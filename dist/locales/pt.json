@@ -389,7 +389,8 @@
                 "title": "Medição",
                 "selected": "{n} selecionado",
                 "geometry": "Geometria",
-                "closed": "Fechado",
+                "closed_line": "Linha fechada",
+                "closed_area": "Área fechada",
                 "center": "Centro",
                 "perimeter": "Perímetro ",
                 "length": "Comprimento",
@@ -470,7 +471,7 @@
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Introduza um modelo de URL de telas. Tokens válidos:\n   - {zoom}/{z}, {x}, {y} para o esquema de telas Z/X/Y\n   - {ty} para coordenadas Y invertidas do estilo TMS\n   - {u} para o esquema quadtile\n   - {switch:a,b,c} para servidor DNS multiplexing\n\nExemplo:\n{example}",
+            "custom_prompt": "Indique um URL para modelo de mosaicos. Os tokens válidos são:\n   - {zoom} ou {z}, {x}, {y} para Z/X/Y esquema de mosaico\n   - {-y} ou {ty} para estilo TMS invertido, coordenadas Y\n   - {u} para esquemas de mosaicos divididos em quatro\n   - {switch:a,b,c} para servidores DNS\n\nExamplo:\n{example}",
             "overlays": "Camadas superiores",
             "imagery_source_faq": "Informação da imagem / Reportar um problema",
             "reset": "reiniciar",
@@ -582,6 +583,7 @@
             "status_code": "O servidor devolveu o seguinte código {code}",
             "unknown_error_details": "Por favor certifique-se que está ligado à Internet.",
             "uploading": "A enviar as alterações para o OpenStreetMap...",
+            "conflict_progress": "Confirmando conflitos: {num} de {total}",
             "unsaved_changes": "Tem alterações por gravar",
             "conflict": {
                 "header": "Resolver alterações em conflito",
@@ -653,7 +655,6 @@
             "untagged_area_tooltip": "Escolha um elemento que indique o que esta área representa.",
             "untagged_relation": "Relação sem etiquetas",
             "untagged_relation_tooltip": "Selecione um tipo de elemento que descreva o que é esta relação.",
-            "many_deletions": "Está a eliminar {n} elementos. Tem a certeza que quer fazer isso? Isto irá eliminá-los do mapa que todas as pessoas visualizam em openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} é normalmente usada em áreas e não linhas.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -1220,6 +1221,28 @@
                 }
             }
         },
+        "units": {
+            "feet": "{quantidade} ft",
+            "miles": "{quantidade} mi",
+            "square_feet": "{quantidade} sq ft",
+            "square_miles": "{quantidade} sq mi",
+            "acres": "{quantidade} ac",
+            "meters": "{quantidade} m",
+            "kilometers": "{quantidade} km",
+            "square_meters": "{quantidade} m²",
+            "square_kilometers": "{quantidade} km²",
+            "hectares": "{quantidade} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantidade}°",
+            "arcminutes": "{quantidade}′",
+            "arcseconds": "{quantidade}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordenada}{direção}",
+            "coordinate_pair": "{latitude}, {longitude}"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1645,9 +1668,17 @@
                         "ESE": "Este-sudeste",
                         "N": "Norte",
                         "NE": "Nordeste",
+                        "NNE": "No-nordeste",
+                        "NNW": "No-nordoeste",
+                        "NW": "Noroeste",
                         "S": "Sul",
                         "SE": "Sudoeste",
-                        "W": "Oeste"
+                        "SSE": "Su-sueste",
+                        "SSW": "Su-sudoeste",
+                        "SW": "Sudoeste",
+                        "W": "Oeste",
+                        "WNW": "Oeste-Nordeste",
+                        "WSW": "Oeste-Sudoeste"
                     }
                 },
                 "direction_clock": {
@@ -2058,7 +2089,9 @@
                 "oneway": {
                     "label": "Sentido único?",
                     "options": {
+                        "alternating": "Alternado",
                         "no": "Não",
+                        "reversible": "Reversível",
                         "undefined": "Assumido que seja \"Não\"",
                         "yes": "Sim"
                     }
@@ -2066,7 +2099,9 @@
                 "oneway_yes": {
                     "label": "Sentido único?",
                     "options": {
+                        "alternating": "Alternado",
                         "no": "Não",
+                        "reversible": "Reversível",
                         "undefined": "Assumido que seja \"Sim\"",
                         "yes": "Sim"
                     }
@@ -2184,6 +2219,10 @@
                 },
                 "railway": {
                     "label": "Tipo"
+                },
+                "railway/position": {
+                    "label": "Marco quilométrico",
+                    "placeholder": "Distância para uma décima (123.4)"
                 },
                 "railway/signal/direction": {
                     "label": "Direção",
@@ -3894,7 +3933,7 @@
                 },
                 "highway/give_way": {
                     "name": "Sinal de cedência de passagem",
-                    "terms": "perda de prioridade"
+                    "terms": "perda de prioridade, cedencia, cedência, prioridade"
                 },
                 "highway/living_street": {
                     "name": "Zona de coexistência",
@@ -6100,18 +6139,33 @@
                 "name": "Estradas TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclismo"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Pedestrianismo"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclismo de montanha"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Skate"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Desportos de Inverno"
             },
             "basemap.at": {

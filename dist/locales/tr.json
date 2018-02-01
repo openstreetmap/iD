@@ -381,7 +381,6 @@
                 "title": "Ölçüm",
                 "selected": "{n} seçildi",
                 "geometry": "Geometri",
-                "closed": "kapalı",
                 "center": "Merkez",
                 "perimeter": "Çevre",
                 "length": "Uzunluk",
@@ -462,7 +461,6 @@
             "switch": "Bu arka plana geçiş yap",
             "custom": "Özel",
             "custom_button": "Özel arka planı düzenle",
-            "custom_prompt": "Bir URL şablonu girin. Geçerli simgeler:\n   - Z/X/Y tile scheme için {zoom}/{z}, {x}, {y}\n   - çevrik TMS-stili Y koordinatları için {ty}\n   - quadtile scheme için {u}\n   - DNS sunucu multiplexing için {switch:a,b,c}\n\nÖrnek:\n{example}",
             "overlays": "Katmanlar",
             "reset": "sıfırla",
             "brightness": "Parlaklık",
@@ -642,7 +640,6 @@
             "untagged_area_tooltip": "Bu alanın ne olduğunu belirten bir tür seç.",
             "untagged_relation": "Etiketlenmemiş Küme",
             "untagged_relation_tooltip": "Bu kümeyi tanımlayan bir tür seç",
-            "many_deletions": "Şu an {n} adet nesneyi siliyorsun. Bunu yapmak istediğinden emin misin? Bu, ilgili tüm nesneleri openstreetmap.org haritasından silecektir.",
             "tag_suggests_area": "{tag} etiketi buranın alan olmasını ima ediyor, ama burası alan değil.",
             "deprecated_tags": "Kullanımdan kaldırılmış etiketler: {tags}"
         },

@@ -357,7 +357,7 @@
                 "key": "И",
                 "title": "Фон",
                 "zoom": "Масштаб",
-                "vintage": "Класичний",
+                "vintage": "Період",
                 "source": "Джерело",
                 "description": "Опис",
                 "resolution": "Роздільна здатність",
@@ -365,8 +365,8 @@
                 "unknown": "Невідомо",
                 "show_tiles": "Показати тайли",
                 "hide_tiles": "Сховати тайли",
-                "show_vintage": "Показати Vintage",
-                "hide_vintage": "Приховати Vintage"
+                "show_vintage": "Показати період",
+                "hide_vintage": "Приховати період"
             },
             "history": {
                 "key": "Р",
@@ -389,7 +389,8 @@
                 "title": "Вимірювання",
                 "selected": "{n} виділено",
                 "geometry": "Геометрія",
-                "closed": "замкнена",
+                "closed_line": "замкнена лінія",
+                "closed_area": "полігон",
                 "center": "Центр",
                 "perimeter": "Периметр",
                 "length": "Довжина",
@@ -470,7 +471,7 @@
             "switch": "Ввімкнути цей шар",
             "custom": "Власний фон",
             "custom_button": "Параметри власного фону",
-            "custom_prompt": "Введіть шаблон URL для квадратів мапи. Використовуйте:\n   - {zoom}/{z}, {x}, {y} для Z/X/Y схеми\n   - {ty} для оберненної  Y-координати в TMS-стилі\n   - {u} для схеми QuadTiles\n   - {switch:a,b,c} у разі використання DNS мультиплексування на сервері\n\nПриклад:\n{example}",
+            "custom_prompt": "Введіть шаблон URL для квадратів мапи. Використовуйте:\n   - {zoom} обо {z}, {x}, {y} для Z/X/Y схеми\n   - {-y} або {ty} для оберненної Y-координати в TMS-стилі\n   - {u} для схеми QuadTiles\n   - {switch:a,b,c} у разі використання DNS мультиплексування на сервері\n\nПриклад:\n{example}",
             "overlays": "Шари",
             "imagery_source_faq": "Про фонове зображення/Повідомити про проблему",
             "reset": "скинути",
@@ -654,7 +655,7 @@
             "untagged_area_tooltip": "Виберіть тип об’єкта, що відповідає цьому полігону.",
             "untagged_relation": "Звʼязок без теґів",
             "untagged_relation_tooltip": "Оберіть тип об’єкту, що описує чим є звʼязок.",
-            "many_deletions": "Ви збираєтесь вилучити {n} об’єктів. Ви дійсно бажаєте це зробити? Таке вилучення призведе до їх зникнення з мапи openstreetmap.org.",
+            "many_deletions": "Ви збираєтесь вилучити {n} об’єкт(ів): {p} точок, {l} ліній, {a} полігонів, {r} зв'язків.  Ви дійсно бажаєте це зробити? Таке вилучення призведе до їх зникнення з мапи openstreetmap.org.",
             "tag_suggests_area": "Теґ {tag} зазвичай ставиться на полігони, але об’єкт не є полігоном",
             "deprecated_tags": "Застарілі теґи: {tags}"
         },
@@ -1220,6 +1221,28 @@
                     "measurement": "Показати/сховати панель Вимірювання"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} фт",
+            "miles": "{quantity} мл",
+            "square_feet": "{quantity} фт²",
+            "square_miles": "{quantity} мл²",
+            "acres": "{quantity} акр",
+            "meters": "{quantity} м",
+            "kilometers": "{quantity} км",
+            "square_meters": "{quantity} м²",
+            "square_kilometers": "{quantity} км²",
+            "hectares": "{quantity} га",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "Пн",
+            "south": "Пд",
+            "east": "Сх",
+            "west": "Зх",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -2219,6 +2242,9 @@
                 "ref": {
                     "label": "Номер"
                 },
+                "ref/isil": {
+                    "label": "Код ISIL"
+                },
                 "ref_aeroway_gate": {
                     "label": "Номер виходу на посадку"
                 },
@@ -3099,6 +3125,10 @@
                     "name": "Душ",
                     "terms": "душ,лазня,гігієна"
                 },
+                "amenity/smoking_area": {
+                    "name": "Місце для куріння",
+                    "terms": "паління,куріння,дим,цигарки,сірники,запальничка,місце,майданчик,кімната"
+                },
                 "amenity/social_facility": {
                     "name": "Соціальний центр",
                     "terms": "Social facility, cjwsfkmybq wtynh, соціальний центр"
@@ -3332,6 +3362,10 @@
                     "name": "Жива огорожа",
                     "terms": "Hedge, bdf jujhjf, живопліт, запліт, запуст"
                 },
+                "barrier/kerb": {
+                    "name": "Бордюр",
+                    "terms": "перешкода,бордюр"
+                },
                 "barrier/kissing_gate": {
                     "name": "Вузька хвіртка",
                     "terms": "Kissing Gate, depmrf dshnrf,вузка хвіртка"
@@ -3371,6 +3405,10 @@
                 "building/barn": {
                     "name": "Комора",
                     "terms": "амбар, запаси, комора"
+                },
+                "building/boathouse": {
+                    "name": "Елінг",
+                    "terms": "човновець,човен,будинок,споруда,ангар,збереження"
                 },
                 "building/bungalow": {
                     "name": "Бунгало",
@@ -3779,6 +3817,10 @@
                 "emergency/private": {
                     "name": "Для приватних аварійно-рятувальних служб"
                 },
+                "emergency/water_tank": {
+                    "name": "Пожежний резервуар",
+                    "terms": "вода,пожежа,цистерна,резервуар,небезпека"
+                },
                 "emergency/yes": {
                     "name": "Доступ для аварійно-рятувальних служб дозволено"
                 },
@@ -3916,6 +3958,10 @@
                 "highway/bridleway": {
                     "name": "Доріжка для вершників ",
                     "terms": "Bridle Path, ljhsrf lkz dthiybrsd, доріжка для кінних прогулянок, доріжка для верхової їзди"
+                },
+                "highway/bus_guideway": {
+                    "name": "Шпурбус",
+                    "terms": "автобус,рельс,напрямний"
                 },
                 "highway/bus_stop": {
                     "name": "Автобусна зупинка/платформа"
@@ -4198,6 +4244,10 @@
                 "landuse/forest": {
                     "name": "Лісовий масив",
                     "terms": "Forest, kscjdbq vfcbd, ліс, лісовий масив"
+                },
+                "landuse/garages": {
+                    "name": "Гаражний комплекс",
+                    "terms": "гараж,кооператив,машина,ділянка"
                 },
                 "landuse/grass": {
                     "name": "Трава",
@@ -6246,7 +6296,7 @@
                     "text": "Умови використання та Відгуки"
                 },
                 "description": "Межі та дати знімків. Підписи з'являються з 14 рівня масштабування. ",
-                "name": "Знімки DigitalGlobe Premium Vintage"
+                "name": "Період знімків DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
@@ -6260,7 +6310,7 @@
                     "text": "Умови використання та Відгуки"
                 },
                 "description": "Межі та дати знімків. Підписи з'являються з 14 рівня масштабування. ",
-                "name": "Знімки DigitalGlobe Standard Vintage"
+                "name": "Період знімків DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -6337,18 +6387,33 @@
                 "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Учасники OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Позначені маршрути: Велосипедні"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Учасники OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Позначені маршрути: Туристичні"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Учасники OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Позначені маршрути: MTB"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Учасники OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Позначені маршрути: Ковзани"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Учасники OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Позначені маршрути: Зимові вид спорту"
             },
             "basemap.at": {

@@ -344,7 +344,6 @@
                 "title": "מדידה",
                 "selected": "{n} נבחרו",
                 "geometry": "צורה",
-                "closed": "סגורה",
                 "center": "מרכז",
                 "perimeter": "היקף",
                 "length": "אורך",
@@ -419,14 +418,21 @@
             "title": "רקע",
             "description": "הגדרות רקע",
             "key": "ר",
+            "backgrounds": "רקעים",
             "none": "אין",
             "best_imagery": "מקור התמונה המוכר והטוב ביותר למיקום זה",
             "switch": "חזרה לרקע זה",
             "custom": "התאמה אישית",
             "custom_button": "עריכת רקע בהתאמה אישית",
-            "custom_prompt": "נא להקליד כתובת תבנית. האסימונים התקניים הם:\n   - {zoom}/{z}, {x}, {y} לסכימת אריחים מסוג Z/X/Y\n   - {ty} לנקודות ציון בציר Y בסגנון TMS\n   - {u} לסכימת אריחים מרובעת (QuadTile)\n   - {switch:a,b,c} למעבר בין DNS של שרתים\n\nדוגמה:\n{example}",
+            "overlays": "שכבות על",
             "reset": "איפוס",
+            "display_options": "אפשרויות תצוגה",
+            "brightness": "בהירות",
+            "contrast": "ניגוד",
+            "saturation": "רוויה",
+            "sharpness": "חדות",
             "minimap": {
+                "description": "הצגת מפה ממוזערת",
                 "tooltip": "הצגת מפה מרוחקת כדי לסייע באיתור האיזור שמוצג כרגע.",
                 "key": "/"
             },
@@ -528,6 +534,7 @@
             "status_code": "השרת החזיר קוד מצב {code}",
             "unknown_error_details": "נא לוודא שיש לך חיבור לאינטרנט",
             "uploading": "השינויים נשלחים אל OpenStreetMap…",
+            "conflict_progress": "בדיקת סתירות: {num} מתוך {total}",
             "unsaved_changes": "יש לך שינויים שלא נשמרו",
             "conflict": {
                 "header": "פתרון עריכות סותרות",
@@ -597,7 +604,7 @@
             "untagged_area_tooltip": "נא לבחור בסוג תכונה שמתאר מה השטח הזה.",
             "untagged_relation": "יחס בלתי מתויג",
             "untagged_relation_tooltip": "נא לבחור סוג תכונה שמתארת מה היחס הזה.",
-            "many_deletions": "בחירתך תמחק {n} תכונות. להמשיך בפעולה? אם כן, התכונות תימחקנה מהמפה לכל מי שרואה את openstreetmap.org.",
+            "many_deletions": "פעולה זו תוביל למחיקת {n} תכונות: {p} מפרקים, {l} קווים, {a} שטחים, {r} קשרים. להמשיך בפעולה? כמו כן, הם יימחקו מהמפה שכולם רואים בכתובת openstreetmap.org.",
             "tag_suggests_area": "התגית {tag} רומזת שהקו אמור להיות שטח, אך זה לא שטח",
             "deprecated_tags": "תגיות שנזנחו: {tags}"
         },
@@ -648,15 +655,19 @@
             "overview": {
                 "title": "סקירה",
                 "navigation_h": "ניווט",
+                "navigation_drag": "ניתן לגרור את המפה על ידי לחיצה והחזקה של {leftclick} כפתור העכבר השמאלי והזזת העכבר. ניתן גם להשתמש במקשי החצים `↑`, `↓`,  `→` , `←` במקלדת שלך.",
                 "navigation_zoom": "ניתן להתקרב או להתרחק על ידי גלילת העכבר או משטח המעקב, לחלופין, על ידי לחיצה על הכפתורים {plus} / {minus} שבצד המפה. ניתן גם להשתמש במקשים ‚+’ או ‚-’ שבמקלדת שלך.",
-                "features_h": "תכונות המפה"
+                "features_h": "תכונות המפה",
+                "nodes_ways": "ב־OpenStreetmap, נקודות נקראות לעתים *מפרקים* וקווים ושטחים נקראים לפעמים *דרכים*."
             },
             "editing": {
                 "title": "עריכה ושמירה",
                 "select_h": "בחירה",
                 "multiselect_h": "בחירה במגוון",
+                "multiselect_shift_click": "`{shift}`+{leftclick} לחיצה שמאלית כדי לבחור כמה תכונות יחדיו.  אפשרות זו מקלה על העברה או מחיקה של מגוון פריטים.",
                 "undo_redo_h": "ביטול ושחזור ביטול",
                 "save_h": "שמירה",
+                "save": "יש ללחוץ על {save} **שמירה** כדי לסיים את העריכות שלך ולשלוח אותן ל־OpenStreetMap. מומלץ לזכור לשמור את עבודתך לעתים תכופות!",
                 "upload_h": "העלאה",
                 "backups_h": "גיבויים אוטומטיים",
                 "keyboard_h": "קיצורי מקלדת",
@@ -1061,6 +1072,21 @@
                     "measurement": "החלפת מצב תצוגת חלונית מדידה"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} רגל",
+            "miles": "{quantity} מיל",
+            "meters": "{quantity} מ׳",
+            "kilometers": "{quantity} ק״מ",
+            "square_meters": "{quantity} מ׳²",
+            "square_kilometers": "{quantity} ק״מ²",
+            "arcdegrees": "{quantity}°",
+            "north": "צפ׳",
+            "south": "דר׳",
+            "east": "מז׳",
+            "west": "מע׳",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {

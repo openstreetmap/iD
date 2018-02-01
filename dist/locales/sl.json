@@ -384,7 +384,6 @@
                 "title": "Merilo",
                 "selected": "{n} izbranih",
                 "geometry": "Geometrija",
-                "closed": "zaprto",
                 "center": "Središče",
                 "perimeter": "Obseg",
                 "length": "Dolžina",
@@ -465,7 +464,6 @@
             "switch": "Preklopi nazaj na to ozadje.",
             "custom": "Po meri",
             "custom_button": "Uredi ozadje po meri",
-            "custom_prompt": "Vpišite naslov url predloge sličic. Veljavni žetoni so:\n   - {zoom}/{z}, {x}, {y} za Z/X/Y sheme sličic\n   - {ty} za koordinate v zapisu TMS\n   - {u} za shemo četverjenja – quadtile\n   - {switch:a,b,c} za zvijanje pretoka prek strežnika DNS\n\nPrimer:\n{example}",
             "reset": "ponastavi",
             "display_options": "Možnosti prikaza",
             "brightness": "Svetlost",
@@ -646,7 +644,6 @@
             "untagged_area_tooltip": "Izberite vrsto predmeta, ki ga ponazarja polje na zemljevidu.",
             "untagged_relation": "Neoznačena zveza",
             "untagged_relation_tooltip": "Izberite vrsto predmeta, ki opisuje zvezo.",
-            "many_deletions": "Izbrisati nameravate predmete ({n}). Ali ste prepričani, da želite nadaljevati? Predmeti bodo izbrisani iz zemljevida openstreetmap.org, ki ga vidijo vsi uporabniki.",
             "tag_suggests_area": "Oznaka {tag} nakazuje, da črta opisovati območje, vendar pa ni sklenjena",
             "deprecated_tags": "Zastarele oznake: {tags}"
         },

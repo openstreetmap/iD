@@ -389,7 +389,6 @@
                 "title": "Mätning",
                 "selected": "{n} markerad(e)",
                 "geometry": "Geometri",
-                "closed": "slutet",
                 "center": "Centrum",
                 "perimeter": "Omkrets",
                 "length": "Längd",
@@ -470,7 +469,6 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga nycklar är:\n  - {zoom}/{z}, {x}, {y} enligt Z/X/Y-schema\n  - {ty} för Y-koordinat enligt omvänd TMS-stil\n  - {u} för QuadTile-scheman\n  - {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
             "overlays": "Bildlager",
             "imagery_source_faq": "Info om flygfotot / Rapportera ett problem",
             "reset": "ta bort",
@@ -653,7 +651,6 @@
             "untagged_area_tooltip": "Välj en typ som beskriver vad detta område är.",
             "untagged_relation": "Otaggad relation",
             "untagged_relation_tooltip": "Välj en typ som beskriver vad denna relation är.",
-            "many_deletions": "Du håller på att radera {n} objekt. Är du helt säker att du vill göra detta? Detta tar bort dem från kartan som alla andra ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} indikerar att detta borde vara ett område istället för en linje",
             "deprecated_tags": "Föråldrade taggar: {tags}"
         },
@@ -2080,6 +2077,9 @@
                 },
                 "ref": {
                     "label": "Referenskod"
+                },
+                "ref/isil": {
+                    "label": "ISIL-kod"
                 },
                 "ref_aeroway_gate": {
                     "label": "Gatenummer"

@@ -378,7 +378,6 @@
                 "title": "Ukuran",
                 "selected": "{n} dipilih",
                 "geometry": "Geometri",
-                "closed": "Tutup",
                 "center": "Tengah",
                 "perimeter": "Perimeter",
                 "length": "Panjang",
@@ -457,7 +456,6 @@
             "switch": "Tukar balik ke latar belakang ini",
             "custom": "Penyuai",
             "custom_button": "Tukar latar belakang tersuai",
-            "custom_prompt": "Masukkan templat URL jubin. Token yang sah adalah:\n   - {zoom}/{z}, {x}, {y} untuk skim jubin Z/X/Y\n   - {ty} untuk koordinat Y gaya-TMS yang dibalikkan\n   - {u} untuk skim jubin kuad\n   - {switch:a,b,c} untuk pemultipleks pelayan DNS\n\nContoh:\n{example}",
             "reset": "set semula",
             "minimap": {
                 "tooltip": "Tunjukkan peta yang dizum keluar untuk membantu mencari kawasan yang dipaparkan saat ini.",
@@ -631,7 +629,6 @@
             "untagged_area_tooltip": "Pilih jenis ciri yang menggambarkan kawasan ini.",
             "untagged_relation": "Hubungan tanpa tag",
             "untagged_relation_tooltip": "Pilih jenis ciri yang menggambarkan hubungan ini.",
-            "many_deletions": "Anda memadamkan {n} ciri. Adakah anda pasti mahu melakukan ini? Ini akan memadam mereka dari peta yang dilihat oleh orang lain di openstreetmap.org.",
             "tag_suggests_area": "Tanda {tag} mencadangkan garis sepatutnya menjadi kawasan, tetapi ianya bukan kawasan",
             "deprecated_tags": "Tag-tag yang telah lapuk: {tags}"
         },

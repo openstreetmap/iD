@@ -389,7 +389,6 @@
                 "title": "Medición",
                 "selected": "{n} seleccionado",
                 "geometry": "Geometría",
-                "closed": "cerrada",
                 "center": "Centro",
                 "perimeter": "Perímetro",
                 "length": "Longitud",
@@ -470,7 +469,6 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introduzca una plantilla URL de tesela. Los tokens válidos son:\n  - {zoom}/{z}, {x}, {y} para el esquema de tesela Z/X/Y\n  - {ty} para coordenadas Y invertidas del estilo TMS\n  - {u} para el esquema quadtile\n  - {switch:a,b,c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
             "overlays": "Superposiciones",
             "imagery_source_faq": "Información de imágenes / Informar un problema",
             "reset": "reiniciar",
@@ -654,7 +652,6 @@
             "untagged_area_tooltip": "Seleccione un tipo de elemento que describa lo que es esta área.",
             "untagged_relation": "Relación no etiquetada",
             "untagged_relation_tooltip": "Seleccione un tipo de elemento que describa qué es esta relación.",
-            "many_deletions": "Está eliminando {n} elementos. ¿Está seguro que quiere hacer esto? Esto los eliminará del mapa que todo el mundo ve en openstreetmap.org.",
             "tag_suggests_area": "La etiqueta {tag} sugiere que esta línea debería ser una área, pero no es un área",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -4082,7 +4079,7 @@
                 },
                 "highway/traffic_signals": {
                     "name": "Semáforos",
-                    "terms": "semáforo, señal de tráfico, luces de tráfico, luces de señalización, luces de parado, señal, tráfico, tránsito, control"
+                    "terms": "semáforo, semaforo, señal de tráfico, luces de tráfico, luces de señalización, luces de parado, señal, tráfico, tránsito, control"
                 },
                 "highway/trunk": {
                     "name": "Carretera principal",

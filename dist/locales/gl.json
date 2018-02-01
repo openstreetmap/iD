@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": "Fai clic para engadir máis vértices á liña. Fai clic noutras liñas para conectalas, e fai dobre clic para rematar a liña."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Isto non se pode editar xa que está conectado cun elemento oculto."
             }
         },
         "operations": {
@@ -111,7 +114,7 @@
                     "line": "Liña borrada",
                     "area": "Área borrada.",
                     "relation": "Relación borrada.",
-                    "multiple": "Borrados {n} recursos."
+                    "multiple": "Borrados {n} elementos."
                 },
                 "too_large": {
                     "single": "Este elemento non pode ser borrado porque non é totalmente visible.",
@@ -119,15 +122,15 @@
                 },
                 "incomplete_relation": {
                     "single": "Este elemento non pode ser eliminado porque aínda non foi completamente baixado.",
-                    "multiple": "Estes recursos non poden ser eliminados por non estar totalmente baixados."
+                    "multiple": "Estes elementos non poden ser eliminados por non estar totalmente baixados."
                 },
                 "part_of_relation": {
-                    "single": "Este recurso non pode ser eliminado porque é parte dunha relación maior. Debe primeiro eliminarlo da relación.",
-                    "multiple": "Estes recursos non poden ser eliminados porque son parte de relacións maiores. Debe en primeiro lugar eliminalos das relacións."
+                    "single": "Este elemento non pode ser eliminado porque é parte dunha relación maior. Debes primeiro eliminalo da relación.",
+                    "multiple": "Estes elementos non poden ser eliminados porque son parte de relacións maiores. Debes en primeiro lugar eliminalos das relacións."
                 },
                 "connected_to_hidden": {
-                    "single": "Este recurso non poden ser borrado porque conecta cun recurso agochado.",
-                    "multiple": "Estes recursos non poden ser borrados porque conectan con recursos agochados."
+                    "single": "Este elemento non poden ser borrado porque está conectado cun elemento agochado.",
+                    "multiple": "Estes elementos non poden ser borrados porque conectan con elementos agochados."
                 }
             },
             "add_member": {
@@ -160,7 +163,7 @@
                 "annotation": "Unidos {n} elementos.",
                 "not_eligible": "Estes elementos non se poden unir.",
                 "not_adjacent": "Estos elementos non se poden fusionar porque os seus extremos non están ligados.",
-                "restriction": "Estos elementos non ponden ser unidos porque polo menos un é membro dunha \"{relation}\" relación.",
+                "restriction": "Estes elementos non se poden unir porque polo menos un delees é un membro dunha relación \"{relation}\".",
                 "incomplete_relation": "Estes elementos non se poden unir porque cando menos un deles non se descargou completamente.",
                 "conflicting_tags": "Estes elementos non se poden unir porque algunhas das súas etiquetas teñen valores contraditorios."
             },
@@ -184,7 +187,7 @@
                 },
                 "too_large": {
                     "single": "Este elemento non pode ser movido porque actualmente non é completamente visible.",
-                    "multiple": "Estes elementos non ponden ser movidos porque actualmente non son completamente visibles."
+                    "multiple": "Estes elementos non poden ser movidos porque actualmente non son completamente visibles."
                 },
                 "connected_to_hidden": {
                     "single": "Este elemento non pode ser movido proque está ligado a un elemento agochado.",
@@ -193,8 +196,8 @@
             },
             "reflect": {
                 "title": {
-                    "long": "Reflexar ao Longo",
-                    "short": "Reflexar ao Curto"
+                    "long": "Reflexar ao longo",
+                    "short": "Reflexar ao curto"
                 },
                 "description": {
                     "long": {
@@ -310,6 +313,7 @@
             "localized_translation_language": "Escoller idioma",
             "localized_translation_name": "Nome"
         },
+        "zoom_in_edit": "Fai zoom para editar",
         "login": "loguear",
         "logout": "saír",
         "loading_auth": "Conectando con OpenStreetMap...",
@@ -340,7 +344,8 @@
             "created": "Creado",
             "about_changeset_comments": "Acerca dos comentarios dos conxuntos de cambios",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Mencionaches Google neste comentario: lembra que a copia de Google Maps está estrictamente prohibida."
+            "google_warning": "Mencionaches Google neste comentario: lembra que a copia de Google Maps está estrictamente prohibida.",
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "Edicións de {users}",
@@ -359,7 +364,9 @@
                 "accuracy": "Precisión",
                 "unknown": "Descoñecido",
                 "show_tiles": "Amosar teselas",
-                "hide_tiles": "Ocultar teselas"
+                "hide_tiles": "Ocultar teselas",
+                "show_vintage": "Mostrar antigüidade",
+                "hide_vintage": "Ocultar antigüidade"
             },
             "history": {
                 "key": "H",
@@ -382,7 +389,8 @@
                 "title": "Medidas",
                 "selected": "{n} seleccionados",
                 "geometry": "Xeometría",
-                "closed": "pechado",
+                "closed_line": "liña pechada",
+                "closed_area": "área pechada",
                 "center": "Centro",
                 "perimeter": "Perímetro",
                 "length": "Lonxitude",
@@ -390,7 +398,8 @@
                 "centroid": "Centroide",
                 "location": "Localización",
                 "metric": "Métrico",
-                "imperial": "Imperial"
+                "imperial": "Imperial",
+                "node_count": "Número de nodos"
             }
         },
         "geometry": {
@@ -456,14 +465,22 @@
             "title": "Fondo",
             "description": "Axustes do fondo",
             "key": "B",
+            "backgrounds": "Fondos",
             "none": "Ningún",
             "best_imagery": "Mellor fonte de imaxes coñecida deste sitio",
             "switch": "Voltar a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introducir unha plantilla URL de mosaico. Os tokens válidos son:\n   - {zoom}/{z}, {x}, {y} para o esquema de mosaico Z/X/Y\n   - {ty} para coordenadas Y invertidas estilo TMS\n   - {u} para o esquema quadtile\n   - {switch:a,b,c} para multiplexado de servidores DNS\n\nExemplo:\n{example}",
+            "overlays": "Superposicións",
+            "imagery_source_faq": "Información das imaxes/Informar dun problema",
             "reset": "reiniciar",
+            "display_options": "Opcións de visualización",
+            "brightness": "Brillo",
+            "contrast": "Contraste",
+            "saturation": "Saturación",
+            "sharpness": "Enfoque",
             "minimap": {
+                "description": "Mostrar minimapa",
                 "tooltip": "Mostrar un mapa reducido para facilitar a localización da área que se estea a mostrar. ",
                 "key": "/"
             },
@@ -565,6 +582,7 @@
             "status_code": "O servidor devolveu a referencia de estado {code}",
             "unknown_error_details": "Asegúrate de que estás conectado a internet.",
             "uploading": "Subindo trocos a OpenStreetMap...",
+            "conflict_progress": "Comprobando conflitos: {num} de {total}",
             "unsaved_changes": "Tes cambios sen gardar",
             "conflict": {
                 "header": "Resolvendo os conflitos de edición",
@@ -596,7 +614,7 @@
             "facebook": "Compartir no Facebook",
             "twitter": "Compartir no Twitter",
             "google": "Compartir no Google+",
-            "help_html": "Os cambios deben aparecer na capa \"Standard\" en poucos minutos. Outras capas, e certas características, pode levar máis tempo.",
+            "help_html": "Os teus cambios deberían aparecer na capa \"Estándar\" nuns minutos. Outras capas, e determinados elementos, poden tardar máis tempo.",
             "help_link_text": "Detalles",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -607,7 +625,8 @@
         "splash": {
             "welcome": "Benvido ao editor de OpenStreetMap iD",
             "text": "iD é unha amigable pero potente ferramenta para contribuir ao mellor mapa libre do mundo. Esta é a versión {version}. Para obter máis información visita {website} e informa de erros en {github}.",
-            "walkthrough": "Comezar o titorial"
+            "walkthrough": "Comezar o titorial",
+            "start": "Editar agora"
         },
         "source_switch": {
             "live": "en liña",
@@ -635,7 +654,6 @@
             "untagged_area_tooltip": "Escolle un tipo de elemento que describa o que é esta área.",
             "untagged_relation": "Relación sen etiquetar",
             "untagged_relation_tooltip": "Escolle un tipo de elemento que describa o que é esta relación.",
-            "many_deletions": "Ti estás a borrar {n} elementos. Estás seguro de que queres facer isto? Isto o borrará do mapa e ninguén o verá en openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} suxire que a liña debería ser unha área, pero non é unha área.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -658,9 +676,19 @@
         "mapillary": {
             "view_on_mapillary": "Ver esta imaxe en Mapillary"
         },
+        "openstreetcam_images": {
+            "tooltip": "Fotos ao nivel da rúa de OpenStreetCam",
+            "title": "Superposición de fotos (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Ver esta imaxe en OpenStreetCam"
+        },
         "help": {
             "title": "Axuda",
-            "key": "H"
+            "key": "H",
+            "help": {
+                "title": "Axuda"
+            }
         },
         "intro": {
             "done": "feito",
@@ -838,6 +866,7 @@
             },
             "areas": {
                 "title": "Áreas",
+                "add_playground": "As *áreas* son usadas para amosar límites de elementos tales como lagoas, edificios e zonas residenciais.{br}Tamén poden ser empregadas para cartografar con maior detalle moitos dos elementos que normalmente cartografarías como puntos. **Fai clic no botón {button} Área para engadir unha nova área.**",
                 "start_playground": "Engadamos este parque infantil ao mapa debuxando unha área. As áreas debúxanse colocando *nodos* ao longo do bordo exterior do elemento. **Fai clic ou preme a barra espaciadora para poñer un nodo inicial nunha das esquinas do parque infantil.**",
                 "continue_playground": "Continúa debuxando a área colocando máis nodos ao longo do bordo do parque infantil. Está ben conectar a área cos camiños peonís existentes.{br}Consello: podes manter presa a tecla '{alt}' para evitar que os nodos se conecten nos elemetos próximos. **Continúa a debuxar a área do parque infantil.**",
                 "finish_playground": "Remata a área premendo enter, ou facendo clic outra vez no último ou no primeiro nodo. **Remata de debuxar a área para o parque infantil.**",

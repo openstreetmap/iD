@@ -382,7 +382,6 @@
                 "title": "Merania",
                 "selected": "{n} vybraných",
                 "geometry": "Geometria",
-                "closed": "uzavretá",
                 "center": "Stred",
                 "perimeter": "Obvod",
                 "length": "Dĺžka",
@@ -461,7 +460,6 @@
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
             "custom_button": "Upraviť volitelné pozadie",
-            "custom_prompt": "Vyplňte vzorovú URL pre mapové dlaždice. Platné polia sú: \n    - {zoom}/{z}, {x}, {y} pre Z/X/Y dlaždicovú schému \n    - {ty} pre TMS štýl s prevrátenými Y súradnicami\n    - {u} pre quadtile schému \n    - {switch:a,b,c} pre DNS server multiplexing\n\nPríklad:\n{example}",
             "reset": "vynulovať",
             "minimap": {
                 "tooltip": "Zobraziť oddialenú mapu pre ľahšie lokalizovanie práve zobrazenej oblasti.",
@@ -635,7 +633,6 @@
             "untagged_area_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto plocha.",
             "untagged_relation": "Neoznačená relácia",
             "untagged_relation_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto relácia.",
-            "many_deletions": "Chystáte sa vymazať {n} objektov. Ste si naozaj istý, že to chcete urobiť? Týmto ich vymažete z mapy na openstreetmap.org, ktorú používajú ďalší používatelia.",
             "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
             "deprecated_tags": "Neschválené označenie: {tags}"
         },
@@ -2079,7 +2076,7 @@
                     }
                 },
                 "structure": {
-                    "label": "Štruktúra",
+                    "label": "Cestná stavba",
                     "options": {
                         "bridge": "Most",
                         "cutting": "Výkop",

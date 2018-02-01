@@ -384,7 +384,6 @@
                 "title": "測量",
                 "selected": "已選 {n} 項",
                 "geometry": "幾何",
-                "closed": "已關閉",
                 "center": "中心點",
                 "perimeter": "周界",
                 "length": "長度",
@@ -463,7 +462,6 @@
             "switch": "切換回這個背景",
             "custom": "自訂",
             "custom_button": "編輯自訂背景",
-            "custom_prompt": "輸入區塊範本的網址。有效的標記是：\n- {zoom}/{z}, {x}, {y} 為 Z/X/Y 標記系統 Z/X/Y scheme\n- {ty} 為已翻轉的 TMS 形式Y座標 TMS-style Y coordinates\n- {u} 為四分位數標記系統 quadtile scheme\n- {switch:a,b,c} 為多工DNS伺服器\n\n例如 :\n{example}",
             "reset": "重設",
             "minimap": {
                 "tooltip": "顯示縮小地圖以確定現在被顯示範圍的位置",
@@ -636,7 +634,6 @@
             "untagged_area_tooltip": "選擇一個特徵種類來形容這個範圍是甚麼。",
             "untagged_relation": "未有標籤的關係",
             "untagged_relation_tooltip": "選擇一個特徵種類來形容這個關係是甚麼。",
-            "many_deletions": "你正在刪除 {n} 個特徵。你確定要這樣做嗎？這樣就會將人人在 openstreetmap.org 地圖內看到的物件刪除了。",
             "tag_suggests_area": "{tag}標籤建議綫應為範圍，但這不是一個範圍。",
             "deprecated_tags": "已棄用的標籤: {tags}"
         },

@@ -389,7 +389,6 @@
                 "title": "Mesures",
                 "selected": "{n} dans la sélection",
                 "geometry": "Geométrie",
-                "closed": "fermé",
                 "center": "Centre",
                 "perimeter": "Périmètre",
                 "length": "Longueur",
@@ -470,7 +469,6 @@
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "custom_button": "Modifier le fond personnalisé",
-            "custom_prompt": "Entrez un modèle URL de tuile. Les symboles valide sont : \n - {zoom}/{z}, {x}, {y} pour schéma de tuile Z/X/Y\n- {ty} pour basculer vers le style de coordonées TMS Y\n- {u} pour le schéma quadri-tuiles\n- {switch:a,b,c} pour le multiplexage de serveur DNS\n\nExemple:\n{example}",
             "overlays": "Calques",
             "imagery_source_faq": "Info imagerie / Signaler un problème",
             "reset": "réinitialiser",
@@ -654,7 +652,6 @@
             "untagged_area_tooltip": "Sélectionnez un type d'élément pour décrire cette surface.",
             "untagged_relation": "Relation sans attributs",
             "untagged_relation_tooltip": "Sélectionnez un type d’entité décrivant ce qu’est cette relation.",
-            "many_deletions": "Vous êtes en train de supprimer {n} éléments. En êtes-vous sûr ? Ils seront supprimés de la carte que tout le monde voit sur openstreetmap.org.",
             "tag_suggests_area": "Cet attribut {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
             "deprecated_tags": "Attributs obsolètes : {tags}"
         },
@@ -715,8 +712,11 @@
                 "title": "Modifier et sauvegarder",
                 "select_h": "Selectionner",
                 "select_left_click": "{clic gauche} Cliquez avec le bouton gauche de la souris sur une fonctionnalité pour la sélectionner. Ceci le mettra en surbrillance, et la barre latérale affichera des détails de cette fonctionnalité, tels que son nom ou son adresse.",
+                "select_right_click": "{rightclick} Le click droit sur un élément affiche le menu d'édition, qui permet d'effectuer certaines opérations sur cet élément comme le tourner, le déplacer ou le supprimer.",
                 "multiselect_h": "Sélection multiple",
+                "multiselect_shift_click": "`{shift}`+{leftclick} permet de sélectionner plusieurs éléments en même temps. Cela permet de déplacer ou de supprimer plusieurs objets d'un coup.",
                 "undo_redo_h": "Annuler & Rétablir",
+                "undo_redo": "Vos modifications sont enregistrées localement dans votre navigateur tant que vous ne les envoyez pas sur les serveurs d'OpenStreetMap. Vous pouvez annuler vos action en appuyant sur le bouton {undo} **Annuler** et les refaire en appuyant sur le bouton {redo} **Refaire**.",
                 "save_h": "Sauvegarder",
                 "save": "Cliquez sur {save} **Enregistrer** pour envoyer vos modifications à OpenStreetMap. Enregistrez fréquemment !",
                 "upload_h": "Téléverser",
@@ -734,6 +734,7 @@
                 "type_picker": "Le sélectionneur de type affiche les types d'éléments les plus fréquents, tels que les parcs, hôpitaux, restaurants, routes et bâtiments. Vous pouvez tout cherchez en tapant ce que vous voulez dans le champs de recherche. Vous pouvez aussi cliquer sur l'icône {inspect} **Info** à côté du type de l'élément pour en apprendre plus.",
                 "fields_h": "Champs",
                 "fields_all_fields": "La section *Tous les champs* contient toutes les informations qui peuvent être éditées. Dans OpenStreetMap, tous les champs sont facultatifs. Vous pouvez toujours les laisser vides en cas de doute.",
+                "fields_add_field": "Vous pouvez aussi cliquer sur le menu déroulant \"Ajouter un champ\" pour ajouter plus d'informations, comme une description, un lien Wikipédia, un accès handicapé, et cetera...",
                 "tags_h": "Tags"
             },
             "points": {
@@ -775,7 +776,9 @@
             "gps": {
                 "title": "Traces GPS",
                 "using_h": "Utilisation des traces GPS",
-                "tracing": "La trace GPS n'est pas envoyée à OpenStreetMap. Le meilleur moyen de l'utiliser est de dessiner sur la carte en s'en servant de modèle."
+                "using": "Pour utiliser une trace GPS, faites la glisser dans l'éditeur. Si elle est reconnue, elle apparaîtra en violet sur la carte. Cliquez sur {data} **Données Carte** pour montrer, cacher ou zoomer sur la trace GPS.",
+                "tracing": "La trace GPS n'est pas envoyée à OpenStreetMap. Le meilleur moyen de l'utiliser est de dessiner sur la carte en s'en servant de modèle.",
+                "upload": "Vous pouvez aussi [uploader vos données GPS sur OpenStreetMap](https://www.openstreetmap.org/trace/create) pour que d'autres utilisateurs puissent les utiliser."
             }
         },
         "intro": {
@@ -1858,7 +1861,7 @@
                     "label": "Niveau"
                 },
                 "levels": {
-                    "label": "Étages",
+                    "label": "Nombre de niveaux",
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
@@ -2987,11 +2990,12 @@
                     "terms": "Services publics des parcs nationaux"
                 },
                 "amenity/recycling": {
-                    "name": "Conteneur de recyclage"
+                    "name": "Conteneur de recyclage",
+                    "terms": "bulle à verre,bulles à verre,container de recyclage,benne de recyclage,point de collecte"
                 },
                 "amenity/recycling_centre": {
                     "name": "Déchetterie",
-                    "terms": "centre de recyclage"
+                    "terms": "centre de recyclage,déchèterie,déchetterie,recyparc,parc à conteneurs,écocentre"
                 },
                 "amenity/register_office": {
                     "name": "Bureau d'état-civil"

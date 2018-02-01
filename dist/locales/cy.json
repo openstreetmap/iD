@@ -1,0 +1,151 @@
+{
+    "cy": {
+        "modes": {
+            "add_area": {
+                "title": "Ardal",
+                "description": "Ychwanegu parciau, adeiladau, llynnoedd neu ardaloedd eraill i'r map.",
+                "tail": "Cliciwch ar y map i ddechrau llunio ardal, fel parc, llyn, neu adeilad."
+            },
+            "add_line": {
+                "title": "Llinell",
+                "description": "Ychwanegu prif-ffyrdd, strydoedd, llwybrau troed, camlas, neu llinelloedd eraill i'r map.",
+                "tail": "Cliciwch ar y map i ddechrau llunio ffordd neu llwybr."
+            },
+            "add_point": {
+                "title": "Pwynt",
+                "description": "Ychwanegu bwytai, henebion, blychau post neu pwyntiau eraill i'r map.",
+                "tail": "Cliciwch ar y map i ychwanegu pwynt."
+            },
+            "browse": {
+                "title": "Pori"
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Wedi ychwanegu pwynt."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "Wedi dechrau llinell.",
+                    "area": "Wedi dechrau ardal."
+                }
+            },
+            "straighten": {
+                "title": "Sythu",
+                "description": "Sythu'r llinell yma",
+                "annotation": "Wedi sythu llinell."
+            },
+            "delete": {
+                "title": "Dileu",
+                "annotation": {
+                    "point": "Wedi dileu pwynt.",
+                    "line": "Wedi dileu llinell.",
+                    "area": "Wedi dileu ardal."
+                }
+            },
+            "disconnect": {
+                "title": "Dad-gysylltu",
+                "description": "Dad-gysylltu'r llinelloedd/ardaloedd yma o'u gilydd.",
+                "annotation": "Llinelloedd/ardaloedd wedi'u ddad-gysylltu."
+            },
+            "move": {
+                "title": "Symyd",
+                "annotation": {
+                    "point": "Wedi symyd pwynt.",
+                    "line": "Wedi symyd llinell.",
+                    "area": "Wedi symyd ardal."
+                }
+            }
+        },
+        "success": {
+            "help_link_text": "Manylion"
+        },
+        "tag_reference": {
+            "description": "Disgrifiad"
+        },
+        "shortcuts": {
+            "editing": {
+                "commands": {
+                    "undo": "Dad-wneud gweithred diwethaf",
+                    "redo": "Ail-wneud gweithred diwethaf",
+                    "save": "Cadw newidiadau"
+                }
+            },
+            "tools": {
+                "title": "Teclynnau",
+                "info": {
+                    "title": "Gwybodaeth"
+                }
+            }
+        },
+        "units": {
+            "north": "G",
+            "south": "D",
+            "east": "Dw",
+            "west": "Gr"
+        },
+        "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "Nodweddion Rhwystr"
+                },
+                "category-building": {
+                    "name": "Nodweddion Adeilad"
+                },
+                "category-golf": {
+                    "name": "Nodweddion Golff"
+                },
+                "category-landuse": {
+                    "name": "Nodweddion Defnydd Tir"
+                },
+                "category-natural-area": {
+                    "name": "Nodweddion Naturiol"
+                },
+                "category-natural-line": {
+                    "name": "Nodweddion Naturiol"
+                },
+                "category-natural-point": {
+                    "name": "Nodweddion Naturiol"
+                },
+                "category-path": {
+                    "name": "Nodweddion Llwybr"
+                },
+                "category-rail": {
+                    "name": "Nodweddion Rheilffordd"
+                },
+                "category-restriction": {
+                    "name": "Nodweddion Cyfyngiad"
+                },
+                "category-road": {
+                    "name": "Nodweddion Ffordd"
+                },
+                "category-water-area": {
+                    "name": "Nodweddion Dŵr"
+                },
+                "category-water-line": {
+                    "name": "Nodweddion Dŵr"
+                }
+            },
+            "fields": {
+                "access": {
+                    "label": "Yn Caniatau Mynediad",
+                    "options": {
+                        "designated": {
+                            "description": "Yn caniatau mynediad yn ôl arwyddion neu is-ddeddfau lleol",
+                            "title": "Dynodedig"
+                        },
+                        "destination": {
+                            "description": "Yn caniatau mynediad ond i gyrraedd cyrchfan",
+                            "title": "Cyrchfan"
+                        },
+                        "no": {
+                            "description": "Dim caniatad mynediad i'r cyhoedd"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

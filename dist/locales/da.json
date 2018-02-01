@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": "Klik for at tilføje flere punkter til linjen. Klik på andre linjer for at forbinde til dem og dobbeltklik for at afslutte linjen."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Kan ikke redigeres da den er forbundet til et skjult kortobjekt."
             }
         },
         "operations": {
@@ -386,7 +389,8 @@
                 "title": "Målinger",
                 "selected": "{n} markeret",
                 "geometry": "Geometri",
-                "closed": "lukket",
+                "closed_line": "lukket linje",
+                "closed_area": "lukket område",
                 "center": "Centrum",
                 "perimeter": "Omkreds",
                 "length": "Længde",
@@ -394,7 +398,8 @@
                 "centroid": "Geometrisk centrum",
                 "location": "Lokation",
                 "metric": "Metrisk",
-                "imperial": "Imperial"
+                "imperial": "Imperial",
+                "node_count": "Antal noder"
             }
         },
         "geometry": {
@@ -460,21 +465,28 @@
             "title": "Baggrund",
             "description": "Baggrundsindstillinger",
             "key": "B",
+            "backgrounds": "Baggrunde",
             "none": "Ingen",
             "best_imagery": "Bedst kendte luftfotokilde for denne her lokalitet",
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
             "custom_button": "Rediger brugerdefineret baggrund",
-            "custom_prompt": "Indtast en URL-skabelon for kort-fliser. Gyldige formater er:\n   - {zoom}/{z}, {x}, {y} til Z/X/Y flise-skemaer\n   - {ty} til omvendte Y-koordinater i TMS-stil\n   - {u} til quad-flise-skemaer\n   - {switch:a,b,c} til multipleksning af DNS-server\n\nEksempel:\n{example}",
+            "custom_prompt": "Indtast en URL-skabelon for kort-fliser. Gyldige formater er:\n   - {zoom} eller {z}, {x}, {y} for Z/X/Y flise-skemaer\n   - {-y} eller {ty} for omvendte Y-koordinater i TMS-stil\n   - {u} for quad-flise-skemaer\n   - {switch:a,b,c} for multipleksning af DNS-opslag\n\nEksempel:\n{example}",
+            "overlays": "Overlægninger",
+            "imagery_source_faq": "Information / rapportér problem angående luftfoto",
             "reset": "nulstil",
+            "display_options": "Visningsindstillinger",
+            "brightness": "Lysstyrke",
             "contrast": "Kontrast",
+            "saturation": "Mætning",
             "sharpness": "Skarphed",
             "minimap": {
+                "description": "Vis minikort",
                 "tooltip": "Vis et udzommet kort for at hjælpe med at lokalisere det viste område.",
                 "key": "/"
             },
-            "fix_misalignment": "Juster billedets offset",
-            "offset": "Træk et hvert sted i det grå område nedenfor for at justere billedets offset eller indtast offset-værdien i meter."
+            "fix_misalignment": "Juster luftfoto-offset",
+            "offset": "Træk et vilkårligt i det grå område nedenfor for at justere luftfotoets offset eller indtast offset-værdien i meter."
         },
         "map_data": {
             "title": "Kortdata",
@@ -545,7 +557,7 @@
         "area_fill": {
             "wireframe": {
                 "description": "Ingen fyld (trådnet)",
-                "tooltip": "At slå visning med trådnet til gør det let at se baggrundsbilledet.",
+                "tooltip": "Aktivering af trådnetsvisning tydeliggør luftfotoet i baggrunden.",
                 "key": "W"
             },
             "partial": {
@@ -571,6 +583,7 @@
             "status_code": "Serveren returnerede følgende statuskode {code}",
             "unknown_error_details": "Kontrollér om du har forbindelse til internettet.",
             "uploading": "Uploader ændringer til OpenStreetMap...",
+            "conflict_progress": "Kontrollerer konflikter: {num} ud af {total}",
             "unsaved_changes": "Du har ændringer, der endnu ikke er gemt",
             "conflict": {
                 "header": "Løs konfliktredigeringer",
@@ -642,7 +655,6 @@
             "untagged_area_tooltip": "Vælg en objekttype der beskriver hvad slags område dette er.",
             "untagged_relation": "Ej tagget relation",
             "untagged_relation_tooltip": "Vælg en objekttype der beskriver hvad slags relation dette er.",
-            "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du vil dette? Dette vil slette dem fra kortet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Tagget {tag} antyder at linjen skulle være et område, men den er ikke et område",
             "deprecated_tags": "Frarådede tags: {tags}"
         },
@@ -660,18 +672,18 @@
         },
         "mapillary_images": {
             "tooltip": "Gadeniveau-billeder fra Mapillary",
-            "title": "Billedelag (Mapillary)"
+            "title": "Fotooverlægning (Mapillary)"
         },
         "mapillary_signs": {
-            "tooltip": "Trafikskilte fra Mapillary (fotolag skal være slået til)",
-            "title": "Trafikskiltelag (Mapillary)"
+            "tooltip": "Trafikskilte fra Mapillary (fotooverlægning skal være slået til)",
+            "title": "Trafikskilteoverlægning (Mapillary)"
         },
         "mapillary": {
             "view_on_mapillary": "Vis dette billede på Mapillary"
         },
         "openstreetcam_images": {
             "tooltip": "Gadeniveau-billeder fra OpenStreetCam",
-            "title": "Billedelag (OpenStreetCam)"
+            "title": "Fotooverlægning (OpenStreetCam)"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Vis dette billede på OpenStreetCam"
@@ -681,12 +693,36 @@
             "key": "H",
             "help": {
                 "title": "Hjælp",
+                "welcome": "Velkommen til iD - et redigeringsværktøj til [OpenStreetMap](https://www.openstreetmap.org/). Med dette værktøj kan du opdatere OpenStreetMap direkte fra din web-browser.",
                 "open_data_h": "Open Data",
-                "before_start_h": "Før du starter"
+                "open_data": "Ændringer du laver i dette kort vil være synlige for alle der anvender OpenStreetMap. Dine redigeringer kan basere sig på personligt kendskab, opmåling og udforskning på stedet eller fotos fra luften eller gadeniveau. Kopiering fra enhver kommerciel kilde, såsom Google Maps, er [strengt forbudt](https://www.openstreetmap.org/copyright).",
+                "before_start_h": "Før du starter",
+                "before_start": "Du bør gøre dig bekendt med OpenStreetMap og dette redigeringsværktøj før du begynder med egentlig redigering af kortet. iD indeholder en såkaldt Gennemgang som lærer dig de basale ting omkring redigering af OpenStreetMap. Klik på \"Start Gennemgang\" på denne side for at starte vejledningen - det tager kun omkring et kvarter.",
+                "open_source_h": "Open Source - Åben kildekode",
+                "open_source": "Dette iD-redigeringsværktøj udvikles i et fællesskabsdrevet open source-projekt og du anvender lige nu version {version}. Kildekoden er tilgængelig [på GitHub](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Du kan hjælpe iD ved at [oversætte](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) eller [rapportere fejl](https://github.com/openstreetmap/iD/issues)."
+            },
+            "overview": {
+                "title": "Overblik",
+                "navigation_h": "Navigation",
+                "features_h": "Kortobjekter",
+                "features": "Vi bruger ordet *kortobjekt* til at beskrive ting der optræder på kortet såsom veje, bygninger, eller interessepunkter. Enhver fysisk ting i den virkelige verden kan indtegnes som et kortobjekt på OpenStreetMap. Kortobjekter repræsenteres på kortet som *punkter*, *linjer* eller *områder*.",
+                "nodes_ways": "I OpenStreetMap kaldes punkter sommetider *noder*, og linjer og områder sommetider *veje*."
             },
             "editing": {
+                "title": "Rediger & gem",
                 "select_h": "Vælg",
                 "save_h": "Gem"
+            },
+            "imagery": {
+                "title": "Luftfoto i baggrunden",
+                "intro": "Luftfotoet der vises i baggrunden bagved kortet er en vigtig ressource under redigering af kortet. Dette kan bestå af ortografiske fotos opsamlet fra satellitter, fly eller droner, eller det kan være indskannede historiske kort eller andre frit tilgængelige kildedata.",
+                "sources_h": "Luftfoto-kilder",
+                "choosing": "For at se hvilke kilder til luftfoto der er tilgængelige i området, skal du klikke på knappen {layers} **Baggrundsindstillinger** i kortets side.",
+                "sources": "Som standard vises et satellit-lag fra [Bing Maps](https://www.bing.com/maps/) som baggrundsbillede. Afhængigt af hvor i verden du redigerer, kan der være andre luftfoto-kilder tilgængelige. Nogle kan være af nyere dato eller have højere opløsning end Bing, så det er altid smart at se efter hvilket lag der er bedst at bruge til at redigere kortet ud fra.",
+                "offsets_h": "Justering af luftfoto-offset",
+                "offset": "Den registrerede position for et luftfoto er nogle gange ikke helt korrekt i forhold til kortet. Hvis du ser at bygninger og veje generelt er forskudt mellem kort og luftfoto, kan det være luftfotoet der er unøjagtigt, så i stedet for at flytte alle kortobjekter kan du justere baggrunden så den er samstemmende med kortets data ved at åbne \"Juster luftfoto-offset\" i bunden af Baggrundsindstillinger-fanen.",
+                "offset_change": "Klik på de små trekanter for at justere offset i små intervaller, eller hold venstre musetast nede og træk indenfor den grå firkant for at trække luftfotoet på plads."
             }
         },
         "intro": {
@@ -993,7 +1029,8 @@
                     "title": "Markering af kortobjekter",
                     "select_one": "Marker et enkelt kortobjekt",
                     "select_multi": "Marker flere kortobjekter",
-                    "lasso": "Tegn en markerings-lasso om kortobjekter"
+                    "lasso": "Tegn en markerings-lasso om kortobjekter",
+                    "search": "Find kortobjekter der indeholder tekst"
                 },
                 "with_selected": {
                     "title": "Ved markeret kortobjekt",
@@ -1054,6 +1091,28 @@
                     "measurement": "Åbn/luk målingspanel"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} fod",
+            "miles": "{quantity} mil",
+            "square_feet": "{quantity} kvadratfod",
+            "square_miles": "{quantity} kvadratmil",
+            "acres": "{quantity} ager",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "Ø",
+            "west": "V",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {

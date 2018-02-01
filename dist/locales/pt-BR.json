@@ -389,7 +389,8 @@
                 "title": "Medição",
                 "selected": "{n} selecionado",
                 "geometry": "Geometria",
-                "closed": "fechado",
+                "closed_line": "linha fechada",
+                "closed_area": "área fechada",
                 "center": "Centro",
                 "perimeter": "Perímetro",
                 "length": "Comprimento",
@@ -470,7 +471,6 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "custom_button": "Editar fundo de tela personalizado",
-            "custom_prompt": "Digite um template de URL de tiles. Tokens válidos são\n- {zoom}/{z}, {x}, {y} para esquema de tiles Z/X/Y\n- {ty} para esquema flipped TMS-style Y coordenada\n - {u} para esquema quadtile\n - {switch:a,b,c} para multiplexação de servidor DNS\n\nExemplo:\n{example}",
             "overlays": "Sobreposições",
             "imagery_source_faq": "Informações sobre imagens / Relatar um problema",
             "reset": "redefinir",
@@ -654,7 +654,6 @@
             "untagged_area_tooltip": "Selecionar um tipo de elemento que descreva o que esta área é.",
             "untagged_relation": "Relação sem etiquetas",
             "untagged_relation_tooltip": "Selecionar um tipo de elemento que descreva o que esta relação é.",
-            "many_deletions": "Você está excluindo {n} elementos.  Você tem certeza de que quer fazer isso?  Isso irá excluí-los do mapa que todo mundo vê no openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} sugere que seja utilizada numa área, mas essa linha não é uma área",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -1178,6 +1177,28 @@
                     "measurement": "Alterna painel de medição"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} ft² ",
+            "square_miles": "{quantity} mi² ",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -5952,8 +5973,8 @@
                     "terms": "Rota Mestre"
                 },
                 "type/site": {
-                    "name": "Local",
-                    "terms": "Site"
+                    "name": "Grupo de Elementos",
+                    "terms": "Grupo de prédios, cadeia de lojas, elementos"
                 },
                 "type/waterway": {
                     "name": "Hidrovia",

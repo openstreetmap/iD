@@ -389,7 +389,6 @@
                 "title": "Midíes",
                 "selected": "{n} seleicionaos",
                 "geometry": "Xeometría",
-                "closed": "zarráu",
                 "center": "Centru",
                 "perimeter": "Perímetru",
                 "length": "Llonxitú",
@@ -468,7 +467,6 @@
             "switch": "Volver a esti fondu",
             "custom": "Personalizáu",
             "custom_button": "Editar fondu personalizáu",
-            "custom_prompt": "Escribir una plantía d'URL de mosaicu. Los tokens válidos son:\n   - {zoom}/{z}, {x}, {y} pal esquema de mosaicu Z/X/Y\n   - {ty} pa coordenaes Y invertíes estilu TMS\n   - {u} pal esquema quadtile\n   - {switch:a,b,c} pal multiplexáu de sirvidores DNS\n\nExemplu:\n{example}",
             "reset": "reaniciar",
             "minimap": {
                 "tooltip": "Amuesa un mapa alloñáu p'ayudar a alcontrar l'área que se ve actualmente.",

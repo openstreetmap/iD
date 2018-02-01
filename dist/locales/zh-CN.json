@@ -389,7 +389,8 @@
                 "title": "测量",
                 "selected": "已选择 {n} 个",
                 "geometry": "几何",
-                "closed": "闭合",
+                "closed_line": "闭合路径",
+                "closed_area": "闭合区域",
                 "center": "中心",
                 "perimeter": "周长",
                 "length": "长度",
@@ -470,7 +471,7 @@
             "switch": "切换回该底图",
             "custom": "自定义",
             "custom_button": "编辑自定义背景",
-            "custom_prompt": "输入地图瓦片URL地址。有效的参数有：\n   - {zoom}/{z}, {x}, {y} 作为 Z/X/Y 坐标系\n   - {ty} 作为翻转的 TMS 算法 Y 坐标\n   - {u} 作为四叉树坐标编码\n   - {switch:a,b,c} 作为 DNS 服务器解析的并行连接子域\n\n示例：\n{example}",
+            "custom_prompt": "输入地图瓦片URL地址。有效的参数有：\n   - {zoom} 或 {z}, {x}, {y} 作为 Z/X/Y 坐标系\n   - {-y} 或 {ty} 作为翻转的 TMS 算法 Y 坐标\n   - {u} 作为四叉树坐标编码\n   - {switch:a,b,c} 作为 DNS 服务器解析的并行连接子域\n\n示例：\n{example}",
             "overlays": "叠加图层",
             "imagery_source_faq": "影像信息 / 报告问题",
             "reset": "重置",
@@ -654,7 +655,7 @@
             "untagged_area_tooltip": "选择描述这块区域的要素类型。",
             "untagged_relation": "未标记的关系",
             "untagged_relation_tooltip": "选择描述这个关系的要素类型。",
-            "many_deletions": "您正在删除 {n} 个要素。您确定要这么做吗？这些要素将会在任何人所见的 openstreetmap.org 地图上被删除。",
+            "many_deletions": "您正在删除 {n} 个要素：{p} 个节点、{l} 条路径、{a} 片区域、{r} 个关系。您确定要这么做吗？这些要素将会在任何人所见的 openstreetmap.org 地图上被删除。",
             "tag_suggests_area": "{tag}的标签所建议的线段应为区域，但这个不是一区域",
             "deprecated_tags": "弃用标签：{tags}"
         },
@@ -695,12 +696,12 @@
                 "title": "帮助",
                 "welcome": "欢迎使用 [OpenStreetMap](https://www.openstreetmap.org/) 的 iD 编辑器。您可以使用这个编辑器在网页浏览器内直接编辑 OpenStreetMap 地图。",
                 "open_data_h": "开放数据",
-                "open_data": "您在这个地图上做出的编辑会对所有使用 OpenStreetMap 的用户可见。您的编辑可以基于个人知识、实地调查、航空拍摄图片或者街景照片。从商业来源，例如谷歌地图这样的来源复制信息是被[严格禁止](https://www.openstreetmap.org/copyright)的。",
+                "open_data": "您在这个地图上做出的编辑会对所有使用 OpenStreetMap 的用户可见。您的编辑可以基于个人知识、实地调查、航空拍摄图片或者街景照片。从商业来源，例如谷歌地图这样的来源复制信息是被 [严格禁止](https://www.openstreetmap.org/copyright) 的。",
                 "before_start_h": "在您开始之前",
                 "before_start": "您在开始编辑之前应当先了解熟悉 OpenStreetMap 和本编辑器。iD 包含了一个导览教程，可以帮助您了解编辑 OpenStreetMap 的基本知识。请点击屏幕上的“开始演练”按钮以开始教程——这只会占用您大概 15 分钟。",
                 "open_source_h": "开放源代码",
-                "open_source": "iD 编辑器是一个合作开放源代码项目，您正在使用的版本是 {version}。其源代码[在 GitHub](https://github.com/openstreetmap/iD) 上可找到。",
-                "open_source_help": "您可以帮助 iD [翻译文本](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)或者[报告问题](https://github.com/openstreetmap/iD/issues)。"
+                "open_source": "iD 编辑器是一个合作开放源代码项目，您正在使用的版本是 {version}。其源代码 [在 GitHub](https://github.com/openstreetmap/iD) 上可找到。",
+                "open_source_help": "您可以帮助 iD [翻译文本](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 或者 [报告问题](https://github.com/openstreetmap/iD/issues)。"
             },
             "overview": {
                 "title": "概览",
@@ -1112,6 +1113,28 @@
                     "measurement": "切换测量面板"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -2101,6 +2124,9 @@
                 "ref": {
                     "label": "编号"
                 },
+                "ref/isil": {
+                    "label": "ISIL 编码"
+                },
                 "ref_aeroway_gate": {
                     "label": "登机口编号"
                 },
@@ -2963,6 +2989,10 @@
                     "name": "淋浴间",
                     "terms": "公共,浴室,淋浴,浴池,澡堂,洗澡,冲澡,冲凉,洗浴,搓澡,清洁,搓背,修脚,温泉,足浴,雨"
                 },
+                "amenity/smoking_area": {
+                    "name": "吸烟区域",
+                    "terms": "吸烟,抽烟,烟,香烟,烟草"
+                },
                 "amenity/social_facility": {
                     "name": "社会服务设施",
                     "terms": "社会服务设施,社会保障设施"
@@ -3329,6 +3359,10 @@
                 "building/roof": {
                     "name": "开放式建筑",
                     "terms": "大棚,屋顶,上盖,开放式建筑"
+                },
+                "building/ruins": {
+                    "name": "建筑物遗迹",
+                    "terms": "遗迹,废墟,遗址,毁坏,考古,建筑,建筑物"
                 },
                 "building/school": {
                     "name": "学校建筑",
@@ -3733,6 +3767,10 @@
                 "highway/bridleway": {
                     "name": "马道",
                     "terms": "马道"
+                },
+                "highway/bus_guideway": {
+                    "name": "导向巴士轨道",
+                    "terms": "导向,巴士,导轨,导轮,胶轮,公交,公交车,轨道"
                 },
                 "highway/bus_stop": {
                     "name": "公交车站 / 站台"
@@ -5991,9 +6029,16 @@
                 "description": "Esri 世界影像",
                 "name": "Esri 世界影像"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "description": "比默认图层或许更为清晰准确的 Esri 归档影像。",
+                "name": "Esri 世界影像 (清晰) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "description": "OpenStreetMap 默认图层",
                 "name": "OpenStreetMap (标准)"
@@ -6007,43 +6052,43 @@
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：地址"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：几何"
             },
             "OSM_Inspector-Highways": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：道路"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：区域（面）"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：地名"
             },
             "OSM_Inspector-Routing": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：路线"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
-                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© Geofabrik 有限公司, OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OSM查看器：标签"
             },
@@ -6051,7 +6096,7 @@
                 "name": "TIGER 道路 2012"
             },
             "US-TIGER-Roads-2014": {
-                "description": "在缩放等级16级以上是来自美国人口调查局的公共领域地图数据。低缩放等级下仅包含自2006年以来的变更，不含已纳入OpenStreetMap的变更。",
+                "description": "在缩放等级16级以上是来自美国人口调查局的公共领域地图数据。低缩放等级下仅包含自2006年以来的变更，不含已纳入 OpenStreetMap 的变更。",
                 "name": "TIGER 道路 2014"
             },
             "US-TIGER-Roads-2017": {
@@ -6059,18 +6104,33 @@
                 "name": "TIGER 道路 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 贡献者, 署名-相同方式共享 3.0"
+                },
                 "name": "以路径表示的小路：自行车道"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 贡献者, 署名-相同方式共享 3.0"
+                },
                 "name": "以路径表示的小路：徒步"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 贡献者, 署名-相同方式共享 3.0"
+                },
                 "name": "以路径表示的小路：山地自行车"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 贡献者, 署名-相同方式共享 3.0"
+                },
                 "name": "以路径表示的小路：滑冰"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 贡献者, 署名-相同方式共享 3.0"
+                },
                 "name": "以路径表示的小路：冬季运动"
             },
             "basemap.at": {
@@ -6084,12 +6144,12 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "由basemap.at提供的正射影像图层，接替geoimage.at影像图层。",
-                "name": "basemap.at正射影像"
+                "description": "由 basemap.at 提供的正射影像图层，接替 geoimage.at 影像图层。",
+                "name": "basemap.at 正射影像"
             },
             "hike_n_bike": {
                 "attribution": {
-                    "text": "© OpenStreetMap贡献者"
+                    "text": "© OpenStreetMap 贡献者"
                 },
                 "name": "徒步与自行车"
             },
@@ -6102,56 +6162,56 @@
             },
             "openpt_map": {
                 "attribution": {
-                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OpenPT Map (叠加层)"
             },
             "osm-gps": {
                 "attribution": {
-                    "text": "© OpenStreetMap贡献者"
+                    "text": "© OpenStreetMap 贡献者"
                 },
                 "description": "上传至 OpenStreetMap 的公开 GPS 轨迹",
                 "name": "OpenStreetMap GPS 轨迹"
             },
             "osm-mapnik-black_and_white": {
                 "attribution": {
-                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OpenStreetMap（黑白标准）"
             },
             "osm-mapnik-german_style": {
                 "attribution": {
-                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                    "text": "© OpenStreetMap 贡献者, 署名-相同方式共享"
                 },
                 "name": "OpenStreetMap（德国样式）"
             },
             "qa_no_address": {
                 "attribution": {
-                    "text": "© Simon Poole, 数据© OpenStreetMap贡献者"
+                    "text": "© Simon Poole, 数据 © OpenStreetMap 贡献者"
                 },
                 "name": "地址缺失质检"
             },
             "skobbler": {
                 "attribution": {
-                    "text": "© 碎片：skobbler 地图数据：OpenStreetMap贡献者"
+                    "text": "© 瓦片：skobbler 地图数据：OpenStreetMap 贡献者"
                 },
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "地图碎片由 Stamen 设计，并以知识共享署名3.0协议授权"
+                    "text": "地图瓦片由 Stamen 设计，并以 署名 3.0 协议授权"
                 },
                 "name": "Stamen 地形"
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "地图© Thunderforest，数据© OpenStreetMap贡献者"
+                    "text": "地图 © Thunderforest，数据 © OpenStreetMap 贡献者"
                 },
                 "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "地图© Thunderforest,，数据© OpenStreetMap贡献者"
+                    "text": "地图 © Thunderforest，数据 © OpenStreetMap 贡献者"
                 },
                 "name": "Thunderforest 地貌"
             }

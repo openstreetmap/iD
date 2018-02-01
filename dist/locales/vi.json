@@ -389,7 +389,8 @@
                 "title": "Đo lường",
                 "selected": "{n} được chọn",
                 "geometry": "Hình",
-                "closed": "đóng",
+                "closed_line": "đường kẻ đóng",
+                "closed_area": "vùng đóng",
                 "center": "Tâm",
                 "perimeter": "Chu vi",
                 "length": "Chiều dài",
@@ -470,7 +471,7 @@
             "switch": "Quay về hình nền này",
             "custom": "Tùy biến",
             "custom_button": "Sửa hình nền tùy biến",
-            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   - {zoom}/{z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   - {ty} cho tọa độ Y kiểu TMS phản chiếu\n   - {u} cho định dạng quadtile\n   - {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
+            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   - {zoom} hoặc {z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   - {-y} hoặc {ty} cho tọa độ Y kiểu TMS phản chiếu\n   - {u} cho định dạng quadtile\n   - {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
             "overlays": "Lớp phủ",
             "imagery_source_faq": "Chi tiết Hình ảnh / Báo cáo Vấn đề",
             "reset": "đặt lại",
@@ -654,7 +655,6 @@
             "untagged_area_tooltip": "Chọn loại vùng.",
             "untagged_relation": "Quan hệ không có thẻ",
             "untagged_relation_tooltip": "Chọn loại quan hệ.",
-            "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
             "tag_suggests_area": "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
             "deprecated_tags": "Không khuyến khích sử dụng các thẻ: {tags}"
         },
@@ -1125,6 +1125,28 @@
                     "measurement": "Bật/tắt bảng đo lường"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} foot",
+            "miles": "{quantity} dặm",
+            "square_feet": "{quantity} foot vuông",
+            "square_miles": "{quantity} dặm vuông",
+            "acres": "{quantity} mẫu Anh",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "B",
+            "south": "N",
+            "east": "Đ",
+            "west": "T",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -3007,6 +3029,10 @@
                     "name": "Tắm đứng",
                     "terms": "phòng tắm đứng, buồng tắm đứng, khay tắm đứng, cabin tắm, phong tam dung, buong tam dung, khay tam dung, cabin tam"
                 },
+                "amenity/smoking_area": {
+                    "name": "Khu vực Hút thuốc",
+                    "terms": "khu vực hút thuốc, khu vực hút thuốc lá, phòng hút thuốc, phòng hút thuốc lá, khu vuc hut thuoc, khu vuc hut thuoc la, phong hut thuoc, phong hut thuoc la"
+                },
                 "amenity/social_facility": {
                     "name": "Dịch vụ Xã hội",
                     "terms": "dịch vụ xã hội, người vô gia cư, người khuyết tật, trẻ em, trung tâm điều trị nghiện ma túy, trung tâm điều trị nghiện rượu, dich vu xa hoi, nguoi vo gia cu, nguoi khuyet tat, tre em, trung tam dieu tri nghien ma tuy, trung tam dieu tri nghien ruou"
@@ -3239,6 +3265,10 @@
                 "barrier/hedge": {
                     "name": "Hàng rào Cây",
                     "terms": "hàng rào cây, hàng cây, hang rao cay, hang cay"
+                },
+                "barrier/kerb": {
+                    "name": "Bờ đường",
+                    "terms": "bờ đường, bờ đường nâng cao, lề đường, bo duong, bo duong nang cao, le duong"
                 },
                 "barrier/kissing_gate": {
                     "name": "Cửa Hàng rào Chắn Trâu bò",
@@ -3691,6 +3721,10 @@
                 "emergency/private": {
                     "name": "Chỉ Dịch vụ Khẩn cấp được Chủ Cho phép"
                 },
+                "emergency/water_tank": {
+                    "name": "Bể nước Cứu hỏa",
+                    "terms": "bể nước cứu hỏa, thùng nước cứu hỏa, bể nước cứu hoả, thùng nước cứu hoả, bể nước chữa cháy, thùng nước chữa cháy, be nuoc cuu hoa, thung nuoc cuu hoa, be nuoc chua chay, thung nuoc chua chay"
+                },
                 "emergency/yes": {
                     "name": "Dành cho Dịch vụ Khẩn cấp"
                 },
@@ -3828,6 +3862,10 @@
                 "highway/bridleway": {
                     "name": "Đường mòn Ngựa",
                     "terms": "đường mòn ngựa, đường cưỡi ngựa, đường đi ngựa, duong mon ngua, duong cuoi ngua, duong di ngua"
+                },
+                "highway/bus_guideway": {
+                    "name": "Đường dẫn Xe buýt",
+                    "terms": "đường dẫn xe buýt, duong dan xe buyt"
                 },
                 "highway/bus_stop": {
                     "name": "Trạm/Bến Xe buýt"

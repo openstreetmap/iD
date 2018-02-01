@@ -386,7 +386,6 @@
                 "title": "Pomiary",
                 "selected": "{n} wybrano",
                 "geometry": "Geometria",
-                "closed": "zamknięty",
                 "center": "Środek",
                 "perimeter": "Obwód",
                 "length": "Długość",
@@ -467,7 +466,6 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
-            "custom_prompt": "Wprowadź szablon dla URL kafla mapy. Obsługiwane symbole:\n   - {zoom}/{z}, {x}, {y} dla schematu adresowania kafla Z/X/Y\n   - {ty} dla odwróconej współrzędnej Y w adresowaniu TMS\n   - {u} dla QuadTiles\n   - {switch:a,b,c} dla multipleksacji serwerów na poziomie DNS\n\nPrzykład:\n{example}",
             "overlays": "Nakładki",
             "reset": "Przywraca ustawienia",
             "display_options": "Wyświetl opcje",
@@ -650,7 +648,6 @@
             "untagged_area_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten obszar.",
             "untagged_relation": "Pusta relacja - brak znaczników",
             "untagged_relation_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta relacja.",
-            "many_deletions": "Usuwasz aż {n} obiektów! Czy na pewno chcesz to zrobić? Tym sposobem trwale usuniesz je z mapy, który wszyscy mogą zobaczyć na openstreetmap.org.",
             "tag_suggests_area": "Znacznik {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
             "deprecated_tags": "Przestarzałe znaczniki: {tags}"
         },

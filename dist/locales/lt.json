@@ -569,7 +569,6 @@
             "untagged_area_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, koks tai plotas yra.",
             "untagged_relation": "Ryšys be žymų",
             "untagged_relation_tooltip": "Parinkite objekto tipą, aprašantį kas yra šis ryšys.",
-            "many_deletions": "Jūs trinate {n} objektus. Ar tikrai norite tai padaryti? Tai ištrins juos iš žemėlapio, kurį visi kiti mato svetainėje openstreetmap.org.",
             "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
             "deprecated_tags": "Pasenusios žymos: {tags}"
         },

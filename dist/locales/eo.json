@@ -388,7 +388,8 @@
                 "title": "Mezuro",
                 "selected": "{n} elektitaj",
                 "geometry": "Geometrio",
-                "closed": "fermita",
+                "closed_line": "fermita linio",
+                "closed_area": "fermita areo",
                 "center": "Centro",
                 "perimeter": "Ĉirkaŭmezuro",
                 "length": "Longo",
@@ -461,7 +462,7 @@
         },
         "background": {
             "title": "Fono",
-            "description": "Fonaj agordoj",
+            "description": "Agordoj de fono",
             "key": "B",
             "backgrounds": "Fonoj",
             "none": "Neniu",
@@ -469,7 +470,7 @@
             "switch": "Baskuli reen al ĉi tiu fono",
             "custom": "Propra",
             "custom_button": "Redakti propran fonon",
-            "custom_prompt": "Entajpu URL-skemon de kaheloj. Ĝustaj ĵetonoj estas:\n - {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n - {ty} por renversaj TMS-stilaj Y-koordinatoj\n - {u} por kvarkahela (quadtile) skemo\n - {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
+            "custom_prompt": "Entajpu URL-skemon de kaheloj. Ĝustaj ĵetonoj estas:\n - {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n - {-y} aŭ {ty} por renversaj TMS-stilaj Y-koordinatoj\n - {u} por kvarkahela (quadtile) skemo\n - {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
             "overlays": "Surtavoloj",
             "imagery_source_faq": "Pri fotaro / Raporti problemon",
             "reset": "restarigi",
@@ -652,7 +653,7 @@
             "untagged_area_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun areon.",
             "untagged_relation": "Senetikeda rilato",
             "untagged_relation_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun rilaton.",
-            "many_deletions": "Vi forigas {n} elementojn. Ĉu vi certe volas fari ĉi tion? Ĉi tio forigos ilin el la mapo, kiun ĉiuj vidas je openstreetmap.org.",
+            "many_deletions": "Vi forigas {n} elementojn: {p} nodo(j)n, {l} linio(j)n, {a} areo(j)n kaj {r} rilato(j)n.  Ĉu vi certe volas fari tion. Tio ĉi forigos ilin el la mapo, kiun ĉiuj vidas ĉe openstreetmap.org.",
             "tag_suggests_area": "La etikedo {tag} indikas, ke linio estu areo, sed ĝi ne estas areo",
             "deprecated_tags": "Evitindaj etikedoj: {tags}"
         },
@@ -827,10 +828,10 @@
                 "title": "Fona fotaro",
                 "intro": "Fona fotaro videbla malantaŭ map-datumoj estas grava fonto por mapigi. Tiu ĉi fotaro povas esti kolektita per satelitoj, aviadiloj aŭ flugrobotoj, aŭ ĝi povas esti skanita historia mapo aŭ aliaj libere disponeblaj datumoj.",
                 "sources_h": "Fontoj de fotaro",
-                "choosing": "Por vidigi disponeblajn fontojn de fotaro por mapigi, klaku la butonon {layers} **fonaj agordoj** flanke de la mapo.",
+                "choosing": "Por vidigi disponeblajn fontojn de fotaro por mapigi, klaku la butonon {layers} **agordoj de fono** flanke de la mapo.",
                 "sources": "Implicite satelita fotaro de [Bing Mapoj](https://www.bing.com/maps/) estas elektita kiel fono. Depende de kie vi mapigas, aliaj fontoj de fotaro povas esti elekteblaj. Iuj povas esti pli aktualaj aŭ pli akurataj, do ĉiam indas kontroli kiu tavolo estas plej taŭga por uzi kiel map-referencon.",
                 "offsets_h": "Ĝustigi fotaran deŝovon",
-                "offset": "Fotaro estas iomete deŝovita rilate al akurataj map-datumoj. Se vi vidas multe da vojoj kaj konstruaĵoj deŝovitaj rilate al la fona fotaro, probable la fotaro estas malĝusta, do ne movu ilin por kongrui al la fono. Anstataŭ tio, vi povas ĝustigi la fonon tiel, kiel ĝi kongruos kun ekzistantaj datumoj per etendi la sekcion “ĝustigi fotaran deŝovon” sube ĉe la panelo “fonaj agordoj”.",
+                "offset": "Fotaro estas iomete deŝovita rilate al akurataj map-datumoj. Se vi vidas multe da vojoj kaj konstruaĵoj deŝovitaj rilate al la fona fotaro, probable la fotaro estas malĝusta, do ne movu ilin por kongrui al la fono. Anstataŭ tio, vi povas ĝustigi la fonon tiel, kiel ĝi kongruos kun ekzistantaj datumoj per etendi la sekcion “ĝustigi fotaran deŝovon” sube ĉe la panelo “agordoj de fono”.",
                 "offset_change": "Klaku trianguletojn por ĝustigi fotaran deŝovon je etaj paŝoj, aŭ premu la maldekstran mus-butonon kaj trenu ene griza kvadrato por ŝovi la fotaron al datumoj."
             },
             "streetlevel": {
@@ -1218,6 +1219,28 @@
                     "measurement": "Baskuli mezur-panelon"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} ft²",
+            "square_miles": "{quantity} mi²",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -2683,7 +2706,7 @@
                 },
                 "aerialway/pylon": {
                     "name": "Kablovoja fosto",
-                    "terms": "apogilo,apogstango,fosto,paliso,stango"
+                    "terms": "apogilo,apogstango,fosto,paliso,stango,kolono"
                 },
                 "aerialway/rope_tow": {
                     "name": "Skitelfero ŝnur-tira",
@@ -3100,6 +3123,10 @@
                     "name": "Duŝejo",
                     "terms": "duŝo,dushejo,dusxejo,banado"
                 },
+                "amenity/smoking_area": {
+                    "name": "Fumejo",
+                    "terms": "cigaredfumejo"
+                },
                 "amenity/social_facility": {
                     "name": "Socia servejo",
                     "terms": "socia servo,socia helpo"
@@ -3332,6 +3359,10 @@
                 "barrier/hedge": {
                     "name": "Kreskaĵbarilo",
                     "terms": "kreskajhbarilo,kreskajxbarilo,heĝo,hegho,hegxo,plektobarilo"
+                },
+                "barrier/kerb": {
+                    "name": "Trotuar-randaĵo",
+                    "terms": "trotuarrandaĵo,randaĵo,randŝtono"
                 },
                 "barrier/kissing_gate": {
                     "name": "Nurhoma pordego",
@@ -3783,6 +3814,10 @@
                 },
                 "emergency/private": {
                     "name": "Vivsav-serva aliro: privata"
+                },
+                "emergency/water_tank": {
+                    "name": "Kontraŭbrulega akvujo",
+                    "terms": "akvujo,rezervujo,kriokaza akvujo,fajrobrigada akvujo"
                 },
                 "emergency/yes": {
                     "name": "Vivsav-serva aliro: jes"
@@ -6281,6 +6316,13 @@
                 },
                 "description": "Tutmonda fotaro de Esri.",
                 "name": "Tutmonda fotaro de Esri"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Arĥivita fotaro de Esri, kiu povas esti pli klara kaj akurata ol la norma tavolo.",
+                "name": "Tutmonda fotaro de Esri (pli klara) Beta"
             },
             "MAPNIK": {
                 "attribution": {

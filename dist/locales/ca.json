@@ -389,7 +389,6 @@
                 "title": "Mesurament",
                 "selected": "{n} seleccionat",
                 "geometry": "Geometria",
-                "closed": "tancat",
                 "center": "Center",
                 "perimeter": "Perímetre",
                 "length": "Longitud",
@@ -642,7 +641,6 @@
             "untagged_area_tooltip": "Seleccioneu un tipus d'objecte que descrigui el que és aquesta àrea.",
             "untagged_relation": "Relació sense etiquetar",
             "untagged_relation_tooltip": "Seleccioneu un tipus d'objecte que descrigui com és aquesta relació.",
-            "many_deletions": "Esteu eliminant  {n} objectes. Segur que ho voleu fer? Això els eliminarà del mapa que tothom veu a openstreetmap.org",
             "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
             "deprecated_tags": "Etiquetes obsoletes : {tags}"
         },

@@ -385,7 +385,8 @@
                 "title": "측정",
                 "selected": "{n}개 선택함",
                 "geometry": "기하",
-                "closed": "닫힌",
+                "closed_line": "닫힌 선",
+                "closed_area": "닫힌 공간",
                 "center": "가운데",
                 "perimeter": "둘레",
                 "length": "길이",
@@ -393,7 +394,8 @@
                 "centroid": "중심",
                 "location": "위치",
                 "metric": "미터법",
-                "imperial": "야드파운드법"
+                "imperial": "야드파운드법",
+                "node_count": "노드 수"
             }
         },
         "geometry": {
@@ -459,18 +461,22 @@
             "title": "배경",
             "description": "배경 설정",
             "key": "B",
+            "backgrounds": "배경",
             "none": "없음",
             "best_imagery": "이 위치의 가장 잘 알려진 사진 자료",
             "switch": "이 배경으로 복귀합니다",
             "custom": "사용자 지정",
             "custom_button": "사용자 지정 배경 편집",
-            "custom_prompt": "타일 URL 템플릿을 입력하세요. 올바른 토큰은 다음과 같습니다:\n - Z/X/Y 타일 체계에 대해 {zoom}/{z}, {x}, {y}\n - 뒤집힌 TMS 스타일의 Y좌표용으로 {ty}\n - 쿼드 타일 방식으로 {u}\n - 다중 DNS 서버용으로 {switch:a,b,c}\n\n예시는 다음과 같습니다:\n{example}",
+            "overlays": "오버레이",
+            "imagery_source_faq": "이미지 정보 / 버그 신고",
             "reset": "재설정",
+            "display_options": "디스플레이 옵션",
             "brightness": "명도",
             "contrast": "대비",
             "saturation": "채도",
             "sharpness": "선명도",
             "minimap": {
+                "description": "미니맵 보이기",
                 "tooltip": "현재 보여지는 지역을 찾을 수 있도록 지도를 축소하여 보여줍니다.",
                 "key": "/"
             },
@@ -632,7 +638,7 @@
         },
         "validations": {
             "disconnected_highway": "도로가 연결되어 있지 않음",
-            "disconnected_highway_tooltip": "도로는 다른 도로나 건물 입구와 연결되어야합니다.",
+            "disconnected_highway_tooltip": "도로는 다른 도로나 건물 입구와 연결되어야 합니다.",
             "old_multipolygon": "바깥 쪽의 다중 다각형 태그",
             "old_multipolygon_tooltip": "이 스타일의 다중면은 더이상 사용되지 않습니다. 바깥쪽 대신에 부모 다중면을 배치해 주세요 ",
             "untagged_point": "태그되지 않은 점",
@@ -643,7 +649,6 @@
             "untagged_area_tooltip": "이 공간을 설명하는 지물 유형을 선택하세요.",
             "untagged_relation": "태그되지 않은 관계",
             "untagged_relation_tooltip": "이 관계가 무엇인지 설명하는 지물 유형을 선택하세요.",
-            "many_deletions": "개체 {n}개를 삭제하고 있습니다. 이를 수행하겠습니까? 다른 사람이 openstreetmap.org에서 보는 지도에서 삭제됩니다.",
             "tag_suggests_area": "{tag} 태그의 제안 선은 공간이여야 하지만 태그는 공간이 아닙니다",
             "deprecated_tags": "사용되지 않는 태그: {tags}"
         },
@@ -678,7 +683,56 @@
         },
         "help": {
             "title": "도움말",
-            "key": "H"
+            "key": "H",
+            "help": {
+                "title": "도움말",
+                "welcome": "[OpenStreetMap] (https://www.openstreetmap.org/)의 iD 편집기에 오신 것을 환영합니다. 이 편집기를 사용하면 웹 브라우저에서 바로 OpenStreetMap을 업데이트 할 수 있습니다.",
+                "open_data_h": "데이터 개방",
+                "open_data": "이 맵에서 편집 한 내용은 OpenStreetMap을 사용하는 모든 사용자가 볼 수 있습니다. 귀하의 편집 내용은 개인 지식, 지상 설문 조사 또는 공중 또는 거리 사진에서 수집한 이미지를 기반으로 할 수 있습니다. Google 지도와 같은 상업적인 출처에서 복사하는 행위는 [엄격히 금지되어 있습니다](https://www.openstreetmap.org/copyright).",
+                "before_start_h": "시작하기 전에",
+                "before_start": "편집을 시작하기 전에 OpenStreetMap과 이 편집기에 익숙해야 합니다. iD에는 OpenStreetMap 편집의 기본 사항을 알려주는 연습이 있습니다. 튜토리얼을 보려면 이 화면에서 \"연습 시작하기\"를 클릭하세요 - 약 15 분이 소요됩니다.",
+                "open_source_h": "오픈소스",
+                "open_source": "iD 편집기는 공동 작업 방식의 오픈 소스 프로젝트이며, 버전 {version}을 사용 중입니다. 소스 코드는 [GitHub에서] 이용할 수 있습니다 (https://github.com/openstreetmap/iD).",
+                "open_source_help": "iD에 [번역] (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 또는 [버그 신고] (https://github.com/openstreetmap/iD/issues)를 통해 도움을 줄 수 있습니다."
+            },
+            "overview": {
+                "title": "개요",
+                "navigation_h": "둘러보기",
+                "navigation_drag": "마우스 왼쪽 버튼 {leftclick}을 누른 상태에서 마우스를 움직여 지도를 드래그 할 수 있습니다. 키보드의 `↓`,`↑`,`←`,`→`화살표 키를 사용할 수도 있습니다.",
+                "navigation_zoom": "마우스 휠이나 트랙 패드로 스크롤하거나 지도 측면의 {plus} / {minus} 버튼을 클릭하여 확대하거나 축소 할 수 있습니다. 키보드의 `+`,`-` 키를 사용할 수도 있습니다.",
+                "features_h": "지도 기능",
+                "features": "우리는 *지물*이라는 단어를 사용하여 도로, 건물, 또는 지도에 나타나는 것을 설명합니다. 현실 세계의 모든 것을 OpenStreetMap을 이용하여 매핑할 수 있습니다. 지도 기능은 *점*, *선*, 또는 *공간*을 사용하여 지도에 표기합니다.",
+                "nodes_ways": "OpenStreetmap에서, 점은 때떄로 *노드*라고 불리며, 선과 공간은 때때로 *길*이라고 불립니다."
+            },
+            "editing": {
+                "title": "편집 & 저장하기",
+                "select_h": "선택",
+                "multiselect_h": "여러 선택",
+                "undo_redo_h": "되돌리기 & 복구하기",
+                "save_h": "저장",
+                "upload_h": "업로드",
+                "backups_h": "자동 백업",
+                "keyboard_h": "키보드 단축키"
+            },
+            "feature_editor": {
+                "title": "지물 편집기"
+            },
+            "points": {
+                "title": "점"
+            },
+            "lines": {
+                "title": "선"
+            },
+            "areas": {
+                "title": "공간"
+            },
+            "relations": {
+                "title": "관계",
+                "multipolygon_h": "다중 다각형",
+                "turn_restriction_h": "회전 제한",
+                "route_h": "노선",
+                "boundary_h": "경계"
+            }
         },
         "intro": {
             "done": "완료",
@@ -784,6 +838,7 @@
             },
             "areas": {
                 "title": "공간",
+                "add_playground": "*공간*은 호수, 건물, 주거 지역과 같은 지형지물의 경계를 표시하는 데 사용됩니다. {br} 일반적으로 점으로 매핑 할 수 있는 많은 기능에 대한 자세한 매핑에 사용할 수도 있습니다. **{button} 공간 버튼을 클릭하여 새 영역을 추가하세요.**",
                 "start_playground": "공간을 그려서 이 놀이터를 지도에 추가해 봅시다. 영역은 지형지물의 바깥쪽 가장자리를 따라 *노드*를 배치하여 그립니다. **클릭하거나 스페이스 바를 눌러 운동장 모서리 중 하나에 시작 노드를 놓으세요.**",
                 "continue_playground": "놀이터의 가장자리를 따라 더 많은 노드를 배치하여 영역 그리기를 계속하십시오. 해당 영역을 기존 경로에 연결할 수 있습니다. {br}도움말 : '{alt}'키를 누르고 있으면 노드가 다른 점에 연결되지 않습니다. **놀이터의 공간을 계속 그리세요.**",
                 "finish_playground": "Enter 키를 누르거나 첫 번째 노드 또는 마지막 노드를 다시 클릭하여 영역 그리기를 마칩니다. **놀이터 영역 그리기를 마치세요.**",
@@ -971,6 +1026,12 @@
                     "measurement": "측정 패널 토글"
                 }
             }
+        },
+        "units": {
+            "north": "북",
+            "south": "남",
+            "east": "동",
+            "west": "서"
         },
         "presets": {
             "categories": {
@@ -1412,6 +1473,14 @@
                         "clockwise": "시계 방향"
                     }
                 },
+                "direction_vertex": {
+                    "label": "방향",
+                    "options": {
+                        "backward": "역방향",
+                        "both": "둘 다 / 모두",
+                        "forward": "정방향"
+                    }
+                },
                 "display": {
                     "label": "표시"
                 },
@@ -1806,6 +1875,7 @@
                     "label": "일방통행",
                     "options": {
                         "no": "아니오",
+                        "reversible": "도로 진행 방향과 역방향",
                         "undefined": "아니오로 간주",
                         "yes": "예"
                     }
@@ -1932,6 +2002,18 @@
                 "railway": {
                     "label": "유형"
                 },
+                "railway/position": {
+                    "label": "거리표 위치",
+                    "placeholder": "소수점 한 자리로 거리 (123.4)"
+                },
+                "railway/signal/direction": {
+                    "label": "방향",
+                    "options": {
+                        "backward": "역방향",
+                        "both": "둘 다 / 모두",
+                        "forward": "정방향"
+                    }
+                },
                 "rating": {
                     "label": "정격 용량"
                 },
@@ -1940,6 +2022,9 @@
                 },
                 "ref": {
                     "label": "참조"
+                },
+                "ref/isil": {
+                    "label": "ISIL 코드"
                 },
                 "ref_aeroway_gate": {
                     "label": "탑승구 번호"
@@ -2233,6 +2318,13 @@
                 },
                 "traffic_signals": {
                     "label": "유형"
+                },
+                "traffic_signals/direction": {
+                    "options": {
+                        "backward": "역방향",
+                        "both": "둘 다 / 모두",
+                        "forward": "정방향"
+                    }
                 },
                 "trail_visibility": {
                     "label": "경로 가시성",
@@ -2609,6 +2701,9 @@
                     "name": "패스트 푸드",
                     "terms": "패스트푸드"
                 },
+                "amenity/ferry_terminal": {
+                    "name": "페리 터미널"
+                },
                 "amenity/fire_station": {
                     "name": "소방서",
                     "terms": "소방서"
@@ -2770,6 +2865,9 @@
                     "name": "관리소",
                     "terms": "관리소, 레인저 스테이션"
                 },
+                "amenity/recycling": {
+                    "name": "재활용 용기"
+                },
                 "amenity/recycling_centre": {
                     "name": "재활용 센터",
                     "terms": "재활용 센터"
@@ -2798,6 +2896,9 @@
                 },
                 "amenity/shower": {
                     "name": "샤워실"
+                },
+                "amenity/smoking_area": {
+                    "name": "흡연 구역"
                 },
                 "amenity/social_facility": {
                     "name": "사회시설",
@@ -3020,6 +3121,9 @@
                     "name": "산 울타리",
                     "terms": "산울타리"
                 },
+                "barrier/kerb": {
+                    "name": "갓돌"
+                },
                 "barrier/kissing_gate": {
                     "name": "목장 문",
                     "terms": "좁게 열리는 문"
@@ -3171,6 +3275,9 @@
                     "name": "반분리된 주택",
                     "terms": "반분리된 주택"
                 },
+                "building/service": {
+                    "name": "서비스 건물"
+                },
                 "building/shed": {
                     "name": "오두막",
                     "terms": "헛간"
@@ -3210,6 +3317,9 @@
                 "camp_site/camp_pitch": {
                     "name": "캠핑장",
                     "terms": "캠핑장"
+                },
+                "circular": {
+                    "name": "로터리"
                 },
                 "club": {
                     "name": "클럽",
@@ -3561,6 +3671,10 @@
                 "highway/bridleway": {
                     "name": "승마로",
                     "terms": "승마도"
+                },
+                "highway/bus_guideway": {
+                    "name": "독립된 버스전용차로",
+                    "terms": "BRT"
                 },
                 "highway/bus_stop": {
                     "name": "버스 정류장"
@@ -4854,6 +4968,9 @@
                 "railway/light_rail": {
                     "name": "경전철",
                     "terms": "경전철,라이트 레일,트롤리"
+                },
+                "railway/milestone": {
+                    "name": "철도 거리표"
                 },
                 "railway/monorail": {
                     "name": "모노레일",

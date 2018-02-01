@@ -383,7 +383,6 @@
                 "title": "Měřítko",
                 "selected": "{n} vybráno",
                 "geometry": "Geometrie",
-                "closed": "zavřeno",
                 "center": "Střed",
                 "perimeter": "Perimetr",
                 "length": "Délka",
@@ -635,7 +634,6 @@
             "untagged_area_tooltip": "Zvolte typ vlastnosti popisující, co je tato plocha zač.",
             "untagged_relation": "Neoznačená relace",
             "untagged_relation_tooltip": "Vyber typ prvku, který popisuje, čím je tato relace",
-            "many_deletions": "Snažíte se smazat {n} objektů. Jste si jisti, že to opravdu chcete udělat? Tím je smažete z mapy, která je pro každého zobrazena na stránce openstreetmap.org.",
             "tag_suggests_area": "Vlastnost {tag} obvykle označuje plochu, ale zvolený objekt není plocha",
             "deprecated_tags": "Zastaralé vlastnosti: {tag}"
         },

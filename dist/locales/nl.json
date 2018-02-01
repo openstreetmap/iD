@@ -389,7 +389,6 @@
                 "title": "Meting",
                 "selected": "{n} geselecteerd",
                 "geometry": "Geometrie",
-                "closed": "gesloten",
                 "center": "Midden",
                 "perimeter": "Omtrek",
                 "length": "Lengte",
@@ -470,7 +469,6 @@
             "switch": "Selecteer terug deze achtergrond",
             "custom": "Aangepast",
             "custom_button": "Tegel-URL-sjabloon aanpassen",
-            "custom_prompt": "Geef een tegel-URL-sjabloon op. Geldige placeholders zijn:\n   - {zoom}/{z}, {x}, {y} voor het Z/X/Y-schema\n   - {ty} voor omgekeerde Y-coördinaten in TMS-stijl\n   - {u} voor het quadtile-schema\n   - {switch:a,b,c} voor DNS-server-multiplexing\n\nVoorbeeld:\n{example}",
             "overlays": "Lagen",
             "imagery_source_faq": "Beeldopnameinfo / Rapporteer een probleem",
             "reset": "Standaard herstellen",
@@ -654,7 +652,6 @@
             "untagged_area_tooltip": "Selecteer een objecttype dat beschrijft wat dit vlak is.",
             "untagged_relation": "Relatie zonder tags",
             "untagged_relation_tooltip": "Selecteer een objecttype dat beschrijft wat deze relatie is.",
-            "many_deletions": "Je verwijdert {n} objecten. Weet je zeker dat je dit wil doen? Dit zal ze verwijderen van de kaart die iedereen ziet op openstreetmap.org.",
             "tag_suggests_area": "De tag {tag} suggereert dat de lijn een vlak is, maar het is geen vlak",
             "deprecated_tags": "Afgeschafte tags: {tags}"
         },
@@ -676,7 +673,7 @@
         },
         "mapillary_signs": {
             "tooltip": "Verkeerborden uit Mapillary (Mapillary-fotolaag moet geactiveerd zijn)",
-            "title": "Herkende-verkeersborden-laag (Mapillary)"
+            "title": "Herkende verkeersborden (Mapillary)"
         },
         "mapillary": {
             "view_on_mapillary": "Bekijk deze afbeelding op Mapillary"
@@ -744,117 +741,117 @@
                 "fields_add_field": "Je kunt ook in het \"Voeg eigenschap toe\"-veld klikken om meer velden toe te voegen, zoals een beschrijving, Wikipedia-link en rolstoeltoegankelijkheidsinfo.",
                 "tags_h": "Tags",
                 "tags_all_tags": "Onder het velden gedeelte kun je het \"Alle tags\"-gedeelte uitklappen om de OpenStreetMap-*tags* voor het geselecteerde object te bekijken en bewerken. Elke tag bestaat uit een *sleutel* (Engels: *key*) en een *waarde*, die de echte waarden zijn die opgeslagen in OpenStreetMap. Een punt dat je in iD aanduidt als \"Restaurant\" met naam \"De Gouden Lepel\" is slechts een abstractie voor een node met de tags `amenity`=`restaurant` en `name`=`De Gouden Lepel`.",
-                "tags_resources": "Voor het bewerken van de tags van een object heb je gemiddelde kennis nodig van OpenStreetMap. Het is verstandig om bronnen als de [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) of [Taginfo](https://taginfo.openstreetmap.org/) te raadplegen om meer te leren over geaccepteerde OpenStreetMap tagging toepassingen."
+                "tags_resources": "Voor het bewerken van de tags van een object heb je wat meer kennis nodig van OpenStreetMap. Je moet de [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) raadplegen om te leren over tagging in OpenStreetMap. Op [Taginfo](https://taginfo.openstreetmap.org/) kan je statistieken zien over hoeveel keer elke tag momenteel in OpenStreetMap gebruikt wordt."
             },
             "points": {
                 "title": "Punten",
-                "intro": "Punten kunnen worden gebruikt om objecten zoals winkels, restaurants en monumenten weer te geven. Ze geven een specifieke locatie aan en beschrijven wat daar is.",
+                "intro": "Punten kunnen gebruikt worden om objecten zoals winkels, restaurants en monumenten weer te geven. Ze geven een specifieke locatie aan en beschrijven wat daar is.",
                 "add_point_h": "Punten toevoegen",
-                "add_point": "Om een punt toe te voegen, klik op de {point}**Punt** knop op de werkbalk boven de kaart, of gebruik de sneltoets `1`. Dit zal de cursor van de muis veranderd in een kruis symbool.",
-                "add_point_finish": "Als je een nieuw punt op de kaart wil zetten, zet dan je muisaanwijzer op de plaats waar het moet komen, en  {leftclick}klik links of druk op de spatiebalk `space`. ",
+                "add_point": "Om een punt toe te voegen, klik je op de \"{point} **Punt**\"-knop in de werkbalk boven de kaart, of gebruik je de sneltoets `1`. De muisaanwijzer verandert in een kruissymbool.",
+                "add_point_finish": "Zet de muisaanwijzer op de plaats waar het punt moet komen, en klik met de {leftclick} linkermuisknop, of druk op `Space`.",
                 "move_point_h": "Punten verplaatsen",
-                "move_point": "Om een punt te verplaatsen, plaats de cursor van de muis op het punt, klik links en houdt de {leftclick} linker muisknop vast terwijl je het punt naar de nieuwe locatie sleept. ",
+                "move_point": "Om een punt te verplaatsen, plaats je de cursor van de muis op het punt, druk je de {leftclick} linkermuisknop in, verschuif je de muis om het punt naar de nieuwe locatie te slepen, en laat je de knop vervolgens los.",
                 "delete_point_h": "Punten verwijderen",
-                "delete_point": "Objecten die niet in het echt bestaan, kan je beter verwijderen. Een object in OpenStreetMap verwijderen, haalt het van de kaart voor iedereen ter wereld. Let dus goed op dat een object echt weg is voor je het verwijdert.",
-                "delete_point_command": "Om een punt te verwijderen, {rightclick} klik rechts op het punt om het te selecteren en het edit menu te tonen. Gebruik dan het {delete} **Verwijder** commando."
+                "delete_point": "Objecten die niet in het echt bestaan, kan je verwijderen. Een object in OpenStreetMap verwijderen haalt het van de kaart voor iedereen ter wereld. Let dus goed op dat een object echt weg is voor je het verwijdert.",
+                "delete_point_command": "Om een punt te verwijderen, klik je met de {rightclick} rechtermuisknop op het punt om het te selecteren en het bewerkmenu te tonen. Gebruik dan het \"{delete} **Verwijder**\"-commando."
             },
             "lines": {
                 "title": "Lijnen",
                 "intro": "*Lijnen* worden gebruikt om objecten zoals wegen, spoorwegen en rivieren voor te stellen. Lijnen worden getekend in het midden van het object dat ze representeren.",
                 "add_line_h": "Lijnen toevoegen",
-                "add_line": "Om een lijn toe te voegen, klik op de {line}**Lijn** knop op de werkbalk boven de kaart, of gebruik de sneltoets `2`. Dit zal de cursor van de muis veranderd in een kruis symbool.",
-                "add_line_draw": "Positioneer daarna de muis op de plek waar de lijn moet beginnen en {leftclick} klik links of gebruik de `Space` spatiebalk om te beginnen met het plaatsen van nodes/punten langs de lijn. Ga verder door meer nodes te plaatsen door te klikken of de spatiebalk te gebruiken. Tijdens het tekenen kun je inzoomen of de kaart verschuiven voor meer detail.",
-                "add_line_finish": "Om een lijn af te ronden klik nogmaals op de laatste node of toets `{return}` enter.",
+                "add_line": "Om een lijn toe te voegen, klik je op de \"{line} **Lijn**\"-knop in de werkbalk boven de kaart, of gebruik je de sneltoets `2`. De muisaanwijzer verandert in een kruissymbool.",
+                "add_line_draw": "Positioneer daarna de muisaanwijzer op de plaats waar de lijn moet beginnen en klik met de {leftclick} linkermuisknop of gebruik `Space` om te beginnen met het plaatsen van knooppunten langs de lijn. Plaats meer knooppunten op dezelfde manier. Tijdens het tekenen kan je inzoomen of de kaart verschuiven om gedetailleerder te kunnen werken.",
+                "add_line_finish": "Om een lijn af te ronden, klik je nogmaals op het laatste knooppunt of druk je op de toets `{return}`.",
                 "modify_line_h": "Lijnen aanpassen",
-                "modify_line_dragnode": "Je zult vaak lijnen zien die niet correct zijn gevormd, bijvoorbeeld een weg die niet overeenkomt met de achterliggende sattelietbeelden. Om de vorm van de lijn aan te passen selecteer je eerst de lijn door {leftclick} links te klikken. Alle nodes van de lijn  worden nu getoond als kleine cirkels. Je kunt de nodes verslepen naar betere locaties.",
-                "modify_line_addnode": "Je kunt ook nieuwe nodes toevoegen door {leftclick}**x2** dubbel te klikken op de lijn of door de kleine driehoekjes tussen de nodes te verslepen.",
+                "modify_line_dragnode": "Je zal vaak lijnen zien die niet correct gevormd zijn, bijvoorbeeld een weg die niet overeenkomt met de achterliggende luchtfoto's. Om de vorm van de lijn aan te passen selecteer je eerst de lijn met de {leftclick} linkermuisknop. Alle knooppunten van de lijn worden nu getoond als kleine cirkels. Je kunt de knooppunten verslepen naar betere locaties.",
+                "modify_line_addnode": "Je kan ook nieuwe knooppunten toevoegen door {leftclick}**x2** te dubbelklikken op de lijn of door de kleine driehoekjes tussen de knooppunten te verslepen.",
                 "connect_line_h": "Lijnen verbinden",
                 "connect_line": "Correcte verbindingen tussen wegen is belangrijk voor de kaart en essentieel voor routebeschrijvingen.",
-                "connect_line_display": "De verbindingen tussen wegen zijn getekend als grijze cirkels. De eindpunten van een lijn zijn getekend als grotere witte cirkels als ze niet met iets verbonden zijn.",
-                "connect_line_drag": "Om een lijn te verbinden met een ander object, sleep een van de nodes van de lijn op het andere object totdat beide objecten samen \"snappen\". Tip: je kunt de `{alt}` toets ingedrukt houden om te voorkomen dat nodes verbinden met andere objecten.",
-                "connect_line_tag": "Als je weet dat de verbinding verkeerslichten of oversteekplaatsen heeft, kun je deze toevoegen door de verbindende node te selecteren en met de object editor het correcte objecttype te selecteren.",
-                "disconnect_line_h": "Lijnen loskoppelen",
-                "disconnect_line_command": "Om een weg van een ander object los te koppelen, {rightclick} klik rechts op de verbindende node en selecteer het {disconnect} **Maak los** commando in het edit menu.",
+                "connect_line_display": "De verbindingen tussen wegen zijn getekend als grijze cirkels. De eindpunten van een lijn zijn getekend als grotere, witte cirkels als ze nergens mee verbonden zijn.",
+                "connect_line_drag": "Om een lijn te verbinden met een ander object, sleep je een van de knooppunten van de lijn op het andere object totdat beide objecten samenklitten. Tip: je kan de `{alt}`-toets ingedrukt houden om te voorkomen dat knooppunten verbinden met andere objecten.",
+                "connect_line_tag": "Verkeerslichten of oversteekplaatsen markeer je bij voorkeur op een knooppunt op hun echte plaats in de weg, door eerst een knooppunt toe te voegen, het te selecteren en vervolgens in de objectbewerker het juiste type te kiezen. Als je de echte positie niet kan bepalen, kan je in de plaats daarvan het toevoegen op knooppunt dat de twee lijnen verbindt.",
+                "disconnect_line_h": "Lijnen losmaken",
+                "disconnect_line_command": "Om een lijn van een ander object los te maken, klik je met de {rightclick} rechtermuisknop op het verbindende knooppunt en selecteer je {disconnect} **Maak los**.",
                 "move_line_h": "Lijnen verplaatsen",
-                "move_line_command": "Om een gehele lijn te verplaatsen, {rightclick} klik rechts op de lijn en selecteer het {move} **Verschuif** commando in het edit menu. Verplaats vervolgens de muis en {leftclick} klik links om de lijn op de nieuwe locatie te plaatsen.",
+                "move_line_command": "Om een lijn in zijn geheel te verplaatsen, klik je er met de {rightclick} rechtermuisknop op en selecteer je {move} **Verschuif**. Verplaats vervolgens de muis en klik met de {leftclick} linkermuisknop om de lijn op de nieuwe locatie te plaatsen.",
                 "move_line_connected": "Lijnen die verbonden zijn met andere objecten zullen verbonden blijven wanneer je de lijn verplaatst naar een nieuwe locatie. iD kan voorkomen dat je een lijn verplaatst over een andere verbonden lijn.",
                 "delete_line_h": "Lijnen verwijderen",
-                "delete_line": "Als een lijn volledig incorrect is, bijvoorbeeld een weg die niet bestaat in de echte wereld, dan is het OK om de lijn te verwijderen. Wees voorzichtig wanneer je objecten verwijdert: de satellietbeelden die je gebruikt kunnen verouderd zijn en een weg die onjuist lijkt kan later zijn aangelegd.",
-                "delete_line_command": "Om een lijn te verwijderen, {rightclick} klik rechts op de lijn om het te selecteren en het edit menu te tonen. Gebruik dan het {delete} **Verwijder** commando."
+                "delete_line": "Als een lijn volledig incorrect is, bijvoorbeeld een weg die niet bestaat in de echte wereld, dan kan je haar verwijderen. Wees voorzichtig wanneer je objecten verwijdert: de luchtbeelden die je gebruikt zijn enkele maanden of jaren oud en een weg die onjuist lijkt, kan later aangelegd zijn.",
+                "delete_line_command": "Lijnen verwijderen werkt identiek als punten verwijderen."
             },
             "areas": {
                 "title": "Vlakken",
-                "intro": "*Vlakken* worden gebruikt om de grenzen van objecten als meren, gebouwen en woonwijken te tonen. Vlakken worden getekend langs de rand van het object dat ze representeren, bijvoorbeeld rond de buitenkant van een gebouw.",
+                "intro": "*Vlakken* worden gebruikt om de grenzen van objecten als meren, gebouwen en woonwijken aan te duiden. Vlakken worden getekend langs de rand van het object dat ze representeren, bijvoorbeeld rond de basis van een gebouw.",
                 "point_or_area_h": "Punten of vlakken?",
-                "point_or_area": "Veel objecten kunnen worden gerepresenteerd worden als punt of vlak. Je voegt gebouwen en gebieden toe als vlakken wanneer dit mogelijk is. Voeg punten in een gebouw toe om bedrijven, voorzieningen en andere objecten binnen dat gebouw te representeren.",
+                "point_or_area": "Veel objecten kunnen worden gerepresenteerd worden als punt of vlak. Je voegt gebouwen en gebieden toe als vlakken wanneer dit mogelijk is.\n\nEr is geen internationale consensus over hoe bedrijven, voorzieningen en andere objecten binnen een gebouw gerepresenteerd moeten worden: op het vlak dat het gebouw voorsteld of als apart punt. Als je zoiets nieuw toevoegt, teken het dan als een punt binnen het gebouw. Als het object al in OpenStreetMap op het gebouw stond, verander het dan niet zomaar naar een apart punt.",
                 "add_area_h": "Vlakken toevoegen",
-                "add_area_command": "Om een vlak toe te voegen, klik op de {line}**Vlak** knop op de werkbalk boven de kaart, of gebruik de sneltoets `3`. Dit zal de cursor van de muis veranderd in een kruis symbool.",
-                "add_area_draw": "Positioneer daarna de muis op één van de hoeken van het object en {leftclick} klik links of gebruik de `Space` spatiebalk om te beginnen met het plaatsen van nodes/punten langs de rand van het object. Ga verder door meer nodes te plaatsen door te klikken of de spatiebalk te gebruiken. Tijdens het tekenen kun je inzoomen of de kaart verschuiven voor meer detail.",
-                "add_area_finish": "Om een vlak af te ronden klik nogmaals op de laatste node of toets `{return}` enter.",
+                "add_area_command": "Om een punt toe te voegen, klik je op de \"{area} **Vlak**\"-knop in de \nwerkbalk boven de kaart, of gebruik je de sneltoets `3`. De \nmuisaanwijzer verandert in een kruissymbool.",
+                "add_area_draw": "Teken vervolgens de knooppunten van het vlak net zoals bij een lijn.",
+                "add_area_finish": "Om een vlak te voltooien, klik je nogmaals op de laatste node of druk je op `{return}`.",
                 "square_area_h": "Hoeken haaks maken",
-                "square_area_command": "Veel vlakken zoals gebouwen hebben haakse hoeken. Om de hoeken van een vlak haaks te maken,  {rightclick} klik rechts op het vlak om het te selecteren en het edit menu te tonen. Gebruik dan het {orthogonalize} **Maak hoeken recht** commando.",
+                "square_area_command": "Veel vlakken, zoals gebouwen, hebben in het echt zo goed als loodrechte hoeken. Om de hoeken van een vlak haaks te maken, klik je er met de {rightclick} rechtermuisknop op en selecteer je {orthogonalize} **Maak hoeken recht**.",
                 "modify_area_h": "Vlakken aanpassen",
-                "modify_area_dragnode": "Je zult vaak vlakken zien die niet correct zijn gevormd, bijvoorbeeld een gebouw dat niet overeenkomt met de achterliggende sattelietbeelden. Om de vorm van het vlak aan te passen selecteer je eerst het vlak door {leftclick} links te klikken. Alle nodes van het vlak worden nu getoond als kleine cirkels. Je kunt de nodes verslepen naar betere locaties.",
-                "modify_area_addnode": "Je kunt ook nieuwe nodes toevoegen door {leftclick}**x2** dubbel te klikken op de rand van het vlak of door de kleine driehoekjes tussen de nodes te verslepen.",
+                "modify_area_dragnode": "Je zult vaak vlakken zien die niet correct gevormd zijn, bijvoorbeeld een gebouw dat niet overeenkomt met de achterliggende luchtbeelden.",
+                "modify_area_addnode": "De vorm van een vlak aanpassen werkt identiek zoals de vorm van een lijn aanpassen.",
                 "delete_area_h": "Vlakken verwijderen",
-                "delete_area": "Als een vlak volledig incorrect is, bijvoorbeeld een gebouw dat niet bestaat in de echte wereld, dan is het OK om het vlak te verwijderen. Wees voorzichtig wanneer je objecten verwijdert: de satellietbeelden die je gebruikt kunnen verouderd zijn en een gebouw dat onjuist lijkt kan later zijn aangelegd.",
-                "delete_area_command": "Om een vlak te verwijderen, {rightclick} klik rechts op het vlak om het te selecteren en het edit menu te tonen. Gebruik dan het {delete} **Verwijder** commando."
+                "delete_area": "Als een vlak volledig incorrect is, bijvoorbeeld een gebouw dat niet bestaat in de echte wereld, dan is het OK om het vlak te verwijderen. Wees voorzichtig wanneer je objecten verwijdert: de luchtbeelden die je gebruikt zijn enkele maanden of jaren oud, en een gebouw dat onjuist lijkt, kan later gebouwd zijn.",
+                "delete_area_command": "Vlakken verwijderen werkt identiek als punten verwijderen."
             },
             "relations": {
                 "title": "Relaties",
-                "intro": "Een \"relatie\" is een speciaal type object in OpenStreetMap dat andere objecten groepeert. De objecten die tot een relatie behoren worden \"members\" genoemd en iedere member heeft een \"role\" in de relatie.",
+                "intro": "Een *relatie* is een speciaal soort object in OpenStreetMap dat andere objecten groepeert. De objecten die tot een relatie behoren worden haar *leden* genoemd (Engels: *members*) en elk lid kan een *rol* hebben in de relatie.",
                 "edit_relation_h": "Relaties bewerken",
-                "edit_relation": "Onderaan de object editor kun het \"Alle Relaties\" gedeelte uitklappen om te zien of het geselecteerde object member is van een relatie. Je kunt vervolgens op de relatie klikken om de relatie te selecteren en te bewerken.",
-                "edit_relation_add": "Om een object aan een relatie toe te voegen selecteer je het object en klik je op de {plus} plus knop in het \"Alle relaties\" gedeelte van de object editor. Je kunt nu kiezen uit een lijst van relaties in de buurt of kiezen voor de \"Nieuwe relatie...\" optie.",
-                "edit_relation_delete": "Je kunt ook de {delete} **Verwijder** knop gebruiken om het geselecteerde object uit een relatie te verwijderen. Wanneer je alle members van een relatie verwijdert, zal de relatie automatisch ook worden verwijderd.",
-                "maintain_relation_h": "Relaties behouden",
-                "maintain_relation": "Over het algemeen zal iD automatisch relaties behouden wanneer je bewerkingen uitvoert. Wees voorzichtig wanneer je objecten vervangt die onderdeel kunnen zijn van een relatie. Bijvoorbeeld als je een deel van een weg verwijdert en een nieuw deel tekent om het te vervangen, zul je het nieuwe deel moeten toevoegen aan dezelfde relaties (routes, turn restrictions, etc.) als het origineel.",
-                "relation_types_h": "Relatie types",
-                "multipolygon_h": "Meervoudige polygonen",
-                "multipolygon": "Een *multipolygon* relatie is een groep van een of meerdere *outer* objecten en een of meerderen *inner* objecten. De outer/buitenste objecten definiëren de buitenste contouren van de multipolygoon. De inner/binnenste objecten definiëren sub-gebieden of gaten binnen de multipolygoon.",
-                "multipolygon_create": "Om een multipolygoon aan te maken, bijvoorbeeld een gebouw met een gat erin, teken de buitenste contour als een gebied en de binnenste contour als een lijn of vlak. Klik daarna links `{shift}`+{leftclick} om beide objecten te selecteren, {rightclick} klik rechts om het edit menu te tonen en selecteer het {merge}**Voeg samen** commando.",
-                "multipolygon_merge": "Het samenvoegen van meerdere lijnen of vlakken creëert een nieuwe multipolygoon relatie met alle geselecteerde objecten als members. iD zal automatisch de inner en outer roles kiezen, gebaseerd op de objecten die binnen andere objecten zijn gelegen.",
+                "edit_relation": "Onderaan de objectbewerker kan je het \"Alle relaties\"-gedeelte uitklappen om te zien of het geselecteerde object lid is van een relatie. Je kunt vervolgens op de relatie klikken om de relatie te selecteren en te bewerken.",
+                "edit_relation_add": "Om een object aan een relatie toe te voegen, selecteer je het object en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van de objectbewerker. Je kan nu kiezen uit een lijst van relaties in de buurt of een nieuwe maken met de optie \"Nieuwe relatie …\"",
+                "edit_relation_delete": "Met de \"{delete} **Verwijder**\"-knop verwijder je het geselecteerde object uit een relatie. Wanneer je alle leden van een relatie verwijdert, zal de relatie automatisch ook verwijderd worden.",
+                "maintain_relation_h": "Relaties onderhouden",
+                "maintain_relation": "Over het algemeen zal iD automatisch relaties onderhouden wanneer je bewerkingen uitvoert. Wees voorzichtig wanneer je objecten vervangt die onderdeel kunnen zijn van een relatie. Bijvoorbeeld als je een deel van een weg verwijdert en een nieuw deel tekent om het te vervangen, zal je het nieuwe deel moeten toevoegen aan dezelfde relaties (routes, afslagbeperkingen, enz.) als het origineel.",
+                "relation_types_h": "Relatietypes",
+                "multipolygon_h": "Multipolygonen",
+                "multipolygon": "Een *multipolygoon*-relatie is een groep van een of meer buitenrandvlakken (rol *outer*) en nul of meer binnenrandvlakken (rol *inner*). De buitenranden definiëren de buitenste contouren van de multipolygoon. De binnenranden definiëren gaten binnen de multipolygoon.",
+                "multipolygon_create": "Om een multipolygoon aan te maken, bijvoorbeeld een gebouw met een binnenplaats, teken je de buitenste contouren en de binnenste contouren als aparte vlakken. `{shift}`+{leftclick} Klik daarna met de linkermuisknop om beide objecten te selecteren, klik met de {rightclick} rechtermuisknop op een van hen, en klik op {merge} **Voeg samen**.",
+                "multipolygon_merge": "Het samenvoegen van meerdere lijnen of vlakken creëert een nieuwe multipolygoonrelatie met alle geselecteerde objecten als leden. iD zal automatisch de inner- en outer-rollen kiezen, gebaseerd op het al dan niet binnen een ander object liggen.",
                 "turn_restriction_h": "Afslagbeperkingen",
-                "turn_restriction": "Een *Afslagbeperking* relatie is een groep van verschillende wegvakken op een kruispunt. Aflsagbeperkingen bestaan uit een *van* weg, *via* nodes of wegen en een *naar* weg.",
-                "turn_restriction_field": "Om afslagbeperkingen te bewerken, selecteer een kruispunt node waar twee of meer wegen bij elkaar komen. De object editor zal een speciaal \"Afslagbeperkingen\" veld tonen met een model van de kruising.",
-                "turn_restriction_editing": "In het \"Afslagbeperkingen\" veld, klik om een \"van\" weg te selecteren en te bekijken of afslaan toegestaan is of beperkt tot een van de \"naar\" wegen. Je kunt op de afslaan iconen klikken om ze van toegestaan naar beperkt de wijzigen. iD zal automatisch de relaties aanmaken en de from, via en to roles aanpassen op basis van jouw keuzes.",
+                "turn_restriction": "Een *afslagbeperkings*relatie is een groep van verschillende wegsegmenten op een kruispunt. Aflsagbeperkingen bestaan uit een *van*-weg, *via*-knooppunten of -wegen en een *naar*-weg.",
+                "turn_restriction_field": "Om afslagbeperkingen te bewerken, selecteer je een kruispunt-knooppunt waar twee of meer wegen bij elkaar komen. De objectbewerker zal een speciaal veld \"afslagbeperkingen\" tonen met een model van de kruising.",
+                "turn_restriction_editing": "In dat veld kan je een \"van\"-weg selecteren door erop te klikken. Vervolgens kan je zien of afslaan toegestaan is tot elke mogelijke \"naar\"-weg. Je kan op de icoontjes klikken om te kiezen tussen toegestaan en verboden. iD zal automatisch de nodige relaties aanmaken of verwijderen en de *from*-, *via*- en *to*-rollen instellen op basis van jouw keuzes.",
                 "route_h": "Routes",
-                "route": "Een *route* relatie is een groep van een of meerdere lijnen die samen een routenetwerk vormen, zoals een bus- of treinroute of een snelweg.",
-                "route_add": "Om een object aan een route relatie toe te voegen selecteer je het object en klik je op de {plus} plus knop in het \"Alle relaties\" gedeelte van de object editor. Je kunt nu kiezen uit een lijst van relaties in de buurt of kiezen voor de \"Nieuwe relatie...\" optie.",
+                "route": "Een *route*-relatie is een groep van een of meerdere lijnen die samen een routenetwerk vormen, zoals een bus- of treintraject of een snelweg.",
+                "route_add": "Om een object aan een routerelatie toe te voegen, selecteer je het object en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van de objectbewerker. Je kan nu kiezen uit een lijst van relaties in de buurt of een nieuwe aanmaken met \"Nieuwe relatie …\"",
                 "boundary_h": "Grenzen",
-                "boundary": "Een *boundary* of grensrelatie is een groep van een of meerdere lijnen die samen een administratieve grens vormen.",
-                "boundary_add": "Om een object aan een boundary relatie toe te voegen selecteer je het object en klik je op de {plus} plus knop in het \"Alle relaties\" gedeelte van de object editor. Je kunt nu kiezen uit een lijst van relaties in de buurt of kiezen voor de \"Nieuwe relatie...\" optie."
+                "boundary": "Een of *grens*-relatie (Engels: *boundary*) is een groep van een of meerdere lijnen die samen een administratieve grens vormen.",
+                "boundary_add": "Om een object aan een grensrelatie toe te voegen, selecteer je het \nobject en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van \nde objectbewerker. Je kan nu kiezen uit een lijst van relaties in de \nbuurt of een nieuwe aanmaken met \"Nieuwe relatie …\""
             },
             "imagery": {
-                "title": "Achtergronden",
-                "intro": "Het achtergrondbeeld dat verschijnen achter de kaartdata is een belangrijke bron voor het in kaart brengen. Deze beelden kunnen  luchtfoto's zijn van satellieten, vliegtuigen en drones, het kunnen ingescande historische kaarten zijn of andere vrij beschikbare brondata.",
-                "sources_h": "Achtergrond bronnen",
-                "choosing": "Om te zien welke bronnen beschikbaar zijn voor het bewerken, klik op de {layers} **Achtergrondinstellingen** knop naast de kaart.",
-                "sources": "Standaard staat de [Bing Maps](https://www.bing.com/maps/) satelliet laag ingesteld als achtergrond. Afhankelijk van waar je aan het bewerken bent, zijn andere bronnen beschikbaar. Sommige kunnen nieuwer zijn of in een hogere resolutie beschikbaar zijn, het is dus altijd nuttig om te kijken welke achtergrond het beste is om als referentie te gebruiken.",
+                "title": "Achtergrondbeelden",
+                "intro": "Het achtergrondbeeld dat onder de kaartdata verschijnt, is een belangrijke bron voor het karteren. Deze beelden kunnen luchtfoto's zijn van satellieten, vliegtuigen en drones, het kunnen ingescande historische kaarten zijn of andere vrij beschikbare brondata.",
+                "sources_h": "Achtergrondbronnen",
+                "choosing": "Om te zien welke bronnen beschikbaar zijn voor het bewerken, klik je op de knop {layers} **Achtergrondinstellingen** naast de kaart.",
+                "sources": "Standaard wordt een luchtfotolaag gekozen afhankelijk van de locatie op de kaart waar iD opgestart werd. De Bing Maps-satellietfotolaag is wereldwijd de terugvalkeuze. Het is vaak nuttig te kijken welke achtergrond de beste is voor het gebied dat je bewerkt: sommige bronnen kunnen recenter of van hogere resolutie zijn.",
                 "offsets_h": "Verplaatsing van luchtfoto aanpassen",
-                "offset": "Achtergrond beelden kunnen soms lichtelijk in positie afwijken van de accurate kaartgegevens. Als je veel gebouwen of wegen ziet die verschoven liggen ten opzichte van de achtergrond, kan het zijn dat de achtergrond incorrect is. Verplaats dus niet alle objecten om ze te overeen te laten komen met de achtergrond. Verplaats in plaats daarvan de achtergrond, zodat deze overeenkomt met de kaartgegevens. Dit doe je door het \"Verplaatsing van luchtfoto aanpassen\" gedeelte uit te klappen onderin het Achtergrondinstellingen paneel.",
-                "offset_change": "Klik op de kleine driehoeken om de verplaatsing van de achtergrond in kleine stappen aan te passen. Je kunt ook de linker muisknop ingedrukt houden en de achtergrond verslepen in het grijze vlak."
+                "offset": "Achtergrondbeelden kunnen soms vrij zwaar in positie afwijken van de correcte locatie. Als je veel gebouwen of wegen ziet die verschoven liggen ten opzichte van de achtergrond, kan het zijn dat de achtergrond incorrect is, en niet de kaart. Verplaats dus niet alle objecten om ze te overeen te laten komen met de achtergrond. Verplaats in plaats daarvan de achtergrond, zodat deze overeenkomt met de kaartgegevens. Dit doe je door het gedeelte \"Verplaatsing van luchtfoto aanpassen\" onderin het achtergrondinstellingenpaneel uit te klappen.",
+                "offset_change": "Klik op de kleine driehoeken om de verplaatsing van de achtergrond in kleine stappen aan te passen. Je kan ook de linkermuisknop ingedrukt houden en de achtergrond verslepen in het grijze vlak."
             },
             "streetlevel": {
                 "title": "Foto's op straatniveau",
-                "intro": "Foto's op straatniveau zijn nuttig voor het in kaart brengen van verkeersborden, bedrijven en andere details die niet zichtbaar zijn op satellietbeelden en luchtfoto's. De iD editor ondersteunt dergelijke foto's van [Mapillary](https://www.mapillary.com) en [OpenStreetCam](https://www.openstreetcam.org).",
-                "using_h": "Gebruik foto's op straatniveau",
-                "using": "Om foto's op straatniveau te gebruiken in de editor, klik op het {data}**Kaartgegevens** paneel naast de kaart om de beschikbare foto lagen aan of uit te zetten.",
-                "photos": "Wanneer ingeschakeld, toont de foto laag een lijn langs de reeks van foto's. Op hogere zoomniveaus markeert een cirkel iedere foto locatie, op nog hogere zoomniveaus geeft een kegel zelfs de richting van de camera aan op het moment dat de foto is gemaakt.",
-                "viewer": "Wanneer je op een van de locaties van een foto klikt, verschijnt er een foto viewer in de benedenhoek van de kaart. De viewer bevat   bediening om vooruit en achteruit te gaan in de reeks van foto's. Het toont ook de gebruikersnaam van de maker van de foto, de datum en een link naar de originele foto op de website."
+                "intro": "Foto's op straatniveau zijn nuttig voor het in kaart brengen van verkeersborden, bedrijven en andere details die niet zichtbaar zijn op luchtfoto's. iD ondersteunt dergelijke foto's van [Mapillary](https://www.mapillary.com) en [OpenStreetCam](https://www.openstreetcam.org). Gebruik nooit Google Streetview, de wettelijke consequenties daarvan zijn namelijk niet duidelijk.",
+                "using_h": "Foto's op straatniveau gebruiken",
+                "using": "Om foto's op straatniveau te gebruiken, klik je op {data} **Kaartgegevens** naast de kaart om het betreffende paneel te openen. Daar kan je beschikbare foto lagen aan of uit te zetten.",
+                "photos": "Als je de fotolaag aanzet, worden lijnen langs fotoreeksen getoond. Wanneer je meer inzoomt, wordt op elke fotolocatie een cirkel getoond. Na nog meer inzoomen wordt een kegel zichtbaar die de richting van de camera aangeeft op het moment dat de foto gemaakt werd (maar die is vaak onnauwkeurig).",
+                "viewer": "Wanneer je op een fotolocatie klikt, verschijnt er een fotopaneel in een benedenhoek van de kaart. Dat paneel bevat bedieningselementen om vooruit en achteruit te gaan in de reeks van foto's. Het toont ook de gebruikersnaam van de maker van de foto, de datum van vastlegging, en een link naar de originele foto op de website."
             },
             "gps": {
-                "title": "GPS Tracks",
-                "intro": "Verzamelde GPS tracks zijn een waardevolle bron voor OpenStreetMap. Deze editor ondersteunt *.gpx*, *.geojson*, and *.kml* bestanden op je lokale computer. Je kunt GPS tracks verzamelen met een smartphone, sporthorloge of een ander GPS apparaat.",
-                "survey": "Voor informatie over het uitvoeren van een GPS meting, lees [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).",
-                "using_h": "GPS Tracks gebruiken",
-                "using": "Om een GPS track te gebruiken voor het bewerken, sleep een bestand naar de editor. Als het wordt herkend, zal het worden getekend als een heldere paarse lijn. Klik op het {data} **Kaartgegevens** paneel naast de kaart om je GPS data aan of uit te zetten en er op in te zoomen.",
-                "tracing": "De GPS track wordt niet automatisch verzonden naar OpenStreetMap. De beste manier om het te gebruiken is als referentie voor nieuwe objecten die je toevoegt.",
-                "upload": "Je kunt ook [je GPS data uploaden naar OpenStreetMap](https://www.openstreetmap.org/trace/create) zodat andere gebruikers de data ook kunnen gebruiken."
+                "title": "GPS-tracks",
+                "intro": "Verzamelde GPS-tracks zijn een waardevolle bron voor OpenStreetMap. In iD kan je *.gpx*-, *.geojson*-, and *.kml*-bestanden openen die lokaal op je computer staan. Je kan GPS-tracks verzamelen met een smartphone, sporthorloge of een ander GPS-apparaat.",
+                "survey": "Voor informatie over het uitvoeren van een GPS-meting, kan je dit Engelstalige artikel lezen: [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).",
+                "using_h": "GPS-tracks gebruiken",
+                "using": "Om een GPS-track te gebruiken voor het bewerken, sleep je een bestand naar dit kaartbewerkingsprogramma. Als het herkend wordt, zal het getekend worden als een heldere paarse lijn. Open het \"{data} **Kaartgegevens**\"-paneel naast de kaart om je GPS-data aan of uit te zetten of er op in te zoomen.",
+                "tracing": "De GPS-track wordt niet automatisch verzonden naar OpenStreetMap. De beste manier om het te gebruiken is als referentie voor nieuwe objecten die je toevoegt.",
+                "upload": "Je kan ook [je GPS-data uploaden naar OpenStreetMap](https://www.openstreetmap.org/trace/create) zodat andere gebruikers hen ook kunnen gebruiken."
             }
         },
         "intro": {
-            "done": "klaar",
+            "done": "Klaar",
             "ok": "Oké",
             "graph": {
                 "block_number": "<value for addr:block_number>",
@@ -926,7 +923,7 @@
                     "marina-park": "Jachthavenpark",
                     "market-street": "Marktstraat",
                     "memory-isle-park": "Achtmeipark",
-                    "memory-isle": "Achtmeistraat",
+                    "memory-isle": "Achtmei-land",
                     "michigan-avenue": "Muntstraat",
                     "middle-street": "Arenbergstraat",
                     "millard-street": "Begijnenstraat",
@@ -996,7 +993,7 @@
                 "drag": "De grote kaart toont de OpenStreetMap-gegevens bovenop een achtergrond.{br}Net zoals bij elke online kaart kan je navigeren door met de linkermuisknop in de kaart te klikken en de muis te verschuiven terwijl je die knop ingedrukt houdt. **Versleep de kaart!**",
                 "zoom": "Je kan in- en uitzoomen door te scrollen met het muiswiel of de touchpad, of met de knoppen {plus} en {minus}. **Zoom in of uit!**",
                 "features": "We gebruiken het woord *objecten* als we het over dingen op de kaart hebben. Alles wat je in de echte wereld ziet, kan gemapt gemapt worden als object in OpenStreetMap.",
-                "points_lines_areas": "Kaartobjecten worden voorgesteld door *punten, lijnen of vlakken*.",
+                "points_lines_areas": "Kaartobjecten worden voorgesteld door *punten*, *lijnen* of *vlakken*.",
                 "nodes_ways": "In OpenStreetMap worden punten ook wel *nodes* genoemd, en lijnen en vlakken worden ook wel *ways* genoemd.",
                 "click_townhall": "Elk object op de kaart kan je selecteren door er op te klikken. **Klik op het punt om het te selecteren.**",
                 "selected_townhall": "Fantastisch! Het punt is nu geselecteerd. Rond geselecteerde objecten komt een pulserende gloed.",
@@ -1012,8 +1009,8 @@
             },
             "points": {
                 "title": "Punten",
-                "add_point": "*Punten* kunnen gebruikt worden om objecten zoals winkels, restaurants en monumenten voor te stellen.{br}Ze markeren een bepaalde locatie aan en beschrijven wat daar is. **Klik op de knop \"{button} Punt\" om een nieuw punt toe te voegen.**",
-                "place_point": "Als je een nieuw punt op de kaart wil zetten, zet dan je muisaanwijzer op de plaats waar het moet komen, en klik of druk op de spatiebalk. **Verplaats de muisaanwijzer tot boven dit gebouw, en klik of druk op de spatiebalk.**",
+                "add_point": "*Punten* kunnen gebruikt worden om objecten zoals winkels, restaurants en monumenten voor te stellen.{br}Ze duiden een bepaalde locatie aan en beschrijven wat daar is. **Klik op de knop \"{button} Punt\" om een nieuw punt toe te voegen.**",
+                "place_point": "Als je een nieuw punt op de kaart wil zetten, zet dan je muisaanwijzer op de plaats waar het moet komen, en klik of druk op de spatiebalk. **Verplaats de muisaanwijzer tot boven dit gebouw, en klik, of druk op de spatiebalk.**",
                 "search_cafe": "Er zijn veel soorten objecten die voorgesteld kunnen worden door punten. Het punt dat je net toegevoegd hebt, is een cafetaria. **Zoek naar '{preset}'.**",
                 "choose_cafe": "**Kies {preset} uit de lijst.**",
                 "feature_editor": "Het punt wordt nu aangeduid als een cafetaria. Gebruik de objectbewerker om meer informatie toe te voegen over de cafetaria.",
@@ -1030,7 +1027,7 @@
             "areas": {
                 "title": "Vlakken",
                 "add_playground": "*Vlakken* worden gebruikt om de grenzen van objecten als meren, gebouwen en woonwijken te tonen.{br}Ze kunnen ook gebruikt worden voor het meer gedetailleerd in kaart brengen van veel objecten die je anders als punten zou toevoegen. **Klik op de knop \"{button} Vlak\" om een nieuw vlak toe te voegen.**",
-                "start_playground": "Laten we deze speeltuin intekenen als een vlak. Vlakken worden gemaakt door *knooppunten* aan hun omtrek te zetten. **Klik of druk op de spatiebalk om het eerste knooppunt in een van de hoeken van het speelplein te zetten.**",
+                "start_playground": "Laten we deze speeltuin intekenen als een vlak. Vlakken worden gemaakt door *knooppunten* aan hun omtrek te zetten. **Klik, of druk op de spatiebalk, om het eerste knooppunt in een van de hoeken van het speelplein te zetten.**",
                 "continue_playground": "Teken het vlak verder door meer knooppunten op de omtrek van de \nspeeltuin te zetten.{br}Tip: Je kan de {alt}-toets indrukken terwijl je \neen knooppunt zet om te vermijden dat ze verbinden met andere objecten. **Ga door met het tekenen van het vlak voor de speeltuin.**",
                 "finish_playground": "Sluit het vlak door op enter te drukken, of opnieuw te klikken op het eerste of het laatste knooppunt. **Sluit het vlak voor de speeltuin.**",
                 "search_playground": "**Zoek naar '{preset}'.**",
@@ -1052,7 +1049,7 @@
                 "choose_preset_residential": "Er zijn veel soorten wegen, maar dit is een straat. **Kies {preset}.**",
                 "retry_preset_residential": "Je hebt niet het {preset}-type geselecteerd. **Klik hier om opnieuw te kiezen.**",
                 "name_road": "**Geef deze weg een naam, en sluit dan de objectbewerker met escape, enter, of de {button}-knop.**",
-                "did_name_road": "Ziet er goed uit! Nu zullen de vorm van een lijn leren veranderen.",
+                "did_name_road": "Ziet er goed uit! Nu zullen we de vorm van een lijn leren veranderen.",
                 "update_line": "Soms moet je de vorm van een bestaande lijn veranderen. Hier heb je een straat die niet helemaal goed ingetekend is.",
                 "add_node": "We kunnen wat knooppunten toevoegen om de vorm te verbeteren. Een manier om dat te doen is door te dubbelklikken op de lijn op de plaats waar je een knooppunt wil toevoegen. **Dubbelklik op de lijn om een nieuw knooppunt toe te voegen.**",
                 "start_drag_endpoint": "Als een lijn geselecteerd is, kan je haar knooppunten verslepen. **Versleep het eindpunt van de lijn naar het kruispunt op de achtergrondafbeelding.**",
@@ -1096,9 +1093,9 @@
             },
             "startediting": {
                 "title": "Begin met aanpassen",
-                "help": "Je bent nu klaar om OpenStreetMap te bewerken!{br}Je kan deze rondleiding steeds opnieuw volgen en meer documentatie bekijken door op de knop \"{button} Hulp\" te klikken of de toets '{toets}' te drukken.",
-                "shortcuts": "U kunt een lijst met opdrachten samen met hun toetsenbordkoppelingen bekijken door op de toets '{toets}' te drukken.",
-                "save": "Vergeet niet om je aanpassingen regelmatig op te slaan!",
+                "help": "Je bent nu klaar om OpenStreetMap te bewerken!{br}Je kan deze rondleiding steeds opnieuw volgen en meer documentatie bekijken door op de knop \"{button} Hulp\" te klikken of op de toets '{toets}' te drukken.",
+                "shortcuts": "Je kan een lijst met opdrachten samen met hun toetsenbordkoppelingen bekijken door op de toets '{toets}' te drukken.",
+                "save": "Sla je aanpassingen regelmatig op, bijvoorbeeld als je klaar bent in een bepaald gebied!",
                 "start": "Karteer de wereld!"
             }
         },
@@ -1142,7 +1139,7 @@
                 },
                 "help": {
                     "title": "Hulp",
-                    "help": "Toon hulp/documentatie",
+                    "help": "Hulp/documentatie tonen",
                     "keyboard": "Sneltoetsen tonen"
                 },
                 "display_options": {
@@ -1150,7 +1147,7 @@
                     "background": "Achtergrondopties tonen",
                     "background_switch": "Naar laatstgebruikte achtergrond wisselen",
                     "map_data": "Opties voor kaartgegevens tonen",
-                    "fullscreen": "Gebruik volledig scherm",
+                    "fullscreen": "Volledig scherm gebruiken",
                     "wireframe": "Wireframemodus aan/uit",
                     "minimap": "Minikaartje aan/uit"
                 },
@@ -1159,7 +1156,7 @@
                     "select_one": "Eén object selecteren",
                     "select_multi": "Meerdere objecten selecteren",
                     "lasso": "Objecten selecteren met lasso",
-                    "search": "Zoek objecten met overeenkomende tekst"
+                    "search": "Objecten zoeken"
                 },
                 "with_selected": {
                     "title": "Met object geselecteerd",
@@ -1213,11 +1210,11 @@
                 "title": "Gereedschappen",
                 "info": {
                     "title": "Informatie",
-                    "all": "Schakel alle informatiepanelen in of uit",
-                    "background": "Schakel het achtergrondpaneel in of uit",
-                    "history": "Schakel het geschiedenispaneel in of uit",
-                    "location": "Schakel het locatiepaneel in of uit",
-                    "measurement": "Schakel het meetpaneel in of uit"
+                    "all": "Alle informatiepanelen open/dicht",
+                    "background": "Achtergrondpaneel open/dicht",
+                    "history": "Geschiedenispaneel open/dicht",
+                    "location": "Locatiepaneel open/dicht",
+                    "measurement": "Meetpaneel open/dicht"
                 }
             }
         },
@@ -1733,7 +1730,7 @@
                         "green": "Tussen het groen",
                         "lane": "Op straat",
                         "parking_lot": "Parkeerplaats",
-                        "sidewalk": "Stoep"
+                        "sidewalk": "Trottoir"
                     }
                 },
                 "fire_hydrant/type": {
@@ -2098,7 +2095,7 @@
                     "placeholder": "3, 4, 5 …"
                 },
                 "park_ride": {
-                    "label": "Parkeren en Reizen"
+                    "label": "Park & Ride (parkeren en ander vervoersmiddel nemen)"
                 },
                 "parking": {
                     "label": "Type",
@@ -3796,8 +3793,8 @@
                     "terms": "Britse oversteekplaats op verhoogde inrichting"
                 },
                 "footway/sidewalk": {
-                    "name": "Stoep",
-                    "terms": "trottoir"
+                    "name": "Trottoir",
+                    "terms": "stoep,voetpad"
                 },
                 "ford": {
                     "name": "Voorde (doorwaadbare plaats)",
@@ -4579,8 +4576,8 @@
                     "name": "Dijk"
                 },
                 "man_made/flagpole": {
-                    "name": "Vlaggemast",
-                    "terms": "vlaggemast"
+                    "name": "Vlaggenmast",
+                    "terms": "vlaggenstok,vlaggenpaal"
                 },
                 "man_made/gasometer": {
                     "name": "Gashouder",

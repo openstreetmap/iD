@@ -384,7 +384,6 @@
                 "title": "Måling",
                 "selected": "{n} valgt",
                 "geometry": "Geometri",
-                "closed": "lukket",
                 "length": "Lengde",
                 "area": "Område"
             }
@@ -456,7 +455,6 @@
             "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
             "custom_button": "Endre egendefinert bakgrunn",
-            "custom_prompt": "Skriv inn en URL-mal. Gyldige symboler er:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y flisordning\n   - {ty} for snudde Y-koordinater med TMS-stil\n   - {u} for quadtile-ordning\n   - {switch:a,b,c} for DNS server multiplexing\n\nEksempel:\n{example}",
             "reset": "tilbakestill",
             "minimap": {
                 "tooltip": "Vis et kart som er zoomet ut for å hjelpe med å lokalisere området som vises.",
@@ -618,7 +616,6 @@
             "untagged_area_tooltip": "Velg en kartegenskaptype som beskriver hva dette område er.",
             "untagged_relation": "Utagget relasjon",
             "untagged_relation_tooltip": "Velg en kartegenskaptype som beskriver hva denne relasjonen er.",
-            "many_deletions": "Du sletter {n} kartegenskaper. Er du sikker på at du vil gjøre dette? Det vil slette dem fra kartet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
             "deprecated_tags": "Utgående tagger: {tags}"
         },

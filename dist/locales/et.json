@@ -559,7 +559,6 @@
             "untagged_line": "Sildistamata joon",
             "untagged_area": "Sildistamata ala",
             "untagged_relation": "Sildistamata relatsioon",
-            "many_deletions": "Oled kustutamas {n} objekti. Kas oled sa kindel, et soovid seda teha? See kustutab need kaardilt, mida kõik näevad aadressil openstreetmap.org.",
             "tag_suggests_area": "Silt {tag} viitab, et joon peaks olema ala, kuid see pole ala.",
             "deprecated_tags": "Iganenud sildid: {tags}"
         },

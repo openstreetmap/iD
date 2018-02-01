@@ -386,7 +386,6 @@
                 "title": "Measurement",
                 "selected": "{n} selected",
                 "geometry": "Geometry",
-                "closed": "closed",
                 "center": "Centre",
                 "perimeter": "Perimeter",
                 "length": "Length",
@@ -465,7 +464,6 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
-            "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y tile scheme\n   - {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
             "reset": "reset",
             "minimap": {
                 "tooltip": "Show a zoomed out map to help locate the area currently displayed.",
@@ -640,7 +638,6 @@
             "untagged_area_tooltip": "Select a feature type that describes what this area is.",
             "untagged_relation": "Untagged relation",
             "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
-            "many_deletions": "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "deprecated_tags": "Deprecated tags: {tags}"
         },
@@ -3402,10 +3399,10 @@
                     "name": "Raised Street Crossing"
                 },
                 "footway/crosswalk": {
-                    "name": "Pedestrian Crosswalk"
+                    "name": "Zebra Crossing"
                 },
                 "footway/crosswalk-raised": {
-                    "name": "Raised Pedestrian Crosswalk"
+                    "name": "Raised Zebra Crossing"
                 },
                 "footway/sidewalk": {
                     "name": "Pavement",
@@ -3505,10 +3502,10 @@
                     "name": "Raised Street Crossing"
                 },
                 "highway/crosswalk": {
-                    "name": "Pedestrian Crosswalk"
+                    "name": "Zebra Crossing"
                 },
                 "highway/crosswalk-raised": {
-                    "name": "Raised Pedestrian Crosswalk"
+                    "name": "Raised Zebra Crossing"
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path"
@@ -4417,7 +4414,7 @@
                     "name": "Buffer Stop"
                 },
                 "railway/crossing": {
-                    "name": "Railway Crossing (Path)"
+                    "name": "Level Crossing (Path)"
                 },
                 "railway/derail": {
                     "name": "Railway Derailer"
@@ -4429,7 +4426,7 @@
                     "name": "Funicular"
                 },
                 "railway/level_crossing": {
-                    "name": "Railway Crossing (Road)"
+                    "name": "Level Crossing (Road)"
                 },
                 "railway/milestone": {
                     "name": "Railway Milestone"

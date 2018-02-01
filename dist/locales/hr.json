@@ -571,7 +571,6 @@
             "untagged_area_tooltip": "Odaberi element karte koji opisuje što ovo područje predstavlja.",
             "untagged_relation": "Neoznačena relacija",
             "untagged_relation_tooltip": "Odaberi element karte koji opisuje što ova relacija predstavlja.",
-            "many_deletions": "Brišeš {n} elemenata. Jesi li siguran/na da to želiš učiniti? Ovo će ih obrisati sa karte koju svi vide na openstreetmap.org.",
             "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
             "deprecated_tags": "Zastarjele oznake: {tags}"
         },

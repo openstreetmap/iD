@@ -353,7 +353,6 @@
                 "title": "Mittaus",
                 "selected": "{n} valittu",
                 "geometry": "Muoto",
-                "closed": "umpinainen",
                 "perimeter": "Piiri",
                 "length": "Pituus",
                 "area": "Pinta-ala",
@@ -586,7 +585,6 @@
             "untagged_area": "Ominaisuustiedoton alue",
             "untagged_area_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän alueen tarkoitusta.",
             "untagged_relation": "Ominaisuustiedoton relaatio",
-            "many_deletions": "Olet poistamassa {n} karttakohdetta. Haluatko varmasti poistaa ne kaikkien julkisesti käyttämältä OpenStreetMap.org-kartalta?",
             "tag_suggests_area": "Ominaisuustiedon {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
             "deprecated_tags": "Vanhentuneet ominaisuustiedot: {tags}"
         },

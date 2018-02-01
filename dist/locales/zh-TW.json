@@ -389,7 +389,8 @@
                 "title": "測量",
                 "selected": "{n} 被選擇",
                 "geometry": "形狀",
-                "closed": "已關閉",
+                "closed_line": "封閉線段",
+                "closed_area": "封閉區域",
                 "center": "中心",
                 "perimeter": "周長",
                 "length": "長度",
@@ -470,7 +471,7 @@
             "switch": "切換回此背景",
             "custom": "客製化",
             "custom_button": "編輯自訂的背景",
-            "custom_prompt": "輸入圖磚 URL 範本。有效的代號是：\n   - {zoom}/{z}, {x}, {y} 給 Z/X/Y 結構\n   - {ty} 給 TMS 樣式的 Y 座標\n   - {u} 給 quadtile 結構使用\n   - {switch:a,b,c} 給 DNS 伺服器多路通訊使用\n\n範例：\n{example}",
+            "custom_prompt": "輸入標題網址模版。有效的代碼是： \n- {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n- {-y} or {ty} for flipped TMS-style Y coordinates\n- {u} for quadtile scheme\n- {switch:a,b,c} for DNS server multiplexing\n\n範例：\n{example}",
             "overlays": "覆疊",
             "imagery_source_faq": "影像資訊 / 問題回報",
             "reset": "重設",
@@ -654,7 +655,7 @@
             "untagged_area_tooltip": "選擇適當的物件種類描述這區域是什麼。",
             "untagged_relation": "未標記的關係",
             "untagged_relation_tooltip": "選取一個可以適當地描述這個關係的圖徽類型。",
-            "many_deletions": "您正要刪除 {n} 個圖徽。您確定您要這麼做嗎？這將會把它們從每個人都看到的 openstreetmap.org 的地圖上刪除。",
+            "many_deletions": "您正要刪除 {n} 個圖徽：{p} 個節點、{l} 條線段、{a} 個區域、{r} 個關係。您確定您要這麼做嗎？這將會把它們從每個人都看得到的 openstreetmap.org 的地圖上刪除。",
             "tag_suggests_area": "{tag} 標籤所建議的線段應為區域，但這個不是一區域",
             "deprecated_tags": "已棄用的標籤︰{tags}"
         },
@@ -1220,6 +1221,28 @@
                     "measurement": "切換測量面板"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} 英呎",
+            "miles": "{quantity} 英哩",
+            "square_feet": "{quantity} 平方英呎",
+            "square_miles": "{quantity} 平方英哩",
+            "acres": "{quantity} 英畝",
+            "meters": "{quantity} 公尺",
+            "kilometers": "{quantity} 公里",
+            "square_meters": "{quantity} 平方公尺",
+            "square_kilometers": "{quantity} 平方公里",
+            "hectares": "{quantity} 公頃",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "北",
+            "south": "南",
+            "east": "東",
+            "west": "西",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -3102,6 +3125,10 @@
                     "name": "淋浴間",
                     "terms": "淋浴間,淋浴,淋浴設施"
                 },
+                "amenity/smoking_area": {
+                    "name": "吸煙區",
+                    "terms": "吸煙區,吸菸區"
+                },
                 "amenity/social_facility": {
                     "name": "社福機構",
                     "terms": "社福設施"
@@ -3334,6 +3361,10 @@
                 "barrier/hedge": {
                     "name": "樹籬",
                     "terms": "樹籬"
+                },
+                "barrier/kerb": {
+                    "name": "路緣",
+                    "terms": "路緣"
                 },
                 "barrier/kissing_gate": {
                     "name": "單人轉門",
@@ -3785,6 +3816,10 @@
                 },
                 "emergency/private": {
                     "name": "供私人緊急通行"
+                },
+                "emergency/water_tank": {
+                    "name": "緊急水箱",
+                    "terms": "緊急水箱"
                 },
                 "emergency/yes": {
                     "name": "開放緊急通行"
@@ -6283,6 +6318,13 @@
                 },
                 "description": "Esri 世界衛星圖。",
                 "name": "Esri 世界衛星圖"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "Ersi 的封存衛星圖可能比預設的圖層更清晰且更精確。",
+                "name": "Esri 世界衛星圖（清晰版）Beta"
             },
             "MAPNIK": {
                 "attribution": {
