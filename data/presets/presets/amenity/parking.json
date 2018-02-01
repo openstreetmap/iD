@@ -9,8 +9,7 @@
         "supervised",
         "park_ride",
         "surface",
-        "maxstay",
-        "address"
+        "maxstay"
     ],
     "geometry": [
         "point",
