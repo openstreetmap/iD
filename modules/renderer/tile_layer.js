@@ -257,7 +257,7 @@ export function rendererTileLayer(context) {
                 .selectAll('.tile-label-debug-vintage')
                 .each(function(d) {
                     var span = d3_select(this);
-                    var center = context._projection.invert(tileCenter(d));
+                    var center = context.projection.invert(tileCenter(d));
                     _source.getMetadata(center, d, function(err, result) {
                         span.text((result && result.vintage && result.vintage.range) ||
                             t('info_panels.background.vintage') + ': ' + t('info_panels.background.unknown')

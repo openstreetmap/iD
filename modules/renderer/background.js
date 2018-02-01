@@ -356,7 +356,7 @@ export function rendererBackground(context) {
         _backgroundSources = dataImagery.map(function(source) {
             if (source.type === 'bing') {
                 return rendererBackgroundSource.Bing(source, dispatch);
-            } else if (source.id === 'EsriWorldImagery') {
+            } else if (/^EsriWorldImagery/.test(source.id)) {
                 return rendererBackgroundSource.Esri(source);
             } else {
                 return rendererBackgroundSource(source);
