@@ -276,6 +276,9 @@ rendererBackgroundSource.Esri = function(data) {
         if (inflight[tileId]) return;
 
         switch (true) {
+            case (zoom >= 20 && esri.id === 'EsriWorldImageryClarity'):
+                metadataLayer = 4;
+                break;
             case zoom >= 19:
                 metadataLayer = 3;
                 break;
@@ -289,8 +292,15 @@ rendererBackgroundSource.Esri = function(data) {
                 metadataLayer = 99;
         }
 
+        var url;
         // build up query using the layer appropriate to the current zoom
-        var url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/' + metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json&callback={callback}';
+        if (esri.id === 'EsriWorldImagery') {
+            url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/';
+        } else if (esri.id === 'EsriWorldImageryClarity') {
+            url = 'https://serviceslab.arcgisonline.com/arcgis/rest/services/Clarity_World_Imagery/MapServer/';
+        }
+
+        url += metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json&callback={callback}';
 
         if (!cache[tileId]) {
             cache[tileId] = {};
