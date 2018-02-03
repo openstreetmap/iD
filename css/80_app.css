@@ -1836,7 +1836,7 @@ input[type=number] {
 
 .form-field-restrictions .preset-input-wrap {
     position: relative;
-    height: 300px;
+    height: 400px;
 }
 
 .form-field-restrictions svg.surface {

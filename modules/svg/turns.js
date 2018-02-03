@@ -1,26 +1,28 @@
-import { geoAngle } from '../geo';
+import { geoAngle } from '../geo/index';
 
 
 export function svgTurns(projection) {
 
     return function drawTurns(selection, graph, turns) {
 
-        function key(turn) {
-            return [turn.from.node + turn.via.node + turn.to.node].join('-');
-        }
-
         function icon(turn) {
             var u = turn.u ? '-u' : '';
-            if (!turn.restriction)
-                return '#turn-yes' + u;
-            var restriction = graph.entity(turn.restriction).tags.restriction;
-            return '#turn-' +
-                (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
+            if (turn.direct || turn.indirect) return '#turn-no' + u;
+            if (turn.only) return '#turn-only' + u;
+            return '#turn-yes' + u;
         }
 
-        var layer = selection.selectAll('.layer-points .layer-points-turns');
+        var layer = selection.selectAll('.data-layer-osm').selectAll('.layer-turns')
+            .data([0]);
+
+        layer = layer.enter()
+            .append('g')
+            .attr('class', 'layer-osm layer-turns')
+            .merge(layer);
+
+
         var groups = layer.selectAll('g.turn')
-            .data(turns, key);
+            .data(turns, function(d) { return d.key; });
 
         groups.exit()
             .remove();
@@ -61,11 +63,11 @@ export function svgTurns(projection) {
 
         groups
             .attr('transform', function (turn) {
-                var v = graph.entity(turn.via.node),
-                    t = graph.entity(turn.to.node),
-                    a = geoAngle(v, t, projection),
-                    p = projection(v.loc),
-                    r = turn.u ? 0 : 60;
+                var t = graph.entity(turn.to.node);
+                var v = graph.entity(turn.to.vertex);
+                var a = geoAngle(v, t, projection);
+                var p = projection(v.loc);
+                var r = turn.u ? 0 : 60;
 
                 return 'translate(' + (r * Math.cos(a) + p[0]) + ',' + (r * Math.sin(a) + p[1]) + ') ' +
                     'rotate(' + a * 180 / Math.PI + ')';

@@ -1,195 +1,556 @@
-import _each from 'lodash-es/each';
+import _clone from 'lodash-es/clone';
+import _every from 'lodash-es/every';
 import _extend from 'lodash-es/extend';
-import _find from 'lodash-es/find';
-import _indexOf from 'lodash-es/indexOf';
-import _keys from 'lodash-es/keys';
-import _values from 'lodash-es/values';
+import _uniq from 'lodash-es/uniq';
 
-import { geoAngle } from '../geo/index';
-import { osmWay } from './way';
+import {
+    actionDeleteRelation,
+    actionReverse,
+    actionSplit
+} from '../actions';
+
+import { coreGraph } from '../core';
+import { geoAngle, geoSphericalDistance } from '../geo';
+import { osmEntity } from './entity';
 
 
 export function osmTurn(turn) {
-    if (!(this instanceof osmTurn))
+    if (!(this instanceof osmTurn)) {
         return new osmTurn(turn);
+    }
     _extend(this, turn);
 }
 
 
-export function osmIntersection(graph, vertexId) {
-    var vertex = graph.entity(vertexId),
-        parentWays = graph.parentWays(vertex),
-        coincident = [],
-        highways = {};
+export function osmIntersection(graph, startVertexId) {
+    var vgraph = coreGraph(),  // virtual graph
+        i, j, k;
 
-    function addHighway(way, adjacentNodeId) {
-        if (highways[adjacentNodeId]) {
-            coincident.push(adjacentNodeId);
-        } else {
-            highways[adjacentNodeId] = way;
+
+    function memberOfRestriction(entity) {
+        return graph.parentRelations(entity)
+            .some(function(r) { return r.isRestriction(); });
+    }
+
+    function isRoad(way) {
+        if (way.isArea() || way.isDegenerate()) return false;
+        var roads = {
+            'motorway': true,
+            'motorway_link': true,
+            'trunk': true,
+            'trunk_link': true,
+            'primary': true,
+            'primary_link': true,
+            'secondary': true,
+            'secondary_link': true,
+            'tertiary': true,
+            'tertiary_link': true,
+            'residential': true,
+            'unclassified': true,
+            'living_street': true,
+            'service': true,
+            'road': true,
+            'track': true
+        };
+        return roads[way.tags.highway];
+    }
+
+
+    var distCutoff = 20;  // meters
+    var checkVertices = [graph.entity(startVertexId)];
+    var checkWays;
+    var vertices = [];
+    var vertexIds = [];
+    var vertex;
+    var ways = [];
+    var wayIds = [];
+    var way;
+    var nodes = [];
+    var node;
+    var parents = [];
+    var parent;
+
+    // `actions` will store whatever actions must be performed to satisfy
+    // preconditions for adding a turn restriction to this intersection.
+    //  - Remove any existing degenerate turn restrictions (missing from/to, etc)
+    //  - Reverse oneways so that they are drawn in the forward direction
+    //  - Split ways on key vertices
+    var actions = [];
+
+
+    // STEP 1:  walk the graph outwards from starting vertex to search
+    //  for more key vertices and ways to include in the intersection..
+
+    while (checkVertices.length) {
+        vertex = checkVertices.pop();
+
+        // check this vertex for parent ways that are roads
+        checkWays = graph.parentWays(vertex);
+        var hasWays = false;
+        for (i = 0; i < checkWays.length; i++) {
+            way = checkWays[i];
+            if (!isRoad(way) && !memberOfRestriction(way)) continue;
+
+            ways.push(way);   // it's a road, or it's already in a turn restriction
+            hasWays = true;
+
+            // check the way's children for more key vertices
+            nodes = _uniq(graph.childNodes(way));
+            for (j = 0; j < nodes.length; j++) {
+                node = nodes[j];
+                if (node === vertex) continue;                                           // same thing
+                if (vertices.indexOf(node) !== -1) continue;                             // seen it already
+                if (node.loc && vertex.loc && geoSphericalDistance(node.loc, vertex.loc) > distCutoff) continue;   // too far
+
+                // a key vertex will have parents that are also roads
+                var hasParents = false;
+                parents = graph.parentWays(node);
+                for (k = 0; k < parents.length; k++) {
+                    parent = parents[k];
+                    if (parent === way) continue;                 // same thing
+                    if (ways.indexOf(parent) !== -1) continue;    // seen it already
+                    if (!isRoad(parent)) continue;                // not a road
+                    hasParents = true;
+                    break;
+                }
+
+                if (hasParents) {
+                    checkVertices.push(node);
+                }
+            }
+        }
+
+        if (hasWays) {
+            vertices.push(vertex);
         }
     }
 
-    // Pre-split ways that would need to be split in
-    // order to add a restriction. The real split will
-    // happen when the restriction is added.
-    parentWays.forEach(function(way) {
-        if (!way.tags.highway || way.isArea() || way.isDegenerate())
-            return;
-
-        var isFirst = (vertexId === way.first()),
-            isLast = (vertexId === way.last()),
-            isAffix = (isFirst || isLast),
-            isClosingNode = (isFirst && isLast);
-
-        if (isAffix && !isClosingNode) {
-            var index = (isFirst ? 1 : way.nodes.length - 2);
-            addHighway(way, way.nodes[index]);
-
-        } else {
-            var splitIndex, wayA, wayB, indexA, indexB;
-            if (isClosingNode) {
-                splitIndex = Math.ceil(way.nodes.length / 2);  // split at midpoint
-                wayA = osmWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
-                wayB = osmWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
-                indexA = 1;
-                indexB = way.nodes.length - 2;
-            } else {
-                splitIndex = _indexOf(way.nodes, vertex.id, 1);  // split at vertexid
-                wayA = osmWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
-                wayB = osmWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
-                indexA = splitIndex - 1;
-                indexB = splitIndex + 1;
-            }
-            graph = graph.replace(wayA).replace(wayB);
-            addHighway(wayA, way.nodes[indexA]);
-            addHighway(wayB, way.nodes[indexB]);
-        }
-    });
-
-    // remove any ways from this intersection that are coincident
-    // (i.e. any adjacent node used by more than one intersecting way)
-    coincident.forEach(function (n) {
-        delete highways[n];
-    });
+    vertices = _uniq(vertices);
+    ways = _uniq(ways);
 
 
-    var intersection = {
-        highways: highways,
-        ways: _values(highways),
-        graph: graph
-    };
-
-
-    intersection.adjacentNodeId = function(fromWayId) {
-        return _find(_keys(highways), function(k) {
-            return highways[k].id === fromWayId;
+    // STEP 2:  Build a virtual graph containing only the entities in the intersection..
+    // Everything done after this step should act on the virtual graph
+    // Any actions that must be performed later to the main graph go in `actions` array
+    ways.forEach(function(way) {
+        graph.childNodes(way).forEach(function(node) {
+            vgraph = vgraph.replace(node);
         });
-    };
 
+        vgraph = vgraph.replace(way);
 
-    intersection.turns = function(fromNodeId) {
-        var start = highways[fromNodeId];
-        if (!start)
-            return [];
-
-        if (start.first() === vertex.id && start.tags.oneway === 'yes')
-            return [];
-        if (start.last() === vertex.id && start.tags.oneway === '-1')
-            return [];
-
-        function withRestriction(turn) {
-            graph.parentRelations(graph.entity(turn.from.way)).forEach(function(relation) {
-                if (relation.tags.type !== 'restriction')
-                    return;
-
-                var f = relation.memberByRole('from'),
-                    t = relation.memberByRole('to'),
-                    v = relation.memberByRole('via');
-
-                if (f && f.id === turn.from.way &&
-                    v && v.id === turn.via.node &&
-                    t && t.id === turn.to.way) {
-                    turn.restriction = relation.id;
-                } else if (/^only_/.test(relation.tags.restriction) &&
-                    f && f.id === turn.from.way &&
-                    v && v.id === turn.via.node &&
-                    t && t.id !== turn.to.way) {
-                    turn.restriction = relation.id;
-                    turn.indirect_restriction = true;
+        graph.parentRelations(way).forEach(function(relation) {
+            if (relation.isRestriction()) {
+                if (relation.isValidRestriction(graph)) {
+                    vgraph = vgraph.replace(relation);
+                } else if (relation.isComplete(graph)) {
+                    actions.push(actionDeleteRelation(relation.id));
                 }
-            });
-
-            return osmTurn(turn);
-        }
-
-
-        var from = {
-                node: fromNodeId,
-                way: start.id.split(/-(a|b)/)[0]
-            },
-            via = { node: vertex.id },
-            turns = [];
-
-        _each(highways, function(end, adjacentNodeId) {
-            if (end === start)
-                return;
-
-            // backward
-            if (end.first() !== vertex.id && end.tags.oneway !== 'yes') {
-                turns.push(withRestriction({
-                    from: from,
-                    via: via,
-                    to: {
-                        node: adjacentNodeId,
-                        way: end.id.split(/-(a|b)/)[0]
-                    }
-                }));
             }
-
-            // forward
-            if (end.last() !== vertex.id && end.tags.oneway !== '-1') {
-                turns.push(withRestriction({
-                    from: from,
-                    via: via,
-                    to: {
-                        node: adjacentNodeId,
-                        way: end.id.split(/-(a|b)/)[0]
-                    }
-                }));
-            }
-
         });
+    });
 
-        // U-turn
-        if (start.tags.oneway !== 'yes' && start.tags.oneway !== '-1') {
-            turns.push(withRestriction({
-                from: from,
-                via: via,
-                to: from,
-                u: true
-            }));
+
+    // STEP 3:  Force all oneways to be drawn in the forward direction
+    ways.forEach(function(w) {
+        var way = vgraph.entity(w.id);
+        if (way.tags.oneway === '-1') {
+            var action = actionReverse(way.id, { reverseOneway: true });
+            actions.push(action);
+            vgraph = action(vgraph);
+        }
+    });
+
+
+    // STEP 4:  Split ways on key vertices
+    var origCount = osmEntity.id.next.way;
+    vertices.forEach(function(v) {
+        // This is an odd way to do it, but we need to find all the ways that
+        // will be split here, then split them one at a time to ensure that these
+        // actions can be replayed on the main graph exactly in the same order.
+        // (It is unintuitive, but the order of ways returned from graph.parentWays()
+        // is arbitrary, depending on how the main graph and vgraph were built)
+        var splitAll = actionSplit(v.id);
+        if (!splitAll.disabled(vgraph)) {
+            splitAll.ways(vgraph).forEach(function(way) {
+                var splitOne = actionSplit(v.id).limitWays([way.id]);
+                actions.push(splitOne);
+                vgraph = splitOne(vgraph);
+            });
+        }
+    });
+
+    // In here is where we should also split the intersection at nearby junction.
+    //   for https://github.com/mapbox/iD-internal/issues/31
+    // nearbyVertices.forEach(function(v) {
+    // });
+
+    // Reasons why we reset the way id count here:
+    //  1. Continuity with way ids created by the splits so that we can replay
+    //     these actions later if the user decides to create a turn restriction
+    //  2. Avoids churning way ids just by hovering over a vertex
+    //     and displaying the turn restriction editor
+    osmEntity.id.next.way = origCount;
+
+
+    // STEP 5:  Update arrays to point to vgraph entities
+    vertexIds = vertices.map(function(v) { return v.id; });
+    vertices = [];
+    ways = [];
+
+    vertexIds.forEach(function(id) {
+        var vertex = vgraph.entity(id);
+        var parents = vgraph.parentWays(vertex);
+
+        vertices.push(vertex);
+        ways = ways.concat(parents);
+    });
+
+    vertices = _uniq(vertices);
+    ways = _uniq(ways);
+
+    vertexIds = vertices.map(function(v) { return v.id; });
+    wayIds = ways.map(function(w) { return w.id; });
+
+
+    // STEP 6:  Update the ways with some metadata that will be useful for
+    // walking the intersection graph later and rendering turn arrows.
+
+    function withMetadata(way, vertexIds) {
+        var __oneWay = way.isOneWay();
+
+        // which affixes are key vertices?
+        var __first = (vertexIds.indexOf(way.first()) !== -1);
+        var __last = (vertexIds.indexOf(way.last()) !== -1);
+
+        // what roles is this way eligible for?
+        var __via = (__first && __last);
+        var __from = ((__first && !__oneWay) || __last);
+        var __to = (__first || (__last && !__oneWay));
+
+        return way.update({
+            __first:  __first,
+            __last:  __last,
+            __from:  __from,
+            __via: __via,
+            __to:  __to,
+            __oneWay:  __oneWay
+        });
+    }
+
+    ways = [];
+    wayIds.forEach(function(id) {
+        var way = withMetadata(vgraph.entity(id), vertexIds);
+        vgraph = vgraph.replace(way);
+        ways.push(way);
+    });
+
+
+    // STEP 7:  Simplify - This is an iterative process where we:
+    //  1. Find trivial vertices with only 2 parents
+    //  2. trim off the leaf way from those vertices and remove from vgraph
+
+    var keepGoing;
+    var removeWayIds = [];
+    var removeVertexIds = [];
+
+    do {
+        keepGoing = false;
+        checkVertices = vertexIds.slice();
+
+        for (i = 0; i < checkVertices.length; i++) {
+            var vertexId = checkVertices[i];
+            vertex = vgraph.hasEntity(vertexId);
+
+            if (!vertex) {
+                vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                removeVertexIds.push(vertexId);
+                continue;
+            }
+
+            parents = vgraph.parentWays(vertex);
+            if (parents.length < 3) {
+                vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+            }
+
+            if (parents.length === 2) {     // vertex with 2 parents is trivial
+                var a = parents[0];
+                var b = parents[1];
+                var aIsLeaf = a && !a.__via;
+                var bIsLeaf = b && !b.__via;
+                var leaf, survivor;
+
+                if (aIsLeaf && !bIsLeaf) {
+                    leaf = a;
+                    survivor = b;
+                } else if (!aIsLeaf && bIsLeaf) {
+                    leaf = b;
+                    survivor = a;
+                }
+
+                if (leaf && survivor) {
+                    survivor = withMetadata(survivor, vertexIds);      // update survivor way
+                    vgraph = vgraph.replace(survivor).remove(leaf);    // update graph
+                    removeWayIds.push(leaf.id);
+                    keepGoing = true;
+                }
+            }
+
+            parents = vgraph.parentWays(vertex);
+
+            if (parents.length < 2) {     // vertex is no longer a key vertex
+                vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                removeVertexIds.push(vertexId);
+                keepGoing = true;
+            }
+
+            if (parents.length < 1) {     // vertex is no longer attached to anything
+                vgraph = vgraph.remove(vertex);
+            }
+
+        }
+    } while (keepGoing);
+
+
+    vertices = vertices
+        .filter(function(vertex) { return removeVertexIds.indexOf(vertex.id) === -1; })
+        .map(function(vertex) { return vgraph.entity(vertex.id); });
+    ways = ways
+        .filter(function(way) { return removeWayIds.indexOf(way.id) === -1; })
+        .map(function(way) { return vgraph.entity(way.id); });
+
+
+    // OK!  Here is our intersection..
+    var intersection = {
+        graph: vgraph,
+        actions: actions,
+        vertices: vertices,
+        ways: ways,
+    };
+
+
+
+    // Get all the valid turns through this intersection given a starting way id.
+    // This operates on the virtual graph for everything.
+    //
+    // Basically, walk through all possible paths from starting way,
+    //   honoring the existing turn restrictions as we go (watch out for loops!)
+    //
+    // For each path found, generate and return a `osmTurn` datastructure.
+    //
+    intersection.turns = function(fromWayId) {
+        if (!fromWayId) return [];
+
+        var vgraph = intersection.graph;
+        var keyVertexIds = intersection.vertices.map(function(v) { return v.id; });
+        var keyWayIds = intersection.ways.map(function(w) { return w.id; });
+
+        var start = vgraph.entity(fromWayId);
+        if (!start || !(start.__from || start.__via)) return [];
+
+        var maxPathLength = 7;  // from-*-via-*-via-*-to  (2 vias max)
+        var maxStepDist = 20;   // meters
+        var turns = [];
+
+        step(start);
+        return turns;
+
+
+        // traverse the intersection graph and find all the valid paths
+        function step(entity, currPath, currRestrictions, matchedRestriction) {
+            currPath = _clone(currPath || []);
+            if (currPath.length >= maxPathLength) return;
+            currPath.push(entity.id);
+            currRestrictions = _clone(currRestrictions || []);
+
+            if (entity.type === 'node') {
+                var parents = vgraph.parentWays(entity);
+                var nextWays = [];
+
+                // which ways can we step into?
+                for (var i = 0; i < parents.length; i++) {
+                    var way = parents[i];
+
+                    // if next way is a oneway incoming to this vertex, skip
+                    if (way.__oneWay && way.nodes[0] !== entity.id) continue;
+
+                    // if we have seen it before (allowing for an initial u-turn), skip
+                    if (currPath.indexOf(way.id) !== -1 && currPath.length >= 3) continue;
+
+                    // Check all "current" restrictions (where we've already walked the `from`)
+                    var restrict = undefined;
+                    for (var j = 0; j < currRestrictions.length; j++) {
+                        var restriction = currRestrictions[j];
+                        var v = restriction.membersByRole('via');
+                        var t = restriction.memberByRole('to');
+                        var isOnly = /^only_/.test(restriction.tags.restriction);
+
+                        // Are all the vias part of this local intersection?
+                        // This matters for flagging "indirect" restrictions
+                        var isLocalVia;
+                        if (v.length === 1 && v[0].type === 'node') {
+                            isLocalVia = (keyVertexIds.indexOf(v[0].id) !== -1);
+                        } else {
+                            isLocalVia = _every(v, function(via) { return keyWayIds.indexOf(via.id) !== -1; });
+                        }
+
+                        // Does this path match the turn restriction?
+                        var isMatch = false;
+                        if (  // match via node, to way
+                            v.length === 1 &&
+                            v[0].type === 'node' &&
+                            v[0].id === entity.id &&
+                            t.id === way.id
+                        ) {
+                            isMatch = true;
+                        } else if (  // match via ways, to way
+                            _every(v, function(via) { return currPath.indexOf(via.id) !== -1; }) &&
+                            t.id === way.id
+                        ) {
+                            isMatch = true;
+                        }
+
+                        if (isMatch && isOnly) {
+                            restrict = { id: restriction.id, only: true };
+                            break;
+                        } else if (isMatch && !isOnly) {
+                            restrict = { id: restriction.id, direct: true };
+                            break;
+                        } else if (!isMatch && isOnly && isLocalVia) {
+                            restrict = { id: restriction.id, indirect: true };
+                            // no break - keep looking for a "better" direct or only
+                        }
+                    }
+
+                    nextWays.push({ way: way, restrict: restrict });
+                }
+
+                nextWays.forEach(function(nextWay) {
+                    step(nextWay.way, currPath, currRestrictions, nextWay.restrict);
+                });
+
+
+            } else {  // entity.type === 'way'
+                if (currPath.length >= 3) {     // this is a "complete" path..
+                    var turn = pathToTurn(currPath);
+                    if (turn) {
+                        if (matchedRestriction) {
+                            turn.restriction = matchedRestriction.id;
+                            turn.only = matchedRestriction.only;
+                            turn.direct = matchedRestriction.direct;
+                            turn.indirect = matchedRestriction.indirect;
+                        }
+                        turns.push(osmTurn(turn));
+                    }
+
+                    if (currPath[0] === currPath[2]) return;     // we made a u-turn - stop here
+                }
+
+                if (matchedRestriction) return;  // don't advance any further
+
+                // which nodes can we step into?
+                var n1 = vgraph.entity(entity.first()),
+                    n2 = vgraph.entity(entity.last()),
+                    dist = n1.loc && n2.loc && geoSphericalDistance(n1.loc, n2.loc),
+                    nextNodes = [];
+
+                if (currPath.length > 1) {
+                    if (dist > maxStepDist) return;   // the next node is too far
+                    if (!entity.__via) return;        // this way is a leaf / can't be a via
+                }
+
+                if (!entity.__oneWay &&                     // bidirectional..
+                    keyVertexIds.indexOf(n1.id) !== -1 &&   // key vertex..
+                    currPath.indexOf(n1.id) === -1) {       // haven't seen it yet..
+                    nextNodes.push(n1);                     // can advance to first node
+                }
+                if (keyVertexIds.indexOf(n2.id) !== -1 &&   // key vertex..
+                    currPath.indexOf(n2.id) === -1) {       // haven't seen it yet..
+                    nextNodes.push(n2);                     // can advance to last node
+                }
+
+                // gather restrictions FROM this way
+                var fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
+                    if (!r.isRestriction()) return false;
+                    var f = r.memberByRole('from');
+                    return f && f.id === entity.id;
+                });
+
+                nextNodes.forEach(function(node) {
+                    step(node, currPath, currRestrictions.concat(fromRestrictions), false);
+                });
+            }
         }
 
-        return turns;
+
+        // assumes path is alternating way-node-way of odd length
+        function pathToTurn(path) {
+            if (path.length < 3) return;
+            var fromWayId, fromNodeId, fromVertexId;
+            var toWayId, toNodeId, toVertexId;
+            var viaWayIds, viaNodeId, isUturn;
+
+            fromWayId = path[0];
+            toWayId = path[path.length - 1];
+
+            if (path.length === 3 && fromWayId === toWayId) {  // u turn
+                var way = vgraph.entity(fromWayId);
+                if (way.__oneWay) return null;
+
+                isUturn = true;
+                viaNodeId = fromVertexId = toVertexId = path[1];
+                fromNodeId = toNodeId = adjacentNode(fromWayId, viaNodeId);
+
+            } else {
+                isUturn = false;
+                fromVertexId = path[1];
+                fromNodeId = adjacentNode(fromWayId, fromVertexId);
+                toVertexId = path[path.length - 2];
+                toNodeId = adjacentNode(toWayId, toVertexId);
+
+                if (path.length === 3) {
+                    viaNodeId = path[1];
+                } else {
+                    viaWayIds = path.filter(function(entityId) { return entityId[0] === 'w'; });
+                    viaWayIds = viaWayIds.slice(1, viaWayIds.length - 1);  // remove first, last
+                }
+            }
+
+            return {
+                key:  path.join(','),
+                path: path,
+                from: { node: fromNodeId, way:  fromWayId, vertex: fromVertexId },
+                via:  { node: viaNodeId,  ways: viaWayIds },
+                to:   { node: toNodeId,   way:  toWayId, vertex: toVertexId },
+                u:    isUturn
+            };
+
+
+            function adjacentNode(wayId, affixId) {
+                var nodes = vgraph.entity(wayId).nodes;
+                return affixId === nodes[0] ? nodes[1] : nodes[nodes.length - 2];
+            }
+
+        }
+
     };
 
     return intersection;
 }
 
 
-export function osmInferRestriction(graph, from, via, to, projection) {
-    var fromWay = graph.entity(from.way),
-        fromNode = graph.entity(from.node),
-        toWay = graph.entity(to.way),
-        toNode = graph.entity(to.node),
-        viaNode = graph.entity(via.node),
-        fromOneWay = (fromWay.tags.oneway === 'yes' && fromWay.last() === via.node) ||
-            (fromWay.tags.oneway === '-1' && fromWay.first() === via.node),
-        toOneWay = (toWay.tags.oneway === 'yes' && toWay.first() === via.node) ||
-            (toWay.tags.oneway === '-1' && toWay.last() === via.node),
-        angle = geoAngle(viaNode, fromNode, projection) -
-                geoAngle(viaNode, toNode, projection);
+export function osmInferRestriction(graph, from, to, projection) {
+    var fromWay = graph.entity(from.way);
+    var fromNode = graph.entity(from.node);
+    var fromVertex = graph.entity(from.vertex);
+    var toWay = graph.entity(to.way);
+    var toNode = graph.entity(to.node);
+    var toVertex = graph.entity(to.vertex);
+
+    var fromOneWay = (fromWay.tags.oneway === 'yes');
+    var toOneWay = (toWay.tags.oneway === 'yes');
+    var angle = geoAngle(fromVertex, fromNode, projection) -
+                geoAngle(toVertex, toNode, projection);
 
     angle = angle * 180 / Math.PI;
 

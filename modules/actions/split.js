@@ -53,7 +53,10 @@ export function actionSplit(nodeId, newWayIds) {
         }
 
         function dist(nA, nB) {
-            return geoSphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
+            var locA = graph.entity(nA).loc;
+            var locB = graph.entity(nB).loc;
+            var epsilon = 1e-6;
+            return (locA && locB) ? geoSphericalDistance(locA, locB) : epsilon;
         }
 
         // calculate lengths

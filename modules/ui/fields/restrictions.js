@@ -6,44 +6,14 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-
-import {
-    behaviorBreathe,
-    behaviorHover
-} from '../../behavior';
-
-import {
-    osmEntity,
-    osmIntersection,
-    osmInferRestriction,
-    osmTurn
-} from '../../osm';
-
-import {
-    actionRestrictTurn,
-    actionUnrestrictTurn
-} from '../../actions';
-
-import {
-    geoExtent,
-    geoRawMercator,
-    geoZoomToScale
-} from '../../geo';
-
-import {
-    svgLayers,
-    svgLines,
-    svgTurns,
-    svgVertices
-} from '../../svg';
-
+import { actionRestrictTurn, actionUnrestrictTurn } from '../../actions';
+import { behaviorBreathe, behaviorHover } from '../../behavior';
+import { geoExtent, geoRawMercator } from '../../geo';
+import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
+import { svgLabels, svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
 import { utilRebind } from '../../util/rebind';
 import { utilFunctor } from '../../util';
-
-import {
-    utilGetDimensions,
-    utilSetDimensions
-} from '../../util/dimensions';
+import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
 export function uiFieldRestrictions(field, context) {
@@ -51,19 +21,31 @@ export function uiFieldRestrictions(field, context) {
     var breathe = behaviorBreathe(context);
     var hover = behaviorHover(context);
     var initialized = false;
+    var graph;
     var vertexID;
-    var fromNodeID;
+    var fromWayID;
 
 
-    function restrictions(selection) {
+    function restrictions(selection, intersection) {
         // if form field is hidden or has detached from dom, clean up.
-        if (!d3_select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
+        if (!d3_select('.inspector-wrap.inspector-hidden').empty() ||
+            !selection.node().parentNode || !selection.node().parentNode.parentNode) {
             selection.call(restrictions.off);
             return;
         }
 
+        // try to reuse the intersection, but always rebuild it if the graph has changed
+        if (context.graph() !== graph || !intersection) {
+            graph = context.graph();
+            intersection = osmIntersection(graph, vertexID);
+        }
+        var ok = (intersection.vertices.length && intersection.ways.length);
+
         var wrap = selection.selectAll('.preset-input-wrap')
-            .data([0]);
+            .data(ok ? [0] : []);
+
+        wrap.exit()
+            .remove();
 
         var enter = wrap.enter()
             .append('div')
@@ -73,31 +55,35 @@ export function uiFieldRestrictions(field, context) {
             .append('div')
             .attr('class', 'restriction-help');
 
+        // hack: no actual intersection exists here, just dont show the field
+        if (!ok) return;
 
-        var intersection = osmIntersection(context.graph(), vertexID);
-        var graph = intersection.graph;
-        var vertex = graph.entity(vertexID);
+        var vgraph = intersection.graph;
         var filter = utilFunctor(true);
+        var extent = geoExtent();
         var projection = geoRawMercator();
 
         var d = utilGetDimensions(wrap.merge(enter));
         var c = [d[0] / 2, d[1] / 2];
-        var z = 24;
+        var z = intersection.vertices.length === 1 ? 22 : 20;
 
         projection
-            .scale(geoZoomToScale(z));
+            .scale(256 * Math.pow(2, z) / (2 * Math.PI));
 
-        var s = projection(vertex.loc);
+        // fit extent to include all key vertices
+        for (var i = 0; i < intersection.vertices.length; i++) {
+            extent._extend(intersection.vertices[i].extent());
+        }
+        var s = projection(extent.center());
 
         projection
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
-        var extent = geoExtent(projection.invert([0, d[1]]), projection.invert([d[0], 0]));
-
         var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
         var drawVertices = svgVertices(projection, context);
         var drawLines = svgLines(projection, context);
+        // var drawLabels = svgLabels(projection, context, true);
         var drawTurns = svgTurns(projection, context);
 
         enter
@@ -117,9 +103,10 @@ export function uiFieldRestrictions(field, context) {
 
         surface
             .call(utilSetDimensions, d)
-            .call(drawVertices, graph, [vertex], filter, extent, true)
-            .call(drawLines, graph, intersection.ways, filter)
-            .call(drawTurns, graph, intersection.turns(fromNodeID));
+            .call(drawVertices, vgraph, intersection.vertices, filter, extent, z)
+            .call(drawLines, vgraph, intersection.ways, filter)
+            // .call(drawLabels, vgraph, intersection.ways, filter, d, true)
+            .call(drawTurns, vgraph, intersection.turns(fromWayID));
 
         surface
             .on('click.restrictions', click)
@@ -130,9 +117,9 @@ export function uiFieldRestrictions(field, context) {
             .selectAll('.selected')
             .classed('selected', false);
 
-        if (fromNodeID) {
+        if (fromWayID) {
             surface
-                .selectAll('.' + intersection.highways[fromNodeID].id)
+                .selectAll('.' + fromWayID)
                 .classed('selected', true);
         }
 
@@ -155,69 +142,111 @@ export function uiFieldRestrictions(field, context) {
 
             var datum = d3_event.target.__data__;
             var entity = datum && datum.properties && datum.properties.entity;
-            if (entity) datum = entity;
+            if (entity) {
+                datum = entity;
+            }
 
-            if (datum instanceof osmEntity) {
-                fromNodeID = intersection.adjacentNodeId(datum.id);
+            if (datum instanceof osmWay && (datum.__from || datum.__via)) {
+                fromWayID = datum.id;
                 render();
 
             } else if (datum instanceof osmTurn) {
+                var actions;
                 if (datum.restriction) {
-                    context.perform(
+                    actions = intersection.actions.concat([
                         actionUnrestrictTurn(datum, projection),
                         t('operations.restriction.annotation.delete')
-                    );
+                    ]);
                 } else {
-                    context.perform(
+                    actions = intersection.actions.concat([
                         actionRestrictTurn(datum, projection),
                         t('operations.restriction.annotation.create')
-                    );
+                    ]);
                 }
+                context.perform.apply(context, actions);
+
+            } else {
+                fromWayID = null;
+                render();
             }
         }
 
 
         function mouseover() {
             var datum = d3_event.target.__data__;
-            if (datum instanceof osmTurn) {
-                var graph = context.graph();
-                var presets = context.presets();
-                var preset;
+            var entity = datum && datum.properties && datum.properties.entity;
+            if (entity) {
+                datum = entity;
+            }
 
+            if (datum instanceof osmWay) {
+                wrap.selectAll('.restriction-help')
+                    .text(datum.id);
+
+            } else if (datum instanceof osmTurn) {
+
+                //DEBUG
+                var str = '';
                 if (datum.restriction) {
-                    preset = presets.match(graph.entity(datum.restriction), graph);
-                } else {
-                    preset = presets.item('type/restriction/' +
-                        osmInferRestriction(
-                            graph,
-                            datum.from,
-                            datum.via,
-                            datum.to,
-                            projection
-                        )
-                    );
+                    if (datum.only)      { str += 'ONLY_ '; }
+                    if (datum.direct)    { str += 'NO_ '; }
+                    if (datum.indirect)  { str += 'indirect '; }
+                    str += datum.restriction;
                 }
 
+                str += ' FROM ' + datum.from.way +
+                    ' VIA ' + (datum.via.node || datum.via.ways.join(',')) +
+                    ' TO ' + datum.to.way;
+
                 wrap.selectAll('.restriction-help')
-                    .text(t('operations.restriction.help.' +
-                        (datum.restriction ? 'toggle_off' : 'toggle_on'),
-                        { restriction: preset.name() })
-                    );
+                    .text(str);
+
+// return;
+            //     var presets = context.presets(),
+            //         preset;
+
+            //     if (datum.restriction) {
+            //         preset = presets.match(vgraph.entity(datum.restriction), vgraph);
+            //     } else {
+            //         preset = presets.item('type/restriction/' +
+            //             osmInferRestriction(
+            //                 vgraph,
+            //                 datum.from,
+            //                 datum.to,
+            //                 projection
+            //             )
+            //         );
+            //     }
+
+            //     wrap.selectAll('.restriction-help')
+            //         .text(t('operations.restriction.help.' +
+            //             (datum.restriction ? 'toggle_off' : 'toggle_on'),
+            //             { restriction: preset.name() })
+            //         );
             }
         }
 
 
         function mouseout() {
-            wrap.selectAll('.restriction-help')
-                .text(t('operations.restriction.help.' +
-                    (fromNodeID ? 'toggle' : 'select'))
-                );
+
+            if (fromWayID) {
+                wrap.selectAll('.restriction-help')
+                    .text('FROM ' + fromWayID);
+            } else {
+                wrap.selectAll('.restriction-help')
+                    .text('Click to select the FROM way');
+            }
+
+            // wrap.selectAll('.restriction-help')
+            //     .text(t('operations.restriction.help.' +
+            //         (fromWayID ? 'toggle' : 'select'))
+            //     );
         }
 
 
         function render() {
             if (context.hasEntity(vertexID)) {
-                restrictions(selection);
+                restrictions(selection, intersection);
             }
         }
     }
@@ -225,7 +254,7 @@ export function uiFieldRestrictions(field, context) {
 
     restrictions.entity = function(_) {
         if (!vertexID || vertexID !== _.id) {
-            fromNodeID = null;
+            fromWayID = null;
             vertexID = _.id;
         }
     };
