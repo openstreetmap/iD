@@ -484,6 +484,9 @@ en:
           both: Both / All
           # direction=forward
           forward: Forward
+      dispensing:
+        # dispensing=*
+        label: Dispenses Prescriptions
       display:
         # display=*
         label: Display

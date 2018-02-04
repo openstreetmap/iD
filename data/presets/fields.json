@@ -649,6 +649,12 @@
             "label": "Direction (Degrees Clockwise)",
             "placeholder": "45, 90, 180, 270"
         },
+        "dispensing": {
+            "key": "dispensing",
+            "type": "check",
+            "label": "Dispenses Prescriptions",
+            "default": "yes"
+        },
         "display": {
             "key": "display",
             "type": "combo",
