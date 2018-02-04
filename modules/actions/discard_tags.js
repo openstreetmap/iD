@@ -9,15 +9,21 @@ export function actionDiscardTags(difference) {
 
     return function(graph) {
         function discardTags(entity) {
-            if (!_isEmpty(entity.tags)) {
-                var tags = {};
-                _each(entity.tags, function(v, k) {
-                    if (v) tags[k] = v;
-                });
+            var tags = {};
+            var keys = Object.keys(entity.tags);
+            var discarded = false;
 
-                graph = graph.replace(entity.update({
-                    tags: _omit(tags, dataDiscarded)
-                }));
+            for (var i = 0; i < keys.length; i++) {
+                var k = keys[i];
+                if (dataDiscarded[k] || !entity.tags[k]) {
+                    discarded = true;
+                } else {
+                    tags[k] = entity.tags[k];
+                }
+            }
+
+            if (discarded) {
+                graph = graph.replace(entity.update({ tags: tags }));
             }
         }
 

@@ -15,14 +15,13 @@ import {
 
 
 export function uiCommitChanges(context) {
-    var _entityID;
     var detected = utilDetect();
+    var _entityID;
 
 
     function commitChanges(selection) {
-
-        var history = context.history(),
-            summary = history.difference().summary();
+        var history = context.history();
+        var summary = history.difference().summary();
 
         var container = selection.selectAll('.modal-section.commit-section')
             .data([0]);
@@ -96,14 +95,14 @@ export function uiCommitChanges(context) {
 
 
         // Download changeset link
-        var changeset = new osmChangeset().update({ id: undefined }),
-            changes = history.changes(actionDiscardTags(history.difference()));
+        var changeset = new osmChangeset().update({ id: undefined });
+        var changes = history.changes(actionDiscardTags(history.difference()));
 
         delete changeset.id;  // Export without chnageset_id
 
-        var data = JXON.stringify(changeset.osmChangeJXON(changes)),
-            blob = new Blob([data], {type: 'text/xml;charset=utf-8;'}),
-            fileName = 'changes.osc';
+        var data = JXON.stringify(changeset.osmChangeJXON(changes));
+        var blob = new Blob([data], {type: 'text/xml;charset=utf-8;'});
+        var fileName = 'changes.osc';
 
         var linkEnter = container.selectAll('.download-changes')
             .data([0])
@@ -164,7 +163,6 @@ export function uiCommitChanges(context) {
         _entityID = _;
         return commitChanges;
     };
-
 
 
     return commitChanges;
