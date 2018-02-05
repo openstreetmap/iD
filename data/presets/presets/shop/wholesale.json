@@ -1,5 +1,5 @@
 {
-    "icon": "shop",
+    "icon": "warehouse",
     "fields": [
         "name",
         "operator",
@@ -20,5 +20,5 @@
     "tags": {
         "shop": "wholesale"
     },
-    "name": "Wholesale Shop"
+    "name": "Wholesale Store"
 }

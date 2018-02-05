@@ -5766,7 +5766,7 @@
                     "terms": ""
                 },
                 "shop/health_food": {
-                    "name": "Health food shop",
+                    "name": "Health Food Shop",
                     "terms": "wholefood,vitamins,vegetarian,vegan"
                 },
                 "shop/hearing_aids": {
@@ -6006,7 +6006,7 @@
                     "terms": "ammo,gun,knife,knives"
                 },
                 "shop/wholesale": {
-                    "name": "Wholesale shop/store",
+                    "name": "Wholesale Store",
                     "terms": "warehouse club,cash and carry"
                 },
                 "shop/window_blind": {

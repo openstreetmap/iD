@@ -17029,7 +17029,7 @@
             "tags": {
                 "shop": "health_food "
             },
-            "name": "Health food shop"
+            "name": "Health Food Shop"
         },
         "shop/hearing_aids": {
             "icon": "shop",
@@ -18246,7 +18246,7 @@
             "name": "Weapon Shop"
         },
         "shop/wholesale": {
-            "icon": "shop",
+            "icon": "warehouse",
             "fields": [
                 "name",
                 "operator",
@@ -18267,7 +18267,7 @@
             "tags": {
                 "shop": "wholesale"
             },
-            "name": "Wholesale shop/store"
+            "name": "Wholesale Store"
         },
         "shop/window_blind": {
             "icon": "shop",

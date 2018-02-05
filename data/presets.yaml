@@ -5119,9 +5119,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Hardware Store'', separated by commas>'
       shop/health_food:
         # 'shop=health_food '
-        name: Health food shop
+        name: Health Food Shop
         # 'terms: wholefood,vitamins,vegetarian,vegan'
-        terms: '<translate with synonyms or related terms for ''Health food shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Health Food Shop'', separated by commas>'
       shop/hearing_aids:
         # shop=hearing_aids
         name: Hearing Aids Store
@@ -5383,9 +5383,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Weapon Shop'', separated by commas>'
       shop/wholesale:
         # shop=wholesale
-        name: Wholesale shop/store
+        name: Wholesale Store
         # 'terms: warehouse club,cash and carry'
-        terms: '<translate with synonyms or related terms for ''Wholesale shop/store'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Wholesale Store'', separated by commas>'
       shop/window_blind:
         # shop=window_blind
         name: Window Blind Store
