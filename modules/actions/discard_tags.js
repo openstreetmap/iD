@@ -1,9 +1,4 @@
-import _each from 'lodash-es/each';
-import _isEmpty from 'lodash-es/isEmpty';
-import _omit from 'lodash-es/omit';
-
 import { dataDiscarded } from '../../data';
-
 
 export function actionDiscardTags(difference) {
 
