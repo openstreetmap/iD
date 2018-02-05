@@ -23,9 +23,8 @@ export function coreDifference(base, head) {
         if (!h || !b) return true;
 
         if (h.loc || b.loc) {
-            if (!h.loc && b.loc ||
-                h.loc && !b.loc ||
-                h.loc[0] !== b.loc[0] && h.loc[1] !== b.loc[1]) return true;
+            if (!h.loc && b.loc || h.loc && !b.loc ||
+                h.loc[0] !== b.loc[0] || h.loc[1] !== b.loc[1]) return true;
         }
         if (h.nodes || b.nodes) {
             if (!_isEqual(h.nodes, b.nodes)) return true;
