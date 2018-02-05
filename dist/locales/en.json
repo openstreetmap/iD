@@ -5765,6 +5765,10 @@
                     "name": "Hardware Store",
                     "terms": ""
                 },
+                "shop/health_food": {
+                    "name": "Health Food Shop",
+                    "terms": "wholefood,vitamins,vegetarian,vegan"
+                },
                 "shop/hearing_aids": {
                     "name": "Hearing Aids Store",
                     "terms": ""
@@ -6002,7 +6006,7 @@
                     "terms": "ammo,gun,knife,knives"
                 },
                 "shop/wholesale": {
-                    "name": "Wholesale shop/store",
+                    "name": "Wholesale Shop",
                     "terms": "warehouse club,cash and carry"
                 },
                 "shop/window_blind": {

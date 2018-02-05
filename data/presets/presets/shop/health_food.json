@@ -3,7 +3,6 @@
     "fields": [
         "name",
         "operator",
-        "wholesale",
         "address",
         "building_area",
         "opening_hours",
@@ -14,11 +13,13 @@
         "area"
     ],
     "terms": [
-        "warehouse club",
-        "cash and carry"
+        "wholefood",
+        "vitamins",
+        "vegetarian",
+        "vegan"
     ],
     "tags": {
-        "shop": "wholesale"
+        "shop": "health_food "
     },
-    "name": "Wholesale Shop"
+    "name": "Health Food Shop"
 }

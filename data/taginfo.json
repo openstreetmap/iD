@@ -3073,6 +3073,10 @@
         },
         {
             "key": "shop",
+            "value": "health_food "
+        },
+        {
+            "key": "shop",
             "value": "hearing_aids"
         },
         {
