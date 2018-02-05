@@ -3073,6 +3073,10 @@
         },
         {
             "key": "shop",
+            "value": "health_food "
+        },
+        {
+            "key": "shop",
             "value": "hearing_aids"
         },
         {
@@ -3306,6 +3310,10 @@
         {
             "key": "shop",
             "value": "weapons"
+        },
+        {
+            "key": "shop",
+            "value": "wholesale"
         },
         {
             "key": "shop",

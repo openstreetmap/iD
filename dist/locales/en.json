@@ -2642,6 +2642,9 @@
                 "wheelchair": {
                     "label": "Wheelchair Access"
                 },
+                "wholesale": {
+                    "label": "wholesale"
+                },
                 "width": {
                     "label": "Width (Meters)"
                 },
@@ -5762,6 +5765,10 @@
                     "name": "Hardware Store",
                     "terms": ""
                 },
+                "shop/health_food": {
+                    "name": "Health Food Shop",
+                    "terms": "wholefood,vitamins,vegetarian,vegan"
+                },
                 "shop/hearing_aids": {
                     "name": "Hearing Aids Store",
                     "terms": ""
@@ -5997,6 +6004,10 @@
                 "shop/weapons": {
                     "name": "Weapon Shop",
                     "terms": "ammo,gun,knife,knives"
+                },
+                "shop/wholesale": {
+                    "name": "Wholesale Shop",
+                    "terms": "warehouse club,cash and carry"
                 },
                 "shop/window_blind": {
                     "name": "Window Blind Store",

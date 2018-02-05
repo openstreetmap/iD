@@ -1620,6 +1620,9 @@ en:
       wheelchair:
         # wheelchair=*
         label: Wheelchair Access
+      wholesale:
+        # wholesale=*
+        label: wholesale
       width:
         # width=*
         label: Width (Meters)
@@ -5114,6 +5117,11 @@ en:
         # shop=hardware
         name: Hardware Store
         terms: '<translate with synonyms or related terms for ''Hardware Store'', separated by commas>'
+      shop/health_food:
+        # 'shop=health_food '
+        name: Health Food Shop
+        # 'terms: wholefood,vitamins,vegetarian,vegan'
+        terms: '<translate with synonyms or related terms for ''Health Food Shop'', separated by commas>'
       shop/hearing_aids:
         # shop=hearing_aids
         name: Hearing Aids Store
@@ -5373,6 +5381,11 @@ en:
         name: Weapon Shop
         # 'terms: ammo,gun,knife,knives'
         terms: '<translate with synonyms or related terms for ''Weapon Shop'', separated by commas>'
+      shop/wholesale:
+        # shop=wholesale
+        name: Wholesale Shop
+        # 'terms: warehouse club,cash and carry'
+        terms: '<translate with synonyms or related terms for ''Wholesale Shop'', separated by commas>'
       shop/window_blind:
         # shop=window_blind
         name: Window Blind Store

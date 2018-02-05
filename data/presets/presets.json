@@ -17006,6 +17006,31 @@
             },
             "name": "Hardware Store"
         },
+        "shop/health_food": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours",
+                "payment_multi"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "wholefood",
+                "vitamins",
+                "vegetarian",
+                "vegan"
+            ],
+            "tags": {
+                "shop": "health_food "
+            },
+            "name": "Health Food Shop"
+        },
         "shop/hearing_aids": {
             "icon": "shop",
             "fields": [
@@ -18219,6 +18244,30 @@
                 "shop": "weapons"
             },
             "name": "Weapon Shop"
+        },
+        "shop/wholesale": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "operator",
+                "wholesale",
+                "address",
+                "building_area",
+                "opening_hours",
+                "payment_multi"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "warehouse club",
+                "cash and carry"
+            ],
+            "tags": {
+                "shop": "wholesale"
+            },
+            "name": "Wholesale Shop"
         },
         "shop/window_blind": {
             "icon": "shop",
