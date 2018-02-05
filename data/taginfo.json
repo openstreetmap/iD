@@ -3309,6 +3309,10 @@
         },
         {
             "key": "shop",
+            "value": "wholesale"
+        },
+        {
+            "key": "shop",
             "value": "window_blind"
         },
         {

@@ -2202,6 +2202,11 @@
             "universal": true,
             "label": "Wheelchair Access"
         },
+        "wholesale": {
+            "key": "wholesale",
+            "type": "typeCombo",
+            "label": "wholesale"
+        },
         "width": {
             "key": "width",
             "type": "number",

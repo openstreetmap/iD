@@ -18220,6 +18220,30 @@
             },
             "name": "Weapon Shop"
         },
+        "shop/wholesale": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "operator",
+                "wholesale",
+                "address",
+                "building_area",
+                "opening_hours",
+                "payment_multi"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "warehouse club",
+                "cash and carry"
+            ],
+            "tags": {
+                "shop": "wholesale"
+            },
+            "name": "Wholesale shop/store"
+        },
         "shop/window_blind": {
             "icon": "shop",
             "fields": [
