@@ -5117,6 +5117,11 @@ en:
         # shop=hardware
         name: Hardware Store
         terms: '<translate with synonyms or related terms for ''Hardware Store'', separated by commas>'
+      shop/health_food:
+        # 'shop=health_food '
+        name: Health food shop
+        # 'terms: wholefood,vitamins,vegetarian,vegan'
+        terms: '<translate with synonyms or related terms for ''Health food shop'', separated by commas>'
       shop/hearing_aids:
         # shop=hearing_aids
         name: Hearing Aids Store

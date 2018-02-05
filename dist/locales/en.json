@@ -5765,6 +5765,10 @@
                     "name": "Hardware Store",
                     "terms": ""
                 },
+                "shop/health_food": {
+                    "name": "Health food shop",
+                    "terms": "wholefood,vitamins,vegetarian,vegan"
+                },
                 "shop/hearing_aids": {
                     "name": "Hearing Aids Store",
                     "terms": ""
