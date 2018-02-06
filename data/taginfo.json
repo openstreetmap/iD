@@ -1759,6 +1759,10 @@
         },
         {
             "key": "leisure",
+            "value": "amusement_arcade"
+        },
+        {
+            "key": "leisure",
             "value": "bird_hide"
         },
         {

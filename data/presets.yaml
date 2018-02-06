@@ -3588,6 +3588,11 @@ en:
         name: Adult Gaming Center
         # 'terms: gambling,slot machine'
         terms: '<translate with synonyms or related terms for ''Adult Gaming Center'', separated by commas>'
+      leisure/amusement_arcade:
+        # leisure=amusement_arcade
+        name: Amusement Arcade
+        # 'terms: pay-to-play games,video games,driving simulators,pinball machines'
+        terms: '<translate with synonyms or related terms for ''Amusement Arcade'', separated by commas>'
       leisure/bird_hide:
         # leisure=bird_hide
         name: Bird Hide

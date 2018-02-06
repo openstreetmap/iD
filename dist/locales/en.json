@@ -4433,6 +4433,10 @@
                     "name": "Adult Gaming Center",
                     "terms": "gambling,slot machine"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Amusement Arcade",
+                    "terms": "pay-to-play games,video games,driving simulators,pinball machines"
+                },
                 "leisure/bird_hide": {
                     "name": "Bird Hide",
                     "terms": "machan,ornithology"
