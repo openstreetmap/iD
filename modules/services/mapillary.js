@@ -511,12 +511,11 @@ export default {
 
     updateViewer: function(imageKey, context) {
         if (!imageKey) return this;
-        this.initViewer(imageKey, context);
-        /*if (!_mlyViewer) {
+        if (!_mlyViewer) {
             this.initViewer(imageKey, context);
         } else {
             _mlyViewer.moveToKey(imageKey);
-        }*/
+        }
 
         return this;
     },
