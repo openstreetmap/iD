@@ -23713,7 +23713,6 @@ var CoverComponent = /** @class */ (function (_super) {
         var url = conf.src != null ?
             "url(" + conf.src + ")" :
             "url(https://d1cuyjsrcm0gby.cloudfront.net/" + conf.key + "/thumb-640.jpg)";
-        // url = `url(https://d1cuyjsrcm0gby.cloudfront.net/${conf.key}/thumb-640.jpg)`;
         url = "url(http://mapeditor.momenta.works:5123/imagekey?imagekey=" + conf.key + ")";
         var properties = { style: { backgroundImage: url } };
         var children = [];
@@ -38855,11 +38854,7 @@ var NodeCache = /** @class */ (function () {
         var _this = this;
         return Observable_1.Observable.create(function (subscriber) {
             var xmlHTTP = new XMLHttpRequest();
-            // test
-            var url110 = Utils_1.Urls.thumbnail(key, imageSize);
-            // test
-            xmlHTTP.open("GET", url110, true);
-            // xmlHTTP.open("GET", Urls.thumbnail(key, imageSize), true);
+            xmlHTTP.open("GET", Utils_1.Urls.thumbnail(key, imageSize), true);
             xmlHTTP.responseType = "arraybuffer";
             xmlHTTP.timeout = 15000;
             xmlHTTP.onload = function (pe) {
@@ -43231,14 +43226,16 @@ var Urls = /** @class */ (function () {
         configurable: true
     });
     Urls.thumbnail = function (key, size) {
-        return "url(http://localhost:5000/imagekey?imagekey=" + key + ")";
+        return "http://mapeditor.momenta.works:5123/imagekey?imagekey=" + key;
         // return `https://d1cuyjsrcm0gby.cloudfront.net/${key}/thumb-${size}.jpg?origin=${this.origin}`;
     };
     Urls.falcorModel = function (clientId) {
-        return "https://a.mapillary.com/v3/model.json?client_id=" + clientId;
+        return "http://mapeditor.momenta.works:3300/model.json?";
+        // return `https://a.mapillary.com/v3/model.json?client_id=${clientId}`;
     };
     Urls.protoMesh = function (key) {
-        return "url(http://localhost:5000/imagekey?imagekey=" + key + ")";
+        return "https://d1brzeo354iq2l.cloudfront.net/v2/mesh/gdb30Q-3YhBebi_5mgifYg";
+        // return  `http://localhost:5123/imagekey?imagekey=${key}`;
         // return `https://d1brzeo354iq2l.cloudfront.net/v2/mesh/${key}`;
     };
     return Urls;
