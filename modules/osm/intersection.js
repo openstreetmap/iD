@@ -263,14 +263,18 @@ export function osmIntersection(graph, startVertexId) {
             vertex = vgraph.hasEntity(vertexId);
 
             if (!vertex) {
-                vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                if (vertexIds.indexOf(vertexId) !== -1) {
+                    vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                }
                 removeVertexIds.push(vertexId);
                 continue;
             }
 
             parents = vgraph.parentWays(vertex);
             if (parents.length < 3) {
-                vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                if (vertexIds.indexOf(vertexId) !== -1) {
+                    vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                }
             }
 
             if (parents.length === 2) {     // vertex with 2 parents is trivial
@@ -299,7 +303,9 @@ export function osmIntersection(graph, startVertexId) {
             parents = vgraph.parentWays(vertex);
 
             if (parents.length < 2) {     // vertex is no longer a key vertex
-                vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                if (vertexIds.indexOf(vertexId) !== -1) {
+                    vertexIds.splice(vertexIds.indexOf(vertexId), 1);   // stop checking this one
+                }
                 removeVertexIds.push(vertexId);
                 keepGoing = true;
             }
