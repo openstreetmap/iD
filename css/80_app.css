@@ -1852,8 +1852,17 @@ input[type=number] {
     right: 0;
     padding: 2px 6px;
     background-color: rgba(255, 255, 255, .8);
-    color: #999;
+    color: #888;
     text-align: center;
+}
+
+.form-field-restrictions .restriction-help span {
+    margin: 2px;
+}
+
+.form-field-restrictions .restriction-help span.qualifier {
+    color: #666;
+    font-weight: bold;
 }
 
 /* Changeset editor while comment text is empty */
