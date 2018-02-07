@@ -30,8 +30,8 @@ export function osmTurn(turn) {
 
 
 export function osmIntersection(graph, startVertexId) {
-    var vgraph = coreGraph(),  // virtual graph
-        i, j, k;
+    var vgraph = coreGraph();  // virtual graph
+    var i, j, k;
 
 
     function memberOfRestriction(entity) {
@@ -63,8 +63,9 @@ export function osmIntersection(graph, startVertexId) {
     }
 
 
-    var distCutoff = 20;  // meters
-    var checkVertices = [graph.entity(startVertexId)];
+    var distCutoff = 30;  // meters
+    var startNode = graph.entity(startVertexId);
+    var checkVertices = [startNode];
     var checkWays;
     var vertices = [];
     var vertexIds = [];
@@ -107,7 +108,8 @@ export function osmIntersection(graph, startVertexId) {
                 node = nodes[j];
                 if (node === vertex) continue;                                           // same thing
                 if (vertices.indexOf(node) !== -1) continue;                             // seen it already
-                if (node.loc && vertex.loc && geoSphericalDistance(node.loc, vertex.loc) > distCutoff) continue;   // too far
+                if (node.loc && startNode.loc &&
+                    geoSphericalDistance(node.loc, startNode.loc) > distCutoff) continue;   // too far from start
 
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
@@ -333,7 +335,7 @@ export function osmIntersection(graph, startVertexId) {
         .map(function(way) { return vgraph.entity(way.id); });
 
 
-    // STEP 8:  Extend leaf ways
+    // STEP 8:  Extend leaf ways, so they don't end within the viewer
     ways.forEach(function(way) {
         var n1, n2;
         if (way.__via) return;   // not a leaf
@@ -345,7 +347,7 @@ export function osmIntersection(graph, startVertexId) {
             n2 = vgraph.entity(way.nodes[0]);
         }
 
-        if (n1.loc && n2.loc) {
+        if (n1.loc && n2.loc && vgraph.parentWays(n2).length === 1) {
             var toLoc = geoVecInterp(n1.loc, n2.loc, 10);  // extend 1000%
             n2 = n2.move(toLoc);
             vgraph = vgraph.replace(n2);
@@ -383,7 +385,7 @@ export function osmIntersection(graph, startVertexId) {
         if (!start || !(start.__from || start.__via)) return [];
 
         var maxPathLength = 7;  // from-*-via-*-via-*-to  (2 vias max)
-        var maxStepDist = 20;   // meters
+        var maxStepDist = 30;   // meters
         var turns = [];
 
         step(start);
