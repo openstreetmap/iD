@@ -68,23 +68,38 @@ export function uiFieldRestrictions(field, context) {
 
         var vgraph = intersection.graph;
         var filter = utilFunctor(true);
-        var extent = geoExtent();
         var projection = geoRawMercator();
 
         var d = utilGetDimensions(wrap.merge(enter));
         var c = geoVecScale(d, 0.5);
-        var z = intersection.vertices.length === 1 ? 22 : 19.5;
+        var z = 22;
 
         projection.scale(geoZoomToScale(z));
 
-        // fit extent to include all key vertices
+        // Calculate extent of all key vertices
+        var extent = geoExtent();
         for (var i = 0; i < intersection.vertices.length; i++) {
             extent._extend(intersection.vertices[i].extent());
         }
-        var center = projection(extent.center());
 
+        // If this is a large intersection, adjust zoom to fit extent
+        if (intersection.vertices.length > 1) {
+            var padding = 220;
+            var tl = projection([extent[0][0], extent[1][1]]);
+            var br = projection([extent[1][0], extent[0][1]]);
+            var hFactor = (br[0] - tl[0]) / (d[0] - padding);
+            var vFactor = (br[1] - tl[1]) / (d[1] - padding);
+            var hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
+            var vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
+            z = z - Math.max(hZoomDiff, vZoomDiff);
+            projection.scale(geoZoomToScale(z));
+        }
+
+        var padTop = 30;
+        var extentCenter = projection(extent.center());
+        extentCenter[1] = extentCenter[1] - padTop;
         projection
-            .translate(geoVecSubtract(c, center))
+            .translate(geoVecSubtract(c, extentCenter))
             .clipExtent([[0, 0], d]);
 
         var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
