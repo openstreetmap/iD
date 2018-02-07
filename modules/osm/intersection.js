@@ -10,8 +10,15 @@ import {
 } from '../actions';
 
 import { coreGraph } from '../core';
-import { geoAngle, geoSphericalDistance } from '../geo';
+
+import {
+    geoAngle,
+    geoSphericalDistance,
+    geoVecInterp
+} from '../geo';
+
 import { osmEntity } from './entity';
+
 
 
 export function osmTurn(turn) {
@@ -324,6 +331,25 @@ export function osmIntersection(graph, startVertexId) {
     ways = ways
         .filter(function(way) { return removeWayIds.indexOf(way.id) === -1; })
         .map(function(way) { return vgraph.entity(way.id); });
+
+
+    // STEP 8:  Extend leaf ways
+    ways.forEach(function(way) {
+        var n1, n2;
+        if (way.__via) return;   // not a leaf
+        if (way.__first) {
+            n1 = vgraph.entity(way.nodes[way.nodes.length - 2]);
+            n2 = vgraph.entity(way.nodes[way.nodes.length - 1]);
+        } else {
+            n1 = vgraph.entity(way.nodes[1]);
+            n2 = vgraph.entity(way.nodes[0]);
+        }
+
+        var toLoc = geoVecInterp(n1.loc, n2.loc, 10);  // extend 1000%
+        n2 = n2.move(toLoc);
+        vgraph = vgraph.replace(n2);
+    });
+
 
 
     // OK!  Here is our intersection..

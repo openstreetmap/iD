@@ -8,7 +8,15 @@ import {
 import { t } from '../../util/locale';
 import { actionRestrictTurn, actionUnrestrictTurn } from '../../actions';
 import { behaviorBreathe, behaviorHover } from '../../behavior';
-import { geoExtent, geoRawMercator } from '../../geo';
+
+import {
+    geoExtent,
+    geoRawMercator,
+    geoVecScale,
+    geoVecSubtract,
+    geoZoomToScale
+} from '../../geo';
+
 import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
 import { svgLabels, svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
 import { utilRebind } from '../../util/rebind';
@@ -64,20 +72,19 @@ export function uiFieldRestrictions(field, context) {
         var projection = geoRawMercator();
 
         var d = utilGetDimensions(wrap.merge(enter));
-        var c = [d[0] / 2, d[1] / 2];
-        var z = intersection.vertices.length === 1 ? 22 : 20;
+        var c = geoVecScale(d, 0.5);
+        var z = intersection.vertices.length === 1 ? 22 : 19.5;
 
-        projection
-            .scale(256 * Math.pow(2, z) / (2 * Math.PI));
+        projection.scale(geoZoomToScale(z));
 
         // fit extent to include all key vertices
         for (var i = 0; i < intersection.vertices.length; i++) {
             extent._extend(intersection.vertices[i].extent());
         }
-        var s = projection(extent.center());
+        var center = projection(extent.center());
 
         projection
-            .translate([c[0] - s[0], c[1] - s[1]])
+            .translate(geoVecSubtract(c, center))
             .clipExtent([[0, 0], d]);
 
         var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
