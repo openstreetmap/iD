@@ -9300,7 +9300,7 @@
             "name": "Adult Gaming Center"
         },
         "leisure/amusement_arcade": {
-            "icon": "poi-dice",
+            "icon": "gaming",
             "fields": [
                 "name",
                 "operator",
