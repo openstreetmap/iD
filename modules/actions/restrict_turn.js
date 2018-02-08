@@ -27,7 +27,7 @@ import {
 // Normally, this will be undefined and the relation will automatically
 // be assigned a new ID.
 //
-export function actionRestrictTurn(turn, projection, restrictionId) {
+export function actionRestrictTurn(turn, projection, restrictionID) {
 
     return function(graph) {
         var fromWay = graph.entity(turn.from.way);
@@ -49,15 +49,10 @@ export function actionRestrictTurn(turn, projection, restrictionId) {
         members.push({ id: toWay.id, type: 'way',  role: 'to' });
 
         return graph.replace(osmRelation({
-            id: restrictionId,
+            id: restrictionID,
             tags: {
                 type: 'restriction',
-                restriction: turn.restriction ||
-                    osmInferRestriction(
-                        graph,
-                        turn.from,
-                        turn.to,
-                        projection)
+                restriction: turn.restriction || osmInferRestriction(graph, turn.from, turn.to, projection)
             },
             members: members
         }));

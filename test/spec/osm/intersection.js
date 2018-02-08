@@ -338,7 +338,7 @@ describe('iD.osmIntersection', function() {
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=,*,-');
             expect(turns[1].u).to.be.not.ok;
-            expect(turns[1].restriction).to.eql('r');
+            expect(turns[1].restrictionID).to.eql('r');
             expect(turns[1].direct).to.be.true;
             expect(turns[1].indirect).to.be.not.ok;
             expect(turns[1].only).to.be.not.ok;
@@ -372,7 +372,7 @@ describe('iD.osmIntersection', function() {
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
             expect(turns[1].key).to.eql('=,*,~');
-            expect(turns[1].restriction).to.eql('r');
+            expect(turns[1].restrictionID).to.eql('r');
             expect(turns[1].u).to.be.not.ok;
             expect(turns[1].direct).to.be.not.ok;
             expect(turns[1].indirect).to.be.true;
@@ -380,7 +380,7 @@ describe('iD.osmIntersection', function() {
 
             expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
             expect(turns[2].key).to.eql('=,*,-');
-            expect(turns[2].restriction).to.eql('r');
+            expect(turns[2].restrictionID).to.eql('r');
             expect(turns[2].u).to.be.not.ok;
             expect(turns[2].direct).to.be.not.ok;
             expect(turns[2].indirect).to.be.not.ok;

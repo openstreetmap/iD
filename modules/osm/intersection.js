@@ -471,7 +471,7 @@ export function osmIntersection(graph, startVertexId) {
                     var turn = pathToTurn(currPath);
                     if (turn) {
                         if (matchedRestriction) {
-                            turn.restriction = matchedRestriction.id;
+                            turn.restrictionID = matchedRestriction.id;
                             turn.only = matchedRestriction.only;
                             turn.direct = matchedRestriction.direct;
                             turn.indirect = matchedRestriction.indirect;

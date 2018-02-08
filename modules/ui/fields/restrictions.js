@@ -1,3 +1,5 @@
+import _cloneDeep from 'lodash-es/cloneDeep';
+
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
@@ -206,7 +208,18 @@ export function uiFieldRestrictions(field, context) {
 
             } else if (datum instanceof osmTurn) {
                 var actions;
-                if (datum.restriction) {
+                datum.restriction = osmInferRestriction(vgraph, datum.from, datum.to, projection);
+
+                if (datum.restrictionID && !datum.only) {      // cycle thru the `only_` state
+                    var datumOnly = _cloneDeep(datum);
+                    datumOnly.only = true;
+                    datumOnly.restriction = datumOnly.restriction.replace(/^no\_/, 'only_');
+                    actions = _intersection.actions.concat([
+                        actionUnrestrictTurn(datum, projection),
+                        actionRestrictTurn(datumOnly, projection),
+                        t('operations.restriction.annotation.create')
+                    ]);
+                } else if (datum.restrictionID) {
                     actions = _intersection.actions.concat([
                         actionUnrestrictTurn(datum, projection),
                         t('operations.restriction.annotation.delete')
@@ -250,14 +263,14 @@ export function uiFieldRestrictions(field, context) {
                     .classed('related', true);
 
                 var turnType = {
-                    'no_left_turn': 'Left Turns',
-                    'no_right_turn': 'Right Turns',
-                    'no_u_turn': 'U-Turns',
+                    'no_left_turn': 'Left Turn',
+                    'no_right_turn': 'Right Turn',
+                    'no_u_turn': 'U-Turn',
                     'no_straight_on': 'Continuing'
                 }[osmInferRestriction(vgraph, datum.from, datum.to, projection)];
 
                 var restrictType = 'IS';
-                if (datum.restriction) {
+                if (datum.restrictionID) {
                     if (datum.only)      { restrictType = 'IS ONLY'; }
                     if (datum.direct)    { restrictType = 'IS NOT'; }
                     if (datum.indirect)  { restrictType = 'IS NOT '; }
