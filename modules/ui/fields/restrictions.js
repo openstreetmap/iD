@@ -52,8 +52,9 @@ export function uiFieldRestrictions(field, context) {
     var breathe = behaviorBreathe(context);
     var hover = behaviorHover(context);
 
+    var _detail = 0;
     var _initialized = false;
-    var _wrap = d3_select(null);
+    var _container = d3_select(null);
     var _graph;
     var _vertexID;
     var _intersection;
@@ -71,27 +72,72 @@ export function uiFieldRestrictions(field, context) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        _wrap = wrap.enter()
+        wrap = wrap.enter()
             .append('div')
             .attr('class', 'preset-input-wrap')
             .merge(wrap);
 
-        var help = _wrap.selectAll('.restriction-help')
+        var detailEnter = wrap.selectAll('.restriction-detail')
+            .data([0])
+            .enter()
+            .append('div')
+            .attr('class', 'restriction-detail');
+
+        detailEnter
+            .append('span')
+            .attr('class', 'restriction-detail-label')
+            .text('Max Detail: ');
+
+        detailEnter
+            .append('input')
+            .attr('class', 'restriction-detail-input')
+            .attr('type', 'range')
+            .attr('min', '0')
+            .attr('max', '2')
+            .attr('step', '1')
+            .on('input', function(d) {
+                var val = d3_select(this).property('value');
+                _detail = +val;
+                _intersection = null;
+                _container.selectAll('.layer-osm *').remove();
+                selection.call(restrictions);
+            });
+
+        detailEnter
+            .append('span')
+            .attr('class', 'restriction-detail-text');
+
+        // update
+        wrap.selectAll('.restriction-detail-input')
+            .property('value', _detail);
+
+        var t = ['via node only', 'via 1 way', 'via 2 ways'];
+        wrap.selectAll('.restriction-detail-text')
+            .text(t[_detail]);
+
+
+        var container = wrap.selectAll('.restriction-container')
             .data([0]);
 
-        help.enter()
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'restriction-container');
+
+        containerEnter
             .append('div')
             .attr('class', 'restriction-help');
 
+        _container = containerEnter
+            .merge(container);
 
         // try to reuse the intersection, but always rebuild it if the graph has changed
         if (context.graph() !== _graph || !_intersection) {
             _graph = context.graph();
-            _intersection = osmIntersection(_graph, _vertexID);
+            _intersection = osmIntersection(_graph, _vertexID, _detail);
         }
         var ok = (_intersection.vertices.length && _intersection.ways.length);
 
-        _wrap
+        _container
             .call(renderViewer);
     }
 
@@ -103,7 +149,7 @@ export function uiFieldRestrictions(field, context) {
         var filter = utilFunctor(true);
         var projection = geoRawMercator();
 
-        var d = utilGetDimensions(_wrap);
+        var d = utilGetDimensions(_container);
         var c = geoVecScale(d, 0.5);
         var z = 22;
 
@@ -155,17 +201,12 @@ export function uiFieldRestrictions(field, context) {
                 .call(breathe)
                 .call(hover);
 
-// entity editor will redraw all fields anyway?
-            // context.history()
-            //     .on('change.restrictions', redraw);
-
             d3_select(window)
                 .on('resize.restrictions', function() {
-                    utilSetDimensions(_wrap, null);
+                    utilSetDimensions(_container, null);
                     redraw();
                 });
         }
-
 
         surface
             .call(utilSetDimensions, d)
@@ -240,7 +281,7 @@ export function uiFieldRestrictions(field, context) {
 
 
         function mouseover() {
-            var help = _wrap.selectAll('.restriction-help').html('');
+            var help = _container.selectAll('.restriction-help').html('');
             var div, d;
 
             var datum = d3_event.target.__data__;
@@ -321,7 +362,7 @@ export function uiFieldRestrictions(field, context) {
                 //     ' VIA ' + (datum.via.node || datum.via.ways.join(',')) +
                 //     ' TO ' + datum.to.way;
 
-                // _wrap.selectAll('.restriction-help')
+                // _container.selectAll('.restriction-help')
                 //     .text(str);
 
 // return;
@@ -341,7 +382,7 @@ export function uiFieldRestrictions(field, context) {
             //         );
             //     }
 
-            //     _wrap.selectAll('.restriction-help')
+            //     _container.selectAll('.restriction-help')
             //         .text(t('operations.restriction.help.' +
             //             (datum.restriction ? 'toggle_off' : 'toggle_on'),
             //             { restriction: preset.name() })
@@ -351,7 +392,7 @@ export function uiFieldRestrictions(field, context) {
 
 
         function mouseout() {
-            var help = _wrap.selectAll('.restriction-help').html('');
+            var help = _container.selectAll('.restriction-help').html('');
             var div = help.append('div');
             var d;
 
@@ -366,7 +407,7 @@ export function uiFieldRestrictions(field, context) {
                 div.append('span').text('way');
             }
 
-            // _wrap.selectAll('.restriction-help')
+            // _container.selectAll('.restriction-help')
             //     .text(t('operations.restriction.help.' +
             //         (_fromWayID ? 'toggle' : 'select'))
             //     );
@@ -375,7 +416,7 @@ export function uiFieldRestrictions(field, context) {
 
         function redraw() {
             if (context.hasEntity(_vertexID)) {
-                _wrap.call(renderViewer);
+                _container.call(renderViewer);
             }
         }
     }
@@ -411,9 +452,6 @@ export function uiFieldRestrictions(field, context) {
             .on('click.restrictions', null)
             .on('mouseover.restrictions', null)
             .on('mouseout.restrictions', null);
-
-        // context.history()
-        //     .on('change.restrictions', null);
 
         d3_select(window)
             .on('resize.restrictions', null);

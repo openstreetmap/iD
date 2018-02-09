@@ -29,7 +29,12 @@ export function osmTurn(turn) {
 }
 
 
-export function osmIntersection(graph, startVertexId) {
+//
+// detail = 0     - via node only
+// detail = 1     - via node / 1 via way
+// detail = 2     - via node / up to 2 via ways
+//
+export function osmIntersection(graph, startVertexId, detail) {
     var vgraph = coreGraph();  // virtual graph
     var i, j, k;
 
@@ -101,6 +106,7 @@ export function osmIntersection(graph, startVertexId) {
 
             ways.push(way);   // it's a road, or it's already in a turn restriction
             hasWays = true;
+            if (!detail) continue;
 
             // check the way's children for more key vertices
             nodes = _uniq(graph.childNodes(way));
@@ -384,7 +390,10 @@ export function osmIntersection(graph, startVertexId) {
         var start = vgraph.entity(fromWayId);
         if (!start || !(start.__from || start.__via)) return [];
 
-        var maxPathLength = 7;  // from-*-via-*-via-*-to  (2 vias max)
+        // detail=0   from-*-to              (0 vias)
+        // detail=1   from-*-via-*-to        (1 via max)
+        // detail=2   from-*-via-*-via-*-to  (2 vias max)
+        var maxPathLength = (detail * 2) + 3;
         var maxStepDist = 30;   // meters
         var turns = [];
 

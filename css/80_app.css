@@ -1834,7 +1834,11 @@ input[type=number] {
 
 /* Restrictions editor */
 
-.form-field-restrictions .preset-input-wrap {
+.form-field-restrictions .restriction-detail {
+    height: 30px;
+}
+
+.form-field-restrictions .restriction-container {
     position: relative;
     height: 400px;
 }
@@ -1844,7 +1848,7 @@ input[type=number] {
     height: 100%;
 }
 
-.form-field-restrictions .restriction-help {
+.restriction-container .restriction-help {
     z-index: 1;
     position: absolute;
     top: 0;
@@ -1856,11 +1860,11 @@ input[type=number] {
     text-align: center;
 }
 
-.form-field-restrictions .restriction-help span {
+.restriction-help span {
     margin: 2px;
 }
 
-.form-field-restrictions .restriction-help span.qualifier {
+.restriction-help span.qualifier {
     color: #666;
     font-weight: bold;
 }
