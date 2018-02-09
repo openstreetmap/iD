@@ -320,24 +320,29 @@ export function uiFieldRestrictions(field, context) {
                     'no_straight_on': 'Continuing'
                 }[osmInferRestriction(vgraph, datum.from, datum.to, projection)];
 
-                var restrictType = 'IS';
+                var restrictType = '';
+                var klass = 'allow';
                 if (datum.restrictionID) {
-                    if (datum.only)      { restrictType = 'IS ONLY'; }
-                    if (datum.direct)    { restrictType = 'IS NOT'; }
-                    if (datum.indirect)  { restrictType = 'IS NOT '; }
+                    if (datum.direct)    { restrictType = 'NO'; klass = 'restrict'; }
+                    if (datum.indirect)  { restrictType = 'NO'; klass = 'restrict'; }
+                    if (datum.only)      { restrictType = 'ONLY'; klass = 'only'; }
                 }
 
+                var s = (klass === 'allow' ? turnType + ' Allowed' : restrictType + ' ' + turnType);
 
-                d = display(vgraph.entity(datum.from.way), vgraph);
                 div = help.append('div');
-                div.append('span').text(turnType);
-                // div.append('span').text('Travel');
+                div.append('span')
+                    .attr('class', 'qualifier ' + klass)
+                    .text(s);
+
+                div = help.append('div');
+                d = display(vgraph.entity(datum.from.way), vgraph);
                 div.append('span').attr('class', 'qualifier').text('FROM');
                 div.append('span').text(d.name || d.type);
-                div.append('span').attr('class', 'qualifier').text(restrictType);
-                div.append('span').text('allowed...');
 
-                div = help.append('div');
+                d = display(vgraph.entity(datum.to.way), vgraph);
+                div.append('span').attr('class', 'qualifier').text('TO');
+                div.append('span').text(d.name || d.type);
 
                 if (datum.via.ways) {
                     div = help.append('div');
@@ -354,9 +359,6 @@ export function uiFieldRestrictions(field, context) {
                         prev = curr;
                     }
                 }
-                d = display(vgraph.entity(datum.to.way), vgraph);
-                div.append('span').attr('class', 'qualifier').text('TO');
-                div.append('span').text(d.name || d.type);
 
 
                 //DEBUG

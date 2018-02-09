@@ -1875,6 +1875,15 @@ input[type=number] {
     color: #666;
     font-weight: bold;
 }
+.restriction-help span.qualifier.allow {
+    color: #8cd05f;
+}
+.restriction-help span.qualifier.restrict {
+    color: #e06d5f;
+}
+.restriction-help span.qualifier.only {
+    color: #7092ff;
+}
 
 /* Changeset editor while comment text is empty */
 
