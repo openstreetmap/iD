@@ -51,8 +51,9 @@ export function uiFieldRestrictions(field, context) {
     var dispatch = d3_dispatch('change');
     var breathe = behaviorBreathe(context);
     var hover = behaviorHover(context);
+    var storedDetail = context.storage('turn-restriction-detail');
 
-    var _detail = 0;
+    var _detail = storedDetail !== null ? (+storedDetail) : 0;
     var _initialized = false;
     var _container = d3_select(null);
     var _graph;
@@ -95,11 +96,12 @@ export function uiFieldRestrictions(field, context) {
             .attr('min', '0')
             .attr('max', '2')
             .attr('step', '1')
-            .on('input', function(d) {
+            .on('input', function() {
                 var val = d3_select(this).property('value');
                 _detail = +val;
                 _intersection = null;
                 _container.selectAll('.layer-osm *').remove();
+                context.storage('turn-restriction-detail', _detail);
                 selection.call(restrictions);
             });
 
@@ -135,6 +137,7 @@ export function uiFieldRestrictions(field, context) {
             _graph = context.graph();
             _intersection = osmIntersection(_graph, _vertexID, _detail);
         }
+
         var ok = (_intersection.vertices.length && _intersection.ways.length);
 
         _container
@@ -206,6 +209,13 @@ export function uiFieldRestrictions(field, context) {
                     utilSetDimensions(_container, null);
                     redraw();
                 });
+        }
+
+
+        // This can happen if we've lowered the detail while a FROM way
+        // is selected, and that way is no longer part of the intersection.
+        if (_fromWayID && !vgraph.hasEntity(_fromWayID)) {
+            _fromWayID = null;
         }
 
         surface

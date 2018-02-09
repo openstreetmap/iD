@@ -1835,7 +1835,14 @@ input[type=number] {
 /* Restrictions editor */
 
 .form-field-restrictions .restriction-detail {
+    padding: 5px 10px;
+    background-color: #fff;
     height: 30px;
+}
+
+.restriction-detail input {
+    margin: 0px 10px;
+    vertical-align: middle;
 }
 
 .form-field-restrictions .restriction-container {
