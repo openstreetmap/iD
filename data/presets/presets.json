@@ -8241,6 +8241,8 @@
             "icon": "landmark",
             "fields": [
                 "name",
+                "religion",
+                "denomination"
                 "inscription"
             ],
             "geometry": [
