@@ -8242,7 +8242,7 @@
             "fields": [
                 "name",
                 "religion",
-                "denomination"
+                "denomination",
                 "inscription"
             ],
             "geometry": [
