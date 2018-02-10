@@ -29,12 +29,7 @@ export function osmTurn(turn) {
 }
 
 
-//
-// detail = 0     - via node only
-// detail = 1     - via node / 1 via way
-// detail = 2     - via node / up to 2 via ways
-//
-export function osmIntersection(graph, startVertexId, detail) {
+export function osmIntersection(graph, startVertexId) {
     var vgraph = coreGraph();  // virtual graph
     var i, j, k;
 
@@ -106,7 +101,6 @@ export function osmIntersection(graph, startVertexId, detail) {
 
             ways.push(way);   // it's a road, or it's already in a turn restriction
             hasWays = true;
-            if (!detail) continue;
 
             // check the way's children for more key vertices
             nodes = _uniq(graph.childNodes(way));
@@ -380,8 +374,13 @@ export function osmIntersection(graph, startVertexId, detail) {
     //
     // For each path found, generate and return a `osmTurn` datastructure.
     //
-    intersection.turns = function(fromWayId) {
+    // detail = 0     - via node only
+    // detail = 1     - via node / 1 via way
+    // detail = 2     - via node / up to 2 via ways
+    //
+    intersection.turns = function(fromWayId, detail) {
         if (!fromWayId) return [];
+        if (!detail) detail = 0;
 
         var vgraph = intersection.graph;
         var keyVertexIds = intersection.vertices.map(function(v) { return v.id; });

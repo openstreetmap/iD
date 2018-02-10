@@ -63,12 +63,33 @@ export function uiFieldRestrictions(field, context) {
 
 
     function restrictions(selection) {
+        // try to reuse the intersection, but always rebuild it if the graph has changed
+        if (_vertexID && (context.graph() !== _graph || !_intersection)) {
+            _graph = context.graph();
+            _intersection = osmIntersection(_graph, _vertexID);
+        }
+
+        // It's possible for there to be no actual intersection here.
+        // for example, a vertex of two `highway=path`
+        // In this case, hide the field.
+        var isOK = (_intersection && _intersection.vertices.length && _intersection.ways.length);
+        d3_select(selection.node().parentNode).classed('hide', !isOK)
+
         // if form field is hidden or has detached from dom, clean up.
-        if (!d3_select('.inspector-wrap.inspector-hidden').empty() ||
-            !selection.node().parentNode || !selection.node().parentNode.parentNode) {
+        if (!isOK ||
+            !d3_select('.inspector-wrap.inspector-hidden').empty() ||
+            !selection.node().parentNode ||
+            !selection.node().parentNode.parentNode) {
             selection.call(restrictions.off);
             return;
         }
+
+
+
+
+        var isComplex = (isOK && _intersection.vertices.length > 1);
+
+
 
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
@@ -78,18 +99,22 @@ export function uiFieldRestrictions(field, context) {
             .attr('class', 'preset-input-wrap')
             .merge(wrap);
 
-        var detailEnter = wrap.selectAll('.restriction-detail')
-            .data([0])
-            .enter()
+        var detailControl = wrap.selectAll('.restriction-detail')
+            .data(isComplex ? [0]: []);
+
+        detailControl.exit()
+            .remove();
+
+        var detailControlEnter = detailControl.enter()
             .append('div')
             .attr('class', 'restriction-detail');
 
-        detailEnter
+        detailControlEnter
             .append('span')
             .attr('class', 'restriction-detail-label')
             .text('Max Detail: ');
 
-        detailEnter
+        detailControlEnter
             .append('input')
             .attr('class', 'restriction-detail-input')
             .attr('type', 'range')
@@ -99,13 +124,12 @@ export function uiFieldRestrictions(field, context) {
             .on('input', function() {
                 var val = d3_select(this).property('value');
                 _detail = +val;
-                _intersection = null;
-                _container.selectAll('.layer-osm *').remove();
+                _container.selectAll('.layer-osm .layer-turns *').remove();
                 context.storage('turn-restriction-detail', _detail);
                 selection.call(restrictions);
             });
 
-        detailEnter
+        detailControlEnter
             .append('span')
             .attr('class', 'restriction-detail-text');
 
@@ -131,14 +155,6 @@ export function uiFieldRestrictions(field, context) {
 
         _container = containerEnter
             .merge(container);
-
-        // try to reuse the intersection, but always rebuild it if the graph has changed
-        if (context.graph() !== _graph || !_intersection) {
-            _graph = context.graph();
-            _intersection = osmIntersection(_graph, _vertexID, _detail);
-        }
-
-        var ok = (_intersection.vertices.length && _intersection.ways.length);
 
         _container
             .call(renderViewer);
@@ -177,7 +193,7 @@ export function uiFieldRestrictions(field, context) {
             projection.scale(geoZoomToScale(z));
         }
 
-        var padTop = 30;   // reserve top space for hints
+        var padTop = 30;   // reserve top space for hint text
         var extentCenter = projection(extent.center());
         extentCenter[1] = extentCenter[1] - padTop;
 
@@ -222,7 +238,7 @@ export function uiFieldRestrictions(field, context) {
             .call(utilSetDimensions, d)
             .call(drawVertices, vgraph, _intersection.vertices, filter, extent, z)
             .call(drawLines, vgraph, _intersection.ways, filter)
-            .call(drawTurns, vgraph, _intersection.turns(_fromWayID));
+            .call(drawTurns, vgraph, _intersection.turns(_fromWayID, _detail));
 
         surface
             .on('click.restrictions', click)
