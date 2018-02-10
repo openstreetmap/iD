@@ -1841,6 +1841,7 @@ input[type=number] {
 }
 
 .restriction-detail input {
+    width: 60px;
     margin: 0px 10px;
     vertical-align: middle;
 }
@@ -1876,13 +1877,13 @@ input[type=number] {
     font-weight: bold;
 }
 .restriction-help span.qualifier.allow {
-    color: #8cd05f;
+    color: #8b5;
 }
 .restriction-help span.qualifier.restrict {
-    color: #e06d5f;
+    color: #d76;
 }
 .restriction-help span.qualifier.only {
-    color: #7092ff;
+    color: #78f;
 }
 
 /* Changeset editor while comment text is empty */

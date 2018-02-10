@@ -73,7 +73,7 @@ export function uiFieldRestrictions(field, context) {
         // for example, a vertex of two `highway=path`
         // In this case, hide the field.
         var isOK = (_intersection && _intersection.vertices.length && _intersection.ways.length);
-        d3_select(selection.node().parentNode).classed('hide', !isOK)
+        d3_select(selection.node().parentNode).classed('hide', !isOK);
 
         // if form field is hidden or has detached from dom, clean up.
         if (!isOK ||
@@ -85,12 +85,6 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-
-
-        var isComplex = (isOK && _intersection.vertices.length > 1);
-
-
-
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
@@ -98,6 +92,8 @@ export function uiFieldRestrictions(field, context) {
             .append('div')
             .attr('class', 'preset-input-wrap')
             .merge(wrap);
+
+        var isComplex = (isOK && _intersection.vertices.length > 1);
 
         var detailControl = wrap.selectAll('.restriction-detail')
             .data(isComplex ? [0]: []);
@@ -333,7 +329,7 @@ export function uiFieldRestrictions(field, context) {
                     'no_left_turn': 'Left Turn',
                     'no_right_turn': 'Right Turn',
                     'no_u_turn': 'U-Turn',
-                    'no_straight_on': 'Continuing'
+                    'no_straight_on': 'Straight On'
                 }[osmInferRestriction(vgraph, datum.from, datum.to, projection)];
 
                 var restrictType = '';
