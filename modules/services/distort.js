@@ -38,22 +38,22 @@ export function AddDistortion(points, plateno){
     var K = config[indexK],
         distortMatrix = config[indexDist];
     return points.map(function(value) {
-        let fx = K[0];
-        let cx = K[2];
-        let fy = K[4];
-        let cy = K[5];
-        let k1 = distortMatrix[0],
+        var fx = K[0];
+        var cx = K[2];
+        var fy = K[4];
+        var cy = K[5];
+        var k1 = distortMatrix[0],
             k2 = distortMatrix[1],
             p1 = distortMatrix[2],
             p2 = distortMatrix[3],
             k3 = distortMatrix[4];
-        let x = (value[0] - cx) / fx;
-        let y = (value[1] - cy) / fy;
-        let r2 = x*x + y*y;
-        let xn = x * (1 + k1*r2 + k2*r2*r2 + k3*r2*r2*r2) + 2*p1*x*y + p2 * (r2 + 2*x*x);
-        let yn = y * (1 + k1*r2 + k2*r2*r2 + k3*r2*r2*r2) + p1 * (r2 + 2*y*y) + 2*p2*x*y;
-        let orig_x = xn * fx + cx;
-        let orig_y = yn * fy + cy;
+        var x = (value[0] - cx) / fx;
+        var y = (value[1] - cy) / fy;
+        var r2 = x*x + y*y;
+        var xn = x * (1 + k1*r2 + k2*r2*r2 + k3*r2*r2*r2) + 2*p1*x*y + p2 * (r2 + 2*x*x);
+        var yn = y * (1 + k1*r2 + k2*r2*r2 + k3*r2*r2*r2) + p1 * (r2 + 2*y*y) + 2*p2*x*y;
+        var orig_x = xn * fx + cx;
+        var orig_y = yn * fy + cy;
         return [orig_x, orig_y];
     });
     
