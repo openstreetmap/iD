@@ -808,10 +808,10 @@ export default {
                 detectionKey + '?' + utilQsString({
                     client_id: clientId,
                 });
-            url = 'http://127.0.0.1:5123/detection?imagekey=' + detectionKey;
+            //url = 'http://127.0.0.1:5123/detection?imagekey=' + detectionKey;
 
             _forEach(tagArr, function(value, key){
-                url = 'http://127.0.0.1:5123/detection?imagekey=' + detectionKey + '&tag=json_' + key;
+                url = 'http://mapeditor.momenta.works:5123/detection?imagekey=' + detectionKey + '&tag=json_' + key;
                 d3_request(url)
                     .mimeType('application/json')
                     .response(function(xhr) {
