@@ -27,6 +27,7 @@ import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
+import { AddDistortion } from './distort';
 
 
 var apibase = 'https://a.mapillary.com/v3/',
@@ -636,7 +637,7 @@ export default {
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
                 .text('mapillary.com');
 
-            this.updateDetections(d);
+            this.updateDetections1(d);
         }
 
         return this;
@@ -785,6 +786,113 @@ export default {
             }
 
             return tag;
+        }
+    },
+
+    updateDetections1: function(d) {
+        if (!_mlyViewer) return;
+
+        var imageKey = d && d.key;
+        var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
+
+        var plateno = d.captured_by;
+        var tagArr = {
+            'trafficsign' : 'traffisign',
+            'lane' : 'lanes',
+            'line' : 'line'
+        }
+        loadDetection(imageKey);
+
+        function loadDetection(detectionKey) {
+            var url = 'http://127.0.0.1:5123/' + 'detections/'+
+                detectionKey + '?' + utilQsString({
+                    client_id: clientId,
+                });
+            url = 'http://127.0.0.1:5123/detection?imagekey=' + detectionKey;
+
+            _forEach(tagArr, function(value, key){
+                url = 'http://127.0.0.1:5123/detection?imagekey=' + detectionKey + '&tag=json_' + key;
+                d3_request(url)
+                    .mimeType('application/json')
+                    .response(function(xhr) {
+                        return JSON.parse(xhr.responseText);
+                    })
+                    .get(function(err, data) {
+                        if (!data || !data[key + '_num'] || data[key + '_num'] === 0 ) return;
+
+                        _forEach(data[value], function(val){
+                            var tag = makeTag(val, value, plateno);
+                            if (tag) {
+                                var tagComponent = _mlyViewer.getComponent('tag');
+                                tagComponent.add([tag]);
+                            }
+                        });
+
+                    });
+            });
+        }
+
+
+        function makeTag(data, tagType, plateno) {
+            var imageWidth = 1920;
+            var imageHeight = 1200;
+
+            var text = data.trackid;
+            var tag;
+            var points = [];
+            switch (tagType) {
+                case tagArr.trafficsign: {
+                    var coordinates = data.rect;
+                    points.push([coordinates.left,coordinates.bottom]);
+                    points.push([coordinates.right,coordinates.bottom]);
+                    points.push([coordinates.right,coordinates.top]);
+                    points.push([coordinates.left,coordinates.top]);
+                    points.push([coordinates.left,coordinates.bottom]);
+                    break;
+                }
+                case tagArr.line:
+                case tagArr.lane: {
+                    if (!data.points) return;
+                    _forEach(data.points, function(point){
+                        points.push([point.x,point.y]);
+                    });
+                    points = _filter(points, function(point){
+                        return point[0] >= 0 && point[1] >= 0 && point[0] <=imageWidth && point[1] <=imageHeight;
+                    });
+                    for (let i = points.length -1; i >=0; i--){
+                        points.push([points[i][0] + 1,points[i][1]]);
+                    }
+                    points.push(points[0]);
+                    break;
+                }
+
+                default:{
+                    console.log('Unknown type');
+                    return;
+                }
+            }
+            points = AddDistortion(points, plateno);
+            points = points.map(function(value){
+                return [value[0]/imageWidth, value[1]/imageHeight];
+            })
+            var polygonGeometry = new Mapillary
+                .TagComponent
+                .PolygonGeometry(points);
+            tag = new Mapillary.TagComponent.OutlineTag(
+                text,
+                polygonGeometry,
+                {
+                    text: text,
+                    textColor: 0xffff00,
+                    lineColor: 0xffff00,
+                    lineWidth: 2,
+                    fillColor: 0xffff00,
+                    fillOpacity: 0.3,
+                }
+            );
+            return tag;
+
+
         }
     },
 
