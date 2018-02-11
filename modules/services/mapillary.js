@@ -859,7 +859,7 @@ export default {
                     points = _filter(points, function(point){
                         return point[0] >= 0 && point[1] >= 0 && point[0] <=imageWidth && point[1] <=imageHeight;
                     });
-                    for (let i = points.length -1; i >=0; i--){
+                    for (var i = points.length -1; i >=0; i--){
                         points.push([points[i][0] + 1,points[i][1]]);
                     }
                     points.push(points[0]);
