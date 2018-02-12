@@ -604,7 +604,9 @@ export function osmInferRestriction(graph, from, to, projection) {
     if (fromNode === toNode)
         return 'no_u_turn';
     if ((angle < 23 || angle > 336) && fromOneWay && toOneWay)
-        return 'no_u_turn';
+        return 'no_u_turn';   // wider tolerance for u-turn if both ways are oneway
+    if ((angle < 40 || angle > 319) && fromOneWay && toOneWay && from.vertex !== to.vertex)
+        return 'no_u_turn';   // even wider tolerance for u-turn if there is a via way (from !== to)
     if (angle < 158)
         return 'no_right_turn';
     if (angle > 202)
