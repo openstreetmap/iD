@@ -296,4 +296,4 @@ var id = iD.Context()
 
 ```
 
-This should be set with caution for performance reasons. The OpenStreetMap API has a limitation of 50000 nodes per request.
+This should be set with caution for performance reasons. The OpenStreetMap API has a limitation of 10000 nodes per request.
