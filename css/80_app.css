@@ -1883,7 +1883,7 @@ input[type=number] {
 div.combobox {
     z-index: 9999;
     display: none;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    box-shadow: 0 4px 10px 1px rgba(0,0,0,.2);
     margin-top: -1px;
     background: white;
     max-height: 120px;
@@ -1896,7 +1896,7 @@ div.combobox {
 .combobox a {
     display: block;
     padding: 5px 10px;
-    border-top:1px solid #ccc;
+    border-top: 1px solid #ccc;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -1909,6 +1909,7 @@ div.combobox {
 
 .combobox a:first-child {
     border-top: 0;
+    padding: 4px 10px;
 }
 
 .combobox-caret {

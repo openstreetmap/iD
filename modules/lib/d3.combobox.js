@@ -265,8 +265,8 @@ export function d3combobox() {
             var rect = node.getBoundingClientRect();
 
             wrapper
-                .style('left', rect.left + 'px')
-                .style('width', rect.width + 'px')
+                .style('left', (rect.left + 5) + 'px')
+                .style('width', (rect.width - 10) + 'px')
                 .style('top', rect.height + rect.top + 'px');
         }
 
