@@ -178,7 +178,7 @@ export function uiFieldRestrictions(field, context) {
 
         // If this is a large intersection, adjust zoom to fit extent
         if (_intersection.vertices.length > 1) {
-            var padding = 220;
+            var padding = 150;   // in z22 pixels
             var tl = projection([extent[0][0], extent[1][1]]);
             var br = projection([extent[1][0], extent[0][1]]);
             var hFactor = (br[0] - tl[0]) / (d[0] - padding);

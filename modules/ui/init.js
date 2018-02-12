@@ -68,7 +68,7 @@ export function uiInit(context) {
         container
             .append('div')
             .attr('id', 'sidebar')
-            .attr('class', 'col5')
+            .attr('class', 'col4')
             .call(ui.sidebar);
 
         var content = container
@@ -94,7 +94,7 @@ export function uiInit(context) {
 
         bar
             .append('div')
-            .attr('class', 'spacer col5');
+            .attr('class', 'spacer col4');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');

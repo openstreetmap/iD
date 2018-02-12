@@ -69,7 +69,7 @@ export function svgTurns(projection) {
                 var p = projection(v.loc);
                 var q = projection(t.loc);
                 var mid = geoVecLength(p, q) / 2;
-                var r = turn.u ? 0 : Math.min(mid, 40);
+                var r = turn.u ? 0 : Math.min(mid, 50);
 
                 return 'translate(' + (r * Math.cos(a) + p[0]) + ',' + (r * Math.sin(a) + p[1]) + ') ' +
                     'rotate(' + a * 180 / Math.PI + ')';
