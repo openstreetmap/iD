@@ -63,13 +63,17 @@ export function svgTurns(projection) {
 
         groups
             .attr('transform', function (turn) {
+                var pxOffset = 50;
+                var way = graph.entity(turn.to.way);
                 var t = graph.entity(turn.to.node);
                 var v = graph.entity(turn.to.vertex);
                 var a = geoAngle(v, t, projection);
                 var p = projection(v.loc);
                 var q = projection(t.loc);
-                var mid = geoVecLength(p, q) / 2;
-                var r = turn.u ? 0 : Math.min(mid, 50);
+                var mid = geoVecLength(p, q) / 2;    // midpoint of destination way
+                var r = turn.u ? 0
+                    : !way.__via ? pxOffset          // leaf way: put marker at pxOffset
+                    : Math.min(mid, pxOffset);       // via way: prefer pxOffset, fallback to midpoint
 
                 return 'translate(' + (r * Math.cos(a) + p[0]) + ',' + (r * Math.sin(a) + p[1]) + ') ' +
                     'rotate(' + a * 180 / Math.PI + ')';
