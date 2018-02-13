@@ -29,8 +29,9 @@ export function osmTurn(turn) {
 }
 
 
-export function osmIntersection(graph, startVertexId) {
-    var vgraph = coreGraph();  // virtual graph
+export function osmIntersection(graph, startVertexId, maxDistance) {
+    maxDistance = maxDistance || 30;    // in meters
+    var vgraph = coreGraph();           // virtual graph
     var i, j, k;
 
 
@@ -63,7 +64,6 @@ export function osmIntersection(graph, startVertexId) {
     }
 
 
-    var distCutoff = 30;  // meters
     var startNode = graph.entity(startVertexId);
     var checkVertices = [startNode];
     var checkWays;
@@ -109,7 +109,7 @@ export function osmIntersection(graph, startVertexId) {
                 if (node === vertex) continue;                                           // same thing
                 if (vertices.indexOf(node) !== -1) continue;                             // seen it already
                 if (node.loc && startNode.loc &&
-                    geoSphericalDistance(node.loc, startNode.loc) > distCutoff) continue;   // too far from start
+                    geoSphericalDistance(node.loc, startNode.loc) > maxDistance) continue;   // too far from start
 
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
@@ -355,7 +355,6 @@ export function osmIntersection(graph, startVertexId) {
     });
 
 
-
     // OK!  Here is our intersection..
     var intersection = {
         graph: vgraph,
@@ -374,13 +373,9 @@ export function osmIntersection(graph, startVertexId) {
     //
     // For each path found, generate and return a `osmTurn` datastructure.
     //
-    // detail = 0     - via node only
-    // detail = 1     - via node / 1 via way
-    // detail = 2     - via node / up to 2 via ways
-    //
-    intersection.turns = function(fromWayId, detail) {
+    intersection.turns = function(fromWayId, maxViaWay) {
         if (!fromWayId) return [];
-        if (!detail) detail = 0;
+        if (!maxViaWay) maxViaWay = 0;
 
         var vgraph = intersection.graph;
         var keyVertexIds = intersection.vertices.map(function(v) { return v.id; });
@@ -389,11 +384,11 @@ export function osmIntersection(graph, startVertexId) {
         var start = vgraph.entity(fromWayId);
         if (!start || !(start.__from || start.__via)) return [];
 
-        // detail=0   from-*-to              (0 vias)
-        // detail=1   from-*-via-*-to        (1 via max)
-        // detail=2   from-*-via-*-via-*-to  (2 vias max)
-        var maxPathLength = (detail * 2) + 3;
-        var maxStepDist = 30;   // meters
+        // maxViaWay=0   from-*-to              (0 vias)
+        // maxViaWay=1   from-*-via-*-to        (1 via max)
+        // maxViaWay=2   from-*-via-*-via-*-to  (2 vias max)
+        var maxPathLength = (maxViaWay * 2) + 3;
+        var maxDistance = 30;   // meters
         var turns = [];
 
         step(start);
@@ -499,7 +494,7 @@ export function osmIntersection(graph, startVertexId) {
                     nextNodes = [];
 
                 if (currPath.length > 1) {
-                    if (dist > maxStepDist) return;   // the next node is too far
+                    if (dist > maxDistance) return;   // the next node is too far
                     if (!entity.__via) return;        // this way is a leaf / can't be a via
                 }
 

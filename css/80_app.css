@@ -1834,21 +1834,44 @@ input[type=number] {
 
 /* Restrictions editor */
 
-.form-field-restrictions .restriction-detail {
-    padding: 5px 10px;
+.form-field-restrictions .restriction-controls-container {
     background-color: #fff;
-    height: 30px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    padding: 5px;
 }
 
-.restriction-detail input {
+.restriction-controls-container .restriction-controls {
+    display: table;
+}
+
+.restriction-controls .restriction-control {
+    display: table-row;
+    padding: 5px 10px;
+    height: 25px;
+}
+
+.restriction-control input,
+.restriction-control span {
+    display: table-cell;
+    text-align: start;
+    padding: 0px 5px;
+}
+
+.restriction-control span.restriction-control-label {
+    text-align: end;
+}
+
+.restriction-control input {
     width: 60px;
-    margin: 0px 10px;
+    padding: 0;
+    margin: 0px 5px;
     vertical-align: middle;
 }
 
 .form-field-restrictions .restriction-container {
     position: relative;
-    height: 400px;
+    height: 370px;
 }
 
 .form-field-restrictions svg.surface {

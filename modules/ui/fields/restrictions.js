@@ -41,6 +41,8 @@ import {
     utilRebind
 } from '../../util';
 
+import { utilDetect } from '../../util/detect';
+
 import {
     utilGetDimensions,
     utilSetDimensions
@@ -51,11 +53,15 @@ export function uiFieldRestrictions(field, context) {
     var dispatch = d3_dispatch('change');
     var breathe = behaviorBreathe(context);
     var hover = behaviorHover(context);
-    var storedDetail = context.storage('turn-restriction-detail');
+    var storedViaWay = context.storage('turn-restriction-via-way');
+    var storedDistance = context.storage('turn-restriction-distance');
+    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
 
-    var _detail = storedDetail !== null ? (+storedDetail) : 0;
+    var _maxViaWay = storedViaWay !== null ? (+storedViaWay) : 1;
+    var _maxDistance = storedDistance ? (+storedDistance) : 30;
     var _initialized = false;
-    var _container = d3_select(null);
+    var _parent = d3_select(null);       // the entire field
+    var _container = d3_select(null);    // just the map
     var _graph;
     var _vertexID;
     var _intersection;
@@ -63,10 +69,12 @@ export function uiFieldRestrictions(field, context) {
 
 
     function restrictions(selection) {
+        _parent = selection;
+
         // try to reuse the intersection, but always rebuild it if the graph has changed
         if (_vertexID && (context.graph() !== _graph || !_intersection)) {
             _graph = context.graph();
-            _intersection = osmIntersection(_graph, _vertexID);
+            _intersection = osmIntersection(_graph, _vertexID, _maxDistance);
         }
 
         // It's possible for there to be no actual intersection here.
@@ -95,52 +103,10 @@ export function uiFieldRestrictions(field, context) {
 
         var isComplex = (isOK && _intersection.vertices.length > 1);
 
-        var detailControl = wrap.selectAll('.restriction-detail')
-            .data(isComplex ? [0]: []);
-
-        detailControl.exit()
-            .remove();
-
-        var detailControlEnter = detailControl.enter()
-            .append('div')
-            .attr('class', 'restriction-detail');
-
-        detailControlEnter
-            .append('span')
-            .attr('class', 'restriction-detail-label')
-            .text('Max Detail: ');
-
-        detailControlEnter
-            .append('input')
-            .attr('class', 'restriction-detail-input')
-            .attr('type', 'range')
-            .attr('min', '0')
-            .attr('max', '2')
-            .attr('step', '1')
-            .on('input', function() {
-                var val = d3_select(this).property('value');
-                _detail = +val;
-                _container.selectAll('.layer-osm .layer-turns *').remove();
-                context.storage('turn-restriction-detail', _detail);
-                selection.call(restrictions);
-            });
-
-        detailControlEnter
-            .append('span')
-            .attr('class', 'restriction-detail-text');
-
-        // update
-        wrap.selectAll('.restriction-detail-input')
-            .property('value', _detail);
-
-        var t = ['via node only', 'via 1 way', 'via 2 ways'];
-        wrap.selectAll('.restriction-detail-text')
-            .text(t[_detail]);
-
-
         var container = wrap.selectAll('.restriction-container')
             .data([0]);
 
+        // enter
         var containerEnter = container.enter()
             .append('div')
             .attr('class', 'restriction-container');
@@ -149,11 +115,121 @@ export function uiFieldRestrictions(field, context) {
             .append('div')
             .attr('class', 'restriction-help');
 
+        // update
         _container = containerEnter
-            .merge(container);
-
-        _container
+            .merge(container)
             .call(renderViewer);
+
+
+        var controls = wrap.selectAll('.restriction-controls')
+            .data([0]);
+
+        // enter/update
+        controls.enter()
+            .append('div')
+            .attr('class', 'restriction-controls-container')
+            .append('div')
+            .attr('class', 'restriction-controls')
+            .merge(controls)
+            .call(renderControls);
+    }
+
+
+    function renderControls(selection) {
+        var distControl = selection.selectAll('.restriction-distance')
+            .data([0]);
+
+        distControl.exit()
+            .remove();
+
+        var distControlEnter = distControl.enter()
+            .append('div')
+            .attr('class', 'restriction-control restriction-distance');
+
+        distControlEnter
+            .append('span')
+            .attr('class', 'restriction-control-label restriction-distance-label')
+            .text('Distance:');
+
+        distControlEnter
+            .append('input')
+            .attr('class', 'restriction-distance-input')
+            .attr('type', 'range')
+            .attr('min', '20')
+            .attr('max', '50')
+            .attr('step', '5')
+            .on('input', function() {
+                var val = d3_select(this).property('value');
+                _maxDistance = +val;
+                _intersection = null;
+                _container.selectAll('.layer-osm .layer-turns *').remove();
+                context.storage('turn-restriction-distance', _maxDistance);
+                _parent.call(restrictions);
+            });
+
+        distControlEnter
+            .append('span')
+            .attr('class', 'restriction-distance-text');
+
+        // update
+        selection.selectAll('.restriction-distance-input')
+            .property('value', _maxDistance);
+
+        var distDisplay;
+        if (isImperial) {   // imprecise conversion for prettier display
+            var distToFeet = {
+                20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
+            }[_maxDistance];
+            distDisplay = 'Up to ' + distToFeet + ' feet';
+        } else {
+            distDisplay = 'Up to ' + _maxDistance + ' meters';
+        }
+
+        selection.selectAll('.restriction-distance-text')
+            .text(distDisplay);
+
+
+        var viaControl = selection.selectAll('.restriction-via-way')
+            .data([0]);
+
+        viaControl.exit()
+            .remove();
+
+        var viaControlEnter = viaControl.enter()
+            .append('div')
+            .attr('class', 'restriction-control restriction-via-way');
+
+        viaControlEnter
+            .append('span')
+            .attr('class', 'restriction-control-label restriction-via-way-label')
+            .text('Via:');
+
+        viaControlEnter
+            .append('input')
+            .attr('class', 'restriction-via-way-input')
+            .attr('type', 'range')
+            .attr('min', '0')
+            .attr('max', '2')
+            .attr('step', '1')
+            .on('input', function() {
+                var val = d3_select(this).property('value');
+                _maxViaWay = +val;
+                _container.selectAll('.layer-osm .layer-turns *').remove();
+                context.storage('turn-restriction-via-way', _maxViaWay);
+                _parent.call(restrictions);
+            });
+
+        viaControlEnter
+            .append('span')
+            .attr('class', 'restriction-via-way-text');
+
+        // update
+        selection.selectAll('.restriction-via-way-input')
+            .property('value', _maxViaWay);
+
+        var t = ['Node only', 'Up to 1 way', 'Up to 2 ways'];
+        selection.selectAll('.restriction-via-way-text')
+            .text(t[_maxViaWay]);
     }
 
 
@@ -234,7 +310,7 @@ export function uiFieldRestrictions(field, context) {
             .call(utilSetDimensions, d)
             .call(drawVertices, vgraph, _intersection.vertices, filter, extent, z)
             .call(drawLines, vgraph, _intersection.ways, filter)
-            .call(drawTurns, vgraph, _intersection.turns(_fromWayID, _detail));
+            .call(drawTurns, vgraph, _intersection.turns(_fromWayID, _maxViaWay));
 
         surface
             .on('click.restrictions', click)
@@ -455,11 +531,11 @@ export function uiFieldRestrictions(field, context) {
 
 
     restrictions.entity = function(_) {
-        if (!_vertexID || _vertexID !== _.id) {
+        // if (!_vertexID || _vertexID !== _.id) {
             _intersection = null;
             _fromWayID = null;
             _vertexID = _.id;
-        }
+        // }
     };
 
 
