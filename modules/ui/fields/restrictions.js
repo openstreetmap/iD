@@ -157,7 +157,15 @@ export function uiFieldRestrictions(field, context) {
             .attr('type', 'range')
             .attr('min', '20')
             .attr('max', '50')
-            .attr('step', '5')
+            .attr('step', '5');
+
+        distControlEnter
+            .append('span')
+            .attr('class', 'restriction-distance-text');
+
+        // update
+        selection.selectAll('.restriction-distance-input')
+            .property('value', _maxDistance)
             .on('input', function() {
                 var val = d3_select(this).property('value');
                 _maxDistance = +val;
@@ -166,14 +174,6 @@ export function uiFieldRestrictions(field, context) {
                 context.storage('turn-restriction-distance', _maxDistance);
                 _parent.call(restrictions);
             });
-
-        distControlEnter
-            .append('span')
-            .attr('class', 'restriction-distance-text');
-
-        // update
-        selection.selectAll('.restriction-distance-input')
-            .property('value', _maxDistance);
 
         var distDisplay;
         if (isImperial) {   // imprecise conversion for prettier display
@@ -210,14 +210,7 @@ export function uiFieldRestrictions(field, context) {
             .attr('type', 'range')
             .attr('min', '0')
             .attr('max', '2')
-            .attr('step', '1')
-            .on('input', function() {
-                var val = d3_select(this).property('value');
-                _maxViaWay = +val;
-                _container.selectAll('.layer-osm .layer-turns *').remove();
-                context.storage('turn-restriction-via-way', _maxViaWay);
-                _parent.call(restrictions);
-            });
+            .attr('step', '1');
 
         viaControlEnter
             .append('span')
@@ -225,7 +218,14 @@ export function uiFieldRestrictions(field, context) {
 
         // update
         selection.selectAll('.restriction-via-way-input')
-            .property('value', _maxViaWay);
+            .property('value', _maxViaWay)
+            .on('input', function() {
+                var val = d3_select(this).property('value');
+                _maxViaWay = +val;
+                _container.selectAll('.layer-osm .layer-turns *').remove();
+                context.storage('turn-restriction-via-way', _maxViaWay);
+                _parent.call(restrictions);
+            });
 
         var t = ['Node only', 'Up to 1 way', 'Up to 2 ways'];
         selection.selectAll('.restriction-via-way-text')
