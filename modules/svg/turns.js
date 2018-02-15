@@ -1,4 +1,4 @@
-import { geoAngle, geoVecLength } from '../geo';
+import { geoAngle, geoPathLength } from '../geo';
 
 
 export function svgTurns(projection) {
@@ -63,19 +63,23 @@ export function svgTurns(projection) {
 
         groups
             .attr('transform', function (turn) {
-                var pxOffset = 50;
-                var way = graph.entity(turn.to.way);
-                var t = graph.entity(turn.to.node);
-                var v = graph.entity(turn.to.vertex);
-                var a = geoAngle(v, t, projection);
-                var p = projection(v.loc);
-                var q = projection(t.loc);
-                var mid = geoVecLength(p, q) / 2;    // midpoint of destination way
-                var r = turn.u ? 0
-                    : !way.__via ? pxOffset          // leaf way: put marker at pxOffset
-                    : Math.min(mid, pxOffset);       // via way: prefer pxOffset, fallback to midpoint
+                var pxRadius = 50;
+                var toWay = graph.entity(turn.to.way);
+                var toPoints = graph.childNodes(toWay)
+                    .map(function (n) { return n.loc; })
+                    .map(projection);
+                var toLength = geoPathLength(toPoints);
+                var mid = toLength / 2;    // midpoint of destination way
 
-                return 'translate(' + (r * Math.cos(a) + p[0]) + ',' + (r * Math.sin(a) + p[1]) + ') ' +
+                var toNode = graph.entity(turn.to.node);
+                var toVertex = graph.entity(turn.to.vertex);
+                var a = geoAngle(toVertex, toNode, projection);
+                var o = projection(toVertex.loc);
+                var r = turn.u ? 0               // u-turn: no radius
+                    : !toWay.__via ? pxRadius    // leaf way: put marker at pxRadius
+                    : Math.min(mid, pxRadius);   // via way: prefer pxRadius, fallback to mid for very short ways
+
+                return 'translate(' + (r * Math.cos(a) + o[0]) + ',' + (r * Math.sin(a) + o[1]) + ') ' +
                     'rotate(' + a * 180 / Math.PI + ')';
             });
 
