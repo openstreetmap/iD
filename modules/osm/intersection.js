@@ -433,31 +433,42 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                             isLocalVia = _every(v, function(via) { return keyWayIds.indexOf(via.id) !== -1; });
                         }
 
-                        // Does this path match the turn restriction?
-                        var isMatch = false;
-                        if (  // match via node, to way
-                            v.length === 1 &&
-                            v[0].type === 'node' &&
-                            v[0].id === entity.id &&
-                            t.id === way.id
-                        ) {
-                            isMatch = true;
-                        } else if (  // match via ways, to way
-                            _every(v, function(via) { return currPath.indexOf(via.id) !== -1; }) &&
-                            t.id === way.id
-                        ) {
-                            isMatch = true;
+                        // Does the current path match this turn restriction?
+                        var isDirectMatch = false;
+                        var isAlongOnlyPath = false;
+
+                        if (t.id === way.id) {     // match TO
+                            if (v.length === 1 && v[0].type === 'node' && v[0].id === entity.id) {
+                                isDirectMatch = true;    // match VIA node
+                            } else if (_every(v, function(via) { return currPath.indexOf(via.id) !== -1; })) {
+                                isDirectMatch = true;    // match all VIA ways
+                            }
+
+                        } else if (isOnly) {
+                            for (k = 0; k < v.length; k++) {
+                                // way doesn't match TO, but is one of the via ways along the path of an "only"
+                                if (v[k].type === 'way' && v[k].id === way.id) {
+                                    isAlongOnlyPath = true;
+                                    break;
+                                }
+                            }
                         }
 
-                        if (isMatch && isOnly) {
-                            restrict = { id: restriction.id, only: true };
+                        if (isDirectMatch) {
+                            if (isOnly) {
+                                restrict = { id: restriction.id, direct: true, only: true };
+                            } else {
+                                restrict = { id: restriction.id, direct: true, no: true };
+                            }
                             break;
-                        } else if (isMatch && !isOnly) {
-                            restrict = { id: restriction.id, direct: true };
-                            break;
-                        } else if (!isMatch && isOnly && isLocalVia) {
-                            restrict = { id: restriction.id, indirect: true };
-                            // no break - keep looking for a "better" direct or only
+
+                        } else {  // indirect match, caused by presence of an "only"
+                            if (isAlongOnlyPath) {
+                                restrict = { id: restriction.id, indirect: true, only: true };
+                            } else if (isOnly && isLocalVia) {
+                                restrict = { id: restriction.id, indirect: true, no: true };
+                            }
+                            // no break - keep looking for a "better" direct match
                         }
                     }
 
@@ -475,6 +486,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     if (turn) {
                         if (matchedRestriction) {
                             turn.restrictionID = matchedRestriction.id;
+                            turn.no = matchedRestriction.no;
                             turn.only = matchedRestriction.only;
                             turn.direct = matchedRestriction.direct;
                             turn.indirect = matchedRestriction.indirect;
@@ -485,7 +497,9 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     if (currPath[0] === currPath[2]) return;     // we made a u-turn - stop here
                 }
 
-                if (matchedRestriction) return;  // don't advance any further
+                if (matchedRestriction &&
+                    (matchedRestriction.direct || matchedRestriction.no)
+                ) return;  // don't advance any further
 
                 // which nodes can we step into?
                 var n1 = vgraph.entity(entity.first()),

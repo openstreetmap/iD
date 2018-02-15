@@ -7,7 +7,7 @@ export function svgTurns(projection) {
 
         function icon(turn) {
             var u = turn.u ? '-u' : '';
-            if (turn.direct || turn.indirect) return '#turn-no' + u;
+            if (turn.no) return '#turn-no' + u;
             if (turn.only) return '#turn-only' + u;
             return '#turn-yes' + u;
         }
@@ -62,6 +62,9 @@ export function svgTurns(projection) {
             .merge(enter);
 
         groups
+            .attr('opacity', function (turn) {
+                return turn.indirect ? '0.7' : null;
+            })
             .attr('transform', function (turn) {
                 var pxRadius = 50;
                 var toWay = graph.entity(turn.to.way);
