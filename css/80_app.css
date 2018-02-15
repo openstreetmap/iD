@@ -1893,6 +1893,7 @@ input[type=number] {
     background-color: rgba(255, 255, 255, .8);
     color: #888;
     text-align: center;
+    pointer-events: none;
 }
 
 .restriction-help span {
