@@ -110,7 +110,7 @@ export function svgGpx(projection, context, dispatch) {
                 .attr('class', textClass)
                 .merge(labels)
                 .text(function(d) {
-                    if(d.properties) {
+                    if (d.properties) {
                         return d.properties.desc || d.properties.name;
                     }
                     return null;
