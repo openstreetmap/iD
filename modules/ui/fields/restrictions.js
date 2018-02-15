@@ -240,7 +240,7 @@ export function uiFieldRestrictions(field, context) {
         var filter = utilFunctor(true);
         var projection = geoRawMercator();
 
-        var d = utilGetDimensions(_container);
+        var d = utilGetDimensions(selection);
         var c = geoVecScale(d, 0.5);
         var z = 22;
 

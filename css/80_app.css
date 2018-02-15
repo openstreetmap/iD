@@ -1873,6 +1873,10 @@ input[type=number] {
     position: relative;
     height: 370px;
 }
+/* zero width space, so container takes up space */
+.form-field-restrictions .restriction-container:after {
+    content: '\200b';
+}
 
 .form-field-restrictions svg.surface {
     width: 100%;
