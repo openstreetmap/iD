@@ -52,7 +52,7 @@ export function actionRestrictTurn(turn, projection, restrictionID) {
             id: restrictionID,
             tags: {
                 type: 'restriction',
-                restriction: turn.restriction || osmInferRestriction(graph, turn.from, turn.to, projection)
+                restriction: turn.restriction || osmInferRestriction(graph, turn, projection)
             },
             members: members
         }));

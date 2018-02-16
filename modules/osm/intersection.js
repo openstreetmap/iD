@@ -604,13 +604,13 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 }
 
 
-export function osmInferRestriction(graph, from, to, projection) {
-    var fromWay = graph.entity(from.way);
-    var fromNode = graph.entity(from.node);
-    var fromVertex = graph.entity(from.vertex);
-    var toWay = graph.entity(to.way);
-    var toNode = graph.entity(to.node);
-    var toVertex = graph.entity(to.vertex);
+export function osmInferRestriction(graph, turn, projection) {
+    var fromWay = graph.entity(turn.from.way);
+    var fromNode = graph.entity(turn.from.node);
+    var fromVertex = graph.entity(turn.from.vertex);
+    var toWay = graph.entity(turn.to.way);
+    var toNode = graph.entity(turn.to.node);
+    var toVertex = graph.entity(turn.to.vertex);
 
     var fromOneWay = (fromWay.tags.oneway === 'yes');
     var toOneWay = (toWay.tags.oneway === 'yes');
@@ -624,7 +624,7 @@ export function osmInferRestriction(graph, from, to, projection) {
         return 'no_u_turn';
     if ((angle < 23 || angle > 336) && fromOneWay && toOneWay)
         return 'no_u_turn';   // wider tolerance for u-turn if both ways are oneway
-    if ((angle < 40 || angle > 319) && fromOneWay && toOneWay && from.vertex !== to.vertex)
+    if ((angle < 40 || angle > 319) && fromOneWay && toOneWay && turn.from.vertex !== turn.to.vertex)
         return 'no_u_turn';   // even wider tolerance for u-turn if there is a via way (from !== to)
     if (angle < 158)
         return 'no_right_turn';

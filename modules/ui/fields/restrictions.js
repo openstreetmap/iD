@@ -347,7 +347,7 @@ export function uiFieldRestrictions(field, context) {
 
             } else if (datum instanceof osmTurn) {
                 var actions;
-                datum.restriction = osmInferRestriction(vgraph, datum.from, datum.to, projection);
+                datum.restriction = osmInferRestriction(vgraph, datum, projection);
 
                 if (datum.restrictionID && !datum.direct) {
                     return;
@@ -436,7 +436,7 @@ export function uiFieldRestrictions(field, context) {
                 var fromWayID = datum.from.way;
                 var viaWayIDs = datum.via.ways;
                 var toWayID = datum.to.way;
-                var restrictionType = osmInferRestriction(vgraph, datum.from, datum.to, projection);
+                var restrictionType = osmInferRestriction(vgraph, datum, projection);
 
                 var turnType = {
                     'no_left_turn': 'Left Turn',
