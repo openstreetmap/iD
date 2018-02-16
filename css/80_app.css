@@ -1894,6 +1894,11 @@ input[type=number] {
     color: #888;
     text-align: center;
     pointer-events: none;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .restriction-help span {
