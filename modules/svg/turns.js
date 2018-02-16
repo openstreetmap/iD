@@ -63,7 +63,7 @@ export function svgTurns(projection) {
 
         groups
             .attr('opacity', function (turn) {
-                return turn.indirect ? '0.7' : null;
+                return turn.direct === false ? '0.7' : null;
             })
             .attr('transform', function (turn) {
                 var pxRadius = 50;

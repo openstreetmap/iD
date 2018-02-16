@@ -420,6 +420,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     var restrict = undefined;
                     for (var j = 0; j < currRestrictions.length; j++) {
                         var restriction = currRestrictions[j];
+                        var f = restriction.memberByRole('from');
                         var v = restriction.membersByRole('via');
                         var t = restriction.memberByRole('to');
                         var isOnly = /^only_/.test(restriction.tags.restriction);
@@ -434,14 +435,15 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         }
 
                         // Does the current path match this turn restriction?
-                        var isDirectMatch = false;
+                        var matchesFrom = (f.id === fromWayId);
+                        var matchesViaTo = false;
                         var isAlongOnlyPath = false;
 
-                        if (t.id === way.id) {     // match TO
+                        if (t.id === way.id) {     // match VIA, TO
                             if (v.length === 1 && v[0].type === 'node' && v[0].id === entity.id) {
-                                isDirectMatch = true;    // match VIA node
+                                matchesViaTo = true;    // match VIA node
                             } else if (_every(v, function(via) { return currPath.indexOf(via.id) !== -1; })) {
-                                isDirectMatch = true;    // match all VIA ways
+                                matchesViaTo = true;    // match all VIA ways
                             }
 
                         } else if (isOnly) {
@@ -454,22 +456,23 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                             }
                         }
 
-                        if (isDirectMatch) {
+                        if (matchesViaTo) {
                             if (isOnly) {
-                                restrict = { id: restriction.id, direct: true, only: true };
+                                restrict = { id: restriction.id, direct: matchesFrom, only: true, end: true };
                             } else {
-                                restrict = { id: restriction.id, direct: true, no: true };
+                                restrict = { id: restriction.id, direct: matchesFrom, no: true, end: true };
                             }
-                            break;
-
-                        } else {  // indirect match, caused by presence of an "only"
+                        } else {    // indirect - caused by a different nearby restriction
                             if (isAlongOnlyPath) {
-                                restrict = { id: restriction.id, indirect: true, only: true };
+                                restrict = { id: restriction.id, direct: false, only: true, end: false };
                             } else if (isOnly && isLocalVia) {
-                                restrict = { id: restriction.id, indirect: true, no: true };
+                                restrict = { id: restriction.id, direct: false, no: true, end: true };
                             }
-                            // no break - keep looking for a "better" direct match
                         }
+
+                        // stop looking if we find a "direct" restriction (matching FROM, VIA, TO)
+                        if (restrict && restrict.direct)
+                            break;
                     }
 
                     nextWays.push({ way: way, restrict: restrict });
@@ -489,23 +492,20 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                             turn.no = matchedRestriction.no;
                             turn.only = matchedRestriction.only;
                             turn.direct = matchedRestriction.direct;
-                            turn.indirect = matchedRestriction.indirect;
                         }
                         turns.push(osmTurn(turn));
                     }
 
-                    if (currPath[0] === currPath[2]) return;     // we made a u-turn - stop here
+                    if (currPath[0] === currPath[2]) return;   // if we made a u-turn - stop here
                 }
 
-                if (matchedRestriction &&
-                    (matchedRestriction.direct || matchedRestriction.no)
-                ) return;  // don't advance any further
+                if (matchedRestriction && matchedRestriction.end) return;  // don't advance any further
 
                 // which nodes can we step into?
-                var n1 = vgraph.entity(entity.first()),
-                    n2 = vgraph.entity(entity.last()),
-                    dist = n1.loc && n2.loc && geoSphericalDistance(n1.loc, n2.loc),
-                    nextNodes = [];
+                var n1 = vgraph.entity(entity.first());
+                var n2 = vgraph.entity(entity.last());
+                var dist = n1.loc && n2.loc && geoSphericalDistance(n1.loc, n2.loc);
+                var nextNodes = [];
 
                 if (currPath.length > 1) {
                     if (dist > maxDistance) return;   // the next node is too far

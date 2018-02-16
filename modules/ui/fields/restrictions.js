@@ -349,7 +349,7 @@ export function uiFieldRestrictions(field, context) {
                 var actions;
                 datum.restriction = osmInferRestriction(vgraph, datum.from, datum.to, projection);
 
-                if (datum.restrictionID && datum.indirect) {
+                if (datum.restrictionID && !datum.direct) {
                     return;
                 } else if (datum.restrictionID && !datum.only) {      // cycle thru the `only_` state
                     var datumOnly = _cloneDeep(datum);
@@ -418,7 +418,7 @@ export function uiFieldRestrictions(field, context) {
                 }
 
                 var s = (klass === 'allow' ? turnType + ' Allowed' : restrictType + ' ' + turnType);
-                if (datum.indirect) { s += ' (indirect)'; }
+                if (datum.direct === false) { s += ' (indirect)'; }
 
                 div = help.append('div');
                 div.append('span')
