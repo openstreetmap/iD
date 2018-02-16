@@ -254,7 +254,7 @@ export function uiFieldRestrictions(field, context) {
 
         // If this is a large intersection, adjust zoom to fit extent
         if (_intersection.vertices.length > 1) {
-            var padding = 160;   // in z22 pixels
+            var padding = 180;   // in z22 pixels
             var tl = projection([extent[0][0], extent[1][1]]);
             var br = projection([extent[1][0], extent[0][1]]);
             var hFactor = (br[0] - tl[0]) / (d[0] - padding);
@@ -265,7 +265,7 @@ export function uiFieldRestrictions(field, context) {
             projection.scale(geoZoomToScale(z));
         }
 
-        var padTop = 30;   // reserve top space for hint text
+        var padTop = 35;   // reserve top space for hint text
         var extentCenter = projection(extent.center());
         extentCenter[1] = extentCenter[1] - padTop;
 
@@ -351,10 +351,10 @@ export function uiFieldRestrictions(field, context) {
 
                 if (datum.restrictionID && !datum.direct) {
                     return;
-                } else if (datum.restrictionID && !datum.only) {      // cycle thru the `only_` state
+                } else if (datum.restrictionID && !datum.only) {    // cycle thru the `only_` state
                     var datumOnly = _cloneDeep(datum);
                     datumOnly.only = true;
-                    datumOnly.restriction = datumOnly.restriction.replace(/^no\_/, 'only_');
+                    datumOnly.restriction = datumOnly.restriction.replace(/^no/, 'only');
                     actions = _intersection.actions.concat([
                         actionUnrestrictTurn(datum, projection),
                         actionRestrictTurn(datumOnly, projection),
@@ -438,20 +438,12 @@ export function uiFieldRestrictions(field, context) {
                 var toWayID = datum.to.way;
                 var restrictionType = osmInferRestriction(vgraph, datum.from, datum.to, projection);
 
-                if (datum.restrictionID && datum.only && datum.direct === false) {
-                    var r = vgraph.entity(datum.restrictionID);
-                    fromWayID = r.memberByRole('from').id;
-                    viaWayIDs = r.membersByRole('via').map(function (m) { return m.id; });
-                    toWayID = r.memberByRole('to').id;
-                    restrictionType = r.tags.restriction.replace(/^only/, 'no');
-                }
-
                 var turnType = {
                     'no_left_turn': 'Left Turn',
                     'no_right_turn': 'Right Turn',
                     'no_u_turn': 'U-Turn',
                     'no_straight_on': 'Straight On'
-                }[restrictionType];
+                }[restrictionType.replace(/^only/, 'no')];
 
                 var restrictType = '';
                 var klass = 'allow';
@@ -475,7 +467,7 @@ export function uiFieldRestrictions(field, context) {
                 div.append('span').attr('class', 'qualifier').text('TO');
                 div.append('span').text(d.name || d.type);
 
-                if (viaWayIDs) {
+                if (viaWayIDs && viaWayIDs.length) {
                     div = help.append('div');
                     div.append('span').attr('class', 'qualifier').text('VIA');
 

@@ -401,13 +401,14 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             if (currPath.length >= maxPathLength) return;
             currPath.push(entity.id);
             currRestrictions = _clone(currRestrictions || []);
+            var i, j;
 
             if (entity.type === 'node') {
                 var parents = vgraph.parentWays(entity);
                 var nextWays = [];
 
                 // which ways can we step into?
-                for (var i = 0; i < parents.length; i++) {
+                for (i = 0; i < parents.length; i++) {
                     var way = parents[i];
 
                     // if next way is a oneway incoming to this vertex, skip
@@ -418,7 +419,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
                     // Check all "current" restrictions (where we've already walked the `from`)
                     var restrict = undefined;
-                    for (var j = 0; j < currRestrictions.length; j++) {
+                    for (j = 0; j < currRestrictions.length; j++) {
                         var restriction = currRestrictions[j];
                         var f = restriction.memberByRole('from');
                         var v = restriction.membersByRole('via');
@@ -458,15 +459,15 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
                         if (matchesViaTo) {
                             if (isOnly) {
-                                restrict = { id: restriction.id, direct: matchesFrom, only: true, end: true };
+                                restrict = { id: restriction.id, direct: matchesFrom, from: f.id, only: true, end: true };
                             } else {
-                                restrict = { id: restriction.id, direct: matchesFrom, no: true, end: true };
+                                restrict = { id: restriction.id, direct: matchesFrom, from: f.id, no: true, end: true };
                             }
                         } else {    // indirect - caused by a different nearby restriction
                             if (isAlongOnlyPath) {
-                                restrict = { id: restriction.id, direct: false, only: true, end: false };
+                                restrict = { id: restriction.id, direct: false, from: f.id, only: true, end: false };
                             } else if (isOnly && isLocalVia) {
-                                restrict = { id: restriction.id, direct: false, no: true, end: true };
+                                restrict = { id: restriction.id, direct: false, from: f.id, no: true, end: true };
                             }
                         }
 
@@ -485,7 +486,19 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
             } else {  // entity.type === 'way'
                 if (currPath.length >= 3) {     // this is a "complete" path..
-                    var turn = pathToTurn(currPath);
+                    var turnPath = _clone(currPath);
+
+                    // an indirect restriction - only include the partial path (starting at FROM)
+                    if (matchedRestriction && matchedRestriction.direct === false) {
+                        for (i = 0; i < turnPath.length; i++) {
+                            if (i > 0 && turnPath[i] === matchedRestriction.from) {
+                                turnPath = turnPath.slice(i);
+                                break;
+                            }
+                        }
+                    }
+
+                    var turn = pathToTurn(turnPath);
                     if (turn) {
                         if (matchedRestriction) {
                             turn.restrictionID = matchedRestriction.id;
@@ -583,7 +596,6 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 var nodes = vgraph.entity(wayId).nodes;
                 return affixId === nodes[0] ? nodes[1] : nodes[nodes.length - 2];
             }
-
         }
 
     };
@@ -602,10 +614,8 @@ export function osmInferRestriction(graph, from, to, projection) {
 
     var fromOneWay = (fromWay.tags.oneway === 'yes');
     var toOneWay = (toWay.tags.oneway === 'yes');
-    var angle = geoAngle(fromVertex, fromNode, projection) -
-                geoAngle(toVertex, toNode, projection);
-
-    angle = angle * 180 / Math.PI;
+    var angle = (geoAngle(fromVertex, fromNode, projection) -
+                geoAngle(toVertex, toNode, projection)) * 180 / Math.PI;
 
     while (angle < 0)
         angle += 360;
