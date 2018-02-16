@@ -5207,6 +5207,7 @@
             "tags": {
                 "craft": "boatbuilder"
             },
+            "matchScore": 0.4,
             "name": "Boat Builder"
         },
         "craft/bookbinder": {
