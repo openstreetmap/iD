@@ -381,115 +381,8 @@ export function uiFieldRestrictions(field, context) {
 
 
         function mouseover() {
-            var help = _container.selectAll('.restriction-help').html('');
-            var div, d;
-
             var datum = d3_event.target.__data__;
-            var entity = datum && datum.properties && datum.properties.entity;
-            if (entity) {
-                datum = entity;
-            }
-
-            surface.selectAll('.related')
-                .classed('related', false);
-
-            if (datum instanceof osmWay) {
-                d = display(vgraph.entity(datum.id), vgraph);
-                div = help.append('div');
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(d.name || d.type);
-
-            } else if (datum instanceof osmTurn) {
-                surface.selectAll(utilEntitySelector(datum.key.split(',')))
-                    .classed('related', true);
-
-                var turnType = {
-                    'no_left_turn': 'Left Turn',
-                    'no_right_turn': 'Right Turn',
-                    'no_u_turn': 'U-Turn',
-                    'no_straight_on': 'Straight On'
-                }[osmInferRestriction(vgraph, datum.from, datum.to, projection)];
-
-                var restrictType = '';
-                var klass = 'allow';
-                if (datum.restrictionID) {
-                    if (datum.no)   { restrictType = 'NO'; klass = 'restrict'; }
-                    if (datum.only) { restrictType = 'ONLY'; klass = 'only'; }
-                }
-
-                var s = (klass === 'allow' ? turnType + ' Allowed' : restrictType + ' ' + turnType);
-                if (datum.direct === false) { s += ' (indirect)'; }
-
-                div = help.append('div');
-                div.append('span')
-                    .attr('class', 'qualifier ' + klass)
-                    .text(s);
-
-                div = help.append('div');
-                d = display(vgraph.entity(datum.from.way), vgraph);
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(d.name || d.type);
-
-                d = display(vgraph.entity(datum.to.way), vgraph);
-                div.append('span').attr('class', 'qualifier').text('TO');
-                div.append('span').text(d.name || d.type);
-
-                if (datum.via.ways) {
-                    div = help.append('div');
-                    div.append('span').attr('class', 'qualifier').text('VIA');
-
-                    var curr, prev;
-                    for (var i = 0; i < datum.via.ways.length; i++) {
-                        d = display(vgraph.entity(datum.via.ways[i]), vgraph);
-                        curr = d.name || d.type;
-                        if (curr === prev) continue;  // collapse identical names
-
-                        if (prev) div.append('span').text(',');
-                        div.append('span').text(curr);
-                        prev = curr;
-                    }
-                }
-
-
-                //DEBUG
-                // var str = '';
-                // if (datum.restriction) {
-                //     if (datum.only)      { str += 'ONLY_ '; }
-                //     if (datum.direct)    { str += 'NO_ '; }
-                //     if (datum.indirect)  { str += 'indirect '; }
-                //     str += datum.restriction;
-                // }
-
-                // str += ' FROM ' + datum.from.way +
-                //     ' VIA ' + (datum.via.node || datum.via.ways.join(',')) +
-                //     ' TO ' + datum.to.way;
-
-                // _container.selectAll('.restriction-help')
-                //     .text(str);
-
-// return;
-            //     var presets = context.presets(),
-            //         preset;
-
-            //     if (datum.restriction) {
-            //         preset = presets.match(vgraph.entity(datum.restriction), vgraph);
-            //     } else {
-            //         preset = presets.item('type/restriction/' +
-            //             osmInferRestriction(
-            //                 vgraph,
-            //                 datum.from,
-            //                 datum.to,
-            //                 projection
-            //             )
-            //         );
-            //     }
-
-            //     _container.selectAll('.restriction-help')
-            //         .text(t('operations.restriction.help.' +
-            //             (datum.restriction ? 'toggle_off' : 'toggle_on'),
-            //             { restriction: preset.name() })
-            //         );
-            }
+            updateHelp(datum);
         }
 
 
@@ -508,11 +401,6 @@ export function uiFieldRestrictions(field, context) {
                 div.append('span').attr('class', 'qualifier').text('FROM');
                 div.append('span').text('way');
             }
-
-            // _container.selectAll('.restriction-help')
-            //     .text(t('operations.restriction.help.' +
-            //         (_fromWayID ? 'toggle' : 'select'))
-            //     );
         }
 
 
@@ -520,6 +408,90 @@ export function uiFieldRestrictions(field, context) {
             if (context.hasEntity(_vertexID)) {
                 _container.call(renderViewer);
             }
+        }
+
+
+        function updateHelp(datum) {
+            var help = _container.selectAll('.restriction-help').html('');
+            var div, d;
+
+            var entity = datum && datum.properties && datum.properties.entity;
+            if (entity) {
+                datum = entity;
+            }
+
+            surface.selectAll('.related')
+                .classed('related', false);
+
+            if (datum instanceof osmWay) {
+                d = display(vgraph.entity(datum.id), vgraph);
+                div = help.append('div');
+                div.append('span').attr('class', 'qualifier').text('FROM');
+                div.append('span').text(d.name || d.type);
+
+            } else if (datum instanceof osmTurn) {
+                surface.selectAll(utilEntitySelector(datum.key.split(',')))
+                    .classed('related', true);
+
+                var fromWayID = datum.from.way;
+                var viaWayIDs = datum.via.ways;
+                var toWayID = datum.to.way;
+                var restrictionType = osmInferRestriction(vgraph, datum.from, datum.to, projection);
+
+                if (datum.restrictionID && datum.only && datum.direct === false) {
+                    var r = vgraph.entity(datum.restrictionID);
+                    fromWayID = r.memberByRole('from').id;
+                    viaWayIDs = r.membersByRole('via').map(function (m) { return m.id; });
+                    toWayID = r.memberByRole('to').id;
+                    restrictionType = r.tags.restriction.replace(/^only/, 'no');
+                }
+
+                var turnType = {
+                    'no_left_turn': 'Left Turn',
+                    'no_right_turn': 'Right Turn',
+                    'no_u_turn': 'U-Turn',
+                    'no_straight_on': 'Straight On'
+                }[restrictionType];
+
+                var restrictType = '';
+                var klass = 'allow';
+                if (datum.no)   { restrictType = 'NO'; klass = 'restrict'; }
+                if (datum.only) { restrictType = 'ONLY'; klass = 'only'; }
+
+                var s = (klass === 'allow' ? turnType + ' Allowed' : restrictType + ' ' + turnType);
+                if (datum.direct === false) { s += ' (indirect)'; }
+
+                div = help.append('div');
+                div.append('span')
+                    .attr('class', 'qualifier ' + klass)
+                    .text(s);
+
+                div = help.append('div');
+                d = display(vgraph.entity(fromWayID), vgraph);
+                div.append('span').attr('class', 'qualifier').text('FROM');
+                div.append('span').text(d.name || d.type);
+
+                d = display(vgraph.entity(toWayID), vgraph);
+                div.append('span').attr('class', 'qualifier').text('TO');
+                div.append('span').text(d.name || d.type);
+
+                if (viaWayIDs) {
+                    div = help.append('div');
+                    div.append('span').attr('class', 'qualifier').text('VIA');
+
+                    var curr, prev;
+                    for (var i = 0; i < viaWayIDs.length; i++) {
+                        d = display(vgraph.entity(viaWayIDs[i]), vgraph);
+                        curr = d.name || d.type;
+                        if (curr === prev) continue;  // collapse identical names
+
+                        if (prev) div.append('span').text(',');
+                        div.append('span').text(curr);
+                        prev = curr;
+                    }
+                }
+            }
+
         }
     }
 
