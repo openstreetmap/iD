@@ -32,6 +32,16 @@ var blacklist = {
     'OSM_Inspector-Routing': true,
     'OSM_Inspector-Tagging': true
 };
+var supportedWMSProjections = [
+    'EPSG:3857',
+    'EPSG:900913', // EPSG:3857 alternatives codes
+    'EPSG:3587',
+    'EPSG:54004',
+    'EPSG:41001',
+    'EPSG:102113',
+    'EPSG:102100',
+    'EPSG:3785'
+];
 
 var whitelist = [
     // Add custom sources here if needed.
@@ -39,8 +49,15 @@ var whitelist = [
 
 
 sources.concat(whitelist).forEach(function(source) {
-    if (source.type !== 'tms' && source.type !== 'bing') return;
+    if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
     if (source.id in blacklist) return;
+    var supportedProjection = source.available_projections &&
+        supportedWMSProjections.find(function(supportedProjection) {
+            return source.available_projections.some(function(projection) {
+              return supportedProjection === projection;
+            })
+        });
+    if (source.type === 'wms' && supportedProjection === undefined) return;
 
     var im = {
         id: source.id,
@@ -48,6 +65,10 @@ sources.concat(whitelist).forEach(function(source) {
         type: source.type,
         template: source.url
     };
+
+    if (source.type === 'wms') {
+      im.projection = supportedProjection;
+    }
 
     var startDate, endDate, isValid;
 
