@@ -410,7 +410,7 @@ export function uiFieldRestrictions(field, context) {
 
         function updateHelp(datum) {
             var help = _container.selectAll('.restriction-help').html('');
-            var div, d, turnType, r;
+            var div, d, turnType, way, r;
 
             var entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
@@ -422,6 +422,16 @@ export function uiFieldRestrictions(field, context) {
                 .classed('allow', false)
                 .classed('restrict', false)
                 .classed('only', false);
+
+            if (_fromWayID) {
+                way = vgraph.entity(_fromWayID);
+                surface
+                    .selectAll('.' + _fromWayID)
+                    .classed('selected', true)
+                    .classed('related', true)
+                    .classed('only', !!way.__fromOnly);
+            }
+
 
 
             if (datum instanceof osmWay) {
@@ -508,13 +518,6 @@ export function uiFieldRestrictions(field, context) {
 
             } else {       // datum is empty surface
                 if (_fromWayID) {
-                    var way = vgraph.entity(_fromWayID);
-                    surface
-                        .selectAll('.' + _fromWayID)
-                        .classed('selected', true)
-                        .classed('related', true)
-                        .classed('only', !!way.__fromOnly);
-
                     if (way.__fromOnly) {
                         r = vgraph.entity(way.__fromOnly);
 
@@ -533,6 +536,7 @@ export function uiFieldRestrictions(field, context) {
                     div = help.append('div');
                     div.append('span').attr('class', 'qualifier').text('FROM');
                     div.append('span').text(d.name || d.type);
+
                 } else {
                     div = help.append('div');
                     div.append('span').text('Click to select the');
