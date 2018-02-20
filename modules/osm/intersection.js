@@ -210,7 +210,6 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     vertexIds.forEach(function(id) {
         var vertex = vgraph.entity(id);
         var parents = vgraph.parentWays(vertex);
-
         vertices.push(vertex);
         ways = ways.concat(parents);
     });
@@ -243,8 +242,21 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             __from:  __from,
             __via: __via,
             __to:  __to,
-            __oneWay:  __oneWay
+            __oneWay:  __oneWay,
+            __fromOnly: fromOnly(way)
         });
+
+        function fromOnly(way) {
+            var parents = vgraph.parentRelations(way);
+            for (var i = 0; i < parents.length; i++) {
+                var r = parents[i];
+                var f = r.memberByRole('from');
+                if (r.isRestriction() && /^only_/.test(r.tags.restriction) && f.id === way.id) {
+                    return r.id;
+                }
+            }
+            return null;
+        }
     }
 
     ways = [];
@@ -583,7 +595,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             }
 
             return {
-                key:  path.join(','),
+                key:  path.join('_'),
                 path: path,
                 from: { node: fromNodeId, way:  fromWayId, vertex: fromVertexId },
                 via:  { node: viaNodeId,  ways: viaWayIds },

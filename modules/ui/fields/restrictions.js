@@ -283,7 +283,8 @@ export function uiFieldRestrictions(field, context) {
         selection
             .call(drawLayers);
 
-        var surface = selection.selectAll('.surface');
+        var surface = selection.selectAll('.surface')
+            .classed('tr', true);
 
         if (firstTime) {
             _initialized = true;
@@ -314,20 +315,26 @@ export function uiFieldRestrictions(field, context) {
 
         surface
             .on('click.restrictions', click)
-            .on('mouseover.restrictions', mouseover)
-            .on('mouseout.restrictions', mouseout);
+            .on('mouseover.restrictions', mouseover);
 
         surface
             .selectAll('.selected')
             .classed('selected', false);
 
+        surface
+            .selectAll('.related')
+            .classed('related', false);
+
         if (_fromWayID) {
+            var way = vgraph.entity(_fromWayID);
             surface
                 .selectAll('.' + _fromWayID)
-                .classed('selected', true);
+                .classed('selected', true)
+                .classed('related', true)
+                .classed('only', !!way.__fromOnly);
         }
 
-        mouseout();
+        updateHelp(null);
 
 
         function click() {
@@ -351,6 +358,7 @@ export function uiFieldRestrictions(field, context) {
 
                 if (datum.restrictionID && !datum.direct) {
                     return;
+
                 } else if (datum.restrictionID && !datum.only) {    // cycle thru the `only_` state
                     var datumOnly = _cloneDeep(datum);
                     datumOnly.only = true;
@@ -371,7 +379,14 @@ export function uiFieldRestrictions(field, context) {
                         t('operations.restriction.annotation.create')
                     ]);
                 }
+
                 context.perform.apply(context, actions);
+
+                // At this point the datum will be changed, but will have same key..
+                // Refresh it and update the help..
+                var s = surface.selectAll('.' + datum.key);
+                datum = s.empty() ? null : s.datum();
+                updateHelp(datum);
 
             } else {
                 _fromWayID = null;
@@ -386,24 +401,6 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-        function mouseout() {
-            var help = _container.selectAll('.restriction-help').html('');
-            var div = help.append('div');
-            var d;
-
-            if (_fromWayID) {
-                d = display(vgraph.entity(_fromWayID), vgraph);
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(d.name || d.type);
-
-            } else {
-                div.append('span').text('Click to select the');
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text('way');
-            }
-        }
-
-
         function redraw() {
             if (context.hasEntity(_vertexID)) {
                 _container.call(renderViewer);
@@ -413,7 +410,7 @@ export function uiFieldRestrictions(field, context) {
 
         function updateHelp(datum) {
             var help = _container.selectAll('.restriction-help').html('');
-            var div, d;
+            var div, d, turnType, r;
 
             var entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
@@ -421,24 +418,44 @@ export function uiFieldRestrictions(field, context) {
             }
 
             surface.selectAll('.related')
-                .classed('related', false);
+                .classed('related', false)
+                .classed('allow', false)
+                .classed('restrict', false)
+                .classed('only', false);
+
 
             if (datum instanceof osmWay) {
+                surface.selectAll('.' + datum.id)
+                    .classed('related', true)
+                    .classed('only', !!datum.__fromOnly);
+
+                if (datum.__fromOnly) {
+                    r = vgraph.entity(datum.__fromOnly);
+
+                    turnType = {
+                        'only_left_turn': 'Left Turn',
+                        'only_right_turn': 'Right Turn',
+                        'only_u_turn': 'U-Turn',
+                        'only_straight_on': 'Straight On'
+                    }[r.tags.restriction];
+
+                    div = help.append('div');
+                    div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
+                }
+
                 d = display(vgraph.entity(datum.id), vgraph);
                 div = help.append('div');
                 div.append('span').attr('class', 'qualifier').text('FROM');
                 div.append('span').text(d.name || d.type);
 
-            } else if (datum instanceof osmTurn) {
-                surface.selectAll(utilEntitySelector(datum.key.split(',')))
-                    .classed('related', true);
 
+            } else if (datum instanceof osmTurn) {
                 var fromWayID = datum.from.way;
                 var viaWayIDs = datum.via.ways;
                 var toWayID = datum.to.way;
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
 
-                var turnType = {
+                turnType = {
                     'no_left_turn': 'Left Turn',
                     'no_right_turn': 'Right Turn',
                     'no_u_turn': 'U-Turn',
@@ -450,13 +467,19 @@ export function uiFieldRestrictions(field, context) {
                 if (datum.no)   { restrictType = 'NO'; klass = 'restrict'; }
                 if (datum.only) { restrictType = 'ONLY'; klass = 'only'; }
 
+                var alongIDs = datum.path.slice();
+                surface.selectAll(utilEntitySelector(alongIDs))
+                    .classed('related', true)
+                    .classed('allow', (klass === 'allow'))
+                    .classed('restrict', (klass === 'restrict'))
+                    .classed('only', (klass === 'only'));
+
+
                 var s = (klass === 'allow' ? turnType + ' Allowed' : restrictType + ' ' + turnType);
                 if (datum.direct === false) { s += ' (indirect)'; }
 
                 div = help.append('div');
-                div.append('span')
-                    .attr('class', 'qualifier ' + klass)
-                    .text(s);
+                div.append('span').attr('class', 'qualifier ' + klass).text(s);
 
                 div = help.append('div');
                 d = display(vgraph.entity(fromWayID), vgraph);
@@ -481,6 +504,40 @@ export function uiFieldRestrictions(field, context) {
                         div.append('span').text(curr);
                         prev = curr;
                     }
+                }
+
+            } else {       // datum is empty surface
+                if (_fromWayID) {
+                    var way = vgraph.entity(_fromWayID);
+                    surface
+                        .selectAll('.' + _fromWayID)
+                        .classed('selected', true)
+                        .classed('related', true)
+                        .classed('only', !!way.__fromOnly);
+
+                    if (way.__fromOnly) {
+                        r = vgraph.entity(way.__fromOnly);
+
+                        turnType = {
+                            'only_left_turn': 'Left Turn',
+                            'only_right_turn': 'Right Turn',
+                            'only_u_turn': 'U-Turn',
+                            'only_straight_on': 'Straight On'
+                        }[r.tags.restriction];
+
+                        div = help.append('div');
+                        div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
+                    }
+
+                    d = display(vgraph.entity(_fromWayID), vgraph);
+                    div = help.append('div');
+                    div.append('span').attr('class', 'qualifier').text('FROM');
+                    div.append('span').text(d.name || d.type);
+                } else {
+                    div = help.append('div');
+                    div.append('span').text('Click to select the');
+                    div.append('span').attr('class', 'qualifier').text('FROM');
+                    div.append('span').text('way');
                 }
             }
 
@@ -516,8 +573,7 @@ export function uiFieldRestrictions(field, context) {
             .call(hover.off)
             .call(breathe.off)
             .on('click.restrictions', null)
-            .on('mouseover.restrictions', null)
-            .on('mouseout.restrictions', null);
+            .on('mouseover.restrictions', null);
 
         d3_select(window)
             .on('resize.restrictions', null);
