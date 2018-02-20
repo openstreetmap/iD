@@ -407,7 +407,7 @@ export function uiFieldRestrictions(field, context) {
 
 
         function updateHelp(datum) {
-            var turns = {
+            var turnTypes = {
                 'no_left_turn': 'Left Turn',
                 'no_right_turn': 'Right Turn',
                 'no_u_turn': 'U-Turn',
@@ -440,13 +440,14 @@ export function uiFieldRestrictions(field, context) {
 
             if (datum instanceof osmWay && datum.__from) {
                 way = datum;
+
                 surface.selectAll('.' + way.id)
                     .classed('related', true)
                     .classed('only', !!way.__fromOnly);
 
                 if (way.__fromOnly) {
                     r = vgraph.entity(way.__fromOnly);
-                    turnType = turns[r.tags.restriction.replace(/^only/, 'no')];
+                    turnType = turnTypes[r.tags.restriction.replace(/^only/, 'no')];
                     div = help.append('div');
                     div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
                 }
@@ -456,34 +457,29 @@ export function uiFieldRestrictions(field, context) {
                 div.append('span').attr('class', 'qualifier').text('FROM');
                 div.append('span').text(d.name || d.type);
 
-                // highlight all TOs and ONLY VIAs?
-                var parents = vgraph.parentRelations(way);
-                for (i = 0; i < parents.length; i++) {
-                    r = parents[i];
-                    var f = r.memberByRole('from');
+                // highlight all paths on hover?
+                var turns = _intersection.turns(way.id, _maxViaWay);
 
-                    if (r.isRestriction() && f.id === way.id) {
-                        var kl = 'allow';
-                        if (/^no_/.test(r.tags.restriction))   { kl = 'restrict'; }
-                        if (/^only_/.test(r.tags.restriction)) { kl = 'only'; }
+                for (i = 0; i < turns.length; i++) {
+                    var turn = turns[i];
+                    var ids = [turn.to.way];
+                    var kl = 'allow';
+                    if (turn.no) { kl = 'restrict'; }
+                    if (turn.only) { kl = 'only'; }
 
-                        var t = r.memberByRole('to');
-                        surface.selectAll('.' + t.id)
-                            .classed('related', true)
-                            .classed('allow', (kl === 'allow'))
-                            .classed('restrict', (kl === 'restrict'))
-                            .classed('only', (kl === 'only'));
+                    if (turn.only || turns.length === 1) {
+                        var v = turn.via.node  ? [turn.via.node]
+                            : turn.via.ways ? turn.via.ways
+                            : [];
 
-                        var v = r.membersByRole('via');
-                        if (kl === 'only' && v.length) {
-                            var vIDs = v.map(function (m) { return m.id; });
-                            surface.selectAll(utilEntitySelector(vIDs))
-                                .classed('related', true)
-                                .classed('allow', (kl === 'allow'))
-                                .classed('restrict', (kl === 'restrict'))
-                                .classed('only', (kl === 'only'));
-                        }
+                        ids = ids.concat(v);
                     }
+
+                    surface.selectAll(utilEntitySelector(ids))
+                        .classed('related', true)
+                        .classed('allow', (kl === 'allow'))
+                        .classed('restrict', (kl === 'restrict'))
+                        .classed('only', (kl === 'only'));
                 }
 
 
@@ -492,7 +488,7 @@ export function uiFieldRestrictions(field, context) {
                 var viaWayIDs = datum.via.ways;
                 var toWayID = datum.to.way;
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
-                turnType = turns[restrictionType.replace(/^only/, 'no')];
+                turnType = turnTypes[restrictionType.replace(/^only/, 'no')];
 
                 var restrictType = '';
                 var klass = 'allow';
@@ -542,7 +538,7 @@ export function uiFieldRestrictions(field, context) {
                 if (_fromWayID) {
                     if (way.__fromOnly) {
                         r = vgraph.entity(way.__fromOnly);
-                        turnType = turns[r.tags.restriction.replace(/^only/, 'no')];
+                        turnType = turnTypes[r.tags.restriction.replace(/^only/, 'no')];
                         div = help.append('div');
                         div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
                     }

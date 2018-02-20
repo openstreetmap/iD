@@ -261,9 +261,10 @@ g.turn circle {
 }
 
 /* Turn restriction paths and vertices */
+.surface.tr .way.target,
 .surface.tr path.shadow.selected,
 .surface.tr path.shadow.related {
-    stroke-width: 30px;
+    stroke-width: 25px;
 }
 
 .surface.tr path.shadow.selected,
