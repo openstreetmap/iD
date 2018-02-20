@@ -9,7 +9,7 @@ import {
 
 import { t } from '../../util/locale';
 import { actionRestrictTurn, actionUnrestrictTurn } from '../../actions';
-import { behaviorBreathe, behaviorHover } from '../../behavior';
+import { behaviorBreathe } from '../../behavior';
 
 import {
     geoExtent,
@@ -52,7 +52,6 @@ import {
 export function uiFieldRestrictions(field, context) {
     var dispatch = d3_dispatch('change');
     var breathe = behaviorBreathe(context);
-    var hover = behaviorHover(context);
     var storedViaWay = context.storage('turn-restriction-via-way');
     var storedDistance = context.storage('turn-restriction-distance');
     var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
@@ -290,8 +289,7 @@ export function uiFieldRestrictions(field, context) {
             _initialized = true;
 
             surface
-                .call(breathe)
-                .call(hover);
+                .call(breathe);
 
             d3_select(window)
                 .on('resize.restrictions', function() {
@@ -409,6 +407,13 @@ export function uiFieldRestrictions(field, context) {
 
 
         function updateHelp(datum) {
+            var turns = {
+                'no_left_turn': 'Left Turn',
+                'no_right_turn': 'Right Turn',
+                'no_u_turn': 'U-Turn',
+                'no_straight_on': 'Straight On'
+            };
+
             var help = _container.selectAll('.restriction-help').html('');
             var div, d, turnType, way, r;
 
@@ -433,22 +438,14 @@ export function uiFieldRestrictions(field, context) {
             }
 
 
-
-            if (datum instanceof osmWay) {
+            if (datum instanceof osmWay && datum.__from) {
                 surface.selectAll('.' + datum.id)
                     .classed('related', true)
                     .classed('only', !!datum.__fromOnly);
 
                 if (datum.__fromOnly) {
                     r = vgraph.entity(datum.__fromOnly);
-
-                    turnType = {
-                        'only_left_turn': 'Left Turn',
-                        'only_right_turn': 'Right Turn',
-                        'only_u_turn': 'U-Turn',
-                        'only_straight_on': 'Straight On'
-                    }[r.tags.restriction];
-
+                    turnType = turns[r.tags.restriction.replace(/^only/, 'no')];
                     div = help.append('div');
                     div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
                 }
@@ -464,13 +461,7 @@ export function uiFieldRestrictions(field, context) {
                 var viaWayIDs = datum.via.ways;
                 var toWayID = datum.to.way;
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
-
-                turnType = {
-                    'no_left_turn': 'Left Turn',
-                    'no_right_turn': 'Right Turn',
-                    'no_u_turn': 'U-Turn',
-                    'no_straight_on': 'Straight On'
-                }[restrictionType.replace(/^only/, 'no')];
+                turnType = turns[restrictionType.replace(/^only/, 'no')];
 
                 var restrictType = '';
                 var klass = 'allow';
@@ -520,14 +511,7 @@ export function uiFieldRestrictions(field, context) {
                 if (_fromWayID) {
                     if (way.__fromOnly) {
                         r = vgraph.entity(way.__fromOnly);
-
-                        turnType = {
-                            'only_left_turn': 'Left Turn',
-                            'only_right_turn': 'Right Turn',
-                            'only_u_turn': 'U-Turn',
-                            'only_straight_on': 'Straight On'
-                        }[r.tags.restriction];
-
+                        turnType = turns[r.tags.restriction.replace(/^only/, 'no')];
                         div = help.append('div');
                         div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
                     }
@@ -539,7 +523,7 @@ export function uiFieldRestrictions(field, context) {
 
                 } else {
                     div = help.append('div');
-                    div.append('span').text('Click to select the');
+                    div.append('span').text('Click to select a');
                     div.append('span').attr('class', 'qualifier').text('FROM');
                     div.append('span').text('way');
                 }
@@ -574,7 +558,6 @@ export function uiFieldRestrictions(field, context) {
         if (!_initialized) return;
 
         selection.selectAll('.surface')
-            .call(hover.off)
             .call(breathe.off)
             .on('click.restrictions', null)
             .on('mouseover.restrictions', null);
