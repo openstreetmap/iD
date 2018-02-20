@@ -1910,10 +1910,10 @@ input[type=number] {
     font-weight: bold;
 }
 .restriction-help span.qualifier.allow {
-    color: #7a4;
+    color: #8b5;
 }
 .restriction-help span.qualifier.restrict {
-    color: #d75;
+    color: #d53;
 }
 .restriction-help span.qualifier.only {
     color: #78f;

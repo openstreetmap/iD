@@ -276,18 +276,15 @@ g.turn circle {
 }
 .surface.tr path.shadow.related.allow,
 .surface.tr g.vertex.related.allow .shadow {
-    stroke: #7a4;
-    /*stroke: #8cd05f;*/
+    stroke: #5b3;
 }
 .surface.tr path.shadow.related.restrict,
 .surface.tr g.vertex.related.restrict .shadow {
-    stroke: #d75;
-    /*stroke: #e06d5f;*/
+    stroke: #d53;
 }
 .surface.tr path.shadow.related.only,
 .surface.tr g.vertex.related.only .shadow {
-    stroke: #78f;
-    /*stroke: #7092ff;*/
+    stroke: #68f;
 }
 
 
