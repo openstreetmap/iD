@@ -415,7 +415,7 @@ export function uiFieldRestrictions(field, context) {
             };
 
             var help = _container.selectAll('.restriction-help').html('');
-            var div, d, turnType, way, r;
+            var div, d, turnType, way, r, i;
 
             var entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
@@ -439,21 +439,52 @@ export function uiFieldRestrictions(field, context) {
 
 
             if (datum instanceof osmWay && datum.__from) {
-                surface.selectAll('.' + datum.id)
+                way = datum;
+                surface.selectAll('.' + way.id)
                     .classed('related', true)
-                    .classed('only', !!datum.__fromOnly);
+                    .classed('only', !!way.__fromOnly);
 
-                if (datum.__fromOnly) {
-                    r = vgraph.entity(datum.__fromOnly);
+                if (way.__fromOnly) {
+                    r = vgraph.entity(way.__fromOnly);
                     turnType = turns[r.tags.restriction.replace(/^only/, 'no')];
                     div = help.append('div');
                     div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
                 }
 
-                d = display(vgraph.entity(datum.id), vgraph);
+                d = display(vgraph.entity(way.id), vgraph);
                 div = help.append('div');
                 div.append('span').attr('class', 'qualifier').text('FROM');
                 div.append('span').text(d.name || d.type);
+
+                // highlight all TOs and ONLY VIAs?
+                var parents = vgraph.parentRelations(way);
+                for (i = 0; i < parents.length; i++) {
+                    r = parents[i];
+                    var f = r.memberByRole('from');
+
+                    if (r.isRestriction() && f.id === way.id) {
+                        var kl = 'allow';
+                        if (/^no_/.test(r.tags.restriction))   { kl = 'restrict'; }
+                        if (/^only_/.test(r.tags.restriction)) { kl = 'only'; }
+
+                        var t = r.memberByRole('to');
+                        surface.selectAll('.' + t.id)
+                            .classed('related', true)
+                            .classed('allow', (kl === 'allow'))
+                            .classed('restrict', (kl === 'restrict'))
+                            .classed('only', (kl === 'only'));
+
+                        var v = r.membersByRole('via');
+                        if (kl === 'only' && v.length) {
+                            var vIDs = v.map(function (m) { return m.id; });
+                            surface.selectAll(utilEntitySelector(vIDs))
+                                .classed('related', true)
+                                .classed('allow', (kl === 'allow'))
+                                .classed('restrict', (kl === 'restrict'))
+                                .classed('only', (kl === 'only'));
+                        }
+                    }
+                }
 
 
             } else if (datum instanceof osmTurn) {
@@ -496,7 +527,7 @@ export function uiFieldRestrictions(field, context) {
                     div.append('span').attr('class', 'qualifier').text('VIA');
 
                     var curr, prev;
-                    for (var i = 0; i < viaWayIDs.length; i++) {
+                    for (i = 0; i < viaWayIDs.length; i++) {
                         d = display(vgraph.entity(viaWayIDs[i]), vgraph);
                         curr = d.name || d.type;
                         if (curr === prev) continue;  // collapse identical names
