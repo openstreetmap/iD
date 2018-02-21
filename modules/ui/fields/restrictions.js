@@ -329,10 +329,9 @@ export function uiFieldRestrictions(field, context) {
                 .selectAll('.' + _fromWayID)
                 .classed('selected', true)
                 .classed('related', true);
-                // .classed('only', !!way.__fromOnly);
         }
 
-        updateHelp(null);
+        updateHints(null);
 
 
         function click() {
@@ -384,7 +383,7 @@ export function uiFieldRestrictions(field, context) {
                 // Refresh it and update the help..
                 var s = surface.selectAll('.' + datum.key);
                 datum = s.empty() ? null : s.datum();
-                updateHelp(datum);
+                updateHints(datum);
 
             } else {
                 _fromWayID = null;
@@ -395,7 +394,7 @@ export function uiFieldRestrictions(field, context) {
 
         function mouseover() {
             var datum = d3_event.target.__data__;
-            updateHelp(datum);
+            updateHints(datum);
         }
 
 
@@ -406,7 +405,42 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-        function updateHelp(datum) {
+        function highlightPathsFrom(wayID) {
+            surface.selectAll('.related')
+                .classed('related', false)
+                .classed('allow', false)
+                .classed('restrict', false)
+                .classed('only', false);
+
+            surface.selectAll('.' + wayID)
+                .classed('related', true);
+
+            if (wayID) {
+                var turns = _intersection.turns(wayID, _maxViaWay);
+                for (var i = 0; i < turns.length; i++) {
+                    var turn = turns[i];
+                    var ids = [turn.to.way];
+                    var klass = (turn.no ? 'restrict' : (turn.only ? 'only' : 'allow'));
+
+                    if (turn.only || turns.length === 1) {
+                        if (turn.via.ways) {
+                            ids = ids.concat(turn.via.ways);
+                        }
+                    } else if (turn.to.way === wayID) {
+                        continue;
+                    }
+
+                    surface.selectAll(utilEntitySelector(ids))
+                        .classed('related', true)
+                        .classed('allow', (klass === 'allow'))
+                        .classed('restrict', (klass === 'restrict'))
+                        .classed('only', (klass === 'only'));
+                }
+            }
+        }
+
+
+        function updateHints(datum) {
             var turnTypes = {
                 'no_left_turn': 'Left Turn',
                 'no_right_turn': 'Right Turn',
@@ -415,18 +449,12 @@ export function uiFieldRestrictions(field, context) {
             };
 
             var help = _container.selectAll('.restriction-help').html('');
-            var div, d, turnType, way, r, i;
+            var div, turnType;
 
             var entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
                 datum = entity;
             }
-
-            surface.selectAll('.related')
-                .classed('related', false)
-                .classed('allow', false)
-                .classed('restrict', false)
-                .classed('only', false);
 
             if (_fromWayID) {
                 way = vgraph.entity(_fromWayID);
@@ -434,60 +462,22 @@ export function uiFieldRestrictions(field, context) {
                     .selectAll('.' + _fromWayID)
                     .classed('selected', true)
                     .classed('related', true);
-                    // .classed('only', !!way.__fromOnly);
             }
 
 
             if (datum instanceof osmWay && datum.__from) {
                 way = datum;
 
+                highlightPathsFrom(_fromWayID ? null : way.id);
                 surface.selectAll('.' + way.id)
                     .classed('related', true);
-                    // .classed('only', !!way.__fromOnly);
-
-                // if (way.__fromOnly) {
-                //     r = vgraph.entity(way.__fromOnly);
-                //     turnType = turnTypes[r.tags.restriction.replace(/^only/, 'no')];
-                //     div = help.append('div');
-                //     div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
-                // }
-
-                if (!_fromWayID || _fromWayID !== way.id) {
-                    div = help.append('div');
-                    div.append('span').text('Click to select');
-                }
 
                 div = help.append('div');
-                d = display(vgraph.entity(way.id), vgraph);
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(d.name || d.type);
-
-                // highlight all paths on hover?
-                if (!_fromWayID) {
-                    var turns = _intersection.turns(way.id, _maxViaWay);
-
-                    for (i = 0; i < turns.length; i++) {
-                        var turn = turns[i];
-                        var ids = [turn.to.way];
-                        var kl = 'allow';
-                        if (turn.no) { kl = 'restrict'; }
-                        if (turn.only) { kl = 'only'; }
-
-                        if (turn.only || turns.length === 1) {
-                            var v = turn.via.node  ? [turn.via.node]
-                                : turn.via.ways ? turn.via.ways
-                                : [];
-
-                            ids = ids.concat(v);
-                        }
-
-                        surface.selectAll(utilEntitySelector(ids))
-                            .classed('related', true)
-                            .classed('allow', (kl === 'allow'))
-                            .classed('restrict', (kl === 'restrict'))
-                            .classed('only', (kl === 'only'));
+                if (!_fromWayID || _fromWayID !== way.id) {
+                    div.append('span').text('Click to select');
                 }
-            }
+                div.append('span').attr('class', 'qualifier').text('FROM');
+                div.append('span').text(displayName(vgraph.entity(way.id), vgraph));
 
 
             } else if (datum instanceof osmTurn) {
@@ -502,6 +492,8 @@ export function uiFieldRestrictions(field, context) {
                 if (datum.no)   { restrictType = 'NO'; klass = 'restrict'; }
                 if (datum.only) { restrictType = 'ONLY'; klass = 'only'; }
 
+
+                highlightPathsFrom(null);
                 var alongIDs = datum.path.slice();
                 surface.selectAll(utilEntitySelector(alongIDs))
                     .classed('related', true)
@@ -517,22 +509,19 @@ export function uiFieldRestrictions(field, context) {
                 div.append('span').attr('class', 'qualifier ' + klass).text(s);
 
                 div = help.append('div');
-                d = display(vgraph.entity(fromWayID), vgraph);
                 div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(d.name || d.type);
+                div.append('span').text(displayName(vgraph.entity(fromWayID), vgraph));
 
-                d = display(vgraph.entity(toWayID), vgraph);
                 div.append('span').attr('class', 'qualifier').text('TO');
-                div.append('span').text(d.name || d.type);
+                div.append('span').text(displayName(vgraph.entity(toWayID), vgraph));
 
                 if (viaWayIDs && viaWayIDs.length) {
                     div = help.append('div');
                     div.append('span').attr('class', 'qualifier').text('VIA');
 
                     var curr, prev;
-                    for (i = 0; i < viaWayIDs.length; i++) {
-                        d = display(vgraph.entity(viaWayIDs[i]), vgraph);
-                        curr = d.name || d.type;
+                    for (var i = 0; i < viaWayIDs.length; i++) {
+                        curr = displayName(vgraph.entity(viaWayIDs[i]), vgraph);
                         if (curr === prev) continue;  // collapse identical names
 
                         if (prev) div.append('span').text(',');
@@ -542,18 +531,11 @@ export function uiFieldRestrictions(field, context) {
                 }
 
             } else {       // datum is empty surface
+                highlightPathsFrom(null);
                 if (_fromWayID) {
-                    // if (way.__fromOnly) {
-                    //     r = vgraph.entity(way.__fromOnly);
-                    //     turnType = turnTypes[r.tags.restriction.replace(/^only/, 'no')];
-                    //     div = help.append('div');
-                    //     div.append('span').attr('class', 'qualifier only').text('ONLY ' + turnType);
-                    // }
-
                     div = help.append('div');
-                    d = display(vgraph.entity(_fromWayID), vgraph);
                     div.append('span').attr('class', 'qualifier').text('FROM');
-                    div.append('span').text(d.name || d.type);
+                    div.append('span').text(displayName(vgraph.entity(_fromWayID), vgraph));
 
                 } else {
                     div = help.append('div');
@@ -567,11 +549,11 @@ export function uiFieldRestrictions(field, context) {
     }
 
 
-    function display(entity, graph) {
+    function displayName(entity, graph) {
         var name = utilDisplayName(entity) || '';
         var matched = context.presets().match(entity, graph);
         var type = (matched && matched.name()) || utilDisplayType(entity.id);
-        return { name: name, type: type };
+        return name || type;
     }
 
 

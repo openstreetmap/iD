@@ -242,21 +242,8 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             __from:  __from,
             __via: __via,
             __to:  __to,
-            __oneWay:  __oneWay,
-            __fromOnly: fromOnly(way)
+            __oneWay:  __oneWay
         });
-
-        function fromOnly(way) {
-            var parents = vgraph.parentRelations(way);
-            for (var i = 0; i < parents.length; i++) {
-                var r = parents[i];
-                var f = r.memberByRole('from');
-                if (r.isRestriction() && /^only_/.test(r.tags.restriction) && f.id === way.id) {
-                    return r.id;
-                }
-            }
-            return null;
-        }
     }
 
     ways = [];
