@@ -285,16 +285,46 @@
                 "connected_to_hidden": "This can't be split because it is connected to a hidden feature."
             },
             "restriction": {
-                "help": {
-                    "select": "Click to select a road segment.",
-                    "toggle": "Click to toggle turn restrictions.",
-                    "toggle_on": "Click to add a \"{restriction}\" restriction.",
-                    "toggle_off": "Click to remove the \"{restriction}\" restriction."
-                },
                 "annotation": {
                     "create": "Added a turn restriction",
                     "delete": "Deleted a turn restriction"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distance",
+                "distance_up_to": "Up to {distance}",
+                "via": "Via",
+                "via_node_only": "Node only",
+                "via_up_to_one": "Up to 1 way",
+                "via_up_to_multiple": "Up to {num} ways"
+            },
+            "help": {
+                "no": "NO",
+                "only": "ONLY",
+                "allowed": "Allowed",
+                "indirect": "(indirect)",
+                "turn": {
+                    "left_turn": "Left Turn",
+                    "right_turn": "Right Turn",
+                    "u_turn": "U-Turn",
+                    "straight_on": "Straight On"
+                },
+                "no_turn_string": "{no} {turn} {indirect}",
+                "only_turn_string": "{only} {turn} {indirect}",
+                "allowed_turn_string": "{turn} {allowed} {indirect}",
+                "from": "FROM",
+                "via": "VIA",
+                "to": "TO",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Click to select a {from} segment",
+                "select_from_name": "Click to select {from} {fromName}",
+                "toggle": "Click to toggle turn restrictions.",
+                "toggle_on": "Click to add a \"{restriction}\" restriction.",
+                "toggle_off": "Click to remove the \"{restriction}\" restriction."
             }
         },
         "undo": {

@@ -1905,17 +1905,17 @@ input[type=number] {
     margin: 2px;
 }
 
-.restriction-help span.qualifier {
+.restriction-help .qualifier {
     color: #666;
     font-weight: bold;
 }
-.restriction-help span.qualifier.allow {
+.restriction-help .qualifier.allow {
     color: #8b5;
 }
-.restriction-help span.qualifier.restrict {
+.restriction-help .qualifier.restrict {
     color: #d53;
 }
-.restriction-help span.qualifier.only {
+.restriction-help .qualifier.only {
     color: #78f;
 }
 

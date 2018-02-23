@@ -54,7 +54,6 @@ export function uiFieldRestrictions(field, context) {
     var breathe = behaviorBreathe(context);
     var storedViaWay = context.storage('turn-restriction-via-way');
     var storedDistance = context.storage('turn-restriction-distance');
-    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
 
     var _maxViaWay = storedViaWay !== null ? (+storedViaWay) : 1;
     var _maxDistance = storedDistance ? (+storedDistance) : 30;
@@ -119,7 +118,6 @@ export function uiFieldRestrictions(field, context) {
             .merge(container)
             .call(renderViewer);
 
-
         var controls = wrap.selectAll('.restriction-controls')
             .data([0]);
 
@@ -148,7 +146,7 @@ export function uiFieldRestrictions(field, context) {
         distControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-distance-label')
-            .text('Distance:');
+            .text(t('restriction.controls.distance') + ':');
 
         distControlEnter
             .append('input')
@@ -174,18 +172,8 @@ export function uiFieldRestrictions(field, context) {
                 _parent.call(restrictions);
             });
 
-        var distDisplay;
-        if (isImperial) {   // imprecise conversion for prettier display
-            var distToFeet = {
-                20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
-            }[_maxDistance];
-            distDisplay = 'Up to ' + distToFeet + ' feet';
-        } else {
-            distDisplay = 'Up to ' + _maxDistance + ' meters';
-        }
-
         selection.selectAll('.restriction-distance-text')
-            .text(distDisplay);
+            .text(displayMaxDistance(_maxDistance));
 
 
         var viaControl = selection.selectAll('.restriction-via-way')
@@ -201,7 +189,7 @@ export function uiFieldRestrictions(field, context) {
         viaControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-via-way-label')
-            .text('Via:');
+            .text(t('restriction.controls.via') + ':');
 
         viaControlEnter
             .append('input')
@@ -226,9 +214,8 @@ export function uiFieldRestrictions(field, context) {
                 _parent.call(restrictions);
             });
 
-        var t = ['Node only', 'Up to 1 way', 'Up to 2 ways'];
         selection.selectAll('.restriction-via-way-text')
-            .text(t[_maxViaWay]);
+            .text(displayMaxVia(_maxViaWay));
     }
 
 
@@ -441,15 +428,12 @@ export function uiFieldRestrictions(field, context) {
 
 
         function updateHints(datum) {
-            var turnTypes = {
-                'no_left_turn': 'Left Turn',
-                'no_right_turn': 'Right Turn',
-                'no_u_turn': 'U-Turn',
-                'no_straight_on': 'Straight On'
-            };
-
             var help = _container.selectAll('.restriction-help').html('');
-            var div, turnType;
+
+            var placeholders = {};
+            ['from', 'via', 'to'].forEach(function(k) {
+                placeholders[k] = '<span class="qualifier">' + t('restriction.help.' + k) + '</span>';
+            });
 
             var entity = datum && datum.properties && datum.properties.entity;
             if (entity) {
@@ -464,7 +448,7 @@ export function uiFieldRestrictions(field, context) {
                     .classed('related', true);
             }
 
-
+            // Hovering a way
             if (datum instanceof osmWay && datum.__from) {
                 way = datum;
 
@@ -472,26 +456,75 @@ export function uiFieldRestrictions(field, context) {
                 surface.selectAll('.' + way.id)
                     .classed('related', true);
 
-                div = help.append('div');
-                if (!_fromWayID || _fromWayID !== way.id) {
-                    div.append('span').text('Click to select');
-                }
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(displayName(vgraph.entity(way.id), vgraph));
+                var clickSelect = (!_fromWayID || _fromWayID !== way.id);
+                help
+                    .append('div')      // "Click to select FROM {fromName}." / "FROM {fromName}"
+                    .html(t('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
+                        from: placeholders.from,
+                        fromName: displayName(way.id, vgraph)
+                    }));
 
 
+            // Hovering a turn arrow
             } else if (datum instanceof osmTurn) {
-                var fromWayID = datum.from.way;
-                var viaWayIDs = datum.via.ways;
-                var toWayID = datum.to.way;
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
-                turnType = turnTypes[restrictionType.replace(/^only/, 'no')];
+                var turnType = restrictionType.replace(/^(only|no)\_/, '');
+                var indirect = (datum.direct === false ? t('restriction.help.indirect') : '');
+                var klass, turnHtml;
 
-                var restrictType = '';
-                var klass = 'allow';
-                if (datum.no)   { restrictType = 'NO'; klass = 'restrict'; }
-                if (datum.only) { restrictType = 'ONLY'; klass = 'only'; }
+                if (datum.no) {
+                    klass = 'restrict';
+                    turnHtml = t('restriction.help.no_turn_string', {
+                        no: t('restriction.help.no'),
+                        turn: t('restriction.help.turn.' + turnType),
+                        indirect: indirect
+                    });
+                } else if (datum.only) {
+                    klass = 'only';
+                    turnHtml = t('restriction.help.only_turn_string', {
+                        only: t('restriction.help.only'),
+                        turn: t('restriction.help.turn.' + turnType),
+                        indirect: indirect
+                    });
+                } else {
+                    klass = 'allow';
+                    turnHtml = t('restriction.help.allowed_turn_string', {
+                        allowed: t('restriction.help.allowed'),
+                        turn: t('restriction.help.turn.' + turnType),
+                        indirect: indirect
+                    });
+                }
 
+                help
+                    .append('div')      // Turn Description
+                    .attr('class', 'qualifier ' + klass)
+                    .html(turnHtml);
+
+                help
+                    .append('div')      // "FROM {fromName} TO {toName}"
+                    .html(t('restriction.help.from_name_to_name', {
+                        from: placeholders.from,
+                        fromName: displayName(datum.from.way, vgraph),
+                        to: placeholders.to,
+                        toName: displayName(datum.to.way, vgraph)
+                    }));
+
+                if (datum.via.ways && datum.via.ways.length) {
+                    var names = [];
+                    for (var i = 0; i < datum.via.ways.length; i++) {
+                        var prev = names[names.length - 1];
+                        var curr = displayName(datum.via.ways[i], vgraph);
+                        if (!prev || curr !== prev)   // collapse identical names
+                            names.push(curr);
+                    }
+
+                    help
+                        .append('div')      // "VIA {viaNames}"
+                        .html(t('restriction.help.via_names', {
+                            via: placeholders.via,
+                            viaNames: names.join(', ')
+                        }));
+                }
 
                 highlightPathsFrom(null);
                 var alongIDs = datum.path.slice();
@@ -502,54 +535,55 @@ export function uiFieldRestrictions(field, context) {
                     .classed('only', (klass === 'only'));
 
 
-                var s = (klass === 'allow' ? turnType + ' Allowed' : restrictType + ' ' + turnType);
-                if (datum.direct === false) { s += ' (indirect)'; }
-
-                div = help.append('div');
-                div.append('span').attr('class', 'qualifier ' + klass).text(s);
-
-                div = help.append('div');
-                div.append('span').attr('class', 'qualifier').text('FROM');
-                div.append('span').text(displayName(vgraph.entity(fromWayID), vgraph));
-
-                div.append('span').attr('class', 'qualifier').text('TO');
-                div.append('span').text(displayName(vgraph.entity(toWayID), vgraph));
-
-                if (viaWayIDs && viaWayIDs.length) {
-                    div = help.append('div');
-                    div.append('span').attr('class', 'qualifier').text('VIA');
-
-                    var curr, prev;
-                    for (var i = 0; i < viaWayIDs.length; i++) {
-                        curr = displayName(vgraph.entity(viaWayIDs[i]), vgraph);
-                        if (curr === prev) continue;  // collapse identical names
-
-                        if (prev) div.append('span').text(',');
-                        div.append('span').text(curr);
-                        prev = curr;
-                    }
-                }
-
-            } else {       // datum is empty surface
+            // Hovering empty surface
+            } else {
                 highlightPathsFrom(null);
                 if (_fromWayID) {
-                    div = help.append('div');
-                    div.append('span').attr('class', 'qualifier').text('FROM');
-                    div.append('span').text(displayName(vgraph.entity(_fromWayID), vgraph));
+                    help
+                        .append('div')      // "FROM {fromName}"
+                        .html(t('restriction.help.from_name', {
+                            from: placeholders.from,
+                            fromName: displayName(_fromWayID, vgraph)
+                        }));
 
                 } else {
-                    div = help.append('div');
-                    div.append('span').text('Click to select a');
-                    div.append('span').attr('class', 'qualifier').text('FROM');
-                    div.append('span').text('way');
+                    help
+                        .append('div')      // "Click to select a FROM segment."
+                        .html(t('restriction.help.select_from', {
+                            from: placeholders.from
+                        }));
                 }
             }
-
         }
     }
 
 
-    function displayName(entity, graph) {
+    function displayMaxDistance(maxDist) {
+        var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
+        var opts;
+
+        if (isImperial) {
+            var distToFeet = {   // imprecise conversion for prettier display
+                20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
+            }[maxDist];
+            opts = { distance: t('units.feet', { quantity: distToFeet }) };
+        } else {
+            opts = { distance: t('units.meters', { quantity: maxDist }) };
+        }
+
+        return t('restriction.controls.distance_up_to', opts);
+    }
+
+
+    function displayMaxVia(maxVia) {
+        return maxVia === 0 ? t('restriction.controls.via_node_only')
+            : maxVia === 1 ? t('restriction.controls.via_up_to_one')
+            : t('restriction.controls.via_up_to_multiple', { num: maxVia });
+    }
+
+
+    function displayName(entityID, graph) {
+        var entity = graph.entity(entityID);
         var name = utilDisplayName(entity) || '';
         var matched = context.presets().match(entity, graph);
         var type = (matched && matched.name()) || utilDisplayType(entity.id);
