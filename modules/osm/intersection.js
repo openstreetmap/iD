@@ -490,7 +490,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     // an indirect restriction - only include the partial path (starting at FROM)
                     if (matchedRestriction && matchedRestriction.direct === false) {
                         for (i = 0; i < turnPath.length; i++) {
-                            if (i > 0 && turnPath[i] === matchedRestriction.from) {
+                            if (turnPath[i] === matchedRestriction.from) {
                                 turnPath = turnPath.slice(i);
                                 break;
                             }
