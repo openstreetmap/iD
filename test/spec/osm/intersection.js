@@ -81,11 +81,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,-');
+            expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).to.be.not.ok;
         });
 
@@ -103,11 +103,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,-');
+            expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).to.be.not.ok;
         });
 
@@ -130,15 +130,15 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(3);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('-,*,=');
+            expect(turns[0].key).to.eql('-_*_=');
             expect(turns[0].u).to.be.not.ok;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('-,*,-');
+            expect(turns[1].key).to.eql('-_*_-');
             expect(turns[1].u).to.be.true;
 
             expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[2].key).to.match(/^-,\*,w-\d+$/);   // new way
+            expect(turns[2].key).to.match(/^-\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).to.be.not.ok;
         });
 
@@ -161,15 +161,15 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(3);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,-');
+            expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).to.be.not.ok;
 
             expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[2].key).to.match(/^=,\*,w-\d+$/);   // new way
+            expect(turns[2].key).to.match(/^=\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).to.be.not.ok;
         });
 
@@ -187,7 +187,7 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(1);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,-');
+            expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).to.be.not.ok;
         });
 
@@ -205,7 +205,7 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(1);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,-');
+            expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).to.be.not.ok;
         });
 
@@ -247,11 +247,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,-');
+            expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).to.be.not.ok;
         });
 
@@ -269,11 +269,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,-');
+            expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).to.be.not.ok;
         });
 
@@ -291,7 +291,7 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(1);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
         });
 
@@ -309,7 +309,7 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(1);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
         });
 
@@ -332,11 +332,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,-');
+            expect(turns[1].key).to.eql('=_*_-');
             expect(turns[1].u).to.be.not.ok;
             expect(turns[1].restrictionID).to.eql('r');
             expect(turns[1].direct).to.be.true;
@@ -367,11 +367,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(3);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,=');
+            expect(turns[0].key).to.eql('=_*_=');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,~');
+            expect(turns[1].key).to.eql('=_*_~');
             expect(turns[1].restrictionID).to.eql('r');
             expect(turns[1].u).to.be.not.ok;
             expect(turns[1].direct).to.be.not.ok;
@@ -379,7 +379,7 @@ describe('iD.osmIntersection', function() {
             expect(turns[1].only).to.be.not.ok;
 
             expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[2].key).to.eql('=,*,-');
+            expect(turns[2].key).to.eql('=_*_-');
             expect(turns[2].restrictionID).to.eql('r');
             expect(turns[2].u).to.be.not.ok;
             expect(turns[2].direct).to.be.not.ok;
@@ -407,15 +407,15 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(3);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,-');
+            expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).to.be.not.ok;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,=');
+            expect(turns[1].key).to.eql('=_*_=');
             expect(turns[1].u).to.be.true;
 
             expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[2].key).to.match(/^=,\*,w-\d+$/);   // new way
+            expect(turns[2].key).to.match(/^=\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).to.be.not.ok;
         });
 
@@ -439,15 +439,15 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(3);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('-,*,-');
+            expect(turns[0].key).to.eql('-_*_-');
             expect(turns[0].u).to.be.true;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('-,*,=');
+            expect(turns[1].key).to.eql('-_*_=');
             expect(turns[1].u).to.be.not.ok;
 
             expect(turns[2]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[2].key).to.match(/^-,\*,w-\d+$/);   // new way
+            expect(turns[2].key).to.match(/^-\_\*\_w-\d+$/);   // new way
             expect(turns[2].u).to.be.not.ok;
         });
 
@@ -471,11 +471,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,-');
+            expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).to.be.not.ok;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,=');
+            expect(turns[1].key).to.eql('=_*_=');
             expect(turns[1].u).to.be.true;
         });
 
@@ -499,11 +499,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql('=,*,-');
+            expect(turns[0].key).to.eql('=_*_-');
             expect(turns[0].u).to.be.not.ok;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql('=,*,=');
+            expect(turns[1].key).to.eql('=_*_=');
             expect(turns[1].u).to.be.true;
         });
 
@@ -529,11 +529,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql(newWay.id + ',*,-');
+            expect(turns[0].key).to.eql(newWay.id + '_*_-');
             expect(turns[0].u).to.be.not.ok;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql(newWay.id + ',*,=');
+            expect(turns[1].key).to.eql(newWay.id + '_*_=');
             expect(turns[1].u).to.be.not.ok;
         });
 
@@ -559,11 +559,11 @@ describe('iD.osmIntersection', function() {
             expect(turns.length).to.eql(2);
 
             expect(turns[0]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[0].key).to.eql(newWay.id + ',*,-');
+            expect(turns[0].key).to.eql(newWay.id + '_*_-');
             expect(turns[0].u).to.be.not.ok;
 
             expect(turns[1]).to.be.an.instanceOf(iD.osmTurn);
-            expect(turns[1].key).to.eql(newWay.id + ',*,=');
+            expect(turns[1].key).to.eql(newWay.id + '_*_=');
             expect(turns[1].u).to.be.not.ok;
         });
 
