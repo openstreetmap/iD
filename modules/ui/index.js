@@ -19,6 +19,7 @@ export { uiEntityEditor } from './entity_editor';
 export { uiFeatureInfo } from './feature_info';
 export { uiFeatureList } from './feature_list';
 export { uiField } from './field';
+export { uiFieldHelp } from './field_help';
 export { uiFlash } from './flash';
 export { uiFormFields } from './form_fields';
 export { uiFullScreen } from './full_screen';

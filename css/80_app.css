@@ -1266,6 +1266,7 @@ a.hide-toggle {
     border-top: 0;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
+    position: relative;
 }
 
 .form-field textarea {
@@ -1988,7 +1989,7 @@ div.combobox {
 }
 
 .combobox-caret::after {
-    content:"";
+    content: "";
     height: 0; width: 0;
     position: absolute;
     left: 0; right: 0; bottom: 0; top: 0;
@@ -1996,6 +1997,20 @@ div.combobox {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
+}
+
+/* Field Help */
+
+.field-help-body {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 10px;
+    background: rgba(255,255,255,0.95);
 }
 
 /* Raw Tag Editor */
