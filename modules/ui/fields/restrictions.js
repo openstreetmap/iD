@@ -99,8 +99,6 @@ export function uiFieldRestrictions(field, context) {
             .attr('class', 'preset-input-wrap')
             .merge(wrap);
 
-        var isComplex = (isOK && _intersection.vertices.length > 1);
-
         var container = wrap.selectAll('.restriction-container')
             .data([0]);
 
