@@ -882,6 +882,37 @@
                 "using": "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Click the {data} **Map data** panel on the side of the map to enable, disable, or zoom to your GPS data.",
                 "tracing": "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add.",
                 "upload": "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Editing Turn Restrictions",
+                    "inspecting": {
+                        "title": "Inspecting",
+                        "about": "To inspect turn restrictions, hover over a starting segment.",
+                        "shadow": "All paths starting from that segment will be drawn with a line shadow.",
+                        "from": "{from} Starting segment",
+                        "allow": "{allowed} Allowed",
+                        "restrict": "{restricted} Restricted",
+                        "only": "{only} Only"
+                    },
+                    "modifying": {
+                        "title": "Modifying",
+                        "about": "To modify turn restrictions, click on a starting segment.",
+                        "indicators": "All of the possible TO destinations from that segment will appear as turn indicators.",
+                        "indicators2": "Click on a turn indicator to toggle it between \"Allowed\", \"Restricted\", and \"Only\".",
+                        "allow": "{allowed} Allowed",
+                        "restrict": "{restricted} Restricted",
+                        "only": "{only} Only"
+                    },
+                    "tips": {
+                        "title": "Tips",
+                        "tip1": "* Prefer simple restrictions over complex ones.",
+                        "tip2": "For example, avoid using a via-way restriction if a simpler turn restriction will do.",
+                        "tip3": "* Some restrictions are \"(indirect)\".  These restrictions exist because of another nearby restriction.",
+                        "tip4": "For example, a route with an \"Only Straight On\" turn restriction will indirectly create \"No Turn\" restrictions.",
+                        "tip5": "* You may not edit an indirect restriction.  Instead, edit the nearby direct restriction."
+                    }
+                }
             }
         },
         "intro": {

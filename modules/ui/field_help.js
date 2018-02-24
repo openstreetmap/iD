@@ -3,14 +3,73 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import marked from 'marked';
+import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
+
+
+// This currently only works with the 'restrictions' field
+var fieldHelpKeys = {
+    restrictions: [
+        ['inspecting',[
+            'title',
+            'about',
+            'shadow',
+            'from',
+            'allow',
+            'restrict',
+            'only'
+        ]],
+        ['modifying',[
+            'title',
+            'about',
+            'indicators',
+            'indicators2',
+            'allow',
+            'restrict',
+            'only'
+        ]],
+        ['tips',[
+            'title',
+            'tip1',
+            'tip2',
+            'tip3',
+            'tip4',
+            'tip5'
+        ]]
+    ]
+};
+
+var fieldHelpHeadings = {
+    'help.field.restrictions.inspecting.title': 3,
+    'help.field.restrictions.modifying.title': 3,
+    'help.field.restrictions.tips.title': 3
+};
+
+var replacements = {};
 
 
 export function uiFieldHelp(fieldName) {
     var fieldHelp = {};
     var _body = d3_select(null);
     var _showing;
+
+
+    // For each section, squash all the texts into a single markdown document
+    var docs = fieldHelpKeys[fieldName].map(function(key) {
+        var helpkey = 'help.field.' + fieldName + '.' + key[0];
+        var text = key[1].reduce(function(all, part) {
+            var subkey = helpkey + '.' + part;
+            var depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
+            var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
+            return all + hhh + t(subkey, replacements) + '\n\n';
+        }, '');
+
+        return {
+            title: t(helpkey + '.title'),
+            html: marked(text.trim())
+        };
+    });
 
 
     function show() {
@@ -34,6 +93,53 @@ export function uiFieldHelp(fieldName) {
             });
 
         _showing = false;
+    }
+
+
+    function clickHelp(d, i) {
+        var rtl = (textDirection === 'rtl');
+
+        _body.selectAll('.field-help-content').html(d.html);
+        var nav = _body.selectAll('.field-help-nav').html('');
+
+        if (rtl) {
+            nav.call(drawNext).call(drawPrevious);
+        } else {
+            nav.call(drawPrevious).call(drawNext);
+        }
+
+        function drawNext(selection) {
+            if (i < docs.length - 1) {
+                var nextLink = selection
+                    .append('a')
+                    .attr('class', 'next')
+                    .on('click', function() {
+                        clickHelp(docs[i + 1], i + 1);
+                    });
+
+                nextLink
+                    .append('span')
+                    .text(docs[i + 1].title)
+                    .call(svgIcon((rtl ? '#icon-backward' : '#icon-forward'), 'inline'));
+            }
+        }
+
+
+        function drawPrevious(selection) {
+            if (i > 0) {
+                var prevLink = selection
+                    .append('a')
+                    .attr('class', 'previous')
+                    .on('click', function() {
+                        clickHelp(docs[i - 1], i - 1);
+                    });
+
+                prevLink
+                    .call(svgIcon((rtl ? '#icon-forward' : '#icon-backward'), 'inline'))
+                    .append('span')
+                    .text(docs[i - 1].title);
+            }
+        }
     }
 
 
@@ -73,16 +179,22 @@ export function uiFieldHelp(fieldName) {
             .attr('class', 'field-help-body cf hide')
             .style('height', '0px');
 
-//debug
-for (var i = 0; i < 15; i++) {
         enter
-            .append('p')
-            .attr('class', 'field-help-description')
-            .text('lorem ipsum');
-}
+            .append('h2')
+            .text(t('help.field.' + fieldName + '.title'));
+
+        enter
+            .append('div')
+            .attr('class', 'field-help-content');
+
+        enter
+            .append('div')
+            .attr('class', 'field-help-nav');
 
         _body = _body
             .merge(enter);
+
+        clickHelp(docs[0], 0);
 
         if (_showing === false) {
             hide();
