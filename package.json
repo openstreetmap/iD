@@ -10,7 +10,7 @@
   ],
   "license": "ISC",
   "scripts": {
-    "all": "npm-run-all -s clean build dist",
+    "all": "npm-run-all -s clean flow build dist",
     "build": "node development_server.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
@@ -23,7 +23,8 @@
     "start": "node development_server.js develop",
     "test": "npm-run-all -s lint build test:**",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
-    "translations": "node data/update_locales"
+    "translations": "node data/update_locales",
+    "flow": "flow"
   },
   "dependencies": {
     "@mapbox/sexagesimal": "1.1.0",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@mapbox/maki": "^4.0.0",
     "@std/esm": "^0.22.0",
+    "babel-eslint": "^8.2.2",
     "chai": "^4.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
@@ -46,6 +48,9 @@
     "ecstatic": "^3.0.0",
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
     "eslint": "^4.3.0",
+    "eslint-plugin-flowtype": "^2.46.1",
+    "flow-bin": "^0.66.0",
+    "flow-remove-types": "^1.2.3",
     "gaze": "^1.1.1",
     "glob": "^7.1.0",
     "happen": "^0.3.1",
@@ -62,6 +67,7 @@
     "request": "^2.81.0",
     "rollup": "~0.55.0",
     "rollup-plugin-commonjs": "~8.3.0",
+    "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-includepaths": "~0.2.2",
     "rollup-plugin-json": "~2.2.0",
     "rollup-plugin-node-resolve": "~3.0.0",
