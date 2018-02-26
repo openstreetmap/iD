@@ -2006,13 +2006,16 @@ div.combobox {
 .field-help-body {
     display: block;
     position: absolute;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    margin-left: 5px;
+    margin-right: 5px;
     overflow: hidden;
     top: 0;
-    width: 100%;
-    height: 100%;
     z-index: 2;
-    padding: 0px;
     background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
 }
 
 .field-help-title h2 {
@@ -2029,6 +2032,8 @@ div.combobox {
 
 .field-help-content {
     padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .field-help-content h3 {
@@ -2050,6 +2055,7 @@ div.combobox {
     height: 20px;
 }
 .field-help-content svg.shadow {
+    opacity: 0.7;
     width: 60px;
     height: 20px;
 }
@@ -2064,6 +2070,19 @@ div.combobox {
 }
 .field-help-content svg.only {
     color: #68f;
+}
+
+.field-help-nav {
+    position: relative;
+}
+.field-help-nav a {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+.field-help-nav-item {
+    display: inline-block;
+    list-style: none;
 }
 
 
@@ -2757,7 +2776,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc li a:hover,
-.help-wrap .nav a:hover  {
+.help-wrap .nav a:hover {
     background: #ececec;
 }
 

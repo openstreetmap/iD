@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import marked from 'marked';
-import { t, textDirection } from '../util/locale';
+import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { icon } from 'intro/helper';
 
@@ -15,7 +15,6 @@ var fieldHelpKeys = {
         ['inspecting',[
             'title',
             'about',
-            'shadow',
             'from',
             'allow',
             'restrict',
@@ -25,7 +24,6 @@ var fieldHelpKeys = {
             'title',
             'about',
             'indicators',
-            'indicators2',
             'allow',
             'restrict',
             'only'
@@ -58,10 +56,10 @@ var replacements = {
 };
 
 
-export function uiFieldHelp(fieldName) {
+export function uiFieldHelp(context, fieldName) {
     var fieldHelp = {};
+    var _wrap = d3_select(null);
     var _body = d3_select(null);
-
 
     // For each section, squash all the texts into a single markdown document
     var docs = fieldHelpKeys[fieldName].map(function(key) {
@@ -74,6 +72,7 @@ export function uiFieldHelp(fieldName) {
         }, '');
 
         return {
+            key: helpkey,
             title: t(helpkey + '.title'),
             html: marked(text.trim())
         };
@@ -81,11 +80,14 @@ export function uiFieldHelp(fieldName) {
 
 
     function show() {
+        _wrap    // allow help to spill outside the wrap
+            .style('overflow', 'visible');
+
         _body
             .classed('hide', false)
             .transition()
             .duration(200)
-            .style('height', '100%');
+            .style('height', '600px');
     }
 
 
@@ -95,54 +97,32 @@ export function uiFieldHelp(fieldName) {
             .duration(200)
             .style('height', '0px')
             .on('end', function () {
+                _wrap.style('overflow', null);
                 _body.classed('hide', true);
             });
     }
 
 
     function clickHelp(d, i) {
-        var rtl = (textDirection === 'rtl');
+        var content = _body.selectAll('.field-help-content')
+            .html(d.html);
 
-        _body.selectAll('.field-help-content').html(d.html);
-        var nav = _body.selectAll('.field-help-nav').html('');
-
-        if (rtl) {
-            nav.call(drawNext).call(drawPrevious);
-        } else {
-            nav.call(drawPrevious).call(drawNext);
+        // add an image for some help sections
+        var img;
+        switch (d.key) {
+            case 'help.field.restrictions.inspecting':
+            img = 'tr_inspect.gif';
+            break;
+            case 'help.field.restrictions.modifying':
+            img = 'tr_modify.gif';
+            break;
         }
 
-        function drawNext(selection) {
-            if (i < docs.length - 1) {
-                var nextLink = selection
-                    .append('a')
-                    .attr('class', 'next')
-                    .on('click', function() {
-                        clickHelp(docs[i + 1], i + 1);
-                    });
-
-                nextLink
-                    .append('span')
-                    .text(docs[i + 1].title)
-                    .call(svgIcon((rtl ? '#icon-backward' : '#icon-forward'), 'inline'));
-            }
-        }
-
-
-        function drawPrevious(selection) {
-            if (i > 0) {
-                var prevLink = selection
-                    .append('a')
-                    .attr('class', 'previous')
-                    .on('click', function() {
-                        clickHelp(docs[i - 1], i - 1);
-                    });
-
-                prevLink
-                    .call(svgIcon((rtl ? '#icon-forward' : '#icon-backward'), 'inline'))
-                    .append('span')
-                    .text(docs[i - 1].title);
-            }
+        if (img) {
+            content
+                .append('img')
+                .attr('class', 'field-help-image')
+                .attr('src', context.imagePath(img));
         }
     }
 
@@ -172,10 +152,10 @@ export function uiFieldHelp(fieldName) {
 
     fieldHelp.body = function(selection) {
         // this control expects the field to have a preset-input-wrap div
-        var wrap = selection.selectAll('.preset-input-wrap');
-        if (wrap.empty()) return;
+        _wrap = selection.selectAll('.preset-input-wrap');
+        if (_wrap.empty()) return;
 
-        _body = wrap.selectAll('.field-help-body')
+        _body = _wrap.selectAll('.field-help-body')
             .data([0]);
 
         var enter = _body.enter()
@@ -202,13 +182,28 @@ export function uiFieldHelp(fieldName) {
             })
             .call(svgIcon('#icon-close'));
 
-        enter
-            .append('div')
-            .attr('class', 'field-help-content');
+        var navEnter = enter
+            .append('ul')
+            .attr('class', 'field-help-nav');
+
+        var titles = docs.map(function(d) { return d.title; });
+        navEnter.selectAll('.field-help-nav-item')
+            .data(titles)
+            .enter()
+            .append('li')
+            .attr('class', 'field-help-nav-item')
+            .append('a')
+            .attr('class', 'next')
+            .text(function(d) { return d; })
+            .on('click', function(d, i) {
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+                clickHelp(docs[i], i);
+            });
 
         enter
             .append('div')
-            .attr('class', 'field-help-nav');
+            .attr('class', 'field-help-content');
 
         _body = _body
             .merge(enter);
