@@ -149,9 +149,6 @@ export function uiField(context, presetField, entity, options) {
                 // instantiate field help
                 if (options.wrap && field.type === 'restrictions') {
                     help = uiFieldHelp('restrictions');
-                    if (_state === 'hover') {
-                        help.showing(false);
-                    }
                 }
 
                 // instantiate tag reference

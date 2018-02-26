@@ -61,7 +61,6 @@ var replacements = {
 export function uiFieldHelp(fieldName) {
     var fieldHelp = {};
     var _body = d3_select(null);
-    var _showing;
 
 
     // For each section, squash all the texts into a single markdown document
@@ -87,8 +86,6 @@ export function uiFieldHelp(fieldName) {
             .transition()
             .duration(200)
             .style('height', '100%');
-
-        _showing = true;
     }
 
 
@@ -100,8 +97,6 @@ export function uiFieldHelp(fieldName) {
             .on('end', function () {
                 _body.classed('hide', true);
             });
-
-        _showing = false;
     }
 
 
@@ -166,10 +161,10 @@ export function uiFieldHelp(fieldName) {
             .on('click', function () {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
-                if (_showing) {
-                    hide();
-                } else {
+                if (_body.classed('hide')) {
                     show();
+                } else {
+                    hide();
                 }
             });
     };
@@ -185,12 +180,27 @@ export function uiFieldHelp(fieldName) {
 
         var enter = _body.enter()
             .append('div')
-            .attr('class', 'field-help-body cf hide')
+            .attr('class', 'field-help-body cf hide')   // initially hidden
             .style('height', '0px');
 
-        enter
+        var titleEnter = enter
+            .append('div')
+            .attr('class', 'field-help-title cf');
+
+        titleEnter
             .append('h2')
+            .attr('class', 'fl')
             .text(t('help.field.' + fieldName + '.title'));
+
+        titleEnter
+            .append('button')
+            .attr('class', 'fr close')
+            .on('click', function() {
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+                hide();
+            })
+            .call(svgIcon('#icon-close'));
 
         enter
             .append('div')
@@ -204,17 +214,6 @@ export function uiFieldHelp(fieldName) {
             .merge(enter);
 
         clickHelp(docs[0], 0);
-
-        if (_showing === false) {
-            hide();
-        }
-    };
-
-
-    fieldHelp.showing = function(_) {
-        if (!arguments.length) return _showing;
-        _showing = _;
-        return fieldHelp;
     };
 
 

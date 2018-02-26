@@ -681,12 +681,14 @@ button.save.has-count .count::before {
     height: 100%;
 }
 
+.field-help-title button.close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
     right: 0;
     top: 0;
 }
+[dir='rtl'] .field-help-title button.close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -1920,42 +1922,6 @@ input[type=number] {
     color: #78f;
 }
 
-.field-help-body h2 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-.field-help-body h3 {
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-.field-help-body p {
-    margin-bottom: 5px;
-}
-.field-help-body ul li {
-    list-style: inside;
-    margin-bottom: 5px;
-}
-.field-help-content svg.turn {
-    width: 40px;
-    height: 20px;
-}
-.field-help-content svg.shadow {
-    width: 60px;
-    height: 20px;
-}
-.field-help-content svg.from {
-    color: #777;
-}
-.field-help-content svg.allow {
-    color: #5b3;
-}
-.field-help-content svg.restrict {
-    color: #d53;
-}
-.field-help-content svg.only {
-    color: #68f;
-}
-
 /* Changeset editor while comment text is empty */
 
 .form-field-comment:not(.present) #preset-input-comment {
@@ -2045,9 +2011,61 @@ div.combobox {
     width: 100%;
     height: 100%;
     z-index: 2;
-    padding: 10px;
+    padding: 0px;
     background: rgba(255,255,255,0.95);
 }
+
+.field-help-title h2 {
+    padding: 10px;
+    margin-bottom: 0px;
+    font-size: 16px;
+}
+
+.field-help-title button {
+    width: 32px;
+    height: 40px;
+    border-radius: 0;
+}
+
+.field-help-content {
+    padding: 10px;
+}
+
+.field-help-content h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.field-help-content p {
+    margin-bottom: 5px;
+}
+
+.field-help-content ul li {
+    list-style: inside;
+    margin-bottom: 5px;
+}
+
+.field-help-content svg.turn {
+    width: 40px;
+    height: 20px;
+}
+.field-help-content svg.shadow {
+    width: 60px;
+    height: 20px;
+}
+.field-help-content svg.from {
+    color: #777;
+}
+.field-help-content svg.allow {
+    color: #5b3;
+}
+.field-help-content svg.restrict {
+    color: #d53;
+}
+.field-help-content svg.only {
+    color: #68f;
+}
+
 
 /* Raw Tag Editor */
 
