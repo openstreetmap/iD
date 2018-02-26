@@ -1622,7 +1622,7 @@ en:
         label: Wheelchair Access
       wholesale:
         # wholesale=*
-        label: wholesale
+        label: Wholesale
       width:
         # width=*
         label: Width (Meters)

@@ -491,7 +491,7 @@ export default {
     hideViewer: function() {
         _mlySelectedImage = null;
 
-        if (!_mlyFallback) {
+        if (!_mlyFallback && _mlyViewer) {
             _mlyViewer.getComponent('sequence').stop();
         }
 

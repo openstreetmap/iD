@@ -2205,7 +2205,7 @@
         "wholesale": {
             "key": "wholesale",
             "type": "typeCombo",
-            "label": "wholesale"
+            "label": "Wholesale"
         },
         "width": {
             "key": "width",
