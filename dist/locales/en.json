@@ -890,19 +890,19 @@
                         "title": "Inspecting",
                         "about": "To inspect turn restrictions, hover over a starting segment.",
                         "shadow": "All paths starting from that segment will be drawn with a line shadow.",
-                        "from": "{from} Starting segment",
-                        "allow": "{allowed} Allowed",
-                        "restrict": "{restricted} Restricted",
-                        "only": "{only} Only"
+                        "from": "{fromShadow} **Starting segment**",
+                        "allow": "{allowShadow} **Allowed**",
+                        "restrict": "{restrictShadow} **Restricted**",
+                        "only": "{onlyShadow} **Only**"
                     },
                     "modifying": {
                         "title": "Modifying",
                         "about": "To modify turn restrictions, click on a starting segment.",
                         "indicators": "All of the possible TO destinations from that segment will appear as turn indicators.",
                         "indicators2": "Click on a turn indicator to toggle it between \"Allowed\", \"Restricted\", and \"Only\".",
-                        "allow": "{allowed} Allowed",
-                        "restrict": "{restricted} Restricted",
-                        "only": "{only} Only"
+                        "allow": "{allowTurn} **Allowed**",
+                        "restrict": "{restrictTurn} **Restricted**",
+                        "only": "{onlyTurn} **Only**"
                     },
                     "tips": {
                         "title": "Tips",

@@ -6,6 +6,7 @@ import {
 import marked from 'marked';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
+import { icon } from 'intro/helper';
 
 
 // This currently only works with the 'restrictions' field
@@ -46,7 +47,15 @@ var fieldHelpHeadings = {
     'help.field.restrictions.tips.title': 3
 };
 
-var replacements = {};
+var replacements = {
+    fromShadow: icon('#turn-shadow', 'pre-text shadow from'),
+    allowShadow: icon('#turn-shadow', 'pre-text shadow allow'),
+    restrictShadow: icon('#turn-shadow', 'pre-text shadow restrict'),
+    onlyShadow: icon('#turn-shadow', 'pre-text shadow only'),
+    allowTurn: icon('#turn-yes', 'pre-text turn'),
+    restrictTurn: icon('#turn-no', 'pre-text turn'),
+    onlyTurn: icon('#turn-only', 'pre-text turn')
+};
 
 
 export function uiFieldHelp(fieldName) {

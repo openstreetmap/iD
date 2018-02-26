@@ -375,6 +375,9 @@
     "turn-yes-u":               { "viewBox": "200 344 32 32" },
     "turn-no-u":                { "viewBox": "232 344 32 32" },
     "turn-only-u":              { "viewBox": "264 344 32 32" },
+    "turn-shadow":              { "viewBox": "296 344 37 11" },
+
+    "turn-shadow-shape":        { "fill": "currentColor" },
 
     "preset-icon-frame":        { "viewBox": "340 320 45 45" },
 

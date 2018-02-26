@@ -1920,6 +1920,42 @@ input[type=number] {
     color: #78f;
 }
 
+.field-help-body h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.field-help-body h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.field-help-body p {
+    margin-bottom: 5px;
+}
+.field-help-body ul li {
+    list-style: inside;
+    margin-bottom: 5px;
+}
+.field-help-content svg.turn {
+    width: 40px;
+    height: 20px;
+}
+.field-help-content svg.shadow {
+    width: 60px;
+    height: 20px;
+}
+.field-help-content svg.from {
+    color: #777;
+}
+.field-help-content svg.allow {
+    color: #5b3;
+}
+.field-help-content svg.restrict {
+    color: #d53;
+}
+.field-help-content svg.only {
+    color: #68f;
+}
+
 /* Changeset editor while comment text is empty */
 
 .form-field-comment:not(.present) #preset-input-comment {
