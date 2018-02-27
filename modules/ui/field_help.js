@@ -10,57 +10,62 @@ import { icon } from 'intro/helper';
 
 
 // This currently only works with the 'restrictions' field
-var fieldHelpKeys = {
-    restrictions: [
-        ['inspecting',[
-            'title',
-            'about',
-            'from',
-            'allow',
-            'restrict',
-            'only'
-        ]],
-        ['modifying',[
-            'title',
-            'about',
-            'indicators',
-            'allow',
-            'restrict',
-            'only'
-        ]],
-        ['tips',[
-            'title',
-            'tip1',
-            'tip2',
-            'tip3',
-            'tip4',
-            'tip5'
-        ]]
-    ]
-};
-
-var fieldHelpHeadings = {
-    'help.field.restrictions.inspecting.title': 3,
-    'help.field.restrictions.modifying.title': 3,
-    'help.field.restrictions.tips.title': 3
-};
-
-var replacements = {
-    fromShadow: icon('#turn-shadow', 'pre-text shadow from'),
-    allowShadow: icon('#turn-shadow', 'pre-text shadow allow'),
-    restrictShadow: icon('#turn-shadow', 'pre-text shadow restrict'),
-    onlyShadow: icon('#turn-shadow', 'pre-text shadow only'),
-    allowTurn: icon('#turn-yes', 'pre-text turn'),
-    restrictTurn: icon('#turn-no', 'pre-text turn'),
-    onlyTurn: icon('#turn-only', 'pre-text turn')
-};
-
+// It borrows some code from uiHelp
 
 export function uiFieldHelp(context, fieldName) {
     var fieldHelp = {};
     var _inspector = d3_select(null);
     var _wrap = d3_select(null);
     var _body = d3_select(null);
+
+    var fieldHelpKeys = {
+        restrictions: [
+            ['about',[
+                'about',
+                'from_via_to',
+                'maxdist',
+                'maxvia'
+            ]],
+            ['inspecting',[
+                'about',
+                'from_shadow',
+                'allow_shadow',
+                'restrict_shadow',
+                'only_shadow',
+                'restricted',
+                'only'
+            ]],
+            ['modifying',[
+                'about',
+                'indicators',
+                'allow_turn',
+                'restrict_turn',
+                'only_turn'
+            ]],
+            ['tips',[
+                'simple',
+                'simple_example',
+                'indirect',
+                'indirect_example',
+                'indirect_noedit'
+            ]]
+        ]
+    };
+
+    var fieldHelpHeadings = {};
+
+    var replacements = {
+        distField: t('restriction.controls.distance'),
+        viaField: t('restriction.controls.via'),
+        fromShadow: icon('#turn-shadow', 'pre-text shadow from'),
+        allowShadow: icon('#turn-shadow', 'pre-text shadow allow'),
+        restrictShadow: icon('#turn-shadow', 'pre-text shadow restrict'),
+        onlyShadow: icon('#turn-shadow', 'pre-text shadow only'),
+        allowTurn: icon('#turn-yes', 'pre-text turn'),
+        restrictTurn: icon('#turn-no', 'pre-text turn'),
+        onlyTurn: icon('#turn-only', 'pre-text turn')
+    };
+
 
     // For each section, squash all the texts into a single markdown document
     var docs = fieldHelpKeys[fieldName].map(function(key) {
@@ -104,26 +109,32 @@ export function uiFieldHelp(context, fieldName) {
     }
 
 
-    function clickHelp(d, i) {
+    function clickHelp(index) {
+        var d = docs[index];
+        var tkeys = fieldHelpKeys[fieldName][index][1];
+
+        _body.selectAll('.field-help-nav-item')
+            .classed('active', function(d, i) { return i === index; });
+
         var content = _body.selectAll('.field-help-content')
             .html(d.html);
 
-        // add an image for some help sections
-        var img;
-        switch (d.key) {
-            case 'help.field.restrictions.inspecting':
-            img = 'tr_inspect.gif';
-            break;
-            case 'help.field.restrictions.modifying':
-            img = 'tr_modify.gif';
-            break;
-        }
+        // class the paragraphs so we can find and style them
+        content.selectAll('p')
+            .attr('class', function(d, i) { return tkeys[i]; });
 
-        if (img) {
+        // insert special content for certain help sections
+        if (d.key === 'help.field.restrictions.inspecting') {
             content
-                .append('img')
-                .attr('class', 'field-help-image')
-                .attr('src', context.imagePath(img));
+                .insert('img', 'p.from_shadow')
+                .attr('class', 'field-help-image cf')
+                .attr('src', context.imagePath('tr_inspect.gif'));
+
+        } else if (d.key === 'help.field.restrictions.modifying') {
+            content
+                .insert('img', 'p.allow_turn')
+                .attr('class', 'field-help-image cf')
+                .attr('src', context.imagePath('tr_modify.gif'));
         }
     }
 
@@ -160,17 +171,16 @@ export function uiFieldHelp(context, fieldName) {
         var iRect = inspector.getBoundingClientRect();
 
         _body
-            .style('left', wRect.left + 'px')
-            .style('width', wRect.width - 10 + 'px')
-            .style('top', wRect.top + inspector.scrollTop - iRect.top + 5 + 'px');
+            .style('top', wRect.top + inspector.scrollTop - iRect.top + 'px');
     }
 
 
     fieldHelp.body = function(selection) {
-        // this control expects the field to have a preset-input-wrap div
+        // This control expects the field to have a preset-input-wrap div
         _wrap = selection.selectAll('.preset-input-wrap');
         if (_wrap.empty()) return;
 
+        // absolute position relative to the inspector, so it "floats" above the fields
         _inspector = d3_select('#sidebar .entity-editor-pane .inspector-body');
         if (_inspector.empty()) return;
 
@@ -180,7 +190,6 @@ export function uiFieldHelp(context, fieldName) {
         var enter = _body.enter()
             .append('div')
             .attr('class', 'field-help-body hide');   // initially hidden
-            // .style('height', '0px');
 
         var titleEnter = enter
             .append('div')
@@ -202,22 +211,20 @@ export function uiFieldHelp(context, fieldName) {
             .call(svgIcon('#icon-close'));
 
         var navEnter = enter
-            .append('ul')
-            .attr('class', 'field-help-nav');
+            .append('div')
+            .attr('class', 'field-help-nav cf');
 
         var titles = docs.map(function(d) { return d.title; });
         navEnter.selectAll('.field-help-nav-item')
             .data(titles)
             .enter()
-            .append('li')
+            .append('div')
             .attr('class', 'field-help-nav-item')
-            .append('a')
-            .attr('class', 'next')
             .text(function(d) { return d; })
             .on('click', function(d, i) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
-                clickHelp(docs[i], i);
+                clickHelp(i);
             });
 
         enter
@@ -227,7 +234,7 @@ export function uiFieldHelp(context, fieldName) {
         _body = _body
             .merge(enter);
 
-        clickHelp(docs[0], 0);
+        clickHelp(0);
     };
 
 

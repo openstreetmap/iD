@@ -885,30 +885,39 @@
             },
             "field": {
                 "restrictions": {
-                    "title": "Editing Turn Restrictions",
+                    "title": "Turn Restrictions Help",
+                    "about": {
+                        "title": "About",
+                        "about": "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads.",
+                        "from_via_to": "A turn restriction always contains: one **FROM way**, one **TO way**, and one **VIA node** or one or more **VIA ways**.",
+                        "maxdist": "The \"{distField}\" slider controls how far to search for additional connected roads.",
+                        "maxvia": "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+                    },
                     "inspecting": {
                         "title": "Inspecting",
-                        "about": "Hover over any starting segment. All possible **TO** destinations will be drawn with a shadow.",
-                        "from": "{fromShadow} **FROM**",
-                        "allow": "{allowShadow} **Allowed**",
-                        "restrict": "{restrictShadow} **Restricted**",
-                        "only": "{onlyShadow} **Only**"
+                        "about": "Hover over any **FROM** segment. Possible **TO** destinations will be drawn with a shadow.",
+                        "from_shadow": "{fromShadow} **FROM segment**",
+                        "allow_shadow": "{allowShadow} **TO Allowed**",
+                        "restrict_shadow": "{restrictShadow} **TO Restricted**",
+                        "only_shadow": "{onlyShadow} **TO Only**",
+                        "restricted": "\"Restricted\" means that there is a turn restriction, for example \"No Left Turn\".",
+                        "only": "\"Only\" means that a vehicle may only make that choice, for example \"Only Straight On\"."
                     },
                     "modifying": {
                         "title": "Modifying",
-                        "about": "Click on any starting segment to select it. All possible **TO** destinations will appear as turn indicators.",
-                        "indicators": "Click on a turn indicator to toggle it between \"Allowed\", \"Restricted\", and \"Only\".",
-                        "allow": "{allowTurn} **Allowed**",
-                        "restrict": "{restrictTurn} **Restricted**",
-                        "only": "{onlyTurn} **Only**"
+                        "about": "Click on any starting **FROM** segment to select it. The selected segment will pulse, and all possible **TO** destinations will appear as turn symbols.",
+                        "indicators": "Click on a turn symbol to toggle it between \"Allowed\", \"Restricted\", and \"Only\".",
+                        "allow_turn": "{allowTurn} **TO Allowed**",
+                        "restrict_turn": "{restrictTurn} **TO Restricted**",
+                        "only_turn": "{onlyTurn} **TO Only**"
                     },
                     "tips": {
                         "title": "Tips",
-                        "tip1": "* Prefer simple restrictions over complex ones.",
-                        "tip2": "For example, avoid using a via-way restriction if a simpler turn restriction will do.",
-                        "tip3": "* Some restrictions are \"(indirect)\".  These restrictions exist because of another nearby restriction.",
-                        "tip4": "For example, a route with an \"Only Straight On\" turn restriction will indirectly create \"No Turn\" restrictions.",
-                        "tip5": "* You may not edit an indirect restriction.  Instead, edit the nearby direct restriction."
+                        "simple": "**Prefer simple restrictions over complex ones.**",
+                        "simple_example": "For example, avoid creating a via-way restriction if a simpler via-node turn restriction will do.",
+                        "indirect": "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**",
+                        "indirect_example": "These restrictions exist because of another nearby restriction. For example, a route with an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection.",
+                        "indirect_noedit": "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
                     }
                 }
             }

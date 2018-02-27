@@ -2006,14 +2006,15 @@ div.combobox {
 .field-help-body {
     display: block;
     position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    margin: 5px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-top: 0;
     border-radius: 0 0 4px 4px;
-    margin-left: 5px;
-    margin-right: 5px;
-    top: 0;
     z-index: 20;
-    max-height: 550px;
     background: rgba(255,255,255,0.95);
     box-shadow: 0 0 30px 5px rgba(0,0,0,.4);
 }
@@ -2021,13 +2022,31 @@ div.combobox {
 .field-help-title h2 {
     padding: 10px;
     margin-bottom: 0px;
-    font-size: 16px;
+    font-size: 17px;
+}
+.field-help-title button {
+    width: 45px;
+    height: 55px;
+    border-radius: 0;
 }
 
-.field-help-title button {
-    width: 32px;
-    height: 40px;
-    border-radius: 0;
+.field-help-nav {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.field-help-nav-item {
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #666;
+}
+.field-help-nav-item.active {
+    color: #7092ff;
+}
+.field-help-nav-item:hover {
+    color: #597be7;
+    background-color: #efefef;
 }
 
 .field-help-content {
@@ -2035,19 +2054,21 @@ div.combobox {
     overflow-y: auto;
     overflow-x: hidden;
 }
-
 .field-help-content h3 {
     font-size: 12px;
     margin-bottom: 5px;
 }
-
 .field-help-content p {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
-
 .field-help-content ul li {
     list-style: inside;
     margin-bottom: 5px;
+}
+
+.field-help-content .field-help-image {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .field-help-content svg.turn {
@@ -2072,17 +2093,12 @@ div.combobox {
     color: #68f;
 }
 
-.field-help-nav {
-    position: relative;
-}
-.field-help-nav a {
-    float: left;
-    width: 50%;
-    text-align: center;
-}
-.field-help-nav-item {
-    display: inline-block;
-    list-style: none;
+.field-help-content p.from_shadow,
+.field-help-content p.allow_shadow,
+.field-help-content p.restrict_shadow,
+.field-help-content p.allow_turn,
+.field-help-content p.restrict_turn {
+    margin-bottom: 5px;
 }
 
 
