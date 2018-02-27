@@ -2015,7 +2015,7 @@ div.combobox {
     z-index: 20;
     max-height: 550px;
     background: rgba(255,255,255,0.95);
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.3);
+    box-shadow: 0 0 30px 5px rgba(0,0,0,.4);
 }
 
 .field-help-title h2 {
