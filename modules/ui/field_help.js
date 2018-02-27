@@ -58,6 +58,7 @@ var replacements = {
 
 export function uiFieldHelp(context, fieldName) {
     var fieldHelp = {};
+    var _inspector = d3_select(null);
     var _wrap = d3_select(null);
     var _body = d3_select(null);
 
@@ -80,24 +81,24 @@ export function uiFieldHelp(context, fieldName) {
 
 
     function show() {
-        _wrap    // allow help to spill outside the wrap
-            .style('overflow', 'visible');
+        updatePosition();
 
         _body
             .classed('hide', false)
+            .style('opacity', '0')
             .transition()
             .duration(200)
-            .style('height', '600px');
+            .style('opacity', '1');
     }
 
 
     function hide() {
         _body
+            .classed('hide', true)
             .transition()
             .duration(200)
-            .style('height', '0px')
+            .style('opacity', '0')
             .on('end', function () {
-                _wrap.style('overflow', null);
                 _body.classed('hide', true);
             });
     }
@@ -128,6 +129,8 @@ export function uiFieldHelp(context, fieldName) {
 
 
     fieldHelp.button = function(selection) {
+        if (_body.empty()) return;
+
         var button = selection.selectAll('.field-help-button')
             .data([0]);
 
@@ -150,18 +153,34 @@ export function uiFieldHelp(context, fieldName) {
     };
 
 
+    function updatePosition() {
+        var wrap = _wrap.node();
+        var inspector = _inspector.node();
+        var wRect = wrap.getBoundingClientRect();
+        var iRect = inspector.getBoundingClientRect();
+
+        _body
+            .style('left', wRect.left + 'px')
+            .style('width', wRect.width - 10 + 'px')
+            .style('top', wRect.top + inspector.scrollTop - iRect.top + 5 + 'px');
+    }
+
+
     fieldHelp.body = function(selection) {
         // this control expects the field to have a preset-input-wrap div
         _wrap = selection.selectAll('.preset-input-wrap');
         if (_wrap.empty()) return;
 
-        _body = _wrap.selectAll('.field-help-body')
+        _inspector = d3_select('#sidebar .entity-editor-pane .inspector-body');
+        if (_inspector.empty()) return;
+
+        _body = _inspector.selectAll('.field-help-body')
             .data([0]);
 
         var enter = _body.enter()
             .append('div')
-            .attr('class', 'field-help-body cf hide')   // initially hidden
-            .style('height', '0px');
+            .attr('class', 'field-help-body hide');   // initially hidden
+            // .style('height', '0px');
 
         var titleEnter = enter
             .append('div')

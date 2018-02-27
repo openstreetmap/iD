@@ -2011,11 +2011,11 @@ div.combobox {
     border-radius: 0 0 4px 4px;
     margin-left: 5px;
     margin-right: 5px;
-    overflow: hidden;
     top: 0;
-    z-index: 2;
+    z-index: 20;
+    max-height: 550px;
     background: rgba(255,255,255,0.95);
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.3);
 }
 
 .field-help-title h2 {
