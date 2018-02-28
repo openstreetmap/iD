@@ -4497,6 +4497,22 @@
             "matchScore": 0.5,
             "name": "Dormitory"
         },
+        "building/farm_auxiliary": {
+            "icon": "farm",
+            "fields": [
+                "name",
+                "address",
+                "levels"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "building": "farm_auxiliary"
+            },
+            "matchScore": 0.5,
+            "name": "Farm Building"
+        },
         "building/farm": {
             "icon": "farm",
             "fields": [
@@ -4511,7 +4527,7 @@
                 "building": "farm"
             },
             "matchScore": 0.5,
-            "name": "Farm Building"
+            "name": "Farm House"
         },
         "building/garage": {
             "icon": "warehouse",

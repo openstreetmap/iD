@@ -9,8 +9,8 @@
         "area"
     ],
     "tags": {
-        "building": "farm"
+        "building": "farm_auxiliary"
     },
     "matchScore": 0.5,
-    "name": "Farm House"
+    "name": "Farm Building"
 }
