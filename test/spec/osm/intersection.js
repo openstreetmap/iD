@@ -22,17 +22,6 @@ describe('iD.osmIntersection', function() {
             expect(result.map(function(i) { return i.id; })).to.eql(['=']);
         });
 
-//TODO?
-        // it('excludes coincident highways', function() {
-        //     var graph = iD.coreGraph([
-        //         iD.osmNode({id: 'u'}),
-        //         iD.osmNode({id: '*'}),
-        //         iD.osmWay({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
-        //         iD.osmWay({id: '-', nodes: ['u', '*'], tags: {highway: 'residential'}})
-        //     ]);
-        //     expect(iD.osmIntersection(graph, '*').ways).to.eql([]);
-        // });
-
         it('includes line highways', function() {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'u'}),
