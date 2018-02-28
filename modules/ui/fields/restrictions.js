@@ -60,6 +60,7 @@ export function uiFieldRestrictions(field, context) {
     var _initialized = false;
     var _parent = d3_select(null);       // the entire field
     var _container = d3_select(null);    // just the map
+    var _oldTurns;
     var _graph;
     var _vertexID;
     var _intersection;
@@ -288,6 +289,7 @@ export function uiFieldRestrictions(field, context) {
         // is selected, and that way is no longer part of the intersection.
         if (_fromWayID && !vgraph.hasEntity(_fromWayID)) {
             _fromWayID = null;
+            _oldTurns = null;
         }
 
         surface
@@ -332,30 +334,57 @@ export function uiFieldRestrictions(field, context) {
 
             if (datum instanceof osmWay && (datum.__from || datum.__via)) {
                 _fromWayID = datum.id;
+                _oldTurns = null;
                 redraw();
 
             } else if (datum instanceof osmTurn) {
-                var actions;
+                var actions, extraActions, turns, i;
                 datum.restriction = osmInferRestriction(vgraph, datum, projection);
 
                 if (datum.restrictionID && !datum.direct) {
                     return;
 
-                } else if (datum.restrictionID && !datum.only) {    // cycle thru the `only_` state
+                } else if (datum.restrictionID && !datum.only) {    // cycle NO -> ONLY
                     var datumOnly = _cloneDeep(datum);
                     datumOnly.only = true;
                     datumOnly.restriction = datumOnly.restriction.replace(/^no/, 'only');
-                    actions = _intersection.actions.concat([
-                        actionUnrestrictTurn(datum, projection),
+
+                    // Adding an ONLY restriction should destroy all other direct restrictions from the FROM.
+                    // We will remember them in _oldTurns, and restore them if the user clicks again.
+                    turns = _intersection.turns(_fromWayID, 2);
+                    extraActions = [];
+                    _oldTurns = [];
+                    for (i = 0; i < turns.length; i++) {
+                        if (turns[i].direct) {
+                            _oldTurns.push(turns[i]);
+                            extraActions.push(actionUnrestrictTurn(turns[i], projection));
+                        }
+                    }
+
+                    actions = _intersection.actions.concat(extraActions, [
                         actionRestrictTurn(datumOnly, projection),
                         t('operations.restriction.annotation.create')
                     ]);
-                } else if (datum.restrictionID) {
-                    actions = _intersection.actions.concat([
+
+                } else if (datum.restrictionID) {   // cycle ONLY -> Allowed
+                    // Restore whatever restrictions we might have destroyed by cycling thru the ONLY state.
+                    // This relies on the assumption that the intersection was already split up when we
+                    // performed the previous action (NO -> ONLY), so the IDs in _oldTurns shouldn't have changed.
+                    turns = _oldTurns || [];
+                    extraActions = [];
+                    for (i = 0; i < turns.length; i++) {
+                        if (turns[i].key !== datum.key) {
+                            extraActions.push(actionRestrictTurn(turns[i], projection));
+                        }
+                    }
+                    _oldTurns = null;
+
+                    actions = _intersection.actions.concat(extraActions, [
                         actionUnrestrictTurn(datum, projection),
                         t('operations.restriction.annotation.delete')
                     ]);
-                } else {
+
+                } else {    // cycle Allowed -> NO
                     actions = _intersection.actions.concat([
                         actionRestrictTurn(datum, projection),
                         t('operations.restriction.annotation.create')
@@ -372,6 +401,7 @@ export function uiFieldRestrictions(field, context) {
 
             } else {
                 _fromWayID = null;
+                _oldTurns = null;
                 redraw();
             }
         }
@@ -590,11 +620,10 @@ export function uiFieldRestrictions(field, context) {
 
 
     restrictions.entity = function(_) {
-        // if (!_vertexID || _vertexID !== _.id) {
-            _intersection = null;
-            _fromWayID = null;
-            _vertexID = _.id;
-        // }
+        _intersection = null;
+        _fromWayID = null;
+        _oldTurns = null;
+        _vertexID = _.id;
     };
 
 
