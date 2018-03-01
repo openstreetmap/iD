@@ -10,5 +10,6 @@ export { behaviorHover } from './hover';
 export { behaviorLasso } from './lasso';
 export { behaviorOperation } from './operation';
 export { behaviorPaste } from './paste';
+export { behaviorPasteTags } from './paste_tags';
 export { behaviorSelect } from './select';
 export { behaviorTail } from './tail';

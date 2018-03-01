@@ -20,6 +20,7 @@ export { actionJoin } from './join';
 export { actionMerge } from './merge';
 export { actionMergePolygon } from './merge_polygon';
 export { actionMergeRemoteChanges } from './merge_remote_changes';
+export { actionMergeTags } from './merge_tags';
 export { actionMove } from './move';
 export { actionMoveNode } from './move_node';
 export { actionNoop } from './noop';

@@ -19,7 +19,7 @@ import {
     behaviorCopy,
     behaviorHover,
     behaviorLasso,
-    behaviorPaste,
+    behaviorPasteTags,
     behaviorSelect
 } from '../behavior';
 
@@ -58,7 +58,7 @@ export function modeSelect(context, selectedIDs) {
         timeout = null,
         behaviors = [
             behaviorCopy(context),
-            behaviorPaste(context),
+            behaviorPasteTags(context),
             behaviorBreathe(context),
             behaviorHover(context),
             behaviorSelect(context),
