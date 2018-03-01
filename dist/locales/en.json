@@ -3581,8 +3581,12 @@
                     "name": "Dormitory",
                     "terms": ""
                 },
-                "building/farm": {
+                "building/farm_auxiliary": {
                     "name": "Farm Building",
+                    "terms": ""
+                },
+                "building/farm": {
+                    "name": "Farm House",
                     "terms": ""
                 },
                 "building/garage": {

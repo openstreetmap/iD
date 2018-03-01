@@ -846,6 +846,10 @@
         },
         {
             "key": "building",
+            "value": "farm_auxiliary"
+        },
+        {
+            "key": "building",
             "value": "farm"
         },
         {

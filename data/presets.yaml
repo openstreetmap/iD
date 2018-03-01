@@ -2567,6 +2567,10 @@ en:
         name: Entrance/Exit
       building/farm:
         # building=farm
+        name: Farm House
+        terms: '<translate with synonyms or related terms for ''Farm House'', separated by commas>'
+      building/farm_auxiliary:
+        # building=farm_auxiliary
         name: Farm Building
         terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
