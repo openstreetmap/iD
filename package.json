@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@mapbox/maki": "^4.0.0",
-    "@std/esm": "^0.23.3",
+    "@std/esm": "0.22.0",
     "chai": "^4.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
@@ -76,7 +76,10 @@
     "xmlbuilder": "^9.0.6"
   },
   "greenkeeper": {
-    "label": "chore-greenkeeper"
+    "label": "chore-greenkeeper",
+    "ignore": [
+      "@std/esm"
+    ]
   },
   "engines": {
     "node": ">=4.0.0"
