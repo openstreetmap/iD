@@ -499,35 +499,26 @@ export function uiFieldRestrictions(field, context) {
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
                 var turnType = restrictionType.replace(/^(only|no)\_/, '');
                 var indirect = (datum.direct === false ? t('restriction.help.indirect') : '');
-                var klass, turnHtml;
+                var klass, turnText, nextText;
 
                 if (datum.no) {
                     klass = 'restrict';
-                    turnHtml = t('restriction.help.no_turn_string', {
-                        no: t('restriction.help.no'),
-                        turn: t('restriction.help.turn.' + turnType),
-                        indirect: indirect
-                    });
+                    turnText = t('restriction.help.turn.no_' + turnType, { indirect: indirect });
+                    nextText = t('restriction.help.turn.only_' + turnType, { indirect: '' });
                 } else if (datum.only) {
                     klass = 'only';
-                    turnHtml = t('restriction.help.only_turn_string', {
-                        only: t('restriction.help.only'),
-                        turn: t('restriction.help.turn.' + turnType),
-                        indirect: indirect
-                    });
+                    turnText = t('restriction.help.turn.only_' + turnType, { indirect: indirect });
+                    nextText = t('restriction.help.turn.allowed_' + turnType, { indirect: '' });
                 } else {
                     klass = 'allow';
-                    turnHtml = t('restriction.help.allowed_turn_string', {
-                        allowed: t('restriction.help.allowed'),
-                        turn: t('restriction.help.turn.' + turnType),
-                        indirect: indirect
-                    });
+                    turnText = t('restriction.help.turn.allowed_' + turnType, { indirect: indirect });
+                    nextText = t('restriction.help.turn.no_' + turnType, { indirect: '' });
                 }
 
                 help
-                    .append('div')      // Turn Description
+                    .append('div')      // "NO Right Turn (indirect)"
                     .attr('class', 'qualifier ' + klass)
-                    .html(turnHtml);
+                    .text(turnText);
 
                 help
                     .append('div')      // "FROM {fromName} TO {toName}"
@@ -553,6 +544,12 @@ export function uiFieldRestrictions(field, context) {
                             via: placeholders.via,
                             viaNames: names.join(', ')
                         }));
+                }
+
+                if (!indirect) {
+                    help
+                        .append('div')      // Click for "No Right Turn"
+                        .text(t('restriction.help.toggle', { turn: nextText.trim() }));
                 }
 
                 highlightPathsFrom(null);
@@ -607,7 +604,7 @@ export function uiFieldRestrictions(field, context) {
     function displayMaxVia(maxVia) {
         return maxVia === 0 ? t('restriction.controls.via_node_only')
             : maxVia === 1 ? t('restriction.controls.via_up_to_one')
-            : t('restriction.controls.via_up_to_multiple', { num: maxVia });
+            : t('restriction.controls.via_up_to_two');
     }
 
 

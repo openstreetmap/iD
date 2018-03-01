@@ -229,20 +229,22 @@ en:
       via: Via
       via_node_only: "Node only"
       via_up_to_one: "Up to 1 way"
-      via_up_to_multiple: "Up to {num} ways"
+      via_up_to_two: "Up to 2 ways"
     help:
-      no: NO
-      only: ONLY
-      allowed: Allowed
       indirect: "(indirect)"
       turn:
-        left_turn: Left Turn
-        right_turn: Right Turn
-        u_turn: U-Turn
-        straight_on: Straight On
-      no_turn_string: "{no} {turn} {indirect}"
-      only_turn_string: "{only} {turn} {indirect}"
-      allowed_turn_string: "{turn} {allowed} {indirect}"
+        no_left_turn: "NO Left Turn {indirect}"
+        no_right_turn: "NO Right Turn {indirect}"
+        no_u_turn: "NO U-Turn {indirect}"
+        no_straight_on: "NO Straight On {indirect}"
+        only_left_turn: "ONLY Left Turn {indirect}"
+        only_right_turn: "ONLY Right Turn {indirect}"
+        only_u_turn: "ONLY U-Turn {indirect}"
+        only_straight_on: "ONLY Straight On {indirect}"
+        allowed_left_turn: "Left Turn Allowed {indirect}"
+        allowed_right_turn: "Right Turn Allowed {indirect}"
+        allowed_u_turn: "U-Turn Allowed {indirect}"
+        allowed_straight_on: "Straight On Allowed {indirect}"
       from: FROM
       via: VIA
       to: TO
@@ -251,9 +253,7 @@ en:
       via_names: "{via} {viaNames}"
       select_from: "Click to select a {from} segment"
       select_from_name: "Click to select {from} {fromName}"
-      toggle: Click to toggle turn restrictions.
-      toggle_on: 'Click to add a "{restriction}" restriction.'
-      toggle_off: 'Click to remove the "{restriction}" restriction.'
+      toggle: "Click for \"{turn}\""
   undo:
     tooltip: "Undo: {action}"
     nothing: Nothing to undo.
