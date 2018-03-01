@@ -557,3 +557,153 @@ describe('iD.osmIntersection', function() {
 
     });
 });
+
+
+describe('iD.osmInferRestriction', function() {
+    var projection = d3.geoMercator().scale(250 / Math.PI);
+
+    it('infers the restriction type based on the turn angle', function() {
+        //
+        //  u === * ~~~ w
+        //        |
+        //        x
+        //
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'u', loc: [-1,  0]}),
+            iD.osmNode({id: '*', loc: [ 0,  0]}),
+            iD.osmNode({id: 'w', loc: [ 1,  0]}),
+            iD.osmNode({id: 'x', loc: [ 0, -1]}),
+            iD.osmWay({id: '=', nodes: ['u', '*']}),
+            iD.osmWay({id: '-', nodes: ['*', 'x']}),
+            iD.osmWay({id: '~', nodes: ['*', 'w']})
+        ]);
+
+        var r1 = iD.osmInferRestriction(graph, {
+            from: { node: 'u', way: '=', vertex: '*' },
+            to:   { node: 'x', way: '-', vertex: '*' }
+        }, projection);
+        expect(r1).to.equal('no_right_turn');
+
+        var r2 = iD.osmInferRestriction(graph, {
+            from: { node: 'x', way: '-', vertex: '*' },
+            to:   { node: 'w', way: '~', vertex: '*' }
+        }, projection);
+        expect(r2).to.equal('no_right_turn');
+
+        var l1 = iD.osmInferRestriction(graph, {
+            from: { node: 'x', way: '-', vertex: '*' },
+            to:   { node: 'u', way: '=', vertex: '*' }
+        }, projection);
+        expect(l1).to.equal('no_left_turn');
+
+        var l2 = iD.osmInferRestriction(graph, {
+            from: { node: 'w', way: '~', vertex: '*' },
+            to:   { node: 'x', way: '-', vertex: '*' }
+        }, projection);
+        expect(l2).to.equal('no_left_turn');
+
+        var s = iD.osmInferRestriction(graph, {
+            from: { node: 'u', way: '=', vertex: '*' },
+            to:   { node: 'w', way: '~', vertex: '*' }
+        }, projection);
+        expect(s).to.equal('no_straight_on');
+
+        var u = iD.osmInferRestriction(graph, {
+            from: { node: 'u', way: '=', vertex: '*' },
+            to:   { node: 'u', way: '=', vertex: '*' }
+        }, projection);
+        expect(u).to.equal('no_u_turn');
+    });
+
+
+    it('infers no_u_turn from sharply acute angle made by forward oneways', function() {
+        //      *
+        //     / \
+        //  w2/   \w1        angle ≈22.6°
+        //   /     \
+        //  u       x
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'u', loc: [0, -5] }),
+            iD.osmNode({ id: '*', loc: [1,  0] }),
+            iD.osmNode({ id: 'x', loc: [2, -5] }),
+            iD.osmWay({ id: 'w1', nodes: ['x', '*'], tags: { oneway: 'yes' } }),
+            iD.osmWay({ id: 'w2', nodes: ['*', 'u'], tags: { oneway: 'yes' } })
+        ]);
+
+        var r = iD.osmInferRestriction(graph, {
+            from: { node: 'x', way: 'w1', vertex: '*' },
+            to:   { node: 'u', way: 'w2', vertex: '*' }
+        }, projection);
+        expect(r).to.equal('no_u_turn');
+    });
+
+
+    it('does not infer no_u_turn from widely acute angle made by forward oneways', function() {
+        //      *
+        //     / \
+        //  w2/   \w1        angle ≈36.9°
+        //   /     \
+        //  u       x
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'u', loc: [0, -3] }),
+            iD.osmNode({ id: '*', loc: [1,  0] }),
+            iD.osmNode({ id: 'x', loc: [2, -3] }),
+            iD.osmWay({ id: 'w1', nodes: ['x', '*'], tags: { oneway: 'yes' } }),
+            iD.osmWay({ id: 'w2', nodes: ['*', 'u'], tags: { oneway: 'yes' } })
+        ]);
+
+        var r = iD.osmInferRestriction(graph, {
+            from: { node: 'x', way: 'w1', vertex: '*' },
+            to:   { node: 'u', way: 'w2', vertex: '*' }
+        }, projection);
+        expect(r).to.equal('no_left_turn');
+    });
+
+
+    it('infers no_u_turn from sharply acute angle made by forward oneways with a via way', function() {
+        //      * -- +
+        //     /      \
+        //  w2/        \w1      angle ≈22.6°
+        //   /          \
+        //  u            x
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'u', loc: [0, -5] }),
+            iD.osmNode({ id: '*', loc: [1,  0] }),
+            iD.osmNode({ id: '+', loc: [2,  0] }),
+            iD.osmNode({ id: 'x', loc: [3, -5] }),
+            iD.osmWay({ id: 'w1', nodes: ['x', '+'], tags: { oneway: 'yes' } }),
+            iD.osmWay({ id: 'w2', nodes: ['*', 'u'], tags: { oneway: 'yes' } }),
+            iD.osmWay({ id: '-',  nodes: ['*', '+'] })
+        ]);
+
+        var r = iD.osmInferRestriction(graph, {
+            from: { node: 'x', way: 'w1', vertex: '+' },
+            to:   { node: 'u', way: 'w2', vertex: '*' }
+        }, projection);
+        expect(r).to.equal('no_u_turn');
+    });
+
+
+    it('infers no_u_turn from widely acute angle made by forward oneways with a via way', function() {
+        //      * -- +
+        //     /      \
+        //  w2/        \w1      angle ≈36.9°
+        //   /          \
+        //  u            x
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'u', loc: [0, -3] }),
+            iD.osmNode({ id: '*', loc: [1,  0] }),
+            iD.osmNode({ id: '+', loc: [2,  0] }),
+            iD.osmNode({ id: 'x', loc: [3, -3] }),
+            iD.osmWay({ id: 'w1', nodes: ['x', '+'], tags: { oneway: 'yes' } }),
+            iD.osmWay({ id: 'w2', nodes: ['*', 'u'], tags: { oneway: 'yes' } }),
+            iD.osmWay({ id: '-',  nodes: ['*', '+'] })
+        ]);
+
+        var r = iD.osmInferRestriction(graph, {
+            from: { node: 'x', way: 'w1', vertex: '+' },
+            to:   { node: 'u', way: 'w2', vertex: '*' }
+        }, projection);
+        expect(r).to.equal('no_u_turn');
+    });
+});

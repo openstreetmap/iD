@@ -1,6 +1,8 @@
 describe('iD.actionUnrestrictTurn', function() {
     it('removes a restriction from a restricted turn', function() {
-        // u====*--->w
+        //
+        // u === * --- w
+        //
         var graph = iD.coreGraph([
             iD.osmNode({ id: 'u' }),
             iD.osmNode({ id: '*' }),

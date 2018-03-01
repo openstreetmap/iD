@@ -1,33 +1,23 @@
-import {
-    osmInferRestriction,
-    osmRelation
-} from '../osm';
+import { osmRelation } from '../osm';
 
 
-// Create a restriction relation for `turn`, which must have the following structure:
+// `actionRestrictTurn` creates a turn restriction relation.
 //
-//     {
-//         from: { node: <node ID>, way: <way ID> },
-//         via:  { node: <node ID>, ways: [<way ID>,<way ID>,...] },
-//         to:   { node: <node ID>, way: <way ID> },
-//         restriction: <'no_right_turn', 'no_left_turn', etc.>
-//     }
+// `turn` must be an `osmTurn` object
+// see osm/intersection.js, pathToTurn()
 //
 // This specifies a restriction of type `restriction` when traveling from
-// `from.node` in `from.way` toward `to.node` in `to.way` via `via.node` OR `via.ways`.
+// `turn.from.way` toward `turn.to.way` via `turn.via.node` OR `turn.via.ways`.
 // (The action does not check that these entities form a valid intersection.)
-//
-// If `restriction` is not provided, it is automatically determined by
-// osmInferRestriction.
 //
 // From, to, and via ways should be split before calling this action.
 // (old versions of the code would split the ways here, but we no longer do it)
 //
-// For testing convenience, accepts an ID to assign to the new relation.
-// Normally, this will be undefined and the relation will automatically
-// be assigned a new ID.
+// For testing convenience, accepts a restrictionID to assign to the new
+// relation. Normally, this will be undefined and the relation will
+// automatically be assigned a new ID.
 //
-export function actionRestrictTurn(turn, projection, restrictionID) {
+export function actionRestrictTurn(turn, restrictionType, restrictionID) {
 
     return function(graph) {
         var fromWay = graph.entity(turn.from.way);
@@ -52,7 +42,7 @@ export function actionRestrictTurn(turn, projection, restrictionID) {
             id: restrictionID,
             tags: {
                 type: 'restriction',
-                restriction: turn.restriction || osmInferRestriction(graph, turn, projection)
+                restriction: restrictionType
             },
             members: members
         }));

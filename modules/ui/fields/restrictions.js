@@ -339,15 +339,15 @@ export function uiFieldRestrictions(field, context) {
 
             } else if (datum instanceof osmTurn) {
                 var actions, extraActions, turns, i;
-                datum.restriction = osmInferRestriction(vgraph, datum, projection);
+                var restrictionType = osmInferRestriction(vgraph, datum, projection);
 
                 if (datum.restrictionID && !datum.direct) {
                     return;
 
-                } else if (datum.restrictionID && !datum.only) {    // cycle NO -> ONLY
+                } else if (datum.restrictionID && !datum.only) {    // NO -> ONLY
                     var datumOnly = _cloneDeep(datum);
                     datumOnly.only = true;
-                    datumOnly.restriction = datumOnly.restriction.replace(/^no/, 'only');
+                    restrictionType = restrictionType.replace(/^no/, 'only');
 
                     // Adding an ONLY restriction should destroy all other direct restrictions from the FROM.
                     // We will remember them in _oldTurns, and restore them if the user clicks again.
@@ -356,17 +356,18 @@ export function uiFieldRestrictions(field, context) {
                     _oldTurns = [];
                     for (i = 0; i < turns.length; i++) {
                         if (turns[i].direct) {
+                            turns[i].restrictionType = osmInferRestriction(vgraph, turns[i], projection);
                             _oldTurns.push(turns[i]);
-                            extraActions.push(actionUnrestrictTurn(turns[i], projection));
+                            extraActions.push(actionUnrestrictTurn(turns[i]));
                         }
                     }
 
                     actions = _intersection.actions.concat(extraActions, [
-                        actionRestrictTurn(datumOnly, projection),
+                        actionRestrictTurn(datumOnly, restrictionType),
                         t('operations.restriction.annotation.create')
                     ]);
 
-                } else if (datum.restrictionID) {   // cycle ONLY -> Allowed
+                } else if (datum.restrictionID) {   // ONLY -> Allowed
                     // Restore whatever restrictions we might have destroyed by cycling thru the ONLY state.
                     // This relies on the assumption that the intersection was already split up when we
                     // performed the previous action (NO -> ONLY), so the IDs in _oldTurns shouldn't have changed.
@@ -374,19 +375,19 @@ export function uiFieldRestrictions(field, context) {
                     extraActions = [];
                     for (i = 0; i < turns.length; i++) {
                         if (turns[i].key !== datum.key) {
-                            extraActions.push(actionRestrictTurn(turns[i], projection));
+                            extraActions.push(actionRestrictTurn(turns[i], turns[i].restrictionType));
                         }
                     }
                     _oldTurns = null;
 
                     actions = _intersection.actions.concat(extraActions, [
-                        actionUnrestrictTurn(datum, projection),
+                        actionUnrestrictTurn(datum),
                         t('operations.restriction.annotation.delete')
                     ]);
 
-                } else {    // cycle Allowed -> NO
+                } else {    // Allowed -> NO
                     actions = _intersection.actions.concat([
-                        actionRestrictTurn(datum, projection),
+                        actionRestrictTurn(datum, restrictionType),
                         t('operations.restriction.annotation.create')
                     ]);
                 }
