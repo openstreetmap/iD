@@ -11,6 +11,7 @@ import {
 
 import { textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
+import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
 import { uiTagReference } from './tag_reference';
 import { utilRebind } from '../util';
@@ -25,11 +26,11 @@ export function uiField(context, presetField, entity, options) {
         info: true
     }, options);
 
-    var dispatch = d3_dispatch('change'),
-        field = _clone(presetField),
-        show = options.show,
-        state = '',
-        tags = {};
+    var dispatch = d3_dispatch('change');
+    var field = _clone(presetField);
+    var _show = options.show;
+    var _state = '';
+    var _tags = {};
 
 
     field.impl = uiFields[field.type](field, context)
@@ -48,14 +49,14 @@ export function uiField(context, presetField, entity, options) {
         if (!entity) return false;
         var original = context.graph().base().entities[entity.id];
         return _some(field.keys, function(key) {
-            return original ? tags[key] !== original.tags[key] : tags[key];
+            return original ? _tags[key] !== original.tags[key] : _tags[key];
         });
     }
 
 
     function isPresent() {
         return _some(field.keys, function(key) {
-            return tags[key];
+            return _tags[key];
         });
     }
 
@@ -65,8 +66,8 @@ export function uiField(context, presetField, entity, options) {
         d3_event.preventDefault();
         if (!entity) return false;
 
-        var original = context.graph().base().entities[entity.id],
-            t = {};
+        var original = context.graph().base().entities[entity.id];
+        var t = {};
         d.keys.forEach(function(key) {
             t[key] = original ? original.tags[key] : undefined;
         });
@@ -143,14 +144,22 @@ export function uiField(context, presetField, entity, options) {
             .classed('modified', isModified())
             .classed('present', isPresent())
             .each(function(d) {
+                var reference, help;
+
+                // instantiate field help
+                if (options.wrap && field.type === 'restrictions') {
+                    help = uiFieldHelp(context, 'restrictions');
+                }
+
+                // instantiate tag reference
                 if (options.wrap && options.info) {
                     var referenceKey = d.key;
                     if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
                         referenceKey = referenceKey.replace(/:$/, '');
                     }
-                    var reference = uiTagReference(d.reference || { key: referenceKey }, context);
 
-                    if (state === 'hover') {
+                    reference = uiTagReference(d.reference || { key: referenceKey }, context);
+                    if (_state === 'hover') {
                         reference.showing(false);
                     }
                 }
@@ -158,35 +167,44 @@ export function uiField(context, presetField, entity, options) {
                 d3_select(this)
                     .call(d.impl);
 
-                if (options.wrap && options.info) {
+                // add field help components
+                if (help) {
+                    d3_select(this)
+                        .call(help.body)
+                        .select('.form-label-button-wrap')
+                        .call(help.button);
+                }
+
+                // add tag reference components
+                if (reference) {
                     d3_select(this)
                         .call(reference.body)
                         .select('.form-label-button-wrap')
                         .call(reference.button);
                 }
 
-                d.impl.tags(tags);
+                d.impl.tags(_tags);
             });
     };
 
 
     field.state = function(_) {
-        if (!arguments.length) return state;
-        state = _;
+        if (!arguments.length) return _state;
+        _state = _;
         return field;
     };
 
 
     field.tags = function(_) {
-        if (!arguments.length) return tags;
-        tags = _;
+        if (!arguments.length) return _tags;
+        _tags = _;
         return field;
     };
 
 
     field.show = function() {
-        show = true;
-        if (field.default && field.key && tags[field.key] !== field.default) {
+        _show = true;
+        if (field.default && field.key && _tags[field.key] !== field.default) {
             var t = {};
             t[field.key] = field.default;
             dispatch.call('change', this, t);
@@ -195,7 +213,7 @@ export function uiField(context, presetField, entity, options) {
 
 
     field.isShown = function() {
-        return show || _some(field.keys, function(key) { return !!tags[key]; });
+        return _show || _some(field.keys, function(key) { return !!_tags[key]; });
     };
 
 

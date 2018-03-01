@@ -1,4 +1,5 @@
 import { interpolate as d3_interpolate } from 'd3-interpolate';
+import { selectAll as d3_selectAll } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
@@ -6,22 +7,22 @@ import { uiViewOnOSM } from './view_on_osm';
 
 
 export function uiInspector(context) {
-    var presetList = uiPresetList(context),
-        entityEditor = uiEntityEditor(context),
-        state = 'select',
-        entityID,
-        newFeature = false;
+    var presetList = uiPresetList(context);
+    var entityEditor = uiEntityEditor(context);
+    var _state = 'select';
+    var _entityID;
+    var _newFeature = false;
 
 
     function inspector(selection) {
         presetList
-            .entityID(entityID)
-            .autofocus(newFeature)
+            .entityID(_entityID)
+            .autofocus(_newFeature)
             .on('choose', setPreset);
 
         entityEditor
-            .state(state)
-            .entityID(entityID)
+            .state(_state)
+            .entityID(_entityID)
             .on('choose', showList);
 
         var wrap = selection.selectAll('.panewrap')
@@ -44,8 +45,8 @@ export function uiInspector(context) {
         var editorPane = wrap.selectAll('.entity-editor-pane');
 
         var graph = context.graph(),
-            entity = context.entity(entityID),
-            showEditor = state === 'hover' ||
+            entity = context.entity(_entityID),
+            showEditor = _state === 'hover' ||
                 entity.isUsed(graph) ||
                 entity.isHighwayIntersection(graph);
 
@@ -66,7 +67,7 @@ export function uiInspector(context) {
             .merge(footer);
 
         footer
-            .call(uiViewOnOSM(context).entityID(entityID));
+            .call(uiViewOnOSM(context).entityID(_entityID));
 
 
         function showList(preset) {
@@ -89,23 +90,27 @@ export function uiInspector(context) {
 
 
     inspector.state = function(_) {
-        if (!arguments.length) return state;
-        state = _;
-        entityEditor.state(state);
+        if (!arguments.length) return _state;
+        _state = _;
+        entityEditor.state(_state);
+
+        // remove any old field help overlay that might have gotten attached to the inspector
+        d3_selectAll('.field-help-body').remove();
+
         return inspector;
     };
 
 
     inspector.entityID = function(_) {
-        if (!arguments.length) return entityID;
-        entityID = _;
+        if (!arguments.length) return _entityID;
+        _entityID = _;
         return inspector;
     };
 
 
     inspector.newFeature = function(_) {
-        if (!arguments.length) return newFeature;
-        newFeature = _;
+        if (!arguments.length) return _newFeature;
+        _newFeature = _;
         return inspector;
     };
 

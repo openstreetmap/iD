@@ -219,14 +219,41 @@ en:
       multiple_ways: There are too many lines here to split.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
-      help:
-        select: Click to select a road segment.
-        toggle: Click to toggle turn restrictions.
-        toggle_on: 'Click to add a "{restriction}" restriction.'
-        toggle_off: 'Click to remove the "{restriction}" restriction.'
       annotation:
         create: Added a turn restriction
         delete: Deleted a turn restriction
+  restriction:
+    controls:
+      distance: Distance
+      distance_up_to: "Up to {distance}"
+      via: Via
+      via_node_only: "Node only"
+      via_up_to_one: "Up to 1 way"
+      via_up_to_two: "Up to 2 ways"
+    help:
+      indirect: "(indirect)"
+      turn:
+        no_left_turn: "NO Left Turn {indirect}"
+        no_right_turn: "NO Right Turn {indirect}"
+        no_u_turn: "NO U-Turn {indirect}"
+        no_straight_on: "NO Straight On {indirect}"
+        only_left_turn: "ONLY Left Turn {indirect}"
+        only_right_turn: "ONLY Right Turn {indirect}"
+        only_u_turn: "ONLY U-Turn {indirect}"
+        only_straight_on: "ONLY Straight On {indirect}"
+        allowed_left_turn: "Left Turn Allowed {indirect}"
+        allowed_right_turn: "Right Turn Allowed {indirect}"
+        allowed_u_turn: "U-Turn Allowed {indirect}"
+        allowed_straight_on: "Straight On Allowed {indirect}"
+      from: FROM
+      via: VIA
+      to: TO
+      from_name: "{from} {fromName}"
+      from_name_to_name: "{from} {fromName} {to} {toName}"
+      via_names: "{via} {viaNames}"
+      select_from: "Click to select a {from} segment"
+      select_from_name: "Click to select {from} {fromName}"
+      toggle: "Click for \"{turn}\""
   undo:
     tooltip: "Undo: {action}"
     nothing: Nothing to undo.
@@ -715,6 +742,38 @@ en:
       using: "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Click the {data} **Map data** panel on the side of the map to enable, disable, or zoom to your GPS data."
       tracing: "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add."
       upload: "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
+    field:
+      restrictions:
+        title: Turn Restrictions Help
+        about:
+          title: About
+          about: "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads."
+          from_via_to: "A turn restriction always contains: one **FROM way**, one **TO way**, and either one **VIA node** or one or more **VIA ways**."
+          maxdist: "The \"{distField}\" slider controls how far to search for additional connected roads."
+          maxvia: "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+        inspecting:
+          title: Inspecting
+          about: "Hover over any **FROM** segment to see whether it has any turn restrictions. Each possible **TO** destination will be drawn with a colored shadow showing whether a restriction exists."
+          from_shadow: "{fromShadow} **FROM segment**"
+          allow_shadow: "{allowShadow} **TO Allowed**"
+          restrict_shadow: "{restrictShadow} **TO Restricted**"
+          only_shadow: "{onlyShadow} **TO Only**"
+          restricted: "\"Restricted\" means that there is a turn restriction, for example \"No Left Turn\"."
+          only: "\"Only\" means that a vehicle taking that path may only make that choice, for example \"Only Straight On\"."
+        modifying:
+          title: Modifying
+          about: "To modify turn restrictions, first click on any starting **FROM** segment to select it. The selected segment will pulse, and all possible **TO** destinations will appear as turn symbols."
+          indicators: "Then, click on a turn symbol to toggle it between \"Allowed\", \"Restricted\", and \"Only\"."
+          allow_turn: "{allowTurn} **TO Allowed**"
+          restrict_turn: "{restrictTurn} **TO Restricted**"
+          only_turn: "{onlyTurn} **TO Only**"
+        tips:
+          title: Tips
+          simple: "**Prefer simple restrictions over complex ones.**"
+          simple_example: "For example, avoid creating a via-way restriction if a simpler via-node turn restriction will do."
+          indirect: "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**"
+          indirect_example: "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection."
+          indirect_noedit: "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
   intro:
     done: done
     ok: OK
