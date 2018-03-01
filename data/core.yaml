@@ -31,6 +31,23 @@ en:
       annotation:
         line: Started a line.
         area: Started an area.
+    momenta_deleteLine:
+        reason: All Chosed must be lines.
+        tooltip: delete a line.
+        key: D
+        annotation: delete lines.
+        title: delete chosed lines.
+    momenta_fillInfo:
+        reason: please chose nodes.
+        tooltip: adapte ele.
+        key: D
+        annotation: adapte ele.
+        title: add ele to nodes.
+    momenta_segment:
+          title: create line segment
+          description: create line segment
+          key: S
+          annotation: generate Segment of selected line
     continue:
       key: A
       title: Continue
