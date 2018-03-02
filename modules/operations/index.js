@@ -4,7 +4,8 @@ export { operationDelete } from './delete';
 export { operationDisconnect } from './disconnect';
 export { operationMerge } from './merge';
 // export { operationMomentaCreateSegment } from './calculate_segments';
-export {operationMomentaDeleteLine,operationMomentaCreateSegment,operationMomentaFillInfo} from '../momenta/operations';
+export {operationMomentaDelete,operationMomentaCreateSegment,operationMomentaFillInfo//,operationMomentaMerge
+,operationMomentaStraighten} from '../momenta/operations';
 export { operationMove } from './move';
 export { operationOrthogonalize } from './orthogonalize';
 export { operationReflectShort, operationReflectLong

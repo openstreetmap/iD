@@ -35,26 +35,26 @@ function convert2JSON(selects, context) {
     // todo check node ele 高程，没有的话需要特殊处理
     for (i=0; i<length; i++) {
         var id = selects[i];
-        var entity = graph.entity(id);
+        var entity = context.entity(id);
         addEntity(changes,entity);
         if (entity.type === 'way'){
             var nodes = entity.nodes;
             nodes.forEach(function (item, index) {
-                addEntity(changes,graph.entity(item));
+                addEntity(changes,context.entity(item));
             });
         }
     }
     return JSON.stringify(changes);
 }
-
+function checkNumUseful(value) {
+    return parseFloat(value)!==NaN
+}
 function sendPost(url,data) {
     var result = minAjax({
         url: url,//request URL
         type: 'POST',//Request type GET/POST
         //Send Data in form of GET/POST
-        data: {
-            value: data
-        },
+        data: data,
         method:false,
         //CALLBACK FUNCTION with RESPONSE as argument
         success: function (data) {
