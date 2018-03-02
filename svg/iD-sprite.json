@@ -423,6 +423,7 @@
     "operation-paste":          { "viewBox": "540 380 20 20" },
     "operation-draw-centerline":{ "viewBox": "560 380 20 20" },
 
+    "operation-momenta_addpoints":{ "viewBox": "540 380 20 20" },
     "operation-momenta_straighten":{ "viewBox": "540 380 20 20" },
     "operation-momenta_merge":{ "viewBox": "540 380 20 20" },
     "operation-momenta_fillInfo":{ "viewBox": "540 380 20 20" },

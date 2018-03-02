@@ -37,6 +37,12 @@ en:
         title: merge elements.
         key: D
         annotation: merge elements.
+    momenta_addpoints:
+        reason: add points.
+        tooltip: add points.
+        key: D
+        annotation: add points..
+        title: add points.
     momenta_straighten:
         title: Straighten
         description: Straighten this line.

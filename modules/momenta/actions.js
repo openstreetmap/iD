@@ -52,7 +52,7 @@ function actionFillInfo(selectIds,context) {
             var ele = context.entity(item);
             if (ele.type === 'node'){
                 if (ele.tags.ele == null){
-                    ele.tags.ele = eleValue;
+                    ele.tags.ele = ''+eleValue;
                     graph = actionAddEntity(ele)(graph);
                 }
             }
@@ -60,7 +60,7 @@ function actionFillInfo(selectIds,context) {
                 var nodes = ele.nodes;
                 nodes.forEach(function (it1) {
                     var n = context.entity(it1);
-                    n.tags.ele = eleValue;
+                    n.tags.ele = ''+eleValue;
                     graph = actionAddEntity(n)(graph);
                 });
                 // if (ele.tags.ele == null){
@@ -85,6 +85,54 @@ function createLineSegment(selectIds,context) {
             var ele = deleteEles[i];
             if (ele.id.indexOf('n')>-1){
                graph = actionDeleteNode(ele.id)(graph);
+            }
+            if (ele.id.indexOf('w')>-1){
+                graph = actionDeleteWay(ele.id)(graph);
+            }
+        }
+        for (i=0; i<createEles.length; i++){
+
+            var ele2 = createEles[i];
+            if (ele2.nodes!=null){
+                var ids = []
+                var nodes = ele2.nodes;
+                for (var i1=0; i1<nodes.length; i1++){
+                    var node = nodes[i1]
+                    var nod = createEntity(node,'node');
+                    ids.push(nod.id);
+                    graph = actionAddEntity(nod)(graph);
+                }
+                ele2.nodes = ids;
+                var way = createEntity(ele2,'way');
+                graph = actionAddEntity(way)(graph);
+            } else {
+                graph = actionAddEntity(createEntity(ele2,'way'))(graph);
+            }
+            // entity = createEntity(ele2);
+            // graph = actionAddEntity(entity)(graph);
+        }
+        for (i=0; i<modifyEles.length; i++){
+            entity = createEntity(modifyEles[i]);
+
+            graph = actionAddEntity(entity)(graph);
+        }
+        return graph;
+    };
+}
+
+function createAddMorePoints(selectIds,context) {
+    var data = convert2JSON(selectIds,context);
+    return function createAdd(graph) {
+        var result = sendPost(url.host+url.createSeg,{value:data,type:'addpoints'});
+        result = JSON.parse(result);
+        var deleteEles = result.deleted;
+        var createEles = result.created;
+        var modifyEles = result.modified;//暂时没有modify
+        var i=0,entity;
+        for (i=0; i<deleteEles.length; i++){
+            var ele = deleteEles[i];
+            if (ele.id.indexOf('n')>-1){
+                graph = actionDeleteNode(ele.id)(graph);
             }
             if (ele.id.indexOf('w')>-1){
                 graph = actionDeleteWay(ele.id)(graph);
@@ -199,4 +247,4 @@ function actionMomentaStraighten(selectIds, context) {
     };
 }
 
-export {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten};
+export {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints};

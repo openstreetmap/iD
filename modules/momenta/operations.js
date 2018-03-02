@@ -2,7 +2,8 @@
 
 import { t } from '../util/locale';
 import { behaviorOperation } from '../behavior/index';
-import {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten} from '../momenta/actions';
+import {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten
+,createAddMorePoints} from '../momenta/actions';
 import {operationDelete} from '../operations';
 import _uniq from 'lodash-es/uniq';
 
@@ -259,4 +260,56 @@ function operationMomentaStraighten(selectedIDs, context) {
     return operation;
 }
 
-export {operationMomentaCreateSegment,operationMomentaDelete,operationMomentaFillInfo,operationMomentaMerge,operationMomentaStraighten};
+
+function operationMomentaAddPoints(selectedIDs, context) {
+    var  action = createAddMorePoints(selectedIDs, context);
+
+    var operation = function() {
+        context.perform(action, operation.annotation());
+    };
+    // function checkIsAllNode(selectedIDs, context) {
+    //     var isAllLine = true,noEle = true;
+    //     selectedIDs.forEach(function (item, i) {
+    //         if (context.entity(item).type !== 'node') {
+    //             isAllLine = false;
+    //         } else if (context.entity(item).tags.ele !=null){
+    //             noEle = false;
+    //         }
+    //     })
+    //     return !noEle;
+    // }
+
+    operation.available = function() {
+        return true;
+    };
+
+
+    operation.disabled = function() {
+        var reason;
+        // if (!checkIsAllNode(selectedIDs,context)){
+        //     reason = t('operations.momenta_addpoints.reason');
+        // }
+        return reason;
+    };
+
+
+    operation.tooltip = function() {
+        return t('operations.momenta_addpoints.tooltip');
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.momenta_addpoints.annotation');
+    };
+
+
+    operation.id = 'momenta_addpoints';
+    operation.keys = [t('operations.momenta_addpoints.key')];
+    operation.title = t('operations.momenta_addpoints.title');
+    operation.behavior = behaviorOperation(context).which(operation);
+
+    return operation;
+}
+
+
+export {operationMomentaCreateSegment,operationMomentaDelete,operationMomentaFillInfo,operationMomentaMerge,operationMomentaStraighten,operationMomentaAddPoints};
