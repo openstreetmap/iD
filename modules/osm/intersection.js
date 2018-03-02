@@ -387,7 +387,6 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         // maxViaWay=1   from-*-via-*-to        (1 via max)
         // maxViaWay=2   from-*-via-*-via-*-to  (2 vias max)
         var maxPathLength = (maxViaWay * 2) + 3;
-        var maxDistance = 30;   // meters
         var turns = [];
 
         step(start);
