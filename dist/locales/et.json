@@ -262,11 +262,6 @@
                 "connected_to_hidden": "Seda ei saa tükeldada, kuna see on ühendatud peidetud objektiga."
             },
             "restriction": {
-                "help": {
-                    "toggle": "Klõpsa, et vahetada pöörde piiranguid.",
-                    "toggle_on": "Klõpsa, et lisada piirang \"{restriction}\".",
-                    "toggle_off": "Klõpsa, et eemaldada piirang \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Lisatud pöörde piirang",
                     "delete": "Kustutatud pöörde piirang"
@@ -396,14 +391,25 @@
         "background": {
             "title": "Taust",
             "description": "Tausta seaded",
+            "backgrounds": "Taustad",
             "none": "Puudub",
+            "switch": "Vaheta tagasi selle tausta vastu",
             "custom": "Kohandatud",
             "custom_button": "Muuda kohandatud tausta",
+            "custom_prompt": "Sisesta paanide internetiaadressi vormel. Sobivad järgmised sõned:\n   - {zoom} või {z}, {x}, {y}, kui kasutad paaniskeemi Z/X/Y\n   - {-y} või {ty}, kui kasutad TMS-skeemi ümberpööratud Y-koordinaate\n   - {u}, kui kasutad ruutpaani skeemi (quadtile)\n   - {switch:a,b,c}, kui kasutad DNS-serveri multipleksimist\n\nNäide:\n{example}",
+            "overlays": "Ülekatted",
+            "imagery_source_faq": "Pildimaterjali teave / teata probleemist",
             "reset": "lähtesta",
+            "display_options": "Kuvasuvandid",
+            "brightness": "Heledus",
+            "contrast": "Kontrast",
+            "saturation": "Küllastus",
+            "sharpness": "Teravus",
             "minimap": {
+                "description": "Näita pisikaarti",
                 "tooltip": "Näita väljasuumitud kaarti, et aidata tuvastada kuvatud ala."
             },
-            "fix_misalignment": "Korrigeeri kattekaardi nihet",
+            "fix_misalignment": "Korrigeeri pildimaterjali nihet",
             "offset": "Lohista alumist halli kasti, et sättida kattekaardi nihet või siseta nihe meetrites."
         },
         "map_data": {
@@ -575,18 +581,25 @@
             "browse": "Sirvi faili"
         },
         "mapillary_images": {
-            "tooltip": "Tänava-tasandi fotod Mapillary'st",
-            "title": "Foto-kate (Mapillary)"
+            "tooltip": "Tänavatasandi fotod Mapillaryst",
+            "title": "Fotokate (Mapillary)"
         },
         "mapillary_signs": {
-            "tooltip": "Liiklusmärgid Mapillary'st (Foto-kate peab olema lubatud)",
-            "title": "Liiklusmärgi-kate (Mapillary)"
+            "tooltip": "Liiklusmärgid Mapillaryst (fotokate peab olema lubatud)",
+            "title": "Liiklusmärkide kate (Mapillary)"
         },
         "mapillary": {
-            "view_on_mapillary": "Vaata seda fotot Mapillary's"
+            "view_on_mapillary": "Vaata seda fotot Mapillarys"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Tänavatasandi fotod OpenStreetCamist",
+            "title": "Fotokate (OpenStreetCam)"
         },
         "help": {
-            "title": "Abi"
+            "title": "Abi",
+            "editing": {
+                "keyboard_h": "Kiirklahvid"
+            }
         },
         "intro": {
             "graph": {
@@ -618,6 +631,15 @@
                 "title": "Alusta muutmist",
                 "save": "Ära unusta oma muudatusi regulaarselt salvestada!",
                 "start": "Alusta kaardistamist!"
+            }
+        },
+        "shortcuts": {
+            "title": "Kiirklahvid",
+            "browsing": {
+                "display_options": {
+                    "background_switch": "Vaheta tagasi viimase tausta vastu",
+                    "minimap": "Lülita pisikaart sisse või välja"
+                }
             }
         },
         "presets": {
@@ -1546,8 +1568,12 @@
                     "name": "Looduskeskus",
                     "terms": "külastuskeskus"
                 },
+                "amenity/recycling": {
+                    "name": "Jäätmekonteiner",
+                    "terms": "taaskasutus,konteiner,prügi,jäätmed,ohtlikud"
+                },
                 "amenity/recycling_centre": {
-                    "name": "Jäätmejaam",
+                    "name": "Ümbertöötluskeskus",
                     "terms": "Taaskasutuskeskus"
                 },
                 "amenity/register_office": {
@@ -3434,7 +3460,7 @@
                     "name": "Kanal"
                 },
                 "waterway/dam": {
-                    "name": "Tamm"
+                    "name": "Pais"
                 },
                 "waterway/ditch": {
                     "name": "Kraav"
@@ -3476,9 +3502,53 @@
                     "name": "Kosk"
                 },
                 "waterway/weir": {
-                    "name": "Pais",
+                    "name": "Ülevoolupais",
                     "terms": "tamm"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Satelliidi- ja aerofotod.",
+                "name": "Bingi aerofotod"
+            },
+            "DigitalGlobe-Premium": {
+                "description": "DigitalGlobe'i satelliidifotod (premium)",
+                "name": "DigitalGlobe'i pildimaterjal (premium)"
+            },
+            "DigitalGlobe-Standard": {
+                "description": "DigitalGlobe'i satelliidifotod (standard)",
+                "name": "DigitalGlobe'i pildimaterjal (standard)"
+            },
+            "EsriWorldImagery": {
+                "description": "Esri Worldi pildimaterjal.",
+                "name": "Esri Worldi pildimaterjal"
+            },
+            "EsriWorldImageryClarity": {
+                "description": "Esri arhiivimaterjal, mis võib olla tavakihi piltidest selgem ja täpsem.",
+                "name": "Esri Worldi pildimaterjal (selgem, beeta)"
+            },
+            "MAPNIK": {
+                "description": "OpenStreetMapi vaikekiht.",
+                "name": "OpenStreetMap (standard)"
+            },
+            "Mapbox": {
+                "description": "Satelliidi- ja aerofotod.",
+                "name": "Mapboxi satelliidifotod"
+            },
+            "mapbox_locator_overlay": {
+                "description": "Näita tähtsamaid objekte, et aidata orienteeruda.",
+                "name": "Asukoha ülekate"
+            },
+            "osm-gps": {
+                "description": "Avalikud GPS-rajad, mis on OpenStreetMapi üles laaditud.",
+                "name": "OpenStreetMapi GPS-rajad"
+            },
+            "stamen-terrain-background": {
+                "name": "Stameni reljeefikaart"
+            },
+            "tf-landscape": {
+                "name": "Thunderforesti maastikukaart"
             }
         }
     }

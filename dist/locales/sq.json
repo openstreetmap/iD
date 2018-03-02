@@ -172,11 +172,6 @@
                 "connected_to_hidden": "Kjo nuk mund të ndahet sepse është lidhur me një tipar të fshehur."
             },
             "restriction": {
-                "help": {
-                    "select": "Klikoni për të zgjedhur një segment rrugor.",
-                    "toggle_on": "Klikoni për të shtuar një kufizim \"{restriction}\".",
-                    "toggle_off": "Klikoni për të hequr kufizimin \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "U shtu një kufizim kthesësh.",
                     "delete": "U fshi një kufizim kthesësh."

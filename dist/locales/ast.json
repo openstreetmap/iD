@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Nun puede partise porque ta coneutao con una carauterística tapecida."
             },
             "restriction": {
-                "help": {
-                    "select": "Fai click pa seleicionar un segmentu de carretera",
-                    "toggle": "Fai click pa conmutar les torgues de xiru.",
-                    "toggle_on": "Fai click p'amestar una torga «{restriction}».",
-                    "toggle_off": "Fai click pa desaniciar la torga «{restriction}»."
-                },
                 "annotation": {
                     "create": "Amestada una torga de xiru",
                     "delete": "Desaniciada una torga de xiru"
@@ -3995,9 +3989,6 @@
                 },
                 "shop": {
                     "name": "Tienda"
-                },
-                "shop/agrarian": {
-                    "name": "Tienda d'agricultura"
                 },
                 "shop/alcohol": {
                     "name": "Llicorería",

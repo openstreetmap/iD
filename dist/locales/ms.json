@@ -282,12 +282,6 @@
                 "connected_to_hidden": "Ini tidak dapat dibelah kerana ianya bersambung ke ciri tersembunyi."
             },
             "restriction": {
-                "help": {
-                    "select": "Klik untuk memilih segmen jalan.",
-                    "toggle": "Klik untuk menukar sekatan pusingan.",
-                    "toggle_on": "Klik untuk menambah suatu larangan \"{restriction}\".",
-                    "toggle_off": "Klik untuk menghapuskan suatu larangan \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Suatu larangan membelok telah ditambah",
                     "delete": "Suatu larangan membelok telah dihapuskan"

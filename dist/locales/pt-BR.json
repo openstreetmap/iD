@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Não pode ser dividido pois está conectado a um elemento oculto."
             },
             "restriction": {
-                "help": {
-                    "select": "Clique para selecionar um segmento de rua.",
-                    "toggle": "Clique para alternar restrições de curva.",
-                    "toggle_on": "Clique para adicionar uma restrição \"{restriction}\".",
-                    "toggle_off": "Clique para remover a restrição \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Adicionada uma restrição de curva",
                     "delete": "Excluída uma restrição de curva"
@@ -797,11 +791,14 @@
             "imagery": {
                 "title": "Imagens de Fundo",
                 "sources_h": "Fontes de Imagens",
-                "offsets_h": "Ajustando o Deslocamento das Imagens de Fundo"
+                "offsets_h": "Ajustando o Deslocamento das Imagens de Fundo",
+                "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento de imagens em pequenos passos, ou segure o botão esquerdo do mouse e arraste no quadrado cinzento para deslizar a imagem para o alinhamento."
             },
             "streetlevel": {
                 "title": "Fotos de Rua",
-                "using_h": "Usando Fotos de Rua"
+                "using_h": "Usando Fotos de Rua",
+                "photos": "Quando ativado, a camada de foto exibe uma linha ao longo da seqüência de fotos. Em níveis de zoom mais altos, um círculo marca em cada local da foto e, em níveis de zoom ainda maiores, um cone indica a direção em que a câmera estava voltada quando a foto foi tirada.",
+                "viewer": "Quando você clica em um dos locais da foto, um visualizador de fotos aparece no canto inferior do mapa. O visualizador de fotos contém controles para avançar e retroceder na sequência da imagem. Também mostra o nome de usuário da pessoa que capturou a imagem, a data em que foi capturada e um link para visualizar a imagem no site original."
             },
             "gps": {
                 "title": "Traçados de GPS",
@@ -1652,6 +1649,9 @@
                         "both": "Ambas / Todas",
                         "forward": "Igual à direção da linha"
                     }
+                },
+                "dispensing": {
+                    "label": "Dispensa prescrições"
                 },
                 "display": {
                     "label": "Mostrador"
@@ -2595,6 +2595,9 @@
                 "wheelchair": {
                     "label": "Acesso a Cadeirantes"
                 },
+                "wholesale": {
+                    "label": "Atacado"
+                },
                 "width": {
                     "label": "Largura (Metros)"
                 },
@@ -2608,6 +2611,7 @@
                 "windings/configuration": {
                     "label": "Configuração das Bombinas",
                     "options": {
+                        "delta": "Delta",
                         "open": "Aberta",
                         "zigzag": "Zig Zag"
                     }
@@ -3076,6 +3080,9 @@
                     "name": "Ducha",
                     "terms": "ducha, chuveiro, banheiro, banho público, banho"
                 },
+                "amenity/smoking_area": {
+                    "name": "Área de fumantes"
+                },
                 "amenity/social_facility": {
                     "name": "Unidade de Assistência Social",
                     "terms": "Assistência Social, assistente social, Serviço Social"
@@ -3398,10 +3405,6 @@
                 },
                 "building/entrance": {
                     "name": "Entrada/Saída"
-                },
-                "building/farm": {
-                    "name": "Edifício de Fazenda",
-                    "terms": "fazenda, roça, zona rural, edifício, casa de fazenda, casa de campo"
                 },
                 "building/garage": {
                     "name": "Garagem",
@@ -5135,6 +5138,15 @@
                 "public_transport/station_trolleybus": {
                     "name": "Estação de Trólebus / Terminal"
                 },
+                "public_transport/stop_position_bus": {
+                    "name": "Local de parada de ônibus"
+                },
+                "public_transport/stop_position_subway": {
+                    "name": "Local de parada de metrô"
+                },
+                "public_transport/stop_position_train": {
+                    "name": "Local de parada de trem"
+                },
                 "railway": {
                     "name": "Ferrovia"
                 },
@@ -5234,10 +5246,6 @@
                 "shop": {
                     "name": "Loja",
                     "terms": "Loja, Comércio"
-                },
-                "shop/agrarian": {
-                    "name": "Loja de Produtos Agrícolas",
-                    "terms": "loja de produtos agropecuários, sementes, fertilizantes, ferramentas agrícolas, loja agrícola, máquinas agrícolas, pesticidas"
                 },
                 "shop/alcohol": {
                     "name": "Loja de alcoólicos licenciada",
@@ -6088,6 +6096,13 @@
                 },
                 "description": "Imagens globais da ESRI.",
                 "name": "Imagens globais da ESRI"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Termos e Comentários"
+                },
+                "description": "Esri imagens de arquivo que podem ser mais claras e mais precisas do que a camada padrão.",
+                "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {

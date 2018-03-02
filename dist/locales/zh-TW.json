@@ -285,12 +285,6 @@
                 "connected_to_hidden": "這個沒辦法切割，因為與其他隱藏的圖徵相連."
             },
             "restriction": {
-                "help": {
-                    "select": "點選選擇一段道路",
-                    "toggle": "點選切換轉向限制。",
-                    "toggle_on": "點選增加\"{restriction}\"的限制。",
-                    "toggle_off": "點選移除\"{restriction}\"的限制。"
-                },
                 "annotation": {
                     "create": "已增加轉向限制",
                     "delete": "已移除轉向限制"
@@ -1697,6 +1691,9 @@
                         "forward": "前進"
                     }
                 },
+                "dispensing": {
+                    "label": "發放處方"
+                },
                 "display": {
                     "label": "顯示"
                 },
@@ -1772,7 +1769,7 @@
                     "label": "設備類型"
                 },
                 "fixme": {
-                    "label": "修復我"
+                    "label": "修正我"
                 },
                 "ford": {
                     "label": "類型",
@@ -2639,6 +2636,9 @@
                 "wheelchair": {
                     "label": "輪椅通道"
                 },
+                "wholesale": {
+                    "label": "批發"
+                },
                 "width": {
                     "label": "寬度 (公尺)"
                 },
@@ -3463,6 +3463,10 @@
                 "building/farm": {
                     "name": "農舍",
                     "terms": "農舍"
+                },
+                "building/farm_auxiliary": {
+                    "name": "農場建築物",
+                    "terms": "農場建築物"
                 },
                 "building/garage": {
                     "name": "車庫",
@@ -4376,6 +4380,10 @@
                 "leisure/adult_gaming_centre": {
                     "name": "成人遊戲中心",
                     "terms": "成人遊樂場"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "遊樂場",
+                    "terms": "遊樂場"
                 },
                 "leisure/bird_hide": {
                     "name": "鳥類棲息處",
@@ -5463,8 +5471,8 @@
                     "terms": "商店,商行"
                 },
                 "shop/agrarian": {
-                    "name": "農用品店",
-                    "terms": "農用品店"
+                    "name": "農業用品補給店",
+                    "terms": "農用品店 "
                 },
                 "shop/alcohol": {
                     "name": "酒類專賣店",
@@ -5704,6 +5712,10 @@
                     "name": "五金店",
                     "terms": "五金行"
                 },
+                "shop/health_food": {
+                    "name": "健康食品店",
+                    "terms": "保康食品店"
+                },
                 "shop/hearing_aids": {
                     "name": "助聽器店",
                     "terms": "助聽器商店"
@@ -5942,6 +5954,10 @@
                 "shop/weapons": {
                     "name": "武器店",
                     "terms": "武器商店,槍店"
+                },
+                "shop/wholesale": {
+                    "name": "批發商",
+                    "terms": "批發商,批發店"
                 },
                 "shop/window_blind": {
                     "name": "窗廉店",

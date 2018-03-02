@@ -282,12 +282,6 @@
                 "connected_to_hidden": "Ovo se ne može razdvojiti jer je spojeno na skriveni element karte."
             },
             "restriction": {
-                "help": {
-                    "select": "Klikni za odabir dijela ceste.",
-                    "toggle": "Klikni za uključivanje zabrane skretanja.",
-                    "toggle_on": "Klikni za dodavanje \"{restriction}\" zabrane.",
-                    "toggle_off": "Klikni za uklanjanje \"{restriction}\" zabrane."
-                },
                 "annotation": {
                     "create": "Zabrana skretanja je dodana",
                     "delete": "Zabrana skretanja je uklonjena"
@@ -574,6 +568,10 @@
             "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
             "deprecated_tags": "Zastarjele oznake: {tags}"
         },
+        "zoom": {
+            "in": "Povećaj prikaz",
+            "out": "Smanji prikaz"
+        },
         "cannot_zoom": "Nije moguće više udaljiti u trenutnom môdu.",
         "full_screen": "Slika preko cijelog zaslona",
         "gpx": {
@@ -594,7 +592,19 @@
             "view_on_mapillary": "Pogledaj ovu sliku na Mapillary"
         },
         "help": {
-            "title": "Pomoć"
+            "title": "Pomoć",
+            "key": "H",
+            "help": {
+                "title": "Pomoć",
+                "open_data_h": "Slobodni podaci",
+                "before_start_h": "Prije nego počneš",
+                "open_source_h": "Otvoreni kod"
+            },
+            "overview": {
+                "title": "Pregled",
+                "navigation_h": "Navigacija",
+                "features_h": "Elementi karte"
+            }
         },
         "intro": {
             "done": "gotovo",

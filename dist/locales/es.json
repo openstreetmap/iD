@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Esto no se puede dividir porque está conectado a un elemento oculto."
             },
             "restriction": {
-                "help": {
-                    "select": "Haga clic para seleccionar un segmento de la vía.",
-                    "toggle": "Haga clic para activar o desactivar las restricciones de giro.",
-                    "toggle_on": "Haga clic para añadir una restricción  de \"{restriction}\"",
-                    "toggle_off": "Haga clic para quitar la restricción «{restriction}»"
-                },
                 "annotation": {
                     "create": "Restricción de giro añadida",
                     "delete": "Restricción de giro eliminada"
@@ -389,6 +383,8 @@
                 "title": "Medición",
                 "selected": "{n} seleccionado",
                 "geometry": "Geometría",
+                "closed_line": "línea cerrada",
+                "closed_area": "área cerrada",
                 "center": "Centro",
                 "perimeter": "Perímetro",
                 "length": "Longitud",
@@ -469,6 +465,7 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
+            "custom_prompt": "Ingrese una plantilla de URL de tesela. Los tokens válidos son:\n  - {zoom} o {z}, {x}, {y} para el esquema de tesela Z/X/Y\n  - {-y} o {ty} para las coordenadas Y invertidas estilo TMS\n  - {u} para el esquema quadtile\n  - {switch: a, b, c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
             "overlays": "Superposiciones",
             "imagery_source_faq": "Información de imágenes / Informar un problema",
             "reset": "reiniciar",
@@ -652,6 +649,7 @@
             "untagged_area_tooltip": "Seleccione un tipo de elemento que describa lo que es esta área.",
             "untagged_relation": "Relación no etiquetada",
             "untagged_relation_tooltip": "Seleccione un tipo de elemento que describa qué es esta relación.",
+            "many_deletions": "Está eliminando {n} elementos: {p} nodos, {l} líneas, {a} áreas, {r} relaciones. ¿Seguro que quiere hacer esto? Esto los borrará del mapa que todos los demás ven en openstreetmap.org.",
             "tag_suggests_area": "La etiqueta {tag} sugiere que esta línea debería ser una área, pero no es un área",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -672,8 +670,8 @@
             "title": "Capa de fotos (Mapillary)"
         },
         "mapillary_signs": {
-            "tooltip": "Señales de tráfico Mapillary (debe habilitar Capa de fotos)",
-            "title": "Capa de señales de tráfico (Mapillary)"
+            "tooltip": "Señales viales de Mapillary (debe habilitar capa de fotos)",
+            "title": "Capa de señales viales (Mapillary)"
         },
         "mapillary": {
             "view_on_mapillary": "Ver esta imagen en Mapillary"
@@ -1218,6 +1216,28 @@
                 }
             }
         },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} ft²",
+            "square_miles": "{quantity} mi²",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "O",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1670,6 +1690,9 @@
                         "both": "Ambos / Todos",
                         "forward": "Adelante"
                     }
+                },
+                "dispensing": {
+                    "label": "Prepara recetas"
                 },
                 "display": {
                     "label": "Monitor"
@@ -2216,6 +2239,9 @@
                 "ref": {
                     "label": "Código de referencia"
                 },
+                "ref/isil": {
+                    "label": "Código ISIL"
+                },
                 "ref_aeroway_gate": {
                     "label": "Número de puerta"
                 },
@@ -2609,6 +2635,9 @@
                 },
                 "wheelchair": {
                     "label": "Acceso en silla de ruedas"
+                },
+                "wholesale": {
+                    "label": "Venta al por mayor"
                 },
                 "width": {
                     "label": "Ancho (metros)"
@@ -3096,6 +3125,10 @@
                     "name": "Ducha",
                     "terms": "ducha, regadera, cuarto de aseo"
                 },
+                "amenity/smoking_area": {
+                    "name": "Área de fumadores",
+                    "terms": "Área de fumadores, area de fumadores, zona de fumadores, cigarrillo, humo"
+                },
                 "amenity/social_facility": {
                     "name": "Instalación social",
                     "terms": "Servicios sociales, Asistencia social, "
@@ -3329,6 +3362,10 @@
                     "name": "Seto",
                     "terms": "cobertura, seto vivo, seto verde, defensa"
                 },
+                "barrier/kerb": {
+                    "name": "Bordillo / Cordón",
+                    "terms": "bordillo, borde de la banqueta, cuneta, sardinel, cordón de la vereda"
+                },
                 "barrier/kissing_gate": {
                     "name": "Puerta de ganado",
                     "terms": "puerta, seguridad, ganado, animales, control"
@@ -3368,6 +3405,10 @@
                 "building/barn": {
                     "name": "Granero",
                     "terms": "Granero, hórreo, silo, depósito de cereal, troj"
+                },
+                "building/boathouse": {
+                    "name": "Cobertizo para botes",
+                    "terms": "cobertizo, botes "
                 },
                 "building/bungalow": {
                     "name": "Bungalow",
@@ -3418,10 +3459,6 @@
                 },
                 "building/entrance": {
                     "name": "Entrada/Salida"
-                },
-                "building/farm": {
-                    "name": "Edificio agrícola",
-                    "terms": "edificio agrícola, edificio agricola, agrícola, agricola, granja"
                 },
                 "building/garage": {
                     "name": "Garaje privado",
@@ -3776,6 +3813,10 @@
                 "emergency/private": {
                     "name": "Acceso de emergencia privado"
                 },
+                "emergency/water_tank": {
+                    "name": "Depósito de agua de emergencia",
+                    "terms": "tanque de agua, cisterna, depósito, deposito"
+                },
                 "emergency/yes": {
                     "name": "Acceso de emergencia permitido"
                 },
@@ -3913,6 +3954,10 @@
                 "highway/bridleway": {
                     "name": "Camino de herradura",
                     "terms": "camino de herradura, senda ecuestre, camino para caballos, pista ecuestre, ruta a caballo, caballo"
+                },
+                "highway/bus_guideway": {
+                    "name": "Bus guiado",
+                    "terms": "Autobús, autobus, bus, colectivo, guiado"
                 },
                 "highway/bus_stop": {
                     "name": "Parada / Plataforma de bus"
@@ -4139,7 +4184,7 @@
                 },
                 "historic/wayside_shrine": {
                     "name": "Santuario al borde del camino",
-                    "terms": "santuario, sagrario, Ermita, Proskynetarion, proskynetaria, oratorio, lugar de culto, icono, figura, humilladero"
+                    "terms": "santuario, sagrario, Ermita, Proskynetarion, proskynetaria, oratorio, lugar de culto, icono, figura, humilladero, virgen, virgencita"
                 },
                 "junction": {
                     "name": "Intersección vial",
@@ -4195,6 +4240,10 @@
                 "landuse/forest": {
                     "name": "Plantación forestal",
                     "terms": "bosque, plantación, pinar, cultivo, plantío, sembrado, eucaliptal, explotación, árbol"
+                },
+                "landuse/garages": {
+                    "name": "Terreno de garajes privados",
+                    "terms": "terreno, garaje, almacenamiento"
                 },
                 "landuse/grass": {
                     "name": "Césped",
@@ -4324,6 +4373,10 @@
                     "name": "Centro de juegos para adultos",
                     "terms": "juego, videojuegos, azar, juegos de azar, máquinas de juego, salón de juegos"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Sala de juegos recreativos",
+                    "terms": "juegos, videojuegos, simuladores, máquinas, maquinas, pinball, fichines"
+                },
                 "leisure/bird_hide": {
                     "name": "Observatorio de aves",
                     "terms": "observatorio, refugio, ave, pájaro, vida silvestre, naturaleza"
@@ -4437,7 +4490,7 @@
                     "terms": "reserva natural, reserva ecológica, área protegida, conservación, preservación, natural"
                 },
                 "leisure/park": {
-                    "name": "Parque / Plaza",
+                    "name": "Parque",
                     "terms": "parque, plaza, plazuela, parque ecoturístico, área de recreación"
                 },
                 "leisure/picnic_table": {
@@ -5410,8 +5463,8 @@
                     "terms": "negocio, tienda, bazar, bodega, comercio, local"
                 },
                 "shop/agrarian": {
-                    "name": "Tienda de agricultura",
-                    "terms": "agricultura, agrícola, cultivo, invernadero, granja, insumos, máquinas, semillas, pesticidas, control plagas, fertilizantes, herramientas, maquinaria, tierra, huerto"
+                    "name": "Tienda de suministros agrícolas",
+                    "terms": "Tienda de suministros agrícolas, insumos agrícolas, máquinas agrícolas, semillas, pesticidas, fertilizantes, herramientas agrícolas, agrícola, agricola"
                 },
                 "shop/alcohol": {
                     "name": "Licorería",
@@ -5651,6 +5704,10 @@
                     "name": "Ferretería",
                     "terms": "ferretería,  herramientas"
                 },
+                "shop/health_food": {
+                    "name": "Tienda de comida saludable",
+                    "terms": "Tienda de comida saludable, alimentos integrales, vitaminas, vegetariano, vegano"
+                },
                 "shop/hearing_aids": {
                     "name": "Tienda de audífonos",
                     "terms": "audífono, oído, sordo, prótesis auditivas, aparatos auditivos, ayudas auditivas, centro auditivo"
@@ -5889,6 +5946,10 @@
                 "shop/weapons": {
                     "name": "Tienda de armas",
                     "terms": "armería, munición, tienda de armas, caza, pesca, cuchillos, navajas"
+                },
+                "shop/wholesale": {
+                    "name": "Almacén al por mayor",
+                    "terms": "Almacén al por mayor, por mayor"
                 },
                 "shop/window_blind": {
                     "name": "Tienda de persianas",
@@ -6266,6 +6327,13 @@
                 "description": "Imágenes mundiales Esri.",
                 "name": "Imágenes mundiales Esri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Las imágenes de archivo de Esri pueden ser más claras y precisas que la capa predeterminada.",
+                "name": "Esri World Imagery (Clarity) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© contribuidores OpenStreetMap, CC-BY-SA"
@@ -6334,18 +6402,33 @@
                 "name": "Carreteras TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, colaboradores de OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclismo"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, colaboradores de OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Senderismo"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, colaboradores de OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: BTT"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, colaboradores de OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Patinaje"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, colaboradores de OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Deportes de invierno"
             },
             "basemap.at": {

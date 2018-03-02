@@ -282,12 +282,6 @@
                 "connected_to_hidden": "Tento objekt nemôžno rozdeliť, pretože je spojený so skrytým objektom."
             },
             "restriction": {
-                "help": {
-                    "select": "Kliknite pre výber segmentu cesty.",
-                    "toggle": "Kliknite pre prepnutie zákazov odbočenia.",
-                    "toggle_on": "Kliknite pre pridanie \"{restriction}\" obmedzenia.",
-                    "toggle_off": "Kliknite pre odstránenie \"{restriction}\"  obmedzenia,"
-                },
                 "annotation": {
                     "create": "Pridať zákaz odbočenia",
                     "delete": "Odstrániť zákaz odbočenia"

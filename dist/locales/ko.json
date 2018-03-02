@@ -282,12 +282,6 @@
                 "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 분할할 수 없습니다."
             },
             "restriction": {
-                "help": {
-                    "select": "도로 분절을 선택하려면 클릭하세요.",
-                    "toggle": "회전 제한을 토글하려면 클릭하세요.",
-                    "toggle_on": "\"{restriction}\" 제한을 추가하려면 클릭하세요.",
-                    "toggle_off": "\"{restriction}\" 제한을 제거하려면 클릭하세요"
-                },
                 "annotation": {
                     "create": "회전 제한을 추가했습니다",
                     "delete": "회전 제한을 삭제했습니다"
@@ -341,7 +335,8 @@
             "created": "만듦",
             "about_changeset_comments": "바뀜집합 덧글에 대해",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "덧글에서 구글을 언급했습니다: 구글 지도로부터 복사하는 것은 엄격히 금지됨을 유의하세요."
+            "google_warning": "덧글에서 구글을 언급했습니다: 구글 지도로부터 복사하는 것은 엄격히 금지됨을 유의하세요.",
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "{users} 사용자의 편집",
@@ -467,6 +462,7 @@
             "switch": "이 배경으로 복귀합니다",
             "custom": "사용자 지정",
             "custom_button": "사용자 지정 배경 편집",
+            "custom_prompt": "타일 URL 템플릿을 입력하세요. 올바른 토큰은 다음과 같습니다:\n - Z/X/Y 타일 체계에 대해 {zoom} 또는 {z}, {x}, {y}\n - 뒤집힌 TMS 스타일의 Y좌표용으로 {-y} 또는 {ty}\n - 쿼드 타일 방식으로 {u}\n - 다중 DNS 서버용으로 {switch:a,b,c}\n\n예시는 다음과 같습니다:\n{example}",
             "overlays": "오버레이",
             "imagery_source_faq": "이미지 정보 / 버그 신고",
             "reset": "재설정",
@@ -649,6 +645,7 @@
             "untagged_area_tooltip": "이 공간을 설명하는 지물 유형을 선택하세요.",
             "untagged_relation": "태그되지 않은 관계",
             "untagged_relation_tooltip": "이 관계가 무엇인지 설명하는 지물 유형을 선택하세요.",
+            "many_deletions": "개체 {n}개: 노드 {p}개, 선 {l}개, 지역 {a}개, 관계 {r}개를 삭제하고 있습니다. 이를 수행하겠습니까? 다른 사람이 openstreetmap.org에서 보는 지도에서 삭제됩니다.",
             "tag_suggests_area": "{tag} 태그의 제안 선은 공간이여야 하지만 태그는 공간이 아닙니다",
             "deprecated_tags": "사용되지 않는 태그: {tags}"
         },
@@ -3630,6 +3627,10 @@
                     "name": "청능사",
                     "terms": "귀,청력,소리"
                 },
+                "healthcare/birthing_center": {
+                    "name": "산원",
+                    "terms": "아기,출산,분만,진통,임신"
+                },
                 "healthcare/blood_donation": {
                     "name": "헌혈의 집",
                     "terms": "헌혈의 집, 헌혈 센터"
@@ -5020,10 +5021,6 @@
                     "name": "상점",
                     "terms": "가게"
                 },
-                "shop/agrarian": {
-                    "name": "농업 용품 가게",
-                    "terms": "농기계,씨앗,종자,농약,살충제,비료,농기구"
-                },
                 "shop/alcohol": {
                     "name": "주류 상점",
                     "terms": "알코올,술,맥주,와인,포도주"
@@ -5262,6 +5259,9 @@
                     "name": "철물점",
                     "terms": "철물점"
                 },
+                "shop/health_food": {
+                    "name": "건강식품 가게"
+                },
                 "shop/hearing_aids": {
                     "name": "보청기 가게"
                 },
@@ -5457,6 +5457,9 @@
                 "shop/weapons": {
                     "name": "무기상점",
                     "terms": "탄약,총,칼,나이프"
+                },
+                "shop/wholesale": {
+                    "name": "도매상"
                 },
                 "shop/window_blind": {
                     "name": "창문 블라인드 가게"

@@ -121,6 +121,9 @@
                 "category-road": {
                     "name": "Nodweddion Ffordd"
                 },
+                "category-route": {
+                    "name": "Nodweddion Llwybr"
+                },
                 "category-water-area": {
                     "name": "Nodweddion Dŵr"
                 },
@@ -144,6 +147,205 @@
                             "description": "Dim caniatad mynediad i'r cyhoedd"
                         }
                     }
+                },
+                "address": {
+                    "label": "Cyfeiriad",
+                    "placeholders": {
+                        "city": "Dinas"
+                    }
+                },
+                "country": {
+                    "label": "Gwlad"
+                },
+                "craft": {
+                    "label": "Math"
+                },
+                "crane/type": {
+                    "label": "Math o Graen"
+                },
+                "crop": {
+                    "label": "Cnydau"
+                },
+                "crossing": {
+                    "label": "Math"
+                },
+                "cuisine": {
+                    "label": "Bwydydd"
+                },
+                "cycleway": {
+                    "options": {
+                        "none": {
+                            "title": "Dim"
+                        }
+                    },
+                    "types": {
+                        "cycleway:left": "Ochr chwith",
+                        "cycleway:right": "Ochr dde"
+                    }
+                },
+                "date": {
+                    "label": "Dyddiad"
+                },
+                "description": {
+                    "label": "Disgrifiad"
+                },
+                "devices": {
+                    "label": "Dyfeisiau",
+                    "placeholder": "1, 2, 3..."
+                },
+                "direction": {
+                    "label": "Cyfeiriad (Gradd Clocwedd)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Cyfeiriad",
+                    "options": {
+                        "E": "Dwyrain",
+                        "N": "Gogledd",
+                        "S": "De",
+                        "W": "Gorllewin"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Cyfeiriad",
+                    "options": {
+                        "anticlockwise": "Gwrthglocwedd",
+                        "clockwise": "Clocwedd"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Cyfeiriad",
+                    "options": {
+                        "backward": "Yn ôl",
+                        "forward": "Ymlaen"
+                    }
+                },
+                "display": {
+                    "label": "Arddangos"
+                },
+                "dock": {
+                    "label": "Math"
+                },
+                "duration": {
+                    "label": "Hyd",
+                    "placeholder": "00:00"
+                },
+                "electrified": {
+                    "options": {
+                        "contact_line": "Llinell Cyswllt",
+                        "no": "Na"
+                    }
+                },
+                "incline_steps": {
+                    "options": {
+                        "down": "Lawr",
+                        "up": "Lan/fyny"
+                    }
+                },
+                "information": {
+                    "label": "Math"
+                },
+                "inscription": {
+                    "label": "Arysgrif"
+                },
+                "internet_access": {
+                    "label": "Mynediad Rhyngrwyd",
+                    "options": {
+                        "no": "Na",
+                        "yes": "Ia"
+                    }
+                },
+                "internet_access/fee": {
+                    "label": "Tâl Mynediad Rhyngrwyd"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Enw Rwydwaith)"
+                },
+                "label": {
+                    "label": "Label"
+                },
+                "lamp_type": {
+                    "label": "Math"
+                },
+                "landuse": {
+                    "label": "Math"
+                },
+                "lanes": {
+                    "label": "Lonydd",
+                    "placeholder": "1, 2, 3..."
+                },
+                "layer": {
+                    "label": "Haen",
+                    "placeholder": "0"
+                },
+                "leaf_cycle": {
+                    "options": {
+                        "deciduous": "Collddail",
+                        "evergreen": "Bytholwyrdd",
+                        "mixed": "Cymysg",
+                        "semi_deciduous": "Lled-collddail",
+                        "semi_evergreen": "Lled-bytholwyrdd"
+                    }
+                },
+                "leaf_cycle_singular": {
+                    "label": "Cylchred Dail",
+                    "options": {
+                        "deciduous": "Collddail",
+                        "evergreen": "Bytholwyrdd",
+                        "semi_deciduous": "Lled-collddail",
+                        "semi_evergreen": "Lled-bytholwyrdd"
+                    }
+                },
+                "leaf_type": {
+                    "label": "Math o Ddail",
+                    "options": {
+                        "broadleaved": "Llydanddail",
+                        "leafless": "Di-ddail",
+                        "mixed": "Cymysg"
+                    }
+                },
+                "leaf_type_singular": {
+                    "label": "Math o Ddail",
+                    "options": {
+                        "broadleaved": "Llydanddail",
+                        "leafless": "Di-ddail"
+                    }
+                },
+                "leisure": {
+                    "label": "Math"
+                },
+                "length": {
+                    "label": "Hyd (metr)"
+                },
+                "level": {
+                    "label": "Lefel"
+                },
+                "levels": {
+                    "label": "Lefelau",
+                    "placeholder": "2, 4, 6..."
+                },
+                "location": {
+                    "label": "Lleoliad"
+                },
+                "man_made": {
+                    "label": "Math"
+                },
+                "manhole": {
+                    "label": "Math"
+                },
+                "mtb/scale/imba": {
+                    "options": {
+                        "1": "Hawdd (cylch gwyrdd)",
+                        "2": "Canolig (sgwâr glas)",
+                        "3": "Anodd (diemwnt du)",
+                        "4": "Anodd Iawn (diemwnt du dwbl)"
+                    },
+                    "placeholder": "Hawdd, Canolig, Anodd..."
+                }
+            },
+            "presets": {
+                "waterway/waterfall": {
+                    "name": "Rheadr"
                 }
             }
         }

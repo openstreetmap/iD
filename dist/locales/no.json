@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Dette/denne kan ikke splittes da det er koblet til et skjult objekt."
             },
             "restriction": {
-                "help": {
-                    "select": "Klikk for å velge et vegelement.",
-                    "toggle": "Klikk for å endre svingebegrensninger.",
-                    "toggle_on": "Klikk for å legge til \"{restriction}\" begrensning.",
-                    "toggle_off": "Klikk for å fjerne \"{restriction}\" begrensning."
-                },
                 "annotation": {
                     "create": "La til en svingebegrensning.",
                     "delete": "Fjernet en svingebegrensning."
@@ -385,7 +379,11 @@
                 "selected": "{n} valgt",
                 "geometry": "Geometri",
                 "length": "Lengde",
-                "area": "Område"
+                "area": "Område",
+                "location": "Sted",
+                "metric": "Metrisk",
+                "imperial": "Imperisk",
+                "node_count": "Antall noder"
             }
         },
         "geometry": {
@@ -450,12 +448,16 @@
             "title": "Bakgrunn",
             "description": "Bakgrunnsinnstillinger",
             "key": "B",
+            "backgrounds": "Bakgrunner",
             "none": "Ingen",
             "best_imagery": "Den beste ortofotokilden til denne plasseringen",
             "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
             "custom_button": "Endre egendefinert bakgrunn",
+            "overlays": "Overlegg",
             "reset": "tilbakestill",
+            "brightness": "Lysstyrke",
+            "contrast": "Kontrast",
             "minimap": {
                 "tooltip": "Vis et kart som er zoomet ut for å hjelpe med å lokalisere området som vises.",
                 "key": "/"

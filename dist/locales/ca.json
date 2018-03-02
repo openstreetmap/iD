@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Aquest no es pot dividir perquè està connectat a un objecte ocult."
             },
             "restriction": {
-                "help": {
-                    "select": "Cliqueu per seleccionar un segment de carretera",
-                    "toggle": "Feu clic per canviar les restriccions de gir",
-                    "toggle_on": "Feu clic per afegir una restricció de \"{restriction}\"",
-                    "toggle_off": "Feu clic per eliminar una restricció de \"{restriction}\""
-                },
                 "annotation": {
                     "create": "Heu afegit una restricció de gir",
                     "delete": "Heu eliminat una restricció de gir"
@@ -389,6 +383,8 @@
                 "title": "Mesurament",
                 "selected": "{n} seleccionat",
                 "geometry": "Geometria",
+                "closed_line": "Línia tancada",
+                "closed_area": "Àrea tancada",
                 "center": "Center",
                 "perimeter": "Perímetre",
                 "length": "Longitud",
@@ -468,8 +464,13 @@
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "custom_button": "Editar el fons personalitzat",
+            "imagery_source_faq": "Informació d'imatge / Comunicar un problema",
             "reset": "reiniciar",
+            "display_options": "Opcions de visualització",
+            "contrast": "Contrast",
+            "saturation": "Saturació",
             "minimap": {
+                "description": "Mostrar miniatura de mapa",
                 "tooltip": "Mostra un mapa amb menys zoom per ajudar a localitzar l'àrea que es mostra actualment.",
                 "key": "/"
             },
@@ -571,6 +572,7 @@
             "status_code": "El servidor ha expedit el codi d'estat {code}",
             "unknown_error_details": "Assegureu-vos d'estar connectats a Internet",
             "uploading": "S'estan pujant els canvis a l'OpenStreetMap...",
+            "conflict_progress": "Comprovant si hi ha conflictes: {num} de {total}",
             "unsaved_changes": "Teniu canvis sense desar.",
             "conflict": {
                 "header": "Resoldre les edicions conflictives",
@@ -641,6 +643,7 @@
             "untagged_area_tooltip": "Seleccioneu un tipus d'objecte que descrigui el que és aquesta àrea.",
             "untagged_relation": "Relació sense etiquetar",
             "untagged_relation_tooltip": "Seleccioneu un tipus d'objecte que descrigui com és aquesta relació.",
+            "many_deletions": "Estàs eliminant  {n} característiques:{n} funcions, {l} línies, {a} àrees, {r} relacions. Segur que ho vols fer? Això les eliminarà del mapa que tothom veu a openstreetmap.org",
             "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
             "deprecated_tags": "Etiquetes obsoletes : {tags}"
         },
@@ -679,13 +682,19 @@
             "key": "H",
             "help": {
                 "title": "Ajuda",
+                "welcome": "Benvingut al editor iD per l'[OpenStreetMap] (https://www.openstreetmap.org/). Amb aquest editor pots actualitzar l'OpenStreeMap des del teu navegador web.",
                 "open_data_h": "Dades Obertes",
+                "open_data": "Les modificacions que facis a aquest mapa seran visibles per tothom que faci servir l'OpenStreetMap. Les teves modificacions poden basar-se en el teu coneixement personal, en mesures sobre el terreny, imatges aèries o fotografies a nivell de carrer. Copiar de fonts comercials, com el Google Maps, [està estricament prohibit] (https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Abans de començar",
-                "open_source_h": "Font Oberta"
+                "before_start": "T'hauries de familiaritzar amb l'OpenStreetMap i amb aquest editor abans de començar a editar. L'iD conté un tutorial per ensenyar-te els conceptes bàsics sobre l'edició de l'OpenStreetMap. Prem \"Comença el Tutorial\" en aquesta pantalla per començar - només et portarà uns 15 minuts.",
+                "open_source_h": "Font Oberta",
+                "open_source": "L'editor iD es una projecte col·laboratiu de codi obert, i estàs utilitzant la versió {version}. El codi font està disponible [al GitHub](https://github.com/openstreetmap/iD). ",
+                "open_source_help": "Pots ajudat a iD [traduint](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) o or [reportant errors](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Visió general",
                 "navigation_h": "Navegació",
+                "navigation_zoom": "Us podeu acostar o allunyar movent la rodeta del ratolí o del ratolí tàctil o clicant els botons {plus} / {minus} al llarg del costat del mapa. També podeu fer servir les tecles  `+`, `-`  del teclat.",
                 "features_h": "Característiques del mapa"
             },
             "editing": {
@@ -723,6 +732,7 @@
                 "title": "Àrees",
                 "point_or_area_h": "Punts o àrees?",
                 "add_area_h": "Afegint àrees",
+                "add_area_command": "Per afegir una àrea, prem el butó {area} **Area** a la barra d'eines sobre el mapa, o prem la drecera `3`.  Això canviarà el cursor del ratolí per una creu.",
                 "square_area_h": "Quadra les cantonades",
                 "modify_area_h": "Modificant àrees",
                 "delete_area_h": "Eliminant àrees"
@@ -937,7 +947,9 @@
                     "zoom": "Apropa't / Allunya't"
                 },
                 "help": {
-                    "title": "Ajuda"
+                    "title": "Ajuda",
+                    "help": "Mostrar ajuda/documentació",
+                    "keyboard": "Mostrar dreceres del teclat"
                 },
                 "display_options": {
                     "title": "Opcions de pantalla",
@@ -990,6 +1002,25 @@
                     "measurement": "Canvia al panell de mesura"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "O",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1399,6 +1430,42 @@
                 },
                 "diaper": {
                     "label": "Canviadors per a nadons"
+                },
+                "direction_cardinal": {
+                    "label": "Direcció",
+                    "options": {
+                        "E": "Est",
+                        "ENE": "Est-Nordest",
+                        "ESE": "Est-sudest",
+                        "N": "Nord",
+                        "NE": "Nordest",
+                        "NNE": "Nord-nordest",
+                        "NNW": "Nord-nordoest",
+                        "NW": "Nordoest",
+                        "S": "Sud",
+                        "SE": "Sudest",
+                        "SSE": "Sud-sud-est",
+                        "SSW": "Sud-sud-oest",
+                        "SW": "Sud-oest",
+                        "W": "Oest",
+                        "WNW": "Oest-nord-oest",
+                        "WSW": "Oest-sud-oest"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Direcció",
+                    "options": {
+                        "anticlockwise": "en sentit contrari al de les agulles del rellotge",
+                        "clockwise": "en sentit de les agulles del rellotge"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Direcció",
+                    "options": {
+                        "backward": "Enrere",
+                        "both": "Ambdós / Tots",
+                        "forward": "Endavant"
+                    }
                 },
                 "display": {
                     "label": "Pantalla"
@@ -1917,6 +1984,14 @@
                 "railway": {
                     "label": "Tipus"
                 },
+                "railway/signal/direction": {
+                    "label": "Direcció",
+                    "options": {
+                        "backward": "Enrere",
+                        "both": "Ambdós / Tots",
+                        "forward": "Endavant"
+                    }
+                },
                 "recycling_accepts": {
                     "label": "N'accepta"
                 },
@@ -2211,6 +2286,14 @@
                 },
                 "traffic_signals": {
                     "label": "Tipus"
+                },
+                "traffic_signals/direction": {
+                    "label": "Direcció",
+                    "options": {
+                        "backward": "Enrere",
+                        "both": "Ambdós / Tots",
+                        "forward": "Endavant"
+                    }
                 },
                 "trail_visibility": {
                     "label": "Visibilitat del camí",
@@ -4682,6 +4765,13 @@
                 "description": "Imatges aèries de Esri",
                 "name": "Imatges aèries de Esri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Termes & Comentaris"
+                },
+                "description": " L'arxiu Esri pot ser més clar i acotat que la capa per defecte ",
+                "name": "Imatges aèries de Esri (Claredat) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
@@ -4750,18 +4840,33 @@
                 "name": "Carreteres TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclisme"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Senderisme"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclisme de Muntanya"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Patinatge"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Esports d'hivern"
             },
             "basemap.at": {

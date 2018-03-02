@@ -18,9 +18,6 @@
         "bg": {
             "rtl": false
         },
-        "bg-BG": {
-            "rtl": false
-        },
         "bn": {
             "rtl": false
         },
@@ -28,6 +25,9 @@
             "rtl": false
         },
         "ca": {
+            "rtl": false
+        },
+        "ckb": {
             "rtl": false
         },
         "cs": {

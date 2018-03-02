@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Questo elemento non può essere diviso perché è connesso ad un elemento nascosto."
             },
             "restriction": {
-                "help": {
-                    "select": "Clicca per selezionare un segmento di strada.",
-                    "toggle": "Clicca per attivare una limitazione.",
-                    "toggle_on": "Clicca per aggiungere \"{restriction}\".",
-                    "toggle_off": "Clicca per rimuovere \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Limitazione aggiunta",
                     "delete": "Limitazione rimossa"
@@ -471,6 +465,7 @@
             "switch": "Ritorna a questo sfondo",
             "custom": "Personalizzato",
             "custom_button": "Modifica sfondo personalizzato",
+            "custom_prompt": "Inserisci un modello di URL per i tasselli. Sono validi i valori:\n- {zoom} oppure {z}, {x}, {y} per il modello dei tasselli Z/X/Y\n- {-y} oppure {ty} per le coordinate Y in stile TMS rovesciato\n- {u} per il modello QuadTile\n- {switch:a,b,c} per il multiplexing del server DNS\n\nEsempio:\n{example}",
             "overlays": "Livelli sovrapposti",
             "imagery_source_faq": "Informazioni sulle immagini satellitari / Segnala un problema",
             "reset": "reset",
@@ -695,17 +690,17 @@
                 "title": "Aiuto",
                 "welcome": "Benvenuto nell'editor iD. Con questo software puoi aggiornare OpenstreetMap direttamente dal tuo browser.",
                 "open_data_h": "Open Data",
-                "open_data": "Le modifiche che apporti alla mappa saranno visibili a tutti gli utilizzatori di Openstreetmap. Le tue modifiche possono essere basate su conoscenze personali, sopralluoghi, foto aeree oppure foto a livello stradale. La copia di informazioni da altri servizi commerciali, quali Google Maps [è vietata] (https://www.openstreetmap.org/copyright).",
+                "open_data": "Le modifiche che apporti alla mappa saranno visibili a tutti gli utilizzatori di OpenStreetMap. Le tue modifiche possono essere basate su conoscenze personali, sopralluoghi, foto aeree oppure foto a livello stradale. La copia di informazioni da altri servizi commerciali, quali Google Maps [è vietata](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Prima di iniziare",
                 "before_start": "Prima di iniziare ad effettuare modifiche dovresti essere a conoscenza delle funzioni principali di questo editor e di come funziona OpenstreetMap. In iD è stata integrata una guida interattiva, con lo scopo di insegnare le funzioni indispensabili per la mappatura. Clicca \"Avvia il tutorial\" su questa schermata per iniziare - richiede circa 15 minuti.",
                 "open_source_h": "Open Source",
-                "open_source": "L'editor iD è un progetto collaborativo open source, tu ora stai usando la versione [versione]. Il codice sorgente è disponibile [su GitHub] (https://github.com/openstreetmap/iD).",
-                "open_source_help": "Puoi contribuire nella traduzione di iD (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) oppure [segnalare problemi](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "L'editor iD è un progetto collaborativo open source, tu ora stai usando la versione {versione}. Il codice sorgente è disponibile [su GitHub](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Puoi contribuire nella [traduzione](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) di iD oppure [segnalare problemi](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Vista generale",
                 "navigation_h": "Navigazione",
-                "navigation_drag": "Puoi trascinare la mappa tenendo premuto il tasto sx del mouse e spostandolo. Puoi inoltre utilizzare le frecce della tua tastiera.",
+                "navigation_drag": "Puoi trascinare la mappa tenendo premuto il tasto sinistro del mouse e spostandolo. Puoi inoltre utilizzare le frecce della tua tastiera.",
                 "navigation_zoom": "Puoi ingrandire o diminuire il livello di zoom utilizzando la rotella del mouse, oppure utilizzando i bottoni [più/meno] nella parte destra della schermata. Puoi inoltre utilizzare i tasti '+' ,'-' della tastiera.",
                 "features_h": "Elementi della mappa",
                 "features": "Utilizziamo la parola \"caratteristiche\" per descrivere gli oggetti che compaiono sulla mappa, ne sono esempi: strade, edifici o punti di interesse vari. Tutti gli elementi presenti nel mondo reale possono essere mappati in OpenStreetMap, sotto forma di punti, linee o aree.",
@@ -714,15 +709,15 @@
             "editing": {
                 "title": "Modifica e salvataggio",
                 "select_h": "Seleziona",
-                "select_left_click": "[leftclick] Il clic con il taso sx del mouse seleziona un elemento. L'elemento selezionato si evidenzierà e la barra laterale mostrerà le informazioni di quell'elemento, ad esempio il nome e l'indirizzo.",
-                "select_right_click": "[rightclick] Il clic con il tasto dx del mouse su un elemento, farà apparire alcuni comandi aggiuntivi, quali: ruota, sposta, cancella, taglia e dividi.",
+                "select_left_click": "{leftclick} Il clic con il tasto sinistro del mouse seleziona un elemento. L'elemento selezionato si evidenzierà e la barra laterale mostrerà le informazioni di quell'elemento, ad esempio il nome e l'indirizzo.",
+                "select_right_click": "{rightclick} Il clic con il tasto destro del mouse su un elemento, farà apparire alcuni comandi aggiuntivi, quali: ruota, sposta, cancella, taglia e dividi.",
                 "multiselect_h": "Selezione multipla",
-                "multiselect_shift_click": "`{shift}`+{leftclick} Il clic con il tasto sx del mouse consente di selezionare più elementi della mappa. La funzione è utile per spostare e cancellare contemporaneamente più elementi.",
+                "multiselect_shift_click": "`{shift}`+{leftclick} Il clic con il tasto sinistro del mouse consente di selezionare più elementi della mappa. La funzione è utile per spostare e cancellare contemporaneamente più elementi.",
                 "multiselect_lasso": "Un altro modo per selezionare più elementi contemporaneamente è quello di tenere premuto il tasto `{shift}` sulla tastiera e quindi premere e tenere premuto il {leftclick} tasto sinistro del mouse e trascinare il mouse per disegnare una selezione. Saranno così selezionati tutti i punti presenti nell'area della selezione.",
                 "undo_redo_h": "Annulla e avanza",
                 "undo_redo": "Finché non decidi di salvare, le tue modifiche sono salvate temporaneamente nel tuo browser. Puoi annullare ogni modifica con il tasto [annulla] oppure ripristinare la modifica annullata con il tasto [avanti]",
                 "save_h": "Salva",
-                "save": "Clicca [salva] per terminare la tua modifica e inviare i nuovi dati a OpenstreetMap. Ricordati di salvare spesso il tuo lavoro!",
+                "save": "Clicca {save} **Salva** per terminare la tua modifica e inviare i nuovi dati a OpenStreetMap. Ricordati di salvare spesso il tuo lavoro!",
                 "save_validation": "Nella schermata di salvataggio avrai la possibilità di visualizzare le tue modifiche. iD farà inoltre un controllo sulle tue modifiche, con lo scopo di individuare informazioni mancanti o  segnalare suggerimenti, in caso qualcosa non risulti corretto.",
                 "upload_h": "Carica",
                 "upload": "Prima di caricare le tue modifiche devi inserire un [commento al gruppo di modifiche](https://wiki.openstreetmap.org/wiki/IT:Good_changeset_comments). Fatto ciò clicca su **Carica** per inviare le tue modifiche ad OpenStreetMap, dove saranno unite alla mappa e rese visibili pubblicamente a chiunque.",
@@ -767,7 +762,7 @@
                 "add_line_finish": "Per completare una linea, premi `{return}` oppure clicca nuovamente sull'ultimo punto",
                 "modify_line_h": "Modificare linee",
                 "modify_line_dragnode": "Spesso vedrai delle linee che non sono disegnate correttamente, per esempio una strada che non corrisponde granché alle immagini di sfondo. Per migliorare l'aspetto di una linea, per prima cosa clicca col {leftclick} tasto sinistro del mouse per selezionarla. Tutti i nodi della linea diverranno dei piccoli cerchi. Adesso puoi spostare ogni nodo in una posizione più corretta.",
-                "modify_line_addnode": "Puoi anche aggiungere dei nodi ad una linea sia cliccando due volte col {lefclick}**x2** tasto sinistro del mouse sulla linea oppure trascinando i piccoli triangoli situati a metà strada tra i vari nodi già presenti.",
+                "modify_line_addnode": "Puoi anche aggiungere dei nodi ad una linea sia cliccando due volte col {leftclick}**x2** tasto sinistro del mouse sulla linea oppure trascinando i piccoli triangoli situati a metà strada tra i vari nodi già presenti.",
                 "connect_line_h": "Connettere linee",
                 "connect_line": "È importante per la mappa ed essenziale per fornire le indicazioni che le strade sia collegate tra loro nel modo giusto.",
                 "connect_line_display": "Le connessioni tra le strade sono mostrate mediante dei piccoli cerchi grigi. Se non sono collegati a nient'altro, gli estremi di una linea sono disegnati con dei cerchi bianchi più grandi.",
@@ -822,7 +817,7 @@
                 "route": "Una relazione *percorso* consiste in un gruppo di uno o più elementi linea che formano insieme una rete di percorsi, come per esempio la linea di un autobus, quella di un treno oppure un percorso stradale.",
                 "route_add": "Per aggiungere un elemento ad una relazione percorso, seleziona l'elemento e scorri verso il basso fino alla sezione \"Tutte le relazioni\" dell'editor dell'elemento, poi clicca il pulsante {plus} aggiungi per aggiungere questo elemento ad una relazione vicina già esistente oppure per crearne una nuova.",
                 "boundary_h": "Confini",
-                "boundary": "Una relazione *Confine\" consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo.",
+                "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo.",
                 "boundary_add": "Per aggiungere un elemento ad una relazione confine, seleziona l'elemento e scorri verso il basso fino alla sezione \"Tutte le relazioni\" dell'editor dell'elemento, poi clicca sul pulsante {plus} aggiungi per aggiungere l'elemento ad una relazione vicina già esistente o per crearne una nuova."
             },
             "imagery": {
@@ -2784,7 +2779,7 @@
                 },
                 "amenity/bicycle_rental": {
                     "name": "Stazione del Bike Sharing",
-                    "terms": "Noleggio biciclette"
+                    "terms": "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Stazione di riparazione biciclette",
@@ -3441,10 +3436,6 @@
                 },
                 "building/entrance": {
                     "name": "Entrata/Uscita"
-                },
-                "building/farm": {
-                    "name": "Cascina (residenza)",
-                    "terms": "<translate with synonyms or related terms for 'Farm Building', separated by commas>"
                 },
                 "building/garage": {
                     "name": "Garage",
@@ -4355,6 +4346,10 @@
                     "name": "Sala da gioco",
                     "terms": "gioco d'azzardo,casinò,bisca"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Sala giochi",
+                    "terms": "Videogiochi"
+                },
                 "leisure/bird_hide": {
                     "name": "osservazione uccelli",
                     "terms": "Capanno di osservazione"
@@ -5025,7 +5020,7 @@
                     "terms": "Località (luogo con nome, non popolato)"
                 },
                 "place/neighbourhood": {
-                    "name": "Vicinanze",
+                    "name": "Quartiere",
                     "terms": "Quartiere,Zona"
                 },
                 "place/plot": {
@@ -5056,6 +5051,7 @@
                     "terms": "<translate with synonyms or related terms for 'Play Balance Beam', separated by commas>"
                 },
                 "playground/basket_spinner": {
+                    "name": "Girello",
                     "terms": "<translate with synonyms or related terms for 'Basket Spinner', separated by commas>"
                 },
                 "playground/basket_swing": {
@@ -5075,7 +5071,7 @@
                 },
                 "playground/rocker": {
                     "name": "Gioco a molla",
-                    "terms": "<translate with synonyms or related terms for 'Spring Rider', separated by commas>"
+                    "terms": "Dondolo a molla"
                 },
                 "playground/roundabout": {
                     "name": "Girello",
@@ -5418,8 +5414,8 @@
                     "terms": "Negozio"
                 },
                 "shop/agrarian": {
-                    "name": "Negozio di articoli agricoli",
-                    "terms": "<translate with synonyms or related terms for 'Agriculture Shop', separated by commas>"
+                    "name": "Negozio di attrezzatura agricola",
+                    "terms": "attrezzi agricoli, macchinai agricoli, fertilizzanti, pesticidi, semina"
                 },
                 "shop/alcohol": {
                     "name": "Negozio di liquori",
@@ -5470,7 +5466,7 @@
                     "terms": "Centro abbronzatura,Solarium"
                 },
                 "shop/bed": {
-                    "name": "Negozio di Materassi",
+                    "name": "Negozio di letti/materassi",
                     "terms": "Negozio di materassi"
                 },
                 "shop/beverages": {
@@ -5482,7 +5478,7 @@
                     "terms": "Negozio biciclette"
                 },
                 "shop/bookmaker": {
-                    "name": "Negozio di scommesse",
+                    "name": "Agenzia di scommesse",
                     "terms": "scommesse,puntate,allibratore"
                 },
                 "shop/books": {
@@ -5578,7 +5574,7 @@
                     "terms": "Cibi e bevande pregiate"
                 },
                 "shop/department_store": {
-                    "name": "Supermercato",
+                    "name": "Grande magazzino",
                     "terms": "Grande magazzino"
                 },
                 "shop/doityourself": {
@@ -5812,7 +5808,7 @@
                     "terms": "Negozio scarpe"
                 },
                 "shop/sports": {
-                    "name": "Negozio di Sport",
+                    "name": "Negozio di articoli sportivi",
                     "terms": "Negozio di articoli sportivi"
                 },
                 "shop/stationery": {
@@ -5897,6 +5893,10 @@
                     "name": "Armeria",
                     "terms": "armeria,armi,munizioni,coltelli,pistole"
                 },
+                "shop/wholesale": {
+                    "name": "Grossista",
+                    "terms": "Negozio di commercio all'ingrosso"
+                },
                 "shop/window_blind": {
                     "name": "Negozio di tapparelle e serrande",
                     "terms": "Serramenti"
@@ -5966,7 +5966,7 @@
                     "terms": "info,infromazioni,turismo,cartello,pannello,turistico"
                 },
                 "tourism/information/guidepost": {
-                    "name": "Indicazione stradale",
+                    "name": "Cartello segnavia",
                     "terms": "segnale,segnaletica,turismo,turistico,indicazione,cartello"
                 },
                 "tourism/information/map": {

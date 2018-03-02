@@ -282,12 +282,6 @@
                 "connected_to_hidden": "Predmeta ni mogoče razdeliti, ker je povezan s skritim predmetom."
             },
             "restriction": {
-                "help": {
-                    "select": "Kliknite za izbiro odseka ceste.",
-                    "toggle": "Kliknite za preklop omejitev zavijanja.",
-                    "toggle_on": "Kliknite za dodajanje omejitve »{restriction}«.",
-                    "toggle_off": "Kliknite za odstranjevanje omejitve »{restriction}«."
-                },
                 "annotation": {
                     "create": "dodajanje omejitve zavijanja ×",
                     "delete": "odstranjevanje omejitev zavijanja ×"
@@ -671,7 +665,7 @@
             "view_on_mapillary": "Pokaži sliko na spletišču Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Ulične fotografije z OpenStreetCama",
+            "tooltip": "Ulične fotografije prek sistema OpenStreetCam",
             "title": "Plast s fotografijami (OpenStreetCam)"
         },
         "openstreetcam": {
@@ -682,7 +676,10 @@
             "key": "H",
             "help": {
                 "title": "Pomoč",
-                "welcome": "Dobrodošli v urejevalniku iD za [OpenStreetMap](https://www.openstreetmap.org/). S tem urejevalnikom lahko OpenStreetMap posodobite neposredno iz svojega brskalnika."
+                "welcome": "Dobrodošli v urejevalniku iD za [OpenStreetMap](https://www.openstreetmap.org/). S tem urejevalnikom lahko OpenStreetMap posodobite neposredno iz brskalnika."
+            },
+            "overview": {
+                "features_h": "Značilnosti zemljevida"
             }
         },
         "intro": {

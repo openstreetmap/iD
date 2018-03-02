@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Nem lehet kettévágni, mert egy rejtett elemhez csatlakozik."
             },
             "restriction": {
-                "help": {
-                    "select": "Kattints egy útszakasz kiválasztásához.",
-                    "toggle": "Kattints a kanyarodási tiltások átkapcsolásához.",
-                    "toggle_on": "Kattints egy „{restriction}” korlátozás hozzáadásához.",
-                    "toggle_off": "Kattints a(z) „{restriction}” korlátozás eltávolításához."
-                },
                 "annotation": {
                     "create": "Kanyarodási tiltás hozzáadva",
                     "delete": "Kanyarodási tiltás törölve"
@@ -389,6 +383,8 @@
                 "title": "Mérés",
                 "selected": "{n} kiválasztott",
                 "geometry": "Geometria",
+                "closed_line": "zárt vonal",
+                "closed_area": "zárt terület",
                 "center": "Középpont",
                 "perimeter": "Kerület",
                 "length": "Hossz",
@@ -1131,6 +1127,23 @@
                     "measurement": "Mérés panel kapcsolása"
                 }
             }
+        },
+        "units": {
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "É",
+            "south": "D",
+            "east": "K",
+            "west": "Ny",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -3330,6 +3343,9 @@
                     "name": "Óvodaépület",
                     "terms": "Iskolai előkészítő épület,  ovi épület, bölcsőde épület, kisdedóvó épület, dedó épület"
                 },
+                "building/mosque": {
+                    "name": "Mecset"
+                },
                 "building/public": {
                     "name": "Középület",
                     "terms": "Nyilvános épület"
@@ -3637,6 +3653,9 @@
                 },
                 "emergency/private": {
                     "name": "Vészhelyzeti használat: magántulajdon"
+                },
+                "emergency/water_tank": {
+                    "name": "Vészhelyzeti víztartály"
                 },
                 "emergency/yes": {
                     "name": "Vészhelyzeti használat"
@@ -4779,6 +4798,7 @@
                     "terms": "pártszékház, politika, párt"
                 },
                 "office/private_investigator": {
+                    "name": "Magánnyomozó iroda",
                     "terms": "<translate with synonyms or related terms for 'Private Investigator Office', separated by commas>"
                 },
                 "office/quango": {
@@ -5036,6 +5056,12 @@
                 "public_transport/stop_position_aerialway": {
                     "name": "Felvonó megállási pont"
                 },
+                "public_transport/stop_position_bus": {
+                    "name": "Busz megállási hely"
+                },
+                "public_transport/stop_position_subway": {
+                    "name": "Metró megállási hely"
+                },
                 "public_transport/stop_position_train": {
                     "name": "Vasút megállási hely"
                 },
@@ -5148,9 +5174,6 @@
                 "shop": {
                     "name": "Üzlet",
                     "terms": "bolt, kereskedés, kiskereskedés"
-                },
-                "shop/agrarian": {
-                    "name": "Mezőgazdasági bolt"
                 },
                 "shop/alcohol": {
                     "name": "Alkoholüzlet",
@@ -5494,7 +5517,7 @@
                     "terms": " Falfesték bolt, Tikkurila Festékbolt, Színkeverő bolt, Festék- vegyi áru szaküzlet"
                 },
                 "shop/pastry": {
-                    "name": "Süteménybolt",
+                    "name": "Cukrászda",
                     "terms": "cukrászda,sütemény,süti,torta"
                 },
                 "shop/pawnbroker": {
@@ -5998,6 +6021,11 @@
                 },
                 "description": "Esri World felvételek.",
                 "name": "Esri World felvételek"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Feltételek és visszajelzés"
+                }
             },
             "MAPNIK": {
                 "attribution": {

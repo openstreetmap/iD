@@ -285,16 +285,46 @@
                 "connected_to_hidden": "非表示の地物に接続しているため、分割することができません。"
             },
             "restriction": {
-                "help": {
-                    "select": "道路の区間を選択するにはクリックしてください。",
-                    "toggle": "進行方向制限を切り替えるにはクリックしてください。",
-                    "toggle_on": "「{restriction}」の制約を追加するにはクリックしてください。",
-                    "toggle_off": "「{restriction}」の制約を削除するにはクリックしてください。"
-                },
                 "annotation": {
                     "create": "進行方向制限を追加しました",
                     "delete": "進行方向制限を削除しました"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "距離",
+                "distance_up_to": "上限 {distance}",
+                "via": "経由",
+                "via_node_only": "ノードのみ",
+                "via_up_to_one": "1 ウェイまで",
+                "via_up_to_two": "2 ウェイまで"
+            },
+            "help": {
+                "indirect": "(間接)",
+                "turn": {
+                    "no_left_turn": "左折禁止 {indirect}",
+                    "no_right_turn": "右折禁止 {indirect}",
+                    "no_u_turn": "Uターン禁止 {indirect}",
+                    "no_straight_on": "直進禁止 {indirect}",
+                    "only_left_turn": "左折専用 {indirect}",
+                    "only_right_turn": "右折専用 {indirect}",
+                    "only_u_turn": "Uターンのみ {indirect}",
+                    "only_straight_on": "直進専用 {indirect}",
+                    "allowed_left_turn": "左折可 {indirect}",
+                    "allowed_right_turn": "右折可 {indirect}",
+                    "allowed_u_turn": "Uターン可 {indirect}",
+                    "allowed_straight_on": "直進可 {indirect}"
+                },
+                "from": "進行元(FROM)",
+                "via": "経由(VIA)",
+                "to": "進行先(TO)",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "クリックして {from} 区間を選択",
+                "select_from_name": "クリックして {from} {fromName}を選択",
+                "toggle": "クリックして「{turn}」に切換え"
             }
         },
         "undo": {
@@ -852,6 +882,44 @@
                 "using": "GPSトレースをマッピングに使うには、そのデータファイルをマップエディタにドラッグ＆ドロップしてください。正しく認識されると、マップ上に明るい紫のラインとして表示されます。マップ脇の{data}**地図データ設定**パネルをクリックしてあなたのGPSデータ（ローカル・ファイル）を有効化したり、無効化したり、あるいはズームしてみてください。",
                 "tracing": "GPSトラックはOpenStreetMapへは送信されません。そのいちばん良い使い方は、自分が追加する新しい地物のためのガイドとして使いながらマッピングすることです。 ",
                 "upload": "あなたは他の利用者が使えるように[自分のGPSデータをOpenStreetMapにアップロード](https://www.openstreetmap.org/trace/create)することもできます。"
+            },
+            "field": {
+                "restrictions": {
+                    "title": "進行方向制限のヘルプ",
+                    "about": {
+                        "title": "説明",
+                        "about": "この枠内で進行方向制限を検査したり変更することができます。選択された交差点が他の近接する道路とともにモデル化して表示されます。",
+                        "from_via_to": "進行方向制限には必ずひとつの**進行元(FROM) ウェイ**、ひとつの**進行先(TO) ウェイ**、そしてひとつの**経由(VIA) ノード**またはひとつ以上の**経由(VIA) ウェイ**が含まれます。",
+                        "maxdist": "「{distField}」スライダーは追加で探す接続道路の距離範囲を制御しています。",
+                        "maxvia": "「{viaField}」スライダーは経由(VIA)ウェイをいくつまで検索に含めて良いかを調整します。 (ヒント: シンプルなほどベター)"
+                    },
+                    "inspecting": {
+                        "title": "検査",
+                        "about": "任意の**FROM**区間にホバー（マウスポインターを合わせる）すると、進行方向制限があるかどうかを確認できます。 可能性のある**TO**進行先が色付きの影で描画され、そこに制限があるかどうかを示します。",
+                        "from_shadow": "{fromShadow} **FROM 区間**",
+                        "allow_shadow": "{allowShadow} **許可されたTO**",
+                        "restrict_shadow": "{restrictShadow} **禁止されたTO**",
+                        "only_shadow": "{onlyShadow} **TOのみ**",
+                        "restricted": "「制限」は進行方向制限があることを示しています。例「左折禁止」。",
+                        "only": "「専用」は通行する乗り物がその選択だけ許可されていることを示します。例「直進専用」。"
+                    },
+                    "modifying": {
+                        "title": "修正",
+                        "about": "進行方向制限を修正するには、まず任意の進行元**FROM**区間をクリックして選択します。選択された区間が点滅し、全ての可能な**TO**進行先が進行方向のシンボルとして現れます。",
+                        "indicators": "次に、進行方向のシンボルをクリックして「許可」「制限」「専用」の間で切り換えます。",
+                        "allow_turn": "{allowTurn} **許可された TO**",
+                        "restrict_turn": "{restrictTurn} **制限された TO**",
+                        "only_turn": "{onlyTurn} **専用の TO**"
+                    },
+                    "tips": {
+                        "title": "ヒント",
+                        "simple": "**複雑なものよりシンプルな制限を選びましょう。**",
+                        "simple_example": "例えば、よりシンプルな経由(via)ノード進行方向制限が使える場合には、経由(via)ウェイを作成することは避けましょう。",
+                        "indirect": "**制限の中には「(間接)」の文字が表示され、明るく描画されるものがあります。**",
+                        "indirect_example": "これらは近くに別の制限がある場合に存在する制限です。例えば、「直進専用」制限は交差点内の全ての他の通行路に対して、間接的に「進行方向変更不可」という制限を設けることになります。",
+                        "indirect_noedit": "間接的な制限を編集するのではなく、近くの直接的な制限を編集します。"
+                    }
+                }
             }
         },
         "intro": {
@@ -1696,6 +1764,9 @@
                         "both": "両方 / 全て",
                         "forward": "順方向"
                     }
+                },
+                "dispensing": {
+                    "label": "調剤可否"
                 },
                 "display": {
                     "label": "表示盤の種類"
@@ -2639,6 +2710,9 @@
                 "wheelchair": {
                     "label": "車椅子の利用可否"
                 },
+                "wholesale": {
+                    "label": "卸売商品"
+                },
                 "width": {
                     "label": "幅 (m)"
                 },
@@ -2669,7 +2743,7 @@
                 },
                 "advertising/billboard": {
                     "name": "広告用看板",
-                    "terms": "掲示板, 看板"
+                    "terms": "掲示板, 看板, 広告, 宣伝, 屋外広告"
                 },
                 "aerialway": {
                     "name": "索道"
@@ -2872,7 +2946,7 @@
                 },
                 "amenity/clock": {
                     "name": "時計",
-                    "terms": "時計, クロック, 公園, 駅"
+                    "terms": "時計, クロック, 公園, 駅前, 広場"
                 },
                 "amenity/college": {
                     "name": "短大・高専・専門学校（代表点または敷地）",
@@ -2907,7 +2981,7 @@
                 },
                 "amenity/dojo": {
                     "name": "道場",
-                    "terms": "道場, スポーツ"
+                    "terms": "道場, スポーツ, 訓練, 稽古, 練習, 習い事, 教習, トレーニング, 教室, 体操, 運動"
                 },
                 "amenity/drinking_water": {
                     "name": "水飲み場",
@@ -2915,7 +2989,7 @@
                 },
                 "amenity/driving_school": {
                     "name": "自動車教習所",
-                    "terms": "Driving School, ドライビングスクール, 教習所, 自動車, 自動車教習所, 車, 学校, 教育"
+                    "terms": "Driving School, ドライビングスクール, 教習所, 自動車, 自動車教習所, 車, 学校, 教育, 稽古, 練習, 訓練, 練習, トレーニング"
                 },
                 "amenity/embassy": {
                     "name": "大使館",
@@ -2938,7 +3012,7 @@
                 },
                 "amenity/fountain": {
                     "name": "噴水",
-                    "terms": "泉,噴水, 公園"
+                    "terms": "泉,噴水, 公園, 広場, 駅前"
                 },
                 "amenity/fuel": {
                     "name": "ガソリンスタンド",
@@ -2958,7 +3032,7 @@
                 },
                 "amenity/hunting_stand": {
                     "name": "狩猟スタンド",
-                    "terms": "狩猟スタンド, 娯楽, スポーツ, 小屋"
+                    "terms": "狩猟スタンド, 娯楽, スポーツ, 小屋, レジャー"
                 },
                 "amenity/ice_cream": {
                     "name": "アイスクリーム店",
@@ -2982,7 +3056,7 @@
                 },
                 "amenity/marketplace": {
                     "name": "市場",
-                    "terms": "市場, マーケット, 朝市, マルシェ, 食品, 雑貨, 買い物, ショッピング"
+                    "terms": "市場, マーケット, 朝市, マルシェ, 食品, 雑貨, 買い物, ショッピング, 食べ物"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "オートバイの駐車場",
@@ -2990,7 +3064,7 @@
                 },
                 "amenity/music_school": {
                     "name": "音楽学校",
-                    "terms": "音楽学校, ミュージック・スクール, 教習所, カラオケ教室, 音楽教室, 学校, 教育"
+                    "terms": "音楽学校, ミュージック・スクール, 教習所, カラオケ教室, 音楽教室, 学校, 教育, 教室, 訓練, 練習, 稽古, 習い事, トレーニング"
                 },
                 "amenity/nightclub": {
                     "name": "ナイトクラブ",
@@ -3004,8 +3078,8 @@
                     "terms": "駐車場, パーキング, 自動車"
                 },
                 "amenity/parking_entrance": {
-                    "name": "駐車場の出入口",
-                    "terms": "駐車場の出入口, 自動車"
+                    "name": "出入口（駐車場）",
+                    "terms": "駐車場の出入口, 自動車, 出入り口, 出入口"
                 },
                 "amenity/parking_space": {
                     "name": "駐車区画（1台ごとの）",
@@ -3127,7 +3201,7 @@
                 },
                 "amenity/smoking_area": {
                     "name": "喫煙所",
-                    "terms": "喫煙所, 喫煙エリア, たばこ, タバコ"
+                    "terms": "喫煙所, 喫煙エリア, たばこ, タバコ, 公園, 駅前, 広場"
                 },
                 "amenity/social_facility": {
                     "name": "福祉施設",
@@ -3348,7 +3422,7 @@
                     "terms": "塹壕, 空堀, 堀, 溝, 谷, 障害物, バリア"
                 },
                 "barrier/entrance": {
-                    "name": "出入口"
+                    "name": "出入口（柵などのバリア）"
                 },
                 "barrier/fence": {
                     "name": "フェンス",
@@ -3360,7 +3434,7 @@
                 },
                 "barrier/hedge": {
                     "name": "生垣",
-                    "terms": "生垣, 障害物, バリア"
+                    "terms": "生垣, 障害物, バリア, 植物, 生け垣, 樹木"
                 },
                 "barrier/kerb": {
                     "name": "縁石",
@@ -3458,11 +3532,15 @@
                     "terms": "寮, 独身寮, 住宅, 住居"
                 },
                 "building/entrance": {
-                    "name": "出入口"
+                    "name": "出入口（非推奨）"
                 },
                 "building/farm": {
-                    "name": "農家（建物）",
-                    "terms": "農家, 住宅, 住居, 農業"
+                    "name": "農家（居住用）",
+                    "terms": "農家, 農業, 生産者, 百姓, 農場"
+                },
+                "building/farm_auxiliary": {
+                    "name": "農業補助施設全般（非居住用）",
+                    "terms": "農業補助施設, 農場, 農業, 農業施設"
                 },
                 "building/garage": {
                     "name": "車庫（建物、小）",
@@ -3546,7 +3624,7 @@
                 },
                 "building/stadium": {
                     "name": "スタジアム（建物）",
-                    "terms": "スタジアム, スポーツ"
+                    "terms": "スタジアム, スポーツ, 運動, 競技"
                 },
                 "building/static_caravan": {
                     "name": "トレーラーハウス",
@@ -3636,7 +3714,7 @@
                 },
                 "craft/confectionery": {
                     "name": "菓子屋（製造・販売）",
-                    "terms": "菓子製造所, 菓子製造直売所, 饅頭屋, まんじゅう屋, 煎餅屋, せんべい屋, 飴屋, 和菓子屋, 和菓子店, 職人, 工房, 食品, お菓子"
+                    "terms": "菓子製造所, 菓子製造直売所, 饅頭屋, まんじゅう屋, 煎餅屋, せんべい屋, 飴屋, 和菓子屋, 和菓子店, 職人, 工房, 食品, お菓子, 食べ物"
                 },
                 "craft/distillery": {
                     "name": "蒸留所",
@@ -3663,8 +3741,8 @@
                     "terms": "ガラス細工師, 職人, 工房"
                 },
                 "craft/handicraft": {
-                    "name": "手工芸品",
-                    "terms": "手工芸品, 職人, 工房, 雑貨"
+                    "name": "手工芸品店",
+                    "terms": "手工芸品, 職人, 工房, 雑貨, 工芸, 民芸, こけし, 人形"
                 },
                 "craft/hvac": {
                     "name": "空調設計",
@@ -3713,7 +3791,7 @@
                 },
                 "craft/pottery": {
                     "name": "窯元",
-                    "terms": "窯元, 陶器製造業, 職人, 工房"
+                    "terms": "窯元, 陶器製造業, 職人, 工房, 陶芸, 陶磁器, 焼き物"
                 },
                 "craft/rigger": {
                     "name": "艤装者",
@@ -3825,8 +3903,8 @@
                     "name": "緊急時の利用可"
                 },
                 "entrance": {
-                    "name": "出入口",
-                    "terms": "出入口, 入口, 出口"
+                    "name": "出入口（全般）",
+                    "terms": "出入口, 入口, 出口, 出入り口, エントランス, 玄関, 正面入口, 裏口"
                 },
                 "footway/crossing": {
                     "name": "横断歩道",
@@ -3906,7 +3984,7 @@
                 },
                 "healthcare/audiologist": {
                     "name": "聴覚訓練士",
-                    "terms": "聴覚訓練士, 聴覚機能訓練士, オージオロジスト, 医療"
+                    "terms": "聴覚訓練士, 聴覚機能訓練士, オージオロジスト, 医療, トレーニング, 訓練"
                 },
                 "healthcare/birthing_center": {
                     "name": "バースセンター",
@@ -4124,7 +4202,7 @@
                 },
                 "highway/traffic_mirror": {
                     "name": "カーブミラー",
-                    "terms": "カーブミラー, ミラー, 道路反射鏡, 道路設備"
+                    "terms": "カーブミラー, ミラー, 道路反射鏡, 道路設備, 交通安全"
                 },
                 "highway/traffic_signals": {
                     "name": "信号機",
@@ -4168,7 +4246,7 @@
                 },
                 "historic/memorial": {
                     "name": "記念碑",
-                    "terms": "記念碑, 石碑, 石仏, 像, 歴史, 銅像, 彫刻"
+                    "terms": "記念碑, 石碑, 石仏, 像, 歴史, 銅像, 彫刻, 公園"
                 },
                 "historic/monument": {
                     "name": "記念堂",
@@ -4235,23 +4313,23 @@
                 },
                 "landuse/farmland": {
                     "name": "農地",
-                    "terms": "農地, 畑, 田, 茶畑, 田んぼ, 田畑, 耕作地"
+                    "terms": "農地, 畑, 田, 茶畑, 田んぼ, 田畑, 耕作地, 農業"
                 },
                 "landuse/farmyard": {
                     "name": "農家（敷地）",
-                    "terms": "農業施設用地, 農家"
+                    "terms": "農業施設用地, 農家, 農業"
                 },
                 "landuse/forest": {
                     "name": "人工林",
-                    "terms": "人工林, 二次林, 営林, 保安林, 鉄道林, 防風林, 森林（人工）"
+                    "terms": "人工林, 二次林, 営林, 保安林, 鉄道林, 防風林, 森林（人工）, 樹木, 植物"
                 },
                 "landuse/garages": {
                     "name": "車庫（土地区画）",
                     "terms": "ガレージ, 車庫"
                 },
                 "landuse/grass": {
-                    "name": "草地",
-                    "terms": "草地, 芝生"
+                    "name": "芝生",
+                    "terms": "草地, 芝生, 植物"
                 },
                 "landuse/greenfield": {
                     "name": "開発予定区画（未整備）",
@@ -4335,7 +4413,7 @@
                 },
                 "landuse/orchard": {
                     "name": "果樹園",
-                    "terms": "果樹園, 果物畑, リンゴ畑, ミカン畑"
+                    "terms": "果樹園, 果物畑, リンゴ畑, ミカン畑, 農業, 樹木, 森林"
                 },
                 "landuse/plant_nursery": {
                     "name": "育苗所",
@@ -4367,7 +4445,7 @@
                 },
                 "landuse/vineyard": {
                     "name": "ぶどう畑",
-                    "terms": "ぶどう畑, 果樹園, 森林"
+                    "terms": "ぶどう畑, 果樹園, 森林, 樹木, 植物, ブドウ, 農業"
                 },
                 "leisure": {
                     "name": "レジャー施設全般",
@@ -4375,7 +4453,11 @@
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "遊技場（成人向け）",
-                    "terms": "遊技場, パチンコ, パチスロ, スロット, 娯楽, アダルト, レジャー"
+                    "terms": "遊技場, パチンコ, パチスロ, スロット, 娯楽, アダルト, レジャー, パチンコ店, パチンコ屋, スロットルマシン"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "ゲームセンター",
+                    "terms": "ゲームセンター, ゲーセン, 娯楽, レジャー, 遊技, ゲーム, 遊戯"
                 },
                 "leisure/bird_hide": {
                     "name": "野鳥観察舎",
@@ -4383,7 +4465,7 @@
                 },
                 "leisure/bowling_alley": {
                     "name": "ボウリング場",
-                    "terms": "ボウリング場, ボウリング, ボーリング, スポーツ, 娯楽"
+                    "terms": "ボウリング場, ボウリング, ボーリング, スポーツ, 娯楽, 運動, レジャー, ゲーム"
                 },
                 "leisure/common": {
                     "name": "共有地",
@@ -4403,67 +4485,67 @@
                 },
                 "leisure/fitness_centre": {
                     "name": "ジム／フィットネスセンター",
-                    "terms": "フィットネスクラブ, フィットネスセンター, ジム, スポーツ"
+                    "terms": "フィットネスクラブ, フィットネスセンター, ジム, スポーツ, 訓練, 練習, 習い事, 教習, トレーニング, 教室, 体操, 運動, エクササイズ"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "ヨガスタジオ",
-                    "terms": "ヨガスタジオ, スポーツ"
+                    "terms": "ヨガスタジオ, スポーツ, トレーニング, 訓練, 教室, 習い事, 教習, 稽古, 体操, 運動"
                 },
                 "leisure/fitness_station": {
-                    "name": "屋外運動器具",
-                    "terms": "屋外運動器具, スポーツ"
+                    "name": "屋外トレーニング場",
+                    "terms": "屋外運動器具, スポーツ, トレーニング, 運動器具, 屋外ジム, 屋外運動場, エクササイズ場, 屋外フィットネス場, 屋外トレーニング場, 屋外健康遊具場"
                 },
                 "leisure/fitness_station/balance_beam": {
                     "name": "平均台",
-                    "terms": "平均台, 運動器具"
+                    "terms": "平均台, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/box": {
                     "name": "トレーニング台",
-                    "terms": "トレーニング台, 運動台, 運動器具"
+                    "terms": "トレーニング台, 運動台, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/horizontal_bar": {
                     "name": "鉄棒",
-                    "terms": "鉄棒, 運動器具"
+                    "terms": "鉄棒, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/horizontal_ladder": {
                     "name": "うんてい",
-                    "terms": "うんてい, 雲梯, 運動器具"
+                    "terms": "うんてい, 雲梯, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/hyperextension": {
                     "name": "トレーニングベンチ",
-                    "terms": "トレーニングベンチ, 背筋台, 運動器具"
+                    "terms": "トレーニングベンチ, 背筋台, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/parallel_bars": {
                     "name": "平行棒",
-                    "terms": "平行棒, 運動器具"
+                    "terms": "平行棒, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/push-up": {
                     "name": "腕立て伏せ",
-                    "terms": "腕立て伏せ, プッシュアップ, 運動器具"
+                    "terms": "腕立て伏せ, プッシュアップ, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/rings": {
                     "name": "吊り輪",
-                    "terms": "吊り輪, 運動器具"
+                    "terms": "吊り輪, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/sign": {
                     "name": "運動の説明標識",
-                    "terms": "運動の説明標識, 運動器具"
+                    "terms": "運動の説明標識, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/sit-up": {
                     "name": "腹筋台",
-                    "terms": "腹筋台, シットアップ, 運動器具"
+                    "terms": "腹筋台, シットアップ, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "階段（トレーニング用）",
-                    "terms": "階段, 運動器具"
+                    "terms": "階段, 運動器具, トレーニング, エクササイズ, 健康遊具"
                 },
                 "leisure/garden": {
                     "name": "庭園",
-                    "terms": "庭園, 日本庭園, 植物園, 公園, 枯山水"
+                    "terms": "庭園, 日本庭園, 植物園, 公園, 枯山水, 植物, 樹木"
                 },
                 "leisure/golf_course": {
                     "name": "ゴルフコース",
-                    "terms": "ゴルフコース, ゴルフ場"
+                    "terms": "ゴルフコース, ゴルフ場, 運動, スポーツ, 娯楽, レジャー"
                 },
                 "leisure/hackerspace": {
                     "name": "ハッカースペース",
@@ -4471,19 +4553,19 @@
                 },
                 "leisure/horse_riding": {
                     "name": "乗馬施設",
-                    "terms": "乗馬施設, 馬事公苑, 乗馬クラブ, スポーツ"
+                    "terms": "乗馬施設, 馬事公苑, 乗馬クラブ, スポーツ, 運動, 娯楽, レジャー"
                 },
                 "leisure/ice_rink": {
                     "name": "アイススケート場",
-                    "terms": "アイススケート, アイススケート場, アイススケートリンク, スケートリンク, スポーツ"
+                    "terms": "アイススケート, アイススケート場, アイススケートリンク, スケートリンク, スポーツ, 運動, 娯楽, レジャー"
                 },
                 "leisure/marina": {
                     "name": "マリーナ",
-                    "terms": "マリーナ, ヨットハーバー, スポーツ"
+                    "terms": "マリーナ, ヨットハーバー, スポーツ, 運動, 娯楽, レジャー"
                 },
                 "leisure/miniature_golf": {
                     "name": "ミニゴルフ",
-                    "terms": "パターゴルフ, スポーツ, 娯楽"
+                    "terms": "パターゴルフ, スポーツ, 娯楽, ミニゴルフ, 運動, レジャー"
                 },
                 "leisure/nature_reserve": {
                     "name": "自然保護区",
@@ -4499,63 +4581,63 @@
                 },
                 "leisure/pitch": {
                     "name": "スポーツ競技場",
-                    "terms": "スポーツ競技場, 運動場, 競技場, グラウンド, 校庭"
+                    "terms": "スポーツ競技場, 運動場, 競技場, グラウンド, 校庭, 競技, 練習"
                 },
                 "leisure/pitch/american_football": {
                     "name": "アメリカンフットボール場",
-                    "terms": "アメリカンフットボール場, アメフト競技場, スポーツ"
+                    "terms": "アメリカンフットボール場, アメフト競技場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/baseball": {
                     "name": "野球場",
-                    "terms": "野球場, 球場, スポーツ"
+                    "terms": "野球場, 球場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/basketball": {
                     "name": "バスケットボール場",
-                    "terms": "バスケットボール場, スポーツ"
+                    "terms": "バスケットボール場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/beachvolleyball": {
                     "name": "ビーチバレーコート",
-                    "terms": "ビーチバレーコート, スポーツ"
+                    "terms": "ビーチバレーコート, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/boules": {
                     "name": "ブールスポーツ",
-                    "terms": "ブールスポーツ, ボッチ, ボッチボール, スポーツ"
+                    "terms": "ブールスポーツ, ボッチ, ボッチボール, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/bowls": {
                     "name": "ローンボウルズ",
-                    "terms": "ローンボウルズ, スポーツ"
+                    "terms": "ローンボウルズ, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/cricket": {
                     "name": "クリケット場",
-                    "terms": "クリケット場, スポーツ"
+                    "terms": "クリケット場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/equestrian": {
                     "name": "乗馬場",
-                    "terms": "乗馬場, スポーツ"
+                    "terms": "乗馬場, スポーツ, 運動, トレーニング, 練習, 訓練, 競技"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "ラグビーリーグ場",
-                    "terms": "ラグビー場, ラグビー, リーグ, スポーツ"
+                    "terms": "ラグビー場, ラグビー, リーグ, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/rugby_union": {
                     "name": "ラグビー場",
-                    "terms": "ラグビーユニオン場, スポーツ"
+                    "terms": "ラグビーユニオン場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/skateboard": {
                     "name": "スケートパーク",
-                    "terms": "スケートパーク, スポーツ"
+                    "terms": "スケートパーク, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/soccer": {
                     "name": "サッカー場",
-                    "terms": "サッカー場, スポーツ"
+                    "terms": "サッカー場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/table_tennis": {
                     "name": "卓球台",
-                    "terms": "卓球台, スポーツ"
+                    "terms": "卓球台, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/tennis": {
                     "name": "テニスコート",
-                    "terms": "テニスコート, テニス場, 庭球場, スポーツ"
+                    "terms": "テニスコート, テニス場, 庭球場, スポーツ, 運動, 競技"
                 },
                 "leisure/pitch/volleyball": {
                     "name": "バレーボールコート",
@@ -4571,7 +4653,7 @@
                 },
                 "leisure/running_track": {
                     "name": "競技トラック (徒競走)",
-                    "terms": "競技トラック (徒競走), スポーツ"
+                    "terms": "競技トラック (徒競走), スポーツ, 運動, 競技"
                 },
                 "leisure/sauna": {
                     "name": "サウナ",
@@ -4583,11 +4665,11 @@
                 },
                 "leisure/sports_centre": {
                     "name": "スポーツセンター/複合施設",
-                    "terms": "スポーツセンター, 複合施設"
+                    "terms": "スポーツセンター, 複合施設, 運動, 競技, トレーニング, 練習, 訓練, 体操"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "スイミングプール施設",
-                    "terms": "遊泳プール, プール, 水泳場, スポーツ"
+                    "terms": "遊泳プール, プール, 水泳場, スポーツ, 運動, 競技"
                 },
                 "leisure/stadium": {
                     "name": "スタジアム",
@@ -4599,7 +4681,7 @@
                 },
                 "leisure/track": {
                     "name": "競技トラック（モータースポーツ以外）",
-                    "terms": "競技トラック, スポーツ"
+                    "terms": "競技トラック, スポーツ, 運動, 競技"
                 },
                 "leisure/water_park": {
                     "name": "ウォーターパーク",
@@ -4765,8 +4847,8 @@
                     "terms": "砂浜, ビーチ, 浜"
                 },
                 "natural/cave_entrance": {
-                    "name": "洞窟の入口",
-                    "terms": "洞窟の入口, 洞穴"
+                    "name": "出入口（洞窟）",
+                    "terms": "洞窟の入口, 洞穴, 出入口, 出入り口"
                 },
                 "natural/cliff": {
                     "name": "崖",
@@ -4786,11 +4868,11 @@
                 },
                 "natural/grassland": {
                     "name": "草原",
-                    "terms": "草地, 草原"
+                    "terms": "草地, 草原, 植物"
                 },
                 "natural/heath": {
                     "name": "荒地",
-                    "terms": "荒地"
+                    "terms": "荒地, 植物"
                 },
                 "natural/peak": {
                     "name": "山頂",
@@ -4814,19 +4896,19 @@
                 },
                 "natural/scrub": {
                     "name": "低木",
-                    "terms": "低木, 茂み"
+                    "terms": "低木, 茂み, 植物"
                 },
                 "natural/spring": {
                     "name": "泉",
                     "terms": "泉, 湧水"
                 },
                 "natural/tree": {
-                    "name": "樹木・林",
-                    "terms": "樹木, 林, 木"
+                    "name": "樹木",
+                    "terms": "樹木, 林, 木, 公園, 森林, 天然記念物, 植物"
                 },
                 "natural/tree_row": {
                     "name": "並木",
-                    "terms": "並木, 木, 樹木"
+                    "terms": "並木, 木, 樹木, 街路樹, 植物"
                 },
                 "natural/volcano": {
                     "name": "火口",
@@ -4842,23 +4924,23 @@
                 },
                 "natural/water/pond": {
                     "name": "池",
-                    "terms": "池"
+                    "terms": "池, 公園"
                 },
                 "natural/water/reservoir": {
                     "name": "貯水池",
-                    "terms": "貯水池"
+                    "terms": "貯水池, ため池, 溜池"
                 },
                 "natural/wetland": {
-                    "name": "湿地帯",
-                    "terms": "湿地帯"
+                    "name": "湿地",
+                    "terms": "湿地帯, 湿地, 植物, 湿原"
                 },
                 "natural/wood": {
                     "name": "自然林",
-                    "terms": "自然林, 原生林, 森林（自然）"
+                    "terms": "自然林, 原生林, 森林（自然）, 樹木, 植物"
                 },
                 "noexit/yes": {
                     "name": "行き止まり",
-                    "terms": "行き止まり"
+                    "terms": "行き止まり, 行止り, 突き当たり"
                 },
                 "office": {
                     "name": "オフィス",
@@ -5167,7 +5249,7 @@
                 },
                 "power/pole": {
                     "name": "電柱",
-                    "terms": "電柱"
+                    "terms": "電柱, 電信柱"
                 },
                 "power/sub_station": {
                     "name": "変電所"
@@ -5429,8 +5511,8 @@
                     "terms": "地下鉄, 線路"
                 },
                 "railway/subway_entrance": {
-                    "name": "地下鉄の出入口",
-                    "terms": "地下鉄の出入口"
+                    "name": "出入口（地下鉄）",
+                    "terms": "地下鉄の出入口, 出入り口, 出入口, 地下鉄, 出口, 入口"
                 },
                 "railway/switch": {
                     "name": "分岐器",
@@ -5464,7 +5546,7 @@
                 },
                 "shop/agrarian": {
                     "name": "農業用品店",
-                    "terms": "農業用品店, 種苗店, 農協"
+                    "terms": "農業用品店, 農協, 種苗店, 農業, 農薬, 飼料, 肥料, 駆除剤, 農機具, 除草剤"
                 },
                 "shop/alcohol": {
                     "name": "酒店",
@@ -5472,15 +5554,15 @@
                 },
                 "shop/anime": {
                     "name": "アニメショップ",
-                    "terms": "アニメショップ, 娯楽"
+                    "terms": "アニメショップ, 娯楽, アニメ, コスプレ, マンガ, まんが"
                 },
                 "shop/antiques": {
                     "name": "古美術品店",
-                    "terms": "古美術品店, アンティークショップ, 美術, アート"
+                    "terms": "古美術品店, アンティークショップ, 美術, アート, 古美術"
                 },
                 "shop/appliance": {
-                    "name": "家電販売店",
-                    "terms": "家電販売店,家電量販店,電器屋, 買い物, ショッピング"
+                    "name": "白物家電販売店（大型製品）",
+                    "terms": "家電販売店,家電量販店,電器屋, 買い物, ショッピング, 白物家電, 白物, 生活家電, 冷蔵庫, 洗濯機, 電機屋"
                 },
                 "shop/art": {
                     "name": "美術品販売店",
@@ -5496,7 +5578,7 @@
                 },
                 "shop/bakery": {
                     "name": "パン屋",
-                    "terms": "パン屋, ベーカリー, 食品"
+                    "terms": "パン屋, ベーカリー, 食品, 食べ物"
                 },
                 "shop/bathroom_furnishing": {
                     "name": "浴室用品店",
@@ -5540,7 +5622,7 @@
                 },
                 "shop/butcher": {
                     "name": "精肉店",
-                    "terms": "精肉店, 肉屋, 食品"
+                    "terms": "精肉店, 肉屋, 食品, 食べ物"
                 },
                 "shop/candles": {
                     "name": "キャンドル専門店",
@@ -5568,7 +5650,7 @@
                 },
                 "shop/cheese": {
                     "name": "チーズ店",
-                    "terms": "チーズ店,食品"
+                    "terms": "チーズ店,食品, 食べ物"
                 },
                 "shop/chemist": {
                     "name": "化粧品・薬品店（英国）",
@@ -5576,7 +5658,7 @@
                 },
                 "shop/chocolate": {
                     "name": "チョコレート店",
-                    "terms": "チョコレート店, 食品"
+                    "terms": "チョコレート店, 食品, 食べ物"
                 },
                 "shop/clothes": {
                     "name": "衣料品店",
@@ -5584,15 +5666,15 @@
                 },
                 "shop/coffee": {
                     "name": "コーヒー豆販売店",
-                    "terms": "コーヒー豆専門店, 嗜好品, 食品, 珈琲"
+                    "terms": "コーヒー豆専門店, 嗜好品, 食品, 珈琲, 飲み物"
                 },
                 "shop/computer": {
                     "name": "コンピューター店",
-                    "terms": "コンピューター店, パソコン店"
+                    "terms": "コンピューター店, パソコン店, コンピュータ, PC"
                 },
                 "shop/confectionery": {
                     "name": "菓子屋（販売）",
-                    "terms": "菓子店, 駄菓子屋, 食品, お菓子, スナック, チョコレート, 飴, キャンディ"
+                    "terms": "菓子店, 駄菓子屋, 食品, お菓子, スナック, チョコレート, 飴, キャンディ, 食べ物"
                 },
                 "shop/convenience": {
                     "name": "コンビニエンスストア",
@@ -5616,11 +5698,11 @@
                 },
                 "shop/dairy": {
                     "name": "日配品店",
-                    "terms": "日配品店, 食品"
+                    "terms": "日配品店, 食品, 食べ物"
                 },
                 "shop/deli": {
                     "name": "惣菜屋",
-                    "terms": "惣菜屋, 弁当屋, デリカ, 食品"
+                    "terms": "惣菜屋, 弁当屋, デリカ, 食品, 食べ物"
                 },
                 "shop/department_store": {
                     "name": "百貨店",
@@ -5639,8 +5721,8 @@
                     "terms": "電子タバコ店, 嗜好品, タバコ, たばこ"
                 },
                 "shop/electronics": {
-                    "name": "家電販売店",
-                    "terms": "家電販売店, 家電量販店, 買い物, ショッピング"
+                    "name": "家電販売店（小型製品）",
+                    "terms": "家電販売店, 家電量販店, 買い物, ショッピング, 小型家電, 電器屋, 電気屋"
                 },
                 "shop/erotic": {
                     "name": "アダルトショップ",
@@ -5652,7 +5734,7 @@
                 },
                 "shop/farm": {
                     "name": "農産物直売所",
-                    "terms": "農産物直売所, 直販, 食品"
+                    "terms": "農産物直売所, 直販, 食品, 食べ物"
                 },
                 "shop/fashion": {
                     "name": "ファッション店",
@@ -5682,7 +5764,7 @@
                 },
                 "shop/garden_centre": {
                     "name": "園芸用品店",
-                    "terms": "園芸用品店, ガーデンセンター, DIY, 家庭菜園, 植木"
+                    "terms": "園芸用品店, ガーデンセンター, DIY, 家庭菜園, 植木, 樹木, 植物"
                 },
                 "shop/gas": {
                     "name": "ガスボンベ店",
@@ -5690,11 +5772,11 @@
                 },
                 "shop/gift": {
                     "name": "ギフト店",
-                    "terms": "ギフト店, ギフト用品店, 土産店"
+                    "terms": "ギフト店, ギフト用品店, 土産店, お土産, 贈答品"
                 },
                 "shop/greengrocer": {
                     "name": "八百屋",
-                    "terms": "八百屋, 青果店, 食品"
+                    "terms": "八百屋, 青果店, 食品, 食べ物"
                 },
                 "shop/hairdresser": {
                     "name": "理美容店",
@@ -5703,6 +5785,10 @@
                 "shop/hardware": {
                     "name": "金物屋",
                     "terms": "金物屋, 金物店"
+                },
+                "shop/health_food": {
+                    "name": "健康食品店",
+                    "terms": "健康食品店, 健康, 食品, 食べ物"
                 },
                 "shop/hearing_aids": {
                     "name": "補聴器店",
@@ -5770,7 +5856,7 @@
                 },
                 "shop/money_lender": {
                     "name": "消費者金融",
-                    "terms": "消費者金融, サラ金, 貸金, お金, 金融"
+                    "terms": "消費者金融, サラ金, 貸金, お金, 金融, マチ金, 借金"
                 },
                 "shop/motorcycle": {
                     "name": "バイク店",
@@ -5798,7 +5884,7 @@
                 },
                 "shop/organic": {
                     "name": "オーガニック商品店",
-                    "terms": "オーガニック商品店, 有機野菜, オーガニック, 有機, 食品"
+                    "terms": "オーガニック商品店, 有機野菜, オーガニック, 有機, 食品, 食べ物"
                 },
                 "shop/outdoor": {
                     "name": "アウトドアショップ",
@@ -5810,7 +5896,7 @@
                 },
                 "shop/pastry": {
                     "name": "焼菓子（ペイストリー）店",
-                    "terms": "焼菓子店, ケーキ屋, 食品, パイ, ビスケット, 洋菓子, ペイストリー, ペストリー, お菓子"
+                    "terms": "焼菓子店, ケーキ屋, 食品, パイ, ビスケット, 洋菓子, ペイストリー, ペストリー, お菓子, 食べ物, 食品"
                 },
                 "shop/pawnbroker": {
                     "name": "質店",
@@ -5834,7 +5920,7 @@
                 },
                 "shop/radiotechnics": {
                     "name": "電子部品店",
-                    "terms": "電子部品店, ラジオ, 電子部品, 電子工作"
+                    "terms": "電子部品店, ラジオ, 電子部品, 電子工作, 電子パーツ"
                 },
                 "shop/religion": {
                     "name": "宗教用品店",
@@ -5842,11 +5928,11 @@
                 },
                 "shop/scuba_diving": {
                     "name": "スキューバダイビングショップ",
-                    "terms": "スキューバダイビングショップ, スキューバダイビング, スポーツ"
+                    "terms": "スキューバダイビングショップ, スキューバダイビング, スポーツ, 運動"
                 },
                 "shop/seafood": {
                     "name": "魚屋",
-                    "terms": "海鮮食品店, 魚屋, 魚市場, 食品, 魚介"
+                    "terms": "海鮮食品店, 魚屋, 魚市場, 食品, 魚介, 食べ物"
                 },
                 "shop/second_hand": {
                     "name": "リサイクルショップ",
@@ -5858,15 +5944,15 @@
                 },
                 "shop/sports": {
                     "name": "スポーツ用品店",
-                    "terms": "スポーツ用品店"
+                    "terms": "スポーツ用品店, 運動, 競技, トレーニング, 訓練"
                 },
                 "shop/stationery": {
                     "name": "文具店",
                     "terms": "文具店, 文房具屋"
                 },
                 "shop/storage_rental": {
-                    "name": "レンタルスペース",
-                    "terms": "貸し倉庫, レンタルボックス, 貸しコンテナ"
+                    "name": "レンタル倉庫",
+                    "terms": "貸し倉庫, レンタルボックス, 貸しコンテナ, 貸倉庫, 倉庫, レンタル倉庫"
                 },
                 "shop/supermarket": {
                     "name": "スーパーマーケット",
@@ -5882,7 +5968,7 @@
                 },
                 "shop/tea": {
                     "name": "茶舗",
-                    "terms": "茶舗, 茶店, 食品, お茶, 緑茶"
+                    "terms": "茶舗, 茶店, 食品, お茶, 緑茶, 飲み物"
                 },
                 "shop/ticket": {
                     "name": "チケット店",
@@ -5910,7 +5996,7 @@
                 },
                 "shop/tyres": {
                     "name": "タイヤ店",
-                    "terms": "タイヤ店, タイヤ販売店, 自動車"
+                    "terms": "タイヤ店, タイヤ販売店, 自動車, カー用品"
                 },
                 "shop/vacant": {
                     "name": "空き店舗, シャッター店舗"
@@ -5937,11 +6023,15 @@
                 },
                 "shop/water_sports": {
                     "name": "ウォータースポーツ用品店",
-                    "terms": "マリンスポーツ専門店, ウォータースポーツ専門店, 水着屋, スポーツ"
+                    "terms": "マリンスポーツ専門店, ウォータースポーツ専門店, 水着屋, スポーツ, 運動, 競技, トレーニング"
                 },
                 "shop/weapons": {
                     "name": "武器屋",
                     "terms": "銃砲店"
+                },
+                "shop/wholesale": {
+                    "name": "卸売店",
+                    "terms": "卸, 卸売, 卸売店"
                 },
                 "shop/window_blind": {
                     "name": "ブラインドカーテン専門店",
@@ -5949,7 +6039,7 @@
                 },
                 "shop/wine": {
                     "name": "ワイン店",
-                    "terms": "ワイン店, 酒屋, 食品, アルコール, 嗜好品"
+                    "terms": "ワイン店, 酒屋, 食品, アルコール, 嗜好品, 飲み物"
                 },
                 "tourism": {
                     "name": "観光",
@@ -5969,11 +6059,11 @@
                 },
                 "tourism/artwork": {
                     "name": "パブリックアート",
-                    "terms": "芸術作品, 銅像, 屋外アート, 彫刻, 壁画, アート, 絵画, オブジェ"
+                    "terms": "芸術作品, 銅像, 屋外アート, 彫刻, 壁画, アート, 絵画, オブジェ, 公園, 駅前, 広場"
                 },
                 "tourism/attraction": {
-                    "name": "観光名所",
-                    "terms": "観光名所, 見どころ, アトラクション, 見もの"
+                    "name": "観光地",
+                    "terms": "観光名所, 見どころ, アトラクション, 見もの, 名所, 旧跡, 名勝, 観光地"
                 },
                 "tourism/camp_site": {
                     "name": "キャンプ場",
@@ -6004,12 +6094,12 @@
                     "terms": "ホテル, 旅館, 宿"
                 },
                 "tourism/information": {
-                    "name": "観光案内",
-                    "terms": "観光案内, 案内, 案内板, 案内所, インフォメーション"
+                    "name": "観光案内（全般）",
+                    "terms": "観光案内, 案内, 案内板, 案内所, インフォメーション, 観光"
                 },
                 "tourism/information/board": {
-                    "name": "情報掲示板",
-                    "terms": "情報掲示板, 案内"
+                    "name": "観光情報掲示板",
+                    "terms": "情報掲示板, 案内, 観光, 観光案内, インフォメーション, 案内板, 観光情報, 掲示板"
                 },
                 "tourism/information/guidepost": {
                     "name": "道標",
@@ -6021,7 +6111,7 @@
                 },
                 "tourism/information/office": {
                     "name": "観光案内所",
-                    "terms": "観光案内所, 案内"
+                    "terms": "観光案内所, 案内, ビジターセンター, 観光, インフォメーション"
                 },
                 "tourism/motel": {
                     "name": "モーテル",
@@ -6041,7 +6131,7 @@
                 },
                 "tourism/viewpoint": {
                     "name": "展望台",
-                    "terms": "展望台, 観光"
+                    "terms": "展望台, 観光, 展望所, 名勝, 景色, 風景, パノラマ, 景勝"
                 },
                 "tourism/wilderness_hut": {
                     "name": "避難小屋",
@@ -6323,7 +6413,7 @@
                 "attribution": {
                     "text": "規約 & フィードバック"
                 },
-                "description": "おそらくデフォルトのレイヤより明瞭で正確、しかしやや古いEsriアーカイブ画像。（日本での違いは不明）",
+                "description": "おそらくEsriデフォルトのレイヤより明瞭で正確、しかしやや古いEsriアーカイブ画像。（日本での違いは不明）",
                 "name": "Esri World Imagery(鮮明版)ベータ"
             },
             "MAPNIK": {

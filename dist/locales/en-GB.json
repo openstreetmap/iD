@@ -282,12 +282,6 @@
                 "connected_to_hidden": "This can't be split because it is connected to a hidden feature."
             },
             "restriction": {
-                "help": {
-                    "select": "Click to select a road segment.",
-                    "toggle": "Click to toggle turn restrictions.",
-                    "toggle_on": "Click to add a \"{restriction}\" restriction.",
-                    "toggle_off": "Click to remove the \"{restriction}\" restriction."
-                },
                 "annotation": {
                     "create": "Added a turn restriction",
                     "delete": "Deleted a turn restriction"
@@ -4469,9 +4463,6 @@
                 },
                 "shop": {
                     "name": "Shop"
-                },
-                "shop/agrarian": {
-                    "name": "Agriculture Shop"
                 },
                 "shop/alcohol": {
                     "name": "Off licence (Alcohol shop)"

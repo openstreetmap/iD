@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Ĉi tiu ne povas esti dividita, ĉar ĝi estas kunigita al kaŝita objekto."
             },
             "restriction": {
-                "help": {
-                    "select": "Klaku por elekti segmenton de vojo.",
-                    "toggle": "Klaku por baskuligi turnaj limigojn.",
-                    "toggle_on": "Klaku por aldoni limigon \"{restriction}\".",
-                    "toggle_off": "Klaku por forigi limigon \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Aldonis turnan limigon.",
                     "delete": "Forigis turnan limigon."
@@ -1695,6 +1689,9 @@
                         "forward": "Antaŭen"
                     }
                 },
+                "dispensing": {
+                    "label": "Medikamentoj je recepto"
+                },
                 "display": {
                     "label": "Vidigilo"
                 },
@@ -2637,6 +2634,9 @@
                 "wheelchair": {
                     "label": "Rulseĝa alirebleco"
                 },
+                "wholesale": {
+                    "label": "Pogranda komerco"
+                },
                 "width": {
                     "label": "Larĝo (metroj)"
                 },
@@ -3457,10 +3457,6 @@
                 },
                 "building/entrance": {
                     "name": "Enirejo/elirejo"
-                },
-                "building/farm": {
-                    "name": "Ĉefarma domo",
-                    "terms": "kampodomo,kampara domo,somerdomo,farmo,farmodomo"
                 },
                 "building/garage": {
                     "name": "Garaĝo",
@@ -4374,6 +4370,10 @@
                 "leisure/adult_gaming_centre": {
                     "name": "Hazardludejo",
                     "terms": "kazino,vetludejo,monludejo,vetaŭtomato"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "Salono de ludoj",
+                    "terms": "ludejo,amuzaparatoj,videoludoj,paĉinko,flipero,bilardo"
                 },
                 "leisure/bird_hide": {
                     "name": "Bird-observejo",
@@ -5702,6 +5702,10 @@
                     "name": "Laborila vendejo",
                     "terms": "iloj,ilovendejo,il-vendejo,memfaradiloj"
                 },
+                "shop/health_food": {
+                    "name": "Sanig-manĝaĵa vendejo",
+                    "terms": "saniga manĝaĵo,sana manĝaĵo,ekologia manĝaĵo,vegetarisma manĝaĵo"
+                },
                 "shop/hearing_aids": {
                     "name": "Aŭd-helpila vendejo",
                     "terms": "aŭdhelpiloj,audhelpiloj,auxdhelpiloj,aŭdiloj,aŭskultiloj,orelhelpiloj"
@@ -5940,6 +5944,10 @@
                 "shop/weapons": {
                     "name": "Armila vendejo",
                     "terms": "armiloj,pafiloj,pistoloj,armea,milita"
+                },
+                "shop/wholesale": {
+                    "name": "Pogranda vendejo",
+                    "terms": "magazeno, staplo"
                 },
                 "shop/window_blind": {
                     "name": "Fenestr-kovrila vendejo",

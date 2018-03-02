@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Dit kan niet gesplitst worden omdat het verbonden is met een verborgen object."
             },
             "restriction": {
-                "help": {
-                    "select": "Klik om een stuk weg te selecteren.",
-                    "toggle": "Klik om te kiezen tussen afslagbeperkingen.",
-                    "toggle_on": "Klik om een \"{restriction}\"-beperking toe te voegen.",
-                    "toggle_off": "Klik om de \"{restriction}\"-beperking weg te halen."
-                },
                 "annotation": {
                     "create": "Afslagbeperking toegevoegd",
                     "delete": "Afslagbeperking weggehaald"
@@ -389,6 +383,8 @@
                 "title": "Meting",
                 "selected": "{n} geselecteerd",
                 "geometry": "Geometrie",
+                "closed_line": "gesloten lijn",
+                "closed_area": "gesloten gebied",
                 "center": "Midden",
                 "perimeter": "Omtrek",
                 "length": "Lengte",
@@ -469,6 +465,7 @@
             "switch": "Selecteer terug deze achtergrond",
             "custom": "Aangepast",
             "custom_button": "Tegel-URL-sjabloon aanpassen",
+            "custom_prompt": "Geef een tegel-URL-sjabloon op. Geldige placeholders zijn:\n   - {zoom}/{z}, {x}, {y} voor het Z/X/Y-schema\n   - {ty} voor omgekeerde Y-coördinaten in TMS-stijl\n   - {u} voor het quadtile-schema\n   - {switch:a,b,c} voor DNS-server-multiplexing\n\nVoorbeeld:\n{example}",
             "overlays": "Lagen",
             "imagery_source_faq": "Beeldopnameinfo / Rapporteer een probleem",
             "reset": "Standaard herstellen",
@@ -652,6 +649,7 @@
             "untagged_area_tooltip": "Selecteer een objecttype dat beschrijft wat dit vlak is.",
             "untagged_relation": "Relatie zonder tags",
             "untagged_relation_tooltip": "Selecteer een objecttype dat beschrijft wat deze relatie is.",
+            "many_deletions": "Je verwijdert {n} objecten. Weet je zeker dat je dit wil doen? Dit zal ze verwijderen van de kaart die iedereen ziet op openstreetmap.org.",
             "tag_suggests_area": "De tag {tag} suggereert dat de lijn een vlak is, maar het is geen vlak",
             "deprecated_tags": "Afgeschafte tags: {tags}"
         },
@@ -1217,6 +1215,21 @@
                     "measurement": "Meetpaneel open/dicht"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "north": "N",
+            "south": "Z",
+            "east": "O",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -2613,6 +2626,9 @@
                 "wheelchair": {
                     "label": "Rolstoeltoegankelijkheid"
                 },
+                "wholesale": {
+                    "label": "Groothandel"
+                },
                 "width": {
                     "label": "Breedte (in meter)"
                 },
@@ -3098,6 +3114,9 @@
                     "name": "Douche",
                     "terms": "stortbad,waterkraan,kraan"
                 },
+                "amenity/smoking_area": {
+                    "name": "Rookgebied"
+                },
                 "amenity/social_facility": {
                     "name": "Sociale Faciliteit",
                     "terms": "OCMW,kansarmen,hulp,hulpcentrum"
@@ -3331,6 +3350,9 @@
                     "name": "Haag",
                     "terms": "heg,haag"
                 },
+                "barrier/kerb": {
+                    "name": "Stoeprand"
+                },
                 "barrier/kissing_gate": {
                     "name": "Voetgangershek",
                     "terms": "veehek,kushek,kusjeshek,kissing gate"
@@ -3419,9 +3441,6 @@
                 },
                 "building/entrance": {
                     "name": "Ingang/Uitgang"
-                },
-                "building/farm": {
-                    "name": "Gebouw van boerderij"
                 },
                 "building/garage": {
                     "name": "Garage (privéstalling voor voertuigen)",
@@ -3768,6 +3787,9 @@
                 },
                 "emergency/private": {
                     "name": "Toegang voor hulpdiensten: privé"
+                },
+                "emergency/water_tank": {
+                    "name": "Noodwatertank"
                 },
                 "emergency/yes": {
                     "name": "Toegang voor hulpdiensten: ja"
@@ -4320,6 +4342,9 @@
                 "leisure/adult_gaming_centre": {
                     "name": "Speelzaal (met kansspelmachines)",
                     "terms": "casino,slot machine,slots,gokken,slotmachine"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "Speelhal"
                 },
                 "leisure/bird_hide": {
                     "name": "Vogelkijkscherm of -hut",
@@ -5350,8 +5375,7 @@
                     "terms": "handelszaak"
                 },
                 "shop/agrarian": {
-                    "name": "Landbouwwinkel (om aan landbouw te doen)",
-                    "terms": "landbouwzaak,landbouwerswinkel,landbouwerszaak,pesticidenwinkel,meststoffenwinkel,zadenwinkel,tractorwinkel,voerwinkel,veevoerwinkel,landbouwgereedschapswinkel,landbouwwerktuigenwinkel"
+                    "name": "Landbouwwinkel"
                 },
                 "shop/alcohol": {
                     "name": "Slijterij",
@@ -5816,6 +5840,9 @@
                     "name": "wapen winkel",
                     "terms": "wapenwinkel"
                 },
+                "shop/wholesale": {
+                    "name": "Groothandel"
+                },
                 "shop/window_blind": {
                     "name": "Jaloeziewinkel",
                     "terms": "zonwering,luiken,jaloezieën"
@@ -6178,6 +6205,13 @@
                 "description": "Esri world imagery",
                 "name": "Esri World Imagery"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Gebruiksvoorwaarden & feedback"
+                },
+                "description": "Esri archiefbeelden kunnen duidelijker en accurater zijn dan de standaard achtergrondbeelden.",
+                "name": "Esri World Imagery (Clarity) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap-bijdragers, CC-BY-SA"
@@ -6246,18 +6280,33 @@
                 "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap bijdragers, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Fietsen"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap bijdragers, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Wandelen"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap bijdragers, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Mountainbiken"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap bijdragers, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Inline skaten"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap bijdragers, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Wintersportpistes"
             },
             "basemap.at": {

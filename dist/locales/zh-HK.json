@@ -282,12 +282,6 @@
                 "connected_to_hidden": "未能分割這個因為它連接著一個隱藏的特徵。"
             },
             "restriction": {
-                "help": {
-                    "select": "於地圖上按一下選擇一段道路。",
-                    "toggle": "按一下改變轉彎限制",
-                    "toggle_on": "按一下新增\"{restriction}\"限制。",
-                    "toggle_off": "按一下移除\"{restriction}\"限制。"
-                },
                 "annotation": {
                     "create": "已新增轉彎限制",
                     "delete": "已刪除轉彎限制"

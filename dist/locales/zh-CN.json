@@ -285,12 +285,6 @@
                 "connected_to_hidden": "无法打断，因为其与一隐藏要素相连。"
             },
             "restriction": {
-                "help": {
-                    "select": "单击以选中一条路。",
-                    "toggle": "点击切换转向限制。",
-                    "toggle_on": "单击以添加一个\"{restriction}\"限制。",
-                    "toggle_off": "单击以删除一个\"{restriction}\"限制。"
-                },
                 "annotation": {
                     "create": "添加转向限制",
                     "delete": "删除转向限制"
@@ -719,7 +713,18 @@
                 "select_right_click": "{rightclick}使用次鼠标键（常见为右键）点击一个要素可以显示编辑菜单，其中给出了可用的指令，如旋转、移动和删除等等。",
                 "multiselect_h": "多选",
                 "multiselect_shift_click": "`{shift}`+{leftclick} 左键以选中多个要素。这样能使移动或删除多个要素变得更为方便。",
-                "save_h": "保存"
+                "multiselect_lasso": "另一种选择多个要素的方式是按住 `{shift}` 键不放，然后按住 {leftclick} 鼠标左键并拖动以绘制一根拉索。所有在拉索中的节点都会被选中。",
+                "undo_redo_h": "撤销和重做",
+                "undo_redo": "您的编辑都会被本地保存在您的浏览器中，直到您选择保存它们至 OpenStreetMap 服务器。您可以点击 {undo} **撤销** 按钮撤销编辑，或点击 {redo} **重做** 按钮重做编辑。",
+                "save_h": "保存",
+                "save": "点击 {save} **保存** 以完成您的编辑并发送至 OpenStreetMap。请您牢记：要经常保存您的编辑！",
+                "save_validation": "在保存界面，您有机会再次检查您所做的编辑。iD 也会做相应的基本检查确保无数据缺失，并且会在不适当的地方提供有用的建议或警告。",
+                "upload_h": "上传",
+                "upload": "在上传您所做的修改之前，您必须输入一段 [修改集合注释](https://wiki.openstreetmap.org/wiki/Good_changeset_comments) 。接着点击 **上传** 将您的编辑发送至 OpenStreetMap，之后它们将会被合并到地图并且对所有人公开可见。",
+                "backups_h": "自动备份",
+                "backups": "如果您一时无法结束您的编辑，例如您的计算机宕机或者关闭了浏览器标签页，您所做的编辑仍会被保存在浏览器存储中。您可以稍后回来（在相同的计算机和浏览器上），然后由 iD 恢复您之前的编辑。",
+                "keyboard_h": "键盘快捷键",
+                "keyboard": "您可以按下 `?` 键以查看键盘快捷键列表。"
             },
             "feature_editor": {
                 "title": "要素编辑器"
@@ -737,7 +742,14 @@
                 "title": "关系"
             },
             "imagery": {
-                "title": "背景影像"
+                "title": "背景影像",
+                "intro": "显示在地图数据下方的背景影像，是绘图过程中的重要资源。它们可以收集自卫星、飞机和无人机的航空照片，或扫描自历史地图，或来自其他可自由使用的数据源。",
+                "sources_h": "影像来源",
+                "choosing": "要查看可适用于编辑的影像资源，请点击地图侧边 {layers} **背景设定** 按钮。",
+                "sources": "[必应地图](https://www.bing.com/maps/) 卫星图层被设定为默认背景影像。基于您编辑的所处位置，也会有其他影像可供使用。其中有些会较新或有更高清晰度，所以建议先检查哪个图层最适合作为绘图参考。",
+                "offsets_h": "调整影像偏移",
+                "offset": "有时候影像相较于准确地图数据会有轻微的偏移。如果您看见大量的道路或建筑物偏移了背景影像，那可能是由影像不正确导致，这时请不要全部移动它们来匹配背景。相反，您可以在背景设置的底部找到“调整影像偏移”版块，通过增加偏移来调整背景，从而使它与既有数据吻合。",
+                "offset_change": "点击小三角以微小的幅度调整影像偏移；或者在灰色矩形内按住鼠标左键并拖动，以校准影像。"
             },
             "streetlevel": {
                 "title": "街景照片"
@@ -923,6 +935,7 @@
             },
             "areas": {
                 "title": "区域",
+                "add_playground": "*区域* 用来显示诸如湖泊、建筑物或居民区等要素的边界。{br}他们亦可作为一种更细致的绘制方式，以替代普通地用点来标记的方式。 **点击 {button} 区域按钮来添加一个新的区域。**",
                 "start_playground": "让我们用描绘一个区域的方式来添加这个游乐场吧。区域是通过在要素的外部轮廓上放置若干 *节点* 来描绘。 **点击或按空格键，在游乐场的其中一角放置一个起始节点。**",
                 "continue_playground": "继续在游乐场的轮廓上放置更多的节点来绘制该区域。如果遇到既有的人行道，你也可以将区域连接到人行道上。{br}提示：您可以按下{alt}键以防止节点连接到其他要素上。 **继续绘制游乐场区域。**",
                 "finish_playground": "按回车键、或再次点击起始/结束节点来结束绘制该区域。 **完成勾画该游乐场的轮廓。**",
@@ -1117,8 +1130,8 @@
         "units": {
             "feet": "{quantity} ft",
             "miles": "{quantity} mi",
-            "square_feet": "{quantity} sq ft",
-            "square_miles": "{quantity} sq mi",
+            "square_feet": "{quantity} ft²",
+            "square_miles": "{quantity} mi²",
             "acres": "{quantity} ac",
             "meters": "{quantity} m",
             "kilometers": "{quantity} km",
@@ -2514,6 +2527,9 @@
                 },
                 "wheelchair": {
                     "label": "轮椅通道"
+                },
+                "wholesale": {
+                    "label": "批发"
                 },
                 "width": {
                     "label": "宽度 (米)"
@@ -5653,6 +5669,9 @@
                 "shop/weapons": {
                     "name": "武器店",
                     "terms": "武器店"
+                },
+                "shop/wholesale": {
+                    "name": "批发市场"
                 },
                 "shop/window_blind": {
                     "name": "百叶窗店",

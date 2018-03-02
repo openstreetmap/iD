@@ -27,7 +27,7 @@
                 "tail": "Klicke, um weitere Knoten zur Linie hinzuzufügen. Klicke auf eine andere Linie, um die Linien zu verbinden und klicke doppelt, um die Linie fertigzustellen."
             },
             "drag_node": {
-                "connected_to_hidden": "Dieses Objekt kann nicht bearbeitet werden, da es mit einem versteckten Objekt verbunden ist."
+                "connected_to_hidden": "Dieses Objekt kann nicht bearbeitet werden, weil es mit einem versteckten Objekt verbunden ist."
             }
         },
         "operations": {
@@ -75,9 +75,9 @@
                     "line": "Eine Linie kreisförmig gemacht.",
                     "area": "Eine Fläche kreisförmig gemacht."
                 },
-                "not_closed": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es nicht geschlossen ist.",
-                "too_large": "Dieses Objekt kann nicht kreisförmig gemacht werden, da zu wenig davon sichtbar ist.",
-                "connected_to_hidden": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es mit einem versteckten Objekt verbunden ist."
+                "not_closed": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil es nicht geschlossen ist.",
+                "too_large": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil zu wenig davon sichtbar ist.",
+                "connected_to_hidden": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil es mit einem versteckten Objekt verbunden ist."
             },
             "orthogonalize": {
                 "title": "Rechtwinklig machen",
@@ -90,8 +90,8 @@
                     "line": "Ecken der Linie rechtwinklig gemacht.",
                     "area": "Ecken der Fläche rechtwinklig gemacht."
                 },
-                "not_squarish": "Dieses Objekt kann nicht rechtwinklig gemacht werden, da es nicht annähernd rechtwinklig ist.",
-                "too_large": "Dieses Objekt kann nicht quadratisch werden, da zu wenig davon sichtbar ist.",
+                "not_squarish": "Dieses Objekt kann nicht rechtwinklig gemacht werden, weil es nicht annähernd rechtwinklig ist.",
+                "too_large": "Dieses Objekt kann nicht quadratisch werden, weil zu wenig davon sichtbar ist.",
                 "connected_to_hidden": "Dieses Objekt kann nicht rechtwinklig gemacht werden, weil es mit einem versteckten Objekt verbunden ist."
             },
             "straighten": {
@@ -99,8 +99,8 @@
                 "description": "Diese Linie begradigen.",
                 "key": "S",
                 "annotation": "Linie begradigt.",
-                "too_bendy": "Dieses Objekt kann nicht begradigt werden, da es zu kurvig ist.",
-                "connected_to_hidden": "Dieses Objekt kann nicht begradigt werden, da es mit einem versteckten Objekt verbunden ist."
+                "too_bendy": "Dieses Objekt kann nicht begradigt werden, weil es zu kurvig ist.",
+                "connected_to_hidden": "Dieses Objekt kann nicht begradigt werden, weil es mit einem versteckten Objekt verbunden ist."
             },
             "delete": {
                 "title": "Löschen",
@@ -117,20 +117,20 @@
                     "multiple": "{n} Objekte gelöscht."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht gelöscht werden, da zu wenig davon sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht gelöscht werden, da momentan nicht genug davon sichtbar ist."
+                    "single": "Dieses Objekt kann nicht gelöscht werden, weil zu wenig davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht gelöscht werden, weil zu wenig davon sichtbar ist."
                 },
                 "incomplete_relation": {
-                    "single": "Dieses Objekt kann nicht gelöscht werden, da es nicht vollständig heruntergeladen wurde.",
-                    "multiple": "Diese Objekte können nicht gelöscht werden, da sie nicht vollständig heruntergeladen wurden."
+                    "single": "Dieses Objekt kann nicht gelöscht werden, weil es nicht vollständig heruntergeladen wurde.",
+                    "multiple": "Diese Objekte können nicht gelöscht werden, weil sie nicht vollständig heruntergeladen wurden."
                 },
                 "part_of_relation": {
-                    "single": "Dieses Objekt kann nicht gelöscht werden, da es Mitglied einer größeren Relation ist. Du musst es zuerst aus der Relation entfernen.",
-                    "multiple": "Diese Objekte können nicht gelöscht werden, da sie Mitglied einer größeren Relation sind. Du musst sie zuerst aus der Relation entfernen."
+                    "single": "Dieses Objekt kann nicht gelöscht werden, weil es Mitglied einer größeren Relation ist. Du musst es zuerst aus der Relation entfernen.",
+                    "multiple": "Diese Objekte können nicht gelöscht werden, weil sie Mitglieder einer größeren Relation sind. Du musst sie zuerst aus der Relation entfernen."
                 },
                 "connected_to_hidden": {
-                    "single": "Dieses Objekt kann nicht gelöscht werden, da es mit einem versteckten Objekt verbunden ist.",
-                    "multiple": "Diese Objekte können nicht gelöscht werden, da sie mit versteckten Objekten verbunden sind."
+                    "single": "Dieses Objekt kann nicht gelöscht werden, weil es mit einem versteckten Objekt verbunden ist.",
+                    "multiple": "Diese Objekte können nicht gelöscht werden, weil sie mit versteckten Objekten verbunden sind."
                 }
             },
             "add_member": {
@@ -153,8 +153,8 @@
                 "key": "D",
                 "annotation": "Linien/Flächen getrennt.",
                 "not_connected": "Es gibt hier nicht genug Linien/Flächen, um diese zu trennen.",
-                "connected_to_hidden": "Dieses Objekt kann nicht getrennt werden, da es mit einem versteckten Objekt verbunden ist.",
-                "relation": "Dies kann nicht getrennt werden, da es Mitglieder einer Relation verbindet."
+                "connected_to_hidden": "Dieses Objekt kann nicht getrennt werden, weil es mit einem versteckten Objekt verbunden ist.",
+                "relation": "Dies kann nicht getrennt werden, weil es Mitglieder einer Relation verbindet."
             },
             "merge": {
                 "title": "Vereinigen",
@@ -162,9 +162,9 @@
                 "key": "C",
                 "annotation": "{n} Objekte wurden vereinigt.",
                 "not_eligible": "Diese Objekte können nicht vereinigt werden.",
-                "not_adjacent": "Diese Objekte können nicht vereinigt werden, da ihre Endpunkte nicht verbunden sind.",
+                "not_adjacent": "Diese Objekte können nicht vereinigt werden, weil ihre Endpunkte nicht verbunden sind.",
                 "restriction": "Diese Objekte können nicht vereinigt werden, weil zumindest ein Objekt Mitglied der '{relation}' Relation ist.",
-                "incomplete_relation": "Diese Objekte können nicht zusammengefügt werden, da mindestens eines noch nicht vollständig heruntergeladen wurde.",
+                "incomplete_relation": "Diese Objekte können nicht zusammengefügt werden, weil mindestens eines noch nicht vollständig heruntergeladen wurde.",
                 "conflicting_tags": "Diese Objekte können nicht vereinigt werden, weil es Eigenschaften mit widersprechenden Werten gibt."
             },
             "move": {
@@ -182,16 +182,16 @@
                     "multiple": "Mehrere Objekte verschoben."
                 },
                 "incomplete_relation": {
-                    "single": "Dieses Objekt kann nicht verschoben werden, da es nicht vollständig heruntergeladen wurde.",
-                    "multiple": "Diese Objekte können nicht verschoben werden, da sie nicht vollständig heruntergeladen wurden."
+                    "single": "Dieses Objekt kann nicht verschoben werden, weil es nicht vollständig heruntergeladen wurde.",
+                    "multiple": "Diese Objekte können nicht verschoben werden, weil sie nicht vollständig heruntergeladen wurden."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht bewegt werden, da momentan nicht genug davon sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht bewegt werden, da momentan nicht genug davon sichtbar ist."
+                    "single": "Dieses Objekt kann nicht bewegt werden, weil momentan nicht genug davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht bewegt werden, weil momentan nicht genug davon sichtbar ist."
                 },
                 "connected_to_hidden": {
-                    "single": "Dieses Objekt kann nicht verschoben werden, da es mit einem versteckten Objekt verbunden ist.",
-                    "multiple": "Diese Objekte können nicht verschoben werden, da sie mit einem versteckten Objekt verbunden sind."
+                    "single": "Dieses Objekt kann nicht verschoben werden, weil es mit einem versteckten Objekt verbunden ist.",
+                    "multiple": "Diese Objekte können nicht verschoben werden, weil sie mit einem versteckten Objekt verbunden sind."
                 }
             },
             "reflect": {
@@ -224,16 +224,16 @@
                     }
                 },
                 "incomplete_relation": {
-                    "single": "Dieses Objekt kann nicht gespiegelt werden, da es nicht vollständig heruntergeladen wurde.",
-                    "multiple": "Diese Objekte können nicht gespiegelt werden, da sie nicht vollständig heruntergeladen wurden."
+                    "single": "Dieses Objekt kann nicht gespiegelt werden, weil es nicht vollständig heruntergeladen wurde.",
+                    "multiple": "Diese Objekte können nicht gespiegelt werden, weil sie nicht vollständig heruntergeladen wurden."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht gespiegelt werden, da momentan nicht genug davon sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht gespiegelt werden, da momentan nicht genug davon sichtbar sind."
+                    "single": "Dieses Objekt kann nicht gespiegelt werden, weil momentan nicht genug davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht gespiegelt werden, weil momentan nicht genug davon sichtbar ist."
                 },
                 "connected_to_hidden": {
-                    "single": "Dieses Objekt kann nicht gespiegelt werden, da es mit einem versteckten Objekt verbunden ist.",
-                    "multiple": "Diese Objekte können nicht gespiegelt werden, da sie mit versteckten Objekten verbunden sind."
+                    "single": "Dieses Objekt kann nicht gespiegelt werden, weil es mit einem versteckten Objekt verbunden ist.",
+                    "multiple": "Diese Objekte können nicht gespiegelt werden, weil sie mit versteckten Objekten verbunden sind."
                 }
             },
             "rotate": {
@@ -249,16 +249,16 @@
                     "multiple": "Mehrere Objekte gedreht."
                 },
                 "incomplete_relation": {
-                    "single": "Dieses Objekt kann nicht gedreht werden, da es nicht vollständig heruntergeladen wurde.",
-                    "multiple": "Diese Objekte können nicht gedreht werden, da sie nicht vollständig heruntergeladen wurden."
+                    "single": "Dieses Objekt kann nicht gedreht werden, weil es nicht vollständig heruntergeladen wurde.",
+                    "multiple": "Diese Objekte können nicht gedreht werden, weil sie nicht vollständig heruntergeladen wurden."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht gedreht werden, da momentan nicht genug davon sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht gedreht werden, da momentan nicht genug davon sichtbar sind."
+                    "single": "Dieses Objekt kann nicht gedreht werden, weil momentan nicht genug davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht gedreht werden, weil momentan nicht genug davon sichtbar ist."
                 },
                 "connected_to_hidden": {
-                    "single": "Dieses Objekt kann nicht gedreht werden, da es mit einem versteckten Objekt verbunden ist.",
-                    "multiple": "Diese Objekte können nicht gedreht werden, da sie mit einem versteckten Objekt verbunden sind."
+                    "single": "Dieses Objekt kann nicht gedreht werden, weil es mit einem versteckten Objekt verbunden ist.",
+                    "multiple": "Diese Objekte können nicht gedreht werden, weil sie mit einem versteckten Objekt verbunden sind."
                 }
             },
             "reverse": {
@@ -282,19 +282,49 @@
                 },
                 "not_eligible": "Linien können nicht am Anfang oder Ende geteilt werden.",
                 "multiple_ways": "Es gibt hier zu viele Linien, um diese teilen zu können.",
-                "connected_to_hidden": "Dieses Objekt kann nicht geteilt werden, da es mit einem versteckten Objekt verbunden ist."
+                "connected_to_hidden": "Dieses Objekt kann nicht geteilt werden, weil es mit einem versteckten Objekt verbunden ist."
             },
             "restriction": {
-                "help": {
-                    "select": "Klicke, um ein Wegsegment auszuwählen.",
-                    "toggle": "Klicke, um die Abbiegebeschränkung umzudrehen.",
-                    "toggle_on": "Klicke, um eine „{restriction}“-Einschränkung hinzuzufügen.",
-                    "toggle_off": "Klicke, um die „{restriction}“-Einschränkung zu löschen."
-                },
                 "annotation": {
                     "create": "Abbiegebeschränkung hinzugefügt",
                     "delete": "Abbiegebeschränkung gelöscht"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Entfernung",
+                "distance_up_to": "Bis zu {distance}",
+                "via": "Über",
+                "via_node_only": "Nur ein Knoten",
+                "via_up_to_one": "Nur ein Weg",
+                "via_up_to_two": "maximal zwei Wege"
+            },
+            "help": {
+                "indirect": "(indirekt)",
+                "turn": {
+                    "no_left_turn": "KEIN Linksabbiegen {indirect}",
+                    "no_right_turn": "KEIN Rechtsabbiegen {indirect}",
+                    "no_u_turn": "Keine Kehrtwende {indirect}",
+                    "no_straight_on": "Nicht  Geradeaus {indirect}",
+                    "only_left_turn": "NUR Linksabbiegen {indirect}",
+                    "only_right_turn": "NUR Rechtsabbiegen {indirect}",
+                    "only_u_turn": "NUR Kehrtwende {indirect}",
+                    "only_straight_on": "NUR Geradeaus {indirect}",
+                    "allowed_left_turn": "Linksabbiegen erlaubt {indirect}",
+                    "allowed_right_turn": "Rechtsabbiegen erlaubt {indirect}",
+                    "allowed_u_turn": "Kehrtwende erlaubt {indirect}",
+                    "allowed_straight_on": "Geradeaus erlaubt {indirect}"
+                },
+                "from": "VON",
+                "via": "ÜBER",
+                "to": "NACH",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Klicke zur Auswahl einer {from} Straße",
+                "select_from_name": "Klicke zur Auswahl {from} {fromName}",
+                "toggle": "Klicke für \"{turn}\""
             }
         },
         "undo": {
@@ -501,7 +531,7 @@
             },
             "fill_area": "Flächenfüllung",
             "map_features": "Karten-Objekte",
-            "autohidden": "Diese Objekte wurden automatisch versteckt, da zu viele auf dem Bildschirm angezeigt würden. Du kannst zum Bearbeiten hinein zoomen.",
+            "autohidden": "Diese Objekte wurden automatisch versteckt, weil zu viele auf dem Bildschirm angezeigt würden. Du kannst zum Bearbeiten hinein zoomen.",
             "osmhidden": "Diese Objekte wurden automatisch versteckt, weil die OpenStreetMap Ebene versteckt ist."
         },
         "feature": {
@@ -562,7 +592,7 @@
             },
             "partial": {
                 "description": "Teilweise Füllung",
-                "tooltip": "Flächen werden nur am Rand innen gefüllt (Empfohlen für Anfänger)"
+                "tooltip": "Flächen werden nur am Rand innen gefüllt (Empfohlen für Anfänger)."
             },
             "full": {
                 "description": "Volle Füllung",
@@ -655,7 +685,7 @@
             "untagged_area_tooltip": "Wähle einen Objekttyp aus, der diese Fläche beschreibt.",
             "untagged_relation": "Relation ohne Eigenschaft",
             "untagged_relation_tooltip": "Wähle einen Objekttyp aus, der diese Relation beschreibt.",
-            "many_deletions": "Du willst {n} Objekte löschen: {p} Knoten, {l} Linien, {a} Fächen und {r} Relationen. Bist du sicher, dass du das möchtest? Damit werden alle diese Objekte aus der Karte entfernt, die alle anderen auf openstreetmap.org sehen.",
+            "many_deletions": "Du willst {n} Objekte löschen: {p} Knoten, {l} Linien, {a} Flächen und {r} Relationen. Bist du sicher, dass du das möchtest? Damit werden alle diese Objekte aus der Karte entfernt, die alle Anderen auf openstreetmap.org sehen.",
             "tag_suggests_area": "Die Eigenschaft {tag} legt nahe, dass die Linie eine Fläche sein sollte, es ist aber keine Fläche",
             "deprecated_tags": "Veraltete Eigenschaften: {tags}"
         },
@@ -667,7 +697,7 @@
         "full_screen": "Vollbildmodus ein-/ausschalten",
         "gpx": {
             "local_layer": "Lokale Datei",
-            "drag_drop": "Zieh eine .gpx, .geojson, oder .kml Datei per Drag & Drop auf die Seite oder klicke den Knopf rechts, um nach Dateien zu suchen",
+            "drag_drop": "Zieh eine .gpx, .geojson oder .kml Datei per Drag & Drop auf die Seite oder klicke den Knopf rechts, um nach Dateien zu suchen",
             "zoom": "GPS-Track anzeigen",
             "browse": "Eine Datei laden"
         },
@@ -698,7 +728,7 @@
                 "open_data_h": "Open Data",
                 "open_data": "Deine Änderungen auf dieser Karte werden für alle Nutzer von OpenStreetMap sichtbar. Du kannst Ortskenntnis, Vor-Ort-Erhebung oder Bildmaterial von Luftaufnahmen und Straßenfotos als Grundlage für deine Bearbeitungen verwenden. Kopieren von kommerziellen Quellen wie Google [ist streng verboten](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Bevor du anfängst",
-                "before_start": "Du solltest mit OpenStreetMap und diesem Editor vertraut sein, bevor du mit dem Bearbeiten anfängst. iD hat einen Rundgang mit dem du die Grundlagen des OpenStreetMap-Bearbeiten lernen kannst. Klicke \"Rundgang starten\" um das Lernprogramm zu starten - es dauert nur etwa 15 Minuten.",
+                "before_start": "Du solltest mit OpenStreetMap und diesem Editor vertraut sein, bevor du mit dem Bearbeiten anfängst. iD hat einen Rundgang mit dem du die Grundlagen des OpenStreetMap-Bearbeitens lernen kannst. Klicke \"Rundgang starten\" um das Lernprogramm zu starten - es dauert nur etwa 15 Minuten.",
                 "open_source_h": "Open Source",
                 "open_source": "Der iD Editor ist ein quelloffenes Gemeinschaftsprojekt und du benutzt gerade Version {version}. Der Quellcode ist [auf GitHub](https://github.com/openstreetmap/iD) verfügbar.",
                 "open_source_help": "Du kannst iD durch [Übersetzungen](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) oder [Fehlermeldungen](https://github.com/openstreetmap/iD/issues) unterstützen."
@@ -707,7 +737,7 @@
                 "title": "Überblick",
                 "navigation_h": "Navigation",
                 "navigation_drag": "Du kannst die Karte durch Drücken und Halten der {leftclick} linken Maustaste und Bewegen der Maus verschieben. Du kannst auch die  `↓`, `↑`, `←`, `→` Pfeiltasten auf deiner Tastatur benutzen.",
-                "navigation_zoom": "Du kannst durch Drehen am Mausrad oder am Trackpad oder durch Klicken der  {plus} / {minus} Knöpfe rechts oben neben der Karte hinein oder heraus zoomen. Du kannst auch die `+`, `-` Tasten auf der Tastatur benutzen.",
+                "navigation_zoom": "Du kannst durch Scrollen am Mausrad oder am Touchpad oder durch Klicken der  {plus} / {minus} Knöpfe rechts oben neben der Karte hinein oder heraus zoomen. Du kannst auch die `+`, `-` Tasten auf der Tastatur benutzen.",
                 "features_h": "Karten-Objekte",
                 "features": "Wir benutzen das Wort *Objekte* um die Dinge zu beschreiben die auf der Karte erscheinen, beispielsweise Straßen, Gebäude oder Sehenswürdigkeiten. Alles in der echten Welt kann als ein Objekt in OpenStreetMap abgebildet  werden. Objekte werden auf der Karte als *Punkte*, *Linien* oder *Flächen* dargestellt.",
                 "nodes_ways": "In OpenStreetMap werden Punkte manchmal *Knoten* genannt, Linien und Flächen werden manchmal *Wege* genannt."
@@ -718,13 +748,13 @@
                 "select_left_click": "{leftclick} Linksklicke ein Objekt um es auszuwählen. Dadurch wird es mit einem pulsierenden Schimmer hervorgehoben und links im *Objekteditor* werden Details des Objekts wie Name oder Adresse angezeigt.",
                 "select_right_click": "{rightclick} Rechtsklicke ein Objekt um das *Bearbeitungs-Menü* zu sehen, welches dir die verfügbaren Befehle wie Drehen, Bewegen oder Löschen zeigt.",
                 "multiselect_h": "Mehrfachauswahl",
-                "multiselect_shift_click": "`{shift}`+{leftclick} Linksklick kann mehrere Objekte gemeinsam auswählen. Damit können diese leicht gemeinsam verschoben, gefreht oder gelöscht werden.",
+                "multiselect_shift_click": "`{shift}`+{leftclick} Linksklick kann mehrere Objekte gemeinsam auswählen. Damit können diese leicht gemeinsam verschoben, gedreht oder gelöscht werden.",
                 "multiselect_lasso": "Eine andere Möglichkeit mehrere Objekte gemeinsam auszuwählen ist die `{shift}` Taste zu halten, dann den {leftclick} linken Mausknopf festzuhalten und mit der Maus ein Auswahl-Lasso um die Objekte zu ziehen. Alle Punkte innerhalb des Auswahl-Lasso werden ausgewählt.",
                 "undo_redo_h": "Rückgängig & Wiederherstellen",
                 "undo_redo": "Deine Bearbeitungen werden lokal in deinem Web Browser gespeichert bis du diese auf dem OpenStreetMap Server speicherst. Du kannst Bearbeitungen durch Klicken des {undo} **Rückgängig** Knopf rückgängig machen und durch Klicken des {redo} **Wiederherstellen** Knopf wiederherstellen.",
                 "save_h": "Speichern",
                 "save": "Klicke {save} **Speichern** um deine Bearbeitungen zu beenden und auf dem OpenStreetMap Server zu speichern. Bitte denk daran, deine Arbeit häufig zu speichern!",
-                "save_validation": "Beim Speichern kannst du überprüfen, was du gerade bearbeitet hast. iD macht einfache Prüfungen auf fehlende Daten und kann hilfreiche Vorschäge und Warnungen anzeigen, wenn etwas nicht richtig erscheint.",
+                "save_validation": "Beim Speichern kannst du überprüfen, was du gerade bearbeitet hast. iD macht einfache Prüfungen auf fehlende Daten und kann hilfreiche Vorschläge und Warnungen anzeigen, wenn etwas nicht richtig erscheint.",
                 "upload_h": "Hochladen",
                 "upload": "Vor dem Hochladen deiner Änderungen musst du einen [Änderungssatz-Kommentar](https://wiki.openstreetmap.org/wiki/DE:Good_changeset_comments) eingeben. Dann klickst du **Upload** um deine Änderungen an OpenStreetMap zu schicken, wo sie in die Karte aufgenommen und öffentlich für alle sichtbar werden.",
                 "backups_h": "Automatische Sicherungen",
@@ -767,12 +797,12 @@
                 "add_line_draw": "Dann bewege den Mauszeiger dorthin, wo die Linie beginnen soll und {leftclick} linksklicke oder drücke die `Leertaste` um den ersten Knoten der Linie zu platzieren. Zeichne weitere Knoten durch Klicken oder Drücken der `Leertaste`. Während des Zeichnens kannst du die Karte verschieben oder hinein zoomen, um mehr Details hinzuzufügen.",
                 "add_line_finish": "Um eine Linie zu beenden drücke `{return}` oder klicke nochmals auf den letzten Knoten.",
                 "modify_line_h": "Linien verändern",
-                "modify_line_dragnode": "Häufig siehst du Linien die nicht genau gezeichnet sind, beispielweise eine Straße, die nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Linie azupassen wählst du sie mit {leftclick} linksklick aus. Alle Knoten der Linie werden als kleine Kreise gezeichnet. Du kannst die Knoten an die richtigen Stellen verschieben.",
+                "modify_line_dragnode": "Häufig siehst du Linien die nicht genau gezeichnet sind, beispielweise eine Straße, die nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Linie anzupassen wählst du sie mit {leftclick} linksklick aus. Alle Knoten der Linie werden als kleine Kreise gezeichnet. Du kannst die Knoten an die richtigen Stellen verschieben.",
                 "modify_line_addnode": "Du kannst neue Knoten in einer Linie auch durch {leftclick}**x2** Doppelklicken auf die Linie oder durch Ziehen der kleinen Dreiecke in der Mitte zwischen zwei Knoten erzeugen.",
                 "connect_line_h": "Linien verbinden",
                 "connect_line": "Die Verbindung von Straßen ist wichtig für die Karte und notwendig für die Navigation.",
                 "connect_line_display": "Die Verbindungen von Straßen werden mit kleinen grauen Kreisen gezeichnet. Die Endpunkte von Linien werden mit größeren weisen Kreise gezeichnet, wenn sie nicht mit anderen Objekten verbunden sind.",
-                "connect_line_drag": "Um eine Linie mit einem anderen Objekt zu verbinden, ziehe einen Knoten der Linie auf das andere Objekt bis beide Objekte verbunden sind. Tip: Du kannst verhindern, dass Knoten mit anderen Objekten verbunden werden, indem du die `{alt}` Taste beim Verschieben gedrückt hältst.",
+                "connect_line_drag": "Um eine Linie mit einem anderen Objekt zu verbinden, ziehe einen Knoten der Linie auf das andere Objekt bis beide Objekte verbunden sind. Tipp: Du kannst verhindern, dass Knoten mit anderen Objekten verbunden werden, indem du die `{alt}` Taste beim Verschieben gedrückt hältst.",
                 "connect_line_tag": "Wenn du weißt, dass die Kreuzung eine Ampel oder einen Zebrastreifen hat, kannst du diese erfassen, indem du den Knoten an der Kreuzung auswählst und dann im Objekteditor den richtigen Objekttyp auswählst.",
                 "disconnect_line_h": "Linien trennen",
                 "disconnect_line_command": "Um eine Straße von einem anderen Objekt zu trennen {rightclick} rechtsklicke auf den Verbindungsknoten und benutze den {disconnect} **Trennen** Befehl aus dem Bearbeitungsmenü.",
@@ -795,7 +825,7 @@
                 "square_area_h": "Ecken rechtwinklig machen",
                 "square_area_command": "Viele Gebäude und andere Flächen haben rechtwinklige Ecken. Um die Ecken rechtwinklig zu machen, {rightclick} rechtsklicke auf den Rand der Fläche um sie auszuwählen und das Bearbeitungsmenü anzuzeigen und benutze den {orthogonalize} **Rechtwinklig machen** Befehl.",
                 "modify_area_h": "Flächen verändern",
-                "modify_area_dragnode": "Häufig siehst du Flächen die nicht genau gezeichnet sind, beispielweise ein Gebäude, das nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Fläche azupassen wählst du sie mit {leftclick} linksklick aus. Alle Knoten der Fläche werden als kleine Kreise gezeichnet. Du kannst die Knoten an die richtigen Stellen verschieben.",
+                "modify_area_dragnode": "Häufig siehst du Flächen die nicht genau gezeichnet sind, beispielweise ein Gebäude, das nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Fläche anzupassen wählst du sie mit {leftclick} linksklick aus. Alle Knoten der Fläche werden als kleine Kreise gezeichnet. Du kannst die Knoten an die richtigen Stellen verschieben.",
                 "modify_area_addnode": "Du kannst neue Knoten in einer Fläche auch durch {leftclick}**x2** Doppelklicken am Rand der Fläche oder durch Ziehen der kleinen Dreiecke in der Mitte zwischen zwei Knoten erzeugen.",
                 "delete_area_h": "Flächen löschen",
                 "delete_area": "Wenn eine Fläche als Ganzes unrichtig ist, beispielsweise ein Gebäude in der echten Welt nicht existiert, kannst du es löschen. Sei beim Löschen von Objekten vorsichtig: Das von dir benutzte Hintergrund-Bildmaterial kann veraltet sein und das Gebäude, welches falsch aussieht, könnte einfach neu gebaut sein.",
@@ -809,7 +839,7 @@
                 "edit_relation_add": "Um ein Objekt zu einer Relation hinzuzufügen wählst du das Objekt aus, dann klickst du den {plus} Knopf im Bereich \"Alle Relationen\" im Objekteditor. Du kannst in der Liste eine Relation in der Nähe oder \"Neue Relation ...\" auswählen.",
                 "edit_relation_delete": "Du kannst auch den {delete} **Löschen** Knopf klicken, um das ausgewählte Objekt aus der Relationen zu entfernen. Wenn du alle Mitglieder einer Relation entfernst, wird die Relation automatisch gelöscht.",
                 "maintain_relation_h": "Relationen erhalten",
-                "maintain_relation": "Normalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Du solltest aufpassen, wenn du Objekte austauscht, die Mitglieder von Relationen sein können. Wenn du beispielsweise einen Straßenabschnitt löschst und einen neuen Straßenabschnitt zeichnest, um ihn zu ersetzen, solltest du den neuen Straßenabschnitt denselben Relationen (Routen, Abbiegebeschränkungen usw.) zuweisen, in denen der gelöschte Straßenabschnitt war.",
+                "maintain_relation": "Normalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Du solltest aufpassen, wenn du Objekte austauschst, die Mitglieder von Relationen sein können. Wenn du beispielsweise einen Straßenabschnitt löschst und einen neuen Straßenabschnitt zeichnest, um ihn zu ersetzen, solltest du den neuen Straßenabschnitt denselben Relationen (Routen, Abbiegebeschränkungen usw.) zuweisen, in denen der gelöschte Straßenabschnitt war.",
                 "relation_types_h": "Typen von Relationen",
                 "multipolygon_h": "Multipolygone",
                 "multipolygon": "Eine Relation vom Typ *Multipolygon* ist eine Gruppe von einem oder mehreren *äußeren* Objekten und einem oder mehreren *inneren* Objekten. Die äußeren Objekte beschreiben den äußeren Rand des Multipolygons, die inneren Objekte beschreiben Teilflächen oder Löcher, die aus dem Multipolygon herausgeschnitten sind.",
@@ -821,10 +851,10 @@
                 "turn_restriction_editing": "Im Feld \"Abbiegebeschränkungen\" wähle eine \"von\" Straße durch Klicken aus, dann siehst du ob Abbiegen zu allen \"nach\" Straßen erlaubt oder verboten ist. Du kannst das Abbiege-Symbol anklicken um zwischen erlaubt und verboten umzuschalten. iD wird die Relationen automatisch erzeugen und die Rollen \"von\", \"via\" und \"nach\" entsprechend deiner Auswahl vergeben.",
                 "route_h": "Routen",
                 "route": "Eine Relation des Typ *Route* fasst eine oder mehrere Linien zusammen, die gemeinsam ein Streckennetz wie eine Busstrecke, eine Zugstrecke oder eine Autobahnstrecke bilden.",
-                "route_add": "Um ein Objekt zu einer Route hinzuzufügen, wähle das Objekt aus und gehe im Objekteditor nach unten zum Bereich \"Alle Relationen\", klicke den {plus} Knopf um dieses Objekt einer nahe gelegenen Relation oder einer neuen Relation hinzuzufügen.",
+                "route_add": "Um ein Objekt zu einer Route hinzuzufügen, wähle das Objekt aus und scrolle im Objekteditor nach unten zum Bereich \"Alle Relationen\", klicke den {plus} Knopf um dieses Objekt einer nahe gelegenen Relation oder einer neuen Relation hinzuzufügen.",
                 "boundary_h": "Grenzen",
                 "boundary": "Eine Relation vom Typ *Grenze* fasst eine oder mehrere Linien zusammen, die gemeinsam eine Verwaltungsgrenze bilden.",
-                "boundary_add": "Um ein Objekt zu einer Grenze hinzuzufügen, wähle das Objekt aus und gehe im Objekteditor nach unten zum Bereich \"Alle Relationen\", klicke den {plus} Knopf um dieses Objekt einer nahe gelegenen Relation oder einer neuen Relation hinzuzufügen."
+                "boundary_add": "Um ein Objekt zu einer Grenze hinzuzufügen, wähle das Objekt aus und scrolle im Objekteditor nach unten zum Bereich \"Alle Relationen\", klicke den {plus} Knopf um dieses Objekt einer nahe gelegenen Relation oder einer neuen Relation hinzuzufügen."
             },
             "imagery": {
                 "title": "Hintergrund-Bildmaterial",
@@ -842,16 +872,54 @@
                 "using_h": "Straßenfotos benutzen",
                 "using": "Um Straßenfotos beim Bearbeiten zu benutzen klicke den {data} **Kartendaten** Knopf auf der rechten Seite der Karte zum Einschalten oder Ausschalten der verfügbaren Bildquellen.",
                 "photos": "Wenn die Straßenfotos eingeschaltet sind, wird eine Linie entlang der Fotosequenz angezeigt. Bei höheren Zoomstufen zeigt ein Kreis jede Fotoposition an und bei noch höheren Zoomstufen zeigt ein Kegel die Richtung der Kamera während der Aufnahme an.",
-                "viewer": "Wenn du auf eine Fotoposition klickst erscheint die Fotoanzeige in der linken unteren Ecke der Karte. Die Fotoanzeige enthalt Kontroll-Knöpfe um vorwärts und rückwärts springen zu können. Es zeigt auch den Benutzernanen der Person, die das Foto erstellt hat, wann das Foto erstellt wurde und einen Link, um das Foto auf der Originalseite zu sehen."
+                "viewer": "Wenn du auf eine Fotoposition klickst erscheint die Fotoanzeige in der linken unteren Ecke der Karte. Die Fotoanzeige enthalt Kontroll-Knöpfe um vorwärts und rückwärts springen zu können. Es zeigt auch den Benutzernamen der Person, die das Foto erstellt hat, wann das Foto erstellt wurde und einen Link, um das Foto auf der Originalseite zu sehen."
             },
             "gps": {
                 "title": "GPS Tracks",
-                "intro": "GPS Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale *.gpx*, *.geojson*, and *.kml* Dateien auf deinem Computer. Du kannst GPS Tracks mit einem Smartphone, einer Sportuhr oder mit anderen GPS-Geräten aufnehmen.",
+                "intro": "GPS Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale *.gpx*, *.geojson* und *.kml* Dateien auf deinem Computer. Du kannst GPS Tracks mit einem Smartphone, einer Sportuhr oder mit anderen GPS-Geräten aufnehmen.",
                 "survey": "Für Informationen über das Aufzeichnen von GPS-Daten kannst du dir folgende Anleitung zur [Kartierung mit Smartphone, GPS oder Field Paper](http://learnosm.org/de/mobile-mapping/) durchlesen.",
                 "using_h": "GPS Tracks verwenden",
                 "using": "Um einen GPS Track zum Bearbeiten zu verwenden, ziehe ihn einfach auf die Karte. Wenn er erkannt wurde, wird er als helle lila Linie auf der Karte dargestellt. Klicke auf den {data} **Kartendaten** Knopf rechts, um die neue Ebene mit dem Track zu aktivieren/deaktivieren oder den GPS-Track auf der Karte anzuzeigen.",
                 "tracing": "Der GPS Track wird nicht zu OpenStreetMap hochgeladen. Am besten verwendest du ihn als Orientierung um neue Objekte zu zeichnen.",
                 "upload": "Du kannst auch [deine GPS Tracks zu OpenStreetMap hochladen](https://www.openstreetmap.org/trace/create) damit sie von anderen Benutzern verwendet werden können."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Abbiegebeschränkungen Hilfe",
+                    "about": {
+                        "title": "Informationen",
+                        "about": "Dieses Feld erlaubt es Abbiegebeschränkungen zu prüfen und zu ändern. Es zeigt ein Model der ausgewählten Kreuzung, inklusive angrenzender Straßen.",
+                        "from_via_to": "Eine Abbiegebeschränkung beinhaltet immer: einen  **VON Weg**, einen **Nach Weg** und entweder einen **VIA Knoten** oder einen oder mehrere **VIA Wege**.",
+                        "maxdist": "Die \"{distField}\" Schieberegler bestimmen, wie weit nach angrenzenden Straßen gesucht wird.",
+                        "maxvia": "Die \"{viaField}\" Schieberegler bestimmen, wie viele Zwischenwege in die Suche einbezogen werden. (Tipp: Einfacher ist besser)"
+                    },
+                    "inspecting": {
+                        "title": "Überprüfen",
+                        "about": "Bewege die Maus über eine **VON** Straße, um zu sehen, ob sie irgendweche Abbiegebeschränkungen hat. Jede mögliche **NACH** Straße wird mit einem farbigen Schatten dargestellt, der anzeigt, ob eine Beschränkung existiert.",
+                        "from_shadow": "{fromShadow} **VON Straße**",
+                        "allow_shadow": "{allowShadow} **NACH erlaubt**",
+                        "restrict_shadow": "{restrictShadow} **NACH verboten**",
+                        "only_shadow": "{onlyShadow} **nur NACH**",
+                        "restricted": "\"Verboten\" bedeutet, dass eine Abbiegebeschränkung exisiert, z.B. \"Kein Linksabbiegen\".",
+                        "only": "\"Nur\" bedeutet, dass ein Fahrzeug auf diesem Weg nur diese Wahl hat, z.B. \"Nur Geradeaus\"."
+                    },
+                    "modifying": {
+                        "title": "Verändern",
+                        "about": "Um Abbiegebeschränkungen zu ändern, klicke zuerst auf eine **VON** Straße, um sie auszuwählen. Die ausgewählte Straße wird pulsieren und alle möglichen **NACH** Straßen werden als Abbiegesymbole erscheinen.",
+                        "indicators": "Dann klickt man auf ein Abbiegesymbol, um es zwischen \"Erlaubt\", \"Verboten\" und \"Nur\" zu ändern.",
+                        "allow_turn": "{allowTurn} **NACH erlaubt**",
+                        "restrict_turn": "{restrictTurn} **NACH beschränkt**",
+                        "only_turn": "{onlyTurn} **nur NACH**"
+                    },
+                    "tips": {
+                        "title": "Tipps",
+                        "simple": "**Bevorzuge einfache anstatt komplexe Beschränkungen.**",
+                        "simple_example": "Zum Beispiel vermeidet man Beschränkungen \"über Wege\", wenn es eine einfache \"über Knoten\" Abbiegebeschränkung auch tut.",
+                        "indirect": "**Einige Beschränkungen zeigen den Text \"(indirekt)\" an und sind heller gezeichnet.**",
+                        "indirect_example": "Diese Beschränkungen existieren wegen einer anderen Beschränkung in der Nähe. Zum Beispiel werden durch eine \"Nur Geradeaus\" Beschränkung indirekt ür alle anderen Wege über die Kreuzung \"Keine Kehrtwende\" Beschränkungen erstellt.",
+                        "indirect_noedit": "Indirekte Beschränkungen sollte man nicht ändern. Stattdessen sollte man die angrenzende, direkte Beschränkung ändern."
+                    }
+                }
             }
         },
         "intro": {
@@ -988,14 +1056,14 @@
                 "practice": "Alle Daten in diesem Rundgang sind nur zum Üben, deine Bearbeitungen können nicht gespeichert werden.",
                 "words": "Dieser Rundgang wird neue Worte und Konzepte vorstellen. Zur Vorstellung eines neuen Wortes wird *kursiv* benutzt.",
                 "mouse": "Du kannst diese Karte mit jedem Eingabegerät bearbeiten, aber dieser Rundgang nimmt an, dass du eine Maus mit linker und rechter Taste hast. **Wenn du eine Maus anschließen willst, mach das jetzt und klicke dann OK.**",
-                "leftclick": "In diesem Rundgang ist mit Klicken oder Doppelklicken die linke Maustaste gemeint. Auf einem Touchpad ist das ein einfacher Klick oder ein Ein-Finger-Tip. **Klicke {num} mal.**",
-                "rightclick": "Manchmal wird nach einem Rechtsklick gefragt. Das kann dasselbe sein wie Strg-Klick oder einem Zwei-Finger-Tip auf einem Touchpad. Deine Tastatur kann auch eine Menü-Taste haben die wie ein Rechtsklick wirkt. **Rechtsklicke {num} mal.**",
+                "leftclick": "In diesem Rundgang ist mit Klicken oder Doppelklicken die linke Maustaste gemeint. Auf einem Touchpad ist das ein einfacher Klick oder ein Ein-Finger-Tipp. **Klicke {num} mal.**",
+                "rightclick": "Manchmal wird nach einem Rechtsklick gefragt. Das kann dasselbe sein wie Strg-Klick oder einem Zwei-Finger-Tipp auf einem Touchpad. Deine Tastatur kann auch eine Menü-Taste haben die wie ein Rechtsklick wirkt. **Rechtsklicke {num} mal.**",
                 "chapters": "So weit so gut! Du kannst die Knöpfe unten benutzen um Kapitel zu überspringen oder wieder zu beginnen, wenn du nicht weiterkommst. **Klicke '{next}' zum Weitermachen.**"
             },
             "navigation": {
                 "title": "Navigation",
                 "drag": "Der Kartenbereich zeigt die OpenStreetMap Daten über einem Hintergrund.{br}Du kannst die Karte verschieben, drücke und halte dazu die linke Maustaste, während du die Maus verschiebst. Du kannst auch die Pfeiltasten auf der Tastatur benutzen. **Verschiebe die Karte!**",
-                "zoom": "Du kannst durch Drehen am Mausrad oder am Trackpad hinein oder heraus zoomen, du kannst dazu auch die {plus} / {minus} Knöpfe klicken. **Zoome die Karte!**",
+                "zoom": "Du kannst durch Scrollen am Mausrad oder am Touchpad hinein oder heraus zoomen, du kannst dazu auch die {plus} / {minus} Knöpfe klicken. **Zoome die Karte!**",
                 "features": "Wir benutzen das Wort *Objekte* um die Dinge zu beschreiben die auf der Karte angezeigt werden. Alles in der echten Welt kann als ein Objekt in OpenStreetMap abgebildet werden.",
                 "points_lines_areas": "Objekte werden auf der Karte als Punkte, Linien oder Flächen dargestellt.",
                 "nodes_ways": "In OpenStreetMap werden Punkte manchmal *Knoten* genannt, Linien und Flächen werden manchmal *Wege* genannt.",
@@ -1003,7 +1071,7 @@
                 "selected_townhall": "Super! Der Punkt ist jetzt ausgewählt. Ausgewählte Objekte werden mit einem pulsierenden Schimmer gezeichnet.",
                 "editor_townhall": "Wenn ein Objekt ausgewählt ist wird der *Objekteditor* neben der Karte angezeigt.",
                 "preset_townhall": "Der obere Teil des Objekteditors zeigt den Typ des Objekts. Dieser Punkt ist ein {preset}.",
-                "fields_townhall": "Der mittlere Bereich des Objekteditors enthält *Felder* mit den Merkmalen des Objektes wie Name oder Adresse",
+                "fields_townhall": "Der mittlere Bereich des Objekteditors enthält *Felder* mit den Merkmalen des Objektes wie Name oder Adresse.",
                 "close_townhall": "**Schließe den Objekteditor durch Drücken von Escape oder durch Klicken auf {button} Knopf in der oberen Ecke.**",
                 "search_street": "Du kannst Objekte in der aktuellen Kartenansicht oder weltweit suchen. **Suche nach '{name}'.**",
                 "choose_street": "**Wähle {name} aus der Liste.**",
@@ -1032,11 +1100,11 @@
                 "title": "Flächen",
                 "add_playground": "*Flächen* werden benutzt um die Grenzen von Objekten wie Seen, Gebäuden oder Wohngebieten darzustellen.{br}Sie können auch benutzt werden um Objekte, die normalerweise als Punkte gezeichnet werden, genauer darzustellen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
                 "start_playground": "Zeichne diesen Spielplatz als Fläche auf der Karte ein. Flächen werden gezeichnet indem *Knoten* entlang des äußeren Randes des Objekte gezeichnet werden. **Klicke oder drücke die Leertaste um den ersten Knoten an einer Ecke des Spielplatzes zu zeichnen.**",
-                "continue_playground": "Setze das Zeichnen der Fläche fort, indem du Knoten entlang des Randes des Spielplatzes setzt. Es ist okay, wenn du die Fläche mit bestehenden Fußwegen verbindest.{br}Tip: Wenn du die '{alt}' Taste gedrückt hältst, kannst du verhindern, dass die Knoten sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
+                "continue_playground": "Setze das Zeichnen der Fläche fort, indem du Knoten entlang des Randes des Spielplatzes setzt. Es ist okay, wenn du die Fläche mit bestehenden Fußwegen verbindest.{br}Tipp: Wenn du die '{alt}' Taste gedrückt hältst, kannst du verhindern, dass die Knoten sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
                 "finish_playground": "Beende die Fläche durch Drücken von Enter oder nochmal Klicken auf den ersten oder letzten Knoten. **Beende das Zeichnen der Fläche für den Spielplatz.**",
                 "search_playground": "**Suche nach '{preset}'.**",
                 "choose_playground": "**Wähle {preset} aus der Liste.**",
-                "add_field": "Dieser Spielplatz hat keinen offiziellen Namen, daher lassen wir das Namens-Feld frei.{br}Schreibe zusätzliche Details über den Spielplatz in das Beschreibungs-Feld. **Öffne die Liste Feld hinzufügen.**",
+                "add_field": "Dieser Spielplatz hat keinen offiziellen Namen, daher lassen wir das Namensfeld frei.{br}Schreibe zusätzliche Details über den Spielplatz in das Beschreibungs-Feld. **Öffne die Liste Feld hinzufügen.**",
                 "choose_field": "**Wähle {field} aus der Liste.**",
                 "retry_add_field": "Du hast das Feld {field} nicht ausgewählt. Versuche es nochmals.",
                 "describe_playground": "**Füge eine Beschreibung ein, dann klicke auf {button} Knopf um den Objekteditor zu schließen.**",
@@ -1045,7 +1113,7 @@
             "lines": {
                 "title": "Linien",
                 "add_line": "*Linien* werden benutzt um Objekt wie Straßen, Eisenbahnschienen oder Flüsse darzustellen. **Klicke auf {button} Linie um eine neue Linie zu zeichnen.**",
-                "start_line": "Hier gibt es eine Straße die in OpenStreetMap fehlt.{br}Zeichne sie ein! In OpenStreetMap soll die Linie in der Mitte der Straße gezeichnet werden. Du kannst die Karte während des Zeichnen verschieben, wenn das notwendig ist. **Beginne die neue Linie durch Klicken auf das obere Ende der fehlenden Straße.**",
+                "start_line": "Hier gibt es eine Straße die in OpenStreetMap fehlt.{br}Zeichne sie ein! In OpenStreetMap soll die Linie in der Mitte der Straße gezeichnet werden. Du kannst die Karte während des Zeichnens verschieben, wenn das notwendig ist. **Beginne die neue Linie durch Klicken auf das obere Ende der fehlenden Straße.**",
                 "intersect": "Du kannst neue Knoten durch Klicken oder Drücken der Leertaste erzeugen.{br} Straßen und viele andere Typen von Linien sind Teil eines größeren Netzwerks. Es ist wichtig dass diese Linien verbunden sind, damit Routing-Anwendungen funktionieren. **Klicke auf {name} um eine Verbindung zwischen den beiden Linien zu erzeugen.**",
                 "retry_intersect": "Diese Straße soll {name} kreuzen. Versuch es nochmals!",
                 "continue_line": "Setze das Zeichnen der Linie für die neue Straße fort. Du kannst die Karte verschieben, wenn das notwendig ist.{br}Wenn du fertig gezeichnet hast klicke nochmals auf den letzten Knoten. **Beende das Zeichnen der Straße.**",
@@ -1056,16 +1124,16 @@
                 "did_name_road": "Sieht gut aus! Jetzt wirst du lernen, wie die den Zustand einer Linie verbessern kannst.",
                 "update_line": "Manchmal musst du den Zustand einer bestehenden Linie ändern. Hier ist eine Straße die nicht ganz richtig aussieht.",
                 "add_node": "Du kannst weitere Knoten zu einer Linie hinzufügen, um den Zustand einer Linie zu verbessern. Eine Möglichkeit um neue Knoten zu zeichnen ist ein Doppelklick auf die Stelle der Linie, wo der neue Knoten entstehen soll. **Doppelklicke auf die Linie um einen neuen Knoten zu erzeugen.**",
-                "start_drag_endpoint": "Wenn eine Linie ausgewählt ist, kannst du jeden Knoten dieser Linie durch Klicken und Festhalten des linken Mausknopfs verschieben. **Schieb den letzen Knoten der Linie dorthinm wo sich diese Straßen kreuzen sollen.**",
-                "finish_drag_endpoint": "Hier sieht es gut aus. **Lass den Mausknopf aus um das Verschieben zu beenden.**",
+                "start_drag_endpoint": "Wenn eine Linie ausgewählt ist, kannst du jeden Knoten dieser Linie durch Klicken und Festhalten des linken Mausknopfs verschieben. **Schieb den letzten Knoten der Linie dorthin, wo sich diese Straßen kreuzen sollen.**",
+                "finish_drag_endpoint": "Hier sieht es gut aus. **Lass den Mausknopf aus, um das Verschieben zu beenden.**",
                 "start_drag_midpoint": "Kleine Dreiecke werden am *Mittelpunkt* zwischen zwei Knoten angezeigt. Eine weitere Möglichkeit um einen neuen Knoten zu erzeugen ist das Verschieben dieses Mittelpunkts zu einer neuen Lage. **Schiebe den Mittelpunkt und erzeuge damit einen neuen Knoten in der Straßenkurve.**",
                 "continue_drag_midpoint": "Diese Linie sieht viel besser aus! Setze das Anpassen der Linie durch Doppelklicken oder Verschieben von Mittelpunkten fort, bis die Kurve dem Straßenverlauf folgt. **Wenn Dir die Linie gefällt, klicke OK.**",
                 "delete_lines": "Wenn es Straßen in der echten Welt nicht gibt, kannst du die zugehörigen Linien löschen.{br}Hier hat die Stadt eine {street} geplant, aber nie gebaut. Du kannst diesen Teil der Karte verbessern, wenn du die zusätzlichen Linien löschst.",
-                "rightclick_intersection": "Die letzte bestehende Straße ist {street1}, daher wirst du die {street2} an dieser Kreuzung teilen und alles darüber löschen. **Rechtsklicke auf den Kreuzungs-Knoten:**",
+                "rightclick_intersection": "Die letzte bestehende Straße ist {street1}, daher wirst du die {street2} an dieser Kreuzung teilen und alles darüber löschen. **Rechtsklicke auf den Kreuzungs-Knoten.**",
                 "split_intersection": "**Klicke auf {button} Knopf um die {street} zu teilen.**",
                 "retry_split": "Du hast den Teilen-Knopf nicht gedrückt. Versuch es nochmals.",
                 "did_split_multi": "Gut gemacht! Die {street1} ist jetzt in zwei Teile geteilt, der obere Teil kann gelöscht werden. **Klicke den oberen Teil der {street2} zum Auswählen an.**",
-                "did_split_single": "**Klicke den oberen Teil von {street2} zum auswählen.**",
+                "did_split_single": "**Klicke den oberen Teil von {street2} zum Auswählen.**",
                 "multi_select": "Die {selected} ist jetzt ausgewählt. Wähle zusätzlich die {other1} aus. Du kannst Shift-Klicken um mehrere Objekte zu wählen. **Shift-Klicke auf die {other2}.**",
                 "multi_rightclick": "Gut! Beide zu löschenden Linien sind jetzt ausgewählt. **Rechtsklicke auf eine der beiden Linien um das Bearbeitungs-Menü zu zeigen.**",
                 "multi_delete": "**Klicke auf {button} Knopf um die zusätzlichen Linien zu löschen.**",
@@ -1084,7 +1152,7 @@
                 "rightclick_building": "**Rechtsklicke das gerade erzeugte Gebäude um es auszuwählen und zeige das Bearbeitungs-Menü.**",
                 "square_building": "Das gerade gezeichnete Haus sieht besser aus, wenn es perfekt rechtwinklige Ecken hat. **Klicke auf {button} Knopf um die Gebäudeecken rechtwinklig zu machen.**",
                 "retry_square": "Du hast nicht den Rechtwinklig-Machen-Knopf geklickt. Versuch es noch einmal.",
-                "done_square": "Siehst du wie die Ecken des Gebäude auf die richtige Stelle rücken? Lass uns einen weiteren nützlichen Trick lernen.",
+                "done_square": "Siehst du wie die Ecken des Gebäudes auf die richtige Stelle rücken? Lass uns einen weiteren nützlichen Trick lernen.",
                 "add_tank": "Als Nächstes wirst du einen kreisrunden Tank zeichnen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
                 "start_tank": "Du musst keinen perfekten Kreis zeichnen. Zeichne einfach eine Fläche innerhalb des Tanks die seinen Rand berührt. **Klicke oder drücke die Leertaste um den ersten Knoten an Rand des Tanks zu zeichnen.**",
                 "continue_tank": "Zeichne noch zwei weitere Knoten am Rand. Der Kreis wird außerhalb der gezeichneten Knoten erzeugt.{br}Beende die Fläche durch Drücken von Enter oder nochmal Klicken auf den ersten oder letzten Knoten.**Zeichne den Tank fertig.**",
@@ -1105,7 +1173,7 @@
         },
         "shortcuts": {
             "title": "Tastenkürzel",
-            "tooltip": "Tastenkürzel-Bildschirm anzeigen",
+            "tooltip": "Tastenkürzel-Bildschirm anzeigen.",
             "toggle": {
                 "key": "?"
             },
@@ -1274,7 +1342,7 @@
                     "name": "Eisenbahnanlagen"
                 },
                 "category-restriction": {
-                    "name": "Abbiege-Beschränkungen"
+                    "name": "Abbiegebeschränkungen"
                 },
                 "category-road": {
                     "name": "Straßen"
@@ -1514,7 +1582,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
-                    "label": "Ausrichtung (Winkel Im Uhrzeigersinn) ",
+                    "label": "Blickrichtung (Grad im Uhrzeigersinn) ",
                     "placeholder": "45, 90, 180, 270"
                 },
                 "camera/mount": {
@@ -1658,11 +1726,11 @@
                     "label": "Windelwechseln möglich"
                 },
                 "direction": {
-                    "label": "Drehrichtung (Grad im Uhrzeigersinn)",
+                    "label": "Blickrichtung (Grad im Uhrzeigersinn)",
                     "placeholder": "45, 90, 180, 270"
                 },
                 "direction_cardinal": {
-                    "label": "Drehrichtung",
+                    "label": "Blickrichtung",
                     "options": {
                         "E": "Ost",
                         "ENE": "Ostnordost",
@@ -1683,19 +1751,22 @@
                     }
                 },
                 "direction_clock": {
-                    "label": "Drehrichtung",
+                    "label": "Blickrichtung",
                     "options": {
                         "anticlockwise": "gegen den Uhrzeigersinn",
                         "clockwise": "im Uhrzeigersinn"
                     }
                 },
                 "direction_vertex": {
-                    "label": "Drehrichtung",
+                    "label": "Blickrichtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
                         "forward": "Vorwärts"
                     }
+                },
+                "dispensing": {
+                    "label": "Gibt rezeptpflichtige Medikamente aus"
                 },
                 "display": {
                     "label": "Anzeige"
@@ -2226,7 +2297,7 @@
                     "placeholder": "Entfernung in Kilometer mit einer Nachkommastelle (123.4)"
                 },
                 "railway/signal/direction": {
-                    "label": "Drehrichtung",
+                    "label": "Blickrichtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
@@ -2425,7 +2496,7 @@
                         "bridge": "Brücke",
                         "cutting": "Einschnitt",
                         "embankment": "Dammlage",
-                        "ford": "Furt",
+                        "ford": "Furt (Gewässerquerung)",
                         "tunnel": "Tunnel"
                     },
                     "placeholder": "Unbekannt"
@@ -2539,7 +2610,7 @@
                     "label": "Typ"
                 },
                 "traffic_signals/direction": {
-                    "label": "Drehrichtung",
+                    "label": "Blickrichtung",
                     "options": {
                         "backward": "Rückwärts",
                         "both": "Beide / Alle",
@@ -2638,6 +2709,9 @@
                 },
                 "wheelchair": {
                     "label": "Rollstuhlzugang"
+                },
+                "wholesale": {
+                    "label": "Großhandel"
                 },
                 "width": {
                     "label": "Breite (Meter)"
@@ -2820,7 +2894,7 @@
                     "terms": "Wechselstube, Geldwechselgeschäft, Währungsumtauschgeschäft, Bargeldumtauschgeschäft"
                 },
                 "amenity/bus_station": {
-                    "name": "Busbahnhof"
+                    "name": "Busbahnhof / Busterminal"
                 },
                 "amenity/cafe": {
                     "name": "Café",
@@ -3462,7 +3536,11 @@
                 },
                 "building/farm": {
                     "name": "Bauernhaus",
-                    "terms": "Bauernhaus"
+                    "terms": "Bauernhof, Farm, Landwirtschaft"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Bauernhaus",
+                    "terms": "Bauernhaus, Landwirtschaftliches Gebäude, Stall"
                 },
                 "building/garage": {
                     "name": "Einzelgarage",
@@ -3628,7 +3706,7 @@
                 },
                 "craft/chimney_sweeper": {
                     "name": "Kaminkehrer",
-                    "terms": "Kaminkehrer,Schornsteinfeger"
+                    "terms": "Kaminkehrer,Schornsteinfeger,Rauchfangkehrer"
                 },
                 "craft/clockmaker": {
                     "name": "Uhrmacher",
@@ -3849,8 +3927,8 @@
                     "terms": "Bürgersteig,Gehsteig,Fußgängerweg,Gehweg,Gangsteig,Trottoir"
                 },
                 "ford": {
-                    "name": "Furt",
-                    "terms": "Furt"
+                    "name": "Furt (Gewässerquerung)",
+                    "terms": "Furt (Gewässerquerung)"
                 },
                 "golf/bunker": {
                     "name": "Bunker (Golf)",
@@ -3885,11 +3963,11 @@
                     "terms": "Abschlag"
                 },
                 "golf/water_hazard_area": {
-                    "name": "frontales Wasserhindernissfläche, frontales Seehinderniss, frontales Teichhinderniss",
-                    "terms": "frontale Wasserhindernissfläche"
+                    "name": "frontale Wasserhindernissfläche",
+                    "terms": "frontale Wasserhindernissfläche, frontales Seehinderniss, frontales Teichhinderniss"
                 },
                 "golf/water_hazard_line": {
-                    "name": "frontales Wasserhinderniss, frontales Bachhinderniss",
+                    "name": "frontales Wasserhinderniss",
                     "terms": "frontales Wasserhinderniss, frontales Seehinderniss, frontales Teichhinderniss"
                 },
                 "healthcare": {
@@ -3964,7 +4042,7 @@
                     "terms": "Spurbusstraße"
                 },
                 "highway/bus_stop": {
-                    "name": "Bushaltestelle"
+                    "name": "Bushaltestelle (Wartebereich)"
                 },
                 "highway/corridor": {
                     "name": "Gang/Korridor im Innenraum",
@@ -4376,6 +4454,10 @@
                 "leisure/adult_gaming_centre": {
                     "name": "Spielothek für Erwachsene",
                     "terms": "Erwachsenenspielzentrum, Spielhölle, Spielothek, Spielautomat, Spielcasino, Spielsalon"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "Spielhalle",
+                    "terms": "Spielhalle"
                 },
                 "leisure/bird_hide": {
                     "name": "Vogelbeobachtungsturm",
@@ -5189,128 +5271,128 @@
                     "terms": "Transformator, Umspannwerk"
                 },
                 "public_transport/linear_platform": {
-                    "name": "Haltestelle",
-                    "terms": "Haltestelle"
+                    "name": "Haltestelle (Wartebereich)",
+                    "terms": "Haltestelle (Wartebereich), Wartebereich einer Haltestelle"
                 },
                 "public_transport/linear_platform_aerialway": {
-                    "name": "Seilbahn-Haltestelle",
-                    "terms": "Seilbahn-Haltestelle"
+                    "name": "Seilbahn-Haltestelle (Wartebereich)",
+                    "terms": "Seilbahn-Haltestelle (Wartebereich), Wartebereich einer Seilbahn-Haltestelle"
                 },
                 "public_transport/linear_platform_bus": {
-                    "name": "Bus-Haltestelle",
-                    "terms": "Bus-Haltestelle"
+                    "name": "Bushaltestelle (Wartebereich)",
+                    "terms": "Bushaltestelle (Wartebereich), Wartebereich einer Bushaltestelle"
                 },
                 "public_transport/linear_platform_ferry": {
-                    "name": "Fähren-Haltestelle",
-                    "terms": "Fähren-Haltestelle"
+                    "name": "Fähranleger (Wartebereich)",
+                    "terms": "Fähranleger (Wartebereich), Wartebereich eines Fähranlegers"
                 },
                 "public_transport/linear_platform_light_rail": {
-                    "name": "Stadtbahnhaltestelle",
-                    "terms": "Stadtbahnhaltestelle"
+                    "name": "Stadtbahnhaltestelle (Wartebereich)",
+                    "terms": "Stadtbahnhaltestelle (Wartebereich), Wartebereich einer Stadtbahnhaltestelle"
                 },
                 "public_transport/linear_platform_monorail": {
-                    "name": "Einschienenbahnhaltestelle",
-                    "terms": "Einschienenbahnhaltestelle"
+                    "name": "Einschienenbahnhaltestelle (Wartebereich)",
+                    "terms": "Einschienenbahnhaltestelle (Wartebereich), Wartebereich einer Einschienenbahnhaltestelle"
                 },
                 "public_transport/linear_platform_subway": {
-                    "name": "U-Bahnhaltestelle",
-                    "terms": "U-Bahnhaltestelle"
+                    "name": "U-Bahnhaltestelle (Wartebereich)",
+                    "terms": "U-Bahnhaltestelle (Wartebereich), Wartebereich einer U-Bahnhaltestelle"
                 },
                 "public_transport/linear_platform_train": {
-                    "name": "Eisenbahnhaltestelle",
-                    "terms": "Eisenbahnhaltestelle"
+                    "name": "Eisenbahnhaltestelle (Wartebereich)",
+                    "terms": "Eisenbahnhaltestelle (Wartebereich), Wartebereich einer Eisenbahnhaltestelle"
                 },
                 "public_transport/linear_platform_tram": {
-                    "name": "Straßenbahnhaltestelle",
-                    "terms": "Straßenbahnhaltestelle"
+                    "name": "Straßenbahnhaltestelle (Wartebereich)",
+                    "terms": "Straßenbahnhaltestelle (Wartebereich), Trambahnhaltestelle (Wartebereich), Wartebereich einer Straßenbahnhaltestelle, Wartebereich einer Trambahnhaltestelle"
                 },
                 "public_transport/linear_platform_trolleybus": {
-                    "name": "Oberleitungsbus-Haltestelle",
-                    "terms": "Oberleitungsbus-Haltestelle"
+                    "name": "Oberleitungsbushaltestelle (Wartebereich)",
+                    "terms": "Oberleitungsbushaltestelle (Wartebereich), Wartebereich einer Oberleitungsbushaltestelle"
                 },
                 "public_transport/platform": {
-                    "name": "Haltestelle",
-                    "terms": "Haltestelle"
+                    "name": "Haltestelle (Wartebereich)",
+                    "terms": "Haltestelle (Wartebereich), Wartebereich einer Haltestelle"
                 },
                 "public_transport/platform_aerialway": {
-                    "name": "Seilbahn-Haltestelle",
-                    "terms": "Seilbahn-Haltestelle"
+                    "name": "Lift-/Seilbahn-Haltestelle (Wartebereich)",
+                    "terms": "Lift-/Seilbahn-Haltestelle (Wartebereich), Wartebereich einer Lift-/Seilbahn-Haltestelle"
                 },
                 "public_transport/platform_bus": {
-                    "name": "Bushaltestelle",
-                    "terms": "Bushaltestelle"
+                    "name": "Bushaltestelle (Wartebereich)",
+                    "terms": "Bushaltestelle (Wartebereich), Wartebereich einer Bushaltestelle"
                 },
                 "public_transport/platform_ferry": {
-                    "name": "Fähranleger",
-                    "terms": "Fähranleger"
+                    "name": "Fähranleger (Wartebereich)",
+                    "terms": "Fähranleger (Wartebereich), Wartebereich eines Fähranlegers"
                 },
                 "public_transport/platform_light_rail": {
-                    "name": "Stadtbahnhaltestelle",
-                    "terms": "Stadtbahnhaltestelle"
+                    "name": "Stadtbahnhaltestelle (Wartebereich)",
+                    "terms": "Stadtbahnhaltestelle (Wartebereich), Wartebereich einer Stadtbahnhaltestelle"
                 },
                 "public_transport/platform_monorail": {
-                    "name": "Einschienenbahnhaltestelle",
-                    "terms": "Einschienenbahnhaltestelle"
+                    "name": "Einschienenbahnhaltestelle (Wartebereich)",
+                    "terms": "Einschienenbahnhaltestelle (Wartebereich), Wartebereich einer Einschienenbahnhaltestelle"
                 },
                 "public_transport/platform_subway": {
-                    "name": "U-Bahnhaltestelle",
-                    "terms": "U-Bahnhaltestelle"
+                    "name": "U-Bahnhaltestelle (Wartebereich)",
+                    "terms": "U-Bahnhaltestelle (Wartebereich), Wartebereich einer U-Bahnhaltestelle"
                 },
                 "public_transport/platform_train": {
-                    "name": "Eisenbahnhaltestelle",
-                    "terms": "Eisenbahnhaltestelle"
+                    "name": "Eisenbahnhaltestelle (Wartebereich)",
+                    "terms": "Eisenbahnhaltestelle (Wartebereich), Wartebereich einer Eisenbahnhaltestelle"
                 },
                 "public_transport/platform_tram": {
-                    "name": "Straßenbahnhaltestelle",
-                    "terms": "Straßenbahnhaltestelle"
+                    "name": "Straßenbahnhaltestelle (Wartebereich)",
+                    "terms": "Straßenbahnhaltestelle (Wartebereich), Trambahnhaltestelle (Wartebereich), Wartebereich einer Straßenbahnhaltestelle, Wartebereich einer Trambahnhaltestelle"
                 },
                 "public_transport/platform_trolleybus": {
-                    "name": "Oberleitungsbus-Haltestelle",
-                    "terms": "Oberleitungsbus-Haltestelle"
+                    "name": "Oberleitungsbushaltestelle (Wartebereich)",
+                    "terms": "Oberleitungsbushaltestelle (Wartebereich), Wartebereich einer Oberleitungsbushaltestelle"
                 },
                 "public_transport/station": {
-                    "name": "Haltestelle",
-                    "terms": "Haltestelle"
+                    "name": "Station",
+                    "terms": "Station"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "Lift-/Seilbahn-Haltestelle",
-                    "terms": "Lift-/Seilbahn-Haltestelle"
+                    "name": "Lift-/Seilbahn-Station",
+                    "terms": "Lift-/Seilbahn-Station"
                 },
                 "public_transport/station_bus": {
-                    "name": "Busbahnhof",
-                    "terms": "Busbahnhof, Busterminal, Bushaltestelle"
+                    "name": "Busbahnhof / Busterminal",
+                    "terms": "Bustattsion, Busbahnhof, Busterminal, Bushaltestelle"
                 },
                 "public_transport/station_ferry": {
-                    "name": "Fähranleger",
-                    "terms": "Fähranleger"
+                    "name": "Fähranleger / Fährterminal",
+                    "terms": "Fähranleger, Fährterminal"
                 },
                 "public_transport/station_light_rail": {
-                    "name": "Stadtbahnhaltestelle",
-                    "terms": "Stadtbahnhaltestelle"
+                    "name": "Stadtbahn-Station",
+                    "terms": "Stadtbahn-Station"
                 },
                 "public_transport/station_monorail": {
-                    "name": "Einschienenbahnhaltestelle",
-                    "terms": "Einschienenbahnhaltestelle"
+                    "name": "Einschienenbahn-Station",
+                    "terms": "Einschienenbahn-Station"
                 },
                 "public_transport/station_subway": {
-                    "name": "U-Bahnhaltestelle",
-                    "terms": "U-Bahnhaltestelle"
+                    "name": "U-Bahn-Station",
+                    "terms": "U-Bahn-Station"
                 },
                 "public_transport/station_train": {
-                    "name": "Eisenbahnhaltestelle",
-                    "terms": "Eisenbahnhaltestelle"
+                    "name": "Eisenbahn-Station",
+                    "terms": "Eisenbahn-Station"
                 },
                 "public_transport/station_train_halt": {
-                    "name": "Eisenbahn-Bedarfshaltestelle",
-                    "terms": "Eisenbahn-Bedarfshaltestelle"
+                    "name": "Eisenbahn-Bedarfsstation",
+                    "terms": "Eisenbahn-Bedarfsstation"
                 },
                 "public_transport/station_tram": {
-                    "name": "Straßenbahnhaltestelle",
-                    "terms": "Straßenbahnhaltestelle"
+                    "name": "Straßenbahnstation",
+                    "terms": "Straßenbahnstation, Trambahnstation"
                 },
                 "public_transport/station_trolleybus": {
-                    "name": "Oberleitungsbus-Haltestelle",
-                    "terms": "Oberleitungsbus-Haltestelle"
+                    "name": "Oberleitungsbusstation / Oberleitungsbusterminal",
+                    "terms": "Oberleitungsbusstation, Oberleitungsbusterminal"
                 },
                 "public_transport/stop_area": {
                     "name": "Haltestellen-Relation",
@@ -5350,7 +5432,7 @@
                 },
                 "public_transport/stop_position_tram": {
                     "name": "Straßenbahn-Halteplatz",
-                    "terms": "Straßenbahn-Halteplatz"
+                    "terms": "Straßenbahn-Halteplatz, Trambahn-Halteplatz"
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Oberleitungsbus-Halteplatz",
@@ -5411,7 +5493,7 @@
                     "terms": "Schmalspureisenbahn, Schmalspurbahn, schmalspurige Eisenbahn"
                 },
                 "railway/platform": {
-                    "name": "Eisenbahnhaltestelle"
+                    "name": "Eisenbahnhaltestelle (Wartebereich)"
                 },
                 "railway/rail": {
                     "name": "Eisenbahnschienen",
@@ -5442,7 +5524,7 @@
                 },
                 "railway/tram": {
                     "name": "Straßenbahngleise",
-                    "terms": "Straßenbahngleise, Straßenbahn, Bim, Tramway, Stadtbahn, Trambahn"
+                    "terms": "Straßenbahngleise, Trambahngleise, Tramgleise, Bimgleis, Tramwaygleise, Stadtbahngleise"
                 },
                 "railway/tram_stop": {
                     "name": "Straßenbahn-Halteplatz"
@@ -5463,8 +5545,8 @@
                     "terms": "Geschäft, Ladenlokal"
                 },
                 "shop/agrarian": {
-                    "name": "Geschäft für landwirtschaftliche Produktion",
-                    "terms": "Geschäft für landwirtschaftliche Produktion"
+                    "name": "Agrarmarkt",
+                    "terms": "Agrarmarkt,Landwirtschaftsbedarfsgeschäft"
                 },
                 "shop/alcohol": {
                     "name": "Spirituosenladen",
@@ -5608,7 +5690,7 @@
                 },
                 "shop/craft": {
                     "name": "Kunsthandwerkgeschäft",
-                    "terms": "Kunsthandwerkgeschäft"
+                    "terms": "Kunsthandwerkgeschäft,Bastelbedarf,Künstlerbedarf"
                 },
                 "shop/curtain": {
                     "name": "Vorhanggeschäft",
@@ -5703,6 +5785,10 @@
                 "shop/hardware": {
                     "name": "Eisenwarenhandel",
                     "terms": "Baustoffmarkt, Baustoff-Handlung"
+                },
+                "shop/health_food": {
+                    "name": "Reformhaus",
+                    "terms": "Reformhaus"
                 },
                 "shop/hearing_aids": {
                     "name": "Hörgerätegeschäft",
@@ -5942,6 +6028,10 @@
                 "shop/weapons": {
                     "name": "Waffengeschäft",
                     "terms": "Waffengeschäft,Waffenhändler"
+                },
+                "shop/wholesale": {
+                    "name": "Großhandelsgeschäft",
+                    "terms": "Großhandelsgeschäft"
                 },
                 "shop/window_blind": {
                     "name": "Fensterladengeschäft",
@@ -6195,8 +6285,8 @@
                     "terms": "Eisenbahn-Linie"
                 },
                 "type/route/tram": {
-                    "name": "Tramlinie",
-                    "terms": "Straßenbahn-Linie"
+                    "name": "Straßenbahn-Linie",
+                    "terms": "Straßenbahn-Linie, Trambahn-Linie"
                 },
                 "type/route_master": {
                     "name": "Hauptroute",

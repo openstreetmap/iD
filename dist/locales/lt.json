@@ -282,12 +282,6 @@
                 "connected_to_hidden": "Tai negali būti padalinta, nes yra prijungta prie paslėpto objekto."
             },
             "restriction": {
-                "help": {
-                    "select": "Spustelėkite, kad pasirinktumėte kelio atkarpą.",
-                    "toggle": "Spustelėkite, kad nustatytumėte posūkio apribojimus.",
-                    "toggle_on": "Spustelėkite, kad pridėtumėte \"{restriction}\" apribojimą.",
-                    "toggle_off": "Spustelėkite, kad panaikintumėte \"{restriction}\" apribojimą."
-                },
                 "annotation": {
                     "create": "Posūkio apribojimas pridėtas",
                     "delete": "Posūkio apribojimas panaikintas"

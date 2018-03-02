@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Dette kan ikke opdeles, da det er forbundet med et skjult objekt."
             },
             "restriction": {
-                "help": {
-                    "select": "Klik for at vælge et vejsegment.",
-                    "toggle": "Klik for at slå svingbegrænsninger til.",
-                    "toggle_on": "Klik for tilføje en \"{restriction}\"-begrænsning.",
-                    "toggle_off": "Klik for at fjerne \"{restriction}\"-begrænsningen."
-                },
                 "annotation": {
                     "create": "Tilføjede en svingbegrænsning",
                     "delete": "Slettede en svingbegrænsning"
@@ -473,7 +467,7 @@
             "custom_button": "Rediger brugerdefineret baggrund",
             "custom_prompt": "Indtast en URL-skabelon for kort-fliser. Gyldige formater er:\n   - {zoom} eller {z}, {x}, {y} for Z/X/Y flise-skemaer\n   - {-y} eller {ty} for omvendte Y-koordinater i TMS-stil\n   - {u} for quad-flise-skemaer\n   - {switch:a,b,c} for multipleksning af DNS-opslag\n\nEksempel:\n{example}",
             "overlays": "Overlægninger",
-            "imagery_source_faq": "Information / rapportér problem angående luftfoto",
+            "imagery_source_faq": "Luftfoto-information / anmeld problem",
             "reset": "nulstil",
             "display_options": "Visningsindstillinger",
             "brightness": "Lysstyrke",
@@ -486,7 +480,7 @@
                 "key": "/"
             },
             "fix_misalignment": "Juster luftfoto-offset",
-            "offset": "Træk et vilkårligt i det grå område nedenfor for at justere luftfotoets offset eller indtast offset-værdien i meter."
+            "offset": "Træk et vilkårligt sted i det grå område nedenfor for at justere luftfotoets offset, eller indtast offset-værdien i meter."
         },
         "map_data": {
             "title": "Kortdata",
@@ -655,6 +649,7 @@
             "untagged_area_tooltip": "Vælg en objekttype der beskriver hvad slags område dette er.",
             "untagged_relation": "Ej tagget relation",
             "untagged_relation_tooltip": "Vælg en objekttype der beskriver hvad slags relation dette er.",
+            "many_deletions": "Du sletter {n} kortobjekter: {p} noder, {l} linjer, {a} områder, {r} relationer. Er du sikker på at du vil gøre dette? Dette vil slette dem fra kortet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Tagget {tag} antyder at linjen skulle være et område, men den er ikke et område",
             "deprecated_tags": "Frarådede tags: {tags}"
         },
@@ -705,6 +700,8 @@
             "overview": {
                 "title": "Overblik",
                 "navigation_h": "Navigation",
+                "navigation_drag": "Du kan ændre området af kortet der er synligt, ved at trykke og holde {leftclick} venstre-musetast nedtrykket og flytte musen. Du kan også bruge `↓`, `↑`, `←`, `→` piletasterne på dit tastatur.",
+                "navigation_zoom": "Du kan zoome ind og ud ved brug af musens rullehjul eller tilsvarende på et trackpad, eller ved at klikke på knapperne {plus} / {minus} i kanten af kortet. Du kan også bruge `+`, `-` tasterne på dit tastatur.",
                 "features_h": "Kortobjekter",
                 "features": "Vi bruger ordet *kortobjekt* til at beskrive ting der optræder på kortet såsom veje, bygninger, eller interessepunkter. Enhver fysisk ting i den virkelige verden kan indtegnes som et kortobjekt på OpenStreetMap. Kortobjekter repræsenteres på kortet som *punkter*, *linjer* eller *områder*.",
                 "nodes_ways": "I OpenStreetMap kaldes punkter sommetider *noder*, og linjer og områder sommetider *veje*."
@@ -712,7 +709,28 @@
             "editing": {
                 "title": "Rediger & gem",
                 "select_h": "Vælg",
+                "select_left_click": "{leftclick} Venstre-klik på et kortobjekt for at markere det. Dette vil fremhæve det med en pulserende glød, og i kanten af kortet vises detaljer om objektet, såsom navn og adresse.",
+                "select_right_click": "{rightclick} Højreklik på et kortobjekt for at vise redigeringsmenuen, som viser de mulige værktøjer der kan anvendes, såsom rotation, flytning og sletning.",
+                "multiselect_h": "Multi-markering",
                 "save_h": "Gem"
+            },
+            "feature_editor": {
+                "title": "Redigeringsværktøj til kortobjekter",
+                "intro": "*Redigeringsværktøjet til kortobjekter* kommer frem i kanten af kortet, og gør det muligt at se og redigere alle informationer om det markerede kortobjekt.",
+                "definitions": "I toppen vises kortobjektets type. I midten et antal *felter* som viser kortobjektets attributter, såsom dets navn eller adresse.",
+                "type_h": "Kortobjekt-type",
+                "type": "Du kan klikke på objekttypen for at ændre et kortobjekts type. Alt hvad der eksisterer i den virkelige verden kan tilføjes til OpenStreetMap, så der er tusindvis af typer at vælge imellem.",
+                "type_picker": "Typevælgeren viser de mest almindeligt forekommende, såsom parker, hospitaler, restauranter, veje og bygninger. Du kan søge ved at skrive hvad du leder efter i søgeboksen. Du  kan også klikke på {inspect} **Info**-ikonet ved siden af objekttypen for at lære mere om denne.",
+                "fields_h": "Felter",
+                "fields_all_fields": "Sektionen \"Alle felter\" indeholder alle de felter objektet kan indeholde, og som du kan redigere. I OpenStreetMap er alle felter valgfri, og det er helt OK at efterlade et felt tomt hvis du er usikker.",
+                "fields_example": "Hver objekttype vil vise forskellige felter. Eksempelvis kan der for en vej vises felter for dens belægning og hastighedsgrænse, mens der for en restaurant kan vises felter for hvilken mad der serveres og dens åbningstider. ",
+                "fields_add_field": "Du kan også klikke på \"Tilføj felt\"-boksen for at tilføje yderligere felter, såsom beskrivelse, Wikipedia-link, kørestolsegnethed og meget mere.",
+                "tags_h": "Tags (attributter)",
+                "tags_all_tags": "Under sektionen med felter kan du udvide \"Alle tags\"-sektionen for at redigere alle OpenStreetMap-*tags* for det markerede kortobjekt. Hvert tag består af en *nøgle* og en *værdi*, dette er dataelementer som definer samtlige de egenskaber som er gemt i OpenStreetMap.",
+                "tags_resources": "Redigering af et kortobjekts tags kræver et vist kendskab til OpenStreetMap. Du bør studere ressourcer som [OpenStreetMap-wikien](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) for at lære mere om den gængse praksis for OpenStreetMap-tagging."
+            },
+            "points": {
+                "title": "Punkter"
             },
             "imagery": {
                 "title": "Luftfoto i baggrunden",
@@ -1283,6 +1301,9 @@
                 "aeroway": {
                     "label": "Type"
                 },
+                "agrarian": {
+                    "label": "Produkter"
+                },
                 "amenity": {
                     "label": "Type"
                 },
@@ -1351,11 +1372,17 @@
                 "board_type": {
                     "label": "Type"
                 },
+                "boules": {
+                    "label": "Type"
+                },
                 "boundary": {
                     "label": "Type"
                 },
                 "brand": {
                     "label": "Mærke"
+                },
+                "brewery": {
+                    "label": "Fadøl"
                 },
                 "bridge": {
                     "label": "Type",
@@ -1435,7 +1462,8 @@
                     "label": "Krantype",
                     "options": {
                         "floor-mounted_crane": "Gulvmonteret kran",
-                        "portal_crane": "Portalkran"
+                        "portal_crane": "Portalkran",
+                        "travel_lift": "Skibskran"
                     }
                 },
                 "crop": {
@@ -1511,10 +1539,15 @@
                     "label": "Beskrivelse"
                 },
                 "devices": {
+                    "label": "Enheder",
                     "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Babybleskifte"
+                },
+                "direction": {
+                    "label": "Retning (grader med uret)",
+                    "placeholder": "45, 90, 180, 270"
                 },
                 "direction_cardinal": {
                     "label": "Retning",
@@ -1548,6 +1581,7 @@
                     "label": "Retning",
                     "options": {
                         "backward": "Baglæns",
+                        "both": "Begge / alle",
                         "forward": "Forlæns"
                     }
                 },
@@ -1940,7 +1974,9 @@
                 "oneway": {
                     "label": "Ensrettet",
                     "options": {
+                        "alternating": "Skiftende",
                         "no": "Nej",
+                        "reversible": "Reversibel",
                         "undefined": "Antages at være Nej",
                         "yes": "Ja"
                     }
@@ -1948,7 +1984,9 @@
                 "oneway_yes": {
                     "label": "Ensrettet",
                     "options": {
+                        "alternating": "Skiftende",
                         "no": "Nej",
+                        "reversible": "Reversibel",
                         "undefined": "Antages at være Ja",
                         "yes": "Ja"
                     }
@@ -1960,7 +1998,7 @@
                     "label": "Operatør"
                 },
                 "outdoor_seating": {
-                    "label": "Udendørssidepladser"
+                    "label": "Udendørssiddepladser"
                 },
                 "par": {
                     "label": "Par",
@@ -1982,7 +2020,11 @@
                     }
                 },
                 "payment_multi": {
-                    "label": "Betallingstyper"
+                    "label": "Betalingstyper"
+                },
+                "phases": {
+                    "label": "Faser",
+                    "placeholder": "1, 2, 3..."
                 },
                 "phone": {
                     "label": "Telefon",
@@ -2036,6 +2078,15 @@
                     "label": "Udgangseffekt",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground/baby": {
+                    "label": "Baby-siddeplads"
+                },
+                "playground/max_age": {
+                    "label": "Maksimal alder"
+                },
+                "playground/min_age": {
+                    "label": "Minimal alder"
+                },
                 "population": {
                     "label": "Befolkning"
                 },
@@ -2053,6 +2104,14 @@
                 },
                 "railway": {
                     "label": "Type"
+                },
+                "railway/signal/direction": {
+                    "label": "Retning",
+                    "options": {
+                        "backward": "Baglæns",
+                        "both": "Begge / alle",
+                        "forward": "Forlæns"
+                    }
                 },
                 "recycling_accepts": {
                     "label": "Accepterer"
@@ -2245,8 +2304,18 @@
                     },
                     "placeholder": "Ukendt"
                 },
+                "structure_waterway": {
+                    "label": "Struktur",
+                    "options": {
+                        "tunnel": "Tunnel"
+                    },
+                    "placeholder": "Ukendt"
+                },
                 "studio": {
                     "label": "Type"
+                },
+                "substance": {
+                    "label": "Væske"
                 },
                 "substation": {
                     "label": "Type"
@@ -2273,6 +2342,14 @@
                 },
                 "surveillance/zone": {
                     "label": "Overvågningszone"
+                },
+                "switch": {
+                    "options": {
+                        "circuit_breaker": "Kredsløbskontakt",
+                        "disconnector": "Afkobler",
+                        "earthing": "Jording",
+                        "mechanical": "Mekanisk"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Følbar belægning for blinde"
@@ -2304,6 +2381,9 @@
                 "tourism": {
                     "label": "Type"
                 },
+                "tourism_attraction": {
+                    "label": "Turisme"
+                },
                 "tower/construction": {
                     "label": "Konstruktion",
                     "placeholder": "Udbarduneret, Lattice, Fastspændt, ..."
@@ -2322,11 +2402,22 @@
                     },
                     "placeholder": "Fast, overvejende fast, blød …"
                 },
+                "trade": {
+                    "label": "Type"
+                },
                 "traffic_calming": {
                     "label": "Type"
                 },
                 "traffic_signals": {
                     "label": "Type"
+                },
+                "traffic_signals/direction": {
+                    "label": "Retning",
+                    "options": {
+                        "backward": "Baglæns",
+                        "both": "Begge / alle",
+                        "forward": "Forlæns"
+                    }
                 },
                 "trail_visibility": {
                     "label": "Synlighed af spor",
@@ -2339,6 +2430,16 @@
                         "no": "Ingen: sporløs, kræver fremragende orienteringsfærdigheder"
                     },
                     "placeholder": "Fremragende, god, dårlig..."
+                },
+                "transformer": {
+                    "label": "Type",
+                    "options": {
+                        "converter": "Konverter",
+                        "generator": "Generator",
+                        "phase_angle_regulator": "Fasevinkelregulator",
+                        "traction": "Fremdrift",
+                        "yes": "Ukendt"
+                    }
                 },
                 "trees": {
                     "label": "Træer"
@@ -2357,6 +2458,29 @@
                         "house": "Op til 5m (16ft)",
                         "street": "5 til 20m (16 til 65ft)"
                     }
+                },
+                "volcano/status": {
+                    "label": "Vulkan-status",
+                    "options": {
+                        "active": "Aktiv",
+                        "dormant": "I dvale",
+                        "extinct": "Udslukket"
+                    }
+                },
+                "volcano/type": {
+                    "label": "Vulkan-type"
+                },
+                "voltage": {
+                    "label": "Spænding"
+                },
+                "voltage/primary": {
+                    "label": "Primærspænding"
+                },
+                "voltage/secondary": {
+                    "label": "Sekundærspænding"
+                },
+                "voltage/tertiary": {
+                    "label": "Tertiærspænding"
                 },
                 "wall": {
                     "label": "Type"
@@ -2385,6 +2509,13 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Vindinger",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "Vindings-konfiguration"
                 }
             },
             "presets": {
@@ -3522,15 +3653,39 @@
                 "healthcare/alternative/chiropractic": {
                     "name": "Kiropraktor"
                 },
+                "healthcare/audiologist": {
+                    "name": "Audiolog",
+                    "terms": "audiolog,høreapparat"
+                },
+                "healthcare/birthing_center": {
+                    "name": "Fødselscenter",
+                    "terms": "fødsel,føde,gravid,baby"
+                },
                 "healthcare/blood_donation": {
                     "name": "Blodbank",
                     "terms": "Blodbank, Donorblodbank"
                 },
+                "healthcare/hospice": {
+                    "terms": "terminal,død,sygdom"
+                },
                 "healthcare/midwife": {
                     "name": "Jordemoder"
                 },
+                "healthcare/optometrist": {
+                    "name": "Optiker",
+                    "terms": "briller,øjne,optik,linser,syn"
+                },
                 "healthcare/physiotherapist": {
-                    "name": "Fysioterapeut"
+                    "name": "Fysioterapeut",
+                    "terms": "psyke,terapi,"
+                },
+                "healthcare/podiatrist": {
+                    "name": "Fodterapeut",
+                    "terms": "fod,fødder,negle"
+                },
+                "healthcare/psychotherapist": {
+                    "name": "Psykoterapeut",
+                    "terms": "psyke,angst,depression,mental,sind,selvmord"
                 },
                 "highway": {
                     "name": "Vej"
@@ -3756,8 +3911,8 @@
                     "terms": "Vejsidemindesmærker"
                 },
                 "historic/wayside_shrine": {
-                    "name": "Vejsideskrin",
-                    "terms": "Vejsideskrin"
+                    "name": "Vejsidehelligdom",
+                    "terms": "Vejsidehelligdom"
                 },
                 "junction": {
                     "name": "Vejfletning",

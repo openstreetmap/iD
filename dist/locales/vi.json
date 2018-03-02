@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Không thể chia cắt đối tượng này vì nó nối liền với một đối tượng ẩn."
             },
             "restriction": {
-                "help": {
-                    "select": "Nhấn chuột để chọn một khúc đường.",
-                    "toggle": "Nhấn chuột để thêm hoặc bỏ hạn chế rẽ.",
-                    "toggle_on": "Nhấn chuột để thêm hạn chế “{restriction}”.",
-                    "toggle_off": "Bấm để bỏ hạn chế “{restriction}”."
-                },
                 "annotation": {
                     "create": "thêm hạn chế rẽ",
                     "delete": "bỏ hạn chế rẽ"
@@ -655,6 +649,7 @@
             "untagged_area_tooltip": "Chọn loại vùng.",
             "untagged_relation": "Quan hệ không có thẻ",
             "untagged_relation_tooltip": "Chọn loại quan hệ.",
+            "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng, tính cả {p} nốt, {l} đường kẻ, {a} vùng, và {r} quan hệ? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
             "tag_suggests_area": "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
             "deprecated_tags": "Không khuyến khích sử dụng các thẻ: {tags}"
         },
@@ -1601,6 +1596,9 @@
                         "forward": "Tiến"
                     }
                 },
+                "dispensing": {
+                    "label": "Phát Thuốc"
+                },
                 "display": {
                     "label": "Kiểu Hiển thị"
                 },
@@ -2543,6 +2541,9 @@
                 "wheelchair": {
                     "label": "Đi Xe lăn Được"
                 },
+                "wholesale": {
+                    "label": "Bán buôn"
+                },
                 "width": {
                     "label": "Chiều ngang (Mét)"
                 },
@@ -3363,10 +3364,6 @@
                 },
                 "building/entrance": {
                     "name": "Cửa Ra vào"
-                },
-                "building/farm": {
-                    "name": "Nhà ở Nông trại",
-                    "terms": "nhà ở nông trại, căn nhà nông trại, nha o nong trai, can nha nong trai"
                 },
                 "building/garage": {
                     "name": "Ga ra",
@@ -4280,6 +4277,10 @@
                 "leisure/adult_gaming_centre": {
                     "name": "Trung tâm Đánh bạc",
                     "terms": "trung tâm đánh bạc, máy đánh bạc, trung tam danh bac, may danh bac"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "Khu Trò chơi Điện tử",
+                    "terms": "khu trò chơi điện tử, trung tâm trò chơi điện tử, trò chơi cảm giác mạnh, trò chơi video, trò chơi bắn bóng, pinball, trò chơi lái xe ảo, khu tro choi dien tu, trung tam tro choi dien tu, tro choi cam giac manh, tro choi video, tro choi ban bong, tro choi lai xe ao"
                 },
                 "leisure/bird_hide": {
                     "name": "Căn nhà Quan sát Chim",
@@ -5367,8 +5368,8 @@
                     "terms": "cửa hàng, tiệm, cửa hiệu, cửa buôn bán, nhà bán hàng, nhà buôn bán, nơi bán hàng, cua hang, tiem, cua hieu, cua buon ban, nha ban hang, nha buon ban, noi ban hang"
                 },
                 "shop/agrarian": {
-                    "name": "Tiệm Nông thôn",
-                    "terms": "tiệm nông nghiệp, cửa hàng nông nghiệp, quán nông nghiệp, hạt, thuốc trừ dịch hại, dụng cụ nông nghiệp, tiem nong nghiep, cua hang nong nghiep, quan nong nghiep, hat, thuoc tru dich hai, dung cu nong nghiep"
+                    "name": "Tiệm Nông nghiệp",
+                    "terms": "tiệm nông nghiệp, cửa hàng nông nghiệp, hạt, thuốc trừ dịch hại, dụng cụ nông nghiệp, tiem nong nghiep, cua hang nong nghiep, hat, thuoc tru dich hai, dung cu nong nghiep"
                 },
                 "shop/alcohol": {
                     "name": "Tiệm Rượu",
@@ -5608,6 +5609,10 @@
                     "name": "Tiệm Ngũ kim",
                     "terms": "khu vực bán đồ ngũ kim, chỗ bán đồ ngũ kim, tiệm bán đồ ngũ kim, nơi bán đồ ngũ kim, cửa hàng bán đồ ngũ kim, cửa hiệu bán đồ ngũ kim, quầy bán đồ ngũ kim, nơi đồ ngũ kim, cửa tiệm đồ ngũ kim, đồ xây dựng, vít, đinh, ốc, sơn, đèn, pin, khu vuc ban do ngu kim, cho ban do ngu kim, tiem ban do ngu kim, noi ban do ngu kim, cua hang ban do ngu kim, cua hieu ban do ngu kim, quay ban do ngu kim, noi do ngu kim, cua tiem do ngu kim, do xay dung, vit, dinh, oc, son, den"
                 },
+                "shop/health_food": {
+                    "name": "Tiệm Thực phẩm Tự nhiên",
+                    "terms": "tiệm thực phẩm tự nhiên, cửa hàng thực phẩm tự nhiên, tiệm thực phẩm bổ dưỡng, cửa hàng thực phẩm bổ dưỡng, tiem thuc pham tu nhien, cua hang thuc pham tu nhien, tiem thuc pham bo duong, cua hang thuc pham bo duong"
+                },
                 "shop/hearing_aids": {
                     "name": "Tiệm Ống nghe",
                     "terms": "tiệm ống nghe, cửa hàng ống nghe, cửa hiệu ống nghe, điếc tai, tiem ong nghe, cua hang ong nghe, cua hieu ong nghe, diec tai"
@@ -5846,6 +5851,10 @@
                 "shop/weapons": {
                     "name": "Tiệm Súng",
                     "terms": "tiệm súng, cửa hàng súng, cửa hiệu súng, quán súng, tiem sung, cua hang sung, cua hieu sung, quan sung"
+                },
+                "shop/wholesale": {
+                    "name": "Tiệm Bán buôn",
+                    "terms": "tiệm bán buôn, cửa hàng bán buôn, tiệm bán sỉ, cửa hàng bán sỉ, tiem ban buon, cua hang ban buon, tiem ban si, cua hang ban si"
                 },
                 "shop/window_blind": {
                     "name": "Tiệm Mành",
@@ -6223,6 +6232,13 @@
                 "description": "Hình ảnh thế giới Esri.",
                 "name": "Hình ảnh Thế giới Esri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Hình ảnh lưu trữ Esri có thể rõ hơn và chính xác hơn lớp mặc định.",
+                "name": "Hình ảnh Thế giới Esri (Clarity) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© những người đóng góp vào OpenStreetMap, CC BY-SA"
@@ -6291,18 +6307,33 @@
                 "name": "Đường sá TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Xe đạp"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Đường Đi bộ Dài"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Xe đạp Leo núi"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Trượt băng"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Thể thao Mùa đông"
             },
             "basemap.at": {

@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Detta kan inte delas då det är kopplat till ett dolt objekt."
             },
             "restriction": {
-                "help": {
-                    "select": "Klicka för att välja ett vägsegment.",
-                    "toggle": "Klicka för att växla svängrestriktioner.",
-                    "toggle_on": "Klicka för att lägga till en \"{restriction}\"-restriktion.",
-                    "toggle_off": "Klicka för att ta bort \"{restriction}\"-restriktionen."
-                },
                 "annotation": {
                     "create": "Lade till en svängrestriktion",
                     "delete": "Tog bort en svängrestriktion"
@@ -1083,6 +1077,28 @@
                     "measurement": "Visa/dölj panelen Mätning"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "Ö",
+            "west": "V",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -5078,9 +5094,6 @@
                 "shop": {
                     "name": "Affär",
                     "terms": "Affär, shop, butik"
-                },
-                "shop/agrarian": {
-                    "name": "Jordbruksaffär"
                 },
                 "shop/alcohol": {
                     "name": "Vin-och-spritaffär",

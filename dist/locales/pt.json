@@ -285,16 +285,46 @@
                 "connected_to_hidden": "Não é possível dividir porque este elemento está conectado a outro elemento oculto."
             },
             "restriction": {
-                "help": {
-                    "select": "Clique para selecionar um segmento de estrada.",
-                    "toggle": "Clique para inverter as restrições de viragem.",
-                    "toggle_on": "Clique para adicionar uma restrição de \"{restriction}\".",
-                    "toggle_off": "Clique para remover a restrição de \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Restrição de viragem adicionada.",
                     "delete": "Restrição de viragem eliminada."
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distância",
+                "distance_up_to": "Até {distância}",
+                "via": "Via",
+                "via_node_only": "Apenas nó",
+                "via_up_to_one": "Até uma linha",
+                "via_up_to_two": "Até duas linhas"
+            },
+            "help": {
+                "indirect": "(indirectamente)",
+                "turn": {
+                    "no_left_turn": "Proibido virar à esquerda (indirectamente)",
+                    "no_right_turn": "Proibido virar à direita (indirectamente)",
+                    "no_u_turn": "Proibido inversão de marcha (indirectamente)",
+                    "no_straight_on": "Proibido seguir em frente (indirectamente)",
+                    "only_left_turn": "Apenas virar à esquerda (indirectamente)",
+                    "only_right_turn": "Apenas virar à direita (indirectamente)",
+                    "only_u_turn": "Apenas inversão de marcha (indirectamente)",
+                    "only_straight_on": "Apenas seguir em frente (indirectamente)",
+                    "allowed_left_turn": "É permitido virar à esquerda (indirectamente)",
+                    "allowed_right_turn": "É permitido virar à direita (indirectamente)",
+                    "allowed_u_turn": "É permitido a inversão de marcha (indirectamente)",
+                    "allowed_straight_on": "É permitido a inversão de marcha (indirectamente)"
+                },
+                "from": "DESDE",
+                "via": "VIA",
+                "to": "PARA",
+                "from_name": "{desde} {Nomedesde}",
+                "from_name_to_name": "{desde} {Nomedesde} {para} {Nomepara}",
+                "via_names": "{via} {Nomesvia}",
+                "select_from": "Clique para seleccionar um segmento {desde}",
+                "select_from_name": "Clique para seleccionar um segmento {Nomedesde}",
+                "toggle": "Clique para \"{virar}\""
             }
         },
         "undo": {
@@ -655,6 +685,7 @@
             "untagged_area_tooltip": "Escolha um elemento que indique o que esta área representa.",
             "untagged_relation": "Relação sem etiquetas",
             "untagged_relation_tooltip": "Selecione um tipo de elemento que descreva o que é esta relação.",
+            "many_deletions": "Está a eliminar {n} elementos: {p} nós, {l} linhas, {a} áreas, {r} relações. Tem a certeza que quer fazer isto? Isto irá eliminá-las do mapa que qualquer pessoa pode ver em openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} é normalmente usada em áreas e não linhas.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -851,6 +882,24 @@
                 "using": "Para utilizar um rasto GPS para mapear, arraste-o e coloque o ficheiro no editor do mapa do seu browser. Se for reconhecido, será desenhado no mapa como uma linha com uma cor de roxo claro. Clique em {data} **Dados do mapa** no painel lateral ao mapa para ativar, desativar ou aproximar para a sua informação GPS.",
                 "tracing": "O rasto GPS não é enviado para o OpenStreetMap, a melhor maneira para utilizá-lo é desenhar no mapa e utilizando-o como guia para os novos elementos que adicionar.",
                 "upload": "Pode também [enviar os seus dados GPS para o OpenStreetMap](https://www.openstreetmap.org/trace/create) para que outros possam utilizá-los para mapear."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Ajuda da restrições de viragem",
+                    "about": {
+                        "title": "Sobre",
+                        "about": "Este campo permite-lhe inspeccionar e modificar as restrições de viragem. É mostrado um modelo da intersecção seleccionada incluindo as estradas que estão conectadas."
+                    },
+                    "inspecting": {
+                        "title": "Inspeccionando"
+                    },
+                    "modifying": {
+                        "title": "Modificando"
+                    },
+                    "tips": {
+                        "title": "Dicas"
+                    }
+                }
             }
         },
         "intro": {
@@ -3956,7 +4005,7 @@
                     "terms": "Ligação Autoestrada, Entrada Autoestrada, Saída Autoestrada"
                 },
                 "highway/path": {
-                    "name": "Trilho",
+                    "name": "Trilho pedestre",
                     "terms": "Trilha, Caminho, vereda (com pavimento em terra), vereda"
                 },
                 "highway/pedestrian_area": {
@@ -3964,7 +4013,7 @@
                     "terms": "praça, largo, alameda"
                 },
                 "highway/pedestrian_line": {
-                    "name": "Estrada Pedonal",
+                    "name": "Rua pedonal",
                     "terms": "pedestre, rua pedonal, rua pedestre, pedonal"
                 },
                 "highway/primary": {
@@ -4137,7 +4186,7 @@
                 },
                 "landuse/aquaculture": {
                     "name": "Aquacultura",
-                    "terms": "algicultura,aquicultura,carcinicultura,malacocultura,maricultura,mitilicultura,ostreicultura,pectinicultura,piscicultura,ranicultura,viveiro de peixes"
+                    "terms": "algicultura, aquicultura, carcinicultura, malacocultura, maricultura, mitilicultura,ostreicultura, pectinicultura,piscicultura, ranicultura, viveiro de peixes"
                 },
                 "landuse/basin": {
                     "name": "Bacia hidrográfica",
@@ -4153,7 +4202,7 @@
                 },
                 "landuse/churchyard": {
                     "name": "Adro de igreja",
-                    "terms": "Churchyard, Área da Igreja, Zona da Igreja, Praça da Igreja, Adro"
+                    "terms": "Área da Igreja, Zona da Igreja, Praça da Igreja, Adro"
                 },
                 "landuse/commercial": {
                     "name": "Zona de escritórios ",
@@ -5214,10 +5263,6 @@
                     "name": "Loja",
                     "terms": "Loja, Venda, Vendedor"
                 },
-                "shop/agrarian": {
-                    "name": "Loja de Produtos Agrícolas",
-                    "terms": "produtos agrícolas, produtos agrículas"
-                },
                 "shop/alcohol": {
                     "name": "Loja de bebidas alcoólicas",
                     "terms": "Alcool"
@@ -6070,6 +6115,13 @@
                 },
                 "description": "Imagens aéreas Esri.",
                 "name": "Imagens globais da Esri"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Termos e opinião"
+                },
+                "description": "A imagem de arquivo da ESRI poderá ser mais definida e detalhada que a cama pré-definida.",
+                "name": "Imagem Global ESRI (Claridade) versão Beta"
             },
             "MAPNIK": {
                 "attribution": {

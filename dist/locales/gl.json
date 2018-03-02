@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Isto non se pode partir xa que está conectado cun elemento oculto."
             },
             "restriction": {
-                "help": {
-                    "select": "Fai clic para seleccionar un segmento de estrada.",
-                    "toggle": "Fai clic para alternar as restricións de xiro.",
-                    "toggle_on": "Fai clic para engadir unha restrición \"{restriction}\".",
-                    "toggle_off": "Fai clic para eliminar a restrición \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Engadida unha restrición de xiro.",
                     "delete": "Eliminada unha restrición de xiro."
@@ -471,6 +465,7 @@
             "switch": "Voltar a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
+            "custom_prompt": "Introducir unha plantilla URL de mosaico. Os tokens válidos son:\n   - {zoom}/{z}, {x}, {y} para o esquema de mosaico Z/X/Y\n   - {-y} ou {ty} para coordenadas Y invertidas estilo TMS\n   - {u} para o esquema quadtile\n   - {switch:a,b,c} para multiplexado de servidores DNS\n\nExemplo:\n{example}",
             "overlays": "Superposicións",
             "imagery_source_faq": "Información das imaxes/Informar dun problema",
             "reset": "reiniciar",
@@ -654,8 +649,13 @@
             "untagged_area_tooltip": "Escolle un tipo de elemento que describa o que é esta área.",
             "untagged_relation": "Relación sen etiquetar",
             "untagged_relation_tooltip": "Escolle un tipo de elemento que describa o que é esta relación.",
+            "many_deletions": "Estás borrando {n} elementos: {p} nodos, {l} liñas, {a} áreas e {r} relacións. Estás seguro de querer facelo? Esta acción eliminaraos do mapa e ninguén os verá en openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} suxire que a liña debería ser unha área, pero non é unha área.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
+        },
+        "zoom": {
+            "in": "Ampliar",
+            "out": "Reducir"
         },
         "cannot_zoom": "Non se pode reducir máis no modo actual.",
         "full_screen": "Pasar a pantalla completa",
@@ -687,7 +687,8 @@
             "title": "Axuda",
             "key": "H",
             "help": {
-                "title": "Axuda"
+                "title": "Axuda",
+                "welcome": "Benvido ao editor iD para [OpenStreetMap] (https://www.openstreetmap.org/). Con este editor podes actualizar OpenStreetMap directamente desde o teu navegador."
             }
         },
         "intro": {
@@ -995,7 +996,8 @@
                     "title": "Seleccionar elementos",
                     "select_one": "Seleccionar un só elemento",
                     "select_multi": "Seleccionar múltiples elementos",
-                    "lasso": "Debuxar un lazo de selección arredor dos elementos"
+                    "lasso": "Debuxar un lazo de selección arredor dos elementos",
+                    "search": "Buscar elementos que coincidan cun texto de busca"
                 },
                 "with_selected": {
                     "title": "Con elementos selecionados",
@@ -1056,6 +1058,28 @@
                     "measurement": "Alternar panel de medición"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "O",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -3301,7 +3325,10 @@
                 },
                 "footway/crosswalk": {
                     "name": "Paso de peóns",
-                    "terms": "paso de peóns, paso de cebra"
+                    "terms": "paso de peóns, paso de cebra, cruamento peonil, cruzamento de peóns"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "Paso de peóns elevado"
                 },
                 "footway/sidewalk": {
                     "name": "Beirarrúa",
@@ -3359,7 +3386,11 @@
                     "terms": "paso peonil, paso peatonal, paso de cebra"
                 },
                 "highway/crosswalk": {
-                    "name": "Cruce peonil"
+                    "name": "Paso de peóns",
+                    "terms": "paso de peóns, paso de cebra, cruamento peonil, cruzamento de peóns"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "Paso de peóns elevado"
                 },
                 "highway/cycleway": {
                     "name": "Senda ciclista"
@@ -3372,7 +3403,7 @@
                     "name": "Senda peonil"
                 },
                 "highway/give_way": {
-                    "name": "Ceda o oaso"
+                    "name": "Ceda o paso"
                 },
                 "highway/living_street": {
                     "name": "Rúa residencial"
@@ -3394,6 +3425,13 @@
                 },
                 "highway/path": {
                     "name": "Camiño"
+                },
+                "highway/pedestrian_area": {
+                    "name": "Área peonil"
+                },
+                "highway/pedestrian_line": {
+                    "name": "Rúa peonil",
+                    "terms": "rúa peonil, rúa de peóns, calle peatonal"
                 },
                 "highway/primary": {
                     "name": "Estrada primaria",

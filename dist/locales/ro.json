@@ -755,15 +755,18 @@
                     "label": "Acces Permis",
                     "options": {
                         "designated": {
+                            "description": "Acces permis potrivit semnalizării sau legilor locale",
                             "title": "Desemnat"
                         },
                         "destination": {
+                            "description": "Acces permis doar pentru a ajunge la o destinație",
                             "title": "Destinație"
                         },
                         "dismount": {
                             "title": "Demonta"
                         },
                         "no": {
+                            "description": "Acces interzis publicului larg",
                             "title": "Interzis"
                         },
                         "permissive": {
@@ -806,7 +809,7 @@
                         "housenumber": "123",
                         "neighbourhood": "Cartier",
                         "place": "Loc",
-                        "postcode": "Număr Poștal",
+                        "postcode": "Cod poștal",
                         "province": "Provincie",
                         "province!jp": "Prefectură",
                         "quarter": "Cartier",
@@ -887,7 +890,10 @@
                     "label": "Aer Liber"
                 },
                 "bath/type": {
-                    "label": "Specialitate"
+                    "label": "Specialitate",
+                    "options": {
+                        "hot_spring": "Izvor cald"
+                    }
                 },
                 "beauty": {
                     "label": "Tip de Magazin"
@@ -911,6 +917,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Tip"
+                },
+                "boules": {
                     "label": "Tip"
                 },
                 "boundary": {
@@ -1527,6 +1536,18 @@
                 "visibility": {
                     "label": "Vizibilitate"
                 },
+                "voltage": {
+                    "label": "Voltaj"
+                },
+                "voltage/primary": {
+                    "label": "Voltaj primar"
+                },
+                "voltage/secondary": {
+                    "label": "Voltaj secundar"
+                },
+                "voltage/tertiary": {
+                    "label": "Voltaj terțiar"
+                },
                 "wall": {
                     "label": "Tip"
                 },
@@ -1548,6 +1569,9 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
                 }
             },
             "presets": {
@@ -2044,7 +2068,7 @@
                     "terms": "<translate with synonyms or related terms for 'Barrier', separated by commas>"
                 },
                 "barrier/block": {
-                    "name": "Bloc",
+                    "name": "Blocaj",
                     "terms": "<translate with synonyms or related terms for 'Block', separated by commas>"
                 },
                 "barrier/bollard": {

@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": "Çizgiye daha fazla bağlantı noktası eklemek için tıkla. Bu çizgiyi diğer çizgilere bağlamak için üstlerine tıkla ve bitirmek için de son noktaya çift tıkla."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Bu düzenlenemez, çünkü gizli bir özellikle ile bağlantısı var."
             }
         },
         "operations": {
@@ -282,12 +285,6 @@
                 "connected_to_hidden": "Bu bölünemez, çünkü gizli bir nesneye bağlı."
             },
             "restriction": {
-                "help": {
-                    "select": "Yolun bir bölümünü seçmek için tıkla.",
-                    "toggle": "Dönüş kısıtlamalarını açıp kapamak için tıkla.",
-                    "toggle_on": "Bir \"{restriction}\" kısıtlamasını göstermek için tıkla.",
-                    "toggle_off": "\"{restriction}\" kısıtlamasını kaldırmak için tıkla."
-                },
                 "annotation": {
                     "create": "Bir dönüş kısıtlaması eklendi.",
                     "delete": "Bir dönüş kısıtlaması silindi"
@@ -349,7 +346,9 @@
             "truncated_list": "{users} ve {count} başka kişi tarafından yapılmış değişiklikler"
         },
         "info_panels": {
+            "key": "I",
             "background": {
+                "key": "B",
                 "title": "Arkaplan",
                 "zoom": "Yakınlaştırma",
                 "vintage": "Görüntü Yılı",
@@ -364,6 +363,7 @@
                 "hide_vintage": "Görüntü Yılını Gizle"
             },
             "history": {
+                "key": "H",
                 "title": "Geçmiş",
                 "selected": "{n} seçildi",
                 "version": "Versiyon",
@@ -374,13 +374,17 @@
                 "link_text": "openstreetmap.org üzerindeki geçmiş"
             },
             "location": {
+                "key": "L",
                 "title": "Konum",
                 "unknown_location": "Bilinmeyen Konum"
             },
             "measurement": {
+                "key": "M",
                 "title": "Ölçüm",
                 "selected": "{n} seçildi",
                 "geometry": "Geometri",
+                "closed_line": "kapalı hat",
+                "closed_area": "kapalı alan",
                 "center": "Merkez",
                 "perimeter": "Çevre",
                 "length": "Uzunluk",
@@ -462,12 +466,15 @@
             "custom": "Özel",
             "custom_button": "Özel arka planı düzenle",
             "overlays": "Katmanlar",
+            "imagery_source_faq": "İmge Bilgisi / Problem Bildir",
             "reset": "sıfırla",
+            "display_options": "Görüntüleme Seçenekleri",
             "brightness": "Parlaklık",
             "contrast": "Karşıtlık",
             "saturation": "Doygunluk",
             "sharpness": "Keskinlik",
             "minimap": {
+                "description": "Küçük Haritayı Göster",
                 "tooltip": "Şu an ekrandaki bölgeden uzaklaşarak üzerinde çalıştığın alanı haritada bul.",
                 "key": "/"
             },
@@ -742,6 +749,7 @@
             },
             "areas": {
                 "title": "Alanlar",
+                "intro": "Alanlar göl, bina ve mahallelerin sınırlarını göstermek için kullanılır. Alanlar, temsil ettikleri özelliğin kenarında, örneğin bir binanın tabanının etrafında izlenmelidir.",
                 "point_or_area_h": "Noktalar mı yoksa Alanlar mı?",
                 "add_area_h": "Alanların Eklenmesi",
                 "add_area_finish": "Bir alanı tamamlamak için `{return}` tuşuna basınız veya ilk ya da son düğüme tekrar tıklayınız.",
@@ -1079,6 +1087,26 @@
                     "measurement": "Ölçüm panelini açın"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{alan1} ({alan2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "K",
+            "south": "G",
+            "east": "D",
+            "west": "B"
         },
         "presets": {
             "categories": {
@@ -2043,6 +2071,9 @@
                         "forward": "İleri"
                     }
                 },
+                "rating": {
+                    "label": "Güç Düzeyi"
+                },
                 "recycling_accepts": {
                     "label": "Kabul Ediyor"
                 },
@@ -2235,6 +2266,7 @@
                     "placeholder": "Bilinmiyor"
                 },
                 "structure_waterway": {
+                    "label": "Yapı",
                     "options": {
                         "tunnel": "Tünel"
                     },
@@ -2242,6 +2274,9 @@
                 },
                 "studio": {
                     "label": "Tür"
+                },
+                "substance": {
+                    "label": "Madde"
                 },
                 "substation": {
                     "label": "Tür"
@@ -2268,6 +2303,15 @@
                 },
                 "surveillance/zone": {
                     "label": "Güvenli Alan"
+                },
+                "switch": {
+                    "label": "Tür",
+                    "options": {
+                        "circuit_breaker": "Şalter",
+                        "disconnector": "Ayırıcı",
+                        "earthing": "Topraklama",
+                        "mechanical": "Mekanik"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Döşeme"
@@ -2356,6 +2400,9 @@
                         "auxiliary": "Yardımcı",
                         "converter": "Dönüştürücü",
                         "distribution": "Dağıtım",
+                        "generator": "Üreteç",
+                        "phase_angle_regulator": "Faz Açısı Düzenleyici",
+                        "traction": "Çekme",
                         "yes": "Bilinmeyen"
                     }
                 },
@@ -2388,11 +2435,22 @@
                 "volcano/type": {
                     "label": "Yanardağ Türü",
                     "options": {
-                        "scoria": "Lav külü"
+                        "scoria": "Lav külü",
+                        "shield": "Koruyucu",
+                        "stratovolcano": "Katmanlı yanardağ"
                     }
                 },
                 "voltage": {
                     "label": "Gerilim"
+                },
+                "voltage/primary": {
+                    "label": "Birincil Gerilim"
+                },
+                "voltage/secondary": {
+                    "label": "İkincil Gerilim"
+                },
+                "voltage/tertiary": {
+                    "label": "Üçüncül Gerilim"
                 },
                 "wall": {
                     "label": "Tür"
@@ -2416,6 +2474,9 @@
                 "wheelchair": {
                     "label": "Tekerlekli Sandalye Erişimi"
                 },
+                "wholesale": {
+                    "label": "Toptan satış"
+                },
                 "width": {
                     "label": "Genişlik (metre)"
                 },
@@ -2423,6 +2484,7 @@
                     "label": "Vikipedi"
                 },
                 "windings": {
+                    "label": "Bobinler",
                     "placeholder": "1, 2, 3..."
                 },
                 "windings/configuration": {
@@ -2894,6 +2956,10 @@
                     "name": "Banyo",
                     "terms": "Banyo, Duş"
                 },
+                "amenity/smoking_area": {
+                    "name": "Sigara İçme Alanı",
+                    "terms": "Sigara İçme Alanı"
+                },
                 "amenity/social_facility": {
                     "name": "Okul Tesisleri",
                     "terms": "Okul Tesisleri"
@@ -3052,6 +3118,9 @@
                     "name": "Atlı Karınca",
                     "terms": "Atlı Karınca"
                 },
+                "attraction/dark_ride": {
+                    "name": "Korku Tüneli"
+                },
                 "attraction/pirate_ship": {
                     "name": "Korsan Gemisi",
                     "terms": "Korsan Gemisi"
@@ -3119,6 +3188,9 @@
                     "name": "Koruma Duvarı",
                     "terms": "Koruma Duvarı"
                 },
+                "barrier/kerb": {
+                    "name": "Bordür"
+                },
                 "barrier/kissing_gate": {
                     "name": "Sadece İnsanlar İçin Giriş Kapısı",
                     "terms": "Sadece İnsanlar İçin Giriş Kapısı"
@@ -3158,6 +3230,9 @@
                 "building/barn": {
                     "name": "Samanlık",
                     "terms": "Samanlık"
+                },
+                "building/boathouse": {
+                    "name": "Kayıkhane"
                 },
                 "building/bungalow": {
                     "name": "Tek Katlı Müstakil Ev",
@@ -3208,10 +3283,6 @@
                 },
                 "building/entrance": {
                     "name": "Giriş/Çıkış"
-                },
-                "building/farm": {
-                    "name": "Çiftlik",
-                    "terms": "Çiftlik"
                 },
                 "building/garage": {
                     "name": "Garaj",
@@ -3328,6 +3399,9 @@
                     "name": "Kamp Ateş Alanı",
                     "terms": "Kamp Ateş Alanı"
                 },
+                "circular": {
+                    "name": "Dönel Kavşak"
+                },
                 "club": {
                     "name": "Klüb",
                     "terms": "Bar, Kulüp"
@@ -3372,9 +3446,15 @@
                     "name": "Gıda Dağıtım Şirketi",
                     "terms": "Gıda Dağıtım Şirketi"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Baca Temizleyicisi"
+                },
                 "craft/clockmaker": {
                     "name": "Saatçi",
                     "terms": "Saatçi"
+                },
+                "craft/confectionery": {
+                    "name": "Şekerci"
                 },
                 "craft/distillery": {
                     "name": "İçki İmalathanesi",
@@ -3477,6 +3557,9 @@
                     "name": "İskeleci",
                     "terms": "İskeleci, Yapı Kurma Ustası"
                 },
+                "craft/sculptor": {
+                    "name": "Yontucu"
+                },
                 "craft/shoemaker": {
                     "name": "Ayakkabıcı",
                     "terms": "Ayakkabıcı"
@@ -3534,6 +3617,9 @@
                     "name": "Yangın Musluğu",
                     "terms": "Yangın Musluğu"
                 },
+                "emergency/life_ring": {
+                    "name": "Can Simidi"
+                },
                 "emergency/no": {
                     "name": "Acil Erişim Yok"
                 },
@@ -3547,6 +3633,9 @@
                 "emergency/private": {
                     "name": "Kısıtlı Acil Erişim"
                 },
+                "emergency/water_tank": {
+                    "name": "Acil Su Deposu"
+                },
                 "emergency/yes": {
                     "name": "Acil Erişim"
                 },
@@ -3558,9 +3647,15 @@
                     "name": "Geçit",
                     "terms": "Geçit"
                 },
+                "footway/crossing-raised": {
+                    "name": "Üst Geçit"
+                },
                 "footway/crosswalk": {
                     "name": "Yaya Geçidi",
                     "terms": "Yaya Geçidi"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "Yaya Üst Geçidi"
                 },
                 "footway/sidewalk": {
                     "name": "Kaldırım",
@@ -3677,6 +3772,12 @@
                     "name": "At Yolu",
                     "terms": "At Yolu, At Yürüyüş Yolu"
                 },
+                "highway/bus_guideway": {
+                    "name": "Otobüs Tercihli Yolu"
+                },
+                "highway/bus_stop": {
+                    "name": "Otobüs Durağı"
+                },
                 "highway/corridor": {
                     "name": "Koridor",
                     "terms": "Koridor, Geçit"
@@ -3685,9 +3786,15 @@
                     "name": "Geçit",
                     "terms": "Yaya Geçidi, Geçit"
                 },
+                "highway/crossing-raised": {
+                    "name": "Üst Geçit"
+                },
                 "highway/crosswalk": {
                     "name": "Yaya Geçidi",
                     "terms": "Yaya Geçidi, Geçit"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "Yaya Üst Geçidi"
                 },
                 "highway/cycleway": {
                     "name": "Bisiklet Yolu",
@@ -3728,6 +3835,9 @@
                 "highway/path": {
                     "name": "Patika",
                     "terms": "Patika, Yol"
+                },
+                "highway/pedestrian_area": {
+                    "name": "Yaya Bölgesi"
                 },
                 "highway/pedestrian_line": {
                     "name": "Yaya Yolu"
@@ -3943,6 +4053,12 @@
                     "name": "Çimenlik",
                     "terms": "Çimenlik, Yeşil Alan"
                 },
+                "landuse/greenfield": {
+                    "name": "Yeşil alan"
+                },
+                "landuse/greenhouse_horticulture": {
+                    "name": "Sera çiçeçiliği"
+                },
                 "landuse/harbour": {
                     "name": "Liman",
                     "terms": "Liman"
@@ -3950,6 +4066,9 @@
                 "landuse/industrial": {
                     "name": "Sanayi Bölgesi",
                     "terms": "Sanayi Bölgesi, Sanayi Alanı"
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Hurdalık"
                 },
                 "landuse/industrial/slaughterhouse": {
                     "name": "Kesimevi"
@@ -4030,6 +4149,9 @@
                     "name": "Antreman Sahası",
                     "terms": "Antreman Sahası"
                 },
+                "landuse/religious": {
+                    "name": "Dinsel Alan"
+                },
                 "landuse/residential": {
                     "name": "Yerleşim Alanı",
                     "terms": "Yerleşim Alanı"
@@ -4049,6 +4171,9 @@
                 "leisure/adult_gaming_centre": {
                     "name": "Yetişkin Oyun Merkezi",
                     "terms": "Yetişkin Oyun Merkezi"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "Oyun Salonu"
                 },
                 "leisure/bird_hide": {
                     "name": "Vahşi Yaşam Gözetleme Kulesi",
@@ -4194,6 +4319,9 @@
                     "name": "Yarış Pisti (motor spor hariç)",
                     "terms": "Koşu Pisti"
                 },
+                "leisure/sauna": {
+                    "name": "Sauna"
+                },
                 "leisure/slipway": {
                     "name": "Gemi Kızağı",
                     "terms": "Gemi Kızağı"
@@ -4245,6 +4373,9 @@
                 "man_made/chimney": {
                     "name": "Baca",
                     "terms": "Baca"
+                },
+                "man_made/crane": {
+                    "name": "Vinç"
                 },
                 "man_made/cutline": {
                     "name": "Yangın Durduma Hattı",
@@ -4344,6 +4475,9 @@
                 "man_made/works": {
                     "name": "Fabrika",
                     "terms": "Fabrika, Sanayi"
+                },
+                "manhole": {
+                    "name": "Rogar"
                 },
                 "natural": {
                     "name": "Doğal",
@@ -5756,6 +5890,11 @@
                 "description": "Esri Uydu Görüntüleri",
                 "name": "Esri Uydu Görüntüleri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Şartlar ve Geri Bildirim"
+                }
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap destekçileri, CC-BY-SA"
@@ -5824,18 +5963,33 @@
                 "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap destekçileri, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Bisiklet"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap destekçileri, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Yürüyüş"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap destekçileri, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Dağ Bisikleti"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap destekçileri, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Kaykay"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap destekçileri, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Kış Sporları"
             },
             "basemap.at": {
