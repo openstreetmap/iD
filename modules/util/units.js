@@ -144,12 +144,13 @@ export function dmsCoordinatePair(coord) {
 
 /**
  * Returns the given coordinate pair in decimal format.
+ * note: unlocalized to avoid comma ambiguity - see #4765
  *
  * @param {Array<Number>} coord longitude and latitude
  */
 export function decimalCoordinatePair(coord) {
 	return t('units.coordinate_pair', {
-		latitude: clamp(coord[1], -90, 90).toLocaleString(locale, { maximumFractionDigits: OSM_PRECISION }),
-		longitude: wrap(coord[0], -180, 180).toLocaleString(locale, { maximumFractionDigits: OSM_PRECISION })
+		latitude: clamp(coord[1], -90, 90).toFixed(OSM_PRECISION),
+		longitude: wrap(coord[0], -180, 180).toFixed(OSM_PRECISION)
 	});
 }
