@@ -33,9 +33,15 @@ function vintageRange(vintage) {
 }
 
 function getEPSG3857XY(x, y, z) {
+    //polyfill for IE11, PhantomJS
+    var sinh = Math.sinh || function(x) {
+        var y = Math.exp(x);
+        return (y - 1 / y) / 2;
+    };
+
     var zoomSize = Math.pow(2, z);
     var lon = x / zoomSize * Math.PI * 2 - Math.PI;
-    var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
+    var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
     var mercCoords = d3_geoMercatorRaw(lon, lat);
     return {
         x: 20037508.34 / Math.PI * mercCoords[0],

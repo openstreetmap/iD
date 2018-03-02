@@ -54,7 +54,7 @@ sources.concat(whitelist).forEach(function(source) {
     var supportedProjection = source.available_projections &&
         supportedWMSProjections.find(function(supportedProjection) {
             return source.available_projections.some(function(projection) {
-              return supportedProjection === projection;
+                return supportedProjection === projection;
             })
         });
     if (source.type === 'wms' && supportedProjection === undefined) return;
@@ -67,7 +67,7 @@ sources.concat(whitelist).forEach(function(source) {
     };
 
     if (source.type === 'wms') {
-      im.projection = supportedProjection;
+        im.projection = supportedProjection;
     }
 
     var startDate, endDate, isValid;
