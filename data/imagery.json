@@ -33675,7 +33675,7 @@
             "id": "DigitalGlobe-Premium",
             "name": "DigitalGlobe Premium Imagery",
             "type": "tms",
-            "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.316c9a2e/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqOGRmNXltOTBucm0yd3BtY3E5czl6NmYifQ.qJJsPgCjyzMCm3YG3YWQBQ",
+            "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.316c9a2e/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqZGFrZ2c2dzFlMWgyd2x0ZHdmMDB6NzYifQ.9Pl3XOO82ArX94fHV289Pg",
             "scaleExtent": [
                 0,
                 22
@@ -33705,7 +33705,7 @@
             "id": "DigitalGlobe-Standard",
             "name": "DigitalGlobe Standard Imagery",
             "type": "tms",
-            "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.0a8e44ba/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqOGRmNW9qZjBudmgzMnA1a294OGRtNm8ifQ.06mo-nDisy4KmqjYxEVwQw",
+            "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.0a8e44ba/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqZGFrZ3pjczNpaHYycXFyMGo0djY3N2IifQ.90uebT4-ow1uqZKTUrf6RQ",
             "scaleExtent": [
                 0,
                 22
@@ -72418,7 +72418,7 @@
                     ]
                 ]
             ],
-            "terms_url": "https://njgin.state.nj.us/NJ_NJGINExplorer/ShowMetadata.jsp?docId={CDC67AB8-ADA1-4B4B-9087-67A82CB9151C}",
+            "terms_url": "https://njgin.state.nj.us/NJ_NJGINExplorer/ShowMetadata.jsp?docId={E30775F2-6370-4525-8E68-C371ED29BBB3}",
             "terms_text": "NJ Office of Information Technology (NJOIT), Office of Geographic Information Systems (OGIS)",
             "description": "Digital orthophotography of New Jersey, Near Infrared, 1 foot resolution"
         },
