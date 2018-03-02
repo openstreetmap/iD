@@ -28,6 +28,113 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.7.0
+##### March 2, 2018
+
+#### :mega: Release Highlights
+* :world_map: We've added support for more background imagery from WMS servers. Thanks Martin Raifer [@tyrasd] and Guillaume Rischard [@grischard] for your work on this!
+
+  _Press <kbd>B</kbd> to see if new imagery is available in your area._
+
+* :arrow_right_hook: The turn restriction editor just got a big update!
+  * Include nearby connected roads (with configurable distance)
+  * Hover over a from way to see which paths are restricted or allowed
+  * Add restrictions that span one or more via ways (e.g. divided highway u-turns)
+  * Add `only_` turn restrictions (e.g. only straight on)
+  * View popup help for more information about working with turn restrictions
+
+  _Try selecting a junction node in a complex intersection, editing turn restrictions, and viewing the popup help._
+
+[@tyrasd]: https://github.com/tyrasd
+[@grischard]: https://github.com/grischard
+
+#### :tada: New Features
+* Support background imagery on WMS servers supporting EPSG:3857 ([#1141], [#4814], thanks [@tyrasd] and [@grischard])
+* Add support for complex intersection via way, and `only_` restrictions ([#2346], [#2622], [#4768])
+  * :warning: code depending on any of these modules will need modification:
+  `actionRestrictTurn`, `actionUnrestrictTurn`, `osmIntersection`, `osmInferRestriction`, `uiFieldRestrictions`
+* Added `uiFieldHelp` component for popup field help (currently used only for restrictions field) ([#4768])
+
+[#4814]: https://github.com/openstreetmap/iD/issues/4814
+[#4768]: https://github.com/openstreetmap/iD/issues/4768
+[#2622]: https://github.com/openstreetmap/iD/issues/2622
+[#2346]: https://github.com/openstreetmap/iD/issues/2346
+[#1141]: https://github.com/openstreetmap/iD/issues/1141
+[@tyrasd]: https://github.com/tyrasd
+[@grischard]: https://github.com/grischard
+
+#### :sparkles: Usability
+* When combobox is attached to textarea, let user up/down arrow ([#4750])
+* Improve rendering of tree row, use a thicker line ([#4825])
+* Vertex navigation for home/end should work with way selected ([#4841])
+* Improve combobox option visibility ([#4761])
+* Increase max height of combobox, so they can show more items ([#4819], [#4831], thanks [@SteevenBosse])
+
+[#4841]: https://github.com/openstreetmap/iD/issues/4841
+[#4831]: https://github.com/openstreetmap/iD/issues/4831
+[#4825]: https://github.com/openstreetmap/iD/issues/4825
+[#4819]: https://github.com/openstreetmap/iD/issues/4819
+[#4761]: https://github.com/openstreetmap/iD/issues/4761
+[#4750]: https://github.com/openstreetmap/iD/issues/4750
+[@SteevenBosse]: https://github.com/SteevenBosse
+
+#### :bug: Bugfixes
+* Fix bug trying to stop Mapillary autoplaying if `_mlyViewer` is not initialized ([#4804], [#4809], thanks [@fritruc])
+* Fix bug trying to show labels when `.geojson` file has `null` properties ([#4795], [#4805], thanks [@vershwal])
+* Query the appropriate metadata for esri clarity background imagery ([#4766], [#4767], thanks [@jgravois])
+
+[#4809]: https://github.com/openstreetmap/iD/issues/4809
+[#4805]: https://github.com/openstreetmap/iD/issues/4805
+[#4804]: https://github.com/openstreetmap/iD/issues/4804
+[#4795]: https://github.com/openstreetmap/iD/issues/4795
+[#4767]: https://github.com/openstreetmap/iD/issues/4767
+[#4766]: https://github.com/openstreetmap/iD/issues/4766
+[@fritruc]: https://github.com/fritruc
+[@vershwal]: https://github.com/vershwal
+[@jgravois]: https://github.com/jgravois
+
+#### :earth_asia: Localization
+* Do not localize decimalCoordinatePair appearing in info panels ([#4765])
+* Fix Polish address format to not show place and city together ([#4784], thanks [@MKuranowski])
+
+[#4784]: https://github.com/openstreetmap/iD/issues/4784
+[#4765]: https://github.com/openstreetmap/iD/issues/4765
+[@MKuranowski]: https://github.com/MKuranowski
+
+#### :hourglass: Performance
+* Don't draw line and area touch targets for segments outside the viewport
+* Improve performance of `coreDifference`, `actionDiscardTags` (slow changeset comment typing) ([#2743], [#4611])
+
+[#4611]: https://github.com/openstreetmap/iD/issues/4611
+[#2743]: https://github.com/openstreetmap/iD/issues/2743
+
+#### :rocket: Presets
+* Rename `building=farm` to "Farm House", add `building=farm_auxiliary` as "Farm Building" ([#4839], [#4826], thanks [@MaciejWWojcik])
+* Reduce the search priority for "Boat Builder" below "Building" ([#4808], thanks [@bencostamagna])
+* Add religion and denomination fields to `historic=wayside_shrine` preset ([#4785], thanks [@hikemaniac])
+* Add `leisure=amusement_arcade` preset ([#4774], [#4777], thanks [@fritruc])
+* Change caption on `shop=agrarian` preset to "Farm Supply Shop" ([#4775])
+* Add presets for `shop=wholesale` and `shop=health_food` ([#4754], [#4773], thanks [@fritruc])
+* Add `dispensing` field to `amenity=pharmacy` preset ([#4763])
+* Add `opening_hours` field to `amenity=police` preset ([#4753])
+
+[#4839]: https://github.com/openstreetmap/iD/issues/4839
+[#4826]: https://github.com/openstreetmap/iD/issues/4826
+[#4808]: https://github.com/openstreetmap/iD/issues/4808
+[#4785]: https://github.com/openstreetmap/iD/issues/4785
+[#4774]: https://github.com/openstreetmap/iD/issues/4774
+[#4777]: https://github.com/openstreetmap/iD/issues/4777
+[#4775]: https://github.com/openstreetmap/iD/issues/4775
+[#4754]: https://github.com/openstreetmap/iD/issues/4754
+[#4773]: https://github.com/openstreetmap/iD/issues/4773
+[#4763]: https://github.com/openstreetmap/iD/issues/4763
+[#4753]: https://github.com/openstreetmap/iD/issues/4753
+[@MaciejWWojcik]: https://github.com/MaciejWWojcik
+[@bencostamagna]: https://github.com/bencostamagna
+[@hikemaniac]: https://github.com/hikemaniac
+[@fritruc]: https://github.com/fritruc
+
+
 # 2.6.1
 ##### February 1, 2018
 
