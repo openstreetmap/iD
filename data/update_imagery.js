@@ -14,6 +14,7 @@ var blacklist = {
     'openpt_map': true,                   // 'OpenPT Map (overlay)'
     'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
     'qa_no_address': true,                // 'QA No Address'
+    'landsat': true,                      // 'Landsat'
 
     'US-TIGER-Roads-2012': true,
     'US-TIGER-Roads-2014': true,
