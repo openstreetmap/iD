@@ -37,6 +37,12 @@ en:
         title: merge elements.
         key: D
         annotation: merge elements.
+    momenta_convertDirection:
+        reason: convert line direction.
+        tooltip: convert chosed lines direction.
+        key: D
+        annotation: convert chosed lines direction
+        title: convert chosed lines direction.
     momenta_addpoints:
         reason: add points.
         tooltip: add points.

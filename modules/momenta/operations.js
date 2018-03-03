@@ -3,6 +3,7 @@
 import { t } from '../util/locale';
 import { behaviorOperation } from '../behavior/index';
 import {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten
+,actionConvertDirection
 ,createAddMorePoints} from '../momenta/actions';
 import {operationDelete} from '../operations';
 import _uniq from 'lodash-es/uniq';
@@ -312,4 +313,54 @@ function operationMomentaAddPoints(selectedIDs, context) {
 }
 
 
-export {operationMomentaCreateSegment,operationMomentaDelete,operationMomentaFillInfo,operationMomentaMerge,operationMomentaStraighten,operationMomentaAddPoints};
+function operationMomentaConvertDirection(selectedIDs, context) {
+    var  action = actionConvertDirection(selectedIDs, context);
+
+    var operation = function() {
+        context.perform(action, operation.annotation());
+    };
+    // function checkIsAllNode(selectedIDs, context) {
+    //     var isAllLine = true,noEle = true;
+    //     selectedIDs.forEach(function (item, i) {
+    //         if (context.entity(item).type !== 'node') {
+    //             isAllLine = false;
+    //         } else if (context.entity(item).tags.ele !=null){
+    //             noEle = false;
+    //         }
+    //     })
+    //     return !noEle;
+    // }
+
+    operation.available = function() {
+        return true;
+    };
+
+
+    operation.disabled = function() {
+        var reason;
+        // if (!checkIsAllNode(selectedIDs,context)){
+        //     reason = t('operations.momenta_addpoints.reason');
+        // }
+        return reason;
+    };
+
+
+    operation.tooltip = function() {
+        return t('operations.momenta_convertDirection.tooltip');
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.momenta_convertDirection.annotation');
+    };
+
+
+    operation.id = 'momenta_convertDirection';
+    operation.keys = [t('operations.momenta_convertDirection.key')];
+    operation.title = t('operations.momenta_convertDirection.title');
+    operation.behavior = behaviorOperation(context).which(operation);
+
+    return operation;
+}
+
+export {operationMomentaCreateSegment,operationMomentaDelete,operationMomentaFillInfo,operationMomentaConvertDirection,operationMomentaMerge,operationMomentaStraighten,operationMomentaAddPoints};

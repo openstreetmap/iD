@@ -5,6 +5,7 @@ export { operationDisconnect } from './disconnect';
 export { operationMerge } from './merge';
 // export { operationMomentaCreateSegment } from './calculate_segments';
 export {operationMomentaDelete,operationMomentaCreateSegment,operationMomentaFillInfo//,operationMomentaMerge
+,operationMomentaConvertDirection
 ,operationMomentaStraighten,operationMomentaAddPoints} from '../momenta/operations';
 export { operationMove } from './move';
 export { operationOrthogonalize } from './orthogonalize';
