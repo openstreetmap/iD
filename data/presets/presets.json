@@ -9428,7 +9428,7 @@
                 "dance teaching"
             ],
             "tags": {
-                "leisure": "dance"
+                "leisure": "dance",
                 "dance:teaching": "yes"
             },
             "reference": {
