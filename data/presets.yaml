@@ -3613,6 +3613,11 @@ en:
         name: Dance Hall
         # 'terms: ballroom,jive,swing,tango,waltz'
         terms: '<translate with synonyms or related terms for ''Dance Hall'', separated by commas>'
+      leisure/dancing_school:
+        # leisure=dance, dance:teaching=yes
+        name: Dancing School
+        # 'terms: jive,swing,tango,waltz,dance teaching'
+        terms: '<translate with synonyms or related terms for ''Dancing School'', separated by commas>'
       leisure/dog_park:
         # leisure=dog_park
         name: Dog Park

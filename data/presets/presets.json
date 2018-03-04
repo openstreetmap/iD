@@ -9408,6 +9408,35 @@
             },
             "name": "Dance Hall"
         },
+        "leisure/dancing_school": {
+            "icon": "school",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "jive",
+                "swing",
+                "tango",
+                "waltz",
+                "dance teaching"
+            ],
+            "tags": {
+                "leisure": "dance"
+                "dance:teaching": "yes"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "dance"
+            },
+            "name": "Dancing School"
+        },
         "leisure/dog_park": {
             "icon": "dog-park",
             "geometry": [
