@@ -18,13 +18,14 @@
     "dist:min": "uglifyjs dist/iD.js -c warnings=false -m -o dist/iD.min.js",
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
     "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
+    "flow": "flow",
+    "flow:coverage": "flow-coverage-report --config .flowcoverageconfig",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js js/id test/spec modules",
     "start": "node development_server.js develop",
     "test": "npm-run-all -s lint build test:**",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
-    "translations": "node data/update_locales",
-    "flow": "flow"
+    "translations": "node data/update_locales"
   },
   "dependencies": {
     "@mapbox/sexagesimal": "1.1.0",
@@ -50,6 +51,7 @@
     "eslint": "^4.3.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "flow-bin": "^0.66.0",
+    "flow-coverage-report": "^0.5.0",
     "flow-remove-types": "^1.2.3",
     "gaze": "^1.1.1",
     "glob": "^7.1.0",
