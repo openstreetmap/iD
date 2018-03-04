@@ -7,12 +7,13 @@ const commonjs = require('rollup-plugin-commonjs');
 const json = require('rollup-plugin-json');
 const includePaths = require('rollup-plugin-includepaths');
 const colors = require('colors/safe');
+const flow = require('rollup-plugin-flow');
 
 
 module.exports = function buildSrc() {
     var cache;
     var building = false;
-    return function() {
+    return function () {
         if (building) return;
 
         // Start clean
@@ -28,9 +29,10 @@ module.exports = function buildSrc() {
             .rollup({
                 input: './modules/id.js',
                 plugins: [
+                    flow(),
                     includePaths({
                         paths: [
-                            'node_modules/d3/node_modules'  // for npm 2
+                            'node_modules/d3/node_modules' // for npm 2
                         ]
                     }),
                     nodeResolve({
@@ -43,7 +45,7 @@ module.exports = function buildSrc() {
                 ],
                 cache: cache
             })
-            .then(function(bundle) {
+            .then(function (bundle) {
                 cache = bundle;
                 return bundle.write({
                     format: 'iife',
@@ -52,11 +54,11 @@ module.exports = function buildSrc() {
                     strict: false
                 });
             })
-            .then(function() {
+            .then(function () {
                 building = false;
                 console.timeEnd(colors.green('src built'));
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 building = false;
                 cache = undefined;
                 console.error(err);
@@ -67,5 +69,7 @@ module.exports = function buildSrc() {
 
 
 function unlink(f) {
-    try { fs.unlinkSync(f); } catch (e) { /* noop */ }
+    try {
+        fs.unlinkSync(f);
+    } catch (e) { /* noop */ }
 }
