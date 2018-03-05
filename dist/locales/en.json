@@ -1703,6 +1703,9 @@
                         }
                     }
                 },
+                "dance/style": {
+                    "label": "Dance Styles"
+                },
                 "date": {
                     "label": "Date"
                 },
@@ -4526,7 +4529,7 @@
                     "terms": "ballroom,jive,swing,tango,waltz"
                 },
                 "leisure/dancing_school": {
-                    "name": "Dancing School",
+                    "name": "Dance School",
                     "terms": "jive,swing,tango,waltz,dance teaching"
                 },
                 "leisure/dog_park": {

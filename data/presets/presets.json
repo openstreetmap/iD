@@ -9425,12 +9425,13 @@
             "name": "Dance Hall"
         },
         "leisure/dancing_school": {
-            "icon": "school",
+            "icon": "music",
             "fields": [
                 "name",
                 "operator",
                 "address",
-                "opening_hours"
+                "opening_hours",
+                "dance/style"
             ],
             "geometry": [
                 "point",
@@ -9451,7 +9452,7 @@
                 "key": "leisure",
                 "value": "dance"
             },
-            "name": "Dancing School"
+            "name": "Dance School"
         },
         "leisure/dog_park": {
             "icon": "dog-park",

@@ -548,6 +548,11 @@
                 }
             }
         },
+        "dance/style": {
+            "key": "dance:style",
+            "type": "semiCombo",
+            "label": "Dance Styles"
+        },
         "date": {
             "key": "date",
             "type": "check",
