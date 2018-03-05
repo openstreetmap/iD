@@ -59,6 +59,9 @@ sources.concat(whitelist).forEach(function(source) {
             })
         });
     if (source.type === 'wms' && supportedProjection === undefined) return;
+    if (source.type === 'wms' && sources.some(function(otherSource) {
+        return otherSource.name === source.name && otherSource.type !== source.type;
+    })) return;
 
     var im = {
         id: source.id,
