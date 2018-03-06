@@ -31,6 +31,51 @@ en:
       annotation:
         line: Started a line.
         area: Started an area.
+    momenta_merge:
+        reason: line nodes must has ele.
+        tooltip: merge elements.
+        title: merge elements.
+        key: D
+        annotation: merge elements.
+    momenta_convertDirection:
+        reason: convert line direction.
+        tooltip: convert chosed lines direction.
+        key: D
+        annotation: convert chosed lines direction
+        title: convert chosed lines direction.
+    momenta_addpoints:
+        reason: add points.
+        tooltip: add points.
+        key: D
+        annotation: add points..
+        title: add points.
+    momenta_straighten:
+        title: Straighten
+        description: Straighten this line.
+        key: S
+        annotation: Straightened a line.
+        too_bendy: This can't be straightened because it bends too much.
+        connected_to_hidden: This line can't be straightened because it is connected to a hidden feature.
+    momenta_delete:
+        reason: All Chosed must be lines.
+        tooltip: delete elements.
+        key: D
+        annotation: delete elements.
+        title: delete chosed elements.
+        not_closed: This can't be made circular because it's not a loop.
+        too_large: This can't be made circular because not enough of it is currently visible.
+        connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
+    momenta_fillInfo:
+        reason: please chose nodes.
+        tooltip: adapte ele.
+        key: D
+        annotation: adapte ele.
+        title: add ele to nodes.
+    momenta_segment:
+          title: create line segment
+          description: create line segment
+          key: S
+          annotation: generate Segment of selected line
     continue:
       key: A
       title: Continue

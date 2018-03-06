@@ -1,0 +1,13 @@
+{
+  "icon": "momenta-pole",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "momenta": "pole"
+  },
+  "name": "momenta pole"
+}

@@ -11,6 +11,7 @@ function setMark(index) {
         result[markValue2.key]=({'icon':cates[i],'name':markValue2.value,'i':i,'id':markValue2.key,'parentName':markValue2.fullName});
     }
     add();
+    return getElement();
 }
 
 function add() {

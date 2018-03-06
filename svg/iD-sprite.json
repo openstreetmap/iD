@@ -422,6 +422,14 @@
     "operation-copy":           { "viewBox": "520 380 20 20" },
     "operation-paste":          { "viewBox": "540 380 20 20" },
     "operation-draw-centerline":{ "viewBox": "560 380 20 20" },
+
+    "operation-momenta_convertDirection":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_addpoints":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_straighten":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_merge":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_fillInfo":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_segment":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_delete":{ "viewBox": "540 380 20 20" },
     "operation-join-lanegroup": { "viewBox": "580 380 20 20" },
 
     "operation-delete-shape":         { "fill": "inherit" },
@@ -697,5 +705,9 @@
     "traffic-sign-toll":        {"viewBox":"391.19000244140625 2321.27001953125 94.4340087890625 93.98642578124999"},
     "traffic-sign_22_":        {"viewBox":"510.53900146484375 2271.55908203125 78.5543701171875 146.07216796875"},
     "traffic-sign_23_":        {"viewBox":"604.0709838867188 2273.705078125 78.554443359375 146.07216796875"}
+,
+    "momenta-icon":        {"viewBox":"901.5 310.7539978027344 56.4003662109375 59.095202636718746"},
+    "momenta-pole":        {"viewBox":"788.0696411132812 316.70599365234375 40.632861328124996 57.105615234375"},
+    "momenta-board":        {"viewBox":"843.4609985351562 310.7539978027344 51.693603515625 64.19040527343749"}
 
 }

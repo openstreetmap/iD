@@ -1,0 +1,9 @@
+{
+    "icon": "momenta-icon",
+    "geometry": "point",
+    "name": "momenta Features",
+    "members": [
+        "momenta/momenta-pole",
+        "momenta/momenta-board"
+    ]
+}
