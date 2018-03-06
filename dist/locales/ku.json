@@ -3,6 +3,62 @@
         "modes": {
             "add_area": {
                 "title": "Herêm"
+            },
+            "add_line": {
+                "title": "Xêz"
+            },
+            "add_point": {
+                "title": "Nuqte"
+            }
+        },
+        "operations": {
+            "continue": {
+                "key": "A",
+                "title": "Bidomîne"
+            },
+            "circularize": {
+                "key": "O"
+            },
+            "orthogonalize": {
+                "title": "Çarçik",
+                "key": "S"
+            },
+            "delete": {
+                "title": "Jê bibe"
+            }
+        },
+        "translate": {
+            "localized_translation_name": "Nav"
+        },
+        "login": "têkeve",
+        "logout": "derkeve",
+        "commit": {
+            "save": "Bar bike",
+            "cancel": "Betal bike"
+        },
+        "info_panels": {
+            "history": {
+                "title": "Dîrok"
+            }
+        },
+        "inspector": {
+            "search": "Lêbigere",
+            "check": {
+                "yes": "Erê",
+                "no": "Na"
+            }
+        },
+        "help": {
+            "title": "Alîkarî",
+            "help": {
+                "title": "Alîkarî"
+            },
+            "editing": {
+                "save_h": "Qeyd bike",
+                "upload_h": "Bar bike"
+            },
+            "points": {
+                "title": "Nuqte"
             }
         }
     }

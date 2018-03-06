@@ -291,6 +291,42 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Tầm xa",
+                "distance_up_to": "Cho tới {distance}",
+                "via": "Theo",
+                "via_node_only": "Chỉ nốt",
+                "via_up_to_one": "Cho tới 1 lối",
+                "via_up_to_two": "Cho tới 2 lối"
+            },
+            "help": {
+                "indirect": "(gián tiếp)",
+                "turn": {
+                    "no_left_turn": "CẤM Rẽ Trái {indirect}",
+                    "no_right_turn": "CẤM Rẽ Phải {indirect}",
+                    "no_u_turn": "CẤM Quay ngược {indirect}",
+                    "no_straight_on": "CẤM Chạy thẳng {indirect}",
+                    "only_left_turn": "CHỈ Rẽ Trái {indirect}",
+                    "only_right_turn": "CHỈ Rẽ Phải {indirect}",
+                    "only_u_turn": "CHỈ Quay ngược {indirect}",
+                    "only_straight_on": "CHỈ Chạy thẳng {indirect}",
+                    "allowed_left_turn": "Cho phép Rẽ Trái {indirect}",
+                    "allowed_right_turn": "Cho phép Rẽ Phải {indirect}",
+                    "allowed_u_turn": "Cho phép Quay ngược {indirect}",
+                    "allowed_straight_on": "Cho phép Chạy thẳng {indirect}"
+                },
+                "from": "TỪ",
+                "via": "THEO",
+                "to": "ĐẾN",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Nhấn chuột để chọn khúc đường {from}",
+                "select_from_name": "Nhấn chuột để chọn {from} {fromName}",
+                "toggle": "Nhấn chuột cho “{turn}”"
+            }
+        },
         "undo": {
             "tooltip": "Hoàn tác việc {action}.",
             "nothing": "Không có gì để hoàn tác."
@@ -846,6 +882,44 @@
                 "using": "Để sử dụng một tuyến GPS trong việc vẽ bản đồ, kéo thả tập tin GPS vào chương trình vẽ bản đồ này. Nếu chương trình nhận ra tuyến đường, tuyến đường sẽ được tô màu hồng sẫm trên bản đồ. Bấm nút {data} **Dữ liệu Bản đồ** ở bên phải của bản đồ để bật, tắt, hoặc thu phóng vừa dữ liệu GPS do bạn thu thập.",
                 "tracing": "Tuyến đường GPX không được tải trực tiếp lên OpenStreetMap. Cách tốt nhất để sử dụng nó là vạch đường mới theo nó trên bản đồ.",
                 "upload": "Bạn cũng có thể [tải dữ liệu GPS của bạn lên OpenStreetMap](https://www.openstreetmap.org/trace/create) để cho người khác sử dụng."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Trợ giúp về Hạn chế Rẽ",
+                    "about": {
+                        "title": "Giới thiệu",
+                        "about": "Hộp này cho phép kiểm tra và thay đổi các hạn chế rẽ. Nó hiển thị mô hình của giao lộ được chọn, bao gồm các đường sá nối liền.",
+                        "from_via_to": "Một hạn chế rẽ luôn có: một **lối TỪ**, một **lối ĐẾN**; và một **nốt THEO** hoặc một **lối THEO** trở lên.",
+                        "maxdist": "Con trượt “{distField}” điều khiển tầm xa tìm kiếm các đường sá nối liền.",
+                        "maxvia": "Con trượt “{viaField}” điều khiển số lối theo được bao gồm khi tìm đường sá. (Mẹo vặt: càng đơn giản càng tốt.)"
+                    },
+                    "inspecting": {
+                        "title": "Kiểm tra",
+                        "about": "Rê chuột lên khúc **TỪ** nào đó để xem nó có hạn chế rẽ hay không. Mỗi khúc có thể đi **ĐẾN** sẽ được tô màu cho biết nó có hạn chế rẽ hay không.",
+                        "from_shadow": "{fromShadow} **TỪ khúc**",
+                        "allow_shadow": "{allowShadow} **Cho phép ĐẾN**",
+                        "restrict_shadow": "{restrictShadow} **Cấm ĐẾN**",
+                        "only_shadow": "{onlyShadow} **Chỉ ĐẾN**",
+                        "restricted": "“Cấm” có nghĩa hạn chế rẽ, ví dụ “Cấm Rẽ Trái”.",
+                        "only": "“Chỉ” có nghĩa rằng một xe đi đường này chỉ được phép tiếp tục theo lối đó, ví dụ “Chỉ Chạy thẳng”."
+                    },
+                    "modifying": {
+                        "title": "Thay đổi",
+                        "about": "Để thay đổi hạn chế rẽ, nhấn chuột vào một khúc **TỪ** ban đầu để chọn nó. Khúc được chọn sẽ chớp chớp, và tất cả các nơi có thể đi **ĐẾN** sẽ xuất hiện hình rẽ.",
+                        "indicators": "Sau đó, nhấn chuột vào hình rẽ để luân chuyển giữa “Cho phép”, “Cấm”, và “Chỉ”.",
+                        "allow_turn": "{allowTurn} **Cho phép ĐẾN**",
+                        "restrict_turn": "{restrictTurn} **Cấm ĐẾN**",
+                        "only_turn": "{onlyTurn} **Chỉ ĐẾN**"
+                    },
+                    "tips": {
+                        "title": "Mẹo vặt",
+                        "simple": "**Nên tạo hạn chế càng đơn giản càng tốt.**",
+                        "simple_example": "Ví dụ đừng nên tạo hạn chế có lối theo nếu nốt theo đã được.",
+                        "indirect": "**Một số hạn chế có vẻ mờ nhạt và đề chữ “(gián tiếp)”.**",
+                        "indirect_example": "Các hạn chế này tồn tại vì một hạn chế lân cận. Chẳng hạn một hạn chế “Chỉ Chạy thẳng” sẽ gây các hạn chế “Cấm Rẽ” gián tiếp đối với các lối khác đi ngang giao lộ.",
+                        "indirect_noedit": "Bạn không thể sửa đổi các hạn chế gián tiếp. Thay thế, sửa đổi hạn chế trực tiếp lân cận."
+                    }
+                }
             }
         },
         "intro": {
@@ -866,10 +940,95 @@
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "vn",
                 "name": {
+                    "1st-avenue": "Ngõ 1",
+                    "2nd-avenue": "Ngõ 2",
+                    "4th-avenue": "Ngõ 4",
+                    "5th-avenue": "Ngõ 5",
+                    "6th-avenue": "Ngõ 6",
+                    "6th-street": "Ngũ Đại Hồ",
+                    "7th-avenue": "Ngõ 7",
+                    "8th-avenue": "Ngõ 8",
+                    "9th-avenue": "Ngõ 9",
+                    "10th-avenue": "Ngõ 10",
+                    "11th-avenue": "Ngõ 11",
+                    "12th-avenue": "Ngõ 12",
+                    "access-point-employment": "Văn phòng Giới thiệu Việc làm Tương lai",
+                    "adams-street": "Đệ Nhị",
                     "andrews-elementary-school": "Trường Tiểu học Trần Hưng Đạo",
+                    "andrews-street": "Trần Hưng Đạo",
+                    "armitage-street": "Mỹ Hòa",
+                    "barrows-school": "Trường Hoa Thịnh Đốn",
+                    "battle-street": "Thắng Lợi",
+                    "bennett-street": "Tam Giác",
+                    "bowman-park": "Công viên Cộng đồng",
+                    "collins-drive": "Kiến Thức",
                     "conrail-railroad": "Bắc Bình – Nam Hòa",
+                    "conservation-park": "Công viên Bảo tồn",
+                    "constantine-street": "Ngọc Lân",
+                    "cushman-street": "Cận Đông",
+                    "dollar-tree": "Tiết kiệm",
+                    "douglas-avenue": "Cựu Kim Sơn",
+                    "east-street": "Đông Phương",
+                    "elm-street": "Đu Đủ",
+                    "flower-street": "Bông Hoa",
+                    "foster-street": "Hậu Trường",
+                    "french-street": "Đọc Lập",
+                    "garden-street": "Vườn Hoa",
+                    "gem-pawnbroker": "Vân Vân",
+                    "golden-finch-framing": "Khung tranh Phượng hoàng",
+                    "grant-avenue": "Phú Quốc",
+                    "hoffman-pond": "Hồ Cạn",
+                    "hoffman-street": "Liên Giang",
+                    "hook-avenue": "Liên Hệ",
+                    "jefferson-street": "Tự Do",
+                    "kelsey-street": "Tây Nguyên",
+                    "lafayette-park": "Công viên Tưởng niệm",
+                    "las-coffee-cafe": "Cà phê Mỹ Châu",
+                    "lincoln-avenue": "Hòa Bình",
+                    "lowrys-books": "Văn Chương",
+                    "lynns-garage": "Tiệm sửa xe ABC",
+                    "main-street-barbell": "Cử tạ Tam Giang",
+                    "main-street-cafe": "Cà phê Ngon lành",
+                    "main-street-fitness": "Thể dục Tam Giang",
+                    "main-street": "Thương mại",
+                    "maple-street": "Thích Hợp",
+                    "marina-park": "Công viên Bến Thông Hải",
+                    "market-street": "Chợ",
+                    "memory-isle-park": "Công viên Ngọc Lâm",
+                    "memory-isle": "Đảo Ngọc Lâm",
+                    "michigan-avenue": "Yên Phong",
+                    "middle-street": "Trung Lập",
+                    "millard-street": "Cửa Sông",
+                    "moore-street": "Đoàn Kết",
+                    "morris-avenue": "Tân Anh",
+                    "mural-mall": "Đường dạo Tranh tường",
+                    "paisanos-bar-and-grill": "Bánh cuốn Tây Hồ",
+                    "paisley-emporium": "Tái Hồi",
+                    "paparazzi-tattoo": "Xăm Xăm",
+                    "pealer-street": "Mạc Tư Khoa",
+                    "pine-street": "Cây Thông",
+                    "pizza-hut": "Phở Tàu Bay",
+                    "portage-avenue": "Hương Giang",
+                    "portage-river": "Sông Hương",
+                    "preferred-insurance-services": "Bảo hiểm Nguyễn Văn Lưu",
+                    "railroad-drive": "Xe Lửa",
+                    "river-city-appliance": "Đồ Gia dụng Tam Giang",
+                    "river-drive": "Ngọc Ngà",
+                    "river-road": "Thủy Triều",
+                    "river-street": "Bến Tàu",
+                    "riverside-cemetery": "Nghĩa địa Ven sông",
+                    "riverwalk-trail": "Đường mòn Dọc sông",
+                    "riviera-theatre": "Rạp phim Tam Giang",
                     "rocky-river": "Sông Đá",
+                    "saint-joseph-river": "Sông Thông Hải",
+                    "scidmore-park-petting-zoo": "Vườn thú Tam Giang",
+                    "scidmore-park": "Công viên Tam Giang",
+                    "scouter-park": "Công viên Ngọc Ngà",
+                    "sherwin-williams": "Màu sắc",
+                    "south-street": "Nam Phương",
                     "southern-michigan-bank": "Ngân hàng Bắc Ninh",
+                    "spring-street": "Xuân Lộc",
+                    "sturgeon-river-road": "Tứ Giang",
                     "three-rivers-city-hall": "Tòa thị chính Tam Giang",
                     "three-rivers-elementary-school": "Trường Tiểu học Tam Giang",
                     "three-rivers-fire-department": "Đoàn Cứu hỏa Tam Giang",
@@ -878,7 +1037,17 @@
                     "three-rivers-municipal-airport": "Sân bay Tam Giang",
                     "three-rivers-post-office": "Bưu điện Tam Giang",
                     "three-rivers-public-library": "Thư viện Tam Giang",
-                    "three-rivers": "Tam Giang"
+                    "three-rivers": "Tam Giang",
+                    "unique-jewelry": "Kim Châu",
+                    "walnut-street": "Hạch Đào",
+                    "washington-street": "Hoa Thịnh Đốn",
+                    "water-street": "Trường Sa",
+                    "west-street": "Tây Phương",
+                    "wheeler-street": "Cần Cù",
+                    "william-towing": "Dũng Kéo Xe",
+                    "willow-drive": "Cây Liễu",
+                    "wood-street": "Hai Bà Trưng",
+                    "world-fare": "Bốn Phương"
                 }
             },
             "welcome": {
@@ -3364,6 +3533,14 @@
                 },
                 "building/entrance": {
                     "name": "Cửa Ra vào"
+                },
+                "building/farm": {
+                    "name": "Nhà ở Nông trại",
+                    "terms": "nhà ở nông trại, căn nhà nông trại, nha o nong trai, can nha nong trai"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Tòa nhà Nông trại",
+                    "terms": "tòa nhà nông trại, toà nhà nông trại, toa nha nong trai"
                 },
                 "building/garage": {
                     "name": "Ga ra",

@@ -745,8 +745,8 @@
             "editing": {
                 "title": "Modifier et sauvegarder",
                 "select_h": "Selectionner",
-                "select_left_click": "{clic gauche} Cliquez avec le bouton gauche de la souris sur une fonctionnalité pour la sélectionner. Ceci le mettra en surbrillance, et la barre latérale affichera des détails de cette fonctionnalité, tels que son nom ou son adresse.",
-                "select_right_click": "{rightclick} Le click droit sur un élément affiche le menu d'édition, qui permet d'effectuer certaines opérations sur cet élément comme le tourner, le déplacer ou le supprimer.",
+                "select_left_click": "{leftclick} Cliquez avec le bouton gauche de la souris sur une fonctionnalité pour la sélectionner. Ceci le mettra en surbrillance, et la barre latérale affichera des détails de cette fonctionnalité, tels que son nom ou son adresse.",
+                "select_right_click": "{rightclick} Le clic droit sur un élément affiche le menu d'édition, qui permet d'effectuer certaines opérations sur cet élément comme le tourner, le déplacer ou le supprimer.",
                 "multiselect_h": "Sélection multiple",
                 "multiselect_shift_click": "`{shift}`+{leftclick} permet de sélectionner plusieurs éléments en même temps. Cela permet de déplacer ou de supprimer plusieurs objets d'un coup.",
                 "multiselect_lasso": "Pour sélectionner plusieurs éléments vous pouvez aussi maintenir la touche `{shift}` pressée, rester appuyé avec le {leftclick} bouton gauche de la souris et glisser la souris pour dessiner un lasso de sélection. Tous les points dans le lasso seront sélectionnés.",
@@ -760,7 +760,7 @@
                 "backups_h": "Sauvegarde automatique",
                 "backups": "Si vous ne pouvez pas terminer vos modifications tout de suite, par exemple si votre ordinateur s’éteint ou si vous fermez votre navigateur, votre travail est enregistré. Vous pouvez revenir plus tard (avec le même navigateur, sur la même ordinateur) et iD vous proposera de reprendre là où vous vous étiez arrêté.",
                 "keyboard_h": "Raccourcis clavier",
-                "keyboard": "Vous pouvez voir une liste de raccourcis clavier en pressant la touche '?'."
+                "keyboard": "Vous pouvez voir une liste de raccourcis clavier en pressant la touche `?`."
             },
             "feature_editor": {
                 "title": "Éditeur d'élément",

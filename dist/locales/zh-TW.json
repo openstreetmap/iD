@@ -291,6 +291,14 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "距離",
+                "distance_up_to": "最大 {distance}",
+                "via": "經由",
+                "via_node_only": "只有節點"
+            }
+        },
         "undo": {
             "tooltip": "復原: {action}",
             "nothing": "沒有動作可以撤銷。"
@@ -1628,6 +1636,9 @@
                         "cycleway:left": "左側",
                         "cycleway:right": "右側"
                     }
+                },
+                "dance/style": {
+                    "label": "舞蹈類型"
                 },
                 "date": {
                     "label": "日期"
@@ -4400,6 +4411,10 @@
                 "leisure/dance": {
                     "name": "舞廳",
                     "terms": "跳舞場所"
+                },
+                "leisure/dancing_school": {
+                    "name": "舞蹈學校",
+                    "terms": "舞蹈學校"
                 },
                 "leisure/dog_park": {
                     "name": "狗公園",

@@ -4,7 +4,7 @@
             "add_area": {
                 "title": "Fläche",
                 "description": "Parks, Gebäude, Seen oder andere Flächen zur Karte hinzufügen.",
-                "tail": "Klicke auf die Karte, um das Zeichnen einer Fläche wie einen Park, eines Sees oder eines Gebäudes zu starten."
+                "tail": "Klicke auf die Karte, um das Zeichnen einer Fläche wie eines Parks, eines Sees oder eines Gebäudes zu starten."
             },
             "add_line": {
                 "title": "Linie",
@@ -294,10 +294,10 @@
         "restriction": {
             "controls": {
                 "distance": "Entfernung",
-                "distance_up_to": "Bis zu {distance}",
+                "distance_up_to": "bis zu {distance}",
                 "via": "Über",
-                "via_node_only": "Nur ein Knoten",
-                "via_up_to_one": "Nur ein Weg",
+                "via_node_only": "nur ein Knoten",
+                "via_up_to_one": "nur ein Weg",
                 "via_up_to_two": "maximal zwei Wege"
             },
             "help": {
@@ -888,7 +888,7 @@
                     "title": "Abbiegebeschränkungen Hilfe",
                     "about": {
                         "title": "Informationen",
-                        "about": "Dieses Feld erlaubt es Abbiegebeschränkungen zu prüfen und zu ändern. Es zeigt ein Model der ausgewählten Kreuzung, inklusive angrenzender Straßen.",
+                        "about": "Dieses Feld erlaubt es Abbiegebeschränkungen zu prüfen und zu ändern. Es zeigt ein Modell der ausgewählten Kreuzung mit den angrenzenden Straßen.",
                         "from_via_to": "Eine Abbiegebeschränkung beinhaltet immer: einen  **VON Weg**, einen **Nach Weg** und entweder einen **VIA Knoten** oder einen oder mehrere **VIA Wege**.",
                         "maxdist": "Die \"{distField}\" Schieberegler bestimmen, wie weit nach angrenzenden Straßen gesucht wird.",
                         "maxvia": "Die \"{viaField}\" Schieberegler bestimmen, wie viele Zwischenwege in die Suche einbezogen werden. (Tipp: Einfacher ist besser)"
@@ -908,13 +908,13 @@
                         "about": "Um Abbiegebeschränkungen zu ändern, klicke zuerst auf eine **VON** Straße, um sie auszuwählen. Die ausgewählte Straße wird pulsieren und alle möglichen **NACH** Straßen werden als Abbiegesymbole erscheinen.",
                         "indicators": "Dann klickt man auf ein Abbiegesymbol, um es zwischen \"Erlaubt\", \"Verboten\" und \"Nur\" zu ändern.",
                         "allow_turn": "{allowTurn} **NACH erlaubt**",
-                        "restrict_turn": "{restrictTurn} **NACH beschränkt**",
+                        "restrict_turn": "{restrictTurn} **NACH verboten**",
                         "only_turn": "{onlyTurn} **nur NACH**"
                     },
                     "tips": {
                         "title": "Tipps",
                         "simple": "**Bevorzuge einfache anstatt komplexe Beschränkungen.**",
-                        "simple_example": "Zum Beispiel vermeidet man Beschränkungen \"über Wege\", wenn es eine einfache \"über Knoten\" Abbiegebeschränkung auch tut.",
+                        "simple_example": "Vermeide beispielsweise Abbiegebeschränkungen \"über Wege\", wenn die Modellierung auch mit einfachen Abbiegebeschränkungen \"über Knoten\" möglich ist.",
                         "indirect": "**Einige Beschränkungen zeigen den Text \"(indirekt)\" an und sind heller gezeichnet.**",
                         "indirect_example": "Diese Beschränkungen existieren wegen einer anderen Beschränkung in der Nähe. Zum Beispiel werden durch eine \"Nur Geradeaus\" Beschränkung indirekt ür alle anderen Wege über die Kreuzung \"Keine Kehrtwende\" Beschränkungen erstellt.",
                         "indirect_noedit": "Indirekte Beschränkungen sollte man nicht ändern. Stattdessen sollte man die angrenzende, direkte Beschränkung ändern."
@@ -1702,6 +1702,9 @@
                         "cycleway:left": "Linke Seite",
                         "cycleway:right": "Rechte Seite"
                     }
+                },
+                "dance/style": {
+                    "label": "Tanzstile"
                 },
                 "date": {
                     "label": "Datum"
@@ -4344,8 +4347,8 @@
                     "terms": "Hafenanlage, Seehafen"
                 },
                 "landuse/industrial": {
-                    "name": "Fabrikgelände",
-                    "terms": "Industriegebiet, Industriegelände, Industriegegend, Industrie, Fabriken"
+                    "name": "Industriegebiet",
+                    "terms": "Fabrikgelände, Industriegelände, Industriegegend, Industrie, Fabriken"
                 },
                 "landuse/industrial/scrap_yard": {
                     "name": "Schrottplatz",
@@ -4440,7 +4443,7 @@
                     "terms": "Wohngebiet,Wohnanlage,Wohngegend,Wohnregion,Wohnhäuser,Siedlungsfläche"
                 },
                 "landuse/retail": {
-                    "name": "Geschäftsgebiet",
+                    "name": "Einzelhandel",
                     "terms": "Einzelhandelsgebiet, Einzelhandelsfläche, Geschäfte"
                 },
                 "landuse/vineyard": {
@@ -4468,12 +4471,16 @@
                     "terms": "Bowlingbahn, Kegelbahn"
                 },
                 "leisure/common": {
-                    "name": "öffentliche Fläche, Allmende",
-                    "terms": "öffentliche Grünfläche, Allmende, Allmeind"
+                    "name": "Öffentliche Fläche, Allmende",
+                    "terms": "Öffentliche Grünfläche, Allmende, Allmeind"
                 },
                 "leisure/dance": {
                     "name": "Tanzsaal",
                     "terms": "Tanzlokal, Tanzhalle, Tanzboden, Tanzdiele, Tanzpalast, Tanzsaal, Tanzhaus"
+                },
+                "leisure/dancing_school": {
+                    "name": "Tanzschule",
+                    "terms": "Tanzschule"
                 },
                 "leisure/dog_park": {
                     "name": "Hundepark",
@@ -4891,7 +4898,7 @@
                     "terms": "Sand"
                 },
                 "natural/scree": {
-                    "name": "Hangschutt",
+                    "name": "Geröll",
                     "terms": "Schutthalde, Schuttkegel, Schuttfuß, Schuttrampe, Talus"
                 },
                 "natural/scrub": {
@@ -5125,7 +5132,7 @@
                     "terms": "Kleine Insel, Inselchen"
                 },
                 "place/isolated_dwelling": {
-                    "name": "abgelegene Siedlung",
+                    "name": "Einzelsiedlung",
                     "terms": "frei stehendes Haus, Einzelhaus, Einöde"
                 },
                 "place/locality": {

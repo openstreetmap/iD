@@ -291,6 +291,42 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "距离",
+                "distance_up_to": "{distance} 及以内",
+                "via": "经由",
+                "via_node_only": "仅限节点",
+                "via_up_to_one": "最多 1 路径",
+                "via_up_to_two": "最多 2 路径"
+            },
+            "help": {
+                "indirect": "（间接）",
+                "turn": {
+                    "no_left_turn": "禁止左转{indirect}",
+                    "no_right_turn": "禁止右转{indirect}",
+                    "no_u_turn": "禁止掉头{indirect}",
+                    "no_straight_on": "禁止直行{indirect}",
+                    "only_left_turn": "仅限左转{indirect}",
+                    "only_right_turn": "仅限右转{indirect}",
+                    "only_u_turn": "仅限掉头{indirect}",
+                    "only_straight_on": "仅限直行{indirect}",
+                    "allowed_left_turn": "允许左转{indirect}",
+                    "allowed_right_turn": "允许右转{indirect}",
+                    "allowed_u_turn": "允许掉头{indirect}",
+                    "allowed_straight_on": "允许直行{indirect}"
+                },
+                "from": "从",
+                "via": "经由",
+                "to": "至",
+                "from_name": "{from} {fromName} 起",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "点击选择一个 {from}... 部分",
+                "select_from_name": "点击选择 {from} {fromName} 起",
+                "toggle": "点击应用 “{turn}”"
+            }
+        },
         "undo": {
             "tooltip": "撤销：{action}",
             "nothing": "没有可以撤销的操作。"
@@ -757,6 +793,16 @@
             "gps": {
                 "title": "GPS 轨迹",
                 "upload": "您也可以[将您的 GPS 数据上传至 OpenStreetMap](https://www.openstreetmap.org/trace/create) 以供他人使用。"
+            },
+            "field": {
+                "restrictions": {
+                    "title": "转向限制帮助",
+                    "about": {
+                        "title": "关于",
+                        "about": "本字段允许您浏览并修改转向限制。一个包含选中的交叉路口以及其邻近连接的道路的模型将会被显示。",
+                        "from_via_to": "一个转向限制总是包含：一条 **从... 路径**（起始路径）、一条 **至... 路径**（结束路径） 和一个 **经由节点** 或单/多条 **经由路径**。"
+                    }
+                }
             }
         },
         "intro": {

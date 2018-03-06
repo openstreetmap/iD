@@ -291,6 +291,42 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Distanco",
+                "distance_up_to": "Maksimume {distance}",
+                "via": "Tra",
+                "via_node_only": "Nur nodo",
+                "via_up_to_one": "Maks. 1 vojo",
+                "via_up_to_two": "Maks 2 vojoj"
+            },
+            "help": {
+                "indirect": "(pera limigo)",
+                "turn": {
+                    "no_left_turn": "SEN turno maldekstren {indirect}",
+                    "no_right_turn": "SEN turno dekstren {indirect}",
+                    "no_u_turn": "SEN turno malantaŭen {indirect}",
+                    "no_straight_on": "SEN veturo rekten {indirect}",
+                    "only_left_turn": "NUR turno maldekstren {indirect}",
+                    "only_right_turn": "NUR turno dekstren {indirect}",
+                    "only_u_turn": "NUR turno malantaŭen {indirect}",
+                    "only_straight_on": "NUR veturo rekten {indirect}",
+                    "allowed_left_turn": "Turno maldekstren permesata {indirect}",
+                    "allowed_right_turn": "Turno dekstren permesata {indirect}",
+                    "allowed_u_turn": "Turno malantaŭen permesata {indirect}",
+                    "allowed_straight_on": "Veturo rekten permesata {indirect}"
+                },
+                "from": "EL",
+                "via": "TRA",
+                "to": "AL",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Klaku por elekti segmenton {from}",
+                "select_from_name": "Klaku por elekti {from} {fromName}",
+                "toggle": "Klaku por “{turn}”"
+            }
+        },
         "undo": {
             "tooltip": "Malfari: {action}",
             "nothing": "Nenio por malfari."
@@ -844,6 +880,44 @@
                 "using": "Por uzi GPS-spuron por mapigi, ŝovu kaj demetu dosieron en la map-redaktilo. Se ĝi estos legita, ĝi montriĝos sur la mapo kiel hela violkolora linio. Klaku la panelon {data} **map-datumoj** flanke de la mapo por montri, kaŝi aŭ pligrandigi al viaj GPS-datumoj.",
                 "tracing": "La GPS-spuro ne estas sendata al OpenStreetMap – la plej bona maniero por uzi ĝin estas desegni sur la mapo uzante ĝin kiel gvidilon por novaj objektoj por aldoni.",
                 "upload": "Vi ankaŭ povas [alŝuti viajn GPS-datumoj al OpenStreetMap](https://www.openstreetmap.org/trace/create) por ke aliaj uzantoj povu uzi ilin."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Helpo pri turnaj limigoj",
+                    "about": {
+                        "title": "Pri",
+                        "about": "Tiu ĉi kampo ebligas al vi kontroli kaj modifi turnajn limigojn. Ĝi montras skizon de elektita vojkruciĝo kun proksimaj konektitaj vojoj.",
+                        "from_via_to": "Turna limigo ĉiam enhavas unu **vojon EL**, unu **vojon AL**, kaj aŭ unu **nodo TRA** aŭ almenaŭ unu **vojo TRA**.",
+                        "maxdist": "La ŝovilo “{distField}” ebligas agordi kiel malproksime serĉi pliajn konektitajn vojojn.",
+                        "maxvia": "La ŝovilo “{viaField}” ebligas agordi kiom da vojoj inkluzivi dum serĉi. (Konsilo: ju pli simple des pli bone.)"
+                    },
+                    "inspecting": {
+                        "title": "Kontroli",
+                        "about": "Musumu supre iu segmento **EL** por vidigi ĉu ĝi havas iujn turnajn limigojn. Ĉiu ebla elveturo **AL** estos kolore markita se limigo ekzistas.",
+                        "from_shadow": "{fromShadow} **segmento EL**",
+                        "allow_shadow": "{allowShadow} **AL permesata**",
+                        "restrict_shadow": "{restrictShadow} **AL malpermesata**",
+                        "only_shadow": "{onlyShadow} **nur AL**",
+                        "restricted": "“Malpermesata” signifas, ke veturo tien estas malpermesata, ekzemple “sen turno maldekstren”.",
+                        "only": "“Nur” signifas, ke veturilo sekvanta tiun vojon povas nur veturi tien, ekzemple “nur veturo rekten”."
+                    },
+                    "modifying": {
+                        "title": "Modifi",
+                        "about": "Por modifi turnajn limigojn, unue klaku iun segmenton **EL** por ĝin elekti. La elektita segmento estos markita per pulsanta lumo kaj eblaj elveturoj **AL** aperos kiel turn-simboloj.",
+                        "indicators": "Sekve klaku turn-simbolon por baskuli inter “permesata”, “malpermesata” kaj “nur”.",
+                        "allow_turn": "{allowTurn} **AL permesata**",
+                        "restrict_turn": "{restrictTurn} **AL malpermesata**",
+                        "only_turn": "{onlyTurn} **nur AL**"
+                    },
+                    "tips": {
+                        "title": "Konsiloj",
+                        "simple": "**Preferu simplajn turnajn limigojn ol malsimplaj.**",
+                        "simple_example": "Ekzemple evitu krei limigon tra-vojo, se pli simpla tra-noda limigo funkcius.",
+                        "indirect": "**Ĉe kelkaj limigoj montriĝas teksto \"(indirect)\" kaj estas markitaj pli hele.**",
+                        "indirect_example": "Tiuj limigoj ekzistas pro alia proksima limigo. Ekzemple limigo “nur veturo rekten” pere kreos limigojn “sen turno” por ĉiuj vojoj tra la vojkruciĝo.",
+                        "indirect_noedit": "Vi ne povas redakti perajn limigojn. Anstataŭ redaktu proksiman senperan limigon."
+                    }
+                }
             }
         },
         "intro": {
@@ -1626,6 +1700,9 @@
                         "cycleway:left": "Maldekstra flanko",
                         "cycleway:right": "Dekstra flanko"
                     }
+                },
+                "dance/style": {
+                    "label": "Stiloj de danco"
                 },
                 "date": {
                     "label": "Dato"
@@ -3458,6 +3535,14 @@
                 "building/entrance": {
                     "name": "Enirejo/elirejo"
                 },
+                "building/farm": {
+                    "name": "Ĉefarma domo",
+                    "terms": "kampodomo,kampara domo,somerdomo,farmo,farmodomo"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Ĉefarma konstruaĵo",
+                    "terms": "kampodomo,kampara domo,somerdomo,farmo,farmodomo"
+                },
                 "building/garage": {
                     "name": "Garaĝo",
                     "terms": "garagho,garagxo,aŭtejo,autejo,auxtejo,aŭtomobilejo"
@@ -4390,6 +4475,10 @@
                 "leisure/dance": {
                     "name": "Dancejo",
                     "terms": "diskoteko,diskejo"
+                },
+                "leisure/dancing_school": {
+                    "name": "Danca lernejo",
+                    "terms": "danclernejo,dancolernejo"
                 },
                 "leisure/dog_park": {
                     "name": "Hund-parko",

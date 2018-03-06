@@ -1703,6 +1703,9 @@
                         "cycleway:right": "右側"
                     }
                 },
+                "dance/style": {
+                    "label": "ダンススタイル"
+                },
                 "date": {
                     "label": "日付"
                 },
@@ -3912,7 +3915,7 @@
                 },
                 "footway/crossing-raised": {
                     "name": "隆起横断歩道",
-                    "terms": "隆起横断歩道, 横断歩道, 交通安全"
+                    "terms": "隆起横断歩道, 横断歩道, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "footway/crosswalk": {
                     "name": "横断歩道（ゼブラあり）",
@@ -3920,7 +3923,7 @@
                 },
                 "footway/crosswalk-raised": {
                     "name": "隆起横断歩道（ゼブラあり）",
-                    "terms": "隆起横断歩道, 横断歩道, 交通安全, ゼブラ"
+                    "terms": "隆起横断歩道, 横断歩道, 交通安全, ゼブラ, 交通静穏化, 道路設備, 減速"
                 },
                 "footway/sidewalk": {
                     "name": "歩道（車道の脇）",
@@ -4054,7 +4057,7 @@
                 },
                 "highway/crossing-raised": {
                     "name": "隆起横断歩道",
-                    "terms": "隆起横断歩道, 横断歩道, 交通安全"
+                    "terms": "隆起横断歩道, 横断歩道, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "highway/crosswalk": {
                     "name": "横断歩道（ノード用、ゼブラあり）",
@@ -4062,7 +4065,7 @@
                 },
                 "highway/crosswalk-raised": {
                     "name": "隆起横断歩道（ゼブラあり）",
-                    "terms": "隆起横断歩道, 横断歩道, 交通安全"
+                    "terms": "隆起横断歩道, 横断歩道, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "highway/cycleway": {
                     "name": "自転車道",
@@ -4078,7 +4081,7 @@
                 },
                 "highway/give_way": {
                     "name": "ゆずれ標識",
-                    "terms": "ゆずれ, 譲れ"
+                    "terms": "ゆずれ, 譲れ, 道路設備, 標識, 道路標識"
                 },
                 "highway/living_street": {
                     "name": "Living Street (日本では使用しない)",
@@ -4182,7 +4185,7 @@
                 },
                 "highway/stop": {
                     "name": "一時停止標識",
-                    "terms": "一時停止標識, 一旦停止, 止まれ, とまれ, 道路標識"
+                    "terms": "一時停止標識, 一旦停止, 止まれ, とまれ, 道路標識, 道路設備"
                 },
                 "highway/street_lamp": {
                     "name": "街路灯",
@@ -4474,6 +4477,10 @@
                 "leisure/dance": {
                     "name": "ダンスホール",
                     "terms": "ダンスホール, 娯楽"
+                },
+                "leisure/dancing_school": {
+                    "name": "ダンススクール",
+                    "terms": "ダンススクール, 舞踏, 日本舞踊, タンゴ, 社交ダンス, ワルツ, ダンス教室, 稽古, 練習, 習い事, 学校"
                 },
                 "leisure/dog_park": {
                     "name": "ドッグパーク",
@@ -6143,43 +6150,43 @@
                 },
                 "traffic_calming": {
                     "name": "交通静穏化設備（全般）",
-                    "terms": "交通静穏化, 交通安全"
+                    "terms": "交通静穏化, 交通安全, 道路設備, 減速"
                 },
                 "traffic_calming/bump": {
                     "name": "スピードバンプ",
-                    "terms": "スピードバンプ, 交通安全"
+                    "terms": "スピードバンプ, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/chicane": {
                     "name": "シケイン",
-                    "terms": "シケイン, 交通安全"
+                    "terms": "シケイン, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/choker": {
                     "name": "チョーカー",
-                    "terms": "チョーカー, 交通安全"
+                    "terms": "チョーカー, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/cushion": {
                     "name": "スピードクッション",
-                    "terms": "スピードクッション, 交通安全"
+                    "terms": "スピードクッション, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/dip": {
                     "name": "ディップ",
-                    "terms": "ディップ, 交通安全"
+                    "terms": "ディップ, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/hump": {
                     "name": "スピードハンプ",
-                    "terms": "スピードハンプ, 交通安全"
+                    "terms": "スピードハンプ, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/island": {
                     "name": "交通島",
-                    "terms": "交通島, 交通安全"
+                    "terms": "交通島, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "ランブルストリップ",
-                    "terms": "ランブルストリップ, 交通安全"
+                    "terms": "ランブルストリップ, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "traffic_calming/table": {
                     "name": "隆起台（減速用）",
-                    "terms": "隆起台, スピードテーブル, 減速テーブル, 交通安全"
+                    "terms": "隆起台, スピードテーブル, 減速テーブル, 交通安全, 交通静穏化, 道路設備, 減速"
                 },
                 "type/boundary": {
                     "name": "境界",

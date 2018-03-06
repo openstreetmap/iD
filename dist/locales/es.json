@@ -1629,6 +1629,9 @@
                         "cycleway:right": "Lado derecho"
                     }
                 },
+                "dance/style": {
+                    "label": "Estilos de baile"
+                },
                 "date": {
                     "label": "Fecha"
                 },
@@ -3460,6 +3463,12 @@
                 "building/entrance": {
                     "name": "Entrada/Salida"
                 },
+                "building/farm": {
+                    "name": "Casa de Campo"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Edificio agrícola"
+                },
                 "building/garage": {
                     "name": "Garaje privado",
                     "terms": "garaje,cochera"
@@ -4392,6 +4401,9 @@
                 "leisure/dance": {
                     "name": "Salón de baile",
                     "terms": "sala de baile, pista de baile, baile de salón, bolero, conga, cha-cha-chá, fox-trot, mambo, son cubano, meregue, milonga, pasodoble, polka, rock and roll, rumba, swing, tango, vals, jive"
+                },
+                "leisure/dancing_school": {
+                    "name": "Escuela de baile"
                 },
                 "leisure/dog_park": {
                     "name": "Parque canino",

@@ -291,6 +291,42 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Distanza",
+                "distance_up_to": "Fino a {distance}",
+                "via": "Via",
+                "via_node_only": "Solo nodi",
+                "via_up_to_one": "Al più un percorso",
+                "via_up_to_two": "Non più di 2 percorsi"
+            },
+            "help": {
+                "indirect": "(indiretto)",
+                "turn": {
+                    "no_left_turn": "Divieto di svolta a sinistra {indirect}",
+                    "no_right_turn": "Divieto di svolta a destra {indirect}",
+                    "no_u_turn": "Divieto di inversione a U {indirect}",
+                    "no_straight_on": "Divieto di proseguire diritto {indirect}",
+                    "only_left_turn": "Obbligo di svolta a sinistra {indirect}",
+                    "only_right_turn": "Obbligo di svolta a destra {indirect}",
+                    "only_u_turn": "Obbligo di inversione a U {indirect}",
+                    "only_straight_on": "Obbligo di proseguire diritto {indirect}",
+                    "allowed_left_turn": "È consentita la svolta a sinistra {indirect}",
+                    "allowed_right_turn": "È consentita la svolta a destra {indirect}",
+                    "allowed_u_turn": "È consentita l'inversione di marcia {indirect}",
+                    "allowed_straight_on": "È consentito proseguire diritto {indirect}"
+                },
+                "from": "DA",
+                "via": "VIA",
+                "to": "VERSO",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Clicca per selezionare un segmento {from}",
+                "select_from_name": "Clicca per selezionare {from}{fromName}",
+                "toggle": "Clicca per \"{turn}\""
+            }
+        },
         "undo": {
             "tooltip": "Annulla: {action}",
             "nothing": "Niente da ripristinare."
@@ -846,6 +882,15 @@
                 "using": "Per usare una traccia GPS durante la mappatura, trascina e rilascia il file dei dati sull'editor della mappa. Se riconosciuto, il file verrà automaticamente mostrato sulla mappa con un linea viola. Clicca il pannello {data} **Dati mappa** a lato della mappa per abilitare, disabilitare o ingrandire i tuoi dati GPS.",
                 "tracing": "La traccia GPS non viene inviata ad OpenStreetMap: il modo migliore di procedere è di disegnare sulla mappa, usandola come riferimento per i nuovi elementi da aggiungere.",
                 "upload": "Puoi anche [caricare i tuoi dati GPS su OpenStreetMap](https://www.openstreetmap.org/trace/create) affinché anche gli altri utenti possano usarli."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Aiuto per i divieti di svolta",
+                    "about": {
+                        "title": "Informazioni",
+                        "about": "Questo campo permette di esaminare e modificare i divieti di svolta. Viene mostrato un modello dell'intersezione selezionata con incluse le relative strade."
+                    }
+                }
             }
         },
         "intro": {
@@ -1127,7 +1172,7 @@
             },
             "or": "-o-",
             "browsing": {
-                "title": "Navigando",
+                "title": "Naviga",
                 "navigation": {
                     "title": "Navigazione",
                     "pan": "Scorrere la mappa",
@@ -1170,9 +1215,9 @@
                 }
             },
             "editing": {
-                "title": "Modificando",
+                "title": "Modifica",
                 "drawing": {
-                    "title": "Disegnando",
+                    "title": "Disegna",
                     "add_point": "modo 'aggiungi punto'",
                     "add_line": "modo 'aggiungi linea'",
                     "add_area": "modo 'aggiungi area'",
@@ -1217,26 +1262,26 @@
             }
         },
         "units": {
-            "feet": "{quantità} piedi",
-            "miles": "{quantità} miglia",
-            "square_feet": "{quantità} piedi quadrati",
-            "square_miles": "{quantità} miglia quadrate",
-            "acres": "{quantità} acri",
-            "meters": "{quantità} metri",
-            "kilometers": "{quantità} chilometri",
-            "square_meters": "{quantità} m²",
-            "square_kilometers": "{quantità} km²",
+            "feet": "{quantity} piedi",
+            "miles": "{quantity} miglia",
+            "square_feet": "{quantity} piedi quadrati",
+            "square_miles": "{quantity} miglia quadrate",
+            "acres": "{quantity} acri",
+            "meters": "{quantity} metri",
+            "kilometers": "{quantity} chilometri",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
             "hectares": "{quantity} acri",
             "area_pair": "{area1} ({area2})",
-            "arcdegrees": "{quantità}°",
-            "arcminutes": "{quantità}′",
-            "arcseconds": "{quantità}″",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
             "north": "Nord",
             "south": "Sud",
             "east": "Est",
             "west": "Ovest",
-            "coordinate": "{coordinata}{direzione}",
-            "coordinate_pair": "{latitudine}, {longitudine}"
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
