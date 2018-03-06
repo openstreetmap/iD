@@ -28,7 +28,7 @@
             "rtl": false
         },
         "ckb": {
-            "rtl": false
+            "rtl": true
         },
         "cs": {
             "rtl": false
@@ -124,7 +124,7 @@
             "rtl": false
         },
         "ku": {
-            "rtl": true
+            "rtl": false
         },
         "lij": {
             "rtl": false
