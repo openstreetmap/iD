@@ -32,23 +32,6 @@ function vintageRange(vintage) {
     return s;
 }
 
-function getEPSG3857XY(x, y, z) {
-    //polyfill for IE11, PhantomJS
-    var sinh = Math.sinh || function(x) {
-        var y = Math.exp(x);
-        return (y - 1 / y) / 2;
-    };
-
-    var zoomSize = Math.pow(2, z);
-    var lon = x / zoomSize * Math.PI * 2 - Math.PI;
-    var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
-    var mercCoords = d3_geoMercatorRaw(lon, lat);
-    return {
-        x: 20037508.34 / Math.PI * mercCoords[0],
-        y: 20037508.34 / Math.PI * mercCoords[1]
-    };
-}
-
 
 export function rendererBackgroundSource(data) {
     var source = _clone(data);
@@ -114,8 +97,33 @@ export function rendererBackgroundSource(data) {
 
     source.url = function(coord) {
         if (this.type === 'wms') {
-            var minXmaxY = getEPSG3857XY(coord[0], coord[1], coord[2]);
-            var maxXminY = getEPSG3857XY(coord[0]+1, coord[1]+1, coord[2]);
+            var tileToProjectedCoords = (function(x, y, z) {
+                //polyfill for IE11, PhantomJS
+                var sinh = Math.sinh || function(x) {
+                    var y = Math.exp(x);
+                    return (y - 1 / y) / 2;
+                };
+
+                var zoomSize = Math.pow(2, z);
+                var lon = x / zoomSize * Math.PI * 2 - Math.PI;
+                var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
+
+                switch (this.projection) {
+                  case 'EPSG:4326': // todo: alternative codes of WGS 84?
+                    return {
+                      x: lon * 180 / Math.PI,
+                      y: lat * 180 / Math.PI
+                    };
+                  default: // EPSG:3857 and synonyms
+                    var mercCoords = d3_geoMercatorRaw(lon, lat);
+                    return {
+                      x: 20037508.34 / Math.PI * mercCoords[0],
+                      y: 20037508.34 / Math.PI * mercCoords[1]
+                    };
+                }
+            }).bind(this);
+            var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
+            var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
             return template
                 .replace('{width}', 256)
                 .replace('{height}', 256)
