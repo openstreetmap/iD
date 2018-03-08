@@ -4558,7 +4558,7 @@ en:
         # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Monorail Stop / Platform'', separated by commas>'
       public_transport/linear_platform_subway:
-        # 'public_transport=platform, train=yes'
+        # 'public_transport=platform, subway=yes'
         name: Subway Stop / Platform
         # 'terms: metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground'
         terms: '<translate with synonyms or related terms for ''Subway Stop / Platform'', separated by commas>'
@@ -4608,7 +4608,7 @@ en:
         # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Monorail Stop / Platform'', separated by commas>'
       public_transport/platform_subway:
-        # 'public_transport=platform, train=yes'
+        # 'public_transport=platform, subway=yes'
         name: Subway Stop / Platform
         # 'terms: metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground'
         terms: '<translate with synonyms or related terms for ''Subway Stop / Platform'', separated by commas>'
