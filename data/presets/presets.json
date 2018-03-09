@@ -2032,6 +2032,7 @@
         "amenity/parking": {
             "icon": "parking",
             "fields": [
+                "name",
                 "operator",
                 "parking",
                 "capacity",
@@ -10219,6 +10220,7 @@
         "leisure/pitch": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "sport",
                 "surface",
                 "lit"
