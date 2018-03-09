@@ -1,6 +1,7 @@
 {
     "icon": "pitch",
     "fields": [
+        "name",
         "sport",
         "surface",
         "lit"
