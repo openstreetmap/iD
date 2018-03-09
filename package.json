@@ -50,7 +50,7 @@
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
     "eslint": "^4.3.0",
     "eslint-plugin-flowtype": "^2.46.1",
-    "flow-bin": "^0.66.0",
+    "flow-bin": "^0.67.1",
     "flow-coverage-report": "^0.5.0",
     "flow-remove-types": "^1.2.3",
     "gaze": "^1.1.1",
