@@ -4,6 +4,7 @@
         "name",
         "oneway",
         "maxspeed",
+        "maxspeed_advisory",
         "lanes",
         "surface",
         "structure",
