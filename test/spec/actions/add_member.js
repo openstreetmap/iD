@@ -177,7 +177,7 @@ describe('iD.actionAddMember', function() {
             expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
         });
 
-        it('reorders members as node, way, relation (for Public Transport routing)', function() {
+        it('keeps stops and platforms ordered before node, way, relation (for PTv2 routes)', function() {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -185,17 +185,27 @@ describe('iD.actionAddMember', function() {
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '=', nodes: ['b', 'c']}),
                 iD.osmRelation({id: 'r', members: [
-                    { id: 'n1', type: 'node', role: 'forward' },
+                    { id: 'n1', type: 'node', role: 'stop' },
+                    { id: 'w1', type: 'way', role: 'platform' },
+                    { id: 'n2', type: 'node', role: 'stop' },
+                    { id: 'w2', type: 'way', role: 'platform' },
+                    { id: 'n3', type: 'node', role: 'forward' },
+                    { id: 'n4', type: 'node', role: 'forward' },
                     { id: '-', type: 'way', role: 'forward' },
                     { id: 'r1', type: 'relation', role: 'forward' },
-                    { id: 'n2', type: 'node', role: 'forward' }
+                    { id: 'n5', type: 'node', role: 'forward' }
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', { id: '=', type: 'way', role: 'forward' })(graph);
             expect(graph.entity('r').members).to.eql([
-                { id: 'n1', type: 'node', role: 'forward' },
-                { id: 'n2', type: 'node', role: 'forward' },
+                { id: 'n1', type: 'node', role: 'stop' },
+                { id: 'w1', type: 'way', role: 'platform' },
+                { id: 'n2', type: 'node', role: 'stop' },
+                { id: 'w2', type: 'way', role: 'platform' },
+                { id: 'n3', type: 'node', role: 'forward' },
+                { id: 'n4', type: 'node', role: 'forward' },
+                { id: 'n5', type: 'node', role: 'forward' },
                 { id: '-', type: 'way', role: 'forward' },
                 { id: '=', type: 'way', role: 'forward' },
                 { id: 'r1', type: 'relation', role: 'forward' }
