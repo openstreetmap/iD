@@ -378,7 +378,6 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
         var vgraph = intersection.graph;
         var keyVertexIds = intersection.vertices.map(function(v) { return v.id; });
-        var keyWayIds = intersection.ways.map(function(w) { return w.id; });
 
         var start = vgraph.entity(fromWayId);
         if (!start || !(start.__from || start.__via)) return [];
@@ -415,7 +414,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     // if we have seen it before (allowing for an initial u-turn), skip
                     if (currPath.indexOf(way.id) !== -1 && currPath.length >= 3) continue;
 
-                    // Check all "current" restrictions (where we've already walked the `from`)
+                    // Check all "current" restrictions (where we've already walked the `FROM`)
                     var restrict = undefined;
                     for (j = 0; j < currRestrictions.length; j++) {
                         var restriction = currRestrictions[j];
@@ -423,15 +422,6 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         var v = restriction.membersByRole('via');
                         var t = restriction.memberByRole('to');
                         var isOnly = /^only_/.test(restriction.tags.restriction);
-
-                        // Are all the vias part of this local intersection?
-                        // This matters for flagging "indirect" restrictions
-                        var isLocalVia;
-                        if (v.length === 1 && v[0].type === 'node') {
-                            isLocalVia = (keyVertexIds.indexOf(v[0].id) !== -1);
-                        } else {
-                            isLocalVia = _every(v, function(via) { return keyWayIds.indexOf(via.id) !== -1; });
-                        }
 
                         // Does the current path match this turn restriction?
                         var matchesFrom = (f.id === fromWayId);
@@ -464,7 +454,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         } else {    // indirect - caused by a different nearby restriction
                             if (isAlongOnlyPath) {
                                 restrict = { id: restriction.id, direct: false, from: f.id, only: true, end: false };
-                            } else if (isOnly && isLocalVia) {
+                            } else if (isOnly) {
                                 restrict = { id: restriction.id, direct: false, from: f.id, no: true, end: true };
                             }
                         }
@@ -533,15 +523,34 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     nextNodes.push(n2);                     // can advance to last node
                 }
 
-                // gather restrictions FROM this way
-                var fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
-                    if (!r.isRestriction()) return false;
-                    var f = r.memberByRole('from');
-                    return f && f.id === entity.id;
-                });
+                nextNodes.forEach(function(nextNode) {
+                    // gather restrictions FROM this way
+                    var fromRestrictions = vgraph.parentRelations(entity).filter(function(r) {
+                        if (!r.isRestriction()) return false;
 
-                nextNodes.forEach(function(node) {
-                    step(node, currPath, currRestrictions.concat(fromRestrictions), false);
+                        var f = r.memberByRole('from');
+                        if (!f || f.id !== entity.id) return false;
+
+                        var isOnly = /^only_/.test(r.tags.restriction);
+                        if (!isOnly) return true;
+
+                        // `only_` restrictions only matter along the direction of the VIA - #4849
+                        var isOnlyVia = false;
+                        var v = r.membersByRole('via');
+                        if (v.length === 1 && v[0].type === 'node') {   // via node
+                            isOnlyVia = (v[0].id === nextNode.id);
+                        } else {                                        // via way(s)
+                            for (k = 0; k < v.length; k++) {
+                                if (v[k].type === 'way' && vgraph.entity(v[k].id).first() === nextNode.id) {
+                                    isOnlyVia = true;
+                                    break;
+                                }
+                            }
+                        }
+                        return isOnlyVia;
+                    });
+
+                    step(nextNode, currPath, currRestrictions.concat(fromRestrictions), false);
                 });
             }
         }
