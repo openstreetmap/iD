@@ -903,16 +903,16 @@ describe('iD.actionSplit', function () {
         ['restriction', 'restriction:bus'].forEach(function (type) {
             describe('type = ' + type, function () {
 
-                it('updates a restriction\'s \'from\' role', function () {
+                it('updates a restriction\'s \'from\' role - via node', function () {
                     // Situation:
                     //    a ----> b ----> c ~~~~ d
-                    // A restriction from ---- to ~~~~ via c.
+                    // A restriction from ---- to ~~~~ via node c.
                     //
                     // Split at b.
                     //
                     // Expected result:
                     //    a ----> b ====> c ~~~~ d
-                    // A restriction from ==== to ~~~~ via c.
+                    // A restriction from ==== to ~~~~ via node c.
                     //
                     var graph = iD.coreGraph([
                         iD.osmNode({id: 'a'}),
@@ -937,16 +937,16 @@ describe('iD.actionSplit', function () {
                     ]);
                 });
 
-                it('updates a restriction\'s \'to\' role', function () {
+                it('updates a restriction\'s \'to\' role - via node', function () {
                     // Situation:
                     //    a ----> b ----> c ~~~~ d
-                    // A restriction from ~~~~ to ---- via c.
+                    // A restriction from ~~~~ to ---- via node c.
                     //
                     // Split at b.
                     //
                     // Expected result:
                     //    a ----> b ====> c ~~~~ d
-                    // A restriction from ~~~~ to ==== via c.
+                    // A restriction from ~~~~ to ==== via node c.
                     //
                     var graph = iD.coreGraph([
                         iD.osmNode({id: 'a'}),
@@ -971,17 +971,16 @@ describe('iD.actionSplit', function () {
                     ]);
                 });
 
-
-                it('updates both \'to\' and \'from\' roles for u-turn restrictions', function () {
+                it('updates both \'to\' and \'from\' roles for via-node u-turn restrictions', function () {
                     // Situation:
                     //    a ----> b ----> c ~~~~ d
-                    // A restriction from ---- to ---- via c.
+                    // A restriction from ---- to ---- via node c.
                     //
                     // Split at b.
                     //
                     // Expected result:
                     //    a ----> b ====> c ~~~~ d
-                    // A restriction from ==== to ==== via c.
+                    // A restriction from ==== to ==== via node c.
                     //
                     var graph = iD.coreGraph([
                         iD.osmNode({id: 'a'}),
@@ -1003,6 +1002,140 @@ describe('iD.actionSplit', function () {
                         {id: '=', role: 'from', type: 'way'},
                         {id: '=', role: 'to', type: 'way'},
                         {id: 'c', role: 'via', type: 'node'}
+                    ]);
+                });
+
+                it('updates a restriction\'s \'from\' role - via way', function () {
+                    // Situation:
+                    //            e <~~~~ d
+                    //                    |
+                    //                    |
+                    //    a ----> b ----> c
+                    //
+                    // A restriction from ---- to ~~~~ via way |
+                    //
+                    // Split at b.
+                    //
+                    // Expected result:
+                    //            e <~~~~ d
+                    //                    |
+                    //                    |
+                    //    a ----> b ====> c
+                    //
+                    // A restriction from ==== to ~~~~ via way |
+                    //
+                    var graph = iD.coreGraph([
+                        iD.osmNode({id: 'a'}),
+                        iD.osmNode({id: 'b'}),
+                        iD.osmNode({id: 'c'}),
+                        iD.osmNode({id: 'd'}),
+                        iD.osmNode({id: 'e'}),
+                        iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                        iD.osmWay({id: '|', nodes: ['c', 'd']}),
+                        iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                        iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                            {id: '-', role: 'from', type: 'way'},
+                            {id: '~', role: 'to', type: 'way'},
+                            {id: '|', role: 'via', type: 'way'}
+                        ]})
+                    ]);
+
+                    graph = iD.actionSplit('b', ['='])(graph);
+
+                    expect(graph.entity('r').members).to.eql([
+                        {id: '=', role: 'from', type: 'way'},
+                        {id: '~', role: 'to', type: 'way'},
+                        {id: '|', role: 'via', type: 'way'}
+                    ]);
+                });
+
+                it('updates a restriction\'s \'to\' role - via way', function () {
+                    // Situation:
+                    //            e <~~~~ d
+                    //                    |
+                    //                    |
+                    //    a ----> b ----> c
+                    //
+                    // A restriction from ~~~~ to ---- via way |
+                    //
+                    // Split at b.
+                    //
+                    // Expected result:
+                    //            e <~~~~ d
+                    //                    |
+                    //                    |
+                    //    a ----> b ====> c
+                    //
+                    // A restriction from ~~~~ to ==== via way |
+                    //
+                    var graph = iD.coreGraph([
+                        iD.osmNode({id: 'a'}),
+                        iD.osmNode({id: 'b'}),
+                        iD.osmNode({id: 'c'}),
+                        iD.osmNode({id: 'd'}),
+                        iD.osmNode({id: 'e'}),
+                        iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                        iD.osmWay({id: '|', nodes: ['c', 'd']}),
+                        iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                        iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                            {id: '~', role: 'from', type: 'way'},
+                            {id: '-', role: 'to', type: 'way'},
+                            {id: '|', role: 'via', type: 'way'}
+                        ]})
+                    ]);
+
+                    graph = iD.actionSplit('b', ['='])(graph);
+
+                    expect(graph.entity('r').members).to.eql([
+                        {id: '~', role: 'from', type: 'way'},
+                        {id: '=', role: 'to', type: 'way'},
+                        {id: '|', role: 'via', type: 'way'}
+                    ]);
+                });
+
+
+                it('updates a restriction\'s \'via\' role when splitting via way', function () {
+                    // Situation:
+                    //    d               e
+                    //    |               ‖
+                    //    |               ‖
+                    //    a ----> b ----> c
+                    //
+                    // A restriction from | to ‖ via way ----
+                    //
+                    // Split at b.
+                    //
+                    // Expected result:
+                    //    d               e
+                    //    |               ‖
+                    //    |               ‖
+                    //    a ----> b ====> c
+                    //
+                    // A restriction from | to ‖ via ways ----, ====
+                    //
+                    var graph = iD.coreGraph([
+                        iD.osmNode({id: 'a'}),
+                        iD.osmNode({id: 'b'}),
+                        iD.osmNode({id: 'c'}),
+                        iD.osmNode({id: 'd'}),
+                        iD.osmNode({id: 'e'}),
+                        iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                        iD.osmWay({id: '|', nodes: ['d', 'a']}),
+                        iD.osmWay({id: '‖', nodes: ['e', 'c']}),
+                        iD.osmRelation({id: 'r', tags: {type: type}, members: [
+                            {id: '|', role: 'from', type: 'way'},
+                            {id: '-', role: 'via', type: 'way'},
+                            {id: '‖', role: 'to', type: 'way'}
+                        ]})
+                    ]);
+
+                    graph = iD.actionSplit('b', ['='])(graph);
+
+                    expect(graph.entity('r').members).to.eql([
+                        {id: '|', role: 'from', type: 'way'},
+                        {id: '-', role: 'via', type: 'way'},
+                        {id: '=', role: 'via', type: 'way'},
+                        {id: '‖', role: 'to', type: 'way'}
                     ]);
                 });
 

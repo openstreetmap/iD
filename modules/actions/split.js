@@ -1,5 +1,6 @@
 import _extend from 'lodash-es/extend';
 import _indexOf from 'lodash-es/indexOf';
+import _intersection from 'lodash-es/intersection';
 import _some from 'lodash-es/some';
 
 import { actionAddMember } from './add_member';
@@ -31,7 +32,7 @@ import { utilWrap } from '../util';
 export function actionSplit(nodeId, newWayIds) {
     var _wayIDs;
 
-    // if the way is closed, we need to search for a partner node
+    // If the way is closed, we need to search for a partner node
     // to split the way at.
     //
     // The following looks for a node that is both far away from
@@ -87,7 +88,7 @@ export function actionSplit(nodeId, newWayIds) {
 
 
     function split(graph, wayA, newWayId) {
-        var wayB = osmWay({id: newWayId, tags: wayA.tags});
+        var wayB = osmWay({id: newWayId, tags: wayA.tags});   // `wayB` is the NEW way
         var origNodes = wayA.nodes.slice();
         var nodesA;
         var nodesB;
@@ -119,12 +120,58 @@ export function actionSplit(nodeId, newWayIds) {
         graph = graph.replace(wayB);
 
         graph.parentRelations(wayA).forEach(function(relation) {
+            var member;
+
+            // Turn restrictions - make sure:
+            // 1. Splitting a FROM/TO way - only `wayA` OR `wayB` remains in relation
+            //    (whichever one is connected to the VIA node/ways)
+            // 2. Splitting a VIA way - `wayB` remains in relation as a VIA way
             if (relation.isRestriction()) {
-                var via = relation.memberByRole('via');
-                if (via && wayB.contains(via.id)) {
-                    relation = relation.replaceMember(wayA, wayB);
-                    graph = graph.replace(relation);
+                var f = relation.memberByRole('from');
+                var v = relation.membersByRole('via');
+                var t = relation.memberByRole('to');
+                var i;
+
+                // 1. split a FROM/TO
+                if (f.id === wayA.id || t.id === wayA.id) {
+                    var keepB = false;
+                    if (v.length === 1 && v[0].type === 'node') {   // check via node
+                        keepB = wayB.contains(v[0].id);
+                    } else {                                        // check via way(s)
+                        for (i = 0; i < v.length; i++) {
+                            if (v[i].type === 'way') {
+                                var wayVia = graph.hasEntity(v[i].id);
+                                if (wayVia && _intersection(wayB.nodes, wayVia.nodes).length) {
+                                    keepB = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (keepB) {
+                        relation = relation.replaceMember(wayA, wayB);
+                        graph = graph.replace(relation);
+                    }
+
+                // 2. split a VIA
+                } else {
+                    for (i = 0; i < v.length; i++) {
+                        if (v[i].type === 'way' && v[i].id === wayA.id) {
+                            member = {
+                                id: wayB.id,
+                                type: 'way',
+                                role: 'via'
+                            };
+                            graph = actionAddMember(relation.id, member, v[i].index + 1)(graph);
+                            break;
+                        }
+                    }
                 }
+
+            // All other relations (Routes, Multipolygons, etc):
+            // 1. Both `wayA` and `wayB` remain in the relation
+            // 2. But must be inserted as a pair (see `actionAddMember` for details)
             } else {
                 if (relation === isOuter) {
                     graph = graph.replace(relation.mergeTags(wayA.tags));
@@ -132,7 +179,7 @@ export function actionSplit(nodeId, newWayIds) {
                     graph = graph.replace(wayB.update({tags: {}}));
                 }
 
-                var member = {
+                member = {
                     id: wayB.id,
                     type: 'way',
                     role: relation.memberById(wayA.id).role
