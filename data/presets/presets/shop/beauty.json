@@ -5,6 +5,7 @@
         "operator",
         "address",
         "building_area",
+        "beauty",
         "opening_hours",
         "payment_multi"
     ],
