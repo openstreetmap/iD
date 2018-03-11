@@ -291,6 +291,25 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Distància",
+                "distance_up_to": "Fins a {distància}",
+                "via": "Via",
+                "via_node_only": "Només nodes",
+                "via_up_to_one": "Fins a 1 via",
+                "via_up_to_two": "Fins a 2 vies"
+            },
+            "help": {
+                "indirect": "(indirecte)",
+                "turn": {
+                    "no_left_turn": "Prohibició del gir a l'esquerra {indirecte}",
+                    "no_right_turn": "Prohibició del gir a la dreta {indirecte}",
+                    "no_u_turn": "Prohibició del gir total  {indirecte}",
+                    "no_straight_on": "Prohibició de seguir recte {indirecte}"
+                }
+            }
+        },
         "undo": {
             "tooltip": "Desfeu: {action}",
             "nothing": "Res a desfer"
@@ -464,11 +483,14 @@
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "custom_button": "Editar el fons personalitzat",
+            "overlays": "Capes",
             "imagery_source_faq": "Informació d'imatge / Comunicar un problema",
             "reset": "reiniciar",
             "display_options": "Opcions de visualització",
+            "brightness": "Brillantor",
             "contrast": "Contrast",
             "saturation": "Saturació",
+            "sharpness": "Agudesa",
             "minimap": {
                 "description": "Mostrar miniatura de mapa",
                 "tooltip": "Mostra un mapa amb menys zoom per ajudar a localitzar l'àrea que es mostra actualment.",
@@ -759,6 +781,23 @@
             "gps": {
                 "title": "Traces GPS",
                 "using_h": "Fent servir Traces GPS"
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Activa l'ajuda per a les restriccions",
+                    "about": {
+                        "title": "Més informació"
+                    },
+                    "inspecting": {
+                        "title": "Inspeccionant"
+                    },
+                    "modifying": {
+                        "title": "Modificant"
+                    },
+                    "tips": {
+                        "title": "Consells"
+                    }
+                }
             }
         },
         "intro": {
@@ -2541,9 +2580,15 @@
                 "amenity/bureau_de_change": {
                     "name": "Canvi de divisa"
                 },
+                "amenity/bus_station": {
+                    "name": "Estació d'autobusos"
+                },
                 "amenity/cafe": {
                     "name": "Cafè",
                     "terms": "Cafè, bar, cafeteria"
+                },
+                "amenity/car_pooling": {
+                    "name": "Compartició de cotxes"
                 },
                 "amenity/car_rental": {
                     "name": "Lloguer de cotxes",
@@ -2625,6 +2670,9 @@
                 "amenity/fast_food": {
                     "name": "Local de menjar ràpid",
                     "terms": "Menjar ràpid, servei de menjar ràpid, restaurant de menjar ràpid, Local de menjar ràpid"
+                },
+                "amenity/ferry_terminal": {
+                    "name": "Moll per Ferry"
                 },
                 "amenity/fire_station": {
                     "name": "Parc de bombers",
@@ -2763,6 +2811,9 @@
                 "amenity/ranger_station": {
                     "name": "Base d'Agents Rurals"
                 },
+                "amenity/recycling": {
+                    "name": "Contenidor de reciclatge"
+                },
                 "amenity/recycling_centre": {
                     "name": "Centre de Reciclatge"
                 },
@@ -2788,6 +2839,9 @@
                 },
                 "amenity/shower": {
                     "name": "Dutxa"
+                },
+                "amenity/smoking_area": {
+                    "name": "Àrea per a fumadors"
                 },
                 "amenity/social_facility": {
                     "name": "Equipament social"
@@ -2873,6 +2927,9 @@
                 "amenity/veterinary": {
                     "name": "Veterinari"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Paperera per a excrements de gos"
+                },
                 "amenity/waste_basket": {
                     "name": "Paperera",
                     "terms": "Paperera, Basura, Paperera pública, Contenidor, deixalles, brossa"
@@ -2886,12 +2943,21 @@
                 "amenity/water_point": {
                     "name": "Aigua potable d'autocaravana"
                 },
+                "amenity/watering_place": {
+                    "name": "Font d'aigua per animals"
+                },
                 "area": {
                     "name": "Àrea",
                     "terms": "Àrea"
                 },
                 "area/highway": {
                     "name": "Superfície de la carretera"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Atracció de fira"
+                },
+                "attraction/animal": {
+                    "name": "Animal"
                 },
                 "attraction/pirate_ship": {
                     "name": "Vaixell pirata"
@@ -3015,6 +3081,12 @@
                 "building/entrance": {
                     "name": "Entrada/Sortida"
                 },
+                "building/farm": {
+                    "name": "Casa d'una granja"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Edifici d'una granja"
+                },
                 "building/garage": {
                     "name": "garatge ",
                     "terms": "Garatge"
@@ -3047,6 +3119,9 @@
                 "building/kindergarten": {
                     "name": "Edifici de preescolar"
                 },
+                "building/mosque": {
+                    "name": "Edifici d'una mesquita"
+                },
                 "building/public": {
                     "name": "Edifici públic"
                 },
@@ -3060,6 +3135,9 @@
                 "building/roof": {
                     "name": "Teulada"
                 },
+                "building/ruins": {
+                    "name": "Edifici en ruïnes"
+                },
                 "building/school": {
                     "name": "Edifici escolar",
                     "terms": "Escola, Gimnàs, Poliesportiu, Aulari, Seminaris, Pati, Esbarjo, Aules, Despatxos, Tallers, Ateliers, Aules d'informàtica, Classes, Classe, Sala de música, Corredors, Corredor, Pasillo, Pasillos, Passadís, Passadissos, Sala de professors, Recepció"
@@ -3067,20 +3145,32 @@
                 "building/semidetached_house": {
                     "name": "Casa adossada"
                 },
+                "building/service": {
+                    "name": "Edifici de serveis"
+                },
                 "building/shed": {
                     "name": "Traster"
                 },
                 "building/stable": {
                     "name": "Estable"
                 },
+                "building/stadium": {
+                    "name": "Edifici d'un estadi"
+                },
                 "building/static_caravan": {
                     "name": "Caravana fixa"
+                },
+                "building/temple": {
+                    "name": "Edifici d'un temple"
                 },
                 "building/terrace": {
                     "name": "Cases unifamiliars"
                 },
                 "building/train_station": {
                     "name": "Estació de ferrocarril"
+                },
+                "building/transportation": {
+                    "name": "Edifici per a transports"
                 },
                 "building/university": {
                     "name": "Edifici universitari",
@@ -3091,6 +3181,12 @@
                 },
                 "camp_site/camp_pitch": {
                     "name": "Àrea de campament"
+                },
+                "circular": {
+                    "name": "Rotonda"
+                },
+                "club": {
+                    "name": "Club"
                 },
                 "craft": {
                     "name": "Artesà"
@@ -3123,8 +3219,14 @@
                 "craft/caterer": {
                     "name": "Servei de càtering"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Escura-xemeneies"
+                },
                 "craft/clockmaker": {
                     "name": "Rellotger"
+                },
+                "craft/confectionery": {
+                    "name": "Artesà de llaminadures"
                 },
                 "craft/distillery": {
                     "name": "Destil·leria"
@@ -3134,6 +3236,9 @@
                 },
                 "craft/electrician": {
                     "name": "Electricista"
+                },
+                "craft/electronics_repair": {
+                    "name": "Botiga de reparacions electròniques "
                 },
                 "craft/gardener": {
                     "name": "Jardiner"
@@ -3264,6 +3369,9 @@
                 "emergency/private": {
                     "name": "Accés per a emergències privat"
                 },
+                "emergency/water_tank": {
+                    "name": "Dipòsit d'aigua d'emergència"
+                },
                 "emergency/yes": {
                     "name": "Accés per a emergències permès"
                 },
@@ -3274,8 +3382,14 @@
                 "footway/crossing": {
                     "name": "Creuament de carrer"
                 },
+                "footway/crossing-raised": {
+                    "name": "Pas de carrer sobre-elevat"
+                },
                 "footway/crosswalk": {
                     "name": "Pas de vianants"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "Pas de vianants sobre-elevat"
                 },
                 "footway/sidewalk": {
                     "name": "Vorera"

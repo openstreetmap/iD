@@ -1703,6 +1703,9 @@
                         "cycleway:right": "Bên phải"
                     }
                 },
+                "dance/style": {
+                    "label": "Thể loại Khiêu vũ"
+                },
                 "date": {
                     "label": "Ngày tháng"
                 },
@@ -4474,6 +4477,10 @@
                 "leisure/dance": {
                     "name": "Phòng Khiêu vũ",
                     "terms": "phòng khiêu vũ, phòng nhảy, phong khieu vu, phong nhay"
+                },
+                "leisure/dancing_school": {
+                    "name": "Trường Múa/Khiêu vũ",
+                    "terms": "trường múa, trường khiêu vũ, ba lê, ba-lê, balê, tango, tăng-gô, tăng gô, waltz, van-xơ, van xơ, vanxơ, truong mua, truong kheu vu, ba le, ba-le, bale, tang-go, tang go, van-xo, van xo, vanxo"
                 },
                 "leisure/dog_park": {
                     "name": "Công viên dành cho Chó",

@@ -2223,12 +2223,12 @@
                 "piste/difficulty": {
                     "label": "Schwierigkeit",
                     "options": {
-                        "advanced": "Fortgeschritten (schwarze Raute)",
-                        "easy": "Einfach (grüner Kreis)",
-                        "expert": "Experte (doppelte schwarze Raute)",
+                        "advanced": "Fortgeschritten (schwarz)",
+                        "easy": "Einfach (blau)",
+                        "expert": "Experte (orange/doppelschwarz)",
                         "extreme": "Extrem (Kletterausrüstung benötigt)",
-                        "freeride": "Freie Abfahrt (abseits der Piste)",
-                        "intermediate": "Mittel (blaues Quadrat)",
+                        "freeride": "Freie Abfahrt (gelb, abseits der Piste)",
+                        "intermediate": "Mittelschwer (rot)",
                         "novice": "Anfänger (Unterricht)"
                     },
                     "placeholder": "Einfach, Mittel, Fortgeschritten …"
@@ -4292,8 +4292,8 @@
                     "terms": "Becken, Kessel"
                 },
                 "landuse/brownfield": {
-                    "name": "Altlast",
-                    "terms": "Altlast, Industriebrache, verseuchter Boden"
+                    "name": "Brachfläche (innerstädtisch)",
+                    "terms": "Altlast, Industriebrache"
                 },
                 "landuse/cemetery": {
                     "name": "Friedhof",
@@ -4324,7 +4324,7 @@
                 },
                 "landuse/forest": {
                     "name": "Bewirtschafteter Wald",
-                    "terms": "Forst, Forstwald, bewirtschafteter Wald, Wald"
+                    "terms": "Forst, Forstwald, bewirtschafteter Wald, Nutzwald"
                 },
                 "landuse/garages": {
                     "name": "Garagenhof",
@@ -4335,12 +4335,12 @@
                     "terms": "Gras, Grünfläche, Wiese"
                 },
                 "landuse/greenfield": {
-                    "name": "Freifläche",
+                    "name": "Bauland",
                     "terms": "Freifläche, unbebaute Fläche, Bauland, Rohbauland"
                 },
                 "landuse/greenhouse_horticulture": {
-                    "name": "Gewächshäuser-Nutzung",
-                    "terms": "Gewächshäuser-Nutzung"
+                    "name": "Gewächshäuser",
+                    "terms": "Gewächshäuser"
                 },
                 "landuse/harbour": {
                     "name": "Hafen",
@@ -4703,8 +4703,8 @@
                     "terms": "künstlich, Bauwerk"
                 },
                 "man_made/adit": {
-                    "name": "Stollen",
-                    "terms": "Stollen, Zugangsstollen, Förderstollen"
+                    "name": "Bergwerk - Stolleneingang",
+                    "terms": "Stollen (horizontaler Tunnel im Bergbau), Stollenmundloch"
                 },
                 "man_made/breakwater": {
                     "name": "Wellenbrecher",
@@ -4859,7 +4859,7 @@
                 },
                 "natural/cliff": {
                     "name": "Klippe",
-                    "terms": "Klippe, Kliff"
+                    "terms": "Klippe, Kliff, Steilkante"
                 },
                 "natural/coastline": {
                     "name": "Küstenlinie",
@@ -4879,7 +4879,7 @@
                 },
                 "natural/heath": {
                     "name": "Heidelandschaft",
-                    "terms": "Heidelandschaft"
+                    "terms": "Heidelandschaft, Strauchheiden"
                 },
                 "natural/peak": {
                     "name": "Berggipfel",
@@ -4898,8 +4898,8 @@
                     "terms": "Sand"
                 },
                 "natural/scree": {
-                    "name": "Geröll",
-                    "terms": "Schutthalde, Schuttkegel, Schuttfuß, Schuttrampe, Talus"
+                    "name": "Hangschutt, Schutt",
+                    "terms": "Blockschutt, Schuttreiße, Schuttkegel, Schutthalde, Talus, kantiges \"Geröll\""
                 },
                 "natural/scrub": {
                     "name": "Buschland",
@@ -4927,11 +4927,11 @@
                 },
                 "natural/water/lake": {
                     "name": "See",
-                    "terms": "See,Loch"
+                    "terms": "See,Loch,Bergsee"
                 },
                 "natural/water/pond": {
                     "name": "Teich",
-                    "terms": "See,Mühlteich,Bergsee,Tümpel,Teich"
+                    "terms": "Mühlteich,Tümpel,Teich"
                 },
                 "natural/water/reservoir": {
                     "name": "Speicherbecken",
@@ -4943,7 +4943,7 @@
                 },
                 "natural/wood": {
                     "name": "Naturwald",
-                    "terms": "Urwald, Naturwald, Wald"
+                    "terms": "Urwald, Naturwald"
                 },
                 "noexit/yes": {
                     "name": "Sackgasse",
@@ -6273,7 +6273,7 @@
                 },
                 "type/route/piste": {
                     "name": "Wintersportroute",
-                    "terms": "Wintersportroute, Schipiste, Langlaufloipe, Schhiroute, Piste"
+                    "terms": "Wintersportroute, Schipiste, Langlaufloipe, Schiroute, Piste"
                 },
                 "type/route/power": {
                     "name": "Stromnetz",

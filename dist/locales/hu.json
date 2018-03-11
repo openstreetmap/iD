@@ -3858,7 +3858,7 @@
                     "terms": "autópálya lehajtó, autópálya leágazás"
                 },
                 "highway/path": {
-                    "name": "Gyalogút",
+                    "name": "Ösvény",
                     "terms": "Ösvény"
                 },
                 "highway/pedestrian_area": {

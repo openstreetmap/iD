@@ -1171,7 +1171,7 @@
                         "housename": "房名",
                         "housenumber": "123",
                         "housenumber!jp": "建築物號碼/地段",
-                        "neighbourhood": "鄰里",
+                        "neighbourhood": "屋苑",
                         "neighbourhood!jp": "丁目/字/小字 (日本)",
                         "place": "地方",
                         "postcode": "郵遞區號",
