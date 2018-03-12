@@ -66524,6 +66524,18 @@
             "terms_text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
         },
         {
+            "id": "yby",
+            "name": "园博园",
+            "type": "tms",
+            "template": "http://mapeditor.momenta.works:4005/api/default.aerial_yby.mbtiles/{z}/{x}/{y}.png",
+            "scaleExtent": [
+                0,
+                22
+            ],
+            "terms_url": "https://momenta.ai/",
+            "terms_text": "Maps © MOMENTA , Data © haoyiping contributors"
+        },
+        {
             "id": "US-TIGER-Roads-2017",
             "name": "TIGER Roads 2017",
             "type": "tms",
