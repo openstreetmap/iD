@@ -635,7 +635,7 @@ export default {
                 .attr('target', '_blank')
                 .attr('href', 'https://www.mapillary.com/app/?pKey=' + encodeURIComponent(d.key) +
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-                .text('mapillary.com');
+                .text('初速度');
 
             this.updateDetections1(d);
         }
