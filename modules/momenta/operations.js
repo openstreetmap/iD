@@ -33,6 +33,7 @@ function operationMomentaDelete(selectedIDs, context) {
 
 
     operation.disabled = function() {
+        return ''
         return actDel.disabled();
         // var reason;
         // // if (!checkIsAllLine(selectedIDs,context)){
