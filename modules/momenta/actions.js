@@ -322,4 +322,35 @@ function actionConvertLineType(selectIds, context) {
     };
 
 }
-export {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType};
+function actionAddStopLine(selectIds, context) {
+    // var data = convert2JSON(selectIds,context);
+
+    return function convertLineType(graph){
+        var copies = {};
+        selectIds.forEach(function (item,i) {
+            var ele = context.entity(item);
+            if (ele.type === 'way'){
+                graph.entity(ele.id).copy(graph, copies);
+                copies[ele.id].tags.highway = 'lane-white-solid';
+                copies[ele.id].tags.type = 'solid';
+                copies[ele.id].tags.tableInfo = 'lane_lines';
+                copies[ele.id].tags.merge_count = 1;
+
+                // if (ele.tags.type === 'dashed'){
+                //     copies[ele.id].tags.highway = 'lane-white-solid';
+                //     copies[ele.id].tags.type = 'solid';
+                // }else if (ele.tags.type === 'solid'){
+                //     copies[ele.id].tags.highway = 'lane-white-dash';
+                //     copies[ele.id].tags.type = 'dashed';
+                // }
+                actionDeleteWay(ele.id);
+                actionAddEntity(copies[ele.id]);
+            }
+        });
+
+
+        return graph;
+    };
+
+}
+export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType};

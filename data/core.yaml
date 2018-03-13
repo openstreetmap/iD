@@ -54,6 +54,11 @@ en:
         description: convertLineType.
         key: L
         annotation: convertLineType.
+    momenta_addStopLine:
+        title: addStopLine
+        description: addStopLine.
+        key: L
+        annotation: addStopLine.
     momenta_straighten:
             title: Straighten
             description: Straighten this line.
