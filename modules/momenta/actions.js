@@ -2,7 +2,7 @@ import {
     convert2JSON,sendPost
 } from './utils';
 import {url} from './url';
-import {actionAddEntity,actionDeleteNode,actionDeleteWay} from '../actions';
+import {actionAddEntity,actionDeleteNode,actionDeleteWay,actionCopyEntities} from '../actions';
 import {osmNode,osmWay,osmRelation} from '../osm';
 
 function createEntity(ele,type){
@@ -294,4 +294,32 @@ function actionConvertDirection(selectIds, context) {
         return graph;
     };
 }
-export {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection};
+
+
+function actionConvertLineType(selectIds, context) {
+    // var data = convert2JSON(selectIds,context);
+
+    return function convertLineType(graph){
+        var copies = {};
+        selectIds.forEach(function (item,i) {
+            var ele = context.entity(item);
+            if (ele.type === 'way'){
+                graph.entity(ele.id).copy(graph, copies);
+                if (ele.tags.type === 'dashed'){
+                    copies[ele.id].tags.highway = 'lane-white-solid';
+                    copies[ele.id].tags.type = 'solid';
+                }else if (ele.tags.type === 'solid'){
+                    copies[ele.id].tags.highway = 'lane-white-dash';
+                    copies[ele.id].tags.type = 'dashed';
+                }
+                actionDeleteWay(ele.id);
+                actionAddEntity(copies[ele.id]);
+            }
+        });
+
+
+        return graph;
+    };
+
+}
+export {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType};
