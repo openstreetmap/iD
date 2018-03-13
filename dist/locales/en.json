@@ -4298,7 +4298,7 @@
                 },
                 "historic/memorial": {
                     "name": "Memorial",
-                    "terms": ""
+                    "terms": "dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein"
                 },
                 "historic/monument": {
                     "name": "Monument",

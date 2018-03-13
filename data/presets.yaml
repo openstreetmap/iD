@@ -3360,6 +3360,7 @@ en:
       historic/memorial:
         # historic=memorial
         name: Memorial
+        # 'terms: dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein'
         terms: '<translate with synonyms or related terms for ''Memorial'', separated by commas>'
       historic/monument:
         # historic=monument
