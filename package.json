@@ -69,7 +69,6 @@
     "request": "^2.85.0",
     "rollup": "~0.56.3",
     "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-includepaths": "^0.2.2",
     "rollup-plugin-json": "^2.2.0",
     "rollup-plugin-node-resolve": "^3.2.0",
