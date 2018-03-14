@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "type": [
+        "astronomical",
+        "meteorological",
+        "espionage"
+    ],
+    "tags": {
+        "man_made": "observatory"
+    },
+    "name": "Observatory"
+}
