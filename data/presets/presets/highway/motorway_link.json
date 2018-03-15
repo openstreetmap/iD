@@ -4,6 +4,7 @@
         "name",
         "ref_road_number",
         "oneway",
+        "maxspeed",
         "maxspeed/advisory",
         "lanes",
         "surface",
