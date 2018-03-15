@@ -3200,6 +3200,11 @@ en:
         name: Motorway Link
         # 'terms: ramp,on ramp,off ramp'
         terms: '<translate with synonyms or related terms for ''Motorway Link'', separated by commas>'
+      highway/passing_place:
+        # highway=passing_place
+        name: Passing Place
+        # 'terms: turnout, pullout'
+        terms: '<translate with synonyms or related terms for ''Passing Place'', separated by commas>'
       highway/path:
         # highway=path
         name: Path
