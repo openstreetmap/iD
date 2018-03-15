@@ -1,4 +1,6 @@
 en:
+  icons:
+    information: info
   modes:
     add_area:
       title: Area
