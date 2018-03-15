@@ -67,7 +67,7 @@
     "npm-run-all": "^4.0.0",
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.85.0",
-    "rollup": "~0.56.3",
+    "rollup": "~0.57.0",
     "rollup-plugin-commonjs": "^9.0.0",
     "rollup-plugin-includepaths": "^0.2.2",
     "rollup-plugin-json": "^2.2.0",
