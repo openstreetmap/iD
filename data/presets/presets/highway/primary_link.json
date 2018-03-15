@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "oneway",
-        "maxspeed",
+        "maxspeed/advisory",
         "lanes",
         "surface",
         "maxheight",
