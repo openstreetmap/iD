@@ -11074,6 +11074,20 @@
             },
             "name": "Observation Tower"
         },
+        "man_made/observatory": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "astronomical",
+                "meteorological"
+            ],
+            "tags": {
+                "man_made": "observatory"
+            },
+            "name": "Observatory"
+        },
         "man_made/petroleum_well": {
             "icon": "poi-storage-tank",
             "geometry": [

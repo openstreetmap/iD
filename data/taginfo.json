@@ -2062,6 +2062,10 @@
         },
         {
             "key": "man_made",
+            "value": "observatory"
+        },
+        {
+            "key": "man_made",
             "value": "petroleum_well"
         },
         {
