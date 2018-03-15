@@ -1410,6 +1410,10 @@
         },
         {
             "key": "highway",
+            "value": "passing_place"
+        },
+        {
+            "key": "highway",
             "value": "path"
         },
         {

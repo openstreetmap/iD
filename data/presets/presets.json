@@ -7349,6 +7349,19 @@
             ],
             "name": "Motorway"
         },
+        "highway/passing_place": {
+            "icon": "circle-stroked",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "highway": "passing_place"
+            },
+            "terms": [
+                "turnout, pullout"
+            ],
+            "name": "Passing Place"
+        },
         "highway/path": {
             "icon": "highway-path",
             "fields": [

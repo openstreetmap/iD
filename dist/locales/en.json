@@ -4152,6 +4152,10 @@
                     "name": "Motorway",
                     "terms": "autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike"
                 },
+                "highway/passing_place": {
+                    "name": "Passing Place",
+                    "terms": "turnout, pullout"
+                },
                 "highway/path": {
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
