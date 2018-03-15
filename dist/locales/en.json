@@ -2064,6 +2064,10 @@
                     "label": "Speed Limit",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "label": "Advisory Speed Limit",
+                    "placeholder": "40, 50, 60..."
+                },
                 "maxstay": {
                     "label": "Max Stay"
                 },

@@ -39,7 +39,7 @@ export function uiFieldLocalized(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.safeid)
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder())
             .call(utilNoAuto)

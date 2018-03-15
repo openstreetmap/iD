@@ -96,14 +96,14 @@ export function uiField(context, presetField, entity, options) {
         // Enter
         var enter = container.enter()
             .append('div')
-            .attr('class', function(d) { return 'form-field form-field-' + d.id; })
+            .attr('class', function(d) { return 'form-field form-field-' + d.safeid; })
             .classed('nowrap', !options.wrap);
 
         if (options.wrap) {
             var label = enter
                 .append('label')
                 .attr('class', 'form-label')
-                .attr('for', function(d) { return 'preset-input-' + d.id; })
+                .attr('for', function(d) { return 'preset-input-' + d.safeid; })
                 .text(function(d) { return d.label(); });
 
             var wrap = label

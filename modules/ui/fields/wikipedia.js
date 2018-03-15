@@ -91,7 +91,7 @@ export function uiFieldWikipedia(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-title')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.safeid)
             .call(utilNoAuto)
             .merge(title);
 
