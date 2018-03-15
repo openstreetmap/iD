@@ -3943,8 +3943,9 @@ en:
         # 'terms: lookout tower,fire tower'
         terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/observatory:
-        # 'man_made=observatory
+        # man_made=observatory
         name: Observatory
+        # 'terms: astronomical,meteorological'
         terms: '<translate with synonyms or related terms for ''Observatory'', separated by commas>'
       man_made/petroleum_well:
         # man_made=petroleum_well

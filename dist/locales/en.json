@@ -4810,7 +4810,7 @@
                 },
                 "man_made/observatory": {
                     "name": "Observatory",
-                    "terms": ""
+                    "terms": "astronomical,meteorological"
                 },
                 "man_made/petroleum_well": {
                     "name": "Oil Well",

@@ -3,10 +3,9 @@
         "point",
         "area"
     ],
-    "type": [
+    "terms": [
         "astronomical",
-        "meteorological",
-        "espionage"
+        "meteorological"
     ],
     "tags": {
         "man_made": "observatory"
