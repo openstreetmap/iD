@@ -1692,11 +1692,13 @@ input[type=number] {
     content: none;
 }
 
+#preset-input-maxspeed_advisory,
 #preset-input-maxspeed {
     border-right: none;
     border-radius: 0 0 0 4px;
     width: 80%;
 }
+[dir='rtl'] #preset-input-maxspeed_advisory,
 [dir='rtl'] #preset-input-maxspeed {
     border-right: 1px solid #ccc;
     border-radius: 0 0 4px 0;
