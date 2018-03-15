@@ -157,6 +157,7 @@ export function uiTagReference(tag) {
         _button = _button.enter()
             .append('button')
             .attr('class', 'tag-reference-button')
+            .attr('title', t('icons.information'))
             .attr('tabindex', -1)
             .call(svgIcon('#icon-inspect'))
             .merge(_button);
