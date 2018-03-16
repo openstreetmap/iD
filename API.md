@@ -31,6 +31,8 @@ in the hash portion of the URL:
   _Example:_ `offset=-10,5`
 * __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
+* __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
+  _Example:_ `source=Bing%3BMapillary`
 * __`hashtags`__ - Prefills the changeset hashtags.  Pass a url encoded list of event
   hashtags separated by commas, semicolons, or spaces.  Leading '#' symbols are
   optional and will be added automatically. (Note that hashtag-like strings are
@@ -53,6 +55,7 @@ are available as regular URL query parameters:
 * __`gpx`__ - same as standalone
 * __`offset`__ - same as standalone
 * __`comment`__ - same as standalone
+* __`source`__ - same as standalone
 * __`hashtags`__ - same as standalone
 * __`walkthrough`__ - same as standalone
 
