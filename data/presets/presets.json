@@ -4197,6 +4197,7 @@
                 "name",
                 "building",
                 "levels",
+                "height",
                 "address"
             ],
             "geometry": [
