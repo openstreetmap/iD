@@ -1,3 +1,8 @@
+// @flow
+import type { Vec2 } from '.';
+type Node = { id: string, loc: Vec2 };
+type Edge = { index: number, distance: number, loc: ?Vec2 };
+
 import _every from 'lodash-es/every';
 import _some from 'lodash-es/some';
 
@@ -14,18 +19,18 @@ import {
 
 // Return the counterclockwise angle in the range (-pi, pi)
 // between the positive X axis and the line intersecting a and b.
-export function geoAngle(a, b, projection) {
+export function geoAngle(a: Node, b: Node, projection: (Vec2) => Vec2): number {
     return geoVecAngle(projection(a.loc), projection(b.loc));
 }
 
-export function geoEdgeEqual(a, b) {
+export function geoEdgeEqual(a: Vec2, b: Vec2): boolean {
     return (a[0] === b[0] && a[1] === b[1]) ||
         (a[0] === b[1] && a[1] === b[0]);
 }
 
 // Rotate all points counterclockwise around a pivot point by given angle
-export function geoRotate(points, angle, around) {
-    return points.map(function(point) {
+export function geoRotate(points: Array<Vec2>, angle: number, around: Vec2): Array<Vec2> {
+    return points.map(function(point: Vec2) {
         var radial = geoVecSubtract(point, around);
         return [
             radial[0] * Math.cos(angle) - radial[1] * Math.sin(angle) + around[0],
@@ -39,7 +44,7 @@ export function geoRotate(points, angle, around) {
 // projection onto that edge, if such a projection exists, or the distance to
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
-export function geoChooseEdge(nodes, point, projection, activeID) {
+export function geoChooseEdge(nodes: Array<Node>, point: Vec2, projection: (loc: Vec2) => Vec2, activeID?: string): ?Edge {
     var dist = geoVecLength;
     var points = nodes.map(function(n) { return projection(n.loc); });
     var ids = nodes.map(function(n) { return n.id; });
@@ -84,7 +89,7 @@ export function geoChooseEdge(nodes, point, projection, activeID) {
 // This is used to test e.g. multipolygon rings that cross
 // `activeNodes` is the ring containing the activeID being dragged.
 // `inactiveNodes` is the other ring to test against
-export function geoHasLineIntersections(activeNodes, inactiveNodes, activeID) {
+export function geoHasLineIntersections(activeNodes: Array<Node>, inactiveNodes: Array<Node>, activeID?: string): boolean {
     var actives = [];
     var inactives = [];
     var j, k, n1, n2, segment;
@@ -125,7 +130,7 @@ export function geoHasLineIntersections(activeNodes, inactiveNodes, activeID) {
 
 // Test active (dragged or drawing) segments against inactive segments
 // This is used to test whether a way intersects with itself.
-export function geoHasSelfIntersections(nodes, activeID) {
+export function geoHasSelfIntersections(nodes: Array<Node>, activeID?: string): boolean {
     var actives = [];
     var inactives = [];
     var j, k;
@@ -175,7 +180,7 @@ export function geoHasSelfIntersections(nodes, activeID) {
 // From https://github.com/pgkelley4/line-segments-intersect
 // This uses the vector cross product approach described below:
 //  http://stackoverflow.com/a/565282/786339
-export function geoLineIntersection(a, b) {
+export function geoLineIntersection(a: Array<Vec2>, b: Array<Vec2>): ?Vec2 {
     var p = [a[0][0], a[0][1]];
     var p2 = [a[1][0], a[1][1]];
     var q = [b[0][0], b[0][1]];
@@ -198,7 +203,7 @@ export function geoLineIntersection(a, b) {
 }
 
 
-export function geoPathIntersections(path1, path2) {
+export function geoPathIntersections(path1: Array<Vec2>, path2: Array<Vec2>): Array<Vec2> {
     var intersections = [];
     for (var i = 0; i < path1.length - 1; i++) {
         for (var j = 0; j < path2.length - 1; j++) {
@@ -213,7 +218,7 @@ export function geoPathIntersections(path1, path2) {
     return intersections;
 }
 
-export function geoPathHasIntersections(path1, path2) {
+export function geoPathHasIntersections(path1: Array<Vec2>, path2: Array<Vec2>): boolean {
     for (var i = 0; i < path1.length - 1; i++) {
         for (var j = 0; j < path2.length - 1; j++) {
             var a = [ path1[i], path1[i+1] ];
@@ -237,7 +242,7 @@ export function geoPathHasIntersections(path1, path2) {
 // ray-casting algorithm based on
 // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
 //
-export function geoPointInPolygon(point, polygon) {
+export function geoPointInPolygon(point: Vec2, polygon: Array<Vec2>): boolean {
     var x = point[0];
     var y = point[1];
     var inside = false;
@@ -257,14 +262,14 @@ export function geoPointInPolygon(point, polygon) {
 }
 
 
-export function geoPolygonContainsPolygon(outer, inner) {
+export function geoPolygonContainsPolygon(outer: Array<Vec2>, inner: Array<Vec2>): boolean {
     return _every(inner, function(point) {
         return geoPointInPolygon(point, outer);
     });
 }
 
 
-export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
+export function geoPolygonIntersectsPolygon(outer: Array<Vec2>, inner: Array<Vec2>, checkSegments: boolean): boolean {
     function testPoints(outer, inner) {
         return _some(inner, function(point) {
             return geoPointInPolygon(point, outer);
@@ -275,7 +280,7 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
 }
 
 
-export function geoPathLength(path) {
+export function geoPathLength(path: Array<Vec2>): number {
     var length = 0;
     for (var i = 0; i < path.length - 1; i++) {
         length += geoVecLength(path[i], path[i + 1]);
@@ -286,7 +291,7 @@ export function geoPathLength(path) {
 
 // If the given point is at the edge of the padded viewport,
 // return a vector that will nudge the viewport in that direction
-export function geoViewportEdge(point, dimensions) {
+export function geoViewportEdge(point: Vec2, dimensions: Vec2): ?Vec2 {
     var pad = [80, 20, 50, 20];   // top, right, bottom, left
     var x = 0;
     var y = 0;

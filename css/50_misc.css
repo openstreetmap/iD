@@ -32,6 +32,28 @@ path.casing.tag-boundary-national_park {
 }
 
 
+/* Tree Rows */
+path.shadow.tag-natural-tree_row {
+    stroke-width: 16;
+}
+path.casing.tag-natural-tree_row {
+    stroke-width: 7;
+}
+path.stroke.tag-natural-tree_row {
+    stroke-width: 5;
+}
+
+.low-zoom path.shadow.tag-natural-tree_row {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-natural-tree_row {
+    stroke-width: 5;
+}
+.low-zoom path.stroke.tag-natural-tree_row {
+    stroke-width: 3;
+}
+
+
 /* barriers */
 path.stroke.tag-barrier {
     stroke: #ddd;

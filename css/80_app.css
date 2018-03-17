@@ -681,12 +681,14 @@ button.save.has-count .count::before {
     height: 100%;
 }
 
+.field-help-title button.close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
     right: 0;
     top: 0;
 }
+[dir='rtl'] .field-help-title button.close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -1266,6 +1268,7 @@ a.hide-toggle {
     border-top: 0;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
+    position: relative;
 }
 
 .form-field textarea {
@@ -1689,11 +1692,13 @@ input[type=number] {
     content: none;
 }
 
+#preset-input-maxspeed_advisory,
 #preset-input-maxspeed {
     border-right: none;
     border-radius: 0 0 0 4px;
     width: 80%;
 }
+[dir='rtl'] #preset-input-maxspeed_advisory,
 [dir='rtl'] #preset-input-maxspeed {
     border-right: 1px solid #ccc;
     border-radius: 0 0 4px 0;
@@ -1834,9 +1839,48 @@ input[type=number] {
 
 /* Restrictions editor */
 
-.form-field-restrictions .preset-input-wrap {
+.form-field-restrictions .restriction-controls-container {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    padding: 5px;
+}
+
+.restriction-controls-container .restriction-controls {
+    display: table;
+}
+
+.restriction-controls .restriction-control {
+    display: table-row;
+    padding: 5px 10px;
+    height: 25px;
+}
+
+.restriction-control input,
+.restriction-control span {
+    display: table-cell;
+    text-align: start;
+    padding: 0px 5px;
+}
+
+.restriction-control span.restriction-control-label {
+    text-align: end;
+}
+
+.restriction-control input {
+    width: 60px;
+    padding: 0;
+    margin: 0px 5px;
+    vertical-align: middle;
+}
+
+.form-field-restrictions .restriction-container {
     position: relative;
-    height: 300px;
+    height: 370px;
+}
+/* zero width space, so container takes up space */
+.form-field-restrictions .restriction-container:after {
+    content: '\200b';
 }
 
 .form-field-restrictions svg.surface {
@@ -1844,7 +1888,7 @@ input[type=number] {
     height: 100%;
 }
 
-.form-field-restrictions .restriction-help {
+.restriction-container .restriction-help {
     z-index: 1;
     position: absolute;
     top: 0;
@@ -1852,8 +1896,32 @@ input[type=number] {
     right: 0;
     padding: 2px 6px;
     background-color: rgba(255, 255, 255, .8);
-    color: #999;
+    color: #888;
     text-align: center;
+    pointer-events: none;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.restriction-help span {
+    margin: 2px;
+}
+
+.restriction-help .qualifier {
+    color: #666;
+    font-weight: bold;
+}
+.restriction-help .qualifier.allow {
+    color: #8b5;
+}
+.restriction-help .qualifier.restrict {
+    color: #d53;
+}
+.restriction-help .qualifier.only {
+    color: #78f;
 }
 
 /* Changeset editor while comment text is empty */
@@ -1883,10 +1951,10 @@ input[type=number] {
 div.combobox {
     z-index: 9999;
     display: none;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    box-shadow: 0 4px 10px 1px rgba(0,0,0,.2);
     margin-top: -1px;
     background: white;
-    max-height: 120px;
+    max-height: 245px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #ccc;
@@ -1896,7 +1964,7 @@ div.combobox {
 .combobox a {
     display: block;
     padding: 5px 10px;
-    border-top:1px solid #ccc;
+    border-top: 1px solid #ccc;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -1909,6 +1977,7 @@ div.combobox {
 
 .combobox a:first-child {
     border-top: 0;
+    padding: 4px 10px;
 }
 
 .combobox-caret {
@@ -1925,7 +1994,7 @@ div.combobox {
 }
 
 .combobox-caret::after {
-    content:"";
+    content: "";
     height: 0; width: 0;
     position: absolute;
     left: 0; right: 0; bottom: 0; top: 0;
@@ -1934,6 +2003,107 @@ div.combobox {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
+
+/* Field Help */
+
+.field-help-body {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    margin: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    z-index: 20;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 30px 5px rgba(0,0,0,.4);
+}
+
+.field-help-title h2 {
+    padding: 10px;
+    margin-bottom: 0px;
+    font-size: 17px;
+}
+.field-help-title button {
+    width: 45px;
+    height: 55px;
+    border-radius: 0;
+}
+
+.field-help-nav {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.field-help-nav-item {
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #666;
+}
+.field-help-nav-item.active {
+    color: #7092ff;
+}
+.field-help-nav-item:hover {
+    color: #597be7;
+    background-color: #efefef;
+}
+
+.field-help-content {
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.field-help-content h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.field-help-content p {
+    margin-bottom: 15px;
+}
+.field-help-content ul li {
+    list-style: inside;
+    margin-bottom: 5px;
+}
+
+.field-help-content .field-help-image {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.field-help-content svg.turn {
+    width: 40px;
+    height: 20px;
+}
+.field-help-content svg.shadow {
+    opacity: 0.7;
+    width: 60px;
+    height: 20px;
+}
+.field-help-content svg.from {
+    color: #777;
+}
+.field-help-content svg.allow {
+    color: #5b3;
+}
+.field-help-content svg.restrict {
+    color: #d53;
+}
+.field-help-content svg.only {
+    color: #68f;
+}
+
+.field-help-content p.from_shadow,
+.field-help-content p.allow_shadow,
+.field-help-content p.restrict_shadow,
+.field-help-content p.allow_turn,
+.field-help-content p.restrict_turn {
+    margin-bottom: 5px;
+}
+
 
 /* Raw Tag Editor */
 
@@ -2625,7 +2795,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc li a:hover,
-.help-wrap .nav a:hover  {
+.help-wrap .nav a:hover {
     background: #ececec;
 }
 

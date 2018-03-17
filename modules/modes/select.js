@@ -54,22 +54,22 @@ export function modeSelect(context, selectedIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('select'),
-        timeout = null,
-        behaviors = [
-            behaviorCopy(context),
-            behaviorPaste(context),
-            behaviorBreathe(context),
-            behaviorHover(context),
-            behaviorSelect(context),
-            behaviorLasso(context),
-            modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior
-        ],
-        inspector,
-        editMenu,
-        newFeature = false,
-        suppressMenu = true,
-        follow = false;
+    var keybinding = d3_keybinding('select');
+    var timeout = null;
+    var behaviors = [
+        behaviorCopy(context),
+        behaviorPaste(context),
+        behaviorBreathe(context),
+        behaviorHover(context),
+        behaviorSelect(context),
+        behaviorLasso(context),
+        modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior
+    ];
+    var inspector;
+    var editMenu;
+    var newFeature = false;
+    var suppressMenu = true;
+    var follow = false;
 
 
     var wrap = context.container()
@@ -102,8 +102,8 @@ export function modeSelect(context, selectedIDs) {
 
     // find the common parent ways for nextVertex, previousVertex
     function commonParents() {
-        var graph = context.graph(),
-            commonParents = [];
+        var graph = context.graph();
+        var commonParents = [];
 
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = context.hasEntity(selectedIDs[i]);
@@ -164,8 +164,8 @@ export function modeSelect(context, selectedIDs) {
         if (entity && context.geometry(entity.id) === 'relation') {
             suppressMenu = true;
         } else {
-            var point = context.mouse(),
-                viewport = geoExtent(context.projection.clipExtent()).polygon();
+            var point = context.mouse();
+            var viewport = geoExtent(context.projection.clipExtent()).polygon();
 
             if (point && geoPointInPolygon(point, viewport)) {
                 editMenu.center(point);
@@ -278,8 +278,8 @@ export function modeSelect(context, selectedIDs) {
         function selectElements(drawn) {
             if (!checkSelectedIDs()) return;
 
-            var surface = context.surface(),
-                entity = singular();
+            var surface = context.surface();
+            var entity = singular();
 
             if (entity && context.geometry(entity.id) === 'relation') {
                 suppressMenu = true;
@@ -319,9 +319,17 @@ export function modeSelect(context, selectedIDs) {
 
         function firstVertex() {
             d3_event.preventDefault();
+            var entity = singular();
             var parent = singularParent();
-            if (parent) {
-                var way = context.entity(parent);
+            var way;
+
+            if (entity && entity.type === 'way') {
+                way = entity;
+            } else if (parent) {
+                way = context.entity(parent);
+            }
+
+            if (way) {
                 context.enter(
                     modeSelect(context, [way.first()]).follow(true)
                 );
@@ -331,9 +339,17 @@ export function modeSelect(context, selectedIDs) {
 
         function lastVertex() {
             d3_event.preventDefault();
+            var entity = singular();
             var parent = singularParent();
-            if (parent) {
-                var way = context.entity(parent);
+            var way;
+
+            if (entity && entity.type === 'way') {
+                way = entity;
+            } else if (parent) {
+                way = context.entity(parent);
+            }
+
+            if (way) {
                 context.enter(
                     modeSelect(context, [way.last()]).follow(true)
                 );
@@ -346,10 +362,10 @@ export function modeSelect(context, selectedIDs) {
             var parent = singularParent();
             if (!parent) return;
 
-            var way = context.entity(parent),
-                length = way.nodes.length,
-                curr = way.nodes.indexOf(selectedIDs[0]),
-                index = -1;
+            var way = context.entity(parent);
+            var length = way.nodes.length;
+            var curr = way.nodes.indexOf(selectedIDs[0]);
+            var index = -1;
 
             if (curr > 0) {
                 index = curr - 1;
@@ -370,10 +386,10 @@ export function modeSelect(context, selectedIDs) {
             var parent = singularParent();
             if (!parent) return;
 
-            var way = context.entity(parent),
-                length = way.nodes.length,
-                curr = way.nodes.indexOf(selectedIDs[0]),
-                index = -1;
+            var way = context.entity(parent);
+            var length = way.nodes.length;
+            var curr = way.nodes.indexOf(selectedIDs[0]);
+            var index = -1;
 
             if (curr < length - 1) {
                 index = curr + 1;
@@ -415,8 +431,8 @@ export function modeSelect(context, selectedIDs) {
         if (!checkSelectedIDs()) return;
 
         var operations = _without(_values(Operations), Operations.operationDelete)
-                .map(function(o) { return o(selectedIDs, context); })
-                .filter(function(o) { return o.available(); });
+            .map(function(o) { return o(selectedIDs, context); })
+            .filter(function(o) { return o.available(); });
 
         // deprecation warning - Radial Menu to be removed in iD v3
         var isRadialMenu = context.storage('edit-menu-style') === 'radial';
@@ -478,8 +494,8 @@ export function modeSelect(context, selectedIDs) {
         }
 
         if (follow) {
-            var extent = geoExtent(),
-                graph = context.graph();
+            var extent = geoExtent();
+            var graph = context.graph();
             selectedIDs.forEach(function(id) {
                 var entity = context.entity(id);
                 extent._extend(entity.extent(graph));
@@ -503,7 +519,6 @@ export function modeSelect(context, selectedIDs) {
 
     mode.exit = function() {
         if (timeout) window.clearTimeout(timeout);
-
         if (inspector) wrap.call(inspector.close);
 
         behaviors.forEach(function(behavior) {

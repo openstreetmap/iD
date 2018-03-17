@@ -1,6 +1,7 @@
 {
     "icon": "parking",
     "fields": [
+        "name",
         "operator",
         "parking",
         "capacity",
@@ -9,8 +10,7 @@
         "supervised",
         "park_ride",
         "surface",
-        "maxstay",
-        "address"
+        "maxstay"
     ],
     "geometry": [
         "point",

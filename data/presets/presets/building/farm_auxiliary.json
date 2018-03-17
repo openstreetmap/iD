@@ -1,0 +1,16 @@
+{
+    "icon": "farm",
+    "fields": [
+        "name",
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "farm_auxiliary"
+    },
+    "matchScore": 0.5,
+    "name": "Farm Building"
+}

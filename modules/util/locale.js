@@ -1,9 +1,10 @@
+// @flow
 var translations = Object.create(null);
 
 export var currentLocale = 'en';
 export var textDirection = 'ltr';
 
-export function setLocale(_) {
+export function setLocale(_: any): void {
     if (translations[_] !== undefined) {
         currentLocale = _;
     } else if (translations[_.split('-')[0]]) {
@@ -11,7 +12,7 @@ export function setLocale(_) {
     }
 }
 
-export function addTranslation(id, value) {
+export function addTranslation(id: string, value: string): void {
     translations[id] = value;
 }
 
@@ -22,12 +23,14 @@ export function addTranslation(id, value) {
  * @param {string} s string identifier
  * @returns {string?} locale string
  */
-export function t(s, o, loc) {
+export function t(s: string, o: any, loc?: string): string {
     loc = loc || currentLocale;
 
     var path = s
         .split('.')
-        .map(function(s) { return s.replace('<TX_DOT>', '.'); })
+        .map(function (s) {
+            return s.replace('<TX_DOT>', '.');
+        })
         .reverse();
 
     var rep = translations[loc];
@@ -35,7 +38,8 @@ export function t(s, o, loc) {
     while (rep !== undefined && path.length) rep = rep[path.pop()];
 
     if (rep !== undefined) {
-        if (o) for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
+        if (o)
+            for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
         return rep;
     }
 
@@ -59,6 +63,6 @@ export function t(s, o, loc) {
  * @param {string} s ltr or rtl
  */
 
-export function setTextDirection(dir) {
+export function setTextDirection(dir: string): void {
     textDirection = dir;
 }

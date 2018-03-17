@@ -27,7 +27,7 @@ export function uiFieldText(field, context) {
 
 
     function i(selection) {
-        var fieldId = 'preset-input-' + field.id;
+        var fieldId = 'preset-input-' + field.safeid;
 
         input = selection.selectAll('input')
             .data([0]);

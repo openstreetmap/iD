@@ -548,6 +548,11 @@
                 }
             }
         },
+        "dance/style": {
+            "key": "dance:style",
+            "type": "semiCombo",
+            "label": "Dance Styles"
+        },
         "date": {
             "key": "date",
             "type": "check",
@@ -648,6 +653,12 @@
             "type": "number",
             "label": "Direction (Degrees Clockwise)",
             "placeholder": "45, 90, 180, 270"
+        },
+        "dispensing": {
+            "key": "dispensing",
+            "type": "check",
+            "label": "Dispenses Prescriptions",
+            "default": "yes"
         },
         "display": {
             "key": "display",
@@ -1126,6 +1137,12 @@
             "key": "maxspeed",
             "type": "maxspeed",
             "label": "Speed Limit",
+            "placeholder": "40, 50, 60..."
+        },
+        "maxspeed/advisory": {
+            "key": "maxspeed:advisory",
+            "type": "maxspeed",
+            "label": "Advisory Speed Limit",
             "placeholder": "40, 50, 60..."
         },
         "maxstay": {
@@ -2195,6 +2212,11 @@
             "icon": "wheelchair",
             "universal": true,
             "label": "Wheelchair Access"
+        },
+        "wholesale": {
+            "key": "wholesale",
+            "type": "typeCombo",
+            "label": "Wholesale"
         },
         "width": {
             "key": "width",

@@ -1,98 +1,50 @@
-import { actionSplit } from './split';
-
-import {
-    osmInferRestriction,
-    osmRelation,
-    osmWay
-} from '../osm';
+import { osmRelation } from '../osm';
 
 
-// Create a restriction relation for `turn`, which must have the following structure:
+// `actionRestrictTurn` creates a turn restriction relation.
 //
-//     {
-//         from: { node: <node ID>, way: <way ID> },
-//         via:  { node: <node ID> },
-//         to:   { node: <node ID>, way: <way ID> },
-//         restriction: <'no_right_turn', 'no_left_turn', etc.>
-//     }
+// `turn` must be an `osmTurn` object
+// see osm/intersection.js, pathToTurn()
 //
 // This specifies a restriction of type `restriction` when traveling from
-// `from.node` in `from.way` toward `to.node` in `to.way` via `via.node`.
+// `turn.from.way` toward `turn.to.way` via `turn.via.node` OR `turn.via.ways`.
 // (The action does not check that these entities form a valid intersection.)
 //
-// If `restriction` is not provided, it is automatically determined by
-// osmInferRestriction.
+// From, to, and via ways should be split before calling this action.
+// (old versions of the code would split the ways here, but we no longer do it)
 //
-// If necessary, the `from` and `to` ways are split. In these cases, `from.node`
-// and `to.node` are used to determine which portion of the split ways become
-// members of the restriction.
+// For testing convenience, accepts a restrictionID to assign to the new
+// relation. Normally, this will be undefined and the relation will
+// automatically be assigned a new ID.
 //
-// For testing convenience, accepts an ID to assign to the new relation.
-// Normally, this will be undefined and the relation will automatically
-// be assigned a new ID.
-//
-export function actionRestrictTurn(turn, projection, restrictionId) {
+export function actionRestrictTurn(turn, restrictionType, restrictionID) {
 
     return function(graph) {
-        var from = graph.entity(turn.from.way),
-            via  = graph.entity(turn.via.node),
-            to   = graph.entity(turn.to.way);
+        var fromWay = graph.entity(turn.from.way);
+        var toWay = graph.entity(turn.to.way);
+        var viaNode = turn.via.node && graph.entity(turn.via.node);
+        var viaWays = turn.via.ways && turn.via.ways.map(function(id) { return graph.entity(id); });
+        var members = [];
 
-        function isClosingNode(way, nodeId) {
-            return nodeId === way.first() && nodeId === way.last();
+        members.push({ id: fromWay.id, type: 'way',  role: 'from' });
+
+        if (viaNode) {
+            members.push({ id: viaNode.id,  type: 'node', role: 'via' });
+        } else if (viaWays) {
+            viaWays.forEach(function(viaWay) {
+                members.push({ id: viaWay.id,  type: 'way', role: 'via' });
+            });
         }
 
-        function split(toOrFrom) {
-            var newID = toOrFrom.newID || osmWay().id;
-            graph = actionSplit(via.id, [newID])
-                .limitWays([toOrFrom.way])(graph);
-
-            var a = graph.entity(newID),
-                b = graph.entity(toOrFrom.way);
-
-            if (a.nodes.indexOf(toOrFrom.node) !== -1) {
-                return [a, b];
-            } else {
-                return [b, a];
-            }
-        }
-
-        if (!from.affix(via.id) || isClosingNode(from, via.id)) {
-            if (turn.from.node === turn.to.node) {
-                // U-turn
-                from = to = split(turn.from)[0];
-            } else if (turn.from.way === turn.to.way) {
-                // Straight-on or circular
-                var s = split(turn.from);
-                from = s[0];
-                to   = s[1];
-            } else {
-                // Other
-                from = split(turn.from)[0];
-            }
-        }
-
-        if (!to.affix(via.id) || isClosingNode(to, via.id)) {
-            to = split(turn.to)[0];
-        }
+        members.push({ id: toWay.id, type: 'way',  role: 'to' });
 
         return graph.replace(osmRelation({
-            id: restrictionId,
+            id: restrictionID,
             tags: {
                 type: 'restriction',
-                restriction: turn.restriction ||
-                    osmInferRestriction(
-                        graph,
-                        turn.from,
-                        turn.via,
-                        turn.to,
-                        projection)
+                restriction: restrictionType
             },
-            members: [
-                {id: from.id, type: 'way',  role: 'from'},
-                {id: via.id,  type: 'node', role: 'via'},
-                {id: to.id,   type: 'way',  role: 'to'}
-            ]
+            members: members
         }));
     };
 }

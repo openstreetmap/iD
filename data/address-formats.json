@@ -24,7 +24,7 @@
             ]
         },
         {
-            "countryCodes": ["at", "ch", "de", "si"],
+            "countryCodes": ["at", "ch", "de", "si", "pl"],
             "format": [
                 ["street", "housenumber"],
                 ["postcode", "city"]
@@ -40,14 +40,6 @@
             "format": [
                 ["street", "housenumber", "unit"],
                 ["postcode", "city"]
-            ]
-        },
-        {
-            "countryCodes": ["pl"],
-            "format": [
-                ["street", "housenumber"],
-                ["postcode"],
-                ["place", "city"]
             ]
         },
         {

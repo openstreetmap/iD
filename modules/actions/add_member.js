@@ -10,10 +10,20 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
     return function action(graph) {
         var relation = graph.entity(relationId);
 
-        if ((isNaN(memberIndex) || insertPair) && member.type === 'way') {
+        // There are some special rules for Public Transport v2 routes.
+        var isPTv2 = (member.role === 'stop' || member.role === 'platform');
+
+        if ((isNaN(memberIndex) || insertPair) && member.type === 'way' && !isPTv2) {
             // Try to perform sensible inserts based on how the ways join together
             graph = addWayMember(relation, graph);
         } else {
+            // see https://wiki.openstreetmap.org/wiki/Public_transport#Service_routes
+            // Stops and Platforms for PTv2 should be ordered first.
+            // hack: We do not currently have the ability to place them in the exactly correct order.
+            if (isPTv2 && isNaN(memberIndex)) {
+                memberIndex = 0;
+            }
+
             graph = graph.replace(relation.addMember(member, memberIndex));
         }
 
@@ -25,6 +35,20 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
     // In this situation we were not supplied a memberIndex.
     function addWayMember(relation, graph) {
         var groups, tempWay, item, i, j, k;
+
+        // remove PTv2 stops and platforms before doing anything.
+        var PTv2members = [];
+        var members = [];
+        for (i = 0; i < relation.members.length; i++) {
+            var m = relation.members[i];
+            if (m.role === 'stop' || m.role === 'platform') {
+                PTv2members.push(m);
+            } else {
+                members.push(m);
+            }
+        }
+        relation = relation.update({ members: members });
+
 
         if (insertPair) {
             // We're adding a member that must stay paired with an existing member.
@@ -50,7 +74,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             groups.way.push(member);
         }
 
-        var members = withIndex(groups.way);
+        members = withIndex(groups.way);
         var joined = osmJoinWays(members, graph);
 
         // `joined` might not contain all of the way members,
@@ -116,10 +140,10 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             }
         }
 
-        // Write members in the order: nodes, ways, relations
-        // This is reccomended for Public Transport routes:
+        // Put stops and platforms first, then nodes, ways, relations
+        // This is recommended for Public Transport v2 routes:
         // see https://wiki.openstreetmap.org/wiki/Public_transport#Service_routes
-        var newMembers = (groups.node || []).concat(wayMembers, (groups.relation || []));
+        var newMembers = PTv2members.concat( (groups.node || []), wayMembers, (groups.relation || []) );
 
         return graph.replace(relation.update({members: newMembers}));
 

@@ -51,7 +51,14 @@ asyncMap(resources, getResource, function(err, locales) {
                 obj[code] = locale[code];
                 fs.writeFileSync(outdir + code + '.json', JSON.stringify(obj, null, 4));
                 getLanguageInfo(code, function(err, info) {
-                    dataLocales[code] = { rtl: info && info.rtl };
+                    var rtl = info && info.rtl;
+                    // exceptions: see #4783
+                    if (code === 'ckb') {
+                        rtl = true;
+                    } else if (code === 'ku') {
+                        rtl = false;
+                    }
+                    dataLocales[code] = { rtl: rtl };
                     done();
                 });
             }

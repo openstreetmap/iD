@@ -50,13 +50,14 @@ export function uiCommit(context) {
         var osm = context.connection();
         if (!osm) return;
 
-        // expire stored comment and hashtags after cutoff datetime - #3947
+        // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
         var commentDate = +context.storage('commentDate') || 0;
         var currDate = Date.now();
         var cutoff = 2 * 86400 * 1000;   // 2 days
         if (commentDate > currDate || currDate - commentDate > cutoff) {
             context.storage('comment', null);
             context.storage('hashtags', null);
+            context.storage('source', null);
         }
 
         var tags;
@@ -64,6 +65,7 @@ export function uiCommit(context) {
             var detected = utilDetect();
             tags = {
                 comment: context.storage('comment') || '',
+                source: context.storage('source') || '',
                 created_by: ('iD ' + context.version).substr(0, 255),
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
@@ -287,6 +289,15 @@ export function uiCommit(context) {
             }
             if (!onInput) {
                 context.storage('comment', changed.comment);
+                context.storage('commentDate', Date.now());
+            }
+        }
+        if (changed.hasOwnProperty('source')) {
+            if (changed.source === undefined) {
+                changed.source = '';
+            }
+            if (!onInput) {
+                context.storage('source', changed.source);
                 context.storage('commentDate', Date.now());
             }
         }

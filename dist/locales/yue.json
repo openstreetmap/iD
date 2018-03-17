@@ -207,12 +207,6 @@
                 "connected_to_hidden": "無得分，佢連咗去隠藏地貌。"
             },
             "restriction": {
-                "help": {
-                    "select": "撳一下揀段車道",
-                    "toggle": "撳一下限制車道轉向",
-                    "toggle_on": "撳一下加條則，限制車道轉向 {restriction}",
-                    "toggle_off": "撳一下減條則，限制車道轉向 {restriction}"
-                },
                 "annotation": {
                     "create": "加咗一則，限制車道轉向",
                     "delete": "減咗一則，限制車道轉向"

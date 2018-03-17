@@ -1,483 +1,80 @@
 describe('iD.actionRestrictTurn', function() {
-    var projection = d3.geoMercator().scale(250 / Math.PI);
+    it('adds a via node restriction to an unrestricted turn', function() {
+        //
+        // u === * --- w
+        //
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'u'}),
+            iD.osmNode({id: '*'}),
+            iD.osmNode({id: 'w'}),
+            iD.osmWay({id: '=', nodes: ['u', '*']}),
+            iD.osmWay({id: '-', nodes: ['*', 'w']})
+        ]);
 
-    it('adds a restriction to an unrestricted turn', function() {
-        // u====*--->w
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Way({id: '=', nodes: ['u', '*']}),
-                iD.Way({id: '-', nodes: ['*', 'w']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'u', way: '='},
-                via:  {node: '*'},
-                to:   {node: 'w', way: '-'},
-                restriction: 'no_right_turn'
-            }, projection, 'r');
+        var turn = {
+            from: { node: 'u', way: '=' },
+            via:  { node: '*'},
+            to:   { node: 'w', way: '-' }
+        };
 
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(r.memberByRole('from').id).to.eql('=');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('-');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the from way when necessary (forward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'u', way: '='},
-                via:  {node: '*'},
-                to:   {node: 'x', way: '-'},
-                restriction: 'no_right_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(r.memberByRole('from').id).to.eql('=');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('-');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the from way when necessary (backward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'w', way: '=', newID: '=='},
-                via:  {node: '*'},
-                to:   {node: 'x', way: '-'},
-                restriction: 'no_left_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(r.memberByRole('from').id).to.eql('==');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('-');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the from way when necessary (straight on forward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'u', way: '=', newID: '=='},
-                via:  {node: '*'},
-                to:   {node: 'w', way: '='},
-                restriction: 'no_straight_on'
-            }, projection, 'r');
-
+        var action = iD.actionRestrictTurn(turn, 'no_straight_on', 'r');
         graph = action(graph);
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
-        expect(r.memberByRole('from').id).to.eql('=');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('==');
-        expect(r.memberByRole('to').type).to.eql('way');
+
+        var f = r.memberByRole('from');
+        expect(f.id).to.eql('=');
+        expect(f.type).to.eql('way');
+
+        var v = r.memberByRole('via');
+        expect(v.id).to.eql('*');
+        expect(v.type).to.eql('node');
+
+        var t = r.memberByRole('to');
+        expect(t.id).to.eql('-');
+        expect(t.type).to.eql('way');
     });
 
-    it('splits the from way when necessary (straight on backward)', function() {
-        // u<===*====w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['w', '*', 'u']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'u', way: '=', newID: '=='},
-                via:  {node: '*'},
-                to:   {node: 'w', way: '='},
-                restriction: 'no_straight_on'
-            }, projection, 'r');
 
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
-        expect(r.memberByRole('from').id).to.eql('==');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('=');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the from way when necessary (vertex closes from)', function() {
+    it('adds a via way restriction to an unrestricted turn', function() {
         //
-        //  b -- c
-        //  |    |
-        //  a -- * === w
+        // u === v1
+        //       |
+        // w --- v2
         //
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [-1, 0]}),
-                iD.Node({id: 'b', loc: [-1, 1]}),
-                iD.Node({id: 'c', loc: [ 0, 1]}),
-                iD.Node({id: '*', loc: [ 0, 0]}),
-                iD.Node({id: 'w', loc: [ 1, 0]}),
-                iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*']}),
-                iD.Way({id: '=', nodes: ['*', 'w']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'c', way: '-', newID: '--'},
-                via:  {node: '*'},
-                to:   {node: 'w', way: '='},
-                restriction: 'no_left_turn'
-            }, projection, 'r');
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'u'}),
+            iD.osmNode({id: 'v1'}),
+            iD.osmNode({id: 'v2'}),
+            iD.osmNode({id: 'w'}),
+            iD.osmWay({id: '=', nodes: ['u', 'v1']}),
+            iD.osmWay({id: '|', nodes: ['v1', 'v2']}),
+            iD.osmWay({id: '-', nodes: ['v2', 'w']})
+        ]);
 
-        graph = action(graph);
+        var turn = {
+            from: { node: 'u', way: '=' },
+            via:  { ways: ['|'] },
+            to:   { node: 'w', way: '-' }
+        };
 
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(r.memberByRole('from').id).to.eql('--');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('=');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the from/to way when necessary (vertex closes from/to)', function() {
-        //
-        //  b -- c
-        //  |    |
-        //  a -- * === w
-        //
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [-1, 0]}),
-                iD.Node({id: 'b', loc: [-1, 1]}),
-                iD.Node({id: 'c', loc: [ 0, 1]}),
-                iD.Node({id: '*', loc: [ 0, 0]}),
-                iD.Node({id: 'w', loc: [ 1, 0]}),
-                iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*']}),
-                iD.Way({id: '=', nodes: ['*', 'w']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'a', way: '-', newID: '--'},
-                via:  {node: '*'},
-                to:   {node: 'c', way: '-'},
-                restriction: 'no_left_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(r.memberByRole('from').id).to.eql('-');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('--');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the to way when necessary (forward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'x', way: '-'},
-                via:  {node: '*'},
-                to:   {node: 'w', way: '=', newID: '=='},
-                restriction: 'no_right_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(r.memberByRole('from').id).to.eql('-');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('==');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the to way when necessary (backward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'x', way: '-'},
-                via:  {node: '*'},
-                to:   {node: 'u', way: '='},
-                restriction: 'no_left_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(r.memberByRole('from').id).to.eql('-');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('=');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the to way when necessary (vertex closes to)', function() {
-        //
-        //  b -- c
-        //  |    |
-        //  a -- * === w
-        //
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [-1, 0]}),
-                iD.Node({id: 'b', loc: [-1, 1]}),
-                iD.Node({id: 'c', loc: [ 0, 1]}),
-                iD.Node({id: '*', loc: [ 0, 0]}),
-                iD.Node({id: 'w', loc: [ 1, 0]}),
-                iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*']}),
-                iD.Way({id: '=', nodes: ['*', 'w']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'w', way: '='},
-                via:  {node: '*'},
-                to:   {node: 'c', way: '-', newID: '--'},
-                restriction: 'no_right_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(r.memberByRole('from').id).to.eql('=');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('--');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('splits the from/to way of a U-turn (forward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'u', way: '='},
-                via:  {node: '*'},
-                to:   {node: 'u', way: '='},
-                restriction: 'no_u_turn'
-            }, projection, 'r');
-
+        var action = iD.actionRestrictTurn(turn, 'no_u_turn', 'r');
         graph = action(graph);
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_u_turn'});
-        expect(r.memberByRole('from').id).to.eql('=');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('=');
-        expect(r.memberByRole('to').type).to.eql('way');
+
+        var f = r.memberByRole('from');
+        expect(f.id).to.eql('=');
+        expect(f.type).to.eql('way');
+
+        var v = r.memberByRole('via');
+        expect(v.id).to.eql('|');
+        expect(v.type).to.eql('way');
+
+        var t = r.memberByRole('to');
+        expect(t.id).to.eql('-');
+        expect(t.type).to.eql('way');
     });
-
-    it('splits the from/to way of a U-turn (backward)', function() {
-        // u====*===>w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u'}),
-                iD.Node({id: '*'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['*', 'x']})
-            ]),
-            action = iD.actionRestrictTurn({
-                from: {node: 'w', way: '=', newID: '=='},
-                via:  {node: '*'},
-                to:   {node: 'w', way: '=', newID: '~~'},
-                restriction: 'no_u_turn'
-            }, projection, 'r');
-
-        graph = action(graph);
-
-        var r = graph.entity('r');
-        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_u_turn'});
-        expect(r.memberByRole('from').id).to.eql('==');
-        expect(r.memberByRole('from').type).to.eql('way');
-        expect(r.memberByRole('via').id).to.eql('*');
-        expect(r.memberByRole('via').type).to.eql('node');
-        expect(r.memberByRole('to').id).to.eql('==');
-        expect(r.memberByRole('to').type).to.eql('way');
-    });
-
-    it('infers the restriction type based on the turn angle', function() {
-        // u====*~~~~w
-        //      |
-        //      x
-        var graph = iD.Graph([
-                iD.Node({id: 'u', loc: [-1,  0]}),
-                iD.Node({id: '*', loc: [ 0,  0]}),
-                iD.Node({id: 'w', loc: [ 1,  0]}),
-                iD.Node({id: 'x', loc: [ 0, -1]}),
-                iD.Way({id: '=', nodes: ['u', '*']}),
-                iD.Way({id: '-', nodes: ['*', 'x']}),
-                iD.Way({id: '~', nodes: ['*', 'w']})
-            ]);
-
-        var r1 = iD.actionRestrictTurn({
-            from: {node: 'u', way: '='},
-            via:  {node: '*'},
-            to:   {node: 'x', way: '-'}
-        }, projection, 'r')(graph);
-        expect(r1.entity('r').tags.restriction).to.equal('no_right_turn');
-
-        var r2 = iD.actionRestrictTurn({
-            from: {node: 'x', way: '-'},
-            via:  {node: '*'},
-            to:   {node: 'w', way: '~'}
-        }, projection, 'r')(graph);
-        expect(r2.entity('r').tags.restriction).to.equal('no_right_turn');
-
-        var l1 = iD.actionRestrictTurn({
-            from: {node: 'x', way: '-'},
-            via:  {node: '*'},
-            to:   {node: 'u', way: '='}
-        }, projection, 'r')(graph);
-        expect(l1.entity('r').tags.restriction).to.equal('no_left_turn');
-
-        var l2 = iD.actionRestrictTurn({
-            from: {node: 'w', way: '~'},
-            via:  {node: '*'},
-            to:   {node: 'x', way: '-'}
-        }, projection, 'r')(graph);
-        expect(l2.entity('r').tags.restriction).to.equal('no_left_turn');
-
-        var s = iD.actionRestrictTurn({
-            from: {node: 'u', way: '='},
-            via:  {node: '*'},
-            to:   {node: 'w', way: '~'}
-        }, projection, 'r')(graph);
-        expect(s.entity('r').tags.restriction).to.equal('no_straight_on');
-
-        var u = iD.actionRestrictTurn({
-            from: {node: 'u', way: '='},
-            via:  {node: '*'},
-            to:   {node: 'u', way: '='}
-        }, projection, 'r')(graph);
-        expect(u.entity('r').tags.restriction).to.equal('no_u_turn');
-    });
-
-    it('infers no_u_turn from acute angle made by forward oneways', function() {
-        //      *
-        //     / \
-        //  w2/   \w1
-        //   /     \
-        //  u       x
-        var graph = iD.Graph([
-                iD.Node({id: 'u', loc: [-1, -20]}),
-                iD.Node({id: '*', loc: [ 0,   0]}),
-                iD.Node({id: 'x', loc: [ 1, -20]}),
-                iD.Way({id: 'w1', nodes: ['x', '*'], tags: {oneway: 'yes'}}),
-                iD.Way({id: 'w2', nodes: ['*', 'u'], tags: {oneway: 'yes'}})
-            ]);
-
-        var r = iD.actionRestrictTurn({
-            from: {node: 'x', way: 'w1'},
-            via:  {node: '*'},
-            to:   {node: 'u', way: 'w2'}
-        }, projection, 'r')(graph);
-        expect(r.entity('r').tags.restriction).to.equal('no_u_turn');
-    });
-
-    it('infers no_u_turn from acute angle made by reverse oneways', function() {
-        //      *
-        //     / \
-        //  w2/   \w1
-        //   /     \
-        //  u       x
-        var graph = iD.Graph([
-                iD.Node({id: 'u', loc: [-1, -20]}),
-                iD.Node({id: '*', loc: [ 0,   0]}),
-                iD.Node({id: 'x', loc: [ 1, -20]}),
-                iD.Way({id: 'w1', nodes: ['*', 'x'], tags: {oneway: '-1'}}),
-                iD.Way({id: 'w2', nodes: ['u', '*'], tags: {oneway: '-1'}})
-            ]);
-
-        var r = iD.actionRestrictTurn({
-            from: {node: 'x', way: 'w1'},
-            via:  {node: '*'},
-            to:   {node: 'u', way: 'w2'}
-        }, projection, 'r')(graph);
-        expect(r.entity('r').tags.restriction).to.equal('no_u_turn');
-    });
-
 });

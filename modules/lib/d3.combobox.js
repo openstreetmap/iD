@@ -36,6 +36,7 @@ export function d3combobox() {
             .selectAll('div.combobox')
             .filter(function(d) { return d === input.node(); });
         var shown = !wrapper.empty();
+        var tagName = input.node() ? input.node().tagName.toLowerCase() : '';
 
         input
             .classed('combobox-input', true)
@@ -139,11 +140,13 @@ export function d3combobox() {
                    break;
                // up arrow
                case 38:
+                   if (tagName === 'textarea' && !shown) return;
                    nav(-1);
                    d3_event.preventDefault();
                    break;
                // down arrow
                case 40:
+                   if (tagName === 'textarea' && !shown) return;
                    nav(+1);
                    d3_event.preventDefault();
                    break;
@@ -265,8 +268,8 @@ export function d3combobox() {
             var rect = node.getBoundingClientRect();
 
             wrapper
-                .style('left', rect.left + 'px')
-                .style('width', rect.width + 'px')
+                .style('left', (rect.left + 5) + 'px')
+                .style('width', (rect.width - 10) + 'px')
                 .style('top', rect.height + rect.top + 'px');
         }
 

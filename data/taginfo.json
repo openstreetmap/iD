@@ -846,6 +846,10 @@
         },
         {
             "key": "building",
+            "value": "farm_auxiliary"
+        },
+        {
+            "key": "building",
             "value": "farm"
         },
         {
@@ -1406,6 +1410,10 @@
         },
         {
             "key": "highway",
+            "value": "passing_place"
+        },
+        {
+            "key": "highway",
             "value": "path"
         },
         {
@@ -1759,6 +1767,10 @@
         },
         {
             "key": "leisure",
+            "value": "amusement_arcade"
+        },
+        {
+            "key": "leisure",
             "value": "bird_hide"
         },
         {
@@ -1772,6 +1784,10 @@
         {
             "key": "leisure",
             "value": "dance"
+        },
+        {
+            "key": "dance:teaching",
+            "value": "yes"
         },
         {
             "key": "leisure",
@@ -2043,6 +2059,10 @@
         {
             "key": "tower:type",
             "value": "observation"
+        },
+        {
+            "key": "man_made",
+            "value": "observatory"
         },
         {
             "key": "man_made",
@@ -2577,7 +2597,7 @@
             "value": "yes"
         },
         {
-            "key": "train",
+            "key": "subway",
             "value": "yes"
         },
         {
@@ -2617,7 +2637,7 @@
             "value": "yes"
         },
         {
-            "key": "train",
+            "key": "subway",
             "value": "yes"
         },
         {
@@ -3073,6 +3093,10 @@
         },
         {
             "key": "shop",
+            "value": "health_food "
+        },
+        {
+            "key": "shop",
             "value": "hearing_aids"
         },
         {
@@ -3306,6 +3330,10 @@
         {
             "key": "shop",
             "value": "weapons"
+        },
+        {
+            "key": "shop",
+            "value": "wholesale"
         },
         {
             "key": "shop",

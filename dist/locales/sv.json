@@ -285,12 +285,6 @@
                 "connected_to_hidden": "Detta kan inte delas då det är kopplat till ett dolt objekt."
             },
             "restriction": {
-                "help": {
-                    "select": "Klicka för att välja ett vägsegment.",
-                    "toggle": "Klicka för att växla svängrestriktioner.",
-                    "toggle_on": "Klicka för att lägga till en \"{restriction}\"-restriktion.",
-                    "toggle_off": "Klicka för att ta bort \"{restriction}\"-restriktionen."
-                },
                 "annotation": {
                     "create": "Lade till en svängrestriktion",
                     "delete": "Tog bort en svängrestriktion"
@@ -389,7 +383,6 @@
                 "title": "Mätning",
                 "selected": "{n} markerad(e)",
                 "geometry": "Geometri",
-                "closed": "slutet",
                 "center": "Centrum",
                 "perimeter": "Omkrets",
                 "length": "Längd",
@@ -470,7 +463,6 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga nycklar är:\n  - {zoom}/{z}, {x}, {y} enligt Z/X/Y-schema\n  - {ty} för Y-koordinat enligt omvänd TMS-stil\n  - {u} för QuadTile-scheman\n  - {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
             "overlays": "Bildlager",
             "imagery_source_faq": "Info om flygfotot / Rapportera ett problem",
             "reset": "ta bort",
@@ -653,7 +645,6 @@
             "untagged_area_tooltip": "Välj en typ som beskriver vad detta område är.",
             "untagged_relation": "Otaggad relation",
             "untagged_relation_tooltip": "Välj en typ som beskriver vad denna relation är.",
-            "many_deletions": "Du håller på att radera {n} objekt. Är du helt säker att du vill göra detta? Detta tar bort dem från kartan som alla andra ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} indikerar att detta borde vara ett område istället för en linje",
             "deprecated_tags": "Föråldrade taggar: {tags}"
         },
@@ -1087,6 +1078,28 @@
                 }
             }
         },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "Ö",
+            "west": "V",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1478,6 +1491,9 @@
                         "cycleway:right": "Höger sida"
                     }
                 },
+                "dance/style": {
+                    "label": "Dansstilar"
+                },
                 "date": {
                     "label": "Datum"
                 },
@@ -1539,6 +1555,9 @@
                         "both": "Båda / Alla",
                         "forward": "Framåt"
                     }
+                },
+                "dispensing": {
+                    "label": "Receptbelagda läkemedel "
                 },
                 "display": {
                     "label": "Visning"
@@ -1933,7 +1952,9 @@
                 "oneway": {
                     "label": "Enkelriktat",
                     "options": {
+                        "alternating": "Växlande",
                         "no": "Nej",
+                        "reversible": "Vändbar",
                         "undefined": "Förväntas vara Nej",
                         "yes": "Ja"
                     }
@@ -1941,7 +1962,9 @@
                 "oneway_yes": {
                     "label": "Enkelriktat",
                     "options": {
+                        "alternating": "Växlande",
                         "no": "Nej",
+                        "reversible": "Vändbar",
                         "undefined": "Förväntas vara Ja",
                         "yes": "Ja"
                     }
@@ -2080,6 +2103,9 @@
                 },
                 "ref": {
                     "label": "Referenskod"
+                },
+                "ref/isil": {
+                    "label": "ISIL-kod"
                 },
                 "ref_aeroway_gate": {
                     "label": "Gatenummer"
@@ -2475,6 +2501,9 @@
                 "wheelchair": {
                     "label": "Handikappanpassat"
                 },
+                "wholesale": {
+                    "label": "Grosist"
+                },
                 "width": {
                     "label": "Bredd (meter)"
                 },
@@ -2662,6 +2691,10 @@
                     "name": "Café",
                     "terms": "kaffeservering, kaffestuga, kafeteria, cafeteria, servering, konditori, kondis, fik, kaffe, te, bistro"
                 },
+                "amenity/car_pooling": {
+                    "name": "Bilpool",
+                    "terms": "Bilpool, hyrbil, lånebil"
+                },
                 "amenity/car_rental": {
                     "name": "Biluthyrning",
                     "terms": "Biluthyrning, billån, billeasing, lånebil, hyrbil"
@@ -2808,6 +2841,10 @@
                     "name": "Bibliotek",
                     "terms": "Bibliotek, boksamling, bokskatt, bokrum, läsesal, bibbla, bok, böcker"
                 },
+                "amenity/love_hotel": {
+                    "name": "Kärlekshotell",
+                    "terms": "Kärlekshotell, sexhotell, korttidshotell, hotell"
+                },
                 "amenity/marketplace": {
                     "name": "Marknadsplats",
                     "terms": "Saluhall, torg, marknad, salutorg"
@@ -2952,6 +2989,10 @@
                 "amenity/shower": {
                     "name": "Dusch",
                     "terms": "Dusch, duschutrymme, duschkabin, duschbad, badrum, duschrum"
+                },
+                "amenity/smoking_area": {
+                    "name": "Rökområde",
+                    "terms": "rökrum, rökområde, rökruta, rökning tillåten, rökning, röka, cigarett"
                 },
                 "amenity/social_facility": {
                     "name": "Social inrättning",
@@ -3186,6 +3227,10 @@
                     "name": "Häck",
                     "terms": "Häck, buskar"
                 },
+                "barrier/kerb": {
+                    "name": "Trottoarkant",
+                    "terms": "trottoarkant, kant, kantsten"
+                },
                 "barrier/kissing_gate": {
                     "name": "Grind vid betesmark",
                     "terms": "Grind vid betesmark, Kryssgrind"
@@ -3226,6 +3271,14 @@
                     "name": "Lada",
                     "terms": "Lada, ladugård, loge, magasin, skjul, skulle, lagård"
                 },
+                "building/boathouse": {
+                    "name": "Båthus",
+                    "terms": "Båthus, sjöbod, strandbod"
+                },
+                "building/bungalow": {
+                    "name": "Bungalow",
+                    "terms": "Bungalow, stuga, sommarstuga, fristående hus, villa, semesterhus"
+                },
                 "building/bunker": {
                     "name": "Bunker"
                 },
@@ -3244,6 +3297,10 @@
                 "building/church": {
                     "name": "Kyrkobyggnad",
                     "terms": "Kyrka, kyrkobyggnad, kyrkbyggnad, kyrksal, andaktssal, missionshus, gudstjänst, gudstjänstslokal, andaktslokal, gudshus"
+                },
+                "building/civic": {
+                    "name": "Kommunal byggnad",
+                    "terms": "Civil, kommunal, publik, stadshus, kommunhus, medborgarhus"
                 },
                 "building/college": {
                     "name": "Collegebyggnad",
@@ -3267,6 +3324,14 @@
                 },
                 "building/entrance": {
                     "name": "Entré/utgång"
+                },
+                "building/farm": {
+                    "name": "Mangårdsbyggnad (bostadshus på gård)",
+                    "terms": "Mangårdsbyggnad, bostad, hus, bostadshus, gård, lantbruk"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Gårdsbyggnader",
+                    "terms": "Gårdsbyggnader, ekonomibyggnader, gårdshus, ladugård, stall, lantbruksbyggnader, gård, lantbruk"
                 },
                 "building/garage": {
                     "name": "Garage",
@@ -3323,6 +3388,10 @@
                 "building/roof": {
                     "name": "Tak",
                     "terms": "Tak, övertäckning, valv, överbyggnad, regnskydd"
+                },
+                "building/ruins": {
+                    "name": "Ruinbyggnad",
+                    "terms": "Ruinbyggnad, ruin, raserad, husrest, förfallen, ödehus, huslämning, fornlämning"
                 },
                 "building/school": {
                     "name": "Skolbyggnad",
@@ -4161,6 +4230,10 @@
                 "leisure/dance": {
                     "name": "Dansbana",
                     "terms": "Dansbana, danshus, rotunda, folkets park, bal, balsal, bugg, foxtrot, salsa, jive, swing, tango, valls, gammaldans"
+                },
+                "leisure/dancing_school": {
+                    "name": "Dansskola",
+                    "terms": "Dansskola, bugg, foxtrot, gamaldans, swing, jive, vals, dans, danskurs, dansutbildning, tiodans, salsa, tango"
                 },
                 "leisure/dog_park": {
                     "name": "Hundpark",
@@ -5078,9 +5151,6 @@
                 "shop": {
                     "name": "Affär",
                     "terms": "Affär, shop, butik"
-                },
-                "shop/agrarian": {
-                    "name": "Jordbruksaffär"
                 },
                 "shop/alcohol": {
                     "name": "Vin-och-spritaffär",

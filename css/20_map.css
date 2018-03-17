@@ -26,6 +26,11 @@
     pointer-events: none;
 }
 
+.lasso #map {
+    pointer-events: visibleStroke;
+}
+
+
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
 .node.target {
@@ -242,7 +247,7 @@ text.point {
 }
 
 
-/* Turns */
+/* Turn Restrictions */
 
 g.turn rect,
 g.turn circle {
@@ -255,9 +260,33 @@ g.turn circle {
     pointer-events: none;
 }
 
-.lasso #map {
-    pointer-events: visibleStroke;
+/* Turn restriction paths and vertices */
+.surface.tr .way.target,
+.surface.tr path.shadow.selected,
+.surface.tr path.shadow.related {
+    stroke-width: 25px;
 }
+
+.surface.tr path.shadow.selected,
+.surface.tr path.shadow.related,
+.surface.tr g.vertex.selected .shadow,
+.surface.tr g.vertex.related .shadow {
+    stroke-opacity: 0.7;
+    stroke: #777;
+}
+.surface.tr path.shadow.related.allow,
+.surface.tr g.vertex.related.allow .shadow {
+    stroke: #5b3;
+}
+.surface.tr path.shadow.related.restrict,
+.surface.tr g.vertex.related.restrict .shadow {
+    stroke: #d53;
+}
+.surface.tr path.shadow.related.only,
+.surface.tr g.vertex.related.only .shadow {
+    stroke: #68f;
+}
+
 
 /* GPX Paths */
 

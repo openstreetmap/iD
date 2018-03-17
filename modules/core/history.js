@@ -32,12 +32,14 @@ import {
 
 
 export function coreHistory(context) {
-    var imageryUsed = ['Bing'],
-        dispatch = d3_dispatch('change', 'undone', 'redone'),
-        lock = utilSessionMutex('lock'),
-        duration = 150,
-        checkpoints = {},
-        stack, index, tree;
+    var imageryUsed = ['Bing'];
+    var dispatch = d3_dispatch('change', 'undone', 'redone');
+    var lock = utilSessionMutex('lock');
+    var duration = 150;
+    var _checkpoints = {};
+    var _stack;
+    var _index;
+    var _tree;
 
 
     // internal _act, accepts list of actions and eased time
@@ -45,15 +47,14 @@ export function coreHistory(context) {
         actions = Array.prototype.slice.call(actions);
 
         var annotation;
-
         if (!_isFunction(actions[actions.length - 1])) {
             annotation = actions.pop();
         }
 
-        stack[index].transform = context.projection.transform();
-        stack[index].selectedIDs = context.selectedIDs();
+        _stack[_index].transform = context.projection.transform();
+        _stack[_index].selectedIDs = context.selectedIDs();
 
-        var graph = stack[index].graph;
+        var graph = _stack[_index].graph;
         for (var i = 0; i < actions.length; i++) {
             graph = actions[i](graph, t);
         }
@@ -68,33 +69,33 @@ export function coreHistory(context) {
 
     // internal _perform with eased time
     function _perform(args, t) {
-        var previous = stack[index].graph;
-        stack = stack.slice(0, index + 1);
-        stack.push(_act(args, t));
-        index++;
+        var previous = _stack[_index].graph;
+        _stack = _stack.slice(0, _index + 1);
+        _stack.push(_act(args, t));
+        _index++;
         return change(previous);
     }
 
 
     // internal _replace with eased time
     function _replace(args, t) {
-        var previous = stack[index].graph;
-        // assert(index == stack.length - 1)
-        stack[index] = _act(args, t);
+        var previous = _stack[_index].graph;
+        // assert(_index == _stack.length - 1)
+        _stack[_index] = _act(args, t);
         return change(previous);
     }
 
 
     // internal _overwrite with eased time
     function _overwrite(args, t) {
-        var previous = stack[index].graph;
-        if (index > 0) {
-            index--;
-            stack.pop();
+        var previous = _stack[_index].graph;
+        if (_index > 0) {
+            _index--;
+            _stack.pop();
         }
-        stack = stack.slice(0, index + 1);
-        stack.push(_act(args, t));
-        index++;
+        _stack = _stack.slice(0, _index + 1);
+        _stack.push(_act(args, t));
+        _index++;
         return change(previous);
     }
 
@@ -116,18 +117,18 @@ export function coreHistory(context) {
     var history = {
 
         graph: function() {
-            return stack[index].graph;
+            return _stack[_index].graph;
         },
 
 
         base: function() {
-            return stack[0].graph;
+            return _stack[0].graph;
         },
 
 
         merge: function(entities, extent) {
-            stack[0].graph.rebase(entities, _map(stack, 'graph'), false);
-            tree.rebase(entities, false);
+            _stack[0].graph.rebase(entities, _map(_stack, 'graph'), false);
+            _tree.rebase(entities, false);
 
             dispatch.call('change', this, undefined, extent);
         },
@@ -137,8 +138,8 @@ export function coreHistory(context) {
             // complete any transition already in progress
             d3_select(document).interrupt('history.perform');
 
-            var transitionable = false,
-                action0 = arguments[0];
+            var transitionable = false;
+            var action0 = arguments[0];
 
             if (arguments.length === 1 ||
                 arguments.length === 2 && !_isFunction(arguments[1])) {
@@ -185,29 +186,29 @@ export function coreHistory(context) {
         pop: function(n) {
             d3_select(document).interrupt('history.perform');
 
-            var previous = stack[index].graph;
+            var previous = _stack[_index].graph;
             if (isNaN(+n) || +n < 0) {
                 n = 1;
             }
-            while (n-- > 0 && index > 0) {
-                index--;
-                stack.pop();
+            while (n-- > 0 && _index > 0) {
+                _index--;
+                _stack.pop();
             }
             return change(previous);
         },
 
 
-        // Back to the previous annotated state or index = 0.
+        // Back to the previous annotated state or _index = 0.
         undo: function() {
             d3_select(document).interrupt('history.perform');
 
-            var previous = stack[index].graph;
-            while (index > 0) {
-                index--;
-                if (stack[index].annotation) break;
+            var previous = _stack[_index].graph;
+            while (_index > 0) {
+                _index--;
+                if (_stack[_index].annotation) break;
             }
 
-            dispatch.call('undone', this, stack[index]);
+            dispatch.call('undone', this, _stack[_index]);
             return change(previous);
         },
 
@@ -216,13 +217,13 @@ export function coreHistory(context) {
         redo: function() {
             d3_select(document).interrupt('history.perform');
 
-            var previous = stack[index].graph;
-            var tryIndex = index;
-            while (tryIndex < stack.length - 1) {
+            var previous = _stack[_index].graph;
+            var tryIndex = _index;
+            while (tryIndex < _stack.length - 1) {
                 tryIndex++;
-                if (stack[tryIndex].annotation) {
-                    index = tryIndex;
-                    dispatch.call('redone', this, stack[index]);
+                if (_stack[tryIndex].annotation) {
+                    _index = tryIndex;
+                    dispatch.call('redone', this, _stack[_index]);
                     break;
                 }
             }
@@ -232,38 +233,38 @@ export function coreHistory(context) {
 
 
         undoAnnotation: function() {
-            var i = index;
+            var i = _index;
             while (i >= 0) {
-                if (stack[i].annotation) return stack[i].annotation;
+                if (_stack[i].annotation) return _stack[i].annotation;
                 i--;
             }
         },
 
 
         redoAnnotation: function() {
-            var i = index + 1;
-            while (i <= stack.length - 1) {
-                if (stack[i].annotation) return stack[i].annotation;
+            var i = _index + 1;
+            while (i <= _stack.length - 1) {
+                if (_stack[i].annotation) return _stack[i].annotation;
                 i++;
             }
         },
 
 
         intersects: function(extent) {
-            return tree.intersects(extent, stack[index].graph);
+            return _tree.intersects(extent, _stack[_index].graph);
         },
 
 
         difference: function() {
-            var base = stack[0].graph,
-                head = stack[index].graph;
+            var base = _stack[0].graph;
+            var head = _stack[_index].graph;
             return coreDifference(base, head);
         },
 
 
         changes: function(action) {
-            var base = stack[0].graph,
-                head = stack[index].graph;
+            var base = _stack[0].graph;
+            var head = _stack[_index].graph;
 
             if (action) {
                 head = action(head);
@@ -281,7 +282,7 @@ export function coreHistory(context) {
 
         validate: function(changes) {
             return _flatten(
-                _map(Validations, function(fn) { return fn()(changes, stack[index].graph); })
+                _map(Validations, function(fn) { return fn()(changes, _stack[_index].graph); })
             );
         },
 
@@ -296,7 +297,7 @@ export function coreHistory(context) {
                 imageryUsed = sources;
                 return history;
             } else {
-                var arr = _map(stack.slice(1, index + 1), 'imageryUsed');
+                var arr = _map(_stack.slice(1, _index + 1), 'imageryUsed');
                 return _without(_uniq(_flatten(arr)), 'Custom');
             }
         },
@@ -304,9 +305,9 @@ export function coreHistory(context) {
 
         // save the current history state
         checkpoint: function(key) {
-            checkpoints[key] = {
-                stack: _cloneDeep(stack),
-                index: index
+            _checkpoints[key] = {
+                stack: _cloneDeep(_stack),
+                index: _index
             };
             return history;
         },
@@ -314,14 +315,14 @@ export function coreHistory(context) {
 
         // restore history state to a given checkpoint or reset completely
         reset: function(key) {
-            if (key !== undefined && checkpoints.hasOwnProperty(key)) {
-                stack = _cloneDeep(checkpoints[key].stack);
-                index = checkpoints[key].index;
+            if (key !== undefined && _checkpoints.hasOwnProperty(key)) {
+                _stack = _cloneDeep(_checkpoints[key].stack);
+                _index = _checkpoints[key].index;
             } else {
-                stack = [{graph: coreGraph()}];
-                index = 0;
-                tree = coreTree(stack[0].graph);
-                checkpoints = {};
+                _stack = [{graph: coreGraph()}];
+                _index = 0;
+                _tree = coreTree(_stack[0].graph);
+                _checkpoints = {};
             }
             dispatch.call('change');
             return history;
@@ -329,10 +330,10 @@ export function coreHistory(context) {
 
 
         toIntroGraph: function() {
-            var nextId = { n: 0, r: 0, w: 0 },
-                permIds = {},
-                graph = this.graph(),
-                baseEntities = {};
+            var nextId = { n: 0, r: 0, w: 0 };
+            var permIds = {};
+            var graph = this.graph();
+            var baseEntities = {};
 
             // clone base entities..
             _forEach(graph.base().entities, function(entity) {
@@ -395,11 +396,11 @@ export function coreHistory(context) {
         toJSON: function() {
             if (!this.hasChanges()) return;
 
-            var allEntities = {},
-                baseEntities = {},
-                base = stack[0];
+            var allEntities = {};
+            var baseEntities = {};
+            var base = _stack[0];
 
-            var s = stack.map(function(i) {
+            var s = _stack.map(function(i) {
                 var modified = [], deleted = [];
 
                 _forEach(i.graph.entities, function(entity, id) {
@@ -412,7 +413,7 @@ export function coreHistory(context) {
                     }
 
                     // make sure that the originals of changed or deleted entities get merged
-                    // into the base of the stack after restoring the data from JSON.
+                    // into the base of the _stack after restoring the data from JSON.
                     if (id in base.graph.entities) {
                         baseEntities[id] = base.graph.entities[id];
                     }
@@ -440,17 +441,17 @@ export function coreHistory(context) {
                 baseEntities: _values(baseEntities),
                 stack: s,
                 nextIDs: osmEntity.id.next,
-                index: index
+                index: _index
             });
         },
 
 
         fromJSON: function(json, loadChildNodes) {
-            var h = JSON.parse(json),
-                loadComplete = true;
+            var h = JSON.parse(json);
+            var loadComplete = true;
 
             osmEntity.id.next = h.nextIDs;
-            index = h.index;
+            _index = h.index;
 
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
@@ -461,18 +462,18 @@ export function coreHistory(context) {
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
-                    // the stack even if the current stack doesn't have them (for
+                    // the _stack even if the current _stack doesn't have them (for
                     // example when iD has been restarted in a different region)
                     var baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
-                    stack[0].graph.rebase(baseEntities, _map(stack, 'graph'), true);
-                    tree.rebase(baseEntities, true);
+                    _stack[0].graph.rebase(baseEntities, _map(_stack, 'graph'), true);
+                    _tree.rebase(baseEntities, true);
 
                     // When we restore a modified way, we also need to fetch any missing
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
                         var osm = context.connection();
                         var nodes = _flatten(_uniq(_map(_filter(baseEntities, { type: 'way' }), 'nodes')));
-                        var missing = _reject(nodes, function(n) { return stack[0].graph.hasEntity(n); });
+                        var missing = _reject(nodes, function(n) { return _stack[0].graph.hasEntity(n); });
 
                         if (!_isEmpty(missing) && osm) {
                             loadComplete = false;
@@ -486,8 +487,8 @@ export function coreHistory(context) {
                                     var visible = _groupBy(result.data, 'visible');
                                     if (!_isEmpty(visible.true)) {
                                         missing = _difference(missing, _map(visible.true, 'id'));
-                                        stack[0].graph.rebase(visible.true, _map(stack, 'graph'), true);
-                                        tree.rebase(visible.true, true);
+                                        _stack[0].graph.rebase(visible.true, _map(_stack, 'graph'), true);
+                                        _tree.rebase(visible.true, true);
                                     }
 
                                     // fetch older versions of nodes that were deleted..
@@ -508,7 +509,7 @@ export function coreHistory(context) {
                     }
                 }
 
-                stack = h.stack.map(function(d) {
+                _stack = h.stack.map(function(d) {
                     var entities = {}, entity;
 
                     if (d.modified) {
@@ -525,14 +526,14 @@ export function coreHistory(context) {
                     }
 
                     return {
-                        graph: coreGraph(stack[0].graph).load(entities),
+                        graph: coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed
                     };
                 });
 
             } else { // original version
-                stack = h.stack.map(function(d) {
+                _stack = h.stack.map(function(d) {
                     var entities = {};
 
                     for (var i in d.entities) {
@@ -540,7 +541,7 @@ export function coreHistory(context) {
                         entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
                     }
 
-                    d.graph = coreGraph(stack[0].graph).load(entities);
+                    d.graph = coreGraph(_stack[0].graph).load(entities);
                     return d;
                 });
             }
