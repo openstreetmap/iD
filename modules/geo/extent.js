@@ -1,6 +1,5 @@
 // @flow
-type Vec2 = [number, number];
-type Mat2 = [Vec2, Vec2];
+import type { Vec2, Mat2 } from '.';
 
 import _extend from 'lodash-es/extend';
 

@@ -1,7 +1,5 @@
 // @flow
-type Vec2 = [number, number];
-type Mat2 = [Vec2, Vec2];
-type Transform = { x: number, y: number, k: number };
+import type { Mat2, Vec2, Transform } from '.';
 
 import {
     geoMercatorRaw as d3_geoMercatorRaw,

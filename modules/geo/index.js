@@ -1,3 +1,8 @@
+// @flow
+export type Vec2 = [number, number];
+export type Mat2 = [Vec2, Vec2];
+export type Transform = { x: number, y: number, k: number };
+
 export { geoExtent } from './extent.js';
 
 export { geoLatToMeters } from './geo.js';
