@@ -1,3 +1,7 @@
+// @flow
+type Vec2 = [number, number];
+type Mat2 = [Vec2, Vec2];
+
 import _extend from 'lodash-es/extend';
 
 import {
@@ -6,9 +10,10 @@ import {
 } from './index';
 
 
-export function geoExtent(min, max) {
-    if (!(this instanceof geoExtent)) return new geoExtent(min, max);
-    if (min instanceof geoExtent) {
+export function geoExtent(min?: Vec2 | Mat2, max?: Vec2) {
+    if (!(this instanceof geoExtent)) {
+        return new geoExtent(min, max);
+    } else if (min instanceof geoExtent) {
         return min;
     } else if (min && min.length === 2 && min[0].length === 2 && min[1].length === 2) {
         this[0] = min[0];
@@ -19,6 +24,7 @@ export function geoExtent(min, max) {
     }
 }
 
+// $FlowFixMe
 geoExtent.prototype = new Array(2);
 
 _extend(geoExtent.prototype, {
@@ -34,8 +40,8 @@ _extend(geoExtent.prototype, {
     extend: function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return geoExtent(
-            [Math.min(obj[0][0], this[0][0]), Math.min(obj[0][1], this[0][1])],
-            [Math.max(obj[1][0], this[1][0]), Math.max(obj[1][1], this[1][1])]
+            [(Math.min(obj[0][0], this[0][0]): number), (Math.min(obj[0][1], this[0][1]): number)],
+            [(Math.max(obj[1][0], this[1][0]): number), (Math.max(obj[1][1], this[1][1]): number)]
         );
     },
 
@@ -101,16 +107,16 @@ _extend(geoExtent.prototype, {
     intersection: function(obj) {
         if (!this.intersects(obj)) return new geoExtent();
         return new geoExtent(
-            [Math.max(obj[0][0], this[0][0]), Math.max(obj[0][1], this[0][1])],
-            [Math.min(obj[1][0], this[1][0]), Math.min(obj[1][1], this[1][1])]
+            [(Math.max(obj[0][0], this[0][0]): number), (Math.max(obj[0][1], this[0][1]): number)],
+            [(Math.min(obj[1][0], this[1][0]): number), (Math.min(obj[1][1], this[1][1]): number)]
         );
     },
 
 
     percentContainedIn: function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
-        var a1 = this.intersection(obj).area(),
-            a2 = this.area();
+        var a1 = this.intersection(obj).area();
+        var a2 = this.area();
 
         if (a1 === Infinity || a2 === Infinity || a1 === 0 || a2 === 0) {
             return 0;
@@ -120,9 +126,9 @@ _extend(geoExtent.prototype, {
     },
 
 
-    padByMeters: function(meters) {
-        var dLat = geoMetersToLat(meters),
-            dLon = geoMetersToLon(meters, this.center()[1]);
+    padByMeters: function(meters: number) {
+        var dLat: number = geoMetersToLat(meters);
+        var dLon: number = geoMetersToLon(meters, this.center()[1]);
         return geoExtent(
             [this[0][0] - dLon, this[0][1] - dLat],
             [this[1][0] + dLon, this[1][1] + dLat]
