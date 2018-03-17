@@ -32,6 +32,7 @@
     "icon-down":                { "viewBox": "600 0 20 20" },
     "icon-more":                { "viewBox": "620 0 20 20" },
     "icon-no":                  { "viewBox": "640 0 20 20" },
+    "icon-edit":                { "viewBox": "660 0 20 20" },
 
     "icon-alert-shape":               { "fill": "currentColor" },
     "icon-point-shape":               { "fill": "currentColor" },
@@ -70,6 +71,7 @@
     "icon-down-shape":                { "fill": "currentColor" },
     "icon-more-shape":                { "fill": "currentColor" },
     "icon-no-shape":                  { "fill": "currentColor" },
+    "icon-edit-shape":                { "fill": "currentColor" },
 
     "highway-motorway":         { "viewBox": "0 20 60 60" },
     "highway-trunk":            { "viewBox": "60 20 60 60" },
