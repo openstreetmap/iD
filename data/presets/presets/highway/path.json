@@ -12,6 +12,7 @@
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
+        "horse_scale",
         "ref"
     ],
     "geometry": [
