@@ -1,7 +1,9 @@
 {
     "en": {
         "icons": {
-            "information": "info"
+            "information": "info",
+            "remove": "remove",
+            "undo": "undo"
         },
         "modes": {
             "add_area": {
