@@ -382,6 +382,11 @@ export function uiHelp(context) {
             .call(tooltipBehavior);
         var shown = false;
 
+        pane
+            .append('button')
+            .on('click', function() { uiHelp.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
 
         var toc = pane
             .append('ul')

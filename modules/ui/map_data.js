@@ -458,6 +458,11 @@ export function uiMapData(context) {
 
 
         pane
+            .append('button')
+            .on('click', function() { uiMapData.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
+        pane
             .append('h2')
             .text(t('map_data.title'));
 
