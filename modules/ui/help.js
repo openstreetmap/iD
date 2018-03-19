@@ -15,8 +15,7 @@ import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-
-import { icon } from 'intro/helper';
+import { icon } from './intro/helper';
 
 export function uiHelp(context) {
     var key = t('help.key');

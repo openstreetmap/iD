@@ -5,7 +5,6 @@ const rollup = require('rollup');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const json = require('rollup-plugin-json');
-const includePaths = require('rollup-plugin-includepaths');
 const colors = require('colors/safe');
 const flowRemoveTypes = require('flow-remove-types');
 
@@ -30,11 +29,6 @@ module.exports = function buildSrc() {
                 input: './modules/id.js',
                 plugins: [
                     flow(),
-                    includePaths({
-                        paths: [
-                            'node_modules/d3/node_modules' // for npm 2
-                        ]
-                    }),
                     nodeResolve({
                         module: true,
                         main: true,

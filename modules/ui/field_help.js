@@ -6,7 +6,7 @@ import {
 import marked from 'marked';
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
-import { icon } from 'intro/helper';
+import { icon } from './intro/helper';
 
 
 // This currently only works with the 'restrictions' field

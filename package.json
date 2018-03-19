@@ -69,7 +69,6 @@
     "request": "^2.85.0",
     "rollup": "~0.57.0",
     "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-includepaths": "^0.2.2",
     "rollup-plugin-json": "^2.2.0",
     "rollup-plugin-node-resolve": "^3.2.0",
     "shelljs": "^0.8.0",
@@ -89,6 +88,7 @@
     ]
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0",
+    "npm": ">=3.0.0"
   }
 }
