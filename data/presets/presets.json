@@ -4597,6 +4597,7 @@
             "icon": "building",
             "fields": [
                 "name",
+                "brand",
                 "address",
                 "levels",
                 "smoking"
@@ -18706,6 +18707,7 @@
             "icon": "lodging",
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94124,6 +94126,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94149,6 +94152,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94174,6 +94178,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94199,6 +94204,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94224,6 +94230,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94249,6 +94256,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94274,6 +94282,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94299,6 +94308,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94324,6 +94334,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94349,6 +94360,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94374,6 +94386,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94399,6 +94412,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94424,6 +94438,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94449,6 +94464,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94474,6 +94490,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94499,6 +94516,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94524,6 +94542,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94549,6 +94568,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94574,6 +94594,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94599,6 +94620,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94624,6 +94646,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94649,6 +94672,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94674,6 +94698,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94699,6 +94724,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94724,6 +94750,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94749,6 +94776,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94774,6 +94802,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94799,6 +94828,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94824,6 +94854,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94849,6 +94880,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94874,6 +94906,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94899,6 +94932,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94924,6 +94958,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94949,6 +94984,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94974,6 +95010,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -94999,6 +95036,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95024,6 +95062,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95049,6 +95088,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95074,6 +95114,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95099,6 +95140,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95124,6 +95166,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95149,6 +95192,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95174,6 +95218,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95199,6 +95244,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95224,6 +95270,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95249,6 +95296,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95274,6 +95322,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95299,6 +95348,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95324,6 +95374,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95349,6 +95400,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95374,6 +95426,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95399,6 +95452,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95424,6 +95478,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95449,6 +95504,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95474,6 +95530,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95499,6 +95556,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95524,6 +95582,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95549,6 +95608,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95574,6 +95634,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95599,6 +95660,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95624,6 +95686,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95649,6 +95712,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
@@ -95674,6 +95738,7 @@
             ],
             "fields": [
                 "name",
+                "brand",
                 "operator",
                 "address",
                 "building_area",
