@@ -4597,7 +4597,6 @@
             "icon": "building",
             "fields": [
                 "name",
-                "brand",
                 "address",
                 "levels",
                 "smoking"
