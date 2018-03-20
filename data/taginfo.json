@@ -1595,6 +1595,10 @@
             "value": "allotments"
         },
         {
+            "key": "allotments",
+            "value": "plot"
+        },
+        {
             "key": "landuse",
             "value": "aquaculture"
         },

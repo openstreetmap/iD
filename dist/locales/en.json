@@ -4349,6 +4349,10 @@
                     "name": "Community Garden",
                     "terms": "allotment,garden"
                 },
+                "landuse/allotments/plot": {
+                    "name": "Plot",
+                    "terms": ""
+                },
                 "landuse/aquaculture": {
                     "name": "Aquaculture",
                     "terms": "fish farm,crustacean,algae,aquafarming,shrimp farm,oyster farm,mariculture,algaculture"
