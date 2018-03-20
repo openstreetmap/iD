@@ -27,7 +27,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         } else if (!services.mapillary && _mapillary) {
             _mapillary = null;
         }
-
+        
         return _mapillary;
     }
 
@@ -76,6 +76,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function click(d) {
+        console.log("mapillary image feature click: ", d);
         var service = getService();
         if (!service) return;
 

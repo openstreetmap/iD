@@ -249,6 +249,7 @@ export function uiInit(context) {
             .append('button')
             .attr('class', 'thumb-hide')
             .on('click', function () {
+                if (services.streetside) { services.streetside.hideViewer(); }
                 if (services.mapillary) { services.mapillary.hideViewer(); }
                 if (services.openstreetcam) { services.openstreetcam.hideViewer(); }
             })

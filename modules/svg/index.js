@@ -6,6 +6,7 @@ export { svgIcon } from './icon.js';
 export { svgLabels } from './labels.js';
 export { svgLayers } from './layers.js';
 export { svgLines } from './lines.js';
+export { svgStreetside } from './streetside.js';
 export { svgMapillaryImages } from './mapillary_images.js';
 export { svgMapillarySigns } from './mapillary_signs.js';
 export { svgMidpoints } from './midpoints.js';

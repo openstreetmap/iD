@@ -28,10 +28,10 @@ import { geoExtent } from '../geo';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
-
 var apibase = 'https://a.mapillary.com/v3/',
     viewercss = 'mapillary-js/mapillary.min.css',
-    viewerjs = 'mapillary-js/mapillary.min.js',
+    // viewerjs = 'mapillary-js/mapillary.min.js',
+    viewerjs = 'mapillary-js/mapillary.js',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     tileZoom = 14,
@@ -520,7 +520,7 @@ export default {
             this.initViewer(imageKey, context);
         } else {
             _mlyViewer.moveToKey(imageKey)
-                .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
+                .catch(function(e) { console.error('mly3', e); });  // eslint-disabe-line no-console
         }
 
         return this;

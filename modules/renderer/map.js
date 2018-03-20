@@ -514,6 +514,7 @@ export function rendererMap(context) {
     // returns Lng/Lat
     map.mouseCoordinates = function() {
         var coord = map.mouse() || pxCenter();
+        console.log("map.mouseCoordinates",projection.invert(coord));
         return projection.invert(coord);
     };
 

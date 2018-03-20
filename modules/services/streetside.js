@@ -23,6 +23,10 @@ import {
 
 import rbush from 'rbush';
 
+// photo sphere viewer
+import _three from 'three/build/three';
+import _d from 'd.js/lib/d';
+
 import { jsonpRequest } from '../util/jsonp_request';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
