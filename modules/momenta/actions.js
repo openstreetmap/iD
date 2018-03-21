@@ -358,7 +358,7 @@ function actionAddStopLine(selectIds, context) {
 
 }
 
-function addPackage(packageId) {
+function addPackage(result) {
     return function clearAll(graph) {
         // var graph = context.graph();
 
@@ -381,7 +381,9 @@ function addPackage(packageId) {
         // var entities = graph.entities;
         // deleteElement(entities);
 
-        var result = sendPost(url.check_host,{'packageIds':packageId});
+        // var result = sendPost(url.check_host,{'packageIds':packageId},function (data) {
+        //
+        // });
         result = JSON.parse(result);
         var createEles = result.created;
 
@@ -417,9 +419,12 @@ function addMomentaPackages(packageId) {
         window.id.undo();
         window.id.history().undoAnnotation();
     }
-    setTimeout(function () {
-        window.id.perform(addPackage(packageId), 'addMomentaPackages');
-    },10);
+    sendPost(url.check_host,{'packageIds':packageId},function (data) {
+        window.id.perform(addPackage(data), 'addMomentaPackages');
+    });
+    // setTimeout(function () {
+    //
+    // },10);
 }
 window.addPackages = addMomentaPackages
 export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};

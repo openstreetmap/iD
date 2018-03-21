@@ -49,18 +49,15 @@ function convert2JSON(selects, context) {
 function checkNumUseful(value) {
     return parseFloat(value)!==NaN
 }
-function sendPost(url,data) {
+function sendPost(url,data,callback) {
     var result = minAjax({
         url: url,//request URL
         type: 'POST',//Request type GET/POST
         //Send Data in form of GET/POST
         data: data,
-        method:false,
+        method:callback,
         //CALLBACK FUNCTION with RESPONSE as argument
-        success: function (data) {
-            // alert(data);
-            result = data;
-        }
+        success: callback
     });
     return result;
 }
