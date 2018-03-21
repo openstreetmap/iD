@@ -418,7 +418,7 @@ function addMomentaPackages(packageId) {
         window.id.history().undoAnnotation();
     }
     setTimeout(function () {
-        window.id.perform(addPackage(packageId), 'deleteAll');
+        window.id.perform(addPackage(packageId), 'addMomentaPackages');
     },10);
 }
 window.addPackages = addMomentaPackages
