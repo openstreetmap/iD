@@ -1763,6 +1763,10 @@ en:
         name: Airport Terminal
         # 'terms: airport,aerodrome'
         terms: '<translate with synonyms or related terms for ''Airport Terminal'', separated by commas>'
+      allotments/plot:
+        # allotments=plot
+        name: Community Garden Plot
+        terms: '<translate with synonyms or related terms for ''Community Garden Plot'', separated by commas>'
       amenity:
         # amenity=*
         name: Amenity

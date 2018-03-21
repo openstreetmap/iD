@@ -132,6 +132,10 @@
             "value": "terminal"
         },
         {
+            "key": "allotments",
+            "value": "plot"
+        },
+        {
             "key": "amenity",
             "value": "bus_station"
         },
