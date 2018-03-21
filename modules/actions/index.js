@@ -34,4 +34,5 @@ export { actionUnrestrictTurn } from './unrestrict_turn';
 export { actionReflect } from './reflect.js';
 export { actionDrawCenterline } from './draw_centerline';
 export { actionJoinLanegroup } from './join_lanegroup';
+export { addMomentaPackages } from './../momenta/actions';
 

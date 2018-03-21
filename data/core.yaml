@@ -35,27 +35,37 @@ en:
         reason: line nodes must has ele.
         tooltip: merge elements.
         title: merge elements.
-        key: D
+        key: M
         annotation: merge elements.
     momenta_convertDirection:
         reason: convert line direction.
         tooltip: convert chosed lines direction.
-        key: D
+        key: R
         annotation: convert chosed lines direction
         title: convert chosed lines direction.
     momenta_addpoints:
         reason: add points.
         tooltip: add points.
-        key: D
+        key: P
         annotation: add points..
         title: add points.
+    momenta_convertLineType:
+        title: convertLineType
+        description: convertLineType.
+        key: L
+        annotation: convertLineType.
+    momenta_addStopLine:
+        title: addStopLine
+        description: addStopLine.
+        key: L
+        annotation: addStopLine.
     momenta_straighten:
-        title: Straighten
-        description: Straighten this line.
-        key: S
-        annotation: Straightened a line.
-        too_bendy: This can't be straightened because it bends too much.
-        connected_to_hidden: This line can't be straightened because it is connected to a hidden feature.
+            title: Straighten
+            description: Straighten this line.
+            key: L
+            annotation: Straightened a line.
+            too_bendy: This can't be straightened because it bends too much.
+            connected_to_hidden: This line can't be straightened because it is connected to a hidden feature.
     momenta_delete:
         reason: All Chosed must be lines.
         tooltip: delete elements.
@@ -68,7 +78,7 @@ en:
     momenta_fillInfo:
         reason: please chose nodes.
         tooltip: adapte ele.
-        key: D
+        key: F
         annotation: adapte ele.
         title: add ele to nodes.
     momenta_segment:
