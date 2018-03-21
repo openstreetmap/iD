@@ -412,12 +412,14 @@ function addPackage(packageId) {
     };
 
 }
-
-window.addPackages = function (packageId) {
-    window.id.undo();
-    window.id.history().undoAnnotation();
+function addMomentaPackages(packageId) {
+    while (window.id.undo().length()>0){
+        window.id.undo();
+        window.id.history().undoAnnotation();
+    }
     setTimeout(function () {
         window.id.perform(addPackage(packageId), 'deleteAll');
     },10);
-};
-export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType};
+}
+window.addPackages = addMomentaPackages
+export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};
