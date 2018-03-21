@@ -1,3 +1,12 @@
+// @flow
+export type Node = { };
+export type Way = { };
+export type Relation = { };
+export type Graph = {
+    replace: (Node | Way | Relation) => Graph;
+};
+export type Action = (Graph) => Graph;
+
 export { actionAddEntity } from './add_entity';
 export { actionAddMember } from './add_member';
 export { actionAddMidpoint } from './add_midpoint';
