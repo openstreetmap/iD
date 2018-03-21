@@ -362,24 +362,24 @@ function addPackage(packageId) {
     return function clearAll(graph) {
         // var graph = context.graph();
 
-        function deleteElement(entities) {
-            for (var ele in entities) {
-                // if (ele.indexOf('n')>-1){
-                //     graph = actionDeleteNode(ele)(graph);
-                // }
-                if (ele.indexOf('w')>-1){
-                    var entity = entities[ele];
-                    if (entity){
-                        graph = actionDeleteWay(ele)(graph);
-                        for (var ndindex in entity.nodes){
-                            graph = actionDeleteNode(entity.nodes[ndindex])(graph);
-                        }
-                    }
-                }
-            }
-        }
-        var entities = graph.entities;
-        deleteElement(entities);
+        // function deleteElement(entities) {
+        //     for (var ele in entities) {
+        //         // if (ele.indexOf('n')>-1){
+        //         //     graph = actionDeleteNode(ele)(graph);
+        //         // }
+        //         if (ele.indexOf('w')>-1){
+        //             var entity = entities[ele];
+        //             if (entity){
+        //                 graph = actionDeleteWay(ele)(graph);
+        //                 for (var ndindex in entity.nodes){
+        //                     graph = actionDeleteNode(entity.nodes[ndindex])(graph);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // var entities = graph.entities;
+        // deleteElement(entities);
 
         var result = sendPost(url.check_host,{'packageIds':packageId});
         result = JSON.parse(result);
@@ -414,6 +414,10 @@ function addPackage(packageId) {
 }
 
 window.addPackages = function (packageId) {
-    window.id.perform(addPackage(packageId), 'deleteAll');
+    window.id.undo();
+    window.id.history().undoAnnotation();
+    setTimeout(function () {
+        window.id.perform(addPackage(packageId), 'deleteAll');
+    },10);
 };
 export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType};
