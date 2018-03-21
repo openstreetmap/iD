@@ -1,3 +1,10 @@
+// @flow
+import type { Action, Graph, Node, Relation, Way } from '.';
+type Member = { id: string, type: string, role: string };
+type Pair = [Member, Member];
+type IndexedMember = { id: string, type: string, role: string, index: number };
+type InsertPair = { originalID: string, insertedID: string, nodes: Array<string> };
+
 import _clone from 'lodash-es/clone';
 import _groupBy from 'lodash-es/groupBy';
 import _omit from 'lodash-es/omit';
@@ -5,13 +12,13 @@ import _omit from 'lodash-es/omit';
 import { osmJoinWays, osmWay } from '../osm';
 
 
-export function actionAddMember(relationId, member, memberIndex, insertPair) {
+export function actionAddMember(relationId: string, member: Member, memberIndex?: number, insertPair?: InsertPair): Action {
 
-    return function action(graph) {
-        var relation = graph.entity(relationId);
+    return function action(graph: Graph): Graph {
+        var relation: Relation = graph.entity(relationId);
 
         // There are some special rules for Public Transport v2 routes.
-        var isPTv2 = (member.role === 'stop' || member.role === 'platform');
+        var isPTv2: boolean = (member.role === 'stop' || member.role === 'platform');
 
         if ((isNaN(memberIndex) || insertPair) && member.type === 'way' && !isPTv2) {
             // Try to perform sensible inserts based on how the ways join together
@@ -33,7 +40,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
 
     // Add a way member into the relation "wherever it makes sense".
     // In this situation we were not supplied a memberIndex.
-    function addWayMember(relation, graph) {
+    function addWayMember(relation: Relation, graph: Graph): Graph {
         var groups, tempWay, item, i, j, k;
 
         // remove PTv2 stops and platforms before doing anything.
@@ -97,7 +104,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
                 var way = graph.entity(item.id);
 
                 // If this is a paired item, generate members in correct order and role
-                if (tempWay && item.id === tempWay.id) {
+                if (insertPair && tempWay && item.id === tempWay.id) {
                     if (nodes[0].id === insertPair.nodes[0]) {
                         item.pair = [
                             { id: insertPair.originalID, type: 'way', role: item.role },
@@ -170,7 +177,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         // segment                 5 4 7 6
         // members       0 1 2 3 x 5 4 7 6 x 8 9    keep 6 in j+k
         //
-        function moveMember(arr, findIndex, toIndex) {
+        function moveMember(arr: Array<IndexedMember>, findIndex: number, toIndex: number): void {
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].index === findIndex) {
                     break;
@@ -186,7 +193,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
 
         // This is the same as `Relation.indexedMembers`,
         // Except we don't want to index all the members, only the ways
-        function withIndex(arr) {
+        function withIndex(arr: Array<Member>): Array<IndexedMember> {
             var result = new Array(arr.length);
             for (var i = 0; i < arr.length; i++) {
                 result[i] = arr[i];

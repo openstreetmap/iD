@@ -2,8 +2,10 @@
 export type Node = { };
 export type Way = { };
 export type Relation = { };
+export type Entity = { Node | Way | Relation };
 export type Graph = {
-    replace: (Node | Way | Relation) => Graph;
+    replace: (Entity) => Graph;
+    remove: (Entity) => Graph;
 };
 export type Action = (Graph) => Graph;
 
