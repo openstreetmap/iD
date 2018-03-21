@@ -132,6 +132,10 @@
             "value": "terminal"
         },
         {
+            "key": "allotments",
+            "value": "plot"
+        },
+        {
             "key": "amenity",
             "value": "bus_station"
         },
@@ -1593,10 +1597,6 @@
         {
             "key": "landuse",
             "value": "allotments"
-        },
-        {
-            "key": "allotments",
-            "value": "plot"
         },
         {
             "key": "landuse",

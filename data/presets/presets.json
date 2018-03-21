@@ -535,6 +535,23 @@
             },
             "name": "Airport Terminal"
         },
+        "allotments/plot": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name",
+                "ref"
+            ],
+            "tags": {
+                "allotments": "plot"
+            },
+            "reference": {
+                "key": "allotments",
+                "value": "plot"
+            },
+            "name": "Community Garden Plot"
+        },
         "amenity/bus_station": {
             "icon": "bus",
             "fields": [
@@ -8362,31 +8379,6 @@
                 "garden"
             ],
             "name": "Community Garden"
-        },
-        "landuse/allotments/plot": {
-            "geometry": [
-                "area"
-            ],
-            "fields": [
-                "name",
-                "ref"
-            ],
-            "tags": {
-                "allotments": "plot"
-            },
-            "addTags": {
-                "landuse": "allotments",
-                "allotments": "plot"
-            },
-            "removeTags": {
-                "landuse": "allotments",
-                "allotments": "plot"
-            },
-            "reference": {
-                "key": "allotments",
-                "value": "plot"
-            },
-            "name": "Plot"
         },
         "landuse/aquaculture": {
             "icon": "aquarium",

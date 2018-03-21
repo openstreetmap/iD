@@ -2877,6 +2877,10 @@
                     "name": "Airport Terminal",
                     "terms": "airport,aerodrome"
                 },
+                "allotments/plot": {
+                    "name": "Community Garden Plot",
+                    "terms": ""
+                },
                 "amenity/bus_station": {
                     "name": "Bus Station / Terminal",
                     "terms": ""
@@ -4348,10 +4352,6 @@
                 "landuse/allotments": {
                     "name": "Community Garden",
                     "terms": "allotment,garden"
-                },
-                "landuse/allotments/plot": {
-                    "name": "Plot",
-                    "terms": ""
                 },
                 "landuse/aquaculture": {
                     "name": "Aquaculture",

@@ -9,17 +9,9 @@
     "tags": {
         "allotments": "plot"
     },
-    "addTags": {
-        "landuse": "allotments",
-        "allotments": "plot"
-    },
-    "removeTags": {
-        "landuse": "allotments",
-        "allotments": "plot"
-    },
     "reference": {
         "key": "allotments",
         "value": "plot"
     },
-    "name": "Plot"
+    "name": "Community Garden Plot"
 }
