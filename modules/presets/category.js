@@ -1,9 +1,17 @@
+// @flow
+
 import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
 import { presetCollection } from './collection';
 
+type categoryObject = { 
+  geometry: string, 
+  icon: string, 
+  name: string, 
+  members: [string]
+};
 
-export function presetCategory(id, category, all) {
+export function presetCategory(id: string, category: categoryObject, all: () => mixed): categoryObject {
     category = _clone(category);
 
     category.id = id;
@@ -14,22 +22,22 @@ export function presetCategory(id, category, all) {
     }));
 
 
-    category.matchGeometry = function(geometry) {
+    category.matchGeometry = function(geometry: string): boolean {
         return category.geometry.indexOf(geometry) >= 0;
     };
 
 
-    category.matchScore = function() {
+    category.matchScore = function(): number {
         return -1;
     };
 
 
-    category.name = function() {
+    category.name = function(): string {
         return t('presets.categories.' + id + '.name', {'default': id});
     };
 
 
-    category.terms = function() {
+    category.terms = function(): [] {
         return [];
     };
 
