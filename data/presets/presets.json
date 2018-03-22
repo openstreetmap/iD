@@ -11665,6 +11665,18 @@
             "terms": [],
             "name": "Heath"
         },
+        "natural/mud": {
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "natural": "mud"
+            },
+            "terms": [
+                "wetland"
+            ],
+            "name": "Mud"
+        },
         "natural/peak": {
             "icon": "mountain",
             "fields": [
