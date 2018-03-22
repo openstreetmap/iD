@@ -384,19 +384,19 @@ function addPackage(result) {
         // var result = sendPost(url.check_host,{'packageIds':packageId},function (data) {
         //
         // });
-        result = JSON.parse(result);
-        if (result.center){
-            var center = result.center;
-            window.id.map().center(center);
-            window.id.map().zoom(18);
-        }
-        // window.id.map().center([-77.0, 38.9]);
-        // window.id.map().zoom(2.0);
-        var createEles = result.created;
+        // result = JSON.parse(result);
+        // if (result.center){
+        //     var center = result.center;
+        //     window.id.map().center(center);
+        //     window.id.map().zoom(18);
+        // }
+        // // window.id.map().center([-77.0, 38.9]);
+        // // window.id.map().zoom(2.0);
+        // var createEles = result.created;
 
-        for (var i=0; i<createEles.length; i++){
+        for (var i=0; i<result.length; i++){
 
-            var ele2 = createEles[i];
+            var ele2 = result[i];
             if (ele2.nodes!=null){
                 var ids = [];
                 var nodes = ele2.nodes;
@@ -417,7 +417,7 @@ function addPackage(result) {
         }
 
         return graph;
-
+        // new Worker()
     };
 
 }
@@ -426,14 +426,26 @@ function addMomentaPackages(packageId) {
         window.id.undo();
         window.id.history().undoAnnotation();
     }
-    sendPost(url.check_host,{'packageIds':packageId},function (data) {
-        // window.id.map().center([-77.0, 38.9]);
-        // window.id.map().zoom(2.0);
-        window.id.perform(addPackage(data), 'addMomentaPackages');
+    sendPost(url.check_host,{'packageIds':packageId},function (result) {
+        result = JSON.parse(result);
+        if (result.center){
+            var center = result.center;
+            window.id.map().center(center);
+            window.id.map().zoom(18);
+        }
+        var createEles = result.created;
+        for (var i=0; i<createEles.length; i+=10){
+            var eles = createEles.slice(i,i+10);
+            setTimeout(function (eles) {
+                return function () {
+                    window.id.perform(addPackage(eles), 'addMomentaPackages');
+                };
+            }(eles),10);
+        }
     });
     // setTimeout(function () {
     //
     // },10);
 }
-window.addPackages = addMomentaPackages
+window.addPackages = addMomentaPackages;
 export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};
