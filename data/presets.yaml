@@ -4101,6 +4101,11 @@ en:
         # natural=heath
         name: Heath
         terms: '<translate with synonyms or related terms for ''Heath'', separated by commas>'
+      natural/mud:
+        # natural=mud
+        name: Mud
+        # 'terms: wetland'
+        terms: '<translate with synonyms or related terms for ''Mud'', separated by commas>'
       natural/peak:
         # natural=peak
         name: Peak

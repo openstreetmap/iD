@@ -4947,6 +4947,10 @@
                     "name": "Heath",
                     "terms": ""
                 },
+                "natural/mud": {
+                    "name": "Mud",
+                    "terms": "wetland"
+                },
                 "natural/peak": {
                     "name": "Peak",
                     "terms": "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
