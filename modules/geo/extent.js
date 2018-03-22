@@ -1,6 +1,3 @@
-// @flow
-import type { Vec2, Mat2 } from '.';
-
 import _extend from 'lodash-es/extend';
 
 import {
@@ -9,7 +6,7 @@ import {
 } from './index';
 
 
-export function geoExtent(min?: Vec2 | Mat2, max?: Vec2) {
+export function geoExtent(min, max) {
     if (!(this instanceof geoExtent)) {
         return new geoExtent(min, max);
     } else if (min instanceof geoExtent) {
@@ -39,8 +36,8 @@ _extend(geoExtent.prototype, {
     extend: function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return geoExtent(
-            [(Math.min(obj[0][0], this[0][0]): number), (Math.min(obj[0][1], this[0][1]): number)],
-            [(Math.max(obj[1][0], this[1][0]): number), (Math.max(obj[1][1], this[1][1]): number)]
+            [Math.min(obj[0][0], this[0][0]), Math.min(obj[0][1], this[0][1])],
+            [Math.max(obj[1][0], this[1][0]), Math.max(obj[1][1], this[1][1])]
         );
     },
 
@@ -59,8 +56,7 @@ _extend(geoExtent.prototype, {
 
 
     center: function() {
-        return [(this[0][0] + this[1][0]) / 2,
-                (this[0][1] + this[1][1]) / 2];
+        return [(this[0][0] + this[1][0]) / 2, (this[0][1] + this[1][1]) / 2];
     },
 
 
@@ -106,8 +102,8 @@ _extend(geoExtent.prototype, {
     intersection: function(obj) {
         if (!this.intersects(obj)) return new geoExtent();
         return new geoExtent(
-            [(Math.max(obj[0][0], this[0][0]): number), (Math.max(obj[0][1], this[0][1]): number)],
-            [(Math.min(obj[1][0], this[1][0]): number), (Math.min(obj[1][1], this[1][1]): number)]
+            [Math.max(obj[0][0], this[0][0]), Math.max(obj[0][1], this[0][1])],
+            [Math.min(obj[1][0], this[1][0]), Math.min(obj[1][1], this[1][1])]
         );
     },
 
@@ -125,9 +121,9 @@ _extend(geoExtent.prototype, {
     },
 
 
-    padByMeters: function(meters: number) {
-        var dLat: number = geoMetersToLat(meters);
-        var dLon: number = geoMetersToLon(meters, this.center()[1]);
+    padByMeters: function(meters) {
+        var dLat = geoMetersToLat(meters);
+        var dLon = geoMetersToLon(meters, this.center()[1]);
         return geoExtent(
             [this[0][0] - dLon, this[0][1] - dLat],
             [this[1][0] + dLon, this[1][1] + dLat]

@@ -1,8 +1,3 @@
-// @flow
-export type Vec2 = [number, number];
-export type Mat2 = [Vec2, Vec2];
-export type Transform = { x: number, y: number, k: number };
-
 export { geoExtent } from './extent.js';
 
 export { geoLatToMeters } from './geo.js';
@@ -42,4 +37,3 @@ export { geoVecInterp } from './vector.js';
 export { geoVecLength } from './vector.js';
 export { geoVecSubtract } from './vector.js';
 export { geoVecScale } from './vector.js';
-

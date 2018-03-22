@@ -6,8 +6,6 @@ const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const json = require('rollup-plugin-json');
 const colors = require('colors/safe');
-const flowRemoveTypes = require('flow-remove-types');
-
 
 module.exports = function buildSrc() {
     var cache;
@@ -28,7 +26,6 @@ module.exports = function buildSrc() {
             .rollup({
                 input: './modules/id.js',
                 plugins: [
-                    flow(),
                     nodeResolve({
                         module: true,
                         main: true,
@@ -66,16 +63,4 @@ function unlink(f) {
     try {
         fs.unlinkSync(f);
     } catch (e) { /* noop */ }
-}
-
-// Using this instead of rollup-plugin-flow due to
-// https://github.com/leebyron/rollup-plugin-flow/issues/5
-function flow() {
-    return {
-        name: 'flow-remove-types',
-        transform: (code) => ({
-            code: flowRemoveTypes(code).toString(),
-            map: null
-        })
-    };
 }

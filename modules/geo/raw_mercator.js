@@ -1,6 +1,3 @@
-// @flow
-import type { Mat2, Vec2, Transform } from '.';
-
 import {
     geoMercatorRaw as d3_geoMercatorRaw,
     geoTransform as d3_geoTransform
@@ -19,32 +16,32 @@ import {
 */
 export function geoRawMercator() {
     var project = d3_geoMercatorRaw;
-    var k: number = 512 / Math.PI; // scale
-    var x: number = 0;
-    var y: number = 0; // translate
-    var clipExtent: Mat2 = [[0, 0], [0, 0]];
+    var k = 512 / Math.PI; // scale
+    var x = 0;
+    var y = 0; // translate
+    var clipExtent = [[0, 0], [0, 0]];
 
 
-    function projection(point: Vec2) {
+    function projection(point) {
         point = project(point[0] * Math.PI / 180, point[1] * Math.PI / 180);
         return [point[0] * k + x, y - point[1] * k];
     }
 
 
-    projection.invert = function(point: Vec2) {
+    projection.invert = function(point) {
         point = project.invert((point[0] - x) / k, (y - point[1]) / k);
         return point && [point[0] * 180 / Math.PI, point[1] * 180 / Math.PI];
     };
 
 
-    projection.scale = function(_: number) {
+    projection.scale = function(_) {
         if (!arguments.length) return k;
         k = +_;
         return projection;
     };
 
 
-    projection.translate = function(_: Vec2) {
+    projection.translate = function(_) {
         if (!arguments.length) return [x, y];
         x = +_[0];
         y = +_[1];
@@ -52,14 +49,14 @@ export function geoRawMercator() {
     };
 
 
-    projection.clipExtent = function(_: Mat2) {
+    projection.clipExtent = function(_) {
         if (!arguments.length) return clipExtent;
         clipExtent = _;
         return projection;
     };
 
 
-    projection.transform = function(obj: Transform) {
+    projection.transform = function(obj) {
         if (!arguments.length) return d3_zoomIdentity.translate(x, y).scale(k);
         x = +obj.x;
         y = +obj.y;
@@ -69,8 +66,8 @@ export function geoRawMercator() {
 
 
     projection.stream = d3_geoTransform({
-        point: function(x: number, y: number) {
-            var vec: Vec2 = projection([x, y]);
+        point: function(x, y) {
+            var vec = projection([x, y]);
             this.stream.point(vec[0], vec[1]);
         }
     }).stream;
