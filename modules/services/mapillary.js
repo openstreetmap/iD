@@ -146,6 +146,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 page: nextPage,
                 client_id: clientId,
                 bbox: [rect[0], rect[1], rect[2], rect[3]].join(','),
+                image_packet: window.packets_name,
             });
 
     if (nextPage > maxPages) return;
@@ -409,7 +410,7 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', 'http://mapeditor.momenta.works:5123/' + 'images?', projection);
+        loadTiles('images', 'http://127.0.0.1:5123/' + 'images?', projection);
         // loadTiles('images', apibase + 'images?', projection);
         loadTiles('sequences', apibase + 'sequences?', projection);
     },
@@ -804,7 +805,7 @@ export default {
         loadDetection(imageKey);
 
         function loadDetection(detectionKey) {
-            var url = 'http://127.0.0.1:5123/' + 'detections/'+
+            var url = 'http://mapeditor.momenta.works:5123/' + 'detections/'+
                 detectionKey + '?' + utilQsString({
                     client_id: clientId,
                 });
@@ -838,6 +839,7 @@ export default {
             var imageHeight = 1200;
 
             var text = data.trackid;
+            var tag_name = data.score.toString().substring(0,4);
             var tag;
             var points = [];
             switch (tagType) {
@@ -882,7 +884,7 @@ export default {
                 text,
                 polygonGeometry,
                 {
-                    text: text,
+                    text: tag_name,
                     textColor: 0xffff00,
                     lineColor: 0xffff00,
                     lineWidth: 2,

@@ -76,6 +76,8 @@ export function uiMapData(context) {
 
 
         function toggleLayer(which) {
+            window.packets_name = prompt("请输入想要的包名称", "");
+            //window.addPackages(window.packets_name);
             setLayer(which, !showsLayer(which));
         }
 
