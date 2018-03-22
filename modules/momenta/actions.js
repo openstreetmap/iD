@@ -385,6 +385,13 @@ function addPackage(result) {
         //
         // });
         result = JSON.parse(result);
+        if (result.center){
+            var center = result.center;
+            window.id.map().center(center);
+            window.id.map().zoom(18);
+        }
+        // window.id.map().center([-77.0, 38.9]);
+        // window.id.map().zoom(2.0);
         var createEles = result.created;
 
         for (var i=0; i<createEles.length; i++){
@@ -420,6 +427,8 @@ function addMomentaPackages(packageId) {
         window.id.history().undoAnnotation();
     }
     sendPost(url.check_host,{'packageIds':packageId},function (data) {
+        // window.id.map().center([-77.0, 38.9]);
+        // window.id.map().zoom(2.0);
         window.id.perform(addPackage(data), 'addMomentaPackages');
     });
     // setTimeout(function () {
