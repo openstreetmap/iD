@@ -20,7 +20,7 @@ import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
-import { utilRebind } from '../util';
+import { utilCleanTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
@@ -213,51 +213,6 @@ export function uiEntityEditor(context) {
     }
 
 
-    function clean(orig) {
-
-        function cleanVal(k, v) {
-            function keepSpaces(k) {
-                return /_hours|_times|:conditional$/.test(k);
-            }
-
-            function skip(k) {
-                return /^(description|note|fixme)$/.test(k);
-            }
-
-            if (skip(k)) return v;
-
-            var cleaned = v
-                .split(';')
-                .map(function(s) { return s.trim(); })
-                .join(keepSpaces(k) ? '; ' : ';');
-
-            // The code below is not intended to validate websites and emails.
-            // It is only intended to prevent obvious copy-paste errors. (#2323)
-            // clean website- and email-like tags
-            if (k.indexOf('website') !== -1 ||
-                k.indexOf('email') !== -1 ||
-                cleaned.indexOf('http') === 0) {
-                cleaned = cleaned
-                    .replace(/[\u200B-\u200F\uFEFF]/g, '');  // strip LRM and other zero width chars
-
-            }
-
-            return cleaned;
-        }
-
-        var out = {};
-        for (var k in orig) {
-            if (!k) continue;
-            var v = orig[k];
-            if (v !== undefined) {
-                out[k] = cleanVal(k, v);
-            }
-        }
-
-        return out;
-    }
-
-
     // Tag changes that fire on input can all get coalesced into a single
     // history operation when the user leaves the field.  #2342
     function changeTags(changed, onInput) {
@@ -274,7 +229,7 @@ export function uiEntityEditor(context) {
         }
 
         if (!onInput) {
-            tags = clean(tags);
+            tags = utilCleanTags(tags);
         }
 
         if (!_isEqual(entity.tags, tags)) {
