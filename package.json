@@ -45,7 +45,7 @@
     "chai": "^4.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
-    "d3": "4.13.0",
+    "d3": "5.0.0",
     "ecstatic": "^3.0.0",
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
     "eslint": "^4.3.0",
