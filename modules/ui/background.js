@@ -151,7 +151,7 @@ export function uiBackground(context) {
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
-            .call(svgIcon('#icon-search'));
+            .call(svgIcon('#icon-edit'));
 
         enter.filter(function(d) { return d.best(); })
             .append('div')
