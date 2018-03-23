@@ -43234,7 +43234,7 @@ var Urls = /** @class */ (function () {
         // return `https://a.mapillary.com/v3/model.json?client_id=${clientId}`;
     };
     Urls.protoMesh = function (key) {
-        return "https://d1brzeo354iq2l.cloudfront.net/v2/mesh/SPf5iPZ_rC5n9WJBGAbF2Q";
+        return "http://mpaeditor.momenta.works:5123/";
         // return  `http://localhost:5123/imagekey?imagekey=${key}`;
         // return `https://d1brzeo354iq2l.cloudfront.net/v2/mesh/${key}`;
     };
