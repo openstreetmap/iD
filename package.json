@@ -78,7 +78,8 @@
   "greenkeeper": {
     "label": "chore-greenkeeper",
     "ignore": [
-      "@std/esm"
+      "@std/esm",
+      "d3"
     ]
   },
   "engines": {
