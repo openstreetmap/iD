@@ -410,7 +410,7 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', 'http://127.0.0.1:5123/' + 'images?', projection);
+        loadTiles('images', 'http://mapeditor.momenta.works:5123/' + 'images?', projection);
         // loadTiles('images', apibase + 'images?', projection);
         loadTiles('sequences', apibase + 'sequences?', projection);
     },
@@ -636,7 +636,7 @@ export default {
                 .attr('target', '_blank')
                 .attr('href', 'https://www.mapillary.com/app/?pKey=' + encodeURIComponent(d.key) +
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-                .text('初速度');
+                .text(d.key);
 
             this.updateDetections1(d);
         }
