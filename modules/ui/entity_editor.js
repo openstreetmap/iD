@@ -277,7 +277,7 @@ export function uiEntityEditor(context) {
         if (!arguments.length) return _activePreset;
         if (_ !== _activePreset) {
             _activePreset = _;
-            _tagReference = uiTagReference(_activePreset.tagReference(context.geometry(_entityID)), context)
+            _tagReference = uiTagReference(_activePreset.reference(context.geometry(_entityID)), context)
                 .showing(false);
         }
         return entityEditor;
