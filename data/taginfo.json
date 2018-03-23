@@ -1891,6 +1891,10 @@
         },
         {
             "key": "leisure",
+            "value": "outdoor_seating"
+        },
+        {
+            "key": "leisure",
             "value": "park"
         },
         {
