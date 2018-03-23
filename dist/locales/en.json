@@ -4645,6 +4645,10 @@
                     "name": "Nature Reserve",
                     "terms": "protected,wildlife"
                 },
+                "leisure/outdoor_seating": {
+                    "name": "Outdoor Seating Area",
+                    "terms": "al fresco,beer garden,dining,cafe,restaurant,pub,bar,patio"
+                },
                 "leisure/park": {
                     "name": "Park",
                     "terms": "esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland"

@@ -10213,6 +10213,31 @@
             ],
             "name": "Nature Reserve"
         },
+        "leisure/outdoor_seating": {
+            "icon": "picnic-site",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator"
+            ],
+            "terms": [
+                "al fresco",
+                "beer garden",
+                "dining",
+                "cafe",
+                "restaurant",
+                "pub",
+                "bar",
+                "patio"
+            ],
+            "tags": {
+                "leisure": "outdoor_seating"
+            },
+            "name": "Outdoor Seating Area"
+        },
         "leisure/park": {
             "icon": "park",
             "geometry": [

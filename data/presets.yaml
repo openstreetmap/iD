@@ -3758,6 +3758,11 @@ en:
         name: Nature Reserve
         # 'terms: protected,wildlife'
         terms: '<translate with synonyms or related terms for ''Nature Reserve'', separated by commas>'
+      leisure/outdoor_seating:
+        # leisure=outdoor_seating
+        name: Outdoor Seating Area
+        # 'terms: al fresco,beer garden,dining,cafe,restaurant,pub,bar,patio'
+        terms: '<translate with synonyms or related terms for ''Outdoor Seating Area'', separated by commas>'
       leisure/park:
         # leisure=park
         name: Park
