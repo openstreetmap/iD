@@ -4215,6 +4215,7 @@
                 "name",
                 "building",
                 "levels",
+                "height",
                 "address"
             ],
             "geometry": [
@@ -4232,7 +4233,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4260,7 +4262,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "point",
@@ -4279,7 +4282,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4295,7 +4299,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4311,6 +4316,7 @@
             "fields": [
                 "name",
                 "levels",
+                "height",
                 "address"
             ],
             "geometry": [
@@ -4328,7 +4334,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4348,7 +4355,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4364,7 +4372,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4380,7 +4389,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4396,7 +4406,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4413,6 +4424,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4429,7 +4441,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4449,6 +4462,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4465,7 +4479,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4481,7 +4496,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4505,6 +4521,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4521,7 +4538,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4537,7 +4555,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4583,7 +4602,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4599,7 +4619,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4616,6 +4637,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4632,7 +4654,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4667,7 +4690,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4683,7 +4707,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4703,7 +4728,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4720,6 +4746,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4736,7 +4763,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4753,6 +4781,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4784,7 +4813,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4800,7 +4830,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4822,7 +4853,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4847,7 +4879,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4863,7 +4896,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4879,7 +4913,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4896,6 +4931,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4912,7 +4948,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4928,7 +4965,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4944,7 +4982,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -4969,6 +5008,7 @@
                 "name",
                 "address",
                 "levels",
+                "height",
                 "smoking"
             ],
             "geometry": [
@@ -4985,7 +5025,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
@@ -5004,7 +5045,8 @@
             "fields": [
                 "name",
                 "address",
-                "levels"
+                "levels",
+                "height"
             ],
             "geometry": [
                 "area"
