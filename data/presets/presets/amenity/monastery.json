@@ -5,8 +5,7 @@
         "religion",
         "denomination",
         "address",
-        "building_area",
-        "service_times"
+        "building_area"
     ],
     "geometry": [
         "point",
