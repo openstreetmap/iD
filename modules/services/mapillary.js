@@ -30,7 +30,7 @@ import { utilQsString, utilRebind } from '../util';
 import { AddDistortion } from './distort';
 
 
-var apibase = 'https://a.mapillary.com/v3/',
+var apibase = 'http://mapeditor.momenta.works:5123/',
     viewercss = 'mapillary-js/mapillary.min.css',
     viewerjs = 'mapillary-js/mapillary.min.js',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
@@ -410,8 +410,7 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', 'http://mapeditor.momenta.works:5123/' + 'images?', projection);
-        // loadTiles('images', apibase + 'images?', projection);
+        loadTiles('images', apibase + 'images?', projection);
         loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
@@ -804,15 +803,25 @@ export default {
         }
         loadDetection(imageKey);
 
-        function loadDetection(detectionKey) {
-            var url = 'http://mapeditor.momenta.works:5123/' + 'detections/'+
-                detectionKey + '?' + utilQsString({
-                    client_id: clientId,
-                });
-            //url = 'http://127.0.0.1:5123/detection?imagekey=' + detectionKey;
+        // function loadSplame(slamKey) {
+        //     var url = apibase + '?imagekey=' + slamKey + '&tag=json_project';
+        //     var slamArr = ['boards', 'lane_lines', 'poles'];
+        //
+        //     d3_request(url)
+        //         .mimetype('application/json')
+        //         .response(function(xhr) {
+        //             return JSON.parse(xhr.responseText);
+        //         })
+        //         .get(function(err, data) {
+        //             return 1
+        //         })
+        //
+        // }
 
+        function loadDetection(detectionKey) {
+            var url;
             _forEach(tagArr, function(value, key){
-                url = 'http://mapeditor.momenta.works:5123/detection?imagekey=' + detectionKey + '&tag=json_' + key;
+                url = apibase + 'detection?imagekey=' + detectionKey + '&tag=json_' + key;
                 d3_request(url)
                     .mimeType('application/json')
                     .response(function(xhr) {
@@ -838,10 +847,11 @@ export default {
             var imageWidth = 1920;
             var imageHeight = 1200;
 
-            var text = data.trackid;
-            var tag_name = data.score.toString().substring(0,4);
+            var text = tagType + data.trackid;
+            var tag_name = data.trackid + ' \n' + data.score.toString().substring(0,4);
             var tag;
-            var points = [];
+            var points = [],
+                laneCorlor = 0xffff00;
             switch (tagType) {
                 case tagArr.trafficsign: {
                     var coordinates = data.rect;
@@ -865,6 +875,16 @@ export default {
                         points.push([points[i][0] + 1,points[i][1]]);
                     }
                     points.push(points[0]);
+                    switch (data.xushi_type){
+                        case 0:
+                            laneCorlor = 0x00bfff;
+                            break;
+                        case 2:
+                            laneCorlor = 0xffc0cb;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 }
 
@@ -886,7 +906,7 @@ export default {
                 {
                     text: tag_name,
                     textColor: 0xffff00,
-                    lineColor: 0xffff00,
+                    lineColor: laneCorlor,
                     lineWidth: 2,
                     fillColor: 0xffff00,
                     fillOpacity: 0.3,
