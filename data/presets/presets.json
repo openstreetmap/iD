@@ -1984,6 +1984,7 @@
                 "house of worship",
                 "minster",
                 "mission",
+                "monastery",
                 "mosque",
                 "oratory",
                 "parish",
@@ -1995,9 +1996,9 @@
                 "temple"
             ],
             "tags": {
-                "amenity": "monastary"
+                "amenity": "monastery_grounds"
             },
-            "name": "Monastary Grounds"
+            "name": "Monastery Grounds"
         },
         "amenity/motorcycle_parking": {
             "icon": "scooter",

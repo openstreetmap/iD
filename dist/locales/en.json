@@ -3126,8 +3126,8 @@
                     "terms": ""
                 },
                 "amenity/monastery": {
-                    "name": "Monastary Grounds",
-                    "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
+                    "name": "Monastery Grounds",
+                    "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,monastery,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcycle Parking",
