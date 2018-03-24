@@ -381,6 +381,10 @@
         },
         {
             "key": "amenity",
+            "value": "monastery_grounds"
+        },
+        {
+            "key": "amenity",
             "value": "motorcycle_parking"
         },
         {
