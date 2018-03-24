@@ -1955,6 +1955,50 @@
             },
             "name": "Marketplace"
         },
+        "amenity/monastery": {
+            "icon": "place-of-worship",
+            "fields": [
+                "name",
+                "religion",
+                "denomination",
+                "address",
+                "building_area",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "abbey",
+                "basilica",
+                "bethel",
+                "cathedral",
+                "chancel",
+                "chantry",
+                "chapel",
+                "church",
+                "fold",
+                "house of God",
+                "house of prayer",
+                "house of worship",
+                "minster",
+                "mission",
+                "mosque",
+                "oratory",
+                "parish",
+                "sacellum",
+                "sanctuary",
+                "shrine",
+                "synagogue",
+                "tabernacle",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "monastary"
+            },
+            "name": "Monastary Grounds"
+        },
         "amenity/motorcycle_parking": {
             "icon": "scooter",
             "fields": [

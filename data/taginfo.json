@@ -381,6 +381,10 @@
         },
         {
             "key": "amenity",
+            "value": "monastary"
+        },
+        {
+            "key": "amenity",
             "value": "motorcycle_parking"
         },
         {

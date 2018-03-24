@@ -2032,6 +2032,11 @@ en:
         # amenity=marketplace
         name: Marketplace
         terms: '<translate with synonyms or related terms for ''Marketplace'', separated by commas>'
+      amenity/monastery:
+        # amenity=monastary
+        name: Monastary Grounds
+        # 'terms: abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Monastary Grounds'', separated by commas>'
       amenity/motorcycle_parking:
         # amenity=motorcycle_parking
         name: Motorcycle Parking
