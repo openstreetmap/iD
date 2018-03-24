@@ -1,16 +1,18 @@
+
 import {
     convert2JSON,sendPost
 } from './utils';
 import {url} from './url';
 import {actionAddEntity,actionDeleteNode,actionDeleteWay,actionCopyEntities} from '../actions';
 import {osmNode,osmWay,osmRelation} from '../osm';
+import {} from './ui';
 
 function createEntity(ele,type){
-    if (ele.type==='node'||type === 'node'){
+    if (ele.type==='node'||type === 'node'||(ele.tags!=null && ele.tags.tableInfo==='poles'|| ele.tags.tableInfo==='boards')){
         delete ele.type;
         return new osmNode(ele);
     }
-    if (ele.type === 'way'||type === 'way'){
+    if (ele.type === 'way'||type === 'way'||(ele.tags!=null && ele.tags.tableInfo==='lane_lines')){
         delete ele.type;
         return new osmWay(ele);
     }
@@ -410,7 +412,7 @@ function addPackage(result) {
                 var way = createEntity(ele2,'way');
                 graph = actionAddEntity(way)(graph);
             } else {
-                graph = actionAddEntity(createEntity(ele2,'way'))(graph);
+                graph = actionAddEntity(createEntity(ele2))(graph);
             }
             // entity = createEntity(ele2);
             // graph = actionAddEntity(entity)(graph);
@@ -421,11 +423,21 @@ function addPackage(result) {
     };
 
 }
+
+if (!window.momentaPool ){
+    window.momentaPool= {};
+}
+
 function addMomentaPackages(packageId) {
     while (window.id.undo().length()>0){
         window.id.undo();
         window.id.history().undoAnnotation();
     }
+    if (packageId==null ||packageId === ''){
+        return;
+    }
+    window.momentaPool['currentPackage']=packageId;
+    window.momentaPool.changeButtonState();
     sendPost(url.check_host,{'packageIds':packageId},function (result) {
         result = JSON.parse(result);
         if (result.center){
@@ -447,5 +459,6 @@ function addMomentaPackages(packageId) {
     //
     // },10);
 }
+
 window.addPackages = addMomentaPackages;
 export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};
