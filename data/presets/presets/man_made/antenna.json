@@ -1,14 +1,22 @@
 {
     "icon": "poi-mast",
     "fields": [
-        "height"
+        "height",
+        "communication_multi"
     ],
     "geometry": [
         "point"
     ],
     "terms": [
-        "antenna",
-        "radio mast",
+        "broadcast",
+        "cell phone",
+        "cell",
+        "communication",
+        "mobile phone",
+        "radio",
+        "television",
+        "transmission",
+        "tv"
     ],
     "tags": {
         "man_made": "antenna"

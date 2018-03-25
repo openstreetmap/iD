@@ -2026,6 +2026,10 @@
         },
         {
             "key": "man_made",
+            "value": "antenna"
+        },
+        {
+            "key": "man_made",
             "value": "breakwater"
         },
         {

@@ -3911,6 +3911,11 @@ en:
         name: Adit
         # 'terms: entrance,underground,mine,cave'
         terms: '<translate with synonyms or related terms for ''Adit'', separated by commas>'
+      man_made/antenna:
+        # man_made=antenna
+        name: Antenna
+        # 'terms: broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv'
+        terms: '<translate with synonyms or related terms for ''Antenna'', separated by commas>'
       man_made/breakwater:
         # man_made=breakwater
         name: Breakwater
