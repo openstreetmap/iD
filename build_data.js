@@ -67,7 +67,7 @@ module.exports = function buildData() {
         var presets = generatePresets(tstrings);
         var defaults = read('data/presets/defaults.json');
         var translations = generateTranslations(fields, presets, tstrings);
-        var taginfo = generateTaginfo(presets);
+        var taginfo = generateTaginfo(presets, fields);
 
         // Additional consistency checks
         validateCategoryPresets(categories, presets);
@@ -300,7 +300,7 @@ function generateTranslations(fields, presets, tstrings) {
     return translations;
 }
 
-function generateTaginfo(presets) {
+function generateTaginfo(presets, fields) {
     var taginfo = {
         'data_format': 1,
         'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json',
@@ -333,6 +333,25 @@ function generateTaginfo(presets) {
         }
 
         taginfo.tags.push(tag);
+    });
+
+    _forEach(fields, function(field) {
+        var keys = field.keys || [ field.key ] || [];
+
+        keys.forEach(function(key) {
+            if (field.strings && field.strings.options) {
+               var values = Object.keys(field.strings.options);
+               values.forEach(function(value) {
+                   var tag = { key:   key,
+                               value: value };
+                   taginfo.tags.push(tag);
+               });
+            }
+            else {
+               tag = { key: key };
+               taginfo.tags.push(tag);
+            }
+        });
     });
 
     return taginfo;
