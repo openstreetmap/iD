@@ -5313,9 +5313,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Pet Store'', separated by commas>'
       shop/pet_grooming:
         # shop=pet_grooming
-        name: Pet Grooming_store
+        name: Pet Grooming Store
         # 'terms: dog'
-        terms: '<translate with synonyms or related terms for ''Pet Grooming_store'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Pet Grooming Store'', separated by commas>'
       shop/photo:
         # shop=photo
         name: Photography Store
