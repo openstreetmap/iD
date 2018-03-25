@@ -3233,6 +3233,10 @@
         },
         {
             "key": "shop",
+            "value": "pet_grooming"
+        },
+        {
+            "key": "shop",
             "value": "pet"
         },
         {
