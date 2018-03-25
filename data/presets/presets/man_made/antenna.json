@@ -1,0 +1,17 @@
+{
+    "icon": "poi-mast",
+    "fields": [
+        "height"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "antenna",
+        "radio mast",
+    ],
+    "tags": {
+        "man_made": "antenna"
+    },
+    "name": "Antenna"
+}
