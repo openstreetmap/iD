@@ -348,7 +348,7 @@ function generateTaginfo(presets, fields) {
                });
             }
             else {
-               tag = { key: key };
+               var tag = { key: key };
                taginfo.tags.push(tag);
             }
         });
