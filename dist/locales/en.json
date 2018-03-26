@@ -6005,6 +6005,10 @@
                     "name": "Perfume Store",
                     "terms": ""
                 },
+                "shop/pet_grooming": {
+                    "name": "Pet Grooming Store",
+                    "terms": "dog"
+                },
                 "shop/pet": {
                     "name": "Pet Store",
                     "terms": "animal,cat,dog,fish,kitten,puppy,reptile"

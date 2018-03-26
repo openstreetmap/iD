@@ -1,0 +1,22 @@
+{
+    "icon": "dog-park",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "dog"
+    ],
+    "tags": {
+        "shop": "pet_grooming"
+    },
+    "name": "Pet Grooming Store"
+}
