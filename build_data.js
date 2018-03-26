@@ -318,6 +318,7 @@ function generateTaginfo(presets, fields) {
     };
 
     _forEach(presets, function(preset) {
+
         if (preset.suggestion)
             return;
 
@@ -332,10 +333,14 @@ function generateTaginfo(presets, fields) {
             tag.value = preset.tags[last];
         }
 
-        taginfo.tags.push(tag);
+        if (preset.name)
+          tag.description = preset.name;
+
+        coalesceTags(taginfo, tag);
     });
 
     _forEach(fields, function(field) {
+
         var keys = field.keys || [ field.key ] || [];
 
         keys.forEach(function(key) {
@@ -344,15 +349,52 @@ function generateTaginfo(presets, fields) {
                values.forEach(function(value) {
                    var tag = { key:   key,
                                value: value };
-                   taginfo.tags.push(tag);
+                   if (field.label)
+                      tag.description = field.label;
+                   coalesceTags(taginfo, tag);
                });
             }
             else {
                var tag = { key: key };
-               taginfo.tags.push(tag);
+               if (field.label)
+                  tag.description = field.label;
+               coalesceTags(taginfo, tag);
             }
         });
     });
+
+    function coalesceTags(taginfo, tag) {
+
+       if (!tag.key) {
+         return;
+       }
+
+       var currentTaginfoEntries = taginfo.tags.filter(function(t) {
+           return (t.key    === tag.key &&
+                   t.value  === tag.value);
+       });
+
+       if (currentTaginfoEntries.length === 0) {
+         taginfo.tags.push(tag);
+         return;
+       }
+
+       if (!tag.description) {
+         return;
+       }
+
+       if (!currentTaginfoEntries[0].description) {
+         currentTaginfoEntries[0].description = tag.description;
+         return;
+       }
+
+       var isNewDescription = currentTaginfoEntries[0].description.split(' ,')
+                           .indexOf(tag.description) === -1;
+
+       if (isNewDescription) {
+         currentTaginfoEntries[0].description += ", " + tag.description;
+       }
+    }
 
     return taginfo;
 }
