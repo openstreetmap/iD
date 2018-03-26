@@ -76,7 +76,7 @@ export function uiMapData(context) {
 
 
         function toggleLayer(which) {
-            window.packets_name = prompt("请输入想要的包名称", "");
+            window.packets_name = prompt('请输入想要的包名称', '');
             window.addPackages(window.packets_name);
             setLayer(which, !showsLayer(which));
         }
@@ -205,10 +205,44 @@ export function uiMapData(context) {
             ul.exit()
                 .remove();
 
+
+
             // Enter
             var ulEnter = ul.enter()
                 .append('ul')
                 .attr('class', 'layer-list layer-list-gpx');
+
+            var box = ulEnter
+                .append('li')
+                .attr('class', 'list-item-gpx');
+
+            var frameId = null
+            box
+                .append('input')
+                // .attr('class', 'list-item-gpx-extent')
+                .attr('style', 'width:90%;height:100%;font-size:18px')
+                .on('change', function() {
+                    frameId = this.value;
+                    if (frameId!=null){
+                        searchButton.classed('disabled',false);
+                    } else {
+                        searchButton.classed('disabled',true);
+                    }
+                });
+
+            var  searchButton = box
+                .append('button')
+                .attr('class', 'list-item-gpx-extent')
+                .call(tooltip()
+                    .title('定位到视频帧')
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', function() {
+                    if (frameId!=null){
+                        window.focusOnFrames(frameId);
+                    }
+                })
+                .classed('disabled',true)
+                .call(svgIcon('#icon-search'));
 
             var liEnter = ulEnter
                 .append('li')

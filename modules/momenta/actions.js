@@ -452,7 +452,7 @@ function addMomentaPackages(packageId) {
                 return function () {
                     window.id.perform(addPackage(eles), 'addMomentaPackages');
                 };
-            }(eles),10);
+            }(eles),100);
         }
     });
     // setTimeout(function () {
@@ -460,5 +460,14 @@ function addMomentaPackages(packageId) {
     // },10);
 }
 
+function focusOnFrames(frameId) {
+    window.id.map().center([116.35815,39.82925]);
+    window.id.map().zoom(18);
+    sendPost(url.queryFrameLocation,{'frameId':frameId},function (result) {
+        window.id.map().center([116.35815,39.82925]);
+        window.id.map().zoom(18);
+    });
+}
+window.focusOnFrames = focusOnFrames;
 window.addPackages = addMomentaPackages;
 export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};
