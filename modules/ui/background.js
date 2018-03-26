@@ -351,6 +351,11 @@ export function uiBackground(context) {
             .call(paneTooltip);
 
         pane
+            .append('button')
+            .on('click', function() { uiBackground.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
+        pane
             .append('h2')
             .text(t('background.title'));
 
