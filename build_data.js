@@ -388,11 +388,11 @@ function generateTaginfo(presets, fields) {
          return;
        }
 
-       var isNewDescription = currentTaginfoEntries[0].description.split(' ,')
+       var isNewDescription = currentTaginfoEntries[0].description.split(', ')
                            .indexOf(tag.description) === -1;
 
        if (isNewDescription) {
-         currentTaginfoEntries[0].description += ", " + tag.description;
+         currentTaginfoEntries[0].description += ', ' + tag.description;
        }
     }
 
