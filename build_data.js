@@ -14,6 +14,7 @@ const path = require('path');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
+const maki = require ('@mapbox/maki');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
@@ -159,6 +160,14 @@ function generateFields(tstrings) {
             }
         }
 
+        if (field.geometry) {
+          t.geometry = field.geometry;
+        }
+
+        if (field.icon) {
+          t.icon = field.icon;
+        }
+
         fields[id] = field;
     });
     return fields;
@@ -297,10 +306,17 @@ function generateTranslations(fields, presets, tstrings) {
         }
     });
 
+    // remove fields we're not interested in for translation
+    _forEach(translations.fields, function(field) {
+        delete field.icon;
+        delete field.geometry;
+    });
+
     return translations;
 }
 
 function generateTaginfo(presets, fields) {
+
     var taginfo = {
         'data_format': 1,
         'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json',
@@ -334,7 +350,15 @@ function generateTaginfo(presets, fields) {
         }
 
         if (preset.name)
-          tag.description = preset.name;
+          tag.description = [ preset.name ];
+
+        if (preset.geometry) {
+          setObjectType(tag, preset);
+        }
+
+        if (isMaki(preset.icon)) {
+            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' + preset.icon + '-11.svg';
+        }
 
         coalesceTags(taginfo, tag);
     });
@@ -350,17 +374,22 @@ function generateTaginfo(presets, fields) {
                    var tag = { key:   key,
                                value: value };
                    if (field.label)
-                      tag.description = field.label;
+                      tag.description = [ field.label ];
                    coalesceTags(taginfo, tag);
                });
             }
             else {
                var tag = { key: key };
                if (field.label)
-                  tag.description = field.label;
+                  tag.description = [ field.label ];
                coalesceTags(taginfo, tag);
             }
         });
+    });
+
+    _forEach(taginfo.tags, function(elem) {
+       if (elem.description)
+          elem.description = elem.description.join(', ');
     });
 
     function coalesceTags(taginfo, tag) {
@@ -384,16 +413,35 @@ function generateTaginfo(presets, fields) {
        }
 
        if (!currentTaginfoEntries[0].description) {
-         currentTaginfoEntries[0].description = tag.description;
+         currentTaginfoEntries[0].description = [ tag.description ];
          return;
        }
 
-       var isNewDescription = currentTaginfoEntries[0].description.split(', ')
-                           .indexOf(tag.description) === -1;
+       var isNewDescription = currentTaginfoEntries[0].description
+                                   .indexOf(tag.description) === -1;
 
        if (isNewDescription) {
-         currentTaginfoEntries[0].description += ', ' + tag.description;
+         currentTaginfoEntries[0].description.push(tag.description[0]);
        }
+    }
+
+    function isMaki(icon) {
+        var dataFeatureIcons = maki.layouts.all.all;
+        return (icon && dataFeatureIcons.indexOf(icon) !== -1);
+    }
+
+    function setObjectType(tag, input) {
+      tag.object_types = [];
+      const mapping = { "point"    : "node",
+                        "vertex"   : "node",
+                        "line"     : "way",
+                        "relation" : "relation",
+                        "area"     : "area" };
+
+      input.geometry.forEach(function(geom) {
+         if (tag.object_types.indexOf(mapping[geom]) === -1)
+           tag.object_types.push(mapping[geom]);
+      });
     }
 
     return taginfo;
