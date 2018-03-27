@@ -442,7 +442,7 @@ export function uiMapData(context) {
 
         var pane = selection
             .append('div')
-            .attr('class', 'fillL map-overlay col3 content hide');
+            .attr('class', 'fillL map-pane col4 hide');
 
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -457,18 +457,26 @@ export function uiMapData(context) {
             .call(paneTooltip);
 
 
-        pane
+        var heading = pane
+            .append('div')
+            .attr('class', 'pane-heading');
+
+        heading
+            .append('h2')
+            .text(t('map_data.title'));
+
+        heading
             .append('button')
             .on('click', function() { uiMapData.hidePane(); })
             .call(svgIcon('#icon-close'));
 
-        pane
-            .append('h2')
-            .text(t('map_data.title'));
 
+        var content = pane
+            .append('div')
+            .attr('class', 'pane-content');
 
         // data layers
-        pane
+        content
             .append('div')
             .attr('class', 'map-data-data-layers')
             .call(uiDisclosure(context, 'data_layers', true)
@@ -477,7 +485,7 @@ export function uiMapData(context) {
             );
 
         // area fills
-        pane
+        content
             .append('div')
             .attr('class', 'map-data-area-fills')
             .call(uiDisclosure(context, 'fill_area', false)
@@ -486,7 +494,7 @@ export function uiMapData(context) {
             );
 
         // feature filters
-        pane
+        content
             .append('div')
             .attr('class', 'map-data-feature-filters')
             .call(uiDisclosure(context, 'map_features', false)
