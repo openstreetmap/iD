@@ -328,6 +328,33 @@ function actionConvertLineType(selectIds, context) {
     };
 
 }
+
+// function actionGetLocation(selectIds, context) {
+//     // var data = convert2JSON(selectIds,context);
+//
+//     return function convertLineType(graph){
+//         var copies = {};
+//         selectIds.forEach(function (item,i) {
+//             var ele = context.entity(item);
+//             if (ele.type === 'way'){
+//                 graph.entity(ele.id).copy(graph, copies);
+//                 if (ele.tags.type === 'dashed'){
+//                     copies[ele.id].tags.highway = 'lane-white-solid';
+//                     copies[ele.id].tags.type = 'solid';
+//                 } else if (ele.tags.type === 'solid'){
+//                     copies[ele.id].tags.highway = 'lane-white-dash';
+//                     copies[ele.id].tags.type = 'dashed';
+//                 }
+//                 actionDeleteWay(ele.id);
+//                 actionAddEntity(copies[ele.id]);
+//             }
+//         });
+//
+//
+//         return graph;
+//     };
+//
+// }
 function actionAddStopLine(selectIds, context) {
     // var data = convert2JSON(selectIds,context);
 
@@ -461,10 +488,15 @@ function addMomentaPackages(packageId) {
 }
 
 function focusOnFrames(frameId) {
-    window.id.map().center([116.35815,39.82925]);
-    window.id.map().zoom(18);
-    sendPost(url.queryFrameLocation,{'frameId':frameId},function (result) {
-        window.id.map().center([116.35815,39.82925]);
+    // window.id.map().center([116.35815,39.82925]);
+    // window.id.map().zoom(18);
+    sendPost(url.queryFrameLocation,{'imagekey':frameId},function (result) {
+        result = JSON.parse(result);
+        var location = result['loc'];
+        var splitss = location.split(' ');
+        var packageID = result['packet_name'];
+        window.id.map().center([parseFloat(splitss[0]),parseFloat(splitss[1])]);
+        addPackage(packageID)
         window.id.map().zoom(18);
     });
 }
