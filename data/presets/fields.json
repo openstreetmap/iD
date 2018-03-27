@@ -951,7 +951,7 @@
             "type": "check",
             "label": "Indoor"
         },
-        "indoor": {
+        "industrial": {
             "key": "industrial",
             "type": "combo",
             "label": "Type"
