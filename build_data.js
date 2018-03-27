@@ -432,11 +432,11 @@ function generateTaginfo(presets, fields) {
 
     function setObjectType(tag, input) {
       tag.object_types = [];
-      const mapping = { "point"    : "node",
-                        "vertex"   : "node",
-                        "line"     : "way",
-                        "relation" : "relation",
-                        "area"     : "area" };
+      const mapping = { 'point'    : 'node',
+                        'vertex'   : 'node',
+                        'line'     : 'way',
+                        'relation' : 'relation',
+                        'area'     : 'area' };
 
       input.geometry.forEach(function(geom) {
          if (tag.object_types.indexOf(mapping[geom]) === -1)
