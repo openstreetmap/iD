@@ -14,7 +14,7 @@ const path = require('path');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
-const maki = require ('@mapbox/maki');
+const maki = require('@mapbox/maki');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
@@ -349,8 +349,9 @@ function generateTaginfo(presets, fields) {
             tag.value = preset.tags[last];
         }
 
-        if (preset.name)
+        if (preset.name) {
           tag.description = [ preset.name ];
+        }
 
         if (preset.geometry) {
           setObjectType(tag, preset);
@@ -373,15 +374,17 @@ function generateTaginfo(presets, fields) {
                values.forEach(function(value) {
                    var tag = { key:   key,
                                value: value };
-                   if (field.label)
+                   if (field.label) {
                       tag.description = [ field.label ];
+                   }
                    coalesceTags(taginfo, tag);
                });
             }
             else {
                var tag = { key: key };
-               if (field.label)
+               if (field.label) {
                   tag.description = [ field.label ];
+               }
                coalesceTags(taginfo, tag);
             }
         });
@@ -394,9 +397,8 @@ function generateTaginfo(presets, fields) {
 
     function coalesceTags(taginfo, tag) {
 
-       if (!tag.key) {
+       if (!tag.key)
          return;
-       }
 
        var currentTaginfoEntries = taginfo.tags.filter(function(t) {
            return (t.key    === tag.key &&
@@ -408,9 +410,8 @@ function generateTaginfo(presets, fields) {
          return;
        }
 
-       if (!tag.description) {
+       if (!tag.description)
          return;
-       }
 
        if (!currentTaginfoEntries[0].description) {
          currentTaginfoEntries[0].description = [ tag.description ];
@@ -439,8 +440,9 @@ function generateTaginfo(presets, fields) {
                         'area'     : 'area' };
 
       input.geometry.forEach(function(geom) {
-         if (tag.object_types.indexOf(mapping[geom]) === -1)
+         if (tag.object_types.indexOf(mapping[geom]) === -1) {
            tag.object_types.push(mapping[geom]);
+         }
       });
     }
 
