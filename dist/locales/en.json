@@ -1949,6 +1949,9 @@
                 "indoor": {
                     "label": "Indoor"
                 },
+                "industrial": {
+                    "label": "Type"
+                },
                 "information": {
                     "label": "Type"
                 },

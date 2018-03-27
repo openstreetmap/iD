@@ -686,6 +686,9 @@ en:
       indoor:
         # indoor=*
         label: Indoor
+      industrial:
+        # industrial=*
+        label: Type
       information:
         # information=*
         label: Type

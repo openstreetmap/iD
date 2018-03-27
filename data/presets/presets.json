@@ -8719,7 +8719,8 @@
         "landuse/industrial": {
             "icon": "industry",
             "fields": [
-                "name"
+                "name",
+                "industrial"
             ],
             "geometry": [
                 "area"
