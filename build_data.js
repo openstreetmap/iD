@@ -357,7 +357,7 @@ function generateTaginfo(presets, fields) {
         }
 
         if (isMaki(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' + preset.icon + '-11.svg';
+            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' + preset.icon + '-15.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);
