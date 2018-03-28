@@ -414,12 +414,12 @@ function generateTaginfo(presets, fields) {
          return;
 
        if (!currentTaginfoEntries[0].description) {
-         currentTaginfoEntries[0].description = [ tag.description ];
+         currentTaginfoEntries[0].description = tag.description;
          return;
        }
 
        var isNewDescription = currentTaginfoEntries[0].description
-                                   .indexOf(tag.description) === -1;
+                                   .indexOf(tag.description[0]) === -1;
 
        if (isNewDescription) {
          currentTaginfoEntries[0].description.push(tag.description[0]);
