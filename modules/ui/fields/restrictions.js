@@ -79,7 +79,17 @@ export function uiFieldRestrictions(field, context) {
         // It's possible for there to be no actual intersection here.
         // for example, a vertex of two `highway=path`
         // In this case, hide the field.
-        var isOK = (_intersection && _intersection.vertices.length && _intersection.ways.length);
+        var isOK = (
+            _intersection &&
+            _intersection.vertices.length &&           // has vertices
+            _intersection.vertices                     // has the vertex that the user selected
+                .filter(function(vertex) { return vertex.id === _vertexID; }).length &&
+            _intersection.ways.length > 2 &&           // has more than 2 ways
+            _intersection.ways                         // has more than 1 TO way
+                .filter(function(way) { return way.__to; }).length > 1
+        );
+
+        // Also hide in the case where
         d3_select(selection.node().parentNode).classed('hide', !isOK);
 
         // if form field is hidden or has detached from dom, clean up.
