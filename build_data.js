@@ -160,14 +160,6 @@ function generateFields(tstrings) {
             }
         }
 
-        if (field.geometry) {
-          t.geometry = field.geometry;
-        }
-
-        if (field.icon) {
-          t.icon = field.icon;
-        }
-
         fields[id] = field;
     });
     return fields;
@@ -304,12 +296,6 @@ function generateTranslations(fields, presets, tstrings) {
         } else {
             delete preset.terms;
         }
-    });
-
-    // remove fields we're not interested in for translation
-    _forEach(translations.fields, function(field) {
-        delete field.icon;
-        delete field.geometry;
     });
 
     return translations;
