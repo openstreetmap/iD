@@ -6356,15 +6356,19 @@
                     "terms": ""
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Left Turn Only",
+                    "name": "Only Left Turn",
                     "terms": ""
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Right Turn Only",
+                    "name": "Only Right Turn",
                     "terms": ""
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "No Turns",
+                    "name": "Only Straight On",
+                    "terms": ""
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Only U-turn",
                     "terms": ""
                 },
                 "type/route_master": {

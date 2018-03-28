@@ -5706,16 +5706,20 @@ en:
         terms: '<translate with synonyms or related terms for ''No U-turn'', separated by commas>'
       type/restriction/only_left_turn:
         # 'type=restriction, restriction=only_left_turn'
-        name: Left Turn Only
-        terms: '<translate with synonyms or related terms for ''Left Turn Only'', separated by commas>'
+        name: Only Left Turn
+        terms: '<translate with synonyms or related terms for ''Only Left Turn'', separated by commas>'
       type/restriction/only_right_turn:
         # 'type=restriction, restriction=only_right_turn'
-        name: Right Turn Only
-        terms: '<translate with synonyms or related terms for ''Right Turn Only'', separated by commas>'
+        name: Only Right Turn
+        terms: '<translate with synonyms or related terms for ''Only Right Turn'', separated by commas>'
       type/restriction/only_straight_on:
         # 'type=restriction, restriction=only_straight_on'
-        name: No Turns
-        terms: '<translate with synonyms or related terms for ''No Turns'', separated by commas>'
+        name: Only Straight On
+        terms: '<translate with synonyms or related terms for ''Only Straight On'', separated by commas>'
+      type/restriction/only_u_turn:
+        # 'type=restriction, restriction=only_u_turn'
+        name: Only U-turn
+        terms: '<translate with synonyms or related terms for ''Only U-turn'', separated by commas>'
       type/route:
         # type=route
         name: Route

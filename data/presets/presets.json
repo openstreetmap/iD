@@ -19712,7 +19712,7 @@
                 "type": "restriction",
                 "restriction": "only_left_turn"
             },
-            "name": "Left Turn Only"
+            "name": "Only Left Turn"
         },
         "type/restriction/only_right_turn": {
             "icon": "restriction-only-right-turn",
@@ -19726,7 +19726,7 @@
                 "type": "restriction",
                 "restriction": "only_right_turn"
             },
-            "name": "Right Turn Only"
+            "name": "Only Right Turn"
         },
         "type/restriction/only_straight_on": {
             "icon": "restriction-only-straight-on",
@@ -19740,7 +19740,21 @@
                 "type": "restriction",
                 "restriction": "only_straight_on"
             },
-            "name": "No Turns"
+            "name": "Only Straight On"
+        },
+        "type/restriction/only_u_turn": {
+            "icon": "restriction-only-u-turn",
+            "fields": [
+                "except"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "restriction",
+                "restriction": "only_u_turn"
+            },
+            "name": "Only U-turn"
         },
         "type/route_master": {
             "icon": "route-master",

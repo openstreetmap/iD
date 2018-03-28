@@ -271,6 +271,7 @@
     "restriction-only-straight-on": { "viewBox": "300 260 60 60" },
     "restriction-only-left-turn":   { "viewBox": "360 260 60 60" },
     "restriction-only-right-turn":  { "viewBox": "420 260 60 60" },
+    "restriction-only-u-turn":      { "viewBox": "440 400 60 60" },
 
     "restriction":              { "viewBox": "480 260 60 60" },
     "multipolygon":             { "viewBox": "540 260 60 60" },
@@ -462,7 +463,7 @@
     "feature-images":           { "viewBox": "0 480 200 80" },
     "building-images":          { "viewBox": "700 480 200 80" },
 
-    "walkthrough-mouse":        { "viewBox": "400 411 25 43" },
+    "walkthrough-mouse":        { "viewBox": "397 411 25 43" },
 
     "walkthrough-mouse-shape":  { "fill": "#000000" },
     "walkthrough-mouse-left":   { "fill": "inherit" },

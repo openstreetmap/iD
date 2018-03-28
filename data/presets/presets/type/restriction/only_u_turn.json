@@ -1,5 +1,5 @@
 {
-    "icon": "restriction-only-straight-on",
+    "icon": "restriction-only-u-turn",
     "fields": [
         "except"
     ],
@@ -8,7 +8,7 @@
     ],
     "tags": {
         "type": "restriction",
-        "restriction": "only_straight_on"
+        "restriction": "only_u_turn"
     },
-    "name": "Only Straight On"
+    "name": "Only U-turn"
 }

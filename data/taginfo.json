@@ -3578,6 +3578,10 @@
             "value": "only_straight_on"
         },
         {
+            "key": "restriction",
+            "value": "only_u_turn"
+        },
+        {
             "key": "type",
             "value": "route_master"
         },
