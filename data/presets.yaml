@@ -1563,6 +1563,22 @@ en:
         label: Type
         # tunnel field placeholder
         placeholder: Default
+      usage_rail:
+        # usage=*
+        label: Usage Type
+        options:
+          # usage=branch
+          branch: Branch
+          # usage=industrial
+          industrial: Industrial
+          # usage=main
+          main: Main
+          # usage=military
+          military: Military
+          # usage=test
+          test: Test
+          # usage=tourism
+          tourism: Tourism
       vending:
         # vending=*
         label: Type of Goods

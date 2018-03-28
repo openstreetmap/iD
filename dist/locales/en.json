@@ -2664,6 +2664,17 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
+                "usage_rail": {
+                    "label": "Usage Type",
+                    "options": {
+                        "main": "Main",
+                        "branch": "Branch",
+                        "industrial": "Industrial",
+                        "military": "Military",
+                        "test": "Test",
+                        "tourism": "Tourism"
+                    }
+                },
                 "vending": {
                     "label": "Type of Goods"
                 },

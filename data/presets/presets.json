@@ -15499,17 +15499,18 @@
         },
         "railway/abandoned": {
             "icon": "railway-abandoned",
+            "fields": [
+                "name",
+                "structure",
+                "service_rail",
+                "usage_rail"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "abandoned"
             },
-            "fields": [
-                "name",
-                "structure",
-                "service_rail"
-            ],
             "terms": [],
             "name": "Abandoned Railway"
         },
@@ -15562,16 +15563,17 @@
         },
         "railway/disused": {
             "icon": "railway-disused",
+            "fields": [
+                "structure",
+                "service_rail",
+                "usage_rail"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "disused"
             },
-            "fields": [
-                "structure",
-                "service_rail"
-            ],
             "terms": [],
             "name": "Disused Railway"
         },
@@ -15617,19 +15619,22 @@
         },
         "railway/light_rail": {
             "icon": "railway-light-rail",
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail",
+                "usage_rail",
+                "voltage",
+                "frequency"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "light_rail"
             },
-            "fields": [
-                "name",
-                "structure",
-                "gauge",
-                "electrified",
-                "service_rail"
-            ],
             "terms": [
                 "light rail",
                 "streetcar",
@@ -15679,36 +15684,42 @@
         },
         "railway/monorail": {
             "icon": "railway-monorail",
+            "fields": [
+                "name",
+                "structure",
+                "electrified",
+                "service_rail",
+                "usage_rail",
+                "voltage",
+                "frequency"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "monorail"
             },
-            "fields": [
-                "name",
-                "structure",
-                "electrified",
-                "service_rail"
-            ],
             "terms": [],
             "name": "Monorail"
         },
         "railway/narrow_gauge": {
             "icon": "railway-rail",
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail",
+                "usage_rail",
+                "voltage",
+                "frequency"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "narrow_gauge"
             },
-            "fields": [
-                "name",
-                "structure",
-                "gauge",
-                "electrified",
-                "service_rail"
-            ],
             "terms": [
                 "narrow gauge railway",
                 "narrow gauge railroad"
@@ -15717,20 +15728,23 @@
         },
         "railway/rail": {
             "icon": "railway-rail",
-            "geometry": [
-                "line"
-            ],
-            "tags": {
-                "railway": "rail"
-            },
             "fields": [
                 "name",
                 "structure",
                 "gauge",
                 "electrified",
                 "maxspeed",
-                "service_rail"
+                "service_rail",
+                "usage_rail",
+                "voltage",
+                "frequency"
             ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "railway": "rail"
+            },
             "terms": [],
             "name": "Rail"
         },
@@ -15774,19 +15788,22 @@
         },
         "railway/subway": {
             "icon": "railway-subway",
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail",
+                "usage_rail",
+                "voltage",
+                "frequency"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "subway"
             },
-            "fields": [
-                "name",
-                "structure",
-                "gauge",
-                "electrified",
-                "service_rail"
-            ],
             "terms": [
                 "metro",
                 "transit"
@@ -15829,19 +15846,22 @@
         },
         "railway/tram": {
             "icon": "railway-light-rail",
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail",
+                "usage_rail",
+                "voltage",
+                "frequency"
+            ],
             "geometry": [
                 "line"
             ],
             "tags": {
                 "railway": "tram"
             },
-            "fields": [
-                "name",
-                "structure",
-                "gauge",
-                "electrified",
-                "service_rail"
-            ],
             "terms": [
                 "light rail",
                 "streetcar",
