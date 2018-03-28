@@ -77,10 +77,10 @@ export function uiMapData(context) {
             });
 
             _fillSelected = d;
-            if (d !== 'wireframe') {
-                _fillDefault = d;
-            }
             context.storage('area-fill', d);
+            if (d !== 'wireframe') {
+                context.storage('area-fill-toggle', d);
+            }
             update();
         }
 
@@ -91,15 +91,6 @@ export function uiMapData(context) {
             }
             return false;
         }
-
-        _fillSelected = d;
-        context.storage('area-fill', d);
-        if (d !== 'wireframe') {
-            context.storage('area-fill-toggle', d);
-        }
-        update();
-    }
-
 
         function setLayer(which, enabled) {
             var layer = layers.layer(which);
@@ -1095,24 +1086,21 @@ export function uiMapData(context) {
 
         }
 
-        if (_fillSelected === 'wireframe') {
-            _fillSelected = context.storage('area-fill-toggle') || 'partial';
-        } else {
-            _fillSelected = 'wireframe';
-        }
-
-        setFill(_fillSelected);
-        context.map().pan([0,0]);  // trigger a redraw
-
-
-
         function toggleWireframe() {
             if (d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             }
-            setFill((_fillSelected === 'wireframe' ? _fillDefault : 'wireframe'));
+
+            if (_fillSelected === 'wireframe') {
+                _fillSelected = context.storage('area-fill-toggle') || 'partial';
+            } else {
+                _fillSelected = 'wireframe';
+            }
+
+            setFill(_fillSelected);
             context.map().pan([0,0]);  // trigger a redraw
+
         }
 
         function hidePane() {
@@ -1237,6 +1225,8 @@ export function uiMapData(context) {
         uiMapData.hidePane = hidePane;
         uiMapData.togglePane = togglePane;
         uiMapData.setVisible = setVisible;
+
+    }
 
     return mapData;
 }

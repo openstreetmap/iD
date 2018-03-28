@@ -40,6 +40,7 @@ export function coreHistory(context) {
     var _stack;
     var _index;
     var _tree;
+    var source;
     var importPlan;
 
     // internal _act, accepts list of actions and eased time
