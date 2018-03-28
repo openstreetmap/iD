@@ -1,0 +1,353 @@
+{
+    "cy": {
+        "modes": {
+            "add_area": {
+                "title": "Ardal",
+                "description": "Ychwanegu parciau, adeiladau, llynnoedd neu ardaloedd eraill i'r map.",
+                "tail": "Cliciwch ar y map i ddechrau llunio ardal, fel parc, llyn, neu adeilad."
+            },
+            "add_line": {
+                "title": "Llinell",
+                "description": "Ychwanegu prif-ffyrdd, strydoedd, llwybrau troed, camlas, neu llinelloedd eraill i'r map.",
+                "tail": "Cliciwch ar y map i ddechrau llunio ffordd neu llwybr."
+            },
+            "add_point": {
+                "title": "Pwynt",
+                "description": "Ychwanegu bwytai, henebion, blychau post neu pwyntiau eraill i'r map.",
+                "tail": "Cliciwch ar y map i ychwanegu pwynt."
+            },
+            "browse": {
+                "title": "Pori"
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Wedi ychwanegu pwynt."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "Wedi dechrau llinell.",
+                    "area": "Wedi dechrau ardal."
+                }
+            },
+            "straighten": {
+                "title": "Sythu",
+                "description": "Sythu'r llinell yma",
+                "annotation": "Wedi sythu llinell."
+            },
+            "delete": {
+                "title": "Dileu",
+                "annotation": {
+                    "point": "Wedi dileu pwynt.",
+                    "line": "Wedi dileu llinell.",
+                    "area": "Wedi dileu ardal."
+                }
+            },
+            "disconnect": {
+                "title": "Dad-gysylltu",
+                "description": "Dad-gysylltu'r llinelloedd/ardaloedd yma o'u gilydd.",
+                "annotation": "Llinelloedd/ardaloedd wedi'u ddad-gysylltu."
+            },
+            "move": {
+                "title": "Symyd",
+                "annotation": {
+                    "point": "Wedi symyd pwynt.",
+                    "line": "Wedi symyd llinell.",
+                    "area": "Wedi symyd ardal."
+                }
+            }
+        },
+        "success": {
+            "help_link_text": "Manylion"
+        },
+        "tag_reference": {
+            "description": "Disgrifiad"
+        },
+        "shortcuts": {
+            "editing": {
+                "commands": {
+                    "undo": "Dad-wneud gweithred diwethaf",
+                    "redo": "Ail-wneud gweithred diwethaf",
+                    "save": "Cadw newidiadau"
+                }
+            },
+            "tools": {
+                "title": "Teclynnau",
+                "info": {
+                    "title": "Gwybodaeth"
+                }
+            }
+        },
+        "units": {
+            "north": "G",
+            "south": "D",
+            "east": "Dw",
+            "west": "Gr"
+        },
+        "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "Nodweddion Rhwystr"
+                },
+                "category-building": {
+                    "name": "Nodweddion Adeilad"
+                },
+                "category-golf": {
+                    "name": "Nodweddion Golff"
+                },
+                "category-landuse": {
+                    "name": "Nodweddion Defnydd Tir"
+                },
+                "category-natural-area": {
+                    "name": "Nodweddion Naturiol"
+                },
+                "category-natural-line": {
+                    "name": "Nodweddion Naturiol"
+                },
+                "category-natural-point": {
+                    "name": "Nodweddion Naturiol"
+                },
+                "category-path": {
+                    "name": "Nodweddion Llwybr"
+                },
+                "category-rail": {
+                    "name": "Nodweddion Rheilffordd"
+                },
+                "category-restriction": {
+                    "name": "Nodweddion Cyfyngiad"
+                },
+                "category-road": {
+                    "name": "Nodweddion Ffordd"
+                },
+                "category-route": {
+                    "name": "Nodweddion Llwybr"
+                },
+                "category-water-area": {
+                    "name": "Nodweddion Dŵr"
+                },
+                "category-water-line": {
+                    "name": "Nodweddion Dŵr"
+                }
+            },
+            "fields": {
+                "access": {
+                    "label": "Yn Caniatau Mynediad",
+                    "options": {
+                        "designated": {
+                            "description": "Yn caniatau mynediad yn ôl arwyddion neu is-ddeddfau lleol",
+                            "title": "Dynodedig"
+                        },
+                        "destination": {
+                            "description": "Yn caniatau mynediad ond i gyrraedd cyrchfan",
+                            "title": "Cyrchfan"
+                        },
+                        "no": {
+                            "description": "Dim caniatad mynediad i'r cyhoedd"
+                        }
+                    }
+                },
+                "address": {
+                    "label": "Cyfeiriad",
+                    "placeholders": {
+                        "city": "Dinas"
+                    }
+                },
+                "country": {
+                    "label": "Gwlad"
+                },
+                "craft": {
+                    "label": "Math"
+                },
+                "crane/type": {
+                    "label": "Math o Graen"
+                },
+                "crop": {
+                    "label": "Cnydau"
+                },
+                "crossing": {
+                    "label": "Math"
+                },
+                "cuisine": {
+                    "label": "Bwydydd"
+                },
+                "cycleway": {
+                    "options": {
+                        "none": {
+                            "title": "Dim"
+                        }
+                    },
+                    "types": {
+                        "cycleway:left": "Ochr chwith",
+                        "cycleway:right": "Ochr dde"
+                    }
+                },
+                "date": {
+                    "label": "Dyddiad"
+                },
+                "description": {
+                    "label": "Disgrifiad"
+                },
+                "devices": {
+                    "label": "Dyfeisiau",
+                    "placeholder": "1, 2, 3..."
+                },
+                "direction": {
+                    "label": "Cyfeiriad (Gradd Clocwedd)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Cyfeiriad",
+                    "options": {
+                        "E": "Dwyrain",
+                        "N": "Gogledd",
+                        "S": "De",
+                        "W": "Gorllewin"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Cyfeiriad",
+                    "options": {
+                        "anticlockwise": "Gwrthglocwedd",
+                        "clockwise": "Clocwedd"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Cyfeiriad",
+                    "options": {
+                        "backward": "Yn ôl",
+                        "forward": "Ymlaen"
+                    }
+                },
+                "display": {
+                    "label": "Arddangos"
+                },
+                "dock": {
+                    "label": "Math"
+                },
+                "duration": {
+                    "label": "Hyd",
+                    "placeholder": "00:00"
+                },
+                "electrified": {
+                    "options": {
+                        "contact_line": "Llinell Cyswllt",
+                        "no": "Na"
+                    }
+                },
+                "incline_steps": {
+                    "options": {
+                        "down": "Lawr",
+                        "up": "Lan/fyny"
+                    }
+                },
+                "information": {
+                    "label": "Math"
+                },
+                "inscription": {
+                    "label": "Arysgrif"
+                },
+                "internet_access": {
+                    "label": "Mynediad Rhyngrwyd",
+                    "options": {
+                        "no": "Na",
+                        "yes": "Ia"
+                    }
+                },
+                "internet_access/fee": {
+                    "label": "Tâl Mynediad Rhyngrwyd"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Enw Rwydwaith)"
+                },
+                "label": {
+                    "label": "Label"
+                },
+                "lamp_type": {
+                    "label": "Math"
+                },
+                "landuse": {
+                    "label": "Math"
+                },
+                "lanes": {
+                    "label": "Lonydd",
+                    "placeholder": "1, 2, 3..."
+                },
+                "layer": {
+                    "label": "Haen",
+                    "placeholder": "0"
+                },
+                "leaf_cycle": {
+                    "options": {
+                        "deciduous": "Collddail",
+                        "evergreen": "Bytholwyrdd",
+                        "mixed": "Cymysg",
+                        "semi_deciduous": "Lled-collddail",
+                        "semi_evergreen": "Lled-bytholwyrdd"
+                    }
+                },
+                "leaf_cycle_singular": {
+                    "label": "Cylchred Dail",
+                    "options": {
+                        "deciduous": "Collddail",
+                        "evergreen": "Bytholwyrdd",
+                        "semi_deciduous": "Lled-collddail",
+                        "semi_evergreen": "Lled-bytholwyrdd"
+                    }
+                },
+                "leaf_type": {
+                    "label": "Math o Ddail",
+                    "options": {
+                        "broadleaved": "Llydanddail",
+                        "leafless": "Di-ddail",
+                        "mixed": "Cymysg"
+                    }
+                },
+                "leaf_type_singular": {
+                    "label": "Math o Ddail",
+                    "options": {
+                        "broadleaved": "Llydanddail",
+                        "leafless": "Di-ddail"
+                    }
+                },
+                "leisure": {
+                    "label": "Math"
+                },
+                "length": {
+                    "label": "Hyd (metr)"
+                },
+                "level": {
+                    "label": "Lefel"
+                },
+                "levels": {
+                    "label": "Lefelau",
+                    "placeholder": "2, 4, 6..."
+                },
+                "location": {
+                    "label": "Lleoliad"
+                },
+                "man_made": {
+                    "label": "Math"
+                },
+                "manhole": {
+                    "label": "Math"
+                },
+                "mtb/scale/imba": {
+                    "options": {
+                        "1": "Hawdd (cylch gwyrdd)",
+                        "2": "Canolig (sgwâr glas)",
+                        "3": "Anodd (diemwnt du)",
+                        "4": "Anodd Iawn (diemwnt du dwbl)"
+                    },
+                    "placeholder": "Hawdd, Canolig, Anodd..."
+                }
+            },
+            "presets": {
+                "waterway/waterfall": {
+                    "name": "Rheadr"
+                }
+            }
+        }
+    }
+}

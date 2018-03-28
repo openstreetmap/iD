@@ -30,7 +30,7 @@ export function uiBackground(context) {
     var key = t('background.key');
 
     var _customSource = context.background().findSource('custom');
-    var _previousBackground = context.background().findSource(context.storage('background-previous-last-used'));
+    var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
     var _shown = false;
 
     var _backgroundList = d3_select(null);
@@ -92,7 +92,7 @@ export function uiBackground(context) {
 
         d3_event.preventDefault();
         _previousBackground = context.background().baseLayerSource();
-        context.storage('background-previous-last-used', _previousBackground.id);
+        context.storage('background-last-used-toggle', _previousBackground.id);
         context.storage('background-last-used', d.id);
         context.background().baseLayerSource(d);
         _backgroundList.call(updateLayerSelections);
@@ -151,7 +151,7 @@ export function uiBackground(context) {
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
-            .call(svgIcon('#icon-search'));
+            .call(svgIcon('#icon-edit'));
 
         enter.filter(function(d) { return d.best(); })
             .append('div')
@@ -336,7 +336,7 @@ export function uiBackground(context) {
 
         var pane = selection
             .append('div')
-            .attr('class', 'fillL map-overlay col3 content hide');
+            .attr('class', 'fillL map-pane col4 hide');
 
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -350,12 +350,27 @@ export function uiBackground(context) {
             .call(svgIcon('#icon-layers', 'light'))
             .call(paneTooltip);
 
-        pane
+
+        var heading = pane
+            .append('div')
+            .attr('class', 'pane-heading');
+
+        heading
             .append('h2')
             .text(t('background.title'));
 
+        heading
+            .append('button')
+            .on('click', function() { uiBackground.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
+
+        var content = pane
+            .append('div')
+            .attr('class', 'pane-content');
+
         // background list
-        pane
+        content
             .append('div')
             .attr('class', 'background-background-list-container')
             .call(uiDisclosure(context, 'background_list', true)
@@ -364,7 +379,7 @@ export function uiBackground(context) {
             );
 
         // overlay list
-        pane
+        content
             .append('div')
             .attr('class', 'background-overlay-list-container')
             .call(uiDisclosure(context, 'overlay_list', true)
@@ -373,12 +388,12 @@ export function uiBackground(context) {
             );
 
         // display options
-        _displayOptionsContainer = pane
+        _displayOptionsContainer = content
             .append('div')
             .attr('class', 'background-display-options');
 
         // offset controls
-        _offsetContainer = pane
+        _offsetContainer = content
             .append('div')
             .attr('class', 'background-offset');
 

@@ -66,5 +66,3 @@ export function geoZoomToScale(z, tileSize) {
     return tileSize * Math.pow(2, z) / TAU;
 }
 
-
-

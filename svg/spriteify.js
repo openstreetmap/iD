@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 'use strict';
 
-require = require('@std/esm')(module, { esm: 'js' }); // eslint-disable-line no-global-assign
+const requireESM = require('@std/esm')(module, { esm: 'js' });
+const _merge = requireESM('lodash-es/merge').default;
 
-var _merge = require('lodash-es/merge').default;
-
-var argv = require('minimist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2));
 if (argv.help || argv.h || !argv.svg) {
     return help();
 }
-var fs = require('fs');
-var json = (argv.json ? JSON.parse(fs.readFileSync(argv.json)) : {});
-var xml2js = require('xml2js');
+const fs = require('fs');
+const json = (argv.json ? JSON.parse(fs.readFileSync(argv.json)) : {});
+const xml2js = require('xml2js');
 
 xmlToJs(argv.svg, function (err, obj) {
     if (err) throw (err);

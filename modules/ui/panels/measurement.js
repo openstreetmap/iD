@@ -8,14 +8,15 @@ import {
 } from 'd3-geo';
 
 import { t } from '../../util/locale';
+import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { geoExtent } from '../../geo';
 import { utilDetect } from '../../util/detect';
 
 
 
 export function uiPanelMeasurement(context) {
-    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
-    var OSM_PRECISION = 7;
+    var locale = utilDetect().locale,
+        isImperial = (locale.toLowerCase() === 'en-us');
 
 
     function radiansToMeters(r) {
@@ -51,75 +52,6 @@ export function uiPanelMeasurement(context) {
     }
 
 
-    function displayLength(m) {
-        var d = m * (isImperial ? 3.28084 : 1),
-            p, unit;
-
-        if (isImperial) {
-            if (d >= 5280) {
-                d /= 5280;
-                unit = 'mi';
-            } else {
-                unit = 'ft';
-            }
-        } else {
-            if (d >= 1000) {
-                d /= 1000;
-                unit = 'km';
-            } else {
-                unit = 'm';
-            }
-        }
-
-        // drop unnecessary precision
-        p = d > 1000 ? 0 : d > 100 ? 1 : 2;
-
-        return String(d.toFixed(p)) + ' ' + unit;
-    }
-
-
-    function displayArea(m2) {
-        var d = m2 * (isImperial ? 10.7639111056 : 1),
-            d1, d2, p1, p2, unit1, unit2;
-
-        if (isImperial) {
-            if (d >= 6969600) {     // > 0.25mi² show mi²
-                d1 = d / 27878400;
-                unit1 = 'mi²';
-            } else {
-                d1 = d;
-                unit1 = 'ft²';
-            }
-
-            if (d > 4356 && d < 43560000) {   // 0.1 - 1000 acres
-                d2 = d / 43560;
-                unit2 = 'ac';
-            }
-
-        } else {
-            if (d >= 250000) {    // > 0.25km² show km²
-                d1 = d / 1000000;
-                unit1 = 'km²';
-            } else {
-                d1 = d;
-                unit1 = 'm²';
-            }
-
-            if (d > 1000 && d < 10000000) {   // 0.1 - 1000 hectares
-                d2 = d / 10000;
-                unit2 = 'ha';
-            }
-        }
-
-        // drop unnecessary precision
-        p1 = d1 > 1000 ? 0 : d1 > 100 ? 1 : 2;
-        p2 = d2 > 1000 ? 0 : d2 > 100 ? 1 : 2;
-
-        return String(d1.toFixed(p1)) + ' ' + unit1 +
-            (d2 ? ' (' + String(d2.toFixed(p2)) + ' ' + unit2 + ')' : '');
-    }
-
-
     function redraw(selection) {
         var resolver = context.graph();
         var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
@@ -132,7 +64,7 @@ export function uiPanelMeasurement(context) {
         selection
             .append('h4')
             .attr('class', 'measurement-heading')
-            .text(singular || t('info_panels.measurement.selected', { n: selected.length }));
+            .text(singular || t('info_panels.measurement.selected', { n: selected.length.toLocaleString(locale) }));
 
         if (!selected.length) return;
 
@@ -146,16 +78,17 @@ export function uiPanelMeasurement(context) {
 
         var list = selection
             .append('ul');
+        var coordItem;
 
         // multiple features, just display extent center..
         if (!singular) {
-            list
+            coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.center') + ':')
-                .append('span')
-                .text(
-                    center[1].toFixed(OSM_PRECISION) + ', ' + center[0].toFixed(OSM_PRECISION)
-                );
+                .text(t('info_panels.measurement.center') + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(center));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(center));
             return;
         }
 
@@ -175,7 +108,7 @@ export function uiPanelMeasurement(context) {
                 .text(t('info_panels.measurement.geometry') + ':')
                 .append('span')
                 .text(
-                    (closed ? t('info_panels.measurement.closed') + ' ' : '') + t('geometry.' + geometry)
+                    closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
                 );
 
             if (entity.type !== 'relation') {
@@ -183,8 +116,7 @@ export function uiPanelMeasurement(context) {
                     .append('li')
                     .text(t('info_panels.measurement.node_count') + ':')
                     .append('span')
-                    .text(nodeCount(feature)
-                    );
+                    .text(nodeCount(feature).toLocaleString(locale));
             }
 
             if (closed) {
@@ -193,7 +125,7 @@ export function uiPanelMeasurement(context) {
                     .append('li')
                     .text(t('info_panels.measurement.area') + ':')
                     .append('span')
-                    .text(displayArea(area));
+                    .text(displayArea(area, isImperial));
             }
 
 
@@ -201,15 +133,15 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .text(lengthLabel + ':')
                 .append('span')
-                .text(displayLength(length));
+                .text(displayLength(length, isImperial));
 
-            list
+            coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.centroid') + ':')
-                .append('span')
-                .text(
-                    centroid[1].toFixed(OSM_PRECISION) + ', ' + centroid[0].toFixed(OSM_PRECISION)
-                );
+                .text(t('info_panels.measurement.centroid') + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(centroid));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(centroid));
 
             var toggle  = isImperial ? 'imperial' : 'metric';
 
@@ -233,13 +165,13 @@ export function uiPanelMeasurement(context) {
                 .append('span')
                 .text(t('geometry.' + geometry));
 
-            list
+            coordItem = list
                 .append('li')
-                .text(centerLabel + ':')
-                .append('span')
-                .text(
-                    center[1].toFixed(OSM_PRECISION) + ', ' + center[0].toFixed(OSM_PRECISION)
-                );
+                .text(centerLabel + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(center));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(center));
         }
     }
 

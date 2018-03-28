@@ -1,0 +1,24 @@
+{
+    "icon": "poi-vending-machine",
+    "fields": [
+        "vending",
+        "operator",
+        "payment_multi",
+        "currency_multi"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "food"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "food"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "food"
+    },
+    "name": "Food Vending Machine"
+}

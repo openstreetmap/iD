@@ -1,5 +1,10 @@
 {
     "en": {
+        "icons": {
+            "information": "info",
+            "remove": "remove",
+            "undo": "undo"
+        },
         "modes": {
             "add_area": {
                 "title": "Area",
@@ -285,16 +290,46 @@
                 "connected_to_hidden": "This can't be split because it is connected to a hidden feature."
             },
             "restriction": {
-                "help": {
-                    "select": "Click to select a road segment.",
-                    "toggle": "Click to toggle turn restrictions.",
-                    "toggle_on": "Click to add a \"{restriction}\" restriction.",
-                    "toggle_off": "Click to remove the \"{restriction}\" restriction."
-                },
                 "annotation": {
                     "create": "Added a turn restriction",
                     "delete": "Deleted a turn restriction"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distance",
+                "distance_up_to": "Up to {distance}",
+                "via": "Via",
+                "via_node_only": "Node only",
+                "via_up_to_one": "Up to 1 way",
+                "via_up_to_two": "Up to 2 ways"
+            },
+            "help": {
+                "indirect": "(indirect)",
+                "turn": {
+                    "no_left_turn": "NO Left Turn {indirect}",
+                    "no_right_turn": "NO Right Turn {indirect}",
+                    "no_u_turn": "NO U-Turn {indirect}",
+                    "no_straight_on": "NO Straight On {indirect}",
+                    "only_left_turn": "ONLY Left Turn {indirect}",
+                    "only_right_turn": "ONLY Right Turn {indirect}",
+                    "only_u_turn": "ONLY U-Turn {indirect}",
+                    "only_straight_on": "ONLY Straight On {indirect}",
+                    "allowed_left_turn": "Left Turn Allowed {indirect}",
+                    "allowed_right_turn": "Right Turn Allowed {indirect}",
+                    "allowed_u_turn": "U-Turn Allowed {indirect}",
+                    "allowed_straight_on": "Straight On Allowed {indirect}"
+                },
+                "from": "FROM",
+                "via": "VIA",
+                "to": "TO",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Click to select a {from} segment",
+                "select_from_name": "Click to select {from} {fromName}",
+                "toggle": "Click for \"{turn}\""
             }
         },
         "undo": {
@@ -389,7 +424,8 @@
                 "title": "Measurement",
                 "selected": "{n} selected",
                 "geometry": "Geometry",
-                "closed": "closed",
+                "closed_line": "closed line",
+                "closed_area": "closed area",
                 "center": "Center",
                 "perimeter": "Perimeter",
                 "length": "Length",
@@ -470,7 +506,7 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
-            "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y tile scheme\n   - {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
+            "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
             "overlays": "Overlays",
             "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
@@ -654,7 +690,7 @@
             "untagged_area_tooltip": "Select a feature type that describes what this area is.",
             "untagged_relation": "Untagged relation",
             "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
-            "many_deletions": "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "deprecated_tags": "Deprecated tags: {tags}"
         },
@@ -669,6 +705,32 @@
             "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
+        },
+        "geoservice": {
+            "approve": "Approve",
+            "reject": "Reject",
+            "match_preset": "Optional: match features to a OSM preset",
+            "exceeded_limit": "Service feature limit exceeded. Number fetched: ",
+            "enter_url": "Enter a GeoService URL",
+            "add_layer": "Add GeoService Layer",
+            "show_all": "Show OSM & Import",
+            "hide_import": "Hide Import Layer",
+            "hide_osm": "Hide OSM Layer",
+            "clear_geoservice": "Clear GeoService",
+            "select_layer": "select one layer",
+            "success": "You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap. You can filter the view to see only your imported data in the right sidebar.",
+            "no_data": "No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService.",
+            "copyright": {
+                "approved": "Copyright information (previously approved): ",
+                "previous": "No copyright information provided. (previously approved)",
+                "not_approved": "No copyright information provided."
+            },
+            "not_valid": "The url provided not recognized as a valid GeoService",
+            "plan": "The source license grants permission for inclusion in OpenStreetMap. I'm also providing a link to my import plan:",
+            "verboten": "This data source matches Google or another service which is copyrighted, and not importable on OpenStreetMap.",
+            "first_timer": "This is your first time importing from this GeoService. Please confirm that its license grants permission to be included in OpenStreetMap",
+            "no_preset": "Please use a preset or import at least one field from the GeoService",
+            "view_import": "View GeoService Import"
         },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",
@@ -852,8 +914,60 @@
                 "tracing": "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add.",
                 "upload": "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
             },
-            "geoservices": "# GeoServices\n\nThe GeoService tool allows you to fetch live JSON from [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data)and verify the accuracy of individual features before importing them into OpenStreetMap.\n\n### Import/Guidelines\n\nImports should be planned and executed with more care and sensitivity than other edits, because poor imports can have significant impacts on both existing data and local mapping community. If you'd like to import data in bulk you **must** heed OSM's [Import/Guidelines](http://wiki.openstreetmap.org/wiki/Import/Guidelines) and discuss the plan _in advance_.\n\n### License Approval\n\nJust because you find a public GeoService out in the wild does **not** mean you are allowed to import the data into OpenStreetMap!\n\nImporting is _only_ allowed if the organization has published it with a PD (Public Domain), CC0 (Creative Commons) or PDDL license or explicit permission has been granted for inclusion in OSM. You can find more information about ODbL license compatibility [here](http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility).\n\n### Sample GeoServices\n\n* [Madison, WI - bus lines](https://maps.cityofmadison.com/arcgis/rest/services/Public/OPEN_DATA_TRANS/MapServer/18)\n* [Norfolk, VA - addresses](http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/0')\n* [Hartford, CT - complex buildings / OSM relations](http://gis1.hartford.gov/arcgis/rest/services/OpenData_Community/MapServer/41)\n* [Stark County / Canton, OH - bike lanes](https://webdmz.starkcountyohio.gov/arcgis/rest/services/RPC/RideStarkOnRoadBikeLane/MapServer/0)\n\n### Editing Process\n\nIn the right menubar, select Map Data (as if you are importing a GPX layer)\n\nClick 'Add GeoService Layer'\n\nUse the iD editor's preset menu on the left to set a target import (for example, a building or address).\n\nPaste the GeoService URL into the text field (it is also possible to add a service to iD by including &geoservice=(escaped URL) in a link URL).\n\nYou'll be asked to confirm that the copyright information for the service grants permission for the data to be included in OpenStreetMap.\n\nSelect 'Load in View' (for large datasets) or 'Load Globally' to control what is fetched.\n\nThe GeoService importer now gives you the option to map the service's fields to OSM tags.\n\n* You can change the name of the tag in your GeoService\n* You can add new fields - for example, addresses in Norfolk, Virginia should have ```addr:city=Norfolk``` and ```addr:state=VA``` which are ignored as redundant in the city's data\n* Fields which you do not map are removed from the data before import\n\nAfter features have been fetched they need to be reviewed and approved individually prior to being included in an actual changeset.\n\n### I've heard of GeoJSON. What is a _GeoService_?\n\nThe [GeoServices](http://geoservices.github.io/index.html) REST specification was developed by Esri and transferred to the [Open Web Foundation](http://www.openwebfoundation.org/faqs/users-of-owf-agreements) in 2010. In iD, we are leveraging its predictable pattern for querying spatial data.\n\n```\n// which US County am I located in?\nhttps://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/15/query?\noutFields=*&\ngeometryType=esriGeometryPoint&\ngeometry=-77.069,38.897&\ninSR=4326&\nf=geojson\n```\n[live example](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/15/query?outFields=*&geometryType=esriGeometryPoint&geometry=-77.06930,38.89733&inSR=4326&f=geojson)\n\nBesides datasets published with Esri tools, the open source project [Koop](http://koopjs.github.io/) makes it possible to use this tool to fetch data from CKAN and Socrata data stores as well.\n"
+            "geoservices": {
+                "title": "Geoservices",
+                "intro": "The GeoService tool allows you to fetch live JSON from [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data)and verify the accuracy of individual features before importing them into OpenStreetMap.",
+                "import_guidelines": "Imports should be planned and executed with more care and sensitivity than other edits, because poor imports can have significant impacts on both existing data and local mapping community. If you'd like to import data in bulk you **must** heed OSM's [Import/Guidelines](http://wiki.openstreetmap.org/wiki/Import/Guidelines) and discuss the plan _in advance_.",
+                "license_approval": "Just because you find a public GeoService out in the wild does **not** mean you are allowed to import the data into OpenStreetMap! Importing is _only_ allowed if the organization has published it with a PD (Public Domain), CC0 (Creative Commons) or PDDL license or explicit permission has been granted for inclusion in OSM. You can find more information about ODbL license compatibility [here](http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility).",
+                "sample_geoservices": "[Madison, WI - bus lines](https://maps.cityofmadison.com/arcgis/rest/services/Public/OPEN_DATA_TRANS/MapServer/18), [Norfolk, VA - addresses](http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/0'), [Hartford, CT - complex buildings / OSM relations](http://gis1.hartford.gov/arcgis/rest/services/OpenData_Community/MapServer/41), [Stark County / Canton, OH - bike lanes](https://webdmz.starkcountyohio.gov/arcgis/rest/services/RPC/RideStarkOnRoadBikeLane/MapServer/0)",
+                "editing_process_1": "In the right menubar, select Map Data (as if you are importing a GPX layer)",
+                "editing_process_2": "Click 'Add GeoService Layer'",
+                "editing_process_3": "Use the iD editor's preset menu on the left to set a target import (for example, a building or address).",
+                "editing_process_4": "Paste the GeoService URL into the text field (it is also possible to add a service to iD by including &geoservice=(escaped URL) in a link URL).",
+                "editing_process_5": "You'll be asked to confirm that the copyright information for the service grants permission for the data to be included in OpenStreetMap.",
+                "editing_process_6": "Select 'Load in View' (for large datasets) or 'Load Globally' to control what is fetched.",
+                "editing_process_7": "The GeoService importer now gives you the option to map the service's fields to OSM tags. You can change the name of the tag in your GeoService. You can add new fields - for example, addresses in Norfolk, Virginia should have ```addr:city=Norfolk``` and ```addr:state=VA``` which are ignored as redundant in the city's data. Fields which you do not map are removed from the data before import. After features have been fetched they need to be reviewed and approved individually prior to being included in an actual changeset.",
+                "wat": "**I've heard of GeoJSON. What is a _GeoService_?** The [GeoServices](http://geoservices.github.io/index.html) REST specification was developed by Esri and transferred to the [Open Web Foundation](http://www.openwebfoundation.org/faqs/users-of-owf-agreements) in 2010. In iD, we are leveraging its predictable pattern for querying spatial data (ie: [which US County am I located in](      https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/15/query? outFields=*&geometryType=esriGeometryPoint&geometry=-77.069,38.897&inSR=4326&f=geojson)). Besides datasets published with Esri tools, the open source project [Koop](http://koopjs.github.io/) makes it possible to use this tool to fetch data from CKAN and Socrata data stores as well."
             },
+            "field": {
+                "restrictions": {
+                    "title": "Turn Restrictions Help",
+                    "about": {
+                        "title": "About",
+                        "about": "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads.",
+                        "from_via_to": "A turn restriction always contains: one **FROM way**, one **TO way**, and either one **VIA node** or one or more **VIA ways**.",
+                        "maxdist": "The \"{distField}\" slider controls how far to search for additional connected roads.",
+                        "maxvia": "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+                    },
+                    "inspecting": {
+                        "title": "Inspecting",
+                        "about": "Hover over any **FROM** segment to see whether it has any turn restrictions. Each possible **TO** destination will be drawn with a colored shadow showing whether a restriction exists.",
+                        "from_shadow": "{fromShadow} **FROM segment**",
+                        "allow_shadow": "{allowShadow} **TO Allowed**",
+                        "restrict_shadow": "{restrictShadow} **TO Restricted**",
+                        "only_shadow": "{onlyShadow} **TO Only**",
+                        "restricted": "\"Restricted\" means that there is a turn restriction, for example \"No Left Turn\".",
+                        "only": "\"Only\" means that a vehicle taking that path may only make that choice, for example \"Only Straight On\"."
+                    },
+                    "modifying": {
+                        "title": "Modifying",
+                        "about": "To modify turn restrictions, first click on any starting **FROM** segment to select it. The selected segment will pulse, and all possible **TO** destinations will appear as turn symbols.",
+                        "indicators": "Then, click on a turn symbol to toggle it between \"Allowed\", \"Restricted\", and \"Only\".",
+                        "allow_turn": "{allowTurn} **TO Allowed**",
+                        "restrict_turn": "{restrictTurn} **TO Restricted**",
+                        "only_turn": "{onlyTurn} **TO Only**"
+                    },
+                    "tips": {
+                        "title": "Tips",
+                        "simple": "**Prefer simple restrictions over complex ones.**",
+                        "simple_example": "For example, avoid creating a via-way restriction if a simpler via-node turn restriction will do.",
+                        "indirect": "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**",
+                        "indirect_example": "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection.",
+                        "indirect_noedit": "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
+                    }
+                }
+            }
+        },
         "intro": {
             "done": "done",
             "ok": "OK",
@@ -1221,6 +1335,28 @@
                     "measurement": "Toggle measurement panel"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1613,6 +1749,9 @@
                         }
                     }
                 },
+                "dance/style": {
+                    "label": "Dance Styles"
+                },
                 "date": {
                     "label": "Date"
                 },
@@ -1674,6 +1813,9 @@
                 "direction": {
                     "label": "Direction (Degrees Clockwise)",
                     "placeholder": "45, 90, 180, 270"
+                },
+                "dispensing": {
+                    "label": "Dispenses Prescriptions"
                 },
                 "display": {
                     "label": "Display"
@@ -1848,6 +1990,9 @@
                 "indoor": {
                     "label": "Indoor"
                 },
+                "industrial": {
+                    "label": "Type"
+                },
                 "information": {
                     "label": "Type"
                 },
@@ -1966,6 +2111,10 @@
                 },
                 "maxspeed": {
                     "label": "Speed Limit",
+                    "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "label": "Advisory Speed Limit",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2556,8 +2705,19 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
+                "usage_rail": {
+                    "label": "Usage Type",
+                    "options": {
+                        "main": "Main",
+                        "branch": "Branch",
+                        "industrial": "Industrial",
+                        "military": "Military",
+                        "test": "Test",
+                        "tourism": "Tourism"
+                    }
+                },
                 "vending": {
-                    "label": "Type of Goods"
+                    "label": "Types of Goods"
                 },
                 "visibility": {
                     "label": "Visibility",
@@ -2616,6 +2776,9 @@
                 },
                 "wheelchair": {
                     "label": "Wheelchair Access"
+                },
+                "wholesale": {
+                    "label": "Wholesale"
                 },
                 "width": {
                     "label": "Width (Meters)"
@@ -2768,6 +2931,10 @@
                 "aeroway/terminal": {
                     "name": "Airport Terminal",
                     "terms": "airport,aerodrome"
+                },
+                "allotments/plot": {
+                    "name": "Community Garden Plot",
+                    "terms": ""
                 },
                 "amenity/bus_station": {
                     "name": "Bus Station / Terminal",
@@ -3013,6 +3180,10 @@
                     "name": "Marketplace",
                     "terms": ""
                 },
+                "amenity/monastery": {
+                    "name": "Monastery Grounds",
+                    "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,monastery,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcycle Parking",
                     "terms": ""
@@ -3209,6 +3380,10 @@
                     "name": "Cigarette Vending Machine",
                     "terms": "cigarette"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Coffee Vending Machine",
+                    "terms": "coffee"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Condom Vending Machine",
                     "terms": "condom"
@@ -3217,6 +3392,14 @@
                     "name": "Drink Vending Machine",
                     "terms": "drink,soda,beverage,juice,pop"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Electronics Vending Machine",
+                    "terms": "cable,charger,earbud,headphone,phone,tablet"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Flat Coin Vending Machine",
+                    "terms": "coin,crush,elongated,flatten,penny,souvenir"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Excrement Bag Vending Machine",
                     "terms": "excrement bags,poop,dog,animal"
@@ -3224,6 +3407,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine",
                     "terms": "condom,tampon,pad,woman,women,menstrual hygiene products,personal care"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Food Vending Machine",
+                    "terms": "food"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Gas Pump",
+                    "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Ice Cream Vending Machine",
+                    "terms": "chocolate,ice cream,frozen,popsicle,vanilla"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",
@@ -3240,6 +3435,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Transit Ticket Vending Machine",
                     "terms": "bus,train,ferry,rail,ticket,transportation"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Postage Vending Machine",
+                    "terms": "mail,postage,stamp"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Snack Vending Machine",
@@ -3485,8 +3684,12 @@
                     "name": "Dormitory",
                     "terms": ""
                 },
-                "building/farm": {
+                "building/farm_auxiliary": {
                     "name": "Farm Building",
+                    "terms": ""
+                },
+                "building/farm": {
+                    "name": "Farm House",
                     "terms": ""
                 },
                 "building/garage": {
@@ -4049,6 +4252,10 @@
                     "name": "Motorway",
                     "terms": "autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike"
                 },
+                "highway/passing_place": {
+                    "name": "Passing Place",
+                    "terms": "turnout, pullout"
+                },
                 "highway/path": {
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
@@ -4195,7 +4402,7 @@
                 },
                 "historic/memorial": {
                     "name": "Memorial",
-                    "terms": ""
+                    "terms": "dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein"
                 },
                 "historic/monument": {
                     "name": "Monument",
@@ -4405,6 +4612,10 @@
                     "name": "Adult Gaming Center",
                     "terms": "gambling,slot machine"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Amusement Arcade",
+                    "terms": "pay-to-play games,video games,driving simulators,pinball machines"
+                },
                 "leisure/bird_hide": {
                     "name": "Bird Hide",
                     "terms": "machan,ornithology"
@@ -4420,6 +4631,10 @@
                 "leisure/dance": {
                     "name": "Dance Hall",
                     "terms": "ballroom,jive,swing,tango,waltz"
+                },
+                "leisure/dancing_school": {
+                    "name": "Dance School",
+                    "terms": "jive,swing,tango,waltz,dance teaching"
                 },
                 "leisure/dog_park": {
                     "name": "Dog Park",
@@ -4516,6 +4731,10 @@
                 "leisure/nature_reserve": {
                     "name": "Nature Reserve",
                     "terms": "protected,wildlife"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Outdoor Seating Area",
+                    "terms": "al fresco,beer garden,dining,cafe,restaurant,pub,bar,patio"
                 },
                 "leisure/park": {
                     "name": "Park",
@@ -4649,6 +4868,10 @@
                     "name": "Adit",
                     "terms": "entrance,underground,mine,cave"
                 },
+                "man_made/antenna": {
+                    "name": "Antenna",
+                    "terms": "broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv"
+                },
                 "man_made/breakwater": {
                     "name": "Breakwater",
                     "terms": ""
@@ -4696,6 +4919,10 @@
                 "man_made/observation": {
                     "name": "Observation Tower",
                     "terms": "lookout tower,fire tower"
+                },
+                "man_made/observatory": {
+                    "name": "Observatory",
+                    "terms": "astronomical,meteorological"
                 },
                 "man_made/petroleum_well": {
                     "name": "Oil Well",
@@ -4820,6 +5047,10 @@
                 "natural/heath": {
                     "name": "Heath",
                     "terms": ""
+                },
+                "natural/mud": {
+                    "name": "Mud",
+                    "terms": "wetland"
                 },
                 "natural/peak": {
                     "name": "Peak",
@@ -5502,7 +5733,7 @@
                     "terms": ""
                 },
                 "shop/agrarian": {
-                    "name": "Agriculture Shop",
+                    "name": "Farm Supply Shop",
                     "terms": "agricultural inputs,agricultural machines,seeds,pesticides,fertilizer,agricultural tools"
                 },
                 "shop/alcohol": {
@@ -5737,6 +5968,10 @@
                     "name": "Hardware Store",
                     "terms": ""
                 },
+                "shop/health_food": {
+                    "name": "Health Food Shop",
+                    "terms": "wholefood,vitamins,vegetarian,vegan"
+                },
                 "shop/hearing_aids": {
                     "name": "Hearing Aids Store",
                     "terms": ""
@@ -5852,6 +6087,10 @@
                 "shop/perfumery": {
                     "name": "Perfume Store",
                     "terms": ""
+                },
+                "shop/pet_grooming": {
+                    "name": "Pet Grooming Store",
+                    "terms": "dog"
                 },
                 "shop/pet": {
                     "name": "Pet Store",
@@ -5972,6 +6211,10 @@
                 "shop/weapons": {
                     "name": "Weapon Shop",
                     "terms": "ammo,gun,knife,knives"
+                },
+                "shop/wholesale": {
+                    "name": "Wholesale Store",
+                    "terms": "warehouse club,cash and carry"
                 },
                 "shop/window_blind": {
                     "name": "Window Blind Store",
@@ -6154,15 +6397,19 @@
                     "terms": ""
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Left Turn Only",
+                    "name": "Only Left Turn",
                     "terms": ""
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Right Turn Only",
+                    "name": "Only Right Turn",
                     "terms": ""
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "No Turns",
+                    "name": "Only Straight On",
+                    "terms": ""
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Only U-turn",
                     "terms": ""
                 },
                 "type/route_master": {

@@ -21,8 +21,7 @@ export function uiMapData(context) {
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
-    var _fillDefault = context.storage('area-fill') || 'partial';
-    var _fillSelected = _fillDefault !== 'wireframe' ? _fillDefault : 'partial';
+    var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
     var _fillList = d3_select(null);
@@ -51,7 +50,7 @@ export function uiMapData(context) {
                 }));
             };
         }
-        
+
         function showsFeature(d) {
             return context.features().enabled(d);
         }
@@ -85,7 +84,6 @@ export function uiMapData(context) {
             update();
         }
 
-
         function showsLayer(which) {
             var layer = layers.layer(which);
             if (layer) {
@@ -93,6 +91,14 @@ export function uiMapData(context) {
             }
             return false;
         }
+
+        _fillSelected = d;
+        context.storage('area-fill', d);
+        if (d !== 'wireframe') {
+            context.storage('area-fill-toggle', d);
+        }
+        update();
+    }
 
 
         function setLayer(which, enabled) {
@@ -1086,8 +1092,19 @@ export function uiMapData(context) {
 
             _featureList
                 .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
-            
+
         }
+
+        if (_fillSelected === 'wireframe') {
+            _fillSelected = context.storage('area-fill-toggle') || 'partial';
+        } else {
+            _fillSelected = 'wireframe';
+        }
+
+        setFill(_fillSelected);
+        context.map().pan([0,0]);  // trigger a redraw
+
+
 
         function toggleWireframe() {
             if (d3_event) {
@@ -1141,7 +1158,7 @@ export function uiMapData(context) {
 
         var pane = selection
             .append('div')
-            .attr('class', 'fillL map-overlay col3 content hide');
+            .attr('class', 'fillL map-pane col4 hide');
 
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -1156,13 +1173,26 @@ export function uiMapData(context) {
             .call(paneTooltip);
 
 
-        pane
+        var heading = pane
+            .append('div')
+            .attr('class', 'pane-heading');
+
+        heading
             .append('h2')
             .text(t('map_data.title'));
 
+        heading
+            .append('button')
+            .on('click', function() { uiMapData.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
+
+        var content = pane
+            .append('div')
+            .attr('class', 'pane-content');
 
         // data layers
-        pane
+        content
             .append('div')
             .attr('class', 'map-data-data-layers')
             .call(uiDisclosure(context, 'data_layers', true)
@@ -1171,7 +1201,7 @@ export function uiMapData(context) {
             );
 
         // area fills
-        pane
+        content
             .append('div')
             .attr('class', 'map-data-area-fills')
             .call(uiDisclosure(context, 'fill_area', false)
@@ -1180,7 +1210,7 @@ export function uiMapData(context) {
             );
 
         // feature filters
-        pane
+        content
             .append('div')
             .attr('class', 'map-data-feature-filters')
             .call(uiDisclosure(context, 'map_features', false)
@@ -1194,7 +1224,7 @@ export function uiMapData(context) {
             .on('change.map_data-update', update);
 
         update();
-        setFill(_fillDefault);
+        setFill(_fillSelected);
 
         var keybinding = d3_keybinding('features')
             .on(key, togglePane)
@@ -1206,9 +1236,7 @@ export function uiMapData(context) {
 
         uiMapData.hidePane = hidePane;
         uiMapData.togglePane = togglePane;
-        uiMapData.setVisible = setVisible;         
-            
-    }
+        uiMapData.setVisible = setVisible;
 
     return mapData;
 }

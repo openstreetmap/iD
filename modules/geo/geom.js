@@ -80,12 +80,57 @@ export function geoChooseEdge(nodes, point, projection, activeID) {
 }
 
 
-// check active (dragged or drawing) segments against inactive segments
+// Test active (dragged or drawing) segments against inactive segments
+// This is used to test e.g. multipolygon rings that cross
+// `activeNodes` is the ring containing the activeID being dragged.
+// `inactiveNodes` is the other ring to test against
+export function geoHasLineIntersections(activeNodes, inactiveNodes, activeID) {
+    var actives = [];
+    var inactives = [];
+    var j, k, n1, n2, segment;
+
+    // gather active segments (only segments in activeNodes that contain the activeID)
+    for (j = 0; j < activeNodes.length - 1; j++) {
+        n1 = activeNodes[j];
+        n2 = activeNodes[j+1];
+        segment = [n1.loc, n2.loc];
+        if (n1.id === activeID || n2.id === activeID) {
+            actives.push(segment);
+        }
+    }
+
+    // gather inactive segments
+    for (j = 0; j < inactiveNodes.length - 1; j++) {
+        n1 = inactiveNodes[j];
+        n2 = inactiveNodes[j+1];
+        segment = [n1.loc, n2.loc];
+        inactives.push(segment);
+    }
+
+    // test
+    for (j = 0; j < actives.length; j++) {
+        for (k = 0; k < inactives.length; k++) {
+            var p = actives[j];
+            var q = inactives[k];
+            var hit = geoLineIntersection(p, q);
+            if (hit) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+
+// Test active (dragged or drawing) segments against inactive segments
+// This is used to test whether a way intersects with itself.
 export function geoHasSelfIntersections(nodes, activeID) {
     var actives = [];
     var inactives = [];
     var j, k;
 
+    // group active and passive segments along the nodes
     for (j = 0; j < nodes.length - 1; j++) {
         var n1 = nodes[j];
         var n2 = nodes[j+1];
@@ -97,6 +142,7 @@ export function geoHasSelfIntersections(nodes, activeID) {
         }
     }
 
+    // test
     for (j = 0; j < actives.length; j++) {
         for (k = 0; k < inactives.length; k++) {
             var p = actives[j];

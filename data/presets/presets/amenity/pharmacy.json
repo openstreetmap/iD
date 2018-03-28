@@ -7,7 +7,8 @@
         "building_area",
         "drive_through",
         "opening_hours",
-        "payment_multi"
+        "payment_multi",
+        "dispensing"
     ],
     "geometry": [
         "point",

@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "address",
-        "levels"
+        "levels",
+        "height"
     ],
     "geometry": [
         "area"
@@ -12,5 +13,5 @@
         "building": "farm"
     },
     "matchScore": 0.5,
-    "name": "Farm Building"
+    "name": "Farm House"
 }

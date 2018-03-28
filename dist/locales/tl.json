@@ -258,12 +258,6 @@
                 "connected_to_hidden": "Hindi masibak dahil dahil may nakatagong feature na konektado dito."
             },
             "restriction": {
-                "help": {
-                    "select": "I-click upang pumili ng isang segment ng kalsada.",
-                    "toggle": "I-click upang i-toggle ang mga \"turn restrictions\".",
-                    "toggle_on": "I-click upang magdagdag ng \"{restriction}\" restriction.",
-                    "toggle_off": "I-click upang alisin ang \"{restriction}\" restriction."
-                },
                 "annotation": {
                     "create": "Idinagdag isang \"turn restriction\"",
                     "delete": "Tinanggal ang isang \"turn restriction\""

@@ -110,7 +110,10 @@ export function svgGpx(projection, context, dispatch) {
                 .attr('class', textClass)
                 .merge(labels)
                 .text(function(d) {
-                    return d.properties.desc || d.properties.name;
+                    if (d.properties) {
+                        return d.properties.desc || d.properties.name;
+                    }
+                    return null;
                 })
                 .attr('x', function(d) {
                     var centroid = getPath.centroid(d);

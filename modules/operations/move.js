@@ -1,16 +1,16 @@
 import _some from 'lodash-es/some';
 
 import { t } from '../util/locale';
-import { behaviorOperation } from '../behavior/index';
-import { geoExtent } from '../geo/index';
-import { modeMove } from '../modes/index';
+import { behaviorOperation } from '../behavior';
+import { geoExtent } from '../geo';
+import { modeMove } from '../modes';
 
 
 export function operationMove(selectedIDs, context) {
-    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
-        extent = selectedIDs.reduce(function(extent, id) {
-            return extent.extend(context.entity(id).extent(context.graph()));
-        }, geoExtent());
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+    var extent = selectedIDs.reduce(function(extent, id) {
+        return extent.extend(context.entity(id).extent(context.graph()));
+    }, geoExtent());
 
 
     var operation = function() {

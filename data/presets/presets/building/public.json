@@ -4,6 +4,7 @@
         "name",
         "address",
         "levels",
+        "height",
         "smoking"
     ],
     "geometry": [

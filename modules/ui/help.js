@@ -15,8 +15,7 @@ import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-
-import { icon } from 'intro/helper';
+import { icon } from './intro/helper';
 
 export function uiHelp(context) {
     var key = t('help.key');
@@ -384,20 +383,41 @@ export function uiHelp(context) {
 
 
         var pane = selection.append('div')
-            .attr('class', 'help-wrap map-overlay fillL col6 content hide');
+            .attr('class', 'help-wrap map-pane fillL col6 hide');
+
         var tooltipBehavior = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
             .html(true)
             .title(uiTooltipHtml(t('help.title'), key));
+
         var button = selection.append('button')
             .attr('tabindex', -1)
             .on('click', togglePane)
             .call(svgIcon('#icon-help', 'light'))
             .call(tooltipBehavior);
+
         var shown = false;
 
 
-        var toc = pane
+        var heading = pane
+            .append('div')
+            .attr('class', 'pane-heading');
+
+        var doctitle = heading
+            .append('h2')
+            .text(t('help.title'));
+
+        heading
+            .append('button')
+            .on('click', function() { uiHelp.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
+
+        var content = pane
+            .append('div')
+            .attr('class', 'pane-content');
+
+        var toc = content
             .append('ul')
             .attr('class', 'toc');
 
@@ -441,19 +461,15 @@ export function uiHelp(context) {
             .text(t('splash.walkthrough'));
 
 
-        var content = pane
+        var helpContent = content
             .append('div')
             .attr('class', 'left-content');
 
-        var doctitle = content
-            .append('h2')
-            .text(t('help.title'));
-
-        var body = content
+        var body = helpContent
             .append('div')
             .attr('class', 'body');
 
-        var nav = content
+        var nav = helpContent
             .append('div')
             .attr('class', 'nav');
 

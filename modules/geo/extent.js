@@ -7,8 +7,9 @@ import {
 
 
 export function geoExtent(min, max) {
-    if (!(this instanceof geoExtent)) return new geoExtent(min, max);
-    if (min instanceof geoExtent) {
+    if (!(this instanceof geoExtent)) {
+        return new geoExtent(min, max);
+    } else if (min instanceof geoExtent) {
         return min;
     } else if (min && min.length === 2 && min[0].length === 2 && min[1].length === 2) {
         this[0] = min[0];
@@ -19,6 +20,7 @@ export function geoExtent(min, max) {
     }
 }
 
+// $FlowFixMe
 geoExtent.prototype = new Array(2);
 
 _extend(geoExtent.prototype, {
@@ -54,8 +56,7 @@ _extend(geoExtent.prototype, {
 
 
     center: function() {
-        return [(this[0][0] + this[1][0]) / 2,
-                (this[0][1] + this[1][1]) / 2];
+        return [(this[0][0] + this[1][0]) / 2, (this[0][1] + this[1][1]) / 2];
     },
 
 
@@ -109,8 +110,8 @@ _extend(geoExtent.prototype, {
 
     percentContainedIn: function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
-        var a1 = this.intersection(obj).area(),
-            a2 = this.area();
+        var a1 = this.intersection(obj).area();
+        var a2 = this.area();
 
         if (a1 === Infinity || a2 === Infinity || a1 === 0 || a2 === 0) {
             return 0;
@@ -121,8 +122,8 @@ _extend(geoExtent.prototype, {
 
 
     padByMeters: function(meters) {
-        var dLat = geoMetersToLat(meters),
-            dLon = geoMetersToLon(meters, this.center()[1]);
+        var dLat = geoMetersToLat(meters);
+        var dLon = geoMetersToLon(meters, this.center()[1]);
         return geoExtent(
             [this[0][0] - dLon, this[0][1] - dLat],
             [this[1][0] + dLon, this[1][1] + dLat]

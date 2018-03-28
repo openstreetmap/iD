@@ -33,13 +33,13 @@ export function uiFieldMaxspeed(field, context) {
             .container(context.container())
             .data(['km/h', 'mph'].map(comboValues));
 
-        input = selection.selectAll('#preset-input-' + field.id)
+        input = selection.selectAll('#preset-input-' + field.safeid)
             .data([0]);
 
         input = input.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.safeid)
             .attr('placeholder', field.placeholder())
             .call(utilNoAuto)
             .call(combobox)

@@ -7,11 +7,13 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
+import { dmsCoordinatePair } from '../util/units';
+import { coreGraph } from '../core';
 import { geoExtent, geoChooseEdge } from '../geo';
 import { modeSelect } from '../modes';
 import { osmEntity } from '../osm';
-import { svgIcon } from '../svg';
 import { services } from '../services';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 
 import {
@@ -23,7 +25,7 @@ import {
 
 
 export function uiFeatureList(context) {
-    var keybinding = d3_keybinding('feature-list');
+    var keybinding = d3_keybinding('uiFeatureList');
     var _geocodeResults;
 
 
@@ -117,10 +119,10 @@ export function uiFeatureList(context) {
 
 
         function features() {
-            var entities = {},
-                result = [],
-                graph = context.graph(),
-                q = search.property('value').toLowerCase();
+            var entities = {};
+            var result = [];
+            var graph = context.graph();
+            var q = search.property('value').toLowerCase();
 
             if (!q) return result;
 
@@ -143,7 +145,7 @@ export function uiFeatureList(context) {
                     id: -1,
                     geometry: 'point',
                     type: t('inspector.location'),
-                    name: loc[0].toFixed(6) + ', ' + loc[1].toFixed(6),
+                    name: dmsCoordinatePair([loc[1], loc[0]]),
                     location: loc
                 });
             }
@@ -156,8 +158,9 @@ export function uiFeatureList(context) {
 
                 var name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) >= 0) {
-                    var matched = context.presets().match(entity, graph),
-                        type = (matched && matched.name()) || utilDisplayType(entity.id);
+                    var matched = context.presets().match(entity, graph);
+                    var type = (matched && matched.name()) || utilDisplayType(entity.id);
+
                     result.push({
                         id: entity.id,
                         entity: entity,
@@ -180,13 +183,28 @@ export function uiFeatureList(context) {
             }
 
             (_geocodeResults || []).forEach(function(d) {
-                // https://github.com/openstreetmap/iD/issues/1890
-                if (d.osm_type && d.osm_id) {
+                if (d.osm_type && d.osm_id) {    // some results may be missing these - #1890
+
+                    // Make a temporary osmEntity so we can preset match
+                    // and better localize the search result - #4725
+                    var id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
+                    var tags = {};
+                    tags[d.class] = d.type;
+
+                    var attrs = { id: id, type: d.osm_type, tags: tags };
+                    if (d.osm_type === 'way') {   // for ways, add some fake closed nodes
+                        attrs.nodes = ['a','a'];  // so that geometry area is possible
+                    }
+
+                    var tempEntity = osmEntity(attrs);
+                    var tempGraph = coreGraph([tempEntity]);
+                    var matched = context.presets().match(tempEntity, tempGraph);
+                    var type = (matched && matched.name()) || utilDisplayType(id);
+
                     result.push({
-                        id: osmEntity.id.fromOSM(d.osm_type, d.osm_id),
-                        geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
-                        type: d.type !== 'yes' ? (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' ')
-                                               : (d.class.charAt(0).toUpperCase() + d.class.slice(1)).replace('_', ' '),
+                        id: tempEntity.id,
+                        geometry: tempEntity.geometry(tempGraph),
+                        type: type,
                         name: d.display_name,
                         extent: new geoExtent(
                             [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
@@ -200,8 +218,8 @@ export function uiFeatureList(context) {
 
 
         function drawList() {
-            var value = search.property('value'),
-                results = features();
+            var value = search.property('value');
+            var results = features();
 
             list.classed('filtered', value.length);
 
@@ -310,8 +328,8 @@ export function uiFeatureList(context) {
                 if (d.entity.type === 'node') {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
-                    var center = context.projection(context.map().center()),
-                        edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
+                    var center = context.projection(context.map().center());
+                    var edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
                 context.enter(modeSelect(context, [d.entity.id]));

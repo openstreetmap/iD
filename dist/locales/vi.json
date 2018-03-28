@@ -285,16 +285,46 @@
                 "connected_to_hidden": "Không thể chia cắt đối tượng này vì nó nối liền với một đối tượng ẩn."
             },
             "restriction": {
-                "help": {
-                    "select": "Nhấn chuột để chọn một khúc đường.",
-                    "toggle": "Nhấn chuột để thêm hoặc bỏ hạn chế rẽ.",
-                    "toggle_on": "Nhấn chuột để thêm hạn chế “{restriction}”.",
-                    "toggle_off": "Bấm để bỏ hạn chế “{restriction}”."
-                },
                 "annotation": {
                     "create": "thêm hạn chế rẽ",
                     "delete": "bỏ hạn chế rẽ"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Tầm xa",
+                "distance_up_to": "Cho tới {distance}",
+                "via": "Theo",
+                "via_node_only": "Chỉ nốt",
+                "via_up_to_one": "Cho tới 1 lối",
+                "via_up_to_two": "Cho tới 2 lối"
+            },
+            "help": {
+                "indirect": "(gián tiếp)",
+                "turn": {
+                    "no_left_turn": "CẤM Rẽ Trái {indirect}",
+                    "no_right_turn": "CẤM Rẽ Phải {indirect}",
+                    "no_u_turn": "CẤM Quay ngược {indirect}",
+                    "no_straight_on": "CẤM Chạy thẳng {indirect}",
+                    "only_left_turn": "CHỈ Rẽ Trái {indirect}",
+                    "only_right_turn": "CHỈ Rẽ Phải {indirect}",
+                    "only_u_turn": "CHỈ Quay ngược {indirect}",
+                    "only_straight_on": "CHỈ Chạy thẳng {indirect}",
+                    "allowed_left_turn": "Cho phép Rẽ Trái {indirect}",
+                    "allowed_right_turn": "Cho phép Rẽ Phải {indirect}",
+                    "allowed_u_turn": "Cho phép Quay ngược {indirect}",
+                    "allowed_straight_on": "Cho phép Chạy thẳng {indirect}"
+                },
+                "from": "TỪ",
+                "via": "THEO",
+                "to": "ĐẾN",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Nhấn chuột để chọn khúc đường {from}",
+                "select_from_name": "Nhấn chuột để chọn {from} {fromName}",
+                "toggle": "Nhấn chuột cho “{turn}”"
             }
         },
         "undo": {
@@ -389,7 +419,8 @@
                 "title": "Đo lường",
                 "selected": "{n} được chọn",
                 "geometry": "Hình",
-                "closed": "đóng",
+                "closed_line": "đường kẻ đóng",
+                "closed_area": "vùng đóng",
                 "center": "Tâm",
                 "perimeter": "Chu vi",
                 "length": "Chiều dài",
@@ -470,7 +501,7 @@
             "switch": "Quay về hình nền này",
             "custom": "Tùy biến",
             "custom_button": "Sửa hình nền tùy biến",
-            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   - {zoom}/{z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   - {ty} cho tọa độ Y kiểu TMS phản chiếu\n   - {u} cho định dạng quadtile\n   - {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
+            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   - {zoom} hoặc {z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   - {-y} hoặc {ty} cho tọa độ Y kiểu TMS phản chiếu\n   - {u} cho định dạng quadtile\n   - {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
             "overlays": "Lớp phủ",
             "imagery_source_faq": "Chi tiết Hình ảnh / Báo cáo Vấn đề",
             "reset": "đặt lại",
@@ -654,7 +685,7 @@
             "untagged_area_tooltip": "Chọn loại vùng.",
             "untagged_relation": "Quan hệ không có thẻ",
             "untagged_relation_tooltip": "Chọn loại quan hệ.",
-            "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
+            "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng, tính cả {p} nốt, {l} đường kẻ, {a} vùng, và {r} quan hệ? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
             "tag_suggests_area": "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
             "deprecated_tags": "Không khuyến khích sử dụng các thẻ: {tags}"
         },
@@ -851,6 +882,44 @@
                 "using": "Để sử dụng một tuyến GPS trong việc vẽ bản đồ, kéo thả tập tin GPS vào chương trình vẽ bản đồ này. Nếu chương trình nhận ra tuyến đường, tuyến đường sẽ được tô màu hồng sẫm trên bản đồ. Bấm nút {data} **Dữ liệu Bản đồ** ở bên phải của bản đồ để bật, tắt, hoặc thu phóng vừa dữ liệu GPS do bạn thu thập.",
                 "tracing": "Tuyến đường GPX không được tải trực tiếp lên OpenStreetMap. Cách tốt nhất để sử dụng nó là vạch đường mới theo nó trên bản đồ.",
                 "upload": "Bạn cũng có thể [tải dữ liệu GPS của bạn lên OpenStreetMap](https://www.openstreetmap.org/trace/create) để cho người khác sử dụng."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Trợ giúp về Hạn chế Rẽ",
+                    "about": {
+                        "title": "Giới thiệu",
+                        "about": "Hộp này cho phép kiểm tra và thay đổi các hạn chế rẽ. Nó hiển thị mô hình của giao lộ được chọn, bao gồm các đường sá nối liền.",
+                        "from_via_to": "Một hạn chế rẽ luôn có: một **lối TỪ**, một **lối ĐẾN**; và một **nốt THEO** hoặc một **lối THEO** trở lên.",
+                        "maxdist": "Con trượt “{distField}” điều khiển tầm xa tìm kiếm các đường sá nối liền.",
+                        "maxvia": "Con trượt “{viaField}” điều khiển số lối theo được bao gồm khi tìm đường sá. (Mẹo vặt: càng đơn giản càng tốt.)"
+                    },
+                    "inspecting": {
+                        "title": "Kiểm tra",
+                        "about": "Rê chuột lên khúc **TỪ** nào đó để xem nó có hạn chế rẽ hay không. Mỗi khúc có thể đi **ĐẾN** sẽ được tô màu cho biết nó có hạn chế rẽ hay không.",
+                        "from_shadow": "{fromShadow} **TỪ khúc**",
+                        "allow_shadow": "{allowShadow} **Cho phép ĐẾN**",
+                        "restrict_shadow": "{restrictShadow} **Cấm ĐẾN**",
+                        "only_shadow": "{onlyShadow} **Chỉ ĐẾN**",
+                        "restricted": "“Cấm” có nghĩa hạn chế rẽ, ví dụ “Cấm Rẽ Trái”.",
+                        "only": "“Chỉ” có nghĩa rằng một xe đi đường này chỉ được phép tiếp tục theo lối đó, ví dụ “Chỉ Chạy thẳng”."
+                    },
+                    "modifying": {
+                        "title": "Thay đổi",
+                        "about": "Để thay đổi hạn chế rẽ, nhấn chuột vào một khúc **TỪ** ban đầu để chọn nó. Khúc được chọn sẽ chớp chớp, và tất cả các nơi có thể đi **ĐẾN** sẽ xuất hiện hình rẽ.",
+                        "indicators": "Sau đó, nhấn chuột vào hình rẽ để luân chuyển giữa “Cho phép”, “Cấm”, và “Chỉ”.",
+                        "allow_turn": "{allowTurn} **Cho phép ĐẾN**",
+                        "restrict_turn": "{restrictTurn} **Cấm ĐẾN**",
+                        "only_turn": "{onlyTurn} **Chỉ ĐẾN**"
+                    },
+                    "tips": {
+                        "title": "Mẹo vặt",
+                        "simple": "**Nên tạo hạn chế càng đơn giản càng tốt.**",
+                        "simple_example": "Ví dụ đừng nên tạo hạn chế có lối theo nếu nốt theo đã được.",
+                        "indirect": "**Một số hạn chế có vẻ mờ nhạt và đề chữ “(gián tiếp)”.**",
+                        "indirect_example": "Các hạn chế này tồn tại vì một hạn chế lân cận. Chẳng hạn một hạn chế “Chỉ Chạy thẳng” sẽ gây các hạn chế “Cấm Rẽ” gián tiếp đối với các lối khác đi ngang giao lộ.",
+                        "indirect_noedit": "Bạn không thể sửa đổi các hạn chế gián tiếp. Thay thế, sửa đổi hạn chế trực tiếp lân cận."
+                    }
+                }
             }
         },
         "intro": {
@@ -871,10 +940,95 @@
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "vn",
                 "name": {
+                    "1st-avenue": "Ngõ 1",
+                    "2nd-avenue": "Ngõ 2",
+                    "4th-avenue": "Ngõ 4",
+                    "5th-avenue": "Ngõ 5",
+                    "6th-avenue": "Ngõ 6",
+                    "6th-street": "Ngũ Đại Hồ",
+                    "7th-avenue": "Ngõ 7",
+                    "8th-avenue": "Ngõ 8",
+                    "9th-avenue": "Ngõ 9",
+                    "10th-avenue": "Ngõ 10",
+                    "11th-avenue": "Ngõ 11",
+                    "12th-avenue": "Ngõ 12",
+                    "access-point-employment": "Văn phòng Giới thiệu Việc làm Tương lai",
+                    "adams-street": "Đệ Nhị",
                     "andrews-elementary-school": "Trường Tiểu học Trần Hưng Đạo",
+                    "andrews-street": "Trần Hưng Đạo",
+                    "armitage-street": "Mỹ Hòa",
+                    "barrows-school": "Trường Hoa Thịnh Đốn",
+                    "battle-street": "Thắng Lợi",
+                    "bennett-street": "Tam Giác",
+                    "bowman-park": "Công viên Cộng đồng",
+                    "collins-drive": "Kiến Thức",
                     "conrail-railroad": "Bắc Bình – Nam Hòa",
+                    "conservation-park": "Công viên Bảo tồn",
+                    "constantine-street": "Ngọc Lân",
+                    "cushman-street": "Cận Đông",
+                    "dollar-tree": "Tiết kiệm",
+                    "douglas-avenue": "Cựu Kim Sơn",
+                    "east-street": "Đông Phương",
+                    "elm-street": "Đu Đủ",
+                    "flower-street": "Bông Hoa",
+                    "foster-street": "Hậu Trường",
+                    "french-street": "Đọc Lập",
+                    "garden-street": "Vườn Hoa",
+                    "gem-pawnbroker": "Vân Vân",
+                    "golden-finch-framing": "Khung tranh Phượng hoàng",
+                    "grant-avenue": "Phú Quốc",
+                    "hoffman-pond": "Hồ Cạn",
+                    "hoffman-street": "Liên Giang",
+                    "hook-avenue": "Liên Hệ",
+                    "jefferson-street": "Tự Do",
+                    "kelsey-street": "Tây Nguyên",
+                    "lafayette-park": "Công viên Tưởng niệm",
+                    "las-coffee-cafe": "Cà phê Mỹ Châu",
+                    "lincoln-avenue": "Hòa Bình",
+                    "lowrys-books": "Văn Chương",
+                    "lynns-garage": "Tiệm sửa xe ABC",
+                    "main-street-barbell": "Cử tạ Tam Giang",
+                    "main-street-cafe": "Cà phê Ngon lành",
+                    "main-street-fitness": "Thể dục Tam Giang",
+                    "main-street": "Thương mại",
+                    "maple-street": "Thích Hợp",
+                    "marina-park": "Công viên Bến Thông Hải",
+                    "market-street": "Chợ",
+                    "memory-isle-park": "Công viên Ngọc Lâm",
+                    "memory-isle": "Đảo Ngọc Lâm",
+                    "michigan-avenue": "Yên Phong",
+                    "middle-street": "Trung Lập",
+                    "millard-street": "Cửa Sông",
+                    "moore-street": "Đoàn Kết",
+                    "morris-avenue": "Tân Anh",
+                    "mural-mall": "Đường dạo Tranh tường",
+                    "paisanos-bar-and-grill": "Bánh cuốn Tây Hồ",
+                    "paisley-emporium": "Tái Hồi",
+                    "paparazzi-tattoo": "Xăm Xăm",
+                    "pealer-street": "Mạc Tư Khoa",
+                    "pine-street": "Cây Thông",
+                    "pizza-hut": "Phở Tàu Bay",
+                    "portage-avenue": "Hương Giang",
+                    "portage-river": "Sông Hương",
+                    "preferred-insurance-services": "Bảo hiểm Nguyễn Văn Lưu",
+                    "railroad-drive": "Xe Lửa",
+                    "river-city-appliance": "Đồ Gia dụng Tam Giang",
+                    "river-drive": "Ngọc Ngà",
+                    "river-road": "Thủy Triều",
+                    "river-street": "Bến Tàu",
+                    "riverside-cemetery": "Nghĩa địa Ven sông",
+                    "riverwalk-trail": "Đường mòn Dọc sông",
+                    "riviera-theatre": "Rạp phim Tam Giang",
                     "rocky-river": "Sông Đá",
+                    "saint-joseph-river": "Sông Thông Hải",
+                    "scidmore-park-petting-zoo": "Vườn thú Tam Giang",
+                    "scidmore-park": "Công viên Tam Giang",
+                    "scouter-park": "Công viên Ngọc Ngà",
+                    "sherwin-williams": "Màu sắc",
+                    "south-street": "Nam Phương",
                     "southern-michigan-bank": "Ngân hàng Bắc Ninh",
+                    "spring-street": "Xuân Lộc",
+                    "sturgeon-river-road": "Tứ Giang",
                     "three-rivers-city-hall": "Tòa thị chính Tam Giang",
                     "three-rivers-elementary-school": "Trường Tiểu học Tam Giang",
                     "three-rivers-fire-department": "Đoàn Cứu hỏa Tam Giang",
@@ -883,7 +1037,17 @@
                     "three-rivers-municipal-airport": "Sân bay Tam Giang",
                     "three-rivers-post-office": "Bưu điện Tam Giang",
                     "three-rivers-public-library": "Thư viện Tam Giang",
-                    "three-rivers": "Tam Giang"
+                    "three-rivers": "Tam Giang",
+                    "unique-jewelry": "Kim Châu",
+                    "walnut-street": "Hạch Đào",
+                    "washington-street": "Hoa Thịnh Đốn",
+                    "water-street": "Trường Sa",
+                    "west-street": "Tây Phương",
+                    "wheeler-street": "Cần Cù",
+                    "william-towing": "Dũng Kéo Xe",
+                    "willow-drive": "Cây Liễu",
+                    "wood-street": "Hai Bà Trưng",
+                    "world-fare": "Bốn Phương"
                 }
             },
             "welcome": {
@@ -1125,6 +1289,28 @@
                     "measurement": "Bật/tắt bảng đo lường"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} foot",
+            "miles": "{quantity} dặm",
+            "square_feet": "{quantity} foot vuông",
+            "square_miles": "{quantity} dặm vuông",
+            "acres": "{quantity} mẫu Anh",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "B",
+            "south": "N",
+            "east": "Đ",
+            "west": "T",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1517,6 +1703,9 @@
                         "cycleway:right": "Bên phải"
                     }
                 },
+                "dance/style": {
+                    "label": "Thể loại Khiêu vũ"
+                },
                 "date": {
                     "label": "Ngày tháng"
                 },
@@ -1578,6 +1767,9 @@
                         "both": "2 Chiều / Mọi Hướng",
                         "forward": "Tiến"
                     }
+                },
+                "dispensing": {
+                    "label": "Phát Thuốc"
                 },
                 "display": {
                     "label": "Kiểu Hiển thị"
@@ -2521,6 +2713,9 @@
                 "wheelchair": {
                     "label": "Đi Xe lăn Được"
                 },
+                "wholesale": {
+                    "label": "Bán buôn"
+                },
                 "width": {
                     "label": "Chiều ngang (Mét)"
                 },
@@ -3007,6 +3202,10 @@
                     "name": "Tắm đứng",
                     "terms": "phòng tắm đứng, buồng tắm đứng, khay tắm đứng, cabin tắm, phong tam dung, buong tam dung, khay tam dung, cabin tam"
                 },
+                "amenity/smoking_area": {
+                    "name": "Khu vực Hút thuốc",
+                    "terms": "khu vực hút thuốc, khu vực hút thuốc lá, phòng hút thuốc, phòng hút thuốc lá, khu vuc hut thuoc, khu vuc hut thuoc la, phong hut thuoc, phong hut thuoc la"
+                },
                 "amenity/social_facility": {
                     "name": "Dịch vụ Xã hội",
                     "terms": "dịch vụ xã hội, người vô gia cư, người khuyết tật, trẻ em, trung tâm điều trị nghiện ma túy, trung tâm điều trị nghiện rượu, dich vu xa hoi, nguoi vo gia cu, nguoi khuyet tat, tre em, trung tam dieu tri nghien ma tuy, trung tam dieu tri nghien ruou"
@@ -3240,6 +3439,10 @@
                     "name": "Hàng rào Cây",
                     "terms": "hàng rào cây, hàng cây, hang rao cay, hang cay"
                 },
+                "barrier/kerb": {
+                    "name": "Bờ đường",
+                    "terms": "bờ đường, bờ đường nâng cao, lề đường, bo duong, bo duong nang cao, le duong"
+                },
                 "barrier/kissing_gate": {
                     "name": "Cửa Hàng rào Chắn Trâu bò",
                     "terms": "cửa hàng rào chắn trâu bò, cua hang rao chan trau bo"
@@ -3337,6 +3540,10 @@
                 "building/farm": {
                     "name": "Nhà ở Nông trại",
                     "terms": "nhà ở nông trại, căn nhà nông trại, nha o nong trai, can nha nong trai"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Tòa nhà Nông trại",
+                    "terms": "tòa nhà nông trại, toà nhà nông trại, toa nha nong trai"
                 },
                 "building/garage": {
                     "name": "Ga ra",
@@ -3691,6 +3898,10 @@
                 "emergency/private": {
                     "name": "Chỉ Dịch vụ Khẩn cấp được Chủ Cho phép"
                 },
+                "emergency/water_tank": {
+                    "name": "Bể nước Cứu hỏa",
+                    "terms": "bể nước cứu hỏa, thùng nước cứu hỏa, bể nước cứu hoả, thùng nước cứu hoả, bể nước chữa cháy, thùng nước chữa cháy, be nuoc cuu hoa, thung nuoc cuu hoa, be nuoc chua chay, thung nuoc chua chay"
+                },
                 "emergency/yes": {
                     "name": "Dành cho Dịch vụ Khẩn cấp"
                 },
@@ -3828,6 +4039,10 @@
                 "highway/bridleway": {
                     "name": "Đường mòn Ngựa",
                     "terms": "đường mòn ngựa, đường cưỡi ngựa, đường đi ngựa, duong mon ngua, duong cuoi ngua, duong di ngua"
+                },
+                "highway/bus_guideway": {
+                    "name": "Đường dẫn Xe buýt",
+                    "terms": "đường dẫn xe buýt, duong dan xe buyt"
                 },
                 "highway/bus_stop": {
                     "name": "Trạm/Bến Xe buýt"
@@ -4243,6 +4458,10 @@
                     "name": "Trung tâm Đánh bạc",
                     "terms": "trung tâm đánh bạc, máy đánh bạc, trung tam danh bac, may danh bac"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Khu Trò chơi Điện tử",
+                    "terms": "khu trò chơi điện tử, trung tâm trò chơi điện tử, trò chơi cảm giác mạnh, trò chơi video, trò chơi bắn bóng, pinball, trò chơi lái xe ảo, khu tro choi dien tu, trung tam tro choi dien tu, tro choi cam giac manh, tro choi video, tro choi ban bong, tro choi lai xe ao"
+                },
                 "leisure/bird_hide": {
                     "name": "Căn nhà Quan sát Chim",
                     "terms": "căn nhà quan sát chim, căn nhà quan sát động vật, can nha quan sat chim, can nha quan sat dong vat"
@@ -4258,6 +4477,10 @@
                 "leisure/dance": {
                     "name": "Phòng Khiêu vũ",
                     "terms": "phòng khiêu vũ, phòng nhảy, phong khieu vu, phong nhay"
+                },
+                "leisure/dancing_school": {
+                    "name": "Trường Múa/Khiêu vũ",
+                    "terms": "trường múa, trường khiêu vũ, ba lê, ba-lê, balê, tango, tăng-gô, tăng gô, waltz, van-xơ, van xơ, vanxơ, truong mua, truong kheu vu, ba le, ba-le, bale, tang-go, tang go, van-xo, van xo, vanxo"
                 },
                 "leisure/dog_park": {
                     "name": "Công viên dành cho Chó",
@@ -5329,8 +5552,8 @@
                     "terms": "cửa hàng, tiệm, cửa hiệu, cửa buôn bán, nhà bán hàng, nhà buôn bán, nơi bán hàng, cua hang, tiem, cua hieu, cua buon ban, nha ban hang, nha buon ban, noi ban hang"
                 },
                 "shop/agrarian": {
-                    "name": "Tiệm Nông thôn",
-                    "terms": "tiệm nông nghiệp, cửa hàng nông nghiệp, quán nông nghiệp, hạt, thuốc trừ dịch hại, dụng cụ nông nghiệp, tiem nong nghiep, cua hang nong nghiep, quan nong nghiep, hat, thuoc tru dich hai, dung cu nong nghiep"
+                    "name": "Tiệm Nông nghiệp",
+                    "terms": "tiệm nông nghiệp, cửa hàng nông nghiệp, hạt, thuốc trừ dịch hại, dụng cụ nông nghiệp, tiem nong nghiep, cua hang nong nghiep, hat, thuoc tru dich hai, dung cu nong nghiep"
                 },
                 "shop/alcohol": {
                     "name": "Tiệm Rượu",
@@ -5570,6 +5793,10 @@
                     "name": "Tiệm Ngũ kim",
                     "terms": "khu vực bán đồ ngũ kim, chỗ bán đồ ngũ kim, tiệm bán đồ ngũ kim, nơi bán đồ ngũ kim, cửa hàng bán đồ ngũ kim, cửa hiệu bán đồ ngũ kim, quầy bán đồ ngũ kim, nơi đồ ngũ kim, cửa tiệm đồ ngũ kim, đồ xây dựng, vít, đinh, ốc, sơn, đèn, pin, khu vuc ban do ngu kim, cho ban do ngu kim, tiem ban do ngu kim, noi ban do ngu kim, cua hang ban do ngu kim, cua hieu ban do ngu kim, quay ban do ngu kim, noi do ngu kim, cua tiem do ngu kim, do xay dung, vit, dinh, oc, son, den"
                 },
+                "shop/health_food": {
+                    "name": "Tiệm Thực phẩm Tự nhiên",
+                    "terms": "tiệm thực phẩm tự nhiên, cửa hàng thực phẩm tự nhiên, tiệm thực phẩm bổ dưỡng, cửa hàng thực phẩm bổ dưỡng, tiem thuc pham tu nhien, cua hang thuc pham tu nhien, tiem thuc pham bo duong, cua hang thuc pham bo duong"
+                },
                 "shop/hearing_aids": {
                     "name": "Tiệm Ống nghe",
                     "terms": "tiệm ống nghe, cửa hàng ống nghe, cửa hiệu ống nghe, điếc tai, tiem ong nghe, cua hang ong nghe, cua hieu ong nghe, diec tai"
@@ -5808,6 +6035,10 @@
                 "shop/weapons": {
                     "name": "Tiệm Súng",
                     "terms": "tiệm súng, cửa hàng súng, cửa hiệu súng, quán súng, tiem sung, cua hang sung, cua hieu sung, quan sung"
+                },
+                "shop/wholesale": {
+                    "name": "Tiệm Bán buôn",
+                    "terms": "tiệm bán buôn, cửa hàng bán buôn, tiệm bán sỉ, cửa hàng bán sỉ, tiem ban buon, cua hang ban buon, tiem ban si, cua hang ban si"
                 },
                 "shop/window_blind": {
                     "name": "Tiệm Mành",
@@ -6185,6 +6416,13 @@
                 "description": "Hình ảnh thế giới Esri.",
                 "name": "Hình ảnh Thế giới Esri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Hình ảnh lưu trữ Esri có thể rõ hơn và chính xác hơn lớp mặc định.",
+                "name": "Hình ảnh Thế giới Esri (Clarity) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© những người đóng góp vào OpenStreetMap, CC BY-SA"
@@ -6253,18 +6491,33 @@
                 "name": "Đường sá TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Xe đạp"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Đường Đi bộ Dài"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Xe đạp Leo núi"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Trượt băng"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, những người đóng góp vào OpenStreetMap, CC BY-SA 3.0"
+                },
                 "name": "Waymarked Trails: Thể thao Mùa đông"
             },
             "basemap.at": {

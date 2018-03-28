@@ -285,16 +285,46 @@
                 "connected_to_hidden": "Ĉi tiu ne povas esti dividita, ĉar ĝi estas kunigita al kaŝita objekto."
             },
             "restriction": {
-                "help": {
-                    "select": "Klaku por elekti segmenton de vojo.",
-                    "toggle": "Klaku por baskuligi turnaj limigojn.",
-                    "toggle_on": "Klaku por aldoni limigon \"{restriction}\".",
-                    "toggle_off": "Klaku por forigi limigon \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Aldonis turnan limigon.",
                     "delete": "Forigis turnan limigon."
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distanco",
+                "distance_up_to": "Maksimume {distance}",
+                "via": "Tra",
+                "via_node_only": "Nur nodo",
+                "via_up_to_one": "Maks. 1 vojo",
+                "via_up_to_two": "Maks 2 vojoj"
+            },
+            "help": {
+                "indirect": "(pera limigo)",
+                "turn": {
+                    "no_left_turn": "SEN turno maldekstren {indirect}",
+                    "no_right_turn": "SEN turno dekstren {indirect}",
+                    "no_u_turn": "SEN turno malantaŭen {indirect}",
+                    "no_straight_on": "SEN veturo rekten {indirect}",
+                    "only_left_turn": "NUR turno maldekstren {indirect}",
+                    "only_right_turn": "NUR turno dekstren {indirect}",
+                    "only_u_turn": "NUR turno malantaŭen {indirect}",
+                    "only_straight_on": "NUR veturo rekten {indirect}",
+                    "allowed_left_turn": "Turno maldekstren permesata {indirect}",
+                    "allowed_right_turn": "Turno dekstren permesata {indirect}",
+                    "allowed_u_turn": "Turno malantaŭen permesata {indirect}",
+                    "allowed_straight_on": "Veturo rekten permesata {indirect}"
+                },
+                "from": "EL",
+                "via": "TRA",
+                "to": "AL",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Klaku por elekti segmenton {from}",
+                "select_from_name": "Klaku por elekti {from} {fromName}",
+                "toggle": "Klaku por “{turn}”"
             }
         },
         "undo": {
@@ -388,7 +418,8 @@
                 "title": "Mezuro",
                 "selected": "{n} elektitaj",
                 "geometry": "Geometrio",
-                "closed": "fermita",
+                "closed_line": "fermita linio",
+                "closed_area": "fermita areo",
                 "center": "Centro",
                 "perimeter": "Ĉirkaŭmezuro",
                 "length": "Longo",
@@ -461,7 +492,7 @@
         },
         "background": {
             "title": "Fono",
-            "description": "Fonaj agordoj",
+            "description": "Agordoj de fono",
             "key": "B",
             "backgrounds": "Fonoj",
             "none": "Neniu",
@@ -469,7 +500,7 @@
             "switch": "Baskuli reen al ĉi tiu fono",
             "custom": "Propra",
             "custom_button": "Redakti propran fonon",
-            "custom_prompt": "Entajpu URL-skemon de kaheloj. Ĝustaj ĵetonoj estas:\n - {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n - {ty} por renversaj TMS-stilaj Y-koordinatoj\n - {u} por kvarkahela (quadtile) skemo\n - {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
+            "custom_prompt": "Entajpu URL-skemon de kaheloj. Ĝustaj ĵetonoj estas:\n - {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n - {-y} aŭ {ty} por renversaj TMS-stilaj Y-koordinatoj\n - {u} por kvarkahela (quadtile) skemo\n - {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
             "overlays": "Surtavoloj",
             "imagery_source_faq": "Pri fotaro / Raporti problemon",
             "reset": "restarigi",
@@ -652,7 +683,7 @@
             "untagged_area_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun areon.",
             "untagged_relation": "Senetikeda rilato",
             "untagged_relation_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun rilaton.",
-            "many_deletions": "Vi forigas {n} elementojn. Ĉu vi certe volas fari ĉi tion? Ĉi tio forigos ilin el la mapo, kiun ĉiuj vidas je openstreetmap.org.",
+            "many_deletions": "Vi forigas {n} elementojn: {p} nodo(j)n, {l} linio(j)n, {a} areo(j)n kaj {r} rilato(j)n.  Ĉu vi certe volas fari tion. Tio ĉi forigos ilin el la mapo, kiun ĉiuj vidas ĉe openstreetmap.org.",
             "tag_suggests_area": "La etikedo {tag} indikas, ke linio estu areo, sed ĝi ne estas areo",
             "deprecated_tags": "Evitindaj etikedoj: {tags}"
         },
@@ -827,10 +858,10 @@
                 "title": "Fona fotaro",
                 "intro": "Fona fotaro videbla malantaŭ map-datumoj estas grava fonto por mapigi. Tiu ĉi fotaro povas esti kolektita per satelitoj, aviadiloj aŭ flugrobotoj, aŭ ĝi povas esti skanita historia mapo aŭ aliaj libere disponeblaj datumoj.",
                 "sources_h": "Fontoj de fotaro",
-                "choosing": "Por vidigi disponeblajn fontojn de fotaro por mapigi, klaku la butonon {layers} **fonaj agordoj** flanke de la mapo.",
+                "choosing": "Por vidigi disponeblajn fontojn de fotaro por mapigi, klaku la butonon {layers} **agordoj de fono** flanke de la mapo.",
                 "sources": "Implicite satelita fotaro de [Bing Mapoj](https://www.bing.com/maps/) estas elektita kiel fono. Depende de kie vi mapigas, aliaj fontoj de fotaro povas esti elekteblaj. Iuj povas esti pli aktualaj aŭ pli akurataj, do ĉiam indas kontroli kiu tavolo estas plej taŭga por uzi kiel map-referencon.",
                 "offsets_h": "Ĝustigi fotaran deŝovon",
-                "offset": "Fotaro estas iomete deŝovita rilate al akurataj map-datumoj. Se vi vidas multe da vojoj kaj konstruaĵoj deŝovitaj rilate al la fona fotaro, probable la fotaro estas malĝusta, do ne movu ilin por kongrui al la fono. Anstataŭ tio, vi povas ĝustigi la fonon tiel, kiel ĝi kongruos kun ekzistantaj datumoj per etendi la sekcion “ĝustigi fotaran deŝovon” sube ĉe la panelo “fonaj agordoj”.",
+                "offset": "Fotaro estas iomete deŝovita rilate al akurataj map-datumoj. Se vi vidas multe da vojoj kaj konstruaĵoj deŝovitaj rilate al la fona fotaro, probable la fotaro estas malĝusta, do ne movu ilin por kongrui al la fono. Anstataŭ tio, vi povas ĝustigi la fonon tiel, kiel ĝi kongruos kun ekzistantaj datumoj per etendi la sekcion “ĝustigi fotaran deŝovon” sube ĉe la panelo “agordoj de fono”.",
                 "offset_change": "Klaku trianguletojn por ĝustigi fotaran deŝovon je etaj paŝoj, aŭ premu la maldekstran mus-butonon kaj trenu ene griza kvadrato por ŝovi la fotaron al datumoj."
             },
             "streetlevel": {
@@ -849,6 +880,44 @@
                 "using": "Por uzi GPS-spuron por mapigi, ŝovu kaj demetu dosieron en la map-redaktilo. Se ĝi estos legita, ĝi montriĝos sur la mapo kiel hela violkolora linio. Klaku la panelon {data} **map-datumoj** flanke de la mapo por montri, kaŝi aŭ pligrandigi al viaj GPS-datumoj.",
                 "tracing": "La GPS-spuro ne estas sendata al OpenStreetMap – la plej bona maniero por uzi ĝin estas desegni sur la mapo uzante ĝin kiel gvidilon por novaj objektoj por aldoni.",
                 "upload": "Vi ankaŭ povas [alŝuti viajn GPS-datumoj al OpenStreetMap](https://www.openstreetmap.org/trace/create) por ke aliaj uzantoj povu uzi ilin."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Helpo pri turnaj limigoj",
+                    "about": {
+                        "title": "Pri",
+                        "about": "Tiu ĉi kampo ebligas al vi kontroli kaj modifi turnajn limigojn. Ĝi montras skizon de elektita vojkruciĝo kun proksimaj konektitaj vojoj.",
+                        "from_via_to": "Turna limigo ĉiam enhavas unu **vojon EL**, unu **vojon AL**, kaj aŭ unu **nodo TRA** aŭ almenaŭ unu **vojo TRA**.",
+                        "maxdist": "La ŝovilo “{distField}” ebligas agordi kiel malproksime serĉi pliajn konektitajn vojojn.",
+                        "maxvia": "La ŝovilo “{viaField}” ebligas agordi kiom da vojoj inkluzivi dum serĉi. (Konsilo: ju pli simple des pli bone.)"
+                    },
+                    "inspecting": {
+                        "title": "Kontroli",
+                        "about": "Musumu supre iu segmento **EL** por vidigi ĉu ĝi havas iujn turnajn limigojn. Ĉiu ebla elveturo **AL** estos kolore markita se limigo ekzistas.",
+                        "from_shadow": "{fromShadow} **segmento EL**",
+                        "allow_shadow": "{allowShadow} **AL permesata**",
+                        "restrict_shadow": "{restrictShadow} **AL malpermesata**",
+                        "only_shadow": "{onlyShadow} **nur AL**",
+                        "restricted": "“Malpermesata” signifas, ke veturo tien estas malpermesata, ekzemple “sen turno maldekstren”.",
+                        "only": "“Nur” signifas, ke veturilo sekvanta tiun vojon povas nur veturi tien, ekzemple “nur veturo rekten”."
+                    },
+                    "modifying": {
+                        "title": "Modifi",
+                        "about": "Por modifi turnajn limigojn, unue klaku iun segmenton **EL** por ĝin elekti. La elektita segmento estos markita per pulsanta lumo kaj eblaj elveturoj **AL** aperos kiel turn-simboloj.",
+                        "indicators": "Sekve klaku turn-simbolon por baskuli inter “permesata”, “malpermesata” kaj “nur”.",
+                        "allow_turn": "{allowTurn} **AL permesata**",
+                        "restrict_turn": "{restrictTurn} **AL malpermesata**",
+                        "only_turn": "{onlyTurn} **nur AL**"
+                    },
+                    "tips": {
+                        "title": "Konsiloj",
+                        "simple": "**Preferu simplajn turnajn limigojn ol malsimplaj.**",
+                        "simple_example": "Ekzemple evitu krei limigon tra-vojo, se pli simpla tra-noda limigo funkcius.",
+                        "indirect": "**Ĉe kelkaj limigoj montriĝas teksto \"(indirect)\" kaj estas markitaj pli hele.**",
+                        "indirect_example": "Tiuj limigoj ekzistas pro alia proksima limigo. Ekzemple limigo “nur veturo rekten” pere kreos limigojn “sen turno” por ĉiuj vojoj tra la vojkruciĝo.",
+                        "indirect_noedit": "Vi ne povas redakti perajn limigojn. Anstataŭ redaktu proksiman senperan limigon."
+                    }
+                }
             }
         },
         "intro": {
@@ -1218,6 +1287,28 @@
                     "measurement": "Baskuli mezur-panelon"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} ft²",
+            "square_miles": "{quantity} mi²",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1610,6 +1701,9 @@
                         "cycleway:right": "Dekstra flanko"
                     }
                 },
+                "dance/style": {
+                    "label": "Stiloj de danco"
+                },
                 "date": {
                     "label": "Dato"
                 },
@@ -1671,6 +1765,9 @@
                         "both": "Ambaŭ / ĉiuj",
                         "forward": "Antaŭen"
                     }
+                },
+                "dispensing": {
+                    "label": "Medikamentoj je recepto"
                 },
                 "display": {
                     "label": "Vidigilo"
@@ -2614,6 +2711,9 @@
                 "wheelchair": {
                     "label": "Rulseĝa alirebleco"
                 },
+                "wholesale": {
+                    "label": "Pogranda komerco"
+                },
                 "width": {
                     "label": "Larĝo (metroj)"
                 },
@@ -2683,7 +2783,7 @@
                 },
                 "aerialway/pylon": {
                     "name": "Kablovoja fosto",
-                    "terms": "apogilo,apogstango,fosto,paliso,stango"
+                    "terms": "apogilo,apogstango,fosto,paliso,stango,kolono"
                 },
                 "aerialway/rope_tow": {
                     "name": "Skitelfero ŝnur-tira",
@@ -3100,6 +3200,10 @@
                     "name": "Duŝejo",
                     "terms": "duŝo,dushejo,dusxejo,banado"
                 },
+                "amenity/smoking_area": {
+                    "name": "Fumejo",
+                    "terms": "cigaredfumejo"
+                },
                 "amenity/social_facility": {
                     "name": "Socia servejo",
                     "terms": "socia servo,socia helpo"
@@ -3333,6 +3437,10 @@
                     "name": "Kreskaĵbarilo",
                     "terms": "kreskajhbarilo,kreskajxbarilo,heĝo,hegho,hegxo,plektobarilo"
                 },
+                "barrier/kerb": {
+                    "name": "Trotuar-randaĵo",
+                    "terms": "trotuarrandaĵo,randaĵo,randŝtono"
+                },
                 "barrier/kissing_gate": {
                     "name": "Nurhoma pordego",
                     "terms": "kontraŭbruta,kontraubruta,kontrauxbruta"
@@ -3429,6 +3537,10 @@
                 },
                 "building/farm": {
                     "name": "Ĉefarma domo",
+                    "terms": "kampodomo,kampara domo,somerdomo,farmo,farmodomo"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Ĉefarma konstruaĵo",
                     "terms": "kampodomo,kampara domo,somerdomo,farmo,farmodomo"
                 },
                 "building/garage": {
@@ -3783,6 +3895,10 @@
                 },
                 "emergency/private": {
                     "name": "Vivsav-serva aliro: privata"
+                },
+                "emergency/water_tank": {
+                    "name": "Kontraŭbrulega akvujo",
+                    "terms": "akvujo,rezervujo,kriokaza akvujo,fajrobrigada akvujo"
                 },
                 "emergency/yes": {
                     "name": "Vivsav-serva aliro: jes"
@@ -4340,6 +4456,10 @@
                     "name": "Hazardludejo",
                     "terms": "kazino,vetludejo,monludejo,vetaŭtomato"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Salono de ludoj",
+                    "terms": "ludejo,amuzaparatoj,videoludoj,paĉinko,flipero,bilardo"
+                },
                 "leisure/bird_hide": {
                     "name": "Bird-observejo",
                     "terms": "birdobservejo"
@@ -4355,6 +4475,10 @@
                 "leisure/dance": {
                     "name": "Dancejo",
                     "terms": "diskoteko,diskejo"
+                },
+                "leisure/dancing_school": {
+                    "name": "Danca lernejo",
+                    "terms": "danclernejo,dancolernejo"
                 },
                 "leisure/dog_park": {
                     "name": "Hund-parko",
@@ -5667,6 +5791,10 @@
                     "name": "Laborila vendejo",
                     "terms": "iloj,ilovendejo,il-vendejo,memfaradiloj"
                 },
+                "shop/health_food": {
+                    "name": "Sanig-manĝaĵa vendejo",
+                    "terms": "saniga manĝaĵo,sana manĝaĵo,ekologia manĝaĵo,vegetarisma manĝaĵo"
+                },
                 "shop/hearing_aids": {
                     "name": "Aŭd-helpila vendejo",
                     "terms": "aŭdhelpiloj,audhelpiloj,auxdhelpiloj,aŭdiloj,aŭskultiloj,orelhelpiloj"
@@ -5905,6 +6033,10 @@
                 "shop/weapons": {
                     "name": "Armila vendejo",
                     "terms": "armiloj,pafiloj,pistoloj,armea,milita"
+                },
+                "shop/wholesale": {
+                    "name": "Pogranda vendejo",
+                    "terms": "magazeno, staplo"
                 },
                 "shop/window_blind": {
                     "name": "Fenestr-kovrila vendejo",
@@ -6281,6 +6413,13 @@
                 },
                 "description": "Tutmonda fotaro de Esri.",
                 "name": "Tutmonda fotaro de Esri"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Arĥivita fotaro de Esri, kiu povas esti pli klara kaj akurata ol la norma tavolo.",
+                "name": "Tutmonda fotaro de Esri (pli klara) Beta"
             },
             "MAPNIK": {
                 "attribution": {

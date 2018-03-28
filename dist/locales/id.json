@@ -183,12 +183,6 @@
                 "connected_to_hidden": "Tidak bisa dipotong karena terhubung dengan fitur tersembunyi."
             },
             "restriction": {
-                "help": {
-                    "select": "Klik untuk memilih segmen jalan.",
-                    "toggle": "Klik untuk menentukan larangan belok kiri/kanan.",
-                    "toggle_on": "Klik untuk menambahkan larangan \"{restriction}\".",
-                    "toggle_off": "Klik untuk menghapus larangan \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Menambahkan larangan belok",
                     "delete": "Menghapus larangan belok"

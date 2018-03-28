@@ -15,10 +15,11 @@ import {
     * Resampling
 */
 export function geoRawMercator() {
-    var project = d3_geoMercatorRaw,
-        k = 512 / Math.PI, // scale
-        x = 0, y = 0, // translate
-        clipExtent = [[0, 0], [0, 0]];
+    var project = d3_geoMercatorRaw;
+    var k = 512 / Math.PI; // scale
+    var x = 0;
+    var y = 0; // translate
+    var clipExtent = [[0, 0], [0, 0]];
 
 
     function projection(point) {
@@ -55,19 +56,19 @@ export function geoRawMercator() {
     };
 
 
-    projection.transform = function(_) {
+    projection.transform = function(obj) {
         if (!arguments.length) return d3_zoomIdentity.translate(x, y).scale(k);
-        x = +_.x;
-        y = +_.y;
-        k = +_.k;
+        x = +obj.x;
+        y = +obj.y;
+        k = +obj.k;
         return projection;
     };
 
 
     projection.stream = d3_geoTransform({
         point: function(x, y) {
-            x = projection([x, y]);
-            this.stream.point(x[0], x[1]);
+            var vec = projection([x, y]);
+            this.stream.point(vec[0], vec[1]);
         }
     }).stream;
 

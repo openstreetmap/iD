@@ -1,18 +1,21 @@
 {
     "icon": "railway-rail",
+    "fields": [
+        "name",
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail",
+        "usage_rail",
+        "voltage",
+        "frequency"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "narrow_gauge"
     },
-    "fields": [
-        "name",
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
-    ],
     "terms": [
         "narrow gauge railway",
         "narrow gauge railroad"

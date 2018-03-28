@@ -283,16 +283,15 @@
                 "connected_to_hidden": "امکان جدا کردن به دلیل اتصال به یک عنصر پنهان وجود ندارد."
             },
             "restriction": {
-                "help": {
-                    "select": "کلیک برای انتخاب یک بخش جاده",
-                    "toggle": "برای روشن کردن محدودیت‌های پیچ، کلیک کنید.",
-                    "toggle_on": "برای اضافه کردن محدودیت \"{restriction}\" کلیک کنید.",
-                    "toggle_off": "برای حذف محدودیت \"{restriction}\" کلیک کنید."
-                },
                 "annotation": {
                     "create": "محدودیت پیچ اضافه شد.",
                     "delete": "محدودیت پیچ حذف شد."
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "مسافت"
             }
         },
         "undo": {
@@ -379,7 +378,7 @@
             "measurement": {
                 "key": "M",
                 "title": "اندازه",
-                "closed": "بسته شده",
+                "geometry": "هندسه",
                 "center": "مرکز",
                 "perimeter": "محیط",
                 "length": "درازا",
@@ -387,7 +386,8 @@
                 "centroid": "مرکز",
                 "location": "مکان",
                 "metric": "متریک",
-                "imperial": "امپراتوری"
+                "imperial": "امپراتوری",
+                "node_count": "تعداد گره ­ها"
             }
         },
         "geometry": {
@@ -459,6 +459,8 @@
             "switch": "بازگشت به این پس‌زمینه",
             "custom": "سفارشی",
             "custom_button": "ویرایش پشت زمینه سفارشی",
+            "overlays": "پوشش ها",
+            "imagery_source_faq": "اطلاعات تصویر / گزارش یک مشکل",
             "reset": "باز نشاندن",
             "brightness": "روشنایی",
             "minimap": {
@@ -545,7 +547,8 @@
         "restore": {
             "heading": "شما تغییرات ذخیره نشده دارید",
             "description": "آیا مایلید تغییرات ذخیره نشده جلسه قبل را بازیابی کنید؟",
-            "restore": " بازگردانی تغییرات من"
+            "restore": " بازگردانی تغییرات من",
+            "reset": "لغو تغییرات من"
         },
         "save": {
             "title": "ذخیره",
@@ -614,7 +617,6 @@
             "untagged_line_tooltip": "یک نوع عنصر را برای توصیف موجودیت این خط انتخاب کنید.",
             "untagged_area": "فضای برچسب گذاری نشده",
             "untagged_area_tooltip": "یک نوع عنصر را برای توصیف موجودیت این محدوده انتخاب کنید.",
-            "many_deletions": "شما در حال حذف {n} شئ هستید. مطمئنید میخواهید این کار را انجام دهید؟ این کار آنها را از نقشه ای که دیگران در openstreetmap.org میبینند حذف می کند.",
             "tag_suggests_area": "برچسب  {tag} پیشنهاد میکند خط باید یک فضا باشد، اما این یک فضا نیست",
             "deprecated_tags": "برچسب های توصیه شده: {tags}"
         },
@@ -647,7 +649,8 @@
                 "open_source_h": "سورس باز"
             },
             "overview": {
-                "navigation_h": "مسیریابی"
+                "navigation_h": "مسیریابی",
+                "features_h": "ویژگی‌های نقشه"
             },
             "editing": {
                 "select_h": "انتخاب",
@@ -1202,6 +1205,46 @@
                 "diaper": {
                     "label": "امکان تعویض پوشک"
                 },
+                "direction": {
+                    "label": "جهت (خلاف عقربه های ساعت)",
+                    "placeholder": "45، 90، 180، 270"
+                },
+                "direction_cardinal": {
+                    "label": "جهت",
+                    "options": {
+                        "E": "شرق",
+                        "ENE": "شرق-شمال‌شرق",
+                        "ESE": " شرق-جنوب‌شرق ",
+                        "N": "شمال",
+                        "NE": "شمال شرق",
+                        "NNE": " شمال-شمال‌شرق ",
+                        "NNW": " شمال-شمال‌غرب ",
+                        "NW": "شمال‌غرب",
+                        "S": "جنوب",
+                        "SE": "جنوب شرق",
+                        "SSE": " جنوب- جنوب‌شرق ",
+                        "SSW": " جنوب-جنوب‌غربی ",
+                        "SW": "جنوب غربی",
+                        "W": "غرب",
+                        "WNW": " غرب-شمال‌غرب ",
+                        "WSW": " غرب-جنوب‌غربی "
+                    }
+                },
+                "direction_clock": {
+                    "label": "جهت",
+                    "options": {
+                        "anticlockwise": "خلاف عقربه های ساعت",
+                        "clockwise": "جهت عقربه های ساعت"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "جهت",
+                    "options": {
+                        "backward": "به عقب",
+                        "both": "هردو/همه",
+                        "forward": " به جلو "
+                    }
+                },
                 "display": {
                     "label": "نمایش"
                 },
@@ -1595,7 +1638,9 @@
                 "oneway": {
                     "label": "يک طرفه",
                     "options": {
+                        "alternating": "متناوب",
                         "no": "خیر",
+                        "reversible": "وارونه",
                         "undefined": "خیر فرض شده",
                         "yes": "بلی"
                     }
@@ -1603,7 +1648,9 @@
                 "oneway_yes": {
                     "label": "یک طرفه",
                     "options": {
+                        "alternating": "متناوب",
                         "no": "خیر",
+                        "reversible": "وارونه",
                         "undefined": "بلی فرض شده",
                         "yes": "بلی"
                     }
@@ -1722,6 +1769,18 @@
                 "railway": {
                     "label": "نوع"
                 },
+                "railway/position": {
+                    "label": " تابلو کیلومترشمار ",
+                    "placeholder": " فاصله تا یک رقم اعشار(123.4) "
+                },
+                "railway/signal/direction": {
+                    "label": "جهت",
+                    "options": {
+                        "backward": " به عقب ",
+                        "both": "هردو/همه",
+                        "forward": " به جلو "
+                    }
+                },
                 "rating": {
                     "label": "درجه قدرت"
                 },
@@ -1730,6 +1789,9 @@
                 },
                 "ref": {
                     "label": "کد مرجع"
+                },
+                "ref/isil": {
+                    "label": "کد ISIL"
                 },
                 "ref_aeroway_gate": {
                     "label": "شماره ورودی"
@@ -2024,6 +2086,14 @@
                 "traffic_signals": {
                     "label": "نوع"
                 },
+                "traffic_signals/direction": {
+                    "label": "جهت",
+                    "options": {
+                        "backward": " به عقب ",
+                        "both": "هردو/همه",
+                        "forward": " به جلو "
+                    }
+                },
                 "trail_visibility": {
                     "label": "مسیر پیاده روی",
                     "options": {
@@ -2117,6 +2187,9 @@
                 "wheelchair": {
                     "label": "دسترسی ویلچر"
                 },
+                "wholesale": {
+                    "label": "عمده فروشی"
+                },
                 "width": {
                     "label": "عرض (متر)"
                 },
@@ -2161,21 +2234,24 @@
                     "terms": "تله‌اسکی,تله سی یژ"
                 },
                 "aerialway/drag_lift": {
-                    "name": "آسانسور"
+                    "name": "آسانسور",
+                    "terms": "<translate with synonyms or related terms for 'Drag Lift', separated by commas>"
                 },
                 "aerialway/gondola": {
                     "name": "تله کابین",
                     "terms": "بلم, قایق"
                 },
                 "aerialway/goods": {
-                    "name": "محموله هوایی"
+                    "name": "محموله هوایی",
+                    "terms": "<translate with synonyms or related terms for 'Goods Aerialway', separated by commas>"
                 },
                 "aerialway/magic_carpet": {
                     "name": "آسانسور اسکی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سطح شیب‌دار بالابر'، با کاما جدا می‌شوند>"
                 },
                 "aerialway/mixed_lift": {
-                    "name": "بالابر چند منظوره"
+                    "name": "بالابر چند منظوره",
+                    "terms": "<translate with synonyms or related terms for 'Mixed Lift', separated by commas>"
                 },
                 "aerialway/platter": {
                     "name": "بالابر بشقابی",
@@ -2206,6 +2282,9 @@
                 "aeroway/apron": {
                     "name": "صحن",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'صحن'، با کاما جدا می‌شوند>"
+                },
+                "aeroway/gate": {
+                    "name": " دروازه فرودگاه "
                 },
                 "aeroway/hangar": {
                     "name": "آشیانه هواپیما",
@@ -4821,6 +4900,13 @@
                 "description": "نقشه های Esri world ",
                 "name": "نقشه های Esri world "
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "فید بک"
+                },
+                "description": "تصاویر بایگانی Esri که ممکن است واضح تر و دقیق تر از لایه پیش فرض باشد.",
+                "name": "Esri World Imagery (Clarity) Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "©همکاران OSM و CC-BY-SA"
@@ -4889,18 +4975,33 @@
                 "name": "جاده های TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "مسیرهای مشخص شده: دوچرخه سواری"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "مسیرهای مشخص شده: پیاده روی"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "مسیرهای مشخص شده: MTB"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "مسیرهای مشخص شده: اسکیت"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "مسیرهای مشخص شده: ورزشهای زمستانی"
             },
             "basemap.at": {
@@ -4958,7 +5059,8 @@
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMap contributors"
-                }
+                },
+                "name": "س/ج بدون آدرس"
             },
             "skobbler": {
                 "attribution": {

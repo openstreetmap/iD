@@ -1,0 +1,83 @@
+{
+    "ckb": {
+        "modes": {
+            "add_area": {
+                "title": "ناوچە"
+            },
+            "add_line": {
+                "title": "هێڵ"
+            },
+            "add_point": {
+                "title": "خاڵ"
+            }
+        },
+        "tooltip_keyhint": "کورتبڕ:",
+        "translate": {
+            "translate": "وەرگێڕان",
+            "localized_translation_language": "هەڵبژاردنی زمان",
+            "localized_translation_name": "ناو"
+        },
+        "logout": "دەرچوون",
+        "report_a_bug": "ناردنی هەڵە",
+        "help_translate": "یارمەتیدان بۆ وەرگێڕان",
+        "commit": {
+            "cancel": "پاشگەزبوونەوە",
+            "deleted": "سڕایەوە",
+            "created": "دروستکرا"
+        },
+        "geometry": {
+            "point": "خاڵ",
+            "line": "هێڵ",
+            "area": "ناوچە"
+        },
+        "inspector": {
+            "remove": "لابردن",
+            "search": "گەڕان",
+            "check": {
+                "yes": "بەڵێ",
+                "no": "نەخێر"
+            },
+            "add": "زیادکردن",
+            "none": "هیچ"
+        },
+        "background": {
+            "none": "هیچ"
+        },
+        "feature": {
+            "points": {
+                "description": "خاڵەکان"
+            }
+        },
+        "save": {
+            "title": "پاشەکەوتکردن",
+            "conflict": {
+                "previous": "<پێشتر",
+                "next": "دواتر>"
+            }
+        },
+        "success": {
+            "help_link_text": "وردەکارییەکان"
+        },
+        "help": {
+            "title": "یارمەتی"
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "tr"
+            },
+            "startediting": {
+                "title": "دەستپێکردنی دەستکاری"
+            }
+        }
+    }
+}

@@ -14,8 +14,8 @@ import {
 
 
 export function behaviorHash(context) {
-    var s0 = null, // cached window.location.hash
-        lat = 90 - 1e-8; // allowable latitude range
+    var s0 = null; // cached window.location.hash
+    var lat = 90 - 1e-8; // allowable latitude range
 
 
     var parser = function(map, s) {
@@ -42,13 +42,13 @@ export function behaviorHash(context) {
 
 
     var formatter = function(map) {
-        var center = map.center(),
-            zoom = map.zoom(),
-            precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _omit(utilStringQs(window.location.hash.substring(1)),
-                ['comment', 'hashtags', 'walkthrough']
-            ),
-            newParams = {};
+        var center = map.center();
+        var zoom = map.zoom();
+        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        var q = _omit(utilStringQs(window.location.hash.substring(1)),
+            ['comment', 'source', 'hashtags', 'walkthrough']
+        );
+        var newParams = {};
 
         delete q.id;
         var selected = context.selectedIDs().filter(function(id) {
@@ -107,6 +107,11 @@ export function behaviorHash(context) {
 
             if (q.comment) {
                 context.storage('comment', q.comment);
+                context.storage('commentDate', Date.now());
+            }
+
+            if (q.source) {
+                context.storage('source', q.source);
                 context.storage('commentDate', Date.now());
             }
 

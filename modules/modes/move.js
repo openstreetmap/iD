@@ -8,12 +8,8 @@ import { t } from '../util/locale';
 
 import { actionMove } from '../actions';
 import { behaviorEdit } from '../behavior';
-import { geoViewportEdge } from '../geo';
-
-import {
-    modeBrowse,
-    modeSelect
-} from './index';
+import { geoViewportEdge, geoVecSubtract } from '../geo';
+import { modeBrowse, modeSelect } from './index';
 
 import {
     operationCircularize,
@@ -51,11 +47,6 @@ export function modeMove(context, entityIDs, baseGraph) {
     var _nudgeInterval;
 
 
-    function vecSub(a, b) {
-        return [a[0] - b[0], a[1] - b[1]];
-    }
-
-
     function doMove(nudge) {
         nudge = nudge || [0, 0];
 
@@ -70,7 +61,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
         var currMouse = context.mouse();
         var origMouse = context.projection(_origin);
-        var delta = vecSub(vecSub(currMouse, origMouse), nudge);
+        var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
 
         fn(actionMove(entityIDs, delta, context.projection, _cache), annotation);
         _prevGraph = context.graph();
