@@ -1581,7 +1581,7 @@ en:
           tourism: Tourism
       vending:
         # vending=*
-        label: Type of Goods
+        label: Types of Goods
       visibility:
         # visibility=*
         label: Visibility
@@ -2299,6 +2299,11 @@ en:
         name: Cigarette Vending Machine
         # 'terms: cigarette'
         terms: '<translate with synonyms or related terms for ''Cigarette Vending Machine'', separated by commas>'
+      amenity/vending_machine/coffee:
+        # 'amenity=vending_machine, vending=coffee'
+        name: Coffee Vending Machine
+        # 'terms: coffee'
+        terms: '<translate with synonyms or related terms for ''Coffee Vending Machine'', separated by commas>'
       amenity/vending_machine/condoms:
         # 'amenity=vending_machine, vending=condoms'
         name: Condom Vending Machine
@@ -2309,6 +2314,16 @@ en:
         name: Drink Vending Machine
         # 'terms: drink,soda,beverage,juice,pop'
         terms: '<translate with synonyms or related terms for ''Drink Vending Machine'', separated by commas>'
+      amenity/vending_machine/electronics:
+        # 'amenity=vending_machine, vending=electronics'
+        name: Electronics Vending Machine
+        # 'terms: cable,charger,earbud,headphone,phone,tablet'
+        terms: '<translate with synonyms or related terms for ''Electronics Vending Machine'', separated by commas>'
+      amenity/vending_machine/elongated_coin:
+        # 'amenity=vending_machine, vending=elongated_coin'
+        name: Flat Coin Vending Machine
+        # 'terms: coin,crush,elongated,flatten,penny,souvenir'
+        terms: '<translate with synonyms or related terms for ''Flat Coin Vending Machine'', separated by commas>'
       amenity/vending_machine/excrement_bags:
         # 'amenity=vending_machine, vending=excrement_bags'
         name: Excrement Bag Vending Machine
@@ -2319,6 +2334,21 @@ en:
         name: Feminine Hygiene Vending Machine
         # 'terms: condom,tampon,pad,woman,women,menstrual hygiene products,personal care'
         terms: '<translate with synonyms or related terms for ''Feminine Hygiene Vending Machine'', separated by commas>'
+      amenity/vending_machine/food:
+        # 'amenity=vending_machine, vending=food'
+        name: Food Vending Machine
+        # 'terms: food'
+        terms: '<translate with synonyms or related terms for ''Food Vending Machine'', separated by commas>'
+      amenity/vending_machine/fuel:
+        # 'amenity=vending_machine, vending=fuel'
+        name: Gas Pump
+        # 'terms: petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel'
+        terms: '<translate with synonyms or related terms for ''Gas Pump'', separated by commas>'
+      amenity/vending_machine/ice_cream:
+        # 'amenity=vending_machine, vending=ice_cream'
+        name: Ice Cream Vending Machine
+        # 'terms: chocolate,ice cream,frozen,popsicle,vanilla'
+        terms: '<translate with synonyms or related terms for ''Ice Cream Vending Machine'', separated by commas>'
       amenity/vending_machine/news_papers:
         # 'amenity=vending_machine, vending=news_papers'
         name: Newspaper Vending Machine
@@ -2342,6 +2372,11 @@ en:
         name: Transit Ticket Vending Machine
         # 'terms: bus,train,ferry,rail,ticket,transportation'
         terms: '<translate with synonyms or related terms for ''Transit Ticket Vending Machine'', separated by commas>'
+      amenity/vending_machine/stamps:
+        # 'amenity=vending_machine, vending=stamps'
+        name: Postage Vending Machine
+        # 'terms: mail,postage,stamp'
+        terms: '<translate with synonyms or related terms for ''Postage Vending Machine'', separated by commas>'
       amenity/vending_machine/sweets:
         # 'amenity=vending_machine, vending=sweets'
         name: Snack Vending Machine

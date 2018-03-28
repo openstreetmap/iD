@@ -1,6 +1,7 @@
 {
     "icon": "poi-vending-machine",
     "fields": [
+        "vending",
         "operator",
         "payment_multi",
         "currency_multi"

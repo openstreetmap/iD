@@ -3,7 +3,6 @@
     "fields": [
         "vending",
         "operator",
-        "fee",
         "payment_multi",
         "currency_multi"
     ],
@@ -11,16 +10,20 @@
         "point"
     ],
     "terms": [
-        "newspaper"
+        "coin",
+        "crush",
+        "elongated",
+        "flatten",
+        "penny",
+        "souvenir"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "news_papers"
+        "vending": "elongated_coin"
     },
     "reference": {
         "key": "vending",
-        "value": "newspapers"
+        "value": "elongated_coin"
     },
-    "name": "Newspaper Vending Machine",
-    "searchable": false
+    "name": "Flat Coin Vending Machine"
 }

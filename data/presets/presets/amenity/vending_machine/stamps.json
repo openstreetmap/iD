@@ -3,7 +3,6 @@
     "fields": [
         "vending",
         "operator",
-        "fee",
         "payment_multi",
         "currency_multi"
     ],
@@ -11,16 +10,17 @@
         "point"
     ],
     "terms": [
-        "newspaper"
+        "mail",
+        "postage",
+        "stamp"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "news_papers"
+        "vending": "stamps"
     },
     "reference": {
         "key": "vending",
-        "value": "newspapers"
+        "value": "stamps"
     },
-    "name": "Newspaper Vending Machine",
-    "searchable": false
+    "name": "Postage Vending Machine"
 }

@@ -3237,6 +3237,7 @@
         "amenity/vending_machine/news_papers": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "fee",
                 "payment_multi",
@@ -3262,6 +3263,7 @@
         "amenity/vending_machine/cigarettes": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3282,9 +3284,34 @@
             },
             "name": "Cigarette Vending Machine"
         },
+        "amenity/vending_machine/coffee": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "coffee"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "coffee"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "coffee"
+            },
+            "name": "Coffee Vending Machine"
+        },
         "amenity/vending_machine/condoms": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3308,6 +3335,7 @@
         "amenity/vending_machine/drinks": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3332,9 +3360,68 @@
             },
             "name": "Drink Vending Machine"
         },
+        "amenity/vending_machine/electronics": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "cable",
+                "charger",
+                "earbud",
+                "headphone",
+                "phone",
+                "tablet"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "electronics"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "electronics"
+            },
+            "name": "Electronics Vending Machine"
+        },
+        "amenity/vending_machine/elongated_coin": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "coin",
+                "crush",
+                "elongated",
+                "flatten",
+                "penny",
+                "souvenir"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "elongated_coin"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "elongated_coin"
+            },
+            "name": "Flat Coin Vending Machine"
+        },
         "amenity/vending_machine/excrement_bags": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "fee",
                 "payment_multi",
@@ -3362,6 +3449,7 @@
         "amenity/vending_machine/feminine_hygiene": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3388,9 +3476,93 @@
             },
             "name": "Feminine Hygiene Vending Machine"
         },
+        "amenity/vending_machine/food": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "food"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "food"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "food"
+            },
+            "name": "Food Vending Machine"
+        },
+        "amenity/vending_machine/fuel": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "petrol",
+                "fuel",
+                "gasoline",
+                "propane",
+                "diesel",
+                "lng",
+                "cng",
+                "biodiesel"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "fuel"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "fuel"
+            },
+            "name": "Gas Pump"
+        },
+        "amenity/vending_machine/ice_cream": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "chocolate",
+                "ice cream",
+                "frozen",
+                "popsicle",
+                "vanilla"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "ice_cream"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "ice_cream"
+            },
+            "name": "Ice Cream Vending Machine"
+        },
         "amenity/vending_machine/newspapers": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "fee",
                 "payment_multi",
@@ -3415,6 +3587,7 @@
         "amenity/vending_machine/parcel_pickup_dropoff": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3440,6 +3613,7 @@
         "amenity/vending_machine/parking_tickets": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3465,6 +3639,7 @@
         "amenity/vending_machine/public_transport_tickets": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"
@@ -3490,9 +3665,36 @@
             },
             "name": "Transit Ticket Vending Machine"
         },
+        "amenity/vending_machine/stamps": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "mail",
+                "postage",
+                "stamp"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "stamps"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "stamps"
+            },
+            "name": "Postage Vending Machine"
+        },
         "amenity/vending_machine/sweets": {
             "icon": "poi-vending-machine",
             "fields": [
+                "vending",
                 "operator",
                 "payment_multi",
                 "currency_multi"

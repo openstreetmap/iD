@@ -2129,8 +2129,8 @@
         },
         "vending": {
             "key": "vending",
-            "type": "combo",
-            "label": "Type of Goods"
+            "type": "semiCombo",
+            "label": "Types of Goods"
         },
         "visibility": {
             "key": "visibility",

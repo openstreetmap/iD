@@ -3,7 +3,6 @@
     "fields": [
         "vending",
         "operator",
-        "fee",
         "payment_multi",
         "currency_multi"
     ],
@@ -11,16 +10,19 @@
         "point"
     ],
     "terms": [
-        "newspaper"
+        "chocolate",
+        "ice cream",
+        "frozen",
+        "popsicle",
+        "vanilla"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "news_papers"
+        "vending": "ice_cream"
     },
     "reference": {
         "key": "vending",
-        "value": "newspapers"
+        "value": "ice_cream"
     },
-    "name": "Newspaper Vending Machine",
-    "searchable": false
+    "name": "Ice Cream Vending Machine"
 }

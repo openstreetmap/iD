@@ -2676,7 +2676,7 @@
                     }
                 },
                 "vending": {
-                    "label": "Type of Goods"
+                    "label": "Types of Goods"
                 },
                 "visibility": {
                     "label": "Visibility",
@@ -3339,6 +3339,10 @@
                     "name": "Cigarette Vending Machine",
                     "terms": "cigarette"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Coffee Vending Machine",
+                    "terms": "coffee"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Condom Vending Machine",
                     "terms": "condom"
@@ -3347,6 +3351,14 @@
                     "name": "Drink Vending Machine",
                     "terms": "drink,soda,beverage,juice,pop"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Electronics Vending Machine",
+                    "terms": "cable,charger,earbud,headphone,phone,tablet"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Flat Coin Vending Machine",
+                    "terms": "coin,crush,elongated,flatten,penny,souvenir"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Excrement Bag Vending Machine",
                     "terms": "excrement bags,poop,dog,animal"
@@ -3354,6 +3366,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine",
                     "terms": "condom,tampon,pad,woman,women,menstrual hygiene products,personal care"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Food Vending Machine",
+                    "terms": "food"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Gas Pump",
+                    "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Ice Cream Vending Machine",
+                    "terms": "chocolate,ice cream,frozen,popsicle,vanilla"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",
@@ -3370,6 +3394,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Transit Ticket Vending Machine",
                     "terms": "bus,train,ferry,rail,ticket,transportation"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Postage Vending Machine",
+                    "terms": "mail,postage,stamp"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Snack Vending Machine",

@@ -3,7 +3,6 @@
     "fields": [
         "vending",
         "operator",
-        "fee",
         "payment_multi",
         "currency_multi"
     ],
@@ -11,16 +10,22 @@
         "point"
     ],
     "terms": [
-        "newspaper"
+        "petrol",
+        "fuel",
+        "gasoline",
+        "propane",
+        "diesel",
+        "lng",
+        "cng",
+        "biodiesel"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "news_papers"
+        "vending": "fuel"
     },
     "reference": {
         "key": "vending",
-        "value": "newspapers"
+        "value": "fuel"
     },
-    "name": "Newspaper Vending Machine",
-    "searchable": false
+    "name": "Gas Pump"
 }

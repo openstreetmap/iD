@@ -3,7 +3,6 @@
     "fields": [
         "vending",
         "operator",
-        "fee",
         "payment_multi",
         "currency_multi"
     ],
@@ -11,16 +10,15 @@
         "point"
     ],
     "terms": [
-        "newspaper"
+        "coffee"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "news_papers"
+        "vending": "coffee"
     },
     "reference": {
         "key": "vending",
-        "value": "newspapers"
+        "value": "coffee"
     },
-    "name": "Newspaper Vending Machine",
-    "searchable": false
+    "name": "Coffee Vending Machine"
 }

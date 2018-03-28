@@ -581,6 +581,10 @@
         },
         {
             "key": "vending",
+            "value": "coffee"
+        },
+        {
+            "key": "vending",
             "value": "condoms"
         },
         {
@@ -589,11 +593,31 @@
         },
         {
             "key": "vending",
+            "value": "electronics"
+        },
+        {
+            "key": "vending",
+            "value": "elongated_coin"
+        },
+        {
+            "key": "vending",
             "value": "excrement_bags"
         },
         {
             "key": "vending",
             "value": "feminine_hygiene"
+        },
+        {
+            "key": "vending",
+            "value": "food"
+        },
+        {
+            "key": "vending",
+            "value": "fuel"
+        },
+        {
+            "key": "vending",
+            "value": "ice_cream"
         },
         {
             "key": "vending",
@@ -610,6 +634,10 @@
         {
             "key": "vending",
             "value": "public_transport_tickets"
+        },
+        {
+            "key": "vending",
+            "value": "stamps"
         },
         {
             "key": "vending",
