@@ -336,7 +336,7 @@ export function uiBackground(context) {
 
         var pane = selection
             .append('div')
-            .attr('class', 'fillL map-overlay col3 content hide');
+            .attr('class', 'fillL map-pane col4 hide');
 
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -350,12 +350,27 @@ export function uiBackground(context) {
             .call(svgIcon('#icon-layers', 'light'))
             .call(paneTooltip);
 
-        pane
+
+        var heading = pane
+            .append('div')
+            .attr('class', 'pane-heading');
+
+        heading
             .append('h2')
             .text(t('background.title'));
 
+        heading
+            .append('button')
+            .on('click', function() { uiBackground.hidePane(); })
+            .call(svgIcon('#icon-close'));
+
+
+        var content = pane
+            .append('div')
+            .attr('class', 'pane-content');
+
         // background list
-        pane
+        content
             .append('div')
             .attr('class', 'background-background-list-container')
             .call(uiDisclosure(context, 'background_list', true)
@@ -364,7 +379,7 @@ export function uiBackground(context) {
             );
 
         // overlay list
-        pane
+        content
             .append('div')
             .attr('class', 'background-overlay-list-container')
             .call(uiDisclosure(context, 'overlay_list', true)
@@ -373,12 +388,12 @@ export function uiBackground(context) {
             );
 
         // display options
-        _displayOptionsContainer = pane
+        _displayOptionsContainer = content
             .append('div')
             .attr('class', 'background-display-options');
 
         // offset controls
-        _offsetContainer = pane
+        _offsetContainer = content
             .append('div')
             .attr('class', 'background-offset');
 
