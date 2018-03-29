@@ -1848,6 +1848,10 @@ input[type=number] {
 
 .restriction-controls-container .restriction-controls {
     display: table;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .restriction-controls .restriction-control {
