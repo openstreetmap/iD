@@ -402,6 +402,9 @@ en:
         types:
           'cycleway:left': Left side
           'cycleway:right': Right side
+      dance/style:
+        # 'dance:style=*'
+        label: Dance Styles
       date:
         # date=*
         label: Date
@@ -484,6 +487,9 @@ en:
           both: Both / All
           # direction=forward
           forward: Forward
+      dispensing:
+        # dispensing=*
+        label: Dispenses Prescriptions
       display:
         # display=*
         label: Display
@@ -680,6 +686,9 @@ en:
       indoor:
         # indoor=*
         label: Indoor
+      industrial:
+        # industrial=*
+        label: Type
       information:
         # information=*
         label: Type
@@ -820,6 +829,11 @@ en:
         # maxspeed=*
         label: Speed Limit
         # maxspeed field placeholder
+        placeholder: '40, 50, 60...'
+      maxspeed/advisory:
+        # 'maxspeed:advisory=*'
+        label: Advisory Speed Limit
+        # maxspeed/advisory field placeholder
         placeholder: '40, 50, 60...'
       maxstay:
         # maxstay=*
@@ -1549,9 +1563,25 @@ en:
         label: Type
         # tunnel field placeholder
         placeholder: Default
+      usage_rail:
+        # usage=*
+        label: Usage Type
+        options:
+          # usage=branch
+          branch: Branch
+          # usage=industrial
+          industrial: Industrial
+          # usage=main
+          main: Main
+          # usage=military
+          military: Military
+          # usage=test
+          test: Test
+          # usage=tourism
+          tourism: Tourism
       vending:
         # vending=*
-        label: Type of Goods
+        label: Types of Goods
       visibility:
         # visibility=*
         label: Visibility
@@ -1617,6 +1647,9 @@ en:
       wheelchair:
         # wheelchair=*
         label: Wheelchair Access
+      wholesale:
+        # wholesale=*
+        label: Wholesale
       width:
         # width=*
         label: Width (Meters)
@@ -1749,6 +1782,10 @@ en:
         name: Airport Terminal
         # 'terms: airport,aerodrome'
         terms: '<translate with synonyms or related terms for ''Airport Terminal'', separated by commas>'
+      allotments/plot:
+        # allotments=plot
+        name: Community Garden Plot
+        terms: '<translate with synonyms or related terms for ''Community Garden Plot'', separated by commas>'
       amenity:
         # amenity=*
         name: Amenity
@@ -2014,6 +2051,11 @@ en:
         # amenity=marketplace
         name: Marketplace
         terms: '<translate with synonyms or related terms for ''Marketplace'', separated by commas>'
+      amenity/monastery:
+        # amenity=monastery
+        name: Monastery Grounds
+        # 'terms: abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,monastery,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple'
+        terms: '<translate with synonyms or related terms for ''Monastery Grounds'', separated by commas>'
       amenity/motorcycle_parking:
         # amenity=motorcycle_parking
         name: Motorcycle Parking
@@ -2257,6 +2299,11 @@ en:
         name: Cigarette Vending Machine
         # 'terms: cigarette'
         terms: '<translate with synonyms or related terms for ''Cigarette Vending Machine'', separated by commas>'
+      amenity/vending_machine/coffee:
+        # 'amenity=vending_machine, vending=coffee'
+        name: Coffee Vending Machine
+        # 'terms: coffee'
+        terms: '<translate with synonyms or related terms for ''Coffee Vending Machine'', separated by commas>'
       amenity/vending_machine/condoms:
         # 'amenity=vending_machine, vending=condoms'
         name: Condom Vending Machine
@@ -2267,6 +2314,16 @@ en:
         name: Drink Vending Machine
         # 'terms: drink,soda,beverage,juice,pop'
         terms: '<translate with synonyms or related terms for ''Drink Vending Machine'', separated by commas>'
+      amenity/vending_machine/electronics:
+        # 'amenity=vending_machine, vending=electronics'
+        name: Electronics Vending Machine
+        # 'terms: cable,charger,earbud,headphone,phone,tablet'
+        terms: '<translate with synonyms or related terms for ''Electronics Vending Machine'', separated by commas>'
+      amenity/vending_machine/elongated_coin:
+        # 'amenity=vending_machine, vending=elongated_coin'
+        name: Flat Coin Vending Machine
+        # 'terms: coin,crush,elongated,flatten,penny,souvenir'
+        terms: '<translate with synonyms or related terms for ''Flat Coin Vending Machine'', separated by commas>'
       amenity/vending_machine/excrement_bags:
         # 'amenity=vending_machine, vending=excrement_bags'
         name: Excrement Bag Vending Machine
@@ -2277,6 +2334,21 @@ en:
         name: Feminine Hygiene Vending Machine
         # 'terms: condom,tampon,pad,woman,women,menstrual hygiene products,personal care'
         terms: '<translate with synonyms or related terms for ''Feminine Hygiene Vending Machine'', separated by commas>'
+      amenity/vending_machine/food:
+        # 'amenity=vending_machine, vending=food'
+        name: Food Vending Machine
+        # 'terms: food'
+        terms: '<translate with synonyms or related terms for ''Food Vending Machine'', separated by commas>'
+      amenity/vending_machine/fuel:
+        # 'amenity=vending_machine, vending=fuel'
+        name: Gas Pump
+        # 'terms: petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel'
+        terms: '<translate with synonyms or related terms for ''Gas Pump'', separated by commas>'
+      amenity/vending_machine/ice_cream:
+        # 'amenity=vending_machine, vending=ice_cream'
+        name: Ice Cream Vending Machine
+        # 'terms: chocolate,ice cream,frozen,popsicle,vanilla'
+        terms: '<translate with synonyms or related terms for ''Ice Cream Vending Machine'', separated by commas>'
       amenity/vending_machine/news_papers:
         # 'amenity=vending_machine, vending=news_papers'
         name: Newspaper Vending Machine
@@ -2300,6 +2372,11 @@ en:
         name: Transit Ticket Vending Machine
         # 'terms: bus,train,ferry,rail,ticket,transportation'
         terms: '<translate with synonyms or related terms for ''Transit Ticket Vending Machine'', separated by commas>'
+      amenity/vending_machine/stamps:
+        # 'amenity=vending_machine, vending=stamps'
+        name: Postage Vending Machine
+        # 'terms: mail,postage,stamp'
+        terms: '<translate with synonyms or related terms for ''Postage Vending Machine'', separated by commas>'
       amenity/vending_machine/sweets:
         # 'amenity=vending_machine, vending=sweets'
         name: Snack Vending Machine
@@ -2561,6 +2638,10 @@ en:
         name: Entrance/Exit
       building/farm:
         # building=farm
+        name: Farm House
+        terms: '<translate with synonyms or related terms for ''Farm House'', separated by commas>'
+      building/farm_auxiliary:
+        # building=farm_auxiliary
         name: Farm Building
         terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
@@ -3182,6 +3263,11 @@ en:
         name: Motorway Link
         # 'terms: ramp,on ramp,off ramp'
         terms: '<translate with synonyms or related terms for ''Motorway Link'', separated by commas>'
+      highway/passing_place:
+        # highway=passing_place
+        name: Passing Place
+        # 'terms: turnout, pullout'
+        terms: '<translate with synonyms or related terms for ''Passing Place'', separated by commas>'
       highway/path:
         # highway=path
         name: Path
@@ -3347,6 +3433,7 @@ en:
       historic/memorial:
         # historic=memorial
         name: Memorial
+        # 'terms: dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein'
         terms: '<translate with synonyms or related terms for ''Memorial'', separated by commas>'
       historic/monument:
         # historic=monument
@@ -3582,6 +3669,11 @@ en:
         name: Adult Gaming Center
         # 'terms: gambling,slot machine'
         terms: '<translate with synonyms or related terms for ''Adult Gaming Center'', separated by commas>'
+      leisure/amusement_arcade:
+        # leisure=amusement_arcade
+        name: Amusement Arcade
+        # 'terms: pay-to-play games,video games,driving simulators,pinball machines'
+        terms: '<translate with synonyms or related terms for ''Amusement Arcade'', separated by commas>'
       leisure/bird_hide:
         # leisure=bird_hide
         name: Bird Hide
@@ -3602,6 +3694,11 @@ en:
         name: Dance Hall
         # 'terms: ballroom,jive,swing,tango,waltz'
         terms: '<translate with synonyms or related terms for ''Dance Hall'', separated by commas>'
+      leisure/dancing_school:
+        # 'leisure=dance, dance:teaching=yes'
+        name: Dance School
+        # 'terms: jive,swing,tango,waltz,dance teaching'
+        terms: '<translate with synonyms or related terms for ''Dance School'', separated by commas>'
       leisure/dog_park:
         # leisure=dog_park
         name: Dog Park
@@ -3720,6 +3817,11 @@ en:
         name: Nature Reserve
         # 'terms: protected,wildlife'
         terms: '<translate with synonyms or related terms for ''Nature Reserve'', separated by commas>'
+      leisure/outdoor_seating:
+        # leisure=outdoor_seating
+        name: Outdoor Seating Area
+        # 'terms: al fresco,beer garden,dining,cafe,restaurant,pub,bar,patio'
+        terms: '<translate with synonyms or related terms for ''Outdoor Seating Area'', separated by commas>'
       leisure/park:
         # leisure=park
         name: Park
@@ -3863,6 +3965,11 @@ en:
         name: Adit
         # 'terms: entrance,underground,mine,cave'
         terms: '<translate with synonyms or related terms for ''Adit'', separated by commas>'
+      man_made/antenna:
+        # man_made=antenna
+        name: Antenna
+        # 'terms: broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv'
+        terms: '<translate with synonyms or related terms for ''Antenna'', separated by commas>'
       man_made/breakwater:
         # man_made=breakwater
         name: Breakwater
@@ -3918,6 +4025,11 @@ en:
         name: Observation Tower
         # 'terms: lookout tower,fire tower'
         terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
+      man_made/observatory:
+        # man_made=observatory
+        name: Observatory
+        # 'terms: astronomical,meteorological'
+        terms: '<translate with synonyms or related terms for ''Observatory'', separated by commas>'
       man_made/petroleum_well:
         # man_made=petroleum_well
         name: Oil Well
@@ -4062,6 +4174,11 @@ en:
         # natural=heath
         name: Heath
         terms: '<translate with synonyms or related terms for ''Heath'', separated by commas>'
+      natural/mud:
+        # natural=mud
+        name: Mud
+        # 'terms: wetland'
+        terms: '<translate with synonyms or related terms for ''Mud'', separated by commas>'
       natural/peak:
         # natural=peak
         name: Peak
@@ -4535,7 +4652,7 @@ en:
         # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Monorail Stop / Platform'', separated by commas>'
       public_transport/linear_platform_subway:
-        # 'public_transport=platform, train=yes'
+        # 'public_transport=platform, subway=yes'
         name: Subway Stop / Platform
         # 'terms: metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground'
         terms: '<translate with synonyms or related terms for ''Subway Stop / Platform'', separated by commas>'
@@ -4585,7 +4702,7 @@ en:
         # 'terms: monorail,platform,public transit,public transportation,rail,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Monorail Stop / Platform'', separated by commas>'
       public_transport/platform_subway:
-        # 'public_transport=platform, train=yes'
+        # 'public_transport=platform, subway=yes'
         name: Subway Stop / Platform
         # 'terms: metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground'
         terms: '<translate with synonyms or related terms for ''Subway Stop / Platform'', separated by commas>'
@@ -4835,9 +4952,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Shop'', separated by commas>'
       shop/agrarian:
         # shop=agrarian
-        name: Agriculture Shop
+        name: Farm Supply Shop
         # 'terms: agricultural inputs,agricultural machines,seeds,pesticides,fertilizer,agricultural tools'
-        terms: '<translate with synonyms or related terms for ''Agriculture Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Farm Supply Shop'', separated by commas>'
       shop/alcohol:
         # shop=alcohol
         name: Liquor Store
@@ -5111,6 +5228,11 @@ en:
         # shop=hardware
         name: Hardware Store
         terms: '<translate with synonyms or related terms for ''Hardware Store'', separated by commas>'
+      shop/health_food:
+        # 'shop=health_food '
+        name: Health Food Shop
+        # 'terms: wholefood,vitamins,vegetarian,vegan'
+        terms: '<translate with synonyms or related terms for ''Health Food Shop'', separated by commas>'
       shop/hearing_aids:
         # shop=hearing_aids
         name: Hearing Aids Store
@@ -5243,6 +5365,11 @@ en:
         name: Pet Store
         # 'terms: animal,cat,dog,fish,kitten,puppy,reptile'
         terms: '<translate with synonyms or related terms for ''Pet Store'', separated by commas>'
+      shop/pet_grooming:
+        # shop=pet_grooming
+        name: Pet Grooming Store
+        # 'terms: dog'
+        terms: '<translate with synonyms or related terms for ''Pet Grooming Store'', separated by commas>'
       shop/photo:
         # shop=photo
         name: Photography Store
@@ -5370,6 +5497,11 @@ en:
         name: Weapon Shop
         # 'terms: ammo,gun,knife,knives'
         terms: '<translate with synonyms or related terms for ''Weapon Shop'', separated by commas>'
+      shop/wholesale:
+        # shop=wholesale
+        name: Wholesale Store
+        # 'terms: warehouse club,cash and carry'
+        terms: '<translate with synonyms or related terms for ''Wholesale Store'', separated by commas>'
       shop/window_blind:
         # shop=window_blind
         name: Window Blind Store
@@ -5574,16 +5706,20 @@ en:
         terms: '<translate with synonyms or related terms for ''No U-turn'', separated by commas>'
       type/restriction/only_left_turn:
         # 'type=restriction, restriction=only_left_turn'
-        name: Left Turn Only
-        terms: '<translate with synonyms or related terms for ''Left Turn Only'', separated by commas>'
+        name: Only Left Turn
+        terms: '<translate with synonyms or related terms for ''Only Left Turn'', separated by commas>'
       type/restriction/only_right_turn:
         # 'type=restriction, restriction=only_right_turn'
-        name: Right Turn Only
-        terms: '<translate with synonyms or related terms for ''Right Turn Only'', separated by commas>'
+        name: Only Right Turn
+        terms: '<translate with synonyms or related terms for ''Only Right Turn'', separated by commas>'
       type/restriction/only_straight_on:
         # 'type=restriction, restriction=only_straight_on'
-        name: No Turns
-        terms: '<translate with synonyms or related terms for ''No Turns'', separated by commas>'
+        name: Only Straight On
+        terms: '<translate with synonyms or related terms for ''Only Straight On'', separated by commas>'
+      type/restriction/only_u_turn:
+        # 'type=restriction, restriction=only_u_turn'
+        name: Only U-turn
+        terms: '<translate with synonyms or related terms for ''Only U-turn'', separated by commas>'
       type/route:
         # type=route
         name: Route

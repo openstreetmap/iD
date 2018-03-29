@@ -10,5 +10,5 @@
         "type": "restriction",
         "restriction": "only_straight_on"
     },
-    "name": "No Turns"
+    "name": "Only Straight On"
 }

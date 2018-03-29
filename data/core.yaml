@@ -1,4 +1,8 @@
 en:
+  icons:
+    information: info
+    remove: remove
+    undo: undo
   modes:
     add_area:
       title: Area
@@ -219,14 +223,41 @@ en:
       multiple_ways: There are too many lines here to split.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
-      help:
-        select: Click to select a road segment.
-        toggle: Click to toggle turn restrictions.
-        toggle_on: 'Click to add a "{restriction}" restriction.'
-        toggle_off: 'Click to remove the "{restriction}" restriction.'
       annotation:
         create: Added a turn restriction
         delete: Deleted a turn restriction
+  restriction:
+    controls:
+      distance: Distance
+      distance_up_to: "Up to {distance}"
+      via: Via
+      via_node_only: "Node only"
+      via_up_to_one: "Up to 1 way"
+      via_up_to_two: "Up to 2 ways"
+    help:
+      indirect: "(indirect)"
+      turn:
+        no_left_turn: "NO Left Turn {indirect}"
+        no_right_turn: "NO Right Turn {indirect}"
+        no_u_turn: "NO U-Turn {indirect}"
+        no_straight_on: "NO Straight On {indirect}"
+        only_left_turn: "ONLY Left Turn {indirect}"
+        only_right_turn: "ONLY Right Turn {indirect}"
+        only_u_turn: "ONLY U-Turn {indirect}"
+        only_straight_on: "ONLY Straight On {indirect}"
+        allowed_left_turn: "Left Turn Allowed {indirect}"
+        allowed_right_turn: "Right Turn Allowed {indirect}"
+        allowed_u_turn: "U-Turn Allowed {indirect}"
+        allowed_straight_on: "Straight On Allowed {indirect}"
+      from: FROM
+      via: VIA
+      to: TO
+      from_name: "{from} {fromName}"
+      from_name_to_name: "{from} {fromName} {to} {toName}"
+      via_names: "{via} {viaNames}"
+      select_from: "Click to select a {from} segment"
+      select_from_name: "Click to select {from} {fromName}"
+      toggle: "Click for \"{turn}\""
   undo:
     tooltip: "Undo: {action}"
     nothing: Nothing to undo.
@@ -309,7 +340,8 @@ en:
       title: Measurement
       selected: "{n} selected"
       geometry: Geometry
-      closed: closed
+      closed_line: closed line
+      closed_area: closed area
       center: Center
       perimeter: Perimeter
       length: Length
@@ -381,7 +413,7 @@ en:
     switch: Switch back to this background
     custom: Custom
     custom_button: Edit custom background
-    custom_prompt: "Enter a tile URL template. Valid tokens are:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y tile scheme\n   - {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
+    custom_prompt: "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
     overlays: Overlays
     imagery_source_faq: Imagery Info / Report a Problem
     reset: reset
@@ -535,7 +567,7 @@ en:
     untagged_area_tooltip: "Select a feature type that describes what this area is."
     untagged_relation: Untagged relation
     untagged_relation_tooltip: "Select a feature type that describes what this relation is."
-    many_deletions: "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
+    many_deletions: "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
     tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
     deprecated_tags: "Deprecated tags: {tags}"
   zoom:
@@ -753,6 +785,38 @@ en:
       editing_process_7: "The GeoService importer now gives you the option to map the service's fields to OSM tags. You can change the name of the tag in your GeoService. You can add new fields - for example, addresses in Norfolk, Virginia should have ```addr:city=Norfolk``` and ```addr:state=VA``` which are ignored as redundant in the city's data. Fields which you do not map are removed from the data before import. After features have been fetched they need to be reviewed and approved individually prior to being included in an actual changeset."
       wat: "**I've heard of GeoJSON. What is a _GeoService_?** The [GeoServices](http://geoservices.github.io/index.html) REST specification was developed by Esri and transferred to the [Open Web Foundation](http://www.openwebfoundation.org/faqs/users-of-owf-agreements) in 2010. In iD, we are leveraging its predictable pattern for querying spatial data (ie: [which US County am I located in](      https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/15/query?
       outFields=*&geometryType=esriGeometryPoint&geometry=-77.069,38.897&inSR=4326&f=geojson)). Besides datasets published with Esri tools, the open source project [Koop](http://koopjs.github.io/) makes it possible to use this tool to fetch data from CKAN and Socrata data stores as well."
+    field:
+      restrictions:
+        title: Turn Restrictions Help
+        about:
+          title: About
+          about: "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads."
+          from_via_to: "A turn restriction always contains: one **FROM way**, one **TO way**, and either one **VIA node** or one or more **VIA ways**."
+          maxdist: "The \"{distField}\" slider controls how far to search for additional connected roads."
+          maxvia: "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+        inspecting:
+          title: Inspecting
+          about: "Hover over any **FROM** segment to see whether it has any turn restrictions. Each possible **TO** destination will be drawn with a colored shadow showing whether a restriction exists."
+          from_shadow: "{fromShadow} **FROM segment**"
+          allow_shadow: "{allowShadow} **TO Allowed**"
+          restrict_shadow: "{restrictShadow} **TO Restricted**"
+          only_shadow: "{onlyShadow} **TO Only**"
+          restricted: "\"Restricted\" means that there is a turn restriction, for example \"No Left Turn\"."
+          only: "\"Only\" means that a vehicle taking that path may only make that choice, for example \"Only Straight On\"."
+        modifying:
+          title: Modifying
+          about: "To modify turn restrictions, first click on any starting **FROM** segment to select it. The selected segment will pulse, and all possible **TO** destinations will appear as turn symbols."
+          indicators: "Then, click on a turn symbol to toggle it between \"Allowed\", \"Restricted\", and \"Only\"."
+          allow_turn: "{allowTurn} **TO Allowed**"
+          restrict_turn: "{restrictTurn} **TO Restricted**"
+          only_turn: "{onlyTurn} **TO Only**"
+        tips:
+          title: Tips
+          simple: "**Prefer simple restrictions over complex ones.**"
+          simple_example: "For example, avoid creating a via-way restriction if a simpler via-node turn restriction will do."
+          indirect: "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**"
+          indirect_example: "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection."
+          indirect_noedit: "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
   intro:
     done: done
     ok: OK
@@ -1094,3 +1158,24 @@ en:
         history: "Toggle history panel"
         location: "Toggle location panel"
         measurement: "Toggle measurement panel"
+  units:
+    feet: "{quantity} ft"
+    miles: "{quantity} mi"
+    square_feet: "{quantity} sq ft"
+    square_miles: "{quantity} sq mi"
+    acres: "{quantity} ac"
+    meters: "{quantity} m"
+    kilometers: "{quantity} km"
+    square_meters: "{quantity} m²"
+    square_kilometers: "{quantity} km²"
+    hectares: "{quantity} ha"
+    area_pair: "{area1} ({area2})"
+    arcdegrees: "{quantity}°"
+    arcminutes: "{quantity}′"
+    arcseconds: "{quantity}″"
+    north: "N"
+    south: "S"
+    east: "E"
+    west: "W"
+    coordinate: "{coordinate}{direction}"
+    coordinate_pair: "{latitude}, {longitude}"

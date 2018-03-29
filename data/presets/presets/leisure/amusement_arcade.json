@@ -1,0 +1,24 @@
+{
+    "icon": "gaming",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "pay-to-play games",
+        "video games",
+        "driving simulators",
+        "pinball machines"
+    ],
+    "tags": {
+        "leisure": "amusement_arcade"
+    },
+    "name": "Amusement Arcade"
+}

@@ -18,9 +18,6 @@
         "bg": {
             "rtl": false
         },
-        "bg-BG": {
-            "rtl": false
-        },
         "bn": {
             "rtl": false
         },
@@ -30,7 +27,13 @@
         "ca": {
             "rtl": false
         },
+        "ckb": {
+            "rtl": true
+        },
         "cs": {
+            "rtl": false
+        },
+        "cy": {
             "rtl": false
         },
         "da": {
@@ -121,10 +124,9 @@
             "rtl": false
         },
         "ku": {
-            "rtl": true
+            "rtl": false
         },
         "lij": {
-            "rtl": false
         },
         "lt": {
             "rtl": false
@@ -190,6 +192,9 @@
             "rtl": false
         },
         "sl": {
+            "rtl": false
+        },
+        "so": {
             "rtl": false
         },
         "sq": {

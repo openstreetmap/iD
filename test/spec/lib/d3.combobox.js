@@ -160,6 +160,18 @@ describe('d3.combobox', function() {
         expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');  // skip foobar
     });
 
+    it('does not autocomplete numeric options', function() {
+        var numeric = [
+            {title: '100', value: '100'},
+            {title: '110', value: '110'}
+        ];
+        input.call(combobox.data(numeric));
+        focusTypeahead(input);
+        simulateKeypress('1');
+        simulateKeypress('0');
+        expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
+    });
+
     it('selects the completed portion of the value', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);

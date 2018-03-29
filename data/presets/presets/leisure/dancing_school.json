@@ -1,0 +1,30 @@
+{
+    "icon": "music",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "dance/style"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "jive",
+        "swing",
+        "tango",
+        "waltz",
+        "dance teaching"
+    ],
+    "tags": {
+        "leisure": "dance",
+        "dance:teaching": "yes"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "dance"
+    },
+    "name": "Dance School"
+}

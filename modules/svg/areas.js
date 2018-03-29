@@ -58,9 +58,10 @@ export function svgAreas(projection, context) {
 
 
         // Targets allow hover and vertex snapping
+        var targetData = data.targets.filter(getPath);
         var targets = selection.selectAll('.area.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
-            .data(data.targets, function key(d) { return d.id; });
+            .data(targetData, function key(d) { return d.id; });
 
         // exit
         targets.exit()
@@ -75,9 +76,10 @@ export function svgAreas(projection, context) {
 
 
         // NOPE
+        var nopeData = data.nopes.filter(getPath);
         var nopes = selection.selectAll('.area.target-nope')
             .filter(function(d) { return filter(d.properties.entity); })
-            .data(data.nopes, function key(d) { return d.id; });
+            .data(nopeData, function key(d) { return d.id; });
 
         // exit
         nopes.exit()
@@ -90,7 +92,6 @@ export function svgAreas(projection, context) {
             .attr('d', getPath)
             .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; });
     }
-
 
 
     function drawAreas(selection, graph, entities, filter) {

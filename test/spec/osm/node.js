@@ -565,6 +565,30 @@ describe('iD.osmNode', function () {
             expect(node2.directions(graph, projection)).to.eql([]);
         });
 
+        it('supports multiple directions delimited by ;', function () {
+            var node1 = iD.osmNode({ loc: [0, 0], tags: { direction: '0;45' }});
+            var node2 = iD.osmNode({ loc: [0, 0], tags: { direction: '45;north' }});
+            var node3 = iD.osmNode({ loc: [0, 0], tags: { direction: 'north;east' }});
+            var node4 = iD.osmNode({ loc: [0, 0], tags: { direction: 'n;s;e;w' }});
+            var node5 = iD.osmNode({ loc: [0, 0], tags: { direction: 's;wat' }});
+            var graph = iD.coreGraph([node1, node2, node3, node4, node5]);
+
+            expect(node1.directions(graph, projection)).to.eql([0, 45], 'numeric 0, numeric 45');
+            expect(node2.directions(graph, projection)).to.eql([45, 0], 'numeric 45, cardinal north');
+            expect(node3.directions(graph, projection)).to.eql([0, 90], 'cardinal north and east');
+            expect(node4.directions(graph, projection)).to.eql([0, 180, 90, 270], 'cardinal n,s,e,w');
+            expect(node5.directions(graph, projection)).to.eql([180], 'cardinal 180 and nonsense');
+        });
+
+        it('supports mixing textual, cardinal, numeric directions, delimited by ;', function () {
+            var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both;ne;60' }});
+            var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+            var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+            var graph = iD.coreGraph([node1, node2, node3, way]);
+            expect(node2.directions(graph, projection)).to.have.members([90, 270, 45, 60]);
+        });
+
     });
 
     describe('#asJXON', function () {

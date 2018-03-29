@@ -1,6 +1,5 @@
 import _difference from 'lodash-es/difference';
 import _each from 'lodash-es/each';
-import _omit from 'lodash-es/omit';
 import _isEqual from 'lodash-es/isEqual';
 import _values from 'lodash-es/values';
 
@@ -14,32 +13,50 @@ import _values from 'lodash-es/values';
     child and parent relationships.
  */
 export function coreDifference(base, head) {
-    var changes = {},
-        difference = {},
-        length = 0;
-
+    var _changes = {};
+    var _diff = {};
+    var _length = 0;
+    var i, k, h, b, keys;
 
     function changed(h, b) {
-        return h !== b && !_isEqual(_omit(h, 'v'), _omit(b, 'v'));
+        if (h === b) return false;
+        if (!h || !b) return true;
+
+        if (h.loc || b.loc) {
+            if (!h.loc && b.loc || h.loc && !b.loc ||
+                h.loc[0] !== b.loc[0] || h.loc[1] !== b.loc[1]) return true;
+        }
+        if (h.nodes || b.nodes) {
+            if (!_isEqual(h.nodes, b.nodes)) return true;
+        }
+        if (h.members || b.members) {
+            if (!_isEqual(h.members, b.members)) return true;
+        }
+        return !_isEqual(h.tags, b.tags);
     }
 
 
-    _each(head.entities, function(h, id) {
-        var b = base.entities[id];
+    keys = Object.keys(head.entities);
+    for (i = 0; i < keys.length; i++) {
+        k = keys[i];
+        h = head.entities[k];
+        b = base.entities[k];
         if (changed(h, b)) {
-            changes[id] = {base: b, head: h};
-            length++;
+            _changes[k] = {base: b, head: h};
+            _length++;
         }
-    });
+    }
 
-
-    _each(base.entities, function(b, id) {
-        var h = head.entities[id];
-        if (!changes[id] && changed(h, b)) {
-            changes[id] = {base: b, head: h};
-            length++;
+    keys = Object.keys(base.entities);
+    for (i = 0; i < keys.length; i++) {
+        k = keys[i];
+        h = head.entities[k];
+        b = base.entities[k];
+        if (!_changes[k] && changed(h, b)) {
+            _changes[k] = {base: b, head: h};
+            _length++;
         }
-    });
+    }
 
 
     function addParents(parents, result) {
@@ -55,53 +72,53 @@ export function coreDifference(base, head) {
     }
 
 
-    difference.length = function() {
-        return length;
+    _diff.length = function length() {
+        return _length;
     };
 
 
-    difference.changes = function() {
-        return changes;
+    _diff.changes = function changes() {
+        return _changes;
     };
 
 
-    difference.extantIDs = function() {
+    _diff.extantIDs = function extantIDs() {
         var result = [];
-        _each(changes, function(change, id) {
+        _each(_changes, function(change, id) {
             if (change.head) result.push(id);
         });
         return result;
     };
 
 
-    difference.modified = function() {
+    _diff.modified = function modified() {
         var result = [];
-        _each(changes, function(change) {
+        _each(_changes, function(change) {
             if (change.base && change.head) result.push(change.head);
         });
         return result;
     };
 
 
-    difference.created = function() {
+    _diff.created = function created() {
         var result = [];
-        _each(changes, function(change) {
+        _each(_changes, function(change) {
             if (!change.base && change.head) result.push(change.head);
         });
         return result;
     };
 
 
-    difference.deleted = function() {
+    _diff.deleted = function deleted() {
         var result = [];
-        _each(changes, function(change) {
+        _each(_changes, function(change) {
             if (change.base && !change.head) result.push(change.base);
         });
         return result;
     };
 
 
-    difference.summary = function() {
+    _diff.summary = function summary() {
         var relevant = {};
 
         function addEntity(entity, graph, changeType) {
@@ -120,7 +137,10 @@ export function coreDifference(base, head) {
             }
         }
 
-        _each(changes, function(change) {
+        var keys = Object.keys(_changes);
+        for (var i = 0; i < keys.length; i++) {
+            var change = _changes[keys[i]];
+
             if (change.head && change.head.geometry(head) !== 'vertex') {
                 addEntity(change.head, head, change.base ? 'modified' : 'created');
 
@@ -128,8 +148,8 @@ export function coreDifference(base, head) {
                 addEntity(change.base, base, 'deleted');
 
             } else if (change.base && change.head) { // modified vertex
-                var moved    = !_isEqual(change.base.loc,  change.head.loc),
-                    retagged = !_isEqual(change.base.tags, change.head.tags);
+                var moved    = !_isEqual(change.base.loc,  change.head.loc);
+                var retagged = !_isEqual(change.base.tags, change.head.tags);
 
                 if (moved) {
                     addParents(change.head);
@@ -145,21 +165,22 @@ export function coreDifference(base, head) {
             } else if (change.base && change.base.hasInterestingTags()) { // deleted vertex
                 addEntity(change.base, base, 'deleted');
             }
-        });
+        }
 
         return _values(relevant);
     };
 
 
-    difference.complete = function(extent) {
-        var result = {}, id, change;
+    _diff.complete = function complete(extent) {
+        var result = {};
+        var id, change;
 
-        for (id in changes) {
-            change = changes[id];
+        for (id in _changes) {
+            change = _changes[id];
 
-            var h = change.head,
-                b = change.base,
-                entity = h || b;
+            var h = change.head;
+            var b = change.base;
+            var entity = h || b;
 
             if (extent &&
                 (!h || !h.intersects(extent, head)) &&
@@ -169,9 +190,9 @@ export function coreDifference(base, head) {
             result[id] = h;
 
             if (entity.type === 'way') {
-                var nh = h ? h.nodes : [],
-                    nb = b ? b.nodes : [],
-                    diff, i;
+                var nh = h ? h.nodes : [];
+                var nb = b ? b.nodes : [];
+                var diff, i;
 
                 diff = _difference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
@@ -192,5 +213,5 @@ export function coreDifference(base, head) {
     };
 
 
-    return difference;
+    return _diff;
 }

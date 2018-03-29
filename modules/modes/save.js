@@ -48,7 +48,7 @@ var _isSaving = false;
 
 export function modeSave(context) {
     var mode = { id: 'save' };
-    var keybinding = d3_keybinding('save');
+    var keybinding = d3_keybinding('modeSave');
 
     // filter out pending import objects
     var deletions = [];

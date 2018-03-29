@@ -16,16 +16,16 @@
     ],
     "tags": {
         "public_transport": "platform",
-        "train": "yes"
+        "subway": "yes"
     },
     "addTags": {
         "public_transport": "platform",
-        "train": "yes",
+        "subway": "yes",
         "railway": "platform"
     },
     "removeTags": {
         "public_transport": "platform",
-        "train": "yes",
+        "subway": "yes",
         "railway": "platform"
     },
     "reference": {

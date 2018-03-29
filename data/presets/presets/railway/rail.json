@@ -1,19 +1,22 @@
 {
     "icon": "railway-rail",
-    "geometry": [
-        "line"
-    ],
-    "tags": {
-        "railway": "rail"
-    },
     "fields": [
         "name",
         "structure",
         "gauge",
         "electrified",
         "maxspeed",
-        "service_rail"
+        "service_rail",
+        "usage_rail",
+        "voltage",
+        "frequency"
     ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "rail"
+    },
     "terms": [],
     "name": "Rail"
 }

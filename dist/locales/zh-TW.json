@@ -285,16 +285,46 @@
                 "connected_to_hidden": "這個沒辦法切割，因為與其他隱藏的圖徵相連."
             },
             "restriction": {
-                "help": {
-                    "select": "點選選擇一段道路",
-                    "toggle": "點選切換轉向限制。",
-                    "toggle_on": "點選增加\"{restriction}\"的限制。",
-                    "toggle_off": "點選移除\"{restriction}\"的限制。"
-                },
                 "annotation": {
                     "create": "已增加轉向限制",
                     "delete": "已移除轉向限制"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "距離",
+                "distance_up_to": "最大 {distance}",
+                "via": "經由",
+                "via_node_only": "只有節點",
+                "via_up_to_one": "最多 1 路徑",
+                "via_up_to_two": "最多 2 路徑"
+            },
+            "help": {
+                "indirect": "(間接)",
+                "turn": {
+                    "no_left_turn": "禁止左轉 {indirect}",
+                    "no_right_turn": "禁止右轉 {indirect}",
+                    "no_u_turn": "禁止迴轉 {indirect}",
+                    "no_straight_on": "禁止直行 {indirect}",
+                    "only_left_turn": "只能左轉 {indirect}",
+                    "only_right_turn": "只能右轉 {indirect}",
+                    "only_u_turn": "只能迴轉 {indirect}",
+                    "only_straight_on": "只能直行 {indirect}",
+                    "allowed_left_turn": "允許左轉 {indirect}",
+                    "allowed_right_turn": "允許右轉 {indirect}",
+                    "allowed_u_turn": "允許迴轉 {indirect}",
+                    "allowed_straight_on": "允許直行 {indirect}"
+                },
+                "from": "從",
+                "via": "經由",
+                "to": "到",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "點選 {from} 片段",
+                "select_from_name": "點選 {from} 片段 {fromName}",
+                "toggle": "點 \"{turn}\""
             }
         },
         "undo": {
@@ -389,7 +419,8 @@
                 "title": "測量",
                 "selected": "{n} 被選擇",
                 "geometry": "形狀",
-                "closed": "已關閉",
+                "closed_line": "封閉線段",
+                "closed_area": "封閉區域",
                 "center": "中心",
                 "perimeter": "周長",
                 "length": "長度",
@@ -470,7 +501,7 @@
             "switch": "切換回此背景",
             "custom": "客製化",
             "custom_button": "編輯自訂的背景",
-            "custom_prompt": "輸入圖磚 URL 範本。有效的代號是：\n   - {zoom}/{z}, {x}, {y} 給 Z/X/Y 結構\n   - {ty} 給 TMS 樣式的 Y 座標\n   - {u} 給 quadtile 結構使用\n   - {switch:a,b,c} 給 DNS 伺服器多路通訊使用\n\n範例：\n{example}",
+            "custom_prompt": "輸入標題網址模版。有效的代碼是： \n- {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n- {-y} or {ty} for flipped TMS-style Y coordinates\n- {u} for quadtile scheme\n- {switch:a,b,c} for DNS server multiplexing\n\n範例：\n{example}",
             "overlays": "覆疊",
             "imagery_source_faq": "影像資訊 / 問題回報",
             "reset": "重設",
@@ -654,7 +685,7 @@
             "untagged_area_tooltip": "選擇適當的物件種類描述這區域是什麼。",
             "untagged_relation": "未標記的關係",
             "untagged_relation_tooltip": "選取一個可以適當地描述這個關係的圖徽類型。",
-            "many_deletions": "您正要刪除 {n} 個圖徽。您確定您要這麼做嗎？這將會把它們從每個人都看到的 openstreetmap.org 的地圖上刪除。",
+            "many_deletions": "您正要刪除 {n} 個圖徽：{p} 個節點、{l} 條線段、{a} 個區域、{r} 個關係。您確定您要這麼做嗎？這將會把它們從每個人都看得到的 openstreetmap.org 的地圖上刪除。",
             "tag_suggests_area": "{tag} 標籤所建議的線段應為區域，但這個不是一區域",
             "deprecated_tags": "已棄用的標籤︰{tags}"
         },
@@ -851,6 +882,25 @@
                 "using": "要用 GPS 軌跡畫地圖，請把資料檔案拖到地圖編輯器裡。如果成功辨識，則會在地圖上顯示亮紫色的線條。點地圖旁邊的 {data}  **地圖資料**面板啟用、關閉，或是縮放到你的 GPS 資料。",
                 "tracing": "GPS 軌跡並未傳到開放街圖 - 而最好的使用方式則是照著軌跡的指引，繪製你要新增的圖徵。",
                 "upload": "您也可以透過[上傳你的 GPS 資訊至 OpenStreetMap 開放街圖](https://www.openstreetmap.org/trace/create)以供其他使用者利用。"
+            },
+            "field": {
+                "restrictions": {
+                    "title": "轉彎限制說明",
+                    "about": {
+                        "title": "關於",
+                        "about": "這個欄位允許你偵測和變動轉彎限制，顯示選取的交叉路口的模型，以及鄰近連結的道路。",
+                        "from_via_to": "轉彎限制總是有：一個**從路徑**，一個**到路徑**，以及一個**經由節點*，或一個或多個**經由路徑**。"
+                    },
+                    "inspecting": {
+                        "title": "偵測"
+                    },
+                    "modifying": {
+                        "title": "變動"
+                    },
+                    "tips": {
+                        "title": "技巧"
+                    }
+                }
             }
         },
         "intro": {
@@ -1220,6 +1270,28 @@
                     "measurement": "切換測量面板"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} 英呎",
+            "miles": "{quantity} 英哩",
+            "square_feet": "{quantity} 平方英呎",
+            "square_miles": "{quantity} 平方英哩",
+            "acres": "{quantity} 英畝",
+            "meters": "{quantity} 公尺",
+            "kilometers": "{quantity} 公里",
+            "square_meters": "{quantity} 平方公尺",
+            "square_kilometers": "{quantity} 平方公里",
+            "hectares": "{quantity} 公頃",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "北",
+            "south": "南",
+            "east": "東",
+            "west": "西",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1612,6 +1684,9 @@
                         "cycleway:right": "右側"
                     }
                 },
+                "dance/style": {
+                    "label": "舞蹈類型"
+                },
                 "date": {
                     "label": "日期"
                 },
@@ -1673,6 +1748,9 @@
                         "both": "兩者都有 / 全都有",
                         "forward": "前進"
                     }
+                },
+                "dispensing": {
+                    "label": "發放處方"
                 },
                 "display": {
                     "label": "顯示"
@@ -1749,7 +1827,7 @@
                     "label": "設備類型"
                 },
                 "fixme": {
-                    "label": "修復我"
+                    "label": "修正我"
                 },
                 "ford": {
                     "label": "類型",
@@ -2616,6 +2694,9 @@
                 "wheelchair": {
                     "label": "輪椅通道"
                 },
+                "wholesale": {
+                    "label": "批發"
+                },
                 "width": {
                     "label": "寬度 (公尺)"
                 },
@@ -3102,6 +3183,10 @@
                     "name": "淋浴間",
                     "terms": "淋浴間,淋浴,淋浴設施"
                 },
+                "amenity/smoking_area": {
+                    "name": "吸煙區",
+                    "terms": "吸煙區,吸菸區"
+                },
                 "amenity/social_facility": {
                     "name": "社福機構",
                     "terms": "社福設施"
@@ -3335,6 +3420,10 @@
                     "name": "樹籬",
                     "terms": "樹籬"
                 },
+                "barrier/kerb": {
+                    "name": "路緣",
+                    "terms": "路緣"
+                },
                 "barrier/kissing_gate": {
                     "name": "單人轉門",
                     "terms": "U形旋轉小門,V形旋轉小門"
@@ -3432,6 +3521,10 @@
                 "building/farm": {
                     "name": "農舍",
                     "terms": "農舍"
+                },
+                "building/farm_auxiliary": {
+                    "name": "農場建築物",
+                    "terms": "農場建築物"
                 },
                 "building/garage": {
                     "name": "車庫",
@@ -3785,6 +3878,10 @@
                 },
                 "emergency/private": {
                     "name": "供私人緊急通行"
+                },
+                "emergency/water_tank": {
+                    "name": "緊急水箱",
+                    "terms": "緊急水箱"
                 },
                 "emergency/yes": {
                     "name": "開放緊急通行"
@@ -4342,6 +4439,10 @@
                     "name": "成人遊戲中心",
                     "terms": "成人遊樂場"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "遊樂場",
+                    "terms": "遊樂場"
+                },
                 "leisure/bird_hide": {
                     "name": "鳥類棲息處",
                     "terms": "鳥類棲息處,鳥類棲地,鳥類藏身處"
@@ -4357,6 +4458,10 @@
                 "leisure/dance": {
                     "name": "舞廳",
                     "terms": "跳舞場所"
+                },
+                "leisure/dancing_school": {
+                    "name": "舞蹈學校",
+                    "terms": "舞蹈學校"
                 },
                 "leisure/dog_park": {
                     "name": "狗公園",
@@ -5428,8 +5533,8 @@
                     "terms": "商店,商行"
                 },
                 "shop/agrarian": {
-                    "name": "農用品店",
-                    "terms": "農用品店"
+                    "name": "農業用品補給店",
+                    "terms": "農用品店 "
                 },
                 "shop/alcohol": {
                     "name": "酒類專賣店",
@@ -5669,6 +5774,10 @@
                     "name": "五金店",
                     "terms": "五金行"
                 },
+                "shop/health_food": {
+                    "name": "健康食品店",
+                    "terms": "保康食品店"
+                },
                 "shop/hearing_aids": {
                     "name": "助聽器店",
                     "terms": "助聽器商店"
@@ -5907,6 +6016,10 @@
                 "shop/weapons": {
                     "name": "武器店",
                     "terms": "武器商店,槍店"
+                },
+                "shop/wholesale": {
+                    "name": "批發商",
+                    "terms": "批發商,批發店"
                 },
                 "shop/window_blind": {
                     "name": "窗廉店",
@@ -6283,6 +6396,13 @@
                 },
                 "description": "Esri 世界衛星圖。",
                 "name": "Esri 世界衛星圖"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "Ersi 的封存衛星圖可能比預設的圖層更清晰且更精確。",
+                "name": "Esri 世界衛星圖（清晰版）Beta"
             },
             "MAPNIK": {
                 "attribution": {

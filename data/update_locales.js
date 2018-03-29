@@ -1,9 +1,8 @@
 /* Downloads the latest translations from Transifex */
 
-require = require('@std/esm')(module, { esm: 'js' }); // eslint-disable-line no-global-assign
-
-const _isEmpty = require('lodash-es/isEmpty').default;
-const _merge = require('lodash-es/merge').default;
+const requireESM = require('@std/esm')(module, { esm: 'js' });
+const _isEmpty = requireESM('lodash-es/isEmpty').default;
+const _merge = requireESM('lodash-es/merge').default;
 
 var request = require('request').defaults({ maxSockets: 1 });
 var yaml = require('js-yaml');
@@ -52,7 +51,14 @@ asyncMap(resources, getResource, function(err, locales) {
                 obj[code] = locale[code];
                 fs.writeFileSync(outdir + code + '.json', JSON.stringify(obj, null, 4));
                 getLanguageInfo(code, function(err, info) {
-                    dataLocales[code] = { rtl: info && info.rtl };
+                    var rtl = info && info.rtl;
+                    // exceptions: see #4783
+                    if (code === 'ckb') {
+                        rtl = true;
+                    } else if (code === 'ku') {
+                        rtl = false;
+                    }
+                    dataLocales[code] = { rtl: rtl };
                     done();
                 });
             }

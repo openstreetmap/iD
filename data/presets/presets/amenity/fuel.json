@@ -2,6 +2,7 @@
     "icon": "fuel",
     "fields": [
         "name",
+        "brand",
         "operator",
         "address",
         "fuel_multi",

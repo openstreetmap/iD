@@ -1,5 +1,4 @@
 import _clone from 'lodash-es/clone';
-import _includes from 'lodash-es/includes';
 import _isEqual from 'lodash-es/isEqual';
 import _isFunction from 'lodash-es/isFunction';
 import _keys from 'lodash-es/keys';
@@ -17,8 +16,8 @@ import { dataDiscarded } from '../../data';
 
 
 export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
-    var option = 'safe',  // 'safe', 'force_local', 'force_remote'
-        conflicts = [];
+    var _option = 'safe';  // 'safe', 'force_local', 'force_remote'
+    var _conflicts = [];
 
 
     function user(d) {
@@ -32,32 +31,32 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             return (Math.abs(a[0] - b[0]) < epsilon) && (Math.abs(a[1] - b[1]) < epsilon);
         }
 
-        if (option === 'force_local' || pointEqual(target.loc, remote.loc)) {
+        if (_option === 'force_local' || pointEqual(target.loc, remote.loc)) {
             return target;
         }
-        if (option === 'force_remote') {
+        if (_option === 'force_remote') {
             return target.update({loc: remote.loc});
         }
 
-        conflicts.push(t('merge_remote_changes.conflict.location', { user: user(remote.user) }));
+        _conflicts.push(t('merge_remote_changes.conflict.location', { user: user(remote.user) }));
         return target;
     }
 
 
     function mergeNodes(base, remote, target) {
-        if (option === 'force_local' || _isEqual(target.nodes, remote.nodes)) {
+        if (_option === 'force_local' || _isEqual(target.nodes, remote.nodes)) {
             return target;
         }
-        if (option === 'force_remote') {
+        if (_option === 'force_remote') {
             return target.update({nodes: remote.nodes});
         }
 
-        var ccount = conflicts.length,
-            o = base.nodes || [],
-            a = target.nodes || [],
-            b = remote.nodes || [],
-            nodes = [],
-            hunks = diff3Merge(a, o, b, true);
+        var ccount = _conflicts.length;
+        var o = base.nodes || [];
+        var a = target.nodes || [];
+        var b = remote.nodes || [];
+        var nodes = [];
+        var hunks = diff3Merge(a, o, b, true);
 
         for (var i = 0; i < hunks.length; i++) {
             var hunk = hunks[i];
@@ -72,13 +71,13 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 } else if (_isEqual(c.o, c.b)) {  // only changed locally
                     nodes.push.apply(nodes, c.a);
                 } else {       // changed both locally and remotely
-                    conflicts.push(t('merge_remote_changes.conflict.nodelist', { user: user(remote.user) }));
+                    _conflicts.push(t('merge_remote_changes.conflict.nodelist', { user: user(remote.user) }));
                     break;
                 }
             }
         }
 
-        return (conflicts.length === ccount) ? target.update({nodes: nodes}) : target;
+        return (_conflicts.length === ccount) ? target.update({nodes: nodes}) : target;
     }
 
 
@@ -90,11 +89,11 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 graph.parentRelations(node).length > 0;
         }
 
-        var ccount = conflicts.length;
+        var ccount = _conflicts.length;
 
         for (var i = 0; i < children.length; i++) {
-            var id = children[i],
-                node = graph.hasEntity(id);
+            var id = children[i];
+            var node = graph.hasEntity(id);
 
             // remove unused childNodes..
             if (targetWay.nodes.indexOf(id) === -1) {
@@ -105,29 +104,29 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             }
 
             // restore used childNodes..
-            var local = localGraph.hasEntity(id),
-                remote = remoteGraph.hasEntity(id),
-                target;
+            var local = localGraph.hasEntity(id);
+            var remote = remoteGraph.hasEntity(id);
+            var target;
 
-            if (option === 'force_remote' && remote && remote.visible) {
+            if (_option === 'force_remote' && remote && remote.visible) {
                 updates.replacements.push(remote);
 
-            } else if (option === 'force_local' && local) {
+            } else if (_option === 'force_local' && local) {
                 target = osmEntity(local);
                 if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
 
-            } else if (option === 'safe' && local && remote && local.version !== remote.version) {
+            } else if (_option === 'safe' && local && remote && local.version !== remote.version) {
                 target = osmEntity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
                 } else {
-                    conflicts.push(t('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
+                    _conflicts.push(t('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
                 }
 
-                if (conflicts.length !== ccount) break;
+                if (_conflicts.length !== ccount) break;
                 updates.replacements.push(target);
             }
         }
@@ -148,44 +147,44 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeMembers(remote, target) {
-        if (option === 'force_local' || _isEqual(target.members, remote.members)) {
+        if (_option === 'force_local' || _isEqual(target.members, remote.members)) {
             return target;
         }
-        if (option === 'force_remote') {
+        if (_option === 'force_remote') {
             return target.update({members: remote.members});
         }
 
-        conflicts.push(t('merge_remote_changes.conflict.memberlist', { user: user(remote.user) }));
+        _conflicts.push(t('merge_remote_changes.conflict.memberlist', { user: user(remote.user) }));
         return target;
     }
 
 
     function mergeTags(base, remote, target) {
         function ignoreKey(k) {
-            return _includes(dataDiscarded, k);
+            return dataDiscarded[k];
         }
 
-        if (option === 'force_local' || _isEqual(target.tags, remote.tags)) {
+        if (_option === 'force_local' || _isEqual(target.tags, remote.tags)) {
             return target;
         }
-        if (option === 'force_remote') {
+        if (_option === 'force_remote') {
             return target.update({tags: remote.tags});
         }
 
-        var ccount = conflicts.length,
-            o = base.tags || {},
-            a = target.tags || {},
-            b = remote.tags || {},
-            keys = _reject(_union(_keys(o), _keys(a), _keys(b)), ignoreKey),
-            tags = _clone(a),
-            changed = false;
+        var ccount = _conflicts.length;
+        var o = base.tags || {};
+        var a = target.tags || {};
+        var b = remote.tags || {};
+        var keys = _reject(_union(_keys(o), _keys(a), _keys(b)), ignoreKey);
+        var tags = _clone(a);
+        var changed = false;
 
         for (var i = 0; i < keys.length; i++) {
             var k = keys[i];
 
             if (o[k] !== b[k] && a[k] !== b[k]) {    // changed remotely..
                 if (o[k] !== a[k]) {      // changed locally..
-                    conflicts.push(t('merge_remote_changes.conflict.tags',
+                    _conflicts.push(t('merge_remote_changes.conflict.tags',
                         { tag: k, local: a[k], remote: b[k], user: user(remote.user) }));
 
                 } else {                  // unchanged locally, accept remote change..
@@ -199,7 +198,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             }
         }
 
-        return (changed && conflicts.length === ccount) ? target.update({tags: tags}) : target;
+        return (changed && _conflicts.length === ccount) ? target.update({tags: tags}) : target;
     }
 
 
@@ -214,18 +213,18 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
     //  `graph.base()` --- ... --- `remoteGraph`
     //
     var action = function(graph) {
-        var updates = { replacements: [], removeIds: [] },
-            base = graph.base().entities[id],
-            local = localGraph.entity(id),
-            remote = remoteGraph.entity(id),
-            target = osmEntity(local, { version: remote.version });
+        var updates = { replacements: [], removeIds: [] };
+        var base = graph.base().entities[id];
+        var local = localGraph.entity(id);
+        var remote = remoteGraph.entity(id);
+        var target = osmEntity(local, { version: remote.version });
 
         // delete/undelete
         if (!remote.visible) {
-            if (option === 'force_remote') {
+            if (_option === 'force_remote') {
                 return actionDeleteMultiple([id])(graph);
 
-            } else if (option === 'force_local') {
+            } else if (_option === 'force_local') {
                 if (target.type === 'way') {
                     target = mergeChildren(target, _uniq(local.nodes), updates, graph);
                     graph = updateChildren(updates, graph);
@@ -233,7 +232,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 return graph.replace(target);
 
             } else {
-                conflicts.push(t('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
+                _conflicts.push(t('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
                 return graph;  // do nothing
             }
         }
@@ -254,7 +253,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
         target = mergeTags(base, remote, target);
 
-        if (!conflicts.length) {
+        if (!_conflicts.length) {
             graph = updateChildren(updates, graph).replace(target);
         }
 
@@ -263,13 +262,13 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     action.withOption = function(opt) {
-        option = opt;
+        _option = opt;
         return action;
     };
 
 
     action.conflicts = function() {
-        return conflicts;
+        return _conflicts;
     };
 
 

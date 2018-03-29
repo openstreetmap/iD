@@ -1,3 +1,4 @@
+import { displayLength } from '../util/units';
 import { geoLonToMeters, geoMetersToLon } from '../geo';
 import { utilDetect } from '../util/detect';
 
@@ -36,21 +37,7 @@ export function uiScale(context) {
         dLon = geoMetersToLon(scale.dist / conversion, lat);
         scale.px = Math.round(projection([loc1[0] + dLon, loc1[1]])[0]);
 
-        if (isImperial) {
-            if (scale.dist >= 5280) {
-                scale.dist /= 5280;
-                scale.text = String(scale.dist) + ' mi';
-            } else {
-                scale.text = String(scale.dist) + ' ft';
-            }
-        } else {
-            if (scale.dist >= 1000) {
-                scale.dist /= 1000;
-                scale.text = String(scale.dist) + ' km';
-            } else {
-                scale.text = String(scale.dist) + ' m';
-            }
-        }
+        scale.text = displayLength(scale.dist / conversion, isImperial);
 
         return scale;
     }

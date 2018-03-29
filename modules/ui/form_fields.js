@@ -37,7 +37,7 @@ export function uiFormFields(context) {
         // Enter
         var enter = fields.enter()
             .append('div')
-            .attr('class', function(d) { return 'wrap-form-field wrap-form-field-' + d.id; });
+            .attr('class', function(d) { return 'wrap-form-field wrap-form-field-' + d.safeid; });
 
         // Update
         fields = fields

@@ -103,7 +103,7 @@ export function uiFieldCheck(field, context) {
             .append('input')
             .property('indeterminate', field.type !== 'defaultCheck')
             .attr('type', 'checkbox')
-            .attr('id', 'preset-input-' + field.id);
+            .attr('id', 'preset-input-' + field.safeid);
 
         enter
             .append('span')
@@ -113,7 +113,7 @@ export function uiFieldCheck(field, context) {
         if (field.type === 'onewayCheck') {
             enter
                 .append('a')
-                .attr('id', 'preset-input-' + field.id + '-reverser')
+                .attr('id', 'preset-input-' + field.safeid + '-reverser')
                 .attr('class', 'reverser button' + (reverserHidden() ? ' hide' : ''))
                 .attr('href', '#')
                 .append('span')

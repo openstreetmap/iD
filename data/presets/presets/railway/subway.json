@@ -1,18 +1,21 @@
 {
     "icon": "railway-subway",
+    "fields": [
+        "name",
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail",
+        "usage_rail",
+        "voltage",
+        "frequency"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "subway"
     },
-    "fields": [
-        "name",
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
-    ],
     "terms": [
         "metro",
         "transit"

@@ -1,17 +1,20 @@
 {
     "icon": "railway-monorail",
+    "fields": [
+        "name",
+        "structure",
+        "electrified",
+        "service_rail",
+        "usage_rail",
+        "voltage",
+        "frequency"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "monorail"
     },
-    "fields": [
-        "name",
-        "structure",
-        "electrified",
-        "service_rail"
-    ],
     "terms": [],
     "name": "Monorail"
 }

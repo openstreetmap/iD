@@ -2,81 +2,63 @@
     "ku": {
         "modes": {
             "add_area": {
-                "title": "ناوچە"
+                "title": "Herêm"
             },
             "add_line": {
-                "title": "هێڵ"
+                "title": "Xêz"
             },
             "add_point": {
-                "title": "خاڵ"
+                "title": "Nuqte"
             }
         },
-        "tooltip_keyhint": "کورتبڕ:",
+        "operations": {
+            "continue": {
+                "key": "A",
+                "title": "Bidomîne"
+            },
+            "circularize": {
+                "key": "O"
+            },
+            "orthogonalize": {
+                "title": "Çarçik",
+                "key": "S"
+            },
+            "delete": {
+                "title": "Jê bibe"
+            }
+        },
         "translate": {
-            "translate": "وەرگێڕان",
-            "localized_translation_language": "هەڵبژاردنی زمان",
-            "localized_translation_name": "ناو"
+            "localized_translation_name": "Nav"
         },
-        "logout": "دەرچوون",
-        "report_a_bug": "ناردنی هەڵە",
-        "help_translate": "یارمەتیدان بۆ وەرگێڕان",
+        "login": "têkeve",
+        "logout": "derkeve",
         "commit": {
-            "cancel": "پاشگەزبوونەوە",
-            "deleted": "سڕایەوە",
-            "created": "دروستکرا"
+            "save": "Bar bike",
+            "cancel": "Betal bike"
         },
-        "geometry": {
-            "point": "خاڵ",
-            "line": "هێڵ",
-            "area": "ناوچە"
+        "info_panels": {
+            "history": {
+                "title": "Dîrok"
+            }
         },
         "inspector": {
-            "remove": "لابردن",
-            "search": "گەڕان",
+            "search": "Lêbigere",
             "check": {
-                "yes": "بەڵێ",
-                "no": "نەخێر"
-            },
-            "add": "زیادکردن",
-            "none": "هیچ"
-        },
-        "background": {
-            "none": "هیچ"
-        },
-        "feature": {
-            "points": {
-                "description": "خاڵەکان"
+                "yes": "Erê",
+                "no": "Na"
             }
-        },
-        "save": {
-            "title": "پاشەکەوتکردن",
-            "conflict": {
-                "previous": "<پێشتر",
-                "next": "دواتر>"
-            }
-        },
-        "success": {
-            "help_link_text": "وردەکارییەکان"
         },
         "help": {
-            "title": "یارمەتی"
-        },
-        "intro": {
-            "graph": {
-                "block_number": "<value for addr:block_number>",
-                "county": "<value for addr:county>",
-                "district": "<value for addr:district>",
-                "hamlet": "<value for addr:hamlet>",
-                "neighbourhood": "<value for addr:neighbourhood>",
-                "province": "<value for addr:province>",
-                "quarter": "<value for addr:quarter>",
-                "state": "<value for addr:state>",
-                "subdistrict": "<value for addr:subdistrict>",
-                "suburb": "<value for addr:suburb>",
-                "countrycode": "tr"
+            "title": "Alîkarî",
+            "help": {
+                "title": "Alîkarî"
             },
-            "startediting": {
-                "title": "دەستپێکردنی دەستکاری"
+            "editing": {
+                "save_h": "Qeyd bike",
+                "upload_h": "Bar bike"
+            },
+            "points": {
+                "title": "Nuqte"
             }
         }
     }

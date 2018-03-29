@@ -24,8 +24,8 @@ import {
 
 import {
     geoChooseEdge,
+    geoHasLineIntersections,
     geoHasSelfIntersections,
-    geoPathHasIntersections,
     geoVecSubtract,
     geoViewportEdge
 } from '../geo';
@@ -245,7 +245,7 @@ export function modeDragNode(context) {
                     if (k === activeIndex) continue;
 
                     // make sure active ring doesnt cross passive rings
-                    if (geoPathHasIntersections(rings[activeIndex].coords, rings[k].coords)) {
+                    if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {
                         return true;
                     }
                 }

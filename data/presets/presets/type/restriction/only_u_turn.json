@@ -1,0 +1,14 @@
+{
+    "icon": "restriction-only-u-turn",
+    "fields": [
+        "except"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "restriction",
+        "restriction": "only_u_turn"
+    },
+    "name": "Only U-turn"
+}

@@ -132,6 +132,10 @@
             "value": "terminal"
         },
         {
+            "key": "allotments",
+            "value": "plot"
+        },
+        {
             "key": "amenity",
             "value": "bus_station"
         },
@@ -377,6 +381,10 @@
         },
         {
             "key": "amenity",
+            "value": "monastery"
+        },
+        {
+            "key": "amenity",
             "value": "motorcycle_parking"
         },
         {
@@ -573,6 +581,10 @@
         },
         {
             "key": "vending",
+            "value": "coffee"
+        },
+        {
+            "key": "vending",
             "value": "condoms"
         },
         {
@@ -581,11 +593,31 @@
         },
         {
             "key": "vending",
+            "value": "electronics"
+        },
+        {
+            "key": "vending",
+            "value": "elongated_coin"
+        },
+        {
+            "key": "vending",
             "value": "excrement_bags"
         },
         {
             "key": "vending",
             "value": "feminine_hygiene"
+        },
+        {
+            "key": "vending",
+            "value": "food"
+        },
+        {
+            "key": "vending",
+            "value": "fuel"
+        },
+        {
+            "key": "vending",
+            "value": "ice_cream"
         },
         {
             "key": "vending",
@@ -602,6 +634,10 @@
         {
             "key": "vending",
             "value": "public_transport_tickets"
+        },
+        {
+            "key": "vending",
+            "value": "stamps"
         },
         {
             "key": "vending",
@@ -843,6 +879,10 @@
         {
             "key": "building",
             "value": "dormitory"
+        },
+        {
+            "key": "building",
+            "value": "farm_auxiliary"
         },
         {
             "key": "building",
@@ -1406,6 +1446,10 @@
         },
         {
             "key": "highway",
+            "value": "passing_place"
+        },
+        {
+            "key": "highway",
             "value": "path"
         },
         {
@@ -1759,6 +1803,10 @@
         },
         {
             "key": "leisure",
+            "value": "amusement_arcade"
+        },
+        {
+            "key": "leisure",
             "value": "bird_hide"
         },
         {
@@ -1772,6 +1820,10 @@
         {
             "key": "leisure",
             "value": "dance"
+        },
+        {
+            "key": "dance:teaching",
+            "value": "yes"
         },
         {
             "key": "leisure",
@@ -1868,6 +1920,10 @@
         {
             "key": "leisure",
             "value": "nature_reserve"
+        },
+        {
+            "key": "leisure",
+            "value": "outdoor_seating"
         },
         {
             "key": "leisure",
@@ -1998,6 +2054,10 @@
         },
         {
             "key": "man_made",
+            "value": "antenna"
+        },
+        {
+            "key": "man_made",
             "value": "breakwater"
         },
         {
@@ -2043,6 +2103,10 @@
         {
             "key": "tower:type",
             "value": "observation"
+        },
+        {
+            "key": "man_made",
+            "value": "observatory"
         },
         {
             "key": "man_made",
@@ -2165,6 +2229,10 @@
         {
             "key": "natural",
             "value": "heath"
+        },
+        {
+            "key": "natural",
+            "value": "mud"
         },
         {
             "key": "natural",
@@ -2577,7 +2645,7 @@
             "value": "yes"
         },
         {
-            "key": "train",
+            "key": "subway",
             "value": "yes"
         },
         {
@@ -2617,7 +2685,7 @@
             "value": "yes"
         },
         {
-            "key": "train",
+            "key": "subway",
             "value": "yes"
         },
         {
@@ -3073,6 +3141,10 @@
         },
         {
             "key": "shop",
+            "value": "health_food "
+        },
+        {
+            "key": "shop",
             "value": "hearing_aids"
         },
         {
@@ -3186,6 +3258,10 @@
         {
             "key": "shop",
             "value": "perfumery"
+        },
+        {
+            "key": "shop",
+            "value": "pet_grooming"
         },
         {
             "key": "shop",
@@ -3306,6 +3382,10 @@
         {
             "key": "shop",
             "value": "weapons"
+        },
+        {
+            "key": "shop",
+            "value": "wholesale"
         },
         {
             "key": "shop",
@@ -3496,6 +3576,10 @@
         {
             "key": "restriction",
             "value": "only_straight_on"
+        },
+        {
+            "key": "restriction",
+            "value": "only_u_turn"
         },
         {
             "key": "type",

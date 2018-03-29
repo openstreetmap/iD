@@ -91,16 +91,16 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
         context.replace(actionMoveNode(end.id, loc));
         end = context.entity(end.id);
-        checkGeometry(origWay.isClosed());    // skipLast = true when drawing areas
+        checkGeometry(false);
     }
 
 
     // Check whether this edit causes the geometry to break.
     // If so, class the surface with a nope cursor.
-    // `skipLast` - include closing segment in the check, see #4655
-    function checkGeometry(skipLast) {
+    // `finishDraw` - Only checks the relevant line segments if finishing drawing
+    function checkGeometry(finishDraw) {
         var nopeDisabled = context.surface().classed('nope-disabled');
-        var isInvalid = isInvalidGeometry(end, context.graph(), skipLast);
+        var isInvalid = isInvalidGeometry(end, context.graph(), finishDraw);
 
         if (nopeDisabled) {
             context.surface()
@@ -114,13 +114,26 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     }
 
 
-    function isInvalidGeometry(entity, graph, skipLast) {
+    function isInvalidGeometry(entity, graph, finishDraw) {
         var parents = graph.parentWays(entity);
 
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
             var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
-            if (skipLast)  nodes.pop();   // disregard closing segment - #4655
+            
+            if (origWay.isClosed()) { // Check if Area
+                if (finishDraw) {
+                    nodes.splice(-2, 1);
+                    entity = nodes[nodes.length-2];
+                } else {
+                    nodes.pop();
+                }
+            } else { // Line
+                if (finishDraw) {
+                    nodes.pop();
+                }
+            }
+
             if (geoHasSelfIntersections(nodes, entity.id)) {
                 return true;
             }
@@ -241,7 +254,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             annotation
         );
 
-        checkGeometry(false);   // skipLast = false
+        checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
 
@@ -261,7 +274,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             annotation
         );
 
-        checkGeometry(false);   // skipLast = false
+        checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
 
@@ -280,7 +293,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             annotation
         );
 
-        checkGeometry(false);   // skipLast = false
+        checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
 
@@ -289,7 +302,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // If the way has enough nodes to be valid, it's selected.
     // Otherwise, delete everything and return to browse mode.
     drawWay.finish = function() {
-        checkGeometry(true);   // skipLast = true
+        checkGeometry(true);   // finishDraw = true
         if (context.surface().classed('nope')) {
             return;   // can't click here
         }

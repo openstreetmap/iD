@@ -32,6 +32,7 @@
     "icon-down":                { "viewBox": "600 0 20 20" },
     "icon-more":                { "viewBox": "620 0 20 20" },
     "icon-no":                  { "viewBox": "640 0 20 20" },
+    "icon-edit":                { "viewBox": "660 0 20 20" },
 
     "icon-alert-shape":               { "fill": "currentColor" },
     "icon-point-shape":               { "fill": "currentColor" },
@@ -70,6 +71,7 @@
     "icon-down-shape":                { "fill": "currentColor" },
     "icon-more-shape":                { "fill": "currentColor" },
     "icon-no-shape":                  { "fill": "currentColor" },
+    "icon-edit-shape":                { "fill": "currentColor" },
 
     "highway-motorway":         { "viewBox": "0 20 60 60" },
     "highway-trunk":            { "viewBox": "60 20 60 60" },
@@ -269,6 +271,7 @@
     "restriction-only-straight-on": { "viewBox": "300 260 60 60" },
     "restriction-only-left-turn":   { "viewBox": "360 260 60 60" },
     "restriction-only-right-turn":  { "viewBox": "420 260 60 60" },
+    "restriction-only-u-turn":      { "viewBox": "440 400 60 60" },
 
     "restriction":              { "viewBox": "480 260 60 60" },
     "multipolygon":             { "viewBox": "540 260 60 60" },
@@ -375,6 +378,9 @@
     "turn-yes-u":               { "viewBox": "200 344 32 32" },
     "turn-no-u":                { "viewBox": "232 344 32 32" },
     "turn-only-u":              { "viewBox": "264 344 32 32" },
+    "turn-shadow":              { "viewBox": "296 344 37 11" },
+
+    "turn-shadow-shape":        { "fill": "currentColor" },
 
     "preset-icon-frame":        { "viewBox": "340 320 45 45" },
 
@@ -457,7 +463,7 @@
     "feature-images":           { "viewBox": "0 480 200 80" },
     "building-images":          { "viewBox": "700 480 200 80" },
 
-    "walkthrough-mouse":        { "viewBox": "400 411 25 43" },
+    "walkthrough-mouse":        { "viewBox": "397 411 25 43" },
 
     "walkthrough-mouse-shape":  { "fill": "#000000" },
     "walkthrough-mouse-left":   { "fill": "inherit" },

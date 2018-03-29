@@ -285,16 +285,46 @@
                 "connected_to_hidden": "Não é possível dividir porque este elemento está conectado a outro elemento oculto."
             },
             "restriction": {
-                "help": {
-                    "select": "Clique para selecionar um segmento de estrada.",
-                    "toggle": "Clique para inverter as restrições de viragem.",
-                    "toggle_on": "Clique para adicionar uma restrição de \"{restriction}\".",
-                    "toggle_off": "Clique para remover a restrição de \"{restriction}\"."
-                },
                 "annotation": {
                     "create": "Restrição de viragem adicionada.",
                     "delete": "Restrição de viragem eliminada."
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distância",
+                "distance_up_to": "Até {distância}",
+                "via": "Via",
+                "via_node_only": "Apenas nó",
+                "via_up_to_one": "Até uma linha",
+                "via_up_to_two": "Até duas linhas"
+            },
+            "help": {
+                "indirect": "(indirectamente)",
+                "turn": {
+                    "no_left_turn": "Proibido virar à esquerda (indirectamente)",
+                    "no_right_turn": "Proibido virar à direita (indirectamente)",
+                    "no_u_turn": "Proibido inversão de marcha (indirectamente)",
+                    "no_straight_on": "Proibido seguir em frente (indirectamente)",
+                    "only_left_turn": "Apenas virar à esquerda (indirectamente)",
+                    "only_right_turn": "Apenas virar à direita (indirectamente)",
+                    "only_u_turn": "Apenas inversão de marcha (indirectamente)",
+                    "only_straight_on": "Apenas seguir em frente (indirectamente)",
+                    "allowed_left_turn": "É permitido virar à esquerda (indirectamente)",
+                    "allowed_right_turn": "É permitido virar à direita (indirectamente)",
+                    "allowed_u_turn": "É permitido a inversão de marcha (indirectamente)",
+                    "allowed_straight_on": "É permitido a inversão de marcha (indirectamente)"
+                },
+                "from": "DESDE",
+                "via": "VIA",
+                "to": "PARA",
+                "from_name": "{desde} {Nomedesde}",
+                "from_name_to_name": "{desde} {Nomedesde} {para} {Nomepara}",
+                "via_names": "{via} {Nomesvia}",
+                "select_from": "Clique para seleccionar um segmento {desde}",
+                "select_from_name": "Clique para seleccionar um segmento {Nomedesde}",
+                "toggle": "Clique para \"{virar}\""
             }
         },
         "undo": {
@@ -389,7 +419,8 @@
                 "title": "Medição",
                 "selected": "{n} selecionado",
                 "geometry": "Geometria",
-                "closed": "Fechado",
+                "closed_line": "Linha fechada",
+                "closed_area": "Área fechada",
                 "center": "Centro",
                 "perimeter": "Perímetro ",
                 "length": "Comprimento",
@@ -470,7 +501,7 @@
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Introduza um modelo de URL de telas. Tokens válidos:\n   - {zoom}/{z}, {x}, {y} para o esquema de telas Z/X/Y\n   - {ty} para coordenadas Y invertidas do estilo TMS\n   - {u} para o esquema quadtile\n   - {switch:a,b,c} para servidor DNS multiplexing\n\nExemplo:\n{example}",
+            "custom_prompt": "Indique um URL para modelo de mosaicos. Os tokens válidos são:\n   - {zoom} ou {z}, {x}, {y} para Z/X/Y esquema de mosaico\n   - {-y} ou {ty} para estilo TMS invertido, coordenadas Y\n   - {u} para esquemas de mosaicos divididos em quatro\n   - {switch:a,b,c} para servidores DNS\n\nExamplo:\n{example}",
             "overlays": "Camadas superiores",
             "imagery_source_faq": "Informação da imagem / Reportar um problema",
             "reset": "reiniciar",
@@ -582,6 +613,7 @@
             "status_code": "O servidor devolveu o seguinte código {code}",
             "unknown_error_details": "Por favor certifique-se que está ligado à Internet.",
             "uploading": "A enviar as alterações para o OpenStreetMap...",
+            "conflict_progress": "Confirmando conflitos: {num} de {total}",
             "unsaved_changes": "Tem alterações por gravar",
             "conflict": {
                 "header": "Resolver alterações em conflito",
@@ -653,7 +685,7 @@
             "untagged_area_tooltip": "Escolha um elemento que indique o que esta área representa.",
             "untagged_relation": "Relação sem etiquetas",
             "untagged_relation_tooltip": "Selecione um tipo de elemento que descreva o que é esta relação.",
-            "many_deletions": "Está a eliminar {n} elementos. Tem a certeza que quer fazer isso? Isto irá eliminá-los do mapa que todas as pessoas visualizam em openstreetmap.org.",
+            "many_deletions": "Está a eliminar {n} elementos: {p} nós, {l} linhas, {a} áreas, {r} relações. Tem a certeza que quer fazer isto? Isto irá eliminá-las do mapa que qualquer pessoa pode ver em openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} é normalmente usada em áreas e não linhas.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -850,6 +882,24 @@
                 "using": "Para utilizar um rasto GPS para mapear, arraste-o e coloque o ficheiro no editor do mapa do seu browser. Se for reconhecido, será desenhado no mapa como uma linha com uma cor de roxo claro. Clique em {data} **Dados do mapa** no painel lateral ao mapa para ativar, desativar ou aproximar para a sua informação GPS.",
                 "tracing": "O rasto GPS não é enviado para o OpenStreetMap, a melhor maneira para utilizá-lo é desenhar no mapa e utilizando-o como guia para os novos elementos que adicionar.",
                 "upload": "Pode também [enviar os seus dados GPS para o OpenStreetMap](https://www.openstreetmap.org/trace/create) para que outros possam utilizá-los para mapear."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Ajuda da restrições de viragem",
+                    "about": {
+                        "title": "Sobre",
+                        "about": "Este campo permite-lhe inspeccionar e modificar as restrições de viragem. É mostrado um modelo da intersecção seleccionada incluindo as estradas que estão conectadas."
+                    },
+                    "inspecting": {
+                        "title": "Inspeccionando"
+                    },
+                    "modifying": {
+                        "title": "Modificando"
+                    },
+                    "tips": {
+                        "title": "Dicas"
+                    }
+                }
             }
         },
         "intro": {
@@ -1219,6 +1269,28 @@
                     "measurement": "Mostrar/esconder painel de medição"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantidade} ft",
+            "miles": "{quantidade} mi",
+            "square_feet": "{quantidade} sq ft",
+            "square_miles": "{quantidade} sq mi",
+            "acres": "{quantidade} ac",
+            "meters": "{quantidade} m",
+            "kilometers": "{quantidade} km",
+            "square_meters": "{quantidade} m²",
+            "square_kilometers": "{quantidade} km²",
+            "hectares": "{quantidade} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantidade}°",
+            "arcminutes": "{quantidade}′",
+            "arcseconds": "{quantidade}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordenada}{direção}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1645,9 +1717,17 @@
                         "ESE": "Este-sudeste",
                         "N": "Norte",
                         "NE": "Nordeste",
+                        "NNE": "No-nordeste",
+                        "NNW": "No-nordoeste",
+                        "NW": "Noroeste",
                         "S": "Sul",
                         "SE": "Sudoeste",
-                        "W": "Oeste"
+                        "SSE": "Su-sueste",
+                        "SSW": "Su-sudoeste",
+                        "SW": "Sudoeste",
+                        "W": "Oeste",
+                        "WNW": "Oeste-Nordeste",
+                        "WSW": "Oeste-Sudoeste"
                     }
                 },
                 "direction_clock": {
@@ -2058,7 +2138,9 @@
                 "oneway": {
                     "label": "Sentido único?",
                     "options": {
+                        "alternating": "Alternado",
                         "no": "Não",
+                        "reversible": "Reversível",
                         "undefined": "Assumido que seja \"Não\"",
                         "yes": "Sim"
                     }
@@ -2066,7 +2148,9 @@
                 "oneway_yes": {
                     "label": "Sentido único?",
                     "options": {
+                        "alternating": "Alternado",
                         "no": "Não",
+                        "reversible": "Reversível",
                         "undefined": "Assumido que seja \"Sim\"",
                         "yes": "Sim"
                     }
@@ -2184,6 +2268,10 @@
                 },
                 "railway": {
                     "label": "Tipo"
+                },
+                "railway/position": {
+                    "label": "Marco quilométrico",
+                    "placeholder": "Distância para uma décima (123.4)"
                 },
                 "railway/signal/direction": {
                     "label": "Direção",
@@ -3894,7 +3982,7 @@
                 },
                 "highway/give_way": {
                     "name": "Sinal de cedência de passagem",
-                    "terms": "perda de prioridade"
+                    "terms": "perda de prioridade, cedencia, cedência, prioridade"
                 },
                 "highway/living_street": {
                     "name": "Zona de coexistência",
@@ -3917,7 +4005,7 @@
                     "terms": "Ligação Autoestrada, Entrada Autoestrada, Saída Autoestrada"
                 },
                 "highway/path": {
-                    "name": "Trilho",
+                    "name": "Trilho pedestre",
                     "terms": "Trilha, Caminho, vereda (com pavimento em terra), vereda"
                 },
                 "highway/pedestrian_area": {
@@ -3925,7 +4013,7 @@
                     "terms": "praça, largo, alameda"
                 },
                 "highway/pedestrian_line": {
-                    "name": "Estrada Pedonal",
+                    "name": "Rua pedonal",
                     "terms": "pedestre, rua pedonal, rua pedestre, pedonal"
                 },
                 "highway/primary": {
@@ -4098,7 +4186,7 @@
                 },
                 "landuse/aquaculture": {
                     "name": "Aquacultura",
-                    "terms": "algicultura,aquicultura,carcinicultura,malacocultura,maricultura,mitilicultura,ostreicultura,pectinicultura,piscicultura,ranicultura,viveiro de peixes"
+                    "terms": "algicultura, aquicultura, carcinicultura, malacocultura, maricultura, mitilicultura,ostreicultura, pectinicultura,piscicultura, ranicultura, viveiro de peixes"
                 },
                 "landuse/basin": {
                     "name": "Bacia hidrográfica",
@@ -4114,7 +4202,7 @@
                 },
                 "landuse/churchyard": {
                     "name": "Adro de igreja",
-                    "terms": "Churchyard, Área da Igreja, Zona da Igreja, Praça da Igreja, Adro"
+                    "terms": "Área da Igreja, Zona da Igreja, Praça da Igreja, Adro"
                 },
                 "landuse/commercial": {
                     "name": "Zona de escritórios ",
@@ -5175,10 +5263,6 @@
                     "name": "Loja",
                     "terms": "Loja, Venda, Vendedor"
                 },
-                "shop/agrarian": {
-                    "name": "Loja de Produtos Agrícolas",
-                    "terms": "produtos agrícolas, produtos agrículas"
-                },
                 "shop/alcohol": {
                     "name": "Loja de bebidas alcoólicas",
                     "terms": "Alcool"
@@ -6032,6 +6116,13 @@
                 "description": "Imagens aéreas Esri.",
                 "name": "Imagens globais da Esri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Termos e opinião"
+                },
+                "description": "A imagem de arquivo da ESRI poderá ser mais definida e detalhada que a cama pré-definida.",
+                "name": "Imagem Global ESRI (Claridade) versão Beta"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© contribuidores OpenStreetMap, CC-BY-SA"
@@ -6100,18 +6191,33 @@
                 "name": "Estradas TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclismo"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Pedestrianismo"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Ciclismo de montanha"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Skate"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuidores OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Desportos de Inverno"
             },
             "basemap.at": {
