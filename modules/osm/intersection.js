@@ -529,8 +529,10 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         if (v.length === 1 && v[0].type === 'node') {   // via node
                             isOnlyVia = (v[0].id === nextNode.id);
                         } else {                                        // via way(s)
-                            for (k = 0; k < v.length; k++) {
-                                if (v[k].type === 'way' && vgraph.entity(v[k].id).first() === nextNode.id) {
+                            for (var i = 0; i < v.length; i++) {
+                                if (!v[i].type === 'way') continue;
+                                var viaWay = vgraph.entity(v[i].id);
+                                if (viaWay.first() === nextNode.id || viaWay.last() === nextNode.id) {
                                     isOnlyVia = true;
                                     break;
                                 }
