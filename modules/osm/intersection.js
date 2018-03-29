@@ -530,7 +530,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                             isOnlyVia = (v[0].id === nextNode.id);
                         } else {                                        // via way(s)
                             for (var i = 0; i < v.length; i++) {
-                                if (!v[i].type === 'way') continue;
+                                if (v[i].type !== 'way') continue;
                                 var viaWay = vgraph.entity(v[i].id);
                                 if (viaWay.first() === nextNode.id || viaWay.last() === nextNode.id) {
                                     isOnlyVia = true;
