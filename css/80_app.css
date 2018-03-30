@@ -2729,18 +2729,19 @@ div.full-screen > button:hover {
 
 /* Side panes */
 
-.map-data-control .map-pane,
+/*.map-data-control .map-pane,
 .background-control .map-pane,
 .help-control .map-pane {
-    z-index: -1;
 }
-
+*/
 .map-pane {
     position: fixed;
     top: 60px;
     bottom: 30px;
     right: 0;
+    padding-bottom: 50px;
     overflow: hidden;
+    z-index: -1;
 }
 [dir='rtl'] .map-pane {
     left: 0;
@@ -2857,6 +2858,7 @@ div.full-screen > button:hover {
 
 .help-wrap .nav {
     position: relative;
+    padding-bottom: 30px;
 }
 
 .help-wrap .nav a {
