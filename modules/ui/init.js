@@ -276,6 +276,7 @@ export function uiInit(context) {
             .on('resize.editor', onResize);
 
         onResize();
+        window.onresizea = onResize;
 
         function pan(d) {
             return function() {

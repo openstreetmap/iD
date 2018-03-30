@@ -17,6 +17,7 @@ function addHideSideBarKEY() {
     var setHide = function () {
         var select = window.id.container().select('#sidebar');
         select.classed('hide', !select.classed('hide'));
+        window.onresizea();
     };
     // setTimeout(setHide,100);
     keybinding.on(keys, setHide);

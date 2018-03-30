@@ -329,32 +329,24 @@ function actionConvertLineType(selectIds, context) {
 
 }
 
-// function actionGetLocation(selectIds, context) {
-//     // var data = convert2JSON(selectIds,context);
-//
-//     return function convertLineType(graph){
-//         var copies = {};
-//         selectIds.forEach(function (item,i) {
-//             var ele = context.entity(item);
-//             if (ele.type === 'way'){
-//                 graph.entity(ele.id).copy(graph, copies);
-//                 if (ele.tags.type === 'dashed'){
-//                     copies[ele.id].tags.highway = 'lane-white-solid';
-//                     copies[ele.id].tags.type = 'solid';
-//                 } else if (ele.tags.type === 'solid'){
-//                     copies[ele.id].tags.highway = 'lane-white-dash';
-//                     copies[ele.id].tags.type = 'dashed';
-//                 }
-//                 actionDeleteWay(ele.id);
-//                 actionAddEntity(copies[ele.id]);
-//             }
-//         });
-//
-//
-//         return graph;
-//     };
-//
-// }
+function actionGetLocation(selectIds, context) {
+    // var data = convert2JSON(selectIds,context);
+
+    return function convertLocation(graph){
+        var copies = {};
+        selectIds.forEach(function (item,i) {
+            var ele = context.entity(item);
+            if (ele.type === 'node'){
+                var loc = ele.loc;
+                alert(loc[0]+','+loc[1]);
+            }
+        });
+
+
+        return graph;
+    };
+
+}
 function actionAddStopLine(selectIds, context) {
     // var data = convert2JSON(selectIds,context);
 
@@ -472,6 +464,13 @@ function addMomentaPackages(packageId) {
             window.id.map().center(center);
             window.id.map().zoom(18);
         }
+        sendPost(url.queryPackageLocation,{'packetname':packageId},function (result) {
+            result = JSON.parse(result);
+            var location = result['loc'];
+            var splitss = location.split(' ');
+            window.id.map().center([parseFloat(splitss[0]),parseFloat(splitss[1])]);
+            window.id.map().zoom(18);
+        });
         var createEles = result.created;
         for (var i=0; i<createEles.length; i+=10){
             var eles = createEles.slice(i,i+10);
@@ -502,4 +501,4 @@ function focusOnFrames(frameId) {
 }
 window.focusOnFrames = focusOnFrames;
 window.addPackages = addMomentaPackages;
-export {createLineSegment,actionAddStopLine,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};
+export {createLineSegment,actionAddStopLine,actionGetLocation,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten,createAddMorePoints,actionConvertDirection,actionConvertLineType,addMomentaPackages};

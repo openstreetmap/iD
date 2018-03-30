@@ -3,7 +3,7 @@
 import { t } from '../util/locale';
 import { behaviorOperation } from '../behavior/index';
 import {createLineSegment,deleteLines,actionFillInfo,actionMerge,actionMomentaStraighten
-,actionConvertLineType,actionAddStopLine
+,actionConvertLineType,actionAddStopLine,actionGetLocation
 ,actionConvertDirection
 ,createAddMorePoints} from '../momenta/actions';
 import {operationDelete} from '../operations';
@@ -214,6 +214,56 @@ function operationMomentaFillInfo(selectedIDs, context) {
     return operation;
 }
 
+
+function operationMomentaGetLocation(selectedIDs, context) {
+    var  action = actionGetLocation(selectedIDs, context);
+
+    var operation = function() {
+        context.perform(action, operation.annotation());
+    };
+    function checkIsAllNode(selectedIDs, context) {
+        var isAllLine = true,noEle = true;
+        selectedIDs.forEach(function (item, i) {
+            if (context.entity(item).type !== 'node') {
+                isAllLine = false;
+            } else if (context.entity(item).tags.ele !=null){
+                noEle = false;
+            }
+        })
+        return !noEle;
+    }
+
+    operation.available = function() {
+        return true;
+    };
+
+
+    operation.disabled = function() {
+        var reason;
+        // if (!checkIsAllNode(selectedIDs,context)){
+        //     reason = t('operations.momenta_location.reason');
+        // }
+        return reason;
+    };
+
+
+    operation.tooltip = function() {
+        return t('operations.momenta_location.tooltip');
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.momenta_location.annotation');
+    };
+
+
+    operation.id = 'momenta_location';
+    operation.keys = [t('operations.momenta_location.key')];
+    operation.title = t('operations.momenta_location.title');
+    operation.behavior = behaviorOperation(context).which(operation);
+
+    return operation;
+}
 function operationMomentaStraighten(selectedIDs, context) {
     var entityId = selectedIDs[0],
         action = actionMomentaStraighten(selectedIDs,context);
@@ -467,5 +517,5 @@ function operationMomentaAddStopLine(selectedIDs, context) {
     return operation;
 }
 export {operationMomentaCreateSegment,operationMomentaDelete,operationMomentaFillInfo,operationMomentaConvertDirection,operationMomentaMerge,
-    operationMomentaAddStopLine
+    operationMomentaAddStopLine,operationMomentaGetLocation
     ,operationMomentaConvertLineType,operationMomentaStraighten,operationMomentaAddPoints};

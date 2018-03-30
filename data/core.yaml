@@ -81,6 +81,12 @@ en:
         key: F
         annotation: adapte ele.
         title: add ele to nodes.
+    momenta_location:
+        reason: obtain location.
+        tooltip: get location of the point.
+        key: F
+        annotation: obtain location.
+        title: obtain location.
     momenta_segment:
           title: create line segment
           description: create line segment
