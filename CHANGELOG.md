@@ -28,6 +28,51 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.7.1
+##### March 11, 2018
+
+#### :tada: New Features
+* Add support for EPSG:4326 WMS layers ([#4858], thanks [@tyrasd])
+
+[#4858]: https://github.com/openstreetmap/iD/issues/4858
+[@tyrasd]: https://github.com/tyrasd
+
+#### :bug: Bugfixes
+* Allow user to press <kbd>esc</kbd> to finish drawing in an invalid position ([#4845], [#4860], thanks [@jguthrie100])
+* Remove code attempting to extend short leaf ways in turn restriction editor ([#4869])
+* Properly split ways which are members of a via way turn restriction ([#4861])
+* Avoid reordering stops and platforms in PTv2 routes ([#4864])
+* `only_` restrictions should only count if they leave the FROM towards the VIA ([#4849])
+
+[#4869]: https://github.com/openstreetmap/iD/issues/4869
+[#4864]: https://github.com/openstreetmap/iD/issues/4864
+[#4861]: https://github.com/openstreetmap/iD/issues/4861
+[#4860]: https://github.com/openstreetmap/iD/issues/4860
+[#4849]: https://github.com/openstreetmap/iD/issues/4849
+[#4845]: https://github.com/openstreetmap/iD/issues/4845
+[@jguthrie100]: https://github.com/jguthrie100
+
+#### :earth_asia: Localization
+* For Kurdish languages - set `ckb` to RTL and `ku` to LTR ([#4783])
+
+[#4783]: https://github.com/openstreetmap/iD/issues/4783
+
+#### :rocket: Presets
+* Fix duplicate `opening_hours` on `shop=beauty` preset ([#4868], [#4867], thanks [@hikemaniac])
+* Add `name` field to `leisure=pitch` and `amenity=parking` presets ([#4865], [#4857], thanks [@umarpreet1])
+* Fix subway platform presets to use `subway=yes` tag ([#4862])
+* Add preset for Dance School - `leisure=dance`+`dance:teaching=yes` ([#4846], thanks [@hikemaniac])
+
+[#4868]: https://github.com/openstreetmap/iD/issues/4868
+[#4867]: https://github.com/openstreetmap/iD/issues/4867
+[#4865]: https://github.com/openstreetmap/iD/issues/4865
+[#4857]: https://github.com/openstreetmap/iD/issues/4857
+[#4862]: https://github.com/openstreetmap/iD/issues/4862
+[#4846]: https://github.com/openstreetmap/iD/issues/4846
+[@hikemaniac]: https://github.com/hikemaniac
+[@umarpreet1]: https://github.com/umarpreet1
+
+
 # 2.7.0
 ##### March 2, 2018
 

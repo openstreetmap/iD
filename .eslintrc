@@ -5,8 +5,7 @@
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:flowtype/recommended"
+        "eslint:recommended"
     ],
     "globals": {
         "d3": false
@@ -16,9 +15,6 @@
         "ecmaVersion": 6,
         "sourceType": "module"
     },
-    "plugins": [
-        "flowtype"
-    ],
     "rules": {
         "dot-notation": "error",
         "eqeqeq": ["error", "smart"],
@@ -72,10 +68,5 @@
         "space-unary-ops": "error",
         "wrap-regex": "off",
         "quotes": ["error", "single"]
-    },
-    "settings": {
-        "flowtype": {
-            "onlyFilesWithFlowAnnotation": true
-        }
     }
 }

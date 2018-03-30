@@ -1,5 +1,6 @@
 export { utilAsyncMap } from './util';
 export { utilCallWhenIdle } from './call_when_idle';
+export { utilCleanTags } from './clean_tags';
 export { utilDisplayName } from './util';
 export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';

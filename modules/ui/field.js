@@ -9,6 +9,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { t } from '../util/locale';
 import { textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiFieldHelp } from './field_help';
@@ -96,14 +97,14 @@ export function uiField(context, presetField, entity, options) {
         // Enter
         var enter = container.enter()
             .append('div')
-            .attr('class', function(d) { return 'form-field form-field-' + d.id; })
+            .attr('class', function(d) { return 'form-field form-field-' + d.safeid; })
             .classed('nowrap', !options.wrap);
 
         if (options.wrap) {
             var label = enter
                 .append('label')
                 .attr('class', 'form-label')
-                .attr('for', function(d) { return 'preset-input-' + d.id; })
+                .attr('for', function(d) { return 'preset-input-' + d.safeid; })
                 .text(function(d) { return d.label(); });
 
             var wrap = label
@@ -114,6 +115,7 @@ export function uiField(context, presetField, entity, options) {
                 wrap
                     .append('button')
                     .attr('class', 'remove-icon')
+                    .attr('title', t('icons.remove'))
                     .attr('tabindex', -1)
                     .call(svgIcon('#operation-delete'));
             }
@@ -122,6 +124,7 @@ export function uiField(context, presetField, entity, options) {
                 wrap
                     .append('button')
                     .attr('class', 'modified-icon')
+                    .attr('title', t('icons.undo'))
                     .attr('tabindex', -1)
                     .call(
                         (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')

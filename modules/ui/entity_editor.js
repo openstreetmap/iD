@@ -1,8 +1,6 @@
 import _clone from 'lodash-es/clone';
-import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
 import _isEqual from 'lodash-es/isEqual';
-import _some from 'lodash-es/some';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -22,18 +20,18 @@ import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
-import { utilRebind } from '../util';
+import { utilCleanTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
-    var dispatch = d3_dispatch('choose'),
-        state = 'select',
-        coalesceChanges = false,
-        modified = false,
-        base,
-        entityId,
-        activePreset,
-        reference;
+    var dispatch = d3_dispatch('choose');
+    var _state = 'select';
+    var _coalesceChanges = false;
+    var _modified = false;
+    var _base;
+    var _entityID;
+    var _activePreset;
+    var _tagReference;
 
     var presetEditor = uiPresetEditor(context)
         .on('change', changeTags);
@@ -42,8 +40,8 @@ export function uiEntityEditor(context) {
 
 
     function entityEditor(selection) {
-        var entity = context.entity(entityId),
-            tags = _clone(entity.tags);
+        var entity = context.entity(_entityID);
+        var tags = _clone(entity.tags);
 
         // Header
         var header = selection.selectAll('.header')
@@ -63,7 +61,7 @@ export function uiEntityEditor(context) {
             .append('button')
             .attr('class', 'fr preset-close')
             .on('click', function() { context.enter(modeBrowse(context)); })
-            .call(svgIcon(modified ? '#icon-apply' : '#icon-close'));
+            .call(svgIcon(_modified ? '#icon-apply' : '#icon-close'));
 
         enter
             .append('h3')
@@ -75,7 +73,7 @@ export function uiEntityEditor(context) {
 
         header.selectAll('.preset-reset')
             .on('click', function() {
-                dispatch.call('choose', this, activePreset);
+                dispatch.call('choose', this, _activePreset);
             });
 
 
@@ -125,47 +123,49 @@ export function uiEntityEditor(context) {
         body = body
             .merge(enter);
 
-        body.selectAll('.preset-list-button-wrap')
-            .call(reference.button);
+        if (_tagReference) {
+            body.selectAll('.preset-list-button-wrap')
+                .call(_tagReference.button);
 
-        body.selectAll('.preset-list-item')
-            .call(reference.body);
+            body.selectAll('.preset-list-item')
+                .call(_tagReference.body);
+        }
 
         body.selectAll('.preset-reset')
             .on('click', function() {
-                dispatch.call('choose', this, activePreset);
+                dispatch.call('choose', this, _activePreset);
             });
 
         body.select('.preset-list-item button')
             .call(uiPresetIcon()
-                .geometry(context.geometry(entityId))
-                .preset(activePreset)
+                .geometry(context.geometry(_entityID))
+                .preset(_activePreset)
             );
 
         body.select('.preset-list-item .label')
-            .text(activePreset.name());
+            .text(_activePreset.name());
 
         body.select('.preset-editor')
             .call(presetEditor
-                .preset(activePreset)
-                .entityID(entityId)
+                .preset(_activePreset)
+                .entityID(_entityID)
                 .tags(tags)
-                .state(state)
+                .state(_state)
             );
 
         body.select('.raw-tag-editor')
             .call(rawTagEditor
-                .preset(activePreset)
-                .entityID(entityId)
+                .preset(_activePreset)
+                .entityID(_entityID)
                 .tags(tags)
-                .state(state)
+                .state(_state)
             );
 
         if (entity.type === 'relation') {
             body.select('.raw-member-editor')
                 .style('display', 'block')
                 .call(uiRawMemberEditor(context)
-                    .entityID(entityId)
+                    .entityID(_entityID)
                 );
         } else {
             body.select('.raw-member-editor')
@@ -174,7 +174,7 @@ export function uiEntityEditor(context) {
 
         body.select('.raw-membership-editor')
             .call(uiRawMembershipEditor(context)
-                .entityID(entityId)
+                .entityID(_entityID)
             );
 
         body.select('.key-trap')
@@ -192,9 +192,9 @@ export function uiEntityEditor(context) {
 
 
         function historyChanged() {
-            if (state === 'hide') return;
+            if (_state === 'hide') return;
 
-            var entity = context.hasEntity(entityId);
+            var entity = context.hasEntity(_entityID);
             var graph = context.graph();
             if (!entity) return;
 
@@ -207,109 +207,77 @@ export function uiEntityEditor(context) {
             if (!(weakPreset && match.isFallback())) {
                 entityEditor.preset(match);
             }
-            entityEditor.modified(base !== graph);
+            entityEditor.modified(_base !== graph);
             entityEditor(selection);
         }
-    }
-
-
-    function clean(o) {
-
-        function cleanVal(k, v) {
-            function keepSpaces(k) {
-                return k.match(/_hours|_times/) !== null;
-            }
-
-            var blacklist = ['description', 'note', 'fixme'];
-            if (_some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
-
-            var cleaned = v.split(';')
-                .map(function(s) { return s.trim(); })
-                .join(keepSpaces(k) ? '; ' : ';');
-
-            // The code below is not intended to validate websites and emails.
-            // It is only intended to prevent obvious copy-paste errors. (#2323)
-            // clean website- and email-like tags
-            if (k.indexOf('website') !== -1 ||
-                k.indexOf('email') !== -1 ||
-                cleaned.indexOf('http') === 0) {
-                cleaned = cleaned
-                    .replace(/[\u200B-\u200F\uFEFF]/g, '');  // strip LRM and other zero width chars
-
-            }
-
-            return cleaned;
-        }
-
-        var out = {}, k, v;
-        for (k in o) {
-            if (k && (v = o[k]) !== undefined) {
-                out[k] = cleanVal(k, v);
-            }
-        }
-        return out;
     }
 
 
     // Tag changes that fire on input can all get coalesced into a single
     // history operation when the user leaves the field.  #2342
     function changeTags(changed, onInput) {
-        var entity = context.entity(entityId),
-            annotation = t('operations.change_tags.annotation'),
-            tags = _clone(entity.tags);
+        var entity = context.entity(_entityID);
+        var annotation = t('operations.change_tags.annotation');
+        var tags = _clone(entity.tags);
 
-        _forEach(changed, function(v, k) {
+        for (var k in changed) {
+            if (!k) continue;
+            var v = changed[k];
             if (v !== undefined || tags.hasOwnProperty(k)) {
                 tags[k] = v;
             }
-        });
+        }
 
         if (!onInput) {
-            tags = clean(tags);
+            tags = utilCleanTags(tags);
         }
 
         if (!_isEqual(entity.tags, tags)) {
-            if (coalesceChanges) {
-                context.overwrite(actionChangeTags(entityId, tags), annotation);
+            if (_coalesceChanges) {
+                context.overwrite(actionChangeTags(_entityID, tags), annotation);
             } else {
-                context.perform(actionChangeTags(entityId, tags), annotation);
-                coalesceChanges = !!onInput;
+                context.perform(actionChangeTags(_entityID, tags), annotation);
+                _coalesceChanges = !!onInput;
             }
         }
     }
 
 
     entityEditor.modified = function(_) {
-        if (!arguments.length) return modified;
-        modified = _;
+        if (!arguments.length) return _modified;
+        _modified = _;
         d3_selectAll('button.preset-close use')
-            .attr('xlink:href', (modified ? '#icon-apply' : '#icon-close'));
+            .attr('xlink:href', (_modified ? '#icon-apply' : '#icon-close'));
+        return entityEditor;
     };
 
 
     entityEditor.state = function(_) {
-        if (!arguments.length) return state;
-        state = _;
+        if (!arguments.length) return _state;
+        _state = _;
         return entityEditor;
     };
 
 
     entityEditor.entityID = function(_) {
-        if (!arguments.length) return entityId;
-        entityId = _;
-        base = context.graph();
-        entityEditor.preset(context.presets().match(context.entity(entityId), base));
-        entityEditor.modified(false);
-        coalesceChanges = false;
-        return entityEditor;
+        if (!arguments.length) return _entityID;
+        _entityID = _;
+        _base = context.graph();
+        _coalesceChanges = false;
+
+        var presetMatch = context.presets().match(context.entity(_entityID), _base);
+
+        return entityEditor
+            .preset(presetMatch)
+            .modified(false);
     };
 
 
     entityEditor.preset = function(_) {
-        if (!arguments.length) return activePreset;
-        if (_ !== activePreset) {
-            activePreset = _;
-            reference = uiTagReference(activePreset.reference(context.geometry(entityId)), context)
+        if (!arguments.length) return _activePreset;
+        if (_ !== _activePreset) {
+            _activePreset = _;
+            _tagReference = uiTagReference(_activePreset.reference(context.geometry(_entityID)), context)
                 .showing(false);
         }
         return entityEditor;

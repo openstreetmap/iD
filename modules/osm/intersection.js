@@ -1,5 +1,5 @@
 import _clone from 'lodash-es/clone';
-import _every from 'lodash-es/every';
+import _difference from 'lodash-es/difference';
 import _extend from 'lodash-es/extend';
 import _uniq from 'lodash-es/uniq';
 
@@ -13,8 +13,7 @@ import { coreGraph } from '../core';
 
 import {
     geoAngle,
-    geoSphericalDistance,
-    geoVecInterp
+    geoSphericalDistance
 } from '../geo';
 
 import { osmEntity } from './entity';
@@ -334,26 +333,6 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         .map(function(way) { return vgraph.entity(way.id); });
 
 
-    // STEP 8:  Extend leaf ways, so they don't end within the viewer
-    ways.forEach(function(way) {
-        var n1, n2;
-        if (way.__via) return;   // not a leaf
-        if (way.__first) {
-            n1 = vgraph.entity(way.nodes[way.nodes.length - 2]);
-            n2 = vgraph.entity(way.nodes[way.nodes.length - 1]);
-        } else {
-            n1 = vgraph.entity(way.nodes[1]);
-            n2 = vgraph.entity(way.nodes[0]);
-        }
-
-        if (n1.loc && n2.loc && vgraph.parentWays(n2).length === 1) {
-            var toLoc = geoVecInterp(n1.loc, n2.loc, 10);  // extend 1000%
-            n2 = n2.move(toLoc);
-            vgraph = vgraph.replace(n2);
-        }
-    });
-
-
     // OK!  Here is our intersection..
     var intersection = {
         graph: vgraph,
@@ -431,8 +410,18 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         if (t.id === way.id) {     // match VIA, TO
                             if (v.length === 1 && v[0].type === 'node' && v[0].id === entity.id) {
                                 matchesViaTo = true;    // match VIA node
-                            } else if (_every(v, function(via) { return currPath.indexOf(via.id) !== -1; })) {
-                                matchesViaTo = true;    // match all VIA ways
+
+                            } else {                    // match all VIA ways
+                                var pathVias = [];
+                                for (k = 1; k < currPath.length; k++) {  // k = 1 skips FROM way
+                                    if (currPath[k][0] === 'w') pathVias.push(currPath[k]);
+                                }
+                                var restrictionVias = [];
+                                for (k = 0; k < v.length; k++) {
+                                    if (v[k].type === 'way') restrictionVias.push(v[k].id);
+                                }
+                                var diff = _difference(pathVias, restrictionVias);
+                                matchesViaTo = !diff.length;
                             }
 
                         } else if (isOnly) {
@@ -540,8 +529,10 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         if (v.length === 1 && v[0].type === 'node') {   // via node
                             isOnlyVia = (v[0].id === nextNode.id);
                         } else {                                        // via way(s)
-                            for (k = 0; k < v.length; k++) {
-                                if (v[k].type === 'way' && vgraph.entity(v[k].id).first() === nextNode.id) {
+                            for (var i = 0; i < v.length; i++) {
+                                if (v[i].type !== 'way') continue;
+                                var viaWay = vgraph.entity(v[i].id);
+                                if (viaWay.first() === nextNode.id || viaWay.last() === nextNode.id) {
                                     isOnlyVia = true;
                                     break;
                                 }

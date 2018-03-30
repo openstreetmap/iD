@@ -683,14 +683,14 @@
             "key": "H",
             "help": {
                 "title": "도움말",
-                "welcome": "[OpenStreetMap] (https://www.openstreetmap.org/)의 iD 편집기에 오신 것을 환영합니다. 이 편집기를 사용하면 웹 브라우저에서 바로 OpenStreetMap을 업데이트 할 수 있습니다.",
+                "welcome": "[OpenStreetMap](https://www.openstreetmap.org/)의 iD 편집기에 오신 것을 환영합니다. 이 편집기를 사용하면 웹 브라우저에서 바로 OpenStreetMap을 업데이트 할 수 있습니다.",
                 "open_data_h": "데이터 개방",
                 "open_data": "이 맵에서 편집 한 내용은 OpenStreetMap을 사용하는 모든 사용자가 볼 수 있습니다. 귀하의 편집 내용은 개인 지식, 지상 설문 조사 또는 공중 또는 거리 사진에서 수집한 이미지를 기반으로 할 수 있습니다. Google 지도와 같은 상업적인 출처에서 복사하는 행위는 [엄격히 금지되어 있습니다](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "시작하기 전에",
                 "before_start": "편집을 시작하기 전에 OpenStreetMap과 이 편집기에 익숙해야 합니다. iD에는 OpenStreetMap 편집의 기본 사항을 알려주는 연습이 있습니다. 튜토리얼을 보려면 이 화면에서 \"연습 시작하기\"를 클릭하세요 - 약 15 분이 소요됩니다.",
                 "open_source_h": "오픈소스",
-                "open_source": "iD 편집기는 공동 작업 방식의 오픈 소스 프로젝트이며, 버전 {version}을 사용 중입니다. 소스 코드는 [GitHub에서] 이용할 수 있습니다 (https://github.com/openstreetmap/iD).",
-                "open_source_help": "iD에 [번역] (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 또는 [버그 신고] (https://github.com/openstreetmap/iD/issues)를 통해 도움을 줄 수 있습니다."
+                "open_source": "iD 편집기는 공동 작업 방식의 오픈 소스 프로젝트이며, 버전 {version}을 사용 중입니다. 소스 코드는 [GitHub에서](https://github.com/openstreetmap/iD) 이용할 수 있습니다.",
+                "open_source_help": "iD에 [번역](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 또는 [버그 신고](https://github.com/openstreetmap/iD/issues)를 통해 도움을 줄 수 있습니다."
             },
             "overview": {
                 "title": "개요",
@@ -729,6 +729,17 @@
                 "turn_restriction_h": "회전 제한",
                 "route_h": "노선",
                 "boundary_h": "경계"
+            },
+            "imagery": {
+                "title": "배경 이미지",
+                "sources_h": "이미지 출처"
+            },
+            "field": {
+                "restrictions": {
+                    "about": {
+                        "title": "정보"
+                    }
+                }
             }
         },
         "intro": {
@@ -5853,18 +5864,33 @@
                 "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 기여자, CC by-SA 3.0"
+                },
                 "name": "도로 표지가 달린 길: 자전거"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 기여자, CC by-SA 3.0"
+                },
                 "name": "도로 표지가 달린 길: 걷기"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 기여자, CC by-SA 3.0"
+                },
                 "name": "도로 표지가 달린 길: 산악 자전거"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 기여자, CC by-SA 3.0"
+                },
                 "name": "도로 표지가 달린 길: 스케이트"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap 기여자, CC by-SA 3.0"
+                },
                 "name": "도로 표지가 달린 길: 겨울 스포츠"
             },
             "basemap.at": {

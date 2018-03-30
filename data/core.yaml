@@ -1,4 +1,8 @@
 en:
+  icons:
+    information: info
+    remove: remove
+    undo: undo
   modes:
     add_area:
       title: Area

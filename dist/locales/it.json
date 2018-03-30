@@ -868,7 +868,7 @@
             },
             "streetlevel": {
                 "title": "Foto a livello stradale",
-                "intro": "Le foto a livello stradale sono utile per mappare segnali stradali, attività commerciali e altri dettagli che non si possono vedere da foto satellitari o aeree. L'editor iD è compatibile con le foto a livello stradale di [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Le foto a livello stradale sono utili per mappare segnali stradali, attività commerciali e altri dettagli che non si possono vedere da foto satellitari o aeree. L'editor iD è compatibile con le foto a livello stradale di [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Utilizzo delle foto a livello stradale",
                 "using": "Per usare le foto a livello stradale, clicca sul pannello {data} **Dati mappa** a lato della mappa per abilitare o disabilitare i livelli di foto disponibili.",
                 "photos": "Quando abilitato, il livello delle foto mostra una linea lungo la sequenza di foto. A livelli di ingrandimento maggiori, un cerchio indica il punto in cui ogni foto è stata scattata, mentre a livelli di ingrandimento ancora più grandi, un cono mostra la direzione della fotocamera al momento dello scatto.",
@@ -888,7 +888,36 @@
                     "title": "Aiuto per i divieti di svolta",
                     "about": {
                         "title": "Informazioni",
-                        "about": "Questo campo permette di esaminare e modificare i divieti di svolta. Viene mostrato un modello dell'intersezione selezionata con incluse le relative strade."
+                        "about": "Questo campo permette di esaminare e modificare i divieti di svolta. Viene mostrato un modello dell'intersezione selezionata con incluse le relative strade.",
+                        "from_via_to": "Un obbligo di svolta conterrà sempre: un percorso con ruolo **DA**, un percorso con ruolo **VERSO** ed un nodo con ruolo **VIA** o in alternativa uno o più percorsi con ruolo **VIA**.",
+                        "maxdist": "La guida \"{distField}\" controlla quanto lontano cercare ulteriori percorsi connessi.",
+                        "maxvia": "La guida \"{viaField}\" regola il numero di percorsi di tipo via che verranno inclusi nella ricerca. (suggerimento: le soluzioni più semplici danno i migliori risultati)"
+                    },
+                    "inspecting": {
+                        "title": "Ispezionare",
+                        "about": "Muovi il mouse sopra qualsiasi segmento con ruolo **DA** per vedere se ha qualche obbligo di svolta. Ogni possibile destinazione con ruolo **VERSO** verrà disegnata con un'ombra colorata nel caso in cui sia presente un obbligo di svolta.",
+                        "from_shadow": "{fromShadow} **Segmento DA**",
+                        "allow_shadow": "{allowShadow} **VERSO ammesso**",
+                        "restrict_shadow": "{restrictShadow} **VERSO limitato**",
+                        "only_shadow": "{onlyShadow} **Solo VERSO**",
+                        "restricted": "\"Limitato\" significa che è presente un divieto di svolta, come per esempio \"Divieto di svolta a sinistra\".",
+                        "only": "\"Solo\" significa che un veicolo che sta transitando su quel percorso ha solamente una scelta, come per esempio \"Direzione obbligatoria diritto\"."
+                    },
+                    "modifying": {
+                        "title": "Modificare",
+                        "about": "Per modificare un obbligo di svolta, per prima cosa clicca in un qualsiasi segmento di tipo **DA** per selezionarlo. Il segmento selezionato pulserà e tutte le destinazioni possibili di tipo **VERSO** appariranno come simboli di svolta.",
+                        "indicators": "Adesso, clicca su un simbolo di svolta per passare dallo stato \"Ammesso\", \"Limitato\" oppure \"Solo\".",
+                        "allow_turn": "{allowTurn} **VERSO ammesso**",
+                        "restrict_turn": "{restrictTurn} **VERSO limitato**",
+                        "only_turn": "{onlyTurn} **solo VERSO**"
+                    },
+                    "tips": {
+                        "title": "Suggerimenti",
+                        "simple": "**Preferisci obblighi di svolta semplici invece di altri più complessi.**",
+                        "simple_example": "Ad esempio, evita di creare un obbligo di svolta che utilizza un percorso di topo VIA se basta usare un nodo per lo stesso ruolo.",
+                        "indirect": "**Alcuni obblighi di svolta sono segnati con il testo \"{indirect}\" e sono colorati più chiari.**",
+                        "indirect_example": "Questi obblighi di svolta esistono come conseguenza di un altro obbligo nei dintorni. Ad esempio, un \"obbligo di direzione obbligatoria\" genererà automaticamente un \"divieto di inversione di marcia\" per tutti gli altri percorsi che attraversano l'intersezione.",
+                        "indirect_noedit": "Non puoi modificare gli obblighi di svolta indiretti. Al loro posto, modifica i normali obblighi di svolta vicini."
                     }
                 }
             }
@@ -1613,7 +1642,8 @@
                     "label": "Tipo di gru",
                     "options": {
                         "floor-mounted_crane": "Gru ancorata a terra",
-                        "portal_crane": "Gru portuale"
+                        "portal_crane": "Gru portuale",
+                        "travel_lift": "Gru per imbarcazioni"
                     }
                 },
                 "crop": {
@@ -1672,6 +1702,9 @@
                         "cycleway:left": "Lato sinistro",
                         "cycleway:right": "Lato destro"
                     }
+                },
+                "dance/style": {
+                    "label": "Stili di danza"
                 },
                 "date": {
                     "label": "Data"
@@ -1734,6 +1767,9 @@
                         "both": "Entrambi / Tutti",
                         "forward": "In avanti"
                     }
+                },
+                "dispensing": {
+                    "label": "Prescrive medicinali"
                 },
                 "display": {
                     "label": "Display"
@@ -2140,6 +2176,7 @@
                     "options": {
                         "alternating": "Senso unico alternato",
                         "no": "No",
+                        "reversible": "invertito sporadicamente",
                         "undefined": "Si (ipotesi)",
                         "yes": "Sì"
                     }
@@ -2594,10 +2631,12 @@
                 "transformer": {
                     "label": "Tipo",
                     "options": {
+                        "auto": "Autotrasformatore",
                         "auxiliary": "Ausiliario",
                         "converter": "Convertitore",
                         "distribution": "Distribuzione",
                         "generator": "Generatore",
+                        "phase_angle_regulator": "Regolatore ad angolo di fase",
                         "traction": "Trazione",
                         "yes": "Sconosciuto"
                     }
@@ -2677,10 +2716,18 @@
                     "label": "Wikipedia"
                 },
                 "windings": {
+                    "label": "Avvolgimenti",
                     "placeholder": "1, 2, 3,..."
                 },
                 "windings/configuration": {
+                    "label": "Configurazione degli avvolgimenti",
                     "options": {
+                        "delta": "a triangolo",
+                        "leblanc": "Leblanc",
+                        "open": "aperto",
+                        "open-delta": "a triangolo aperto",
+                        "scott": "Scott",
+                        "star": "a stella",
                         "zigzag": "Zig Zag"
                     }
                 }
@@ -4161,7 +4208,7 @@
                     "terms": "rotonda,inversione,marcia"
                 },
                 "highway/unclassified": {
-                    "name": "Strada secondaria / non classificata",
+                    "name": "Strada minore/non classificata",
                     "terms": "Strada minore/non classificata"
                 },
                 "historic": {
@@ -4410,6 +4457,9 @@
                 "leisure/dance": {
                     "name": "Sala da ballo",
                     "terms": "ballo,danza,jive,swing,tango,valzer,balera"
+                },
+                "leisure/dancing_school": {
+                    "name": "Scuola di danza"
                 },
                 "leisure/dog_park": {
                     "name": "Area per cani",
@@ -5189,6 +5239,7 @@
                     "terms": "Sottostazione"
                 },
                 "power/switch": {
+                    "name": "Interruttore di potenza",
                     "terms": "<translate with synonyms or related terms for 'Power Switch', separated by commas>"
                 },
                 "power/tower": {

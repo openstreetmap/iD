@@ -37,4 +37,3 @@ export { geoVecInterp } from './vector.js';
 export { geoVecLength } from './vector.js';
 export { geoVecSubtract } from './vector.js';
 export { geoVecScale } from './vector.js';
-

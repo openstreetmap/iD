@@ -14,6 +14,7 @@ const path = require('path');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
+const maki = require('@mapbox/maki');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
@@ -67,7 +68,7 @@ module.exports = function buildData() {
         var presets = generatePresets(tstrings);
         var defaults = read('data/presets/defaults.json');
         var translations = generateTranslations(fields, presets, tstrings);
-        var taginfo = generateTaginfo(presets);
+        var taginfo = generateTaginfo(presets, fields);
 
         // Additional consistency checks
         validateCategoryPresets(categories, presets);
@@ -300,7 +301,8 @@ function generateTranslations(fields, presets, tstrings) {
     return translations;
 }
 
-function generateTaginfo(presets) {
+function generateTaginfo(presets, fields) {
+
     var taginfo = {
         'data_format': 1,
         'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json',
@@ -318,6 +320,7 @@ function generateTaginfo(presets) {
     };
 
     _forEach(presets, function(preset) {
+
         if (preset.suggestion)
             return;
 
@@ -332,8 +335,102 @@ function generateTaginfo(presets) {
             tag.value = preset.tags[last];
         }
 
-        taginfo.tags.push(tag);
+        if (preset.name) {
+          tag.description = [ preset.name ];
+        }
+
+        if (preset.geometry) {
+          setObjectType(tag, preset);
+        }
+
+        if (isMaki(preset.icon)) {
+            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' + preset.icon + '-15.svg?sanitize=true';
+        }
+
+        coalesceTags(taginfo, tag);
     });
+
+    _forEach(fields, function(field) {
+
+        var keys = field.keys || [ field.key ] || [];
+
+        keys.forEach(function(key) {
+            if (field.strings && field.strings.options) {
+               var values = Object.keys(field.strings.options);
+               values.forEach(function(value) {
+                   var tag = { key:   key,
+                               value: value };
+                   if (field.label) {
+                      tag.description = [ field.label ];
+                   }
+                   coalesceTags(taginfo, tag);
+               });
+            }
+            else {
+               var tag = { key: key };
+               if (field.label) {
+                  tag.description = [ field.label ];
+               }
+               coalesceTags(taginfo, tag);
+            }
+        });
+    });
+
+    _forEach(taginfo.tags, function(elem) {
+       if (elem.description)
+          elem.description = elem.description.join(', ');
+    });
+
+    function coalesceTags(taginfo, tag) {
+
+       if (!tag.key)
+         return;
+
+       var currentTaginfoEntries = taginfo.tags.filter(function(t) {
+           return (t.key    === tag.key &&
+                   t.value  === tag.value);
+       });
+
+       if (currentTaginfoEntries.length === 0) {
+         taginfo.tags.push(tag);
+         return;
+       }
+
+       if (!tag.description)
+         return;
+
+       if (!currentTaginfoEntries[0].description) {
+         currentTaginfoEntries[0].description = tag.description;
+         return;
+       }
+
+       var isNewDescription = currentTaginfoEntries[0].description
+                                   .indexOf(tag.description[0]) === -1;
+
+       if (isNewDescription) {
+         currentTaginfoEntries[0].description.push(tag.description[0]);
+       }
+    }
+
+    function isMaki(icon) {
+        var dataFeatureIcons = maki.layouts.all.all;
+        return (icon && dataFeatureIcons.indexOf(icon) !== -1);
+    }
+
+    function setObjectType(tag, input) {
+      tag.object_types = [];
+      const mapping = { 'point'    : 'node',
+                        'vertex'   : 'node',
+                        'line'     : 'way',
+                        'relation' : 'relation',
+                        'area'     : 'area' };
+
+      input.geometry.forEach(function(geom) {
+         if (tag.object_types.indexOf(mapping[geom]) === -1) {
+           tag.object_types.push(mapping[geom]);
+         }
+      });
+    }
 
     return taginfo;
 }

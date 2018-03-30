@@ -1692,11 +1692,13 @@ input[type=number] {
     content: none;
 }
 
+#preset-input-maxspeed_advisory,
 #preset-input-maxspeed {
     border-right: none;
     border-radius: 0 0 0 4px;
     width: 80%;
 }
+[dir='rtl'] #preset-input-maxspeed_advisory,
 [dir='rtl'] #preset-input-maxspeed {
     border-right: 1px solid #ccc;
     border-radius: 0 0 4px 0;
@@ -1772,7 +1774,7 @@ input[type=number] {
     content: "";
     display: block;
     position: absolute;
-    background:#ccc;
+    background: #ccc;
     height: 11px;
     width: 1px;
     left: 0;
@@ -1846,6 +1848,10 @@ input[type=number] {
 
 .restriction-controls-container .restriction-controls {
     display: table;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .restriction-controls .restriction-control {
@@ -2382,7 +2388,7 @@ div.full-screen > button:hover {
 
 .map-controls {
     right: 0;
-    top: 70px;
+    top: 132px;
     width: 40px;
     position: fixed;
     z-index: 100;
@@ -2408,26 +2414,45 @@ div.full-screen > button:hover {
 }
 
 /* Zoomer */
-
-.zoombuttons button.zoom-in {
+.zoombuttons > button.zoom-in {
     border-radius: 4px 0 0 0;
 }
-[dir='rtl'] .zoombuttons button.zoom-in {
+[dir='rtl'] .zoombuttons > button.zoom-in {
     border-radius: 0 4px 0 0;
 }
 
-/* Background / Map Data Settings */
+/* Geolocator */
+.geolocate-control {
+    margin-bottom: 10px;
+}
+.geolocate-control > button {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .geolocate-control > button {
+    border-radius: 0 0 4px 0;
+}
+
+/* Pane Buttons */
+.help-control > button {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .help-control > button {
+    border-radius: 0 0 4px 0;
+}
 
 .map-data-control button {
     border-radius: 0;
 }
 
-.background-control button {
+.background-control > button {
     border-radius: 4px 0 0 0;
 }
-[dir='rtl'] .background-control button {
+[dir='rtl'] .background-control > button {
     border-radius: 0 4px 0 0;
 }
+
+
+/* Background / Map Data Settings */
 
 .map-data-control,
 .background-control {
@@ -2702,51 +2727,60 @@ div.full-screen > button:hover {
     border-radius: 3px 0 0 3px;
 }
 
-.map-data-control .map-overlay,
-.background-control .map-overlay,
-.help-control .map-overlay {
-    z-index: -1;
-}
+/* Side panes */
 
-/* Geolocator */
-
-.geolocate-control {
-    margin-bottom: 10px;
+/*.map-data-control .map-pane,
+.background-control .map-pane,
+.help-control .map-pane {
 }
-
-.geolocate-control button {
-    border-radius: 0 0 0 4px;
-}
-[dir='rtl'] .geolocate-control button {
-    border-radius: 0 0 4px 0;
-}
-
-.map-overlay.content {
+*/
+.map-pane {
     position: fixed;
     top: 60px;
     bottom: 30px;
-    padding: 20px 50px 20px 20px;
     right: 0;
-    overflow: auto;
+    padding-bottom: 50px;
+    overflow: hidden;
+    z-index: -1;
 }
-[dir='rtl'] .map-overlay.content {
-    padding: 20px 20px 20px 50px;
+[dir='rtl'] .map-pane {
     left: 0;
     right: auto !important;
 }
 
-.map-overlay.content > div {
+.pane-heading {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.pane-heading h2 {
+    margin: 15px 20px;
+}
+
+.pane-heading button {
+    width: 40px;
+    height: 61px;
+    border-radius: 0;
+}
+
+.pane-content {
+    height: 100%;
+    padding: 10px 50px 20px 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+[dir='rtl'] .pane-content {
+    padding: 10px 20px 20px 50px;
+}
+
+.pane-content > div {
     padding-bottom: 15px;
 }
 
 /* Help */
 
-.help-control button {
-    border-radius: 0 0 0 4px;
-}
-[dir='rtl'] .help-control button {
-    border-radius: 0 0 4px 0;
-}
 
 .help-wrap p {
     font-size: 15px;
@@ -2824,6 +2858,7 @@ div.full-screen > button:hover {
 
 .help-wrap .nav {
     position: relative;
+    padding-bottom: 30px;
 }
 
 .help-wrap .nav a {
@@ -3876,7 +3911,7 @@ svg.mouseclick use.right {
 .tooltip {
     position: absolute;
     display: none;
-    color:#333;
+    color: #333;
     font-size: 12px;
 }
 
@@ -4030,33 +4065,33 @@ svg.mouseclick use.right {
 /* Exceptions for tooltip layouts */
 
 /* make tooltips in panels dark */
-.map-overlay .tooltip.top .tooltip-arrow,
+.map-pane .tooltip.top .tooltip-arrow,
 .entity-editor-pane .tooltip.top .tooltip-arrow,
 .warning-section .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
-.map-overlay .tooltip.bottom .tooltip-arrow,
+.map-pane .tooltip.bottom .tooltip-arrow,
 .entity-editor-pane .tooltip.bottom .tooltip-arrow,
 .warning-section .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
 
-.map-overlay .tooltip.left .tooltip-arrow,
+.map-pane .tooltip.left .tooltip-arrow,
 .entity-editor-pane .tooltip.left .tooltip-arrow,
 .warning-section .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
-.map-overlay .tooltip.right .tooltip-arrow,
+.map-pane .tooltip.right .tooltip-arrow,
 .entity-editor-pane .tooltip.right .tooltip-arrow,
 .warning-section .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 
-.map-overlay .tooltip-inner,
-.map-overlay .tooltip-heading,
-.map-overlay .keyhint-wrap,
+.map-pane .tooltip-inner,
+.map-pane .tooltip-heading,
+.map-pane .keyhint-wrap,
 .entity-editor-pane .tooltip-inner,
 .warning-section .tooltip-inner {
     background: #000;

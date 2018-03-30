@@ -211,6 +211,9 @@ export function d3combobox() {
             idx = -1;
             if (!v) return;
 
+            // Don't autocomplete if user is typing a number - #4935
+            if (!isNaN(parseFloat(v)) && isFinite(v)) return;
+
             var best = -1;
             var suggestion, compare;
 

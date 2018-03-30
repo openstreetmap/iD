@@ -291,7 +291,7 @@ export function uiFieldCombo(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.safeid)
             .call(utilNoAuto)
             .call(initCombo, selection)
             .merge(input);

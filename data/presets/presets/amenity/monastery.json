@@ -1,0 +1,44 @@
+{
+    "icon": "place-of-worship",
+    "fields": [
+        "name",
+        "religion",
+        "denomination",
+        "address",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "abbey",
+        "basilica",
+        "bethel",
+        "cathedral",
+        "chancel",
+        "chantry",
+        "chapel",
+        "church",
+        "fold",
+        "house of God",
+        "house of prayer",
+        "house of worship",
+        "minster",
+        "mission",
+        "monastery",
+        "mosque",
+        "oratory",
+        "parish",
+        "sacellum",
+        "sanctuary",
+        "shrine",
+        "synagogue",
+        "tabernacle",
+        "temple"
+    ],
+    "tags": {
+        "amenity": "monastery"
+    },
+    "name": "Monastery Grounds"
+}

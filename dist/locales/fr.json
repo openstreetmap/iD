@@ -1601,6 +1601,9 @@
                         "cycleway:right": "Côté droit"
                     }
                 },
+                "dance/style": {
+                    "label": "Styles de dances"
+                },
                 "date": {
                     "label": "Date"
                 },
@@ -4372,6 +4375,10 @@
                 "leisure/dance": {
                     "name": "Salle de danse",
                     "terms": "piste de danse,salle de bal,dancing"
+                },
+                "leisure/dancing_school": {
+                    "name": "École de dance",
+                    "terms": "<translate with synonyms or related terms for 'Dance School', separated by commas>"
                 },
                 "leisure/dog_park": {
                     "name": "Parc canin",

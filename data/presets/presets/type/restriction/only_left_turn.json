@@ -10,5 +10,5 @@
         "type": "restriction",
         "restriction": "only_left_turn"
     },
-    "name": "Left Turn Only"
+    "name": "Only Left Turn"
 }

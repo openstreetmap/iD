@@ -187,13 +187,15 @@ describe('iD.actionAddMember', function() {
                 iD.osmRelation({id: 'r', members: [
                     { id: 'n1', type: 'node', role: 'stop' },
                     { id: 'w1', type: 'way', role: 'platform' },
-                    { id: 'n2', type: 'node', role: 'stop' },
-                    { id: 'w2', type: 'way', role: 'platform' },
-                    { id: 'n3', type: 'node', role: 'forward' },
-                    { id: 'n4', type: 'node', role: 'forward' },
+                    { id: 'n2', type: 'node', role: 'stop_entry_only' },
+                    { id: 'w2', type: 'way', role: 'platform_entry_only' },
+                    { id: 'n3', type: 'node', role: 'stop_exit_only' },
+                    { id: 'w3', type: 'way', role: 'platform_exit_only' },
+                    { id: 'n10', type: 'node', role: 'forward' },
+                    { id: 'n11', type: 'node', role: 'forward' },
                     { id: '-', type: 'way', role: 'forward' },
                     { id: 'r1', type: 'relation', role: 'forward' },
-                    { id: 'n5', type: 'node', role: 'forward' }
+                    { id: 'n12', type: 'node', role: 'forward' }
                 ]})
             ]);
 
@@ -201,11 +203,13 @@ describe('iD.actionAddMember', function() {
             expect(graph.entity('r').members).to.eql([
                 { id: 'n1', type: 'node', role: 'stop' },
                 { id: 'w1', type: 'way', role: 'platform' },
-                { id: 'n2', type: 'node', role: 'stop' },
-                { id: 'w2', type: 'way', role: 'platform' },
-                { id: 'n3', type: 'node', role: 'forward' },
-                { id: 'n4', type: 'node', role: 'forward' },
-                { id: 'n5', type: 'node', role: 'forward' },
+                { id: 'n2', type: 'node', role: 'stop_entry_only' },
+                { id: 'w2', type: 'way', role: 'platform_entry_only' },
+                { id: 'n3', type: 'node', role: 'stop_exit_only' },
+                { id: 'w3', type: 'way', role: 'platform_exit_only' },
+                { id: 'n10', type: 'node', role: 'forward' },
+                { id: 'n11', type: 'node', role: 'forward' },
+                { id: 'n12', type: 'node', role: 'forward' },
                 { id: '-', type: 'way', role: 'forward' },
                 { id: '=', type: 'way', role: 'forward' },
                 { id: 'r1', type: 'relation', role: 'forward' }

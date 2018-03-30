@@ -951,6 +951,11 @@
             "type": "check",
             "label": "Indoor"
         },
+        "industrial": {
+            "key": "industrial",
+            "type": "combo",
+            "label": "Type"
+        },
         "information": {
             "key": "information",
             "type": "typeCombo",
@@ -1137,6 +1142,12 @@
             "key": "maxspeed",
             "type": "maxspeed",
             "label": "Speed Limit",
+            "placeholder": "40, 50, 60..."
+        },
+        "maxspeed/advisory": {
+            "key": "maxspeed:advisory",
+            "type": "maxspeed",
+            "label": "Advisory Speed Limit",
             "placeholder": "40, 50, 60..."
         },
         "maxstay": {
@@ -2101,10 +2112,25 @@
             "label": "Type",
             "placeholder": "Default"
         },
+        "usage_rail": {
+            "key": "usage",
+            "type": "combo",
+            "label": "Usage Type",
+            "strings": {
+                "options": {
+                    "main": "Main",
+                    "branch": "Branch",
+                    "industrial": "Industrial",
+                    "military": "Military",
+                    "test": "Test",
+                    "tourism": "Tourism"
+                }
+            }
+        },
         "vending": {
             "key": "vending",
-            "type": "combo",
-            "label": "Type of Goods"
+            "type": "semiCombo",
+            "label": "Types of Goods"
         },
         "visibility": {
             "key": "visibility",

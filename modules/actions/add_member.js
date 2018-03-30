@@ -11,7 +11,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         var relation = graph.entity(relationId);
 
         // There are some special rules for Public Transport v2 routes.
-        var isPTv2 = (member.role === 'stop' || member.role === 'platform');
+        var isPTv2 = /stop|platform/.test(member.role);
 
         if ((isNaN(memberIndex) || insertPair) && member.type === 'way' && !isPTv2) {
             // Try to perform sensible inserts based on how the ways join together
@@ -41,7 +41,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         var members = [];
         for (i = 0; i < relation.members.length; i++) {
             var m = relation.members[i];
-            if (m.role === 'stop' || m.role === 'platform') {
+            if (/stop|platform/.test(m.role)) {
                 PTv2members.push(m);
             } else {
                 members.push(m);

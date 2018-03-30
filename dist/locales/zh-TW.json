@@ -296,7 +296,35 @@
                 "distance": "距離",
                 "distance_up_to": "最大 {distance}",
                 "via": "經由",
-                "via_node_only": "只有節點"
+                "via_node_only": "只有節點",
+                "via_up_to_one": "最多 1 路徑",
+                "via_up_to_two": "最多 2 路徑"
+            },
+            "help": {
+                "indirect": "(間接)",
+                "turn": {
+                    "no_left_turn": "禁止左轉 {indirect}",
+                    "no_right_turn": "禁止右轉 {indirect}",
+                    "no_u_turn": "禁止迴轉 {indirect}",
+                    "no_straight_on": "禁止直行 {indirect}",
+                    "only_left_turn": "只能左轉 {indirect}",
+                    "only_right_turn": "只能右轉 {indirect}",
+                    "only_u_turn": "只能迴轉 {indirect}",
+                    "only_straight_on": "只能直行 {indirect}",
+                    "allowed_left_turn": "允許左轉 {indirect}",
+                    "allowed_right_turn": "允許右轉 {indirect}",
+                    "allowed_u_turn": "允許迴轉 {indirect}",
+                    "allowed_straight_on": "允許直行 {indirect}"
+                },
+                "from": "從",
+                "via": "經由",
+                "to": "到",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "點選 {from} 片段",
+                "select_from_name": "點選 {from} 片段 {fromName}",
+                "toggle": "點 \"{turn}\""
             }
         },
         "undo": {
@@ -854,6 +882,25 @@
                 "using": "要用 GPS 軌跡畫地圖，請把資料檔案拖到地圖編輯器裡。如果成功辨識，則會在地圖上顯示亮紫色的線條。點地圖旁邊的 {data}  **地圖資料**面板啟用、關閉，或是縮放到你的 GPS 資料。",
                 "tracing": "GPS 軌跡並未傳到開放街圖 - 而最好的使用方式則是照著軌跡的指引，繪製你要新增的圖徵。",
                 "upload": "您也可以透過[上傳你的 GPS 資訊至 OpenStreetMap 開放街圖](https://www.openstreetmap.org/trace/create)以供其他使用者利用。"
+            },
+            "field": {
+                "restrictions": {
+                    "title": "轉彎限制說明",
+                    "about": {
+                        "title": "關於",
+                        "about": "這個欄位允許你偵測和變動轉彎限制，顯示選取的交叉路口的模型，以及鄰近連結的道路。",
+                        "from_via_to": "轉彎限制總是有：一個**從路徑**，一個**到路徑**，以及一個**經由節點*，或一個或多個**經由路徑**。"
+                    },
+                    "inspecting": {
+                        "title": "偵測"
+                    },
+                    "modifying": {
+                        "title": "變動"
+                    },
+                    "tips": {
+                        "title": "技巧"
+                    }
+                }
             }
         },
         "intro": {

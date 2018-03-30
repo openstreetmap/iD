@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "levels",
+        "height",
         "address"
     ],
     "geometry": [
