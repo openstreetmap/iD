@@ -3674,6 +3674,10 @@ en:
         name: Amusement Arcade
         # 'terms: pay-to-play games,video games,driving simulators,pinball machines'
         terms: '<translate with synonyms or related terms for ''Amusement Arcade'', separated by commas>'
+      leisure/beach_resort:
+        # leisure=beach_resort
+        name: Beach Resort
+        terms: '<translate with synonyms or related terms for ''Beach Resort'', separated by commas>'
       leisure/bird_hide:
         # leisure=bird_hide
         name: Bird Hide

@@ -1,0 +1,17 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "name",
+        "address",
+        "fee"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "leisure": "beach_resort"
+    },
+    "name": "Beach Resort"
+}
