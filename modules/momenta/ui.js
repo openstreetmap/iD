@@ -14,10 +14,13 @@ function addHideSideBarKEY() {
     var keybinding = d3_keybinding('hide-sideBar');
     var detected = utilDetect();
     var keys = detected.os === 'mac' ? uiCmd('⌘B') : uiCmd('⌘B');
-    keybinding.on(keys, function () {
+    var setHide = function () {
         var select = window.id.container().select('#sidebar');
         select.classed('hide', !select.classed('hide'));
-    });
+        window.onresizea();
+    };
+    // setTimeout(setHide,100);
+    keybinding.on(keys, setHide);
 
     d3_select(document)
         .call(keybinding);
@@ -25,7 +28,11 @@ function addHideSideBarKEY() {
 function uploadOSM() {
     if (window.momentaPool && window.momentaPool.currentPackage){
         sendPost(url.upload_package,{'packageIds':window.momentaPool.currentPackage},function (result) {
-
+            if (result==='success'){
+                alert('审核通过:'+window.momentaPool.currentPackage);
+            } else {
+                alert('上传错误:'+window.momentaPool.currentPackage);
+            }
         });
     }
 }

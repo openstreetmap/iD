@@ -430,6 +430,7 @@
     "operation-momenta_straighten":{ "viewBox": "540 380 20 20" },
     "operation-momenta_merge":{ "viewBox": "540 380 20 20" },
     "operation-momenta_fillInfo":{ "viewBox": "540 380 20 20" },
+    "operation-momenta_location":{ "viewBox": "540 380 20 20" },
     "operation-momenta_segment":{ "viewBox": "540 380 20 20" },
     "operation-momenta_delete":{ "viewBox": "540 380 20 20" },
     "operation-join-lanegroup": { "viewBox": "580 380 20 20" },
