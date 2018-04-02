@@ -39,7 +39,6 @@
   "devDependencies": {
     "@mapbox/maki": "^4.0.0",
     "@std/esm": "0.22.0",
-    "babel-eslint": "^8.2.2",
     "chai": "^4.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
