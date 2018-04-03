@@ -4575,6 +4575,10 @@
                     "name": "Amusement Arcade",
                     "terms": "pay-to-play games,video games,driving simulators,pinball machines"
                 },
+                "leisure/beach_resort": {
+                    "name": "Beach Resort",
+                    "terms": ""
+                },
                 "leisure/bird_hide": {
                     "name": "Bird Hide",
                     "terms": "machan,ornithology"

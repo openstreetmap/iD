@@ -9677,6 +9677,23 @@
             },
             "name": "Amusement Arcade"
         },
+        "leisure/beach_resort": {
+            "icon": "pitch",
+            "fields": [
+                "name",
+                "address",
+                "fee"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "leisure": "beach_resort"
+            },
+            "name": "Beach Resort"
+        },
         "leisure/bird_hide": {
             "icon": "poi-binoculars",
             "fields": [
