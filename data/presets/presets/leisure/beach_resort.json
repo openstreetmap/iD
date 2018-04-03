@@ -1,5 +1,5 @@
 {
-    "icon": "pitch",
+    "icon": "poi-beach",
     "fields": [
         "name",
         "address",
@@ -7,7 +7,6 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

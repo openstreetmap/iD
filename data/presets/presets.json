@@ -9678,7 +9678,7 @@
             "name": "Amusement Arcade"
         },
         "leisure/beach_resort": {
-            "icon": "pitch",
+            "icon": "poi-beach",
             "fields": [
                 "name",
                 "address",
@@ -9686,7 +9686,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {

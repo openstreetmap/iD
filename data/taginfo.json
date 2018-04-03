@@ -4057,8 +4057,7 @@
             "object_types": [
                 "node",
                 "area"
-            ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
+            ]
         },
         {
             "key": "leisure",
