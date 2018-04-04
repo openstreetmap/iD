@@ -2811,6 +2811,10 @@
                     "name": "Billboard",
                     "terms": ""
                 },
+                "advertising/column": {
+                    "name": "Column",
+                    "terms": ""
+                },
                 "aerialway/station": {
                     "name": "Aerialway Station",
                     "terms": ""
@@ -6665,7 +6669,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on goverment data.",
+                "description": "Basemap of Austria, based on government data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6727,7 +6731,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
             },

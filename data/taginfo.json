@@ -118,6 +118,14 @@
             ]
         },
         {
+            "key": "advertising",
+            "value": "column",
+            "description": "Column",
+            "object_types": [
+                "node"
+            ]
+        },
+        {
             "key": "aerialway",
             "value": "station",
             "description": "Aerialway Station",

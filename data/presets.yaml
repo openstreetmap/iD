@@ -1688,6 +1688,10 @@ en:
         # advertising=billboard
         name: Billboard
         terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
+      advertising/column:
+        # advertising=column
+        name: Column
+        terms: '<translate with synonyms or related terms for ''Column'', separated by commas>'
       aerialway:
         # aerialway=*
         name: Aerialway
