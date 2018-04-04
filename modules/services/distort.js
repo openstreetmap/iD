@@ -32,11 +32,10 @@ var config =
             1.7838000000000000e-02]
     }
 
-export function AddDistortion(points, plateno){
-    var indexK = plateno + '_k';
-    var indexDist = plateno + '_dist';
-    var K = config[indexK],
-        distortMatrix = config[indexDist];
+export function AddDistortion(points, deDistortionMatrix){
+    var K = [deDistortionMatrix.fx, 0, deDistortionMatrix.cx, 0, deDistortionMatrix.fy, deDistortionMatrix.cy, 0, 0, 1],
+        distortMatrix = deDistortionMatrix.DistCoef;
+
     return points.map(function(value) {
         var fx = K[0];
         var cx = K[2];

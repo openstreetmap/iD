@@ -42,7 +42,8 @@ var apibase = 'http://mapeditor.momenta.works:5123/',
     _mlySelectedImage,
     _mlySignDefs,
     _mlySignSprite,
-    _mlyViewer;
+    _mlyViewer,
+    _mlyIntrinsicMatrixCache = {};
 
 
 function abortRequest(i) {
@@ -611,7 +612,7 @@ export default {
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
                     .attr('href', 'https://www.mapillary.com/app/user/' + encodeURIComponent(d.captured_by))
-                    .text('@' + d.captured_by);
+                    .text(d.captured_by + '-' + d.captured_at);
 
                 attribution
                     .append('span')
@@ -796,27 +797,142 @@ export default {
         var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
 
         var plateno = d.captured_by;
+        var packetName = plateno + '-' + d.captured_at;
         var tagArr = {
             'trafficsign' : 'traffisign',
             'lane' : 'lanes',
             'line' : 'line'
         }
         loadDetection(imageKey);
+        loadSplame(imageKey);
+        if (!_mlyIntrinsicMatrixCache[packetName]){
+            loadIntrinsicMatrix(imageKey);
+        }
 
-        // function loadSplame(slamKey) {
-        //     var url = apibase + '?imagekey=' + slamKey + '&tag=json_project';
-        //     var slamArr = ['boards', 'lane_lines', 'poles'];
-        //
-        //     d3_request(url)
-        //         .mimetype('application/json')
-        //         .response(function(xhr) {
-        //             return JSON.parse(xhr.responseText);
-        //         })
-        //         .get(function(err, data) {
-        //             return 1
-        //         })
-        //
-        // }
+        function loadIntrinsicMatrix(imageKey) {
+            var url = apibase + 'detection?imagekey=' + imageKey + '&tag=IntrinsicMatrix';
+            console.log(url)
+            d3_request(url)
+                .mimeType('application/json')
+                .response(function(xhr) {
+                return JSON.parse(xhr.responseText);
+            })
+                .get(function(err, data){
+                    _mlyIntrinsicMatrixCache[packetName] = data;
+                });
+        }
+
+        function loadSplame(slamKey) {
+            var url = apibase + 'detection?imagekey=' + slamKey + '&tag=json_project';
+            var slamArr = {
+                lamppost: {listName:'line', numName: 'line_num'},
+                lane: {listName:'lanes', numName: 'lane_num'},
+                trafficsign: {listName : 'traffisign', numName: 'trafficsign_num'},
+                };
+            d3_request(url)
+                .mimeType('application/json')
+                .response(function(xhr) {
+                    return JSON.parse(xhr.responseText);
+                })
+                .get(function(err, data) {
+                    _forEach(slamArr, function(value,key){
+                        if (!data || !data[key][value.numName] || !data[key][value.numName] === 0) return;
+                        _forEach(data[key][value.listName], function(val){
+                            var tag = makeSlamTag(val, key, plateno);
+                            if (tag) {
+                                var tagComponet = _mlyViewer.getComponent('tag');
+                                tagComponet.add([tag]);
+                            }
+                        });
+                    });
+                });
+        }
+
+        function makeSlamTag(data, tagType, plateno) {
+            var imageWidth = 1920;
+            var imageHeight = 1200;
+
+            var text = tagType + data.trackid;
+            var tag_name = data.trackid + ' \n' + data.score.toString().substring(0,4);
+            var tag;
+            var points = [],
+                laneCorlor = 0xff0000;
+            switch (tagType) {
+                case 'trafficsign': {
+                    switch (data.type) {
+                        case 'CIRCLE':{
+                            var coordinates = data.points;
+                            points.push([coordinates[0].x,coordinates[0].y]);
+                            points.push([coordinates[0].x+10,coordinates[0].y]);
+                            points.push([coordinates[0].x,coordinates[0].y+10]);
+                            points.push([coordinates[0].x,coordinates[0].y]);
+                            break;
+                        }
+                        default: {
+                            if (!data.points) return;
+                            _forEach(data.points, function (point) {
+                                points.push([point.x, point.y]);
+                            });
+                            points.push(points[0])
+                            break;
+                        }
+                    }
+                    points = _filter(points, function(point){
+                        return point[0] >= 0 && point[1] >= 0 && point[0] <=imageWidth && point[1] <=imageHeight;
+                    });
+                    break;
+                }
+                case 'lane':
+                case 'lamppost': {
+                    if (!data.points) return;
+                    _forEach(data.points, function(point){
+                        points.push([point.x-2.5,point.y]);
+                    });
+                    points = _filter(points, function(point){
+                        return point[0] >= 0 && point[1] >= 0 && point[0] <=imageWidth && point[1] <=imageHeight;
+                    });
+                    for (var i = points.length -1; i >=0; i--){
+                        points.push([points[i][0] + 2.5,points[i][1]]);
+                    }
+                    points.push(points[0]);
+                    switch (data.xushi_type){
+                        case 'solid':
+                            laneCorlor = 0xff0000;
+                            break;
+                        case 'dashed':
+                            laneCorlor = 0x008000;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                }
+
+                default:{
+                    console.log('Unknown type');
+                    return;
+                }
+            }
+            points = points.map(function(value){
+                return [value[0]/imageWidth, value[1]/imageHeight];
+            })
+            var polygonGeometry = new Mapillary
+                .TagComponent
+                .PolygonGeometry(points);
+            tag = new Mapillary.TagComponent.OutlineTag(
+                text,
+                polygonGeometry,
+                {
+                    text: tag_name,
+                    textColor: laneCorlor,
+                    lineColor: laneCorlor,
+                    lineWidth: '10',
+                    fillColor: laneCorlor,
+                    fillOpacity: 0.3,
+                }
+            );
+            return tag;
+        }
 
         function loadDetection(detectionKey) {
             var url;
@@ -854,13 +970,15 @@ export default {
                 laneCorlor = 0xffff00;
             switch (tagType) {
                 case tagArr.trafficsign: {
-                    var coordinates = data.rect;
-                    points.push([coordinates.left,coordinates.bottom]);
-                    points.push([coordinates.right,coordinates.bottom]);
-                    points.push([coordinates.right,coordinates.top]);
-                    points.push([coordinates.left,coordinates.top]);
-                    points.push([coordinates.left,coordinates.bottom]);
-                    break;
+                    if (1 === data.cls) {
+                        var coordinates = data.rect;
+                        points.push([coordinates.left, coordinates.bottom]);
+                        points.push([coordinates.right, coordinates.bottom]);
+                        points.push([coordinates.right, coordinates.top]);
+                        points.push([coordinates.left, coordinates.top]);
+                        points.push([coordinates.left, coordinates.bottom]);
+                        break;
+                    }
                 }
                 case tagArr.line:
                 case tagArr.lane: {
@@ -893,7 +1011,10 @@ export default {
                     return;
                 }
             }
-            points = AddDistortion(points, plateno);
+            console.log(points);
+            points = AddDistortion(points, _mlyIntrinsicMatrixCache[packetName]);
+            console.log("after:");
+            console.log(points);
             points = points.map(function(value){
                 return [value[0]/imageWidth, value[1]/imageHeight];
             })
@@ -909,7 +1030,7 @@ export default {
                     lineColor: laneCorlor,
                     lineWidth: 2,
                     fillColor: 0xffff00,
-                    fillOpacity: 0.3,
+                    fillOpacity: 0,
                 }
             );
             return tag;
