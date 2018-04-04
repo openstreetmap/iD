@@ -182,6 +182,20 @@
             "name": "Address",
             "matchScore": 0.15
         },
+        "advertising/advertising_column": {
+            "fields": [
+                "direction",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "advertising": "advertising_column"
+            },
+            "name": "Advertising Column"
+        },
         "advertising/billboard": {
             "fields": [
                 "direction",
@@ -196,20 +210,6 @@
                 "advertising": "billboard"
             },
             "name": "Billboard"
-        },
-        "advertising/column": {
-            "fields": [
-                "direction",
-                "lit"
-            ],
-            "geometry": [
-                "point",
-                "vertex"
-            ],
-            "tags": {
-                "advertising": "column"
-            },
-            "name": "Column"
         },
         "aerialway/station": {
             "icon": "aerialway",

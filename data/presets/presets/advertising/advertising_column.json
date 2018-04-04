@@ -5,10 +5,10 @@
     ],
     "geometry": [
         "point",
-        "vertex"
+        "area"
     ],
     "tags": {
-        "advertising": "column"
+        "advertising": "advertising_column"
     },
-    "name": "Column"
+    "name": "Advertising Column"
 }
