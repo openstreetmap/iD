@@ -6668,7 +6668,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on government data.",
+                "description": "Basemap of Austria, based on goverment data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6730,7 +6730,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
                 },
                 "name": "Stamen Terrain"
             },
