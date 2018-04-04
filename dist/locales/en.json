@@ -1819,6 +1819,9 @@
                 "except": {
                     "label": "Exceptions"
                 },
+                "faces": {
+                    "label": "faces"
+                },
                 "fax": {
                     "label": "Fax",
                     "placeholder": "+31 42 123 4567"
@@ -6665,7 +6668,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on goverment data.",
+                "description": "Basemap of Austria, based on government data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6727,7 +6730,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
             },

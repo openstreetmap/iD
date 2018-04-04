@@ -736,6 +736,11 @@
             "type": "combo",
             "label": "Exceptions"
         },
+        "faces": {
+            "key": "faces",
+            "type": "number",
+            "label": "faces"
+        },
         "fax": {
             "key": "fax",
             "type": "tel",

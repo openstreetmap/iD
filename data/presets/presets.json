@@ -1358,7 +1358,8 @@
                 "support",
                 "display",
                 "visibility",
-                "date"
+                "date",
+                "faces"
             ],
             "geometry": [
                 "point",

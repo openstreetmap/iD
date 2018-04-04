@@ -540,6 +540,9 @@ en:
       except:
         # except=*
         label: Exceptions
+      faces:
+        # faces=*
+        label: faces
       fax:
         # fax=*
         label: Fax
