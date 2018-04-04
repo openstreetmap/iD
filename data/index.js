@@ -1,5 +1,6 @@
 export { wikipedia as dataWikipedia } from 'wmf-sitematrix';
 export { default as dataSuggestions } from 'name-suggestion-index/name-suggestions.json';
+export { default as plurals } from 'cldr-core/supplemental/plurals.json';
 
 export { dataAddressFormats } from './address-formats.json';
 export { dataDeprecated } from './deprecated.json';

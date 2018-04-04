@@ -13,6 +13,7 @@ export { utilGetAllNodes } from './util';
 export { utilGetPrototypeOf } from './util';
 export { utilGetSetValue } from './get_set_value';
 export { utilIdleWorker} from './idle_worker';
+export { t } from './locale';
 export { utilNoAuto } from './util';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';

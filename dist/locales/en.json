@@ -119,7 +119,10 @@
                     "line": "Deleted a line.",
                     "area": "Deleted an area.",
                     "relation": "Deleted a relation.",
-                    "multiple": "Deleted {n} features."
+                    "multiple": {
+                        "one": "Deleted a feature.",
+                        "other": "Deleted {n} features."
+                    }
                 },
                 "too_large": {
                     "single": "This feature can't be deleted because not enough of it is currently visible.",
@@ -167,7 +170,10 @@
                 "title": "Merge",
                 "description": "Merge these features.",
                 "key": "C",
-                "annotation": "Merged {n} features.",
+                "annotation": {
+                    "one": "Merged a feature.",
+                    "other": "Merged {n} features."
+                },
                 "not_eligible": "These features can't be merged.",
                 "not_adjacent": "These features can't be merged because their endpoints aren't connected.",
                 "restriction": "These features can't be merged because it would damage a \"{relation}\" relation.",
@@ -286,7 +292,10 @@
                 "annotation": {
                     "line": "Split a line.",
                     "area": "Split an area boundary.",
-                    "multiple": "Split {n} lines/area boundaries."
+                    "multiple": {
+                        "one": "Split a line/area boundary.",
+                        "other": "Split {n} lines/area boundaries."
+                    }
                 },
                 "not_eligible": "Lines can't be split at their beginning or end.",
                 "multiple_ways": "There are too many lines here to split.",
@@ -358,8 +367,14 @@
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
         "feature_info": {
-            "hidden_warning": "{count} hidden features",
-            "hidden_details": "These features are currently hidden: {details}"
+            "hidden_warning": {
+                "one": "1 hidden feature",
+                "other": "{count} hidden features"
+            },
+            "hidden_details": {
+                "one": "This feature is currently hidden: {details}",
+                "other": "These features are currently hidden: {details}"
+            }
         },
         "status": {
             "error": "Unable to connect to API.",
@@ -374,7 +389,10 @@
             "request_review": "I would like someone to review my edits.",
             "save": "Upload",
             "cancel": "Cancel",
-            "changes": "{count} Changes",
+            "changes": {
+                "one": "1 Change",
+                "other": "{count} Changes"
+            },
             "download_changes": "Download osmChange file",
             "warnings": "Warnings",
             "modified": "Modified",
@@ -387,7 +405,10 @@
         },
         "contributors": {
             "list": "Edits by {users}",
-            "truncated_list": "Edits by {users} and {count} others"
+            "truncated_list": {
+                "one": "Edits by {users} and someone else",
+                "other": "Edits by {users} and {count} others"
+            }
         },
         "info_panels": {
             "key": "I",
@@ -409,7 +430,10 @@
             "history": {
                 "key": "H",
                 "title": "History",
-                "selected": "{n} selected",
+                "selected": {
+                    "one": "1 selected",
+                    "other": "{n} selected"
+                },
                 "no_history": "No History (New Feature)",
                 "version": "Version",
                 "last_edit": "Last Edit",
@@ -426,7 +450,10 @@
             "measurement": {
                 "key": "M",
                 "title": "Measurement",
-                "selected": "{n} selected",
+                "selected": {
+                    "one": "1 selected",
+                    "other": "{n} selected"
+                },
                 "geometry": "Geometry",
                 "closed_line": "closed line",
                 "closed_area": "closed area",
@@ -470,7 +497,10 @@
             "new_relation": "New relation...",
             "role": "Role",
             "choose": "Select feature type",
-            "results": "{n} results for {search}",
+            "results": {
+                "one": "1 result for {search}",
+                "other": "{n} results for {search}"
+            },
             "reference": "View on OpenStreetMap Wiki",
             "back_tooltip": "Change feature",
             "remove": "Remove",
@@ -701,7 +731,10 @@
             "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
             "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
-            "deprecated_tags": "Deprecated tags: {tags}"
+            "deprecated_tags": {
+                "one": "Deprecated tag: {tags}",
+                "other": "Deprecated tags: {tags}"
+            }
         },
         "zoom": {
             "in": "Zoom in",
@@ -1071,7 +1104,10 @@
                 "words": "This walkthrough will introduce some new words and concepts. When we introduce a new word, we'll use *italics*.",
                 "mouse": "You can use any input device to edit the map, but this walkthrough assumes you have a mouse with left and right buttons. **If you want to attach a mouse, do so now, then click OK.**",
                 "leftclick": "When this tutorial asks you to click or double-click, we mean with the left button. On a trackpad it might be a single-click or single-finger tap. **Left-click {num} times.**",
-                "rightclick": "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**",
+                "rightclick": {
+                    "one": "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click once.**",
+                    "other": "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**"
+                },
                 "chapters": "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
             },
             "navigation": {
@@ -6601,7 +6637,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
                 "name": "DigitalGlobe Premium Imagery Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -6615,7 +6651,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
                 "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
@@ -6624,13 +6660,6 @@
                 },
                 "description": "Esri world imagery.",
                 "name": "Esri World Imagery"
-            },
-            "EsriWorldImageryClarity": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Esri archive imagery that may be clearer and more accurate than the default layer.",
-                "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -6699,37 +6728,33 @@
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
-            "US_Forest_Service_roads_overlay": {
-                "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
-                "name": "U.S. Forest Roads Overlay"
-            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Cycling"
             },
             "Waymarked_Trails-Hiking": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Hiking"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Skating"
             },
             "Waymarked_Trails-Winter_Sports": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Winter Sports"
             },
@@ -6737,7 +6762,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on government data.",
+                "description": "Basemap of Austria, based on goverment data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6799,7 +6824,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
                 },
                 "name": "Stamen Terrain"
             },

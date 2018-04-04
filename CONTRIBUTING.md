@@ -252,6 +252,17 @@ to iD, only display them in the interface through the `t()` function.
 Then, add the new string to `data/core.yaml`. The translation system, Transifex,
 will automatically detect the change.
 
+If you need to insert something into the string programmatically, insert a
+`{token}` into the string in the YAML file. If the token is a number that can
+affect how surrounding words are pluralized, define the singular and plural
+forms separately like this:
+
+```yaml
+    changes:
+      one: "1 Change"
+      other: "{count} Changes"
+```
+
 If you are updating an existing string, update it in `data/core/yaml` and run
 `npm run build` to generate the `en.json` file automatically, then commit both
 modified files.

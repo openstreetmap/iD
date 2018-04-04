@@ -1,3 +1,8 @@
+import { plurals } from '../../data/index';
+import { default as pluralRuleParser } from 'cldrpluralruleparser';
+import _find from 'lodash-es/find';
+import _findKey from 'lodash-es/findKey';
+
 var translations = Object.create(null);
 
 export var currentLocale = 'en';
@@ -13,6 +18,16 @@ export function setLocale(_) {
 
 export function addTranslation(id, value) {
     translations[id] = value;
+}
+
+/**
+ * Returns the plural form for the given number and locale.
+ */
+function getRule(num, loc) {
+    var rules = plurals.supplemental['plurals-type-cardinal'][loc];
+    return (_findKey(rules, function(rule) {
+        return pluralRuleParser(rule, num);
+    }) || 'other').replace('pluralRule-count-', '');
 }
 
 /**
@@ -41,6 +56,15 @@ export function t(s, o, loc) {
 
     if (rep !== undefined) {
         if (o) {
+            // If plural forms are provided, dig one level deeper based on the first numeric token replacement provided.
+            if (typeof rep === 'object') {
+                var num = _find(o, function(key) {
+                    return typeof key === 'number';
+                });
+                if (num !== undefined) {
+                    rep = rep[getRule(num, loc)];
+                }
+            }
             for (var k in o) {
                 rep = rep.replace('{' + k + '}', o[k]);
             }
