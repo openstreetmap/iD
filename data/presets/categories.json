@@ -1,0 +1,216 @@
+{
+    "categories": {
+        "category-barrier": {
+            "icon": "roadblock",
+            "geometry": "line",
+            "name": "Barrier Features",
+            "members": [
+                "barrier/fence",
+                "barrier/wall",
+                "barrier/ditch",
+                "barrier/gate",
+                "barrier/hedge",
+                "barrier/kerb",
+                "barrier"
+            ]
+        },
+        "category-building": {
+            "icon": "building",
+            "geometry": "area",
+            "name": "Building Features",
+            "members": [
+                "building",
+                "building/house",
+                "building/apartments",
+                "building/retail",
+                "building/commercial",
+                "building/industrial",
+                "building/residential"
+            ]
+        },
+        "category-golf": {
+            "icon": "golf",
+            "geometry": "area",
+            "name": "Golf Features",
+            "members": [
+                "golf/fairway",
+                "golf/green",
+                "golf/lateral_water_hazard_area",
+                "golf/rough",
+                "golf/bunker",
+                "golf/tee",
+                "golf/water_hazard_area"
+            ]
+        },
+        "category-landuse": {
+            "icon": "landuse",
+            "geometry": "area",
+            "name": "Land Use Features",
+            "members": [
+                "landuse/residential",
+                "landuse/industrial",
+                "landuse/commercial",
+                "landuse/retail",
+                "landuse/farmland",
+                "landuse/farmyard",
+                "landuse/forest",
+                "landuse/meadow",
+                "landuse/aquaculture",
+                "landuse/cemetery",
+                "landuse/military",
+                "landuse/religious"
+            ]
+        },
+        "category-natural-area": {
+            "icon": "natural",
+            "geometry": "area",
+            "name": "Natural Features",
+            "members": [
+                "natural/water",
+                "natural/wood",
+                "natural/scrub",
+                "natural/wetland",
+                "natural/grassland",
+                "natural/heath",
+                "natural/bare_rock",
+                "natural/beach",
+                "natural/cave_entrance",
+                "natural/glacier"
+            ]
+        },
+        "category-natural-line": {
+            "icon": "natural",
+            "geometry": "line",
+            "name": "Natural Features",
+            "members": [
+                "natural/coastline",
+                "natural/tree_row"
+            ]
+        },
+        "category-natural-point": {
+            "icon": "natural",
+            "geometry": "point",
+            "name": "Natural Features",
+            "members": [
+                "natural/peak",
+                "natural/cliff",
+                "natural/beach",
+                "natural/cave_entrance"
+            ]
+        },
+        "category-path": {
+            "icon": "category-path",
+            "geometry": "line",
+            "name": "Path Features",
+            "members": [
+                "footway/crosswalk",
+                "footway/sidewalk",
+                "highway/steps",
+                "highway/path",
+                "highway/footway",
+                "highway/cycleway",
+                "highway/bridleway",
+                "highway/pedestrian_line"
+            ]
+        },
+        "category-rail": {
+            "icon": "category-rail",
+            "geometry": "line",
+            "name": "Rail Features",
+            "members": [
+                "railway/rail",
+                "railway/subway",
+                "railway/tram",
+                "railway/monorail",
+                "railway/disused",
+                "railway/abandoned"
+            ]
+        },
+        "category-restriction": {
+            "icon": "restriction",
+            "geometry": "relation",
+            "name": "Restriction Features",
+            "members": [
+                "type/restriction/no_left_turn",
+                "type/restriction/no_right_turn",
+                "type/restriction/no_straight_on",
+                "type/restriction/no_u_turn",
+                "type/restriction/only_left_turn",
+                "type/restriction/only_right_turn",
+                "type/restriction/only_straight_on",
+                "type/restriction/only_u_turn",
+                "type/restriction"
+            ]
+        },
+        "category-road": {
+            "icon": "category-roads",
+            "geometry": "line",
+            "name": "Road Features",
+            "members": [
+                "highway/residential",
+                "highway/motorway",
+                "highway/trunk",
+                "highway/primary",
+                "highway/secondary",
+                "highway/tertiary",
+                "highway/living_street",
+                "highway/unclassified",
+                "highway/service",
+                "highway/track",
+                "highway/motorway_link",
+                "highway/trunk_link",
+                "highway/primary_link",
+                "highway/secondary_link",
+                "highway/tertiary_link",
+                "highway/road"
+            ]
+        },
+        "category-route": {
+            "icon": "route",
+            "geometry": "relation",
+            "name": "Route Features",
+            "members": [
+                "type/route/road",
+                "type/route/bicycle",
+                "type/route/foot",
+                "type/route/hiking",
+                "type/route/horse",
+                "type/route/piste",
+                "type/route/bus",
+                "type/route/train",
+                "type/route/light_rail",
+                "type/route/tram",
+                "type/route/subway",
+                "type/route/ferry",
+                "type/route/power",
+                "type/route/pipeline",
+                "type/route/detour",
+                "type/route_master",
+                "type/route"
+            ]
+        },
+        "category-water-area": {
+            "icon": "water",
+            "geometry": "area",
+            "name": "Water Features",
+            "members": [
+                "natural/water/lake",
+                "natural/water/pond",
+                "natural/water/reservoir",
+                "natural/water"
+            ]
+        },
+        "category-water-line": {
+            "icon": "category-water",
+            "geometry": "line",
+            "name": "Water Features",
+            "members": [
+                "waterway/river",
+                "waterway/stream",
+                "waterway/canal",
+                "waterway/ditch",
+                "waterway/drain"
+            ]
+        }
+    }
+}
