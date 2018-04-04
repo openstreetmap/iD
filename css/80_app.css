@@ -3043,7 +3043,7 @@ img.tile-debug {
 .nocolor { color: rgba(0, 0, 0, 0); }
 .red     { color: rgba(255, 0, 0, 0.75); }
 .green   { color: rgba(0, 255, 0, 0.75); }
-.blue    { color: rgba(0, 0, 255, 0.75); }
+.blue    { color: rgba(176, 176, 255, 0.75); }
 .yellow  { color: rgba(255, 255, 0, 0.75); }
 .cyan    { color: rgba(0, 255, 255, 0.75); }
 .magenta { color: rgba(255, 0, 255, 0.75); }

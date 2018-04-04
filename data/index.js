@@ -12,6 +12,11 @@ export { default as dataImperial } from './imperial.json';
 export { default as dataDriveLeft } from './drive-left.json';
 export { en as dataEn } from '../dist/locales/en.json';
 
+import {
+    features as ociFeatures,
+    resources as ociResources
+} from 'osm-community-index';
+
 import { dataImagery } from './imagery.json';
 import { presets } from './presets/presets.json';
 import { defaults } from './presets/defaults.json';
@@ -22,6 +27,10 @@ import maki from '@mapbox/maki';
 export var dataFeatureIcons = maki.layouts.all.all;
 
 export var data = {
+    community: {
+        features: ociFeatures,
+        resources: ociResources
+    },
     imagery: dataImagery,
     presets: {
         presets: presets,
