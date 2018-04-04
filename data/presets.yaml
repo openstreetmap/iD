@@ -1684,14 +1684,14 @@ en:
         # 'addr:*=*'
         name: Address
         terms: '<translate with synonyms or related terms for ''Address'', separated by commas>'
-      advertising/advertising_column:
-        # advertising=advertising_column
-        name: Advertising Column
-        terms: '<translate with synonyms or related terms for ''Advertising Column'', separated by commas>'
       advertising/billboard:
         # advertising=billboard
         name: Billboard
         terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
+      advertising/column:
+        # advertising=column
+        name: Advertising Column
+        terms: '<translate with synonyms or related terms for ''Advertising Column'', separated by commas>'
       aerialway:
         # aerialway=*
         name: Aerialway

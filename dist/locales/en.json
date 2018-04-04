@@ -2807,12 +2807,12 @@
                     "name": "Address",
                     "terms": ""
                 },
-                "advertising/advertising_column": {
-                    "name": "Advertising Column",
-                    "terms": ""
-                },
                 "advertising/billboard": {
                     "name": "Billboard",
+                    "terms": ""
+                },
+                "advertising/column": {
+                    "name": "Advertising Column",
                     "terms": ""
                 },
                 "aerialway/station": {

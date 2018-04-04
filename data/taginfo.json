@@ -110,20 +110,20 @@
         },
         {
             "key": "advertising",
-            "value": "advertising_column",
-            "description": "Advertising Column",
-            "object_types": [
-                "node",
-                "area"
-            ]
-        },
-        {
-            "key": "advertising",
             "value": "billboard",
             "description": "Billboard",
             "object_types": [
                 "node",
                 "way"
+            ]
+        },
+        {
+            "key": "advertising",
+            "value": "column",
+            "description": "Advertising Column",
+            "object_types": [
+                "node",
+                "area"
             ]
         },
         {
