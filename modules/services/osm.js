@@ -26,20 +26,42 @@ import { utilRebind, utilIdleWorker } from '../util';
 
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
-    urlroot = 'https://www.openstreetmap.org',
+    // urlroot = 'https://10.2.135.59:7080',
     blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
     loadedTiles = {},
     entityCache = {},
     connectionId = 1,
     tileZoom = 16,
+// //8070
+//
+//     urlroot = 'http://10.2.135.59:8070',
+//     oauth = osmAuth({
+//         url: urlroot,
+//         oauth_consumer_key: 'bcVBF024XOyvd0OatvQK8h2ti1WeOn0aRfk88PY6',
+//         oauth_secret: '0zgA6FxmQHbAc6jqdPt0jFPNzR3pmabbdzcu6Aax',
+//         loading: authLoading,
+//         done: authDone
+//     }),
+
+
+//8100
+
+    urlroot = 'http://10.2.135.59:8100',
     oauth = osmAuth({
         url: urlroot,
-        oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-        oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+        oauth_consumer_key: 'YWo7xq7ImX8ti3J3iqfhd3TivDPWuvHNuorj8wxE',
+        oauth_secret: '0c061HIOuZR15pmZjhIWikmFfg6InQo1nWOUG7DO',
         loading: authLoading,
         done: authDone
     }),
+    // oauth = osmAuth({
+    //     url: urlroot,
+    //     oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
+    //     oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+    //     loading: authLoading,
+    //     done: authDone
+    // }),
     rateLimitError,
     userChangesets,
     userDetails,
