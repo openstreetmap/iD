@@ -612,7 +612,7 @@ export default {
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
                     .attr('href', 'https://www.mapillary.com/app/user/' + encodeURIComponent(d.captured_by))
-                    .text('@' + d.captured_by);
+                    .text(d.captured_by + '-' + d.captured_at);
 
                 attribution
                     .append('span')
