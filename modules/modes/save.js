@@ -28,6 +28,8 @@ import {
     modeSelect
 } from './index';
 
+import { services } from '../services';
+
 import {
     uiConflicts,
     uiConfirm,
@@ -66,6 +68,7 @@ export function modeSave(context) {
     var _conflicts = [];
     var _errors = [];
     var _origChanges;
+    var _location;
 
 
     function cancel(selectedID) {
@@ -305,6 +308,7 @@ export function modeSave(context) {
             var history = context.history();
             var changes = history.changes(actionDiscardTags(history.difference()));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
+                loadLocation();  // so it is ready when we display the save screen
                 osm.putChangeset(changeset, changes, uploadCallback);
             } else {        // changes were insignificant or reverted by user
                 d3_select('.inspector-wrap *').remove();
@@ -468,6 +472,7 @@ export function modeSave(context) {
 
         var ui = uiSuccess(context)
             .changeset(changeset)
+            .location(_location)
             .on('cancel', function() { context.ui().sidebar.hide(); });
 
         context.enter(modeBrowse(context).sidebar(ui));
@@ -483,6 +488,27 @@ export function modeSave(context) {
     function keybindingOff() {
         d3_select(document)
             .call(keybinding.off);
+    }
+
+
+    // Reverse geocode current map location so we can display a message on
+    // the success screen like "Thank you for editing around city, state."
+    function loadLocation() {
+        _location = null;
+        if (!services.geocoder) return;
+
+        services.geocoder.reverse(context.map().center(), function(err, result) {
+            if (err || !result || !result.address) return;
+
+            var parts = [];
+            var addr = result.address;
+            var city = addr && (addr.suburb || addr.city || addr.county);
+            if (city) parts.push(city);
+            var region = addr && (addr.state || addr.country);
+            if (region) parts.push(region);
+
+            _location = parts.join(', ');
+        });
     }
 
 

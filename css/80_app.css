@@ -3595,10 +3595,11 @@ img.tile-debug {
 /* Success Modal
 ------------------------------------------------------- */
 .save-success p {
-    padding: 15px 15px 0 15px;
+    padding: 15px 20px 0 20px;
 }
-.save-success a.details {
-    padding-left: 15px;
+.save-success .details {
+    margin: 0px 5px;
+    white-space: nowrap;
 }
 .save-success .button {
     padding-top: 15px;

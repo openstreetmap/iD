@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
+import whichPolygon from 'which-polygon';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { svgIcon } from '../svg';
@@ -8,8 +9,9 @@ import { utilRebind } from '../util/rebind';
 
 
 export function uiSuccess(context) {
-    var dispatch = d3_dispatch('cancel'),
-        changeset;
+    var dispatch = d3_dispatch('cancel');
+    var _changeset;
+    var _location;
 
 
     function success(selection) {
@@ -33,22 +35,26 @@ export function uiSuccess(context) {
 
         body
             .append('p')
-            .html(t('success.help_html'));
+            .append('strong')
+            .append('em')
+            .html(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
-        body
+        var detailLink = body
+            .append('p')
+            .html(t('success.help_html'))
             .append('a')
             .attr('class', 'details')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link', 'inline'))
             .attr('href', t('success.help_link_url'))
+            .call(svgIcon('#icon-out-link', 'inline'))
             .append('span')
             .text(t('success.help_link_text'));
 
         var osm = context.connection();
         if (!osm) return;
 
-        var changesetURL = osm.changesetURL(changeset.id);
+        var changesetURL = osm.changesetURL(_changeset.id);
 
         var viewOnOsm = body
             .append('a')
@@ -66,7 +72,13 @@ export function uiSuccess(context) {
             .append('div')
             .text(t('success.view_on_osm'));
 
-        var message = (changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
+        body
+            .call(showShareLinks, changesetURL);
+    }
+
+
+    function showShareLinks(selection, changesetURL) {
+        var message = (_changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
             ' ' + changesetURL;
 
         var sharing = [
@@ -75,7 +87,7 @@ export function uiSuccess(context) {
             { key: 'google', value: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL) }
         ];
 
-        body.selectAll('.button.social')
+        selection.selectAll('.button.social')
             .data(sharing)
             .enter()
             .append('a')
@@ -84,14 +96,27 @@ export function uiSuccess(context) {
             .attr('href', function(d) { return d.value; })
             .call(tooltip()
                 .title(function(d) { return t('success.' + d.key); })
-                .placement('bottom'))
+                .placement('bottom')
+            )
             .each(function(d) { d3_select(this).call(svgIcon('#logo-' + d.key, 'social')); });
     }
 
 
+    function showCommunities(selection) {
+
+    }
+
+
     success.changeset = function(_) {
-        if (!arguments.length) return changeset;
-        changeset = _;
+        if (!arguments.length) return _changeset;
+        _changeset = _;
+        return success;
+    };
+
+
+    success.location = function(_) {
+        if (!arguments.length) return _location;
+        _location = _;
         return success;
     };
 

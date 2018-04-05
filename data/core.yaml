@@ -529,6 +529,8 @@ en:
   success:
     edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"
+    thank_you: "Thank you for improving the map."
+    thank_you_location: "Thank you for improving the map around {where}."
     view_on_osm: "View on OSM"
     facebook: "Share on Facebook"
     twitter: "Share on Twitter"
