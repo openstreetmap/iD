@@ -290,13 +290,6 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
 rendererBackgroundSource.Esri = function(data) {
-
-    // don't request blank tiles, instead overzoom real tiles - #4327
-    // deprecated technique, but it works (for now)
-    if (data.template.match(/blankTile/) === null) {
-        data.template = data.template + '?blankTile=false';
-    }
-
     var esri = rendererBackgroundSource(data),
         cache = {},
         inflight = {};
@@ -311,6 +304,9 @@ rendererBackgroundSource.Esri = function(data) {
             metadata = {};
 
         if (inflight[tileId]) return;
+
+        // instead of calling fetchTilemap when the metadata window is open, we should call it when editing is first activated
+        fetchTilemap(center, esri);
 
         switch (true) {
             case (zoom >= 20 && esri.id === 'EsriWorldImageryClarity'):
@@ -409,6 +405,37 @@ rendererBackgroundSource.Esri = function(data) {
             });
         }
 
+        // use a tilemap service to set maximum zoom for esri tiles dynamically
+        function fetchTilemap(center, esri) {
+            // tiles are available globally to zoom level 19, afterward they are only a possibility
+            const urlZ = 20;
+
+            // calculate url z/y/x from the lat/long of the center of the map
+            const urlX = (Math.floor((center[0] + 180) / 360 * Math.pow(2, urlZ)));
+            const urlY = (Math.floor((1 - Math.log(Math.tan(center[1] * Math.PI / 180) + 1 / Math.cos(center[1] * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, urlZ)));
+
+            // we fetch an 8x8 grid because they cover a normal extent and responses are cached
+            const tilemapUrl = tileCoord[3].replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+/, 'tilemap') + `/${urlZ}/${urlY}/${urlX}/8/8`;
+
+            // make the request and introspect the response from the tilemap server
+            fetch(tilemapUrl)
+            .then(response => response.json())
+            .then(tilemap => {
+                let tiles = true;
+                for (i=0;i<tilemap.data.length;i++) {
+                    // any value of 0 means an individual tile in the grid doesn't exist
+                    if (!tilemap.data[i]) {
+                        tiles = false;
+                        break;
+                    }
+                }
+
+                // if any tiles are missing, restrict maxZoom to 19
+                if (!tiles) {
+                    esri.scaleExtent[1] = 19;
+                }
+            })
+        }
 
         function clean(val) {
             return String(val).trim() || unknown;
