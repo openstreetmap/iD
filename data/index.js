@@ -12,6 +12,7 @@ export { default as dataImperial } from './imperial.json';
 export { default as dataDriveLeft } from './drive-left.json';
 export { en as dataEn } from '../dist/locales/en.json';
 
+
 import {
     features as ociFeatures,
     resources as ociResources
@@ -26,10 +27,25 @@ import { fields } from './presets/fields.json';
 import maki from '@mapbox/maki';
 export var dataFeatureIcons = maki.layouts.all.all;
 
+import _values from 'lodash-es/values';
+import whichPolygon from 'which-polygon';
+
+// workaround for which-polygon
+// only supports `properties`, not `id`
+// https://github.com/mapbox/which-polygon/pull/6
+var features = _values(ociFeatures).map(function(feature) {
+    feature.properties = { id: feature.id };
+    return feature;
+});
+
 export var data = {
     community: {
         features: ociFeatures,
-        resources: ociResources
+        resources: ociResources,
+        query: whichPolygon({
+            type: 'FeatureCollection',
+            features: features
+        })
     },
     imagery: dataImagery,
     presets: {

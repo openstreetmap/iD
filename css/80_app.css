@@ -3552,8 +3552,7 @@ img.tile-debug {
     text-align: center;
 }
 
-.modal-actions button,
-.save-success a.button {
+.modal-actions button {
     font-weight: normal;
     color: #7092ff;
     border-bottom: 1px solid #ccc;
@@ -3562,10 +3561,14 @@ img.tile-debug {
     text-align: center;
     display: inline-block;
 }
-
-.modal-actions button:hover
-.save-success a.button:hover {
+.modal-actions button:hover {
     background-color: #ececec;
+}
+
+.logo-small {
+    height: 40px;
+    width: 40px;
+    margin: auto;
 }
 
 .logo {
@@ -3589,33 +3592,58 @@ img.tile-debug {
     color: #7092ff;
 }
 .modal-actions .logo-reset {
-    color: #E06C5E;
+    color: #e06c5e;
 }
 
 /* Success Modal
 ------------------------------------------------------- */
+.save-summary,
+.save-shareLinks,
+.save-communityLinks {
+    padding: 0px 20px;
+}
+
 .save-success p {
-    padding: 15px 20px 0 20px;
+    padding-top: 15px;
 }
 .save-success .details {
     margin: 0px 5px;
     white-space: nowrap;
 }
-.save-success .button {
+.save-summary .button {
     padding-top: 15px;
 }
-.save-success .logo-osm {
+.save-summary .logo-osm {
     color: #7092ff;
-    margin-bottom: 10px;
 }
-.save-success a.button.social {
+
+.save-shareLinks,
+.save-communityLinks {
+    border-top: 1px solid #ccc;
+}
+
+.save-shareLinks a.button.social {
     height: auto;
     border-bottom: none;
 }
-.save-success .icon.social {
-    height: 80px;
-    width: 80px;
+.save-shareLinks .icon.social {
+    height: 40px;
+    width: 40px;
     color: #7092ff;
+}
+
+.save-success a.button {
+    font-weight: normal;
+    color: #7092ff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    display: inline-block;
+}
+.save-success a.button:hover {
+    background-color: #ececec;
 }
 
 /* Splash Modal

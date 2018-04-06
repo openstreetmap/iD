@@ -1,8 +1,10 @@
+import _filter from 'lodash-es/filter';
+
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import whichPolygon from 'which-polygon';
 import { t } from '../util/locale';
+import { data } from '../../data';
 import { tooltip } from '../util/tooltip';
 import { svgIcon } from '../svg';
 import { utilRebind } from '../util/rebind';
@@ -33,13 +35,17 @@ export function uiSuccess(context) {
             .append('div')
             .attr('class', 'body save-success fillL');
 
-        body
+        var summary = body
+            .append('div')
+            .attr('class', 'save-summary');
+
+        summary
             .append('p')
             .append('strong')
             .append('em')
             .html(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
-        var detailLink = body
+        summary
             .append('p')
             .html(t('success.help_html'))
             .append('a')
@@ -56,28 +62,58 @@ export function uiSuccess(context) {
 
         var changesetURL = osm.changesetURL(_changeset.id);
 
-        var viewOnOsm = body
-            .append('a')
-            .attr('class', 'button col12 osm')
-            .attr('target', '_blank')
-            .attr('href', changesetURL);
+        var table = summary
+            .append('table')
+            .attr('class', 'summary-table');
 
-        viewOnOsm
+        var row = table
+            .append('tr')
+            .attr('class', 'summary-row');
+
+        row
+            .append('td')
+            .attr('class', 'summary-icon')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', changesetURL)
             .append('svg')
-            .attr('class', 'logo logo-osm')
+            .attr('class', 'logo-small')
             .append('use')
             .attr('xlink:href', '#logo-osm');
 
-        viewOnOsm
-            .append('div')
+        row
+            .append('td')
+            .attr('class', 'summary-detail')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', changesetURL)
             .text(t('success.view_on_osm'));
 
-        body
-            .call(showShareLinks, changesetURL);
+
+        // Gather community polygon IDs intersecting the map..
+        var matchFeatures = data.community.query(context.map().center(), true);
+        var matchIDs = matchFeatures.map(function(feature) { return feature.id; });
+
+        // Gather community resources that are either global or match a polygon.
+        var matchResources = _filter(data.community.resources, function(v) {
+            return v.featureId === null || matchIDs.indexOf(v.featureId) !== -1;
+        });
+
+        if (matchResources.length) {
+            body
+                .call(showCommunityLinks, matchResources);
+        } else {
+            body
+                .call(showShareLinks, changesetURL);
+        }
     }
 
 
     function showShareLinks(selection, changesetURL) {
+        var shareLinks = selection
+            .append('div')
+            .attr('class', 'save-shareLinks');
+
         var message = (_changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
             ' ' + changesetURL;
 
@@ -87,7 +123,7 @@ export function uiSuccess(context) {
             { key: 'google', value: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL) }
         ];
 
-        selection.selectAll('.button.social')
+        shareLinks.selectAll('.button.social')
             .data(sharing)
             .enter()
             .append('a')
@@ -102,8 +138,31 @@ export function uiSuccess(context) {
     }
 
 
-    function showCommunities(selection) {
+    function showCommunityLinks(selection, matchResources) {
+        var communityLinks = selection
+            .append('div')
+            .attr('class', 'save-communityLinks');
 
+        var table = communityLinks
+            .append('table')
+            .attr('class', 'community-table');
+
+        var row = table.selectAll('.community-row')
+            .data(matchResources);
+
+        var rowEnter = row.enter()
+            .append('tr')
+            .attr('class', 'community-row');
+
+        rowEnter
+            .append('td')
+            .attr('class', 'community-icon')
+            .text(function(d) { return d.type; });
+
+        rowEnter
+            .append('td')
+            .attr('class', 'community-detail')
+            .text(function(d) { return d.name; });
     }
 
 
