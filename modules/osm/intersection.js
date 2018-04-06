@@ -408,22 +408,20 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         var isAlongOnlyPath = false;
 
                         if (t.id === way.id) {     // match VIA, TO
-                            if (v.length === 1 && v[0].type === 'node' && v[0].id === entity.id) {
-                                matchesViaTo = true;    // match VIA node
-
-                            } else {                    // match all VIA ways
+                            if (v.length === 1 && v[0].type === 'node') { // match VIA node
+                                matchesViaTo = v[0].id === entity.id;
+                            } else {                                      // match all VIA ways
                                 var pathVias = [];
-                                for (k = 1; k < currPath.length; k++) {  // k = 1 skips FROM way
-                                    if (currPath[k][0] === 'w') pathVias.push(currPath[k]);
+                                for (k = 2; k < currPath.length; k+=2) {  // k = 1 skips FROM way
+                                    pathVias.push(currPath[k]);
                                 }
                                 var restrictionVias = [];
                                 for (k = 0; k < v.length; k++) {
-                                    if (v[k].type === 'way') restrictionVias.push(v[k].id);
+                                    restrictionVias.push(v[k].id);
                                 }
                                 var diff = _difference(pathVias, restrictionVias);
                                 matchesViaTo = !diff.length;
                             }
-
                         } else if (isOnly) {
                             for (k = 0; k < v.length; k++) {
                                 // way doesn't match TO, but is one of the via ways along the path of an "only"

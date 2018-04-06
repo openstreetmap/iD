@@ -359,13 +359,13 @@ export function uiFieldRestrictions(field, context) {
                     datumOnly.only = true;
                     restrictionType = restrictionType.replace(/^no/, 'only');
 
-                    // Adding an ONLY restriction should destroy all other direct restrictions from the FROM.
+                    // Adding an ONLY restriction should destroy all other direct restrictions from the FROM towards the VIA.
                     // We will remember them in _oldTurns, and restore them if the user clicks again.
                     turns = _intersection.turns(_fromWayID, 2);
                     extraActions = [];
                     _oldTurns = [];
                     for (i = 0; i < turns.length; i++) {
-                        if (turns[i].direct) {
+                        if (turns[i].direct && turns[i].path[1] === datum.path[1]) {
                             turns[i].restrictionType = osmInferRestriction(vgraph, turns[i], projection);
                             _oldTurns.push(turns[i]);
                             extraActions.push(actionUnrestrictTurn(turns[i]));
