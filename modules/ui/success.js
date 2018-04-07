@@ -72,7 +72,7 @@ export function uiSuccess(context) {
 
         row
             .append('td')
-            .attr('class', 'summary-icon')
+            .attr('class', 'cell-icon summary-icon')
             .append('a')
             .attr('target', '_blank')
             .attr('href', changesetURL)
@@ -83,7 +83,7 @@ export function uiSuccess(context) {
 
         var summaryDetail = row
             .append('td')
-            .attr('class', 'summary-detail');
+            .attr('class', 'cell-detail summary-detail');
 
         summaryDetail
             .append('a')
@@ -168,13 +168,46 @@ export function uiSuccess(context) {
 
         rowEnter
             .append('td')
-            .attr('class', 'community-icon')
-            .text(function(d) { return d.type; });
+            .attr('class', 'cell-icon community-icon')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', function(d) { return d.url; })
+            .append('svg')
+            .attr('class', 'logo-small')
+            .append('use')
+            .attr('xlink:href', function(d) { return '#community-' + d.type; });
 
-        rowEnter
+        var communityDetail = rowEnter
             .append('td')
-            .attr('class', 'community-detail')
-            .text(function(d) { return d.name; });
+            .attr('class', 'cell-detail community-detail');
+
+        communityDetail.each(function(d) {
+            var selection = d3_select(this);
+            var replacements = {
+                url: d.url,
+                signupUrl: d.signupUrl || d.url
+            };
+
+            selection
+                .append('div')
+                .attr('class', 'community-detail-name')
+                .append('a')
+                .attr('target', '_blank')
+                .attr('href', d.url)
+                .text(t('community.' + d.id + '.name'));
+
+            selection
+                .append('div')
+                .attr('class', 'community-detail-description')
+                .text(t('community.' + d.id + '.description', replacements));
+
+            if (d.extendedDescription) {
+                selection
+                    .append('div')
+                    .attr('class', 'community-detail-extendedDescription')
+                    .text(t('community.' + d.id + '.extendedDescription', replacements));
+            }
+        });
     }
 
 

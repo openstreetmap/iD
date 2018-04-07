@@ -3611,6 +3611,9 @@ img.tile-debug {
     vertical-align: top;
     padding: 0 10px 5px 10px;
 }
+.save-success td.cell-icon {
+    width: 50px;
+}
 .save-success .details {
     margin: 0px 5px;
     white-space: nowrap;
