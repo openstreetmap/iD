@@ -527,17 +527,19 @@ en:
       memberlist: 'Relation members were changed by both you and {user}.'
       tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
-    edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
     thank_you_location: "Thank you for improving the map around {where}."
-    view_on_osm: "View on OSM"
-    facebook: "Share on Facebook"
-    twitter: "Share on Twitter"
-    google: "Share on Google+"
     help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+    view_on_osm: "View these changes on OpenStreetMap"
+    changeset_id: "Changeset ID: {changeset_id}"
+    edited_osm: "Edited OSM!"
+    facebook: "Share on Facebook"
+    twitter: "Share on Twitter"
+    google: "Share on Google+"
+    like_osm: "Like OpenStreetMap? Connect with others and learn more:"
   confirm:
     okay: "OK"
     cancel: "Cancel"

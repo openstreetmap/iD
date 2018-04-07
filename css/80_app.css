@@ -3600,21 +3600,20 @@ img.tile-debug {
 .save-summary,
 .save-shareLinks,
 .save-communityLinks {
-    padding: 0px 20px;
+    padding: 0px 20px 15px 20px;
 }
 
+.save-success table,
 .save-success p {
-    padding-top: 15px;
+    margin-top: 15px;
+}
+.save-success td {
+    vertical-align: top;
+    padding: 0 10px 5px 10px;
 }
 .save-success .details {
     margin: 0px 5px;
     white-space: nowrap;
-}
-.save-summary .button {
-    padding-top: 15px;
-}
-.save-summary .logo-osm {
-    color: #7092ff;
 }
 
 .save-shareLinks,

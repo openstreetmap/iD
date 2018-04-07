@@ -81,13 +81,19 @@ export function uiSuccess(context) {
             .append('use')
             .attr('xlink:href', '#logo-osm');
 
-        row
+        var summaryDetail = row
             .append('td')
-            .attr('class', 'summary-detail')
+            .attr('class', 'summary-detail');
+
+        summaryDetail
             .append('a')
             .attr('target', '_blank')
             .attr('href', changesetURL)
             .text(t('success.view_on_osm'));
+
+        summaryDetail
+            .append('div')
+            .text(t('success.changeset_id', { changeset_id: _changeset.id }));
 
 
         // Gather community polygon IDs intersecting the map..
@@ -142,6 +148,12 @@ export function uiSuccess(context) {
         var communityLinks = selection
             .append('div')
             .attr('class', 'save-communityLinks');
+
+        communityLinks
+            .append('p')
+            .append('strong')
+            .append('em')
+            .html(t('success.like_osm'));
 
         var table = communityLinks
             .append('table')
