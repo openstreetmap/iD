@@ -2461,9 +2461,6 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
-                "vending": {
-                    "label": "Type of Goods"
-                },
                 "visibility": {
                     "label": "Visibility",
                     "options": {
@@ -4956,15 +4953,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "No U-turn"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Left Turn Only"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Right Turn Only"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "No Turns"
-                },
                 "type/route": {
                     "name": "Route"
                 },
@@ -5192,7 +5180,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on goverment data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -5253,9 +5240,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
-                },
                 "name": "Stamen Terrain"
             },
             "tf-cycle": {
@@ -5269,6 +5253,57 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Improve OpenStreetMap in the Bay Area",
+                "extendedDescription": "This group is about growing the OpenStreetMap community here in the Bay Area. Our events are open to everyone, from open source enthusiasts, cyclists, GIS professionals, geocachers, and beyond. Anyone and everyone who is interested in maps, map making and free map data is welcome to join our group as well as attend our events."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Online mapping community based out of State College, PA"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "The OpenStreetMap user group for Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth, and all the cities in between are abounding with creative and tech-savvy people. The vision for this usergroup is to find new ways to use the amazing resource of OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Meetup for map enthusiasts in the Philadelphia area",
+                "extendedDescription": "GeoPhilly unites developers, geographers, data geeks, open source enthusiasts, civic hackers and map addicts in our shared love of maps and the stories they tell. If you use maps as part of your work or just want to learn more, this is the meetup for you!  Our events aim to be open, friendly, educational and social and range from happy hours to lightning talks or even workshops. Come create a diverse, inspiring geospatial community in the Philadelphia with us!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Improve OpenStreetMap in the DC area",
+                "extendedDescription": "We are a group of volunteer mappers who aim to improve the OpenStreetMap in the DC area. We also aim to teach others about the OSM ecosystem, data analytics, cartography, and GIS. We gather every other month at meetups to focus on one area of our city."
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "The OpenStreetMap user group for Chattanooga"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Mappers and OpenStreetMap users in the Portland area",
+                "extendedDescription": "OpenStreetMap (OSM) is a map of the world made by people like you. It's a map that you build, that's given away for free like wikipedia. Check out osm.org for more, and come join us at a meetup to talk maps, contribute to OSM, and have fun!"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "All are welcome! Sign up at {signupUrl}"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Sign up at {signupUrl}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap on Reddit",
+                "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
             }
         }
     }

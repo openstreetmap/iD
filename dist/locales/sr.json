@@ -1849,9 +1849,6 @@
                     "label": "Врста",
                     "placeholder": "Подразумевано"
                 },
-                "vending": {
-                    "label": "Врста добара"
-                },
                 "visibility": {
                     "label": "Видљивост",
                     "options": {
@@ -3661,15 +3658,6 @@
                 },
                 "type/restriction/no_u_turn": {
                     "name": "Забрана полукружног окретања"
-                },
-                "type/restriction/only_left_turn": {
-                    "name": "Обавезан смер - лево"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Обавезан смер - десно"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Обавезан смер - право"
                 },
                 "type/route": {
                     "name": "Путања"

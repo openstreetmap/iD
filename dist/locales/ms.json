@@ -2883,7 +2883,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Petaasas Austria, berdasarkan data kerajaan.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -2944,9 +2943,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Jubin peta oleh Stamen Design, di bawah CC BY 3.0"
-                },
                 "name": "Rupa Bumi Stamen"
             },
             "tf-cycle": {
@@ -2960,6 +2956,57 @@
                     "text": "Peta © Thunderforest, Data © penyumbang-penyumbang OpenStreetMap"
                 },
                 "name": "Landskap Thunderforest"
+            }
+        },
+        "community": {
+            "Bay-Area-OpenStreetMappers": {
+                "name": "OpenStreetMappers Kawasan Teluk",
+                "description": "Perbaiki OpenStreetMap di Kawasan Teluk",
+                "extendedDescription": "Kumpulan ini ialah mengenai memperkembangkan komuniti OpenStreetMap di Kawasan Teluk ini. Acara-acara kami adalah terbuka kepada sesiapa sahaja, dari peminat sumber terbuka, penunggang basikal, profesional GIS, pengcache geo, dan sebagainya. Sesiapa sahaja dan semua orang yang berminat dalam peta, membuat peta, dan data peta percuma adalah dialu-alukan untuk menyertai kumpulan kami serta menghadiri acara-acara kami."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "OSM Pennsylvania Pusat",
+                "description": "Komuniti pemetaan atas talian yang berpusat di luar State College, PA"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "OSM Dallas-Fort Worth",
+                "description": "Kumpulan pengguna OpenStreetMap bagi Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth, dan kesemua bandar di antaranya adalah berlimpah dengan orang-orang yang kreatif dan celik teknologi. Visi kumpulan pengguna ini ialah untuk mencari cara-cara yang baru untuk menggunakan sumber OSM yang hebat."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Pertemuan untuk peminat-peminat peta di kawasan Philadelphia",
+                "extendedDescription": "GeoPhilly menyatukan pemaju, ahli geografi, gek data, peminat sumber terbuka, penggodam awam dan kaki peta dalam perkongsian minat kita tentang peta dan cerita-cerita yang dikongsi sama. Jika anda menggunakan peta sebagai sebahagian dari kerja anda atau hanya untuk mempelajari dengan lebih lanjut, ini ialah pertemuan untuk anda! Acara kami bertujuan untuk menjadi terbuka, mesra, berpendidikan dan bersosial dan berjulat dari jam gembira kepada ceramah kilat atau malah bengkel. Datanglah untuk mencipta komuniti yang berpelbagai, berinspirasi di Philadelphia dengan kami!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Memeta DC",
+                "description": "Perbaiki OpenStreetMap di kawasan DC",
+                "extendedDescription": "Kami ialah sebuah kumpulan pemeta sukarela yang bertujuan untuk memperbaiki OpenStreetMap di kawasan DC. Kami juga berhasrat untuk mengajar yang lain tentang ekosistem OSM, penganalisaan data, kartografi, dan GIS. Kami berkumpul setiap bulan yang lain dalam pertemuan untuk memfokuskan pada satu kawasan bandar kami."
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Kumpulan pengguna OpenStreetMap bagi Chattanooga"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Pemeta dan pengguna OpenStreetMap, pemaju dan peminat di kawasan Metropolitan New York"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Pemeta dan pengguna OpenStreetMap di kawasan Portland",
+                "extendedDescription": "OpenStreetMap (OSM) ialah sebuah peta dunia yang dibuat oleh orang-orang seperti anda. Ianya sebuah peta yang anda buat, diberi secara percuma seperti wikipedia. Lihat osm.org bagi yang lanjut, dan datang sertai kami pada pertemuan untuk berbincang tentang peta, menyumbang ke OSM, dan berseronok!"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "Semua dialu-alukan hadir! Daftar di {signupUrl}"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Daftar di {signupUrl}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap di Reddit",
+                "description": "/r/openstreetmap/ ialah sebuah tempat yang hebat untuk mempelajari lebih lanjut tentang OpenStreetMap. Tanya apa sahaja kepada kami!"
             }
         }
     }

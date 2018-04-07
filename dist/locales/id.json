@@ -2556,15 +2556,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Dilarang Putar Balik"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Belok Kiri Saja"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Belok Kanan Saja"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Dilarang Berbelok"
-                },
                 "type/route": {
                     "name": "Rute"
                 },

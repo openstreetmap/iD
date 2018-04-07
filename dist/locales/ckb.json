@@ -2,7 +2,8 @@
     "ckb": {
         "modes": {
             "add_area": {
-                "title": "ناوچە"
+                "title": "ناوچە",
+                "description": "زیادکردنی باخچە و بینا و گۆم و شوێنی تر بۆ سەر نەخشەکە."
             },
             "add_line": {
                 "title": "هێڵ"
@@ -11,13 +12,18 @@
                 "title": "خاڵ"
             }
         },
+        "operations": {
+            "continue": {
+                "title": "بەردەوامبوون"
+            }
+        },
         "tooltip_keyhint": "کورتبڕ:",
         "translate": {
             "translate": "وەرگێڕان",
             "localized_translation_language": "هەڵبژاردنی زمان",
             "localized_translation_name": "ناو"
         },
-        "logout": "دەرچوون",
+        "logout": "چوونە دەرەوە",
         "report_a_bug": "ناردنی هەڵە",
         "help_translate": "یارمەتیدان بۆ وەرگێڕان",
         "commit": {

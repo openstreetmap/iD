@@ -2413,9 +2413,6 @@
                     "label": "Tür",
                     "placeholder": "Varsayılan"
                 },
-                "vending": {
-                    "label": "Ürün Çeşidi"
-                },
                 "visibility": {
                     "label": "Görüş",
                     "options": {
@@ -5705,18 +5702,6 @@
                     "name": "U-dönüşü Yasak",
                     "terms": "U-dönüşü Yasak"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Sola Dönüş Zorunlu",
-                    "terms": "Sola Dönüş Zorunlu"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Sağa Dönüş Zorunlu",
-                    "terms": "Sağa Dönüş Zorunlu"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Dönüş Yasak",
-                    "terms": "Dönüş Yasak"
-                },
                 "type/route": {
                     "name": "Güzergah",
                     "terms": "Güzergah, Rota"
@@ -5996,7 +5981,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Hükümet verilerinden oluşturulmuş Avusturya haritası",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6057,9 +6041,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Harita Stamen Design, CC BY 3.0"
-                },
                 "name": "Stamen Arazi"
             },
             "tf-cycle": {

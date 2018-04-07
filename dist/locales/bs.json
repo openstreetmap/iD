@@ -655,9 +655,6 @@
                 "trail_visibility": {
                     "label": "Vidljivost traga"
                 },
-                "vending": {
-                    "label": "Vrsta dobara"
-                },
                 "water": {
                     "label": "Vrsta"
                 },

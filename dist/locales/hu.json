@@ -1,5 +1,10 @@
 {
     "hu": {
+        "icons": {
+            "information": "infó",
+            "remove": "eltávolítás",
+            "undo": "visszavonás"
+        },
         "modes": {
             "add_area": {
                 "title": "Terület",
@@ -289,6 +294,21 @@
                     "create": "Kanyarodási tiltás hozzáadva",
                     "delete": "Kanyarodási tiltás törölve"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Távolság",
+                "via_node_only": "Csak csomópont"
+            },
+            "help": {
+                "indirect": "(indirekt)",
+                "from": "INNEN",
+                "via": "EZEN ÁT",
+                "to": "IDE",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}"
             }
         },
         "undo": {
@@ -759,6 +779,16 @@
             "gps": {
                 "title": "GPS nyomvonalok",
                 "using_h": "GPS nyomvonal használata"
+            },
+            "field": {
+                "restrictions": {
+                    "about": {
+                        "title": "Névjegy"
+                    },
+                    "modifying": {
+                        "title": "Módosítás"
+                    }
+                }
             }
         },
         "intro": {
@@ -1129,6 +1159,11 @@
             }
         },
         "units": {
+            "feet": "{quantity} láb",
+            "miles": "{quantity} mérföld",
+            "square_feet": "{quantity} négyzetláb",
+            "square_miles": "{quantity} négyzet mérföld",
+            "acres": "{quantity} hektár",
             "meters": "{quantity} m",
             "kilometers": "{quantity} km",
             "square_meters": "{quantity} m²",
@@ -1996,7 +2031,7 @@
                     }
                 },
                 "opening_hours": {
-                    "label": "Nyitva tartás"
+                    "label": "Nyitvatartás"
                 },
                 "operator": {
                     "label": "Üzemeltető"
@@ -2459,9 +2494,6 @@
                 "tunnel": {
                     "label": "Típus",
                     "placeholder": "Alapértelmezett"
-                },
-                "vending": {
-                    "label": "Termékek típusa"
                 },
                 "visibility": {
                     "label": "Láthatóság",
@@ -5830,18 +5862,6 @@
                     "name": "Megfordulni tilos",
                     "terms": "Tilos megfordulni"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Kötelező haladási irány: balra",
-                    "terms": "Csak balra szabad fordulni"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Kötelező haladási irány: jobbra",
-                    "terms": "Csak jobbra kanyarodás"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Kötelező haladási irány: egyenesen tovább",
-                    "terms": "Tilos kanyarodni"
-                },
                 "type/route": {
                     "name": "Útvonal",
                     "terms": "útvonal, nyomvonal"
@@ -6126,7 +6146,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Osztrák Basemap, kormányzati adatok alapján.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6187,9 +6206,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Térképcsempék: Stamen Design, CC BY 3.0 szerint"
-                },
                 "name": "Stamen Terrain (terep)"
             },
             "tf-cycle": {
@@ -6203,6 +6219,26 @@
                     "text": "Térképek: © Thunderforest, adatok: © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape (táj)"
+            }
+        },
+        "community": {
+            "Bay-Area-OpenStreetMappers": {
+                "name": "A San Francisco-öböl környéki (Bay Area) OpenStreetMap-szerkesztők",
+                "description": "Az OpenStreetMap tökéletesítése a San Francisco-öböl környékén",
+                "extendedDescription": "Ez a csoport az itteni, öbölkörnyéki OpenStreetMap-közösség gyarapításával foglalkozik. Rendezvényeink mindenki számára nyitottak a nyílt forráskódú szoftverek híveitől kezdve a kerékpárosokon, térinformatikusokon és geocaching-játékosokon át bárki másig. Örömmel látunk mindenkit, akit érdekelnek a térképek, a térképészet és a nyílt térképadatok, hogy csatlakozzék csoportunkhoz és részt vegyen a rendezvényeinken."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Közép-Pennsylvania OSM",
+                "description": "A Pennsylvania State College főiskolából kinövő online térképészközösség"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "A Dallas-Fort Worth-ban működő OpenStreetMap felhasználói csoport",
+                "extendedDescription": "Dallas, Fort Worth és a köztük lévő városok bővelkednek kreatív, műszakilag jártas emberekben. A felhasználói csoport jövőképe, hogy új utakat találjon az OSM lenyűgöző erőforrásainak kihasználásra."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Térképrajongók találkozója Philadelphia térségében"
             }
         }
     }

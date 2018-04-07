@@ -1,5 +1,10 @@
 {
     "gl": {
+        "icons": {
+            "information": "información",
+            "remove": "quitar",
+            "undo": "desfacer"
+        },
         "modes": {
             "add_area": {
                 "title": "Área",
@@ -289,6 +294,42 @@
                     "create": "Engadida unha restrición de xiro.",
                     "delete": "Eliminada unha restrición de xiro."
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distancia",
+                "distance_up_to": "Ata {distance}",
+                "via": "A través de",
+                "via_node_only": "Só nodo",
+                "via_up_to_one": "Ata 1 vía",
+                "via_up_to_two": "Ata 2 vías"
+            },
+            "help": {
+                "indirect": "(indirecta)",
+                "turn": {
+                    "no_left_turn": "Prohibido xirar á esquerda {indirect}",
+                    "no_right_turn": "Prohibido xirar á dereita {indirect}",
+                    "no_u_turn": "Prohibido cambiar de sentido {indirect}",
+                    "no_straight_on": "Prohibido seguir recto {indirect}",
+                    "only_left_turn": "Obrigatorio xirar á esquerda {indirect}",
+                    "only_right_turn": "Obrigatorio xirar á dereita {indirect}",
+                    "only_u_turn": "Obrigatorio cambiar de sentido {indirect}",
+                    "only_straight_on": "Obrigatorio seguir recto {indirect}",
+                    "allowed_left_turn": "Permitido xirar á esquerda {indirect}",
+                    "allowed_right_turn": "Permitido xirar á dereita {indirect}",
+                    "allowed_u_turn": "Permitido cambiar de sentido {indirect}",
+                    "allowed_straight_on": "Permitido seguir recto {indirect}"
+                },
+                "from": "DESDE",
+                "via": "A TRAVÉS DE",
+                "to": "CARA A",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Fai clic para seleccionar un segmento {from}",
+                "select_from_name": "Fai clic para seleccionar {from} {fromName}",
+                "toggle": "Fai clic para \"{turn}\""
             }
         },
         "undo": {
@@ -689,6 +730,44 @@
             "help": {
                 "title": "Axuda",
                 "welcome": "Benvido ao editor iD para [OpenStreetMap] (https://www.openstreetmap.org/). Con este editor podes actualizar OpenStreetMap directamente desde o teu navegador."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Axuda das restricións de xiro",
+                    "about": {
+                        "title": "Acerca de",
+                        "about": "Este campo permíteche inspecionar e modificar restricións de xiro. Mostra un modelo da intersección seleccionada, incluíndo outras estradas conectadas próximas.",
+                        "from_via_to": "Unha restrición de xiro sempre contén: unha **vía DESDE**, unha **vía CARA A** e un **nodo A TRAVÉS DE** ou unha ou varias **vías A TRAVÉS DE**.",
+                        "maxdist": "A barra de desprazamento \"{distField}\" controla ata onde se vai buscar por máis estradas conectadas.",
+                        "maxvia": "A barra de desprazamento \"{viaField}\" axusta cántas vías intermedias poden ser incluídas na busca. (Consello: canto máis simple, mellor)"
+                    },
+                    "inspecting": {
+                        "title": "Inspecionar",
+                        "about": "Sitúate sobre calquera segmento **DESDE** para ver se ten restricións de xiro. Cada destino **CARA A** posible debuxarase cunha sombra coloreada indicando se existe algunha restrición de xiro.",
+                        "from_shadow": "{fromShadow} **segmento DESDE**",
+                        "allow_shadow": "{allowShadow} **CARA A permitido**",
+                        "restrict_shadow": "{restrictShadow} **CARA A prohibido**",
+                        "only_shadow": "{onlyShadow} **CARA A obrigatorio**",
+                        "restricted": "\"Prohibido\" significa que hai unha restrición de xiro, por exemplo \"Prohibido xirar á esquerda\".",
+                        "only": "\"Obrigatorio\" significa que un vehículo que entre na intersección só poderá ir por esa ruta, por exemplo \"Obrigatorio seguir recto\"."
+                    },
+                    "modifying": {
+                        "title": "Modificar",
+                        "about": "Para modificar restricións de xiro, primeiro fai clic en calquera segmento **DESDE** para selecionalo. O segmento selecionado parpadeará, e todos os destinos **CARA A** posibles mostraranse como símbolos de xiro.",
+                        "indicators": "Logo, fai clic nun símbolo de xiro para alternalo entre \"Permitido, \"Prohibido\" e \"Obrigatorio\".",
+                        "allow_turn": "{allowTurn} **CARA A permitido**",
+                        "restrict_turn": "{restrictTurn} **CARA A prohibido**",
+                        "only_turn": "{onlyTurn} **CARA A obrigatorio**"
+                    },
+                    "tips": {
+                        "title": "Consellos",
+                        "simple": "**Intenta usar restricións simples en lugar de restricións máis complexas.**",
+                        "simple_example": "Por exemplo, se podes establecer o elemento intermedio simplemente cun nodo, evita facelo cunha vía.",
+                        "indirect": "**Algunhas restricións mostran o texto \"(indirecta)\" e aparecen cunha cor máis tenue.**",
+                        "indirect_example": "Estas restricións existen debido a outra restrición cercana. Por exemplo, unha restrición de \"Obrigatorio seguir recto\" creará indirectamente restricións de \"Prohibido xirar\" para tódalas demáis rutas da intersección.",
+                        "indirect_noedit": "Non podes modificar restricións indirectas. En lugar diso, modifica a restrición directa cercana."
+                    }
+                }
             }
         },
         "intro": {
@@ -2307,9 +2386,6 @@
                 "tunnel": {
                     "label": "Tipo",
                     "placeholder": "Por defecto"
-                },
-                "vending": {
-                    "label": "Tipo de Bens"
                 },
                 "visibility": {
                     "label": "Visibilidade",
@@ -4754,15 +4830,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Prohibido o cambio de sentido"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Obrigatorio xirar á esquerda"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Obrigatorio xirar á dereita"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Obrigatorio continuar recto"
-                },
                 "type/route": {
                     "name": "Ruta"
                 },
@@ -4961,7 +5028,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa base para Austria, baseado en datos do goberno.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -5022,9 +5088,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Tiles do mapa por Stamen Design, baixo CC BY 3.0"
-                },
                 "name": "Terreo Stamen"
             },
             "tf-cycle": {
@@ -5038,6 +5101,16 @@
                     "text": "Mapas © Thunderforest, Información © contribuidores do OpenStreetMap"
                 },
                 "name": "Paisaxe Thunderforest"
+            }
+        },
+        "community": {
+            "OSM-ES-telegram": {
+                "name": "@OSMes no Telegram",
+                "description": "Chat de Telegram de OpenStreetMap España"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap en Reddit",
+                "description": "/r/openstreetmap/ é un bo sitio para aprender máis sobre OpenStreetMap. Pregúntanos calquera cousa!"
             }
         }
     }
