@@ -163,6 +163,17 @@ h4, h5 {
     outline-style: none;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #aaa;
+    opacity: 1; /* Firefox */
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #aaa;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #aaa;
+}
+
 p {
     font-size: 12px;
     margin:0;
@@ -656,16 +667,12 @@ button.save.has-count .count::before {
 }
 
 .header h3 {
-    text-align: left;
+    text-align: center;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 20px 20px 20px 40px;
-}
-[dir='rtl'] .header h3 {
-    text-align: right;
-    padding: 20px 40px 20px 20px;
+    padding: 20px;
 }
 
 .header button,
