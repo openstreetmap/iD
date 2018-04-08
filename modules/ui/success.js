@@ -105,7 +105,21 @@ export function uiSuccess(context) {
         });
 
         if (matchResources.length) {
-            body.call(showCommunityLinks, matchResources);
+            // sort by size ascending
+            matchResources.sort(function(a, b) {
+                var aSize = Infinity;
+                var bSize = Infinity;
+                if (a.featureId) {
+                    aSize = data.community.features[a.featureId].properties.area;
+                }
+                if (b.featureId) {
+                    bSize = data.community.features[b.featureId].properties.area;
+                }
+                return aSize < bSize ? -1 : aSize > bSize ? 1 : 0;
+            });
+
+            body
+                .call(showCommunityLinks, matchResources);
         }
     }
 
@@ -160,7 +174,7 @@ export function uiSuccess(context) {
                 .attr('href', d.url)
                 .text(t('community.' + d.id + '.name'));
 
-            var description = selection
+            selection
                 .append('div')
                 .attr('class', 'community-description')
                 .html(t('community.' + d.id + '.description', replacements));
