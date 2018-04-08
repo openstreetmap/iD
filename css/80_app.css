@@ -3604,6 +3604,11 @@ img.tile-debug {
 
 /* Success Modal
 ------------------------------------------------------- */
+.save-success.body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .save-summary,
 .save-communityLinks {
     padding: 0px 20px 15px 20px;
@@ -3641,6 +3646,9 @@ img.tile-debug {
     font-size: 14px;
     font-weight: bold;
 }
+.community-languages {
+    font-style: italic;
+}
 .save-summary .details {
     margin: 0px 5px;
     white-space: nowrap;
@@ -3655,11 +3663,12 @@ img.tile-debug {
     width: 12px;
     height: 15px;
 }
-.community-detail .disclosure-wrap .community-extended-description {
+.community-detail .community-more {
     background-color: #efefef;
     padding: 8px;
     border-radius: 4px;
 }
+
 
 /* Splash Modal
 ------------------------------------------------------- */

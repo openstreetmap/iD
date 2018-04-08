@@ -537,6 +537,7 @@ en:
     changeset_id: "Changeset #: {changeset_id}"
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
+    languages: "Languages: {languages}"
   confirm:
     okay: "OK"
     cancel: "Cancel"

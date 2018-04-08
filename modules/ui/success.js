@@ -179,20 +179,33 @@ export function uiSuccess(context) {
                 .attr('class', 'community-description')
                 .html(t('community.' + d.id + '.description', replacements));
 
-            if (d.extendedDescription) {
+            if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
                 selection
                     .append('div')
                     .call(uiDisclosure(context, 'community-ext-' + d.id, false)
                         .title(t('success.more'))
-                        .content(extendedDescription)
+                        .content(showMore)
                     );
             }
 
-            function extendedDescription(selection) {
-                selection
+            function showMore(selection) {
+                var more = selection
                     .append('div')
-                    .attr('class', 'community-extended-description')
-                    .html(t('community.' + d.id + '.extendedDescription', replacements));
+                    .attr('class', 'community-more');
+
+                if (d.extendedDescription) {
+                    more
+                        .append('div')
+                        .attr('class', 'community-extended-description')
+                        .html(t('community.' + d.id + '.extendedDescription', replacements));
+                }
+
+                if (d.languageCodes && d.languageCodes.length) {
+                    more
+                        .append('div')
+                        .attr('class', 'community-languages')
+                        .text(t('success.languages', { languages: d.languageCodes.join(', ') }));
+                }
             }
 
             function linkify(url) {
