@@ -100,7 +100,7 @@ export function uiSuccess(context) {
 
         // Gather community resources that are either global or match a polygon.
         var matchResources = _filter(data.community.resources, function(v) {
-            return v.featureId === null || matchIDs.indexOf(v.featureId) !== -1;
+            return !v.featureId || matchIDs.indexOf(v.featureId) !== -1;
         });
 
         if (matchResources.length) {
