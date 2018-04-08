@@ -652,7 +652,8 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "View Changes on OSM",
             "changeset_id": "Changeset #: {changeset_id}",
-            "like_osm": "Like OpenStreetMap? Connect with others:"
+            "like_osm": "Like OpenStreetMap? Connect with others:",
+            "more": "More"
         },
         "confirm": {
             "okay": "OK",

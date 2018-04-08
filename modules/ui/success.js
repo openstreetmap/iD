@@ -6,6 +6,7 @@ import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 import { data } from '../../data';
 import { svgIcon } from '../svg';
+import { uiDisclosure } from '../ui';
 import { utilRebind } from '../util/rebind';
 
 
@@ -84,7 +85,7 @@ export function uiSuccess(context) {
 
         summaryDetail
             .append('a')
-            .attr('class', 'cell-detail summary-detail-view')
+            .attr('class', 'cell-detail summary-view-on-osm')
             .attr('target', '_blank')
             .attr('href', changesetURL)
             .text(t('success.view_on_osm'));
@@ -153,21 +154,30 @@ export function uiSuccess(context) {
 
             selection
                 .append('div')
-                .attr('class', 'community-detail-name')
+                .attr('class', 'community-name')
                 .append('a')
                 .attr('target', '_blank')
                 .attr('href', d.url)
                 .text(t('community.' + d.id + '.name'));
 
-            selection
+            var description = selection
                 .append('div')
-                .attr('class', 'community-detail-description')
+                .attr('class', 'community-description')
                 .html(t('community.' + d.id + '.description', replacements));
 
             if (d.extendedDescription) {
                 selection
                     .append('div')
-                    .attr('class', 'community-detail-extendedDescription')
+                    .call(uiDisclosure(context, 'community-ext-' + d.id, false)
+                        .title(t('success.more'))
+                        .content(extendedDescription)
+                    );
+            }
+
+            function extendedDescription(selection) {
+                selection
+                    .append('div')
+                    .attr('class', 'community-extended-description')
                     .html(t('community.' + d.id + '.extendedDescription', replacements));
             }
 

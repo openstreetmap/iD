@@ -536,6 +536,7 @@ en:
     view_on_osm: "View Changes on OSM"
     changeset_id: "Changeset #: {changeset_id}"
     like_osm: "Like OpenStreetMap? Connect with others:"
+    more: More
   confirm:
     okay: "OK"
     cancel: "Cancel"

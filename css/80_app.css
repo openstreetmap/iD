@@ -412,7 +412,7 @@ li.hide {
 
 button {
     text-align: center;
-    line-height:20px;
+    line-height: 20px;
     border:0;
     background: white;
     font-weight: bold;
@@ -3613,6 +3613,7 @@ img.tile-debug {
 .save-success h3 {
     font-size: 14px;
     margin-top: 15px;
+    line-height: 1.5;
     padding-bottom: 0;
 }
 .save-success td {
@@ -3628,8 +3629,8 @@ img.tile-debug {
     padding-bottom: 20px;
 }
 
-.summary-detail-view,
-.community-detail-name {
+.summary-view-on-osm,
+.community-name {
     font-size: 14px;
     font-weight: bold;
 }
@@ -3638,6 +3639,20 @@ img.tile-debug {
     white-space: nowrap;
 }
 
+.community-detail a.hide-toggle,
+.community-detail a:visited.hide-toggle {
+    font-size: 12px;
+    font-weight: normal;
+}
+.community-detail .hide-toggle svg.icon.pre-text {
+    width: 12px;
+    height: 15px;
+}
+.community-detail .disclosure-wrap .community-extended-description {
+    background-color: #efefef;
+    padding: 8px;
+    border-radius: 4px;
+}
 
 /* Splash Modal
 ------------------------------------------------------- */
