@@ -41,11 +41,11 @@ export function uiSuccess(context) {
 
         summary
             .append('h3')
-            .html(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
+            .text(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
         summary
             .append('p')
-            .html(t('success.help_html'))
+            .text(t('success.help_html'))
             .append('a')
             .attr('class', 'details')
             .attr('target', '_blank')
@@ -150,7 +150,7 @@ export function uiSuccess(context) {
 
         communityLinks
             .append('h3')
-            .html(t('success.like_osm'));
+            .text(t('success.like_osm'));
 
         var table = communityLinks
             .append('table')
@@ -181,8 +181,8 @@ export function uiSuccess(context) {
         communityDetail.each(function(d) {
             var selection = d3_select(this);
             var replacements = {
-                url: d.url,
-                signupUrl: d.signupUrl || d.url
+                url: linkify(d.url),
+                signupUrl: linkify(d.signupUrl || d.url)
             };
 
             selection
@@ -196,13 +196,17 @@ export function uiSuccess(context) {
             selection
                 .append('div')
                 .attr('class', 'community-detail-description')
-                .text(t('community.' + d.id + '.description', replacements));
+                .html(t('community.' + d.id + '.description', replacements));
 
             if (d.extendedDescription) {
                 selection
                     .append('div')
                     .attr('class', 'community-detail-extendedDescription')
-                    .text(t('community.' + d.id + '.extendedDescription', replacements));
+                    .html(t('community.' + d.id + '.extendedDescription', replacements));
+            }
+
+            function linkify(url) {
+                return '<a target="_blank" href="' + url + '">' + url + '</a>';
             }
         });
     }
