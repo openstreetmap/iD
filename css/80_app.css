@@ -3607,14 +3607,30 @@ img.tile-debug {
 .save-success p {
     margin-top: 15px;
 }
+.save-success h3 {
+    font-size: 14px;
+    margin-top: 15px;
+    padding-bottom: 0;
+}
 .save-success td {
     vertical-align: top;
-    padding: 0 10px 5px 10px;
 }
 .save-success td.cell-icon {
-    width: 50px;
+    width: 40px;
 }
-.save-success .details {
+.save-success td.cell-detail {
+    padding: 0 10px;
+}
+.save-success td.community-detail {
+    padding-bottom: 20px;
+}
+
+.summary-detail-view,
+.community-detail-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+.save-summary .details {
     margin: 0px 5px;
     white-space: nowrap;
 }

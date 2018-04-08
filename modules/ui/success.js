@@ -40,9 +40,7 @@ export function uiSuccess(context) {
             .attr('class', 'save-summary');
 
         summary
-            .append('p')
-            .append('strong')
-            .append('em')
+            .append('h3')
             .html(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
         summary
@@ -87,6 +85,7 @@ export function uiSuccess(context) {
 
         summaryDetail
             .append('a')
+            .attr('class', 'cell-detail summary-detail-view')
             .attr('target', '_blank')
             .attr('href', changesetURL)
             .text(t('success.view_on_osm'));
@@ -150,9 +149,7 @@ export function uiSuccess(context) {
             .attr('class', 'save-communityLinks');
 
         communityLinks
-            .append('p')
-            .append('strong')
-            .append('em')
+            .append('h3')
             .html(t('success.like_osm'));
 
         var table = communityLinks
