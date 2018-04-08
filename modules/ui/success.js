@@ -5,7 +5,6 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { data } from '../../data';
-import { tooltip } from '../util/tooltip';
 import { svgIcon } from '../svg';
 import { utilRebind } from '../util/rebind';
 
@@ -105,41 +104,8 @@ export function uiSuccess(context) {
         });
 
         if (matchResources.length) {
-            body
-                .call(showCommunityLinks, matchResources);
-        } else {
-            body
-                .call(showShareLinks, changesetURL);
+            body.call(showCommunityLinks, matchResources);
         }
-    }
-
-
-    function showShareLinks(selection, changesetURL) {
-        var shareLinks = selection
-            .append('div')
-            .attr('class', 'save-shareLinks');
-
-        var message = (_changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
-            ' ' + changesetURL;
-
-        var sharing = [
-            { key: 'facebook', value: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL) },
-            { key: 'twitter', value: 'https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(message) },
-            { key: 'google', value: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL) }
-        ];
-
-        shareLinks.selectAll('.button.social')
-            .data(sharing)
-            .enter()
-            .append('a')
-            .attr('class', 'button social col4')
-            .attr('target', '_blank')
-            .attr('href', function(d) { return d.value; })
-            .call(tooltip()
-                .title(function(d) { return t('success.' + d.key); })
-                .placement('bottom')
-            )
-            .each(function(d) { d3_select(this).call(svgIcon('#logo-' + d.key, 'social')); });
     }
 
 
