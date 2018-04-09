@@ -10635,6 +10635,7 @@
         "leisure/pitch/american_football": {
             "icon": "america-football",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10656,6 +10657,7 @@
         "leisure/pitch/baseball": {
             "icon": "baseball",
             "fields": [
+                "name",
                 "lit"
             ],
             "geometry": [
@@ -10676,6 +10678,7 @@
         "leisure/pitch/basketball": {
             "icon": "basketball",
             "fields": [
+                "name",
                 "surface",
                 "hoops",
                 "lit",
@@ -10699,6 +10702,7 @@
         "leisure/pitch/beachvolleyball": {
             "icon": "basketball",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10732,6 +10736,7 @@
         "leisure/pitch/boules": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "boules",
                 "surface",
                 "lit"
@@ -10758,6 +10763,7 @@
         "leisure/pitch/bowls": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10779,6 +10785,7 @@
         "leisure/pitch/cricket": {
             "icon": "cricket",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10800,6 +10807,7 @@
         "leisure/pitch/equestrian": {
             "icon": "horse-riding",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "building"
@@ -10828,6 +10836,7 @@
         "leisure/pitch/rugby_league": {
             "icon": "america-football",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10849,6 +10858,7 @@
         "leisure/pitch/rugby_union": {
             "icon": "america-football",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10870,6 +10880,7 @@
         "leisure/pitch/skateboard": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10891,6 +10902,7 @@
         "leisure/pitch/soccer": {
             "icon": "soccer",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10914,6 +10926,7 @@
         "leisure/pitch/table_tennis": {
             "icon": "tennis",
             "fields": [
+                "name",
                 "lit",
                 "access_simple"
             ],
@@ -10938,6 +10951,7 @@
         "leisure/pitch/tennis": {
             "icon": "tennis",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "access_simple"
@@ -10960,6 +10974,7 @@
         "leisure/pitch/volleyball": {
             "icon": "basketball",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],

@@ -1,6 +1,7 @@
 {
     "icon": "cricket",
     "fields": [
+        "name",
         "surface",
         "lit"
     ],
