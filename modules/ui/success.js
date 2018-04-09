@@ -50,7 +50,7 @@ export function uiSuccess(context) {
             .append('p')
             .text(t('success.help_html'))
             .append('a')
-            .attr('class', 'details')
+            .attr('class', 'link-out')
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', t('success.help_link_url'))
@@ -164,6 +164,19 @@ export function uiSuccess(context) {
 
         communityDetail
             .each(showCommunityDetails);
+
+        communityLinks
+            .append('div')
+            .attr('class', 'community-missing')
+            .text(t('success.missing'))
+            .append('a')
+            .attr('class', 'link-out')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-out-link', 'inline'))
+            .attr('href', 'https://github.com/osmlab/osm-community-index/issues')
+            .append('span')
+            .text(t('success.tell_us'));
     }
 
 

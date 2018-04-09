@@ -539,6 +539,8 @@ en:
     more: More
     events: Events
     languages: "Languages: {languages}"
+    missing: "Is something missing from this list?"
+    tell_us: "Tell us!"
   confirm:
     okay: "OK"
     cancel: "Cancel"

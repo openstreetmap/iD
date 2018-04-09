@@ -3630,6 +3630,11 @@ img.tile-debug {
     overflow-x: hidden;
 }
 
+.save-success .link-out {
+    margin: 0px 5px;
+    white-space: nowrap;
+}
+
 .save-summary,
 .save-communityLinks {
     padding: 0px 20px 15px 20px;
@@ -3674,10 +3679,6 @@ img.tile-debug {
 .community-languages:only-child {
     margin-top: 0;
 }
-.save-summary .details {
-    margin: 0px 5px;
-    white-space: nowrap;
-}
 
 .community-detail a.hide-toggle,
 .community-detail a:visited.hide-toggle {
@@ -3708,6 +3709,11 @@ img.tile-debug {
 }
 .community-event-when {
     font-weight: bold;
+}
+
+.community-missing {
+    padding: 10px;
+    text-align: center;
 }
 
 
