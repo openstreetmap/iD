@@ -325,6 +325,7 @@ en:
       key: H
       title: History
       selected: "{n} selected"
+      no_history: "No History (New Feature)"
       version: Version
       last_edit: Last Edit
       edited_by: Edited By
