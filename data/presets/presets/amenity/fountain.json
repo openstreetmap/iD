@@ -1,8 +1,7 @@
 {
     "icon": "poi-fountain",
     "fields": [
-        "name",
-        "watering_place"
+        "name"
     ],
     "geometry": [
         "point",

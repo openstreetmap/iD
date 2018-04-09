@@ -359,6 +359,7 @@ function generateTaginfo(presets, fields) {
             if (field.strings && field.strings.options) {
                 var values = Object.keys(field.strings.options);
                 values.forEach(function(value) {
+                    if (value === 'undefined' || value === '*' || value === '') return;
                     var tag = { key: key, value: value };
                     if (field.label) {
                         tag.description = [ field.label ];

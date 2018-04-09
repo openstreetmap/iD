@@ -493,6 +493,9 @@ en:
       display:
         # display=*
         label: Display
+      distance:
+        # distance=*
+        label: Total Distance
       dock:
         # dock=*
         label: Type
@@ -669,6 +672,48 @@ en:
         label: Hoops
         # hoops field placeholder
         placeholder: '1, 2, 4...'
+      horse_dressage:
+        # sport=*
+        label: Dressage Riding
+        options:
+          # sport=equestrian
+          equestrian: 'Yes'
+          # sport=undefined
+          undefined: 'No'
+      horse_riding:
+        # leisure=*
+        label: Horseback Riding
+        options:
+          # leisure=horse_riding
+          horse_riding: 'Yes'
+          # leisure=undefined
+          undefined: 'No'
+      horse_scale:
+        # horse_scale=*
+        label: Horseback Riding Difficulty
+        options:
+          # horse_scale=common
+          common: 'Easy: No problems or difficulties. (default)'
+          # horse_scale=critical
+          critical: 'Borderline: Passable only for experienced riders and horses. Major obstacles. Bridges should be examined carefully.'
+          # horse_scale=dangerous
+          dangerous: 'Dangerous: Passable only for very experienced riders and horses and only in good weather. Dismount.'
+          # horse_scale=demanding
+          demanding: 'Use with caution: Uneven way, occasional difficult passages.'
+          # horse_scale=difficult
+          difficult: 'Difficult: Way narrow and exposed. May contain obstacles to step over and narrow passages.'
+          # horse_scale=impossible
+          impossible: 'Impassable: Way or bridge not passable for horses. Too narrow, insuffient support, obstacles like ladders. Danger of life.'
+        # horse_scale field placeholder
+        placeholder: 'Difficult, Dangerous...'
+      horse_stables:
+        # amenity=*
+        label: Riding Stable
+        options:
+          # amenity=stables
+          stables: 'Yes'
+          # amenity=undefined
+          undefined: 'No'
       iata:
         # iata=*
         label: IATA
@@ -5620,6 +5665,10 @@ en:
         # tourism=theme_park
         name: Theme Park
         terms: '<translate with synonyms or related terms for ''Theme Park'', separated by commas>'
+      tourism/trail_riding_station:
+        # tourism=trail_riding_station
+        name: Trail Riding Station
+        terms: '<translate with synonyms or related terms for ''Trail Riding Station'', separated by commas>'
       tourism/viewpoint:
         # tourism=viewpoint
         name: Viewpoint

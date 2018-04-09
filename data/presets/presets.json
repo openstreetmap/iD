@@ -1691,6 +1691,9 @@
         },
         "amenity/fountain": {
             "icon": "poi-fountain",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "point",
                 "area"
@@ -7698,6 +7701,7 @@
                 "mtb/scale",
                 "mtb/scale/uphill",
                 "mtb/scale/imba",
+                "horse_scale",
                 "ref"
             ],
             "geometry": [
@@ -8273,7 +8277,8 @@
                 "smoothness",
                 "mtb/scale",
                 "mtb/scale/uphill",
-                "mtb/scale/imba"
+                "mtb/scale/imba",
+                "horse_scale"
             ],
             "geometry": [
                 "line"
@@ -19366,6 +19371,28 @@
             },
             "name": "Theme Park"
         },
+        "tourism/trail_riding_station": {
+            "icon": "horse-riding",
+            "fields": [
+                "name",
+                "horse_stables",
+                "horse_riding",
+                "horse_dressage",
+                "address",
+                "phone",
+                "website",
+                "description"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "tourism": "trail_riding_station"
+            },
+            "name": "Trail Riding Station",
+            "matchScore": 2
+        },
         "tourism/viewpoint": {
             "icon": "poi-binoculars",
             "geometry": [
@@ -19910,7 +19937,9 @@
                 "name",
                 "ref_route",
                 "operator",
-                "network_foot"
+                "network_foot",
+                "description",
+                "distance"
             ],
             "geometry": [
                 "relation"
@@ -19927,7 +19956,9 @@
                 "name",
                 "ref_route",
                 "operator",
-                "network_horse"
+                "network_horse",
+                "description",
+                "distance"
             ],
             "geometry": [
                 "relation"

@@ -1785,6 +1785,9 @@
                 "display": {
                     "label": "Display"
                 },
+                "distance": {
+                    "label": "Total Distance"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -1938,6 +1941,39 @@
                 "hoops": {
                     "label": "Hoops",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "label": "Dressage Riding",
+                    "options": {
+                        "undefined": "No",
+                        "equestrian": "Yes"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Horseback Riding",
+                    "options": {
+                        "undefined": "No",
+                        "horse_riding": "Yes"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Horseback Riding Difficulty",
+                    "placeholder": "Difficult, Dangerous...",
+                    "options": {
+                        "common": "Easy: No problems or difficulties. (default)",
+                        "demanding": "Use with caution: Uneven way, occasional difficult passages.",
+                        "difficult": "Difficult: Way narrow and exposed. May contain obstacles to step over and narrow passages.",
+                        "critical": "Borderline: Passable only for experienced riders and horses. Major obstacles. Bridges should be examined carefully.",
+                        "dangerous": "Dangerous: Passable only for very experienced riders and horses and only in good weather. Dismount.",
+                        "impossible": "Impassable: Way or bridge not passable for horses. Too narrow, insuffient support, obstacles like ladders. Danger of life."
+                    }
+                },
+                "horse_stables": {
+                    "label": "Riding Stable",
+                    "options": {
+                        "undefined": "No",
+                        "stables": "Yes"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -6286,6 +6322,10 @@
                 },
                 "tourism/theme_park": {
                     "name": "Theme Park",
+                    "terms": ""
+                },
+                "tourism/trail_riding_station": {
+                    "name": "Trail Riding Station",
                     "terms": ""
                 },
                 "tourism/viewpoint": {

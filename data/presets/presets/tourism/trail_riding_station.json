@@ -1,5 +1,5 @@
 {
-    "icon": "horse_riding",
+    "icon": "horse-riding",
     "fields": [
         "name",
         "horse_stables",
@@ -17,6 +17,6 @@
     "tags": {
         "tourism": "trail_riding_station"
     },
-    "name": "Trail riding station",
+    "name": "Trail Riding Station",
     "matchScore": 2.0
 }

@@ -6,10 +6,7 @@
         "operator",
         "network_foot",
         "description",
-        "distance",
-        "trailblazing_text",
-        "trailblazing_osmc",
-        "trailblazing_wiki"
+        "distance"
     ],
     "geometry": [
         "relation"

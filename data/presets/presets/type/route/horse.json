@@ -4,12 +4,9 @@
         "name",
         "ref_route",
         "operator",
+        "network_horse",
         "description",
-        "distance",
-        "trailblazing_text",
-        "trailblazing_osmc",
-        "trailblazing_wiki",
-        "network_horse"
+        "distance"
     ],
     "geometry": [
         "relation"

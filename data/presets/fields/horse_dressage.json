@@ -1,11 +1,15 @@
 {
     "key": "sport",
     "type": "check",
-    "label": "Dressage riding",
+    "label": "Dressage Riding",
     "strings": {
         "options": {
             "undefined": "No",
-            "equestrian": "Offered"
+            "equestrian": "Yes"
         }
+    },
+    "reference": {
+        "key": "sport",
+        "value": "equestrian"
     }
 }
