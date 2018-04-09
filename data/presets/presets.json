@@ -197,6 +197,20 @@
             },
             "name": "Billboard"
         },
+        "advertising/column": {
+            "fields": [
+                "direction",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "advertising": "column"
+            },
+            "name": "Advertising Column"
+        },
         "aerialway/station": {
             "icon": "aerialway",
             "geometry": [
