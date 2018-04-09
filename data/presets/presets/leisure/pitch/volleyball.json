@@ -1,6 +1,7 @@
 {
     "icon": "basketball",
     "fields": [
+        "name",
         "surface",
         "lit"
     ],
