@@ -3460,6 +3460,9 @@ img.tile-debug {
     color: #ccf;
 }
 
+/* Notification Badges */
+
+/* For an icon (e.g. new version) */
 .badge {
     display: inline-block;
     background: #d32232;
@@ -3484,6 +3487,24 @@ img.tile-debug {
     width: 11px;
     height: 11px;
     fill: white;
+}
+
+/* For text (e.g. upcoming events) */
+.badge-text {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+    background: #f00;
+    border-radius: 9px;
+}
+[dir='rtl'] .badge-text {
+    margin-left: 0;
+    margin-right: 5px;
 }
 
 
@@ -3647,7 +3668,11 @@ img.tile-debug {
     font-weight: bold;
 }
 .community-languages {
+    margin-top: 5px;
     font-style: italic;
+}
+.community-languages:only-child {
+    margin-top: 0;
 }
 .save-summary .details {
     margin: 0px 5px;
@@ -3665,6 +3690,10 @@ img.tile-debug {
     height: 15px;
 }
 
+.community-events {
+    margin-top: 5px;
+}
+
 .community-event,
 .community-more {
     background-color: #efefef;
@@ -3673,7 +3702,10 @@ img.tile-debug {
     margin-bottom: 5px;
 }
 
-.community-event-name,
+.community-event-name {
+    font-size: 14px;
+    font-weight: bold;
+}
 .community-event-when {
     font-weight: bold;
 }

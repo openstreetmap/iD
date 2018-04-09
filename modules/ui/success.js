@@ -191,6 +191,8 @@ export function uiSuccess(context) {
             selection
                 .append('div')
                 .call(uiDisclosure(context, 'community-more-' + d.id, false)
+                    .expanded(false)
+                    .updatePreference(false)
                     .title(t('success.more'))
                     .content(showMore)
                 );
@@ -215,9 +217,15 @@ export function uiSuccess(context) {
             selection
                 .append('div')
                 .call(uiDisclosure(context, 'community-events-' + d.id, false)
+                    .expanded(false)
+                    .updatePreference(false)
                     .title(t('success.events'))
                     .content(showNextEvents)
-                );
+                )
+                .select('.hide-toggle')
+                .append('span')
+                .attr('class', 'badge-text')
+                .text(nextEvents.length);
         }
 
 
