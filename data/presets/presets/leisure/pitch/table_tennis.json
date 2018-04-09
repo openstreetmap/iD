@@ -1,7 +1,7 @@
 {
     "icon": "tennis",
     "fields": [
-        "name",,
+        "name",
         "lit",
         "access_simple"
     ],
