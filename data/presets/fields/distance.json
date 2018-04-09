@@ -1,0 +1,6 @@
+{
+    "key": "distance",
+    "type": "text",
+    "label": "Total distance",
+    "placeholder": "0"
+}

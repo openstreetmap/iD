@@ -4,7 +4,12 @@
         "name",
         "ref_route",
         "operator",
-        "network_foot"
+        "network_foot",
+        "description",
+        "distance",
+        "trailblazing_text",
+        "trailblazing_osmc",
+        "trailblazing_wiki"
     ],
     "geometry": [
         "relation"
