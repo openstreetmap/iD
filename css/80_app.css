@@ -3638,7 +3638,7 @@ img.tile-debug {
     padding: 0 10px;
 }
 .save-success td.community-detail {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 .summary-view-on-osm,
@@ -3658,15 +3658,24 @@ img.tile-debug {
 .community-detail a:visited.hide-toggle {
     font-size: 12px;
     font-weight: normal;
+    padding-bottom: 0;
 }
 .community-detail .hide-toggle svg.icon.pre-text {
     width: 12px;
     height: 15px;
 }
-.community-detail .community-more {
+
+.community-event,
+.community-more {
     background-color: #efefef;
     padding: 8px;
     border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.community-event-name,
+.community-event-when {
+    font-weight: bold;
 }
 
 

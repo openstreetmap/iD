@@ -7,11 +7,14 @@ import { t } from '../util/locale';
 import { data } from '../../data';
 import { svgIcon } from '../svg';
 import { uiDisclosure } from '../ui';
+import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
 export function uiSuccess(context) {
+    var detected = utilDetect();
     var dispatch = d3_dispatch('cancel');
+    var MAXEVENTS = 2;
     var _changeset;
     var _location;
 
@@ -159,59 +162,135 @@ export function uiSuccess(context) {
             .append('td')
             .attr('class', 'cell-detail community-detail');
 
-        communityDetail.each(function(d) {
-            var selection = d3_select(this);
-            var replacements = {
-                url: linkify(d.url),
-                signupUrl: linkify(d.signupUrl || d.url)
-            };
+        communityDetail
+            .each(showCommunityDetails);
+    }
 
+
+    function showCommunityDetails(d) {
+        var selection = d3_select(this);
+        var replacements = {
+            url: linkify(d.url),
+            signupUrl: linkify(d.signupUrl || d.url)
+        };
+
+        selection
+            .append('div')
+            .attr('class', 'community-name')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', d.url)
+            .text(t('community.' + d.id + '.name'));
+
+        selection
+            .append('div')
+            .attr('class', 'community-description')
+            .html(t('community.' + d.id + '.description', replacements));
+
+        if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
             selection
                 .append('div')
-                .attr('class', 'community-name')
+                .call(uiDisclosure(context, 'community-more-' + d.id, false)
+                    .title(t('success.more'))
+                    .content(showMore)
+                );
+        }
+
+        var nextEvents = (d.events || [])
+            .map(function(event) {                  // add parsed date
+                event.date = new Date(event.when);
+                return event;
+            })
+            .filter(function(event) {               // date is valid and future (or today)
+                var t = event.date.getTime();
+                var now = (new Date()).setHours(0,0,0,0);
+                return !isNaN(t) && t >= now;
+            })
+            .sort(function(a, b) {                  // sort by date ascending
+                return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+            })
+            .slice(0, MAXEVENTS);                   // limit number of events shown
+
+        if (nextEvents.length) {
+            selection
+                .append('div')
+                .call(uiDisclosure(context, 'community-events-' + d.id, false)
+                    .title(t('success.events'))
+                    .content(showNextEvents)
+                );
+        }
+
+
+        function showMore(selection) {
+            var more = selection
+                .append('div')
+                .attr('class', 'community-more');
+
+            if (d.extendedDescription) {
+                more
+                    .append('div')
+                    .attr('class', 'community-extended-description')
+                    .html(t('community.' + d.id + '.extendedDescription', replacements));
+            }
+
+            if (d.languageCodes && d.languageCodes.length) {
+                more
+                    .append('div')
+                    .attr('class', 'community-languages')
+                    .text(t('success.languages', { languages: d.languageCodes.join(', ') }));
+            }
+        }
+
+
+        function showNextEvents(selection) {
+            var events = selection
+                .append('div')
+                .attr('class', 'community-events');
+
+            var item = events.selectAll('.community-event')
+                .data(nextEvents);
+
+            var itemEnter = item.enter()
+                .append('div')
+                .attr('class', 'community-event');
+
+            itemEnter
+                .append('div')
+                .attr('class', 'community-event-name')
                 .append('a')
                 .attr('target', '_blank')
-                .attr('href', d.url)
-                .text(t('community.' + d.id + '.name'));
+                .attr('href', function(d) { return d.url; })
+                .text(function(d) { return d.name; });
 
-            selection
+            itemEnter
                 .append('div')
-                .attr('class', 'community-description')
-                .html(t('community.' + d.id + '.description', replacements));
+                .attr('class', 'community-event-when')
+                .text(function(d) {
+                    var options = {
+                        weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+                    };
+                    if (d.date.getHours() || d.date.getMinutes()) {   // include time if it has one
+                        options.hour = 'numeric';
+                        options.minute = 'numeric';
+                    }
+                    return d.date.toLocaleString(detected.locale, options);
+                });
 
-            if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
-                selection
-                    .append('div')
-                    .call(uiDisclosure(context, 'community-ext-' + d.id, false)
-                        .title(t('success.more'))
-                        .content(showMore)
-                    );
-            }
+            itemEnter
+                .append('div')
+                .attr('class', 'community-event-where')
+                .text(function(d) { return d.where; });
 
-            function showMore(selection) {
-                var more = selection
-                    .append('div')
-                    .attr('class', 'community-more');
+            itemEnter
+                .append('div')
+                .attr('class', 'community-event-description')
+                .text(function(d) { return d.description; });
+        }
 
-                if (d.extendedDescription) {
-                    more
-                        .append('div')
-                        .attr('class', 'community-extended-description')
-                        .html(t('community.' + d.id + '.extendedDescription', replacements));
-                }
 
-                if (d.languageCodes && d.languageCodes.length) {
-                    more
-                        .append('div')
-                        .attr('class', 'community-languages')
-                        .text(t('success.languages', { languages: d.languageCodes.join(', ') }));
-                }
-            }
-
-            function linkify(url) {
-                return '<a target="_blank" href="' + url + '">' + url + '</a>';
-            }
-        });
+        function linkify(url) {
+            return '<a target="_blank" href="' + url + '">' + url + '</a>';
+        }
     }
 
 
