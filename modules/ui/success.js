@@ -169,6 +169,7 @@ export function uiSuccess(context) {
 
     function showCommunityDetails(d) {
         var selection = d3_select(this);
+        var communityID = d.id;
         var replacements = {
             url: linkify(d.url),
             signupUrl: linkify(d.signupUrl || d.url)
@@ -268,7 +269,13 @@ export function uiSuccess(context) {
                 .append('a')
                 .attr('target', '_blank')
                 .attr('href', function(d) { return d.url; })
-                .text(function(d) { return d.name; });
+                .text(function(d) {
+                    var name = d.name;
+                    if (d.i18n && d.id) {
+                        name = t('community.' + communityID + '.events.' + d.id + '.name', { default: name });
+                    }
+                    return name;
+                });
 
             itemEnter
                 .append('div')
@@ -287,12 +294,24 @@ export function uiSuccess(context) {
             itemEnter
                 .append('div')
                 .attr('class', 'community-event-where')
-                .text(function(d) { return d.where; });
+                .text(function(d) {
+                    var where = d.where;
+                    if (d.i18n && d.id) {
+                        where = t('community.' + communityID + '.events.' + d.id + '.where', { default: where });
+                    }
+                    return where;
+                });
 
             itemEnter
                 .append('div')
                 .attr('class', 'community-event-description')
-                .text(function(d) { return d.description; });
+                .text(function(d) {
+                    var description = d.description;
+                    if (d.i18n && d.id) {
+                        description = t('community.' + communityID + '.events.' + d.id + '.description', { default: description });
+                    }
+                    return description;
+                });
         }
 
 
