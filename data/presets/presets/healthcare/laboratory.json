@@ -1,0 +1,24 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "website",
+        "ref",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "medical_laboratory",
+        "medical_lab",
+        "blood_check"
+    ],
+    "tags": {
+        "healthcare": "laboratory"
+    },
+    "name": "Laboratory"
+}
