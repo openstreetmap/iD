@@ -1,5 +1,10 @@
 {
     "he": {
+        "icons": {
+            "information": "מידע",
+            "remove": "הסר",
+            "undo": "בטל"
+        },
         "modes": {
             "add_area": {
                 "title": "שטח",
@@ -70,7 +75,7 @@
                     "line": "להפוך קו זה למעגלי.",
                     "area": "להפוך איזור זה למעגלי."
                 },
-                "key": "ע",
+                "key": "O",
                 "annotation": {
                     "line": "הקו עוגל",
                     "area": "האיזור עוגל."
@@ -85,7 +90,7 @@
                     "line": "ריבוע פינות בקו זה",
                     "area": "ריבוע פינות באיזור זה"
                 },
-                "key": "ר",
+                "key": "S",
                 "annotation": {
                     "line": "הפיכת הקצוות של קו לריבוע.",
                     "area": "הפיכת הקצוות של שטח לריבוע."
@@ -97,7 +102,7 @@
             "straighten": {
                 "title": "יישור",
                 "description": "יישור הקו הזה.",
-                "key": "ש",
+                "key": "S",
                 "annotation": "יישור קו.",
                 "too_bendy": "אי אפשר ליישר את הקו הזה כיוון שהוא יותר מדי מכופף.",
                 "connected_to_hidden": "אי אפשר ליישר את הקו הזה כי הוא מחובר לתכונה נסתרת."
@@ -150,7 +155,7 @@
             "disconnect": {
                 "title": "ניתוק",
                 "description": "ניתוק הקווים/השטחים האלה זה מזה.",
-                "key": "נ",
+                "key": "D",
                 "annotation": "קווים/שטחים מנותקים.",
                 "not_connected": "אין כאן מספיק קווים/שטחים לניתוק.",
                 "connected_to_hidden": "אי אפשר לנתק את זה עקב החיבור לתכונה נסתרת.",
@@ -159,7 +164,7 @@
             "merge": {
                 "title": "מיזוג",
                 "description": "מיזוג התכונות האלה.",
-                "key": "ז",
+                "key": "C",
                 "annotation": "{n} תכונות מוזגו.",
                 "not_eligible": "אי אפשר למזג תכונות אלו.",
                 "not_adjacent": "אי אפשר למזג את התכונות האלו כיוון שנקודות הקצה שלהן אינן מחוברות.",
@@ -173,7 +178,7 @@
                     "single": "העברת התכונה הזאת למיקום שונה.",
                     "multiple": "העברת התכונות האלו למיקום שונה."
                 },
-                "key": "ע",
+                "key": "M",
                 "annotation": {
                     "point": "העברת נקודה.",
                     "vertex": "העברת מפרק בדרך.",
@@ -196,8 +201,8 @@
             },
             "reflect": {
                 "title": {
-                    "long": "שקף לאורך",
-                    "short": "שקף לרוחב"
+                    "long": "שקף את הארוך",
+                    "short": "שקף את הקצר"
                 },
                 "description": {
                     "long": {
@@ -220,7 +225,7 @@
                     "single": "הטיית התכונה הזאת מסביב לנקודת המרכז שלה.",
                     "multiple": "הטיית התכונות האלו סביב נקודות המרכז שלהן."
                 },
-                "key": "ט",
+                "key": "R",
                 "annotation": {
                     "line": "הטיית קו.",
                     "area": "הטיית שטח.",
@@ -242,7 +247,7 @@
             "reverse": {
                 "title": "היפוך",
                 "description": "הפיכת הכיוון של הקו הזה.",
-                "key": "פ",
+                "key": "V",
                 "annotation": "קו התהפך."
             },
             "split": {
@@ -252,7 +257,7 @@
                     "area": "פיצול הגבול של השטח הזה לשניים.",
                     "multiple": "פיצול הקווים/שטח של המפרק הזה לשניים."
                 },
-                "key": "צ",
+                "key": "X",
                 "annotation": {
                     "line": "פיצול קו.",
                     "area": "פיצול גבול שטח.",
@@ -275,7 +280,7 @@
                 "distance_up_to": "עד {distance}",
                 "via": "דרך",
                 "via_node_only": "מפרק בלבד",
-                "via_up_to_one": "עד דרך אחת",
+                "via_up_to_one": "עד דרך 1",
                 "via_up_to_two": "עד 2 דרכים"
             },
             "help": {
@@ -357,9 +362,9 @@
             "truncated_list": "עריכות מאת {users} ו־{count} נוספים"
         },
         "info_panels": {
-            "key": "ח",
+            "key": "I",
             "background": {
-                "key": "ר",
+                "key": "B",
                 "title": "רקע",
                 "zoom": "תקריב",
                 "vintage": "סגנון מיושן",
@@ -374,7 +379,7 @@
                 "hide_vintage": "הסתרת סגנון מיושן"
             },
             "history": {
-                "key": "ה",
+                "key": "H",
                 "title": "היסטוריה",
                 "selected": "{n} נבחרו",
                 "version": "גרסה",
@@ -385,12 +390,12 @@
                 "link_text": "היסטוריה ב־openstreetmap.org"
             },
             "location": {
-                "key": "ק",
+                "key": "L",
                 "title": "מיקום",
                 "unknown_location": "מיקום לא ידוע"
             },
             "measurement": {
-                "key": "ד",
+                "key": "M",
                 "title": "מדידה",
                 "selected": "{n} נבחרו",
                 "geometry": "צורה",
@@ -469,7 +474,7 @@
         "background": {
             "title": "רקע",
             "description": "הגדרות רקע",
-            "key": "ר",
+            "key": "B",
             "backgrounds": "רקעים",
             "none": "אין",
             "best_imagery": "מקור התמונה המוכר והטוב ביותר למיקום זה",
@@ -495,7 +500,7 @@
         "map_data": {
             "title": "נתוני מפה",
             "description": "נתוני מפה",
-            "key": "נ",
+            "key": "F",
             "data_layers": "שכבות נתונים",
             "layers": {
                 "osm": {
@@ -562,7 +567,7 @@
             "wireframe": {
                 "description": "ללא מילוי (מסגרת דקיקה)",
                 "tooltip": "הפעלת מצב מסגרת דקיקה מאפשר לך לראות בקלות את התמונה ברקע.",
-                "key": "ד"
+                "key": "W"
             },
             "partial": {
                 "description": "מילוי חלקי",
@@ -620,7 +625,8 @@
             "twitter": "שיתוף בטוויטר",
             "google": "שיתוף ב־Google+‎",
             "help_html": "השינויים שלך אמורים להופיע בשכבה ה„תקנית” בעוד מספר דקות. שכבות אחרות ותכונות מסוימות עשויות לארוך זמן רב יותר.",
-            "help_link_text": "פרטים"
+            "help_link_text": "פרטים",
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
             "okay": "אישור",
@@ -722,11 +728,16 @@
                 "select_right_click": "יש ללחוץ {rightclick} לחיצה ימנית על תכונה כדי להציג את תפריט העריכה, שמציג את הפקודות הזמינות, כגון הטיה, הזזה ומחיקה.",
                 "multiselect_h": "בחירה במגוון",
                 "multiselect_shift_click": "`{shift}`+{leftclick} לחיצה שמאלית כדי לבחור כמה תכונות יחדיו.  אפשרות זו מקלה על העברה או מחיקה של מגוון פריטים.",
+                "multiselect_lasso": "דרך נוספת לבחור מספר תכונות היא להחזיק את המקש `{shift}` ואז ללחוץ להחזיק את כפתור העכבר השמאלי ולגרור את העכבר כדי לצייר בחירה בצורת פלצור. כל הנקודות בתוך אזור הפלצור תיבחרנה.",
                 "undo_redo_h": "ביטול ושחזור ביטול",
+                "undo_redo": "העריכות שלך נשמרות מקומית בדפדפן שלך עד לבחירתך בשמירתן לשרת של OpenStreetMap. ניתן לבטל עריכות על ידי לחיצה על הכפתור {undo} **ביטול** וניתן ",
                 "save_h": "שמירה",
                 "save": "יש ללחוץ על {save} **שמירה** כדי לסיים את העריכות שלך ולשלוח אותן ל־OpenStreetMap. מומלץ לזכור לשמור את עבודתך לעתים תכופות!",
+                "save_validation": "במסך השמירה תהיה לך אפשרות לסקור את מה שעשית. iD יבצע בדיקות בסיסיות לאיתור מידע וחסר ועשוי גם להציג הצעות ואזהרות מועילות אם משהו לא נראה כשורה.",
                 "upload_h": "העלאה",
+                "upload": "בטרם העלאת השינויים שלך עליך לכתוב [הערה לערכת השינויים](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). לאחר מכן יש ללחוץ על **העלאה** כדי לשלוח את השינויים שלך ל־OpenStreetMap, שם הם ימוזגו למפה ויהיו גלויים לעיני כל.",
                 "backups_h": "גיבויים אוטומטיים",
+                "backups": "אם אין לך אפשרות לסיים את העריכות שלך בבת אחת, למשל: המחשב קרס או שלשונית הדפדפן שלך נסגרה, העריכות שלך עדיין נשמרות באזור האחסון שבדפדפן שלך. ניתן לחזור בהמשך (באותו הדפדפן והמחשב) ו־iD יציע לך לשחזר את עבודתך.",
                 "keyboard_h": "קיצורי מקלדת",
                 "keyboard": "ניתן לצפות ברשימה של קיצורי המקלדת על ידי לחיצה על המקש ‚?’."
             },
@@ -765,16 +776,24 @@
                 "add_line_draw": "עכשיו, עליך להציב את סמן העכבר על מיקום תחילת הקו המיועד {leftclick} וללחוץ עם המקש השמאלי או ללחוץ על המקש ‚רווח’ כדי להתחיל להציב מפרקים לאורך הקו. ניתן להמשיך ולהוסיף עוד מפרקים על ידי לחיצה עם העכבר או על מקש ה‚רווח’. בעת הציור, ניתן להתקרב או לגרור את המפה כדי להוסיף עוד פרטים.",
                 "add_line_finish": "כדי לסיים ציור קו, יש ללחוץ על `{return}` או ללחוץ שוב על המפרק האחרון.",
                 "modify_line_h": "עריכת קווים",
+                "modify_line_addnode": "ניתן גם ליצור מפרקים חדשים לאורכו של קו בין אם על ידי {leftclick}**x2** לחיצה כפולה על הקו כולו או על ידי גרירת המשולשים הקטנים בנקודות האמצע שבין המפרקים.",
                 "connect_line_h": "חיבור קווים",
                 "connect_line": "חיבור כבישים כראוי חשוב לתפעול המפה וגם כדי לספק הנחיות לנהיגה בעזרת המפה.",
                 "connect_line_display": "החיבורים בין כבישים מסומנים בעיגול אפור. נקודות הקצה של הקווים מסומנים בעיגולים לבנים גדולים יותר אם הם לא מחוברים לשום דבר.",
+                "connect_line_drag": "כדי לחבר קו לתכונה אחרת, יש לגרור את אחד ממפרקי הקו לתכונה האחרת עד שהתכונות נצמדות זו לזו. עצה: ניתן להחזיק את המקש `{alt}` כדי למנוע מהמפרקים להתחבר לתכונות אחרות.",
                 "connect_line_tag": "אם ידוע לך שבנקודת החיבור יש רמזורים או מעברי חציה, ניתן להוסיף אותם על ידי בחירת הצומת המחבר ובחירת סוג התכונה המתאים באמצעות עורך התכונות.",
                 "disconnect_line_h": "ניתוק קווים",
+                "disconnect_line_command": "כדי לנתק דרך מתכונה אחרת, יש ללחוץ עם {rightclick} מקש ימני על המפגש ביניהם ולבחור בפקודה {disconnect} **ניתוק** מתפריט העריכה.",
                 "move_line_h": "הזזת קווים",
-                "delete_line_h": "מחיקת קווים"
+                "move_line_command": "כדי להעביר קו שלם, יש ללחוץ עם {rightclick} כפתור ימני על הקו ולבחור בפקודה **העברה** מתפריט העריכה. לאחר מכן יש להעביר את העכבר וללחוץ {leftclick} לחיצה שמאלית כדי להציב את הקו במיקום חדש.",
+                "move_line_connected": "קווים שמחוברים לתכונות אחרות יוסיפו להיות מחוברים גם עם העברת הקו למיקום החדש. יתכן ש־iD ימנע ממך להעביר קו דרך קו מחובר אחר.",
+                "delete_line_h": "מחיקת קווים",
+                "delete_line": "אם קיים קו שגוי לחלוטין, למשל דרך שאינה קיימת במציאות, אין שום מניעה למחוק אותה. כדאי לנקוט משנה זהירות בעת מחיקת תכונות: צילומי הרקע המופיעים עשויים להיות בלתי עדכניים וכביש שנראה שגוי יכול להיות פשוט חדש.",
+                "delete_line_command": "כדי למחוק קו, יש ללחוץ עם {rightclick} מקש ימני על הקו כדי לבחור אותו ולהציג את תפריט העריכה, לאחר מכן יש להשתמש בפקודה {delete} **מחיקה**."
             },
             "areas": {
                 "title": "שטחים",
+                "intro": "*שטחים* משמשים להצגת גבולות של תכונות כגון אגמים, בניינים ואזורי מגורים. יש לסמן שטחים לאורך גבולות התכונה המיוצגת, למשל, מסביב לבסיס הבניין.",
                 "point_or_area_h": "נקודות או שטחים?",
                 "point_or_area": "תכונות רבות ניתנות לייצוג כנקודות או שטחים. עליך למפות מבנים וקווי מתאר של נכסים כשטחים ככל הניתן. יש להציב נקודות בתוך שטח בניין כדי לייצג עסקים, שירותים ותכונות נוספות שנמצאות בתוך הבניין.",
                 "add_area_h": "הוספת שטחים",
@@ -782,13 +801,17 @@
                 "add_area_draw": "עכשיו, עליך להציב את סמן העכבר על אחת מהפינות של התכונה {leftclick} וללחוץ עם המקש השמאלי או ללחוץ על המקש ‚רווח’ כדי להתחיל להציב מפרקים מסביב למסגרת החיצונית של האזור. ניתן להמשיך ולהוסיף עוד מפרקים על ידי לחיצה עם העכבר או על מקש ה‚רווח’. בעת הציור, ניתן להתקרב או לגרור את המפה כדי להוסיף עוד פרטים.",
                 "add_area_finish": "כדי לסיים ציור שטח, יש ללחוץ על `{return}` או ללחוץ שוב על המפרק הראשון או האחרון.",
                 "square_area_h": "ריבוע פינות",
+                "square_area_command": "לתכונות שטח רבות כגון בניינים יש פינות מרובעות. כדי לשנות פינות של שטח, יש ללחוץ עם {rightclick} כפתור ימני על קצה השטח ולבחור בפקודה {orthogonalize} **ריבוע** מתפריט העריכה.",
                 "modify_area_h": "שינוי שטחים",
-                "delete_area_h": "מחיקת שטחים"
+                "delete_area_h": "מחיקת שטחים",
+                "delete_area_command": "כדי למחוק שטח, יש ללחוץ עם {rightclick} כפתור ימני על השטח כדי לבחור אותו ולהציג את תפריט העריכה, לאחר מכן יש להשתמש בפקודה {delete} **מחיקה**."
             },
             "relations": {
                 "title": "יחסים",
                 "intro": "*יחס* הוא סוג מיוחד של תכונה ב־OpenStreetMap המקבצת תחתיה תכונות אחרות. התכונות ששייכות ליחס נקראות *חברות* ולכל חברה יכול להיות *תפקיד* ביחס.",
                 "edit_relation_h": "עריכת יחסים",
+                "edit_relation": "בתחתית עורך התכונות, ניתן להרחיב את האגף „כל היחסים” כדי לראות אם התכונה הנבחרת חברה בקשרים כלשהם. לאחר מגן ניתן ללחוץ על היחס כדי לבחור ולערוך אותו.",
+                "edit_relation_add": "כדי להוסיף תכונה ליחס, יש לבחור את התכונה ואז ללחוץ על הכפתור {add} הוספה באגף „כל היחסים” של עורך התכונות. ניתן לבחור מרשימה של יחסים קרובים או לבחור באפשרות „יחס חדש…”.",
                 "maintain_relation_h": "שימור יחסים",
                 "relation_types_h": "סוגי יחסים",
                 "multipolygon_h": "רבי־מצולעים",
@@ -797,7 +820,9 @@
                 "multipolygon_merge": "מיזוג מגוון קווים או שטחים יגרום ליצירת קשר רב־מצולע חדש שמכיל בתוכו את כל השטחים הנבחרים כחברים בו. iD יבחר את התפקידים הפנימיים והחיצוניים אוטומטית בהתחשב באילו תכונות כלולות בתוך תכונות אחרות.",
                 "turn_restriction_h": "הגבלות פנייה",
                 "route_h": "נתיבים",
-                "boundary_h": "גבולות"
+                "boundary_h": "גבולות",
+                "boundary": "יחס *גבול* הוא קבוצה של תכונה אחת או יותר מסוג קו שמייצרות גבול מנהלי יחד.",
+                "boundary_add": "כדי להוסיף תכונה ליחס גבול, יש לבחור את התכונה ולגלול לאגף „כל היחסים” בעורך התכונות ואז ללחוץ על {plus} כפתור ההוספה כדי להוסיף את התכונה הזאת ליחס קרוב נוכחי או ליחס חדש."
             },
             "imagery": {
                 "title": "תמונות רקע",
@@ -820,6 +845,7 @@
             },
             "field": {
                 "restrictions": {
+                    "title": "עזרה בהגבלת פניות",
                     "about": {
                         "title": "על אודות",
                         "about": "שדה זה מאפשר לך לחקור ולשנות את מגבלות הפנייה. השדה מציג את דגם הצומת הנבחר לרבות דרכים קרובות שמחוברות אליו."
@@ -827,6 +853,9 @@
                     "inspecting": {
                         "restricted": "משמעות הביטוי „מוגבלת” היא שיש מגבלת פנייה, למשל: „אסור לפנות שמאלה”.",
                         "only": "משמעות הביטוי „בלבד” היא שרכב שנוסע בנתיב הזה יכול לבצע בחירה אחת בלבד, למשל „להמשיך ישר בלבד”."
+                    },
+                    "tips": {
+                        "title": "עצות"
                     }
                 }
             }
@@ -1656,6 +1685,9 @@
                         "forward": "קדימה"
                     }
                 },
+                "dispensing": {
+                    "label": "מחלק מרשמים"
+                },
                 "display": {
                     "label": "הצגה"
                 },
@@ -1676,7 +1708,8 @@
                         "no": "אין",
                         "rail": "מסילה מחושמלת",
                         "yes": "יש (לא צוין)"
-                    }
+                    },
+                    "placeholder": "מסילה מחושמלת"
                 },
                 "elevation": {
                     "label": "גובה"
@@ -1720,6 +1753,7 @@
                 "fire_hydrant/type": {
                     "label": "סוג",
                     "options": {
+                        "pillar": "עמוד\\מעל האדמה",
                         "pond": "בריכת דגים\\נוי",
                         "underground": "תת־קרקעי",
                         "wall": "קיר"
@@ -1743,6 +1777,9 @@
                 },
                 "fuel_multi": {
                     "label": "סוגי דלק"
+                },
+                "gauge": {
+                    "label": "מדד"
                 },
                 "gender": {
                     "label": "מגדר",
@@ -1780,6 +1817,7 @@
                     "label": "מעקה"
                 },
                 "hashtags": {
+                    "label": "Hashtag מומלץ",
                     "placeholder": "#דוגמא"
                 },
                 "healthcare": {
@@ -1826,6 +1864,12 @@
                 "information": {
                     "label": "סוג"
                 },
+                "inscription": {
+                    "label": "הקדשה"
+                },
+                "intermittent": {
+                    "label": "תקופתי"
+                },
                 "internet_access": {
                     "label": "גישה לאינטרנט",
                     "options": {
@@ -1862,22 +1906,40 @@
                     "label": "שכבה",
                     "placeholder": "0"
                 },
-                "leaf_cycle_singular": {
+                "leaf_cycle": {
+                    "label": "מחזו עלים",
                     "options": {
+                        "deciduous": "נשירים",
                         "evergreen": "ירוק-עד",
+                        "mixed": "מעורב",
+                        "semi_deciduous": "חצי נשירים",
+                        "semi_evergreen": "חצי ירוק-עד"
+                    }
+                },
+                "leaf_cycle_singular": {
+                    "label": "מחזו עלים",
+                    "options": {
+                        "deciduous": "נשירים",
+                        "evergreen": "ירוק-עד",
+                        "semi_deciduous": "חצי נשירים",
                         "semi_evergreen": "חצי ירוק-עד"
                     }
                 },
                 "leaf_type": {
+                    "label": "סוג עלה",
                     "options": {
+                        "broadleaved": "עלים רחבים",
                         "leafless": "ללא עלים",
-                        "mixed": "מעורב"
+                        "mixed": "מעורב",
+                        "needleleaved": "עלים מחטניים"
                     }
                 },
                 "leaf_type_singular": {
                     "label": "סוג עלה",
                     "options": {
-                        "leafless": "ללא עלה"
+                        "broadleaved": "עלים רחבים",
+                        "leafless": "ללא עלה",
+                        "needleleaved": "עלים מחטניים"
                     }
                 },
                 "leisure": {
@@ -2076,7 +2138,13 @@
                     "label": "סוג",
                     "options": {
                         "downhill": "מורד",
+                        "hike": "טיול רגל",
                         "ice_skate": "החלקרח",
+                        "nordic": "נורדי",
+                        "playground": "גן שעשועים",
+                        "skitour": "סיור סקי",
+                        "sled": "מזחלת",
+                        "sleigh": "מזחלת",
                         "snow_park": "פארק שלג"
                     }
                 },
@@ -2117,10 +2185,29 @@
                 "railway": {
                     "label": "סוג"
                 },
+                "railway/position": {
+                    "label": "אבן דרך",
+                    "placeholder": "מרחק עד עשרון (123.4)"
+                },
                 "railway/signal/direction": {
+                    "label": "כיוון",
                     "options": {
+                        "backward": "אחורה",
+                        "both": "שניהם \\ כולם",
                         "forward": "קדימה"
                     }
+                },
+                "rating": {
+                    "label": "דירוג חשמל"
+                },
+                "recycling_accepts": {
+                    "label": "מסכים"
+                },
+                "ref": {
+                    "label": "מספר הפניה"
+                },
+                "ref/isil": {
+                    "label": "קוד ISIL"
                 },
                 "ref_aeroway_gate": {
                     "label": "מספר שער"
@@ -2173,10 +2260,26 @@
                 "route_master": {
                     "label": "סוג"
                 },
+                "sac_scale": {
+                    "label": "דרגת קושי",
+                    "options": {
+                        "alpine_hiking": "T4: טיול אלפי",
+                        "demanding_alpine_hiking": "T5: טיול אלפי קשה",
+                        "demanding_mountain_hiking": "T3: טיול הרים  קשה",
+                        "difficult_alpine_hiking": "T6: טיול אלפי קשה מאוד",
+                        "hiking": "T1:  טיול רגל",
+                        "mountain_hiking": "T2: טיול הרים"
+                    },
+                    "placeholder": "טיול הרים, טיול אלפים"
+                },
+                "sanitary_dump_station": {
+                    "label": "תחנת סילוק"
+                },
                 "seasonal": {
                     "label": "עונתי"
                 },
                 "second_hand": {
+                    "label": "מכירת משומשים",
                     "options": {
                         "no": "אין",
                         "only": "בלבד",
@@ -2194,7 +2297,10 @@
                     "label": "שירותים"
                 },
                 "service_rail": {
-                    "label": "סוג שירות"
+                    "label": "סוג שירות",
+                    "options": {
+                        "yard": "גינה"
+                    }
                 },
                 "service_times": {
                     "label": "שעות השירות"
@@ -2224,6 +2330,9 @@
                 },
                 "social_facility": {
                     "label": "סוג"
+                },
+                "social_facility_for": {
+                    "label": "כמות אנשים ששורתו"
                 },
                 "source": {
                     "label": "מקורות"
@@ -2320,6 +2429,7 @@
                     "placeholder": "יש, אין, איסוף עצמי בלבד…"
                 },
                 "toilets/disposal": {
+                    "label": "סילוק",
                     "options": {
                         "bucket": "דלי",
                         "chemical": "כימיים",
@@ -2356,7 +2466,8 @@
                 "traffic_signals/direction": {
                     "label": "כיוון",
                     "options": {
-                        "backward": "אחורה"
+                        "backward": "אחורה",
+                        "forward": "קדימה"
                     }
                 },
                 "trail_visibility": {
@@ -2375,9 +2486,6 @@
                 "tunnel": {
                     "label": "סוג",
                     "placeholder": "בררת מחדל"
-                },
-                "vending": {
-                    "label": "סוגי הטובין"
                 },
                 "visibility": {
                     "label": "ראות",
@@ -2452,6 +2560,7 @@
                 "windings/configuration": {
                     "options": {
                         "delta": "דלטא",
+                        "leblanc": "Leblanc",
                         "open": "פתוח",
                         "open-delta": "דלטא פתוח",
                         "zigzag": "זיגזג"
@@ -3138,6 +3247,14 @@
                 "building/entrance": {
                     "name": "כניסה\\יציאה"
                 },
+                "building/farm": {
+                    "name": "בית חווה",
+                    "terms": "בית חווה"
+                },
+                "building/farm_auxiliary": {
+                    "name": "חווה",
+                    "terms": "חווה"
+                },
                 "building/garage": {
                     "name": "מוסך",
                     "terms": "מוסך"
@@ -3182,13 +3299,33 @@
                     "name": "מבנה ציבור",
                     "terms": "בניין ציבורי"
                 },
+                "building/residential": {
+                    "name": "בניין מגורים",
+                    "terms": "בניין מגורים"
+                },
+                "building/retail": {
+                    "name": "בניין קמעוני",
+                    "terms": "בניין קמעוני"
+                },
                 "building/roof": {
                     "name": "גג",
                     "terms": "גג"
                 },
+                "building/ruins": {
+                    "name": "בניין הרוס",
+                    "terms": "בניין הרוס"
+                },
                 "building/school": {
                     "name": "בניין בית ספר",
                     "terms": "מבנה בית ספר, בניין ביצפר, מבנה ביצפר"
+                },
+                "building/service": {
+                    "name": "בניין שירות",
+                    "terms": "בניין שירות"
+                },
+                "building/shed": {
+                    "name": "צריף",
+                    "terms": "צריף"
                 },
                 "building/stable": {
                     "name": "אורווה",
@@ -3197,6 +3334,14 @@
                 "building/stadium": {
                     "name": "אצטדיון",
                     "terms": "אצטדיון"
+                },
+                "building/static_caravan": {
+                    "name": "RV סטטי",
+                    "terms": "RV סטטי"
+                },
+                "building/temple": {
+                    "name": "מקדש",
+                    "terms": "מקדש"
                 },
                 "building/train_station": {
                     "name": "תחנת רכבת"
@@ -3232,9 +3377,21 @@
                     "name": "בונה סירות",
                     "terms": "בונה סירות"
                 },
+                "craft/bookbinder": {
+                    "name": "כורך ספרים",
+                    "terms": "כורך ספרים"
+                },
                 "craft/brewery": {
                     "name": "מבשלת בירה",
                     "terms": "מבשלת בירה"
+                },
+                "craft/carpenter": {
+                    "name": "נגר",
+                    "terms": "נגר"
+                },
+                "craft/carpet_layer": {
+                    "name": "מתקין שטיחים",
+                    "terms": "מתקין שטיחים"
                 },
                 "craft/caterer": {
                     "name": "הסעדה",
@@ -3256,9 +3413,17 @@
                     "name": "מזקקה",
                     "terms": "מזקקה"
                 },
+                "craft/dressmaker": {
+                    "name": "תופרת",
+                    "terms": "תופרת"
+                },
                 "craft/electrician": {
                     "name": "חשמלאי",
                     "terms": "חשמלאי"
+                },
+                "craft/electronics_repair": {
+                    "name": "חנות תיקון אלקטרוניקה",
+                    "terms": "חנות תיקון אלקטרוניקה"
                 },
                 "craft/gardener": {
                     "name": "גנן",
@@ -3268,9 +3433,19 @@
                     "name": "שירות מיזוג מרכזי",
                     "terms": "שירות מיזוג מרכזי"
                 },
+                "craft/jeweler": {
+                    "name": "תכשיטן"
+                },
                 "craft/key_cutter": {
                     "name": "שכפול מפתחות",
                     "terms": "שכפול מפתחות"
+                },
+                "craft/locksmith": {
+                    "name": "מנעולן"
+                },
+                "craft/metal_construction": {
+                    "name": "נפח",
+                    "terms": "נפח"
                 },
                 "craft/optician": {
                     "name": "אופטיקאי"
@@ -3291,9 +3466,44 @@
                     "name": "שרברב",
                     "terms": "שרברב"
                 },
+                "craft/pottery": {
+                    "name": "כלי חרס",
+                    "terms": "כלי חרס"
+                },
+                "craft/roofer": {
+                    "name": "מתקין גגות",
+                    "terms": "מתקין גגות"
+                },
+                "craft/sawmill": {
+                    "name": "מנסרה",
+                    "terms": "מנסרה"
+                },
                 "craft/sculptor": {
                     "name": "פסל",
                     "terms": "פסל"
+                },
+                "craft/shoemaker": {
+                    "name": "סנדלר",
+                    "terms": "סנדלר"
+                },
+                "craft/tailor": {
+                    "name": "חיט"
+                },
+                "craft/tiler": {
+                    "name": "מתקין אריחים",
+                    "terms": "מתקין אריחים"
+                },
+                "craft/tinsmith": {
+                    "name": "פחח",
+                    "terms": "פחח"
+                },
+                "craft/upholsterer": {
+                    "name": "רפד",
+                    "terms": "רפד"
+                },
+                "craft/watchmaker": {
+                    "name": "שען",
+                    "terms": "שען"
                 },
                 "craft/winery": {
                     "name": "יקב",
@@ -3303,9 +3513,116 @@
                     "name": "תחנת אמבולנס",
                     "terms": "תחנת אמבולנס"
                 },
+                "emergency/defibrillator": {
+                    "name": "דפיברילטור",
+                    "terms": "דפיברילטור"
+                },
                 "emergency/fire_hydrant": {
                     "name": "ברז כיבוי אש",
                     "terms": "ברז כיבוי אש"
+                },
+                "emergency/phone": {
+                    "name": "טלפון חרום",
+                    "terms": "טלפון חרום"
+                },
+                "emergency/water_tank": {
+                    "name": "מיכל מים חרום",
+                    "terms": "מיכל מים חרום"
+                },
+                "emergency/yes": {
+                    "name": "כניסת חירום"
+                },
+                "entrance": {
+                    "name": "כניסה\\יציאה",
+                    "terms": "כניסה\\יציאה"
+                },
+                "footway/crossing": {
+                    "name": "מעבר חציה מוגבה",
+                    "terms": "מעבר חציה מוגבה"
+                },
+                "footway/crossing-raised": {
+                    "name": "מעבר חציה מוגבה",
+                    "terms": "מעבר חציה מוגבה"
+                },
+                "footway/crosswalk": {
+                    "name": "מעבר חציה",
+                    "terms": "מעבר חציה"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "מעבר חציה מוגבה",
+                    "terms": "מעבר חציה מוגבה"
+                },
+                "footway/sidewalk": {
+                    "name": "מדרכה",
+                    "terms": "מדרכה"
+                },
+                "ford": {
+                    "name": "מקום צליחה",
+                    "terms": "מקום צליחה"
+                },
+                "golf/bunker": {
+                    "name": "מכשול חול",
+                    "terms": "מכשול חול"
+                },
+                "golf/fairway": {
+                    "name": "אזור פתוח בגולף",
+                    "terms": "אזור פתוח בגולף"
+                },
+                "golf/green": {
+                    "name": "דשא סביב חור גולף",
+                    "terms": "דשא סביב חור גולף"
+                },
+                "golf/hole": {
+                    "name": "חור גוף",
+                    "terms": "חור גוף"
+                },
+                "golf/lateral_water_hazard_area": {
+                    "name": "מכשול מים",
+                    "terms": "מכשול מים"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "מכשול מים",
+                    "terms": "מכשול מים"
+                },
+                "golf/rough": {
+                    "name": "שטח קשה בגולף",
+                    "terms": "שטח קשה בגולף"
+                },
+                "golf/tee": {
+                    "name": "עמדת חביטה בגולף",
+                    "terms": "עמדת חביטה בגולף"
+                },
+                "golf/water_hazard_area": {
+                    "name": "מכשול מים",
+                    "terms": "מכשול מים"
+                },
+                "golf/water_hazard_line": {
+                    "name": "מכשול מים",
+                    "terms": "מכשול מים"
+                },
+                "healthcare": {
+                    "name": "מוסד טיפול בריאותי",
+                    "terms": "מוסד טיפול בריאותי"
+                },
+                "healthcare/alternative": {
+                    "name": "בריאות אלטרנטיבי",
+                    "terms": "בריאות אלטרנטיבי"
+                },
+                "healthcare/alternative/chiropractic": {
+                    "name": "כירופרקט",
+                    "terms": "כירופרקט"
+                },
+                "healthcare/audiologist": {
+                    "name": "אודיולוג",
+                    "terms": "אודיולוג"
+                },
+                "healthcare/birthing_center": {
+                    "name": "מתקן לידה",
+                    "terms": "מתקן לידה"
+                },
+                "healthcare/blood_donation": {
+                    "name": "מרכז תרומת דם",
+                    "terms": "מרכז תרומת דם"
                 },
                 "healthcare/hospice": {
                     "name": "הוספיס",
@@ -3315,9 +3632,21 @@
                     "name": "מיילדת",
                     "terms": "מיילדת"
                 },
+                "healthcare/occupational_therapist": {
+                    "name": "מרפא בעיסוק",
+                    "terms": "מרפא בעיסוק"
+                },
+                "healthcare/optometrist": {
+                    "name": "אופטומטריסט",
+                    "terms": "אופטומטריסט"
+                },
                 "healthcare/physiotherapist": {
                     "name": "פזיווטרפיה",
                     "terms": "פזיווטרפיה"
+                },
+                "healthcare/podiatrist": {
+                    "name": "פודיאטר",
+                    "terms": "פודיאטר"
                 },
                 "healthcare/psychotherapist": {
                     "name": "פסיכוטרפיסט",
@@ -3327,20 +3656,140 @@
                     "name": "מוסד שיקומי",
                     "terms": "מוסד שיקומי"
                 },
+                "healthcare/speech_therapist": {
+                    "name": "קלינאית תקשורת",
+                    "terms": "קלינאית תקשורת"
+                },
                 "highway": {
                     "name": "כביש בין-עירוני"
+                },
+                "highway/crossing": {
+                    "name": "מעבר חציה",
+                    "terms": "מעבר חציה"
+                },
+                "highway/crossing-raised": {
+                    "name": "מעבר חציה מוגבה",
+                    "terms": "מעבר חציה מוגבה"
+                },
+                "highway/crosswalk": {
+                    "name": "מעבר חציה",
+                    "terms": "מעבר חציה"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "מעבר חציה מוגבה",
+                    "terms": "מעבר חציה מוגבה"
+                },
+                "highway/cycleway": {
+                    "name": "מסלול אופניים",
+                    "terms": "מסלול אופניים"
+                },
+                "highway/elevator": {
+                    "name": "מעלית",
+                    "terms": "מעלית"
                 },
                 "highway/footway": {
                     "name": "דרך רגל",
                     "terms": "דרך רגל"
                 },
+                "highway/give_way": {
+                    "name": "תן זכות קדימה",
+                    "terms": "תן זכות קדימה"
+                },
+                "highway/mini_roundabout": {
+                    "name": "מעגל תנועה קטן",
+                    "terms": "מעגל תנועה קטן"
+                },
                 "highway/path": {
                     "name": "שביל",
                     "terms": "שביל"
                 },
+                "highway/pedestrian_area": {
+                    "name": "אזור רק עם תנועה רגלית",
+                    "terms": "אזור רק עם תנועה רגלית"
+                },
+                "highway/pedestrian_line": {
+                    "name": "רחוב רק עם תנועה רגלית",
+                    "terms": "רחוב רק עם תנועה רגלית"
+                },
+                "highway/primary": {
+                    "name": "כביש ראשי",
+                    "terms": "כביש ראשי"
+                },
+                "highway/primary_link": {
+                    "name": "חיבור ראשי",
+                    "terms": "חיבור ראשי"
+                },
+                "highway/raceway": {
+                    "name": "מסלול מרוצים (מונע)",
+                    "terms": "מסלול מרוצים (מונע)"
+                },
+                "highway/residential": {
+                    "name": "כביש באזור מגורים",
+                    "terms": "כביש באזור מגורים"
+                },
+                "highway/rest_area": {
+                    "name": "אזור מנוחה",
+                    "terms": "אזור מנוחה"
+                },
+                "highway/road": {
+                    "name": "כביש לא ידוע",
+                    "terms": "כביש לא ידוע"
+                },
+                "highway/secondary": {
+                    "name": "כביש משני",
+                    "terms": "כביש משני"
+                },
+                "highway/secondary_link": {
+                    "name": "חיבור משני",
+                    "terms": "חיבור משני"
+                },
+                "highway/service": {
+                    "name": "כבישי שירות",
+                    "terms": "כבישי שירות"
+                },
+                "highway/service/alley": {
+                    "name": "סמטה",
+                    "terms": "סמטה"
+                },
+                "highway/speed_camera": {
+                    "name": "מצלמת מהירות",
+                    "terms": "מצלמת מהירות"
+                },
+                "highway/stop": {
+                    "name": "תמרור עצור",
+                    "terms": "תמרור עצור"
+                },
+                "historic": {
+                    "name": "אתר היסטורי",
+                    "terms": "אתר היסטורי"
+                },
+                "historic/archaeological_site": {
+                    "name": "אתר ארכיאולוגי",
+                    "terms": "אתר ארכיאולוגי"
+                },
+                "historic/boundary_stone": {
+                    "name": "אבן גבול",
+                    "terms": "אבן גבול"
+                },
                 "historic/castle": {
                     "name": "טירה",
                     "terms": "טירה"
+                },
+                "historic/memorial": {
+                    "name": "אתר הנצחה",
+                    "terms": "אתר הנצחה"
+                },
+                "historic/monument": {
+                    "name": "מונומנט",
+                    "terms": "מונומנט"
+                },
+                "historic/ruins": {
+                    "name": "אתר חורבן",
+                    "terms": "אתר חורבן"
+                },
+                "historic/tomb": {
+                    "name": "קבר",
+                    "terms": "קבר"
                 },
                 "landuse/allotments": {
                     "name": "גינה קהילתית"
@@ -3349,6 +3798,82 @@
                     "name": "בית קברות",
                     "terms": "בית קברות"
                 },
+                "landuse/forest": {
+                    "name": "יער",
+                    "terms": "יער"
+                },
+                "landuse/grass": {
+                    "name": "דשא",
+                    "terms": "דשא"
+                },
+                "landuse/harbour": {
+                    "name": "מזח",
+                    "terms": "מזח"
+                },
+                "landuse/industrial": {
+                    "name": "אזור תעשיה",
+                    "terms": "אזור תעשיה"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "משחטה",
+                    "terms": "משחטה"
+                },
+                "landuse/landfill": {
+                    "name": "מטמנה",
+                    "terms": "מטמנה"
+                },
+                "landuse/meadow": {
+                    "name": "אחו",
+                    "terms": "אחו"
+                },
+                "landuse/military": {
+                    "name": "אזור צבאי",
+                    "terms": "אזור צבאי"
+                },
+                "landuse/military/airfield": {
+                    "name": "שדה תעופה צבאי",
+                    "terms": "שדה תעופה צבאי"
+                },
+                "landuse/military/barracks": {
+                    "name": "בסיס צבאי",
+                    "terms": "בסיס צבאי"
+                },
+                "landuse/military/bunker": {
+                    "name": "בונקר צבאי",
+                    "terms": "בונקר צבאי"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "נקודת ביקורת",
+                    "terms": "נקודת ביקורת"
+                },
+                "landuse/military/danger_area": {
+                    "name": "אזור מסוכן",
+                    "terms": "אזור מסוכן"
+                },
+                "landuse/military/naval_base": {
+                    "name": "בסיס חיל ים",
+                    "terms": "בסיס חיל ים"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "אתר פיצוץ גרעיני",
+                    "terms": "אתר פיצוץ גרעיני"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "מסלול מכשולים",
+                    "terms": "מסלול מכשולים"
+                },
+                "landuse/military/office": {
+                    "name": "משרד צבאי",
+                    "terms": "משרד צבאי"
+                },
+                "landuse/military/range": {
+                    "name": "אזור ירי צבאי",
+                    "terms": "אזור ירי צבאי"
+                },
+                "landuse/military/training_area": {
+                    "name": "אזור אימונים",
+                    "terms": "אזור אימונים"
+                },
                 "landuse/orchard": {
                     "name": "פרדס",
                     "terms": "פרדס"
@@ -3356,6 +3881,22 @@
                 "landuse/quarry": {
                     "name": "מחצבה",
                     "terms": "מחצבה"
+                },
+                "landuse/religious": {
+                    "name": "אזור דתי",
+                    "terms": "אזור דתי"
+                },
+                "landuse/residential": {
+                    "name": " אזור מגורים",
+                    "terms": " אזור מגורים"
+                },
+                "landuse/retail": {
+                    "name": "אזור מסחרי",
+                    "terms": "אזור מסחרי"
+                },
+                "landuse/vineyard": {
+                    "name": "כרם",
+                    "terms": "כרם"
                 },
                 "leisure/bowling_alley": {
                     "name": "אולם כדורת",
@@ -4745,18 +5286,6 @@
                     "name": "אין פניית פרסה",
                     "terms": "אין פניית פרסה"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "פנייה שמאלה בלבד",
-                    "terms": "פנייה שמאלה בלבד"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "פנייה ימינה בלבד",
-                    "terms": "פנייה ימינה בלבד"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "אין פניות",
-                    "terms": "אין פניות"
-                },
                 "type/route": {
                     "name": "נתיב",
                     "terms": "נתיב"
@@ -5050,7 +5579,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "מפת אוסטריה מבוסס על מידע ממשלתי",
+                "description": " מפת אוסטריה מבוסס על מידע ממשלתי",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -5111,9 +5640,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "אריחי מפה מאת Stamen Design, תחת הרשיון CC BY 3.0"
-                },
                 "name": "תווי שטח מסטודיו Stamen"
             },
             "tf-cycle": {

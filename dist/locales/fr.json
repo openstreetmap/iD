@@ -1,5 +1,8 @@
 {
     "fr": {
+        "icons": {
+            "undo": "annuler"
+        },
         "modes": {
             "add_area": {
                 "title": "Polygone",
@@ -760,7 +763,7 @@
                 "backups_h": "Sauvegarde automatique",
                 "backups": "Si vous ne pouvez pas terminer vos modifications tout de suite, par exemple si votre ordinateur s’éteint ou si vous fermez votre navigateur, votre travail est enregistré. Vous pouvez revenir plus tard (avec le même navigateur, sur la même ordinateur) et iD vous proposera de reprendre là où vous vous étiez arrêté.",
                 "keyboard_h": "Raccourcis clavier",
-                "keyboard": "Vous pouvez voir une liste de raccourcis clavier en pressant la touche `?`."
+                "keyboard": "Vous pouvez voir une liste de raccourcis clavier en appuyant sur la touche `?`."
             },
             "feature_editor": {
                 "title": "Éditeur d'élément",
@@ -779,7 +782,9 @@
             },
             "points": {
                 "title": "Points",
+                "intro": "Les *points* peuvent être utilisés pour représenter des éléments comme des magasins, restaurants ou monuments. Ils indiquent une position précise et décrivent ce qu'il y a à cet endroit. ",
                 "add_point_h": "Ajouter des Points",
+                "add_point_finish": "Pour placer un nouveau point sur la carte, placer le curseur de la souris où le point doit aller, puis effectuer un {leftclick} clic gauche ou un appui sur la barre d'Espace.",
                 "move_point_h": "Déplacer des Points",
                 "delete_point_h": "Supprimer des Points "
             },
@@ -787,10 +792,16 @@
                 "title": "Lignes",
                 "add_line_h": "Ajouter des Lignes",
                 "modify_line_h": "Modifier des Lignes",
+                "connect_line_h": "Connecter des lignes",
+                "disconnect_line_h": "Séparer des lignes",
                 "move_line_h": "Déplacer des Lignes",
                 "delete_line_h": "Supprimer des lignes"
             },
             "areas": {
+                "title": "Polygones",
+                "intro": "Les *polygones* sont utilisés pour montrer les délimitations d'éléments comme des lacs, des bâtiments et des zones résidentielles. Les polygones doivent être dessinés le long du bord des éléments qu'ils représentent, par exemple autour du pied d'un bâtiment.",
+                "point_or_area_h": "Des points ou un polygone ?",
+                "point_or_area": "De nombreux éléments peuvent être représentés par des points ou des polygones. Vous devriez cartographier les bâtiments et les contours de propriétés avec des polygones lorsque c'est possible. Placez des points à l'intérieur d'un bâtiment pour représenter des entreprises, des équipements et d'autres éléments se trouvant à l'intérieur.",
                 "add_area_h": "Ajouter des polygones",
                 "square_area_h": "Donner une forme orthogonale.",
                 "modify_area_h": "Modifier des polyognes",
@@ -1063,8 +1074,8 @@
             },
             "startediting": {
                 "title": "Sortir du tutoriel et contribuer",
-                "help": "Vous êtes maintenant prêt pour contribuer à OpenStreetMap !{br}Vous pouvez recommencer ce tutorial à tout moment ou lire plus de documentation en cliquant sur le {button} bouton Aide ou en pressant la touche '{key}'.",
-                "shortcuts": "Vous pouvez voir une liste des commandes avec leur raccourci clavier en pressant la touche '{key}'.",
+                "help": "Vous êtes maintenant prêt pour contribuer à OpenStreetMap !{br}Vous pouvez recommencer ce tutorial à tout moment ou lire plus de documentation en cliquant sur le bouton Aide {button} ou en appuyant sur la touche '{key}'.",
+                "shortcuts": "Vous pouvez voir une liste des commandes avec leurs raccourcis claviers en appuyant sur la touche '{key}'.",
                 "save": "N'oubliez pas de sauver régulièrement vos modifications !",
                 "start": "Commencer à cartographier !"
             }
@@ -1842,6 +1853,9 @@
                 "indoor": {
                     "label": "Intérieur"
                 },
+                "industrial": {
+                    "label": "Type"
+                },
                 "information": {
                     "label": "Type"
                 },
@@ -1961,6 +1975,10 @@
                 "maxspeed": {
                     "label": "Vitesse maximale autorisée",
                     "placeholder": "30, 50, 70, 90, etc."
+                },
+                "maxspeed/advisory": {
+                    "label": "Vitesse conseillée",
+                    "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
                     "label": "Durée maximale"
@@ -2550,6 +2568,17 @@
                     "label": "Type",
                     "placeholder": "Défaut"
                 },
+                "usage_rail": {
+                    "label": "Utilisation",
+                    "options": {
+                        "branch": "Secondaire",
+                        "industrial": "Industrielle",
+                        "main": "Principale",
+                        "military": "Militaire",
+                        "test": " Voie de test pour les nouveaux trains",
+                        "tourism": "Touristique"
+                    }
+                },
                 "vending": {
                     "label": "Marchandise proposée"
                 },
@@ -2730,6 +2759,10 @@
                 "aeroway/terminal": {
                     "name": "Terminal d'aéroport",
                     "terms": "Terminal"
+                },
+                "allotments/plot": {
+                    "name": "Parcelle dans un jardin familial",
+                    "terms": "<translate with synonyms or related terms for 'Community Garden Plot', separated by commas>"
                 },
                 "amenity": {
                     "name": "Équipement"
@@ -2959,6 +2992,10 @@
                     "name": "Marché",
                     "terms": "Marché, Place de marché"
                 },
+                "amenity/monastery": {
+                    "name": "Terrain de monastère",
+                    "terms": "<translate with synonyms or related terms for 'Monastery Grounds', separated by commas>"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Parking pour motocyclettes",
                     "terms": "Parc à motos,Stationnement motos"
@@ -3163,6 +3200,10 @@
                     "name": "Distributeur de cigarettes",
                     "terms": "distributeur de cigarettes, distributeur à cigarettes, cigarettes, distributeur automatique de cigarettes, machine à cigarettes, vente automatique de cigarettes, vente de cigarettes, vente cigarettes, vending machine cigarettes"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Distributeur de café",
+                    "terms": "Distributeur de café"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Distributeur de préservatifs",
                     "terms": "distributeur de préservatifs, distributeur à préservatifs, préservatifs, distributeur automatique de préservatifs, machine à préservatifs, vente automatique de préservatifs, vente de préservatifs, vente préservatifs, vending machine condoms, capotes, condoms"
@@ -3171,6 +3212,13 @@
                     "name": "Distributeur de boissons",
                     "terms": "distributeur de boissons, distributeur à boissons, boissons, distributeur automatique de boissons, machine à boissons, machine à café, vente automatique de boissons, vente de boissons, vente boissons, eau, café, thé, soda, jus de fruit, vending machine drinks, drinks"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Distributeur de matériel éléctronique",
+                    "terms": "<translate with synonyms or related terms for 'Electronics Vending Machine', separated by commas>"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "terms": "<translate with synonyms or related terms for 'Flat Coin Vending Machine', separated by commas>"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Distributeur de sacs pour excréments d'animaux",
                     "terms": "distributeur de sacs pour excréments d'animaux, distributeur à sacs pour excréments d'animaux, sacs pour excréments d'animaux, sacs à excréments d'animaux, sacs à crottes, distributeur automatique de sacs pour excréments d'animaux, distributeur automatique de sacs à crottes, machine à sacs pour excréments d'animaux, machine à sacs à crottes, vente de sacs pour excréments d'animaux, vente de sacs à crottes, vente sacs pour excréments d'animaux, vente sacs à crottes, vending machine excrement bags, excrement bags"
@@ -3178,6 +3226,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Distributeur de produits d'hygiène féminine",
                     "terms": "machine distributrice de produits d'hygiène féminine, distributeur de serviettes hygiéniques, distributeur de tampons, distributeur de tampon, serviette, tampon, cup, distributeur de cup, menstruations"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Distributeur d'aliments",
+                    "terms": "Distributeur d'aliments"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Pompe à essence",
+                    "terms": "Distributeur de carburant"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Distributeur de glace",
+                    "terms": "Distributeur de glace"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Distributeur de journaux"
@@ -3197,6 +3257,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Distributeur de titres de transport",
                     "terms": "distributeur de titres de transport, distributeur à titres de transport, titres de transport, tickets de transport, distributeur automatique de titres de transport, guichet automatique, machine à titres de transport, vente automatique de titres de transport, vente de titres de transport, vente titres de transport, tickets de train, tickets de bus, tickets de métro, tickets de RER, tickets train, tickets bus, tickets métro, tickets RER, billets de train, billets de bus, billets de métro, billets de RER, billets train, billets bus, billets métro, billets RER, titres de train, titres de bus, titres de métro, titres de RER, vending machine public transport tickets, public transport tickets, tickets, billets, train, bus, métro, RER"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Distributeur de timbres",
+                    "terms": "<translate with synonyms or related terms for 'Postage Vending Machine', separated by commas>"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Distributeur de snacks",
@@ -3525,7 +3589,7 @@
                 },
                 "building/stadium": {
                     "name": "Bâtiment du stade",
-                    "terms": "<translate with synonyms or related terms for 'Stadium Building', separated by commas>"
+                    "terms": "Stade, Tribune."
                 },
                 "building/static_caravan": {
                     "name": "Mobil home fixe",
@@ -4001,6 +4065,10 @@
                     "name": "Bretelle d'autoroute",
                     "terms": "Bretelle d'autoroute"
                 },
+                "highway/passing_place": {
+                    "name": "Aire de croisement",
+                    "terms": "Aire de croisement"
+                },
                 "highway/path": {
                     "name": "Chemin non carrossable",
                     "terms": "Chemin"
@@ -4360,6 +4428,10 @@
                     "name": "Salle de jeux",
                     "terms": "<translate with synonyms or related terms for 'Amusement Arcade', separated by commas>"
                 },
+                "leisure/beach_resort": {
+                    "name": "Station balnéaire",
+                    "terms": "Station balnéaire, plage."
+                },
                 "leisure/bird_hide": {
                     "name": "Observatoire ornithologique",
                     "terms": "Observatoire d'oiseaux"
@@ -4476,6 +4548,10 @@
                     "name": "Réserve naturelle",
                     "terms": "Zone protégée"
                 },
+                "leisure/outdoor_seating": {
+                    "name": "Aire des places en terrasse",
+                    "terms": "<translate with synonyms or related terms for 'Outdoor Seating Area', separated by commas>"
+                },
                 "leisure/park": {
                     "name": "Parc",
                     "terms": "Parc"
@@ -4554,7 +4630,7 @@
                 },
                 "leisure/resort": {
                     "name": "Complexe touristique , Village de vacances",
-                    "terms": "Complexe hôtelier, Complexe touristique, Village de vacances, Spa, détente, Relaxation, Station thermale."
+                    "terms": "Complexe hôtelier, Complexe touristique, Village de vacances, Spa, détente, Relaxation, Station thermale, Lieu de séjour, Hôtel."
                 },
                 "leisure/running_track": {
                     "name": "Piste de course (à pieds)",
@@ -4603,6 +4679,10 @@
                 "man_made/adit": {
                     "name": "Entrée de mine",
                     "terms": "Entrée de galerie de mine,Entrée de galerie"
+                },
+                "man_made/antenna": {
+                    "name": "Antenne radioélectrique",
+                    "terms": "Antenne radioélectrique"
                 },
                 "man_made/breakwater": {
                     "name": "Brise-lames",
@@ -4654,6 +4734,10 @@
                 "man_made/observation": {
                     "name": "Tour d'observation",
                     "terms": "Tour d'observation, Mirador"
+                },
+                "man_made/observatory": {
+                    "name": "Observatoire",
+                    "terms": "Observatoire"
                 },
                 "man_made/petroleum_well": {
                     "name": "Puits de pétrole",
@@ -4779,6 +4863,10 @@
                     "name": "Lande",
                     "terms": "Bruyère"
                 },
+                "natural/mud": {
+                    "name": "Boue",
+                    "terms": "Boue"
+                },
                 "natural/peak": {
                     "name": "Sommet",
                     "terms": "Pic, Mont"
@@ -4880,7 +4968,7 @@
                 },
                 "office/company": {
                     "name": "Bureau d'entreprise",
-                    "terms": "<translate with synonyms or related terms for 'Corporate Office', separated by commas>"
+                    "terms": "Bureau d'entreprise, Entreprise"
                 },
                 "office/coworking": {
                     "name": "Espace de coworking",
@@ -4903,7 +4991,7 @@
                     "terms": "Agence immobilière"
                 },
                 "office/financial": {
-                    "name": "Bureau d'entreprise financière  ",
+                    "name": "Bureau d'entreprise financière",
                     "terms": "Bureau financier,Établissement financier"
                 },
                 "office/forestry": {
@@ -5192,7 +5280,7 @@
                     "terms": "<translate with synonyms or related terms for 'Ferry Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_light_rail": {
-                    "name": "Station de tramway",
+                    "name": "Station de métro léger",
                     "terms": "<translate with synonyms or related terms for 'Light Rail Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_monorail": {
@@ -5204,11 +5292,11 @@
                     "terms": "<translate with synonyms or related terms for 'Subway Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_train": {
-                    "name": "Gare ferroviaire",
+                    "name": "Quai de gare ferroviaire",
                     "terms": "<translate with synonyms or related terms for 'Train Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_tram": {
-                    "name": "Station de tramway",
+                    "name": "Quai pour tramway",
                     "terms": "<translate with synonyms or related terms for 'Tram Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_trolleybus": {
@@ -5224,7 +5312,7 @@
                     "terms": "<translate with synonyms or related terms for 'Aerialway Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_bus": {
-                    "name": "Arrêt de bus",
+                    "name": "Quai d'arrêt de bus",
                     "terms": "<translate with synonyms or related terms for 'Bus Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_ferry": {
@@ -5232,7 +5320,7 @@
                     "terms": "<translate with synonyms or related terms for 'Ferry Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_light_rail": {
-                    "name": "Station de tramway",
+                    "name": "Station de métro léger",
                     "terms": "<translate with synonyms or related terms for 'Light Rail Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_monorail": {
@@ -5244,11 +5332,11 @@
                     "terms": "<translate with synonyms or related terms for 'Subway Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_train": {
-                    "name": "Gare ferroviaire",
+                    "name": "Quai de gare ferroviaire",
                     "terms": "<translate with synonyms or related terms for 'Train Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_tram": {
-                    "name": "Station de tramway",
+                    "name": "Quai pour tramway",
                     "terms": "<translate with synonyms or related terms for 'Tram Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_trolleybus": {
@@ -5398,7 +5486,7 @@
                     "terms": "Voie ferrée étroite"
                 },
                 "railway/platform": {
-                    "name": "Gare ferroviaire"
+                    "name": "Quai de gare ferroviaire"
                 },
                 "railway/rail": {
                     "name": "Voie ferrée",
@@ -5815,6 +5903,10 @@
                     "name": "Animalerie",
                     "terms": "Animalerie"
                 },
+                "shop/pet_grooming": {
+                    "name": "Salon de toilettage",
+                    "terms": "Salon de toilettage"
+                },
                 "shop/photo": {
                     "name": "Tirage de photos",
                     "terms": "Photographe, Tirage de photos"
@@ -6128,6 +6220,10 @@
                 "type/restriction/only_straight_on": {
                     "name": "Interdiction de bifurquer",
                     "terms": "Interdiction de bifurquer"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Demi-tour obligatoire",
+                    "terms": "Demi-tour obligatoire"
                 },
                 "type/route": {
                     "name": "Itinéraire",
@@ -6484,7 +6580,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles par Stamen Design, sous CC BY 3.0"
+                    "text": "Tuiles par Stamen Design, sous CC-BY 3.0. Données par OpenStreetMap, sous ODbL"
                 },
                 "name": "Stamen Terrain"
             },
@@ -6499,6 +6595,67 @@
                     "text": "Cartes © Thunderforest, données © contributeurs OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Améliorer OpenStreetMap dans la Bay Area",
+                "extendedDescription": "Ce groupe a pour objectif de développer la communauté OpenStreetMap dans le secteur de la Région de la baie de San Francisco. Nos événements sont ouverts à tout le monde, passionné.e.s de l'Open Source, cyclistes, professionnel.le.s de la géomatique, geocachers, ou d'autres encore. Quiconque est intéressé.e par les cartes, la cartographie et les données cartographiques libres est invité.e à rejoindre le groupe et à participer aux événements."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Communauté de cartographie en ligne de State College, Pennsylvanie"
+            },
+            "Code-for-San-Jose-Slack": {
+                "description": "Tout le monde est la bienvenue! Inscrivez-vous sur {signupUrl} et rejoignez le canal #osm."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "Groupe d'utilisateurs OpenStreetMap de Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth et les villes au milieu abondent de personnes créatives et douées en informatique. La volonté de ce groupe est de trouver de nouvelles manières d'utiliser les supers ressources d'OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Réunion pour les passionnés de cartographie dans la région de Philadelphie",
+                "extendedDescription": "GeoPhilly unit les développeurs, les géographes, les passionnés de données et d'open source, les hackers civiques et les drogués de la carte dans l'amour partagé pour les cartes et les histoires qu'elles racontent. Que vous utilisiez des cartes dans votre travail ou que vous souhaitiez en savoir plus, c'est la bonne réunion ! Nos événements essayent d'être ouverts, amicaux, éducatifs et sociaux et vont des happy hours aux présentations rapides voire aux ateliers. Venez créer une communauté géospatiale diversifiée et inspirante à Philadelphie avec nous !"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Améliorer OpenStreetMap dans la région de DC",
+                "extendedDescription": "Nous sommes un groupe de cartographes volontaires qui cherchons à améliorer OpenStreetMap dans la région de DC. Nous essayons aussi de montrer aux autres ce qu'est l'écosystème OSM, l'analyse de données, la cartographie et les SIG. Nous nous réunissons tous les mois à des réunions pour nous concentrer sur une partie de notre ville."
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Le groupe d'utilisateurs d'OSM de Chattanooga"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Cartographes et utilisateurs d'OpenStreetMap, développeurs et passionnés dans la région métropolitaine de New York"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Cartographes et utilisateurs d'OpenStreetMap dans la région de Portland",
+                "extendedDescription": "OpenStreetMap (OSM) est une carte du monde faite par des gens comme vous. C'est une carte que vous construisez et qui est libre comme wikipédia. Voyez osm.org pour plus d'informations et rejoignez-nous à une rencontre pour parler de cartes, contribuer à OSM et s'amuser !"
+            },
+            "OSM-US-Slack": {
+                "name": "Slack d'OpenStreetMap US",
+                "description": "Vous êtes tous les bienvenus ! Enregistrez-vous sur {signupUrl}"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Slack de Maptime Australia",
+                "description": "Enregistrez-vous sur {signupUrl}"
+            },
+            "OSM-AR-telegram": {
+                "extendedDescription": "Rejoignez la communauté pour apprendre davantage sur OpenStreetMap, poser des questions ou participer à nos réunions. Tout le monde est la bienvenue!"
+            },
+            "OSM-AR-twitter": {
+                "name": "Twitter d'OpenStreetMap Argentine",
+                "description": "Suivez-nous sur Twitter à {url}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap sur Reddit",
+                "description": "/r/openstreetmap/ est un super endroit pour en apprendre plus sur OpenStreetMap. Demandez-nous tout ce que vous voulez !"
             }
         }
     }

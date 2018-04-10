@@ -138,7 +138,13 @@ export function rendererFeatures(context) {
     });
 
     defineFeature('boundaries', function isBoundary(entity) {
-        return !!entity.tags.boundary;
+        return (
+            !!entity.tags.boundary
+        ) && !(
+            traffic_roads[entity.tags.highway] ||
+            service_roads[entity.tags.highway] ||
+            paths[entity.tags.highway]
+        );
     });
 
     defineFeature('water', function isWater(entity) {
@@ -483,7 +489,7 @@ export function rendererFeatures(context) {
             var storageDisabled = storage.replace(/;/g, ',').split(',');
             storageDisabled.forEach(features.disable);
         }
-        
+
         var q = utilStringQs(window.location.hash.substring(1));
         if (q.disable_features) {
             var hashDisabled = q.disable_features.replace(/;/g, ',').split(',');

@@ -1,0 +1,22 @@
+{
+    "icon": "horse-riding",
+    "fields": [
+        "name",
+        "horse_stables",
+        "horse_riding",
+        "horse_dressage",
+        "address",
+        "phone",
+        "website",
+        "description"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "trail_riding_station"
+    },
+    "name": "Trail Riding Station",
+    "matchScore": 2.0
+}

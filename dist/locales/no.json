@@ -2917,15 +2917,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Ingen U-sving"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Påbudt venstresving"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Påbudt høyresving"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Ikke tillatt å snu"
-                },
                 "type/route": {
                     "name": "Rute"
                 },

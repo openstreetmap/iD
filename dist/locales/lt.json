@@ -1538,9 +1538,6 @@
                 "trees": {
                     "label": "Medžiai"
                 },
-                "vending": {
-                    "label": "Prekių tipas"
-                },
                 "visibility": {
                     "label": "Matomumas"
                 },
@@ -3164,18 +3161,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Jokio apsisukimo",
                     "terms": "Negalima apsisukti"
-                },
-                "type/restriction/only_left_turn": {
-                    "name": "Sukimas tik į kairę",
-                    "terms": "Tik į kairę"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Sukimas tik į dešinę",
-                    "terms": "Tik į dešinę"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Jokių posūkių",
-                    "terms": "Nėra posūkių"
                 },
                 "type/route": {
                     "name": "Maršrutas",

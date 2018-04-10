@@ -1444,9 +1444,6 @@
                 "trees": {
                     "label": "樹"
                 },
-                "vending": {
-                    "label": "貨類"
-                },
                 "visibility": {
                     "label": "顯隱",
                     "options": {

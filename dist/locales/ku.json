@@ -2,7 +2,7 @@
     "ku": {
         "modes": {
             "add_area": {
-                "title": "Herêm"
+                "title": "Qad"
             },
             "add_line": {
                 "title": "Xêz"
@@ -23,30 +23,85 @@
                 "title": "Çarçik",
                 "key": "S"
             },
+            "straighten": {
+                "key": "S"
+            },
             "delete": {
                 "title": "Jê bibe"
+            },
+            "disconnect": {
+                "key": "D"
+            },
+            "merge": {
+                "key": "C"
+            },
+            "move": {
+                "key": "M"
+            },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                }
             }
         },
         "translate": {
             "localized_translation_name": "Nav"
         },
+        "zoom_in_edit": "Ji bo guherandinê nêzîk bike",
         "login": "têkeve",
         "logout": "derkeve",
         "commit": {
-            "save": "Bar bike",
-            "cancel": "Betal bike"
+            "save": "Bişîne",
+            "cancel": "Betal bike",
+            "deleted": "Hate jêbirin",
+            "created": "Hate afirandin"
+        },
+        "contributors": {
+            "list": "Guherînên {users}",
+            "truncated_list": "Guherînên {users} û {count} yên din"
         },
         "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "source": "Çavkanî",
+                "description": "Danasîn"
+            },
             "history": {
-                "title": "Dîrok"
+                "key": "H",
+                "title": "Dîrok",
+                "version": "Guherto",
+                "edited_by": "Hat guherîn ji alî"
+            },
+            "measurement": {
+                "area": "Qad"
             }
+        },
+        "geometry": {
+            "area": "qad"
+        },
+        "geolocate": {
+            "title": "Cihê min nîşan bide"
         },
         "inspector": {
             "search": "Lêbigere",
+            "feature_list": "Li bireseran bigere",
             "check": {
                 "yes": "Erê",
                 "no": "Na"
             }
+        },
+        "map_data": {
+            "title": "Daneyên nexşeyê",
+            "description": "Daneyên nexşeyê"
+        },
+        "save": {
+            "title": "Qeyd bike"
+        },
+        "zoom": {
+            "in": "Nêzîk bike",
+            "out": "Dûr bike"
         },
         "help": {
             "title": "Alîkarî",
@@ -59,6 +114,232 @@
             },
             "points": {
                 "title": "Nuqte"
+            }
+        },
+        "shortcuts": {
+            "key": {
+                "delete": "Jê bibe"
+            },
+            "editing": {
+                "commands": {
+                    "save": "Guherandinan qeyd bike"
+                }
+            }
+        },
+        "presets": {
+            "fields": {
+                "access": {
+                    "types": {
+                        "access": "Hemû"
+                    }
+                },
+                "address": {
+                    "label": "Adrês",
+                    "placeholders": {
+                        "city": "Bajar",
+                        "city!vn": "Bajar/Bajarok",
+                        "conscriptionnumber": "123",
+                        "country": "Welat",
+                        "county!jp": "Navçe",
+                        "district": "Navçe",
+                        "hamlet": "Mezra",
+                        "housenumber": "123",
+                        "province": "Parêzgeh",
+                        "state": "Dewlet",
+                        "street": "Kolan"
+                    }
+                },
+                "aerialway": {
+                    "label": "Cûre"
+                },
+                "aerialway/summer/access": {
+                    "options": {
+                        "exit": "Derkeve"
+                    }
+                },
+                "aeroway": {
+                    "label": "Cûre"
+                },
+                "amenity": {
+                    "label": "Cûre"
+                },
+                "area/highway": {
+                    "label": "Cûre"
+                },
+                "artwork_type": {
+                    "label": "Cûre"
+                },
+                "barrier": {
+                    "label": "Cûre"
+                },
+                "bicycle_parking": {
+                    "label": "Cûre"
+                },
+                "board_type": {
+                    "label": "Cûre"
+                },
+                "boules": {
+                    "label": "Cûre"
+                },
+                "boundary": {
+                    "label": "Cûre"
+                },
+                "bridge": {
+                    "label": "Cûre"
+                },
+                "bunker_type": {
+                    "label": "Cûre"
+                },
+                "castle_type": {
+                    "label": "Cûre"
+                },
+                "club": {
+                    "label": "Cûre"
+                },
+                "construction": {
+                    "label": "Cûre"
+                },
+                "country": {
+                    "label": "Welat"
+                },
+                "craft": {
+                    "label": "Cûre"
+                },
+                "crossing": {
+                    "label": "Cûre"
+                },
+                "cutting": {
+                    "label": "Cûre"
+                },
+                "direction_cardinal": {
+                    "options": {
+                        "E": "Rojhilat",
+                        "ENE": "Rojhilat-bakurê rojhilat",
+                        "ESE": "Rojhilat-başûrê rojhilat",
+                        "N": "Bakur",
+                        "NE": "Bakurê rojava",
+                        "NNE": "Bakur-bakurê rojhilat",
+                        "NNW": "Bakur-bakurê rojava",
+                        "NW": "Bakurê rojava",
+                        "S": "Başûr",
+                        "SE": "Başûrê rojhilat",
+                        "SSE": "Başûr-başûrê rojhilat",
+                        "SSW": "Başûr-başûrê rojava",
+                        "SW": "Başûrê rojava",
+                        "W": "Rojava",
+                        "WNW": "Rojava-bakurê rojava",
+                        "WSW": "Rojava-başûrê rojava"
+                    }
+                },
+                "electrified": {
+                    "options": {
+                        "no": "Na"
+                    }
+                },
+                "embankment": {
+                    "label": "Cûre"
+                },
+                "entrance": {
+                    "label": "Cûre"
+                },
+                "fax": {
+                    "label": "Faks"
+                },
+                "fire_hydrant/type": {
+                    "label": "Cûre",
+                    "options": {
+                        "wall": "Dîwar"
+                    }
+                },
+                "ford": {
+                    "label": "Cûre"
+                },
+                "generator/source": {
+                    "label": "Çavkanî"
+                },
+                "generator/type": {
+                    "label": "Cûre"
+                },
+                "government": {
+                    "label": "Cûre"
+                },
+                "highway": {
+                    "label": "Cûre"
+                },
+                "historic": {
+                    "label": "Cûre"
+                },
+                "information": {
+                    "label": "Cûre"
+                },
+                "internet_access": {
+                    "options": {
+                        "no": "Na",
+                        "yes": "Erê"
+                    }
+                },
+                "lamp_type": {
+                    "label": "Cûre"
+                },
+                "landuse": {
+                    "label": "Cûre"
+                },
+                "leisure": {
+                    "label": "Cûre"
+                },
+                "man_made": {
+                    "label": "Cûre"
+                },
+                "manhole": {
+                    "label": "Cûre"
+                },
+                "map_type": {
+                    "label": "Cûre"
+                },
+                "memorial": {
+                    "label": "Cûre"
+                },
+                "name": {
+                    "label": "Nav"
+                },
+                "oneway_yes": {
+                    "options": {
+                        "no": "Na",
+                        "yes": "Erê"
+                    }
+                },
+                "parking": {
+                    "label": "Cûre"
+                },
+                "place": {
+                    "label": "Cûre"
+                },
+                "power": {
+                    "label": "Cûre"
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "Na",
+                        "yes": "Erê"
+                    }
+                },
+                "takeaway": {
+                    "options": {
+                        "no": "Na",
+                        "yes": "Erê"
+                    }
+                },
+                "trees": {
+                    "label": "Dar"
+                },
+                "wikipedia": {
+                    "label": "Wîkîpediya"
+                }
+            },
+            "presets": {
+                "landuse/forest": {
+                    "name": "Daristan"
+                }
             }
         }
     }

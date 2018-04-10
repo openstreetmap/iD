@@ -325,6 +325,7 @@ en:
       key: H
       title: History
       selected: "{n} selected"
+      no_history: "No History (New Feature)"
       version: Version
       last_edit: Last Edit
       edited_by: Edited By
@@ -527,15 +528,20 @@ en:
       memberlist: 'Relation members were changed by both you and {user}.'
       tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
-    edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"
-    view_on_osm: "View on OSM"
-    facebook: "Share on Facebook"
-    twitter: "Share on Twitter"
-    google: "Share on Google+"
-    help_html: Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer.
+    thank_you: "Thank you for improving the map."
+    thank_you_location: "Thank you for improving the map around {where}."
+    help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+    view_on_osm: "View Changes on OSM"
+    changeset_id: "Your changeset #: {changeset_id}"
+    like_osm: "Like OpenStreetMap? Connect with others:"
+    more: More
+    events: Events
+    languages: "Languages: {languages}"
+    missing: "Is something missing from this list?"
+    tell_us: "Tell us!"
   confirm:
     okay: "OK"
     cancel: "Cancel"

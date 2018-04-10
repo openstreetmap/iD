@@ -2163,9 +2163,6 @@
                 "trees": {
                     "label": "Drevesa"
                 },
-                "vending": {
-                    "label": "Vrsta dobrin"
-                },
                 "visibility": {
                     "label": "Vidnost",
                     "options": {
@@ -4703,18 +4700,6 @@
                     "name": "Ni mogoče polkrožno obrniti",
                     "terms": "Polkrožno obračanje ni dovoljeno"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Možno je zaviti samo levo",
-                    "terms": "Dovoljeno je zaviti samo levo."
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Možno je zaviti samo desno",
-                    "terms": "Dovoljeno je zaviti samo desn"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Možno je samo nadaljevati naravnost",
-                    "terms": "Zavijanje ni dovoljeno."
-                },
                 "type/route": {
                     "name": "Proga",
                     "terms": "cesta,letalska linija,kolesarska pot,pohodniška pot,linija,pot"
@@ -4944,7 +4929,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Osnovni zemljevid Avstrije, ki temelji na uradnih podatkih",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {

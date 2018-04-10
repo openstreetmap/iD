@@ -1941,6 +1941,9 @@
                     "label": "限制速度",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60..."
+                },
                 "maxstay": {
                     "label": "可停留时间"
                 },
@@ -2512,9 +2515,6 @@
                 "tunnel": {
                     "label": "类型",
                     "placeholder": "默认"
-                },
-                "vending": {
-                    "label": "商品类型"
                 },
                 "visibility": {
                     "label": "能见度",
@@ -4167,7 +4167,7 @@
                     "terms": "检查点,检查站,检查,边检"
                 },
                 "landuse/military/danger_area": {
-                    "name": "危险区域",
+                    "name": "军事危险区域",
                     "terms": "危险区"
                 },
                 "landuse/military/naval_base": {
@@ -5897,18 +5897,6 @@
                     "name": "禁止掉头",
                     "terms": "禁止掉头"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "仅左转",
-                    "terms": "仅左转"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "仅右转",
-                    "terms": "仅右转"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "禁止转向",
-                    "terms": "禁止转向"
-                },
                 "type/route": {
                     "name": "线路",
                     "terms": "路线,路径"
@@ -6202,7 +6190,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "基于政府数据的奥地利底图",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6263,9 +6250,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "地图瓦片由 Stamen 设计，并以 署名 3.0 协议授权"
-                },
                 "name": "Stamen 地形"
             },
             "tf-cycle": {
@@ -6279,6 +6263,13 @@
                     "text": "地图 © Thunderforest，数据 © OpenStreetMap 贡献者"
                 },
                 "name": "Thunderforest 地貌"
+            }
+        },
+        "community": {
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap 印度 - 共同参与的街区绘图",
+                "description": "改进印度的 OpenStreetMap",
+                "extendedDescription": "在印度贡献地图？有了疑问，想要和社区共同交流？点击 {Url} 加入我们，任何问题都很欢迎！"
             }
         }
     }

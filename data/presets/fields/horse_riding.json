@@ -1,0 +1,15 @@
+{
+    "key": "leisure",
+    "type": "check",
+    "label": "Horseback Riding",
+    "strings": {
+        "options": {
+            "undefined": "No",
+            "horse_riding": "Yes"
+        }
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "horse_riding"
+    }
+}

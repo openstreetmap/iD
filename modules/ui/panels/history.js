@@ -96,8 +96,8 @@ export function uiPanelHistory(context) {
 
 
     function redraw(selection) {
-        var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
-            singular = selected.length === 1 ? selected[0] : null;
+        var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+        var singular = selected.length === 1 ? selected[0] : null;
 
         osm = context.connection();
 
@@ -111,6 +111,13 @@ export function uiPanelHistory(context) {
         if (!singular) return;
 
         var entity = context.entity(singular);
+
+        if (!entity.version) {
+            selection
+                .append('div')
+                .text(t('info_panels.history.no_history'));
+            return;
+        }
 
         var list = selection
             .append('ul');

@@ -1,5 +1,8 @@
 {
     "pl": {
+        "icons": {
+            "undo": "Cofnij"
+        },
         "modes": {
             "add_area": {
                 "title": "Obszar",
@@ -286,6 +289,16 @@
                     "create": "Dodano zakaz/nakaz skrętu",
                     "delete": "Usunięto zakaz/nakaz skrętu"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "via": "Przez"
+            },
+            "help": {
+                "from": "Z",
+                "via": "PRZEZ",
+                "to": "DO"
             }
         },
         "undo": {
@@ -765,6 +778,13 @@
                 "using": "By użyć śladu GPS do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli zostanie on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na {data} **Dane mapy** po prawej stronie by włączyć, wyłączyć lub przybliżyć widok twojego śladu GPS.",
                 "tracing": "Ślad GPS nie jest bezpośrednio zapisywany na serwerach OpenStreetMap - najlepszym sposobem na wykorzystanie go jest rysowanie mapy na jego podstawie.",
                 "upload": "Możesz także wysłać [swój ślad GPS na serwery OpenStreetMap](https://www.openstreetmap.org/trace/create), pozwalając tym samym innym użytkownikom na korzystanie z niego."
+            },
+            "field": {
+                "restrictions": {
+                    "tips": {
+                        "title": "Wskazówki"
+                    }
+                }
             }
         },
         "intro": {
@@ -2492,9 +2512,6 @@
                 "tunnel": {
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
-                },
-                "vending": {
-                    "label": "Rodzaje towarów"
                 },
                 "visibility": {
                     "label": "Widoczność",
@@ -5892,18 +5909,6 @@
                     "name": "Zakaz zawracania",
                     "terms": "zakaz,zawracanie"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Nakaz skrętu w lewo",
-                    "terms": "nakaz,lewoskręt"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Nakaz skrętu w prawo",
-                    "terms": "nakaz,prawoskręt"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Nakaz jazdy prosto",
-                    "terms": "zakaz,nakręcanie,wykręcanie,skręt"
-                },
                 "type/route": {
                     "name": "Trasa/linia",
                     "terms": "trasa,linia"
@@ -6189,7 +6194,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa bazowa Austrii, oparta o dane rządowe.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6250,9 +6254,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Kafelki mapowe Stamen Design, licencja CC BY 3.0"
-                },
                 "name": "Stamen - Teren"
             },
             "tf-cycle": {

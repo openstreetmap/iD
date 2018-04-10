@@ -1,5 +1,10 @@
 {
     "eo": {
+        "icons": {
+            "information": "informoj",
+            "remove": "forigi",
+            "undo": "malfari"
+        },
         "modes": {
             "add_area": {
                 "title": "Areo",
@@ -1812,6 +1817,9 @@
                 "except": {
                     "label": "Esceptoj"
                 },
+                "faces": {
+                    "label": "Flankoj"
+                },
                 "fax": {
                     "label": "Telekopiilo",
                     "placeholder": "+31 42 123 45 67"
@@ -1942,6 +1950,9 @@
                 "indoor": {
                     "label": "Interno"
                 },
+                "industrial": {
+                    "label": "Speco"
+                },
                 "information": {
                     "label": "Speco"
                 },
@@ -2060,6 +2071,10 @@
                 },
                 "maxspeed": {
                     "label": "Rapidlimo",
+                    "placeholder": "40, 50, 60…"
+                },
+                "maxspeed/advisory": {
+                    "label": "Konsilinda rapidlimo",
                     "placeholder": "40, 50, 60…"
                 },
                 "maxstay": {
@@ -2408,7 +2423,7 @@
                     "label": "Speco de servo",
                     "options": {
                         "crossover": "Trakforko",
-                        "siding": "Preterpasejo",
+                        "siding": "Kromtrako",
                         "spur": "Branĉtrako",
                         "yard": "Ranĝadstaciaj trakoj"
                     }
@@ -2650,6 +2665,17 @@
                     "label": "Speco",
                     "placeholder": "Norma"
                 },
+                "usage_rail": {
+                    "label": "Uzo",
+                    "options": {
+                        "branch": "branĉa",
+                        "industrial": "industria",
+                        "main": "ĉefa",
+                        "military": "armea",
+                        "test": "testa",
+                        "tourism": "turisma"
+                    }
+                },
                 "vending": {
                     "label": "Specoj de varoj"
                 },
@@ -2830,6 +2856,10 @@
                 "aeroway/terminal": {
                     "name": "Flugstacio",
                     "terms": "flughaveno,terminalo"
+                },
+                "allotments/plot": {
+                    "name": "Parcelo de familia ĝardeno",
+                    "terms": "terpeco;parcelo;ĝardeno"
                 },
                 "amenity": {
                     "name": "Servejo"
@@ -3059,6 +3089,10 @@
                     "name": "Bazaro",
                     "terms": "foirejo,foiro,komercejo"
                 },
+                "amenity/monastery": {
+                    "name": "Monaĥeja tereno",
+                    "terms": "monahhejo,monahxejo,abatejo,klostro,klaŭstro"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcikla parkumejo",
                     "terms": "motorciklejo,motociklejo"
@@ -3263,6 +3297,10 @@
                     "name": "Vendilo de cigaredoj",
                     "terms": "cigaredo,vendmaŝino"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Vendilo de kafo",
+                    "terms": "kafmaŝino,teo"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Vendilo de kondomoj",
                     "terms": "kondomo,vendmaŝimo,penisingo"
@@ -3271,6 +3309,14 @@
                     "name": "Vendilo de trinkaĵoj",
                     "terms": "vendilo de trinkajxoj,vendilo de trinkajsoj,trinkaĵoj"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Vendilo de elektronikaĵoj",
+                    "terms": "ŝargiloj,piloj,kabloj,memoriloj,memorbastonetoj,SD-kartoj,memorkartoj"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Vendilo de etenditaj moneroj",
+                    "terms": "moneretendilo,etendilo,memoraĵoj"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Vendilo de saketoj por fekaĵoj",
                     "terms": "fekajhoj,fekajxoj,merdo,hundo"
@@ -3278,6 +3324,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Vendilo de virinaj higienaĵoj",
                     "terms": "menstrusorbiloj,tambonoj,persona higieno"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Vendilo de manĝaĵo",
+                    "terms": "manghajho,mangxajxo"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Vendilo de benzino",
+                    "terms": "benzinstacio,diseloleo,benzino,brulaĵo,LPG,biodisel"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Vendilo de glaciaĵoj",
+                    "terms": "glaciaĵo"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Vendilo de gazetoj"
@@ -3297,6 +3355,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Vendilo de vojimpostoj",
                     "terms": "vojimposto,vojimpostejo,vojimpostilo"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Vendilo de poŝtmarkoj",
+                    "terms": "poŝtmarkoj"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Vendilo de dolĉaĵoj",
@@ -4101,6 +4163,10 @@
                     "name": "Aŭtovoja ligilo",
                     "terms": "enveturejo,elveturejo,aŭtoŝoseo,nodo"
                 },
+                "highway/passing_place": {
+                    "name": "Preterpasejo",
+                    "terms": "pasejo,preterveturejo"
+                },
                 "highway/path": {
                     "name": "Vojeto (piedpremita)",
                     "terms": "vojo,pado,irejo,piedvojeto"
@@ -4460,6 +4526,10 @@
                     "name": "Salono de ludoj",
                     "terms": "ludejo,amuzaparatoj,videoludoj,paĉinko,flipero,bilardo"
                 },
+                "leisure/beach_resort": {
+                    "name": "Sablobordo administrata (kun oportunaĵoj)",
+                    "terms": "plaĝo,strando,ripozcentro,sunbanejo"
+                },
                 "leisure/bird_hide": {
                     "name": "Bird-observejo",
                     "terms": "birdobservejo"
@@ -4575,6 +4645,10 @@
                 "leisure/nature_reserve": {
                     "name": "Natur-rezervejo",
                     "terms": "naturrezervejo,naturprotektejo,rezervejo,naturparko,nacia parko,konservejo"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Seĝoj eksterdome",
+                    "terms": "seghoj,segxoj,benko,altano,teraso"
                 },
                 "leisure/park": {
                     "name": "Parko",
@@ -4704,6 +4778,10 @@
                     "name": "Mineja koridoro",
                     "terms": "minejkoridoro,minejo horizontala,minejgalerio,galerio"
                 },
+                "man_made/antenna": {
+                    "name": "Anteno",
+                    "terms": "masto"
+                },
                 "man_made/breakwater": {
                     "name": "Ond-rompilo",
                     "terms": "ondorompilo,ondrompilo,digo,ĝeto"
@@ -4754,6 +4832,10 @@
                 "man_made/observation": {
                     "name": "Vidturo",
                     "terms": "observturo,turo"
+                },
+                "man_made/observatory": {
+                    "name": "Observejo",
+                    "terms": "astronomia,vetera,teleskopo"
                 },
                 "man_made/petroleum_well": {
                     "name": "Puto nafta",
@@ -4878,6 +4960,10 @@
                 "natural/heath": {
                     "name": "Erikejo",
                     "terms": "arbustaro,herbejo"
+                },
+                "natural/mud": {
+                    "name": "Kota tereno",
+                    "terms": "koto;malsekejo;ŝlimejo"
                 },
                 "natural/peak": {
                     "name": "Montpinto",
@@ -5463,8 +5549,8 @@
                     "terms": "relŝuo,relfino,finrelo"
                 },
                 "railway/disused": {
-                    "name": "Forlasita relvojo",
-                    "terms": "eksa fervojlinio,trako,relvojo"
+                    "name": "Neuzata relvojo",
+                    "terms": "eksa fervojlinio,trako,relvojo,forlasita fervojlinio"
                 },
                 "railway/funicular": {
                     "name": "Funikularo",
@@ -5915,6 +6001,10 @@
                     "name": "Dombesta vendejo",
                     "terms": "dombestoj,hejmbestoj,bestoj,kobajo,kuniklo,papago"
                 },
+                "shop/pet_grooming": {
+                    "name": "Dombesta beligejo",
+                    "terms": "frizejo,hartondisto,hundoj,katoj,hejmbestoj"
+                },
                 "shop/photo": {
                     "name": "Fotografia vendejo",
                     "terms": "fotografio,fotografarto"
@@ -6218,16 +6308,20 @@
                     "terms": "malpermeso,malantaŭen,U-forma,,Uforma,prohibo"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Turno maldekstren devigita",
-                    "terms": "ordono,devigo,maldekstren"
+                    "name": "Nur turno maldekstren",
+                    "terms": "maldekstren,liven"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Turno dekstren devigita",
-                    "terms": "ordono,devigo,maldekstren"
+                    "name": "Nur turno dekstren",
+                    "terms": "dekstren"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Veturo rekten devigita",
-                    "terms": "ordono,devigo,rekten,antaŭen"
+                    "name": "Nur veturo rekten",
+                    "terms": "rekten,antaŭen"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Nur turno malantaŭen",
+                    "terms": "malantaŭen,reveturen,U-turno"
                 },
                 "type/route": {
                     "name": "Kurso",
@@ -6584,7 +6678,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map-kaheloj de Stamen Design, laŭ CC BY 3.0"
+                    "text": "Map-kaheloj de Stamen Design, laŭ CC BY 3.0. Datumoj de OpenStreetMap, laŭ ODbL"
                 },
                 "name": "Stamen Terrain"
             },

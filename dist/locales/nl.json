@@ -2565,9 +2565,6 @@
                     "label": "Type",
                     "placeholder": "Standaard"
                 },
-                "vending": {
-                    "label": "Soort waren"
-                },
                 "visibility": {
                     "label": "Zichtbaarheid",
                     "options": {
@@ -6010,18 +6007,6 @@
                     "name": "Niet omkeren",
                     "terms": "geen U-bocht,U-bocht verboden,omkeren verboden,omdraaien verboden,verboden om te draaien,verboden om te keren,niet omdraaien,niet keren,verboden te keren,keren verboden"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Enkel links afslaan",
-                    "terms": "verplicht links afslaan,links afslaan verplicht,enkel links inslaan,verplicht links inslaan,links inslaan verplicht"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Enkel rechts afslaan",
-                    "terms": "verplicht rechts afslaan,rechts afslaan verplicht,enkel rechts inslaan,verplicht rechts inslaan,rechts inslaan verplicht"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Enkel rechtdoor",
-                    "terms": "rechtdoor,niet draaien,niet afslaan,niet inslaan,draaien verboden,afslaan verboden,draaien verboden"
-                },
                 "type/route": {
                     "name": "Route"
                 },
@@ -6313,7 +6298,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basiskaart van Oostenrijk, gebaseerd op overheidsgegevens.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6374,9 +6358,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Kaarttegels door Stamen Design, onder CC BY 3.0"
-                },
                 "name": "Stamen Terrein"
             },
             "tf-cycle": {

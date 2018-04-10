@@ -407,6 +407,7 @@
                 "key": "H",
                 "title": "History",
                 "selected": "{n} selected",
+                "no_history": "No History (New Feature)",
                 "version": "Version",
                 "last_edit": "Last Edit",
                 "edited_by": "Edited By",
@@ -644,15 +645,20 @@
             }
         },
         "success": {
-            "edited_osm": "Edited OSM!",
             "just_edited": "You just edited OpenStreetMap!",
-            "view_on_osm": "View on OSM",
-            "facebook": "Share on Facebook",
-            "twitter": "Share on Twitter",
-            "google": "Share on Google+",
-            "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer.",
+            "thank_you": "Thank you for improving the map.",
+            "thank_you_location": "Thank you for improving the map around {where}.",
+            "help_html": "Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.",
             "help_link_text": "Details",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "View Changes on OSM",
+            "changeset_id": "Your changeset #: {changeset_id}",
+            "like_osm": "Like OpenStreetMap? Connect with others:",
+            "more": "More",
+            "events": "Events",
+            "languages": "Languages: {languages}",
+            "missing": "Is something missing from this list?",
+            "tell_us": "Tell us!"
         },
         "confirm": {
             "okay": "OK",
@@ -1779,6 +1785,9 @@
                 "display": {
                     "label": "Display"
                 },
+                "distance": {
+                    "label": "Total Distance"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -1820,7 +1829,7 @@
                     "label": "Exceptions"
                 },
                 "faces": {
-                    "label": "faces"
+                    "label": "Faces"
                 },
                 "fax": {
                     "label": "Fax",
@@ -1932,6 +1941,39 @@
                 "hoops": {
                     "label": "Hoops",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "label": "Dressage Riding",
+                    "options": {
+                        "undefined": "No",
+                        "equestrian": "Yes"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Horseback Riding",
+                    "options": {
+                        "undefined": "No",
+                        "horse_riding": "Yes"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Horseback Riding Difficulty",
+                    "placeholder": "Difficult, Dangerous...",
+                    "options": {
+                        "common": "Easy: No problems or difficulties. (default)",
+                        "demanding": "Use with caution: Uneven way, occasional difficult passages.",
+                        "difficult": "Difficult: Way narrow and exposed. May contain obstacles to step over and narrow passages.",
+                        "critical": "Borderline: Passable only for experienced riders and horses. Major obstacles. Bridges should be examined carefully.",
+                        "dangerous": "Dangerous: Passable only for very experienced riders and horses and only in good weather. Dismount.",
+                        "impossible": "Impassable: Way or bridge not passable for horses. Too narrow, insuffient support, obstacles like ladders. Danger of life."
+                    }
+                },
+                "horse_stables": {
+                    "label": "Riding Stable",
+                    "options": {
+                        "undefined": "No",
+                        "stables": "Yes"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -2812,6 +2854,10 @@
                 },
                 "advertising/billboard": {
                     "name": "Billboard",
+                    "terms": ""
+                },
+                "advertising/column": {
+                    "name": "Advertising Column",
                     "terms": ""
                 },
                 "aerialway/station": {
@@ -4113,6 +4159,10 @@
                 "healthcare/hospice": {
                     "name": "Hospice",
                     "terms": "terminal,illness"
+                },
+                "healthcare/laboratory": {
+                    "name": "Medical Laboratory",
+                    "terms": "medical_laboratory,medical_lab,blood_check"
                 },
                 "healthcare/midwife": {
                     "name": "Midwife",
@@ -6278,6 +6328,10 @@
                     "name": "Theme Park",
                     "terms": ""
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Trail Riding Station",
+                    "terms": ""
+                },
                 "tourism/viewpoint": {
                     "name": "Viewpoint",
                     "terms": ""
@@ -6745,6 +6799,230 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap India - Participatory neighborhood mapping",
+                "description": "Improve OpenStreetMap in India",
+                "extendedDescription": "Mapping in India? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japan Community",
+                "description": "Mappers and OpenStreetMap users in Japan"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japan Mailinglist",
+                "description": "Talk-ja is an Official Mailinglist for Japanese Community"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japan Twitter",
+                "description": "Hashtag on Twitter: {url}"
+            },
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap PH Facebook",
+                "description": "Welcome to OpenStreetMap Philippines, where we encourage all fellow Filipinos to contribute to the OpenStreetMap project."
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph Mailing List",
+                "description": "A mailing list to discuss OpenStreetMap in the Philippines"
+            },
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap PH Slack",
+                "description": "All are welcome! Sign up at {signupUrl}"
+            },
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap PH Telegram",
+                "description": "Un-official, Telegram local community of OpenStreetMap contributors and friends in the Philippines"
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap RU forum",
+                "description": "OpenStreetMap Russia web forum"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap RU telegram",
+                "description": "OpenStreetMap Russia telegram chat"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taiwan Community",
+                "description": "Facebook Group for Mappers and OpenStreetMap users to discuss matters about Taiwan."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Taiwan Mailinglist",
+                "description": "Talk-tw is an Official Mailinglist for the Communities to dicuss matters about Taiwan"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Belarus",
+                "description": "OpenStreetMap Belarus telegram chat"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Talk-cz Mailing List",
+                "description": "Talk-cz is the official mailing list for Czech community"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes on Telegram",
+                "description": "OpenStreetMap Spain Telegram chat"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver",
+                "description": "Mappers and OpenStreetMap users in the Vancouver, BC area"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Improve OpenStreetMap in the Bay Area",
+                "extendedDescription": "This group is about growing the OpenStreetMap community here in the Bay Area. Our events are open to everyone, from open source enthusiasts, cyclists, GIS professionals, geocachers, and beyond. Anyone and everyone who is interested in maps, map making and free map data is welcome to join our group as well as attend our events."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Online mapping community based out of State College, PA"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Code for San Jose Slack",
+                "description": "All are welcome! Sign up at {signupUrl}, then join the #osm channel."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "The OpenStreetMap user group for Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth, and all the cities in between are abounding with creative and tech-savvy people. The vision for this usergroup is to find new ways to use the amazing resource of OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Meetup for map enthusiasts in the Philadelphia area",
+                "extendedDescription": "GeoPhilly unites developers, geographers, data geeks, open source enthusiasts, civic hackers and map addicts in our shared love of maps and the stories they tell. If you use maps as part of your work or just want to learn more, this is the meetup for you!  Our events aim to be open, friendly, educational and social and range from happy hours to lightning talks or even workshops. Come create a diverse, inspiring geospatial community in the Philadelphia with us!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Improve OpenStreetMap in the DC area",
+                "extendedDescription": "We are a group of volunteer mappers who aim to improve the OpenStreetMap in the DC area. We also aim to teach others about the OSM ecosystem, data analytics, cartography, and GIS. We gather every other month at meetups to focus on one area of our city."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "Mappers and OpenStreetMap users, around Portland, ME",
+                "extendedDescription": "Maptime is, rather literally, time for mapmaking.  Our mission is to open the doors of cartographic possibility to anyone interested by creating a time and space for collaborative learning, exploration, and map creation using mapping tools and technologies."
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Improve OpenStreetMap in the Cleveland area",
+                "extendedDescription": "Open Geo Cleveland aims to be a resource for people to discuss and share knowledge on utilizing free geographic data sets especially OpenStreetMap, and Open geo-spatial software that manages, edits, and displays geographic data, and advocate for its use in Northeast Ohio. We're also a maptime chapter =)"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston",
+                "description": "Mappers and OpenStreetMap users in the Boston area",
+                "extendedDescription": "OpenStreetMap is the free and open, wiki-style map of the world, with hundreds of thousands of contributions every day from people like you. Editing the map is simple, and fun! Join us both indoors and outdoors in our effort to create the best map of the Boston area and the rest of the world!"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea",
+                "description": "Mappers and OpenStreetMap users around Mount Vernon, WA",
+                "extendedDescription": "OpenStreetMap is an map of the world made by people like you. It's a map that you build, that's given away for free like wikipedia. Check out osm.org for more. We meet all the time to talk maps, make maps and have fun!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "The OpenStreetMap user group for Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado",
+                "description": "Mappers and OpenStreetMap users in the state of Colorado, USA",
+                "extendedDescription": "OpenStreetMap (OSM) Colorado is a local collaboration of people interested in contributing their efforts to create free maps. We encourage all of our mappers to organize or suggest mapping events throughout the state. Meetup activities can be simple social mixers, OSM basic to advanced training, or community mapping parties."
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Mappers and OpenStreetMap users in the Portland area",
+                "extendedDescription": "OpenStreetMap (OSM) is a map of the world made by people like you. It's a map that you build, that's given away for free like wikipedia. Check out osm.org for more, and come join us at a meetup to talk maps, contribute to OSM, and have fun!"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle",
+                "description": "Mappers and OpenStreetMap users in the Seattle area"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Southern California",
+                "description": "Let's have some fun, contribute something to Los Angeles, and learn about mapping!",
+                "extendedDescription": "OpenStreetMap (OSM) Southern California is for anyone interested in mapping to get together to work with OpenStreetMap.  OpenStreetMap, the Wikipedia of maps, is a free open-source map of the world being created by more than 1,000,000 volunteers around the globe.  Everyone is welcome.  If you don't know OpenStreetMap, we'll teach you. If you have an idea for a mapping project or even a field trip that the group can do, great!"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay",
+                "description": "Map Nights hosted by Code for San Jose",
+                "extendedDescription": "Code for San Jose, the local Code for America brigade, hosts monthly Map Nights on Thursday nights in downtown San José. Meet fellow South Bay mappers, help out with local mapping projects, and hear about other civic tech projects. Programming and GIS skills are not required."
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay",
+                "description": "Mappers and OpenStreetMap users in the Tampa Bay area",
+                "extendedDescription": "OSM Tampa Bay group for local residents to get together and build out the definitive map of Tampa Bay with OpenStreetMap, the free and editable map of the world.  If you're into maps, data, open source, GPS, hiking, cycling, et cetera, you'll love working with OpenStreetMap -- so join in! We'll get together and map and talk about new topics once-a-month or so."
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "All are welcome! Sign up at {signupUrl}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap US",
+                "description": "We help grow and improve OpenStreetMap in the United States.",
+                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah",
+                "description": "Mappers and OpenStreetMap users in the Salt Lake City area",
+                "extendedDescription": "Activities may include things like Learn To Map workshops, mapping parties and outdoor data collection. The events will take place in the SLC area, at least initially.  We are looking for seasoned mappers as well as people new to OSM. Join and let's do some mapping!"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming",
+                "description": "Mappers and OpenStreetMap users in the state of Wyoming",
+                "extendedDescription": "OpenStreetMap (OSM) Wyoming is a local collaboration of people interested in contributing their efforts to create free maps. We encourage all of our mappers to organize or suggest mapping events throughout the state. Meetup activities can be simple social mixers, OSM basic to advanced training, or community mapping parties."
+            },
+            "PHXGeo-meetup": {
+                "name": "PHXGeo Meetup",
+                "description": "Mappers and OpenStreetMap users in the Phoenix, AZ area",
+                "extendedDescription": "This is a meetup group for those in the Phoenix area who like maps, GIS, OpenStreetMap, cartography and anything in between."
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "Western-Slope-facebook": {
+                "name": "Western Slope OSM Facebook",
+                "description": "Mappers and OpenStreetMap users around Grand Junction, CO"
+            },
+            "Western-Slope-meetup": {
+                "name": "Western Slope OSM Meetup",
+                "description": "Mappers and OpenStreetMap users around Grand Junction, CO",
+                "extendedDescription": "The goal of this group is to introduce OpenStreetMap to the community, develop a community of mappers, create the most amazing geodata possible using whatever method we can and finally strategize in order to get this data out into our community. Imagine accurate trail signage! Imagine further development of bike paths! Imagine anything you want, that's the joy of OpenStreetMap!"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Sign up at {signupUrl}"
+            },
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Argentina Facebook",
+                "description": "Join the OpenStreetMap Argentina community on Facebook",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
+            "OSM-AR-forum": {
+                "name": "OpenStreetMap Argentina web forum",
+                "description": "Join the OpenStreetMap Argentina web forum",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap Argentina IRC",
+                "description": "Join #osm-ar on irc.oftc.net (port 6667)"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar Mailing List",
+                "description": "A mailing list to discuss OpenStreetMap in Argentina"
+            },
+            "OSM-AR-telegram": {
+                "name": "OpenStreetMap Argentina Telegram",
+                "description": "Join the OpenStreetMap Argentina community on Telegram",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
+            "OSM-AR-twitter": {
+                "name": "OpenStreetMap Argentina Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap on Reddit",
+                "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
             }
         }
     }

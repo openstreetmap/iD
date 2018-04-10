@@ -1,5 +1,10 @@
 {
     "it": {
+        "icons": {
+            "information": "info",
+            "remove": "rimuovi",
+            "undo": "annulla"
+        },
         "modes": {
             "add_area": {
                 "title": "Area",
@@ -730,7 +735,7 @@
                 "before_start_h": "Prima di iniziare",
                 "before_start": "Prima di iniziare ad effettuare modifiche dovresti essere a conoscenza delle funzioni principali di questo editor e di come funziona OpenstreetMap. In iD è stata integrata una guida interattiva, con lo scopo di insegnare le funzioni indispensabili per la mappatura. Clicca \"Avvia il tutorial\" su questa schermata per iniziare - richiede circa 15 minuti.",
                 "open_source_h": "Open Source",
-                "open_source": "L'editor iD è un progetto collaborativo open source, tu ora stai usando la versione {versione}. Il codice sorgente è disponibile [su GitHub](https://github.com/openstreetmap/iD).",
+                "open_source": "L'editor iD è un progetto collaborativo open source, ora stai usando la versione {version}. Il codice sorgente è disponibile [su GitHub](https://github.com/openstreetmap/iD).",
                 "open_source_help": "Puoi contribuire nella [traduzione](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) di iD oppure [segnalare problemi](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
@@ -915,7 +920,7 @@
                         "title": "Suggerimenti",
                         "simple": "**Preferisci obblighi di svolta semplici invece di altri più complessi.**",
                         "simple_example": "Ad esempio, evita di creare un obbligo di svolta che utilizza un percorso di topo VIA se basta usare un nodo per lo stesso ruolo.",
-                        "indirect": "**Alcuni obblighi di svolta sono segnati con il testo \"{indirect}\" e sono colorati più chiari.**",
+                        "indirect": "**Alcuni obblighi di svolta sono segnati con il testo \"(indiretto)\" e sono colorati più chiari.**",
                         "indirect_example": "Questi obblighi di svolta esistono come conseguenza di un altro obbligo nei dintorni. Ad esempio, un \"obbligo di direzione obbligatoria\" genererà automaticamente un \"divieto di inversione di marcia\" per tutti gli altri percorsi che attraversano l'intersezione.",
                         "indirect_noedit": "Non puoi modificare gli obblighi di svolta indiretti. Al loro posto, modifica i normali obblighi di svolta vicini."
                     }
@@ -1814,6 +1819,9 @@
                 "except": {
                     "label": "Eccezioni"
                 },
+                "faces": {
+                    "label": "facciate"
+                },
                 "fax": {
                     "label": "Fax",
                     "placeholder": "+39 01 123 456"
@@ -1944,6 +1952,9 @@
                 "indoor": {
                     "label": "Al chiuso"
                 },
+                "industrial": {
+                    "label": "Tipo"
+                },
                 "information": {
                     "label": "Tipo"
                 },
@@ -2062,6 +2073,10 @@
                 },
                 "maxspeed": {
                     "label": "Limite di velocità",
+                    "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "label": "Limite di velocità consigliata",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2296,6 +2311,7 @@
                     "label": "Tipo"
                 },
                 "railway/position": {
+                    "label": "Posizione della pietra miliare",
                     "placeholder": "Distanza ad una cifra decimale (123.4)"
                 },
                 "railway/signal/direction": {
@@ -2545,6 +2561,9 @@
                 "switch": {
                     "label": "Tipo",
                     "options": {
+                        "circuit_breaker": "Interruttore automatico",
+                        "disconnector": "Sezionatore",
+                        "earthing": "Sezionatore di terra",
                         "mechanical": "Meccanico"
                     }
                 },
@@ -2648,8 +2667,19 @@
                     "label": "Tipo",
                     "placeholder": "Default"
                 },
+                "usage_rail": {
+                    "label": "Tipo di utilizzo",
+                    "options": {
+                        "branch": "Secondario",
+                        "industrial": "Industriale",
+                        "main": "Principale",
+                        "military": "Militare",
+                        "test": "Per collaudi",
+                        "tourism": "Turismo"
+                    }
+                },
                 "vending": {
-                    "label": "Beni venduti"
+                    "label": "Tipi di prodotti"
                 },
                 "visibility": {
                     "label": "Visibilità",
@@ -2708,6 +2738,9 @@
                 },
                 "wheelchair": {
                     "label": "Accesso in carrozzina"
+                },
+                "wholesale": {
+                    "label": "Vendita all’ingrosso"
                 },
                 "width": {
                     "label": "Larghezza (Metri)"
@@ -2826,20 +2859,24 @@
                     "name": "Terminal aeroportuale",
                     "terms": "aeroporto,aerodromo,terminale"
                 },
+                "allotments/plot": {
+                    "name": "Orto pubblico",
+                    "terms": "orto pubblico,anziano,anziani,orti urbani,orto,orti,orto per anziani"
+                },
                 "amenity": {
                     "name": "Servizi"
                 },
                 "amenity/animal_boarding": {
                     "name": "Pensione per animali",
-                    "terms": "pet,resort,hotel,rifugio,can*,gatt*,cavall*,cucciol*,rettil*"
+                    "terms": "pet,resort,hotel,rifugio,pensione,cane,cani,gatto,gatti,cavallo,cavalli,cucciolo,cuccioli,rettile,rettili"
                 },
                 "amenity/animal_breeding": {
                     "name": "Allevamento",
-                    "terms": "tor*,gatt*,vivaio,can*,mucc*,cavall*,cucciol*,rettil*,allevatore"
+                    "terms": "toro,tori,gatto,gatti,vivaio,cane,cani,mucca,mucche,cavallo,cavalli,cavalle,cucciolo,cuccioli,rettile,rettili,allevatore"
                 },
                 "amenity/animal_shelter": {
                     "name": "Rifugio per animali",
-                    "terms": "adozion*,gatt*,can*,cucciol*,rettil*,ricovero,riparo"
+                    "terms": "adozione,adozioni,gatto,gatti,micio,cane,cani,cucciolo,cuccioli,rettile,rettili,ricovero,riparo"
                 },
                 "amenity/arts_centre": {
                     "name": "Centro Culturale",
@@ -2871,7 +2908,7 @@
                 },
                 "amenity/bicycle_rental": {
                     "name": "Stazione del Bike Sharing",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
+                    "terms": "noleggio bici,noleggio biciclette,nolo bici,nolo biciclette,noleggio velocipedi,prestito biciclette,bike sharing"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Stazione di riparazione biciclette",
@@ -2890,7 +2927,7 @@
                     "terms": "cambi,ufficio cambi,cambio,valuta,cambiovaluta"
                 },
                 "amenity/bus_station": {
-                    "name": "Stazione autobus"
+                    "name": "Stazione /Terminal degli autobus"
                 },
                 "amenity/cafe": {
                     "name": "Caffè",
@@ -2898,7 +2935,7 @@
                 },
                 "amenity/car_pooling": {
                     "name": "Condivisione automobile",
-                    "terms": "<translate with synonyms or related terms for 'Car Pooling', separated by commas>"
+                    "terms": "car pooling,auto di gruppo,concarreggio,condivisione auto"
                 },
                 "amenity/car_rental": {
                     "name": "Noleggio auto",
@@ -2934,11 +2971,11 @@
                 },
                 "amenity/clinic/abortion": {
                     "name": "Clinica per aborti",
-                    "terms": "<translate with synonyms or related terms for 'Abortion Clinic', separated by commas>"
+                    "terms": "clinica abortiva,clinica per l’aborto,ospedale per l’aborto,centro per l’aborto,centro abortivo"
                 },
                 "amenity/clinic/fertility": {
                     "name": "Centro fecondazione assistita",
-                    "terms": "<translate with synonyms or related terms for 'Fertility Clinic', separated by commas>"
+                    "terms": "clinica fertilità,clinica della fertilità,centro fertilità,centro fecondazione assistita,centro della fecondazione assistita,clinica della fecondazione assistita,clinica fecondazione assistita,centro di procreazione assistita,clinica di procreazione assistita"
                 },
                 "amenity/clock": {
                     "name": "Orologio",
@@ -2985,7 +3022,7 @@
                 },
                 "amenity/driving_school": {
                     "name": "Scuola guida",
-                    "terms": "autoscuola,auto*,macchina,guida,scuola"
+                    "terms": "autoscuola,auto,macchina,guida,scuola,scuolaguida,autobus,ambulanze,camion"
                 },
                 "amenity/embassy": {
                     "name": "Ambasciata",
@@ -2996,7 +3033,7 @@
                     "terms": "Fast Food"
                 },
                 "amenity/ferry_terminal": {
-                    "name": "Stazione battelli"
+                    "name": "Stazione / Terminal dei battelli"
                 },
                 "amenity/fire_station": {
                     "name": "Caserma dei pompieri",
@@ -3004,7 +3041,7 @@
                 },
                 "amenity/food_court": {
                     "name": "Zona ristorazione",
-                    "terms": "<translate with synonyms or related terms for 'Food Court', separated by commas>"
+                    "terms": "food court,zona ristorazione,area cibo,ristoranti,cibo"
                 },
                 "amenity/fountain": {
                     "name": "Fontana",
@@ -3032,7 +3069,7 @@
                 },
                 "amenity/ice_cream": {
                     "name": "Gelateria",
-                    "terms": "gelat*,semifredd*,yogurt,sorbett*,ghiacciol*"
+                    "terms": "gelato,gelati,gelataio,semifreddo,semifreddi,yogurt,sorbetto,sorbetti,ghiacciolo,ghiaccoli,grattachecca,sorbetteria,gelateria"
                 },
                 "amenity/internet_cafe": {
                     "name": "Internet Cafe",
@@ -3048,11 +3085,15 @@
                 },
                 "amenity/love_hotel": {
                     "name": "Love Hotel",
-                    "terms": "<translate with synonyms or related terms for 'Love Hotel', separated by commas>"
+                    "terms": "hotel per coppie,motel per coppie,hotel a ore,sexy motel"
                 },
                 "amenity/marketplace": {
                     "name": "Mercato",
                     "terms": "Mercato"
+                },
+                "amenity/monastery": {
+                    "name": "Montastero",
+                    "terms": "monastero,abbazia,badia"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Parcheggio moto",
@@ -3060,7 +3101,7 @@
                 },
                 "amenity/music_school": {
                     "name": "Scuola di musica",
-                    "terms": "<translate with synonyms or related terms for 'Music School', separated by commas>"
+                    "terms": "scuola di musica,lezioni di musica,scuola di piano,scuola di violino,scuola di batteria,educazione musicale,lezioni di musica"
                 },
                 "amenity/nightclub": {
                     "name": "Discoteca",
@@ -3083,7 +3124,7 @@
                 },
                 "amenity/pavilion": {
                     "name": "Tendone",
-                    "terms": "padiglione,tend*"
+                    "terms": "padiglione,tenda,tende"
                 },
                 "amenity/pharmacy": {
                     "name": "Farmacia",
@@ -3103,7 +3144,7 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Tempio Hindu",
-                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                    "terms": "tempio indiano,tempio indù,tempio induista,mandir"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
@@ -3115,15 +3156,15 @@
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Tempio Shintoista",
-                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                    "terms": "jinja,tempio giapponese,tempio shintoista,santuario shintoista"
                 },
                 "amenity/place_of_worship/sikh": {
                     "name": "Tempio Sikh",
-                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                    "terms": "tempio indiano,tempio sikh"
                 },
                 "amenity/place_of_worship/taoist": {
                     "name": "Tempio Taoista",
-                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
+                    "terms": "tempio taoista,tempio daoista,tempio cinese,dàoguàn"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario",
@@ -3151,7 +3192,7 @@
                 },
                 "amenity/public_bath": {
                     "name": "Bagni Pubblici",
-                    "terms": "<translate with synonyms or related terms for 'Public Bath', separated by commas>"
+                    "terms": "bagni,bagno,bagno turco,sorgenti calde,terme,bagni termali,onsen,hammam,vasca delle abluzioni,lavacro"
                 },
                 "amenity/public_bookcase": {
                     "name": "Libreria pubblica",
@@ -3163,7 +3204,7 @@
                 },
                 "amenity/recycling": {
                     "name": "Cassonetto per raccolta differenziata",
-                    "terms": "<translate with synonyms or related terms for 'Recycling Container', separated by commas>"
+                    "terms": "contenitore del riciclaggio,riciclaggio,vetro,plastica,bottiglie,alluminio"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro di riciclaggio",
@@ -3193,11 +3234,11 @@
                 },
                 "amenity/shower": {
                     "name": "Doccia",
-                    "terms": "<translate with synonyms or related terms for 'Shower', separated by commas>"
+                    "terms": "docce,doccia,doccia calda,doccia fredda, doccia pubblica"
                 },
                 "amenity/smoking_area": {
                     "name": "Area fumatori",
-                    "terms": "<translate with synonyms or related terms for 'Smoking Area', separated by commas>"
+                    "terms": "area per fumatori,fumare,fumatori,fumatore,sigarette"
                 },
                 "amenity/social_facility": {
                     "name": "Centro socio-assistenziale",
@@ -3258,6 +3299,10 @@
                     "name": "Distributore automatico di sigarette",
                     "terms": "distributore automatico,macchinetta,sigarette,tabacco,cartine,accendini"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Macchinetta del caffè",
+                    "terms": "caffè,cafe,coffee,moka,cappuccino,latte,espresso,tazzina,macchiato"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Distributore automatico di preservativi",
                     "terms": "distributore automatico,macchinetta,preservativi"
@@ -3266,6 +3311,14 @@
                     "name": "Distributore automatico di bevande",
                     "terms": "distributore automatico,macchinetta,bevande,bottiglie,bottigliette"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Macchinetta accessori elettrici",
+                    "terms": "cavi,caricabatterie,cuffie,cuffiette,telefono,smartphone,tablet,usb"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Macchinetta di monete da souvenir",
+                    "terms": "moneta,monete,appiatita,appiattite,schiacciata,schiacciate,allungata,allungate,penny,souvenir,turismo,ricordo,commemorativa,commemorative"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Distributore automatico di sacchetti per escrementi",
                     "terms": "distributore automatico,macchinetta,cacca,cane"
@@ -3273,6 +3326,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Distributore automatico di prodotti per l'igiene femminile",
                     "terms": "<translate with synonyms or related terms for 'Feminine Hygiene Vending Machine', separated by commas>"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Macchinetta del cibo",
+                    "terms": "cibo,barrette,sandwich,panini,cioccolata,tramezzini"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Pompa della benzina",
+                    "terms": "benzina,petrolio,propano,diesel,benzene,ottani,verde,senza piombo,gpl,metano,bioetanolo,biodiesel,"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Macchinetta del gelato",
+                    "terms": "gelato,cioccolata,ghiaccoli,ghiacciato,vaniglia,grattachecca,gelati,panna,fragola,pistacchio"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Distributore automatico di giornali"
@@ -3293,6 +3358,10 @@
                     "name": "Distributore automatico di biglietti per trasporto pubblico",
                     "terms": "distributore automatico,macchinetta,biglietti,bus,metro,tram"
                 },
+                "amenity/vending_machine/stamps": {
+                    "name": "Macchinetta dei francobolli",
+                    "terms": "posta,spedizione,invio,francobollo,francobolli,marca da bollo"
+                },
                 "amenity/vending_machine/sweets": {
                     "name": "Distributore automatico di snack",
                     "terms": "distributore automatico,macchinetta,snack,cibo"
@@ -3303,7 +3372,7 @@
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "Cestino per escrementi animali",
-                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
+                    "terms": "cestino deiezioni canine,cacca,popò,cane,cani,deiezioni,sacchetti"
                 },
                 "amenity/waste_basket": {
                     "name": "Cestino della spazzatura",
@@ -3323,7 +3392,7 @@
                 },
                 "amenity/watering_place": {
                     "name": "Abbeveratoio",
-                    "terms": "acqua,fontan*,abbever*,animal*"
+                    "terms": "acqua,fontana,fontanella,abbeveratoio,animale,animali"
                 },
                 "area": {
                     "name": "Area",
@@ -3362,6 +3431,7 @@
                     "terms": "<translate with synonyms or related terms for 'Dark Ride', separated by commas>"
                 },
                 "attraction/drop_tower": {
+                    "name": "Torre a caduta libera",
                     "terms": "<translate with synonyms or related terms for 'Drop Tower', separated by commas>"
                 },
                 "attraction/pirate_ship": {
@@ -3529,6 +3599,14 @@
                 "building/entrance": {
                     "name": "Entrata/Uscita"
                 },
+                "building/farm": {
+                    "name": "Residenza della fattoria",
+                    "terms": "fattoria,casa del fattore,casa del contadino,residenza del contadino,residenza del fattore,dimora del contadino,dimora del fattore,casa colonica"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Edificio della fattoria non abitato",
+                    "terms": "fattoria,casa di campagna,rudere,cascinale,casale,casolare,rustico,casa rurale,capanno,magazzino"
+                },
                 "building/garage": {
                     "name": "Garage",
                     "terms": "Garage"
@@ -3644,9 +3722,12 @@
                     "name": "Piazzola",
                     "terms": "Piazzola,lotto"
                 },
+                "circular": {
+                    "name": "Strada rotonda senza precedenza"
+                },
                 "club": {
                     "name": "Club",
-                    "terms": "social*,centr*"
+                    "terms": "sociale,centro,centro sociale,centro aggregazione,centro culturale"
                 },
                 "craft": {
                     "name": "Mestiere",
@@ -3956,7 +4037,7 @@
                 },
                 "healthcare": {
                     "name": "Clinica",
-                    "terms": "<translate with synonyms or related terms for 'Healthcare Facility', separated by commas>"
+                    "terms": "clinica,ospedale,clinica ospedaliera,dottori,studio dottori,medicina,aiuto medico,guardia medica,centro igiene mentale,pediatra,medico,oftalmologo,dentista,ginecologo,andrologo,geriatra,medico dello sport"
                 },
                 "healthcare/alternative": {
                     "name": "Medicina alternativa",
@@ -3987,6 +4068,7 @@
                     "terms": "<translate with synonyms or related terms for 'Midwife', separated by commas>"
                 },
                 "healthcare/occupational_therapist": {
+                    "name": "Medico del lavoro",
                     "terms": "<translate with synonyms or related terms for 'Occupational Therapist', separated by commas>"
                 },
                 "healthcare/optometrist": {
@@ -4083,6 +4165,10 @@
                     "name": "Svincolo autostradale",
                     "terms": "Svincolo autostradale"
                 },
+                "highway/passing_place": {
+                    "name": "Slargo per passaggio",
+                    "terms": "slargo,sorpasso,zona,incrocio,area di sorpasso,area di incrocio,slargo di sorpasso,slargo di incrocio"
+                },
                 "highway/path": {
                     "name": "Sentiero",
                     "terms": "Sentiero"
@@ -4105,7 +4191,7 @@
                 },
                 "highway/raceway": {
                     "name": "Circuito (Motoristico)",
-                    "terms": "pista,autodromo,pista automobilistica,pista motoristica,auto*,moto*"
+                    "terms": "pista,autodromo,pista automobilistica,pista motoristica,auto,moto,motori,nascar,corsa,formula uno"
                 },
                 "highway/residential": {
                     "name": "Residenziale",
@@ -4265,7 +4351,7 @@
                 },
                 "landuse/aquaculture": {
                     "name": "Acquacoltura",
-                    "terms": "pesci,crostacei,alghe,gamber*,maricoltura,algacoltura"
+                    "terms": "pesci,crostacei,alghe,gambero,gamberi,gamberetti,aragoste,maricoltura,algacoltura,allevamento,molluschi,cozze,ostriche,orate"
                 },
                 "landuse/basin": {
                     "name": "Bacino",
@@ -4336,7 +4422,7 @@
                 },
                 "landuse/industrial/slaughterhouse": {
                     "name": "Macello",
-                    "terms": "macello,mattatoio,abbattimento,macelleria,macellaio,gallin*,mucc*,carne,suin*,maial*,animali"
+                    "terms": "macello,mattatoio,abbattimento,macelleria,macellaio,galline,gallina,mucca,mucche,carne,suino,suini,maiale,maiali,tacchino,tacchini,animali"
                 },
                 "landuse/landfill": {
                     "name": "Discarica",
@@ -4376,7 +4462,7 @@
                 },
                 "landuse/military/nuclear_explosion_site": {
                     "name": "Sito per esplosioni nucleari",
-                    "terms": "bomba,atomica,poligono,tiro,lancio,missil*,test,nucleare"
+                    "terms": "bomba,atomica,poligono,tiro,lancio,missile,missili,nucleare,test,nucleare"
                 },
                 "landuse/military/obstacle_course": {
                     "name": "Percorso ad ostacoli",
@@ -4388,7 +4474,7 @@
                 },
                 "landuse/military/range": {
                     "name": "Poligono di tiro militare",
-                    "terms": "poligono,militare,tiro,lancio,bombe,missil*"
+                    "terms": "poligono,militare,militari,tiro,lancio,bombe,missile,missili,forze militari,forza aerea,forza,guardia,armi,fuoco,marina,fucile,cecchino,cecchini,truppe,truppa,addestramento,guerra,battaglia,battaglione"
                 },
                 "landuse/military/training_area": {
                     "name": "Area di addestramento",
@@ -4442,6 +4528,10 @@
                     "name": "Sala giochi",
                     "terms": "Videogiochi"
                 },
+                "leisure/beach_resort": {
+                    "name": "Stabilimento balnerare",
+                    "terms": "spiaggia,spiaggia attrezzata,bagni,bagno,stabilimento balneare"
+                },
                 "leisure/bird_hide": {
                     "name": "osservazione uccelli",
                     "terms": "Capanno di osservazione"
@@ -4459,7 +4549,8 @@
                     "terms": "ballo,danza,jive,swing,tango,valzer,balera"
                 },
                 "leisure/dancing_school": {
-                    "name": "Scuola di danza"
+                    "name": "Scuola di danza",
+                    "terms": "scuola di danza,danza,lezioni di danza,imparare a danzare,danzare,maestro di danza"
                 },
                 "leisure/dog_park": {
                     "name": "Area per cani",
@@ -4494,6 +4585,7 @@
                     "terms": "<translate with synonyms or related terms for 'Exercise Horizontal Bar', separated by commas>"
                 },
                 "leisure/fitness_station/horizontal_ladder": {
+                    "name": "Scala orizzontale",
                     "terms": "<translate with synonyms or related terms for 'Exercise Monkey Bars', separated by commas>"
                 },
                 "leisure/fitness_station/hyperextension": {
@@ -4502,7 +4594,7 @@
                 },
                 "leisure/fitness_station/parallel_bars": {
                     "name": "Barre Parallele",
-                    "terms": "barr*,esercizi,fitness,palestra,percorso"
+                    "terms": "barra,trazioni,barre,esercizi,fitness,palestra,percorso"
                 },
                 "leisure/fitness_station/push-up": {
                     "name": "Stazione per piegamenti sulle braccia",
@@ -4533,11 +4625,12 @@
                     "terms": "Campo da golf"
                 },
                 "leisure/hackerspace": {
+                    "name": "Spazio hacker",
                     "terms": "<translate with synonyms or related terms for 'Hackerspace', separated by commas>"
                 },
                 "leisure/horse_riding": {
                     "name": "Centro equestre",
-                    "terms": "cavall*,equestre,circolo,ippica,club"
+                    "terms": "cavallo,cavalli,equestre,circolo,ippica,club,destrieri,stalla,stalle"
                 },
                 "leisure/ice_rink": {
                     "name": "Pista di Ghiaccio",
@@ -4554,6 +4647,10 @@
                 "leisure/nature_reserve": {
                     "name": "Riserva naturale",
                     "terms": "riserva,natura,parco,naturale"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Posti a sedere all’esterno",
+                    "terms": "giardino,patio,esterno,aperto,all’aperto,cena,caffè,merenda,pub,ristorante,bar,veranda,dehors"
                 },
                 "leisure/park": {
                     "name": "Parco",
@@ -4597,7 +4694,7 @@
                 },
                 "leisure/pitch/equestrian": {
                     "name": "Maneggio",
-                    "terms": "dressage,equestre,cavall*,cavalcat*"
+                    "terms": "dressage,equestre,cavallo,cavalli,cavalcata,cavalcate"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Campo di rugby a 13",
@@ -4683,6 +4780,10 @@
                     "name": "Cunicolo",
                     "terms": "adito,miniera,ingresso"
                 },
+                "man_made/antenna": {
+                    "name": "Antenna",
+                    "terms": "cella,stazione,trasmissione,trasmissioni,comunicazione,comunicazioni,telecomunicazione,cellulare,cellulari,smartphone,gsm,telefono,telefoni,telefonia,telefonica,radio,televisione,tv,etere"
+                },
                 "man_made/breakwater": {
                     "name": "Frangiflutti",
                     "terms": "Frangifrutti"
@@ -4733,6 +4834,10 @@
                 "man_made/observation": {
                     "name": "Torre di osservazione",
                     "terms": "torre,osservazione,osservatorio,piattaforma,osservativa,antincendio,panorama"
+                },
+                "man_made/observatory": {
+                    "name": "Osservatorio",
+                    "terms": "osservatorio,astronomico,meteorologico,vulcanologico,osservatorio meteorologico,osservatorio astronomico,radiotelescopio"
                 },
                 "man_made/petroleum_well": {
                     "name": "Pozzo petrolifero",
@@ -4858,6 +4963,10 @@
                     "name": "Brughiera",
                     "terms": "Brughiera"
                 },
+                "natural/mud": {
+                    "name": "Fango",
+                    "terms": "fango,fangoso,umido,bagnato,terra bagnata,melmoso,paludoso,palude"
+                },
                 "natural/peak": {
                     "name": "Picco",
                     "terms": "culmine,guglia,alpe,apice,cresta,sommità,cima,cocuzzolo,collina,monte,montagna,pinnacolo,estremità,vertice,vetta,piz"
@@ -4924,7 +5033,7 @@
                 },
                 "noexit/yes": {
                     "name": "Senza uscita",
-                    "terms": "strada,senza,uscita,fine,punto,mort*"
+                    "terms": "strada,senza,uscita,fine,punto,morto,strada senza uscita"
                 },
                 "office": {
                     "name": "Uffici",
@@ -4986,6 +5095,7 @@
                     "terms": "finanza,finanziaria,fiduciaria,mag"
                 },
                 "office/forestry": {
+                    "name": "Ufficio forestale",
                     "terms": "<translate with synonyms or related terms for 'Forestry Office', separated by commas>"
                 },
                 "office/foundation": {
@@ -5051,6 +5161,7 @@
                     "terms": "<translate with synonyms or related terms for 'Private Investigator Office', separated by commas>"
                 },
                 "office/quango": {
+                    "name": "Ufficio di una simil ONG",
                     "terms": "<translate with synonyms or related terms for 'Quasi-NGO Office', separated by commas>"
                 },
                 "office/research": {
@@ -5119,6 +5230,7 @@
                     "terms": "Quartiere,Zona"
                 },
                 "place/plot": {
+                    "name": "Particella catastale",
                     "terms": "<translate with synonyms or related terms for 'Plot', separated by commas>"
                 },
                 "place/quarter": {
@@ -5127,7 +5239,7 @@
                 },
                 "place/square": {
                     "name": "Piazza",
-                    "terms": "piazz*,spiazzo,slargo"
+                    "terms": "piazza,piazze,piazzale,spiazzo,slargo,largo"
                 },
                 "place/suburb": {
                     "name": "Sobborgo",
@@ -5162,6 +5274,7 @@
                     "terms": "<translate with synonyms or related terms for 'Bouncy Cushion', separated by commas>"
                 },
                 "playground/horizontal_bar": {
+                    "name": "Barra per trazioni",
                     "terms": "<translate with synonyms or related terms for 'Play Horizontal Bar', separated by commas>"
                 },
                 "playground/rocker": {
@@ -5225,7 +5338,7 @@
                 },
                 "power/plant": {
                     "name": "Area della Centrale elettrica",
-                    "terms": "carbone,gas,generatore,idroelettrico,nucleare,energia,elettric*,centrale"
+                    "terms": "carbone,gas,generatore,idroelettrico,nucleare,energia,elettrica,elittricità,elettrico,centrale,produzione"
                 },
                 "power/pole": {
                     "name": "Palo della luce",
@@ -5251,6 +5364,7 @@
                     "terms": "Trasformatore"
                 },
                 "public_transport/linear_platform": {
+                    "name": "Fermata / Banchina del trasporto pubblico",
                     "terms": "<translate with synonyms or related terms for 'Transit Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_aerialway": {
@@ -5286,9 +5400,11 @@
                     "terms": "<translate with synonyms or related terms for 'Tram Stop / Platform', separated by commas>"
                 },
                 "public_transport/linear_platform_trolleybus": {
+                    "name": "Fermata / Banchina del filobus",
                     "terms": "<translate with synonyms or related terms for 'Trolleybus Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform": {
+                    "name": "Fermata / Banchina del trasporto pubblico",
                     "terms": "<translate with synonyms or related terms for 'Transit Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_aerialway": {
@@ -5324,9 +5440,11 @@
                     "terms": "<translate with synonyms or related terms for 'Tram Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_trolleybus": {
+                    "name": "Fermata / Banchina del filobus",
                     "terms": "<translate with synonyms or related terms for 'Trolleybus Stop / Platform', separated by commas>"
                 },
                 "public_transport/station": {
+                    "name": "Stazione del trasporto pubblico",
                     "terms": "<translate with synonyms or related terms for 'Transit Station', separated by commas>"
                 },
                 "public_transport/station_aerialway": {
@@ -5342,7 +5460,7 @@
                     "terms": "<translate with synonyms or related terms for 'Ferry Station / Terminal', separated by commas>"
                 },
                 "public_transport/station_light_rail": {
-                    "name": "Stazione del tram",
+                    "name": "Stazione della metropolitana di superficie",
                     "terms": "<translate with synonyms or related terms for 'Light Rail Station', separated by commas>"
                 },
                 "public_transport/station_monorail": {
@@ -5366,15 +5484,19 @@
                     "terms": "<translate with synonyms or related terms for 'Tram Station', separated by commas>"
                 },
                 "public_transport/station_trolleybus": {
+                    "name": "Stazione / Terminal dei filobus",
                     "terms": "<translate with synonyms or related terms for 'Trolleybus Station / Terminal', separated by commas>"
                 },
                 "public_transport/stop_area": {
+                    "name": "Area della fermata del trasporto pubblico",
                     "terms": "<translate with synonyms or related terms for 'Transit Stop Area', separated by commas>"
                 },
                 "public_transport/stop_position": {
+                    "name": "Punto di stop del trasporto pubblico",
                     "terms": "<translate with synonyms or related terms for 'Transit Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_aerialway": {
+                    "name": "Punto di stop del trasporto a fune",
                     "terms": "<translate with synonyms or related terms for 'Aerialway Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_bus": {
@@ -5386,12 +5508,15 @@
                     "terms": "<translate with synonyms or related terms for 'Ferry Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_light_rail": {
+                    "name": "Punto di stop della metropolitana di superficie",
                     "terms": "<translate with synonyms or related terms for 'Light Rail Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_monorail": {
+                    "name": "Punto di stop della monorotaia",
                     "terms": "<translate with synonyms or related terms for 'Monorail Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_subway": {
+                    "name": "Punto di stop della metropolitana",
                     "terms": "<translate with synonyms or related terms for 'Subway Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_train": {
@@ -5399,9 +5524,11 @@
                     "terms": "<translate with synonyms or related terms for 'Train Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_tram": {
+                    "name": "Punto di stop del tram",
                     "terms": "<translate with synonyms or related terms for 'Tram Stopping Location', separated by commas>"
                 },
                 "public_transport/stop_position_trolleybus": {
+                    "name": "Punto di stop del filobus",
                     "terms": "<translate with synonyms or related terms for 'Trolleybus Stopping Location', separated by commas>"
                 },
                 "railway": {
@@ -5412,7 +5539,8 @@
                     "terms": "Ferrovia abbandonata"
                 },
                 "railway/buffer_stop": {
-                    "terms": "<translate with synonyms or related terms for 'Buffer Stop', separated by commas>"
+                    "name": "Respingente",
+                    "terms": "respingente,stop,ammortizzatore,fine linea"
                 },
                 "railway/crossing": {
                     "name": "Passaggio a livello (sentiero)",
@@ -5438,8 +5566,8 @@
                     "terms": "passaggio a livello,incrocio ferroviario,attraversamento"
                 },
                 "railway/light_rail": {
-                    "name": "Tram",
-                    "terms": "<translate with synonyms or related terms for 'Light Rail', separated by commas>"
+                    "name": "Metropolitana di superficie",
+                    "terms": "tranvia,metrotranvia,metropolitana,metropolitana di superficie"
                 },
                 "railway/milestone": {
                     "name": "Pietra miliare ferroviaria",
@@ -5447,7 +5575,7 @@
                 },
                 "railway/miniature": {
                     "name": "Ferrovia in miniatura",
-                    "terms": "<translate with synonyms or related terms for 'Miniature Railway', separated by commas>"
+                    "terms": "trenino,treno in miniatura,scartamento ridotto,scartamento minimo,ferrovia,binario"
                 },
                 "railway/monorail": {
                     "name": "Monorotaia",
@@ -5485,7 +5613,7 @@
                 },
                 "railway/train_wash": {
                     "name": "Lavaggio treni",
-                    "terms": "<translate with synonyms or related terms for 'Train Wash', separated by commas>"
+                    "terms": "lavaggio,pulizia,treni,treno"
                 },
                 "railway/tram": {
                     "name": "Tram",
@@ -5531,7 +5659,7 @@
                 },
                 "shop/art": {
                     "name": "Negozio di opere d'arte",
-                    "terms": "opere d'arte,quadri,sculture,galleria,art*"
+                    "terms": "opere d'arte,quadri,sculture,galleria,arte,esibizione,mostra"
                 },
                 "shop/baby_goods": {
                     "name": "Negozio di prodotti per l'infanzia",
@@ -5733,7 +5861,7 @@
                 },
                 "shop/gas": {
                     "name": "Bombolaio",
-                    "terms": "gas,bombol*,gpl,metano,lpg,cng,gas naturale,propano"
+                    "terms": "gas,bombole,bombola,gpl,metano,lpg,cng,gas naturale,propano,ricarica bombole,ricarica"
                 },
                 "shop/gift": {
                     "name": "Negozio souvenir",
@@ -5750,6 +5878,10 @@
                 "shop/hardware": {
                     "name": "Ferramenta",
                     "terms": "Negozio di Ferramenta"
+                },
+                "shop/health_food": {
+                    "name": "Prodotti per il benessere",
+                    "terms": "prodotti genuini,benessere,negozio di prodotti biologici,negozio di prodotti per la salute,prodotti per la salute"
                 },
                 "shop/hearing_aids": {
                     "name": "Negozio di apparecchi acustici",
@@ -5777,7 +5909,7 @@
                 },
                 "shop/kiosk": {
                     "name": "Chiosco",
-                    "terms": "<translate with synonyms or related terms for 'Kiosk', separated by commas>"
+                    "terms": "chiosco,edicola,tabacchi,dolciumi,snack"
                 },
                 "shop/kitchen": {
                     "name": "Negozio di cucine",
@@ -5793,7 +5925,7 @@
                 },
                 "shop/locksmith": {
                     "name": "Fabbro",
-                    "terms": "<tradurre con sinonimi o termini collegati alla parola 'fabbro, separati da virgole'>"
+                    "terms": "fabbro,ferraio,serrature,chiavi,ferro battuto"
                 },
                 "shop/lottery": {
                     "name": "Ricevitoria",
@@ -5865,11 +5997,15 @@
                 },
                 "shop/perfumery": {
                     "name": "Profumeria",
-                    "terms": "profum*"
+                    "terms": "profumi,profumo,profumeria"
                 },
                 "shop/pet": {
                     "name": "Negozio di animali",
                     "terms": "Negozio di animali"
+                },
+                "shop/pet_grooming": {
+                    "name": "Toelettatura per animali",
+                    "terms": "cane,gatto,cani,gatti,toilette,toletta,tolettatura,toelettatura,parrucchiere,unghie,shampoo,"
                 },
                 "shop/photo": {
                     "name": "Fotografo",
@@ -5937,7 +6073,7 @@
                 },
                 "shop/tiles": {
                     "name": "Negozio di piastrelle",
-                    "terms": "<translate with synonyms or related terms for 'Tile Shop', separated by commas>"
+                    "terms": "piastrelle,mattonelle,pavimento,pavimenti,ceramica,pietra"
                 },
                 "shop/tobacco": {
                     "name": "Tabacchino",
@@ -5948,7 +6084,8 @@
                     "terms": "Negozio giocattoli"
                 },
                 "shop/trade": {
-                    "terms": "<translate with synonyms or related terms for 'Trade Shop', separated by commas>"
+                    "name": "Materiali da edilizia",
+                    "terms": "materiali edilizi,edilizia,mattoni,cemento,stucco,gesso"
                 },
                 "shop/travel_agency": {
                     "name": "Agenzia di viaggi",
@@ -5979,7 +6116,7 @@
                 },
                 "shop/watches": {
                     "name": "Negozio di orologi",
-                    "terms": "orolog*"
+                    "terms": "orologio,orologi,negozio orologi,sveglia,sveglie,orologio a cipolla,cronografo,cronometro"
                 },
                 "shop/water_sports": {
                     "name": "Negozio per sport acquatici",
@@ -6039,10 +6176,10 @@
                 },
                 "tourism/gallery": {
                     "name": "Galleria d'arte",
-                    "terms": "opere d'arte,quadri,sculture,galleria,fotografie,dipinti,art*"
+                    "terms": "opere d'arte,quadri,sculture,galleria,foto,fotografia,fotografie,dipinti,arte,artistica,esibizione,mostra"
                 },
                 "tourism/guest_house": {
-                    "name": "Affittacamere/Bed & Breakfast",
+                    "name": "Bed & Breakfast",
                     "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
                 },
                 "tourism/hostel": {
@@ -6095,7 +6232,7 @@
                 },
                 "tourism/wilderness_hut": {
                     "name": "Bivacco",
-                    "terms": "<translate with synonyms or related terms for 'Wilderness Hut', separated by commas>"
+                    "terms": "bivacco,baito,struttura incustodita,casetta,piccolo rifugio"
                 },
                 "tourism/zoo": {
                     "name": "Zoo",
@@ -6139,7 +6276,7 @@
                 },
                 "traffic_calming/table": {
                     "name": "Dosso",
-                    "terms": "<translate with synonyms or related terms for 'Speed Table', separated by commas>"
+                    "terms": "veloce,lento,piano,velocità,dosso,dossi,rallentatore,tabellone,tabella,cuscino sonoro,banda sonora,cuscini sonori,bande sonore"
                 },
                 "type/boundary": {
                     "name": "Confine",
@@ -6174,15 +6311,19 @@
                 },
                 "type/restriction/only_left_turn": {
                     "name": "Obbligo di svolta a sinistra",
-                    "terms": "obbligo,curva,sinistra"
+                    "terms": "svolta a sinistra,divieto di svolta a destra,divieto di andare diritto,obbligo"
                 },
                 "type/restriction/only_right_turn": {
                     "name": "Obbligo di svolta a destra",
-                    "terms": "obbligo,curva,destra"
+                    "terms": "svolta a destra,divieto di svolta sinistra,divieto di andare diritto,obbligo"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Direzione obbligatoria dritto",
-                    "terms": "obbligo,dritto,diritto,divieto di svolta"
+                    "name": "Obbligo di andare diritto",
+                    "terms": "diritto,dritto,proseguire diritto,obbligo,divieto di svolta"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Obbligo di inversione di marcia",
+                    "terms": "Svolta a U,inversione,inversione di marcia,tornare indietro,torna indietro,curva a U"
                 },
                 "type/route": {
                     "name": "Percorso",
@@ -6217,8 +6358,8 @@
                     "terms": "cavallo,strada,ippica,sentiero,equitazione"
                 },
                 "type/route/light_rail": {
-                    "name": "Linea tramviaria",
-                    "terms": "<translate with synonyms or related terms for 'Light Rail Route', separated by commas>"
+                    "name": "Linea della metropolitana di superficie",
+                    "terms": "tranvia,metrotranvia,leggera,metro leggera,metropolitana leggera,linea tranvia,linea del tranvia"
                 },
                 "type/route/pipeline": {
                     "name": "Condotta",
@@ -6226,7 +6367,7 @@
                 },
                 "type/route/piste": {
                     "name": "Pista da sci",
-                    "terms": "<translate with synonyms or related terms for 'Piste/Ski Route', separated by commas>"
+                    "terms": "pista,piste,pista da sci,piste da sci,rossa,blu,nera,pista blu,pista rossa,pista nera,discesa"
                 },
                 "type/route/power": {
                     "name": "Linea elettrica",
@@ -6238,7 +6379,7 @@
                 },
                 "type/route/subway": {
                     "name": "Linea metropolitana",
-                    "terms": "<translate with synonyms or related terms for 'Subway Route', separated by commas>"
+                    "terms": "metro,metropolitana,subway,linea,linea della metro"
                 },
                 "type/route/train": {
                     "name": "Linea ferroviaria",
@@ -6477,7 +6618,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, basati su dati governativi.",
+                "description": "mappa di base, ottenuta da dati del governo.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6539,7 +6680,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                    "text": "Tasselli della mappa di Stamen Design con licenza CC-BY 3.0. Dati di OpenStreetMap com licenza ODbL"
                 },
                 "name": "Stamen Terrain"
             },
@@ -6554,6 +6695,328 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "osm-mg-facebook": {
+                "name": "Gruppo Facebook di OpenStreetMap del Madagascar",
+                "description": "Gruppo Facebook malgascio per persone interessate a OpenStreetMap"
+            },
+            "talk-mg": {
+                "name": "Mailinglist talk-mg",
+                "description": "Un posto dove i collaboratori, le comunità e gli utenti di OpenStreetMap del Madagascar possono condividere e discutere."
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap del Bangladesh",
+                "description": "Migliora OpenStreetMap nel Bangladesh",
+                "extendedDescription": "Stai mappando nel Bangladesh? Hai domande o vuoi unirti alla comunità locale? Unisciti a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap India - mappatura di quartiere partecipativa",
+                "description": "Miglioriamo OpenStreetMap in India",
+                "extendedDescription": "Mappi in India? Hai domande o vuoi unirti alla comunità locale? Unisciti a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-india-mailinglist": {
+                "name": "Mailinglist di OpenStreetMap dell’India",
+                "description": "Talk-in è la mailinglist ufficiale della comunità indiana"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter di OpenStreetMap dell’India",
+                "description": "Siamo solo ad un cinguettio di distanza: {url}"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap dell’Indonesia",
+                "description": "Migliora OpenStreetMap in Indonesia",
+                "extendedDescription": "Stai mappando in Indonesia? Hai domande o vuoi connetterti alla comunità locale? Unisci a a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-japan-facebook": {
+                "name": "Comunità OpenStreetMap del Giappone",
+                "description": "Mappatori e utenti OpenStreetMap del Giappone"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Mailinglist di OpenStreetMap Giappone",
+                "description": "Talk-ja è la mailinglist ufficiale della comunità giapponese"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter OpenStreetMap Giappone",
+                "description": "Hashtag su Twitter: {url}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap della Mongolia",
+                "description": "Migliora OpenStreetMap in Mongolia",
+                "extendedDescription": "Stai mappando in Mongolia? Hai domande o vuoi connetterti alla comunità locale? Unisci a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap del Nepal",
+                "description": "Migliora OpenStreetMap in Nepal",
+                "extendedDescription": "Stai mappando in Nepal? Hai domande o vuoi connetterti alla comunità locale? Unisciti a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-PH-facebook": {
+                "name": "Facebook di OpenStreetMap delle Filippine",
+                "description": "Benvenuta/o in OpenStreetMap delle Filippine, un posto dove i nostri amici filippini vengono incoraggiati a contribuire al progetto OpenStreetMap."
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Mailing list Talk-ph",
+                "description": "Una mailinglist per discutere OpenStreetMap nelle Filippine"
+            },
+            "OSM-PH-slack": {
+                "name": "Slack di OpenStreetMap delle Filippine",
+                "description": "Tutti sono i benvenuti! Registrati su {signupUrl}"
+            },
+            "OSM-PH-telegram": {
+                "name": "Telegram di OpenStreetMap delle Filippine",
+                "description": "Non ufficiale, comunità locale su Telegram di utenti OpenStreetMap e amici nelle Filippine."
+            },
+            "OSM-RU-forum": {
+                "name": "Forum di OpenStreetMap della Russia",
+                "description": "Forum web di OpenStreetMap della Russia"
+            },
+            "OSM-RU-telegram": {
+                "name": "Telegram di OpenStreetMap della Russia",
+                "description": "Chat Telegram di OpenStreetMap della Russia"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap dello Sri Lanka",
+                "description": "Migliora OpenStreetMap nello Sri Lanka",
+                "extendedDescription": "Stai mappando lo Sri Lanka? Hai domande o vuoi connetterti alla comunità locale? Unisciti a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-TW-facebook": {
+                "name": "Comunità di OpenStreetMap di Taiwan",
+                "description": "Gruppo di Facebook per mappatori e utenti OpenStreetMap che vogliono discutere su argomenti inerenti Taiwan."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "Mailinglist di OpenStreetMap di Taiwan",
+                "description": "Talk-tw è la mailinglist ufficiale delle comunità per discutere su argomenti inerenti Taiwan."
+            },
+            "be-facebook": {
+                "name": "Comunità belga di OpenStreetMap",
+                "description": "Facebook di mappatori e OpenStreetMap del Belgio"
+            },
+            "be-forum": {
+                "name": "Forum belga di OpenStreetMap",
+                "description": "Forum web belga di OpenStreetMap"
+            },
+            "be-irc": {
+                "name": "Canale IRC belga di OpenStreetMap",
+                "description": "Entra in #osmbe su irc.oftc.net (porta 6667)",
+                "extendedDescription": "Unisciti a #osmbe su irc.oftc.net (porta 6667), è collegato al canale di chat di matrix"
+            },
+            "be-mailinglist": {
+                "name": "Mailinglist talk-be",
+                "description": "Talk-be è la mailinglist ufficiale della comunità OSM belga"
+            },
+            "be-matrix": {
+                "name": "Canale Riot di OpenStreetMap belga",
+                "description": "Tutti i mappatori sono i benvenuti! Iscriviti su {signupUrl}",
+                "extendedDescription": "Esistono diversi canali, per principianti, canali a tema, per discutere di landuse e di problemi degli sviluppatori."
+            },
+            "be-twitter": {
+                "name": "Twitter di OpenStreetMap del Belgio",
+                "description": "OSM belga su Twitter: {url}"
+            },
+            "byosm": {
+                "name": "OpenStreetMap della Bielorussia",
+                "description": "Chat telegram di OpenStreetMap della Bielorussia"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Mailinglist Talk-cz",
+                "description": "Talk-cz è la mailinglist ufficiale della comunità ceca"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes su Telegram",
+                "description": "Chat Telegram di OpenStreetMap della Spagna"
+            },
+            "OSM-CA-Slack": {
+                "name": "Slack di OSM-CA",
+                "description": "Tutti sono i benvenuti! Iscriviti su {signupUrl}."
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap di Vancouver",
+                "description": "Mappatori e utenti OpenStreetMap di Vancouver, area Colombia Britannica"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "OpenStreetMappers a Bay Area",
+                "description": "Migliora OpenStreetMap a Bay Area",
+                "extendedDescription": "Il nostro gruppo vuole far crescere la community OpenStreetMap qui nella zona di Bay Area. I nostri eventi sono aperti a chiunque, dall'appassionato di open source, al ciclista, al professionista GIS, al geocacher e oltre. Qualunque persona appassionata di mappe, cartografia o analisi geografica è la benvenuta a unirsi al nostro gruppo e partecipare ai nostri eventi. "
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "OSM Pennsylvania Centrale",
+                "description": "Community online di mapping con base presso State College, PA"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Slack di Programmare per San Jose",
+                "description": "Tutti sono benvenuti! Iscriviti su {signupUrl}, e dopo collegati al canale \"osm su IRC."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "OSM Dallas-Fort Worth",
+                "description": "Gruppo OpenStreetMap di Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Work, e tutte le città limitrofe abbondano di persone creative ed esperte di tecnologia. La nostra vision è quella di cercare in questo gruppo nuove vie di utilizzare le fantastiche risorse offerte da OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Meetup per appassionati di mappe nella zona di Philadelphia",
+                "extendedDescription": "Geophilly unisce sviluppatori, geografi, data geek, appassionati open source, civic hacker e drogati di mappe nella comune passione passione per le mappe e delle storie che possono raccontare. Se usate delle mappe nel vostro lavoro o se voltete soltanto saperne di più, questo è il meetup adatto per voi! I nostri eventi mirano a essere aperti, amichevoli, educativi e sociali, e spaziano dalle piacevoli chiacchierate agli incontri lampo e perfino agli workshop. Venite a creare una community geospaziale variegata e ispirativa con noi a Philadelphia!"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota",
+                "description": "Mappatori e appassionati di OpenStreetMap nell’area delle Twin Cities.",
+                "extendedDescription": "Un punto di contatto per gli appassionati di OpenStreetMap del Minnesota e delle Twin Cities!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mappando DC",
+                "description": "Migliora OpenStreetMap nell'area di DC",
+                "extendedDescription": "Siamo un gruppo di mappatori volontari con l'obiettivo di migliorare OpenStreetMap nell'area di DC. Puntiamo anche a insegnare agli altri l'ecosistema OSM, l'analisi dei dati, la cartografia e GIS. Ci raduniamo ogni altro mese ai meetup per concentrarci su una zona della nostra città."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "Mappatori e utenti OpenStreetMap nei dintorni di Portland, Maine",
+                "extendedDescription": "Maptime è letteralmente tempo per la mappatura. La nostra missione è quella di aprire le porte della cartografia a chiunque sia interessato, creando un posto e dei momenti per l’apprendimento collaborativo, l’esplorazione, la creazione di mappe usando strumenti e tecnologie per la mappatura."
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Miglioriamo OpenStreetMap nell’area di Cleveland",
+                "extendedDescription": "Open Geo Cleveland mira a diventare una risorsa per le persone che vogliano discutere e condividere le proprie conoscenze su come utilizzare i dati geografici liberi, nella fattispecie OpenStreetMap, e di software geospaziale aperto che gestisce, modifica e mostra su schermo dati geografici, e spinge per il loro utilizzo nell’Ohio del nord-est. Siamo anche un chapter di maptime =)"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap di Boston",
+                "description": "Mappatori e utenti di OpenStreetMap che risiedono nell’area di Boston",
+                "extendedDescription": "OpenStreetMap è una mappa libera e aperta, simile ad una mappa del mondo in stile Wikipedia, con centinaia di migliaia di contributi ogni giorno da persone come te. Modificare la mappa è semplice e divertente! Unisciti a noi sia da casa che all’aperto, nel nostro obiettivo di creare la miglior mappa dell’area di Boston e del resto del mondo!"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap, mar dei Salish centrale",
+                "description": "Mappatori e utenti di OpenStreetMap nei dintorni di Mount Vernon, nello stato di Washington",
+                "extendedDescription": "OpenStreetMap è la mappa del mondo creata da persone come te. È una mappa che tu puoi costruire e che è gratis come Wikipedia. Vai su osm.org per altre informazioni. Noi ci riuniamo sempre per parlare di mappe, mappare e divertirci!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Gruppo utenti OpenStreetMap di Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap del Colorado",
+                "description": "Mappatori e utenti OpenStreetMap dello stato del Colorado, USA",
+                "extendedDescription": "OpenStreetMap (OSM) del Colorado è una collaborazione locale di persone interessate a usare le proprie forze per creare mappe libere. Noi incoraggiamo i nostri mappatori ad organizzare e suggerire eventi di mappatura ovunque nel nostro stato. Attività di incontro come per esempio semplici riunioni, lezioni di OSM dal principiante all’intermedio oppure feste di mappatura in compagnia."
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Mappatori e utenti OpenStreetMap, sviluppatori e appassionati nell'area Metropolitana di New York"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Mappatori e utenti OpenStreetMap nell'area di Portland",
+                "extendedDescription": "OpenStreetMap (OSM) è una cartina del pianeta costruita da persone come te. È una mappa che puoi modificare, distribuita gratuitamente come Wikipedia. Vai su osm.org per saperne di più e vieni ai nostri meetup per discutere di mappe, contribuire a OSM e divertirti!"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap di Seattle",
+                "description": "Mappatori e utenti OpenStreetMap nell’area di Seattle"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap della California del sud",
+                "description": "Divertiamoci, contribuiamo con qualunque cosa a Los Angeles e impariamo a mappare!",
+                "extendedDescription": "OpenStreetMap (OSM) della California del sud è per chiunque sia interessato a mappare insieme agli altri lavorando con OpenStreetMap. OpenStreetMap, la Wikipedia delle mappe, è la mappa del mondo open-source libera creata da più di un milione di volontari per tutto il globo. Chiunque è ben accetto. Se non conosci OpenStreetMap, te la insegneremo noi. Se hai un’idea per un progetto di mappatura oppure una gita sul campo che il nostro gruppo può effettuare, perfetto!"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM di South Bay",
+                "description": "Serate della mappa ospitate da \"Programmare per San Jose\"",
+                "extendedDescription": "Programmare per San Jose, la filiale locale della brigata di Programmare per l’America, ospita ogni mese di giovedì una serata per la mappa nei sobborghi di San José. Incontra altri mappatori della South Bay, aiutaci con i progetti di mappatura locale e vieni a conoscenza di altri progetti di tecnologia civica. Non è richiesto né saper programmare né sapere cosa sia un GIS."
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap di Tampa Bay",
+                "description": "Mappatori e utenti OpenStreetMap dell’area di Tampa Bay",
+                "extendedDescription": "Gruppo OSM di Tampa Bay per riunire residenti locali e riuscire a costruire la mappa definitiva di Tampa Bay con OpenStreetMap, la mappa del mondo libera e modificabile. Se ti interessano le mappe, i dati, l’open source, il GPS, le passeggiate, pedalare, etc., ti piacerà da impazzire lavorare con OpenStreetMap - perciò unisciti a noi! Ci incontreremo e mapperemo e discuteremo di nuovi argomenti più o meno una volta al mese."
+            },
+            "OSM-US-Slack": {
+                "name": "Slack Americano di OpenStreetMap",
+                "description": "Sono tutti i benvenuti! Registrati all'indirizzo {signupUrl}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap degli Stati Uniti",
+                "description": "Aiutiamo a crescere e migliorare OpenStreetMap negli Stati Uniti.",
+                "extendedDescription": "Supportiamo OpenStreetMap organizzando conferenze annuali, producendo risorse per la comunità, costruendo relazioni e diffondendo la voce. Unisciti a OpenStreetMap degli Stati Uniti qui: {signupUrl}"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap dello Utah",
+                "description": "Mappaori e utenti OpenStreetMap dell’area di Salt Lake City",
+                "extendedDescription": "Le attività comprendono cose come lezioni per imparare a mappare, feste di mappatura e uscite all’aperto per la raccolta di dati. Gli eventi avverranno nell’area SLC, almemmo all’inizio. Stiamo cercando sia mappatori esperti che alle prime armi. Unisciti e andiamo a mappare!"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap del Wyoming",
+                "description": "Mappatori e utenti OpenStreetMap dello stato del Wyoming",
+                "extendedDescription": "OpenStreetMap (OSM) del Wyoming è una collaborazione local formata da perrsone interessate a unire i loro sforzi per creare mappe libere. Incoraggiamo tutti i nostri mappatori a organizzare o suggerire eventi di mappatura ovunque nello stato. Attività di gruppo sono per esempio incontri, lezioni di OSM dal principiante all’intrmedio, oppure feste di mappatura in compagnia."
+            },
+            "PHXGeo-meetup": {
+                "name": "Meetup PHXGeo",
+                "description": "Mappatori e utenti OpenStreetMap di Phoenix (area Arizona)",
+                "extendedDescription": "Questo è un gruppo meetup per i residenti nell’area di Phoenix a cui piacciono le mappe, GIS, OpenStreetMap e cartografia in tutte le loro combinazioni."
+            },
+            "PHXGeo-twitter": {
+                "name": "Twitter PHXGeo",
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "Western-Slope-facebook": {
+                "name": "Facebook di OSM Western Slope",
+                "description": "Mappatori e utenti OpenStreetMap attorno a Grand Junction (Colorado)"
+            },
+            "Western-Slope-meetup": {
+                "name": "Meetup di OSM di Western Slope",
+                "description": "Mappatori e utenti OpenStreetMap intorno a Grand Junction (Colorado)",
+                "extendedDescription": "L’obiettivo di questo gruppo è quello di introdurre la comunità a OpenStreetMap, sviluppare una gruppo di mappatori, creare i più strabilianti dati georiferiti utilizzando qualsiasi metodo possibile e infine studiare dei metodi che permettano a questi dati di ritornare nella nostra comunità. Immagina un segnale dei percorsi accurato! Immagine un’ulteriore sviluppo delle piste ciclabili! Immagina qualsiasi cosa, quello è il bello di OpenStreetMap!"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Slack di Australia Maptime",
+                "description": "Registrati all'indirizzo {signupUrl}"
+            },
+            "talk-au": {
+                "name": "Mailinglist talk-au",
+                "description": "Un posto dove i mappatori australiani possono conversare liberamente"
+            },
+            "OSM-AR-facebook": {
+                "name": "Facebook di OpenStreetMap dell’Argentina",
+                "description": "Unisciti alla comunità su Facebook di OpenStreetMap dell’Argentina",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è benvenuto!"
+            },
+            "OSM-AR-forum": {
+                "name": "Forum web di OpenStreetMap dell’Argentina",
+                "description": "Unisciti al forum web di OpenStreetMap dell’Argentina",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è benvenuto!"
+            },
+            "OSM-AR-irc": {
+                "name": "IRC di OpenStreetMap dell’Argentina",
+                "description": "Entra su #osm-ar nel server irc.oftc.net (porta 6667)"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Mailinglist talk-ar",
+                "description": "Una mailinglist per parlare di OpenStreetMap dell’Argentina"
+            },
+            "OSM-AR-telegram": {
+                "name": "Telegram di OpenStreetMap dell’Argentina",
+                "description": "Unisciti alla comunità su Telegram di OpenStreetMap dell’Argentina",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è benvenuto!"
+            },
+            "OSM-AR-twitter": {
+                "name": "Twitter di OpenStreetMap dell’Argentina",
+                "description": "Seguici su Twitter all’url {url}"
+            },
+            "Bahia-telegram": {
+                "name": "Gruppo Telegram di OpenStreetMap di Bahia",
+                "description": "Unisciti alla comunità OpenStreetMap di Bahia su Telegram",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è il benvenuto!"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Mailinglist talk-br",
+                "description": "Una mailinglist per discutere di OpenStreetMap in Brasile"
+            },
+            "OSM-br-telegram": {
+                "name": "Telegram di OpenStreetMap del Brasile",
+                "description": "Unisciti alla comunità brasiliana di OpenStreetMap su Telegram",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è il benvenuto!"
+            },
+            "OSM-br-twitter": {
+                "name": "Twitter di OpenStreetMap del Brasile",
+                "description": "Seguici su Twitter su {url}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap su Reddit",
+                "description": "/r/openstreetmap/ è il posto perfetto per imparare di più su OpenStreetMap. Chiedici di tutto!"
             }
         }
     }

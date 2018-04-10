@@ -17,7 +17,7 @@
             },
             "browse": {
                 "title": "Hisava.",
-                "description": "Akisaho ary hangezao ny sarintany."
+                "description": "Akisaho ary hakaikezo ny sarintany."
             },
             "draw_area": {
                 "tail": "Tsindrio raha hampiditra vona eo faritra misy anao. Tsindrio ilay teboka voalohany raha hamarana ny fanoritana faritra."
@@ -204,6 +204,20 @@
                 }
             }
         },
+        "zoom_in_edit": "Hakaikezo raha hanova",
+        "info_panels": {
+            "background": {
+                "zoom": "Hakaiky"
+            }
+        },
+        "zoom": {
+            "in": "Hanakaiky",
+            "out": "Hanalavitra"
+        },
+        "cannot_zoom": "Tsy afaka manalavitra noho izao intsony amin'ity maody ity.",
+        "gpx": {
+            "zoom": "Hanangeza araky ny sosona"
+        },
         "intro": {
             "graph": {
                 "block_number": "<value for addr:block_number>",
@@ -217,6 +231,13 @@
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "mg"
+            }
+        },
+        "shortcuts": {
+            "browsing": {
+                "navigation": {
+                    "zoom": "Hanakaiky / Hanalavitra"
+                }
             }
         }
     }

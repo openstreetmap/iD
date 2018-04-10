@@ -4,7 +4,9 @@
         "name",
         "ref_route",
         "operator",
-        "network_horse"
+        "network_horse",
+        "description",
+        "distance"
     ],
     "geometry": [
         "relation"

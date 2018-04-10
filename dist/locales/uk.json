@@ -1,5 +1,10 @@
 {
     "uk": {
+        "icons": {
+            "information": "інформація",
+            "remove": "вилучити",
+            "undo": "відмінити"
+        },
         "modes": {
             "add_area": {
                 "title": "Полігон",
@@ -1703,6 +1708,9 @@
                         "cycleway:right": "Праворуч"
                     }
                 },
+                "dance/style": {
+                    "label": "Види танців"
+                },
                 "date": {
                     "label": "Дата"
                 },
@@ -1941,6 +1949,9 @@
                 "indoor": {
                     "label": "План приміщення"
                 },
+                "industrial": {
+                    "label": "Тип"
+                },
                 "information": {
                     "label": "Тип"
                 },
@@ -2059,6 +2070,10 @@
                 },
                 "maxspeed": {
                     "label": "Обмеження швидкості",
+                    "placeholder": "40, 50, 60…"
+                },
+                "maxspeed/advisory": {
+                    "label": "Рекомендована швидкість",
                     "placeholder": "40, 50, 60…"
                 },
                 "maxstay": {
@@ -2649,8 +2664,16 @@
                     "label": "Тип",
                     "placeholder": "Типово"
                 },
-                "vending": {
-                    "label": "Тип товарів"
+                "usage_rail": {
+                    "label": "Тіп колії",
+                    "options": {
+                        "branch": "Гілка",
+                        "industrial": "Промислова",
+                        "main": "Основний путь",
+                        "military": "Військова",
+                        "test": "Випробувальна",
+                        "tourism": "Туристична"
+                    }
                 },
                 "visibility": {
                     "label": "Видно з",
@@ -4100,6 +4123,10 @@
                     "name": "З’їзд з/на автомагістраль",
                     "terms": "Motorway Link, ppl fdnjvfuscnhfkm, естакада, виїзд з, виїзд на, з’їзд з, з’їзд на"
                 },
+                "highway/passing_place": {
+                    "name": "Місце для роз'їзду",
+                    "terms": "дорога,дати шлях,роз'їзд,переваги,рух,зустрічний рух"
+                },
                 "highway/path": {
                     "name": "Стежка",
                     "terms": "Path, cntrf, тропа"
@@ -4475,6 +4502,10 @@
                     "name": "Зала для танців",
                     "terms": "танці,зала,бальні танці,розваги,дозвілля,клуб,інтереси,тренування"
                 },
+                "leisure/dancing_school": {
+                    "name": "Школа танців",
+                    "terms": "школа,клуб,танці,танцювальна,танго,модерн,вальс,ча-ча-ча,латино,сучасні,хіп-хоп"
+                },
                 "leisure/dog_park": {
                     "name": "Парк для собак",
                     "terms": "Dog Park, gfhr lkz cjfr, парк для собак"
@@ -4749,6 +4780,10 @@
                 "man_made/observation": {
                     "name": "Оглядова вежа",
                     "terms": "Observation tower, jukzljdf dtf, пожежна вежа, вежа спостереження"
+                },
+                "man_made/observatory": {
+                    "name": "Обсерваторія",
+                    "terms": "астрономія,метеорологія,спостереження,зірки,погода"
                 },
                 "man_made/petroleum_well": {
                     "name": "Нафтова свердловина",
@@ -6213,16 +6248,20 @@
                     "terms": "знак, обмеження, розворот, немає, заборона"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Поворот тільки праворуч",
-                    "terms": "знак, обмеження, поворот, праворуч, тільки"
+                    "name": "Тільки ліворуч",
+                    "terms": "поворот,рух,ліворуч,заборона"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Поворот тільки ліворуч",
-                    "terms": "знак, обмеження, ліворуч, поворот, тільки"
+                    "name": "Тільки праворуч",
+                    "terms": "поворот,рух,праворуч,заборона"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Тільки прямо",
-                    "terms": "знак, обмеження, тільки прямо, поворота немає"
+                    "name": "ТІльки прямо",
+                    "terms": "рух,прямо,заборона"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Тільки розворот",
+                    "terms": "рух,розворот,заборона"
                 },
                 "type/route": {
                     "name": "Маршрут",
@@ -6517,7 +6556,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Базова мапа Австрії, на основі урядових даних.",
+                "description": "Мапа Австрії, на основі урядових даних.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6579,7 +6618,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Тайли мапи від Stamen Design, CC BY 3.0"
+                    "text": "Тайли мапи від Stamen Design, CC BY 3.0. Дані OpenStreetMap, ODbL."
                 },
                 "name": "Stamen Terrain"
             },
@@ -6594,6 +6633,12 @@
                     "text": "Мапи © Thunderforest, Дані © Учасники OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "OSM-Reddit": {
+                "name": "OpenStreetMap на Reddit",
+                "description": "/r/openstreetmap/ чудове місце, щоб дізнатись більше про OpenStreetMap. Можете питати про будь-що!"
             }
         }
     }

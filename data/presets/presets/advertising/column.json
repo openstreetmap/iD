@@ -1,14 +1,14 @@
 {
-    "icon": "poi-fountain",
     "fields": [
-        "name"
+       "direction",
+       "lit"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "tags": {
-        "amenity": "fountain"
+        "advertising": "column"
     },
-    "name": "Fountain"
+    "name": "Advertising Column"
 }

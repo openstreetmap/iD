@@ -844,9 +844,6 @@
                 "traffic_signals": {
                     "label": "Տեսակ"
                 },
-                "vending": {
-                    "label": "Գոյքի Տեսակ"
-                },
                 "water": {
                     "label": "Տեսակ"
                 },

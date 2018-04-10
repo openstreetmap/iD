@@ -134,6 +134,7 @@ export function svgDefs(context) {
         // symbol spritesheets
         defs
             .call(SVGSpriteDefinition('iD-sprite', context.imagePath('iD-sprite.svg')))
-            .call(SVGSpriteDefinition('maki-sprite', context.imagePath('maki-sprite.svg')));
+            .call(SVGSpriteDefinition('maki-sprite', context.imagePath('maki-sprite.svg')))
+            .call(SVGSpriteDefinition('community-sprite', context.imagePath('community-sprite.svg')));
     };
 }
