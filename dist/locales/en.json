@@ -4161,7 +4161,7 @@
                     "terms": "terminal,illness"
                 },
                 "healthcare/laboratory": {
-                    "name": "Laboratory",
+                    "name": "Medical Laboratory",
                     "terms": "medical_laboratory,medical_lab,blood_check"
                 },
                 "healthcare/midwife": {
