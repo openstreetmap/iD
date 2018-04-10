@@ -545,7 +545,7 @@ en:
         label: Exceptions
       faces:
         # faces=*
-        label: faces
+        label: Faces
       fax:
         # fax=*
         label: Fax
