@@ -3080,6 +3080,16 @@
         },
         {
             "key": "healthcare",
+            "value": "laboratory",
+            "description": "Laboratory",
+            "object_types": [
+                "node",
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/hospital-15.svg?sanitize=true"
+        },
+        {
+            "key": "healthcare",
             "value": "midwife",
             "description": "Midwife",
             "object_types": [

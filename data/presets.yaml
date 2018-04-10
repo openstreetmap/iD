@@ -3142,6 +3142,11 @@ en:
         name: Hospice
         # 'terms: terminal,illness'
         terms: '<translate with synonyms or related terms for ''Hospice'', separated by commas>'
+      healthcare/laboratory:
+        # healthcare=laboratory
+        name: Laboratory
+        # 'terms: medical_laboratory,medical_lab,blood_check'
+        terms: '<translate with synonyms or related terms for ''Laboratory'', separated by commas>'
       healthcare/midwife:
         # healthcare=midwife
         name: Midwife

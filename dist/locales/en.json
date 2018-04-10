@@ -4111,6 +4111,10 @@
                     "name": "Hospice",
                     "terms": "terminal,illness"
                 },
+                "healthcare/laboratory": {
+                    "name": "Laboratory",
+                    "terms": "medical_laboratory,medical_lab,blood_check"
+                },
                 "healthcare/midwife": {
                     "name": "Midwife",
                     "terms": "baby,childbirth,delivery,labour,labor,pregnancy"
