@@ -1400,6 +1400,170 @@ describe('iD.osmIntersection', function() {
             });
         });
 
+
+        describe('complex intersection - via 2 ways with loops - gotchas', function() {
+            //
+            //            e
+            //           / \
+            //          /   \
+            //   a --- b === c ~~~ d
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b'], tags: {highway: 'residential'}}),
+                iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {highway: 'residential'}}),
+                iD.osmWay({id: '~', nodes: ['c', 'd'], tags: {highway: 'residential'}}),
+                iD.osmWay({id: '/', nodes: ['b', 'e'], tags: {highway: 'residential'}}),
+                iD.osmWay({id: '\\', nodes: ['e', 'c'], tags: {highway: 'residential'}})
+            ]);
+
+            it('with no restrictions, finds all turns', function() {
+                var turns = iD.osmIntersection(graph, 'c').turns('=', 2);
+                expect(turns.length).to.eql(10);
+
+                expect(turns[0].key).to.eql('=_b_=');
+                expect(turns[0].u).to.be.true;
+
+                expect(turns[1].key).to.eql('=_b_/');
+                expect(turns[1].u).to.be.not.ok;
+
+                expect(turns[2].key).to.eql('=_b_/_e_\\');
+                expect(turns[2].u).to.be.not.ok;
+
+                expect(turns[3].key).to.eql('=_b_/_e_\\_c_~');
+                expect(turns[3].u).to.be.not.ok;
+
+                expect(turns[4].key).to.eql('=_b_-');
+                expect(turns[4].u).to.be.not.ok;
+
+                expect(turns[5].key).to.eql('=_c_=');
+                expect(turns[5].u).to.be.true;
+
+                expect(turns[6].key).to.eql('=_c_~');
+                expect(turns[6].u).to.be.not.ok;
+
+                expect(turns[7].key).to.eql('=_c_\\');
+                expect(turns[7].u).to.be.not.ok;
+
+                expect(turns[8].key).to.eql('=_c_\\_e_/');
+                expect(turns[8].u).to.be.not.ok;
+
+                expect(turns[9].key).to.eql('=_c_\\_e_/_b_-');
+                expect(turns[9].u).to.be.not.ok;
+            });
+
+            it('matches from-via-to strictly when alternate paths exist between from and to', function() {
+                var r1 = iD.osmRelation({
+                    id: 'r1',
+                    tags: { type: 'restriction', restriction: 'no_straight_on' },
+                    members: [
+                        { role: 'from', id: '=', type: 'way' },
+                        { role: 'via', id: 'c', type: 'node' },
+                        { role: 'to', id: '~', type: 'way' }
+                    ]
+                });
+                graph = graph.replace(r1);
+
+                var turns = iD.osmIntersection(graph, 'c').turns('=', 2);
+                expect(turns.length).to.eql(10);
+
+                expect(turns[0].key).to.eql('=_b_=');
+                expect(turns[0].u).to.be.true;
+
+                expect(turns[1].key).to.eql('=_b_/');
+                expect(turns[1].u).to.be.not.ok;
+
+                expect(turns[2].key).to.eql('=_b_/_e_\\');
+                expect(turns[2].u).to.be.not.ok;
+
+                expect(turns[3].key).to.eql('=_b_/_e_\\_c_~');
+                expect(turns[3].u).to.be.not.ok;
+                expect(turns[3].restrictionID).to.be.undefined;   // the alternate path should not match
+                expect(turns[3].direct).to.be.undefined;
+
+                expect(turns[4].key).to.eql('=_b_-');
+                expect(turns[4].u).to.be.not.ok;
+
+                expect(turns[5].key).to.eql('=_c_=');
+                expect(turns[5].u).to.be.true;
+
+                expect(turns[6].key).to.eql('=_c_~');
+                expect(turns[6].u).to.be.not.ok;
+                expect(turns[6].restrictionID).to.eql('r1');
+                expect(turns[6].direct).to.be.true;         // direct
+                expect(turns[6].no).to.be.true;             // restricted!
+                expect(turns[6].only).to.be.not.ok;
+
+                expect(turns[7].key).to.eql('=_c_\\');
+                expect(turns[7].u).to.be.not.ok;
+
+                expect(turns[8].key).to.eql('=_c_\\_e_/');
+                expect(turns[8].u).to.be.not.ok;
+
+                expect(turns[9].key).to.eql('=_c_\\_e_/_b_-');
+                expect(turns[9].u).to.be.not.ok;
+            });
+
+
+            it('`only_` restriction is only effective towards the via', function() {
+                var r1 = iD.osmRelation({
+                    id: 'r1',
+                    tags: { type: 'restriction', restriction: 'only_straight_on' },
+                    members: [
+                        { role: 'from', id: '=', type: 'way' },
+                        { role: 'via', id: 'c', type: 'node' },
+                        { role: 'to', id: '~', type: 'way' }
+                    ]
+                });
+                graph = graph.replace(r1);
+
+                var turns = iD.osmIntersection(graph, 'c').turns('=', 2);
+                expect(turns.length).to.eql(8);
+
+                expect(turns[0].key).to.eql('=_b_=');         // not towards via
+                expect(turns[0].u).to.be.true;
+
+                expect(turns[1].key).to.eql('=_b_/');         // not towards via
+                expect(turns[1].u).to.be.not.ok;
+
+                expect(turns[2].key).to.eql('=_b_/_e_\\');    // not towards via
+                expect(turns[2].u).to.be.not.ok;
+
+                expect(turns[3].key).to.eql('=_b_/_e_\\_c_~');    // not towards via
+                expect(turns[3].u).to.be.not.ok;
+                expect(turns[3].restrictionID).to.be.undefined;   // the alternate path should not match
+                expect(turns[3].direct).to.be.undefined;
+
+                expect(turns[4].key).to.eql('=_b_-');         // not towards via
+                expect(turns[4].u).to.be.not.ok;
+
+                expect(turns[5].key).to.eql('=_c_=');
+                expect(turns[5].u).to.be.true;
+                expect(turns[5].restrictionID).to.eql('r1');
+                expect(turns[5].direct).to.be.false;         // indirect
+                expect(turns[5].no).to.be.true;              // restricted!
+                expect(turns[5].only).to.be.not.ok;
+
+                expect(turns[6].key).to.eql('=_c_~');
+                expect(turns[6].u).to.be.not.ok;
+                expect(turns[6].restrictionID).to.eql('r1');
+                expect(turns[6].direct).to.be.true;          // direct
+                expect(turns[6].no).to.be.not.ok;
+                expect(turns[6].only).to.be.true;            // only!
+
+                expect(turns[7].key).to.eql('=_c_\\');
+                expect(turns[7].u).to.be.not.ok;
+                expect(turns[7].restrictionID).to.eql('r1');
+                expect(turns[7].direct).to.be.false;         // indirect
+                expect(turns[7].no).to.be.true;              // restricted!
+                expect(turns[7].only).to.be.not.ok;
+            });
+        });
+
     });
 });
 
