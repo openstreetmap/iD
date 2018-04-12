@@ -1456,7 +1456,7 @@ describe('iD.osmIntersection', function() {
                 expect(turns[9].u).to.be.not.ok;
             });
 
-            it('matches from-via-to strictly when alternate paths exist between from and to', function() {
+            it('matches from-via-to strictly when alternate paths exist between from-via-to', function() {
                 var r1 = iD.osmRelation({
                     id: 'r1',
                     tags: { type: 'restriction', restriction: 'no_straight_on' },

@@ -407,21 +407,29 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         var matchesViaTo = false;
                         var isAlongOnlyPath = false;
 
-                        if (t.id === way.id) {     // match VIA, TO
-                            if (v.length === 1 && v[0].type === 'node') { // match VIA node
-                                matchesViaTo = v[0].id === entity.id;
-                            } else {                                      // match all VIA ways
+                        if (t.id === way.id) {     // match TO
+
+                            if (v.length === 1 && v[0].type === 'node') {    // match VIA node
+                                matchesViaTo = (v[0].id === entity.id && (
+                                    (matchesFrom && currPath.length === 2) ||
+                                    (!matchesFrom && currPath.length > 2)
+                                ));
+
+                            } else {                                         // match all VIA ways
                                 var pathVias = [];
-                                for (k = 2; k < currPath.length; k+=2) {  // k = 1 skips FROM way
-                                    pathVias.push(currPath[k]);
+                                for (k = 2; k < currPath.length; k +=2 ) {   // k = 2 skips FROM
+                                    pathVias.push(currPath[k]);              // (path goes way-node-way...)
                                 }
                                 var restrictionVias = [];
                                 for (k = 0; k < v.length; k++) {
-                                    restrictionVias.push(v[k].id);
+                                    if (v[k].type === 'way') {
+                                        restrictionVias.push(v[k].id);
+                                    }
                                 }
                                 var diff = _difference(pathVias, restrictionVias);
                                 matchesViaTo = !diff.length;
                             }
+
                         } else if (isOnly) {
                             for (k = 0; k < v.length; k++) {
                                 // way doesn't match TO, but is one of the via ways along the path of an "only"
