@@ -175,7 +175,8 @@ export function modeDragNode(context) {
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum();
-            var targetLoc = d && d.properties && d.properties.entity && d.properties.entity.loc;
+            var target = d && d.properties && d.properties.entity;
+            var targetLoc = target && target.loc;
             var targetNodes = d && d.properties && d.properties.nodes;
 
             if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
@@ -194,10 +195,23 @@ export function modeDragNode(context) {
             moveAnnotation(entity)
         );
 
+        // Below here: validations
+        var isInvalid = false;
 
-        // check if this movement causes the geometry to break
+        // Check if this connection to `target` could cause relations to break..
+        if (target) {
+            isInvalid = isRelationConflict([entity.id, target.id], context.graph());
+            if (isInvalid && !context.surface().classed('nope')) {
+                uiFlash().text(t('operations.connect.relation'))();
+            }
+        }
+
+        // Check if this drag causes the geometry to break..
+        if (!isInvalid) {
+            isInvalid = isInvalidGeometry(entity, context.graph());
+        }
+
         var nopeDisabled = context.surface().classed('nope-disabled');
-        var isInvalid = isInvalidGeometry(entity, context.graph());
         if (nopeDisabled) {
             context.surface()
                 .classed('nope', false)
@@ -209,6 +223,38 @@ export function modeDragNode(context) {
         }
 
         _lastLoc = loc;
+    }
+
+
+    // See also actionConnect.disabled()
+    // (similar, but this code can also check node-way)
+    function isRelationConflict(ids, graph) {
+        var seen = {};
+
+        for (var i = 0; i < ids.length; i++) {
+            var ent1 = graph.entity(ids[i]);
+
+            var toCheck = [ent1];
+            if (ent1.type === 'node') {
+                toCheck = toCheck.concat(graph.parentWays(ent1));
+            }
+            for (var j = 0; j < toCheck.length; j++) {
+                var ent2 = toCheck[j];
+
+                var relations = graph.parentRelations(ent2);
+                for (var k = 0; k < relations.length; k++) {
+                    var relation = relations[k];
+                    var role = relation.memberById(ent2.id).role || '';
+
+                    if (seen[relation.id] !== undefined && seen[relation.id] !== role) {
+                        return 'relation';
+                    } else {
+                        seen[relation.id] = role;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 

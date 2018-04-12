@@ -171,4 +171,101 @@ describe('iD.actionConnect', function() {
         expect(graph.entity('r1').members).to.eql([{id: 'c', role: 'r1', type: 'node'}]);
         expect(graph.entity('r2').members).to.eql([{id: 'c', role: 'r2', type: 'node'}]);
     });
+
+
+    describe('#disabled', function () {
+        it('returns falsy when connecting members of the same relation and same roles (different ways)', function () {
+            //
+            //  "Route 1"   "Route 1"
+            //  'forward'   'forward'
+            //  a ----- b   c ===== d
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r1', tags: { name: 'Route 1'}, members: [
+                    { id: '-', type: 'way', role: 'forward' },
+                    { id: '=', type: 'way', role: 'forward' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+        });
+
+        it('returns falsy when connecting members of the different relation and different roles (different ways)', function () {
+            //
+            //  "Route 1"   "Route 2"
+            //  'forward'   'backward'
+            //  a ----- b   c ===== d
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r1', tags: { name: 'Route 1'}, members: [
+                    { id: '-', type: 'way', role: 'forward' }
+                ]}),
+                iD.osmRelation({id: 'r2', tags: { name: 'Route 2'}, members: [
+                    { id: '=', type: 'way', role: 'backward' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+        });
+
+        it('returns \'relation\' when connecting members of the same relation but different roles (different ways)', function () {
+            //
+            //  "Route 1"   "Route 1"
+            //  'forward'   'backward'
+            //  a ----- b   c ===== d
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r1', tags: { name: 'Route 1'}, members: [
+                    { id: '-', type: 'way', role: 'forward' },
+                    { id: '=', type: 'way', role: 'backward' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('relation');
+        });
+
+        it('returns \'relation\' when connecting members of the same relation but different roles (joined way)', function () {
+            //
+            //   from   via    to
+            //  a --- b === c ~~~ d
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '-', type: 'way', role: 'from' },
+                    { id: '=', type: 'way', role: 'via' },
+                    { id: '~', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('relation');
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('relation');
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.eql('relation');
+        });
+    });
+
 });
