@@ -355,6 +355,7 @@ export function uiFieldRestrictions(field, context) {
                     return;
 
                 } else if (datum.restrictionID && !datum.only) {    // NO -> ONLY
+                    var seen = {};
                     var datumOnly = _cloneDeep(datum);
                     datumOnly.only = true;
                     restrictionType = restrictionType.replace(/^no/, 'only');
@@ -365,10 +366,14 @@ export function uiFieldRestrictions(field, context) {
                     extraActions = [];
                     _oldTurns = [];
                     for (i = 0; i < turns.length; i++) {
-                        if (turns[i].direct && turns[i].path[1] === datum.path[1]) {
-                            turns[i].restrictionType = osmInferRestriction(vgraph, turns[i], projection);
-                            _oldTurns.push(turns[i]);
-                            extraActions.push(actionUnrestrictTurn(turns[i]));
+                        var turn = turns[i];
+                        if (seen[turn.restrictionID]) continue;  // avoid deleting the turn twice (#4968, #4928)
+
+                        if (turn.direct && turn.path[1] === datum.path[1]) {
+                            seen[turns[i].restrictionID] = true;
+                            turn.restrictionType = osmInferRestriction(vgraph, turn, projection);
+                            _oldTurns.push(turn);
+                            extraActions.push(actionUnrestrictTurn(turn));
                         }
                     }
 
