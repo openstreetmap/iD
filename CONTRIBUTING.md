@@ -226,7 +226,7 @@ project** button near the bottom of the project page. You can edit your
 getting too many notifications.
 
 Translations are licensed under
-[ISC](https://raw.github.com/openstreetmap/iD/master/LICENSE), the same license
+[ISC](https://raw.github.com/openstreetmap/iD/master/LICENSE.md), the same license
 as iD.
 
 **Why are there so many duplicate "Type" translations?** There are multiple
