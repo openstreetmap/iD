@@ -3521,6 +3521,10 @@
                     "name": "Drop Tower",
                     "terms": "theme park,amusement ride,gondola,tower,big drop"
                 },
+                "attraction/maze": {
+                    "name": "Maze",
+                    "terms": "theme park,amusement ride,labyrinth"
+                },
                 "attraction/pirate_ship": {
                     "name": "Pirate Ship",
                     "terms": "theme park,carnival ride,amusement ride"
