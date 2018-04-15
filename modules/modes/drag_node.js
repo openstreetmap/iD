@@ -119,7 +119,9 @@ export function modeDragNode(context) {
 
         if (_isCancelled) {
             if (hasHidden) {
-                uiFlash().text(t('modes.drag_node.connected_to_hidden'))();
+                uiFlash()
+                    .duration(4000)
+                    .text(t('modes.drag_node.connected_to_hidden'))();
             }
             return drag.cancel();
         }
@@ -178,14 +180,15 @@ export function modeDragNode(context) {
             var target = d && d.properties && d.properties.entity;
             var targetLoc = target && target.loc;
             var targetNodes = d && d.properties && d.properties.nodes;
+            var edge;
 
             if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
                 loc = targetLoc;
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
-                if (choice) {
-                    loc = choice.loc;
+                edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+                if (edge) {
+                    loc = edge.loc;
                 }
             }
         }
@@ -200,16 +203,32 @@ export function modeDragNode(context) {
 
         // Check if this connection to `target` could cause relations to break..
         if (target) {
-            isInvalid = isRelationConflict([entity.id, target.id], context.graph());
-            if (isInvalid && !context.surface().classed('nope')) {
-                uiFlash().text(t('operations.connect.relation'))();
-            }
+            isInvalid = hasRelationConflict(entity, target, edge, context.graph());
         }
 
         // Check if this drag causes the geometry to break..
         if (!isInvalid) {
-            isInvalid = isInvalidGeometry(entity, context.graph());
+            isInvalid = hasInvalidGeometry(entity, context.graph());
         }
+
+
+        var nope = context.surface().classed('nope');
+        if (isInvalid === 'relation' || isInvalid === 'restriction') {
+            if (!nope) {   // about to nope - show hint
+                uiFlash()
+                    .duration(4000)
+                    .text(t('operations.connect.' + isInvalid,
+                        { relation: context.presets().item('type/restriction').name() }
+                    ))();
+            }
+        } else {
+            if (nope) {   // about to un-nope, remove hint
+                uiFlash()
+                    .duration(1)
+                    .text('')();
+            }
+        }
+
 
         var nopeDisabled = context.surface().classed('nope-disabled');
         if (nopeDisabled) {
@@ -226,39 +245,29 @@ export function modeDragNode(context) {
     }
 
 
-    // See also actionConnect.disabled()
-    // (similar, but this code can also check node-way)
-    function isRelationConflict(ids, graph) {
-        var seen = {};
+    // Uses `actionConnect.disabled()` to know whether this connection is ok..
+    function hasRelationConflict(entity, target, edge, graph) {
+        var testGraph = graph.update();  // copy
 
-        for (var i = 0; i < ids.length; i++) {
-            var ent1 = graph.entity(ids[i]);
+        // if snapping to way - add midpoint there and consider that the target..
+        if (edge) {
+            var midpoint = osmNode();
+            var action = actionAddMidpoint({
+                loc: edge.loc,
+                edge: [target.nodes[edge.index - 1], target.nodes[edge.index]]
+            }, midpoint);
 
-            var toCheck = [ent1];
-            if (ent1.type === 'node') {
-                toCheck = toCheck.concat(graph.parentWays(ent1));
-            }
-            for (var j = 0; j < toCheck.length; j++) {
-                var ent2 = toCheck[j];
-
-                var relations = graph.parentRelations(ent2);
-                for (var k = 0; k < relations.length; k++) {
-                    var relation = relations[k];
-                    var role = relation.memberById(ent2.id).role || '';
-
-                    if (seen[relation.id] !== undefined && seen[relation.id] !== role) {
-                        return 'relation';
-                    } else {
-                        seen[relation.id] = role;
-                    }
-                }
-            }
+            testGraph = action(testGraph);
+            target = midpoint;
         }
-        return false;
+
+        // can we connect to it?
+        var ids = [entity.id, target.id];
+        return actionConnect(ids).disabled(testGraph);
     }
 
 
-    function isInvalidGeometry(entity, graph) {
+    function hasInvalidGeometry(entity, graph) {
         var parents = graph.parentWays(entity);
         var i, j, k;
 
