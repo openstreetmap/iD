@@ -174,98 +174,259 @@ describe('iD.actionConnect', function() {
 
 
     describe('#disabled', function () {
-        it('returns falsy when connecting members of the same relation and same roles (different ways)', function () {
-            //
-            //  "Route 1"   "Route 1"
-            //  'forward'   'forward'
-            //  a ----- b   c ===== d
-            //
+        it('returns falsy when connecting members of the same relation and same roles', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
-                iD.osmNode({id: 'd'}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r1', tags: { name: 'Route 1'}, members: [
-                    { id: '-', type: 'way', role: 'forward' },
-                    { id: '=', type: 'way', role: 'forward' }
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmRelation({id: 'r1', members: [
+                    { id: 'b', type: 'node', role: 'foo' },
+                    { id: 'c', type: 'node', role: 'foo' }
                 ]})
             ]);
 
             expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
         });
 
-        it('returns falsy when connecting members of the different relation and different roles (different ways)', function () {
-            //
-            //  "Route 1"   "Route 2"
-            //  'forward'   'backward'
-            //  a ----- b   c ===== d
-            //
+        it('returns falsy when connecting members of the different relation and different roles', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
-                iD.osmNode({id: 'd'}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r1', tags: { name: 'Route 1'}, members: [
-                    { id: '-', type: 'way', role: 'forward' }
-                ]}),
-                iD.osmRelation({id: 'r2', tags: { name: 'Route 2'}, members: [
-                    { id: '=', type: 'way', role: 'backward' }
-                ]})
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmRelation({id: 'r1', members: [{ id: 'b', type: 'node', role: 'foo' } ]}),
+                iD.osmRelation({id: 'r2', members: [{ id: 'c', type: 'node', role: 'bar' } ]})
             ]);
 
             expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
         });
 
-        it('returns \'relation\' when connecting members of the same relation but different roles (different ways)', function () {
-            //
-            //  "Route 1"   "Route 1"
-            //  'forward'   'backward'
-            //  a ----- b   c ===== d
-            //
+        it('returns \'relation\' when connecting members of the same relation but different roles', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
-                iD.osmNode({id: 'd'}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r1', tags: { name: 'Route 1'}, members: [
-                    { id: '-', type: 'way', role: 'forward' },
-                    { id: '=', type: 'way', role: 'backward' }
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmRelation({id: 'r1', members: [
+                    { id: 'b', type: 'node', role: 'foo' },
+                    { id: 'c', type: 'node', role: 'bar' }
                 ]})
             ]);
 
             expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('relation');
         });
 
-        it('returns \'relation\' when connecting members of the same relation but different roles (joined way)', function () {
+        it('returns falsy when connecting a node unrelated to the restriction', function () {
             //
-            //   from   via    to
-            //  a --- b === c ~~~ d
+            //  a --- b   d ~~~ e        r1:  `no_right_turn`
+            //        |                        FROM '-'
+            //        |                        VIA  'b'
+            //        c                        TO   '|'
             //
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
                 iD.osmNode({id: 'c'}),
                 iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['b', 'c']}),
-                iD.osmWay({id: '~', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+                iD.osmWay({id: '|', nodes: ['b', 'c']}),
+                iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_right_turn' }, members: [
                     { id: '-', type: 'way', role: 'from' },
-                    { id: '=', type: 'way', role: 'via' },
-                    { id: '~', type: 'way', role: 'to' }
+                    { id: 'b', type: 'node', role: 'via' },
+                    { id: '|', type: 'way', role: 'to' }
                 ]})
             ]);
 
-            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('relation');
-            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('relation');
-            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.eql('relation');
+            expect(iD.actionConnect(['a', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
         });
-    });
 
+        it('returns falsy when connecting nodes that would not break a via-node restriction', function () {
+            //
+            //  a --- b --- c      r1:  `no_right_turn`
+            //              |            FROM '-'
+            //              d            VIA  'c'
+            //              |            TO   '|'
+            //              e
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmWay({id: '|', nodes: ['c', 'd', 'e']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_right_turn' }, members: [
+                    { id: '-', type: 'way', role: 'from' },
+                    { id: 'c', type: 'node', role: 'via' },
+                    { id: '|', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            // allowed: adjacent connections that don't destroy a way
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['d', 'e']).disabled(graph)).to.be.not.ok;
+        });
+
+        it('returns falsy when connecting nodes that would not break a via-way restriction', function () {
+            //
+            //  a --- b --- c      r1:  `no_u_turn`
+            //              |            FROM '='
+            //              d            VIA  '|'
+            //              |            TO   '-'
+            //  g === f === e
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmNode({id: 'f'}),
+                iD.osmNode({id: 'g'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmWay({id: '|', nodes: ['c', 'd', 'e']}),
+                iD.osmWay({id: '=', nodes: ['e', 'f', 'g']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_u_turn' }, members: [
+                    { id: '=', type: 'way', role: 'from' },
+                    { id: '|', type: 'way', role: 'via' },
+                    { id: '-', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            // allowed: adjacent connections that don't destroy a way
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['d', 'e']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['e', 'f']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['f', 'g']).disabled(graph)).to.be.not.ok;
+        });
+
+        it('returns \'restriction\' when connecting nodes that would break a via-node restriction', function () {
+            //
+            //  a --- b --- c      r1:  `no_right_turn`
+            //              |            FROM '-'
+            //              d            VIA  'c'
+            //              |            TO   '|'
+            //              e
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmWay({id: '|', nodes: ['c', 'd', 'e']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_right_turn' }, members: [
+                    { id: '-', type: 'way', role: 'from' },
+                    { id: 'c', type: 'node', role: 'via' },
+                    { id: '|', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            // prevented:
+            // extra connections to the VIA node, or any connections between FROM and TO
+            expect(iD.actionConnect(['a', 'c']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA');
+            expect(iD.actionConnect(['e', 'c']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA');
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('restriction', 'extra connection FROM-TO');
+        });
+
+        it('returns \'restriction\' when connecting nodes that would break a via-way restriction', function () {
+            //
+            //  a --- b --- c      r1:  `no_u_turn`
+            //              |            FROM '='
+            //              d            VIA  '|'
+            //              |            TO   '-'
+            //  g === f === e
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmNode({id: 'f'}),
+                iD.osmNode({id: 'g'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmWay({id: '|', nodes: ['c', 'd', 'e']}),
+                iD.osmWay({id: '=', nodes: ['e', 'f', 'g']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_u_turn' }, members: [
+                    { id: '=', type: 'way', role: 'from' },
+                    { id: '|', type: 'way', role: 'via' },
+                    { id: '-', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            // prevented:
+            // extra connections to any node along VIA way
+            expect(iD.actionConnect(['a', 'c']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA c');
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA d');
+            expect(iD.actionConnect(['b', 'e']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA e');
+            expect(iD.actionConnect(['c', 'e']).disabled(graph)).to.eql('restriction', 'extra connection VIA-VIA');
+            expect(iD.actionConnect(['f', 'c']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA c');
+            expect(iD.actionConnect(['f', 'd']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA d');
+            expect(iD.actionConnect(['g', 'e']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA e');
+        });
+
+        it('returns \'restriction\' when connecting would destroy a way in a via-node restriction', function () {
+            //
+            //  a --- b      r1:  `no_right_turn`
+            //        |            FROM '-'
+            //        |            VIA  'b'
+            //        c            TO   '|'
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '|', nodes: ['b', 'c']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_right_turn' }, members: [
+                    { id: '-', type: 'way', role: 'from' },
+                    { id: 'b', type: 'node', role: 'via' },
+                    { id: '|', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('restriction', 'destroy FROM');
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('restriction', 'destroy TO');
+        });
+
+        it('returns \'restriction\' when connecting would destroy a way in via-way restriction', function () {
+            //
+            //  a --- b      r1:  `no_u_turn`
+            //        |            FROM '='
+            //        |            VIA  '|'
+            //  d === c            TO   '-'
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '|', nodes: ['b', 'c']}),
+                iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_u_turn' }, members: [
+                    { id: '=', type: 'way', role: 'from' },
+                    { id: '|', type: 'way', role: 'via' },
+                    { id: '-', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.eql('restriction', 'destroy TO');
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('restriction', 'destroy VIA');
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.eql('restriction', 'destroy FROM');
+        });
+
+    });
 });

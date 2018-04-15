@@ -151,7 +151,8 @@
                     "line": "Connected a way to a line.",
                     "area": "Connected a way to an area."
                 },
-                "relation": "These features can't be connected because they have conflicting relation roles."
+                "relation": "These features can't be connected because they have conflicting relation roles.",
+                "restriction": "These features can't be connected because it would damage a \"{relation}\" relation."
             },
             "disconnect": {
                 "title": "Disconnect",
