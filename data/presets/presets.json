@@ -4085,6 +4085,26 @@
             },
             "name": "Drop Tower"
         },
+        "attraction/maze": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "amusement ride",
+                "labyrinth"
+            ],
+            "tags": {
+                "attraction": "maze"
+            },
+            "name": "Maze"
+        },
         "attraction/pirate_ship": {
             "icon": "amusement-park",
             "fields": [

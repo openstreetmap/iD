@@ -2515,6 +2515,11 @@ en:
         name: Drop Tower
         # 'terms: theme park,amusement ride,gondola,tower,big drop'
         terms: '<translate with synonyms or related terms for ''Drop Tower'', separated by commas>'
+      attraction/maze:
+        # attraction=maze
+        name: Maze
+        # 'terms: theme park,amusement ride,labyrinth'
+        terms: '<translate with synonyms or related terms for ''Maze'', separated by commas>'
       attraction/pirate_ship:
         # attraction=pirate_ship
         name: Pirate Ship

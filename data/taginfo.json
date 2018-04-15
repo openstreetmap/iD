@@ -1661,6 +1661,16 @@
         },
         {
             "key": "attraction",
+            "value": "maze",
+            "description": "Maze",
+            "object_types": [
+                "node",
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/amusement-park-15.svg?sanitize=true"
+        },
+        {
+            "key": "attraction",
             "value": "pirate_ship",
             "description": "Pirate Ship",
             "object_types": [
