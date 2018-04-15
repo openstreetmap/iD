@@ -217,6 +217,34 @@ describe('iD.actionConnect', function() {
             expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.eql('relation');
         });
 
+        it('returns falsy when connecting a node unrelated to the restriction', function () {
+            //
+            //  a --- b   d ~~~ e        r1:  `no_right_turn`
+            //        |                        FROM '-'
+            //        |                        VIA  'b'
+            //        c                        TO   '|'
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '|', nodes: ['b', 'c']}),
+                iD.osmWay({id: '~', nodes: ['d', 'e']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_right_turn' }, members: [
+                    { id: '-', type: 'way', role: 'from' },
+                    { id: 'b', type: 'node', role: 'via' },
+                    { id: '|', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            expect(iD.actionConnect(['a', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['c', 'd']).disabled(graph)).to.be.not.ok;
+        });
+
         it('returns falsy when connecting nodes that would not break a via-node restriction', function () {
             //
             //  a --- b --- c      r1:  `no_right_turn`

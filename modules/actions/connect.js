@@ -61,7 +61,7 @@ export function actionConnect(nodeIDs) {
         var seen = {};
         var restrictionIDs = [];
         var survivor;
-        var node;
+        var node, way;
         var relations, relation, role;
         var i, j, k;
 
@@ -116,15 +116,11 @@ export function actionConnect(nodeIDs) {
         restrictionIDs = _uniq(restrictionIDs);
         for (i = 0; i < restrictionIDs.length; i++) {
             relation = graph.entity(restrictionIDs[i]);
+            if (!relation.isComplete(graph)) continue;
 
-            var memberWays = [];
-            for (j = 0; j < relation.members.length; j++) {
-                var m = relation.members[j];
-                var entity = graph.hasEntity(m.id);
-                if (m.type === 'way') {
-                    memberWays.push(entity);
-                }
-            }
+            var memberWays = relation.members
+                .filter(function(m) { return m.type === 'way'; })
+                .map(function(m) { return graph.entity(m.id); });
 
             // 2a. disable if connection would damage a restriction
             // (a key node is a node at the junction of ways)
@@ -149,34 +145,56 @@ export function actionConnect(nodeIDs) {
 
             for (j = 0; j < nodeIDs.length; j++) {
                 var n = nodeIDs[j];
-                if (nodes.from.indexOf(n) !== -1) { connectFrom = true; }
-                if (nodes.via.indexOf(n) !== -1) { connectVia = true; }
-                if (nodes.to.indexOf(n) !== -1) { connectTo = true; }
+                if (nodes.from.indexOf(n) !== -1)    { connectFrom = true; }
+                if (nodes.via.indexOf(n) !== -1)     { connectVia = true; }
+                if (nodes.to.indexOf(n) !== -1)      { connectTo = true; }
                 if (nodes.keyfrom.indexOf(n) !== -1) { connectKeyFrom = true; }
-                if (nodes.keyto.indexOf(n) !== -1) { connectKeyTo = true; }
+                if (nodes.keyto.indexOf(n) !== -1)   { connectKeyTo = true; }
             }
-            if (connectFrom && connectTo) { return 'restriction'; }
+            if (connectFrom && connectTo)  { return 'restriction'; }
             if (connectFrom && connectVia) { return 'restriction'; }
-            if (connectTo && connectVia) { return 'restriction'; }
+            if (connectTo   && connectVia) { return 'restriction'; }
 
-            // connecting to a key node - must be an adjacent node
+            // connecting to a key node -
+            // if both nodes are on a member way (i.e. part of the turn restriction),
+            // the connecting node must be adjacent to the key node.
             if (connectKeyFrom || connectKeyTo) {
                 if (nodeIDs.length !== 2) { return 'restriction'; }
-                var ok = false;
+
+                var n0 = null;
+                var n1 = null;
                 for (j = 0; j < memberWays.length; j++) {
-                    ok = memberWays[j].areAdjacent(nodeIDs[0], nodeIDs[1]);
-                    if (ok) break;
+                    way = memberWays[j];
+                    if (way.contains(nodeIDs[0])) { n0 = nodeIDs[0]; }
+                    if (way.contains(nodeIDs[1])) { n1 = nodeIDs[1]; }
                 }
-                if (!ok) { return 'restriction'; }
+
+                if (n0 && n1) {    // both nodes are part of the restriction
+                    var ok = false;
+                    for (j = 0; j < memberWays.length; j++) {
+                        way = memberWays[j];
+                        if (way.areAdjacent(n0, n1)) {
+                            ok = true;
+                            break;
+                        }
+                    }
+                    if (!ok) {
+                        return 'restriction';
+                    }
+                }
             }
 
             // 2b. disable if nodes being connected will destroy a member way in a restriction
-            // (to test, make a copy and try removing non surviving nodes)
+            // (to test, make a copy and try actually connecting the nodes)
             for (j = 0; j < memberWays.length; j++) {
-                var way = memberWays[j].update({});
+                way = memberWays[j].update({});   // make copy
                 for (k = 0; k < nodeIDs.length; k++) {
-                    if (nodeIDs[k] !== survivor.id) {
+                    if (nodeIDs[k] === survivor.id) continue;
+
+                    if (way.areAdjacent(nodeIDs[k], survivor.id)) {
                         way = way.removeNode(nodeIDs[k]);
+                    } else {
+                        way = way.replaceNode(nodeIDs[k], survivor.id);
                     }
                 }
                 if (way.isDegenerate()) {
