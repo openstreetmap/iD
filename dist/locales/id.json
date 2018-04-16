@@ -397,12 +397,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM tersunting!",
             "just_edited": "Anda baru saja menyunting OpenStreetMap!",
-            "view_on_osm": "Lihat di OSM",
-            "facebook": "Bagikan di Facebook",
-            "twitter": "Bagikan di Twitter",
-            "google": "Bagikan di Google+",
             "help_link_text": "detail"
         },
         "confirm": {

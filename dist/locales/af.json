@@ -183,8 +183,7 @@
             "unsaved_changes": "Jy het ongestoorde veranderinge"
         },
         "success": {
-            "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!",
-            "view_on_osm": "Besigtig op OSM"
+            "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!"
         },
         "splash": {
             "welcome": "Welkom by die iD OpenStreetMap program",

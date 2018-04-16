@@ -617,13 +617,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM을 편집했습니다!",
             "just_edited": "오픈스트리트맵을 편집했습니다!",
-            "view_on_osm": "OSM에서 보기",
-            "facebook": "페이스북에 공유",
-            "twitter": "트위터에 공유",
-            "google": "Google+에 공유",
-            "help_html": "변경사항은 몇 분 후에 \"표준\" 레이어에서 보여집니다. 다른 레이어와 특정 지물은 더 오래 걸릴 수 있습니다.",
             "help_link_text": "자세한 정보",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Ko:FAQ#.EB.82.98.EB.8A.94_.EC.A7.80.EB.8F.84.EC.97.90_.EC.95.BD.EA.B0.84.EC.9D.98_.EB.B3.80.EA.B2.BD.EC.9D.84_.EA.B0.80.ED.96.88.EB.8B.A4._.EB.82.B4.EA.B0.80_.EC.96.B4.EB.96.BB.EA.B2.8C_.EB.82.98.EC.9D.98_.EB.B3.80.EA.B2.BD.EC.82.AC.ED.95.AD.EC.9D.84_.EB.B3.BC_.EC.88.98_.EC.9E.88.EB.82.98.EC.9A.94.3F"
         },

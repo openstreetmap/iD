@@ -150,7 +150,9 @@
                     "vertex": "nối liền đường kẻ với đường khác",
                     "line": "nối liền lối với đường kẻ",
                     "area": "nối liền đường kẻ với vùng"
-                }
+                },
+                "relation": "Không thể nối liền các đối tượng này vì có vai trò quan hệ xung đột.",
+                "restriction": "Không thể nối liền các đối tượng này vì sẽ làm hư một quan hệ “{relation}”."
             },
             "disconnect": {
                 "title": "Tháo gỡ",
@@ -407,6 +409,7 @@
                 "key": "L",
                 "title": "Lịch sử",
                 "selected": "{n} được chọn",
+                "no_history": "Không có Lịch sử (Đối tượng Mới Tạo)",
                 "version": "Phiên bản",
                 "last_edit": "Sửa đổi Cuối cùng",
                 "edited_by": "Người Sửa đổi",
@@ -644,15 +647,20 @@
             }
         },
         "success": {
-            "edited_osm": "Bạn đã sửa đổi OSM!",
             "just_edited": "Bạn vừa sửa đổi OpenStreetMap!",
-            "view_on_osm": "Xem tại OSM",
-            "facebook": "Chia sẻ trên Facebook",
-            "twitter": "Chia sẻ trên Twitter",
-            "google": "Chia sẻ trên Google+",
-            "help_html": "Các thay đổi của bạn sẽ xuất hiện trên lớp “Chuẩn” trong vòng vài phút. Một số lớp và tính năng khác có thể được cập nhật chậm hơn.",
+            "thank_you": "Cảm ơn bạn đã cải thiện bản đồ!",
+            "thank_you_location": "Cảm ơn bạn đã cải thiện bản đồ {where}.",
+            "help_html": "Các thay đổi của bạn sẽ xuất hiện tại OpenStreetMap trong vòng vài phút. Các bản đồ tại trang khác có thể được cập nhật chậm hơn.",
             "help_link_text": "Chi tiết",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Vi:FAQ?setlang=vi#T.C3.B4i_v.E1.BB.ABa_thay_.C4.91.E1.BB.95i_b.E1.BA.A3n_.C4.91.E1.BB.93._L.C3.A0m_sao_xem_.C4.91.C6.B0.E1.BB.A3c_c.C3.A1c_thay_.C4.91.E1.BB.95i_c.E1.BB.A7a_t.C3.B4i.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Vi:FAQ?setlang=vi#T.C3.B4i_v.E1.BB.ABa_thay_.C4.91.E1.BB.95i_b.E1.BA.A3n_.C4.91.E1.BB.93._L.C3.A0m_sao_xem_.C4.91.C6.B0.E1.BB.A3c_c.C3.A1c_thay_.C4.91.E1.BB.95i_c.E1.BB.A7a_t.C3.B4i.3F",
+            "view_on_osm": "Xem các Thay đổi tại OSM",
+            "changeset_id": "Số bộ thay đổi của bạn: {changeset_id}",
+            "like_osm": "Bạn có ham mê OpenStreetMap chưa? Hãy liên hệ với cộng đồng:",
+            "more": "Thêm nữa",
+            "events": "Sự kiện",
+            "languages": "Ngôn ngữ: {languages}",
+            "missing": "Danh sách này thiếu gì không?",
+            "tell_us": "Báo cho chúng tôi biết!"
         },
         "confirm": {
             "okay": "OK",
@@ -1779,6 +1787,9 @@
                 "display": {
                     "label": "Kiểu Hiển thị"
                 },
+                "distance": {
+                    "label": "Tầm xa Tổng cộng"
+                },
                 "dock": {
                     "label": "Loại"
                 },
@@ -1932,6 +1943,39 @@
                 "hoops": {
                     "label": "Số Vòng",
                     "placeholder": "1, 2, 4…"
+                },
+                "horse_dressage": {
+                    "label": "Cưỡi ngựa Biểu diễn",
+                    "options": {
+                        "equestrian": "Có",
+                        "undefined": "Không"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Cưỡi ngựa",
+                    "options": {
+                        "horse_riding": "Có",
+                        "undefined": "Không"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Trình độ Cưỡi ngựa",
+                    "options": {
+                        "common": "Dễ: Không có trở ngại. (mặc định)",
+                        "critical": "Rất Khó: Chỉ có những ngựa và người cưỡi ngựa có nhiều khả năng có thể qua lại. Có trở ngại lớn. Cần phải xem xét kỹ càng các cầu.",
+                        "dangerous": "Nguy hiểm: Chỉ có những ngựa và người cưỡi ngựa có rất nhiều khả năng có thể qua lại được khi trời đẹp. Nên xuống ngựa.",
+                        "demanding": "Xấu: Lối gồ ghề, đôi khi có quãng khó đi qua.",
+                        "difficult": "Khó: Lối hẹp có thể có trở ngại làm dễ bị té.",
+                        "impossible": "Hiểm nghèo: Ngựa không qua được lối hoặc cầu quá hẹp, thiếu cột chống, có trở ngại như thang."
+                    },
+                    "placeholder": "Khó, Nguy hiểm…"
+                },
+                "horse_stables": {
+                    "label": "Chuồng Ngựa",
+                    "options": {
+                        "stables": "Có",
+                        "undefined": "Không"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -2774,6 +2818,10 @@
                     "name": "Bảng Quảng cáo",
                     "terms": "bảng quảng cáo, biển quảng cáo, panô quảng cáo, pano quảng cáo, pa-nô quảng cáo, pa nô quảng cáo, bang quang cao, bien quang cao, pano quang cao, pa-no quang cao, pa no quang cao"
                 },
+                "advertising/column": {
+                    "name": "Cột Quảng cáo",
+                    "terms": "cột quảng cáo, cột morris, cột áp phích, cot quang cao, cot morris, cot ap phich"
+                },
                 "aerialway": {
                     "name": "Cáp treo"
                 },
@@ -3434,6 +3482,10 @@
                     "name": "Tháp Rơi Tự do",
                     "terms": "tháp rơi tự do, thap roi tu do"
                 },
+                "attraction/maze": {
+                    "name": "Mê cung",
+                    "terms": "mê cung, cung mê, mê lộ, mê đạo, me cung, cung me, me lo, me dao"
+                },
                 "attraction/pirate_ship": {
                     "name": "Thuyền Cướp biển",
                     "terms": "thuyền cướp biển, thuyen cuop bien"
@@ -4062,6 +4114,10 @@
                 "healthcare/hospice": {
                     "name": "Nhà An dưỡng Cuối đời",
                     "terms": "nhà an dưỡng cuối đời, nha an duong cuoi doi"
+                },
+                "healthcare/laboratory": {
+                    "name": "Phòng Thí nghiệm Y tế",
+                    "terms": "phòng thí nghiệm y tế, phòng thử nghiệm y tế, phòng xét nghiệm y tế, phòng thí nghiệm lâm sàng, phòng thử nghiệm lâm sàng, phòng xét nghiệm lâm sàng, phòng thử máu, phong thi nghiem y te, phong thu nghiem y te, phong xet nghiem y te, phong thi nghiem lam sang, phong thu nghiem lam sang, phong xet nghiem lam sang, phong thu mau"
                 },
                 "healthcare/midwife": {
                     "name": "Bà đỡ",
@@ -6226,6 +6282,10 @@
                     "name": "Công viên Chủ đề",
                     "terms": "công viên chủ đề, công viên vui chơi giả trí, tàu lượn siêu tốc, vòi nước, cong vien chu de, cong vien vui choi gia tri, tau luon sieu toc, voi nuoc"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Chuồng Ngựa Tạm thời",
+                    "terms": "chuồng ngựa tạm thời, chuong ngua tam thoi"
+                },
                 "tourism/viewpoint": {
                     "name": "Điểm Ngắm cảnh",
                     "terms": "điểm ngắm cảnh, nơi ngắm cảnh, kính viễn vọng, kiếng viễn vọng, kính nhìn từ xa, kiếng nhìn từ xa, thắng cảnh, diem ngam canh, noi ngam canh, kinh vien vong, kieng vien vong, kinh nhin tu xa, kieng nhin tu xa, thang canh"
@@ -6486,7 +6546,7 @@
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
-                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 14 trở lên.",
+                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 13 trở lên.",
                 "name": "Lúc chụp DigitalGlobe Thượng hạng"
             },
             "DigitalGlobe-Standard": {
@@ -6500,7 +6560,7 @@
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
-                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 14 trở lên.",
+                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 13 trở lên.",
                 "name": "Lúc chụp DigitalGlobe Tiêu chuẩn"
             },
             "EsriWorldImagery": {
@@ -6583,6 +6643,9 @@
             "US-TIGER-Roads-2017": {
                 "description": "Màu vàng là dữ liệu bản đồ thuộc phạm vi công cộng do Điều tra dân số Hoa Kỳ cung cấp. Màu đỏ là dữ liệu chưa xuất hiện trong OpenStreetMap.",
                 "name": "Đường sá TIGER 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Lớp phủ Đường Lâm nghiệp Hoa Kỳ"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6698,10 +6761,36 @@
             }
         },
         "community": {
+            "osm-mg-facebook": {
+                "name": "Nhóm Facebook OpenStreetMap Madagascar",
+                "description": "Nhóm Facebook dành cho những người Madagascar quan tâm đến OpenStreetMap."
+            },
+            "talk-mg": {
+                "name": "Danh sách thư talk-mg",
+                "description": "Nơi để những người đóng góp, cộng đồng, và người dùng OpenStreetMap chia sẻ và thảo luận."
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Cải thiện OpenStreetMap tại Bangladesh",
+                "extendedDescription": "Bạn có lập bản đồ tại Bangladesh? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
+            },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Ấn Độ – tham gia lập bản đồ hàng xóm",
                 "description": "Cải thiện OpenStreetMap tại Ấn Độ",
                 "extendedDescription": "Bạn có lập bản đồ tại Ấn Độ? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
+            },
+            "OSM-india-mailinglist": {
+                "name": "Danh sách thư OpenStreetMap Ấn Độ",
+                "description": "talk-in là danh sách thư chính thức của cộng đồng Ấn Độ"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter OpenStreetMap Ấn Độ",
+                "description": "Chúng tôi chỉ cách bạn một tweet: {url}"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesia",
+                "description": "Cải thiện OpenStreetMap tại Indonesia",
+                "extendedDescription": "Bạn có lập bản đồ tại Indonesia? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
             },
             "OSM-japan-facebook": {
                 "name": "Cộng đồng OpenStreetMap Nhật Bản",
@@ -6714,6 +6803,16 @@
             "OSM-japan-twitter": {
                 "name": "Twitter OpenStreetMap Nhật Bản",
                 "description": "Thẻ băm tại Twitter: {url}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mông Cổ",
+                "description": "Cải thiện OpenStreetMap tại Mông Cổ",
+                "extendedDescription": "Bạn có lập bản đồ tại Mông Cổ? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal",
+                "description": "Cải thiện OpenStreetMap tại Nepal",
+                "extendedDescription": "Bạn có lập bản đồ tại Nepal? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
             },
             "OSM-PH-facebook": {
                 "name": "Facebook OpenStreetMap Philippines",
@@ -6739,6 +6838,11 @@
                 "name": "Telegram OpenStreetMap Nga",
                 "description": "Trò chuyện Telegram của OpenStreetMap Nga"
             },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
+                "description": "Cải thiện OpenStreetMap tại Sri Lanka",
+                "extendedDescription": "Bạn có lập bản đồ tại Sri Lanka? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
+            },
             "OSM-TW-facebook": {
                 "name": "Cộng đồng OpenStreetMap Đài Loan",
                 "description": "Nhóm Facebook cho phép những người lập bản đồ và người dùng OpenStreetMap để thảo luận về Đài Loan."
@@ -6746,6 +6850,44 @@
             "OSM-TW-mailinglist": {
                 "name": "Danh sách thư OpenStreetMap Đài Loan",
                 "description": "talk-tw là danh sách thư chính thức của cộng đồng Đài Loan"
+            },
+            "at-mailinglist": {
+                "name": "Danh sách thư talk-at",
+                "description": "talk-at là danh sách thư chính thức của cộng đồng Áo"
+            },
+            "at-twitter": {
+                "name": "Twitter OpenStreetMap Áo",
+                "description": "OpenStreetMap Áo tại Twitter: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Áo",
+                "description": "Trang thông tin về OpenStreetMap tại Áo"
+            },
+            "be-facebook": {
+                "name": "Cộng đồng OpenStreetMap Bỉ",
+                "description": "Nhóm Facebook của những người lập bản đồ và người dùng OpenStreetMap ở Bỉ"
+            },
+            "be-forum": {
+                "name": "Diễn đàn OpenStreetMap Bỉ",
+                "description": "Diễn đàn Web của OpenStreetMap Bỉ"
+            },
+            "be-irc": {
+                "name": "IRC OpenStreetMap Bỉ",
+                "description": "Hãy tham gia #osmbe tại irc.oftc.net (cổng 6667)",
+                "extendedDescription": "Hãy tham gia #osmbe tại irc.oftc.net (cổng 6667), kênh này có cầu nối với kênh trò chuyện Matrix"
+            },
+            "be-mailinglist": {
+                "name": "Danh sách thư talk-be",
+                "description": "talk-be là danh sách thư chính thức của cộng đồng Bỉ"
+            },
+            "be-matrix": {
+                "name": "Kênh Riot OpenStreetMap Bỉ",
+                "description": "Mời bạn tham gia tại {signupUrl}",
+                "extendedDescription": "Có nhiều kênh dành cho người mới đến, chủ đề riêng, kiểu sử dụng đất riêng, và nhà phát triển"
+            },
+            "be-twitter": {
+                "name": "Twitter OpenStreetMap Bỉ",
+                "description": "OSM Bỉ tại Twitter: {url}"
             },
             "byosm": {
                 "name": "OpenStreetMap Belarus",
@@ -6755,9 +6897,39 @@
                 "name": "Danh sách thư talk-cz",
                 "description": "talk-cz là danh sách thư chính thức của cộng đồng Séc"
             },
+            "de-forum": {
+                "name": "Diễn đàn OpenStreetMap Đức",
+                "description": "Diễn đàn Web của OpenStreetMap Đức"
+            },
+            "de-irc": {
+                "name": "IRC OpenStreetMap Đức",
+                "description": "Hãy tham gia #osm-de tại irc.oftc.net (cổng 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Danh sách thư talk-de",
+                "description": "talk-de là danh sách thư chính thức của cộng đồng Đức"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Đức",
+                "description": "Trang thông tin về OpenStreetMap tại Đức"
+            },
             "OSM-ES-telegram": {
                 "name": "@OSMes tại Telegram",
                 "description": "Trò chuyện Telegram của OpenStreetMap Tây Ban Nha"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Cải thiện OpenStreetMap tại khu vực Rôma",
+                "extendedDescription": "Chúng ta nhằm mục đích cho phép thảo luận và chia sẻ kiến thức về cách sử dụng kho dữ liệu địa lý mở, nhất là OpenStreetMap, cũng như cách sử dụng phần mềm không gian địa lý mở để quản lý, sửa đổi, và hiển thị dữ liệu địa lý. Chúng ta ủng hộ sử dụng dữ liệu mở và phần mềm không gian địa lý mở tại miền Đông Bắc Lazio."
+            },
+            "talk-it-lazio": {
+                "name": "OpenStreetMap Ý-Lazio",
+                "description": "Mời bạn tham gia tại {signupUrl}",
+                "extendedDescription": "Danh sách thư cho khu vực Rôma và Lazio."
+            },
+            "OSM-CA-Slack": {
+                "name": "Slack OSM Canada",
+                "description": "Mời bạn tham gia tại {signupUrl}"
             },
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver",
@@ -6785,6 +6957,11 @@
                 "name": "GeoPhilly",
                 "description": "Cuộc họp mặt cho những người hâm mộ bản đồ ở khu vực Philadelphia",
                 "extendedDescription": "GeoPhilly liên hiệp các nhà phát triển, nhà địa lý học, người hâm mộ về dữ liệu và dữ liệu mở, “civic hacker”, và người nghiện bản đồ để bày tỏ say mê bản đồ và chia sẻ các câu chuyện trong bản đồ. Nếu bạn sử dụng bản đồ trong việc làm hoặc chỉ muốn tìm hiểu thêm, bạn nên tham gia cuộc họp mặt này! Chúng ta cố gắng tổ chức các sự kiện mở rộng, thân thiện, cùng giáo dục cùng giải trí, bao gồm họp mặt tại quán rượu, bài thuyết trình nhanh chóng, và workshop. Mời bạn cùng xây dựng một cộng đồng không gian địa lý đa dạng văn hóa và gây cảm hứng tại Philadelphia!"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota",
+                "description": "Những người lập bản đồ và người hâm mộ OpenStreetMap ở vùng Thành phố Đôi",
+                "extendedDescription": "Nơi liên hệ của những người hâm mộ OpenStreetMap ở Minnesota và vùng Thành phố Đôi!"
             },
             "Mapping-DC-meetup": {
                 "name": "Mapping DC",
@@ -6817,7 +6994,8 @@
             },
             "OSM-Colorado": {
                 "name": "OpenStreetMap Colorado",
-                "description": "Những người lập bản đồ và người dùng OpenStreetMap ở tiểu bang Colorado, Hoa Kỳ"
+                "description": "Những người lập bản đồ và người dùng OpenStreetMap ở tiểu bang Colorado, Hoa Kỳ",
+                "extendedDescription": "OpenStreetMap Colorado là nhóm địa phương cố gắng xây dựng bản đồ mở. Chúng tôi khuyên khích mọi thành viên tổ chức hoặc gợi ý các sự kiện lập bản đồ ở khắp tiểu bang. Các hoạt động gặp mặt có thể là buổi liên hoan khiêu vũ đơn giản, chương trình huấn luyện về OSM từ căn bản đến nâng cao, hoặc tiệc vẽ bản đồ của cộng đồng."
             },
             "OSM-NYC": {
                 "name": "OpenStreetMap Thành phố New York",
@@ -6861,7 +7039,8 @@
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
-                "description": "Những người lập bản đồ và người dùng OpenStreetMap ở tiểu bang Wyoming, Hoa Kỳ"
+                "description": "Những người lập bản đồ và người dùng OpenStreetMap ở tiểu bang Wyoming, Hoa Kỳ",
+                "extendedDescription": "OpenStreetMap Wyoming là nhóm địa phương cố gắng xây dựng bản đồ mở. Chúng tôi khuyên khích mọi thành viên tổ chức hoặc gợi ý các sự kiện lập bản đồ ở khắp tiểu bang. Các hoạt động gặp mặt có thể là buổi liên hoan khiêu vũ đơn giản, chương trình huấn luyện về OSM từ căn bản đến nâng cao, hoặc tiệc vẽ bản đồ của cộng đồng."
             },
             "PHXGeo-meetup": {
                 "name": "Họp mặt PHXGeo",
@@ -6913,6 +7092,42 @@
             },
             "OSM-AR-twitter": {
                 "name": "Twitter OpenStreetMap Argentina",
+                "description": "Theo dõi chúng tôi trên Twitter: {url}"
+            },
+            "Bahia-telegram": {
+                "name": "Nhóm Telegram OpenStreetMap Bahia",
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Bahia tại Telegram",
+                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+            },
+            "OSM-br-mailinglist": {
+                "name": "Danh sách thư talk-br",
+                "description": "Danh sách thư để thảo luận về OpenStreetMap tại Brasil"
+            },
+            "OSM-br-telegram": {
+                "name": "Telegram OpenStreetMap Brasil",
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Brasil tại Telegram",
+                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+            },
+            "OSM-br-twitter": {
+                "name": "Twitter OpenStreetMap Brasil",
+                "description": "Theo dõi chúng tôi trên Twitter: {url}"
+            },
+            "OSM-CL-facebook": {
+                "name": "Facebook OpenStreetMap Chile",
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Chile tại Facebook",
+                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Danh sách thư talk-cl",
+                "description": "Danh sách thư để thảo luận về OpenStreetMap tại Chile"
+            },
+            "OSM-CL-telegram": {
+                "name": "Telegram OpenStreetMap Chile",
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Chile tại Telegram",
+                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+            },
+            "OSM-CL-twitter": {
+                "name": "Twitter OpenStreetMap Chile",
                 "description": "Theo dõi chúng tôi trên Twitter: {url}"
             },
             "OSM-Reddit": {

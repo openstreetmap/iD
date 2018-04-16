@@ -190,12 +190,6 @@
                 "next": "Xiga >"
             }
         },
-        "success": {
-            "view_on_osm": "Ka eeg OSM",
-            "facebook": "Faafi Facebook",
-            "twitter": "Faafi Twitter",
-            "google": "Faafi Google+"
-        },
         "splash": {
             "welcome": "Ku soo dhowow id OpenStreetMap editor"
         },

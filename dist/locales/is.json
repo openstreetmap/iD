@@ -644,13 +644,7 @@
             }
         },
         "success": {
-            "edited_osm": "Þú breyttir OSM!",
             "just_edited": "Þú hefur breytt OpenStreetMap!",
-            "view_on_osm": "Skoða á OSM",
-            "facebook": "Deila á Facebook",
-            "twitter": "Deila á Twitter",
-            "google": "Deila á Google+",
-            "help_html": "Breytingarnar þínar ættu að birtast á \"staðlaða\" laginu innan skamms. Breytingar á öðrum lögum og ákveðnum eigindum gætu tekið lengri tíma.",
             "help_link_text": "Nánar",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -5612,7 +5606,6 @@
                 "attribution": {
                     "text": "Skilmálar og umsagnir"
                 },
-                "description": "Útjaðar myndefnis og tökudagsetningar. Merkingar birtast við aðdráttarstig 14 og hærra.",
                 "name": "Eldri myndir frá DigitalGlobe (Premium Vintage)"
             },
             "DigitalGlobe-Standard": {
@@ -5626,7 +5619,6 @@
                 "attribution": {
                     "text": "Skilmálar og umsagnir"
                 },
-                "description": "Útjaðar myndefnis og tökudagsetningar. Merkingar birtast við aðdráttarstig 14 og hærra.",
                 "name": "Eldri myndir frá DigitalGlobe (Standard Vintage)"
             },
             "EsriWorldImagery": {

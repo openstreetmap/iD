@@ -637,13 +637,7 @@
             }
         },
         "success": {
-            "edited_osm": "Heu editat l'OSM!",
             "just_edited": "Acabeu d'editar l'OpenStreetMap!",
-            "view_on_osm": "Mostra-ho a OSM",
-            "facebook": "Compartiu-ho a Facebook",
-            "twitter": "Compartiu-ho al Twitter",
-            "google": "Compartiu-ho a Google+",
-            "help_html": "Els vostres canvis s'haurien de veure a la capa \"Estàndard\" en pocs minuts. Altres capes i determinats objectes poden tardar més.",
             "help_link_text": "Detalls",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -4858,7 +4852,6 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Limitacions d'imatges i dates de captura. Les etiquetes apareixen al nivell de zoom 14 i superior.",
                 "name": "Imatges de DigitalGlobe Premium Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -4872,7 +4865,6 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Limitacions d'imatges i dates de captura. Les etiquetes apareixen al nivell de zoom 14 i superior.",
                 "name": "Imatges de DigitalGlobe estàndard Vintage"
             },
             "EsriWorldImagery": {

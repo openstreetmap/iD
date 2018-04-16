@@ -622,13 +622,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM szerkesztve!",
             "just_edited": "Szerkesztetted az OpenStreetMapet!",
-            "view_on_osm": "Megtekintés OSM-en",
-            "facebook": "Megosztás Facebookon",
-            "twitter": "Megosztás Twitteren",
-            "google": "Megosztás Google+-on",
-            "help_html": "A változtatásaid néhány percen belül megjelennek az alapértelmezett rétegen. Ez a többi rétegnél és bizonyos funkcióknál több ideig is tarthat.",
             "help_link_text": "Részletek",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F"
         },

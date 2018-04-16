@@ -641,13 +641,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM:ia muokattu!",
             "just_edited": "Muokkasit juuri OpenStreetMapia!",
-            "view_on_osm": "Näytä OSM-kartalla",
-            "facebook": "Jaa Facebookissa",
-            "twitter": "Jaa Twitterissä",
-            "google": "Jaa Google+-palvelussa",
-            "help_html": "Karttaan tehdyt muutokset ilmestyvät perinteiseen karttanäkymään muutaman minuutin kuluessa. Joidenkin ominaisuuksien ilmestyminen kartalle ja muutokset joihinkin karttanäkymiin voivat viedä kauemmin.",
             "help_link_text": "Tiedot",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -5459,8 +5453,7 @@
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
-                },
-                "description": "Kuva-alueet ja kuvauspäivämäärät. Aineisto on käytettävissä suurennostasolla 14 ja lähempänä."
+                }
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
@@ -5472,8 +5465,7 @@
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
-                },
-                "description": "Kuvien rajat ja kuvauspäivät. Merkit näkyvät zoomaus tasolla 14 tai isommalla. "
+                }
             },
             "EsriWorldImagery": {
                 "attribution": {

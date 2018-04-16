@@ -582,13 +582,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM bol upravený!",
             "just_edited": "Práve ste upravili OpenStreetMap!",
-            "view_on_osm": "Zobraziť na OSM",
-            "facebook": "Zdieľaj na Facebooku",
-            "twitter": "Zdieľaj na Twitteri",
-            "google": "Zdieľaj na Google+",
-            "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie.",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },

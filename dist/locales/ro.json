@@ -458,12 +458,7 @@
             }
         },
         "success": {
-            "edited_osm": "Ai editat OSM!",
             "just_edited": "Tocmai ai editat OpenStreetMap!",
-            "view_on_osm": "Vezi pe OSM",
-            "facebook": "Distribuie pe Facebook",
-            "twitter": "Distribuie pe Twitter",
-            "google": "Distribuie pe Google+",
             "help_link_text": "Detalii"
         },
         "confirm": {

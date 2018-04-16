@@ -607,13 +607,7 @@
             }
         },
         "success": {
-            "edited_osm": "已編輯了OSM！",
             "just_edited": "你剛剛編輯了OpenStreetMap！",
-            "view_on_osm": "於OSM上顯示",
-            "facebook": "分享至 Facebook",
-            "twitter": "分享至 Twitter",
-            "google": "分享至 Google+",
-            "help_html": "你的變更會在幾分鐘後出現在標準圖層。其他圖層或某些特徵可能需要多些時間。",
             "help_link_text": "詳細資料",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -5598,7 +5592,6 @@
                 "attribution": {
                     "text": "條款和意見"
                 },
-                "description": "航攝邊界及拍攝日期。標籤會在縮放第14級或更高時顯示。",
                 "name": "DigitalGlobe Premium 舊航攝圖"
             },
             "DigitalGlobe-Standard": {
@@ -5612,7 +5605,6 @@
                 "attribution": {
                     "text": "條款和意見"
                 },
-                "description": "航攝邊界及拍攝日期。標籤會在縮放水平14或以上時顯示。",
                 "name": "DigitalGlobe Standard 舊航攝圖"
             },
             "EsriWorldImagery": {

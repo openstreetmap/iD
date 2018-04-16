@@ -603,13 +603,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM aangepast!",
             "just_edited": "Je hebt OpenStreetMap bewerkt!",
-            "view_on_osm": "Bekijk op OSM",
-            "facebook": "Deel op Facebook",
-            "twitter": "Deel op Twitter",
-            "google": "Deel op Google+",
-            "help_html": "Je wijzigingen zouden binnen enkele minuten zichtbaar moeten zijn in de \"Standaard\"-laag. Het updaten van sommige soorten objecten kan langer duren. Andere lagen dan de \"Standaard\"-laag worden minder vaak bijgewerkt.",
             "help_link_text": "Meer hierover, in het Engels",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -6166,7 +6160,6 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
-                "description": "Luchtfoto grenzen en opnamedatum. Labels verschijnen bij zoomniveau 14 en hoger.",
                 "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -6180,7 +6173,6 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
-                "description": "Luchtfoto grenzen en opnamedatum. Labels verschijnen bij zoomniveau 14 en hoger.",
                 "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "EsriWorldImagery": {

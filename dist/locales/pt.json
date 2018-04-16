@@ -644,13 +644,7 @@
             }
         },
         "success": {
-            "edited_osm": "Acabou de editar o OpenStreetMap!",
             "just_edited": "Acaba de editar o OpenStreetMap!",
-            "view_on_osm": "Ver no OpenStreetMap",
-            "facebook": "Partilhar no Facebook",
-            "twitter": "Partilhar no Twitter",
-            "google": "Partilhar no Google+",
-            "help_html": "As suas alterações devem aparecer na \"Camada Padrão\" em poucos minutos. Outras camadas e determinados elementos podem demorar mais tempo.",
             "help_link_text": "Detalhes",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -6162,7 +6156,6 @@
                 "attribution": {
                     "text": "Termos e Opinião"
                 },
-                "description": "Limites das imagens e datas de captura. As etiquetas aparecem no nível de aproximação 14 ou superior.",
                 "name": "Imagens DigitalGlobe Premium antigas"
             },
             "DigitalGlobe-Standard": {
@@ -6176,7 +6169,6 @@
                 "attribution": {
                     "text": "Termos e Opinião"
                 },
-                "description": "Limites das imagens e datas de captura. As etiquetas aparecem no nível de aproximação 14 ou superior.",
                 "name": "Imagens DigitalGlobe Standard antigaas"
             },
             "EsriWorldImagery": {

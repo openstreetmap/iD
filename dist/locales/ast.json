@@ -577,12 +577,7 @@
             }
         },
         "success": {
-            "edited_osm": "¡Editáu OSM!",
             "just_edited": "¡Acaba d'editar OpenStreetMap!",
-            "view_on_osm": "Ver en OSM",
-            "facebook": "Compartir en Facebook",
-            "twitter": "Compartir en Twitter",
-            "google": "Compartir en Google+",
             "help_link_text": "Detalles"
         },
         "confirm": {
@@ -4600,7 +4595,6 @@
                 "attribution": {
                     "text": "Términos y comentarios "
                 },
-                "description": "Llendes de les imáxenes y dates de la toma. Les etiquetes apaecen col nivel d'ampliación 14 y mayor.",
                 "name": "Imáxenes antigües de DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -4614,7 +4608,6 @@
                 "attribution": {
                     "text": "Términos y comentarios "
                 },
-                "description": "Llendes de les imáxenes y dates de la toma. Les etiquetes apaecen col nivel d'ampliación 14 y mayor.",
                 "name": "Imáxenes antigües de DigitalGlobe Standard"
             },
             "EsriWorldImagery": {

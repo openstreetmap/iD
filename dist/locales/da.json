@@ -644,13 +644,7 @@
             }
         },
         "success": {
-            "edited_osm": "Redigerede OSM!",
             "just_edited": "Du har lige redigeret OpenStreetMap!",
-            "view_on_osm": "Vis på OSM",
-            "facebook": "Del på Facebook",
-            "twitter": "Del på Twitter",
-            "google": "Del på Google+",
-            "help_html": "Dine ændringer vil komme frem i \"Standard\"-kortlaget om få minutter. Andre kortlag, og specielle objekter, kan tage længere tid.",
             "help_link_text": "Detaljer",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -5640,7 +5634,7 @@
                     "terms": "Kanal"
                 },
                 "waterway/dam": {
-                    "name": "Dam",
+                    "name": "Dæmning",
                     "terms": "Dam"
                 },
                 "waterway/ditch": {
@@ -5705,7 +5699,6 @@
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
-                "description": "Luftfoto grænser og optagelsesdatoer. Tekstmærkater optræder ved zoom-niveau 14 og højere.",
                 "name": "DigitalGlobe Premium ældre fotos"
             },
             "DigitalGlobe-Standard": {
@@ -5719,7 +5712,6 @@
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
-                "description": "Luftfoto grænser og optagelsesdatoer. Tekstmærkater optræder ved zoom-niveau 14 og højere.",
                 "name": "DigitalGlobe Standard ældre fotos"
             },
             "EsriWorldImagery": {

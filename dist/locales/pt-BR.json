@@ -643,13 +643,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM editado!",
             "just_edited": "Você acaba de editar o OpenStreetMap!",
-            "view_on_osm": "Ver no OSM",
-            "facebook": "Compartilhar no Facebook",
-            "twitter": "Compartilhar no Twitter",
-            "google": "Compartilhar Google+",
-            "help_html": "Suas modificações devem aparecer na camada \"Padrão\" dentro de alguns minutos. Alguns elementos e outras camadas podem demorar mais para serem atualizadas.",
             "help_link_text": "Detalhes",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Pt:Perguntas_frequentes#Eu_acabei_de_alterar_o_mapa._Como_eu_fa.C3.A7o_para_visualizar_minhas_altera.C3.A7.C3.B5es.3F"
         },
@@ -6200,7 +6194,6 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Limites de imagens de satélite e datas de captura. Etiquetas aparecerão no nível de zoom 14 ou acima.",
                 "name": "Bordas das Imagens de Satélite DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -6214,7 +6207,6 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Limites de imagens de satélite e datas de captura. Etiquetas aparecerão no nível de zoom 14 ou acima.",
                 "name": "Boradas das Imagens de Satélite DigitalGlobe Standard"
             },
             "EsriWorldImagery": {

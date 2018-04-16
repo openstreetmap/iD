@@ -644,13 +644,7 @@
             }
         },
         "success": {
-            "edited_osm": "已編輯了OSM！",
             "just_edited": "您剛剛編輯了OpenStreetMap！",
-            "view_on_osm": "於OSM上顯示",
-            "facebook": "分享至 Facebook",
-            "twitter": "分享至 Twitter",
-            "google": "分享至 Google+",
-            "help_html": "你編輯的變動應該過幾分會出現在\"標準圖層\"。其他圖層和特定圖徵，則需要久一點。",
             "help_link_text": "詳細資料",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -1818,9 +1812,6 @@
                 },
                 "except": {
                     "label": "例外"
-                },
-                "faces": {
-                    "label": "面的數量"
                 },
                 "fax": {
                     "label": "傳真",
@@ -6486,7 +6477,7 @@
                 "attribution": {
                     "text": "使用條款與意見回饋"
                 },
-                "description": "影像邊界與取得時間。標籤會在縮放14層級或更高時顯示。",
+                "description": "影像邊界與拍攝日期。標籤將會在縮放等級大於等於 13 時出現。",
                 "name": "DigitalGlobe Premium 空照圖年份"
             },
             "DigitalGlobe-Standard": {
@@ -6500,7 +6491,7 @@
                 "attribution": {
                     "text": "使用條款與意見回饋"
                 },
-                "description": "影像邊界與取得時間。標籤會在縮放14層級或更高時顯示。",
+                "description": "影像邊界與拍攝日期。標籤將會在縮放等級大於等於 13 時出現。",
                 "name": "DigitalGlobe Standard 空照圖年份"
             },
             "EsriWorldImagery": {
@@ -6583,6 +6574,9 @@
             "US-TIGER-Roads-2017": {
                 "description": "黃 = 自美國人口普查局的公共領域地圖資料取得。紅 = 在開放街圖上找不到資料",
                 "name": "TIGER 道路 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "美國森林道路覆蓋層"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {

@@ -587,13 +587,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSMویرایش شد!",
             "just_edited": "شما OpenStreetMap را ویرایش کردید!",
-            "view_on_osm": "نمایش در OSM",
-            "facebook": "اشتراک گذاری در فیسبوک",
-            "twitter": "اشتراک گذاری در تویتر",
-            "google": "اشتراک گذاری در Google+",
-            "help_html": "تغییرات شما در لایه‌ی \"استاندارد\" به زودی قابل رؤیت است. تغیرات در سایر لایه‌ها و عناصر خاص، ممکن است بیشتر طول کشد تا نمایان شوند.",
             "help_link_text": "جزئیات",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F"
         },
@@ -5414,7 +5408,6 @@
                 "attribution": {
                     "text": "ارسال نظرات"
                 },
-                "description": "مرزها و تاریخ نقشه ها از زوم 14 به بالا قابل مشاهده هستند",
                 "name": "فهرست DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -5428,7 +5421,6 @@
                 "attribution": {
                     "text": "ارسال نظرات"
                 },
-                "description": "مرزها و تاریخ نقشه ها از زوم 14 به بالا قابل مشاهده هستند",
                 "name": "فهرست DigitalGlobe Premium"
             },
             "EsriWorldImagery": {

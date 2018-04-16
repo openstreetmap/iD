@@ -577,13 +577,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM telah Disunting!",
             "just_edited": "Anda baru sahaja telah menyunting OpenStreetMap!",
-            "view_on_osm": "Lihat dalam OSM",
-            "facebook": "Kongsi melalui Facebook",
-            "twitter": "Kongsi melalui Twitter",
-            "google": "Kongsi melalui Google+",
-            "help_html": "Perubahan anda akan muncul pada lapisan \"Standard\" dalam beberapa minit. Lapisan lain, dan ciri-ciri tertentu, mungkin mengambil masa yang lebih lama.",
             "help_link_text": "Butiran",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -2773,7 +2767,6 @@
                 "attribution": {
                     "text": "Terma & Maklum Balas"
                 },
-                "description": "Had-had imejan dan tarikh rakaman dibuat. Label hanya kelihatan pada paras zum 14 dan lebih tinggi.",
                 "name": "Vintaj Imejan Satelit Premium DigitalGlobe"
             },
             "DigitalGlobe-Standard": {
@@ -2787,7 +2780,6 @@
                 "attribution": {
                     "text": "Terma & Maklum Balas"
                 },
-                "description": "Had-had imejan dan tarikh rakaman dibuat. Label hanya kelihatan pada paras zum 14 dan lebih tinggi.",
                 "name": "Vintaj Imejan Satelit Standard DigitalGlobe"
             },
             "EsriWorldImagery": {

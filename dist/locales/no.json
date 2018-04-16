@@ -575,13 +575,7 @@
             }
         },
         "success": {
-            "edited_osm": "Redigert OSM!",
             "just_edited": "Du har akkurat endret OpenStreetMap!",
-            "view_on_osm": "Vis på OSM",
-            "facebook": "Del på Facebook",
-            "twitter": "Del på Twitter",
-            "google": "Del på Google+",
-            "help_html": "Endringene dine burde vises i \"standard\"-laget om et par minutter. Andre lag, og visse kartegenskaper, kan ta litt lengre tid.",
             "help_link_text": "Detaljer"
         },
         "confirm": {

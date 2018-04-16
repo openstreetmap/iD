@@ -150,7 +150,9 @@
                     "vertex": "Kunigis linion/areon al alia linio.",
                     "line": "Kunigis linion/areon al linio.",
                     "area": "Kunigis linion/areon al areo."
-                }
+                },
+                "relation": "Ĉi tiuj elementoj ne povas esti konektitaj, ĉar ili havas konfliktajn rolojn de rilatoj.",
+                "restriction": "Ĉi tiuj elementoj ne povas esti konektitaj, ĉar tio ĉi detruus la rilaton “{relation}”."
             },
             "disconnect": {
                 "title": "Malkunigi",
@@ -406,6 +408,7 @@
                 "key": "H",
                 "title": "Historio",
                 "selected": "{n} elektitaj",
+                "no_history": "Neniu historio (nova elemento)",
                 "version": "Versio",
                 "last_edit": "Lasta redakto",
                 "edited_by": "Redaktita de",
@@ -643,14 +646,19 @@
             }
         },
         "success": {
-            "edited_osm": "Redaktis OSM!",
             "just_edited": "Vi ĵus redaktis OpenStreetMap!",
-            "view_on_osm": "Montri en OSM",
-            "facebook": "Kunhavigi per Fejsbuko",
-            "twitter": "Kunhavigi per Twitter",
-            "google": "Kunhavigi per Google+",
-            "help_html": "Viaj ŝanĝoj povos aperi en la “Norma” tavolo post kelkaj minutoj. Aktualigo de aliaj tavoloj kaj aliaj elementoj povos okupi pli da tempo.",
-            "help_link_text": "Detaloj"
+            "thank_you": "Dankon por plibonigi la mapon.",
+            "thank_you_location": "Dankon por plibonigi la mapon ĉirkaŭ {where}.",
+            "help_html": "Viaj ŝanĝoj aperos en OpenStreetMap post kelkaj minutoj. Aktualigo de aliaj mapoj povas okupi pli da tempo.",
+            "help_link_text": "Detaloj",
+            "view_on_osm": "Montri ŝanĝoj ĉe OSM",
+            "changeset_id": "Via ŝanĝaro #: {changeset_id}",
+            "like_osm": "Ĉu OpenStreetMap plaĉas al vi? Komunikiĝu kun aliaj:",
+            "more": "Pli",
+            "events": "Okazaĵoj",
+            "languages": "Lingvoj: {languages}",
+            "missing": "Ĉu io mankas en la listo?",
+            "tell_us": "Sciigu nin!"
         },
         "confirm": {
             "okay": "Bone",
@@ -1777,6 +1785,9 @@
                 "display": {
                     "label": "Vidigilo"
                 },
+                "distance": {
+                    "label": "Tuta distanco"
+                },
                 "dock": {
                     "label": "Speco"
                 },
@@ -1930,6 +1941,39 @@
                 "hoops": {
                     "label": "Korboj",
                     "placeholder": "1, 2, 4…"
+                },
+                "horse_dressage": {
+                    "label": "Dresrajdado",
+                    "options": {
+                        "equestrian": "Jes",
+                        "undefined": "Ne"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Ĉeval-rajdado",
+                    "options": {
+                        "horse_riding": "Jes",
+                        "undefined": "Ne"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Ĉeval-rajdada malfacileco",
+                    "options": {
+                        "common": "Facila: neniuj problemoj kaj malfacilaĵoj (implicite).",
+                        "critical": "Malfacilega: transrajdebla nur por spertaj rajdistoj kaj ĉevaloj, grandaj obstakloj, pontoj povas ne subteni vian pezon.",
+                        "dangerous": "Tre malfacilega: transrajdebla nur por tre spertaj rajdistoj kaj ĉevaloj dum bona vetero, deĉevaliĝu.",
+                        "demanding": "Ete malfacila: malebena vojo, kelkaj malfacilaj pasejoj.",
+                        "difficult": "Malfacila: mallarĝa kaj malebena vojo, povas enhavi transsaltendajn baraĵojn kaj mallarĝajn pasejojn.",
+                        "impossible": "Netransrajdebla: vojo aŭ ponto netrairebla por ĉevaloj.; tre mallarĝa, malhelpaĵoj kiel ŝtupetaroj; danĝera por vivo."
+                    },
+                    "placeholder": "Malfacila, danĝera…"
+                },
+                "horse_stables": {
+                    "label": "Ĉeval-domo",
+                    "options": {
+                        "stables": "Jes",
+                        "undefined": "Ne"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -2772,6 +2816,10 @@
                     "name": "Anonctabulego",
                     "terms": "anonctabulo,reklamo,spamo,afiŝo,afisho,afisxo"
                 },
+                "advertising/column": {
+                    "name": "Reklam-kolono",
+                    "terms": "reklamkolono,kolumno,afiŝkolono"
+                },
                 "aerialway": {
                     "name": "Kablotransporto"
                 },
@@ -3432,6 +3480,10 @@
                     "name": "Defala turo (allogaĵo)",
                     "terms": "turo,drop tower"
                 },
+                "attraction/maze": {
+                    "name": "Labirinto",
+                    "terms": "vojenigmo,enigmo"
+                },
                 "attraction/pirate_ship": {
                     "name": "Pirata ŝipo (allogaĵo)",
                     "terms": "ŝipo,shipo,sxipo,piratŝipo"
@@ -4060,6 +4112,10 @@
                 "healthcare/hospice": {
                     "name": "Hospico",
                     "terms": "hospico,flegejo"
+                },
+                "healthcare/laboratory": {
+                    "name": "Medicina laboratorio",
+                    "terms": "medicina labo,labo,sanĝkontrolejo"
                 },
                 "healthcare/midwife": {
                     "name": "Akuŝisto",
@@ -5446,7 +5502,7 @@
                     "terms": "stacidomo"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "Stacio koblovoja",
+                    "name": "Stacio kablovoja",
                     "terms": "telferstacio,telfera stacio"
                 },
                 "public_transport/station_bus": {
@@ -6224,6 +6280,10 @@
                     "name": "Amuzparko",
                     "terms": "amuzejo,temparko,distroparko"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Pensiono por ĉevalistoj",
+                    "terms": "ĉevalejo,ĉevalhotelo"
+                },
                 "tourism/viewpoint": {
                     "name": "Belvidejo",
                     "terms": "videjo,vidindaĵo,rigardejo"
@@ -6484,7 +6544,7 @@
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
-                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 14.",
+                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
                 "name": "Detala fotaro de DigitalGlobe - fot-dato"
             },
             "DigitalGlobe-Standard": {
@@ -6498,7 +6558,7 @@
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
-                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 14.",
+                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
                 "name": "Norma fotaro de DigitalGlobe - fot-dato"
             },
             "EsriWorldImagery": {
@@ -6581,6 +6641,9 @@
             "US-TIGER-Roads-2017": {
                 "description": "Flave = publikaj map-datumoj de Usona popolnombrado. Ruĝe = datumoj ne trovitaj en OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Surtavolo de arbar-kultivaj vojoj"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6693,6 +6756,12 @@
                     "text": "Mapoj: © Thunderforest, datumoj: © kontribuintoj de OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "OSM-Reddit": {
+                "name": "OpenStreetMap ĉe Reddit",
+                "description": "/r/openstreetmap/ estas bonega loko por sciiĝi pli pri OpenStreetMap. Demandu pri io ajn!"
             }
         }
     }

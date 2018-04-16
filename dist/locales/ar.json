@@ -609,11 +609,6 @@
         },
         "success": {
             "just_edited": "لقد قمت للتو بتحرير OpenStreetMap!",
-            "view_on_osm": "عرض على OSM",
-            "facebook": "شارك على فيس بوك",
-            "twitter": "شارك على تويتر",
-            "google": "شارك على جوجل بلس",
-            "help_html": "ينبغي أن تظهر التغييرات التي قمت بها في الطبقة \"القياسية\" خلال بضع دقائق. قد تأخذ الطبقات الأخرى وقتا أطول.",
             "help_link_text": "تفاصيل",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -1007,25 +1002,38 @@
                     "edit_menu": "فتح قائمة التحرير"
                 },
                 "vertex_selected": {
-                    "title": "مع القعدة المختارة",
+                    "title": "مع العقدة المختارة",
                     "previous": "قفز إلى العقدة السابقة",
                     "next": "قفز إلى القعدة التالية",
                     "first": "قفز إلى العقدة الأولى",
-                    "last": "فز إلى العقدة الأخيرة"
+                    "last": "قفز إلى العقدة الأخيرة"
                 }
             },
             "editing": {
                 "title": "تحرير",
                 "drawing": {
                     "title": "رسم",
-                    "place_point": "إضافة نقطة"
+                    "add_point": "نمط \"إضافة نقطة\"",
+                    "add_line": "نمط \"إضافة خط\"",
+                    "add_area": "نمط \"إضافة مساحة\"",
+                    "place_point": "إضافة نقطة",
+                    "disable_snap": "اضغط مع الاستمرار لتعطيل ميزة الانجذاب للنقاط",
+                    "stop_line": "إنهاء رسم خط أو مساحة"
                 },
                 "operations": {
                     "title": "عمليات",
+                    "continue_line": "استكمال خط من العُقدة المُختارة",
+                    "merge": "دمج العناصر المُختارة",
+                    "disconnect": "فصل العناصر عند العُقدة المُختارة",
                     "split": "افصل الخط إلى خطين عند نقطة التلاقي المُختارة",
                     "reverse": "عكس الخط",
+                    "move": "نقل العناصر المُختارة",
+                    "rotate": "تدوير العناصر المُختارة",
                     "orthogonalize": "جعله خط مستقيما / جعلها مساحة مربعة",
-                    "delete": "حذف الميزات المحددة"
+                    "circularize": "جعل الخطوط المغلقة أو المنطقة دائرية",
+                    "reflect_long": "انعكاس العناصر خلال المحور الأطول",
+                    "reflect_short": "انعكاس العناصر خلال المحور الأقصر",
+                    "delete": "حذف العناصر المُختارة"
                 },
                 "commands": {
                     "title": "الأوامر",
@@ -1691,7 +1699,7 @@
                     }
                 },
                 "leaf_cycle_singular": {
-                    "label": "الفينولوجيا الأوراق",
+                    "label": "دورة أوراق الشجر",
                     "options": {
                         "deciduous": "نفضية",
                         "evergreen": "دائمة الخضرة",
@@ -2247,7 +2255,7 @@
                     "terms": "عنوان"
                 },
                 "aerialway": {
-                    "name": "محطة النقل بالكابلات "
+                    "name": "النقل بالكابلات "
                 },
                 "aerialway/cable_car": {
                     "name": "تلفريك",
@@ -2260,6 +2268,10 @@
                 "aerialway/goods": {
                     "name": "نقل البضائع بالكابلات ",
                     "terms": "نقل البضائع بالكابلات "
+                },
+                "aerialway/pylon": {
+                    "name": "برج التلفريك / المصعد التزلج",
+                    "terms": "برج التلفريك ; المصعد التزلج"
                 },
                 "aerialway/station": {
                     "name": "محطة النقل بالكابلات"
@@ -2301,6 +2313,10 @@
                 },
                 "amenity": {
                     "name": "مرفق"
+                },
+                "amenity/animal_shelter": {
+                    "name": "مأوى حيوانات",
+                    "terms": "مأوى حيوانات; ملجأ"
                 },
                 "amenity/arts_centre": {
                     "name": "مركز فنون",
@@ -2374,7 +2390,8 @@
                     "terms": "محطة شحن"
                 },
                 "amenity/childcare": {
-                    "name": "رعاية الأطفال"
+                    "name": "رعاية الأطفال",
+                    "terms": "رعاية الأطفال; حضانة"
                 },
                 "amenity/cinema": {
                     "name": "سينما",
@@ -2383,6 +2400,14 @@
                 "amenity/clinic": {
                     "name": "عيادة",
                     "terms": "عيادة; مستوصف"
+                },
+                "amenity/clinic/abortion": {
+                    "name": "عيادة الإجهاض",
+                    "terms": "عيادة الإجهاض"
+                },
+                "amenity/clinic/fertility": {
+                    "name": "عيادة الخصوبة",
+                    "terms": "عيادة الخصوبة"
                 },
                 "amenity/clock": {
                     "name": "ساعة",
@@ -2397,7 +2422,8 @@
                     "terms": "مركز اجتماعي"
                 },
                 "amenity/compressed_air": {
-                    "name": "هواء مضغوط"
+                    "name": "هواء مضغوط",
+                    "terms": "هواء مضغوط"
                 },
                 "amenity/courthouse": {
                     "name": "دار العدل",
@@ -2666,6 +2692,30 @@
                 "area/highway": {
                     "name": "سطح الطريق",
                     "terms": "<translate with synonyms or related terms for 'Road Surface', separated by commas>"
+                },
+                "attraction/animal": {
+                    "name": "حيوان",
+                    "terms": "حيوان"
+                },
+                "attraction/big_wheel": {
+                    "name": "دولاب هواء",
+                    "terms": "دولاب هواء; العجلة الكبيرة"
+                },
+                "attraction/carousel": {
+                    "name": "دوامة خيل",
+                    "terms": "دوامة خيل"
+                },
+                "attraction/maze": {
+                    "name": "متاهة",
+                    "terms": "متاهة"
+                },
+                "attraction/pirate_ship": {
+                    "name": "سفينة قراصنة",
+                    "terms": "سفينة قراصنة"
+                },
+                "attraction/roller_coaster": {
+                    "name": "السفينة الدوارة",
+                    "terms": "سفينة دوارة"
                 },
                 "barrier": {
                     "name": "حاجز",
@@ -2945,7 +2995,8 @@
                     "name": "قفال - صانع أقفال"
                 },
                 "craft/painter": {
-                    "name": "دهّان"
+                    "name": "دهّان",
+                    "terms": "دهّان"
                 },
                 "craft/photographer": {
                     "name": "مصور",
@@ -2979,6 +3030,10 @@
                     "name": "منشرة",
                     "terms": "منشرة"
                 },
+                "craft/scaffolder": {
+                    "name": "مركب السقالة",
+                    "terms": "مركب السقالة"
+                },
                 "craft/sculptor": {
                     "name": "نحّات",
                     "terms": "نحّات"
@@ -2989,6 +3044,10 @@
                 },
                 "craft/tailor": {
                     "name": "خياط"
+                },
+                "craft/tiler": {
+                    "name": "مركِّب البلاط",
+                    "terms": "مركِّب البلاط"
                 },
                 "craft/upholsterer": {
                     "name": "منجد",
@@ -3049,6 +3108,10 @@
                 "healthcare/blood_donation": {
                     "name": "مركز التبرع بالدم",
                     "terms": "تبرع بالدم"
+                },
+                "healthcare/laboratory": {
+                    "name": "مختبر طبي",
+                    "terms": "مختبر طبي; مخبر التحاليل الطبية"
                 },
                 "healthcare/occupational_therapist": {
                     "name": "أخصائي العلاج الوظيفي",
@@ -3402,7 +3465,8 @@
                     "name": "مكتب عسكري"
                 },
                 "landuse/military/range": {
-                    "name": "نطاق عسكري"
+                    "name": "ميدان الرماية العسكرية",
+                    "terms": "ميدان الرماية العسكرية"
                 },
                 "landuse/military/training_area": {
                     "name": "منطقة تدريب",
@@ -3582,7 +3646,7 @@
                 },
                 "leisure/sports_centre": {
                     "name": "مركز رياضي",
-                    "terms": " مركز رياضي، نادي رياضي "
+                    "terms": " مركز رياضي; نادي رياضي; مجمع رياضي"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "مبنى حوض سباحة",
@@ -4195,6 +4259,10 @@
                 "shop/alcohol": {
                     "name": "محل خمور",
                     "terms": "محل خمور"
+                },
+                "shop/appliance": {
+                    "name": "متجر الأجهزة المنزلية",
+                    "terms": "متجر الأجهزة المنزلية"
                 },
                 "shop/art": {
                     "name": "متجر الفنون",

@@ -520,13 +520,7 @@
             }
         },
         "success": {
-            "edited_osm": "Uređen OSM!",
             "just_edited": "Upravo si uredio/la OpenStreetMap!",
-            "view_on_osm": "Pogledaj na OSM",
-            "facebook": "Podijeli na mreži Facebook",
-            "twitter": "Podijeli na mreži Twitter",
-            "google": "Podijeli na mreži Google+",
-            "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određene elemente trebati će više vremena.",
             "help_link_text": "Detalji",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },

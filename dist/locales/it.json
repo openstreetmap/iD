@@ -150,7 +150,9 @@
                     "vertex": "Connessa una linea ad un'altra.",
                     "line": "Connessa una strada ad una linea.",
                     "area": "Connessa una linea ad un'area."
-                }
+                },
+                "relation": "Questi elementi non possono essere collegati tra loro perché ci sono conflitti nei ruoli della relazione.",
+                "restriction": "Questi elementi non possono essere connessi tra loro perché ciò danneggerebbe la relazione “{relation}”"
             },
             "disconnect": {
                 "title": "Disconnetti",
@@ -407,6 +409,7 @@
                 "key": "H",
                 "title": "Storico",
                 "selected": "{n} selezionato/i",
+                "no_history": "Nessuna cronologia (nuovo elemento)",
                 "version": "Versione",
                 "last_edit": "Ultima modifica",
                 "edited_by": "Modificato da",
@@ -644,15 +647,20 @@
             }
         },
         "success": {
-            "edited_osm": "OSMI Modificato",
             "just_edited": "Hai appena modificato OpenStreetMap!",
-            "view_on_osm": "Vedi su OSM",
-            "facebook": "Condividi su Facebook",
-            "twitter": "Condividi su Twitter",
-            "google": "Condividi su Google+",
-            "help_html": "Le tue modifiche appariranno nel livello \"Standard\" tra qualche minuto. Per gli altri livelli e per certi elementi potrebbe essere necessario più tempo.",
+            "thank_you": "Ti ringraziamo per aver migliorato la mappa.",
+            "thank_you_location": "Grazie per aver migliorato la mappa attorno a {where}.",
+            "help_html": "Le tue modifiche dovrebbero apparire su OpenStreetMap entro pochi minuti. Per le altre mappe che usano OpenStreetMap occorrerà attendere po’ di più.",
             "help_link_text": "Dettagli",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/IT:FAQ#Ho_editato_i_dati_tutto_il_giorno.2C_ma_le_mie_modifiche_non_appaiono_nel_viewer.21"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/IT:FAQ#Ho_editato_i_dati_tutto_il_giorno.2C_ma_le_mie_modifiche_non_appaiono_nel_viewer.21",
+            "view_on_osm": "Vedi le modifiche su OSM",
+            "changeset_id": "Il tuo gruppo di modifiche #: {changeset_id}",
+            "like_osm": "Ti piace OpenStreetMap? Unisciti agli altri:",
+            "more": "Altro",
+            "events": "Eventi",
+            "languages": "Lingue: {languages}",
+            "missing": "Manca qualcosa da questa lista?",
+            "tell_us": "Segnalacelo!"
         },
         "confirm": {
             "okay": "OK",
@@ -1401,7 +1409,7 @@
                         "bicycle": "Biciclette",
                         "foot": "A piedi",
                         "horse": "Cavalli",
-                        "motor_vehicle": "Veicoli a Motore"
+                        "motor_vehicle": "Veicoli a motore"
                     }
                 },
                 "access_simple": {
@@ -1584,7 +1592,7 @@
                 },
                 "cables": {
                     "label": "Cavi",
-                    "placeholder": "1, 2, 3,..."
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Direzione (gradi in senso orario)",
@@ -1671,7 +1679,7 @@
                     "label": "Rete"
                 },
                 "cycleway": {
-                    "label": "Corsie Ciclabili",
+                    "label": "Corsie ciclabili",
                     "options": {
                         "lane": {
                             "description": "Una corsia ciclabile separata dal traffico motorizzato da una linea disegnata",
@@ -1728,7 +1736,7 @@
                 },
                 "devices": {
                     "label": "Dispositivi",
-                    "placeholder": "1, 2, 3,..."
+                    "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Fasciatoio"
@@ -1779,6 +1787,9 @@
                 "display": {
                     "label": "Display"
                 },
+                "distance": {
+                    "label": "Distanza totale"
+                },
                 "dock": {
                     "label": "Tipologia"
                 },
@@ -1794,10 +1805,10 @@
                     "options": {
                         "contact_line": "Linea Aerea di Contatto",
                         "no": "No",
-                        "rail": "Rotaia Elettrificata",
+                        "rail": "Rotaia elettrificata",
                         "yes": "Sì (non specificato)"
                     },
-                    "placeholder": "Linea Aerea, Rotaia Elettrificata..."
+                    "placeholder": "Linea aerea, rotaia elettrificata..."
                 },
                 "elevation": {
                     "label": "Altitudine"
@@ -1820,7 +1831,7 @@
                     "label": "Eccezioni"
                 },
                 "faces": {
-                    "label": "facciate"
+                    "label": "Facciate"
                 },
                 "fax": {
                     "label": "Fax",
@@ -1932,6 +1943,39 @@
                 "hoops": {
                     "label": "Canestri",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "label": "Dressage",
+                    "options": {
+                        "equestrian": "Sì",
+                        "undefined": "No"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Cavalcata",
+                    "options": {
+                        "horse_riding": "Sì",
+                        "undefined": "No"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Livello di difficoltà della cavalcata",
+                    "options": {
+                        "common": "Facile: nessun ostacolo o difficoltà. (predefinito)",
+                        "critical": "Intermedio: effettuabile solo da cavalieri esperti e cavalli in forma. Ostacoli importanti. I ponti vanno esaminati accuratamente.",
+                        "dangerous": "Pericoloso: solo per cavalieri molto esperti e cavalli in forma se le condizioni meteo lo permettono. È necessario scendere da cavallo.",
+                        "demanding": "Da praticare con cautela: strada disconnessa con passaggi occasionalmente difficili.",
+                        "difficult": "Difficile: percorso stretto ed esposto. Possono esserci ostacoli da saltare e passaggi stretti.",
+                        "impossible": "Impraticabile: il percorso/ponte non è adatto ai cavalli. Troppo stretto, non può tenere il peso dell’animale oppure ci sono ostacoli come scale. Pericolo di vita."
+                    },
+                    "placeholder": "Difficile, pericoloso..."
+                },
+                "horse_stables": {
+                    "label": "Scuderia ippica",
+                    "options": {
+                        "stables": "Sì",
+                        "undefined": "No"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -2069,7 +2113,7 @@
                 },
                 "maxheight": {
                     "label": "Altezza massima",
-                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\", ..."
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Limite di velocità",
@@ -2092,7 +2136,7 @@
                     "label": "Controllo"
                 },
                 "mtb/scale": {
-                    "label": "Difficoltà Mountain Bike",
+                    "label": "Difficoltà mountain bike",
                     "options": {
                         "0": "0: Ghiaia solida/terra battuta, nessun ostacolo, curve ampie",
                         "1": "1: Un po' di terriccio, piccoli ostacoli, curve ampie",
@@ -2120,10 +2164,10 @@
                     "options": {
                         "0": "0: Pendenza media <10%, ghiaia/terra battuta, nessun ostacolo",
                         "1": "1: Pendenza media <15%, ghiaia/terra battuta, ostacoli rari e piccoli",
-                        "2": "2: Pendenza media <20%, superficie stabile, radici/roccie grandi come un pugno",
-                        "3": "3: Pendenza media <25%, superficie varia, rami/roccie grandi come un pugno",
-                        "4": "4: Pendenza media <30%, in cattive condizioni, rami/roccie grandi",
-                        "5": "5: Pendenza estrema, in genere è necessario spigere o sollevare la bici"
+                        "2": "2: Pendenza media <20%, superficie stabile, radici/rocce grandi come un pugno",
+                        "3": "3: Pendenza media <25%, superficie varia, rami/rocce grandi come un pugno",
+                        "4": "4: Pendenza media <30%, in cattive condizioni, rami/rocce grandi",
+                        "5": "5: Pendenza estrema, in genere è necessario spingere o sollevare la bici"
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
@@ -2750,7 +2794,7 @@
                 },
                 "windings": {
                     "label": "Avvolgimenti",
-                    "placeholder": "1, 2, 3,..."
+                    "placeholder": "1, 2, 3..."
                 },
                 "windings/configuration": {
                     "label": "Configurazione degli avvolgimenti",
@@ -2773,6 +2817,10 @@
                 "advertising/billboard": {
                     "name": "Cartellone pubblicitario",
                     "terms": "pubblicità,cartellone,promozione,propaganda,réclame,manifesto"
+                },
+                "advertising/column": {
+                    "name": "Espositore pubblicitario cilindrico",
+                    "terms": "espositore pubblicitario,espositori,cilindro,cilindrico,pubblicità,cartellone,totem"
                 },
                 "aerialway": {
                     "name": "Trasporto a fune"
@@ -3060,7 +3108,7 @@
                     "terms": "spandisale,sale,ghiaccio,inverno,salare"
                 },
                 "amenity/hospital": {
-                    "name": "Area Ospedaliera",
+                    "name": "Area ospedaliera",
                     "terms": "ospedale,clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
                 },
                 "amenity/hunting_stand": {
@@ -3325,7 +3373,7 @@
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Distributore automatico di prodotti per l'igiene femminile",
-                    "terms": "<translate with synonyms or related terms for 'Feminine Hygiene Vending Machine', separated by commas>"
+                    "terms": "preservativo,preservativi,pillola,coppetta,spirale,profilattico,profilattici,tampone,tamponi,assorbente,assorbenti,assorbente interno,assorbenti interni,donna,donne,femmina,femmine,femminilità,sviluppo,mestruazioni,ciclo,mestruale,prodotti di igiene,prodotti per la persona,cura della persona"
                 },
                 "amenity/vending_machine/food": {
                     "name": "Macchinetta del cibo",
@@ -3404,11 +3452,11 @@
                 },
                 "attraction/amusement_ride": {
                     "name": "Parco divertimenti",
-                    "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
+                    "terms": "parco a tema,parco tematico,parco di divertimento,parco divertimenti,parco dei divertimenti,giostra,giostre,attrazione,ruota panoramica"
                 },
                 "attraction/animal": {
                     "name": "Animale",
-                    "terms": "<translate with synonyms or related terms for 'Animal', separated by commas>"
+                    "terms": "zoo,zoo safari,safari,parco animali,gabbia,gabbie,leone,leoni,tigre,tigri,orso,orsi,giraffa,giraffe,elefante,elefanti,zebra,zebre"
                 },
                 "attraction/big_wheel": {
                     "name": "Ruota panoramica",
@@ -3433,6 +3481,10 @@
                 "attraction/drop_tower": {
                     "name": "Torre a caduta libera",
                     "terms": "<translate with synonyms or related terms for 'Drop Tower', separated by commas>"
+                },
+                "attraction/maze": {
+                    "name": "Labirinto",
+                    "terms": "parco a tema,parco tematico,parco di divertimento,parco divertimenti,parco dei divertimenti,giostra,giostre,attrazione,divertimento,labirinto,dedalo"
                 },
                 "attraction/pirate_ship": {
                     "name": "Nave dei pirati",
@@ -3551,7 +3603,7 @@
                 },
                 "building/bungalow": {
                     "name": "Bungalow",
-                    "terms": "<translate with synonyms or related terms for 'Bungalow', separated by commas>"
+                    "terms": "bungalow,campeggio,alloggio,residence"
                 },
                 "building/bunker": {
                     "name": "Bunker"
@@ -3574,7 +3626,7 @@
                 },
                 "building/civic": {
                     "name": "Edificio comunale",
-                    "terms": "<translate with synonyms or related terms for 'Civic Building', separated by commas>"
+                    "terms": "civico,municipale,pubblico,cittadino"
                 },
                 "building/college": {
                     "name": "Edificio di un College",
@@ -3609,7 +3661,7 @@
                 },
                 "building/garage": {
                     "name": "Garage",
-                    "terms": "Garage"
+                    "terms": "garage,posto auto,auto,box"
                 },
                 "building/garages": {
                     "name": "Garage",
@@ -3645,7 +3697,7 @@
                 },
                 "building/mosque": {
                     "name": "Moschea (edificio)",
-                    "terms": "<translate with synonyms or related terms for 'Mosque Building', separated by commas>"
+                    "terms": "moschea,moschee,islam,sala della preghiera,preghiera,minareto"
                 },
                 "building/public": {
                     "name": "Edificio pubblico",
@@ -3665,7 +3717,7 @@
                 },
                 "building/ruins": {
                     "name": "Edificio in rovina",
-                    "terms": "<translate with synonyms or related terms for 'Building Ruins', separated by commas>"
+                    "terms": "rovina,rovine,distrutto,pericolante,pericolo,crollo,crolli,crollato,collassato,collasso"
                 },
                 "building/school": {
                     "name": "Edificio scolastico",
@@ -3677,7 +3729,7 @@
                 },
                 "building/service": {
                     "name": "Edificio di servizio",
-                    "terms": "<translate with synonyms or related terms for 'Service Building', separated by commas>"
+                    "terms": "servizio,stazione di servizio,sottostazione,sala,sala trasformatori,sala pompe,pompa"
                 },
                 "building/shed": {
                     "name": "Capanno",
@@ -3689,7 +3741,7 @@
                 },
                 "building/stadium": {
                     "name": "Stadio",
-                    "terms": "<translate with synonyms or related terms for 'Stadium Building', separated by commas>"
+                    "terms": "stadio,stadio olimpico,olimpico,stadio di calcio,stadio del ghiaccio,stadio sportivo,sport,sportivo,arena,palazzetto"
                 },
                 "building/static_caravan": {
                     "name": "Roulotte stazionaria",
@@ -3697,7 +3749,7 @@
                 },
                 "building/temple": {
                     "name": "Tempio",
-                    "terms": "<translate with synonyms or related terms for 'Temple Building', separated by commas>"
+                    "terms": "tempio,templi,luogo di preghiera"
                 },
                 "building/terrace": {
                     "name": "Villette a schiera",
@@ -4062,6 +4114,10 @@
                 "healthcare/hospice": {
                     "name": "Ospizio",
                     "terms": "<translate with synonyms or related terms for 'Hospice', separated by commas>"
+                },
+                "healthcare/laboratory": {
+                    "name": "Laboratorio medico",
+                    "terms": "laboratorio,clinica,medico,medica,medicina,esame del sangue,esami del sangue,laboratorio medico,controllo medico,controlli medici"
                 },
                 "healthcare/midwife": {
                     "name": "Clinica prenatale",
@@ -5647,7 +5703,7 @@
                 },
                 "shop/anime": {
                     "name": "Negozio di manga",
-                    "terms": "Negozio di anime"
+                    "terms": "negozio di anime,anime,manga,Giappone,cosplay,figurine,fumetti,costumi"
                 },
                 "shop/antiques": {
                     "name": "Antiquario",
@@ -6226,6 +6282,10 @@
                     "name": "Parco a tema",
                     "terms": "Parco a tema"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Stazione di sosta per cavalli",
+                    "terms": "stazione,stop,sosta,cavallo,cavalli,cavalcatura,rifornimento,abbeveratoio,pausa,riposo"
+                },
                 "tourism/viewpoint": {
                     "name": "Punto panoramico",
                     "terms": " Punto panoramico "
@@ -6486,7 +6546,7 @@
                 "attribution": {
                     "text": "Termini & Feedback"
                 },
-                "description": "Immagini dei confini e data di riferimento. Le etichette vengono mostrate a livelli di zoom maggiori o uguali a 14.",
+                "description": "Confini delle immagini e data di acquisizione. Le etichette appaiono a livelli di ingrandimento 13 e successivi.",
                 "name": "DigitalGlobe Premium Imagery Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -6500,7 +6560,7 @@
                 "attribution": {
                     "text": "Termini & Feedback"
                 },
-                "description": "Immagini dei confini e data di riferimento. Le etichette vengono mostrate a livelli di zoom maggiori o uguali a 14.",
+                "description": "Confini delle immagini e data di acquisizione. Le etichette appaiono a livelli di ingrandimento 13 e successivi.",
                 "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
@@ -6583,6 +6643,9 @@
             "US-TIGER-Roads-2017": {
                 "description": "Giallo = Dati pubblici forniti da enti statali Statunitensi.",
                 "name": "TIGER Roads 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Strade forestali U.S. (sovrapposta)"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6788,6 +6851,18 @@
                 "name": "Mailinglist di OpenStreetMap di Taiwan",
                 "description": "Talk-tw è la mailinglist ufficiale delle comunità per discutere su argomenti inerenti Taiwan."
             },
+            "at-mailinglist": {
+                "name": "Mailinglist talk-at",
+                "description": "Talk-at è la mailinglist ufficiale della comunità austriaca di OpenStreetMap"
+            },
+            "at-twitter": {
+                "name": "Twitter di OpenStreetMap dell’Austria",
+                "description": "OpenStreetMap dell’Austria su Twitter: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap dell’Austria",
+                "description": "La piattaforma per informazioni su OpenStreetMap in Austria"
+            },
             "be-facebook": {
                 "name": "Comunità belga di OpenStreetMap",
                 "description": "Facebook di mappatori e OpenStreetMap del Belgio"
@@ -6799,7 +6874,7 @@
             "be-irc": {
                 "name": "Canale IRC belga di OpenStreetMap",
                 "description": "Entra in #osmbe su irc.oftc.net (porta 6667)",
-                "extendedDescription": "Unisciti a #osmbe su irc.oftc.net (porta 6667), è collegato al canale di chat di matrix"
+                "extendedDescription": "Entra in #osmbe su irc.oftc.net (porta 6667), è connesso con al canale di chat matrix"
             },
             "be-mailinglist": {
                 "name": "Mailinglist talk-be",
@@ -6822,9 +6897,35 @@
                 "name": "Mailinglist Talk-cz",
                 "description": "Talk-cz è la mailinglist ufficiale della comunità ceca"
             },
+            "de-forum": {
+                "name": "Forum OpenStreetMap della Germania",
+                "description": "Forum web di OpenStreetMap della Germania"
+            },
+            "de-irc": {
+                "name": "Canale IRC di OpenStreetMap della Germania",
+                "description": "Entra in #osm-de su irc.oftc.net (porta 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Mailinglist talk-de",
+                "description": "Talk-de è la mailinglist ufficiale della comunità OSM della Germania"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap della Germania",
+                "description": "La piattaforma d’informazione per OpenStreetMap in Germania"
+            },
             "OSM-ES-telegram": {
                 "name": "@OSMes su Telegram",
                 "description": "Chat Telegram di OpenStreetMap della Spagna"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Miglioriamo OpenStreetMap nell’area attorno a Roma",
+                "extendedDescription": "Puntiamo ad aiutare le persone a discutere e a condividere le loro conoscenze nell’utilizzo dei dati geografici, in particolar modo quelli di OpenStreetMap, in quello di software geo-spaziale che gestisce, modifica e visualizza dati geografici e promuoviamo il suo uso nel Lazio."
+            },
+            "talk-it-lazio": {
+                "name": "OpenStreetMap Italy del Lazio",
+                "description": "Tutti sono i benvenuti! Iscriviti su {signupUrl}",
+                "extendedDescription": "Mailinglist di Roma e del Lazio."
             },
             "OSM-CA-Slack": {
                 "name": "Slack di OSM-CA",
@@ -6875,7 +6976,7 @@
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Miglioriamo OpenStreetMap nell’area di Cleveland",
-                "extendedDescription": "Open Geo Cleveland mira a diventare una risorsa per le persone che vogliano discutere e condividere le proprie conoscenze su come utilizzare i dati geografici liberi, nella fattispecie OpenStreetMap, e di software geospaziale aperto che gestisce, modifica e mostra su schermo dati geografici, e spinge per il loro utilizzo nell’Ohio del nord-est. Siamo anche un chapter di maptime =)"
+                "extendedDescription": "Open Geo Cleveland mira a diventare una risorsa per le persone che vogliano discutere e condividere le proprie conoscenze su come utilizzare i dati geografici liberi, nella fattispecie OpenStreetMap, e di software geo-spaziale aperto che gestisce, modifica e mostra su schermo dati geografici, e spingiamo per il suo uso nell’Ohio del nord-est. Siamo anche un chapter di maptime =)"
             },
             "OSM-Boston": {
                 "name": "OpenStreetMap di Boston",
@@ -6994,7 +7095,7 @@
             },
             "OSM-AR-twitter": {
                 "name": "Twitter di OpenStreetMap dell’Argentina",
-                "description": "Seguici su Twitter all’url {url}"
+                "description": "Seguici su Twitter all’indirizzo {url}"
             },
             "Bahia-telegram": {
                 "name": "Gruppo Telegram di OpenStreetMap di Bahia",
@@ -7012,7 +7113,25 @@
             },
             "OSM-br-twitter": {
                 "name": "Twitter di OpenStreetMap del Brasile",
-                "description": "Seguici su Twitter su {url}"
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "OSM-CL-facebook": {
+                "name": "Facebook di OpenStreetMap del Cile",
+                "description": "Unisciti alla comunità OpenStreetMap del Cile su Facebook",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Tutti sono i benvenuti!"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Mailinglist talk-cl",
+                "description": "Una mailinglist per discutere su OpenStreetMap del Cile"
+            },
+            "OSM-CL-telegram": {
+                "name": "Telegram di OpenStreetMap del Cile",
+                "description": "Unisciti alla comunità di OpenStreetMap del Cile su Telegram",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Tutti sono i benvenuti!"
+            },
+            "OSM-CL-twitter": {
+                "name": "Twitter di OpenStreetMap del Cile",
+                "description": "Seguici su Twitter all’indirizzo {url}"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap su Reddit",

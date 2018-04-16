@@ -150,7 +150,9 @@
                     "vertex": "Vía conectada a otra.",
                     "line": "Vía conectada a una línea.",
                     "area": "Vía conectada a un área."
-                }
+                },
+                "relation": "Estos elementos no se pueden conectar porque tienen roles de relación con conflictos.",
+                "restriction": "Estos elementos no se pueden conectar porque dañarían la relación \"{relation}\"."
             },
             "disconnect": {
                 "title": "Desconectar",
@@ -407,6 +409,7 @@
                 "key": "H",
                 "title": "Historial",
                 "selected": "{n} seleccionado",
+                "no_history": "Sin historial (Nuevo elemento)",
                 "version": "Versión",
                 "last_edit": "Última edición",
                 "edited_by": "Editado por",
@@ -644,15 +647,20 @@
             }
         },
         "success": {
-            "edited_osm": "¡OSM editado!",
             "just_edited": "¡Acaba de editar OpenStreetMap!",
-            "view_on_osm": "Ver en OSM",
-            "facebook": "Compartir en Facebook",
-            "twitter": "Compartir en Twitter",
-            "google": "Compartir en Google+",
-            "help_html": "Sus cambios deberían aparecer en la capa «estándar» en unos pocos minutos. Otras capas, y ciertos elementos, pueden llevar más tiempo.",
+            "thank_you": "Gracias por mejorar el mapa.",
+            "thank_you_location": "Gracias por mejorar el mapa alrededor de {where}.",
+            "help_html": "Los cambios deberían aparecer en OpenStreetMap en unos minutos. Puede llevar más tiempo para que otros mapas reciban las actualizaciones.",
             "help_link_text": "Detalles",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/ES:FAQ#Acabo_de_hacer_algunos_cambios_en_el_mapa._.C2.BFC.C3.B3mo_puedo_ver_mis_modificaciones.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/ES:FAQ#Acabo_de_hacer_algunos_cambios_en_el_mapa._.C2.BFC.C3.B3mo_puedo_ver_mis_modificaciones.3F",
+            "view_on_osm": "Ver cambios en OSM",
+            "changeset_id": "Tu conjunto de cambios #: {changeset_id}",
+            "like_osm": "¿Como OpenStreetMap? Conéctate con otros:",
+            "more": "Más",
+            "events": "Eventos",
+            "languages": "Idiomas: {languages}",
+            "missing": "¿Falta algo en esta lista?",
+            "tell_us": "Cuentanos!"
         },
         "confirm": {
             "okay": "Aceptar",
@@ -1819,9 +1827,6 @@
                 "except": {
                     "label": "Excepciones"
                 },
-                "faces": {
-                    "label": "caras"
-                },
                 "fax": {
                     "label": "Fax",
                     "placeholder": "+31 42 123 4567"
@@ -2773,6 +2778,10 @@
                 "advertising/billboard": {
                     "name": "Panel publicitario",
                     "terms": "panel, cartel, cartelera, valla, publicitario, publicidad"
+                },
+                "advertising/column": {
+                    "name": "Columna publicitaria",
+                    "terms": "Columna publicitaria, publicidad, cartel, propaganda"
                 },
                 "aerialway": {
                     "name": "Transporte por cable"
@@ -6486,7 +6495,7 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de acercamiento 14 y superior.",
+                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de zoom 13 y superior.",
                 "name": "Imágenes antiguas DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -6500,7 +6509,7 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de acercamiento 14 y superior.",
+                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de zoom 13 y superior.",
                 "name": "Imágenes antiguas DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -6583,6 +6592,9 @@
             "US-TIGER-Roads-2017": {
                 "description": "Amarillo = Datos del mapa de dominio público desde el US Census. Rojo = Datos no encontrados en OpenStreetMap",
                 "name": "Carreteras TIGER 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Superposición de carreteras forestales de los EE.UU."
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6698,10 +6710,36 @@
             }
         },
         "community": {
+            "osm-mg-facebook": {
+                "name": "Grupo de Facebook OpenStreetMap Madagascar",
+                "description": "Grupo de Facebook Malgache para gente interesada en OpenStreetMap"
+            },
+            "talk-mg": {
+                "name": "Lista de Correo Talk-mg",
+                "description": "Lugar para los colaboradores, comunidades y usuarios de OpenStreetMap en Madagascar para compartir y debatir."
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Mejore OpenStreetMap en Bangladesh",
+                "extendedDescription": "¿Mapeando en Bangladesh? ¿Tiene alguna pregunta, desea conectarse con la comunidad aquí? Únete a nosotros en {Url}. ¡Todos son bienvenidos!"
+            },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Mapeo participativo del barrio",
-                "description": "Mejora OpenStreetMap en India",
+                "description": "Mejore OpenStreetMap en India",
                 "extendedDescription": "¿Mapeando en India? ¿Tienes preguntas, quieres contactar con la comunidad local? Únete a nosotros en {Url}. ¡Todos son bienvenidos!"
+            },
+            "OSM-india-mailinglist": {
+                "name": "Lista de correo de OpenStreetMap India",
+                "description": "Talk-in es la lista de correo oficial para la comunidad India"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter de OpenStreetMap India",
+                "description": "Estamos a solo un tweet: {url}"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesia",
+                "description": "Mejore OpenStreetMap en Indonesia",
+                "extendedDescription": "¿Mapeando en Indonesia? ¿Tiene alguna pregunta, desea conectarse con la comunidad aquí? Únete a nosotros en {Url}. ¡Todos son bienvenidos!"
             },
             "OSM-japan-facebook": {
                 "name": "Comunidad OpenStreetMap Japón",
@@ -6713,10 +6751,25 @@
             },
             "OSM-japan-twitter": {
                 "name": "Twitter de OpenStreetMap Japón",
-                "description": "Etiqueta en Twitter: {url}"
+                "description": "Hashtag en Twitter: {url}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolia",
+                "description": "Mejore OpenStreetMap en Mongolia",
+                "extendedDescription": "¿Mapeando en Mongolia? ¿Tiene alguna pregunta, desea conectarse con la comunidad aquí? Únete a nosotros en {Url}. ¡Todos son bienvenidos!"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal",
+                "description": "Mejore OpenStreetMap en Nepal",
+                "extendedDescription": "¿Mapeando en Nepal? ¿Tiene alguna pregunta, desea conectarse con la comunidad aquí? Únete a nosotros en {Url}. ¡Todos son bienvenidos!"
             },
             "OSM-PH-facebook": {
+                "name": "Grupo de Facebook OpenStreetMap PH",
                 "description": "Bienvenido a OpenStreetMap Filipinas, donde animamos a los Filipinos a contribuir al proyecto OpenStreetMap"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Lista de correo Talk-ph",
+                "description": "Una lista de correo para discutir OpenStreetMap en Filipinas"
             },
             "OSM-PH-slack": {
                 "description": "¡Todos son bienvenidos! Regístrate en {signupUrl}"
@@ -6733,16 +6786,19 @@
                 "name": "Telegram de OpenStreetMap RU",
                 "description": "Chat de telegram de OpenStreetMap Rusia"
             },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka"
+            },
             "OSM-TW-facebook": {
                 "name": "Comunidad de OpenStreetMap Taiwan"
             },
             "byosm": {
-                "name": "OpenStreetMap Bielorrusia",
-                "description": "Grupo OpenStreetMap Bielorrusia en Telegram"
+                "name": "OpenStreetMap Belarús",
+                "description": "Grupo de telegram de OpenStreetMap Belarús"
             },
             "OSM-ES-telegram": {
                 "name": "@OSMes en Telegram",
-                "description": "Grupo OpenStreetMap España en Telegram"
+                "description": "Grupo de Telegram de OpenStreetMap España"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers del área de la bahía",

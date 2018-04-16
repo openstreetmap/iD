@@ -601,13 +601,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM güncellendi!",
             "just_edited": "OpenStreetMap'te bir değişiklik yaptın!",
-            "view_on_osm": "OSM'de gör",
-            "facebook": "Facebook'ta Paylaş",
-            "twitter": "Twitter'da Paylaş",
-            "google": "Google+'ta Paylaş",
-            "help_html": "Yaptığın değişiklikleri \"Standard\" harita katmanında birkaç dakika içerinde görebilirsin. Diğer katmanlar ve nesnelerin güncellenmesi biraz zaman alabilir.",
             "help_link_text": "Detaylar",
             "help_link_url": "Yaptığın değişiklikleri nasıl görebileceğine dair detaylı bilgiyi şu adreste bulabilirsin - İngilizce: https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -5851,7 +5845,6 @@
                 "attribution": {
                     "text": "Şartlar ve Geri Bildirim"
                 },
-                "description": "Görüntü sınırları ve çekilme tarihleri. Etiketler yakınlaştırma düzeyi 14 veya daha üstünde gösterilir.",
                 "name": "DigitalGlobe Özel Görüntü Dönemi Ürünü"
             },
             "DigitalGlobe-Standard": {
@@ -5865,7 +5858,6 @@
                 "attribution": {
                     "text": "Şartlar ve Geri Bildirim"
                 },
-                "description": "Görüntü sınırları ve çekilme tarihleri. Etiketler yakınlaştırma düzeyi 14 veya daha üstünde gösterilir.",
                 "name": "DigitalGlobe Standard Görüntü Dönemi Ürünü"
             },
             "EsriWorldImagery": {

@@ -412,13 +412,7 @@
             }
         },
         "success": {
-            "edited_osm": "Уреден OSM!",
             "just_edited": "Штотуку го уредивте OpenStreetMap!",
-            "view_on_osm": "Погл. на OSM",
-            "facebook": "Сподели на Фејсбук",
-            "twitter": "Сподели на Твитер",
-            "google": "Сподели на Гугл+",
-            "help_html": "Вашите промени треба да се појават во слојот „Стандарден“ за некоја минута. На другите слоеви и извесни елементи може да им треба повеќе време.",
             "help_link_text": "Подробно",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },

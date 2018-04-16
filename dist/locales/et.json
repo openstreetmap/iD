@@ -530,13 +530,7 @@
             }
         },
         "success": {
-            "edited_osm": "Sa täiendasid OSM-i!",
             "just_edited": "Täiendasid just OpenStreetMapi!",
-            "view_on_osm": "Vaata OSM-is",
-            "facebook": "Jaga Facebookis",
-            "twitter": "Jaga Twitteris",
-            "google": "Jaga Google+-is",
-            "help_html": "Sinu muudatused peaksid ilmuma kihil \"Standard\" mõne minuti jooksul. Teiste kihtide ja teatud objektidega võib kauem minna.",
             "help_link_text": "Üksikasjad"
         },
         "confirm": {
@@ -1006,6 +1000,9 @@
                 "healthcare/speciality": {
                     "label": "Erialad"
                 },
+                "horse_riding": {
+                    "label": "Ratsutamine"
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1333,6 +1330,9 @@
                 "trees": {
                     "label": "Puud"
                 },
+                "usage_rail": {
+                    "label": "Kasutusostarve"
+                },
                 "visibility": {
                     "label": "Nähtavus"
                 },
@@ -1599,7 +1599,8 @@
                     "terms": "parkla"
                 },
                 "amenity/pharmacy": {
-                    "name": "Apteek"
+                    "name": "Apteek",
+                    "terms": "ravimid"
                 },
                 "amenity/place_of_worship": {
                     "name": "Pühakoda",
@@ -1870,10 +1871,12 @@
                     "name": "Sissepääs"
                 },
                 "building/farm": {
-                    "name": "Talumaja"
+                    "name": "Maamaja",
+                    "terms": "talumaja,elumaja,elamu,maja,rehi*"
                 },
                 "building/farm_auxiliary": {
-                    "name": "Talu hoone"
+                    "name": "Taluhoone",
+                    "terms": "hoone,ait,abihoone,laut,küün"
                 },
                 "building/garage": {
                     "name": "Garaaž",
@@ -2179,6 +2182,10 @@
                 "healthcare/hospice": {
                     "name": "Hooldekodu",
                     "terms": "hospiits"
+                },
+                "healthcare/laboratory": {
+                    "name": "Meditsiiniline labor",
+                    "terms": "labor*,verelabor*"
                 },
                 "healthcare/midwife": {
                     "name": "Ämmaemand"
@@ -2507,6 +2514,9 @@
                 "leisure/amusement_arcade": {
                     "name": "Videomängumasin",
                     "terms": "telekamäng,mängukonsool"
+                },
+                "leisure/beach_resort": {
+                    "name": "Rannakuurort"
                 },
                 "leisure/bowling_alley": {
                     "name": "Boolingusaal",
@@ -3056,8 +3066,8 @@
                     "name": "Juustupood"
                 },
                 "shop/chemist": {
-                    "name": "Apteek",
-                    "terms": "Ravimid"
+                    "name": "Kodukeemia kauplus",
+                    "terms": "puhastus*,ravimid,kemikaal*,pesuvahend*,üldpuhastus*,hügieeni*,tarbed,keemia"
                 },
                 "shop/chocolate": {
                     "name": "Šokolaadikauplus",
@@ -3547,6 +3557,18 @@
                 },
                 "type/restriction/no_u_turn": {
                     "name": "Tagasipöörd keelatud"
+                },
+                "type/restriction/only_left_turn": {
+                    "name": "Ainult vasakpööre"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Ainult parempööre"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Ainult otse"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Ainult ümberpöörd"
                 },
                 "type/route": {
                     "name": "Marsruut"
