@@ -112,7 +112,7 @@ export function uiSuccess(context) {
 
 
         // Gather community polygon IDs intersecting the map..
-        var matchFeatures = data.community.query(context.map().center(), true);
+        var matchFeatures = data.community.query(context.map().center(), true) || [];
         var matchIDs = matchFeatures.map(function(feature) { return feature.id; });
 
         // Gather community resources that are either global or match a polygon.
