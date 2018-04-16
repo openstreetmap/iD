@@ -28,6 +28,157 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.8.0
+##### April 16, 2018
+
+#### :mega: Release Highlights
+* :speech_balloon: We've changed how things look on the post-upload screen.  Now after saving your edits,
+you will see a list of OpenStreetMap communities that are active around the area where you are editing.<br/>
+_Reach out to nearby mappers and say hello!_
+
+#### :boom: Breaking Changes
+* Drop support for node 4 / npm 2 ([#4853])
+  * :warning: If you are building the iD project, you will need to upgrade your node version.
+
+[#4853]: https://github.com/openstreetmap/iD/issues/4853
+
+#### :tada: New Features
+* Post-upload dialog improvements, and [community index](https://github.com/osmlab/osm-community-index/) integration ([#4815])
+  * Social sharing options are gone (was: share your edit on Facebook, Twitter, Google+)
+  * Community resources are displayed from most local to global
+  * Nice icons come from FontAwesome
+  * Each resource has a name, short description, and extended description (all available for translation)
+  * Each resource can include a list of which languages are spoken (currently displays language codes)
+  * Resources can optionally have events. If events exist, the next upcoming 2 will be shown.
+  * Events can have a name, description, where, when
+  * Events can optionally be translated (this would be more useful for a big event like a State of the Map)
+* Send more information about iD presets to Taginfo service - fields, geometries, icons ([#4940], [#4937], [#3598], thanks [@mmd-osm])
+* Remember changeset `source` tag value, make it settable via url param ([#4899])
+
+[#4940]: https://github.com/openstreetmap/iD/issues/4940
+[#4937]: https://github.com/openstreetmap/iD/issues/4937
+[#4899]: https://github.com/openstreetmap/iD/issues/4899
+[#4815]: https://github.com/openstreetmap/iD/issues/4815
+[#3598]: https://github.com/openstreetmap/iD/issues/3598
+[@mmd-osm]: https://github.com/mmd-osm
+
+#### :sparkles: Usability
+* Show a message on the History Panel if the selected feature is new ([#4975])
+* Don't click cycle through `alternating` or `reversible` oneway states ([#4970])
+* Fix zoom scaleExtent to allow zoom out to z2 (full world) ([#4959])
+* Rename "No Turns" to "Only Straight On", add "Only U-turn" preset and icon ([#4952])
+* Don't autocomplete numeric values in the combobox ([#4935])
+* Hide Turn Restriction field on trivial junctions ([#4934])
+* Add 'X' to close side panes (Background, Map Data, Help) ([#4913], [#4599], thanks [@vershwal])
+* Add pencil "edit" icon to custom background item ([#4908], [#4798], thanks @vershwal)
+* Add hint alt text for "remove", "undo", "info" buttons ([#4904], [#4833], [#4892] thanks [@vershwal])
+
+[#4975]: https://github.com/openstreetmap/iD/issues/4975
+[#4970]: https://github.com/openstreetmap/iD/issues/4970
+[#4959]: https://github.com/openstreetmap/iD/issues/4959
+[#4952]: https://github.com/openstreetmap/iD/issues/4952
+[#4935]: https://github.com/openstreetmap/iD/issues/4935
+[#4934]: https://github.com/openstreetmap/iD/issues/4934
+[#4913]: https://github.com/openstreetmap/iD/issues/4913
+[#4908]: https://github.com/openstreetmap/iD/issues/4908
+[#4904]: https://github.com/openstreetmap/iD/issues/4904
+[#4892]: https://github.com/openstreetmap/iD/issues/4892
+[#4833]: https://github.com/openstreetmap/iD/issues/4833
+[#4798]: https://github.com/openstreetmap/iD/issues/4798
+[#4599]: https://github.com/openstreetmap/iD/issues/4599
+[@vershwal]: https://github.com/vershwal
+
+#### :bug: Bugfixes
+* Prevent node drags from breaking many kinds of relations / turn restrictions ([#4921])
+* Fix bug preventing adding restrictions when multiple via paths exist ([#4968], [#4969], thanks [@tyrasd])
+* Guard code to avoid deleting a turn twice ([#4968], [#4928])
+* When connecting nodes, prefer to keep an existing (not new) node ([#4974], [#4674])
+* When boundaries are shared with roads, consider them as roads for purposes of filtering ([#4973])
+* Fix bug when deleting an only restriction on a bidirectional road ([#4951])
+* Prevent clicking in restriction editor from selecting nearby text
+* Handle "entry only" and "exit only" variants of 'stop' and 'platform' when identifying PTv2 members ([#4946])
+* Fix ';'-space delimiting within `conditional` opening hours style files, add tests ([#4925])
+
+[#4974]: https://github.com/openstreetmap/iD/issues/4974
+[#4973]: https://github.com/openstreetmap/iD/issues/4973
+[#4969]: https://github.com/openstreetmap/iD/issues/4969
+[#4968]: https://github.com/openstreetmap/iD/issues/4968
+[#4951]: https://github.com/openstreetmap/iD/issues/4951
+[#4946]: https://github.com/openstreetmap/iD/issues/4946
+[#4928]: https://github.com/openstreetmap/iD/issues/4928
+[#4925]: https://github.com/openstreetmap/iD/issues/4925
+[#4921]: https://github.com/openstreetmap/iD/issues/4921
+[#4674]: https://github.com/openstreetmap/iD/issues/4674
+[@tyrasd]: https://github.com/tyrasd
+
+#### :rocket: Presets
+* Add preset for `attraction=maze` ([#4987], [#4986], thanks [@sulfo])
+* Add preset for `healthcare=laboratory` ([#4982], [#4980], thanks [@vershwal])
+* Add name field to several pitch presets ([#4976], [#4857], thanks [@vershwal])
+* Add preset for `advertising=column` ([#4963], [#4961], thanks [@Xavier-J-Ortiz])
+* Add `faces=*` field to clock preset ([#4962], [#4961], thanks [@Xavier-J-Ortiz])
+* Add preset for `leisure=beach_resort` ([#4956], [#4955], thanks [@Xavier-J-Ortiz])
+* Add more kinds of vending machines, change vending to multiple select field ([#4888])
+* Add `usage` `voltage` `frequency` fields to several rail presets ([#4919])
+* Add `industrial=*` field to landuse industrial preset ([#4949], thanks [@hikemaniac])
+* Add preset for `shop=pet_grooming` ([#4942], [#4939], thanks [@Xavier-J-Ortiz])
+* Add preset for Trail Riding Station, add fields to Horseback Riding and Hiking routes ([#4912], thanks [@NopMap])
+* Add preset for `man_made=antenna` ([#4938], thanks [@obama])
+* Add preset for `amenity=monastary` ([#4936], [#4932], thanks [@Xavier-J-Ortiz])
+* Add `height=*` field to many building presets ([#4905], [#2455], thanks [@vershwal])
+* Add preset for `leisure=outdoor_seating` ([#4933], [#4931], thanks [@vershwal])
+* Add preset for `natural=mud` ([#4926], [#4923], thanks [@Xavier-J-Ortiz])
+* Add preset for `allotments=plot` ([#4920], [#4917], thanks [@vershwal])
+* Add `brand=*` field to `amenity=fuel` preset ([#4906], [#2300], thanks [@vershwal])
+* Add preset for `highway=passing_place` ([#4891], [#4883], thanks [@Xavier-J-Ortiz])
+* Add preset for `man_made=observatory` ([#4889], [#4855], thanks [@vershwal])
+* Add field for `maxspeed:advisory=*` to presets for link roads ([#4870], [#4522], thanks [@umarpreet1])
+* Add more search terms for memorial (including "stolperstein")
+
+[#4987]: https://github.com/openstreetmap/iD/issues/4987
+[#4986]: https://github.com/openstreetmap/iD/issues/4986
+[#4982]: https://github.com/openstreetmap/iD/issues/4982
+[#4980]: https://github.com/openstreetmap/iD/issues/4980
+[#4976]: https://github.com/openstreetmap/iD/issues/4976
+[#4963]: https://github.com/openstreetmap/iD/issues/4963
+[#4962]: https://github.com/openstreetmap/iD/issues/4962
+[#4961]: https://github.com/openstreetmap/iD/issues/4961
+[#4956]: https://github.com/openstreetmap/iD/issues/4956
+[#4955]: https://github.com/openstreetmap/iD/issues/4955
+[#4949]: https://github.com/openstreetmap/iD/issues/4949
+[#4942]: https://github.com/openstreetmap/iD/issues/4942
+[#4939]: https://github.com/openstreetmap/iD/issues/4939
+[#4938]: https://github.com/openstreetmap/iD/issues/4938
+[#4936]: https://github.com/openstreetmap/iD/issues/4936
+[#4933]: https://github.com/openstreetmap/iD/issues/4933
+[#4932]: https://github.com/openstreetmap/iD/issues/4932
+[#4931]: https://github.com/openstreetmap/iD/issues/4931
+[#4926]: https://github.com/openstreetmap/iD/issues/4926
+[#4923]: https://github.com/openstreetmap/iD/issues/4923
+[#4920]: https://github.com/openstreetmap/iD/issues/4920
+[#4919]: https://github.com/openstreetmap/iD/issues/4919
+[#4917]: https://github.com/openstreetmap/iD/issues/4917
+[#4912]: https://github.com/openstreetmap/iD/issues/4912
+[#4906]: https://github.com/openstreetmap/iD/issues/4906
+[#4905]: https://github.com/openstreetmap/iD/issues/4905
+[#4891]: https://github.com/openstreetmap/iD/issues/4891
+[#4888]: https://github.com/openstreetmap/iD/issues/4888
+[#4883]: https://github.com/openstreetmap/iD/issues/4883
+[#4889]: https://github.com/openstreetmap/iD/issues/4889
+[#4870]: https://github.com/openstreetmap/iD/issues/4870
+[#4857]: https://github.com/openstreetmap/iD/issues/4857
+[#4855]: https://github.com/openstreetmap/iD/issues/4855
+[#4522]: https://github.com/openstreetmap/iD/issues/4522
+[#2455]: https://github.com/openstreetmap/iD/issues/2455
+[#2300]: https://github.com/openstreetmap/iD/issues/2300
+[@sulfo]: https://github.com/sulfo
+[@vershwal]: https://github.com/vershwal
+[@Xavier-J-Ortiz]: https://github.com/Xavier-J-Ortiz
+[@hikemaniac]: https://github.com/hikemaniac
+[@NopMap]: https://github.com/NopMap
+[@umarpreet1]: https://github.com/umarpreet1
+
+
 # 2.7.1
 ##### March 11, 2018
 
