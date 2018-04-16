@@ -70,7 +70,7 @@ _Reach out to nearby mappers and say hello!_
 * Don't autocomplete numeric values in the combobox ([#4935])
 * Hide Turn Restriction field on trivial junctions ([#4934])
 * Add 'X' to close side panes (Background, Map Data, Help) ([#4913], [#4599], thanks [@vershwal])
-* Add pencil "edit" icon to custom background item ([#4908], [#4798], thanks @vershwal)
+* Add pencil "edit" icon to custom background item ([#4908], [#4798], thanks [@vershwal])
 * Add hint alt text for "remove", "undo", "info" buttons ([#4904], [#4833], [#4892] thanks [@vershwal])
 
 [#4975]: https://github.com/openstreetmap/iD/issues/4975
