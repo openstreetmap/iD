@@ -81,7 +81,7 @@ export function actionConnect(nodeIDs) {
                 role = relation.memberById(node.id).role || '';
 
                 // if this node is a via node in a restriction, remember for later
-                if (relation.isRestriction()) {
+                if (relation.isValidRestriction()) {
                     restrictionIDs.push(relation.id);
                 }
 
@@ -104,7 +104,7 @@ export function actionConnect(nodeIDs) {
 
                 for (k = 0; k < relations.length; k++) {
                     relation = relations[k];
-                    if (relation.isRestriction()) {
+                    if (relation.isValidRestriction()) {
                         restrictionIDs.push(relation.id);
                     }
                 }
@@ -122,6 +122,11 @@ export function actionConnect(nodeIDs) {
                 .filter(function(m) { return m.type === 'way'; })
                 .map(function(m) { return graph.entity(m.id); });
 
+            memberWays = _uniq(memberWays);
+            var f = relation.memberByRole('from');
+            var t = relation.memberByRole('to');
+            var isUturn = (f.id === t.id);
+
             // 2a. disable if connection would damage a restriction
             // (a key node is a node at the junction of ways)
             var nodes = { from: [], via: [], to: [], keyfrom: [], keyto: [] };
@@ -132,10 +137,10 @@ export function actionConnect(nodeIDs) {
             nodes.keyfrom = _uniq(nodes.keyfrom.filter(hasDuplicates));
             nodes.keyto = _uniq(nodes.keyto.filter(hasDuplicates));
 
-            var f = keyNodeFilter(nodes.keyfrom, nodes.keyto);
-            nodes.from = nodes.from.filter(f);
-            nodes.via = nodes.via.filter(f);
-            nodes.to = nodes.to.filter(f);
+            var filter = keyNodeFilter(nodes.keyfrom, nodes.keyto);
+            nodes.from = nodes.from.filter(filter);
+            nodes.via = nodes.via.filter(filter);
+            nodes.to = nodes.to.filter(filter);
 
             var connectFrom = false;
             var connectVia = false;
@@ -151,7 +156,7 @@ export function actionConnect(nodeIDs) {
                 if (nodes.keyfrom.indexOf(n) !== -1) { connectKeyFrom = true; }
                 if (nodes.keyto.indexOf(n) !== -1)   { connectKeyTo = true; }
             }
-            if (connectFrom && connectTo)  { return 'restriction'; }
+            if (connectFrom && connectTo && !isUturn) { return 'restriction'; }
             if (connectFrom && connectVia) { return 'restriction'; }
             if (connectTo   && connectVia) { return 'restriction'; }
 

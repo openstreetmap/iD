@@ -189,7 +189,7 @@ describe('iD.actionConnect', function() {
             expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
         });
 
-        it('returns falsy when connecting members of the different relation and different roles', function () {
+        it('returns falsy when connecting members of different relation and different roles', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a'}),
                 iD.osmNode({id: 'b'}),
@@ -334,10 +334,38 @@ describe('iD.actionConnect', function() {
             ]);
 
             // prevented:
-            // extra connections to the VIA node, or any connections between FROM and TO
+            // extra connections to the VIA node, or any connections between distinct FROM and TO
             expect(iD.actionConnect(['a', 'c']).disabled(graph)).to.eql('restriction', 'extra connection FROM-VIA');
             expect(iD.actionConnect(['e', 'c']).disabled(graph)).to.eql('restriction', 'extra connection TO-VIA');
             expect(iD.actionConnect(['b', 'd']).disabled(graph)).to.eql('restriction', 'extra connection FROM-TO');
+        });
+
+        it('returns falsy when connecting nodes on a via-node u_turn restriction', function () {
+            //
+            //  a --- b --- c      r1:  `no_u_turn`
+            //              |            FROM '-'
+            //              d            VIA  'c'
+            //              |            TO   '-'
+            //              e
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a'}),
+                iD.osmNode({id: 'b'}),
+                iD.osmNode({id: 'c'}),
+                iD.osmNode({id: 'd'}),
+                iD.osmNode({id: 'e'}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmWay({id: '|', nodes: ['c', 'd', 'e']}),
+                iD.osmRelation({id: 'r1', tags: { type: 'restriction', restriction: 'no_u_turn' }, members: [
+                    { id: '-', type: 'way', role: 'from' },
+                    { id: 'c', type: 'node', role: 'via' },
+                    { id: '-', type: 'way', role: 'to' }
+                ]})
+            ]);
+
+            // The u-turn case is one where a connection between FROM-TO should be allowed
+            expect(iD.actionConnect(['a', 'b']).disabled(graph)).to.be.not.ok;
+            expect(iD.actionConnect(['b', 'c']).disabled(graph)).to.be.not.ok;
         });
 
         it('returns \'restriction\' when connecting nodes that would break a via-way restriction', function () {
