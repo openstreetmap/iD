@@ -654,13 +654,13 @@
             "help_link_text": "Detalles",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/ES:FAQ#Acabo_de_hacer_algunos_cambios_en_el_mapa._.C2.BFC.C3.B3mo_puedo_ver_mis_modificaciones.3F",
             "view_on_osm": "Ver cambios en OSM",
-            "changeset_id": "Tu conjunto de cambios #: {changeset_id}",
+            "changeset_id": "Conjunto de cambios #: {changeset_id}",
             "like_osm": "¿Como OpenStreetMap? Conéctate con otros:",
             "more": "Más",
             "events": "Eventos",
             "languages": "Idiomas: {languages}",
             "missing": "¿Falta algo en esta lista?",
-            "tell_us": "Cuentanos!"
+            "tell_us": "¡Cuentanos!"
         },
         "confirm": {
             "okay": "Aceptar",
@@ -2991,8 +2991,8 @@
                     "terms": "cronómetro"
                 },
                 "amenity/college": {
-                    "name": "Centro educativo post-bachillerato no universitario",
-                    "terms": "formación profesional, escuela profesional, educación terciaria, post-bachillerato, ciclo formativo de grado superior, FP, conservatorio"
+                    "name": "Terreno de centro educativo superior no universitario",
+                    "terms": "formación profesional, escuela profesional, educación terciaria, post-bachillerato, ciclo formativo de grado superior, FP, conservatorio, Terciario, superior, no universitario, terreno, área, area, suelo, instituto"
                 },
                 "amenity/community_centre": {
                     "name": "Centro Comunitario",
@@ -3338,7 +3338,7 @@
                 },
                 "amenity/vending_machine/food": {
                     "name": "Máquina expendedora de alimentos",
-                    "terms": "Máquina expendedora de alimentos, comida, alimento, comestible"
+                    "terms": "Máquina expendedora de alimentos, comida, alimento, comestible, expendedora"
                 },
                 "amenity/vending_machine/fuel": {
                     "name": "Surtidor de combustible",
@@ -3586,7 +3586,7 @@
                     "terms": "Edificio cívico, edificio civico, cívico, civico, centro cívico, centro civico, ayuntamiento, biblioteca, piscina"
                 },
                 "building/college": {
-                    "name": "Edificio educativo post-bachillerato no universitario",
+                    "name": "Edificio educativo superior no universitario",
                     "terms": "edificio del instituto, edificio instituto, centro educativo, centro formativo"
                 },
                 "building/commercial": {
@@ -6772,6 +6772,7 @@
                 "description": "Una lista de correo para discutir OpenStreetMap en Filipinas"
             },
             "OSM-PH-slack": {
+                "name": "Slack de OpenStreetMap PH",
                 "description": "¡Todos son bienvenidos! Regístrate en {signupUrl}"
             },
             "OSM-PH-telegram": {
@@ -6787,18 +6788,74 @@
                 "description": "Chat de telegram de OpenStreetMap Rusia"
             },
             "OSM-LKA-facebook": {
-                "name": "OpenStreetMap Sri Lanka"
+                "name": "OpenStreetMap Sri Lanka",
+                "description": "Mejore OpenStreetMap en Sri Lanka",
+                "extendedDescription": "¿Mapeando en Sri Lanka? ¿Tiene alguna pregunta, desea conectarse con la comunidad? Únase a nosotros en {Url}. ¡Todos son bienvenidos!"
             },
             "OSM-TW-facebook": {
-                "name": "Comunidad de OpenStreetMap Taiwan"
+                "name": "Comunidad de OpenStreetMap Taiwan",
+                "description": "Grupo de Facebook para usuarios y mapeadores de OpenStreetMap para discutir asuntos sobre Taiwán."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "Lista de correo de OpenStreetMap Taiwán",
+                "description": "Talk-tw es la lista de correo oficial para que las Comunidades discutan asuntos sobre Taiwán"
+            },
+            "at-mailinglist": {
+                "name": "Lista de correo Talk-at",
+                "description": "Talk-at es la lista de correo oficial de la comunidad austríaca de OSM"
+            },
+            "at-twitter": {
+                "name": "Twitter OpenStreetMap Austria",
+                "description": "OpenStreetMap Austria en Twitter: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Austria",
+                "description": "La plataforma de información sobre OpenStreetMap en Austria"
+            },
+            "be-facebook": {
+                "name": "Comunidad OpenStreetMap BE",
+                "description": "Facebook de Mapeadores y OpenStreetMap en Bélgica"
+            },
+            "be-forum": {
+                "name": "Foro de OpenStreetMap BE",
+                "description": "Foro web de OpenStreetMap Bélgica"
+            },
+            "be-irc": {
+                "name": "IRC de OpenStreetMap Bélgica",
+                "description": "Únase a #osmbe en irc.oftc.net (puerto 6667)",
+                "extendedDescription": "Únase a #osmbe en irc.oftc.net (puerto 6667), está puenteado con el canal de chat matrix"
+            },
+            "be-mailinglist": {
+                "name": "Lista de correo de Talk-be",
+                "description": "Talk-be es la lista de correo oficial de la comunidad belga de OSM"
+            },
+            "be-matrix": {
+                "name": "Canal de Riot de OpenStreetMap BE",
+                "description": "¡Todos los mapeadores son bienvenidos! Regístrese en {signupUrl}",
+                "extendedDescription": "Existen múltiples canales, de principiantes a canales temáticos, landuse y dev talk"
+            },
+            "be-twitter": {
+                "name": "Twitter OpenStreetMap Bélgica",
+                "description": "OpenStreetMap Bélgica en Twitter {url}"
             },
             "byosm": {
                 "name": "OpenStreetMap Belarús",
                 "description": "Grupo de telegram de OpenStreetMap Belarús"
             },
+            "talk-cz-mailinglist": {
+                "name": "Lista de correo Talk-cz",
+                "description": "Talk-cz es la lista de correo oficial para la comunidad checa"
+            },
+            "de-mailinglist": {
+                "name": "Lista de correo Talk-de",
+                "description": "Talk-de es la lista de correo oficial para la comunidad OSM alemana"
+            },
             "OSM-ES-telegram": {
                 "name": "@OSMes en Telegram",
                 "description": "Grupo de Telegram de OpenStreetMap España"
+            },
+            "talk-it-lazio": {
+                "extendedDescription": "Lista de correo para el área de Roma y Lazio."
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers del área de la bahía",
@@ -6866,13 +6923,13 @@
                 "extendedDescription": "El grupo OSM de residentes locales de Tampa Bay para reunirnos y construir el mapa definitivo de Tampa Bay con OpenStreetMap, el mapa libre y editable del mundo.  Si te van los mapas, el código abierto, GPS, senderismo, ciclismo, etcetera, te encantará trabajar con OpenStreetMap -- ¡así que únete! Nos juntaremos y haremos mapas y hablaremos de nuevos temas una vez al mes o así."
             },
             "OSM-US-Slack": {
-                "name": "Slack de OpenStreetMap US",
+                "name": "Slack de OpenStreetMap EE.UU.",
                 "description": "¡Todos son bienvenidos! Regístrate en {signupUrl}"
             },
             "OSM-US": {
-                "name": "OpenStreetMap US",
+                "name": "OpenStreetMap EE.UU.",
                 "description": "Ayudamos a crecer y mejorar OpenStreetMap en los Estados Unidos.",
-                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap US aquí: {signupUrl}"
+                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -6905,6 +6962,42 @@
             "Maptime-Australia-Slack": {
                 "name": "Slack de Maptime Australia",
                 "description": "Regístrate en {signupUrl}"
+            },
+            "talk-au": {
+                "name": "Lista de correo Talk-au"
+            },
+            "OSM-AR-facebook": {
+                "name": "Facebook de OpenStreetMap Argentina",
+                "description": "Unite a la comunidad de OpenStreetMap Argentina en Facebook",
+                "extendedDescription": "Unite a la comunidad para aprender más sobre OpenStreetMap, hacer preguntas o participar en nuestras reuniones. ¡Todos son bienvenidos!"
+            },
+            "OSM-AR-forum": {
+                "name": "Foro web de OpenStreetMap Argentina",
+                "description": "Unite al foro web de OpenStreetMap Argentina",
+                "extendedDescription": "Unite a la comunidad para aprender más sobre OpenStreetMap, hacer preguntas o participar en nuestras reuniones. ¡Todos son bienvenidos!"
+            },
+            "OSM-AR-irc": {
+                "name": "IRC de OpenStreetMap Argentina",
+                "description": "Unite a #osm-ar en irc.oftc.net (puerto 6667)"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Lista de correo Talk-ar",
+                "description": "Una lista de correo para discutir sobre OpenStreetMap en Argentina"
+            },
+            "OSM-AR-telegram": {
+                "name": "Telegram de OpenStreetMap Argentina",
+                "description": "Unite a la comunidad de OpenStreetMap Argentina en Telegram",
+                "extendedDescription": "Unite a la comunidad para aprender más sobre OpenStreetMap, hacer preguntas o participar en nuestras reuniones. ¡Todos son bienvenidos!"
+            },
+            "OSM-AR-twitter": {
+                "name": "Twitter de OpenStreetMap Argentina",
+                "description": "Seguinos en Twitter en {url}"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Lista de correo Talk-br"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Lista de correo Talk-br"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap en Reddit",

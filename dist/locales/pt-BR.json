@@ -150,7 +150,8 @@
                     "vertex": "Conectou uma linha a outra.",
                     "line": "Conectou uma via a uma linha.",
                     "area": "Conectou uma linha a uma área."
-                }
+                },
+                "restriction": "Estes elementos não podem ser conectados porque isto danificaria uma relação \"{relation}\"."
             },
             "disconnect": {
                 "title": "Desconectar",
@@ -407,6 +408,7 @@
                 "key": "H",
                 "title": "Histórico",
                 "selected": "{n} selecionado",
+                "no_history": "Sem histórico (elemento novo)",
                 "version": "Versão",
                 "last_edit": "Última Edição",
                 "edited_by": "Editado por",
@@ -506,6 +508,7 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "custom_button": "Editar fundo de tela personalizado",
+            "custom_prompt": "Insira um modelo de URL de quadros. Tokens válidos são:\n   - {zoom} ou {z}, {x}, {y} para o esquema Z/X/Y dos quadros\n   - {-y} ou {ty} para coordenadas invertidas, estilo TMS\n   - {u} para esquema quadtile\n   - {switch:a,b,c} para multiplexação de servidor DNS\n\nExemplo:\n{example}",
             "overlays": "Sobreposições",
             "imagery_source_faq": "Informações sobre imagens / Relatar um problema",
             "reset": "redefinir",
@@ -644,8 +647,19 @@
         },
         "success": {
             "just_edited": "Você acaba de editar o OpenStreetMap!",
+            "thank_you": "Obrigado por aprimorar o mapa.",
+            "thank_you_location": "Obrigado por aprimorar o mapa ao redor de {where}.",
+            "help_html": "Suas alterações devem aparecer no OpenStreetMap dentro de alguns minutos. Os mapas em outros lugares podem demorar mais para serem atualizados.",
             "help_link_text": "Detalhes",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Pt:Perguntas_frequentes#Eu_acabei_de_alterar_o_mapa._Como_eu_fa.C3.A7o_para_visualizar_minhas_altera.C3.A7.C3.B5es.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Pt:Perguntas_frequentes#Eu_acabei_de_alterar_o_mapa._Como_eu_fa.C3.A7o_para_visualizar_minhas_altera.C3.A7.C3.B5es.3F",
+            "view_on_osm": "Ver alterações no OSM",
+            "changeset_id": "Seu conjunto de alterações #: {changeset_id}",
+            "like_osm": "Gosta do OpenStreetMap? Conecte-se com outros:",
+            "more": "Mais",
+            "events": "Eventos",
+            "languages": "Idiomas: {languages}",
+            "missing": "Há algo faltando nesta lista?",
+            "tell_us": "Conte-nos!"
         },
         "confirm": {
             "okay": "OK",
@@ -803,6 +817,7 @@
                 "connect_line_drag": "Para conectar uma linha a algum outro elemento, arraste um dos nós das linhas a outro elemento até que ambos os elementos estejam unidos. Dica: você pode segurar a tecla `{alt}` caso não deseje que um nó se conecte a outros elementos enquanto o arrasta.",
                 "connect_line_tag": "Se você sabe que um cruzamento tem semáforos ou faixas de pedestre, você pode adicioná-los selecionando o nó do cruzamento e utilizando o editor de elementos para selecionar o tipo correto de elemento.",
                 "disconnect_line_h": "Desconectando Linhas",
+                "disconnect_line_command": "Para desconectar uma rua de outro elemento, clique com o {rightclick} botão direito no nó conectado, e selecione o comando {disconnect} **Desconectar** no menu de edição.",
                 "move_line_h": "Movendo Linhas",
                 "delete_line_h": "Removendo Linhas"
             },
@@ -6481,6 +6496,19 @@
             },
             "OSM-AR-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br Mailing List",
+                "description": "Uma lista de e-mail de discussão sobre o OpenStreetMap no Brasil"
+            },
+            "OSM-br-telegram": {
+                "name": "OpenStreetMap Brasil Telegram",
+                "description": "Participe da comunidade OpenStreetMap Brasil no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar das nossas reuniões. Todos são bem-vindos!"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap Brasil Twitter",
+                "description": "Nos siga no Twitter em {url}"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap no Reddit",
