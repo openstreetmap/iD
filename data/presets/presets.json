@@ -16292,6 +16292,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
