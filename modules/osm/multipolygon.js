@@ -140,7 +140,7 @@ export function osmJoinWays(toJoin, graph) {
                 // (for member ordering only, not way ordering - see #4872)
                 // Strongly prefer to generate a forward path that preserves the order
                 // of the members array. For multipolygons and most relations, member
-                // order does not matter - but for routes, it does. (see #4859)
+                // order does not matter - but for routes, it does. (see #4589)
                 // If we started this sequence backwards (i.e. next member way attaches to
                 // the start node and not the end node), reverse the initial way before continuing.
                 if (joinAsMembers && currWays.length === 1 && nodes[0] !== end && nodes[nodes.length - 1] !== end &&
