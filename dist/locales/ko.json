@@ -1,5 +1,10 @@
 {
     "ko": {
+        "icons": {
+            "information": "정보",
+            "remove": "제거",
+            "undo": "실행 취소"
+        },
         "modes": {
             "add_area": {
                 "title": "공간",
@@ -25,6 +30,9 @@
             },
             "draw_line": {
                 "tail": "선에 더 많은 노드를 추가하려면 클릭하세요. 다른 선을 노드로 연결하려면 다른 선을 클릭하고 선을 끝내려면 더블 클릭하세요."
+            },
+            "drag_node": {
+                "connected_to_hidden": "이것은 숨겨진 지뭃에 연결되어 있기 때문에 편집할 수 없습니다."
             }
         },
         "operations": {
@@ -286,6 +294,16 @@
                     "create": "회전 제한을 추가했습니다",
                     "delete": "회전 제한을 삭제했습니다"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "거리",
+                "via_node_only": "노드 전용"
+            },
+            "help": {
+                "select_from": "{from} 분절을 선택하려면 클릭하세요.",
+                "select_from_name": "{from}{fromName}을(를) 선택하려면 클릭하십시요"
             }
         },
         "undo": {
@@ -599,13 +617,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM을 편집했습니다!",
             "just_edited": "오픈스트리트맵을 편집했습니다!",
-            "view_on_osm": "OSM에서 보기",
-            "facebook": "페이스북에 공유",
-            "twitter": "트위터에 공유",
-            "google": "Google+에 공유",
-            "help_html": "변경사항은 몇 분 후에 \"표준\" 레이어에서 보여집니다. 다른 레이어와 특정 지물은 더 오래 걸릴 수 있습니다.",
             "help_link_text": "자세한 정보",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Ko:FAQ#.EB.82.98.EB.8A.94_.EC.A7.80.EB.8F.84.EC.97.90_.EC.95.BD.EA.B0.84.EC.9D.98_.EB.B3.80.EA.B2.BD.EC.9D.84_.EA.B0.80.ED.96.88.EB.8B.A4._.EB.82.B4.EA.B0.80_.EC.96.B4.EB.96.BB.EA.B2.8C_.EB.82.98.EC.9D.98_.EB.B3.80.EA.B2.BD.EC.82.AC.ED.95.AD.EC.9D.84_.EB.B3.BC_.EC.88.98_.EC.9E.88.EB.82.98.EC.9A.94.3F"
         },
@@ -673,7 +685,8 @@
             "view_on_mapillary": "Mapillary에서 이 그림 보기"
         },
         "openstreetcam_images": {
-            "tooltip": "OpenStreetCam의 거리수준 사진"
+            "tooltip": "OpenStreetCam의 거리수준 사진",
+            "title": "사진 겹치기 (OpenStreetCam)"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "OpenStreetCam에서 이 사진 보기"
@@ -704,7 +717,11 @@
             "editing": {
                 "title": "편집 & 저장하기",
                 "select_h": "선택",
+                "select_left_click": "{leftclick}마우스 왼쪽키는 지물을 선택할 때 사용합니다. 선택됬을경우, 지물이 강조처리되고, 이름이나 주소와 같은 지물에 대한 정보가 사이드바에 표시됩니다. ",
+                "select_right_click": "{rightclick} 마우스 오른쪽 키는 회전, 이동, 삭제와 같은 지물에 대한 편집 메뉴를 표시합니다. ",
                 "multiselect_h": "여러 선택",
+                "multiselect_shift_click": "`{shift}`+{leftclick} 여러 지물들을 같이 선택합니다. 여러 물체들을 쉽게 삭제하거나 옮길 수 있습니다.",
+                "multiselect_lasso": "여러 지물들을 선택할 수 있는 다른 방법은 `{shift}`키를 누른 상태로 {leftclick} 마우스 왼쪽 버튼으로 선택할 지물들을 묶는 것입니다. 이 경우, 올가미 내의 모든 점들이 선택됩니다.",
                 "undo_redo_h": "되돌리기 & 복구하기",
                 "save_h": "저장",
                 "upload_h": "업로드",
@@ -1782,6 +1799,9 @@
                     "label": "제한 속도",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60..."
+                },
                 "maxstay": {
                     "label": "최대 투숙일수"
                 },
@@ -2328,6 +2348,7 @@
                     "label": "유형"
                 },
                 "traffic_signals/direction": {
+                    "label": "방향",
                     "options": {
                         "backward": "역방향",
                         "both": "둘 다 / 모두",
@@ -2365,6 +2386,9 @@
                 "tunnel": {
                     "label": "유형",
                     "placeholder": "기본값"
+                },
+                "usage_rail": {
+                    "label": "용도"
                 },
                 "vending": {
                     "label": "상품 종류"
@@ -2767,6 +2791,9 @@
                     "name": "시장",
                     "terms": "시장"
                 },
+                "amenity/monastery": {
+                    "name": "수도원 부지"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "오토바이 주차장",
                     "terms": "모터사이클 주차장"
@@ -2967,6 +2994,9 @@
                     "name": "담배 자판기",
                     "terms": "담배 자판기, 담배 자동 판매기"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "커피 자판기"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "콘돔 자판기",
                     "terms": "콘돔 자판기, 콘돔 자동 판매기"
@@ -2975,9 +3005,18 @@
                     "name": "음료 자판기",
                     "terms": "음료 자판기, 음료 자동 판매기"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "전자 제품 자판기"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "쓰레기 봉투 자판기",
                     "terms": "쓰레기 봉투 자판기, 쓰레기 봉투 자동 판매기"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "식품 자판기"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "아이스크림 자판기"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "신문 자동판매기"
@@ -2997,6 +3036,9 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "1회용 교통카드·승차권 판매기",
                     "terms": "1회용 교통카드·승차권 판매기, 대중교통 티켓 발권기"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "우표 자판기"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "간식 자판기",
@@ -4283,6 +4325,9 @@
                     "name": "수평갱",
                     "terms": "횡갱"
                 },
+                "man_made/antenna": {
+                    "name": "안테나"
+                },
                 "man_made/breakwater": {
                     "name": "방파제",
                     "terms": "방파제"
@@ -4333,6 +4378,10 @@
                 "man_made/observation": {
                     "name": "전망대",
                     "terms": "관찰탑, 감시탑"
+                },
+                "man_made/observatory": {
+                    "name": "관측소",
+                    "terms": "천문대,기상대"
                 },
                 "man_made/petroleum_well": {
                     "name": "유정",
@@ -4457,6 +4506,9 @@
                 "natural/heath": {
                     "name": "황무지",
                     "terms": "황무지"
+                },
+                "natural/mud": {
+                    "name": "진흙"
                 },
                 "natural/peak": {
                     "name": "정상",
@@ -5625,18 +5677,6 @@
                     "name": "유턴 금지",
                     "terms": "유턴 금지"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "좌회전 전용",
-                    "terms": "좌회전 전용"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "우회전 전용",
-                    "terms": "우회전 전용"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "회전 금지",
-                    "terms": "회전 금지"
-                },
                 "type/route": {
                     "name": "노선",
                     "terms": "경로, 노선"
@@ -5663,9 +5703,15 @@
                 "type/route/horse": {
                     "name": "승마 노선"
                 },
+                "type/route/light_rail": {
+                    "name": "경전철 노선"
+                },
                 "type/route/pipeline": {
                     "name": "파이프라인 노선",
                     "terms": "관로 노선,도관 노선"
+                },
+                "type/route/piste": {
+                    "name": "피스트/스키 노선"
                 },
                 "type/route/power": {
                     "name": "전력 노선"
@@ -5957,9 +6003,6 @@
                 }
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "맵 타일 by Stamen Design, CC BY 3.0 이하"
-                },
                 "name": "Stamen 지형"
             },
             "tf-cycle": {

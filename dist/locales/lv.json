@@ -217,12 +217,7 @@
             }
         },
         "success": {
-            "edited_osm": "Jūs izmainījāt OSM!",
-            "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
-            "view_on_osm": "Apskatīt OSM",
-            "facebook": "Dalīties Facebook",
-            "twitter": "Dalīties uz Facebook",
-            "google": "Dalīties uz Google+"
+            "just_edited": "Jūs nupat rediģējāt OpenStreetMap"
         },
         "confirm": {
             "cancel": "Atcelt"

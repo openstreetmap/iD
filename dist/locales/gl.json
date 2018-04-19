@@ -1,5 +1,10 @@
 {
     "gl": {
+        "icons": {
+            "information": "información",
+            "remove": "quitar",
+            "undo": "desfacer"
+        },
         "modes": {
             "add_area": {
                 "title": "Área",
@@ -289,6 +294,42 @@
                     "create": "Engadida unha restrición de xiro.",
                     "delete": "Eliminada unha restrición de xiro."
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distancia",
+                "distance_up_to": "Ata {distance}",
+                "via": "A través de",
+                "via_node_only": "Só nodo",
+                "via_up_to_one": "Ata 1 vía",
+                "via_up_to_two": "Ata 2 vías"
+            },
+            "help": {
+                "indirect": "(indirecta)",
+                "turn": {
+                    "no_left_turn": "Prohibido xirar á esquerda {indirect}",
+                    "no_right_turn": "Prohibido xirar á dereita {indirect}",
+                    "no_u_turn": "Prohibido cambiar de sentido {indirect}",
+                    "no_straight_on": "Prohibido seguir recto {indirect}",
+                    "only_left_turn": "Obrigatorio xirar á esquerda {indirect}",
+                    "only_right_turn": "Obrigatorio xirar á dereita {indirect}",
+                    "only_u_turn": "Obrigatorio cambiar de sentido {indirect}",
+                    "only_straight_on": "Obrigatorio seguir recto {indirect}",
+                    "allowed_left_turn": "Permitido xirar á esquerda {indirect}",
+                    "allowed_right_turn": "Permitido xirar á dereita {indirect}",
+                    "allowed_u_turn": "Permitido cambiar de sentido {indirect}",
+                    "allowed_straight_on": "Permitido seguir recto {indirect}"
+                },
+                "from": "DESDE",
+                "via": "A TRAVÉS DE",
+                "to": "CARA A",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Fai clic para seleccionar un segmento {from}",
+                "select_from_name": "Fai clic para seleccionar {from} {fromName}",
+                "toggle": "Fai clic para \"{turn}\""
             }
         },
         "undo": {
@@ -603,15 +644,20 @@
             }
         },
         "success": {
-            "edited_osm": "OSM editado!",
             "just_edited": "Acabas de editar OpenStreetMap!",
-            "view_on_osm": "Ver en OSM",
-            "facebook": "Compartir no Facebook",
-            "twitter": "Compartir no Twitter",
-            "google": "Compartir no Google+",
-            "help_html": "Os teus cambios deberían aparecer na capa \"Estándar\" nuns minutos. Outras capas, e determinados elementos, poden tardar máis tempo.",
+            "thank_you": "Grazas por mellorar o mapa",
+            "thank_you_location": "Grazas por mellorar o mapa por {where}",
+            "help_html": "Os teus cambios deberían aparecer na capa estándar de OpenStreetMap nuns minutos. Pódelle levar máis tempo actualizarse a outras capas e mapas de outros sitios.",
             "help_link_text": "Detalles",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Ver cambios en OSM",
+            "changeset_id": "O teu conxunto de cambios é o {changeset_id}",
+            "like_osm": "Gústache OpenStreetMap? Comunícate con outras persoas:",
+            "more": "Máis",
+            "events": "Eventos",
+            "languages": "Idiomas: {languages}",
+            "missing": "Falta algo nesta lista?",
+            "tell_us": "Cóntanos!"
         },
         "confirm": {
             "okay": "OK",
@@ -689,6 +735,44 @@
             "help": {
                 "title": "Axuda",
                 "welcome": "Benvido ao editor iD para [OpenStreetMap] (https://www.openstreetmap.org/). Con este editor podes actualizar OpenStreetMap directamente desde o teu navegador."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Axuda das restricións de xiro",
+                    "about": {
+                        "title": "Acerca de",
+                        "about": "Este campo permíteche inspecionar e modificar restricións de xiro. Mostra un modelo da intersección seleccionada, incluíndo outras estradas conectadas próximas.",
+                        "from_via_to": "Unha restrición de xiro sempre contén: unha **vía DESDE**, unha **vía CARA A** e un **nodo A TRAVÉS DE** ou unha ou varias **vías A TRAVÉS DE**.",
+                        "maxdist": "A barra de desprazamento \"{distField}\" controla ata onde se vai buscar por máis estradas conectadas.",
+                        "maxvia": "A barra de desprazamento \"{viaField}\" axusta cántas vías intermedias poden ser incluídas na busca. (Consello: canto máis simple, mellor)"
+                    },
+                    "inspecting": {
+                        "title": "Inspecionar",
+                        "about": "Sitúate sobre calquera segmento **DESDE** para ver se ten restricións de xiro. Cada destino **CARA A** posible debuxarase cunha sombra coloreada indicando se existe algunha restrición de xiro.",
+                        "from_shadow": "{fromShadow} **segmento DESDE**",
+                        "allow_shadow": "{allowShadow} **CARA A permitido**",
+                        "restrict_shadow": "{restrictShadow} **CARA A prohibido**",
+                        "only_shadow": "{onlyShadow} **CARA A obrigatorio**",
+                        "restricted": "\"Prohibido\" significa que hai unha restrición de xiro, por exemplo \"Prohibido xirar á esquerda\".",
+                        "only": "\"Obrigatorio\" significa que un vehículo que entre na intersección só poderá ir por esa ruta, por exemplo \"Obrigatorio seguir recto\"."
+                    },
+                    "modifying": {
+                        "title": "Modificar",
+                        "about": "Para modificar restricións de xiro, primeiro fai clic en calquera segmento **DESDE** para selecionalo. O segmento selecionado parpadeará, e todos os destinos **CARA A** posibles mostraranse como símbolos de xiro.",
+                        "indicators": "Logo, fai clic nun símbolo de xiro para alternalo entre \"Permitido, \"Prohibido\" e \"Obrigatorio\".",
+                        "allow_turn": "{allowTurn} **CARA A permitido**",
+                        "restrict_turn": "{restrictTurn} **CARA A prohibido**",
+                        "only_turn": "{onlyTurn} **CARA A obrigatorio**"
+                    },
+                    "tips": {
+                        "title": "Consellos",
+                        "simple": "**Intenta usar restricións simples en lugar de restricións máis complexas.**",
+                        "simple_example": "Por exemplo, se podes establecer o elemento intermedio simplemente cun nodo, evita facelo cunha vía.",
+                        "indirect": "**Algunhas restricións mostran o texto \"(indirecta)\" e aparecen cunha cor máis tenue.**",
+                        "indirect_example": "Estas restricións existen debido a outra restrición cercana. Por exemplo, unha restrición de \"Obrigatorio seguir recto\" creará indirectamente restricións de \"Prohibido xirar\" para tódalas demáis rutas da intersección.",
+                        "indirect_noedit": "Non podes modificar restricións indirectas. En lugar diso, modifica a restrición directa cercana."
+                    }
+                }
             }
         },
         "intro": {
@@ -1250,6 +1334,9 @@
                 "aeroway": {
                     "label": "Tipo"
                 },
+                "agrarian": {
+                    "label": "Produtos"
+                },
                 "amenity": {
                     "label": "Tipo"
                 },
@@ -1339,6 +1426,10 @@
                 },
                 "bunker_type": {
                     "label": "Tipo"
+                },
+                "cables": {
+                    "label": "Cables",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Dirección (Grados en sentido horario)",
@@ -1457,6 +1548,9 @@
                         "cycleway:right": "Lado dereito"
                     }
                 },
+                "dance/style": {
+                    "label": "Estilos de baile"
+                },
                 "date": {
                     "label": "Data"
                 },
@@ -1473,13 +1567,57 @@
                     "label": "Descrición completa"
                 },
                 "devices": {
+                    "label": "Dispositivos",
                     "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Con área de cambia-cueiros "
                 },
+                "direction": {
+                    "label": "Dirección (Graos en sentido horario)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Dirección",
+                    "options": {
+                        "E": "Leste",
+                        "ENE": "Les-nordeste",
+                        "ESE": "Les-sueste",
+                        "N": "Norte",
+                        "NE": "Nordeste",
+                        "NNE": "Nor-nordeste",
+                        "NNW": "Nor-noroeste",
+                        "NW": "Noroeste",
+                        "S": "Sur",
+                        "SE": "Sueste",
+                        "SSE": "Sur-sueste",
+                        "SSW": "Sur-suroeste",
+                        "SW": "Suroeste",
+                        "W": "Oeste",
+                        "WNW": "Oés-noroeste",
+                        "WSW": "Oés-suroeste"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Sentido",
+                    "options": {
+                        "anticlockwise": "Sentido antihorario",
+                        "clockwise": "Sentido horario"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Sentido",
+                    "options": {
+                        "backward": "Atrás",
+                        "both": "Ambos/todos",
+                        "forward": "Adiante"
+                    }
+                },
                 "display": {
                     "label": "Presentación"
+                },
+                "distance": {
+                    "label": "Distancia total"
                 },
                 "dock": {
                     "label": "Tipo"
@@ -1549,6 +1687,9 @@
                         "wall": "Parede"
                     }
                 },
+                "fitness_station": {
+                    "label": "Tipo de equipamento"
+                },
                 "fixme": {
                     "label": "Amáñame"
                 },
@@ -1590,6 +1731,9 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
+                "government": {
+                    "label": "Tipo"
+                },
                 "grape_variety": {
                     "label": "Variedades de Uvas"
                 },
@@ -1626,6 +1770,28 @@
                     "label": "Canastras",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Si",
+                        "undefined": "Non"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Centro de equitación",
+                    "options": {
+                        "horse_riding": "Si",
+                        "undefined": "Non"
+                    }
+                },
+                "horse_scale": {
+                    "placeholder": "Difícil, perigoso..."
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Si",
+                        "undefined": "Non"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1644,6 +1810,9 @@
                 },
                 "indoor": {
                     "label": "Dentro"
+                },
+                "industrial": {
+                    "label": "Tipo"
                 },
                 "information": {
                     "label": "Tipo"
@@ -1765,6 +1934,10 @@
                     "label": "Límite de velocidade",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "label": "Límite de velocidade recomendado",
+                    "placeholder": "40, 50, 60..."
+                },
                 "maxstay": {
                     "label": "Estancia Máxima"
                 },
@@ -1862,7 +2035,9 @@
                 "oneway": {
                     "label": "Sentido único",
                     "options": {
+                        "alternating": "Alterno",
                         "no": "Non",
+                        "reversible": "Reversible",
                         "undefined": "Suponse «Non»",
                         "yes": "Si"
                     }
@@ -1870,7 +2045,9 @@
                 "oneway_yes": {
                     "label": "Sentido único",
                     "options": {
+                        "alternating": "Alterno",
                         "no": "Non",
+                        "reversible": "Reversible",
                         "undefined": "Suponse «Si»",
                         "yes": "Si"
                     }
@@ -1907,6 +2084,7 @@
                     "label": "Tipos de pagamento"
                 },
                 "phases": {
+                    "label": "Fases",
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
@@ -2218,6 +2396,9 @@
                 "surveillance/zone": {
                     "label": "Zona de Vixilancia"
                 },
+                "switch": {
+                    "label": "Tipo"
+                },
                 "tactile_paving": {
                     "label": "Pavimento táctil"
                 },
@@ -2278,6 +2459,14 @@
                 "traffic_signals": {
                     "label": "Tipo"
                 },
+                "traffic_signals/direction": {
+                    "label": "Sentido",
+                    "options": {
+                        "backward": "Atrás",
+                        "both": "Ambos/todos",
+                        "forward": "Adiante"
+                    }
+                },
                 "trail_visibility": {
                     "label": "Visibilidade do sendeiro",
                     "options": {
@@ -2291,6 +2480,7 @@
                     "placeholder": "Excelente, bo, malo..."
                 },
                 "transformer": {
+                    "label": "Tipo",
                     "options": {
                         "auto": "Autotransformador",
                         "converter": "Conversor",
@@ -2308,8 +2498,8 @@
                     "label": "Tipo",
                     "placeholder": "Por defecto"
                 },
-                "vending": {
-                    "label": "Tipo de Bens"
+                "usage_rail": {
+                    "label": "Tipo de uso"
                 },
                 "visibility": {
                     "label": "Visibilidade",
@@ -2327,6 +2517,18 @@
                 },
                 "volcano/type": {
                     "label": "Tipo de volcán"
+                },
+                "voltage": {
+                    "label": "Tensión"
+                },
+                "voltage/primary": {
+                    "label": "Tensión do primario"
+                },
+                "voltage/secondary": {
+                    "label": "Tensión do secundario"
+                },
+                "voltage/tertiary": {
+                    "label": "Tensión do terciario"
                 },
                 "wall": {
                     "label": "Tipo"
@@ -2357,6 +2559,7 @@
                     "label": "Wikipedia"
                 },
                 "windings": {
+                    "label": "Devanados",
                     "placeholder": "1, 2, 3..."
                 },
                 "windings/configuration": {
@@ -2380,6 +2583,10 @@
                 "advertising/billboard": {
                     "name": "Carteleira",
                     "terms": "anuncio, publicidade, carteleira"
+                },
+                "advertising/column": {
+                    "name": "Columna de publicidade",
+                    "terms": "columna, publicidade, anuncios, cilindro"
                 },
                 "aerialway": {
                     "name": "Vía aérea"
@@ -2450,6 +2657,10 @@
                 "aeroway/terminal": {
                     "name": "Terminal de aeroporto"
                 },
+                "allotments/plot": {
+                    "name": "Parcela de horto urbano",
+                    "terms": "horto urbano, horta urbana, horto, horta, parcela, cultivo, horta comunitaria, horto comunitario, terreo"
+                },
                 "amenity": {
                     "name": "Instalacións"
                 },
@@ -2479,7 +2690,7 @@
                 },
                 "amenity/bar": {
                     "name": "Bar de copas",
-                    "terms": "pub, bar, bar de copas, bebidas, alcohol"
+                    "terms": "pub, bar, bar de copas, bebidas, alcohol, cantina, taberna, cervexa"
                 },
                 "amenity/bbq": {
                     "name": "Barbacoa/Grella",
@@ -2502,14 +2713,19 @@
                     "terms": "bici, bicicleta, reparación, inchar"
                 },
                 "amenity/biergarten": {
-                    "name": "Xardín da cervexa"
+                    "name": "Xardín da cervexa",
+                    "terms": "cervexa, alcohol, biergarten"
                 },
                 "amenity/boat_rental": {
-                    "name": "Aluguer de botes"
+                    "name": "Aluguer de botes",
+                    "terms": "aluguer, bote, barca, lancha"
                 },
                 "amenity/bureau_de_change": {
                     "name": "Troco de divisas",
                     "terms": "troco, cambio, divisa, moeda"
+                },
+                "amenity/bus_station": {
+                    "name": "Estación de autobuses"
                 },
                 "amenity/cafe": {
                     "name": "Cafetería",
@@ -2583,7 +2799,7 @@
                     "terms": "doutor, médico, clínica, saúde"
                 },
                 "amenity/dojo": {
-                    "name": "Dojo/academia de artes aarciais"
+                    "name": "Dojo/academia de artes marciais"
                 },
                 "amenity/drinking_water": {
                     "name": "Fonte",
@@ -2599,6 +2815,9 @@
                 "amenity/fast_food": {
                     "name": "Comida rápida"
                 },
+                "amenity/ferry_terminal": {
+                    "name": "Estación de ferry"
+                },
                 "amenity/fire_station": {
                     "name": "Parque de bombeiros"
                 },
@@ -2611,16 +2830,18 @@
                 },
                 "amenity/fuel": {
                     "name": "Gasolineira",
-                    "terms": "gasolineira, gasolina, gasoil, diésel, combustible, estación de servicio"
+                    "terms": "gasolineira, gasolina, gasoil, diésel, combustible, estación de servicio, área de servicio"
                 },
                 "amenity/grave_yard": {
-                    "name": "Cemiterio"
+                    "name": "Cemiterio",
+                    "terms": "cemitero, cementerio, tumbas, panteón"
                 },
                 "amenity/grit_bin": {
                     "name": "Contenedor de sal"
                 },
                 "amenity/hospital": {
-                    "name": "Hospital"
+                    "name": "Hospital",
+                    "terms": "hospital, clínica, urxencias, sanidade, saúde, médico"
                 },
                 "amenity/hunting_stand": {
                     "name": "Stand de Caza"
@@ -2642,15 +2863,24 @@
                     "terms": "biblioteca, libros, lectura"
                 },
                 "amenity/marketplace": {
-                    "name": "Mercado"
+                    "name": "Mercado",
+                    "terms": "mercado, mercadillo, plaza"
+                },
+                "amenity/monastery": {
+                    "name": "Zona de monasterio",
+                    "terms": "monasterio, área de monasterio, igrexa, capela"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Aparcamento de motos",
                     "terms": "aparcamento, aparcadoiro, parking, motos, motocicletas, ciclomotores"
                 },
+                "amenity/music_school": {
+                    "name": "Escola de música",
+                    "terms": "escola de música, conservatorio, academia, música, instrumentos"
+                },
                 "amenity/nightclub": {
                     "name": "Pub",
-                    "terms": "Pub, Discoteca, After, Sala de baile"
+                    "terms": "Pub, Discoteca, After, Sala de baile, bailar, bebidas, alcohol, música"
                 },
                 "amenity/nursing_home": {
                     "name": "Residencia de anciáns"
@@ -2663,7 +2893,7 @@
                     "name": "Entrada/Saída a garaxe de aparcamento"
                 },
                 "amenity/parking_space": {
-                    "name": "Espazo de Aparcamento"
+                    "name": "Praza de aparcamento"
                 },
                 "amenity/pavilion": {
                     "name": "Pavillón"
@@ -2722,7 +2952,7 @@
                 },
                 "amenity/pub": {
                     "name": "Bar",
-                    "terms": "Pub, bar, café, cafetería"
+                    "terms": "Pub, bar, café, cafetería, bebidas, alcohol, cervexa, bar de tapas, pinchos"
                 },
                 "amenity/public_bath": {
                     "name": "Baño público",
@@ -2735,12 +2965,16 @@
                 "amenity/ranger_station": {
                     "name": "Estación de gardabosques"
                 },
+                "amenity/recycling": {
+                    "name": "Contenedor de reciclaxe",
+                    "terms": "reciclaxe, contenedor, lixo, basura, orgánico, plásticos, vidrio, punto limpo"
+                },
                 "amenity/recycling_centre": {
                     "name": "Centro de Reciclaxe",
                     "terms": "centro de reciclaxe, punto limpo"
                 },
                 "amenity/register_office": {
-                    "name": "Oficina de Rexistro"
+                    "name": "Oficina do rexistro"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurante",
@@ -2757,10 +2991,12 @@
                     "name": "Depósito de chatarra"
                 },
                 "amenity/shelter": {
-                    "name": "Abrigo"
+                    "name": "Abrigo",
+                    "terms": "abrigo, refuxio, cuberto, gazebo"
                 },
                 "amenity/shower": {
-                    "name": "Ducha"
+                    "name": "Ducha",
+                    "terms": "duchas, baño, auga"
                 },
                 "amenity/social_facility": {
                     "name": "Axuda Social"
@@ -2812,6 +3048,10 @@
                 "amenity/vending_machine/cigarettes": {
                     "name": "Expendedora de tabaco"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Máquina do café",
+                    "terms": "café, máquina, expendedora, cafetera"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Expendedora de condóns"
                 },
@@ -2821,17 +3061,25 @@
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Caca Can"
                 },
+                "amenity/vending_machine/food": {
+                    "name": "Expendedora de comida"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Expendedora de xeados"
+                },
                 "amenity/vending_machine/news_papers": {
                     "name": "Expendedora de xornais"
                 },
                 "amenity/vending_machine/newspapers": {
-                    "name": "Expendedora de xornais"
+                    "name": "Expendedora de xornais",
+                    "terms": "expendedora, xornais, revistas, periódicos"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Máquina expendedora de recollida/entrega de paquetes"
                 },
                 "amenity/vending_machine/parking_tickets": {
-                    "name": "Parquímetro"
+                    "name": "Parquímetro",
+                    "terms": "parquímetro, aparcamento, parking"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Expendedora de billetes de transporte público"
@@ -2951,7 +3199,7 @@
                 },
                 "barrier/fence": {
                     "name": "Valado",
-                    "terms": "Valado, reixa, valo, cercado"
+                    "terms": "Valado, reixa, valo, cercado, alambrada, cerca"
                 },
                 "barrier/gate": {
                     "name": "Porta",
@@ -2960,6 +3208,9 @@
                 "barrier/hedge": {
                     "name": "Cobertura",
                     "terms": "cobertura, seto, liña de arbustos"
+                },
+                "barrier/kerb": {
+                    "name": "Bordillo"
                 },
                 "barrier/kissing_gate": {
                     "name": "Porta Kissing"
@@ -2975,24 +3226,30 @@
                     "terms": "escada, escaleira, valado, cerca, reixa"
                 },
                 "barrier/toll_booth": {
-                    "name": "Peaxe"
+                    "name": "Peaxe",
+                    "terms": "peaxe, cabina de peaxe, cabina de cobro"
                 },
                 "barrier/wall": {
                     "name": "Muro"
                 },
                 "boundary/administrative": {
-                    "name": "Límite administrativo"
+                    "name": "Límite administrativo",
+                    "terms": "límite administrativo, fronteira, término municipal"
                 },
                 "building": {
                     "name": "Edificio",
                     "terms": "edificio, casa, inmoble, vivenda"
                 },
                 "building/apartments": {
-                    "name": "Apartamentos"
+                    "name": "Apartamentos",
+                    "terms": "apartamento, piso, vivenda, aloxamento"
                 },
                 "building/barn": {
                     "name": "Celeiro/Hórreo",
                     "terms": "celeiro, hórreo, cabazo, cabaceiro, cabaceira, piorno"
+                },
+                "building/bungalow": {
+                    "name": "Bungaló"
                 },
                 "building/bunker": {
                     "name": "Bunker"
@@ -3009,6 +3266,9 @@
                 },
                 "building/church": {
                     "name": "Edificio de igrexa"
+                },
+                "building/civic": {
+                    "name": "Edificio cívico"
                 },
                 "building/college": {
                     "name": "Instituto de educación superior",
@@ -4754,15 +5014,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Prohibido o cambio de sentido"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Obrigatorio xirar á esquerda"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Obrigatorio xirar á dereita"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Obrigatorio continuar recto"
-                },
                 "type/route": {
                     "name": "Ruta"
                 },
@@ -4867,24 +5118,43 @@
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
-                    "text": "Termos & Autoachegas"
+                    "text": "Termos e comentarios"
                 },
                 "description": "Imaxes de satélite Premium DigitalGlobe.",
                 "name": "Imaxes DigitalGlobe Premium"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Termos e comentarios"
+                },
+                "name": "Antigüidade das imaxes DigitalGlobe Premium"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
-                    "text": "Termos & Autoachegas"
+                    "text": "Termos e comentarios"
                 },
-                "description": "Imaxes de satélite Standard DigitalGlobe.",
+                "description": "Imaxes de satélite DigitalGlobe estándar.",
                 "name": "Imaxes DigitalGlobe Standard"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Termos e comentarios"
+                },
+                "name": "Antigüidade das imaxes DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
-                    "text": "Termos & Autoachegas"
+                    "text": "Termos e comentarios"
                 },
-                "description": "Imaxes mundiais Esri",
+                "description": "Imaxes mundiais Esri.",
                 "name": "Imaxes mundiais Esri"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Termos e comentarios"
+                },
+                "description": "Arquivo de imaxes de Esri que pode que sexan máis claras e máis precisas que a súa capa por defecto.",
+                "name": "Imaxes mundiais Esri (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -4895,7 +5165,7 @@
             },
             "Mapbox": {
                 "attribution": {
-                    "text": "Termos & Autoachegas"
+                    "text": "Termos e comentarios"
                 },
                 "description": "Imaxes satélite e aéreas.",
                 "name": "Mapbox Satélite"
@@ -4916,7 +5186,7 @@
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
                 },
-                "name": "OSM Inspector: Autoestradas"
+                "name": "OSM Inspector: Estradas"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
@@ -4940,7 +5210,7 @@
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
                 },
-                "name": "OSM Inspector: Lapelas"
+                "name": "OSM Inspector: Etiquetado"
             },
             "Waymarked_Trails-Cycling": {
                 "name": "Marcador de Pistas: Ciclismo"
@@ -4961,7 +5231,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa base para Austria, baseado en datos do goberno.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -4979,7 +5248,7 @@
             },
             "mapbox_locator_overlay": {
                 "attribution": {
-                    "text": "Termos & Autoachegas"
+                    "text": "Termos e comentarios"
                 },
                 "description": "Amosa os elementos importantes para axudarche a orientarte.",
                 "name": "Superposición de Localizador"
@@ -5011,33 +5280,52 @@
             },
             "qa_no_address": {
                 "attribution": {
-                    "text": "Simon Poole, Achegas ©contribuidores do OpenStreetMap"
+                    "text": "Simon Poole, Datos ©contribuidores do OpenStreetMap"
                 },
                 "name": "QA Sen Enderezos"
             },
             "skobbler": {
                 "attribution": {
-                    "text": "© Tiles: skobbler información Mapa: contribuidores do OpenStreetMap"
+                    "text": "© Teselas: skobbler Datos do mapa: contribuidores do OpenStreetMap"
                 },
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Tiles do mapa por Stamen Design, baixo CC BY 3.0"
+                    "text": "Teselas do mapa por Stamen Design, baixo CC BY 3.0. Datos por OpenStreetMap, baixo ODbL"
                 },
                 "name": "Terreo Stamen"
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Mapas © Thunderforest, Información © contribuidores do OpenStreetMap"
+                    "text": "Mapas © Thunderforest, Datos © contribuidores do OpenStreetMap"
                 },
-                "name": "Thunderforest OpenCycleMap"
+                "name": "OpenCycleMap de Thunderforest"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Mapas © Thunderforest, Información © contribuidores do OpenStreetMap"
+                    "text": "Mapas © Thunderforest, Datos © contribuidores do OpenStreetMap"
                 },
-                "name": "Paisaxe Thunderforest"
+                "name": "Landscape de Thunderforest"
+            }
+        },
+        "community": {
+            "osm-mg-facebook": {
+                "name": "Grupo de Facebook do OpenStreetMap na illa de Madagascar"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes no Telegram",
+                "description": "Chat de Telegram do OpenStreetMap España"
+            },
+            "OSM-AR-twitter": {
+                "description": "Seguenos no Twitter na seguinte ligazón {url}"
+            },
+            "OSM-br-twitter": {
+                "description": "Seguenos no Twitter na seguinte ligazón {url}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap no Reddit",
+                "description": "/r/openstreetmap/ é un bo sitio para aprender máis sobre OpenStreetMap. Pregúntanos calquera cousa!"
             }
         }
     }

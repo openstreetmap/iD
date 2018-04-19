@@ -118,6 +118,15 @@
             ]
         },
         {
+            "key": "advertising",
+            "value": "column",
+            "description": "Advertising Column",
+            "object_types": [
+                "node",
+                "area"
+            ]
+        },
+        {
             "key": "aerialway",
             "value": "station",
             "description": "Aerialway Station",
@@ -1652,6 +1661,16 @@
         },
         {
             "key": "attraction",
+            "value": "maze",
+            "description": "Maze",
+            "object_types": [
+                "node",
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/amusement-park-15.svg?sanitize=true"
+        },
+        {
+            "key": "attraction",
             "value": "pirate_ship",
             "description": "Pirate Ship",
             "object_types": [
@@ -3080,6 +3099,16 @@
         },
         {
             "key": "healthcare",
+            "value": "laboratory",
+            "description": "Medical Laboratory",
+            "object_types": [
+                "node",
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/hospital-15.svg?sanitize=true"
+        },
+        {
+            "key": "healthcare",
             "value": "midwife",
             "description": "Midwife",
             "object_types": [
@@ -4052,6 +4081,15 @@
         },
         {
             "key": "leisure",
+            "value": "beach_resort",
+            "description": "Beach Resort",
+            "object_types": [
+                "node",
+                "area"
+            ]
+        },
+        {
+            "key": "leisure",
             "value": "bird_hide",
             "description": "Bird Hide",
             "object_types": [
@@ -4290,7 +4328,7 @@
         {
             "key": "leisure",
             "value": "horse_riding",
-            "description": "Horseback Riding Facility",
+            "description": "Horseback Riding Facility, Horseback Riding",
             "object_types": [
                 "node",
                 "area"
@@ -4449,7 +4487,7 @@
         {
             "key": "sport",
             "value": "equestrian",
-            "description": "Riding Arena",
+            "description": "Riding Arena, Dressage Riding",
             "object_types": [
                 "node",
                 "area"
@@ -7790,6 +7828,16 @@
         },
         {
             "key": "tourism",
+            "value": "trail_riding_station",
+            "description": "Trail Riding Station",
+            "object_types": [
+                "node",
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/horse-riding-15.svg?sanitize=true"
+        },
+        {
+            "key": "tourism",
             "value": "viewpoint",
             "description": "Viewpoint",
             "object_types": [
@@ -9026,6 +9074,10 @@
             "description": "Display"
         },
         {
+            "key": "distance",
+            "description": "Total Distance"
+        },
+        {
             "key": "dock",
             "description": "Type"
         },
@@ -9076,6 +9128,10 @@
         {
             "key": "except",
             "description": "Exceptions"
+        },
+        {
+            "key": "faces",
+            "description": "Faces"
         },
         {
             "key": "fax",
@@ -9253,6 +9309,41 @@
         {
             "key": "hoops",
             "description": "Hoops"
+        },
+        {
+            "key": "horse_scale",
+            "value": "common",
+            "description": "Horseback Riding Difficulty"
+        },
+        {
+            "key": "horse_scale",
+            "value": "demanding",
+            "description": "Horseback Riding Difficulty"
+        },
+        {
+            "key": "horse_scale",
+            "value": "difficult",
+            "description": "Horseback Riding Difficulty"
+        },
+        {
+            "key": "horse_scale",
+            "value": "critical",
+            "description": "Horseback Riding Difficulty"
+        },
+        {
+            "key": "horse_scale",
+            "value": "dangerous",
+            "description": "Horseback Riding Difficulty"
+        },
+        {
+            "key": "horse_scale",
+            "value": "impossible",
+            "description": "Horseback Riding Difficulty"
+        },
+        {
+            "key": "amenity",
+            "value": "stables",
+            "description": "Riding Stable"
         },
         {
             "key": "iata",
@@ -9611,11 +9702,6 @@
         {
             "key": "note",
             "description": "Note"
-        },
-        {
-            "key": "oneway",
-            "value": "undefined",
-            "description": "One Way"
         },
         {
             "key": "oneway",

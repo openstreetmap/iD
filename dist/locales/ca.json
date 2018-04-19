@@ -1,5 +1,10 @@
 {
     "ca": {
+        "icons": {
+            "information": "Informació",
+            "remove": "Eliminar",
+            "undo": "Desfer"
+        },
         "modes": {
             "add_area": {
                 "title": "Àrea",
@@ -306,8 +311,19 @@
                     "no_left_turn": "Prohibició del gir a l'esquerra {indirecte}",
                     "no_right_turn": "Prohibició del gir a la dreta {indirecte}",
                     "no_u_turn": "Prohibició del gir total  {indirecte}",
-                    "no_straight_on": "Prohibició de seguir recte {indirecte}"
-                }
+                    "no_straight_on": "Prohibició de seguir recte {indirecte}",
+                    "only_left_turn": "NOMÉS gir a l'esquerra {indirecte}",
+                    "only_right_turn": "NOMÉS gir a la dreta {indirecte}",
+                    "only_u_turn": "NOMÉS gir total {indirecte}",
+                    "only_straight_on": "NOMÉS seguir recte {indirecte}",
+                    "allowed_left_turn": "Gir a l'esquerra permès {indirecte}",
+                    "allowed_right_turn": "Gir a la dreta permès {indirecte}",
+                    "allowed_u_turn": "Gir total permès {indirecte}",
+                    "allowed_straight_on": "Segui recte permès {indirecte}"
+                },
+                "from": "DES DE",
+                "via": "VIA",
+                "to": "A"
             }
         },
         "undo": {
@@ -478,6 +494,7 @@
             "title": "Fons",
             "description": "Paràmetres de configuració del fons",
             "key": "B",
+            "backgrounds": "Fons",
             "none": "Cap",
             "best_imagery": "Font d'imatgeria millor coneguda per a aquesta ubicació",
             "switch": "Senyals de trànsit ",
@@ -620,13 +637,7 @@
             }
         },
         "success": {
-            "edited_osm": "Heu editat l'OSM!",
             "just_edited": "Acabeu d'editar l'OpenStreetMap!",
-            "view_on_osm": "Mostra-ho a OSM",
-            "facebook": "Compartiu-ho a Facebook",
-            "twitter": "Compartiu-ho al Twitter",
-            "google": "Compartiu-ho a Google+",
-            "help_html": "Els vostres canvis s'haurien de veure a la capa \"Estàndard\" en pocs minuts. Altres capes i determinats objectes poden tardar més.",
             "help_link_text": "Detalls",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -727,7 +738,8 @@
                 "save_h": "Desar",
                 "upload_h": "Puja",
                 "backups_h": "Copia de seguretat automàtica",
-                "keyboard_h": "Dreceres de teclat"
+                "keyboard_h": "Dreceres de teclat",
+                "keyboard": "Pots veure una llista de dreceres del teclat prement la tecla `?`."
             },
             "feature_editor": {
                 "title": "Editor de característiques",
@@ -2365,9 +2377,6 @@
                 "tunnel": {
                     "label": "Tipus",
                     "placeholder": "Predeterminat"
-                },
-                "vending": {
-                    "label": "Tipus de mercaderies"
                 },
                 "visibility": {
                     "label": "Visibilitat",
@@ -4721,18 +4730,6 @@
                     "name": "Prohibició del gir total",
                     "terms": "Prohibit canviar de sentit"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Només gir a l'esquerra",
-                    "terms": "Gir a l'esquerra obligatori"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Només gir a la dreta",
-                    "terms": "Gir a la dreta obligatori"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Prohibició de tots els girs",
-                    "terms": "Prohibit girar, no girs, cap gir, no girar, seguir recte"
-                },
                 "type/route": {
                     "name": "Ruta",
                     "terms": "Ruta"
@@ -4855,7 +4852,6 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Limitacions d'imatges i dates de captura. Les etiquetes apareixen al nivell de zoom 14 i superior.",
                 "name": "Imatges de DigitalGlobe Premium Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -4869,7 +4865,6 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Limitacions d'imatges i dates de captura. Les etiquetes apareixen al nivell de zoom 14 i superior.",
                 "name": "Imatges de DigitalGlobe estàndard Vintage"
             },
             "EsriWorldImagery": {
@@ -4987,7 +4982,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa Base d'Austria, basat en dades governamentals.",
+                "description": "Mapa base d'Àustria, basat en dades governamentals.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -5048,9 +5043,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Quadricula de mapes de Stamen Design, sota CC BY 3.0"
-                },
                 "name": "Stamen Terrain"
             },
             "tf-cycle": {
@@ -5064,6 +5056,40 @@
                     "text": "Mapes © Thunderforest, Dades © OpenStreetMap col·laboradors"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "OSM-India-facebook": {
+                "description": "Millora OpenStreetMap a l'Índia"
+            },
+            "OSM-japan-facebook": {
+                "name": "Comunitat de Japó d'OpenStreetMap",
+                "description": "Mapador i usuari d'OpenStreetMap a Japó"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter de Japó d'OpenStreetMap",
+                "description": "Etiqueta a Twitter: {url}"
+            },
+            "OSM-TW-facebook": {
+                "name": "Comunitat de Taiwan d'OpenStreetMap",
+                "description": "Grup de Facebook per mapadors i usuaris d'OpenStreetMap per discutir assumptes sobre Taiwan."
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Califòrnia del Sud",
+                "extendedDescription": "OpenStreetMap (OSM) Califòrnia del Sud és per a tothom interessat en el mapatge que s'uneixi a treballar amb OpenStreetMap. OpenStreetMap, la Viquipèdia dels mapes, és un mapa de codi obert gratuït del món sent creat per més de 1000000 de voluntaris al voltant del món. Tothom és benvingut. Si no coneixes OpenStreetMap, t'ensenyarem. Si tens una idea d'un projecte de mapatge o fins i tot una excursió de camp que el grup pot fer, genial!"
+            },
+            "OSM-AR-telegram": {
+                "name": "Telegram d'OpenStreetMap Argentina",
+                "description": "Uneix-te a la comunitat argentina d'OpenStreetMap a Telegram",
+                "extendedDescription": "Uneix-te a la comunitat per aprendre més sobre OpenStreetMap, pregunta o participa a les nostres reunions. Tothom és benvingut!"
+            },
+            "OSM-AR-twitter": {
+                "name": "Twitter d'Argentina d'OpenStreetMap",
+                "description": "Segueix-nos a Twitter a {url}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap a Reddit",
+                "description": "/r/openstreetmap/ és un bon lloc per aprendre més sobre OpenStreetMap. Pregunta'ns qualsevol cosa!"
             }
         }
     }

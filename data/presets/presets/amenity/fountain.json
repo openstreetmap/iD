@@ -1,5 +1,8 @@
 {
     "icon": "poi-fountain",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "point",
         "area"

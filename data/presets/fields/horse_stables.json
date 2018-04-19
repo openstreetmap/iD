@@ -1,0 +1,15 @@
+{
+    "key": "amenity",
+    "type": "check",
+    "label": "Riding Stable",
+    "strings": {
+        "options": {
+            "undefined": "No",
+            "stables": "Yes"
+        }
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "stables"
+    }
+}

@@ -1,5 +1,9 @@
 {
     "ro": {
+        "icons": {
+            "information": "informaţii",
+            "remove": "Şterge"
+        },
         "modes": {
             "add_area": {
                 "title": "Suprafață",
@@ -195,6 +199,17 @@
                     "line": "Separă linia",
                     "area": "Sparge limitele unei suprafețe"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Distanţă",
+                "via": "Prin"
+            },
+            "help": {
+                "from": "DIN",
+                "via": "PRIN",
+                "to": "LA"
             }
         },
         "undo": {
@@ -443,12 +458,7 @@
             }
         },
         "success": {
-            "edited_osm": "Ai editat OSM!",
             "just_edited": "Tocmai ai editat OpenStreetMap!",
-            "view_on_osm": "Vezi pe OSM",
-            "facebook": "Distribuie pe Facebook",
-            "twitter": "Distribuie pe Twitter",
-            "google": "Distribuie pe Google+",
             "help_link_text": "Detalii"
         },
         "confirm": {
@@ -601,7 +611,14 @@
                 }
             },
             "welcome": {
-                "title": "Bun Venit"
+                "title": "Bun Venit",
+                "welcome": "Bine ați venit! Acest ghid vă va învăța elementele de bază ale editării pe OpenStreetMap.",
+                "practice": "Toate datele din acest ghid sunt doar pentru practicare, și orice modificări pe care le faceți în ghid nu vor fi salvate.",
+                "words": "Acest ghid va introduce câteva cuvinte și concepte noi. Când introducem un cuvânt nou, vom folosi *italics*.",
+                "mouse": "Puteți utiliza orice dispozitiv de intrare pentru a edita harta, însă acest ghid presupune că aveți un mouse cu butoane stânga și dreapta. ** Dacă doriți să atașați un mouse, faceți acest lucru acum, apoi apăsați pe OK. **",
+                "leftclick": "Când acest tutorial vă solicită să apăsați odată sau să apăsați de două ori, înseamnă cu butonul din stânga. Pe un trackpad este posibil să fie o atingere cu o singură apăsare sau cu un singur deget. ** Apăsați pe stânga de {num} ori. **",
+                "rightclick": "Uneori vă vom cere să apăsați dreapta. Acest lucru ar putea fi același lucru cu clic-control sau atingeți cu două degete pe un trackpad. Tastatura poate avea chiar și o tastă de \"meniu\" care funcționează ca și apăsat dreapta. ** Apăsați dreapta de {num} ori. **",
+                "chapters": "Până acum, este bine! Puteți utiliza butoanele de mai jos pentru a trece peste capitole în orice moment sau pentru a reporni un capitol dacă rămâneți blocat. Să începem! ** Apăsați pe '{next}' pentru a continua. **"
             },
             "navigation": {
                 "title": "Navigare"
@@ -1529,9 +1546,6 @@
                 },
                 "trees": {
                     "label": "Copaci"
-                },
-                "vending": {
-                    "label": "Tip de Bunuri"
                 },
                 "visibility": {
                     "label": "Vizibilitate"
@@ -4057,18 +4071,6 @@
                     "name": "Fără Întoarcere",
                     "terms": "<translate with synonyms or related terms for 'No U-turn', separated by commas>"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Întoarcere doar la Stânga",
-                    "terms": "<translate with synonyms or related terms for 'Left Turn Only', separated by commas>"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Întoarcere doar la Dreapta",
-                    "terms": "<translate with synonyms or related terms for 'Right Turn Only', separated by commas>"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Fără Întoarcere",
-                    "terms": "<translate with synonyms or related terms for 'No Turns', separated by commas>"
-                },
                 "type/route": {
                     "name": "Rută",
                     "terms": "<translate with synonyms or related terms for 'Route', separated by commas>"
@@ -4203,6 +4205,11 @@
                 "description": "Imagini de satelit DigitalGlobe standard.",
                 "name": "Imagini DigitalGlobe Standard"
             },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Termeni & Feedback"
+                }
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© Contribuitori OpenStreetMap, CC-BY-SA"
@@ -4278,7 +4285,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap de Austria, bazat pe date ale guvernamentului.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -4339,9 +4345,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Plăci de hartă de Stamen Design, sub CC BY 3.0"
-                },
                 "name": "Teren Stamen"
             },
             "tf-cycle": {
@@ -4355,6 +4358,11 @@
                     "text": "Hărți © Thunderforest, Date © Contribuitori OpenStreetMap"
                 },
                 "name": "Peisaj Thunderforest "
+            }
+        },
+        "community": {
+            "Bay-Area-OpenStreetMappers": {
+                "description": "Îmbunătățește OpenStreetMap în Bay Area"
             }
         }
     }

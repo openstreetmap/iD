@@ -221,10 +221,7 @@
             "unsaved_changes": "您有未保存的更改"
         },
         "success": {
-            "edited_osm": "编辑OSM！",
-            "just_edited": "你正在编辑的OpenStreetMap！",
-            "view_on_osm": "在OSM上查看",
-            "facebook": "在Facebook上分享"
+            "just_edited": "你正在编辑的OpenStreetMap！"
         },
         "splash": {
             "welcome": "欢迎使用OpenStreetMap编辑器iD",

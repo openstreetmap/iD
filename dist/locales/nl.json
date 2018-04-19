@@ -603,13 +603,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM aangepast!",
             "just_edited": "Je hebt OpenStreetMap bewerkt!",
-            "view_on_osm": "Bekijk op OSM",
-            "facebook": "Deel op Facebook",
-            "twitter": "Deel op Twitter",
-            "google": "Deel op Google+",
-            "help_html": "Je wijzigingen zouden binnen enkele minuten zichtbaar moeten zijn in de \"Standaard\"-laag. Het updaten van sommige soorten objecten kan langer duren. Andere lagen dan de \"Standaard\"-laag worden minder vaak bijgewerkt.",
             "help_link_text": "Meer hierover, in het Engels",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -2564,9 +2558,6 @@
                 "tunnel": {
                     "label": "Type",
                     "placeholder": "Standaard"
-                },
-                "vending": {
-                    "label": "Soort waren"
                 },
                 "visibility": {
                     "label": "Zichtbaarheid",
@@ -6010,18 +6001,6 @@
                     "name": "Niet omkeren",
                     "terms": "geen U-bocht,U-bocht verboden,omkeren verboden,omdraaien verboden,verboden om te draaien,verboden om te keren,niet omdraaien,niet keren,verboden te keren,keren verboden"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Enkel links afslaan",
-                    "terms": "verplicht links afslaan,links afslaan verplicht,enkel links inslaan,verplicht links inslaan,links inslaan verplicht"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Enkel rechts afslaan",
-                    "terms": "verplicht rechts afslaan,rechts afslaan verplicht,enkel rechts inslaan,verplicht rechts inslaan,rechts inslaan verplicht"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Enkel rechtdoor",
-                    "terms": "rechtdoor,niet draaien,niet afslaan,niet inslaan,draaien verboden,afslaan verboden,draaien verboden"
-                },
                 "type/route": {
                     "name": "Route"
                 },
@@ -6181,7 +6160,6 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
-                "description": "Luchtfoto grenzen en opnamedatum. Labels verschijnen bij zoomniveau 14 en hoger.",
                 "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -6195,7 +6173,6 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
-                "description": "Luchtfoto grenzen en opnamedatum. Labels verschijnen bij zoomniveau 14 en hoger.",
                 "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "EsriWorldImagery": {
@@ -6313,7 +6290,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basiskaart van Oostenrijk, gebaseerd op overheidsgegevens.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6374,9 +6350,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Kaarttegels door Stamen Design, onder CC BY 3.0"
-                },
                 "name": "Stamen Terrein"
             },
             "tf-cycle": {

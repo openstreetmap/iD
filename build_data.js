@@ -106,9 +106,11 @@ module.exports = function buildData() {
     };
 };
 
+
 function read(f) {
     return JSON.parse(fs.readFileSync(f, 'utf8'));
 }
+
 
 function validate(file, instance, schema) {
     var validationErrors = jsonschema.validate(instance, schema).errors;
@@ -125,18 +127,18 @@ function validate(file, instance, schema) {
     }
 }
 
+
 function generateCategories(tstrings) {
     var categories = {};
     glob.sync(__dirname + '/data/presets/categories/*.json').forEach(function(file) {
-        var field = read(file),
-            id = 'category-' + path.basename(file, '.json');
-
-        tstrings.categories[id] = {name: field.name};
-
+        var field = read(file);
+        var id = 'category-' + path.basename(file, '.json');
+        tstrings.categories[id] = { name: field.name };
         categories[id] = field;
     });
     return categories;
 }
+
 
 function generateFields(tstrings) {
     var fields = {};
@@ -171,9 +173,9 @@ function suggestionsToPresets(presets) {
     for (var key in suggestions) {
         for (var value in suggestions[key]) {
             for (var name in suggestions[key][value]) {
-                var item = key + '/' + value + '/' + name,
-                    tags = {},
-                    count = suggestions[key][value][name].count;
+                var item = key + '/' + value + '/' + name;
+                var tags = {};
+                var count = suggestions[key][value][name].count;
 
                 if (existing[name] && count > existing[name].count) {
                     delete presets[existing[name].category];
@@ -187,10 +189,10 @@ function suggestionsToPresets(presets) {
         }
     }
 
-    function addSuggestion(category, tags, name, count) {
-        var tag = category.split('/'),
-            parent = presets[tag[0] + '/' + tag[1]];
 
+    function addSuggestion(category, tags, name, count) {
+        var tag = category.split('/');
+        var parent = presets[tag[0] + '/' + tag[1]];
 
         // Hacky code to add healthcare tagging not yet present in name-suggestion-index
         // This will be fixed by https://github.com/osmlab/name-suggestion-index/issues/57
@@ -230,16 +232,20 @@ function suggestionsToPresets(presets) {
     return presets;
 }
 
+
 function stripLeadingUnderscores(str) {
-    return str.split('/').map(function(s) { return s.replace(/^_/,''); }).join('/');
+    return str.split('/')
+        .map(function(s) { return s.replace(/^_/,''); })
+        .join('/');
 }
+
 
 function generatePresets(tstrings) {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
-        var preset = read(file),
-            id = stripLeadingUnderscores(file.match(/presets\/presets\/([^.]*)\.json/)[1]);
+        var preset = read(file);
+        var id = stripLeadingUnderscores(file.match(/presets\/presets\/([^.]*)\.json/)[1]);
 
         validate(file, preset, presetSchema);
 
@@ -247,13 +253,14 @@ function generatePresets(tstrings) {
             name: preset.name,
             terms: (preset.terms || []).join(',')
         };
+
         presets[id] = preset;
     });
 
     presets = _merge(presets, suggestionsToPresets(presets));
     return presets;
-
 }
+
 
 function generateTranslations(fields, presets, tstrings) {
     var translations = _cloneDeep(tstrings);
@@ -301,8 +308,8 @@ function generateTranslations(fields, presets, tstrings) {
     return translations;
 }
 
-function generateTaginfo(presets, fields) {
 
+function generateTaginfo(presets, fields) {
     var taginfo = {
         'data_format': 1,
         'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json',
@@ -320,96 +327,87 @@ function generateTaginfo(presets, fields) {
     };
 
     _forEach(presets, function(preset) {
+        if (preset.suggestion) return;
 
-        if (preset.suggestion)
-            return;
+        var keys = Object.keys(preset.tags);
+        var last = keys[keys.length - 1];
+        var tag = { key: last };
 
-        var keys = Object.keys(preset.tags),
-            last = keys[keys.length - 1],
-            tag = { key: last };
-
-        if (!last)
-            return;
+        if (!last) return;
 
         if (preset.tags[last] !== '*') {
             tag.value = preset.tags[last];
         }
-
         if (preset.name) {
-          tag.description = [ preset.name ];
+            tag.description = [ preset.name ];
         }
-
         if (preset.geometry) {
-          setObjectType(tag, preset);
+            setObjectType(tag, preset);
         }
-
         if (isMaki(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' + preset.icon + '-15.svg?sanitize=true';
+            tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' +
+                preset.icon + '-15.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);
     });
 
     _forEach(fields, function(field) {
-
         var keys = field.keys || [ field.key ] || [];
 
         keys.forEach(function(key) {
             if (field.strings && field.strings.options) {
-               var values = Object.keys(field.strings.options);
-               values.forEach(function(value) {
-                   var tag = { key:   key,
-                               value: value };
-                   if (field.label) {
-                      tag.description = [ field.label ];
-                   }
-                   coalesceTags(taginfo, tag);
-               });
-            }
-            else {
-               var tag = { key: key };
-               if (field.label) {
-                  tag.description = [ field.label ];
-               }
-               coalesceTags(taginfo, tag);
+                var values = Object.keys(field.strings.options);
+                values.forEach(function(value) {
+                    if (value === 'undefined' || value === '*' || value === '') return;
+                    var tag = { key: key, value: value };
+                    if (field.label) {
+                        tag.description = [ field.label ];
+                    }
+                    coalesceTags(taginfo, tag);
+                });
+            } else {
+                var tag = { key: key };
+                if (field.label) {
+                    tag.description = [ field.label ];
+                }
+                coalesceTags(taginfo, tag);
             }
         });
     });
 
     _forEach(taginfo.tags, function(elem) {
-       if (elem.description)
-          elem.description = elem.description.join(', ');
+        if (elem.description)
+            elem.description = elem.description.join(', ');
     });
 
+
     function coalesceTags(taginfo, tag) {
+        if (!tag.key) return;
 
-       if (!tag.key)
-         return;
+        var currentTaginfoEntries = taginfo.tags.filter(function(t) {
+            return (t.key === tag.key && t.value === tag.value);
+        });
 
-       var currentTaginfoEntries = taginfo.tags.filter(function(t) {
-           return (t.key    === tag.key &&
-                   t.value  === tag.value);
-       });
+        if (currentTaginfoEntries.length === 0) {
+            taginfo.tags.push(tag);
+            return;
+        }
 
-       if (currentTaginfoEntries.length === 0) {
-         taginfo.tags.push(tag);
-         return;
-       }
+        if (!tag.description)
+            return;
 
-       if (!tag.description)
-         return;
+        if (!currentTaginfoEntries[0].description) {
+            currentTaginfoEntries[0].description = tag.description;
+            return;
+        }
 
-       if (!currentTaginfoEntries[0].description) {
-         currentTaginfoEntries[0].description = tag.description;
-         return;
-       }
+        var isNewDescription = currentTaginfoEntries[0].description
+            .indexOf(tag.description[0]) === -1;
 
-       var isNewDescription = currentTaginfoEntries[0].description
-                                   .indexOf(tag.description[0]) === -1;
-
-       if (isNewDescription) {
-         currentTaginfoEntries[0].description.push(tag.description[0]);
-       }
+        if (isNewDescription) {
+            currentTaginfoEntries[0].description.push(tag.description[0]);
+        }
     }
 
     function isMaki(icon) {
@@ -418,18 +416,20 @@ function generateTaginfo(presets, fields) {
     }
 
     function setObjectType(tag, input) {
-      tag.object_types = [];
-      const mapping = { 'point'    : 'node',
-                        'vertex'   : 'node',
-                        'line'     : 'way',
-                        'relation' : 'relation',
-                        'area'     : 'area' };
+        tag.object_types = [];
+        const mapping = {
+            'point'    : 'node',
+            'vertex'   : 'node',
+            'line'     : 'way',
+            'relation' : 'relation',
+            'area'     : 'area'
+        };
 
-      input.geometry.forEach(function(geom) {
-         if (tag.object_types.indexOf(mapping[geom]) === -1) {
-           tag.object_types.push(mapping[geom]);
-         }
-      });
+        input.geometry.forEach(function(geom) {
+            if (tag.object_types.indexOf(mapping[geom]) === -1) {
+                tag.object_types.push(mapping[geom]);
+            }
+        });
     }
 
     return taginfo;
@@ -486,19 +486,20 @@ function translationsToYAML(translations) {
 
 function writeEnJson(tstrings) {
     var readCoreYaml = readFileProm('data/core.yaml', 'utf8');
-    var readImagery = readFileProm(
-        'node_modules/editor-layer-index/i18n/en.yaml',
-        'utf8'
-    );
+    var readImagery = readFileProm('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
+    var readCommunity = readFileProm('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
 
-    return Promise.all([readCoreYaml, readImagery]).then(function(data) {
+    return Promise.all([readCoreYaml, readImagery, readCommunity]).then(function(data) {
         var core = YAML.load(data[0]);
         var imagery = YAML.load(data[1]);
-        var en = _merge(core, { en: { presets: tstrings } }, imagery);
-        return writeFileProm(
-            'dist/locales/en.json',
-            JSON.stringify(en, null, 4)
+        var community = YAML.load(data[2]);
+        var en = _merge(
+            core,
+            { en: { presets: tstrings } },
+            imagery,
+            { en: { community: community.en } }
         );
+        return writeFileProm('dist/locales/en.json', JSON.stringify(en, null, 4));
     });
 }
 

@@ -520,13 +520,7 @@
             }
         },
         "success": {
-            "edited_osm": "Pakeitėte OSM!",
             "just_edited": "Jūs ką tik pakeitėte OpenStreetMap!",
-            "view_on_osm": "Žiūrėti OSM žemėlapyje",
-            "facebook": "Pasidalinti Facebook'e",
-            "twitter": "Pasidalinti Twitter'yje",
-            "google": "Pasidalinti Google+",
-            "help_html": "Jūsų pakeitimai turėtų būti matomi „Standartiniame“ sluoksnyje po kelių minučių. Kituose sluoksniuose ir kai kurios savybės gali pasirodyti vėliau.",
             "help_link_text": "Detalės",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -1537,9 +1531,6 @@
                 },
                 "trees": {
                     "label": "Medžiai"
-                },
-                "vending": {
-                    "label": "Prekių tipas"
                 },
                 "visibility": {
                     "label": "Matomumas"
@@ -3164,18 +3155,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Jokio apsisukimo",
                     "terms": "Negalima apsisukti"
-                },
-                "type/restriction/only_left_turn": {
-                    "name": "Sukimas tik į kairę",
-                    "terms": "Tik į kairę"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Sukimas tik į dešinę",
-                    "terms": "Tik į dešinę"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Jokių posūkių",
-                    "terms": "Nėra posūkių"
                 },
                 "type/route": {
                     "name": "Maršrutas",

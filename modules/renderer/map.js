@@ -18,7 +18,12 @@ import {
 } from 'd3-zoom';
 
 import { t } from '../util/locale';
-import { geoExtent } from '../geo';
+
+import {
+    geoExtent,
+    geoScaleToZoom,
+    geoZoomToScale
+} from '../geo';
 
 import {
     modeBrowse,
@@ -48,39 +53,45 @@ import { utilBindOnce } from '../util/bind_once';
 import { utilGetDimensions } from '../util/dimensions';
 
 
+// constants
+var TAU = 2 * Math.PI;
+var TILESIZE = 256;
+var kMin = geoZoomToScale(2, TILESIZE);
+var kMax = geoZoomToScale(24, TILESIZE);
+
 
 export function rendererMap(context) {
+    var dispatch = d3_dispatch('move', 'drawn');
+    var projection = context.projection;
+    var curtainProjection = context.curtainProjection;
+    var drawLayers = svgLayers(projection, context);
+    var drawPoints = svgPoints(projection, context);
+    var drawVertices = svgVertices(projection, context);
+    var drawLines = svgLines(projection, context);
+    var drawAreas = svgAreas(projection, context);
+    var drawMidpoints = svgMidpoints(projection, context);
+    var drawLabels = svgLabels(projection, context);
 
-    var dimensions = [1, 1],
-        dispatch = d3_dispatch('move', 'drawn'),
-        projection = context.projection,
-        curtainProjection = context.curtainProjection,
-        dblclickEnabled = true,
-        redrawEnabled = true,
-        transformStart = projection.transform(),
-        transformLast,
-        transformed = false,
-        minzoom = 0,
-        drawLayers = svgLayers(projection, context),
-        drawPoints = svgPoints(projection, context),
-        drawVertices = svgVertices(projection, context),
-        drawLines = svgLines(projection, context),
-        drawAreas = svgAreas(projection, context),
-        drawMidpoints = svgMidpoints(projection, context),
-        drawLabels = svgLabels(projection, context),
-        supersurface = d3_select(null),
-        wrapper = d3_select(null),
-        surface = d3_select(null),
-        mouse,
-        mousemove;
+    var _selection = d3_select(null);
+    var supersurface = d3_select(null);
+    var wrapper = d3_select(null);
+    var surface = d3_select(null);
+
+    var dimensions = [1, 1];
+    var dblclickEnabled = true;
+    var redrawEnabled = true;
+    var transformStart = projection.transform();
+    var transformLast;
+    var transformed = false;
+    var minzoom = 0;
+    var mouse;
+    var mousemove;
 
     var zoom = d3_zoom()
-        .scaleExtent([ztok(2), ztok(24)])
+        .scaleExtent([kMin, kMax])
         .interpolate(d3_interpolate)
         .filter(zoomEventFilter)
         .on('zoom', zoomPan);
-
-    var _selection = d3_select(null);
 
     var scheduleRedraw = _throttle(redraw, 750);
     // var isRedrawScheduled = false;
@@ -104,8 +115,8 @@ export function rendererMap(context) {
         // window.cancelIdleCallback(pendingRedrawCall);
     }
 
-    function map(selection) {
 
+    function map(selection) {
         _selection = selection;
 
         context
@@ -273,14 +284,6 @@ export function rendererMap(context) {
     }
 
 
-    function ztok(z) {
-        return 256 * Math.pow(2, z);
-    }
-
-    function ktoz(k) {
-        return Math.max(Math.log(k) / Math.LN2 - 8, 0);
-    }
-
     function pxCenter() {
         return [dimensions[0] / 2, dimensions[1] / 2];
     }
@@ -395,7 +398,7 @@ export function rendererMap(context) {
             _selection.node().__zoom = eventTransform;
         }
 
-        if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
+        if (geoScaleToZoom(eventTransform.k, TILESIZE) < minzoom) {
             surface.interrupt();
             uiFlash().text(t('cannot_zoom'))();
             setZoom(context.minEditableZoom(), true);
@@ -486,20 +489,6 @@ export function rendererMap(context) {
     };
 
 
-    function pointLocation(p) {
-        var translate = projection.translate(),
-            scale = projection.scale() * 2 * Math.PI;
-        return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
-    }
-
-
-    function locationPoint(l) {
-        var translate = projection.translate(),
-            scale = projection.scale() * 2 * Math.PI;
-        return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
-    }
-
-
     map.mouse = function() {
         var event = mousemove || d3_event;
         if (event) {
@@ -557,10 +546,10 @@ export function rendererMap(context) {
             return false;
         }
 
-        var k = projection.scale(),
-            k2 = Math.max(ztok(2), Math.min(ztok(24), ztok(z2))) / (2 * Math.PI),
-            center = pxCenter(),
-            l = pointLocation(center);
+        var k = projection.scale();
+        var k2 = Math.max(kMin, Math.min(kMax, geoZoomToScale(z2, TILESIZE)));
+        var center = pxCenter();
+        var l = pointLocation(center);
 
         projection.scale(k2);
 
@@ -584,6 +573,19 @@ export function rendererMap(context) {
         }
 
         return true;
+
+
+        function locationPoint(l) {
+            var translate = projection.translate();
+            var scale = projection.scale() * TAU;
+            return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
+        }
+
+        function pointLocation(p) {
+            var translate = projection.translate();
+            var scale = projection.scale() * TAU;
+            return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
+        }
     }
 
 
@@ -593,10 +595,10 @@ export function rendererMap(context) {
             return false;
         }
 
-        var t = projection.translate(),
-            k = projection.scale(),
-            pxC = pxCenter(),
-            ll = projection(loc2);
+        var t = projection.translate();
+        var k = projection.scale();
+        var pxC = pxCenter();
+        var ll = projection(loc2);
 
         t[0] = t[0] - ll[0] + pxC[0];
         t[1] = t[1] - ll[1] + pxC[1];
@@ -618,8 +620,8 @@ export function rendererMap(context) {
 
 
     map.pan = function(delta, duration) {
-        var t = projection.translate(),
-            k = projection.scale();
+        var t = projection.translate();
+        var k = projection.scale();
 
         t[0] += delta[0];
         t[1] += delta[1];
@@ -688,7 +690,7 @@ export function rendererMap(context) {
 
     map.zoom = function(z2) {
         if (!arguments.length) {
-            return Math.max(ktoz(projection.scale() * 2 * Math.PI), 0);
+            return Math.max(geoScaleToZoom(projection.scale(), TILESIZE), 0);
         }
 
         if (z2 < minzoom) {
@@ -711,14 +713,14 @@ export function rendererMap(context) {
         if (!isFinite(extent.area())) return;
 
         var z2 = map.trimmedExtentZoom(extent);
-        zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
+        zoomLimits = zoomLimits || [context.minEditableZoom(), 24];
         map.centerZoom(extent.center(), Math.min(Math.max(z2, zoomLimits[0]), zoomLimits[1]));
     };
 
 
     map.centerZoom = function(loc2, z2) {
-        var centered = setCenter(loc2),
-            zoomed   = setZoom(z2);
+        var centered = setCenter(loc2);
+        var zoomed   = setZoom(z2);
 
         if (centered || zoomed) {
             dispatch.call('move', this, map);
@@ -766,8 +768,10 @@ export function rendererMap(context) {
 
     map.extent = function(_) {
         if (!arguments.length) {
-            return new geoExtent(projection.invert([0, dimensions[1]]),
-                                 projection.invert([dimensions[0], 0]));
+            return new geoExtent(
+                projection.invert([0, dimensions[1]]),
+                projection.invert([dimensions[0], 0])
+            );
         } else {
             var extent = geoExtent(_);
             map.centerZoom(extent.center(), map.extentZoom(extent));
@@ -777,9 +781,13 @@ export function rendererMap(context) {
 
     map.trimmedExtent = function(_) {
         if (!arguments.length) {
-            var headerY = 60, footerY = 30, pad = 10;
-            return new geoExtent(projection.invert([pad, dimensions[1] - footerY - pad]),
-                                 projection.invert([dimensions[0] - pad, headerY + pad]));
+            var headerY = 60;
+            var footerY = 30;
+            var pad = 10;
+            return new geoExtent(
+                projection.invert([pad, dimensions[1] - footerY - pad]),
+                projection.invert([dimensions[0] - pad, headerY + pad])
+            );
         } else {
             var extent = geoExtent(_);
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
@@ -788,15 +796,15 @@ export function rendererMap(context) {
 
 
     function calcZoom(extent, dim) {
-        var tl = projection([extent[0][0], extent[1][1]]),
-            br = projection([extent[1][0], extent[0][1]]);
+        var tl = projection([extent[0][0], extent[1][1]]);
+        var br = projection([extent[1][0], extent[0][1]]);
 
         // Calculate maximum zoom that fits extent
-        var hFactor = (br[0] - tl[0]) / dim[0],
-            vFactor = (br[1] - tl[1]) / dim[1],
-            hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
-            vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
-            newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
+        var hFactor = (br[0] - tl[0]) / dim[0];
+        var vFactor = (br[1] - tl[1]) / dim[1];
+        var hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
+        var vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
+        var newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
         return newZoom;
     }
@@ -808,8 +816,9 @@ export function rendererMap(context) {
 
 
     map.trimmedExtentZoom = function(_) {
-        var trimY = 120, trimX = 40,
-            trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
+        var trimY = 120;
+        var trimX = 40;
+        var trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
         return calcZoom(geoExtent(_), trimmed);
     };
 

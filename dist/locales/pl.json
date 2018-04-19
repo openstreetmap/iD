@@ -1,5 +1,8 @@
 {
     "pl": {
+        "icons": {
+            "undo": "Cofnij"
+        },
         "modes": {
             "add_area": {
                 "title": "Obszar",
@@ -286,6 +289,16 @@
                     "create": "Dodano zakaz/nakaz skrętu",
                     "delete": "Usunięto zakaz/nakaz skrętu"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "via": "Przez"
+            },
+            "help": {
+                "from": "Z",
+                "via": "PRZEZ",
+                "to": "DO"
             }
         },
         "undo": {
@@ -598,13 +611,7 @@
             }
         },
         "success": {
-            "edited_osm": "Zmiany zostały wprowadzone do OSM!",
             "just_edited": "Właśnie wprowadziłeś zmiany w OpenStreetMap!",
-            "view_on_osm": "Wyświetl na OSM",
-            "facebook": "Podziel się na Facebooku",
-            "twitter": "Podziel się na Twitterze",
-            "google": "Podziel się na Google+",
-            "help_html": "Zmiany powinny pojawić się na warstwie podstawowej mapy w ciągu kilku minut. Inne warstwy mogą odświeżać się dłużej.",
             "help_link_text": "Więcej informacji",
             "help_link_url": "http://wiki.openstreetmap.org/wiki/Pl:FAQ#Kiedy_wprowadzone_przeze_mnie_zmiany_poka.C5.BCa_si.C4.99_na_mapie.3F"
         },
@@ -765,6 +772,13 @@
                 "using": "By użyć śladu GPS do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli zostanie on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na {data} **Dane mapy** po prawej stronie by włączyć, wyłączyć lub przybliżyć widok twojego śladu GPS.",
                 "tracing": "Ślad GPS nie jest bezpośrednio zapisywany na serwerach OpenStreetMap - najlepszym sposobem na wykorzystanie go jest rysowanie mapy na jego podstawie.",
                 "upload": "Możesz także wysłać [swój ślad GPS na serwery OpenStreetMap](https://www.openstreetmap.org/trace/create), pozwalając tym samym innym użytkownikom na korzystanie z niego."
+            },
+            "field": {
+                "restrictions": {
+                    "tips": {
+                        "title": "Wskazówki"
+                    }
+                }
             }
         },
         "intro": {
@@ -1615,6 +1629,9 @@
                 "display": {
                     "label": "Typ wyświetlacza"
                 },
+                "distance": {
+                    "label": "Całkowita Odległość"
+                },
                 "dock": {
                     "label": "Typ"
                 },
@@ -1766,6 +1783,24 @@
                     "label": "Kosz",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Tak",
+                        "undefined": "Nie"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Tak",
+                        "undefined": "Nie"
+                    }
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Tak",
+                        "undefined": "Nie"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1784,6 +1819,9 @@
                 },
                 "indoor": {
                     "label": "Wnętrze"
+                },
+                "industrial": {
+                    "label": "Typ"
                 },
                 "information": {
                     "label": "Typ"
@@ -1903,6 +1941,9 @@
                 },
                 "maxspeed": {
                     "label": "Ograniczenie prędkości",
+                    "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2492,9 +2533,6 @@
                 "tunnel": {
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
-                },
-                "vending": {
-                    "label": "Rodzaje towarów"
                 },
                 "visibility": {
                     "label": "Widoczność",
@@ -5892,18 +5930,6 @@
                     "name": "Zakaz zawracania",
                     "terms": "zakaz,zawracanie"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Nakaz skrętu w lewo",
-                    "terms": "nakaz,lewoskręt"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Nakaz skrętu w prawo",
-                    "terms": "nakaz,prawoskręt"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Nakaz jazdy prosto",
-                    "terms": "zakaz,nakręcanie,wykręcanie,skręt"
-                },
                 "type/route": {
                     "name": "Trasa/linia",
                     "terms": "trasa,linia"
@@ -6057,7 +6083,6 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
-                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 14 i wyższym.",
                 "name": "Datowanie zdjęć DigitalGlobe Premium "
             },
             "DigitalGlobe-Standard": {
@@ -6071,7 +6096,6 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
-                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 14 i wyższym.",
                 "name": "Datowanie zdjęć DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -6189,7 +6213,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa bazowa Austrii, oparta o dane rządowe.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6250,9 +6273,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Kafelki mapowe Stamen Design, licencja CC BY 3.0"
-                },
                 "name": "Stamen - Teren"
             },
             "tf-cycle": {

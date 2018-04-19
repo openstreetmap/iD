@@ -18,7 +18,7 @@ import { utilRebind } from '../util';
 
 var _changeset;
 var readOnlyTags = [
-    /^_changesets_count$/,
+    /^changesets_count$/,
     /^created_by$/,
     /^ideditor:/,
     /^imagery_used$/,
@@ -65,7 +65,6 @@ export function uiCommit(context) {
             var detected = utilDetect();
             tags = {
                 comment: context.storage('comment') || '',
-                source: context.storage('source') || '',
                 created_by: ('iD ' + context.version).substr(0, 255),
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
@@ -78,6 +77,11 @@ export function uiCommit(context) {
             var hashtags = context.storage('hashtags');
             if (hashtags) {
                 tags.hashtags = hashtags;
+            }
+
+            var source = context.storage('source');
+            if (source) {
+                tags.source = source;
             }
 
             _changeset = new osmChangeset({ tags: tags });
@@ -293,9 +297,6 @@ export function uiCommit(context) {
             }
         }
         if (changed.hasOwnProperty('source')) {
-            if (changed.source === undefined) {
-                changed.source = '';
-            }
             if (!onInput) {
                 context.storage('source', changed.source);
                 context.storage('commentDate', Date.now());

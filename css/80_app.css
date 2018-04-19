@@ -163,6 +163,17 @@ h4, h5 {
     outline-style: none;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #aaa;
+    opacity: 1; /* Firefox */
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #aaa;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #aaa;
+}
+
 p {
     font-size: 12px;
     margin:0;
@@ -412,7 +423,7 @@ li.hide {
 
 button {
     text-align: center;
-    line-height:20px;
+    line-height: 20px;
     border:0;
     background: white;
     font-weight: bold;
@@ -656,16 +667,12 @@ button.save.has-count .count::before {
 }
 
 .header h3 {
-    text-align: left;
+    text-align: center;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 20px 20px 20px 40px;
-}
-[dir='rtl'] .header h3 {
-    text-align: right;
-    padding: 20px 40px 20px 20px;
+    padding: 20px;
 }
 
 .header button,
@@ -3043,7 +3050,7 @@ img.tile-debug {
 .nocolor { color: rgba(0, 0, 0, 0); }
 .red     { color: rgba(255, 0, 0, 0.75); }
 .green   { color: rgba(0, 255, 0, 0.75); }
-.blue    { color: rgba(0, 0, 255, 0.75); }
+.blue    { color: rgba(176, 176, 255, 0.75); }
 .yellow  { color: rgba(255, 255, 0, 0.75); }
 .cyan    { color: rgba(0, 255, 255, 0.75); }
 .magenta { color: rgba(255, 0, 255, 0.75); }
@@ -3453,6 +3460,9 @@ img.tile-debug {
     color: #ccf;
 }
 
+/* Notification Badges */
+
+/* For an icon (e.g. new version) */
 .badge {
     display: inline-block;
     background: #d32232;
@@ -3477,6 +3487,24 @@ img.tile-debug {
     width: 11px;
     height: 11px;
     fill: white;
+}
+
+/* For text (e.g. upcoming events) */
+.badge-text {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+    background: #f00;
+    border-radius: 9px;
+}
+[dir='rtl'] .badge-text {
+    margin-left: 0;
+    margin-right: 5px;
 }
 
 
@@ -3552,8 +3580,7 @@ img.tile-debug {
     text-align: center;
 }
 
-.modal-actions button,
-.save-success a.button {
+.modal-actions button {
     font-weight: normal;
     color: #7092ff;
     border-bottom: 1px solid #ccc;
@@ -3562,10 +3589,14 @@ img.tile-debug {
     text-align: center;
     display: inline-block;
 }
-
-.modal-actions button:hover
-.save-success a.button:hover {
+.modal-actions button:hover {
     background-color: #ececec;
+}
+
+.logo-small {
+    height: 40px;
+    width: 40px;
+    margin: auto;
 }
 
 .logo {
@@ -3589,33 +3620,102 @@ img.tile-debug {
     color: #7092ff;
 }
 .modal-actions .logo-reset {
-    color: #E06C5E;
+    color: #e06c5e;
 }
 
 /* Success Modal
 ------------------------------------------------------- */
+.save-success.body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.save-success .link-out {
+    margin: 0px 5px;
+    white-space: nowrap;
+}
+
+.save-summary,
+.save-communityLinks {
+    padding: 0px 20px 15px 20px;
+}
+
+.save-communityLinks {
+    border-top: 1px solid #ccc;
+}
+
+.save-success table,
 .save-success p {
-    padding: 15px 15px 0 15px;
+    margin-top: 15px;
 }
-.save-success a.details {
-    padding-left: 15px;
+.save-success h3 {
+    font-size: 14px;
+    margin-top: 15px;
+    line-height: 1.5;
+    padding-bottom: 0;
 }
-.save-success .button {
-    padding-top: 15px;
+.save-success td {
+    vertical-align: top;
 }
-.save-success .logo-osm {
-    color: #7092ff;
-    margin-bottom: 10px;
+.save-success td.cell-icon {
+    width: 40px;
 }
-.save-success a.button.social {
-    height: auto;
-    border-bottom: none;
+.save-success td.cell-detail {
+    padding: 0 10px;
 }
-.save-success .icon.social {
-    height: 80px;
-    width: 80px;
-    color: #7092ff;
+.save-success td.community-detail {
+    padding-bottom: 15px;
 }
+
+.summary-view-on-osm,
+.community-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+.community-languages {
+    margin-top: 5px;
+    font-style: italic;
+}
+.community-languages:only-child {
+    margin-top: 0;
+}
+
+.community-detail a.hide-toggle,
+.community-detail a:visited.hide-toggle {
+    font-size: 12px;
+    font-weight: normal;
+    padding-bottom: 0;
+}
+.community-detail .hide-toggle svg.icon.pre-text {
+    width: 12px;
+    height: 15px;
+}
+
+.community-events {
+    margin-top: 5px;
+}
+
+.community-event,
+.community-more {
+    background-color: #efefef;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.community-event-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+.community-event-when {
+    font-weight: bold;
+}
+
+.community-missing {
+    padding: 10px;
+    text-align: center;
+}
+
 
 /* Splash Modal
 ------------------------------------------------------- */

@@ -53,7 +53,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.7.1';
+    context.version = '2.8.0';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -316,6 +316,7 @@ export function coreContext() {
         tile: false,        // tile boundaries
         collision: false,   // label collision bounding boxes
         imagery: false,     // imagery bounding polygons
+        community: false,   // community bounding polygons
         imperial: false,    // imperial (not metric) bounding polygons
         driveLeft: false,   // driveLeft bounding polygons
         target: false       // touch targets

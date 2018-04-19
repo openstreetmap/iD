@@ -273,15 +273,13 @@ describe('iD.actionJoin', function () {
         ]);
 
         graph = iD.actionJoin(['-', '='])(graph);
-
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
         expect(graph.hasEntity('=')).to.be.undefined;
     });
 
     it('joins a <-- b ==> c', function () {
         // Expected result:
         // a --> b --> c
-        // tags on --- reversed
         var graph = iD.coreGraph([
             iD.osmNode({id: 'a'}),
             iD.osmNode({id: 'b'}),
@@ -292,9 +290,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
         expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
+        expect(graph.entity('-').tags).to.eql({'lanes:forward': 2});
     });
 
     it('joins a --> b <== c', function () {

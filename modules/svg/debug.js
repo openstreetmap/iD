@@ -1,3 +1,5 @@
+import _values from 'lodash-es/values';
+
 import { select as d3_select } from 'd3-selection';
 
 import { geoPolygonIntersectsPolygon } from '../geo';
@@ -20,6 +22,7 @@ export function svgDebug(projection, context) {
         var showsTile = context.getDebug('tile');
         var showsCollision = context.getDebug('collision');
         var showsImagery = context.getDebug('imagery');
+        var showsCommunity = context.getDebug('community');
         var showsImperial = context.getDebug('imperial');
         var showsDriveLeft = context.getDebug('driveLeft');
         var showsTouchTargets = context.getDebug('target');
@@ -33,6 +36,9 @@ export function svgDebug(projection, context) {
         }
         if (showsImagery) {
             debugData.push({ class: 'orange', label: 'imagery' });
+        }
+        if (showsCommunity) {
+            debugData.push({ class: 'blue', label: 'community' });
         }
         if (showsImperial) {
             debugData.push({ class: 'cyan', label: 'imperial' });
@@ -71,7 +77,7 @@ export function svgDebug(projection, context) {
 
 
         var layer = selection.selectAll('.layer-debug')
-            .data(showsImagery || showsImperial || showsDriveLeft ? [0] : []);
+            .data(showsImagery || showsCommunity || showsImperial || showsDriveLeft ? [0] : []);
 
         layer.exit()
             .remove();
@@ -100,6 +106,17 @@ export function svgDebug(projection, context) {
         imagery.enter()
             .append('path')
             .attr('class', 'debug-imagery debug orange');
+
+
+        var community = layer.selectAll('path.debug-community')
+            .data(showsCommunity ? _values(data.community.features) : []);
+
+        community.exit()
+            .remove();
+
+        community.enter()
+            .append('path')
+            .attr('class', 'debug-community debug blue');
 
 
         var imperial = layer

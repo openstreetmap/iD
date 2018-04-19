@@ -197,6 +197,20 @@
             },
             "name": "Billboard"
         },
+        "advertising/column": {
+            "fields": [
+                "direction",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "advertising": "column"
+            },
+            "name": "Advertising Column"
+        },
         "aerialway/station": {
             "icon": "aerialway",
             "geometry": [
@@ -1358,7 +1372,8 @@
                 "support",
                 "display",
                 "visibility",
-                "date"
+                "date",
+                "faces"
             ],
             "geometry": [
                 "point",
@@ -1676,6 +1691,9 @@
         },
         "amenity/fountain": {
             "icon": "poi-fountain",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "point",
                 "area"
@@ -4066,6 +4084,26 @@
                 "attraction": "drop_tower"
             },
             "name": "Drop Tower"
+        },
+        "attraction/maze": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "amusement ride",
+                "labyrinth"
+            ],
+            "tags": {
+                "attraction": "maze"
+            },
+            "name": "Maze"
         },
         "attraction/pirate_ship": {
             "icon": "amusement-park",
@@ -7070,6 +7108,30 @@
             },
             "name": "Hospice"
         },
+        "healthcare/laboratory": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "website",
+                "ref",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "medical_laboratory",
+                "medical_lab",
+                "blood_check"
+            ],
+            "tags": {
+                "healthcare": "laboratory"
+            },
+            "name": "Medical Laboratory"
+        },
         "healthcare/midwife": {
             "icon": "hospital",
             "fields": [
@@ -7683,6 +7745,7 @@
                 "mtb/scale",
                 "mtb/scale/uphill",
                 "mtb/scale/imba",
+                "horse_scale",
                 "ref"
             ],
             "geometry": [
@@ -8258,7 +8321,8 @@
                 "smoothness",
                 "mtb/scale",
                 "mtb/scale/uphill",
-                "mtb/scale/imba"
+                "mtb/scale/imba",
+                "horse_scale"
             ],
             "geometry": [
                 "line"
@@ -9677,6 +9741,22 @@
             },
             "name": "Amusement Arcade"
         },
+        "leisure/beach_resort": {
+            "icon": "poi-beach",
+            "fields": [
+                "name",
+                "address",
+                "fee"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "beach_resort"
+            },
+            "name": "Beach Resort"
+        },
         "leisure/bird_hide": {
             "icon": "poi-binoculars",
             "fields": [
@@ -10599,6 +10679,7 @@
         "leisure/pitch/american_football": {
             "icon": "america-football",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10620,6 +10701,7 @@
         "leisure/pitch/baseball": {
             "icon": "baseball",
             "fields": [
+                "name",
                 "lit"
             ],
             "geometry": [
@@ -10640,6 +10722,7 @@
         "leisure/pitch/basketball": {
             "icon": "basketball",
             "fields": [
+                "name",
                 "surface",
                 "hoops",
                 "lit",
@@ -10663,6 +10746,7 @@
         "leisure/pitch/beachvolleyball": {
             "icon": "basketball",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10696,6 +10780,7 @@
         "leisure/pitch/boules": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "boules",
                 "surface",
                 "lit"
@@ -10722,6 +10807,7 @@
         "leisure/pitch/bowls": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10743,6 +10829,7 @@
         "leisure/pitch/cricket": {
             "icon": "cricket",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10764,6 +10851,7 @@
         "leisure/pitch/equestrian": {
             "icon": "horse-riding",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "building"
@@ -10792,6 +10880,7 @@
         "leisure/pitch/rugby_league": {
             "icon": "america-football",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10813,6 +10902,7 @@
         "leisure/pitch/rugby_union": {
             "icon": "america-football",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10834,6 +10924,7 @@
         "leisure/pitch/skateboard": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10855,6 +10946,7 @@
         "leisure/pitch/soccer": {
             "icon": "soccer",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -10878,6 +10970,7 @@
         "leisure/pitch/table_tennis": {
             "icon": "tennis",
             "fields": [
+                "name",
                 "lit",
                 "access_simple"
             ],
@@ -10902,6 +10995,7 @@
         "leisure/pitch/tennis": {
             "icon": "tennis",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "access_simple"
@@ -10924,6 +11018,7 @@
         "leisure/pitch/volleyball": {
             "icon": "basketball",
             "fields": [
+                "name",
                 "surface",
                 "lit"
             ],
@@ -16721,6 +16816,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -19335,6 +19431,28 @@
             },
             "name": "Theme Park"
         },
+        "tourism/trail_riding_station": {
+            "icon": "horse-riding",
+            "fields": [
+                "name",
+                "horse_stables",
+                "horse_riding",
+                "horse_dressage",
+                "address",
+                "phone",
+                "website",
+                "description"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "tourism": "trail_riding_station"
+            },
+            "name": "Trail Riding Station",
+            "matchScore": 2
+        },
         "tourism/viewpoint": {
             "icon": "poi-binoculars",
             "geometry": [
@@ -19879,7 +19997,9 @@
                 "name",
                 "ref_route",
                 "operator",
-                "network_foot"
+                "network_foot",
+                "description",
+                "distance"
             ],
             "geometry": [
                 "relation"
@@ -19896,7 +20016,9 @@
                 "name",
                 "ref_route",
                 "operator",
-                "network_horse"
+                "network_horse",
+                "description",
+                "distance"
             ],
             "geometry": [
                 "relation"
@@ -64928,6 +65050,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -64951,6 +65074,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -64974,6 +65098,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -64997,6 +65122,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65020,6 +65146,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65043,6 +65170,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65066,6 +65194,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65089,6 +65218,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65112,6 +65242,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65135,6 +65266,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65158,6 +65290,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65181,6 +65314,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65204,6 +65338,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65227,6 +65362,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65250,6 +65386,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65273,6 +65410,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65296,6 +65434,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65319,6 +65458,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65342,6 +65482,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65365,6 +65506,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65388,6 +65530,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65411,6 +65554,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65434,6 +65578,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65457,6 +65602,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65480,6 +65626,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65503,6 +65650,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65526,6 +65674,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65549,6 +65698,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65572,6 +65722,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",
@@ -65595,6 +65746,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "brand",
                 "second_hand",
                 "service/vehicle",
                 "opening_hours",

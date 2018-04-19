@@ -209,10 +209,6 @@
             }
         },
         "success": {
-            "view_on_osm": "OSM இல் பார்",
-            "facebook": "Facebook இல் பகிர்ந்து கொள்ள",
-            "twitter": "Twitter இல் பகிர்ந்து கொள்ள",
-            "google": "Google+ இல் பகிர்ந்து கொள்ள",
             "help_link_text": "விவரங்கள்"
         },
         "confirm": {

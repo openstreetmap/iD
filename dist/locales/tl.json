@@ -1,5 +1,8 @@
 {
     "tl": {
+        "icons": {
+            "remove": "tanggalin"
+        },
         "modes": {
             "add_area": {
                 "title": "Poligon",
@@ -38,11 +41,11 @@
             "start": {
                 "annotation": {
                     "line": "Nagsimula ng isang linya.",
-                    "area": "Nagsimula sa isang area o polygon."
+                    "area": "Nagsimula ng isang area o polygon."
                 }
             },
             "continue": {
-                "key": "a",
+                "key": "A",
                 "title": "Ipagpatuloy",
                 "description": "Ipagpatuloy ang linyang ito.",
                 "not_eligible": "Walang linyang maaring ipagpatuloy dito.",
@@ -264,6 +267,14 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Distansya"
+            },
+            "help": {
+                "from": "GALING"
+            }
+        },
         "undo": {
             "tooltip": "I-undo:{action}",
             "nothing": "Walang ma-undo"
@@ -312,6 +323,24 @@
         "contributors": {
             "list": "Edits nina {users}",
             "truncated_list": "Edits nina {users} at {count} iba pa"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "source": "Pinagmulan",
+                "description": "Paglalarawan"
+            },
+            "history": {
+                "key": "H",
+                "title": "Bersyon"
+            },
+            "location": {
+                "title": "Lokasyon"
+            },
+            "measurement": {
+                "location": "Lokasyon"
+            }
         },
         "geometry": {
             "point": "tuldok",
@@ -451,12 +480,7 @@
             }
         },
         "success": {
-            "edited_osm": "Nag-edit sa OSM!",
             "just_edited": "Nag-edit ka sa OpenStreetMap!",
-            "view_on_osm": "Tingnan sa OSM",
-            "facebook": "I-share sa Facebook",
-            "twitter": "I-share sa Twitter",
-            "google": "I-share sa Google+",
             "help_link_text": "Mga detalye",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -698,6 +722,15 @@
                 "amenity": {
                     "label": "Uri"
                 },
+                "animal_boarding": {
+                    "label": "Para sa hayop"
+                },
+                "animal_breeding": {
+                    "label": "Para sa hayop"
+                },
+                "animal_shelter": {
+                    "label": "Para sa hayop"
+                },
                 "area/highway": {
                     "label": "Uri"
                 },
@@ -754,11 +787,17 @@
                 "board_type": {
                     "label": "uri"
                 },
+                "boules": {
+                    "label": "Uri"
+                },
                 "boundary": {
                     "label": "Uri"
                 },
                 "brand": {
                     "label": "tatak"
+                },
+                "bridge": {
+                    "label": "Uri"
                 },
                 "building": {
                     "label": "Gusali"
@@ -768,6 +807,10 @@
                 },
                 "bunker_type": {
                     "label": "uri"
+                },
+                "cables": {
+                    "label": "Mga kable",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Direksyon (Paikot sa kanan)",
@@ -791,8 +834,17 @@
                 "castle_type": {
                     "label": "uri"
                 },
+                "clothes": {
+                    "label": "Mga damit"
+                },
+                "club": {
+                    "label": "Uri"
+                },
                 "collection_times": {
                     "label": "Mga oras ng koleksyon"
+                },
+                "communication_multi": {
+                    "label": "Mga uri ng komunikasyon"
                 },
                 "construction": {
                     "label": "Uri"
@@ -800,6 +852,9 @@
                 "contact/webcam": {
                     "label": "URL ng webcam",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "Nilalaman"
                 },
                 "country": {
                     "label": "bansa"
@@ -815,6 +870,9 @@
                 },
                 "currency_multi": {
                     "label": "Uri ng pera"
+                },
+                "cutting": {
+                    "label": "Uri"
                 },
                 "cycle_network": {
                     "label": "Network"
@@ -861,11 +919,55 @@
                 "denotation": {
                     "label": "denotasyon"
                 },
+                "description": {
+                    "label": "Paglalarawan"
+                },
+                "devices": {
+                    "label": "Mga aparato",
+                    "placeholder": "1, 2, 3..."
+                },
+                "direction": {
+                    "label": "Direksyon (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Direksyon",
+                    "options": {
+                        "E": "Silangan",
+                        "ENE": "Silangan-Hilagang-silangan",
+                        "ESE": "Silangan-Timog-silangan",
+                        "N": "Hilaga",
+                        "NE": "Hilagang-silangan",
+                        "NNE": "Hilaga-Hiligang-silangan",
+                        "NNW": "Hilaga-Hilagang-kanluran",
+                        "NW": "Hilagang-kanluran",
+                        "S": "Timog",
+                        "SE": "Timog-silangan",
+                        "SSE": "Timog-Timog-silangan",
+                        "SSW": "Timog-Timog-kanluran",
+                        "SW": "Timog-kanluran",
+                        "W": "Kanluran",
+                        "WNW": "Kanluran-Hilagang-kanluran",
+                        "WSW": "Kanluran-Timog-kanluran"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Direksyon"
+                },
+                "direction_vertex": {
+                    "label": "Direksyon",
+                    "options": {
+                        "both": "Pareho / Lahat"
+                    }
+                },
                 "display": {
                     "label": "Ipakita"
                 },
                 "dock": {
                     "label": "uri"
+                },
+                "duration": {
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "options": {
@@ -875,6 +977,9 @@
                 },
                 "email": {
                     "placeholder": "example@example.com"
+                },
+                "emergency": {
+                    "label": "Kagipitan"
                 },
                 "entrance": {
                     "label": "Uri"
@@ -896,9 +1001,41 @@
                     }
                 },
                 "fire_hydrant/type": {
+                    "label": "Uri",
+                    "options": {
+                        "wall": "Pader"
+                    }
+                },
+                "fixme": {
+                    "label": "Ayusin Mo Ako"
+                },
+                "ford": {
                     "label": "Uri"
                 },
+                "gender": {
+                    "label": "Kasarian",
+                    "options": {
+                        "female": "Babae",
+                        "male": "Lalaki"
+                    },
+                    "placeholder": "Hindi alam"
+                },
+                "generator/method": {
+                    "label": "Paraan"
+                },
+                "generator/source": {
+                    "label": "Pinagmulan"
+                },
                 "generator/type": {
+                    "label": "Uri"
+                },
+                "government": {
+                    "label": "Uri"
+                },
+                "hashtags": {
+                    "placeholder": "#halimbawa"
+                },
+                "healthcare": {
                     "label": "Uri"
                 },
                 "highway": {
@@ -907,16 +1044,42 @@
                 "historic": {
                     "label": "Uri"
                 },
+                "hoops": {
+                    "placeholder": "1, 2, 4..."
+                },
+                "iata": {
+                    "label": "IATA"
+                },
+                "icao": {
+                    "label": "ICAO"
+                },
+                "incline_steps": {
+                    "options": {
+                        "down": "Baba",
+                        "up": "Taas"
+                    }
+                },
+                "industrial": {
+                    "label": "Uri"
+                },
                 "information": {
                     "label": "Uri"
                 },
                 "internet_access": {
                     "options": {
-                        "wlan": "Wifi"
+                        "no": "Hindi",
+                        "wlan": "Wifi",
+                        "yes": "Oo"
                     }
                 },
                 "landuse": {
                     "label": "Uri"
+                },
+                "lanes": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "layer": {
+                    "placeholder": "0"
                 },
                 "leisure": {
                     "label": "Uri"

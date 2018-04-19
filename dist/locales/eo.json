@@ -1,5 +1,10 @@
 {
     "eo": {
+        "icons": {
+            "information": "informoj",
+            "remove": "forigi",
+            "undo": "malfari"
+        },
         "modes": {
             "add_area": {
                 "title": "Areo",
@@ -145,7 +150,9 @@
                     "vertex": "Kunigis linion/areon al alia linio.",
                     "line": "Kunigis linion/areon al linio.",
                     "area": "Kunigis linion/areon al areo."
-                }
+                },
+                "relation": "Ĉi tiuj elementoj ne povas esti konektitaj, ĉar ili havas konfliktajn rolojn de rilatoj.",
+                "restriction": "Ĉi tiuj elementoj ne povas esti konektitaj, ĉar tio ĉi detruus la rilaton “{relation}”."
             },
             "disconnect": {
                 "title": "Malkunigi",
@@ -401,6 +408,7 @@
                 "key": "H",
                 "title": "Historio",
                 "selected": "{n} elektitaj",
+                "no_history": "Neniu historio (nova elemento)",
                 "version": "Versio",
                 "last_edit": "Lasta redakto",
                 "edited_by": "Redaktita de",
@@ -638,14 +646,19 @@
             }
         },
         "success": {
-            "edited_osm": "Redaktis OSM!",
             "just_edited": "Vi ĵus redaktis OpenStreetMap!",
-            "view_on_osm": "Montri en OSM",
-            "facebook": "Kunhavigi per Fejsbuko",
-            "twitter": "Kunhavigi per Twitter",
-            "google": "Kunhavigi per Google+",
-            "help_html": "Viaj ŝanĝoj povos aperi en la “Norma” tavolo post kelkaj minutoj. Aktualigo de aliaj tavoloj kaj aliaj elementoj povos okupi pli da tempo.",
-            "help_link_text": "Detaloj"
+            "thank_you": "Dankon por plibonigi la mapon.",
+            "thank_you_location": "Dankon por plibonigi la mapon ĉirkaŭ {where}.",
+            "help_html": "Viaj ŝanĝoj aperos en OpenStreetMap post kelkaj minutoj. Aktualigo de aliaj mapoj povas okupi pli da tempo.",
+            "help_link_text": "Detaloj",
+            "view_on_osm": "Montri ŝanĝoj ĉe OSM",
+            "changeset_id": "Via ŝanĝaro #: {changeset_id}",
+            "like_osm": "Ĉu OpenStreetMap plaĉas al vi? Komunikiĝu kun aliaj:",
+            "more": "Pli",
+            "events": "Okazaĵoj",
+            "languages": "Lingvoj: {languages}",
+            "missing": "Ĉu io mankas en la listo?",
+            "tell_us": "Sciigu nin!"
         },
         "confirm": {
             "okay": "Bone",
@@ -1772,6 +1785,9 @@
                 "display": {
                     "label": "Vidigilo"
                 },
+                "distance": {
+                    "label": "Tuta distanco"
+                },
                 "dock": {
                     "label": "Speco"
                 },
@@ -1811,6 +1827,9 @@
                 },
                 "except": {
                     "label": "Esceptoj"
+                },
+                "faces": {
+                    "label": "Flankoj"
                 },
                 "fax": {
                     "label": "Telekopiilo",
@@ -1923,6 +1942,39 @@
                     "label": "Korboj",
                     "placeholder": "1, 2, 4…"
                 },
+                "horse_dressage": {
+                    "label": "Dresrajdado",
+                    "options": {
+                        "equestrian": "Jes",
+                        "undefined": "Ne"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Ĉeval-rajdado",
+                    "options": {
+                        "horse_riding": "Jes",
+                        "undefined": "Ne"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Ĉeval-rajdada malfacileco",
+                    "options": {
+                        "common": "Facila: neniuj problemoj kaj malfacilaĵoj (implicite).",
+                        "critical": "Malfacilega: transrajdebla nur por spertaj rajdistoj kaj ĉevaloj, grandaj obstakloj, pontoj povas ne subteni vian pezon.",
+                        "dangerous": "Tre malfacilega: transrajdebla nur por tre spertaj rajdistoj kaj ĉevaloj dum bona vetero, deĉevaliĝu.",
+                        "demanding": "Ete malfacila: malebena vojo, kelkaj malfacilaj pasejoj.",
+                        "difficult": "Malfacila: mallarĝa kaj malebena vojo, povas enhavi transsaltendajn baraĵojn kaj mallarĝajn pasejojn.",
+                        "impossible": "Netransrajdebla: vojo aŭ ponto netrairebla por ĉevaloj.; tre mallarĝa, malhelpaĵoj kiel ŝtupetaroj; danĝera por vivo."
+                    },
+                    "placeholder": "Malfacila, danĝera…"
+                },
+                "horse_stables": {
+                    "label": "Ĉeval-domo",
+                    "options": {
+                        "stables": "Jes",
+                        "undefined": "Ne"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1941,6 +1993,9 @@
                 },
                 "indoor": {
                     "label": "Interno"
+                },
+                "industrial": {
+                    "label": "Speco"
                 },
                 "information": {
                     "label": "Speco"
@@ -2060,6 +2115,10 @@
                 },
                 "maxspeed": {
                     "label": "Rapidlimo",
+                    "placeholder": "40, 50, 60…"
+                },
+                "maxspeed/advisory": {
+                    "label": "Konsilinda rapidlimo",
                     "placeholder": "40, 50, 60…"
                 },
                 "maxstay": {
@@ -2408,7 +2467,7 @@
                     "label": "Speco de servo",
                     "options": {
                         "crossover": "Trakforko",
-                        "siding": "Preterpasejo",
+                        "siding": "Kromtrako",
                         "spur": "Branĉtrako",
                         "yard": "Ranĝadstaciaj trakoj"
                     }
@@ -2650,6 +2709,17 @@
                     "label": "Speco",
                     "placeholder": "Norma"
                 },
+                "usage_rail": {
+                    "label": "Uzo",
+                    "options": {
+                        "branch": "branĉa",
+                        "industrial": "industria",
+                        "main": "ĉefa",
+                        "military": "armea",
+                        "test": "testa",
+                        "tourism": "turisma"
+                    }
+                },
                 "vending": {
                     "label": "Specoj de varoj"
                 },
@@ -2746,6 +2816,10 @@
                     "name": "Anonctabulego",
                     "terms": "anonctabulo,reklamo,spamo,afiŝo,afisho,afisxo"
                 },
+                "advertising/column": {
+                    "name": "Reklam-kolono",
+                    "terms": "reklamkolono,kolumno,afiŝkolono"
+                },
                 "aerialway": {
                     "name": "Kablotransporto"
                 },
@@ -2830,6 +2904,10 @@
                 "aeroway/terminal": {
                     "name": "Flugstacio",
                     "terms": "flughaveno,terminalo"
+                },
+                "allotments/plot": {
+                    "name": "Parcelo de familia ĝardeno",
+                    "terms": "terpeco;parcelo;ĝardeno"
                 },
                 "amenity": {
                     "name": "Servejo"
@@ -3059,6 +3137,10 @@
                     "name": "Bazaro",
                     "terms": "foirejo,foiro,komercejo"
                 },
+                "amenity/monastery": {
+                    "name": "Monaĥeja tereno",
+                    "terms": "monahhejo,monahxejo,abatejo,klostro,klaŭstro"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcikla parkumejo",
                     "terms": "motorciklejo,motociklejo"
@@ -3263,6 +3345,10 @@
                     "name": "Vendilo de cigaredoj",
                     "terms": "cigaredo,vendmaŝino"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Vendilo de kafo",
+                    "terms": "kafmaŝino,teo"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Vendilo de kondomoj",
                     "terms": "kondomo,vendmaŝimo,penisingo"
@@ -3271,6 +3357,14 @@
                     "name": "Vendilo de trinkaĵoj",
                     "terms": "vendilo de trinkajxoj,vendilo de trinkajsoj,trinkaĵoj"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Vendilo de elektronikaĵoj",
+                    "terms": "ŝargiloj,piloj,kabloj,memoriloj,memorbastonetoj,SD-kartoj,memorkartoj"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Vendilo de etenditaj moneroj",
+                    "terms": "moneretendilo,etendilo,memoraĵoj"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Vendilo de saketoj por fekaĵoj",
                     "terms": "fekajhoj,fekajxoj,merdo,hundo"
@@ -3278,6 +3372,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Vendilo de virinaj higienaĵoj",
                     "terms": "menstrusorbiloj,tambonoj,persona higieno"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Vendilo de manĝaĵo",
+                    "terms": "manghajho,mangxajxo"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Vendilo de benzino",
+                    "terms": "benzinstacio,diseloleo,benzino,brulaĵo,LPG,biodisel"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Vendilo de glaciaĵoj",
+                    "terms": "glaciaĵo"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Vendilo de gazetoj"
@@ -3297,6 +3403,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Vendilo de vojimpostoj",
                     "terms": "vojimposto,vojimpostejo,vojimpostilo"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Vendilo de poŝtmarkoj",
+                    "terms": "poŝtmarkoj"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Vendilo de dolĉaĵoj",
@@ -3369,6 +3479,10 @@
                 "attraction/drop_tower": {
                     "name": "Defala turo (allogaĵo)",
                     "terms": "turo,drop tower"
+                },
+                "attraction/maze": {
+                    "name": "Labirinto",
+                    "terms": "vojenigmo,enigmo"
                 },
                 "attraction/pirate_ship": {
                     "name": "Pirata ŝipo (allogaĵo)",
@@ -3999,6 +4113,10 @@
                     "name": "Hospico",
                     "terms": "hospico,flegejo"
                 },
+                "healthcare/laboratory": {
+                    "name": "Medicina laboratorio",
+                    "terms": "medicina labo,labo,sanĝkontrolejo"
+                },
                 "healthcare/midwife": {
                     "name": "Akuŝisto",
                     "terms": "akuŝistino,naskiĝcentro,naskiĝdomo,gravedeco"
@@ -4100,6 +4218,10 @@
                 "highway/motorway_link": {
                     "name": "Aŭtovoja ligilo",
                     "terms": "enveturejo,elveturejo,aŭtoŝoseo,nodo"
+                },
+                "highway/passing_place": {
+                    "name": "Preterpasejo",
+                    "terms": "pasejo,preterveturejo"
                 },
                 "highway/path": {
                     "name": "Vojeto (piedpremita)",
@@ -4460,6 +4582,10 @@
                     "name": "Salono de ludoj",
                     "terms": "ludejo,amuzaparatoj,videoludoj,paĉinko,flipero,bilardo"
                 },
+                "leisure/beach_resort": {
+                    "name": "Sablobordo administrata (kun oportunaĵoj)",
+                    "terms": "plaĝo,strando,ripozcentro,sunbanejo"
+                },
                 "leisure/bird_hide": {
                     "name": "Bird-observejo",
                     "terms": "birdobservejo"
@@ -4575,6 +4701,10 @@
                 "leisure/nature_reserve": {
                     "name": "Natur-rezervejo",
                     "terms": "naturrezervejo,naturprotektejo,rezervejo,naturparko,nacia parko,konservejo"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Seĝoj eksterdome",
+                    "terms": "seghoj,segxoj,benko,altano,teraso"
                 },
                 "leisure/park": {
                     "name": "Parko",
@@ -4704,6 +4834,10 @@
                     "name": "Mineja koridoro",
                     "terms": "minejkoridoro,minejo horizontala,minejgalerio,galerio"
                 },
+                "man_made/antenna": {
+                    "name": "Anteno",
+                    "terms": "masto"
+                },
                 "man_made/breakwater": {
                     "name": "Ond-rompilo",
                     "terms": "ondorompilo,ondrompilo,digo,ĝeto"
@@ -4754,6 +4888,10 @@
                 "man_made/observation": {
                     "name": "Vidturo",
                     "terms": "observturo,turo"
+                },
+                "man_made/observatory": {
+                    "name": "Observejo",
+                    "terms": "astronomia,vetera,teleskopo"
                 },
                 "man_made/petroleum_well": {
                     "name": "Puto nafta",
@@ -4878,6 +5016,10 @@
                 "natural/heath": {
                     "name": "Erikejo",
                     "terms": "arbustaro,herbejo"
+                },
+                "natural/mud": {
+                    "name": "Kota tereno",
+                    "terms": "koto;malsekejo;ŝlimejo"
                 },
                 "natural/peak": {
                     "name": "Montpinto",
@@ -5360,7 +5502,7 @@
                     "terms": "stacidomo"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "Stacio koblovoja",
+                    "name": "Stacio kablovoja",
                     "terms": "telferstacio,telfera stacio"
                 },
                 "public_transport/station_bus": {
@@ -5463,8 +5605,8 @@
                     "terms": "relŝuo,relfino,finrelo"
                 },
                 "railway/disused": {
-                    "name": "Forlasita relvojo",
-                    "terms": "eksa fervojlinio,trako,relvojo"
+                    "name": "Neuzata relvojo",
+                    "terms": "eksa fervojlinio,trako,relvojo,forlasita fervojlinio"
                 },
                 "railway/funicular": {
                     "name": "Funikularo",
@@ -5915,6 +6057,10 @@
                     "name": "Dombesta vendejo",
                     "terms": "dombestoj,hejmbestoj,bestoj,kobajo,kuniklo,papago"
                 },
+                "shop/pet_grooming": {
+                    "name": "Dombesta beligejo",
+                    "terms": "frizejo,hartondisto,hundoj,katoj,hejmbestoj"
+                },
                 "shop/photo": {
                     "name": "Fotografia vendejo",
                     "terms": "fotografio,fotografarto"
@@ -6134,6 +6280,10 @@
                     "name": "Amuzparko",
                     "terms": "amuzejo,temparko,distroparko"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Pensiono por ĉevalistoj",
+                    "terms": "ĉevalejo,ĉevalhotelo"
+                },
                 "tourism/viewpoint": {
                     "name": "Belvidejo",
                     "terms": "videjo,vidindaĵo,rigardejo"
@@ -6218,16 +6368,20 @@
                     "terms": "malpermeso,malantaŭen,U-forma,,Uforma,prohibo"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Turno maldekstren devigita",
-                    "terms": "ordono,devigo,maldekstren"
+                    "name": "Nur turno maldekstren",
+                    "terms": "maldekstren,liven"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Turno dekstren devigita",
-                    "terms": "ordono,devigo,maldekstren"
+                    "name": "Nur turno dekstren",
+                    "terms": "dekstren"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Veturo rekten devigita",
-                    "terms": "ordono,devigo,rekten,antaŭen"
+                    "name": "Nur veturo rekten",
+                    "terms": "rekten,antaŭen"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Nur turno malantaŭen",
+                    "terms": "malantaŭen,reveturen,U-turno"
                 },
                 "type/route": {
                     "name": "Kurso",
@@ -6390,7 +6544,7 @@
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
-                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 14.",
+                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
                 "name": "Detala fotaro de DigitalGlobe - fot-dato"
             },
             "DigitalGlobe-Standard": {
@@ -6404,7 +6558,7 @@
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
-                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 14.",
+                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 13.",
                 "name": "Norma fotaro de DigitalGlobe - fot-dato"
             },
             "EsriWorldImagery": {
@@ -6487,6 +6641,9 @@
             "US-TIGER-Roads-2017": {
                 "description": "Flave = publikaj map-datumoj de Usona popolnombrado. Ruĝe = datumoj ne trovitaj en OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Surtavolo de arbar-kultivaj vojoj"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6584,7 +6741,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map-kaheloj de Stamen Design, laŭ CC BY 3.0"
+                    "text": "Map-kaheloj de Stamen Design, laŭ CC BY 3.0. Datumoj de OpenStreetMap, laŭ ODbL"
                 },
                 "name": "Stamen Terrain"
             },
@@ -6599,6 +6756,12 @@
                     "text": "Mapoj: © Thunderforest, datumoj: © kontribuintoj de OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "OSM-Reddit": {
+                "name": "OpenStreetMap ĉe Reddit",
+                "description": "/r/openstreetmap/ estas bonega loko por sciiĝi pli pri OpenStreetMap. Demandu pri io ajn!"
             }
         }
     }
