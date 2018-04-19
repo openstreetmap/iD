@@ -63,20 +63,20 @@
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
 }
 
-.mode-draw-line .way.hover,
-.mode-draw-area .way.hover,
-.mode-add-line  .way.hover,
-.mode-add-area  .way.hover,
-.mode-drag-node .way.hover {
+.mode-draw-line .way.target,
+.mode-draw-area .way.target,
+.mode-add-line  .way.target,
+.mode-add-area  .way.target,
+.mode-drag-node .way.target {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw-connect-line.png) 9 9, crosshair; /* FF */
 }
 
-.mode-draw-line .vertex.hover,
-.mode-draw-area .vertex.hover,
-.mode-add-line  .vertex.hover,
-.mode-add-area  .vertex.hover,
-.mode-drag-node .vertex.hover {
+.mode-draw-line .vertex.target,
+.mode-draw-area .vertex.target,
+.mode-add-line  .vertex.target,
+.mode-add-area  .vertex.target,
+.mode-drag-node .vertex.target {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw-connect-vertex.png) 9 9, crosshair; /* FF */
 }
