@@ -321,11 +321,11 @@ export function uiRawTagEditor(context) {
             // Wrapped in a setTimeout in case it's being called from a blur
             // handler. Without the setTimeout, the call to `content` would
             // wipe out the pending value change.
-            setTimeout(function() {
+            window.setTimeout(function() {
                 _showBlank = true;
                 content(wrap);
                 list.selectAll('li:last-child input.key').node().focus();
-            }, 0);
+            }, 1);
         }
     }
 
