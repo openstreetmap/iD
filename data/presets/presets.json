@@ -4360,7 +4360,6 @@
                 "access"
             ],
             "geometry": [
-                "point",
                 "vertex",
                 "line"
             ],
@@ -4417,8 +4416,8 @@
                 "access"
             ],
             "geometry": [
-                "point",
-                "vertex"
+                "vertex",
+                "line"
             ],
             "tags": {
                 "barrier": "lift_gate"
@@ -4441,7 +4440,6 @@
                 "access"
             ],
             "geometry": [
-                "point",
                 "vertex"
             ],
             "tags": {

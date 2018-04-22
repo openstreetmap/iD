@@ -1856,7 +1856,8 @@
             "value": "lift_gate",
             "description": "Lift Gate",
             "object_types": [
-                "node"
+                "node",
+                "way"
             ],
             "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/roadblock-15.svg?sanitize=true"
         },
