@@ -94,7 +94,7 @@ _Reach out to nearby mappers and say hello!_
 * Guard code to avoid deleting a turn twice ([#4968], [#4928])
 * When connecting nodes, prefer to keep an existing (not new) node ([#4974], [#4674])
 * When boundaries are shared with roads, consider them as roads for purposes of filtering ([#4973])
-* Fix bug when deleting an only restriction on a bidirectional road ([#4951])
+* Fix bug when deleting a "No U-turn" restriction on a bidirectional road ([#4951])
 * Prevent clicking in restriction editor from selecting nearby text
 * Handle "entry only" and "exit only" variants of 'stop' and 'platform' when identifying PTv2 members ([#4946])
 * Fix ';'-space delimiting within `conditional` opening hours style files, add tests ([#4925])
@@ -119,7 +119,7 @@ _Reach out to nearby mappers and say hello!_
 * Add `faces=*` field to clock preset ([#4962], [#4961], thanks [@Xavier-J-Ortiz])
 * Add preset for `leisure=beach_resort` ([#4956], [#4955], thanks [@Xavier-J-Ortiz])
 * Add more kinds of vending machines, change vending to multiple select field ([#4888])
-* Add `usage` `voltage` `frequency` fields to several rail presets ([#4919])
+* Add `usage`, `voltage` and `frequency` fields to several rail presets ([#4919])
 * Add `industrial=*` field to landuse industrial preset ([#4949], thanks [@hikemaniac])
 * Add preset for `shop=pet_grooming` ([#4942], [#4939], thanks [@Xavier-J-Ortiz])
 * Add preset for Trail Riding Station, add fields to Horseback Riding and Hiking routes ([#4912], thanks [@NopMap])
@@ -176,6 +176,7 @@ _Reach out to nearby mappers and say hello!_
 [@Xavier-J-Ortiz]: https://github.com/Xavier-J-Ortiz
 [@hikemaniac]: https://github.com/hikemaniac
 [@NopMap]: https://github.com/NopMap
+[@obama]: https://github.com/obama
 [@umarpreet1]: https://github.com/umarpreet1
 
 
