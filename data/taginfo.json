@@ -515,7 +515,8 @@
             "value": "bureau_de_change",
             "description": "Currency Exchange",
             "object_types": [
-                "node"
+                "node",
+                "area"
             ],
             "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"
         },
