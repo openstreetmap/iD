@@ -642,8 +642,19 @@
         },
         "success": {
             "just_edited": "Muokkasit juuri OpenStreetMapia!",
+            "thank_you": "Kiitos avustasi!",
+            "thank_you_location": "Kiitos, että paransit karttaa paikassa {where}.",
+            "help_html": "Karttaan tehdyt muutokset ilmestyvät perinteiseen karttanäkymään muutaman minuutin kuluessa. Joidenkin ominaisuuksien ilmestyminen kartalle ja muutokset joihinkin karttanäkymiin voivat viedä kauemmin.",
             "help_link_text": "Tiedot",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Näytä muutokset OSM-kartalla",
+            "changeset_id": "Muutoskokoelman seurantatunnus: {changeset_id}",
+            "like_osm": "Tykkäätkö meistä? Kerro se muille:",
+            "more": "Lisää",
+            "events": "Tapahtumat",
+            "languages": "Kielet: {languages}",
+            "missing": "Puuttuuko listalta jotain?",
+            "tell_us": "Kerro meille!"
         },
         "confirm": {
             "okay": "OK",

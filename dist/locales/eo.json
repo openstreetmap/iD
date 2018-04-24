@@ -6643,6 +6643,7 @@
                 "name": "TIGER Roads 2017"
             },
             "US_Forest_Service_roads_overlay": {
+                "description": "Vojo: verda rando = neklasifikita, bruna rando = kampa vojo. Pavimo: helbruna plenigo = sablego, nigra = asfalto, griza = pavimita, blanka = tera, blua = betono, verda = herbo. Blankaj strioj = sezona vojo.",
                 "name": "Surtavolo de arbar-kultivaj vojoj"
             },
             "Waymarked_Trails-Cycling": {
@@ -6759,9 +6760,34 @@
             }
         },
         "community": {
+            "OSM-Facebook": {
+                "name": "OpenStreetMap ĉe Facebook",
+                "description": "Ŝatu nin ĉe Facebook por akiri novaĵojn pri OpenStreetMap."
+            },
+            "OSM-help": {
+                "name": "Helpo pri OpenStreetMap",
+                "description": "Demandu kaj akiru respondojn ĉe kreata de komunumo retejo.",
+                "extendedDescription": "{url} taŭgas por ĉiu, kiu bezonas helpon pri OpenStreetMap. Ne gravas ĉu vi estas komencanta mapisto aŭ havas teĥnikan demandon, ni estas tie ĉi por vin helpi!"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap ĉe Reddit",
                 "description": "/r/openstreetmap/ estas bonega loko por sciiĝi pli pri OpenStreetMap. Demandu pri io ajn!"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap ĉe Twitter",
+                "description": "Sekvi nin ĉe Twitter ĉe {url}"
+            },
+            "OSMF": {
+                "name": "Fondaĵo OpenStreetMap",
+                "description": "OSMF estas ne-profit-cela organizaĵo en Britujo, kiu subtenas la projekton OpenStreetMap",
+                "extendedDescription": "OSMF subtenas OpenStreetMap per regali, prizorgi servilojn gastigatajn OSM, organizi la ĉiujaran konferencon “State of the Map” kaj kunordigi volontulojn, kiuj evoluigas la mapon. Vi povas oferi vian helpon kaj havi opinion pri direkto de la projekto OpenStreetMap per aniĝi OSMF tie ĉi: {signupUrl}",
+                "events": {
+                    "sotm2018": {
+                        "name": "State of the Map 2018",
+                        "description": "Kunigu nin por 3 tagoj en Milano, Italujo por la ĉiujaran internacian konferencon pri OpenStreetMap por kunigi ĉiujn en la komunumo por sociumi, diskonigi kaj lerni.",
+                        "where": "Milano, Italujo"
+                    }
+                }
             }
         }
     }

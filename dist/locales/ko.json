@@ -1509,6 +1509,9 @@
                 "display": {
                     "label": "표시"
                 },
+                "distance": {
+                    "label": "총 거리"
+                },
                 "dock": {
                     "label": "유형"
                 },
@@ -1659,6 +1662,24 @@
                 "hoops": {
                     "label": "후프",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "예",
+                        "undefined": "아니오"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "예",
+                        "undefined": "아니오"
+                    }
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "예",
+                        "undefined": "아니오"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -3108,6 +3129,9 @@
                     "name": "자이로드롭",
                     "terms": "자이로드롭"
                 },
+                "attraction/maze": {
+                    "name": "미로"
+                },
                 "attraction/pirate_ship": {
                     "name": "바이킹",
                     "terms": "바이킹"
@@ -3258,6 +3282,12 @@
                 },
                 "building/entrance": {
                     "name": "입구/출구"
+                },
+                "building/farm": {
+                    "name": "농가"
+                },
+                "building/farm_auxiliary": {
+                    "name": "농장 건물"
                 },
                 "building/garage": {
                     "name": "차고",
@@ -3414,6 +3444,9 @@
                 "craft/caterer": {
                     "name": "요리 조달자",
                     "terms": "요리 조달자"
+                },
+                "craft/chimney_sweeper": {
+                    "name": "굴뚝 청소부"
                 },
                 "craft/clockmaker": {
                     "name": "시계공",
@@ -3690,6 +3723,9 @@
                 },
                 "healthcare/hospice": {
                     "name": "호스피스"
+                },
+                "healthcare/laboratory": {
+                    "name": "의학 연구소"
                 },
                 "healthcare/midwife": {
                     "name": "조산사",
@@ -4127,6 +4163,12 @@
                     "name": "성인용 게임방",
                     "terms": "도박,노름,슬롯머신"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "오락실"
+                },
+                "leisure/beach_resort": {
+                    "name": "해변 리조트"
+                },
                 "leisure/bird_hide": {
                     "name": "탐조대",
                     "terms": "감시대,전망대,조망대,새,조류"
@@ -4197,6 +4239,9 @@
                 "leisure/nature_reserve": {
                     "name": "자연 보호 구역",
                     "terms": "자연 보호 구역, 개발 제한 구역"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "야외 좌석 구역"
                 },
                 "leisure/park": {
                     "name": "공원",
@@ -5083,6 +5128,10 @@
                 "shop": {
                     "name": "상점",
                     "terms": "가게"
+                },
+                "shop/agrarian": {
+                    "name": "농업 용품 가게",
+                    "terms": "농기계,씨앗,종자,농약,살충제,비료,농기구"
                 },
                 "shop/alcohol": {
                     "name": "주류 상점",

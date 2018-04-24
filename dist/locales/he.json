@@ -150,7 +150,9 @@
                     "vertex": "חיבור של דרך לדרך אחרת.",
                     "line": "חיבור של דרך לקו.",
                     "area": "חיבור של דרך לשטח."
-                }
+                },
+                "relation": "לא ניתן לחבר תכונות אלה כיוון שיש להן תפקידים סותרים ביחס.",
+                "restriction": "לא ניתן לחבר תכונות אלה כיוון שזה עשוי להרוס יחס מסוג „{relation}”."
             },
             "disconnect": {
                 "title": "ניתוק",
@@ -217,6 +219,28 @@
                 "key": {
                     "long": "T",
                     "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "תכונה התהפכה לאורך הציר הארוך שלה.",
+                        "multiple": "מספר תכונות התהפכו סביב הציר הארוך שלהן."
+                    },
+                    "short": {
+                        "single": "תכונה התהפכה לאורך הציר הארוך שלה.",
+                        "multiple": "מספר תכונות התהפכו לאורך הציר הקצר שלהן."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "לא ניתן להפוך תכונה זו כיוון שטרם התקבלה לחלוטין.",
+                    "multiple": "לא ניתן להפוך תכונות אלו כיוון שטרם התקבלו לחלוטין."
+                },
+                "too_large": {
+                    "single": "לא ניתן להפוך תכונה זו כיוון שאין די שטח גלוי ממנה.",
+                    "multiple": "לא ניתן להפוך תכונות אלו כיוון שאין די שטח גלוי מהן."
+                },
+                "connected_to_hidden": {
+                    "single": "לא ניתן להפוך תכונה זו כיוון שהיא מקושרת לתכונה נסתרת.",
+                    "multiple": "לא ניתן להפוך תכונות אלו כיוון שחלקן מקושרות לתכונות נסתרות."
                 }
             },
             "rotate": {
@@ -825,6 +849,7 @@
                 "edit_relation_add": "כדי להוסיף תכונה ליחס, יש לבחור את התכונה ואז ללחוץ על הכפתור {add} הוספה באגף „כל היחסים” של עורך התכונות. ניתן לבחור מרשימה של יחסים קרובים או לבחור באפשרות „יחס חדש…”.",
                 "edit_relation_delete": "ניתן ללחוץ על הכפתור {delete} **מחיקה** כדי להסיר את התכונה הנבחרת מהיחס, היחס יימחק אוטומטית.",
                 "maintain_relation_h": "שימור יחסים",
+                "maintain_relation": "על פי רוב, iD ישמור על הקשרים אוטומטית בזמן העריכה. עליך לטפל במצבים בהם ישנן תכונות שהוחלפו שהן חלק מיחסים. למשל, מחיקת קטע מדרך וציור קטע דרך חדש שיחליף אותו, עליך להוסיף את הקטע החדש לאותם היחסים (נתיבים, הגבלות פניה וכו׳) כמו המקור.",
                 "relation_types_h": "סוגי יחסים",
                 "multipolygon_h": "רבי־מצולעים",
                 "multipolygon": "יחס *רב־מצולע* הוא קבוצה של תכונה *חיצונית* אחת או יותר ותכונה פנימית אחת או יותר. התכונות החיצוניות מגדירות את הגבולות החיצוניים של הרב־מצולע ואילו התכונות הפנימיות מגדירות תת־שטחים או חורים שנחתכו מחוץ לרב־מצולע.",
@@ -835,6 +860,8 @@
                 "turn_restriction_field": "כדי לערוך הגבלות פנייה, יש לבחור את הצומת בה דרך אחת או יותר נפגשות. עורך התכונות יציג שדה „הגבלות פנייה” שמכיל את דגם הצומת.",
                 "turn_restriction_editing": "בשדה „הגבלות פנייה” יש ללחוץ על דרך ה„מוצא” ולראות האם פניות מותרות או מוגבלות לכל אחת מדרכי ה„יעד”. ניתן ללחוץ על סמלי הפנייה כדי להחליף בין מורשה למוגבל. iD ייצור קשרים אוטומטית ויגדיר מוצא, מעבר ויעד לכללים בהתאם לבחירותיך.",
                 "route_h": "נתיבים",
+                "route": "יחס *מסלול* הוא קבוצה של תכונה אחת או יותר מסוג קו שמייצרות רשת של מסלולים, כגון מסלולי אוטובוס, מסלול רכבת או כביש מהיר.",
+                "route_add": "כדי להוסיף תכונה ליחס מסלול, יש לבחור את התכונה ולגלול למטה לאגף „כל היחסים” בעורך התכונות ואז ללחוץ על הכפתור {plus} הוספה כדי להוסיף את התכונה הזאת ליחס קיים בסביבה או ליחס חדש.",
                 "boundary_h": "גבולות",
                 "boundary": "יחס *גבול* הוא קבוצה של תכונה אחת או יותר מסוג קו שמייצרות גבול מנהלי יחד.",
                 "boundary_add": "כדי להוסיף תכונה ליחס גבול, יש לבחור את התכונה ולגלול לאגף „כל היחסים” בעורך התכונות ואז ללחוץ על {plus} כפתור ההוספה כדי להוסיף את התכונה הזאת ליחס קרוב נוכחי או ליחס חדש."
@@ -872,10 +899,13 @@
                     "about": {
                         "title": "על אודות",
                         "about": "שדה זה מאפשר לך לחקור ולשנות את מגבלות הפנייה. השדה מציג את דגם הצומת הנבחר לרבות דרכים קרובות שמחוברות אליו.",
-                        "from_via_to": "הגבלת פנייה תמיד מכילה את אחד מהבאים: **דרך מוצא** אחת, **דרך יעד** אחת וגם **מפרק מעבר** אחד או מספר **דרכי מעבר**."
+                        "from_via_to": "הגבלת פנייה תמיד מכילה את אחד מהבאים: **דרך מוצא** אחת, **דרך יעד** אחת וגם **מפרק מעבר** אחד או מספר **דרכי מעבר**.",
+                        "maxdist": "הסרגל „{distField}” שולט עד לאיזה מרחק לחפש דרכים נוספות מחוברות.",
+                        "maxvia": "הסרגל „{viaField}” שולט כמה דרכי ביניים יכללו בחיפוש. (עצה: כמה שיותר פשוט יותר טוב)"
                     },
                     "inspecting": {
                         "title": "חקירה",
+                        "about": "יש לעבור מעל כל מקטע **מוצא** כדי לצפות האם קיימות מגבלות פנייה. כל **יעד** יצויר בהצללה צבעונית שתסמן האם קיימת מגבלה.",
                         "from_shadow": "{fromShadow} **מקטע מוצא**",
                         "allow_shadow": "{allowShadow} **יעד מורשה**",
                         "restrict_shadow": "{restrictShadow} **יעד מוגבל**",
@@ -894,6 +924,7 @@
                     "tips": {
                         "title": "עצות",
                         "simple": "**להעדיף הגבלות פשוטות על פני הגבלות מורכבות.**",
+                        "simple_example": "למשל, יש להימנע מהגבלת פנייה בדרך ביניים במקרה שהגבלת פנייה בצומת מספיקה.",
                         "indirect": "**חלק מההגבלות מציגות את הטקסט „(עקיף)” והן מוצגות בצבע יותר בהיר.**",
                         "indirect_example": "הגבלות אלו קיימות עקב הגבלה אחרת בקרבת מקום. למשל, הגבלת „ישר בלבד” תיצור הגבלות „אין פנייה” לכל שאר הנתיבים שעוברים בצומת.",
                         "indirect_noedit": "לא ניתן לערוך הגבלות עקיפות. במקום, יש לערוך את המגבלה הישירה הקרובה."
@@ -1210,6 +1241,7 @@
                     "search": "חיפוש תכונות שתואמות את טקסט החיפוש"
                 },
                 "with_selected": {
+                    "title": "לאחר בחירת התכונה",
                     "edit_menu": "החלפת תצוגה של תפריט עריכה"
                 },
                 "vertex_selected": {
@@ -1243,6 +1275,8 @@
                     "rotate": "הטיית התכונות הנבחרות",
                     "orthogonalize": "יישור קו / פינות של איזור ריבועי",
                     "circularize": "עיגול פינות של קו סגור או שטח",
+                    "reflect_long": "היפוך תכונות לאורך הציר הארוך",
+                    "reflect_short": "היפוך תכונות לאורך הציר הקצר",
                     "delete": "מחיקת התכונות הנבחרות"
                 },
                 "commands": {
@@ -1750,6 +1784,9 @@
                 "display": {
                     "label": "הצגה"
                 },
+                "distance": {
+                    "label": "סך כל המרחק"
+                },
                 "dock": {
                     "label": "סוג"
                 },
@@ -1900,6 +1937,33 @@
                 "hoops": {
                     "label": "סלים",
                     "placeholder": "1, 2, 4"
+                },
+                "horse_dressage": {
+                    "label": "רכיבה אומנותית",
+                    "options": {
+                        "equestrian": "כן",
+                        "undefined": "לא"
+                    }
+                },
+                "horse_riding": {
+                    "label": "רכיבה על סוסים",
+                    "options": {
+                        "horse_riding": "כן",
+                        "undefined": "לא"
+                    }
+                },
+                "horse_scale": {
+                    "label": "קושי הרכיבה על סוסים",
+                    "options": {
+                        "common": "קל: אין בעיות או קשיים. (בררת מחדל)"
+                    }
+                },
+                "horse_stables": {
+                    "label": "אורוות רכיבה",
+                    "options": {
+                        "stables": "יש",
+                        "undefined": "אין"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -2366,6 +2430,7 @@
                 "service_rail": {
                     "label": "סוג שירות",
                     "options": {
+                        "spur": "דורבן",
                         "yard": "גינה"
                     }
                 },
@@ -3985,6 +4050,9 @@
                     "name": "מכון יוגה",
                     "terms": "מכון יוגה"
                 },
+                "leisure/fitness_station/stairs": {
+                    "name": "מדרגות התעמלות"
+                },
                 "leisure/garden": {
                     "name": "גן",
                     "terms": "גן"
@@ -4016,6 +4084,9 @@
                 "leisure/nature_reserve": {
                     "name": "שמורת טבע",
                     "terms": "שמורת טבע"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "אזור ישיבה בחוץ"
                 },
                 "leisure/park": {
                     "name": "פארק",
@@ -4065,6 +4136,12 @@
                     "name": "שולחן פינג פונג",
                     "terms": "שולחן פינג פונג"
                 },
+                "leisure/pitch/tennis": {
+                    "name": "מגרש טניס"
+                },
+                "leisure/pitch/volleyball": {
+                    "name": "מגרש כדורעף"
+                },
                 "leisure/playground": {
                     "name": "גן שעשועים",
                     "terms": "גן שעשועים"
@@ -4101,6 +4178,15 @@
                     "name": "קו",
                     "terms": "קו"
                 },
+                "man_made": {
+                    "name": "מעשה ידי אדם"
+                },
+                "man_made/antenna": {
+                    "name": "אנטנה"
+                },
+                "man_made/breakwater": {
+                    "name": "שובר גלים"
+                },
                 "man_made/bridge": {
                     "name": "גשר",
                     "terms": "גשר"
@@ -4113,9 +4199,21 @@
                     "name": "מנוף",
                     "terms": "מנוף"
                 },
+                "man_made/embankment": {
+                    "name": "סוללה"
+                },
+                "man_made/flagpole": {
+                    "name": "עמוד דגל"
+                },
                 "man_made/lighthouse": {
                     "name": "מגדלור",
                     "terms": "מגדלור"
+                },
+                "man_made/monitoring_station": {
+                    "name": "תחנת ניטור"
+                },
+                "man_made/observation": {
+                    "name": "מגדל תצפית"
                 },
                 "man_made/petroleum_well": {
                     "name": "באר נפט",
@@ -4128,6 +4226,12 @@
                 "man_made/silo": {
                     "name": "סילו",
                     "terms": "סילו"
+                },
+                "man_made/surveillance": {
+                    "name": "מעקב"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "מצלמת מעקב"
                 },
                 "man_made/tower": {
                     "name": "מגדל",
@@ -4213,9 +4317,15 @@
                     "name": "שדה בור",
                     "terms": "שדה בור"
                 },
+                "natural/mud": {
+                    "name": "בוץ"
+                },
                 "natural/peak": {
                     "name": "פסגה",
                     "terms": "פסגה"
+                },
+                "natural/saddle": {
+                    "name": "אוכף"
                 },
                 "natural/sand": {
                     "name": "חול",
@@ -4511,6 +4621,12 @@
                     "name": "אומגה",
                     "terms": "אומגה"
                 },
+                "point": {
+                    "name": "נקודה"
+                },
+                "power": {
+                    "name": "חשמל"
+                },
                 "power/generator": {
                     "name": "גנרטור",
                     "terms": "גנרטור"
@@ -4523,9 +4639,30 @@
                     "name": "טורבינת רוח",
                     "terms": "טורבינת רוח"
                 },
+                "power/line": {
+                    "name": "קו מתח"
+                },
+                "power/minor_line": {
+                    "name": "קו מתח משני"
+                },
+                "power/plant": {
+                    "name": "תחנת כוח"
+                },
+                "power/pole": {
+                    "name": "עמוד חשמל"
+                },
+                "power/sub_station": {
+                    "name": "תחנה תת קרקעית"
+                },
+                "power/substation": {
+                    "name": "תחנה תת קרקעית"
+                },
                 "power/switch": {
                     "name": "מתג חשמל",
                     "terms": "מתג חשמל"
+                },
+                "power/tower": {
+                    "name": "מגדל מתח גבוה"
                 },
                 "public_transport/linear_platform": {
                     "name": "תחנת רכבת \\ רציף",
@@ -4649,6 +4786,9 @@
                 "railway/abandoned": {
                     "name": "מסילת רכבת לא בשימוש"
                 },
+                "railway/buffer_stop": {
+                    "name": "אוטם מסילה"
+                },
                 "railway/disused": {
                     "name": "מסילת רכבת לא בשימוש",
                     "terms": "מסילת רכבת לא בשימוש"
@@ -4693,6 +4833,9 @@
                 },
                 "railway/tram_stop": {
                     "name": "תחנת חשמלית"
+                },
+                "relation": {
+                    "name": "יחס"
                 },
                 "roundabout": {
                     "name": "מעגל תנועה"
@@ -4769,9 +4912,15 @@
                     "name": "חנות אופניים",
                     "terms": "חנות אופניים"
                 },
+                "shop/bookmaker": {
+                    "name": "סוכנות הימורים"
+                },
                 "shop/books": {
                     "name": "חנות ספרים",
                     "terms": "חנות ספרים"
+                },
+                "shop/boutique": {
+                    "name": "בוטיק"
                 },
                 "shop/butcher": {
                     "name": "קצב",
@@ -5050,6 +5199,9 @@
                 "shop/pet": {
                     "name": "חנות לחיות מחמד",
                     "terms": "חנות לחיות מחמד"
+                },
+                "shop/pet_grooming": {
+                    "name": "חנות לטיפוח חיות מחמד"
                 },
                 "shop/photo": {
                     "name": "חנות צילום",
@@ -5353,6 +5505,18 @@
                     "name": "אין פניית פרסה",
                     "terms": "אין פניית פרסה"
                 },
+                "type/restriction/only_left_turn": {
+                    "name": "פנייה שמאלה בלבד"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "פנייה ימינה בלבד"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "ישר בלבד"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "פרסה בלבד"
+                },
                 "type/route": {
                     "name": "נתיב",
                     "terms": "נתיב"
@@ -5528,6 +5692,7 @@
                 "attribution": {
                     "text": "תנאים ומשוב"
                 },
+                "description": "גבולות תמונות רקע ותאריכי צילום. תוויות מופיעות בתקריב ברמה 13 ומעלה.",
                 "name": "דיגיטל גלוב' תצלומי אוויר"
             },
             "EsriWorldImagery": {
@@ -5610,6 +5775,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "צהוב = מידע ציבורי מממשלת ארה\"ב\nאדום = מידע שלא נמצא בOSM",
                 "name": "מידע טופולוגי ארה\"ב  2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "כביש מהיר: תחימה ירוקה = ללא סיווג. תחימה חומה = מסלול. פני שטח: חצץ = מילוי חום בהיר, אספלט = שחור, מרוצף = אפור, אדמה =לבן, בטון = כחול, דשא = ירוק. עונתי = פסים לבנים",
+                "name": "שכבת דרכי יערות בארה״ב"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -5725,6 +5894,21 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
+            },
+            "osm-gh-facebook": {
+                "name": "הפייסבוק של OpenStreetMap גאנה",
+                "description": "קבוצת פייסבוק לאנשים שמתעניינים ב־OpenStreetMap."
+            },
+            "osm-gh-twitter": {
+                "name": "הטוויטר של OpenStreetMap גאנה",
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
+            },
+            "talk-gh": {
+                "name": "קבוצת הדיוור Talk-gh",
+                "description": "Talk-gh היא קבוצת הדיוור הרשמית של קהילת OSM בגאנה"
+            },
             "osm-mg-facebook": {
                 "name": "קבוצת הפייסבוק של OpenStreetMap במדגסקר ",
                 "description": "קבוצת פייסבוק במלגשי לאנשים שמתעניינים ב־OpenStreetMap."
@@ -5741,7 +5925,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap הודו - מיפוי שכונות התנדבותי",
                 "description": "שיפור OpenStreetMap בהודו",
-                "extendedDescription": "מעניין אותך מיפוי בהודו? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
+                "extendedDescription": "מעניין אותך מיפוי בהודו? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{url}. כולם מוזמנים!"
             },
             "OSM-india-mailinglist": {
                 "name": "קבוצת הדיוור של OpenStreetMap הודו",
@@ -5750,6 +5934,9 @@
             "OSM-india-twitter": {
                 "name": "הטוויטר של OpenStreetMap הודו",
                 "description": "אנחנו במרחק ציוץ: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "תנועת החומרה והתכנה החופשית - פייסבוק"
             },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap אינדונזיה",
@@ -5768,10 +5955,26 @@
                 "name": "הטוויטר של OpenStreetMap יפן",
                 "description": "תגית הקבץ בטוויטר: {url}"
             },
+            "OSM-korea-telegram": {
+                "name": "ערוץ הטלגרם של OSM קוריאה"
+            },
+            "OSM-MY-forum": {
+                "name": "הפורום של OpenStreetMap מלזיה",
+                "description": "הפורום הרשמי של OpenStreetMap מלזיה"
+            },
+            "OSM-MY-matrix": {
+                "name": "ערוץ ה־Riot של OpenStreetMap מלזיה",
+                "description": "כל הממפים מוזמנים! ניתן להירשם בכתובת {signupUrl}"
+            },
             "OSM-MNG-facebook": {
                 "name": "OpenStreetMap מונגוליה",
                 "description": "שיפור OpenStreetMap במונגוליה",
                 "extendedDescription": "מעניין אותך מיפוי במונגוליה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap מיאנמר",
+                "description": "שיפור OpenStreetMap במיאנמר",
+                "extendedDescription": "מעניין אותך מיפוי במיאנמר? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap נפאל",
@@ -5815,6 +6018,31 @@
                 "name": "קבוצת הדיוור של OpenStreetMap טאיוואן",
                 "description": "Talk-tw היא קבוצת הדיוור הרשמית לקהילות לטובת דיונים בנושא טאיוואן"
             },
+            "at-forum": {
+                "name": "הפורום של OpenStreetMap אוסטריה",
+                "description": "הפורום הרשמי לשאלות על OpenStreetMap בתוך וסביב אוסטריה"
+            },
+            "at-mailinglist": {
+                "name": "קבוצת הדיוור Talk-at",
+                "description": "Talk-at היא קבוצת הדיוור הרשמית של קהילת OSM האוסטרית"
+            },
+            "at-twitter": {
+                "name": "הטוויטר של OpenStreetMap אוסטריה",
+                "description": "הטוויטר של OpenStreetMap אוסטריה: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap אוסטריה",
+                "description": "מאגר למידע על OpenStreetMap באוסטריה"
+            },
+            "be-facebook": {
+                "name": "קהילת OpenStreetMap בלגיה"
+            },
+            "be-forum": {
+                "description": "הפורום המקוון של OpenStreetMap בלגיה"
+            },
+            "be-irc": {
+                "name": "ה־IRC של OpenStreetMap בלגיה"
+            },
             "be-matrix": {
                 "description": "כל הממפים מוזמנים! ניתן להירשם בכתובת {signupUrl}"
             },
@@ -5823,14 +6051,72 @@
                 "description": "OSM בלגיה בטוויטר: {url}"
             },
             "byosm": {
-                "name": "OpenStreetMap בלרוס"
+                "name": "OpenStreetMap בלרוס",
+                "description": "קבוצת הטלגרם של OpenStreetMap בלארוס"
             },
             "talk-cz-mailinglist": {
                 "name": "קבוצת הדיוור Talk-cz",
                 "description": "Talk-cz היא קבוצת הדיוור הרשמית של הקהילה הצ׳כית"
             },
+            "de-berlin-mailinglist": {
+                "name": "קבוצת הדיוור של ברלין",
+                "description": "זאת רשימת הדיוור לקהילת OSM בברלין"
+            },
+            "de-berlin-telegram": {
+                "name": "‎@osmberlin בטלגרם",
+                "description": "הטלגרם של OpenStreetMap ברלין"
+            },
+            "de-berlin-twitter": {
+                "name": "הטוויטר של OpenStreetMap ברלין",
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "קבוצת הדיוור Talk-es",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בספרד"
+            },
             "OSM-ES-telegram": {
-                "name": "@OSMes ב־Telegram"
+                "name": "@OSMes ב־Telegram",
+                "description": "הטלגרם של OpenStreetMap ספרד"
+            },
+            "fr-facebook": {
+                "name": "הפייסבוק של OpenStreetMap צרפת",
+                "description": "הפייסבוק של OpenStreetMap צרפת"
+            },
+            "fr-forum": {
+                "name": "הפורום המקוון של OpenStreetMap צרפת",
+                "description": "הפורום המקוון של OpenStreetMap צרפת"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap צרפת ב־IRC"
+            },
+            "fr-mailinglist": {
+                "name": "קבוצת הדיוור Talk-fr",
+                "description": "קבוצת הדיוור Talk-fr"
+            },
+            "fr-twitter": {
+                "name": "הטוויטר של OpenStreetMap צרפת",
+                "description": "הטוויטר של OpenStreetMap צרפת: {url}"
+            },
+            "gb-mailinglist": {
+                "name": "קבוצת הדיוור Talk-gb"
+            },
+            "it-mailinglist": {
+                "name": "קבוצת הדיוור Talk-it",
+                "description": "Talk-at היא קבוצת הדיוור הרשמית של קהילת OSM האיטלקית"
+            },
+            "it-twitter": {
+                "name": "הטוויטר של OpenStreetMap איטליה"
+            },
+            "talk-it-lazio": {
+                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}"
+            },
+            "se-mailinglist": {
+                "name": "קבוצת הדיוור Talk-se",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בשוודיה"
+            },
+            "se-twitter": {
+                "name": "הטוויטר של OpenStreetMap שוודיה",
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
             },
             "OSM-CA-Slack": {
                 "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}."
@@ -5845,9 +6131,16 @@
                 "name": "OpenStreetMap בוסטון",
                 "description": "ממפים ומשתמשים ב־OpenStreetMap באזור בוסטון"
             },
+            "OSM-Chattanooga": {
+                "name": "OSM צ׳טנוגה",
+                "description": "קבוצת משתמשי OpenStreetMap בצ׳טנוגה"
+            },
             "OSM-Colorado": {
                 "name": "OpenStreetMap קולורדו",
                 "description": "ממפים ומשתמשים ב־OpenStreetMap במדינת קולורדו, ארה״ב"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap העיר ניו יורק"
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap פורטלנד",
@@ -5895,11 +6188,11 @@
                 "description": "ניתן להצטרף לקהילה של OpenStreetMap ארגנטינה בפייסבוק"
             },
             "OSM-AR-mailinglist": {
-                "name": "קבוצת הדיוור Talk-ar"
+                "name": "קבוצת הדיוור Talk-ar",
+                "description": "קבוצת דיוור היסטורית. כמעט לא בשימוש כיום."
             },
             "OSM-AR-telegram": {
-                "name": "הטלגרם של OpenStreetMap ארגנטינה",
-                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
+                "name": "הטלגרם של OpenStreetMap ארגנטינה"
             },
             "OSM-AR-twitter": {
                 "name": "הטוויטר של OpenStreetMap ארגנטינה",
@@ -5921,8 +6214,70 @@
                 "name": "הטוויטר של OpenStreetMap ברזיל",
                 "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
             },
+            "OSM-CL-facebook": {
+                "name": "הפייסבוק של OpenStreetMap ׳ילה",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap צ׳ילה בפייסבוק"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "קבוצת הדיוור Talk-cl",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בצ׳ילה"
+            },
+            "OSM-CL-telegram": {
+                "name": "הטלגרם של OpenStreetMap צ׳ילה",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap צ׳ילה בטלגרם"
+            },
+            "OSM-CL-twitter": {
+                "name": "הטוויטר של OpenStreetMap צ׳ילה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSM-CO-facebook": {
+                "name": "הפייסבוק של OpenStreetMap קולומביה"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "קבוצת הדיוור Talk-co",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בקולומביה"
+            },
+            "OSM-CO-twitter": {
+                "name": "הטוויטר של OpenStreetMap קולומביה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap קולומביה"
+            },
+            "OSM-PE-facebook": {
+                "name": "הפייסבוק של OpenStreetMap פרו",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap פרו בפייסבוק"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "קבוצת הדיוור Talk-pe",
+                "description": "קבוצת הדיוור הרשמית ל־OpenStreetMap פרו"
+            },
+            "OSM-PE-twitter": {
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap פרו"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap בפייסבוק"
+            },
+            "OSM-help": {
+                "name": "העזרה של OpenStreetMap"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap ב־Reddit"
+            },
+            "OSM-Twitter": {
+                "name": "הטוויטר של OpenStreetMap",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSMF": {
+                "name": "קרן OpenStreetMap",
+                "events": {
+                    "sotm2018": {
+                        "where": "מילאנו, איטליה"
+                    }
+                }
             }
         }
     }

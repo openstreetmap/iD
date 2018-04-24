@@ -5818,8 +5818,7 @@
         "community": {
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Kortagerð með þáttöku nágranna",
-                "description": "Bætum OpenStreetMap-gögn á Indlandi",
-                "extendedDescription": "Kortlagning á Indlandi? Ertu með spurningar, viltu ná sambandi við aðra? Gakktu til liðs við okkur á {Url}. Allir eru velkomnir!"
+                "description": "Bætum OpenStreetMap-gögn á Indlandi"
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap Japan samfélagið",
@@ -5984,26 +5983,22 @@
             },
             "OSM-AR-facebook": {
                 "name": "Facebook-hópur OpenStreetMap Argentína",
-                "description": "Gakktu til liðs við OpenStreetMap Argentína hópinn á Facebook",
-                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+                "description": "Gakktu til liðs við OpenStreetMap Argentína hópinn á Facebook"
             },
             "OSM-AR-forum": {
                 "name": "Vefspjall (forum) OpenStreetMap Argentína",
-                "description": "Gakktu til liðs við OpenStreetMap Argentína vefspjallið",
-                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+                "description": "Gakktu til liðs við OpenStreetMap Argentína vefspjallið"
             },
             "OSM-AR-irc": {
                 "name": "IRC-rás OpenStreetMap Argentína",
                 "description": "Taktu þátt á #osm-ar á irc.oftc.net (gátt 6667)"
             },
             "OSM-AR-mailinglist": {
-                "name": "Talk-ar póstlistinn",
-                "description": "Póstlisti til að ræða OpenStreetMap í Argentínu"
+                "name": "Talk-ar póstlistinn"
             },
             "OSM-AR-telegram": {
                 "name": "Telegram-hópur OpenStreetMap Argentína",
-                "description": "Gakktu til liðs við OpenStreetMap Argentína hópinn á Telegram",
-                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+                "description": "Gakktu til liðs við OpenStreetMap Argentína hópinn á Telegram"
             },
             "OSM-AR-twitter": {
                 "name": "Twitter-hópur OpenStreetMap Argentína",

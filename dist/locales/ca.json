@@ -5080,8 +5080,7 @@
             },
             "OSM-AR-telegram": {
                 "name": "Telegram d'OpenStreetMap Argentina",
-                "description": "Uneix-te a la comunitat argentina d'OpenStreetMap a Telegram",
-                "extendedDescription": "Uneix-te a la comunitat per aprendre més sobre OpenStreetMap, pregunta o participa a les nostres reunions. Tothom és benvingut!"
+                "description": "Uneix-te a la comunitat argentina d'OpenStreetMap a Telegram"
             },
             "OSM-AR-twitter": {
                 "name": "Twitter d'Argentina d'OpenStreetMap",
