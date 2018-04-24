@@ -1,0 +1,14 @@
+{
+    "icon": "poi-beach",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "natural": "reef"
+    },
+    "terms": [
+        "reef"
+    ],
+    "name": "Reef"
+}
