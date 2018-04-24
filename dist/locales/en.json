@@ -6695,6 +6695,7 @@
                 "name": "TIGER Roads 2017"
             },
             "US_Forest_Service_roads_overlay": {
+                "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
                 "name": "U.S. Forest Roads Overlay"
             },
             "Waymarked_Trails-Cycling": {
