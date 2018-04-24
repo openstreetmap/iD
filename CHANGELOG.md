@@ -28,6 +28,38 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.8.1
+##### April 24, 2018
+
+#### :sparkles: Usability
+* Linkify subreddit in community description ([#4997])
+
+[#4997]: https://github.com/openstreetmap/iD/issues/4997
+
+#### :bug: Bugfixes
+
+* Avoid reversing ways when using the join operation ([#4872])
+* Fix join-line and join-point cursors ([#4887])
+* Fix tabbing between fields in the tag editor on Firefox ([#4991])
+* Don't add empty `source` tag on a changeset ([#4993])
+
+[#4993]: https://github.com/openstreetmap/iD/issues/4993
+[#4991]: https://github.com/openstreetmap/iD/issues/4991
+[#4887]: https://github.com/openstreetmap/iD/issues/4887
+[#4872]: https://github.com/openstreetmap/iD/issues/4872
+
+#### :rocket: Presets
+* Change `amenity=bureau_de_change` to allow tagging as a building/area ([#5005])
+* Remove point as allowable geometry from `barrier=gate` ([#5004])
+* Add `brand=*` field to `shop=car` preset ([#4998], [#4999], thanks [@hikemaniac])
+
+[#5005]: https://github.com/openstreetmap/iD/issues/5005
+[#5004]: https://github.com/openstreetmap/iD/issues/5004
+[#4999]: https://github.com/openstreetmap/iD/issues/4999
+[#4998]: https://github.com/openstreetmap/iD/issues/4998
+[@hikemaniac]: https://github.com/hikemaniac
+
+
 # 2.8.0
 ##### April 16, 2018
 
