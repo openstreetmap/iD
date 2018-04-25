@@ -5125,6 +5125,15 @@
         },
         {
             "key": "natural",
+            "value": "reef",
+            "description": "Reef",
+            "object_types": [
+                "node",
+                "area"
+            ]
+        },
+        {
+            "key": "natural",
             "value": "ridge",
             "description": "Ridge",
             "object_types": [

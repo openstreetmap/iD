@@ -5078,6 +5078,10 @@
                     "name": "Peak",
                     "terms": "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
                 },
+                "natural/reef": {
+                    "name": "Reef",
+                    "terms": "barrier,coral,ocean,sand,shoal"
+                },
                 "natural/ridge": {
                     "name": "Ridge",
                     "terms": "crest"

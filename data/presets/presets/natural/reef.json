@@ -8,7 +8,11 @@
         "natural": "reef"
     },
     "terms": [
-        "reef"
+        "barrier",
+        "coral",
+        "ocean",
+        "sand",
+        "shoal"
     ],
     "name": "Reef"
 }
