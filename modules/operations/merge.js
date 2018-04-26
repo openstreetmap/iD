@@ -78,25 +78,30 @@ export function operationMerge(selectedIDs, context) {
 
 
     operation.tooltip = function() {
-        var j = join.disabled(context.graph());
-        var m = merge.disabled(context.graph());
-        var p = mergePolygon.disabled(context.graph());
-        var n = mergeNodes.disabled(context.graph());
+        var j = join.disabled(context.graph());          // 'not_eligible', 'not_adjacent', 'restriction', 'conflicting_tags'
+        var m = merge.disabled(context.graph());         // 'not_eligible'
+        var p = mergePolygon.disabled(context.graph());  // 'not_eligible', 'incomplete_relation'
+        var n = mergeNodes.disabled(context.graph());    // 'not_eligible', 'relation', 'restriction'
 
-        if (j === 'restriction' && m && p && n) {
-            return t('operations.merge.restriction',
-                { relation: context.presets().item('type/restriction').name() });
-        }
-
-        if (p === 'incomplete_relation' && j && m && n) {
-            return t('operations.merge.incomplete_relation');
-        }
-
+        // disabled for one of various reasons
         if (j && m && p && n) {
-            return t('operations.merge.' + j);
-        }
+            if (j === 'restriction' || n === 'restriction') {
+                return t('operations.merge.restriction',
+                    { relation: context.presets().item('type/restriction').name() });
 
-        return t('operations.merge.description');
+            } else if (p === 'incomplete_relation') {
+                return t('operations.merge.incomplete_relation');
+
+            } else if (n === 'relation') {
+                return t('operations.merge.relation');
+
+            } else {
+                return t('operations.merge.' + j);
+            }
+
+        } else {
+            return t('operations.merge.description');
+        }
     };
 
 

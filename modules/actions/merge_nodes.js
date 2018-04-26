@@ -30,6 +30,7 @@ export function actionMergeNodes(nodeIDs) {
 
 
     var action = function(graph) {
+        if (nodeIDs.length < 2) return graph;
         var toLoc = chooseLoc(graph);
 
         for (var i = 0; i < nodeIDs.length; i++) {
@@ -41,7 +42,14 @@ export function actionMergeNodes(nodeIDs) {
     };
 
 
-    action.disabled = function (graph) {
+    action.disabled = function(graph) {
+        if (nodeIDs.length < 2) return 'not_eligible';
+
+        for (var i = 0; i < nodeIDs.length; i++) {
+            var entity = graph.entity(nodeIDs[i]);
+            if (entity.type !== 'node') return 'not_eligible';
+        }
+
         return actionConnect(nodeIDs).disabled(graph);
     };
 
