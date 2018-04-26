@@ -1,9 +1,5 @@
 describe('iD.actionMergeNodes', function () {
 
-    function has(arr, findVal) {
-        return arr.some(function(val) { return val === findVal; });
-    }
-
     describe('#disabled', function () {
         it('enabled for both internal and endpoint nodes', function() {
             //
@@ -28,6 +24,54 @@ describe('iD.actionMergeNodes', function () {
     });
 
 
+    it('merges two isolated nodes, averaging loc', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'a', loc: [0, 0] }),
+            iD.osmNode({ id: 'b', loc: [4, 4] })
+        ]);
+
+        graph = iD.actionMergeNodes(['a', 'b'])(graph);
+
+        expect(graph.hasEntity('a')).to.be.undefined;
+
+        var survivor = graph.hasEntity('b');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.loc).to.eql([2, 2], 'average loc');
+    });
+
+
+    it('merges two isolated nodes, merging tags, and keeping loc of the interesting node', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'a', loc: [0, 0], tags: { highway: 'traffic_signals' }}),
+            iD.osmNode({ id: 'b', loc: [4, 4] })
+        ]);
+
+        graph = iD.actionMergeNodes(['a', 'b'])(graph);
+
+        expect(graph.hasEntity('a')).to.be.undefined;
+
+        var survivor = graph.hasEntity('b');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals' }, 'merge all tags');
+        expect(survivor.loc).to.eql([0, 0], 'use loc of interesting node');
+    });
+
+
+    it('merges two isolated nodes, merging tags, and averaging loc of both interesting nodes', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'a', loc: [0, -2], tags: { highway: 'traffic_signals' } }),
+            iD.osmNode({ id: 'b', loc: [0,  2], tags: { crossing: 'zebra' } })
+        ]);
+        graph = iD.actionMergeNodes(['a', 'b'])(graph);
+
+        expect(graph.hasEntity('a')).to.be.undefined;
+
+        var survivor = graph.hasEntity('b');
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'zebra' }, 'merge all tags');
+        expect(survivor.loc).to.eql([0, 0], 'average loc of both interesting nodes');
+    });
+
+
     it('merges two nodes along a single way', function() {
         //
         //  scenerio:         merge b,c:
@@ -45,10 +89,10 @@ describe('iD.actionMergeNodes', function () {
 
         expect(graph.hasEntity('b')).to.be.undefined;
 
-        var c = graph.hasEntity('c');
-        expect(c).to.be.an.instanceof(iD.osmNode);
-        expect(c.loc).to.eql([1, 2]);
-        expect(graph.parentWays(c).length).to.equal(1);
+        var survivor = graph.hasEntity('c');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.loc).to.eql([1, 2]);
+        expect(graph.parentWays(survivor).length).to.equal(1);
     });
 
 
@@ -76,10 +120,10 @@ describe('iD.actionMergeNodes', function () {
 
         expect(graph.hasEntity('b')).to.be.undefined;
 
-        var d = graph.hasEntity('d');
-        expect(d).to.be.an.instanceof(iD.osmNode);
-        expect(d.loc).to.eql([0, 1]);
-        expect(graph.parentWays(d).length).to.equal(2);
+        var survivor = graph.hasEntity('d');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.loc).to.eql([0, 1]);
+        expect(graph.parentWays(survivor).length).to.equal(2);
     });
 
 
@@ -114,22 +158,10 @@ describe('iD.actionMergeNodes', function () {
         expect(graph.hasEntity('b')).to.be.undefined;
         expect(graph.hasEntity('d')).to.be.undefined;
 
-        var d = graph.hasEntity('e');
-        expect(d).to.be.an.instanceof(iD.osmNode);
-        expect(d.loc).to.eql([0, 2]);
-        expect(graph.parentWays(d).length).to.equal(3);
+        var survivor = graph.hasEntity('e');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.loc).to.eql([0, 0]);
+        expect(graph.parentWays(survivor).length).to.equal(3);
     });
 
-
-    it('merges tags of nodes', function() {
-        var graph = iD.coreGraph([
-            iD.osmNode({ id: 'a', loc: [0, -2], tags: { highway: 'traffic_signals' } }),
-            iD.osmNode({ id: 'b', loc: [0,  2], tags: { crossing: 'zebra' } })
-        ]);
-        graph = iD.actionMergeNodes(['a', 'b'])(graph);
-
-        var b = graph.hasEntity('b');
-        expect(b.loc).to.eql([0, 0]);
-        expect(b.tags).to.eql({ highway: 'traffic_signals', crossing: 'zebra' });
-    });
 });

@@ -1,55 +1,48 @@
-import _sum from 'lodash-es/sum';
-import _extend from 'lodash-es/extend';
-
-import { osmNode } from '../osm/node';
+import { actionConnect } from './connect';
+import { geoVecAdd, geoVecScale } from '../geo';
 
 
-export function actionMergeNodes(ids) {
-    function getSelectedEntities(graph) {
-        return ids.map(function(id) { return graph.entity(id); });
+// `actionMergeNodes` is just a combination of:
+//
+// 1. move all the nodes to a common location
+// 2. `actionConnect` them
+
+export function actionMergeNodes(nodeIDs) {
+
+    // If there is a single "interesting" node, use that as the location.
+    // Otherwise return the average location of all the nodes.
+    function chooseLoc(graph) {
+        if (!nodeIDs.length) return null;
+        var sum = [0,0];
+        var interestingCount = 0;
+        var interestingLoc;
+
+        for (var i = 0; i < nodeIDs.length; i++) {
+            var node = graph.entity(nodeIDs[i]);
+            if (node.hasInterestingTags()) {
+                interestingLoc = (++interestingCount === 1) ? node.loc : null;
+            }
+            sum = geoVecAdd(sum, node.loc);
+        }
+
+        return interestingLoc || geoVecScale(sum, 1 / nodeIDs.length);
     }
 
-    function calcAverageLoc(nodes) {
-        return [
-            _sum(nodes.map(function(node) { return node.loc[0]; })) / nodes.length,
-            _sum(nodes.map(function(node) { return node.loc[1]; })) / nodes.length
-        ];
-    }
-
-    function collectTags(entities) {
-       return entities.reduce(function(tags, entity) { return _extend(tags, entity.tags); }, {});
-    }
-
-    function replaceWithinWays(newNode) {
-        return function (graph, node) {
-            return graph.parentWays(node).reduce(function (graph, way) {
-                return graph.replace(way.replaceNode(node.id, newNode.id));
-            }, graph);
-        };
-    }
-
-    function removeFromGraph(graph, entity) {
-        return graph.remove(entity);
-    }
 
     var action = function(graph) {
-        var nodes = getSelectedEntities(graph),
-            newNode = new osmNode({ id: newNodeId, loc: calcAverageLoc(nodes), tags: collectTags(nodes) });
+        var toLoc = chooseLoc(graph);
 
-        graph = graph.replace(newNode);
-        graph = nodes.reduce(replaceWithinWays(newNode), graph);
-        graph = nodes.reduce(removeFromGraph, graph);
-        return graph;
+        for (var i = 0; i < nodeIDs.length; i++) {
+            var node = graph.entity(nodeIDs[i]);
+            graph = graph.replace(node.move(toLoc));
+        }
+
+        return actionConnect(nodeIDs)(graph);
     };
 
+
     action.disabled = function (graph) {
-        function isNotWayNode (entity) { return entity.type !== 'node' || graph.parentWays(entity) <= 0; }
-
-        var entities = getSelectedEntities(graph);
-
-        if (entities.some(isNotWayNode)) {
-            return 'not_eligible';
-        }
+        return actionConnect(nodeIDs).disabled(graph);
     };
 
     return action;
