@@ -1,21 +1,26 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { osmNode, osmRelation, osmWay } from '../osm/index';
+import _clone from 'lodash-es/clone';
+import _isEmpty from 'lodash-es/isEmpty';
+import _map from 'lodash-es/map';
 
+import { json as d3_json } from 'd3-request';
+
+import {
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
+import { osmNode, osmRelation, osmWay } from '../osm/index';
 import { actionAddEntity, actionChangeTags } from '../actions/index';
 
-// import { utilDetect } from '../util/detect';
 import { t } from '../util/locale';
-
 import fromEsri from 'esri-to-geojson';
-
 import polygonArea from 'area-polygon';
 import polygonIntersect from 'turf-intersect';
 import polygonBuffer from 'turf-buffer';
 import pointInside from 'turf-inside';
 
+
 export function svgGeoService(projection, context, dispatch) {
-    // var detected = utilDetect();
 
     function init() {
         if (svgGeoService.initialized) return;  // run once
@@ -32,7 +37,7 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     }
 
-    drawGeoService.processGeoFeature = function(selectfeature, preset) {
+    drawGeoService.processGeoFeature = function(selectfeature) {
         // when importing an object, accept users' changes to keys
         var convertedKeys = Object.keys(this.fields());
         var additionalKeys = Object.keys(selectfeature.properties);
@@ -84,12 +89,14 @@ export function svgGeoService(projection, context, dispatch) {
         return selectfeature;
     };
 
+
     drawGeoService.pane = function() {
         if (!this.geoservicepane) {
-            this.geoservicepane = d3.selectAll('.geoservice-pane');
+            this.geoservicepane = d3_selectAll('.geoservice-pane');
         }
         return this.geoservicepane;
     };
+
 
     drawGeoService.enabled = function(_) {
         if (!arguments.length) return svgGeoService.enabled;
@@ -98,10 +105,12 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     };
 
+
     drawGeoService.hasData = function() {
         var geojson = drawGeoService.geojson();
-        return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
+        return (!(_isEmpty(geojson) || _isEmpty(geojson.features)));
     };
+
 
     drawGeoService.preset = function(preset) {
         // get / set an individual preset, or reset to null
@@ -172,11 +181,11 @@ export function svgGeoService(projection, context, dispatch) {
 
             // special geo circumstances
             if (preset.id === 'address') {
-                return d3.selectAll('.point-in-polygon').classed('must-show', true);
+                return d3_selectAll('.point-in-polygon').classed('must-show', true);
             } else if (preset.id.indexOf('cycle') > -1) {
-                return d3.selectAll('.merge-lines').classed('must-show', true);
+                return d3_selectAll('.merge-lines').classed('must-show', true);
             } else if (preset.id.indexOf('building') > -1) {
-                return d3.selectAll('.overlap-buildings').classed('must-show', true);
+                return d3_selectAll('.overlap-buildings').classed('must-show', true);
             } else {
                 //console.log(preset.id);
             }
@@ -198,11 +207,12 @@ export function svgGeoService(projection, context, dispatch) {
         }
 
         // reset UI for point-in-polygon and merge-lines
-        d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings')
+        d3_selectAll('.point-in-polygon, .merge-lines, .overlap-buildings')
             .classed('must-show', false)
             .selectAll('input')
                 .property('checked', false);
     };
+
 
     drawGeoService.geojson = function(gj) {
         if (!arguments.length) return drawGeoService.datastore;
@@ -210,15 +220,15 @@ export function svgGeoService(projection, context, dispatch) {
 
         var gjids = {};
         var obj = this;
-        var pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
-        var mergeLines = d3.selectAll('.merge-lines input').property('checked');
-        var overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
+        var pointInPolygon = d3_selectAll('.point-in-polygon input').property('checked');
+        var mergeLines = d3_selectAll('.merge-lines input').property('checked');
+        var overlapBuildings = d3_selectAll('.overlap-buildings input').property('checked');
 
         function fetchVisibleBuildings(callback, selector) {
-            var buildings = d3.selectAll(selector || 'path.tag-building');
-            _.map(buildings, function (buildinglist2) {
-                _.map(buildinglist2, function (buildinglist) {
-                    _.map(buildinglist, function (building) {
+            var buildings = d3_selectAll(selector || 'path.tag-building');
+            _map(buildings, function(buildinglist2) {
+                _map(buildinglist2, function(buildinglist) {
+                    _map(buildinglist, function(building) {
                         callback(building);
                     });
                 });
@@ -241,7 +251,7 @@ export function svgGeoService(projection, context, dispatch) {
             function areaFix(polygon) {
                 var area = 0;
                 if (polygon.geometry.type === 'MultiPolygon') {
-                    _.map(polygon.geometry.coordinates, function(section) {
+                    _map(polygon.geometry.coordinates, function(section) {
                         area += polygonArea(section[0]);
                     });
                 } else {
@@ -260,7 +270,7 @@ export function svgGeoService(projection, context, dispatch) {
             return Math.max(overlap1, overlap2);
         }
 
-        _.map(gj.features || [], function(d) {
+        _map(gj.features || [], function(d) {
             var props, nodes, ln, way, rel;
             function makeEntity(loc_or_nodes) {
                 props = {
@@ -314,12 +324,12 @@ export function svgGeoService(projection, context, dispatch) {
 
             function getBuildingPoly(building) {
                 // retrieve GeoJSON for this building if it isn't already stored in gjids { }
-                var wayid = d3.select(building).attr('class').split(' ')[4];
+                var wayid = d3_select(building).attr('class').split(' ')[4];
                 var ent;
                 if (!gjids[wayid]) {
                     var nodes = [];
                     ent = context.entity(wayid);
-                    _.map(ent.nodes, function(nodeid) {
+                    _map(ent.nodes, function(nodeid) {
                         var node = context.entity(nodeid);
                         nodes.push(node.loc);
                     });
@@ -398,13 +408,13 @@ export function svgGeoService(projection, context, dispatch) {
                 // merge the active import GeoJSON attributes (d.properties) into item with wayid
                 var ent = context.entity(wayid);
                 if (!ent.importOriginal) {
-                    ent.importOriginal = _.clone(ent.tags);
+                    ent.importOriginal = _clone(ent.tags);
                 }
 
-                var originalProperties = _.clone(ent.tags);
+                var originalProperties = _clone(ent.tags);
 
                 var keys = Object.keys(d.properties);
-                _.map(keys, function(key) {
+                _map(keys, function(key) {
                     originalProperties[key] = d.properties[key];
                 });
 
@@ -415,14 +425,14 @@ export function svgGeoService(projection, context, dispatch) {
                     'merged import item tags'
                 );
                 setTimeout(function() {
-                    d3.selectAll('.layer-osm .' + wayid).classed('import-edited', true);
+                    d3_selectAll('.layer-osm .' + wayid).classed('import-edited', true);
                 }, 250);
             }
 
             function matchingRoads(importLine) {
                 var matches = [];
                 fetchVisibleRoads(function(road) {
-                    var wayid = d3.select(road).attr('class').split(' ')[3];
+                    var wayid = d3_select(road).attr('class').split(' ')[3];
                     if (1 * wayid.substring(1) < 0) {
                         // don't apply to new drawn roads
                         return;
@@ -433,7 +443,7 @@ export function svgGeoService(projection, context, dispatch) {
                     if (!gjids[wayid]) {
                         var nodes = [];
                         ent = context.entity(wayid);
-                        _.map(ent.nodes, function(nodeid) {
+                        _map(ent.nodes, function(nodeid) {
                             var node = context.entity(nodeid);
                             nodes.push(node.loc);
                         });
@@ -518,7 +528,7 @@ export function svgGeoService(projection, context, dispatch) {
                         var mergeRoads = matchingRoads(importPart);
 
                         /*
-                        _.map(mergeRoads, function(mergeRoadWayId) {
+                        _map(mergeRoads, function(mergeRoadWayId) {
 
                         });
                         */
@@ -655,7 +665,7 @@ export function svgGeoService(projection, context, dispatch) {
         if (url.indexOf('outFields=') === -1) {
             var allFields = drawGeoService.fields();
             var selectFields = [];
-            _.map(Object.keys(allFields), function (field) {
+            _map(Object.keys(allFields), function(field) {
                 if (allFields[field] && field.indexOf('add_') !== 0) {
                     selectFields.push(field);
                 }
@@ -691,7 +701,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
 
         var that = this;
-        d3.json(url, function(err, data) {
+        d3_json(url, function(err, data) {
             if (err) {
                 // console.log('GeoService URL did not load');
                 // console.error(err);
@@ -704,7 +714,7 @@ export function svgGeoService(projection, context, dispatch) {
                     alert(t('geoservice.exceeded_limit') + data.features.length);
                 }
 
-                _.map(jsondl.features, function(selectfeature) {
+                _map(jsondl.features, function(selectfeature) {
                     return that.processGeoFeature(selectfeature, that.preset());
                 });
 
