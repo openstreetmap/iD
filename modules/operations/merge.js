@@ -1,8 +1,10 @@
 import { t } from '../util/locale';
+
 import {
     actionChangePreset,
     actionJoin,
     actionMerge,
+    actionMergeNodes,
     actionMergePolygon
 } from '../actions';
 
@@ -13,32 +15,37 @@ import { modeSelect } from '../modes';
 export function operationMerge(selectedIDs, context) {
 
     function updatePresetTags(newGraph, ids) {
-        var id = ids[0],
-            newEntity = newGraph.hasEntity(id);
+        var id = ids[0];
+        var newEntity = newGraph.hasEntity(id);
 
         if (!newEntity) return;
-
         var newPreset = context.presets().match(newEntity, newGraph);
-
         context.replace(actionChangePreset(id, null, newPreset), operation.annotation());
     }
 
 
-    var join = actionJoin(selectedIDs),
-        merge = actionMerge(selectedIDs),
-        mergePolygon = actionMergePolygon(selectedIDs);
+    var join = actionJoin(selectedIDs);
+    var merge = actionMerge(selectedIDs);
+    var mergePolygon = actionMergePolygon(selectedIDs);
+    var mergeNodes = actionMergeNodes(selectedIDs);
 
 
     var operation = function() {
-        var origGraph = context.graph(),
-            action;
+        var doUpdateTags;
+        var action;
 
-        if (!join.disabled(origGraph)) {
+        if (!join.disabled(context.graph())) {
+            doUpdateTags = false;
             action = join;
-        } else if (!merge.disabled(origGraph)) {
+        } else if (!merge.disabled(context.graph())) {
+            doUpdateTags = true;
             action = merge;
-        } else {
+        } else if (!mergePolygon.disabled(context.graph())) {
+            doUpdateTags = false;
             action = mergePolygon;
+        } else {
+            doUpdateTags = true;
+            action = mergeNodes;
         }
 
         context.perform(action, operation.annotation());
@@ -49,7 +56,7 @@ export function operationMerge(selectedIDs, context) {
         });
 
         // if we merged tags, rematch preset to update tags if necessary (#3851)
-        if (action === merge) {
+        if (doUpdateTags) {
             updatePresetTags(context.graph(), ids);
         }
 
@@ -65,29 +72,36 @@ export function operationMerge(selectedIDs, context) {
     operation.disabled = function() {
         return join.disabled(context.graph()) &&
             merge.disabled(context.graph()) &&
-            mergePolygon.disabled(context.graph());
+            mergePolygon.disabled(context.graph()) &&
+            mergeNodes.disabled(context.graph());
     };
 
 
     operation.tooltip = function() {
-        var j = join.disabled(context.graph()),
-            m = merge.disabled(context.graph()),
-            p = mergePolygon.disabled(context.graph());
+        var j = join.disabled(context.graph());          // 'not_eligible', 'not_adjacent', 'restriction', 'conflicting_tags'
+        var m = merge.disabled(context.graph());         // 'not_eligible'
+        var p = mergePolygon.disabled(context.graph());  // 'not_eligible', 'incomplete_relation'
+        var n = mergeNodes.disabled(context.graph());    // 'not_eligible', 'relation', 'restriction'
 
-        if (j === 'restriction' && m && p) {
-            return t('operations.merge.restriction',
-                { relation: context.presets().item('type/restriction').name() });
+        // disabled for one of various reasons
+        if (j && m && p && n) {
+            if (j === 'restriction' || n === 'restriction') {
+                return t('operations.merge.restriction',
+                    { relation: context.presets().item('type/restriction').name() });
+
+            } else if (p === 'incomplete_relation') {
+                return t('operations.merge.incomplete_relation');
+
+            } else if (n === 'relation') {
+                return t('operations.merge.relation');
+
+            } else {
+                return t('operations.merge.' + j);
+            }
+
+        } else {
+            return t('operations.merge.description');
         }
-
-        if (p === 'incomplete_relation' && j && m) {
-            return t('operations.merge.incomplete_relation');
-        }
-
-        if (j && m && p) {
-            return t('operations.merge.' + j);
-        }
-
-        return t('operations.merge.description');
     };
 
 

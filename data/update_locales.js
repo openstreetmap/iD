@@ -5,11 +5,11 @@ const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 
 var request = require('request').defaults({ maxSockets: 1 });
-var yaml = require('js-yaml');
+var YAML = require('js-yaml');
 var fs = require('fs');
 var stringify = require('json-stable-stringify');
 
-var resources = ['core', 'presets', 'imagery'];
+var resources = ['core', 'presets', 'imagery', 'community'];
 var outdir = './dist/locales/';
 var api = 'https://www.transifex.com/api/2/';
 var projectURL = api + 'project/id-editor/';
@@ -27,18 +27,24 @@ var projectURL = api + 'project/id-editor/';
 
 var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
-var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
-    sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8')),
-    sourceImagery = yaml.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
+var sourceCore = YAML.load(fs.readFileSync('./data/core.yaml', 'utf8'));
+var sourcePresets = YAML.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
+var sourceImagery = YAML.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
+var sourceCommunity = YAML.load(fs.readFileSync('./node_modules/osm-community-index/i18n/en.yaml', 'utf8'));
 
 
-asyncMap(resources, getResource, function(err, locales) {
+asyncMap(resources, getResource, function(err, results) {
     if (err) return console.log(err);
 
-    var locale = _merge(sourceCore, sourcePresets, sourceImagery),
-        dataLocales = {};
+    var locale = _merge(
+        sourceCore,
+        sourcePresets,
+        sourceImagery,
+        { en: { community: sourceCommunity.en } }  // add namespace
+    );
+    var dataLocales = {};
 
-    locales.forEach(function(l) {
+    results.forEach(function(l) {
         locale = _merge(locale, l);
     });
 
@@ -50,6 +56,7 @@ asyncMap(resources, getResource, function(err, locales) {
                 var obj = {};
                 obj[code] = locale[code];
                 fs.writeFileSync(outdir + code + '.json', JSON.stringify(obj, null, 4));
+
                 getLanguageInfo(code, function(err, info) {
                     var rtl = info && info.rtl;
                     // exceptions: see #4783
@@ -81,7 +88,11 @@ function getResource(resource, callback) {
 
             var locale = {};
             results.forEach(function(result, i) {
-                locale[codes[i]] = result;
+                if (resource === 'community' && Object.keys(result).length) {
+                    locale[codes[i]] = { community: result };  // add namespace
+                } else {
+                    locale[codes[i]] = result;
+                }
             });
 
             callback(null, locale);
@@ -100,7 +111,7 @@ function getLanguage(resourceURL) {
             if (err) return callback(err);
             console.log(resp.statusCode + ': ' + url);
             var content = JSON.parse(body).content;
-            callback(null, yaml.safeLoad(content)[code]);
+            callback(null, YAML.safeLoad(content)[code]);
         });
     };
 }
@@ -134,9 +145,9 @@ function getLanguages(resource, callback) {
 
 function asyncMap(inputs, func, callback) {
     setTimeout(function() {
-        var remaining = inputs.length,
-            results = [],
-            error;
+        var remaining = inputs.length;
+        var results = [];
+        var error;
 
         inputs.forEach(function(d, i) {
             func(d, function done(err, data) {

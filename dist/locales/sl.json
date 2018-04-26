@@ -592,13 +592,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM je posodobljen!",
             "just_edited": "Zemljevid OSM je posodobljen!",
-            "view_on_osm": "Pokaži spremembe na OSM",
-            "facebook": "Objavi na Facebook",
-            "twitter": "Objavi na Twitter",
-            "google": "Objavi na Google+",
-            "help_html": "Spremembe na »osnovni plasti« se bodo na zemljevidu pojavile čez nekaj minut. Dodatne plasti in nekatere značilnosti se lahko posodabljajo dlje.",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -2162,9 +2156,6 @@
                 },
                 "trees": {
                     "label": "Drevesa"
-                },
-                "vending": {
-                    "label": "Vrsta dobrin"
                 },
                 "visibility": {
                     "label": "Vidnost",
@@ -4703,18 +4694,6 @@
                     "name": "Ni mogoče polkrožno obrniti",
                     "terms": "Polkrožno obračanje ni dovoljeno"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Možno je zaviti samo levo",
-                    "terms": "Dovoljeno je zaviti samo levo."
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Možno je zaviti samo desno",
-                    "terms": "Dovoljeno je zaviti samo desn"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Možno je samo nadaljevati naravnost",
-                    "terms": "Zavijanje ni dovoljeno."
-                },
                 "type/route": {
                     "name": "Proga",
                     "terms": "cesta,letalska linija,kolesarska pot,pohodniška pot,linija,pot"
@@ -4846,8 +4825,7 @@
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
-                },
-                "description": "Meje posnetkov in datumi zajema. Oznake se pojavijo na ravni povečave 14 in višjih."
+                }
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
@@ -4859,8 +4837,7 @@
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
-                },
-                "description": "Meje posnetkov in datumi zajema. Oznake se pojavijo na ravni povečave 14 in višjih."
+                }
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -4944,7 +4921,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Osnovni zemljevid Avstrije, ki temelji na uradnih podatkih",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {

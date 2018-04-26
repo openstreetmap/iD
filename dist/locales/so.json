@@ -20,6 +20,12 @@
                     "point": "Ku daray bar."
                 }
             },
+            "start": {
+                "annotation": {
+                    "line": "Bilaabay xariiq.",
+                    "area": "Bilaabay goob."
+                }
+            },
             "continue": {
                 "title": "Sii wad",
                 "description": "Sii wad khadkanan.",
@@ -36,7 +42,14 @@
                 "title": "Goobo geli",
                 "description": {
                     "line": "Ka dhig khadkan wareeg."
-                }
+                },
+                "not_closed": "Tani lagama dhigi karo wareeg maxaa yeelay ma aha duub"
+            },
+            "orthogonalize": {
+                "description": {
+                    "area": "Afar geesood ka dhig qararka goobtan."
+                },
+                "not_squarish": "Tani lagama dhigi karo afar gees, sababtoo ah ma aha mid afar gees ah"
             },
             "delete": {
                 "title": "Tirtir",
@@ -46,7 +59,8 @@
             },
             "disconnect": {
                 "title": "Jar Xiriirka",
-                "description": "Ka jar xiriirka khadadkan/goobahan midba midka kale."
+                "description": "Ka jar xiriirka khadadkan/goobahan midba midka kale.",
+                "not_connected": "Ma jiraan khadad/goobo ku filan halkan ku yaalo si loo joojiyo"
             },
             "move": {
                 "title": "Dhaqaaji",
@@ -96,16 +110,20 @@
         },
         "tooltip_keyhint": "Af-goys:",
         "translate": {
+            "translate": "Turjum",
             "localized_translation_label": "Magaca luqadaha badan",
             "localized_translation_language": "Dooro luuqada",
             "localized_translation_name": "Magaca"
         },
+        "zoom_in_edit": "Soo dhawee si aad u tifaftirto khariidada",
+        "help_translate": "Turjum",
         "commit": {
             "created": "Lagu suurtogeliyay"
         },
         "info_panels": {
             "background": {
                 "title": "Hagaajinta",
+                "zoom": "Soo dhawee",
                 "description": "Sharaxaad"
             },
             "history": {
@@ -126,14 +144,18 @@
             "title": "Muuji Goobtayda"
         },
         "inspector": {
+            "view_on_osm": "Ka eeg openstreetmap.org",
             "all_fields": "Dhammaan goobaha",
             "all_tags": "Dhammaan taxanbayaasha",
             "all_relations": "Dhammaan xiriirada",
             "choose": "Dooro nooca tilmaamaha",
+            "reference": "Ka eeg Wiki OpenStreetMap",
             "search": "Raadi",
             "feature_list": "Tilmaamaha Waydiimaha",
+            "edit": "Tifaftir tilmaamaha",
             "radio": {
                 "structure": {
+                    "type": "Nooca",
                     "layer": "Lakabka"
                 }
             },
@@ -168,13 +190,15 @@
                 "next": "Xiga >"
             }
         },
-        "success": {
-            "facebook": "Faafi Facebook",
-            "twitter": "Faafi Twitter",
-            "google": "Faafi Google+"
+        "splash": {
+            "welcome": "Ku soo dhowow id OpenStreetMap editor"
         },
         "tag_reference": {
             "description": "Sharaxaad"
+        },
+        "zoom": {
+            "in": "Soo dhawee",
+            "out": "Fogee"
         },
         "help": {
             "title": "Caawin",
@@ -202,12 +226,23 @@
                 }
             }
         },
+        "intro": {
+            "welcome": {
+                "title": "Ku soo dhowow"
+            },
+            "startediting": {
+                "start": "Bilow Jihaynta!"
+            }
+        },
         "shortcuts": {
             "title": "Af-goys",
             "key": {
                 "delete": "Tirtir"
             },
             "browsing": {
+                "navigation": {
+                    "zoom": "Soo dhawee / Fogee"
+                },
                 "help": {
                     "title": "Caawin"
                 }
@@ -251,6 +286,12 @@
                 },
                 "category-road": {
                     "name": "Tilmaamaha Wadooyinka"
+                },
+                "category-water-area": {
+                    "name": "Tilmaamaha Biyaha"
+                },
+                "category-water-line": {
+                    "name": "Tilmaamaha Biyaha"
                 }
             },
             "fields": {
@@ -263,10 +304,46 @@
                     }
                 },
                 "address": {
+                    "label": "Cinwaanka",
                     "placeholders": {
                         "city": "Magaalo",
-                        "place": "Goob"
+                        "city!vn": "Magaalo",
+                        "place": "Goob",
+                        "street": "Wadada"
                     }
+                },
+                "aerialway": {
+                    "label": "Nooca"
+                },
+                "aeroway": {
+                    "label": "Nooca"
+                },
+                "amenity": {
+                    "label": "Nooca"
+                },
+                "area/highway": {
+                    "label": "Nooca"
+                },
+                "artwork_type": {
+                    "label": "Nooca"
+                },
+                "barrier": {
+                    "label": "Nooca"
+                },
+                "bicycle_parking": {
+                    "label": "Nooca"
+                },
+                "board_type": {
+                    "label": "Nooca"
+                },
+                "boules": {
+                    "label": "Nooca"
+                },
+                "boundary": {
+                    "label": "Nooca"
+                },
+                "bridge": {
+                    "label": "Nooca"
                 },
                 "building": {
                     "label": "Dhismo"
@@ -274,11 +351,32 @@
                 "building_area": {
                     "label": "Dhismo"
                 },
+                "bunker_type": {
+                    "label": "Nooca"
+                },
                 "capacity": {
                     "label": "Mug"
                 },
+                "castle_type": {
+                    "label": "Nooca"
+                },
+                "club": {
+                    "label": "Nooca"
+                },
+                "construction": {
+                    "label": "Nooca"
+                },
+                "craft": {
+                    "label": "Nooca"
+                },
+                "crossing": {
+                    "label": "Nooca"
+                },
                 "cuisine": {
                     "label": "Cunnada"
+                },
+                "cutting": {
+                    "label": "Nooca"
                 },
                 "cycleway": {
                     "label": "Dhabbaha Baaskiilada",
@@ -296,31 +394,96 @@
                 "description": {
                     "label": "Sharaxaad"
                 },
+                "dock": {
+                    "label": "Nooca"
+                },
+                "electrified": {
+                    "options": {
+                        "no": "Maya",
+                        "yes": "Haa (unspecified)"
+                    }
+                },
+                "embankment": {
+                    "label": "Nooca"
+                },
+                "entrance": {
+                    "label": "Nooca"
+                },
+                "fence_type": {
+                    "label": "Nooca"
+                },
                 "fire_hydrant/type": {
+                    "label": "Nooca",
                     "options": {
                         "pond": "Balli"
                     }
                 },
+                "ford": {
+                    "label": "Nooca"
+                },
                 "generator/source": {
                     "label": "Bilowga xogta"
                 },
+                "generator/type": {
+                    "label": "Nooca"
+                },
+                "government": {
+                    "label": "Nooca"
+                },
+                "healthcare": {
+                    "label": "Nooca"
+                },
+                "highway": {
+                    "label": "Nooca"
+                },
+                "historic": {
+                    "label": "Nooca"
+                },
+                "information": {
+                    "label": "Nooca"
+                },
                 "internet_access": {
-                    "label": "Helitaanka Internet-ka"
+                    "label": "Helitaanka Internet-ka",
+                    "options": {
+                        "no": "Maya",
+                        "yes": "Haa"
+                    }
                 },
                 "internet_access/ssid": {
                     "label": "SSID (Magaca Network)"
                 },
+                "lamp_type": {
+                    "label": "Nooca"
+                },
+                "landuse": {
+                    "label": "Nooca"
+                },
                 "lanes": {
                     "label": "Tirada Dhabbooyinka"
                 },
+                "leisure": {
+                    "label": "Nooca"
+                },
                 "levels": {
                     "label": "Heerarka"
+                },
+                "man_made": {
+                    "label": "Nooca"
+                },
+                "manhole": {
+                    "label": "Nooca"
+                },
+                "map_type": {
+                    "label": "Nooca"
                 },
                 "maxheight": {
                     "label": "Dhererka ugu Sareeya"
                 },
                 "maxspeed": {
                     "label": "Xadka Xawaaraha"
+                },
+                "memorial": {
+                    "label": "Nooca"
                 },
                 "name": {
                     "label": "Magaca",
@@ -329,11 +492,25 @@
                 "natural": {
                     "label": "Dabiiciga"
                 },
+                "note": {
+                    "label": "Qoraal"
+                },
+                "office": {
+                    "label": "Nooca"
+                },
                 "oneway": {
-                    "label": "Hal Wado"
+                    "label": "Hal Wado",
+                    "options": {
+                        "no": "Maya",
+                        "yes": "Haa"
+                    }
                 },
                 "oneway_yes": {
-                    "label": "Hal Wado"
+                    "label": "Hal Wado",
+                    "options": {
+                        "no": "Maya",
+                        "yes": "Haa"
+                    }
                 },
                 "opening_hours": {
                     "label": "Saacado"
@@ -344,8 +521,62 @@
                 "outdoor_seating": {
                     "label": "Fadhiga Banaanka"
                 },
+                "parking": {
+                    "label": "Nooca",
+                    "options": {
+                        "surface": "Sagxada"
+                    }
+                },
+                "piste/type": {
+                    "label": "Nooca"
+                },
+                "place": {
+                    "label": "Nooca"
+                },
+                "power": {
+                    "label": "Nooca"
+                },
+                "railway": {
+                    "label": "Nooca"
+                },
+                "relation": {
+                    "label": "Nooca"
+                },
+                "religion": {
+                    "label": "Diinta"
+                },
+                "restriction": {
+                    "label": "Nooca"
+                },
+                "route": {
+                    "label": "Nooca"
+                },
+                "route_master": {
+                    "label": "Nooca"
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "Maya",
+                        "yes": "Haa"
+                    }
+                },
+                "service": {
+                    "label": "Nooca"
+                },
+                "shelter_type": {
+                    "label": "Nooca"
+                },
+                "shop": {
+                    "label": "Nooca"
+                },
+                "site": {
+                    "label": "Nooca"
+                },
                 "smoking": {
                     "label": "Sigaar-cabbista waa la oggolyahay"
+                },
+                "social_facility": {
+                    "label": "Nooca"
                 },
                 "source": {
                     "label": "Bilowga xogta"
@@ -353,14 +584,94 @@
                 "sport": {
                     "label": "Cayaaraha"
                 },
+                "sport_ice": {
+                    "label": "Cayaaraha"
+                },
+                "sport_racing_motor": {
+                    "label": "Cayaaraha"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Cayaaraha"
+                },
                 "structure": {
+                    "label": "Dhismo",
                     "options": {
                         "bridge": "Buundo",
-                        "ford": "Tog"
+                        "ford": "Tog",
+                        "tunnel": "Jid Dalool"
                     }
+                },
+                "structure_waterway": {
+                    "label": "Dhismo",
+                    "options": {
+                        "tunnel": "Jid Dalool"
+                    }
+                },
+                "studio": {
+                    "label": "Nooca"
+                },
+                "substation": {
+                    "label": "Nooca"
+                },
+                "surface": {
+                    "label": "Sagxada"
+                },
+                "switch": {
+                    "label": "Nooca"
+                },
+                "takeaway": {
+                    "label": "Qaadasho",
+                    "options": {
+                        "no": "Maya",
+                        "yes": "Haa"
+                    }
+                },
+                "toilets/disposal": {
+                    "options": {
+                        "pitlatrine": "Musqulo"
+                    }
+                },
+                "tomb": {
+                    "label": "Nooca"
+                },
+                "tourism": {
+                    "label": "Nooca"
+                },
+                "tower/type": {
+                    "label": "Nooca"
+                },
+                "trade": {
+                    "label": "Nooca"
+                },
+                "traffic_calming": {
+                    "label": "Nooca"
+                },
+                "traffic_signals": {
+                    "label": "Nooca"
+                },
+                "transformer": {
+                    "label": "Nooca"
+                },
+                "tunnel": {
+                    "label": "Nooca"
+                },
+                "wall": {
+                    "label": "Nooca"
+                },
+                "water": {
+                    "label": "Nooca"
+                },
+                "waterway": {
+                    "label": "Nooca"
+                },
+                "wetland": {
+                    "label": "Nooca"
                 }
             },
             "presets": {
+                "address": {
+                    "name": "Cinwaanka"
+                },
                 "aeroway/runway": {
                     "name": "Gegada diyaaradaha"
                 },
@@ -403,6 +714,12 @@
                 "amenity/school": {
                     "name": "Goobaha Dugsiyada"
                 },
+                "amenity/toilets": {
+                    "name": "Musqulo"
+                },
+                "area/highway": {
+                    "name": "Sagxada"
+                },
                 "barrier": {
                     "name": "Xannibaadaha"
                 },
@@ -433,6 +750,9 @@
                 "building/school": {
                     "name": "Dhismo Dugsiyada"
                 },
+                "building/stadium": {
+                    "name": "Dhismo Garoon"
+                },
                 "footway/crosswalk": {
                     "name": "Isgoyska Socotada"
                 },
@@ -459,6 +779,12 @@
                 },
                 "highway/service": {
                     "name": "Jidka Shaqaalaha"
+                },
+                "highway/tertiary": {
+                    "name": "Waddada Sarre"
+                },
+                "highway/track": {
+                    "name": "Jidka Jayga aan la Dayactirin"
                 },
                 "highway/unclassified": {
                     "name": "Waddo Yar/La cayimin"
@@ -514,6 +840,12 @@
                 "leisure/pitch/cricket": {
                     "name": "Garoon Kiriket"
                 },
+                "leisure/sports_centre": {
+                    "name": "Xarunta Cayaaraha"
+                },
+                "leisure/stadium": {
+                    "name": "Garoon"
+                },
                 "line": {
                     "name": "Khad"
                 },
@@ -535,14 +867,26 @@
                 "natural/coastline": {
                     "name": "Xeeb"
                 },
+                "natural/water": {
+                    "name": "Biyaha"
+                },
                 "natural/water/lake": {
                     "name": "Haro"
                 },
                 "natural/water/pond": {
                     "name": "Balli"
                 },
+                "natural/wetland": {
+                    "name": "Dhul biyo-fadhiyaan"
+                },
+                "natural/wood": {
+                    "name": "Duur"
+                },
                 "office/government": {
                     "name": "Xafiis Dowladeed"
+                },
+                "office/travel_agent": {
+                    "name": "Wakaalad Socdaal"
                 },
                 "place": {
                     "name": "Goob"
@@ -555,6 +899,9 @@
                 },
                 "place/locality": {
                     "name": "Deegaanka"
+                },
+                "place/town": {
+                    "name": "Magaalo"
                 },
                 "power/line": {
                     "name": "Khadka Korantada"
@@ -580,14 +927,29 @@
                 "shop/mobile_phone": {
                     "name": "Dukaanka Taleefoonka Gacanta"
                 },
+                "shop/supermarket": {
+                    "name": "Suuq-weyne"
+                },
+                "shop/travel_agency": {
+                    "name": "Wakaalad Socdaal"
+                },
                 "tourism/hotel": {
                     "name": "Huteel"
                 },
                 "type/route/ferry": {
                     "name": "Wadada Doonta"
                 },
+                "type/waterway": {
+                    "name": "Biyo Mareen"
+                },
+                "waterway": {
+                    "name": "Biyo Mareen"
+                },
                 "waterway/canal": {
                     "name": "Kanaal"
+                },
+                "waterway/dock": {
+                    "name": "Kaabi qoyan / Kaabi qallalan"
                 }
             }
         }

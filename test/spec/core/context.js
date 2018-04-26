@@ -57,6 +57,7 @@ describe('iD.Context', function() {
                 flags = {
                     tile: false,
                     collision: false,
+                    community: false,
                     imagery: false,
                     imperial: false,
                     driveLeft: false,

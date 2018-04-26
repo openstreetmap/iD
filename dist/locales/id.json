@@ -397,12 +397,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM tersunting!",
             "just_edited": "Anda baru saja menyunting OpenStreetMap!",
-            "view_on_osm": "Lihat di OSM",
-            "facebook": "Bagikan di Facebook",
-            "twitter": "Bagikan di Twitter",
-            "google": "Bagikan di Google+",
             "help_link_text": "detail"
         },
         "confirm": {
@@ -2555,15 +2550,6 @@
                 },
                 "type/restriction/no_u_turn": {
                     "name": "Dilarang Putar Balik"
-                },
-                "type/restriction/only_left_turn": {
-                    "name": "Belok Kiri Saja"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Belok Kanan Saja"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Dilarang Berbelok"
                 },
                 "type/route": {
                     "name": "Rute"

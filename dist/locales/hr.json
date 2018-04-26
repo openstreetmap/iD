@@ -520,13 +520,7 @@
             }
         },
         "success": {
-            "edited_osm": "Uređen OSM!",
             "just_edited": "Upravo si uredio/la OpenStreetMap!",
-            "view_on_osm": "Pogledaj na OSM",
-            "facebook": "Podijeli na mreži Facebook",
-            "twitter": "Podijeli na mreži Twitter",
-            "google": "Podijeli na mreži Google+",
-            "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određene elemente trebati će više vremena.",
             "help_link_text": "Detalji",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -1134,6 +1128,9 @@
                 "bicycle_parking": {
                     "label": "Vrsta"
                 },
+                "bin": {
+                    "label": "Kanta za smeće"
+                },
                 "boundary": {
                     "label": "Vrsta"
                 },
@@ -1730,9 +1727,6 @@
                 },
                 "trees": {
                     "label": "Drveće"
-                },
-                "vending": {
-                    "label": "Vrsta robe"
                 },
                 "water": {
                     "label": "Vrsta"
@@ -2343,8 +2337,14 @@
                 "craft/caterer": {
                     "name": "Dostavljač"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Dimnjačar"
+                },
                 "craft/clockmaker": {
                     "name": "Urar (ručni satovi)"
+                },
+                "craft/distillery": {
+                    "name": "Destilerija"
                 },
                 "craft/dressmaker": {
                     "name": "Krojač"
@@ -3165,6 +3165,9 @@
                     "name": "Kozmetički salon",
                     "terms": "kozmetički salon,solarij,salon ljepote,pediker,beauty centar"
                 },
+                "shop/beauty/nails": {
+                    "name": "Studio za nokte"
+                },
                 "shop/bed": {
                     "name": "Trgovina opreme za krevete",
                     "terms": "madrac, madraci, podnica, podnice, posteljina, jastuk, jastuci"
@@ -3176,6 +3179,9 @@
                 "shop/bicycle": {
                     "name": "prodavaonica bicikala",
                     "terms": "trgovina biciklima"
+                },
+                "shop/bookmaker": {
+                    "name": "Kladioničar"
                 },
                 "shop/books": {
                     "name": "Knjižara"
@@ -3208,6 +3214,9 @@
                 },
                 "shop/cheese": {
                     "name": "Prodavaonica sira"
+                },
+                "shop/chemist": {
+                    "name": "Drogerija"
                 },
                 "shop/chocolate": {
                     "name": "Prodavaonica čokolade"
@@ -3328,6 +3337,9 @@
                     "name": "Zlatarnica",
                     "terms": "zlatarna,zlatara,zlatar"
                 },
+                "shop/kiosk": {
+                    "name": "Kiosk"
+                },
                 "shop/kitchen": {
                     "name": "Trgovina kuhinjskog namještaja",
                     "terms": "kuhinje, pećnice, hladnjak"
@@ -3396,6 +3408,9 @@
                 },
                 "shop/pawnbroker": {
                     "name": "Zalagaonica"
+                },
+                "shop/perfumery": {
+                    "name": "Parfimerija"
                 },
                 "shop/pet": {
                     "name": "Prodavaonica kućnim ljubimcima",
@@ -3482,6 +3497,9 @@
                 "shop/video_games": {
                     "name": "Prodavaonica video igara",
                     "terms": "računalne igre, igrice"
+                },
+                "shop/watches": {
+                    "name": "Trgovina Satovima"
                 },
                 "shop/water_sports": {
                     "name": "Trgovina za vodene sportove",
@@ -3593,15 +3611,6 @@
                 },
                 "type/restriction/no_u_turn": {
                     "name": "Zabranjeno polukružno okretanje"
-                },
-                "type/restriction/only_left_turn": {
-                    "name": "Obavezno lijevo skretanje"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Obavezno desno skretanje"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Zabranjena sva skretanja"
                 },
                 "type/route": {
                     "name": "Ruta",
@@ -3795,7 +3804,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Osnovna karta Austrije, bazirano na vladinim podacima.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -3856,9 +3864,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Sličice karte od Stamen Design, pod CC BY 3.0"
-                },
                 "name": "Stamen Terrain"
             },
             "tf-cycle": {

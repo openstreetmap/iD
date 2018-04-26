@@ -577,12 +577,7 @@
             }
         },
         "success": {
-            "edited_osm": "¡Editáu OSM!",
             "just_edited": "¡Acaba d'editar OpenStreetMap!",
-            "view_on_osm": "Ver en OSM",
-            "facebook": "Compartir en Facebook",
-            "twitter": "Compartir en Twitter",
-            "google": "Compartir en Google+",
             "help_link_text": "Detalles"
         },
         "confirm": {
@@ -2017,9 +2012,6 @@
                 "tunnel": {
                     "label": "Tipu",
                     "placeholder": "Predetermináu"
-                },
-                "vending": {
-                    "label": "Tipu de mercancía"
                 },
                 "visibility": {
                     "label": "Visibilidá",
@@ -4461,15 +4453,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Sin cambiu de sentíu"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Xirar sólo a la izquierda"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Xirar sólo a la drecha"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Xiru torgáu"
-                },
                 "type/route": {
                     "name": "Ruta"
                 },
@@ -4612,7 +4595,6 @@
                 "attribution": {
                     "text": "Términos y comentarios "
                 },
-                "description": "Llendes de les imáxenes y dates de la toma. Les etiquetes apaecen col nivel d'ampliación 14 y mayor.",
                 "name": "Imáxenes antigües de DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -4626,7 +4608,6 @@
                 "attribution": {
                     "text": "Términos y comentarios "
                 },
-                "description": "Llendes de les imáxenes y dates de la toma. Les etiquetes apaecen col nivel d'ampliación 14 y mayor.",
                 "name": "Imáxenes antigües de DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -4722,7 +4703,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa base d'Austria, basáu en datos del gobiernu.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -4783,9 +4763,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Mosaicu del mapa por Stamen Design, baxo CC BY 3.0"
-                },
                 "name": "Terrén Stamen"
             },
             "tf-cycle": {

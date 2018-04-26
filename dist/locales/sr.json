@@ -580,13 +580,7 @@
             }
         },
         "success": {
-            "edited_osm": "Уреди ОСМ!",
             "just_edited": "Управо сте уређивали OpenStreetMap!",
-            "view_on_osm": "Преглед на OSM",
-            "facebook": "Подели на Фејсбуку",
-            "twitter": "Подели на Твитеру",
-            "google": "Подели на Гугл+",
-            "help_html": "Ваше измене требало би да се појаве у „Стандардном“ слоју за неколико минута. За остале слојеве и одређене функције то може трајати дуже.",
             "help_link_text": "Детаљи"
         },
         "confirm": {
@@ -1848,9 +1842,6 @@
                 "tunnel": {
                     "label": "Врста",
                     "placeholder": "Подразумевано"
-                },
-                "vending": {
-                    "label": "Врста добара"
                 },
                 "visibility": {
                     "label": "Видљивост",
@@ -3661,15 +3652,6 @@
                 },
                 "type/restriction/no_u_turn": {
                     "name": "Забрана полукружног окретања"
-                },
-                "type/restriction/only_left_turn": {
-                    "name": "Обавезан смер - лево"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Обавезан смер - десно"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Обавезан смер - право"
                 },
                 "type/route": {
                     "name": "Путања"

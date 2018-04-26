@@ -352,12 +352,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM සංස්කරණය කරන ලදී!",
-            "just_edited": "ඔබ මේ මොහොතේ OpenStreetMap සංස්කරණය කරන ලදී",
-            "view_on_osm": "OSM මත දක්වන්න",
-            "facebook": "Facebook හි බෙදාහරින්න",
-            "twitter": "Twitter හි බෙදා හරින්න",
-            "google": "Google+ හි බෙදා හරින්න"
+            "just_edited": "ඔබ මේ මොහොතේ OpenStreetMap සංස්කරණය කරන ලදී"
         },
         "confirm": {
             "cancel": "අහෝසි කරන්න"
@@ -523,9 +518,6 @@
                     "label": "වර්ගය"
                 },
                 "tracktype": {
-                    "label": "වර්ගය"
-                },
-                "vending": {
                     "label": "වර්ගය"
                 },
                 "water": {

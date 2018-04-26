@@ -1,5 +1,10 @@
 {
     "de": {
+        "icons": {
+            "information": "Info",
+            "remove": "entfernen",
+            "undo": "rückgängig"
+        },
         "modes": {
             "add_area": {
                 "title": "Fläche",
@@ -145,7 +150,9 @@
                     "vertex": "Weg mit einem anderem Weg verbunden.",
                     "line": "Weg mit einer Linie / einer Fläche verbunden.",
                     "area": "Weg mit einer Fläche verbunden."
-                }
+                },
+                "relation": "Diese Objekte können nicht verbunden werden, weil sich Ihre Relations-Rollen widersprechen.",
+                "restriction": "Diese Objekte können nicht verbunden werden, weil damit eine \"{relation}\" Relation beschädigt werden würde.."
             },
             "disconnect": {
                 "title": "Trennen",
@@ -402,6 +409,7 @@
                 "key": "C",
                 "title": "Chronik",
                 "selected": "{n} ausgewählt",
+                "no_history": "Keine Chronik (Neues Objekt)",
                 "version": "Version",
                 "last_edit": "Letzte Bearbeitung",
                 "edited_by": "Bearbeitet von",
@@ -639,15 +647,20 @@
             }
         },
         "success": {
-            "edited_osm": "OSM bearbeitet!",
             "just_edited": "Du hast gerade OpenStreetMap bearbeitet!",
-            "view_on_osm": "Auf OpenStreetMap ansehen",
-            "facebook": "Auf Facebook teilen",
-            "twitter": "Auf Twitter teilen",
-            "google": "Auf Google+ teilen",
-            "help_html": "Deine Änderungen sollten in der \"Standard\"-Ebene in wenigen Minuten erscheinen. Andere Ebenen und bestimmte Objekte können länger dauern.",
+            "thank_you": "Danke für die Verbesserung der Karte.",
+            "thank_you_location": "Danke für die Verbesserung der Karte in {where}.",
+            "help_html": "Deine Änderungen sollten auf OpenStreetMap innerhalb weniger Minuten auftauchen.. Auf anderen Karten könne die Aktualisierung länger dauern.",
             "help_link_text": "Details",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/DE:FAQ#Wann_werden_meine_.C3.84nderungen_auf_den_Karten_gezeigt.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/DE:FAQ#Wann_werden_meine_.C3.84nderungen_auf_den_Karten_gezeigt.3F",
+            "view_on_osm": "Zeige Änderungen auf OSM",
+            "changeset_id": "Dein Änderungssatz #: {changeset_id}",
+            "like_osm": "Gefällt dir OpenStreetMap? Nimm Kontakt auf:",
+            "more": "Mehr",
+            "events": "Veranstaltungen",
+            "languages": "Sprachen: {languages}",
+            "missing": "Fehlt etwas auf dieser Liste?",
+            "tell_us": "Erzähl es uns!"
         },
         "confirm": {
             "okay": "OK",
@@ -861,7 +874,7 @@
                 "intro": "Das Hintergrund-Bildmaterial welches unter den Kartendaten erscheint ist eine wichtige Quelle zum Bearbeiten. Dieses Bildmaterial kann aus Luftbildern bestehen, die von Satelliten, Flugzeugen oder Drohnen gesammelt wurde, oder es können eingescannte historische Karten oder andere frei erhältliche Quelldaten sein.",
                 "sources_h": "Bildmaterial-Quellen",
                 "choosing": "Um zu sehen, welche Bildmaterial-Quellen zum Bearbeiten verfügbar sind klicke den {layers} **Hintergrundeinstellungen** Knopf auf der rechten Seite der Karte. ",
-                "sources": "Als Standard sind die [Bing](https://www.bing.com/maps/) Satellitenbilder als Hintergrundbild ausgewählt. Abhängig von der Gegend sind auch andere Bildmaterial-Quellen verfügbar. Sie können neuer sein oder eine höhere Auflösung haben, daher ist es immer sinnvoll zu prüfen, welches Bildmaterial die beste Referenz zum Bearbeiten ist.",
+                "sources": "Als Standard sind die [Bing](https://www.bing.com/maps/) Satellitenbilder als Hintergrundbild ausgewählt. Abhängig von der Gegend sind auch andere Bildmaterial-Quellen verfügbar. Sie können neuer sein oder eine höhere Auflösung haben, daher ist es immer sinnvoll zu prüfen, welches Bildmaterial die beste Referenz zum Bearbeiten ist.",
                 "offsets_h": "Bildmaterial-Versatz anpassen",
                 "offset": "Bildmaterial ist manchmal geringfügig zu genauen Kartendaten versetzt. Wenn du feststellst, dass viele Wege oder Gebäude gegenüber dem Hintergrund-Bildmaterial versetzt sind, dann kann es sein, dass das Bildmaterial versetzt ist, also verschiebe nicht alle Objekte damit sie zum Hintergrund passen. Stattdessen kannst du den Hintergrund anpassen, damit es zu den bestehenden Daten passt indem du den Bereich „Bildmaterial-Versatz anpassen“ unten in den Hintergrundeinstellungen aufklappst.",
                 "offset_change": "Klicke auf die kleinen Dreiecke um den Bildmaterial-Versatz in kleinen Schritten anzupassen oder halte den linken Mausknopf gedrückt und ziehe innerhalb des grauen Rechtecks um das Bildmaterial zurechtzurücken."
@@ -1336,7 +1349,7 @@
                     "name": "Natürliche Punkte"
                 },
                 "category-path": {
-                    "name": "Wege"
+                    "name": "Weg, Mehrzweckweg"
                 },
                 "category-rail": {
                     "name": "Eisenbahnanlagen"
@@ -1363,7 +1376,7 @@
                     "options": {
                         "designated": {
                             "description": "Zugang durch Schilder oder bestimmte lokale Gesetze erlaubt",
-                            "title": "Vorgesehen/Gewidmet"
+                            "title": "<br><div>rechtsverbindlich vorgesehen / gewidmet<br data-mce-bogus=\"1\"></div>"
                         },
                         "destination": {
                             "description": "Zugang nur für Anlieger/Anrainer",
@@ -1694,7 +1707,7 @@
                         },
                         "track": {
                             "description": "Radweg durch physische Barriere vom restlichen Verkehr getrennt",
-                            "title": "Separierter Radweg"
+                            "title": "baulich getrennter Radweg"
                         }
                     },
                     "placeholder": "nichts",
@@ -1774,6 +1787,9 @@
                 "display": {
                     "label": "Anzeige"
                 },
+                "distance": {
+                    "label": "Geamte Distanz"
+                },
                 "dock": {
                     "label": "Typ"
                 },
@@ -1813,6 +1829,9 @@
                 },
                 "except": {
                     "label": "Ausnahmen"
+                },
+                "faces": {
+                    "label": "Gesichter"
                 },
                 "fax": {
                     "label": "Fax",
@@ -1925,6 +1944,39 @@
                     "label": "Basketball",
                     "placeholder": "1, 2, 4 ..."
                 },
+                "horse_dressage": {
+                    "label": "Dressurreiten",
+                    "options": {
+                        "equestrian": "Ja",
+                        "undefined": "Nein"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Pferdereiten",
+                    "options": {
+                        "horse_riding": "Ja",
+                        "undefined": "Nein"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Schwierigkeit beim Pferdereiten",
+                    "options": {
+                        "common": "Einfach: Keine Probleme oder Schwierigkeiten (Standard)",
+                        "critical": "Grenzfall: Nur für erfahrene Reiter und Pferde passierbar. Größere Hindernissen. Brücken müssen sorgfältig untersucht werden.",
+                        "dangerous": "Gefährlich: Nur für erfahrenen Reiter und Pferde und nur bei gutem Wetter passierbar. Absteigen.",
+                        "demanding": "Mit Vorsicht benutzen: Unebener Weg, teilweise schwierige Passagen.",
+                        "difficult": "Schwierig: Weg schmal und ausgesetzt. Kann Hindernisse zum Übersteigen und schmale Passagen beeinhalten.",
+                        "impossible": "Unpassierbar: Weg oder Brücke für Pferde nicht benützbar. Zu schmal, unzureichende Unterstützung, Hindernisse wie Leitern. Lebensgefahr."
+                    },
+                    "placeholder": "schwierig, gefährlich ..."
+                },
+                "horse_stables": {
+                    "label": "Reitstall",
+                    "options": {
+                        "stables": "Ja",
+                        "undefined": "Nein"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1943,6 +1995,9 @@
                 },
                 "indoor": {
                     "label": "Im Gebäude"
+                },
+                "industrial": {
+                    "label": "Typ"
                 },
                 "information": {
                     "label": "Typ"
@@ -2063,6 +2118,10 @@
                 "maxspeed": {
                     "label": "Höchstgeschwindigkeit",
                     "placeholder": "40, 50, 60 …"
+                },
+                "maxspeed/advisory": {
+                    "label": "Richtgeschwindigkeit",
+                    "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
                     "label": "Maximale Parkzeit"
@@ -2652,8 +2711,19 @@
                     "label": "Typ",
                     "placeholder": "Standard"
                 },
+                "usage_rail": {
+                    "label": "Nutzungsart",
+                    "options": {
+                        "branch": "Zweigstrecke",
+                        "industrial": "Güterverkehrsstrecke",
+                        "main": "Hauptstrecke",
+                        "military": "Militärische Nutzung",
+                        "test": "Teststrecke",
+                        "tourism": "Touristische Nutzung"
+                    }
+                },
                 "vending": {
-                    "label": "Dienstleistung"
+                    "label": "Warentyp"
                 },
                 "visibility": {
                     "label": "Sichtbarkeit",
@@ -2748,6 +2818,10 @@
                     "name": "Plakatwand",
                     "terms": "Werbetafel,Anschlagtafel,Reklametafel,Anschlagbrett"
                 },
+                "advertising/column": {
+                    "name": "Litfaßsäule",
+                    "terms": "Litfaßsäule,Anschlagsäule,Plakatsäule,Anzeigeständer,Plakatträger"
+                },
                 "aerialway": {
                     "name": "Seilbahn"
                 },
@@ -2832,6 +2906,10 @@
                 "aeroway/terminal": {
                     "name": "Flughafenterminal",
                     "terms": "Flughafenterminal, Flughafen-Abfertigungs-Gebäude, Flughafen-Empfangs-Gebäude"
+                },
+                "allotments/plot": {
+                    "name": "Gemeinschaftsgartenparzelle",
+                    "terms": "Gemeinschaftsgartenparzelle, Gartenparzelle, Kleingartenparzelle"
                 },
                 "amenity": {
                     "name": "Einrichtung"
@@ -3014,8 +3092,8 @@
                     "terms": "Food Court, gemeinsamer Gastronomiebereich, Selbstbedienung- und Sitzbereich für mehrere Lokale"
                 },
                 "amenity/fountain": {
-                    "name": "Springbrunnen",
-                    "terms": "Springbrunnen, Wasserspiel"
+                    "name": "Springbrunnen, Zierbrunnen",
+                    "terms": "Dorfbrunnen, Marktbrunnen, Wasserspiel, Designerbrunnen"
                 },
                 "amenity/fuel": {
                     "name": "Tankstelle",
@@ -3060,6 +3138,10 @@
                 "amenity/marketplace": {
                     "name": "Wochenmarkt",
                     "terms": "Wochenmarkt, Marktverkauf, Markt"
+                },
+                "amenity/monastery": {
+                    "name": "Klostergelände",
+                    "terms": "Klostergelände"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Motorradparkplatz",
@@ -3265,6 +3347,10 @@
                     "name": "Zigarettenautomat",
                     "terms": "Zigarettenautomat"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Kaffeeautomat",
+                    "terms": "Kaffeeautomat"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Kondomautomat",
                     "terms": "Kondomautomat"
@@ -3273,6 +3359,14 @@
                     "name": "Getränkeautomat",
                     "terms": "Getränkeautomat, Getränkespender"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Elektro-Zubehör-Automat",
+                    "terms": "Elektro-Zubehör-Automat"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Münz-Sourvenir-Präge-Automat",
+                    "terms": "Münz-Sourvenir-Präge-Automat"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Hundekottütenspender",
                     "terms": "Hundekot-Tütenspender, Kottütenspender, Kottütenautomat, "
@@ -3280,6 +3374,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Frauenhygiene-Automat",
                     "terms": "Frauenhygiene-Automat"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Lebensmittel-Verkaufs-Automat ",
+                    "terms": "Lebensmittel-Verkaufs-Automat "
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Tankautomat",
+                    "terms": "Tankautomat"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Speiseeis-Automat",
+                    "terms": "Speiseeis-Automat"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Zeitungsautomat"
@@ -3299,6 +3405,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Fahrkartenautomat",
                     "terms": "Fahrkartenautomat"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Briefmarkenautomat",
+                    "terms": "Briefmarkenautomat"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Süßigkeitenautomat",
@@ -3371,6 +3481,10 @@
                 "attraction/drop_tower": {
                     "name": "Fallturm",
                     "terms": "Fallturm"
+                },
+                "attraction/maze": {
+                    "name": "Labyrinth",
+                    "terms": "Labyrinth, Irrgarten"
                 },
                 "attraction/pirate_ship": {
                     "name": "Piratenschiff",
@@ -3591,7 +3705,7 @@
                 },
                 "building/residential": {
                     "name": "Allgemeines Wohngebäude",
-                    "terms": "Wohnhaus,Einfamilienhaus,Mehrfamilienhaus"
+                    "terms": "Wohnhaus, Einfamilienhaus, Mehrfamilienhaus"
                 },
                 "building/retail": {
                     "name": "Geschäftsgebäude",
@@ -3872,7 +3986,7 @@
                     "terms": "Defibrillator, Defi, Schockgeber"
                 },
                 "emergency/designated": {
-                    "name": "Notzugang vorgesehen"
+                    "name": "Rettungsweg"
                 },
                 "emergency/destination": {
                     "name": "Notzufahrt ohne Notdurchfahrt"
@@ -4001,6 +4115,10 @@
                     "name": "Hospiz",
                     "terms": "Sterbeklinik, Hospiz"
                 },
+                "healthcare/laboratory": {
+                    "name": "Medizinisches Labor",
+                    "terms": "Medizinisches Labor, Medizinlabor"
+                },
                 "healthcare/midwife": {
                     "name": "Hebamme",
                     "terms": "Hebamme, Entbindungspfleger, Geburtshelfer, Geburtshelferin"
@@ -4096,16 +4214,20 @@
                     "terms": "Autobahn, Expressweg"
                 },
                 "highway/motorway_junction": {
-                    "name": "Autobahnkreuz/-abfahrt",
-                    "terms": "Autobahnkreuz, Autobahnanschluss, Autobahndreieck, Autobahnknoten, Autobahnzubringer, Autobahnabfahrt, Autobahnexit"
+                    "name": "Autobahnkreuzungspunkt",
+                    "terms": "Autobahnkreuz, Autobahnanschluss, Autobahnzubringer, Autobahnabfahrt (Kreuzungspunkt)"
                 },
                 "highway/motorway_link": {
-                    "name": "Autobahnanschluss",
-                    "terms": "Autobahnanschluss, Autobahnauffahrt, Autobahnabfahrt, Auffahrt, Abfahrt"
+                    "name": "Autobahnauffahrt, Autobahnabfahrt",
+                    "terms": "Autobahnanschluss, Auffahrt, Abfahrt"
+                },
+                "highway/passing_place": {
+                    "name": "Ausweichstelle",
+                    "terms": "Haltebucht"
                 },
                 "highway/path": {
-                    "name": "Weg",
-                    "terms": "Mehrzweck-Weg, Wanderweg, Reitweg, Radweg, Fußweg, Pfad"
+                    "name": "Weg, Mehrzweck-Weg",
+                    "terms": "Mehrzweck-Weg, Rad- und Fußweg, Rad-/Fußweg, Wanderweg, Reitweg, Radweg, Fußweg, Pfad"
                 },
                 "highway/pedestrian_area": {
                     "name": "Fußgängerzone",
@@ -4128,8 +4250,8 @@
                     "terms": "Motorsportrennstrecke, Rennstrecke (Motorsport)"
                 },
                 "highway/residential": {
-                    "name": "Anliegerstraße",
-                    "terms": "Anliegerstraße,Wohngebietsstraße,Siedlungsstraße,Ortsstraße"
+                    "name": "Ortsstraße",
+                    "terms": "Anliegerstraße, Wohngebietsstraße, Siedlungsstraße, innerörtliche Straße"
                 },
                 "highway/rest_area": {
                     "name": "Rastplatz ohne Tankstelle/Restaurant",
@@ -4168,8 +4290,8 @@
                     "terms": "Rettungsweg, Zufahrtsstraße für Rettungskräfte, Rettungszufahrt, Feuerwehrzufahrt"
                 },
                 "highway/service/parking_aisle": {
-                    "name": "Parkplatz-Nebenfahrweg",
-                    "terms": "Parkplatzweg, Fahrweg auf Parkplatzflächen"
+                    "name": "Parkplatzweg",
+                    "terms": "Parkplatzfahrgasse, Fahrweg auf Parkplatzflächen"
                 },
                 "highway/services": {
                     "name": "Raststätte mit Tankstelle/Restaurant",
@@ -4439,8 +4561,8 @@
                     "terms": "Gelände mit religiöser Nutzung"
                 },
                 "landuse/residential": {
-                    "name": "Wohngebiet",
-                    "terms": "Wohngebiet,Wohnanlage,Wohngegend,Wohnregion,Wohnhäuser,Siedlungsfläche"
+                    "name": "Siedlungsraum",
+                    "terms": "Wohngebiet, Wohngegend, Wohnregion, Siedlungsfläche, Ortslage"
                 },
                 "landuse/retail": {
                     "name": "Einzelhandel",
@@ -4461,6 +4583,10 @@
                 "leisure/amusement_arcade": {
                     "name": "Spielhalle",
                     "terms": "Spielhalle"
+                },
+                "leisure/beach_resort": {
+                    "name": "Strandresort",
+                    "terms": "Strandresort, Strandhotelanalge, Badestrandresort, Badestrandhotelanlage"
                 },
                 "leisure/bird_hide": {
                     "name": "Vogelbeobachtungsturm",
@@ -4577,6 +4703,10 @@
                 "leisure/nature_reserve": {
                     "name": "Naturschutzgebiet",
                     "terms": "Naturschutzgebiet, Landschaftsschutzgebiet, Naturreservat, Naturschutzpark"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Außengastronomie",
+                    "terms": "Außengastronomie, Gastgarten, Schanigarten"
                 },
                 "leisure/park": {
                     "name": "Park",
@@ -4706,6 +4836,10 @@
                     "name": "Bergwerk - Stolleneingang",
                     "terms": "Stollen (horizontaler Tunnel im Bergbau), Stollenmundloch"
                 },
+                "man_made/antenna": {
+                    "name": "Antennenmast",
+                    "terms": "Antennenanlage, Sendemast "
+                },
                 "man_made/breakwater": {
                     "name": "Wellenbrecher",
                     "terms": "Wellenbrecher, Buhnen, Mole"
@@ -4757,6 +4891,10 @@
                     "name": "Aussichtsturm",
                     "terms": "Ausguck, Ausblick, Beobachtungsstand"
                 },
+                "man_made/observatory": {
+                    "name": "Observatorium",
+                    "terms": "Sternenwarte"
+                },
                 "man_made/petroleum_well": {
                     "name": "Erdölpumpe",
                     "terms": "Tiefpumpe, Pferdekopfpumpe"
@@ -4807,7 +4945,7 @@
                 },
                 "man_made/water_well": {
                     "name": "Brunnen zur Wasserförderung",
-                    "terms": "Brunnen,Tiefbrunnen,Trinkwasserbrunnen,Brauchwasserbrunnen"
+                    "terms": "Bohrbrunnen, Schachtbrunnen, Tiefbrunnen, Trinkwasserbrunnen, Brauchwasserbrunnen,  "
                 },
                 "man_made/water_works": {
                     "name": "Wasserwerk",
@@ -4880,6 +5018,10 @@
                 "natural/heath": {
                     "name": "Heidelandschaft",
                     "terms": "Heidelandschaft, Strauchheiden"
+                },
+                "natural/mud": {
+                    "name": "Schlamm",
+                    "terms": "Schlamm, Schlick, Morast"
                 },
                 "natural/peak": {
                     "name": "Berggipfel",
@@ -5549,7 +5691,7 @@
                 },
                 "shop": {
                     "name": "Laden",
-                    "terms": "Geschäft, Ladenlokal"
+                    "terms": "Laden, Geschäft, Ladenlokal, Shop"
                 },
                 "shop/agrarian": {
                     "name": "Agrarmarkt",
@@ -5592,7 +5734,7 @@
                     "terms": "Badezimmereinrichtungsgeschäft,Badeinrichtungsgeschäft"
                 },
                 "shop/beauty": {
-                    "name": "Kosmetikladen",
+                    "name": "Schönheitssalon",
                     "terms": "Schönheits-Salon, Nagelstudio"
                 },
                 "shop/beauty/nails": {
@@ -5684,15 +5826,15 @@
                     "terms": "Süßigkeitenladen,Süßigkeitengeschäft"
                 },
                 "shop/convenience": {
-                    "name": "Gemischtwarenhandel",
-                    "terms": "Gemischtwarenladen, Kaufgeschäft"
+                    "name": "Gemischtwarenhandel/ Tante-Emma-Laden",
+                    "terms": "Gemischtwarenladen, Dorfladen, Greißler, Nachbarschaftsladen, Kaufgeschäft"
                 },
                 "shop/copyshop": {
                     "name": "Kopierladen",
                     "terms": "Kopieranstalt,Copy-Shop"
                 },
                 "shop/cosmetics": {
-                    "name": "Drogerie",
+                    "name": "Kosmetikladen",
                     "terms": "Drogerie,Kosmetikladen"
                 },
                 "shop/craft": {
@@ -5917,6 +6059,10 @@
                     "name": "Tierhandlung",
                     "terms": "Tierhandlung, Zoohandlung"
                 },
+                "shop/pet_grooming": {
+                    "name": "Tierfriseur",
+                    "terms": "Hundefriseur, Tierfriseur"
+                },
                 "shop/photo": {
                     "name": "Fotofachgeschäft",
                     "terms": "Fotoladen, Fotograf, Fotogeschäft"
@@ -6013,8 +6159,8 @@
                     "terms": "Staubsaugergeschäft,Staubsaugerladen"
                 },
                 "shop/variety_store": {
-                    "name": "Gemischtwarenhandel",
-                    "terms": "Gemischtwarenladen, Kaufgeschäft"
+                    "name": "Billigladen",
+                    "terms": "Ein-Euro-Geschäft, Ein-Euro-Laden, Schnäppchenmarkt, Ramschladen, Sonderpostenmarkt, Restpostenmarkt"
                 },
                 "shop/video": {
                     "name": "Videothek",
@@ -6058,7 +6204,7 @@
                 },
                 "tourism/apartment": {
                     "name": "Ferienwohnung",
-                    "terms": "Ferienwohnung, Gästewohnung, Gästeapartment"
+                    "terms": "Ferienwohnung, Gästewohnung, Gästeapartment, Ferienappartement, Gästeappartement"
                 },
                 "tourism/aquarium": {
                     "name": "Aquarium",
@@ -6136,6 +6282,10 @@
                     "name": "Themenpark",
                     "terms": "Themenpark, Freizeitpark"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Wanderreitstation",
+                    "terms": "Wanderreitstation, Gastpferdeübernachtungsmöglichkeit"
+                },
                 "tourism/viewpoint": {
                     "name": "Aussichtspunkt",
                     "terms": "Aussichtspunkt"
@@ -6204,11 +6354,11 @@
                     "terms": "Abbiegebeschränkung, Beschränkung, Einschränkung"
                 },
                 "type/restriction/no_left_turn": {
-                    "name": "Linksabbiegeverbot",
+                    "name": "Kein Linksabbiegen",
                     "terms": "Linksabbiegeverbot, Linksabbiegen verboten, kein Linksabbiegen, kein Abbiegen nach links"
                 },
                 "type/restriction/no_right_turn": {
-                    "name": "Rechtsabbiegeverbot",
+                    "name": "Kein Rechtsabbiegen",
                     "terms": "Rechtsabbiegeverbot, Rechtsabbiegen verboten, kein Rechtsabbiegen, kein Abbiegen nach rechts"
                 },
                 "type/restriction/no_straight_on": {
@@ -6216,20 +6366,24 @@
                     "terms": "Geradeausfahrverbot, Geradeausfahren verboten, geradeaus fahren nicht erlaubt"
                 },
                 "type/restriction/no_u_turn": {
-                    "name": "Kehrtwendeverbot",
-                    "terms": "Kehrtwendeverbot, Kehrtwende verboten, Umkehren verboten, Umdrehen verboten"
+                    "name": "Keine Kehrtwende",
+                    "terms": "Kehrtwendeverbot, Kehrtwende verboten, Umkehren verboten, Umdrehen verboten, Keine Kehrtwende, Kein Umdrehen, Keine Umkehren"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Linksabbiegegebot",
-                    "terms": "Linksabbiegegebot, Links abbiegen geboten, nur links abbiegen erlaubt"
+                    "name": "Nur Linksabbiegen",
+                    "terms": "Nur Linksabbiegen, Linksabbiegegebot, nur Abbiegen nach Links"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Rechtsabbiegegebot",
-                    "terms": "Rechtsabbiegegebot, Rechts abbiegen geboten, nur rechts abbiegen erlaubt"
+                    "name": "Nur Rechtsabbiegen",
+                    "terms": "Nur Rechtsabbiegen, Rechtsabbiegegebot, Nur Abbiegen nach Rechts"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Kein Abbiegen",
-                    "terms": "Abbiegeverbot, nur geradeaus, Abbiegen verboten"
+                    "name": "Nur geradeaus",
+                    "terms": "Nur geradeaus"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Nur Kehrtwende",
+                    "terms": "Nur Kehrtwende, Kehrtwendegebot, Nur Umkehren, Umkehrgebpt"
                 },
                 "type/route": {
                     "name": "Route",
@@ -6392,7 +6546,7 @@
                 "attribution": {
                     "text": "Bedingungen & Feedback"
                 },
-                "description": "Lufbildgrenzen und Aufnahmedaten. Die Beschriftung erscheint auf Zoom Level 14 und höher.",
+                "description": "Kachelgrenzen und Aufnahmedatum werden bei Zoom-Level 13 und höher angezeigt.",
                 "name": "DigitalGlobe Premium Bildmaterial Klassisch"
             },
             "DigitalGlobe-Standard": {
@@ -6406,7 +6560,7 @@
                 "attribution": {
                     "text": "Bedingungen & Feedback"
                 },
-                "description": "Lufbildgrenzen und Aufnahmedaten. Die Beschriftung erscheint auf Zoom Level 14 und höher.",
+                "description": "Kachelgrenzen und Aufnahmedatum werden bei Zoom-Level 13 und höher angezeigt.",
                 "name": "DigitalGlobe Standard Bildmaterial Klassisch"
             },
             "EsriWorldImagery": {
@@ -6490,6 +6644,10 @@
                 "description": "Gelb = Freie Daten vom US Census. Rot = In OpenStreetMap fehlende Daten",
                 "name": "TIGER Straßen 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Straße: Grüner Rand = Nebenstraße. Brauner Rand = Feldweg/Waldweg. Oberfläche: Schotter = hellbraune Füllung, Asphalt = schwarz, befestigt = grau, ground = weiß, Beton = blau, Gras = grün. Saisonal = weißes Gitter",
+                "name": "U.S.A. Forststraßen Overlay"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, OpenStreetMap-Mitwirkende, CC BY-SA 3.0"
@@ -6524,7 +6682,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Amtliche Verwaltungsgrundkarte von Österreich",
+                "description": "basemap von Österreich, basiert auf Regierungsdaten",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6586,7 +6744,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Kacheln © Stamen Design, CC-BY 3.0"
+                    "text": "Kacheln © Stamen Design, CC BY 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
                 },
                 "name": "Stamen Terrain"
             },
@@ -6601,6 +6759,649 @@
                     "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "name": "Universität von Cape Coast YouthMappers",
+                "description": "Folge uns auf Twitter {url}",
+                "extendedDescription": "Das ist der offizielle handle für die Gruppe der Jungen Mapper der Universität von Cape Coast, Ghana. Wir lieben Karten, Offene Daten und Unterstützung für die Schutzlosen"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana auf Facebook",
+                "description": "Facebook Grupep für Menschen mit Interesse an OpenStreetMap.",
+                "extendedDescription": "Gemeischaft der Mapper in Ghana Förderung von OpenStreetMap und den Humanitarian OpenStreetMap Team (HOT) Projecten in Ghana. Beteilige dich!"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana auf Twitter",
+                "description": "Folge uns auf Twitter {url}"
+            },
+            "talk-gh": {
+                "name": "Talk-gh Mailing Liste",
+                "description": "Talk-gh ist die offizielle Mailing Liste für die OSM Gemeinschaft in Ghana."
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap Madagaskar Facebook Group",
+                "description": "Madagaskar Facebook Gruppe für Menschen mit Interessen in OpenStreetMap."
+            },
+            "talk-mg": {
+                "name": "Talk-mg Mailing Liste",
+                "description": "Platz für OpenStreetMap Mitwirkende, Gemeinschaften und Benutzer in Madagaskar um zu diskutieren und Ideen zu teilen."
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Verbessere OpenStreetMap in Bangladesh",
+                "extendedDescription": "Mappen in Bangladesch? Hast du Fragen, willst du dich mit der bangladesischen OSM Gemeinschaft verbinden? Kontaktiere uns unter {Url}. Alle sind willkommen!"
+            },
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap Indien - Nachbarschaftsmapping",
+                "description": "Verbessere OpenStreetMap in Indien",
+                "extendedDescription": "Mappen in Indien? Hast du Fragen, willst du dich mit der Gemeinschaft hier verbinden? Kontaktiere uns unter {Url}. Alle sind willkommen!",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "State of the Map Asien 2018",
+                        "description": "Beteiligte dich an dem 2018 OpenStreetMap Eventu \"State of the Map Asia\" in Indien",
+                        "where": "Indisches Institut für Management, Bangalore, Indien"
+                    }
+                }
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap India Mailing Liste",
+                "description": "Talk-in ist die offizielle Mailing Liste für die Indische Community"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap Indien Twitter",
+                "description": "Wir sind nur einen Tweet weit weg: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Freie Software Hardware Bewegung - Facebook",
+                "description": "FSHM Facebook Seite für Veranstaltungen und Aktivitäten der Gemeinschaft",
+                "extendedDescription": "FSHM organisiert Veranstaltungen für freie Software/Hard, Technologie, Aktivismus für OpenStreetMap. Seine Facebook Seite ist der beste Weg um in Kontakt mit sweinen Veranstaltungen zu bleiben."
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Freie Software Hardware Bewegung - Matrix",
+                "description": "FSHM Riot Gruppe zum diskutieren, plaudern und mehr über Mapping Aktivitäten zu  erfahren, Veranstaltungen in und um Puducherry",
+                "extendedDescription": "Mitglieder der FSHM Gemeinschaft reden über ihre OSM Mapping Updates und Erfahrungen in der Riot.im Gruppe, in dieser Gruppe wird auch über freie Software / Hardware, Technologie und Aktivismus diskutiert."
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesien",
+                "description": "Verbessere  OpenStreetMap in Indonesien",
+                "extendedDescription": "Mappen in Indonesien? Hast du Fragen, willst du dich mit der indonesischen OSM Gemeinschaft verbinden? Kontaktiere uns unter {Url}. Alle sind willkommen!"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Gemeinschaft Japan",
+                "description": "Mapper und OpenStreetMap Benutzer in Japan"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japan Mailingliste",
+                "description": "Talk-ja ist die offizielle Mailingliste für die Japanische OSM-Gemeinschaft"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japan Twitter",
+                "description": "Hashtag auf Twitter: {url}"
+            },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap Malaysien Forum",
+                "description": "Officielles OpenStreetMap Malaysien Forum"
+            },
+            "OSM-MY-matrix": {
+                "name": "OpenStreetMap Malaysien Riot channel",
+                "description": "Alle Mapper sind willkommen, melde dich an: {signupUrl}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolien",
+                "description": "Verbessere in der Mongolei",
+                "extendedDescription": "Mappen in Mongolien? Hast du Fragen, willst du dich mit der mongolischen OSM Gemeinschaft verbinden? Kontaktiere uns unter {Url}. Alle sind willkommen!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Verbessere OpenStreetMap in Myanmar",
+                "extendedDescription": "Mappst du in Myanmar? Hast du Fragen, willst du mit der OSM-Gemeinschaft Kontakt aufnehmen? Besuche uns auf {Url}. Alle sind willkommen!"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal",
+                "description": "Verbessere in Nepal",
+                "extendedDescription": "Mappen in Nepal? Hast du Fragen, willst du dich mit der nepalesischen OSM Gemeinschaft verbinden? Kontaktiere uns unter {Url}. Alle sind willkommen!"
+            },
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap PH Facebook",
+                "description": "Willkommen zu OpenStreetMap auf den Philippinen, wo wir alle Filipinos ermutigen zu dem OpenStreetMap Projekt beizutragen."
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph Mailingliste",
+                "description": "Eine Mailingliste umd OpenStreetMap auf den Philippinen zu diskutieren"
+            },
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap Philippinen Slack",
+                "description": "Alle sind willkommen, melde dich an: {signupUrl}"
+            },
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap Philippinen Telegram",
+                "description": "Inoffizielle lokale Telegram Gemeinschaft von OpenStreetMap Mitwirkenden und Freunden auf den Philippinen"
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap Russland forum",
+                "description": "OpenStreetMap Russland web forum"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap Russland telegram",
+                "description": "OpenStreetMap Russland telegram chat"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
+                "description": "Verbessere in Sri Lanka",
+                "extendedDescription": "Mappen in Sri Lanka? Hast du Fragen, willst du dich mit der sri-lankischen OSM Gemeinschaft verbinden? Kontaktiere uns unter {Url}. Alle sind willkommen!"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taiwan Gemeinschaft",
+                "description": "Facebook Gruppe für Mapper und OpenStreetMap Benutzer um über Angelegenheiten für Taiwan zu diskutieren."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Taiwan Mailingliste",
+                "description": "Talk-tw is eine offizielle Mailingliste for the Gemeinschaft um über Taiwan-Angelegenheite zu diskutieren"
+            },
+            "at-forum": {
+                "name": "OpenStreetmap Österreich Forum",
+                "description": "Das offizielle Forum für Fragen zu OpenStreetmap in und um Österreich"
+            },
+            "at-mailinglist": {
+                "name": "Talk-at Mailing Liste",
+                "description": "Talk-at ist die offizielle Mailing Liste der österreichischen OSM Gemeinschaft"
+            },
+            "at-twitter": {
+                "name": "OpenStreetMap Österreich Twitter",
+                "description": "OpenStreetMap Österreich auf Twitter: {url}"
+            },
+            "osmgraz-meetup": {
+                "name": "OSM Gemeinschaft Treffen Graz",
+                "description": "Monatliches Treffen der OSM Gemeinschaft in Graz"
+            },
+            "osmgraz-twitter": {
+                "name": "OSM Gemeinschaft Graz auf Twitter",
+                "description": "OpenStreetMap Gemeinschaft Graz auf Twitter"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Österreich",
+                "description": "Die Plattform für Information über OpenStreetMap in Österreich"
+            },
+            "be-facebook": {
+                "name": "OpenStreetMap Belgien Gemeinschaft",
+                "description": "Mapper und OpenStreetMap Benutzer in Belgien"
+            },
+            "be-forum": {
+                "name": "OpenStreetMap Belgien Forum",
+                "description": "OpenStreetMap Belgien Web Forum"
+            },
+            "be-mailinglist": {
+                "name": "Talk-be Mailing Liste",
+                "description": "Talk-be ist die offizielle Mailing Liste für die Belgische OSM Gemeinschaft"
+            },
+            "be-matrix": {
+                "name": "OpenStreetMap Belgien Riot Channel",
+                "description": "Alle Mapper sind willkommen, melde dich an: {signupUrl}",
+                "extendedDescription": "Es gibt mehrer Kanäle, beispielsweise für Anfänger, Flächennutzung, Entwicklung und auch thematische Kanäle"
+            },
+            "be-meetup": {
+                "name": "OpenStreetMap Belgien Treffen",
+                "description": "Persönliches Treffen von alle die an OpenStreetMap interessiert sind",
+                "extendedDescription": "Du kannst andere Mapper bei persönliche Treffen kennenlernen, mit Ihnen diskutieren und von Ihnen lernen. Neulige sind ausdrücklich willkommen."
+            },
+            "be-twitter": {
+                "name": "OpenStreetMap Belgien Twitter",
+                "description": "OSM Belgien auf Twitter: {url}"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Weißrussland",
+                "description": "OpenStreetMap Weißrussland telegram chat"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Talk-cz Mailingliste",
+                "description": "Talk-cz is die offizielle Mailingliste for the tschechische OSM-Gemeinschaft"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Berlin Mailing Liste",
+                "description": "Das ist die Mailing Liste für die Berliner OSM Gemeinschaft"
+            },
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap Berlin-Brandenburg Treffen",
+                "description": "Mapper und OpenStreetMap Benutzer in der Berliner Gegend"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin auf Telegram",
+                "description": "OpenStreetMap Berlin Telegram chat"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlin Twitter",
+                "description": "Folge uns auf Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "OpenStreetMap Deutschland Forum",
+                "description": "OpenStreetMap Deutschland Web Forum"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Deutschland IRC",
+                "description": "Folge #osm-de auf irc.oftc.net (Port 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de Mailing Liste",
+                "description": "Talk-de ist die offizielle Mailing Liste der bundesdeutschen OSM Gemeinschaft"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Deutschland",
+                "description": "Die Plattform für Informationen über OpenStreetMap in Deutschland"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es Mailing Liste",
+                "description": "Eine Mailing Liste um OpenStreetMap in Spanien zu diskutieren"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes on Telegram",
+                "description": "OpenStreetMap Spanien Telegram chat"
+            },
+            "fr-facebook": {
+                "name": "OpenStreetMap Frankreich auf Facebook",
+                "description": "OpenStreetMap Frankreich auf Facebook"
+            },
+            "fr-forum": {
+                "name": "OpenStreetMap Frankreich Web Forum",
+                "description": "OpenStreetMap Frankreich Web Forum"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap Frankreich auf IRC",
+                "description": "Folge #osm-fr auf irc.oftc.net (Port 6667)"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr Mailing Liste",
+                "description": "Talk-fr Mailing Liste"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap Frankreich auf Twitter",
+                "description": "OpenStreetMap Frankreich auf Twitter: {url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "East Midlands (Nottingham) monatliches Treffen im Pub",
+                "description": "Soziales Zusammentreffen für East Midlands Mapper und Benutzer",
+                "extendedDescription": "Eine Gruppe trifft sich regelmäßig, zuesrt in Notringham, und neustens in Derby, machmal auch an ienme anderen Ort in den East Midlands. es sind Gemeinschaftstreffen, aber ein ausgezeichneter Ort um spezielle Fragen über OSM zu stellen. Im Sommer machen wir einfaches Mappen in der Nähe unseres Treffpunkt. Die Gruppe als Ganzes hat ein hohes Interesse öffentliche Fußwege (right of way) zu mappen u d es gibt immer wieder Mapper-Treffen genau zu diesem Zweck."
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb Mailing Liste",
+                "description": "Talk-gb ist das Hauptkommunikationsforum für die Britische (inklusive Nordirland) OSM Gemeinschaft"
+            },
+            "mappa-mercia-group": {
+                "name": "Mappa Mercia lokale Gruppe",
+                "description": "Ein Platz für OpenStreetMap Enthusiasten in den Midlands",
+                "extendedDescription": "Mappa Mercia ist ein Projekt umOpenStreetMap in tden West Midlands, UK zu Erbessern. Wir veranstalten Gemeinschaftstreffen, Trainings, und unterstützen lokale Organisationen die ihre Daten öffnen wollen."
+            },
+            "gb-irc": {
+                "name": "OpenStreetMap Vereinigstes Königreich IRC",
+                "description": "Abboniere #osm-gb auf irc.oftc.net (Port 6667)",
+                "extendedDescription": "Abboniere #osm-gb auf irc.oftc.net (Port 6667), bitte sei geduldig und warte ein paar Minuten nachdem du eine Frage stellst."
+            },
+            "it-facebook": {
+                "name": "OpenStreetMap Italien Facebook",
+                "description": "Beteilige dich an der OpenStreetMap Italien Gemeinschaft auf Facebook"
+            },
+            "it-irc": {
+                "name": "OpenStreetMap Italien IRC",
+                "description": "Abboniere #osm-it auf irc.oftc.net (Port6667)"
+            },
+            "it-mailinglist": {
+                "name": "Talk-it Mailing Liste",
+                "description": "Talk-it ist die offizielle Mailing Liste für die Italienische OSM Gemeinschaft"
+            },
+            "it-twitter": {
+                "name": "OpenStreetMap Italien Twitter",
+                "description": "Folge uns auf Twitter auf {url}"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Einführung für Mapper in Rom",
+                "description": "Verbessere in Rom und Umgebung",
+                "extendedDescription": "Wir zielen darauf ab es Menschen zu ermöglichen über geographischen Daten und insbesondere OpenStreetMap zu diskutieren und Wissen zu teilen, ebenso Offene Geospatial Software zum managen, editieren und anzeigen von geographischen Daten sowie Engagement zur Nutzung in Lazio, Italien"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "OpenStreetMap Mailing Liste für Südtirol",
+                "description": "OpenStreetMap Italien regionales Diskussionsforum für Südtirol"
+            },
+            "talk-it-lazio": {
+                "name": "OpenStreetMap Lazio (Italien)",
+                "description": "Alle sind willkommen, melde dich an: {signupUrl}",
+                "extendedDescription": "Mailing Liste für Rom und das Gebiet von Lazio"
+            },
+            "Trentino-Mailing-List": {
+                "name": "OpenStreetMap Mailing Liste für das Trentino",
+                "description": "OpenStreetMap Italien regionales Diskussionsforum für das Trentino"
+            },
+            "no-forum": {
+                "name": "OpenStreetMap Frankreich Web Forum",
+                "description": "OpenStreetMap Frankreich Web Forum"
+            },
+            "no-irc": {
+                "name": "OpenStreetMap Norwegen auf IRC",
+                "description": "Chat room für Mapper und OpenStreetMap Benutzer, Entwicklung und Enthusiasten in Norwegen"
+            },
+            "no-mailinglist": {
+                "name": "OpenStreetMap Norwegen Mailing Liste",
+                "description": "Mailing Liste für Mappen und OpenStreetMap Benutzer, Entwicklung und Enthusiasten in Norwegen"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Polen auf Facebook",
+                "description": "Gruppe für Mappers und Benutzer von OpenStreetMap in Polen"
+            },
+            "OSM-PL-forum": {
+                "name": "OpenStreetMap Polen Web Forum",
+                "description": "Forum der Polnischen OpenStreetMap Gemeinschaft"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se",
+                "description": "Bereitstellen von OSM Dienstleistungen und Information für die lokale Gemeimschaft in Schweden"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Frankreich auf Facebook",
+                "description": "OpenStreetMap Frankreich auf Facebook"
+            },
+            "se-forum": {
+                "name": "OpenStreetMap Schweden Web Forum",
+                "description": "OpenStreetMap Schweden Web Forum"
+            },
+            "se-irc": {
+                "name": "OpenStreetMap Schweden auf IRC",
+                "description": "Folge #osm.se auf irc.oftc.net (Port 6667)"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se Mailing Liste",
+                "description": "Eine Mailing Liste um OpenStreetMap in Schweden zu diskutieren"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap Schweden auf Twitter",
+                "description": "Folge uns auf Twitter {url}"
+            },
+            "OSM-CA-Slack": {
+                "name": "OSM Kalifornien USA Slack",
+                "description": "Alle sind willkommen, melde dich an: {signupUrl}"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver",
+                "description": "Mapper und OpenStreetMap Benutzer in Vancouver, Kanada"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area (San Francisco) OpenStreetMapper",
+                "description": "Verbessere OpenStreetMap in der Bay Area (San Francisco)",
+                "extendedDescription": "Diese Gruppe beschäftigt sich mit der Vergrößerung der OpenStreetMap Gemeinschaft hier in der Bay Area (San Francisco). Unsere Veranstaltungen sind für alle offen, sowohl für Open Source Liebhaber, Radfahrenden, GIS Fachleute, Geocachers und alle anderen. Alle die an Karten, Kartenerstellung und freien Karte interessiert sind, sind in unserer Gruppe und bei unseren Veranstaltungen willkommen."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Zentral-Pennsylvania OSM",
+                "description": "Online Mapping Gemeinschaft des State College, Pennsylvania"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Conding für San Jose Slack",
+                "description": "Alle sind willkommen! Melde dich bei {signupUrl}, dann nutze den #osm Kanal."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "Die OpenStreetMap Benutzergruppe für Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth und alle Städte dazwischen are strotzen vor kreativen und computererfahrenen Menschen. Die Vision für diese Benutzergruppe ist das finden von neuen Möglichkeiten die erstaunlichen Ressourcen von OSM zu nutzen."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Treffen für Kartenliebhaber in und um Philadelphia",
+                "extendedDescription": "GeoPhilly vereinigt Entwickler, Geographen, Data geeks, Open Source Liebhaber, civic hacker und Kartensüchtige in unserer gemeinsamen Leidenschaft für Karten und die Geschichten die sie erzählen. Wenn du Karten in deiner Arbeit benutzte oder einfach nur lernen willst, das ist der Treffpunkt für dich! Unsere Veranstaltungen beabsichtigen offen, freundlichen, lehrreich und sozial zu sein und range from reichen von \"happy hours\" bis \"lightning talks\" oder sogar Workshops. Bilde mit uns eine diverse und inspirierende OSM-Gemeinschaft community in Philadelphia!"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota",
+                "description": "Mapper und OpenStreetMap Enthusiasten bei den \"Twin Cities\" (Minesota, USA)",
+                "extendedDescription": "Verbindet OpenStreetMap Liebhaber in Minesota USA und den \"Twin Cities\""
+            },
+            "Mapping-DC-meetup": {
+                "name": "Washington DC Mappen",
+                "description": "Verbessere OpenStreetMap im Gebiet Washington DC",
+                "extendedDescription": "Wir sind eine Gruppe von ehrenamtlichen Mappern die OpenStreetMap in Washington DC verbessern wollen. Wir wollen unser Wissen über das OSM-Ökosystem, Datanalayse, Kartegraphie und GIS an andere weitergeben. Wir treffen uns jeden Monat bei Veranstaltungen um uns jedes Mal auf einen Teil unsere Stadt zu konzentrieren."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "Mapper und OpenStreetMap Benutzer in und um Portland, USA",
+                "extendedDescription": "Maptime ist - ziemlich wörtlich - Zeit zum Mappen.  Unsere Ziel ist die Türen für kartografische Möglichkeiten für alle Interessierten zu öffenen, wir stellen Zeit und Raum zum gemeinschaftlichen Lernen, Erkunden und zur Kartenerzeugung bereit und benutzen gemeinsam Mapping Tools und Technologien."
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Verbessere OpenStreetMap in Cleveland, USA",
+                "extendedDescription": "Open Geo Cleveland zielt darauf ab es Menschen zu ermöglichen über geographischen Daten und insbesondere OpenStreetMap zu diskutieren und Wissen zu teilen, ebenso Offene Geospatial Software zum managen, editieren und anzeigen von geographischen Daten sowie Engagement zur Nutzung in Nordost Ohio, USA. Wir sind eine Untergruppe von maptime =)"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston",
+                "description": "Mapper und OpenStreetMap Benutzer in Boston, USA",
+                "extendedDescription": "OpenStreetMap ist die freie und wiki-artige Karte der Welt mit hundertausenden täglich Mitwirkenden wie du. Das verbessern der Karte ist einfach und macht Spaß! Triff uns sowohl bei Veranstaltungen als auch vor Ort bei unseren Bemühungen die beste Karte von Boston und dem Rest der Welt zu machen!"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea",
+                "description": "Mapper und OpenStreetMap Benutzer und um Mount Vernon, USA",
+                "extendedDescription": "OpenStreetMap (OSM) ist die weltweite Karte gemacht von Menschen wie dir. Es ist die Karte zu der du beitragt und die frei zugänglich ist wie Wikipedia. Besuche osm.org für mehr Information. Wir treffen uns immer wieder um über Karten zu reden, zu Mappen und Spaß zu haben!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Die OpenStreetMap Benutzergruppe für Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado",
+                "description": "Mapper und OpenStreetMap Benutzer in Colorado, USA",
+                "extendedDescription": "OpenStreetMap (OSM) Colorado ist die lokale Zusammenarbeiten von Menschen die zu einer freien Karte beitragen wollen. Wir ermutigen unsere Mapper Treffen in ganz Colorado zu organisieren oder vozuschlagen. Treffen können einfach zum Kennenlernen, OSM-Lernen bis zum Fortgeschritenenen Training oder Mapathons (Mapping Parties) sein."
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap New York City",
+                "description": "Mapper und OpenStreetMap Benutzer, Entwickler und Liebhaber in der Metroplregion New York"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland, USA",
+                "description": "Mapper und OpenStreetMap Benutzer in Portland",
+                "extendedDescription": "OpenStreetMap (OSM) ist die weltweite Karte gemacht von Menschen wie dir. Es ist die Karte zu der du beitragt und die frei zugänglich ist wie Wikipedia. Besuche osm.org für mehr Information und komm zu einer unserer Treffen um über Karten zu reden, OSM zu verbessern und Spaß zu haben!"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle",
+                "description": "Mapper und OpenStreetMap Benutzer in Seattlem USA"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Süd-Kalifornien, USA",
+                "description": "Lass uns Spaß haben, etwas zu OSM Los Angeles beitragen und mehr über Mappen lernen!",
+                "extendedDescription": "OpenStreetMap (OSM) Süd-Kalifornien ist für alle am Mappen interessierte um zusammen zu kommen und mit OpenStreetMap zu arbeiten. OpenStreetMap, das Wikipedia der Karten, ist eine freie weltweite open-source Karte, die von über eine Million von Freiwilligen rund um die Globus erzeugt wird. Wenn du OpenStreetMap nicht kennst, unterstützen wird dich. Wenn du eine Idee für ein Kartenprojekt oder einen Erkundungsrundgang hast, den die Gruppe durchführen kann wäre das großartig!"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay",
+                "description": "Mapping-Nächste veranstalted von \"Code for San Jose\"",
+                "extendedDescription": "\"Code for San Jose\", die lokale \"Code for America\" Brigade, veransalted monatlichen Mapping-Nächte jeweils Donnerstag abend in Zentrum von San José. Triff andere South Bay Mapper, unterstütze lokale Mapping-Projekte und erfahre von anderen zivilen Technik-Projekten. Du brauchst keine Erfahrung im Programmieren oder mit GIS."
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay",
+                "description": "Mapper und OpenStreetMap Benutzer in Tampa Bay, USA",
+                "extendedDescription": "OSM Tampa Bay ist eine Gruppe von Bewohner die sich treffen und die definitiv beste OSM-Karte von Tampa Bay machen, die freie und editierbare Karte der Welt. Wenn du dich für Karten, Open Source, GPS, Wandern, Radfahren oder ähnliches interessierst wirst du OpenStreetMap lieben! Stoße zu uns, wir treffen uns zum Reden und Mappen etwa einmal monatlich."
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "Alle sind willkommen! Melde dich unter {signupUrl}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap US",
+                "description": "Wir helfen dabei OpenStreetMap in den USA zu verbessern.",
+                "extendedDescription": "Wir unterstützen OpenStreetMap durch eine jährliche Konferenz, Unterstützung von lokalen OSM-Gruppen, Aufbau von Partnerschaft und durch Verbreitung des Vorteilen von OSM. Beteiligte sich an OpenStreetMap US hier: {signupUrl}"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah",
+                "description": "Mapper und OpenStreetMap Benutzer in Salt Lake City, USA",
+                "extendedDescription": "Activitäten beinhalten Workshop zum Erlernen des Mappens, Mapathong (Mapping Parties und Datensammlung vor Ort. Die Veranstaltungen finden in der SLC area statt, zumindest anfänglichen.  Wir suchen erfahrene Mapper und Menschen die OSM kennenlernenn wollen. Beteilige dich und lass und mappen!"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming",
+                "description": "Mapper und OpenStreetMap Benutzer in Wyoming, USA",
+                "extendedDescription": "OpenStreetMap (OSM) Wyoming ist eine lokale Gemeinschaftsinitiative von menschen die gerne freie Karten tatkräftig unterstützen wollen. Wir ermuten alle unsere Mappler Veranstaltungen zum Mappen in Wyoming vozuschlagen oder zu veranstalten. Treffen können einfach zum Kennenlerne, zur Erlernenn von OSM-Grundlagen oder Fortgeschrittenem Training oder einfach Mappatons (Mapping Parties) sein."
+            },
+            "PHXGeo-meetup": {
+                "name": "PHXGeo Treffen",
+                "description": "Mapper und OpenStreetMap Benutzer in Phoenix, Arizona, USA",
+                "extendedDescription": "Das ist ein Treffpunkt für alle in Phoenix die Karten, GIS, OpenStreetMap, Kartographie und alle dazwischen mögen."
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "Folge uns auf Twitter {url}"
+            },
+            "Western-Slope-facebook": {
+                "name": "Western Slope OSM Facebook",
+                "description": "Mapper und OpenStreetMap Benutzer in und um Grand Junction, Colorado, USA"
+            },
+            "Western-Slope-meetup": {
+                "name": "Western Slope OSM Treffen",
+                "description": "Mapper und OpenStreetMap Benutzer in und um Grand Junction, Colorado, USA",
+                "extendedDescription": "Das Ziel dieser Gruppe ist OpenStreetMap in der Region einzuführen, eine Gemeinschaft von Mappern zu entwickeln, die erstaunlichsten Geodaten mit allen zur Verfügung stehenden Mitteln zu erzeugen und diese Daten in der ganzen Gegend bekannt zu machen. Stell dir einen ganz genaue Wanderkarte oder auch genaue Karte der Fahrradwege vor; oder alles andere was du willst, das ist die Freude von OpenStreetMap!"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Beteilige dich unter {signupUrl}"
+            },
+            "talk-au": {
+                "name": "Talk-au Mailing Liste",
+                "description": "Mappers in Australien chatten hier"
+            },
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Argentinen Facebook",
+                "description": "Beteiligte dich bei der argentinischen OpenStreetMap Gemeinschaft auf Facebook",
+                "extendedDescription": "Nachrichten von der lokalen Gemeinschaft"
+            },
+            "OSM-AR-forum": {
+                "name": "OpenStreetMap Argentinen web forum",
+                "description": "Beteilige dich am argentinischen OpenStreetMap web forum",
+                "extendedDescription": "Ideal für lange oder wichtige Diskussionen. Lansame Reaktionszeit."
+            },
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap Argentinen IRC",
+                "description": "Betielige dich an #osm-ar auf irc.oftc.net (Port 6667)",
+                "extendedDescription": "Du könntest den sümmsten Benuzter in der Gemeinschaft finden."
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar Mailingiste",
+                "description": "Historische Mailing Liste, heute fast nicht mehr benutzt."
+            },
+            "OSM-AR-telegram": {
+                "name": "OpenStreetMap Argentinen Telegram",
+                "description": "Beteilige dich an der argentinischen OpenStreetMap Gemeinschaft auf Telegram",
+                "extendedDescription": "Der aktivsten Kanal in der Gemeinschaft, ideals zum Tratschen und um schnell Antworten auf Fragen zu bekommen. Alle sind willkommen!"
+            },
+            "OSM-AR-twitter": {
+                "name": "OpenStreetMap Argentinen Twitter",
+                "description": "Folge uns auf Twitter {url}",
+                "extendedDescription": "Nachrichten von der lokalen Gemeinschaft und OpenStreetMap in Allgemeinen."
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo Mailing Liste",
+                "description": "Talk-bo ist die offizielle Mailing Liste für die Bolivianische OpenStreetMap Gemeinschaft",
+                "extendedDescription": "Mappen in Bolivien? Hast du Frage, willlst du dich an der OSM gemeinschaft beteiligen? Kontaktiere uns bei {url}. Alle sind willkommen!"
+            },
+            "Bahia-telegram": {
+                "name": "OpenStreetMap Bahia (Brasilien) Telegram Gruppe",
+                "description": "Beteiligte dich an der OpenStreetMap Bahia (Brasislien) Gemeinschaft auf Telegram",
+                "extendedDescription": "Beteilige dich an der Gemeinschaft um mehr über OpenStreetMap zu lernen, zu fragen oder an unseren Treffen teilzunehmen. Alle sind willkommen!"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br Mailing List",
+                "description": "Eine Mailing Liste um OpenStreetMap in Brasilien zu diskutieren"
+            },
+            "OSM-br-telegram": {
+                "name": "OpenStreetMap Brasilen Telegram",
+                "description": "Beteiligte dich an der OpenStreetMap Brasilien Gemeinschaft auf Facebook",
+                "extendedDescription": "Beteilige dich an der Gemeinschaft um mehr über OpenStreetMap zu lernen, zu fragen oder an unseren Treffen teilzunehmen. Alle sind willkommen!"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap Brasilien Twitter",
+                "description": "Folge uns auf Twitter {url}"
+            },
+            "OSM-CL-facebook": {
+                "name": "OpenStreetMap Chile Facebook",
+                "description": "Beteiligte dich an der OpenStreetMap Chile Gemeinschaft auf Facebook",
+                "extendedDescription": "Beteilige dich an der Gemeinschaft um mehr über OpenStreetMap zu lernen, zu fragen oder an unseren Treffen teilzunehmen. Alle sind willkommen!"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl Mailing List",
+                "description": "Eine Mailing Liste um OpenStreetMap in Chile zu diskutieren"
+            },
+            "OSM-CL-telegram": {
+                "name": "OpenStreetMap Chile Telegram",
+                "description": "Beteiligte dich an der OpenStreetMap Chile Gemeinschaft auf Telegram",
+                "extendedDescription": "Beteilige dich an der Gemeinschaft um mehr über OpenStreetMap zu lernen, zu fragen oder an unseren Treffen teilzunehmen. Alle sind willkommen!"
+            },
+            "OSM-CL-twitter": {
+                "name": "OpenStreetMap Chile Twitter",
+                "description": "Folge uns auf Twitter {url}"
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotá",
+                "description": "Wir sind eine Gruppe von Mappper die sich für Mappen in OpenStreetMap rund um Bogotá interessiert.",
+                "extendedDescription": "Lerne Daten vor Ort zu erheben und auf OpenStreetMap zu digitalisieren. Du brauchst kein Vorwissen, du musst nur am Miwirken, Lernen und Spaß haben interessiert sein."
+            },
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Kolumbien Facebook",
+                "description": "Beteiligte dich bei der kolumbianische OpenStreetMap Gemeinschaft auf Facebook",
+                "extendedDescription": "Beteiligte dich bei der kolumbianische OpenStreetMap Gemeinschaft um zu lernen. Alle sind willkommen!"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co Mailing Liste",
+                "description": "Eine Mailing Liste zur Diskussion über OpenStreetMap in Kolumbien"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Kolumbien Twitter",
+                "description": "Folge uns auf Twitter {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Kolumbien",
+                "description": "Nachrichten von der OpenStreetMap Gemeinschaft in Kolumbien und der OSMCo Sitftung"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Peru Facebook",
+                "description": "Werde Teil der OpenStreetMap Peru Gemeinschaft auf Facebook"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe Mailing List",
+                "description": "Die offizielle Mailing List der OpenStreetMap Peru Gemeinschaft"
+            },
+            "OSM-PE-matrix": {
+                "name": "OpenStreetMap Peru Matrix Chat",
+                "description": "Unterhalte dich mit anderen Mitgliedern der OpenStreetmap Peru Gemeinschaft in Matrix."
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram",
+                "description": "Werde Teil der OpenStreetMap Peru Gemeinschaft in Telegram"
+            },
+            "OSM-PE-twitter": {
+                "name": "OpenStreetMap Peru Twitter",
+                "description": "Folge uns auf Twitter unter {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru",
+                "description": "Neuigkeiten und Quellen für die OpenStreetMap Peru Gemeinschaft"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap auf Facebook",
+                "description": "Like uns auf Facebook für Nachrichten und Updates über OpenStreetMap."
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Hilfe",
+                "description": "Stelle Fragen und erhalte Antworten auf der FAQ-Seite der OSM-Gemeinschaft",
+                "extendedDescription": "{url} ist für alle die Hilfe mit OpenStreetMap brauchen. Egal ob du zu Mappen beginnst oder eine technische Frage hast, wir sind hier um die zu helfen!"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap in Reddit",
+                "description": "/r/openstreetmap/ ist ein großartiger Ort umd mehr über OpenStreetMap zu lernen. Du kannst jede Frage stellen!"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Folge uns auf Twitter unter {url}"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap Foundation (OSM Stiftung)",
+                "description": "OSMF is eine gemeinnützige Organisation imit Sitz im Vereinigten Königreich die das OpenStreetMap Projekt unterstützt",
+                "extendedDescription": "OSMF unterstützt OpenStreetMap durch Fundraising, betreibt die OSM-Server, organisiert die jährliche Konferenz \"State of the Map\" und koordiniert die Freiwilligen die OSM am Laufen halten. Du kannst deine Unterstützung zeigen und eine Stimme für die Richtung der Weiterentwicklung von OpenStreetMap bekommen, indem du der OSMF als Mitglied beitrittst: {signupUrl}:",
+                "events": {
+                    "sotm2018": {
+                        "name": "State of the Map 2018",
+                        "description": "Besuche uns für 3 Tage in Mailand, Italien zur weltweiten jährlivhen OpenStreetMap Konferenz, an der sich alle Beteilgen, die sich kennenlernen, voneinander lernen und ihre Erfahrung teilen wollen.",
+                        "where": "Mailand, Italien"
+                    }
+                }
             }
         }
     }

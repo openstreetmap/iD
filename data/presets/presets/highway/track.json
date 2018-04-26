@@ -11,7 +11,8 @@
         "smoothness",
         "mtb/scale",
         "mtb/scale/uphill",
-        "mtb/scale/imba"
+        "mtb/scale/imba",
+        "horse_scale"
     ],
     "geometry": [
         "line"

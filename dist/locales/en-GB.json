@@ -1,5 +1,10 @@
 {
     "en-GB": {
+        "icons": {
+            "information": "info",
+            "remove": "remove",
+            "undo": "undo"
+        },
         "modes": {
             "add_area": {
                 "title": "Area",
@@ -25,6 +30,9 @@
             },
             "draw_line": {
                 "tail": "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
+            },
+            "drag_node": {
+                "connected_to_hidden": "This can't be edited because it is connected to a hidden feature."
             }
         },
         "operations": {
@@ -142,7 +150,9 @@
                     "vertex": "Connected a way to another.",
                     "line": "Connected a way to a line.",
                     "area": "Connected a way to an area."
-                }
+                },
+                "relation": "These features can't be connected because they have conflicting relation roles.",
+                "restriction": "These features can't be connected because it would damage a \"{relation}\" relation."
             },
             "disconnect": {
                 "title": "Disconnect",
@@ -288,6 +298,42 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Distance",
+                "distance_up_to": "Up to {distance}",
+                "via": "Via",
+                "via_node_only": "Node only",
+                "via_up_to_one": "Up to 1 way",
+                "via_up_to_two": "Up to 2 ways"
+            },
+            "help": {
+                "indirect": "(indirect)",
+                "turn": {
+                    "no_left_turn": "NO Left Turn {indirect}",
+                    "no_right_turn": "NO Right Turn {indirect}",
+                    "no_u_turn": "NO U-Turn {indirect}",
+                    "no_straight_on": "NO Straight On {indirect}",
+                    "only_left_turn": "ONLY Left Turn {indirect}",
+                    "only_right_turn": "ONLY Right Turn {indirect}",
+                    "only_u_turn": "ONLY U-Turn {indirect}",
+                    "only_straight_on": "ONLY Straight On {indirect}",
+                    "allowed_left_turn": "Left Turn Allowed {indirect}",
+                    "allowed_right_turn": "Right Turn Allowed {indirect}",
+                    "allowed_u_turn": "U-Turn Allowed {indirect}",
+                    "allowed_straight_on": "Straight On Allowed {indirect}"
+                },
+                "from": "FROM",
+                "via": "VIA",
+                "to": "TO",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Click to select a {from} segment",
+                "select_from_name": "Click to select {from} {fromName}",
+                "toggle": "Click for \"{turn}\""
+            }
+        },
         "undo": {
             "tooltip": "Undo: {action}",
             "nothing": "Nothing to undo."
@@ -363,6 +409,7 @@
                 "key": "H",
                 "title": "History",
                 "selected": "{n} selected",
+                "no_history": "No History (New Feature)",
                 "version": "Version",
                 "last_edit": "Last Edit",
                 "edited_by": "Edited By",
@@ -380,6 +427,8 @@
                 "title": "Measurement",
                 "selected": "{n} selected",
                 "geometry": "Geometry",
+                "closed_line": "closed line",
+                "closed_area": "closed area",
                 "center": "Centre",
                 "perimeter": "Perimeter",
                 "length": "Length",
@@ -387,7 +436,8 @@
                 "centroid": "Centroid",
                 "location": "Location",
                 "metric": "Metric",
-                "imperial": "Imperial"
+                "imperial": "Imperial",
+                "node_count": "Number of nodes"
             }
         },
         "geometry": {
@@ -453,13 +503,23 @@
             "title": "Background",
             "description": "Background settings",
             "key": "B",
+            "backgrounds": "Backgrounds",
             "none": "None",
             "best_imagery": "Best known imagery source for this location",
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
+            "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
+            "overlays": "Overlays",
+            "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
+            "display_options": "Display Options",
+            "brightness": "Brightness",
+            "contrast": "Contrast",
+            "saturation": "Saturation",
+            "sharpness": "Sharpness",
             "minimap": {
+                "description": "Show Minimap",
                 "tooltip": "Show a zoomed out map to help locate the area currently displayed.",
                 "key": "/"
             },
@@ -561,6 +621,7 @@
             "status_code": "Server returned status code {code}",
             "unknown_error_details": "Please ensure you are connected to the Internet.",
             "uploading": "Uploading changes to OpenStreetMap...",
+            "conflict_progress": "Checking for conflicts: {num} of {total}",
             "unsaved_changes": "You have unsaved changes",
             "conflict": {
                 "header": "Resolve conflicting edits",
@@ -586,15 +647,20 @@
             }
         },
         "success": {
-            "edited_osm": "Edited OSM!",
             "just_edited": "You just edited OpenStreetMap!",
-            "view_on_osm": "View on OSM",
-            "facebook": "Share on Facebook",
-            "twitter": "Share on Twitter",
-            "google": "Share on Google+",
-            "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer.",
+            "thank_you": "Thank you for improving the map.",
+            "thank_you_location": "Thank you for improving the map around {where}.",
+            "help_html": "Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.",
             "help_link_text": "Details",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "View Changes on OSM",
+            "changeset_id": "Your changeset #: {changeset_id}",
+            "like_osm": "Like OpenStreetMap? Connect with others:",
+            "more": "More",
+            "events": "Events",
+            "languages": "Languages: {languages}",
+            "missing": "Is something missing from this list?",
+            "tell_us": "Tell us!"
         },
         "confirm": {
             "okay": "OK",
@@ -632,6 +698,7 @@
             "untagged_area_tooltip": "Select a feature type that describes what this area is.",
             "untagged_relation": "Untagged relation",
             "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
+            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "deprecated_tags": "Deprecated tags: {tags}"
         },
@@ -828,6 +895,44 @@
                 "using": "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Click the {data} **Map data** panel on the side of the map to enable, disable, or zoom to your GPS data.",
                 "tracing": "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add.",
                 "upload": "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Turn Restrictions Help",
+                    "about": {
+                        "title": "About",
+                        "about": "This field allows you to inspect and modify turn restrictions. It displays a model of the selected intersection including other nearby connected roads.",
+                        "from_via_to": "A turn restriction always contains: one **FROM way**, one **TO way**, and either one **VIA node** or one or more **VIA ways**.",
+                        "maxdist": "The \"{distField}\" slider controls how far to search for additional connected roads.",
+                        "maxvia": "The \"{viaField}\" slider adjusts how many via ways may be included in the search. (Tip: simple is better)"
+                    },
+                    "inspecting": {
+                        "title": "Inspecting",
+                        "about": "Hover over any **FROM** segment to see whether it has any turn restrictions. Each possible **TO** destination will be drawn with a colored shadow showing whether a restriction exists.",
+                        "from_shadow": "{fromShadow} **FROM segment**",
+                        "allow_shadow": "{allowShadow} **TO Allowed**",
+                        "restrict_shadow": "{restrictShadow} **TO Restricted**",
+                        "only_shadow": "{onlyShadow} **TO Only**",
+                        "restricted": "\"Restricted\" means that there is a turn restriction, for example \"No Left Turn\".",
+                        "only": "\"Only\" means that a vehicle taking that path may only make that choice, for example \"Only Straight On\"."
+                    },
+                    "modifying": {
+                        "title": "Modifying",
+                        "about": "To modify turn restrictions, first click on any starting **FROM** segment to select it. The selected segment will pulse, and all possible **TO** destinations will appear as turn symbols.",
+                        "indicators": "Then, click on a turn symbol to toggle it between \"Allowed\", \"Restricted\", and \"Only\".",
+                        "allow_turn": "{allowTurn} **TO Allowed**",
+                        "restrict_turn": "{restrictTurn} **TO Restricted**",
+                        "only_turn": "{onlyTurn} **TO Only**"
+                    },
+                    "tips": {
+                        "title": "Tips",
+                        "simple": "**Prefer simple restrictions over complex ones.**",
+                        "simple_example": "For example, avoid creating a via-way restriction if a simpler via-node turn restriction will do.",
+                        "indirect": "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**",
+                        "indirect_example": "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection.",
+                        "indirect_noedit": "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
+                    }
+                }
             }
         },
         "intro": {
@@ -1135,7 +1240,8 @@
                     "title": "Selecting features",
                     "select_one": "Select a single feature",
                     "select_multi": "Select multiple features",
-                    "lasso": "Draw a selection lasso around features"
+                    "lasso": "Draw a selection lasso around features",
+                    "search": "Find features matching search text"
                 },
                 "with_selected": {
                     "title": "With feature selected",
@@ -1196,6 +1302,28 @@
                     "measurement": "Toggle measurement panel"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -2460,9 +2588,6 @@
                 "tunnel": {
                     "label": "Type",
                     "placeholder": "Default"
-                },
-                "vending": {
-                    "label": "Type of Goods"
                 },
                 "visibility": {
                     "label": "Visibility",
@@ -4956,15 +5081,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "No U-turn"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Left Turn Only"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Right Turn Only"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "No Turns"
-                },
                 "type/route": {
                     "name": "Route"
                 },
@@ -5082,7 +5198,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
                 "name": "DigitalGlobe Premium Imagery Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -5096,7 +5212,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
                 "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
@@ -5105,6 +5221,13 @@
                 },
                 "description": "Esri world imagery.",
                 "name": "Esri World Imagery"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Esri archive imagery that may be clearer and more accurate than the default layer.",
+                "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -5173,26 +5296,44 @@
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "name": "U.S. Forest Roads Overlay"
+            },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Cycling"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Hiking"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Skating"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
                 "name": "Waymarked Trails: Winter Sports"
             },
             "basemap.at": {
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Basemap of Austria, based on goverment data.",
+                "description": "Basemap of Austria, based on government data.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -5254,7 +5395,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
             },
@@ -5269,6 +5410,57 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Improve OpenStreetMap in the Bay Area",
+                "extendedDescription": "This group is about growing the OpenStreetMap community here in the Bay Area. Our events are open to everyone, from open source enthusiasts, cyclists, GIS professionals, geocachers, and beyond. Anyone and everyone who is interested in maps, map making and free map data is welcome to join our group as well as attend our events."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Online mapping community based out of State College, PA"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "The OpenStreetMap user group for Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth, and all the cities in between are abounding with creative and tech-savvy people. The vision for this usergroup is to find new ways to use the amazing resource of OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Meetup for map enthusiasts in the Philadelphia area",
+                "extendedDescription": "GeoPhilly unites developers, geographers, data geeks, open source enthusiasts, civic hackers and map addicts in our shared love of maps and the stories they tell. If you use maps as part of your work or just want to learn more, this is the meetup for you!  Our events aim to be open, friendly, educational and social and range from happy hours to lightning talks or even workshops. Come create a diverse, inspiring geospatial community in the Philadelphia with us!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Improve OpenStreetMap in the DC area",
+                "extendedDescription": "We are a group of volunteer mappers who aim to improve the OpenStreetMap in the DC area. We also aim to teach others about the OSM ecosystem, data analytics, cartography, and GIS. We gather every other month at meetups to focus on one area of our city."
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "The OpenStreetMap user group for Chattanooga"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Mappers and OpenStreetMap users in the Portland area",
+                "extendedDescription": "OpenStreetMap (OSM) is a map of the world made by people like you. It's a map that you build, that's given away for free like wikipedia. Check out osm.org for more, and come join us at a meetup to talk maps, contribute to OSM, and have fun!"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "All are welcome! Sign up at {signupUrl}"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Sign up at {signupUrl}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap on Reddit",
+                "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
             }
         }
     }

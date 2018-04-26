@@ -1,0 +1,16 @@
+{
+    "icon": "poi-beach",
+    "fields": [
+        "name",
+        "address",
+        "fee"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "beach_resort"
+    },
+    "name": "Beach Resort"
+}

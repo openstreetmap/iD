@@ -11,12 +11,11 @@ import { utilRebind, utilTriggerEvent } from '../util';
 
 
 export function uiChangesetEditor(context) {
-    var dispatch = d3_dispatch('change'),
-        formFields = uiFormFields(context),
-        fieldsArr,
-        tags,
-        changesetId;
-
+    var dispatch = d3_dispatch('change');
+    var formFields = uiFormFields(context);
+    var _fieldsArr;
+    var _tags;
+    var _changesetID;
 
 
     function changesetEditor(selection) {
@@ -27,17 +26,17 @@ export function uiChangesetEditor(context) {
     function render(selection) {
         var initial = false;
 
-        if (!fieldsArr) {
+        if (!_fieldsArr) {
             initial = true;
             var presets = context.presets();
 
-            fieldsArr = [
+            _fieldsArr = [
                 uiField(context, presets.field('comment'), null, { show: true, revert: false }),
                 uiField(context, presets.field('source'), null, { show: false, revert: false }),
                 uiField(context, presets.field('hashtags'), null, { show: false, revert: false }),
             ];
 
-            fieldsArr.forEach(function(field) {
+            _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
                         dispatch.call('change', field, t, onInput);
@@ -45,19 +44,19 @@ export function uiChangesetEditor(context) {
             });
         }
 
-        fieldsArr.forEach(function(field) {
+        _fieldsArr.forEach(function(field) {
             field
-                .tags(tags);
+                .tags(_tags);
         });
 
 
         selection
-            .call(formFields.fieldsArr(fieldsArr));
+            .call(formFields.fieldsArr(_fieldsArr));
 
 
         if (initial) {
-            var commentField = selection.select('#preset-input-comment'),
-                commentNode = commentField.node();
+            var commentField = selection.select('#preset-input-comment');
+            var commentNode = commentField.node();
 
             if (commentNode) {
                 commentNode.focus();
@@ -91,7 +90,7 @@ export function uiChangesetEditor(context) {
         }
 
         // Add warning if comment mentions Google
-        var hasGoogle = tags.comment.match(/google/i);
+        var hasGoogle = _tags.comment.match(/google/i);
         var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
             .data(hasGoogle ? [0] : []);
 
@@ -123,18 +122,18 @@ export function uiChangesetEditor(context) {
 
 
     changesetEditor.tags = function(_) {
-        if (!arguments.length) return tags;
-        tags = _;
-        // Don't reset fieldsArr here.
+        if (!arguments.length) return _tags;
+        _tags = _;
+        // Don't reset _fieldsArr here.
         return changesetEditor;
     };
 
 
     changesetEditor.changesetID = function(_) {
-        if (!arguments.length) return changesetId;
-        if (changesetId === _) return changesetEditor;
-        changesetId = _;
-        fieldsArr = null;
+        if (!arguments.length) return _changesetID;
+        if (_changesetID === _) return changesetEditor;
+        _changesetID = _;
+        _fieldsArr = null;
         return changesetEditor;
     };
 

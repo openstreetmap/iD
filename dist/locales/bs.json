@@ -253,12 +253,7 @@
             "unsaved_changes": "Imate promjene koje nisu spašene"
         },
         "success": {
-            "edited_osm": "OSM uređen!",
-            "just_edited": "Upravo ste uredili OpenStreetMap kartu!",
-            "view_on_osm": "Pogledajte na OSM-u",
-            "facebook": "Podijeliti na Facebooku",
-            "twitter": "Podijeliti na Twitteru",
-            "google": "Podijeliti na Google+"
+            "just_edited": "Upravo ste uredili OpenStreetMap kartu!"
         },
         "splash": {
             "welcome": "Dobrodošli u ID - OpenStreetMap uređivač",
@@ -654,9 +649,6 @@
                 },
                 "trail_visibility": {
                     "label": "Vidljivost traga"
-                },
-                "vending": {
-                    "label": "Vrsta dobara"
                 },
                 "water": {
                     "label": "Vrsta"
