@@ -62,7 +62,6 @@ export function modeSave(context) {
     });
     operationDelete(deletions, context)();
 
-    var keybinding = d3_keybinding('select');
     var loading = uiLoading(context)
         .message(t('save.uploading'))
         .blocking(true);

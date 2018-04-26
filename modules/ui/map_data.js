@@ -1,10 +1,15 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _map from 'lodash-es/map';
+
+import { json as d3_json } from 'd3-request';
+
 import {
     event as d3_event,
-    select as d3_select
+    select as d3_select,
+    selectAll as d3_selectAll
 } from 'd3-selection';
+
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
@@ -35,9 +40,9 @@ export function uiMapData(context) {
                 var v = value.toLowerCase();
                 var suggestedTags = [];
                 if (setPreset) {
-                    _.map(setPreset.fields, function(field) {
+                    _map(setPreset.fields, function(field) {
                         if (field.keys) {
-                            suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
+                            suggestedTags = suggestedTags.concat(_map(field.keys, function(key) {
                                 return { value: key };
                             }));
                         } else if (field.key) {
@@ -231,15 +236,15 @@ export function uiMapData(context) {
 
             var urlEntry, urlInput, copyrightable, copylabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, metadata_url, plan_url;
 
-            d3.selectAll('.geoservice-all-opt input, .geoservice-osm-opt input, .geoservice-import-opt input').on('change', function () {
-                if (d3.select('.geoservice-all-opt input').property('checked')) {
-                    d3.selectAll('.data-layer .geoservice-import, .data-layer .geoservice-osm').style('visibility', 'visible');
-                } else if (d3.select('.geoservice-osm-opt input').property('checked')) {
-                    d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'visible');
-                    d3.selectAll('.data-layer .geoservice-import').style('visibility', 'hidden');
-                } else if (d3.select('.geoservice-import-opt input').property('checked')) {
-                    d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'hidden');
-                    d3.selectAll('.data-layer .geoservice-import').style('visibility', 'visible');
+            d3_selectAll('.geoservice-all-opt input, .geoservice-osm-opt input, .geoservice-import-opt input').on('change', function() {
+                if (d3_select('.geoservice-all-opt input').property('checked')) {
+                    d3_selectAll('.data-layer .geoservice-import, .data-layer .geoservice-osm').style('visibility', 'visible');
+                } else if (d3_select('.geoservice-osm-opt input').property('checked')) {
+                    d3_selectAll('.data-layer .geoservice-osm').style('visibility', 'visible');
+                    d3_selectAll('.data-layer .geoservice-import').style('visibility', 'hidden');
+                } else if (d3_select('.geoservice-import-opt input').property('checked')) {
+                    d3_selectAll('.data-layer .geoservice-osm').style('visibility', 'hidden');
+                    d3_selectAll('.data-layer .geoservice-import').style('visibility', 'visible');
                 }
             });
 
@@ -249,7 +254,7 @@ export function uiMapData(context) {
             }
 
             // based on the help pane
-            this.pane = d3.selectAll('#content').append('div')
+            this.pane = d3_selectAll('#content').append('div')
                 .attr('class', 'shaded hide geoservice-pane')
                 .append('div').attr('class', 'modal fillL col9')
                 .append('div').attr('class', 'cf')
@@ -260,9 +265,9 @@ export function uiMapData(context) {
                 .text(t('geoservice.clear_geoservice'))
                 .on('click', (function() {
                     // clear the UI
-                    d3.selectAll('.geoservice-all-opt, .geoservice-osm-opt, .geoservice-import-opt, .clear-geoservice')
+                    d3_selectAll('.geoservice-all-opt, .geoservice-osm-opt, .geoservice-import-opt, .clear-geoservice')
                     .style('display', 'none');
-                    d3.select('.geoservice-button-label').text('Add GeoService Layer');
+                    d3_select('.geoservice-button-label').text('Add GeoService Layer');
                     hoverGeoService.title(t('geoservice.enter_url'));
                     // clear the map
                     geoserviceLayer.geojson({});
@@ -272,7 +277,7 @@ export function uiMapData(context) {
                 }).bind(this));
 
             function hidePreviewGeoService () {
-                d3.selectAll('.geoservice-preview, .geoservice-table, .copyright-text, .layer-counted')
+                d3_selectAll('.geoservice-preview, .geoservice-table, .copyright-text, .layer-counted')
                     .classed('hide', true);
             }
 
@@ -281,14 +286,14 @@ export function uiMapData(context) {
                     return console.log(err);
                 }
 
-                d3.selectAll('.geoservice-preview, .copyright-text')
+                d3_selectAll('.geoservice-preview, .copyright-text')
                     .classed('hide', false);
 
                 if (data.layers && data.layers.length) {
                     // MapServer layer selector is visible
-                    d3.select('.geoservice-table')
+                    d3_select('.geoservice-table')
                         .classed('hide', true);
-                    d3.selectAll('.geoservice-pane button.url.final')
+                    d3_selectAll('.geoservice-pane button.url.final')
                         .property('disabled', true);
                     layerSelect.html('')
                         .classed('hide', false)
@@ -303,7 +308,7 @@ export function uiMapData(context) {
                             .attr('value', '')
                             .property('selected', true);
 
-                    _.map(data.layers, function(optLayer) {
+                    _map(data.layers, function(optLayer) {
                         layerSelect.append('option')
                             .text(optLayer.name)
                             .attr('value', metadata_url.split('?f=json')[0] + '/' + optLayer.id);
@@ -318,21 +323,21 @@ export function uiMapData(context) {
 
                 // fetch one record for sample values
                 var sample_url = metadata_url.split('?f=json')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json&resultRecordCount=1';
-                d3.json(sample_url, function (err, data) {
+                d3_json(sample_url, function(err, data) {
                     var samplePick = data.features[0].attributes;
                     var fields = Object.keys(samplePick);
-                    _.map(fields, function (field) {
-                        d3.select('tr.preview.' + field + ' .sample-value')
+                    _map(fields, function(field) {
+                        d3_select('tr.preview.' + field + ' .sample-value')
                             .text(samplePick[field]);
                     });
                 });
 
                 // make a count of local (current viewport) and global features
                 var counter_url = metadata_url.split('?f=json')[0] + '/query?where=1%3D1&returnCountOnly=true&f=json';
-                d3.selectAll('.layer-counted').classed('hide', false);
-                d3.json(counter_url, function (err, data) {
+                d3_selectAll('.layer-counted').classed('hide', false);
+                d3_json(counter_url, function(err, data) {
                     var count = data.count;
-                    d3.selectAll('.layer-counted .global').text(count);
+                    d3_selectAll('.layer-counted .global').text(count);
                 });
                 var bounds = context.map().trimmedExtent().bbox();
                 bounds = JSON.stringify({
@@ -346,17 +351,17 @@ export function uiMapData(context) {
                 counter_url += '&geometryType=esriGeometryEnvelope';
                 counter_url += '&spatialRel=esriSpatialRelIntersects';
                 counter_url += '&inSR=4326';
-                d3.json(counter_url, function (err, data) {
+                d3_json(counter_url, function(err, data) {
                     var count = (data || {}).count;
                     if (!err && count > 0) {
                         // re-enable download buttons
-                        d3.selectAll('.geoservice-pane button.url.final')
+                        d3_selectAll('.geoservice-pane button.url.final')
                             .property('disabled', false);
                     } else {
                         // warn user
                         alert(t('geoservice.no_data'));
                     }
-                    d3.selectAll('.layer-counted .local').text(count);
+                    d3_selectAll('.layer-counted .local').text(count);
                 });
 
                 // handle OSM / ODBL license approval and appease import guidelines
@@ -367,26 +372,26 @@ export function uiMapData(context) {
                 if (license) {
                     if (context.storage('license-' + license)) {
                         // user has seen and approved this license before
-                        d3.selectAll('.copyright-text')
+                        d3_selectAll('.copyright-text')
                             .text(t('geoservice.copyright.approved') + license);
                         copyapproval.property('checked', true);
                     } else {
                         // new license
-                        d3.selectAll('.copyright-text').text('Copyright information: ' + license);
+                        d3_selectAll('.copyright-text').text('Copyright information: ' + license);
                         copylabel.classed('hide', false);
                     }
                 } else if (context.storage('license-' + metadata_url)) {
                     // user has seen and approved this URL before
-                    d3.selectAll('.copyright-text')
+                    d3_selectAll('.copyright-text')
                         .text(t('geoservice.copyright.previous'));
                     copyapproval.property('checked', true);
                 } else {
                     // new URL, no license
-                    d3.selectAll('.copyright-text').text(t('geoservice.copyright.not_approved'));
+                    d3_selectAll('.copyright-text').text(t('geoservice.copyright.not_approved'));
                     copylabel.classed('hide', false);
                 }
 
-                var geoserviceTable = d3.selectAll('.geoservice-table')
+                var geoserviceTable = d3_selectAll('.geoservice-table')
                     .html('<thead class="tag-row"><th>Field</th><th>Sample value</th><th class="include-row">Include?</th><th>(optional) OSM tag</th></thead>')
                     .classed('hide', false);
 
@@ -399,7 +404,7 @@ export function uiMapData(context) {
                 // initially list all GeoService fields and set them to false (not imported)
                 var myFields = {};
 
-                _.map(data.fields, function (field) {
+                _map(data.fields, function(field) {
                     // don't allow user to change how OBJECTID works or map other system-managed fields
                     if ((['OBJECTID', 'SHAPE', 'SHAPE_LENGTH', 'SHAPE_AREA', 'SHAPE.LENGTH', 'SHAPE.AREA', 'X_COORD', 'Y_COORD'].indexOf(field.name.toUpperCase()) > -1) || (field.name.toUpperCase().indexOf('SHAPE.') === 0)) {
                         return;
@@ -426,13 +431,13 @@ export function uiMapData(context) {
                             .property('checked', typeof geoserviceLayer.fields()[field.name] === 'string')
                             .on('click', function() {
                                 // control click toggles all, otherwise change event handles it all
-                                if (d3.event.ctrlKey || d3.event.metaKey) {
+                                if (d3_event.ctrlKey || d3_event.metaKey) {
                                     var allSet = this.checked;
                                     var selectFields = geoserviceLayer.fields();
-                                    d3.selectAll('.geoservice-table input[type="checkbox"]')
+                                    d3_selectAll('.geoservice-table input[type="checkbox"]')
                                         .property('checked', allSet);
                                     var fieldNames = Object.keys(selectFields);
-                                    _.map(fieldNames, function (field) {
+                                    _map(fieldNames, function(field) {
                                         // set to current field-name, GeoService original name, or false (for not-imported)
                                         selectFields[field] = allSet ? (selectFields[field] || field) : false;
                                     });
@@ -446,10 +451,10 @@ export function uiMapData(context) {
                                 geoserviceLayer.fields(selectFields);
 
                                 // don't allow an OSM import tag to be entered if we're not importing this field
-                                var dropdown = d3.select('input[name="' + field.name + '"]')
+                                var dropdown = d3_select('input[name="' + field.name + '"]')
                                     .property('value', '')
                                     .property('disabled', !this.checked);
-                                d3.select(dropdown.node().parentNode.lastChild)
+                                d3_select(dropdown.node().parentNode.lastChild)
                                     .classed('hide', !this.checked);
                             });
 
@@ -471,9 +476,9 @@ export function uiMapData(context) {
 
                 // UI: hide combobox dropdown until enabled
                 // show table and OSM add tag button
-                d3.selectAll('.geoservice-table .combobox-caret')
+                d3_selectAll('.geoservice-table .combobox-caret')
                     .classed('hide', true);
-                d3.selectAll('.geoservice-table, .add-tag')
+                d3_selectAll('.geoservice-table, .add-tag')
                     .classed('hide', false);
             }
 
@@ -541,7 +546,7 @@ export function uiMapData(context) {
                         }
                         metadata_url = (metadata_url.join('/') + '?f=json').replace(/\/\//g, '/').replace(':/', '://');
 
-                        d3.json(metadata_url, previewGeoService);
+                        d3_json(metadata_url, previewGeoService);
                     });
 
                 layerPreview = urlEntry.append('div')
@@ -591,7 +596,7 @@ export function uiMapData(context) {
                         geoserviceLayer.preset(null);
                     });
 
-                presetList = _.map(context.presets().collection, function(preset) {
+                presetList = _map(context.presets().collection, function(preset) {
                     return { value: preset.id };
                 });
                 presetComboBox = function(value, cb) {
@@ -653,7 +658,7 @@ export function uiMapData(context) {
                 // this button adds a new field to data brought in from the GeoService
                 // for example you can add addr:state=VA to a city's addresses which otherwise wouldn't have this repeated field
 
-                d3.selectAll('.geoservice-table')
+                d3_selectAll('.geoservice-table')
                     .append('hr')
                     .attr('class', 'import-table-switch');
 
@@ -662,8 +667,8 @@ export function uiMapData(context) {
                     .html('Add key:value to all features')
                     .call(svgIcon('#icon-plus', 'icon light'))
                     .on('click', function() {
-                        d3.selectAll('.import-table-switch').classed('import-table-switch', false);
-                        var row = d3.selectAll('.geoservice-table').append('tr');
+                        d3_selectAll('.import-table-switch').classed('import-table-switch', false);
+                        var row = d3_selectAll('.geoservice-table').append('tr');
                         var uniqNum = Math.floor(Math.random() * 10000);
 
                         // fill in original name and sample value columns
@@ -697,7 +702,7 @@ export function uiMapData(context) {
                                     geoserviceLayer.setField('add_' + this.value, null);
                                 }
                                 this.name = this.value;
-                                d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
+                                d3_selectAll('.osm-key-' + uniqNum).attr('name', this.value);
                             });
 
                         addval.append('div').text('=');
@@ -723,7 +728,7 @@ export function uiMapData(context) {
 
                 // actual download buttons, with license check and memory step
                 var startLoad = function() {
-                    var url = d3.select('input.geoservice').property('value');
+                    var url = d3_select('input.geoservice').property('value');
                     var blacklists = context.connection().imageryBlacklists();
                     for (var b = 0; b < blacklists.length; b++) {
                         if (url.match(new RegExp(blacklists[b]))) {
@@ -746,7 +751,7 @@ export function uiMapData(context) {
                     importedAtLeastOneField = true;
                     }
                     var hideFields = [];
-                    _.map(Object.keys(importFields), function (field) {
+                    _map(Object.keys(importFields), function(field) {
                         if (importFields[field]) {
                             importedAtLeastOneField = true;
                         } else {
@@ -762,31 +767,31 @@ export function uiMapData(context) {
                     // user must do Clear GeoService to clear things and start over
 
                     // hide rows which I didn't import
-                    _.map(hideFields, function (field) {
-                        d3.select('.geoservice-table tr.preview.' + field)
+                    _map(hideFields, function(field) {
+                        d3_select('.geoservice-table tr.preview.' + field)
                             .style('display', 'none');
                     });
                     // don't show the import-or-not checkbox
-                    d3.selectAll('.geoservice-table .include-row, .geoservice-table .combobox-caret')
+                    d3_selectAll('.geoservice-table .include-row, .geoservice-table .combobox-caret')
                         .style('display', 'none');
                     // don't let user change or add OSM tags
-                    d3.selectAll('.geoservice-table .osm-counterpart, .add-osm-key-val input')
+                    d3_selectAll('.geoservice-table .osm-counterpart, .add-osm-key-val input')
                         .property('disabled', true);
-                    d3.selectAll('.add-tag')
+                    d3_selectAll('.add-tag')
                         .style('display', 'none');
 
                     // help text
-                    d3.selectAll('.geoservice-pane .help-text').classed('hide', false);
+                    d3_selectAll('.geoservice-pane .help-text').classed('hide', false);
 
                     // change sidebar
-                    d3.select('.geoservice-button-label')
+                    d3_select('.geoservice-button-label')
                         .text(t('geoservice.view_import'));
                     hoverGeoService.title('View GeoService Import Details');
-                    d3.selectAll('.list-item-geoservice label, .clear-geoservice')
+                    d3_selectAll('.list-item-geoservice label, .clear-geoservice')
                     .style('display', 'block');
-                    d3.selectAll('.layer-counted')
+                    d3_selectAll('.layer-counted')
                         .classed('hide', true);
-                    setGeoService(d3.select('.topurl input.geoservice').property('value'));
+                    setGeoService(d3_select('.topurl input.geoservice').property('value'));
                 };
                 pane.append('button')
                     .attr('class', 'url final local')
@@ -806,14 +811,14 @@ export function uiMapData(context) {
             geoservicePane.classed('hide', hideMe);
 
             // if we're re-opening this window and previously saw zero entities, might retry geoservice call
-            if (!hideMe && d3.select('.geoservice-pane .layer-counted .local').node && d3.select('.geoservice-pane .layer-counted .local').text() === '0') {
-                d3.select('input.geoservice[type="text"]').on('input')(null,
-                    d3.select('input.geoservice[type="text"]').property('value'));
+            if (!hideMe && d3_select('.geoservice-pane .layer-counted .local').node && d3_select('.geoservice-pane .layer-counted .local').text() === '0') {
+                d3_select('input.geoservice[type="text"]').on('input')(null,
+                    d3_select('input.geoservice[type="text"]').property('value'));
             }
         }
 
         function editGeoService() {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             toggle();
         }
 
@@ -839,7 +844,7 @@ export function uiMapData(context) {
 
                 // suggest additional OSM tags
                 var suggestedTags = [];
-                _.map(setPreset.fields, function(field) {
+                _map(setPreset.fields, function(field) {
                     suggestedTags = suggestedTags.concat(field.keys);
                 });
             }

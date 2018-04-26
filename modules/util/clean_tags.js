@@ -12,13 +12,7 @@ export function utilCleanTags(tags) {
 
 
     function cleanValue(k, v) {
-        function keepSpaces(k) {
-            return /_hours|_times|:conditional$/.test(k);
-        }
-
-        function skip(k) {
-            return /^(description|note|fixme)$/.test(k);
-        }
+        v = v + '';   // convert to string (value may be a numeric from imported data)
 
         if (skip(k)) return v;
 
@@ -39,5 +33,14 @@ export function utilCleanTags(tags) {
         }
 
         return cleaned;
+
+
+        function keepSpaces(k) {
+            return /_hours|_times|:conditional$/.test(k);
+        }
+
+        function skip(k) {
+            return /^(description|note|fixme)$/.test(k);
+        }
     }
 }

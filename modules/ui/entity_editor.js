@@ -22,6 +22,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { utilCleanTags, utilRebind } from '../util';
 
+
 export function uiEntityEditor(context) {
     var dispatch = d3_dispatch('choose');
     var _state = 'select';
@@ -274,47 +275,6 @@ export function uiEntityEditor(context) {
             entityEditor.modified(_base !== graph);
             entityEditor(selection);
         }
-    }
-
-
-    function clean(o) {
-
-        function cleanVal(k, v) {
-            // a number value from service should be converted to a string here
-            v = v + '';
-
-            function keepSpaces(k) {
-                return k.match(/_hours|_times/) !== null;
-            }
-
-            var blacklist = ['description', 'note', 'fixme'];
-            if (_some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
-
-            var cleaned = v.split(';')
-                .map(function(s) { return s.trim(); })
-                .join(keepSpaces(k) ? '; ' : ';');
-
-            // The code below is not intended to validate websites and emails.
-            // It is only intended to prevent obvious copy-paste errors. (#2323)
-            // clean website- and email-like tags
-            if (k.indexOf('website') !== -1 ||
-                k.indexOf('email') !== -1 ||
-                cleaned.indexOf('http') === 0) {
-                cleaned = cleaned
-                    .replace(/[\u200B-\u200F\uFEFF]/g, '');  // strip LRM and other zero width chars
-
-            }
-
-            return cleaned;
-        }
-
-        var out = {}, k, v;
-        for (k in o) {
-            if (k && (v = o[k]) !== undefined) {
-                out[k] = cleanVal(k, v);
-            }
-        }
-        return out;
     }
 
 
