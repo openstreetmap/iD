@@ -15,15 +15,17 @@ import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util';
 
-
 var _changeset;
+
 var readOnlyTags = [
     /^changesets_count$/,
     /^created_by$/,
     /^ideditor:/,
     /^imagery_used$/,
     /^host$/,
-    /^locale$/
+    /^locale$/,
+    /^source$/,
+    /^import_discussion$/
 ];
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
@@ -42,7 +44,6 @@ export function uiCommit(context) {
         .on('change', changeTags);
     var commitChanges = uiCommitChanges(context);
     var commitWarnings = uiCommitWarnings(context);
-
 
     function commit(selection) {
         _selection = selection;
@@ -69,6 +70,13 @@ export function uiCommit(context) {
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
+
+            /* if a GeoService was imported, pass the source url through,
+            along with mandatory, user editable field for the import discussion */
+            if (context.history().source()) {
+                tags.source = context.history().source();
+                tags.import_discussion = context.history().importPlan();
+            }
 
             // call findHashtags initially - this will remove stored
             // hashtags if any hashtags are found in the comment - #4304
@@ -351,7 +359,6 @@ export function uiCommit(context) {
         return !(rr === '' || rr === 'no');
     }
 
-
     function updateChangeset(changed, onInput) {
         var tags = _clone(_changeset.tags);
 
@@ -419,7 +426,6 @@ export function uiCommit(context) {
     commit.reset = function() {
         _changeset = null;
     };
-
 
     return utilRebind(commit, dispatch, 'on');
 }

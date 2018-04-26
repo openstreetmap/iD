@@ -189,7 +189,11 @@ export function svgAreas(projection, context) {
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
 
-                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
+                if (entity.approvedForEdit) {
+                    this.setAttribute('class', entity.type + ' area geoservice-import ' + layer + ' ' + entity.id + ' import-' + entity.approvedForEdit);
+                } else {
+                    this.setAttribute('class', entity.type + ' area geoservice-osm ' + layer + ' ' + entity.id);
+                }
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');

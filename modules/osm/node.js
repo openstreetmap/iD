@@ -22,7 +22,7 @@ osmNode.prototype = Object.create(osmEntity.prototype);
 _extend(osmNode.prototype, {
 
     type: 'node',
-
+    approvedForEdit: null,
 
     extent: function() {
         return new geoExtent(this.loc);

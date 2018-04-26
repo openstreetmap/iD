@@ -95,7 +95,13 @@ export function svgPoints(projection, context) {
 
         var enter = groups.enter()
             .append('g')
-            .attr('class', function(d) { return 'node point ' + d.id; })
+            .attr('class', function(d) {
+                if (d.approvedForEdit) {
+                    return 'node point geoservice-import ' + d.id + ' import-' + d.approvedForEdit;
+                } else {
+                    return 'node point geoservice-osm ' + d.id;
+                }
+            })
             .order();
 
         enter

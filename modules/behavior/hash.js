@@ -62,6 +62,7 @@ export function behaviorHash(context) {
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
+        // pretty sure its _assign now?
         return '#' + utilQsString(_assign(q, newParams), true);
     };
 

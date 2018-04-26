@@ -7,6 +7,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { svgDebug } from './debug';
+import { svgGeoService } from './geoservice';
 import { svgGpx } from './gpx';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
@@ -21,6 +22,7 @@ export function svgLayers(projection, context) {
         svg = d3_select(null),
         layers = [
             { id: 'osm', layer: svgOsm(projection, context, dispatch) },
+            { id: 'geoservice', layer: svgGeoService(projection, context, dispatch) },
             { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
             { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
             { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },

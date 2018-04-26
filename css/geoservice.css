@@ -1,0 +1,307 @@
+/* GeoService layer */
+.layer-geoservice {
+    pointer-events: none;
+}
+
+.layer-list li.list-item-geoservice {
+    height: auto;
+}
+
+.layer-list .list-item-geoservice label {
+    border-top: 1px solid #ccc;
+    display: none;
+}
+
+.layer-list .list-item-geoservice label:first-child {
+    border-top: none;
+    display: block;
+}
+
+path.geoservice {
+    stroke: #FF26D4;
+    stroke-width: 2;
+    fill: none;
+}
+
+path.geoservice-polygon, path.geoservice-multipolygon {
+    fill: #FF26D4;
+    fill-opacity: 0.18;
+}
+
+text.geoservice {
+    fill: #FF26D4;
+}
+
+.geoservice-pane button {
+    float: right;
+    background: #ccc;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin-top: 5px;
+}
+
+.geoservice-pane button.no-float {
+    float: none;
+}
+
+.geoservice-pane .inspector-inner {
+    padding: 0;
+}
+
+.geoservice-pane th {
+    font-weight: bold;
+}
+
+.geoservice-pane td, .geoservice-pane th {
+    border: 1px solid #ccc;
+    padding-left: 7px;
+    border-right: none;
+}
+
+.geoservice-pane td:last-child {
+    border-left: none;
+}
+
+.geoservice-pane table input {
+    border-radius: 0 4px 4px 0;
+    padding-left: 2px;
+    border-bottom: none;
+}
+
+.geoservice-pane th {
+    border: none;
+}
+
+.geoservice-pane tr:last-child input {
+    border-bottom: 1px solid rgb(204, 204, 204);
+    margin-bottom: -1px;
+    border-radius: 0 4px 0 0;
+}
+
+.geoservice-pane button.add-tag {
+    margin-top: 0;
+    float: none;
+}
+
+.geoservice-pane .add-tag svg {
+    float: left;
+    color: #444;
+}
+
+.geoservice-pane button.url {
+    /* border-radius: 0 0 4px 4px; */
+    border-radius: 4px;
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.geoservice-pane button.url.final {
+    margin-top: 10px;
+}
+
+.geoservice-pane .topurl input[type='text'] {
+    margin-top: 10px;
+}
+
+.geoservice-pane .preset {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.geoservice-pane .preset button {
+  margin-left: 12px;
+  height: 35px;
+}
+
+.geoservice-pane .preset-icon-holder {
+  display: inline-block;
+}
+
+.geoservice-pane .preset-icon-frame {
+  position: relative;
+  top: -12px;
+  left: 0;
+  margin-right: 8px;
+}
+
+.geoservice-pane .preset-icon-24 svg {
+  position: absolute;
+  left: 30px;
+}
+
+.geoservice-pane .preset-icon-28 {
+  position: relative;
+  left: 36px;
+  top: -15px;
+}
+
+.geoservice-pane .preset-icon-60 {
+  position: relative;
+  top: -15px;
+}
+
+.geoservice-pane .import-approval {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 11px;
+  margin-top: 10px;
+}
+
+.geoservice-pane .import-approval label {
+    display: block;
+}
+
+.geoservice-pane .import-table-switch {
+    display: none;
+}
+
+.geoservice-table.hide, .geoservice-pane .hide {
+    display: none !important;
+}
+
+.geoservice-pane.shaded {
+    z-index: 9 !important;
+}
+
+.geoservice-pane .preset .combobox-input {
+    max-width: 45%;
+    margin-left: 10%;
+}
+
+.geoservice-pane .preset .combobox-caret {
+    margin-top: 10px;
+}
+
+.geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines, .geoservice-pane .overlap-buildings {
+    display: none;
+}
+
+.geoservice-pane .must-show {
+    display: block !important;
+}
+
+.geoservice-pane .layer-select {
+    margin-top: 8px;
+}
+
+.geoservice-pane .layer-counted {
+    font-weight: bold;
+    text-align: right;
+}
+
+.layer-list button.clear-geoservice {
+    float: none;
+    width: auto;
+    padding: 7px;
+    margin-top: 7px;
+    margin-bottom: 6px;
+    margin-left: 7px;
+    border-radius: 3px !important;
+    border-left: none;
+		background: #ccc;
+}
+
+/* more importer stuff */
+
+.import-approve {
+    text-align: center;
+}
+
+.import-approve .import-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 20px;
+    top: 15px;
+    border-radius: 10px;
+}
+
+.import-approve .import-icon.neutral {
+    color: goldenrod;
+    background-color: goldenrod;
+}
+
+.import-approve .import-icon.approve {
+    color: #80fa80;
+    background-color: #80fa80;
+}
+
+.import-approve .import-icon.reject {
+    color: #fc7d7d;
+    background-color: #fc7d7d;
+}
+
+.import-approve button {
+    margin: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.import-approve button.approve {
+    background-color: #a6f3a6;
+}
+
+.import-approve button.approve:hover {
+    background-color: #80fa80;
+}
+
+.import-approve button:last-child {
+    background-color: #fca5a5;
+}
+
+.import-approve button:last-child:hover {
+    background-color: #fc7d7d;
+}
+
+g.point.import-approved .stroke {
+    fill: #a6f3a6;
+}
+
+path.import-approved.way {
+    stroke: #a6f3a6;
+}
+
+path.import-approved.way.area {
+    stroke: rgba(90, 225, 90, 0.3);
+}
+
+g.point.import-pending .stroke {
+    fill: goldenrod;
+}
+
+path.import-pending.way {
+    stroke: goldenrod;
+}
+
+path.import-pending.way.area {
+    stroke: rgba(218, 165, 32, 0.3);
+}
+
+g.point.import-edited .stroke {
+    fill: #a6a6f3;
+}
+
+path.import-edited.way {
+    stroke: #a6a6f3;
+}
+
+path.import-edited.way.area {
+    stroke: rgba(90, 90, 225, 0.3);
+}
+
+g.point.import-rejected .stroke {
+    fill: #f3a6a6;
+}
+
+path.import-rejected.way {
+    stroke: #f3a6a6;
+}
+
+path.import-rejected.way.area {
+    stroke: rgba(225, 90, 90, 0.3);
+}
+
+.geoservice-pane .preset-icon-24 {
+    position: inherit;
+}

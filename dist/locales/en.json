@@ -715,6 +715,32 @@
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
         },
+        "geoservice": {
+            "approve": "Approve",
+            "reject": "Reject",
+            "match_preset": "Optional: match features to a OSM preset",
+            "exceeded_limit": "Service feature limit exceeded. Number fetched: ",
+            "enter_url": "Enter a GeoService URL",
+            "add_layer": "Add GeoService Layer",
+            "show_all": "Show OSM & Import",
+            "hide_import": "Hide Import Layer",
+            "hide_osm": "Hide OSM Layer",
+            "clear_geoservice": "Clear GeoService",
+            "select_layer": "select one layer",
+            "success": "You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap. You can filter the view to see only your imported data in the right sidebar.",
+            "no_data": "No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService.",
+            "copyright": {
+                "approved": "Copyright information (previously approved): ",
+                "previous": "No copyright information provided. (previously approved)",
+                "not_approved": "No copyright information provided."
+            },
+            "not_valid": "The url provided not recognized as a valid GeoService",
+            "plan": "The source license grants permission for inclusion in OpenStreetMap. I'm also providing a link to my import plan:",
+            "verboten": "This data source matches Google or another service which is copyrighted, and not importable on OpenStreetMap.",
+            "first_timer": "This is your first time importing from this GeoService. Please confirm that its license grants permission to be included in OpenStreetMap",
+            "no_preset": "Please use a preset or import at least one field from the GeoService",
+            "view_import": "View GeoService Import"
+        },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",
             "title": "Photo Overlay (Mapillary)"
@@ -896,6 +922,21 @@
                 "using": "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Click the {data} **Map data** panel on the side of the map to enable, disable, or zoom to your GPS data.",
                 "tracing": "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add.",
                 "upload": "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
+            },
+            "geoservices": {
+                "title": "Geoservices",
+                "intro": "The GeoService tool allows you to fetch live JSON from [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data)and verify the accuracy of individual features before importing them into OpenStreetMap.",
+                "import_guidelines": "Imports should be planned and executed with more care and sensitivity than other edits, because poor imports can have significant impacts on both existing data and local mapping community. If you'd like to import data in bulk you **must** heed OSM's [Import/Guidelines](http://wiki.openstreetmap.org/wiki/Import/Guidelines) and discuss the plan _in advance_.",
+                "license_approval": "Just because you find a public GeoService out in the wild does **not** mean you are allowed to import the data into OpenStreetMap! Importing is _only_ allowed if the organization has published it with a PD (Public Domain), CC0 (Creative Commons) or PDDL license or explicit permission has been granted for inclusion in OSM. You can find more information about ODbL license compatibility [here](http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility).",
+                "sample_geoservices": "[Madison, WI - bus lines](https://maps.cityofmadison.com/arcgis/rest/services/Public/OPEN_DATA_TRANS/MapServer/18), [Norfolk, VA - addresses](http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/0'), [Hartford, CT - complex buildings / OSM relations](http://gis1.hartford.gov/arcgis/rest/services/OpenData_Community/MapServer/41), [Stark County / Canton, OH - bike lanes](https://webdmz.starkcountyohio.gov/arcgis/rest/services/RPC/RideStarkOnRoadBikeLane/MapServer/0)",
+                "editing_process_1": "In the right menubar, select Map Data (as if you are importing a GPX layer)",
+                "editing_process_2": "Click 'Add GeoService Layer'",
+                "editing_process_3": "Use the iD editor's preset menu on the left to set a target import (for example, a building or address).",
+                "editing_process_4": "Paste the GeoService URL into the text field (it is also possible to add a service to iD by including &geoservice=(escaped URL) in a link URL).",
+                "editing_process_5": "You'll be asked to confirm that the copyright information for the service grants permission for the data to be included in OpenStreetMap.",
+                "editing_process_6": "Select 'Load in View' (for large datasets) or 'Load Globally' to control what is fetched.",
+                "editing_process_7": "The GeoService importer now gives you the option to map the service's fields to OSM tags. You can change the name of the tag in your GeoService. You can add new fields - for example, addresses in Norfolk, Virginia should have ```addr:city=Norfolk``` and ```addr:state=VA``` which are ignored as redundant in the city's data. Fields which you do not map are removed from the data before import. After features have been fetched they need to be reviewed and approved individually prior to being included in an actual changeset.",
+                "wat": "**I've heard of GeoJSON. What is a _GeoService_?** The [GeoServices](http://geoservices.github.io/index.html) REST specification was developed by Esri and transferred to the [Open Web Foundation](http://www.openwebfoundation.org/faqs/users-of-owf-agreements) in 2010. In iD, we are leveraging its predictable pattern for querying spatial data (ie: [which US County am I located in](      https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/15/query? outFields=*&geometryType=esriGeometryPoint&geometry=-77.069,38.897&inSR=4326&f=geojson)). Besides datasets published with Esri tools, the open source project [Koop](http://koopjs.github.io/) makes it possible to use this tool to fetch data from CKAN and Socrata data stores as well."
             },
             "field": {
                 "restrictions": {

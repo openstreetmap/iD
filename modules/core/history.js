@@ -40,7 +40,8 @@ export function coreHistory(context) {
     var _stack;
     var _index;
     var _tree;
-
+    var source;
+    var importPlan;
 
     // internal _act, accepts list of actions and eased time
     function _act(actions, t) {
@@ -62,7 +63,9 @@ export function coreHistory(context) {
         return {
             graph: graph,
             annotation: annotation,
-            imageryUsed: imageryUsed
+            imageryUsed: imageryUsed,
+            source: source,
+            importPlan: importPlan
         };
     }
 
@@ -302,6 +305,24 @@ export function coreHistory(context) {
             }
         },
 
+        source: function(sourceUrl) {
+            if (sourceUrl) {
+                source = sourceUrl;
+                return history;
+            } else {
+                return source;
+            }
+        },
+
+        importPlan: function(plan_url) {
+            if (plan_url) {
+                importPlan = plan_url;
+                return history;
+            } else {
+                return importPlan;
+            }
+        },
+
 
         // save the current history state
         checkpoint: function(key) {
@@ -431,6 +452,8 @@ export function coreHistory(context) {
                 if (deleted.length) x.deleted = deleted;
                 if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
                 if (i.annotation) x.annotation = i.annotation;
+                if (i.source) x.source = i.source;
+                if (i.importPlan) x.importPlan = i.importPlan;
 
                 return x;
             });
@@ -528,7 +551,8 @@ export function coreHistory(context) {
                     return {
                         graph: coreGraph(_stack[0].graph).load(entities),
                         annotation: d.annotation,
-                        imageryUsed: d.imageryUsed
+                        imageryUsed: d.imageryUsed,
+                        source: d.source
                     };
                 });
 

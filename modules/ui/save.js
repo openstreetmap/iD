@@ -14,7 +14,6 @@ import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
-
 export function uiSave(context) {
     var history = context.history();
     var key = uiCmd('⌘S');
@@ -52,7 +51,15 @@ export function uiSave(context) {
         var numChanges = 0;
 
         function updateCount() {
-            var _ = history.difference().summary().length;
+            var _ = 0;
+            var changeEntities = history.difference().summary();
+            for (var e = 0; e < changeEntities.length; e++) {
+                if (!changeEntities[e].entity
+                  || !changeEntities[e].entity.approvedForEdit
+                  || changeEntities[e].entity.approvedForEdit === 'approved') {
+                    _++;
+                }
+            }
             if (_ === numChanges) return;
             numChanges = _;
 

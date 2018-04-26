@@ -97,7 +97,12 @@ export function rendererFeatures(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return !context.editable() || this.count > this.currentMax * _cullFactor; },
+            hidden: function() {
+                if (this.approvedForEdit) {
+                    return false;
+                }
+                return !context.editable() || this.count > this.currentMax * _cullFactor;
+            },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }

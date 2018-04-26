@@ -22,7 +22,6 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { utilCleanTags, utilRebind } from '../util';
 
-
 export function uiEntityEditor(context) {
     var dispatch = d3_dispatch('choose');
     var _state = 'select';
@@ -85,6 +84,71 @@ export function uiEntityEditor(context) {
         enter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
+
+        // import one-by-one approval
+        this.focusEntity = entity;
+
+        var importApprove = enter
+            .append('div')
+            .attr('class', 'inspector-border import-approve');
+
+        // accept/reject circle indicator
+        var statusIcon = 'neutral';
+        if (this.focusEntity.approvedForEdit === 'approved') {
+            statusIcon = 'approve';
+        } else if (this.focusEntity.approvedForEdit === 'rejected') {
+            statusIcon = 'reject';
+        }
+        d3_selectAll('.import-icon')
+            .classed('neutral approve reject', false)
+            .classed(statusIcon, true);
+        importApprove.append('span')
+            .attr('class', 'import-icon ' + statusIcon)
+            .text('___');
+
+        // accept button
+        importApprove.append('button')
+            .attr('class', 'approve')
+            .text(t('geoservice.approve'))
+            .on('click', function() {
+                this.focusEntity.approvedForEdit = 'approved';
+                context.history().on('change.save')();
+                // apply a CSS class to any point / line / polygon approved
+                d3_selectAll('.layer-osm .' + this.focusEntity.id)
+                    .classed('import-approved', true)
+                    .classed('import-edited import-rejected import-pending', false);
+                d3_selectAll('.import-icon')
+                    .classed('neutral reject', false)
+                    .classed('approve', true);
+            }.bind(this));
+
+        // reject button
+        importApprove.append('button')
+            .text(t('geoservice.reject'))
+            .on('click', (function() {
+                if (this.focusEntity && this.focusEntity.importOriginal) {
+                    // modified object: delete button restores original tags
+                    this.focusEntity.approvedForEdit = 'unchanged';
+                    context.perform(
+                        actionChangeTags(this.focusEntity.id, this.focusEntity.importOriginal),
+                        'merged import item tags'
+                    );
+                    d3_selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
+                } else {
+                    // show object red for rejected
+                    this.focusEntity.approvedForEdit = 'rejected';
+                    d3_selectAll('.layer-osm .' + this.focusEntity.id)
+                        .classed('import-approved import-edited import-pending', false)
+                        .classed('import-rejected', true);
+                }
+                d3_selectAll('.import-icon')
+                    .classed('neutral approve', false)
+                    .classed('reject', true);
+                context.history().on('change.save')();
+            }).bind(this));
+
+        // show import approval section?
+        d3_selectAll('.import-approve').classed('hide', !entity.approvedForEdit);
 
         enter
             .append('div')
@@ -210,6 +274,47 @@ export function uiEntityEditor(context) {
             entityEditor.modified(_base !== graph);
             entityEditor(selection);
         }
+    }
+
+
+    function clean(o) {
+
+        function cleanVal(k, v) {
+            // a number value from service should be converted to a string here
+            v = v + '';
+
+            function keepSpaces(k) {
+                return k.match(/_hours|_times/) !== null;
+            }
+
+            var blacklist = ['description', 'note', 'fixme'];
+            if (_some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
+
+            var cleaned = v.split(';')
+                .map(function(s) { return s.trim(); })
+                .join(keepSpaces(k) ? '; ' : ';');
+
+            // The code below is not intended to validate websites and emails.
+            // It is only intended to prevent obvious copy-paste errors. (#2323)
+            // clean website- and email-like tags
+            if (k.indexOf('website') !== -1 ||
+                k.indexOf('email') !== -1 ||
+                cleaned.indexOf('http') === 0) {
+                cleaned = cleaned
+                    .replace(/[\u200B-\u200F\uFEFF]/g, '');  // strip LRM and other zero width chars
+
+            }
+
+            return cleaned;
+        }
+
+        var out = {}, k, v;
+        for (k in o) {
+            if (k && (v = o[k]) !== undefined) {
+                out[k] = cleanVal(k, v);
+            }
+        }
+        return out;
     }
 
 
