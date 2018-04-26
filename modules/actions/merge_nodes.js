@@ -4,15 +4,15 @@ import _extend from 'lodash-es/extend';
 import { osmNode } from '../osm/node';
 
 
-export function actionMergeWayNodes (ids, newNodeId) {
-    function getSelectedEntities (graph) {
-        return ids.map(function (id) { return graph.entity(id); });
+export function actionMergeNodes(ids) {
+    function getSelectedEntities(graph) {
+        return ids.map(function(id) { return graph.entity(id); });
     }
 
-    function calcAverageLoc (nodes) {
+    function calcAverageLoc(nodes) {
         return [
-            _sum(nodes.map(function (node) { return node.loc[0]; })) / nodes.length,
-            _sum(nodes.map(function (node) { return node.loc[1]; })) / nodes.length
+            _sum(nodes.map(function(node) { return node.loc[0]; })) / nodes.length,
+            _sum(nodes.map(function(node) { return node.loc[1]; })) / nodes.length
         ];
     }
 
@@ -20,7 +20,7 @@ export function actionMergeWayNodes (ids, newNodeId) {
        return entities.reduce(function(tags, entity) { return _extend(tags, entity.tags); }, {});
     }
 
-    function replaceWithinWays (newNode) {
+    function replaceWithinWays(newNode) {
         return function (graph, node) {
             return graph.parentWays(node).reduce(function (graph, way) {
                 return graph.replace(way.replaceNode(node.id, newNode.id));
@@ -28,20 +28,17 @@ export function actionMergeWayNodes (ids, newNodeId) {
         };
     }
 
-    function removeFromGraph (graph, entity) {
+    function removeFromGraph(graph, entity) {
         return graph.remove(entity);
     }
 
-    var action = function (graph) {
+    var action = function(graph) {
         var nodes = getSelectedEntities(graph),
             newNode = new osmNode({ id: newNodeId, loc: calcAverageLoc(nodes), tags: collectTags(nodes) });
 
         graph = graph.replace(newNode);
-
         graph = nodes.reduce(replaceWithinWays(newNode), graph);
-
         graph = nodes.reduce(removeFromGraph, graph);
-
         return graph;
     };
 

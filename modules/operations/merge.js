@@ -1,10 +1,11 @@
 import { t } from '../util/locale';
+
 import {
     actionChangePreset,
     actionJoin,
     actionMerge,
-    actionMergePolygon,
-    actionMergeWayNodes
+    actionMergeNodes,
+    actionMergePolygon
 } from '../actions';
 
 import { behaviorOperation } from '../behavior';
@@ -14,35 +15,37 @@ import { modeSelect } from '../modes';
 export function operationMerge(selectedIDs, context) {
 
     function updatePresetTags(newGraph, ids) {
-        var id = ids[0],
-            newEntity = newGraph.hasEntity(id);
+        var id = ids[0];
+        var newEntity = newGraph.hasEntity(id);
 
         if (!newEntity) return;
-
         var newPreset = context.presets().match(newEntity, newGraph);
-
         context.replace(actionChangePreset(id, null, newPreset), operation.annotation());
     }
 
 
-    var join = actionJoin(selectedIDs),
-        merge = actionMerge(selectedIDs),
-        mergePolygon = actionMergePolygon(selectedIDs),
-        mergeWayNodes = actionMergeWayNodes(selectedIDs);
+    var join = actionJoin(selectedIDs);
+    var merge = actionMerge(selectedIDs);
+    var mergePolygon = actionMergePolygon(selectedIDs);
+    var mergeNodes = actionMergeNodes(selectedIDs);
 
 
     var operation = function() {
-        var origGraph = context.graph(),
-            action;
+        var doUpdateTags;
+        var action;
 
-        if (!join.disabled(origGraph)) {
+        if (!join.disabled(context.graph())) {
+            doUpdateTags = false;
             action = join;
-        } else if (!merge.disabled(origGraph)) {
+        } else if (!merge.disabled(context.graph())) {
+            doUpdateTags = true;
             action = merge;
-        } else if (!mergePolygon.disabled(origGraph)) {
+        } else if (!mergePolygon.disabled(context.graph())) {
+            doUpdateTags = false;
             action = mergePolygon;
         } else {
-            action = mergeWayNodes;
+            doUpdateTags = true;
+            action = mergeNodes;
         }
 
         context.perform(action, operation.annotation());
@@ -53,7 +56,7 @@ export function operationMerge(selectedIDs, context) {
         });
 
         // if we merged tags, rematch preset to update tags if necessary (#3851)
-        if (action === merge) {
+        if (doUpdateTags) {
             updatePresetTags(context.graph(), ids);
         }
 
@@ -70,15 +73,15 @@ export function operationMerge(selectedIDs, context) {
         return join.disabled(context.graph()) &&
             merge.disabled(context.graph()) &&
             mergePolygon.disabled(context.graph()) &&
-            mergeWayNodes.disabled(context.graph());
+            mergeNodes.disabled(context.graph());
     };
 
 
     operation.tooltip = function() {
-        var j = join.disabled(context.graph()),
-            m = merge.disabled(context.graph()),
-            p = mergePolygon.disabled(context.graph()),
-            n = mergeWayNodes.disabled(context.graph());
+        var j = join.disabled(context.graph());
+        var m = merge.disabled(context.graph());
+        var p = mergePolygon.disabled(context.graph());
+        var n = mergeNodes.disabled(context.graph());
 
         if (j === 'restriction' && m && p && n) {
             return t('operations.merge.restriction',
