@@ -1,5 +1,10 @@
 {
     "pt-BR": {
+        "icons": {
+            "information": "informações",
+            "remove": "remover",
+            "undo": "desfazer"
+        },
         "modes": {
             "add_area": {
                 "title": "Área",
@@ -145,7 +150,8 @@
                     "vertex": "Conectou uma linha a outra.",
                     "line": "Conectou uma via a uma linha.",
                     "area": "Conectou uma linha a uma área."
-                }
+                },
+                "restriction": "Estes elementos não podem ser conectados porque isto danificaria uma relação \"{relation}\"."
             },
             "disconnect": {
                 "title": "Desconectar",
@@ -291,6 +297,42 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Distância",
+                "distance_up_to": "Até {distance}",
+                "via": "Via",
+                "via_node_only": "Apenas nó",
+                "via_up_to_one": "Até 1 caminho",
+                "via_up_to_two": "Até 2 caminhos"
+            },
+            "help": {
+                "indirect": "(indireto)",
+                "turn": {
+                    "no_left_turn": "PROIBIDA conversão à esquerda {indirect}",
+                    "no_right_turn": "PROIBIDA conversão à direita {indirect}",
+                    "no_u_turn": "PROIBIDO retorno {indirect}",
+                    "no_straight_on": "PROIBIDO seguir em frente {indirect}",
+                    "only_left_turn": "SOMENTE conversão à esquerda {indirect}",
+                    "only_right_turn": "SOMENTE conversão à direita {indirect}",
+                    "only_u_turn": "SOMENTE retorno {indirect}",
+                    "only_straight_on": "SOMENTE seguir em frente {indirect}",
+                    "allowed_left_turn": "Permitida conversão à esquerda {indirect}",
+                    "allowed_right_turn": "Permitida conversão à direita {indirect}",
+                    "allowed_u_turn": "Permitido retorno {indirect}",
+                    "allowed_straight_on": "Permitido seguir em frente {indirect}"
+                },
+                "from": "A PARTIR DE",
+                "via": "VIA",
+                "to": "PARA",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Clique para escolher {from} que segmento",
+                "select_from_name": "Clique para selecionar {from} {fromName}",
+                "toggle": "Clique para \"{turn}\""
+            }
+        },
         "undo": {
             "tooltip": "Desfazer: {action}",
             "nothing": "Nada para desfazer."
@@ -366,6 +408,7 @@
                 "key": "H",
                 "title": "Histórico",
                 "selected": "{n} selecionado",
+                "no_history": "Sem histórico (elemento novo)",
                 "version": "Versão",
                 "last_edit": "Última Edição",
                 "edited_by": "Editado por",
@@ -465,6 +508,7 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "custom_button": "Editar fundo de tela personalizado",
+            "custom_prompt": "Insira um modelo de URL de quadros. Tokens válidos são:\n   - {zoom} ou {z}, {x}, {y} para o esquema Z/X/Y dos quadros\n   - {-y} ou {ty} para coordenadas invertidas, estilo TMS\n   - {u} para esquema quadtile\n   - {switch:a,b,c} para multiplexação de servidor DNS\n\nExemplo:\n{example}",
             "overlays": "Sobreposições",
             "imagery_source_faq": "Informações sobre imagens / Relatar um problema",
             "reset": "redefinir",
@@ -602,15 +646,20 @@
             }
         },
         "success": {
-            "edited_osm": "OSM editado!",
             "just_edited": "Você acaba de editar o OpenStreetMap!",
-            "view_on_osm": "Ver no OSM",
-            "facebook": "Compartilhar no Facebook",
-            "twitter": "Compartilhar no Twitter",
-            "google": "Compartilhar Google+",
-            "help_html": "Suas modificações devem aparecer na camada \"Padrão\" dentro de alguns minutos. Alguns elementos e outras camadas podem demorar mais para serem atualizadas.",
+            "thank_you": "Obrigado por aprimorar o mapa.",
+            "thank_you_location": "Obrigado por aprimorar o mapa ao redor de {where}.",
+            "help_html": "Suas alterações devem aparecer no OpenStreetMap dentro de alguns minutos. Os mapas em outros lugares podem demorar mais para serem atualizados.",
             "help_link_text": "Detalhes",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Pt:Perguntas_frequentes#Eu_acabei_de_alterar_o_mapa._Como_eu_fa.C3.A7o_para_visualizar_minhas_altera.C3.A7.C3.B5es.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Pt:Perguntas_frequentes#Eu_acabei_de_alterar_o_mapa._Como_eu_fa.C3.A7o_para_visualizar_minhas_altera.C3.A7.C3.B5es.3F",
+            "view_on_osm": "Ver alterações no OSM",
+            "changeset_id": "Seu conjunto de alterações #: {changeset_id}",
+            "like_osm": "Gosta do OpenStreetMap? Conecte-se com outros:",
+            "more": "Mais",
+            "events": "Eventos",
+            "languages": "Idiomas: {languages}",
+            "missing": "Há algo faltando nesta lista?",
+            "tell_us": "Conte-nos!"
         },
         "confirm": {
             "okay": "OK",
@@ -648,6 +697,7 @@
             "untagged_area_tooltip": "Selecionar um tipo de elemento que descreva o que esta área é.",
             "untagged_relation": "Relação sem etiquetas",
             "untagged_relation_tooltip": "Selecionar um tipo de elemento que descreva o que esta relação é.",
+            "many_deletions": "Você está apagando {n} feições: {p} nós, {l} linhas, {a} áreas, {r} relações. Você ter certeza que quer executar esta ação? Ela irá apagar estes elementos para todas as pessoas que acessam o openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} sugere que seja utilizada numa área, mas essa linha não é uma área",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
@@ -767,6 +817,7 @@
                 "connect_line_drag": "Para conectar uma linha a algum outro elemento, arraste um dos nós das linhas a outro elemento até que ambos os elementos estejam unidos. Dica: você pode segurar a tecla `{alt}` caso não deseje que um nó se conecte a outros elementos enquanto o arrasta.",
                 "connect_line_tag": "Se você sabe que um cruzamento tem semáforos ou faixas de pedestre, você pode adicioná-los selecionando o nó do cruzamento e utilizando o editor de elementos para selecionar o tipo correto de elemento.",
                 "disconnect_line_h": "Desconectando Linhas",
+                "disconnect_line_command": "Para desconectar uma rua de outro elemento, clique com o {rightclick} botão direito no nó conectado, e selecione o comando {disconnect} **Desconectar** no menu de edição.",
                 "move_line_h": "Movendo Linhas",
                 "delete_line_h": "Removendo Linhas"
             },
@@ -806,6 +857,29 @@
                 "using_h": "Usando Traçados de GPS",
                 "tracing": "A trilha GPX não está sendo enviada ao OpenStreetMap - a melhor maneira de usá-la é desenhar no mapa, usando-a como um guia para os novos elementos que você adicionar.",
                 "upload": "Você também pode [enviá-la ao OpenStreetMap](https://www.openstreetmap.org/trace/create) para que outros usuários possam utilizá-la."
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Ajuda das Restrições de curva",
+                    "about": {
+                        "title": "Sobre",
+                        "about": "Este campo permite que você inspecione e modifique restrições de curva. Ele mostra um modelo da interseção selecionada, incluindo outras ruas próximas conectadas.",
+                        "from_via_to": "Uma restrição de curva sempre contém: um **A PARTIR DE caminho**, um **PARA caminho**, e um **VIA nó** ou um ou mais **VIA nós**.",
+                        "maxdist": "O controle deslizante \"{distField}\" define a distância que se deve procurar por ruas conectadas adicionais.",
+                        "maxvia": "O controle deslizante \"{viaField}\" ajusta quantos caminhos serão incluídos na busca. (Dica: quanto mais simples, melhor)"
+                    },
+                    "inspecting": {
+                        "title": "Inspecionar"
+                    },
+                    "modifying": {
+                        "title": "Modificar"
+                    },
+                    "tips": {
+                        "title": "Dicas",
+                        "simple": "**Prefira restrições simples ao invés de complexas**",
+                        "indirect_noedit": "Você não pode editar restrições indiretas. Ao invés disso, tente editar uma relação direta próxima."
+                    }
+                }
             }
         },
         "intro": {
@@ -1588,6 +1662,9 @@
                         "cycleway:right": "Lado direito"
                     }
                 },
+                "dance/style": {
+                    "label": "Estilos de Dança"
+                },
                 "date": {
                     "label": "Data"
                 },
@@ -1656,6 +1733,9 @@
                 "display": {
                     "label": "Mostrador"
                 },
+                "distance": {
+                    "label": "Distância total"
+                },
                 "dock": {
                     "label": "Tipo"
                 },
@@ -1695,6 +1775,9 @@
                 },
                 "except": {
                     "label": "Exceções"
+                },
+                "faces": {
+                    "label": "Faces"
                 },
                 "fax": {
                     "label": "Fax",
@@ -1807,6 +1890,24 @@
                     "label": "Aros de Tabela",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Sim",
+                        "undefined": "Não"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Sim",
+                        "undefined": "Não"
+                    }
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Sim",
+                        "undefined": "Não"
+                    }
+                },
                 "iata": {
                     "label": "Código IATA"
                 },
@@ -1825,6 +1926,9 @@
                 },
                 "indoor": {
                     "label": "Interior"
+                },
+                "industrial": {
+                    "label": "Tipo"
                 },
                 "information": {
                     "label": "Tipo"
@@ -1944,6 +2048,9 @@
                 },
                 "maxspeed": {
                     "label": "Limite de Velocidade",
+                    "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2534,8 +2641,17 @@
                     "label": "Tipo",
                     "placeholder": "Padrão"
                 },
+                "usage_rail": {
+                    "label": "Tipo de Utilização",
+                    "options": {
+                        "industrial": "Industrial",
+                        "military": "Militar",
+                        "test": "Teste",
+                        "tourism": "Turismo"
+                    }
+                },
                 "vending": {
-                    "label": "Tipo de Produtos"
+                    "label": "Tipos de Produtos"
                 },
                 "visibility": {
                     "label": "Visibilidade",
@@ -2613,6 +2729,8 @@
                     "options": {
                         "delta": "Delta",
                         "open": "Aberta",
+                        "open-delta": "Delta Aberto",
+                        "star": "Estrela / Y",
                         "zigzag": "Zig Zag"
                     }
                 }
@@ -2939,6 +3057,9 @@
                     "name": "Mercado ou feira",
                     "terms": "Feira, mercado, mercado municipal, feirinha"
                 },
+                "amenity/monastery": {
+                    "name": "Jardins do mosteiro"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Estacionamento de motos",
                     "terms": "Estacionamento de motocicletas, estacionamento de motos, estacionamento"
@@ -3142,6 +3263,9 @@
                     "name": "Máquina de Venda de Cigarros",
                     "terms": "cigarro, venda de cigarro"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Máquina de Venda de Café"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Máquina de Venda de Preservativos",
                     "terms": "máquina de venda de camisinhas, preservativos, camisinha"
@@ -3150,6 +3274,12 @@
                     "name": "Máquina de Venda de Bebidas",
                     "terms": "Máquina de Venda de Bebidas, máquina de refrigerante, refrigerante, lata, latinha"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Máquina de Venda de Eletrônicos"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Máquina de Venda de Moedas Achatadas"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Máquina de Vendas de Sacola de Excrementos",
                     "terms": "sacos de excremento, cocô, fezes, dejetos, animal, cachorro, animal de estimação, pet, sacola"
@@ -3157,6 +3287,15 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de Vendas - Higiene Feminina",
                     "terms": "produtos de higiene feminina, camisinha, preservativo, absorvente, tampão, cuidados pessoais, higiene, mulher"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Máquina de Venda de Comida"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Bomba de Gasolina"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Máquina de Venda de Sorvete"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Máquina de Venda de Jornais"
@@ -3176,6 +3315,9 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Máquina de Vendas de Bilhete de Transporte",
                     "terms": "Transporte público, ônibus, Trem, Metrô, Ticket, Bilhete"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Máquina de Venda de Selos"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Máquina de Venda de Lanches",
@@ -3755,6 +3897,9 @@
                 "emergency/private": {
                     "name": "Acesso de Emergência Privado"
                 },
+                "emergency/water_tank": {
+                    "name": "Tanque de água de emergência"
+                },
                 "emergency/yes": {
                     "name": "Acesso de Emergência"
                 },
@@ -3763,11 +3908,11 @@
                     "terms": "Entrada/Saída, Porta, "
                 },
                 "footway/crossing": {
-                    "name": "Travessia em Rua",
+                    "name": "Faixa para travessia de pedestres",
                     "terms": "Faixa de cruzamento"
                 },
                 "footway/crossing-raised": {
-                    "name": "Travessia em via elevada",
+                    "name": "Faixa elevada para travessia de pedestres",
                     "terms": "quebra mola, quebra-molas, redutor de velocidade, faixa de pedestres"
                 },
                 "footway/crosswalk": {
@@ -4025,7 +4170,7 @@
                     "terms": "Área de Serviço, Posto de combustíveis, posto de gasolina, combustíveis, borracharia, lava jato, serviços, loja de conveniências"
                 },
                 "highway/speed_camera": {
-                    "name": "Sensor de Velocidade",
+                    "name": "Câmera de Controle de Velocidade",
                     "terms": "câmera de velocidade, radar, pardal, foto-sensor, foto sensor, fotossensor, sinal de trânsito, fiscalização eletrônica de velocidade"
                 },
                 "highway/steps": {
@@ -4141,6 +4286,7 @@
                     "terms": "Bacia"
                 },
                 "landuse/brownfield": {
+                    "name": "Área contaminada",
                     "terms": "Terreno industrial abandonado, área em revitalização, área abandonada, terreno em revitalização, zona industrial abandonada, desenvolvimento"
                 },
                 "landuse/cemetery": {
@@ -4315,6 +4461,9 @@
                     "name": "Danceteria",
                     "terms": "salão de dança, balada, boate, clube de dança, salsa, tango"
                 },
+                "leisure/dancing_school": {
+                    "name": "Escola de Dança"
+                },
                 "leisure/dog_park": {
                     "name": "Cachorródromo",
                     "terms": "Canódromo, Cachorródromo, Parque Canino, Parque de Cachorros, cães, cão, cachorros"
@@ -4328,7 +4477,7 @@
                     "terms": "Academia de Musculação, Academia de Ginástica"
                 },
                 "leisure/fitness_centre/yoga": {
-                    "name": "Estúdio de Ioga",
+                    "name": "Estúdio de Yôga",
                     "terms": "Estúdio de Yoga, Academia de Ioga, Academia de Yoga, Yôga, Ioga, Yoga"
                 },
                 "leisure/fitness_station": {
@@ -4338,11 +4487,17 @@
                 "leisure/fitness_station/balance_beam": {
                     "name": "Trave de Equilíbrio"
                 },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "Barra Fixa Horizontal"
+                },
                 "leisure/fitness_station/hyperextension": {
                     "name": "Estação de Hiperextensão"
                 },
                 "leisure/fitness_station/parallel_bars": {
                     "name": "Barras Paralelas"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "name": "Prancha para Abdominais"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "Escadas de Exercício"
@@ -4507,6 +4662,9 @@
                     "name": "Ádito de Mineração",
                     "terms": "Entrada, Passagem, Mina, Acesso"
                 },
+                "man_made/antenna": {
+                    "name": "Antena"
+                },
                 "man_made/breakwater": {
                     "name": "Molhe/Quebra-Mar",
                     "terms": "Molhe, Quebra-Mar"
@@ -4556,6 +4714,9 @@
                 "man_made/observation": {
                     "name": "Torre de Observação",
                     "terms": "torre de observação, observação, ponto de observação, torre de incêndio, incêndio florestal"
+                },
+                "man_made/observatory": {
+                    "name": "Observatório"
                 },
                 "man_made/petroleum_well": {
                     "name": "Poço de Petróleo",
@@ -4680,6 +4841,9 @@
                 "natural/heath": {
                     "name": "Urzal",
                     "terms": "Urzal"
+                },
+                "natural/mud": {
+                    "name": "Lama"
                 },
                 "natural/peak": {
                     "name": "Cume",
@@ -5485,6 +5649,10 @@
                     "name": "Loja de Material de Construção",
                     "terms": "Loja de Ferragens, Material de Construção, Loja de Tintas, Loja de Parafusos, Madeireira"
                 },
+                "shop/health_food": {
+                    "name": "Loja de Alimentos Saudáveis",
+                    "terms": "loja de produtos naturais, comida saudável, alimentação saudável, natureba"
+                },
                 "shop/hearing_aids": {
                     "name": "Loja de Aparelhos Auditivos",
                     "terms": "farmácia"
@@ -5724,6 +5892,10 @@
                     "name": "Loja de Armas",
                     "terms": "Loja de Tiro, Loja de Equipamentos de Tiro"
                 },
+                "shop/wholesale": {
+                    "name": "Atacadista",
+                    "terms": "atacadão, loja de atacados, "
+                },
                 "shop/window_blind": {
                     "name": "Loja de Persianas",
                     "terms": "Loja de Vidros Blindados, Cortinas"
@@ -5901,16 +6073,20 @@
                     "terms": "Proibido Retornar"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Obrigatório Virar à Esquerda",
-                    "terms": "Obrigatório Virar à Esquerda"
+                    "name": "Apenas curva à esquerda",
+                    "terms": "curva à esquerda obrigatória, conversão à esquerda"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Obrigatório Virar à Direita",
-                    "terms": "Obrigatório Virar à Direita"
+                    "name": "Apenas curva à direita",
+                    "terms": "curva à direita obrigatória, conversão à direita"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Obrigatório Seguir em Frente",
-                    "terms": "Obrigatório Seguir em Frente"
+                    "name": "Apenas seguir em frente",
+                    "terms": "somente seguir em frente"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Apenas retorno",
+                    "terms": "somente retornar, retorno obrigatório"
                 },
                 "type/route": {
                     "name": "Rota",
@@ -6073,7 +6249,6 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Limites de imagens de satélite e datas de captura. Etiquetas aparecerão no nível de zoom 14 ou acima.",
                 "name": "Bordas das Imagens de Satélite DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -6087,7 +6262,6 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Limites de imagens de satélite e datas de captura. Etiquetas aparecerão no nível de zoom 14 ou acima.",
                 "name": "Boradas das Imagens de Satélite DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -6205,7 +6379,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Mapa base da Áustria, baseado em dados governamentais.",
+                "description": "Dados de mapas da Áustria, com base em dados do governo.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6267,7 +6441,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Quadros do mapa de Stamen Design, sob CC BY 3.0"
+                    "text": "Quadros do mapa de Stamen Design, sob CC BY 3.0.   Dados por OpenStreetMap, sob ODbL"
                 },
                 "name": "Stamen, Terreno"
             },
@@ -6282,6 +6456,138 @@
                     "text": "Mapas © Thunderforest, Dados © Colaboradores do OpenStreetMap"
                 },
                 "name": "Paisagens Thunderforest"
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "osm-gh-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap Índia - Mapeamento de vizinhança participativa",
+                "description": "Melhorar o OpenStreetMap na Índia"
+            },
+            "OSM-japan-twitter": {
+                "description": "Hashtag no Twitter: {url}"
+            },
+            "de-berlin-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "se-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "OpenStreetMappers da Bay Area",
+                "description": "Melhorar o OpenStreetMap na área da baía",
+                "extendedDescription": "Este grupo é sobre crescer a comunidade do OpenStreetMap aqui na Área da Baía de São Francisco. Nossos eventos são abertos para todos, desde entusiastas open-source, ciclistas, profissionais GIS, geocachers, e além. Todos e quaisquer pessoas interessadas em mapas, cartografia e dados de mapa livres são bem-vindas a se juntar ao nosso grupo e participar dos nossos eventos."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Pensilvânia central OSM",
+                "description": "Comunidade de mapeamento on-line baseada no State College, PA"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Código para San Jose Slack",
+                "description": "São todos bem-vindos! Inscreva-se em {signupUrl}, então junte-se ao canal #osm."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "O grupo de usuários do OpenStreetMap para Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth e todas as cidades estão repletas de pessoas criativas e conhecedoras de tecnologia. A visão deste grupo de usuários é encontrar novas maneiras de usar o incrível recurso do OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Meetup para entusiastas do mapa na área de Filadélfia",
+                "extendedDescription": "A GeoPhilly une desenvolvedores, geógrafos, geeks de dados, entusiastas do código aberto, hackers cívicos e viciados em mapas em nosso amor compartilhado pelos mapas e pelas histórias que contam. Se você usa mapas como parte do seu trabalho ou apenas quer aprender mais, este é o encontro para você! Nossos eventos visam ser abertos, amigáveis, educacionais e sociais e vão desde happy hours até palestras relâmpago ou até workshops. Venha criar uma comunidade geoespacial diversificada e inspiradora na Filadélfia conosco!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapeamneto de DC",
+                "description": "Melhore o OpenStreetMap na área de DC",
+                "extendedDescription": "Somos um grupo de mapeadores voluntários que visam melhorar o OpenStreetMap na área de DC. Também pretendemos ensinar aos outros sobre o ecossistema OSM, análise de dados, cartografia e GIS. Nós nos reunimos a cada dois meses nos encontros para nos concentrar em uma área da nossa cidade."
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston",
+                "description": "Mapeadores e usuários do OpenStreetMap na área de Boston",
+                "extendedDescription": "OpenStreetMap é o mapa gratuito e aberto do mundo, com centenas de milhares de contribuições diárias de pessoas como você. Editar o mapa é simples e divertido! Junte-se a nós em ambientes internos e externos em nosso esforço para criar o melhor mapa da área de Boston e do resto do mundo!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "O grupo de usuários do OpenStreetMap para o Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado",
+                "extendedDescription": "OpenStreetMap (OSM) Colorado é uma colaboração local de pessoas interessadas em contribuir com seus esforços para criar mapas gratuitos. Encorajamos todos os nossos mapeadores a organizar ou sugerir o mapeamento de eventos em todo o estado. As atividades do Meetup podem ser simples mixers sociais, treinamento básico e avançado do OSM ou partes de mapeamento da comunidade."
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC",
+                "description": "Usuários e Mapeadores do OpenStreetMap, desenvolvedores e entusiastas da área metropolitana de Nova York"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Mapeadores e usuários do OpenStreetMap na área de Portland",
+                "extendedDescription": "OpenStreetMap (OSM) é um mapa do mundo feito por pessoas como você. É um mapa que você constrói, que é dado de graça, como na Wikipédia. Confira osm.org para mais, e junte-se a nós em um meetup para conversar sobre mapas, contribuir para o OSM e se divertir!"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle",
+                "description": "Mapeadores e usuários do OpenStreetMap na área de Seattle"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay",
+                "description": "Noites do Mapa hospedado por Code for San Jose"
+            },
+            "OSM-US-Slack": {
+                "description": "Todos são bem-vindos! Se inscreva em {signupUrl}"
+            },
+            "PHXGeo-twitter": {
+                "description": "Siga-nos no Twitter em {url}"
+            },
+            "Maptime-Australia-Slack": {
+                "description": "Se inscreva em {signupUrl}"
+            },
+            "OSM-AR-twitter": {
+                "description": "Siga-nos no Twitter em {url}"
+            },
+            "Bahia-telegram": {
+                "name": "Grupo Telegram OpenStreetMap Bahia",
+                "description": "Participe da comunidade OpenStreetMap Bahia no Telegram"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br Mailing List",
+                "description": "Uma lista de e-mail de discussão sobre o OpenStreetMap no Brasil"
+            },
+            "OSM-br-telegram": {
+                "name": "Telegram OpenStreetMap Brasil",
+                "description": "Participe da comunidade OpenStreetMap Brasil no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar das nossas reuniões. Todos são bem-vindos!"
+            },
+            "OSM-br-twitter": {
+                "name": "Twitter OpenStreetMap Brasil",
+                "description": "Nos siga no Twitter em {url}"
+            },
+            "OSM-CL-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-CO-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-PE-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap no Reddit",
+                "description": "/r/openstreetmap/ é um ótimo lugar para aprender mais sobre o OpenStreetMap.  Pergunte-nos qualquer coisa!"
+            },
+            "OSM-Twitter": {
+                "name": "Twitter OpenStreetMap",
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSMF": {
+                "events": {
+                    "sotm2018": {
+                        "description": "Participe da conferência global do OpenStreetMap em Milão (Itália), evento que irá reunir por três dias toda a comunidade OSM para socializar, compartilhar e aprender juntos."
+                    }
+                }
             }
         }
     }

@@ -493,6 +493,9 @@ en:
       display:
         # display=*
         label: Display
+      distance:
+        # distance=*
+        label: Total Distance
       dock:
         # dock=*
         label: Type
@@ -540,6 +543,9 @@ en:
       except:
         # except=*
         label: Exceptions
+      faces:
+        # faces=*
+        label: Faces
       fax:
         # fax=*
         label: Fax
@@ -666,6 +672,48 @@ en:
         label: Hoops
         # hoops field placeholder
         placeholder: '1, 2, 4...'
+      horse_dressage:
+        # sport=*
+        label: Dressage Riding
+        options:
+          # sport=equestrian
+          equestrian: 'Yes'
+          # sport=undefined
+          undefined: 'No'
+      horse_riding:
+        # leisure=*
+        label: Horseback Riding
+        options:
+          # leisure=horse_riding
+          horse_riding: 'Yes'
+          # leisure=undefined
+          undefined: 'No'
+      horse_scale:
+        # horse_scale=*
+        label: Horseback Riding Difficulty
+        options:
+          # horse_scale=common
+          common: 'Easy: No problems or difficulties. (default)'
+          # horse_scale=critical
+          critical: 'Borderline: Passable only for experienced riders and horses. Major obstacles. Bridges should be examined carefully.'
+          # horse_scale=dangerous
+          dangerous: 'Dangerous: Passable only for very experienced riders and horses and only in good weather. Dismount.'
+          # horse_scale=demanding
+          demanding: 'Use with caution: Uneven way, occasional difficult passages.'
+          # horse_scale=difficult
+          difficult: 'Difficult: Way narrow and exposed. May contain obstacles to step over and narrow passages.'
+          # horse_scale=impossible
+          impossible: 'Impassable: Way or bridge not passable for horses. Too narrow, insuffient support, obstacles like ladders. Danger of life.'
+        # horse_scale field placeholder
+        placeholder: 'Difficult, Dangerous...'
+      horse_stables:
+        # amenity=*
+        label: Riding Stable
+        options:
+          # amenity=stables
+          stables: 'Yes'
+          # amenity=undefined
+          undefined: 'No'
       iata:
         # iata=*
         label: IATA
@@ -1688,6 +1736,10 @@ en:
         # advertising=billboard
         name: Billboard
         terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
+      advertising/column:
+        # advertising=column
+        name: Advertising Column
+        terms: '<translate with synonyms or related terms for ''Advertising Column'', separated by commas>'
       aerialway:
         # aerialway=*
         name: Aerialway
@@ -2463,6 +2515,11 @@ en:
         name: Drop Tower
         # 'terms: theme park,amusement ride,gondola,tower,big drop'
         terms: '<translate with synonyms or related terms for ''Drop Tower'', separated by commas>'
+      attraction/maze:
+        # attraction=maze
+        name: Maze
+        # 'terms: theme park,amusement ride,labyrinth'
+        terms: '<translate with synonyms or related terms for ''Maze'', separated by commas>'
       attraction/pirate_ship:
         # attraction=pirate_ship
         name: Pirate Ship
@@ -3142,6 +3199,11 @@ en:
         name: Hospice
         # 'terms: terminal,illness'
         terms: '<translate with synonyms or related terms for ''Hospice'', separated by commas>'
+      healthcare/laboratory:
+        # healthcare=laboratory
+        name: Medical Laboratory
+        # 'terms: medical_laboratory,medical_lab,blood_check'
+        terms: '<translate with synonyms or related terms for ''Medical Laboratory'', separated by commas>'
       healthcare/midwife:
         # healthcare=midwife
         name: Midwife
@@ -3674,6 +3736,10 @@ en:
         name: Amusement Arcade
         # 'terms: pay-to-play games,video games,driving simulators,pinball machines'
         terms: '<translate with synonyms or related terms for ''Amusement Arcade'', separated by commas>'
+      leisure/beach_resort:
+        # leisure=beach_resort
+        name: Beach Resort
+        terms: '<translate with synonyms or related terms for ''Beach Resort'', separated by commas>'
       leisure/bird_hide:
         # leisure=bird_hide
         name: Bird Hide
@@ -4184,6 +4250,11 @@ en:
         name: Peak
         # 'terms: acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top'
         terms: '<translate with synonyms or related terms for ''Peak'', separated by commas>'
+      natural/reef:
+        # natural=reef
+        name: Reef
+        # 'terms: barrier,coral,ocean,sand,shoal'
+        terms: '<translate with synonyms or related terms for ''Reef'', separated by commas>'
       natural/ridge:
         # natural=ridge
         name: Ridge
@@ -5609,6 +5680,10 @@ en:
         # tourism=theme_park
         name: Theme Park
         terms: '<translate with synonyms or related terms for ''Theme Park'', separated by commas>'
+      tourism/trail_riding_station:
+        # tourism=trail_riding_station
+        name: Trail Riding Station
+        terms: '<translate with synonyms or related terms for ''Trail Riding Station'', separated by commas>'
       tourism/viewpoint:
         # tourism=viewpoint
         name: Viewpoint

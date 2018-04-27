@@ -20,12 +20,12 @@ export function actionDisconnect(nodeId, newNodeId) {
 
 
     var action = function(graph) {
-        var node = graph.entity(nodeId),
-            connections = action.connections(graph);
+        var node = graph.entity(nodeId);
+        var connections = action.connections(graph);
 
         connections.forEach(function(connection) {
-            var way = graph.entity(connection.wayID),
-                newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
+            var way = graph.entity(connection.wayID);
+            var newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {
@@ -45,9 +45,9 @@ export function actionDisconnect(nodeId, newNodeId) {
 
 
     action.connections = function(graph) {
-        var candidates = [],
-            keeping = false,
-            parentWays = graph.parentWays(graph.entity(nodeId));
+        var candidates = [];
+        var keeping = false;
+        var parentWays = graph.parentWays(graph.entity(nodeId));
 
         parentWays.forEach(function(way) {
             if (wayIds && wayIds.indexOf(way.id) === -1) {
@@ -74,9 +74,9 @@ export function actionDisconnect(nodeId, newNodeId) {
         if (connections.length === 0 || (wayIds && wayIds.length !== connections.length))
             return 'not_connected';
 
-        var parentWays = graph.parentWays(graph.entity(nodeId)),
-            seenRelationIds = {},
-            sharedRelation;
+        var parentWays = graph.parentWays(graph.entity(nodeId));
+        var seenRelationIds = {};
+        var sharedRelation;
 
         parentWays.forEach(function(way) {
             if (wayIds && wayIds.indexOf(way.id) === -1)

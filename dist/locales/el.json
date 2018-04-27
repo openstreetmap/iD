@@ -495,13 +495,7 @@
             }
         },
         "success": {
-            "edited_osm": "Επεξεργαστήκατε τον OSM",
             "just_edited": "Μόλις επεξεργαστήκατε το OpenStreetMap!",
-            "view_on_osm": "Εμφάνιση στο OSM",
-            "facebook": "Διαμοιρασμός στο Facebook",
-            "twitter": "Διαμοιρασμός στο Twitter",
-            "google": "Διαμοιρασμός στο Google+",
-            "help_html": "Οι αλλαγές σας θα εμφανιστούν στο \"Κανονικό\" στρώμα σε λίγα λεπτά. Στα άλλα στρώματα, και ορισμένα χαρακτηριστικά, ίσως χρειαστούν περισσότερο χρόνο.",
             "help_link_text": "Λεπτομέρειες"
         },
         "confirm": {
@@ -1546,9 +1540,6 @@
                 },
                 "trees": {
                     "label": "Δέντρα"
-                },
-                "vending": {
-                    "label": "Είδος αγαθών"
                 },
                 "visibility": {
                     "label": "Ορατότητα",
@@ -3466,15 +3457,6 @@
                 "type/restriction/no_u_turn": {
                     "name": "Όχι Αναστροφή"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Μόνο Αριστερή Στροφή"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Μόνο Δεξιά Στροφή"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Όχι Στροφές"
-                },
                 "type/route": {
                     "name": "Δρομολόγιο",
                     "terms": "Δρομολόγιο, Διαδρομή"
@@ -3680,11 +3662,6 @@
                     "text": "© Πλακίδια: skobbler Δεδομένα χάρτη: OpenStreetMap contributors"
                 },
                 "name": "skobbler"
-            },
-            "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Πλακίδια χάρτη από Stamen Design, υπό CC BY 3.0"
-                }
             },
             "tf-cycle": {
                 "attribution": {

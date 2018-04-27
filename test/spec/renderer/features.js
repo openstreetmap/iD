@@ -166,6 +166,7 @@ describe('iD.Features', function() {
 
             // Boundaries
             iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
+            iD.Way({id: 'boundary_road', tags: {boundary: 'administrative', highway: 'primary'}, version: 1}),
 
             // Water
             iD.Way({id: 'water', tags: {area: 'yes', natural: 'water'}, version: 1}),
@@ -251,7 +252,7 @@ describe('iD.Features', function() {
                 'motorway', 'motorway_link', 'trunk', 'trunk_link',
                 'primary', 'primary_link', 'secondary', 'secondary_link',
                 'tertiary', 'tertiary_link', 'residential', 'living_street',
-                'unclassified', 'inner3'
+                'unclassified', 'boundary_road', 'inner3'
             ]);
 
             dontMatch([
@@ -340,6 +341,7 @@ describe('iD.Features', function() {
             ]);
 
             dontMatch([
+                'boundary_road',   // because boundary also used as highway - #4973
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'

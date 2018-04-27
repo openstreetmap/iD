@@ -1,0 +1,20 @@
+{
+    "icon": "amusement-park",
+    "fields": [
+        "name",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride",
+        "labyrinth"
+    ],
+    "tags": {
+        "attraction": "maze"
+    },
+    "name": "Maze"
+}

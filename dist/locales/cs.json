@@ -1,5 +1,10 @@
 {
     "cs": {
+        "icons": {
+            "information": "Zobrazit popis z wiki.osm.org",
+            "remove": "Odstranit",
+            "undo": "Zpět"
+        },
         "modes": {
             "add_area": {
                 "title": "Plocha",
@@ -7,8 +12,8 @@
                 "tail": "Klikněte na mapu a začněte tak kreslit plochu, jako třeba park, jezero nebo budovu."
             },
             "add_line": {
-                "title": "Čára",
-                "description": "Přidat do mapy silnice, ulice, stezky, potoky či jiné čáry.",
+                "title": "Linie",
+                "description": "Přidat do mapy silnice, ulice, stezky, potoky či jiné linie.",
                 "tail": "Klikněte na mapu a začněte tak kreslit silnice, stezky nebo trasy."
             },
             "add_point": {
@@ -25,6 +30,9 @@
             },
             "draw_line": {
                 "tail": "Body k linii přidáte kliknutím. Když kliknete na jinou linii, připojíte linie k sobě. Editaci ukončíte dvojklikem."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Tento objekt nelze upravit, protože je spojen se skrytým objektem."
             }
         },
         "operations": {
@@ -44,9 +52,9 @@
             "continue": {
                 "key": "A",
                 "title": "Pokračovat",
-                "description": "Navázat na čáru.",
-                "not_eligible": "Nelze navázat na žádnou čáru.",
-                "multiple": "Zde je možné navázat na několik čar. Stiskněte klávesu Shift a kliknutím zvolte jednu z čar.",
+                "description": "Navázat na linii.",
+                "not_eligible": "Nelze navázat na žádnou linii.",
+                "multiple": "Zde je možné navázat na několik linií. Stiskněte klávesu Shift a kliknutím zvolte jednu z nich.",
                 "annotation": {
                     "line": "Prodloužena linie.",
                     "area": "Plocha pokračuje."
@@ -93,11 +101,11 @@
             },
             "straighten": {
                 "title": "Narovnat",
-                "description": "Narovnat tuto čáru.",
+                "description": "Narovnat tuto linii.",
                 "key": "S",
                 "annotation": "Narovnána linie.",
                 "too_bendy": "Objekt nelze narovnat, protože je příliš zakroucený.",
-                "connected_to_hidden": "Čáru nelze narovnat, protože je napojená na skrytý objekt."
+                "connected_to_hidden": "Linii nelze narovnat, protože je napojená na skrytý objekt."
             },
             "delete": {
                 "title": "Smazat",
@@ -288,6 +296,25 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Vzdálenost",
+                "distance_up_to": "Do max: {distance}",
+                "via": "Přes",
+                "via_node_only": "Pouze bod",
+                "via_up_to_one": "Max 1 cesta",
+                "via_up_to_two": "Max 2 cesty"
+            },
+            "help": {
+                "indirect": "(nepřímé)",
+                "from": "Z",
+                "via": "PŘES",
+                "to": "DO",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}"
+            }
+        },
         "undo": {
             "tooltip": "Zpět: {action}",
             "nothing": "Není co vracet."
@@ -363,6 +390,7 @@
                 "key": "H",
                 "title": "Historie",
                 "selected": "{n} vybráno",
+                "no_history": "Žádná historie (nový prvek)",
                 "version": "Verze",
                 "last_edit": "Poslední úprava",
                 "edited_by": "Upravil(a)",
@@ -600,15 +628,17 @@
             }
         },
         "success": {
-            "edited_osm": "OSM upraveno!",
             "just_edited": "Právě jste upravil/a OpenStreetMap!",
-            "view_on_osm": "Zobrazit na OSM",
-            "facebook": "Sdílet na Facebooku",
-            "twitter": "Sdílet na Twitteru",
-            "google": "Sdílet na Google+",
-            "help_html": "Vaše úpravy by se obvykle měly objevit na „Standardní“ vrstvě během několika minut. U rozsáhlejších objektů a ostatních vrstev to může trvat déle.",
+            "thank_you": "Děkujeme za zlepšení mapy.",
+            "thank_you_location": "Děkujeme za zlepšení mapy okolo {where}.",
+            "help_html": "Vaše změny by se měly objevit na \"standardní\" mapě OpenStreetMap během pár minut.  Na ostatních mapách to může trvat déle.",
             "help_link_text": "Více",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Cs:FAQ#Zrovna_jsem_ud.C4.9Blal_n.C4.9Bjak.C3.A9_zm.C4.9Bny_v_map.C4.9B._Jak_uvid.C3.ADm_sv.C3.A9_zm.C4.9Bny.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Cs:FAQ#Zrovna_jsem_ud.C4.9Blal_n.C4.9Bjak.C3.A9_zm.C4.9Bny_v_map.C4.9B._Jak_uvid.C3.ADm_sv.C3.A9_zm.C4.9Bny.3F",
+            "view_on_osm": "Zobrazit změny na OSM",
+            "changeset_id": "Vaše sada změn #: {changeset_id}",
+            "like_osm": "Líbí se Vám OpenStreetMap? Spojte se s ostatními:",
+            "languages": "Jazyky: {languages}",
+            "tell_us": "Řekněte nám o tom!"
         },
         "confirm": {
             "okay": "OK",
@@ -687,8 +717,12 @@
                 "title": "Nápověda",
                 "welcome": "Vítejte v editoru iD pro [OpenStreetMap](https://www.openstreetmap.org/). Tímto editorem můžete upravovat OpenStreetMap přímo v browseru.",
                 "open_data_h": "Otevřená data",
+                "open_data": "Editace, které zde uložíte, budou ihned zapsány do ostré databáze!! Ukládajte pouze reálné objekty a to z osobní znalosti, GPS záznamů či volně dostupných leteckých map. Kopírování z komerčních zdrojů je [striktně zakázáno](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Než začnete",
-                "open_source_h": "Otevřený kód"
+                "before_start": "Měli byste být obeznámeni s OpenStreetMap a tímto editorem, než začnete editovat. iD nabítí průvodce, který Vás naučí základy editace OpenStreetMap. Klikněte na \"Začít s procházkou\" na této obrazovce pro spuštení průvodce - zabere jen okolo 15 minut.",
+                "open_source_h": "Otevřený kód",
+                "open_source": "Editor iD je společně vytvářený open source projekt a Vy právě používáte verzi {version}. Zdrojový kód je dostupný [na webu GitHub](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Můžete iD editoru pomoci [překladem](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) nebo [hlášením chyb](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Přehled",
@@ -910,7 +944,9 @@
             },
             "areas": {
                 "title": "Plochy",
+                "add_playground": "*Plochy* používáme pro hranice budov, lesů, jezer apod.{br}Ovšem také jimi můžeme detailně zakreslit prvky, které by normálně byly body.**Přidejte plochu tlačítkem {button} Plocha**",
                 "start_playground": "Pojďme přidat toto dětské hřiště. Plochu vytvoříte naklikáním bodů okolo.\n**Začněte kliknutím do rohu**",
+                "continue_playground": "Pokračujte přidáváním bodů do rohů hřiště. {br}\nPlochu můžete spojit s existující pěšinou. (Pokud tomu naopak chcete zabránit držte klávesu Alt)\n**Přidejte další body do hřiště**",
                 "finish_playground": "Dokončete plochu kliknutím na první či poslední bod (též lze klávesou Enter).\n**Dokončete obrys hřšitě.**",
                 "search_playground": "**Vyhledejte '{preset}'.**",
                 "choose_playground": "**Zvolte {preset}.**",
@@ -952,7 +988,7 @@
             },
             "buildings": {
                 "title": "Budovy",
-                "add_building": "OSM je mimojiné také největší databází budov.{br}\nPokud někde budova chybí, můžete přidat její obrys.\n**Přidejte novou plochu tlačítkem {button} Plocha**",
+                "add_building": "OSM je mimojiné také největší databází budov.{br}\nPokud někde budova chybí, můžete přidat její obrys.{br}\nPozor: letecké snímky v ČR často nesedí - neopravujte, prosím, existující budovy, pokud si nejste jisti.\n**Přidejte novou plochu tlačítkem {button} Plocha**",
                 "start_building": "Pojďme přidat třeba tenhle barák.{br}\nZkuste budovu oklikat co nejpřesněji.\n**Začněte kreslit kliknutím do rohu**",
                 "continue_building": "Přidejte postupně další body do rohů, můžete i přizoomovat.{br}\nZadávání ukončíte kliknutím na první či poslední bod.\n**Dokončete obrys budovy**",
                 "retry_building": "Nějak se vám to asi nezdařilo. Zkuste to prosím znovu.",
@@ -975,6 +1011,8 @@
             },
             "startediting": {
                 "title": "Začít s editací",
+                "help": "Nyní jste připraveni editovat OpenStreetMap!{br}\nTuto prohlídku si můžete kdykoliv znovu přehrát nebo se podívejte na další dokumentaci stisknutím {button} tlačítka Nápověda.",
+                "shortcuts": "Seznam příkazů a jejich klávesové zkratky můžete zobrazit stisknutím klávesy `{key}`.",
                 "save": "Nezapomeňte pravidelně ukládat své úpravy!",
                 "start": "Začít mapovat!"
             }
@@ -1012,19 +1050,27 @@
                 "title": "Procházení",
                 "navigation": {
                     "title": "Navigace",
-                    "zoom": "Přiblížit / /oddálit"
+                    "pan": "Posun mapy",
+                    "pan_more": "Posun mapy o jednu obrazovku",
+                    "zoom": "Přiblížit / /oddálit",
+                    "zoom_more": "Více přiblížit / oddálit"
                 },
                 "help": {
-                    "title": "Nápověda"
+                    "title": "Nápověda",
+                    "help": "Zobrazit nápovědu",
+                    "keyboard": "Zobrazit klávesové zkratky"
                 },
                 "display_options": {
                     "title": "Vlastnosti zobrazení",
                     "background": "Zobrazit volby pozadí",
+                    "background_switch": "Zapnout předchozí použité pozadí",
                     "map_data": "Zobrazit volby mapových dat",
                     "fullscreen": "Vstoupit do režimu celé obrazovky",
+                    "wireframe": "Přepnout výplň budov",
                     "minimap": "Přepnout minimapu"
                 },
                 "selecting": {
+                    "title": "Vybrání prvků",
                     "select_one": "Zvolit jednu vlastnost",
                     "select_multi": "Zvolit více vlastností"
                 }
@@ -1059,6 +1105,20 @@
             }
         },
         "units": {
+            "feet": "{quantity} stop",
+            "miles": "{quantity} mil",
+            "square_feet": "{quantity} stop²",
+            "square_miles": "{quantity} mil²",
+            "acres": "{quantity} arů",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
             "north": "S",
             "south": "J",
             "east": "V",
@@ -2382,9 +2442,6 @@
                     "label": "Typ",
                     "placeholder": "Výchozí"
                 },
-                "vending": {
-                    "label": "Druh zboží"
-                },
                 "visibility": {
                     "label": "Viditelnost",
                     "options": {
@@ -3652,6 +3709,9 @@
                     "name": "Jezdecká stezka",
                     "terms": "jezdecká stezka,jezdecká trasa,stezka pro jezdce,stezka pro koně,koňská stezka"
                 },
+                "highway/bus_stop": {
+                    "name": "Zastávka autobusu"
+                },
                 "highway/corridor": {
                     "name": "Chodba",
                     "terms": "chodba,koridor"
@@ -3681,7 +3741,7 @@
                 },
                 "highway/give_way": {
                     "name": "Značka Dej přednost",
-                    "terms": "dej přednost v jízdě,dej přednost,značka přednosti v jízdě,vedlejší silnice,vedlejší ulice"
+                    "terms": "dej přednost v jízdě,dej přednost,značka přednosti v jízdě,vedlejší silnice,vedlejší ulice"
                 },
                 "highway/living_street": {
                     "name": "Obytná zóna",
@@ -3783,7 +3843,7 @@
                 },
                 "highway/stop": {
                     "name": "Stopka",
-                    "terms": "stopka,stop,dej přednost v jízdě,přednost,značka,dopravní značka"
+                    "terms": "stopka,stop,stůj,dej přednost v jízdě,přednost,značka,dopravní značka"
                 },
                 "highway/street_lamp": {
                     "name": "Pouliční lampa",
@@ -4723,6 +4783,9 @@
                 "public_transport/stop_area": {
                     "name": "Oblast zastávky"
                 },
+                "public_transport/stop_position": {
+                    "name": "Místo zastavení veřejné dopravy"
+                },
                 "public_transport/stop_position_aerialway": {
                     "name": "Místo zastavení lanovky"
                 },
@@ -4796,6 +4859,9 @@
                     "name": "Úzkorozchodná dráha",
                     "terms": "úzkorozchodná dráha,úzkokolejná dráha,úzkokolejka"
                 },
+                "railway/platform": {
+                    "name": "Železniční nástupiště"
+                },
                 "railway/rail": {
                     "name": "Kolej",
                     "terms": "koleje,železnice,vlak,trať"
@@ -4824,6 +4890,9 @@
                 "railway/tram": {
                     "name": "Tramvaj",
                     "terms": "tramvaj,tranvaj,šalina,šmirgl,tramvajka,elektrika,električka,tram"
+                },
+                "railway/tram_stop": {
+                    "name": "Zastávka tramvaje"
                 },
                 "relation": {
                     "name": "Relace",
@@ -5475,18 +5544,6 @@
                     "name": "Zákaz otáčení",
                     "terms": "otáčení,otočit,u-turn"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Přikázaný směr jízdy vlevo",
-                    "terms": "přikázáno jet vlevo,jen vlevo,pouze vlevo,odbočit vlevo"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Přikázaný směr jízdy vpravo",
-                    "terms": "přikázáno jet vpravo,jen vpravo,pouze vpravo,odbočit vpravo"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Přikázaný směr jízdy přímo",
-                    "terms": "přikázaný směr jízdy rovně,zákaz odbočit,zákaz zatočit,pouze rovně,pouze přímo,jen rovně,jen přímo"
-                },
                 "type/route": {
                     "name": "Trasa",
                     "terms": "trasa,cesta,linka,stopa,značka,spojení"
@@ -5824,6 +5881,50 @@
                 "attribution": {
                     "text": "Mapy © Thunderforest, data © přispěvatelé OpenStreetMap"
                 }
+            }
+        },
+        "community": {
+            "talk-cz-mailinglist": {
+                "description": "Talk-cz je hlavní komunikační kanál české komunity"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Vylepšete OpenStreetMap v Bay Area"
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "OSM Střední Pensylvánie"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM"
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapování DC",
+                "description": "Vylepšete OpenStreetMap na území DC"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Uživatelská skupina OpenStreetMap pro Chatanoogu"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "Všichni jsou vítaní! Přihlaste se na {signupUrl}"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Maptime Australia Slack",
+                "description": "Přihlaste se na {signupUrl}"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap na Redditu",
+                "description": "/r/openstreetmap/ je vynikající místo, kde lze zjistit více o OpenStreetMap. Zeptejte se nás na cokoliv!"
             }
         }
     }

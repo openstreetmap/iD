@@ -1,0 +1,14 @@
+{
+    "fields": [
+       "direction",
+       "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "advertising": "column"
+    },
+    "name": "Advertising Column"
+}

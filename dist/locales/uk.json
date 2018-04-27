@@ -1,5 +1,10 @@
 {
     "uk": {
+        "icons": {
+            "information": "інформація",
+            "remove": "вилучити",
+            "undo": "відмінити"
+        },
         "modes": {
             "add_area": {
                 "title": "Полігон",
@@ -145,7 +150,9 @@
                     "vertex": "Лінію приєднано до іншої лінії.",
                     "line": "Лінія з’єднана з іншою лінією.",
                     "area": "Лінія з’єднана з полігоном."
-                }
+                },
+                "relation": "Ці обʼєкти не можуть бути зʼєднані, бо вони мають ролі, значення яких конфліктують між собою.",
+                "restriction": "Ці об’єкти не можуть бути з’єднані, це може зруйнувати звʼязок \"{relation}\"."
             },
             "disconnect": {
                 "title": "Від’єднати",
@@ -402,6 +409,7 @@
                 "key": "H",
                 "title": "Історія",
                 "selected": "{n} виділено",
+                "no_history": "Історія відсутня (Новий об'єкт)",
                 "version": "Версія",
                 "last_edit": "Останні зміни",
                 "edited_by": "Змінено: ",
@@ -639,15 +647,20 @@
             }
         },
         "success": {
-            "edited_osm": "OSM змінено!",
             "just_edited": "Ви щойно внесли зміни на мапу OpenStreetMap!",
-            "view_on_osm": "Подивитись в OSM",
-            "facebook": "Поділитись у Facebook",
-            "twitter": "Поділитись у Twitter",
-            "google": "Поділитись у Google+",
-            "help_html": "Ваші зміни зʼявляться на \"Стандартному\" шарі через кілька хвилин. На інших шарах зміни зʼявляться згодом.",
+            "thank_you": "Дякуємо за вдосконалення мапи.",
+            "thank_you_location": "Дякуємо вам з вдосконалення мапи навколо {where}.",
+            "help_html": "Ваші зміни зʼявляться на OpenStreetMap через кілька хвилин. На інших шарах зміни зʼявляться згодом.",
             "help_link_text": "Деталі",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Uk:ЧаПи#.D0.AF_.D1.89.D0.BE.D0.B9.D0.BD.D0.BE_.D0.B7.D1.80.D0.BE.D0.B1.D0.B8.D0.B2_.D0.B4.D0.B5.D1.8F.D0.BA.D1.96_.D0.B7.D0.BC.D1.96.D0.BD.D0.B8_.D0.BD.D0.B0_.D0.BC.D0.B0.D0.BF.D1.96._.D0.AF.D0.BA_.D0.BC.D0.B5.D0.BD.D1.96_.D1.97.D1.85_.D0.BF.D0.BE.D0.B1.D0.B0.D1.87.D0.B8.D1.82.D0.B8.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Uk:ЧаПи#.D0.AF_.D1.89.D0.BE.D0.B9.D0.BD.D0.BE_.D0.B7.D1.80.D0.BE.D0.B1.D0.B8.D0.B2_.D0.B4.D0.B5.D1.8F.D0.BA.D1.96_.D0.B7.D0.BC.D1.96.D0.BD.D0.B8_.D0.BD.D0.B0_.D0.BC.D0.B0.D0.BF.D1.96._.D0.AF.D0.BA_.D0.BC.D0.B5.D0.BD.D1.96_.D1.97.D1.85_.D0.BF.D0.BE.D0.B1.D0.B0.D1.87.D0.B8.D1.82.D0.B8.3F",
+            "view_on_osm": "Подивтись зміни в ОСМ",
+            "changeset_id": "Номер вашого набору змін: {changeset_id}",
+            "like_osm": "Подобається OpenStreetMap? Приєднайтесь до:",
+            "more": "Ще",
+            "events": "Події",
+            "languages": "Мови: {languages}",
+            "missing": "Щось з цього переліку відсутнє?",
+            "tell_us": "Розкажіть нам!"
         },
         "confirm": {
             "okay": "Так",
@@ -1703,6 +1716,9 @@
                         "cycleway:right": "Праворуч"
                     }
                 },
+                "dance/style": {
+                    "label": "Види танців"
+                },
                 "date": {
                     "label": "Дата"
                 },
@@ -1771,6 +1787,9 @@
                 "display": {
                     "label": "Циферблат"
                 },
+                "distance": {
+                    "label": "Відстань"
+                },
                 "dock": {
                     "label": "Тип"
                 },
@@ -1810,6 +1829,9 @@
                 },
                 "except": {
                     "label": "Винятки"
+                },
+                "faces": {
+                    "label": "Сторони"
                 },
                 "fax": {
                     "label": "Факс",
@@ -1922,6 +1944,39 @@
                     "label": "Кільця",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "label": "Виїздка",
+                    "options": {
+                        "equestrian": "Так",
+                        "undefined": "Ні"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Верхова їзда",
+                    "options": {
+                        "horse_riding": "Так",
+                        "undefined": "Ні"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Складність маршруту",
+                    "options": {
+                        "common": "Легкий: жодних складностпей. (типовий)",
+                        "critical": "Дуже складний: тільки для досвідчених вершників та їх коней. Багато перешкод. Мости вимагають попереднього огляду на придатність рухатись по ним коням.",
+                        "dangerous": "Небезпечний: тільки для дуже досвідчених вершників та їх коней і тільки за сприятливих погодних умов. Пересування тільки спішившись.",
+                        "demanding": "Будьте обережні: нерівний шлях, іноді складні переходи.",
+                        "difficult": "Складний: Шлях вузький і незахищений. Може містити перешкоди, які треба долати, та вузькі проходи.",
+                        "impossible": "Неможливий: Шлях чи міст не придатні для коней. Завузький, недостатня підтримка, перешкоди, такі як драбини. Небезпека життю."
+                    },
+                    "placeholder": "Складно, Небезпечно…"
+                },
+                "horse_stables": {
+                    "label": "Стайня",
+                    "options": {
+                        "stables": "Так",
+                        "undefined": "Ні"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1940,6 +1995,9 @@
                 },
                 "indoor": {
                     "label": "План приміщення"
+                },
+                "industrial": {
+                    "label": "Тип"
                 },
                 "information": {
                     "label": "Тип"
@@ -2059,6 +2117,10 @@
                 },
                 "maxspeed": {
                     "label": "Обмеження швидкості",
+                    "placeholder": "40, 50, 60…"
+                },
+                "maxspeed/advisory": {
+                    "label": "Рекомендована швидкість",
                     "placeholder": "40, 50, 60…"
                 },
                 "maxstay": {
@@ -2649,8 +2711,19 @@
                     "label": "Тип",
                     "placeholder": "Типово"
                 },
+                "usage_rail": {
+                    "label": "Тіп колії",
+                    "options": {
+                        "branch": "Гілка",
+                        "industrial": "Промислова",
+                        "main": "Основний путь",
+                        "military": "Військова",
+                        "test": "Випробувальна",
+                        "tourism": "Туристична"
+                    }
+                },
                 "vending": {
-                    "label": "Тип товарів"
+                    "label": "Товари"
                 },
                 "visibility": {
                     "label": "Видно з",
@@ -2745,6 +2818,10 @@
                     "name": "Рекламний щит",
                     "terms": "реклама,оголошення,щит,бігборд,борд,інформація"
                 },
+                "advertising/column": {
+                    "name": "Тумба для оголошень",
+                    "terms": "реклама,сітілайт,лайтбокс,оголошення,конструкція,колона,тумба"
+                },
                 "aerialway": {
                     "name": "Канатна дорога"
                 },
@@ -2829,6 +2906,10 @@
                 "aeroway/terminal": {
                     "name": "Термінал",
                     "terms": "аеропорт,термінал,літак,очікування,duty-free,дьюті-фрі,зала"
+                },
+                "allotments/plot": {
+                    "name": "Дачна ділянка",
+                    "terms": "дача,город,сад,ділянка,участок"
                 },
                 "amenity": {
                     "name": "Зручності"
@@ -3058,6 +3139,10 @@
                     "name": "Ринок",
                     "terms": "Marketplace, hbyjr, базар, базарна площа"
                 },
+                "amenity/monastery": {
+                    "name": "Територія монастиря",
+                    "terms": "абатство,базиліка,моелельня,собор,вівтар,каплиця,церква,дім божий,молитовний дім,обрядовий дім,міссія,монастир,мечеть,приход,святилище,рака,святиня,синагога,храм"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Стоянка для мотоциклів",
                     "terms": "стоянка,мотоцикл"
@@ -3262,6 +3347,10 @@
                     "name": "Автомат продажу цигарок",
                     "terms": "циграки,торгівля,тютюн,палити,автомат,кіоск"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Каво-машина",
+                    "terms": "кава,лате,капучіно,амерікано,напій,гарячий"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Автомат продажу нацюцюрників",
                     "terms": "перезерватив,кондом,гандон,секс,захист,атомат,торгівля"
@@ -3270,6 +3359,14 @@
                     "name": "Автомат продажу напоїв",
                     "terms": "напої,газована вода,вода,сік,автомат,продаж,кіоск"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Автомат продажу електроприладів",
+                    "terms": "кабель,зарядний пристрій,навушники,хендс-фрі,телефон,смартфон,планшет"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Автомат продажу сувенірних монет",
+                    "terms": "монета,сувенір,витягнута,сплюснута,копійка"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Автомат пакетів для екскрементів",
                     "terms": "лайно,собака,тварина,кішка,пакет"
@@ -3277,6 +3374,18 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Автомат з продажу засобів жіночої гігієни",
                     "terms": "презерватив,тампон,прокладка,жінка,жінки,засоби,гігієна,менструація,циклу,догляд,особистий"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Автомат продажу їжі",
+                    "terms": "їжа,сир,молоко,картопля,макарони,ковбаса,сосиски"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Автомат продажу палива",
+                    "terms": "паливо,бензин,газ,пропан,бутан,дизель,скраплений газ,керосин,біодизель"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Автомат морозива",
+                    "terms": "морозиво,шоколадне,ванільне,фруктове"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Автомат продажу газет"
@@ -3296,6 +3405,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Автомат продажу проїзних квитків",
                     "terms": "автобус,трамвай,тролейбус,паром,електричка,квиток,транспорт,громадський,проїзд"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Автомат продажу поштових марок",
+                    "terms": "лист,марка,пошта,відправлення"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Автомат продажу солодощів",
@@ -3368,6 +3481,10 @@
                 "attraction/drop_tower": {
                     "name": "Падіння з вежі",
                     "terms": "парк,атракціони,вежа,вільне,падіння,кидок"
+                },
+                "attraction/maze": {
+                    "name": "Лабіринт",
+                    "terms": "лабіринт,парк,розваги"
                 },
                 "attraction/pirate_ship": {
                     "name": "Піратській корабель",
@@ -3998,6 +4115,10 @@
                     "name": "Хоспіс",
                     "terms": "хвороба,хоспіс,невіліковна,допомога"
                 },
+                "healthcare/laboratory": {
+                    "name": "Медична лабораторія",
+                    "terms": "лабораторія,аналізи,кров,інсулін,цукор,сеча,кал,тиск,гормони"
+                },
                 "healthcare/midwife": {
                     "name": "Акушерка",
                     "terms": "повитуха,пологи,дитина,вагітність"
@@ -4099,6 +4220,10 @@
                 "highway/motorway_link": {
                     "name": "З’їзд з/на автомагістраль",
                     "terms": "Motorway Link, ppl fdnjvfuscnhfkm, естакада, виїзд з, виїзд на, з’їзд з, з’їзд на"
+                },
+                "highway/passing_place": {
+                    "name": "Місце для роз'їзду",
+                    "terms": "дорога,дати шлях,роз'їзд,переваги,рух,зустрічний рух"
                 },
                 "highway/path": {
                     "name": "Стежка",
@@ -4459,6 +4584,10 @@
                     "name": "Ігрові автомати",
                     "terms": "один-на-один,ігра,автомат,відео,симулятор,пінбол"
                 },
+                "leisure/beach_resort": {
+                    "name": "Пляжний курорт",
+                    "terms": "курорт,відпочинок,пляж,вода,дозвілля,розваги,готель,житло"
+                },
                 "leisure/bird_hide": {
                     "name": "Пункт спостереження",
                     "terms": "птахи,звіри,природа,тварини"
@@ -4474,6 +4603,10 @@
                 "leisure/dance": {
                     "name": "Зала для танців",
                     "terms": "танці,зала,бальні танці,розваги,дозвілля,клуб,інтереси,тренування"
+                },
+                "leisure/dancing_school": {
+                    "name": "Школа танців",
+                    "terms": "школа,клуб,танці,танцювальна,танго,модерн,вальс,ча-ча-ча,латино,сучасні,хіп-хоп"
                 },
                 "leisure/dog_park": {
                     "name": "Парк для собак",
@@ -4570,6 +4703,10 @@
                 "leisure/nature_reserve": {
                     "name": "Заповідник",
                     "terms": "заповідник, заказник, охорона, природа, територія, акваторія, природний парк"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Місця на свіжому повітрі",
+                    "terms": "кафе,шинок,сніданок,обід,вечера,їжа,страви,напої,пиво,вино,горілка,віски,коньяк,алкоголь,ресторан,бар,паб,веренда,майданчик"
                 },
                 "leisure/park": {
                     "name": "Парк",
@@ -4699,6 +4836,10 @@
                     "name": "Штольня",
                     "terms": "entrance,underground,mine, cave,печера,шахта,вхід,вихід,підземелля"
                 },
+                "man_made/antenna": {
+                    "name": "Антена",
+                    "terms": "антена,сигнал,зв'язок,мобільний,телефон,телесигнал,передача"
+                },
                 "man_made/breakwater": {
                     "name": "Хвилеріз",
                     "terms": "Breakwater, dbkthsp, хвилеріз"
@@ -4749,6 +4890,10 @@
                 "man_made/observation": {
                     "name": "Оглядова вежа",
                     "terms": "Observation tower, jukzljdf dtf, пожежна вежа, вежа спостереження"
+                },
+                "man_made/observatory": {
+                    "name": "Обсерваторія",
+                    "terms": "астрономія,метеорологія,спостереження,зірки,погода"
                 },
                 "man_made/petroleum_well": {
                     "name": "Нафтова свердловина",
@@ -4873,6 +5018,10 @@
                 "natural/heath": {
                     "name": "Пустир/вереск",
                     "terms": "Heath, gecnbh, степ, верес, пустище"
+                },
+                "natural/mud": {
+                    "name": "Багно",
+                    "terms": "багно,багнюка,грязь"
                 },
                 "natural/peak": {
                     "name": "Пік",
@@ -5469,7 +5618,7 @@
                     "name": "Полустанок (на вимогу)"
                 },
                 "railway/level_crossing": {
-                    "name": "Залізничний переїзд (автомобілний)",
+                    "name": "Залізничний переїзд (автомобільний)",
                     "terms": "залізниця,потяг,рейки,автомобіль,перехід,шлагбаум,світлофор,поїзд,(автомобільний),дорога,шлях"
                 },
                 "railway/light_rail": {
@@ -5910,6 +6059,10 @@
                     "name": "Товари для тварин",
                     "terms": "Pet Store,njdfhb lkz ndfhby, зоомагазин"
                 },
+                "shop/pet_grooming": {
+                    "name": "Салон догляду за тваринами",
+                    "terms": "собака,кіт,стрижка,підрізка кігтів,купання,мийка"
+                },
                 "shop/photo": {
                     "name": "Фототовари",
                     "terms": "Photography Store, ajnjnjdfhb, фотограф"
@@ -6129,6 +6282,10 @@
                     "name": "Тематичний парк",
                     "terms": "Theme Park, ntvfnbxybq gfhr, тематичний парк"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Місце відпочинку для коней та вершників",
+                    "terms": "станція,відпочинок,коні,кінь,вершник,туризм"
+                },
                 "tourism/viewpoint": {
                     "name": "Оглядовий майданчик",
                     "terms": "Viewpoint, jukzljddbq vfqlfyxbr, оглядовий майданчик"
@@ -6213,16 +6370,20 @@
                     "terms": "знак, обмеження, розворот, немає, заборона"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Поворот тільки праворуч",
-                    "terms": "знак, обмеження, поворот, праворуч, тільки"
+                    "name": "Тільки ліворуч",
+                    "terms": "поворот,рух,ліворуч,заборона"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Поворот тільки ліворуч",
-                    "terms": "знак, обмеження, ліворуч, поворот, тільки"
+                    "name": "Тільки праворуч",
+                    "terms": "поворот,рух,праворуч,заборона"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Тільки прямо",
-                    "terms": "знак, обмеження, тільки прямо, поворота немає"
+                    "name": "ТІльки прямо",
+                    "terms": "рух,прямо,заборона"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Тільки розворот",
+                    "terms": "рух,розворот,заборона"
                 },
                 "type/route": {
                     "name": "Маршрут",
@@ -6385,7 +6546,7 @@
                 "attribution": {
                     "text": "Умови використання та Відгуки"
                 },
-                "description": "Межі та дати знімків. Підписи з'являються з 14 рівня масштабування. ",
+                "description": "Межі та дати знімків. Підписи з'являються з 13 рівня масштабування. ",
                 "name": "Період знімків DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -6399,7 +6560,7 @@
                 "attribution": {
                     "text": "Умови використання та Відгуки"
                 },
-                "description": "Межі та дати знімків. Підписи з'являються з 14 рівня масштабування. ",
+                "description": "Межі та дати знімків. Підписи з'являються з 13 рівня масштабування. ",
                 "name": "Період знімків DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -6483,6 +6644,10 @@
                 "description": "Жовтий = Дані, що розповсюджуються US Census на умовах суспільного надбання. Червоний = Дані, відсутні в OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Дороги: Зелений контур = unclassified. Коричневий контур = track. Покриття: gravel = світло-коричневе заповнення, asphalt = чорне, paved = сіре, ground = біле, concrete = синє, grass = зелене. Seasonal = білі смуги",
+                "name": "U.S. Forest Roads, додатковий шар"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, Учасники OpenStreetMap, CC by-SA 3.0"
@@ -6517,7 +6682,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Базова мапа Австрії, на основі урядових даних.",
+                "description": "Мапа Австрії, на основі урядових даних.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6579,7 +6744,7 @@
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "Тайли мапи від Stamen Design, CC BY 3.0"
+                    "text": "Тайли мапи від Stamen Design, CC BY 3.0. Дані OpenStreetMap, ODbL."
                 },
                 "name": "Stamen Terrain"
             },
@@ -6594,6 +6759,181 @@
                     "text": "Мапи © Thunderforest, Дані © Учасники OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "name": "Університет Кейп-Кост - YouthMappers",
+                "description": "Приєднуйтесь до нас у Twitter: {url}",
+                "extendedDescription": "Це офіційний провід відділення Youth Mappers Університету Кейп-Кост, Гана. Ми любимо карти, відкриваємо дані та допомагаємо вразливим."
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Гана у Facebook",
+                "description": "Група у Facebook для тих, хто цікавиться OpenStreetMap.",
+                "extendedDescription": "Місцева спільнота маперів Гани, розповсюджуємо інформацію про проекти OpenStreetMap та Humanitarian OpenStreetMap Team (HOT) в Гані. Приєднуйтесь до нас."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Гана у Twitter",
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "talk-gh": {
+                "name": "Talk-gh Список розсилки",
+                "description": "Talk-gh – офіційний список розсилки OSM спільноти Гани."
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap Madagascar група у Facebook",
+                "description": "Малагасійська група у Facebook для тих, хто цікавиться OpenStreetMap."
+            },
+            "talk-mg": {
+                "name": "Talk-mg Список розсилки",
+                "description": "Місце, де учасники OpenStreetMap, спільнота та користувачі з Мадагаскару поширюють інформацію та обмінюються думками"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Бангладеш",
+                "description": "Покращити OpenStreetMap в Бангладеш",
+                "extendedDescription": "Мапите в Бангладеш? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap Індія - участь в мапінгу поселень",
+                "description": "Покращити OpenStreetMap в Індії",
+                "extendedDescription": "Мапите в Індії? Маєте питання чи бажаєте поспілкуватись зі спільнотою тут? Приєднуйтесь до нас - {url}. Ласкаво просимо!",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "State of the Map Азія 2018",
+                        "description": "Відвідайте регіональну конференцію State of the Map 2018 в Індії",
+                        "where": "Індійський інститут управління, Бангалор, Індія"
+                    }
+                }
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap Індія, список розсилки",
+                "description": "Talk-in – офіційний список розсилки Індійської спільноти"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap Індія Twitter",
+                "description": "Ми просто в твітемо: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Free Software Hardware Movement - Facebook",
+                "description": "Відвідайте сторінку FSHM у Facebook, щоб дізнатись про події та заходи",
+                "extendedDescription": "FSHM організовує події пов'язані з вільним програмним та апаратним забезпечення, технологіями, розповсюдженням інформації про них та OpenStreetMap. На цій сторінці у FB ви завжди знайдете свіжу інформацію про події."
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Free Software Hardware Movement - Matrix"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Індонезія",
+                "description": "Покращити OpenStreetMap в Індонезії",
+                "extendedDescription": "Мапите в Індонезії? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-japan-facebook": {
+                "name": "Японська спільнота OpenStreetMap",
+                "description": "Учасники та користувачі OpenStreetMap в Японії"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Японія, список розсилки",
+                "description": "Talk-ja – офіційний список розсилки Японської спільноти"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Японія Twitter",
+                "description": "Хеш-теґ у Twitter: {url}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Монголія",
+                "description": "Покращити OpenStreetMap в Монголії",
+                "extendedDescription": "Мапите в Монголії? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Непал",
+                "description": "Покращити OpenStreetMap в Непалі",
+                "extendedDescription": "Мапите в Непалі? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap Філіппіни у Facebook"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph Список розсилки"
+            },
+            "OSM-LKA-facebook": {
+                "description": "Покращити OpenStreetMap у Шрі-Ланці",
+                "extendedDescription": "Мапите у Шрі-Ланці? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Тайвань, список розсилки",
+                "description": "Talk-tw – офіційний список розсилки спільноти для обговорення питань пов'язаних з Тайванем"
+            },
+            "at-mailinglist": {
+                "name": "Talk-at Список розсилки",
+                "description": "Talk-at – офіційний список розсилки OSM спільноти Австрії."
+            },
+            "be-mailinglist": {
+                "name": "Talk-be Список розсилки",
+                "description": "Talk-be – офіційний список розсилки OSM спільноти Бельгії."
+            },
+            "talk-cz-mailinglist": {
+                "name": "Talk-cz Список розсилки",
+                "description": "Talk-cz – офіційний список розсилки OSM спільноти Чехії."
+            },
+            "de-mailinglist": {
+                "name": "Talk-de Список розсилки",
+                "description": "Talk-de – офіційний список розсилки OSM спільноти Німеччини."
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es Список розсилки"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr Список розсилки",
+                "description": "Talk-fr Список розсилки"
+            },
+            "OSM-Rome-meetup": {
+                "description": "Покращити OpenStreetMap навкруги Риму"
+            },
+            "talk-it-lazio": {
+                "extendedDescription": "Список розсилки спільноти Риму та Лаціо"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se Список розсилки"
+            },
+            "se-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "description": "Покращити OpenStreetMap в районі Затоки Сан-Франциско"
+            },
+            "Mapping-DC-meetup": {
+                "description": "Покращити OpenStreetMap навколо Вашингтона, округ Колумбія",
+                "extendedDescription": "Ми є групою маперів-волонтерів, які прагнуть вдосконалити OpenStreetMap в окрузі Колумбія. Ми також намагаємось поширити інформацію про екосистему OSM, аналізі даних, картографію та ГІС серед зацікавлених осіб. Ми збираємося щомісяця на зустрічах, щоб покращити якусь частину нашого міста."
+            },
+            "OpenCleveland-meetup": {
+                "description": "Покращити OpenStreetMap навколо Клівленда"
+            },
+            "OSM-US": {
+                "description": "Ми допомагаємо розвивати та вдосконалювати OpenStreetMap у Сполучених Штатах."
+            },
+            "talk-au": {
+                "name": "Talk-au Список розсилки"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar Список розсилки"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br Список розсилки"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl Список розсилки"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co Список розсилки"
+            },
+            "OSM-CO-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe Список розсилки"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap на Reddit",
+                "description": "/r/openstreetmap/ чудове місце, щоб дізнатись більше про OpenStreetMap. Можете питати про будь-що!"
             }
         }
     }

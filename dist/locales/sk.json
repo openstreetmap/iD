@@ -582,13 +582,7 @@
             }
         },
         "success": {
-            "edited_osm": "OSM bol upravený!",
             "just_edited": "Práve ste upravili OpenStreetMap!",
-            "view_on_osm": "Zobraziť na OSM",
-            "facebook": "Zdieľaj na Facebooku",
-            "twitter": "Zdieľaj na Twitteri",
-            "google": "Zdieľaj na Google+",
-            "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie.",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -2181,9 +2175,6 @@
                 "tunnel": {
                     "label": "Typ",
                     "placeholder": "Prednastavené"
-                },
-                "vending": {
-                    "label": "Typ tovaru"
                 },
                 "visibility": {
                     "label": "Viditeľnosť",
@@ -4612,18 +4603,6 @@
                     "name": "Zákaz otáčania",
                     "terms": "zakaz otacania"
                 },
-                "type/restriction/only_left_turn": {
-                    "name": "Prikázaný smer jazdy vľavo",
-                    "terms": "Prikazany smer jazdy vlavo"
-                },
-                "type/restriction/only_right_turn": {
-                    "name": "Prikázaný smer jazdy vpravo",
-                    "terms": "prikazany smer jazdy vpravo"
-                },
-                "type/restriction/only_straight_on": {
-                    "name": "Prikázaný smer jazdy priamo",
-                    "terms": "prikazany smer jazdy priamo"
-                },
                 "type/route": {
                     "name": "Trasa",
                     "terms": "trasa,linka,trat,trať"
@@ -4838,7 +4817,6 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Základná mapa Rakúska, odvodená z vládnych dát.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -4899,9 +4877,6 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "attribution": {
-                    "text": "Mapové dlaždice od Stamen Design, pod CC BY 3.0"
-                },
                 "name": "Stamen terén"
             },
             "tf-cycle": {

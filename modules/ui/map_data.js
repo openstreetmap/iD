@@ -342,7 +342,7 @@ export function uiMapData(context) {
                     ymax: bounds.maxY.toFixed(6) * 1,
                     spatialReference: {wkid: 4326}
                 });
-                counter_url += '&geometry=' + bounds;
+                counter_url += '&geometry=' + encodeURIComponent(bounds);
                 counter_url += '&geometryType=esriGeometryEnvelope';
                 counter_url += '&spatialRel=esriSpatialRelIntersects';
                 counter_url += '&inSR=4326';

@@ -684,7 +684,7 @@ export function svgGeoService(projection, context, dispatch) {
 
         // make a spatial query within the user viewport (unless the user made their own spatial query)
         if (!downloadMax && (url.indexOf('spatialRel') === -1)) {
-            url += '&geometry=' + this.lastBounds;
+            url += '&geometry=' + encodeURIComponent(this.lastBounds);
             url += '&geometryType=esriGeometryEnvelope';
             url += '&spatialRel=esriSpatialRelIntersects';
             url += '&inSR=4326';

@@ -104,6 +104,16 @@ export function osmJoinWays(toJoin, graph) {
         return member.type === 'way' && graph.hasEntity(member.id);
     });
 
+    // Are the things we are joining relation members or `osmWays`?
+    // If `osmWays`, skip the "prefer a forward path" code below (see #4872)
+    var i;
+    var joinAsMembers = true;
+    for (i = 0; i < toJoin.length; i++) {
+        if (toJoin[i] instanceof osmWay) {
+            joinAsMembers = false;
+            break;
+        }
+    }
 
     var sequences = [];
     sequences.actions = [];
@@ -121,19 +131,19 @@ export function osmJoinWays(toJoin, graph) {
             var end = currNodes[currNodes.length - 1];
             var fn = null;
             var nodes = null;
-            var i;
 
             // Find the next way/member to join.
             for (i = 0; i < toJoin.length; i++) {
                 item = toJoin[i];
                 nodes = resolve(item);
 
+                // (for member ordering only, not way ordering - see #4872)
                 // Strongly prefer to generate a forward path that preserves the order
                 // of the members array. For multipolygons and most relations, member
-                // order does not matter - but for routes, it does. If we started this
-                // sequence backwards (i.e. next member way attaches to the start node
-                // and not the end node), reverse the initial way before continuing.
-                if (currWays.length === 1 && nodes[0] !== end && nodes[nodes.length - 1] !== end &&
+                // order does not matter - but for routes, it does. (see #4589)
+                // If we started this sequence backwards (i.e. next member way attaches to
+                // the start node and not the end node), reverse the initial way before continuing.
+                if (joinAsMembers && currWays.length === 1 && nodes[0] !== end && nodes[nodes.length - 1] !== end &&
                     (nodes[nodes.length - 1] === start || nodes[0] === start)
                 ) {
                     currWays[0] = reverse(currWays[0]);
