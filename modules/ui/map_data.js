@@ -162,10 +162,6 @@ export function uiMapData(context) {
                 .text(function(d) { return t(d.id.replace('-', '_') + '.title'); });
 
 
-            function clickGpx() {
-                toggleLayer('gpx');
-            }
-
             // Update
             li = li
                 .merge(liEnter);
