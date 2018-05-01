@@ -14,12 +14,14 @@ import polygonIntersect from 'turf-intersect';
 import polygonBuffer from 'turf-buffer';
 import pointInside from 'turf-inside';
 
-import { osmNode, osmRelation, osmWay } from '../osm/index';
-import { actionAddEntity, actionChangeTags } from '../actions/index';
+import { coreGraph } from '../core';
+import { osmNode, osmRelation, osmWay } from '../osm';
+import { utilRebind } from '../util';
 import { t } from '../util/locale';
 
 
 var dispatch = d3_dispatch('change');
+var _gsGraph = null;
 var _gsFormat = 'geojson';
 var _gsDownloadMax = null;
 var _gsImportFields = {};
@@ -27,10 +29,21 @@ var _gsImportFields = {};
 
 export default {
 
-    init: function() {},
-    reset: function() {},
+    init: function() {
+        this.reset();
+        this.event = utilRebind(this, dispatch, 'on');
+    },
 
-    query: function(urlbase, context) {
+    reset: function() {
+        _gsGraph = coreGraph();
+    },
+
+    graph: function() {
+        return _gsGraph;
+    },
+
+    query: function(urlbase, context, options) {
+        options = options || {};
 
         // add necessary URL parameters to the user's URL
         var url = urlbase;
@@ -93,88 +106,88 @@ export default {
 
         var that = this;
         d3_json(url, function(err, data) {
-            if (err) {
-                // console.log('GeoService URL did not load');
-                // console.error(err);
-            } else {
-                // convert EsriJSON text to GeoJSON object
-                var jsondl = (_gsFormat === 'geojson') ? data : fromEsri.fromEsri(data);
+            if (err || !data) return;
 
-                // warn if went over server's maximum results count
-                if (data.exceededTransferLimit) {
-                    alert(t('geoservice.exceeded_limit') + data.features.length);
-                }
+            // convert EsriJSON text to GeoJSON object
+            var gj = (_gsFormat === 'geojson') ? data : fromEsri.fromEsri(data);
 
-                jsondl.features.map(function(feature) {
-                    return that.processGeoFeature(feature, that.preset());
-                });
-
-                // send the modified geo-features to the draw layer
-                that.processGeoJSON(jsondl, context);
+            // warn if went over server's maximum results count
+            if (data.exceededTransferLimit) {
+                alert(t('geoservice.exceeded_limit') + data.features.length);
             }
+
+            gj.features.map(function(feature) {
+                return that.processFeature(feature, that.preset());
+            });
+
+            that.processGeoJSON(gj, options);
         });
     },
 
 
-    processGeoFeature: function(feature) {
-        // when importing an object, accept users' changes to keys
-        var convertedKeys = Object.keys(_gsImportFields);
-        var additionalKeys = Object.keys(feature.properties);
-        for (var a = 0; a < additionalKeys.length; a++) {
-            if (!_gsImportFields[additionalKeys[a]] && additionalKeys[a] !== 'OBJECTID') {
-                convertedKeys.push(additionalKeys[a]);
-            }
-        }
+    //
+    // Accepts a single GeoJSON Feature and adjusts its properties
+    // according to the user's import rules specified in `_gsImportFields`
+    //
+    processFeature: function(feature) {
+        var propertyKeys = Object.keys(feature.properties);
+        var importKeys = Object.keys(_gsImportFields);
 
         // keep the OBJECTID to make sure we don't download the same data multiple times
-        var outprops = {
+        var outProps = {
             OBJECTID: (feature.properties.OBJECTID || (Math.random() + ''))
         };
 
-        // convert the rest of the layer's properties
-        for (var k = 0; k < convertedKeys.length; k++) {
+        var i, k;
+        for (i = 0; i < propertyKeys.length; i++) {
+            k = propertyKeys[i];
+            if (!_gsImportFields[k] && k !== 'OBJECTID') {
+                importKeys.push(k);
+            }
+        }
+
+        for (i = 0; i < importKeys.length; i++) {
+            k = importKeys[i];
             var osmk = null;
             var osmv = null;
 
-            if (convertedKeys[k].indexOf('add_') === 0) {
-                // user or preset has added a key:value pair to all objects
-                osmk = convertedKeys[k].substring(4);
-                osmv = _gsImportFields[convertedKeys[k]];
-                if (_gsImportFields[osmk]) {
-                    // this data will be imported from the GeoService and not from preset
-                    continue;
-                }
-            } else {
-                var originalKey = convertedKeys[k];
-                var approval = _gsImportFields[originalKey];
-                if (!approval) {
-                    // left unchecked, do not import
-                    continue;
-                }
+            if (/^add\_/.test(k)) {      // user or preset has added a key:value pair to all objects
+                osmk = k.substring(4);
+                osmv = _gsImportFields[k];
+                if (_gsImportFields[osmk]) continue;   // osmk already in import field list, skip
 
-                // user checked or kept box checked, should be imported
-                osmv = feature.properties[originalKey];
+            } else {
+                if (!_gsImportFields[k]) continue;   // not in import field list, skip
+                osmv = feature.properties[k];
                 if (osmv) {
-                    osmk = _gsImportFields[originalKey] || originalKey;
+                    osmk = _gsImportFields[k] || k;
                 }
             }
 
-            if (osmk) {
-                // user directs any transferred keys
-                outprops[osmk] = osmv;
+            if (osmk && osmv) {
+                outProps[osmk] = osmv;
             }
         }
-        feature.properties = outprops;
+
+        feature.properties = outProps;
         return feature;
     },
 
 
-    processGeoJSON:  function(gj, context) {
+    //
+    // Accepts a GeoJSON FeatureCollection and iterates over all features
+    // importing them as OSM entities (Nodes, Ways, Relations) into `_gsGraph`
+    //
+    processGeoJSON: function(gj, options) {
+        options = options || {};
+
+        // possible options:
+        //   pointInPolygon: false,
+        //   mergeLines: false,
+        //   overlapBuildings: false
+
         var gjids = {};
-        var obj = this;
-        var pointInPolygon = d3_selectAll('.point-in-polygon input').property('checked');
-        var mergeLines = d3_selectAll('.merge-lines input').property('checked');
-        var overlapBuildings = d3_selectAll('.overlap-buildings input').property('checked');
+        var that = this;
 
         function fetchVisibleBuildings(callback, selector) {
             var buildings = d3_selectAll(selector || 'path.tag-building');
@@ -224,6 +237,7 @@ export default {
 
         (gj.features || []).map(function(d) {
             var props, nodes, ln, way, rel;
+
             function makeEntity(loc_or_nodes) {
                 props = {
                     tags: d.properties,
@@ -250,27 +264,21 @@ export default {
                     props = makeEntity(pts[p]);
                     props.tags = {};
                     var node = new osmNode(props);
-                    context.perform(
-                        actionAddEntity(node),
-                        'adding node inside a way'
-                    );
+                    _gsGraph = _gsGraph.replace(node);
                     nodes.push(node.id);
                 }
                 return nodes;
             }
 
-            function mapLine(d, coords, loop) {
+            function mapLine(d, coords, isClosed) {
                 nodes = makeMiniNodes(coords);
-                if (loop) {
+                if (isClosed) {
                     nodes.push(nodes[0]);
                 }
                 props = makeEntity(nodes);
                 way = new osmWay(props, nodes);
                 way.approvedForEdit = 'pending';
-                context.perform(
-                    actionAddEntity(way),
-                    'adding way'
-                );
+                _gsGraph = _gsGraph.replace(way);
                 return way;
             }
 
@@ -280,9 +288,9 @@ export default {
                 var ent;
                 if (!gjids[wayid]) {
                     var nodes = [];
-                    ent = context.entity(wayid);
+                    ent = _gsGraph.entity(wayid);
                     ent.nodes.map(function(nodeid) {
-                        var node = context.entity(nodeid);
+                        var node = _gsGraph.entity(nodeid);
                         nodes.push(node.loc);
                     });
 
@@ -318,18 +326,11 @@ export default {
                         }
 
                         // generate a relation
-                        rel = new osmRelation({
-                            tags: {
-                                type: 'MultiPolygon'
-                            },
-                            members: componentRings
-                        });
+                        rel = new osmRelation({ tags: { type: 'multipolygon' }, members: componentRings });
                         rel.approvedForEdit = 'pending';
-                        context.perform(
-                            actionAddEntity(rel),
-                            'adding multiple-ring Polygon'
-                        );
+                        _gsGraph = _gsGraph.replace(rel);
                         return rel;
+
                     } else {
                         // polygon with one single ring
                         coords[0].pop();
@@ -338,7 +339,7 @@ export default {
                     }
                 };
 
-                if (overlapBuildings) {
+                if (options.overlapBuildings) {
                     var foundOverlap = false;
                     fetchVisibleBuildings(function(building) {
                         if (!foundOverlap) {
@@ -358,23 +359,19 @@ export default {
 
             function mergeImportTags(wayid) {
                 // merge the active import GeoJSON attributes (d.properties) into item with wayid
-                var ent = context.entity(wayid);
+                var ent = _gsGraph.entity(wayid);
                 if (!ent.importOriginal) {
                     ent.importOriginal = _clone(ent.tags);
                 }
 
                 var originalProperties = _clone(ent.tags);
-
                 Object.keys(d.properties).map(function(key) {
                     originalProperties[key] = d.properties[key];
                 });
 
-                var adjustedFeature = obj.processGeoFeature({ properties: originalProperties });
+                var adjustedFeature = that.processFeature({ properties: originalProperties });
+                _gsGraph = _gsGraph.replace(ent.update({tags: adjustedFeature.properties}));
 
-                context.perform(
-                    actionChangeTags(wayid, adjustedFeature.properties),
-                    'merged import item tags'
-                );
                 setTimeout(function() {
                     d3_selectAll('.layer-osm .' + wayid).classed('import-edited', true);
                 }, 250);
@@ -388,14 +385,13 @@ export default {
                         // don't apply to new drawn roads
                         return;
                     }
-                    var ent;
 
                     // fetch existing, or load a GeoJSON representation of the road
                     if (!gjids[wayid]) {
                         var nodes = [];
-                        ent = context.entity(wayid);
+                        var ent = _gsGraph.entity(wayid);
                         ent.nodes.map(function(nodeid) {
-                            var node = context.entity(nodeid);
+                            var node = _gsGraph.entity(nodeid);
                             nodes.push(node.loc);
                         });
                         gjids[wayid] = {
@@ -421,7 +417,7 @@ export default {
                 props = makeEntity(d.geometry.coordinates);
 
                 // user is merging points to polygons (example: addresses to buildings)
-                if (pointInPolygon) {
+                if (options.pointInPolygon) {
                     var matched = false;
                     fetchVisibleBuildings(function(building) {
                         var wayid = getBuildingPoly(building);
@@ -436,23 +432,17 @@ export default {
                         // add address point independently of existing buildings
                         var node = new osmNode(props);
                         node.approvedForEdit = 'pending';
-                        context.perform(
-                            actionAddEntity(node),
-                            'adding point'
-                        );
+                        _gsGraph = _gsGraph.replace(node);
                     }
 
                 } else {
                     var noded = new osmNode(props);
                     noded.approvedForEdit = 'pending';
-                    context.perform(
-                        actionAddEntity(noded),
-                        'adding point'
-                    );
+                    _gsGraph = _gsGraph.replace(noded);
                 }
 
             } else if (d.geometry.type === 'LineString') {
-                if (mergeLines) {
+                if (options.mergeLines) {
                     var mergeRoadsd = matchingRoads(d);
                     if (!mergeRoadsd.length) {
                         // none of the roads overlapped
@@ -462,12 +452,11 @@ export default {
                     mapLine(d, d.geometry.coordinates);
                 }
 
-            } else if (d.geometry.type === 'MultiLineString') {
+            } else if (d.geometry.type === 'MultiLineString') {  // TODO: check
                 var lines = [];
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                    if (mergeLines) {
+                    if (options.mergeLines) {
                         // test each part of the MultiLineString for merge-ability
-
                         // this fragment of the MultiLineString should be compared
                         var importPart = {
                             type: 'Feature',
@@ -495,25 +484,18 @@ export default {
                 }
 
                 // don't add geodata if we are busy merging lines
-                if (mergeLines) {
+                if (options.mergeLines) {
                     return;
                 }
 
                 // generate a relation
-                rel = new osmRelation({
-                    tags: {
-                        type: 'route' // still need to tackle multilinestring and multipolygon types
-                    },
-                    members: lines
-                });
+                rel = new osmRelation({ tags: { type: 'route' }, members: lines });
                 rel.approvedForEdit = 'pending';
-                context.perform(
-                    actionAddEntity(rel),
-                    'adding multiple Lines as a Relation'
-                );
+                _gsGraph = _gsGraph.replace(rel);
 
             } else if (d.geometry.type === 'Polygon') {
                 mapPolygon(d, d.geometry.coordinates);
+
             } else if (d.geometry.type === 'MultiPolygon') {
                 var polygons = [];
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
@@ -524,17 +506,9 @@ export default {
                 }
 
                 // generate a relation
-                rel = new osmRelation({
-                    tags: {
-                        type: 'MultiPolygon'
-                    },
-                    members: polygons
-                });
+                rel = new osmRelation({ tags: { type: 'multipolygon' }, members: polygons });
                 rel.approvedForEdit = 'pending';
-                context.perform(
-                    actionAddEntity(rel),
-                    'adding multiple Polygons as a Relation'
-                );
+                _gsGraph = _gsGraph.replace(rel);
             } else {
                 // console.log('Did not recognize Geometry Type: ' + d.geometry.type);
             }
