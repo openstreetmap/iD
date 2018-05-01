@@ -1,4 +1,4 @@
-/* global Mapillary:false */
+
 import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
@@ -23,10 +23,6 @@ import {
 
 import rbush from 'rbush';
 
-// photo sphere viewer
-import _three from 'three/build/three';
-import _d from 'd.js/lib/d';
-
 import { jsonpRequest } from '../util/jsonp_request';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
@@ -38,7 +34,6 @@ var msapi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/';
 var apibase = 'https://a.mapillary.com/v3/',
     appkey = 'An-VWpS-o_m7aV8Lxa0oR9cC3bxwdhdCYEGEFHMP9wyMbmRJFzWfMDD1z3-DXUuE',
     viewercss = 'mapillary-js/mapillary.min.css',
-    //viewerjs = 'mapillary-js/mapillary.min.js',
     viewerjs = 'mapillary-js/mapillary.js',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
@@ -538,38 +533,40 @@ export default {
         }
     },
 
-
+    // create the streeside viewer
     loadViewer: function (context) {
-        // add mly-wrapper
-        var wrap = d3_select('#photoviewer').selectAll('.mly-wrapper')
+        // create ms-wrapper a photo wrapper class
+        var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
 
+        // inject ms-wrapper into the photoviewer div (used by all
+        // to house each custom photo viewer)
         var wrapEnter = wrap.enter()
             .append('div')
-            .attr('id', 'mly')
-            .attr('class', 'photo-wrapper mly-wrapper')
+            .attr('id', 'ms')
+            .attr('class', 'photo-wrapper ms-wrapper')
             .classed('hide', true);
 
+        // inject div to support photo attribution into ms-wrapper
         wrapEnter
             .append('div')
             .attr('class', 'photo-attribution-streetside fillD');
-
-
-        // load mapillary-viewercss
-        d3_select('head').selectAll('#mapillary-viewercss')
+        
+        // load streetside viewer css
+        d3_select('head').selectAll('#streetside-viewercss')
             .data([0])
             .enter()
             .append('link')
-            .attr('id', 'mapillary-viewercss')
+            .attr('id', 'streetside-viewercss')
             .attr('rel', 'stylesheet')
             .attr('href', context.asset(viewercss));
 
-        // load mapillary-viewerjs
-        d3_select('head').selectAll('#mapillary-viewerjs')
+        // load streetside viewer js
+        d3_select('head').selectAll('#streetside-viewerjs')
             .data([0])
             .enter()
             .append('script')
-            .attr('id', 'mapillary-viewerjs')
+            .attr('id', 'streetside-viewerjs')
             .attr('src', context.asset(viewerjs));
     },
 
@@ -578,18 +575,18 @@ export default {
         var wrap = d3_select('#photoviewer')
             .classed('hide', false);
 
-        var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
+        var isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
 
         if (isHidden) {
             wrap
-                .selectAll('.photo-wrapper:not(.mly-wrapper)')
+                .selectAll('.photo-wrapper:not(.ms-wrapper)')
                 .classed('hide', true);
 
             wrap
-                .selectAll('.photo-wrapper.mly-wrapper')
+                .selectAll('.photo-wrapper.ms-wrapper')
                 .classed('hide', false);
 
-            _mlyViewer.resize();
+            //_mlyViewer.resize();
         }
 
         return this;
@@ -663,7 +660,7 @@ export default {
                 };
             }
 
-            _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
+            _mlyViewer = new Mapillary.Viewer('ms', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
             _mlyViewer.moveToKey(imageKey)
                 .catch(function (e) { console.error('mly3', e); });  // eslint-disable-line no-console
@@ -726,7 +723,7 @@ export default {
 
         this.setStyles(null, true);
 
-        var wrap = d3_select('#photoviewer .mly-wrapper');
+        var wrap = d3_select('#photoviewer .ms-wrapper');
         var attribution = wrap.selectAll('.photo-attribution-streetside').html('');
         var year = (new Date()).getFullYear();
 

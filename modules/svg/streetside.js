@@ -83,7 +83,7 @@ export function svgStreetside(projection, context, dispatch) {
 
         service
             .selectImage(d)
-            .updateViewer(d.key, context)
+            //.updateViewer(d.key, context);
             .showViewer();
 
         context.map().centerEase(d.loc);

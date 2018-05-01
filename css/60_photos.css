@@ -64,6 +64,9 @@
     float: left;
     line-height: 6px;
 }
+.photo-attribution-streetside .image_link:hover{
+    color: #06b8ff;
+}
 
 /* markers and sequences */
 .viewfield-group {
@@ -209,6 +212,28 @@
     stroke: #77ddff;
 }
 
+
+/* Streetside viewer */
+#ms .domRenderer .TagSymbol {
+    font-size: 10px;
+    background-color: rgba(0,0,0,0.4);
+    padding: 0 4px;
+    border-radius: 4px;
+    top: -25px;
+}
+#ms .domRenderer .Attribution {
+    /* we will roll our own to avoid async update issues like #4526 */
+    display: none;
+}
+
+.ms-wrapper .photo-attribution a:active,
+.ms-wrapper .photo-attribution a:hover {
+    color: #35af6d;
+}
+
+.ms-wrapper .mapillary-js-dom {
+    z-index: 9;
+}
 
 /* Mapillary viewer */
 #mly .domRenderer .TagSymbol {
