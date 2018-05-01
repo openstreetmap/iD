@@ -98,9 +98,6 @@ export function rendererFeatures(context) {
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
             hidden: function() {
-                if (this.approvedForEdit) {
-                    return false;
-                }
                 return !context.editable() || this.count > this.currentMax * _cullFactor;
             },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }

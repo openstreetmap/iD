@@ -314,9 +314,9 @@ export function coreHistory(context) {
             }
         },
 
-        importPlan: function(plan_url) {
-            if (plan_url) {
-                importPlan = plan_url;
+        importPlan: function(planUrl) {
+            if (planUrl) {
+                importPlan = planUrl;
                 return history;
             } else {
                 return importPlan;

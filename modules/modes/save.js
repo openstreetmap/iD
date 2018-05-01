@@ -44,23 +44,11 @@ import {
 } from '../util';
 
 
-import { operationDelete } from '../operations/index';
-
 var _isSaving = false;
 
 export function modeSave(context) {
     var mode = { id: 'save' };
     var keybinding = d3_keybinding('modeSave');
-
-    // filter out pending import objects
-    var deletions = [];
-    var added = context.changes().created.concat([]);
-    _map(added, function(entity) {
-        if (entity.approvedForEdit && entity.approvedForEdit !== 'approved' && entity.approvedForEdit !== 'unchanged') {
-            deletions.push(entity.id);
-        }
-    });
-    operationDelete(deletions, context)();
 
     var loading = uiLoading(context)
         .message(t('save.uploading'))

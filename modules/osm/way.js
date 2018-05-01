@@ -28,7 +28,6 @@ osmWay.prototype = Object.create(osmEntity.prototype);
 _extend(osmWay.prototype, {
     type: 'way',
     nodes: [],
-    approvedForEdit: null,
 
     copy: function(resolver, copies) {
         if (copies[this.id])

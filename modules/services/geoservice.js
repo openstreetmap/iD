@@ -277,7 +277,7 @@ export default {
                 }
                 props = makeEntity(nodes);
                 way = new osmWay(props, nodes);
-                way.approvedForEdit = 'pending';
+                way.importStatus = 'pending';
                 _gsGraph = _gsGraph.replace(way);
                 return way;
             }
@@ -314,20 +314,16 @@ export default {
                         // what about rings within rings?
 
                         // generate each ring
-                        var componentRings = [];
+                        var members = [];
                         for (var ring = 0; ring < coords.length; ring++) {
-                            // props.tags = {};
                             coords[ring].pop();
                             way = mapLine(d, coords[ring], true);
-                            componentRings.push({
-                                id: way.id,
-                                role: (ring === 0 ? 'outer' : 'inner')
-                            });
+                            members.push({ id: way.id, role: (ring === 0 ? 'outer' : 'inner') });
                         }
 
                         // generate a relation
-                        rel = new osmRelation({ tags: { type: 'multipolygon' }, members: componentRings });
-                        rel.approvedForEdit = 'pending';
+                        rel = new osmRelation({ tags: { type: 'multipolygon' }, members: members });
+                        rel.importStatus = 'pending';
                         _gsGraph = _gsGraph.replace(rel);
                         return rel;
 
@@ -431,13 +427,13 @@ export default {
                     if (!matched) {
                         // add address point independently of existing buildings
                         var node = new osmNode(props);
-                        node.approvedForEdit = 'pending';
+                        node.importStatus = 'pending';
                         _gsGraph = _gsGraph.replace(node);
                     }
 
                 } else {
                     var noded = new osmNode(props);
-                    noded.approvedForEdit = 'pending';
+                    noded.importStatus = 'pending';
                     _gsGraph = _gsGraph.replace(noded);
                 }
 
@@ -490,7 +486,7 @@ export default {
 
                 // generate a relation
                 rel = new osmRelation({ tags: { type: 'route' }, members: lines });
-                rel.approvedForEdit = 'pending';
+                rel.importStatus = 'pending';
                 _gsGraph = _gsGraph.replace(rel);
 
             } else if (d.geometry.type === 'Polygon') {
@@ -507,7 +503,7 @@ export default {
 
                 // generate a relation
                 rel = new osmRelation({ tags: { type: 'multipolygon' }, members: polygons });
-                rel.approvedForEdit = 'pending';
+                rel.importStatus = 'pending';
                 _gsGraph = _gsGraph.replace(rel);
             } else {
                 // console.log('Did not recognize Geometry Type: ' + d.geometry.type);

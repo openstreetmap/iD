@@ -95,9 +95,9 @@ export function uiEntityEditor(context) {
 
         // accept/reject circle indicator
         var statusIcon = 'neutral';
-        if (this.focusEntity.approvedForEdit === 'approved') {
+        if (this.focusEntity.importStatus === 'approved') {
             statusIcon = 'approve';
-        } else if (this.focusEntity.approvedForEdit === 'rejected') {
+        } else if (this.focusEntity.importStatus === 'rejected') {
             statusIcon = 'reject';
         }
         d3_selectAll('.import-icon')
@@ -112,7 +112,7 @@ export function uiEntityEditor(context) {
             .attr('class', 'approve')
             .text(t('geoservice.approve'))
             .on('click', function() {
-                this.focusEntity.approvedForEdit = 'approved';
+                this.focusEntity.importStatus = 'approved';
                 context.history().on('change.save')();
                 // apply a CSS class to any point / line / polygon approved
                 d3_selectAll('.layer-osm .' + this.focusEntity.id)
@@ -129,7 +129,7 @@ export function uiEntityEditor(context) {
             .on('click', (function() {
                 if (this.focusEntity && this.focusEntity.importOriginal) {
                     // modified object: delete button restores original tags
-                    this.focusEntity.approvedForEdit = 'unchanged';
+                    this.focusEntity.importStatus = 'unchanged';
                     context.perform(
                         actionChangeTags(this.focusEntity.id, this.focusEntity.importOriginal),
                         'merged import item tags'
@@ -137,7 +137,7 @@ export function uiEntityEditor(context) {
                     d3_selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
                 } else {
                     // show object red for rejected
-                    this.focusEntity.approvedForEdit = 'rejected';
+                    this.focusEntity.importStatus = 'rejected';
                     d3_selectAll('.layer-osm .' + this.focusEntity.id)
                         .classed('import-approved import-edited import-pending', false)
                         .classed('import-rejected', true);
@@ -149,7 +149,7 @@ export function uiEntityEditor(context) {
             }).bind(this));
 
         // show import approval section?
-        d3_selectAll('.import-approve').classed('hide', !entity.approvedForEdit);
+        d3_selectAll('.import-approve').classed('hide', !entity.importStatus);
 
         enter
             .append('div')

@@ -39,7 +39,6 @@ osmRelation.creationOrder = function(a, b) {
 _extend(osmRelation.prototype, {
     type: 'relation',
     members: [],
-    approvedForEdit: null,
 
     copy: function(resolver, copies) {
         if (copies[this.id])
