@@ -4250,6 +4250,11 @@ en:
         name: Peak
         # 'terms: acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top'
         terms: '<translate with synonyms or related terms for ''Peak'', separated by commas>'
+      natural/reef:
+        # natural=reef
+        name: Reef
+        # 'terms: barrier,coral,ocean,sand,shoal'
+        terms: '<translate with synonyms or related terms for ''Reef'', separated by commas>'
       natural/ridge:
         # natural=ridge
         name: Ridge

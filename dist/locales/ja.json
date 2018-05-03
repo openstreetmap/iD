@@ -6625,6 +6625,7 @@
                 "name": "TIGER Roads 2017"
             },
             "US_Forest_Service_roads_overlay": {
+                "description": "Highway: 緑枠 = unclassified.ブラウン枠 = track. Surface: gravel = ライトブラウン, Asphalt = 黒, paved = グレイ, ground =白, concrete = 青, grass = 緑. Seasonal = 白棒",
                 "name": "U.S. Forest Roads Overlay"
             },
             "Waymarked_Trails-Cycling": {
@@ -6756,8 +6757,7 @@
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Participatory neighborhood mapping",
-                "description": "Improve OpenStreetMap in India",
-                "extendedDescription": "Mapping in India? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
+                "description": "Improve OpenStreetMap in India"
             },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap India Mailinglist",
@@ -6784,10 +6784,23 @@
                 "name": "OpenStreetMap 日本のTwitter",
                 "description": "Twitterでのハッシュタグ: {url}"
             },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap Malaysia Forum",
+                "description": "Official OpenStreetMap Malaysia Forum"
+            },
+            "OSM-MY-matrix": {
+                "name": "OpenStreetMap Malaysia Riot channel",
+                "description": "All mappers are welcome! Sign up at {signupUrl}"
+            },
             "OSM-MNG-facebook": {
                 "name": "OpenStreetMap Mongolia",
                 "description": "Improve OpenStreetMap in Mongolia",
                 "extendedDescription": "Mapping in Mongolia? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Improve OpenStreetMap in Myanmar",
+                "extendedDescription": "Mapping in Myanmar? Have questions, want to connect with the community here? Join us at {Url}. All are welcome!"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal",
@@ -6851,11 +6864,6 @@
                 "name": "OpenStreetMap BE forum",
                 "description": "OpenStreetMap Belgium web forum"
             },
-            "be-irc": {
-                "name": "OpenStreetMap Belgium IRC",
-                "description": "Join #osmbe on irc.oftc.net (port 6667)",
-                "extendedDescription": "Join #osmbe on irc.oftc.net (port 6667), it is bridged with the matrix chat channel"
-            },
             "be-mailinglist": {
                 "name": "Talk-be Mailing List",
                 "description": "Talk-be is the official mailing list for Belgian OSM community"
@@ -6864,6 +6872,11 @@
                 "name": "OpenStreetMap BE Riot channel",
                 "description": "All mappers are welcome! Sign up at {signupUrl}",
                 "extendedDescription": "Multiple channels exists, for beginners to thematic channels, landuse and dev talk"
+            },
+            "be-meetup": {
+                "name": "OpenStreetMap Belgium Meetup",
+                "description": "IRL meetups of everyone who is interested in OpenStreetMap.",
+                "extendedDescription": "Physical meetups are great to meet other mappers, ask them questions and to learn a lot. Especially new contributors are very welcome!"
             },
             "be-twitter": {
                 "name": "OpenStreetMap Belgium Twitter",
@@ -6892,6 +6905,10 @@
             "osm-de": {
                 "name": "OpenStreetMap Germany",
                 "description": "The platform for information on OpenStreetMap in Germany"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es mailing list",
+                "description": "A mailing list to discuss OpenStreetMap in Spain"
             },
             "OSM-ES-telegram": {
                 "name": "@OSMes on Telegram",
@@ -7052,26 +7069,22 @@
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentina Facebook",
-                "description": "Join the OpenStreetMap Argentina community on Facebook",
-                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+                "description": "Join the OpenStreetMap Argentina community on Facebook"
             },
             "OSM-AR-forum": {
                 "name": "OpenStreetMap Argentina web forum",
-                "description": "Join the OpenStreetMap Argentina web forum",
-                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+                "description": "Join the OpenStreetMap Argentina web forum"
             },
             "OSM-AR-irc": {
                 "name": "OpenStreetMap Argentina IRC",
                 "description": "Join #osm-ar on irc.oftc.net (port 6667)"
             },
             "OSM-AR-mailinglist": {
-                "name": "Talk-ar Mailing List",
-                "description": "A mailing list to discuss OpenStreetMap in Argentina"
+                "name": "Talk-ar Mailing List"
             },
             "OSM-AR-telegram": {
                 "name": "OpenStreetMap Argentina Telegram",
-                "description": "Join the OpenStreetMap Argentina community on Telegram",
-                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+                "description": "Join the OpenStreetMap Argentina community on Telegram"
             },
             "OSM-AR-twitter": {
                 "name": "OpenStreetMap Argentina Twitter",
@@ -7112,6 +7125,28 @@
             "OSM-CL-twitter": {
                 "name": "OpenStreetMap Chile Twitter",
                 "description": "Follow us on Twitter at {url}"
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotá",
+                "description": "We're a group of mappers interested in mapping in OpenStreetMap around Bogotá.",
+                "extendedDescription": "Learn to collect data in the field and digitize onto OpenStreetMap.  It is not necessary to have previous knowledge! You just need the desire to participate, learn, and have fun."
+            },
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Colombia Facebook",
+                "description": "Join the OpenStreetMap Colombia community on Facebook",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap. Everyone is welcome!"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co Mailing List",
+                "description": "A mailing list to discuss OpenStreetMap in Colombia"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Colombia Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colombia",
+                "description": "News of the OpenStreetMap Colombia community and the OSMCo Foundation"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",

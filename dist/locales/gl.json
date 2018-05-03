@@ -150,7 +150,9 @@
                     "vertex": "Conectada unha vía a outra.",
                     "line": "Conectada unha vía a unha liña.",
                     "area": "Conectada unha vía a unha área."
-                }
+                },
+                "relation": "Estes elementos non se poden conectar porque teñen roles de relación contraditorios.",
+                "restriction": "Estes elementos non se poden conectar porque se danaría a relación \"{relation}\"."
             },
             "disconnect": {
                 "title": "Desconectar",
@@ -407,6 +409,7 @@
                 "key": "H",
                 "title": "Historial",
                 "selected": "{n} seleccionados",
+                "no_history": "Sen historial (elemento novo)",
                 "version": "Versión",
                 "last_edit": "Última edición",
                 "edited_by": "Editado por",
@@ -1658,6 +1661,9 @@
                 },
                 "except": {
                     "label": "Excepcións"
+                },
+                "faces": {
+                    "label": "Caras"
                 },
                 "fax": {
                     "label": "Fax",
@@ -3143,6 +3149,9 @@
                     "name": "Torre de caída",
                     "terms": "caída, torre, atracción"
                 },
+                "attraction/maze": {
+                    "name": "Laberinto"
+                },
                 "attraction/pirate_ship": {
                     "name": "Barco pirata",
                     "terms": "barco pirata, atracción"
@@ -3629,6 +3638,9 @@
                 },
                 "healthcare/blood_donation": {
                     "name": "Doación de sangue"
+                },
+                "healthcare/laboratory": {
+                    "name": "Laboratorio médico"
                 },
                 "highway": {
                     "name": "Estrada"
@@ -5127,6 +5139,7 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
+                "description": "Límites das imaxes e datas de captura. As etiquetas aparecen a un nivel de zoom de 13 e superior.",
                 "name": "Antigüidade das imaxes DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -5140,6 +5153,7 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
+                "description": "Límites das imaxes e datas de captura. As etiquetas aparecen a un nivel de zoom de 13 e superior.",
                 "name": "Antigüidade das imaxes DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -5312,6 +5326,10 @@
         "community": {
             "osm-mg-facebook": {
                 "name": "Grupo de Facebook do OpenStreetMap na illa de Madagascar"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Lista de correo talk-es",
+                "description": "Unha lista de correo para debatir sobre o OpenStreetMap en España"
             },
             "OSM-ES-telegram": {
                 "name": "@OSMes no Telegram",

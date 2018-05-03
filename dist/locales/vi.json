@@ -4254,8 +4254,8 @@
                     "terms": "ngõ dân cư, ngõ dân sinh, ngõ, đường dân cư, dân cư, đường dân sinh, dân sinh, kiệt, ngo dan cu, ngo dan sinh, ngo, duong dan cu, dan cu, duong dan sinh, dan sinh, kiet"
                 },
                 "highway/rest_area": {
-                    "name": "Khu Vệ sinh và Nơi Nghỉ ngơi",
-                    "terms": "khu vệ sinh, phòng vệ sinh, nơi nghỉ ngơi, chỗ nghỉ ngơi, trạm thông tin, khu ve sinh, phong ve sinh, noi nghi ngoi, cho nghi ngoi, tram thong tin"
+                    "name": "Trạm Dừng Nghỉ",
+                    "terms": "trạm dừng nghỉ, khu vệ sinh, phòng vệ sinh, nơi nghỉ ngơi, chỗ nghỉ ngơi, trạm thông tin, tram dung nghi, khu ve sinh, phong ve sinh, noi nghi ngoi, cho nghi ngoi, tram thong tin"
                 },
                 "highway/road": {
                     "name": "Đường Nói chung",
@@ -6776,8 +6776,7 @@
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Ấn Độ – tham gia lập bản đồ hàng xóm",
-                "description": "Cải thiện OpenStreetMap tại Ấn Độ",
-                "extendedDescription": "Bạn có lập bản đồ tại Ấn Độ? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {Url}."
+                "description": "Cải thiện OpenStreetMap tại Ấn Độ"
             },
             "OSM-india-mailinglist": {
                 "name": "Danh sách thư OpenStreetMap Ấn Độ",
@@ -6870,11 +6869,6 @@
             "be-forum": {
                 "name": "Diễn đàn OpenStreetMap Bỉ",
                 "description": "Diễn đàn Web của OpenStreetMap Bỉ"
-            },
-            "be-irc": {
-                "name": "IRC OpenStreetMap Bỉ",
-                "description": "Hãy tham gia #osmbe tại irc.oftc.net (cổng 6667)",
-                "extendedDescription": "Hãy tham gia #osmbe tại irc.oftc.net (cổng 6667), kênh này có cầu nối với kênh trò chuyện Matrix"
             },
             "be-mailinglist": {
                 "name": "Danh sách thư talk-be",
@@ -7069,26 +7063,22 @@
             },
             "OSM-AR-facebook": {
                 "name": "Facebook OpenStreetMap Argentina",
-                "description": "Hãy tham gia cộng đồng OpenStreetMap Argentina tại Facebook",
-                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Argentina tại Facebook"
             },
             "OSM-AR-forum": {
                 "name": "Diễn đàn Web của OpenStreetMap Argentina",
-                "description": "Hãy tham gia diễn đàn Web của OpenStreetMap Argentina",
-                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+                "description": "Hãy tham gia diễn đàn Web của OpenStreetMap Argentina"
             },
             "OSM-AR-irc": {
                 "name": "IRC OpenStreetMap Argentina",
                 "description": "Hãy tham gia #osm-ar tại irc.oftc.net (cổng 6667)"
             },
             "OSM-AR-mailinglist": {
-                "name": "Danh sách thư talk-ar",
-                "description": "Danh sách thư để thảo luận về OpenStreetMap tại Argentina"
+                "name": "Danh sách thư talk-ar"
             },
             "OSM-AR-telegram": {
                 "name": "Telegram OpenStreetMap Argentina",
-                "description": "Hãy tham gia cộng đồng OpenStreetMap Argentina tại Telegram",
-                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Argentina tại Telegram"
             },
             "OSM-AR-twitter": {
                 "name": "Twitter OpenStreetMap Argentina",

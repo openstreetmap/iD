@@ -6104,7 +6104,7 @@
                     "terms": "Cartoleria"
                 },
                 "shop/storage_rental": {
-                    "name": "Noleggio",
+                    "name": "Box a noleggio",
                     "terms": "noleggio"
                 },
                 "shop/supermarket": {
@@ -6645,6 +6645,7 @@
                 "name": "TIGER Roads 2017"
             },
             "US_Forest_Service_roads_overlay": {
+                "description": "Strada: bordo verde = non classificata. Bordo marrone = carrareccia. Manto in ghiaia = colore diriempimento marrone chiaro, asfaltato = nero, pavimentato = grigio, terra = bianco,  cemento = blu, erboso = verde. Stagionale = con barre bianche",
                 "name": "Strade forestali U.S. (sovrapposta)"
             },
             "Waymarked_Trails-Cycling": {
@@ -6761,9 +6762,27 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "name": "Giovani mappatori dell’università di Cape Coast",
+                "description": "Seguici su Twitter: {url}",
+                "extendedDescription": "Questo è il punto d’incontro del capitolo dei Giovani Mappatori dell’università di Cape Coast in Ghana. Amiamo le mappe, i dati aperti e aiutare i più vulnerabili."
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap del Ghana su Facebook",
+                "description": "Gruppo Facebook per persone interessate a OpenStreetMap.",
+                "extendedDescription": "Mappatori nella comunità del Ghana, promuoviamo OpenStreetMap e i progetti della squadra umanitaria di OpenStreetMap (HOT) in Ghana. Unisciti a noi."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap del Ghana su Twitter",
+                "description": "Seguici su Twitter: {url}"
+            },
+            "talk-gh": {
+                "name": "Mailinglist talk-gh",
+                "description": "Talk-gh è la mailinglist ufficiale della comunità OSM del Ghana."
+            },
             "osm-mg-facebook": {
                 "name": "Gruppo Facebook di OpenStreetMap del Madagascar",
-                "description": "Gruppo Facebook malgascio per persone interessate a OpenStreetMap"
+                "description": "Gruppo Facebook malgascio per persone interessate a OpenStreetMap."
             },
             "talk-mg": {
                 "name": "Mailinglist talk-mg",
@@ -6777,7 +6796,14 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - mappatura di quartiere partecipativa",
                 "description": "Miglioriamo OpenStreetMap in India",
-                "extendedDescription": "Mappi in India? Hai domande o vuoi unirti alla comunità locale? Unisciti a noi su {Url}. Tutti sono i benvenuti!"
+                "extendedDescription": "Mappi in India? Hai domande o vuoi connetterti alla comunità locale? Unisciti a noi su {url}. Tutti sono i benvenuti!",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "State of the Map Asia 2018",
+                        "description": "Unisciti a State of the Map Asia di OpenStreetMap, un evento che si terrà in India nel 2018",
+                        "where": "Indian Institute of Management, Bangalore, India"
+                    }
+                }
             },
             "OSM-india-mailinglist": {
                 "name": "Mailinglist di OpenStreetMap dell’India",
@@ -6786,6 +6812,16 @@
             "OSM-india-twitter": {
                 "name": "Twitter di OpenStreetMap dell’India",
                 "description": "Siamo solo ad un cinguettio di distanza: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Movimento del software e hardware liberi su Facebook",
+                "description": "Pagina Facebook di FSHM per conoscere gli eventi e le attività della comunità",
+                "extendedDescription": "FSHM organizza eventi che riguardano il software e l’hardware liberi, la tecnologia, l’attivismo e OpenStreetMap. La sua pagina Facebook è il posto migliore per rimanere in contatto con i suoi eventi."
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Movimento del software e hardware liberi su Matrix",
+                "description": "Gruppo FSHM di Riot per discutere, condividere e aggiornare le attività di mappatura, gli eventi si terranno nei dintorni di Pondicherry",
+                "extendedDescription": "I membri della comunità FSHM condividono le loro esperienze / novità sulla mappatura in OSM attraverso il gruppo Riot.im, questo gruppo è anche usato per discutere di argomenti relativi al software e all’hardware liberi, la tecnologia e l’attivismo."
             },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap dell’Indonesia",
@@ -6804,10 +6840,27 @@
                 "name": "Twitter OpenStreetMap Giappone",
                 "description": "Hashtag su Twitter: {url}"
             },
+            "OSM-korea-telegram": {
+                "name": "Canale Telegram  di OSM della Corea",
+                "description": "Canale non ufficiale per discutere e condividere per i contribuenti, le comunità e gli utenti di OpenStreetMap in Corea."
+            },
+            "OSM-MY-forum": {
+                "name": "Forum web di OpenStreetMap della Malaysia",
+                "description": "Forum web ufficiale di OpenStreetMap della Malaysia"
+            },
+            "OSM-MY-matrix": {
+                "name": "Canale Riot di OpenStreetMap della Malaysia",
+                "description": "Tutti i mappatori sono i benvenuti! Iscriviti su {signupUrl}"
+            },
             "OSM-MNG-facebook": {
                 "name": "OpenStreetMap della Mongolia",
                 "description": "Migliora OpenStreetMap in Mongolia",
                 "extendedDescription": "Stai mappando in Mongolia? Hai domande o vuoi connetterti alla comunità locale? Unisci a noi su {Url}. Tutti sono i benvenuti!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Contribuisci a migliorare OpenStreetMap in Myanmar",
+                "extendedDescription": "Mappi in Myanmar? Hai domande oppure vuoi connetterti alla comunità di quaggiù? Unisciti a noi all’indirizzo {Url}. Tutti sono i benvenuti!"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap del Nepal",
@@ -6851,6 +6904,10 @@
                 "name": "Mailinglist di OpenStreetMap di Taiwan",
                 "description": "Talk-tw è la mailinglist ufficiale delle comunità per discutere su argomenti inerenti Taiwan."
             },
+            "at-forum": {
+                "name": "Forum web di OpenStreetMap dell’Austria",
+                "description": "Il forum ufficiale di OpenStreetMap per fare domande sull’Austria e nei suoi dintorni."
+            },
             "at-mailinglist": {
                 "name": "Mailinglist talk-at",
                 "description": "Talk-at è la mailinglist ufficiale della comunità austriaca di OpenStreetMap"
@@ -6858,6 +6915,14 @@
             "at-twitter": {
                 "name": "Twitter di OpenStreetMap dell’Austria",
                 "description": "OpenStreetMap dell’Austria su Twitter: {url}"
+            },
+            "osmgraz-meetup": {
+                "name": "Comunità OSM di Graz Meetup",
+                "description": "Meetup mensile della comunità OpenStreetMap in Graz"
+            },
+            "osmgraz-twitter": {
+                "name": "Comunità OSM di Graz su Twitter",
+                "description": "Comunità OpenStreetMap in Graz su Twitter"
             },
             "osm-at": {
                 "name": "OpenStreetMap dell’Austria",
@@ -6872,9 +6937,9 @@
                 "description": "Forum web belga di OpenStreetMap"
             },
             "be-irc": {
-                "name": "Canale IRC belga di OpenStreetMap",
+                "name": "Canale IRC di OpenStreetMap del Belgio",
                 "description": "Entra in #osmbe su irc.oftc.net (porta 6667)",
-                "extendedDescription": "Entra in #osmbe su irc.oftc.net (porta 6667), è connesso con al canale di chat matrix"
+                "extendedDescription": "Entra in #osmbe su irc.oftc.net (porta 6667), è unito al canale di chat Matrix"
             },
             "be-mailinglist": {
                 "name": "Mailinglist talk-be",
@@ -6884,6 +6949,11 @@
                 "name": "Canale Riot di OpenStreetMap belga",
                 "description": "Tutti i mappatori sono i benvenuti! Iscriviti su {signupUrl}",
                 "extendedDescription": "Esistono diversi canali, per principianti, canali a tema, per discutere di landuse e di problemi degli sviluppatori."
+            },
+            "be-meetup": {
+                "name": "Meetup di OpenStreetMap del Belgio",
+                "description": "Incontri di persona per chiunque sia interessato a OpenStreetMap.",
+                "extendedDescription": "Incontrarsi di persona è una grande occasione per conoscere altri mappatori, fare domande e imparare un sacco di cose. I nuovi utenti sono in special modo i benvenuti!"
             },
             "be-twitter": {
                 "name": "Twitter di OpenStreetMap del Belgio",
@@ -6896,6 +6966,22 @@
             "talk-cz-mailinglist": {
                 "name": "Mailinglist Talk-cz",
                 "description": "Talk-cz è la mailinglist ufficiale della comunità ceca"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Mailinglist di Berlino",
+                "description": "Questa è la mailinglist per la comunità OSM di Berlino"
+            },
+            "de-berlin-meetup": {
+                "name": "Meetup di OpenStreetMap di Berlino-Brandeburgo",
+                "description": "Mappatori e utenti di OpenStreetMap dell’area berlinese"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin su Telegram",
+                "description": "Chat Telegram di OpenStreetMap di Berlino"
+            },
+            "de-berlin-twitter": {
+                "name": "Twitter di OpenStreetMap di Berlino",
+                "description": "seguici su Twitter: {url}"
             },
             "de-forum": {
                 "name": "Forum OpenStreetMap della Germania",
@@ -6913,19 +6999,130 @@
                 "name": "OpenStreetMap della Germania",
                 "description": "La piattaforma d’informazione per OpenStreetMap in Germania"
             },
+            "OSM-ES-mailinglist": {
+                "name": "Mailinglist talk-es",
+                "description": "Una mailinglist per discutere su OpenStreetMap della Spagna"
+            },
             "OSM-ES-telegram": {
                 "name": "@OSMes su Telegram",
                 "description": "Chat Telegram di OpenStreetMap della Spagna"
+            },
+            "fr-facebook": {
+                "name": "Pagina Facebook di OpenStreetMap della Francia",
+                "description": "Pagina Facebook di OpenStreetMap della Francia"
+            },
+            "fr-forum": {
+                "name": "Forum web di OpenStreetMap della Francia",
+                "description": "Forum web di OpenStreetMap della Francia"
+            },
+            "fr-irc": {
+                "name": "Canale IRC di OpenStreetMap della Francia",
+                "description": "Entra in #osm-fr su irc.oftc.net (porta 6667)"
+            },
+            "fr-mailinglist": {
+                "name": "Mailinglist talk-fr",
+                "description": "Mailinglist talk-fr"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap della Francia su Twitter",
+                "description": "OpenStreetMap della Francia su Twitter: {url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Meetup mensili pubblici di Nottingham e East Midlands",
+                "description": "Incontri sociali per i mappatori e utenti delle East Midlands",
+                "extendedDescription": "Un gruppo che da marzo 2011 si riunisce, inizialmente a Nottingham, più recentemente a Derby e di tanto in tanto da qualche altra parte nelle East Midlands. Si tratta di incontri sociali, ma sono anche dei momenti eccellenti per venire a fare delle domande specifiche su OSM nella nostra zona o in generale. Nei mesi estivi facciamo solitamente delle sessioni leggere di mappatura nei dintorni del punto d’incontro. Il gruppo ha come interesse speciale quello di mappare le precedenze nelle strade pubbliche e di tanto in tanto ci incontriamo proprio per questo scopo."
+            },
+            "gb-mailinglist": {
+                "name": "Mailinglist talk-gb",
+                "description": "Talk-gb è la principale piattaforma di comunicazione della comunità OSM britannica (Irlanda del Nord inclusa)"
+            },
+            "mappa-mercia-group": {
+                "name": "Gruppo locale Mappa Mercia",
+                "description": "Un posto per gli appassionati di OpenStreetMap nelle Midlands",
+                "extendedDescription": "Mappa Mercia è un progetto per sviluppare OpenStreetMap nelle West Midlands nel Regno Unito. Organizziamo eventi per la comunità,  lezioni e supportiamo gli enti locali che vogliano rendere aperti i dati in loro possesso."
+            },
+            "gb-irc": {
+                "name": "Canale IRC di OpenStreetMap del Regno Unito",
+                "description": "Entra in #osm-gb su irc.oftc.net (porta 6667)",
+                "extendedDescription": "Entra in #osm-gb su irc.oftc.net (porta 6667), cerca di essere paziente e aspetta almeno qualche minuto se chiedi qualcosa"
+            },
+            "it-facebook": {
+                "name": "Facebook di OpenStreetMap dell’Italia",
+                "description": "Unisciti alla comunità italiana di OpenStreetMap su Facebook"
+            },
+            "it-irc": {
+                "name": "Canale IRC di OpenStreetMap dell’Italia",
+                "description": "Entra in #osm-it su irc.oftc.net (porta 6667)"
+            },
+            "it-mailinglist": {
+                "name": "Mailinglist talk-it",
+                "description": "Talk-it è la mailinglist ufficiale della comunità OSM italiana"
+            },
+            "it-twitter": {
+                "name": "Twiter di OpenStreetMap dell’Italia",
+                "description": "Seguici su Twitter all’indirizzo {url}"
             },
             "OSM-Rome-meetup": {
                 "name": "Incontro Mappatori Romani",
                 "description": "Miglioriamo OpenStreetMap nell’area attorno a Roma",
                 "extendedDescription": "Puntiamo ad aiutare le persone a discutere e a condividere le loro conoscenze nell’utilizzo dei dati geografici, in particolar modo quelli di OpenStreetMap, in quello di software geo-spaziale che gestisce, modifica e visualizza dati geografici e promuoviamo il suo uso nel Lazio."
             },
+            "South-Tyrol-Mailing-List": {
+                "name": "Mailinglist di OpenStreetMap del Sud Tirolo",
+                "description": "Mailinglist di OpenStreetMap Italia dell’area del Sud Tirolo,"
+            },
             "talk-it-lazio": {
                 "name": "OpenStreetMap Italy del Lazio",
                 "description": "Tutti sono i benvenuti! Iscriviti su {signupUrl}",
                 "extendedDescription": "Mailinglist di Roma e del Lazio."
+            },
+            "Trentino-Mailing-List": {
+                "name": "Mailinglist di OpenStreetMap per il Trentino",
+                "description": "Mailinglist di OpenStreetMap Italia del Trentino"
+            },
+            "no-forum": {
+                "name": "Forum web di OpenStreetMap della Norvegia",
+                "description": "Forum web di OpenStreetMap della Norvegia"
+            },
+            "no-irc": {
+                "name": "OpenStreetMap della Norvegia su IRC",
+                "description": "Stanza della chat per mappatori e utenti di OpenStreetMap, sviluppatori ed appassionati in Norvegia"
+            },
+            "no-mailinglist": {
+                "name": "Mailinglist di OpenStreetMap della Norvegia",
+                "description": "Mailinglist per mappatori e utenti di OpenStreetMap, sviluppatori ed appassionati in Norvegia"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "Gruppo Facebook di OpenStreetMap della Polonia",
+                "description": "Gruppo per mappatori e utenti di OpenStreetMap in Polonia"
+            },
+            "OSM-PL-forum": {
+                "name": "Forum web di OpenStreetMap della Polonia",
+                "description": "Forum web della comunità polacca di OpenStreetMap"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se",
+                "description": "Offriamo servizi OSM e informazioni per la comunità locale in Svezia"
+            },
+            "se-facebook": {
+                "name": "Facebook di OpenStreetMap della Svezia",
+                "description": "OpenStreetMap della Svezia su Facebook"
+            },
+            "se-forum": {
+                "name": "Forum web di OpenStreetMap della Svezia",
+                "description": "Forum web di OpenStreetMap della Svezia"
+            },
+            "se-irc": {
+                "name": "Canale IRC di OpenStreetMap della Svezia",
+                "description": "Entra in #osm.se su irc.oftc.net (porta 6667)"
+            },
+            "se-mailinglist": {
+                "name": "Mailinglist talk-se",
+                "description": "Una mailinglist per discutere di OpenStreetMap in Svezia"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap della Svezia su Twitter",
+                "description": "Seguici su Twitter: {url}"
             },
             "OSM-CA-Slack": {
                 "name": "Slack di OSM-CA",
@@ -7073,34 +7270,46 @@
             "OSM-AR-facebook": {
                 "name": "Facebook di OpenStreetMap dell’Argentina",
                 "description": "Unisciti alla comunità su Facebook di OpenStreetMap dell’Argentina",
-                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è benvenuto!"
+                "extendedDescription": "Novità della comunità locale"
             },
             "OSM-AR-forum": {
                 "name": "Forum web di OpenStreetMap dell’Argentina",
                 "description": "Unisciti al forum web di OpenStreetMap dell’Argentina",
-                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è benvenuto!"
+                "extendedDescription": "Ideale per discussioni lunghe e profonde. Tempi di risposta lenti."
             },
             "OSM-AR-irc": {
                 "name": "IRC di OpenStreetMap dell’Argentina",
-                "description": "Entra su #osm-ar nel server irc.oftc.net (porta 6667)"
+                "description": "Entra su #osm-ar nel server irc.oftc.net (porta 6667)",
+                "extendedDescription": "Potresti trovarvi gli utenti più nerd della comunità."
             },
             "OSM-AR-mailinglist": {
                 "name": "Mailinglist talk-ar",
-                "description": "Una mailinglist per parlare di OpenStreetMap dell’Argentina"
+                "description": "Vecchia mailinglist. Praticamente inutilizzata al giorno d’oggi."
             },
             "OSM-AR-telegram": {
                 "name": "Telegram di OpenStreetMap dell’Argentina",
                 "description": "Unisciti alla comunità su Telegram di OpenStreetMap dell’Argentina",
-                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è benvenuto!"
+                "extendedDescription": "Il canale più attivo della comunità, ideale per chiacchierare e ricevere risposte alle proprie domande praticamente in tempo reale. Tutti sono i benvenuti!"
             },
             "OSM-AR-twitter": {
                 "name": "Twitter di OpenStreetMap dell’Argentina",
-                "description": "Seguici su Twitter all’indirizzo {url}"
+                "description": "Seguici su Twitter all’indirizzo {url}",
+                "extendedDescription": "Novità dalla comunità locale e OpenStreetMap in generale."
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Mailinglist talk-bo",
+                "description": "Talk-bo è la mailinglist ufficiale della comunità OpenStreetMap boliviana",
+                "extendedDescription": "Mappi in Bolivia? Hai domande o vuoi connetterti con la comunità di quaggiù? Unisciti a noi all’indirizzo {url}. Tutti sono i benvenuti!"
             },
             "Bahia-telegram": {
                 "name": "Gruppo Telegram di OpenStreetMap di Bahia",
                 "description": "Unisciti alla comunità OpenStreetMap di Bahia su Telegram",
                 "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Chiunque è il benvenuto!"
+            },
+            "DF-telegram": {
+                "name": "Gruppo Telegram di OpenStreetMap di Brasilia",
+                "description": "Unisciti alla comunità di OpenStreetMap di Brasilia su Telegram",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap, fare domande e partecipare alle nostre riunioni. Tutti sono i benvenuti!"
             },
             "OSM-br-mailinglist": {
                 "name": "Mailinglist talk-br",
@@ -7133,9 +7342,80 @@
                 "name": "Twitter di OpenStreetMap del Cile",
                 "description": "Seguici su Twitter all’indirizzo {url}"
             },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotà",
+                "description": "Siamo un gruppo di mappatori interessati a mappare su OpenStreetMap nei dintorni di Bogotà",
+                "extendedDescription": "Impara a raccogliere dati sul campo e a inserirli in OpenStreetMap. Non importa avere delle conoscenze pregresse! È solo necessario voler partecipare, imparare e divertirsi."
+            },
+            "OSM-CO-facebook": {
+                "name": "Facebook di OpenStreetMap della Colombia",
+                "description": "Unisciti alla comunità di OpenStreetMap della Colombia su Facebook",
+                "extendedDescription": "Unisciti alla comunità per saperne di più su OpenStreetMap. Tutti sono i benvenuti!"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Mailinglist talk-co",
+                "description": "Una mailinglist per discutere di OpenStreetMap in Colombia"
+            },
+            "OSM-CO-twitter": {
+                "name": "Twitter di OpenStreetMap della Colombia",
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap della Colombia",
+                "description": "Novità della comunità di OpenStreetMap della Colombia e della fondazione OSMCo"
+            },
+            "OSM-PE-facebook": {
+                "name": "Facebook di OpenStreetMap del Perù",
+                "description": "Unisciti alla comunità di OpenStreetMap del Perù su Facebook"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Mailinglist talk-pe",
+                "description": "La mailinglist ufficiale della comunità di OpenStreetMap del Perù"
+            },
+            "OSM-PE-matrix": {
+                "name": "Chat Matrix di OpenStreetMap del Perù",
+                "description": "Parla su Matrix con gli altri membri della comunità di OpenStreetMap del Perù"
+            },
+            "OSM-PE-telegram": {
+                "name": "Telegram di OpenStreetMap del Perù",
+                "description": "Unisciti alla comunità di OpenStreetMap del Perù su Telegram"
+            },
+            "OSM-PE-twitter": {
+                "name": "Twitter di OpenStreetMap del Perù",
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap del Perù",
+                "description": "Novità e risorse per la comunità di OpenStreetMap del Perù"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap su Facebook",
+                "description": "Metti “Mi piace” su Facebook per notizie e aggiornamenti su OpenStreetMap"
+            },
+            "OSM-help": {
+                "name": "Assistenza OpenStreetMap",
+                "description": "Fai domande e ricevi risposte nel sito di domande e risposte gestito dalla comunità OSM.",
+                "extendedDescription": "{url} è per tutti quelli che hanno bisogno di aiuto con OpenStreetMap. Sia che tu sia un principiante o che tu abbia una domanda tecnica, siamo qui per aiutarti!"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap su Reddit",
                 "description": "/r/openstreetmap/ è il posto perfetto per imparare di più su OpenStreetMap. Chiedici di tutto!"
+            },
+            "OSM-Twitter": {
+                "name": "Twitter di OpenStreetMap",
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap Foundation",
+                "description": "OSMF è una organizzazione non a scopo di lucro che ha sede nel Regno Unito e che supporta il progetto OpenStreetMap",
+                "extendedDescription": "La OSMF supporta OpenStreetMap raccogliendo fondi, gestendo i server che alimentano OSM, organizzando l’annuale conferenza di State of the Map e coordinando i volontari che fanno funzionare OSM. Puoi dimostrare il tuo supporto e avere una voce in capitolo nella guida di OpenStreetMap unendoti come membro alla OSMF a questo indirizzo: {signupUrl}",
+                "events": {
+                    "sotm2018": {
+                        "name": "State of the Map 2018",
+                        "description": "Unisciti a noi per 3 giorni a Milano (Italia), alla conferenza mondiale annuale di OpenStreetMap, in cui tutti i membri della comunità potranno incontrarsi per socializzare, condividere ed imparare.",
+                        "where": "Milano, Italia"
+                    }
+                }
             }
         }
     }

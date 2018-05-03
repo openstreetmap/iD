@@ -28,6 +28,9 @@
             },
             "draw_line": {
                 "tail": "Kliknij, aby dodać więcej punktów do linii. Kliknij inne linie, aby je połączyć lub użyj dwukliku, aby zakończyć rysowanie."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Tego obiektu nie można edytować, ponieważ jest połączony z innym niewidocznym obiektem."
             }
         },
         "operations": {
@@ -293,6 +296,7 @@
         },
         "restriction": {
             "controls": {
+                "distance": "Odległość",
                 "via": "Przez"
             },
             "help": {
@@ -376,6 +380,7 @@
                 "key": "H",
                 "title": "Historia",
                 "selected": "{n} wybrano",
+                "no_history": "Brak Historii (nowy obiekt)",
                 "version": "Wersja",
                 "last_edit": "Ostatnia edycja",
                 "edited_by": "Edytowane przez",
@@ -508,7 +513,7 @@
         },
         "feature": {
             "points": {
-                "description": "Punkty",
+                "description": "Punkty (POI)",
                 "tooltip": "Użyteczne miejsca"
             },
             "traffic_roads": {
@@ -521,15 +526,15 @@
             },
             "paths": {
                 "description": "Ścieżki",
-                "tooltip": "Chodniki, ścieżki dla pieszych, ścieżki rowerowe, etc."
+                "tooltip": "Chodniki, ścieżki dla pieszych, ścieżki rowerowe etc."
             },
             "buildings": {
                 "description": "Budynki",
-                "tooltip": "Budynki, wiaty, garaże, etc."
+                "tooltip": "Budynki, wiaty, garaże etc."
             },
             "landuse": {
                 "description": "Obiekty użytkowania terenów",
-                "tooltip": "Lasy, pola, parki, osiedla mieszkaniowe, obszary komercyjne, etc."
+                "tooltip": "Lasy, pola, parki, osiedla mieszkaniowe, obszary handlowe, biurowe etc."
             },
             "boundaries": {
                 "description": "Granice",
@@ -537,19 +542,19 @@
             },
             "water": {
                 "description": "Obiekty wodne",
-                "tooltip": "Rzeki, jeziora, stawy, dorzecza, etc."
+                "tooltip": "Rzeki, jeziora, stawy, dorzecza etc."
             },
             "rail": {
                 "description": "Obiekty kolejowe",
                 "tooltip": "Tory kolejowe"
             },
             "power": {
-                "description": "Obiekty związane z dystrybucją prądu elektrycznego.",
-                "tooltip": "Linie energetyczne, elektrownie, podstacje, etc."
+                "description": "Obiekty dystrybucji prądu elektrycznego",
+                "tooltip": "Linie energetyczne, elektrownie, podstacje etc."
             },
             "past_future": {
                 "description": "Przeszłość/przyszłość",
-                "tooltip": "Projektowane, w czasie budowy, opuszczone, wyburzone, etc."
+                "tooltip": "Obiekty projektowane, w czasie budowy, opuszczone, wyburzone etc."
             },
             "others": {
                 "description": "Inne",
@@ -611,9 +616,19 @@
             }
         },
         "success": {
-            "just_edited": "Właśnie wprowadziłeś zmiany w OpenStreetMap!",
+            "just_edited": "Właśnie zmieniłeś OpenStreetMap!",
+            "thank_you": "Dziękujemy za ulepszanie mapy.",
+            "thank_you_location": "Dziękujemy za ulepszanie mapy w: {where}.",
+            "help_html": "Zmiany powinny pojawić się na warstwie standardowej mapy w ciągu kilku minut. Inne warstwy mogą odświeżać się dłużej.",
             "help_link_text": "Więcej informacji",
-            "help_link_url": "http://wiki.openstreetmap.org/wiki/Pl:FAQ#Kiedy_wprowadzone_przeze_mnie_zmiany_poka.C5.BCa_si.C4.99_na_mapie.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Pl:FAQ#Kiedy_wprowadzone_przeze_mnie_zmiany_poka.C5.BCa_si.C4.99_na_mapie.3F",
+            "view_on_osm": "Zobacz zmiany na OSM",
+            "changeset_id": "Twój zestaw zmian: #{changeset_id}",
+            "like_osm": "Podoba Ci się OpenStreetMap? Skontaktuj się z innymi mapującymi:",
+            "more": "Więcej",
+            "languages": "Języki: {languages}",
+            "missing": "Brakuje czegoś na tej liście?",
+            "tell_us": "Daj nam znać!"
         },
         "confirm": {
             "okay": "OK",
@@ -715,7 +730,8 @@
                 "save_h": "Zapisz",
                 "upload_h": "Wyślij",
                 "backups_h": "Automatyczne kopie zapasowe",
-                "keyboard_h": "Skróty klawiszowe"
+                "keyboard_h": "Skróty klawiszowe",
+                "keyboard": "Możesz zobaczyć listę skrótów klawiaturowych po naciśnięciu klawisza `?`."
             },
             "feature_editor": {
                 "title": "Edytor Obiektu",
@@ -1265,7 +1281,7 @@
                     "placeholders": {
                         "block_number": "Kwartał",
                         "block_number!jp": "Kwartał",
-                        "city": "Miejsc. (adres bez ulicy)",
+                        "city": "Miejsc. (adres z ulicą)",
                         "city!jp": "Miasto/Wieś/Okręg specjalny Tokio",
                         "city!vn": "Miasto",
                         "conscriptionnumber": "123",
@@ -1281,7 +1297,7 @@
                         "housenumber!jp": "Nr budynku/działki",
                         "neighbourhood": "Okręg",
                         "neighbourhood!jp": "Chōme/Aza/Koaza",
-                        "place": "Miejsc. (adres z ulicą)",
+                        "place": "Miejsc. (adres bez ulicy)",
                         "postcode": "Kod pocztowy",
                         "province": "Prowincja/województwo",
                         "province!jp": "Prefektura",
@@ -1561,6 +1577,9 @@
                         "cycleway:right": "Prawa strona"
                     }
                 },
+                "dance/style": {
+                    "label": "Style taneczne"
+                },
                 "date": {
                     "label": "Data"
                 },
@@ -1672,6 +1691,9 @@
                 "except": {
                     "label": "Wyjątki"
                 },
+                "faces": {
+                    "label": "Liczba powierzchni"
+                },
                 "fax": {
                     "label": "Faks",
                     "placeholder": "+48 42 123 45 67"
@@ -1777,22 +1799,29 @@
                     "label": "Rodzaj"
                 },
                 "historic/civilization": {
-                    "label": "Historyczna cywilizacja"
+                    "label": "Cywilizacja historyczna"
                 },
                 "hoops": {
                     "label": "Kosz",
                     "placeholder": "1, 2, 4..."
                 },
                 "horse_dressage": {
+                    "label": "Dresaż",
                     "options": {
                         "equestrian": "Tak",
                         "undefined": "Nie"
                     }
                 },
                 "horse_riding": {
+                    "label": "Jeździectwo",
                     "options": {
                         "horse_riding": "Tak",
                         "undefined": "Nie"
+                    }
+                },
+                "horse_scale": {
+                    "options": {
+                        "common": "Łatwe: Brak przeszkód, problemów. (domyślnie)"
                     }
                 },
                 "horse_stables": {
@@ -2534,6 +2563,9 @@
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
                 },
+                "usage_rail": {
+                    "label": "Sposób użytkowania"
+                },
                 "visibility": {
                     "label": "Widoczność",
                     "options": {
@@ -2626,6 +2658,10 @@
                 "advertising/billboard": {
                     "name": "Billboard",
                     "terms": "Reklama"
+                },
+                "advertising/column": {
+                    "name": "Słup z ogłoszeniami/reklamami",
+                    "terms": "reklamy,ogłoszenia"
                 },
                 "aerialway": {
                     "name": "Wyciąg narciarski"
@@ -2940,6 +2976,10 @@
                     "name": "Targowisko",
                     "terms": "targowisko,targ,rynek,giełda"
                 },
+                "amenity/monastery": {
+                    "name": "Teren klasztoru",
+                    "terms": "klasztor"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Parking dla motocyklów",
                     "terms": "miejsce postojowe dla motocyklów"
@@ -3144,6 +3184,10 @@
                     "name": "Automat z papierosami",
                     "terms": "Automat z papierosami"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Automat do sprzedaży kawy",
+                    "terms": "automat do sprzedaży kawy, kawiarka"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Automat z prezerwatywami",
                     "terms": "Automat z prezerwatywami"
@@ -3152,6 +3196,14 @@
                     "name": "Automat z napojami",
                     "terms": "Automat z napojami"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Automat do sprzedaży urządzeń elektronicznych",
+                    "terms": "automat do sprzedaży urządzeń elektronicznych, małe agd"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Automat do sprzedaży monet pamiątkowych",
+                    "terms": "automat do sprzedaży monet pamiątkowych,moneta pamiątkowa"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Dozownik z workami na psie odchody",
                     "terms": "woreczki na psie odchody"
@@ -3159,6 +3211,14 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Automat z produktami higieny kobiecej",
                     "terms": "podpaski,tampony"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Automat do sprzedaży jedzenia",
+                    "terms": "automat do sprzedaży jedzenia,jedzenie,pożywienie"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Automat do sprzedaży lodów",
+                    "terms": "automat do sprzedaży lodów,lody"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Automat z gazetami"
@@ -3178,6 +3238,10 @@
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Automat z biletami komunikacji publicznej",
                     "terms": "bilety komunikacji publicznej"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Automat do sprzedaży znaczków pocztowych",
+                    "terms": "automat do sprzedaży znaczków pocztowych, znaczki pocztowe"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Automat z przekąskami",
@@ -3250,6 +3314,10 @@
                 "attraction/drop_tower": {
                     "name": "Wieża Swobodnego Spadania",
                     "terms": "wieża spadania"
+                },
+                "attraction/maze": {
+                    "name": "Labirynt",
+                    "terms": "labirynt"
                 },
                 "attraction/pirate_ship": {
                     "name": "Statek piracki",
@@ -3415,6 +3483,14 @@
                 },
                 "building/entrance": {
                     "name": "Wejście/wyjście"
+                },
+                "building/farm": {
+                    "name": "Gospodarstwo (mieszkalny)",
+                    "terms": "Farma"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Budynek gospodarczy",
+                    "terms": "Gospodarstwo (niemieszkalny), Farma"
                 },
                 "building/garage": {
                     "name": "Garaż",
@@ -3974,6 +4050,10 @@
                     "name": "Autostrada - wjazd/zjazd",
                     "terms": "rampa,wjazd,wyjazd,zjazd"
                 },
+                "highway/passing_place": {
+                    "name": "Mijanka",
+                    "terms": "mijanka"
+                },
                 "highway/path": {
                     "name": "Ścieżka/droga ",
                     "terms": "ścieżka,dróżka"
@@ -4195,14 +4275,14 @@
                 },
                 "landuse/forest": {
                     "name": "Las",
-                    "terms": "las,drzewa"
+                    "terms": "las,puszcza"
                 },
                 "landuse/garages": {
                     "name": "Teren z garażami",
                     "terms": "garaże,garażowisko,obszar garaży,wiaty"
                 },
                 "landuse/grass": {
-                    "name": "Trawa",
+                    "name": "Trawa/trawnik",
                     "terms": "trawa, trawnik, skwer,klomb"
                 },
                 "landuse/greenfield": {
@@ -4233,7 +4313,7 @@
                     "terms": "składowisko odpadów,śmieci"
                 },
                 "landuse/meadow": {
-                    "name": "Łąka",
+                    "name": "Łąka/pastwisko",
                     "terms": "łąka,pastwisko"
                 },
                 "landuse/military": {
@@ -4301,7 +4381,7 @@
                     "terms": "torowisko"
                 },
                 "landuse/recreation_ground": {
-                    "name": "Tereny rekreacyjne",
+                    "name": "Park rekreacyjno-sportowy",
                     "terms": "rekreacja,odpoczynek,sporty,zabawy"
                 },
                 "landuse/religious": {
@@ -4344,9 +4424,13 @@
                     "name": "Sala Taneczna",
                     "terms": "dyskoteka"
                 },
+                "leisure/dancing_school": {
+                    "name": "Szkoła tańca",
+                    "terms": "szkoła tańca,tańce,tańczenie,taniec"
+                },
                 "leisure/dog_park": {
-                    "name": "Park dla psów",
-                    "terms": "psi park, wybieg dla psów"
+                    "name": "Wybieg dla psów",
+                    "terms": "psi park, wybieg dla psów, park dla psów"
                 },
                 "leisure/firepit": {
                     "name": "Miejsce na ognisko",
@@ -4437,8 +4521,8 @@
                     "terms": "rezerwat"
                 },
                 "leisure/park": {
-                    "name": "Park",
-                    "terms": "las,plac,teren rekreacyjny"
+                    "name": "Park rekreacyjno-wypoczynkowy",
+                    "terms": "park,wypoczynek,rekreacja,teren rekreacyjny"
                 },
                 "leisure/picnic_table": {
                     "name": "Stół piknikowy",
@@ -4550,7 +4634,7 @@
                 },
                 "leisure/water_park": {
                     "name": "Park wodny",
-                    "terms": "aquapark, cieplice"
+                    "terms": "aquapark, cieplice,akwapark"
                 },
                 "line": {
                     "name": "Linia",
@@ -4614,6 +4698,10 @@
                 "man_made/observation": {
                     "name": "Wieża obserwacyjna",
                     "terms": "wieża obserwacyjna"
+                },
+                "man_made/observatory": {
+                    "name": "Obserwatorium",
+                    "terms": "obserwatorium astronomiczne"
                 },
                 "man_made/petroleum_well": {
                     "name": "Szyb naftowy",
@@ -4732,12 +4820,16 @@
                     "terms": "lodowiec, lądolód, jęzor lodowcowy"
                 },
                 "natural/grassland": {
-                    "name": "Łąka",
-                    "terms": "Teren trawiasty"
+                    "name": "Łąka/sawanna/step/preria",
+                    "terms": "teren trawiasty,sawanna,step,preria"
                 },
                 "natural/heath": {
                     "name": "Wrzosowisko",
                     "terms": "Zdrowie, medycyna, szpital,"
+                },
+                "natural/mud": {
+                    "name": "Błoto",
+                    "terms": "błotne"
                 },
                 "natural/peak": {
                     "name": "Szczyt",
@@ -4800,8 +4892,8 @@
                     "terms": "bagna, bagno, mokradło, mokradła"
                 },
                 "natural/wood": {
-                    "name": "Las/puszcza",
-                    "terms": "las,puszcza,zalesienie"
+                    "name": "Drzewa",
+                    "terms": "zadrzewienie,las,zalesienie"
                 },
                 "noexit/yes": {
                     "name": "Brak przejścia/przejazdu",
@@ -5218,7 +5310,7 @@
                     "name": "Peron kolejowy"
                 },
                 "railway/rail": {
-                    "name": "Tor",
+                    "name": "Tor kolejowy",
                     "terms": "tory, torowisko"
                 },
                 "railway/signal": {
@@ -5930,6 +6022,22 @@
                     "name": "Zakaz zawracania",
                     "terms": "zakaz,zawracanie"
                 },
+                "type/restriction/only_left_turn": {
+                    "name": "Tylko skręt w lewo",
+                    "terms": "tylko w lewo,nakaz skrętu w lewo"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Tylko skręt w prawo",
+                    "terms": "tylko w prawo, nakaz skrętu w prawo"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Tylko jazda prosto",
+                    "terms": "tylko prosto, nakaz jazdy na wprost"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Tylko zawracanie",
+                    "terms": "tylko zawracanie, nakaz zawracania"
+                },
                 "type/route": {
                     "name": "Trasa/linia",
                     "terms": "trasa,linia"
@@ -6083,6 +6191,7 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
+                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 13 i wyższym.",
                 "name": "Datowanie zdjęć DigitalGlobe Premium "
             },
             "DigitalGlobe-Standard": {
@@ -6096,6 +6205,7 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
+                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 13 i wyższym.",
                 "name": "Datowanie zdjęć DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -6179,6 +6289,10 @@
                 "description": "Żółty = Dane public domain od US Census. Czerwony = Brak danych w OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Drogi:  Zielone obramowanie = czwartorzędna. Brązowe obramowanie = polna/leśna. Nawierzchnia: żwir = jasno-brązowe wypełnienie, asfalt = czarny, twarda = szary, grunt = biały, beton = niebieski, trawa = zielony. Dostępna sezonowo = białe paski",
+                "name": "Nakładka z drogami z U.S. Forest"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, autorzy OpenStreetMap, CC by-SA 3.0"
@@ -6213,6 +6327,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "Mapa bazowa Austrii, na podstawie danych rządowych",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -6273,6 +6388,9 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kafle mapy od Stamen Design, licencja CC BY 3.0. Dane z OpenStreetMap, licencja ODbL"
+                },
                 "name": "Stamen - Teren"
             },
             "tf-cycle": {
@@ -6286,6 +6404,207 @@
                     "text": "Mapa © Thunderforest, dane © autorzy OpenStreetMap"
                 },
                 "name": "Thunderforest Krajobraz"
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana na Facebook'u"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana na Twitter'rze",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesz"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonezja"
+            },
+            "OSM-japan-twitter": {
+                "description": "Hashtag na Twitterze: {url}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolia"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Mjanma"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal"
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap RU forum",
+                "description": "OpenStreetMap Rosja forum www"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap RU telegram"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Austria"
+            },
+            "be-forum": {
+                "description": "Forum OpenStreetMap Belgium "
+            },
+            "byosm": {
+                "name": "OpenStreetMap Białoruś",
+                "description": "OpenStreetMap Białoruś - czat na Telegramie"
+            },
+            "de-berlin-twitter": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "de-forum": {
+                "name": "OpenStreetMap DE forum",
+                "description": "OpenStreetMap Niemcy - forum www"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Niemcy - IRC",
+                "description": "Dołącza do #osm-de na irc.oftc.net (port 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de mailingowa lista dyskusyjna",
+                "description": "Talk-de to oficjalna lista dyskusyjna dla społeczności OSM w Niemczech"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Niemcy"
+            },
+            "it-twitter": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Polska na Facebooku",
+                "description": "Mapujący i użytkownicy OpenStreetMap w Polsce"
+            },
+            "OSM-PL-forum": {
+                "name": "Forum OpenStreetMap Polska",
+                "description": "Forum dyskusyjne polskiej społeczności OpenStreetMap"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se"
+            },
+            "se-twitter": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver"
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "OSM Centralna Pensylwania"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM"
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota"
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME"
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Southern California"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap US"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming"
+            },
+            "PHXGeo-meetup": {
+                "name": "PHXGeo Meetup"
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-AR-twitter": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-br-twitter": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-CL-twitter": {
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap KolumbiaTwitter",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Kolumbia"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Peru Facebook"
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram",
+                "description": "Dołącz do społeczności OpenStreetMap Peru na Telegramie"
+            },
+            "OSM-PE-twitter": {
+                "name": "OpenStreetMap Peru Twitter",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap na Facebook'u"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap  na Reddit",
+                "description": "/r/openstreetmap/ jest wspaniałym miejscem by dowiedzieć się więcej o OpenStreetMap."
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSMF": {
+                "name": "Fundacja OpenStreetMap ",
+                "events": {
+                    "sotm2018": {
+                        "name": "State of the Map 2018"
+                    }
+                }
             }
         }
     }

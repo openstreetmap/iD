@@ -1,5 +1,9 @@
 {
     "nl": {
+        "icons": {
+            "information": "info",
+            "remove": "verwijder"
+        },
         "modes": {
             "add_area": {
                 "title": "Vlak",
@@ -289,6 +293,36 @@
                     "create": "Afslagbeperking toegevoegd",
                     "delete": "Afslagbeperking weggehaald"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance_up_to": "Tot en met {distance}",
+                "via_up_to_one": "Tot en met 1 weg",
+                "via_up_to_two": "Tot en met 2 wegen"
+            },
+            "help": {
+                "indirect": "(indirect)",
+                "turn": {
+                    "no_left_turn": "NIET links afslaan {indirect}",
+                    "no_right_turn": "NIET rechts afslaan {indirect}",
+                    "no_u_turn": "NIET U-bochten gebruiken {indirect}",
+                    "no_straight_on": "NIET rechtdoor gaan {indirect}",
+                    "only_left_turn": "ALLEEN links afslaan {indirect}",
+                    "only_right_turn": "ALLEEN rechts afslaan {indirect}",
+                    "only_u_turn": "ALLEEN U-bochten gebruiken {indirect}",
+                    "only_straight_on": "ALLEEN rechtdoor gaan {indirect}",
+                    "allowed_left_turn": "Links afslaan toegestaan {indirect}",
+                    "allowed_right_turn": "Rechts afslaan toegestaan {indirect}",
+                    "allowed_u_turn": "U-bochten gebruiken toegestaan {indirect}",
+                    "allowed_straight_on": "Rechtdoor gaan toegestaan {indirect}"
+                },
+                "from": "VAN",
+                "via": "VIA",
+                "to": "NAAR",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}"
             }
         },
         "undo": {
@@ -605,7 +639,13 @@
         "success": {
             "just_edited": "Je hebt OpenStreetMap bewerkt!",
             "help_link_text": "Meer hierover, in het Engels",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Bekijk wijzigingen op OSM",
+            "more": "Meer",
+            "events": "Evenementen",
+            "languages": "Talen: {languages}",
+            "missing": "Mist er iets in deze lijst?",
+            "tell_us": "Meld het ons!"
         },
         "confirm": {
             "okay": "Oké",
@@ -840,6 +880,24 @@
                 "using": "Om een GPS-track te gebruiken voor het bewerken, sleep je een bestand naar dit kaartbewerkingsprogramma. Als het herkend wordt, zal het getekend worden als een heldere paarse lijn. Open het \"{data} **Kaartgegevens**\"-paneel naast de kaart om je GPS-data aan of uit te zetten of er op in te zoomen.",
                 "tracing": "De GPS-track wordt niet automatisch verzonden naar OpenStreetMap. De beste manier om het te gebruiken is als referentie voor nieuwe objecten die je toevoegt.",
                 "upload": "Je kan ook [je GPS-data uploaden naar OpenStreetMap](https://www.openstreetmap.org/trace/create) zodat andere gebruikers hen ook kunnen gebruiken."
+            },
+            "field": {
+                "restrictions": {
+                    "about": {
+                        "title": "Over"
+                    },
+                    "inspecting": {
+                        "from_shadow": "{fromShadow} **VAN segment**",
+                        "allow_shadow": "{allowShadow} **NAAR toegestaan**",
+                        "restrict_shadow": "{restrictShadow} **NAAR beperkt**",
+                        "only_shadow": "{onlyShadow} **NAAR alleen**"
+                    },
+                    "modifying": {
+                        "allow_turn": "{allowTurn} **NAAR toegestaan**",
+                        "restrict_turn": "{restrictTurn} **NAAR beperkt**",
+                        "only_turn": "{onlyTurn} **NAAR alleen**"
+                    }
+                }
             }
         },
         "intro": {
@@ -1216,8 +1274,15 @@
             "square_feet": "{quantity} sq ft",
             "square_miles": "{quantity} sq mi",
             "acres": "{quantity} ac",
+            "meters": "{quantity} m",
             "kilometers": "{quantity} km",
             "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
             "north": "N",
             "south": "Z",
             "east": "O",
@@ -1616,6 +1681,9 @@
                         "cycleway:right": "Rechterkant"
                     }
                 },
+                "dance/style": {
+                    "label": "Dansstijlen"
+                },
                 "date": {
                     "label": "Datum"
                 },
@@ -1681,6 +1749,9 @@
                 "display": {
                     "label": "Weergave"
                 },
+                "distance": {
+                    "label": "Totale afstand"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -1720,6 +1791,9 @@
                 },
                 "except": {
                     "label": "Uitzonderingen"
+                },
+                "faces": {
+                    "label": "Gezichten"
                 },
                 "fax": {
                     "label": "Fax",
@@ -1832,6 +1906,34 @@
                     "label": "Lussen",
                     "placeholder": "1, 2, 4 …"
                 },
+                "horse_dressage": {
+                    "label": "Dressuur",
+                    "options": {
+                        "equestrian": "Ja",
+                        "undefined": "Nee"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Paardrijden",
+                    "options": {
+                        "horse_riding": "Ja",
+                        "undefined": "Nee"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Moeilijkheidsgraad paardrijden",
+                    "options": {
+                        "common": "Makkelijk: Geen problemen of moeilijkheden. (standaard)"
+                    },
+                    "placeholder": "Moeilijk, gevaarlijk..."
+                },
+                "horse_stables": {
+                    "label": "Rijstal",
+                    "options": {
+                        "stables": "Ja",
+                        "undefined": "Nee"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1850,6 +1952,9 @@
                 },
                 "indoor": {
                     "label": "Binnen"
+                },
+                "industrial": {
+                    "label": "Type"
                 },
                 "information": {
                     "label": "Type"
@@ -1970,6 +2075,10 @@
                 "maxspeed": {
                     "label": "Snelheidsbeperking",
                     "placeholder": "40, 50, 60 …"
+                },
+                "maxspeed/advisory": {
+                    "label": "Adviessnelheid",
+                    "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
                     "label": "Maximale verblijftijd"
@@ -2559,6 +2668,19 @@
                     "label": "Type",
                     "placeholder": "Standaard"
                 },
+                "usage_rail": {
+                    "label": "Gebruikstype",
+                    "options": {
+                        "industrial": "Industrieel",
+                        "main": "Hoofd",
+                        "military": "Militair",
+                        "test": "Test",
+                        "tourism": "Toerisme"
+                    }
+                },
+                "vending": {
+                    "label": "Typen goederen"
+                },
                 "visibility": {
                     "label": "Zichtbaarheid",
                     "options": {
@@ -2651,6 +2773,9 @@
                 "advertising/billboard": {
                     "name": "Reclamebord",
                     "terms": "billboard"
+                },
+                "advertising/column": {
+                    "name": "Reclamezuil"
                 },
                 "aerialway": {
                     "name": "Kabelbaan"
@@ -3167,6 +3292,9 @@
                     "name": "Sigarettenautomaat",
                     "terms": "sigarettenautomaat,tabakautomaat"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Koffieautomaat"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Condoomautomaat",
                     "terms": "automaat"
@@ -3273,6 +3401,9 @@
                 "attraction/drop_tower": {
                     "name": "Valtoren",
                     "terms": "valattractie,grote val"
+                },
+                "attraction/maze": {
+                    "name": "Doolhof"
                 },
                 "attraction/pirate_ship": {
                     "name": "Piratenschip",
@@ -3881,6 +4012,9 @@
                     "name": "Palliatievezorgcentrum",
                     "terms": "hospice,hospitium,terminale zorg,terminaal,ongeneeslijk ziek,terminaal ziek,hospicezorg,palliatieve zorg,palliatievezorgeenheid"
                 },
+                "healthcare/laboratory": {
+                    "name": "Medisch laboratorium"
+                },
                 "healthcare/midwife": {
                     "name": "Verloskundige",
                     "terms": "vroedkundige,vroedvrouw"
@@ -4337,6 +4471,9 @@
                 "leisure/amusement_arcade": {
                     "name": "Speelhal"
                 },
+                "leisure/beach_resort": {
+                    "name": "Strandoord"
+                },
                 "leisure/bird_hide": {
                     "name": "Vogelkijkscherm of -hut",
                     "terms": "vogelkijkhut,vogelkijkscherm"
@@ -4352,6 +4489,9 @@
                 "leisure/dance": {
                     "name": "Danszaal",
                     "terms": "ballroom,jive,swing,tango,wals"
+                },
+                "leisure/dancing_school": {
+                    "name": "Dansschool"
                 },
                 "leisure/dog_park": {
                     "name": "Hondenpark",
@@ -4568,6 +4708,9 @@
                     "name": "Horizontale mijn- of grotingang",
                     "terms": "ingang,ondergronds,grot,mijn,adit"
                 },
+                "man_made/antenna": {
+                    "name": "Antenne"
+                },
                 "man_made/breakwater": {
                     "name": "Golfbreker",
                     "terms": "golven,havenbescherming,kustbescherming,stortsteengolfbreker,caissongolfbreker,drijvende golfbreker,palengolfbreker,havengolfbreker,strekdammen"
@@ -4617,6 +4760,9 @@
                 },
                 "man_made/observation": {
                     "name": "Uitkijktoren"
+                },
+                "man_made/observatory": {
+                    "name": "Observatorium"
                 },
                 "man_made/petroleum_well": {
                     "name": "Oliebron",
@@ -4732,6 +4878,9 @@
                 },
                 "natural/heath": {
                     "name": "Heideveld"
+                },
+                "natural/mud": {
+                    "name": "Modder"
                 },
                 "natural/peak": {
                     "name": "Top",
@@ -5719,6 +5868,9 @@
                     "name": "Dierenwinkel",
                     "terms": "dierenzaak,dierenwinkel,huisdieren"
                 },
+                "shop/pet_grooming": {
+                    "name": "Huisdierenverzorgingswinkel"
+                },
                 "shop/photo": {
                     "name": "Fotowinkel"
                 },
@@ -6001,6 +6153,18 @@
                     "name": "Niet omkeren",
                     "terms": "geen U-bocht,U-bocht verboden,omkeren verboden,omdraaien verboden,verboden om te draaien,verboden om te keren,niet omdraaien,niet keren,verboden te keren,keren verboden"
                 },
+                "type/restriction/only_left_turn": {
+                    "name": "Alleen links afslaan"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Alleen rechts afslaan"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Alleen rechtdoor"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Alleen U-bocht"
+                },
                 "type/route": {
                     "name": "Route"
                 },
@@ -6160,6 +6324,7 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
+                "description": "Beeldgrenzen en opnamedata. Labels verschijnen vanaf zoomniveau 13 en hoger.",
                 "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "DigitalGlobe-Standard": {
@@ -6173,13 +6338,14 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
+                "description": "Beeldgrenzen en opnamedata. Labels verschijnen vanaf zoomniveau 13 en hoger.",
                 "name": "DigitalGlobe-premiumbeelden Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Voorwaarden & Terugkoppeling"
                 },
-                "description": "Esri world imagery",
+                "description": "Esri world imagery.",
                 "name": "Esri World Imagery"
             },
             "EsriWorldImageryClarity": {
@@ -6256,6 +6422,10 @@
                 "description": "Geel = Publiek domein kaartgegevens van de US Census. Rood = data niet gevonden in OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Snelwegy: Groene omlijning = ongeclassificeerd. Bruine omlijning = route. Oppervlak: gravel = lichtbruin gevuld, asfalt = zwart, bestraat = grijs, grond = wit, beton = blauw, gras = groen. Seizoensgebonden = witte balken",
+                "name": "U.S. Forest Roads-laag"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, OpenStreetMap bijdragers, CC by-SA 3.0"
@@ -6290,13 +6460,14 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "Basiskaart Oostenrijk, gebaseerd op overheidsgegevens.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Orthofotolaag voorzien door basemap.at. 'Opvolger' van beelden van geoimage.at.",
+                "description": "Orthofoto-laag voorzien door basemap.at. 'Opvolger' van geoimage.at.",
                 "name": "basemap.at Orthofoto"
             },
             "hike_n_bike": {
@@ -6350,6 +6521,9 @@
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kaarttegels van Stamen Design, onder CC BY 3.0. Gegevens van OpenStreetMap, onder ODbL"
+                },
                 "name": "Stamen Terrein"
             },
             "tf-cycle": {
@@ -6363,6 +6537,355 @@
                     "text": "Kaarten © Thunderforest, gegevens © OpenStreetMap-bijdragers"
                 },
                 "name": "Thunderforest Landschap"
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana op Facebook",
+                "description": "Facebook-groep voor mensen met interesse in OpenStreetMap."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana op Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "talk-gh": {
+                "name": "Talk-gh mailinglijst"
+            },
+            "osm-mg-facebook": {
+                "name": "Facebook",
+                "description": "Neem deel aan de OpenStreetMap Madagascar community op Facebook"
+            },
+            "talk-mg": {
+                "name": "Talk-mg Mailinglijst",
+                "description": "Plek voor OpenStreetMap bijdragers, gemeenschappen en gebruikers in Madagascar om te delen en te discussiëren."
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Verbeter OpenStreetMap in Bangladesh"
+            },
+            "OSM-India-facebook": {
+                "description": "Verbeter OpenStreetMap in India",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "State of the Map Asia 2018",
+                        "where": "Indian Institute of Management, Bangalore, India"
+                    }
+                }
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap India Mailinglijst",
+                "description": "Talk-in is de officiële Mailinglijst voor de India"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap India Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Free Software Hardware Movement – Facebook",
+                "description": "FSHM Facebook-pagina om op de hoogte te blijven van community-evenementen, -activiteiten"
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Free Software Hardware Movement – Matrix"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesië",
+                "description": "Verbeter OpenStreetMap in Indonesië"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japan"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japan Mailinglijst",
+                "description": "Talk-ja is de officiële Mailinglijst voor Japan"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japan Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap Maleisië Forum",
+                "description": "Officiële OpenStreetMap Maleisië Forum"
+            },
+            "OSM-MY-matrix": {
+                "name": "OpenStreetMap Maleisië Riot-kanaal"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolië",
+                "description": "Verbeter OpenStreetMap in Mongolia"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Verbeter OpenStreetMap in Myanmar"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal",
+                "description": "Verbeter OpenStreetMap in Nepal"
+            },
+            "OSM-PH-facebook": {
+                "name": "Facebook"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph Mailinglijst",
+                "description": "Talk-ph is de officiële Mailinglijst voor de Filipijnen"
+            },
+            "OSM-PH-slack": {
+                "name": "Slack"
+            },
+            "OSM-PH-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Filipijnen op Telegram"
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap RU forum",
+                "description": "OpenStreetMap Rusland webforum"
+            },
+            "OSM-RU-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Rusland op Telegram"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
+                "description": "Verbeter OpenStreetMap in Sri Lanka"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taiwan",
+                "description": "Neem deel aan de OpenStreetMap Taiwan community op Facebook"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Taiwan Mailinglijst",
+                "description": "Talk-tw is de officiële Mailinglijst voor Taiwan"
+            },
+            "at-mailinglist": {
+                "name": "Talk-at Mailinglijst",
+                "description": "Talk-at is de officiële Mailinglijst voor Oostenrijk"
+            },
+            "at-twitter": {
+                "name": "OpenStreetMap Oostenrijk Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Oostenrijk"
+            },
+            "be-facebook": {
+                "description": "Neem deel aan de OpenStreetMap België community op Facebook"
+            },
+            "be-mailinglist": {
+                "name": "Talk-be Mailinglijst",
+                "description": "Talk-be is de officiële Mailinglijst voor België"
+            },
+            "be-twitter": {
+                "name": "OpenStreetMap België Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Wit-Rusland",
+                "description": "OpenStreetMap Wit-Rusland op Telegram"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Talk-cz Mailinglijst",
+                "description": "Talk-cz is de officiële Mailinglijst voor Tsjechië"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Duitsland IRC"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de Mailinglijst",
+                "description": "Talk-de is de officiële Mailinglijst voor Duitsland"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Duitsland",
+                "description": "Het platform voor informatie over OpenStreetMap in Duitsland"
+            },
+            "OSM-ES-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Spanje op Telegram"
+            },
+            "fr-facebook": {
+                "name": "OpenStreetMap Frankrijk Facebook-pagina",
+                "description": "OpenStreetMap Frankrijk Facebook-pagina"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap Frankrijk op Twitter",
+                "description": "OpenStreetMap Frankrijk op Twitter: {url}"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Verbeter OpenStreetMap in Rome"
+            },
+            "talk-it-lazio": {
+                "name": "OpenStreetMap IT Lazio",
+                "extendedDescription": "Mailinglijst voor Rome en Lazio."
+            },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Polen Facebook-groep"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Zweden Facebook-pagina",
+                "description": "OpenStreetMap Zweden op Facebook"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap Zweden op Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "OSM-CA-Slack": {
+                "name": "Slack"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Verbeter OpenStreetMap in de Bay Area"
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "OpenStreetMap Central Pennsylvania"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Slack"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM"
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Verbeter OpenStreetMap in District Columbia"
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Verbeter OpenStreetMap in de regio Cleveland"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "De OpenStreetMap-gebruikersgroep voor Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado"
+            },
+            "OSM-NYC": {
+                "name": "OpenStreetMap NYC"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Zuid Californië"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay"
+            },
+            "OSM-US-Slack": {
+                "name": "Slack"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap Verenigde Staten"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming"
+            },
+            "PHXGeo-meetup": {
+                "name": "PHXGeo Meetup"
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "Western-Slope-facebook": {
+                "name": "Facebook"
+            },
+            "Maptime-Australia-Slack": {
+                "name": "Slack"
+            },
+            "talk-au": {
+                "name": "Talk-au Mailinglijst"
+            },
+            "OSM-AR-facebook": {
+                "name": "Facebook",
+                "description": "Neem deel aan de OpenStreetMap Argentinië community op Facebook"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar Mailinglijst"
+            },
+            "OSM-AR-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Argentinië op Telegram"
+            },
+            "OSM-AR-twitter": {
+                "name": "OpenStreetMap Argentinië Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "Bahia-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Bahia op Telegram"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br Mailinglijst",
+                "description": "Talk-br is de officiële Mailinglijst voor Brazilië"
+            },
+            "OSM-br-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Brazilië op Telegram"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap Brazilië Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "OSM-CL-facebook": {
+                "name": "Facebook",
+                "description": "Neem deel aan de OpenStreetMap Chili community op Facebook"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl Mailinglijst",
+                "description": "Talk-cl is de officiële Mailinglijst voor Chili"
+            },
+            "OSM-CL-telegram": {
+                "name": "Telegram",
+                "description": "OpenStreetMap Chili op Telegram"
+            },
+            "OSM-CL-twitter": {
+                "name": "OpenStreetMap Chili Twitter",
+                "description": "Volg ons op Twitter: {url}"
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogota"
+            },
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Colombia Facebook",
+                "description": "Wordt lid van de OpenStreetMap Colombia community op Facebook"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Colombia Twitter",
+                "description": "Volg ons op Twitter at {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colombia"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap op Reddit",
+                "description": "Op /r/openstreetmap/ vind een levendige dialoog plaats over OpenStreetMap. Hier kun je alles vragen!"
             }
         }
     }

@@ -4,8 +4,8 @@
         "access"
     ],
     "geometry": [
-        "point",
-        "vertex"
+        "vertex",
+        "line"
     ],
     "tags": {
         "barrier": "lift_gate"

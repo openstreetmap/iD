@@ -515,7 +515,8 @@
             "value": "bureau_de_change",
             "description": "Currency Exchange",
             "object_types": [
-                "node"
+                "node",
+                "area"
             ],
             "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"
         },
@@ -1856,7 +1857,8 @@
             "value": "lift_gate",
             "description": "Lift Gate",
             "object_types": [
-                "node"
+                "node",
+                "way"
             ],
             "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/roadblock-15.svg?sanitize=true"
         },
@@ -5120,6 +5122,15 @@
                 "node"
             ],
             "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/mountain-15.svg?sanitize=true"
+        },
+        {
+            "key": "natural",
+            "value": "reef",
+            "description": "Reef",
+            "object_types": [
+                "node",
+                "area"
+            ]
         },
         {
             "key": "natural",

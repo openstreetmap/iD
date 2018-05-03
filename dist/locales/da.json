@@ -150,7 +150,8 @@
                     "vertex": "Forbandt en vej til en anden.",
                     "line": "Forbandt en vej til en linje.",
                     "area": "Forbandt en vej til et område."
-                }
+                },
+                "restriction": "Disse kortobjekter kan ikke forbindes, da det ville skade en \"{relation}\"-relation."
             },
             "disconnect": {
                 "title": "Frakobl",
@@ -201,17 +202,17 @@
             },
             "reflect": {
                 "title": {
-                    "long": "Reflektere langt",
-                    "short": "Reflektere kort"
+                    "long": "Spejlvend om lang akse",
+                    "short": "Spejlvend om kort akse"
                 },
                 "description": {
                     "long": {
-                        "single": "Reflekter dette objekt på tværs af dets lange akse.",
-                        "multiple": "Reflekter disse objekter på tværs af deres lange akse."
+                        "single": "Spejlvend dette objekt omkring dets lange akse.",
+                        "multiple": "Spejlvend disse objekter omkring deres lange akse."
                     },
                     "short": {
-                        "single": "Reflekter dette objekt på tværs af dets kort akse.",
-                        "multiple": "Reflekter disse objekter på tværs af deres korte akse."
+                        "single": "Spejlvend dette objekt omkring dets korte akse.",
+                        "multiple": "Spejlvend disse objekter omkring deres korte akse."
                     }
                 },
                 "key": {
@@ -220,25 +221,25 @@
                 },
                 "annotation": {
                     "long": {
-                        "single": "Reflekterede et objekt på tværs af dets lange akse.",
-                        "multiple": "Reflekterede flere objekter på tværs af deres lange akse."
+                        "single": "Spejlvendte et objekt omkring dets lange akse.",
+                        "multiple": "Spejlvendte flere objekter omkring af deres lange akse."
                     },
                     "short": {
-                        "single": "Reflekterede et objekt på tværs af dets korte akse.",
-                        "multiple": "Reflekterede flere objekter på tværs af deres korte akse."
+                        "single": "Spejlvendte et objekt omkring dets korte akse.",
+                        "multiple": "Spejlvendte flere objekter omkring deres korte akse."
                     }
                 },
                 "incomplete_relation": {
-                    "single": "Dette objekt kan ikke reflekteres da det ikke er blevet downloadet helt.",
-                    "multiple": "Disse objekter kan ikke reflekteres da de ikke er blevet downloadet helt."
+                    "single": "Dette objekt kan ikke spejlvendes, da det ikke er blevet downloadet helt.",
+                    "multiple": "Disse objekter kan ikke spejlvendes, da de ikke er blevet downloadet helt."
                 },
                 "too_large": {
-                    "single": "Dette objekt kan ikke reflekteres da der ikke er nok af det synligt i den nuværende visning.",
-                    "multiple": "Disse objekter kan ikke reflekteres da der ikke er nok af dem synligt i den nuværende visning."
+                    "single": "Dette objekt kan ikke spejlvendes, da der ikke er nok af det synligt i den nuværende visning.",
+                    "multiple": "Disse objekter kan ikke spejlvendes, da der ikke er nok af dem synligt i den nuværende visning."
                 },
                 "connected_to_hidden": {
-                    "single": "Dette objekt kan ikke reflekteres da det er forbundet med et skjult objekt.",
-                    "multiple": "Disse objekter kan ikke reflekteres da nogle af dem er forbundet med skjulte objekter."
+                    "single": "Dette objekt kan ikke spejlvendes, da det er forbundet med et skjult objekt.",
+                    "multiple": "Disse objekter kan ikke spejlvendes, da nogle af dem er forbundet med skjulte objekter."
                 }
             },
             "rotate": {
@@ -377,7 +378,7 @@
             "modified": "Ændret",
             "deleted": "Slettet",
             "created": "Oprettet",
-            "about_changeset_comments": "Vedr. ændringssætkommentarer",
+            "about_changeset_comments": "Om kommentarer til ændringssæt",
             "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Du nævnte Google i denne kommentar: husk at kopiering fra Google Maps er strengt forbudt.",
             "google_warning_link": "https://www.openstreetmap.org/copyright"
@@ -407,6 +408,7 @@
                 "key": "H",
                 "title": "Historik",
                 "selected": "{n} markerede",
+                "no_history": "Ingen historik (ny funktionalitet)",
                 "version": "Version",
                 "last_edit": "Sidst ændret",
                 "edited_by": "Ændret af",
@@ -645,8 +647,18 @@
         },
         "success": {
             "just_edited": "Du har lige redigeret OpenStreetMap!",
+            "thank_you": "Tak fordi du forbedrede kortet.",
+            "thank_you_location": "Tak fordi du forbedrede kortet omkring {where}.",
+            "help_html": "Dine ændringer bør dukke op på OpenStreetMap inden for få minutter. Det kan tage længere tid for andre kort at modtage opdateringer.",
             "help_link_text": "Detaljer",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Vis ændringer på OSM",
+            "changeset_id": "Dit ændringssætnummer: {changeset_id}",
+            "like_osm": "Kan du lide OpenStreetMap? Få kontakt med andre:",
+            "more": "Mere",
+            "languages": "Sprog: {languages}",
+            "missing": "Mangler der noget på listen?",
+            "tell_us": "Fortæl os det!"
         },
         "confirm": {
             "okay": "OK",
@@ -748,7 +760,8 @@
                 "select_right_click": "{rightclick} Højreklik på et kortobjekt for at vise redigeringsmenuen, som viser de mulige værktøjer der kan anvendes, såsom rotation, flytning og sletning.",
                 "multiselect_h": "Multi-markering",
                 "multiselect_shift_click": "`{shift}`+{leftclick} venstreklik for at markere flere kortobjekter ad gangen. Dette gør det nemmere at flytte eller slette flere objekter i en operation.",
-                "save_h": "Gem"
+                "save_h": "Gem",
+                "upload": "Før du uploader dine ændringer, skal du skrive en [kommentar til ændringssættet](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Dernæst skal du klikke på **Upload** for at sende dine ændringer til OpenStreetMap, hvor de vil blive føjet til kortet og blive offentligt synlige for alle."
             },
             "feature_editor": {
                 "title": "Redigeringsværktøj til kortobjekter",

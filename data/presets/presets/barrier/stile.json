@@ -4,7 +4,6 @@
         "access"
     ],
     "geometry": [
-        "point",
         "vertex"
     ],
     "tags": {

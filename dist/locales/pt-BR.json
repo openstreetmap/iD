@@ -1733,6 +1733,9 @@
                 "display": {
                     "label": "Mostrador"
                 },
+                "distance": {
+                    "label": "Distância total"
+                },
                 "dock": {
                     "label": "Tipo"
                 },
@@ -1772,6 +1775,9 @@
                 },
                 "except": {
                     "label": "Exceções"
+                },
+                "faces": {
+                    "label": "Faces"
                 },
                 "fax": {
                     "label": "Fax",
@@ -1883,6 +1889,24 @@
                 "hoops": {
                     "label": "Aros de Tabela",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Sim",
+                        "undefined": "Não"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Sim",
+                        "undefined": "Não"
+                    }
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Sim",
+                        "undefined": "Não"
+                    }
                 },
                 "iata": {
                     "label": "Código IATA"
@@ -6048,6 +6072,22 @@
                     "name": "Proibido Retornar",
                     "terms": "Proibido Retornar"
                 },
+                "type/restriction/only_left_turn": {
+                    "name": "Apenas curva à esquerda",
+                    "terms": "curva à esquerda obrigatória, conversão à esquerda"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Apenas curva à direita",
+                    "terms": "curva à direita obrigatória, conversão à direita"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Apenas seguir em frente",
+                    "terms": "somente seguir em frente"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Apenas retorno",
+                    "terms": "somente retornar, retorno obrigatório"
+                },
                 "type/route": {
                     "name": "Rota",
                     "terms": "Rota"
@@ -6419,13 +6459,24 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "osm-gh-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Índia - Mapeamento de vizinhança participativa",
-                "description": "Melhorar o OpenStreetMap na Índia",
-                "extendedDescription": "Mapeamento na Índia? Tem dúvidas, quer se conectar com a comunidade aqui? Junte-se a nós em {Url}. São todos bem-vindos!"
+                "description": "Melhorar o OpenStreetMap na Índia"
             },
             "OSM-japan-twitter": {
                 "description": "Hashtag no Twitter: {url}"
+            },
+            "de-berlin-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "se-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers da Bay Area",
@@ -6497,22 +6548,46 @@
             "OSM-AR-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
             },
+            "Bahia-telegram": {
+                "name": "Grupo Telegram OpenStreetMap Bahia",
+                "description": "Participe da comunidade OpenStreetMap Bahia no Telegram"
+            },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Mailing List",
                 "description": "Uma lista de e-mail de discussão sobre o OpenStreetMap no Brasil"
             },
             "OSM-br-telegram": {
-                "name": "OpenStreetMap Brasil Telegram",
+                "name": "Telegram OpenStreetMap Brasil",
                 "description": "Participe da comunidade OpenStreetMap Brasil no Telegram",
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar das nossas reuniões. Todos são bem-vindos!"
             },
             "OSM-br-twitter": {
-                "name": "OpenStreetMap Brasil Twitter",
+                "name": "Twitter OpenStreetMap Brasil",
                 "description": "Nos siga no Twitter em {url}"
+            },
+            "OSM-CL-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-CO-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-PE-twitter": {
+                "description": "Siga-nos no Twitter: {url}"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap no Reddit",
                 "description": "/r/openstreetmap/ é um ótimo lugar para aprender mais sobre o OpenStreetMap.  Pergunte-nos qualquer coisa!"
+            },
+            "OSM-Twitter": {
+                "name": "Twitter OpenStreetMap",
+                "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSMF": {
+                "events": {
+                    "sotm2018": {
+                        "description": "Participe da conferência global do OpenStreetMap em Milão (Itália), evento que irá reunir por três dias toda a comunidade OSM para socializar, compartilhar e aprender juntos."
+                    }
+                }
             }
         }
     }
