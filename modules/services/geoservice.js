@@ -21,9 +21,9 @@ import { t } from '../util/locale';
 
 
 var dispatch = d3_dispatch('change');
-var _gsGraph = null;
 var _gsFormat = 'geojson';
 var _gsDownloadMax = null;
+var _gsGraph = null;
 var _gsImportFields = {};
 
 
@@ -40,6 +40,10 @@ export default {
 
     graph: function() {
         return _gsGraph;
+    },
+
+    entityIDs: function() {
+        return Object.keys(_gsGraph.entities);
     },
 
     query: function(urlbase, context, options) {
@@ -116,8 +120,8 @@ export default {
                 alert(t('geoservice.exceeded_limit') + data.features.length);
             }
 
-            gj.features.map(function(feature) {
-                return that.processFeature(feature, that.preset());
+            gj.features.forEach(function(feature) {
+                that.processFeature(feature);
             });
 
             that.processGeoJSON(gj, options);
