@@ -16,6 +16,7 @@ import pointInside from 'turf-inside';
 
 import { actionAddEntity, actionChangeTags, actionNoop } from '../actions';
 import { osmNode, osmRelation, osmWay } from '../osm';
+import { utilQsString, utilStringQs } from '../util';
 import { utilRebind } from '../util';
 import { t } from '../util/locale';
 
@@ -23,6 +24,7 @@ import { t } from '../util/locale';
 var dispatch = d3_dispatch('change');
 var _gsFormat = 'geojson';
 var _gsDownloadMax = null;
+var _gsLastBounds = null;
 var _gsImportFields = {};
 
 
@@ -73,6 +75,16 @@ function setProperties(feature) {
     return feature;
 }
 
+
+function getEsriGeometry(bbox) {
+    return JSON.stringify({
+        xmin: +bbox.minX.toFixed(6),
+        ymin: +bbox.minY.toFixed(6),
+        xmax: +bbox.maxX.toFixed(6),
+        ymax: +bbox.maxY.toFixed(6),
+        spatialReference: { wkid: 4326 }
+    });
+}
 
 // todo these:
 
@@ -213,69 +225,62 @@ export default {
 
     reset: function() {},
 
-    query: function(context, urlbase, options) {
+    query: function(context, url, options) {
         options = options || {};
 
-        // add necessary URL parameters to the user's URL
-        var url = urlbase;
-        if (url.indexOf('/query') === -1) {
-            if (url[url.length - 1] !== '/') {
-                url += '/';
+        var parts = url.split('?');
+        var base = parts[0];
+        var q = (parts.length > 1 && utilStringQs(parts[1])) || {};
+
+        // make sure url ends in `/query`..
+        if (!/\/query$/.test(base)) {
+            if (!/\/$/.test(base)) {
+                base += '/';
             }
-            url += 'query?';
+            base += 'query';
         }
-        if (url.indexOf('?') === -1) {
-            url += '?';
+
+        // build url parameters..
+        if (!q.where) {
+            q.where = 'where=1>0';
         }
-        if (_gsDownloadMax && url.indexOf('where') === -1) {
-            // if there is no spatial query, need a SQL query here
-            url += 'where=1>0';
+        if (!q.outSR) {
+            q.outSR = '4326';
         }
-        if (url.indexOf('outSR') === -1) {
-            url += '&outSR=4326';
+        if (!q.f) {
+            q.f = _gsFormat;
         }
-        if (url.indexOf('&f=') === -1) {
-            url += '&f=' + _gsFormat;
+        if (!q.maxAllowableOffset) {
+            q.maxAllowableOffset = '0.000005';
         }
-        if (url.indexOf('maxAllowableOffset') === -1) {
-            url += '&maxAllowableOffset=0.000005';
-        }
-        if (url.indexOf('outFields=') === -1) {
+        if (!q.outFields) {
             var selectFields = [];
-            Object.keys(_gsImportFields).map(function(field) {
-                if (_gsImportFields[field] && field.indexOf('add_') !== 0) {
-                    selectFields.push(field);
+            Object.keys(_gsImportFields).forEach(function(k) {
+                if (_gsImportFields[k] && !/^add\_/.test(k)) {
+                    selectFields.push(k);
                 }
             });
-            url += '&outFields=' + (selectFields.join(',') || '*');
+            q.outFields = (selectFields.join(',') || '*');
         }
 
-        // turn iD Editor bounds into a query
-        var bounds = context.map().trimmedExtent().bbox();
-        bounds = JSON.stringify({
-            xmin: +bounds.minX.toFixed(6),
-            ymin: +bounds.minY.toFixed(6),
-            xmax: +bounds.maxX.toFixed(6),
-            ymax: +bounds.maxY.toFixed(6),
-            spatialReference: { wkid: 4326 }
-        });
-        if (this.lastBounds === bounds) {
-            // unchanged bounds, unchanged import parameters, so unchanged data
+        // make a bounds query
+        var bounds = getEsriGeometry(context.map().trimmedExtent().bbox());
+        if (_gsLastBounds === bounds) {
             return this;
         }
-
-        // data has changed - make a query
-        this.lastBounds = bounds;
+        _gsLastBounds = bounds;
 
         // make a spatial query within the user viewport (unless the user made their own spatial query)
-        if (!_gsDownloadMax && (url.indexOf('spatialRel') === -1)) {
-            url += '&geometry=' + this.lastBounds;
-            url += '&geometryType=esriGeometryEnvelope';
-            url += '&spatialRel=esriSpatialRelIntersects';
-            url += '&inSR=4326';
+        if (!_gsDownloadMax && !q.spatialRef) {
+            q.geometry = bounds;
+            q.geometryType = 'esriGeometryEnvelope';
+            q.spatialRel = 'esriSpatialRelIntersects';
+            q.inSR = '4326';
         }
 
+        url = base + '?' + utilQsString(q);
         var that = this;
+
         d3_json(url, function(err, data) {
             if (err || !data) return;
 
