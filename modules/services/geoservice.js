@@ -25,6 +25,9 @@ var dispatch = d3_dispatch('change');
 var _gsFormat = 'geojson';
 var _gsDownloadMax = null;
 var _gsLastBounds = null;
+var _gsLicenseText = null;
+var _gsMetadataURL = null;
+var _gsPlanURL = null;
 var _gsImportFields = {};
 
 
@@ -223,7 +226,13 @@ export default {
         this.event = utilRebind(this, dispatch, 'on');
     },
 
-    reset: function() {},
+    reset: function() {
+        _gsLastBounds = null;
+        _gsLicenseText = null;
+        _gsMetadataURL = null;
+        _gsPlanURL = null;
+        _gsImportFields = {};
+    },
 
     query: function(context, url, options) {
         options = options || {};
@@ -510,6 +519,24 @@ export default {
     importFields: function(_) {
         if (!arguments.length) return _gsImportFields;
         _gsImportFields = _;
+        return this;
+    },
+
+    licenseText: function(_) {
+        if (!arguments.length) return _gsLicenseText;
+        _gsLicenseText = _;
+        return this;
+    },
+
+    metadataURL: function(_) {
+        if (!arguments.length) return _gsMetadataURL;
+        _gsMetadataURL = _;
+        return this;
+    },
+
+    planURL: function(_) {
+        if (!arguments.length) return _gsPlanURL;
+        _gsPlanURL = _;
         return this;
     }
 

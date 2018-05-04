@@ -1,7 +1,6 @@
 export { svgAreas } from './areas.js';
 export { svgDebug } from './debug.js';
 export { svgDefs } from './defs.js';
-export { svgGeoService } from './geoservice.js';
 export { svgGpx } from './gpx.js';
 export { svgIcon } from './icon.js';
 export { svgLabels } from './labels.js';

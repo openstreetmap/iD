@@ -158,13 +158,6 @@ export function rendererBackground(context) {
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
-        var gsLayer = context.layers().layer('geoservice');
-        if (gsLayer && gsLayer.hasData()) {
-            imageryUsed.push('GeoService');
-            context.history().source(gsLayer.layerUrl);
-            context.history().importPlan(gsLayer.planUrl);
-        }
-
         var gpx = context.layers().layer('gpx');
         if (gpx && gpx.enabled() && gpx.hasGpx()) {
             // Include a string like '.gpx data file' or '.geojson data file'

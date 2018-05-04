@@ -1,7 +1,3 @@
-/* GeoService layer */
-.layer-geoservice {
-    pointer-events: none;
-}
 
 .layer-list li.list-item-geoservice {
     height: auto;
