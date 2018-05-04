@@ -59,6 +59,7 @@ osmEntity.key = function(entity) {
 osmEntity.prototype = {
 
     tags: {},
+    status: 'active',   // or 'pending', 'rejected' for imported entities
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
