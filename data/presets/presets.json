@@ -9822,6 +9822,7 @@
                 "operator",
                 "address",
                 "building_area",
+                "dance/style",
                 "opening_hours"
             ],
             "geometry": [
