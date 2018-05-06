@@ -1084,7 +1084,7 @@ en:
         placeholder: '1, 2, 3...'
       phone:
         # phone=*
-        label: Phone
+        label: Telephone
         # phone field placeholder
         placeholder: +31 42 123 4567
       piste/difficulty:

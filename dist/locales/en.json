@@ -2277,7 +2277,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Phone",
+                    "label": "Telephone",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
