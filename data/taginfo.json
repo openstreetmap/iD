@@ -6983,7 +6983,7 @@
         },
         {
             "key": "shop",
-            "value": "health_food ",
+            "value": "health_food",
             "description": "Health Food Shop",
             "object_types": [
                 "node",

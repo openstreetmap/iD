@@ -5300,7 +5300,7 @@ en:
         name: Hardware Store
         terms: '<translate with synonyms or related terms for ''Hardware Store'', separated by commas>'
       shop/health_food:
-        # 'shop=health_food '
+        # shop=health_food
         name: Health Food Shop
         # 'terms: wholefood,vitamins,vegetarian,vegan'
         terms: '<translate with synonyms or related terms for ''Health Food Shop'', separated by commas>'
