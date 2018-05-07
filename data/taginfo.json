@@ -2108,6 +2108,15 @@
         },
         {
             "key": "building",
+            "value": "grandstand",
+            "description": "Grandstand",
+            "object_types": [
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
+        },
+        {
+            "key": "building",
             "value": "greenhouse",
             "description": "Greenhouse",
             "object_types": [

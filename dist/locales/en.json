@@ -3715,6 +3715,10 @@
                     "name": "Garages",
                     "terms": ""
                 },
+                "building/grandstand": {
+                    "name": "Grandstand",
+                    "terms": "tribune,stand,stands,bleachers"
+                },
                 "building/greenhouse": {
                     "name": "Greenhouse",
                     "terms": ""

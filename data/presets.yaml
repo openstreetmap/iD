@@ -2709,6 +2709,11 @@ en:
         # building=garages
         name: Garages
         terms: '<translate with synonyms or related terms for ''Garages'', separated by commas>'
+      building/grandstand:
+        # building=grandstand
+        name: Grandstand
+        # 'terms: tribune,stand,stands,bleachers'
+        terms: '<translate with synonyms or related terms for ''Grandstand'', separated by commas>'
       building/greenhouse:
         # building=greenhouse
         name: Greenhouse
