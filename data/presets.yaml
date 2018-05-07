@@ -3575,7 +3575,7 @@ en:
       landuse/forest:
         # landuse=forest
         name: Forest
-        # 'terms: tree'
+        # 'terms: cut,forest,lumber,tree'
         terms: '<translate with synonyms or related terms for ''Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
@@ -4048,6 +4048,11 @@ en:
         # man_made=chimney
         name: Chimney
         terms: '<translate with synonyms or related terms for ''Chimney'', separated by commas>'
+      man_made/clearcut:
+        # man_made=clearcut
+        name: Clearcut Forest
+        # 'terms: cut,forest,lumber,tree,wood'
+        terms: '<translate with synonyms or related terms for ''Clearcut Forest'', separated by commas>'
       man_made/crane:
         # man_made=crane
         name: Crane

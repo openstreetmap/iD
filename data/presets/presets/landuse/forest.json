@@ -13,6 +13,9 @@
         "landuse": "forest"
     },
     "terms": [
+        "cut",
+        "forest",
+        "lumber",
         "tree"
     ],
     "name": "Forest"

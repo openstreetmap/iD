@@ -4738,6 +4738,15 @@
         },
         {
             "key": "man_made",
+            "value": "clearcut",
+            "description": "Clearcut Forest",
+            "object_types": [
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/logging-15.svg?sanitize=true"
+        },
+        {
+            "key": "man_made",
             "value": "crane",
             "description": "Crane",
             "object_types": [

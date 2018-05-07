@@ -8903,6 +8903,9 @@
                 "landuse": "forest"
             },
             "terms": [
+                "cut",
+                "forest",
+                "lumber",
                 "tree"
             ],
             "name": "Forest"
@@ -11382,6 +11385,23 @@
                 "man_made": "chimney"
             },
             "name": "Chimney"
+        },
+        "man_made/clearcut": {
+            "icon": "logging",
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "man_made": "clearcut"
+            },
+            "terms": [
+                "cut",
+                "forest",
+                "lumber",
+                "tree",
+                "wood"
+            ],
+            "name": "Clearcut Forest"
         },
         "man_made/crane": {
             "icon": "poi-crane",

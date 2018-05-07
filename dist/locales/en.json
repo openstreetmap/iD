@@ -4497,7 +4497,7 @@
                 },
                 "landuse/forest": {
                     "name": "Forest",
-                    "terms": "tree"
+                    "terms": "cut,forest,lumber,tree"
                 },
                 "landuse/garages": {
                     "name": "Garage Landuse",
@@ -4906,6 +4906,10 @@
                 "man_made/chimney": {
                     "name": "Chimney",
                     "terms": ""
+                },
+                "man_made/clearcut": {
+                    "name": "Clearcut Forest",
+                    "terms": "cut,forest,lumber,tree,wood"
                 },
                 "man_made/crane": {
                     "name": "Crane",
