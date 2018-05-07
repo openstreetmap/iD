@@ -1,0 +1,21 @@
+{
+    "icon": "building",
+    "fields": [
+        "name",
+        "height"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "grandstand"
+    },
+    "terms": [
+        "tribune",
+        "stand",
+        "stands",
+        "bleachers"
+    ],
+    "matchScore": 0.5,
+    "name": "Grandstand"
+}
