@@ -207,7 +207,8 @@ export function uiRawTagEditor(context) {
 
 
         function bindTypeahead(key, value) {
-            if (isReadOnly({ key: key })) return;
+            if (isReadOnly(key.datum())) return;
+
             var geometry = context.geometry(_entityID);
 
             key.call(d3_combobox()
