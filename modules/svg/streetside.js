@@ -34,6 +34,7 @@ export function svgStreetside(projection, context, dispatch) {
 
 
     function showLayer() {
+        console.log('svg - streetside - showLayer()');
         var service = getService();
         if (!service) return;
 
@@ -77,7 +78,7 @@ export function svgStreetside(projection, context, dispatch) {
 
 
     function click(d) {
-        // console.log("svg: map was clicked with streetside on, here is the passed object: ", d);
+        console.log("svg: map was clicked with streetside on, here is the passed object: ", d);
         var service = getService();
         if (!service) return;
 
@@ -112,7 +113,7 @@ export function svgStreetside(projection, context, dispatch) {
 
 
     function update() {
-        // console.log("svg: update called....");
+        console.log("svg - streetside - update()");
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
 
@@ -203,12 +204,13 @@ export function svgStreetside(projection, context, dispatch) {
         }
     }
 
-
+    //drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
+    //'svgStreetside()' is called from index.js (ln)
     function drawImages(selection) {
-        // console.log("svg: drawImages called ....");
+        //console.log("svg - streetside - drawImages(); selection: ", selection);
         var enabled = svgStreetside.enabled,
             service = getService();
-
+        //console.log("svg - streetside - drawImages(); svgStreetside enabled? ", enabled);
         layer = selection.selectAll('.layer-streetside-images')
             .data(service ? [0] : []);
 
@@ -245,6 +247,7 @@ export function svgStreetside(projection, context, dispatch) {
 
 
     drawImages.enabled = function(_) {
+        //console.log('svg - streetside - drawImages.enabled()');
         if (!arguments.length) return svgStreetside.enabled;
         svgStreetside.enabled = _;
         if (svgStreetside.enabled) {

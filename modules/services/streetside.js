@@ -29,10 +29,14 @@ import { geoExtent } from '../geo';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
+//import _pannellum from 'pannellum';
 
-var msapi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/';
 var apibase = 'https://a.mapillary.com/v3/',
+    msapi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/',
+    bubbleapi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/',
     appkey = 'An-VWpS-o_m7aV8Lxa0oR9cC3bxwdhdCYEGEFHMP9wyMbmRJFzWfMDD1z3-DXUuE',
+    streetsideViewerCss = 'pannellum-streetside/pannellum.css',
+    streetsideViewer = 'pannellum-streetside/pannellum.js',
     viewercss = 'mapillary-js/mapillary.min.css',
     viewerjs = 'mapillary-js/mapillary.js',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
@@ -91,6 +95,7 @@ function localeTimestamp(s) {
 // using d3.geo.tiles.js from lib, gets tile extents for the current
 // map view extent
 function getTiles(projection) {
+    //console.log('services - streetside - getTiles()');
     var s = projection.scale() * 2 * Math.PI,
         z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
         ts = 256 * Math.pow(2, z - tileZoom),
@@ -120,17 +125,18 @@ function getTiles(projection) {
 
 
 function loadTiles(which, url, projection) {
-    //console.log("loading tiles from streetside service...");
+    console.log('services - streetside - loadTiles() for: ', which);
+    ////console.log("loading tiles from streetside service...");
     var s = projection.scale() * 2 * Math.PI,
         currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
-    //console.log("     var projection = ", projection);
-    //console.log("     var s = ", s);
+    ////console.log("     var projection = ", projection);
+    ////console.log("     var s = ", s);
 
     // breakup the map view into tiles
     var tiles = getTiles(projection).filter(function (t) {
         return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
     });
-    //console.log("     var tiles = ", tiles);
+    console.log("var tiles = ", tiles);
     //console.log("     which.inflight ", which.inflight);
 
     // which.inflight seems to always be undefined
@@ -141,36 +147,48 @@ function loadTiles(which, url, projection) {
     }).map(abortRequest);
 
     tiles.forEach(function (tile) {
-        //console.log("     tile to load = ", tile);
-        // console.log("     tile extent to load = ", tile.extent[0][1] + ',' + tile.extent[0][0] + ',' + tile.extent[1][1] + ',' + tile.extent[1][0]);
-        // console.log("     tile extent to load (MS):   n=", tile.extent[1][1] + '&s=' + tile.extent[0][1] + '&e=' + tile.extent[1][0] + '&w=' + tile.extent[0][0]);
+        ////console.log("     tile to load = ", tile);
+        // //console.log("     tile extent to load = ", tile.extent[0][1] + ',' + tile.extent[0][0] + ',' + tile.extent[1][1] + ',' + tile.extent[1][0]);
+        // //console.log("     tile extent to load (MS):   n=", tile.extent[1][1] + '&s=' + tile.extent[0][1] + '&e=' + tile.extent[1][0] + '&w=' + tile.extent[0][0]);
         loadNextTilePage(which, currZoom, url, tile);
     });
 }
 
 // load data for the next tile page in line
 function loadNextTilePage(which, currZoom, url, tile) {
+    console.log('services - streetside - loadNextTilePage() which: ', which);
+    //console.log('services - streetside - loadNextTilePage() currZoom: ', currZoom);
+    //console.log('services - streetside - loadNextTilePage() url: ', url);
+    console.log('services - streetside - loadNextTilePage() tile: ', tile);
     var cache = _mlyCache[which],
         rect = tile.extent.rectangle(),
         maxPages = maxPageAtZoom(currZoom),
         nextPage = cache.nextPage[tile.id] || 0;
-    switch (which) {
+        console.log('maxPages = ', maxPages);
+        console.log('cache.nextPage[tile.id] - ', cache.nextPage[tile.id]);
+        console.log('nextPage = ', nextPage);
+        switch (which) {
         case 'bubbles':
+            //console.log('services - streetside - loadNextTilePage() nextPage > maxPages?: ', nextPage > maxPages);
+            
             if (nextPage > maxPages) return;
 
+            
             var id = tile.id + ',' + String(nextPage);
+            //console.log('services - streetside - loadNextTilePage() cache.loaded[id]: ', cache.loaded[id]);
+            //console.log('services - streetside - loadNextTilePage() cache.inflight[id]: ', cache.inflight[id]);
             if (cache.loaded[id] || cache.inflight[id]) return;
 
             cache.inflight[id] = true;
             getBubbles(url, tile, function (bubbles) {
                 cache.loaded[id] = true;
                 delete cache.inflight[id];
-                // console.log("bubbles: ", bubbles);
+                //console.log("bubbles: ", bubbles);
                 if (!bubbles) return;
                 // remove first element, statistic info on request, not a bubble
                 bubbles.shift();
                 var features = bubbles.map(function (bubble) {
-                    // console.log("bubble: ", bubble);
+                    //console.log("bubble: ", bubble);
                     var loc = [bubble.lo, bubble.la];
                     var d = {
                         loc: loc,
@@ -195,14 +213,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     cache.points[bubbleId] = feature;
                     cache.forImageKey[bubbleId] = bubbleId;
                     // return false;  // because no `d` data worth loading into an rbush
+                    //console.log('End of GetBubbles success handling: cache = ', cache);
                     return {
                         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
                     };
 
                 }).filter(Boolean);
-                // console.log("bubble features: ", features);
+                // //console.log("bubble features: ", features);
                 cache.rtree.load(features);
-
+                
             });
             break;
         default:
@@ -213,12 +232,12 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     client_id: clientId,
                     bbox: [rect[0], rect[1], rect[2], rect[3]].join(','),
                 });
-            //console.log("cache for loadNextTilePage: ", cache);
+            ////console.log("cache for loadNextTilePage: ", cache);
             if (nextPage > maxPages) return;
 
             var id = tile.id + ',' + String(nextPage);
             if (cache.loaded[id] || cache.inflight[id]) return;
-            //console.log("get nextURL: ", nextURL);
+            ////console.log("get nextURL: ", nextURL);
             cache.inflight[id] = d3_request(nextURL)
                 .mimeType('application/json')
                 .response(function (xhr) {
@@ -229,14 +248,14 @@ function loadNextTilePage(which, currZoom, url, tile) {
                             cache.nextURL[tile.id] = pagination.next;
                         }
                     }
-                    //console.log("     reponse from nextURL:",xhr.responseText);
+                    ////console.log("     reponse from nextURL:",xhr.responseText);
                     return JSON.parse(xhr.responseText);
                 })
                 .get(function (err, data) {
                     cache.loaded[id] = true;
                     delete cache.inflight[id];
                     if (err || !data.features || !data.features.length) return;
-                    // console.log("features returned by mapillary: ", data.features);
+                    // //console.log("features returned by mapillary: ", data.features);
                     var features = data.features.map(function (feature) {
                         var loc = feature.geometry.coordinates,
                             d;
@@ -253,7 +272,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                             cache.forImageKey[d.key] = d;     // cache imageKey -> image
 
                         } else if (which === 'sequences') {
-                            // console.log("sequence", feature);
+                            // //console.log("sequence", feature);
                             var sequenceKey = feature.properties.key;
                             cache.lineString[sequenceKey] = feature;           // cache sequenceKey -> lineString
                             feature.properties.coordinateProperties.image_keys.forEach(function (imageKey) {
@@ -288,7 +307,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         };
 
                     }).filter(Boolean);
-                    //console.log("mapillary features: ", features);
+                    ////console.log("mapillary features: ", features);
                     cache.rtree.load(features);
 
                     if (which === 'images' || which === 'sequences') {
@@ -303,7 +322,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     } else {
                         cache.nextPage[tile.id] = Infinity;     // no more pages to load
                     }
-                    // console.log("_mlyCache: ", _mlyCache);
+                    // //console.log("_mlyCache: ", _mlyCache);
                 });
             break;
     }
@@ -312,6 +331,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
 // call the bubble api and get the json data
 // for the tile extent
 function getBubbles(url, tile, callback) {
+    //console.log('services - streetside - getBubbles()');
     var rect = tile.extent.rectangle()
     jsonpRequest(url + utilQsString({
         n: rect[3],
@@ -371,6 +391,7 @@ function partitionViewport(psize, projection) {
 
 // no more than `limit` results per partition.
 function searchLimited(psize, limit, projection, rtree) {
+    //console.log('services - streetside - searchLimited()');
     limit = limit || 3;
 
     var partitions = partitionViewport(psize, projection);
@@ -443,6 +464,12 @@ export default {
         _mlyClicks = [];
     },
 
+    //called by update() in svg - services.js
+    bubbles: function (projection) {
+        //console.log('services - streetside - bubbles()');
+        var psize = 32, limit = 3;
+        return searchLimited(psize, limit, projection, _mlyCache.bubbles.rtree);
+    },
 
     images: function (projection) {
         var psize = 16, limit = 3;
@@ -478,12 +505,6 @@ export default {
         });
     },
 
-
-    bubbles: function (projection) {
-        var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.bubbles.rtree);
-    },
-
     signsSupported: function () {
         var detected = utilDetect();
         if (detected.ie) return false;
@@ -510,31 +531,32 @@ export default {
 
     // this is called a bunch of times repeatedly 
     loadImages: function (projection) {
-        // console.log("loadImages called...");
+        //console.log('services - streetside - loadImages()');
         loadTiles('bubbles', msapi + 'GetBubbles.ashx?', projection);
-        loadTiles('images', apibase + 'images?', projection);
-        loadTiles('sequences', apibase + 'sequences?', projection);
+        //loadTiles('images', apibase + 'images?', projection);
+        //loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
 
-    loadSigns: function (context, projection) {
-        // if we are looking at signs, we'll actually need to fetch images too
-        loadTiles('images', apibase + 'images?', projection);
-        loadTiles('objects', apibase + 'objects?', projection);
+    // loadSigns: function (context, projection) {
+    //     // if we are looking at signs, we'll actually need to fetch images too
+    //     loadTiles('images', apibase + 'images?', projection);
+    //     loadTiles('objects', apibase + 'objects?', projection);
 
-        // load traffic sign defs
-        if (!_mlySignDefs) {
-            _mlySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
-            _mlySignDefs = {};
-            d3_json(context.asset('img/traffic-signs/traffic-signs.json'), function (err, data) {
-                if (err) return;
-                _mlySignDefs = data;
-            });
-        }
-    },
+    //     // load traffic sign defs
+    //     if (!_mlySignDefs) {
+    //         _mlySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
+    //         _mlySignDefs = {};
+    //         d3_json(context.asset('img/traffic-signs/traffic-signs.json'), function (err, data) {
+    //             if (err) return;
+    //             _mlySignDefs = data;
+    //         });
+    //     }
+    // },
 
     // create the streeside viewer
     loadViewer: function (context) {
+        //console.log('services - streetside - loadViewer()');
         // create ms-wrapper a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
@@ -547,31 +569,44 @@ export default {
             .attr('class', 'photo-wrapper ms-wrapper')
             .classed('hide', true);
 
+        // inject div to support streetside viewer (pannellum)
+        wrapEnter
+            .append('div')
+            .attr('id','viewer-streetside');
+            //.attr('class','photo-viewer-streetside');
+
         // inject div to support photo attribution into ms-wrapper
         wrapEnter
             .append('div')
             .attr('class', 'photo-attribution-streetside fillD');
-        
-        // load streetside viewer css
-        d3_select('head').selectAll('#streetside-viewercss')
-            .data([0])
-            .enter()
-            .append('link')
-            .attr('id', 'streetside-viewercss')
-            .attr('rel', 'stylesheet')
-            .attr('href', context.asset(viewercss));
 
-        // load streetside viewer js
+        // // inject child div for the pannellum viewer
+        // var wrap2 = d3_select('#viewer-streetside-wrapper').selectAll('#streetside-viewer').data([0]);
+        // wrap2.enter()
+        //     .append('div')
+        //     .attr('id','viewer-streetside');
+
+        // load streetside pannellum viewer css
+        d3_select('head').selectAll('#streetside-viewercss')
+        .data([0])
+        .enter()
+        .append('link')
+        .attr('id', 'streetside-viewercss')
+        .attr('rel', 'stylesheet')
+        .attr('href', context.asset(streetsideViewerCss));
+
+        // load streetside pannellum viewer js
         d3_select('head').selectAll('#streetside-viewerjs')
             .data([0])
             .enter()
             .append('script')
             .attr('id', 'streetside-viewerjs')
-            .attr('src', context.asset(viewerjs));
+            .attr('src', context.asset(streetsideViewer));
     },
 
 
     showViewer: function () {
+        //console.log('services - streetside - showViewer()');
         var wrap = d3_select('#photoviewer')
             .classed('hide', false);
 
@@ -703,6 +738,9 @@ export default {
     // This allows images to be selected from places that dont have access
     // to the full image datum (like the street signs layer or the js viewer)
     selectImage: function (d, imageKey, fromViewer) {
+        //console.log('services - streetside - selectIamge(); d = ',d);
+        //console.log('services - streetside - selectIamge(); imageKey = ',imageKey);
+        //console.log('services - streetside - selectIamge(); fromViewer = ',fromViewer);
         if (!d && imageKey) {
             // If the user clicked on something that's not an image marker, we
             // might get in here.. Cache lookup can fail, e.g. if the user
@@ -756,9 +794,32 @@ export default {
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
                 .text('Report a privacy concern with this image');
 
-            this.updateDetections(d);
+            //this.updateDetections(d);
+
+            var bubbleIdQuadKey = d.key.toString(4);
+            var paddingNeeded = 16 - bubbleIdQuadKey.length;
+            for (var i = 0; i < paddingNeeded ;i++)
+            {
+                bubbleIdQuadKey = "0" + bubbleIdQuadKey;
+            }
+            var imgLocIdxArr = ['01','02','03','10','11','12']; //Order matters here: front=01, right=02, back=03, left=10 up=11,= down=12
+            var imgUrlPrefix = bubbleapi + 'hs' + bubbleIdQuadKey;
+            var imgUrlSuffix = '.jpg?g=6338&n=z';
+            pannellum.viewer('viewer-streetside', {
+                "type": "cubemap",
+                "cubeMap": [
+                    imgUrlPrefix + imgLocIdxArr[0] +  imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[1] +  imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[2] +  imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[3] +  imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[4] +  imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[5] +  imgUrlSuffix
+                ],
+                "showFullscreenCtrl": false,
+                "autoLoad": true
+            }); 
         }
-        console.log("clicked a streetside image: ", d);
+        ////console.log("clicked a streetside image: ", d);
         return this;
     },
 
