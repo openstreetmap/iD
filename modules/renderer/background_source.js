@@ -6,6 +6,8 @@ import {
   geoMercatorRaw as d3_geoMercatorRaw
 } from 'd3-geo';
 
+import { json as d3_json } from 'd3-request';
+
 import { t } from '../util/locale';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { jsonpRequest } from '../util/jsonp_request';
@@ -418,9 +420,9 @@ rendererBackgroundSource.Esri = function(data) {
             const tilemapUrl = tileCoord[3].replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+/, 'tilemap') + `/${urlZ}/${urlY}/${urlX}/8/8`;
 
             // make the request and introspect the response from the tilemap server
-            fetch(tilemapUrl)
-            .then(response => response.json())
-            .then(tilemap => {
+            d3_json(tilemapUrl, function (err, tilemap) {
+                if (err || !tilemap) return;
+
                 let tiles = true;
                 for (i=0;i<tilemap.data.length;i++) {
                     // any value of 0 means an individual tile in the grid doesn't exist
