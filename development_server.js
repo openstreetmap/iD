@@ -12,9 +12,9 @@ var buildSrc = require('./build_src')(isDevelopment);
 var buildCSS = require('./build_css')(isDevelopment);
 
 buildData()
-.then(function () {
-    return buildSrc();
-});
+    .then(function () {
+        return buildSrc();
+    });
 
 buildCSS();
 

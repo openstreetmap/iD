@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const requireESM = require('@std/esm')(module, { esm: 'js' });
+const requireESM = require('esm')(module);
 const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
 const _extend = requireESM('lodash-es/extend').default;
 const _forEach = requireESM('lodash-es/forEach').default;

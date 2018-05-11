@@ -1,6 +1,6 @@
 /* Downloads the latest translations from Transifex */
 
-const requireESM = require('@std/esm')(module, { esm: 'js' });
+const requireESM = require('esm')(module);
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 

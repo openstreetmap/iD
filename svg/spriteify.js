@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-const requireESM = require('@std/esm')(module, { esm: 'js' });
-const _merge = requireESM('lodash-es/merge').default;
-
 const argv = require('minimist')(process.argv.slice(2));
 if (argv.help || argv.h || !argv.svg) {
     return help();
@@ -12,28 +9,30 @@ const fs = require('fs');
 const json = (argv.json ? JSON.parse(fs.readFileSync(argv.json)) : {});
 const xml2js = require('xml2js');
 
-xmlToJs(argv.svg, function (err, obj) {
+
+xmlToJs(argv.svg, function(err, obj) {
     if (err) throw (err);
     jsToXml(obj, function (err) {
         if (err) console.log(err);
     });
 });
 
+
 function xmlToJs(filename, cb) {
-    fs.readFile(filename, 'utf8', function (err, xmlStr) {
+    fs.readFile(filename, 'utf8', function(err, xmlStr) {
         if (err) throw (err);
 
-        var opts = {
-                explicitArray: true,
-                explicitCharkey: true,
-                explicitChildren: true,
-                preserveChildrenOrder: true,
-                normalize: true,
-                attrkey: '#attr',
-                childkey: '#child',
-                charkey: '#char'
-            },
-            parser = new xml2js.Parser(opts);
+        const opts = {
+            explicitArray: true,
+            explicitCharkey: true,
+            explicitChildren: true,
+            preserveChildrenOrder: true,
+            normalize: true,
+            attrkey: '#attr',
+            childkey: '#child',
+            charkey: '#char'
+        };
+        const parser = new xml2js.Parser(opts);
 
         parser.parseString(xmlStr, function (err, obj) {
             cb(err, obj);
@@ -63,10 +62,10 @@ function transform(source) {
         target['#char'] = source['#char'];
     }
     if (source['#attr'] !== undefined) {
-        var id = source['#attr'].id,
-            replace = (id && json[id] !== undefined) ? json[id] : {};
+        var id = source['#attr'].id;
+        var replace = (id && json[id] !== undefined) ? json[id] : {};
 
-        target['#attr'] = _merge(source['#attr'], replace);
+        target['#attr'] = Object.assign(source['#attr'], replace);
         if (replace.viewBox !== undefined) {
             target['#name'] = 'symbol';
         }
