@@ -65,7 +65,7 @@
     "request": "^2.85.0",
     "rollup": "~0.58.0",
     "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-json": "^2.2.0",
+    "rollup-plugin-json": "^3.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "shelljs": "^0.8.0",
     "shx": "^0.2.1",
