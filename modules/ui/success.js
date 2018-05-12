@@ -32,6 +32,22 @@ export function uiSuccess(context) {
     var _location;
 
 
+    // string-to-date parsing in JavaScript is weird
+    function parseEventDate(when) {
+        if (!when) return;
+
+        var raw = when.trim();
+        if (!raw) return;
+
+        if (!/Z$/.test(raw)) {    // if no trailing 'Z', add one
+            raw += 'Z';           // this forces date to be parsed as a UTC date
+        }
+
+        var parsed = new Date(raw);
+        return new Date(parsed.toUTCString().substr(0, 25));  // convert to local timezone
+    }
+
+
     function success(selection) {
         var header = selection
             .append('div')
@@ -237,8 +253,8 @@ export function uiSuccess(context) {
         }
 
         var nextEvents = (d.events || [])
-            .map(function(event) {                  // add parsed date
-                event.date = new Date(event.when);
+            .map(function(event) {
+                event.date = parseEventDate(event.when);
                 return event;
             })
             .filter(function(event) {               // date is valid and future (or today)
