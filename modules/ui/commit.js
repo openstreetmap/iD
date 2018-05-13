@@ -79,9 +79,13 @@ export function uiCommit(context) {
                 tags.hashtags = hashtags;
             }
 
+            // iD 2.8.1 could write a literal 'undefined' here.. see #5021
+            // (old source values expire after 2 days, so 'undefined' checks can go away in v2.9)
             var source = context.storage('source');
-            if (source) {
+            if (source && source !== 'undefined') {
                 tags.source = source;
+            } else if (source === 'undefined') {
+                context.storage('source', null);
             }
 
             _changeset = new osmChangeset({ tags: tags });
@@ -297,7 +301,9 @@ export function uiCommit(context) {
             }
         }
         if (changed.hasOwnProperty('source')) {
-            if (!onInput) {
+            if (changed.source === undefined) {
+                context.storage('source', null);
+            } else if (!onInput) {
                 context.storage('source', changed.source);
                 context.storage('commentDate', Date.now());
             }
