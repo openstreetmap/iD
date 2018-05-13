@@ -502,7 +502,7 @@ export function modeSave(context) {
 
             var parts = [];
             var addr = result.address;
-            var city = addr && (addr.suburb || addr.city || addr.county);
+            var city = addr && (addr.town || addr.city || addr.county);
             if (city) parts.push(city);
             var region = addr && (addr.state || addr.country);
             if (region) parts.push(region);
