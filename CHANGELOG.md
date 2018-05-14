@@ -28,6 +28,55 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.8.2
+##### May 14, 2018
+
+#### :tada: New Features
+* Allow performing Merge command when several nodes are selected ([#3774], [#4484], thanks [@ferdibiflator])
+* Add support for building iD on Node 10 ([#5028])
+
+[#5028]: https://github.com/openstreetmap/iD/issues/5028
+[#4484]: https://github.com/openstreetmap/iD/issues/4484
+[#3774]: https://github.com/openstreetmap/iD/issues/3774
+[@ferdibiflator]: https://github.com/ferdibiflator
+
+#### :sparkles: Usability
+* Exclude non-administrative boundary from address city suggestions ([#5034])
+* Replace `suburb` with `town` in "Thank you for editing near.." message ([#4989])
+* Rename "Phone" to "Telephone" in Add Field dropdown (so user can type either) ([#5019])
+
+[#5034]: https://github.com/openstreetmap/iD/issues/5034
+[#5019]: https://github.com/openstreetmap/iD/issues/5019
+[#4989]: https://github.com/openstreetmap/iD/issues/4989
+
+#### :bug: Bugfixes
+* Don't write 'undefined' to storage when deleting the changeset source ([#5021])
+* Make date parsing from community index more consistent ([#5011])
+* Fix a bug in setting some tags as read-only ([#5025], thanks [@guyarad])
+
+[#5025]: https://github.com/openstreetmap/iD/issues/5025
+[#5021]: https://github.com/openstreetmap/iD/issues/5021
+[#5011]: https://github.com/openstreetmap/iD/issues/5011
+[@guyarad]: https://github.com/guyarad
+
+#### :rocket: Presets
+
+* Add preset for `man_made=clearcut` ([#5027], thanks [@obama])
+* Add preset for `building=grandstand` ([#5026], thanks [@tyrasd])
+* Remove trailing space from health food preset ([#5022])
+* Added dance style field to dance hall preset ([#5020], thanks [@hikemaniac])
+* Add `natural=reef` preset ([#5006], thanks [@obama])
+
+[#5027]: https://github.com/openstreetmap/iD/issues/5027
+[#5026]: https://github.com/openstreetmap/iD/issues/5026
+[#5022]: https://github.com/openstreetmap/iD/issues/5022
+[#5020]: https://github.com/openstreetmap/iD/issues/5020
+[#5006]: https://github.com/openstreetmap/iD/issues/5006
+[@obama]: https://github.com/obama
+[@tyrasd]: https://github.com/tyrasd
+[@hikemaniac]: https://github.com/hikemaniac
+
+
 # 2.8.1
 ##### April 24, 2018
 
