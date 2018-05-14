@@ -58,7 +58,7 @@
     "minimist": "^1.2.0",
     "mocha": "^5.0.0",
     "mocha-phantomjs-core": "^2.1.0",
-    "name-suggestion-index": "0.1.5",
+    "name-suggestion-index": "0.1.6",
     "npm-run-all": "^4.0.0",
     "osm-community-index": "0.4.2",
     "phantomjs-prebuilt": "~2.1.11",
