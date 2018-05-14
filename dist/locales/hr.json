@@ -160,7 +160,6 @@
                 "annotation": "{n} elemenata je spojeno.",
                 "not_eligible": "Ovi elementi se ne mogu spojiti.",
                 "not_adjacent": "Ovi elementi se ne mogu spojiti jer njihove krajnje točke nisu spojene.",
-                "restriction": "Ovi elementi se ne mogu spojiti jer je barem jedan dio \"{relation}\" relacije.",
                 "incomplete_relation": "Ovi se elementi ne mogu spojiti jer bar jedan od njih nije potpuno preuzet s interneta.",
                 "conflicting_tags": "Ovi elementi se ne mogu spojiti jer se neke njihove oznake ne podudaraju."
             },
@@ -1513,7 +1512,6 @@
                     }
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+385 01 123 4567"
                 },
                 "piste/difficulty": {

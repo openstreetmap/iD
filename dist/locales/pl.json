@@ -166,7 +166,6 @@
                 "annotation": "Scal {n} obiektów.",
                 "not_eligible": "Te obiekty nie mogą zostać scalone.",
                 "not_adjacent": "Tych obiektów nie można scalić, ponieważ ich węzły nie są połączone.",
-                "restriction": "Tego obiektu nie można scalić, ponieważ przynajmniej jeden z nich jest członkiem relacji - \"{relation}\".",
                 "incomplete_relation": "Tych obiektów nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany.",
                 "conflicting_tags": "Tego obiektu nie można scalić, ponieważ ich tagi mają sprzeczne wartości."
             },
@@ -2128,7 +2127,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+48 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -6417,11 +6415,25 @@
                 "name": "OpenStreetMap Ghana na Twitter'rze",
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
+            "talk-gh": {
+                "name": "Lista dyskusyjna Talk-gh",
+                "description": "Talk-gh to oficjalna mailingowa lista dyskusyjna społeczności OSM w Ghanie"
+            },
+            "talk-mg": {
+                "name": "Lista dyskusyjna Talk-mg"
+            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesz"
             },
+            "OSM-india-mailinglist": {
+                "name": "Lista dyskusyjna OpenStreetMap Indie",
+                "description": "Talk-in  to oficjalna mailingowa lista dyskusyjna społeczności OSM w Indiach"
+            },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonezja"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Lista dyskusyjna OpenStreetMap Japonia"
             },
             "OSM-japan-twitter": {
                 "description": "Hashtag na Twitterze: {url}"
@@ -6435,6 +6447,10 @@
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal"
             },
+            "OSM-PH-mailinglist": {
+                "name": "Lista dyskusyjna Talk-ph",
+                "description": "Mailingowa lista dyskusyjna OpenStreetMap na Filipinach"
+            },
             "OSM-RU-forum": {
                 "name": "OpenStreetMap RU forum",
                 "description": "OpenStreetMap Rosja forum www"
@@ -6445,15 +6461,41 @@
             "OSM-LKA-facebook": {
                 "name": "OpenStreetMap Sri Lanka"
             },
+            "OSM-TW-mailinglist": {
+                "name": "Lista dyskusyjna OpenStreetMap Tajwan",
+                "description": "Talk-tw  to oficjalna mailingowa lista dyskusyjna społeczności w kwestii Tajwanu"
+            },
+            "at-mailinglist": {
+                "name": "Lista dyskusyjna Talk-at",
+                "description": "Talk-at  to oficjalna mailingowa lista dyskusyjna austriackiej społeczności OSM"
+            },
             "osm-at": {
                 "name": "OpenStreetMap Austria"
-            },
-            "be-forum": {
-                "description": "Forum OpenStreetMap Belgium "
             },
             "byosm": {
                 "name": "OpenStreetMap Białoruś",
                 "description": "OpenStreetMap Białoruś - czat na Telegramie"
+            },
+            "be-forum": {
+                "description": "Forum OpenStreetMap Belgium "
+            },
+            "be-mailinglist": {
+                "name": "Lista dyskusyjna Talk-be",
+                "description": "Talk-be to oficjalna mailingowa lista dyskusyjna belgijskiej społeczności OSM "
+            },
+            "talk-cz-mailinglist": {
+                "name": "Lista dyskusyjna Talk-cz",
+                "description": "Talk-cz  to oficjalna mailingowa lista dyskusyjna czeskiej społeczności OSM"
+            },
+            "dk-mailinglist": {
+                "name": "Lista dyskusyjna Talk-dk"
+            },
+            "fr-mailinglist": {
+                "name": "Lista dyskusyjna Talk-fr",
+                "description": "Lista dyskusyjna Talk-fr"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Lista dyskusyjna dla Berlina"
             },
             "de-berlin-twitter": {
                 "description": "Obserwuj nas na Twitterze: {url}"
@@ -6470,11 +6512,23 @@
                 "name": "Talk-de mailingowa lista dyskusyjna",
                 "description": "Talk-de to oficjalna lista dyskusyjna dla społeczności OSM w Niemczech"
             },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Lista dyskusyjna OWL"
+            },
             "osm-de": {
                 "name": "OpenStreetMap Niemcy"
             },
+            "it-mailinglist": {
+                "name": "Lista dyskusyjna Talk-it"
+            },
             "it-twitter": {
                 "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "Lista dyskusyjna OpenStreetMap dla Południowego Tyrolu"
+            },
+            "no-mailinglist": {
+                "name": "Lista dyskusyjna OpenStreetMap Norwegia"
             },
             "OSM-PL-facebook-group": {
                 "name": "OpenStreetMap Polska na Facebooku",
@@ -6484,11 +6538,20 @@
                 "name": "Forum OpenStreetMap Polska",
                 "description": "Forum dyskusyjne polskiej społeczności OpenStreetMap"
             },
+            "OSM-ES-mailinglist": {
+                "name": "Lista dyskusyjna Talk-es"
+            },
             "osm-se": {
                 "name": "OpenStreetMap.se"
             },
+            "se-mailinglist": {
+                "name": "Lista dyskusyjna Talk-se"
+            },
             "se-twitter": {
                 "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "gb-mailinglist": {
+                "name": "Lista dyskusyjna Talk-gb"
             },
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver"
@@ -6557,14 +6620,35 @@
                 "name": "PHXGeo Twitter",
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
+            "talk-au": {
+                "name": "Lista dyskusyjna Talk-au"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Lista dyskusyjna Talk-ar"
+            },
             "OSM-AR-twitter": {
                 "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Lista dyskusyjna Talk-bo"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Lista dyskusyjna Talk-br"
             },
             "OSM-br-twitter": {
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
+            "OSM-CL-mailinglist": {
+                "name": "Lista dyskusyjna Talk-cl"
+            },
             "OSM-CL-twitter": {
                 "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotá"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Lista dyskusyjna Talk-co"
             },
             "OSM-CO-twitter": {
                 "name": "OpenStreetMap KolumbiaTwitter",
@@ -6575,6 +6659,9 @@
             },
             "OSM-PE-facebook": {
                 "name": "OpenStreetMap Peru Facebook"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Lista dyskusyjna Talk-pe"
             },
             "OSM-PE-telegram": {
                 "name": "OpenStreetMap Peru Telegram",
@@ -6589,6 +6676,9 @@
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap na Facebook'u"
+            },
+            "OSM-help": {
+                "name": "Pomoc OpenStreetMap"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap  na Reddit",

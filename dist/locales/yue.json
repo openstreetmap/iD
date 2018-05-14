@@ -151,7 +151,6 @@
                 "key": "C",
                 "annotation": "拼咗地貌 {n} 個",
                 "not_eligible": "爾啲地貌，無得併埋。",
-                "restriction": "地貌無得拼，佢哋至少一個，屬於 {relation} 關聯。",
                 "incomplete_relation": "地貌無得拼，佢哋至少一個未傳晒落來。",
                 "conflicting_tags": "地貌無得拼，佢哋籤中內有矛盾。"
             },
@@ -1192,7 +1191,6 @@
                     "label": "畀錢方式"
                 },
                 "phone": {
-                    "label": "電話",
                     "placeholder": "+852 12345678"
                 },
                 "piste/difficulty": {

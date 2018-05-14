@@ -158,7 +158,6 @@
                 "key": "C",
                 "annotation": "Pinagsama ang {n} features.",
                 "not_eligible": "Ang mga bagay na ito ay hindi maaaring pagsamahin.",
-                "restriction": "Hindi maaring pagsamahin dahil may isang o higit pang feature na bahagi ng \"{relation}\" relation.",
                 "incomplete_relation": "Hindi maaaring ipagsama o i-merge dahil ang isa sa mga ito ay hindi pa ganap na nai-download.",
                 "conflicting_tags": "Hindi maaring pagsamahin dahil may magkakaibang mga tags ang bawat isa."
             },

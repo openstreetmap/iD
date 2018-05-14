@@ -168,7 +168,6 @@
                 "annotation": "{n} elem egyesítve.",
                 "not_eligible": "Az elemek nem egyesíthetőek.",
                 "not_adjacent": "Az elemek nem egyesíthetőek, mert a végpontjaik nincsenek összekötve.",
-                "restriction": "Az elemek nem egyesíthetőek, mert legalább az egyik tagja egy „{relation}” kapcsolatnak.",
                 "incomplete_relation": "Nem sikerült az egyesítés, mert legalább egy elem nincs teljesen letöltve.",
                 "conflicting_tags": "Az elemek nem egyesíthetőek, mert néhány címke értéke ütközik."
             },
@@ -624,7 +623,12 @@
         "success": {
             "just_edited": "Szerkesztetted az OpenStreetMapet!",
             "help_link_text": "Részletek",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F",
+            "more": "Több",
+            "events": "Események",
+            "languages": "Nyelvek: {languages}",
+            "missing": "Valami hiányzik a listáról?",
+            "tell_us": "Mondd el!"
         },
         "confirm": {
             "okay": "OK",
@@ -1423,6 +1427,9 @@
                 "brand": {
                     "label": "Márka"
                 },
+                "brewery": {
+                    "label": "Csapolt sörök"
+                },
                 "bridge": {
                     "label": "Típus",
                     "placeholder": "Alapértelmezett"
@@ -1437,6 +1444,7 @@
                     "label": "Típus"
                 },
                 "cables": {
+                    "label": "Kábelek",
                     "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
@@ -1497,7 +1505,12 @@
                     "label": "Típus"
                 },
                 "crane/type": {
-                    "label": "Daru típus"
+                    "label": "Daru típus",
+                    "options": {
+                        "floor-mounted_crane": "Bakdaru",
+                        "portal_crane": "Portáldaru",
+                        "travel_lift": "Futódaru"
+                    }
                 },
                 "crop": {
                     "label": "Termények"
@@ -1555,6 +1568,9 @@
                         "cycleway:left": "Bal oldal",
                         "cycleway:right": "Jobb oldal"
                     }
+                },
+                "dance/style": {
+                    "label": "Táncstílusok"
                 },
                 "date": {
                     "label": "Dátum"
@@ -1614,11 +1630,15 @@
                     "label": "Irány",
                     "options": {
                         "backward": "Hátra",
+                        "both": "Mindkettő / Összes",
                         "forward": "Előre"
                     }
                 },
                 "display": {
                     "label": "Kijelző"
+                },
+                "distance": {
+                    "label": "Teljes távolság"
                 },
                 "dock": {
                     "label": "Típus"
@@ -1687,6 +1707,9 @@
                         "underground": "Föld alatti",
                         "wall": "Fali"
                     }
+                },
+                "fitness_station": {
+                    "label": "Felszereléstípus"
                 },
                 "fixme": {
                     "label": "JavítsKi"
@@ -1768,6 +1791,27 @@
                     "label": "Kosárlabdapalánk",
                     "placeholder": "1, 2, 4…"
                 },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Igen",
+                        "undefined": "Nem"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Igen",
+                        "undefined": "Nem"
+                    }
+                },
+                "horse_scale": {
+                    "placeholder": "Nehéz, veszélyes…"
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Igen",
+                        "undefined": "Nem"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1786,6 +1830,9 @@
                 },
                 "indoor": {
                     "label": "Beltéri"
+                },
+                "industrial": {
+                    "label": "Típus"
                 },
                 "information": {
                     "label": "Típus"
@@ -1906,6 +1953,10 @@
                 "maxspeed": {
                     "label": "Sebességkorlátozás",
                     "placeholder": "30, 50, 70…"
+                },
+                "maxspeed/advisory": {
+                    "label": "Ajánlott sebességkorlátozás",
+                    "placeholder": "40, 50, 60…"
                 },
                 "maxstay": {
                     "label": "Leghosszabb várakozási idő"
@@ -2060,7 +2111,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telefonszám",
                     "placeholder": "+36 1 123 45 67"
                 },
                 "piste/difficulty": {
@@ -2145,7 +2195,9 @@
                 "railway/signal/direction": {
                     "label": "Irány",
                     "options": {
-                        "backward": "Hátra"
+                        "backward": "Hátra",
+                        "both": "Mindkettő / Összes",
+                        "forward": "Előre"
                     }
                 },
                 "rating": {
@@ -2388,7 +2440,8 @@
                     "label": "Típus",
                     "options": {
                         "circuit_breaker": "Áramkör megszakító",
-                        "earthing": "Földelés"
+                        "earthing": "Földelés",
+                        "mechanical": "Mechanikus"
                     }
                 },
                 "tactile_paving": {
@@ -2455,6 +2508,7 @@
                     "label": "Irány",
                     "options": {
                         "backward": "Hátra",
+                        "both": "Mindkettő / Összes",
                         "forward": "Előre"
                     }
                 },
@@ -2488,6 +2542,19 @@
                 "tunnel": {
                     "label": "Típus",
                     "placeholder": "Alapértelmezett"
+                },
+                "usage_rail": {
+                    "options": {
+                        "branch": "Ág",
+                        "industrial": "Ipari",
+                        "main": "Fő",
+                        "military": "Katonai",
+                        "test": "Teszt",
+                        "tourism": "Turisztikai"
+                    }
+                },
+                "vending": {
+                    "label": "Áruk típusa"
                 },
                 "visibility": {
                     "label": "Láthatóság",
@@ -2547,6 +2614,9 @@
                 "wheelchair": {
                     "label": "Akadálymentesség"
                 },
+                "wholesale": {
+                    "label": "Nagykereskedelem"
+                },
                 "width": {
                     "label": "Szélesség (méter)"
                 },
@@ -2556,6 +2626,16 @@
                 "windings": {
                     "label": "Tekercsek",
                     "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "options": {
+                        "delta": "Delta",
+                        "leblanc": "Leblanc",
+                        "open": "Nyitott",
+                        "open-delta": "Nyitott delta",
+                        "scott": "Scott",
+                        "zigzag": "Cikk-cakk"
+                    }
                 }
             },
             "presets": {
@@ -2566,6 +2646,9 @@
                 "advertising/billboard": {
                     "name": "Óriásplakát",
                     "terms": "plakát,óriásplakát,reklámtábla,poszter, óriásposzter"
+                },
+                "advertising/column": {
+                    "name": "Hirdetőoszlop"
                 },
                 "aerialway": {
                     "name": "Drótkötélpálya"
@@ -4497,7 +4580,7 @@
                     "terms": "gazométer"
                 },
                 "man_made/groyne": {
-                    "name": "Sarkantyú",
+                    "name": "Keresztgát",
                     "terms": "védőgát, hullámtörő"
                 },
                 "man_made/lighthouse": {

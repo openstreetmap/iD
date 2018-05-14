@@ -163,7 +163,6 @@
                 "annotation": "{n} nesne birleştirildi.",
                 "not_eligible": "Bu nesneler birleştirilemez.",
                 "not_adjacent": "Bu nesneler birleştirilemez, çünkü birbirleriyle bağlı değiller.",
-                "restriction": "Bu nesneler birleştirilemez, çünkü en az bir tanesi \"{relation}\" kümesinin üyesi.",
                 "incomplete_relation": "Bu nesneler birleştirilemez, çünkü içlerinden en az biri henüz tamamen indirilmedi.",
                 "conflicting_tags": "Bu nesneler birleştirilemez, çünkü bazı etiketleri birbiriyle çelişkili değerlere sahip."
             },
@@ -1988,7 +1987,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

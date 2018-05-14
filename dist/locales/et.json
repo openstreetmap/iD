@@ -155,7 +155,6 @@
                 "key": "C",
                 "annotation": "Ühendatud {n} objekti.",
                 "not_eligible": "Neid objekte ei saa ühendada.",
-                "restriction": "Neid objekte ei saa ühendada, kuna vähemalt üks neist on relatsiooni \"{relation}\" liige.",
                 "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult alla laaditud.",
                 "conflicting_tags": "Neid objekte ei saa ühendada, kuna osa nende silte on konfliktsete väärtustega."
             },
@@ -1147,7 +1146,6 @@
                     "label": "Makseviisid"
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+372 567 8901"
                 },
                 "population": {
@@ -3088,8 +3086,8 @@
                     "name": "Kommipood"
                 },
                 "shop/convenience": {
-                    "name": "Esmatarbekauba pood",
-                    "terms": "Kauplus, pood"
+                    "name": "Toidupood",
+                    "terms": "Kauplus,pood,külapood,esmatarbekaup,väike pood"
                 },
                 "shop/copyshop": {
                     "name": "Koopiateenuse kauplus"

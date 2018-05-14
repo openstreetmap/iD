@@ -1,5 +1,10 @@
 {
     "sl": {
+        "icons": {
+            "information": "podrobnosti",
+            "remove": "odstrani",
+            "undo": "razveljavi"
+        },
         "modes": {
             "add_area": {
                 "title": "Mnogokotnik",
@@ -160,7 +165,6 @@
                 "annotation": "združevanje {n} predmetov ×",
                 "not_eligible": "Izbranih predmetov ni mogoče združiti.",
                 "not_adjacent": "Predmetov ni mogoče združiti, ker končne točke niso povezane.",
-                "restriction": "Predmetov ni mogoče združiti, ker je vsaj en vključen v povezavo »{relation}«.",
                 "incomplete_relation": "Teh predmetov ni mogoče združiti, ker vsaj en ni v celoti prejet.",
                 "conflicting_tags": "Predmetov ni mogoče združiti, ker so v njihovih oznakah neskladne vrednosti."
             },
@@ -286,6 +290,11 @@
                     "create": "dodajanje omejitve zavijanja ×",
                     "delete": "odstranjevanje omejitev zavijanja ×"
                 }
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Razdalja"
             }
         },
         "undo": {
@@ -594,7 +603,12 @@
         "success": {
             "just_edited": "Zemljevid OSM je posodobljen!",
             "help_link_text": "Podrobnosti",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "more": "Več",
+            "events": "Dogodki",
+            "languages": "Jeziki: {languages}",
+            "missing": "Ali na seznamu kaj manjka?",
+            "tell_us": "Sporočite nam!"
         },
         "confirm": {
             "okay": "V redu",
@@ -674,6 +688,16 @@
             },
             "overview": {
                 "features_h": "Značilnosti zemljevida"
+            },
+            "field": {
+                "restrictions": {
+                    "about": {
+                        "title": "O programu"
+                    },
+                    "tips": {
+                        "title": "Namigi"
+                    }
+                }
             }
         },
         "intro": {
@@ -1042,6 +1066,23 @@
                 }
             }
         },
+        "units": {
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "S",
+            "south": "J",
+            "east": "V",
+            "west": "Z",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1081,10 +1122,10 @@
                     "name": "Značilnosti cest"
                 },
                 "category-water-area": {
-                    "name": "Vrste voda"
+                    "name": "Značilnosti voda"
                 },
                 "category-water-line": {
-                    "name": "Vrste voda"
+                    "name": "Značilnosti voda"
                 }
             },
             "fields": {
@@ -1164,7 +1205,8 @@
                         "subdistrict": "Okraj",
                         "subdistrict!vn": "Okraj/Komuna/Mestece",
                         "suburb": "Predmestje",
-                        "suburb!jp": "Okraj"
+                        "suburb!jp": "Okraj",
+                        "unit": "Enota"
                     }
                 },
                 "admin_level": {
@@ -1209,6 +1251,9 @@
                 },
                 "aeroway": {
                     "label": "Vrsta"
+                },
+                "agrarian": {
+                    "label": "Izdelki"
                 },
                 "amenity": {
                     "label": "Vrsta"
@@ -1299,6 +1344,9 @@
                 },
                 "bunker_type": {
                     "label": "Vrsta"
+                },
+                "cables": {
+                    "placeholder": "1, 2, 3 ..."
                 },
                 "camera/direction": {
                     "label": "Smer (v stopinjah v smeri ur. kazalca)",
@@ -1437,8 +1485,47 @@
                 "description": {
                     "label": "Opis"
                 },
+                "devices": {
+                    "label": "naprave",
+                    "placeholder": "1, 2, 3 ..."
+                },
                 "diaper": {
                     "label": "Previjalnica"
+                },
+                "direction": {
+                    "label": "Smer (v stopinjah v smeri ur. kazalca)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Direction",
+                    "options": {
+                        "E": "Vzhod",
+                        "ENE": "Vzhod-severovzhod",
+                        "ESE": "Vzhod-jugovzhod",
+                        "N": "Sever",
+                        "NE": "Severovzhod",
+                        "NNE": "Sever-severovzhod",
+                        "NNW": "Sever-severozahod",
+                        "NW": "Severozahod",
+                        "S": "Jug",
+                        "SE": "Jugovzhod",
+                        "SSE": "Jug-jugovzhod",
+                        "SSW": "Jug-jugozahod",
+                        "SW": "Jugozahod",
+                        "W": "Zahod",
+                        "WNW": "Zahod-severozahod",
+                        "WSW": "Zahod-jugozahod"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Smer",
+                    "options": {
+                        "anticlockwise": "V obratni smeri urinega kazalca",
+                        "clockwise": "V smeri urinega kazalca"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Smer"
                 },
                 "display": {
                     "label": "Zaslon"
@@ -1448,6 +1535,10 @@
                 },
                 "drive_through": {
                     "label": "Storitev za avtomobile"
+                },
+                "duration": {
+                    "label": "Trajanje",
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "label": "Elektrifikacija",
@@ -1465,6 +1556,10 @@
                 "email": {
                     "label": "Elektronski naslov",
                     "placeholder": "ime.naziv@naziv.domene.si"
+                },
+                "embankment": {
+                    "label": "Vrsta",
+                    "placeholder": "Privzeto"
                 },
                 "emergency": {
                     "label": "Urgenca"
@@ -1830,7 +1925,6 @@
                     "label": "Vrste plačila"
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+386 1 234 5678"
                 },
                 "piste/difficulty": {
@@ -4843,8 +4937,13 @@
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
                 },
-                "description": "Posnetki sveta Esri",
+                "description": "Posnetki sveta Esri.",
                 "name": "Posnetki sveta Esri"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                }
             },
             "MAPNIK": {
                 "attribution": {
@@ -4972,6 +5071,23 @@
             },
             "tf-landscape": {
                 "name": "Thunderforest Landscape"
+            }
+        },
+        "community": {
+            "OSM-help": {
+                "name": "Pomoč OpenStreetMap"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter"
+            },
+            "OSMF": {
+                "name": "Fundacija OpenStreetMap",
+                "events": {
+                    "sotm2018": {
+                        "name": "Stanje zemljevida 2018",
+                        "where": "Milano, Italija"
+                    }
+                }
             }
         }
     }

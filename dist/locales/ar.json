@@ -168,7 +168,6 @@
                 "annotation": "تم دمج {n} عناصر.",
                 "not_eligible": "لا يمكن دمج هذه العناصر.",
                 "not_adjacent": "لا يمكن دمج هذه العناصر لأن نقاط نهاياتها غير متصلة.",
-                "restriction": "لا يمكن دمج هذه العناصر لأن واحدة منها على الأقل جزء من العلاقة \"{relation}\".",
                 "incomplete_relation": "لا يمكن دمج هذه العناصر لأن واحد منها على الأقل لم يتم تحميله بالكامل.",
                 "conflicting_tags": "لا يمكن دمج هذه العناصر لأن بعض وسومها تحتوي قيما متعارضة مع بعضها."
             },
@@ -727,6 +726,8 @@
                 "intro": "يظهر *محرر العناصر* على جانب الخريطة، ويتيح لك عرض وتحرير جميع المعلومات المتعلقة بالعنصر المُختار.",
                 "definitions": "يعرض لك القسم العلوي نوع العنصر.\nكما يحتوي القسم الأوسط على *حقول* تعرض خصائص وسمات العنصر، كالاسم والعنوان.",
                 "type_h": "نوع العنصر",
+                "type": "يمكنك النقر على نوع العنصر لتغيير العنصر إلى نواع مختلف. أي شيء موجود في العالم الحقيقي يمكن إضافته إلى خرائط OpenStreetMap، لذلك هناك الآلاف من أنواع العناصر التي يمكنك الاختيار بينها.",
+                "type_picker": "عند اختيار نوع العنصر يظهر لك في الأعلى أنواع العناصر الأكثر شيوعا واستخداما، مثل مواقف السيارات، والمستشفيات، والمطاعم، والطُرق، والمباني، ونحو ذلك.\nيمكنك البحث عن أي شيء عن طريق كتابة ما تريده في حقل البحث. كما يمكنك أيضا النقر على أيقونة {inspect} **معلومات** الموجودة بجانب نوع العنصر لمعرفة المزيد عنه.",
                 "fields_h": "الحقول",
                 "tags_h": "الوسوم"
             },
@@ -761,6 +762,13 @@
             },
             "imagery": {
                 "title": "صور الخلفية"
+            },
+            "field": {
+                "restrictions": {
+                    "tips": {
+                        "title": "نصائح"
+                    }
+                }
             }
         },
         "intro": {
@@ -824,6 +832,8 @@
                     "lafayette-park": "حديقة لافاييت",
                     "las-coffee-cafe": "مقهى لاس كوفي",
                     "lincoln-avenue": "جادة لينكولن",
+                    "lowrys-books": "مكتبة لاوريز",
+                    "lynns-garage": "جراج لين",
                     "main-street-cafe": "مقهى الشارع الرئيسي",
                     "main-street-fitness": "مركز لياقة بدنية",
                     "main-street": "الشارع الرئيسي",
@@ -832,13 +842,45 @@
                     "market-street": "شارع السوق",
                     "michigan-avenue": "جادة ميشيغان",
                     "middle-street": "الشارع الأوسط",
+                    "millard-street": "شارع ميلارد",
+                    "moore-street": "شارع موور",
+                    "morris-avenue": "ضاحية موريس",
+                    "mural-mall": "سوق مورال التجاري",
+                    "paisanos-bar-and-grill": "بار وشوي بايسانوز",
+                    "paisley-emporium": "متجر بيزلي",
+                    "paparazzi-tattoo": "وشم باباراتزي",
+                    "pealer-street": "شارع بيلر",
+                    "pine-street": "شارع الصنوبر",
                     "pizza-hut": "بيتزا هت",
+                    "river-road": "طريق النهر",
+                    "river-street": "شارع النهر",
+                    "riviera-theatre": "مسرح ريفيرا",
+                    "rocky-river": "نهر روكي",
                     "saint-joseph-river": "نهر القديس يوسف",
+                    "scidmore-park": "منتزه سكيدمور",
+                    "scouter-park": "منتزه سكوتر",
+                    "sherwin-williams": "شيروين وليامز",
                     "south-street": "الشارع الجنوبي",
+                    "southern-michigan-bank": "بنك جنوب ميشيغان",
                     "spring-street": "شارع الربيع",
-                    "three-rivers-fire-department": "قسم إطفاء الثلاثة أنهار",
+                    "sturgeon-river-road": "شارع نهر ستورجيون",
+                    "three-rivers-city-hall": "مجلس بلدية ثري ريفرز",
+                    "three-rivers-elementary-school": "مدرسة ثري ريفرز الإبتدائية",
+                    "three-rivers-fire-department": "قسم إطفاء ثري ريفرز",
+                    "three-rivers-high-school": "مدرسة ثري ريفرز الثانوية",
+                    "three-rivers-middle-school": "مدرسة ثري ريفرز المتوسطة",
+                    "three-rivers-municipal-airport": "مطار ثري ريفرز المحلي",
+                    "three-rivers-post-office": "مكتب بريد ثري ريفرز",
+                    "three-rivers-public-library": "مكتبة ثري ريفرز العامة",
+                    "three-rivers": "ثري ريفرز",
+                    "unique-jewelry": "مجوهرات فريدة",
+                    "walnut-street": "شارع وولنات",
                     "washington-street": "شارع واشنطن",
-                    "west-street": "الشارع الغربي"
+                    "water-street": "شارع المياه",
+                    "west-street": "الشارع الغربي",
+                    "wheeler-street": "شارع ويلر",
+                    "wood-street": "شارع الخشب",
+                    "world-fare": "وورلد فير"
                 }
             },
             "welcome": {
@@ -1065,6 +1107,9 @@
             "kilometers": "{quantity} كلم",
             "square_meters": "{quantity} م²",
             "square_kilometers": "{quantity} كلم²",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
             "north": "شمال",
             "south": "جنوب",
             "east": "شرق",
@@ -1491,6 +1536,9 @@
                 "display": {
                     "label": "عرض"
                 },
+                "distance": {
+                    "label": "المسافة الكلية"
+                },
                 "dock": {
                     "label": "النوع"
                 },
@@ -1652,6 +1700,9 @@
                 },
                 "indoor": {
                     "label": "داخلي"
+                },
+                "industrial": {
+                    "label": "النوع"
                 },
                 "information": {
                     "label": "النوع"
@@ -1878,7 +1929,6 @@
                     "label": "طرق الدفع"
                 },
                 "phone": {
-                    "label": "هاتف",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2598,7 +2648,8 @@
                     "terms": "مطعم"
                 },
                 "amenity/school": {
-                    "name": "أرض مدرسة"
+                    "name": "أرض مدرسة",
+                    "terms": "مدرسة"
                 },
                 "amenity/scrapyard": {
                     "name": "مقبرة السيارات"
@@ -2628,7 +2679,8 @@
                     "terms": "دار التمريض"
                 },
                 "amenity/studio": {
-                    "name": "أستوديو"
+                    "name": "أستوديو",
+                    "terms": "أستوديو; إذاعة; راديو; تلفزيون"
                 },
                 "amenity/swimming_pool": {
                     "name": "حوض سباحة"
@@ -2664,6 +2716,10 @@
                 "amenity/vending_machine/cigarettes": {
                     "name": "آلة بيع السجائر",
                     "terms": "سجائر"
+                },
+                "amenity/vending_machine/coffee": {
+                    "name": "آلة بيع القهوة",
+                    "terms": "قهوة"
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "آلة بيع المشروبات",
@@ -2704,6 +2760,10 @@
                     "name": "دولاب هواء",
                     "terms": "دولاب هواء; العجلة الكبيرة"
                 },
+                "attraction/bumper_car": {
+                    "name": "سيارة اصطدامية",
+                    "terms": "سيارة اصطدامية"
+                },
                 "attraction/carousel": {
                     "name": "دوامة خيل",
                     "terms": "دوامة خيل"
@@ -2732,17 +2792,25 @@
                     "name": "عمود صلب",
                     "terms": "عمود صلب"
                 },
+                "barrier/border_control": {
+                    "name": "معبر حدودي",
+                    "terms": "معبر حدودي"
+                },
                 "barrier/cattle_grid": {
                     "name": "شبكة الماشية",
                     "terms": "شبكة الماشية,شبكة لمنع الماشية"
                 },
                 "barrier/city_wall": {
                     "name": "جدار المدينة",
-                    "terms": "جدار المدينة"
+                    "terms": "جدار المدينة; سور"
                 },
                 "barrier/cycle_barrier": {
                     "name": "حاجز دراجات هوائية",
                     "terms": "حاجز دراجات هوائية; حاجز; ممر; حاجز مرور; حاجز دراجات"
+                },
+                "barrier/ditch": {
+                    "name": "خندق",
+                    "terms": "خندق"
                 },
                 "barrier/entrance": {
                     "name": "مدخل"
@@ -2905,6 +2973,14 @@
                     "name": "مبنى شبه منفصل",
                     "terms": "<translate with synonyms or related terms for 'Semi-Detached House', separated by commas>"
                 },
+                "building/shed": {
+                    "name": "سقيفة",
+                    "terms": "سقيفة; بيت"
+                },
+                "building/stable": {
+                    "name": "إسطبل",
+                    "terms": "إسطبل"
+                },
                 "building/stadium": {
                     "name": "مبنى الملعب",
                     "terms": "مبنى الملعب"
@@ -2912,6 +2988,10 @@
                 "building/temple": {
                     "name": "مبنى المعبد",
                     "terms": "مبنى المعبد"
+                },
+                "building/terrace": {
+                    "name": "صف منازل",
+                    "terms": "صف منازل"
                 },
                 "building/train_station": {
                     "name": "محطة قطار"
@@ -2921,7 +3001,8 @@
                     "terms": "مبنى للنقل العام"
                 },
                 "building/university": {
-                    "name": "مبنى جامعي"
+                    "name": "مبنى جامعي",
+                    "terms": "جامعة; كلية"
                 },
                 "building/warehouse": {
                     "name": "مستودع",
@@ -3108,6 +3189,10 @@
                     "name": "متخصص في الطب البديل",
                     "terms": "متخصص في الطب البديل"
                 },
+                "healthcare/alternative/chiropractic": {
+                    "name": "المعالج للأمراض يدويا",
+                    "terms": "المعالج للأمراض يدويا; مقوم العظام"
+                },
                 "healthcare/audiologist": {
                     "name": "أخصائي السمع",
                     "terms": "أخصائي السمع"
@@ -3181,6 +3266,10 @@
                 "highway/footway": {
                     "name": "طريق مشي بالأقدام",
                     "terms": "ممشى بالأقدام"
+                },
+                "highway/give_way": {
+                    "name": "إشارة \"أفسح الطريق\"",
+                    "terms": "أفسح الطريق"
                 },
                 "highway/living_street": {
                     "name": "شارع سكني",
@@ -3491,6 +3580,10 @@
                     "name": "محجر",
                     "terms": "محجر"
                 },
+                "landuse/railway": {
+                    "name": "منطقة السكك الحديدية",
+                    "terms": "منطقة السكك الحديدية"
+                },
                 "landuse/recreation_ground": {
                     "name": "ميدان الألعاب",
                     "terms": "ميدان الألعاب"
@@ -3595,6 +3688,10 @@
                     "name": "ملعب كرة الطائرة الشاطئية",
                     "terms": "ملعب"
                 },
+                "leisure/pitch/boules": {
+                    "name": "ملعب كرة حديدية",
+                    "terms": "ملعب كرة حديدية"
+                },
                 "leisure/pitch/cricket": {
                     "name": "ملعب كريكت",
                     "terms": "ملعب كريكت"
@@ -3673,7 +3770,7 @@
                 },
                 "leisure/water_park": {
                     "name": "ملاهي مائية",
-                    "terms": "ملاهي مائية"
+                    "terms": "ملاهي مائية; حديقة مائية; منتزه مائي"
                 },
                 "line": {
                     "name": "طريق",
@@ -3847,9 +3944,17 @@
                     "name": "قمة",
                     "terms": "قمة, ذروة"
                 },
+                "natural/reef": {
+                    "name": "شعاب",
+                    "terms": "شعاب"
+                },
                 "natural/ridge": {
                     "name": "نتوء جبلي",
-                    "terms": "نتوء جبلي، قمة"
+                    "terms": "نتوء جبلي، قمة جبل"
+                },
+                "natural/saddle": {
+                    "name": "ممر جبلي",
+                    "terms": "ممر جبلي"
                 },
                 "natural/sand": {
                     "name": "رمل",
@@ -3865,14 +3970,15 @@
                 },
                 "natural/spring": {
                     "name": "نبع",
-                    "terms": "نبع"
+                    "terms": "نبع; منبع"
                 },
                 "natural/tree": {
                     "name": "شجرة",
                     "terms": "شجرة"
                 },
                 "natural/tree_row": {
-                    "name": "خط أشجار"
+                    "name": "خط الأشجار",
+                    "terms": "خط الأشجار; صف من الأشجار"
                 },
                 "natural/volcano": {
                     "name": "بركان",
@@ -3896,7 +4002,7 @@
                 },
                 "natural/wetland": {
                     "name": "أرض رطبة",
-                    "terms": "أرض رطبة"
+                    "terms": "أرض رطبة; مستنقع; هور"
                 },
                 "natural/wood": {
                     "name": "غابة أخشاب",
@@ -4098,7 +4204,7 @@
                 },
                 "place/square": {
                     "name": "ساحة",
-                    "terms": "ساحة"
+                    "terms": "ساحة; باحة; ممشى"
                 },
                 "place/suburb": {
                     "name": "ضاحية",
@@ -4153,6 +4259,10 @@
                 "power/substation": {
                     "name": "محطة فرعية",
                     "terms": "محطة فرعية"
+                },
+                "power/switch": {
+                    "name": "معدة وصل وفصل",
+                    "terms": "معدة وصل وفصل"
                 },
                 "power/tower": {
                     "name": "برج عالي الجهد",
@@ -4234,6 +4344,10 @@
                 "railway/rail": {
                     "name": "قطار",
                     "terms": "قطار"
+                },
+                "railway/signal": {
+                    "name": "إشارات المرور ( السكك الحديدية )",
+                    "terms": "إشارة المرور "
                 },
                 "railway/station": {
                     "name": "محطة سكة حديد"
@@ -4583,6 +4697,10 @@
                     "name": "محل بيع الشاي",
                     "terms": "محل بيع الشاي،  شاي"
                 },
+                "shop/ticket": {
+                    "name": "بائع التذاكر",
+                    "terms": "بائع التذاكر; تذاكر"
+                },
                 "shop/tiles": {
                     "name": "محل بيع البلاط",
                     "terms": "محل بيع البلاط، بلاط، خزف"
@@ -4605,6 +4723,10 @@
                 },
                 "shop/vacant": {
                     "name": "محل شاغر"
+                },
+                "shop/vacuum_cleaner": {
+                    "name": "متجر المكنسات الكهربائية",
+                    "terms": "متجر المكنسات الكهربائية; مكنسات كهربائية"
                 },
                 "shop/variety_store": {
                     "name": "محل كل شيء ",
@@ -4855,8 +4977,8 @@
                     "name": "مجرى مائي"
                 },
                 "waterway/boatyard": {
-                    "name": "ساحة بناء المراكب",
-                    "terms": "ساحة بناء المراكب"
+                    "name": "حوض بناء سفن",
+                    "terms": "حوض بناء سفن; ورشة"
                 },
                 "waterway/canal": {
                     "name": "قناة",

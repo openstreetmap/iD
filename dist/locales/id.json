@@ -1,5 +1,9 @@
 {
     "id": {
+        "icons": {
+            "information": "info",
+            "remove": "hapus"
+        },
         "modes": {
             "add_area": {
                 "title": "Wilayah",
@@ -137,7 +141,6 @@
                 "key": "C",
                 "annotation": "Satukan {n} fitur.",
                 "not_eligible": "Fitur-fitur ini tidak bisa digabung.",
-                "restriction": "Fitur-fitur ini tidak bisa disatukan karena ada setidaknya satu yang merupakan bagian dari relasi \"{relation}\".",
                 "incomplete_relation": "Fitur ini tidak bisa digabungkan karena belum sepenuhnya terunduh.",
                 "conflicting_tags": "Fitur-fitur ini tidak bisa disatukan karena beberapa nilai dari tagnya ada yang bertolak belakang."
             },
@@ -189,6 +192,11 @@
                 }
             }
         },
+        "restriction": {
+            "controls": {
+                "distance": "Jarak"
+            }
+        },
         "undo": {
             "tooltip": "Batalkan: {action}",
             "nothing": "Tak ada yang bisa dibatalkan."
@@ -218,8 +226,10 @@
             "readonly": "API dalam kondisi hanya-baca. Anda perlu menunggu untuk menyimpan perubahan."
         },
         "commit": {
+            "title": "Unggah ke OpenStreetMap",
             "upload_explanation": "Perubahan yang anda unggah akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
             "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
+            "save": "Unggah",
             "cancel": "Batal",
             "changes": "{count} Perubahan",
             "warnings": "Peringatan",
@@ -434,7 +444,10 @@
             "view_on_mapillary": "Lihat gambar ini di Mapillary"
         },
         "help": {
-            "title": "Bantuan"
+            "title": "Bantuan",
+            "help": {
+                "open_source_h": "Sumber Terbuka"
+            }
         },
         "intro": {
             "done": "selesai",
@@ -874,7 +887,6 @@
                     }
                 },
                 "phone": {
-                    "label": "Telepon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

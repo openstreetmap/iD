@@ -168,7 +168,6 @@
                 "annotation": "{n} prvků spojeno.",
                 "not_eligible": "Objekty nelze spojit v jeden.",
                 "not_adjacent": "Objekty nelze spojit, protože jejich koncové body nejsou spojené.",
-                "restriction": "Objekty nelze spojit, protože aspoň jeden z nich je členem relace \"{relation}\".",
                 "incomplete_relation": "Tyto objekty nelze spojit, protože jsou stažené jen částečně.",
                 "conflicting_tags": "Objekty nelze spojit, protože některé z jejich vlastností kolidují."
             },
@@ -2021,7 +2020,6 @@
                     "placeholder": "1, 2, 3…"
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+420 603 123456"
                 },
                 "piste/difficulty": {

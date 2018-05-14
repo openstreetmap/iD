@@ -151,6 +151,7 @@
                     "line": "Conectou uma via a uma linha.",
                     "area": "Conectou uma linha a uma área."
                 },
+                "relation": "Esses recursos não podem ser conectados porque eles têm funções de relação conflitantes.",
                 "restriction": "Estes elementos não podem ser conectados porque isto danificaria uma relação \"{relation}\"."
             },
             "disconnect": {
@@ -169,7 +170,8 @@
                 "annotation": "Mesclar {n} elementos.",
                 "not_eligible": "Esses elementos não podem ser mesclados.",
                 "not_adjacent": "Estes elementos não podem ser mesclados porque suas extremidades não estão conectadas.",
-                "restriction": "Estes elementos não podem ser mesclados porque pelo menos um deles é membro de uma relação \"{relation}\".",
+                "restriction": "Esses recursos não podem ser mesclados porque isso danificaria uma relação \"{relation}\".",
+                "relation": "Esses recursos não podem ser mesclados porque possuem funções de relação conflitantes.",
                 "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente.",
                 "conflicting_tags": "Estes elementos não podem ser mesclados porque algumas de suas etiquetas têm valores conflitantes."
             },
@@ -819,30 +821,45 @@
                 "disconnect_line_h": "Desconectando Linhas",
                 "disconnect_line_command": "Para desconectar uma rua de outro elemento, clique com o {rightclick} botão direito no nó conectado, e selecione o comando {disconnect} **Desconectar** no menu de edição.",
                 "move_line_h": "Movendo Linhas",
-                "delete_line_h": "Removendo Linhas"
+                "move_line_connected": "Linhas conectadas a outros recursos permanecerão conectadas conforme você move a linha para um novo local. O iD pode impedir que você mova uma linha através de outra linha conectada.",
+                "delete_line_h": "Removendo Linhas",
+                "delete_line": "Se uma linha estiver totalmente incorreta, por exemplo, uma estrada que não existe no mundo real, não há problema em excluí-la. Tenha cuidado ao excluir recursos: as imagens de plano de fundo que você está usando podem estar desatualizadas e uma estrada que parece estar errada pode simplesmente ser recém-criada."
             },
             "areas": {
                 "title": "Áreas",
+                "intro": "*Áreas* são usadas para mostrar os limites de recursos como lagos, edifícios e áreas residenciais. As áreas devem ser rastreadas em torno da borda do recurso que elas representam, por exemplo, ao redor da base de um edifício.",
                 "point_or_area_h": "Pontos ou Áreas",
+                "point_or_area": "Muitos recursos podem ser representados como pontos ou áreas. Você deve mapear contornos de edifícios e propriedades como áreas sempre que possível. Coloque pontos dentro de uma área de construção para representar empresas, comodidades e outros recursos localizados dentro do prédio.",
                 "add_area_h": "Adicionando Áreas",
                 "square_area_h": "Alinhar Cantos",
                 "modify_area_h": "Modificando Áreas",
-                "delete_area_h": "Removendo Áreas"
+                "delete_area_h": "Removendo Áreas",
+                "delete_area": "Se uma área estiver totalmente incorreta, por exemplo, um prédio que não existe no mundo real, não há problema em excluí-lo. Seja cauteloso ao excluir recursos - as imagens de plano de fundo que você está usando podem estar desatualizadas e um edifício que parece estar errado pode simplesmente ser recém-construído."
             },
             "relations": {
                 "title": "Relações",
+                "intro": "Uma *relação* é um tipo especial de recurso no OpenStreetMap que agrupa outros recursos. Os recursos que pertencem a uma relação são chamados de *membros*, e cada membro pode ter uma *função* na relação.",
                 "edit_relation_h": "Editando Relações",
+                "edit_relation": "Na parte inferior do editor de recursos, você pode expandir a seção \"Todas as relações\" para ver se o recurso selecionado é um membro de qualquer relação. Você pode clicar na relação para selecioná-la e editá-la.",
                 "maintain_relation_h": "Mantendo Relações",
+                "maintain_relation": "Na maioria das vezes, o iD manterá as relações automaticamente conforme você edita. Você deve tomar cuidado ao substituir recursos que possam ser membros de relações. Por exemplo, se você excluir uma seção da estrada e desenhar uma nova seção da estrada para substituí-la, adicione a nova seção às mesmas relações (rotas, restrições de rotação, etc.) do original.",
                 "relation_types_h": "Tipos de Relações",
                 "multipolygon_h": "Multipolígonos",
                 "turn_restriction_h": "Restrições de Manobra",
+                "turn_restriction": "Uma relação de restrição de giro é um grupo de vários segmentos de estrada em uma interseção. As restrições de curva consistem em um *de* estrada, *via* nó ou estradas e uma *para* estrada.",
+                "turn_restriction_field": "Para editar as restrições de curva, selecione um nó de junção onde duas ou mais estradas se encontram. O editor de recursos exibirá um campo especial \"Ativar restrições\" contendo um modelo da interseção.",
+                "turn_restriction_editing": "No campo \"Ativar restrições\", clique para selecionar uma estrada \"de\" e veja se as curvas são permitidas ou restritas a qualquer uma das estradas \"para\". Você pode clicar nos ícones de turno para alterná-los entre permitido e restrito. O iD criará relações automaticamente e definirá as funções de, para e com base nas suas escolhas.",
                 "route_h": "Rotas",
-                "boundary_h": "Fronteiras"
+                "route": "Uma relação *rota* é um grupo de um ou mais recursos de linha que juntos formam uma rede de rotas, como uma rota de ônibus, rota de trem ou rota de rodovia.",
+                "boundary_h": "Fronteiras",
+                "boundary": "Uma relação *limite* é um grupo de um ou mais recursos de linha que juntos formam um limite administrativo."
             },
             "imagery": {
                 "title": "Imagens de Fundo",
+                "intro": "As imagens de fundo que aparecem abaixo dos dados do mapa são um recurso importante para o mapeamento. Essas imagens podem ser fotos aéreas coletadas de satélites, aviões e drones, ou podem ser mapas históricos digitalizados ou outros dados de fonte disponíveis gratuitamente.",
                 "sources_h": "Fontes de Imagens",
                 "offsets_h": "Ajustando o Deslocamento das Imagens de Fundo",
+                "offset": "Às vezes, as imagens são ligeiramente compensadas pelos dados precisos do mapa. Se você vir muitas estradas ou edifícios deslocados das imagens de plano de fundo, pode ser que as imagens estejam incorretas, por isso não mova todas elas para corresponder ao plano de fundo. Em vez disso, você pode ajustar o plano de fundo para que ele corresponda aos dados existentes, expandindo a seção \"Ajustar contorno da imagem\" na parte inferior do painel Configurações do plano de fundo.",
                 "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento de imagens em pequenos passos, ou segure o botão esquerdo do mouse e arraste no quadrado cinzento para deslizar a imagem para o alinhamento."
             },
             "streetlevel": {
@@ -864,15 +881,27 @@
                     "about": {
                         "title": "Sobre",
                         "about": "Este campo permite que você inspecione e modifique restrições de curva. Ele mostra um modelo da interseção selecionada, incluindo outras ruas próximas conectadas.",
-                        "from_via_to": "Uma restrição de curva sempre contém: um **A PARTIR DE caminho**, um **PARA caminho**, e um **VIA nó** ou um ou mais **VIA nós**.",
+                        "from_via_to": "Uma restrição de viragem contém sempre: uma linha **FROM**(de), uma linha **TO**(para), e um nó ou linha **VIA**(através de).",
                         "maxdist": "O controle deslizante \"{distField}\" define a distância que se deve procurar por ruas conectadas adicionais.",
                         "maxvia": "O controle deslizante \"{viaField}\" ajusta quantos caminhos serão incluídos na busca. (Dica: quanto mais simples, melhor)"
                     },
                     "inspecting": {
-                        "title": "Inspecionar"
+                        "title": "Inspecionar",
+                        "about": "Passe o mouse sobre qualquer segmento **DE** para ver se há restrições de turno. Cada possível destino ** PARA ** será desenhado com uma sombra colorida mostrando se existe uma restrição.",
+                        "from_shadow": "{fromShadow} segmento **FROM** (de)",
+                        "allow_shadow": "{allowShadow} **TO** (para) permitido",
+                        "restrict_shadow": "{restrictShadow} **TO** (para) não permitido",
+                        "only_shadow": "{onlyShadow} **TO** (para) apenas",
+                        "restricted": "\"Restrito\" significa que existe uma restrição de turno, por exemplo, \"Sem curvas à esquerda\".",
+                        "only": "\"Apenas\" significa que um veículo que leva esse caminho só pode fazer essa escolha, por exemplo, \"Somente Direto\"."
                     },
                     "modifying": {
-                        "title": "Modificar"
+                        "title": "Modificar",
+                        "about": "Para modificar as restrições de curva, primeiro clique em qualquer segmento inicial de **DE** para selecioná-lo. O segmento selecionado será pulsado e todos os destinos possíveis do **PARA** aparecerão como símbolos de virada.",
+                        "indicators": "Em seguida, clique em um símbolo de turno para alterná-lo entre \"Permitido\", \"Restrito\" e \"Somente\".",
+                        "allow_turn": "{allowTurn} **TO** (para) permitido",
+                        "restrict_turn": "{restrictTurn} **TO** (para) não permitido",
+                        "only_turn": "{onlyTurn} **TO** (para) apenas"
                     },
                     "tips": {
                         "title": "Dicas",
@@ -1891,18 +1920,33 @@
                     "placeholder": "1, 2, 4..."
                 },
                 "horse_dressage": {
+                    "label": "Equitação de Adestramento",
                     "options": {
                         "equestrian": "Sim",
                         "undefined": "Não"
                     }
                 },
                 "horse_riding": {
+                    "label": "Hipismo",
                     "options": {
                         "horse_riding": "Sim",
                         "undefined": "Não"
                     }
                 },
+                "horse_scale": {
+                    "label": "Dificuldade no hipismo",
+                    "options": {
+                        "common": "Fácil: sem problemas ou dificuldades. (padrão)",
+                        "critical": "Borderline: Passável apenas para cavaleiros experientes e cavalos. Principais obstáculos. Pontes devem ser examinadas com cuidado.",
+                        "dangerous": "Perigoso: Passível apenas para cavaleiros e cavalos experientes e apenas quando o tempo estiver bom. Desmontar.",
+                        "demanding": "Use com cautela: maneira irregular, passagens difíceis ocasionais.",
+                        "difficult": "Difícil: Maneira estreita e exposta. Pode conter obstáculos para passar por cima e estreitar passagens.",
+                        "impossible": "Intransitável: Caminho ou ponte não passável para cavalos. Suporte muito estreito e insuficiente, obstáculos como escadas. Perigo de vida."
+                    },
+                    "placeholder": "Difícil, Perigoso..."
+                },
                 "horse_stables": {
+                    "label": "Hipismo estável",
                     "options": {
                         "stables": "Sim",
                         "undefined": "Não"
@@ -2051,6 +2095,7 @@
                     "placeholder": "40, 50, 60..."
                 },
                 "maxspeed/advisory": {
+                    "label": "Limite de Velocidade Consultivo",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2644,7 +2689,9 @@
                 "usage_rail": {
                     "label": "Tipo de Utilização",
                     "options": {
+                        "branch": "Filial",
                         "industrial": "Industrial",
+                        "main": "Principal",
                         "military": "Militar",
                         "test": "Teste",
                         "tourism": "Turismo"
@@ -2744,6 +2791,10 @@
                     "name": "Outdoor",
                     "terms": "Publicidade, letreiro, placa de publicidade"
                 },
+                "advertising/column": {
+                    "name": "Coluna de publicidade",
+                    "terms": "<translate with synonyms or related terms for 'Advertising Column', separated by commas>"
+                },
                 "aerialway": {
                     "name": "Teleférico do tipo cabine"
                 },
@@ -2828,6 +2879,10 @@
                 "aeroway/terminal": {
                     "name": "Terminal de Aeroporto",
                     "terms": "aeroporto, edifício, terminal aeroportuário, embarque, desembarque, viagem, turismo, avião, helicóptero"
+                },
+                "allotments/plot": {
+                    "name": "Parcela de Jardim Comunitário",
+                    "terms": "<translate with synonyms or related terms for 'Community Garden Plot', separated by commas>"
                 },
                 "amenity": {
                     "name": "Serviço"
@@ -3058,7 +3113,8 @@
                     "terms": "Feira, mercado, mercado municipal, feirinha"
                 },
                 "amenity/monastery": {
-                    "name": "Jardins do mosteiro"
+                    "name": "Jardins do mosteiro",
+                    "terms": "<translate with synonyms or related terms for 'Monastery Grounds', separated by commas>"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Estacionamento de motos",
@@ -3202,7 +3258,8 @@
                     "terms": "ducha, chuveiro, banheiro, banho público, banho"
                 },
                 "amenity/smoking_area": {
-                    "name": "Área de fumantes"
+                    "name": "Área de fumantes",
+                    "terms": "<translate with synonyms or related terms for 'Smoking Area', separated by commas>"
                 },
                 "amenity/social_facility": {
                     "name": "Unidade de Assistência Social",
@@ -3264,7 +3321,8 @@
                     "terms": "cigarro, venda de cigarro"
                 },
                 "amenity/vending_machine/coffee": {
-                    "name": "Máquina de Venda de Café"
+                    "name": "Máquina de Venda de Café",
+                    "terms": "<translate with synonyms or related terms for 'Coffee Vending Machine', separated by commas>"
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "Máquina de Venda de Preservativos",
@@ -3390,6 +3448,9 @@
                 "attraction/drop_tower": {
                     "name": "Torre de Queda Livre",
                     "terms": "big tower"
+                },
+                "attraction/maze": {
+                    "name": "Labirinto"
                 },
                 "attraction/pirate_ship": {
                     "name": "Navio Pirata",
@@ -3548,6 +3609,12 @@
                 "building/entrance": {
                     "name": "Entrada/Saída"
                 },
+                "building/farm": {
+                    "name": "Casa de fazenda"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Edifício da Fazenda"
+                },
                 "building/garage": {
                     "name": "Garagem",
                     "terms": "Garagem"
@@ -3646,6 +3713,9 @@
                 },
                 "building/train_station": {
                     "name": "Estação Ferroviária"
+                },
+                "building/transportation": {
+                    "name": "Edifício de transporte"
                 },
                 "building/university": {
                     "name": "Edifício Universitário",
@@ -3999,6 +4069,9 @@
                     "name": "Unidades de Cuidados Paliativos",
                     "terms": "doença, terminal, tratamento"
                 },
+                "healthcare/laboratory": {
+                    "name": "Laboratório médico"
+                },
                 "healthcare/midwife": {
                     "name": "Parteira",
                     "terms": "obstetra, obstetrícia, parteira, parto, clínica de obstetrícia, gravidez, gestante, gestação"
@@ -4037,6 +4110,9 @@
                 "highway/bridleway": {
                     "name": "Hipovia",
                     "terms": "Hipovia, Picadeiro, Caminho para Cavalgada, calvagada, Trilha de Equitação, cavalo, hipismo"
+                },
+                "highway/bus_guideway": {
+                    "name": "Guideway de ônibus"
                 },
                 "highway/bus_stop": {
                     "name": "Parada de ônibus / Plataforma"
@@ -4096,6 +4172,9 @@
                 "highway/motorway_link": {
                     "name": "Ligação de Autoestrada",
                     "terms": "acesso a autoestrada, acesso a via expressa, ligação de via expressa"
+                },
+                "highway/passing_place": {
+                    "name": "Lugar de passagem"
                 },
                 "highway/path": {
                     "name": "Caminho Informal",
@@ -5213,6 +5292,9 @@
                     "name": "Parada de Ônibus / Plataforma",
                     "terms": "ônibus, ponto de ônibus, transporte público, plataforma, trânsito"
                 },
+                "public_transport/linear_platform_ferry": {
+                    "name": "Parada de Balsa / Plataforma"
+                },
                 "public_transport/linear_platform_light_rail": {
                     "name": "Parada de VLT / Plataforma",
                     "terms": "veículo leve sobre trilhos, VLT, bonde, transporte público, trânsito, transporte, coletivo"
@@ -5240,6 +5322,9 @@
                 "public_transport/platform_bus": {
                     "name": "Parada de ônibus / Plataforma",
                     "terms": "ônibus, ponto de ônibus, transporte público, plataforma, trânsito"
+                },
+                "public_transport/platform_ferry": {
+                    "name": "Parada de Balsa / Plataforma"
                 },
                 "public_transport/platform_light_rail": {
                     "name": "Parada de VLT / Plataforma",
@@ -5305,11 +5390,23 @@
                 "public_transport/stop_position_bus": {
                     "name": "Local de parada de ônibus"
                 },
+                "public_transport/stop_position_light_rail": {
+                    "name": "Local de parada do VLT"
+                },
+                "public_transport/stop_position_monorail": {
+                    "name": "Localização de parada do monotrilho"
+                },
                 "public_transport/stop_position_subway": {
                     "name": "Local de parada de metrô"
                 },
                 "public_transport/stop_position_train": {
                     "name": "Local de parada de trem"
+                },
+                "public_transport/stop_position_tram": {
+                    "name": "Localização de parada do bonde"
+                },
+                "public_transport/stop_position_trolleybus": {
+                    "name": "Trólebus parando local"
                 },
                 "railway": {
                     "name": "Ferrovia"
@@ -5337,6 +5434,9 @@
                 "railway/funicular": {
                     "name": "Funicular",
                     "terms": "Funicular, Plano Inclinado"
+                },
+                "railway/halt": {
+                    "name": "Estação de trem (parada / pedido)"
                 },
                 "railway/level_crossing": {
                     "name": "Cruzamento de Ferrovia (Estrada)",
@@ -5395,6 +5495,9 @@
                 "railway/tram": {
                     "name": "Trilho de bonde",
                     "terms": "Bonde, VLT, Veículo leve sobre trilhos"
+                },
+                "railway/tram_stop": {
+                    "name": "Posição de parada do bonde"
                 },
                 "relation": {
                     "name": "Relação",
@@ -5991,12 +6094,17 @@
                     "name": "Parque Temático",
                     "terms": "Parque Temático"
                 },
+                "tourism/trail_riding_station": {
+                    "name": "Estação de Hipismo de Trilha",
+                    "terms": "<translate with synonyms or related terms for 'Trail Riding Station', separated by commas>"
+                },
                 "tourism/viewpoint": {
                     "name": "Mirante",
                     "terms": "Mirante"
                 },
                 "tourism/wilderness_hut": {
-                    "name": "Abrigo Isolado"
+                    "name": "Abrigo Isolado",
+                    "terms": "<translate with synonyms or related terms for 'Wilderness Hut', separated by commas>"
                 },
                 "tourism/zoo": {
                     "name": "Zoológico",
@@ -6039,7 +6147,8 @@
                     "terms": "sonorizador"
                 },
                 "traffic_calming/table": {
-                    "name": "Redutor de Velocidade Elevado"
+                    "name": "Redutor de Velocidade Elevado",
+                    "terms": "<translate with synonyms or related terms for 'Speed Table', separated by commas>"
                 },
                 "type/boundary": {
                     "name": "Fronteira",
@@ -6249,6 +6358,7 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
+                "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
                 "name": "Bordas das Imagens de Satélite DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
@@ -6262,6 +6372,7 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
+                "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
                 "name": "Boradas das Imagens de Satélite DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
@@ -6344,6 +6455,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Amarelo = Dados de mapa de domínio público do Censo dos EUA. Vermelho = Dados não encontrados no OpenStreetMap",
                 "name": "Estradas TIGER 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Estrada: Cobertura verde = não classificada. Cobertura marrom = trilha. Superfície: cascalho = preenchimento marrom claro, Asfalto = preto, Pavimentado = cinza, Terra = branco, Concreto = azul, Grama = verde. Sazonal = barras brancas",
+                "name": "Sobreposição de estradas florestais dos EUA"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6462,15 +6577,44 @@
             "cape-coast-youthmappers": {
                 "description": "Siga-nos no Twitter: {url}"
             },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Gana no Facebook",
+                "description": "Grupo no Facebook para pessoas interessadas no OpenStreetMap."
+            },
             "osm-gh-twitter": {
+                "name": "OpenStreetMap Gana no Twitter",
                 "description": "Siga-nos no Twitter: {url}"
+            },
+            "talk-gh": {
+                "name": "Lista de Discussão Talk-gh"
+            },
+            "talk-mg": {
+                "name": "Lista de Discussão Talk-mg"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Índia - Mapeamento de vizinhança participativa",
                 "description": "Melhorar o OpenStreetMap na Índia"
             },
+            "OSM-india-mailinglist": {
+                "name": "Lista de Discussão do OpenStreetMap na Índia",
+                "description": "Talk-in é a lista de discussão oficial para a comunidade indiana"
+            },
+            "OSM-india-twitter": {
+                "description": "Estamos a um tweet de distância: {url}"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonésia"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Lista de Discussão do OpenStreetMap Japão",
+                "description": "Talk-ja é a lista de discussão oficial para a Comunidade Japonesa"
+            },
             "OSM-japan-twitter": {
                 "description": "Hashtag no Twitter: {url}"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Lista de Discussão Talk-ph",
+                "description": "Uma lista de discussão para falar sobre o OpenStreetMap nas Filipinas"
             },
             "de-berlin-twitter": {
                 "description": "Siga-nos no Twitter: {url}"

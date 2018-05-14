@@ -170,7 +170,8 @@
                 "annotation": "已合并 {n} 个要素。",
                 "not_eligible": "这些要素不可以合并。",
                 "not_adjacent": "这些要素的结束节点并未相连，无法将其合并。",
-                "restriction": "这些要素不能被合并，因为其中至少有一个要素是某个“{relation}”关系的成员。",
+                "restriction": "这些要素不能被合并，因为这样会破坏 “{relation}” 关系。",
+                "relation": "这些要素不能被合并，因为其有冲突的关系成员。",
                 "incomplete_relation": "此要素暂未下载完成，无法合并。",
                 "conflicting_tags": "这些要素不能被合并，因为它们的某些标签具有冲突的值。"
             },
@@ -985,7 +986,7 @@
                 "add_name": "在 OpenStreetMap 中，所有的字段都是选填的，如果您不确定的话，让字段留空也是可以的。{br}让我们假设您对当地这间咖啡馆有所了解，并且知道它的名称。 **为这间咖啡馆添加名称。**",
                 "add_close": "要素编辑器会自动记住您所有的改动。 **当您添加了名称后，按下 Esc 键、回车键或点击 {button} 按钮来关闭要素编辑器。**",
                 "reselect": "很多时候，点会已经存在，但是信息有错误或不完整。我们可以编辑已经存在的点。 **点击选中您刚才创建的咖啡馆。**",
-                "update": "让我们给这间咖啡馆加入更多的细节。您可以更改它的名称、添加菜肴或填写地址。 **更改咖啡馆的细节。**",
+                "update": "让我们给这间咖啡馆加入更多的细节。您可以更改它的名称、添加菜系或填写地址。 **更改咖啡馆的细节。**",
                 "update_close": "**当您完成更新咖啡馆后，按下 Esc 键、回车键或点击 {button} 按钮来关闭要素编辑器。**",
                 "rightclick": "您可以右键点击任意要素来显示 *编辑菜单* ，它显示可以使用的编辑操作列表。 **右键点击您创建的点来显示编辑菜单。**",
                 "delete": "删除现实世界中不存在的要素是被允许的。{br}在 OpenStreetMap 中删除要素意味着它将会从每个人使用的地图中移除，所以您应该在删除前确保它真的已不复存在。 **点击 {button} 按钮来删除该点。**",
@@ -996,7 +997,7 @@
                 "title": "区域",
                 "add_playground": "*区域* 用来显示诸如湖泊、建筑物或居民区等要素的边界。{br}他们亦可作为相较于用点来标记要素而言更为细致的绘制方式。 **点击 {button} 区域按钮来添加一个新的区域。**",
                 "start_playground": "让我们用描绘一个区域的方式来添加这个游乐场吧。区域是通过在要素的外部轮廓上放置若干 *节点* 来描绘。 **点击或按空格键，在游乐场的其中一角放置一个起始节点。**",
-                "continue_playground": "继续在游乐场的轮廓上放置更多的节点来绘制该区域。如果遇到既有的人行道，你也可以将区域连接到人行道上。{br}提示：您可以按下{alt}键以防止节点连接到其他要素上。 **继续绘制游乐场区域。**",
+                "continue_playground": "继续在游乐场的轮廓上放置更多的节点来绘制该区域。如果遇到既有的人行道，您也可以将区域连接到人行道上。{br}提示：您可以按下{alt}键以防止节点连接到其他要素上。 **继续绘制游乐场区域。**",
                 "finish_playground": "按回车键、或再次点击起始/结束节点来结束绘制该区域。 **完成勾画该游乐场的轮廓。**",
                 "search_playground": "**搜索 '{preset}' 。**",
                 "choose_playground": "**在列表中选择 {preset} 。**",
@@ -6494,8 +6495,7 @@
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap 孟加拉国",
-                "description": "改进位于孟加拉国的 OpenStreetMap",
-                "extendedDescription": "在孟加拉国绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+                "description": "改进位于孟加拉国的 OpenStreetMap"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap 印度 - 共同参与的街区绘图",
@@ -6619,33 +6619,46 @@
                 "name": "OpenStreetMap 奥地利",
                 "description": "位于奥地利的 OpenStreetMap 信息平台"
             },
+            "byosm": {
+                "name": "OpenStreetMap 白俄罗斯",
+                "description": "OpenStreetMap 白俄罗斯 Telegram 交流"
+            },
             "be-facebook": {
-                "name": "OpenStreetMap 比利时社区",
-                "description": "在比利时的绘图者和 OpenStreetMap Facebook"
+                "name": "OpenStreetMap 比利时社区"
             },
             "be-forum": {
                 "name": "OpenStreetMap 比利时论坛",
                 "description": "OpenStreetMap 比利时网络论坛"
             },
             "be-mailinglist": {
-                "name": "Talk-be 邮件列表",
-                "description": "Talk-be 是比利时 OpenStreetMap 社区的官方邮件列表"
-            },
-            "be-matrix": {
-                "name": "OpenStreetMap 比利时 Riot 频道",
-                "description": "欢迎所有的绘图者！在 {signupUrl} 上注册。"
+                "name": "Talk-be 邮件列表"
             },
             "be-twitter": {
-                "name": "OpenStreetMap 比利时 Twitter",
-                "description": "OSM 比利时 Twitter 主页：{url}"
-            },
-            "byosm": {
-                "name": "OpenStreetMap 白俄罗斯",
-                "description": "OpenStreetMap 白俄罗斯 Telegram 交流"
+                "name": "OpenStreetMap 比利时 Twitter"
             },
             "talk-cz-mailinglist": {
                 "name": "Talk-cz 邮件列表",
                 "description": "Talk-cz 是捷克 OpenStreetMap 社区的官方邮件列表"
+            },
+            "fr-facebook": {
+                "name": "OpenStreetMap 法国 Facebook 主页",
+                "description": "OpenStreetMap 法国 Facebook 主页"
+            },
+            "fr-forum": {
+                "name": "OpenStreetMap 法国网络论坛",
+                "description": "OpenStreetMap 法国网络论坛"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap 法国 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-fr"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr 邮件列表",
+                "description": "Talk-fr 邮件列表"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap 法国 Twitter 主页",
+                "description": "OpenStreetMap 法国 Twitter 主页：{url}"
             },
             "de-berlin-mailinglist": {
                 "name": "柏林邮件列表",
@@ -6678,47 +6691,6 @@
             "osm-de": {
                 "name": "OpenStreetMap 德国",
                 "description": "位于德国的 OpenStreetMap 信息平台"
-            },
-            "OSM-ES-mailinglist": {
-                "name": "Talk-es 邮件列表",
-                "description": "讨论在西班牙 OpenStreetMap 的邮件列表"
-            },
-            "OSM-ES-telegram": {
-                "name": "@OSMes Telegram 主页",
-                "description": "OpenStreetMap 西班牙 Telegram 交流"
-            },
-            "fr-facebook": {
-                "name": "OpenStreetMap 法国 Facebook 主页",
-                "description": "OpenStreetMap 法国 Facebook 主页"
-            },
-            "fr-forum": {
-                "name": "OpenStreetMap 法国网络论坛",
-                "description": "OpenStreetMap 法国网络论坛"
-            },
-            "fr-irc": {
-                "name": "OpenStreetMap 法国 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-fr"
-            },
-            "fr-mailinglist": {
-                "name": "Talk-fr 邮件列表",
-                "description": "Talk-fr 邮件列表"
-            },
-            "fr-twitter": {
-                "name": "OpenStreetMap 法国 Twitter 主页",
-                "description": "OpenStreetMap 法国 Twitter 主页：{url}"
-            },
-            "Nottingham-OSM-pub-meetup": {
-                "name": "东米德兰（诺丁汉）月度酒吧见面会",
-                "description": "东米德兰绘图者和用户的社交聚会",
-                "extendedDescription": "该小组自2011年3月开始举行会议，地点最初在诺丁汉，近几年在德比，或不时在东米德兰的其他地方举行。这些虽是社交聚会，但却是来询问涉及地区或只是普通的 OSM 特定问题的好地方。在夏季，我们通常会在会场附近进行一小时的小型测绘。整个团队都对关于公共优先权的测绘有着特殊的兴趣，并且不时为此而召开绘图会议。"
-            },
-            "gb-mailinglist": {
-                "name": "Talk-gb 邮件列表",
-                "description": "Talk-gb 是英国(包括北爱尔兰) OSM 社区的主要交流论坛"
-            },
-            "gb-irc": {
-                "name": "OpenStreetMap 英国 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-gb"
             },
             "it-facebook": {
                 "name": "OpenStreetMap 意大利 Facebook",
@@ -6764,6 +6736,14 @@
             "OSM-PL-facebook-group": {
                 "name": "OpenStreetMap 波兰 Facebook 小组"
             },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es 邮件列表",
+                "description": "讨论在西班牙 OpenStreetMap 的邮件列表"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes Telegram 主页",
+                "description": "OpenStreetMap 西班牙 Telegram 交流"
+            },
             "osm-se": {
                 "name": "OpenStreetMap.se"
             },
@@ -6786,6 +6766,19 @@
             "se-twitter": {
                 "name": "OpenStreetMap 瑞典 Twitter 页面",
                 "description": "在 Twitter 上关注我们：{url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "东米德兰（诺丁汉）月度酒吧见面会",
+                "description": "东米德兰绘图者和用户的社交聚会",
+                "extendedDescription": "该小组自2011年3月开始举行会议，地点最初在诺丁汉，近几年在德比，或不时在东米德兰的其他地方举行。这些虽是社交聚会，但却是来询问涉及地区或只是普通的 OSM 特定问题的好地方。在夏季，我们通常会在会场附近进行一小时的小型测绘。整个团队都对关于公共优先权的测绘有着特殊的兴趣，并且不时为此而召开绘图会议。"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb 邮件列表",
+                "description": "Talk-gb 是英国(包括北爱尔兰) OSM 社区的主要交流论坛"
+            },
+            "gb-irc": {
+                "name": "OpenStreetMap 英国 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-gb"
             },
             "OSM-CA-Slack": {
                 "name": "OSM-CA Slack",

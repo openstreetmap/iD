@@ -170,7 +170,8 @@
                 "annotation": "Unidos {n} elementos.",
                 "not_eligible": "Estes elementos non se poden unir.",
                 "not_adjacent": "Estos elementos non se poden fusionar porque os seus extremos non están ligados.",
-                "restriction": "Estes elementos non se poden unir porque polo menos un delees é un membro dunha relación \"{relation}\".",
+                "restriction": "Estes elementos non se poden combinar porque se danaría a relación \"{relation}\".",
+                "relation": "Estes elementos non se poden combinar porque teñen roles de relación contraditorios.",
                 "incomplete_relation": "Estes elementos non se poden unir porque cando menos un deles non se descargou completamente.",
                 "conflicting_tags": "Estes elementos non se poden unir porque algunhas das súas etiquetas teñen valores contraditorios."
             },
@@ -1748,7 +1749,7 @@
                     "placeholder": "1-18"
                 },
                 "handrail": {
-                    "label": "Carretilla"
+                    "label": "Pasamáns"
                 },
                 "hashtags": {
                     "label": "Cancelos suxeridos",
@@ -2094,7 +2095,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Teléfono",
                     "placeholder": "+34 989 12 34 56"
                 },
                 "piste/difficulty": {
@@ -3891,7 +3891,8 @@
                     "terms": "vertedoiro, lixo, escombrera, basurero"
                 },
                 "landuse/meadow": {
-                    "name": "Prado"
+                    "name": "Prado",
+                    "terms": "prado, pasto, pradeira, herba"
                 },
                 "landuse/military": {
                     "name": "Zona militar"
@@ -3939,7 +3940,7 @@
                 },
                 "landuse/quarry": {
                     "name": "Canteira",
-                    "terms": "canteira, pedra, minería"
+                    "terms": "canteira, pedra, minería, mina, pedra, rocha, minerais"
                 },
                 "landuse/railway": {
                     "name": "Corredor ferroviario"
@@ -4267,7 +4268,7 @@
                 },
                 "natural/heath": {
                     "name": "Uceira",
-                    "terms": "uceira, breixeira, moural, urceira, uzal, herba"
+                    "terms": "uceira, breixeira, moural, urceira, uzal, herba, arbustos, gamallos"
                 },
                 "natural/peak": {
                     "name": "Cume",
@@ -4288,7 +4289,8 @@
                     "terms": "pedregal, laxas, laxes, pedras, rochas"
                 },
                 "natural/scrub": {
-                    "name": "Matogueira"
+                    "name": "Matogueira",
+                    "terms": "matogueira, arbustos, toxeira, toxos, silveira, breña, coucheira, fraguiza, vedramio"
                 },
                 "natural/spring": {
                     "name": "Manancial",
@@ -4324,7 +4326,7 @@
                 },
                 "natural/wood": {
                     "name": "Bosque",
-                    "terms": "bosque, fraga, foresta, monte"
+                    "terms": "bosque, fraga, foresta, monte, árbores"
                 },
                 "noexit/yes": {
                     "name": "Sen saída"
@@ -4429,6 +4431,10 @@
                 },
                 "place/village": {
                     "name": "Vila"
+                },
+                "playground/sandpit": {
+                    "name": "Areeiro",
+                    "terms": "areeiro, areal, area, caixón de area"
                 },
                 "point": {
                     "name": "Punto"

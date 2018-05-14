@@ -170,7 +170,8 @@
                 "annotation": "Kunfandis {n} objektojn.",
                 "not_eligible": "Ĉi tiuj objektoj ne povas esti kunfanditaj.",
                 "not_adjacent": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar iliaj finpunktoj ne estas kunigitaj.",
-                "restriction": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar almenaŭ unu estas ano de rilato \"{relation}\".",
+                "restriction": "Ĉi tiuj elementoj ne povas esti kunfanditaj, ĉar tio ĉi detruus la rilaton “{relation}”.",
+                "relation": "Ĉi tiuj elementoj ne povas esti kunfanditaj, ĉar ili havas konfliktajn rolojn de rilatoj.",
                 "incomplete_relation": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar almenaŭ unu ne estas elŝutita tute.",
                 "conflicting_tags": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar iuj el iliaj etikedoj havas konfliktajn valorojn."
             },
@@ -3665,6 +3666,10 @@
                     "name": "Garaĝaro",
                     "terms": "garagharo,garagxaro,garaĝo,aŭtejo,aŭtomobilejo"
                 },
+                "building/grandstand": {
+                    "name": "Spektoteraso",
+                    "terms": "tribuno,spektejo,podio,estrado"
+                },
                 "building/greenhouse": {
                     "name": "Kultivdomo",
                     "terms": "forcejo,plantdomo,plantodomo"
@@ -4850,6 +4855,10 @@
                     "name": "Kamentubo",
                     "terms": "kameno,fumtubo"
                 },
+                "man_made/clearcut": {
+                    "name": "Hakita arbaro",
+                    "terms": "malarbaro,dehakita arbaro,senarba areo,senarbigita areo,stumpoj"
+                },
                 "man_made/crane": {
                     "name": "Gruo",
                     "terms": "gruo,argano,levmaŝino"
@@ -5024,6 +5033,10 @@
                 "natural/peak": {
                     "name": "Montpinto",
                     "terms": "montopinto,monto,supro,kulmino,supraĵo"
+                },
+                "natural/reef": {
+                    "name": "Rifo",
+                    "terms": "submara roko,ŝtono"
                 },
                 "natural/ridge": {
                     "name": "Montokresto",
@@ -6760,6 +6773,14 @@
             }
         },
         "community": {
+            "OSM-PL-facebook-group": {
+                "name": "Facebook-grupo OpenStreetMap Polska",
+                "description": "Grupo por mapigistoj kaj uzantoj de OpenStreetMap en Polujo."
+            },
+            "OSM-PL-forum": {
+                "name": "Forum-sekcio OpenStreetMap Polska",
+                "description": "Diskutejo por pola komunumo de OpenStreetMap"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap ĉe Facebook",
                 "description": "Ŝatu nin ĉe Facebook por akiri novaĵojn pri OpenStreetMap."

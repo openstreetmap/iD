@@ -477,7 +477,6 @@
                     "label": "类型"
                 },
                 "phone": {
-                    "label": "手机",
                     "placeholder": "+31 42 123 4567"
                 },
                 "place": {

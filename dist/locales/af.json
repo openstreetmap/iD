@@ -443,7 +443,6 @@
                     "label": "Tipe"
                 },
                 "phone": {
-                    "label": "Telefoon",
                     "placeholder": "+27 11 907 1111"
                 },
                 "place": {

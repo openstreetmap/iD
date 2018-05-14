@@ -644,7 +644,6 @@
                     "label": "ধরন"
                 },
                 "phone": {
-                    "label": "ফোন",
                     "placeholder": "+৩১ ৪২ ১২৩ ৪৫৬৭"
                 },
                 "place": {

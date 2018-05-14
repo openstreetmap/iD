@@ -168,7 +168,6 @@
                 "annotation": "Yhdistetty {n} kohdetta.",
                 "not_eligible": "Näitä ominaisuuksia ei voi sulauttaa yhteen.",
                 "not_adjacent": "Näitä karttapisteitä ei voi yhdistää, sillä niiden päätepisteitä ei ole yhdistetty toisiinsa.",
-                "restriction": "Näitä kohteita ei voi yhdistää, koska ainakin yksi on on liitettynä relaatioon \"{relation}\" .",
                 "incomplete_relation": "Näitä karttakohteita ei voi yhdistää,  sillä ainakin yhden tietoja ei ole täysin ladattu.",
                 "conflicting_tags": "Näitä kohteita ei voi yhdistää, koska joidenkin niiden ominaisuustiedoissa on ristiriitaisia arvoja.  "
             },
@@ -643,9 +642,9 @@
         "success": {
             "just_edited": "Muokkasit juuri OpenStreetMapia!",
             "thank_you": "Kiitos avustasi!",
-            "thank_you_location": "Kiitos, että paransit karttaa paikassa {where}.",
+            "thank_you_location": "Kiitos, että paransit karttaa alueella {where}.",
             "help_html": "Karttaan tehdyt muutokset ilmestyvät perinteiseen karttanäkymään muutaman minuutin kuluessa. Joidenkin ominaisuuksien ilmestyminen kartalle ja muutokset joihinkin karttanäkymiin voivat viedä kauemmin.",
-            "help_link_text": "Tiedot",
+            "help_link_text": "Lisätietoja",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Näytä muutokset OSM-kartalla",
             "changeset_id": "Muutoskokoelman seurantatunnus: {changeset_id}",
@@ -1850,6 +1849,9 @@
                     "label": "Nopeusrajoitus",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "label": "Suositusnopeus"
+                },
                 "maxstay": {
                     "label": "Sallittu enimmäisaika"
                 },
@@ -1995,7 +1997,6 @@
                     "label": "Maksutavat"
                 },
                 "phone": {
-                    "label": "Puhelinnumero",
                     "placeholder": "+358 40 123 4567"
                 },
                 "piste/difficulty": {
@@ -5659,6 +5660,50 @@
                     "text": "Kartat © Thunderforest, Aineisto © OpenStreetMapin tekijät"
                 },
                 "name": "Thunderforest-maisema"
+            }
+        },
+        "community": {
+            "it-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "se-facebook": {
+                "description": "OpenStreetMap Ruotsi Facebookissa"
+            },
+            "PHXGeo-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSM-AR-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSM-br-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSM-CL-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSM-CO-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSM-PE-twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap Facebookissa",
+                "description": "Pysy ajan tasalla tuoreimmista OpenStreetMap-uutisista tykkäämällä meistä Facebookissa."
+            },
+            "OSM-help": {
+                "description": "Hanki vastauksia kysymyksiisi OpenStreetMapin yhteisön ylläpitämällä vastausfoorumilla."
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap Redditissä",
+                "description": "/r/openstreetmap/ on näppärä tapa oppia lisää OpenStreetMapista. Kysy mitä tahansa!"
+            },
+            "OSM-Twitter": {
+                "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap-säätiö",
+                "description": "OSMF on Iso-Britanniasta toimiva voittoa tavoittelematon, OpenStreetMapin toimintaa edistävä säätiö"
             }
         }
     }

@@ -163,7 +163,6 @@
                 "annotation": "Meciéronse {n} carauterístiques.",
                 "not_eligible": "Eses carauterístiques nun puen amestase",
                 "not_adjacent": "Estos oxetos nun pueden fusionase porque los sos estremos nun tán coneutaos.",
-                "restriction": "Eses carauterístiques nun puen mecese porque una polo menos ye miembru d'una rellación \"{relation}\".",
                 "incomplete_relation": "Estes carauterístiques nun puen entemecese porque polo menos una nun se descargó completamente.",
                 "conflicting_tags": "Eses carauterístiques nun puen mecese porque  dalgún valor de les etiquetes fai conflictu."
             },
@@ -1607,7 +1606,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Teléfonu",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

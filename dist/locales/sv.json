@@ -170,7 +170,8 @@
                 "annotation": "Sammanfogade {n} objekt.",
                 "not_eligible": "Dessa objekt kan inte sammanfogas.",
                 "not_adjacent": "Dessa objekt kan inte sammanfogas då deras ändar inte är sammankopplade.",
-                "restriction": "Dessa objekt kan inte sammanfogas då minst en av dem tillhör relationenen \"{relation}\".",
+                "restriction": "Dessa objekt kan inte sammanfogas då det kommer att skada en relation av typen \"{relation}\".",
+                "relation": "Dessa objekt kan inte sammanfogas då de har motstridiga relationsroller.",
                 "incomplete_relation": "Dessa objekt kan inte sammanfogas då åtminstone ett inte är fullständigt nedladdat.",
                 "conflicting_tags": "Dessa objekt kan inte sammanfogas då några av dess taggar har motstridiga värden."
             },
@@ -3375,8 +3376,17 @@
                     "name": "Varumaskin för mensskydd",
                     "terms": "Varumaskin för mensskydd, mensskydd, kondom, tampong, bindor, binda, kvinna, kvinnor, mens, menstruation"
                 },
+                "amenity/vending_machine/food": {
+                    "name": "Matvaruautomat",
+                    "terms": "Matvaruautomat, mat, matautomat, matvarumaskin, Varuautomat, varumaskin, mellanmål"
+                },
                 "amenity/vending_machine/fuel": {
-                    "name": "Bränslepump"
+                    "name": "Bränslepump",
+                    "terms": "Bränslepump, bensin, etanol, diesel, bränsle, propan, ing, cng, biodiesel, pump, tapp, tanka, tankomat, tankstation, mack, bensinstation"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Glassautomat",
+                    "terms": "Glassautomat, glass, isglass, Varuautomat, varumaskin"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Tidningsautomat"
@@ -6753,7 +6763,7 @@
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Förbättra OpenStreetMap i Bangladesh",
-                "extendedDescription": "Kartlägger i Bangladesh? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {Url}. Alla är välkomna!"
+                "extendedDescription": "Kartlägger i Bangladesh? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {url}. Alla är välkomna!"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Indien - Användarstödd kartläggning av grannskapet",
@@ -6768,11 +6778,11 @@
                 }
             },
             "OSM-india-mailinglist": {
-                "name": "Epostlistan OpenStreetMap Indien",
+                "name": "E-postlista för OpenStreetMap Indien",
                 "description": "Talk-in är den officiella e-postlistan för den indiska gemenskapen"
             },
             "OSM-india-twitter": {
-                "name": "OpenStreetMap Indien Twitter",
+                "name": "OpenStreetMap Indien på Twitter",
                 "description": "Vi är bara ett tweet iväg: {url}"
             },
             "OSM-India-Puducherry-Facebook": {
@@ -6791,23 +6801,35 @@
                 "extendedDescription": "Kartlägger i Indonesien? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {Url}. Alla är välkomna!"
             },
             "OSM-japan-facebook": {
-                "name": "OpenStreetMap Japan Community",
+                "name": "Gemenskap för OpenStreetMap Japan",
                 "description": "Kartläggare och OpenStreetMap-användare i Japan"
             },
             "OSM-japan-mailinglist": {
-                "name": "Epostlista för OpenStreetMap Japan",
+                "name": "E-postlista för OpenStreetMap Japan",
                 "description": "Talk-ja är en officiell e-postlista för den japanska gemenskapen"
             },
             "OSM-japan-twitter": {
-                "name": "OpenStreetMap Japan Twitter",
+                "name": "OpenStreetMap Japan på Twitter",
                 "description": "Hashtag på Twitter: {url}"
             },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japan",
+                "description": "Kartläggare och OpenStreetMap-användare i Japan"
+            },
+            "OSM-korea-telegram": {
+                "name": "Telegram-kanal för OSM Korea",
+                "description": "Inofficiell kanal för bidragsgivare till OpenStreetMap, sammanslutningar och användare i Korea för att dela och diskutera."
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaysia på Facebook",
+                "description": "För chatt om allt som rör OpenStreetMap!"
+            },
             "OSM-MY-forum": {
-                "name": "OpenStreetMap Malaysia Forum",
-                "description": "Officiellt OpenStreetMap Malaysia-forum"
+                "name": "Forum för OpenStreetMap Malaysia",
+                "description": "Officiellt  forum för OpenStreetMap Malaysia"
             },
             "OSM-MY-matrix": {
-                "name": "OpenStreetMap Malaysia Riot-kanal",
+                "name": "Riot-kanal för OpenStreetMap Malaysia",
                 "description": "Alla kartläggare är välkomna! Registrera dig på {signupUrl}"
             },
             "OSM-MNG-facebook": {
@@ -6826,7 +6848,7 @@
                 "extendedDescription": "Kartlägger i Nepal? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {Url}. Alla är välkomna!"
             },
             "OSM-PH-facebook": {
-                "name": "OpenStreetMap PH Facebook",
+                "name": "OpenStreetMap PH på Facebook",
                 "description": "Välkommen till OpenStreetMap Filippinerna, där vi uppmuntrar alla filippiner att bidra till OpenStreetMap-projektet."
             },
             "OSM-PH-mailinglist": {
@@ -6834,20 +6856,20 @@
                 "description": "En epostlista för att diskutera OpenStreetMap på Filippinerna"
             },
             "OSM-PH-slack": {
-                "name": "OpenStreetMap PH Slack",
+                "name": "OpenStreetMap PH på Slack",
                 "description": "Alla är välkomna! Registrera dig på {signupUrl}"
             },
             "OSM-PH-telegram": {
-                "name": "OpenStreetMap PH Telegram",
+                "name": "Telegram för OpenStreetMap PH",
                 "description": "Inofficiell, lokal gemenskap på Telegram för OpenStreetMaps bidragsgivare och vänner på Filippinerna"
             },
             "OSM-RU-forum": {
-                "name": "OpenStreetMap RU forum",
-                "description": "OpenStreetMap ryska webbforum"
+                "name": "Forum för OpenStreetMap RU",
+                "description": "Webbforum för OpenStreetMap Ryssland"
             },
             "OSM-RU-telegram": {
-                "name": "OpenStreetMap RU telegram",
-                "description": "OpenStreetMap ryska telegram-chat"
+                "name": "Telegram för OpenStreetMap RU",
+                "description": "Telegram-chatt för OpenStreetMap Rysland"
             },
             "OSM-LKA-facebook": {
                 "name": "OpenStreetMap Sri Lanka",
@@ -6855,15 +6877,34 @@
                 "extendedDescription": "Kartlägger i Sir Lanka? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {Url}. Alla är välkomna!"
             },
             "OSM-TW-facebook": {
-                "name": "OpenStreetMap Taiwan-gemenskap",
+                "name": "Gemenskap för OpenStreetMap Taiwan",
                 "description": "Facebook-grupp för kartläggare och OpenStreetMap-användare för att diskutera frågor rörande Taiwan."
             },
             "OSM-TW-mailinglist": {
-                "name": "OpenStreetMap Taiwan-epostlista",
+                "name": "E-postlista för OpenStreetMap Taiwan",
                 "description": "Talk-tw är en officiell e-postlista för att diskutera frågor som rör Taiwan"
             },
+            "OSM-TH-CNX-meetup": {
+                "name": "OSM Meetup Chiang Mai",
+                "description": "Oregelbundna träffar för OpenStreetMap-gemenskapen i Chiang Mai"
+            },
+            "OSM-TH-forum": {
+                "name": "Forum för OpenStreetMap TH",
+                "description": "Webbforum för OpenStreetMap Thailand"
+            },
+            "al-forum": {
+                "name": "Forum för OSM Albanien",
+                "description": "Forum för OpenStreetMap Albanien"
+            },
+            "al-maptime-tirana": {
+                "description": "Sociala evenemang organiserade runt kartläggning - nybörjare är varmt välkomna!"
+            },
+            "al-telegram": {
+                "name": "Telegram-kanal för OSM Albanien",
+                "description": "Telegram-chatt för OpenStreetMap Albanien "
+            },
             "at-forum": {
-                "name": "OpenStreetMap Österrike Forum",
+                "name": "Forum för OpenStreetMap Österrike",
                 "description": "Det officiella forumet för OpenStreetMap-frågor i och runt Österrike"
             },
             "at-mailinglist": {
@@ -6871,7 +6912,7 @@
                 "description": "Talk-at är den officiella e-postlistan för den österrikiska OSM-gemenskapen"
             },
             "at-twitter": {
-                "name": "OpenStreetMap Österrike Twitter",
+                "name": "OpenStreetMap Österrike på Twitter",
                 "description": "OpenStreetMap Österrike på Twitter: {url}"
             },
             "osmgraz-meetup": {
@@ -6886,89 +6927,83 @@
                 "name": "OpenStreetMap Österrike",
                 "description": "Plattformen för information om OpenStreetMap i Österrike"
             },
+            "byosm": {
+                "name": "OpenStreetMap Vitryssland",
+                "description": "Telegram-chatt för OpenStreetMap Vitryssland"
+            },
             "be-facebook": {
                 "name": "OpenStreetMap BE-gemenskap",
-                "description": "Kartläggar- och OpenStreetMap-facebook i Belgien"
+                "description": "Kartläggare och OpenStreetMap på Facebook i Belgien"
             },
             "be-forum": {
-                "name": "OpenStreetMap BE forum",
-                "description": "OpenStreetMap belgiska webbforum"
+                "name": "Forum för OpenStreetMap BE",
+                "description": "Webbforum för OpenStreetMap Belgien"
+            },
+            "be-irc": {
+                "name": "IRC för OpenStreetMap Belgien",
+                "description": "Anslut #osmbe på irc.oftc.net (port 6667)",
+                "extendedDescription": "Anslut #osmbe på irc.oftc.net (port 6667), den är bryggad med chatt-kanalen Matrix"
             },
             "be-mailinglist": {
                 "name": "E-postlistan Talk-be",
                 "description": "Talk-be är den officiella e-postlistan för den belgiska OSM-gemenskapen"
             },
+            "be-maptime": {
+                "name": "Maptime Belgien",
+                "description": "Sociala evenemang organiserade runt kartläggning - nybörjare är varmt välkomna!"
+            },
             "be-matrix": {
-                "name": "OpenStreetMap BE Riot-kanal",
-                "description": "Alla kartläggare är välkomna! Registrera dig på {signupUrl}",
-                "extendedDescription": "Flera kanaler existerar, för nybörjare till heta kanaler, landanvändning och utvecklingsdiskussioner"
+                "name": "Matrix-kanal för OpenStreetMap BE",
+                "description": "Alla kartläggare är välkomna!",
+                "extendedDescription": "De flesta diskussionerna sker i kanalen \"OpenStreetMap Belgium\". Du kan fråga vad som helst där! De andra rummen är för specifika ämnen."
             },
             "be-meetup": {
-                "name": "OpenStreetMap Belgien Meetup",
-                "description": "IRL-träffar för alla som är intresserade av OpenStreetMap.",
+                "name": "OpenStreetMap Belgien på Meetup",
+                "description": "Träffa alla som är intresserade av OpenStreetMap i verkligheten",
                 "extendedDescription": "Fysiska träffar är ett bra sätt att träffa andra kartläggare, ställa frågor till dem och lära dig jättemycket. Speciellt nya bidragsgivare är varmt välkomna!"
             },
             "be-twitter": {
-                "name": "OpenStreetMap Belgium Twitter",
-                "description": "OSM Belgien på Twitter: {url}"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Vitryssland",
-                "description": "OpenStreetMap Vitrysslands telegram-chatt"
+                "name": "OpenStreetMap Belgium på Twitter",
+                "description": "OSM Belgien på Twitter: @osm_be"
             },
             "talk-cz-mailinglist": {
                 "name": "E-postlistan Talk-cz",
                 "description": "Talk-cz är den officiella e-postlistan för den tjeckiska gemenskapen"
             },
-            "de-berlin-mailinglist": {
-                "name": "Berlins e-postlista",
-                "description": "Detta är e-postlistan för Berlins OSM-gemenskap"
+            "dk-forum": {
+                "name": "Webbforum för OpenStreetMap Danmark",
+                "description": "Webbforum för OpenStreetMap Danmark"
             },
-            "de-berlin-meetup": {
-                "description": "Kartläggare och OpenStreetMap-användare runt Berlin"
+            "dk-irc": {
+                "name": "IRC för OpenStreetMap Danmark",
+                "description": "Anslut #osm-dk på irc.oftc.net (port 6667)"
             },
-            "de-berlin-telegram": {
-                "name": "@osmberlin på Telegram",
-                "description": "OpenStreetMap Berlin Telegram-chat"
+            "dk-mailinglist": {
+                "name": "E-postlistan Talk-dk",
+                "description": "En e-postlista för att diskutera OpenStreetMap i Danmark"
             },
-            "de-berlin-twitter": {
-                "name": "OpenStreetMap Berlin Twitter",
-                "description": "Följ oss på Twitter: {url}"
+            "fi-forum": {
+                "name": "Forum för OpenStreetMap FI",
+                "description": "Webbforum för OpenStreetMap Finland"
             },
-            "de-forum": {
-                "name": "OpenStreetMap DE forum",
-                "description": "OpenStreetMap tyska webbforum"
+            "fi-irc": {
+                "name": "IRC för OpenStreetMap Finland",
+                "description": "Anslut #osm-fi på irc.oftc.net (port 6667)"
             },
-            "de-irc": {
-                "name": "OpenStreetMap Tyskland IRC",
-                "description": "Anslut #osm-de på irc.oftc.net (port 6667)"
-            },
-            "de-mailinglist": {
-                "name": "E-postlistan Talk-de",
-                "description": "Talk-de är den officiella e-postlistan för den tyska OSM-gemenskapen"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap Tyskland",
-                "description": "Plattformen för information om OpenStreetMap i Tyskland"
-            },
-            "OSM-ES-mailinglist": {
-                "name": "E-postlistan Talk-es",
-                "description": "En e-postlista för att diskutera OpenStreetMap i Spanien"
-            },
-            "OSM-ES-telegram": {
-                "name": "@OSMes på Telegram",
-                "description": "OpenStreetMap spanska Telegram-chat"
+            "fi-mailinglist": {
+                "name": "E-postlistan Talk-fi",
+                "description": "Talk-fi är den officiella e-postlistan för den finska OSM-gemenskapen"
             },
             "fr-facebook": {
                 "name": "OpenStreetMap Frankrikes Facebook-sida",
                 "description": "OpenStreetMap Frankrikes Facebook-sida"
             },
             "fr-forum": {
-                "name": "OpenStreetMap Frankrike webbforum",
-                "description": "OpenStreetMap Frankrike webbforum"
+                "name": "Webbforum för OpenStreetMap Frankrike ",
+                "description": "Webbforum för OpenStreetMap Frankrike"
             },
             "fr-irc": {
-                "name": "OpenStreetMap Frankrike på IRC",
+                "name": "IRC för OpenStreetMap Frankrike",
                 "description": "Anslut #osm-fr på irc.oftc.net (port 6667)"
             },
             "fr-mailinglist": {
@@ -6979,25 +7014,72 @@
                 "name": "OpenStreetMap Frankrike på Twitter",
                 "description": "OpenStreetMap Frankrike på Twitter: {url}"
             },
-            "gb-mailinglist": {
-                "name": "E-postlistan Talk-gb"
+            "de-berlin-mailinglist": {
+                "name": "E-postlista för Berlin",
+                "description": "Detta är e-postlistan för Berlins OSM-gemenskap"
             },
-            "gb-irc": {
-                "name": "OpenStreetMap Storbritannien IRC",
-                "description": "Anslut #osm-gb på irc.oftc.net (port 6667)"
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap Berlin-Brandenburg på Meetup",
+                "description": "Kartläggare och OpenStreetMap-användare runt Berlin"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Berlin"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlin på Twitter",
+                "description": "Följ oss på Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "Forum för OpenStreetMap DE",
+                "description": "Webbforum för OpenStreetMap Tyskland"
+            },
+            "de-irc": {
+                "name": "IRC för OpenStreetMap Tyskland",
+                "description": "Anslut #osm-de på irc.oftc.net (port 6667)"
+            },
+            "de-mailinglist": {
+                "name": "E-postlistan Talk-de",
+                "description": "Talk-de är den officiella e-postlistan för den tyska OSM-gemenskapen"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "E-postlista för OWL",
+                "description": "Detta är e-postlistan för OSM-gemenskap i Ostwestfalen-Lippe"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Tyskland",
+                "description": "Plattformen för information om OpenStreetMap i Tyskland"
+            },
+            "hu-facebook": {
+                "name": "OpenStreetMap HU på Facebook",
+                "description": "Kartläggar- och OpenStreetMap-facebook i Ungern"
+            },
+            "hu-forum": {
+                "name": "Forum för OpenStreetMap HU",
+                "description": "Webbforum för OpenStreetMap Ungern"
+            },
+            "hu-meetup": {
+                "name": "OpenStreetMap Ungern på Meetup",
+                "description": "Plattformen för att organisera träffar i Ungen"
             },
             "it-facebook": {
-                "name": "OpenStreetMap Italien Facebook"
+                "name": "OpenStreetMap Italien på Facebook",
+                "description": "Anslut till gemenskapen i OpenStreetMap Italien via Facebook"
             },
             "it-irc": {
-                "name": "OpenStreetMap Italien IRC",
+                "name": "IRC för OpenStreetMap Italien",
                 "description": "Anslut #osm-it på irc.oftc.net (port 6667)"
             },
             "it-mailinglist": {
-                "name": "E-postlistan Talk-it"
+                "name": "E-postlistan Talk-it",
+                "description": "Talk-it är den officiella e-postlistan för den italienske OSM-gemenskapen"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Italien"
             },
             "it-twitter": {
-                "name": "OpenStreetMap Italien Twitter",
+                "name": "OpenStreetMap Italien på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "OSM-Rome-meetup": {
@@ -7005,21 +7087,29 @@
                 "description": "Förbättra OpenStreetMap kring Rom",
                 "extendedDescription": "Vi siktar på att vara en resurs för människor att diskutera och dela kunskaper om hur man använder fri geografiska datasamlingar, speciellt OpenStreetMap, och öppen geo-mjukvara som hanterar, redigerar och visar geografiska data och förespråkar för dess användning i Lazio."
             },
+            "South-Tyrol-Mailing-List": {
+                "name": "E-postlista för OpenStreetMap i Sydtyrolen",
+                "description": "Regional e-postlista för OpenStreetMap Italien i Sydtyrolen"
+            },
             "talk-it-lazio": {
                 "name": "OpenStreetMap IT Lazio",
                 "description": "Alla är välkomna! Registrera dig på {signupUrl}",
                 "extendedDescription": "E-postlista för området kring Rom och Lazio."
             },
+            "Trentino-Mailing-List": {
+                "name": "E-postlista för OpenStreetMap i Trento",
+                "description": "Regional e-postlista för OpenStreetMap Italien i Trentino"
+            },
             "no-forum": {
-                "name": "OpenStreetMap Norge webbforum",
-                "description": "OpenStreetMap Norge webbforum"
+                "name": "Webbforum för OpenStreetMap Norge",
+                "description": "Webbforum för OpenStreetMap Norge"
             },
             "no-irc": {
-                "name": "OpenStreetMap Norge på IRC",
+                "name": "IRC för OpenStreetMap Norge",
                 "description": "Chattrum för kartläggare och OpenStreetMap-användare, utvecklare och entusiaster i Norge"
             },
             "no-mailinglist": {
-                "name": "E-postlista OpenStreetMap Norge",
+                "name": "E-postlista för OpenStreetMap i Norge",
                 "description": "E-postlista för kartläggare och OpenStreetMap-användare, utvecklare och entusiaster i Norge"
             },
             "OSM-PL-facebook-group": {
@@ -7027,23 +7117,31 @@
                 "description": "Grupp för kartläggare och användare av OpenStreetMap i Polen"
             },
             "OSM-PL-forum": {
-                "name": "OpenStreetMap Polen Forum",
+                "name": "Forum för OpenStreetMap Polen",
                 "description": "Forum för den polska OpenStreetMap-gemenskapen"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "E-postlistan Talk-es",
+                "description": "En e-postlista för att diskutera OpenStreetMap i Spanien"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Spanien"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Tillhandahåller OSM-tjänster och information för den svenska gemenskapen"
             },
             "se-facebook": {
-                "name": "OpenStreetMap Sverige Facebook",
+                "name": "OpenStreetMap Sverige på Facebook",
                 "description": "OpenStreetMap Sverige på Facebook"
             },
             "se-forum": {
-                "name": "OpenStreetMap Sverige webbforum",
-                "description": "OpenStreetMap Sverige webbforum"
+                "name": "Webbforum för OpenStreetMap Sverige",
+                "description": "Webbforum för OpenStreetMap Sverige"
             },
             "se-irc": {
-                "name": "OpenStreetMap Sverige IRC",
+                "name": "IRC för OpenStreetMap Sverige",
                 "description": "Anslut #osm.se på irc.oftc.net (port 6667)"
             },
             "se-mailinglist": {
@@ -7054,13 +7152,40 @@
                 "name": "OpenStreetMap Sverige på Twitter",
                 "description": "Följ oss på Twitter: {url}"
             },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Pub-möte en gång i månaden i East Midlands (Nottingham)",
+                "description": "Social sammankomst för kartläggare och användare i East Midlands",
+                "extendedDescription": "En grupp har träffats sedan mars 2011, ursprungligen i Nottingham, och senare i Derby och ibland någon annanstans i East Midlands. Det är sociala träffar, men det är en utmärkt plats att komma till för att ställa specifika frågor om OSM, antingen i närområdet eller i allmänhet. Under sommarmånaderna brukar vi göra lite lätt kartläggning i en timme i närheten av vår mötesplats. Gruppen som helhet har ett särskilt intresse för att kartlägga vägrestriktioner  och då och då har vi kartläggningsmöten för detta ändamål."
+            },
+            "gb-mailinglist": {
+                "name": "E-postlistan Talk-gb",
+                "description": "Talk-be är den officiella kommunikationslistan för den brittiska (inklusive nordirländska)  OSM-gemenskapen"
+            },
+            "mappa-mercia-group": {
+                "name": "Lokalgrupp Mappa Mercia",
+                "description": "Ett hem för OpenStreetMap-entusiaster i Midlands",
+                "extendedDescription": "Mappa Mercia är ett projekt att förbättra OpenStreetMap i West Midlands, Storbritannien. Vi har gemenskapsevenemang, tillhandahåller upplärning och ger support till lokala organisationer som vill öppna upp sin data."
+            },
+            "gb-irc": {
+                "name": "IRC för OpenStreetMap Storbritannien",
+                "description": "Anslut #osm-gb på irc.oftc.net (port 6667)",
+                "extendedDescription": "Anslut #osm-gb på irc.oftc.net (port 6667). Ha tålamod och vänta några minuter om du ställer en fråga"
+            },
             "OSM-CA-Slack": {
-                "name": "OSM-CA Slack",
+                "name": "OSM-CA på Slack",
                 "description": "Alla är välkomna! Registrera dig på {signupUrl}."
             },
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver",
                 "description": "Kartläggare och OpenStreetMap-användare i Vancouver, BC-området"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Kuba på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Kuba"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM Nicaragua på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Nicaragua"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -7072,7 +7197,7 @@
                 "description": "Online-kartläggningsgemenskap baserat på State College, PA"
             },
             "Code-for-San-Jose-Slack": {
-                "name": "Kod för San Jose Slack",
+                "name": "Kod för San Jose på Slack",
                 "description": "Alla är välkomna! Registrera dig på {signupUrl} och anslut sedan till #osm-kanalen."
             },
             "Dallas-Fort-Worth-OSM": {
@@ -7082,7 +7207,7 @@
             },
             "GeoPhilly": {
                 "name": "GeoPhilly",
-                "description": "Meetup för kart-entusiaster kring Philadelphia",
+                "description": "Träffar för kart-entusiaster kring Philadelphia",
                 "extendedDescription": "GeoPhilly förenar utvecklare, geografer, data-nördar, open source-entusiaster, civila hackare och kartmissbrukare i vår gemensamma kärlek för kartor och vad de berättar för oss. Om du använder kartor som en del av ditt arbete eller bara vill lära dig mer, är det här samlingspunkten för dig! Våra aktiviteter syftar till att vara öppna, vänliga, pedagogiska och sociala och spänna allt från roliga stunder till korta föreläsningar eller till och med workshops. Kom och skapa en varierad, inspirerande geo-gemenskap i Philadelphia med oss!"
             },
             "MapMinnesota": {
@@ -7153,7 +7278,7 @@
                 "extendedDescription": "Gruppen OSM Tampa Bay är till för att lokalinvånare ska förenas och bygga upp den optimala kartan över Tampa Bay med OpenStreetMap, den fria och redigerbara kartan över världen. Om du gillar kartor, data, open source, GPS, vandring, cykling, etc., kommer du att älska att arbeta med OpenStreetMap\n-- så gå med! Vi kommer samman, kartlägger och pratar om nya ämnen ungefär en gång i månaden."
             },
             "OSM-US-Slack": {
-                "name": "OpenStreetMap US Slack",
+                "name": "OpenStreetMap US på Slack",
                 "description": "Alla är välkomna! Registrera dig på {signupUrl}"
             },
             "OSM-US": {
@@ -7172,12 +7297,12 @@
                 "extendedDescription": "OpenStreetMap (OSM) Wyoming är en lokal gemenskap med personer som är intresserade av att bidra till att skapa gratiskartor. Vi uppmuntrar alla våra kartläggare att organisera eller föreslå kartläggningsevenemang i hela staten. Meetup-aktiviteter kan vara enkla sociala träffar, enkla eller avancerade utbildningar kring OSM eller gemensamma kartläggningsatsningar."
             },
             "PHXGeo-meetup": {
-                "name": "PHXGeo Meetup",
+                "name": "PHXGeo på Meetup",
                 "description": "Kartläggare och OpenStreetMap-användare kring Phoenix, Arizona",
                 "extendedDescription": "Detta är en meetup-grupp för de kring Phoenix som gillar kartläggning, GIS, OpenStreetMap, kartografi och allt däremellan. "
             },
             "PHXGeo-twitter": {
-                "name": "PHXGeo Twitter",
+                "name": "PHXGeo på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "Western-Slope-facebook": {
@@ -7185,12 +7310,12 @@
                 "description": "Kartläggare och OpenStreetMap-användare runt Grand Junction, Colorado"
             },
             "Western-Slope-meetup": {
-                "name": "Western Slope (Colorado) OSM-Meetup",
+                "name": "Western Slope (Colorado) på Meetup",
                 "description": "Kartläggare och OpenStreetMap-användare kring Grand Junction, Colorado",
                 "extendedDescription": "Målet med denna grupp är att introducera OpenStreetMap för allmänheten, utveckla en gemenskap av kartläggare, skapa den bästa möjliga geodatan med alla till buds stående medel och därefter få ut denna data i samhället. Föreställ dig korrekta vägskyltar! Föreställ dig ytterligare förbättring av cykelvägar! Föreställ dig precis vad som helst, det är det som är glädjen med OpenStreetMap!"
             },
             "Maptime-Australia-Slack": {
-                "name": "Maptime Australien Slack",
+                "name": "Maptime Australien på Slack",
                 "description": "Registrera dig på {signupUrl}"
             },
             "talk-au": {
@@ -7198,17 +7323,17 @@
                 "description": "Plats där australienska användare kan chatta"
             },
             "OSM-AR-facebook": {
-                "name": "OpenStreetMap Argentina Facebook",
+                "name": "OpenStreetMap Argentina på Facebook",
                 "description": "Anslut till gemenskapen på OpenStreetMap Argentina via Facebook",
                 "extendedDescription": "Nyheter från den lokala gemenskapen"
             },
             "OSM-AR-forum": {
-                "name": "OpenStreetMap Argentinska webbforum",
+                "name": "Webbforum för OpenStreetMap Argentinska",
                 "description": "Anslut till OpenStreetMap argentinska webbforum",
                 "extendedDescription": "Ideal för långa eller viktiga diskussioner. Lång svarstid."
             },
             "OSM-AR-irc": {
-                "name": "OpenStreetMap Argentina IRC",
+                "name": "IRC för OpenStreetMap Argentina",
                 "description": "Anslut #osm-ar på irc.oftc.net (port 6667)",
                 "extendedDescription": "Du kan stöta på den mest nördiga användaren i gemenskapen."
             },
@@ -7217,21 +7342,28 @@
                 "description": "Historisk e-postlista. Knappt använd idag."
             },
             "OSM-AR-telegram": {
-                "name": "OpenStreetMap Argentina Telegram",
+                "name": "Telegram för OpenStreetMap Argentina",
                 "description": "Anslut till gemenskapen på OpenStreetMap Argentina via Telegram",
                 "extendedDescription": "Den mest aktiva kanalen i gemenskapen, ideal för att chatta och få svar på dina frågor snabbt. Alla är välkomna!"
             },
             "OSM-AR-twitter": {
-                "name": "OpenStreetMap Argentina Twitter",
+                "name": "OpenStreetMap Argentina på Twitter",
                 "description": "Följ oss på Twitter på {url}",
                 "extendedDescription": "Nyheter från den lokala gemenskapen och OpenStreetMap i allmänhet."
             },
             "OSM-BO-mailinglist": {
-                "name": "E-postlistan Talk-bo"
+                "name": "E-postlistan Talk-bo",
+                "description": "Talk-bo är den officiella e-postlistan för den bolivianska OSM-gemenskapen",
+                "extendedDescription": "Kartlägger i Bolivia? Har du frågor, vill komma i kontakt med gemenskapen här? Gå med på {url}. Alla är välkomna!"
             },
             "Bahia-telegram": {
-                "name": "OpenStreetMap Bahia Telegram-grupp",
+                "name": "Telegram för OpenStreetMap Bahia",
                 "description": "Anslut till gemenskapen på OpenStreetMap Bahia via Telegram",
+                "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
+            },
+            "DF-telegram": {
+                "name": "Telegram för OpenStreetMap Brasília",
+                "description": "Anslut till gemenskapen på OpenStreetMap Brasília via Telegram",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
             },
             "OSM-br-mailinglist": {
@@ -7239,16 +7371,16 @@
                 "description": "En e-postlista för att diskutera OpenStreetMap i Brasilien"
             },
             "OSM-br-telegram": {
-                "name": "OpenStreetMap Brasilien Telegram",
+                "name": "Telegram för OpenStreetMap Brasilien",
                 "description": "Anslut till gemenskapen på OpenStreetMap Brasilien via Telegram",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
             },
             "OSM-br-twitter": {
-                "name": "OpenStreetMap Brasilien Twitter",
+                "name": "OpenStreetMap Brasilien på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "OSM-CL-facebook": {
-                "name": "OpenStreetMap Chile Facebook",
+                "name": "OpenStreetMap Chile på Facebook",
                 "description": "Anslut till gemenskapen i OpenStreetMap Child via Facebook",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
             },
@@ -7257,12 +7389,12 @@
                 "description": "En e-postlista för att diskutera OpenStreetMap i Chile"
             },
             "OSM-CL-telegram": {
-                "name": "OpenStreetMap Chile Telegram",
+                "name": "Telegram för OpenStreetMap Chile",
                 "description": "Anslut till gemenskapen i OpenStreetMap Child via Telegram",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
             },
             "OSM-CL-twitter": {
-                "name": "OpenStreetMap Chile Twitter",
+                "name": "OpenStreetMap Chile på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "Maptime-Bogota": {
@@ -7271,7 +7403,7 @@
                 "extendedDescription": "Lär dig att samla in data på fältet och digitalisera det i OpenStreetMap. Det finns inga krav på förkunskaper! Du behöver bara lusten att delta, lära dig och ha kul."
             },
             "OSM-CO-facebook": {
-                "name": "OpenStreetMap Colombia Facebook",
+                "name": "OpenStreetMap Colombia på Facebook",
                 "description": "Anslut till gemenskapen i OpenStreetMap Columbia via Facebook",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap. Alla är välkomna!"
             },
@@ -7279,32 +7411,44 @@
                 "name": "E-postlistan Talk-co",
                 "description": "En e-postlista för att diskutera OpenStreetMap i Colombia"
             },
+            "OSM-CO-telegram": {
+                "name": "OSM Colombia på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Colombia "
+            },
             "OSM-CO-twitter": {
-                "name": "OpenStreetMap Colombia Twitter",
+                "name": "OpenStreetMap Colombia på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "OSM-CO": {
                 "name": "OpenStreetMap Colombia",
                 "description": "Nyheter om OpenStreetMap Colombia-gemenskapen och OSMCo Foundation"
             },
+            "OSM-EC-telegram": {
+                "name": "OSM Ecuador på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Ecuador"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paraguay på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Paraguay"
+            },
             "OSM-PE-facebook": {
-                "name": "OpenStreetMap Peru Facebook",
+                "name": "OpenStreetMap Peru på Facebook",
                 "description": "Anslut till gemenskapen i OpenStreetMap Peru via Facebook"
             },
             "OSM-PE-mailinglist": {
                 "name": "E-postlistan Talk-pe",
-                "description": "Den officiella e-postlistan för OpenStreetMap Peru-gemenskapen"
+                "description": "Den officiella e-postlistan för OpenStreetMap-gemenskapen i Peru"
             },
             "OSM-PE-matrix": {
-                "name": "OpenStreetMap Peru Matrix-chat",
+                "name": "Matrix-chat för OpenStreetMap Peru",
                 "description": "Chatta med andra medlemmar i OpenStreetMap Peru-gemenskapen via Matrix."
             },
             "OSM-PE-telegram": {
-                "name": "OpenStreetMap Peru Telegram",
+                "name": "Telegram för OpenStreetMap Peru",
                 "description": "Anslut till gemenskapen i OpenStreetMap Peru via Telegram"
             },
             "OSM-PE-twitter": {
-                "name": "OpenStreetMap Peru Twitter",
+                "name": "OpenStreetMap Peru på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "OSM-PE": {
@@ -7325,14 +7469,17 @@
                 "description": "/r/openstreetmap/ är ett bra ställe att lära sig mer om OpenStreetMap.  Fråga om vad som helst!"
             },
             "OSM-Twitter": {
-                "name": "OpenStreetMap Twitter",
+                "name": "OpenStreetMap på Twitter",
                 "description": "Följ oss på Twitter på {url}"
             },
             "OSMF": {
                 "name": "OpenStreetMap Foundation",
+                "description": "OSMF är en ideell organisation baserat i Storbritannien som stöttar OpenStreetMap-projekt.",
+                "extendedDescription": "OSMF stöder OpenStreetMap genom insamling, underhåll av servrarna som driver OSM, organiserar den årliga State of the Map-konferensen och samordnar de volontärer som håller OSM igång. Du kan visa ditt stöd och göra din röst hörd för OpenStreetMap genom att bli medlem i OSMF här: {signupUrl}",
                 "events": {
                     "sotm2018": {
                         "name": "State of the Map 2018",
+                        "description": "Delta på den 3 dagar långa årliga världsomspännande OpenStreetMap-konferensen i Milano, Italien, vilken sammanför alla i gemenskapen för att umgås, dela med sig och lära.",
                         "where": "Milan, Italien"
                     }
                 }

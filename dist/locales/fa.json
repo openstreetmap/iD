@@ -2,7 +2,7 @@
     "fa": {
         "icons": {
             "information": "اطلاعات",
-            "remove": "پاک کردن",
+            "remove": "پاک‌کردن",
             "undo": "بازگردانی"
         },
         "modes": {
@@ -23,13 +23,13 @@
             },
             "browse": {
                 "title": "مرور",
-                "description": "مرور و زوم نقشه."
+                "description": "زوم کنید و نقشه را تکان دهید."
             },
             "draw_area": {
-                "tail": "برای افزودن گره به منطقه تان کلیک کنید. برای پایان دادن به منطقه روی اولین گره کلیک کنید."
+                "tail": "برای افزودن گره به ناحیه کلیک کنید. برای بستن ناحیه روی اولین گره کلیک کنید."
             },
             "draw_line": {
-                "tail": "برای افزودن گره های بیشتر به خط کلیک کنید. برای اتصال به سایر خطوط روی آنها کلیک کنید، و برای پایان دادن به خط دو بار کلیک کنید."
+                "tail": "برای افزودن گره‌های بیشتر به خط کلیک کنید. برای اتصال به سایر خطوط روی آن‌ها کلیک کنید، و برای پایان دادن به خط دو بار کلیک کنید."
             },
             "drag_node": {
                 "connected_to_hidden": "این عنصر به دلیل متصل بودن به یک عنصر مخفی قابل تغییر نیست. "
@@ -53,10 +53,10 @@
                 "key": "A",
                 "title": "ادامه",
                 "description": "ادامه این خط.",
-                "not_eligible": "خط قابل ادامه دادنی اینجا نیست.",
+                "not_eligible": "اینجا خطی قابل ادامه‌دادن نیست.",
                 "multiple": "اینجا چندین خط قابل ادامه دادن است. برای انتخاب یک خط، کلید Shift را فشار دهید و روی آن کلیک کنید تا انتخاب شود.",
                 "annotation": {
-                    "line": "نقطه‌ای ادامه داده شد.",
+                    "line": "خطی ادامه داده شد.",
                     "area": "محدوده‌ای ادامه داده شد."
                 }
             },
@@ -168,7 +168,6 @@
                 "annotation": "{n} عنصر ادغام شده.",
                 "not_eligible": "این عناصر قابل ترکیب نیستند.",
                 "not_adjacent": "امکان ادغام این وبژگی‌ها وجود ندارد زیرا کانکشن آنها قطع است.",
-                "restriction": "امکان ادغام این عناصر وجود ندارد زیرا حداقل یکی از آن‌ها جزو رابطه \"{relation}\" می‌باشد.",
                 "incomplete_relation": "امکان ادغام این عناصر وجود ندارد زیرا حداقل یکی از آن‌ها کامل دانلود نشده است.",
                 "conflicting_tags": "امکان ادغام این عناصر وجود ندارد زیرا بعضی از آن‌ها دارای برچسب‌هایی با مقادیر مخالف یکدیگر هستند."
             },
@@ -474,7 +473,7 @@
                 "tooltip": "برای پیدا کردن محل منطقه نشان داده شده، یک نقشه کوچک نمایی نشان بده",
                 "key": "/"
             },
-            "fix_misalignment": "تنظیم فاصله تصویری",
+            "fix_misalignment": "تنظیم جابه‌جایی تصویر",
             "offset": "برای تنظیم افست تصاویر، محدوده خاکستری زیر را بکشید یا مقادیر را به متر در کادر زیر وارد کنید."
         },
         "map_data": {
@@ -1714,7 +1713,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "تلفن",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2393,7 +2391,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تبدیل ارز / صرافی'، با کاما جدا می‌شوند>"
                 },
                 "amenity/bus_station": {
-                    "name": "ایستگاه اتوبوس / ترمینال"
+                    "name": "پایانه اتوبوس / ترمینال"
                 },
                 "amenity/cafe": {
                     "name": "کافه",
@@ -2767,6 +2765,9 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "terms": "<translate with synonyms or related terms for 'Feminine Hygiene Vending Machine', separated by commas>"
                 },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "دستگاه فروش بستنی"
+                },
                 "amenity/vending_machine/news_papers": {
                     "name": "دستگاه خود فروش روزنامه"
                 },
@@ -2866,6 +2867,7 @@
                     "terms": "<translate with synonyms or related terms for 'Tourist Train', separated by commas>"
                 },
                 "attraction/water_slide": {
+                    "name": "سرسره آبی",
                     "terms": "<translate with synonyms or related terms for 'Water Slide', separated by commas>"
                 },
                 "barrier": {
@@ -4548,6 +4550,9 @@
                     "name": "روستا",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'روستا'، با کاما جدا می‌شوند>"
                 },
+                "playground/slide": {
+                    "name": "سرسره"
+                },
                 "point": {
                     "name": "نقطه",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نقطه'، با کاما جدا می‌شوند>"
@@ -4589,6 +4594,12 @@
                     "name": "مبدل برق",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کاهنده جریان برق'، با کاما جدا می‌شوند>"
                 },
+                "public_transport/linear_platform_bus": {
+                    "name": "ایستگاه اتوبوس"
+                },
+                "public_transport/station_monorail": {
+                    "name": "ایستگاه مونوریل"
+                },
                 "railway": {
                     "name": "راه آهن"
                 },
@@ -4613,7 +4624,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده گذرنده از راه‌آهن'، با کاما جدا می‌شوند>"
                 },
                 "railway/monorail": {
-                    "name": "ترن هوایی",
+                    "name": "مونوریل",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مونوریل'، با کاما جدا می‌شوند>"
                 },
                 "railway/narrow_gauge": {
@@ -5400,143 +5411,149 @@
         },
         "imagery": {
             "Bing": {
-                "description": "نقشه های ماهواره ای aerial",
-                "name": "نقشه های Bing"
+                "description": "تصاویر هوایی و ماهواره‌ای",
+                "name": "تصاویر هوایی بینگ"
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "description": "نقشه های ماهواره ای Premium DigitalGlobe ",
-                "name": "نقشه های DigitalGlobe Premium"
+                "description": "تصاویر ماهواره‌ای DigitalGlobe Premium",
+                "name": "تصوایر DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "name": "فهرست DigitalGlobe Premium"
+                "description": "محدودهٔ تصاویر و تاریخ عکس‌برداری. برچسب‌ها در زوم ۱۳ و بالاتر ظاهر می‌شود.",
+                "name": "تصاویر DigitalGlobe Premium Vintage"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "description": "نقشه های ماهواره ای استاندارد DigitalGlobe Premium",
-                "name": "نقشه های استاندارد DigitalGlobe Premium"
+                "description": "تصاویر ماهواره‌ای DigitalGlobe Standard",
+                "name": "تصاویر DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "name": "فهرست DigitalGlobe Premium"
+                "description": "محدودهٔ تصاویر و تاریخ عکس‌برداری. برچسب‌ها در زوم ۱۳ و بالاتر ظاهر می‌شود.",
+                "name": "تصاویر DigitalGlobe Standard Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "description": "نقشه های Esri world ",
-                "name": "نقشه های Esri world "
+                "description": "تصاویر جهانی Esri",
+                "name": "تصاویر جهانی Esri"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
-                    "text": "فید بک"
+                    "text": "قوانین و بازخورد"
                 },
-                "description": "تصاویر بایگانی Esri که ممکن است واضح تر و دقیق تر از لایه پیش فرض باشد.",
-                "name": "Esri World Imagery (Clarity) Beta"
+                "description": "تصاویر بایگانی Esri که شاید واضح‌تر و دقیق‌تر از لایهٔ پیشفرض باشد.",
+                "name": "تصاویر جهانی Esri (واضح) - آزمایشی"
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "©همکاران OSM و CC-BY-SA"
+                    "text": "© مشارکت‌کنندگان OpenStreetMap،‏ CC-BY-SA"
                 },
-                "description": "لایه پیش فرض OSM",
-                "name": "نقشه های OSM ( استاندارد)"
+                "description": "لایهٔ پیشفرض OSM",
+                "name": "نقشه‌های OSM (استاندارد)"
             },
             "Mapbox": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "description": "نقشه های ماهواره ای aerial",
-                "name": "نقشه های ماهواره ای Mapbox"
+                "description": "تصاویر هوایی و ماهواره‌ای",
+                "name": "ماهوارهٔ Mapbox"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : آدرسها"
+                "name": "بازبین OSM: نشانی‌ها"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : ژئومتری"
+                "name": "بازبین OSM: هندسی"
             },
             "OSM_Inspector-Highways": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : اتوبانها"
+                "name": "بازبین OSM: راه‌ها"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : محدوده"
+                "name": "بازبین OSM: محوطه"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : مکانها"
+                "name": "بازبین OSM: مکان‌ها"
             },
             "OSM_Inspector-Routing": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : خطوط"
+                "name": "بازبین OSM: مسیریابی"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
-                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                    "text": "© شرکت Geofabrik GmbH، مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "بازرسی OSM : برچسبها"
+                "name": "بازبین OSM: تگ‌گذاری"
             },
             "US-TIGER-Roads-2012": {
                 "name": "جاده های TIGER 2012"
             },
             "US-TIGER-Roads-2014": {
-                "description": "از زوم +16 به بعد اطلاعات مالکیت ملکی در آمریکا دیده میشود.از زومهای کمتر فقط تغییراتی که در OSM مربوط به سال 2006 ثبت شده است قابل دیدن است",
+                "description": "در زوم ۱۶‎+‎، اطلاعات مالکیت عمومی از سرشماری آمریکاست. در زوم‌های کمتر، فقط تغییراتی که از سال ۲۰۰۶ ایجاد شده منهای تغییراتی که قبلاً در OSM آمده",
                 "name": "جاده های TIGER 2014"
             },
             "US-TIGER-Roads-2017": {
-                "description": "زود = داده های دولتی سرشماری آمریکا. قرمز : داده های بدون منبع در OSM",
+                "description": "زرد = داده‌های دولتی سرشماری آمریکا. قرمز: داده‌هایی که در OSM پیدا نشد",
                 "name": "جاده های TIGER 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "راه: سبزرنگ = دسته‌بندی‌نشده. قهوه‌ای‌رنگ = رد چرخ. سطح: شن‌ریزه = قهوه‌ای روشن توپر، آسفالت = سیاه، روسازی‌شده = خاکستری، زمین = سفید، بتن = آبی، چمن = سبز. فصلی = سفید",
+                "name": "رولایهٔ راه‌های جنگلی آمریکا"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org، مشارکت‌کنندگان OpenStreetMap،‏ CC by-SA 3.0"
                 },
                 "name": "مسیرهای مشخص شده: دوچرخه سواری"
             },
             "Waymarked_Trails-Hiking": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org، مشارکت‌کنندگان OpenStreetMap،‏ CC by-SA 3.0"
                 },
                 "name": "مسیرهای مشخص شده: پیاده روی"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org، مشارکت‌کنندگان OpenStreetMap،‏ CC by-SA 3.0"
                 },
                 "name": "مسیرهای مشخص شده: MTB"
             },
             "Waymarked_Trails-Skating": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org، مشارکت‌کنندگان OpenStreetMap،‏ CC by-SA 3.0"
                 },
                 "name": "مسیرهای مشخص شده: اسکیت"
             },
             "Waymarked_Trails-Winter_Sports": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org، مشارکت‌کنندگان OpenStreetMap،‏ CC by-SA 3.0"
                 },
                 "name": "مسیرهای مشخص شده: ورزشهای زمستانی"
             },
@@ -5544,78 +5561,81 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "نقشه اصلی اتریش، بر اساس اطلاعات دولت می‌باشد.",
+                "description": "نقشهٔ پایهٔ اتریش، بر اساس اطلاعات دولت است.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
+                "description": "لایهٔ Orthofoto را basemap.at فراهم کرده است. «جایگزین» تصاویر geoimage.at.",
                 "name": "basemap.at Orthofoto"
             },
             "hike_n_bike": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "© مشارکت‌کنندگان OpenStreetMap "
                 },
-                "name": "پیاده روی و دوچرخه سواری"
+                "name": "پیاده‌روی و دوچرخه‌سواری"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
-                    "text": "ارسال نظرات"
+                    "text": "قوانین و بازخورد"
                 },
-                "description": "برای کمک به شما ویژگی های اصلی نمایش میدهد.",
+                "description": "برای کمک به شما ویژگی‌های اصلی را نمایش می‌دهد.",
                 "name": "لایه یاب"
             },
             "openpt_map": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                    "text": "© مشارکت‌کنندگان OpenStreetMap،‏ CC-BY-SA"
                 },
-                "name": "OpenPT Map (overlay)"
+                "name": "نقشهٔ OpenPT (رولایه)"
             },
             "osm-gps": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "© مشارکت‌کنندگان OpenStreetMap "
                 },
-                "description": "آپلود GPSهای عمومی در OSM",
-                "name": "ظبط مسیر در OSM"
+                "description": "مسیرهای GPS عمومی آپلودشده در OSM.",
+                "name": "مسیرهای GPS متعلق به OSM"
             },
             "osm-mapnik-black_and_white": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                    "text": "© مشارکت‌کنندگان OSM،‏ CC-BY-SA"
                 },
-                "name": "OSM ( استاندارد سیاه و سفید )"
+                "name": "OSM (سیاه و سفید استاندارد)"
             },
             "osm-mapnik-german_style": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                    "text": "© مشارکت‌کنندگان OpenStreetMap،‏ CC-BY-SA"
                 },
-                "name": "SOM (نمای آلمانی)"
+                "name": "OSM (سبک آلمانی)"
             },
             "qa_no_address": {
                 "attribution": {
-                    "text": "Simon Poole, Data ©OpenStreetMap contributors"
+                    "text": "Simon Poole، داده‌ها © مشارکت‌کنندگان OpenStreetMap"
                 },
                 "name": "س/ج بدون آدرس"
             },
             "skobbler": {
                 "attribution": {
-                    "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
+                    "text": "© کاشی‌ها: skobbler  داده‌های نقشه: مشارکت‌کنندگان OpenStreetMap "
                 },
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
-                "name": "لجن زار"
+                "attribution": {
+                    "text": "کاشی‌های نقشه از Stamen Design، تحت مجوز CC BY 3.0. داده‌ها از OpenStreetMap، تحت مجوز ODbL"
+                },
+                "name": "Stamen Terrain"
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                    "text": "نقشه‌ها © Thunderforest،‏ داده‌ها © مشارکت‌کنندگان OpenStreetMap"
                 },
                 "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                    "text": "نقشه‌ها © Thunderforest،‏ داده‌ها © مشارکت‌کنندگان OpenStreetMap "
                 },
                 "name": "Thunderforest Landscape"
             }

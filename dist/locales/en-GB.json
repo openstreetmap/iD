@@ -170,7 +170,6 @@
                 "annotation": "Merged {n} features.",
                 "not_eligible": "These features can't be merged.",
                 "not_adjacent": "These features can't be merged because their endpoints aren't connected.",
-                "restriction": "These features can't be merged because at least one is a member of a \"{relation}\" relation.",
                 "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded.",
                 "conflicting_tags": "These features can't be merged because some of their tags have conflicting values."
             },
@@ -2177,7 +2176,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telephone",
                     "placeholder": "+44 1632 961234"
                 },
                 "piste/difficulty": {

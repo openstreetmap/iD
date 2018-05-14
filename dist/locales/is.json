@@ -168,7 +168,6 @@
                 "annotation": "Sameinaði {n} fitjur.",
                 "not_eligible": "Það er ekki hægt að sameina þessa hluti.",
                 "not_adjacent": "Það er ekki hægt að sameina þessi atriði því endapunktar þeirra eru ekki tengdir.",
-                "restriction": "Það er ekki hægt að sameina þessi atriði því a.m.k. eitt þeirra er hluti af \"{relation}\" venslum.",
                 "incomplete_relation": "Það er ekki hægt að sameina þessi atriði því ekki er búið að hlaða inn að fullu a.m.k. einu þeirra.",
                 "conflicting_tags": "Það er ekki hægt að sameina þessi atriði því sum merki þeirra eru ekki með samstæð gildi."
             },
@@ -2223,7 +2222,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Sími",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

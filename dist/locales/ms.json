@@ -160,7 +160,6 @@
                 "annotation": "{n} gambaran telah digabung.",
                 "not_eligible": "Gambaran-gambaran ini tidak dapat digabungkan.",
                 "not_adjacent": "Ciri-ciri ini tidak dapat digabungkan kerana titik hujung mereka tidak bersambung.",
-                "restriction": "Ciri-ciri ini tidak dapat digabungkan kerana sekurang-kurangnya satu adalah ahli hubungan \"{relation}\".",
                 "incomplete_relation": "Ciri-ciri ini tidak dapat digabungkan kerana sekurang-kurangnya satu belum sepenuhnya dimuat turun.",
                 "conflicting_tags": "Ciri-ciri ini tidak dapat digabungkan kerana beberapa penanda mereka mempunyai nilai yang bercanggah."
             },
@@ -1619,7 +1618,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

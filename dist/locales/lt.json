@@ -160,7 +160,6 @@
                 "annotation": "Sulieti {n} objektai.",
                 "not_eligible": "Šie geoobjektai negali būti sulieti.",
                 "not_adjacent": "Šių objektų negalima sulieti, nes jų pabaigos taškai nėra sujungti.",
-                "restriction": "Šių objektų negalima sulieti, nes bent vienas iš jų yra ryšyje „{relation}“,",
                 "incomplete_relation": "Šie objektai negali būti sujungti, nes ne visi pilnai atsiųsti.",
                 "conflicting_tags": "Šių objektų negalima sulieti, nes kai kurios iš jų žymų turi nesuderinamas reikšmes."
             },
@@ -1313,7 +1312,6 @@
                     "label": "Mokėjimo tipai"
                 },
                 "phone": {
-                    "label": "Telefonas",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

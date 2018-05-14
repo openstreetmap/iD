@@ -1332,7 +1332,6 @@
                     "label": "Tip"
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

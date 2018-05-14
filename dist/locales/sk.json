@@ -160,7 +160,6 @@
                 "annotation": "Zlúčiť {n} objektov.",
                 "not_eligible": "Tieto objekty nemôžno zlúčiť.",
                 "not_adjacent": "Tieto objekty nemôžno zlúčiť, pretože ich koncové body nie sú spojené.",
-                "restriction": "Tieto objekty nemôžno zlúčiť, pretože aspoň jeden je členom relácie \"{relation}\".",
                 "incomplete_relation": "Tieto objekty nemôžno zlúčiť, pretože aspoň jeden z nich nebol úplne stiahnutý.",
                 "conflicting_tags": "Tieto objekty nemôžno zlúčiť, pretože niktoré ich označenia majú odporujúce si hodnoty."
             },
@@ -1814,7 +1813,6 @@
                     "label": "Typy platieb"
                 },
                 "phone": {
-                    "label": "Telefón",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

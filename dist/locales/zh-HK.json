@@ -163,7 +163,6 @@
                 "annotation": "合併{n}個特徵。",
                 "not_eligible": "不能合併這些特徵。",
                 "not_adjacent": "這些特徵不能合併因為它們的端點不是連接在一起。",
-                "restriction": "這些特徵不能合併因為最少一個是\"{relation}\" 關係的構件。",
                 "incomplete_relation": "這些特徵不能合併因為最少一個尚未完全下載。",
                 "conflicting_tags": "這些特徵不能合併因為當中一些標籤的數值有衝突。"
             },
@@ -1980,7 +1979,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "電話",
                     "placeholder": "+852 12345678"
                 },
                 "piste/difficulty": {

@@ -14,7 +14,7 @@
             "add_line": {
                 "title": "Ligne",
                 "description": "Ajouter des routes, des rues, des chemins, des canaux ou d'autres lignes à la carte.",
-                "tail": "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un chemin."
+                "tail": "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un itinéraire."
             },
             "add_point": {
                 "title": "Point",
@@ -170,7 +170,8 @@
                 "annotation": "fusion de {n} éléments.",
                 "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
                 "not_adjacent": "Ces éléments ne peuvent être fusionnés car leurs extrémités ne sont pas connectés.",
-                "restriction": "Ces éléments ne peuvent être fusionnés car au moins l'un d'entre eux est membre de la relation \"{relation}\".",
+                "restriction": "Ces éléments ne peuvent être fusionnés car cela endommagerait une relation \"{relation}\".",
+                "relation": "Ces éléments ne peuvent être fusionnés car leurs rôles sont incompatibles dans une relation.",
                 "incomplete_relation": "Ces éléments ne peuvent pas être fusionnés parce qu'au moins l'un d'entre eux n'a pas été complètement téléchargé.",
                 "conflicting_tags": "Ces éléments ne peuvent être fusionnés car certains de leurs tags ont des valeurs conflictuelles."
             },
@@ -804,6 +805,7 @@
             },
             "lines": {
                 "title": "Lignes",
+                "intro": "Les *lignes* sont utilisées pour représenter des éléments comme des routes, des voies ferrées ou des rivières. Les lignes doivent être dessinées au centre de l'élément qu'elles représentent.",
                 "add_line_h": "Ajouter des Lignes",
                 "add_line": "Pour ajouter une ligne, cliquez sur le bouton **Ligne** {line} de la barre d'outils au-dessus de la carte, ou pressez la touche `2`. Cela transformera le curseur de la souris en une croix.",
                 "add_line_draw": "Puis, positionnez le curseur à l'endroit où doit commencer la ligne et faites un clic gauche {leftclick} ou pressez la barre d'espace `Space` pour placer des nœuds le long de la ligne. Continuez à placer des nœuds en cliquant ou en pressant la barre d'espace `Space`. Lorsque vous tracez la ligne, vous pouvez zoomer ou déplacer la carte afin d'ajouter davantage de détails.",
@@ -814,11 +816,15 @@
                 "connect_line_h": "Connecter des lignes",
                 "connect_line": "Il est important que les routes soient connectées correctement pour la carte, et essentiel pour la navigation.",
                 "connect_line_display": "Les connexions entre plusieurs routes sont matérialisées avec des cercles gris. Les points d'une ligne qui ne sont connectés à rien apparaissent comme des cercles blancs, plus grands.",
+                "connect_line_drag": "Pour connecter une ligne à un autre élément, faites glisser l'un des nœuds de la ligne vers cet élément jusqu'à ce qu'ils s'accrochent ensemble. Astuce: vous pouvez maintenir la touche `{alt}` enfoncée pour empêcher les nœuds de se connecter à d'autres éléments.",
+                "connect_line_tag": "Si le croisement a un feu de signalisation ou un passage pour piétons, vous pouvez l'ajouter en sélectionnant le nœud de connexion et en utilisant l'éditeur d'élément pour choisir le type d'élément correct.",
                 "disconnect_line_h": "Séparer des lignes",
                 "disconnect_line_command": "Pour déconnecter une route d'un autre élément, faites un clic droit {rightclick} sur le nœud de connexion et sélectionnez la commande **Déconnecter** {disconnect} dans le menu d'édition.",
                 "move_line_h": "Déplacer des Lignes",
                 "move_line_command": "Pour déplacer une ligne entière, faites un clic droit {rightclick} sur cette ligne et sélectionnez la commande **Déplacer**  {move}  dans le menu d'édition. Puis déplacez la souris, et faites un clic gauche {leftclick} à l'endroit où vous souhaitez laisser la ligne..",
+                "move_line_connected": "Les lignes qui sont connectées à d'autres éléments resteront connectées lorsque vous la déplacerez à un autre endroit. iD peut vous empêcher de déplacer une ligne à travers une autre ligne connectées.",
                 "delete_line_h": "Supprimer des lignes",
+                "delete_line": "Si une ligne est entièrement erronée, comme une route qui n'existe pas, vous pouvez l'effacer. Faites attention en supprimant des éléments car l'imagerie que vous utilisez n'est pas forcément à jour, et une route nouvellement construite peut être manquante sur des images trop anciennes.",
                 "delete_line_command": "Pour supprimer une ligne, faites un clic droit {rightclick} sur cette ligne pour la sélectionner et voir le menu d'édition, puis utilisez la commande **Supprimer** {delete}."
             },
             "areas": {
@@ -833,7 +839,10 @@
                 "square_area_h": "Donner une forme orthogonale",
                 "square_area_command": "De nombreux éléments comme les bâtiments ont les coins carrés. Pour rendre carrés les coins d'un polygone, faites un clic droit {rightclick} sur un bord du polygone et sélectionnez la commande **Carré** {orthogonalize} du menu d'édition.",
                 "modify_area_h": "Modifier des polygones",
+                "modify_area_dragnode": "Souvent, vous verrez que les polygones ne sont pas formés correctement, par exemple un bâtiment qui ne correspond pas à l'imagerie utilisée en fond. Pour ajuster la forme d'un polygone, faites d'abord un clic gauche {leftclick} pour le sélectionner. Tous les nœuds du polygone apparaîtront comme des petits cercles. Vous pourrez alors les déplacer.",
+                "modify_area_addnode": "Vous pouvez aussi créer de nouveaux nœuds le long d'un polygone soit en double-cliquant {leftclick}**x2** sur le bord de ce polygone, soit en déplaçant les petits triangles situés entre deux nœuds existants.",
                 "delete_area_h": "Supprimer des polygones",
+                "delete_area": "Si un polygone est entièrement erroné, comme un bâtiment qui n'existe pas, vous pouvez l'effacer. Faites attention en supprimant des éléments car l'imagerie que vous utilisez n'est pas forcément à jour, et un bâtiment nouvellement construit peut être manquant sur des images trop anciennes.",
                 "delete_area_command": "Pour supprimer un polygone, faites un clic droit {rightclick} sur ce polygone pour le sélectionner et voir le menu d'édition, puis utilisez la commande **Supprimer** {delete}."
             },
             "relations": {
@@ -844,25 +853,45 @@
                 "edit_relation_add": "Pour ajouter un élément à une relation, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section \"Toutes les relations\" de l'éditeur d'éléments. Vous pouvez choisir la relation dans une liste contenant les relations présentes aux environs, ou bien en créer une nouvelle avec l'option \"Nouvelle relation...\".",
                 "edit_relation_delete": "Vous pouvez également cliquer sur le bouton **Supprimer** {delete}  pour supprimer un élément d'une relation. Si vous supprimez tous les éléments d'une relation, celle-ci sera automatiquement supprimée.",
                 "maintain_relation_h": "Maintenir des Relations",
-                "maintain_relation": "La plupart du temps, iD maintient automatiquement les relations lorsque vous éditez.\nVous devez toutefois faire attention quand vous remplacez des éléments qui sont membres de relations. Par exemple, si vous supprimez la section d'une route et que vous en créez une nouvelle pour la remplacer, vous devez impérativement ajouter la nouvelle section aux mêmes relations que l'ancienne (chemins, interdictions de tourner, etc...).",
+                "maintain_relation": "La plupart du temps, iD maintient automatiquement les relations lorsque vous éditez.\nVous devez toutefois faire attention quand vous remplacez des éléments qui sont membres de relations. Par exemple, si vous supprimez la section d'une route et que vous en créez une nouvelle pour la remplacer, vous devez impérativement ajouter la nouvelle section aux mêmes relations que l'ancienne (itinéraires, interdictions de tourner, etc...).",
                 "relation_types_h": "Types de Relation",
                 "multipolygon_h": "Multipolygones",
+                "multipolygon": "Une relation *multipolygone* est un groupe d'un ou plusieurs éléments *extérieurs* et d'un ou plusieurs éléments intérieurs. Les éléments extérieurs définissent les bords extérieurs du multipolygone, et les éléments intérieurs définissent les sous-polygones ou les trous à l'intérieur du multipolygone.",
+                "multipolygon_create": "Pour créer un multipolygone, par exemple un bâtiment avec un trou au milieu, dessinez le bord externe comme une aire et le bord intérieur comme une ligne ou un autre type d'aire. Ensuite, `{shift}`+{leftclick} cliquez-gauche pour sélectionner les deux éléments, {rightclick} cliquez-droit pour ouvrir le menu d'édition et sélectionnez la commande {merge} **Fusionner**.",
+                "multipolygon_merge": "La fusion de plusieurs lignes ou polygones créera une nouvelle relation multipolygone avec comme membres tous les polygones sélectionnés. iD choisira automatiquement les rôles intérieur et extérieur, en fonction des éléments contenus à l'intérieur d'autres éléments.",
                 "turn_restriction_h": "Interdictions de tourner",
-                "route_h": "Chemins",
-                "boundary_h": "Frontières"
+                "turn_restriction": "Une relation *restriction de tourner* est un groupe formé de plusieurs segments de routes à une intersection. Elle comporte une route *depuis*, un nœud ou des routes *via*, et une route *vers*.",
+                "turn_restriction_field": "Pour éditer les restrictions de tourner, sélectionnez un nœud où se croisent au moins deux routes. L'éditeur d'élément affichera alors un champ spécial \"Interdictions de tourner\" contenant un modèle de l'intersection.",
+                "turn_restriction_editing": "Dans le champ \"restrictions de tourner\", cliquez pour sélectionner une route \"depuis\", et voyez s'il est autorisé ou non de tourner sur une ou plusieurs routes \"vers\". Vous pouvez cliquer sur l'icône de direction pour basculer la position entre autorisé et interdit. iD créera automatiquement les relations et mettra à jour les rôles selon votre saisie.",
+                "route_h": "Itinéraires",
+                "route": "Une relation *itinéraire* est un groupe d'une ou plusieurs lignes formant ensemble un réseau, comme un itinéraire de bus, un itinéraire ferroviaire, ou un itinéraire routier.",
+                "route_add": "Pour ajouter un élément à une relation itinéraire, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section \"Toutes les relations\" de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle.",
+                "boundary_h": "Frontières",
+                "boundary": "Une relation *frontière* est un groupe d'une ou plusieurs lignes formant ensemble une frontière administrative.",
+                "boundary_add": "Pour ajouter un élément à une relation frontière, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section \"Toutes les relations\" de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle."
             },
             "imagery": {
                 "title": "Fond de carte",
+                "intro": "Le fond de carte qui apparaît sous les données est un élément important pour cartographier. Il peut s'agir de photos aériennes émanant de satellites, d'avions, et de drones, ou de cartes historiques scannées, ou encore de toute autre source de données libre.",
                 "sources_h": "Sources des images",
-                "offsets_h": "Ajustement du fond de carte"
+                "choosing": "Pour voir quelles sources sont disponibles pour éditer, cliquez sur le bouton **Paramètres du fond de carte** {layers} sur le côté de la carte.",
+                "sources": "Par défaut, une image satellite [Bing Maps](https://www.bing.com/maps/) est affichée en arrière-plan. Selon le lieu où vous éditez, d'autres images peuvent être disponibles. Certaines peuvent être plus récentes ou avec une meilleure résolution, si bien qu'il est utile de vérifier quelle est la meilleure image à utiliser pour cartographier.",
+                "offsets_h": "Ajustement du fond de carte",
+                "offset": "L'imagerie est parfois légèrement décalée par rapport aux données précises de la carte. Si vous constatez que de nombreuses routes ou de nombreux bâtiments sont décalés par rapport au fond de carte, c'est peut-être que l'imagerie n'est pas correctement alignée. Plutôt que de déplacer à tort les éléments de la carte, vous pouvez ajuster le fond de carte en utilisant la section \"Ajuster le décalage du fond de carte\" en bas du panneau Paramètres du fond de carte.",
+                "offset_change": "Cliquez sur les petits triangles pour ajuster finement le décalage de l'imagerie, ou maintenez enfoncé le bouton gauche de la souris et faites glisser l'image jusqu'à ce qu'elle soit correctement alignée."
             },
             "streetlevel": {
                 "title": "Photos de la rue",
-                "using_h": "Utiliser des photos de la rue."
+                "intro": "Les photos de la rue sont utiles pour cartographier la signalisation routière, les commerces, et d'autres détails que l'on ne peut pas voir sur l'imagerie aérienne. L'éditeur iD prend en charge les photos de la rue de [Mapillary](https://www.mapillary.com) et [OpenStreetCam](https://www.openstreetcam.org).",
+                "using_h": "Utiliser des photos de la rue.",
+                "using": "Pour utiliser les photos de la rue, cliquez sur le bouton **Données cartographiques** {data} sur le bord de la carte. Cela permettra d'activer ou de désactiver les surcouches photographiques disponibles.",
+                "photos": "Lorsque cela est activé, la couche photo montre une ligne entre les séquences de photo. Aux niveaux de zoom élevés, un cercle marque l'emplacement de chaque photo et aux zooms encore plus élevés, un cône indique la direction de l'appareil photo lorsque la photo a été prise.",
+                "viewer": "Lorsque vous cliquez sur l'un des emplacements de la photo, une visionneuse de photo apparaît dans le bord bas de la carte. La visionneuse contient des contrôles pour avancer et reculer dans la séquence de photos. Elle montre aussi le nom d'utilisateur de la personne qui a pris l'image, la date de capture et un lien pour voir l'image sur le site d'origine."
             },
             "gps": {
                 "title": "Traces GPS",
                 "intro": "Les traces GPS collectées sont une source précieuse de données pour OpenStreetMap. Cet éditeur accepte les fichiers de formats *.gpx*, *.geojson*, et *.kml*. Vous pouvez collecter des traces GPS à partir d'un smartphone, d'une montre connectée, ou de tout appareil muni d'une puce GPS.",
+                "survey": "Pour plus d'information sur la conduite d'étude de terrain au GPS, vous pouvez lire [Cartographier avec un smartphone, un GPS ou sur papier](http://learnosm.org/fr/mobile-mapping/).",
                 "using_h": "Utilisation des traces GPS",
                 "using": "Pour utiliser une trace GPS, faites la glisser dans l'éditeur. Si elle est reconnue, elle apparaîtra en violet sur la carte. Cliquez sur {data} **Données Carte** pour montrer, cacher ou zoomer sur la trace GPS.",
                 "tracing": "La trace GPS n'est pas envoyée à OpenStreetMap. Le meilleur moyen de l'utiliser est de dessiner sur la carte en s'en servant de modèle.",
@@ -870,9 +899,13 @@
             },
             "field": {
                 "restrictions": {
-                    "title": "Aide sur les restrictions de tourner",
+                    "title": "Aide des restrictions de tourner",
                     "about": {
-                        "title": "À propos"
+                        "title": "À propos",
+                        "about": "Ce champ vous permet d'inspecter et de modifier les restrictions de tourner. Il affiche un modèle de l'intersection sélectionnée avec les routes connectées proches.",
+                        "from_via_to": "Une restriction de tourner contient toujours: un **chemin DEPUIS**, un **chemin VERS**, et soit un **nœud VIA**, soit un ou plusieurs **chemins VIA**.",
+                        "maxdist": "Le curseur \"{distField}\" contrôle la distance jusqu'à laquelle chercher des routes connectées supplémentaires.",
+                        "maxvia": "Le curseur \"{viaField}\" ajuste le nombre de chemins via à inclure dans la recherche. (Astuce: plus c'est simple, mieux c'est)"
                     },
                     "inspecting": {
                         "title": "Inspecter",
@@ -890,11 +923,15 @@
                         "indicators": "Puis cliquez sur un symbole de direction pour le basculer entre \"autorisé\", \"interdit\", et \"uniquement\".",
                         "allow_turn": "{allowTurn} **VERS autorisé**",
                         "restrict_turn": "{restrictTurn} **VERS interdit**",
-                        "only_turn": "{onlyTurn} **Vers uniquement**"
+                        "only_turn": "{onlyTurn} **VERS uniquement**"
                     },
                     "tips": {
                         "title": "Astuces",
-                        "simple": "**Privilégiez les restrictions simples plutôt que les complexes.**"
+                        "simple": "**Privilégiez les restrictions simples plutôt que les complexes.**",
+                        "simple_example": "Par exemple, évitez de créer une restriction par un chemin via si un simple nœud via est suffisant.",
+                        "indirect": "**Certaines restrictions affichent le texte \"(indirect)\" et sont dessinées en transparence.**",
+                        "indirect_example": "Ces restrictions existent à cause d'une autre restriction proche. Par exemple, une restriction \"Obligation d'aller tout droit\" créera indirectement des restrictions \"Interdiction de tourner\" pour tous les autres chemins de l'intersection.",
+                        "indirect_noedit": "Vous ne pouvez pas éditer les restrictions indirectes. À la place, éditez la restriction directe la plus proche."
                     }
                 }
             }
@@ -1075,6 +1112,7 @@
             },
             "areas": {
                 "title": "Polygones",
+                "add_playground": "Les *Polygones* sont utilisés pour montrer les limites d'éléments comme les lacs, les bâtiments, et les zones résidentielles. {br}Ils peuvent aussi être utilisés pour cartographier finement des éléments représentés normalement par des points. **Cliquez sur le bouton Polygone {button} pour ajouter un nouveau polygone.**",
                 "start_playground": "Ajoutons une aire de jeu pour enfant sur la carte en dessinant un polygone. Les polygones sont dessinés en plaçant des *nœuds* pour définir les bords de l'élément. **Cliquez ou appuyez sur la barre d'espace pour placer le premier nœud sur l'un des angles de l'aire de jeu.**",
                 "continue_playground": "Continuez à dessiner le polygone en plaçant d'autres nœuds le long de l'aire de jeu. Vous pouvez connecter le polygone au chemin piéton existant. {br} Astuce : Vous pouvez maintenir la touche  {Alt} pour éviter aux nœuds de se connecter à d'autres éléments. ** continuez à dessiner le polygone de l'aire de jeux **",
                 "finish_playground": "Terminez le polygone avec la touche Entrée ou en cliquant une nouvelle fois sur son premier ou son dernier nœud. **Terminez le polygone d'aire de jeu.**",
@@ -2239,7 +2277,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Téléphone ",
+                    "label": "Téléphone",
                     "placeholder": "+33 1 23 45 67 89"
                 },
                 "piste/difficulty": {
@@ -3630,6 +3668,10 @@
                     "name": "Bloc de garages",
                     "terms": "garages, bloc de garages, boxes, box, hangar, parcages, parkings, voitures, parc de stationnement couvert"
                 },
+                "building/grandstand": {
+                    "name": "tribune",
+                    "terms": "<translate with synonyms or related terms for 'Grandstand', separated by commas>"
+                },
                 "building/greenhouse": {
                     "name": "Serre",
                     "terms": "serre, culture sous serre, serriculture, serre-tunnel, tunnel serre, jardin d'hiver, orangerie, verrière, véranda, structure en verre, greenhouse, glasshouse"
@@ -4815,6 +4857,10 @@
                     "name": "Cheminée",
                     "terms": "Cheminée"
                 },
+                "man_made/clearcut": {
+                    "name": "Coupe rase forestière",
+                    "terms": "<translate with synonyms or related terms for 'Clearcut Forest', separated by commas>"
+                },
                 "man_made/crane": {
                     "name": "Grue",
                     "terms": "Grue"
@@ -4860,7 +4906,7 @@
                 },
                 "man_made/petroleum_well": {
                     "name": "Puits de pétrole",
-                    "terms": "Puits de forage, derrick, chevalet de pompage, ..."
+                    "terms": "Puits de forage, derrick, chevalet de pompage"
                 },
                 "man_made/pier": {
                     "name": "Jetée",
@@ -4989,6 +5035,10 @@
                 "natural/peak": {
                     "name": "Sommet",
                     "terms": "Pic, Mont"
+                },
+                "natural/reef": {
+                    "name": "Récif",
+                    "terms": "barrière, barriere, corail, océan, haut fond, récif, recif, ocean, rocher, coralien"
                 },
                 "natural/ridge": {
                     "name": "Ligne de crête",
@@ -5431,7 +5481,7 @@
                     "terms": "<translate with synonyms or related terms for 'Aerialway Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_bus": {
-                    "name": "Quai d'arrêt de bus",
+                    "name": "Arrêt de bus",
                     "terms": "<translate with synonyms or related terms for 'Bus Stop / Platform', separated by commas>"
                 },
                 "public_transport/platform_ferry": {
@@ -6538,7 +6588,7 @@
                     "text": "Termes & commentaires"
                 },
                 "description": "Images Esri archivées qui peut être plus propre et plus précise que la couche par défaut",
-                "name": "Images Esri mondiales (clarifiées) bêta"
+                "name": "Images mondiales Esri (clarifiées) bêta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -6754,7 +6804,7 @@
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Améliorez OpenStreetMap au Bangladesh",
-                "extendedDescription": "Vous cartographiez au Bangladesh ? Vous avez des questions, vous souhaitez rencontrer la communauté ? Rejoignez-nous sur {Url}. Vous êtes tous les bienvenus !"
+                "extendedDescription": "Vous cartographiez au Bangladesh ? Vous avez des questions, souhaitez entrer en contact avec la communauté ici ? Rejoignez-nous sur {url}. Vous êtes tous les bienvenus !"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Inde - cartographie participative du voisinage",
@@ -6802,6 +6852,18 @@
             "OSM-japan-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Japon",
                 "description": "Hashtag sur Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japon",
+                "description": "Cartographes et utilisateurs d'OpenStreetMap au Japon"
+            },
+            "OSM-korea-telegram": {
+                "name": "Canal telegram d'OSM Corée",
+                "description": "Canal non officiel des contributeurs d'OpenStreetMap, des communautés et des utilisateurs en Corée pour partager et discuter."
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaisie sur Facebook",
+                "description": "Pour discuter de tout ce qui concerne OpenStreetMap!"
             },
             "OSM-MY-forum": {
                 "name": "Forum d'OpenStreetMap Malaisie",
@@ -6863,6 +6925,28 @@
                 "name": "Liste de diffusion OpenStreetMap Taïwan",
                 "description": "Talk-tw est la liste de diffusion officielle pour la communauté OSM de Taïwan"
             },
+            "OSM-TH-CNX-meetup": {
+                "name": "Rencontres OSM Chiang Mai",
+                "description": "Rencontres irrégulières de la communauté OpenStreetMap à Chiang Mai",
+                "extendedDescription": "Les membres de la communauté OpenStreetMap se rencontrent tous les quelques mois à Chiang Mai. Contactez-nous et regardez {url} pour voir quand notre prochaine rencontre est prévue"
+            },
+            "OSM-TH-forum": {
+                "name": "Forum OpenStreetMap TH",
+                "description": "Forum web d'OpenStreetMap Thaïlande"
+            },
+            "al-forum": {
+                "name": "Forum d'OSM Albanie",
+                "description": "Forum d'OpenStreetMap Albanie"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana",
+                "description": "Événements sociaux organisés autour de la cartographie — les débutants sont les bienvenus !",
+                "extendedDescription": "Maptime est un environnement d'apprentissage ouvert pour tous les niveaux et degrés de connaissance, offrant un support éducatif volontaire pour le débutant. Maptime est aussi flexible que structuré, créant un espace pour les tutoriels de cartographie, les ateliers, les projets en cours avec un but commun et des temps de travail indépendants ou communs."
+            },
+            "al-telegram": {
+                "name": "Canal Telegram d'OSM Albanie",
+                "description": "Canal Telegram d'OpenStreetMap Albanie"
+            },
             "at-forum": {
                 "name": "Forum d'OpenStreetMap Autriche",
                 "description": "Le forum officiel pour les questions sur OpenStreetMap en Autriche et autour"
@@ -6887,26 +6971,36 @@
                 "name": "OpenStreetMap Autriche",
                 "description": "La plateforme pour obtenir des informations sur OpenStreetMap en Autriche"
             },
+            "byosm": {
+                "name": "OpenStreetMap Biélorussie",
+                "description": "Chat telegram OpenStreetMap Biélorussie"
+            },
             "be-facebook": {
                 "name": "OpenStreetMap Belgique",
-                "description": "Facebook des cartographes et d'OpenStreetMap en Belgique"
+                "description": "Cartographes et OpenStreetMap sur Facebook en Belgique"
             },
             "be-forum": {
-                "name": "forum OpenStreetMap BE",
-                "description": "forum web d'OpenStreetMap Belgique"
+                "name": "Forum OpenStreetMap BE",
+                "description": "Forum web d'OpenStreetMap Belgique"
             },
             "be-irc": {
                 "name": "IRC d'OpenStreetMap Belgique",
-                "description": "Rejoignez #osmbe sur irc.oftc.net (port 6667)"
+                "description": "Rejoignez #osmbe sur irc.oftc.net (port 6667)",
+                "extendedDescription": "Rejoignez #osmbe sur irc.oftc.net (port 6667), il y a un pont avec le canal matrix"
             },
             "be-mailinglist": {
                 "name": "Liste de diffusion talk-be",
-                "description": "Talk-be est la liste de diffusion officielle pour la communauté OSM de Belgique"
+                "description": "Talk-be est la liste de diffusion officielle pour la communauté belge d'OSM"
+            },
+            "be-maptime": {
+                "name": "Maptime Belgique",
+                "description": "Événements sociaux organisés autour de la cartographie — les débutants sont les bienvenus !",
+                "extendedDescription": "Maptime est un environnement d'apprentissage ouvert pour tous les niveaux et degrés de connaissance, offrant un support éducatif volontaire pour le débutant. Maptime est aussi flexible que structuré, créant un espace pour les tutoriels de cartographie, les ateliers, les projets en cours avec un but commun et des temps de travail indépendants ou communs."
             },
             "be-matrix": {
-                "name": "Canal Riot d'OpenStreetMap BE",
-                "description": "Tous les cartographes sont les bienvenus ! Enregistrez-vous sur {signupUrl}",
-                "extendedDescription": "Divers canaux existent pour les débutants, des thématiques particulières, les utilisations du terrain et les discussions de développeurs"
+                "name": "Canal Matrix d'OpenStreetMap BE",
+                "description": "Tous les cartographes sont les bienvenus !",
+                "extendedDescription": "La plupart des discussions ont lieu sur le canal « OpenStreetMap Belgium ». Vous pouvez y demander tout ce que vous voulez ! Les autres canaux sont là pour des sujets spécifiques."
             },
             "be-meetup": {
                 "name": "Réunion d'OpenStreetMap Belgique",
@@ -6915,15 +7009,55 @@
             },
             "be-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Belgique",
-                "description": "OSM Belgique sur Twitter: {url}"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Biélorussie",
-                "description": "Chat telegram OpenStreetMap Biélorussie"
+                "description": "OSM Belgique sur Twitter: @osm_be"
             },
             "talk-cz-mailinglist": {
                 "name": "Liste de diffusion talk-cz",
                 "description": "Talk-cz est la liste de diffusion officielle pour la communauté tchèque"
+            },
+            "dk-forum": {
+                "name": "Forum web d'OpenStreetMap Danemark",
+                "description": "Forum web d'OpenStreetMap Danemark"
+            },
+            "dk-irc": {
+                "name": "IRC d'OpenStreetMap Danemark",
+                "description": "Rejoignez #osm-dk sur irc.oftc.net (port 6667)"
+            },
+            "dk-mailinglist": {
+                "name": "Liste de diffusion Talk-dk",
+                "description": "Une liste de diffusion pour discuter d'OpenStreetMap au Danemark"
+            },
+            "fi-forum": {
+                "name": "Forum OpenStreetMap FI",
+                "description": "Forum web d'OpenStreetMap Finlande"
+            },
+            "fi-irc": {
+                "name": "IRC d'OpenStreetMap Finlande",
+                "description": "Rejoignez #osm-fi sur irc.oftc.net (port 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Liste de diffusion Talk-fi",
+                "description": "Talk-fi est la liste de diffusion officielle de la communauté d'OSM en Finlande"
+            },
+            "fr-facebook": {
+                "name": "Page Facebook d'OpenStreetMap France",
+                "description": "Page Facebook d'OpenStreetMap France"
+            },
+            "fr-forum": {
+                "name": "Forum web d'OpenStreetMap France",
+                "description": "Forum web d'OpenStreetMap France"
+            },
+            "fr-irc": {
+                "name": "IRC d'OpenStreetMap France",
+                "description": "Rejoignez #osm-fr sur irc.oftc.net (port 6667)"
+            },
+            "fr-mailinglist": {
+                "name": "Liste de diffusion Talk-fr",
+                "description": "Liste de diffusion Talk-fr"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap France sur Twitter",
+                "description": "OpenStreetMap France sur Twitter: {url}"
             },
             "de-berlin-mailinglist": {
                 "name": "Liste de diffusion pour Berlin",
@@ -6953,53 +7087,25 @@
                 "name": "Liste de diffusion Talk-de",
                 "description": "Talk-de est la liste de diffusion officielle pour la communauté allemande d'OSM"
             },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Liste de diffusion OWL",
+                "description": "Il s'agit de la liste de diffusion pour la communauté OSM en Westphalie Est-Lippe"
+            },
             "osm-de": {
                 "name": "OpenStreetMap Allemagne",
                 "description": "La plate-forme pour l'information sur OpenStreetMap en Allemagne"
             },
-            "OSM-ES-mailinglist": {
-                "name": "Liste de diffusion Talk-es",
-                "description": "Une liste de diffusion pour discuter d'OpenStreetMap en Espagne"
+            "hu-facebook": {
+                "name": "OpenStreetMap HU sur Facebook",
+                "description": "Page Facebook des cartographes et d'OpenStreetMap en Hongrie"
             },
-            "OSM-ES-telegram": {
-                "name": "@OSMes sur Telegram",
-                "description": "Chat Telegram d'OpenStreetMap Espagne"
+            "hu-forum": {
+                "name": "Forum OpenStreetMap HU",
+                "description": "Forum web d'OpenStreetMap Hongrie"
             },
-            "fr-facebook": {
-                "name": "Page Facebook d'OpenStreetMap France",
-                "description": "Page Facebook d'OpenStreetMap France"
-            },
-            "fr-forum": {
-                "name": "Forum web d'OpenStreetMap France",
-                "description": "Forum web d'OpenStreetMap France"
-            },
-            "fr-irc": {
-                "name": "IRC d'OpenStreetMap France",
-                "description": "Rejoignez #osm-fr sur irc.oftc.net (port 6667)"
-            },
-            "fr-mailinglist": {
-                "name": "Liste de diffusion Talk-fr",
-                "description": "Liste de diffusion Talk-fr"
-            },
-            "fr-twitter": {
-                "name": "OpenStreetMap France sur Twitter",
-                "description": "OpenStreetMap France sur Twitter: {url}"
-            },
-            "Nottingham-OSM-pub-meetup": {
-                "name": "Rencontres mensuelles dans un pub de East Midlands (Nottingham)",
-                "description": "Rassemblement social pour les cartographes et les utilisateur d'East Midlands"
-            },
-            "gb-mailinglist": {
-                "name": "Liste de diffusion Talk-gb"
-            },
-            "mappa-mercia-group": {
-                "name": "Groupe local Mappa Mercia",
-                "description": "Un endroit pour les amateurs d'OpenStreetMap dans les Midlands"
-            },
-            "gb-irc": {
-                "name": "IRC d'OpenStreetMap Royaume-Uni",
-                "description": "Rejoignez #osm-gb sur irc.oftc.net (port 6667)",
-                "extendedDescription": "Rejoignez #osm-gb sur irc.oftc.net (port 6667), soyez patient SVP et attendez quelques minutes si vous posez une question"
+            "hu-meetup": {
+                "name": "Réunion d'OpenStreetMap Hongrie",
+                "description": "La plate-forme pour l'organisation des réunions en Hongrie"
             },
             "it-facebook": {
                 "name": "Facebook d'OpenStreetMap Italie",
@@ -7013,6 +7119,10 @@
                 "name": "Liste de diffusion Talk-it",
                 "description": "Talk-it est la liste de diffusion officielle pour la communauté italienne d'OSM"
             },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Italie"
+            },
             "it-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Italie",
                 "description": "Suivez-nous sur Twitter à l'adresse {url}"
@@ -7023,7 +7133,8 @@
                 "extendedDescription": "Nous souhaitons être une ressource pour les gens où discuter et partager notre connaissance sur l'utilisation des données géographiques libres, en particulier OpenStreetMap, et des logiciels géospatiaux qui gèrent, modifient et affichent des données géographiques et militons pour leur utilisation à Lazio."
             },
             "South-Tyrol-Mailing-List": {
-                "name": "Liste de diffusion OpenStreetMap pour le Tyrol du Sud"
+                "name": "Liste de diffusion OpenStreetMap pour le Haut-Adige",
+                "description": "Liste de discussion OpenStreetMap Italie régionale pour le Haut-Adige."
             },
             "talk-it-lazio": {
                 "name": "OpenStreetMap Italie Lazio",
@@ -7031,7 +7142,8 @@
                 "extendedDescription": "Liste de diffusion pour Rome et la région du Lazio"
             },
             "Trentino-Mailing-List": {
-                "name": "Liste de diffusion OpenStreetMap pour le Trentin"
+                "name": "Liste de diffusion OpenStreetMap pour le Trentin",
+                "description": "Liste de discussion OpenStreetMap Italie régionale pour Trentino."
             },
             "no-forum": {
                 "name": "Forum web d'OpenStreetMap Norvège",
@@ -7052,6 +7164,14 @@
             "OSM-PL-forum": {
                 "name": "Forum d'OpenStreetMap Pologne",
                 "description": "Forum de la communauté polonaise d'OpenStreetMap"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Liste de diffusion Talk-es",
+                "description": "Une liste de diffusion pour discuter d'OpenStreetMap en Espagne"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Espagne"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
@@ -7077,6 +7197,25 @@
                 "name": "OpenStreetMap Suède sur Twitter",
                 "description": "Suivez-nous sur Twitter: {url}"
             },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Rencontres mensuelles dans un pub de East Midlands (Nottingham)",
+                "description": "Rassemblement social pour les cartographes et les utilisateur d'East Midlands",
+                "extendedDescription": "Un groupe se rencontre depuis Mars 2011, au début à Nottingham et plus récemment à Derby et de temps en temps autre part dans les East Midlands. Ce sont des rencontres sociales mais sont des moments privilégiés pour poser des questions spécifiques sur OSM dans la région et en général. Pendant les mois d'été nous cartographions rapidement pendant une heure autour du lieu de réunion. Le groupe est particulièrement intéressé par la cartographie des droits de passage et organise parfois des cartoparties dans ce but."
+            },
+            "gb-mailinglist": {
+                "name": "Liste de diffusion Talk-gb",
+                "description": "Talk-gb est la liste principale pour la communauté OSM anglaise (dont fait partie l'Irlande du Nord)"
+            },
+            "mappa-mercia-group": {
+                "name": "Groupe local Mappa Mercia",
+                "description": "Un endroit pour les amateurs d'OpenStreetMap dans les Midlands",
+                "extendedDescription": "Mappa Mercia est un projet pour faire grandir OpenStreetMap dans les West Midlands au Royaume-Uni. Nous organisons des événements communautaires, fournissons de l'aide et du support aux organisations locales qui veulent libérer leurs données."
+            },
+            "gb-irc": {
+                "name": "IRC d'OpenStreetMap Royaume-Uni",
+                "description": "Rejoignez #osm-gb sur irc.oftc.net (port 6667)",
+                "extendedDescription": "Rejoignez #osm-gb sur irc.oftc.net (port 6667), soyez patient SVP et attendez quelques minutes si vous posez une question"
+            },
             "OSM-CA-Slack": {
                 "name": "Slack OSM-CA",
                 "description": "Vous êtes tous les bienvenus ! Enregistrez-vous sur {signupUrl}."
@@ -7084,6 +7223,14 @@
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver",
                 "description": "Cartographes et utilisateurs d'OpenStreetMap à Vancouver"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Cuba"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM Nicaragua sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Nicaragua"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -7259,6 +7406,11 @@
                 "description": "Rejoignez la communauté d'OpenStreetMap Bahia sur Telegram",
                 "extendedDescription": "Rejoignez la communauté pour en apprendre plus sur OpenStreetMap, pour poser des questions ou participer à nos rencontres. Tout le monde est le bienvenu!"
             },
+            "DF-telegram": {
+                "name": "Groupe Telegram d'OpenStreetMap Brésil",
+                "description": "Rejoignez la communauté d'OpenStreetMap Brasilia sur Telegram",
+                "extendedDescription": "Rejoignez la communauté pour en apprendre plus sur OpenStreetMap, pour poser des questions ou participer à nos rencontres. Tout le monde est le bienvenu!"
+            },
             "OSM-br-mailinglist": {
                 "name": "Liste de diffusion talk-br",
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap au Brézil"
@@ -7304,6 +7456,10 @@
                 "name": "Liste de diffusion Talk-co",
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap en Colombie"
             },
+            "OSM-CO-telegram": {
+                "name": "OSM Colombie sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Colombie"
+            },
             "OSM-CO-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Colombie",
                 "description": "Suivez-nous sur Twitter à l'adresse {url}"
@@ -7311,6 +7467,14 @@
             "OSM-CO": {
                 "name": "OpenStreetMap Colombie",
                 "description": "Des nouvelles de la communauté d'OpenStreetMap Colombie et de la fondation OSMCo"
+            },
+            "OSM-EC-telegram": {
+                "name": "OSM Équateur sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Équateur"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paraguay sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Paraguay"
             },
             "OSM-PE-facebook": {
                 "name": "Facebook d'OpenStreetMap Pérou",
@@ -7337,10 +7501,13 @@
                 "description": "Nouvelles et ressources pour la communauté d'OpenStreetMap au Pérou"
             },
             "OSM-Facebook": {
-                "name": "OpenStreetMap sur Facebook"
+                "name": "OpenStreetMap sur Facebook",
+                "description": "Mettez-nous un « j'aime » sur Facebook pour recevoir des nouvelles d'OpenStreetMap."
             },
             "OSM-help": {
-                "name": "Aide d'OpenStreetMap"
+                "name": "Aide d'OpenStreetMap",
+                "description": "Posez des questions et recevez des réponses sur le site de question-réponse de la communauté OSM.",
+                "extendedDescription": "Le site {url} s'adresse à tous ceux qui ont besoin d'aide sur OpenStreetMap. Que vous soyez un débutant ou que vous ayez une question technique, nous sommes là pour vous aider !"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap sur Reddit",
@@ -7353,9 +7520,11 @@
             "OSMF": {
                 "name": "Fondation OpenStreetMap",
                 "description": "OSMF est une organisation à but non lucratif de droit britannique qui soutient le projet OpenStreetMap",
+                "extendedDescription": "OSMF supporte le projet OpenStreetMap en levant des fonds, en maintenant les serveurs d'OSM, en organisant la conférence annuelle State of the Map, et en coordonnant les volontaires qui permettent à OSM de fonctionner. Vous pouvez apporter votre aide et faire entendre votre voix dans OpenStreetMap en devenant membre d'OSMF ici: {signupUrl}",
                 "events": {
                     "sotm2018": {
                         "name": "State of the Map 2018",
+                        "description": "Rejoignez-nous pendant 3 jours à Milan, Italie, pour la conférence mondiale annuelle d'OpenStreetMap, rassemblant toute la communauté pour discuter, partager et apprendre.",
                         "where": "Milan, Italie"
                     }
                 }

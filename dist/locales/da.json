@@ -169,7 +169,6 @@
                 "annotation": "Fusionerede {n} objekter.",
                 "not_eligible": "Disse objekter kan ikke fusioneres.",
                 "not_adjacent": "Disse objekter kan ikke fusioneres da deres endepunkter ikke er forbundet.",
-                "restriction": "Disse objekter kan ikke fusioneres da en af dem er medlem af   \"{relation}\" relationen.",
                 "incomplete_relation": "Disse objekter kan ikke fusioneres, da mindst et af dem ikke er blevet downloadet helt.",
                 "conflicting_tags": "Disse objekter kan ikke fusioneres fordi nogle af deres tags har konfliktende værdier."
             },
@@ -2114,7 +2113,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

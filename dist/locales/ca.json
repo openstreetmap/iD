@@ -168,7 +168,6 @@
                 "annotation": "S'han fusionat {n} objectes.",
                 "not_eligible": "Aquests objectes no es poden fusionar.",
                 "not_adjacent": "Aquests objectes no es poden fusionar perquè els seu extrems no estan connectats.",
-                "restriction": "Aquests objectes no es poden fusionar ja que com a mínim un de ells és membre de la relació \"{relation}\".",
                 "incomplete_relation": "Aquests objectes no es poden fusionar perquè com a mínim un de ells no s'ha baixat del tot.",
                 "conflicting_tags": "Aquests objectes no es poden fusionar donat que algunes de les seves etiquetes tenen valors diferents."
             },
@@ -1957,7 +1956,6 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telèfon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {

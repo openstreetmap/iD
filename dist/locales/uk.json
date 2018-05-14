@@ -170,7 +170,8 @@
                 "annotation": "Обʼєднано {n} обʼєктів.",
                 "not_eligible": "Ці об’єкти неможливо об’єднати.",
                 "not_adjacent": "Ці обʼєкти не можуть бути обʼєднані, бо їх кінцеві точки не зʼєднані.",
-                "restriction": "Ці об’єкти не можуть бути об’єднані, принаймні один з них є членом звʼязку \"{relation}\".",
+                "restriction": "Ці об’єкти не можуть бути об’єднані, це може пошкодити звʼязок \"{relation}\".",
+                "relation": "Ці об’єкти не можуть бути об’єднані, вони мають ролі, що конфліктують друг з другом.",
                 "incomplete_relation": "Ці об’єкти не можуть бути об’єднані, принаймні один з них завантажений не повністю.",
                 "conflicting_tags": "Ці обʼєкти не можуть бути обʼєднані, бо вони мають теґи, значення яких не збігаються."
             },
@@ -5027,6 +5028,10 @@
                     "name": "Пік",
                     "terms": "Peak, gsr, пагорб, круча, вершина, гора, найвища точка, гребінь, узгір’я"
                 },
+                "natural/reef": {
+                    "name": "Риф",
+                    "terms": "риф,корал,бар'єр,окена,пісок,мілина"
+                },
                 "natural/ridge": {
                     "name": "Гірський хребет",
                     "terms": "гори,скелі,хребет,перевал,гребінь"
@@ -6790,8 +6795,7 @@
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Бангладеш",
-                "description": "Покращити OpenStreetMap в Бангладеш",
-                "extendedDescription": "Мапите в Бангладеш? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+                "description": "Покращити OpenStreetMap в Бангладеш"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Індія - участь в мапінгу поселень",
@@ -6867,29 +6871,34 @@
                 "description": "Talk-at – офіційний список розсилки OSM спільноти Австрії."
             },
             "be-mailinglist": {
-                "name": "Talk-be Список розсилки",
-                "description": "Talk-be – офіційний список розсилки OSM спільноти Бельгії."
+                "name": "Talk-be Список розсилки"
             },
             "talk-cz-mailinglist": {
                 "name": "Talk-cz Список розсилки",
                 "description": "Talk-cz – офіційний список розсилки OSM спільноти Чехії."
             },
+            "fr-mailinglist": {
+                "name": "Talk-fr Список розсилки",
+                "description": "Talk-fr Список розсилки"
+            },
+            "de-berlin-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
             "de-mailinglist": {
                 "name": "Talk-de Список розсилки",
                 "description": "Talk-de – офіційний список розсилки OSM спільноти Німеччини."
             },
-            "OSM-ES-mailinglist": {
-                "name": "Talk-es Список розсилки"
-            },
-            "fr-mailinglist": {
-                "name": "Talk-fr Список розсилки",
-                "description": "Talk-fr Список розсилки"
+            "it-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
             },
             "OSM-Rome-meetup": {
                 "description": "Покращити OpenStreetMap навкруги Риму"
             },
             "talk-it-lazio": {
                 "extendedDescription": "Список розсилки спільноти Риму та Лаціо"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es Список розсилки"
             },
             "se-mailinglist": {
                 "name": "Talk-se Список розсилки"
@@ -6910,17 +6919,29 @@
             "OSM-US": {
                 "description": "Ми допомагаємо розвивати та вдосконалювати OpenStreetMap у Сполучених Штатах."
             },
+            "PHXGeo-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
             "talk-au": {
                 "name": "Talk-au Список розсилки"
             },
             "OSM-AR-mailinglist": {
                 "name": "Talk-ar Список розсилки"
             },
+            "OSM-AR-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Список розсилки"
             },
+            "OSM-br-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
             "OSM-CL-mailinglist": {
                 "name": "Talk-cl Список розсилки"
+            },
+            "OSM-CL-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
             },
             "OSM-CO-mailinglist": {
                 "name": "Talk-co Список розсилки"
@@ -6931,9 +6952,37 @@
             "OSM-PE-mailinglist": {
                 "name": "Talk-pe Список розсилки"
             },
+            "OSM-PE-twitter": {
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap у Facebook",
+                "description": "Вподобайте нашу сторінку на Facebook, щоб отримувати новини про OpenStreetMap."
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Help",
+                "description": "Поставте питання та отримайте відповіді на веб-сайті із запитаннями і відповідями що підтримується спільнотою OSM.",
+                "extendedDescription": "{url} для всіх, хто потребує допомоги в OpenStreetMap. Неважливо, або ви новачок в мапінгу або вам потрібна відповідь на суто технічне питання, ми тут, щоб допомогти вам!"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap на Reddit",
                 "description": "/r/openstreetmap/ чудове місце, щоб дізнатись більше про OpenStreetMap. Можете питати про будь-що!"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSMF": {
+                "name": "Фундація OpenStreetMap",
+                "description": "OSMF, зареєстрована у Великий Британії, неприбуткова організація, що опікується проектом OpenStreetMap",
+                "extendedDescription": "OSMF підтримує OpenStreetMap організовуючи збір коштів, опікуючись роботою серверів, на яких розташовано OSM, організовуючи щорічні конференції State of the Map, координуючи зусилля волонтерів, що допомагають роботі OSM. Ви можете також показати свою підтримку та мати вплив на подальший розвиток проекту, ставши членом OSMF: {signupUrl}",
+                "events": {
+                    "sotm2018": {
+                        "name": "State of the Map 2018",
+                        "description": "Приєднайтесь до нас в Мілані, Італія на 3 дні на щорічній всесвітній конференції OpenStreetMap, на якій збираються представники спільноти для спілкування, обміну досвідом та навчання.",
+                        "where": "Мілан, Італія"
+                    }
+                }
             }
         }
     }
