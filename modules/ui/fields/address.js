@@ -82,17 +82,17 @@ export function uiFieldAddress(field, context) {
 
 
         function isAddressable(d) {
-            if (d.tags.name &&
-                (d.tags.admin_level === '8' || d.tags.border_type === 'city'))
-                return true;
+            if (d.tags.name) {
+                if (d.tags.admin_level === '8' && d.tags.boundary === 'administrative')
+                    return true;
+                if (d.tags.border_type === 'city')
+                    return true;
+                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village')
+                    return true;
+            }
 
-            if (d.tags.place && d.tags.name && (
-                    d.tags.place === 'city' ||
-                    d.tags.place === 'town' ||
-                    d.tags.place === 'village'))
+            if (d.tags['addr:city'])
                 return true;
-
-            if (d.tags['addr:city']) return true;
 
             return false;
         }
