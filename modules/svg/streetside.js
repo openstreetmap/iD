@@ -3,7 +3,6 @@ import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
 
-
 export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
@@ -17,14 +16,14 @@ export function svgStreetside(projection, context, dispatch) {
         if (svgStreetside.initialized) return;  // run once
         svgStreetside.enabled = false;
         svgStreetside.initialized = true;
-        // console.log("svg: streetside initialized....");
+        console.log("svg: streetside initialized....");
     }
 
 
     function getService() {
         if (services.streetside && !_streetside) {
             _streetside = services.streetside;
-            _streetside.event.on('loadedImages', throttledRedraw);
+            _streetside.event.on('loadedBubbles', throttledRedraw);
         } else if (!services.streetside && _streetside) {
             _streetside = null;
         }
@@ -118,15 +117,19 @@ export function svgStreetside(projection, context, dispatch) {
         var selected = viewer.empty() ? undefined : viewer.datum();
 
         var z = ~~context.map().zoom();
+        
+        console.log('z = ', z);
+        console.log('minMarkerZoom = ', minMarkerZoom);
+
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
 
         var service = getService();
         // gets the features from service cache
-        var sequences = (service ? service.sequences(projection) : []);
-        var images = (service && showMarkers ? service.images(projection) : []);
+        //var sequences = (service ? service.sequences(projection) : []);
+        //var images = (service && showMarkers ? service.images(projection) : []);
         var bubbles = (service && showMarkers ? service.bubbles(projection) : []);
-        // console.log("     svg: update() bubbles", bubbles);
+         console.log("svg: update() bubbles", bubbles);
         // console.log("     svg: update() images", images);
         // var traces = layer.selectAll('.sequences').selectAll('.sequence')
         //     .data(sequences, function(d) { return d.properties.key; });
@@ -207,7 +210,7 @@ export function svgStreetside(projection, context, dispatch) {
     //drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
     //'svgStreetside()' is called from index.js (ln)
     function drawImages(selection) {
-        //console.log("svg - streetside - drawImages(); selection: ", selection);
+        console.log("svg - streetside - drawImages(); selection: ", selection);
         var enabled = svgStreetside.enabled,
             service = getService();
         //console.log("svg - streetside - drawImages(); svgStreetside enabled? ", enabled);

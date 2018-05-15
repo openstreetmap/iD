@@ -38,7 +38,8 @@
     "osm-auth": "1.0.2",
     "rbush": "2.0.2",
     "wmf-sitematrix": "0.1.4",
-    "pannellum": "2.4.1"
+    "pannellum": "2.4.1",
+    "q": "1.5.1"
   },
   "devDependencies": {
     "@mapbox/maki": "^4.0.0",

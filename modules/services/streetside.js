@@ -23,13 +23,13 @@ import {
 
 import rbush from 'rbush';
 
+import Q from 'q';
+
 import { jsonpRequest } from '../util/jsonp_request';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
-
-//import _pannellum from 'pannellum';
 
 var apibase = 'https://a.mapillary.com/v3/',
     msapi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/',
@@ -42,7 +42,8 @@ var apibase = 'https://a.mapillary.com/v3/',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     tileZoom = 14,
-    dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
+    //dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
+    dispatch = d3_dispatch('loadedBubbles'),
     _mlyFallback = false,
     _mlyCache,
     _mlyClicks,
@@ -102,7 +103,10 @@ function getTiles(projection) {
         origin = [
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]];
-
+    console.log('s = ', s);
+    console.log('z = ', z);
+    console.log('ts = ', ts);
+    console.log('origin = ', origin);
     return d3_geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
@@ -129,9 +133,14 @@ function loadTiles(which, url, projection) {
     ////console.log("loading tiles from streetside service...");
     var s = projection.scale() * 2 * Math.PI,
         currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
-    ////console.log("     var projection = ", projection);
-    ////console.log("     var s = ", s);
-
+    //console.log("var projection = ", projection);
+    //console.log("var projection.scale() = ", projection.scale());
+    //console.log("var s = ", s);
+    //console.log("var currZoom = ", currZoom);
+    var geoExt = new geoExtent(projection.invert([0, 1]),
+                                 projection.invert([1, 0]));
+    console.log("map.extent() = ", geoExt);
+    
     // breakup the map view into tiles
     var tiles = getTiles(projection).filter(function (t) {
         return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
@@ -147,206 +156,306 @@ function loadTiles(which, url, projection) {
     }).map(abortRequest);
 
     tiles.forEach(function (tile) {
-        ////console.log("     tile to load = ", tile);
+        console.log("     tile to load = ", tile);
         // //console.log("     tile extent to load = ", tile.extent[0][1] + ',' + tile.extent[0][0] + ',' + tile.extent[1][1] + ',' + tile.extent[1][0]);
         // //console.log("     tile extent to load (MS):   n=", tile.extent[1][1] + '&s=' + tile.extent[0][1] + '&e=' + tile.extent[1][0] + '&w=' + tile.extent[0][0]);
-        loadNextTilePage(which, currZoom, url, tile);
+       loadNextTilePage(which, currZoom, url, tile);
     });
 }
 
 // load data for the next tile page in line
 function loadNextTilePage(which, currZoom, url, tile) {
-    console.log('services - streetside - loadNextTilePage() which: ', which);
-    //console.log('services - streetside - loadNextTilePage() currZoom: ', currZoom);
-    //console.log('services - streetside - loadNextTilePage() url: ', url);
-    console.log('services - streetside - loadNextTilePage() tile: ', tile);
+    console.log('loadNextTilePage() which: ', which);
+    console.log('currZoom: ', currZoom);
+    console.log('url: ', url);
+    console.log('tile: ', tile);
     var cache = _mlyCache[which],
-        rect = tile.extent.rectangle(),
         maxPages = maxPageAtZoom(currZoom),
         nextPage = cache.nextPage[tile.id] || 0;
-        console.log('maxPages = ', maxPages);
-        console.log('cache.nextPage[tile.id] - ', cache.nextPage[tile.id]);
-        console.log('nextPage = ', nextPage);
-        switch (which) {
-        case 'bubbles':
-            //console.log('services - streetside - loadNextTilePage() nextPage > maxPages?: ', nextPage > maxPages);
-            
-            if (nextPage > maxPages) return;
 
-            
-            var id = tile.id + ',' + String(nextPage);
-            //console.log('services - streetside - loadNextTilePage() cache.loaded[id]: ', cache.loaded[id]);
-            //console.log('services - streetside - loadNextTilePage() cache.inflight[id]: ', cache.inflight[id]);
-            if (cache.loaded[id] || cache.inflight[id]) return;
+        var id = tile.id + ',' + String(nextPage);
 
-            cache.inflight[id] = true;
-            getBubbles(url, tile, function (bubbles) {
-                cache.loaded[id] = true;
-                delete cache.inflight[id];
-                //console.log("bubbles: ", bubbles);
-                if (!bubbles) return;
-                // remove first element, statistic info on request, not a bubble
-                bubbles.shift();
-                var features = bubbles.map(function (bubble) {
-                    //console.log("bubble: ", bubble);
-                    var loc = [bubble.lo, bubble.la];
-                    var d = {
-                        loc: loc,
-                        key: bubble.id,
-                        ca: bubble.he,
-                        captured_at: bubble.cd,
-                        captured_by: "microsoft",
-                        nbn: bubble.nbn,
-                        pbn: bubble.pbn,
-                        rn: bubble.rn,
-                        pano: true
-                    };
-                    var feature = {
-                        geometry: {
-                            coordinates: [bubble.lo, bubble.la],
-                            type: "Point"
-                        },
-                        properties: d,
-                        type: "Feature"
-                    };
-                    var bubbleId = bubble.id;
-                    cache.points[bubbleId] = feature;
-                    cache.forImageKey[bubbleId] = bubbleId;
-                    // return false;  // because no `d` data worth loading into an rbush
-                    //console.log('End of GetBubbles success handling: cache = ', cache);
-                    return {
-                        minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
-                    };
+        console.log('id = ', id);
+        console.log('cache.loaded[id]: ', cache.loaded[id]);
+        console.log('cache.inflight[id]: ', cache.inflight[id]);
+        
+        if (cache.loaded[id] || cache.inflight[id]) return;
 
-                }).filter(Boolean);
-                // //console.log("bubble features: ", features);
-                cache.rtree.load(features);
+        cache.inflight[id] = getBubbles(url, tile, function(bubbles){
+            console.log("GET Response - bubbles: ", bubbles);
+            cache.loaded[id] = true;
+            delete cache.inflight[id];
+            if (!bubbles) return;
+            // remove first element, statistic info on request, not a bubble
+            bubbles.shift();
+            var features = bubbles.map(function (bubble) {
+                //console.log("bubble: ", bubble);
+                var loc = [bubble.lo, bubble.la];
+                var d = {
+                    loc: loc,
+                    key: bubble.id,
+                    ca: bubble.he,
+                    captured_at: bubble.cd,
+                    captured_by: "microsoft",
+                    nbn: bubble.nbn,
+                    pbn: bubble.pbn,
+                    rn: bubble.rn,
+                    pano: true
+                };
+                var feature = {
+                    geometry: {
+                        coordinates: [bubble.lo, bubble.la],
+                        type: "Point"
+                    },
+                    properties: d,
+                    type: "Feature"
+                };
+                var bubbleId = bubble.id;
+                cache.points[bubbleId] = feature;
+                cache.forImageKey[bubbleId] = bubbleId;
+                // return false;  // because no `d` data worth loading into an rbush
+                //console.log('End of GetBubbles success handling: cache = ', cache);
+                return {
+                    minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+                };
+
+            }).filter(Boolean);
+            // //console.log("bubble features: ", features);
+            cache.rtree.load(features);
+
+            console.log('bubbles.length', bubbles.length);
+            console.log('cache.nextPage[tile.id]', cache.nextPage[tile.id]);
+
+            if (which === 'bubbles'){
+                dispatch.call('loadedBubbles');
+            }
+            // if (bubbles.length === maxResults) {  // more pages to load
+            //     cache.nextPage[tile.id] = nextPage + 1;
+            //     loadNextTilePage(which, currZoom, url, tile);
+            // } else {
+            //     cache.nextPage[tile.id] = Infinity;     // no more pages to load
+            // }
+        });
+
+        //console.log('maxPages = ', maxPages);
+        //console.log('cache.nextPage[tile.id] - ', cache.nextPage[tile.id]);
+        //console.log('nextPage = ', nextPage);
+        
+        // bubbleCalls.push(getBubbles(url, tile, function (bubbles) {
+        //     console.log("got the bubbles: ", bubbles);
+        // }));
+        
+        // bubbleCalls.push(getBubbles(url, tile));
+
+        // var doAll = Q.all(bubbleCalls);
+        // doAll.then(function () {
+        //     console.log('success');
+        // }).catch(function (ex) {
+        //     console.log('error');
+        // });
+
+
+        // switch (which) {
+        //     case 'bubbles':
+        //         //console.log('services - streetside - loadNextTilePage() nextPage > maxPages?: ', nextPage > maxPages);
                 
-            });
-            break;
-        default:
-            var nextURL = cache.nextURL[tile.id] || url +
-                utilQsString({
-                    per_page: maxResults,
-                    page: nextPage,
-                    client_id: clientId,
-                    bbox: [rect[0], rect[1], rect[2], rect[3]].join(','),
-                });
-            ////console.log("cache for loadNextTilePage: ", cache);
-            if (nextPage > maxPages) return;
+        //         if (nextPage > maxPages) return;
 
-            var id = tile.id + ',' + String(nextPage);
-            if (cache.loaded[id] || cache.inflight[id]) return;
-            ////console.log("get nextURL: ", nextURL);
-            cache.inflight[id] = d3_request(nextURL)
-                .mimeType('application/json')
-                .response(function (xhr) {
-                    var linkHeader = xhr.getResponseHeader('Link');
-                    if (linkHeader) {
-                        var pagination = parsePagination(xhr.getResponseHeader('Link'));
-                        if (pagination.next) {
-                            cache.nextURL[tile.id] = pagination.next;
-                        }
-                    }
-                    ////console.log("     reponse from nextURL:",xhr.responseText);
-                    return JSON.parse(xhr.responseText);
-                })
-                .get(function (err, data) {
-                    cache.loaded[id] = true;
-                    delete cache.inflight[id];
-                    if (err || !data.features || !data.features.length) return;
-                    // //console.log("features returned by mapillary: ", data.features);
-                    var features = data.features.map(function (feature) {
-                        var loc = feature.geometry.coordinates,
-                            d;
+                
+        //         var id = tile.id + ',' + String(nextPage);
+        //         //console.log('services - streetside - loadNextTilePage() cache.loaded[id]: ', cache.loaded[id]);
+        //         //console.log('services - streetside - loadNextTilePage() cache.inflight[id]: ', cache.inflight[id]);
+        //         if (cache.loaded[id] || cache.inflight[id]) return;
 
-                        if (which === 'images') {
-                            d = {
-                                loc: loc,
-                                key: feature.properties.key,
-                                ca: feature.properties.ca,
-                                captured_at: feature.properties.captured_at,
-                                captured_by: feature.properties.username,
-                                pano: feature.properties.pano
-                            };
-                            cache.forImageKey[d.key] = d;     // cache imageKey -> image
+        //         cache.inflight[id] = true;
+        //         getBubbles(url, tile, function (bubbles) {
+        //             cache.loaded[id] = true;
+        //             delete cache.inflight[id];
+        //             //console.log("bubbles: ", bubbles);
+        //             if (!bubbles) return;
+        //             // remove first element, statistic info on request, not a bubble
+        //             bubbles.shift();
+        //             var features = bubbles.map(function (bubble) {
+        //                 //console.log("bubble: ", bubble);
+        //                 var loc = [bubble.lo, bubble.la];
+        //                 var d = {
+        //                     loc: loc,
+        //                     key: bubble.id,
+        //                     ca: bubble.he,
+        //                     captured_at: bubble.cd,
+        //                     captured_by: "microsoft",
+        //                     nbn: bubble.nbn,
+        //                     pbn: bubble.pbn,
+        //                     rn: bubble.rn,
+        //                     pano: true
+        //                 };
+        //                 var feature = {
+        //                     geometry: {
+        //                         coordinates: [bubble.lo, bubble.la],
+        //                         type: "Point"
+        //                     },
+        //                     properties: d,
+        //                     type: "Feature"
+        //                 };
+        //                 var bubbleId = bubble.id;
+        //                 cache.points[bubbleId] = feature;
+        //                 cache.forImageKey[bubbleId] = bubbleId;
+        //                 // return false;  // because no `d` data worth loading into an rbush
+        //                 //console.log('End of GetBubbles success handling: cache = ', cache);
+        //                 return {
+        //                     minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+        //                 };
 
-                        } else if (which === 'sequences') {
-                            // //console.log("sequence", feature);
-                            var sequenceKey = feature.properties.key;
-                            cache.lineString[sequenceKey] = feature;           // cache sequenceKey -> lineString
-                            feature.properties.coordinateProperties.image_keys.forEach(function (imageKey) {
-                                cache.forImageKey[imageKey] = sequenceKey;     // cache imageKey -> sequenceKey
-                            });
-                            return false;  // because no `d` data worth loading into an rbush
+        //             }).filter(Boolean);
+        //             // //console.log("bubble features: ", features);
+        //             cache.rtree.load(features);
+                    
+        //         });
+        //         break;
+        //     default:
+        //         var nextURL = cache.nextURL[tile.id] || url +
+        //             utilQsString({
+        //                 per_page: maxResults,
+        //                 page: nextPage,
+        //                 client_id: clientId,
+        //                 bbox: [rect[0], rect[1], rect[2], rect[3]].join(','),
+        //             });
+        //         ////console.log("cache for loadNextTilePage: ", cache);
+        //         if (nextPage > maxPages) return;
 
-                        } else if (which === 'objects') {
-                            d = {
-                                loc: loc,
-                                key: feature.properties.key,
-                                value: feature.properties.value,
-                                package: feature.properties.package,
-                                detections: feature.properties.detections
-                            };
+        //         var id = tile.id + ',' + String(nextPage);
+        //         if (cache.loaded[id] || cache.inflight[id]) return;
+        //         ////console.log("get nextURL: ", nextURL);
+        //         cache.inflight[id] = d3_request(nextURL)
+        //             .mimeType('application/json')
+        //             .response(function (xhr) {
+        //                 var linkHeader = xhr.getResponseHeader('Link');
+        //                 if (linkHeader) {
+        //                     var pagination = parsePagination(xhr.getResponseHeader('Link'));
+        //                     if (pagination.next) {
+        //                         cache.nextURL[tile.id] = pagination.next;
+        //                     }
+        //                 }
+        //                 ////console.log("     reponse from nextURL:",xhr.responseText);
+        //                 return JSON.parse(xhr.responseText);
+        //             })
+        //             .get(function (err, data) {
+        //                 cache.loaded[id] = true;
+        //                 delete cache.inflight[id];
+        //                 if (err || !data.features || !data.features.length) return;
+        //                 // //console.log("features returned by mapillary: ", data.features);
+        //                 var features = data.features.map(function (feature) {
+        //                     var loc = feature.geometry.coordinates,
+        //                         d;
 
-                            // cache imageKey -> detectionKey
-                            feature.properties.detections.forEach(function (detection) {
-                                var imageKey = detection.image_key;
-                                var detectionKey = detection.detection_key;
-                                if (!_mlyCache.detections[imageKey]) {
-                                    _mlyCache.detections[imageKey] = {};
-                                }
-                                if (!_mlyCache.detections[imageKey][detectionKey]) {
-                                    _mlyCache.detections[imageKey][detectionKey] = {};
-                                }
-                            });
-                        }
+        //                     if (which === 'images') {
+        //                         d = {
+        //                             loc: loc,
+        //                             key: feature.properties.key,
+        //                             ca: feature.properties.ca,
+        //                             captured_at: feature.properties.captured_at,
+        //                             captured_by: feature.properties.username,
+        //                             pano: feature.properties.pano
+        //                         };
+        //                         cache.forImageKey[d.key] = d;     // cache imageKey -> image
 
-                        return {
-                            minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
-                        };
+        //                     } else if (which === 'sequences') {
+        //                         // //console.log("sequence", feature);
+        //                         var sequenceKey = feature.properties.key;
+        //                         cache.lineString[sequenceKey] = feature;           // cache sequenceKey -> lineString
+        //                         feature.properties.coordinateProperties.image_keys.forEach(function (imageKey) {
+        //                             cache.forImageKey[imageKey] = sequenceKey;     // cache imageKey -> sequenceKey
+        //                         });
+        //                         return false;  // because no `d` data worth loading into an rbush
 
-                    }).filter(Boolean);
-                    ////console.log("mapillary features: ", features);
-                    cache.rtree.load(features);
+        //                     } else if (which === 'objects') {
+        //                         d = {
+        //                             loc: loc,
+        //                             key: feature.properties.key,
+        //                             value: feature.properties.value,
+        //                             package: feature.properties.package,
+        //                             detections: feature.properties.detections
+        //                         };
 
-                    if (which === 'images' || which === 'sequences') {
-                        dispatch.call('loadedImages');
-                    } else if (which === 'objects') {
-                        dispatch.call('loadedSigns');
-                    }
+        //                         // cache imageKey -> detectionKey
+        //                         feature.properties.detections.forEach(function (detection) {
+        //                             var imageKey = detection.image_key;
+        //                             var detectionKey = detection.detection_key;
+        //                             if (!_mlyCache.detections[imageKey]) {
+        //                                 _mlyCache.detections[imageKey] = {};
+        //                             }
+        //                             if (!_mlyCache.detections[imageKey][detectionKey]) {
+        //                                 _mlyCache.detections[imageKey][detectionKey] = {};
+        //                             }
+        //                         });
+        //                     }
 
-                    if (data.features.length === maxResults) {  // more pages to load
-                        cache.nextPage[tile.id] = nextPage + 1;
-                        loadNextTilePage(which, currZoom, url, tile);
-                    } else {
-                        cache.nextPage[tile.id] = Infinity;     // no more pages to load
-                    }
-                    // //console.log("_mlyCache: ", _mlyCache);
-                });
-            break;
-    }
+        //                     return {
+        //                         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+        //                     };
+
+        //                 }).filter(Boolean);
+        //                 ////console.log("mapillary features: ", features);
+        //                 cache.rtree.load(features);
+
+        //                 if (which === 'images' || which === 'sequences') {
+        //                     dispatch.call('loadedImages');
+        //                 } else if (which === 'objects') {
+        //                     dispatch.call('loadedSigns');
+        //                 }
+
+        //                 if (data.features.length === maxResults) {  // more pages to load
+        //                     cache.nextPage[tile.id] = nextPage + 1;
+        //                     loadNextTilePage(which, currZoom, url, tile);
+        //                 } else {
+        //                     cache.nextPage[tile.id] = Infinity;     // no more pages to load
+        //                 }
+        //                 // //console.log("_mlyCache: ", _mlyCache);
+        //             });
+        //         break;
+        // }
 }
 
 // call the bubble api and get the json data
 // for the tile extent
+// function getBubbles2(url, tile) {
+//     console.log('services - streetside - getBubbles()');
+//     var deferred = Q.defer();
+//     var rect = tile.extent.rectangle()
+//     var urlForRequest = url + utilQsString({
+//         n: rect[3],
+//         s: rect[1],
+//         e: rect[2],
+//         w: rect[0],
+//         appkey: appkey
+//     });
+//     return deferred.promise;
+// }
+
 function getBubbles(url, tile, callback) {
-    //console.log('services - streetside - getBubbles()');
-    var rect = tile.extent.rectangle()
-    jsonpRequest(url + utilQsString({
+    console.log('services - streetside - getBubbles()');
+    //var deferred = Q.defer();
+    var rect = tile.extent.rectangle();
+    console.log('rect: ', rect);
+    var urlForRequest = url + utilQsString({
         n: rect[3],
         s: rect[1],
         e: rect[2],
         w: rect[0],
         appkey: appkey,
         jsCallback: '{callback}'
-    }), function (data) {
+    });
+    console.log('url for request',urlForRequest);
+    jsonpRequest(urlForRequest, function (data) {
         if (!data || data.error) {
             callback(null);
+            //deferred.resolve(data);
         } else {
             callback(data);
+            //deferred.reject();
         }
     });
+    //return deferred.promise;
 }
 
 // extract links to pages of API results
@@ -441,23 +550,23 @@ export default {
             if (cache.bubbles && cache.bubbles.inflight) {
                 _forEach(cache.bubbles.inflight, abortRequest);
             }
-            if (cache.images && cache.images.inflight) {
-                _forEach(cache.images.inflight, abortRequest);
-            }
-            if (cache.objects && cache.objects.inflight) {
-                _forEach(cache.objects.inflight, abortRequest);
-            }
-            if (cache.sequences && cache.sequences.inflight) {
-                _forEach(cache.sequences.inflight, abortRequest);
-            }
+            // if (cache.images && cache.images.inflight) {
+            //     _forEach(cache.images.inflight, abortRequest);
+            // }
+            // if (cache.objects && cache.objects.inflight) {
+            //     _forEach(cache.objects.inflight, abortRequest);
+            // }
+            // if (cache.sequences && cache.sequences.inflight) {
+            //     _forEach(cache.sequences.inflight, abortRequest);
+            // }
         }
 
         _mlyCache = {
-            bubbles: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, points: {} },
-            images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {} },
-            objects: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} },
-            detections: {}
+            bubbles: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, points: {} }
+            // images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {} },
+            // objects: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            // sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} },
+            // detections: {}
         };
 
         _mlySelectedImage = null;
@@ -471,63 +580,63 @@ export default {
         return searchLimited(psize, limit, projection, _mlyCache.bubbles.rtree);
     },
 
-    images: function (projection) {
-        var psize = 16, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.images.rtree);
-    },
+    // images: function (projection) {
+    //     var psize = 16, limit = 3;
+    //     return searchLimited(psize, limit, projection, _mlyCache.images.rtree);
+    // },
 
 
-    signs: function (projection) {
-        var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.objects.rtree);
-    },
+    // signs: function (projection) {
+    //     var psize = 32, limit = 3;
+    //     return searchLimited(psize, limit, projection, _mlyCache.objects.rtree);
+    // },
 
 
-    sequences: function (projection) {
-        var viewport = projection.clipExtent();
-        var min = [viewport[0][0], viewport[1][1]];
-        var max = [viewport[1][0], viewport[0][1]];
-        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        var sequenceKeys = {};
+    // sequences: function (projection) {
+    //     var viewport = projection.clipExtent();
+    //     var min = [viewport[0][0], viewport[1][1]];
+    //     var max = [viewport[1][0], viewport[0][1]];
+    //     var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+    //     var sequenceKeys = {};
 
-        // all sequences for images in viewport
-        _mlyCache.images.rtree.search(bbox)
-            .forEach(function (d) {
-                var sequenceKey = _mlyCache.sequences.forImageKey[d.data.key];
-                if (sequenceKey) {
-                    sequenceKeys[sequenceKey] = true;
-                }
-            });
+    //     // all sequences for images in viewport
+    //     _mlyCache.images.rtree.search(bbox)
+    //         .forEach(function (d) {
+    //             var sequenceKey = _mlyCache.sequences.forImageKey[d.data.key];
+    //             if (sequenceKey) {
+    //                 sequenceKeys[sequenceKey] = true;
+    //             }
+    //         });
 
-        // Return lineStrings for the sequences
-        return Object.keys(sequenceKeys).map(function (sequenceKey) {
-            return _mlyCache.sequences.lineString[sequenceKey];
-        });
-    },
+    //     // Return lineStrings for the sequences
+    //     return Object.keys(sequenceKeys).map(function (sequenceKey) {
+    //         return _mlyCache.sequences.lineString[sequenceKey];
+    //     });
+    // },
 
-    signsSupported: function () {
-        var detected = utilDetect();
-        if (detected.ie) return false;
-        if ((detected.browser.toLowerCase() === 'safari') && (parseFloat(detected.version) < 10)) return false;
-        return true;
-    },
+    // signsSupported: function () {
+    //     var detected = utilDetect();
+    //     if (detected.ie) return false;
+    //     if ((detected.browser.toLowerCase() === 'safari') && (parseFloat(detected.version) < 10)) return false;
+    //     return true;
+    // },
 
 
-    signHTML: function (d) {
-        if (!_mlySignDefs || !_mlySignSprite) return;
-        var position = _mlySignDefs[d.value];
-        if (!position) return '<div></div>';
-        var iconStyle = [
-            'background-image:url(' + _mlySignSprite + ')',
-            'background-repeat:no-repeat',
-            'height:' + position.height + 'px',
-            'width:' + position.width + 'px',
-            'background-position-x:-' + position.x + 'px',
-            'background-position-y:-' + position.y + 'px',
-        ];
+    // signHTML: function (d) {
+    //     if (!_mlySignDefs || !_mlySignSprite) return;
+    //     var position = _mlySignDefs[d.value];
+    //     if (!position) return '<div></div>';
+    //     var iconStyle = [
+    //         'background-image:url(' + _mlySignSprite + ')',
+    //         'background-repeat:no-repeat',
+    //         'height:' + position.height + 'px',
+    //         'width:' + position.width + 'px',
+    //         'background-position-x:-' + position.x + 'px',
+    //         'background-position-y:-' + position.y + 'px',
+    //     ];
 
-        return '<div style="' + iconStyle.join(';') + '"></div>';
-    },
+    //     return '<div style="' + iconStyle.join(';') + '"></div>';
+    // },
 
     // this is called a bunch of times repeatedly 
     loadImages: function (projection) {
@@ -829,10 +938,10 @@ export default {
     },
 
 
-    getSequenceKeyForImage: function (d) {
-        var imageKey = d && d.key;
-        return imageKey && _mlyCache.sequences.forImageKey[imageKey];
-    },
+    // getSequenceKeyForImage: function (d) {
+    //     var imageKey = d && d.key;
+    //     return imageKey && _mlyCache.sequences.forImageKey[imageKey];
+    // },
 
 
     setStyles: function (hovered, reset) {
@@ -847,19 +956,19 @@ export default {
                 .classed('selected', false);
         }
 
-        var hoveredImageKey = hovered && hovered.key;
+        //var hoveredImageKey = hovered && hovered.key;
         var hoveredBubbleKey = hovered && hovered.key;
-        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
-        var hoveredLineString = hoveredSequenceKey && _mlyCache.sequences.lineString[hoveredSequenceKey];
-        var hoveredImageKeys = (hoveredLineString && hoveredLineString.properties.coordinateProperties.image_keys) || [];
+        //var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
+        //var hoveredLineString = hoveredSequenceKey && _mlyCache.sequences.lineString[hoveredSequenceKey];
+        //var hoveredImageKeys = (hoveredLineString && hoveredLineString.properties.coordinateProperties.image_keys) || [];
 
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedBubbleKey = selected && selected.key;
-        var selectedImageKey = selected && selected.key;
-        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
-        var selectedLineString = selectedSequenceKey && _mlyCache.sequences.lineString[selectedSequenceKey];
-        var selectedImageKeys = (selectedLineString && selectedLineString.properties.coordinateProperties.image_keys) || [];
+        //var selectedImageKey = selected && selected.key;
+        //var selectedSequenceKey = this.getSequenceKeyForImage(selected);
+        //var selectedLineString = selectedSequenceKey && _mlyCache.sequences.lineString[selectedSequenceKey];
+        //var selectedImageKeys = (selectedLineString && selectedLineString.properties.coordinateProperties.image_keys) || [];
 
         // highlight sibling viewfields on either the selected or the hovered sequences
         var highlightedBubbleKeys = _union(hoveredBubbleKey, selectedBubbleKey);
@@ -877,99 +986,99 @@ export default {
     },
 
 
-    updateDetections: function (d) {
-        if (!_mlyViewer || _mlyFallback) return;
+    // updateDetections: function (d) {
+    //     if (!_mlyViewer || _mlyFallback) return;
 
-        var imageKey = d && d.key;
-        var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
+    //     var imageKey = d && d.key;
+    //     var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
 
-        _forEach(detections, function (data, k) {
-            if (_isEmpty(data)) {
-                loadDetection(k);
-            } else {
-                var tag = makeTag(data);
-                if (tag) {
-                    var tagComponent = _mlyViewer.getComponent('tag');
-                    tagComponent.add([tag]);
-                }
-            }
-        });
-
-
-        function loadDetection(detectionKey) {
-            var url = apibase + 'detections/' +
-                detectionKey + '?' + utilQsString({
-                    client_id: clientId,
-                });
-
-            d3_request(url)
-                .mimeType('application/json')
-                .response(function (xhr) {
-                    return JSON.parse(xhr.responseText);
-                })
-                .get(function (err, data) {
-                    if (!data || !data.properties) return;
-
-                    var imageKey = data.properties.image_key;
-                    _mlyCache.detections[imageKey][detectionKey] = data;
-
-                    var selectedKey = _mlySelectedImage && _mlySelectedImage.key;
-                    if (imageKey === selectedKey) {
-                        var tag = makeTag(data);
-                        if (tag) {
-                            var tagComponent = _mlyViewer.getComponent('tag');
-                            tagComponent.add([tag]);
-                        }
-                    }
-                });
-        }
+    //     _forEach(detections, function (data, k) {
+    //         if (_isEmpty(data)) {
+    //             loadDetection(k);
+    //         } else {
+    //             var tag = makeTag(data);
+    //             if (tag) {
+    //                 var tagComponent = _mlyViewer.getComponent('tag');
+    //                 tagComponent.add([tag]);
+    //             }
+    //         }
+    //     });
 
 
-        function makeTag(data) {
-            var valueParts = data.properties.value.split('--');
-            if (valueParts.length !== 3) return;
+    //     function loadDetection(detectionKey) {
+    //         var url = apibase + 'detections/' +
+    //             detectionKey + '?' + utilQsString({
+    //                 client_id: clientId,
+    //             });
 
-            var text = valueParts[1].replace(/-/g, ' ');
-            var tag;
+    //         d3_request(url)
+    //             .mimeType('application/json')
+    //             .response(function (xhr) {
+    //                 return JSON.parse(xhr.responseText);
+    //             })
+    //             .get(function (err, data) {
+    //                 if (!data || !data.properties) return;
 
-            // Currently only two shapes <Polygon|Point>
-            if (data.properties.shape.type === 'Polygon') {
-                var polygonGeometry = new Mapillary
-                    .TagComponent
-                    .PolygonGeometry(data.properties.shape.coordinates[0]);
+    //                 var imageKey = data.properties.image_key;
+    //                 _mlyCache.detections[imageKey][detectionKey] = data;
 
-                tag = new Mapillary.TagComponent.OutlineTag(
-                    data.properties.key,
-                    polygonGeometry,
-                    {
-                        text: text,
-                        textColor: 0xffff00,
-                        lineColor: 0xffff00,
-                        lineWidth: 2,
-                        fillColor: 0xffff00,
-                        fillOpacity: 0.3,
-                    }
-                );
+    //                 var selectedKey = _mlySelectedImage && _mlySelectedImage.key;
+    //                 if (imageKey === selectedKey) {
+    //                     var tag = makeTag(data);
+    //                     if (tag) {
+    //                         var tagComponent = _mlyViewer.getComponent('tag');
+    //                         tagComponent.add([tag]);
+    //                     }
+    //                 }
+    //             });
+    //     }
 
-            } else if (data.properties.shape.type === 'Point') {
-                var pointGeometry = new Mapillary
-                    .TagComponent
-                    .PointGeometry(data.properties.shape.coordinates[0]);
 
-                tag = new Mapillary.TagComponent.SpotTag(
-                    data.properties.key,
-                    pointGeometry,
-                    {
-                        text: text,
-                        color: 0xffff00,
-                        textColor: 0xffff00
-                    }
-                );
-            }
+    //     function makeTag(data) {
+    //         var valueParts = data.properties.value.split('--');
+    //         if (valueParts.length !== 3) return;
 
-            return tag;
-        }
-    },
+    //         var text = valueParts[1].replace(/-/g, ' ');
+    //         var tag;
+
+    //         // Currently only two shapes <Polygon|Point>
+    //         if (data.properties.shape.type === 'Polygon') {
+    //             var polygonGeometry = new Mapillary
+    //                 .TagComponent
+    //                 .PolygonGeometry(data.properties.shape.coordinates[0]);
+
+    //             tag = new Mapillary.TagComponent.OutlineTag(
+    //                 data.properties.key,
+    //                 polygonGeometry,
+    //                 {
+    //                     text: text,
+    //                     textColor: 0xffff00,
+    //                     lineColor: 0xffff00,
+    //                     lineWidth: 2,
+    //                     fillColor: 0xffff00,
+    //                     fillOpacity: 0.3,
+    //                 }
+    //             );
+
+    //         } else if (data.properties.shape.type === 'Point') {
+    //             var pointGeometry = new Mapillary
+    //                 .TagComponent
+    //                 .PointGeometry(data.properties.shape.coordinates[0]);
+
+    //             tag = new Mapillary.TagComponent.SpotTag(
+    //                 data.properties.key,
+    //                 pointGeometry,
+    //                 {
+    //                     text: text,
+    //                     color: 0xffff00,
+    //                     textColor: 0xffff00
+    //                 }
+    //             );
+    //         }
+
+    //         return tag;
+    //     }
+    // },
 
 
     cache: function () {
