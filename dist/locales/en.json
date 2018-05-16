@@ -4647,6 +4647,10 @@
                     "name": "Bird Hide",
                     "terms": "machan,ornithology"
                 },
+                "leisure/bleachers": {
+                    "name": "Bleachers",
+                    "terms": "crowd,bench,sports,stand,stands,seat,seating"
+                },
                 "leisure/bowling_alley": {
                     "name": "Bowling Alley",
                     "terms": "bowling center"

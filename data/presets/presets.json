@@ -9800,6 +9800,25 @@
             ],
             "name": "Bird Hide"
         },
+        "leisure/bleachers": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "bleachers"
+            },
+            "terms": [
+                "crowd",
+                "bench",
+                "sports",
+                "stand",
+                "stands",
+                "seat",
+                "seating"
+            ],
+            "name": "Bleachers"
+        },
         "leisure/bowling_alley": {
             "icon": "poi-bowling",
             "fields": [

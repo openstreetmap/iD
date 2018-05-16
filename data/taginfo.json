@@ -4110,6 +4110,15 @@
         },
         {
             "key": "leisure",
+            "value": "bleachers",
+            "description": "Bleachers",
+            "object_types": [
+                "node",
+                "area"
+            ]
+        },
+        {
+            "key": "leisure",
             "value": "bowling_alley",
             "description": "Bowling Alley",
             "object_types": [

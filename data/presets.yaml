@@ -3750,6 +3750,11 @@ en:
         name: Bird Hide
         # 'terms: machan,ornithology'
         terms: '<translate with synonyms or related terms for ''Bird Hide'', separated by commas>'
+      leisure/bleachers:
+        # leisure=bleachers
+        name: Bleachers
+        # 'terms: crowd,bench,sports,stand,stands,seat,seating'
+        terms: '<translate with synonyms or related terms for ''Bleachers'', separated by commas>'
       leisure/bowling_alley:
         # leisure=bowling_alley
         name: Bowling Alley
