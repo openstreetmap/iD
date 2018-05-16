@@ -172,7 +172,7 @@ export function uiMapData(context) {
             .append('label')
             .call(tooltip()
                 .title(t('map_data.layers.osm.tooltip'))
-                .placement('top')
+                .placement('bottom')
             );
 
         labelEnter
