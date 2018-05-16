@@ -1,0 +1,17 @@
+{
+    "icon": "picnic-site",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "leisure": "bleachers"
+    },
+    "terms": [
+        "stand",
+        "stands",
+        "bench",
+        "benches",
+        "bleachers"
+    ],
+    "name": "Bleachers"
+}
