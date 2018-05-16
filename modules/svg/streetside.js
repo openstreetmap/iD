@@ -5,9 +5,9 @@ import { services } from '../services';
 
 export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
+    var minZoom = 16;
     var minMarkerZoom = 16;
-    var minViewfieldZoom = 18;
+    var minViewfieldZoom = 16;
     var layer = d3_select(null);
     var _streetside;
 
@@ -112,14 +112,14 @@ export function svgStreetside(projection, context, dispatch) {
 
 
     function update() {
-        console.log("svg - streetside - update()");
+        console.log("svg - update()");
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
 
         var z = ~~context.map().zoom();
         
-        console.log('z = ', z);
-        console.log('minMarkerZoom = ', minMarkerZoom);
+        //console.log('z = ', z);
+        //console.log('minMarkerZoom = ', minMarkerZoom);
 
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
@@ -210,7 +210,7 @@ export function svgStreetside(projection, context, dispatch) {
     //drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
     //'svgStreetside()' is called from index.js (ln)
     function drawImages(selection) {
-        console.log("svg - streetside - drawImages(); selection: ", selection);
+        //console.log("svg - streetside - drawImages(); selection: ", selection);
         var enabled = svgStreetside.enabled,
             service = getService();
         //console.log("svg - streetside - drawImages(); svgStreetside enabled? ", enabled);
@@ -241,7 +241,8 @@ export function svgStreetside(projection, context, dispatch) {
                 editOn();
                 update();
                 // console.log("svg: calling loadImages....");
-                service.loadImages(projection);
+                
+                service.loadBubbles(projection);
             } else {
                 editOff();
             }
