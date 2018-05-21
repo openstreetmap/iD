@@ -277,6 +277,87 @@ export function uiMapData(context) {
             .property('checked', showsGpx);
     }
 
+    function drawMvtItem(selection) {
+        var mvt = layers.layer('gpx'),
+            hasMvt = mvt && mvt.hasGpx(),
+            showsMvt = hasMvt && gpx.enabled();
+
+        var ul = selection
+            .selectAll('.layer-list-mvt')
+            .data(mvt ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-mvt');
+
+        var liEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-mvt');
+
+        liEnter
+            .append('button')
+            .attr('class', 'list-item-mvt-extent')
+            .call(tooltip()
+                .title(t('mvt.zoom'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                mvt.fitZoom();
+            })
+            .call(svgIcon('#icon-search'));
+
+        liEnter
+            .append('button')
+            .attr('class', 'list-item-mvt-browse')
+            .call(tooltip()
+                .title(t('mvt.browse'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function() {
+                d3_select(document.createElement('input'))
+                    .attr('type', 'file')
+                    .on('change', function() {
+                        mvt.files(d3_event.target.files);
+                    })
+                    .node().click();
+            })
+            .call(svgIcon('#icon-geolocate'));
+
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('mvt.drag_drop'))
+                .placement('top')
+            );
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('mvt'); });
+
+        labelEnter
+            .append('span')
+            .text(t('mvt.local_layer'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        ul.selectAll('.list-item-mvt')
+            .classed('active', showsMvt)
+            .selectAll('label')
+            .classed('deemphasize', !hasMvt)
+            .selectAll('input')
+            .property('disabled', !hasMvt)
+            .property('checked', showsMvt);
+    }
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
@@ -369,7 +450,8 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItem)
             .call(drawPhotoItems)
-            .call(drawGpxItem);
+            .call(drawGpxItem)
+            .call(drawMvtItem);
 
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
