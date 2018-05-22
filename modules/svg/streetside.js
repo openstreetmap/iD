@@ -7,11 +7,13 @@ export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 16;
     var minMarkerZoom = 16;
-    var minViewfieldZoom = 16;
+    var minViewfieldZoom = 19;
     var layer = d3_select(null);
     var _streetside;
 
-
+    /**
+     * init().
+     */
     function init() {
         if (svgStreetside.initialized) return;  // run once
         svgStreetside.enabled = false;
@@ -19,7 +21,9 @@ export function svgStreetside(projection, context, dispatch) {
         console.log("svg: streetside initialized....");
     }
 
-
+    /**
+     * getService().
+     */
     function getService() {
         if (services.streetside && !_streetside) {
             _streetside = services.streetside;
@@ -31,7 +35,9 @@ export function svgStreetside(projection, context, dispatch) {
         return _streetside;
     }
 
-
+    /**
+     * showLayer().
+     */
     function showLayer() {
         console.log('svg - streetside - showLayer()');
         var service = getService();
@@ -48,7 +54,9 @@ export function svgStreetside(projection, context, dispatch) {
             .on('end', function () { dispatch.call('change'); });
     }
 
-
+    /**
+     * hideLayer().
+     */
     function hideLayer() {
         var service = getService();
         if (service) {
@@ -64,44 +72,55 @@ export function svgStreetside(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-
+    /**
+     * editOn().
+     */
     function editOn() {
         layer.style('display', 'block');
     }
 
-
+    /**
+     * editOff().
+     */
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
-
+    /**
+     * click() Handles 'bubble' point click event.
+     */
     function click(d) {
-        console.log("svg: map was clicked with streetside on, here is the passed object: ", d);
+        console.log("svg: map was clicked with streetside on. Passed obj: ", d);
         var service = getService();
         if (!service) return;
 
         service
             .selectImage(d)
-            //.updateViewer(d.key, context);
             .showViewer();
 
         context.map().centerEase(d.loc);
     }
 
-
+    /**
+     * mouseover().
+     */
     function mouseover(d) {
         var service = getService();
         if (service) service.setStyles(d);
     }
 
-
+    /**
+     * mouseout().
+     */
     function mouseout() {
         var service = getService();
         if (service) service.setStyles(null);
     }
 
-
+    /**
+     * transform().
+     */
     function transform(d) {
         var t = svgPointTransform(projection)(d);
         if (d.ca) {
@@ -110,42 +129,20 @@ export function svgStreetside(projection, context, dispatch) {
         return t;
     }
 
-
+    /**
+     * update().
+     */
     function update() {
         console.log("svg - update()");
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
-
         var z = ~~context.map().zoom();
-        
-        //console.log('z = ', z);
-        //console.log('minMarkerZoom = ', minMarkerZoom);
-
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
-
         var service = getService();
+
         // gets the features from service cache
-        //var sequences = (service ? service.sequences(projection) : []);
-        //var images = (service && showMarkers ? service.images(projection) : []);
         var bubbles = (service && showMarkers ? service.bubbles(projection) : []);
-         console.log("svg: update() bubbles", bubbles);
-        // console.log("     svg: update() images", images);
-        // var traces = layer.selectAll('.sequences').selectAll('.sequence')
-        //     .data(sequences, function(d) { return d.properties.key; });
-
-        // // exit
-        // traces.exit()
-        //     .remove();
-
-        // // enter/update
-        // traces = traces.enter()
-        //     .append('path')
-        //     .attr('class', 'sequence')
-        //     .merge(traces)
-        //     .attr('d', svgPath(projection).geojson);
-
-
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(bubbles, function(d) { return d.key; });
 
@@ -171,7 +168,7 @@ export function svgStreetside(projection, context, dispatch) {
             .sort(function(a, b) {
                 return (a === selected) ? 1
                     : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
+                    : b.loc[1] - a.loc[1];
             })
             .attr('transform', transform)
             .select('.viewfield-scale');
@@ -191,8 +188,10 @@ export function svgStreetside(projection, context, dispatch) {
         viewfields.exit()
             .remove();
 
-        viewfields.enter()               // viewfields may or may not be drawn...
-            .insert('path', 'circle')    // but if they are, draw below the circles
+        // viewfields may or may not be drawn...
+        // but if they are, draw below the circles
+        viewfields.enter()               
+            .insert('path', 'circle')    
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
@@ -207,13 +206,16 @@ export function svgStreetside(projection, context, dispatch) {
         }
     }
 
-    //drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
-    //'svgStreetside()' is called from index.js (ln)
+    /**
+     * drawImages() 
+     * drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
+     * 'svgStreetside()' is called from index.js
+     */
     function drawImages(selection) {
         //console.log("svg - streetside - drawImages(); selection: ", selection);
         var enabled = svgStreetside.enabled,
             service = getService();
-        //console.log("svg - streetside - drawImages(); svgStreetside enabled? ", enabled);
+
         layer = selection.selectAll('.layer-streetside-images')
             .data(service ? [0] : []);
 
@@ -224,10 +226,6 @@ export function svgStreetside(projection, context, dispatch) {
             .append('g')
             .attr('class', 'layer-streetside-images')
             .style('display', enabled ? 'block' : 'none');
-
-        // layerEnter
-        //     .append('g')
-        //     .attr('class', 'sequences');
 
         layerEnter
             .append('g')
@@ -240,7 +238,6 @@ export function svgStreetside(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                // console.log("svg: calling loadImages....");
                 
                 service.loadBubbles(projection);
             } else {
@@ -249,7 +246,9 @@ export function svgStreetside(projection, context, dispatch) {
         }
     }
 
-
+    /**
+     * drawImages.enabled().
+     */
     drawImages.enabled = function(_) {
         //console.log('svg - streetside - drawImages.enabled()');
         if (!arguments.length) return svgStreetside.enabled;
@@ -263,12 +262,13 @@ export function svgStreetside(projection, context, dispatch) {
         return this;
     };
 
-
+    /**
+     * drawImages.supported().
+     */
     drawImages.supported = function() {
         return !!getService();
     };
-
-
+    
     init();
 
     return drawImages;
