@@ -279,7 +279,7 @@ export function uiMapData(context) {
 
     function drawMvtItem(selection) {
         var mvt = layers.layer('mvt'),
-            hasMvt = mvt && mvt.hasGpx(),
+            hasMvt = mvt && mvt.hasMvt(),
             showsMvt = hasMvt && mvt.enabled();
 
         var ul = selection

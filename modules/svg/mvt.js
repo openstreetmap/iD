@@ -14,8 +14,6 @@ import {
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
-import toGeoJSON from '@mapbox/togeojson';
-
 
 var _initialized = false;
 var _enabled = false;
@@ -43,24 +41,24 @@ export function svgMvt(projection, context, dispatch) {
 
         d3_select('body')
             .attr('dropzone', 'copy')
-            .on('drop.localgpx', function() {
+            .on('drop.localmvt', function() {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawGpx.files(d3_event.dataTransfer.files);
+                drawMvt.files(d3_event.dataTransfer.files);
             })
-            .on('dragenter.localgpx', over)
-            .on('dragexit.localgpx', over)
-            .on('dragover.localgpx', over);
+            .on('dragenter.localmvt', over)
+            .on('dragexit.localmvt', over)
+            .on('dragover.localmvt', over);
 
         _initialized = true;
     }
 
 
-    function drawGpx(selection) {
+    function drawMvt(selection) {
         var getPath = svgPath(projection).geojson;
 
-        layer = selection.selectAll('.layer-gpx')
+        layer = selection.selectAll('.layer-mvt')
             .data(_enabled ? [0] : []);
 
         layer.exit()
@@ -68,7 +66,7 @@ export function svgMvt(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-gpx')
+            .attr('class', 'layer-mvt')
             .merge(layer);
 
 
@@ -81,7 +79,7 @@ export function svgMvt(projection, context, dispatch) {
 
         paths = paths.enter()
             .append('path')
-            .attr('class', 'gpx')
+            .attr('class', 'mvt')
             .merge(paths);
 
         paths
@@ -92,8 +90,8 @@ export function svgMvt(projection, context, dispatch) {
         labelData = labelData.filter(getPath);
 
         layer
-            .call(drawLabels, 'gpxlabel-halo', labelData)
-            .call(drawLabels, 'gpxlabel', labelData);
+            .call(drawLabels, 'mvtlabel-halo', labelData)
+            .call(drawLabels, 'mvtlabel', labelData);
 
 
         function drawLabels(selection, textClass, data) {
@@ -148,28 +146,28 @@ export function svgMvt(projection, context, dispatch) {
 
     function parseSaveAndZoom(extension, data) {
         switch (extension) {
-            default:
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
+            /*default:
+                drawMvt.geojson(tile.toGeoJSON(x,y,z)).fitZoom();
                 break;
-            case '.kml':
-                drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
-                break;
+            case '.mbtiles':
+                drawMvt.geojson(tile.toGeoJSON()).fitZoom();
+                break;*/
             case '.geojson':
             case '.json':
-                drawGpx.geojson(JSON.parse(data)).fitZoom();
+                drawMvt.geojson(JSON.parse(data)).fitZoom();
                 break;
         }
     }
 
 
-    drawGpx.showLabels = function(_) {
+    drawMvt.showLabels = function(_) {
         if (!arguments.length) return _showLabels;
         _showLabels = _;
         return this;
     };
 
 
-    drawGpx.enabled = function(_) {
+    drawMvt.enabled = function(_) {
         if (!arguments.length) return _enabled;
         _enabled = _;
         dispatch.call('change');
@@ -177,12 +175,12 @@ export function svgMvt(projection, context, dispatch) {
     };
 
 
-    drawGpx.hasGpx = function() {
+    drawMvt.hasMvt = function() {
         return (!(_isEmpty(_geojson) || _isEmpty(_geojson.features)));
     };
 
 
-    drawGpx.geojson = function(gj) {
+    drawMvt.geojson = function(gj) {
         if (!arguments.length) return _geojson;
         if (_isEmpty(gj) || _isEmpty(gj.features)) return this;
         _geojson = gj;
@@ -191,7 +189,7 @@ export function svgMvt(projection, context, dispatch) {
     };
 
 
-    drawGpx.url = function(url) {
+    drawMvt.url = function(url) {
         d3_text(url, function(err, data) {
             if (!err) {
                 _src = url;
@@ -203,7 +201,7 @@ export function svgMvt(projection, context, dispatch) {
     };
 
 
-    drawGpx.files = function(fileList) {
+    drawMvt.files = function(fileList) {
         if (!fileList.length) return this;
         var f = fileList[0],
             reader = new FileReader();
@@ -221,13 +219,13 @@ export function svgMvt(projection, context, dispatch) {
     };
 
 
-    drawGpx.getSrc = function () {
+    drawMvt.getSrc = function () {
         return _src;
     };
 
 
-    drawGpx.fitZoom = function() {
-        if (!this.hasGpx()) return this;
+    drawMvt.fitZoom = function() {
+        if (!this.hasMvt()) return this;
 
         var map = context.map();
         var viewport = map.trimmedExtent().polygon();
@@ -264,5 +262,5 @@ export function svgMvt(projection, context, dispatch) {
 
 
     init();
-    return drawGpx;
+    return drawMvt;
 }
