@@ -589,6 +589,9 @@ en:
     drag_drop: "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse"
     zoom: "Zoom to layer"
     browse: "Browse for a file"
+  streetside:
+    tooltip: "Streetside photos from Microsoft"
+    title: "Photo Overlay (Streetside)"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
     title: "Photo Overlay (Mapillary)"

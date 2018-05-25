@@ -42,6 +42,32 @@
     color: #fff;
 }
 
+/* streetside photo attribution */
+.photo-wrapper .photo-attribution-streetside {
+    width: 100%;
+    font-size: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 4px 2px;
+    z-index: 10;
+}
+
+.photo-attribution-streetside a,
+.photo-attribution-streetside a:visited,
+.photo-attribution-streetside span {
+    padding: 4px 2px;
+    color: #fff;
+}
+.photo-attribution-streetside .image_link{
+    color: #fff;
+    float: left;
+    line-height: 6px;
+}
+.photo-attribution-streetside .image_link:hover{
+    color: #06b8ff;
+}
+
 /* markers and sequences */
 .viewfield-group {
     pointer-events: visible;
@@ -113,6 +139,29 @@
 }
 
 
+/* Streetside Image Layer */
+.layer-streetside-images {
+    pointer-events: none;
+}
+.layer-streetside-images .viewfield-group * {
+    fill: #00d8f5;
+}
+.layer-streetside-images .viewfield-group * {
+    fill: #00d8f5;
+}
+.layer-streetside-images .viewfield-group.selected * {
+    fill: #fffc64 !important;
+    fill-opacity: 1;
+}
+.layer-streetside-images .viewfield-group.hovered * {
+    fill: #fffc64 !important;
+    fill-opacity: .9;
+}
+.layer-streetside-images .sequence {
+    stroke: #00d8f5;
+}
+
+
 /* Mapillary Image Layer */
 .layer-mapillary-images {
     pointer-events: none;
@@ -162,6 +211,28 @@
     stroke: #77ddff;
 }
 
+
+/* Streetside viewer */
+#ms .domRenderer .TagSymbol {
+    font-size: 10px;
+    background-color: rgba(0,0,0,0.4);
+    padding: 0 4px;
+    border-radius: 4px;
+    top: -25px;
+}
+#ms .domRenderer .Attribution {
+    /* we will roll our own to avoid async update issues like #4526 */
+    display: none;
+}
+
+.ms-wrapper .photo-attribution a:active,
+.ms-wrapper .photo-attribution a:hover {
+    color: #35af6d;
+}
+
+.ms-wrapper .mapillary-js-dom {
+    z-index: 9;
+}
 
 /* Mapillary viewer */
 #mly .domRenderer .TagSymbol {
