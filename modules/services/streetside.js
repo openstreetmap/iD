@@ -1,19 +1,10 @@
-import _filter from 'lodash-es/filter';
-import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
-import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
-import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
 
 import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    request as d3_request,
-    json as d3_json
-} from 'd3-request';
 
 import {
     select as d3_select,
@@ -31,7 +22,6 @@ import { utilQsString, utilRebind } from '../util';
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
 var bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
-var acctId = '1402191';
 var pannellumViewerCss = 'pannellum-streetside/pannellum.css';
 var pannellumViewer = 'pannellum-streetside/pannellum.js';
 var tileZoom = 16.5;
@@ -427,11 +417,14 @@ export default {
                 bubbleIdQuadKey = '0' + bubbleIdQuadKey;
             }
 
+            // bhousel todo check this
+            if (!window.pannellum) return;
+
             // Order matters here: front=01, right=02, back=03, left=10, up=11, down=12
             var imgLocIdxArr = ['01','02','03','10','11','12'];
             var imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
             var imgUrlSuffix = '.jpg?g=6338&n=z';
-            pannellum.viewer('viewer-streetside', {
+            window.pannellum.viewer('viewer-streetside', {
                 type: 'cubemap',
                 cubeMap: [
                     imgUrlPrefix + imgLocIdxArr[0] +  imgUrlSuffix,
@@ -473,9 +466,9 @@ export default {
             .classed('hovered', function (d) { return d.key === hoveredBubbleKey; })
             .classed('selected', function (d) { return d.key === selectedBubbleKey; });
 
-        d3_selectAll('.layer-streetside-images .sequence')
-            .classed('highlighted', function (d) { return d.properties.key === hoveredSequenceKey; })
-            .classed('selected', function (d) { return d.properties.key === selectedSequenceKey; });
+        // d3_selectAll('.layer-streetside-images .sequence')
+        //     .classed('highlighted', function (d) { return d.properties.key === hoveredSequenceKey; })
+        //     .classed('selected', function (d) { return d.properties.key === selectedSequenceKey; });
 
         return this;
     },

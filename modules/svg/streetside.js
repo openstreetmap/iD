@@ -3,6 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
 
+
 export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 16;
@@ -18,7 +19,6 @@ export function svgStreetside(projection, context, dispatch) {
         if (svgStreetside.initialized) return;  // run once
         svgStreetside.enabled = false;
         svgStreetside.initialized = true;
-        console.log("svg: streetside initialized....");
     }
 
     /**
@@ -39,7 +39,6 @@ export function svgStreetside(projection, context, dispatch) {
      * showLayer().
      */
     function showLayer() {
-        console.log('svg - streetside - showLayer()');
         var service = getService();
         if (!service) return;
 
@@ -91,7 +90,6 @@ export function svgStreetside(projection, context, dispatch) {
      * click() Handles 'bubble' point click event.
      */
     function click(d) {
-        console.log("svg: map was clicked with streetside on. Passed obj: ", d);
         var service = getService();
         if (!service) return;
 
@@ -133,7 +131,6 @@ export function svgStreetside(projection, context, dispatch) {
      * update().
      */
     function update() {
-        console.log("svg - update()");
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var z = ~~context.map().zoom();
@@ -212,9 +209,8 @@ export function svgStreetside(projection, context, dispatch) {
      * 'svgStreetside()' is called from index.js
      */
     function drawImages(selection) {
-        //console.log("svg - streetside - drawImages(); selection: ", selection);
-        var enabled = svgStreetside.enabled,
-            service = getService();
+        var enabled = svgStreetside.enabled;
+        var service = getService();
 
         layer = selection.selectAll('.layer-streetside-images')
             .data(service ? [0] : []);
@@ -250,7 +246,6 @@ export function svgStreetside(projection, context, dispatch) {
      * drawImages.enabled().
      */
     drawImages.enabled = function(_) {
-        //console.log('svg - streetside - drawImages.enabled()');
         if (!arguments.length) return svgStreetside.enabled;
         svgStreetside.enabled = _;
         if (svgStreetside.enabled) {
