@@ -12,6 +12,7 @@ import {
 } from 'd3-selection';
 
 import rbush from 'rbush';
+import { t } from '../util/locale';
 import { jsonpRequest } from '../util/jsonp_request';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
@@ -40,10 +41,10 @@ function abortRequest(i) {
  */
 function nearNullIsland(x, y, z) {
     if (z >= 7) {
-        var center = Math.pow(2, z - 1),
-            width = Math.pow(2, z - 6),
-            min = center - (width / 2),
-            max = center + (width / 2) - 1;
+        var center = Math.pow(2, z - 1);
+        var width = Math.pow(2, z - 6);
+        var min = center - (width / 2);
+        var max = center + (width / 2) - 1;
         return x >= min && x <= max && y >= min && y <= max;
     }
     return false;
@@ -130,15 +131,14 @@ function loadNextTilePage(which, currZoom, url, tile) {
     var nextPage = cache.nextPage[tile.id] || 0;
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
-    cache.inflight[id] = getBubbles(url, tile, function(bubbles){
-        // console.log("GET Response - bubbles: ", bubbles);
+    cache.inflight[id] = getBubbles(url, tile, function(bubbles) {
         cache.loaded[id] = true;
         delete cache.inflight[id];
         if (!bubbles) return;
 
         // [].shift() removes the first element, some statistics info, not a bubble point
         bubbles.shift();
-        // console.log('bubbles.length', bubbles.length);
+
         var features = bubbles.map(function (bubble) {
             var loc = [bubble.lo, bubble.la];
             var d = {
@@ -285,6 +285,7 @@ export default {
         loadTiles('bubbles', bubbleApi, projection);
     },
 
+
     /**
      * loadViewer() create the streeside viewer.
      */
@@ -304,7 +305,7 @@ export default {
         // inject div to support streetside viewer (pannellum)
         wrapEnter
             .append('div')
-            .attr('id','viewer-streetside');
+            .attr('id', 'viewer-streetside');
 
         // inject div to support photo attribution into ms-wrapper
         wrapEnter
@@ -389,7 +390,7 @@ export default {
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
                     .attr('href', 'https://www.microsoft.com/en-us/maps/streetside')
-                    .text('©' + year +' Microsoft');
+                    .text('©' + year + ' Microsoft');
 
                 attribution
                     .append('span')
@@ -409,7 +410,7 @@ export default {
                 .attr('target', '_blank')
                 .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' + encodeURIComponent(d.key) +
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-                .text('Report a privacy concern with this image');
+                .text(t('streetside.report'));
 
             var bubbleIdQuadKey = d.key.toString(4);
             var paddingNeeded = 16 - bubbleIdQuadKey.length;
@@ -427,15 +428,16 @@ export default {
             window.pannellum.viewer('viewer-streetside', {
                 type: 'cubemap',
                 cubeMap: [
-                    imgUrlPrefix + imgLocIdxArr[0] +  imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[1] +  imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[2] +  imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[3] +  imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[4] +  imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[5] +  imgUrlSuffix
+                    imgUrlPrefix + imgLocIdxArr[0] + imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[1] + imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[2] + imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[3] + imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[4] + imgUrlSuffix,
+                    imgUrlPrefix + imgLocIdxArr[5] + imgUrlSuffix
                 ],
                 showFullscreenCtrl: false,
-                autoLoad: true
+                autoLoad: true,
+                compass: true
             });
         }
         return this;
