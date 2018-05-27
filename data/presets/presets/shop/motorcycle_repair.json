@@ -1,0 +1,28 @@
+{
+    "icon": "scooter",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "service/vehicle",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "auto",
+        "garage",
+        "service",
+        "motorcycle"
+        "bike",
+        "bike repair"
+    ],
+    "tags": {
+        "shop": "motorcycle_repair"
+    },
+    "name": "Motorcycle Repair Shop"
+}
