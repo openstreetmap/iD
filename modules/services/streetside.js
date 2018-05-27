@@ -23,11 +23,14 @@ import { utilQsString, utilRebind } from '../util';
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
 var bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
-var pannellumViewerCss = 'pannellum-streetside/pannellum.css';
-var pannellumViewer = 'pannellum-streetside/pannellum.js';
+var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
+var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var tileZoom = 16.5;
 var dispatch = d3_dispatch('loadedBubbles');
+var _currScene = 0;
 var _bubbleCache;
+var _pannellumViewer;
+var _sceneOptions;
 
 /**
  * abortRequest().
@@ -286,6 +289,21 @@ export default {
     },
 
 
+    initViewer: function (context) {
+        if (!window.pannellum) return;
+        if (_pannellumViewer) return;
+
+        var sceneID = ++_currScene + '';
+        var options = {
+            'default': { firstScene: sceneID },
+            scenes: {}
+        }
+        options.scenes[sceneID] = _sceneOptions;
+
+        _pannellumViewer = window.pannellum.viewer('viewer-streetside', options);
+    },
+
+
     /**
      * loadViewer() create the streeside viewer.
      */
@@ -319,7 +337,7 @@ export default {
             .append('link')
             .attr('id', 'streetside-viewercss')
             .attr('rel', 'stylesheet')
-            .attr('href', context.asset(pannellumViewerCss));
+            .attr('href', context.asset(pannellumViewerCSS));
 
         // load streetside pannellum viewer js
         d3_select('head').selectAll('#streetside-viewerjs')
@@ -327,13 +345,33 @@ export default {
             .enter()
             .append('script')
             .attr('id', 'streetside-viewerjs')
-            .attr('src', context.asset(pannellumViewer));
+            .attr('src', context.asset(pannellumViewerJS));
     },
 
     /**
      * showViewer()
      */
     showViewer: function () {
+        if (!_sceneOptions) return;
+
+        if (!_pannellumViewer) {
+            this.initViewer();
+        } else {
+            // make a new scene
+            var sceneID = ++_currScene + '';
+            _pannellumViewer
+                .addScene(sceneID, _sceneOptions)
+                .loadScene(sceneID);
+
+            // remove previous scene
+            if (_currScene > 2) {
+                sceneID = (_currScene - 1) + '';
+                _pannellumViewer
+                    .removeScene(sceneID);
+            }
+
+        }
+
         var wrap = d3_select('#photoviewer')
             .classed('hide', false);
 
@@ -412,20 +450,22 @@ export default {
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
                 .text(t('streetside.report'));
 
+
             var bubbleIdQuadKey = d.key.toString(4);
             var paddingNeeded = 16 - bubbleIdQuadKey.length;
             for (var i = 0; i < paddingNeeded; i++) {
                 bubbleIdQuadKey = '0' + bubbleIdQuadKey;
             }
 
-            // bhousel todo check this
-            if (!window.pannellum) return;
-
             // Order matters here: front=01, right=02, back=03, left=10, up=11, down=12
             var imgLocIdxArr = ['01','02','03','10','11','12'];
             var imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
             var imgUrlSuffix = '.jpg?g=6338&n=z';
-            window.pannellum.viewer('viewer-streetside', {
+
+            _sceneOptions = {
+                showFullscreenCtrl: false,
+                autoLoad: true,
+                compass: true,
                 type: 'cubemap',
                 cubeMap: [
                     imgUrlPrefix + imgLocIdxArr[0] + imgUrlSuffix,
@@ -434,12 +474,10 @@ export default {
                     imgUrlPrefix + imgLocIdxArr[3] + imgUrlSuffix,
                     imgUrlPrefix + imgLocIdxArr[4] + imgUrlSuffix,
                     imgUrlPrefix + imgLocIdxArr[5] + imgUrlSuffix
-                ],
-                showFullscreenCtrl: false,
-                autoLoad: true,
-                compass: true
-            });
+                ]
+            };
         }
+
         return this;
     },
 
