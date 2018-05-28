@@ -15,11 +15,11 @@
     ],
     "terms": [
         "auto",
-        "garage",
-        "service",
-        "motorcycle"
         "bike",
-        "bike repair"
+        "garage",
+        "motorcycle",
+        "repair",
+        "service"
     ],
     "tags": {
         "shop": "motorcycle_repair"

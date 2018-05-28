@@ -7190,6 +7190,16 @@
         },
         {
             "key": "shop",
+            "value": "motorcycle_repair",
+            "description": "Motorcycle Repair Shop",
+            "object_types": [
+                "node",
+                "area"
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/scooter-15.svg?sanitize=true"
+        },
+        {
+            "key": "shop",
             "value": "motorcycle",
             "description": "Motorcycle Dealership",
             "object_types": [

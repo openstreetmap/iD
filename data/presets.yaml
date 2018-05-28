@@ -5397,6 +5397,11 @@ en:
         name: Motorcycle Dealership
         # 'terms: bike'
         terms: '<translate with synonyms or related terms for ''Motorcycle Dealership'', separated by commas>'
+      shop/motorcycle_repair:
+        # shop=motorcycle_repair
+        name: Motorcycle Repair Shop
+        # 'terms: auto,bike,garage,motorcycle,repair,service'
+        terms: '<translate with synonyms or related terms for ''Motorcycle Repair Shop'', separated by commas>'
       shop/music:
         # shop=music
         name: Music Store

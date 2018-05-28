@@ -6079,6 +6079,10 @@
                     "name": "Money Lender",
                     "terms": ""
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Motorcycle Repair Shop",
+                    "terms": "auto,bike,garage,motorcycle,repair,service"
+                },
                 "shop/motorcycle": {
                     "name": "Motorcycle Dealership",
                     "terms": "bike"
