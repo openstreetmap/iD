@@ -14,6 +14,9 @@ import {
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
+import vt from '@mapbox/vector-tile';
+import Protobuf from 'pbf';
+
 
 var _initialized = false;
 var _enabled = false;
@@ -145,13 +148,31 @@ export function svgMvt(projection, context, dispatch) {
 
 
     function parseSaveAndZoom(extension, data) {
+        var tile = new vt.VectorTile(new Protobuf(data));
+        var layers = Object.keys(tile.layers);
+        if (!Array.isArray(layers))
+        layers = [layers]
+
+        var collection = {type: 'FeatureCollection', features: []};
+
+        layers.forEach(function (layerID) {
+            var layer = tile.layers[layerID];
+            if (layer) {
+                for (var i = 0; i < layer.length; i++) {
+                    var feature = layer.feature(i).toGeoJSON(150, 194, 9);
+                    if (layers.length > 1) feature.properties.vt_layer = layerID;
+                    collection.features.push(feature);
+                }
+            }
+        });
+
         switch (extension) {
             /*default:
                 drawMvt.geojson(tile.toGeoJSON(x,y,z)).fitZoom();
-                break;
-            case '.mbtiles':
-                drawMvt.geojson(tile.toGeoJSON()).fitZoom();
                 break;*/
+            case '.pbf':
+                drawMvt.geojson(JSON.parse(collection)).fitZoom();
+                break;
             case '.geojson':
             case '.json':
                 drawMvt.geojson(JSON.parse(data)).fitZoom();
