@@ -171,7 +171,7 @@ export function svgMvt(projection, context, dispatch) {
                 drawMvt.geojson(tile.toGeoJSON(x,y,z)).fitZoom();
                 break;*/
             case '.pbf':
-                drawMvt.geojson(JSON.parse(collection)).fitZoom();
+                drawMvt.geojson(collection).fitZoom();
                 break;
             case '.geojson':
             case '.json':
@@ -235,7 +235,7 @@ export function svgMvt(projection, context, dispatch) {
             };
         })(f);
 
-        reader.readAsText(f);
+        reader.readAsArrayBuffer(f);
         return this;
     };
 
