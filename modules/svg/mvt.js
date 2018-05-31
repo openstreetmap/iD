@@ -128,8 +128,25 @@ export function svgMvt(projection, context, dispatch) {
     }
 
 
-    function toDom(x) {
-        return (new DOMParser()).parseFromString(x, 'text/xml');
+    function vtToGeoJson(x) {
+        var tile = new vt.VectorTile(new Protobuf(x));
+        var layers = Object.keys(tile.layers);
+        if (!Array.isArray(layers))
+        layers = [layers]
+
+        var collection = {type: 'FeatureCollection', features: []};
+
+        layers.forEach(function (layerID) {
+            var layer = tile.layers[layerID];
+            if (layer) {
+                for (var i = 0; i < layer.length; i++) {
+                    var feature = layer.feature(i).toGeoJSON(0, 1, 2);
+                    if (layers.length > 1) feature.properties.vt_layer = layerID;
+                    collection.features.push(feature);
+                }
+            }
+        });
+        return collection;
     }
 
 
@@ -148,30 +165,15 @@ export function svgMvt(projection, context, dispatch) {
 
 
     function parseSaveAndZoom(extension, data) {
-        var tile = new vt.VectorTile(new Protobuf(data));
-        var layers = Object.keys(tile.layers);
-        if (!Array.isArray(layers))
-        layers = [layers]
-
-        var collection = {type: 'FeatureCollection', features: []};
-
-        layers.forEach(function (layerID) {
-            var layer = tile.layers[layerID];
-            if (layer) {
-                for (var i = 0; i < layer.length; i++) {
-                    var feature = layer.feature(i).toGeoJSON(150, 194, 9);
-                    if (layers.length > 1) feature.properties.vt_layer = layerID;
-                    collection.features.push(feature);
-                }
-            }
-        });
-
         switch (extension) {
-            /*default:
-                drawMvt.geojson(tile.toGeoJSON(x,y,z)).fitZoom();
-                break;*/
+            default:
+                drawMvt.geojson(JSON.parse(data)).fitZoom();
+                break;
             case '.pbf':
-                drawMvt.geojson(collection).fitZoom();
+                drawMvt.geojson(vtToGeoJson(data)).fitZoom();
+                break;
+            case '.mvt':
+                drawMvt.geojson(vtToGeoJson(data)).fitZoom();
                 break;
             case '.geojson':
             case '.json':
