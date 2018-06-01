@@ -5880,7 +5880,7 @@
             "name": "Gardener"
         },
         "craft/glaziery": {
-            "icon": "fire-station",
+            "icon": "poi-window",
             "fields": [
                 "name",
                 "operator",
@@ -6358,7 +6358,7 @@
             "name": "Watchmaker"
         },
         "craft/window_construction": {
-            "icon": "poi-tool",
+            "icon": "poi-window",
             "fields": [
                 "name",
                 "operator",
@@ -19002,7 +19002,7 @@
             "name": "Wholesale Store"
         },
         "shop/window_blind": {
-            "icon": "shop",
+            "icon": "poi-window",
             "fields": [
                 "name",
                 "operator",

@@ -1,5 +1,5 @@
 {
-    "icon": "poi-tool",
+    "icon": "poi-window",
     "fields": [
         "name",
         "operator",

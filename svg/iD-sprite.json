@@ -346,6 +346,7 @@
     "poi-milestone":            { "viewBox": "655 335 15 15" },
     "poi-crane":                { "viewBox": "670 335 15 15" },
     "poi-bulb":                 { "viewBox": "685 335 15 15" },
+    "poi-window":               { "viewBox": "700 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -367,6 +368,7 @@
     "poi-milestone-shape":         { "fill": "currentColor" },
     "poi-crane-shape":             { "fill": "currentColor" },
     "poi-bulb-shape":              { "fill": "currentColor" },
+    "poi-window-shape":            { "fill": "currentColor" },
 
     "poi-vertex":               { "viewBox": "400 350 15 15" },
 
