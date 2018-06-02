@@ -20,10 +20,10 @@ export {
 
 
 export function uiFieldText(field, context) {
-    var dispatch = d3_dispatch('change'),
-        nominatim = services.geocoder,
-        input,
-        entity;
+    var dispatch = d3_dispatch('change');
+    var nominatim = services.geocoder;
+    var input;
+    var entity;
 
 
     function i(selection) {
@@ -84,7 +84,20 @@ export function uiFieldText(field, context) {
                 .on('click', function(d) {
                     d3_event.preventDefault();
                     var num = parseInt(input.node().value || 0, 10);
-                    if (!isNaN(num)) input.node().value = num + d;
+                    if (isNaN(num)) {
+                        num = 0;
+                    }
+
+                    num = num + d;
+
+                    if (field.minValue !== undefined) {
+                        num = Math.max(num, field.minValue);
+                    }
+                    if (field.maxValue !== undefined) {
+                        num = Math.min(num, field.maxValue);
+                    }
+
+                    input.node().value = num;
                     change()();
                 });
         }
