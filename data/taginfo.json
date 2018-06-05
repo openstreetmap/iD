@@ -1712,7 +1712,7 @@
             "object_types": [
                 "node"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/amusement-park-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/danger-15.svg?sanitize=true"
         },
         {
             "key": "attraction",

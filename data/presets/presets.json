@@ -4109,7 +4109,7 @@
             "name": "Maze"
         },
         "attraction/pirate_ship": {
-            "icon": "amusement-park",
+            "icon": "danger",
             "fields": [
                 "name",
                 "operator",
