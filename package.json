@@ -19,6 +19,7 @@
     "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
     "dist:svg:community": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"community-%s\" --symbol-sprite dist/img/community-sprite.svg node_modules/osm-community-index/dist/img/*.svg",
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
+    "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/temaki/icons/*.svg",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js js/id test/spec modules",
     "start": "node development_server.js develop",
@@ -73,6 +74,7 @@
     "sinon-chai": "^3.1.0",
     "smash": "0.0",
     "svg-sprite": "1.4.0",
+    "temaki": "1.0.0",
     "uglify-js": "~3.4.0",
     "xml2js": "^0.4.17",
     "xmlbuilder": "^10.0.0"

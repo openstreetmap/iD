@@ -8,21 +8,6 @@ import { select as d3_select } from 'd3-selection';
 */
 export function svgDefs(context) {
 
-    function SVGSpriteDefinition(id, href) {
-        return function(defs) {
-            d3_request(href)
-                .mimeType('image/svg+xml')
-                .response(function(xhr) { return xhr.responseXML; })
-                .get(function(err, svg) {
-                    if (err) return;
-                    defs.node().appendChild(
-                        d3_select(svg.documentElement).attr('id', id).node()
-                    );
-                });
-        };
-    }
-
-
     return function drawDefs(selection) {
         var defs = selection.append('defs');
 
@@ -132,9 +117,31 @@ export function svgDefs(context) {
             .attr('height', function (d) { return d; });
 
         // symbol spritesheets
-        defs
-            .call(SVGSpriteDefinition('iD-sprite', context.imagePath('iD-sprite.svg')))
-            .call(SVGSpriteDefinition('maki-sprite', context.imagePath('maki-sprite.svg')))
-            .call(SVGSpriteDefinition('community-sprite', context.imagePath('community-sprite.svg')));
+        defs.selectAll('.spritesheet')
+            .data([
+                'iD-sprite',
+                'maki-sprite',
+                'temaki-sprite',
+                'community-sprite'
+            ])
+            .enter()
+            .append('g')
+            .attr('class', function (d) { return 'spritesheet spritesheet-' + d; })
+            .each(loadSprite);
+
+
+        function loadSprite(d) {
+            var url = context.imagePath(d + '.svg');
+            var node = d3_select(this).node();
+            d3_request(url)
+                .mimeType('image/svg+xml')
+                .response(function(xhr) { return xhr.responseXML; })
+                .get(function(err, svg) {
+                    if (err) return;
+                    node.appendChild(
+                        d3_select(svg.documentElement).attr('id', d).node()
+                    );
+                });
+        }
     };
 }
