@@ -1,5 +1,5 @@
 {
-    "icon": "poi-trolleybus",
+    "icon": "temaki-trolleybus",
     "fields": [
         "name",
         "ref_stop_position",

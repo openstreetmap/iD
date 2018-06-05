@@ -1,5 +1,5 @@
 {
-    "icon": "poi-storage-tank",
+    "icon": "temaki-storage_tank",
     "fields": [
         "operator",
         "access_simple",

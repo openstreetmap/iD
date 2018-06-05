@@ -1,5 +1,5 @@
 {
-    "icon": "poi-light-rail",
+    "icon": "temaki-light_rail",
     "fields": [
         "name",
         "ref_platform",

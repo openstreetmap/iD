@@ -937,7 +937,7 @@
             "name": "Barbecue/Grill"
         },
         "amenity/bench": {
-            "icon": "poi-bench",
+            "icon": "temaki-bench",
             "fields": [
                 "backrest"
             ],
@@ -1179,7 +1179,7 @@
             "name": "Car Wash"
         },
         "amenity/casino": {
-            "icon": "poi-dice",
+            "icon": "temaki-dice",
             "fields": [
                 "name",
                 "operator",
@@ -1369,7 +1369,7 @@
             "name": "Fertility Clinic"
         },
         "amenity/clock": {
-            "icon": "poi-clock",
+            "icon": "temaki-clock",
             "fields": [
                 "name",
                 "support",
@@ -1693,7 +1693,7 @@
             "name": "Food Court"
         },
         "amenity/fountain": {
-            "icon": "poi-fountain",
+            "icon": "temaki-fountain",
             "fields": [
                 "name"
             ],
@@ -1812,7 +1812,7 @@
             "name": "Hospital Grounds"
         },
         "amenity/hunting_stand": {
-            "icon": "poi-binoculars",
+            "icon": "temaki-binoculars",
             "geometry": [
                 "point",
                 "vertex",
@@ -1860,7 +1860,7 @@
             "name": "Ice Cream Shop"
         },
         "amenity/internet_cafe": {
-            "icon": "poi-mast",
+            "icon": "temaki-antenna",
             "fields": [
                 "name",
                 "operator",
@@ -2315,7 +2315,7 @@
             "name": "Church"
         },
         "amenity/place_of_worship/hindu": {
-            "icon": "poi-hinduist",
+            "icon": "temaki-hinduism",
             "fields": [
                 "name",
                 "denomination",
@@ -2399,7 +2399,7 @@
             "name": "Mosque"
         },
         "amenity/place_of_worship/shinto": {
-            "icon": "poi-shintoist",
+            "icon": "temaki-shinto",
             "fields": [
                 "name",
                 "denomination",
@@ -2426,7 +2426,7 @@
             "name": "Shinto Shrine"
         },
         "amenity/place_of_worship/sikh": {
-            "icon": "poi-sikhist",
+            "icon": "temaki-sikhism",
             "fields": [
                 "name",
                 "denomination",
@@ -2453,7 +2453,7 @@
             "name": "Sikh Temple"
         },
         "amenity/place_of_worship/taoist": {
-            "icon": "poi-taoist",
+            "icon": "temaki-taoism",
             "fields": [
                 "name",
                 "denomination",
@@ -2807,7 +2807,7 @@
             "name": "Restaurant"
         },
         "amenity/sanitary_dump_station": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "fields": [
                 "operator",
                 "access_simple",
@@ -2881,7 +2881,7 @@
             "name": "Shelter"
         },
         "amenity/shower": {
-            "icon": "poi-shower",
+            "icon": "temaki-shower",
             "fields": [
                 "operator",
                 "opening_hours",
@@ -2922,7 +2922,7 @@
             "name": "Smoking Area"
         },
         "amenity/social_facility": {
-            "icon": "poi-social-facility",
+            "icon": "temaki-social_facility",
             "fields": [
                 "name",
                 "operator",
@@ -2944,7 +2944,7 @@
             "name": "Social Facility"
         },
         "amenity/social_facility/food_bank": {
-            "icon": "poi-social-facility",
+            "icon": "temaki-social_facility",
             "fields": [
                 "name",
                 "operator",
@@ -3004,7 +3004,7 @@
             "name": "Elderly Group Home"
         },
         "amenity/social_facility/homeless_shelter": {
-            "icon": "poi-social-facility",
+            "icon": "temaki-social_facility",
             "fields": [
                 "name",
                 "operator",
@@ -3239,7 +3239,7 @@
             "name": "University Grounds"
         },
         "amenity/vending_machine": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3256,7 +3256,7 @@
             "name": "Vending Machine"
         },
         "amenity/vending_machine/news_papers": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3282,7 +3282,7 @@
             "searchable": false
         },
         "amenity/vending_machine/cigarettes": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3306,7 +3306,7 @@
             "name": "Cigarette Vending Machine"
         },
         "amenity/vending_machine/coffee": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3330,7 +3330,7 @@
             "name": "Coffee Vending Machine"
         },
         "amenity/vending_machine/condoms": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3354,7 +3354,7 @@
             "name": "Condom Vending Machine"
         },
         "amenity/vending_machine/drinks": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3382,7 +3382,7 @@
             "name": "Drink Vending Machine"
         },
         "amenity/vending_machine/electronics": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3411,7 +3411,7 @@
             "name": "Electronics Vending Machine"
         },
         "amenity/vending_machine/elongated_coin": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3440,7 +3440,7 @@
             "name": "Flat Coin Vending Machine"
         },
         "amenity/vending_machine/excrement_bags": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3468,7 +3468,7 @@
             "name": "Excrement Bag Vending Machine"
         },
         "amenity/vending_machine/feminine_hygiene": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3498,7 +3498,7 @@
             "name": "Feminine Hygiene Vending Machine"
         },
         "amenity/vending_machine/food": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3522,7 +3522,7 @@
             "name": "Food Vending Machine"
         },
         "amenity/vending_machine/fuel": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3553,7 +3553,7 @@
             "name": "Gas Pump"
         },
         "amenity/vending_machine/ice_cream": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3581,7 +3581,7 @@
             "name": "Ice Cream Vending Machine"
         },
         "amenity/vending_machine/newspapers": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3606,7 +3606,7 @@
             "name": "Newspaper Vending Machine"
         },
         "amenity/vending_machine/parcel_pickup_dropoff": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3632,7 +3632,7 @@
             "name": "Parcel Pickup/Dropoff Vending Machine"
         },
         "amenity/vending_machine/parking_tickets": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3658,7 +3658,7 @@
             "name": "Parking Ticket Vending Machine"
         },
         "amenity/vending_machine/public_transport_tickets": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3687,7 +3687,7 @@
             "name": "Transit Ticket Vending Machine"
         },
         "amenity/vending_machine/stamps": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -3713,7 +3713,7 @@
             "name": "Postage Vending Machine"
         },
         "amenity/vending_machine/sweets": {
-            "icon": "poi-vending-machine",
+            "icon": "temaki-vending_machine",
             "fields": [
                 "vending",
                 "operator",
@@ -4065,7 +4065,7 @@
             "name": "Dark Ride"
         },
         "attraction/drop_tower": {
-            "icon": "poi-tower",
+            "icon": "temaki-tower",
             "fields": [
                 "name",
                 "operator",
@@ -5115,7 +5115,7 @@
             "name": "Roof"
         },
         "building/ruins": {
-            "icon": "poi-ruins",
+            "icon": "temaki-ruins",
             "fields": [
                 "name",
                 "address",
@@ -5405,7 +5405,7 @@
             "name": "Club"
         },
         "craft": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "craft",
@@ -5557,7 +5557,7 @@
             "name": "Beekeeper"
         },
         "craft/blacksmith": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5575,7 +5575,7 @@
             "name": "Blacksmith"
         },
         "craft/boatbuilder": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5615,7 +5615,7 @@
             "name": "Bookbinder"
         },
         "craft/brewery": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "fields": [
                 "name",
                 "operator",
@@ -5642,7 +5642,7 @@
             "name": "Brewery"
         },
         "craft/carpenter": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5663,7 +5663,7 @@
             "name": "Carpenter"
         },
         "craft/carpet_layer": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5700,7 +5700,7 @@
             "name": "Caterer"
         },
         "craft/chimney_sweeper": {
-            "icon": "poi-chimney",
+            "icon": "temaki-chimney",
             "fields": [
                 "name",
                 "operator",
@@ -5718,7 +5718,7 @@
             "name": "Chimney Sweeper"
         },
         "craft/clockmaker": {
-            "icon": "poi-clock",
+            "icon": "temaki-clock",
             "fields": [
                 "name",
                 "operator",
@@ -5758,7 +5758,7 @@
             "name": "Candy Maker"
         },
         "craft/distillery": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "fields": [
                 "name",
                 "operator",
@@ -5818,7 +5818,7 @@
             "name": "Dressmaker"
         },
         "craft/electrician": {
-            "icon": "poi-power",
+            "icon": "temaki-power",
             "fields": [
                 "name",
                 "operator",
@@ -5840,7 +5840,7 @@
             "name": "Electrician"
         },
         "craft/electronics_repair": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5880,7 +5880,7 @@
             "name": "Gardener"
         },
         "craft/glaziery": {
-            "icon": "poi-window",
+            "icon": "temaki-window",
             "fields": [
                 "name",
                 "operator",
@@ -5921,7 +5921,7 @@
             "name": "Handicraft"
         },
         "craft/hvac": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5944,7 +5944,7 @@
             "name": "HVAC"
         },
         "craft/insulator": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -5980,7 +5980,7 @@
             "name": "Key Cutter"
         },
         "craft/metal_construction": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6055,7 +6055,7 @@
             "name": "Photographic Laboratory"
         },
         "craft/plasterer": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6073,7 +6073,7 @@
             "name": "Plasterer"
         },
         "craft/plumber": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6115,7 +6115,7 @@
             "name": "Pottery"
         },
         "craft/rigger": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6133,7 +6133,7 @@
             "name": "Rigger"
         },
         "craft/roofer": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6151,7 +6151,7 @@
             "name": "Roofer"
         },
         "craft/saddler": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6169,7 +6169,7 @@
             "name": "Saddler"
         },
         "craft/sailmaker": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6208,7 +6208,7 @@
             "name": "Sawmill"
         },
         "craft/scaffolder": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6244,7 +6244,7 @@
             "name": "Sculptor"
         },
         "craft/shoemaker": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6265,7 +6265,7 @@
             "name": "Shoemaker"
         },
         "craft/stonemason": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6286,7 +6286,7 @@
             "name": "Stonemason"
         },
         "craft/tiler": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6304,7 +6304,7 @@
             "name": "Tiler"
         },
         "craft/tinsmith": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6322,7 +6322,7 @@
             "name": "Tinsmith"
         },
         "craft/upholsterer": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -6340,7 +6340,7 @@
             "name": "Upholsterer"
         },
         "craft/watchmaker": {
-            "icon": "poi-clock",
+            "icon": "temaki-clock",
             "fields": [
                 "name",
                 "operator",
@@ -6358,7 +6358,7 @@
             "name": "Watchmaker"
         },
         "craft/window_construction": {
-            "icon": "poi-window",
+            "icon": "temaki-window",
             "fields": [
                 "name",
                 "operator",
@@ -6528,7 +6528,7 @@
             "name": "Defibrillator"
         },
         "emergency/fire_hydrant": {
-            "icon": "poi-fire-hydrant",
+            "icon": "temaki-fire_hydrant",
             "fields": [
                 "fire_hydrant/type",
                 "fire_hydrant/position",
@@ -7492,7 +7492,7 @@
             "name": "Street Crossing"
         },
         "highway/crosswalk-raised": {
-            "icon": "poi-foot",
+            "icon": "temaki-pedestrian",
             "fields": [
                 "crossing",
                 "kerb",
@@ -7520,7 +7520,7 @@
             "name": "Raised Pedestrian Crosswalk"
         },
         "highway/crosswalk": {
-            "icon": "poi-foot",
+            "icon": "temaki-pedestrian",
             "fields": [
                 "crossing",
                 "kerb",
@@ -7565,7 +7565,7 @@
             "name": "Cycle Path"
         },
         "highway/elevator": {
-            "icon": "poi-elevator",
+            "icon": "temaki-elevator",
             "fields": [
                 "access_simple",
                 "opening_hours",
@@ -7609,7 +7609,7 @@
             "name": "Foot Path"
         },
         "highway/give_way": {
-            "icon": "poi-yield",
+            "icon": "temaki-yield",
             "fields": [
                 "direction_vertex"
             ],
@@ -7661,7 +7661,7 @@
             "name": "Mini-Roundabout"
         },
         "highway/motorway_junction": {
-            "icon": "poi-junction",
+            "icon": "temaki-junction",
             "geometry": [
                 "vertex"
             ],
@@ -7786,7 +7786,7 @@
             "name": "Path"
         },
         "highway/pedestrian_area": {
-            "icon": "poi-foot",
+            "icon": "temaki-pedestrian",
             "fields": [
                 "name",
                 "surface",
@@ -8238,7 +8238,7 @@
             "name": "Steps"
         },
         "highway/stop": {
-            "icon": "poi-stop",
+            "icon": "temaki-stop",
             "fields": [
                 "stop",
                 "direction_vertex"
@@ -8257,7 +8257,7 @@
             "name": "Stop Sign"
         },
         "highway/street_lamp": {
-            "icon": "poi-bulb",
+            "icon": "temaki-bulb",
             "geometry": [
                 "point",
                 "vertex"
@@ -8401,7 +8401,7 @@
             "name": "Traffic Mirror"
         },
         "highway/traffic_signals": {
-            "icon": "poi-traffic-signals",
+            "icon": "temaki-traffic_signals",
             "geometry": [
                 "vertex"
             ],
@@ -8518,7 +8518,7 @@
             "name": "Minor/Unclassified Road"
         },
         "historic": {
-            "icon": "poi-ruins",
+            "icon": "temaki-ruins",
             "fields": [
                 "historic",
                 "inscription"
@@ -8534,7 +8534,7 @@
             "name": "Historic Site"
         },
         "historic/archaeological_site": {
-            "icon": "poi-ruins",
+            "icon": "temaki-ruins",
             "fields": [
                 "name",
                 "historic/civilization",
@@ -8551,7 +8551,7 @@
             "name": "Archaeological Site"
         },
         "historic/boundary_stone": {
-            "icon": "poi-milestone",
+            "icon": "temaki-milestone",
             "fields": [
                 "name",
                 "inscription"
@@ -8625,7 +8625,7 @@
             "name": "Monument"
         },
         "historic/ruins": {
-            "icon": "poi-ruins",
+            "icon": "temaki-ruins",
             "fields": [
                 "name",
                 "historic/civilization",
@@ -8693,7 +8693,7 @@
             "name": "Wayside Shrine"
         },
         "junction": {
-            "icon": "poi-junction",
+            "icon": "temaki-junction",
             "fields": [
                 "name"
             ],
@@ -9138,7 +9138,7 @@
             "name": "Meadow"
         },
         "landuse/military": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name"
             ],
@@ -9193,7 +9193,7 @@
             "name": "Military Airfield"
         },
         "landuse/military/barracks": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name",
                 "building_area"
@@ -9228,7 +9228,7 @@
             "name": "Barracks"
         },
         "landuse/military/bunker": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name",
                 "bunker_type",
@@ -9338,7 +9338,7 @@
             "name": "Danger Area"
         },
         "landuse/military/naval_base": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name"
             ],
@@ -9404,7 +9404,7 @@
             "name": "Nuclear Explosion Site"
         },
         "landuse/military/obstacle_course": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "geometry": [
                 "point",
                 "area"
@@ -9433,7 +9433,7 @@
             "name": "Obstacle Course"
         },
         "landuse/military/office": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name",
                 "building_area"
@@ -9470,7 +9470,7 @@
             "name": "Military Office"
         },
         "landuse/military/range": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name"
             ],
@@ -9510,7 +9510,7 @@
             "name": "Military Range"
         },
         "landuse/military/training_area": {
-            "icon": "poi-military",
+            "icon": "temaki-military",
             "fields": [
                 "name"
             ],
@@ -9720,7 +9720,7 @@
             "name": "Leisure"
         },
         "leisure/adult_gaming_centre": {
-            "icon": "poi-dice",
+            "icon": "temaki-dice",
             "fields": [
                 "name",
                 "operator",
@@ -9767,7 +9767,7 @@
             "name": "Amusement Arcade"
         },
         "leisure/beach_resort": {
-            "icon": "poi-beach",
+            "icon": "temaki-beach",
             "fields": [
                 "name",
                 "address",
@@ -9783,7 +9783,7 @@
             "name": "Beach Resort"
         },
         "leisure/bird_hide": {
-            "icon": "poi-binoculars",
+            "icon": "temaki-binoculars",
             "fields": [
                 "building_area"
             ],
@@ -9820,7 +9820,7 @@
             "name": "Bleachers"
         },
         "leisure/bowling_alley": {
-            "icon": "poi-bowling",
+            "icon": "temaki-bowling",
             "fields": [
                 "name",
                 "operator",
@@ -9842,7 +9842,7 @@
             "name": "Bowling Alley"
         },
         "leisure/common": {
-            "icon": "poi-foot",
+            "icon": "temaki-pedestrian",
             "geometry": [
                 "point",
                 "area"
@@ -11167,7 +11167,7 @@
             "name": "Sauna"
         },
         "leisure/slipway": {
-            "icon": "poi-beach",
+            "icon": "temaki-beach",
             "geometry": [
                 "point",
                 "line"
@@ -11324,7 +11324,7 @@
             "matchScore": 0.1
         },
         "man_made": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "fields": [
                 "name",
                 "man_made"
@@ -11372,7 +11372,7 @@
             "name": "Adit"
         },
         "man_made/antenna": {
-            "icon": "poi-mast",
+            "icon": "temaki-antenna",
             "fields": [
                 "height",
                 "communication_multi"
@@ -11416,7 +11416,7 @@
             "name": "Bridge"
         },
         "man_made/chimney": {
-            "icon": "poi-chimney",
+            "icon": "temaki-chimney",
             "geometry": [
                 "point",
                 "area"
@@ -11444,7 +11444,7 @@
             "name": "Clearcut Forest"
         },
         "man_made/crane": {
-            "icon": "poi-crane",
+            "icon": "temaki-crane",
             "fields": [
                 "operator",
                 "height",
@@ -11481,7 +11481,7 @@
             "name": "Flagpole"
         },
         "man_made/gasometer": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "geometry": [
                 "point",
                 "area"
@@ -11519,7 +11519,7 @@
             "name": "Lighthouse"
         },
         "man_made/mast": {
-            "icon": "poi-mast",
+            "icon": "temaki-antenna",
             "fields": [
                 "tower/type",
                 "tower/construction",
@@ -11551,7 +11551,7 @@
             "name": "Mast"
         },
         "man_made/monitoring_station": {
-            "icon": "poi-mast",
+            "icon": "temaki-antenna",
             "geometry": [
                 "point",
                 "area"
@@ -11573,7 +11573,7 @@
             "name": "Monitoring Station"
         },
         "man_made/observation": {
-            "icon": "poi-tower",
+            "icon": "temaki-tower",
             "geometry": [
                 "point",
                 "area"
@@ -11603,7 +11603,7 @@
             "name": "Observatory"
         },
         "man_made/petroleum_well": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "geometry": [
                 "point"
             ],
@@ -11663,7 +11663,7 @@
             "name": "Pumping Station"
         },
         "man_made/silo": {
-            "icon": "poi-silo",
+            "icon": "temaki-silo",
             "fields": [
                 "building_area",
                 "crop"
@@ -11683,7 +11683,7 @@
             "name": "Silo"
         },
         "man_made/storage_tank": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "fields": [
                 "building_area",
                 "content"
@@ -11789,7 +11789,7 @@
             "name": "Survey Point"
         },
         "man_made/tower": {
-            "icon": "poi-tower",
+            "icon": "temaki-tower",
             "fields": [
                 "tower/type",
                 "tower/construction",
@@ -11889,7 +11889,7 @@
             "name": "Watermill"
         },
         "man_made/windmill": {
-            "icon": "poi-windmill",
+            "icon": "temaki-windmill",
             "fields": [
                 "building_area"
             ],
@@ -12036,7 +12036,7 @@
             "name": "Bare Rock"
         },
         "natural/bay": {
-            "icon": "poi-beach",
+            "icon": "temaki-beach",
             "geometry": [
                 "point",
                 "area"
@@ -12051,7 +12051,7 @@
             "name": "Bay"
         },
         "natural/beach": {
-            "icon": "poi-beach",
+            "icon": "temaki-beach",
             "fields": [
                 "surface"
             ],
@@ -12204,7 +12204,7 @@
             "name": "Peak"
         },
         "natural/reef": {
-            "icon": "poi-beach",
+            "icon": "temaki-beach",
             "geometry": [
                 "point",
                 "area"
@@ -13796,7 +13796,7 @@
             "matchScore": 0.1
         },
         "power/sub_station": {
-            "icon": "poi-power",
+            "icon": "temaki-power",
             "fields": [
                 "substation",
                 "operator",
@@ -13818,7 +13818,7 @@
             "searchable": false
         },
         "power/generator": {
-            "icon": "poi-power",
+            "icon": "temaki-power",
             "fields": [
                 "operator",
                 "generator/source",
@@ -13844,7 +13844,7 @@
             "name": "Power Generator"
         },
         "power/generator/source_nuclear": {
-            "icon": "poi-nuclear",
+            "icon": "temaki-radiation",
             "fields": [
                 "operator",
                 "generator/source",
@@ -13877,7 +13877,7 @@
             "name": "Nuclear Reactor"
         },
         "power/generator/source_wind": {
-            "icon": "poi-wind",
+            "icon": "temaki-wind_turbine",
             "fields": [
                 "operator",
                 "generator/source",
@@ -13989,7 +13989,7 @@
             "name": "Power Pole"
         },
         "power/substation": {
-            "icon": "poi-power",
+            "icon": "temaki-power",
             "fields": [
                 "substation",
                 "operator",
@@ -14006,7 +14006,7 @@
             "name": "Substation"
         },
         "power/switch": {
-            "icon": "poi-power",
+            "icon": "temaki-power",
             "fields": [
                 "switch",
                 "operator",
@@ -14038,7 +14038,7 @@
             "name": "High-Voltage Tower"
         },
         "power/transformer": {
-            "icon": "poi-power",
+            "icon": "temaki-power",
             "fields": [
                 "transformer",
                 "operator",
@@ -14603,7 +14603,7 @@
             "name": "Ferry Stop / Platform"
         },
         "public_transport/platform_light_rail": {
-            "icon": "poi-light-rail",
+            "icon": "temaki-light_rail",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14652,7 +14652,7 @@
             "name": "Light Rail Stop / Platform"
         },
         "public_transport/platform_monorail": {
-            "icon": "poi-monorail",
+            "icon": "temaki-monorail",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14697,7 +14697,7 @@
             "name": "Monorail Stop / Platform"
         },
         "public_transport/platform_subway": {
-            "icon": "poi-subway",
+            "icon": "temaki-subway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14791,7 +14791,7 @@
             "name": "Train Stop / Platform"
         },
         "public_transport/platform_tram": {
-            "icon": "poi-tram",
+            "icon": "temaki-tram",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14841,7 +14841,7 @@
             "name": "Tram Stop / Platform"
         },
         "public_transport/platform_trolleybus": {
-            "icon": "poi-trolleybus",
+            "icon": "temaki-trolleybus",
             "fields": [
                 "name",
                 "ref_platform",
@@ -15050,7 +15050,7 @@
             "name": "Ferry Station / Terminal"
         },
         "public_transport/station_light_rail": {
-            "icon": "poi-light-rail",
+            "icon": "temaki-light_rail",
             "fields": [
                 "name",
                 "network",
@@ -15102,7 +15102,7 @@
             "name": "Light Rail Station"
         },
         "public_transport/station_monorail": {
-            "icon": "poi-monorail",
+            "icon": "temaki-monorail",
             "fields": [
                 "name",
                 "network",
@@ -15148,7 +15148,7 @@
             "name": "Monorail Station"
         },
         "public_transport/station_subway": {
-            "icon": "poi-subway",
+            "icon": "temaki-subway",
             "fields": [
                 "name",
                 "network",
@@ -15285,7 +15285,7 @@
             "name": "Train Station"
         },
         "public_transport/station_tram": {
-            "icon": "poi-tram",
+            "icon": "temaki-tram",
             "fields": [
                 "name",
                 "network",
@@ -15326,7 +15326,7 @@
             "name": "Tram Station"
         },
         "public_transport/station_trolleybus": {
-            "icon": "poi-trolleybus",
+            "icon": "temaki-trolleybus",
             "fields": [
                 "name",
                 "network",
@@ -15525,7 +15525,7 @@
             "name": "Ferry Stopping Location"
         },
         "public_transport/stop_position_light_rail": {
-            "icon": "poi-light-rail",
+            "icon": "temaki-light_rail",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -15568,7 +15568,7 @@
             "name": "Light Rail Stopping Location"
         },
         "public_transport/stop_position_monorail": {
-            "icon": "poi-monorail",
+            "icon": "temaki-monorail",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -15607,7 +15607,7 @@
             "name": "Monorail Stopping Location"
         },
         "public_transport/stop_position_subway": {
-            "icon": "poi-subway",
+            "icon": "temaki-subway",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -15689,7 +15689,7 @@
             "name": "Train Stopping Location"
         },
         "public_transport/stop_position_tram": {
-            "icon": "poi-tram",
+            "icon": "temaki-tram",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -15733,7 +15733,7 @@
             "name": "Tram Stopping Location"
         },
         "public_transport/stop_position_trolleybus": {
-            "icon": "poi-trolleybus",
+            "icon": "temaki-trolleybus",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -15854,7 +15854,7 @@
             "searchable": false
         },
         "railway/tram_stop": {
-            "icon": "poi-tram",
+            "icon": "temaki-tram",
             "fields": [
                 "name",
                 "network",
@@ -15893,7 +15893,7 @@
             "name": "Abandoned Railway"
         },
         "railway/buffer_stop": {
-            "icon": "poi-buffer-stop",
+            "icon": "temaki-buffer-stop",
             "geometry": [
                 "vertex"
             ],
@@ -16021,7 +16021,7 @@
             "name": "Light Rail"
         },
         "railway/milestone": {
-            "icon": "poi-milestone",
+            "icon": "temaki-milestone",
             "geometry": [
                 "point",
                 "vertex"
@@ -16127,7 +16127,7 @@
             "name": "Rail"
         },
         "railway/signal": {
-            "icon": "poi-railway-signals",
+            "icon": "temaki-railway_signals",
             "geometry": [
                 "point",
                 "vertex"
@@ -16189,7 +16189,7 @@
             "name": "Subway"
         },
         "railway/switch": {
-            "icon": "poi-junction",
+            "icon": "temaki-junction",
             "geometry": [
                 "vertex"
             ],
@@ -17276,7 +17276,7 @@
             "name": "Department Store"
         },
         "shop/doityourself": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -17670,7 +17670,7 @@
             "name": "Hairdresser"
         },
         "shop/hardware": {
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "operator",
@@ -19002,7 +19002,7 @@
             "name": "Wholesale Store"
         },
         "shop/window_blind": {
-            "icon": "poi-window",
+            "icon": "temaki-window",
             "fields": [
                 "name",
                 "operator",
@@ -19563,7 +19563,7 @@
             "matchScore": 2
         },
         "tourism/viewpoint": {
-            "icon": "poi-binoculars",
+            "icon": "temaki-binoculars",
             "geometry": [
                 "point",
                 "vertex"
@@ -19619,7 +19619,7 @@
             "name": "Zoo"
         },
         "traffic_calming": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "traffic_calming",
                 "direction_vertex"
@@ -19640,7 +19640,7 @@
             "name": "Traffic Calming"
         },
         "traffic_calming/bump": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "surface",
                 "direction_vertex"
@@ -19660,7 +19660,7 @@
             "name": "Speed Bump"
         },
         "traffic_calming/chicane": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "direction_vertex"
             ],
@@ -19679,7 +19679,7 @@
             "name": "Traffic Chicane"
         },
         "traffic_calming/choker": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "direction_vertex"
             ],
@@ -19697,7 +19697,7 @@
             "name": "Traffic Choker"
         },
         "traffic_calming/cushion": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "surface",
                 "direction_vertex"
@@ -19718,7 +19718,7 @@
             "name": "Speed Cushion"
         },
         "traffic_calming/dip": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "surface",
                 "direction_vertex"
@@ -19737,7 +19737,7 @@
             "name": "Dip"
         },
         "traffic_calming/hump": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "surface",
                 "direction_vertex"
@@ -19757,7 +19757,7 @@
             "name": "Speed Hump"
         },
         "traffic_calming/island": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "geometry": [
                 "vertex"
             ],
@@ -19772,7 +19772,7 @@
             "name": "Traffic Island"
         },
         "traffic_calming/rumble_strip": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "direction_vertex"
             ],
@@ -19791,7 +19791,7 @@
             "name": "Rumble Strip"
         },
         "traffic_calming/table": {
-            "icon": "poi-warning",
+            "icon": "temaki-diamond",
             "fields": [
                 "surface"
             ],
@@ -20475,7 +20475,7 @@
             "name": "Riverbank"
         },
         "waterway/sanitary_dump_station": {
-            "icon": "poi-storage-tank",
+            "icon": "temaki-storage_tank",
             "fields": [
                 "name",
                 "operator",
@@ -61509,7 +61509,7 @@
                 "amenity": "social_facility"
             },
             "name": "Safe Haven",
-            "icon": "poi-social-facility",
+            "icon": "temaki-social_facility",
             "geometry": [
                 "point",
                 "area"
@@ -61532,7 +61532,7 @@
                 "amenity": "social_facility"
             },
             "name": "Детский дом",
-            "icon": "poi-social-facility",
+            "icon": "temaki-social_facility",
             "geometry": [
                 "point",
                 "area"
@@ -61555,7 +61555,7 @@
                 "amenity": "social_facility"
             },
             "name": "Социальный участковый",
-            "icon": "poi-social-facility",
+            "icon": "temaki-social_facility",
             "geometry": [
                 "point",
                 "area"
@@ -62231,7 +62231,7 @@
                 "man_made": "windmill"
             },
             "name": "De Hoop",
-            "icon": "poi-windmill",
+            "icon": "temaki-windmill",
             "geometry": [
                 "point",
                 "area"
@@ -77282,7 +77282,7 @@
                 "shop": "doityourself"
             },
             "name": "Ace Hardware",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77303,7 +77303,7 @@
                 "shop": "doityourself"
             },
             "name": "B&Q",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77324,7 +77324,7 @@
                 "shop": "doityourself"
             },
             "name": "Bauhaus",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77345,7 +77345,7 @@
                 "shop": "doityourself"
             },
             "name": "Biltema",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77366,7 +77366,7 @@
                 "shop": "doityourself"
             },
             "name": "Brico",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77387,7 +77387,7 @@
                 "shop": "doityourself"
             },
             "name": "Bricomarché",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77408,7 +77408,7 @@
                 "shop": "doityourself"
             },
             "name": "Bricorama",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77429,7 +77429,7 @@
                 "shop": "doityourself"
             },
             "name": "Bunnings Warehouse",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77450,7 +77450,7 @@
                 "shop": "doityourself"
             },
             "name": "Castorama",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77471,7 +77471,7 @@
                 "shop": "doityourself"
             },
             "name": "Easy",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77492,7 +77492,7 @@
                 "shop": "doityourself"
             },
             "name": "Gamma",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77513,7 +77513,7 @@
                 "shop": "doityourself"
             },
             "name": "Globus Baumarkt",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77534,7 +77534,7 @@
                 "shop": "doityourself"
             },
             "name": "Hagebaumarkt",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77555,7 +77555,7 @@
                 "shop": "doityourself"
             },
             "name": "Hellweg",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77576,7 +77576,7 @@
                 "shop": "doityourself"
             },
             "name": "Home Depot",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77597,7 +77597,7 @@
                 "shop": "doityourself"
             },
             "name": "Home Hardware",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77618,7 +77618,7 @@
                 "shop": "doityourself"
             },
             "name": "Homebase",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77639,7 +77639,7 @@
                 "shop": "doityourself"
             },
             "name": "Hornbach",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77660,7 +77660,7 @@
                 "shop": "doityourself"
             },
             "name": "Hubo",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77681,7 +77681,7 @@
                 "shop": "doityourself"
             },
             "name": "Karwei",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77702,7 +77702,7 @@
                 "shop": "doityourself"
             },
             "name": "Lagerhaus",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77723,7 +77723,7 @@
                 "shop": "doityourself"
             },
             "name": "Leroy Merlin",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77744,7 +77744,7 @@
                 "shop": "doityourself"
             },
             "name": "Lowe's",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77765,7 +77765,7 @@
                 "shop": "doityourself"
             },
             "name": "Lowes",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77786,7 +77786,7 @@
                 "shop": "doityourself"
             },
             "name": "Menards",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77807,7 +77807,7 @@
                 "shop": "doityourself"
             },
             "name": "Mr Bricolage",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77828,7 +77828,7 @@
                 "shop": "doityourself"
             },
             "name": "Mr.Bricolage",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77849,7 +77849,7 @@
                 "shop": "doityourself"
             },
             "name": "OBI",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77870,7 +77870,7 @@
                 "shop": "doityourself"
             },
             "name": "Point P",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77891,7 +77891,7 @@
                 "shop": "doityourself"
             },
             "name": "Praktiker",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77912,7 +77912,7 @@
                 "shop": "doityourself"
             },
             "name": "Praxis",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77933,7 +77933,7 @@
                 "shop": "doityourself"
             },
             "name": "Rona",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77954,7 +77954,7 @@
                 "shop": "doityourself"
             },
             "name": "Screwfix",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77975,7 +77975,7 @@
                 "shop": "doityourself"
             },
             "name": "Sonderpreis Baumarkt",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -77996,7 +77996,7 @@
                 "shop": "doityourself"
             },
             "name": "Tekzen",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78017,7 +78017,7 @@
                 "shop": "doityourself"
             },
             "name": "Toom Baumarkt",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78038,7 +78038,7 @@
                 "shop": "doityourself"
             },
             "name": "Weldom",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78059,7 +78059,7 @@
                 "shop": "doityourself"
             },
             "name": "Wickes",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78080,7 +78080,7 @@
                 "shop": "doityourself"
             },
             "name": "Леруа Мерлен",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78101,7 +78101,7 @@
                 "shop": "doityourself"
             },
             "name": "Мастер",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78122,7 +78122,7 @@
                 "shop": "doityourself"
             },
             "name": "Строитель",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78143,7 +78143,7 @@
                 "shop": "doityourself"
             },
             "name": "Стройматериалы",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78164,7 +78164,7 @@
                 "shop": "doityourself"
             },
             "name": "カインズホーム",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78185,7 +78185,7 @@
                 "shop": "doityourself"
             },
             "name": "コメリ",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -78206,7 +78206,7 @@
                 "shop": "doityourself"
             },
             "name": "コーナン",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80747,7 +80747,7 @@
                 "shop": "hardware"
             },
             "name": "1000 мелочей",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80768,7 +80768,7 @@
                 "shop": "hardware"
             },
             "name": "Ferretería",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80789,7 +80789,7 @@
                 "shop": "hardware"
             },
             "name": "Harbor Freight Tools",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80810,7 +80810,7 @@
                 "shop": "hardware"
             },
             "name": "Quincaillerie",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80831,7 +80831,7 @@
                 "shop": "hardware"
             },
             "name": "True Value",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80852,7 +80852,7 @@
                 "shop": "hardware"
             },
             "name": "Würth",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80873,7 +80873,7 @@
                 "shop": "hardware"
             },
             "name": "Промтовары",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80894,7 +80894,7 @@
                 "shop": "hardware"
             },
             "name": "Сантехника",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80915,7 +80915,7 @@
                 "shop": "hardware"
             },
             "name": "Товары для дома",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"
@@ -80936,7 +80936,7 @@
                 "shop": "hardware"
             },
             "name": "Хозтовары",
-            "icon": "poi-tool",
+            "icon": "temaki-tools",
             "geometry": [
                 "point",
                 "area"

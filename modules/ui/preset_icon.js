@@ -20,20 +20,20 @@ export function uiPresetIcon() {
         else if (geom === 'line')
             return 'other-line';
         else if (geom === 'vertex')
-            return p.isFallback() ? '' : 'poi-vertex';
+            return p.isFallback() ? '' : 'temaki-vertex';
         else
             return 'marker-stroked';
     }
 
 
     function render() {
-        var selection = d3_select(this),
-            p = preset.apply(this, arguments),
-            geom = geometry.apply(this, arguments),
-            picon = getIcon(p, geom),
-            isPoi = picon.match(/^poi-/) !== null,
-            isMaki = dataFeatureIcons.indexOf(picon) !== -1,
-            isFramed = (geom === 'area' || geom === 'verex');
+        var selection = d3_select(this);
+        var p = preset.apply(this, arguments);
+        var geom = geometry.apply(this, arguments);
+        var picon = getIcon(p, geom);
+        var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+        var isTemaki = /^temaki-/.test(picon);
+        var isFramed = (geom === 'area' || geom === 'vertex');
 
 
         function tag_classes(p) {
@@ -84,12 +84,12 @@ export function uiPresetIcon() {
 
         icon
             .attr('class', 'preset-icon preset-icon-' +
-                ((isMaki || isPoi) ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
+                ((isMaki || isTemaki) ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
             );
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isMaki || isPoi ? '' : tag_classes(p));
+                return 'icon ' + picon + (isMaki || isTemaki ? '' : tag_classes(p));
             });
 
         icon.selectAll('use')

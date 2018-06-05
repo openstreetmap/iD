@@ -460,7 +460,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-bench.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -577,7 +578,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-dice.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -644,7 +646,8 @@
             "description": "Clock",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-clock.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -792,7 +795,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-fountain.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -839,7 +843,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-binoculars.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -858,7 +863,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-antenna.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1025,7 +1031,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-hinduism.svg?sanitize=true"
         },
         {
             "key": "religion",
@@ -1054,7 +1061,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-shinto.svg?sanitize=true"
         },
         {
             "key": "religion",
@@ -1063,7 +1071,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-sikhism.svg?sanitize=true"
         },
         {
             "key": "religion",
@@ -1072,7 +1081,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-taoism.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1199,7 +1209,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1228,7 +1239,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-shower.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1246,7 +1258,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-social_facility.svg?sanitize=true"
         },
         {
             "key": "social_facility",
@@ -1255,7 +1268,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-social_facility.svg?sanitize=true"
         },
         {
             "key": "social_facility:for",
@@ -1274,7 +1288,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-social_facility.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1351,7 +1366,8 @@
             "description": "Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1359,7 +1375,8 @@
             "description": "Newspaper Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1367,7 +1384,8 @@
             "description": "Cigarette Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1375,7 +1393,8 @@
             "description": "Coffee Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1383,7 +1402,8 @@
             "description": "Condom Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1391,7 +1411,8 @@
             "description": "Drink Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1399,7 +1420,8 @@
             "description": "Electronics Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1407,7 +1429,8 @@
             "description": "Flat Coin Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1415,7 +1438,8 @@
             "description": "Excrement Bag Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1423,7 +1447,8 @@
             "description": "Feminine Hygiene Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1431,7 +1456,8 @@
             "description": "Food Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1439,7 +1465,8 @@
             "description": "Gas Pump",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1447,7 +1474,8 @@
             "description": "Ice Cream Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1455,7 +1483,8 @@
             "description": "Newspaper Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1463,7 +1492,8 @@
             "description": "Parcel Pickup/Dropoff Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1471,7 +1501,8 @@
             "description": "Parking Ticket Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1479,7 +1510,8 @@
             "description": "Transit Ticket Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1487,7 +1519,8 @@
             "description": "Postage Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -1495,7 +1528,8 @@
             "description": "Snack Vending Machine",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-vending_machine.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1658,7 +1692,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tower.svg?sanitize=true"
         },
         {
             "key": "attraction",
@@ -2228,7 +2263,8 @@
             "description": "Building Ruins",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-ruins.svg?sanitize=true"
         },
         {
             "key": "building",
@@ -2363,7 +2399,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2432,7 +2469,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2441,7 +2479,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2460,7 +2499,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2469,7 +2509,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2478,7 +2519,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2497,7 +2539,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-chimney.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2506,7 +2549,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-clock.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2525,7 +2569,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2544,7 +2589,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-power.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2553,7 +2599,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2572,7 +2619,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-window.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2591,7 +2639,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2600,7 +2649,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2619,7 +2669,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2658,7 +2709,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2667,7 +2719,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2686,7 +2739,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2695,7 +2749,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2704,7 +2759,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2713,7 +2769,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2732,7 +2789,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2751,7 +2809,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2760,7 +2819,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2769,7 +2829,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2778,7 +2839,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2787,7 +2849,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2796,7 +2859,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-clock.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2805,7 +2869,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-window.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2898,7 +2963,8 @@
             "description": "Fire Hydrant",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-fire_hydrant.svg?sanitize=true"
         },
         {
             "key": "emergency",
@@ -3252,7 +3318,8 @@
             "description": "Elevator",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-elevator.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3268,7 +3335,8 @@
             "description": "Yield Sign",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-yield.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3293,7 +3361,8 @@
             "description": "Motorway Junction / Exit",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-junction.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3485,7 +3554,8 @@
             "description": "Stop Sign",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-stop.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3493,7 +3563,8 @@
             "description": "Street Lamp",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-bulb.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3533,7 +3604,8 @@
             "description": "Traffic Signals",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-traffic_signals.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3583,7 +3655,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-ruins.svg?sanitize=true"
         },
         {
             "key": "historic",
@@ -3592,7 +3665,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-ruins.svg?sanitize=true"
         },
         {
             "key": "historic",
@@ -3600,7 +3674,8 @@
             "description": "Boundary Stone",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-milestone.svg?sanitize=true"
         },
         {
             "key": "historic",
@@ -3639,7 +3714,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-ruins.svg?sanitize=true"
         },
         {
             "key": "historic",
@@ -3678,7 +3754,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-junction.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -3878,7 +3955,8 @@
             "description": "Military Area",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3897,7 +3975,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3906,7 +3985,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3935,7 +4015,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3954,7 +4035,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3963,7 +4045,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3972,7 +4055,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "military",
@@ -3981,7 +4065,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-military.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -4077,7 +4162,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-dice.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4096,7 +4182,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-beach.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4105,7 +4192,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-binoculars.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4123,7 +4211,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-bowling.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4132,7 +4221,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-pedestrian.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4630,7 +4720,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-beach.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4699,7 +4790,8 @@
                 "node",
                 "way",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4725,7 +4817,8 @@
             "description": "Antenna",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-antenna.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4751,7 +4844,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-chimney.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4770,7 +4864,8 @@
                 "node",
                 "way",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-crane.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4796,7 +4891,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4823,7 +4919,8 @@
             "description": "Mast",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-antenna.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4832,7 +4929,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-antenna.svg?sanitize=true"
         },
         {
             "key": "tower:type",
@@ -4841,7 +4939,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tower.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4858,7 +4957,8 @@
             "description": "Oil Well",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4894,7 +4994,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-silo.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4903,7 +5004,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "surveillance:type",
@@ -4939,7 +5041,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tower.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -4998,7 +5101,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-windmill.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -5060,7 +5164,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-beach.svg?sanitize=true"
         },
         {
             "key": "natural",
@@ -5069,7 +5174,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-beach.svg?sanitize=true"
         },
         {
             "key": "natural",
@@ -5156,7 +5262,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-beach.svg?sanitize=true"
         },
         {
             "key": "natural",
@@ -5972,7 +6079,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-power.svg?sanitize=true"
         },
         {
             "key": "power",
@@ -5981,7 +6089,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-power.svg?sanitize=true"
         },
         {
             "key": "generator:method",
@@ -5990,7 +6099,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-radiation.svg?sanitize=true"
         },
         {
             "key": "generator:method",
@@ -5999,7 +6109,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-wind_turbine.svg?sanitize=true"
         },
         {
             "key": "power",
@@ -6041,7 +6152,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-power.svg?sanitize=true"
         },
         {
             "key": "power",
@@ -6050,7 +6162,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-power.svg?sanitize=true"
         },
         {
             "key": "power",
@@ -6067,7 +6180,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-power.svg?sanitize=true"
         },
         {
             "key": "aerialway",
@@ -6212,7 +6326,8 @@
             "description": "Tram Stopping Position",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tram.svg?sanitize=true"
         },
         {
             "key": "railway",
@@ -6228,7 +6343,8 @@
             "description": "Buffer Stop",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-buffer-stop.svg?sanitize=true"
         },
         {
             "key": "railway",
@@ -6287,7 +6403,8 @@
             "description": "Railway Milestone",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-milestone.svg?sanitize=true"
         },
         {
             "key": "railway",
@@ -6327,7 +6444,8 @@
             "description": "Railway Signal",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-railway_signals.svg?sanitize=true"
         },
         {
             "key": "railway",
@@ -6352,7 +6470,8 @@
             "description": "Railway Switch",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-junction.svg?sanitize=true"
         },
         {
             "key": "railway",
@@ -6836,7 +6955,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "shop",
@@ -7005,7 +7125,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-tools.svg?sanitize=true"
         },
         {
             "key": "shop",
@@ -7644,7 +7765,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-window.svg?sanitize=true"
         },
         {
             "key": "shop",
@@ -7888,7 +8010,8 @@
             "description": "Viewpoint",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-binoculars.svg?sanitize=true"
         },
         {
             "key": "tourism",
@@ -7916,7 +8039,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7925,7 +8049,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7934,7 +8059,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7943,7 +8069,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7952,7 +8079,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7961,7 +8089,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7970,7 +8099,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7978,7 +8108,8 @@
             "description": "Traffic Island",
             "object_types": [
                 "node"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "traffic_calming",
@@ -7987,7 +8118,8 @@
             "object_types": [
                 "node",
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-diamond.svg?sanitize=true"
         },
         {
             "key": "type",
@@ -8311,7 +8443,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/temaki-storage_tank.svg?sanitize=true"
         },
         {
             "key": "intermittent",

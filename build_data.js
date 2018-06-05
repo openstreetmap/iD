@@ -344,7 +344,12 @@ function generateTaginfo(presets, fields) {
         if (preset.geometry) {
             setObjectType(tag, preset);
         }
-        if (isMaki(preset.icon)) {
+
+        // add icon
+        if (/^temaki-/.test(preset.icon)) {
+            tag.icon_url = 'https://raw.githubusercontent.com/bhousel/temaki/master/icons/' +
+                preset.icon + '.svg?sanitize=true';
+        } else if (isMaki(preset.icon)) {
             tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' +
                 preset.icon + '-15.svg?sanitize=true';
         }

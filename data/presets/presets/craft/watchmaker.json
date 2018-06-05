@@ -1,5 +1,5 @@
 {
-    "icon": "poi-clock",
+    "icon": "temaki-clock",
     "fields": [
         "name",
         "operator",
