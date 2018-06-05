@@ -140,7 +140,7 @@ export function svgMvt(projection, context, dispatch) {
             var layer = tile.layers[layerID];
             if (layer) {
                 for (var i = 0; i < layer.length; i++) {
-                    var feature = layer.feature(i).toGeoJSON(0, 1, 2);
+                    var feature = layer.feature(i).toGeoJSON(150, 194, 9);
                     if (layers.length > 1) feature.properties.vt_layer = layerID;
                     collection.features.push(feature);
                 }
