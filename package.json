@@ -49,7 +49,7 @@
     "concat-files": "^0.1.1",
     "d3": "4.13.0",
     "ecstatic": "^3.0.0",
-    "editor-layer-index": "osmlab/editor-layer-index.git",
+    "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
     "eslint": "^4.3.0",
     "esm": "~3.0.0",
     "gaze": "^1.1.1",
