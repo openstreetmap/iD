@@ -213,11 +213,12 @@ common tag values from the Taginfo service to use as dropdown values.
 
 ## Icons
 
-Preset icons in iD are pulled from the open source map icon set,
-[Maki](http://www.mapbox.com/maki/).
+You can use any of the following open source map icon sets as preset icons.
 
-The icons are identified in iD by the same name as they are on the Maki home.  Use those
-names when identifying the icon to be used for a given preset.
+* [Maki](http://www.mapbox.com/maki/) - prefix: `maki-`
+* [Temaki](http://bhousel.github.io/temaki/docs/) - prefix: `temaki-`
+
+When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
 
 
 ## Building
