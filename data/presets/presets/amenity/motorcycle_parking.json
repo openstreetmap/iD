@@ -1,5 +1,5 @@
 {
-    "icon": "scooter",
+    "icon": "maki-scooter",
     "fields": [
         "capacity",
         "operator",

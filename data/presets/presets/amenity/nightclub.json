@@ -1,5 +1,5 @@
 {
-    "icon": "bar",
+    "icon": "maki-bar",
     "fields": [
         "name",
         "operator",

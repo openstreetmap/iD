@@ -1,5 +1,5 @@
 {
-    "icon": "campsite",
+    "icon": "maki-campsite",
     "fields": [
         "name",
         "ref"

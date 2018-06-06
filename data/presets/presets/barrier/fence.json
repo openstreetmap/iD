@@ -1,5 +1,5 @@
 {
-    "icon": "fence",
+    "icon": "maki-fence",
     "fields": [
         "fence_type",
         "height"

@@ -1,5 +1,5 @@
 {
-    "icon": "marker-stroked",
+    "icon": "maki-marker-stroked",
     "fields": [
         "name",
         "operator",

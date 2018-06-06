@@ -1,5 +1,5 @@
 {
-    "icon": "attraction",
+    "icon": "maki-attraction",
     "fields": [
         "name",
         "tourism"

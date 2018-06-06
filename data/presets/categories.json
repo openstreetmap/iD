@@ -1,7 +1,7 @@
 {
     "categories": {
         "category-barrier": {
-            "icon": "roadblock",
+            "icon": "maki-roadblock",
             "geometry": "line",
             "name": "Barrier Features",
             "members": [
@@ -15,7 +15,7 @@
             ]
         },
         "category-building": {
-            "icon": "building",
+            "icon": "maki-building",
             "geometry": "area",
             "name": "Building Features",
             "members": [
@@ -29,7 +29,7 @@
             ]
         },
         "category-golf": {
-            "icon": "golf",
+            "icon": "maki-golf",
             "geometry": "area",
             "name": "Golf Features",
             "members": [
@@ -43,7 +43,7 @@
             ]
         },
         "category-landuse": {
-            "icon": "landuse",
+            "icon": "maki-landuse",
             "geometry": "area",
             "name": "Land Use Features",
             "members": [
@@ -62,7 +62,7 @@
             ]
         },
         "category-natural-area": {
-            "icon": "natural",
+            "icon": "maki-natural",
             "geometry": "area",
             "name": "Natural Features",
             "members": [
@@ -79,7 +79,7 @@
             ]
         },
         "category-natural-line": {
-            "icon": "natural",
+            "icon": "maki-natural",
             "geometry": "line",
             "name": "Natural Features",
             "members": [
@@ -88,7 +88,7 @@
             ]
         },
         "category-natural-point": {
-            "icon": "natural",
+            "icon": "maki-natural",
             "geometry": "point",
             "name": "Natural Features",
             "members": [
@@ -190,7 +190,7 @@
             ]
         },
         "category-water-area": {
-            "icon": "water",
+            "icon": "maki-water",
             "geometry": "area",
             "name": "Water Features",
             "members": [

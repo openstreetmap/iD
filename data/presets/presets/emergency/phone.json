@@ -1,5 +1,5 @@
 {
-    "icon": "emergency-phone",
+    "icon": "maki-emergency-phone",
     "fields": [
         "operator"
     ],

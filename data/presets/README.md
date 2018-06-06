@@ -16,7 +16,7 @@ A basic preset is of the form:
 ```javascript
 {
     // The icon in iD which represents this feature.
-    "icon": "park",
+    "icon": "maki-park",
     // An array of field names. See the fields documentation for details of what's valid here.
     "fields": [
         "address"

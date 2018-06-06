@@ -1,5 +1,5 @@
 {
-    "icon": "restaurant",
+    "icon": "maki-restaurant",
     "fields": [
         "name",
         "cuisine",

@@ -1,5 +1,5 @@
 {
-    "icon": "prison",
+    "icon": "maki-prison",
     "fields": [
         "name",
         "operator",

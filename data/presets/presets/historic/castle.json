@@ -1,5 +1,5 @@
 {
-    "icon": "castle",
+    "icon": "maki-castle",
     "fields": [
         "name",
         "castle_type",

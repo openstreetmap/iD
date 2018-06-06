@@ -3,7 +3,6 @@ import _values from 'lodash-es/values';
 
 import { select as d3_select } from 'd3-selection';
 
-import { dataFeatureIcons } from '../../data';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './index';
@@ -152,7 +151,7 @@ export function svgVertices(projection, context) {
             .attr('transform', 'translate(-5.5, -5.5)')
             .attr('xlink:href', function(d) {
                 var picon = getIcon(d);
-                var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                var isMaki = /^maki-/.test(picon);
                 return '#' + picon + (isMaki ? '-11' : '');
             });
 

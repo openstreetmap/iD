@@ -1,5 +1,5 @@
 {
-    "icon": "toilet",
+    "icon": "maki-toilet",
     "fields": [
         "toilets/disposal",
         "operator",

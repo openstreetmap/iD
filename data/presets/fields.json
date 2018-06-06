@@ -1481,7 +1481,7 @@
         "phone": {
             "key": "phone",
             "type": "tel",
-            "icon": "telephone",
+            "icon": "maki-telephone",
             "universal": true,
             "label": "Telephone",
             "placeholder": "+31 42 123 4567"
@@ -2320,7 +2320,7 @@
                 "limited",
                 "no"
             ],
-            "icon": "wheelchair",
+            "icon": "maki-wheelchair",
             "universal": true,
             "label": "Wheelchair Access"
         },

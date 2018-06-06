@@ -1,6 +1,5 @@
 import { select as d3_select } from 'd3-selection';
 
-import { dataFeatureIcons } from '../../data';
 import { svgIcon } from '../svg';
 import { utilFunctor } from '../util';
 
@@ -31,7 +30,7 @@ export function uiPresetIcon() {
         var p = preset.apply(this, arguments);
         var geom = geometry.apply(this, arguments);
         var picon = getIcon(p, geom);
-        var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+        var isMaki = /^maki-/.test(picon);
         var isTemaki = /^temaki-/.test(picon);
         var isFramed = (geom === 'area' || geom === 'vertex');
 

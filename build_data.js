@@ -14,7 +14,6 @@ const path = require('path');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
-const maki = require('@mapbox/maki');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
@@ -346,12 +345,12 @@ function generateTaginfo(presets, fields) {
         }
 
         // add icon
-        if (/^temaki-/.test(preset.icon)) {
-            tag.icon_url = 'https://raw.githubusercontent.com/bhousel/temaki/master/icons/' +
-                preset.icon + '.svg?sanitize=true';
-        } else if (isMaki(preset.icon)) {
+        if (/^maki-/.test(preset.icon)) {
             tag.icon_url = 'https://raw.githubusercontent.com/mapbox/maki/master/icons/' +
-                preset.icon + '-15.svg?sanitize=true';
+                preset.icon.replace(/^maki-/, '') + '-15.svg?sanitize=true';
+        } else if (/^temaki-/.test(preset.icon)) {
+            tag.icon_url = 'https://raw.githubusercontent.com/bhousel/temaki/master/icons/' +
+                preset.icon.replace(/^temaki-/, '') + '.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);
@@ -415,10 +414,6 @@ function generateTaginfo(presets, fields) {
         }
     }
 
-    function isMaki(icon) {
-        var dataFeatureIcons = maki.layouts.all.all;
-        return (icon && dataFeatureIcons.indexOf(icon) !== -1);
-    }
 
     function setObjectType(tag, input) {
         tag.object_types = [];
