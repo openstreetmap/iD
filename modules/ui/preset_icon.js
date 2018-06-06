@@ -32,7 +32,7 @@ export function uiPresetIcon() {
         var picon = getIcon(p, geom);
         var isMaki = /^maki-/.test(picon);
         var isTemaki = /^temaki-/.test(picon);
-        var isFa = /^fa-/.test(picon);
+        var isFa = /^fa[srb]-/.test(picon);
         var isPOI = isMaki || isTemaki || isFa;
         var isFramed = (geom === 'area' || geom === 'vertex');
 

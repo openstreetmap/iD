@@ -1,5 +1,5 @@
 {
-    "icon": "fa-ambulance",
+    "icon": "fas-ambulance",
     "fields": [
         "name",
         "operator",

@@ -1,5 +1,5 @@
 {
-    "icon": "fa-motorcycle",
+    "icon": "fas-motorcycle",
     "fields": [
         "name",
         "operator",

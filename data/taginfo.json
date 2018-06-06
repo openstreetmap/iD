@@ -924,7 +924,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/motorcycle.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-motorcycle.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -2946,7 +2946,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/ambulance.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-ambulance.svg?sanitize=true"
         },
         {
             "key": "emergency",
@@ -7313,7 +7313,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/motorcycle.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-motorcycle.svg?sanitize=true"
         },
         {
             "key": "shop",
@@ -7323,7 +7323,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/motorcycle.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-motorcycle.svg?sanitize=true"
         },
         {
             "key": "shop",

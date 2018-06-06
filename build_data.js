@@ -22,7 +22,9 @@ const suggestions = require('name-suggestion-index/name-suggestions.json');
 // fontawesome icons
 const fontawesome = require('@fortawesome/fontawesome');
 const fas = require('@fortawesome/fontawesome-free-solid').default;
-fontawesome.library.add(fas);
+const far = require('@fortawesome/fontawesome-free-regular').default;
+const fab = require('@fortawesome/fontawesome-free-brands').default;
+fontawesome.library.add(fas, far, fab);
 
 
 module.exports = function buildData() {
@@ -146,7 +148,7 @@ function generateCategories(tstrings, faIcons) {
         categories[id] = category;
 
         // fontawesome icon, remember for later
-        if (/^fa-/.test(category.icon)) {
+        if (/^fa[srb]-/.test(category.icon)) {
             faIcons[category.icon] = {};
         }
     });
@@ -179,7 +181,7 @@ function generateFields(tstrings, faIcons) {
         fields[id] = field;
 
         // fontawesome icon, remember for later
-        if (/^fa-/.test(field.icon)) {
+        if (/^fa[srb]-/.test(field.icon)) {
             faIcons[field.icon] = {};
         }
     });
@@ -277,7 +279,7 @@ function generatePresets(tstrings, faIcons) {
         presets[id] = preset;
 
         // fontawesome icon, remember for later
-        if (/^fa-/.test(preset.icon)) {
+        if (/^fa[srb]-/.test(preset.icon)) {
             faIcons[preset.icon] = {};
         }
     });
@@ -377,9 +379,9 @@ function generateTaginfo(presets, fields) {
         } else if (/^temaki-/.test(preset.icon)) {
             tag.icon_url = 'https://raw.githubusercontent.com/bhousel/temaki/master/icons/' +
                 preset.icon.replace(/^temaki-/, '') + '.svg?sanitize=true';
-        } else if (/^fa-/.test(preset.icon)) {
+        } else if (/^fa[srb]-/.test(preset.icon)) {
             tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/' +
-                preset.icon.replace(/^fa-/, '') + '.svg?sanitize=true';
+                preset.icon + '.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);
@@ -536,9 +538,10 @@ function writeEnJson(tstrings) {
 
 function writeFaIcons(faIcons) {
     for (var key in faIcons) {
-        var name = key.substring(3);  // without `fa-`
-        var def = fontawesome.findIconDefinition({ iconName: name });
-        writeFileProm('svg/fontawesome/' + name + '.svg', fontawesome.icon(def).html);
+        var prefix = key.substring(0, 3);   // `fas`, `far`, `fab`
+        var name = key.substring(4);
+        var def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
+        writeFileProm('svg/fontawesome/' + key + '.svg', fontawesome.icon(def).html);
     }
 }
 
