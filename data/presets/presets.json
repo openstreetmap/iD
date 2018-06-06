@@ -2021,7 +2021,7 @@
             "name": "Monastery Grounds"
         },
         "amenity/motorcycle_parking": {
-            "icon": "maki-scooter",
+            "icon": "fa-motorcycle",
             "fields": [
                 "capacity",
                 "operator",
@@ -6485,7 +6485,7 @@
             "matchScore": 0.01
         },
         "emergency/ambulance_station": {
-            "icon": "maki-hospital",
+            "icon": "fa-ambulance",
             "fields": [
                 "name",
                 "operator",
@@ -18056,7 +18056,7 @@
             "name": "Money Lender"
         },
         "shop/motorcycle_repair": {
-            "icon": "maki-scooter",
+            "icon": "fa-motorcycle",
             "fields": [
                 "name",
                 "operator",
@@ -18084,7 +18084,7 @@
             "name": "Motorcycle Repair Shop"
         },
         "shop/motorcycle": {
-            "icon": "maki-scooter",
+            "icon": "fa-motorcycle",
             "fields": [
                 "name",
                 "operator",
@@ -83203,7 +83203,7 @@
                 "shop": "motorcycle"
             },
             "name": "Harley Davidson",
-            "icon": "maki-scooter",
+            "icon": "fa-motorcycle",
             "geometry": [
                 "point",
                 "area"
@@ -83224,7 +83224,7 @@
                 "shop": "motorcycle"
             },
             "name": "Yamaha",
-            "icon": "maki-scooter",
+            "icon": "fa-motorcycle",
             "geometry": [
                 "point",
                 "area"

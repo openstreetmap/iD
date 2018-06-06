@@ -19,6 +19,11 @@ const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
 const suggestions = require('name-suggestion-index/name-suggestions.json');
 
+// fontawesome icons
+const fontawesome = require('@fortawesome/fontawesome');
+const fas = require('@fortawesome/fontawesome-free-solid').default;
+fontawesome.library.add(fas);
+
 
 module.exports = function buildData() {
     var building;
@@ -52,6 +57,9 @@ module.exports = function buildData() {
             presets: {}
         };
 
+        // Font Awesome icons used
+        var faIcons = {};
+
         // Start clean
         shell.rm('-f', [
             'data/presets/categories.json',
@@ -59,12 +67,13 @@ module.exports = function buildData() {
             'data/presets/presets.json',
             'data/presets.yaml',
             'data/taginfo.json',
-            'dist/locales/en.json'
+            'dist/locales/en.json',
+            'svg/fontawesome/*',
         ]);
 
-        var categories = generateCategories(tstrings);
-        var fields = generateFields(tstrings);
-        var presets = generatePresets(tstrings);
+        var categories = generateCategories(tstrings, faIcons);
+        var fields = generateFields(tstrings, faIcons);
+        var presets = generatePresets(tstrings, faIcons);
         var defaults = read('data/presets/defaults.json');
         var translations = generateTranslations(fields, presets, tstrings);
         var taginfo = generateTaginfo(presets, fields);
@@ -90,7 +99,8 @@ module.exports = function buildData() {
             ),
             writeFileProm('data/presets.yaml', translationsToYAML(translations)),
             writeFileProm('data/taginfo.json', JSON.stringify(taginfo, null, 4)),
-            writeEnJson(tstrings)
+            writeEnJson(tstrings),
+            writeFaIcons(faIcons)
         ];
 
         return Promise.all(tasks)
@@ -127,23 +137,28 @@ function validate(file, instance, schema) {
 }
 
 
-function generateCategories(tstrings) {
+function generateCategories(tstrings, faIcons) {
     var categories = {};
     glob.sync(__dirname + '/data/presets/categories/*.json').forEach(function(file) {
-        var field = read(file);
+        var category = read(file);
         var id = 'category-' + path.basename(file, '.json');
-        tstrings.categories[id] = { name: field.name };
-        categories[id] = field;
+        tstrings.categories[id] = { name: category.name };
+        categories[id] = category;
+
+        // fontawesome icon, remember for later
+        if (/^fa-/.test(category.icon)) {
+            faIcons[category.icon] = {};
+        }
     });
     return categories;
 }
 
 
-function generateFields(tstrings) {
+function generateFields(tstrings, faIcons) {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
-        var field = read(file),
-            id = stripLeadingUnderscores(file.match(/presets\/fields\/([^.]*)\.json/)[1]);
+        var field = read(file);
+        var id = stripLeadingUnderscores(file.match(/presets\/fields\/([^.]*)\.json/)[1]);
 
         validate(file, field, fieldSchema);
 
@@ -162,9 +177,15 @@ function generateFields(tstrings) {
         }
 
         fields[id] = field;
+
+        // fontawesome icon, remember for later
+        if (/^fa-/.test(field.icon)) {
+            faIcons[field.icon] = {};
+        }
     });
     return fields;
 }
+
 
 function suggestionsToPresets(presets) {
     var existing = {};
@@ -239,7 +260,7 @@ function stripLeadingUnderscores(str) {
 }
 
 
-function generatePresets(tstrings) {
+function generatePresets(tstrings, faIcons) {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
@@ -254,6 +275,11 @@ function generatePresets(tstrings) {
         };
 
         presets[id] = preset;
+
+        // fontawesome icon, remember for later
+        if (/^fa-/.test(preset.icon)) {
+            faIcons[preset.icon] = {};
+        }
     });
 
     presets = _merge(presets, suggestionsToPresets(presets));
@@ -351,6 +377,9 @@ function generateTaginfo(presets, fields) {
         } else if (/^temaki-/.test(preset.icon)) {
             tag.icon_url = 'https://raw.githubusercontent.com/bhousel/temaki/master/icons/' +
                 preset.icon.replace(/^temaki-/, '') + '.svg?sanitize=true';
+        } else if (/^fa-/.test(preset.icon)) {
+            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/' +
+                preset.icon.replace(/^fa-/, '') + '.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);
@@ -484,6 +513,7 @@ function translationsToYAML(translations) {
         .replace(/\'.*#\':/g, '#');
 }
 
+
 function writeEnJson(tstrings) {
     var readCoreYaml = readFileProm('data/core.yaml', 'utf8');
     var readImagery = readFileProm('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
@@ -502,6 +532,16 @@ function writeEnJson(tstrings) {
         return writeFileProm('dist/locales/en.json', JSON.stringify(en, null, 4));
     });
 }
+
+
+function writeFaIcons(faIcons) {
+    for (var key in faIcons) {
+        var name = key.substring(3);  // without `fa-`
+        var def = fontawesome.findIconDefinition({ iconName: name });
+        writeFileProm('svg/fontawesome/' + name + '.svg', fontawesome.icon(def).html);
+    }
+}
+
 
 function writeFileProm(path, content) {
     return new Promise(function(res, rej) {

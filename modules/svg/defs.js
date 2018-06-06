@@ -122,6 +122,7 @@ export function svgDefs(context) {
                 'iD-sprite',
                 'maki-sprite',
                 'temaki-sprite',
+                'fa-sprite',
                 'community-sprite'
             ])
             .enter()

@@ -21,7 +21,7 @@ export function uiPresetIcon() {
         else if (geom === 'vertex')
             return p.isFallback() ? '' : 'temaki-vertex';
         else
-            return 'marker-stroked';
+            return 'maki-marker-stroked';
     }
 
 
@@ -32,6 +32,8 @@ export function uiPresetIcon() {
         var picon = getIcon(p, geom);
         var isMaki = /^maki-/.test(picon);
         var isTemaki = /^temaki-/.test(picon);
+        var isFa = /^fa-/.test(picon);
+        var isPOI = isMaki || isTemaki || isFa;
         var isFramed = (geom === 'area' || geom === 'vertex');
 
 
@@ -83,12 +85,12 @@ export function uiPresetIcon() {
 
         icon
             .attr('class', 'preset-icon preset-icon-' +
-                ((isMaki || isTemaki) ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
+                (isPOI ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
             );
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isMaki || isTemaki ? '' : tag_classes(p));
+                return 'icon ' + picon + (isPOI ? '' : tag_classes(p));
             });
 
         icon.selectAll('use')
