@@ -112,23 +112,6 @@ export function svgMapillarySigns(projection, context, dispatch) {
             })
             .on('click', click);
 
-        // var enter = signs.enter()
-        //     .append('foreignObject')
-        //     .attr('class', 'icon-sign')
-        //     .attr('width', '24px')      // for Firefox
-        //     .attr('height', '24px')     // for Firefox
-        //     .classed('selected', function(d) {
-        //         return _some(d.detections, function(detection) {
-        //             return detection.image_key === selectedImageKey;
-        //         });
-        //     })
-        //     .on('click', click);
-
-        // enter
-        //     .append('xhtml:body')
-        //     .attr('class', 'icon-sign-body')
-        //     .html(service.signHTML);
-
         // update
         signs
             .merge(enter)
@@ -138,8 +121,6 @@ export function svgMapillarySigns(projection, context, dispatch) {
                     : b.loc[1] - a.loc[1];  // sort Y
             })
             .attr('transform', transform);
-            // .attr('x', function(d) { return projection(d.loc)[0] - 12; })   // offset by -12px to
-            // .attr('y', function(d) { return projection(d.loc)[1] - 12; });  // center signs on loc
     }
 
 
@@ -185,8 +166,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     drawSigns.supported = function() {
-        var service = getService();
-        return (service && service.signsSupported());
+        return !!getService();
     };
 
 
