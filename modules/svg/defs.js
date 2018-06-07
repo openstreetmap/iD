@@ -1,3 +1,5 @@
+import _uniq from 'lodash-es/uniq';
+
 import { request as d3_request } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
 
@@ -8,10 +10,10 @@ import { select as d3_select } from 'd3-selection';
 */
 export function svgDefs(context) {
 
-    return function drawDefs(selection) {
+    function drawDefs(selection) {
         var defs = selection.append('defs');
 
-        // markers
+        // add markers
         defs
             .append('marker')
             .attr('id', 'oneway-marker')
@@ -66,7 +68,7 @@ export function svgDefs(context) {
             .attr('stroke-width', '0.5px')
             .attr('stroke-opacity', '0.75');
 
-        // patterns
+        // add patterns
         var patterns = defs.selectAll('pattern')
             .data([
                 // pattern name, pattern image name
@@ -104,7 +106,7 @@ export function svgDefs(context) {
                 return context.imagePath('pattern/' + d[1] + '.png');
             });
 
-        // clip paths
+        // add clip paths
         defs.selectAll('clipPath')
             .data([12, 18, 20, 32, 45])
             .enter()
@@ -116,33 +118,39 @@ export function svgDefs(context) {
             .attr('width', function (d) { return d; })
             .attr('height', function (d) { return d; });
 
-        // symbol spritesheets
-        defs.selectAll('.spritesheet')
-            .data([
-                'iD-sprite',
-                'maki-sprite',
-                'temaki-sprite',
-                'fa-sprite',
-                'community-sprite'
-            ])
+        // add symbol spritesheets
+        defs
+            .call(drawDefs.addSprites, [
+                'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'community-sprite'
+            ]);
+    }
+
+
+    drawDefs.addSprites = function(selection, ids) {
+        var spritesheets = selection.selectAll('.spritesheet');
+        var currData = spritesheets.data();
+        var data = _uniq(currData.concat(ids));
+
+        spritesheets
+            .data(data)
             .enter()
             .append('g')
-            .attr('class', function (d) { return 'spritesheet spritesheet-' + d; })
-            .each(loadSprite);
-
-
-        function loadSprite(d) {
-            var url = context.imagePath(d + '.svg');
-            var node = d3_select(this).node();
-            d3_request(url)
-                .mimeType('image/svg+xml')
-                .response(function(xhr) { return xhr.responseXML; })
-                .get(function(err, svg) {
-                    if (err) return;
-                    node.appendChild(
-                        d3_select(svg.documentElement).attr('id', d).node()
-                    );
-                });
-        }
+            .attr('class', function(d) { return 'spritesheet spritesheet-' + d; })
+            .each(function(d) {
+                var url = context.imagePath(d + '.svg');
+                var node = d3_select(this).node();
+                d3_request(url)
+                    .mimeType('image/svg+xml')
+                    .response(function(xhr) { return xhr.responseXML; })
+                    .get(function(err, svg) {
+                        if (err) return;
+                        node.appendChild(
+                            d3_select(svg.documentElement).attr('id', d).node()
+                        );
+                    });
+            });
     };
+
+
+    return drawDefs;
 }
