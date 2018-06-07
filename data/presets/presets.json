@@ -2671,6 +2671,7 @@
             "name": "Public Bookcase"
         },
         "amenity/ranger_station": {
+            "icon": "maki-ranger-station",
             "fields": [
                 "name",
                 "operator",

@@ -1170,7 +1170,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/ranger-station-15.svg?sanitize=true"
         },
         {
             "key": "recycling_type",
