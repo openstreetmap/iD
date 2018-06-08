@@ -1,5 +1,5 @@
 {
-    "icon": "route-ferry",
+    "icon": "iD-route-ferry",
     "fields": [
         "name",
         "ref_route",

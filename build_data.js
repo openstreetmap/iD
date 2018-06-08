@@ -70,7 +70,7 @@ module.exports = function buildData() {
             'data/presets.yaml',
             'data/taginfo.json',
             'dist/locales/en.json',
-            'svg/fontawesome/*',
+            'svg/fontawesome/*.svg',
         ]);
 
         var categories = generateCategories(tstrings, faIcons);
@@ -382,6 +382,9 @@ function generateTaginfo(presets, fields) {
         } else if (/^fa[srb]-/.test(preset.icon)) {
             tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/' +
                 preset.icon + '.svg?sanitize=true';
+        } else if (/^iD-/.test(preset.icon)) {
+            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/' +
+                preset.icon.replace(/^iD-/, '') + '.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);

@@ -62,7 +62,7 @@ export function uiUndoRedo(context) {
                 }
             }
             d3_select(this)
-                .call(svgIcon('#icon-' + iconName));
+                .call(svgIcon('#iD-icon-' + iconName));
         });
 
         var keybinding = d3_keybinding('undo')

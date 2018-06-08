@@ -88,7 +88,7 @@ export function uiRawTagEditor(context) {
             .append('button')
             .attr('class', 'add-tag')
             .on('click', addTag)
-            .call(svgIcon('#icon-plus', 'light'));
+            .call(svgIcon('#iD-icon-plus', 'light'));
 
 
         var items = list.selectAll('.tag-row')
@@ -132,7 +132,7 @@ export function uiRawTagEditor(context) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
-            .call(svgIcon('#operation-delete'));
+            .call(svgIcon('#iD-operation-delete'));
 
 
         // Update

@@ -84,13 +84,13 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-area',
-                t('intro.buildings.add_building', { button: icon('#icon-area', 'pre-text') }));
+                t('intro.buildings.add_building', { button: icon('#iD-icon-area', 'pre-text') }));
 
             tooltip.selectAll('.tooltip-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')
-                .attr('xlink:href', '#building-images');
+                .attr('xlink:href', '#iD-graphic-buildings');
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'add-area') return;
@@ -313,7 +313,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.buildings.close', { button: icon('#icon-apply', 'pre-text') })
+                t('intro.buildings.close', { button: icon('#iD-icon-apply', 'pre-text') })
             );
         }, 500);
 
@@ -378,7 +378,7 @@ export function uiIntroBuilding(context, reveal) {
         var menuCoords = context.map().mouseCoordinates();
 
         revealEditMenu(menuCoords,
-            t('intro.buildings.square_building', { button: icon('#operation-orthogonalize', 'pre-text') })
+            t('intro.buildings.square_building', { button: icon('#iD-operation-orthogonalize', 'pre-text') })
         );
 
         context.on('enter.intro', function(mode) {
@@ -394,7 +394,7 @@ export function uiIntroBuilding(context, reveal) {
             if (!wasChanged && !node) { return continueTo(rightClickHouse); }
 
             revealEditMenu(menuCoords,
-                t('intro.buildings.square_building', { button: icon('#operation-orthogonalize', 'pre-text') }),
+                t('intro.buildings.square_building', { button: icon('#iD-operation-orthogonalize', 'pre-text') }),
                 { duration: 0 }
             );
         });
@@ -461,7 +461,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('button.add-area',
-                t('intro.buildings.add_tank', { button: icon('#icon-area', 'pre-text') })
+                t('intro.buildings.add_tank', { button: icon('#iD-icon-area', 'pre-text') })
             );
 
             context.on('enter.intro', function(mode) {
@@ -636,7 +636,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.buildings.close', { button: icon('#icon-apply', 'pre-text') })
+                t('intro.buildings.close', { button: icon('#iD-icon-apply', 'pre-text') })
             );
         }, 500);
 
@@ -700,7 +700,7 @@ export function uiIntroBuilding(context, reveal) {
         var menuCoords = context.map().mouseCoordinates();
 
         revealEditMenu(menuCoords,
-            t('intro.buildings.circle_tank', { button: icon('#operation-circularize', 'pre-text') })
+            t('intro.buildings.circle_tank', { button: icon('#iD-operation-circularize', 'pre-text') })
         );
 
         context.on('enter.intro', function(mode) {
@@ -716,7 +716,7 @@ export function uiIntroBuilding(context, reveal) {
             if (!wasChanged && !node) { return continueTo(rightClickTank); }
 
             revealEditMenu(menuCoords,
-                t('intro.buildings.circle_tank', { button: icon('#operation-circularize', 'pre-text') }),
+                t('intro.buildings.circle_tank', { button: icon('#iD-operation-circularize', 'pre-text') }),
                 { duration: 0 }
             );
         });

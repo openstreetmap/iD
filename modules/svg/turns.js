@@ -7,9 +7,9 @@ export function svgTurns(projection) {
 
         function icon(turn) {
             var u = turn.u ? '-u' : '';
-            if (turn.no) return '#turn-no' + u;
-            if (turn.only) return '#turn-only' + u;
-            return '#turn-yes' + u;
+            if (turn.no) return '#iD-turn-no' + u;
+            if (turn.only) return '#iD-turn-only' + u;
+            return '#iD-turn-yes' + u;
         }
 
         var layer = selection.selectAll('.data-layer-osm').selectAll('.layer-turns')

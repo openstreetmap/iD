@@ -57,13 +57,13 @@ export function uiFieldHelp(context, fieldName) {
     var replacements = {
         distField: t('restriction.controls.distance'),
         viaField: t('restriction.controls.via'),
-        fromShadow: icon('#turn-shadow', 'pre-text shadow from'),
-        allowShadow: icon('#turn-shadow', 'pre-text shadow allow'),
-        restrictShadow: icon('#turn-shadow', 'pre-text shadow restrict'),
-        onlyShadow: icon('#turn-shadow', 'pre-text shadow only'),
-        allowTurn: icon('#turn-yes', 'pre-text turn'),
-        restrictTurn: icon('#turn-no', 'pre-text turn'),
-        onlyTurn: icon('#turn-only', 'pre-text turn')
+        fromShadow: icon('#iD-turn-shadow', 'pre-text shadow from'),
+        allowShadow: icon('#iD-turn-shadow', 'pre-text shadow allow'),
+        restrictShadow: icon('#iD-turn-shadow', 'pre-text shadow restrict'),
+        onlyShadow: icon('#iD-turn-shadow', 'pre-text shadow only'),
+        allowTurn: icon('#iD-turn-yes', 'pre-text turn'),
+        restrictTurn: icon('#iD-turn-no', 'pre-text turn'),
+        onlyTurn: icon('#iD-turn-only', 'pre-text turn')
     };
 
 
@@ -150,7 +150,7 @@ export function uiFieldHelp(context, fieldName) {
             .append('button')
             .attr('class', 'field-help-button')
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-help'))
+            .call(svgIcon('#iD-icon-help'))
             .merge(button)
             .on('click', function () {
                 d3_event.stopPropagation();
@@ -208,7 +208,7 @@ export function uiFieldHelp(context, fieldName) {
                 d3_event.preventDefault();
                 hide();
             })
-            .call(svgIcon('#icon-close'));
+            .call(svgIcon('#iD-icon-close'));
 
         var navEnter = enter
             .append('div')

@@ -6670,7 +6670,7 @@
             "name": "Street Crossing"
         },
         "footway/crosswalk-raised": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "crossing",
                 "access",
@@ -6701,7 +6701,7 @@
             "name": "Raised Pedestrian Crosswalk"
         },
         "footway/crosswalk": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "crossing",
                 "access",
@@ -6727,7 +6727,7 @@
             "name": "Pedestrian Crosswalk"
         },
         "footway/sidewalk": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "surface",
                 "lit",
@@ -7384,7 +7384,7 @@
                 "structure",
                 "access"
             ],
-            "icon": "highway-bridleway",
+            "icon": "iD-highway-bridleway",
             "geometry": [
                 "line"
             ],
@@ -7399,7 +7399,7 @@
             "name": "Bridle Path"
         },
         "highway/bus_guideway": {
-            "icon": "highway-bus_guideway",
+            "icon": "iD-highway-bus_guideway",
             "fields": [
                 "name",
                 "operator",
@@ -7425,7 +7425,7 @@
             "name": "Bus Guideway"
         },
         "highway/corridor": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "width",
@@ -7544,7 +7544,7 @@
             "name": "Pedestrian Crosswalk"
         },
         "highway/cycleway": {
-            "icon": "highway-cycleway",
+            "icon": "iD-highway-cycleway",
             "fields": [
                 "name",
                 "oneway",
@@ -7585,7 +7585,7 @@
             "name": "Elevator"
         },
         "highway/footway": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "surface",
@@ -7628,7 +7628,7 @@
             "name": "Yield Sign"
         },
         "highway/living_street": {
-            "icon": "highway-living-street",
+            "icon": "iD-highway-living-street",
             "fields": [
                 "name",
                 "oneway",
@@ -7675,7 +7675,7 @@
             "name": "Motorway Junction / Exit"
         },
         "highway/motorway_link": {
-            "icon": "highway-motorway-link",
+            "icon": "iD-highway-motorway-link",
             "fields": [
                 "name",
                 "ref_road_number",
@@ -7710,7 +7710,7 @@
             "name": "Motorway Link"
         },
         "highway/motorway": {
-            "icon": "highway-motorway",
+            "icon": "iD-highway-motorway",
             "fields": [
                 "name",
                 "ref_road_number",
@@ -7755,7 +7755,7 @@
             "name": "Passing Place"
         },
         "highway/path": {
-            "icon": "highway-path",
+            "icon": "iD-highway-path",
             "fields": [
                 "name",
                 "surface",
@@ -7814,7 +7814,7 @@
             "name": "Pedestrian Area"
         },
         "highway/pedestrian_line": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "surface",
@@ -7841,7 +7841,7 @@
             "name": "Pedestrian Street"
         },
         "highway/primary_link": {
-            "icon": "highway-primary-link",
+            "icon": "iD-highway-primary-link",
             "fields": [
                 "name",
                 "oneway",
@@ -7869,7 +7869,7 @@
             "name": "Primary Link"
         },
         "highway/primary": {
-            "icon": "highway-primary",
+            "icon": "iD-highway-primary",
             "fields": [
                 "name",
                 "oneway",
@@ -7892,7 +7892,7 @@
             "name": "Primary Road"
         },
         "highway/raceway": {
-            "icon": "highway-unclassified",
+            "icon": "iD-highway-unclassified",
             "fields": [
                 "name",
                 "oneway",
@@ -7927,7 +7927,7 @@
             "name": "Racetrack (Motorsport)"
         },
         "highway/residential": {
-            "icon": "highway-residential",
+            "icon": "iD-highway-residential",
             "fields": [
                 "name",
                 "oneway",
@@ -7967,7 +7967,7 @@
             "name": "Rest Area"
         },
         "highway/road": {
-            "icon": "highway-road",
+            "icon": "iD-highway-road",
             "fields": [
                 "name",
                 "oneway",
@@ -7988,7 +7988,7 @@
             "name": "Unknown Road"
         },
         "highway/secondary_link": {
-            "icon": "highway-secondary-link",
+            "icon": "iD-highway-secondary-link",
             "fields": [
                 "name",
                 "oneway",
@@ -8016,7 +8016,7 @@
             "name": "Secondary Link"
         },
         "highway/secondary": {
-            "icon": "highway-secondary",
+            "icon": "iD-highway-secondary",
             "fields": [
                 "name",
                 "oneway",
@@ -8039,7 +8039,7 @@
             "name": "Secondary Road"
         },
         "highway/service": {
-            "icon": "highway-service",
+            "icon": "iD-highway-service",
             "fields": [
                 "name",
                 "service",
@@ -8060,7 +8060,7 @@
             "name": "Service Road"
         },
         "highway/service/alley": {
-            "icon": "highway-service",
+            "icon": "iD-highway-service",
             "fields": [
                 "name",
                 "oneway",
@@ -8084,7 +8084,7 @@
             "name": "Alley"
         },
         "highway/service/drive-through": {
-            "icon": "highway-service",
+            "icon": "iD-highway-service",
             "fields": [
                 "name",
                 "oneway",
@@ -8109,7 +8109,7 @@
             "name": "Drive-Through"
         },
         "highway/service/driveway": {
-            "icon": "highway-service",
+            "icon": "iD-highway-service",
             "fields": [
                 "name",
                 "oneway",
@@ -8133,7 +8133,7 @@
             "name": "Driveway"
         },
         "highway/service/emergency_access": {
-            "icon": "highway-service",
+            "icon": "iD-highway-service",
             "fields": [
                 "name",
                 "oneway",
@@ -8157,7 +8157,7 @@
             "name": "Emergency Access"
         },
         "highway/service/parking_aisle": {
-            "icon": "highway-service",
+            "icon": "iD-highway-service",
             "fields": [
                 "name",
                 "oneway",
@@ -8217,7 +8217,7 @@
             "name": "Speed Camera"
         },
         "highway/steps": {
-            "icon": "highway-steps",
+            "icon": "iD-highway-steps",
             "fields": [
                 "surface",
                 "lit",
@@ -8281,7 +8281,7 @@
             "name": "Street Lamp"
         },
         "highway/tertiary_link": {
-            "icon": "highway-tertiary-link",
+            "icon": "iD-highway-tertiary-link",
             "fields": [
                 "name",
                 "oneway",
@@ -8309,7 +8309,7 @@
             "name": "Tertiary Link"
         },
         "highway/tertiary": {
-            "icon": "highway-tertiary",
+            "icon": "iD-highway-tertiary",
             "fields": [
                 "name",
                 "oneway",
@@ -8332,7 +8332,7 @@
             "name": "Tertiary Road"
         },
         "highway/track": {
-            "icon": "highway-track",
+            "icon": "iD-highway-track",
             "fields": [
                 "name",
                 "tracktype",
@@ -8421,7 +8421,7 @@
             "name": "Traffic Signals"
         },
         "highway/trunk_link": {
-            "icon": "highway-trunk-link",
+            "icon": "iD-highway-trunk-link",
             "fields": [
                 "name",
                 "ref_road_number",
@@ -8448,7 +8448,7 @@
             "name": "Trunk Link"
         },
         "highway/trunk": {
-            "icon": "highway-trunk",
+            "icon": "iD-highway-trunk",
             "fields": [
                 "name",
                 "ref_road_number",
@@ -8497,7 +8497,7 @@
             "name": "Turning Loop (Island)"
         },
         "highway/unclassified": {
-            "icon": "highway-unclassified",
+            "icon": "iD-highway-unclassified",
             "fields": [
                 "name",
                 "oneway",
@@ -11266,7 +11266,7 @@
             "name": "Swimming Pool"
         },
         "leisure/track": {
-            "icon": "highway-road",
+            "icon": "iD-highway-road",
             "fields": [
                 "surface",
                 "sport_racing_nonmotor",
@@ -11638,7 +11638,7 @@
             "name": "Pier"
         },
         "man_made/pipeline": {
-            "icon": "pipeline-line",
+            "icon": "iD-pipeline-line",
             "fields": [
                 "location",
                 "operator",
@@ -13911,7 +13911,7 @@
             "name": "Wind Turbine"
         },
         "power/line": {
-            "icon": "power-line",
+            "icon": "iD-power-line",
             "fields": [
                 "name",
                 "operator",
@@ -13927,7 +13927,7 @@
             "name": "Power Line"
         },
         "power/minor_line": {
-            "icon": "power-line",
+            "icon": "iD-power-line",
             "fields": [
                 "name",
                 "operator",
@@ -14066,7 +14066,7 @@
             "name": "Transformer"
         },
         "public_transport/linear_platform_aerialway": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14100,7 +14100,7 @@
             "name": "Aerialway Stop / Platform"
         },
         "public_transport/linear_platform_bus": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14143,7 +14143,7 @@
             "name": "Bus Stop / Platform"
         },
         "public_transport/linear_platform_ferry": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14179,7 +14179,7 @@
             "name": "Ferry Stop / Platform"
         },
         "public_transport/linear_platform_light_rail": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14227,7 +14227,7 @@
             "name": "Light Rail Stop / Platform"
         },
         "public_transport/linear_platform_monorail": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14271,7 +14271,7 @@
             "name": "Monorail Stop / Platform"
         },
         "public_transport/linear_platform_subway": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14318,7 +14318,7 @@
             "name": "Subway Stop / Platform"
         },
         "public_transport/linear_platform_train": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14363,7 +14363,7 @@
             "name": "Train Stop / Platform"
         },
         "public_transport/linear_platform_tram": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14412,7 +14412,7 @@
             "name": "Tram Stop / Platform"
         },
         "public_transport/linear_platform_trolleybus": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14460,7 +14460,7 @@
             "name": "Trolleybus Stop / Platform"
         },
         "public_transport/linear_platform": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -15809,7 +15809,7 @@
             "searchable": false
         },
         "railway/platform": {
-            "icon": "highway-footway",
+            "icon": "iD-highway-footway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -15877,7 +15877,7 @@
             "searchable": false
         },
         "railway/abandoned": {
-            "icon": "railway-abandoned",
+            "icon": "iD-railway-abandoned",
             "fields": [
                 "name",
                 "structure",
@@ -15941,7 +15941,7 @@
             "name": "Railway Derailer"
         },
         "railway/disused": {
-            "icon": "railway-disused",
+            "icon": "iD-railway-disused",
             "fields": [
                 "structure",
                 "service_rail",
@@ -15957,7 +15957,7 @@
             "name": "Disused Railway"
         },
         "railway/funicular": {
-            "icon": "railway-rail",
+            "icon": "iD-railway-rail",
             "geometry": [
                 "line"
             ],
@@ -15997,7 +15997,7 @@
             "name": "Railway Crossing (Road)"
         },
         "railway/light_rail": {
-            "icon": "railway-light-rail",
+            "icon": "iD-railway-light-rail",
             "fields": [
                 "name",
                 "structure",
@@ -16040,7 +16040,7 @@
             "name": "Railway Milestone"
         },
         "railway/miniature": {
-            "icon": "railway-rail",
+            "icon": "iD-railway-rail",
             "geometry": [
                 "line"
             ],
@@ -16062,7 +16062,7 @@
             "name": "Miniature Railway"
         },
         "railway/monorail": {
-            "icon": "railway-monorail",
+            "icon": "iD-railway-monorail",
             "fields": [
                 "name",
                 "structure",
@@ -16082,7 +16082,7 @@
             "name": "Monorail"
         },
         "railway/narrow_gauge": {
-            "icon": "railway-rail",
+            "icon": "iD-railway-rail",
             "fields": [
                 "name",
                 "structure",
@@ -16106,7 +16106,7 @@
             "name": "Narrow Gauge Rail"
         },
         "railway/rail": {
-            "icon": "railway-rail",
+            "icon": "iD-railway-rail",
             "fields": [
                 "name",
                 "structure",
@@ -16166,7 +16166,7 @@
             "name": "Subway Entrance"
         },
         "railway/subway": {
-            "icon": "railway-subway",
+            "icon": "iD-railway-subway",
             "fields": [
                 "name",
                 "structure",
@@ -16224,7 +16224,7 @@
             "name": "Train Wash"
         },
         "railway/tram": {
-            "icon": "railway-light-rail",
+            "icon": "iD-railway-light-rail",
             "fields": [
                 "name",
                 "structure",
@@ -16250,7 +16250,7 @@
             "name": "Tram"
         },
         "relation": {
-            "icon": "relation",
+            "icon": "iD-relation",
             "fields": [
                 "name",
                 "relation"
@@ -16262,7 +16262,7 @@
             "name": "Relation"
         },
         "route/ferry": {
-            "icon": "ferry-line",
+            "icon": "iD-ferry-line",
             "geometry": [
                 "line"
             ],
@@ -19811,7 +19811,7 @@
             "name": "Speed Table"
         },
         "type/multipolygon": {
-            "icon": "multipolygon",
+            "icon": "iD-multipolygon",
             "geometry": [
                 "area",
                 "relation"
@@ -19825,7 +19825,7 @@
             "matchScore": 0.1
         },
         "type/boundary": {
-            "icon": "boundary",
+            "icon": "iD-boundary",
             "fields": [
                 "name",
                 "boundary"
@@ -19858,7 +19858,7 @@
             "name": "Administrative Boundary"
         },
         "type/restriction": {
-            "icon": "restriction",
+            "icon": "iD-restriction",
             "fields": [
                 "name",
                 "restriction",
@@ -19873,7 +19873,7 @@
             "name": "Restriction"
         },
         "type/restriction/no_left_turn": {
-            "icon": "restriction-no-left-turn",
+            "icon": "iD-restriction-no-left-turn",
             "fields": [
                 "except"
             ],
@@ -19887,7 +19887,7 @@
             "name": "No Left Turn"
         },
         "type/restriction/no_right_turn": {
-            "icon": "restriction-no-right-turn",
+            "icon": "iD-restriction-no-right-turn",
             "fields": [
                 "except"
             ],
@@ -19901,7 +19901,7 @@
             "name": "No Right Turn"
         },
         "type/restriction/no_straight_on": {
-            "icon": "restriction-no-straight-on",
+            "icon": "iD-restriction-no-straight-on",
             "fields": [
                 "except"
             ],
@@ -19915,7 +19915,7 @@
             "name": "No Straight On"
         },
         "type/restriction/no_u_turn": {
-            "icon": "restriction-no-u-turn",
+            "icon": "iD-restriction-no-u-turn",
             "fields": [
                 "except"
             ],
@@ -19929,7 +19929,7 @@
             "name": "No U-turn"
         },
         "type/restriction/only_left_turn": {
-            "icon": "restriction-only-left-turn",
+            "icon": "iD-restriction-only-left-turn",
             "fields": [
                 "except"
             ],
@@ -19943,7 +19943,7 @@
             "name": "Only Left Turn"
         },
         "type/restriction/only_right_turn": {
-            "icon": "restriction-only-right-turn",
+            "icon": "iD-restriction-only-right-turn",
             "fields": [
                 "except"
             ],
@@ -19957,7 +19957,7 @@
             "name": "Only Right Turn"
         },
         "type/restriction/only_straight_on": {
-            "icon": "restriction-only-straight-on",
+            "icon": "iD-restriction-only-straight-on",
             "fields": [
                 "except"
             ],
@@ -19971,7 +19971,7 @@
             "name": "Only Straight On"
         },
         "type/restriction/only_u_turn": {
-            "icon": "restriction-only-u-turn",
+            "icon": "iD-restriction-only-u-turn",
             "fields": [
                 "except"
             ],
@@ -19985,7 +19985,7 @@
             "name": "Only U-turn"
         },
         "type/route_master": {
-            "icon": "route-master",
+            "icon": "iD-route-master",
             "fields": [
                 "name",
                 "route_master",
@@ -20002,7 +20002,7 @@
             "name": "Route Master"
         },
         "type/route": {
-            "icon": "route",
+            "icon": "iD-route",
             "fields": [
                 "name",
                 "route",
@@ -20019,7 +20019,7 @@
             "name": "Route"
         },
         "type/route/bicycle": {
-            "icon": "route-bicycle",
+            "icon": "iD-route-bicycle",
             "fields": [
                 "name",
                 "ref_route",
@@ -20036,7 +20036,7 @@
             "name": "Cycle Route"
         },
         "type/route/bus": {
-            "icon": "route-bus",
+            "icon": "iD-route-bus",
             "fields": [
                 "name",
                 "ref_route",
@@ -20053,7 +20053,7 @@
             "name": "Bus Route"
         },
         "type/route/detour": {
-            "icon": "route-detour",
+            "icon": "iD-route-detour",
             "fields": [
                 "name",
                 "ref_route"
@@ -20068,7 +20068,7 @@
             "name": "Detour Route"
         },
         "type/route/ferry": {
-            "icon": "route-ferry",
+            "icon": "iD-route-ferry",
             "fields": [
                 "name",
                 "ref_route",
@@ -20085,7 +20085,7 @@
             "name": "Ferry Route"
         },
         "type/route/foot": {
-            "icon": "route-foot",
+            "icon": "iD-route-foot",
             "fields": [
                 "name",
                 "ref_route",
@@ -20102,7 +20102,7 @@
             "name": "Foot Route"
         },
         "type/route/hiking": {
-            "icon": "route-foot",
+            "icon": "iD-route-foot",
             "fields": [
                 "name",
                 "ref_route",
@@ -20121,7 +20121,7 @@
             "name": "Hiking Route"
         },
         "type/route/horse": {
-            "icon": "route-horse",
+            "icon": "iD-route-horse",
             "fields": [
                 "name",
                 "ref_route",
@@ -20140,7 +20140,7 @@
             "name": "Riding Route"
         },
         "type/route/light_rail": {
-            "icon": "route-light-rail",
+            "icon": "iD-route-light-rail",
             "fields": [
                 "name",
                 "ref_route",
@@ -20157,7 +20157,7 @@
             "name": "Light Rail Route"
         },
         "type/route/pipeline": {
-            "icon": "route-pipeline",
+            "icon": "iD-route-pipeline",
             "fields": [
                 "name",
                 "ref_route",
@@ -20173,7 +20173,7 @@
             "name": "Pipeline Route"
         },
         "type/route/piste": {
-            "icon": "route-piste",
+            "icon": "iD-route-piste",
             "fields": [
                 "name",
                 "ref_route",
@@ -20190,7 +20190,7 @@
             "name": "Piste/Ski Route"
         },
         "type/route/power": {
-            "icon": "route-power",
+            "icon": "iD-route-power",
             "fields": [
                 "name",
                 "ref_route",
@@ -20206,7 +20206,7 @@
             "name": "Power Route"
         },
         "type/route/road": {
-            "icon": "route-road",
+            "icon": "iD-route-road",
             "fields": [
                 "name",
                 "ref_route",
@@ -20222,7 +20222,7 @@
             "name": "Road Route"
         },
         "type/route/subway": {
-            "icon": "route-subway",
+            "icon": "iD-route-subway",
             "fields": [
                 "name",
                 "ref_route",
@@ -20239,7 +20239,7 @@
             "name": "Subway Route"
         },
         "type/route/train": {
-            "icon": "route-train",
+            "icon": "iD-route-train",
             "fields": [
                 "name",
                 "ref_route",
@@ -20256,7 +20256,7 @@
             "name": "Train Route"
         },
         "type/route/tram": {
-            "icon": "route-tram",
+            "icon": "iD-route-tram",
             "fields": [
                 "name",
                 "ref_route",
@@ -20273,7 +20273,7 @@
             "name": "Tram Route"
         },
         "type/site": {
-            "icon": "relation",
+            "icon": "iD-relation",
             "fields": [
                 "name",
                 "site"
@@ -20287,7 +20287,7 @@
             "name": "Site"
         },
         "type/waterway": {
-            "icon": "route-water",
+            "icon": "iD-route-water",
             "fields": [
                 "name",
                 "waterway",
@@ -20329,7 +20329,7 @@
             "name": "Boatyard"
         },
         "waterway/canal": {
-            "icon": "waterway-canal",
+            "icon": "iD-waterway-canal",
             "fields": [
                 "name",
                 "width",
@@ -20360,7 +20360,7 @@
             "name": "Dam"
         },
         "waterway/ditch": {
-            "icon": "waterway-ditch",
+            "icon": "iD-waterway-ditch",
             "fields": [
                 "structure_waterway",
                 "intermittent"
@@ -20397,7 +20397,7 @@
             "name": "Wet Dock / Dry Dock"
         },
         "waterway/drain": {
-            "icon": "waterway-ditch",
+            "icon": "iD-waterway-ditch",
             "fields": [
                 "structure_waterway",
                 "intermittent"
@@ -20435,7 +20435,7 @@
             "name": "Marine Fuel Station"
         },
         "waterway/river": {
-            "icon": "waterway-river",
+            "icon": "iD-waterway-river",
             "fields": [
                 "name",
                 "structure_waterway",
@@ -20507,7 +20507,7 @@
             "name": "Marine Toilet Disposal"
         },
         "waterway/stream_intermittent": {
-            "icon": "waterway-stream",
+            "icon": "iD-waterway-stream",
             "fields": [
                 "name",
                 "structure_waterway",
@@ -20550,7 +20550,7 @@
             "name": "Intermittent Stream"
         },
         "waterway/stream": {
-            "icon": "waterway-stream",
+            "icon": "iD-waterway-stream",
             "fields": [
                 "name",
                 "structure_waterway",

@@ -1,5 +1,5 @@
 {
-    "icon": "category-path",
+    "icon": "iD-category-path",
     "geometry": "line",
     "name": "Path Features",
     "members": [

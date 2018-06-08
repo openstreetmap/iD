@@ -1,5 +1,5 @@
 {
-    "icon": "highway-primary",
+    "icon": "iD-highway-primary",
     "fields": [
         "name",
         "oneway",

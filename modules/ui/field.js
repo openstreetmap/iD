@@ -117,7 +117,7 @@ export function uiField(context, presetField, entity, options) {
                     .attr('class', 'remove-icon')
                     .attr('title', t('icons.remove'))
                     .attr('tabindex', -1)
-                    .call(svgIcon('#operation-delete'));
+                    .call(svgIcon('#iD-operation-delete'));
             }
 
             if (options.revert) {
@@ -126,9 +126,7 @@ export function uiField(context, presetField, entity, options) {
                     .attr('class', 'modified-icon')
                     .attr('title', t('icons.undo'))
                     .attr('tabindex', -1)
-                    .call(
-                        (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-                    );
+                    .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-redo' : '#iD-icon-undo'));
             }
         }
 

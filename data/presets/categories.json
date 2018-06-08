@@ -99,7 +99,7 @@
             ]
         },
         "category-path": {
-            "icon": "category-path",
+            "icon": "iD-category-path",
             "geometry": "line",
             "name": "Path Features",
             "members": [
@@ -114,7 +114,7 @@
             ]
         },
         "category-rail": {
-            "icon": "category-rail",
+            "icon": "iD-category-rail",
             "geometry": "line",
             "name": "Rail Features",
             "members": [
@@ -127,7 +127,7 @@
             ]
         },
         "category-restriction": {
-            "icon": "restriction",
+            "icon": "iD-restriction",
             "geometry": "relation",
             "name": "Restriction Features",
             "members": [
@@ -143,7 +143,7 @@
             ]
         },
         "category-road": {
-            "icon": "category-roads",
+            "icon": "iD-category-roads",
             "geometry": "line",
             "name": "Road Features",
             "members": [
@@ -166,7 +166,7 @@
             ]
         },
         "category-route": {
-            "icon": "route",
+            "icon": "iD-route",
             "geometry": "relation",
             "name": "Route Features",
             "members": [
@@ -201,7 +201,7 @@
             ]
         },
         "category-water-line": {
-            "icon": "category-water",
+            "icon": "iD-category-water",
             "geometry": "line",
             "name": "Water Features",
             "members": [

@@ -1,5 +1,5 @@
 {
-    "icon": "restriction",
+    "icon": "iD-restriction",
     "geometry": "relation",
     "name": "Restriction Features",
     "members": [

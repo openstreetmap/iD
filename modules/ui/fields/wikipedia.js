@@ -108,7 +108,7 @@ export function uiFieldWikipedia(field, context) {
             .append('button')
             .attr('class', 'button-input-action wiki-link minor')
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link'))
+            .call(svgIcon('#iD-icon-out-link'))
             .merge(link);
 
         link

@@ -17,7 +17,7 @@ export function uiPresetIcon() {
         if (p.icon)
             return p.icon;
         else if (geom === 'line')
-            return 'other-line';
+            return 'iD-other-line';
         else if (geom === 'vertex')
             return p.isFallback() ? '' : 'temaki-vertex';
         else
@@ -71,7 +71,7 @@ export function uiPresetIcon() {
         areaFrame = areaFrame.enter()
             .append('div')
             .attr('class', 'preset-icon-frame')
-            .call(svgIcon('#preset-icon-frame'));
+            .call(svgIcon('#iD-preset-icon-frame'));
 
 
         var icon = selection.selectAll('.preset-icon')

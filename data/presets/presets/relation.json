@@ -1,5 +1,5 @@
 {
-    "icon": "relation",
+    "icon": "iD-relation",
     "fields": [
         "name",
         "relation"

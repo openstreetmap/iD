@@ -109,7 +109,7 @@ export function uiChangesetEditor(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-alert', 'inline'))
+            .call(svgIcon('#iD-icon-alert', 'inline'))
             .attr('href', t('commit.google_warning_link'))
             .append('span')
             .text(t('commit.google_warning'));

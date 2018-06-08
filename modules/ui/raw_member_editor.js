@@ -146,7 +146,7 @@ export function uiRawMemberEditor(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMember)
-                .call(svgIcon('#operation-delete'));
+                .call(svgIcon('#iD-operation-delete'));
 
             if (taginfo) {
                 enter.each(bindTypeahead);

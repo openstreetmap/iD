@@ -1,5 +1,5 @@
 {
-    "icon": "route",
+    "icon": "iD-route",
     "geometry": "relation",
     "name": "Route Features",
     "members": [

@@ -53,7 +53,7 @@ export function uiModal(selection, blocking) {
         modal.append('button')
             .attr('class', 'close')
             .on('click', shaded.close)
-            .call(svgIcon('#icon-close'));
+            .call(svgIcon('#iD-icon-close'));
 
         keybinding
             .on('⌫', shaded.close)

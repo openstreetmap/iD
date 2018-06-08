@@ -1,5 +1,5 @@
 {
-    "icon": "route-master",
+    "icon": "iD-route-master",
     "fields": [
         "name",
         "route_master",

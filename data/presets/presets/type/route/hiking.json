@@ -1,5 +1,5 @@
 {
-    "icon": "route-foot",
+    "icon": "iD-route-foot",
     "fields": [
         "name",
         "ref_route",

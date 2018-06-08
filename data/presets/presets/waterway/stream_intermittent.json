@@ -1,5 +1,5 @@
 {
-    "icon": "waterway-stream",
+    "icon": "iD-waterway-stream",
     "fields": [
         "name",
         "structure_waterway",

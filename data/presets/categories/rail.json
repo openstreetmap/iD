@@ -1,5 +1,5 @@
 {
-    "icon": "category-rail",
+    "icon": "iD-category-rail",
     "geometry": "line",
     "name": "Rail Features",
     "members": [

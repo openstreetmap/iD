@@ -166,7 +166,7 @@ export function uiIntro(context) {
             .append('svg')
             .attr('class', 'intro-nav-wrap-logo')
             .append('use')
-            .attr('xlink:href', '#logo-walkthrough');
+            .attr('xlink:href', '#iD-logo-walkthrough');
 
         var buttonwrap = navwrap
             .append('div')
@@ -187,7 +187,7 @@ export function uiIntro(context) {
         buttons
             .append('span')
             .attr('class', 'status')
-            .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'));
+            .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
 
         enterChapter(chapters[0]);
 

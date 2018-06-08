@@ -27,7 +27,7 @@ export function uiStatus(context) {
                             .append('a')
                             .attr('class', 'api-status-login')
                             .attr('target', '_blank')
-                            .call(svgIcon('#icon-out-link', 'inline'))
+                            .call(svgIcon('#iD-icon-out-link', 'inline'))
                             .append('span')
                             .text(t('login'))
                             .on('click.login', function() {

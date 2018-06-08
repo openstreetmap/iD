@@ -70,7 +70,7 @@ export function uiZoom(context) {
 
         button.each(function(d) {
             d3_select(this)
-                .call(svgIcon('#icon-' + d.icon, 'light'));
+                .call(svgIcon('#iD-icon-' + d.icon, 'light'));
         });
 
         var keybinding = d3_keybinding('zoom');

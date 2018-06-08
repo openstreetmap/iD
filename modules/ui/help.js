@@ -217,25 +217,25 @@ export function uiHelp(context) {
     };
 
     var replacements = {
-        point: icon('#icon-point', 'pre-text'),
-        line: icon('#icon-line', 'pre-text'),
-        area: icon('#icon-area', 'pre-text'),
-        plus: icon('#icon-plus', 'pre-text'),
-        minus: icon('#icon-minus', 'pre-text'),
-        orthogonalize: icon('#operation-orthogonalize', 'pre-text'),
-        disconnect: icon('#operation-disconnect', 'pre-text'),
-        layers: icon('#icon-layers', 'pre-text'),
-        data: icon('#icon-data', 'pre-text'),
-        inspect: icon('#icon-inspect', 'pre-text'),
-        move: icon('#operation-move', 'pre-text'),
-        merge: icon('#operation-merge', 'pre-text'),
-        delete: icon('#operation-delete', 'pre-text'),
-        close: icon('#icon-close', 'pre-text'),
-        undo: icon(textDirection === 'rtl' ? '#icon-redo' : '#icon-undo', 'pre-text'),
-        redo: icon(textDirection === 'rtl' ? '#icon-undo' : '#icon-redo', 'pre-text'),
-        save: icon('#icon-save', 'pre-text'),
-        leftclick: icon('#walkthrough-mouse', 'pre-text mouseclick', 'left'),
-        rightclick: icon('#walkthrough-mouse', 'pre-text mouseclick', 'right'),
+        point: icon('#iD-icon-point', 'pre-text'),
+        line: icon('#iD-icon-line', 'pre-text'),
+        area: icon('#iD-icon-area', 'pre-text'),
+        plus: icon('#iD-icon-plus', 'pre-text'),
+        minus: icon('#iD-icon-minus', 'pre-text'),
+        orthogonalize: icon('#iD-operation-orthogonalize', 'pre-text'),
+        disconnect: icon('#iD-operation-disconnect', 'pre-text'),
+        layers: icon('#iD-icon-layers', 'pre-text'),
+        data: icon('#iD-icon-data', 'pre-text'),
+        inspect: icon('#iD-icon-inspect', 'pre-text'),
+        move: icon('#iD-operation-move', 'pre-text'),
+        merge: icon('#iD-operation-merge', 'pre-text'),
+        delete: icon('#iD-operation-delete', 'pre-text'),
+        close: icon('#iD-icon-close', 'pre-text'),
+        undo: icon(textDirection === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
+        redo: icon(textDirection === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
+        save: icon('#iD-icon-save', 'pre-text'),
+        leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
+        rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
         shift: uiCmd.display('⇧'),
         alt: uiCmd.display('⌥'),
         return: uiCmd.display('↵'),
@@ -333,7 +333,7 @@ export function uiHelp(context) {
                     nextLink
                         .append('span')
                         .text(docs[i + 1].title)
-                        .call(svgIcon((rtl ? '#icon-backward' : '#icon-forward'), 'inline'));
+                        .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
 
@@ -348,7 +348,7 @@ export function uiHelp(context) {
                         });
 
                     prevLink
-                        .call(svgIcon((rtl ? '#icon-forward' : '#icon-backward'), 'inline'))
+                        .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
                         .text(docs[i - 1].title);
                 }
@@ -379,7 +379,7 @@ export function uiHelp(context) {
         var button = selection.append('button')
             .attr('tabindex', -1)
             .on('click', togglePane)
-            .call(svgIcon('#icon-help', 'light'))
+            .call(svgIcon('#iD-icon-help', 'light'))
             .call(tooltipBehavior);
 
         var shown = false;
@@ -396,7 +396,7 @@ export function uiHelp(context) {
         heading
             .append('button')
             .on('click', function() { uiHelp.hidePane(); })
-            .call(svgIcon('#icon-close'));
+            .call(svgIcon('#iD-icon-close'));
 
 
         var content = pane
@@ -440,7 +440,7 @@ export function uiHelp(context) {
             .append('svg')
             .attr('class', 'logo logo-walkthrough')
             .append('use')
-            .attr('xlink:href', '#logo-walkthrough');
+            .attr('xlink:href', '#iD-logo-walkthrough');
 
         walkthrough
             .append('div')

@@ -6,7 +6,7 @@ var _flashTimer;
 
 export function uiFlash() {
     var _duration = 2000;
-    var _iconName = '#icon-no';
+    var _iconName = '#iD-icon-no';
     var _iconClass = 'disabled';
     var _text = '';
     var _textClass;
