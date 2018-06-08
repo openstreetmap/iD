@@ -169,6 +169,13 @@ export function rendererBackground(context) {
         var streetside = context.layers().layer('streetside');
         if (streetside && streetside.enabled()) {
             imageryUsed.push('Bing Streetside');
+
+        var mvt = context.layers().layer('mvt');
+        if (mvt && mvt.enabled() && mvt.hasMvt()) {
+            // Include a string like '.mvt data file' or '.geojson data file'
+            var match = mvt.getSrc().match(/(pbf|mvt|(?:geo)?json)$/i);
+            var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
+            imageryUsed.push(extension + 'data file');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');
@@ -418,6 +425,13 @@ export function rendererBackground(context) {
             var gpx = context.layers().layer('gpx');
             if (gpx) {
                 gpx.url(q.gpx);
+            }
+        }
+
+        if (q.mvt) {
+            var mvt = context.layers().layer('mvt');
+            if (mvt) {
+                mvt.url(q.mvt);
             }
         }
 
