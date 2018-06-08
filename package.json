@@ -76,7 +76,7 @@
     "rollup-plugin-json": "^3.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "shelljs": "^0.8.0",
-    "shx": "^0.2.1",
+    "shx": "^0.3.0",
     "sinon": "^5.0.0",
     "sinon-chai": "^3.1.0",
     "smash": "0.0",
