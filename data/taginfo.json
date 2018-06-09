@@ -4998,7 +4998,8 @@
             "object_types": [
                 "way",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
         },
         {
             "key": "man_made",
