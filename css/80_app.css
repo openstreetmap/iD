@@ -996,13 +996,11 @@ a.hide-toggle {
     position: absolute;
     top: 7px;
     left: 7px;
-    height: 42px;
-    width: 42px;
     margin: auto;
 }
 [dir='rtl'] .preset-icon-frame {
-  left: auto;
-  right: 7px;
+    left: auto;
+    right: 7px;
 }
 
 .preset-icon-frame .icon {
