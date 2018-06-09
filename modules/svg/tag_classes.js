@@ -6,7 +6,7 @@ export function svgTagClasses() {
     var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
             'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-            'leisure', 'military', 'place'
+            'leisure', 'military', 'place', 'man_made'
         ],
         statuses = [
             'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
