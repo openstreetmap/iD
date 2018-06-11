@@ -3867,7 +3867,8 @@
             "description": "Churchyard",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-christian-15.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -4164,7 +4165,8 @@
             "description": "Religious Area",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/place-of-worship-15.svg?sanitize=true"
         },
         {
             "key": "landuse",

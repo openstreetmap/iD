@@ -8841,6 +8841,7 @@
             "name": "Cemetery"
         },
         "landuse/churchyard": {
+            "icon": "maki-religious-christian",
             "fields": [
                 "name",
                 "religion",
@@ -9655,6 +9656,7 @@
             "name": "Recreation Ground"
         },
         "landuse/religious": {
+            "icon": "maki-place-of-worship",
             "geometry": [
                 "area"
             ],
