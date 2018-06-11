@@ -1,4 +1,5 @@
 {
+    "icon": "maki-religious-christian",
     "fields": [
         "name",
         "religion",

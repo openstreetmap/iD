@@ -1311,7 +1311,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-taxi.svg?sanitize=true"
         },
         {
             "key": "amenity",
@@ -1468,7 +1468,7 @@
             "object_types": [
                 "node"
             ],
-            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/vending_machine.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fuel-15.svg?sanitize=true"
         },
         {
             "key": "vending",
@@ -2132,7 +2132,7 @@
             "object_types": [
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/warehouse-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
         },
         {
             "key": "building",
@@ -2141,7 +2141,7 @@
             "object_types": [
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/warehouse-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
         },
         {
             "key": "building",
@@ -2612,7 +2612,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -2662,7 +2662,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/marker-stroked-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-key.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -3301,7 +3301,7 @@
             "object_types": [
                 "way"
             ],
-            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-bus_guideway.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-bus-guideway.svg?sanitize=true"
         },
         {
             "key": "highway",
@@ -3823,7 +3823,8 @@
             "description": "Community Garden",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -3866,7 +3867,8 @@
             "description": "Churchyard",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-christian-15.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -3883,7 +3885,8 @@
             "description": "Construction",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/tools.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -3918,7 +3921,8 @@
             "description": "Garage Landuse",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -4161,7 +4165,8 @@
             "description": "Religious Area",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/place-of-worship-15.svg?sanitize=true"
         },
         {
             "key": "landuse",
@@ -4593,7 +4598,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
         },
         {
             "key": "sport",
@@ -4602,7 +4608,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
         },
         {
             "key": "sport",
@@ -4711,7 +4718,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4751,7 +4759,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-thermometer-three-quarters.svg?sanitize=true"
         },
         {
             "key": "leisure",
@@ -4914,7 +4923,8 @@
             "description": "Cut line",
             "object_types": [
                 "way"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/logging-15.svg?sanitize=true"
         },
         {
             "key": "man_made",
@@ -6401,7 +6411,7 @@
             "object_types": [
                 "node"
             ],
-            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/buffer-stop.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/buffer_stop.svg?sanitize=true"
         },
         {
             "key": "railway",

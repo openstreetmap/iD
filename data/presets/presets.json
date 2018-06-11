@@ -3098,7 +3098,7 @@
             "name": "Studio"
         },
         "amenity/taxi": {
-            "icon": "maki-car",
+            "icon": "fas-taxi",
             "fields": [
                 "name",
                 "operator",
@@ -3524,7 +3524,7 @@
             "name": "Food Vending Machine"
         },
         "amenity/vending_machine/fuel": {
-            "icon": "temaki-vending_machine",
+            "icon": "maki-fuel",
             "fields": [
                 "vending",
                 "operator",
@@ -4855,7 +4855,7 @@
             "name": "Farm House"
         },
         "building/garage": {
-            "icon": "maki-warehouse",
+            "icon": "fas-warehouse",
             "fields": [
                 "name",
                 "capacity"
@@ -4870,7 +4870,7 @@
             "name": "Garage"
         },
         "building/garages": {
-            "icon": "maki-warehouse",
+            "icon": "fas-warehouse",
             "fields": [
                 "name",
                 "capacity"
@@ -5860,7 +5860,7 @@
             "name": "Electronics Repair Shop"
         },
         "craft/gardener": {
-            "icon": "maki-garden",
+            "icon": "maki-garden-center",
             "fields": [
                 "name",
                 "operator",
@@ -5964,7 +5964,7 @@
             "name": "Insulator"
         },
         "craft/key_cutter": {
-            "icon": "maki-marker-stroked",
+            "icon": "fas-key",
             "fields": [
                 "name",
                 "operator",
@@ -7414,7 +7414,7 @@
             "name": "Bridle Path"
         },
         "highway/bus_guideway": {
-            "icon": "iD-highway-bus_guideway",
+            "icon": "iD-highway-bus-guideway",
             "fields": [
                 "name",
                 "operator",
@@ -8755,6 +8755,7 @@
             "searchable": false
         },
         "landuse/allotments": {
+            "icon": "maki-garden-center",
             "geometry": [
                 "area"
             ],
@@ -8840,6 +8841,7 @@
             "name": "Cemetery"
         },
         "landuse/churchyard": {
+            "icon": "maki-religious-christian",
             "fields": [
                 "name",
                 "religion",
@@ -8870,6 +8872,7 @@
             "name": "Commercial Area"
         },
         "landuse/construction": {
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "construction",
@@ -8948,6 +8951,7 @@
             "name": "Forest"
         },
         "landuse/garages": {
+            "icon": "fas-warehouse",
             "geometry": [
                 "area"
             ],
@@ -9652,6 +9656,7 @@
             "name": "Recreation Ground"
         },
         "landuse/religious": {
+            "icon": "maki-place-of-worship",
             "geometry": [
                 "area"
             ],
@@ -10781,7 +10786,7 @@
             "name": "Baseball Diamond"
         },
         "leisure/pitch/basketball": {
-            "icon": "basketball",
+            "icon": "maki-basketball",
             "fields": [
                 "name",
                 "surface",
@@ -10805,7 +10810,7 @@
             "name": "Basketball Court"
         },
         "leisure/pitch/beachvolleyball": {
-            "icon": "basketball",
+            "icon": "maki-basketball",
             "fields": [
                 "name",
                 "surface",
@@ -11077,7 +11082,7 @@
             "name": "Tennis Court"
         },
         "leisure/pitch/volleyball": {
-            "icon": "basketball",
+            "icon": "maki-basketball",
             "fields": [
                 "name",
                 "surface",
@@ -11165,6 +11170,7 @@
             "name": "Racetrack (Running)"
         },
         "leisure/sauna": {
+            "icon": "fas-thermometer-three-quarters",
             "fields": [
                 "name",
                 "operator",
@@ -11478,6 +11484,7 @@
             "name": "Crane"
         },
         "man_made/cutline": {
+            "icon": "maki-logging",
             "geometry": [
                 "line"
             ],
@@ -15917,7 +15924,7 @@
             "name": "Abandoned Railway"
         },
         "railway/buffer_stop": {
-            "icon": "temaki-buffer-stop",
+            "icon": "temaki-buffer_stop",
             "geometry": [
                 "vertex"
             ],
