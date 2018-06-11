@@ -5860,7 +5860,7 @@
             "name": "Electronics Repair Shop"
         },
         "craft/gardener": {
-            "icon": "maki-garden",
+            "icon": "maki-garden-center",
             "fields": [
                 "name",
                 "operator",
@@ -8755,6 +8755,7 @@
             "searchable": false
         },
         "landuse/allotments": {
+            "icon": "maki-garden-center",
             "geometry": [
                 "area"
             ],

@@ -2612,7 +2612,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
         },
         {
             "key": "craft",
@@ -3823,7 +3823,8 @@
             "description": "Community Garden",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
         },
         {
             "key": "landuse",
