@@ -6408,7 +6408,7 @@
             "object_types": [
                 "node"
             ],
-            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/buffer-stop.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/buffer_stop.svg?sanitize=true"
         },
         {
             "key": "railway",

@@ -15924,7 +15924,7 @@
             "name": "Abandoned Railway"
         },
         "railway/buffer_stop": {
-            "icon": "temaki-buffer-stop",
+            "icon": "temaki-buffer_stop",
             "geometry": [
                 "vertex"
             ],
