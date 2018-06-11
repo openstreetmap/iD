@@ -5964,7 +5964,7 @@
             "name": "Insulator"
         },
         "craft/key_cutter": {
-            "icon": "maki-marker-stroked",
+            "icon": "fas-key",
             "fields": [
                 "name",
                 "operator",

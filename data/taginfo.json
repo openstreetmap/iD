@@ -2662,7 +2662,7 @@
                 "node",
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/marker-stroked-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-key.svg?sanitize=true"
         },
         {
             "key": "craft",
