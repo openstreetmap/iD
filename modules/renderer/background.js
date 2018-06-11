@@ -173,9 +173,9 @@ export function rendererBackground(context) {
         var mvt = context.layers().layer('mvt');
         if (mvt && mvt.enabled() && mvt.hasMvt()) {
             // Include a string like '.mvt data file' or '.geojson data file'
-            var match = mvt.getSrc().match(/(pbf|mvt|(?:geo)?json)$/i);
-            var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
-            imageryUsed.push(extension + 'data file');
+            var matchmvt = mvt.getSrc().match(/(pbf|mvt|(?:geo)?json)$/i);
+            var extensionmvt = matchmvt ? ('.' + matchmvt[0].toLowerCase() + ' ') : '';
+            imageryUsed.push(extensionmvt + 'data file');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');

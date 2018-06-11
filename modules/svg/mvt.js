@@ -132,7 +132,7 @@ export function svgMvt(projection, context, dispatch) {
         var tile = new vt.VectorTile(new Protobuf(x));
         var layers = Object.keys(tile.layers);
         if (!Array.isArray(layers))
-        layers = [layers]
+            layers = [layers];
 
         var collection = {type: 'FeatureCollection', features: []};
 
