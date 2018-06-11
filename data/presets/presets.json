@@ -2904,6 +2904,7 @@
             "name": "Shower"
         },
         "amenity/smoking_area": {
+            "icon": "fas-smoking",
             "fields": [
                 "name",
                 "shelter",
