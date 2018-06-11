@@ -8871,6 +8871,7 @@
             "name": "Commercial Area"
         },
         "landuse/construction": {
+            "icon": "temaki-tools",
             "fields": [
                 "name",
                 "construction",
