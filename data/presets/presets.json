@@ -11484,6 +11484,7 @@
             "name": "Crane"
         },
         "man_made/cutline": {
+            "icon": "maki-logging",
             "geometry": [
                 "line"
             ],
