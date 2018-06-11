@@ -3301,7 +3301,7 @@
             "object_types": [
                 "way"
             ],
-            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-bus_guideway.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-bus-guideway.svg?sanitize=true"
         },
         {
             "key": "highway",

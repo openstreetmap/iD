@@ -7414,7 +7414,7 @@
             "name": "Bridle Path"
         },
         "highway/bus_guideway": {
-            "icon": "iD-highway-bus_guideway",
+            "icon": "iD-highway-bus-guideway",
             "fields": [
                 "name",
                 "operator",
