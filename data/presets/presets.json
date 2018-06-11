@@ -3524,7 +3524,7 @@
             "name": "Food Vending Machine"
         },
         "amenity/vending_machine/fuel": {
-            "icon": "temaki-vending_machine",
+            "icon": "maki-fuel",
             "fields": [
                 "vending",
                 "operator",

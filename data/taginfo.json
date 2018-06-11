@@ -1468,7 +1468,7 @@
             "object_types": [
                 "node"
             ],
-            "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/vending_machine.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fuel-15.svg?sanitize=true"
         },
         {
             "key": "vending",
