@@ -10786,7 +10786,7 @@
             "name": "Baseball Diamond"
         },
         "leisure/pitch/basketball": {
-            "icon": "basketball",
+            "icon": "maki-basketball",
             "fields": [
                 "name",
                 "surface",
@@ -10810,7 +10810,7 @@
             "name": "Basketball Court"
         },
         "leisure/pitch/beachvolleyball": {
-            "icon": "basketball",
+            "icon": "maki-basketball",
             "fields": [
                 "name",
                 "surface",
@@ -11082,7 +11082,7 @@
             "name": "Tennis Court"
         },
         "leisure/pitch/volleyball": {
-            "icon": "basketball",
+            "icon": "maki-basketball",
             "fields": [
                 "name",
                 "surface",

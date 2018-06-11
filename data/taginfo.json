@@ -4598,7 +4598,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
         },
         {
             "key": "sport",
@@ -4607,7 +4608,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
         },
         {
             "key": "sport",
@@ -4716,7 +4718,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
         },
         {
             "key": "leisure",
