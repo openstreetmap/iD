@@ -4855,7 +4855,7 @@
             "name": "Farm House"
         },
         "building/garage": {
-            "icon": "maki-warehouse",
+            "icon": "fas-warehouse",
             "fields": [
                 "name",
                 "capacity"
@@ -4870,7 +4870,7 @@
             "name": "Garage"
         },
         "building/garages": {
-            "icon": "maki-warehouse",
+            "icon": "fas-warehouse",
             "fields": [
                 "name",
                 "capacity"
@@ -8950,6 +8950,7 @@
             "name": "Forest"
         },
         "landuse/garages": {
+            "icon": "fas-warehouse",
             "geometry": [
                 "area"
             ],

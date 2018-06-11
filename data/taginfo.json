@@ -2132,7 +2132,7 @@
             "object_types": [
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/warehouse-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
         },
         {
             "key": "building",
@@ -2141,7 +2141,7 @@
             "object_types": [
                 "area"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/warehouse-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
         },
         {
             "key": "building",
@@ -3920,7 +3920,8 @@
             "description": "Garage Landuse",
             "object_types": [
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
         },
         {
             "key": "landuse",
