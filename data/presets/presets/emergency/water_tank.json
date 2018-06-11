@@ -2,8 +2,8 @@
     "icon": "maki-water",
     "fields": [
         "name",
-        "operator",
-        "ref"
+        "ref",
+        "operator"
     ],
     "geometry": [
         "point",

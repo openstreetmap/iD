@@ -6510,11 +6510,9 @@
         "emergency/defibrillator": {
             "icon": "maki-defibrillator",
             "fields": [
-                "ref",
-                "access",
-                "opening_hours",
                 "indoor",
-                "phone"
+                "ref",
+                "operator"
             ],
             "geometry": [
                 "point",
@@ -6527,6 +6525,22 @@
                 "emergency": "defibrillator"
             },
             "name": "Defibrillator"
+        },
+        "emergency/fire_extinguisher": {
+            "icon": "fas-fire-extinguisher",
+            "fields": [
+                "indoor",
+                "ref",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "emergency": "fire_extinguisher"
+            },
+            "name": "Fire Extinguisher"
         },
         "emergency/fire_hydrant": {
             "icon": "temaki-fire_hydrant",
@@ -6587,8 +6601,8 @@
             "icon": "maki-water",
             "fields": [
                 "name",
-                "operator",
-                "ref"
+                "ref",
+                "operator"
             ],
             "geometry": [
                 "point",

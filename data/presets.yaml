@@ -3065,6 +3065,10 @@ en:
       emergency/destination:
         # emergency=destination
         name: Emergency Access Destination
+      emergency/fire_extinguisher:
+        # emergency=fire_extinguisher
+        name: Fire Extinguisher
+        terms: '<translate with synonyms or related terms for ''Fire Extinguisher'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant

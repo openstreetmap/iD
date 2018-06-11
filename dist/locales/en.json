@@ -4059,6 +4059,10 @@
                     "name": "Defibrillator",
                     "terms": "AED"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Fire Extinguisher",
+                    "terms": ""
+                },
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
                     "terms": "fire plug"
