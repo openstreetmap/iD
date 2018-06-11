@@ -2974,7 +2974,7 @@
             "object_types": [
                 "node"
             ],
-            "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/circle-stroked-15.svg?sanitize=true"
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-life-ring.svg?sanitize=true"
         },
         {
             "key": "emergency",

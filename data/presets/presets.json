@@ -6549,7 +6549,7 @@
             "name": "Fire Hydrant"
         },
         "emergency/life_ring": {
-            "icon": "maki-circle-stroked",
+            "icon": "fas-life-ring",
             "fields": [
                 "ref",
                 "operator"

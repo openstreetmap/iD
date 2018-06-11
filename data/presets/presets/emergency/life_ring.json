@@ -1,5 +1,5 @@
 {
-    "icon": "maki-circle-stroked",
+    "icon": "fas-life-ring",
     "fields": [
         "ref",
         "operator"
