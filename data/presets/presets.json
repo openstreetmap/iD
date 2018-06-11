@@ -3098,7 +3098,7 @@
             "name": "Studio"
         },
         "amenity/taxi": {
-            "icon": "maki-car",
+            "icon": "fas-taxi",
             "fields": [
                 "name",
                 "operator",
