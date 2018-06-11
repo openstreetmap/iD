@@ -11170,6 +11170,7 @@
             "name": "Racetrack (Running)"
         },
         "leisure/sauna": {
+            "icon": "fas-thermometer-three-quarters",
             "fields": [
                 "name",
                 "operator",

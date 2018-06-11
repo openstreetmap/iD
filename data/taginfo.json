@@ -4756,7 +4756,8 @@
             "object_types": [
                 "node",
                 "area"
-            ]
+            ],
+            "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-thermometer-three-quarters.svg?sanitize=true"
         },
         {
             "key": "leisure",
