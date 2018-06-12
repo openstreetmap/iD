@@ -339,23 +339,20 @@ export default {
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
 
-        // inject ms-wrapper into the photoviewer div (used by all
-        // to house each custom photo viewer)
+        // inject ms-wrapper into the photoviewer div
+        // (used by all to house each custom photo viewer)
         var wrapEnter = wrap.enter()
             .append('div')
             .attr('id', 'ms')
             .attr('class', 'photo-wrapper ms-wrapper')
             .classed('hide', true);
 
-        // inject div to support streetside viewer (pannellum)
+        // inject div to support streetside viewer (pannellum) and attribution line
         wrapEnter
             .append('div')
-            .attr('id', 'viewer-streetside');
-
-        // inject div to support photo attribution into ms-wrapper
-        wrapEnter
+            .attr('id', 'viewer-streetside')
             .append('div')
-            .attr('class', 'photo-attribution-streetside fillD');
+            .attr('class', 'photo-attribution fillD');
 
         // load streetside pannellum viewer css
         d3_select('head').selectAll('#streetside-viewercss')
@@ -445,7 +442,7 @@ export default {
         this.setStyles(null, true);
 
         var wrap = d3_select('#photoviewer .ms-wrapper');
-        var attribution = wrap.selectAll('.photo-attribution-streetside').html('');
+        var attribution = wrap.selectAll('.photo-attribution').html('');
         var year = (new Date()).getFullYear();
 
         if (d) {
@@ -493,7 +490,8 @@ export default {
                 showFullscreenCtrl: false,
                 autoLoad: true,
                 compass: true,
-                yaw: d.ca,
+                northOffset: d.ca,
+                yaw: 0,
                 type: 'cubemap',
                 cubeMap: [
                     imgUrlPrefix + imgLocIdxArr[0] + imgUrlSuffix,

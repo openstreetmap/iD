@@ -10,7 +10,7 @@ export function svgStreetside(projection, context, dispatch) {
     var minMarkerZoom = 16;
     var minViewfieldZoom = 19;
     var layer = d3_select(null);
-    var _viewerRotation = null;
+    var _viewerYaw = 0;
     var _streetside;
 
     /**
@@ -96,6 +96,8 @@ export function svgStreetside(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
+        _viewerYaw = 0;
+
         // reset bubble back to a circular field
         layer.selectAll('.viewfield-group.selected .viewfield')
             .attr('d', viewfieldPath);
@@ -132,7 +134,7 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function transform(d) {
         var t = svgPointTransform(projection)(d);
-        var rot = _viewerRotation !== null ? _viewerRotation : d.ca;
+        var rot = d.ca + _viewerYaw;
         if (rot) {
             t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
@@ -148,7 +150,7 @@ export function svgStreetside(projection, context, dispatch) {
         if (!viewer) return;
 
         // update viewfield rotation
-        _viewerRotation = viewer.getYaw();
+        _viewerYaw = viewer.getYaw();
         layer.selectAll('.viewfield-group.selected')
             .attr('transform', transform);
     }

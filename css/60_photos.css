@@ -25,12 +25,13 @@
 }
 
 .photo-wrapper .photo-attribution {
-    width: 100%;
-    font-size: 10px;
-    text-align: right;
     position: absolute;
     bottom: 0;
     right: 0;
+    width: 100%;
+    font-size: 10px;
+    text-align: right;
+    line-height: 1.1em;
     padding: 4px 2px;
     z-index: 10;
 }
@@ -40,32 +41,6 @@
 .photo-attribution span {
     padding: 4px 2px;
     color: #fff;
-}
-
-/* streetside photo attribution */
-.photo-wrapper .photo-attribution-streetside {
-    width: 100%;
-    font-size: 10px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 4px 2px;
-    z-index: 10;
-}
-
-.photo-attribution-streetside a,
-.photo-attribution-streetside a:visited,
-.photo-attribution-streetside span {
-    padding: 4px 2px;
-    color: #fff;
-}
-.photo-attribution-streetside .image_link{
-    color: #fff;
-    float: left;
-    line-height: 6px;
-}
-.photo-attribution-streetside .image_link:hover{
-    color: #06b8ff;
 }
 
 /* markers and sequences */
@@ -194,13 +169,16 @@
 }
 
 
-/* Streetside viewer */
+/* Streetside Viewer (pannellum) */
+.ms-wrapper .photo-attribution .image_link {
+    display: block;
+}
 .ms-wrapper .photo-attribution a:active,
 .ms-wrapper .photo-attribution a:hover {
     color: #35af6d;
 }
 
-.pnlm-compass {
+.ms-wrapper .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
