@@ -1,5 +1,5 @@
 {
-    "icon": "bank",
+    "icon": "maki-bank",
     "fields": [
         "operator",
         "currency_multi",

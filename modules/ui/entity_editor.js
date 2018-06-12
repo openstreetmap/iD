@@ -55,13 +55,13 @@ export function uiEntityEditor(context) {
         enter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
-            .call(svgIcon((textDirection === 'rtl') ? '#icon-forward' : '#icon-backward'));
+            .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
 
         enter
             .append('button')
             .attr('class', 'fr preset-close')
             .on('click', function() { context.enter(modeBrowse(context)); })
-            .call(svgIcon(_modified ? '#icon-apply' : '#icon-close'));
+            .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
         enter
             .append('h3')
@@ -247,7 +247,7 @@ export function uiEntityEditor(context) {
         if (!arguments.length) return _modified;
         _modified = _;
         d3_selectAll('button.preset-close use')
-            .attr('xlink:href', (_modified ? '#icon-apply' : '#icon-close'));
+            .attr('xlink:href', (_modified ? '#iD-icon-apply' : '#iD-icon-close'));
         return entityEditor;
     };
 

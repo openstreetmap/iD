@@ -1,5 +1,5 @@
 {
-    "icon": "highway-footway",
+    "icon": "iD-highway-footway",
     "fields": [
         "name",
         "width",

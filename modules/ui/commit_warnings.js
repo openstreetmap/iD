@@ -45,7 +45,7 @@ export function uiCommitWarnings(context) {
             .attr('class', 'warning-item');
 
         itemsEnter
-            .call(svgIcon('#icon-alert', 'pre-text'));
+            .call(svgIcon('#iD-icon-alert', 'pre-text'));
 
         itemsEnter
             .append('strong')

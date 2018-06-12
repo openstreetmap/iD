@@ -1,5 +1,5 @@
 {
-    "icon": "poi-tool",
+    "icon": "temaki-tools",
     "fields": [
         "name",
         "operator",

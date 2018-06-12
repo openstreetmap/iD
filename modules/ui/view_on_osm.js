@@ -17,7 +17,7 @@ export function uiViewOnOSM(context) {
             .append('a')
             .attr('class', 'view-on-osm')
             .attr('target', '_blank')
-            .call(svgIcon('#icon-out-link', 'inline'));
+            .call(svgIcon('#iD-icon-out-link', 'inline'));
 
         enter
             .append('span')

@@ -11,8 +11,8 @@ import { utilRebind } from '../../util/rebind';
 
 
 export function uiIntroStartEditing(context, reveal) {
-    var dispatch = d3_dispatch('done', 'startEditing'),
-        modalSelection = d3_select(null);
+    var dispatch = d3_dispatch('done', 'startEditing');
+    var modalSelection = d3_select(null);
 
 
     var chapter = {
@@ -21,7 +21,7 @@ export function uiIntroStartEditing(context, reveal) {
 
     function showHelp() {
         reveal('.map-control.help-control',
-            t('intro.startediting.help', { button: icon('#icon-help', 'pre-text'), key: t('help.key') }), {
+            t('intro.startediting.help', { button: icon('#iD-icon-help', 'pre-text'), key: t('help.key') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { shortcuts(); }
             }
@@ -69,7 +69,7 @@ export function uiIntroStartEditing(context, reveal) {
                 .append('svg')
                 .attr('class', 'illustration')
                 .append('use')
-                .attr('xlink:href', '#logo-walkthrough');
+                .attr('xlink:href', '#iD-logo-walkthrough');
 
             startbutton
                 .append('h2')

@@ -1,5 +1,5 @@
 {
-    "icon": "highway-residential",
+    "icon": "iD-highway-residential",
     "fields": [
         "name",
         "oneway",

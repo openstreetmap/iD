@@ -1,5 +1,5 @@
 {
-    "icon": "route-pipeline",
+    "icon": "iD-route-pipeline",
     "fields": [
         "name",
         "ref_route",

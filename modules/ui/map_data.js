@@ -229,7 +229,7 @@ export function uiMapData(context) {
                 d3_event.stopPropagation();
                 gpx.fitZoom();
             })
-            .call(svgIcon('#icon-search'));
+            .call(svgIcon('#iD-icon-search'));
 
         liEnter
             .append('button')
@@ -246,7 +246,7 @@ export function uiMapData(context) {
                     })
                     .node().click();
             })
-            .call(svgIcon('#icon-geolocate'));
+            .call(svgIcon('#iD-icon-geolocate'));
 
         var labelEnter = liEnter
             .append('label')
@@ -453,7 +453,7 @@ export function uiMapData(context) {
             .append('button')
             .attr('tabindex', -1)
             .on('click', togglePane)
-            .call(svgIcon('#icon-data', 'light'))
+            .call(svgIcon('#iD-icon-data', 'light'))
             .call(paneTooltip);
 
 
@@ -468,7 +468,7 @@ export function uiMapData(context) {
         heading
             .append('button')
             .on('click', function() { uiMapData.hidePane(); })
-            .call(svgIcon('#icon-close'));
+            .call(svgIcon('#iD-icon-close'));
 
 
         var content = pane

@@ -1,4 +1,5 @@
 {
+    "icon": "fas-thermometer-three-quarters",
     "fields": [
         "name",
         "operator",

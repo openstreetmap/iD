@@ -1,5 +1,5 @@
 {
-    "icon": "route-power",
+    "icon": "iD-route-power",
     "fields": [
         "name",
         "ref_route",

@@ -1,5 +1,5 @@
 {
-    "icon": "logging",
+    "icon": "maki-logging",
     "fields": [
         "name",
         "operator",

@@ -1,0 +1,16 @@
+{
+    "icon": "fas-fire-extinguisher",
+    "fields": [
+        "indoor",
+        "ref",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "emergency": "fire_extinguisher"
+    },
+    "name": "Fire Extinguisher"
+}

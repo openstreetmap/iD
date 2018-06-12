@@ -1,4 +1,3 @@
-import { dataFeatureIcons } from '../../data';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform, svgTagClasses } from './index';
@@ -138,7 +137,7 @@ export function svgPoints(projection, context) {
                 if (!picon)
                     return '';
                 else {
-                    var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                    var isMaki = /^maki-/.test(picon);
                     return '#' + picon + (isMaki ? '-11' : '');
                 }
             });

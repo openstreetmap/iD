@@ -1,5 +1,5 @@
 {
-    "icon": "category-roads",
+    "icon": "iD-category-roads",
     "geometry": "line",
     "name": "Road Features",
     "members": [

@@ -6,7 +6,7 @@
         "structure",
         "access"
     ],
-    "icon": "highway-bridleway",
+    "icon": "iD-highway-bridleway",
     "geometry": [
         "line"
     ],

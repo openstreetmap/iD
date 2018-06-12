@@ -1,5 +1,5 @@
 {
-    "icon": "poi-nuclear",
+    "icon": "temaki-radiation",
     "fields": [
         "operator",
         "generator/source",

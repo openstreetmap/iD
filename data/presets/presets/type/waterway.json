@@ -1,5 +1,5 @@
 {
-    "icon": "route-water",
+    "icon": "iD-route-water",
     "fields": [
         "name",
         "waterway",

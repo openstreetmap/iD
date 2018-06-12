@@ -84,13 +84,13 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-line',
-                t('intro.lines.add_line', { button: icon('#icon-line', 'pre-text') }));
+                t('intro.lines.add_line', { button: icon('#iD-icon-line', 'pre-text') }));
 
             tooltip.selectAll('.tooltip-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')
-                .attr('xlink:href', '#feature-images');
+                .attr('xlink:href', '#iD-graphic-lines');
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'add-line') return;
@@ -360,7 +360,7 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.lines.name_road', { button: icon('#icon-apply', 'pre-text') }),
+                t('intro.lines.name_road', { button: icon('#iD-icon-apply', 'pre-text') }),
                 { tooltipClass: 'intro-lines-name_road' }
             );
         }, 500);
@@ -724,7 +724,7 @@ export function uiIntroLine(context, reveal) {
         washingtonSegmentId = null;
 
         revealEditMenu(menuCoords, t('intro.lines.split_intersection',
-            { button: icon('#operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') })
+            { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') })
         );
 
         context.map().on('move.intro drawn.intro', function() {
@@ -732,7 +732,7 @@ export function uiIntroLine(context, reveal) {
             if (!wasChanged && !node) { return continueTo(rightClickIntersection); }
 
             revealEditMenu(menuCoords, t('intro.lines.split_intersection',
-                { button: icon('#operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') }),
+                { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') }),
                 { duration: 0 }
             );
         });
@@ -999,12 +999,12 @@ export function uiIntroLine(context, reveal) {
 
         var menuCoords = context.map().mouseCoordinates();
         revealEditMenu(menuCoords,
-            t('intro.lines.multi_delete', { button: icon('#operation-delete', 'pre-text') })
+            t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') })
         );
 
         context.map().on('move.intro drawn.intro', function() {
             revealEditMenu(menuCoords,
-                t('intro.lines.multi_delete', { button: icon('#operation-delete', 'pre-text') }),
+                t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') }),
                 { duration: 0 }
             );
         });

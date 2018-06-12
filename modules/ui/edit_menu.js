@@ -9,23 +9,23 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiEditMenu(context, operations) {
-    var menu,
-        center = [0, 0],
-        offset = [0, 0],
-        tooltip;
+    var menu;
+    var center = [0, 0];
+    var offset = [0, 0];
+    var tooltip;
 
-    var p = 8,               // top padding
-        m = 4,               // top margin
-        h = 15,              // height of icon
-        vpBottomMargin = 45, // viewport bottom margin
-        vpSideMargin = 35,   // viewport side margin
-        buttonWidth = 44,
-        buttonHeight = (2 * p + h),
-        menuWidth = buttonWidth,
-        menuHeight = (2 * m) + operations.length * buttonHeight,
-        menuSideMargin = 10,
-        tooltipWidth = 200,
-        tooltipHeight = 200;  // a reasonable guess, real height depends on tooltip contents
+    var p = 8;               // top padding
+    var m = 4;               // top margin
+    var h = 15;              // height of icon
+    var vpBottomMargin = 45; // viewport bottom margin
+    var vpSideMargin = 35;   // viewport side margin
+    var buttonWidth = 44;
+    var buttonHeight = (2 * p + h);
+    var menuWidth = buttonWidth;
+    var menuHeight = (2 * m) + operations.length * buttonHeight;
+    var menuSideMargin = 10;
+    var tooltipWidth = 200;
+    var tooltipHeight = 200;  // a reasonable guess, real height depends on tooltip contents
 
 
     var editMenu = function (selection) {
@@ -33,8 +33,8 @@ export function uiEditMenu(context, operations) {
 
         selection.node().parentNode.focus();
 
-        var isRTL = textDirection === 'rtl',
-            viewport = context.surfaceRect();
+        var isRTL = textDirection === 'rtl';
+        var viewport = context.surfaceRect();
 
         if (!isRTL && (center[0] + menuSideMargin + menuWidth) > (viewport.width - vpSideMargin)) {
             // menu is going left-to-right and near right viewport edge, go left instead
@@ -101,10 +101,8 @@ export function uiEditMenu(context, operations) {
             .append('use')
             .attr('width', '20')
             .attr('height', '20')
-            .attr('transform', function () {
-                return 'translate(' + [2 * p, 5] + ')';
-            })
-            .attr('xlink:href', function (d) { return '#operation-' + d.id; });
+            .attr('transform', function () { return 'translate(' + [2 * p, 5] + ')'; })
+            .attr('xlink:href', function (d) { return '#iD-operation-' + d.id; });
 
         tooltip = d3_select(document.body)
             .append('div')

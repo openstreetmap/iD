@@ -1,5 +1,5 @@
 {
-    "icon": "highway-tertiary-link",
+    "icon": "iD-highway-tertiary-link",
     "fields": [
         "name",
         "oneway",

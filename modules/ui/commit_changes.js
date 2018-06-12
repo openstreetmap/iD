@@ -52,7 +52,7 @@ export function uiCommitChanges(context) {
         itemsEnter
             .each(function(d) {
                 d3_select(this)
-                    .call(svgIcon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
+                    .call(svgIcon('#iD-icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
             });
 
         itemsEnter
@@ -124,7 +124,7 @@ export function uiCommitChanges(context) {
         }
 
         linkEnter
-            .call(svgIcon('#icon-load', 'inline'))
+            .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
             .text(t('commit.download_changes'));
 

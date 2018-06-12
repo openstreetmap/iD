@@ -151,7 +151,7 @@ export function uiBackground(context) {
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
-            .call(svgIcon('#icon-edit'));
+            .call(svgIcon('#iD-icon-edit'));
 
         enter.filter(function(d) { return d.best(); })
             .append('div')
@@ -245,7 +245,7 @@ export function uiBackground(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link', 'inline'))
+            .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
@@ -347,7 +347,7 @@ export function uiBackground(context) {
             .append('button')
             .attr('tabindex', -1)
             .on('click', togglePane)
-            .call(svgIcon('#icon-layers', 'light'))
+            .call(svgIcon('#iD-icon-layers', 'light'))
             .call(paneTooltip);
 
 
@@ -362,7 +362,7 @@ export function uiBackground(context) {
         heading
             .append('button')
             .on('click', function() { uiBackground.hidePane(); })
-            .call(svgIcon('#icon-close'));
+            .call(svgIcon('#iD-icon-close'));
 
 
         var content = pane

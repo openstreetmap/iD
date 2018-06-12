@@ -23,9 +23,6 @@ import { defaults } from './presets/defaults.json';
 import { categories } from './presets/categories.json';
 import { fields } from './presets/fields.json';
 
-import maki from '@mapbox/maki';
-export var dataFeatureIcons = maki.layouts.all.all;
-
 import { geoArea as d3_geoArea } from 'd3-geo';
 import _values from 'lodash-es/values';
 import whichPolygon from 'which-polygon';

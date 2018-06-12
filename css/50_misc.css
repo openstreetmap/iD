@@ -225,3 +225,42 @@ path.fill.tag-amenity-shelter {
     border-color: rgb(224, 110, 95);
     background-color: rgba(224, 110, 95, 0.3);
 }
+
+/* piers */
+.preset-icon .icon.tag-man_made-pier {
+    color: #ae8681;
+    fill: #dcd9b9;
+}
+
+.preset-icon-fill-area.tag-man_made-pier {
+    border-color: #ae8681;
+    background-color: #dcd9b9;
+}
+
+path.shadow.tag-man_made-pier {
+    stroke-width: 16;
+}
+path.casing.tag-man_made-pier {
+    stroke: #dcd9b9;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+}
+path.stroke.tag-man_made-pier {
+    stroke: #ae8681;
+    stroke-width: 3;
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 6;
+}
+
+.low-zoom path.shadow.tag-man_made-pier {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-man_made-pier {
+    stroke-width: 3;
+}
+.low-zoom path.stroke.tag-man_made-pier {
+    stroke-width: 1;
+    stroke-linecap: butt;
+    stroke-dasharray: 3, 3;
+}

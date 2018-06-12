@@ -1,5 +1,5 @@
 {
-    "icon": "grocery",
+    "icon": "maki-grocery",
     "fields": [
         "name",
         "operator",

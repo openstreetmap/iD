@@ -20,10 +20,10 @@ export {
 
 
 export function uiFieldText(field, context) {
-    var dispatch = d3_dispatch('change'),
-        nominatim = services.geocoder,
-        input,
-        entity;
+    var dispatch = d3_dispatch('change');
+    var nominatim = services.geocoder;
+    var input;
+    var entity;
 
 
     function i(selection) {
@@ -83,18 +83,40 @@ export function uiFieldText(field, context) {
             spinControl.selectAll('button')
                 .on('click', function(d) {
                     d3_event.preventDefault();
-                    var num = parseInt(input.node().value || 0, 10);
-                    if (!isNaN(num)) input.node().value = num + d;
+                    input.node().value = parsed(input.node().value) + d;
                     change()();
                 });
         }
     }
 
 
+    // parse as a number
+    function parsed(val) {
+        return parseInt(val || 0, 10) || 0;
+    }
+
+    // clamp number to min/max
+    function clamped(num) {
+        if (field.minValue !== undefined) {
+            num = Math.max(num, field.minValue);
+        }
+        if (field.maxValue !== undefined) {
+            num = Math.min(num, field.maxValue);
+        }
+        return num;
+    }
+
+
     function change(onInput) {
         return function() {
             var t = {};
-            t[field.key] = utilGetSetValue(input) || undefined;
+            var val = utilGetSetValue(input) || undefined;
+
+            if (!onInput && field.type === 'number') {
+                val = clamped(parsed(val)) + '';
+                utilGetSetValue(input, val);
+            }
+            t[field.key] = val;
             dispatch.call('change', this, t, onInput);
         };
     }

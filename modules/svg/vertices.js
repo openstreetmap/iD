@@ -3,7 +3,6 @@ import _values from 'lodash-es/values';
 
 import { select as d3_select } from 'd3-selection';
 
-import { dataFeatureIcons } from '../../data';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './index';
@@ -49,7 +48,9 @@ export function svgVertices(projection, context) {
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
 
-        function getIcon(entity) {
+        function getIcon(d) {
+            // always check latest entity, as fastEntityKey avoids enter/exit now
+            var entity = graph.entity(d.id);
             if (entity.id in icons) return icons[entity.id];
 
             icons[entity.id] =
@@ -91,9 +92,6 @@ export function svgVertices(projection, context) {
                             .attr('visibility', (i && klass === 'fill') ? 'hidden' : null);
                     });
             });
-
-            selection.selectAll('use')
-                .attr('visibility', (z === 0 ? 'hidden' : null));
         }
 
         vertices.sort(sortY);
@@ -120,19 +118,6 @@ export function svgVertices(projection, context) {
             .append('circle')
             .attr('class', 'stroke');
 
-        // Vertices with icons get a `use`.
-        enter.filter(function(d) { return getIcon(d); })
-            .append('use')
-            .attr('class', 'icon')
-            .attr('width', '11px')
-            .attr('height', '11px')
-            .attr('transform', 'translate(-5.5, -5.5)')
-            .attr('xlink:href', function(d) {
-                var picon = getIcon(d);
-                var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
-                return '#' + picon + (isMaki ? '-11' : '');
-            });
-
         // Vertices with tags get a fill.
         enter.filter(function(d) { return d.hasInterestingTags(); })
             .append('circle')
@@ -148,10 +133,33 @@ export function svgVertices(projection, context) {
             .call(updateAttributes);
 
 
-        // Directional vertices get viewfields
-        var dgroups = groups.filter(function(d) { return getDirections(d); })
+        // Vertices with icons get a `use`.
+        var iconUse = groups
+            .selectAll('.icon')
+            .data(function data(d) { return zoom >= 17 && getIcon(d) ? [d] : []; }, fastEntityKey);
+
+        // exit
+        iconUse.exit()
+            .remove();
+
+        // enter
+        iconUse.enter()
+            .append('use')
+            .attr('class', 'icon')
+            .attr('width', '11px')
+            .attr('height', '11px')
+            .attr('transform', 'translate(-5.5, -5.5)')
+            .attr('xlink:href', function(d) {
+                var picon = getIcon(d);
+                var isMaki = /^maki-/.test(picon);
+                return '#' + picon + (isMaki ? '-11' : '');
+            });
+
+
+        // Vertices with directions get viewfields
+        var dgroups = groups
             .selectAll('.viewfieldgroup')
-            .data(function data(d) { return zoom >= 18 ? [d] : []; }, osmEntity.key);
+            .data(function data(d) { return zoom >= 18 && getDirections(d) ? [d] : []; }, fastEntityKey);
 
         // exit
         dgroups.exit()
@@ -164,7 +172,7 @@ export function svgVertices(projection, context) {
             .merge(dgroups);
 
         var viewfields = dgroups.selectAll('.viewfield')
-            .data(getDirections, function key(d) { return d; });
+            .data(getDirections, function key(d) { return osmEntity.key(d); });
 
         // exit
         viewfields.exit()

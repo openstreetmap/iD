@@ -1,5 +1,5 @@
 {
-    "icon": "pipeline-line",
+    "icon": "iD-pipeline-line",
     "fields": [
         "location",
         "operator",

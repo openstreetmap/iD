@@ -10,12 +10,7 @@ import _union from 'lodash-es/union';
 
 import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    request as d3_request,
-    json as d3_json
-} from 'd3-request';
-
+import { request as d3_request } from 'd3-request';
 import {
     select as d3_select,
     selectAll as d3_selectAll
@@ -25,6 +20,7 @@ import rbush from 'rbush';
 
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
+import { svgDefs } from '../svg';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
@@ -39,8 +35,6 @@ var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
 var _mlySelectedImage;
-var _mlySignDefs;
-var _mlySignSprite;
 var _mlyViewer;
 
 
@@ -384,27 +378,7 @@ export default {
 
 
     signsSupported: function() {
-        var detected = utilDetect();
-        if (detected.ie) return false;
-        if ((detected.browser.toLowerCase() === 'safari') && (parseFloat(detected.version) < 10)) return false;
         return true;
-    },
-
-
-    signHTML: function(d) {
-        if (!_mlySignDefs || !_mlySignSprite) return;
-        var position = _mlySignDefs[d.value];
-        if (!position) return '<div></div>';
-        var iconStyle = [
-            'background-image:url(' + _mlySignSprite + ')',
-            'background-repeat:no-repeat',
-            'height:' + position.height + 'px',
-            'width:' + position.width + 'px',
-            'background-position-x:-' + position.x + 'px',
-            'background-position-y:-' + position.y + 'px',
-        ];
-
-        return '<div style="' + iconStyle.join(';') +'"></div>';
     },
 
 
@@ -418,16 +392,6 @@ export default {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?', projection);
         loadTiles('objects', apibase + 'objects?', projection);
-
-        // load traffic sign defs
-        if (!_mlySignDefs) {
-            _mlySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
-            _mlySignDefs = {};
-            d3_json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
-                if (err) return;
-                _mlySignDefs = data;
-            });
-        }
     },
 
 
@@ -463,6 +427,10 @@ export default {
             .append('script')
             .attr('id', 'mapillary-viewerjs')
             .attr('src', context.asset(viewerjs));
+
+        // load mapillary signs sprite
+        var defs = context.container().select('defs');
+        defs.call(svgDefs(context).addSprites, ['mapillary-sprite']);
     },
 
 
@@ -739,10 +707,8 @@ export default {
 
 
         function loadDetection(detectionKey) {
-            var url = apibase + 'detections/'+
-                detectionKey + '?' + utilQsString({
-                    client_id: clientId,
-                });
+            var url = apibase + 'detections/' +
+                    detectionKey + '?' + utilQsString({ client_id: clientId });
 
             d3_request(url)
                 .mimeType('application/json')
@@ -816,13 +782,6 @@ export default {
 
     cache: function() {
         return _mlyCache;
-    },
-
-
-    signDefs: function(_) {
-        if (!arguments.length) return _mlySignDefs;
-        _mlySignDefs = _;
-        return this;
     }
 
 };

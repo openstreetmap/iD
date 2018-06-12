@@ -4064,6 +4064,10 @@
                     "name": "Defibrillator",
                     "terms": "AED"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Fire Extinguisher",
+                    "terms": ""
+                },
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
                     "terms": "fire plug"
@@ -6083,6 +6087,10 @@
                 "shop/money_lender": {
                     "name": "Money Lender",
                     "terms": ""
+                },
+                "shop/motorcycle_repair": {
+                    "name": "Motorcycle Repair Shop",
+                    "terms": "auto,bike,garage,motorcycle,repair,service"
                 },
                 "shop/motorcycle": {
                     "name": "Motorcycle Dealership",

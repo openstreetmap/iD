@@ -1,5 +1,5 @@
 {
-    "icon": "rail-metro",
+    "icon": "maki-rail-metro",
     "fields": [
         "name",
         "operator",

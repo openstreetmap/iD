@@ -1,5 +1,5 @@
 {
-    "icon": "bus",
+    "icon": "maki-bus",
     "fields": [
         "name",
         "building_area",

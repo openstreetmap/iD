@@ -3,6 +3,7 @@
         "ref"
     ],
     "geometry": [
+        "point",
         "vertex"
     ],
     "tags": {

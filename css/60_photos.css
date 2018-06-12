@@ -178,25 +178,18 @@
 .layer-mapillary-signs {
     pointer-events: none;
 }
-.layer-mapillary-signs .icon-sign .icon-sign-body {
-    min-width: 20px;
-    height: 24px;
-    width: 24px;
+.layer-mapillary-signs .icon-sign {
     outline: 2px solid transparent;
     pointer-events: visible;
     cursor: pointer;
-    z-index: 30;
-    overflow: visible;
 }
-.layer-mapillary-signs .icon-sign:hover .icon-sign-body {
+.layer-mapillary-signs .icon-sign:hover {
     outline: 5px solid #eebb00;
     background-color: #eebb00;
-    z-index: 70;
 }
-.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
+.layer-mapillary-signs .icon-sign.selected {
     outline: 5px solid #ffee00;
     background-color: #ffee00;
-    z-index: 40;
 }
 
 

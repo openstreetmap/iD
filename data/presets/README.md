@@ -16,7 +16,7 @@ A basic preset is of the form:
 ```javascript
 {
     // The icon in iD which represents this feature.
-    "icon": "park",
+    "icon": "maki-park",
     // An array of field names. See the fields documentation for details of what's valid here.
     "fields": [
         "address"
@@ -213,11 +213,15 @@ common tag values from the Taginfo service to use as dropdown values.
 
 ## Icons
 
-Preset icons in iD are pulled from the open source map icon set,
-[Maki](http://www.mapbox.com/maki/).
+You can use any of the following open source map icon sets as preset icons.
 
-The icons are identified in iD by the same name as they are on the Maki home.  Use those
-names when identifying the icon to be used for a given preset.
+* [Maki](http://www.mapbox.com/maki/) - prefix: `maki-`
+* [Temaki](http://bhousel.github.io/temaki/docs/) - prefix: `temaki-`
+* [Font Awesome (free, solid)](https://fontawesome.com/icons?d=gallery&s=solid) - prefix: `fas-`
+* [Font Awesome (free, regular)](https://fontawesome.com/icons?d=gallery&s=regular) - prefix: `far-`
+* [Font Awesome (free, brands)](https://fontawesome.com/icons?d=gallery&s=brands) - prefix: `fab-`
+
+When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
 
 
 ## Building

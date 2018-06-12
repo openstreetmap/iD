@@ -1,5 +1,5 @@
 {
-    "icon": "waterway-ditch",
+    "icon": "iD-waterway-ditch",
     "fields": [
         "structure_waterway",
         "intermittent"

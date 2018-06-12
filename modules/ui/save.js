@@ -88,7 +88,7 @@ export function uiSave(context) {
             .call(tooltipBehavior);
 
         button
-            .call(svgIcon('#icon-save', 'pre-text'))
+            .call(svgIcon('#iD-icon-save', 'pre-text'))
             .append('span')
             .attr('class', 'label')
             .text(t('save.title'));

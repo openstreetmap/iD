@@ -1,5 +1,5 @@
 {
-    "icon": "hospital",
+    "icon": "maki-hospital",
     "fields": [
         "name",
         "operator",

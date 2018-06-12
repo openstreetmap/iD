@@ -72,7 +72,7 @@ export function uiSelectionList(context, selectedIDs) {
                 .append('button')
                 .attr('class', 'close')
                 .on('click', deselectEntity)
-                .call(svgIcon('#icon-close'));
+                .call(svgIcon('#iD-icon-close'));
 
             label
                 .append('span')
@@ -93,7 +93,7 @@ export function uiSelectionList(context, selectedIDs) {
             items.selectAll('.entity-geom-icon use')
                 .attr('href', function() {
                     var entity = this.parentNode.parentNode.__data__;
-                    return '#icon-' + context.geometry(entity.id);
+                    return '#iD-icon-' + context.geometry(entity.id);
                 });
 
             items.selectAll('.entity-type')

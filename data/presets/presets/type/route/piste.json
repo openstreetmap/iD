@@ -1,5 +1,5 @@
 {
-    "icon": "route-piste",
+    "icon": "iD-route-piste",
     "fields": [
         "name",
         "ref_route",

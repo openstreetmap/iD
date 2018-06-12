@@ -1,5 +1,5 @@
 {
-    "icon": "place-of-worship",
+    "icon": "maki-place-of-worship",
     "fields": [
         "name",
         "religion",

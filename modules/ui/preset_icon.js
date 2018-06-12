@@ -1,6 +1,5 @@
 import { select as d3_select } from 'd3-selection';
 
-import { dataFeatureIcons } from '../../data';
 import { svgIcon } from '../svg';
 import { utilFunctor } from '../util';
 
@@ -18,22 +17,24 @@ export function uiPresetIcon() {
         if (p.icon)
             return p.icon;
         else if (geom === 'line')
-            return 'other-line';
+            return 'iD-other-line';
         else if (geom === 'vertex')
-            return p.isFallback() ? '' : 'poi-vertex';
+            return p.isFallback() ? '' : 'temaki-vertex';
         else
-            return 'marker-stroked';
+            return 'maki-marker-stroked';
     }
 
 
     function render() {
-        var selection = d3_select(this),
-            p = preset.apply(this, arguments),
-            geom = geometry.apply(this, arguments),
-            picon = getIcon(p, geom),
-            isPoi = picon.match(/^poi-/) !== null,
-            isMaki = dataFeatureIcons.indexOf(picon) !== -1,
-            isFramed = (geom === 'area' || geom === 'verex');
+        var selection = d3_select(this);
+        var p = preset.apply(this, arguments);
+        var geom = geometry.apply(this, arguments);
+        var picon = getIcon(p, geom);
+        var isMaki = /^maki-/.test(picon);
+        var isTemaki = /^temaki-/.test(picon);
+        var isFa = /^fa[srb]-/.test(picon);
+        var isPOI = isMaki || isTemaki || isFa;
+        var isFramed = (geom === 'area' || geom === 'vertex');
 
 
         function tag_classes(p) {
@@ -70,7 +71,7 @@ export function uiPresetIcon() {
         areaFrame = areaFrame.enter()
             .append('div')
             .attr('class', 'preset-icon-frame')
-            .call(svgIcon('#preset-icon-frame'));
+            .call(svgIcon('#iD-preset-icon-frame'));
 
 
         var icon = selection.selectAll('.preset-icon')
@@ -84,12 +85,12 @@ export function uiPresetIcon() {
 
         icon
             .attr('class', 'preset-icon preset-icon-' +
-                ((isMaki || isPoi) ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
+                (isPOI ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
             );
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + (isMaki || isPoi ? '' : tag_classes(p));
+                return 'icon ' + picon + (isPOI ? '' : tag_classes(p));
             });
 
         icon.selectAll('use')
