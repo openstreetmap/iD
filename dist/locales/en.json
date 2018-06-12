@@ -6606,6 +6606,15 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "name": "AGIV Flanders most recent aerial imagery"
+            },
+            "AGIV10cm": {
+                "name": "AGIV Flanders 2013-2015 aerial imagery 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
@@ -6707,6 +6716,24 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Tagging"
+            },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) most recent aerial imagery"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerical imagery"
+            },
+            "UrbisAdmFR": {
+                "name": "URBISfr numerical imagery"
+            },
+            "UrbisAdmNL": {
+                "name": "URBISnl numerical imagery"
+            },
+            "UrbISOrtho2016": {
+                "name": "URBIS 2016 aerial imagery"
+            },
+            "UrbISOrtho2017": {
+                "name": "URBIS 2017 aerial imagery"
             },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
