@@ -143,6 +143,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
         bubbles.shift();
 
         var features = bubbles.map(function (bubble) {
+            var bubbleId = bubble.id;
+            if (cache.points[bubbleId]) return null;  // skip duplicates
+
             var loc = [bubble.lo, bubble.la];
             var d = {
                 loc: loc,
@@ -164,12 +167,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 type: 'Feature'
             };
 
-            var bubbleId = bubble.id;
             cache.points[bubbleId] = feature;
             cache.forImageKey[bubbleId] = bubbleId;
+
             return {
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             };
+
         }).filter(Boolean);
 
         cache.rtree.load(features);
@@ -297,7 +301,7 @@ export default {
         var options = {
             'default': { firstScene: sceneID },
             scenes: {}
-        }
+        };
         options.scenes[sceneID] = _sceneOptions;
 
         _pannellumViewer = window.pannellum.viewer('viewer-streetside', options);
