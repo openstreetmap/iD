@@ -3,8 +3,9 @@ import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
 import _union from 'lodash-es/union';
 
-import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { range as d3_range } from 'd3-array';
+import { timer as d3_timer } from 'd3-timer';
 
 import {
     select as d3_select,
@@ -312,12 +313,21 @@ export default {
         _pannellumViewer = window.pannellum.viewer('viewer-streetside', options);
 
         _pannellumViewer
-            .on('mouseup', updateRotation)
-            .on('touchend', updateRotation);
-
-        function updateRotation() {
-            dispatch.call('viewerChanged');
-        }
+            .on('mousedown', function() {
+                d3_select(window).on('mousemove.pannellum', function() {
+                    dispatch.call('viewerChanged');
+                });
+            })
+            .on('mouseup', function() {
+                d3_select(window).on('mousemove.pannellum', null);
+                // continue dispatching events for a few seconds, in case viewer has inertia.
+                var t = d3_timer(function(elapsed) {
+                    dispatch.call('viewerChanged');
+                    if (elapsed > 2000) {
+                        t.stop();
+                    }
+                });
+            });
     },
 
 
@@ -483,6 +493,7 @@ export default {
                 showFullscreenCtrl: false,
                 autoLoad: true,
                 compass: true,
+                yaw: d.ca,
                 type: 'cubemap',
                 cubeMap: [
                     imgUrlPrefix + imgLocIdxArr[0] + imgUrlSuffix,

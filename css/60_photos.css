@@ -195,26 +195,20 @@
 
 
 /* Streetside viewer */
-#ms .domRenderer .TagSymbol {
-    font-size: 10px;
-    background-color: rgba(0,0,0,0.4);
-    padding: 0 4px;
-    border-radius: 4px;
-    top: -25px;
-}
-#ms .domRenderer .Attribution {
-    /* we will roll our own to avoid async update issues like #4526 */
-    display: none;
-}
-
 .ms-wrapper .photo-attribution a:active,
 .ms-wrapper .photo-attribution a:hover {
     color: #35af6d;
 }
 
-.ms-wrapper .mapillary-js-dom {
-    z-index: 9;
+.pnlm-compass {
+    width: 26px;
+    height: 26px;
+    left: 4px;
+    top: 60px;
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
 }
+
 
 /* Mapillary viewer */
 #mly .domRenderer .TagSymbol {
@@ -237,6 +231,7 @@
 .mly-wrapper .mapillary-js-dom {
     z-index: 9;
 }
+
 
 /* OpenStreetCam viewer */
 .osc-wrapper {
