@@ -293,6 +293,11 @@ export default {
     },
 
 
+    viewer: function() {
+        return _pannellumViewer;
+    },
+
+
     initViewer: function (context) {
         if (!window.pannellum) return;
         if (_pannellumViewer) return;
@@ -503,7 +508,7 @@ export default {
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedBubbleKey = selected && selected.key;
-        var highlightedBubbleKeys = _union(hoveredBubbleKey, selectedBubbleKey);
+        var highlightedBubbleKeys = _union([hoveredBubbleKey], [selectedBubbleKey]);
 
         d3_selectAll('.layer-streetside-images .viewfield-group')
             .classed('highlighted', function (d) { return highlightedBubbleKeys.indexOf(d.key) !== -1; })

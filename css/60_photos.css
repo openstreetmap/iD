@@ -146,17 +146,6 @@
 .layer-streetside-images .viewfield-group * {
     fill: #00d8f5;
 }
-.layer-streetside-images .viewfield-group * {
-    fill: #00d8f5;
-}
-.layer-streetside-images .viewfield-group.selected * {
-    fill: #fffc64 !important;
-    fill-opacity: 1;
-}
-.layer-streetside-images .viewfield-group.hovered * {
-    fill: #fffc64 !important;
-    fill-opacity: .9;
-}
 .layer-streetside-images .sequence {
     stroke: #00d8f5;
 }
