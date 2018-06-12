@@ -26,7 +26,7 @@ var bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtN
 var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var tileZoom = 16.5;
-var dispatch = d3_dispatch('loadedBubbles');
+var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var _currScene = 0;
 var _bubbleCache;
 var _pannellumViewer;
@@ -177,7 +177,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
         }).filter(Boolean);
 
         cache.rtree.load(features);
-        if (which === 'bubbles'){
+        if (which === 'bubbles') {
             dispatch.call('loadedBubbles');
         }
     });
@@ -310,6 +310,14 @@ export default {
         options.scenes[sceneID] = _sceneOptions;
 
         _pannellumViewer = window.pannellum.viewer('viewer-streetside', options);
+
+        _pannellumViewer
+            .on('mouseup', updateRotation)
+            .on('touchend', updateRotation);
+
+        function updateRotation() {
+            dispatch.call('viewerChanged');
+        }
     },
 
 
