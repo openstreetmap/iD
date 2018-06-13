@@ -78,11 +78,11 @@ export function rendererMap(context) {
     var surface = d3_select(null);
 
     var dimensions = [1, 1];
-    var dblclickEnabled = true;
-    var redrawEnabled = true;
-    var transformStart = projection.transform();
-    var transformLast;
-    var transformed = false;
+    var _dblClickEnabled = true;
+    var _redrawEnabled = true;
+    var _transformStart = projection.transform();
+    var _transformLast;
+    var _transformed = false;
     var minzoom = 0;
     var mouse;
     var mousemove;
@@ -191,7 +191,7 @@ export function rendererMap(context) {
                 mousemove = d3_event;
             })
             .on('mouseover.vertices', function() {
-                if (map.editable() && !transformed) {
+                if (map.editable() && !_transformed) {
                     var hover = d3_event.target.__data__;
                     surface.selectAll('.data-layer-osm')
                         .call(drawVertices.drawHover, context.graph(), hover, map.extent());
@@ -199,7 +199,7 @@ export function rendererMap(context) {
                 }
             })
             .on('mouseout.vertices', function() {
-                if (map.editable() && !transformed) {
+                if (map.editable() && !_transformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.selectAll('.data-layer-osm')
                         .call(drawVertices.drawHover, context.graph(), hover, map.extent());
@@ -211,7 +211,7 @@ export function rendererMap(context) {
             .call(context.background());
 
         context.on('enter.map',  function() {
-            if (map.editable() && !transformed) {
+            if (map.editable() && !_transformed) {
 
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
@@ -358,7 +358,7 @@ export function rendererMap(context) {
 
 
     function dblClick() {
-        if (!dblclickEnabled) {
+        if (!_dblClickEnabled) {
             d3_event.preventDefault();
             d3_event.stopImmediatePropagation();
         }
@@ -370,9 +370,9 @@ export function rendererMap(context) {
         var source = event.sourceEvent;
         var eventTransform = event.transform;
 
-        if (transformStart.x === eventTransform.x &&
-            transformStart.y === eventTransform.y &&
-            transformStart.k === eventTransform.k) {
+        if (_transformStart.x === eventTransform.x &&
+            _transformStart.y === eventTransform.y &&
+            _transformStart.k === eventTransform.k) {
             return;  // no change
         }
 
@@ -387,7 +387,7 @@ export function rendererMap(context) {
             var lines = Math.abs(source.deltaY);
             var scroll = lines > 2 ? 40 : lines * 10;
 
-            var t0 = transformed ? transformLast : transformStart;
+            var t0 = _transformed ? _transformLast : _transformStart;
             var p0 = mouse(source);
             var p1 = t0.invert(p0);
             var k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500);
@@ -409,9 +409,9 @@ export function rendererMap(context) {
 
         projection.transform(eventTransform);
 
-        var scale = eventTransform.k / transformStart.k;
-        var tX = (eventTransform.x / scale - transformStart.x) * scale;
-        var tY = (eventTransform.y / scale - transformStart.y) * scale;
+        var scale = eventTransform.k / _transformStart.k;
+        var tX = (eventTransform.x / scale - _transformStart.x) * scale;
+        var tY = (eventTransform.y / scale - _transformStart.y) * scale;
 
         if (context.inIntro()) {
             curtainProjection.transform({
@@ -422,8 +422,8 @@ export function rendererMap(context) {
         }
 
         if (source) mousemove = event;
-        transformed = true;
-        transformLast = eventTransform;
+        _transformed = true;
+        _transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);
         scheduleRedraw();
 
@@ -432,12 +432,12 @@ export function rendererMap(context) {
 
 
     function resetTransform() {
-        if (!transformed) return false;
+        if (!_transformed) return false;
 
         // deprecation warning - Radial Menu to be removed in iD v3
         surface.selectAll('.edit-menu, .radial-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
-        transformed = false;
+        _transformed = false;
         if (context.inIntro()) {
             curtainProjection.transform(projection.transform());
         }
@@ -446,7 +446,7 @@ export function rendererMap(context) {
 
 
     function redraw(difference, extent) {
-        if (surface.empty() || !redrawEnabled) return;
+        if (surface.empty() || !_redrawEnabled) return;
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
@@ -476,7 +476,7 @@ export function rendererMap(context) {
             editOff();
         }
 
-        transformStart = projection.transform();
+        _transformStart = projection.transform();
 
         return map;
     }
@@ -508,16 +508,21 @@ export function rendererMap(context) {
 
 
     map.dblclickEnable = function(_) {
-        if (!arguments.length) return dblclickEnabled;
-        dblclickEnabled = _;
+        if (!arguments.length) return _dblClickEnabled;
+        _dblClickEnabled = _;
         return map;
     };
 
 
     map.redrawEnable = function(_) {
-        if (!arguments.length) return redrawEnabled;
-        redrawEnabled = _;
+        if (!arguments.length) return _redrawEnabled;
+        _redrawEnabled = _;
         return map;
+    };
+
+
+    map.isTransformed = function(_) {
+        return _transformed;
     };
 
 
@@ -535,8 +540,8 @@ export function rendererMap(context) {
                 .call(zoom.transform, d3_zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
         } else {
             projection.transform(t2);
-            transformStart = t2;
-            _selection.call(zoom.transform, transformStart);
+            _transformStart = t2;
+            _selection.call(zoom.transform, _transformStart);
         }
     }
 
@@ -568,8 +573,8 @@ export function rendererMap(context) {
                 .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k2));
         } else {
             projection.translate(t);
-            transformStart = projection.transform();
-            _selection.call(zoom.transform, transformStart);
+            _transformStart = projection.transform();
+            _selection.call(zoom.transform, _transformStart);
         }
 
         return true;
@@ -611,8 +616,8 @@ export function rendererMap(context) {
                 .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
         } else {
             projection.translate(t);
-            transformStart = projection.transform();
-            _selection.call(zoom.transform, transformStart);
+            _transformStart = projection.transform();
+            _selection.call(zoom.transform, _transformStart);
         }
 
         return true;
@@ -634,8 +639,8 @@ export function rendererMap(context) {
                 .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
         } else {
             projection.translate(t);
-            transformStart = projection.transform();
-            _selection.call(zoom.transform, transformStart);
+            _transformStart = projection.transform();
+            _selection.call(zoom.transform, _transformStart);
             dispatch.call('move', this, map);
             immediateRedraw();
         }

@@ -140,6 +140,10 @@ export function svgStreetside(projection, context, dispatch) {
 
 
     function viewerChanged() {
+        // skip this if the map is currently transformed
+        // e.g. during drags or easing.
+        if (context.map().isTransformed()) return;
+
         var service = getService();
         if (!service) return;
 
