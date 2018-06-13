@@ -26,10 +26,11 @@ var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
 var bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
 var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
-var tileZoom = 16.5;
+var tileZoom = 15;
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var _currScene = 0;
-var _bubbleCache;
+var _currSequence = 0;
+var _ssCache;
 var _pannellumViewer;
 var _sceneOptions;
 
@@ -60,11 +61,7 @@ function nearNullIsland(x, y, z) {
 function localeTimestamp(s) {
     if (!s) return null;
     var detected = utilDetect();
-    var options = {
-        day: 'numeric', month: 'short', year: 'numeric'
-        //hour: 'numeric', minute: 'numeric', second: 'numeric',
-        //timeZone: 'UTC'
-    };
+    var options = { day: 'numeric', month: 'short', year: 'numeric' };
     var d = new Date(s);
     if (isNaN(d.getTime())) return null;
     return d.toLocaleString(detected.locale, options);
@@ -112,7 +109,6 @@ function getTiles(projection) {
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
 function loadTiles(which, url, projection) {
-    // console.log('loadTiles() for: ', which);
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
@@ -130,11 +126,11 @@ function loadTiles(which, url, projection) {
  * loadNextTilePage() load data for the next tile page in line.
  */
 function loadNextTilePage(which, currZoom, url, tile) {
-    // console.log('loadNextTilePage()');
-    var cache = _bubbleCache[which];
+    var cache = _ssCache[which];
     var nextPage = cache.nextPage[tile.id] || 0;
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
+
     cache.inflight[id] = getBubbles(url, tile, function(bubbles) {
         cache.loaded[id] = true;
         delete cache.inflight[id];
@@ -144,8 +140,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
         bubbles.shift();
 
         var features = bubbles.map(function (bubble) {
-            var bubbleId = bubble.id;
-            if (cache.points[bubbleId]) return null;  // skip duplicates
+            if (cache.points[bubble.id]) return null;  // skip duplicates
 
             var loc = [bubble.lo, bubble.la];
             var d = {
@@ -154,22 +149,48 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 ca: bubble.he,
                 captured_at: bubble.cd,
                 captured_by: 'microsoft',
-                nbn: bubble.nbn,
-                pbn: bubble.pbn,
-                rn: bubble.rn,
-                pano: true
-            };
-            var feature = {
-                geometry: {
-                    coordinates: [bubble.lo, bubble.la],
-                    type: 'Point'
-                },
-                properties: d,
-                type: 'Feature'
+                // nbn: bubble.nbn,
+                // pbn: bubble.pbn,
+                // ad: bubble.ad,
+                // rn: bubble.rn,
+                pr: bubble.pr,  // previous
+                ne: bubble.ne,  // next
+                pano: true,
+                sequenceID: null
             };
 
-            cache.points[bubbleId] = feature;
-            cache.forImageKey[bubbleId] = bubbleId;
+            // determine (or create) a squence to attach this bubble to
+            var seqID = findSequenceID(d);
+            var seq;
+            if (seqID) {
+                seq = _ssCache.sequences[seqID];
+            } else {
+                seq = { id: ++_currSequence, min: bubble.id, max: bubble.id, bubbles: [] };
+                _ssCache.sequences[seq.id] = seq;
+            }
+            d.sequenceID = seq.id;
+
+            // expand the range of the sequence to include this bubble
+            if (d.pr === undefined || bubble.id < seq.min) {
+                seq.min = bubble.id;
+            }
+            if (d.ne === undefined || bubble.id > seq.max) {
+                seq.max = bubble.id;
+            }
+            seq.bubbles.push(bubble.id);
+
+            // if next or previous bubble is already assigned a different sequence,
+            // merge the sequences
+            var prev = d.pr && _ssCache.bubbles.points[d.pr];
+            if (prev && prev.sequenceID !== seq.id) {
+                mergeSequences(prev.sequenceID, seq.id);
+            }
+            var next = d.ne && _ssCache.bubbles.points[d.ne];
+            if (next && next.sequenceID !== seq.id) {
+                mergeSequences(next.sequenceID, seq.id);
+            }
+
+            cache.points[bubble.id] = d;
 
             return {
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -184,11 +205,49 @@ function loadNextTilePage(which, currZoom, url, tile) {
     });
 }
 
+
+function findSequenceID(bubble) {
+    var prev = bubble.pr && _ssCache.bubbles.points[bubble.pr];
+    if (prev && prev.sequenceID) {
+        return prev.sequenceID;
+    }
+    var next = bubble.ne && _ssCache.bubbles.points[bubble.ne];
+    if (next && next.sequenceID) {
+        return next.sequenceID;
+    }
+
+    var seqIDs = Object.keys(_ssCache.sequences);
+    for (var i = 0; i < seqIDs.length; i++) {
+        var seq = _ssCache.sequences[seqIDs[i]];
+        if ((bubble.id >= seq.min && bubble.id <= seq.max) ||
+            (bubble.pr >= seq.min && bubble.pr <= seq.max) ||
+            (bubble.ne >= seq.min && bubble.ne <= seq.max)) {
+            return seq.id;
+        }
+    }
+}
+
+
+function mergeSequences(oldID, newID) {
+    var oldSeq = _ssCache.sequences[oldID];
+    var newSeq = _ssCache.sequences[newID];
+
+    newSeq.min = Math.min(oldSeq.min, newSeq.min);
+    newSeq.max = Math.max(oldSeq.max, newSeq.max);
+
+    oldSeq.bubbles.forEach(function (bubbleID) {
+        _ssCache.bubbles.points[bubbleID].sequenceID = newID;
+    });
+
+    newSeq.bubbles = newSeq.bubbles.concat(oldSeq.bubbles);
+    delete _ssCache.sequences[oldID];
+}
+
+
 /**
  * getBubbles() handles the request to the server for a tile extent of 'bubbles' (streetside image locations).
  */
 function getBubbles(url, tile, callback) {
-    //console.log('services - streetside - getBubbles()');
     var rect = tile.extent.rectangle();
     var urlForRequest = url + utilQsString({
         n: rect[3],
@@ -198,6 +257,7 @@ function getBubbles(url, tile, callback) {
         appkey: bubbleAppKey,
         jsCallback: '{callback}'
     });
+
     jsonpRequest(urlForRequest, function (data) {
         if (!data || data.error) {
             callback(null);
@@ -217,6 +277,7 @@ function partitionViewport(psize, projection) {
     var cols = d3_range(0, dimensions[0], psize);
     var rows = d3_range(0, dimensions[1], psize);
     var partitions = [];
+
     rows.forEach(function (y) {
         cols.forEach(function (x) {
             var min = [x, y + psize];
@@ -228,17 +289,16 @@ function partitionViewport(psize, projection) {
     return partitions;
 }
 
+
 /**
  * searchLimited().
  */
 function searchLimited(psize, limit, projection, rtree) {
-    //console.log('services - streetside - searchLimited()');
     limit = limit || 3;
 
     var partitions = partitionViewport(psize, projection);
     var results;
 
-    // console.time('previous');
     results = _flatten(_map(partitions, function (extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
@@ -254,7 +314,7 @@ export default {
      * init() initialize streetside.
      */
     init: function () {
-        if (!_bubbleCache) {
+        if (!_ssCache) {
             this.reset();
         }
 
@@ -265,7 +325,7 @@ export default {
      * reset() reset the cache.
      */
     reset: function () {
-        var cache = _bubbleCache;
+        var cache = _ssCache;
 
         if (cache) {
             if (cache.bubbles && cache.bubbles.inflight) {
@@ -273,8 +333,9 @@ export default {
             }
         }
 
-        _bubbleCache = {
-            bubbles: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, points: {} }
+        _ssCache = {
+            bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush(), points: {} },
+            sequences: {}
         };
     },
 
@@ -283,8 +344,50 @@ export default {
      */
     bubbles: function (projection) {
         var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _bubbleCache.bubbles.rtree);
+        return searchLimited(psize, limit, projection, _ssCache.bubbles.rtree);
     },
+
+
+    sequences: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var sequenceIDs = {};
+
+        // all sequences for bubbles in viewport
+        _ssCache.bubbles.rtree.search(bbox)
+            .forEach(function(d) {
+                if (d.data.sequenceID) {
+                    sequenceIDs[d.data.sequenceID] = true;
+                }
+            });
+
+        // make linestrings from those sequences
+        var lineStrings = [];
+        Object.keys(sequenceIDs)
+            .forEach(function(sequenceID) {
+                var seq = _ssCache.sequences[sequenceID];
+                if (seq) {
+                    var coords = [];
+                    for (var i = seq.min; i <= seq.max; i++) {
+                        var point = _ssCache.bubbles.points[i];
+                        if (point) {
+                            coords.push(point.loc);
+                        }
+                    }
+
+                    lineStrings.push({
+                        type: 'LineString',
+                        properties: { key: sequenceID },
+                        coordinates: coords
+                    });
+                }
+            });
+
+        return lineStrings;
+    },
+
 
     /**
      * loadBubbles()
@@ -507,6 +610,12 @@ export default {
         return this;
     },
 
+
+    getSequenceKeyForBubble: function(d) {
+        return d && d.sequenceID;
+    },
+
+
     /**
      * setStyles().
      */
@@ -521,20 +630,30 @@ export default {
                 .classed('highlighted', false)
                 .classed('selected', false);
         }
+
         var hoveredBubbleKey = hovered && hovered.key;
+        var hoveredSequenceKey = this.getSequenceKeyForBubble(hovered);
+        var hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
+        var hoveredBubbleKeys = (hoveredSequence && hoveredSequence.bubbles) || [];
+
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedBubbleKey = selected && selected.key;
-        var highlightedBubbleKeys = _union([hoveredBubbleKey], [selectedBubbleKey]);
+        var selectedSequenceKey = this.getSequenceKeyForBubble(selected);
+        var selectedSequence = selectedSequenceKey && _ssCache.sequences[selectedSequenceKey];
+        var selectedBubbleKeys = (selectedSequence && selectedSequence.bubbles) || [];
+
+        // highlight sibling viewfields on either the selected or the hovered sequences
+        var highlightedBubbleKeys = _union(hoveredBubbleKeys, selectedBubbleKeys);
 
         d3_selectAll('.layer-streetside-images .viewfield-group')
             .classed('highlighted', function (d) { return highlightedBubbleKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function (d) { return d.key === hoveredBubbleKey; })
             .classed('selected', function (d) { return d.key === selectedBubbleKey; });
 
-        // d3_selectAll('.layer-streetside-images .sequence')
-        //     .classed('highlighted', function (d) { return d.properties.key === hoveredSequenceKey; })
-        //     .classed('selected', function (d) { return d.properties.key === selectedSequenceKey; });
+        d3_selectAll('.layer-streetside-images .sequence')
+            .classed('highlighted', function (d) { return d.properties.key === hoveredSequenceKey; })
+            .classed('selected', function (d) { return d.properties.key === selectedSequenceKey; });
 
         return this;
     },
@@ -543,6 +662,6 @@ export default {
      * cache().
      */
     cache: function () {
-        return _bubbleCache;
+        return _ssCache;
     }
 };

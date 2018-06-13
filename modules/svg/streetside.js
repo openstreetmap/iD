@@ -6,7 +6,7 @@ import { services } from '../services';
 
 export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 16;
+    var minZoom = 14;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 19;
     var layer = d3_select(null);
@@ -167,8 +167,24 @@ export function svgStreetside(projection, context, dispatch) {
         var showViewfields = (z >= minViewfieldZoom);
         var service = getService();
 
-        // gets the features from service cache
+        var sequences = (service ? service.sequences(projection) : []);
         var bubbles = (service && showMarkers ? service.bubbles(projection) : []);
+
+        var traces = layer.selectAll('.sequences').selectAll('.sequence')
+            .data(sequences, function(d) { return d.properties.key; });
+
+        // exit
+        traces.exit()
+            .remove();
+
+        // enter/update
+        traces = traces.enter()
+            .append('path')
+            .attr('class', 'sequence')
+            .merge(traces)
+            .attr('d', svgPath(projection).geojson);
+
+
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(bubbles, function(d) { return d.key; });
 
@@ -242,6 +258,10 @@ export function svgStreetside(projection, context, dispatch) {
             .append('g')
             .attr('class', 'layer-streetside-images')
             .style('display', enabled ? 'block' : 'none');
+
+        layerEnter
+            .append('g')
+            .attr('class', 'sequences');
 
         layerEnter
             .append('g')
