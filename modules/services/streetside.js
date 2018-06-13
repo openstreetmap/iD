@@ -446,8 +446,12 @@ export default {
     /**
      * showViewer()
      */
-    showViewer: function () {
+    showViewer: function (yaw) {
         if (!_sceneOptions) return;
+
+        if (yaw !== undefined) {
+            _sceneOptions.yaw = yaw;
+        }
 
         if (!_pannellumViewer) {
             this.initViewer();

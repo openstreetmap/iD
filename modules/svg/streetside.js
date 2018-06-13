@@ -11,6 +11,7 @@ export function svgStreetside(projection, context, dispatch) {
     var minViewfieldZoom = 18;
     var layer = d3_select(null);
     var _viewerYaw = 0;
+    var _selectedSequence = null;
     var _streetside;
 
     /**
@@ -96,11 +97,15 @@ export function svgStreetside(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
-        _viewerYaw = 0;
+        // try to preserve the viewer rotation when staying on the same sequence
+        if (d.sequenceKey !== _selectedSequence) {
+            _viewerYaw = 0;  // reset
+        }
+        _selectedSequence = d.sequenceKey;
 
         service
             .selectImage(d)
-            .showViewer();
+            .showViewer(_viewerYaw);
 
         context.map().centerEase(d.loc);
     }
