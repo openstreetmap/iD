@@ -119,10 +119,11 @@
     pointer-events: none;
 }
 .layer-streetside-images .viewfield-group * {
-    fill: #00d8f5;
+    fill: #0de6b0;
 }
 .layer-streetside-images .sequence {
-    stroke: #00d8f5;
+    stroke: #0de6b0;
+    stroke-opacity: 0.7;  /* slight bump - only one per road */
 }
 
 
@@ -162,10 +163,10 @@
     pointer-events: none;
 }
 .layer-openstreetcam-images .viewfield-group * {
-    fill: #77ddff;
+    fill: #20c4ff;
 }
 .layer-openstreetcam-images .sequence {
-    stroke: #77ddff;
+    stroke: #20c4ff;
 }
 
 
@@ -175,7 +176,7 @@
 }
 .ms-wrapper .photo-attribution a:active,
 .ms-wrapper .photo-attribution a:hover {
-    color: #35af6d;
+    color: #0de6b0;
 }
 
 .ms-wrapper .pnlm-compass.pnlm-control {
@@ -222,7 +223,7 @@
 
 .osc-wrapper .photo-attribution a:active,
 .osc-wrapper .photo-attribution a:hover {
-    color: #77ddff;
+    color: #20c4ff;
 }
 
 .osc-controls-wrap {

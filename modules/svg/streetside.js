@@ -8,7 +8,7 @@ export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 14;
     var minMarkerZoom = 16;
-    var minViewfieldZoom = 19;
+    var minViewfieldZoom = 18;
     var layer = d3_select(null);
     var _viewerYaw = 0;
     var _streetside;

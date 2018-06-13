@@ -29,7 +29,6 @@ var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var tileZoom = 15;
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var _currScene = 0;
-var _currSequence = 0;
 var _ssCache;
 var _pannellumViewer;
 var _sceneOptions;
@@ -156,41 +155,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 pr: bubble.pr,  // previous
                 ne: bubble.ne,  // next
                 pano: true,
-                sequenceID: null
+                sequenceKey: null
             };
 
-            // determine (or create) a squence to attach this bubble to
-            var seqID = findSequenceID(d);
-            var seq;
-            if (seqID) {
-                seq = _ssCache.sequences[seqID];
-            } else {
-                seq = { id: ++_currSequence, min: bubble.id, max: bubble.id, bubbles: [] };
-                _ssCache.sequences[seq.id] = seq;
-            }
-            d.sequenceID = seq.id;
-
-            // expand the range of the sequence to include this bubble
-            if (d.pr === undefined || bubble.id < seq.min) {
-                seq.min = bubble.id;
-            }
-            if (d.ne === undefined || bubble.id > seq.max) {
-                seq.max = bubble.id;
-            }
-            seq.bubbles.push(bubble.id);
-
-            // if next or previous bubble is already assigned a different sequence,
-            // merge the sequences
-            var prev = d.pr && _ssCache.bubbles.points[d.pr];
-            if (prev && prev.sequenceID !== seq.id) {
-                mergeSequences(prev.sequenceID, seq.id);
-            }
-            var next = d.ne && _ssCache.bubbles.points[d.ne];
-            if (next && next.sequenceID !== seq.id) {
-                mergeSequences(next.sequenceID, seq.id);
-            }
-
             cache.points[bubble.id] = d;
+
+            // a sequence starts here
+            if (bubble.pr === undefined) {
+                cache.leaders.push(bubble.id);
+            }
 
             return {
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -199,6 +172,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
         }).filter(Boolean);
 
         cache.rtree.load(features);
+
+        connectSequences();
+
         if (which === 'bubbles') {
             dispatch.call('loadedBubbles');
         }
@@ -206,43 +182,54 @@ function loadNextTilePage(which, currZoom, url, tile) {
 }
 
 
-function findSequenceID(bubble) {
-    var prev = bubble.pr && _ssCache.bubbles.points[bubble.pr];
-    if (prev && prev.sequenceID) {
-        return prev.sequenceID;
-    }
-    var next = bubble.ne && _ssCache.bubbles.points[bubble.ne];
-    if (next && next.sequenceID) {
-        return next.sequenceID;
-    }
+// call this sometimes to connect the bubbles into sequences
+function connectSequences() {
+    var cache = _ssCache.bubbles;
+    var keepLeaders = [];
 
-    var seqIDs = Object.keys(_ssCache.sequences);
-    for (var i = 0; i < seqIDs.length; i++) {
-        var seq = _ssCache.sequences[seqIDs[i]];
-        if ((bubble.id >= seq.min && bubble.id <= seq.max) ||
-            (bubble.pr >= seq.min && bubble.pr <= seq.max) ||
-            (bubble.ne >= seq.min && bubble.ne <= seq.max)) {
-            return seq.id;
+    for (var i = 0; i < cache.leaders.length; i++) {
+        var bubble = cache.points[cache.leaders[i]];
+        var seen = {};
+
+        // try to make a sequence.. use the key of the leader bubble.
+        var sequence = { key: bubble.key, bubbles: [] };
+        var complete = false;
+
+        do {
+            sequence.bubbles.push(bubble);
+            seen[bubble.key] = true;
+
+            if (bubble.ne === undefined) {
+                complete = true;
+            } else {
+                bubble = cache.points[bubble.ne];  // advance to next
+            }
+        } while (bubble && !seen[bubble.key] && !complete);
+
+
+        if (complete) {
+            _ssCache.sequences[sequence.key] = sequence;
+
+            // assign bubbles to the sequence
+            for (var j = 0; j < sequence.bubbles.length; j++) {
+                sequence.bubbles[j].sequenceKey = sequence.key;
+            }
+
+            // create a GeoJSON LineString
+            sequence.geojson = {
+                type: 'LineString',
+                properties: { key: sequence.key },
+                coordinates: sequence.bubbles.map(function (d) { return d.loc; })
+            };
+
+        } else {
+            keepLeaders.push(cache.leaders[i]);
         }
     }
+
+    // couldn't complete these, save for later
+    cache.leaders = keepLeaders;
 }
-
-
-function mergeSequences(oldID, newID) {
-    var oldSeq = _ssCache.sequences[oldID];
-    var newSeq = _ssCache.sequences[newID];
-
-    newSeq.min = Math.min(oldSeq.min, newSeq.min);
-    newSeq.max = Math.max(oldSeq.max, newSeq.max);
-
-    oldSeq.bubbles.forEach(function (bubbleID) {
-        _ssCache.bubbles.points[bubbleID].sequenceID = newID;
-    });
-
-    newSeq.bubbles = newSeq.bubbles.concat(oldSeq.bubbles);
-    delete _ssCache.sequences[oldID];
-}
-
 
 /**
  * getBubbles() handles the request to the server for a tile extent of 'bubbles' (streetside image locations).
@@ -334,7 +321,7 @@ export default {
         }
 
         _ssCache = {
-            bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush(), points: {} },
+            bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush(), points: {}, leaders: [] },
             sequences: {}
         };
     },
@@ -353,39 +340,20 @@ export default {
         var min = [viewport[0][0], viewport[1][1]];
         var max = [viewport[1][0], viewport[0][1]];
         var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        var sequenceIDs = {};
+        var seen = {};
+        var results = [];
 
         // all sequences for bubbles in viewport
         _ssCache.bubbles.rtree.search(bbox)
             .forEach(function(d) {
-                if (d.data.sequenceID) {
-                    sequenceIDs[d.data.sequenceID] = true;
+                var key = d.data.sequenceKey;
+                if (key && !seen[key]) {
+                    seen[key] = true;
+                    results.push(_ssCache.sequences[key].geojson);
                 }
             });
 
-        // make linestrings from those sequences
-        var lineStrings = [];
-        Object.keys(sequenceIDs)
-            .forEach(function(sequenceID) {
-                var seq = _ssCache.sequences[sequenceID];
-                if (seq) {
-                    var coords = [];
-                    for (var i = seq.min; i <= seq.max; i++) {
-                        var point = _ssCache.bubbles.points[i];
-                        if (point) {
-                            coords.push(point.loc);
-                        }
-                    }
-
-                    lineStrings.push({
-                        type: 'LineString',
-                        properties: { key: sequenceID },
-                        coordinates: coords
-                    });
-                }
-            });
-
-        return lineStrings;
+        return results;
     },
 
 
@@ -612,7 +580,7 @@ export default {
 
 
     getSequenceKeyForBubble: function(d) {
-        return d && d.sequenceID;
+        return d && d.sequenceKey;
     },
 
 
@@ -634,14 +602,14 @@ export default {
         var hoveredBubbleKey = hovered && hovered.key;
         var hoveredSequenceKey = this.getSequenceKeyForBubble(hovered);
         var hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
-        var hoveredBubbleKeys = (hoveredSequence && hoveredSequence.bubbles) || [];
+        var hoveredBubbleKeys =  (hoveredSequence && hoveredSequence.bubbles.map(function (d) { return d.key; })) || [];
 
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedBubbleKey = selected && selected.key;
         var selectedSequenceKey = this.getSequenceKeyForBubble(selected);
         var selectedSequence = selectedSequenceKey && _ssCache.sequences[selectedSequenceKey];
-        var selectedBubbleKeys = (selectedSequence && selectedSequence.bubbles) || [];
+        var selectedBubbleKeys = (selectedSequence && selectedSequence.bubbles.map(function (d) { return d.key; })) || [];
 
         // highlight sibling viewfields on either the selected or the hovered sequences
         var highlightedBubbleKeys = _union(hoveredBubbleKeys, selectedBubbleKeys);
