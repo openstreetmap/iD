@@ -166,6 +166,11 @@ export function rendererBackground(context) {
             imageryUsed.push(extension + 'data file');
         }
 
+        var streetside = context.layers().layer('streetside');
+        if (streetside && streetside.enabled()) {
+            imageryUsed.push('Bing StreetSide');
+        }
+
         var mapillary_images = context.layers().layer('mapillary-images');
         if (mapillary_images && mapillary_images.enabled()) {
             imageryUsed.push('Mapillary Images');
