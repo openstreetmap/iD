@@ -26,7 +26,8 @@ var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
 var bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
 var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
-var tileZoom = 15;
+var maxResults = 2000;
+var tileZoom = 16.5;
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var _currScene = 0;
 var _ssCache;
@@ -241,6 +242,7 @@ function getBubbles(url, tile, callback) {
         s: rect[1],
         e: rect[2],
         w: rect[0],
+        c: maxResults,
         appkey: bubbleAppKey,
         jsCallback: '{callback}'
     });

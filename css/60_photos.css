@@ -119,11 +119,11 @@
     pointer-events: none;
 }
 .layer-streetside-images .viewfield-group * {
-    fill: #0de6b0;
+    fill: #0fffc4;
 }
 .layer-streetside-images .sequence {
-    stroke: #0de6b0;
-    stroke-opacity: 0.7;  /* slight bump - only one per road */
+    stroke: #0fffc4;
+    stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
 
 
@@ -176,7 +176,7 @@
 }
 .ms-wrapper .photo-attribution a:active,
 .ms-wrapper .photo-attribution a:hover {
-    color: #0de6b0;
+    color: #0fffc4;
 }
 
 .ms-wrapper .pnlm-compass.pnlm-control {
