@@ -717,7 +717,7 @@
         },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
-            "title": "Photo Overlay (Streetside)",
+            "title": "Photo Overlay (Bing Streetside)",
             "report": "Report a privacy concern with this image"
         },
         "mapillary_images": {
