@@ -521,7 +521,7 @@ export function rendererMap(context) {
     };
 
 
-    map.isTransformed = function(_) {
+    map.isTransformed = function() {
         return _transformed;
     };
 
