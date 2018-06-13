@@ -683,6 +683,19 @@ export default {
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
             .classed('selected', function(d) { return d.properties.key === selectedSequenceKey; });
 
+        // update viewfields if needed
+        d3_selectAll('.viewfield-group .viewfield')
+            .attr('d', viewfieldPath);
+
+        function viewfieldPath() {
+            var d = this.parentNode.__data__;
+            if (d.pano && d.key !== selectedImageKey) {
+                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+            } else {
+                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+            }
+        }
+
         return this;
     },
 

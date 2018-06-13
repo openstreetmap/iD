@@ -98,17 +98,9 @@ export function svgStreetside(projection, context, dispatch) {
 
         _viewerYaw = 0;
 
-        // reset bubble back to a circular field
-        layer.selectAll('.viewfield-group.selected .viewfield')
-            .attr('d', viewfieldPath);
-
         service
             .selectImage(d)
             .showViewer();
-
-        // show selected bubble with a viewfield
-        layer.selectAll('.viewfield-group.selected .viewfield')
-            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
 
         context.map().centerEase(d.loc);
     }
@@ -237,6 +229,17 @@ export function svgStreetside(projection, context, dispatch) {
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
+
+        function viewfieldPath() {
+            var d = this.parentNode.__data__;
+            if (d.pano) {
+                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+            } else {
+                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+            }
+        }
+
     }
 
     /**
@@ -282,15 +285,6 @@ export function svgStreetside(projection, context, dispatch) {
         }
     }
 
-
-    function viewfieldPath() {
-        var d = this.parentNode.__data__;
-        if (d.pano) {
-            return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
-        } else {
-            return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
-        }
-    }
 
     /**
      * drawImages.enabled().
