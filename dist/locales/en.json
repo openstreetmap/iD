@@ -6611,6 +6611,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Orthophoto Flanders most recent © AGIV"
+                },
+                "name": "AGIV Flanders most recent aerial imagery"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                },
+                "name": "AGIV Flanders 2013-2015 aerial imagery 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
@@ -6713,6 +6731,12 @@
                 },
                 "name": "OSM Inspector: Tagging"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) most recent aerial imagery"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerical imagery"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
             },
@@ -6727,6 +6751,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
                 "name": "U.S. Forest Roads Overlay"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
