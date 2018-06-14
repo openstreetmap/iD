@@ -6997,6 +6997,10 @@
                 "description": "Irregular meeting of the OpenStreetMap community in Chiang Mai",
                 "extendedDescription": "Members of the OpenStreetMap community meet every few months in Chiang Mai. Get in contact and check out {url} to see when the next meetup is scheduled"
             },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap TH Facebook group",
+                "description": "Facebook group for OpenStreetMappers in Thailand"
+            },
             "OSM-TH-forum": {
                 "name": "OpenStreetMap TH forum",
                 "description": "OpenStreetMap Thailand web forum"
@@ -7078,8 +7082,20 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium on Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Czech OSM community",
+                "description": "Map portal, website and contacts on OSM members in Czechia"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ on Facebook",
+                "description": "Follow czech community on Facebook - including translated WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Czech twitter @osmcz",
+                "description": "Follow czech community on Twitter - including translated WeeklyOSM!"
+            },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz Mailing List",
+                "name": "Czech mailing list (talk-cz)",
                 "description": "Talk-cz is the official mailing list for Czech community"
             },
             "dk-forum": {
@@ -7157,6 +7173,10 @@
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Germany Telegram",
+                "description": "Join the OpenStreetMap Germany Telegram supergroup at {url}"
             },
             "osm-de": {
                 "name": "OpenStreetMap Germany",
@@ -7579,6 +7599,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",
                 "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Join the OpenStreetMap Telegram global supergroup at {url}"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",
