@@ -168,7 +168,7 @@ export function rendererBackground(context) {
 
         var streetside = context.layers().layer('streetside');
         if (streetside && streetside.enabled()) {
-            imageryUsed.push('Bing StreetSide');
+            imageryUsed.push('Bing Streetside');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');

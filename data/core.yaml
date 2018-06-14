@@ -590,8 +590,8 @@ en:
     zoom: "Zoom to layer"
     browse: "Browse for a file"
   streetside:
-    tooltip: "StreetSide photos from Microsoft"
-    title: "Photo Overlay (Bing StreetSide)"
+    tooltip: "Streetside photos from Microsoft"
+    title: "Photo Overlay (Bing Streetside)"
     report: Report a privacy concern with this image
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"

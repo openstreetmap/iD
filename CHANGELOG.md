@@ -33,11 +33,11 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### Jun 14, 2018
 
 #### :mega: Release Highlights
-* :camera: We've added support for [Bing StreetSide](https://www.microsoft.com/en-us/maps/streetside)! This new layer provides 360-degree panoramic imagery across large regions of the United States, United Kingdom, France, and Spain. Thank you, Microsoft!<br/>
-_Activate the Bing StreetSide layer by opening the Map Data pane (shortcut <kbd>F</kbd>)_
+* :camera: We've added support for [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside)! This new layer provides 360-degree panoramic imagery across large regions of the United States, United Kingdom, France, and Spain. Thank you, Microsoft!<br/>
+_Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>F</kbd>)_
 
 #### :tada: New Features
-* Add Bing StreetSide data layer and service ([#5050], thanks [@jharpster], [@shawnaparadee], [@LorenMueller])
+* Add Bing Streetside data layer and service ([#5050], thanks [@jharpster], [@shawnaparadee], [@LorenMueller])
 * Changed how icons and other graphics are bundled into iD ([#3924])
   * Added support for more icon sets (such as [FontAwesome](https://fontawesome.com/icons?d=gallery)) for presets or other iD icons ([#3025])
   * Extracted many preset icons from the iD sprite into a separate project: [bhousel/temaki](https://github.com/bhousel/temaki)
