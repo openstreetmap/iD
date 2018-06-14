@@ -3,12 +3,15 @@ import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
 
+
 export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 16;
+    var minZoom = 14;
     var minMarkerZoom = 16;
-    var minViewfieldZoom = 19;
+    var minViewfieldZoom = 18;
     var layer = d3_select(null);
+    var _viewerYaw = 0;
+    var _selectedSequence = null;
     var _streetside;
 
     /**
@@ -18,7 +21,6 @@ export function svgStreetside(projection, context, dispatch) {
         if (svgStreetside.initialized) return;  // run once
         svgStreetside.enabled = false;
         svgStreetside.initialized = true;
-        console.log("svg: streetside initialized....");
     }
 
     /**
@@ -27,11 +29,13 @@ export function svgStreetside(projection, context, dispatch) {
     function getService() {
         if (services.streetside && !_streetside) {
             _streetside = services.streetside;
-            _streetside.event.on('loadedBubbles', throttledRedraw);
+            _streetside.event
+                .on('viewerChanged', viewerChanged)
+                .on('loadedBubbles', throttledRedraw);
         } else if (!services.streetside && _streetside) {
             _streetside = null;
         }
-        
+
         return _streetside;
     }
 
@@ -39,7 +43,6 @@ export function svgStreetside(projection, context, dispatch) {
      * showLayer().
      */
     function showLayer() {
-        console.log('svg - streetside - showLayer()');
         var service = getService();
         if (!service) return;
 
@@ -91,13 +94,18 @@ export function svgStreetside(projection, context, dispatch) {
      * click() Handles 'bubble' point click event.
      */
     function click(d) {
-        console.log("svg: map was clicked with streetside on. Passed obj: ", d);
         var service = getService();
         if (!service) return;
 
+        // try to preserve the viewer rotation when staying on the same sequence
+        if (d.sequenceKey !== _selectedSequence) {
+            _viewerYaw = 0;  // reset
+        }
+        _selectedSequence = d.sequenceKey;
+
         service
             .selectImage(d)
-            .showViewer();
+            .showViewer(_viewerYaw);
 
         context.map().centerEase(d.loc);
     }
@@ -123,17 +131,37 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function transform(d) {
         var t = svgPointTransform(projection)(d);
-        if (d.ca) {
-            t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        var rot = d.ca + _viewerYaw;
+        if (rot) {
+            t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
         return t;
     }
+
+
+    function viewerChanged() {
+        var service = getService();
+        if (!service) return;
+
+        var viewer = service.viewer();
+        if (!viewer) return;
+
+        // update viewfield rotation
+        _viewerYaw = viewer.getYaw();
+
+        // avoid updating if the map is currently transformed
+        // e.g. during drags or easing.
+        if (context.map().isTransformed()) return;
+
+        layer.selectAll('.viewfield-group.selected')
+            .attr('transform', transform);
+    }
+
 
     /**
      * update().
      */
     function update() {
-        console.log("svg - update()");
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var z = ~~context.map().zoom();
@@ -141,8 +169,24 @@ export function svgStreetside(projection, context, dispatch) {
         var showViewfields = (z >= minViewfieldZoom);
         var service = getService();
 
-        // gets the features from service cache
+        var sequences = (service ? service.sequences(projection) : []);
         var bubbles = (service && showMarkers ? service.bubbles(projection) : []);
+
+        var traces = layer.selectAll('.sequences').selectAll('.sequence')
+            .data(sequences, function(d) { return d.properties.key; });
+
+        // exit
+        traces.exit()
+            .remove();
+
+        // enter/update
+        traces = traces.enter()
+            .append('path')
+            .attr('class', 'sequence')
+            .merge(traces)
+            .attr('d', svgPath(projection).geojson);
+
+
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(bubbles, function(d) { return d.key; });
 
@@ -190,11 +234,12 @@ export function svgStreetside(projection, context, dispatch) {
 
         // viewfields may or may not be drawn...
         // but if they are, draw below the circles
-        viewfields.enter()               
-            .insert('path', 'circle')    
+        viewfields.enter()
+            .insert('path', 'circle')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
 
         function viewfieldPath() {
             var d = this.parentNode.__data__;
@@ -204,17 +249,17 @@ export function svgStreetside(projection, context, dispatch) {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
+
     }
 
     /**
-     * drawImages() 
+     * drawImages()
      * drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
      * 'svgStreetside()' is called from index.js
      */
     function drawImages(selection) {
-        //console.log("svg - streetside - drawImages(); selection: ", selection);
-        var enabled = svgStreetside.enabled,
-            service = getService();
+        var enabled = svgStreetside.enabled;
+        var service = getService();
 
         layer = selection.selectAll('.layer-streetside-images')
             .data(service ? [0] : []);
@@ -229,6 +274,10 @@ export function svgStreetside(projection, context, dispatch) {
 
         layerEnter
             .append('g')
+            .attr('class', 'sequences');
+
+        layerEnter
+            .append('g')
             .attr('class', 'markers');
 
         layer = layerEnter
@@ -238,7 +287,7 @@ export function svgStreetside(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                
+
                 service.loadBubbles(projection);
             } else {
                 editOff();
@@ -246,11 +295,11 @@ export function svgStreetside(projection, context, dispatch) {
         }
     }
 
+
     /**
      * drawImages.enabled().
      */
     drawImages.enabled = function(_) {
-        //console.log('svg - streetside - drawImages.enabled()');
         if (!arguments.length) return svgStreetside.enabled;
         svgStreetside.enabled = _;
         if (svgStreetside.enabled) {
@@ -268,7 +317,7 @@ export function svgStreetside(projection, context, dispatch) {
     drawImages.supported = function() {
         return !!getService();
     };
-    
+
     init();
 
     return drawImages;

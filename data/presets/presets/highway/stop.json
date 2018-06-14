@@ -1,5 +1,5 @@
 {
-    "icon": "poi-stop",
+    "icon": "temaki-stop",
     "fields": [
         "stop",
         "direction_vertex"

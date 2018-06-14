@@ -1,11 +1,9 @@
 {
-    "icon": "defibrillator",
+    "icon": "maki-defibrillator",
     "fields": [
-        "ref",
-        "access",
-        "opening_hours",
         "indoor",
-        "phone"
+        "ref",
+        "operator"
     ],
     "geometry": [
         "point",

@@ -1,5 +1,5 @@
 {
-    "icon": "scooter",
+    "icon": "fas-motorcycle",
     "fields": [
         "capacity",
         "operator",

@@ -1,5 +1,5 @@
 {
-    "icon": "poi-subway",
+    "icon": "temaki-subway",
     "fields": [
         "name",
         "ref_stop_position",

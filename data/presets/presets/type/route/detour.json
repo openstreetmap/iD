@@ -1,5 +1,5 @@
 {
-    "icon": "route-detour",
+    "icon": "iD-route-detour",
     "fields": [
         "name",
         "ref_route"

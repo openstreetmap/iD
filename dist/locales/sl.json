@@ -5074,6 +5074,20 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "description": "Sledi nam na Twitterju: {url}"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana na Facebooku",
+                "description": "Facebook skupina za ljudi, ki jih zanima OpenStreetMap"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana na Twitterju",
+                "description": "Sledi nam na Twitterju: {url}"
+            },
+            "osm-mg-facebook": {
+                "name": "Facebook skupina OpenStreetMap Madagaskar"
+            },
             "OSM-help": {
                 "name": "Pomoč OpenStreetMap"
             },

@@ -42,8 +42,8 @@ path.stroke.tag-highway {
     stroke-width: 5;
 }
 
-.preset-icon .icon.highway-motorway,
-.preset-icon .icon.highway-motorway-link {
+.preset-icon .icon.iD-highway-motorway,
+.preset-icon .icon.iD-highway-motorway-link {
     color: #CF2081;
     fill: #70372f;
 }
@@ -58,8 +58,8 @@ path.casing.tag-motorway {
     stroke:#70372f;
 }
 
-.preset-icon .icon.highway-trunk,
-.preset-icon .icon.highway-trunk-link {
+.preset-icon .icon.iD-highway-trunk,
+.preset-icon .icon.iD-highway-trunk-link {
     color: #DD2F22;
     fill: #70372f;
 }
@@ -74,8 +74,8 @@ path.casing.tag-trunk {
     stroke:#70372f;
 }
 
-.preset-icon .icon.highway-primary,
-.preset-icon .icon.highway-primary-link {
+.preset-icon .icon.iD-highway-primary,
+.preset-icon .icon.iD-highway-primary-link {
     color: #F99806;
     fill: #70372f;
 }
@@ -90,8 +90,8 @@ path.casing.tag-primary {
     stroke:#70372f;
 }
 
-.preset-icon .icon.highway-secondary,
-.preset-icon .icon.highway-secondary-link {
+.preset-icon .icon.iD-highway-secondary,
+.preset-icon .icon.iD-highway-secondary-link {
     color: #F3F312;
     fill: #70372f;
 }
@@ -106,8 +106,8 @@ path.casing.tag-secondary {
     stroke:#70372f;
 }
 
-.preset-icon .icon.highway-tertiary,
-.preset-icon .icon.highway-tertiary-link {
+.preset-icon .icon.iD-highway-tertiary,
+.preset-icon .icon.iD-highway-tertiary-link {
     color: #FFF9B3;
     fill: #70372f;
 }
@@ -122,8 +122,8 @@ path.casing.tag-tertiary {
     stroke:#70372f;
 }
 
-.legacy-carto .preset-icon .icon.highway-motorway,
-.legacy-carto .preset-icon .icon.highway-motorway-link {
+.legacy-carto .preset-icon .icon.iD-highway-motorway,
+.legacy-carto .preset-icon .icon.iD-highway-motorway-link {
     color: #58a9ed;
     fill: #2c5476;
 }
@@ -138,8 +138,8 @@ path.casing.tag-tertiary {
     stroke:#2c5476;
 }
 
-.legacy-carto .preset-icon .icon.highway-trunk,
-.legacy-carto .preset-icon .icon.highway-trunk-link {
+.legacy-carto .preset-icon .icon.iD-highway-trunk,
+.legacy-carto .preset-icon .icon.iD-highway-trunk-link {
     color: #8cd05f;
     fill: #46682f;
 }
@@ -154,8 +154,8 @@ path.casing.tag-tertiary {
     stroke:#46682f;
 }
 
-.legacy-carto .preset-icon .icon.highway-primary,
-.legacy-carto .preset-icon .icon.highway-primary-link {
+.legacy-carto .preset-icon .icon.iD-highway-primary,
+.legacy-carto .preset-icon .icon.iD-highway-primary-link {
     color: #e06d5f;
     fill: #70372f;
 }
@@ -170,8 +170,8 @@ path.casing.tag-tertiary {
     stroke:#70372f;
 }
 
-.legacy-carto .preset-icon .icon.highway-secondary,
-.legacy-carto .preset-icon .icon.highway-secondary-link {
+.legacy-carto .preset-icon .icon.iD-highway-secondary,
+.legacy-carto .preset-icon .icon.iD-highway-secondary-link {
     color: #eab056;
     fill: #75582b;
 }
@@ -186,8 +186,8 @@ path.casing.tag-tertiary {
     stroke:#75582b;
 }
 
-.legacy-carto .preset-icon .icon.highway-tertiary,
-.legacy-carto .preset-icon .icon.highway-tertiary-link {
+.legacy-carto .preset-icon .icon.iD-highway-tertiary,
+.legacy-carto .preset-icon .icon.iD-highway-tertiary-link {
     color: #ffff7e;
     fill: #7f7f3f;
 }
@@ -202,7 +202,7 @@ path.casing.tag-tertiary {
     stroke:#7f7f3f;
 }
 
-.preset-icon .icon.highway-residential {
+.preset-icon .icon.iD-highway-residential {
     color: #fff;
     fill: #444;
 }
@@ -215,7 +215,7 @@ path.casing.tag-residential {
     stroke:#444;
 }
 
-.preset-icon .icon.highway-unclassified {
+.preset-icon .icon.iD-highway-unclassified {
     color: #dcd9b9;
     fill: #444;
 }
@@ -398,7 +398,7 @@ path.stroke.tag-steps {
 }
 
 
-.preset-icon .icon.highway-living-street {
+.preset-icon .icon.iD-highway-living-street {
     color: #bbb;
     fill: #ddd;
 }
@@ -411,8 +411,8 @@ path.casing.tag-living_street {
     stroke: #fff;
 }
 
-.preset-icon .icon.highway-footway.tag-highway-corridor,
-.preset-icon .icon.highway-footway.tag-highway-pedestrian {
+.preset-icon .icon.iD-highway-footway.tag-highway-corridor,
+.preset-icon .icon.iD-highway-footway.tag-highway-pedestrian {
     color: #8cd05f;
     fill: #fff;
 }
@@ -442,7 +442,7 @@ path.casing.tag-pedestrian.tag-unpaved {
     stroke-dasharray: none;
 }
 
-.preset-icon .icon.highway-road {
+.preset-icon .icon.iD-highway-road {
     color: #9e9e9e;
     fill: #666;
 }
@@ -455,7 +455,7 @@ path.casing.tag-road {
     stroke:#666;
 }
 
-.preset-icon .icon.highway-service {
+.preset-icon .icon.iD-highway-service {
     color: #fff;
     fill: #666;
 }
@@ -470,8 +470,8 @@ path.casing.tag-service {
 
 /* special service roads and bus guideways */
 /* with `service=* tag`  (e.g. parking_aisle, alley, drive-through */
-.preset-icon .icon.highway-bus_guideway,
-.preset-icon .icon.highway-service.tag-service {
+.preset-icon .icon.iD-highway-bus_guideway,
+.preset-icon .icon.iD-highway-service.tag-service {
     color: #dcd9b9;
     fill: #666;
 }
@@ -486,7 +486,7 @@ path.casing.tag-service.tag-service {
     stroke: #666;
 }
 
-.preset-icon .icon.highway-track {
+.preset-icon .icon.iD-highway-track {
     color: #eaeaea;
     fill: #c5b59f;
 }
@@ -531,8 +531,8 @@ path.casing.tag-highway-bridleway.tag-unpaved {
     stroke-dasharray: none;
 }
 
-.preset-icon .icon.category-path,
-.preset-icon .icon.highway-path {
+.preset-icon .icon.iD-category-path,
+.preset-icon .icon.iD-highway-path {
     color: #746f6f;
     fill: #c5b59f;
 }
@@ -542,7 +542,7 @@ path.stroke.tag-highway-path {
 
 .preset-icon .icon.tag-route-foot,
 .preset-icon .icon.tag-route-hiking,
-.preset-icon .icon.highway-footway {
+.preset-icon .icon.iD-highway-footway {
     color: #ae8681;
     fill: #fff;
 }
@@ -550,7 +550,7 @@ path.stroke.tag-highway-footway {
     stroke: #ae8681;
 }
 
-.preset-icon .icon.highway-footway.tag-crossing {
+.preset-icon .icon.iD-highway-footway.tag-crossing {
     color: #444;
 }
 path.stroke.tag-highway-footway.tag-crossing {
@@ -562,7 +562,7 @@ path.stroke.tag-highway-footway.tag-crossing {
 }
 
 .preset-icon .icon.tag-route-bicycle,
-.preset-icon .icon.highway-cycleway {
+.preset-icon .icon.iD-highway-cycleway {
     color: #58a9ed;
     fill: #fff;
 }
@@ -571,7 +571,7 @@ path.stroke.tag-highway-cycleway {
 }
 
 .preset-icon .icon.tag-route-horse,
-.preset-icon .icon.highway-bridleway {
+.preset-icon .icon.iD-highway-bridleway {
     color: #e06d5f;
     fill: #fff;
 }
@@ -579,7 +579,7 @@ path.stroke.tag-highway-bridleway {
     stroke: #e06d5f;
 }
 
-.preset-icon .icon.highway-steps {
+.preset-icon .icon.iD-highway-steps {
     color: #81d25c;
     fill: #fff;
 }

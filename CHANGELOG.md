@@ -28,6 +28,74 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# 2.9.0
+##### Jun 14, 2018
+
+#### :mega: Release Highlights
+* :camera: We've added support for [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside)! This new layer provides 360-degree panoramic imagery across large regions of the United States, United Kingdom, France, and Spain. Thank you, Microsoft!<br/>
+_Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>F</kbd>)_
+
+#### :tada: New Features
+* Add Bing Streetside data layer and service ([#5050], thanks [@jharpster], [@shawnaparadee], [@LorenMueller])
+* Changed how icons and other graphics are bundled into iD ([#3924])
+  * Added support for more icon sets (such as [FontAwesome](https://fontawesome.com/icons?d=gallery)) for presets or other iD icons ([#3025])
+  * Extracted many preset icons from the iD sprite into a separate project: [bhousel/temaki](https://github.com/bhousel/temaki)
+  * Many presets that previously did not have a suitable icon now have one.
+  * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/master/data/presets/README.md#icons) for more details.
+
+[#5050]: https://github.com/openstreetmap/iD/issues/5050
+[#3924]: https://github.com/openstreetmap/iD/issues/3924
+[#3025]: https://github.com/openstreetmap/iD/issues/3025
+[@jharpster]: https://github.com/jharpster
+[@shawnaparadee]: https://github.com/shawnaparadee
+[@LorenMueller]: https://github.com/LorenMueller
+
+#### :sparkles: Usability
+* When pasting a `key=value` string into tag editor, put `key` and `value` into correct fields ([#5024], [#5070], thanks [@AndreasHae])
+* Replace Mapillary street sign spritesheet `.png` with `.svg` ([#4145])
+  * Much sharper graphics
+  * Adds support for many more street signs
+  * Adds support for the Mapillary street sign layer in all browsers
+* Render piers similar to other walkable features (sidewalks, rail platforms) ([#5068], thanks [@JamesKingdom])
+* Support `minValue`/`maxValue` on numeric fields. Avoid negative values for many fields ([#5043])
+
+[#5070]: https://github.com/openstreetmap/iD/issues/5070
+[#5068]: https://github.com/openstreetmap/iD/issues/5068
+[#5043]: https://github.com/openstreetmap/iD/issues/5043
+[#5024]: https://github.com/openstreetmap/iD/issues/5024
+[#4145]: https://github.com/openstreetmap/iD/issues/4145
+[@AndreasHae]: https://github.com/AndreasHae
+[@JamesKingdom]: https://github.com/JamesKingdom
+
+#### :bug: Bugfixes
+* Fix bug causing icons not to update after a node drag ([#5045])
+* Fix tooltip location for data layers button ([#5042], thanks [@thomas-hervey])
+
+[#5045]: https://github.com/openstreetmap/iD/issues/5045
+[#5042]: https://github.com/openstreetmap/iD/issues/5042
+[@thomas-hervey]: https://github.com/thomas-hervey
+
+#### :earth_asia: Localization
+* Add Australian address format ([#5039])
+
+[#5039]: https://github.com/openstreetmap/iD/issues/5039
+
+#### :rocket: Presets
+* Add a window icon, use it for `craft=glaziery` and a few other presets ([#5018])
+* Allow `power=pole` preset for a standalone point ([#5059], [#5051])
+* Add preset for `shop=motorcycle_repair` ([#5054], thanks [@demonshreder])
+* Add preset for `leisure=bleachers` ([#5031], thanks [@rivermont])
+
+[#5059]: https://github.com/openstreetmap/iD/issues/5059
+[#5054]: https://github.com/openstreetmap/iD/issues/5054
+[#5051]: https://github.com/openstreetmap/iD/issues/5051
+[#5031]: https://github.com/openstreetmap/iD/issues/5031
+[#5018]: https://github.com/openstreetmap/iD/issues/5018
+[@demonshreder]: https://github.com/demonshreder
+[@rivermont]: https://github.com/rivermont
+
+
 # 2.8.2
 ##### May 14, 2018
 
@@ -60,7 +128,6 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@guyarad]: https://github.com/guyarad
 
 #### :rocket: Presets
-
 * Add preset for `man_made=clearcut` ([#5027], thanks [@obama])
 * Add preset for `building=grandstand` ([#5026], thanks [@tyrasd])
 * Remove trailing space from health food preset ([#5022])
@@ -86,7 +153,6 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#4997]: https://github.com/openstreetmap/iD/issues/4997
 
 #### :bug: Bugfixes
-
 * Avoid reversing ways when using the join operation ([#4872])
 * Fix join-line and join-point cursors ([#4887])
 * Fix tabbing between fields in the tag editor on Firefox ([#4991])

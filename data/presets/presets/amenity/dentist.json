@@ -1,5 +1,5 @@
 {
-    "icon": "dentist",
+    "icon": "maki-dentist",
     "fields": [
         "name",
         "operator",

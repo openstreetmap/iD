@@ -83,16 +83,16 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal('#surface',
             t('intro.navigation.zoom', {
-                plus: icon('#icon-plus', 'pre-text'),
-                minus: icon('#icon-minus', 'pre-text')
+                plus: icon('#iD-icon-plus', 'pre-text'),
+                minus: icon('#iD-icon-minus', 'pre-text')
             })
         );
 
         context.map().on('drawn.intro', function() {
             reveal('#surface',
                 t('intro.navigation.zoom', {
-                    plus: icon('#icon-plus', 'pre-text'),
-                    minus: icon('#icon-minus', 'pre-text')
+                    plus: icon('#iD-icon-plus', 'pre-text'),
+                    minus: icon('#iD-icon-minus', 'pre-text')
                 }), { duration: 0 }
             );
         });
@@ -360,7 +360,7 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         var selector = '.entity-editor-pane button.preset-close svg use';
-        var href = d3_select(selector).attr('href') || '#icon-close';
+        var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         reveal('.entity-editor-pane',
             t('intro.navigation.close_townhall', { button: icon(href, 'pre-text') })
@@ -373,7 +373,7 @@ export function uiIntroNavigation(context, reveal) {
         context.history().on('change.intro', function() {
             // update the close icon in the tooltip if the user edits something.
             var selector = '.entity-editor-pane button.preset-close svg use';
-            var href = d3_select(selector).attr('href') || '#icon-close';
+            var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
             reveal('.entity-editor-pane',
                 t('intro.navigation.close_townhall', { button: icon(href, 'pre-text') }),
@@ -496,7 +496,7 @@ export function uiIntroNavigation(context, reveal) {
 
     function editorStreet() {
         var selector = '.entity-editor-pane button.preset-close svg use';
-        var href = d3_select(selector).attr('href') || '#icon-close';
+        var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         reveal('.entity-editor-pane',
             t('intro.navigation.editor_street', {
@@ -513,7 +513,7 @@ export function uiIntroNavigation(context, reveal) {
         context.history().on('change.intro', function() {
             // update the close icon in the tooltip if the user edits something.
             var selector = '.entity-editor-pane button.preset-close svg use';
-            var href = d3_select(selector).attr('href') || '#icon-close';
+            var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
             reveal('.entity-editor-pane',
                 t('intro.navigation.editor_street', {

@@ -61,7 +61,7 @@ export function uiIntroWelcome(context, reveal) {
             .insert('svg', 'span')
             .attr('class', 'tooltip-illustration')
             .append('use')
-            .attr('xlink:href', '#walkthrough-mouse');
+            .attr('xlink:href', '#iD-walkthrough-mouse');
 
         tooltip
             .append('div')
@@ -102,7 +102,7 @@ export function uiIntroWelcome(context, reveal) {
             .insert('svg', 'span')
             .attr('class', 'tooltip-illustration')
             .append('use')
-            .attr('xlink:href', '#walkthrough-mouse');
+            .attr('xlink:href', '#iD-walkthrough-mouse');
 
         tooltip
             .append('div')

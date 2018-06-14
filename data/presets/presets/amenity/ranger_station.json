@@ -1,4 +1,5 @@
 {
+    "icon": "maki-ranger-station",
     "fields": [
         "name",
         "operator",

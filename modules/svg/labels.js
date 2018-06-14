@@ -5,7 +5,6 @@ import _throttle from 'lodash-es/throttle';
 import { geoPath as d3_geoPath } from 'd3-geo';
 
 import rbush from 'rbush';
-import { dataFeatureIcons } from '../../data';
 import { textDirection } from '../util/locale';
 
 import {
@@ -218,7 +217,7 @@ export function svgLabels(projection, context) {
                 if (!picon) {
                     return '';
                 } else {
-                    var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                    var isMaki = /^maki-/.test(picon);
                     return '#' + picon + (isMaki ? '-15' : '');
                 }
             });

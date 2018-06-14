@@ -1,5 +1,5 @@
 {
-    "icon": "warehouse",
+    "icon": "fas-warehouse",
     "fields": [
         "name",
         "capacity"

@@ -67,7 +67,7 @@ export function uiInfo(context) {
                 .append('button')
                 .attr('class', 'close')
                 .on('click', function (d) { toggle(d); })
-                .call(svgIcon('#icon-close'));
+                .call(svgIcon('#iD-icon-close'));
 
             enter
                 .append('div')

@@ -1,5 +1,5 @@
 {
-    "icon": "parking",
+    "icon": "maki-parking",
     "fields": [
         "name",
         "operator",

@@ -1,5 +1,5 @@
 {
-    "icon": "veterinary",
+    "icon": "maki-veterinary",
     "fields": [
         "name",
         "operator",

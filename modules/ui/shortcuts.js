@@ -199,7 +199,7 @@ export function uiShortcuts() {
 
                 if (click && click[1]) {
                     selection
-                        .call(svgIcon('#walkthrough-mouse', 'mouseclick', click[1]));
+                        .call(svgIcon('#iD-walkthrough-mouse', 'mouseclick', click[1]));
                 } else {
                     selection
                         .append('kbd')

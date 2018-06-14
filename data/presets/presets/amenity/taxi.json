@@ -1,5 +1,5 @@
 {
-    "icon": "car",
+    "icon": "fas-taxi",
     "fields": [
         "name",
         "operator",

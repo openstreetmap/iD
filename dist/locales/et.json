@@ -981,6 +981,9 @@
                 "fence_type": {
                     "label": "Tüüp"
                 },
+                "fixme": {
+                    "label": "Paranda mind"
+                },
                 "fuel": {
                     "label": "Kütus"
                 },
@@ -1329,7 +1332,7 @@
                     "label": "Puud"
                 },
                 "usage_rail": {
-                    "label": "Kasutusostarve"
+                    "label": "Kasutusotstarve"
                 },
                 "visibility": {
                     "label": "Nähtavus"
@@ -1922,7 +1925,7 @@
                 },
                 "building/ruins": {
                     "name": "Hoone varemed",
-                    "terms": "varemed,purunenud,maha jäätud"
+                    "terms": "varemed,purunenud,maha jäetud"
                 },
                 "building/school": {
                     "name": "Koolihoone",
@@ -3486,8 +3489,8 @@
                     "terms": "einestuskoht,söögikoht"
                 },
                 "tourism/theme_park": {
-                    "name": "Teemapark",
-                    "terms": "lõbustuspark"
+                    "name": "Lõbustuspark",
+                    "terms": "teemapark,seikluskeskus,perepark,seikluspark"
                 },
                 "tourism/viewpoint": {
                     "name": "Vaatekoht",
@@ -3669,7 +3672,7 @@
                     "terms": "vesi,vee"
                 },
                 "waterway/waterfall": {
-                    "name": "Kosk"
+                    "name": "Juga"
                 },
                 "waterway/weir": {
                     "name": "Ülevoolupais",

@@ -715,6 +715,9 @@
             "zoom": "縮放到圖層",
             "browse": "瀏覽檔案"
         },
+        "streetside": {
+            "report": "回報關於此照片的隱私疑慮"
+        },
         "mapillary_images": {
             "tooltip": "從 Mapillary 來的街道級照片",
             "title": "照片覆蓋層 (Mapillary)"
@@ -3996,6 +3999,10 @@
                 "emergency/destination": {
                     "name": "緊急通道目的地"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "滅火器",
+                    "terms": "滅火器"
+                },
                 "emergency/fire_hydrant": {
                     "name": "消防栓",
                     "terms": "消防栓,消防設施,"
@@ -4199,7 +4206,7 @@
                     "terms": "電梯,升降梯"
                 },
                 "highway/footway": {
-                    "name": "人行道",
+                    "name": "步道",
                     "terms": "步行徑,人行步道"
                 },
                 "highway/give_way": {
@@ -4597,6 +4604,10 @@
                     "name": "鳥類棲息處",
                     "terms": "鳥類棲息處,鳥類棲地,鳥類藏身處"
                 },
+                "leisure/bleachers": {
+                    "name": "看台",
+                    "terms": "看台,看臺"
+                },
                 "leisure/bowling_alley": {
                     "name": "保齡球館",
                     "terms": "保齡球館,保齡球場,地球社"
@@ -4856,6 +4867,10 @@
                 "man_made/chimney": {
                     "name": "煙囪",
                     "terms": "煙筒"
+                },
+                "man_made/clearcut": {
+                    "name": "伐木林",
+                    "terms": "人工林"
                 },
                 "man_made/crane": {
                     "name": "起重機",
@@ -6020,6 +6035,10 @@
                     "name": "機車行",
                     "terms": "摩托車行,機器腳踏車行"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "摩托車維修店",
+                    "terms": "摩托車維修店,機車維修店,機車行,摩托車行"
+                },
                 "shop/music": {
                     "name": "音樂店",
                     "terms": "唱片行"
@@ -6920,6 +6939,22 @@
                 "name": "開放街圖台灣郵件論壇",
                 "description": "Talk-tw 是台灣社群專門討論有關台灣圖資的官方郵件論壇"
             },
+            "OSM-TH-CNX-meetup": {
+                "name": "OSM 清邁聚會",
+                "description": "開放街圖清邁社群不定期聚會",
+                "extendedDescription": "清邁開放街圖社群每隔幾個月的時候的聚會，歡迎接洽以及找尋 {url} 下次聚會時間"
+            },
+            "OSM-TH-forum": {
+                "name": "開放街圖泰國論壇",
+                "description": "開放街圖泰國網頁論壇 "
+            },
+            "al-forum": {
+                "name": "開放街圖阿爾巴尼亞論壇",
+                "description": "開放街圖阿爾巴尼亞論壇"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana"
+            },
             "at-forum": {
                 "name": "開放街圖奧地利論壇",
                 "description": "開放街圖在奧地利問答的官方論壇"
@@ -6965,6 +7000,9 @@
                 "name": "Talk-be 郵件論壇",
                 "description": "Talk-be 是比利時社群的官方郵件論壇 "
             },
+            "be-maptime": {
+                "name": "Maptime Belgium"
+            },
             "be-matrix": {
                 "name": "OpenStreetMap BE Matrix channel",
                 "description": "歡迎所有圖客！"
@@ -6978,7 +7016,6 @@
                 "name": "開放街圖比利時 Twitter"
             },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz 郵件論壇",
                 "description": "Talk-cz 是捷克社群的官方郵件論壇 "
             },
             "dk-forum": {

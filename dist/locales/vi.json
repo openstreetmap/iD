@@ -715,6 +715,9 @@
             "zoom": "Phóng vừa lớp",
             "browse": "Duyệt tập tin"
         },
+        "streetside": {
+            "report": "Báo cáo lo ngại riêng tư trong hình"
+        },
         "mapillary_images": {
             "tooltip": "Hình ảnh cấp phố do Mapillary cung cấp",
             "title": "Lớp phủ Hình ảnh (Mapillary)"
@@ -1546,7 +1549,7 @@
                     "label": "Loại Tiệm"
                 },
                 "bench": {
-                    "label": "Ghế"
+                    "label": "Băng ghế"
                 },
                 "bicycle_parking": {
                     "label": "Kiểu"
@@ -2277,6 +2280,7 @@
                     "placeholder": "1, 2, 3…"
                 },
                 "phone": {
+                    "label": "Số Điện thoại",
                     "placeholder": "+84 1 234 5678"
                 },
                 "piste/difficulty": {
@@ -2947,8 +2951,8 @@
                     "terms": "vỉ, vỉ nướng thịt, bbq, vi, vi nuong thit"
                 },
                 "amenity/bench": {
-                    "name": "Ghế",
-                    "terms": "ghế dài, ghế, ghế ngồi, chỗ ngồi, ghe dai, ghe, ghe ngoi, cho ngoi"
+                    "name": "Băng ghế",
+                    "terms": "băng ghế, ghế dài, ghế, ghế ngồi, chỗ ngồi, bang ghe, ghe dai, ghe, ghe ngoi, cho ngoi"
                 },
                 "amenity/bicycle_parking": {
                     "name": "Chỗ Đậu Xe đạp",
@@ -3667,6 +3671,10 @@
                     "name": "Dãy Ga ra",
                     "terms": "dãy ga ra, dãy ga-ra, dãy nhà để xe, day ga ra, day ga-ra, day nha de xe"
                 },
+                "building/grandstand": {
+                    "name": "Khán đài",
+                    "terms": "khán đài, khan dai"
+                },
                 "building/greenhouse": {
                     "name": "Nhà kính",
                     "terms": "nhà kính, nhà kiếng, nhà trồng rau, nhà trồng hoa, nha kinh, nha kieng, nha trong rau, nha trong hoa"
@@ -3990,6 +3998,10 @@
                 },
                 "emergency/destination": {
                     "name": "Dịch vụ Khẩn cấp Đến nơi"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Bình Cứu hỏa",
+                    "terms": "bình cứu hỏa, bình cứu hoả, bình chữa cháy, bình chữa lửa, binh cuu hoa, binh chua chay, binh chua lua"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Trụ Cứu hỏa",
@@ -4592,6 +4604,10 @@
                     "name": "Căn nhà Quan sát Chim",
                     "terms": "căn nhà quan sát chim, căn nhà quan sát động vật, can nha quan sat chim, can nha quan sat dong vat"
                 },
+                "leisure/bleachers": {
+                    "name": "Khán đài Ngoài trời",
+                    "terms": "khán đài ngoài trời, băng ghế, khan dai ngoai troi, bang ghe"
+                },
                 "leisure/bowling_alley": {
                     "name": "Khu Bowling",
                     "terms": "khu bowling, trung tâm bowling, khu bóng gỗ, trung tam bowling, khu bong go"
@@ -4851,6 +4867,10 @@
                 "man_made/chimney": {
                     "name": "Ống khói",
                     "terms": "ống khói, lò sưởi, ong khoi, lo suoi"
+                },
+                "man_made/clearcut": {
+                    "name": "Rừng bị Chặt trắng",
+                    "terms": "rừng bị chặt trắng, rừng được chặt trắng, rung bi chat trang, rung duoc chat trang"
                 },
                 "man_made/crane": {
                     "name": "Cẩu",
@@ -6015,6 +6035,10 @@
                     "name": "Tiệm Xe máy",
                     "terms": "tiệm xe máy, tiệm xe gắn máy, tiệm xe hai bánh, chỗ bán xe máy, cửa hàng xe máy, tiem xe may, tiem xe gan may, tiem xe hai banh, cho ban xe may, cua hang xe may"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Tiệm Sửa Xe máy",
+                    "terms": "tiệm sửa xe máy, cửa hàng sửa xe máy, tiệm sửa xe mô tô, cửa hàng sửa xe mô tô, tiem sua xe may, cua hang sua xe may, tiem sua xe mo to, cua hang sua xe mo to"
+                },
                 "shop/music": {
                     "name": "Tiệm Âm nhạc",
                     "terms": "tiệm nhạc cụ, tiệm đĩa nhạc, tiệm thiết bị âm nhạc, tiệm bản nhạc, chỗ bán nhạc, quầy nhạc, cửa hàng nhạc, cửa hiệu nhạc, tiem nhac cu, tiem dia nhac, tiem thiet bi am nhac, tiem ban nhac, cho ban nhac, quay nhac, cua hang nhac, cua hieu nhac"
@@ -6793,7 +6817,8 @@
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
-                "description": "Cải thiện OpenStreetMap tại Bangladesh"
+                "description": "Cải thiện OpenStreetMap tại Bangladesh",
+                "extendedDescription": "Bạn có lập bản đồ tại Bangladesh? Bạn có thắc mắc, muốn liên hệ với cộng đồng tại đây? Mời bạn tham gia tại {url}."
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Ấn Độ – tham gia lập bản đồ hàng xóm",
@@ -6837,6 +6862,10 @@
             "OSM-japan-twitter": {
                 "name": "Twitter OpenStreetMap Nhật Bản",
                 "description": "Thẻ băm tại Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Nhật Bản",
+                "description": "Những người lập bản đồ và người dùng OpenStreetMap ở Nhật Bản"
             },
             "OSM-korea-telegram": {
                 "name": "Kênh Telegram OSM Hàn Quốc",
@@ -6906,6 +6935,28 @@
                 "name": "Danh sách thư OpenStreetMap Đài Loan",
                 "description": "talk-tw là danh sách thư chính thức của cộng đồng Đài Loan"
             },
+            "OSM-TH-CNX-meetup": {
+                "name": "Họp mặt OSM Chiềng Mai"
+            },
+            "OSM-TH-facebook": {
+                "name": "Nhóm Facebook OpenStreetMap Thái Lan",
+                "description": "Nhóm Facebook dành cho những người OpenStreetMap tại Thái Lan"
+            },
+            "OSM-TH-forum": {
+                "name": "Diễn đàn OpenStreetMap Thái Lan",
+                "description": "Diễn đàn Web của OpenStreetMap Thái Lan"
+            },
+            "al-forum": {
+                "name": "Diễn đàn OSM Albania",
+                "description": "Diễn đàn OpenStreetMap Albania"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana"
+            },
+            "al-telegram": {
+                "name": "Kênh Telegram OSM Albania",
+                "description": "Kênh Telegram OpenStreetMap Albania"
+            },
             "at-forum": {
                 "name": "Diễn đàn OpenStreetMap Áo",
                 "description": "Diễn đàn chính thức dành cho các câu hỏi về OpenStreetMap trong và chung quanh nước Áo"
@@ -6951,6 +7002,9 @@
                 "name": "Danh sách thư talk-be",
                 "description": "talk-be là danh sách thư chính thức của cộng đồng OSM tại Bỉ"
             },
+            "be-maptime": {
+                "name": "Maptime Bỉ"
+            },
             "be-matrix": {
                 "name": "Kênh Matrix OpenStreetMap Bỉ",
                 "description": "Mời mọi người tham gia!"
@@ -6960,10 +7014,23 @@
                 "description": "Họp mặt dành cho mọi người quan tâm đến OpenStreetMap"
             },
             "be-twitter": {
-                "name": "Twitter OpenStreetMap Bỉ"
+                "name": "Twitter OpenStreetMap Bỉ",
+                "description": "OSM Bỉ tại Twitter: @osm_be"
+            },
+            "czech-community": {
+                "name": "Cộng đồng OSM Séc",
+                "description": "Trang bản đồ và thông tin liên lạc với thành viên OSM tại Séc"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap Séc tại Facebook",
+                "description": "Theo dõi cộng đồng Séc tại Facebook – có cả bản dịch WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter Séc @osmcz",
+                "description": "Theo dõi cộng đồng Séc tại Twitter – có cả bản dịch WeeklyOSM!"
             },
             "talk-cz-mailinglist": {
-                "name": "Danh sách thư talk-cz",
+                "name": "Danh sách thư Séc (talk-cz)",
                 "description": "talk-cz là danh sách thư chính thức của cộng đồng Séc"
             },
             "dk-forum": {
@@ -6977,6 +7044,18 @@
             "dk-mailinglist": {
                 "name": "Danh sách thư talk-dk",
                 "description": "Danh sách thư để thảo luận về OpenStreetMap tại Đan Mạch"
+            },
+            "fi-forum": {
+                "name": "Diễn đàn OpenStreetMap Phần Lan",
+                "description": "Diễn đàn Web của OpenStreetMap Phần Lan"
+            },
+            "fi-irc": {
+                "name": "IRC OpenStreetMap Phần Lan",
+                "description": "Hãy tham gia #osm-fi tại irc.oftc.net (cổng 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Danh sách thư talk-fi",
+                "description": "talk-fi là danh sách thư chính thức của cộng đồng Phần Lan"
             },
             "fr-facebook": {
                 "name": "Trang Facebook của OpenStreetMap Pháp",
@@ -7030,6 +7109,10 @@
                 "name": "Danh sách OWL",
                 "description": "Đây là danh sách thư của cộng đồng OSM tại Ostwestfalen-Lippe"
             },
+            "de-telegram": {
+                "name": "Telegram OpenStreetMap Đức",
+                "description": "Hãy tham gia siêu nhóm Telegram của OpenStreetMap Đức tại {url}"
+            },
             "osm-de": {
                 "name": "OpenStreetMap Đức",
                 "description": "Trang thông tin về OpenStreetMap tại Đức"
@@ -7043,7 +7126,8 @@
                 "description": "Diễn đàn Web của OpenStreetMap Hungary"
             },
             "hu-meetup": {
-                "name": "Họp mặt OpenStreetMap Hungary"
+                "name": "Họp mặt OpenStreetMap Hungary",
+                "description": "Trang tổ chức cuộc họp mặt tại Hungary"
             },
             "it-facebook": {
                 "name": "Facebook OpenStreetMap Ý",
@@ -7056,6 +7140,10 @@
             "it-mailinglist": {
                 "name": "Danh sách thư talk-it",
                 "description": "talk-it là danh sách thư chính thức của cộng đồng Ý"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Ý"
             },
             "it-twitter": {
                 "name": "Twitter OpenStreetMap Ý",
@@ -7153,6 +7241,14 @@
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver",
                 "description": "Những người lập bản đồ và người dùng OpenStreetMap ở vùng Vancouver, British Columbia"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Cuba"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM Nicaragua tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Nicaragua"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Cộng đồng OpenStreetMap tại Khu vực vịnh",
@@ -7300,7 +7396,8 @@
                 "description": "Hãy tham gia #osm-ar tại irc.oftc.net (cổng 6667)"
             },
             "OSM-AR-mailinglist": {
-                "name": "Danh sách thư talk-ar"
+                "name": "Danh sách thư talk-ar",
+                "description": "Danh sách thư lịch sử, ít dùng ngày nay"
             },
             "OSM-AR-telegram": {
                 "name": "Telegram OpenStreetMap Argentina",
@@ -7369,6 +7466,10 @@
                 "name": "Danh sách thư talk-co",
                 "description": "Danh sách thư để thảo luận về OpenStreetMap tại Colombia"
             },
+            "OSM-CO-telegram": {
+                "name": "OSM Colombia tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Colombia"
+            },
             "OSM-CO-twitter": {
                 "name": "Twitter OpenStreetMap Colombia",
                 "description": "Theo dõi chúng tôi trên Twitter: {url}"
@@ -7376,6 +7477,14 @@
             "OSM-CO": {
                 "name": "OpenStreetMap Colombia",
                 "description": "Tin tức về cộng đồng OpenStreetMap Colombia và Quỹ OSMCo"
+            },
+            "OSM-EC-telegram": {
+                "name": "OSM Ecuador tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Ecuador"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paraguay tại Telegram",
+                "description": "Trò chuyện Telegram của OpenStreetMap Paraguay"
             },
             "OSM-PE-facebook": {
                 "name": "Facebook OpenStreetMap Peru",
@@ -7413,6 +7522,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap tại Reddit",
                 "description": "/r/openstreetmap/ là nơi để tìm hiểu thêm về OpenStreetMap. Có thắc mắc thì hỏi ở đây!"
+            },
+            "OSM-Telegram": {
+                "name": "Telegram OpenStreetMap",
+                "description": "Hãy tham gia siêu nhóm Telegram của OpenStreetMap toàn cầu tại {url}"
             },
             "OSM-Twitter": {
                 "name": "Twitter OpenStreetMap",

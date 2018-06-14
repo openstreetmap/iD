@@ -1,5 +1,5 @@
 {
-    "icon": "poi-fire-hydrant",
+    "icon": "temaki-fire_hydrant",
     "fields": [
         "fire_hydrant/type",
         "fire_hydrant/position",

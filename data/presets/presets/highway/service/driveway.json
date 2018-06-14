@@ -1,5 +1,5 @@
 {
-    "icon": "highway-service",
+    "icon": "iD-highway-service",
     "fields": [
         "name",
         "oneway",

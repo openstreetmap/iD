@@ -1,5 +1,5 @@
 {
-    "icon": "poi-monorail",
+    "icon": "temaki-monorail",
     "fields": [
         "name",
         "ref_platform",

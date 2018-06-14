@@ -1181,6 +1181,9 @@
                 "aeroway": {
                     "label": "Typ"
                 },
+                "agrarian": {
+                    "label": "Produkty"
+                },
                 "amenity": {
                     "label": "Typ"
                 },
@@ -1400,8 +1403,44 @@
                 "diaper": {
                     "label": "Obsahuje miesto na výmenu plienok"
                 },
+                "direction_cardinal": {
+                    "label": "Svetové strany",
+                    "options": {
+                        "E": "Východ",
+                        "ENE": "Východ-severovýchod",
+                        "ESE": "Východ-juhovýchod",
+                        "N": "Sever",
+                        "NE": "Severovýchod",
+                        "NNE": "Sever-severovýchod",
+                        "NNW": "Sever-severozápad",
+                        "NW": "Severozápad",
+                        "S": "Juh",
+                        "SE": "Juhovýchod",
+                        "SSE": "Juh-juhovýchod",
+                        "SSW": "Juh-juhozápad",
+                        "SW": "Juhozápad",
+                        "W": "Západ",
+                        "WNW": "Západ-severozápad",
+                        "WSW": "Západ-juhozápad"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Smer",
+                    "options": {
+                        "anticlockwise": "Proti smeru hodinových ručičiek",
+                        "clockwise": "V smere hodinových ručičiek"
+                    }
+                },
+                "direction_vertex": {
+                    "options": {
+                        "forward": "Dopredu"
+                    }
+                },
                 "display": {
                     "label": "Ciferník"
+                },
+                "distance": {
+                    "label": "Celková vzdialenosť"
                 },
                 "dock": {
                     "label": "Typ"
@@ -1522,6 +1561,9 @@
                 "hashtags": {
                     "placeholder": "#príklad"
                 },
+                "healthcare/speciality": {
+                    "label": "Špeciality"
+                },
                 "height": {
                     "label": "Výška (metrov)"
                 },
@@ -1537,6 +1579,31 @@
                 "hoops": {
                     "label": "Koše",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "label": "Drezúra koní",
+                    "options": {
+                        "equestrian": "Áno",
+                        "undefined": "Nie"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Jazda na koni",
+                    "options": {
+                        "horse_riding": "Áno",
+                        "undefined": "Nie"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Obtiažnosť pri jazde na koni",
+                    "placeholder": "Obtiažne, nebezpečné"
+                },
+                "horse_stables": {
+                    "label": "Stajňa",
+                    "options": {
+                        "stables": "Áno",
+                        "undefined": "Nie"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -1557,11 +1624,17 @@
                 "indoor": {
                     "label": "Vnútri"
                 },
+                "industrial": {
+                    "label": "Typ"
+                },
                 "information": {
                     "label": "Typ"
                 },
                 "inscription": {
                     "label": "Nápis"
+                },
+                "intermittent": {
+                    "label": "Striedavý"
                 },
                 "internet_access": {
                     "label": "Prístup k Internetu",
@@ -1674,6 +1747,9 @@
                     "label": "Povolená rýchlosť",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "label": "Doporučená rýchlosť"
+                },
                 "maxstay": {
                     "label": "Maximálna dĺžka parkovania"
                 },
@@ -1769,6 +1845,7 @@
                     "label": "Jednosmerná",
                     "options": {
                         "no": "Nie",
+                        "reversible": "Obojstranný",
                         "undefined": "Pravdepodobne nie",
                         "yes": "Áno"
                     }
@@ -1813,6 +1890,7 @@
                     "label": "Typy platieb"
                 },
                 "phone": {
+                    "label": "Telefón",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -1862,6 +1940,15 @@
                 "plant/output/electricity": {
                     "label": "Elektrický výkon",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "playground/baby": {
+                    "label": "Detská sedačka"
+                },
+                "playground/max_age": {
+                    "label": "Najvyšší vek"
+                },
+                "playground/min_age": {
+                    "label": "Najnižší vek"
                 },
                 "population": {
                     "label": "Populácia"
@@ -2072,6 +2159,12 @@
                     },
                     "placeholder": "Neznáme"
                 },
+                "structure_waterway": {
+                    "options": {
+                        "tunnel": "Tunel"
+                    },
+                    "placeholder": "Neznáme"
+                },
                 "studio": {
                     "label": "Typ"
                 },
@@ -2100,6 +2193,11 @@
                 },
                 "surveillance/zone": {
                     "label": "Monitorovaná zóna"
+                },
+                "switch": {
+                    "options": {
+                        "circuit_breaker": "Istič"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Taktilné značenie"
@@ -2130,6 +2228,9 @@
                 },
                 "tourism": {
                     "label": "Typ"
+                },
+                "tourism_attraction": {
+                    "label": "Turizmus"
                 },
                 "tower/construction": {
                     "label": "Konštrukcia veže",
@@ -2167,12 +2268,35 @@
                     },
                     "placeholder": "Výborná, dobrá, zlá..."
                 },
+                "transformer": {
+                    "options": {
+                        "auto": "Auto-transformátor",
+                        "auxiliary": "Pomocný",
+                        "generator": "Generátor",
+                        "phase_angle_regulator": "Fázový regulátor",
+                        "traction": "Pohon",
+                        "yes": "Neznáme"
+                    }
+                },
                 "trees": {
                     "label": "Stromy"
                 },
                 "tunnel": {
                     "label": "Typ",
                     "placeholder": "Prednastavené"
+                },
+                "usage_rail": {
+                    "label": "Použitý typ",
+                    "options": {
+                        "branch": "Vetva",
+                        "industrial": "Priemyselné",
+                        "main": "Hlavný",
+                        "military": "Armádne",
+                        "tourism": "Cestovný ruch"
+                    }
+                },
+                "vending": {
+                    "label": "Druhy tovaru"
                 },
                 "visibility": {
                     "label": "Viditeľnosť",
@@ -2181,6 +2305,34 @@
                         "house": "Do 5m (16 stôp)",
                         "street": "5 až 20m (16 až 65 stôp)"
                     }
+                },
+                "volcano/status": {
+                    "label": "Stav sopky",
+                    "options": {
+                        "active": "Aktívny",
+                        "dormant": "Nečinná",
+                        "extinct": "Vyhasnutá"
+                    }
+                },
+                "volcano/type": {
+                    "label": "Typ sopky",
+                    "options": {
+                        "scoria": "Škvára",
+                        "shield": "Štít",
+                        "stratovolcano": "Stratovulkán"
+                    }
+                },
+                "voltage": {
+                    "label": "Napätie"
+                },
+                "voltage/primary": {
+                    "label": "Primárne napätie"
+                },
+                "voltage/secondary": {
+                    "label": "Sekundárne napätie"
+                },
+                "voltage/tertiary": {
+                    "label": "Terciárne napätie"
                 },
                 "wall": {
                     "label": "Typ"
@@ -2204,11 +2356,17 @@
                 "wheelchair": {
                     "label": "Prístup pre vozičkárov"
                 },
+                "wholesale": {
+                    "label": "Veľkoobchod"
+                },
                 "width": {
                     "label": "Šírka (metrov)"
                 },
                 "wikipedia": {
                     "label": "Wikipédia"
+                },
+                "windings": {
+                    "label": "Vinutia"
                 }
             },
             "presets": {
@@ -4533,6 +4691,12 @@
                 "tourism/information": {
                     "name": "Informácie",
                     "terms": "informacie,turisticke informacie,turistické informácie"
+                },
+                "tourism/information/board": {
+                    "name": "Informačná tabuľa"
+                },
+                "tourism/information/map": {
+                    "name": "Mapa"
                 },
                 "tourism/motel": {
                     "name": "Motel",

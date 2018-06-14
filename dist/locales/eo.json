@@ -652,7 +652,7 @@
             "thank_you_location": "Dankon por plibonigi la mapon ĉirkaŭ {where}.",
             "help_html": "Viaj ŝanĝoj aperos en OpenStreetMap post kelkaj minutoj. Aktualigo de aliaj mapoj povas okupi pli da tempo.",
             "help_link_text": "Detaloj",
-            "view_on_osm": "Montri ŝanĝoj ĉe OSM",
+            "view_on_osm": "Montri ŝanĝojn ĉe OSM",
             "changeset_id": "Via ŝanĝaro #: {changeset_id}",
             "like_osm": "Ĉu OpenStreetMap plaĉas al vi? Komunikiĝu kun aliaj:",
             "more": "Pli",
@@ -3667,8 +3667,8 @@
                     "terms": "garagharo,garagxaro,garaĝo,aŭtejo,aŭtomobilejo"
                 },
                 "building/grandstand": {
-                    "name": "Spektoteraso",
-                    "terms": "tribuno,spektejo,podio,estrado"
+                    "name": "Spektejo ĉefa",
+                    "terms": "tribuno,podio,estrado,spektoteraso,spektantejo"
                 },
                 "building/greenhouse": {
                     "name": "Kultivdomo",
@@ -3993,6 +3993,10 @@
                 },
                 "emergency/destination": {
                     "name": "Vivsav-serva aliro: nur al celloko"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Fajr-estingilo",
+                    "terms": "fajrestingilo,fajroestingilo,estingilo,malfajrilo"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Hidranto",
@@ -4594,6 +4598,10 @@
                 "leisure/bird_hide": {
                     "name": "Bird-observejo",
                     "terms": "birdobservejo"
+                },
+                "leisure/bleachers": {
+                    "name": "Spektejo",
+                    "terms": "tribuno,podio,estrado,spektoteraso,spektantejo,benkoj"
                 },
                 "leisure/bowling_alley": {
                     "name": "Kegloludejo",
@@ -6022,6 +6030,10 @@
                     "name": "Motorcikla vendejo",
                     "terms": "motorcikloj,motocikloj"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Motorcikl-riparejo",
+                    "terms": "motocikloj,motorcikloj,riparejo"
+                },
                 "shop/music": {
                     "name": "Muzika vendejo",
                     "terms": "muzikvendejo,lumdiskoj,cd,laserdiskoj"
@@ -6794,9 +6806,13 @@
                 "name": "OpenStreetMap ĉe Reddit",
                 "description": "/r/openstreetmap/ estas bonega loko por sciiĝi pli pri OpenStreetMap. Demandu pri io ajn!"
             },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap ĉe Telegram",
+                "description": "Aniĝu al la tutmonda Telegram-grupo pri OpenStreetMap ĉe {url}"
+            },
             "OSM-Twitter": {
                 "name": "OpenStreetMap ĉe Twitter",
-                "description": "Sekvi nin ĉe Twitter ĉe {url}"
+                "description": "Sekvu nin ĉe Twitter ĉe {url}"
             },
             "OSMF": {
                 "name": "Fondaĵo OpenStreetMap",

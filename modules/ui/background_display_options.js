@@ -94,7 +94,7 @@ export function uiBackgroundDisplayOptions(context) {
                 if (d3_event.button !== 0) return;
                 updateValue(d, 1);
             })
-            .call(svgIcon('#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
+            .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
 
         // update

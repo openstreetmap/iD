@@ -717,7 +717,8 @@
         },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
-            "title": "Photo Overlay (Streetside)"
+            "title": "Photo Overlay (Bing Streetside)",
+            "report": "Report a privacy concern with this image"
         },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",
@@ -4063,6 +4064,10 @@
                     "name": "Defibrillator",
                     "terms": "AED"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Fire Extinguisher",
+                    "terms": ""
+                },
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
                     "terms": "fire plug"
@@ -4650,6 +4655,10 @@
                 "leisure/bird_hide": {
                     "name": "Bird Hide",
                     "terms": "machan,ornithology"
+                },
+                "leisure/bleachers": {
+                    "name": "Bleachers",
+                    "terms": "crowd,bench,sports,stand,stands,seat,seating"
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowling Alley",
@@ -6079,6 +6088,10 @@
                     "name": "Money Lender",
                     "terms": ""
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Motorcycle Repair Shop",
+                    "terms": "auto,bike,garage,motorcycle,repair,service"
+                },
                 "shop/motorcycle": {
                     "name": "Motorcycle Dealership",
                     "terms": "bike"
@@ -6598,6 +6611,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Orthophoto Flanders most recent © AGIV"
+                },
+                "name": "AGIV Flanders most recent aerial imagery"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                },
+                "name": "AGIV Flanders 2013-2015 aerial imagery 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
@@ -6700,6 +6731,12 @@
                 },
                 "name": "OSM Inspector: Tagging"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) most recent aerial imagery"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerical imagery"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
             },
@@ -6714,6 +6751,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
                 "name": "U.S. Forest Roads Overlay"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6984,6 +7045,10 @@
                 "description": "Irregular meeting of the OpenStreetMap community in Chiang Mai",
                 "extendedDescription": "Members of the OpenStreetMap community meet every few months in Chiang Mai. Get in contact and check out {url} to see when the next meetup is scheduled"
             },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap TH Facebook group",
+                "description": "Facebook group for OpenStreetMappers in Thailand"
+            },
             "OSM-TH-forum": {
                 "name": "OpenStreetMap TH forum",
                 "description": "OpenStreetMap Thailand web forum"
@@ -7065,8 +7130,20 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium on Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Czech OSM community",
+                "description": "Map portal, website and contacts on OSM members in Czechia"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ on Facebook",
+                "description": "Follow czech community on Facebook - including translated WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Czech twitter @osmcz",
+                "description": "Follow czech community on Twitter - including translated WeeklyOSM!"
+            },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz Mailing List",
+                "name": "Czech mailing list (talk-cz)",
                 "description": "Talk-cz is the official mailing list for Czech community"
             },
             "dk-forum": {
@@ -7144,6 +7221,10 @@
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Germany Telegram",
+                "description": "Join the OpenStreetMap Germany Telegram supergroup at {url}"
             },
             "osm-de": {
                 "name": "OpenStreetMap Germany",
@@ -7566,6 +7647,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",
                 "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Join the OpenStreetMap Telegram global supergroup at {url}"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",

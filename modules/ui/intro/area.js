@@ -59,13 +59,13 @@ export function uiIntroArea(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-area',
-                t('intro.areas.add_playground', { button: icon('#icon-area', 'pre-text') }));
+                t('intro.areas.add_playground', { button: icon('#iD-icon-area', 'pre-text') }));
 
             tooltip.selectAll('.tooltip-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')
-                .attr('xlink:href', '#landuse-images');
+                .attr('xlink:href', '#iD-graphic-areas');
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'add-area') return;
@@ -420,7 +420,7 @@ export function uiIntroArea(context, reveal) {
         });
 
         reveal('.entity-editor-pane',
-            t('intro.areas.describe_playground', { button: icon('#icon-apply', 'pre-text') }),
+            t('intro.areas.describe_playground', { button: icon('#iD-icon-apply', 'pre-text') }),
             { duration: 300 }
         );
 

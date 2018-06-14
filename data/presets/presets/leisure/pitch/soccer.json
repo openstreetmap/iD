@@ -1,5 +1,5 @@
 {
-    "icon": "soccer",
+    "icon": "maki-soccer",
     "fields": [
         "name",
         "surface",
@@ -18,7 +18,7 @@
         "value": "soccer"
     },
     "terms": [
-	"football"
+    	"football"
     ],
     "name": "Soccer Field"
 }

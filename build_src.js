@@ -32,7 +32,7 @@ module.exports = function buildSrc() {
                         browser: false
                     }),
                     commonjs(),
-                    json()
+                    json( { indent: '' })
                 ],
                 cache: cache
             })

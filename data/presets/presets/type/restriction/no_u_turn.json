@@ -1,5 +1,5 @@
 {
-    "icon": "restriction-no-u-turn",
+    "icon": "iD-restriction-no-u-turn",
     "fields": [
         "except"
     ],

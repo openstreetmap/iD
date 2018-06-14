@@ -1,5 +1,5 @@
 {
-    "icon": "lodging",
+    "icon": "maki-lodging",
     "fields": [
         "name",
         "operator",

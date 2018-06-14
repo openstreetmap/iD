@@ -1,5 +1,5 @@
 {
-    "icon": "poi-wind",
+    "icon": "temaki-wind_turbine",
     "fields": [
         "operator",
         "generator/source",

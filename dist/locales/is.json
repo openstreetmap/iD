@@ -150,7 +150,9 @@
                     "vertex": "Tengdi leið við aðra leið.",
                     "line": "Tengdi leið við línu.",
                     "area": "Tengdi leið við svæði."
-                }
+                },
+                "relation": "Það er ekki hægt að tengja þessi atriði því þau eru með gagnstæð venslahlutverk.",
+                "restriction": "Það er ekki hægt að tengja þessi atriði því það myndi skemma \"{relation}\" vensl."
             },
             "disconnect": {
                 "title": "Aftengja",
@@ -168,6 +170,8 @@
                 "annotation": "Sameinaði {n} fitjur.",
                 "not_eligible": "Það er ekki hægt að sameina þessa hluti.",
                 "not_adjacent": "Það er ekki hægt að sameina þessi atriði því endapunktar þeirra eru ekki tengdir.",
+                "restriction": "Það er ekki hægt að sameina þessi atriði því það myndi skemma \"{relation}\" vensl.",
+                "relation": "Það er ekki hægt að sameina þessi atriði því þau eru með gagnstæð venslahlutverk.",
                 "incomplete_relation": "Það er ekki hægt að sameina þessi atriði því ekki er búið að hlaða inn að fullu a.m.k. einu þeirra.",
                 "conflicting_tags": "Það er ekki hægt að sameina þessi atriði því sum merki þeirra eru ekki með samstæð gildi."
             },
@@ -406,6 +410,7 @@
                 "key": "H",
                 "title": "Aðgerðaferill",
                 "selected": "{n} valin",
+                "no_history": "Enginn ferill (nýr eiginleiki)",
                 "version": "Útgáfa",
                 "last_edit": "Síðasta breyting",
                 "edited_by": "Breytt af",
@@ -644,8 +649,19 @@
         },
         "success": {
             "just_edited": "Þú hefur breytt OpenStreetMap!",
+            "thank_you": "Takk fyrir að bæta kortið.",
+            "thank_you_location": "Takk fyrir að bæta kortið í kringum {where}.",
+            "help_html": "Breytingarnar þínar ættu að birtast á OpenStreetMap innan skamms. Breytingar á öðrum kortum og ákveðnum eigindum gætu tekið lengri tíma.",
             "help_link_text": "Nánar",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Skoða breytingar á OSM",
+            "changeset_id": "Breytingasettið þitt #: {changeset_id}",
+            "like_osm": "Kanntu vel við OpenStreetMap? Tengstu öðrum þátttakendum:",
+            "more": "Meira",
+            "events": "Atburðir",
+            "languages": "Tungumál: {languages}",
+            "missing": "Er eitthvað sem vantar á þennan lista?",
+            "tell_us": "Segðu okkur!"
         },
         "confirm": {
             "okay": "Í lagi",
@@ -1772,6 +1788,9 @@
                 "display": {
                     "label": "Birting"
                 },
+                "distance": {
+                    "label": "Heildarfjarlægð"
+                },
                 "dock": {
                     "label": "Tegund"
                 },
@@ -1922,6 +1941,31 @@
                 "hoops": {
                     "label": "Körfur",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Já",
+                        "undefined": "Nei"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Já",
+                        "undefined": "Nei"
+                    }
+                },
+                "horse_scale": {
+                    "options": {
+                        "common": "Auðvelt: Engin vandamál eða erfiðleikar. (sjálfgefið)"
+                    },
+                    "placeholder": "Erfitt, hættulegt..."
+                },
+                "horse_stables": {
+                    "label": "Reiðhús",
+                    "options": {
+                        "stables": "Já",
+                        "undefined": "Nei"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -2222,6 +2266,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Sími",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -5604,6 +5649,7 @@
                 "attribution": {
                     "text": "Skilmálar og umsagnir"
                 },
+                "description": "Útjaðar myndefnis og tökudagsetningar. Merkingar birtast við aðdráttarstig 13 og hærra.",
                 "name": "Eldri myndir frá DigitalGlobe (Premium Vintage)"
             },
             "DigitalGlobe-Standard": {
@@ -5617,6 +5663,7 @@
                 "attribution": {
                     "text": "Skilmálar og umsagnir"
                 },
+                "description": "Útjaðar myndefnis og tökudagsetningar. Merkingar birtast við aðdráttarstig 13 og hærra.",
                 "name": "Eldri myndir frá DigitalGlobe (Standard Vintage)"
             },
             "EsriWorldImagery": {
@@ -5699,6 +5746,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Gult = Kortagögn í almenningseigu frá US Census þjóðskránni. Rautt = Gögn fundust ekki í OpenStreetMap",
                 "name": "TIGER vegir 2017"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Vegur: Grænn útjaðar = óflokkað. Brúnn útjaðar = slóði. Yfirborð: möl = ljósbrún fylling, malbik = svart, hellur = grátt, jarðvegur = hvítt, steypa = blátt, gras = grænt. Árstíðabundið = hvítar rendur",
+                "name": "U.S. Forest vegayfirlag"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -5814,9 +5865,28 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "description": "Fylgstu með okkur á Twitter: {url}"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana á Twitter",
+                "description": "Fylgstu með okkur á Twitter: {url}"
+            },
+            "talk-gh": {
+                "name": "Talk-gh póstlistinn"
+            },
+            "talk-mg": {
+                "name": "Talk-mg póstlistinn"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh"
+            },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Kortagerð með þáttöku nágranna",
                 "description": "Bætum OpenStreetMap-gögn á Indlandi"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter-hópur OpenStreetMap Indland"
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap Japan samfélagið",
@@ -5862,17 +5932,53 @@
                 "name": "Póstlisti OpenStreetMap Tævan",
                 "description": "Talk-ja er opinber póstlisti tævanska OSM-hópsins"
             },
+            "at-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Austurríki",
+                "description": "Twitter-hópur OpenStreetMap í Austurríki: {url}"
+            },
+            "osmgraz-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Graz",
+                "description": "Twitter-hópur OpenStreetMap í Graz"
+            },
             "byosm": {
                 "name": "OpenStreetMap Hvítarússland",
                 "description": "Telegram-hópur OpenStreetMap Hvítarússlands"
             },
+            "be-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Belgíu",
+                "description": "Twitter-hópur OpenStreetMap í Belgíu: @osm_be"
+            },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz póstlistinn",
                 "description": "Talk-ja er opinber póstlisti tékkneska OSM-hópsins"
+            },
+            "fr-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Frakklandi",
+                "description": "Twitter-hópur OpenStreetMap í Frakklandi: {url}"
+            },
+            "de-berlin-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Berlín",
+                "description": "Fylgstu með okkur á Twitter: {url}"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de póstlistinn"
+            },
+            "it-twitter": {
+                "name": "Twitter-hópur OpenStreetMap á Ítalíu",
+                "description": "Fylgstu með okkur á Twitter á {url}"
             },
             "OSM-ES-telegram": {
                 "name": "@OSMes á Telegram",
                 "description": "Telegram-hópur OpenStreetMap Spánn"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Sweden Facebook"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se póstlistinn"
+            },
+            "se-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Svíþjóð",
+                "description": "Fylgstu með okkur á Twitter: {url}"
             },
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver",
@@ -5968,6 +6074,7 @@
                 "description": "Kortagerðarfólk og notendur OpenStreetMap á Phoenix, AZ-svæðinu"
             },
             "PHXGeo-twitter": {
+                "name": "Twitter-hópur PHXGeo",
                 "description": "Fylgstu með okkur á Twitter á {url}"
             },
             "Western-Slope-facebook": {
@@ -5981,7 +6088,8 @@
             },
             "OSM-AR-facebook": {
                 "name": "Facebook-hópur OpenStreetMap Argentína",
-                "description": "Gakktu til liðs við OpenStreetMap Argentína hópinn á Facebook"
+                "description": "Gakktu til liðs við OpenStreetMap Argentína hópinn á Facebook",
+                "extendedDescription": "Fréttir frá fólki á staðnum"
             },
             "OSM-AR-forum": {
                 "name": "Vefspjall (forum) OpenStreetMap Argentína",
@@ -6002,9 +6110,56 @@
                 "name": "Twitter-hópur OpenStreetMap Argentína",
                 "description": "Fylgstu með okkur á Twitter á {url}"
             },
+            "OSM-br-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Brasilíu",
+                "description": "Fylgstu með okkur á Twitter á {url}"
+            },
+            "OSM-CL-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Síle",
+                "description": "Fylgstu með okkur á Twitter á {url}"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co póstlistinn"
+            },
+            "OSM-CO-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Kólumbíu",
+                "description": "Fylgstu með okkur á Twitter á {url}"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe póstlistinn"
+            },
+            "OSM-PE-telegram": {
+                "name": "Telegram-hópur OpenStreetMap í Perú"
+            },
+            "OSM-PE-twitter": {
+                "name": "Twitter-hópur OpenStreetMap í Perú",
+                "description": "Fylgstu með okkur á Twitter á {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap í Perú"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap á Facebook"
+            },
+            "OSM-help": {
+                "name": "Aðstoð með OpenStreetMap"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap á Reddit",
                 "description": "/r/openstreetmap/ er góður staður til að læra meira um OpenStreetMap.  Spurðu okkur um allt milli himins og jarðar!"
+            },
+            "OSM-Twitter": {
+                "name": "Twitter-hópur OpenStreetMap",
+                "description": "Fylgstu með okkur á Twitter á {url}"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap sjálfseignarstofnunin",
+                "events": {
+                    "sotm2018": {
+                        "name": "Ástand landakortsins 2018",
+                        "where": "Mílanó, Ítalíu"
+                    }
+                }
             }
         }
     }

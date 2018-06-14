@@ -99,7 +99,7 @@ export function uiTagReference(tag) {
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
-                .call(svgIcon('#icon-out-link', 'inline'))
+                .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
                 .text(t('inspector.reference'));
 
@@ -110,7 +110,7 @@ export function uiTagReference(tag) {
                     .attr('class', 'tag-reference-comment-link')
                     .attr('target', '_blank')
                     .attr('tabindex', -1)
-                    .call(svgIcon('#icon-out-link', 'inline'))
+                    .call(svgIcon('#iD-icon-out-link', 'inline'))
                     .attr('href', t('commit.about_changeset_comments_link'))
                     .append('span')
                     .text(t('commit.about_changeset_comments'));
@@ -159,7 +159,7 @@ export function uiTagReference(tag) {
             .attr('class', 'tag-reference-button')
             .attr('title', t('icons.information'))
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-inspect'))
+            .call(svgIcon('#iD-icon-inspect'))
             .merge(_button);
 
         _button

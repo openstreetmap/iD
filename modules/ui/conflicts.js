@@ -62,7 +62,7 @@ export function uiConflicts(context) {
             .append('button')
             .attr('class', 'fr')
             .on('click', cancel)
-            .call(svgIcon('#icon-close'));
+            .call(svgIcon('#iD-icon-close'));
 
         headerEnter
             .append('h3')
@@ -108,7 +108,7 @@ export function uiConflicts(context) {
         }
 
         linkEnter
-            .call(svgIcon('#icon-load', 'inline'))
+            .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
             .text(t('save.conflict.download_changes'));
 

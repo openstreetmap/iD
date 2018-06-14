@@ -1,4 +1,5 @@
 import _map from 'lodash-es/map';
+import _includes from 'lodash-es/includes';
 
 import { ascending as d3_ascending } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -88,7 +89,7 @@ export function uiRawTagEditor(context) {
             .append('button')
             .attr('class', 'add-tag')
             .on('click', addTag)
-            .call(svgIcon('#icon-plus', 'light'));
+            .call(svgIcon('#iD-icon-plus', 'light'));
 
 
         var items = list.selectAll('.tag-row')
@@ -132,7 +133,7 @@ export function uiRawTagEditor(context) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
-            .call(svgIcon('#operation-delete'));
+            .call(svgIcon('#iD-operation-delete'));
 
 
         // Update
@@ -280,6 +281,15 @@ export function uiRawTagEditor(context) {
                     suffix = +(match[2] || 1);
                 while (_tags[kNew]) {  // rename key if already in use
                     kNew = base + '_' + suffix++;
+                }
+
+                if (_includes(kNew, '=')) {
+                    var splitStr = kNew.split('=').map(function(str) { return str.trim(); }),
+                        key = splitStr[0],
+                        value = splitStr[1];
+
+                    kNew = key;
+                    d.value = value;
                 }
             }
             tag[kOld] = undefined;

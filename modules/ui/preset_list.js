@@ -50,7 +50,7 @@ export function uiPresetList(context) {
                 .append('button')
                 .attr('class', 'preset-choose')
                 .on('click', function() { dispatch.call('choose', this, currentPreset); })
-                .call(svgIcon((textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'));
+                .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
         } else {
             messagewrap
                 .append('button')
@@ -58,7 +58,7 @@ export function uiPresetList(context) {
                 .on('click', function() {
                     context.enter(modeBrowse(context));
                 })
-                .call(svgIcon('#icon-close'));
+                .call(svgIcon('#iD-icon-close'));
         }
 
         function keydown() {
@@ -119,7 +119,7 @@ export function uiPresetList(context) {
             .on('input', inputevent);
 
         searchWrap
-            .call(svgIcon('#icon-search', 'pre-text'));
+            .call(svgIcon('#iD-icon-search', 'pre-text'));
 
         if (autofocus) {
             search.node().focus();
@@ -177,7 +177,7 @@ export function uiPresetList(context) {
                 .on('click', function() {
                     var isExpanded = d3_select(this).classed('expanded');
                     var iconName = isExpanded ?
-                        (textDirection === 'rtl' ? '#icon-backward' : '#icon-forward') : '#icon-down';
+                        (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
                     d3_select(this)
                         .classed('expanded', !isExpanded);
                     d3_select(this).selectAll('div.label svg.icon use')
@@ -190,7 +190,7 @@ export function uiPresetList(context) {
                 .attr('class', 'label');
 
             label
-                .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'))
+                .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
                 .html(function() { return preset.name() + '&hellip;'; });
 

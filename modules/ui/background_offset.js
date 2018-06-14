@@ -175,7 +175,7 @@ export function uiBackgroundOffset(context) {
                 if (d3_event.button !== 0) return;
                 resetOffset();
             })
-            .call(svgIcon('#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
+            .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
         updateValue();
     }

@@ -1,6 +1,7 @@
 import _some from 'lodash-es/some';
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
+import { svgPointTransform } from './index';
 import { services } from '../services';
 
 
@@ -86,18 +87,24 @@ export function svgMapillarySigns(projection, context, dispatch) {
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedImageKey = selected && selected.key;
+        var transform = svgPointTransform(projection);
 
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
 
+        // exit
         signs.exit()
             .remove();
 
+        // enter
         var enter = signs.enter()
-            .append('foreignObject')
+            .append('use')
             .attr('class', 'icon-sign')
-            .attr('width', '24px')      // for Firefox
-            .attr('height', '24px')     // for Firefox
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-12px')
+            .attr('xlink:href', function(d) { return '#' + d.value; })
             .classed('selected', function(d) {
                 return _some(d.detections, function(detection) {
                     return detection.image_key === selectedImageKey;
@@ -105,21 +112,21 @@ export function svgMapillarySigns(projection, context, dispatch) {
             })
             .on('click', click);
 
-        enter
-            .append('xhtml:body')
-            .attr('class', 'icon-sign-body')
-            .html(service.signHTML);
-
+        // update
         signs
             .merge(enter)
-            .attr('x', function(d) { return projection(d.loc)[0] - 12; })   // offset by -12px to
-            .attr('y', function(d) { return projection(d.loc)[1] - 12; });  // center signs on loc
+            .sort(function(a, b) {
+                return (a === selected) ? 1
+                    : (b === selected) ? -1
+                    : b.loc[1] - a.loc[1];  // sort Y
+            })
+            .attr('transform', transform);
     }
 
 
     function drawSigns(selection) {
-        var enabled = svgMapillarySigns.enabled,
-            service = getService();
+        var enabled = svgMapillarySigns.enabled;
+        var service = getService();
 
         layer = selection.selectAll('.layer-mapillary-signs')
             .data(service ? [0] : []);
@@ -159,8 +166,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     drawSigns.supported = function() {
-        var service = getService();
-        return (service && service.signsSupported());
+        return !!getService();
     };
 
 

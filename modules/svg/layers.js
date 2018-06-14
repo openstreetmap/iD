@@ -18,17 +18,17 @@ import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 
 
 export function svgLayers(projection, context) {
-    var dispatch = d3_dispatch('change'),
-        svg = d3_select(null),
-        layers = [
-            { id: 'osm', layer: svgOsm(projection, context, dispatch) },
-            { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
-            { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
-            { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
-            { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
-            { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
-            { id: 'debug', layer: svgDebug(projection, context, dispatch) }
-        ];
+    var dispatch = d3_dispatch('change');
+    var svg = d3_select(null);
+    var layers = [
+        { id: 'osm', layer: svgOsm(projection, context, dispatch) },
+        { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
+        { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
+        { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
+        { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
+        { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
+        { id: 'debug', layer: svgDebug(projection, context, dispatch) }
+    ];
 
 
     function drawLayers(selection) {

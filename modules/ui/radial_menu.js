@@ -8,9 +8,9 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiRadialMenu(context, operations) {
-    var menu,
-        center = [0, 0],
-        tooltip;
+    var menu;
+    var center = [0, 0];
+    var tooltip;
 
 
     var radialMenu = function(selection) {
@@ -35,10 +35,10 @@ export function uiRadialMenu(context, operations) {
             .transition()
             .attr('opacity', 1);
 
-        var r = 50,
-            a = Math.PI / 4,
-            a0 = -Math.PI / 4,
-            a1 = a0 + (operations.length - 1) * a;
+        var r = 50;
+        var a = Math.PI / 4;
+        var a0 = -Math.PI / 4;
+        var a1 = a0 + (operations.length - 1) * a;
 
         menu
             .append('path')
@@ -76,7 +76,7 @@ export function uiRadialMenu(context, operations) {
             .attr('transform', 'translate(-10,-10)')
             .attr('width', '20')
             .attr('height', '20')
-            .attr('xlink:href', function(d) { return '#operation-' + d.id; });
+            .attr('xlink:href', function(d) { return '#iD-operation-' + d.id; });
 
         tooltip = d3_select(document.body)
             .append('div')
@@ -87,12 +87,12 @@ export function uiRadialMenu(context, operations) {
         }
 
         function mouseover(d, i) {
-            var rect = context.surfaceRect(),
-                angle = a0 + i * a,
-                top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
-                left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
-                bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
-                right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
+            var rect = context.surfaceRect();
+            var angle = a0 + i * a;
+            var top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px';
+            var left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px';
+            var bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px';
+            var right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
 
             tooltip
                 .style('top', null)

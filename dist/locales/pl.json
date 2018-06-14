@@ -1,6 +1,8 @@
 {
     "pl": {
         "icons": {
+            "information": "informacja",
+            "remove": "usuń",
             "undo": "Cofnij"
         },
         "modes": {
@@ -480,6 +482,7 @@
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
             "overlays": "Nakładki",
+            "imagery_source_faq": "Informacje o obrazie / Zgłoś problem",
             "reset": "Przywraca ustawienia",
             "display_options": "Wyświetl opcje",
             "brightness": "Jasnosć",
@@ -625,6 +628,7 @@
             "changeset_id": "Twój zestaw zmian: #{changeset_id}",
             "like_osm": "Podoba Ci się OpenStreetMap? Skontaktuj się z innymi mapującymi:",
             "more": "Więcej",
+            "events": "Wydarzenia",
             "languages": "Języki: {languages}",
             "missing": "Brakuje czegoś na tej liście?",
             "tell_us": "Daj nam znać!"
@@ -2127,6 +2131,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Telefon",
                     "placeholder": "+48 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2562,7 +2567,12 @@
                     "placeholder": "Domyślny"
                 },
                 "usage_rail": {
-                    "label": "Sposób użytkowania"
+                    "label": "Sposób użytkowania",
+                    "options": {
+                        "industrial": "Przemysłowe",
+                        "military": "Wojskowe",
+                        "tourism": "Turystyka"
+                    }
                 },
                 "visibility": {
                     "label": "Widoczność",
@@ -6409,7 +6419,8 @@
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
             "osm-gh-facebook": {
-                "name": "OpenStreetMap Ghana na Facebook'u"
+                "name": "OpenStreetMap Ghana na Facebook'u",
+                "description": "Grupa w serwisie Facebook dla osób zainteresowanych OpenStreetMap."
             },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Ghana na Twitter'rze",
@@ -6419,24 +6430,35 @@
                 "name": "Lista dyskusyjna Talk-gh",
                 "description": "Talk-gh to oficjalna mailingowa lista dyskusyjna społeczności OSM w Ghanie"
             },
+            "osm-mg-facebook": {
+                "name": "Grupa facebookowa OpenStreetMap Madagaskar"
+            },
             "talk-mg": {
                 "name": "Lista dyskusyjna Talk-mg"
             },
             "OSM-BGD-facebook": {
-                "name": "OpenStreetMap Bangladesz"
+                "name": "OpenStreetMap Bangladesz",
+                "description": "Ulepsz OpenStreetMap w Bangladeszu"
+            },
+            "OSM-India-facebook": {
+                "description": "Ulepsz OpenStreetMap w Indiach"
             },
             "OSM-india-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Indie",
                 "description": "Talk-in  to oficjalna mailingowa lista dyskusyjna społeczności OSM w Indiach"
             },
             "OSM-IDN-facebook": {
-                "name": "OpenStreetMap Indonezja"
+                "name": "OpenStreetMap Indonezja",
+                "description": "Ulepsz OpenStreetMap w Indonezji"
             },
             "OSM-japan-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Japonia"
             },
             "OSM-japan-twitter": {
                 "description": "Hashtag na Twitterze: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japonia"
             },
             "OSM-MNG-facebook": {
                 "name": "OpenStreetMap Mongolia"
@@ -6445,7 +6467,8 @@
                 "name": "OpenStreetMap Mjanma"
             },
             "OSM-Nepal-facebook": {
-                "name": "OpenStreetMap Nepal"
+                "name": "OpenStreetMap Nepal",
+                "description": "Ulepsz OpenStreetMap w Nepalu"
             },
             "OSM-PH-mailinglist": {
                 "name": "Lista dyskusyjna Talk-ph",
@@ -6483,8 +6506,13 @@
                 "name": "Lista dyskusyjna Talk-be",
                 "description": "Talk-be to oficjalna mailingowa lista dyskusyjna belgijskiej społeczności OSM "
             },
+            "be-matrix": {
+                "description": "Wszyscy mapujący są mile widziani!"
+            },
+            "czech-community": {
+                "name": "Czeska społeczność OSM"
+            },
             "talk-cz-mailinglist": {
-                "name": "Lista dyskusyjna Talk-cz",
                 "description": "Talk-cz  to oficjalna mailingowa lista dyskusyjna czeskiej społeczności OSM"
             },
             "dk-mailinglist": {

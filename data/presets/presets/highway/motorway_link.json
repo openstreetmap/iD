@@ -1,5 +1,5 @@
 {
-    "icon": "highway-motorway-link",
+    "icon": "iD-highway-motorway-link",
     "fields": [
         "name",
         "ref_road_number",

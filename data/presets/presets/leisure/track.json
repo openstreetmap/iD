@@ -1,5 +1,5 @@
 {
-    "icon": "highway-road",
+    "icon": "iD-highway-road",
     "fields": [
         "surface",
         "sport_racing_nonmotor",

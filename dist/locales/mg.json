@@ -1,5 +1,10 @@
 {
     "mg": {
+        "icons": {
+            "information": "fanazavana",
+            "remove": "hanala",
+            "undo": "hanafoana"
+        },
         "modes": {
             "add_area": {
                 "title": "Faritra",
@@ -44,6 +49,7 @@
                 }
             },
             "continue": {
+                "key": "A",
                 "title": "Hanohy",
                 "description": "Hanohy ity tsipika ity.",
                 "not_eligible": "Tsy misy tsipika azo tohizana eto.",
@@ -62,6 +68,7 @@
                     "line": "Hanaboribory ity tsipika ity.",
                     "area": "Hanaboribory ity faritra ity."
                 },
+                "key": "O",
                 "annotation": {
                     "line": "Nanaboribory an'ilay tsipika.",
                     "area": "Nanaboribory an'ilay faritra."
@@ -76,6 +83,7 @@
                     "line": "Hampahitsy ny zoron'ito tsipika ito.",
                     "area": "Hampahitsy ireo zoron'ito faritra ito."
                 },
+                "key": "S",
                 "annotation": {
                     "line": "Nampahitsy ny zoron'ilay tsipika.",
                     "area": "Nampahitsy ireo zoron'ilay faritra."
@@ -87,6 +95,7 @@
             "straighten": {
                 "title": "Hampahitsy",
                 "description": "Hampahitsy ito tsipika ito.",
+                "key": "S",
                 "annotation": "Nampahitsy an'ilay tsipika.",
                 "too_bendy": "Tsy mety ampahitsiana ito satria miolaka loatra.",
                 "connected_to_hidden": "Tsy mety ampahitsiana ito tsipika ito satria mifampitohy amina zavatra tsy miseho."
@@ -129,6 +138,7 @@
             "disconnect": {
                 "title": "Hanatsoaka",
                 "description": "Hanasaraka an'ireto tsipika/faritra ireto.",
+                "key": "D",
                 "annotation": "Nanasaraka an'ireo tsipika/faritra.",
                 "not_connected": "Tsy ampy mba hosarahina ny tsipika/faritra misy.",
                 "connected_to_hidden": "Tsy mety tsoahina ito satria mifampitohy amina zavatra tsy miseho."
@@ -136,6 +146,7 @@
             "merge": {
                 "title": "Hanambatra",
                 "description": "Hanambatra an'ireto singa ireto.",
+                "key": "C",
                 "annotation": "Nanambatra singa {n}.",
                 "not_eligible": "Tsy mety atambatra ireto singa ireto.",
                 "not_adjacent": "Tsy mety atambatra ireto singa ireto satria tsy mifampitohy ny faran'izy ireo.",
@@ -147,6 +158,7 @@
                     "single": "Hamindra an'ito singa ito amin'ny toerana hafa.",
                     "multiple": "Hamindra an'ireto singa ireto amin'ny toerana hafa."
                 },
+                "key": "M",
                 "annotation": {
                     "point": "Namindra an'ilay teboka.",
                     "vertex": "Namindra an'ilay vona tamin'ilay soritra.",
@@ -165,6 +177,12 @@
                 "connected_to_hidden": {
                     "single": "Tsy mety afindra ito singa ito satria mifampitohy amina zavatra tsy miseho.",
                     "multiple": "Tsy mety afindra ireo singa ireo satria mifampitohy amina zavatra tsy miseho ny sasany aminy."
+                }
+            },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
                 }
             },
             "rotate": {
@@ -201,7 +219,28 @@
                 "description": {
                     "line": "Hizara an'ito tsipika ito ho roa eto amin'ito vona ito.",
                     "area": "Hizara ny sisin'ito faritra ito ho roa."
-                }
+                },
+                "annotation": {
+                    "line": "Hanapaka tsipika",
+                    "area": "Hanapaka sisina faritra",
+                    "multiple": "Hanapaka tsipika/sisina faritra {n}"
+                },
+                "not_eligible": "Tsy mety tapahana amin'ny fanombohany na ny fiafarany ny tsipika.",
+                "multiple_ways": "Misy tsipika maro loatra eto ka tsy mety tapahana.",
+                "connected_to_hidden": "Tsy mety tapahana ity satria mifampitohy amina zavatra tsy miseho."
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Halavirana",
+                "distance_up_to": "Hatramin'ny {distance}",
+                "via": "Amin'ny alalan'ny",
+                "via_node_only": "Teboka ihany"
+            },
+            "help": {
+                "from": "AVY AO",
+                "via": "MANARAKA NY",
+                "to": "HATRAO"
             }
         },
         "zoom_in_edit": "Hakaikezo raha hanova",

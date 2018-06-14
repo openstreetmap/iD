@@ -6,7 +6,7 @@
         "limited",
         "no"
     ],
-    "icon": "wheelchair",
+    "icon": "maki-wheelchair",
     "universal": true,
     "label": "Wheelchair Access"
 }

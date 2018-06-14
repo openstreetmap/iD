@@ -98,7 +98,6 @@ export function behaviorSelect(context) {
 
 
     function click() {
-       
         d3_select(window)
             .on('mouseup.select', null, true);
 

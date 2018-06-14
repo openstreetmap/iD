@@ -123,7 +123,7 @@
                 },
                 "too_large": {
                     "single": "Questo elemento non può essere cancellato perché non è del tutto visibile.",
-                    "multiple": "Questi elementi non possono essere cacnellati perché non tutti sono visibili."
+                    "multiple": "Questi elementi non possono essere cancellati perché non tutti sono visibili."
                 },
                 "incomplete_relation": {
                     "single": "Questo elemento non può essere cancellato perché non è stato completamente scaricato.",
@@ -715,6 +715,11 @@
             "zoom": "Zoom sul livello",
             "browse": "Scegli un file"
         },
+        "streetside": {
+            "tooltip": "Foto Streetside da Microsoft",
+            "title": "Foto sovrimpresse (Bing Streetside)",
+            "report": "Segnala un problema di privacy su questa foto"
+        },
         "mapillary_images": {
             "tooltip": "Fotografie stradali da Mapillary",
             "title": "Livello Foto (Mapillary)"
@@ -861,7 +866,7 @@
                 "multipolygon_merge": "Quando si uniscono più linee o aree, viene creata una nuova relazione multipoligono avente come membri gli elementi selezionati. iD aggiungerà automaticamente i ruoli outer e inner, determinando quali elementi sono contenuti all'interno degli altri.",
                 "turn_restriction_h": "Restrizione di svolta",
                 "turn_restriction": "Una relazione *Obbligo di svolta* è formata da un gruppo di segmenti di strade ad una intersezione. Gli obblighi di svolta contengono una strada *da*, un nodo *via* e una strada *verso*.",
-                "turn_restriction_field": "Per modificare un obbligo di svolta, seleziona il nodo di giunzione dove due o più strade s'incontrano. L'editor dell'elemento mostrerà un campo speciale \"Obblighi di svolta' contenente un modello dell'intersezione.",
+                "turn_restriction_field": "Per modificare un obbligo di svolta, seleziona il nodo di giunzione dove due o più strade s’incontrano. L’editor dell’elemento mostrerà un campo speciale “Obblighi di svolta” contenente un modello dell’intersezione.",
                 "turn_restriction_editing": "Nel campo \"Obblighi di svolta\", clicca per selezionare una strada \"da\" e decidi se le svolte sono consentite oppure vietate per ogni strada \"verso\". Clicca nelle icone di svolta per alternare lo stato tra consentito e vietato. iD creerà automaticamente le relazione e imposterà i ruoli \"da\", \"via\" e \"verso\" basandosi sulle tue scelte.",
                 "route_h": "Percorsi",
                 "route": "Una relazione *percorso* consiste in un gruppo di uno o più elementi linea che formano insieme una rete di percorsi, come per esempio la linea di un autobus, quella di un treno oppure un percorso stradale.",
@@ -2685,7 +2690,7 @@
                     "options": {
                         "bad": "Cattiva: tracciato visibile a stento",
                         "excellent": "Eccellente: tracciato evidente o segnavia sempre presenti",
-                        "good": "Buona: segnavia visibili, ma talvolta difficile da individuare",
+                        "good": "Buona: segnavia visibili, ma talvolta difficili da individuare",
                         "horrible": "Orribile:  spesso non tracciato",
                         "intermediate": "Media: tracciato non sempre visibile",
                         "no": "Nessuna:  perlopiù non tracciato"
@@ -2941,7 +2946,7 @@
                 },
                 "amenity/bar": {
                     "name": "Bar",
-                    "terms": "caffè,caffé,snack,caffetteria"
+                    "terms": "bettola,lounge bar,alcool,birra,bevuta,bevute,snack"
                 },
                 "amenity/bbq": {
                     "name": "Barbecue/Griglia",
@@ -2980,7 +2985,7 @@
                 },
                 "amenity/cafe": {
                     "name": "Caffè",
-                    "terms": "caffè,te,bar"
+                    "terms": "bistrot,caffè,thè,te,bar,caffetteria"
                 },
                 "amenity/car_pooling": {
                     "name": "Condivisione automobile",
@@ -3122,7 +3127,7 @@
                 },
                 "amenity/internet_cafe": {
                     "name": "Internet Cafe",
-                    "terms": "caffè,te,bar,internet,point"
+                    "terms": "caffè,te,bar,internet,point,internet point,cybercafe"
                 },
                 "amenity/kindergarten": {
                     "name": "Area della Scuola dell'infanzia",
@@ -3996,6 +4001,10 @@
                 "emergency/destination": {
                     "name": "Destinazione d'uso accesso di emergenzza"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Estintore",
+                    "terms": "estintore fuoco,incendio,emergenza,antincendio,pompieri,fiamme,fuoco"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Idrante",
                     "terms": " Pompa antincendio "
@@ -4596,6 +4605,10 @@
                 "leisure/bird_hide": {
                     "name": "osservazione uccelli",
                     "terms": "Capanno di osservazione"
+                },
+                "leisure/bleachers": {
+                    "name": "Gradinata",
+                    "terms": "folla,panchina,panchine,sport,calcio,stadio,gradino,gradini,posti,posto,posto a sedere"
                 },
                 "leisure/bowling_alley": {
                     "name": "Sala da Bowling",
@@ -6024,6 +6037,10 @@
                     "name": "Concessionario di motociclette",
                     "terms": "Motoconcessionaria"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Officina riparazione motocicli",
+                    "terms": "auto,veicolo,moto,bici,garage,motocicletta,motorino,scooter,riparazione,riparatore,officina,servizio"
+                },
                 "shop/music": {
                     "name": "Negozio di musica",
                     "terms": "Negozio di nusica"
@@ -6930,6 +6947,10 @@
                 "description": "Riunioni con cadenza irregolare della comunità OpenStreetMap a Chiang Mai",
                 "extendedDescription": "I membri della comunità di OpenStreetMap si incontrano ogni qualche mese a Chiang Mai. Contattaci all’indirizzo {url} per sapere quando avverrà il prossimo ‘meetup’."
             },
+            "OSM-TH-facebook": {
+                "name": "Gruppo Facebook di OpenStreetMap della Thailandia",
+                "description": "Gruppo Facebook degli utenti di OpenStreetMap in Thailandia"
+            },
             "OSM-TH-forum": {
                 "name": "Forum di OpenStreetMap della Thailandia",
                 "description": "Forum web di OpenStreetMap della Thailandia"
@@ -7011,8 +7032,20 @@
                 "name": "Twitter di OpenStreetMap del Belgio",
                 "description": "OSM del Belgio su Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Comunità OSM della Repubblica Ceca",
+                "description": "Portale delle mappe, sito web e contatti fra i membri di OSM nella Repubblica Ceca"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap della Repubblica Ceca su Facebook",
+                "description": "Segui la comunità ceca su Facebook - include la versione tradotta del settimanale WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter della Repubblica Ceca @osmcz",
+                "description": "Segui la comunità ceca su Twitter - include la versione tradotta del settimanale WeeklyOSM!"
+            },
             "talk-cz-mailinglist": {
-                "name": "Mailinglist Talk-cz",
+                "name": "Mailinglist della Repubblica Ceca (talk-cz)",
                 "description": "Talk-cz è la mailinglist ufficiale della comunità ceca"
             },
             "dk-forum": {
@@ -7090,6 +7123,10 @@
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "Mailinglist OWL",
                 "description": "Questa è la mailinglist della comunità OSM nella regione di Ostwestfalen-Lippe"
+            },
+            "de-telegram": {
+                "name": "Telegram di OpenStreetMap della Germania",
+                "description": "Unisciti al supergruppo di OpenStreetMap della Germania su Telegram all’indirizzo {url}"
             },
             "osm-de": {
                 "name": "OpenStreetMap della Germania",
@@ -7512,6 +7549,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap su Reddit",
                 "description": "/r/openstreetmap/ è il posto perfetto per imparare di più su OpenStreetMap. Chiedici di tutto!"
+            },
+            "OSM-Telegram": {
+                "name": "Telegram di OpenStreetMap",
+                "description": "Unisciti al supergruppo globale di OpenStreetMap su Telegram all’indirizzo {url}"
             },
             "OSM-Twitter": {
                 "name": "Twitter di OpenStreetMap",

@@ -25,12 +25,13 @@
 }
 
 .photo-wrapper .photo-attribution {
-    width: 100%;
-    font-size: 10px;
-    text-align: right;
     position: absolute;
     bottom: 0;
     right: 0;
+    width: 100%;
+    font-size: 10px;
+    text-align: right;
+    line-height: 1.1em;
     padding: 4px 2px;
     z-index: 10;
 }
@@ -40,32 +41,6 @@
 .photo-attribution span {
     padding: 4px 2px;
     color: #fff;
-}
-
-/* streetside photo attribution */
-.photo-wrapper .photo-attribution-streetside {
-    width: 100%;
-    font-size: 10px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 4px 2px;
-    z-index: 10;
-}
-
-.photo-attribution-streetside a,
-.photo-attribution-streetside a:visited,
-.photo-attribution-streetside span {
-    padding: 4px 2px;
-    color: #fff;
-}
-.photo-attribution-streetside .image_link{
-    color: #fff;
-    float: left;
-    line-height: 6px;
-}
-.photo-attribution-streetside .image_link:hover{
-    color: #06b8ff;
 }
 
 /* markers and sequences */
@@ -144,24 +119,13 @@
     pointer-events: none;
 }
 .layer-streetside-images .viewfield-group * {
-    fill: #00d8f5;
+    fill: #0fffc4;
 }
-.layer-streetside-images .viewfield-group * {
-    fill: #00d8f5;
-}
-.layer-streetside-images .viewfield-group.selected * {
-    fill: #fffc64 !important;
-    fill-opacity: 1;
-
-}
-.layer-streetside-images .viewfield-group.hovered * {
-    fill: #fffc64 !important;
-    fill-opacity: .9;
-}
-
 .layer-streetside-images .sequence {
-    stroke: #00d8f5;
+    stroke: #0fffc4;
+    stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
+
 
 /* Mapillary Image Layer */
 .layer-mapillary-images {
@@ -179,25 +143,18 @@
 .layer-mapillary-signs {
     pointer-events: none;
 }
-.layer-mapillary-signs .icon-sign .icon-sign-body {
-    min-width: 20px;
-    height: 24px;
-    width: 24px;
+.layer-mapillary-signs .icon-sign {
     outline: 2px solid transparent;
     pointer-events: visible;
     cursor: pointer;
-    z-index: 30;
-    overflow: visible;
 }
-.layer-mapillary-signs .icon-sign:hover .icon-sign-body {
+.layer-mapillary-signs .icon-sign:hover {
     outline: 5px solid #eebb00;
     background-color: #eebb00;
-    z-index: 70;
 }
-.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
+.layer-mapillary-signs .icon-sign.selected {
     outline: 5px solid #ffee00;
     background-color: #ffee00;
-    z-index: 40;
 }
 
 
@@ -206,34 +163,31 @@
     pointer-events: none;
 }
 .layer-openstreetcam-images .viewfield-group * {
-    fill: #77ddff;
+    fill: #20c4ff;
 }
 .layer-openstreetcam-images .sequence {
-    stroke: #77ddff;
+    stroke: #20c4ff;
 }
 
 
-/* Streetside viewer */
-#ms .domRenderer .TagSymbol {
-    font-size: 10px;
-    background-color: rgba(0,0,0,0.4);
-    padding: 0 4px;
-    border-radius: 4px;
-    top: -25px;
+/* Streetside Viewer (pannellum) */
+.ms-wrapper .photo-attribution .image_link {
+    display: block;
 }
-#ms .domRenderer .Attribution {
-    /* we will roll our own to avoid async update issues like #4526 */
-    display: none;
-}
-
 .ms-wrapper .photo-attribution a:active,
 .ms-wrapper .photo-attribution a:hover {
-    color: #35af6d;
+    color: #0fffc4;
 }
 
-.ms-wrapper .mapillary-js-dom {
-    z-index: 9;
+.ms-wrapper .pnlm-compass.pnlm-control {
+    width: 26px;
+    height: 26px;
+    left: 4px;
+    top: 60px;
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
 }
+
 
 /* Mapillary viewer */
 #mly .domRenderer .TagSymbol {
@@ -257,6 +211,7 @@
     z-index: 9;
 }
 
+
 /* OpenStreetCam viewer */
 .osc-wrapper {
     position: relative;
@@ -268,7 +223,7 @@
 
 .osc-wrapper .photo-attribution a:active,
 .osc-wrapper .photo-attribution a:hover {
-    color: #77ddff;
+    color: #20c4ff;
 }
 
 .osc-controls-wrap {

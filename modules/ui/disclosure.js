@@ -8,12 +8,12 @@ import { textDirection } from '../util/locale';
 
 
 export function uiDisclosure(context, key, expandedDefault) {
-    var dispatch = d3_dispatch('toggled'),
-        _preference = (context.storage('disclosure.' + key + '.expanded')),
-        _expanded = (_preference === null ? !!expandedDefault : (_preference === 'true')),
-        _title,
-        _updatePreference = true,
-        _content = function () {};
+    var dispatch = d3_dispatch('toggled');
+    var _preference = (context.storage('disclosure.' + key + '.expanded'));
+    var _expanded = (_preference === null ? !!expandedDefault : (_preference === 'true'));
+    var _title;
+    var _updatePreference = true;
+    var _content = function () {};
 
 
     var disclosure = function(selection) {
@@ -43,8 +43,8 @@ export function uiDisclosure(context, key, expandedDefault) {
             .text(_title);
 
         hideToggle.selectAll('.hide-toggle-icon')
-            .attr('xlink:href', _expanded ? '#icon-down'
-                : (textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'
+            .attr('xlink:href', _expanded ? '#iD-icon-down'
+                : (textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
             );
 
 
@@ -74,8 +74,8 @@ export function uiDisclosure(context, key, expandedDefault) {
                 .classed('expanded', _expanded);
 
             hideToggle.selectAll('.hide-toggle-icon')
-                .attr('xlink:href', _expanded ? '#icon-down'
-                    : (textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'
+                .attr('xlink:href', _expanded ? '#iD-icon-down'
+                    : (textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
                 );
 
             wrap

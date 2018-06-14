@@ -1,5 +1,5 @@
 {
-    "icon": "highway-cycleway",
+    "icon": "iD-highway-cycleway",
     "fields": [
         "name",
         "oneway",

@@ -64,7 +64,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-point',
-                t('intro.points.add_point', { button: icon('#icon-point', 'pre-text') }));
+                t('intro.points.add_point', { button: icon('#iD-icon-point', 'pre-text') }));
 
             pointId = null;
 
@@ -72,7 +72,7 @@ export function uiIntroPoint(context, reveal) {
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')
-                .attr('xlink:href', '#poi-images');
+                .attr('xlink:href', '#iD-graphic-points');
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'add-point') return;
@@ -260,7 +260,7 @@ export function uiIntroPoint(context, reveal) {
         d3_select('.inspector-wrap .panewrap').style('right', '0%');
 
         var selector = '.entity-editor-pane button.preset-close svg use';
-        var href = d3_select(selector).attr('href') || '#icon-close';
+        var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
@@ -364,7 +364,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.points.update_close', { button: icon('#icon-apply', 'pre-text') })
+                t('intro.points.update_close', { button: icon('#iD-icon-apply', 'pre-text') })
             );
         }, 500);
 
@@ -423,13 +423,13 @@ export function uiIntroPoint(context, reveal) {
         if (!node) { return continueTo(rightClickPoint); }
 
         revealEditMenu(entity.loc,
-            t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') })
+            t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') })
         );
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
                 revealEditMenu(entity.loc,
-                    t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }),
+                    t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') }),
                     { duration: 0}
                 );
             });
@@ -461,7 +461,7 @@ export function uiIntroPoint(context, reveal) {
             continueTo(play);
         });
 
-        var iconName = '#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo');
+        var iconName = '#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo');
         reveal('#bar button.undo-button',
             t('intro.points.undo', { button: icon(iconName, 'pre-text') })
         );

@@ -28,7 +28,7 @@ export function uiContributors(context) {
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
         wrap.html('')
-            .call(svgIcon('#icon-nearby', 'pre-text light'));
+            .call(svgIcon('#iD-icon-nearby', 'pre-text light'));
 
         var userList = d3_select(document.createElement('span'));
 

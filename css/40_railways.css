@@ -86,7 +86,7 @@ path.stroke.tag-railway-subway {
 
 /* railway platforms - like sidewalks */
 
-.preset-icon .icon.highway-footway.tag-railway-platform {
+.preset-icon .icon.iD-highway-footway.tag-railway-platform {
     color: #ae8681;
     fill: #dcd9b9;
 }

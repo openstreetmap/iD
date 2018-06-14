@@ -25,7 +25,7 @@ export function uiNotice(context) {
             });
 
         button
-            .call(svgIcon('#icon-plus', 'pre-text'))
+            .call(svgIcon('#iD-icon-plus', 'pre-text'))
             .append('span')
             .attr('class', 'label')
             .text(t('zoom_in_edit'));

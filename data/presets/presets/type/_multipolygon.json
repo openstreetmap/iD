@@ -1,5 +1,5 @@
 {
-    "icon": "multipolygon",
+    "icon": "iD-multipolygon",
     "geometry": [
         "area",
         "relation"

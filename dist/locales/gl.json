@@ -1184,13 +1184,13 @@
                     "name": "Usos do solo"
                 },
                 "category-natural-area": {
-                    "name": "Recurso Natural"
+                    "name": "Características naturais"
                 },
                 "category-natural-line": {
-                    "name": "Recurso Natural"
+                    "name": "Características naturais"
                 },
                 "category-natural-point": {
-                    "name": "Recurso Natural"
+                    "name": "Características naturais"
                 },
                 "category-path": {
                     "name": "Características de camiño"
@@ -1262,7 +1262,7 @@
                 "address": {
                     "label": "Enderezo",
                     "placeholders": {
-                        "block_number": "Bloque Número",
+                        "block_number": "Número de bloque",
                         "block_number!jp": "Bloque Nº",
                         "city": "Cidade",
                         "city!jp": "Concello/Cidade/Vila/Barrio Especial de Tokio",
@@ -1386,7 +1386,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Tipo de Tenda"
+                    "label": "Tipo de tenda"
                 },
                 "bench": {
                     "label": "Banco"
@@ -1771,7 +1771,7 @@
                     "label": "Tipo"
                 },
                 "historic/civilization": {
-                    "label": "Civilización Histórica"
+                    "label": "Civilización histórica"
                 },
                 "hoops": {
                     "label": "Canastras",
@@ -1934,7 +1934,7 @@
                     "label": "Tipo"
                 },
                 "maxheight": {
-                    "label": "Máxima Altura",
+                    "label": "Altura máxima",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
@@ -1946,10 +1946,10 @@
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
-                    "label": "Estancia Máxima"
+                    "label": "Estancia máxima"
                 },
                 "maxweight": {
-                    "label": "Peso Máximo"
+                    "label": "Peso máximo"
                 },
                 "memorial": {
                     "label": "Tipo"
@@ -2001,7 +2001,7 @@
                     "label": "Rede"
                 },
                 "network_bicycle": {
-                    "label": "Tipo de Rede",
+                    "label": "Tipo de rede",
                     "options": {
                         "icn": "Internacional",
                         "lcn": "Local",
@@ -2011,7 +2011,7 @@
                     "placeholder": "Local, Rexional, Nacional, Internacional"
                 },
                 "network_foot": {
-                    "label": "Tipo de Rede",
+                    "label": "Tipo de rede",
                     "options": {
                         "iwn": "Internacional",
                         "lwn": "Local",
@@ -2095,6 +2095,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Teléfono",
                     "placeholder": "+34 989 12 34 56"
                 },
                 "piste/difficulty": {
@@ -2176,7 +2177,7 @@
                     "label": "Acepta"
                 },
                 "ref": {
-                    "label": "Código de Referencia"
+                    "label": "Código de referencia"
                 },
                 "ref_aeroway_gate": {
                     "label": "Número de porta"
@@ -2505,7 +2506,11 @@
                     "placeholder": "Por defecto"
                 },
                 "usage_rail": {
-                    "label": "Tipo de uso"
+                    "label": "Tipo de uso",
+                    "options": {
+                        "military": "Militar",
+                        "tourism": "Turismo"
+                    }
                 },
                 "visibility": {
                     "label": "Visibilidade",
@@ -3048,7 +3053,7 @@
                     "terms": "campus, universidade"
                 },
                 "amenity/vending_machine": {
-                    "name": "Máquina de Vending",
+                    "name": "Máquina expendedora",
                     "terms": "vending, expendedora"
                 },
                 "amenity/vending_machine/cigarettes": {
@@ -3516,6 +3521,9 @@
                     "name": "Andamista",
                     "terms": "andamios, andamista"
                 },
+                "craft/sculptor": {
+                    "name": "Escultor"
+                },
                 "craft/shoemaker": {
                     "name": "Zapateiro",
                     "terms": "zapateiro, zapatos"
@@ -3563,6 +3571,9 @@
                 },
                 "emergency/destination": {
                     "name": "Acceso de emerxencia como destino"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Extintor"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Boca de incendio"
@@ -3648,6 +3659,9 @@
                 "highway/bridleway": {
                     "name": "Camiño de ferradura",
                     "terms": "camiño, ferradura, cabalo"
+                },
+                "highway/bus_stop": {
+                    "name": "Parada/plataforma de autobús"
                 },
                 "highway/corridor": {
                     "name": "Corredor interior",
@@ -3848,6 +3862,9 @@
                     "name": "Cunca",
                     "terms": "cunca, auga"
                 },
+                "landuse/brownfield": {
+                    "name": "Solar anteriormente edificado"
+                },
                 "landuse/cemetery": {
                     "name": "Cemiterio"
                 },
@@ -3877,6 +3894,9 @@
                 "landuse/grass": {
                     "name": "Céspede",
                     "terms": "céspede, herba"
+                },
+                "landuse/greenfield": {
+                    "name": "Solar urbanizable"
                 },
                 "landuse/harbour": {
                     "name": "Peirao",
@@ -3977,6 +3997,9 @@
                 },
                 "leisure/dance": {
                     "name": "Sala de baile"
+                },
+                "leisure/dancing_school": {
+                    "name": "Escola de danza"
                 },
                 "leisure/dog_park": {
                     "name": "Parque canino"
@@ -4119,6 +4142,9 @@
                     "name": "Entrada a mina",
                     "terms": "entrada, mina, minería, cova, galería, túnel"
                 },
+                "man_made/antenna": {
+                    "name": "Antena"
+                },
                 "man_made/breakwater": {
                     "name": "Rompeondas",
                     "terms": "rompeolas, rompeondas, quebraondas, crebaondas, dique"
@@ -4156,9 +4182,15 @@
                     "name": "Mastro",
                     "terms": "mastro, pau, poste, hasta, antena, telefonía, comunicación, torre"
                 },
+                "man_made/monitoring_station": {
+                    "name": "Estación meteorolóxica"
+                },
                 "man_made/observation": {
                     "name": "Torre de observación",
                     "terms": "torre, observación, atalaia, vixilancia"
+                },
+                "man_made/observatory": {
+                    "name": "Observatorio"
                 },
                 "man_made/petroleum_well": {
                     "name": "Pozo petrolífero",
@@ -4270,9 +4302,15 @@
                     "name": "Uceira",
                     "terms": "uceira, breixeira, moural, urceira, uzal, herba, arbustos, gamallos"
                 },
+                "natural/mud": {
+                    "name": "Barro"
+                },
                 "natural/peak": {
                     "name": "Cume",
                     "terms": "pico, cume, montaña, monte, cúspide"
+                },
+                "natural/reef": {
+                    "name": "Arrecife"
                 },
                 "natural/ridge": {
                     "name": "Cume"
@@ -4300,7 +4338,7 @@
                     "name": "Árbore"
                 },
                 "natural/tree_row": {
-                    "name": "Fila de arbores",
+                    "name": "Fila de árbores",
                     "terms": "fila, ringleira, árbores"
                 },
                 "natural/volcano": {
@@ -4334,8 +4372,26 @@
                 "office": {
                     "name": "Oficina"
                 },
+                "office/accountant": {
+                    "name": "Contable"
+                },
                 "office/administrative": {
                     "name": "Administración local"
+                },
+                "office/adoption_agency": {
+                    "name": "Axencia de adopción"
+                },
+                "office/advertising_agency": {
+                    "name": "Axencia publicitaria"
+                },
+                "office/architect": {
+                    "name": "Arquitecto"
+                },
+                "office/association": {
+                    "name": "Oficina de organización sen ánimo de lucro"
+                },
+                "office/company": {
+                    "name": "Oficina corporativa"
                 },
                 "office/coworking": {
                     "name": "Espacio de cotraballo"
@@ -4345,6 +4401,9 @@
                 },
                 "office/employment_agency": {
                     "name": "Oficina de emprego"
+                },
+                "office/energy_supplier": {
+                    "name": "Oficina de empresa enerxética"
                 },
                 "office/estate_agent": {
                     "name": "Axencia inmobiliaria"
@@ -4358,9 +4417,15 @@
                 "office/government/register_office": {
                     "name": "Oficina de rexistro civil"
                 },
+                "office/guide": {
+                    "name": "Oficina de guías turísticos"
+                },
                 "office/insurance": {
                     "name": "Oficina de seguros",
                     "terms": "seguros, aseguradora"
+                },
+                "office/it": {
+                    "name": "Oficina de tecnoloxías da información"
                 },
                 "office/lawyer": {
                     "name": "Bufete",
@@ -4369,8 +4434,17 @@
                 "office/lawyer/notary": {
                     "name": "Notaría"
                 },
+                "office/moving_company": {
+                    "name": "Empresa de mudanzas"
+                },
+                "office/newspaper": {
+                    "name": "Oficina de xornal"
+                },
                 "office/ngo": {
                     "name": "Oficina ONG"
+                },
+                "office/notary": {
+                    "name": "Notaría"
                 },
                 "office/physician": {
                     "name": "Médico"
@@ -4378,15 +4452,27 @@
                 "office/political_party": {
                     "name": "Partido político"
                 },
+                "office/private_investigator": {
+                    "name": "Oficina de investigador privado"
+                },
                 "office/research": {
                     "name": "Oficina de investigación",
                     "terms": "investigación, desenvolvemento, I+D, laboratorio"
                 },
+                "office/tax_advisor": {
+                    "name": "Oficina de xestor fiscal"
+                },
                 "office/telecommunication": {
                     "name": "Oficina de telecomunicacións"
                 },
+                "office/therapist": {
+                    "name": "Oficina de terapeuta"
+                },
                 "office/travel_agent": {
                     "name": "Axencia de viaxes"
+                },
+                "office/water_utility": {
+                    "name": "Oficina de servizos públicos de auga"
                 },
                 "piste": {
                     "name": "Pista de esquí"
@@ -4407,6 +4493,9 @@
                     "name": "Illa",
                     "terms": "illa, isla, illote, insua"
                 },
+                "place/islet": {
+                    "name": "Illote"
+                },
                 "place/isolated_dwelling": {
                     "name": "Vivenda illada"
                 },
@@ -4415,6 +4504,9 @@
                 },
                 "place/neighbourhood": {
                     "name": "Barrio"
+                },
+                "place/plot": {
+                    "name": "Parcela"
                 },
                 "place/quarter": {
                     "name": "Sub-municipio / Distrito"
@@ -4474,6 +4566,69 @@
                 },
                 "power/transformer": {
                     "name": "Transformador"
+                },
+                "public_transport/linear_platform": {
+                    "name": "Parada/plataforma de autobús"
+                },
+                "public_transport/linear_platform_bus": {
+                    "name": "Parada/plataforma de autobús"
+                },
+                "public_transport/linear_platform_subway": {
+                    "name": "Parada/plataforma de metro"
+                },
+                "public_transport/linear_platform_train": {
+                    "name": "Parada/plataforma de tren"
+                },
+                "public_transport/linear_platform_tram": {
+                    "name": "Parada/plataforma de tranvía"
+                },
+                "public_transport/platform": {
+                    "name": "Parada/plataforma de transporte público"
+                },
+                "public_transport/platform_bus": {
+                    "name": "Parada/plataforma de autobús"
+                },
+                "public_transport/platform_subway": {
+                    "name": "Parada/plataforma de metro"
+                },
+                "public_transport/platform_train": {
+                    "name": "Parada/plataforma de tren"
+                },
+                "public_transport/platform_tram": {
+                    "name": "Parada/plataforma de tranvía"
+                },
+                "public_transport/station": {
+                    "name": "Estación de transporte público"
+                },
+                "public_transport/station_bus": {
+                    "name": "Estación de autobuses"
+                },
+                "public_transport/station_subway": {
+                    "name": "Estación de metro"
+                },
+                "public_transport/station_train": {
+                    "name": "Estación de tren"
+                },
+                "public_transport/station_tram": {
+                    "name": "Estación de tranvía"
+                },
+                "public_transport/stop_area": {
+                    "name": "Zona de parada de transporte público"
+                },
+                "public_transport/stop_position": {
+                    "name": "Punto de parada de transporte público"
+                },
+                "public_transport/stop_position_bus": {
+                    "name": "Punto de parada de autobús"
+                },
+                "public_transport/stop_position_subway": {
+                    "name": "Punto de parada de metro"
+                },
+                "public_transport/stop_position_train": {
+                    "name": "Punto de parada de tren"
+                },
+                "public_transport/stop_position_tram": {
+                    "name": "Punto de parada de tranvía"
                 },
                 "railway": {
                     "name": "Ferrocarril"
@@ -4541,6 +4696,9 @@
                 },
                 "shop": {
                     "name": "Tenda"
+                },
+                "shop/agrarian": {
+                    "name": "Tenda de suministros agrícolas"
                 },
                 "shop/alcohol": {
                     "name": "Licorería"
@@ -4743,6 +4901,9 @@
                 "shop/jewelry": {
                     "name": "Xoiería"
                 },
+                "shop/kiosk": {
+                    "name": "Quiosco"
+                },
                 "shop/kitchen": {
                     "name": "Tenda de cociñas"
                 },
@@ -4777,6 +4938,9 @@
                 },
                 "shop/motorcycle": {
                     "name": "Concesionario de motocicletas"
+                },
+                "shop/motorcycle_repair": {
+                    "name": "Taller de reparación de motocicletas"
                 },
                 "shop/music": {
                     "name": "Tenda de música"
@@ -4905,6 +5069,9 @@
                 "shop/weapons": {
                     "name": "Armería"
                 },
+                "shop/wholesale": {
+                    "name": "Almacén ao por maior"
+                },
                 "shop/window_blind": {
                     "name": "Tenda de persianas"
                 },
@@ -4955,7 +5122,8 @@
                     "name": "Placa de información"
                 },
                 "tourism/information/guidepost": {
-                    "name": "Posto Guía"
+                    "name": "Poste indicador",
+                    "terms": "indicador, poste indicador, cartel indicador"
                 },
                 "tourism/information/map": {
                     "name": "Mapa"
@@ -4985,13 +5153,14 @@
                     "name": "Acougo de Tráfico"
                 },
                 "traffic_calming/bump": {
-                    "name": "Banda de frenado"
+                    "name": "Banda de freado",
+                    "terms": "reductora de velocidade, banda de frenado, badén"
                 },
                 "traffic_calming/chicane": {
                     "name": "Chicán de Tráfico"
                 },
                 "traffic_calming/choker": {
-                    "name": "Choker de tráfico"
+                    "name": "Estreitamento"
                 },
                 "traffic_calming/cushion": {
                     "name": "Almofa de Velocidade"
@@ -5000,13 +5169,15 @@
                     "name": "Soterrado"
                 },
                 "traffic_calming/hump": {
-                    "name": "Speed Hump"
+                    "name": "Badén",
+                    "terms": "badén, reductora de velocidade"
                 },
                 "traffic_calming/island": {
                     "name": "Illa de Tráfico"
                 },
                 "traffic_calming/rumble_strip": {
-                    "name": "Rumble Faixa"
+                    "name": "Bandas sonoras",
+                    "terms": "bandas reductoras de velocidade, bandas sonoras"
                 },
                 "type/boundary": {
                     "name": "Límite"
@@ -5042,46 +5213,52 @@
                     "name": "Ruta de autobús"
                 },
                 "type/route/detour": {
-                    "name": "Ruta de Desvío"
+                    "name": "Ruta de desvío"
                 },
                 "type/route/ferry": {
-                    "name": "Ruta do Ferry"
+                    "name": "Ruta do ferry"
                 },
                 "type/route/foot": {
-                    "name": "Rúa a Pé"
+                    "name": "Rúa a pé"
                 },
                 "type/route/hiking": {
-                    "name": "Ruta de Camiñata"
+                    "name": "Ruta de camiñata"
                 },
                 "type/route/horse": {
-                    "name": "Ruta de Equitación"
+                    "name": "Ruta de equitación"
                 },
                 "type/route/pipeline": {
-                    "name": "Ruta de Tubaría"
+                    "name": "Ruta de tubaría"
                 },
                 "type/route/power": {
-                    "name": "Ruta de Enerxía"
+                    "name": "Ruta de enerxía"
                 },
                 "type/route/road": {
-                    "name": "Ruta de Estrada"
+                    "name": "Ruta de estrada"
+                },
+                "type/route/subway": {
+                    "name": "Ruta de metro"
                 },
                 "type/route/train": {
-                    "name": "Ruta de Tren"
+                    "name": "Ruta de tren"
                 },
                 "type/route/tram": {
-                    "name": "Ruta de Tranvía"
+                    "name": "Ruta de tranvía"
                 },
                 "type/route_master": {
-                    "name": "Ruta Mestre"
+                    "name": "Ruta mestra"
                 },
                 "type/site": {
                     "name": "Lugar"
+                },
+                "type/waterway": {
+                    "name": "Vía de auga"
                 },
                 "vertex": {
                     "name": "Outro"
                 },
                 "waterway": {
-                    "name": "Vía de Auga"
+                    "name": "Vía de auga"
                 },
                 "waterway/boatyard": {
                     "name": "Estaleiro"
@@ -5102,7 +5279,7 @@
                     "name": "Cuneta"
                 },
                 "waterway/fuel": {
-                    "name": "Estación Mariá de Fuel"
+                    "name": "Gasolineira para embarcacións"
                 },
                 "waterway/river": {
                     "name": "Río",
@@ -5118,8 +5295,11 @@
                     "name": "Regato",
                     "terms": "río, regato, rego, torrente, auga"
                 },
+                "waterway/stream_intermittent": {
+                    "name": "Regato intermitente"
+                },
                 "waterway/water_point": {
-                    "name": "Auga Potable Mariña"
+                    "name": "Auga potable para embarcacións"
                 },
                 "waterway/waterfall": {
                     "name": "Fervenza"

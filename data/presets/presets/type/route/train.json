@@ -1,5 +1,5 @@
 {
-    "icon": "route-train",
+    "icon": "iD-route-train",
     "fields": [
         "name",
         "ref_route",

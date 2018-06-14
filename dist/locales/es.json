@@ -4029,11 +4029,11 @@
                     "terms": "Entrada,Salida"
                 },
                 "footway/crossing": {
-                    "name": "Cruce de calle",
+                    "name": "Cruce de calle peatonal",
                     "terms": "cruce, calle, peatones, peatonal, cruce perpendicular entre aceras, vía peatonal sobre calle"
                 },
                 "footway/crossing-raised": {
-                    "name": "Cruce de calle elevado",
+                    "name": "Cruce de calle peatonal sobreelevado",
                     "terms": "Cruce de calle elevado, plano, lomo, velocidad, lento, resalto, resalte, tope"
                 },
                 "footway/crosswalk": {
@@ -4596,6 +4596,10 @@
                 "leisure/bird_hide": {
                     "name": "Observatorio de aves",
                     "terms": "observatorio, refugio, ave, pájaro, vida silvestre, naturaleza"
+                },
+                "leisure/bleachers": {
+                    "name": "Gradas",
+                    "terms": "gradas, multitud, banco, deportes, soporte, asiento, asientos"
                 },
                 "leisure/bowling_alley": {
                     "name": "Pista de bolos",
@@ -6024,6 +6028,10 @@
                     "name": "Concesionario de motocicletas",
                     "terms": "motocicleta, ciclomotor, ciclomoto, moto"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Taller de reparación de motocicletas",
+                    "terms": "taller, moto, garaje, motocicleta, reparación, servicio"
+                },
                 "shop/music": {
                     "name": "Tienda de música",
                     "terms": "música, audio, discos, discográfica, tienda de discos"
@@ -6925,9 +6933,31 @@
                 "name": "Lista de correo de OpenStreetMap Taiwán",
                 "description": "Talk-tw es la lista de correo oficial para que las Comunidades discutan asuntos sobre Taiwán"
             },
+            "OSM-TH-CNX-meetup": {
+                "name": "Meetup de OSM en Chiang Mai",
+                "description": "Reunión irregular de la comunidad OpenStreetMap en Chiang Mai",
+                "extendedDescription": "Los miembros de la comunidad OpenStreetMap se reúnen cada pocos meses en Chiang Mai. Póngase en contacto y eche un vistazo a {url} para ver cuándo está programada la próxima reunión"
+            },
+            "OSM-TH-facebook": {
+                "name": "Grupo de Facebook de OpenStreetMap TH",
+                "description": "Grupo de Facebook para OpenStreetMappers en Tailandia"
+            },
             "OSM-TH-forum": {
                 "name": "Foro OpenStreetMap TH",
                 "description": "Foro web de OpenStreetMap Tailandia"
+            },
+            "al-forum": {
+                "name": "Foro de OSM de Albania",
+                "description": "Foro de OpenStreetMap de Albania"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana",
+                "description": "¡Eventos sociales organizados alrededor del mapeando - principiantes más bienvenidos!",
+                "extendedDescription": "Maptime es un entorno de aprendizaje abierto para todos los niveles y grados de conocimiento, que ofrece apoyo educativo intencional para el principiante. Maptime es a la vez flexible y estructurado, creando espacio para mapeando de tutoriales, talleres, proyectos en curso con un objetivo compartido, y tiempo de trabajo independiente/colaborativo."
+            },
+            "al-telegram": {
+                "name": "Canal de Telegram de OSM de Albania",
+                "description": "Canal de Telegram de OpenStreetMap de Albania"
             },
             "at-forum": {
                 "name": "Foro de OpenStreetMap Austria",
@@ -6942,7 +6972,7 @@
                 "description": "OpenStreetMap Austria en Twitter: {url}"
             },
             "osmgraz-meetup": {
-                "name": "Reunión de la comunidad de OSM en Graz",
+                "name": "Meetup de la comunidad de OSM en Graz",
                 "description": "Reunión mensual de la comunidad OpenStreetMap en Graz"
             },
             "osmgraz-twitter": {
@@ -6974,13 +7004,18 @@
                 "name": "Lista de correo de Talk-be",
                 "description": "Talk-be es la lista de correo oficial para la comunidad belga de OSM"
             },
+            "be-maptime": {
+                "name": "Maptime de Bélgica",
+                "description": "Eventos sociales organizados en torno al mapeo: ¡Los principiantes son bienvenidos!",
+                "extendedDescription": "Maptime es un entorno de aprendizaje abierto para todos los niveles y grados de conocimiento, que ofrece apoyo educativo intencional para el principiante. Maptime es a la vez flexible y estructurado, creando espacio para tutoriales de mapeo, talleres, proyectos en curso con un objetivo compartido y tiempo de trabajo independiente / colaborativo."
+            },
             "be-matrix": {
                 "name": "Canal Matrix de OpenStreetMap BE",
                 "description": "¡Todos los mapeadores son bienvenidos!",
                 "extendedDescription": "La mayoría de las charlas ocurren en el canal \"OpenStreetMap Belgium\". ¡Puede preguntar cualquier cosa allí! Las otras salas son para temas específicos."
             },
             "be-meetup": {
-                "name": "Grupo de encuentro OpenStreetMap Bélgica",
+                "name": "Meetup de encuentro OpenStreetMap Bélgica",
                 "description": "Reuniones en la vida real de todos los interesados en OpenStreetMap",
                 "extendedDescription": "Las reuniones presenciales son geniales para conocer a otros mapeadores, hacerles preguntas y aprender mucho. ¡Son especialmente bienvenidos los nuevos contribuidores!"
             },
@@ -6989,7 +7024,6 @@
                 "description": "OSM Bélgica en Twitter: @osm_be"
             },
             "talk-cz-mailinglist": {
-                "name": "Lista de correo Talk-cz",
                 "description": "Talk-cz es la lista de correo oficial para la comunidad checa"
             },
             "dk-forum": {
@@ -7003,6 +7037,18 @@
             "dk-mailinglist": {
                 "name": "Lista de correo Talk-dk",
                 "description": "Una lista de correo para discutir OpenStreetMap en Dinamarca"
+            },
+            "fi-forum": {
+                "name": "Foro de OpenStreetMap FI",
+                "description": "Foro web de OpenStreetMap Finlandia"
+            },
+            "fi-irc": {
+                "name": "IRC de OpenStreetMap Finlandia",
+                "description": "Únase a #osm-fi en irc.oftc.net (puerto 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Lista de correo de Talk-fi",
+                "description": "Talk-fi es la lista de correo oficial para la comunidad finlandesa de OSM"
             },
             "fr-facebook": {
                 "name": "Página de Facebook de OpenStreetMap Francia",
@@ -7029,7 +7075,7 @@
                 "description": "Esta es la lista de correo de la comunidad de OSM de Berlín"
             },
             "de-berlin-meetup": {
-                "name": "Encuentro de OpenStreetMap Berlín-Brandenburgo",
+                "name": "Meetup de OpenStreetMap Berlín-Brandenburgo",
                 "description": "Mapeadores y usuarios en OpenStreetMap en el área de Berlín"
             },
             "de-berlin-telegram": {
@@ -7055,6 +7101,10 @@
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "Lista de correo OWL",
                 "description": "Esta es la lista de correo de la comunidad Ostwestfalen-Lippe de OSM"
+            },
+            "de-telegram": {
+                "name": "Telegram de OpenStreetMap Alemania",
+                "description": "Únase al supergrupo de Telegram de OpenStreetMap Alemania en {url}"
             },
             "osm-de": {
                 "name": "OpenStreetMap Alemania",
@@ -7083,6 +7133,9 @@
             "it-mailinglist": {
                 "name": "Lista de correo de Talk-it",
                 "description": "Talk-it es la lista de correo oficial de la comunidad OSM italiana"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia en Telegram"
             },
             "it-twitter": {
                 "name": "Twitter de OpenStreetMap Italia",

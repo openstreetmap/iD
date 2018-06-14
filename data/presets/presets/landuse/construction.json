@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-tools",
     "fields": [
         "name",
         "construction",

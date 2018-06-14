@@ -208,7 +208,7 @@ export function uiRawMembershipEditor(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMembership)
-                .call(svgIcon('#operation-delete'));
+                .call(svgIcon('#iD-operation-delete'));
 
             if (taginfo) {
                 enter.each(bindTypeahead);
@@ -245,7 +245,7 @@ export function uiRawMembershipEditor(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMembership)
-                .call(svgIcon('#operation-delete'));
+                .call(svgIcon('#iD-operation-delete'));
 
             newrow = newrow
                 .merge(enter);
@@ -268,7 +268,7 @@ export function uiRawMembershipEditor(context) {
                 .merge(addrel);
 
             addrel
-                .call(svgIcon('#icon-plus', 'light'))
+                .call(svgIcon('#iD-icon-plus', 'light'))
                 .on('click', function() {
                     _showBlank = true;
                     content(wrap);
