@@ -296,6 +296,42 @@ rendererBackgroundSource.Esri = function(data) {
         cache = {},
         inflight = {};
 
+    // use a tilemap service to set maximum zoom for esri tiles dynamically
+    // https://developers.arcgis.com/documentation/tiled-elevation-service/
+    esri.fetchTilemap = function(center) {
+        // tiles are available globally to zoom level 19, afterward they may or may not be present
+        var z = 20;
+
+        // first generate a random url using the template
+        var dummyUrl = esri.url([1,2,3]);
+
+        // calculate url z/y/x from the lat/long of the center of the map
+        var x = (Math.floor((center[0] + 180) / 360 * Math.pow(2, z)));
+        var y = (Math.floor((1 - Math.log(Math.tan(center[1] * Math.PI / 180) + 1 / Math.cos(center[1] * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, z)));
+
+        // fetch an 8x8 grid because responses to leverage cache
+        var tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+/, 'tilemap') + '/' + z + '/' + y + ' /' + '/8/8';
+
+        // make the request and introspect the response from the tilemap server
+        d3_json(tilemapUrl, function (err, tilemap) {
+            if (err || !tilemap) return;
+
+            var tiles = true;
+            for (var i=0; i<tilemap.data.length; i++) {
+                // 0 means an individual tile in the grid doesn't exist
+                if (!tilemap.data[i]) {
+                    tiles = false;
+                    break;
+                }
+            }
+
+            // if any tiles are missing at level 20 we restrict maxZoom to 19
+            if (!tiles) {
+                esri.scaleExtent[1] = 19;
+            }
+        });
+    };
+
     esri.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/'),
             zoom = Math.min(tileCoord[2], esri.scaleExtent[1]),
@@ -306,9 +342,6 @@ rendererBackgroundSource.Esri = function(data) {
             metadata = {};
 
         if (inflight[tileId]) return;
-
-        // instead of calling fetchTilemap when the metadata window is open, we should call it when editing is first activated
-        fetchTilemap(center, esri);
 
         switch (true) {
             case (zoom >= 20 && esri.id === 'EsriWorldImageryClarity'):
@@ -407,37 +440,6 @@ rendererBackgroundSource.Esri = function(data) {
             });
         }
 
-        // use a tilemap service to set maximum zoom for esri tiles dynamically
-        function fetchTilemap(center, esri) {
-            // tiles are available globally to zoom level 19, afterward they are only a possibility
-            const urlZ = 20;
-
-            // calculate url z/y/x from the lat/long of the center of the map
-            const urlX = (Math.floor((center[0] + 180) / 360 * Math.pow(2, urlZ)));
-            const urlY = (Math.floor((1 - Math.log(Math.tan(center[1] * Math.PI / 180) + 1 / Math.cos(center[1] * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, urlZ)));
-
-            // we fetch an 8x8 grid because they cover a normal extent and responses are cached
-            const tilemapUrl = tileCoord[3].replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+/, 'tilemap') + `/${urlZ}/${urlY}/${urlX}/8/8`;
-
-            // make the request and introspect the response from the tilemap server
-            d3_json(tilemapUrl, function (err, tilemap) {
-                if (err || !tilemap) return;
-
-                let tiles = true;
-                for (i=0;i<tilemap.data.length;i++) {
-                    // any value of 0 means an individual tile in the grid doesn't exist
-                    if (!tilemap.data[i]) {
-                        tiles = false;
-                        break;
-                    }
-                }
-
-                // if any tiles are missing, restrict maxZoom to 19
-                if (!tiles) {
-                    esri.scaleExtent[1] = 19;
-                }
-            })
-        }
 
         function clean(val) {
             return String(val).trim() || unknown;

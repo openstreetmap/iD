@@ -34,6 +34,14 @@ export function uiNotice(context) {
         function disableTooHigh() {
             var canEdit = context.map().zoom() >= context.minEditableZoom();
             div.style('display', canEdit ? 'none' : 'block');
+            // if an Esri basemap is being displayed and native zoom past 19 is enabled, check the tilemap
+            if (canEdit) {
+                var basemap = context.background().baseLayerSource();
+                if (/^EsriWorldImagery/.test(basemap.id) && basemap.scaleExtent[1] > 19) {
+                    var center = context.map().center();
+                    basemap.fetchTilemap(center);
+                }
+            }
         }
 
         context.map()
