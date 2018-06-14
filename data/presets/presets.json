@@ -19869,7 +19869,7 @@
             "name": "Boundary"
         },
         "type/boundary/administrative": {
-            "icon": "boundary",
+            "icon": "iD-boundary",
             "fields": [
                 "name",
                 "admin_level"

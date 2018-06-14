@@ -1,5 +1,5 @@
 {
-    "icon": "boundary",
+    "icon": "iD-boundary",
     "fields": [
         "name",
         "admin_level"
