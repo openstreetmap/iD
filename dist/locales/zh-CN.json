@@ -715,6 +715,11 @@
             "zoom": "缩放到图层",
             "browse": "浏览文件"
         },
+        "streetside": {
+            "tooltip": "来自微软公司的街景照片",
+            "title": "照片叠加层 (必应 Streetside)",
+            "report": "报告该图像的隐私问题"
+        },
         "mapillary_images": {
             "tooltip": "来自Mapillary的街景照片",
             "title": "照片叠加层 (Mapillary)"
@@ -728,7 +733,7 @@
         },
         "openstreetcam_images": {
             "tooltip": "来自 OpenStreetCam 的街道等级照片",
-            "title": "照片覆盖（OpenStreetCam）"
+            "title": "照片叠加层 (OpenStreetCam)"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "在 OpenStreetCam 上查看该图像"
@@ -1682,7 +1687,7 @@
                 },
                 "duration": {
                     "label": "乘坐时长",
-                    "placeholder": "00:00"
+                    "placeholder": "hh:mm"
                 },
                 "electrified": {
                     "label": "电气化",
@@ -4232,7 +4237,7 @@
                 },
                 "landuse/construction": {
                     "name": "建设用地",
-                    "terms": "建筑物"
+                    "terms": "建设,建造,施工,工地,在建,建筑,构筑,构建,承建,用地,建设用地"
                 },
                 "landuse/farm": {
                     "name": "农田"
@@ -4848,7 +4853,7 @@
                     "terms": "建筑事务所"
                 },
                 "office/association": {
-                    "name": "非盈利机构办公室",
+                    "name": "非营利机构办公室",
                     "terms": "非盈利机构办公室"
                 },
                 "office/charity": {
@@ -5944,7 +5949,7 @@
                     "terms": "美术馆,画廊,艺术中心"
                 },
                 "tourism/guest_house": {
-                    "name": "招待所",
+                    "name": "客栈",
                     "terms": "招待所,旅馆,宾馆"
                 },
                 "tourism/hostel": {
@@ -6495,7 +6500,8 @@
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap 孟加拉国",
-                "description": "改进位于孟加拉国的 OpenStreetMap"
+                "description": "改进位于孟加拉国的 OpenStreetMap",
+                "extendedDescription": "在孟加拉国绘图？有任何疑问，想要与当地的社区交流？在 {url} 加入我们。欢迎所有人！"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap 印度 - 共同参与的街区绘图",
@@ -6540,6 +6546,10 @@
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap 日本 Twitter",
                 "description": "Twitter 上的#标签：{url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap 日本",
+                "description": "位于日本的绘图者和 OpenStreetMap 用户"
             },
             "OSM-MY-forum": {
                 "name": "OpenStreetMap 马来西亚论坛",
@@ -6637,7 +6647,6 @@
                 "name": "OpenStreetMap 比利时 Twitter"
             },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz 邮件列表",
                 "description": "Talk-cz 是捷克 OpenStreetMap 社区的官方邮件列表"
             },
             "fr-facebook": {
@@ -6944,16 +6953,21 @@
                 "name": "OpenStreetMap Reddit 社区",
                 "description": "/r/openstreetmap/ 是了解更多关于 OpenStreetMap 的好地方。来尽管问我们吧！"
             },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram 群组",
+                "description": "加入 OpenStreetMap Telegram 全球大群：{url}"
+            },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter 主页",
                 "description": "在 Twitter 上关注我们：{url}"
             },
             "OSMF": {
                 "name": "OpenStreetMap 基金会 (OSMF)",
-                "description": "OSMF 是总部位于英国的非盈利组织，用于支持 OpenStreetMap 项目。",
+                "description": "OSMF 是总部位于英国的非营利组织，用于支持 OpenStreetMap 项目。",
                 "events": {
                     "sotm2018": {
                         "name": "State of the Map 2018",
+                        "description": "加入我们为期3天在意大利米兰举办的年度全球 OpenStreetMap 会议，与社区中的每个人相聚并进行交流、分享和学习。",
                         "where": "意大利米兰"
                     }
                 }

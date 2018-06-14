@@ -1467,7 +1467,7 @@
                     }
                 },
                 "aerialway/bubble": {
-                    "label": "覆い"
+                    "label": "フード"
                 },
                 "aerialway/capacity": {
                     "label": "運搬人数（1時間当たり）",
@@ -3401,7 +3401,7 @@
                 },
                 "amenity/veterinary": {
                     "name": "獣医",
-                    "terms": "獣医, ペット医, 病院, 医療"
+                    "terms": "獣医, ペット医, 病院, 医療, 動物病院"
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "犬の便入れ",
@@ -3808,7 +3808,7 @@
                 },
                 "craft/caterer": {
                     "name": "仕出し料理店",
-                    "terms": "仕出し料理店, ケータリング"
+                    "terms": "仕出し料理店, ケータリング, ホカ弁, 弁当"
                 },
                 "craft/chimney_sweeper": {
                     "name": "煙突掃除人",
@@ -4581,6 +4581,10 @@
                     "name": "野鳥観察舎",
                     "terms": "ハイド, 野鳥観察小屋, アウトドア"
                 },
+                "leisure/bleachers": {
+                    "name": "観覧席",
+                    "terms": "観覧席, 外野席, 外野スタンド"
+                },
                 "leisure/bowling_alley": {
                     "name": "ボウリング場",
                     "terms": "ボウリング場, ボウリング, ボーリング, スポーツ, 娯楽, 運動, レジャー, ゲーム"
@@ -5094,7 +5098,7 @@
                 },
                 "office/accountant": {
                     "name": "会計事務所",
-                    "terms": "会計事務所"
+                    "terms": "会計事務所, 税理士, 税理士事務所, 会計士, 公認会計士"
                 },
                 "office/administrative": {
                     "name": "地方行政事務所"
@@ -5164,8 +5168,8 @@
                     "terms": "登記所, 法人登記, 登録所, 法務局"
                 },
                 "office/government/tax": {
-                    "name": "税理士事務所",
-                    "terms": "税理士事務所, 税理士"
+                    "name": "税務署",
+                    "terms": "税務署"
                 },
                 "office/guide": {
                     "name": "ツアーガイド",
@@ -5843,7 +5847,7 @@
                     "terms": "カーテン店, 家具"
                 },
                 "shop/dairy": {
-                    "name": "日配品店",
+                    "name": "乳製品店",
                     "terms": "日配品店, 食品, 食べ物"
                 },
                 "shop/deli": {
@@ -6007,6 +6011,10 @@
                 "shop/motorcycle": {
                     "name": "バイク店",
                     "terms": "バイク店, オートバイ店"
+                },
+                "shop/motorcycle_repair": {
+                    "name": "バイク修理店",
+                    "terms": "バイク修理店, オートバイ修理, バイク, オートバイ"
                 },
                 "shop/music": {
                     "name": "CD/レコード店",
@@ -6914,9 +6922,26 @@
                 "description": "Irregular meeting of the OpenStreetMap community in Chiang Mai",
                 "extendedDescription": "Members of the OpenStreetMap community meet every few months in Chiang Mai. Get in contact and check out {url} to see when the next meetup is scheduled"
             },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap TH Facebook group",
+                "description": "Facebook group for OpenStreetMappers in Thailand"
+            },
             "OSM-TH-forum": {
                 "name": "OpenStreetMap TH forum",
                 "description": "OpenStreetMap Thailand web forum"
+            },
+            "al-forum": {
+                "name": "OSM Albania Forum",
+                "description": "OpenStreetMap Albania Forum"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana",
+                "description": "Social events organized around mapping - beginners most welcome!",
+                "extendedDescription": "Maptime is an open learning environment for all levels and degrees of knowledge, offering intentional educational support for the beginner. Maptime is simultaneously flexible and structured, creating space for mapping tutorials, workshops, ongoing projects with a shared goal, and independent/collaborative work time."
+            },
+            "al-telegram": {
+                "name": "OSM Albania Telegram channel",
+                "description": "OpenStreetMap Albania Telegram channel"
             },
             "at-forum": {
                 "name": "OpenStreetMap Austria Forum",
@@ -6982,8 +7007,20 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium on Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Czech OSM community",
+                "description": "Map portal, website and contacts on OSM members in Czechia"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ on Facebook",
+                "description": "Follow czech community on Facebook - including translated WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Czech twitter @osmcz",
+                "description": "Follow czech community on Twitter - including translated WeeklyOSM!"
+            },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz Mailing List",
+                "name": "Czech mailing list (talk-cz)",
                 "description": "Talk-cz is the official mailing list for Czech community"
             },
             "dk-forum": {
@@ -6997,6 +7034,18 @@
             "dk-mailinglist": {
                 "name": "Talk-dk Mailing List",
                 "description": "A mailing list to discuss OpenStreetMap in Denmark"
+            },
+            "fi-forum": {
+                "name": "OpenStreetMap FI forum",
+                "description": "OpenStreetMap Finland web forum"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap Finland IRC",
+                "description": "Join #osm-fi on irc.oftc.net (port 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi Mailing List",
+                "description": "Talk-fi is the official mailing list for the Finnish OSM community"
             },
             "fr-facebook": {
                 "name": "OpenStreetMap France Facebook page",
@@ -7050,6 +7099,10 @@
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
             },
+            "de-telegram": {
+                "name": "OpenStreetMap Germany Telegram",
+                "description": "Join the OpenStreetMap Germany Telegram supergroup at {url}"
+            },
             "osm-de": {
                 "name": "OpenStreetMap Germany",
                 "description": "The platform for information on OpenStreetMap in Germany"
@@ -7077,6 +7130,10 @@
             "it-mailinglist": {
                 "name": "Talk-it Mailing List",
                 "description": "Talk-it is the official mailing list for the Italian OSM community"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia on Telegram",
+                "description": "OpenStreetMap Italy Telegram chat"
             },
             "it-twitter": {
                 "name": "OpenStreetMap Italy Twitter",
@@ -7467,6 +7524,10 @@
             "OSM-Reddit": {
                 "name": "Reddit上のOpenStreetMap",
                 "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Join the OpenStreetMap Telegram global supergroup at {url}"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",

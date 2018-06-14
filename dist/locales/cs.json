@@ -2020,6 +2020,7 @@
                     "placeholder": "1, 2, 3…"
                 },
                 "phone": {
+                    "label": "Telefon",
                     "placeholder": "+420 603 123456"
                 },
                 "piste/difficulty": {
@@ -2999,7 +3000,7 @@
                 },
                 "amenity/telephone": {
                     "name": "Telefon",
-                    "terms": "telefon"
+                    "terms": "telefon,telefonní budka,veřejný telefon,veřejná telefonní stanice"
                 },
                 "amenity/theatre": {
                     "name": "Divadlo",
@@ -3601,6 +3602,10 @@
                 "footway/crossing": {
                     "name": "Přechod pro chodce",
                     "terms": "přechod pro chodce,zebra,přechod,přechod pro pěší"
+                },
+                "footway/crossing-raised": {
+                    "name": "Zvýšený přechod pro chodce",
+                    "terms": "zpomalovací stůl s přechodem,rychlostní stůl s přechodem"
                 },
                 "footway/crosswalk": {
                     "name": "Přechod pro chodce typu zebra",
@@ -5509,7 +5514,8 @@
                     "terms": "opticko-akustická brzda,spotflex,zpomalovací práh,optická brzda,akustická brzda"
                 },
                 "traffic_calming/table": {
-                    "name": "Rychlostní cedule"
+                    "name": "Zvýšená plocha pro zpomalení",
+                    "terms": "zpomalovací stůl,rychlostní stůl"
                 },
                 "type/boundary": {
                     "name": "Hranice",

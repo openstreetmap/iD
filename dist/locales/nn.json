@@ -1,5 +1,129 @@
 {
     "nn": {
+        "icons": {
+            "information": "info",
+            "remove": "fjern"
+        },
+        "modes": {
+            "add_area": {
+                "title": "Område"
+            }
+        },
+        "operations": {
+            "continue": {
+                "title": "Fortset"
+            },
+            "delete": {
+                "title": "Slett"
+            },
+            "disconnect": {
+                "title": "Kople frå"
+            },
+            "merge": {
+                "title": "Slå saman",
+                "description": "Slå saman desse funksjonane",
+                "key": "S"
+            },
+            "move": {
+                "title": "Flytt"
+            },
+            "rotate": {
+                "title": "Roter"
+            }
+        },
+        "restriction": {
+            "controls": {
+                "via": "Via"
+            },
+            "help": {
+                "from": "FRÅ",
+                "via": "VIA",
+                "to": "TIL"
+            }
+        },
+        "translate": {
+            "localized_translation_language": "Vel språk",
+            "localized_translation_name": "Namn"
+        },
+        "zoom_in_edit": "Zoom inn for å redigere",
+        "login": "Logg inn",
+        "logout": "Logg ut",
+        "report_a_bug": "Rapporter ein feil",
+        "help_translate": "Hjelp til med å omsette",
+        "commit": {
+            "save": "Last opp",
+            "cancel": "Avbryt",
+            "changes": "{count} endringar",
+            "warnings": "Åtvaringar",
+            "modified": "Modifisert",
+            "deleted": "Sletta",
+            "created": "Oppretta"
+        },
+        "contributors": {
+            "list": "Redigeringar av {users}",
+            "truncated_list": "Redigeringar av {users} og {count} andre"
+        },
+        "info_panels": {
+            "key": "R",
+            "background": {
+                "key": "B",
+                "title": "Bakgrunn",
+                "zoom": "Zoom",
+                "vintage": "Årgang",
+                "source": "Kjelde",
+                "description": "Skildring",
+                "resolution": "Oppløysing",
+                "accuracy": "Nøyaktigheit",
+                "unknown": "Ukjend"
+            },
+            "history": {
+                "title": "Historikk",
+                "selected": "{n} valt",
+                "no_history": "Ingen historikk (ny funksjon)",
+                "version": "Versjon",
+                "last_edit": "Siste redigering",
+                "edited_by": "Redigert av",
+                "unknown": "Ukjend"
+            },
+            "location": {
+                "key": "P",
+                "title": "Plassering",
+                "unknown_location": "Ukjend plassering"
+            },
+            "measurement": {
+                "selected": "{n} valt",
+                "geometry": "Geometri",
+                "length": "Lengde",
+                "area": "Område",
+                "location": "Plassering"
+            }
+        },
+        "geolocate": {
+            "title": "Vis plasseringa mi"
+        },
+        "inspector": {
+            "radio": {
+                "structure": {
+                    "default": "Standard",
+                    "layer": "Lag"
+                }
+            },
+            "add": "Legg till",
+            "none": "Ingen",
+            "node": "Node",
+            "location": "Plassering",
+            "add_fields": "Legg til felt:"
+        },
+        "background": {
+            "title": "Bakgrunn",
+            "description": "Bakgrunns-innstillingar",
+            "key": "B",
+            "backgrounds": "Bakgrunnar",
+            "none": "Ingen",
+            "custom": "Tilpassa",
+            "custom_button": "Rediger tilpassa bakgrunn",
+            "contrast": "Kontrast"
+        },
         "intro": {
             "graph": {
                 "block_number": "<value for addr:block_number>",
@@ -13,6 +137,106 @@
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "no"
+            }
+        },
+        "presets": {
+            "fields": {
+                "access": {
+                    "options": {
+                        "destination": {
+                            "title": "Destinasjon"
+                        },
+                        "private": {
+                            "title": "Privat"
+                        }
+                    },
+                    "placeholder": "Ikkje spesifisert",
+                    "types": {
+                        "access": "Alle",
+                        "bicycle": "Syklar",
+                        "foot": "Fot",
+                        "horse": "Hestar"
+                    }
+                },
+                "address": {
+                    "label": "Addresse",
+                    "placeholders": {
+                        "block_number": "Blokknummer",
+                        "city": "By",
+                        "city!vn": "By/bygd",
+                        "conscriptionnumber": "123",
+                        "country": "Land",
+                        "county": "Fylke",
+                        "county!jp": "District",
+                        "district": "Distrikt",
+                        "floor": "Etasje",
+                        "hamlet": "Grend",
+                        "housename": "Husnamn",
+                        "housenumber": "123",
+                        "neighbourhood": "Grannelag",
+                        "place": "Plass",
+                        "postcode": "Postnummer",
+                        "state": "Stat",
+                        "street": "Gate/Veg",
+                        "subdistrict": "Underdistrikt",
+                        "suburb": "Drabantby",
+                        "unit": "Eining"
+                    }
+                },
+                "admin_level": {
+                    "label": "Administrasjonsnivå"
+                },
+                "aerialway": {
+                    "label": "Type"
+                },
+                "aerialway/access": {
+                    "label": "Tilgang",
+                    "options": {
+                        "both": "Begge",
+                        "entry": "Oppføring",
+                        "exit": "Utgang"
+                    }
+                },
+                "aerialway/bubble": {
+                    "label": "Boble"
+                },
+                "agrarian": {
+                    "label": "Produkts"
+                },
+                "animal_boarding": {
+                    "label": "For dyr"
+                },
+                "animal_breeding": {
+                    "label": "For dyr"
+                },
+                "animal_shelter": {
+                    "label": "For dyr"
+                },
+                "area/highway": {
+                    "label": "Type"
+                },
+                "artist": {
+                    "label": "Artist"
+                },
+                "artwork_type": {
+                    "label": "Type"
+                },
+                "atm": {
+                    "label": "MInibank"
+                },
+                "country": {
+                    "label": "Land"
+                },
+                "direction_cardinal": {
+                    "options": {
+                        "E": "Aust"
+                    }
+                }
+            }
+        },
+        "imagery": {
+            "MAPNIK": {
+                "name": "OpenStreetMap (standard)"
             }
         }
     }

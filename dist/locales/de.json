@@ -148,7 +148,7 @@
                 "annotation": {
                     "point": "Weg mit einem Punkt verbunden.",
                     "vertex": "Weg mit einem anderem Weg verbunden.",
-                    "line": "Weg mit einer Linie / einer Fläche verbunden.",
+                    "line": "Weg mit einer Linie / Fläche verbunden.",
                     "area": "Weg mit einer Fläche verbunden."
                 },
                 "relation": "Diese Objekte können nicht verbunden werden, weil sich Ihre Relations-Rollen widersprechen.",
@@ -1335,7 +1335,7 @@
                     "name": "Gebäude"
                 },
                 "category-golf": {
-                    "name": "Golfplatz Merkmale"
+                    "name": "Golfplatz"
                 },
                 "category-landuse": {
                     "name": "Flächennutzung"
@@ -1985,10 +1985,10 @@
                     "label": "ICAO"
                 },
                 "incline": {
-                    "label": "Steigung"
+                    "label": "Neigung"
                 },
                 "incline_steps": {
-                    "label": "Steigung",
+                    "label": "Neigung",
                     "options": {
                         "down": "Hinunter",
                         "up": "Hinauf"
@@ -2163,11 +2163,11 @@
                 "mtb/scale/uphill": {
                     "label": "Mountainbike-Schwierigkeitsgrad bergauf",
                     "options": {
-                        "0": "0: Durchschnittliche Steigung <10%, Kies/verdichtete Erde, keine Hindernisse",
-                        "1": "1: Durchschnittliche Steigung <15%, Kies/verdichtete Erde, wenige kleine Hindernisse",
-                        "2": "2: Durchschnittliche Steigung <20%, stabile Oberfläche, faustgroße Steine/Wurzeln",
-                        "3": "3: Durchschnittliche Steigung <25%, variable Oberfläche, faustgroße Steine/Äste",
-                        "4": "4: Durchschnittliche Steigung <30%, schlechter Zustand, große Steine/Äste. Rad muss meist geschoben oder getragen werden.",
+                        "0": "0: Durchschnittliche Neigung <10%, Kies/verdichtete Erde, keine Hindernisse",
+                        "1": "1: Durchschnittliche Neigung <15%, Kies/verdichtete Erde, wenige kleine Hindernisse",
+                        "2": "2: Durchschnittliche Neigung <20%, stabile Oberfläche, faustgroße Steine/Wurzeln",
+                        "3": "3: Durchschnittliche Neigung <25%, variable Oberfläche, faustgroße Steine/Äste",
+                        "4": "4: Durchschnittliche Neigung <30%, schlechter Zustand, große Steine/Äste. Rad muss meist geschoben oder getragen werden.",
                         "5": "5: Sehr steil, Mountainbike muss generell geschoben oder getragen werden"
                     },
                     "placeholder": "0, 1, 2, 3, 4, 5"
@@ -3996,6 +3996,10 @@
                 "emergency/destination": {
                     "name": "Notzufahrt ohne Notdurchfahrt"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Feuerlöscher",
+                    "terms": "Feuerlöscher, Feuerlöschapparat, Löschgerät, Feuerlöschgerät"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Hydrant",
                     "terms": "Hydrant,Löschwasserentnahmestelle"
@@ -4566,8 +4570,8 @@
                     "terms": "Gelände mit religiöser Nutzung"
                 },
                 "landuse/residential": {
-                    "name": "Siedlungsraum",
-                    "terms": "Wohngebiet, Wohngegend, Wohnregion, Siedlungsfläche, Ortslage"
+                    "name": "Wohngebiet",
+                    "terms": "Wohngebiet, Wohngegend, Wohnregion, Siedlungsfläche, Ortslage, Siedlungsraum"
                 },
                 "landuse/retail": {
                     "name": "Einzelhandel",
@@ -4596,6 +4600,10 @@
                 "leisure/bird_hide": {
                     "name": "Vogelbeobachtungsturm",
                     "terms": "Vogelbeobachtungsturm, Vogelbeobachtungshütte"
+                },
+                "leisure/bleachers": {
+                    "name": "Haupttribüne",
+                    "terms": "Haupttribüne, Ehrentribüne"
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowlingbahn",
@@ -6024,6 +6032,10 @@
                     "name": "Motorradhändler",
                     "terms": "Motorrad-Handlung, Motorradladen"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Motorrad Reperaturwerkstätte",
+                    "terms": "Motorrad Reperaturwerkstatt, Motorrad Reperaturbetrieb"
+                },
                 "shop/music": {
                     "name": "Musikgeschäft",
                     "terms": "Musikladen, Musikgeschäft"
@@ -6930,6 +6942,10 @@
                 "description": "Unregelmässiges Treffen der OpenStreetMap Gemeinschaft in Chiang Mai",
                 "extendedDescription": "Mitgieder der OpenStreetMap treffen sich alle paar Monate in Chiang Mai. Nimm Kontakt auch und lies bei {url} um zu sehen wann das nächste Treffen stattfindet."
             },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap TH Facebook Gruppe",
+                "description": "Facebook Gruppe für OpenStreetMapper in Thailand"
+            },
             "OSM-TH-forum": {
                 "name": "OpenStreetMap TH forum",
                 "description": "OpenStreetMap Thailand Web Forum"
@@ -7011,8 +7027,20 @@
                 "name": "OpenStreetMap Belgien Twitter",
                 "description": "OSM Belgien auf Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Tschechische OSM community",
+                "description": "Mapping Portal, website und Kontaktdaten der  OSM Mitglieder in Tschechien"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ auf Facebook",
+                "description": "Folge der tschechischen Gemeinschaft auf Facebook - inklusive übersetztem WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Tschechischer Twitter @osmcz",
+                "description": "Folge der tschechischen Gemeinschaft auf Twitter - inklusive übersetztem WeeklyOSM!"
+            },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz Mailingliste",
+                "name": "Tschechische Mailing Liste (talk-cz)",
                 "description": "Talk-cz is die offizielle Mailingliste for the tschechische OSM-Gemeinschaft"
             },
             "dk-forum": {
@@ -7090,6 +7118,10 @@
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing Liste",
                 "description": "Das ist die Mailing Liste für die Ostwestfalen-Lippe OSM Gemeinschaft"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Deutschland Telegram",
+                "description": "Beteilige dich an der OpenStreetMap Deutschland Telegram Supergruppe auf {url}"
             },
             "osm-de": {
                 "name": "OpenStreetMap Deutschland",
@@ -7512,6 +7544,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap in Reddit",
                 "description": "/r/openstreetmap/ ist ein großartiger Ort um mehr über OpenStreetMap zu lernen. Du kannst jede Frage stellen!"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Beteilige dich an der globalen OpenStreetMap Telegram Supergruppe auf {url}"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",

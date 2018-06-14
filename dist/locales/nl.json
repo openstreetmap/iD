@@ -1471,18 +1471,18 @@
                 },
                 "aerialway/capacity": {
                     "label": "Capaciteit (per uur)",
-                    "placeholder": "500, 2500, 5000 …"
+                    "placeholder": "500, 2500, 5000, …"
                 },
                 "aerialway/duration": {
                     "label": "Duur (minuten)",
-                    "placeholder": "1, 2, 3 …"
+                    "placeholder": "1, 2, 3, …"
                 },
                 "aerialway/heating": {
                     "label": "Verwarmd"
                 },
                 "aerialway/occupancy": {
                     "label": "Bezetting",
-                    "placeholder": "2, 4, 8 …"
+                    "placeholder": "2, 4, 8, …"
                 },
                 "aerialway/summer/access": {
                     "label": "Toegang (zomer)",
@@ -1593,7 +1593,7 @@
                 },
                 "cables": {
                     "label": "Kabels onder elektrische spanning",
-                    "placeholder": "1, 2, 3 …"
+                    "placeholder": "1, 2, 3, …"
                 },
                 "camera/direction": {
                     "label": "Richting (in graden met de klok mee)",
@@ -1612,7 +1612,7 @@
                 },
                 "capacity": {
                     "label": "Capaciteit",
-                    "placeholder": "50, 100, 200 …"
+                    "placeholder": "50, 100, 200, …"
                 },
                 "castle_type": {
                     "label": "Type"
@@ -1737,7 +1737,7 @@
                 },
                 "devices": {
                     "label": "Aantal apparaten",
-                    "placeholder": "1, 2, 3 …"
+                    "placeholder": "1, 2, 3, …"
                 },
                 "diaper": {
                     "label": "Luierverschoning mogelijk"
@@ -1809,7 +1809,7 @@
                         "rail": "Elektrisch Spoor",
                         "yes": "Ja (onbepaald)"
                     },
-                    "placeholder": "Contactleiding, Elektrisch Spoor …"
+                    "placeholder": "Contactleiding, Elektrisch Spoor, …"
                 },
                 "elevation": {
                     "label": "Hoogte"
@@ -1898,7 +1898,7 @@
                 },
                 "generator/output/electricity": {
                     "label": "Stroomuitvoer",
-                    "placeholder": "50 MW, 100 MW, 200 MW …"
+                    "placeholder": "50 MW, 100 MW, 200 MW, …"
                 },
                 "generator/source": {
                     "label": "Bron"
@@ -1943,7 +1943,7 @@
                 },
                 "hoops": {
                     "label": "Lussen",
-                    "placeholder": "1, 2, 4 …"
+                    "placeholder": "1, 2, 4, …"
                 },
                 "horse_dressage": {
                     "label": "Dressuur",
@@ -1969,7 +1969,7 @@
                         "difficult": "Moeilijk: Smalle en onbeschutte weg. Er kunnen obstakels en nauwe passages zijn.",
                         "impossible": "Ondoordringbaar: Weg of brug niet toegankelijk voor paarden. Te smal, niet genoeg draagkracht, obstakels zoals ladders. Levensgevaar."
                     },
-                    "placeholder": "Moeilijk, Gevaarlijk …"
+                    "placeholder": "Moeilijk, Gevaarlijk, …"
                 },
                 "horse_stables": {
                     "label": "Rijstal",
@@ -2038,8 +2038,8 @@
                     "label": "Type"
                 },
                 "lanes": {
-                    "label": "Rijbanen",
-                    "placeholder": "1, 2, 3 …"
+                    "label": "Rijstroken",
+                    "placeholder": "1, 2, 3, …"
                 },
                 "layer": {
                     "label": "Relatieve hoogteligging",
@@ -2085,14 +2085,14 @@
                     "label": "Type"
                 },
                 "length": {
-                    "label": "Lengte (Meter)"
+                    "label": "Lengte (meter)"
                 },
                 "level": {
                     "label": "Verdieping"
                 },
                 "levels": {
                     "label": "Niveaus",
-                    "placeholder": "2, 4, 6 …"
+                    "placeholder": "2, 4, 6, …"
                 },
                 "lit": {
                     "label": "Verlicht"
@@ -2118,11 +2118,11 @@
                 },
                 "maxspeed": {
                     "label": "Snelheidsbeperking",
-                    "placeholder": "40, 50, 60 …"
+                    "placeholder": "40, 50, 60, …"
                 },
                 "maxspeed/advisory": {
                     "label": "Adviessnelheid",
-                    "placeholder": "40, 50, 70 …"
+                    "placeholder": "40, 50, 70, …"
                 },
                 "maxstay": {
                     "label": "Maximale verblijftijd"
@@ -2147,10 +2147,10 @@
                         "5": "5: Moeilijkst/gevaarlijkst, gebieden met rotsblokken, aardverschuivingen",
                         "6": "6: Niet berijdbaar, behalve voor de allerbeste mountainbikers"
                     },
-                    "placeholder": "0, 1, 2, 3 …"
+                    "placeholder": "0, 1, 2, 3, …"
                 },
                 "mtb/scale/imba": {
-                    "label": "IMBA Route-moeilijkheidsgraad",
+                    "label": "IMBA-route-moeilijkheidsgraad",
                     "options": {
                         "0": "Gemakkelijkst (witte cirkel)",
                         "1": "Makkelijk (groene cirkel)",
@@ -2158,7 +2158,7 @@
                         "3": "Moeilijk (Zwarte diamand)",
                         "4": "Extreem moeilijk (dubbele zwarte diamand)"
                     },
-                    "placeholder": "Makkelijk, gemiddeld, moeilijk …"
+                    "placeholder": "Makkelijk, Gemiddeld, Moeilijk, …"
                 },
                 "mtb/scale/uphill": {
                     "label": "Mountainbike-moeilijkheidsgraad bij berg-op",
@@ -2170,7 +2170,7 @@
                         "4": "4: Gem. stijging <30%, slechte staat, grote rotsen/takken",
                         "5": "5: Erg steil, fiets wordt meestal geduwd of gedragen"
                     },
-                    "placeholder": "0, 1, 2, 3 …"
+                    "placeholder": "0, 1, 2, 3, …"
                 },
                 "name": {
                     "label": "Naam",
@@ -2252,7 +2252,7 @@
                 },
                 "par": {
                     "label": "Par",
-                    "placeholder": "3, 4, 5 …"
+                    "placeholder": "3, 4, 5, …"
                 },
                 "park_ride": {
                     "label": "Park & Ride (parkeren en ander vervoersmiddel nemen)"
@@ -2274,9 +2274,10 @@
                 },
                 "phases": {
                     "label": "Fasen",
-                    "placeholder": "1, 2, 3 …"
+                    "placeholder": "1, 2, 3, …"
                 },
                 "phone": {
+                    "label": "Telefoon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2290,7 +2291,7 @@
                         "intermediate": "Gemiddeld (blauw vierkant)",
                         "novice": "Beginner (educatief)"
                     },
-                    "placeholder": "Gemakkelijk, gemiddeld, moeilijk …"
+                    "placeholder": "Gemakkelijk, Gemiddeld, Moeilijk, …"
                 },
                 "piste/grooming": {
                     "label": "Manier van sneeuw-grooming",
@@ -2325,7 +2326,7 @@
                 },
                 "plant/output/electricity": {
                     "label": "Stroomuitvoer",
-                    "placeholder": "500 MW, 1000 MW, 2000 MW …"
+                    "placeholder": "500 MW, 1000 MW, 2000 MW, …"
                 },
                 "playground/baby": {
                     "label": "Kinderstoeltje"
@@ -2439,7 +2440,7 @@
                         "hiking": "T1: Wandelen",
                         "mountain_hiking": "T2: Bergwandelen"
                     },
-                    "placeholder": "Bergwandelen, alpinewandelen …"
+                    "placeholder": "Bergwandelen, Alpinewandelen, …"
                 },
                 "sanitary_dump_station": {
                     "label": "Toilet-afvoer"
@@ -2499,7 +2500,7 @@
                         "separated": "Toegestaan op aangegeven, niet-afgescheiden plaatsen",
                         "yes": "Overal toegestaan"
                     },
-                    "placeholder": "Nee, Gescheiden, Ja …"
+                    "placeholder": "Nee, Gescheiden, Ja, …"
                 },
                 "smoothness": {
                     "label": "Gladheid",
@@ -2513,7 +2514,7 @@
                         "very_bad": "Grote bodemvrijheid: lichte offroadvoertuigen",
                         "very_horrible": "Gespecialiseerde offroad: tractor, quad"
                     },
-                    "placeholder": "Dunne Wieltjes, Wielen, Offroad …"
+                    "placeholder": "Dunne Wieltjes, Wielen, Offroad, …"
                 },
                 "social_facility": {
                     "label": "Type"
@@ -2621,7 +2622,7 @@
                         "only": "Alleen afhaal",
                         "yes": "Ja"
                     },
-                    "placeholder": "Ja, Nee, Alleen afhaal …"
+                    "placeholder": "Ja, Nee, Alleen afhaal, …"
                 },
                 "toilets/disposal": {
                     "label": "Afvoer",
@@ -2646,7 +2647,7 @@
                 },
                 "tower/construction": {
                     "label": "Constructie",
-                    "placeholder": "Mast, Raamwerk, Verborgen …"
+                    "placeholder": "Mast, Raamwerk, Verborgen, …"
                 },
                 "tower/type": {
                     "label": "Type"
@@ -2660,7 +2661,7 @@
                         "grade4": "Voornamelijk los: aarde/zand/gras met wat vast materiaal",
                         "grade5": "Los: aarde/zand/gras"
                     },
-                    "placeholder": "Vast, voornamelijk vast, los …"
+                    "placeholder": "Vast, Voornamelijk vast, Los, …"
                 },
                 "trade": {
                     "label": "Type"
@@ -2689,7 +2690,7 @@
                         "intermediate": "Gemiddeld: weinig wegwijzers, paden meestal zichtbaar",
                         "no": "Geen: geen paden, perfecte oriëntatie vaardigheden vereist"
                     },
-                    "placeholder": "Uitmuntend, Goed, Slecht …"
+                    "placeholder": "Uitmuntend, Goed, Slecht, …"
                 },
                 "transformer": {
                     "label": "Type",
@@ -2794,7 +2795,7 @@
                 },
                 "windings": {
                     "label": "Wikkelingen",
-                    "placeholder": "1, 2, 3 …"
+                    "placeholder": "1, 2, 3, …"
                 },
                 "windings/configuration": {
                     "label": "Wikkelingconfiguratie",
@@ -3661,6 +3662,9 @@
                     "name": "Garages (privéstalling voor voertuigen)",
                     "terms": "autogarage"
                 },
+                "building/grandstand": {
+                    "name": "Overdekte tribune"
+                },
                 "building/greenhouse": {
                     "name": "Broeikas",
                     "terms": "serre,kas,glastuinbouw"
@@ -3885,7 +3889,7 @@
                     "terms": "portetten,pasfoto's,fotografie,fotokunstenaar"
                 },
                 "craft/photographic_laboratory": {
-                    "name": "Foto-ontwikkellabo",
+                    "name": "Foto-ontwikkellab",
                     "terms": "donkere kamer,foto,analoge foto,negatieven,fotograaf,fotografie"
                 },
                 "craft/plasterer": {
@@ -4579,6 +4583,9 @@
                     "name": "Vogelkijkscherm of -hut",
                     "terms": "vogelkijkhut,vogelkijkscherm"
                 },
+                "leisure/bleachers": {
+                    "name": "Tribune"
+                },
                 "leisure/bowling_alley": {
                     "name": "Bowlingbaan",
                     "terms": "bowlingcentrum,kegelbaan,bowlen,bowl inn"
@@ -4816,7 +4823,7 @@
                 },
                 "man_made/antenna": {
                     "name": "Antenne",
-                    "terms": "zender,ontvanger,radio"
+                    "terms": "zender,ontvanger,radio,zendmast"
                 },
                 "man_made/breakwater": {
                     "name": "Golfbreker",
@@ -4829,6 +4836,9 @@
                 "man_made/chimney": {
                     "name": "Industriële schoorsteen",
                     "terms": "schoorsteen,schouw"
+                },
+                "man_made/clearcut": {
+                    "name": "Gekapt bos"
                 },
                 "man_made/crane": {
                     "name": "Permanente kraan",
@@ -5236,7 +5246,7 @@
                     "terms": "eiland"
                 },
                 "place/islet": {
-                    "name": "Eilandje <1km²",
+                    "name": "Eilandje < 1 km²",
                     "terms": "archipel,atol,islet,rif"
                 },
                 "place/isolated_dwelling": {
@@ -5869,6 +5879,7 @@
                     "terms": "bouwcentrum,bouwmaterialenspeciaalzaak"
                 },
                 "shop/health_food": {
+                    "name": "Gezondheidswinkel",
                     "terms": "supervoedselwinkel,superfoodwinkel"
                 },
                 "shop/hearing_aids": {
@@ -5939,6 +5950,9 @@
                 "shop/motorcycle": {
                     "name": "Motorwinkel"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Motorreparatie"
+                },
                 "shop/music": {
                     "name": "Muziekwinkel"
                 },
@@ -6000,7 +6014,7 @@
                     "terms": "radiotechniek,satelliet-TV"
                 },
                 "shop/religion": {
-                    "name": "Religieuze Winkel",
+                    "name": "Religieuze winkel",
                     "terms": "liturgisch centrum,kerk,godsdienstwinkel,kruisbeelden,souvenirwinkel"
                 },
                 "shop/scuba_diving": {
@@ -6086,7 +6100,7 @@
                     "terms": "videoverhuur,dvd-theek,dvd-verhuur"
                 },
                 "shop/video_games": {
-                    "name": "videogame winkel"
+                    "name": "Computerspelwinkel"
                 },
                 "shop/watches": {
                     "name": "Horlogewinkel",
@@ -6097,8 +6111,8 @@
                     "terms": "watersportwinkel,zwemwinkel,watersportzaak,zwemgerief,watersportgerief"
                 },
                 "shop/weapons": {
-                    "name": "wapen winkel",
-                    "terms": "wapenwinkel"
+                    "name": "Wapenwinkel",
+                    "terms": "wapens,munitie"
                 },
                 "shop/wholesale": {
                     "name": "Groothandel"
@@ -6122,7 +6136,8 @@
                     "terms": "gastenappartement,verhuurd appartement,zomerappartement,vakantieflat,gastenflat,gastappartement,gastflat,verhuurde flat,zomerflat"
                 },
                 "tourism/aquarium": {
-                    "name": "Aquarium"
+                    "name": "Aquarium",
+                    "terms": "vis,zee,water"
                 },
                 "tourism/artwork": {
                     "name": "Kunstwerk",
@@ -6212,7 +6227,8 @@
                     "terms": "zoo"
                 },
                 "traffic_calming": {
-                    "name": "Verkeersremmer"
+                    "name": "Verkeersremmer",
+                    "terms": "drempel,heuvel,langzaam,snelheid"
                 },
                 "traffic_calming/bump": {
                     "name": "Kleine verkeersdrempel",
@@ -6314,14 +6330,14 @@
                     "terms": "hikingroute,trekkingroute"
                 },
                 "type/route/hiking": {
-                    "name": "Hikingroute",
-                    "terms": "wandelroute,trekkingroute"
+                    "name": "Hikingtraject",
+                    "terms": "wandelroute,trekkingroute,wandeltraject"
                 },
                 "type/route/horse": {
-                    "name": "Ruiterroute"
+                    "name": "Ruitertraject"
                 },
                 "type/route/light_rail": {
-                    "name": "Lightrailroute",
+                    "name": "Lightrailtraject",
                     "terms": "lichtspoorroute,lichtespoorwegroute"
                 },
                 "type/route/pipeline": {
@@ -6329,8 +6345,8 @@
                     "terms": "pijplijnroute,pijplijntraject,pijpleidingsroute"
                 },
                 "type/route/piste": {
-                    "name": "Skipiste/Skiroute",
-                    "terms": "piste,skiroute"
+                    "name": "Piste of skiroute",
+                    "terms": "skipiste"
                 },
                 "type/route/power": {
                     "name": "Elektriciteitsleidingstraject",
@@ -6341,7 +6357,7 @@
                     "terms": "autotraject,sightseeingroute"
                 },
                 "type/route/subway": {
-                    "name": "Metroroute",
+                    "name": "Metrotraject",
                     "terms": "metrolijn,route,lijn,metrotraject"
                 },
                 "type/route/train": {
@@ -6353,7 +6369,7 @@
                     "terms": "tramroute"
                 },
                 "type/route_master": {
-                    "name": "Openbaar-vervoer-lijn",
+                    "name": "Openbaarvervoerstraject",
                     "terms": "lijn,buslijn,tramlijn,metrolijn,treintraject,treinlijn"
                 },
                 "type/site": {
@@ -6396,7 +6412,7 @@
                     "terms": "greppel,gracht"
                 },
                 "waterway/fuel": {
-                    "name": "Tankstation voor Boten",
+                    "name": "Maritiem tankstation",
                     "terms": "schip,brandstof"
                 },
                 "waterway/river": {
@@ -6408,7 +6424,7 @@
                     "terms": "oever"
                 },
                 "waterway/sanitary_dump_station": {
-                    "name": "Boot-toilet-afvoer",
+                    "name": "Maritieme toiletafvoer",
                     "terms": "schip,uitwerpselen,urine,toilet"
                 },
                 "waterway/stream": {
@@ -6731,6 +6747,15 @@
                 "name": "OpenStreetMap Japan Twitter",
                 "description": "Volg ons op Twitter: {url}"
             },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japan"
+            },
+            "OSM-korea-telegram": {
+                "name": "OSM Korea Telegram-kanaal"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaysia op Facebook"
+            },
             "OSM-MY-forum": {
                 "name": "OpenStreetMap Maleisië Forum",
                 "description": "Officiële OpenStreetMap Maleisië Forum"
@@ -6784,6 +6809,16 @@
                 "name": "OpenStreetMap Taiwan Mailinglijst",
                 "description": "Talk-tw is de officiële Mailinglijst voor Taiwan"
             },
+            "OSM-TH-forum": {
+                "name": "OpenStreetMap TH-forum"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana"
+            },
+            "al-telegram": {
+                "name": "OSM Albanië Telegram-kanaal",
+                "description": "OpenStreetMap Albanië Telegram-kanaal"
+            },
             "at-mailinglist": {
                 "name": "Talk-at Mailinglijst",
                 "description": "Talk-at is de officiële Mailinglijst voor Oostenrijk"
@@ -6829,7 +6864,6 @@
                 "name": "OpenStreetMap België Twitter"
             },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz Mailinglijst",
                 "description": "Talk-cz is de officiële Mailinglijst voor Tsjechië"
             },
             "fr-facebook": {
@@ -6840,6 +6874,9 @@
                 "name": "OpenStreetMap Frankrijk op Twitter",
                 "description": "OpenStreetMap Frankrijk op Twitter: {url}"
             },
+            "de-berlin-telegram": {
+                "name": "@osmberlin op Telegram"
+            },
             "de-irc": {
                 "name": "OpenStreetMap Duitsland IRC"
             },
@@ -6847,9 +6884,15 @@
                 "name": "Talk-de Mailinglijst",
                 "description": "Talk-de is de officiële Mailinglijst voor Duitsland"
             },
+            "de-telegram": {
+                "name": "OpenStreetMap Duitsland Telegram"
+            },
             "osm-de": {
                 "name": "OpenStreetMap Duitsland",
                 "description": "Het platform voor informatie over OpenStreetMap in Duitsland"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia op Telegram"
             },
             "OSM-Rome-meetup": {
                 "name": "Incontro Mappatori Romani",
@@ -6863,7 +6906,7 @@
                 "name": "OpenStreetMap Polen Facebook-groep"
             },
             "OSM-ES-telegram": {
-                "name": "Telegram",
+                "name": "@OSMes op Telegram",
                 "description": "OpenStreetMap Spanje op Telegram"
             },
             "se-facebook": {
@@ -6879,6 +6922,12 @@
             },
             "OSM-Vancouver-meetup": {
                 "name": "OpenStreetMap Vancouver"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba op Telegram"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM Nicaragua op Telegram"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -6974,7 +7023,7 @@
                 "name": "Talk-ar Mailinglijst"
             },
             "OSM-AR-telegram": {
-                "name": "Telegram",
+                "name": "OpenStreetMap Argentinië Telegram",
                 "description": "OpenStreetMap Argentinië op Telegram"
             },
             "OSM-AR-twitter": {
@@ -6982,15 +7031,17 @@
                 "description": "Volg ons op Twitter: {url}"
             },
             "Bahia-telegram": {
-                "name": "Telegram",
                 "description": "OpenStreetMap Bahia op Telegram"
+            },
+            "DF-telegram": {
+                "name": "OpenStreetMap Brasília Telegram-groep"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Mailinglijst",
                 "description": "Talk-br is de officiële Mailinglijst voor Brazilië"
             },
             "OSM-br-telegram": {
-                "name": "Telegram",
+                "name": "OpenStreetMap Brazilië Telegram",
                 "description": "OpenStreetMap Brazilië op Telegram"
             },
             "OSM-br-twitter": {
@@ -7006,7 +7057,7 @@
                 "description": "Talk-cl is de officiële Mailinglijst voor Chili"
             },
             "OSM-CL-telegram": {
-                "name": "Telegram",
+                "name": "OpenStreetMap Chili Telegram",
                 "description": "OpenStreetMap Chili op Telegram"
             },
             "OSM-CL-twitter": {
@@ -7020,6 +7071,9 @@
                 "name": "OpenStreetMap Colombia Facebook",
                 "description": "Wordt lid van de OpenStreetMap Colombia community op Facebook"
             },
+            "OSM-CO-telegram": {
+                "name": "OSM Colombia op Telegram"
+            },
             "OSM-CO-twitter": {
                 "name": "OpenStreetMap Colombia Twitter",
                 "description": "Volg ons op Twitter at {url}"
@@ -7027,9 +7081,21 @@
             "OSM-CO": {
                 "name": "OpenStreetMap Colombia"
             },
+            "OSM-EC-telegram": {
+                "name": "OSM Ecuador op Telegram"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paraguay op Telegram"
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap op Reddit",
                 "description": "Op /r/openstreetmap/ vind een levendige dialoog plaats over OpenStreetMap. Hier kun je alles vragen!"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram"
             }
         }
     }

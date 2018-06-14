@@ -335,7 +335,7 @@
             "title": "آپلود در اوپن استریت مپ",
             "upload_explanation": "تغییراتی که بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
             "upload_explanation_with_user": "تفییراتی که شما به عنوان {user} بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
-            "request_review": "مایل به بازنگری در ویرایش های خود هستم",
+            "request_review": "می‌خواهم کسی ویرایش‌هایم را بررسی کند.",
             "save": "بارگزاری",
             "cancel": "لغو",
             "changes": "{count} تغییر",
@@ -512,7 +512,7 @@
             },
             "boundaries": {
                 "description": "مرزها",
-                "tooltip": "مرزهای اداری"
+                "tooltip": "مرزهای حکومتی"
             },
             "water": {
                 "description": "عناصر آبی",
@@ -558,6 +558,7 @@
         },
         "save": {
             "title": "ذخیره",
+            "help": "بررسی تغییرات و ذخیره آن‌ها در OpenStreetMap, آنها را برای دیگران قابل نمایش می سازد.",
             "no_changes": "تغییراتی برای دخیره نیست.",
             "error": "هنگامی که  تلاش شد ذخیره شود مشکلاتی رخ داد",
             "status_code": "سرور کد {code} را بازگرداند.",
@@ -588,7 +589,8 @@
         "success": {
             "just_edited": "شما OpenStreetMap را ویرایش کردید!",
             "help_link_text": "جزئیات",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F",
+            "languages": "زبان‌ها: {languages}"
         },
         "confirm": {
             "okay": "ok",
@@ -597,7 +599,8 @@
         "splash": {
             "welcome": "به ویرایشگر ID OpenStreetMap خوش آمدید",
             "text": "iD یک ابزار دوستانه اما قدرتمند برای کمک کردن به بهترین نقشه رایگان جهان است. این نسخه ی  {version} است. برای اطلاعات بیشتر {website} را ببینید و باگ را در {github} گزارش دهید.",
-            "walkthrough": "آغاز گردش"
+            "walkthrough": "آغاز گردش",
+            "start": "حالا ویرایش کن"
         },
         "source_switch": {
             "live": "زنده",
@@ -653,12 +656,16 @@
                 "features_h": "ویژگی‌های نقشه"
             },
             "editing": {
+                "title": "ویرایش و ذخیره",
                 "select_h": "انتخاب",
                 "multiselect_h": "انتخاب چندتایی",
                 "save_h": "ذخیره کن",
                 "upload_h": "آپلود",
                 "backups_h": "بکآپ اتوماتیک",
                 "keyboard_h": "کلید میانبر"
+            },
+            "feature_editor": {
+                "tags_h": "برچسب ها"
             },
             "points": {
                 "title": "نقاط",
@@ -669,6 +676,8 @@
             "lines": {
                 "title": "خطوط",
                 "add_line_h": "اصافه کردن خطوط",
+                "modify_line_h": "ویرایش خطوط",
+                "disconnect_line_h": "قطع اتصال خطوط",
                 "move_line_h": "جابجایی خطوط",
                 "delete_line_h": "پاک کردن خطوط"
             },
@@ -680,6 +689,13 @@
             "relations": {
                 "edit_relation_h": "ویرایش روابط",
                 "multipolygon_h": "چند ضلعی"
+            },
+            "field": {
+                "restrictions": {
+                    "tips": {
+                        "title": "نکات"
+                    }
+                }
             }
         },
         "intro": {
@@ -773,7 +789,10 @@
                 "title": "ویرایش",
                 "drawing": {
                     "title": "نقشه برداری",
-                    "place_point": "ایجاد نقطه"
+                    "add_line": "حالت 'افزودن خط'",
+                    "add_area": "حالت 'افزودن ناحیه'",
+                    "place_point": "ایجاد نقطه",
+                    "stop_line": "اتمام رسم خط یا ناحیه"
                 },
                 "operations": {
                     "title": "عملیات",
@@ -799,6 +818,8 @@
             "square_miles": "{quantity} مایل مربع",
             "meters": "{quantity} متر",
             "kilometers": "{quantity} کیلومتر",
+            "square_meters": "{quantity} متر مربع",
+            "square_kilometers": "{quantity} کیلومتر مربع",
             "area_pair": "{area1} ({area2})",
             "arcdegrees": "{quantity}°",
             "arcminutes": "{quantity}′",
@@ -1200,6 +1221,9 @@
                         "cycleway:left": "سمت چپ",
                         "cycleway:right": "سمت راست"
                     }
+                },
+                "dance/style": {
+                    "label": "سبک های رقص"
                 },
                 "date": {
                     "label": "تاریخ"
@@ -1713,6 +1737,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "تلفن",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2147,6 +2172,14 @@
                     "label": "نوع",
                     "placeholder": "پیش فرض"
                 },
+                "usage_rail": {
+                    "options": {
+                        "tourism": "توریستی"
+                    }
+                },
+                "vending": {
+                    "label": "نوع اجناس:"
+                },
                 "visibility": {
                     "label": "دید",
                     "options": {
@@ -2160,7 +2193,7 @@
                     "options": {
                         "active": "فعال",
                         "dormant": "خاموش",
-                        "extinct": "از بین رفته"
+                        "extinct": "منقرض شده"
                     }
                 },
                 "volcano/type": {
@@ -2490,7 +2523,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سفارت'، با کاما جدا می‌شوند>"
                 },
                 "amenity/fast_food": {
-                    "name": "غذای آماده",
+                    "name": "فست فود",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'غذای آماده'، با کاما جدا می‌شوند>"
                 },
                 "amenity/fire_station": {
@@ -2498,7 +2531,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه آتش نشانی'، با کاما جدا می‌شوند>"
                 },
                 "amenity/food_court": {
-                    "name": "بوفه غذا",
+                    "name": "فودکورت",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بوفه غذا'، با کاما جدا می‌شوند>"
                 },
                 "amenity/fountain": {
@@ -2534,7 +2567,7 @@
                     "terms": "کافه‌ی اینترنت"
                 },
                 "amenity/kindergarten": {
-                    "name": "پیش دبستانی / محیط کودکستان",
+                    "name": "محوطه پیش دبستانی / مهدکودک",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیش دبستانی / محیط کودکستان'، با کاما جدا می‌شوند>"
                 },
                 "amenity/library": {
@@ -2615,6 +2648,7 @@
                     "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
                 },
                 "amenity/place_of_worship/sikh": {
+                    "name": "معبد سیک",
                     "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
                 },
                 "amenity/place_of_worship/taoist": {
@@ -2739,7 +2773,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تالار شهر'، با کاما جدا می‌شوند>"
                 },
                 "amenity/university": {
-                    "name": "محیط دانشگاهی",
+                    "name": "محوطه دانشگاه",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محیط دانشگاه'، با کاما جدا می‌شوند>"
                 },
                 "amenity/vending_machine": {
@@ -2749,6 +2783,9 @@
                 "amenity/vending_machine/cigarettes": {
                     "name": "دستگاه فروش سیگار",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'دستگاه فروش سیگار'، با کاما جدا می‌شوند>"
+                },
+                "amenity/vending_machine/coffee": {
+                    "name": "دستگاه فروش قهوه"
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "دستگاه فروش کاندوم",
@@ -2763,7 +2800,11 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دستگاه خود توزیع کیسه پسماند'، با کاما جدا می‌شوند>"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
+                    "name": "دستتگاه فروش لوازم بهداشتی زنان",
                     "terms": "<translate with synonyms or related terms for 'Feminine Hygiene Vending Machine', separated by commas>"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "دستگاه فروش خوراکی"
                 },
                 "amenity/vending_machine/ice_cream": {
                     "name": "دستگاه فروش بستنی"
@@ -2830,6 +2871,7 @@
                     "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
                 },
                 "attraction/animal": {
+                    "name": "حیوان",
                     "terms": "<translate with synonyms or related terms for 'Animal', separated by commas>"
                 },
                 "attraction/big_wheel": {
@@ -2945,7 +2987,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دیوار'، با کاما جدا می‌شوند>"
                 },
                 "boundary/administrative": {
-                    "name": "مرز اداری",
+                    "name": "مرز حکومتی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرز اداری'، با کاما جدا می‌شوند>"
                 },
                 "building": {
@@ -3055,6 +3097,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیش دبستانی / ساختمان کودکستان'، با کاما جدا می‌شوند>"
                 },
                 "building/mosque": {
+                    "name": "ساختمان مسجد",
                     "terms": "<translate with synonyms or related terms for 'Mosque Building', separated by commas>"
                 },
                 "building/public": {
@@ -3074,6 +3117,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سقف'، با کاما جدا می‌شوند>"
                 },
                 "building/ruins": {
+                    "name": "خرابه های ساختمان",
                     "terms": "<translate with synonyms or related terms for 'Building Ruins', separated by commas>"
                 },
                 "building/school": {
@@ -3096,6 +3140,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اصطبل'، با کاما جدا می‌شوند>"
                 },
                 "building/stadium": {
+                    "name": "ساختمان استادیوم",
                     "terms": "<translate with synonyms or related terms for 'Stadium Building', separated by commas>"
                 },
                 "building/static_caravan": {
@@ -3103,6 +3148,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه از پیش ساخته متحرک'، با کاما جدا می‌شوند>"
                 },
                 "building/temple": {
+                    "name": "ساختمان معبد",
                     "terms": "<translate with synonyms or related terms for 'Temple Building', separated by commas>"
                 },
                 "building/terrace": {
@@ -3439,9 +3485,11 @@
                     "terms": "<translate with synonyms or related terms for 'Chiropractor', separated by commas>"
                 },
                 "healthcare/audiologist": {
+                    "name": "شنوایی سنجی",
                     "terms": "<translate with synonyms or related terms for 'Audiologist', separated by commas>"
                 },
                 "healthcare/birthing_center": {
+                    "name": "زایشگاه",
                     "terms": "<translate with synonyms or related terms for 'Birthing Center', separated by commas>"
                 },
                 "healthcare/blood_donation": {
@@ -3449,7 +3497,11 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز اهدای خون'، با کاما جدا می‌شوند>"
                 },
                 "healthcare/hospice": {
+                    "name": "آسایشگاه",
                     "terms": "<translate with synonyms or related terms for 'Hospice', separated by commas>"
+                },
+                "healthcare/laboratory": {
+                    "name": "آزمایشگاه پزشکی"
                 },
                 "healthcare/midwife": {
                     "name": "ماما",
@@ -3459,21 +3511,26 @@
                     "terms": "<translate with synonyms or related terms for 'Occupational Therapist', separated by commas>"
                 },
                 "healthcare/optometrist": {
+                    "name": "چشم پزشک",
                     "terms": "<translate with synonyms or related terms for 'Optometrist', separated by commas>"
                 },
                 "healthcare/physiotherapist": {
+                    "name": "فیزیوتراپیست",
                     "terms": "<translate with synonyms or related terms for 'Physiotherapist', separated by commas>"
                 },
                 "healthcare/podiatrist": {
+                    "name": "پاپزشک",
                     "terms": "<translate with synonyms or related terms for 'Podiatrist', separated by commas>"
                 },
                 "healthcare/psychotherapist": {
+                    "name": "روان‎‌درمانگر",
                     "terms": "<translate with synonyms or related terms for 'Psychotherapist', separated by commas>"
                 },
                 "healthcare/rehabilitation": {
                     "terms": "<translate with synonyms or related terms for 'Rehabilitation Facility', separated by commas>"
                 },
                 "healthcare/speech_therapist": {
+                    "name": "گفتار درمان",
                     "terms": "<translate with synonyms or related terms for 'Speech Therapist', separated by commas>"
                 },
                 "highway": {
@@ -3548,9 +3605,11 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر'، با کاما جدا می‌شوند>"
                 },
                 "highway/pedestrian_area": {
+                    "name": "محل عابر پیاده",
                     "terms": "<translate with synonyms or related terms for 'Pedestrian Area', separated by commas>"
                 },
                 "highway/pedestrian_line": {
+                    "name": "خیابان عابرپیاده",
                     "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
                 },
                 "highway/primary": {
@@ -3613,6 +3672,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جایگاه خدماتی'، با کاما جدا می‌شوند>"
                 },
                 "highway/speed_camera": {
+                    "name": "دوربین سرعت",
                     "terms": "<translate with synonyms or related terms for 'Speed Camera', separated by commas>"
                 },
                 "highway/steps": {
@@ -3794,7 +3854,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل دفن زباله'، با کاما جدا می‌شوند>"
                 },
                 "landuse/meadow": {
-                    "name": "مرغزار",
+                    "name": "علفزار",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'علفزار'، با کاما جدا می‌شوند>"
                 },
                 "landuse/military": {
@@ -3919,7 +3979,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گودال آتش'، با کاما جدا می‌شوند>"
                 },
                 "leisure/fitness_centre": {
-                    "name": "مرکز پرورش و تناسب اندام",
+                    "name": "باشگاه تناسب اندام",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز پرورش و تناسب اندام'، با کاما جدا می‌شوند>"
                 },
                 "leisure/fitness_centre/yoga": {
@@ -3949,6 +4009,7 @@
                     "terms": "<translate with synonyms or related terms for 'Parallel Bars', separated by commas>"
                 },
                 "leisure/fitness_station/push-up": {
+                    "name": "محل شنا رفتن",
                     "terms": "<translate with synonyms or related terms for 'Push-Up Station', separated by commas>"
                 },
                 "leisure/fitness_station/rings": {
@@ -3958,6 +4019,7 @@
                     "terms": "<translate with synonyms or related terms for 'Exercise Instruction Sign', separated by commas>"
                 },
                 "leisure/fitness_station/sit-up": {
+                    "name": "محل دراز و نشست",
                     "terms": "<translate with synonyms or related terms for 'Sit-Up Station', separated by commas>"
                 },
                 "leisure/fitness_station/stairs": {
@@ -4055,6 +4117,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین فوتبال'، با کاما جدا می‌شوند>"
                 },
                 "leisure/pitch/table_tennis": {
+                    "name": "میز پینگ پنگ",
                     "terms": "<translate with synonyms or related terms for 'Ping Pong Table', separated by commas>"
                 },
                 "leisure/pitch/tennis": {
@@ -4374,7 +4437,7 @@
                     "terms": "<translate with synonyms or related terms for 'Accountant Office', separated by commas>"
                 },
                 "office/administrative": {
-                    "name": "دفتر اداری"
+                    "name": "دفتر حکومتی"
                 },
                 "office/adoption_agency": {
                     "terms": "<translate with synonyms or related terms for 'Adoption Agency', separated by commas>"
@@ -4564,6 +4627,12 @@
                     "name": "مولد برق",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مولد برق'، با کاما جدا می‌شوند>"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "راکتور هسته‌ای"
+                },
+                "power/generator/source_wind": {
+                    "name": "توربین بادی"
+                },
                 "power/line": {
                     "name": "خط نیرو",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط فشار قوی برق'، با کاما جدا می‌شوند>"
@@ -4599,6 +4668,12 @@
                 },
                 "public_transport/station_monorail": {
                     "name": "ایستگاه مونوریل"
+                },
+                "public_transport/station_subway": {
+                    "name": "ایستگاه مترو"
+                },
+                "public_transport/station_train": {
+                    "name": "ایستگاه قطار"
                 },
                 "railway": {
                     "name": "راه آهن"
@@ -4661,6 +4736,9 @@
                 "shop": {
                     "name": "فروشگاه",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه'، با کاما جدا می‌شوند>"
+                },
+                "shop/agrarian": {
+                    "name": "فروشگاه لوازم کشاورزی"
                 },
                 "shop/alcohol": {
                     "name": "مغازه مشروب فروشی",
@@ -4960,6 +5038,9 @@
                     "name": "نمایندگی موتور سیکلت",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نمایندگی موتور سیکلت'، با کاما جدا می‌شوند>"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "تعمیرگاه موتورسیکلت"
+                },
                 "shop/music": {
                     "name": "فروشگاه موسیقی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه موسیقی'، با کاما جدا می‌شوند>"
@@ -4999,6 +5080,9 @@
                 "shop/pawnbroker": {
                     "name": "سمساری",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سمساری'، با کاما جدا می‌شوند>"
+                },
+                "shop/perfumery": {
+                    "name": "عطر فروشی"
                 },
                 "shop/pet": {
                     "name": "فروشگاه حیوانات خانگی",
@@ -5102,6 +5186,9 @@
                 "shop/video_games": {
                     "name": "فروشگاه بازی ویدئویی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه بازی ویدئویی'، با کاما جدا می‌شوند>"
+                },
+                "shop/watches": {
+                    "name": "ساعت فروشی"
                 },
                 "shop/water_sports": {
                     "name": "فروشگاه ورزش‌های آبی/شنا ",
@@ -5252,7 +5339,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'مرز'، با کاما جدا می‌شوند>"
                 },
                 "type/boundary/administrative": {
-                    "name": "مرز اداری",
+                    "name": "مرز حکومتی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرز اداری'، با کاما جدا می‌شوند>"
                 },
                 "type/multipolygon": {
@@ -5277,6 +5364,18 @@
                 "type/restriction/no_u_turn": {
                     "name": "دور زدن ممنوع",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'دور زدن ممنوع'، با کاما جدا می‌شوند>"
+                },
+                "type/restriction/only_left_turn": {
+                    "name": "فقط پیچیدن به چپ"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "فقط پیچیدن به راست"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "فقط مستقیم"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "فقط دورزدن"
                 },
                 "type/route": {
                     "name": "مسیر",
@@ -5313,6 +5412,9 @@
                 "type/route/pipeline": {
                     "name": "مسیر خط لوله",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر خط لوله'، با کاما جدا می‌شوند>"
+                },
+                "type/route/piste": {
+                    "name": "مسیر پیست اسکی"
                 },
                 "type/route/power": {
                     "name": "مسیر برق",
@@ -5641,6 +5743,9 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "description": "ما را در توییتر دنبال کنید: {url}"
+            },
             "Central-Pennsylvania-OSM": {
                 "name": "پنسیلوانیا مرکزی OSM",
                 "description": "جامعه نقشه برداری آنلاین بر اساس کالج ایالتی، پنسیلوانیا"

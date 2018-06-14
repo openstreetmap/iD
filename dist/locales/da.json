@@ -1269,7 +1269,7 @@
                     "options": {
                         "designated": {
                             "description": "Adgang tilladt ifølge trafikskilte eller lokale bestemmelser",
-                            "title": "Udpeget til netop dette formål"
+                            "title": "Bestemt netop til dette formål"
                         },
                         "destination": {
                             "description": "Ærindekørsel tilladt",
@@ -1825,6 +1825,13 @@
                     "label": "Kurve",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "label": "Dressurridning",
+                    "options": {
+                        "equestrian": "Ja",
+                        "undefined": "Nej"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1962,6 +1969,9 @@
                 "maxspeed": {
                     "label": "Hastighedsbegrænsning",
                     "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "label": "Anbefalet fartgrænse"
                 },
                 "maxstay": {
                     "label": "Max tid"
@@ -2113,6 +2123,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2189,6 +2200,9 @@
                 },
                 "railway": {
                     "label": "Type"
+                },
+                "railway/position": {
+                    "placeholder": "Afstand med en decimal (123.4)"
                 },
                 "railway/signal/direction": {
                     "label": "Retning",
@@ -2304,7 +2318,7 @@
                     "label": "Servicetid"
                 },
                 "shelter": {
-                    "label": "Shelter"
+                    "label": "Venteskur"
                 },
                 "shelter_type": {
                     "label": "Type"
@@ -2612,6 +2626,9 @@
                     "name": "Reklameskilt",
                     "terms": "Reklameskilt, Gadeopslagstavle"
                 },
+                "advertising/column": {
+                    "name": "Reklamesøjle"
+                },
                 "aerialway": {
                     "name": "Skiliftbane"
                 },
@@ -2714,7 +2731,7 @@
                 },
                 "amenity/animal_shelter": {
                     "name": "Dyrehjem",
-                    "terms": "Dyrepension, Dyrehjem"
+                    "terms": "Dyrepension, Hundepension, Hestepension, Dyrehjem"
                 },
                 "amenity/arts_centre": {
                     "name": "Kunstcenter",
@@ -3067,8 +3084,8 @@
                     "name": "Skrotplads"
                 },
                 "amenity/shelter": {
-                    "name": "Shelter",
-                    "terms": "Shelter, læskur"
+                    "name": "Skur",
+                    "terms": "Shelter, Bivuak"
                 },
                 "amenity/shower": {
                     "name": "Brusebad",
@@ -3091,8 +3108,8 @@
                     "terms": "Plejehjem, Alderdomshjem"
                 },
                 "amenity/social_facility/homeless_shelter": {
-                    "name": "Hjemløseskur",
-                    "terms": "Hjemløseskur"
+                    "name": "Hjemløseherberg",
+                    "terms": "Hjemløs"
                 },
                 "amenity/social_facility/nursing_home": {
                     "name": "Plejehjem",
@@ -3136,6 +3153,9 @@
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigaretautomat",
                     "terms": "Cigaretautomat, Tobaksautomat"
+                },
+                "amenity/vending_machine/coffee": {
+                    "name": "Kaffeautomat"
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "Kondomautomat",
@@ -3238,6 +3258,9 @@
                     "name": "Forlystelse i mørke",
                     "terms": "spøgelsestog"
                 },
+                "attraction/maze": {
+                    "name": "Labyrint"
+                },
                 "attraction/pirate_ship": {
                     "name": "Piratskib",
                     "terms": "sørøver"
@@ -3338,6 +3361,9 @@
                 "building/barn": {
                     "name": "Lade",
                     "terms": "Lade, Stald"
+                },
+                "building/boathouse": {
+                    "name": "Bådehus"
                 },
                 "building/bunker": {
                     "name": "Bunker"
@@ -3886,6 +3912,9 @@
                     "name": "Motorvejsafkørsel",
                     "terms": "Motorvejsafkørsel"
                 },
+                "highway/passing_place": {
+                    "name": "Vigested"
+                },
                 "highway/path": {
                     "name": "Sti",
                     "terms": "Sti"
@@ -4433,6 +4462,10 @@
                     "name": "Skorsten",
                     "terms": "Skorsten"
                 },
+                "man_made/clearcut": {
+                    "name": "Rydning",
+                    "terms": "Ryddet skov"
+                },
                 "man_made/crane": {
                     "name": "Kran",
                     "terms": "kran, løft, grej"
@@ -4598,6 +4631,9 @@
                 "natural/peak": {
                     "name": "Højdedrag",
                     "terms": "Højdedrag, Bakketop, Bjergtop"
+                },
+                "natural/reef": {
+                    "name": "Rev"
                 },
                 "natural/ridge": {
                     "name": "Højderyg",
@@ -4769,6 +4805,9 @@
                     "name": "Ø",
                     "terms": "Ø"
                 },
+                "place/islet": {
+                    "name": "Holm"
+                },
                 "place/isolated_dwelling": {
                     "name": "Lille beboet område (1-2 hustande)",
                     "terms": "Lille beboet område (1-2 hustande)"
@@ -4780,6 +4819,9 @@
                 "place/neighbourhood": {
                     "name": "Nabolag",
                     "terms": "Nabolag"
+                },
+                "place/plot": {
+                    "name": "Matrikel"
                 },
                 "place/quarter": {
                     "name": "Nabolag / Kvarter",
@@ -4800,6 +4842,15 @@
                 "place/village": {
                     "name": "Landsby",
                     "terms": "Landsby"
+                },
+                "playground/cushion": {
+                    "name": "Hoppepude"
+                },
+                "playground/sandpit": {
+                    "name": "Sandkasse"
+                },
+                "playground/swing": {
+                    "name": "Gynge"
                 },
                 "point": {
                     "name": "Punkt",
@@ -4882,6 +4933,9 @@
                 },
                 "railway/milestone": {
                     "name": "Jernbanemilepæl"
+                },
+                "railway/miniature": {
+                    "name": "Miniaturejernbane"
                 },
                 "railway/monorail": {
                     "name": "Monorail",
@@ -4976,7 +5030,7 @@
                     "terms": "Neglesalon"
                 },
                 "shop/beauty/tanning": {
-                    "name": "Hudklinik",
+                    "name": "Solcenter",
                     "terms": "Hudklinik"
                 },
                 "shop/bed": {
@@ -5436,6 +5490,9 @@
                     "name": "Autocamperplads",
                     "terms": "Autocamperplads"
                 },
+                "tourism/chalet": {
+                    "name": "Feriehus"
+                },
                 "tourism/gallery": {
                     "name": "Kunstgalleri",
                     "terms": "Kunstgalleri, Galleri"
@@ -5491,6 +5548,9 @@
                 "tourism/viewpoint": {
                     "name": "Udsigtspunkt",
                     "terms": "Udsigtspunkt"
+                },
+                "tourism/wilderness_hut": {
+                    "name": "Vildmarkshytte"
                 },
                 "tourism/zoo": {
                     "name": "Zoologisk have",
@@ -5565,6 +5625,15 @@
                 "type/restriction/no_u_turn": {
                     "name": "Ingen U-vending",
                     "terms": "Ingen U-vending"
+                },
+                "type/restriction/only_left_turn": {
+                    "name": "Kun venstresving"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Kun højresving"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Kun lige ud"
                 },
                 "type/route": {
                     "name": "Rute",
@@ -5914,6 +5983,43 @@
                     "text": "Kort © Thunderforest, Data © OpenStreetMap bidragsydere"
                 },
                 "name": "Thunderforest Landskab"
+            }
+        },
+        "community": {
+            "dk-forum": {
+                "name": "Dansk OpenStreetMap online forum"
+            },
+            "dk-irc": {
+                "name": "Dansk OpenStreetMap IRC-kanal"
+            },
+            "dk-mailinglist": {
+                "description": "En email-liste hvor OpenStreetMap i Danmark diskuteres"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap på Facebook",
+                "description": "Like os på Facebook for nyheder og opdateringer om OpenStreetMap."
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Hjælp",
+                "description": "Stil et spørgsmål og få svar på OSM's fællesskabs-drevne spørgsmål- og svar side.",
+                "extendedDescription": "{url} er for alle der har brug for hjælp med OpenStreetMap. Hvad enten du er en begynder eller har et teknisk spørgsmål, er vi her for at hjælpe!"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap på Reddit",
+                "description": "/r/openstreetmap/ er et godt sted at lære mere om OpenStreetMap.  Spørg os om alt!"
+            },
+            "OSM-Twitter": {
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSMF": {
+                "description": "OSMF er en UK-baseret non-profit organisation der støtter OpenStreetMap projektet",
+                "extendedDescription": "OSMF støtter OpenStreetMap ved at rejse penge, vedligeholde serverne der driver OSM, organisere den årlige State of the Map konference, og koordinere de frivillige der holder OSM kørende. Du kan vise din støtte og have en stemme i forhold til OpenStreetMaps retning ved at melde dig som OSMF medlem her: {signupUrl}",
+                "events": {
+                    "sotm2018": {
+                        "description": "Deltag 3 dage i Milano, Italien på den årlige internationale OpenStreetMap konference, der bringer alle i fællesskabet sammen for at socialisere, dele og lære.",
+                        "where": "Milano, Italien"
+                    }
+                }
             }
         }
     }

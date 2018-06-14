@@ -821,9 +821,11 @@
                 "disconnect_line_h": "Desconectando Linhas",
                 "disconnect_line_command": "Para desconectar uma rua de outro elemento, clique com o {rightclick} botão direito no nó conectado, e selecione o comando {disconnect} **Desconectar** no menu de edição.",
                 "move_line_h": "Movendo Linhas",
+                "move_line_command": "Para mover uma linha na sua totalidade, clique com o lado direito do rato {rightclick} na linha e selecione o comando {move} **Mover** no menu de edição. Depois mova o rato e clique com o botão esquerdo do rato {leftclick} para colocar a linha na nova localização.",
                 "move_line_connected": "Linhas conectadas a outros recursos permanecerão conectadas conforme você move a linha para um novo local. O iD pode impedir que você mova uma linha através de outra linha conectada.",
                 "delete_line_h": "Removendo Linhas",
-                "delete_line": "Se uma linha estiver totalmente incorreta, por exemplo, uma estrada que não existe no mundo real, não há problema em excluí-la. Tenha cuidado ao excluir recursos: as imagens de plano de fundo que você está usando podem estar desatualizadas e uma estrada que parece estar errada pode simplesmente ser recém-criada."
+                "delete_line": "Se uma linha estiver totalmente incorreta, por exemplo, uma estrada que não existe no mundo real, não há problema em excluí-la. Tenha cuidado ao excluir recursos: as imagens de plano de fundo que você está usando podem estar desatualizadas e uma estrada que parece estar errada pode simplesmente ser recém-criada.",
+                "delete_line_command": "Para eliminar uma linha, clique no lado direito do rato {rightclick} na linha para selecioná-la e mostrar o menu de edição, utilize o comando {delete} **Eliminar**."
             },
             "areas": {
                 "title": "Áreas",
@@ -831,47 +833,67 @@
                 "point_or_area_h": "Pontos ou Áreas",
                 "point_or_area": "Muitos recursos podem ser representados como pontos ou áreas. Você deve mapear contornos de edifícios e propriedades como áreas sempre que possível. Coloque pontos dentro de uma área de construção para representar empresas, comodidades e outros recursos localizados dentro do prédio.",
                 "add_area_h": "Adicionando Áreas",
+                "add_area_command": "Para adicionar uma área, clique no botão de {area} **Área** na barra de ferramentas acima do mapa ou utilize o atalho do teclado através da tecla `3`. Isto alterará o cursor do rato para um símbolo com uma cruz.",
+                "add_area_draw": "De seguida, posicione o cursor do rato num dos cantos do elemento e clique com o botão esquerdo {leftclick} do rato or toque na tecla `Espaço` para iniciar a colocação dos nós ao longo do limite exterior da área. Continue a colocar mais nós, clicando ou tocando na tecla `Espaço`. Enquanto desenha, pode aproximar ou arrastar o mapa para obter mais detalhes.",
+                "add_area_finish": "Para concluir uma área, pressione `{return}` ou clique novamente no primeiro ou último nó da área.",
                 "square_area_h": "Alinhar Cantos",
+                "square_area_command": "Muitos elementos em área, como edifícios, possuem cantos esquadrados. Para esquadrar a área, clique no botão direito do rato {right-click} no limite da área e selecione o comando {orthogonalize} **Esquadrar** no menu de edição. ",
                 "modify_area_h": "Modificando Áreas",
+                "modify_area_dragnode": "Frequentemente verá áreas que não possuem a forma correta, por exemplo um edifício que não está alinhado com a imagem de fundo. Para ajustar a forma da área, primeiro selecione-a clicando com o lado esquerdo {leftclick} do rato. Todos os nós da área serão representados por pequenos círculos. Pode arrastar os nós para melhorar a localização.",
+                "modify_area_addnode": "Pode também criar nós ao longo da área ao cliclar duas vezes {leftclick}**x2** ja extremidade da área ou arrastar os pequenos triângulos nos pontos intermédios entre os nós.",
                 "delete_area_h": "Removendo Áreas",
-                "delete_area": "Se uma área estiver totalmente incorreta, por exemplo, um prédio que não existe no mundo real, não há problema em excluí-lo. Seja cauteloso ao excluir recursos - as imagens de plano de fundo que você está usando podem estar desatualizadas e um edifício que parece estar errado pode simplesmente ser recém-construído."
+                "delete_area": "Se uma área estiver totalmente incorreta, por exemplo, um prédio que não existe no mundo real, não há problema em excluí-lo. Seja cauteloso ao excluir recursos - as imagens de plano de fundo que você está usando podem estar desatualizadas e um edifício que parece estar errado pode simplesmente ser recém-construído.",
+                "delete_area_command": "Para eliminar uma área, {rightclick} use o lado direito do rato na área para selecioná-la e mostrar o menu de edição, utilize o comando {delete} **Eliminar**."
             },
             "relations": {
                 "title": "Relações",
                 "intro": "Uma *relação* é um tipo especial de recurso no OpenStreetMap que agrupa outros recursos. Os recursos que pertencem a uma relação são chamados de *membros*, e cada membro pode ter uma *função* na relação.",
                 "edit_relation_h": "Editando Relações",
                 "edit_relation": "Na parte inferior do editor de recursos, você pode expandir a seção \"Todas as relações\" para ver se o recurso selecionado é um membro de qualquer relação. Você pode clicar na relação para selecioná-la e editá-la.",
+                "edit_relation_add": "Para adicionar um elemento a uma relação, selecione o elemento e clique no botão {plus} em \"Todas as relações\" na seção do editor de elementos. Você pode escolher de uma lista de relações na próximas ou escolher a opção \"Nova relação...\".",
+                "edit_relation_delete": "Pode também clicar no botão {delete} **Eliminar** para remover o elemento selecionado da relação. Se remover todos os elementos de uma relação, a relação será eliminada automaticamente. ",
                 "maintain_relation_h": "Mantendo Relações",
                 "maintain_relation": "Na maioria das vezes, o iD manterá as relações automaticamente conforme você edita. Você deve tomar cuidado ao substituir recursos que possam ser membros de relações. Por exemplo, se você excluir uma seção da estrada e desenhar uma nova seção da estrada para substituí-la, adicione a nova seção às mesmas relações (rotas, restrições de rotação, etc.) do original.",
                 "relation_types_h": "Tipos de Relações",
                 "multipolygon_h": "Multipolígonos",
+                "multipolygon": "Uma relação multi-polígono, é um grupo de um ou mais elementos exteriores e um ou mais elementos interiores. Os elementos exteriores definem as extremidades externas de um multi-polígono e os elementos interiores as sub-áreas ou espaços ocos do interior de um multi-polígono. ",
+                "multipolygon_create": "Para criar um multi-polígono, por exemplo um edifício com um logradouro (espaço oco), desenhe as extremidades externas como uma área e as internas como uma linha ou como uma outra área. Depois clique no lado esquerdo {leftclick} para selecionar ambos os elementos, clique no lado direito {rightclick} para mostrar o menu de edição e selecione o comando {merge} **Unir**.",
+                "multipolygon_merge": "Juntar várias linhas ou áreas de interesse criará uma nova relação multi-poligono com todas as áreas selecionadas como membros. O iD irá escolher os elementos interiores e exteriores automaticamente, com base nos elementos que estão contidos dentro de outros elementos. ",
                 "turn_restriction_h": "Restrições de Manobra",
                 "turn_restriction": "Uma relação de restrição de giro é um grupo de vários segmentos de estrada em uma interseção. As restrições de curva consistem em um *de* estrada, *via* nó ou estradas e uma *para* estrada.",
                 "turn_restriction_field": "Para editar as restrições de curva, selecione um nó de junção onde duas ou mais estradas se encontram. O editor de recursos exibirá um campo especial \"Ativar restrições\" contendo um modelo da interseção.",
                 "turn_restriction_editing": "No campo \"Ativar restrições\", clique para selecionar uma estrada \"de\" e veja se as curvas são permitidas ou restritas a qualquer uma das estradas \"para\". Você pode clicar nos ícones de turno para alterná-los entre permitido e restrito. O iD criará relações automaticamente e definirá as funções de, para e com base nas suas escolhas.",
                 "route_h": "Rotas",
                 "route": "Uma relação *rota* é um grupo de um ou mais recursos de linha que juntos formam uma rede de rotas, como uma rota de ônibus, rota de trem ou rota de rodovia.",
+                "route_add": "Para adicionar um elemento a uma relação de rota, selecione o elemento e vá até ao fundo em \"todas as relações\" na secção do editor de elementos, depois clique no botão {plus} para adicionar este elemento a uma relação próxima ou criar uma nova relação.",
                 "boundary_h": "Fronteiras",
-                "boundary": "Uma relação *limite* é um grupo de um ou mais recursos de linha que juntos formam um limite administrativo."
+                "boundary": "Uma relação *limite* é um grupo de um ou mais recursos de linha que juntos formam um limite administrativo.",
+                "boundary_add": "Para adicionar um elemento a uma relação de fronteira, selecione o elemento e desça até à secção \"Todas as relações\" do editor de elementos e clique no botão adicionar {plus} para adicionar os elementos próximos que existam na relação ou numa nova relação."
             },
             "imagery": {
                 "title": "Imagens de Fundo",
                 "intro": "As imagens de fundo que aparecem abaixo dos dados do mapa são um recurso importante para o mapeamento. Essas imagens podem ser fotos aéreas coletadas de satélites, aviões e drones, ou podem ser mapas históricos digitalizados ou outros dados de fonte disponíveis gratuitamente.",
                 "sources_h": "Fontes de Imagens",
+                "choosing": "Para ver quais as fontes de imagens que estão disponíveis para editar, clique no botão {camadas} **Definições de fundo** ao lado do mapa.",
+                "sources": "Por padão, a camada satélite do [Bing Maps](https://www.bing.com/maps/) é escolhida como imagem de fundo. Dependendo de onde está a editar, poderá haver disponibilidade de outras fontes de imagens. Algumas poderão ser mais recentes ou possuírem maior resolução, pelo que é sempre pertinente verificar qual a melhor camada para utilizar como referência para o mapeamento.",
                 "offsets_h": "Ajustando o Deslocamento das Imagens de Fundo",
                 "offset": "Às vezes, as imagens são ligeiramente compensadas pelos dados precisos do mapa. Se você vir muitas estradas ou edifícios deslocados das imagens de plano de fundo, pode ser que as imagens estejam incorretas, por isso não mova todas elas para corresponder ao plano de fundo. Em vez disso, você pode ajustar o plano de fundo para que ele corresponda aos dados existentes, expandindo a seção \"Ajustar contorno da imagem\" na parte inferior do painel Configurações do plano de fundo.",
                 "offset_change": "Clique nos pequenos triângulos para ajustar o deslocamento de imagens em pequenos passos, ou segure o botão esquerdo do mouse e arraste no quadrado cinzento para deslizar a imagem para o alinhamento."
             },
             "streetlevel": {
                 "title": "Fotos de Rua",
+                "intro": "As imagens ao nível de rua são bastante úteis para mapear sinais de trânsito, negócios e outros detalhes que não são visíveis em imagens aéreas ou de satélite. O editor iD suporta imagens ao nível de rua do [Mapillary](https://www.mapillary.com) e do [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Usando Fotos de Rua",
+                "using": "Para utilizar imagens ao nível de rua para mapear, clique no painel {data} **Dados do mapa** ao lado do mapa para ativar ou desativar a camada de imagens de rua que estão disponíveis.",
                 "photos": "Quando ativado, a camada de foto exibe uma linha ao longo da seqüência de fotos. Em níveis de zoom mais altos, um círculo marca em cada local da foto e, em níveis de zoom ainda maiores, um cone indica a direção em que a câmera estava voltada quando a foto foi tirada.",
                 "viewer": "Quando você clica em um dos locais da foto, um visualizador de fotos aparece no canto inferior do mapa. O visualizador de fotos contém controles para avançar e retroceder na sequência da imagem. Também mostra o nome de usuário da pessoa que capturou a imagem, a data em que foi capturada e um link para visualizar a imagem no site original."
             },
             "gps": {
                 "title": "Traçados de GPS",
+                "intro": "Os rastos de GPS são informação importante para o OpenStreetMap. Este editor suporta arquivos *.gpx*, *.geojson* e *.kml* que estejam no seu computador. Pode criar rastos GPS utilizando o seu telemóvel, relógios desportivos ou outros aparelhos GPS.",
                 "survey": "Para informações sobre como coletar dados com GPS, leia [Mapeando com um smartphone, GPS, ou papel](http://learnosm.org/pt/mobile-mapping/).",
                 "using_h": "Usando Traçados de GPS",
+                "using": "Para utilizar um rasto GPS para mapear, arraste-o e coloque o arquivo no editor do mapa do seu browser. Se for reconhecido, será desenhado no mapa como uma linha com uma cor de roxo claro. Clique em {data} **Dados do mapa** no painel lateral ao mapa para ativar, desativar ou aproximar para a sua informação GPS.",
                 "tracing": "A trilha GPX não está sendo enviada ao OpenStreetMap - a melhor maneira de usá-la é desenhar no mapa, usando-a como um guia para os novos elementos que você adicionar.",
                 "upload": "Você também pode [enviá-la ao OpenStreetMap](https://www.openstreetmap.org/trace/create) para que outros usuários possam utilizá-la."
             },
@@ -906,6 +928,9 @@
                     "tips": {
                         "title": "Dicas",
                         "simple": "**Prefira restrições simples ao invés de complexas**",
+                        "simple_example": "Por exemplo, evite criar uma restrição de via se uma restrição de giro via nó mais simples servir.",
+                        "indirect": "** Algumas restrições exibem o texto \"(indireto)\" e são desenhadas mais claras. **",
+                        "indirect_example": "Essas restrições existem por causa de outra restrição próxima. Por exemplo, uma restrição \"Somente Direto\" criará indiretamente restrições \"Nenhuma volta\" para todos os outros caminhos através da interseção.",
                         "indirect_noedit": "Você não pode editar restrições indiretas. Ao invés disso, tente editar uma relação direta próxima."
                     }
                 }
@@ -1087,6 +1112,7 @@
             },
             "areas": {
                 "title": "Áreas",
+                "add_playground": "*Áreas* são utilizadas para representar fronteiras de elementos como lagos, edifícios ou áreas residenciais.{br}Podem ser utilizadas para o mapeamento detalhado de muitos elementos que normalmente seriam representados por pontos. **Clique em {button} Área para adicionar uma nova área.**",
                 "start_playground": "Vamos adicionar este parquinho ao mapa desenhando uma área. Áreas podem ser traçadas colocando *nós* ao longo do limite exterior do elemento. **Clique com o mouse ou pressione a barra de espaço para posicionar um nó inicial em um dos cantos do parquinho.**",
                 "continue_playground": "Continue desenhando a área colocando mais nós ao longo da borda do campo de recreação. É bom conectar a área as vias de caminhada existentes.{br} Dica: você pode pressionar a tecla '{alt}' para evitar que os nós se conectem a outros recursos. **Continue a desenhar uma área para o campo de recreação.**",
                 "finish_playground": "Termine a área pressionando Enter, ou clicando novamente no primeiro ou último nó. **Termine de desenhar a área do parquinho.**",
@@ -2775,8 +2801,10 @@
                     "label": "Configuração das Bombinas",
                     "options": {
                         "delta": "Delta",
+                        "leblanc": "Leblanc",
                         "open": "Aberta",
                         "open-delta": "Delta Aberto",
+                        "scott": "Scott",
                         "star": "Estrela / Y",
                         "zigzag": "Zig Zag"
                     }
@@ -3519,6 +3547,9 @@
                     "name": "Cerca Viva",
                     "terms": "Cerca viva"
                 },
+                "barrier/kerb": {
+                    "name": "Meio-fio"
+                },
                 "barrier/kissing_gate": {
                     "name": "Quebra Corpo",
                     "terms": "Porteira Giratória, quebra cabeça, quebra costela, passa um, passador, imbricação"
@@ -3558,6 +3589,9 @@
                 "building/barn": {
                     "name": "Celeiro",
                     "terms": "Celeiro"
+                },
+                "building/boathouse": {
+                    "name": "Garagem de barcos"
                 },
                 "building/bungalow": {
                     "name": "Bangalô",
@@ -3622,6 +3656,9 @@
                 "building/garages": {
                     "name": "Garagens",
                     "terms": "Garagens"
+                },
+                "building/grandstand": {
+                    "name": "Arquibancada"
                 },
                 "building/greenhouse": {
                     "name": "Estufa",
@@ -4365,7 +4402,7 @@
                     "terms": "Bacia"
                 },
                 "landuse/brownfield": {
-                    "name": "Área contaminada",
+                    "name": "Área degradada",
                     "terms": "Terreno industrial abandonado, área em revitalização, área abandonada, terreno em revitalização, zona industrial abandonada, desenvolvimento"
                 },
                 "landuse/cemetery": {
@@ -4404,6 +4441,7 @@
                     "terms": "Gramado"
                 },
                 "landuse/greenfield": {
+                    "name": "Terra não cultivada",
                     "terms": "área projetada, área em desenvolvimento, terreno projetado"
                 },
                 "landuse/greenhouse_horticulture": {
@@ -4524,9 +4562,19 @@
                     "name": "Centro de Jogos para Adultos",
                     "terms": "Centro de Jogos Adutos"
                 },
+                "leisure/amusement_arcade": {
+                    "name": "Fliperama",
+                    "terms": "Fliperama, parque de diversões"
+                },
+                "leisure/beach_resort": {
+                    "name": "Resort em Praia"
+                },
                 "leisure/bird_hide": {
                     "name": "Local de observação de pássaros",
                     "terms": "torre de observação, pássaros, aves, animais"
+                },
+                "leisure/bleachers": {
+                    "name": "Arquibancada simples"
                 },
                 "leisure/bowling_alley": {
                     "name": "Pista de Boliche",
@@ -4574,6 +4622,10 @@
                 },
                 "leisure/fitness_station/parallel_bars": {
                     "name": "Barras Paralelas"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Argolas de Exercício",
+                    "terms": "Argolas"
                 },
                 "leisure/fitness_station/sit-up": {
                     "name": "Prancha para Abdominais"
@@ -5828,6 +5880,9 @@
                     "name": "Revenda de Motos",
                     "terms": "Concessionária de Motos"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Oficina de Motocicletas"
+                },
                 "shop/music": {
                     "name": "Loja de Discos Musicais",
                     "terms": "Loja de Discos Musicais, Loja de CD's, Loja de Vinil, Loja Musical"
@@ -6359,35 +6414,35 @@
                     "text": "Termos e Comentários"
                 },
                 "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
-                "name": "Bordas das Imagens de Satélite DigitalGlobe Premium"
+                "name": "Data das imagens de satélite premium da DigitalGlobe"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Imagens de satélite padrão da DigitalGlobe.",
-                "name": "Imagens padrão da DigitalGlobe"
+                "description": "Imagens de satélite comuns da DigitalGlobe.",
+                "name": "Imagens comuns da DigitalGlobe"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
                 "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
-                "name": "Boradas das Imagens de Satélite DigitalGlobe Standard"
+                "name": "Data das imagens de satélite comuns da DigitalGlobe"
             },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Imagens globais da ESRI.",
-                "name": "Imagens globais da ESRI"
+                "description": "Imagens globais da Esri.",
+                "name": "Imagens globais da Esri"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Esri imagens de arquivo que podem ser mais claras e mais precisas do que a camada padrão.",
-                "name": "Esri World Imagery (Clarity) Beta"
+                "description": "Arquivo de imagens da Esri que podem ser mais claras e precisas do que a camada padrão.",
+                "name": "Imagens globais da Esri (Clareadas) Beta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -6558,7 +6613,7 @@
                 "attribution": {
                     "text": "Quadros do mapa de Stamen Design, sob CC BY 3.0.   Dados por OpenStreetMap, sob ODbL"
                 },
-                "name": "Stamen, Terreno"
+                "name": "Relevo Stamen"
             },
             "tf-cycle": {
                 "attribution": {
@@ -6570,11 +6625,12 @@
                 "attribution": {
                     "text": "Mapas © Thunderforest, Dados © Colaboradores do OpenStreetMap"
                 },
-                "name": "Paisagens Thunderforest"
+                "name": "Panorama Thunderforest"
             }
         },
         "community": {
             "cape-coast-youthmappers": {
+                "name": "Universidade de Cape Coast YouthMappers",
                 "description": "Siga-nos no Twitter: {url}"
             },
             "osm-gh-facebook": {
@@ -6591,9 +6647,13 @@
             "talk-mg": {
                 "name": "Lista de Discussão Talk-mg"
             },
+            "OSM-BGD-facebook": {
+                "extendedDescription": "Mapeando em Bangladesh? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!"
+            },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Índia - Mapeamento de vizinhança participativa",
-                "description": "Melhorar o OpenStreetMap na Índia"
+                "description": "Melhorar o OpenStreetMap na Índia",
+                "extendedDescription": "Mapeando na Índia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!"
             },
             "OSM-india-mailinglist": {
                 "name": "Lista de Discussão do OpenStreetMap na Índia",
@@ -6612,9 +6672,24 @@
             "OSM-japan-twitter": {
                 "description": "Hashtag no Twitter: {url}"
             },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japão"
+            },
+            "OSM-MNG-facebook": {
+                "extendedDescription": "Mapeando na Mongólia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
+            },
+            "OSM-MMR-facebook": {
+                "extendedDescription": "Mapeando em Myanmar? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
+            },
+            "OSM-Nepal-facebook": {
+                "extendedDescription": "Mapeando no Nepal? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
+            },
             "OSM-PH-mailinglist": {
                 "name": "Lista de Discussão Talk-ph",
                 "description": "Uma lista de discussão para falar sobre o OpenStreetMap nas Filipinas"
+            },
+            "OSM-LKA-facebook": {
+                "extendedDescription": "Mapeando no Sri Lanka? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
             },
             "de-berlin-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
@@ -6689,12 +6764,28 @@
             "Maptime-Australia-Slack": {
                 "description": "Se inscreva em {signupUrl}"
             },
+            "talk-au": {
+                "name": "Lista de Discussão Talk-au"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Lista de Discussão Talk-ar",
+                "description": "Lista histórica.  Em desuso hoje."
+            },
             "OSM-AR-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
             },
+            "OSM-BO-mailinglist": {
+                "name": "Lista de Discussão Talk-bo",
+                "description": "Lista de discussão oficial da comunidade OpenStreetMap Boliviana",
+                "extendedDescription": "Mapeando na Bolívia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!"
+            },
             "Bahia-telegram": {
                 "name": "Grupo Telegram OpenStreetMap Bahia",
-                "description": "Participe da comunidade OpenStreetMap Bahia no Telegram"
+                "description": "Participe da comunidade OpenStreetMap Bahia no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
+            },
+            "DF-telegram": {
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Mailing List",
@@ -6711,6 +6802,9 @@
             },
             "OSM-CL-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-CO-facebook": {
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap. Todos são bem-vindos!"
             },
             "OSM-CO-twitter": {
                 "description": "Siga-nos no Twitter: {url}"

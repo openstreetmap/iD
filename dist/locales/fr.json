@@ -374,7 +374,7 @@
             "request_review": "Je souhaite que quelqu'un vérifie mes modifications",
             "save": "Envoyer",
             "cancel": "Annuler",
-            "changes": "{count} modifications",
+            "changes": "{count} modification(s) :",
             "download_changes": "Télécharger le fichier osmChange",
             "warnings": "Attention",
             "modified": "Modifié",
@@ -463,7 +463,7 @@
             "documentation_redirect": "Cette documentation a été redirigée vers une nouvelle page",
             "show_more": "Plus d'informations",
             "view_on_osm": "Visualiser sur openstreetmap.org",
-            "all_fields": "Tous les champs",
+            "all_fields": "Tous les tags",
             "all_tags": "Tous les tags",
             "all_members": "Tous les membres",
             "all_relations": "Toutes les relations",
@@ -498,7 +498,7 @@
             "way": "Chemin",
             "relation": "Relation",
             "location": "Endroit",
-            "add_fields": "Ajouter champ:"
+            "add_fields": "Ajouter un tag :"
         },
         "background": {
             "title": "Fond de carte",
@@ -660,7 +660,7 @@
             "more": "Plus",
             "events": "Événements",
             "languages": "Langues: {languages}",
-            "missing": "Quelque chose manque-t-il dans cette liste?",
+            "missing": "Quelque-chose manque-t-il dans cette liste ?",
             "tell_us": "Dîtes-nous en plus !"
         },
         "confirm": {
@@ -714,6 +714,11 @@
             "drag_drop": "Glissez-déposez un fichier .gpx, .geojson ou .kml sur la page, ou cliquez sur le bouton de droite pour le rechercher dans votre ordinateur.",
             "zoom": "Zoomer sur la couche",
             "browse": "Sélectionnez un fichier"
+        },
+        "streetside": {
+            "tooltip": "Photos Streetside de Microsoft",
+            "title": "Sucouche photo (Bing Streetside)",
+            "report": "Signaler un problème relatif à la vie privée sur cette image"
         },
         "mapillary_images": {
             "tooltip": "Photos de rue depuis Mapillary",
@@ -3669,7 +3674,7 @@
                     "terms": "garages, bloc de garages, boxes, box, hangar, parcages, parkings, voitures, parc de stationnement couvert"
                 },
                 "building/grandstand": {
-                    "name": "tribune",
+                    "name": "Tribune",
                     "terms": "<translate with synonyms or related terms for 'Grandstand', separated by commas>"
                 },
                 "building/greenhouse": {
@@ -3995,6 +4000,10 @@
                 },
                 "emergency/destination": {
                     "name": "Accessible aux services d'urgences"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Extincteur d'incendie",
+                    "terms": "Extincteur, incendie, feu, poudre, mousse"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Borne incendie",
@@ -4597,6 +4606,10 @@
                     "name": "Observatoire ornithologique",
                     "terms": "Observatoire d'oiseaux"
                 },
+                "leisure/bleachers": {
+                    "name": "Gradins",
+                    "terms": "<translate with synonyms or related terms for 'Bleachers', separated by commas>"
+                },
                 "leisure/bowling_alley": {
                     "name": "Bowling",
                     "terms": "Jeux de boules,Jeu de quilles,Quilles"
@@ -4658,8 +4671,8 @@
                     "terms": "Barres parallèles"
                 },
                 "leisure/fitness_station/push-up": {
-                    "name": "Les pompes inclinées en extérieur",
-                    "terms": "Les pompes inclinées en extérieur"
+                    "name": "Équipement pour pompes inclinées en extérieur",
+                    "terms": "<translate with synonyms or related terms for 'Push-Up Station', separated by commas>"
                 },
                 "leisure/fitness_station/rings": {
                     "name": "Anneaux de gymnastique ",
@@ -4670,8 +4683,8 @@
                     "terms": "Panneau d'instruction d'un exercice"
                 },
                 "leisure/fitness_station/sit-up": {
-                    "name": "Équipement de Sit-up en extérieur",
-                    "terms": "Équipement de Sit-up en extérieur"
+                    "name": "Équipement pour abdominaux en extérieur",
+                    "terms": "<translate with synonyms or related terms for 'Sit-Up Station', separated by commas>"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "Escalier d'exercices",
@@ -6024,6 +6037,10 @@
                     "name": "Vendeur de motos",
                     "terms": "Vendeur de motocyclettes"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Réparateur de motos",
+                    "terms": "Réparateur de motos"
+                },
                 "shop/music": {
                     "name": "Magasin de musique",
                     "terms": "Magasin de musique"
@@ -6930,6 +6947,10 @@
                 "description": "Rencontres irrégulières de la communauté OpenStreetMap à Chiang Mai",
                 "extendedDescription": "Les membres de la communauté OpenStreetMap se rencontrent tous les quelques mois à Chiang Mai. Contactez-nous et regardez {url} pour voir quand notre prochaine rencontre est prévue"
             },
+            "OSM-TH-facebook": {
+                "name": "Groupe Facebook OpenStreetMap TH",
+                "description": "Groupe Facebook pour les cartographes en thaïlande"
+            },
             "OSM-TH-forum": {
                 "name": "Forum OpenStreetMap TH",
                 "description": "Forum web d'OpenStreetMap Thaïlande"
@@ -7011,8 +7032,20 @@
                 "name": "Fil Twitter d'OpenStreetMap Belgique",
                 "description": "OSM Belgique sur Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Communauté OSM tchèque",
+                "description": "Portail cartographique, site web et contacts des membres OSM en République Tchèque"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ sur Facebook",
+                "description": "Suivez la communauté tchèque sur Facebook - dont la traduction des HebdoOSM !"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter tchèque @osmcz",
+                "description": "Suivez la communauté tchèque sur Twitter - dont la traduction des HebdoOSM !"
+            },
             "talk-cz-mailinglist": {
-                "name": "Liste de diffusion talk-cz",
+                "name": "Liste de diffusion tchèque (talk-cz)",
                 "description": "Talk-cz est la liste de diffusion officielle pour la communauté tchèque"
             },
             "dk-forum": {
@@ -7090,6 +7123,10 @@
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "Liste de diffusion OWL",
                 "description": "Il s'agit de la liste de diffusion pour la communauté OSM en Westphalie Est-Lippe"
+            },
+            "de-telegram": {
+                "name": "Telegram d'OpenStreetMap Allemagne",
+                "description": "Rejoignez le groupe Telegram d'OpenStreetMap Allemagne sur {url}"
             },
             "osm-de": {
                 "name": "OpenStreetMap Allemagne",
@@ -7512,6 +7549,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap sur Reddit",
                 "description": "/r/openstreetmap/ est un super endroit pour en apprendre plus sur OpenStreetMap. Demandez-nous tout ce que vous voulez !"
+            },
+            "OSM-Telegram": {
+                "name": "Telegram d'OpenStreetMap",
+                "description": "Rejoignez le groupe Telegram d'OpenStreetMap sur {url}"
             },
             "OSM-Twitter": {
                 "name": "Fil Twitter d'OpenStreetMap",

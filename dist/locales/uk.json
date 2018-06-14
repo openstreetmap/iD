@@ -3668,6 +3668,10 @@
                     "name": "Гаражі",
                     "terms": "Garages, ufhfs, гаражі"
                 },
+                "building/grandstand": {
+                    "name": "Трибуна",
+                    "terms": "трибуна,сидіння,лавки"
+                },
                 "building/greenhouse": {
                     "name": "Теплиця",
                     "terms": "Greenhouse, ntgkbwz, теплиця"
@@ -4593,6 +4597,10 @@
                     "name": "Пункт спостереження",
                     "terms": "птахи,звіри,природа,тварини"
                 },
+                "leisure/bleachers": {
+                    "name": "Трибуни",
+                    "terms": "стадіон,трибуна,місця,сидіння,лавка,крісло,стілець"
+                },
                 "leisure/bowling_alley": {
                     "name": "Боулінг",
                     "terms": "боулінг,кеглі,доріжка,розваги,дозвілля,центр,спорт,10"
@@ -4852,6 +4860,10 @@
                 "man_made/chimney": {
                     "name": "Димохід",
                     "terms": "труба,дим,димохід,викиди"
+                },
+                "man_made/clearcut": {
+                    "name": "Вирубка",
+                    "terms": "ліс,дерева,заготівлі,рубка,суцільна"
                 },
                 "man_made/crane": {
                     "name": "Кран",
@@ -6016,6 +6028,10 @@
                     "name": "Мотомагазин",
                     "terms": "Motorcycle Dealership,vjnjvfufpby, мотоцикли"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Ремонт мотоциклів",
+                    "terms": "ремонт,мотоцикл,гараж,сервіс"
+                },
                 "shop/music": {
                     "name": "Музичний магазин",
                     "terms": "Music Store,vepbxybq vfufpby, музичний магазин"
@@ -6795,7 +6811,8 @@
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Бангладеш",
-                "description": "Покращити OpenStreetMap в Бангладеш"
+                "description": "Покращити OpenStreetMap в Бангладеш",
+                "extendedDescription": "Мапите в Бангладеш? Маєте питання чи бажаєте поспілкуватись зі спільнотою тут? Приєднуйтесь до нас - {url}. Ласкаво просимо!"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Індія - участь в мапінгу поселень",
@@ -6823,7 +6840,9 @@
                 "extendedDescription": "FSHM організовує події пов'язані з вільним програмним та апаратним забезпечення, технологіями, розповсюдженням інформації про них та OpenStreetMap. На цій сторінці у FB ви завжди знайдете свіжу інформацію про події."
             },
             "OSM-India-Puducherry-Matrix": {
-                "name": "Free Software Hardware Movement - Matrix"
+                "name": "Free Software Hardware Movement - Matrix",
+                "description": "Група FSHM Riot для обговорення, поширення та сповіщення про заходи та події у та навколо Пудучеррі",
+                "extendedDescription": "Члени спільноти FSHM поширюють свій досвід та досягнення в OSM в групі Riot.im, ця група також використовується для обговорення питань, пов'язаних з вільним програмним забезпеченням / обладнанням, технологіями та активізмом."
             },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Індонезія",
@@ -6842,10 +6861,35 @@
                 "name": "OpenStreetMap Японія Twitter",
                 "description": "Хеш-теґ у Twitter: {url}"
             },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Японія",
+                "description": "Учасники та користувачі OpenStreetMap в Японії"
+            },
+            "OSM-korea-telegram": {
+                "name": "OSM Korea канал в Telegram",
+                "description": "Неофіційний канал для учасників OpenStreetMap в Кореї, для спілкування та обміну досвідом."
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Малайзія у Facebook",
+                "description": "Для спілкування про все, що пов'язано з OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "Форум OpenStreetMap Малайзія",
+                "description": "Офіційний форум OpenStreetMap Малайзія"
+            },
+            "OSM-MY-matrix": {
+                "name": "Канал OpenStreetMap Малайзія на Riot",
+                "description": "Запрошуємо всіх маперів! Зареєструйтеся на {signupUrl}"
+            },
             "OSM-MNG-facebook": {
                 "name": "OpenStreetMap Монголія",
                 "description": "Покращити OpenStreetMap в Монголії",
                 "extendedDescription": "Мапите в Монголії? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap М'янма",
+                "description": "Покращити OpenStreetMap в М'янмі",
+                "extendedDescription": "Мапите в М'янмі? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Непал",
@@ -6853,42 +6897,171 @@
                 "extendedDescription": "Мапите в Непалі? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
             },
             "OSM-PH-facebook": {
-                "name": "OpenStreetMap Філіппіни у Facebook"
+                "name": "OpenStreetMap Філіппіни у Facebook",
+                "description": "Ласкаво просимо до OpenStreetMap Філіппіни, ми закликаємо всіх філіппінців взяти участь в OpenStreetMap."
             },
             "OSM-PH-mailinglist": {
-                "name": "Talk-ph Список розсилки"
+                "name": "Talk-ph Список розсилки",
+                "description": "Список розсилки для обговорення OpenStreetMap на Філіппінах"
+            },
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap PH Slack",
+                "description": "Запрошуємо всіх! Зареєструйтеся на {signupUrl}"
+            },
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap PH Telegram",
+                "description": "Неофіційний канал в Telegram місцевої спільноти учасників OpenStreetMap та друзів на Філіппінах"
+            },
+            "OSM-RU-forum": {
+                "name": "Форум OpenStreetMap RU",
+                "description": "Форум OpenStreetMap Росія"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap RU telegram",
+                "description": "OpenStreetMap Russia канал telegram"
             },
             "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Шрі-Ланка",
                 "description": "Покращити OpenStreetMap у Шрі-Ланці",
                 "extendedDescription": "Мапите у Шрі-Ланці? Маєте питання, бажаєте зв'язатись зі спільнотою? Приєднуйтесь до нас за адресою {Url}. Ласкаво просимо!"
+            },
+            "OSM-TW-facebook": {
+                "name": "Тайванська спільнота OpenStreetMap ",
+                "description": "Група Facebook для маперів та користувачів OpenStreetMap для обговорення питань пов'язаних з Тайванем."
             },
             "OSM-TW-mailinglist": {
                 "name": "OpenStreetMap Тайвань, список розсилки",
                 "description": "Talk-tw – офіційний список розсилки спільноти для обговорення питань пов'язаних з Тайванем"
             },
+            "OSM-TH-CNX-meetup": {
+                "name": "OSM зустріч в Чіангмай",
+                "description": "Нерегулярні зустрічі спільноти OpenStreetMap в Чіангмай",
+                "extendedDescription": "Члени спільноти OpenStreetMap зустрічаються кожні кілька місяців у Чіангмаі. Слідкуйте на {url}, щоб дізнатись, коли відбудеться наступна зустріч"
+            },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap Таїланд група у Facebook",
+                "description": "Група Facebook OpenStreetMap в Таїланді"
+            },
+            "OSM-TH-forum": {
+                "name": "Форум OpenStreetMap TH",
+                "description": "Форум OpenStreetMap Тайланд"
+            },
+            "al-forum": {
+                "name": "Форум OSM Албанія",
+                "description": "Форум OpenStreetMap Албанія"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Тирана",
+                "description": "Соціальні заходи, пов'язані з мапінгом - в першу чергу запрошуємо початківців!",
+                "extendedDescription": "Maptime - це відкрите навчальне середовище для всіх, з різним ступенем  знань, пропонуе особисту ​​освітню підтримку для початківців. Maptime одночасно є гнучким та структурованим, створюючи простір для посібників з мапінгу, семінарів, поточних проектів із спільною метою та незалежним / спільним робочим часом."
+            },
+            "al-telegram": {
+                "name": "OSM Albania канал в Telegram",
+                "description": "OpenStreetMap OSM Albania канал в Telegram"
+            },
+            "at-forum": {
+                "name": "Форум OpenStreetMap Австрія",
+                "description": "Офіційний форум для питань про OpenStreetMap у Австрії та навкруги"
+            },
             "at-mailinglist": {
                 "name": "Talk-at Список розсилки",
                 "description": "Talk-at – офіційний список розсилки OSM спільноти Австрії."
             },
+            "at-twitter": {
+                "name": "OpenStreetMap Австрія Twitter",
+                "description": "OpenStreetMap Австрія у Twitter: {url}"
+            },
+            "osmgraz-meetup": {
+                "name": "Зустріч спільноти OSM в Граці",
+                "description": "Щомісячні зустрічі спільноти OpenStreetMap в Граці"
+            },
+            "osmgraz-twitter": {
+                "name": "OSM спілнота Грац у Твіттері",
+                "description": "OpenStreetMap спілнота Грац у Твіттері"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Австрія",
+                "description": "Інформація про OpenStreetMap в Австрії"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Білорусь",
+                "description": "OpenStreetMap Belarus канал telegram"
+            },
+            "be-facebook": {
+                "name": "Спільнота OpenStreetMap BE",
+                "description": "Мапери та OpenStreetMap Бельгія у Facebook"
+            },
+            "be-forum": {
+                "name": "Форум OpenStreetMap BE",
+                "description": "Форум OpenStreetMap Бельгія"
+            },
+            "be-irc": {
+                "name": "OpenStreetMap Бельгія IRC",
+                "description": "Приєднуйтесь до #osmbe на irc.oftc.net (port 6667)"
+            },
             "be-mailinglist": {
                 "name": "Talk-be Список розсилки"
             },
+            "be-twitter": {
+                "name": "OpenStreetMap Бельгія Twitter",
+                "description": "OSM Бельгія у Twitter: @osm_be"
+            },
             "talk-cz-mailinglist": {
-                "name": "Talk-cz Список розсилки",
                 "description": "Talk-cz – офіційний список розсилки OSM спільноти Чехії."
+            },
+            "dk-forum": {
+                "name": "Форум OpenStreetMap Данія",
+                "description": "Форум OpenStreetMap Данія"
+            },
+            "fi-forum": {
+                "name": "Форум OpenStreetMap FI",
+                "description": "Форум OpenStreetMap Фінляндія"
+            },
+            "fr-facebook": {
+                "name": "Сторінка OpenStreetMap Франція у Facebook",
+                "description": "Сторінка OpenStreetMap Франція у Facebook"
+            },
+            "fr-forum": {
+                "name": "Форум OpenStreetMap Франція",
+                "description": "Форум OpenStreetMap Франція"
             },
             "fr-mailinglist": {
                 "name": "Talk-fr Список розсилки",
                 "description": "Talk-fr Список розсилки"
             },
+            "fr-twitter": {
+                "name": "OpenStreetMap Франція у Twitter",
+                "description": "OpenStreetMap Франція у Twitter: {url}"
+            },
+            "de-berlin-meetup": {
+                "description": "Учасники та користувачі OpenStreetMap з Берліна"
+            },
             "de-berlin-twitter": {
+                "name": "OpenStreetMap Берлін Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "Форум OpenStreetMap DE",
+                "description": "Форум OpenStreetMap Німеччина"
             },
             "de-mailinglist": {
                 "name": "Talk-de Список розсилки",
                 "description": "Talk-de – офіційний список розсилки OSM спільноти Німеччини."
             },
+            "hu-facebook": {
+                "name": "OpenStreetMap Угорщина у Facebook",
+                "description": "Мапери та OpenStreetMap Угорщина у Facebook"
+            },
+            "hu-forum": {
+                "name": "Форум OpenStreetMap HU",
+                "description": "Форум OpenStreetMap Угорщина"
+            },
+            "it-facebook": {
+                "name": "OpenStreetMap Італія у Facebook",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Італія у Facebook"
+            },
             "it-twitter": {
+                "name": "OpenStreetMap Італія Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
             },
             "OSM-Rome-meetup": {
@@ -6897,14 +7070,37 @@
             "talk-it-lazio": {
                 "extendedDescription": "Список розсилки спільноти Риму та Лаціо"
             },
+            "no-forum": {
+                "name": "Форум OpenStreetMap Норвегія",
+                "description": "Форум OpenStreetMap Норвегія"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "Група Facebook OpenStreetMap в Польщі"
+            },
+            "OSM-PL-forum": {
+                "name": "Форум OpenStreetMap Польща",
+                "description": "Форум польської спільноти OpenStreetMap"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es Список розсилки"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Швеція у Facebook",
+                "description": "OpenStreetMap Швеція у Facebook"
+            },
+            "se-forum": {
+                "name": "Форум OpenStreetMap Швеція",
+                "description": "Форум OpenStreetMap Швеція"
             },
             "se-mailinglist": {
                 "name": "Talk-se Список розсилки"
             },
             "se-twitter": {
+                "name": "OpenStreetMap Швеція у Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "gb-mailinglist": {
+                "description": "Talk-gb - це основне місце спілкування для британської (включаючи Північну Ірландію) спільноти OSM"
             },
             "Bay-Area-OpenStreetMappers": {
                 "description": "Покращити OpenStreetMap в районі Затоки Сан-Франциско"
@@ -6920,40 +7116,82 @@
                 "description": "Ми допомагаємо розвивати та вдосконалювати OpenStreetMap у Сполучених Штатах."
             },
             "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "Western-Slope-facebook": {
+                "name": "Western Slope OSM Facebook"
             },
             "talk-au": {
                 "name": "Talk-au Список розсилки"
+            },
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Аргентина у Facebook",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Аргентина у Facebook"
+            },
+            "OSM-AR-forum": {
+                "name": "Форум OpenStreetMap Argentina",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Аргентина на форумі"
             },
             "OSM-AR-mailinglist": {
                 "name": "Talk-ar Список розсилки"
             },
             "OSM-AR-twitter": {
+                "name": "OpenStreetMap Аргентина Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Список розсилки"
             },
             "OSM-br-twitter": {
+                "name": "OpenStreetMap Бразилія Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSM-CL-facebook": {
+                "name": "OpenStreetMap Чилі у Facebook",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Чилі у Facebook"
             },
             "OSM-CL-mailinglist": {
                 "name": "Talk-cl Список розсилки"
             },
             "OSM-CL-twitter": {
+                "name": "OpenStreetMap Чилі Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Колумбія у Facebook",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Колумбія у Facebook"
             },
             "OSM-CO-mailinglist": {
                 "name": "Talk-co Список розсилки"
             },
             "OSM-CO-twitter": {
+                "name": "OpenStreetMap Колумбія Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Перу у Facebook",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Перу у Facebook"
             },
             "OSM-PE-mailinglist": {
-                "name": "Talk-pe Список розсилки"
+                "name": "Talk-pe Список розсилки",
+                "description": "Офіційний список розсилки для спільноти OpenStreetMap Перу"
+            },
+            "OSM-PE-matrix": {
+                "name": "OpenStreetMap Перу Matrix чат",
+                "description": "Спілкуйтесь з іншими членами OpenStreetMap спільноти Перу в Matrix."
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Перу Telegram",
+                "description": "Приєднуйтесь до спільноти OpenStreetMap Перу у Telegram"
             },
             "OSM-PE-twitter": {
+                "name": "OpenStreetMap Перу Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Перу",
+                "description": "Новини та ресурси для спільноти OpenStreetMap в Перу"
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap у Facebook",
@@ -6967,6 +7205,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap на Reddit",
                 "description": "/r/openstreetmap/ чудове місце, щоб дізнатись більше про OpenStreetMap. Можете питати про будь-що!"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Приєднайтеся до глобальної групти OpenStreetMap Telegram за адресою {url}"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",

@@ -1321,7 +1321,7 @@
                     "label": "Erikoisuus",
                     "options": {
                         "foot_bath": "Jalkakylpy",
-                        "hot_spring": "Kuuma lähd",
+                        "hot_spring": "Kuuma lähde",
                         "onsen": "Japanilainen Onsen"
                     }
                 },
@@ -1564,6 +1564,9 @@
                 "display": {
                     "label": "Näyttö"
                 },
+                "distance": {
+                    "label": "Kokonaisetäisyys"
+                },
                 "dock": {
                     "label": "Tyyppi"
                 },
@@ -1690,7 +1693,8 @@
                     "label": "Käsikaide"
                 },
                 "hashtags": {
-                    "label": "Aihetunnisteet ja hashtagit"
+                    "label": "Aihetunnisteet ja hashtagit",
+                    "placeholder": "#esimerkki"
                 },
                 "healthcare": {
                     "label": "Tyyppi"
@@ -1713,6 +1717,27 @@
                 "hoops": {
                     "label": "Koritelineet",
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Kyllä",
+                        "undefined": "Ei"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Hevosratsastus",
+                    "options": {
+                        "horse_riding": "Kyllä",
+                        "undefined": "Ei"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Ratsastuksen vaativuus",
+                    "options": {
+                        "common": "Helppo: Ei ongelmia tai haasteita (oletus)",
+                        "critical": "Rajallinen: Saavutettavissa vain kokeneille ratsastajille ja hevosille. Merkittäviä esteitä. Sillat tulee tarkastaa huolella.",
+                        "dangerous": "Vaarallinen: Saavutettavissa vain erittäin kokeneille ratsastajille ja hevosille hyvällä säällä. Jalkaisin."
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -1997,6 +2022,7 @@
                     "label": "Maksutavat"
                 },
                 "phone": {
+                    "label": "Puhelin",
                     "placeholder": "+358 40 123 4567"
                 },
                 "piste/difficulty": {
@@ -2046,6 +2072,9 @@
                 "plant/output/electricity": {
                     "label": "Voiman ulostulo",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "playground/baby": {
+                    "label": "Vauvanistuin"
                 },
                 "playground/max_age": {
                     "label": "Yläikäraja"
@@ -2401,13 +2430,30 @@
                     "placeholder": "Erinomainen, hyvä, huono..."
                 },
                 "transformer": {
-                    "label": "Tyyppi"
+                    "label": "Tyyppi",
+                    "options": {
+                        "converter": "Muuntaja",
+                        "distribution": "Jakauma",
+                        "generator": "Generaattori"
+                    }
                 },
                 "trees": {
                     "label": "Puut"
                 },
                 "tunnel": {
                     "label": "Tyyppi"
+                },
+                "usage_rail": {
+                    "options": {
+                        "industrial": "Teollinen",
+                        "main": "Tärkein",
+                        "military": "Armeija",
+                        "test": "Testi",
+                        "tourism": "Turismi"
+                    }
+                },
+                "vending": {
+                    "label": "Hyödykkeiden tyyppi"
                 },
                 "visibility": {
                     "label": "Näkyvyys",
@@ -2678,6 +2724,9 @@
                 "amenity/clinic/abortion": {
                     "name": "Raskaudenkeskeytysklinikka",
                     "terms": "abortti, raskaus, raskauden, keskeytys, raskaudenkesketys, sairaala, terveyskeskus, klinikka"
+                },
+                "amenity/clinic/fertility": {
+                    "name": "Hedelmällisyysklinikka"
                 },
                 "amenity/clock": {
                     "name": "Kello"
@@ -4142,6 +4191,9 @@
                 },
                 "man_made/chimney": {
                     "name": "Savupiippu"
+                },
+                "man_made/clearcut": {
+                    "name": "Avohakattu metsä"
                 },
                 "man_made/crane": {
                     "name": "Nosturi"
