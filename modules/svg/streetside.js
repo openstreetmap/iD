@@ -3,36 +3,43 @@ import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
 
-
-export function svgMapillaryImages(projection, context, dispatch) {
+export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
+    var minZoom = 16;
     var minMarkerZoom = 16;
-    var minViewfieldZoom = 18;
+    var minViewfieldZoom = 19;
     var layer = d3_select(null);
-    var _mapillary;
+    var _streetside;
 
-
+    /**
+     * init().
+     */
     function init() {
-        if (svgMapillaryImages.initialized) return;  // run once
-        svgMapillaryImages.enabled = false;
-        svgMapillaryImages.initialized = true;
+        if (svgStreetside.initialized) return;  // run once
+        svgStreetside.enabled = false;
+        svgStreetside.initialized = true;
+        console.log("svg: streetside initialized....");
     }
 
-
+    /**
+     * getService().
+     */
     function getService() {
-        if (services.mapillary && !_mapillary) {
-            _mapillary = services.mapillary;
-            _mapillary.event.on('loadedImages', throttledRedraw);
-        } else if (!services.mapillary && _mapillary) {
-            _mapillary = null;
+        if (services.streetside && !_streetside) {
+            _streetside = services.streetside;
+            _streetside.event.on('loadedBubbles', throttledRedraw);
+        } else if (!services.streetside && _streetside) {
+            _streetside = null;
         }
         
-        return _mapillary;
+        return _streetside;
     }
 
-
+    /**
+     * showLayer().
+     */
     function showLayer() {
+        console.log('svg - streetside - showLayer()');
         var service = getService();
         if (!service) return;
 
@@ -47,7 +54,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .on('end', function () { dispatch.call('change'); });
     }
 
-
+    /**
+     * hideLayer().
+     */
     function hideLayer() {
         var service = getService();
         if (service) {
@@ -63,44 +72,55 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-
+    /**
+     * editOn().
+     */
     function editOn() {
         layer.style('display', 'block');
     }
 
-
+    /**
+     * editOff().
+     */
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
-
+    /**
+     * click() Handles 'bubble' point click event.
+     */
     function click(d) {
-        console.log("mapillary image feature click: ", d);
+        console.log("svg: map was clicked with streetside on. Passed obj: ", d);
         var service = getService();
         if (!service) return;
 
         service
             .selectImage(d)
-            .updateViewer(d.key, context)
             .showViewer();
 
         context.map().centerEase(d.loc);
     }
 
-
+    /**
+     * mouseover().
+     */
     function mouseover(d) {
         var service = getService();
         if (service) service.setStyles(d);
     }
 
-
+    /**
+     * mouseout().
+     */
     function mouseout() {
         var service = getService();
         if (service) service.setStyles(null);
     }
 
-
+    /**
+     * transform().
+     */
     function transform(d) {
         var t = svgPointTransform(projection)(d);
         if (d.ca) {
@@ -109,36 +129,22 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return t;
     }
 
-
+    /**
+     * update().
+     */
     function update() {
+        console.log("svg - update()");
         var viewer = d3_select('#photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
-
         var z = ~~context.map().zoom();
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
-
         var service = getService();
-        var sequences = (service ? service.sequences(projection) : []);
-        var images = (service && showMarkers ? service.images(projection) : []);
 
-        var traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.properties.key; });
-
-        // exit
-        traces.exit()
-            .remove();
-
-        // enter/update
-        traces = traces.enter()
-            .append('path')
-            .attr('class', 'sequence')
-            .merge(traces)
-            .attr('d', svgPath(projection).geojson);
-
-
+        // gets the features from service cache
+        var bubbles = (service && showMarkers ? service.bubbles(projection) : []);
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(images, function(d) { return d.key; });
+            .data(bubbles, function(d) { return d.key; });
 
         // exit
         groups.exit()
@@ -162,7 +168,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .sort(function(a, b) {
                 return (a === selected) ? 1
                     : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
+                    : b.loc[1] - a.loc[1];
             })
             .attr('transform', transform)
             .select('.viewfield-scale');
@@ -182,8 +188,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
         viewfields.exit()
             .remove();
 
-        viewfields.enter()               // viewfields may or may not be drawn...
-            .insert('path', 'circle')    // but if they are, draw below the circles
+        // viewfields may or may not be drawn...
+        // but if they are, draw below the circles
+        viewfields.enter()               
+            .insert('path', 'circle')    
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
@@ -198,12 +206,17 @@ export function svgMapillaryImages(projection, context, dispatch) {
         }
     }
 
-
+    /**
+     * drawImages() 
+     * drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
+     * 'svgStreetside()' is called from index.js
+     */
     function drawImages(selection) {
-        var enabled = svgMapillaryImages.enabled,
+        //console.log("svg - streetside - drawImages(); selection: ", selection);
+        var enabled = svgStreetside.enabled,
             service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-images')
+        layer = selection.selectAll('.layer-streetside-images')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -211,12 +224,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         var layerEnter = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-images')
+            .attr('class', 'layer-streetside-images')
             .style('display', enabled ? 'block' : 'none');
-
-        layerEnter
-            .append('g')
-            .attr('class', 'sequences');
 
         layerEnter
             .append('g')
@@ -229,18 +238,22 @@ export function svgMapillaryImages(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                service.loadImages(projection);
+                
+                service.loadBubbles(projection);
             } else {
                 editOff();
             }
         }
     }
 
-
+    /**
+     * drawImages.enabled().
+     */
     drawImages.enabled = function(_) {
-        if (!arguments.length) return svgMapillaryImages.enabled;
-        svgMapillaryImages.enabled = _;
-        if (svgMapillaryImages.enabled) {
+        //console.log('svg - streetside - drawImages.enabled()');
+        if (!arguments.length) return svgStreetside.enabled;
+        svgStreetside.enabled = _;
+        if (svgStreetside.enabled) {
             showLayer();
         } else {
             hideLayer();
@@ -249,12 +262,14 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return this;
     };
 
-
+    /**
+     * drawImages.supported().
+     */
     drawImages.supported = function() {
         return !!getService();
     };
-
-
+    
     init();
+
     return drawImages;
 }
