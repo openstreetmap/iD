@@ -49,9 +49,9 @@ var chapterFlow = [
 
 
 export function uiIntro(context) {
-    var introGraph = {},
-        currChapter;
-
+    var INTRO_IMAGERY = 'EsriWorldImageryClarity';
+    var introGraph = {};
+    var _currChapter;
 
     // create entities for intro graph and localize names
     for (var id in dataIntroGraph) {
@@ -63,17 +63,17 @@ export function uiIntro(context) {
         context.enter(modeBrowse(context));
 
         // Save current map state
-        var osm = context.connection(),
-            history = context.history().toJSON(),
-            hash = window.location.hash,
-            center = context.map().center(),
-            zoom = context.map().zoom(),
-            background = context.background().baseLayerSource(),
-            overlays = context.background().overlayLayerSources(),
-            opacity = d3_selectAll('#map .layer-background').style('opacity'),
-            loadedTiles = osm && osm.loadedTiles(),
-            baseEntities = context.history().graph().base().entities,
-            countryCode = services.geocoder.countryCode;
+        var osm = context.connection();
+        var history = context.history().toJSON();
+        var hash = window.location.hash;
+        var center = context.map().center();
+        var zoom = context.map().zoom();
+        var background = context.background().baseLayerSource();
+        var overlays = context.background().overlayLayerSources();
+        var opacity = d3_selectAll('#map .layer-background').style('opacity');
+        var loadedTiles = osm && osm.loadedTiles();
+        var baseEntities = context.history().graph().base().entities;
+        var countryCode = services.geocoder.countryCode;
 
         // Block saving
         context.inIntro(true);
@@ -84,9 +84,9 @@ export function uiIntro(context) {
         context.history().merge(_values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
 
-        var esri = context.background().findSource('EsriWorldImagery');
-        if (esri) {
-            context.background().baseLayerSource(esri);
+        var imagery = context.background().findSource(INTRO_IMAGERY);
+        if (imagery) {
+            context.background().baseLayerSource(imagery);
         } else {
             context.background().bing();
         }
@@ -193,16 +193,16 @@ export function uiIntro(context) {
 
 
         function enterChapter(newChapter) {
-            if (currChapter) { currChapter.exit(); }
+            if (_currChapter) { _currChapter.exit(); }
             context.enter(modeBrowse(context));
 
-            currChapter = newChapter;
-            currChapter.enter();
+            _currChapter = newChapter;
+            _currChapter.enter();
 
             buttons
                 .classed('next', false)
                 .classed('active', function(d) {
-                    return d.title === currChapter.title;
+                    return d.title === _currChapter.title;
                 });
         }
     }
