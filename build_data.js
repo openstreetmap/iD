@@ -7,13 +7,14 @@ const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
 
+const colors = require('colors/safe');
 const fs = require('fs');
 const glob = require('glob');
 const jsonschema = require('jsonschema');
 const path = require('path');
+const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
-const colors = require('colors/safe');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
@@ -89,18 +90,18 @@ module.exports = function buildData() {
         var tasks = [
             writeFileProm(
                 'data/presets/categories.json',
-                JSON.stringify({ categories: categories }, null, 4)
+                prettyStringify({ categories: categories })
             ),
             writeFileProm(
                 'data/presets/fields.json',
-                JSON.stringify({ fields: fields }, null, 4)
+                prettyStringify({ fields: fields }, { maxLength: 9999 })
             ),
             writeFileProm(
                 'data/presets/presets.json',
-                JSON.stringify({ presets: presets }, null, 4)
+                prettyStringify({ presets: presets }, { maxLength: 9999 })
             ),
             writeFileProm('data/presets.yaml', translationsToYAML(translations)),
-            writeFileProm('data/taginfo.json', JSON.stringify(taginfo, null, 4)),
+            writeFileProm('data/taginfo.json', prettyStringify(taginfo), { maxLength: 9999 }),
             writeEnJson(tstrings),
             writeFaIcons(faIcons)
         ];

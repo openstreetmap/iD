@@ -1,12 +1,13 @@
-var fs = require('fs');
-var sources = require('editor-layer-index/imagery.json');
+const fs = require('fs');
+const sources = require('editor-layer-index/imagery.json');
+const prettyStringify = require('json-stringify-pretty-compact');
 var imagery = [];
 
 // ignore imagery more than 20 years old..
 var cutoffDate = new Date();
 cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
-var blacklist = {
+const blacklist = {
     'hike_n_bike': true,                  // 'Hike & Bike'
     'osmfr': true,                        // 'OpenStreetMap (French Style)'
     'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
@@ -35,7 +36,8 @@ var blacklist = {
     'OSM_Inspector-Routing': true,
     'OSM_Inspector-Tagging': true
 };
-var supportedWMSProjections = [
+
+const supportedWMSProjections = [
     'EPSG:3857',
     'EPSG:4326',
     'EPSG:900913', // EPSG:3857 alternatives codes
@@ -47,7 +49,7 @@ var supportedWMSProjections = [
     'EPSG:3785'
 ];
 
-var whitelist = [
+const whitelist = [
     // Add custom sources here if needed.
 ];
 
@@ -144,4 +146,4 @@ imagery.sort(function(a, b) {
     return a.name.localeCompare(b.name);
 });
 
-fs.writeFileSync('data/imagery.json', JSON.stringify({ dataImagery: imagery }, null, 4));
+fs.writeFileSync('data/imagery.json', prettyStringify({ dataImagery: imagery }));

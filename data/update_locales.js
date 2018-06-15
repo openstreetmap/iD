@@ -4,15 +4,15 @@ const requireESM = require('esm')(module);
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 
-var request = require('request').defaults({ maxSockets: 1 });
-var YAML = require('js-yaml');
-var fs = require('fs');
-var stringify = require('json-stable-stringify');
+const fs = require('fs');
+const prettyStringify = require('json-stringify-pretty-compact');
+const request = require('request').defaults({ maxSockets: 1 });
+const YAML = require('js-yaml');
 
-var resources = ['core', 'presets', 'imagery', 'community'];
-var outdir = './dist/locales/';
-var api = 'https://www.transifex.com/api/2/';
-var projectURL = api + 'project/id-editor/';
+const resources = ['core', 'presets', 'imagery', 'community'];
+const outdir = './dist/locales/';
+const api = 'https://www.transifex.com/api/2/';
+const projectURL = api + 'project/id-editor/';
 
 
 /*
@@ -25,12 +25,12 @@ var projectURL = api + 'project/id-editor/';
  *  }
  *  */
 
-var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
+const auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
-var sourceCore = YAML.load(fs.readFileSync('./data/core.yaml', 'utf8'));
-var sourcePresets = YAML.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
-var sourceImagery = YAML.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
-var sourceCommunity = YAML.load(fs.readFileSync('./node_modules/osm-community-index/i18n/en.yaml', 'utf8'));
+const sourceCore = YAML.load(fs.readFileSync('./data/core.yaml', 'utf8'));
+const sourcePresets = YAML.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
+const sourceImagery = YAML.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
+const sourceCommunity = YAML.load(fs.readFileSync('./node_modules/osm-community-index/i18n/en.yaml', 'utf8'));
 
 
 asyncMap(resources, getResource, function(err, results) {
@@ -71,7 +71,10 @@ asyncMap(resources, getResource, function(err, results) {
             }
         }, function(err) {
             if (!err) {
-                fs.writeFileSync('data/locales.json', stringify({ dataLocales: dataLocales }, { space: 4 }));
+                const keys = Object.keys(dataLocales).sort();
+                var sorted = {};
+                keys.forEach(function (k) { sorted[k] = dataLocales[k]; });
+                fs.writeFileSync('data/locales.json', prettyStringify({ dataLocales: sorted }));
             }
         }
     );

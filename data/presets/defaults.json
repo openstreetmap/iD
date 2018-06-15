@@ -1,61 +1,61 @@
 {
-    "defaults": {
-        "area": [
-            "category-landuse",
-            "category-building",
-            "category-water-area",
-            "category-natural-area",
-            "leisure/park",
-            "amenity/hospital",
-            "amenity/place_of_worship",
-            "amenity/cafe",
-            "amenity/restaurant",
-            "area"
-        ],
-        "line": [
-            "category-road",
-            "category-rail",
-            "category-path",
-            "category-water-line",
-            "category-barrier",
-            "category-natural-line",
-            "power/line",
-            "line"
-        ],
-        "point": [
-            "category-natural-point",
-            "leisure/park",
-            "amenity/hospital",
-            "amenity/place_of_worship",
-            "amenity/cafe",
-            "amenity/restaurant",
-            "amenity/fast_food",
-            "amenity/bar",
-            "amenity/bank",
-            "shop/supermarket",
-            "point"
-        ],
-        "vertex": [
-            "highway/crosswalk",
-            "highway/crossing",
-            "railway/level_crossing",
-            "highway/traffic_signals",
-            "highway/turning_circle",
-            "highway/turning_loop",
-            "traffic_calming",
-            "highway/mini_roundabout",
-            "highway/motorway_junction",
-            "vertex"
-        ],
-        "relation": [
-            "category-route",
-            "category-restriction",
-            "public_transport/stop_area",
-            "type/boundary",
-            "type/waterway",
-            "type/multipolygon",
-            "type/site",
-            "relation"
-        ]
-    }
+  "defaults": {
+    "area": [
+      "category-landuse",
+      "category-building",
+      "category-water-area",
+      "category-natural-area",
+      "leisure/park",
+      "amenity/hospital",
+      "amenity/place_of_worship",
+      "amenity/cafe",
+      "amenity/restaurant",
+      "area"
+    ],
+    "line": [
+      "category-road",
+      "category-rail",
+      "category-path",
+      "category-water-line",
+      "category-barrier",
+      "category-natural-line",
+      "power/line",
+      "line"
+    ],
+    "point": [
+      "category-natural-point",
+      "leisure/park",
+      "amenity/hospital",
+      "amenity/place_of_worship",
+      "amenity/cafe",
+      "amenity/restaurant",
+      "amenity/fast_food",
+      "amenity/bar",
+      "amenity/bank",
+      "shop/supermarket",
+      "point"
+    ],
+    "vertex": [
+      "highway/crosswalk",
+      "highway/crossing",
+      "railway/level_crossing",
+      "highway/traffic_signals",
+      "highway/turning_circle",
+      "highway/turning_loop",
+      "traffic_calming",
+      "highway/mini_roundabout",
+      "highway/motorway_junction",
+      "vertex"
+    ],
+    "relation": [
+      "category-route",
+      "category-restriction",
+      "public_transport/stop_area",
+      "type/boundary",
+      "type/waterway",
+      "type/multipolygon",
+      "type/site",
+      "relation"
+    ]
+  }
 }

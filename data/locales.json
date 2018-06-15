@@ -1,250 +1,86 @@
 {
-    "dataLocales": {
-        "af": {
-            "rtl": false
-        },
-        "ar": {
-            "rtl": true
-        },
-        "ar-AA": {
-            "rtl": true
-        },
-        "ast": {
-            "rtl": false
-        },
-        "be": {
-            "rtl": false
-        },
-        "bg": {
-            "rtl": false
-        },
-        "bn": {
-            "rtl": false
-        },
-        "bs": {
-            "rtl": false
-        },
-        "ca": {
-            "rtl": false
-        },
-        "ckb": {
-            "rtl": true
-        },
-        "cs": {
-            "rtl": false
-        },
-        "cy": {
-            "rtl": false
-        },
-        "da": {
-            "rtl": false
-        },
-        "de": {
-            "rtl": false
-        },
-        "dv": {
-            "rtl": true
-        },
-        "el": {
-            "rtl": false
-        },
-        "en-GB": {
-            "rtl": false
-        },
-        "eo": {
-            "rtl": false
-        },
-        "es": {
-            "rtl": false
-        },
-        "et": {
-            "rtl": false
-        },
-        "eu": {
-            "rtl": false
-        },
-        "fa": {
-            "rtl": true
-        },
-        "fi": {
-            "rtl": false
-        },
-        "fr": {
-            "rtl": false
-        },
-        "gan": {
-            "rtl": false
-        },
-        "gl": {
-            "rtl": false
-        },
-        "gu": {
-            "rtl": false
-        },
-        "he": {
-            "rtl": true
-        },
-        "hi": {
-            "rtl": false
-        },
-        "hr": {
-            "rtl": false
-        },
-        "hu": {
-            "rtl": false
-        },
-        "hy": {
-            "rtl": false
-        },
-        "ia": {
-            "rtl": false
-        },
-        "id": {
-            "rtl": false
-        },
-        "is": {
-            "rtl": false
-        },
-        "it": {
-            "rtl": false
-        },
-        "ja": {
-            "rtl": false
-        },
-        "jv": {
-            "rtl": false
-        },
-        "km": {
-            "rtl": false
-        },
-        "kn": {
-            "rtl": false
-        },
-        "ko": {
-            "rtl": false
-        },
-        "ku": {
-            "rtl": false
-        },
-        "lij": {
-            "rtl": false
-        },
-        "lt": {
-            "rtl": false
-        },
-        "lv": {
-            "rtl": false
-        },
-        "mg": {
-            "rtl": false
-        },
-        "mk": {
-            "rtl": false
-        },
-        "ml": {
-            "rtl": false
-        },
-        "mn": {
-            "rtl": false
-        },
-        "ms": {
-            "rtl": false
-        },
-        "ne": {
-            "rtl": false
-        },
-        "nl": {
-            "rtl": false
-        },
-        "nn": {
-            "rtl": false
-        },
-        "no": {
-            "rtl": false
-        },
-        "nv": {
-            "rtl": false
-        },
-        "pl": {
-            "rtl": false
-        },
-        "pt": {
-            "rtl": false
-        },
-        "pt-BR": {
-            "rtl": false
-        },
-        "rm": {
-            "rtl": false
-        },
-        "ro": {
-            "rtl": false
-        },
-        "ru": {
-            "rtl": false
-        },
-        "sc": {
-            "rtl": false
-        },
-        "si": {
-            "rtl": false
-        },
-        "sk": {
-            "rtl": false
-        },
-        "sl": {
-            "rtl": false
-        },
-        "so": {
-            "rtl": false
-        },
-        "sq": {
-            "rtl": false
-        },
-        "sr": {
-            "rtl": false
-        },
-        "sv": {
-            "rtl": false
-        },
-        "ta": {
-            "rtl": false
-        },
-        "te": {
-            "rtl": false
-        },
-        "th": {
-            "rtl": false
-        },
-        "tl": {
-            "rtl": false
-        },
-        "tr": {
-            "rtl": false
-        },
-        "uk": {
-            "rtl": false
-        },
-        "ur": {
-            "rtl": true
-        },
-        "vi": {
-            "rtl": false
-        },
-        "yue": {
-            "rtl": false
-        },
-        "zh": {
-            "rtl": false
-        },
-        "zh-CN": {
-            "rtl": false
-        },
-        "zh-HK": {
-            "rtl": false
-        },
-        "zh-TW": {
-            "rtl": false
-        }
-    }
+  "dataLocales": {
+    "af": {"rtl": false},
+    "ar": {"rtl": true},
+    "ar-AA": {"rtl": true},
+    "ast": {"rtl": false},
+    "be": {"rtl": false},
+    "bg": {"rtl": false},
+    "bn": {"rtl": false},
+    "bs": {"rtl": false},
+    "ca": {"rtl": false},
+    "ckb": {"rtl": true},
+    "cs": {"rtl": false},
+    "cy": {"rtl": false},
+    "da": {"rtl": false},
+    "de": {"rtl": false},
+    "dv": {"rtl": true},
+    "el": {"rtl": false},
+    "en-GB": {"rtl": false},
+    "eo": {"rtl": false},
+    "es": {"rtl": false},
+    "et": {"rtl": false},
+    "eu": {"rtl": false},
+    "fa": {"rtl": true},
+    "fi": {"rtl": false},
+    "fr": {"rtl": false},
+    "gan": {"rtl": false},
+    "gl": {"rtl": false},
+    "gu": {"rtl": false},
+    "he": {"rtl": true},
+    "hi": {"rtl": false},
+    "hr": {"rtl": false},
+    "hu": {"rtl": false},
+    "hy": {"rtl": false},
+    "ia": {"rtl": false},
+    "id": {"rtl": false},
+    "is": {"rtl": false},
+    "it": {"rtl": false},
+    "ja": {"rtl": false},
+    "jv": {"rtl": false},
+    "km": {"rtl": false},
+    "kn": {"rtl": false},
+    "ko": {"rtl": false},
+    "ku": {"rtl": false},
+    "lij": {"rtl": false},
+    "lt": {"rtl": false},
+    "lv": {"rtl": false},
+    "mg": {"rtl": false},
+    "mk": {"rtl": false},
+    "ml": {"rtl": false},
+    "mn": {"rtl": false},
+    "ms": {"rtl": false},
+    "ne": {"rtl": false},
+    "nl": {"rtl": false},
+    "nn": {"rtl": false},
+    "no": {"rtl": false},
+    "nv": {"rtl": false},
+    "pl": {"rtl": false},
+    "pt": {"rtl": false},
+    "pt-BR": {"rtl": false},
+    "rm": {"rtl": false},
+    "ro": {"rtl": false},
+    "ru": {"rtl": false},
+    "sc": {"rtl": false},
+    "si": {"rtl": false},
+    "sk": {"rtl": false},
+    "sl": {"rtl": false},
+    "so": {"rtl": false},
+    "sq": {"rtl": false},
+    "sr": {"rtl": false},
+    "sv": {"rtl": false},
+    "ta": {"rtl": false},
+    "te": {"rtl": false},
+    "th": {"rtl": false},
+    "tl": {"rtl": false},
+    "tr": {"rtl": false},
+    "uk": {"rtl": false},
+    "ur": {"rtl": true},
+    "vi": {"rtl": false},
+    "yue": {"rtl": false},
+    "zh": {"rtl": false},
+    "zh-CN": {"rtl": false},
+    "zh-HK": {"rtl": false},
+    "zh-TW": {"rtl": false}
+  }
 }
