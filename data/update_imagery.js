@@ -9,10 +9,12 @@ cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 const blacklist = {
     'hike_n_bike': true,                  // 'Hike & Bike'
+    'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
     'osmfr': true,                        // 'OpenStreetMap (French Style)'
     'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
     'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
     'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
+    'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
     'skobbler': true,                     // 'Skobbler'
     'openpt_map': true,                   // 'OpenPT Map (overlay)'
     'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
