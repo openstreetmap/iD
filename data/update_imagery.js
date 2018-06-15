@@ -8,7 +8,9 @@ cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 var blacklist = {
     'hike_n_bike': true,                  // 'Hike & Bike'
+    'osmfr': true,                        // 'OpenStreetMap (French Style)'
     'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
+    'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
     'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
     'skobbler': true,                     // 'Skobbler'
     'openpt_map': true,                   // 'OpenPT Map (overlay)'
