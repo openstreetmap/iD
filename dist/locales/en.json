@@ -722,7 +722,7 @@
         },
         "mvt": {
             "local_layer": "Add a MVT",
-            "drag_drop": "Drag and drop a .mvt, .pbf or .geojson file on the page, or click the button to the right to browse",
+            "drag_drop": "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse",
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
         },

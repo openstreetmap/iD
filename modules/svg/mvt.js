@@ -6,6 +6,7 @@ import _union from 'lodash-es/union';
 
 import { geoBounds as d3_geoBounds } from 'd3-geo';
 import { text as d3_text } from 'd3-request';
+import { buffer } from 'd3-fetch';
 import {
     event as d3_event,
     select as d3_select
@@ -128,8 +129,8 @@ export function svgMvt(projection, context, dispatch) {
     }
 
 
-    function vtToGeoJson(x) {
-        var tile = new vt.VectorTile(new Protobuf(x));
+    function vtToGeoJson(bufferdata) {
+        var tile = new vt.VectorTile(new Protobuf(bufferdata.data));
         var layers = Object.keys(tile.layers);
         if (!Array.isArray(layers))
             layers = [layers];
@@ -140,7 +141,7 @@ export function svgMvt(projection, context, dispatch) {
             var layer = tile.layers[layerID];
             if (layer) {
                 for (var i = 0; i < layer.length; i++) {
-                    var feature = layer.feature(i).toGeoJSON(150, 194, 9);
+                    var feature = layer.feature(i).toGeoJSON(bufferdata.zxy[2], bufferdata.zxy[3], bufferdata.zxy[1]);
                     if (layers.length > 1) feature.properties.vt_layer = layerID;
                     collection.features.push(feature);
                 }
@@ -164,20 +165,16 @@ export function svgMvt(projection, context, dispatch) {
     }
 
 
-    function parseSaveAndZoom(extension, data) {
+    function parseSaveAndZoom(extension, bufferdata) {
         switch (extension) {
             default:
-                drawMvt.geojson(JSON.parse(data)).fitZoom();
+                drawMvt.geojson(JSON.parse(bufferdata.data)).fitZoom();
                 break;
             case '.pbf':
-                drawMvt.geojson(vtToGeoJson(data)).fitZoom();
+                drawMvt.geojson(vtToGeoJson(bufferdata)).fitZoom();
                 break;
             case '.mvt':
-                drawMvt.geojson(vtToGeoJson(data)).fitZoom();
-                break;
-            case '.geojson':
-            case '.json':
-                drawMvt.geojson(JSON.parse(data)).fitZoom();
+                drawMvt.geojson(vtToGeoJson(bufferdata)).fitZoom();
                 break;
         }
     }
@@ -211,14 +208,18 @@ export function svgMvt(projection, context, dispatch) {
         return this;
     };
 
-
     drawMvt.url = function(url) {
-        d3_text(url, function(err, data) {
-            if (!err) {
+        url = 'https://api.mapbox.com/v4/mapbox.mapbox-streets-v6/9/150/194.vector.pbf?access_token=pk.eyJ1IjoidmVyc2h3YWwiLCJhIjoiY2pocmk1c2J5M28wbDM1cGU1ZDdpeDB1eSJ9.KN1fjHMCdSUsYcuvwiXWIA';
+        buffer(url).then(function(data) {
                 _src = url;
-                var extension = getExtension(url);
-                parseSaveAndZoom(extension, data);
-            }
+                var match = url.match(/(pbf|mvt|(?:geo)?json)/i);
+                var extension = match ? ('.' + match[0].toLowerCase()) : '';
+                var zxy = url.match(/\/(\d+)\/(\d+)\/(\d+)/);
+                var bufferdata = {
+                    data : data,
+                    zxy : zxy
+                };
+                parseSaveAndZoom(extension, bufferdata);
         });
         return this;
     };
@@ -232,8 +233,13 @@ export function svgMvt(projection, context, dispatch) {
         reader.onload = (function(file) {
             _src = file.name;
             var extension = getExtension(file.name);
+            var bufferdata = {
+                    data,
+                    zxy      //to-do find x,y,z
+                };
             return function (e) {
-                parseSaveAndZoom(extension, e.target.result);
+                bufferdata.data = e.target.result;
+                parseSaveAndZoom(extension, bufferdata);
             };
         })(f);
 
