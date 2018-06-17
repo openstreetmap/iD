@@ -110,11 +110,13 @@ export function uiFieldText(field, context) {
     function change(onInput) {
         return function() {
             var t = {};
-            var val = utilGetSetValue(input) || undefined;
+            var val = utilGetSetValue(input).trim() || undefined;
 
-            if (!onInput && field.type === 'number') {
-                val = clamped(parsed(val)) + '';
-                utilGetSetValue(input, val);
+            if (!onInput) {
+                if (field.type === 'number' && val !== undefined) {
+                    val = clamped(parsed(val)) + '';
+                }
+                utilGetSetValue(input, val || '');
             }
             t[field.key] = val;
             dispatch.call('change', this, t, onInput);
