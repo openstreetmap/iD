@@ -9,11 +9,8 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgDebug } from './debug';
 import { svgGpx } from './gpx';
-<<<<<<< HEAD
 import { svgStreetside } from './streetside';
-=======
 import { svgMvt } from './mvt';
->>>>>>> 9b88bc9d1... button works with .gpx
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
 import { svgOpenstreetcamImages } from './openstreetcam_images';

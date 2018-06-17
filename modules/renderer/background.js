@@ -169,6 +169,7 @@ export function rendererBackground(context) {
         var streetside = context.layers().layer('streetside');
         if (streetside && streetside.enabled()) {
             imageryUsed.push('Bing Streetside');
+        }
 
         var mvt = context.layers().layer('mvt');
         if (mvt && mvt.enabled() && mvt.hasMvt()) {
