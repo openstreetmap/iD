@@ -209,7 +209,6 @@ export function svgMvt(projection, context, dispatch) {
     };
 
     drawMvt.url = function(url) {
-        url = 'https://api.mapbox.com/v4/mapbox.mapbox-streets-v6/9/150/194.vector.pbf?access_token=pk.eyJ1IjoidmVyc2h3YWwiLCJhIjoiY2pocmk1c2J5M28wbDM1cGU1ZDdpeDB1eSJ9.KN1fjHMCdSUsYcuvwiXWIA';
         buffer(url).then(function(data) {
                 _src = url;
                 var match = url.match(/(pbf|mvt|(?:geo)?json)/i);

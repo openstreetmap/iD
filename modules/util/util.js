@@ -101,6 +101,9 @@ export function utilStringQs(str) {
         if (parts.length === 2) {
             obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
         }
+        if (parts[0] === 'mvt') {
+            obj[parts[0]] = (parts[2] != undefined) ? (decodeURIComponent(parts[1]) + '=' + decodeURIComponent(parts[2])) : (decodeURIComponent(parts[1]));
+        }
         return obj;
     }, {});
 }
