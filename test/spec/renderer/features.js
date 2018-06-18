@@ -137,7 +137,6 @@ describe('iD.Features', function() {
             iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
             iD.Way({id: 'building_no', tags: {area: 'yes', amenity: 'school', building: 'no'}, version: 1}),
             iD.Way({id: 'building_part', tags: { 'building:part': 'yes'}, version: 1}),
-            iD.Way({id: 'shelter', tags: {area: 'yes', amenity: 'shelter'}, version: 1}),
             iD.Way({id: 'garage1', tags: {area: 'yes', amenity: 'parking', parking: 'multi-storey'}, version: 1}),
             iD.Way({id: 'garage2', tags: {area: 'yes', amenity: 'parking', parking: 'sheds'}, version: 1}),
             iD.Way({id: 'garage3', tags: {area: 'yes', amenity: 'parking', parking: 'carports'}, version: 1}),
@@ -301,7 +300,7 @@ describe('iD.Features', function() {
             features.gatherStats(all, graph, dimensions);
 
             doMatch([
-                'building_yes', 'building_part', 'shelter',
+                'building_yes', 'building_part',
                 'garage1', 'garage2', 'garage3', 'garage4'
             ]);
 
