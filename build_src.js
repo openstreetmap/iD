@@ -8,7 +8,6 @@ const json = require('rollup-plugin-json');
 const colors = require('colors/safe');
 
 module.exports = function buildSrc() {
-    var cache;
     var building = false;
     return function () {
         if (building) return;
@@ -33,11 +32,9 @@ module.exports = function buildSrc() {
                     }),
                     commonjs(),
                     json( { indent: '' })
-                ],
-                cache: cache
+                ]
             })
             .then(function (bundle) {
-                cache = bundle;
                 return bundle.write({
                     format: 'iife',
                     file: 'dist/iD.js',
@@ -51,7 +48,6 @@ module.exports = function buildSrc() {
             })
             .catch(function (err) {
                 building = false;
-                cache = undefined;
                 console.error(err);
                 process.exit(1);
             });
