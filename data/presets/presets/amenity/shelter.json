@@ -3,6 +3,8 @@
     "fields": [
         "name",
         "shelter_type",
+        "building_area",
+        "bench",
         "bin"
     ],
     "geometry": [

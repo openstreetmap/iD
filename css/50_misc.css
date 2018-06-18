@@ -211,17 +211,14 @@ path.casing.tag-status {
 
 
 /* Buildings */
-path.stroke.tag-building,
-path.stroke.tag-amenity-shelter {
+path.stroke.tag-building {
     stroke: rgb(224, 110, 95);
 }
-path.fill.tag-building,
-path.fill.tag-amenity-shelter {
+path.fill.tag-building {
     stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
-.preset-icon-fill-area.tag-building,
-.preset-icon-fill-area.tag-amenity-shelter {
+.preset-icon-fill-area.tag-building {
     border-color: rgb(224, 110, 95);
     background-color: rgba(224, 110, 95, 0.3);
 }

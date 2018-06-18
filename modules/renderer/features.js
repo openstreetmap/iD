@@ -123,7 +123,6 @@ export function rendererFeatures(context) {
         return (
             !!entity.tags['building:part'] ||
             (!!entity.tags.building && entity.tags.building !== 'no') ||
-            entity.tags.amenity === 'shelter' ||
             entity.tags.parking === 'multi-storey' ||
             entity.tags.parking === 'sheds' ||
             entity.tags.parking === 'carports' ||
