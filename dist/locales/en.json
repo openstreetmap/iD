@@ -6858,6 +6858,13 @@
                 },
                 "name": "OpenStreetMap (German Style)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Scan of ´Economic maps´ ca 1950-1980",
+                "name": "Lantmäteriet Economic Map (historic)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMap contributors"
@@ -6887,6 +6894,48 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish railway network, including sidings",
+                "name": "Trafikverket Railway Network"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish railway network with several options for map layers",
+                "name": "Trafikverket Railway Network options"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB road network",
+                "name": "Trafikverket Road Network"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB extra details: Highway reference, traffic calming, rest area, bus stop, bridge, tunnel, speed camera",
+                "name": "Trafikverket Road Network extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB street names",
+                "name": "Trafikverket Street Names"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB road network with several options for map layers",
+                "name": "Trafikverket Road Network options"
             }
         },
         "community": {
