@@ -441,6 +441,9 @@ en:
       osm:
         tooltip: Map data from OpenStreetMap
         title: OpenStreetMap data
+      notes:
+        tooltip: Note data from OpenStreetMap
+        title: OpenStreetMap notes
     fill_area: Fill Areas
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."

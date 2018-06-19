@@ -536,6 +536,10 @@
                 "osm": {
                     "tooltip": "Map data from OpenStreetMap",
                     "title": "OpenStreetMap data"
+                },
+                "notes": {
+                    "tooltip": "Note data from OpenStreetMap",
+                    "title": "OpenStreetMap notes"
                 }
             },
             "fill_area": "Fill Areas",
