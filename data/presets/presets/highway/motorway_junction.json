@@ -7,7 +7,8 @@
         "highway": "motorway_junction"
     },
     "fields": [
-        "ref_highway_junction"
+        "ref_highway_junction",
+        "name"
     ],
     "name": "Motorway Junction / Exit"
 }
