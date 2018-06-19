@@ -20,6 +20,7 @@ import { geoExtent } from '../geo';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
+import Q from 'q';
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -33,6 +34,8 @@ var _currScene = 0;
 var _ssCache;
 var _pannellumViewer;
 var _sceneOptions;
+var _dataUrlArray = [];
+var _faceImgInfoGroups = [];
 
 /**
  * abortRequest().
@@ -296,7 +299,77 @@ function searchLimited(psize, limit, projection, rtree) {
 
     return results;
 }
-
+/**
+ * getImage()
+ */
+function getImage(imgInfo){
+    var response = Q.defer();
+    var canvas = document.getElementById('canvas' + imgInfo.face);
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, imgInfo.dx, imgInfo.dy);
+        response.resolve({imgInfo:imgInfo, status: 'ok'});
+    };
+    img.onerror = function(){
+        console.log('img onerror !');
+        response.resolve({data: imgInfo, status: 'error'});
+    };
+    img.setAttribute("crossorigin","");
+    img.src = imgInfo.url;
+    return response.promise;
+}
+/**
+ * loadCanvas()
+ */
+function loadCanvas(imgInfoGroup){
+    var response = Q.defer();
+    var getImagePromises = [];
+    imgInfoGroup.forEach(function(imgInfo){
+        getImagePromises.push(getImage(imgInfo))
+    });
+    Q.all(getImagePromises).then(function(data){
+        console.log('loadCanvas - All Get Images done: ', data);
+        var canvas = document.getElementById('canvas' + data[0].imgInfo.face);
+        switch(data[0].imgInfo.face){
+            case '01':
+                _dataUrlArray[0] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '02':
+                _dataUrlArray[1] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '03':
+                _dataUrlArray[2] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '10':
+                _dataUrlArray[3] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '11':
+                _dataUrlArray[4] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '12':
+                _dataUrlArray[5] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+        }
+        response.resolve({status:'loadCanvas for face ' + data[0].imgInfo.face + 'ok'});
+    });
+    return response.promise;
+};
+/**
+ * processImages()
+ */
+function processImages(imgFaceInfoGroups){
+    var response = Q.defer();
+    var loadCanvasPromises = [];
+    //call loadCanvas once with each group of infos....
+    imgFaceInfoGroups.forEach(function(faceImgGroup){
+        loadCanvasPromises.push(loadCanvas(faceImgGroup));
+    });
+    Q.all(loadCanvasPromises).then(function(data){
+        response.resolve({status: 'processImages done'})
+    });
+    return response.promise;
+};
 
 export default {
     /**
@@ -408,6 +481,21 @@ export default {
      * loadViewer() create the streeside viewer.
      */
     loadViewer: function (context) {
+        // Add the Streetside working canvases. These are used for 'stitching', or combining, 
+        // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
+        var bodyWrap = d3_select('body')
+            .append('div')
+            .attr('id','divForCanvasWork')
+            .attr('display','none');
+        var canvasDivWrap = d3_select('#divForCanvasWork')
+            .selectAll('canvas')
+            .data(['canvas01','canvas02','canvas03','canvas10','canvas11','canvas12'])
+            .enter()
+            .append('canvas')
+            .attr('id',function(d){return d})
+            .attr('width','512')
+            .attr('height','512');
+        
         // create ms-wrapper, a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
@@ -449,6 +537,7 @@ export default {
      * showViewer()
      */
     showViewer: function (yaw) {
+        console.log('showViewer(), _sceneOptions = ', _sceneOptions)
         if (!_sceneOptions) return;
 
         if (yaw !== undefined) {
@@ -513,6 +602,8 @@ export default {
      * selectImage().
      */
     selectImage: function (d) {
+        var response = Q.defer();
+
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
@@ -557,33 +648,48 @@ export default {
             for (var i = 0; i < paddingNeeded; i++) {
                 bubbleIdQuadKey = '0' + bubbleIdQuadKey;
             }
-
-            // Order matters here: front=01, right=02, back=03, left=10, up=11, down=12
-            var imgLocIdxArr = ['01','02','03','10','11','12'];
             var imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
             var imgUrlSuffix = '.jpg?g=6338&n=z';
+            // Order matters here: front=01, right=02, back=03, left=10, up=11, down=12
+            var imgFaceCodes = ['01','02','03','10','11','12'];
+            var fourImgPerFaceLocationCodes = ['0','1','2','3'];
+            var fourImgPerFaceLocationPositions = [{dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256}];
+            imgFaceCodes.forEach(function(faceCode){
+                var faceImgInfoGroup = [];
+                fourImgPerFaceLocationCodes.forEach(function(loc,idx_l){
+                    var imgInfoObj = {};
+                    imgInfoObj.face = faceCode;
+                    imgInfoObj.url = imgUrlPrefix + faceCode + loc + imgUrlSuffix;
+                    imgInfoObj.dx = fourImgPerFaceLocationPositions[idx_l].dx;
+                    imgInfoObj.dy = fourImgPerFaceLocationPositions[idx_l].dy;
+                    faceImgInfoGroup.push(imgInfoObj);
+                });
+                _faceImgInfoGroups.push(faceImgInfoGroup);
+            });
 
-            _sceneOptions = {
-                showFullscreenCtrl: false,
-                autoLoad: true,
-                compass: true,
-                northOffset: d.ca,
-                yaw: 0,
-                type: 'cubemap',
-                cubeMap: [
-                    imgUrlPrefix + imgLocIdxArr[0] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[1] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[2] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[3] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[4] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[5] + imgUrlSuffix
-                ]
-            };
+            processImages(_faceImgInfoGroups).then(function(data){
+                _sceneOptions = {
+                    showFullscreenCtrl: false,
+                    autoLoad: true,
+                    compass: true,
+                    northOffset: d.ca,
+                    yaw: 0,
+                    type: 'cubemap',
+                    cubeMap: [
+                        _dataUrlArray[0],
+                        _dataUrlArray[1],
+                        _dataUrlArray[2],
+                        _dataUrlArray[3],
+                        _dataUrlArray[4],
+                        _dataUrlArray[5]
+                    ]
+                };
+                response.resolve({status: 'ok'});
+            });
         }
-
-        return this;
+        return response.promise;
     },
-
+    
 
     getSequenceKeyForBubble: function(d) {
         return d && d.sequenceKey;

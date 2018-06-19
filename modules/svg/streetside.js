@@ -2,7 +2,7 @@ import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
-
+import Q from 'q';
 
 export function svgStreetside(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
@@ -104,8 +104,12 @@ export function svgStreetside(projection, context, dispatch) {
         _selectedSequence = d.sequenceKey;
 
         service
-            .selectImage(d)
-            .showViewer(_viewerYaw);
+            .selectImage(d).then(function(r){
+                if (r.status === 'ok'){
+                    service.showViewer(_viewerYaw);
+                }
+            })
+            
 
         context.map().centerEase(d.loc);
     }
