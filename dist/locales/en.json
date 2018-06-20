@@ -4072,6 +4072,10 @@
                     "name": "Fire Hydrant",
                     "terms": "fire plug"
                 },
+                "emergency/first_aid": {
+                    "name": "First Aid Kit",
+                    "terms": "bandage,first aid,med,med kit,medic*,medkit"
+                },
                 "emergency/life_ring": {
                     "name": "Life Ring",
                     "terms": "life buoy,kisby ring,kisbie ring,perry buoy"
