@@ -1,5 +1,7 @@
+import _some from 'lodash-es/some';
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
+import { svgPointTransform } from './index';
 import { services } from '../services';
 
 export function svgNotes(projection, context, dispatch) {
@@ -67,6 +69,36 @@ export function svgNotes(projection, context, dispatch) {
             .on('end', editOff);
     }
 
+    function update() {
+        var service = getService();
+        var data = (service ? service.notes(projection) : []);
+        var transform = svgPointTransform(projection);
+        var notes = layer.selectAll('.notes').selectAll('.note')
+            .data(data, function(d) { return d.key; });
+
+        // exit
+        notes.exit()
+            .remove();
+
+        // enter
+        var notesEnter = notes.enter()
+            .append('g')
+            .attr('class', 'note');
+
+        // update
+        var markers = notes
+            .merge(notesEnter)
+            .attr('transform', transform);
+
+        markers.selectAll('circle')
+            .data([0])
+            .enter()
+            .append('circle')
+            .attr('dx', '0')
+            .attr('dy', '0')
+            .attr('r', '6');
+    }
+
     function drawNotes(selection) {
         var enabled = svgNotes.enabled,
             service = getService();
@@ -82,10 +114,6 @@ export function svgNotes(projection, context, dispatch) {
             .attr('class', 'layer-notes')
             .style('display', enabled ? 'block' : 'none');
 
-        // layerEnter
-        //     .append('g')
-        //     .attr('class', 'sequences');
-
         layerEnter
             .append('g')
             .attr('class', 'notes');
@@ -96,7 +124,7 @@ export function svgNotes(projection, context, dispatch) {
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                // update();
+                update();
                 service.loadNotes(projection);
             } else {
                 editOff();

@@ -113,6 +113,14 @@
     stroke-opacity: 1;
 }
 
+/* Notes Layer */
+.layer-notes {
+    pointer-events: none;
+}
+.layer-notes .notes * {
+    fill: #20c4ff;
+}
+
 
 /* Streetside Image Layer */
 .layer-streetside-images {
