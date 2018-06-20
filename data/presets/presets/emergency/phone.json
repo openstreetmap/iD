@@ -1,6 +1,8 @@
 {
     "icon": "maki-emergency-phone",
     "fields": [
+        "indoor",
+        "ref",
         "operator"
     ],
     "geometry": [
