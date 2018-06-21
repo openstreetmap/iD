@@ -158,7 +158,7 @@ function parseComments(comments) {
 }
 
 var parsers = {
-    note: function parseNote(obj, uid) {
+    note: function parseNote(obj) {
         var attrs = obj.attributes;
         var childNodes = obj.childNodes;
         var parsedNote = {};
