@@ -247,7 +247,7 @@ export default {
         return oauth.authenticated();
     },
 
-    loadFromAPI(path, callback, options) {
+    loadFromAPI: function(path, callback, options) {
         options = _extend({ cache: true }, options);
 
         function done(err, xml) {
@@ -273,7 +273,7 @@ export default {
         }
     },
 
-    loadTile(which, currZoom, url, tile) {
+    loadTile: function(which, currZoom, url, tile) {
         var cache = _notesCache[which];
         var bbox = tile.extent.toParam();
         var fullUrl = url + bbox;
@@ -304,7 +304,7 @@ export default {
         );
     },
 
-    loadTiles(which, url, projection) {
+    loadTiles: function(which, url, projection) {
         var that = this;
         var s = projection.scale() * 2 * Math.PI,
             currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
