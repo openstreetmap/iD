@@ -2145,6 +2145,13 @@
     },
     {
       "key": "emergency",
+      "value": "first_aid",
+      "description": "First Aid Kit",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-medkit.svg?sanitize=true"
+    },
+    {
+      "key": "emergency",
       "value": "life_ring",
       "description": "Life Ring",
       "object_types": ["node"],

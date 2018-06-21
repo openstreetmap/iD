@@ -718,7 +718,7 @@ export function rendererMap(context) {
         if (!isFinite(extent.area())) return;
 
         var z2 = map.trimmedExtentZoom(extent);
-        zoomLimits = zoomLimits || [context.minEditableZoom(), 24];
+        zoomLimits = zoomLimits || [context.minEditableZoom(), 19];
         map.centerZoom(extent.center(), Math.min(Math.max(z2, zoomLimits[0]), zoomLimits[1]));
     };
 

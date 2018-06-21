@@ -247,7 +247,7 @@ function getBubbles(url, tile, callback) {
         jsCallback: '{callback}'
     });
 
-    jsonpRequest(urlForRequest, function (data) {
+    return jsonpRequest(urlForRequest, function (data) {
         if (!data || data.error) {
             callback(null);
         } else {
