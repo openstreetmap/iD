@@ -36,6 +36,8 @@ var _pannellumViewer;
 var _sceneOptions;
 var _dataUrlArray = [];
 var _faceImgInfoGroups = [];
+// _numImgsPerFace: supported values are 4 or 16
+var _numImgsPerFace = 16;
 
 /**
  * abortRequest().
@@ -483,6 +485,11 @@ export default {
     loadViewer: function (context) {
         // Add the Streetside working canvases. These are used for 'stitching', or combining, 
         // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
+        if (_numImgsPerFace === 4){
+            whVal = '512';
+        }else if (_numImgsPerFace === 16){
+            whVal = '1024';
+        }
         var bodyWrap = d3_select('body')
             .append('div')
             .attr('id','divForCanvasWork')
@@ -493,8 +500,8 @@ export default {
             .enter()
             .append('canvas')
             .attr('id',function(d){return d})
-            .attr('width','512')
-            .attr('height','512');
+            .attr('width',whVal)
+            .attr('height',whVal);
         
         // create ms-wrapper, a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
@@ -537,7 +544,6 @@ export default {
      * showViewer()
      */
     showViewer: function (yaw) {
-        console.log('showViewer(), _sceneOptions = ', _sceneOptions)
         if (!_sceneOptions) return;
 
         if (yaw !== undefined) {
@@ -650,18 +656,43 @@ export default {
             }
             var imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
             var imgUrlSuffix = '.jpg?g=6338&n=z';
-            // Order matters here: front=01, right=02, back=03, left=10, up=11, down=12
+            // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
             var imgFaceCodes = ['01','02','03','10','11','12'];
-            var fourImgPerFaceLocationCodes = ['0','1','2','3'];
-            var fourImgPerFaceLocationPositions = [{dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256}];
+            var faceLocCodes = null;
+            var faceLocPositions = null;
+            if (_numImgsPerFace === 4){
+                faceLocCodes = [
+                    '0','1','2','3'
+                ];
+                faceLocPositions = [
+                    {dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256}
+                ];
+            }else if (_numImgsPerFace === 16){
+                faceLocCodes = [
+                    '00','01','02','03',
+                    '10','11','12','13',
+                    '20','21','22','23',
+                    '30','31','32','33'
+                ];
+                faceLocPositions = [
+                    {dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256},
+                    {dx:512,dy:0},{dx:768,dy:0},{dx:512,dy:256},{dx:768,dy:256},
+                    {dx:0,dy:512},{dx:256,dy:512},{dx:0,dy:768},{dx:256,dy:768},
+                    {dx:512,dy:512},{dx:768,dy:512},{dx:512,dy:768},{dx:768,dy:768}
+                ]
+            } else {
+                response.resolve({status:'error'});
+            }
+            // var fourImgPerFaceLocationCodes = ['0','1','2','3'];
+            // var fourImgPerFaceLocationPositions = [{dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256}];
             imgFaceCodes.forEach(function(faceCode){
                 var faceImgInfoGroup = [];
-                fourImgPerFaceLocationCodes.forEach(function(loc,idx_l){
+                faceLocCodes.forEach(function(loc,idx_l){
                     var imgInfoObj = {};
                     imgInfoObj.face = faceCode;
                     imgInfoObj.url = imgUrlPrefix + faceCode + loc + imgUrlSuffix;
-                    imgInfoObj.dx = fourImgPerFaceLocationPositions[idx_l].dx;
-                    imgInfoObj.dy = fourImgPerFaceLocationPositions[idx_l].dy;
+                    imgInfoObj.dx = faceLocPositions[idx_l].dx;
+                    imgInfoObj.dy = faceLocPositions[idx_l].dy;
                     faceImgInfoGroup.push(imgInfoObj);
                 });
                 _faceImgInfoGroups.push(faceImgInfoGroup);
