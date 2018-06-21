@@ -1,4 +1,3 @@
-import _some from 'lodash-es/some';
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './index';
@@ -7,8 +6,6 @@ import { services } from '../services';
 export function svgNotes(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
-    var minMarkerZoom = 16;
-    var minViewfieldZoom = 18;
     var layer = d3_select(null);
     var _notes;
 

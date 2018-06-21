@@ -21,7 +21,6 @@ import { geoExtent } from '../geo';
 
 import {
     osmNote,
-    osmEntity,
 } from '../osm';
 
 import {
@@ -31,7 +30,6 @@ import {
 
 var urlroot = 'https://api.openstreetmap.org',
     _notesCache,
-    __notesSelectedNote,
     dispatch = d3_dispatch('loadedNotes', 'loading'),
     tileZoom = 14;
 
@@ -46,7 +44,6 @@ var oauth = osmAuth({
 function authLoading() {
     dispatch.call('authLoading');
 }
-
 
 function authDone() {
     dispatch.call('authDone');
@@ -202,11 +199,9 @@ function parse(xml, callback, options) {
         var parser = parsers[child.nodeName];
         if (parser) {
             // TODO: change how a note uid is parsed. Nodes also share 'n' + id
-            // var uid = osmEntity.id.fromOSM(child.nodeName, child.childNodes[1].innerHTML);
             var childNodes = child.childNodes;
             var id;
             var i;
-
             for (i = 0; i < childNodes.length; i++) {
                 if (childNodes[i].nodeName === 'id') { id = childNodes[i].nodeName; }
             }
@@ -239,8 +234,6 @@ export default {
         }
 
         _notesCache = { notes: { inflight: {}, loaded: {}, rtree: rbush() } };
-
-        __notesSelectedNote = null;
     },
 
     authenticated: function() {
@@ -251,7 +244,9 @@ export default {
         options = _extend({ cache: true }, options);
 
         function done(err, xml) {
-            if (err) { console.log ('error: ', err); }
+            if (err) {
+                callback(err, xml);
+            }
             parse(
                 xml,
                 function(entities) {
