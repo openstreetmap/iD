@@ -1332,6 +1332,19 @@ en:
       shop:
         # shop=*
         label: Type
+      siren/purpose:
+        # 'siren:purpose=*'
+        label: Purpose
+      siren/type:
+        # 'siren:type=*'
+        label: Type
+        options:
+          # 'siren:type=electronic'
+          electronic: Electronic
+          # 'siren:type=other'
+          other: Other
+          # 'siren:type=pneumatic'
+          pneumatic: Pneumatic
       site:
         # site=*
         label: Type
@@ -3097,6 +3110,11 @@ en:
       emergency/private:
         # emergency=private
         name: Emergency Access Private
+      emergency/siren:
+        # emergency=siren
+        name: Siren
+        # 'terms: air raid,loud,noise,storm,tornado,warning'
+        terms: '<translate with synonyms or related terms for ''Siren'', separated by commas>'
       emergency/water_tank:
         # emergency=water_tank
         name: Emergency Water Tank

@@ -2492,6 +2492,17 @@
                 "shop": {
                     "label": "Type"
                 },
+                "siren/purpose": {
+                    "label": "Purpose"
+                },
+                "siren/type": {
+                    "label": "Type",
+                    "options": {
+                        "pneumatic": "Pneumatic",
+                        "electronic": "Electronic",
+                        "other": "Other"
+                    }
+                },
                 "site": {
                     "label": "Type"
                 },
@@ -4083,6 +4094,10 @@
                 "emergency/phone": {
                     "name": "Emergency Phone",
                     "terms": ""
+                },
+                "emergency/siren": {
+                    "name": "Siren",
+                    "terms": "air raid,loud,noise,storm,tornado,warning"
                 },
                 "emergency/water_tank": {
                     "name": "Emergency Water Tank",
