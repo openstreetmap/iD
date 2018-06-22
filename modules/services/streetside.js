@@ -89,12 +89,15 @@ function getTiles(projection) {
         s / 2 - projection.translate()[1]
     ];
 
-    return d3_geoTile()
+    var tiler = d3_geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
         .size(projection.clipExtent()[1])
-        .translate(projection.translate())()
-        .map(function (tile) {
+        .translate(projection.translate())
+        .margin(1);   // request nearby tiles so we can connect sequences.
+
+    return tiler()
+        .map(function(tile) {
             var x = tile[0] * ts - origin[0];
             var y = tile[1] * ts - origin[1];
             return {
