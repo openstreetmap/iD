@@ -20,6 +20,7 @@ import { geoExtent } from '../geo';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
+import Q from 'q';
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -33,6 +34,10 @@ var _currScene = 0;
 var _ssCache;
 var _pannellumViewer;
 var _sceneOptions;
+var _dataUrlArray = [];
+var _faceImgInfoGroups = [];
+// _numImgsPerFace: supported values are 4 or 16
+var _numImgsPerFace = 16;
 
 /**
  * abortRequest().
@@ -296,7 +301,77 @@ function searchLimited(psize, limit, projection, rtree) {
 
     return results;
 }
-
+/**
+ * getImage()
+ */
+function getImage(imgInfo){
+    var response = Q.defer();
+    var canvas = document.getElementById('canvas' + imgInfo.face);
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, imgInfo.dx, imgInfo.dy);
+        response.resolve({imgInfo:imgInfo, status: 'ok'});
+    };
+    img.onerror = function(){
+        console.log('img onerror !');
+        response.resolve({data: imgInfo, status: 'error'});
+    };
+    img.setAttribute("crossorigin","");
+    img.src = imgInfo.url;
+    return response.promise;
+}
+/**
+ * loadCanvas()
+ */
+function loadCanvas(imgInfoGroup){
+    var response = Q.defer();
+    var getImagePromises = [];
+    imgInfoGroup.forEach(function(imgInfo){
+        getImagePromises.push(getImage(imgInfo))
+    });
+    Q.all(getImagePromises).then(function(data){
+        console.log('loadCanvas - All Get Images done: ', data);
+        var canvas = document.getElementById('canvas' + data[0].imgInfo.face);
+        switch(data[0].imgInfo.face){
+            case '01':
+                _dataUrlArray[0] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '02':
+                _dataUrlArray[1] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '03':
+                _dataUrlArray[2] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '10':
+                _dataUrlArray[3] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '11':
+                _dataUrlArray[4] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+            case '12':
+                _dataUrlArray[5] = canvas.toDataURL('image/jpeg',1.0)
+                break;
+        }
+        response.resolve({status:'loadCanvas for face ' + data[0].imgInfo.face + 'ok'});
+    });
+    return response.promise;
+};
+/**
+ * processImages()
+ */
+function processImages(imgFaceInfoGroups){
+    var response = Q.defer();
+    var loadCanvasPromises = [];
+    //call loadCanvas once with each group of infos....
+    imgFaceInfoGroups.forEach(function(faceImgGroup){
+        loadCanvasPromises.push(loadCanvas(faceImgGroup));
+    });
+    Q.all(loadCanvasPromises).then(function(data){
+        response.resolve({status: 'processImages done'})
+    });
+    return response.promise;
+};
 
 export default {
     /**
@@ -408,6 +483,26 @@ export default {
      * loadViewer() create the streeside viewer.
      */
     loadViewer: function (context) {
+        // Add the Streetside working canvases. These are used for 'stitching', or combining, 
+        // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
+        if (_numImgsPerFace === 4){
+            whVal = '512';
+        }else if (_numImgsPerFace === 16){
+            whVal = '1024';
+        }
+        var bodyWrap = d3_select('body')
+            .append('div')
+            .attr('id','divForCanvasWork')
+            .attr('display','none');
+        var canvasDivWrap = d3_select('#divForCanvasWork')
+            .selectAll('canvas')
+            .data(['canvas01','canvas02','canvas03','canvas10','canvas11','canvas12'])
+            .enter()
+            .append('canvas')
+            .attr('id',function(d){return d})
+            .attr('width',whVal)
+            .attr('height',whVal);
+        
         // create ms-wrapper, a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
@@ -513,6 +608,8 @@ export default {
      * selectImage().
      */
     selectImage: function (d) {
+        var response = Q.defer();
+
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
@@ -557,33 +654,73 @@ export default {
             for (var i = 0; i < paddingNeeded; i++) {
                 bubbleIdQuadKey = '0' + bubbleIdQuadKey;
             }
-
-            // Order matters here: front=01, right=02, back=03, left=10, up=11, down=12
-            var imgLocIdxArr = ['01','02','03','10','11','12'];
             var imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
             var imgUrlSuffix = '.jpg?g=6338&n=z';
-
-            _sceneOptions = {
-                showFullscreenCtrl: false,
-                autoLoad: true,
-                compass: true,
-                northOffset: d.ca,
-                yaw: 0,
-                type: 'cubemap',
-                cubeMap: [
-                    imgUrlPrefix + imgLocIdxArr[0] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[1] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[2] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[3] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[4] + imgUrlSuffix,
-                    imgUrlPrefix + imgLocIdxArr[5] + imgUrlSuffix
+            // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
+            var imgFaceCodes = ['01','02','03','10','11','12'];
+            var faceLocCodes = null;
+            var faceLocPositions = null;
+            if (_numImgsPerFace === 4){
+                faceLocCodes = [
+                    '0','1','2','3'
+                ];
+                faceLocPositions = [
+                    {dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256}
+                ];
+            }else if (_numImgsPerFace === 16){
+                faceLocCodes = [
+                    '00','01','02','03',
+                    '10','11','12','13',
+                    '20','21','22','23',
+                    '30','31','32','33'
+                ];
+                faceLocPositions = [
+                    {dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256},
+                    {dx:512,dy:0},{dx:768,dy:0},{dx:512,dy:256},{dx:768,dy:256},
+                    {dx:0,dy:512},{dx:256,dy:512},{dx:0,dy:768},{dx:256,dy:768},
+                    {dx:512,dy:512},{dx:768,dy:512},{dx:512,dy:768},{dx:768,dy:768}
                 ]
-            };
+            } else {
+                response.resolve({status:'error'});
+            }
+            // var fourImgPerFaceLocationCodes = ['0','1','2','3'];
+            // var fourImgPerFaceLocationPositions = [{dx:0,dy:0},{dx:256,dy:0},{dx:0,dy:256},{dx:256,dy:256}];
+            imgFaceCodes.forEach(function(faceCode){
+                var faceImgInfoGroup = [];
+                faceLocCodes.forEach(function(loc,idx_l){
+                    var imgInfoObj = {};
+                    imgInfoObj.face = faceCode;
+                    imgInfoObj.url = imgUrlPrefix + faceCode + loc + imgUrlSuffix;
+                    imgInfoObj.dx = faceLocPositions[idx_l].dx;
+                    imgInfoObj.dy = faceLocPositions[idx_l].dy;
+                    faceImgInfoGroup.push(imgInfoObj);
+                });
+                _faceImgInfoGroups.push(faceImgInfoGroup);
+            });
+
+            processImages(_faceImgInfoGroups).then(function(data){
+                _sceneOptions = {
+                    showFullscreenCtrl: false,
+                    autoLoad: true,
+                    compass: true,
+                    northOffset: d.ca,
+                    yaw: 0,
+                    type: 'cubemap',
+                    cubeMap: [
+                        _dataUrlArray[0],
+                        _dataUrlArray[1],
+                        _dataUrlArray[2],
+                        _dataUrlArray[3],
+                        _dataUrlArray[4],
+                        _dataUrlArray[5]
+                    ]
+                };
+                response.resolve({status: 'ok'});
+            });
         }
-
-        return this;
+        return response.promise;
     },
-
+    
 
     getSequenceKeyForBubble: function(d) {
         return d && d.sequenceKey;
