@@ -104,7 +104,8 @@ export function svgStreetside(projection, context, dispatch) {
         _selectedSequence = d.sequenceKey;
 
         service
-            .selectImage(d).then(function(r){
+            .selectImage(d)
+            .then(function(r) {
                 if (r.status === 'ok'){
                     service.showViewer(_viewerYaw);
                 }
