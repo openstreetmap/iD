@@ -78,7 +78,7 @@ describe('iD.serviceStreetside', function() {
                 }
             ];
 
-            streetside.loadBubbles(context.projection);
+            streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
             expect(spy).to.have.been.calledOnce;
         });
 
@@ -109,7 +109,7 @@ describe('iD.serviceStreetside', function() {
                 }
             ];
 
-            streetside.loadBubbles(context.projection);
+            streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
             expect(spy).to.have.been.not.called;
         });
     });
