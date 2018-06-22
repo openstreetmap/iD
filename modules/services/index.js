@@ -23,6 +23,7 @@ export var services = {
 export {
     serviceMapillary,
     serviceNominatim,
+    serviceNotes,
     serviceOpenstreetcam,
     serviceOsm,
     serviceStreetside,

@@ -1,10 +1,8 @@
 import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
-import _flatten from 'lodash-es/flatten';
 import _find from 'lodash-es/find';
 import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
-import _map from 'lodash-es/map';
 
 import osmAuth from 'osm-auth';
 
@@ -12,7 +10,6 @@ import rbush from 'rbush';
 
 var _entityCache = {};
 
-import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { xml as d3_xml } from 'd3-request';
 
@@ -33,10 +30,11 @@ var urlroot = 'https://api.openstreetmap.org',
     dispatch = d3_dispatch('loadedNotes', 'loading'),
     tileZoom = 14;
 
+// TODO: complete authentication
 var oauth = osmAuth({
     url: urlroot,
-    oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-    oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+    oauth_consumer_key: '',
+    oauth_secret: '',
     loading: authLoading,
     done: authDone
 });
@@ -47,6 +45,10 @@ function authLoading() {
 
 function authDone() {
     dispatch.call('authDone');
+}
+
+function authenticated() {
+    return oauth.authenticated();
 }
 
 function abortRequest(i) {
@@ -81,52 +83,6 @@ function getTiles(projection) {
         });
 }
 
-function nearNullIsland(x, y, z) {
-    if (z >= 7) {
-        var center = Math.pow(2, z - 1),
-        width = Math.pow(2, z - 6),
-        min = center - (width / 2),
-        max = center + (width / 2) - 1;
-        return x >= min && x <= max && y >= min && y <= max;
-    }
-    return false;
-}
-
-// no more than `limit` results per partition.
-function searchLimited(psize, limit, projection, rtree) {
-    limit = limit || 3;
-
-    var partitions = partitionViewport(psize, projection);
-    var results;
-
-    results = _flatten(_map(partitions, function(extent) {
-        return rtree.search(extent.bbox())
-            .slice(0, limit)
-            .map(function(d) { return d.data; });
-    }));
-    return results;
-}
-
-// partition viewport into `psize` x `psize` regions
-function partitionViewport(psize, projection) {
-    var dimensions = projection.clipExtent()[1];
-    psize = psize || 16;
-    var cols = d3_range(0, dimensions[0], psize);
-    var rows = d3_range(0, dimensions[1], psize);
-    var partitions = [];
-
-    rows.forEach(function(y) {
-        cols.forEach(function(x) {
-            var min = [x, y + psize];
-            var max = [x + psize, y];
-            partitions.push(
-                geoExtent(projection.invert(min), projection.invert(max)));
-        });
-    });
-
-    return partitions;
-}
-
 function getLoc(attrs) {
     var lon = attrs.lon && attrs.lon.value;
     var lat = attrs.lat && attrs.lat.value;
@@ -137,23 +93,20 @@ function parseComments(comments) {
     var parsedComments = [];
 
     // for each comment
-    var i;
-    for (i = 0; i < comments.length; i++) {
-        if (comments[i].nodeName === 'comment') {
-            var childNodes = comments[i].childNodes;
+    _forEach(comments, function(comment) {
+        if (comment.nodeName === 'comment') {
+            var childNodes = comment.childNodes;
             var parsedComment = {};
 
-            // for each comment element
-            var j;
-            for (j = 0; j < childNodes.length; j++) {
-                if (childNodes[j].nodeName !== '#text') {
-                    var nodeName = childNodes[j].nodeName;
-                    parsedComment[nodeName] = childNodes[j].innerHTML;
+            _forEach(childNodes, function(node) {
+                if (node.nodeName !== '#text') {
+                    var nodeName = node.nodeName;
+                    parsedComment[nodeName] = node.innerHTML;
                 }
-            }
-            parsedComments.push(parsedComment);
+            });
+            if (parsedComment) { parsedComments.push(parsedComment); }
         }
-    }
+    });
     return parsedComments;
 }
 
@@ -165,19 +118,18 @@ var parsers = {
 
         parsedNote.loc = getLoc(attrs);
 
-        // for each element in a note
-        var i;
-        for (i = 0; i < childNodes.length; i++) {
-            if (childNodes[i].nodeName !== '#text') {
-                var nodeName = childNodes[i].nodeName;
+        _forEach(childNodes, function(node) {
+            if (node.nodeName !== '#text') {
+                var nodeName = node.nodeName;
                 // if the element is comments, parse the comments
                 if (nodeName === 'comments') {
-                    parsedNote[nodeName] = parseComments(childNodes[i].childNodes);
+                    parsedNote[nodeName] = parseComments(node.childNodes);
                 } else {
-                    parsedNote[nodeName] = childNodes[i].innerHTML;
+                    parsedNote[nodeName] = node.innerHTML;
                 }
             }
-        }
+        });
+
         return {
             minX: parsedNote.loc[0],
             minY: parsedNote.loc[1],
@@ -198,7 +150,8 @@ function parse(xml, callback, options) {
     function parseChild(child) {
         var parser = parsers[child.nodeName];
         if (parser) {
-            // TODO: change how a note uid is parsed. Nodes also share 'n' + id
+
+            // TODO: change how a note uid is parsed. Nodes & notes share 'n' + id combination
             var childNodes = child.childNodes;
             var id;
             var i;
@@ -236,10 +189,6 @@ export default {
         _notesCache = { notes: { inflight: {}, loaded: {}, rtree: rbush() } };
     },
 
-    authenticated: function() {
-        return oauth.authenticated();
-    },
-
     loadFromAPI: function(path, callback, options) {
         options = _extend({ cache: true }, options);
 
@@ -261,14 +210,16 @@ export default {
             );
         }
 
-        if (this.authenticated()) {
+        if (authenticated()) {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
             return d3_xml(path).get(done);
         }
     },
 
+    // TODO: refactor /services for consistency by splitting or joining loadTiles & loadTile
     loadTile: function(which, currZoom, url, tile) {
+        var that = this;
         var cache = _notesCache[which];
         var bbox = tile.extent.toParam();
         var fullUrl = url + bbox;
@@ -281,7 +232,7 @@ export default {
             dispatch.call('loading');
         }
 
-        cache.inflight[id] = this.loadFromAPI(
+        cache.inflight[id] = that.loadFromAPI(
             fullUrl,
             function (err, parsed) {
                 delete cache.inflight[id];
@@ -304,9 +255,7 @@ export default {
         var s = projection.scale() * 2 * Math.PI,
             currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
-        var tiles = getTiles(projection).filter(function(t) {
-                return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
-            });
+        var tiles = getTiles(projection);
 
         _filter(which.inflight, function(v, k) {
             var wanted = _find(tiles, function(tile) { return k === (tile.id + ',0'); });
@@ -320,12 +269,22 @@ export default {
     },
 
     loadNotes: function(projection) {
+        var that = this;
         var url = urlroot + '/api/0.6/notes?bbox=';
-        this.loadTiles('notes', url, projection);
+        that.loadTiles('notes', url, projection);
     },
 
     notes: function(projection) {
-        var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _notesCache.notes.rtree);
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+
+        return _notesCache.notes.rtree.search(bbox)
+            .map(function(d) { return d.data; });
     },
+
+    cache: function() {
+        return _notesCache;
+    }
 };

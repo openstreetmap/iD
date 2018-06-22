@@ -21,7 +21,7 @@ export function svgNotes(projection, context, dispatch) {
 
 
     function editOff() {
-        layer.selectAll('.viewfield-group').remove();
+        layer.selectAll('.note').remove();
         layer.style('display', 'none');
     }
 
@@ -37,10 +37,6 @@ export function svgNotes(projection, context, dispatch) {
     }
 
     function showLayer() {
-        var service = getService();
-        if (!service) return;
-
-        // service.loadViewer(context);
         editOn();
 
         layer
@@ -52,11 +48,6 @@ export function svgNotes(projection, context, dispatch) {
     }
 
     function hideLayer() {
-        var service = getService();
-        if (service) {
-            // service.hideViewer();
-        }
-
         throttledRedraw.cancel();
 
         layer
@@ -90,10 +81,12 @@ export function svgNotes(projection, context, dispatch) {
         markers.selectAll('circle')
             .data([0])
             .enter()
-            .append('circle')
-            .attr('dx', '0')
-            .attr('dy', '0')
-            .attr('r', '6');
+            .append('use')
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-12px')
+            .attr('xlink:href', '#far-comment-alt');
     }
 
     function drawNotes(selection) {

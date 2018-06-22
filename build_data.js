@@ -61,7 +61,10 @@ module.exports = function buildData() {
         };
 
         // Font Awesome icons used
-        var faIcons = {};
+        var faIcons = {
+            'fas-comment-alt': {},
+            'far-comment-alt': {}
+        };
 
         // Start clean
         shell.rm('-f', [

@@ -118,7 +118,7 @@
     pointer-events: none;
 }
 .layer-notes .notes * {
-    fill: #20c4ff;
+    color: #eebb00;
 }
 
 
