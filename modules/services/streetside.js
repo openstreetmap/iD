@@ -8,6 +8,7 @@ import { range as d3_range } from 'd3-array';
 import { timer as d3_timer } from 'd3-timer';
 
 import {
+    event as d3_event,
     select as d3_select,
     selectAll as d3_selectAll
 } from 'd3-selection';
@@ -29,10 +30,11 @@ var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var maxResults = 2000;
 var tileZoom = 16.5;
-var resolution = 2048;    // 512, 1024, 2048  : higher numbers are slower
-var minHfov = 5;          // 20, 10, 5        : zoom in more
-var maxHfov = 50;         //                  : zoom out more
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
+var _hires = false;
+var _resolution = 1024;    // higher numbers are slower - 512, 1024, 2048
+var _minHfov = 10;         // zoom in degrees:  20, 10, 5
+var _maxHfov = 45;         // zoom out degrees
 var _currScene = 0;
 var _ssCache;
 var _pannellumViewer;
@@ -367,6 +369,30 @@ function loadCanvas(imgInfoGroup) {
 }
 
 
+function setupCanvas(selection, reset) {
+    if (reset) {
+        selection.selectAll('#divForCanvasWork')
+            .remove();
+    }
+
+    // Add the Streetside working canvases. These are used for 'stitching', or combining,
+    // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
+    selection.selectAll('#divForCanvasWork')
+        .data([0])
+        .enter()
+        .append('div')
+        .attr('id', 'divForCanvasWork')
+        .attr('display', 'none')
+        .selectAll('canvas')
+        .data(['canvas01', 'canvas02', 'canvas03', 'canvas10', 'canvas11', 'canvas12'])
+        .enter()
+        .append('canvas')
+        .attr('id', function(d) { return d; })
+        .attr('width', _resolution)
+        .attr('height', _resolution);
+}
+
+
 /**
  * processFaces()
  */
@@ -517,19 +543,10 @@ export default {
             .append('div')
             .attr('class', 'photo-attribution fillD');
 
-        // Add the Streetside working canvases. These are used for 'stitching', or combining,
-        // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
-        wrapEnter
-            .append('div')
-            .attr('id', 'divForCanvasWork')
-            .attr('display', 'none')
-            .selectAll('canvas')
-            .data(['canvas01', 'canvas02', 'canvas03', 'canvas10', 'canvas11', 'canvas12'])
-            .enter()
-            .append('canvas')
-            .attr('id', function(d) { return d; })
-            .attr('width', resolution)
-            .attr('height', resolution);
+        // create working canvas for stitching together images
+        wrap = wrap
+            .merge(wrapEnter)
+            .call(setupCanvas, true);
 
         // load streetside pannellum viewer css
         d3_select('head').selectAll('#streetside-viewercss')
@@ -617,6 +634,7 @@ export default {
      */
     selectImage: function (d) {
         var response = Q.defer();
+        var that = this;
 
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -634,6 +652,40 @@ export default {
             return response.promise;
         }
 
+        // Add hires checkbox
+        var label = attribution
+            .append('label')
+            .attr('class', 'streetside-hires');
+
+        label
+            .append('input')
+            .attr('type', 'checkbox')
+            .attr('id', 'streetside-hires-input')
+            .property('checked', _hires)
+            .on('click', function() {
+                d3_event.stopPropagation();
+
+                _hires = !_hires;
+                _resolution = _hires ? 2048 : 1024;
+                _minHfov = _hires ? 5 : 10;
+                wrap.call(setupCanvas, true);
+
+                that.selectImage(d)
+                    .then(function(r) {
+                        if (r.status === 'ok') {
+                            var v = _pannellumViewer;
+                            var yaw = v & v.getYaw();
+                            that.showViewer(yaw || 0);
+                        }
+                    });
+            });
+
+        label
+            .append('span')
+            .text('High Resolution');
+
+
+        // Add capture date
         if (d.captured_by) {
             var yyyy = (new Date()).getFullYear();
 
@@ -656,6 +708,7 @@ export default {
                 .text(localeTimestamp(d.captured_at));
         }
 
+        // Add image link
         attribution
             .append('a')
             .attr('class', 'image_link')
@@ -675,7 +728,7 @@ export default {
 
         // Map images to cube faces
         var quadKeys = null;
-        var numImgsPerFace = Math.pow(resolution / 256, 2);
+        var numImgsPerFace = Math.pow(_resolution / 256, 2);
 
         if (numImgsPerFace === 64) {
             quadKeys = [
@@ -745,9 +798,9 @@ export default {
                 compass: true,
                 northOffset: d.ca,
                 yaw: 0,
-                minHfov: minHfov,
-                maxHfov: maxHfov,
-                hfov: maxHfov,
+                minHfov: _minHfov,
+                maxHfov: _maxHfov,
+                hfov: _maxHfov,
                 type: 'cubemap',
                 cubeMap: [
                     _dataUrlArray[0],
