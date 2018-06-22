@@ -1,4 +1,6 @@
 .DS_Store
+.esm-cache
+.vscode/
 .travis.yml
 /.tx/
 /data/data.js
