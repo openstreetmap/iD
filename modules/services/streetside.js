@@ -29,7 +29,9 @@ var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var maxResults = 2000;
 var tileZoom = 16.5;
-var numImgsPerFace = 16;  // supported values are 4 or 16
+var resolution = 2048;    // 512, 1024, 2048  : higher numbers are slower
+var minHfov = 5;          // 20, 10, 5        : zoom in more
+var maxHfov = 50;         //                  : zoom out more
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var _currScene = 0;
 var _ssCache;
@@ -314,7 +316,7 @@ function getImage(imgInfo) {
     img.onload = function() {
         var canvas = document.getElementById('canvas' + imgInfo.face);
         var ctx = canvas.getContext('2d');
-        ctx.drawImage(img, imgInfo.dx, imgInfo.dy);
+        ctx.drawImage(img, imgInfo.x, imgInfo.y);
         response.resolve({imgInfo:imgInfo, status: 'ok'});
     };
     img.onerror = function() {
@@ -496,8 +498,6 @@ export default {
      * loadViewer() create the streeside viewer.
      */
     loadViewer: function (context) {
-        var whVal = (numImgsPerFace === 16 ? '1024' : '512');
-
         // create ms-wrapper, a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
@@ -528,8 +528,8 @@ export default {
             .enter()
             .append('canvas')
             .attr('id', function(d) { return d; })
-            .attr('width', whVal)
-            .attr('height', whVal);
+            .attr('width', resolution)
+            .attr('height', resolution);
 
         // load streetside pannellum viewer css
         d3_select('head').selectAll('#streetside-viewercss')
@@ -674,40 +674,66 @@ export default {
         var imgUrlSuffix = '.jpg?g=6338&n=z';
 
         // Map images to cube faces
-        var faceLocCodes = null;
-        var faceLocPositions = null;
+        var quadKeys = null;
+        var numImgsPerFace = Math.pow(resolution / 256, 2);
 
-        if (numImgsPerFace === 16) {
-            faceLocCodes = [
-                '00','01','02','03',
-                '10','11','12','13',
-                '20','21','22','23',
-                '30','31','32','33'
+        if (numImgsPerFace === 64) {
+            quadKeys = [
+                '000','001',  '010','011',    '100','101',  '110','111',
+                '002','003',  '012','013',    '102','103',  '112','113',
+
+                '020','021',  '030','031',    '120','121',  '130','131',
+                '022','023',  '032','033',    '122','123',  '132','133',
+
+
+                '200','201',  '210','211',    '300','301',  '310','311',
+                '202','203',  '212','213',    '302','303',  '312','313',
+
+                '220','221',  '230','231',    '320','321',  '330','331',
+                '222','223',  '232','233',    '322','323',  '332','333'
             ];
-            faceLocPositions = [
-                {dx:0, dy:0}, {dx:256, dy:0}, {dx:0, dy:256}, {dx:256, dy:256},
-                {dx:512, dy:0}, {dx:768, dy:0}, {dx:512, dy:256}, {dx:768, dy:256},
-                {dx:0, dy:512}, {dx:256, dy:512}, {dx:0, dy:768}, {dx:256, dy:768},
-                {dx:512, dy:512}, {dx:768, dy:512}, {dx:512, dy:768}, {dx:768, dy:768}
+
+        } else if (numImgsPerFace === 16) {
+            quadKeys = [
+                '00','01',  '10','11',
+                '02','03',  '12','13',
+
+                '20','21',  '30','31',
+                '22','23',  '32','33'
             ];
+
         } else {  // numImgsPerFace === 4
-            faceLocCodes = [
-                '0','1','2','3'
-            ];
-            faceLocPositions = [
-                {dx:0, dy:0}, {dx:256, dy:0}, {dx:0, dy:256}, {dx:256, dy:256}
+            quadKeys = [
+                '0', '1',
+                '2', '3'
             ];
         }
 
+
+        function qkToXY(qk) {
+            var x = 0;
+            var y = 0;
+            var scale = 256;
+            for (var i = qk.length; i > 0; i--) {
+                var key = qk[i-1];
+                x += (+(key === '1' || key === '3')) * scale;
+                y += (+(key === '2' || key === '3')) * scale;
+                scale *= 2;
+            }
+            return [x, y];
+        }
+
+
         // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
-        var faceCodes = ['01','02','03','10','11','12'];
-        var faces = faceCodes.map(function(faceCode) {
-            return faceLocCodes.map(function(loc, i) {
+        var faceKeys = ['01','02','03','10','11','12'];
+        var faces = faceKeys.map(function(faceKey) {
+            return quadKeys.map(function(quadKey) {
+                var xy = qkToXY(quadKey);
                 return {
-                    face: faceCode,
-                    url: imgUrlPrefix + faceCode + loc + imgUrlSuffix,
-                    dx: faceLocPositions[i].dx,
-                    dy: faceLocPositions[i].dy
+                    face: faceKey,
+                    url: imgUrlPrefix + faceKey + quadKey + imgUrlSuffix,
+                    x: xy[0],
+                    y: xy[1]
                 };
             });
         });
@@ -719,6 +745,9 @@ export default {
                 compass: true,
                 northOffset: d.ca,
                 yaw: 0,
+                minHfov: minHfov,
+                maxHfov: maxHfov,
+                hfov: maxHfov,
                 type: 'cubemap',
                 cubeMap: [
                     _dataUrlArray[0],
