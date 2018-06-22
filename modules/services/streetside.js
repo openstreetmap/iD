@@ -306,11 +306,12 @@ function searchLimited(psize, limit, projection, rtree) {
 /**
  * getImage()
  */
-function getImage(imgInfo){
+function getImage(imgInfo) {
     var response = Q.defer();
     var canvas = document.getElementById('canvas' + imgInfo.face);
     var ctx = canvas.getContext('2d');
     var img = new Image();
+
     img.onload = function() {
         ctx.drawImage(img, imgInfo.dx, imgInfo.dy);
         response.resolve({imgInfo:imgInfo, status: 'ok'});
@@ -318,8 +319,9 @@ function getImage(imgInfo){
     img.onerror = function() {
         response.resolve({data: imgInfo, status: 'error'});
     };
-    img.setAttribute('crossorigin','');
+    img.setAttribute('crossorigin', '');
     img.src = imgInfo.url;
+
     return response.promise;
 }
 
@@ -327,12 +329,14 @@ function getImage(imgInfo){
 /**
  * loadCanvas()
  */
-function loadCanvas(imgInfoGroup){
+function loadCanvas(imgInfoGroup) {
     var response = Q.defer();
     var getImagePromises = [];
+
     imgInfoGroup.forEach(function(imgInfo){
         getImagePromises.push(getImage(imgInfo));
     });
+
     Q.all(getImagePromises).then(function(data) {
         var canvas = document.getElementById('canvas' + data[0].imgInfo.face);
         switch (data[0].imgInfo.face) {
@@ -368,13 +372,15 @@ function loadCanvas(imgInfoGroup){
 function processImages(imgFaceInfoGroups){
     var response = Q.defer();
     var loadCanvasPromises = [];
-    //call loadCanvas once with each group of infos....
-    imgFaceInfoGroups.forEach(function(faceImgGroup){
+
+    // call loadCanvas once with each group of infos....
+    imgFaceInfoGroups.forEach(function(faceImgGroup) {
         loadCanvasPromises.push(loadCanvas(faceImgGroup));
     });
-    Q.all(loadCanvasPromises).then(function(){
+    Q.all(loadCanvasPromises).then(function() {
         response.resolve({status: 'processImages done'});
     });
+
     return response.promise;
 }
 
@@ -490,29 +496,12 @@ export default {
      * loadViewer() create the streeside viewer.
      */
     loadViewer: function (context) {
-        // Add the Streetside working canvases. These are used for 'stitching', or combining,
-        // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
-
         var whVal;
         if (_numImgsPerFace === 4) {
             whVal = '512';
         } else if (_numImgsPerFace === 16) {
             whVal = '1024';
         }
-
-        d3_select('body')
-            .append('div')
-            .attr('id', 'divForCanvasWork')
-            .attr('display', 'none');
-
-        d3_select('#divForCanvasWork')
-            .selectAll('canvas')
-            .data(['canvas01', 'canvas02', 'canvas03', 'canvas10', 'canvas11', 'canvas12'])
-            .enter()
-            .append('canvas')
-            .attr('id', function(d) { return d; })
-            .attr('width', whVal)
-            .attr('height', whVal);
 
         // create ms-wrapper, a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
@@ -532,6 +521,20 @@ export default {
             .attr('id', 'viewer-streetside')
             .append('div')
             .attr('class', 'photo-attribution fillD');
+
+        // Add the Streetside working canvases. These are used for 'stitching', or combining,
+        // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
+        wrapEnter
+            .append('div')
+            .attr('id', 'divForCanvasWork')
+            .attr('display', 'none')
+            .selectAll('canvas')
+            .data(['canvas01', 'canvas02', 'canvas03', 'canvas10', 'canvas11', 'canvas12'])
+            .enter()
+            .append('canvas')
+            .attr('id', function(d) { return d; })
+            .attr('width', whVal)
+            .attr('height', whVal);
 
         // load streetside pannellum viewer css
         d3_select('head').selectAll('#streetside-viewercss')
