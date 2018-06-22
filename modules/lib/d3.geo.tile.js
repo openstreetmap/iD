@@ -21,7 +21,6 @@ export function d3geoTile() {
             (_translate[0] - _scale / 2) / k,
             (_translate[1] - _scale / 2) / k
         ];
-        var tiles = [];
 
         var cols = d3_range(
             Math.max(0, Math.floor(-origin[0]) - _margin),
@@ -32,11 +31,20 @@ export function d3geoTile() {
             Math.max(0, Math.ceil(_size[1] / k - origin[1]) + _margin)
         );
 
-        rows.forEach(function(y) {
-            cols.forEach(function(x) {
-                tiles.push([x, y, z0]);
-            });
-        });
+        var tiles = [];
+        for (var i = 0; i < rows.length; i++) {
+            var y = rows[i];
+            for (var j = 0; j < cols.length; j++) {
+                var x = cols[j];
+
+                if (i >= _margin && i <= rows.length - _margin &&
+                    j >= _margin && j <= cols.length - _margin) {
+                    tiles.unshift([x, y, z0]);  // tiles in view at beginning
+                } else {
+                    tiles.push([x, y, z0]);     // tiles in margin at the end
+                }
+            }
+        }
 
         tiles.translate = origin;
         tiles.scale = k;
