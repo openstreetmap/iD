@@ -75,7 +75,7 @@ function localeTimestamp(s) {
  * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
  * an area around (and including) the current map view extents.
  */
-function getTiles(projection) {
+function getTiles(projection, margin) {
     // s is the current map scale
     // z is the 'Level of Detail', or zoom-level, where Level 1 is far from the earth, and Level 23 is close to the ground.
     // ts ('tile size') here is the formula for determining the width/height of the map in pixels, but with a modification.
@@ -94,7 +94,7 @@ function getTiles(projection) {
         .scale(s)
         .size(projection.clipExtent()[1])
         .translate(projection.translate())
-        .margin(1);   // request nearby tiles so we can connect sequences.
+        .margin(margin || 0);   // request nearby tiles so we can connect sequences.
 
     return tiler()
         .map(function(tile) {
@@ -114,12 +114,12 @@ function getTiles(projection) {
 /**
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
-function loadTiles(which, url, projection) {
+function loadTiles(which, url, projection, margin) {
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     // breakup the map view into tiles
-    var tiles = getTiles(projection).filter(function (t) {
+    var tiles = getTiles(projection, margin).filter(function (t) {
         return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
     });
 
@@ -447,8 +447,11 @@ export default {
     /**
      * loadBubbles()
      */
-    loadBubbles: function (projection) {
-        loadTiles('bubbles', bubbleApi, projection);
+    loadBubbles: function (projection, margin) {
+        // by default: request 2 nearby tiles so we can connect sequences.
+        if (margin === undefined) margin = 2;
+
+        loadTiles('bubbles', bubbleApi, projection, margin);
     },
 
 

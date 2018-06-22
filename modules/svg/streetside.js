@@ -12,6 +12,7 @@ export function svgStreetside(projection, context, dispatch) {
     var layer = d3_select(null);
     var _viewerYaw = 0;
     var _selectedSequence = null;
+    var _hoveredBubble = null;
     var _streetside;
 
     /**
@@ -120,7 +121,8 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function mouseover(d) {
         var service = getService();
-        if (service) service.setStyles(d);
+        _hoveredBubble = d;
+        if (service) service.setStyles(d, true);
     }
 
     /**
@@ -128,7 +130,8 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function mouseout() {
         var service = getService();
-        if (service) service.setStyles(null);
+        _hoveredBubble = null;
+        if (service) service.setStyles(null, true);
     }
 
     /**
@@ -193,7 +196,10 @@ export function svgStreetside(projection, context, dispatch) {
 
 
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(bubbles, function(d) { return d.key; });
+            .data(bubbles, function(d) {
+                // force reenter once bubbles are attached to a sequence
+                return d.key + (d.sequenceKey ? 'v1' : 'v0');
+            });
 
         // exit
         groups.exit()
@@ -246,6 +252,11 @@ export function svgStreetside(projection, context, dispatch) {
             .attr('d', viewfieldPath);
 
 
+        if (service) {
+            service.setStyles(_hoveredBubble, true);
+        }
+
+
         function viewfieldPath() {
             var d = this.parentNode.__data__;
             if (d.pano) {
@@ -292,7 +303,6 @@ export function svgStreetside(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-
                 service.loadBubbles(projection);
             } else {
                 editOff();
