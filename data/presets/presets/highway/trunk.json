@@ -18,6 +18,9 @@
     "tags": {
         "highway": "trunk"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Trunk Road"
 }

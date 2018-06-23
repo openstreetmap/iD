@@ -4242,7 +4242,7 @@
                 },
                 "highway/bridleway": {
                     "name": "Bridle Path",
-                    "terms": "bridleway,equestrian,horse"
+                    "terms": "bridleway,equestrian,horse,trail"
                 },
                 "highway/bus_guideway": {
                     "name": "Bus Guideway",
@@ -4294,15 +4294,15 @@
                 },
                 "highway/motorway_junction": {
                     "name": "Motorway Junction / Exit",
-                    "terms": ""
+                    "terms": "exit"
                 },
                 "highway/motorway_link": {
                     "name": "Motorway Link",
-                    "terms": "ramp,on ramp,off ramp"
+                    "terms": "exit,ramp,road,street,on ramp,off ramp"
                 },
                 "highway/motorway": {
                     "name": "Motorway",
-                    "terms": "autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike"
+                    "terms": "autobahn,expressway,freeway,highway,interstate,parkway,road,street,thruway,turnpike"
                 },
                 "highway/passing_place": {
                     "name": "Passing Place",
@@ -4322,11 +4322,11 @@
                 },
                 "highway/primary_link": {
                     "name": "Primary Link",
-                    "terms": "ramp,on ramp,off ramp"
+                    "terms": "on ramp,off ramp,ramp,road,street"
                 },
                 "highway/primary": {
                     "name": "Primary Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/raceway": {
                     "name": "Racetrack (Motorsport)",
@@ -4334,7 +4334,7 @@
                 },
                 "highway/residential": {
                     "name": "Residential Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/rest_area": {
                     "name": "Rest Area",
@@ -4342,19 +4342,19 @@
                 },
                 "highway/road": {
                     "name": "Unknown Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/secondary_link": {
                     "name": "Secondary Link",
-                    "terms": "ramp,on ramp,off ramp"
+                    "terms": "on ramp,off ramp,ramp,road,street"
                 },
                 "highway/secondary": {
                     "name": "Secondary Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/service": {
                     "name": "Service Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/service/alley": {
                     "name": "Alley",
@@ -4398,11 +4398,11 @@
                 },
                 "highway/tertiary_link": {
                     "name": "Tertiary Link",
-                    "terms": "ramp,on ramp,off ramp"
+                    "terms": "on ramp,off ramp,ramp,road,street"
                 },
                 "highway/tertiary": {
                     "name": "Tertiary Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/track": {
                     "name": "Unmaintained Track Road",
@@ -4418,11 +4418,11 @@
                 },
                 "highway/trunk_link": {
                     "name": "Trunk Link",
-                    "terms": "ramp,on ramp,off ramp"
+                    "terms": "on ramp,off ramp,ramp,road,street"
                 },
                 "highway/trunk": {
                     "name": "Trunk Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "highway/turning_circle": {
                     "name": "Turning Circle",
@@ -4434,7 +4434,7 @@
                 },
                 "highway/unclassified": {
                     "name": "Minor/Unclassified Road",
-                    "terms": ""
+                    "terms": "road,street"
                 },
                 "historic": {
                     "name": "Historic Site",

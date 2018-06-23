@@ -20,9 +20,11 @@
         "highway": "secondary_link"
     },
     "terms": [
-        "ramp",
         "on ramp",
-        "off ramp"
+        "off ramp",
+        "ramp",
+        "road",
+        "street"
     ],
     "name": "Secondary Link"
 }

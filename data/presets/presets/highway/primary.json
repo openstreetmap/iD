@@ -18,6 +18,9 @@
     "tags": {
         "highway": "primary"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Primary Road"
 }
