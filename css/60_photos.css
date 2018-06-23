@@ -188,9 +188,10 @@
     background-repeat: no-repeat no-repeat;
 }
 
-.streetside-hires {
+label.streetside-hires {
     float: left;
     padding: 0 10px;
+    cursor: pointer;
 }
 .streetside-hires span {
     margin-top: 2px;

@@ -718,7 +718,8 @@
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
             "title": "Photo Overlay (Bing Streetside)",
-            "report": "Report a privacy concern with this image"
+            "report": "Report a privacy concern with this image",
+            "hires": "High resolution"
         },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",

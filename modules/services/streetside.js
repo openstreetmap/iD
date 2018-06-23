@@ -1,3 +1,4 @@
+import _extend from 'lodash-es/extend';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
@@ -31,10 +32,11 @@ var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var maxResults = 2000;
 var tileZoom = 16.5;
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
+var minHfov = 10;         // zoom in degrees:  20, 10, 5
+var maxHfov = 90;         // zoom out degrees
+var defaultHfov = 45;
 var _hires = false;
-var _resolution = 1024;    // higher numbers are slower - 512, 1024, 2048
-var _minHfov = 10;         // zoom in degrees:  20, 10, 5
-var _maxHfov = 45;         // zoom out degrees
+var _resolution = 512;    // higher numbers are slower - 512, 1024, 2048, 4096
 var _currScene = 0;
 var _ssCache;
 var _pannellumViewer;
@@ -411,6 +413,79 @@ function processFaces(imgFaceInfoGroups) {
 
 
 
+function qkToXY(qk) {
+    var x = 0;
+    var y = 0;
+    var scale = 256;
+    for (var i = qk.length; i > 0; i--) {
+        var key = qk[i-1];
+        x += (+(key === '1' || key === '3')) * scale;
+        y += (+(key === '2' || key === '3')) * scale;
+        scale *= 2;
+    }
+    return [x, y];
+}
+
+
+function getQuadKeys() {
+    var dim = _resolution / 256;
+    var quadKeys;
+
+    if (dim === 16) {
+        quadKeys = [
+            '0000','0001','0010','0011','0100','0101','0110','0111',  '1000','1001','1010','1011','1100','1101','1110','1111',
+            '0002','0003','0012','0013','0102','0103','0112','0113',  '1002','1003','1012','1013','1102','1103','1112','1113',
+            '0020','0021','0030','0031','0120','0121','0130','0131',  '1020','1021','1030','1031','1120','1121','1130','1131',
+            '0022','0023','0032','0033','0122','0123','0132','0133',  '1022','1023','1032','1033','1122','1123','1132','1133',
+            '0200','0201','0210','0211','0300','0301','0310','0311',  '1200','1201','1210','1211','1300','1301','1310','1311',
+            '0202','0203','0212','0213','0302','0303','0312','0313',  '1202','1203','1212','1213','1302','1303','1312','1313',
+            '0220','0221','0230','0231','0320','0321','0330','0331',  '1220','1221','1230','1231','1320','1321','1330','1331',
+            '0222','0223','0232','0233','0322','0323','0332','0333',  '1222','1223','1232','1233','1322','1323','1332','1333',
+
+            '2000','2001','2010','2011','2100','2101','2110','2111',  '3000','3001','3010','3011','3100','3101','3110','3111',
+            '2002','2003','2012','2013','2102','2103','2112','2113',  '3002','3003','3012','3013','3102','3103','3112','3113',
+            '2020','2021','2030','2031','2120','2121','2130','2131',  '3020','3021','3030','3031','3120','3121','3130','3131',
+            '2022','2023','2032','2033','2122','2123','2132','2133',  '3022','3023','3032','3033','3122','3123','3132','3133',
+            '2200','2201','2210','2211','2300','2301','2310','2311',  '3200','3201','3210','3211','3300','3301','3310','3311',
+            '2202','2203','2212','2213','2302','2303','2312','2313',  '3202','3203','3212','3213','3302','3303','3312','3313',
+            '2220','2221','2230','2231','2320','2321','2330','2331',  '3220','3221','3230','3231','3320','3321','3330','3331',
+            '2222','2223','2232','2233','2322','2323','2332','2333',  '3222','3223','3232','3233','3322','3323','3332','3333'
+        ];
+
+    } else if (dim === 8) {
+        quadKeys = [
+            '000','001','010','011',  '100','101','110','111',
+            '002','003','012','013',  '102','103','112','113',
+            '020','021','030','031',  '120','121','130','131',
+            '022','023','032','033',  '122','123','132','133',
+
+            '200','201','210','211',  '300','301','310','311',
+            '202','203','212','213',  '302','303','312','313',
+            '220','221','230','231',  '320','321','330','331',
+            '222','223','232','233',  '322','323','332','333'
+        ];
+
+    } else if (dim === 4) {
+        quadKeys = [
+            '00','01',  '10','11',
+            '02','03',  '12','13',
+
+            '20','21',  '30','31',
+            '22','23',  '32','33'
+        ];
+
+    } else {  // dim === 2
+        quadKeys = [
+            '0', '1',
+            '2', '3'
+        ];
+    }
+
+    return quadKeys;
+}
+
+
+
 export default {
     /**
      * init() initialize streetside.
@@ -666,23 +741,27 @@ export default {
                 d3_event.stopPropagation();
 
                 _hires = !_hires;
-                _resolution = _hires ? 2048 : 1024;
-                _minHfov = _hires ? 5 : 10;
+                _resolution = _hires ? 1024 : 512;
                 wrap.call(setupCanvas, true);
+
+                var viewstate = {
+                    yaw: _pannellumViewer.getYaw(),
+                    pitch: _pannellumViewer.getPitch(),
+                    hfov: _pannellumViewer.getHfov()
+                };
 
                 that.selectImage(d)
                     .then(function(r) {
                         if (r.status === 'ok') {
-                            var v = _pannellumViewer;
-                            var yaw = v & v.getYaw();
-                            that.showViewer(yaw || 0);
+                            _sceneOptions = _extend(_sceneOptions, viewstate);
+                            that.showViewer();
                         }
                     });
             });
 
         label
             .append('span')
-            .text('High Resolution');
+            .text(t('streetside.hires'));
 
 
         // Add capture date
@@ -726,59 +805,11 @@ export default {
         var imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
         var imgUrlSuffix = '.jpg?g=6338&n=z';
 
-        // Map images to cube faces
-        var quadKeys = null;
-        var numImgsPerFace = Math.pow(_resolution / 256, 2);
-
-        if (numImgsPerFace === 64) {
-            quadKeys = [
-                '000','001',  '010','011',    '100','101',  '110','111',
-                '002','003',  '012','013',    '102','103',  '112','113',
-
-                '020','021',  '030','031',    '120','121',  '130','131',
-                '022','023',  '032','033',    '122','123',  '132','133',
-
-
-                '200','201',  '210','211',    '300','301',  '310','311',
-                '202','203',  '212','213',    '302','303',  '312','313',
-
-                '220','221',  '230','231',    '320','321',  '330','331',
-                '222','223',  '232','233',    '322','323',  '332','333'
-            ];
-
-        } else if (numImgsPerFace === 16) {
-            quadKeys = [
-                '00','01',  '10','11',
-                '02','03',  '12','13',
-
-                '20','21',  '30','31',
-                '22','23',  '32','33'
-            ];
-
-        } else {  // numImgsPerFace === 4
-            quadKeys = [
-                '0', '1',
-                '2', '3'
-            ];
-        }
-
-
-        function qkToXY(qk) {
-            var x = 0;
-            var y = 0;
-            var scale = 256;
-            for (var i = qk.length; i > 0; i--) {
-                var key = qk[i-1];
-                x += (+(key === '1' || key === '3')) * scale;
-                y += (+(key === '2' || key === '3')) * scale;
-                scale *= 2;
-            }
-            return [x, y];
-        }
-
-
         // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
         var faceKeys = ['01','02','03','10','11','12'];
+
+        // Map images to cube faces
+        var quadKeys = getQuadKeys();
         var faces = faceKeys.map(function(faceKey) {
             return quadKeys.map(function(quadKey) {
                 var xy = qkToXY(quadKey);
@@ -798,9 +829,9 @@ export default {
                 compass: true,
                 northOffset: d.ca,
                 yaw: 0,
-                minHfov: _minHfov,
-                maxHfov: _maxHfov,
-                hfov: _maxHfov,
+                minHfov: minHfov,
+                maxHfov: maxHfov,
+                hfov: defaultHfov,
                 type: 'cubemap',
                 cubeMap: [
                     _dataUrlArray[0],
