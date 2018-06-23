@@ -86,7 +86,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', '#far-comment-alt');
+            .attr('xlink:href', '#fas-comment-alt');
     }
 
     function drawNotes(selection) {

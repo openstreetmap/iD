@@ -120,7 +120,6 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var service = getService();
         var sequences = (service ? service.sequences(projection) : []);
         var images = (service && showMarkers ? service.images(projection) : []);
-        // console.log('images: ', images);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
