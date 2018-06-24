@@ -3104,6 +3104,11 @@ en:
         name: Life Ring
         # 'terms: life buoy,kisby ring,kisbie ring,perry buoy'
         terms: '<translate with synonyms or related terms for ''Life Ring'', separated by commas>'
+      emergency/lifeguard:
+        # emergency=lifeguard
+        name: Lifeguard
+        # 'terms: CPR,rescue'
+        terms: '<translate with synonyms or related terms for ''Lifeguard'', separated by commas>'
       emergency/no:
         # emergency=no
         name: Emergency Access No

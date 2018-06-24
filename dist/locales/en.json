@@ -4099,6 +4099,10 @@
                     "name": "Life Ring",
                     "terms": "life buoy,kisby ring,kisbie ring,perry buoy"
                 },
+                "emergency/lifeguard": {
+                    "name": "Lifeguard",
+                    "terms": "CPR,rescue"
+                },
                 "emergency/phone": {
                     "name": "Emergency Phone",
                     "terms": ""

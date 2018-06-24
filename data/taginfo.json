@@ -2166,6 +2166,13 @@
     },
     {
       "key": "emergency",
+      "value": "lifeguard",
+      "description": "Lifeguard",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-life-ring.svg?sanitize=true"
+    },
+    {
+      "key": "emergency",
       "value": "phone",
       "description": "Emergency Phone",
       "object_types": ["node"],
