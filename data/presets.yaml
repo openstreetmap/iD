@@ -4270,7 +4270,7 @@ en:
       natural/cliff:
         # natural=cliff
         name: Cliff
-        # 'terms: escarpment'
+        # 'terms: crag,escarpment,rock face,scarp'
         terms: '<translate with synonyms or related terms for ''Cliff'', separated by commas>'
       natural/coastline:
         # natural=coastline

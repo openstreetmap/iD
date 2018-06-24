@@ -5093,7 +5093,7 @@
                 },
                 "natural/cliff": {
                     "name": "Cliff",
-                    "terms": "escarpment"
+                    "terms": "crag,escarpment,rock face,scarp"
                 },
                 "natural/coastline": {
                     "name": "Coastline",
