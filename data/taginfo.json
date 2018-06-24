@@ -2145,7 +2145,7 @@
     },
     {
       "key": "emergency",
-      "value": "first_aid",
+      "value": "first_aid_kit",
       "description": "First Aid Kit",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-medkit.svg?sanitize=true"

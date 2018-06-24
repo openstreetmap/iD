@@ -18,7 +18,7 @@
         "medkit"
     ],
    "tags": {
-        "emergency": "first_aid"
+        "emergency": "first_aid_kit"
     },
     "name": "First Aid Kit"
 }

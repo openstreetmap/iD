@@ -4084,7 +4084,7 @@
                     "name": "Fire Hydrant",
                     "terms": "fire plug"
                 },
-                "emergency/first_aid": {
+                "emergency/first_aid_kit": {
                     "name": "First Aid Kit",
                     "terms": "bandage,first aid,med,med kit,medic*,medkit"
                 },

@@ -3087,8 +3087,8 @@ en:
         name: Fire Hydrant
         # 'terms: fire plug'
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
-      emergency/first_aid:
-        # emergency=first_aid
+      emergency/first_aid_kit:
+        # emergency=first_aid_kit
         name: First Aid Kit
         # 'terms: bandage,first aid,med,med kit,medic*,medkit'
         terms: '<translate with synonyms or related terms for ''First Aid Kit'', separated by commas>'
