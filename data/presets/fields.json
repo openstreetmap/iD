@@ -33,6 +33,7 @@
     "bin": {"key": "bin", "type": "check", "label": "Waste Bin"},
     "blood_components": {"key": "blood:", "type": "multiCombo", "label": "Blood Components", "strings": {"options": {"whole": "whole blood", "plasma": "plasma", "platelets": "platelets", "stemcells": "stem cell samples"}}},
     "board_type": {"key": "board_type", "type": "typeCombo", "label": "Type"},
+    "booth": {"key": "booth", "type": "combo", "label": "Booth", "caseSensitive": true},
     "boules": {"key": "boules", "type": "typeCombo", "label": "Type"},
     "boundary": {"key": "boundary", "type": "combo", "label": "Type"},
     "brand": {"key": "brand", "type": "text", "label": "Brand"},

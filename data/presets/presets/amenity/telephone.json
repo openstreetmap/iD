@@ -6,7 +6,8 @@
         "fee",
         "payment_multi",
         "covered",
-        "indoor"
+        "indoor",
+        "booth"
     ],
     "geometry": [
         "point",

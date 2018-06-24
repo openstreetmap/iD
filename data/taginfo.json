@@ -6345,6 +6345,7 @@
     {"key": "blood:", "value": "platelets", "description": "Blood Components"},
     {"key": "blood:", "value": "stemcells", "description": "Blood Components"},
     {"key": "board_type", "description": "Type"},
+    {"key": "booth", "description": "Booth"},
     {"key": "boules", "description": "Type"},
     {"key": "boundary", "description": "Type"},
     {"key": "brand", "description": "Brand"},

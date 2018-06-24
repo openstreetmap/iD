@@ -241,6 +241,9 @@ en:
       board_type:
         # board_type=*
         label: Type
+      booth:
+        # booth=*
+        label: Booth
       boules:
         # boules=*
         label: Type
