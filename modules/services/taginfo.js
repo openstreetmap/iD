@@ -264,7 +264,7 @@ export default {
                 // A few OSM keys expect values to contain uppercase values (see #3377).
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
-                var re = /network|taxon|genus|species|brand|grape_variety|booth|rating|:output|_hours|_times/;
+                var re = /network|taxon|genus|species|brand|grape_variety|royal_cypher|booth|rating|:output|_hours|_times/;
                 var allowUpperCase = (params.key.match(re) !== null);
                 var f = filterValues(allowUpperCase);
 
