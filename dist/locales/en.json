@@ -4079,6 +4079,10 @@
                     "name": "Defibrillator",
                     "terms": "AED"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Fire Alarm Call Box",
+                    "terms": ""
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Fire Extinguisher",
                     "terms": ""

@@ -3081,6 +3081,10 @@ en:
       emergency/destination:
         # emergency=destination
         name: Emergency Access Destination
+      emergency/fire_alarm:
+        # emergency=fire_alarm_box
+        name: Fire Alarm Call Box
+        terms: '<translate with synonyms or related terms for ''Fire Alarm Call Box'', separated by commas>'
       emergency/fire_extinguisher:
         # emergency=fire_extinguisher
         name: Fire Extinguisher

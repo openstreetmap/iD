@@ -2131,6 +2131,13 @@
     },
     {
       "key": "emergency",
+      "value": "fire_alarm_box",
+      "description": "Fire Alarm Call Box",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-bell.svg?sanitize=true"
+    },
+    {
+      "key": "emergency",
       "value": "fire_extinguisher",
       "description": "Fire Extinguisher",
       "object_types": ["node"],
