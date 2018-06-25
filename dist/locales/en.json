@@ -6668,7 +6668,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Premium DigitalGlobe satellite imagery.",
+                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
                 "name": "DigitalGlobe Premium Imagery"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6682,7 +6682,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Standard DigitalGlobe satellite imagery.",
+                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm or resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
                 "name": "DigitalGlobe Standard Imagery"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6889,6 +6889,13 @@
                 },
                 "name": "OpenStreetMap (German Style)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Scan of ´Economic maps´ ca 1950-1980",
+                "name": "Lantmäteriet Economic Map (historic)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMap contributors"
@@ -6918,6 +6925,48 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish railway network, including sidings",
+                "name": "Trafikverket Railway Network"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish railway network with several options for map layers",
+                "name": "Trafikverket Railway Network options"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB road network",
+                "name": "Trafikverket Road Network"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB extra details: Highway reference, traffic calming, rest area, bus stop, bridge, tunnel, speed camera",
+                "name": "Trafikverket Road Network extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB street names",
+                "name": "Trafikverket Street Names"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB road network with several options for map layers",
+                "name": "Trafikverket Road Network options"
             }
         },
         "community": {
