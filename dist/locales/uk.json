@@ -715,6 +715,12 @@
             "zoom": "Масштабувати до шару",
             "browse": "Вибрати файл"
         },
+        "streetside": {
+            "tooltip": "Streetside фото від Microsoft",
+            "title": "Фото шар (Bing Streetside)",
+            "report": "Повідомити про порущення конфіденційності щодо цього зображення",
+            "hires": "Висока якість"
+        },
         "mapillary_images": {
             "tooltip": "Знімки з вулиць від Mapillary",
             "title": "Фотознімки (Mapillary)"
@@ -2487,6 +2493,17 @@
                 "shop": {
                     "label": "Тип"
                 },
+                "siren/purpose": {
+                    "label": "Призначення"
+                },
+                "siren/type": {
+                    "label": "Тип",
+                    "options": {
+                        "electronic": "Електрична",
+                        "other": "Інший",
+                        "pneumatic": "Пневматична"
+                    }
+                },
                 "site": {
                     "label": "Тип"
                 },
@@ -3945,7 +3962,7 @@
                 },
                 "craft/shoemaker": {
                     "name": "Чоботар",
-                    "terms": "взуття, туфлі, башмак, чобіт, швець, сандалі, "
+                    "terms": "взуття, туфлі, башмак, чобіт, швець, сандалі,"
                 },
                 "craft/stonemason": {
                     "name": "Каменяр",
@@ -3996,9 +4013,17 @@
                 "emergency/destination": {
                     "name": "Для доступу аварійно-рятувальних служб"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Вогнегасник",
+                    "terms": "вогонь,пожежа,вогнегасник,полумья"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Пожежний гідрант",
                     "terms": "Fire Hydrant,gjtybq uslhfyn, пожежний гідрант"
+                },
+                "emergency/first_aid_kit": {
+                    "name": "Аптечка",
+                    "terms": "допомога,невідкладна,медична,аварія,поранення,аварія,швидка"
                 },
                 "emergency/life_ring": {
                     "name": "Рятувальний круг",
@@ -4016,6 +4041,10 @@
                 },
                 "emergency/private": {
                     "name": "Для приватних аварійно-рятувальних служб"
+                },
+                "emergency/siren": {
+                    "name": "Сирена",
+                    "terms": "сирена,повідомлення,попередження,напад,небезпека"
                 },
                 "emergency/water_tank": {
                     "name": "Пожежний резервуар",
@@ -4260,7 +4289,7 @@
                 },
                 "highway/rest_area": {
                     "name": "Зона відпочинку",
-                    "terms": "пікнік, пляж, парк, атракціони, "
+                    "terms": "пікнік, пляж, парк, атракціони,"
                 },
                 "highway/road": {
                     "name": "Тип невідомий",
@@ -4791,7 +4820,7 @@
                 },
                 "leisure/playground": {
                     "name": "Ігровий майданчик",
-                    "terms": "Playground, suhjdbq vfqlfyxbr, дитячий ігровий майданчик,ігровий майданчик "
+                    "terms": "Playground, suhjdbq vfqlfyxbr, дитячий ігровий майданчик,ігровий майданчик"
                 },
                 "leisure/resort": {
                     "name": "Курорт",
@@ -5177,7 +5206,7 @@
                 },
                 "office/government": {
                     "name": "Уряд",
-                    "terms": "правління, "
+                    "terms": "правління,"
                 },
                 "office/government/register_office": {
                     "name": "Відділ державної реєстрації актів цивільного стану",
@@ -5201,7 +5230,7 @@
                 },
                 "office/lawyer": {
                     "name": "Адвокатське бюро",
-                    "terms": "адвокатура, адвокат "
+                    "terms": "адвокатура, адвокат"
                 },
                 "office/lawyer/notary": {
                     "name": "Нотаріус"
@@ -5266,7 +5295,7 @@
                 },
                 "piste": {
                     "name": "Трек / Лижна траса",
-                    "terms": "доріжка, з’їзд, спуск "
+                    "terms": "доріжка, з’їзд, спуск"
                 },
                 "place": {
                     "name": "Місцевість"
@@ -5300,7 +5329,7 @@
                 },
                 "place/neighbourhood": {
                     "name": "Околиці",
-                    "terms": "місцевість, район "
+                    "terms": "місцевість, район"
                 },
                 "place/plot": {
                     "name": "Ділянка",
@@ -5629,7 +5658,7 @@
                 },
                 "railway/funicular": {
                     "name": "Фунікулер",
-                    "terms": "фунікулер, канат, трос "
+                    "terms": "фунікулер, канат, трос"
                 },
                 "railway/halt": {
                     "name": "Полустанок (на вимогу)"
@@ -5736,11 +5765,11 @@
                 },
                 "shop/baby_goods": {
                     "name": "Товари для немовлят",
-                    "terms": "підгузки, "
+                    "terms": "підгузки,"
                 },
                 "shop/bag": {
                     "name": "Магазин з продажу валіз",
-                    "terms": "валіза, багаж, чемодан "
+                    "terms": "валіза, багаж, чемодан"
                 },
                 "shop/bakery": {
                     "name": "Булочна",
@@ -5780,7 +5809,7 @@
                 },
                 "shop/books": {
                     "name": "Книжковий магазин",
-                    "terms": "книга, видавництво, "
+                    "terms": "книга, видавництво,"
                 },
                 "shop/boutique": {
                     "name": "Бутік",
@@ -6122,7 +6151,7 @@
                 },
                 "shop/stationery": {
                     "name": "Канцтовари",
-                    "terms": "Stationery Store,rfywnjdfhb, канцтовари "
+                    "terms": "Stationery Store,rfywnjdfhb, канцтовари"
                 },
                 "shop/storage_rental": {
                     "name": "Місце на складі в оренду",
@@ -6253,7 +6282,7 @@
                 },
                 "tourism/gallery": {
                     "name": "Художня галерея",
-                    "terms": "музей,мистецтво,виставка,галерея "
+                    "terms": "музей,мистецтво,виставка,галерея"
                 },
                 "tourism/guest_house": {
                     "name": "Гостьовий будинок",
@@ -6552,6 +6581,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Свіжі Ортофото Фландрія © AGIV"
+                },
+                "name": "Свіжі аерофотознімки Фландрії від AGIV"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Ортофото Фландрія © AGIV"
+                },
+                "name": "Аерофотознімки Фландрії від AGIV 2013-2015 10см"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Фландрія © AGIV"
+                },
+                "name": "GBR знімки Фландрії від AGIV"
+            },
             "Bing": {
                 "description": "Супутникові та аерофотознімки.",
                 "name": "Знімки Bing"
@@ -6560,7 +6607,7 @@
                 "attribution": {
                     "text": "Умови використання та Відгуки"
                 },
-                "description": "Супутникові знімки DigitalGlobe Premium",
+                "description": "DigitalGlobe-Premium – мозаїка зібрана з основного покриття DigitalGlobe та окремих ділянок заповнених знімками +Vivid або знімками зробленими на замовлення, розподільча здатність 50 см чи краще, з поточним оновленням.",
                 "name": "Знімки DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6574,7 +6621,7 @@
                 "attribution": {
                     "text": "Умови використання та Відгуки"
                 },
-                "description": "Супутникові знімки DigitalGlobe Standard.",
+                "description": "DigitalGlobe-Standard – підібрана збірка, що покриває 86% поверхні сущі, з роподільчою здатністю 30-60 см, де це можливо, заповнена Landsat. Середній вік – 2.31 роки, деякі ділянки оновлюються 2 рази на рік.",
                 "name": "Знімки DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6654,6 +6701,12 @@
                 },
                 "name": "OSM Інспектор: Теґи"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "PW (allonie) найновіші аерофотознімки"
+            },
+            "SPW_PICC": {
+                "name": "SPW (allonie) числові зображення PICC"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
             },
@@ -6668,6 +6721,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Дороги: Зелений контур = unclassified. Коричневий контур = track. Покриття: gravel = світло-коричневе заповнення, asphalt = чорне, paved = сіре, ground = біле, concrete = синє, grass = зелене. Seasonal = білі смуги",
                 "name": "U.S. Forest Roads, додатковий шар"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Випущено за допомоги Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Випущено за допомоги Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Випущено за допомоги Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Випущено за допомоги Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6751,6 +6828,13 @@
                 },
                 "name": "OpenStreetMap (Німецький стиль)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Скан  ´Economic maps´ ca 1950-1980",
+                "name": "Lantmäteriet Economic Map (історична)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Дані © Учасники OpenStreetMap"
@@ -6780,6 +6864,48 @@
                     "text": "Мапи © Thunderforest, Дані © Учасники OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Шведська залізнична мережа, у тому числі переїзди",
+                "name": "Trafikverket Залізниця"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Шведська залізнична мережа з декількома варіантами шарів мапи",
+                "name": "Trafikverket Залізниця (з варіантами)"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Дорожня мережа Швеції NVDB",
+                "name": "Trafikverket Дорожня мережа"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Додаткові дані NVDB Швеція: номери автострад, засоби регулювання швидкості, зони відпочинку, автобусні зупинки, мости та тунелі, камери фіксації швидкості",
+                "name": "Trafikverket Дорожня мережа, з доповненнями"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Назви вулиць, Швеція NVDB",
+                "name": "Trafikverket Назви вулиць"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Дорожня мережа Швеції NVDB з кількома варіантами шарів мапи",
+                "name": "Trafikverket Дорожня мережа (з варіантамі)"
             }
         },
         "community": {

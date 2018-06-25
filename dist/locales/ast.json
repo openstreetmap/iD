@@ -2453,7 +2453,7 @@
                 },
                 "amenity/social_facility": {
                     "name": "Serviciu social",
-                    "terms": "servicios sociales, "
+                    "terms": "servicios sociales,"
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Bancu d'alimentos"
@@ -2493,7 +2493,7 @@
                 },
                 "amenity/university": {
                     "name": "Campus universitariu",
-                    "terms": "terrén universitariu, "
+                    "terms": "terrén universitariu,"
                 },
                 "amenity/vending_machine": {
                     "name": "Máquina de venta automática"
@@ -4586,7 +4586,6 @@
                 "attribution": {
                     "text": "Términos y comentarios "
                 },
-                "description": "Imáxenes de satélite DigitalGlobe Premium.",
                 "name": "Imáxenes DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -4599,7 +4598,6 @@
                 "attribution": {
                     "text": "Términos y comentarios "
                 },
-                "description": "Imáxenes de satélite DigitalGlobe Standard.",
                 "name": "Imáxenes DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

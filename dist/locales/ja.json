@@ -715,6 +715,11 @@
             "zoom": "レイヤにズーム",
             "browse": "ファイルをブラウズ"
         },
+        "streetside": {
+            "tooltip": "Microsoftによる街路写真",
+            "title": "写真の重ね合わせ(Bing街路)",
+            "report": "この画像のプライバシーについてレポートする"
+        },
         "mapillary_images": {
             "tooltip": "Mapillary から路上の写真を取得します",
             "title": "写真の重ね合わせ (Mapillary)"
@@ -1961,6 +1966,12 @@
                 },
                 "horse_scale": {
                     "label": "乗馬の難易度"
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Yes",
+                        "undefined": "No"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -3824,7 +3835,7 @@
                 },
                 "craft/distillery": {
                     "name": "蒸留所",
-                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>, 職人, 工房"
+                    "terms": ", 職人, 工房"
                 },
                 "craft/dressmaker": {
                     "name": "衣服製造所",
@@ -3979,6 +3990,10 @@
                 },
                 "emergency/destination": {
                     "name": "行き先に用事がある緊急車両, 救命"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "消化器",
+                    "terms": "消化器"
                 },
                 "emergency/fire_hydrant": {
                     "name": "消火栓/消防水利",
@@ -5288,7 +5303,7 @@
                 },
                 "place/plot": {
                     "name": "小区画",
-                    "terms": " 小区画, プロット"
+                    "terms": "小区画, プロット"
                 },
                 "place/quarter": {
                     "name": "大字 / (市内の)町",
@@ -5597,7 +5612,7 @@
                 },
                 "railway/buffer_stop": {
                     "name": "車止め（鉄道）",
-                    "terms": "車止め, "
+                    "terms": "車止め,"
                 },
                 "railway/crossing": {
                     "name": "踏切 (歩道)",
@@ -6536,6 +6551,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "オルソ写真Flanders 最新 © AGIV"
+                },
+                "name": "AGIV Flanders 最新航空画像"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "オルソ写真Flanders © AGIV"
+                },
+                "name": "AGIV Flanders 2013-2015 航空写真 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "衛星・航空画像です。",
                 "name": "Bing航空画像"
@@ -6544,7 +6577,6 @@
                 "attribution": {
                     "text": "規約＆フィードバック"
                 },
-                "description": "DigitalGlobeのプレミアム衛星画像です。",
                 "name": "DigitalGlobeプレミアム画像"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6558,7 +6590,6 @@
                 "attribution": {
                     "text": "規約＆フィードバック"
                 },
-                "description": "DigitalGlobeの標準衛星画像です。",
                 "name": "DigitalGlobe標準画像"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6638,6 +6669,12 @@
                 },
                 "name": "OSM Inspector: タグ付け"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) 最新航空画像"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerical imagery"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
             },
@@ -6652,6 +6689,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: 緑枠 = unclassified.ブラウン枠 = track. Surface: gravel = ライトブラウン, Asphalt = 黒, paved = グレイ, ground =白, concrete = 青, grass = 緑. Seasonal = 白棒",
                 "name": "U.S. Forest Roads Overlay"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-オルソ 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-オルソ 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6735,6 +6796,13 @@
                 },
                 "name": "OpenStreetMap (ドイツスタイル)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Scan of ´Economic maps´ ca 1950-1980",
+                "name": "Lantmäteriet Economic Map (historic)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMap contributors"
@@ -6764,6 +6832,48 @@
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish railway network, including sidings",
+                "name": "Trafikverket Railway Network"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish railway network with several options for map layers",
+                "name": "Trafikverket Railway Network options"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB road network",
+                "name": "Trafikverket Road Network"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB extra details: Highway reference, traffic calming, rest area, bus stop, bridge, tunnel, speed camera",
+                "name": "Trafikverket Road Network extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB street names",
+                "name": "Trafikverket Street Names"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB road network with several options for map layers",
+                "name": "Trafikverket Road Network options"
             }
         },
         "community": {
@@ -7007,6 +7117,18 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium on Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "OpenStreetMap Croatia Facebook group",
+                "description": "OpenStreetMap Croatia Facebook group"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Croatia on IRC",
+                "description": "Join #osm-hr on irc.freenode.org (port 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr Mailing List",
+                "description": "Talk-hr mailing list"
+            },
             "czech-community": {
                 "name": "Czech OSM community",
                 "description": "Map portal, website and contacts on OSM members in Czechia"
@@ -7176,6 +7298,14 @@
             "OSM-PL-forum": {
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
+            },
+            "si-forum": {
+                "name": "OpenStreetMap Slovenia Forum",
+                "description": "Forum of OpenStreetMap community in Slovenia"
+            },
+            "si-mailinglist": {
+                "name": "OpenStreetMap Slovenia mailing list",
+                "description": "Mailing list of OpenStreetMap community in Slovenia"
             },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es mailing list",

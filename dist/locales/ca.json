@@ -2637,7 +2637,7 @@
                 },
                 "amenity/bar": {
                     "name": "Bar de copes",
-                    "terms": "Bar de copes, Local d'oci nocturn, Bar Musical, Local d'oci "
+                    "terms": "Bar de copes, Local d'oci nocturn, Bar Musical, Local d'oci"
                 },
                 "amenity/bbq": {
                     "name": "Barbacoa/graella"
@@ -2770,7 +2770,7 @@
                 },
                 "amenity/fuel": {
                     "name": "Benzinera",
-                    "terms": "Betzinera, Estació de servei, Gasolinera, "
+                    "terms": "Betzinera, Estació de servei, Gasolinera,"
                 },
                 "amenity/grave_yard": {
                     "name": "Cementiri",
@@ -2798,7 +2798,7 @@
                 },
                 "amenity/library": {
                     "name": "Biblioteca",
-                    "terms": "Biblioteca, llibreria, Espai d'emmagatzematge de llibres, Edifici públic per als llibres "
+                    "terms": "Biblioteca, llibreria, Espai d'emmagatzematge de llibres, Edifici públic per als llibres"
                 },
                 "amenity/marketplace": {
                     "name": "Mercat",
@@ -2969,7 +2969,7 @@
                 },
                 "amenity/townhall": {
                     "name": "Ajuntament",
-                    "terms": "Ajuntament, casa consistorial, consistori, govern local, seu del govern local,  "
+                    "terms": "Ajuntament, casa consistorial, consistori, govern local, seu del govern local,"
                 },
                 "amenity/university": {
                     "name": "Campus universitari"
@@ -3084,7 +3084,7 @@
                 },
                 "barrier/fence": {
                     "name": "Tanca",
-                    "terms": "Valla, Tanca, Tancament, Barrera, "
+                    "terms": "Valla, Tanca, Tancament, Barrera,"
                 },
                 "barrier/gate": {
                     "name": "Porta",
@@ -4991,7 +4991,6 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Imatges de satèl·lit de DigitalGlobe Premium",
                 "name": "Imatges de DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5005,7 +5004,6 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Imatges de satèl·lit de DigitalGlobe estàndard",
                 "name": "Imatges de DigitalGlobe estàndard"
             },
             "DigitalGlobe-Standard-vintage": {

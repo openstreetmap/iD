@@ -4197,8 +4197,7 @@
                     "terms": "Hřiště na beachvolejbal"
                 },
                 "leisure/pitch/bowls": {
-                    "name": "Bowlingový trávník",
-                    "terms": "<přeložte se synonymy, nebo souvisejícími výrazy pro 'Bowlingový trávník', oddělené čárkami>"
+                    "name": "Bowlingový trávník"
                 },
                 "leisure/pitch/cricket": {
                     "name": "Kriketové hřiště",
@@ -5694,7 +5693,6 @@
                 "attribution": {
                     "text": "Podmínky použití & zpětná vazba"
                 },
-                "description": "Prémiové satelitní snímky DigitalGlobe",
                 "name": "Prémiové snímky DigitalGlobe"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5706,7 +5704,6 @@
                 "attribution": {
                     "text": "Podmínky použití & zpětná vazba"
                 },
-                "description": "Standardní satelitní snímky DigitalGlobe",
                 "name": "Standardní snímky DigitalGlobe"
             },
             "DigitalGlobe-Standard-vintage": {

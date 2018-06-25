@@ -39,7 +39,7 @@
             "add": {
                 "annotation": {
                     "point": "Dodano punkt.",
-                    "vertex": "Dodano punkt do linii.",
+                    "vertex": "Dodano węzeł do linii.",
                     "relation": "Dodano relację."
                 }
             },
@@ -150,7 +150,9 @@
                     "vertex": "Połączono linie.",
                     "line": "Połączono drogę z linią.",
                     "area": "Połączono drogę z obszarem."
-                }
+                },
+                "relation": "Te obiekty nie mogą zostać połączone, ponieważ mają sprzeczne role w relacji.",
+                "restriction": "Te obiekty nie mogą zostać połączone, ponieważ popsułobby to relację „{relation}”."
             },
             "disconnect": {
                 "title": "Rozłącz",
@@ -168,6 +170,8 @@
                 "annotation": "Scal {n} obiektów.",
                 "not_eligible": "Te obiekty nie mogą zostać scalone.",
                 "not_adjacent": "Tych obiektów nie można scalić, ponieważ ich węzły nie są połączone.",
+                "restriction": "Te obiekty nie mogą zostać scalone, ponieważ popsułobby to relację „{relation}”.",
+                "relation": "Te obiekty nie mogą zostać scalone, ponieważ mają sprzeczne role w relacji.",
                 "incomplete_relation": "Tych obiektów nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany.",
                 "conflicting_tags": "Tego obiektu nie można scalić, ponieważ ich tagi mają sprzeczne wartości."
             },
@@ -298,12 +302,37 @@
         "restriction": {
             "controls": {
                 "distance": "Odległość",
-                "via": "Przez"
+                "distance_up_to": "Do {distance}",
+                "via": "Przez",
+                "via_node_only": "Tylko węzły",
+                "via_up_to_one": "Do 1 linii",
+                "via_up_to_two": "Do 2 linii"
             },
             "help": {
+                "indirect": "(niebezpośredni)",
+                "turn": {
+                    "no_left_turn": "Zakaz skrętu w lewo {indirect}",
+                    "no_right_turn": "Zakaz skrętu w prawo {indirect}",
+                    "no_u_turn": "Zakaz zawracania {indirect}",
+                    "no_straight_on": "Zakaz jazdy prosto {indirect}",
+                    "only_left_turn": "Nakaz skrętu w lewo {indirect}",
+                    "only_right_turn": "Nakaz skrętu w prawo {indirect}",
+                    "only_u_turn": "Nakaz zawracania {indirect}",
+                    "only_straight_on": "Nakaz jazdy prosto {indirect}",
+                    "allowed_left_turn": "Zezwolony skręt w lewo {indirect}",
+                    "allowed_right_turn": "Zezwolony skręt w prawo {indirect}",
+                    "allowed_u_turn": "Zezwolone zawracanie {indirect}",
+                    "allowed_straight_on": "Zezwolona jazda prosto {indirect}"
+                },
                 "from": "Z",
                 "via": "PRZEZ",
-                "to": "DO"
+                "to": "DO",
+                "from_name": "{from}: {fromName}",
+                "from_name_to_name": "{from}: {fromName}, {to}: {toName}",
+                "via_names": "{via}: {viaNames}",
+                "select_from": "Kiliknij aby wybrać element „{from}”",
+                "select_from_name": "Kilkin aby wybrać {from} {fromName}",
+                "toggle": "Kilknij aby zastosować „{turn}”"
             }
         },
         "undo": {
@@ -481,6 +510,7 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
+            "custom_prompt": "Wprowadź szablon dla URL kafelków mapy. Obsługiwane symbole:\n   - {zoom}/{z}, {x}, {y} dla schematu adresowania kafelkówZ/X/Y\n   - {-y}/{ty} dla odwróconej współrzędnej Y w adresowaniu TMS\n   - {u} dla QuadTiles\n   - {switch:a,b,c} dla multipleksacji serwerów na poziomie DNS\n\nPrzykład:\n{example}",
             "overlays": "Nakładki",
             "imagery_source_faq": "Informacje o obrazie / Zgłoś problem",
             "reset": "Przywraca ustawienia",
@@ -685,6 +715,12 @@
             "zoom": "Przybliż do warstwy",
             "browse": "Wczytaj plik"
         },
+        "streetside": {
+            "tooltip": "Zdjęcia poziomu ulicy od Microsoft",
+            "title": "Zdjęcia poziomu ulicy (Bing Streetside)",
+            "report": "Zgłoś naruszenie prywatności w tym zdjęciu",
+            "hires": "Wyższa rozdzielczość"
+        },
         "mapillary_images": {
             "tooltip": "Zdjęcia z serwisu Mapillary",
             "title": "Nakładka ze zdjęciami (Mapillary)"
@@ -723,12 +759,17 @@
                 "navigation_drag": "Możesz przeciągnąć mapę, naciskając i przytrzymując {leftclick} lewym przyciskiem myszy i poruszając myszą. Możesz także użyć klawiszy strzałek `↓ ',` ↑ `,` ← `,` → `na klawiaturze.",
                 "navigation_zoom": "Możesz powiększać i pomniejszać obraz, przewijając kółkiem myszy lub trackpadem, albo klikając przyciski {plus} / {minus} wzdłuż boku mapy. Możesz także użyć klawiszy `+`, `-` na klawiaturze.",
                 "features_h": "Właściwości mapy",
+                "features": "Używamy określenia *obiekty* aby opisać rzeczy pojawijające się na mapie, jak drogi, budynki, pounkty zainteresowań. Wszystkie obiekty z rzeczywistego świata można zmapować, czyli odwzorować, w OpenStreetMap. Obiekty są prezentowane na mapie za pomocą *węzłów*, *linii* i *obszarów*.",
                 "nodes_ways": "W OpenStreetmap punkty są czasami nazywane * węzłami *, a linie i obszary są czasami nazywane * drogami *."
             },
             "editing": {
                 "title": "Edytowanie i zapisywanie",
                 "select_h": "Wybierz",
+                "select_left_click": "{leftclick} Kilknij lewy przyciskiem myszy na obiekcie, aby go wybrać. Taki element zostanie podświetlony, a boczny panel wyświetli jego atrybuty, np. nazwę i adres.",
+                "select_right_click": "{rightclick} Kilknij prawym przyciskiem myszy na obiekcie aby wyświetlić menu edycji, które pokazuje możliwe do wykonania akcje, jak np. obót, przesunięcie czy usunięcie.",
                 "multiselect_h": "wielokrotny wybór",
+                "multiselect_shift_click": "`{shift}`+{leftclick} trzymając shift i wybierając obiekty za pomocą LPM pozwala zaznaczać wiele obiektów. Pomaga to w przesuwaiu lub usuwaniu wielu elementów na raz.",
+                "multiselect_lasso": "Innym sposobem aby zaznaczyć wiele obiektów jest przytrzymanie klawisza `{shift}` i {leftclick} i narysawnie myszą lasso wokół obiektów, które mają być wybrane. Wszystkie węzły wewnątrz lasso zostaną zaznaczone.",
                 "undo_redo_h": "Cofnij & Wykonaj ponowniep",
                 "save_h": "Zapisz",
                 "upload_h": "Wyślij",
@@ -2692,11 +2733,11 @@
                 },
                 "aerialway/goods": {
                     "name": "Wyciąg towarowy",
-                    "terms": "wyciąg towarowy, gondola towarowa, "
+                    "terms": "wyciąg towarowy, gondola towarowa,"
                 },
                 "aerialway/magic_carpet": {
                     "name": "Wyciąg narciarski dywanowy",
-                    "terms": "Narciarski pas transmisyjny dla dzieci, "
+                    "terms": "Narciarski pas transmisyjny dla dzieci,"
                 },
                 "aerialway/mixed_lift": {
                     "name": "Wyciąg hybrydowy",
@@ -2704,11 +2745,11 @@
                 },
                 "aerialway/platter": {
                     "name": "Wyciag talerzykowy",
-                    "terms": "Wyciąg talerzykowy, "
+                    "terms": "Wyciąg talerzykowy,"
                 },
                 "aerialway/pylon": {
                     "name": "Podpora wyciagu narciarskiego",
-                    "terms": "Podpora, słup "
+                    "terms": "Podpora, słup"
                 },
                 "aerialway/rope_tow": {
                     "name": "Wyrwirączka",
@@ -3123,7 +3164,7 @@
                 },
                 "amenity/shelter": {
                     "name": "Schronienie",
-                    "terms": "schronienie, "
+                    "terms": "schronienie,"
                 },
                 "amenity/shower": {
                     "name": "Prysznic",
@@ -3139,7 +3180,7 @@
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Bank żywności",
-                    "terms": "Bank żywności, "
+                    "terms": "Bank żywności,"
                 },
                 "amenity/social_facility/group_home": {
                     "name": "Dom spokojnej starości",
@@ -4506,7 +4547,7 @@
                 },
                 "leisure/hackerspace": {
                     "name": "Hackerspace",
-                    "terms": "hackerspace, hackspace,  hacklab, makerspace, creative space "
+                    "terms": "hackerspace, hackspace,  hacklab, makerspace, creative space"
                 },
                 "leisure/horse_riding": {
                     "name": "Jazda konna",
@@ -4550,7 +4591,7 @@
                 },
                 "leisure/pitch/basketball": {
                     "name": "Boisko do koszykówki",
-                    "terms": "boisko do koszykówki "
+                    "terms": "boisko do koszykówki"
                 },
                 "leisure/pitch/beachvolleyball": {
                     "name": "Boisko do gry w siatkówkę plażową",
@@ -4574,11 +4615,11 @@
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Boisko rugby league",
-                    "terms": "Boisko rugby "
+                    "terms": "Boisko rugby"
                 },
                 "leisure/pitch/rugby_union": {
                     "name": "Boisko rugby union",
-                    "terms": "Boisko rugby "
+                    "terms": "Boisko rugby"
                 },
                 "leisure/pitch/skateboard": {
                     "name": "Skate park",
@@ -4877,7 +4918,7 @@
                 },
                 "natural/volcano": {
                     "name": "Wulkan",
-                    "terms": "stratowulkan, "
+                    "terms": "stratowulkan,"
                 },
                 "natural/water": {
                     "name": "Woda",
@@ -5814,7 +5855,7 @@
                 },
                 "shop/travel_agency": {
                     "name": "Biuro podróży",
-                    "terms": "Biuro podróży, "
+                    "terms": "Biuro podróży,"
                 },
                 "shop/tyres": {
                     "name": "Sklep z oponami",
@@ -5929,7 +5970,7 @@
                 },
                 "tourism/information/map": {
                     "name": "Mapa",
-                    "terms": "plan, mapa, "
+                    "terms": "plan, mapa,"
                 },
                 "tourism/information/office": {
                     "name": "Informacja turystyczna",
@@ -6005,7 +6046,7 @@
                 },
                 "type/boundary/administrative": {
                     "name": "Granica administracyjna",
-                    "terms": "Granica administracyjna, "
+                    "terms": "Granica administracyjna,"
                 },
                 "type/multipolygon": {
                     "name": "Wielokąt złożony"
@@ -6192,7 +6233,6 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
-                "description": "Zdjęcia satelitarne DigitalGlobe Premium.",
                 "name": "DigitalGlobe Premium (satelitarne)"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6206,7 +6246,6 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
-                "description": "Zdjęcia satelitarne DigitalGlobe Standard.",
                 "name": "DigitalGlobe Standard (satelitarne)"
             },
             "DigitalGlobe-Standard-vintage": {

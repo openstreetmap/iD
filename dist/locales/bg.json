@@ -2794,7 +2794,6 @@
                 "attribution": {
                     "text": "Условия & oбратна връзка"
                 },
-                "description": "Премиум DigitalGlobe сателитни изображения",
                 "name": "DigitalGlobe премиум изображения"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -2808,7 +2807,6 @@
                 "attribution": {
                     "text": "Условия & oбратна връзка"
                 },
-                "description": "Стандартни DigitalGlobe сателитни изображения.",
                 "name": "Стандартни DigitalGlobe изображения"
             },
             "DigitalGlobe-Standard-vintage": {

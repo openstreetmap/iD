@@ -3072,7 +3072,7 @@
                 },
                 "craft/distillery": {
                     "name": "Destilarna",
-                    "terms": "žganjarna,pivovarna,vino, vinarna,alkohol,žganje,pijača "
+                    "terms": "žganjarna,pivovarna,vino, vinarna,alkohol,žganje,pijača"
                 },
                 "craft/dressmaker": {
                     "name": "Šiviljstvo",
@@ -4913,7 +4913,6 @@
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
                 },
-                "description": "Satelitski posnetki DigitalGlobe Premium",
                 "name": "Posnetki DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -4925,7 +4924,6 @@
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
                 },
-                "description": "Satelitski posnetki DigitalGlobe Standard",
                 "name": "Posnetki DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

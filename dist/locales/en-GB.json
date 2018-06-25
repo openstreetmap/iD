@@ -5655,7 +5655,6 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Premium DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Premium Imagery"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5669,7 +5668,6 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
             },
             "DigitalGlobe-Standard-vintage": {

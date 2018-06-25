@@ -716,7 +716,10 @@
             "browse": "瀏覽檔案"
         },
         "streetside": {
-            "report": "回報關於此照片的隱私疑慮"
+            "tooltip": "微軟的街景照片",
+            "title": "照片覆蓋層 (Bing Streetside)",
+            "report": "回報關於此照片的隱私疑慮",
+            "hires": "高解析度"
         },
         "mapillary_images": {
             "tooltip": "從 Mapillary 來的街道級照片",
@@ -2490,6 +2493,17 @@
                 "shop": {
                     "label": "種類"
                 },
+                "siren/purpose": {
+                    "label": "目的"
+                },
+                "siren/type": {
+                    "label": "類型",
+                    "options": {
+                        "electronic": "電子式",
+                        "other": "其他",
+                        "pneumatic": "氣動式"
+                    }
+                },
                 "site": {
                     "label": "種類"
                 },
@@ -3943,8 +3957,7 @@
                     "terms": "棚架工程"
                 },
                 "craft/sculptor": {
-                    "name": "雕塑家",
-                    "terms": "<translate with synonyms or related terms for 'Sculptor', separated by commas>"
+                    "name": "雕塑家"
                 },
                 "craft/shoemaker": {
                     "name": "鞋匠",
@@ -4007,6 +4020,10 @@
                     "name": "消防栓",
                     "terms": "消防栓,消防設施,"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "急救箱",
+                    "terms": "急救包"
+                },
                 "emergency/life_ring": {
                     "name": "救生圈",
                     "terms": "救生圈"
@@ -4023,6 +4040,10 @@
                 },
                 "emergency/private": {
                     "name": "供私人緊急通行"
+                },
+                "emergency/siren": {
+                    "name": "警笛",
+                    "terms": "警笛"
                 },
                 "emergency/water_tank": {
                     "name": "緊急水箱",
@@ -5719,7 +5740,7 @@
                 },
                 "shop/agrarian": {
                     "name": "農業用品補給店",
-                    "terms": "農用品店 "
+                    "terms": "農用品店"
                 },
                 "shop/alcohol": {
                     "name": "酒類專賣店",
@@ -6559,6 +6580,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Orthophoto Flanders 最新 © AGIV"
+                },
+                "name": "AGIV Flanders 最新空照圖"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                },
+                "name": "AGIV Flanders 2013-2015 空照圖 10公分"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "衛星與空照圖",
                 "name": "Bing 空照圖"
@@ -6567,7 +6606,7 @@
                 "attribution": {
                     "text": "使用條款與意見回饋"
                 },
-                "description": "Premium DigitalGlobe 衛星圖",
+                "description": "DigitalGlobe-Premium 是以 DigitalGlobe 底圖鑲嵌 +Vivid，或是局部區域有興趣的影像，有 50 公分或更高解析度，以及更新更頻繁。 ",
                 "name": "DigitalGlobe Premium 空照圖"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6581,7 +6620,7 @@
                 "attribution": {
                     "text": "使用條款與意見回饋"
                 },
-                "description": "Standard DigitalGlobe 衛星圖",
+                "description": "DigitalGlobe-Standard  累積全球陸地 86% 的影像，有影像的部分具有 30-60 公分解析度，部分用 Ladnsat 補充。平均的影像年齡是 2.31 年，有些地方一年更新兩次。",
                 "name": "DigitalGlobe Standard 空照圖"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6661,6 +6700,12 @@
                 },
                 "name": "OSM 檢查器：標籤"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) 最新空照圖"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC 數值圖"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER 道路 2012"
             },
@@ -6675,6 +6720,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "道路：綠色外框 = 非分類道路。棕色外框 = 土路。路面：碎石路 = 亮棕色實心填滿，柏油 = 黑色，有舖面 = 灰色，地面 = 白色，水泥 = 藍色，草地 = 綠色。季節性 = 白色條紋",
                 "name": "美國森林道路覆蓋層"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "透過布魯塞爾的工具 UrbIS®© - 散佈 & 版權所有 CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "透過布魯塞爾的工具 UrbIS®© - 散佈 & 版權所有 CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "透過布魯塞爾的工具 UrbIS®© - 散佈 & 版權所有 CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "透過布魯塞爾的工具 UrbIS®© - 散佈 & 版權所有 CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6758,6 +6827,13 @@
                 },
                 "name": "OpenStreetMap（德國樣式）"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "掃描 1950-1980 的「經濟地圖」",
+                "name": "Lantmäteriet 經濟地圖（歷史地圖）"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole，資料 ©OpenStreetMap 貢獻者"
@@ -6787,6 +6863,48 @@
                     "text": "地圖 © Thunderforest，資料 © OpenStreetMap 貢獻者"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "瑞典鐵路網，包含支線",
+                "name": "Trafikverket 鐵路網"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "瑞典鐵路網，包含多個選項的圖層",
+                "name": "Trafikverket 鐵路網選項"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "瑞典 NVDB 路網",
+                "name": "Trafikverket 路網"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "瑞典 NVDB 的額外細節：公路編號、交通寧靜區、休息區、公車站牌、橋、隧道、測速照相機",
+                "name": "Trafikverket 路網額外資訊"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB 街道名稱",
+                "name": "Trafikverket 街道名稱"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Swedish NVDB 有多個選項的路網圖層",
+                "name": "Trafikverket 路網選項"
             }
         },
         "community": {
@@ -6944,6 +7062,10 @@
                 "description": "開放街圖清邁社群不定期聚會",
                 "extendedDescription": "清邁開放街圖社群每隔幾個月的時候的聚會，歡迎接洽以及找尋 {url} 下次聚會時間"
             },
+            "OSM-TH-facebook": {
+                "name": "開放街圖泰國 Facebook ",
+                "description": "泰國開放街圖的 Facebook 社團。"
+            },
             "OSM-TH-forum": {
                 "name": "開放街圖泰國論壇",
                 "description": "開放街圖泰國網頁論壇 "
@@ -6953,7 +7075,13 @@
                 "description": "開放街圖阿爾巴尼亞論壇"
             },
             "al-maptime-tirana": {
-                "name": "Maptime Tirana"
+                "name": "Maptime Tirana",
+                "description": "與畫地圖相關的社交活動-尤其歡迎新手！",
+                "extendedDescription": "Maptime 是開放給所有等級和知識程度的學習環境，提供給初學者的國際教育支援。Maptime 同時具有彈性和架構的環境，創造畫地圖的教學、工作坊，分享共同目標的進行中計畫，以及獨立/協同的工作時間。"
+            },
+            "al-telegram": {
+                "name": "開放街圖阿爾巴尼亞 Telegram 頻道 ",
+                "description": "開放街圖阿爾巴尼亞 Telegram 頻道 "
             },
             "at-forum": {
                 "name": "開放街圖奧地利論壇",
@@ -7001,11 +7129,14 @@
                 "description": "Talk-be 是比利時社群的官方郵件論壇 "
             },
             "be-maptime": {
-                "name": "Maptime Belgium"
+                "name": "Maptime Belgium",
+                "description": "圍繞畫地圖的社交活動 - 尤其歡迎新手！",
+                "extendedDescription": "Maptime 是開放給所有等級和知識程度的學習環境，提供給初學者的國際教育支援。Maptime 同時具有彈性和架構的環境，創造畫地圖的教學、工作坊，分享共同目標的進行中計畫，以及獨立/協同的工作時間。"
             },
             "be-matrix": {
                 "name": "OpenStreetMap BE Matrix channel",
-                "description": "歡迎所有圖客！"
+                "description": "歡迎所有圖客！",
+                "extendedDescription": "大部分討論都在 \"OpenStreetMap Belgium\"  頻道。你可以在這裡問任何問題！其他頻道則會針對特定主題。"
             },
             "be-meetup": {
                 "name": "開放街圖比利時聚會",
@@ -7013,9 +7144,35 @@
                 "extendedDescription": "實體的聚會是與其他圖客碰面的好機會，能夠論論問題，學到很多事情，特別是歡迎新的貢獻者。"
             },
             "be-twitter": {
-                "name": "開放街圖比利時 Twitter"
+                "name": "開放街圖比利時 Twitter",
+                "description": "開放街圖比利時 Twitter：@osm_be"
+            },
+            "hr-facebook": {
+                "name": "開放街圖克羅埃西亞 Facebook 社團",
+                "description": "開放街圖克羅埃西亞 Facebook 社團"
+            },
+            "hr-irc": {
+                "name": "開放街圖克羅埃西亞 IRC",
+                "description": "在 irc.freenode.org (port 6667) 上面加入 #osm-ㄐ"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr 郵件論壇",
+                "description": "Talk-hr 郵件論壇"
+            },
+            "czech-community": {
+                "name": "捷克開放街圖社群",
+                "description": "捷克開放街圖成員的地圖入口以及聯繫地方"
+            },
+            "osmcz-facebook": {
+                "name": "開放街圖捷克在 Facebook",
+                "description": "追蹤捷克開放街圖 Facebook -  包括翻譯 WeeklyOSM！"
+            },
+            "osmcz-twitter": {
+                "name": "捷克 Twitter @osmcz",
+                "description": "追蹤捷克開放街圖 Twitter -  包括翻譯 WeeklyOSM！"
             },
             "talk-cz-mailinglist": {
+                "name": "捷克郵件論壇 (Talk-cz ) ",
                 "description": "Talk-cz 是捷克社群的官方郵件論壇 "
             },
             "dk-forum": {
@@ -7029,6 +7186,18 @@
             "dk-mailinglist": {
                 "name": "Talk-dk 郵件論壇",
                 "description": "討論開放街圖在丹麥事物的郵件論壇"
+            },
+            "fi-forum": {
+                "name": "開放街圖芬蘭論壇",
+                "description": "開放街圖芬蘭網路論壇"
+            },
+            "fi-irc": {
+                "name": "開放街圖芬蘭 IRC",
+                "description": "在 irc.oftc.net (port 6667) 上面加入 #osm-fl"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fl 郵件論壇",
+                "description": "Talk-fl 是芬蘭社群的官方郵件論壇 "
             },
             "fr-facebook": {
                 "name": "開放街圖法國 Facebook 頁面",
@@ -7082,9 +7251,28 @@
                 "name": "OWL 郵件論壇",
                 "description": "這是東威斯特法倫 - 利普開放街圖社群的郵件論壇"
             },
+            "de-telegram": {
+                "name": "開放街圖德國 Telegram",
+                "description": "加入開放街圖德國 Telegram 超級聊天室 {url}"
+            },
             "osm-de": {
                 "name": "開放街圖德國",
                 "description": "開放街圖在德國交流資訊的平台"
+            },
+            "hu-facebook": {
+                "name": "開放街圖匈牙利在 Facebook",
+                "description": "匈牙利的圖客和開放街圖 Facebook 頁面"
+            },
+            "hu-forum": {
+                "name": "開放街圖匈牙利論壇",
+                "description": "開放街圖匈牙利網頁論壇"
+            },
+            "hu-meetup": {
+                "name": "開放街圖匈牙利 Meetup",
+                "description": "匈牙利舉行聚會的平台"
+            },
+            "it-facebook": {
+                "name": "開放街圖義大利 Facebook"
             },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es 郵件論壇",

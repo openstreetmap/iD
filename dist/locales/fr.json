@@ -718,7 +718,8 @@
         "streetside": {
             "tooltip": "Photos Streetside de Microsoft",
             "title": "Sucouche photo (Bing Streetside)",
-            "report": "Signaler un problème relatif à la vie privée sur cette image"
+            "report": "Signaler un problème relatif à la vie privée sur cette image",
+            "hires": "Haute résolution"
         },
         "mapillary_images": {
             "tooltip": "Photos de rue depuis Mapillary",
@@ -2492,6 +2493,17 @@
                 "shop": {
                     "label": "Type"
                 },
+                "siren/purpose": {
+                    "label": "Usage"
+                },
+                "siren/type": {
+                    "label": "Type",
+                    "options": {
+                        "electronic": "Électronique",
+                        "other": "Autre",
+                        "pneumatic": "Pneumatique"
+                    }
+                },
                 "site": {
                     "label": "Type de site"
                 },
@@ -2914,8 +2926,7 @@
                     "terms": "Terminal"
                 },
                 "allotments/plot": {
-                    "name": "Parcelle dans un jardin familial",
-                    "terms": "<translate with synonyms or related terms for 'Community Garden Plot', separated by commas>"
+                    "name": "Parcelle dans un jardin familial"
                 },
                 "amenity": {
                     "name": "Équipement"
@@ -2988,8 +2999,7 @@
                     "terms": "Café, bar, salon de thé, pub, brasserie, restaurant, cafe"
                 },
                 "amenity/car_pooling": {
-                    "name": "Covoiturage",
-                    "terms": "<translate with synonyms or related terms for 'Car Pooling', separated by commas>"
+                    "name": "Covoiturage"
                 },
                 "amenity/car_rental": {
                     "name": "Location de voiture",
@@ -3138,16 +3148,14 @@
                     "terms": "Bibliothèque, Médiathèque"
                 },
                 "amenity/love_hotel": {
-                    "name": "Love hôtel",
-                    "terms": "<translate with synonyms or related terms for 'Love Hotel', separated by commas>"
+                    "name": "Love hôtel"
                 },
                 "amenity/marketplace": {
                     "name": "Marché",
                     "terms": "Marché, Place de marché"
                 },
                 "amenity/monastery": {
-                    "name": "Terrain de monastère",
-                    "terms": "<translate with synonyms or related terms for 'Monastery Grounds', separated by commas>"
+                    "name": "Terrain de monastère"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Parking pour motocyclettes",
@@ -3197,8 +3205,7 @@
                     "terms": "Église, Culte chrétien"
                 },
                 "amenity/place_of_worship/hindu": {
-                    "name": "Temple hindou",
-                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                    "name": "Temple hindou"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",
@@ -3209,16 +3216,13 @@
                     "terms": "Mosquée"
                 },
                 "amenity/place_of_worship/shinto": {
-                    "name": "Shintoïste",
-                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                    "name": "Shintoïste"
                 },
                 "amenity/place_of_worship/sikh": {
-                    "name": "Temple Sikh",
-                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                    "name": "Temple Sikh"
                 },
                 "amenity/place_of_worship/taoist": {
-                    "name": "Temple Taoïste",
-                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
+                    "name": "Temple Taoïste"
                 },
                 "amenity/planetarium": {
                     "name": "Planétarium",
@@ -3238,7 +3242,7 @@
                 },
                 "amenity/prison": {
                     "name": "Prison",
-                    "terms": "Prison, Terrains carcéraux, Pénitencier, Maison d'arrêt, Centre correctionnel, Centre de détention, Geôle. "
+                    "terms": "Prison, Terrains carcéraux, Pénitencier, Maison d'arrêt, Centre correctionnel, Centre de détention, Geôle."
                 },
                 "amenity/pub": {
                     "name": "Pub",
@@ -3287,12 +3291,10 @@
                     "terms": "Abri"
                 },
                 "amenity/shower": {
-                    "name": "Douche",
-                    "terms": "<translate with synonyms or related terms for 'Shower', separated by commas>"
+                    "name": "Douche"
                 },
                 "amenity/smoking_area": {
-                    "name": "Zone fumeur",
-                    "terms": "<translate with synonyms or related terms for 'Smoking Area', separated by commas>"
+                    "name": "Zone fumeur"
                 },
                 "amenity/social_facility": {
                     "name": "Établissement de services sociaux",
@@ -3366,12 +3368,10 @@
                     "terms": "distributeur de boissons, distributeur à boissons, boissons, distributeur automatique de boissons, machine à boissons, machine à café, vente automatique de boissons, vente de boissons, vente boissons, eau, café, thé, soda, jus de fruit, vending machine drinks, drinks"
                 },
                 "amenity/vending_machine/electronics": {
-                    "name": "Distributeur de matériel éléctronique",
-                    "terms": "<translate with synonyms or related terms for 'Electronics Vending Machine', separated by commas>"
+                    "name": "Distributeur de matériel éléctronique"
                 },
                 "amenity/vending_machine/elongated_coin": {
-                    "name": "Distributeur de pièces",
-                    "terms": "<translate with synonyms or related terms for 'Flat Coin Vending Machine', separated by commas>"
+                    "name": "Distributeur de pièces"
                 },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Distributeur de sacs pour excréments d'animaux",
@@ -3398,7 +3398,7 @@
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Distributeur de journaux",
-                    "terms": "distributeur de journaux, distributeur à journaux, distributeur automatique de journaux, machine à journaux, vente automatique de journaux, vente de journaux, vente journaux, journaux, journal, machine journaux, vending machine newspapers, newspapers, magazines, journaux "
+                    "terms": "distributeur de journaux, distributeur à journaux, distributeur automatique de journaux, machine à journaux, vente automatique de journaux, vente de journaux, vente journaux, journaux, journal, machine journaux, vending machine newspapers, newspapers, magazines, journaux"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Dépôt ou retrait automatique de colis",
@@ -3413,8 +3413,7 @@
                     "terms": "distributeur de titres de transport, distributeur à titres de transport, titres de transport, tickets de transport, distributeur automatique de titres de transport, guichet automatique, machine à titres de transport, vente automatique de titres de transport, vente de titres de transport, vente titres de transport, tickets de train, tickets de bus, tickets de métro, tickets de RER, tickets train, tickets bus, tickets métro, tickets RER, billets de train, billets de bus, billets de métro, billets de RER, billets train, billets bus, billets métro, billets RER, titres de train, titres de bus, titres de métro, titres de RER, vending machine public transport tickets, public transport tickets, tickets, billets, train, bus, métro, RER"
                 },
                 "amenity/vending_machine/stamps": {
-                    "name": "Distributeur de timbres",
-                    "terms": "<translate with synonyms or related terms for 'Postage Vending Machine', separated by commas>"
+                    "name": "Distributeur de timbres"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Distributeur de snacks",
@@ -3425,8 +3424,7 @@
                     "terms": "Vétérinaire"
                 },
                 "amenity/waste/dog_excrement": {
-                    "name": "Bac à excrément de chien",
-                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
+                    "name": "Bac à excrément de chien"
                 },
                 "amenity/waste_basket": {
                     "name": "Poubelle pour piétons",
@@ -3457,60 +3455,48 @@
                     "terms": "route, chaussée, trottoir, surface, place, emprise, area highway"
                 },
                 "attraction/amusement_ride": {
-                    "name": "Manège",
-                    "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
+                    "name": "Manège"
                 },
                 "attraction/animal": {
-                    "name": "Animal",
-                    "terms": "<translate with synonyms or related terms for 'Animal', separated by commas>"
+                    "name": "Animal"
                 },
                 "attraction/big_wheel": {
-                    "name": "Grande Roue",
-                    "terms": "<translate with synonyms or related terms for 'Big Wheel', separated by commas>"
+                    "name": "Grande Roue"
                 },
                 "attraction/bumper_car": {
-                    "name": "Auto tamponeuse",
-                    "terms": "<translate with synonyms or related terms for 'Bumper Car', separated by commas>"
+                    "name": "Auto tamponeuse"
                 },
                 "attraction/bungee_jumping": {
-                    "name": "Saut à l'élastique",
-                    "terms": "<translate with synonyms or related terms for 'Bungee Jumping', separated by commas>"
+                    "name": "Saut à l'élastique"
                 },
                 "attraction/carousel": {
                     "name": "Carrousel",
                     "terms": "Carrousel, Manège"
                 },
                 "attraction/dark_ride": {
-                    "name": "Parcours scénique",
-                    "terms": "<translate with synonyms or related terms for 'Dark Ride', separated by commas>"
+                    "name": "Parcours scénique"
                 },
                 "attraction/drop_tower": {
-                    "name": "Tour de chute",
-                    "terms": "<translate with synonyms or related terms for 'Drop Tower', separated by commas>"
+                    "name": "Tour de chute"
                 },
                 "attraction/maze": {
                     "name": "Labyrinthe",
                     "terms": "Labyrinthe"
                 },
                 "attraction/pirate_ship": {
-                    "name": "Bateau pirate",
-                    "terms": "<translate with synonyms or related terms for 'Pirate Ship', separated by commas>"
+                    "name": "Bateau pirate"
                 },
                 "attraction/river_rafting": {
-                    "name": "Rafting",
-                    "terms": "<translate with synonyms or related terms for 'River Rafting', separated by commas>"
+                    "name": "Rafting"
                 },
                 "attraction/roller_coaster": {
-                    "name": "Montagnes Russes",
-                    "terms": "<translate with synonyms or related terms for 'Roller Coaster', separated by commas>"
+                    "name": "Montagnes Russes"
                 },
                 "attraction/train": {
-                    "name": "Train touristique",
-                    "terms": "<translate with synonyms or related terms for 'Tourist Train', separated by commas>"
+                    "name": "Train touristique"
                 },
                 "attraction/water_slide": {
-                    "name": "Toboggan Aquatique",
-                    "terms": "<translate with synonyms or related terms for 'Water Slide', separated by commas>"
+                    "name": "Toboggan Aquatique"
                 },
                 "barrier": {
                     "name": "Barrière physique",
@@ -3560,8 +3546,7 @@
                     "terms": "haie, arbustes, arbres, plantes, buisson, clôture, brise-vent, rangée, broussaille, bordure, cloture, buis, ifs, barrier hedge, hedge"
                 },
                 "barrier/kerb": {
-                    "name": "Bordure",
-                    "terms": "<translate with synonyms or related terms for 'Kerb', separated by commas>"
+                    "name": "Bordure"
                 },
                 "barrier/kissing_gate": {
                     "name": "Portillon à chicane mobile",
@@ -3604,12 +3589,10 @@
                     "terms": "grange, hangar agricole, bâtiment agricole, stockage, grenier, abri, remise, étable, ferme, barn"
                 },
                 "building/boathouse": {
-                    "name": "Hangar à bateaux",
-                    "terms": "<translate with synonyms or related terms for 'Boathouse', separated by commas>"
+                    "name": "Hangar à bateaux"
                 },
                 "building/bungalow": {
-                    "name": "Bungalow",
-                    "terms": "<translate with synonyms or related terms for 'Bungalow', separated by commas>"
+                    "name": "Bungalow"
                 },
                 "building/bunker": {
                     "name": "Bunker"
@@ -3631,8 +3614,7 @@
                     "terms": "Église, église, eglise, bâtiment religieux, lieu de culte, édifice religieux,\néglise catholique, église primatiale, basilique, église basilique, collégiale, église collégiale, église décanale, paroisses, église paroissiale, abbatiale, église abbatiale, église priorale,\néglise orthodoxe, métropole, catholicon, katholikon, kyriakon,\nchristianisme, catholicisme, orthodoxie, chrétienne, chrétiens, catholique, orthodoxe, prêtre, religion, clergé, prière, messe, church"
                 },
                 "building/civic": {
-                    "name": "Équipement public",
-                    "terms": "<translate with synonyms or related terms for 'Civic Building', separated by commas>"
+                    "name": "Équipement public"
                 },
                 "building/college": {
                     "name": "Enseignement supérieur (non universitaire) - bâtiment",
@@ -3658,12 +3640,10 @@
                     "name": "Entrée/Sortie"
                 },
                 "building/farm": {
-                    "name": "Corps de ferme",
-                    "terms": "<translate with synonyms or related terms for 'Farm House', separated by commas>"
+                    "name": "Corps de ferme"
                 },
                 "building/farm_auxiliary": {
-                    "name": "Bâtiment de ferme",
-                    "terms": "<translate with synonyms or related terms for 'Farm Building', separated by commas>"
+                    "name": "Bâtiment de ferme"
                 },
                 "building/garage": {
                     "name": "Garage privé",
@@ -3674,8 +3654,7 @@
                     "terms": "garages, bloc de garages, boxes, box, hangar, parcages, parkings, voitures, parc de stationnement couvert"
                 },
                 "building/grandstand": {
-                    "name": "Tribune",
-                    "terms": "<translate with synonyms or related terms for 'Grandstand', separated by commas>"
+                    "name": "Tribune"
                 },
                 "building/greenhouse": {
                     "name": "Serre",
@@ -3706,8 +3685,7 @@
                     "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
                 },
                 "building/mosque": {
-                    "name": "Mosquée - Bâtiment",
-                    "terms": "<translate with synonyms or related terms for 'Mosque Building', separated by commas>"
+                    "name": "Mosquée - Bâtiment"
                 },
                 "building/public": {
                     "name": "Bâtiment public",
@@ -3726,8 +3704,7 @@
                     "terms": "Voûte, Toit ouvert, Marché couvert"
                 },
                 "building/ruins": {
-                    "name": "Bâtiment en ruine",
-                    "terms": "<translate with synonyms or related terms for 'Building Ruins', separated by commas>"
+                    "name": "Bâtiment en ruine"
                 },
                 "building/school": {
                     "name": "Bâtiment scolaire - élémentaire ou secondaire",
@@ -3738,8 +3715,7 @@
                     "terms": "maison jumelée, maison jumelle, maison mitoyenne, maison avec mur mitoyen, pavillon mitoyen, maisons jumelées, maisons jumelles, maisons mitoyennes, maisons avec mur mitoyen, pavillons mitoyens, building semidetached house, semidetached house, semi detached house"
                 },
                 "building/service": {
-                    "name": "Bâtiment de services",
-                    "terms": "<translate with synonyms or related terms for 'Service Building', separated by commas>"
+                    "name": "Bâtiment de services"
                 },
                 "building/shed": {
                     "name": "Cabanon",
@@ -3758,8 +3734,7 @@
                     "terms": "Mobil home statique"
                 },
                 "building/temple": {
-                    "name": "Temple",
-                    "terms": "<translate with synonyms or related terms for 'Temple Building', separated by commas>"
+                    "name": "Temple"
                 },
                 "building/terrace": {
                     "name": "Rangée de maisons",
@@ -3769,8 +3744,7 @@
                     "name": "Gare ferroviaire"
                 },
                 "building/transportation": {
-                    "name": "Bâtiment pour transports publics",
-                    "terms": "<translate with synonyms or related terms for 'Transportation Building', separated by commas>"
+                    "name": "Bâtiment pour transports publics"
                 },
                 "building/university": {
                     "name": "Université - bâtiment universitaire",
@@ -3844,8 +3818,7 @@
                     "terms": "Confisier, confiseur, fabricant de bonbons"
                 },
                 "craft/distillery": {
-                    "name": "Distillerie",
-                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
+                    "name": "Distillerie"
                 },
                 "craft/dressmaker": {
                     "name": "Couturier",
@@ -4009,9 +3982,12 @@
                     "name": "Borne incendie",
                     "terms": "Borne incendie, borne-fontaine, borne fontaine, bouche d'incendie"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Kit de premiers secours",
+                    "terms": "bandage, pansement, premiers secours, kit médical, kit d'urgence, trousse de secours, trousse d'urgence"
+                },
                 "emergency/life_ring": {
-                    "name": "Bouée de Sauvetage",
-                    "terms": "<translate with synonyms or related terms for 'Life Ring', separated by commas>"
+                    "name": "Bouée de Sauvetage"
                 },
                 "emergency/no": {
                     "name": "Non accessible aux services d'urgences"
@@ -4026,9 +4002,12 @@
                 "emergency/private": {
                     "name": "Accès d'urgence privé"
                 },
+                "emergency/siren": {
+                    "name": "Sirène",
+                    "terms": "raid aérien, tempête, tornade, avertissement"
+                },
                 "emergency/water_tank": {
-                    "name": "Réservoir d'eau de secours",
-                    "terms": "<translate with synonyms or related terms for 'Emergency Water Tank', separated by commas>"
+                    "name": "Réservoir d'eau de secours"
                 },
                 "emergency/yes": {
                     "name": "Accessible aux services d'urgences"
@@ -4173,8 +4152,7 @@
                     "terms": "Piste cavalière, Sentier à chevaux, Sentier pour chevaux"
                 },
                 "highway/bus_guideway": {
-                    "name": "Voie de bus guidés",
-                    "terms": "<translate with synonyms or related terms for 'Bus Guideway', separated by commas>"
+                    "name": "Voie de bus guidés"
                 },
                 "highway/bus_stop": {
                     "name": "Arrêt de bus"
@@ -4185,7 +4163,7 @@
                 },
                 "highway/crossing": {
                     "name": "Passage piéton",
-                    "terms": "Passage piéton "
+                    "terms": "Passage piéton"
                 },
                 "highway/crossing-raised": {
                     "name": "Passage piéton surélevé",
@@ -4463,8 +4441,7 @@
                     "terms": "Forêt"
                 },
                 "landuse/garages": {
-                    "name": "Terrain pour garages",
-                    "terms": "<translate with synonyms or related terms for 'Garage Landuse', separated by commas>"
+                    "name": "Terrain pour garages"
                 },
                 "landuse/grass": {
                     "name": "Herbe",
@@ -4475,8 +4452,7 @@
                     "terms": "Terrain vierge"
                 },
                 "landuse/greenhouse_horticulture": {
-                    "name": "Serre d'horticulture",
-                    "terms": "<translate with synonyms or related terms for 'Greenhouse Horticulture', separated by commas>"
+                    "name": "Serre d'horticulture"
                 },
                 "landuse/harbour": {
                     "name": "Port / Havre",
@@ -4540,7 +4516,7 @@
                 },
                 "landuse/military/office": {
                     "name": "Bureau Militaire",
-                    "terms": "Bureau militaire, Bureau de recrutement militaire, "
+                    "terms": "Bureau militaire, Bureau de recrutement militaire,"
                 },
                 "landuse/military/range": {
                     "name": "Stand de tir militaire",
@@ -4595,8 +4571,7 @@
                     "terms": "Jeux pour adultes"
                 },
                 "leisure/amusement_arcade": {
-                    "name": "Salle de jeux",
-                    "terms": "<translate with synonyms or related terms for 'Amusement Arcade', separated by commas>"
+                    "name": "Salle de jeux"
                 },
                 "leisure/beach_resort": {
                     "name": "Station balnéaire",
@@ -4607,8 +4582,7 @@
                     "terms": "Observatoire d'oiseaux"
                 },
                 "leisure/bleachers": {
-                    "name": "Gradins",
-                    "terms": "<translate with synonyms or related terms for 'Bleachers', separated by commas>"
+                    "name": "Gradins"
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowling",
@@ -4623,8 +4597,7 @@
                     "terms": "piste de danse,salle de bal,dancing"
                 },
                 "leisure/dancing_school": {
-                    "name": "École de dance",
-                    "terms": "<translate with synonyms or related terms for 'Dance School', separated by commas>"
+                    "name": "École de dance"
                 },
                 "leisure/dog_park": {
                     "name": "Parc canin",
@@ -4648,7 +4621,7 @@
                 },
                 "leisure/fitness_station/balance_beam": {
                     "name": "Poutre (fitness en extérieur)",
-                    "terms": "Poutre "
+                    "terms": "Poutre"
                 },
                 "leisure/fitness_station/box": {
                     "name": "Boîte de saut",
@@ -4671,20 +4644,18 @@
                     "terms": "Barres parallèles"
                 },
                 "leisure/fitness_station/push-up": {
-                    "name": "Équipement pour pompes inclinées en extérieur",
-                    "terms": "<translate with synonyms or related terms for 'Push-Up Station', separated by commas>"
+                    "name": "Équipement pour pompes inclinées en extérieur"
                 },
                 "leisure/fitness_station/rings": {
                     "name": "Anneaux de gymnastique ",
-                    "terms": "Anneaux de gymnastique "
+                    "terms": "Anneaux de gymnastique"
                 },
                 "leisure/fitness_station/sign": {
                     "name": "Panneau d'instruction d'un exercice",
                     "terms": "Panneau d'instruction d'un exercice"
                 },
                 "leisure/fitness_station/sit-up": {
-                    "name": "Équipement pour abdominaux en extérieur",
-                    "terms": "<translate with synonyms or related terms for 'Sit-Up Station', separated by commas>"
+                    "name": "Équipement pour abdominaux en extérieur"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "Escalier d'exercices",
@@ -4723,8 +4694,7 @@
                     "terms": "Zone protégée"
                 },
                 "leisure/outdoor_seating": {
-                    "name": "Aire des places en terrasse",
-                    "terms": "<translate with synonyms or related terms for 'Outdoor Seating Area', separated by commas>"
+                    "name": "Aire des places en terrasse"
                 },
                 "leisure/park": {
                     "name": "Parc",
@@ -4836,7 +4806,7 @@
                 },
                 "leisure/track": {
                     "name": "Piste de course",
-                    "terms": "Piste hippique,piste d'athlétisme "
+                    "terms": "Piste hippique,piste d'athlétisme"
                 },
                 "leisure/water_park": {
                     "name": "Parc à thème aquatique",
@@ -4871,8 +4841,7 @@
                     "terms": "Cheminée"
                 },
                 "man_made/clearcut": {
-                    "name": "Coupe rase forestière",
-                    "terms": "<translate with synonyms or related terms for 'Clearcut Forest', separated by commas>"
+                    "name": "Coupe rase forestière"
                 },
                 "man_made/crane": {
                     "name": "Grue",
@@ -4974,28 +4943,23 @@
                     "terms": "Usine d'eau potable"
                 },
                 "man_made/watermill": {
-                    "name": "Moulin à eau",
-                    "terms": "<translate with synonyms or related terms for 'Watermill', separated by commas>"
+                    "name": "Moulin à eau"
                 },
                 "man_made/windmill": {
-                    "name": "Moulin à vent",
-                    "terms": "<translate with synonyms or related terms for 'Windmill', separated by commas>"
+                    "name": "Moulin à vent"
                 },
                 "man_made/works": {
                     "name": "Usine",
                     "terms": "Usine"
                 },
                 "manhole": {
-                    "name": "Bouche d'égout",
-                    "terms": "<translate with synonyms or related terms for 'Manhole', separated by commas>"
+                    "name": "Bouche d'égout"
                 },
                 "manhole/drain": {
-                    "name": "Collecteur d'eaux pluviales",
-                    "terms": "<translate with synonyms or related terms for 'Storm Drain', separated by commas>"
+                    "name": "Collecteur d'eaux pluviales"
                 },
                 "manhole/telecom": {
-                    "name": "Puit de télécommunication",
-                    "terms": "<translate with synonyms or related terms for 'Telecom Manhole', separated by commas>"
+                    "name": "Puit de télécommunication"
                 },
                 "natural": {
                     "name": "Nature",
@@ -5103,7 +5067,7 @@
                 },
                 "natural/water/reservoir": {
                     "name": "Bassin de retenue",
-                    "terms": "Réservoir "
+                    "terms": "Réservoir"
                 },
                 "natural/wetland": {
                     "name": "Zone humide",
@@ -5337,7 +5301,7 @@
                 },
                 "playground/balance_beam": {
                     "name": "Poutre (Jeux pour enfants)",
-                    "terms": "Poutre "
+                    "terms": "Poutre"
                 },
                 "playground/basket_spinner": {
                     "name": "Présentoir",
@@ -5403,12 +5367,10 @@
                     "terms": "Génératrice"
                 },
                 "power/generator/source_nuclear": {
-                    "name": "Centrale nucléaire",
-                    "terms": "<translate with synonyms or related terms for 'Nuclear Reactor', separated by commas>"
+                    "name": "Centrale nucléaire"
                 },
                 "power/generator/source_wind": {
-                    "name": "Centrale éolienne",
-                    "terms": "<translate with synonyms or related terms for 'Wind Turbine', separated by commas>"
+                    "name": "Centrale éolienne"
                 },
                 "power/line": {
                     "name": "Ligne électrique majeure",
@@ -5446,172 +5408,130 @@
                     "terms": "Transformateur"
                 },
                 "public_transport/linear_platform": {
-                    "name": "Quai de transport en commun",
-                    "terms": "<translate with synonyms or related terms for 'Transit Stop / Platform', separated by commas>"
+                    "name": "Quai de transport en commun"
                 },
                 "public_transport/linear_platform_aerialway": {
-                    "name": "Quai pour remontée mécanique",
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Stop / Platform', separated by commas>"
+                    "name": "Quai pour remontée mécanique"
                 },
                 "public_transport/linear_platform_bus": {
-                    "name": "Arrêt de bus",
-                    "terms": "<translate with synonyms or related terms for 'Bus Stop / Platform', separated by commas>"
+                    "name": "Arrêt de bus"
                 },
                 "public_transport/linear_platform_ferry": {
-                    "name": "Quai pour ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Stop / Platform', separated by commas>"
+                    "name": "Quai pour ferry"
                 },
                 "public_transport/linear_platform_light_rail": {
-                    "name": "Station de métro léger",
-                    "terms": "<translate with synonyms or related terms for 'Light Rail Stop / Platform', separated by commas>"
+                    "name": "Station de métro léger"
                 },
                 "public_transport/linear_platform_monorail": {
-                    "name": "Station de monorail",
-                    "terms": "<translate with synonyms or related terms for 'Monorail Stop / Platform', separated by commas>"
+                    "name": "Station de monorail"
                 },
                 "public_transport/linear_platform_subway": {
-                    "name": "Station de métro",
-                    "terms": "<translate with synonyms or related terms for 'Subway Stop / Platform', separated by commas>"
+                    "name": "Station de métro"
                 },
                 "public_transport/linear_platform_train": {
-                    "name": "Quai de gare ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Train Stop / Platform', separated by commas>"
+                    "name": "Quai de gare ferroviaire"
                 },
                 "public_transport/linear_platform_tram": {
-                    "name": "Quai pour tramway",
-                    "terms": "<translate with synonyms or related terms for 'Tram Stop / Platform', separated by commas>"
+                    "name": "Quai pour tramway"
                 },
                 "public_transport/linear_platform_trolleybus": {
-                    "name": "Quai pour trolleys",
-                    "terms": "<translate with synonyms or related terms for 'Trolleybus Stop / Platform', separated by commas>"
+                    "name": "Quai pour trolleys"
                 },
                 "public_transport/platform": {
-                    "name": "Quai de transport en commun",
-                    "terms": "<translate with synonyms or related terms for 'Transit Stop / Platform', separated by commas>"
+                    "name": "Quai de transport en commun"
                 },
                 "public_transport/platform_aerialway": {
-                    "name": "Quai pour remontée mécanique",
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Stop / Platform', separated by commas>"
+                    "name": "Quai pour remontée mécanique"
                 },
                 "public_transport/platform_bus": {
-                    "name": "Arrêt de bus",
-                    "terms": "<translate with synonyms or related terms for 'Bus Stop / Platform', separated by commas>"
+                    "name": "Arrêt de bus"
                 },
                 "public_transport/platform_ferry": {
-                    "name": "Quai pour ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Stop / Platform', separated by commas>"
+                    "name": "Quai pour ferry"
                 },
                 "public_transport/platform_light_rail": {
-                    "name": "Station de métro léger",
-                    "terms": "<translate with synonyms or related terms for 'Light Rail Stop / Platform', separated by commas>"
+                    "name": "Station de métro léger"
                 },
                 "public_transport/platform_monorail": {
-                    "name": "Station de monorail",
-                    "terms": "<translate with synonyms or related terms for 'Monorail Stop / Platform', separated by commas>"
+                    "name": "Station de monorail"
                 },
                 "public_transport/platform_subway": {
-                    "name": "Station de métro",
-                    "terms": "<translate with synonyms or related terms for 'Subway Stop / Platform', separated by commas>"
+                    "name": "Station de métro"
                 },
                 "public_transport/platform_train": {
-                    "name": "Quai de gare ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Train Stop / Platform', separated by commas>"
+                    "name": "Quai de gare ferroviaire"
                 },
                 "public_transport/platform_tram": {
-                    "name": "Quai pour tramway",
-                    "terms": "<translate with synonyms or related terms for 'Tram Stop / Platform', separated by commas>"
+                    "name": "Quai pour tramway"
                 },
                 "public_transport/platform_trolleybus": {
-                    "name": "Quai pour trolleys",
-                    "terms": "<translate with synonyms or related terms for 'Trolleybus Stop / Platform', separated by commas>"
+                    "name": "Quai pour trolleys"
                 },
                 "public_transport/station": {
-                    "name": "Station",
-                    "terms": "<translate with synonyms or related terms for 'Transit Station', separated by commas>"
+                    "name": "Station"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "Gare de remontée mécanique",
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Station', separated by commas>"
+                    "name": "Gare de remontée mécanique"
                 },
                 "public_transport/station_bus": {
-                    "name": "Gare routière",
-                    "terms": "<translate with synonyms or related terms for 'Bus Station / Terminal', separated by commas>"
+                    "name": "Gare routière"
                 },
                 "public_transport/station_ferry": {
-                    "name": "Terminal ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Station / Terminal', separated by commas>"
+                    "name": "Terminal ferry"
                 },
                 "public_transport/station_light_rail": {
-                    "name": "Station de tramway",
-                    "terms": "<translate with synonyms or related terms for 'Light Rail Station', separated by commas>"
+                    "name": "Station de tramway"
                 },
                 "public_transport/station_monorail": {
-                    "name": "Station de monorail",
-                    "terms": "<translate with synonyms or related terms for 'Monorail Station', separated by commas>"
+                    "name": "Station de monorail"
                 },
                 "public_transport/station_subway": {
-                    "name": "Station de métro",
-                    "terms": "<translate with synonyms or related terms for 'Subway Station', separated by commas>"
+                    "name": "Station de métro"
                 },
                 "public_transport/station_train": {
-                    "name": "Gare ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Train Station', separated by commas>"
+                    "name": "Gare ferroviaire"
                 },
                 "public_transport/station_train_halt": {
-                    "name": "Gare ferroviaire (arrêt à la demande)",
-                    "terms": "<translate with synonyms or related terms for 'Train Station (Halt / Request)', separated by commas>"
+                    "name": "Gare ferroviaire (arrêt à la demande)"
                 },
                 "public_transport/station_tram": {
-                    "name": "Station de tramway",
-                    "terms": "<translate with synonyms or related terms for 'Tram Station', separated by commas>"
+                    "name": "Station de tramway"
                 },
                 "public_transport/station_trolleybus": {
-                    "name": "Gare de trolleys",
-                    "terms": "<translate with synonyms or related terms for 'Trolleybus Station / Terminal', separated by commas>"
+                    "name": "Gare de trolleys"
                 },
                 "public_transport/stop_area": {
-                    "name": "Zone d'arrêt",
-                    "terms": "<translate with synonyms or related terms for 'Transit Stop Area', separated by commas>"
+                    "name": "Zone d'arrêt"
                 },
                 "public_transport/stop_position": {
-                    "name": "Emplacement d'arrêt",
-                    "terms": "<translate with synonyms or related terms for 'Transit Stopping Location', separated by commas>"
+                    "name": "Emplacement d'arrêt"
                 },
                 "public_transport/stop_position_aerialway": {
-                    "name": "Emplacement où s'arrête la remontée mécanique",
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête la remontée mécanique"
                 },
                 "public_transport/stop_position_bus": {
-                    "name": "Emplacement où s'arrête le bus",
-                    "terms": "<translate with synonyms or related terms for 'Bus Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le bus"
                 },
                 "public_transport/stop_position_ferry": {
-                    "name": "Emplacement où s'arrête le ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le ferry"
                 },
                 "public_transport/stop_position_light_rail": {
-                    "name": "Emplacement où s'arrête le train-tram",
-                    "terms": "<translate with synonyms or related terms for 'Light Rail Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le train-tram"
                 },
                 "public_transport/stop_position_monorail": {
-                    "name": "Emplacement où s'arrête le monorail",
-                    "terms": "<translate with synonyms or related terms for 'Monorail Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le monorail"
                 },
                 "public_transport/stop_position_subway": {
-                    "name": "Emplacement où s'arrête le métro",
-                    "terms": "<translate with synonyms or related terms for 'Subway Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le métro"
                 },
                 "public_transport/stop_position_train": {
-                    "name": "Emplacement où s'arrête le train",
-                    "terms": "<translate with synonyms or related terms for 'Train Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le train"
                 },
                 "public_transport/stop_position_tram": {
-                    "name": "Emplacement où s'arrête le tramway",
-                    "terms": "<translate with synonyms or related terms for 'Tram Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le tramway"
                 },
                 "public_transport/stop_position_trolleybus": {
-                    "name": "Emplacement où s'arrête le trolley",
-                    "terms": "<translate with synonyms or related terms for 'Trolleybus Stopping Location', separated by commas>"
+                    "name": "Emplacement où s'arrête le trolley"
                 },
                 "railway": {
                     "name": "Ferroviaire"
@@ -5621,16 +5541,14 @@
                     "terms": "Voie ferrée abandonnée"
                 },
                 "railway/buffer_stop": {
-                    "name": "Butoir",
-                    "terms": "<translate with synonyms or related terms for 'Buffer Stop', separated by commas>"
+                    "name": "Butoir"
                 },
                 "railway/crossing": {
                     "name": "Passage à niveau (piétons)",
                     "terms": "Passage à niveau (chemin)"
                 },
                 "railway/derail": {
-                    "name": "Dérailleur Ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Railway Derailer', separated by commas>"
+                    "name": "Dérailleur Ferroviaire"
                 },
                 "railway/disused": {
                     "name": "Voie ferrée désaffectée",
@@ -5652,12 +5570,10 @@
                     "terms": "Métro léger"
                 },
                 "railway/milestone": {
-                    "name": "Borne kilométrique ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Railway Milestone', separated by commas>"
+                    "name": "Borne kilométrique ferroviaire"
                 },
                 "railway/miniature": {
-                    "name": "Train miniature à passagers",
-                    "terms": "<translate with synonyms or related terms for 'Miniature Railway', separated by commas>"
+                    "name": "Train miniature à passagers"
                 },
                 "railway/monorail": {
                     "name": "Monorail",
@@ -5675,8 +5591,7 @@
                     "terms": "Rail"
                 },
                 "railway/signal": {
-                    "name": "Feux tricolores Ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Railway Signal', separated by commas>"
+                    "name": "Feux tricolores Ferroviaire"
                 },
                 "railway/station": {
                     "name": "Gare ferroviaire"
@@ -5690,12 +5605,10 @@
                     "terms": "Entrée de métro, Bouche de métro"
                 },
                 "railway/switch": {
-                    "name": "Commutateur Ferroviaire",
-                    "terms": "<translate with synonyms or related terms for 'Railway Switch', separated by commas>"
+                    "name": "Commutateur Ferroviaire"
                 },
                 "railway/train_wash": {
-                    "name": "Lavage de Train",
-                    "terms": "<translate with synonyms or related terms for 'Train Wash', separated by commas>"
+                    "name": "Lavage de Train"
                 },
                 "railway/tram": {
                     "name": "Tramway",
@@ -5720,8 +5633,7 @@
                     "terms": "Magasin,Boutique"
                 },
                 "shop/agrarian": {
-                    "name": "Magasin de produits de la ferme",
-                    "terms": "<translate with synonyms or related terms for 'Farm Supply Shop', separated by commas>"
+                    "name": "Magasin de produits de la ferme"
                 },
                 "shop/alcohol": {
                     "name": "Magasin de vente d'alcool",
@@ -5962,8 +5874,7 @@
                     "terms": "Quincaillerie"
                 },
                 "shop/health_food": {
-                    "name": "Magasin d'alimentation de santé",
-                    "terms": "<translate with synonyms or related terms for 'Health Food Shop', separated by commas>"
+                    "name": "Magasin d'alimentation de santé"
                 },
                 "shop/hearing_aids": {
                     "name": "Audioprothésiste",
@@ -6103,7 +6014,7 @@
                 },
                 "shop/radiotechnics": {
                     "name": "Magasin de composants électroniques et de radio ",
-                    "terms": "Magasin de composants électroniques et de radio "
+                    "terms": "Magasin de composants électroniques et de radio"
                 },
                 "shop/religion": {
                     "name": "Magasin d'articles religieux",
@@ -6213,8 +6124,7 @@
                     "terms": "Armurerie"
                 },
                 "shop/wholesale": {
-                    "name": "Commerce de gros",
-                    "terms": "<translate with synonyms or related terms for 'Wholesale Store', separated by commas>"
+                    "name": "Commerce de gros"
                 },
                 "shop/window_blind": {
                     "name": "Magasin de vente de stores",
@@ -6313,8 +6223,7 @@
                     "terms": "Parc à thème, parc d'attractions"
                 },
                 "tourism/trail_riding_station": {
-                    "name": "Station équestre",
-                    "terms": "<translate with synonyms or related terms for 'Trail Riding Station', separated by commas>"
+                    "name": "Station équestre"
                 },
                 "tourism/viewpoint": {
                     "name": "Point de vue",
@@ -6385,7 +6294,7 @@
                 },
                 "type/restriction/no_left_turn": {
                     "name": "Interdiction de tourner à gauche ",
-                    "terms": "Interdiction de tourner à gauche "
+                    "terms": "Interdiction de tourner à gauche"
                 },
                 "type/restriction/no_right_turn": {
                     "name": "Interdiction de tourner à droite",
@@ -6561,6 +6470,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Orthophoto la plus récente de la Flandre © AGIV"
+                },
+                "name": "Images aériennes AGIV les plus récentes de la Flandre"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto de la Flandre © AGIV"
+                },
+                "name": "Images aériennes 10cm AGIV de la Flandre 2013-2015"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flandres © AGIV"
+                },
+                "name": "AGIV Flandres GRB"
+            },
             "Bing": {
                 "description": "Images satellite et aérienne.",
                 "name": "Images aériennes Bing"
@@ -6569,7 +6496,6 @@
                 "attribution": {
                     "text": "Termes & commentaires"
                 },
-                "description": "Images satellite DigitalGlobe premium",
                 "name": "Images DigitalGlobe premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6583,7 +6509,6 @@
                 "attribution": {
                     "text": "Termes & commentaires"
                 },
-                "description": "Images satellite DigitalGlobe standard",
                 "name": "Images DigitalGlobe standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6663,6 +6588,12 @@
                 },
                 "name": "OSM Inspector: Étiqueter"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "Imagerie aérienne SPW(allonie) la plus récente"
+            },
+            "SPW_PICC": {
+                "name": "Imagerie numérique SPW(allonie) PICC"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "Données géographiques et topologiques intégrées et encodées 2012"
             },
@@ -6677,6 +6608,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Voies : en vert route non classifiée, en marron piste. Surface : les graviers sont représentés par un remplissage marron, l'asphalte par du noir, les pavés par du gris, la terre par du blanc, le béton par du bleu, l'herbe par du vert. Les voies saisonnières ont des barres blanches.",
                 "name": "Surcouche des routes forestières états-uniennes"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Financé par Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Financé par Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Financé par Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Financé par Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6760,6 +6715,13 @@
                 },
                 "name": "OpenStreetMap (style allemand)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Numérisation de ´Economic maps´ de 1950-1980",
+                "name": "Carte économique (historique) de Lantmäteriet"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, données © contributeurs OpenStreetMap"
@@ -6789,6 +6751,48 @@
                     "text": "Cartes © Thunderforest, données © contributeurs OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Réseau ferroviaire suédois, y compris les embranchements",
+                "name": "Réseau ferroviaire Trafikverket"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Réseau ferroviaire suédois avec plusieurs possibilités pour les couches",
+                "name": "Options pour le réseau ferroviaire Trafikverket"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Réseau routier suédois NVDB",
+                "name": "Réseau routier Trafikverket"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Détails supplémentaires pour la NVDB suédoise : numérotation des routes, ralentisseurs, aires de repos, arrêts de bus, tunnels, radars",
+                "name": "Suppléments au réseau routier Trafikverket"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Noms des rues de la NVDB suédoise",
+                "name": "Noms des rues du Trafikverket"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Réseau routier de la NVDB suédoise avec plusieurs possibilités pour les couches",
+                "name": "Options pour le réseau routier Trafikverket"
             }
         },
         "community": {
@@ -7032,6 +7036,18 @@
                 "name": "Fil Twitter d'OpenStreetMap Belgique",
                 "description": "OSM Belgique sur Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "Groupe Facebook d'OpenStreetMap Croatie",
+                "description": "Groupe Facebook d'OpenStreetMap Croatie"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Croatie sur IRC",
+                "description": "Rejoignez #osm-hr sur irc.freenode.org (port 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Liste de diffusion Talk-hr",
+                "description": "Liste de diffusion Talk-hr"
+            },
             "czech-community": {
                 "name": "Communauté OSM tchèque",
                 "description": "Portail cartographique, site web et contacts des membres OSM en République Tchèque"
@@ -7201,6 +7217,14 @@
             "OSM-PL-forum": {
                 "name": "Forum d'OpenStreetMap Pologne",
                 "description": "Forum de la communauté polonaise d'OpenStreetMap"
+            },
+            "si-forum": {
+                "name": "Forum d'OpenStreetMap Slovénie",
+                "description": "Forum de la communauté OpenStreetMap en Slovénie"
+            },
+            "si-mailinglist": {
+                "name": "Liste de diffusion d'OpenStreetMap Slovénie",
+                "description": "Liste de diffusion de la communauté OpenStreetMap en Slovénie"
             },
             "OSM-ES-mailinglist": {
                 "name": "Liste de diffusion Talk-es",

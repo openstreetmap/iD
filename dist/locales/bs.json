@@ -1620,7 +1620,7 @@
                 },
                 "power/generator": {
                     "name": "Generator električne energije",
-                    "terms": "generator el. energije,generator "
+                    "terms": "generator el. energije,generator"
                 },
                 "power/line": {
                     "name": "Energetski vod",

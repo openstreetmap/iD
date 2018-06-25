@@ -1820,6 +1820,9 @@
                 "except": {
                     "label": "Exceções"
                 },
+                "faces": {
+                    "label": "Caras"
+                },
                 "fax": {
                     "label": "Fax",
                     "placeholder": "+351 211 123456"
@@ -1944,6 +1947,9 @@
                     }
                 },
                 "horse_scale": {
+                    "options": {
+                        "common": "Fácil: Sem problemas ou dificuldades. (padrão)"
+                    },
                     "placeholder": "Difícil, perigoso..."
                 },
                 "horse_stables": {
@@ -2250,6 +2256,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Telefone",
                     "placeholder": "+351 211 123456"
                 },
                 "piste/difficulty": {
@@ -2687,7 +2694,9 @@
                 "usage_rail": {
                     "label": "Tipo de Utilização",
                     "options": {
+                        "branch": "Ramo",
                         "industrial": "Industrial",
+                        "main": "Principal",
                         "military": "Militar",
                         "test": "Testes",
                         "tourism": "Turismo"
@@ -2788,6 +2797,9 @@
                 "advertising/billboard": {
                     "name": "Outdoor",
                     "terms": "Billboard, publicidade"
+                },
+                "advertising/column": {
+                    "name": "Coluna de publicidade"
                 },
                 "aerialway": {
                     "name": "Transporte aéreo por cabo"
@@ -2950,7 +2962,7 @@
                 },
                 "amenity/car_sharing": {
                     "name": "Partilha de automóveis",
-                    "terms": "Partilha de Carros, Partilha de Veículos "
+                    "terms": "Partilha de Carros, Partilha de Veículos"
                 },
                 "amenity/car_wash": {
                     "name": "Lavagem de veículos",
@@ -3104,7 +3116,7 @@
                 },
                 "amenity/nightclub": {
                     "name": "Discoteca",
-                    "terms": "Nightclub, Salão de Dança, disco, clube noturno, "
+                    "terms": "Nightclub, Salão de Dança, disco, clube noturno,"
                 },
                 "amenity/nursing_home": {
                     "name": "Lar de idosos"
@@ -3171,7 +3183,7 @@
                 },
                 "amenity/police": {
                     "name": "Esquadra",
-                    "terms": "Polícia, GNR, G.N.R., PSP, P.S.P., Polícia de Segurança Pública, Guarda Nacional Republicana, Judiciária, Polícia Marítima, posto de polícia, "
+                    "terms": "Polícia, GNR, G.N.R., PSP, P.S.P., Polícia de Segurança Pública, Guarda Nacional Republicana, Judiciária, Polícia Marítima, posto de polícia,"
                 },
                 "amenity/post_box": {
                     "name": "Marco de correio",
@@ -3202,8 +3214,7 @@
                     "terms": "Ranger Station, Guarda Florestal"
                 },
                 "amenity/recycling": {
-                    "name": "Contentor reciclagem",
-                    "terms": "<translate with synonyms or related terms for 'Recycling Container', separated by commas>"
+                    "name": "Contentor reciclagem"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro de Reciclagem",
@@ -3298,6 +3309,9 @@
                     "name": "Máquina de tabaco",
                     "terms": "Cigarette Vending Machine, Tabaco, Cigarros"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Máquina de venda de café"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Dispensador de preservativos ",
                     "terms": "Condom Vending Machine, Máquina de venda de preservativos, preservativo"
@@ -3313,6 +3327,15 @@
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Máquina de Venda de Produtos de Higiene Feminina",
                     "terms": "Higiene Feminina"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Máquina de venda de alimentos"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Bomba de combustível"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Máquina de venda de gelados"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Máquina de venda automática de jornais"
@@ -3371,7 +3394,7 @@
                 },
                 "area/highway": {
                     "name": "Superfície da Estrada",
-                    "terms": "tipo de piso, piso, superfície estrada, tipo superfície, "
+                    "terms": "tipo de piso, piso, superfície estrada, tipo superfície,"
                 },
                 "attraction/amusement_ride": {
                     "name": "Atração de Parque de Diversões",
@@ -3403,7 +3426,10 @@
                 },
                 "attraction/drop_tower": {
                     "name": "Torre de Queda Livre",
-                    "terms": "Drop Towe, torre de caída, cair, caída, base jump, "
+                    "terms": "Drop Towe, torre de caída, cair, caída, base jump,"
+                },
+                "attraction/maze": {
+                    "name": "Labirinto"
                 },
                 "attraction/pirate_ship": {
                     "name": "Barco Pirata",
@@ -3517,7 +3543,7 @@
                 },
                 "building/cabin": {
                     "name": "Cabine",
-                    "terms": "Cabin, Praia, Campo, Cabana "
+                    "terms": "Cabin, Praia, Campo, Cabana"
                 },
                 "building/cathedral": {
                     "name": "Edifício de catedral",
@@ -3591,8 +3617,7 @@
                     "terms": "Preschool/Kindergarten Building"
                 },
                 "building/mosque": {
-                    "name": "Edifício Mesquita",
-                    "terms": "<translate with synonyms or related terms for 'Mosque Building', separated by commas>"
+                    "name": "Edifício Mesquita"
                 },
                 "building/public": {
                     "name": "Edifício público",
@@ -3610,6 +3635,9 @@
                     "name": "Cobertura",
                     "terms": "Roof, Coberto, Telhado"
                 },
+                "building/ruins": {
+                    "name": "Ruínas de edifício"
+                },
                 "building/school": {
                     "name": "Edifício escolar",
                     "terms": "School Building, Pavilhão Escolar, Escola"
@@ -3617,6 +3645,9 @@
                 "building/semidetached_house": {
                     "name": "Casa Semi-isolada",
                     "terms": "Semi-Detached House"
+                },
+                "building/service": {
+                    "name": "Edifício de serviços"
                 },
                 "building/shed": {
                     "name": "Barracão",
@@ -3626,9 +3657,12 @@
                     "name": "Estábulo",
                     "terms": "Stable, Cavalo, Cavalos, Cavalariça, Cavalariças"
                 },
+                "building/stadium": {
+                    "name": "Edifício do Estádio"
+                },
                 "building/static_caravan": {
                     "name": "Casa pré-fabricada",
-                    "terms": "Static Mobile Home, Trailer, Caravana, "
+                    "terms": "Static Mobile Home, Trailer, Caravana,"
                 },
                 "building/terrace": {
                     "name": "Casas geminadas",
@@ -3855,13 +3889,16 @@
                 },
                 "emergency/defibrillator": {
                     "name": "Desfibrilador",
-                    "terms": "Defibrillator "
+                    "terms": "Defibrillator"
                 },
                 "emergency/designated": {
                     "name": "Acesso de emergência, designado"
                 },
                 "emergency/destination": {
                     "name": "Acesso de emergência, destino"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Extintor de incêndio"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Boca de incêndio",
@@ -3893,7 +3930,7 @@
                 },
                 "footway/crossing": {
                     "name": "Passadeira de peões",
-                    "terms": "passadeira, zebra, atravessamento de peões, passadeira zebra, "
+                    "terms": "passadeira, zebra, atravessamento de peões, passadeira zebra,"
                 },
                 "footway/crossing-raised": {
                     "name": "Sobreelevação superfície de atravessamento (+3m de comprimento)",
@@ -3901,7 +3938,7 @@
                 },
                 "footway/crosswalk": {
                     "name": "Passadeira de peões",
-                    "terms": "passadeira pedonal, faixa de segurança, zebra, zebra cross, marcas transversais, passadeira com marcas transversais, "
+                    "terms": "passadeira pedonal, faixa de segurança, zebra, zebra cross, marcas transversais, passadeira com marcas transversais,"
                 },
                 "footway/crosswalk-raised": {
                     "name": "Passadeira de peões elevada (+3m de comprimento)",
@@ -3957,7 +3994,7 @@
                 },
                 "healthcare": {
                     "name": "Instalações de Saúde",
-                    "terms": "saúde, cuidados médicos, medicina, cuidados de saúde, clínica, "
+                    "terms": "saúde, cuidados médicos, medicina, cuidados de saúde, clínica,"
                 },
                 "healthcare/alternative": {
                     "name": "Medicina Alternativa",
@@ -4055,7 +4092,7 @@
                 },
                 "highway/footway": {
                     "name": "Caminho pedonal",
-                    "terms": "Andar, Caminho, Estrada, Pé, Pedestre, Percurso, Rua, Ruela, Trajectória, Trilha, Trilho, Via, Viela, Caminho Pedonal, beco, vereda, "
+                    "terms": "Andar, Caminho, Estrada, Pé, Pedestre, Percurso, Rua, Ruela, Trajectória, Trilha, Trilho, Via, Viela, Caminho Pedonal, beco, vereda,"
                 },
                 "highway/give_way": {
                     "name": "Sinal de cedência de passagem",
@@ -4080,6 +4117,9 @@
                 "highway/motorway_link": {
                     "name": "Ligação a uma autoestrada",
                     "terms": "Ligação Autoestrada, Entrada Autoestrada, Saída Autoestrada"
+                },
+                "highway/passing_place": {
+                    "name": "Lugar de passagem"
                 },
                 "highway/path": {
                     "name": "Trilho pedestre",
@@ -4131,7 +4171,7 @@
                 },
                 "highway/service/alley": {
                     "name": "Viela / Traseiras",
-                    "terms": "Traseiras, beco (com acesso para carros), estrada estreita, caminho estreito, beco estreito, viela, "
+                    "terms": "Traseiras, beco (com acesso para carros), estrada estreita, caminho estreito, beco estreito, viela,"
                 },
                 "highway/service/drive-through": {
                     "name": "Serviço ao volante (sem sair do carro)",
@@ -4179,7 +4219,7 @@
                 },
                 "highway/track": {
                     "name": "Estrada florestal / agrícola",
-                    "terms": "Estrada de terra, estrada agrícola, Track, Estrada Rural, Carreiro, Carreiro Florestal "
+                    "terms": "Estrada de terra, estrada agrícola, Track, Estrada Rural, Carreiro, Carreiro Florestal"
                 },
                 "highway/traffic_mirror": {
                     "name": "Espelho rodoviário",
@@ -4187,7 +4227,7 @@
                 },
                 "highway/traffic_signals": {
                     "name": "Semáforos",
-                    "terms": "Semáforo, Vermelho, Verde, Amarelo, Sinal, Sinal de Trânsito, sinal luminoso, sinalização vertical, "
+                    "terms": "Semáforo, Vermelho, Verde, Amarelo, Sinal, Sinal de Trânsito, sinal luminoso, sinalização vertical,"
                 },
                 "highway/trunk": {
                     "name": "Via rápida",
@@ -4243,7 +4283,7 @@
                 },
                 "historic/wayside_cross": {
                     "name": "Cruzeiro",
-                    "terms": " Cruz ao Ar Livre, Cruz"
+                    "terms": "Cruz ao Ar Livre, Cruz"
                 },
                 "historic/wayside_shrine": {
                     "name": "Alminhas / Nicho / Capelinha",
@@ -4313,8 +4353,7 @@
                     "terms": "loteamento"
                 },
                 "landuse/greenhouse_horticulture": {
-                    "name": "Estufa Horticultura",
-                    "terms": "<translate with synonyms or related terms for 'Greenhouse Horticulture', separated by commas>"
+                    "name": "Estufa Horticultura"
                 },
                 "landuse/harbour": {
                     "name": "Porto Marítimo",
@@ -4409,8 +4448,7 @@
                     "terms": "Recreation Ground"
                 },
                 "landuse/religious": {
-                    "name": "Área religiosa",
-                    "terms": "<translate with synonyms or related terms for 'Religious Area', separated by commas>"
+                    "name": "Área religiosa"
                 },
                 "landuse/residential": {
                     "name": "Área residencial",
@@ -4477,16 +4515,14 @@
                     "terms": "trave, equilíbrio, barra, balanço"
                 },
                 "leisure/fitness_station/box": {
-                    "name": "Caixa de Exercícios",
-                    "terms": "<translate with synonyms or related terms for 'Exercise Box', separated by commas>"
+                    "name": "Caixa de Exercícios"
                 },
                 "leisure/fitness_station/horizontal_bar": {
                     "name": "Barra Fixa Horizontal",
                     "terms": "barra, horizontal"
                 },
                 "leisure/fitness_station/horizontal_ladder": {
-                    "name": "Escada Horizontal",
-                    "terms": "<translate with synonyms or related terms for 'Exercise Monkey Bars', separated by commas>"
+                    "name": "Escada Horizontal"
                 },
                 "leisure/fitness_station/hyperextension": {
                     "name": "Dispositivo de Extensões",
@@ -4505,8 +4541,7 @@
                     "terms": "Argolas"
                 },
                 "leisure/fitness_station/sign": {
-                    "name": "Placa de Instruções de Exercício",
-                    "terms": "<translate with synonyms or related terms for 'Exercise Instruction Sign', separated by commas>"
+                    "name": "Placa de Instruções de Exercício"
                 },
                 "leisure/fitness_station/sit-up": {
                     "name": "Dispositivo para Abdominais",
@@ -4577,8 +4612,7 @@
                     "terms": "Vólei, campo, praia, voleibol, volley"
                 },
                 "leisure/pitch/boules": {
-                    "name": "Campo de Boules/Boccia",
-                    "terms": "<translate with synonyms or related terms for 'Boules/Bocce Court', separated by commas>"
+                    "name": "Campo de Boules/Boccia"
                 },
                 "leisure/pitch/bowls": {
                     "name": "Campo de boccia",
@@ -4721,7 +4755,7 @@
                 },
                 "man_made/monitoring_station": {
                     "name": "Estação de monitorização",
-                    "terms": "estação, medição, monitorizar, "
+                    "terms": "estação, medição, monitorizar,"
                 },
                 "man_made/observation": {
                     "name": "Torre de observação",
@@ -4855,6 +4889,9 @@
                     "name": "Charneca",
                     "terms": "Heath"
                 },
+                "natural/mud": {
+                    "name": "Lama"
+                },
                 "natural/peak": {
                     "name": "Pico / Cume",
                     "terms": "Peak, Montanha, Pináculo"
@@ -4983,8 +5020,7 @@
                     "terms": "Guarda Florestal"
                 },
                 "office/foundation": {
-                    "name": "Fundação",
-                    "terms": "<translate with synonyms or related terms for 'Foundation Office', separated by commas>"
+                    "name": "Fundação"
                 },
                 "office/government": {
                     "name": "Escritório da administração nacional",
@@ -4992,7 +5028,7 @@
                 },
                 "office/government/register_office": {
                     "name": "Conservatória do Registo Civil",
-                    "terms": "Register Office, Conservatória, Registo Civil, Registo, Nascimento, Casamento, Óbito, Divórcio, Conservatória dos Registos Centrais, estado civil, "
+                    "terms": "Register Office, Conservatória, Registo Civil, Registo, Nascimento, Casamento, Óbito, Divórcio, Conservatória dos Registos Centrais, estado civil,"
                 },
                 "office/government/tax": {
                     "name": "Finanças",
@@ -5007,8 +5043,7 @@
                     "terms": "Insurance Office, Seguros, Seguro"
                 },
                 "office/it": {
-                    "name": "Escritório de Tecnologia da Informação",
-                    "terms": "<translate with synonyms or related terms for 'Information Technology Office', separated by commas>"
+                    "name": "Escritório de Tecnologia da Informação"
                 },
                 "office/lawyer": {
                     "name": "Escritório de advogados",
@@ -5038,7 +5073,7 @@
                 },
                 "office/political_party": {
                     "name": "Sede/filial de partido político",
-                    "terms": "Political Party, Partido, Partidos, sede partido, sede partidária, política, sede política, "
+                    "terms": "Political Party, Partido, Partidos, sede partido, sede partidária, política, sede política,"
                 },
                 "office/private_investigator": {
                     "name": "Detetive Privado",
@@ -5053,8 +5088,7 @@
                     "terms": "Research Office, Escritório de Investigação, Centro de Pesquisa"
                 },
                 "office/surveyor": {
-                    "name": "Empresa de Agrimensura",
-                    "terms": "<translate with synonyms or related terms for 'Surveyor Office', separated by commas>"
+                    "name": "Empresa de Agrimensura"
                 },
                 "office/tax_advisor": {
                     "name": "Escritório de Assessor Fiscal",
@@ -5236,8 +5270,7 @@
                     "terms": "Substation, energia, Sub-estação, Sub estação, Distribuição"
                 },
                 "power/switch": {
-                    "name": "Interruptor",
-                    "terms": "<translate with synonyms or related terms for 'Power Switch', separated by commas>"
+                    "name": "Interruptor"
                 },
                 "power/tower": {
                     "name": "Torre de alta tensão",
@@ -5327,8 +5360,7 @@
                     "terms": "Railway Milestone, marco quilométrico"
                 },
                 "railway/miniature": {
-                    "name": "Caminho de ferro em miniatura",
-                    "terms": "<translate with synonyms or related terms for 'Miniature Railway', separated by commas>"
+                    "name": "Caminho de ferro em miniatura"
                 },
                 "railway/monorail": {
                     "name": "Monocarril",
@@ -5355,7 +5387,7 @@
                 },
                 "railway/subway_entrance": {
                     "name": "Entrada de metro",
-                    "terms": "Entrada do Metro, Metro, Metropolitano, Subterrâneo "
+                    "terms": "Entrada do Metro, Metro, Metropolitano, Subterrâneo"
                 },
                 "railway/switch": {
                     "name": "Agulha de Ferrovia",
@@ -5647,8 +5679,7 @@
                     "terms": "Jeweler, Jóias, Jóia"
                 },
                 "shop/kiosk": {
-                    "name": "Quiosque",
-                    "terms": "<translate with synonyms or related terms for 'Kiosk', separated by commas>"
+                    "name": "Quiosque"
                 },
                 "shop/kitchen": {
                     "name": "Loja de cozinhas",
@@ -5819,8 +5850,7 @@
                     "terms": "Loja de Brinquedos"
                 },
                 "shop/trade": {
-                    "name": "Loja de Trocas",
-                    "terms": "<translate with synonyms or related terms for 'Trade Shop', separated by commas>"
+                    "name": "Loja de Trocas"
                 },
                 "shop/travel_agency": {
                     "name": "Agência de viagens",
@@ -5851,7 +5881,7 @@
                 },
                 "shop/watches": {
                     "name": "Loja de relógios",
-                    "terms": "relojoaria, Relojoeiro "
+                    "terms": "relojoaria, Relojoeiro"
                 },
                 "shop/water_sports": {
                     "name": "Loja de material de natação",
@@ -5935,7 +5965,7 @@
                 },
                 "tourism/information/guidepost": {
                     "name": "Poste com direções",
-                    "terms": "poste de direções, poste com direções, poste com direções, direção, direção, direções, direções, sinalética, sinalética direções, "
+                    "terms": "poste de direções, poste com direções, poste com direções, direção, direção, direções, direções, sinalética, sinalética direções,"
                 },
                 "tourism/information/map": {
                     "name": "Mapa",
@@ -6066,11 +6096,11 @@
                 },
                 "type/route/foot": {
                     "name": "Rota pedestre",
-                    "terms": "rota pedonal, percurso pedestre, percurso pedonal, circuito pedonal, "
+                    "terms": "rota pedonal, percurso pedestre, percurso pedonal, circuito pedonal,"
                 },
                 "type/route/hiking": {
                     "name": "Rota de caminhada",
-                    "terms": "Hiking rota, hiking, trekking, Rota de caminhada, circuito pedestre, percurso recomendado, pequena rota, grande rota, rota levada, rota trail, percurso trail, percurso levada, "
+                    "terms": "Hiking rota, hiking, trekking, Rota de caminhada, circuito pedestre, percurso recomendado, pequena rota, grande rota, rota levada, rota trail, percurso trail, percurso levada,"
                 },
                 "type/route/horse": {
                     "name": "Rota de equitação",
@@ -6118,7 +6148,7 @@
                 },
                 "type/waterway": {
                     "name": "Curso de Água",
-                    "terms": "Hidrovia, Curso, Rio, Canal, levada, ribeiro, ribeira, córrego, área inundável, inundável, inundada, bacia, hidrologia, hídrica, "
+                    "terms": "Hidrovia, Curso, Rio, Canal, levada, ribeiro, ribeira, córrego, área inundável, inundável, inundada, bacia, hidrologia, hídrica,"
                 },
                 "vertex": {
                     "name": "Outro",
@@ -6129,7 +6159,7 @@
                 },
                 "waterway/boatyard": {
                     "name": "Estaleiro",
-                    "terms": "Boatyard, Barcos, Barco, Embarcações, Embarcação, Reparação, Construção, varadouro, "
+                    "terms": "Boatyard, Barcos, Barco, Embarcações, Embarcação, Reparação, Construção, varadouro,"
                 },
                 "waterway/canal": {
                     "name": "Canal",
@@ -6165,7 +6195,7 @@
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Escoamento sanitário para embarcações",
-                    "terms": "resíduos barcos, águas residuais embarcações, águas residuais barcos, escoamento águas residuais embarcações, escoamento águas residuais barcos, "
+                    "terms": "resíduos barcos, águas residuais embarcações, águas residuais barcos, escoamento águas residuais embarcações, escoamento águas residuais barcos,"
                 },
                 "waterway/stream": {
                     "name": "Ribeiro",
@@ -6198,7 +6228,6 @@
                 "attribution": {
                     "text": "Termos e opinião"
                 },
-                "description": "Imagens aéreas DigitalGlobe Premium.",
                 "name": "DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6212,7 +6241,6 @@
                 "attribution": {
                     "text": "Termos e opinião"
                 },
-                "description": "Imagens aéreas DigitalGlobe Standard.",
                 "name": "DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

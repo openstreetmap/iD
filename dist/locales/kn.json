@@ -1446,24 +1446,11 @@
                 "aeroway/aerodrome": {
                     "name": "ವಿಮಾನ ನಿಲ್ದಾಣ"
                 },
-                "aeroway/hangar": {
-                    "terms": "<translate with synonyms or related terms for 'Hangar', separated by commas>"
-                },
-                "aeroway/helipad": {
-                    "terms": "<translate with synonyms or related terms for 'Helipad', separated by commas>"
-                },
                 "aeroway/runway": {
-                    "name": "ಓಡುದಾರಿ",
-                    "terms": "<translate with synonyms or related terms for 'Runway', separated by commas>"
-                },
-                "aeroway/taxiway": {
-                    "terms": "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
+                    "name": "ಓಡುದಾರಿ"
                 },
                 "amenity": {
                     "name": "ಸೌಕರ್ಯ"
-                },
-                "amenity/arts_centre": {
-                    "terms": "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
                 },
                 "amenity/atm": {
                     "name": "ಎಟಿಎಮ್ "
@@ -1471,18 +1458,8 @@
                 "amenity/bank": {
                     "name": "ಬ್ಯಾಂಕ್"
                 },
-                "amenity/bar": {
-                    "terms": "<translate with synonyms or related terms for 'Bar', separated by commas>"
-                },
-                "amenity/bbq": {
-                    "terms": "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
-                },
                 "amenity/bench": {
-                    "name": " ನ್ಯಾಯಪೀಠ",
-                    "terms": "<translate with synonyms or related terms for 'Bench', separated by commas>"
-                },
-                "amenity/bicycle_parking": {
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
+                    "name": " ನ್ಯಾಯಪೀಠ"
                 },
                 "amenity/cinema": {
                     "name": "ಸಿನಿಮಾ"

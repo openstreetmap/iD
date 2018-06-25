@@ -716,6 +716,8 @@
             "browse": "Duyệt tập tin"
         },
         "streetside": {
+            "tooltip": "Hình ảnh Streetside của Microsoft",
+            "title": "Lớp phủ Hình ảnh (Bing Streetside)",
             "report": "Báo cáo lo ngại riêng tư trong hình"
         },
         "mapillary_images": {
@@ -2490,6 +2492,17 @@
                 "shop": {
                     "label": "Kiểu"
                 },
+                "siren/purpose": {
+                    "label": "Mục đích"
+                },
+                "siren/type": {
+                    "label": "Kiểu",
+                    "options": {
+                        "electronic": "Điện tử",
+                        "other": "Khác",
+                        "pneumatic": "Gió"
+                    }
+                },
                 "site": {
                     "label": "Loại"
                 },
@@ -4023,6 +4036,10 @@
                 },
                 "emergency/private": {
                     "name": "Chỉ Dịch vụ Khẩn cấp được Chủ Cho phép"
+                },
+                "emergency/siren": {
+                    "name": "Còi Báo động",
+                    "terms": "còi báo động, còi báo, còi tầm, còi hú, coi bao dong, coi bao, coi tam, coi hu"
                 },
                 "emergency/water_tank": {
                     "name": "Bể nước Cứu hỏa",
@@ -5697,7 +5714,7 @@
                 },
                 "railway/tram": {
                     "name": "Đường Tàu điện",
-                    "terms": "đường tàu điện, tàu điện, đường xe điện, xe điện, duong tau dien, tau dien, duong xe dien, xe dien "
+                    "terms": "đường tàu điện, tàu điện, đường xe điện, xe điện, duong tau dien, tau dien, duong xe dien, xe dien"
                 },
                 "railway/tram_stop": {
                     "name": "Vị trí Đón khách Tàu điện"
@@ -6559,6 +6576,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Hình ảnh trực giao Vlaanderen mới nhất © AGIV"
+                },
+                "name": "Hình ảnh trực giao Vlaanderen mới nhất của AGIV"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Hình ảnh trực giao Vlaanderen © AGIV"
+                },
+                "name": "Hình chụp trên không 10 cm 2013–2015 Vlaanderen AGIV"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Vlaanderen © AGIV"
+                },
+                "name": "AGIV Vlaanderen GRB"
+            },
             "Bing": {
                 "description": "Hình ảnh chụp từ vệ tinh và trên không trung.",
                 "name": "Hình chụp trên không Bing"
@@ -6567,7 +6602,6 @@
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
-                "description": "Hình ảnh thượng hạng chụp từ vệ tinh DigitalGlobe.",
                 "name": "DigitalGlobe Thượng hạng"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6581,7 +6615,6 @@
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
-                "description": "Hình ảnh tiêu chuẩn chụp từ vệ tinh DigitalGlobe.",
                 "name": "DigitalGlobe Tiêu chuẩn"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6661,6 +6694,12 @@
                 },
                 "name": "Trình kiểm tra OSM: Thẻ"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "Hình chụp trên không Wallonie mới nhất của SPW"
+            },
+            "SPW_PICC": {
+                "name": "Hình ảnh số PICC Wallonie của SPW"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "Đường sá TIGER 2012"
             },
@@ -6675,6 +6714,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Đường sá: vỏ xanh là ngõ; vỏ nâu là đường mòn.\nMặt đường: sỏi đá được tô màu nâu nhạt; nhựa là màu đen, mặt lát là màu xám; đất là màu trắng; bê tông là màu xanh lam; cỏ là màu xanh lá cây.\nTùy mùa có vạch màu trắng.",
                 "name": "Lớp phủ Đường Lâm nghiệp Hoa Kỳ"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "UrbIS®© Bruxelles thực hiện; CIRB phân phát và giữ bản quyền"
+                },
+                "name": "UrbIS trực giao 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "UrbIS®© Bruxelles thực hiện; CIRB phân phát và giữ bản quyền"
+                },
+                "name": "UrbIS trực giao 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "UrbIS®© Bruxelles thực hiện; CIRB phân phát và giữ bản quyền"
+                },
+                "name": "UrbisAdm Pháp"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "UrbIS®© Bruxelles thực hiện; CIRB phân phát và giữ bản quyền"
+                },
+                "name": "UrbisAdm Hà Lan"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6758,6 +6821,13 @@
                 },
                 "name": "OpenStreetMap (Kiểu Đức)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Hình quét các “bản đồ kinh tế” những năm 1950–1980",
+                "name": "Bản đồ Kinh tế Lantmäteriet (lịch sử)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Dữ liệu © những người đóng góp vào OpenStreetMap"
@@ -6787,6 +6857,48 @@
                     "text": "Bản đồ © Thunderforest, dữ liệu © những người đóng góp vào OpenStreetMap"
                 },
                 "name": "Phong cảnh Thunderforest"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Bộ Giao thông Thụy Điển, CC0"
+                },
+                "description": "Hệ thống đường sắt Thụy Điển có cả đường tránh",
+                "name": "Hệ thống Đường sắt Bộ Giao thông Thụy Điển"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Bộ Giao thông Thụy Điển, CC0"
+                },
+                "description": "Hệ thống đường sắt Thụy Điển có vài lớp bản đồ để lựa chọn",
+                "name": "Hệ thống Đường sắt Thụy Điển có tùy chọn"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Bộ Giao thông Thụy Điển, CC0"
+                },
+                "description": "Hệ thống Đường bộ NVDB Thụy Điển",
+                "name": "Hệ thống Đường bộ Bộ Giao thông Thụy Điển"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Bộ Giao thông Thụy Điển, CC0"
+                },
+                "description": "Chi tiết bổ sung từ NVDB Thụy Điển: số đường, thiết bị điều hòa giao thông, trạm dừng nghỉ, trạm xe buýt, cầu, đường hầm, camera giám sát tốc độ",
+                "name": "Hệ thống Đường bộ Bộ Giao thông Thụy Điển bổ sung"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Bộ Giao thông Thụy Điển, CC0"
+                },
+                "description": "Tên Đường NVDB Thụy Điển",
+                "name": "Tên Đường Bộ Giao thông Thụy Điển"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Bộ Giao thông Thụy Điển, CC0"
+                },
+                "description": "Hệ thống đường bộ Thụy Điển có vài lớp bản đồ để lựa chọn",
+                "name": "Hệ thống Đường bộ Thụy Điển có tùy chọn"
             }
         },
         "community": {
@@ -7017,6 +7129,18 @@
                 "name": "Twitter OpenStreetMap Bỉ",
                 "description": "OSM Bỉ tại Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "Nhóm Facebook OpenStreetMap Croatia",
+                "description": "Nhóm Facebook OpenStreetMap Croatia"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Croatia trên IRC",
+                "description": "Hãy tham gia #osm-hr tại irc.oftc.net (cổng 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Danh sách thư talk-hr",
+                "description": "Danh sách thư talk-hr"
+            },
             "czech-community": {
                 "name": "Cộng đồng OSM Séc",
                 "description": "Trang bản đồ và thông tin liên lạc với thành viên OSM tại Séc"
@@ -7066,7 +7190,7 @@
                 "description": "Diễn đàn Web của OpenStreetMap Pháp"
             },
             "fr-irc": {
-                "name": "IRC OpenStreetMap Pháp",
+                "name": "OpenStreetMap Pháp trên IRC",
                 "description": "Hãy tham gia #osm-fr tại irc.oftc.net (cổng 6667)"
             },
             "fr-mailinglist": {
@@ -7172,7 +7296,7 @@
                 "description": "Diễn đàn Web của OpenStreetMap Na Uy"
             },
             "no-irc": {
-                "name": "IRC OpenStreetMap Na Uy",
+                "name": "OpenStreetMap Na Uy trên IRC",
                 "description": "Phòng trò chuyện của những người lập bản đồ và những người sử dụng, nhà phát triển, và người hâm mộ OpenStreetMap ở Na Uy"
             },
             "no-mailinglist": {
@@ -7186,6 +7310,14 @@
             "OSM-PL-forum": {
                 "name": "Diễn đàn OpenStreetMap Ba Lan",
                 "description": "Diễn đàn của cộng đồng OpenStreetMap Ba Lan"
+            },
+            "si-forum": {
+                "name": "Diễn đàn OpenStreetMap Slovenia",
+                "description": "Diễn đàn của cộng đồng OpenStreetMap tại Slovenia"
+            },
+            "si-mailinglist": {
+                "name": "Danh sách thư OpenStreetMap Slovenia",
+                "description": "Danh sách thư để thảo luận về OpenStreetMap tại Slovenia"
             },
             "OSM-ES-mailinglist": {
                 "name": "Danh sách thư talk-es",

@@ -2820,8 +2820,7 @@
                     "terms": "Publicidade, letreiro, placa de publicidade"
                 },
                 "advertising/column": {
-                    "name": "Coluna de publicidade",
-                    "terms": "<translate with synonyms or related terms for 'Advertising Column', separated by commas>"
+                    "name": "Coluna de publicidade"
                 },
                 "aerialway": {
                     "name": "Teleférico do tipo cabine"
@@ -2909,8 +2908,7 @@
                     "terms": "aeroporto, edifício, terminal aeroportuário, embarque, desembarque, viagem, turismo, avião, helicóptero"
                 },
                 "allotments/plot": {
-                    "name": "Parcela de Jardim Comunitário",
-                    "terms": "<translate with synonyms or related terms for 'Community Garden Plot', separated by commas>"
+                    "name": "Parcela de Jardim Comunitário"
                 },
                 "amenity": {
                     "name": "Serviço"
@@ -2992,7 +2990,7 @@
                 },
                 "amenity/car_sharing": {
                     "name": "Compartilhamento de Carros",
-                    "terms": "Carsharing, "
+                    "terms": "Carsharing,"
                 },
                 "amenity/car_wash": {
                     "name": "Lava a Jato",
@@ -3141,8 +3139,7 @@
                     "terms": "Feira, mercado, mercado municipal, feirinha"
                 },
                 "amenity/monastery": {
-                    "name": "Jardins do mosteiro",
-                    "terms": "<translate with synonyms or related terms for 'Monastery Grounds', separated by commas>"
+                    "name": "Jardins do mosteiro"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Estacionamento de motos",
@@ -3209,11 +3206,11 @@
                 },
                 "amenity/place_of_worship/sikh": {
                     "name": "Templo Sique",
-                    "terms": "sikhi, religião, siquismo, sikhismo, templo sikhi, "
+                    "terms": "sikhi, religião, siquismo, sikhismo, templo sikhi,"
                 },
                 "amenity/place_of_worship/taoist": {
                     "name": "Templo Taoísta",
-                    "terms": "daoista, daoismo, Taoismo, tauismo, monastério, templo taoista, templo tauista, "
+                    "terms": "daoista, daoismo, Taoismo, tauismo, monastério, templo taoista, templo tauista,"
                 },
                 "amenity/planetarium": {
                     "name": "Planetário",
@@ -3286,8 +3283,7 @@
                     "terms": "ducha, chuveiro, banheiro, banho público, banho"
                 },
                 "amenity/smoking_area": {
-                    "name": "Área de fumantes",
-                    "terms": "<translate with synonyms or related terms for 'Smoking Area', separated by commas>"
+                    "name": "Área de fumantes"
                 },
                 "amenity/social_facility": {
                     "name": "Unidade de Assistência Social",
@@ -3349,8 +3345,7 @@
                     "terms": "cigarro, venda de cigarro"
                 },
                 "amenity/vending_machine/coffee": {
-                    "name": "Máquina de Venda de Café",
-                    "terms": "<translate with synonyms or related terms for 'Coffee Vending Machine', separated by commas>"
+                    "name": "Máquina de Venda de Café"
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "Máquina de Venda de Preservativos",
@@ -3826,8 +3821,7 @@
                     "terms": "Confeitaria, doceria"
                 },
                 "craft/distillery": {
-                    "name": "Destilaria",
-                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
+                    "name": "Destilaria"
                 },
                 "craft/dressmaker": {
                     "name": "Costureira",
@@ -3838,8 +3832,7 @@
                     "terms": "Eletricista"
                 },
                 "craft/electronics_repair": {
-                    "name": "Oficina de Eletrônicos",
-                    "terms": "<translate with synonyms or related terms for 'Electronics Repair Shop', separated by commas>"
+                    "name": "Oficina de Eletrônicos"
                 },
                 "craft/gardener": {
                     "name": "Jardineiro",
@@ -4012,7 +4005,7 @@
                 },
                 "entrance": {
                     "name": "Entrada/Saída",
-                    "terms": "Entrada/Saída, Porta, "
+                    "terms": "Entrada/Saída, Porta,"
                 },
                 "footway/crossing": {
                     "name": "Faixa para travessia de pedestres",
@@ -4647,7 +4640,7 @@
                 },
                 "leisure/horse_riding": {
                     "name": "Centro de Hipismo",
-                    "terms": "hipismo, equitação, centro de equitação, cavalos, galopamento, "
+                    "terms": "hipismo, equitação, centro de equitação, cavalos, galopamento,"
                 },
                 "leisure/ice_rink": {
                     "name": "Pista de Patinação no Gelo",
@@ -4855,7 +4848,7 @@
                 },
                 "man_made/pier": {
                     "name": "Píer",
-                    "terms": "píer, ponte-cais, pontão, "
+                    "terms": "píer, ponte-cais, pontão,"
                 },
                 "man_made/pipeline": {
                     "name": "Tubulação",
@@ -4907,7 +4900,7 @@
                 },
                 "man_made/watermill": {
                     "name": "Moinho de Água",
-                    "terms": "moinho, catavento, moinho de água, "
+                    "terms": "moinho, catavento, moinho de água,"
                 },
                 "man_made/windmill": {
                     "name": "Moinho de Vento",
@@ -5496,7 +5489,7 @@
                 },
                 "railway/light_rail": {
                     "name": "Veículo Leve sobre Trilhos (VLT)",
-                    "terms": "VLT, trem ligeiro, comboio ligeiro, metrô de superfície, trem, tram, "
+                    "terms": "VLT, trem ligeiro, comboio ligeiro, metrô de superfície, trem, tram,"
                 },
                 "railway/milestone": {
                     "name": "Marco de Ferrovia",
@@ -5579,8 +5572,7 @@
                     "terms": "Antiquário"
                 },
                 "shop/appliance": {
-                    "name": "Loja de Eletrodomésticos",
-                    "terms": "<translate with synonyms or related terms for 'Appliance Store', separated by commas>"
+                    "name": "Loja de Eletrodomésticos"
                 },
                 "shop/art": {
                     "name": "Loja de Arte",
@@ -5782,7 +5774,7 @@
                 },
                 "shop/garden_centre": {
                     "name": "Centro de Jardinagem",
-                    "terms": "Loja de Jardinagem, loja de plantas, "
+                    "terms": "Loja de Jardinagem, loja de plantas,"
                 },
                 "shop/gas": {
                     "name": "Distribuidor de Gás",
@@ -6052,7 +6044,7 @@
                 },
                 "shop/wholesale": {
                     "name": "Atacadista",
-                    "terms": "atacadão, loja de atacados, "
+                    "terms": "atacadão, loja de atacados,"
                 },
                 "shop/window_blind": {
                     "name": "Loja de Persianas",
@@ -6150,16 +6142,14 @@
                     "terms": "Parque Temático"
                 },
                 "tourism/trail_riding_station": {
-                    "name": "Estação de Hipismo de Trilha",
-                    "terms": "<translate with synonyms or related terms for 'Trail Riding Station', separated by commas>"
+                    "name": "Estação de Hipismo de Trilha"
                 },
                 "tourism/viewpoint": {
                     "name": "Mirante",
                     "terms": "Mirante"
                 },
                 "tourism/wilderness_hut": {
-                    "name": "Abrigo Isolado",
-                    "terms": "<translate with synonyms or related terms for 'Wilderness Hut', separated by commas>"
+                    "name": "Abrigo Isolado"
                 },
                 "tourism/zoo": {
                     "name": "Zoológico",
@@ -6202,8 +6192,7 @@
                     "terms": "sonorizador"
                 },
                 "traffic_calming/table": {
-                    "name": "Redutor de Velocidade Elevado",
-                    "terms": "<translate with synonyms or related terms for 'Speed Table', separated by commas>"
+                    "name": "Redutor de Velocidade Elevado"
                 },
                 "type/boundary": {
                     "name": "Fronteira",
@@ -6406,7 +6395,6 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Imagens de satélite premium da DigitalGlobe.",
                 "name": "Imagens premium da DigitalGlobe"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6420,7 +6408,6 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
-                "description": "Imagens de satélite comuns da DigitalGlobe.",
                 "name": "Imagens comuns da DigitalGlobe"
             },
             "DigitalGlobe-Standard-vintage": {

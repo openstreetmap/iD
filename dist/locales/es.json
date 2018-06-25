@@ -715,6 +715,11 @@
             "zoom": "Acercar a la capa",
             "browse": "Buscar un archivo"
         },
+        "streetside": {
+            "tooltip": "Fotografías Streetside de Microsoft",
+            "title": "Capa de fotos (Bing Streetside)",
+            "report": "Informar un problema de privacidad con esta imagen"
+        },
         "mapillary_images": {
             "tooltip": "Fotos a nivel calle de Mapillary",
             "title": "Capa de fotos (Mapillary)"
@@ -2844,7 +2849,7 @@
                 },
                 "aerialway/goods": {
                     "name": "Elevador por cable de mercancías",
-                    "terms": " producto, mercancía, artículo, mercadería, carga, material, elevador, remonte"
+                    "terms": "producto, mercancía, artículo, mercadería, carga, material, elevador, remonte"
                 },
                 "aerialway/magic_carpet": {
                     "name": "Ascensor de alfombra mágica",
@@ -2984,7 +2989,7 @@
                 },
                 "amenity/car_pooling": {
                     "name": "Automóvil compartido",
-                    "terms": "car pool, car pooling, transporte, automóvil, vehículo, auto, carro, coche, compartido, "
+                    "terms": "car pool, car pooling, transporte, automóvil, vehículo, auto, carro, coche, compartido,"
                 },
                 "amenity/car_rental": {
                     "name": "Alquiler de automóviles",
@@ -3291,7 +3296,7 @@
                 },
                 "amenity/social_facility": {
                     "name": "Instalación social",
-                    "terms": "Servicios sociales, Asistencia social, "
+                    "terms": "Servicios sociales, Asistencia social,"
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Banco de alimentos",
@@ -3493,7 +3498,7 @@
                 },
                 "attraction/river_rafting": {
                     "name": "Rafting de río",
-                    "terms": "descenso, río, balsa, balsismo, canotaje, descenso rápidos, deporte extremo, "
+                    "terms": "descenso, río, balsa, balsismo, canotaje, descenso rápidos, deporte extremo,"
                 },
                 "attraction/roller_coaster": {
                     "name": "Montaña rusa",
@@ -3600,7 +3605,7 @@
                 },
                 "building/boathouse": {
                     "name": "Cobertizo para botes",
-                    "terms": "cobertizo, botes "
+                    "terms": "cobertizo, botes"
                 },
                 "building/bungalow": {
                     "name": "Bungalow",
@@ -3777,7 +3782,7 @@
                 },
                 "camp_site/camp_pitch": {
                     "name": "Cancha de acampar",
-                    "terms": "lugar, patio, cancha, terreno, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana, "
+                    "terms": "lugar, patio, cancha, terreno, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana,"
                 },
                 "circular": {
                     "name": "Glorieta / Círculo de tráfico"
@@ -3995,6 +4000,10 @@
                 },
                 "emergency/destination": {
                     "name": "Acceso de emergencia como destino"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Extintor de incendios",
+                    "terms": "Extintor de incendios, incendio, fuego, matafuego"
                 },
                 "emergency/fire_hydrant": {
                     "name": "Hidrante contra incendios",
@@ -5728,7 +5737,7 @@
                 },
                 "shop/appliance": {
                     "name": "Tienda de electrodomésticos",
-                    "terms": "electrodomésticos, aire acondicionado, acondicionador de aire, aparatos, lavavajillas, secadora, heladera, freezer, congelador, nevera, parrilla, cocina, horno, frigorífico, estufa, lavarropas, lavadora, "
+                    "terms": "electrodomésticos, aire acondicionado, acondicionador de aire, aparatos, lavavajillas, secadora, heladera, freezer, congelador, nevera, parrilla, cocina, horno, frigorífico, estufa, lavarropas, lavadora,"
                 },
                 "shop/art": {
                     "name": "Tienda de arte",
@@ -6317,7 +6326,7 @@
                 },
                 "tourism/zoo": {
                     "name": "Zoológico",
-                    "terms": "zoo, zoológico "
+                    "terms": "zoo, zoológico"
                 },
                 "traffic_calming": {
                     "name": "Pacificador de tráfico",
@@ -6560,7 +6569,6 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Imágenes de satélite DigitalGlobe Premium.",
                 "name": "Imágenes DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6574,7 +6582,6 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Imágenes de satélite DigitalGlobe Standard.",
                 "name": "Imágenes DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -7023,7 +7030,20 @@
                 "name": "Twitter OpenStreetMap Bélgica",
                 "description": "OSM Bélgica en Twitter: @osm_be"
             },
+            "czech-community": {
+                "name": "Comunidad checa OSM",
+                "description": "Portal de mapas, sitio web y contactos sobre miembros de OSM en Chequia"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ en Facebook",
+                "description": "¡Siga a la comunidad checa en Facebook, incluido el WeeklyOSM traducido!"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter checo @osmcz",
+                "description": "¡Siga a la comunidad checa en Twitter, incluido el WeeklyOSM traducido!"
+            },
             "talk-cz-mailinglist": {
+                "name": "Lista de correo checa (talk-cz)",
                 "description": "Talk-cz es la lista de correo oficial para la comunidad checa"
             },
             "dk-forum": {
@@ -7135,7 +7155,8 @@
                 "description": "Talk-it es la lista de correo oficial de la comunidad OSM italiana"
             },
             "it-telegram": {
-                "name": "@OpenStreetMapItalia en Telegram"
+                "name": "@OpenStreetMapItalia en Telegram",
+                "description": "Chat de Telegram de OpenStreetMap Italia"
             },
             "it-twitter": {
                 "name": "Twitter de OpenStreetMap Italia",
@@ -7526,6 +7547,10 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap en Reddit",
                 "description": "/r/openstreetmap/ es un gran lugar para aprender más sobre OpenStreetMap. ¡Pregúntenos cualquier cosa!"
+            },
+            "OSM-Telegram": {
+                "name": "Telegram de OpenStreetMap",
+                "description": "Únase al supergrupo global Telegram de OpenStreetMap en {url}"
             },
             "OSM-Twitter": {
                 "name": "Twitter de OpenStreetMap",

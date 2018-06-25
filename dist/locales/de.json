@@ -715,6 +715,12 @@
             "zoom": "GPS-Track anzeigen",
             "browse": "Eine Datei laden"
         },
+        "streetside": {
+            "tooltip": "Straßenfotos von Microsoft",
+            "title": "Straßenfotos (Bing Streetside)",
+            "report": "Melde Privatsphäre-Verletzung bei diesem Bild",
+            "hires": "Hochauflösung"
+        },
         "mapillary_images": {
             "tooltip": "Straßenfotos von Mapillary",
             "title": "Straßenfotos (Mapillary)"
@@ -1565,6 +1571,9 @@
                 },
                 "board_type": {
                     "label": "Typ"
+                },
+                "booth": {
+                    "label": "Kabine"
                 },
                 "boules": {
                     "label": "Typ"
@@ -2487,6 +2496,17 @@
                 "shop": {
                     "label": "Typ"
                 },
+                "siren/purpose": {
+                    "label": "Zweck"
+                },
+                "siren/type": {
+                    "label": "Typ",
+                    "options": {
+                        "electronic": "Electronisch",
+                        "other": "Anderer",
+                        "pneumatic": "Pneumatisch"
+                    }
+                },
                 "site": {
                     "label": "Typ"
                 },
@@ -3193,10 +3213,10 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindutempel",
-                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>hinduistisch"
+                    "terms": "hinduistisch"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "Sy­n­a­go­ge",
+                    "name": "Synagoge",
                     "terms": "jüdisch,Synagoge"
                 },
                 "amenity/place_of_worship/muslim": {
@@ -3205,15 +3225,15 @@
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shintō-Schrein",
-                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>Weg der Götter, Shintoismus"
+                    "terms": "Weg der Götter, Shintoismus"
                 },
                 "amenity/place_of_worship/sikh": {
                     "name": "Sikh-Tempel",
-                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>Sikhismus"
+                    "terms": "Sikhismus"
                 },
                 "amenity/place_of_worship/taoist": {
                     "name": "Tao-Tempel",
-                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>Taoism, Dao"
+                    "terms": "Taoism, Dao"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -3370,7 +3390,7 @@
                 },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Hundekottütenspender",
-                    "terms": "Hundekot-Tütenspender, Kottütenspender, Kottütenautomat, "
+                    "terms": "Hundekot-Tütenspender, Kottütenspender, Kottütenautomat,"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Frauenhygiene-Automat",
@@ -3378,7 +3398,7 @@
                 },
                 "amenity/vending_machine/food": {
                     "name": "Lebensmittel-Verkaufs-Automat ",
-                    "terms": "Lebensmittel-Verkaufs-Automat "
+                    "terms": "Lebensmittel-Verkaufs-Automat"
                 },
                 "amenity/vending_machine/fuel": {
                     "name": "Tankautomat",
@@ -3421,7 +3441,7 @@
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "Hundekotabfalleimer",
-                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>Hundeexkrementbehälter"
+                    "terms": "Hundeexkrementbehälter"
                 },
                 "amenity/waste_basket": {
                     "name": "Mülleimer",
@@ -3452,7 +3472,7 @@
                     "terms": "Straßenbelag, Straßenoberfläche, Straßenzustand"
                 },
                 "attraction/amusement_ride": {
-                    "name": "Vergnügungsfahrt",
+                    "name": "Fahrgeschäft",
                     "terms": "Vergnügungsfahrt, Fahrbetrieb"
                 },
                 "attraction/animal": {
@@ -3669,7 +3689,7 @@
                     "terms": "Mehrfachgaragen, Garagenblock"
                 },
                 "building/grandstand": {
-                    "name": "Haupttribüne",
+                    "name": "Tribüne",
                     "terms": "Haupttribüne, Ehrentribüne"
                 },
                 "building/greenhouse": {
@@ -3996,6 +4016,10 @@
                 "emergency/destination": {
                     "name": "Notzufahrt ohne Notdurchfahrt"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Feueralarm-Knopf",
+                    "terms": "Feueralarm-Knopf, Feueralarmierungskasten"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Feuerlöscher",
                     "terms": "Feuerlöscher, Feuerlöschapparat, Löschgerät, Feuerlöschgerät"
@@ -4004,9 +4028,17 @@
                     "name": "Hydrant",
                     "terms": "Hydrant,Löschwasserentnahmestelle"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Verbandskasten",
+                    "terms": "Verbandskasten, Erste-Hilfe-Koffer, Sanitätskasten"
+                },
                 "emergency/life_ring": {
                     "name": "Rettungsring",
                     "terms": "Rettungsring"
+                },
+                "emergency/lifeguard": {
+                    "name": "Rettungsschwimmerstation",
+                    "terms": "Rettungsschwimmerstation, Rettungsschwimmerposten, Rettungsschwimmerplatz"
                 },
                 "emergency/no": {
                     "name": "keine Notzufahrt"
@@ -4020,6 +4052,10 @@
                 },
                 "emergency/private": {
                     "name": "private Notzufahrt"
+                },
+                "emergency/siren": {
+                    "name": "Sirene",
+                    "terms": "Sirene, Einsatzhorn, Folgetonhorn"
                 },
                 "emergency/water_tank": {
                     "name": "Löschwasser",
@@ -4602,8 +4638,8 @@
                     "terms": "Vogelbeobachtungsturm, Vogelbeobachtungshütte"
                 },
                 "leisure/bleachers": {
-                    "name": "Haupttribüne",
-                    "terms": "Haupttribüne, Ehrentribüne"
+                    "name": "Unüberdachte Tribüne",
+                    "terms": "Gradin, Tribüne"
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowlingbahn",
@@ -4851,7 +4887,7 @@
                 },
                 "man_made/antenna": {
                     "name": "Antennenmast",
-                    "terms": "Antennenanlage, Sendemast "
+                    "terms": "Antennenanlage, Sendemast"
                 },
                 "man_made/breakwater": {
                     "name": "Wellenbrecher",
@@ -4962,7 +4998,7 @@
                 },
                 "man_made/water_well": {
                     "name": "Brunnen zur Wasserförderung",
-                    "terms": "Bohrbrunnen, Schachtbrunnen, Tiefbrunnen, Trinkwasserbrunnen, Brauchwasserbrunnen,  "
+                    "terms": "Bohrbrunnen, Schachtbrunnen, Tiefbrunnen, Trinkwasserbrunnen, Brauchwasserbrunnen,"
                 },
                 "man_made/water_works": {
                     "name": "Wasserwerk",
@@ -5050,7 +5086,7 @@
                 },
                 "natural/ridge": {
                     "name": "Höhenrücken",
-                    "terms": " Bergrücken,Bergzug,Gebirgsgrat,Grat,Kamm,Naht"
+                    "terms": "Bergrücken,Bergzug,Gebirgsgrat,Grat,Kamm,Naht"
                 },
                 "natural/saddle": {
                     "name": "Bergsattel",
@@ -5398,12 +5434,10 @@
                     "terms": "Stromgenerator"
                 },
                 "power/generator/source_nuclear": {
-                    "name": "Kernreaktor",
-                    "terms": "<translate with synonyms or related terms for 'Nuclear Reactor', separated by commas>"
+                    "name": "Kernreaktor"
                 },
                 "power/generator/source_wind": {
-                    "name": "Windrad",
-                    "terms": "<translate with synonyms or related terms for 'Wind Turbine', separated by commas>"
+                    "name": "Windrad"
                 },
                 "power/line": {
                     "name": "Stromleitung-Hochspannung",
@@ -5617,7 +5651,7 @@
                 },
                 "railway/buffer_stop": {
                     "name": "Prellbock",
-                    "terms": "<translate with synonyms or related terms for 'Buffer Stop', separated by commas>Puffer, Pufferwehr, Gleisabschlussbock"
+                    "terms": "Puffer, Pufferwehr, Gleisabschlussbock"
                 },
                 "railway/crossing": {
                     "name": "Bahnübergang (Weg)",
@@ -5670,8 +5704,7 @@
                     "terms": "Gleise, Eisenbahnschienen, Schiene"
                 },
                 "railway/signal": {
-                    "name": "Eisenbahnsignal",
-                    "terms": "<translate with synonyms or related terms for 'Railway Signal', separated by commas>"
+                    "name": "Eisenbahnsignal"
                 },
                 "railway/station": {
                     "name": "Eisenbahnhaltestelle"
@@ -5736,7 +5769,7 @@
                 },
                 "shop/art": {
                     "name": "Kunsthandlung",
-                    "terms": "Kunsthandlung, Kunstgeschäft, "
+                    "terms": "Kunsthandlung, Kunstgeschäft,"
                 },
                 "shop/baby_goods": {
                     "name": "Babysachengeschäft",
@@ -6556,6 +6589,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Orthophoto Flandern aktuell © AGIV"
+                },
+                "name": "AGIV Flandern aktuelle Luftbilder"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flandern © AGIV"
+                },
+                "name": "AGIV Flandern 2013-2015 Luftbilder 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flandern © AGIV"
+                },
+                "name": "AGIV Flandern GRB"
+            },
             "Bing": {
                 "description": "Satellitenbilder und Luftbilder",
                 "name": "Bing Luftbildmaterial"
@@ -6564,7 +6615,7 @@
                 "attribution": {
                     "text": "Bedingungen & Feedback"
                 },
-                "description": "Premium DigitalGlobe Satellitenbilder",
+                "description": "DigitalGlobe-Premium ist ein Mosaik zusammengesetzt aus der DigitalGlobe basemap wobei ausgewählte Regionen ander Quellen haben, entweder +Vivid oder regionspezifische Quellen, Auflösung 50cm oder besser und häufigeren laufenden Updates.",
                 "name": "DigitalGlobe Premium Bildmaterial"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6578,7 +6629,7 @@
                 "attribution": {
                     "text": "Bedingungen & Feedback"
                 },
-                "description": "Standard DigitalGlobe Satellitenbilder",
+                "description": "DigitalGlobe-Standard is eine kuratierte Zusammensetzung von Hintergrundbilderdie 86% der Erdoberfläche bedecken, mit 30-60cm Auflösung sofern verfügbar, aufgefüllt mit Landsat-Bilder. Durchschnittliches Alter ist 2,31 Jahre, wobei manche Gebiet zwei mal pro Jahr aktualisiert werden.",
                 "name": "DigitalGlobe Standard Bildmaterial"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6658,6 +6709,12 @@
                 },
                 "name": "OSM-Objekteditor: Attribute"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "öffentlicher Dienst Wallonien aktuelle Luftbilder"
+            },
+            "SPW_PICC": {
+                "name": "öffentlicher Dienst Wallonien PICC Hintergrund 'numerical'"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Straßen 2012"
             },
@@ -6672,6 +6729,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Straße: Grüner Rand = Nebenstraße. Brauner Rand = Feldweg/Waldweg. Oberfläche: Schotter = hellbraune Füllung, Asphalt = schwarz, befestigt = grau, ground = weiß, Beton = blau, Gras = grün. Saisonal = weißes Gitter",
                 "name": "U.S.A. Forststraßen Overlay"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realisiert von Brüssel UrbIS®© - Vertrieb & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realisiert von Brüssel UrbIS®© - Vertrieb & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realisiert von Brüssel UrbIS®© - Vertrieb & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realisiert von Brüssel UrbIS®© - Vertrieb & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6755,6 +6836,13 @@
                 },
                 "name": "OpenStreetMap (Deutscher Stil)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Scan der ´Ökonomischen Karten´ circa 1950-1980",
+                "name": "Lantmäteriet Ökonomische Karte (historisch)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Kacheln © Simon Poole, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
@@ -6784,6 +6872,48 @@
                     "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Schwedisches Eisenbahn-Netzwerk, inklusive Nebengleise",
+                "name": "Trafikverket Eisenbahn-Netzwerk"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Schwedisches Eisenbahn-Netzwerk mit mehreren Optionen für Karten-Layer",
+                "name": "Trafikverket Eisenbahn-Netzwerk Optionen"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Schwedisches NVDB Straßen-Netzwerk",
+                "name": "Trafikverket Straßen-Netzwerk"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Schwedische NVDB extra Details: Autobahn-Referenz, Verkehrsberuhigung, Rastplätze, Bushaltestellen, Brücken, Tunnel, Geschwindigkeitsüberwachungskamera",
+                "name": "Trafikverket Straßen-Netzwerk Extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Schwedische NVDB Straßen-Namen",
+                "name": "Trafikverket Straßen-Namen"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Schwedisches NVDB Straßen-Netzwerk mit mehreren Optionen für Karten-Layer",
+                "name": "Trafikverket Straßen-Netzwerk Optionen"
             }
         },
         "community": {
@@ -6825,7 +6955,7 @@
                 "events": {
                     "sotmasia2018": {
                         "name": "State of the Map Asien 2018",
-                        "description": "Beteiligte dich an dem 2018 OpenStreetMap Eventu \"State of the Map Asia\" in Indien",
+                        "description": "Beteiligte dich an dem internationalen OpenStreetMap Event \"State of the Map Asia 2018“ in Indien",
                         "where": "Indisches Institut für Management, Bangalore, Indien"
                     }
                 }
@@ -7027,6 +7157,18 @@
                 "name": "OpenStreetMap Belgien Twitter",
                 "description": "OSM Belgien auf Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "OpenStreetMap Kroatien Facebook Gruppe",
+                "description": "OpenStreetMap Kroatien Facebook Gruppe"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Kroatien auf IRC",
+                "description": "Beteilige dich bei #osm-hr auf irc.freenode.org (Port 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr Mailing Liste",
+                "description": "Talk-hr Mailing Liste"
+            },
             "czech-community": {
                 "name": "Tschechische OSM community",
                 "description": "Mapping Portal, website und Kontaktdaten der  OSM Mitglieder in Tschechien"
@@ -7197,6 +7339,14 @@
                 "name": "OpenStreetMap Polen Web Forum",
                 "description": "Forum der Polnischen OpenStreetMap Gemeinschaft"
             },
+            "si-forum": {
+                "name": "OpenStreetMap Slowenien Forum",
+                "description": "Forum der OpenStreetMap Gemeinschaft in Slowenien"
+            },
+            "si-mailinglist": {
+                "name": "OpenStreetMap Slowenien Mailing Liste",
+                "description": "Mailing Liste der OpenStreetMap Gemeinschaft in Slowenien"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es Mailing Liste",
                 "description": "Eine Mailing Liste um OpenStreetMap in Spanien zu diskutieren"
@@ -7361,7 +7511,14 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "Wir helfen dabei OpenStreetMap in den USA zu verbessern.",
-                "extendedDescription": "Wir unterstützen OpenStreetMap durch eine jährliche Konferenz, Unterstützung von lokalen OSM-Gruppen, Aufbau von Partnerschaft und durch Verbreitung des Vorteilen von OSM. Beteiligte sich an OpenStreetMap US hier: {signupUrl}"
+                "extendedDescription": "Wir unterstützen OpenStreetMap durch eine jährliche Konferenz, Unterstützung von lokalen OSM-Gruppen, Aufbau von Partnerschaft und durch Verbreitung des Vorteilen von OSM. Beteiligte sich an OpenStreetMap US hier: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map US 2018",
+                        "description": "Beteilge dich an der nationalen OpenStreetMap Gemeinschaft bei der State of the Map US in Detroit, Michigan. Triff andere Mapper, Firmen, Regierungsbehörden und gemeinnützige Organisationen, die zusammen mit der freien und editierbare Karte der Welt arbeiten.",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

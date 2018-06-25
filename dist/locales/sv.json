@@ -718,7 +718,8 @@
         "streetside": {
             "tooltip": "Gatubilder från Microsoft",
             "title": "Bildlager (Bing Streetside)",
-            "report": "Rapportera ett integritetsproblem med den här bilden"
+            "report": "Rapportera ett integritetsproblem med den här bilden",
+            "hires": "Hög upplösning"
         },
         "mapillary_images": {
             "tooltip": "Gatubilder från Mapillary",
@@ -1571,6 +1572,9 @@
                 "board_type": {
                     "label": "Typ"
                 },
+                "booth": {
+                    "label": "Typ av bås"
+                },
                 "boules": {
                     "label": "Typ"
                 },
@@ -2282,7 +2286,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Telefon",
+                    "label": "Telefonnummer",
                     "placeholder": "+46 31 123 4567"
                 },
                 "piste/difficulty": {
@@ -2472,7 +2476,7 @@
                     "label": "Tjänster"
                 },
                 "service_rail": {
-                    "label": "Användningsområde ",
+                    "label": "Typ av service",
                     "options": {
                         "crossover": "Växelförbindelse",
                         "siding": "Sidospår",
@@ -2491,6 +2495,17 @@
                 },
                 "shop": {
                     "label": "Typ"
+                },
+                "siren/purpose": {
+                    "label": "Syfte"
+                },
+                "siren/type": {
+                    "label": "Typ",
+                    "options": {
+                        "electronic": "Elektronisk",
+                        "other": "Annan",
+                        "pneumatic": "Pneumatisk"
+                    }
                 },
                 "site": {
                     "label": "Typ"
@@ -3115,7 +3130,7 @@
                 },
                 "amenity/hospital": {
                     "name": "Sjukhusområde",
-                    "terms": "Sjukhusområde, lasarett, sjukhus, klinik, läkare, läkarmottagning, sjukvård, sjukstuga, institution, vårdhem, sanatorium, sjuk, kirurgi\n               "
+                    "terms": "Sjukhusområde, lasarett, sjukhus, klinik, läkare, läkarmottagning, sjukvård, sjukstuga, institution, vårdhem, sanatorium, sjuk, kirurgi"
                 },
                 "amenity/hunting_stand": {
                     "name": "Jakttorn",
@@ -3131,7 +3146,7 @@
                 },
                 "amenity/kindergarten": {
                     "name": "Förskoleområde",
-                    "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats, "
+                    "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats,"
                 },
                 "amenity/library": {
                     "name": "Bibliotek",
@@ -3518,7 +3533,7 @@
                 },
                 "barrier/block": {
                     "name": "Block",
-                    "terms": "Block, betongsugga, sugga, avspärrare, trafikbarriärer, Trafikhinder "
+                    "terms": "Block, betongsugga, sugga, avspärrare, trafikbarriärer, Trafikhinder"
                 },
                 "barrier/bollard": {
                     "name": "Stolpe",
@@ -3538,7 +3553,7 @@
                 },
                 "barrier/cycle_barrier": {
                     "name": "Cykelbarriär ",
-                    "terms": "Cykelbarriär, hinder, barriär,  "
+                    "terms": "Cykelbarriär, hinder, barriär,"
                 },
                 "barrier/ditch": {
                     "name": "Dike",
@@ -3573,7 +3588,7 @@
                 },
                 "barrier/retaining_wall": {
                     "name": "Stödmur",
-                    "terms": "Stödmur, nivåskillnad "
+                    "terms": "Stödmur, nivåskillnad"
                 },
                 "barrier/stile": {
                     "name": "Övergång",
@@ -3829,7 +3844,7 @@
                 },
                 "craft/caterer": {
                     "name": "Catering",
-                    "terms": "catering, cateringfirma, matleverantör, matleverans, , "
+                    "terms": "catering, cateringfirma, matleverantör, matleverans, ,"
                 },
                 "craft/chimney_sweeper": {
                     "name": "Sotare",
@@ -3891,7 +3906,7 @@
                 },
                 "craft/metal_construction": {
                     "name": "Metallarbete",
-                    "terms": "Metallarbete, metallarbetare,  kallbearbetning, metallindustri, svets, svetsare, svetsning "
+                    "terms": "Metallarbete, metallarbetare,  kallbearbetning, metallindustri, svets, svetsare, svetsning"
                 },
                 "craft/optician": {
                     "name": "Optiker"
@@ -4001,6 +4016,10 @@
                 "emergency/destination": {
                     "name": "Åtkomst för utryckningsfordon - Destination"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Nödtelefon",
+                    "terms": "Nödtelefon, brandtelefon"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Brandsläckare",
                     "terms": "Brandsläckare, Brandpost, brand, vattenpost, brandsläckning, vattenpost, brandslang, eldsläckare, handbrandsläckare, skumsläckare, pulversläckare, vattensläckare, kolsyresläckare, koldioxidsläckare"
@@ -4009,9 +4028,17 @@
                     "name": "Brandpost",
                     "terms": "Brandpost, vattenpost, brandsläckning, vattenpost, brandslang"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Första hjälpen",
+                    "terms": "Första hjälpen, första hjälpen kit, första hjälpen låda, förbandslåda, förband, bandage, plåster, plåster, sår, brännsår, sårvård"
+                },
                 "emergency/life_ring": {
                     "name": "Livboj",
                     "terms": "livboj, frälsarkrans, livräddningsboj, livräddning"
+                },
+                "emergency/lifeguard": {
+                    "name": "Badvakt",
+                    "terms": "badvakt, livräddare, CPR, räddning, strandvakt, Lifeguard"
                 },
                 "emergency/no": {
                     "name": "Åtkomst för utryckningsfordon - Nej"
@@ -4026,6 +4053,10 @@
                 "emergency/private": {
                     "name": "Åtkomst för utryckningsfordon - Ja"
                 },
+                "emergency/siren": {
+                    "name": "Siren",
+                    "terms": "Siren, larm, Viktigt Meddelande till Allmänheten, VMA, beredskapslarm, flyglarm, Hesa Fredrik, Tyfon, mistlur, starktonssiren, varning"
+                },
                 "emergency/water_tank": {
                     "name": "Vattentank för brandsläckning",
                     "terms": "Vattentank för brandsläckning, vattentank, nödtank, brandsläckningstank, brand, brandsläckning, nöd, vatten, tank, kris, reservoar, räddning, vattensamling, lagringstank, tank, cistern, vattentorn"
@@ -4035,7 +4066,7 @@
                 },
                 "entrance": {
                     "name": "In-/Utgång",
-                    "terms": "Ingång, utgång, entré, dörr, huvudentré "
+                    "terms": "Ingång, utgång, entré, dörr, huvudentré"
                 },
                 "footway/crossing": {
                     "name": "Vägpassage",
@@ -4059,7 +4090,7 @@
                 },
                 "ford": {
                     "name": "Vadställe",
-                    "terms": "Vadställe, vad, övergångsställe "
+                    "terms": "Vadställe, vad, övergångsställe"
                 },
                 "golf/bunker": {
                     "name": "Bunker",
@@ -4127,7 +4158,7 @@
                 },
                 "healthcare/hospice": {
                     "name": "Hospis (palliativ vård)",
-                    "terms": "Hospis, Palliativ vård, död, döende, terminalvård "
+                    "terms": "Hospis, Palliativ vård, död, döende, terminalvård"
                 },
                 "healthcare/laboratory": {
                     "name": "Medicinskt laboratorium",
@@ -4170,7 +4201,7 @@
                 },
                 "highway/bridleway": {
                     "name": "Ridväg",
-                    "terms": "Ridväg, ridstig, häst, rida, ridning, ryttare, "
+                    "terms": "Ridväg, ridstig, häst, rida, ridning, ryttare,"
                 },
                 "highway/bus_guideway": {
                     "name": "Spårbuss",
@@ -4285,7 +4316,7 @@
                 },
                 "highway/service": {
                     "name": "Serviceväg",
-                    "terms": "Uppfart, industriväg, bakgård, parkeringsväg, campinggata, "
+                    "terms": "Uppfart, industriväg, bakgård, parkeringsväg, campinggata,"
                 },
                 "highway/service/alley": {
                     "name": "Gränd",
@@ -4397,7 +4428,7 @@
                 },
                 "historic/tomb": {
                     "name": "Grav",
-                    "terms": "Grav, gravhög, klippgrav, krigsgrav, massgrav, Mausoleum, krypta, pyramid, Sarkofag, gravvalv, katakomb "
+                    "terms": "Grav, gravhög, klippgrav, krigsgrav, massgrav, Mausoleum, krypta, pyramid, Sarkofag, gravvalv, katakomb"
                 },
                 "historic/wayside_cross": {
                     "name": "Kors vid väg",
@@ -4556,7 +4587,7 @@
                 },
                 "landuse/plant_nursery": {
                     "name": "Plantskola",
-                    "terms": "Plantskola, handelsträdgård "
+                    "terms": "Plantskola, handelsträdgård"
                 },
                 "landuse/quarry": {
                     "name": "Stenbrott/Sandtag",
@@ -4576,7 +4607,7 @@
                 },
                 "landuse/residential": {
                     "name": "Bostadsområde",
-                    "terms": "Bostadsområde, villaområde, lägenhetsområde, getto, miljonområde, förort, "
+                    "terms": "Bostadsområde, villaområde, lägenhetsområde, getto, miljonområde, förort,"
                 },
                 "landuse/retail": {
                     "name": "Detaljhandel",
@@ -4644,7 +4675,7 @@
                 },
                 "leisure/fitness_station": {
                     "name": "Utomhusgym",
-                    "terms": "Utomhusgym, utegym, gym, fitness, träning, träningsbana, träningsspår, motion, naturgym "
+                    "terms": "Utomhusgym, utegym, gym, fitness, träning, träningsbana, träningsspår, motion, naturgym"
                 },
                 "leisure/fitness_station/balance_beam": {
                     "name": "Balansbom (träning)",
@@ -4656,7 +4687,7 @@
                 },
                 "leisure/fitness_station/horizontal_bar": {
                     "name": "Räck (träning)",
-                    "terms": "räck, bar, träning, fitness, gym, pullup, pull up, pull-up, utomhusgym, utegym, naturgym, motion, Räckhäv, hävräcke "
+                    "terms": "räck, bar, träning, fitness, gym, pullup, pull up, pull-up, utomhusgym, utegym, naturgym, motion, Räckhäv, hävräcke"
                 },
                 "leisure/fitness_station/horizontal_ladder": {
                     "name": "Armgång",
@@ -4704,7 +4735,7 @@
                 },
                 "leisure/horse_riding": {
                     "name": "Ridskola",
-                    "terms": "Ridskola, häst, hästridning, ridning, rida, stall, ryttare, häst*, ridklubb, ridhus, "
+                    "terms": "Ridskola, häst, hästridning, ridning, rida, stall, ryttare, häst*, ridklubb, ridhus,"
                 },
                 "leisure/ice_rink": {
                     "name": "Skridskobana ",
@@ -4780,7 +4811,7 @@
                 },
                 "leisure/pitch/skateboard": {
                     "name": "Skateboardpark",
-                    "terms": "Skateboardpark, Skate Park, skateboard, skateboardramp, halfpipe "
+                    "terms": "Skateboardpark, Skate Park, skateboard, skateboardramp, halfpipe"
                 },
                 "leisure/pitch/soccer": {
                     "name": "Fotbollsplan",
@@ -4808,7 +4839,7 @@
                 },
                 "leisure/running_track": {
                     "name": "Kapplöpningsbana",
-                    "terms": "Kapplöpningsbana, löpbana, motionsspår, Löparbana "
+                    "terms": "Kapplöpningsbana, löpbana, motionsspår, Löparbana"
                 },
                 "leisure/sauna": {
                     "name": "Bastu",
@@ -4824,7 +4855,7 @@
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "Badanläggning",
-                    "terms": "Badanläggning, badhall, simhall, simbassäng, bassäng, swimmingpool, pool, simning, badhus, motionssim, tävlingssim "
+                    "terms": "Badanläggning, badhall, simhall, simbassäng, bassäng, swimmingpool, pool, simning, badhus, motionssim, tävlingssim"
                 },
                 "leisure/stadium": {
                     "name": "Stadium",
@@ -5087,7 +5118,7 @@
                 },
                 "natural/volcano": {
                     "name": "Vulkan",
-                    "terms": "Vulkan, berg, krater, vulkankrater, lava, magma, "
+                    "terms": "Vulkan, berg, krater, vulkankrater, lava, magma,"
                 },
                 "natural/water": {
                     "name": "Vatten",
@@ -5217,7 +5248,7 @@
                 },
                 "office/moving_company": {
                     "name": "Flyttfirma",
-                    "terms": "Flyttfirma, flyttning, transport, flytt, flyttlass,flyttkarl,bärare, "
+                    "terms": "Flyttfirma, flyttning, transport, flytt, flyttlass,flyttkarl,bärare,"
                 },
                 "office/newspaper": {
                     "name": "Tidningsredaktion",
@@ -5555,7 +5586,7 @@
                 },
                 "public_transport/station_train": {
                     "name": "Järnvägsstation",
-                    "terms": "Järnvägsstation, centralstation, central, huvudbangård, tågstation, järnvägshållplats, tåghållplats, trafikplats, hållställe, linjeplats, hållplats, "
+                    "terms": "Järnvägsstation, centralstation, central, huvudbangård, tågstation, järnvägshållplats, tåghållplats, trafikplats, hållställe, linjeplats, hållplats,"
                 },
                 "public_transport/station_train_halt": {
                     "name": "Mindre järnvägshållplats",
@@ -5920,7 +5951,7 @@
                 },
                 "shop/florist": {
                     "name": "Florist",
-                    "terms": "Florist, blommor, blomförsäljning, bukett, blomsterbindare, blomsterhandlare "
+                    "terms": "Florist, blommor, blomförsäljning, bukett, blomsterbindare, blomsterhandlare"
                 },
                 "shop/frame": {
                     "name": "Ramaffär",
@@ -6007,7 +6038,7 @@
                 },
                 "shop/locksmith": {
                     "name": "Låssmed",
-                    "terms": "Låssmed, nyckeltillverkning, nyckelkopiering, nyckel, lås, låsinstallation, dyrkning, Låsdyrkning "
+                    "terms": "Låssmed, nyckeltillverkning, nyckelkopiering, nyckel, lås, låsinstallation, dyrkning, Låsdyrkning"
                 },
                 "shop/lottery": {
                     "name": "Lotteri",
@@ -6075,7 +6106,7 @@
                 },
                 "shop/pastry": {
                     "name": "Konditori",
-                    "terms": "konditori, kondis, cafe, café, kafé, fik, kaffeservering, bageri, sockerbageri, finbageri, sockerbagare, servering "
+                    "terms": "konditori, kondis, cafe, café, kafé, fik, kaffeservering, bageri, sockerbageri, finbageri, sockerbagare, servering"
                 },
                 "shop/pawnbroker": {
                     "name": "Pantbank",
@@ -6119,7 +6150,7 @@
                 },
                 "shop/second_hand": {
                     "name": "Second hand",
-                    "terms": "Second hand, loppis, loppmarknad, secondhand "
+                    "terms": "Second hand, loppis, loppmarknad, secondhand"
                 },
                 "shop/shoes": {
                     "name": "Skoaffär",
@@ -6147,7 +6178,7 @@
                 },
                 "shop/tattoo": {
                     "name": "Tatueringsstudio",
-                    "terms": "Tatueringsstudio, tatueringssalong, tatuera, tatuerare, tatuering, "
+                    "terms": "Tatueringsstudio, tatueringssalong, tatuera, tatuerare, tatuering,"
                 },
                 "shop/tea": {
                     "name": "Te-butik",
@@ -6175,11 +6206,11 @@
                 },
                 "shop/travel_agency": {
                     "name": "Resebyrå",
-                    "terms": "Resebyrå, reseagent, biljettförsäljning, charter, charterflyg, charterresa "
+                    "terms": "Resebyrå, reseagent, biljettförsäljning, charter, charterflyg, charterresa"
                 },
                 "shop/tyres": {
                     "name": "Däckfirma",
-                    "terms": "Däckfirma, däckbyte, hjulbyte, däckförsäljning, hjulförsäljning, fälgar, däck, hjul, fälg, balansering, "
+                    "terms": "Däckfirma, däckbyte, hjulbyte, däckförsäljning, hjulförsäljning, fälgar, däck, hjul, fälg, balansering,"
                 },
                 "shop/vacant": {
                     "name": "Tom lokal"
@@ -6330,7 +6361,7 @@
                 },
                 "traffic_calming": {
                     "name": "Farthinder",
-                    "terms": "hastighet,* fart*, gupp, fartgupp, säkerhet, långsam, Farthinder, trafikhinder, "
+                    "terms": "hastighet,* fart*, gupp, fartgupp, säkerhet, långsam, Farthinder, trafikhinder,"
                 },
                 "traffic_calming/bump": {
                     "name": "Fartbula (kort gupp)",
@@ -6338,7 +6369,7 @@
                 },
                 "traffic_calming/chicane": {
                     "name": "Sidoförskjutning (chikan)",
-                    "terms": "chikan, trafikchikan, hastighet,* fart*, säkerhet, långsam, kurvor, slalom, Farthinder, trafikhinder, Sidoförskjutning "
+                    "terms": "chikan, trafikchikan, hastighet,* fart*, säkerhet, långsam, kurvor, slalom, Farthinder, trafikhinder, Sidoförskjutning"
                 },
                 "traffic_calming/choker": {
                     "name": "Avsmalning",
@@ -6469,7 +6500,7 @@
                 },
                 "type/route/subway": {
                     "name": "Tunnelbanerutt",
-                    "terms": "Tunnelbanerutt, tunnelbana, "
+                    "terms": "Tunnelbanerutt, tunnelbana,"
                 },
                 "type/route/train": {
                     "name": "Tågrutt",
@@ -6477,7 +6508,7 @@
                 },
                 "type/route/tram": {
                     "name": "Spårvagnsrutt",
-                    "terms": "Spårvagnsrutt, spårvagn, spårvagnsnät, spårvagnsräls, spårvagnsförbindelse "
+                    "terms": "Spårvagnsrutt, spårvagn, spårvagnsnät, spårvagnsräls, spårvagnsförbindelse"
                 },
                 "type/route_master": {
                     "name": "Huvudrutt",
@@ -6520,7 +6551,7 @@
                 },
                 "waterway/drain": {
                     "name": "Dränering",
-                    "terms": "dränering, avrinning, dagvatten, dagvattenavrinning "
+                    "terms": "dränering, avrinning, dagvatten, dagvattenavrinning"
                 },
                 "waterway/fuel": {
                     "name": "Sjömack",
@@ -6532,7 +6563,7 @@
                 },
                 "waterway/riverbank": {
                     "name": "Flodbank",
-                    "terms": "flodstrand, åstrand, flodbank, "
+                    "terms": "flodstrand, åstrand, flodbank,"
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Marin latrintömning",
@@ -6561,6 +6592,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Ortofoto Flandern mest aktuella © AGIV"
+                },
+                "name": "AGIV Flanderns mest aktuella flygfoton"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Ortofoto Flandern © AGIV"
+                },
+                "name": "AGIV Flandern 2013-2015 flygfoton 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flandern © AGIV"
+                },
+                "name": "AGIV Flandern GRB"
+            },
             "Bing": {
                 "description": "Satellit- eller flygfoton.",
                 "name": "Bing-flygfoto"
@@ -6569,7 +6618,7 @@
                 "attribution": {
                     "text": "Villkor & återkoppling"
                 },
-                "description": "Premium DigitalGlobe-satellitfoton.",
+                "description": "DigitalGlobe-Premium är ett mosaik som består av DigitalGlobes baskarta med valda regioner fyllda med +Vivid eller anpassade område med intressanta flygfoton, 50 cm upplösning eller bättre och uppdateras oftare med fortlöpande uppdateringar.",
                 "name": "DigitalGlobe Premium-bilder"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6583,7 +6632,7 @@
                 "attribution": {
                     "text": "Villkor & återkoppling"
                 },
-                "description": "Standard DigitalGlobe-satellitfoton.",
+                "description": "DigitalGlobe-Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30-60 cm upplösning där den är tillgänglig och Landsat för övrig yta. Medelåldern är 2,31 år och vissa områden uppdaterade 2 gånger per år.",
                 "name": "DigitalGlobe Standard-bilder"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6663,6 +6712,12 @@
                 },
                 "name": "OSM Inspector: Taggning"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) mest aktuella flygfoton"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerisk bild"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
             },
@@ -6677,6 +6732,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Väg: Grön ram = oklassificerad. Brun ram = bruksväg. Underlag: grus = ljusbrun fyllning, asfalt = svart, belagd = grå, mark = vit, betong = blå, gräs = grön. Säsongsöppen = vita streck",
                 "name": "Bildlager för Skogsvägar i USA"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6760,6 +6839,13 @@
                 },
                 "name": "OpenStreetMap (Tysk stil)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Inskanning av den Ekonomiska kartan från ca 1950–1980",
+                "name": "Lantmäteriets Ekonomiska karta (historisk)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMaps bidragsgivare"
@@ -6789,6 +6875,48 @@
                     "text": "Kartor © Thunderforest, Data © OpenStreetMaps bidragsgivare"
                 },
                 "name": "Thunderforest landskap"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenska järnvägsnätverket, inklusive sidospår",
+                "name": "Trafikverkets järnvägsnätverk"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenska järnvägsnätverket med flera kartlager att välja",
+                "name": "Trafikverkets järnvägsdatabas anpassningsbar"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenska nationella vägdatabasen, NVDB",
+                "name": "Trafikverkets vägnätverk"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenska nationella vägdatabasen, NVDB, med extra detaljer: Vägreferenser, hastighetsdämpare, busshållplatser, broar, tunnlar, fartkameror.",
+                "name": "Trafikverkets vägnätverk extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenska nationella vägdatabasen, NVDB - Gatunamn",
+                "name": "Trafikverkets gaturnamn"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenska nationella vägdatabasen, NVDB, med flera kartlager att välja",
+                "name": "Trafikverkets vägdatabas anpassningsbar"
             }
         },
         "community": {
@@ -7032,6 +7160,18 @@
                 "name": "OpenStreetMap Belgium på Twitter",
                 "description": "OSM Belgien på Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "OpenStreetMap Kroatiens Facebook-grupp",
+                "description": "OpenStreetMap Kroatiens Facebook-grupp"
+            },
+            "hr-irc": {
+                "name": "IRC för OpenStreetMap Kroatien",
+                "description": "Anslut #osm-hr på irc.freenode.org (port 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "E-postlistan Talk-hr",
+                "description": "E-postlistan Talk-hr"
+            },
             "czech-community": {
                 "name": "Tjeckiska OSM-gemenskapen",
                 "description": "Kartportal, webbplats och kontaktuppgifter för OSM-medlemmar i Tjeckien"
@@ -7202,6 +7342,14 @@
                 "name": "Forum för OpenStreetMap Polen",
                 "description": "Forum för den polska OpenStreetMap-gemenskapen"
             },
+            "si-forum": {
+                "name": "Forum för OpenStreetMap Slovenien",
+                "description": "Forum för den slovenska OpenStreetMap-gemenskapen"
+            },
+            "si-mailinglist": {
+                "name": "E-postlista för OpenStreetMap i Slovenien",
+                "description": "E-postlista för den slovenska OpenStreetMap-gemenskapen"
+            },
             "OSM-ES-mailinglist": {
                 "name": "E-postlistan Talk-es",
                 "description": "En e-postlista för att diskutera OpenStreetMap i Spanien"
@@ -7366,7 +7514,13 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "Vi hjälper till att utöka och förbättra OpenStreetMap i USA.",
-                "extendedDescription": "Vi stöder OpenStreetMap genom att ha årliga konferencier, tillhandahåller resurser för gemenskapen, bygger nätverk och genom att sprida ordet. Gå med i OpenStreetMap USA här: {signupUrl}"
+                "extendedDescription": "Vi stöder OpenStreetMap genom att ha årliga konferencier, tillhandahåller resurser för gemenskapen, bygger nätverk och genom att sprida ordet. Gå med i OpenStreetMap USA här: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map US 2018",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
