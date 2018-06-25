@@ -199,7 +199,7 @@
     "barrier/kerb": {"icon": "maki-wheelchair", "fields": ["kerb", "tactile_paving"], "geometry": ["vertex", "line"], "tags": {"barrier": "kerb"}, "name": "Kerb"},
     "barrier/kissing_gate": {"icon": "maki-barrier", "fields": ["access"], "geometry": ["vertex"], "tags": {"barrier": "kissing_gate"}, "name": "Kissing Gate"},
     "barrier/lift_gate": {"icon": "maki-roadblock", "fields": ["access"], "geometry": ["vertex", "line"], "tags": {"barrier": "lift_gate"}, "name": "Lift Gate"},
-    "barrier/retaining_wall": {"geometry": ["line", "area"], "tags": {"barrier": "retaining_wall"}, "name": "Retaining Wall"},
+    "barrier/retaining_wall": {"fields": ["height"], "geometry": ["line", "area"], "tags": {"barrier": "retaining_wall"}, "name": "Retaining Wall"},
     "barrier/stile": {"icon": "maki-roadblock", "fields": ["access"], "geometry": ["vertex"], "tags": {"barrier": "stile"}, "name": "Stile"},
     "barrier/toll_booth": {"icon": "maki-roadblock", "fields": ["access", "building_area"], "geometry": ["vertex", "area"], "tags": {"barrier": "toll_booth"}, "name": "Toll Booth"},
     "barrier/wall": {"icon": "maki-barrier", "fields": ["wall", "height"], "geometry": ["line", "area"], "tags": {"barrier": "wall"}, "name": "Wall", "matchScore": 0.25},
