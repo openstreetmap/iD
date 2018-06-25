@@ -117,7 +117,7 @@
 .layer-notes {
     pointer-events: none;
 }
-.layer-notes .notes * {
+.layer-notes * {
     color: #eebb00;
 }
 

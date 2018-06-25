@@ -61,32 +61,25 @@ export function svgNotes(projection, context, dispatch) {
         var service = getService();
         var data = (service ? service.notes(projection) : []);
         var transform = svgPointTransform(projection);
-        var notes = layer.selectAll('.notes').selectAll('.note')
+        var notes = layer.selectAll('.note')
             .data(data, function(d) { return d.key; });
 
         // exit
         notes.exit()
             .remove();
 
-        // enter
         var notesEnter = notes.enter()
-            .append('g')
-            .attr('class', 'note');
-
-        // update
-        var markers = notes
-            .merge(notesEnter)
-            .attr('transform', transform);
-
-        markers.selectAll('circle')
-            .data([0])
-            .enter()
             .append('use')
+            .attr('class', 'note')
             .attr('width', '24px')
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
             .attr('xlink:href', '#fas-comment-alt');
+
+        notes
+            .merge(notesEnter)
+            .attr('transform', transform);
     }
 
     function drawNotes(selection) {
@@ -99,16 +92,10 @@ export function svgNotes(projection, context, dispatch) {
         layer.exit()
             .remove();
 
-        var layerEnter = layer.enter()
+        layer.enter()
             .append('g')
             .attr('class', 'layer-notes')
-            .style('display', enabled ? 'block' : 'none');
-
-        layerEnter
-            .append('g')
-            .attr('class', 'notes');
-
-        layer = layerEnter
+            .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
         if (enabled) {
