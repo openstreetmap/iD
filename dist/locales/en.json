@@ -7210,6 +7210,18 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium on Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "OpenStreetMap Croatia Facebook group",
+                "description": "OpenStreetMap Croatia Facebook group"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Croatia on IRC",
+                "description": "Join #osm-hr on irc.freenode.org (port 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr Mailing List",
+                "description": "Talk-hr mailing list"
+            },
             "czech-community": {
                 "name": "Czech OSM community",
                 "description": "Map portal, website and contacts on OSM members in Czechia"
@@ -7380,6 +7392,14 @@
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
             },
+            "si-forum": {
+                "name": "OpenStreetMap Slovenia Forum",
+                "description": "Forum of OpenStreetMap community in Slovenia"
+            },
+            "si-mailinglist": {
+                "name": "OpenStreetMap Slovenia mailing list",
+                "description": "Mailing list of OpenStreetMap community in Slovenia"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es mailing list",
                 "description": "A mailing list to discuss OpenStreetMap in Spain"
@@ -7544,7 +7564,14 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "We help grow and improve OpenStreetMap in the United States.",
-                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}"
+                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map US 2018",
+                        "description": "Join the OpenStreetMap community at State of the Map US in Detroit, Michigan. Connect with other mappers, businesses, government agencies, and non profits, all collaborating around the free and editable map of the world.",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
