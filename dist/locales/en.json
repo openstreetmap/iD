@@ -6682,7 +6682,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm or resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
+                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
                 "name": "DigitalGlobe Standard Imagery"
             },
             "DigitalGlobe-Standard-vintage": {
