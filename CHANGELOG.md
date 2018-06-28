@@ -28,6 +28,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.9.2
+##### Jun 28, 2018
+
+#### :sparkles: Usability
+* This release contains a few updates to the background imagery list
+
+
 # 2.9.1
 ##### Jun 25, 2018
 
