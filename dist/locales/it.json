@@ -6487,7 +6487,6 @@
                 "attribution": {
                     "text": "Termini & Feedback"
                 },
-                "description": "DigitalGlobe-Standard è un set curato di immagini che copre l’86% della terra emersa mondiale, con risoluzione disponibile dai 30 ai 60cm e copertura alternativa che usa Landsat. L’età media è di 2,31 anni anche se alcune aree vengono aggiornate due volte l’anno.",
                 "name": "Immagini DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

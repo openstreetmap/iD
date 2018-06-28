@@ -151,7 +151,7 @@
                     "line": "Linha ou área conectada a outra linha.",
                     "area": "Linha conectada a uma área."
                 },
-                "relation": "Estes elementos não podem ser conectados porque eles têm funções de relação em conflito.",
+                "relation": "Estes elementos não podem ser conectados porque têm funções de relação em conflito.",
                 "restriction": "Estes elementos não podem ser conectados porque iriam danificar a relação \"{relation}\"."
             },
             "disconnect": {
@@ -171,7 +171,7 @@
                 "not_eligible": "Estes elementos não podem ser combinados.",
                 "not_adjacent": "Estes elementos não podem ser unidos porque as suas extremidades não estão conectadas.",
                 "restriction": "Estes elementos não podem ser unidos porque iriam danificar a relação \"{relation}\".",
-                "relation": "Estes elementos não podem ser unidos porque eles têm funções de relação em conflito.",
+                "relation": "Estes elementos não podem ser unidos porque têm funções de relação em conflito.",
                 "incomplete_relation": "Estes elementos não podem ser combinados porque pelo menos um deles não está completamente descarregado no mapa.",
                 "conflicting_tags": "Estes elementos não podem ser combinados porque algumas das suas etiquetas entram em conflito."
             },
@@ -714,6 +714,12 @@
             "drag_drop": "Arraste e largue um ficheiro .gpx, .geojson ou .kml na página ou clique no botão da direita para selecionar um",
             "zoom": "Aproximar para a camada",
             "browse": "Encontrar ficheiro"
+        },
+        "streetside": {
+            "tooltip": "Fotos ao nível da rua da Microsoft",
+            "title": "Camada superior com imagens de rua Bing",
+            "report": "Reporte uma preocupação com a privacidade nesta imagem",
+            "hires": "Alta resolução"
         },
         "mapillary_images": {
             "tooltip": "Fotos ao nível de rua do Mapillary",

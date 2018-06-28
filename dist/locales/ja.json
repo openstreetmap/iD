@@ -718,7 +718,8 @@
         "streetside": {
             "tooltip": "Microsoftによる街路写真",
             "title": "写真の重ね合わせ(Bing街路)",
-            "report": "この画像のプライバシーについてレポートする"
+            "report": "この画像のプライバシーについてレポートする",
+            "hires": "高解像度"
         },
         "mapillary_images": {
             "tooltip": "Mapillary から路上の写真を取得します",
@@ -1571,6 +1572,9 @@
                 "board_type": {
                     "label": "種類"
                 },
+                "booth": {
+                    "label": "ブース"
+                },
                 "boules": {
                     "label": "種類"
                 },
@@ -1965,9 +1969,11 @@
                     }
                 },
                 "horse_scale": {
-                    "label": "乗馬の難易度"
+                    "label": "乗馬の難易度",
+                    "placeholder": "困難, 危険..."
                 },
                 "horse_stables": {
+                    "label": "乗馬施設",
                     "options": {
                         "stables": "Yes",
                         "undefined": "No"
@@ -2481,6 +2487,17 @@
                 },
                 "shop": {
                     "label": "店舗の種類"
+                },
+                "siren/purpose": {
+                    "label": "利用目的"
+                },
+                "siren/type": {
+                    "label": "種類",
+                    "options": {
+                        "electronic": "電子式",
+                        "other": "その他",
+                        "pneumatic": "空気式"
+                    }
                 },
                 "site": {
                     "label": "種類"
@@ -3991,6 +4008,10 @@
                 "emergency/destination": {
                     "name": "行き先に用事がある緊急車両, 救命"
                 },
+                "emergency/fire_alarm": {
+                    "name": "火災通報ボックス",
+                    "terms": "火災通報ボックス, 火災通報装置"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "消化器",
                     "terms": "消化器"
@@ -3999,9 +4020,17 @@
                     "name": "消火栓/消防水利",
                     "terms": "消火栓, 消防, 消防水利, 救命, 緊急, 火災"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "救命キット",
+                    "terms": "救命キット, 救急セット, 救急救命セット"
+                },
                 "emergency/life_ring": {
                     "name": "救命浮き輪",
                     "terms": "救命浮き輪, ライフブイ, 救命浮環, 救命浮標"
+                },
+                "emergency/lifeguard": {
+                    "name": "ライフガード",
+                    "terms": "ライフガード, 救護員, 監視員"
                 },
                 "emergency/no": {
                     "name": "緊急車両の利用不可"
@@ -4015,6 +4044,10 @@
                 },
                 "emergency/private": {
                     "name": "私有の緊急車両"
+                },
+                "emergency/siren": {
+                    "name": "サイレン",
+                    "terms": "サイレン, 緊急サイレン"
                 },
                 "emergency/water_tank": {
                     "name": "防火水槽",
@@ -6577,6 +6610,7 @@
                 "attribution": {
                     "text": "規約＆フィードバック"
                 },
+                "description": "DigitalGlobe-Premiumは DigitalGlobe ベースマップの繋ぎ合わせから成り、50cm以上の解像度した組み合わせで、選ばれた地域が+Vividや興味深いカスタムエリアで埋められ、今後の更新でより頻繁にリフレッシュされます。",
                 "name": "DigitalGlobeプレミアム画像"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6590,6 +6624,7 @@
                 "attribution": {
                     "text": "規約＆フィードバック"
                 },
+                "description": "DigitalGlobe-Standardは地球の大陸部の86%をカバーする画像を集めたセットで、一部30-60cm解像度でランドサットを下敷きにしています。平均年齢は2.31歳で、場所によっては毎年2x 更新されます。",
                 "name": "DigitalGlobe標準画像"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -7471,7 +7506,14 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "We help grow and improve OpenStreetMap in the United States.",
-                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}"
+                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map US 2018",
+                        "description": "Join the OpenStreetMap community at State of the Map US in Detroit, Michigan. Connect with other mappers, businesses, government agencies, and non profits, all collaborating around the free and editable map of the world.",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

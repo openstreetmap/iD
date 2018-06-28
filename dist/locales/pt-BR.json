@@ -715,6 +715,12 @@
             "zoom": "Aproximar a camada",
             "browse": "Procurar um arquivo"
         },
+        "streetside": {
+            "tooltip": "Fotos da Streetside da Microsoft",
+            "title": "Sobreposição de fotos (Bing Streetside)",
+            "report": "Denunciar uma preocupação de privacidade com esta imagem",
+            "hires": "Alta resolução"
+        },
         "mapillary_images": {
             "tooltip": "Fotos a nível de rua do Mapillary",
             "title": "Camada de Fotos (Mapillary)"
@@ -1565,6 +1571,9 @@
                 },
                 "board_type": {
                     "label": "Tipo"
+                },
+                "booth": {
+                    "label": "Cabine"
                 },
                 "boules": {
                     "label": "Tipo"
@@ -2486,6 +2495,17 @@
                 },
                 "shop": {
                     "label": "Tipo"
+                },
+                "siren/purpose": {
+                    "label": "Propósito"
+                },
+                "siren/type": {
+                    "label": "Tipo",
+                    "options": {
+                        "electronic": "Eletrônico",
+                        "other": "Outro",
+                        "pneumatic": "Pneumático"
+                    }
                 },
                 "site": {
                     "label": "Tipo"
@@ -3976,13 +3996,25 @@
                 "emergency/destination": {
                     "name": "Acesso de Emergência como Destino"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Caixa de chamada de alarme de incêndio"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Extintor de incêndio"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Hidrante",
                     "terms": "Hidrante, extintor, incêndio, mangueira"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Kit de primeiros socorros"
+                },
                 "emergency/life_ring": {
                     "name": "Bóia salva-vidas",
                     "terms": "salva-vidas, salva vidas, bóia"
+                },
+                "emergency/lifeguard": {
+                    "name": "Salva-vidas"
                 },
                 "emergency/no": {
                     "name": "Acesso de Emergência Não Permitido"
@@ -3996,6 +4028,9 @@
                 },
                 "emergency/private": {
                     "name": "Acesso de Emergência Privado"
+                },
+                "emergency/siren": {
+                    "name": "Sirene"
                 },
                 "emergency/water_tank": {
                     "name": "Tanque de água de emergência"
@@ -4429,6 +4464,9 @@
                     "name": "Floresta manejada",
                     "terms": "Floresta plantada, Silvicultura, Reflorestamento, Área reflorestada"
                 },
+                "landuse/garages": {
+                    "name": "Uso da terra da garagem"
+                },
                 "landuse/grass": {
                     "name": "Gramado",
                     "terms": "Gramado"
@@ -4607,8 +4645,14 @@
                 "leisure/fitness_station/balance_beam": {
                     "name": "Trave de Equilíbrio"
                 },
+                "leisure/fitness_station/box": {
+                    "name": "Caixa de exercício"
+                },
                 "leisure/fitness_station/horizontal_bar": {
                     "name": "Barra Fixa Horizontal"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "name": "Barras de Macaco de Exercício"
                 },
                 "leisure/fitness_station/hyperextension": {
                     "name": "Estação de Hiperextensão"
@@ -4616,9 +4660,15 @@
                 "leisure/fitness_station/parallel_bars": {
                     "name": "Barras Paralelas"
                 },
+                "leisure/fitness_station/push-up": {
+                    "name": "Estação de flexão"
+                },
                 "leisure/fitness_station/rings": {
                     "name": "Argolas de Exercício",
                     "terms": "Argolas"
+                },
+                "leisure/fitness_station/sign": {
+                    "name": "Sinal de instrução de exercício"
                 },
                 "leisure/fitness_station/sit-up": {
                     "name": "Prancha para Abdominais"
@@ -4657,6 +4707,9 @@
                 "leisure/nature_reserve": {
                     "name": "Reserva natural",
                     "terms": "Reserva florestal, floresta,  natureza, vida selvagem"
+                },
+                "leisure/outdoor_seating": {
+                    "name": "Área de estar ao ar livre"
                 },
                 "leisure/park": {
                     "name": "Parque ou Praça",
@@ -4800,6 +4853,9 @@
                 "man_made/chimney": {
                     "name": "Chaminé",
                     "terms": "Lareira, Forno, Fábrica, Indústria, Gás"
+                },
+                "man_made/clearcut": {
+                    "name": "Floresta desmatada"
                 },
                 "man_made/crane": {
                     "name": "Grua",
@@ -4972,6 +5028,9 @@
                 "natural/peak": {
                     "name": "Cume",
                     "terms": "Pico, Topo de Montanha, Serra, Montanha, Monte"
+                },
+                "natural/reef": {
+                    "name": "Recife"
                 },
                 "natural/ridge": {
                     "name": "Cumeeira",
@@ -5251,9 +5310,21 @@
                     "name": "Povoado",
                     "terms": "vila, povoado, distrito, aldeia"
                 },
+                "playground/basket_spinner": {
+                    "name": "Girador de cesta"
+                },
+                "playground/basket_swing": {
+                    "name": "Balanço de cesta"
+                },
+                "playground/climbing_frame": {
+                    "name": "Quadro de escalada"
+                },
                 "playground/cushion": {
                     "name": "Pula-Pula Inflável",
                     "terms": "castelo inflável, colchão infável"
+                },
+                "playground/horizontal_bar": {
+                    "name": "Jogar Barra Horizontal"
                 },
                 "playground/rocker": {
                     "name": "Balanço de Mola"
@@ -5272,6 +5343,9 @@
                 "playground/slide": {
                     "name": "Escorregador",
                     "terms": "Escorregador, escorrega"
+                },
+                "playground/structure": {
+                    "name": "Estrutura do jogo"
                 },
                 "playground/swing": {
                     "name": "Balanço"
@@ -5333,6 +5407,12 @@
                     "name": "Transformador",
                     "terms": "transformador, energia elétrica, eletricidade"
                 },
+                "public_transport/linear_platform": {
+                    "name": "Parada de Trânsito / Plataforma"
+                },
+                "public_transport/linear_platform_aerialway": {
+                    "name": "Parada / Plataforma Aérea"
+                },
                 "public_transport/linear_platform_bus": {
                     "name": "Parada de Ônibus / Plataforma",
                     "terms": "ônibus, ponto de ônibus, transporte público, plataforma, trânsito"
@@ -5363,6 +5443,12 @@
                 "public_transport/linear_platform_trolleybus": {
                     "name": "Parada de Trólebus / Plataforma",
                     "terms": "parada de trolleybus, ponto de trólebus, trólei, tróleibus, trolleybus, bonde, tram, elétrico, trânsito, transporte público, transporte, coletivo"
+                },
+                "public_transport/platform": {
+                    "name": "Parada de Trânsito / Plataforma"
+                },
+                "public_transport/platform_aerialway": {
+                    "name": "Parada / Plataforma Aérea"
                 },
                 "public_transport/platform_bus": {
                     "name": "Parada de ônibus / Plataforma",
@@ -5398,6 +5484,9 @@
                 "public_transport/station": {
                     "name": "Estação de trânsito"
                 },
+                "public_transport/station_aerialway": {
+                    "name": "Estação Aérea"
+                },
                 "public_transport/station_bus": {
                     "name": "Rodoviária / Terminal de Ônibus",
                     "terms": "ônibus, estação de ônibus, estação rodoviária, terminal rodoviário, estação, transporte público, trânsito"
@@ -5423,6 +5512,7 @@
                     "terms": "estação ferroviária, trem, trilhos, estação, terminal, transporte público, transporte, trânsito"
                 },
                 "public_transport/station_train_halt": {
+                    "name": "Estação de trem (parada / pedido)",
                     "terms": "estação de trem, estação ferroviária, ferrovia, trilhos, estação, terminal, transporte público, transporte, trânsito"
                 },
                 "public_transport/station_tram": {
@@ -5431,6 +5521,15 @@
                 },
                 "public_transport/station_trolleybus": {
                     "name": "Estação de Trólebus / Terminal"
+                },
+                "public_transport/stop_area": {
+                    "name": "Área de parada de trânsito"
+                },
+                "public_transport/stop_position": {
+                    "name": "Local de parada de trânsito"
+                },
+                "public_transport/stop_position_aerialway": {
+                    "name": "Localização de parada da via aérea"
                 },
                 "public_transport/stop_position_bus": {
                     "name": "Local de parada de ônibus"
@@ -5558,6 +5657,9 @@
                 "shop": {
                     "name": "Loja",
                     "terms": "Loja, Comércio"
+                },
+                "shop/agrarian": {
+                    "name": "Loja de Suprimentos Agrícolas"
                 },
                 "shop/alcohol": {
                     "name": "Loja de alcoólicos licenciada",
@@ -5922,6 +6024,9 @@
                 "shop/pet": {
                     "name": "Loja de animais ou artigos para animais",
                     "terms": "Pet Shop, Veterinário, Animais de estimação, cão, cães, gato"
+                },
+                "shop/pet_grooming": {
+                    "name": "Loja de cuidados com animais de estimação"
                 },
                 "shop/photo": {
                     "name": "Loja de Fotografia",
@@ -6387,6 +6492,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Ortofoto Flanders mais recente © AGIV"
+                },
+                "name": "AGIV Flandres mais recente imagem aérea"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                },
+                "name": "AGIV Flanders 2013-2015 imagens aéreas 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Imagens aéreas e de satélite.",
                 "name": "Imagens aéreas do Bing"
@@ -6395,6 +6518,7 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
+                "description": "O DigitalGlobe-Premium é um mosaico composto de mapa base DigitalGlobe com regiões selecionadas preenchidas com imagens Vivid ou personalizadas de área de interesse, resolução de 50 cm ou superior, e atualizadas com mais frequência com atualizações contínuas.",
                 "name": "Imagens premium da DigitalGlobe"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6408,6 +6532,7 @@
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
+                "description": "O DigitalGlobe-Standard é um conjunto curado de imagens que cobre 86% da massa terrestre do planeta, com resolução de 30-60 cm onde disponível, provida pela Landsat. A idade média é de 2,31 anos, com algumas áreas atualizadas 2x por ano.",
                 "name": "Imagens comuns da DigitalGlobe"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6487,6 +6612,12 @@
                 },
                 "name": "Inspetor OSM: Etiquetas"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW (allonie) imagens aéreas mais recentes"
+            },
+            "SPW_PICC": {
+                "name": "SPW (allonie) Imagens numéricas PICC"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "Estradas TIGER 2012"
             },
@@ -6501,6 +6632,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Estrada: Cobertura verde = não classificada. Cobertura marrom = trilha. Superfície: cascalho = preenchimento marrom claro, Asfalto = preto, Pavimentado = cinza, Terra = branco, Concreto = azul, Grama = verde. Sazonal = barras brancas",
                 "name": "Sobreposição de estradas florestais dos EUA"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realizado por meio da Brussels UrbIS®© - Distribuição & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realizado por meio da Brussels UrbIS®© - Distribuição & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realizado por meio da Brussels UrbIS®© - Distribuição & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realizado por meio da Brussels UrbIS®© - Distribuição & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6584,6 +6739,13 @@
                 },
                 "name": "OpenStreetMap (Estilo Alemão)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Scan de 'Mapas Econômicos' de cerca de 1950-1980",
+                "name": "Mapa Econômico Lantmäteriet (histórico)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Dados © Colaboradores do OpenStreetMap"
@@ -6613,6 +6775,48 @@
                     "text": "Mapas © Thunderforest, Dados © Colaboradores do OpenStreetMap"
                 },
                 "name": "Panorama Thunderforest"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Rede ferroviária sueca, incluindo ramais",
+                "name": "Rede Ferroviária Trafikverket"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Rede ferroviária sueca com várias opções para camadas de mapa",
+                "name": "Opções da Rede Ferroviária Trafikverket"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Rede Ferroviária sueca NVDB",
+                "name": "Rede Rodoviária Trafikverket"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Detalhes adicionais NVDB suecos: Referência rodoviária, tráfego calmante, área de descanso, ponto de ônibus, ponte, túnel, câmera de velocidade",
+                "name": "Trafikverket Road Network extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Nomes de ruas em NVDB da Suécia",
+                "name": "Nomes de ruas de Trafikverket"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Rede rodoviária sueca NVDB com várias opções para camadas de mapa",
+                "name": "Opções da Rede Rodoviária Trafikverket"
             }
         },
         "community": {
@@ -6635,6 +6839,7 @@
                 "name": "Lista de Discussão Talk-mg"
             },
             "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
                 "extendedDescription": "Mapeando em Bangladesh? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!"
             },
             "OSM-India-facebook": {
@@ -6663,12 +6868,15 @@
                 "name": "OpenStreetMap Japão"
             },
             "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongólia",
                 "extendedDescription": "Mapeando na Mongólia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
             },
             "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
                 "extendedDescription": "Mapeando em Myanmar? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
             },
             "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal",
                 "extendedDescription": "Mapeando no Nepal? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
             },
             "OSM-PH-mailinglist": {
@@ -6676,13 +6884,70 @@
                 "description": "Uma lista de discussão para falar sobre o OpenStreetMap nas Filipinas"
             },
             "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
                 "extendedDescription": "Mapeando no Sri Lanka? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {Url}.  Todos são bem-vindos!"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "Lista de Discussão Taiwan"
+            },
+            "at-mailinglist": {
+                "name": "Lista de Discussão Talk-at"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Áustria"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Bielorrússia"
+            },
+            "be-mailinglist": {
+                "name": "Lista de Discussão Talk-be"
+            },
+            "be-matrix": {
+                "description": "Todos os mapeadores são bem-vindos!"
+            },
+            "hr-mailinglist": {
+                "name": "Lista de Discussão Talk-hr",
+                "description": "Lista de discussão Talk-hr"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Lista de Discussão Tcheca (talk-cz)"
+            },
+            "dk-mailinglist": {
+                "name": "Lista de Discussão Talk-dk"
+            },
+            "fi-mailinglist": {
+                "name": "Lista de Discussão Talk-fi"
+            },
+            "fr-mailinglist": {
+                "name": "Lista de Discussão Talk-fr",
+                "description": "Lista de Discussão Talk-fr"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Lista de Discussão Berlim"
             },
             "de-berlin-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
             },
+            "de-mailinglist": {
+                "name": "Lista de Discussão Talk-de"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Lista de Discussão OWL"
+            },
+            "it-mailinglist": {
+                "name": "Lista de Discussão Talk-it"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Lista de Discussão Talk-es"
+            },
+            "se-mailinglist": {
+                "name": "Lista de Discussão Talk-se"
+            },
             "se-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
+            },
+            "gb-mailinglist": {
+                "name": "Lista de Discussão Talk-gb"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers da Bay Area",
@@ -6738,12 +7003,29 @@
                 "name": "OpenStreetMap Seattle",
                 "description": "Mapeadores e usuários do OpenStreetMap na área de Seattle"
             },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Califórnia Meridional"
+            },
             "OSM-South-Bay": {
                 "name": "OSM South Bay",
                 "description": "Noites do Mapa hospedado por Code for San Jose"
             },
             "OSM-US-Slack": {
                 "description": "Todos são bem-vindos! Se inscreva em {signupUrl}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap EUA",
+                "events": {
+                    "sotmus2018": {
+                        "where": "Detroit, Michigan"
+                    }
+                }
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming"
             },
             "PHXGeo-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
@@ -6787,17 +7069,32 @@
                 "name": "Twitter OpenStreetMap Brasil",
                 "description": "Nos siga no Twitter em {url}"
             },
+            "OSM-CL-mailinglist": {
+                "name": "Lista de Discussão Talk-cl"
+            },
             "OSM-CL-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
             },
             "OSM-CO-facebook": {
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap. Todos são bem-vindos!"
             },
+            "OSM-CO-mailinglist": {
+                "name": "Lista de Discussão Talk-co"
+            },
             "OSM-CO-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
             },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colômbia"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Lista de Discussão Talk-pe"
+            },
             "OSM-PE-twitter": {
                 "description": "Siga-nos no Twitter: {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap no Reddit",
@@ -6808,9 +7105,11 @@
                 "description": "Siga-nos no Twitter: {url}"
             },
             "OSMF": {
+                "name": "Fundação OpenStreetMap",
                 "events": {
                     "sotm2018": {
-                        "description": "Participe da conferência global do OpenStreetMap em Milão (Itália), evento que irá reunir por três dias toda a comunidade OSM para socializar, compartilhar e aprender juntos."
+                        "description": "Participe da conferência global do OpenStreetMap em Milão (Itália), evento que irá reunir por três dias toda a comunidade OSM para socializar, compartilhar e aprender juntos.",
+                        "where": "Milão, Itália"
                     }
                 }
             }

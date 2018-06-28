@@ -3974,6 +3974,9 @@
                 "emergency/destination": {
                     "name": "Accessible aux services d'urgences"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Boîte d'alarme incendie"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Extincteur d'incendie",
                     "terms": "Extincteur, incendie, feu, poudre, mousse"
@@ -3988,6 +3991,10 @@
                 },
                 "emergency/life_ring": {
                     "name": "Bouée de Sauvetage"
+                },
+                "emergency/lifeguard": {
+                    "name": "sauveteur",
+                    "terms": "sauveteur, maître-nageur, secouriste, surveillant"
                 },
                 "emergency/no": {
                     "name": "Non accessible aux services d'urgences"
@@ -6496,6 +6503,7 @@
                 "attribution": {
                     "text": "Termes & commentaires"
                 },
+                "description": "DigitalGlobe-Premium est une mosaïque composée de la carte de base de DigitalGlobe avec des régions utilisant +Vivid ou des imageries à des endroits intéressants avec une résolution de 50 cm ou mieux, et rafraîchi plus fréquemment avec des mises à jours régulières.",
                 "name": "Images DigitalGlobe premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -7390,7 +7398,14 @@
             "OSM-US": {
                 "name": "OpenStreetMap États-Unis",
                 "description": "Nous aidons OpenStreetMap à grandir et à s'améliorer aux États-Unis.",
-                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}"
+                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map USA 2018",
+                        "description": "Rejoignez la communauté OpenStreetMap au State of the Map USA à Detroit, dans le Michigan. Rencontrez d'autres cartographes, des boîtes, des agences gouvernementales et des associations, qui collaborent tous autour de la carte du monde libre et modifiable.",
+                        "where": "Detroit dans le Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

@@ -1608,7 +1608,7 @@
                     "label": "Nadmořská výška"
                 },
                 "email": {
-                    "label": "Email",
+                    "label": "E-mail",
                     "placeholder": "priklad@priklad.cz"
                 },
                 "embankment": {

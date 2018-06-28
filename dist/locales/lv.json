@@ -492,14 +492,32 @@
             "in": "Pietuvināt",
             "out": "Attālināt"
         },
+        "streetside": {
+            "tooltip": "Ielas līmeņa attēli no Microsoft",
+            "title": "Fotogrāfiju pārklājs (Bing Streetside)"
+        },
+        "mapillary_images": {
+            "tooltip": "Ielas līmeņa attēli no Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Ielas līmeņa attēli no OpenStreetCam",
+            "title": "Fotogrāfiju pārklājs (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Skatīt šo attēlu OpenStreetCam"
+        },
         "help": {
             "title": "Palīdzība",
             "help": {
+                "welcome": "Esiet sveicināti iD [OpenStreetMap](https://www.openstreetmap.org/) rediģētājā. Ar šo rediģētāju jūs varat rediģēt OpenStreetMap savā pārlūkprogrammā.",
                 "open_source_help": "Tu vari palīdzēt iD [tulkojot](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) vai [ziņojot par kļūdām](https://github.com/openstreetmap/iD/issues)."
             },
             "feature_editor": {
                 "title": "Objektu Redaktors",
                 "type_h": "Objekta Veids"
+            },
+            "streetlevel": {
+                "title": "Ielas līmeņa attēli"
             }
         },
         "intro": {
@@ -566,6 +584,10 @@
                         "destination": {
                             "title": "Galamērķis"
                         },
+                        "dismount": {
+                            "description": "Piekļuve atļauta, bet braucējam jānokāpj",
+                            "title": "Jānokāpj"
+                        },
                         "no": {
                             "description": "Piekļuve nav atļauta bez speciālā atļaujām ",
                             "title": "Aizliegts"
@@ -604,12 +626,16 @@
                         "floor": "Stāvs",
                         "housename": "Mājas Nosaukums",
                         "housenumber": "123",
+                        "neighbourhood": "Apdzīvotais rajons",
                         "place": "Vieta",
                         "postcode": "Pasta indekss",
                         "province": "Province",
                         "state": "Štats",
                         "street": "Iela"
                     }
+                },
+                "admin_level": {
+                    "label": "Administrācijas stāvs"
                 },
                 "aerialway": {
                     "label": "Tips"
@@ -752,6 +778,7 @@
                     "label": "Savākšanas laiki"
                 },
                 "comment": {
+                    "label": "Izmaiņu komentārs",
                     "placeholder": "Īss apraksts par jūsu ieguldījumu (vajadzīgs)"
                 },
                 "communication_multi": {
@@ -812,7 +839,11 @@
                             "description": "Nav velosipēdu celiņa",
                             "title": "Nav"
                         },
+                        "share_busway": {
+                            "title": "Velosipēdu celiņš kopā ar publiskā transporta joslu"
+                        },
                         "shared_lane": {
+                            "description": "Velosipēdu celiņš bez atdalīšanas no braucamās daļas",
                             "title": "Dalīts velosipēdu celiņš"
                         },
                         "track": {
@@ -1027,6 +1058,9 @@
                 "historic": {
                     "label": "Tips"
                 },
+                "historic/civilization": {
+                    "label": "Vēsturiska Civilizācija"
+                },
                 "hoops": {
                     "placeholder": "1, 2, 4..."
                 },
@@ -1037,6 +1071,7 @@
                     }
                 },
                 "horse_riding": {
+                    "label": "Zirgu izjāde",
                     "options": {
                         "horse_riding": "Jā",
                         "undefined": "Nē"
@@ -1060,6 +1095,12 @@
                         "stables": "Jā",
                         "undefined": "Nē"
                     }
+                },
+                "iata": {
+                    "label": "IATA"
+                },
+                "icao": {
+                    "label": "ICAO"
                 },
                 "incline": {
                     "label": "Slīpums"
@@ -1096,6 +1137,9 @@
                 "internet_access/ssid": {
                     "label": "SSID (Tīkla Nosaukums)"
                 },
+                "kerb": {
+                    "label": "Apmale"
+                },
                 "label": {
                     "label": "Etiķete"
                 },
@@ -1106,6 +1150,7 @@
                     "label": "Tips"
                 },
                 "lanes": {
+                    "label": "Joslas",
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
@@ -1199,6 +1244,9 @@
                 },
                 "memorial": {
                     "label": "Tips"
+                },
+                "monitoring_multi": {
+                    "label": "Uzraudzība"
                 },
                 "mtb/scale": {
                     "label": "Kalnu riteņbraukšanas grūtības pakāpe",
@@ -1332,6 +1380,7 @@
                     "label": "Maksājumu veidi"
                 },
                 "phases": {
+                    "label": "Fāzes",
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
@@ -1342,7 +1391,8 @@
                     "label": "Grūtība",
                     "options": {
                         "novice": "Iesācēju (Istruktāžas)"
-                    }
+                    },
+                    "placeholder": "Viegls,Vidējs,Grūts"
                 },
                 "piste/type": {
                     "options": {
@@ -1372,8 +1422,14 @@
                 "power": {
                     "label": "Tips"
                 },
+                "product": {
+                    "label": "Produkti"
+                },
                 "railway": {
                     "label": "Tips"
+                },
+                "recycling_accepts": {
+                    "label": "Pieņem"
                 },
                 "ref_golf_hole": {
                     "placeholder": "1-18"
@@ -1495,6 +1551,15 @@
                 "tower/type": {
                     "label": "Tips"
                 },
+                "trade": {
+                    "label": "Tips"
+                },
+                "traffic_calming": {
+                    "label": "Tips"
+                },
+                "traffic_signals": {
+                    "label": "Tips"
+                },
                 "transformer": {
                     "options": {
                         "auto": "Autotransformātors",
@@ -1514,6 +1579,7 @@
                     "options": {
                         "branch": "Zars",
                         "industrial": "Industiāls",
+                        "main": "Galvenais",
                         "military": "Militārs",
                         "test": "Testa",
                         "tourism": "Tūrisma"
@@ -1575,6 +1641,9 @@
                 "advertising/billboard": {
                     "name": "Reklāmas dēlis"
                 },
+                "advertising/column": {
+                    "name": "Reklāmu stabs"
+                },
                 "aerialway/cable_car": {
                     "name": "Trosu Ceļš"
                 },
@@ -1584,14 +1653,26 @@
                 "aeroway/aerodrome": {
                     "name": "Lidosta"
                 },
+                "aeroway/gate": {
+                    "name": "Lidostas vārti"
+                },
                 "aeroway/hangar": {
                     "name": "Angārs"
                 },
                 "aeroway/helipad": {
                     "name": "Helikopteru nosēšanās laukums"
                 },
+                "aeroway/runway": {
+                    "name": "Skrejceļš"
+                },
+                "aeroway/taxiway": {
+                    "name": "Manevrēšanas ceļš"
+                },
                 "aeroway/terminal": {
                     "name": "Lidostas Terminālis"
+                },
+                "amenity": {
+                    "name": "Labierīcība"
                 },
                 "amenity/animal_shelter": {
                     "name": "Dzīvnieku patversme"
@@ -1626,6 +1707,9 @@
                 "amenity/biergarten": {
                     "name": "Alus Dārzs"
                 },
+                "amenity/boat_rental": {
+                    "name": "Laivu īre"
+                },
                 "amenity/bureau_de_change": {
                     "name": "Valūtas Maiņa"
                 },
@@ -1647,11 +1731,17 @@
                 "amenity/charging_station": {
                     "name": "Uzlādes stacija"
                 },
+                "amenity/childcare": {
+                    "name": "Bērnistaba / Bērnu aprūpe"
+                },
                 "amenity/cinema": {
                     "name": "Kino"
                 },
                 "amenity/clinic": {
                     "name": "Klīnika"
+                },
+                "amenity/clinic/abortion": {
+                    "name": "Aborta klīnika"
                 },
                 "amenity/clock": {
                     "name": "Pulkstenis"
@@ -1685,6 +1775,9 @@
                 },
                 "amenity/fire_station": {
                     "name": "Ugunsdzēsēju stacija"
+                },
+                "amenity/food_court": {
+                    "name": "Ēdnīca"
                 },
                 "amenity/fountain": {
                     "name": "Strūklaka"
@@ -1766,6 +1859,9 @@
                 },
                 "amenity/recycling": {
                     "name": "Šķirošanas konteiners"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Šķirošanas centrs"
                 },
                 "amenity/restaurant": {
                     "name": "Restorāns"
@@ -1855,16 +1951,49 @@
                     "name": "Veternārārsts"
                 },
                 "amenity/waste/dog_excrement": {
-                    "name": "Suņu Maisiņu Izmestuve"
+                    "name": "Suņu ekskrementu tvertne"
+                },
+                "amenity/waste_basket": {
+                    "name": "Atkritumu grozs"
+                },
+                "amenity/waste_disposal": {
+                    "name": "Atkritumu konteiners"
+                },
+                "area": {
+                    "name": "Apgabals"
+                },
+                "area/highway": {
+                    "name": "Ceļa segums"
+                },
+                "attraction/animal": {
+                    "name": "Dzīvnieku"
+                },
+                "attraction/carousel": {
+                    "name": "Karuseļu"
+                },
+                "attraction/maze": {
+                    "name": "Labirints"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Pirātu kuģis"
                 },
                 "attraction/roller_coaster": {
                     "name": "Amerikāņu Kalniņi"
+                },
+                "attraction/train": {
+                    "name": "Tūristu vilcieniņš"
+                },
+                "attraction/water_slide": {
+                    "name": "Ūdens Slidkalniņš"
                 },
                 "barrier": {
                     "name": "Barjera"
                 },
                 "barrier/block": {
                     "name": "Ēkas daļa"
+                },
+                "barrier/bollard": {
+                    "name": "Stabs"
                 },
                 "barrier/city_wall": {
                     "name": "Pilsētas mūri"
@@ -1889,6 +2018,9 @@
                 },
                 "barrier/lift_gate": {
                     "name": "Lifta ieeja"
+                },
+                "barrier/retaining_wall": {
+                    "name": "Stiprinājuma siena"
                 },
                 "barrier/toll_booth": {
                     "name": "Muitas punkts"
@@ -1923,6 +2055,9 @@
                 "building/church": {
                     "name": "Baznīcas Ēka"
                 },
+                "building/dormitory": {
+                    "name": "Kopmītnes"
+                },
                 "building/entrance": {
                     "name": "Ieeja/Izeja"
                 },
@@ -1931,6 +2066,9 @@
                 },
                 "building/garages": {
                     "name": "Garāžas"
+                },
+                "building/grandstand": {
+                    "name": "Tribīnes"
                 },
                 "building/greenhouse": {
                     "name": "Siltumnīca"
@@ -1947,11 +2085,26 @@
                 "building/industrial": {
                     "name": "Industijas Ēka"
                 },
+                "building/public": {
+                    "name": "Publiska Ēka"
+                },
+                "building/residential": {
+                    "name": "Dzīvojamā Ēka"
+                },
+                "building/retail": {
+                    "name": "Komerciāla Ēka"
+                },
                 "building/roof": {
                     "name": "Jumts"
                 },
+                "building/ruins": {
+                    "name": "Ēkas drupas"
+                },
                 "building/school": {
                     "name": "Skolas Ēka"
+                },
+                "building/shed": {
+                    "name": "Sķūnis"
                 },
                 "building/stable": {
                     "name": "Stallis"
@@ -1962,14 +2115,32 @@
                 "building/train_station": {
                     "name": "Vilcienu Stacija"
                 },
+                "building/university": {
+                    "name": "Universitātes Ēka"
+                },
                 "building/warehouse": {
                     "name": "Noliktava"
                 },
                 "craft/basket_maker": {
                     "name": "Grozu veidotājs"
                 },
+                "craft/beekeeper": {
+                    "name": "Biškopis"
+                },
+                "craft/boatbuilder": {
+                    "name": "Laivu būvētājs"
+                },
+                "craft/brewery": {
+                    "name": "Darītava"
+                },
+                "craft/chimney_sweeper": {
+                    "name": "Skursteņslauķis"
+                },
                 "craft/clockmaker": {
                     "name": "Pulksteņdaris"
+                },
+                "craft/confectionery": {
+                    "name": "Saldumu veidotājs"
                 },
                 "craft/electrician": {
                     "name": "Elektriķis"
@@ -1995,6 +2166,9 @@
                 "craft/photographer": {
                     "name": "Fotogrāfs"
                 },
+                "craft/photographic_laboratory": {
+                    "name": "Fotolabratorija"
+                },
                 "craft/plumber": {
                     "name": "Santehniķis"
                 },
@@ -2004,8 +2178,14 @@
                 "craft/roofer": {
                     "name": "Jumiķis"
                 },
+                "craft/sawmill": {
+                    "name": "Kokzāģētava"
+                },
                 "craft/sculptor": {
                     "name": "Skulptors"
+                },
+                "craft/shoemaker": {
+                    "name": "Kurpnieks"
                 },
                 "emergency/defibrillator": {
                     "name": "Defibrilators"
@@ -2016,8 +2196,14 @@
                 "emergency/fire_hydrant": {
                     "name": "Ugunsdzēsības Hidrants"
                 },
+                "emergency/lifeguard": {
+                    "name": "Glābējs"
+                },
                 "emergency/phone": {
                     "name": "Ārkārtas telefons"
+                },
+                "emergency/siren": {
+                    "name": "Sirēna"
                 },
                 "entrance": {
                     "name": "Ieeja/Izeja"
@@ -2040,8 +2226,14 @@
                 "highway/cycleway": {
                     "name": "Veloceliņš"
                 },
+                "highway/elevator": {
+                    "name": "Lifts"
+                },
                 "highway/footway": {
                     "name": "Taka"
+                },
+                "highway/living_street": {
+                    "name": "Dzīvojamā iela"
                 },
                 "highway/motorway": {
                     "name": "Ātrgaitas šoseja"
@@ -2066,6 +2258,9 @@
                 },
                 "highway/service/driveway": {
                     "name": "Piebraucamais ceļš"
+                },
+                "highway/speed_camera": {
+                    "name": "Fotoradars"
                 },
                 "highway/steps": {
                     "name": "Kāpnes"
@@ -2150,6 +2345,9 @@
                 },
                 "leisure/bowling_alley": {
                     "name": "Boulinga Zāle"
+                },
+                "leisure/dog_park": {
+                    "name": "Suņu parks"
                 },
                 "leisure/garden": {
                     "name": "Dārzs"
@@ -2279,6 +2477,9 @@
                 },
                 "natural/tree": {
                     "name": "Koks"
+                },
+                "natural/tree_row": {
+                    "name": "Koku rinda"
                 },
                 "natural/volcano": {
                     "name": "Vulkāns"
@@ -2707,7 +2908,6 @@
                 "attribution": {
                     "text": "Noteikumi un atsauksmes"
                 },
-                "description": "DigitalGlobe-Standard ir kārtota attēlu grupa, kas aptver aptuveni 86% no visas pasaules ar 30-60 cm izsķirtspēju, kur tas ir iespējams. Fona aizpildījumu nodrošina Landsat. Vidējais vecums ir 2.31 gadi, lai gan dažas vietas tiek atjauninātas 2 reizes gadā. ",
                 "name": "DigitalGlobe Standarta Attēli"
             },
             "DigitalGlobe-Standard-vintage": {

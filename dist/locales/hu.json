@@ -6011,6 +6011,17 @@
             }
         },
         "imagery": {
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                }
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Műholdképek és légi felvételek",
                 "name": "Bing légi felvételek"
@@ -6049,7 +6060,8 @@
             "EsriWorldImageryClarity": {
                 "attribution": {
                     "text": "Feltételek és visszajelzés"
-                }
+                },
+                "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -6115,6 +6127,18 @@
             },
             "US-TIGER-Roads-2017": {
                 "name": "TIGER Roads 2017"
+            },
+            "UrbISOrtho2016": {
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmNL": {
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {

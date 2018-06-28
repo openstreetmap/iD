@@ -714,6 +714,10 @@
             "zoom": "Escala a la capa",
             "browse": "Navega cap a un fitxer"
         },
+        "streetside": {
+            "tooltip": "Fotografies a peu de carrer de Microsoft",
+            "hires": "Alta resolució"
+        },
         "mapillary_images": {
             "tooltip": "Fotos a peu de carrer de Mapillary",
             "title": "Superposició de fotos (Mapillary)"

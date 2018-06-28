@@ -96,7 +96,7 @@
                     "area": "Ecken der Fläche rechtwinklig gemacht."
                 },
                 "not_squarish": "Dieses Objekt kann nicht rechtwinklig gemacht werden, weil es nicht annähernd rechtwinklig ist.",
-                "too_large": "Dieses Objekt kann nicht quadratisch werden, weil zu wenig davon sichtbar ist.",
+                "too_large": "Dieses Objekt kann nicht rechtwinklig gemacht werden, weil zu wenig davon sichtbar ist.",
                 "connected_to_hidden": "Dieses Objekt kann nicht rechtwinklig gemacht werden, weil es mit einem versteckten Objekt verbunden ist."
             },
             "straighten": {
@@ -161,7 +161,7 @@
                 "annotation": "Linien/Flächen getrennt.",
                 "not_connected": "Es gibt hier nicht genug Linien/Flächen, um diese zu trennen.",
                 "connected_to_hidden": "Dieses Objekt kann nicht getrennt werden, weil es mit einem versteckten Objekt verbunden ist.",
-                "relation": "Dies kann nicht getrennt werden, weil es Mitglieder einer Relation verbindet."
+                "relation": "Dieses Objekt kann nicht getrennt werden, weil es Mitglieder einer Relation verbindet."
             },
             "merge": {
                 "title": "Vereinigen",
@@ -6629,7 +6629,6 @@
                 "attribution": {
                     "text": "Bedingungen & Feedback"
                 },
-                "description": "DigitalGlobe-Standard is eine kuratierte Zusammensetzung von Hintergrundbilderdie 86% der Erdoberfläche bedecken, mit 30-60cm Auflösung sofern verfügbar, aufgefüllt mit Landsat-Bilder. Durchschnittliches Alter ist 2,31 Jahre, wobei manche Gebiet zwei mal pro Jahr aktualisiert werden.",
                 "name": "DigitalGlobe Standard Bildmaterial"
             },
             "DigitalGlobe-Standard-vintage": {

@@ -2382,6 +2382,9 @@
                 "shop": {
                     "label": "Typ"
                 },
+                "siren/type": {
+                    "label": "Rodzaj"
+                },
                 "site": {
                     "label": "Typ"
                 },
@@ -3265,6 +3268,9 @@
                     "name": "Automat do sprzedaży jedzenia",
                     "terms": "automat do sprzedaży jedzenia,jedzenie,pożywienie"
                 },
+                "amenity/vending_machine/fuel": {
+                    "name": "Pompa gazowa"
+                },
                 "amenity/vending_machine/ice_cream": {
                     "name": "Automat do sprzedaży lodów",
                     "terms": "automat do sprzedaży lodów,lody"
@@ -3873,13 +3879,25 @@
                 "emergency/destination": {
                     "name": "Docelowy dojazd dla służb ratowniczych"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Skrzynka z alarmem przeciwpożarowym"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Gaśnica"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Hydrant przeciwpożarowy",
                     "terms": "hydrant"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Apteczka"
+                },
                 "emergency/life_ring": {
                     "name": "Koło ratunkowe",
                     "terms": "koło ratunkowe"
+                },
+                "emergency/lifeguard": {
+                    "name": "Ratownik"
                 },
                 "emergency/no": {
                     "name": "Brak dojazdu dla służb ratowniczych"
@@ -3893,6 +3911,9 @@
                 },
                 "emergency/private": {
                     "name": "Prywatny dojazd dla służb ratowniczych"
+                },
+                "emergency/siren": {
+                    "name": "Syrena alarmowa"
                 },
                 "emergency/water_tank": {
                     "name": "Zbiornik Wody",
@@ -6340,6 +6361,18 @@
                 "description": "Drogi:  Zielone obramowanie = czwartorzędna. Brązowe obramowanie = polna/leśna. Nawierzchnia: żwir = jasno-brązowe wypełnienie, asfalt = czarny, twarda = szary, grunt = biały, beton = niebieski, trawa = zielony. Dostępna sezonowo = białe paski",
                 "name": "Nakładka z drogami z U.S. Forest"
             },
+            "UrbISOrtho2016": {
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "name": "UrbisAdm Francja"
+            },
+            "UrbisAdmNL": {
+                "name": "UrbisAdm Holandia"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, autorzy OpenStreetMap, CC by-SA 3.0"
@@ -6422,6 +6455,11 @@
                 },
                 "name": "OpenStreetMap (Styl niemiecki)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                }
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Dane © autorzy OpenStreetMap"
@@ -6451,6 +6489,36 @@
                     "text": "Mapa © Thunderforest, dane © autorzy OpenStreetMap"
                 },
                 "name": "Thunderforest Krajobraz"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
             }
         },
         "community": {

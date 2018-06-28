@@ -718,7 +718,8 @@
         "streetside": {
             "tooltip": "Hình ảnh Streetside của Microsoft",
             "title": "Lớp phủ Hình ảnh (Bing Streetside)",
-            "report": "Báo cáo lo ngại riêng tư trong hình"
+            "report": "Báo cáo lo ngại riêng tư trong hình",
+            "hires": "Độ phân giải cao"
         },
         "mapillary_images": {
             "tooltip": "Hình ảnh cấp phố do Mapillary cung cấp",
@@ -1570,6 +1571,9 @@
                 },
                 "board_type": {
                     "label": "Kiểu"
+                },
+                "booth": {
+                    "label": "Buồng"
                 },
                 "boules": {
                     "label": "Kiểu"
@@ -4012,6 +4016,10 @@
                 "emergency/destination": {
                     "name": "Dịch vụ Khẩn cấp Đến nơi"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Hộp Điện thoại Báo cháy",
+                    "terms": "hộp điện thoại báo cháy, hộp cuộc gọi báo cháy, hộp khẩn cấp cứu hỏa, hộp khẩn cấp cứu hoả"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Bình Cứu hỏa",
                     "terms": "bình cứu hỏa, bình cứu hoả, bình chữa cháy, bình chữa lửa, binh cuu hoa, binh chua chay, binh chua lua"
@@ -4020,9 +4028,17 @@
                     "name": "Trụ Cứu hỏa",
                     "terms": "trụ cứu hỏa, trụ cứu hoả, trụ chữa cháy, cột cứu hỏa, cột cứu hoả, cột chữa cháy, tru cuu hoa, tru chua chay, cot cuu hoa, cot chua chay"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Hộp Cấp cứu",
+                    "terms": "hộp cấp cứu, hộp sơ cứu, hộp y tế, hộp cứu thương, trạm cấp cứu, trạm sơ cứu, trạm y tế, trạm cứu thương, bộ cấp cứu, bộ sơ cứu, bộ y tế, bộ cứu thương, hop cap cuu, hop so cuu, hop cuu thuong, tram cap cuu, tram so cuu, tram y te, tram cuu thuong, bo cap cuu, bo so cuu, bo y te, bo cuu thuong"
+                },
                 "emergency/life_ring": {
                     "name": "Phao Cứu đắm",
                     "terms": "phao cứu đắm, phao cuu dam"
+                },
+                "emergency/lifeguard": {
+                    "name": "Nhân viên Cứu hộ Bơi lội",
+                    "terms": "nhân viên cứu hộ bơi lội, cứu hộ viên bơi lội, nhân viên cứu hộ hồ bơi, cứu hộ viên hồ bơi, nhân viên cứu hộ bờ biển, cứu hộ viên bờ biển, nhân viên cứu hộ bờ sông, cứu hộ viên bờ sông, nhân viên trực hồ bơi, nhan vien cuu ho boi loi, cuu ho vien boi loi, nhan vien cuu ho ho boi, cuu ho vien ho boi, nhan vien cuu ho bo bien, cuu ho vien bo bien, nhan vien cuu ho bo song, cuu ho vien bo song, nhan vien truc ho boi"
                 },
                 "emergency/no": {
                     "name": "Không cho phép Dịch vụ Khẩn cấp"
@@ -6602,6 +6618,7 @@
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
+                "description": "DigitalGlobe Thượng hạng là một lớp hình ảnh hỗn hợp: ở nhiều nơi có lớp hình gốc của DigitalGlobe, còn một số khu vực được ghép lại hình ảnh +Vivid hoặc hình ảnh khu vực quan tâm tùy biến có độ phân giải 50 cm trở lên, và được cập nhật thường xuyên hơn.",
                 "name": "DigitalGlobe Thượng hạng"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -7478,7 +7495,14 @@
             "OSM-US": {
                 "name": "OpenStreetMap Hoa Kỳ",
                 "description": "Chúng ta giúp phát triển và cải thiện OpenStreetMap tại Hoa Kỳ.",
-                "extendedDescription": "Chúng ta giúp OpenStreetMap bằng cách tổ chức các hội nghị hàng năm, cung cấp tài nguyên cộng đồng, tạo quan hệ đối tác, và truyền bá dự án. Mời tham gia OpenStreetMap Hoa Kỳ tại đây: {signupUrl}"
+                "extendedDescription": "Chúng ta giúp OpenStreetMap bằng cách tổ chức các hội nghị hàng năm, cung cấp tài nguyên cộng đồng, tạo quan hệ đối tác, và truyền bá dự án. Mời tham gia OpenStreetMap Hoa Kỳ tại đây: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map Hoa Kỳ 2018",
+                        "description": "Hãy tham dự hội nghị State of the Map Hoa Kỳ tại Detroit, Michigan, cùng với cộng đồng OpenStreetMap. Gặp gỡ với những người đóng góp khác, kinh doanh, và tổ chức phi lợi nhuận đều cộng tác xây dựng bản đồ thế giới mở có thể sửa đổi.",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

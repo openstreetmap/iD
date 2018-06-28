@@ -608,8 +608,19 @@
         },
         "success": {
             "just_edited": "لقد قمت للتو بتحرير OpenStreetMap!",
+            "thank_you": "شكرًا لك لمشاركتك وتحسين الخريطة.",
+            "thank_you_location": "شكرًا لك لتحسين الخريطة في {where}.",
+            "help_html": "ينبغي أن تظهر تغييراتك على OpenStreetMap في غضون بضع دقائق. قد يستغرق الأمر مدة أطول بالنسبة للخرائط الأخرى حتى تتلقى آخر تحديث.",
             "help_link_text": "تفاصيل",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "عرض التغييرات على OpenStreetMap",
+            "changeset_id": "تغييراتك #: {changeset_id}",
+            "like_osm": "يعجبك OpenStreetMap؟ ترغب بالتواصل مع الآخرين:",
+            "more": "المزيد",
+            "events": "الأحداث",
+            "languages": "اللغات: {languages}",
+            "missing": "هل من شيء مفقود من هذه القائمة؟",
+            "tell_us": "أخبرنا!"
         },
         "confirm": {
             "okay": "موافق",
@@ -645,6 +656,7 @@
             "untagged_area_tooltip": "اختر نوع العنصر التي يصف هذه المساحة.",
             "untagged_relation": "علاقة غير موسومة",
             "untagged_relation_tooltip": "اختر نوع العنصر الذي يصف ما هية هذه العلاقة.",
+            "many_deletions": "لقد قمت بحذف {n} من العناصر:  {p} من النقاط, {l} من الخطوط, {a} من المساحات, {r} من العلاقات.\nهل أنت متأكد من رغبتك في فعل ذلك؟. سيؤدي ذلك إلى حذفها من الخريطة التي يراها الجميع على openstreetmap.org.",
             "tag_suggests_area": "الوسم {tag} يقترح بأن الخط يجب أن يكون منطقة، ولكنها حاليا ليست منطقة",
             "deprecated_tags": "وسوم مهجورة: {tags}"
         },
@@ -659,6 +671,12 @@
             "drag_drop": "اسحب وأفلت ملفات gpx. أو geojson. أو kml. في الصفحة، أو انقر على الزر في اليمين للتصفح واختيار ملف",
             "zoom": "تكبير إلى الطبقة",
             "browse": "تصفح لاختيار ملف"
+        },
+        "streetside": {
+            "tooltip": "صور الشوراع من ميكروسوفت",
+            "title": "طبقات الصور (Bing Streetside)",
+            "report": "الإبلاغ عن مشكلة متعلقة بالخصوصية مع هذه الصورة",
+            "hires": "جودة عالية"
         },
         "mapillary_images": {
             "tooltip": "صور للطرقات من مابي لاري",
