@@ -299,6 +299,11 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
 rendererBackgroundSource.Esri = function(data) {
+    // in addition to using the tilemap at zoom level 20, overzoom real tiles - #4327 (deprecated technique, but it works)
+    if (data.template.match(/blankTile/) === null) {
+        data.template = data.template + '?blankTile=false';
+    }
+
     var esri = rendererBackgroundSource(data);
     var cache = {};
     var inflight = {};
@@ -338,7 +343,7 @@ rendererBackgroundSource.Esri = function(data) {
             }
 
             // if any tiles are missing at level 20 we restrict maxZoom to 19
-            esri.scaleExtent[1] = (hasTiles ? 20 : 19);
+            esri.scaleExtent[1] = (hasTiles ? 22 : 19);
         });
     };
 
