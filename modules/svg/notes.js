@@ -3,11 +3,15 @@ import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
+import { uiNoteEditor } from '../ui';
+
 export function svgNotes(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
+
+    var noteEditor = uiNoteEditor(context);
 
     function init() {
         if (svgNotes.initialized) return;  // run once
@@ -57,6 +61,20 @@ export function svgNotes(projection, context, dispatch) {
             .on('end', editOff);
     }
 
+    function click(d) {
+        context.ui().sidebar.show(noteEditor, d);
+    }
+
+    function mouseover(d) {
+        context.ui().sidebar.show(noteEditor, d);
+    }
+
+    function mouseout(d) {
+        // TODO: check if the item was clicked. If so, it should remain on the sidebar.
+        // TODO: handle multi-clicks. Otherwise, utilize behavior/select.js
+        context.ui().sidebar.hide();
+    }
+
     function update() {
         var service = getService();
         var data = (service ? service.notes(projection) : []);
@@ -70,12 +88,15 @@ export function svgNotes(projection, context, dispatch) {
 
         var notesEnter = notes.enter()
             .append('use')
-            .attr('class', 'note')
+            .attr('class', function(d) { return 'note ' + d.id; })
             .attr('width', '24px')
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', '#fas-comment-alt');
+            .attr('xlink:href', '#fas-comment-alt')
+            .on('click', click)
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout);
 
         notes
             .merge(notesEnter)

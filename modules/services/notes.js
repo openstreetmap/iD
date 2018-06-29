@@ -17,13 +17,14 @@ import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 
 import {
-    osmNote,
-} from '../osm';
-
-import {
     utilRebind,
     utilIdleWorker
 } from '../util';
+
+import {
+    osmNote
+} from '../osm';
+import { actionRestrictTurn } from '../actions';
 
 var urlroot = 'https://api.openstreetmap.org',
     _notesCache,
@@ -111,7 +112,7 @@ function parseComments(comments) {
 }
 
 var parsers = {
-    note: function parseNote(obj) {
+    note: function parseNote(obj, uid) {
         var attrs = obj.attributes;
         var childNodes = obj.childNodes;
         var parsedNote = {};
@@ -129,6 +130,9 @@ var parsers = {
                 }
             }
         });
+
+        parsedNote.id = uid;
+        parsedNote.type = 'note';
 
         return {
             minX: parsedNote.loc[0],
@@ -151,17 +155,19 @@ function parse(xml, callback, options) {
         var parser = parsers[child.nodeName];
         if (parser) {
 
-            // TODO: change how a note uid is parsed. Nodes & notes share 'n' + id combination
             var childNodes = child.childNodes;
-            var id;
-            var i;
-            for (i = 0; i < childNodes.length; i++) {
-                if (childNodes[i].nodeName === 'id') { id = childNodes[i].nodeName; }
-            }
-            if (options.cache && _entityCache[id]) {
+
+            var uid;
+            _forEach(childNodes, function(node) {
+                if (node.nodeName === 'id') {
+                    uid = child.nodeName + node.innerHTML;
+                }
+            });
+
+            if (options.cache && _entityCache[uid]) {
                 return null;
             }
-            return parser(child);
+            return parser(child, uid);
         }
     }
     utilIdleWorker(children, parseChild, callback);

@@ -6,7 +6,10 @@ import {
 } from 'd3-selection';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-import { osmEntity } from '../osm';
+import {
+    osmEntity,
+    osmNote
+} from '../osm';
 import { utilRebind } from '../util/rebind';
 
 
@@ -110,7 +113,12 @@ export function behaviorHover(context) {
             var entity;
             if (datum instanceof osmEntity) {
                 entity = datum;
-            } else {
+            }
+            // TODO: TAH - reintroduce if we need a check for osmNote here
+            // else if (datum instanceof osmNote) {
+            //     entity = datum;
+            // }
+             else {
                 entity = datum && datum.properties && datum.properties.entity;
             }
 

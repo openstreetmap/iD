@@ -118,7 +118,34 @@
     pointer-events: none;
 }
 .layer-notes * {
+    pointer-events: visible;
+    cursor: pointer;
     color: #eebb00;
+}
+
+
+/* TODO: possibly move this note detail .css to another file */
+
+.comment-first {
+    background-color:#ddd;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px auto;
+}
+
+.comment {
+    background-color:#fff;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px auto;
+}
+
+.commentCreator {
+    color: #666;
+}
+
+.commentText {
+    margin: 20px auto;
 }
 
 

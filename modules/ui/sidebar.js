@@ -1,12 +1,26 @@
 import _throttle from 'lodash-es/throttle';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
-
+import { uiNoteEditor } from './note_editor';
 
 export function uiSidebar(context) {
-    var inspector = uiInspector(context),
-        current;
 
+    var inspector = uiInspector(context),
+        noteEditor = uiNoteEditor(context),
+        current,
+        wasNote;
+
+    function isNote(id) {
+        var isNote = (id && id.slice(0,4) === 'note') ? id.slice(0,4) : null;
+        // TODO: have a better check, perhaps see if the hover class is activated on a note
+        if (!isNote && wasNote) {
+            wasNote = false;
+            sidebar.hide();
+        } else if (isNote) {
+            wasNote = true;
+            sidebar.show(noteEditor);
+        }
+    }
 
     function sidebar(selection) {
         var featureListWrap = selection
@@ -21,6 +35,8 @@ export function uiSidebar(context) {
 
 
         function hover(id) {
+            // isNote(id); TODO: instantiate check if needed
+
             if (!current && context.hasEntity(id)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
@@ -46,6 +62,7 @@ export function uiSidebar(context) {
                 inspector
                     .state('hide');
             }
+            // } // TODO: - remove if note check logic is moved
         }
 
 
@@ -82,7 +99,7 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.show = function(component) {
+        sidebar.show = function(component, element) {
             featureListWrap
                 .classed('inspector-hidden', true);
             inspectorWrap
@@ -92,7 +109,7 @@ export function uiSidebar(context) {
             current = selection
                 .append('div')
                 .attr('class', 'sidebar-component')
-                .call(component);
+                .call(component, element);
         };
 
 

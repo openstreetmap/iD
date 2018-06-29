@@ -609,6 +609,19 @@ en:
     title: "Photo Overlay (OpenStreetCam)"
   openstreetcam:
     view_on_openstreetcam: "View this image on OpenStreetCam"
+  note:
+    title: "Edit note"
+    unresolved: "Unresolved note #"
+    description: "Description"
+    creator: "Comment from"
+    anonymous: 'anonymous'
+    creatorOn: 'on'
+    commentTitle: 'Comments'
+    resolve: "Resolve"
+    comment: "Comment"
+    commentResolve: "Comment & Resolve"
+    save: "Save new note"
+    cancel: "Cancel"
   help:
     title: Help
     key: H

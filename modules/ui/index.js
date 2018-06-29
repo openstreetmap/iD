@@ -34,6 +34,7 @@ export { uiMapInMap } from './map_in_map';
 export { uiModal } from './modal';
 export { uiModes } from './modes';
 export { uiNotice } from './notice';
+export { uiNoteEditor } from './note_editor';
 export { uiPresetEditor } from './preset_editor';
 export { uiPresetIcon } from './preset_icon';
 export { uiPresetList } from './preset_list';
