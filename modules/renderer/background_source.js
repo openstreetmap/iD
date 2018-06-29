@@ -338,7 +338,7 @@ rendererBackgroundSource.Esri = function(data) {
             }
 
             // if any tiles are missing at level 20 we restrict maxZoom to 19
-            esri.scaleExtent[1] = (hasTiles ? 20 : 19);
+            esri.scaleExtent[1] = (hasTiles ? 22 : 19);
         });
     };
 
