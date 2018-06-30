@@ -49,15 +49,7 @@ _extend(osmNote.prototype, {
         return new geoExtent(this.loc);
     },
 
-    getID: function() {
-        return this.id;
-    },
-
-    getType: function() {
-        return this.type;
-    },
-
-    getComments: function() {
-        return this.comments;
+    update: function(attrs) {
+        return osmNote(this, attrs, {v: 1 + (this.v || 0)});
     }
 });
