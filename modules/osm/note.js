@@ -1,17 +1,24 @@
 import _extend from 'lodash-es/extend';
 
-import { osmEntity } from './entity';
 import { geoExtent } from '../geo';
-
-import { debug } from '../index';
 
 
 export function osmNote() {
-    if (!(this instanceof osmNote)) return;
-
-    this.initialize(arguments);
-    return this;
+    if (!(this instanceof osmNote)) {
+        return (new osmNote()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
 }
+
+
+osmNote.id = function() {
+    return osmNote.id.next--;
+};
+
+
+osmNote.id.next = -1;
+
 
 _extend(osmNote.prototype, {
 
@@ -31,20 +38,8 @@ _extend(osmNote.prototype, {
             }
         }
 
-        if (!this.id && this.type) {
-            this.id = osmEntity.id(this.type);
-        }
-        if (!this.hasOwnProperty('visible')) {
-            this.visible = true;
-        }
-
-        if (debug) {
-            Object.freeze(this);
-            Object.freeze(this.tags);
-
-            if (this.loc) Object.freeze(this.loc);
-            if (this.nodes) Object.freeze(this.nodes);
-            if (this.members) Object.freeze(this.members);
+        if (!this.id) {
+            this.id = osmNote.id();
         }
 
         return this;
@@ -52,12 +47,6 @@ _extend(osmNote.prototype, {
 
     extent: function() {
         return new geoExtent(this.loc);
-    },
-
-    geometry: function(graph) {
-        return graph.transient(this, 'geometry', function() {
-            return graph.isPoi(this) ? 'point' : 'vertex';
-        });
     },
 
     getID: function() {
