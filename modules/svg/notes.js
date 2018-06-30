@@ -30,10 +30,10 @@ export function svgNotes(projection, context, dispatch) {
     }
 
     function getService() {
-        if (services.notes && !_notes) {
-            _notes = services.notes;
-            _notes.event.on('loadedNotes', throttledRedraw);
-        } else if (!services.notes && _notes) {
+        if (services.osm && !_notes) {
+            _notes = services.osm;
+            _notes.on('loadedNotes', throttledRedraw);
+        } else if (!services.osm && _notes) {
             _notes = null;
         }
 
@@ -107,6 +107,13 @@ export function svgNotes(projection, context, dispatch) {
         var enabled = svgNotes.enabled,
             service = getService();
 
+        function dimensions() {
+            return [window.innerWidth, window.innerHeight];
+        }
+        function done() {
+            console.log('placeholder done within svg/notes.upload.done');
+        }
+
         layer = selection.selectAll('.layer-notes')
             .data(service ? [0] : []);
 
@@ -123,7 +130,7 @@ export function svgNotes(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                service.loadNotes(projection);
+                service.loadNotes(projection, dimensions(), done);
             } else {
                 editOff();
             }
