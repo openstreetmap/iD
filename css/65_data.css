@@ -7,22 +7,32 @@
     pointer-events: visible;
     cursor: pointer;
 }
-.layer-notes .note-shadow {
+
+.layer-notes .note .note-shadow {
     color: #000;
 }
-.layer-notes .note-fill {
-    color: #ee3;
+.layer-notes .note .note-fill {
+    color: #ff3300;
+}
+.layer-notes .note.closed .note-fill {
+    color: #00bb33;
+}
+.layer-notes .note.hovered .note-fill {
+    color: #eebb00;
+}
+.layer-notes .note.selected .note-fill {
+    color: #ffee00;
 }
 
 /* OSM Note UI */
 .comment-first {
-    background-color:#ddd;
+    background-color: #ddd;
     border-radius: 5px;
     padding: 5px;
     margin: 5px auto;
 }
 .comment {
-    background-color:#fff;
+    background-color: #fff;
     border-radius: 5px;
     padding: 5px;
     margin: 5px auto;
