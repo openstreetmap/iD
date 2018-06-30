@@ -25,6 +25,8 @@
         "highway",
         "interstate",
         "parkway",
+        "road",
+        "street",
         "thruway",
         "turnpike"
     ],

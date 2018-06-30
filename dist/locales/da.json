@@ -2872,8 +2872,7 @@
                     "terms": "Dojo,Kampsportsakademi,Kampsportsklub"
                 },
                 "amenity/drinking_water": {
-                    "name": "Drikkevand",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Drikkevand', adskilt med kommaer>"
+                    "name": "Drikkevand"
                 },
                 "amenity/driving_school": {
                     "name": "Køreskole",
@@ -2891,8 +2890,7 @@
                     "name": "Færgeterminal"
                 },
                 "amenity/fire_station": {
-                    "name": "Brandstation",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Brandstation', adskilt med kommaer>"
+                    "name": "Brandstation"
                 },
                 "amenity/food_court": {
                     "name": "Torvehaller",
@@ -2935,8 +2933,7 @@
                     "terms": "Børnehavegrund"
                 },
                 "amenity/library": {
-                    "name": "Bibliotek",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Bibliotek', adskilt med kommaer>"
+                    "name": "Bibliotek"
                 },
                 "amenity/love_hotel": {
                     "name": "Kærlighedshotel",
@@ -3123,8 +3120,7 @@
                     "name": "Svømmebassin"
                 },
                 "amenity/taxi": {
-                    "name": "Taxiholdeplads",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Taxiholdeplads', adskilt med kommaer>"
+                    "name": "Taxiholdeplads"
                 },
                 "amenity/telephone": {
                     "name": "Telefon",
@@ -3205,8 +3201,7 @@
                     "terms": "lort,hund,ekskrement"
                 },
                 "amenity/waste_basket": {
-                    "name": "Skraldespand",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Skraldespand', adskilt med kommaer>"
+                    "name": "Skraldespand"
                 },
                 "amenity/waste_disposal": {
                     "name": "Skraldespand",
@@ -3343,8 +3338,7 @@
                     "terms": "Vejafgifthus, Betalingsanlæg"
                 },
                 "barrier/wall": {
-                    "name": "Mur",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Mur', adskilt med kommaer>"
+                    "name": "Mur"
                 },
                 "boundary/administrative": {
                     "name": "Administrativ grænse",
@@ -3402,7 +3396,7 @@
                 },
                 "building/dormitory": {
                     "name": " Kollegie",
-                    "terms": " Kollegie, Klubværelse, Kollegium"
+                    "terms": "Kollegie, Klubværelse, Kollegium"
                 },
                 "building/entrance": {
                     "name": "Indgang/Udgang"
@@ -4091,7 +4085,7 @@
                 },
                 "landuse/allotments": {
                     "name": "Kolonihave",
-                    "terms": "kolonihaveområde, kolonihave, "
+                    "terms": "kolonihaveområde, kolonihave,"
                 },
                 "landuse/aquaculture": {
                     "name": "Akvakultur",
@@ -4103,7 +4097,7 @@
                 },
                 "landuse/cemetery": {
                     "name": "Gravplads ",
-                    "terms": "Gravplads "
+                    "terms": "Gravplads"
                 },
                 "landuse/churchyard": {
                     "name": "Kirkegård",
@@ -4396,7 +4390,7 @@
                 },
                 "leisure/resort": {
                     "name": "Turistresort",
-                    "terms": "Turistresort, "
+                    "terms": "Turistresort,"
                 },
                 "leisure/running_track": {
                     "name": "Løbebane (Løb)",
@@ -4547,7 +4541,7 @@
                 },
                 "man_made/wastewater_plant": {
                     "name": "Spildevandsanlæg ",
-                    "terms": "Spildevandsanlæg, Vandrensningsanlæg, Rensningsanlæg "
+                    "terms": "Spildevandsanlæg, Vandrensningsanlæg, Rensningsanlæg"
                 },
                 "man_made/water_tower": {
                     "name": "Vandtårn",
@@ -5428,7 +5422,7 @@
                 },
                 "shop/variety_store": {
                     "name": "Spøg og skæmtbutik ",
-                    "terms": "Spøg og skæmtbutik "
+                    "terms": "Spøg og skæmtbutik"
                 },
                 "shop/video": {
                     "name": "Videobutik",
@@ -5772,7 +5766,6 @@
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
-                "description": "Premium DigitalGlobe satellitfoto.",
                 "name": "DigitalGlobe Premium fotos"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5785,7 +5778,6 @@
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
-                "description": "Standard DigitalGlobe satellitfotos.",
                 "name": "DigitalGlobe Standard fotos"
             },
             "DigitalGlobe-Standard-vintage": {

@@ -3686,11 +3686,9 @@
                 "name": "Bingi aerofotod"
             },
             "DigitalGlobe-Premium": {
-                "description": "DigitalGlobe'i satelliidifotod (premium)",
                 "name": "DigitalGlobe'i pildimaterjal (premium)"
             },
             "DigitalGlobe-Standard": {
-                "description": "DigitalGlobe'i satelliidifotod (standard)",
                 "name": "DigitalGlobe'i pildimaterjal (standard)"
             },
             "EsriWorldImagery": {

@@ -713,6 +713,12 @@
             "zoom": "Pligrandigi tavolon",
             "browse": "Esplori por dosieron"
         },
+        "streetside": {
+            "tooltip": "Strat-nivelaj fotoj de Microsoft",
+            "title": "Fotara surtavolo (Bing Streetside)",
+            "report": "Raporti privatecan problemon pri tiu ĉi foto",
+            "hires": "Alta distingivo"
+        },
         "mapillary_images": {
             "tooltip": "Strat-nivelaj fotoj el Mapillary",
             "title": "Fotara surtavolo (Mapillary)"
@@ -1563,6 +1569,9 @@
                 },
                 "board_type": {
                     "label": "Speco"
+                },
+                "booth": {
+                    "label": "Budo"
                 },
                 "boules": {
                     "label": "Speco"
@@ -2484,6 +2493,17 @@
                 },
                 "shop": {
                     "label": "Speco"
+                },
+                "siren/purpose": {
+                    "label": "Celo"
+                },
+                "siren/type": {
+                    "label": "Speco",
+                    "options": {
+                        "electronic": "elektronika",
+                        "other": "alia",
+                        "pneumatic": "pneŭmatika"
+                    }
                 },
                 "site": {
                     "label": "Speco"
@@ -3994,6 +4014,10 @@
                 "emergency/destination": {
                     "name": "Vivsav-serva aliro: nur al celloko"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Alarmilo kontraŭfajra",
+                    "terms": "fajro,alarmbudo,budo"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Fajr-estingilo",
                     "terms": "fajrestingilo,fajroestingilo,estingilo,malfajrilo"
@@ -4002,9 +4026,17 @@
                     "name": "Hidranto",
                     "terms": "akvokrano,fajrohidranto"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Man-apoteko",
+                    "terms": "manapoteko,tujhelpilo,bandaĝo"
+                },
                 "emergency/life_ring": {
                     "name": "Savoringo",
                     "terms": "sekurigilo,ringo"
+                },
+                "emergency/lifeguard": {
+                    "name": "Observejo de akva savisto",
+                    "terms": "savisto,savanto,naghsavanto,akva savisto,vivsavisto"
                 },
                 "emergency/no": {
                     "name": "Vivsav-serva aliro: ne"
@@ -4018,6 +4050,10 @@
                 },
                 "emergency/private": {
                     "name": "Vivsav-serva aliro: privata"
+                },
+                "emergency/siren": {
+                    "name": "Sireno",
+                    "terms": "alarmo,avertilo"
                 },
                 "emergency/water_tank": {
                     "name": "Kontraŭbrulega akvujo",
@@ -6554,6 +6590,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Aera fotaro pri Flandrujo (plej aktuala) © AGIV"
+                },
+                "name": "Plej aktuala aera fotaro de Informa Geografia Agentejo de Flandrujo (AGIV/FGIA)"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Aera fotaro pri Flandrujo © AGIV"
+                },
+                "name": "Aera fotaro 10cm de Informa Geografia Agentejo de Flandrujo (AGIV/FGIA) de 2013-2015"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flandrujo © AGIV"
+                },
+                "name": "AGIV Flandrujo GRB"
+            },
             "Bing": {
                 "description": "Satelita kaj aera fotaroj.",
                 "name": "Aera fotaro de Bing"
@@ -6562,7 +6616,7 @@
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
-                "description": "Detala satelita fotaro de DigitalGlobe.",
+                "description": "DigitalGlobe-Premium estas kunmetaĵo de Digital-Globe-bazmapo kun kelkaj regionoj plenigitaj per +Vivid fotaro je distingivo 50cm aŭ pli bona kaj aktualigata pli ofte.",
                 "name": "Detala fotaro de DigitalGlobe"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6576,7 +6630,7 @@
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
-                "description": "Norma satelita fotaro de DigitalGlobe.",
+                "description": "DigitalGlobe-Standard estas prizorgata fotaro ampleksanta 86% da tero je distingivo 30-60cm (se disponebla), danke al programo Landsat. Mezuma aĝo de fotaro estas 2,31a, sed kelkaj areoj estas aktualigataj dufoje en jaro.",
                 "name": "Norma fotaro de DigitalGlobe"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6656,6 +6710,12 @@
                 },
                 "name": "OSM Inspector: etikedado"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "Plej aktuala aera fotaro de SPW(allonie)"
+            },
+            "SPW_PICC": {
+                "name": "Cifereca fotaro de PICC SPW(allonie)"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
             },
@@ -6670,6 +6730,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Vojo: verda rando = neklasifikita, bruna rando = kampa vojo. Pavimo: helbruna plenigo = sablego, nigra = asfalto, griza = pavimita, blanka = tera, blua = betono, verda = herbo. Blankaj strioj = sezona vojo.",
                 "name": "Surtavolo de arbar-kultivaj vojoj"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6753,6 +6837,13 @@
                 },
                 "name": "OpenStreetMap (germana stilo)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Skano de “ekonomia mapo” ~1950-1980",
+                "name": "Lantmäteriet ekonomia mapo (historia)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon POOLE, Datumoj © kontribuintoj de OpenStreetMap"
@@ -6782,6 +6873,48 @@
                     "text": "Mapoj: © Thunderforest, datumoj: © kontribuintoj de OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sveda fervoja reto (kun kromtrakoj)",
+                "name": "Trafikverket fervoja reto"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sveda fervoja reto kun agordeblaj surtavoloj",
+                "name": "Agordoj  de Trafikverket fervoja reto"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sveda voja reto de NVDB",
+                "name": "Trafikverket voja reto"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Pliaj objektoj de Sveda NVDB: numeroj de aŭtovojoj, trafik-trankviligejoj, servejoj, pontoj, tuneloj, rapid-kontroliloj",
+                "name": "Trafikverket voja reto - detaloj"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Stratnomoj de NVDB",
+                "name": "Trafikverket - stratnomoj"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sveda voja reto de NVDB kun agordeblaj surtavoloj",
+                "name": "Agordoj  de Trafikverket voja reto"
             }
         },
         "community": {

@@ -1,5 +1,9 @@
 {
     "icon": "maki-triangle",
+    "fields": [
+        "name",
+        "height"
+    ],
     "geometry": [
         "point",
         "vertex",
@@ -10,7 +14,10 @@
         "natural": "cliff"
     },
     "terms": [
-        "escarpment"
+        "crag",
+        "escarpment",
+        "rock face",
+        "scarp"
     ],
     "name": "Cliff"
 }

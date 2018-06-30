@@ -6458,7 +6458,6 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
-                "description": "DigitalGlobe premium satellietbeelden",
                 "name": "DigitalGlobe-premiumbeelden"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6472,7 +6471,6 @@
                 "attribution": {
                     "text": "Gebruiksvoorwaarden & feedback"
                 },
-                "description": "DigitalGlobe standaard satellietbeelden",
                 "name": "DigitalGlobe-standaardbeelden"
             },
             "DigitalGlobe-Standard-vintage": {

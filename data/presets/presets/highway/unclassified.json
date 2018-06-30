@@ -17,6 +17,9 @@
     "tags": {
         "highway": "unclassified"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Minor/Unclassified Road"
 }

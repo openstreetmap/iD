@@ -608,8 +608,19 @@
         },
         "success": {
             "just_edited": "لقد قمت للتو بتحرير OpenStreetMap!",
+            "thank_you": "شكرًا لك لمشاركتك وتحسين الخريطة.",
+            "thank_you_location": "شكرًا لك لتحسين الخريطة في {where}.",
+            "help_html": "ينبغي أن تظهر تغييراتك على OpenStreetMap في غضون بضع دقائق. قد يستغرق الأمر مدة أطول بالنسبة للخرائط الأخرى حتى تتلقى آخر تحديث.",
             "help_link_text": "تفاصيل",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "عرض التغييرات على OpenStreetMap",
+            "changeset_id": "تغييراتك #: {changeset_id}",
+            "like_osm": "يعجبك OpenStreetMap؟ ترغب بالتواصل مع الآخرين:",
+            "more": "المزيد",
+            "events": "الأحداث",
+            "languages": "اللغات: {languages}",
+            "missing": "هل من شيء مفقود من هذه القائمة؟",
+            "tell_us": "أخبرنا!"
         },
         "confirm": {
             "okay": "موافق",
@@ -645,6 +656,7 @@
             "untagged_area_tooltip": "اختر نوع العنصر التي يصف هذه المساحة.",
             "untagged_relation": "علاقة غير موسومة",
             "untagged_relation_tooltip": "اختر نوع العنصر الذي يصف ما هية هذه العلاقة.",
+            "many_deletions": "لقد قمت بحذف {n} من العناصر:  {p} من النقاط, {l} من الخطوط, {a} من المساحات, {r} من العلاقات.\nهل أنت متأكد من رغبتك في فعل ذلك؟. سيؤدي ذلك إلى حذفها من الخريطة التي يراها الجميع على openstreetmap.org.",
             "tag_suggests_area": "الوسم {tag} يقترح بأن الخط يجب أن يكون منطقة، ولكنها حاليا ليست منطقة",
             "deprecated_tags": "وسوم مهجورة: {tags}"
         },
@@ -659,6 +671,12 @@
             "drag_drop": "اسحب وأفلت ملفات gpx. أو geojson. أو kml. في الصفحة، أو انقر على الزر في اليمين للتصفح واختيار ملف",
             "zoom": "تكبير إلى الطبقة",
             "browse": "تصفح لاختيار ملف"
+        },
+        "streetside": {
+            "tooltip": "صور الشوراع من ميكروسوفت",
+            "title": "طبقات الصور (Bing Streetside)",
+            "report": "الإبلاغ عن مشكلة متعلقة بالخصوصية مع هذه الصورة",
+            "hires": "جودة عالية"
         },
         "mapillary_images": {
             "tooltip": "صور للطرقات من مابي لاري",
@@ -2342,7 +2360,7 @@
                 },
                 "aerialway/goods": {
                     "name": "نقل البضائع بالكابلات ",
-                    "terms": "نقل البضائع بالكابلات "
+                    "terms": "نقل البضائع بالكابلات"
                 },
                 "aerialway/pylon": {
                     "name": "برج التلفريك / المصعد التزلج",
@@ -2434,8 +2452,7 @@
                     "terms": "تأجير القوارب، ساحة الزوارق، تأجير زوارق"
                 },
                 "amenity/bureau_de_change": {
-                    "name": "تحويل أموال",
-                    "terms": "<translate with synonyms or related terms for 'Currency Exchange', separated by commas>"
+                    "name": "تحويل أموال"
                 },
                 "amenity/bus_station": {
                     "name": "محطة حافلات"
@@ -2470,7 +2487,7 @@
                 },
                 "amenity/cinema": {
                     "name": "سينما",
-                    "terms": "سينما,صالة سينما, دار السينما "
+                    "terms": "سينما,صالة سينما, دار السينما"
                 },
                 "amenity/clinic": {
                     "name": "عيادة",
@@ -2620,7 +2637,7 @@
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "كنيس يهودي",
-                    "terms": "كنيس, معبد اليهود, "
+                    "terms": "كنيس, معبد اليهود,"
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "مسجد",
@@ -2632,7 +2649,7 @@
                 },
                 "amenity/police": {
                     "name": "شرطة",
-                    "terms": "مركز الشرطة, الشرطة "
+                    "terms": "مركز الشرطة, الشرطة"
                 },
                 "amenity/post_box": {
                     "name": "صندوق البريد",
@@ -2771,8 +2788,7 @@
                     "terms": "المساحة; مساحة; منطقة; المنطقة"
                 },
                 "area/highway": {
-                    "name": "سطح الطريق",
-                    "terms": "<translate with synonyms or related terms for 'Road Surface', separated by commas>"
+                    "name": "سطح الطريق"
                 },
                 "attraction/animal": {
                     "name": "حيوان",
@@ -2893,16 +2909,13 @@
                     "name": "ملجأ محصّن"
                 },
                 "building/cabin": {
-                    "name": "كوخ",
-                    "terms": "<translate with synonyms or related terms for 'Cabin', separated by commas>"
+                    "name": "كوخ"
                 },
                 "building/cathedral": {
-                    "name": "مبنى كاتدرائية",
-                    "terms": "<translate with synonyms or related terms for 'Cathedral Building', separated by commas>"
+                    "name": "مبنى كاتدرائية"
                 },
                 "building/chapel": {
-                    "name": "مبنى معبد",
-                    "terms": "<translate with synonyms or related terms for 'Chapel Building', separated by commas>"
+                    "name": "مبنى معبد"
                 },
                 "building/church": {
                     "name": "مبنى كنيسة",
@@ -2918,7 +2931,7 @@
                 },
                 "building/construction": {
                     "name": "مبنى تحت الإنشاء",
-                    "terms": "تحت الانشاء; "
+                    "terms": "تحت الانشاء;"
                 },
                 "building/detached": {
                     "name": "منزل منفصل",
@@ -2988,12 +3001,10 @@
                     "terms": "غطاء"
                 },
                 "building/school": {
-                    "name": "مبنى مدرسة",
-                    "terms": "<translate with synonyms or related terms for 'School Building', separated by commas>"
+                    "name": "مبنى مدرسة"
                 },
                 "building/semidetached_house": {
-                    "name": "مبنى شبه منفصل",
-                    "terms": "<translate with synonyms or related terms for 'Semi-Detached House', separated by commas>"
+                    "name": "مبنى شبه منفصل"
                 },
                 "building/shed": {
                     "name": "سقيفة",
@@ -3477,8 +3488,7 @@
                     "terms": "مفترق طرق"
                 },
                 "landuse": {
-                    "name": "أرض",
-                    "terms": "<ترجم بالمصطلحات أو المرادفات لـ \"الأراضي\"، فاصلا المدخلات بالفاصلة \",\">"
+                    "name": "أرض"
                 },
                 "landuse/aquaculture": {
                     "name": "مزرعة سمكية",
@@ -3545,7 +3555,7 @@
                 },
                 "landuse/meadow": {
                     "name": "مرج",
-                    "terms": " مرج, روضة, مخضرة"
+                    "terms": "مرج, روضة, مخضرة"
                 },
                 "landuse/military": {
                     "name": "منطقة عسكرية",
@@ -3592,7 +3602,7 @@
                 },
                 "landuse/orchard": {
                     "name": "بستان",
-                    "terms": " بستان, بيارة, أشجار البستان"
+                    "terms": "بستان, بيارة, أشجار البستان"
                 },
                 "landuse/plant_nursery": {
                     "name": "مشتل",
@@ -3748,7 +3758,7 @@
                 },
                 "leisure/pitch/volleyball": {
                     "name": "ملعب كرة الطائرة",
-                    "terms": "ملعب "
+                    "terms": "ملعب"
                 },
                 "leisure/playground": {
                     "name": "ساحة ألعاب للأطفال",
@@ -3772,7 +3782,7 @@
                 },
                 "leisure/sports_centre": {
                     "name": "مركز رياضي",
-                    "terms": " مركز رياضي; نادي رياضي; مجمع رياضي"
+                    "terms": "مركز رياضي; نادي رياضي; مجمع رياضي"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "مبنى حوض سباحة",
@@ -3840,7 +3850,7 @@
                 },
                 "man_made/observation": {
                     "name": "برج مراقبة",
-                    "terms": "برمج المراقبة، أبراج المراقبة، أبراج المشاهدة، "
+                    "terms": "برمج المراقبة، أبراج المراقبة، أبراج المشاهدة،"
                 },
                 "man_made/observatory": {
                     "name": "مرصد",
@@ -3952,7 +3962,7 @@
                 },
                 "natural/grassland": {
                     "name": "أرض عشبية",
-                    "terms": " مرعى, مرج, أرض معشوشبة"
+                    "terms": "مرعى, مرج, أرض معشوشبة"
                 },
                 "natural/heath": {
                     "name": "مرج",
@@ -4040,7 +4050,7 @@
                 },
                 "office/accountant": {
                     "name": " المحاسب ",
-                    "terms": " المحاسب القانوني، المدقق، الحسابات "
+                    "terms": "المحاسب القانوني، المدقق، الحسابات"
                 },
                 "office/administrative": {
                     "name": "مكتب الإداري "
@@ -4051,7 +4061,7 @@
                 },
                 "office/architect": {
                     "name": " مهندس معماري ",
-                    "terms": " بناء، مباني، مدينة، تعمير "
+                    "terms": "بناء، مباني، مدينة، تعمير"
                 },
                 "office/association": {
                     "name": "جمعية ",
@@ -4087,7 +4097,7 @@
                 },
                 "office/financial": {
                     "name": "مكتب مالي",
-                    "terms": "وزارة المالية، المكتب المالي والضريبي، "
+                    "terms": "وزارة المالية، المكتب المالي والضريبي،"
                 },
                 "office/forestry": {
                     "name": "إدارة الغابات",
@@ -4099,7 +4109,7 @@
                 },
                 "office/government": {
                     "name": "مكتب حكومي",
-                    "terms": "رئاسة الوزراء، إدارة الدولة، المكتب العام، "
+                    "terms": "رئاسة الوزراء، إدارة الدولة، المكتب العام،"
                 },
                 "office/government/register_office": {
                     "name": "مكتب السجل المدني",
@@ -4130,11 +4140,11 @@
                 },
                 "office/newspaper": {
                     "name": "صحيفة",
-                    "terms": " جريدة، صفحة أخبار، يومية "
+                    "terms": "جريدة، صفحة أخبار، يومية"
                 },
                 "office/ngo": {
                     "name": "مكتب المنظمات الغير حكومية",
-                    "terms": "مكتب الجمعيات الخيرية، هيئات العمل اﻹغائي، "
+                    "terms": "مكتب الجمعيات الخيرية، هيئات العمل اﻹغائي،"
                 },
                 "office/notary": {
                     "name": "كاتب عدل / موثق",
@@ -4173,7 +4183,7 @@
                 },
                 "office/therapist": {
                     "name": "المعالج",
-                    "terms": " معالج، معالج فيزيائي، طبيب، مُمرض "
+                    "terms": "معالج، معالج فيزيائي، طبيب، مُمرض"
                 },
                 "office/travel_agent": {
                     "name": "وكالة السفر"
@@ -4253,7 +4263,7 @@
                 },
                 "power/generator/source_nuclear": {
                     "name": " محطة طاقة نووية ",
-                    "terms": " محطة طاقة نووية "
+                    "terms": "محطة طاقة نووية"
                 },
                 "power/generator/source_wind": {
                     "name": "عنفة رياح",
@@ -4369,7 +4379,7 @@
                 },
                 "railway/signal": {
                     "name": "إشارات المرور ( السكك الحديدية )",
-                    "terms": "إشارة المرور "
+                    "terms": "إشارة المرور"
                 },
                 "railway/station": {
                     "name": "محطة سكة حديد"
@@ -4613,7 +4623,7 @@
                 },
                 "shop/locksmith": {
                     "name": "محل أقفال",
-                    "terms": "صانع اﻷقفال، أقفال، حداد، "
+                    "terms": "صانع اﻷقفال، أقفال، حداد،"
                 },
                 "shop/mall": {
                     "name": "مركز تسوق مول",
@@ -4945,7 +4955,7 @@
                 },
                 "type/route/hiking": {
                     "name": "ممشى ",
-                    "terms": "مسار المشاة، طريق للمشي، "
+                    "terms": "مسار المشاة، طريق للمشي،"
                 },
                 "type/route/horse": {
                     "name": "مسار ركوب",
@@ -5073,14 +5083,12 @@
                 "attribution": {
                     "text": "الشروط والملاحظات"
                 },
-                "description": "صور الأقمار الصناعية الممتازة لـ DigitalGlobe",
                 "name": "صور DigitalGlobe الممتازة"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "الشروط والملاحظات"
                 },
-                "description": "صور الأقمار الصناعية القياسية لـ DigitalGlobe",
                 "name": "صور DigitalGlobe القياسية"
             },
             "EsriWorldImagery": {

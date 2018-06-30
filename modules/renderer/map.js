@@ -6,6 +6,7 @@ import _values from 'lodash-es/values';
 import { set as d3_set } from 'd3-collection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
+import { scaleLinear as d3_scaleLinear } from 'd3-scale';
 
 import {
     event as d3_event,
@@ -455,11 +456,23 @@ export function rendererMap(context) {
             difference = extent = undefined;
         }
 
-        var z = String(~~map.zoom());
+        var zoom = map.zoom();
+        var z = String(~~zoom);
+
         if (surface.attr('data-zoom') !== z) {
-            surface.attr('data-zoom', z)
-                .classed('low-zoom', z <= 16);
+            surface.attr('data-zoom', z);
         }
+
+        // class surface as `lowzoom` around z17-z18.5 (based on latitude)
+        var lat = map.center()[1];
+        var lowzoom = d3_scaleLinear()
+            .domain([-60, 0, 60])
+            .range([17, 18.5, 17])
+            .clamp(true);
+
+        surface
+            .classed('low-zoom', zoom <= lowzoom(lat));
+
 
         if (!difference) {
             supersurface.call(context.background());

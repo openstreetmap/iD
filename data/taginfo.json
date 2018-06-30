@@ -2131,6 +2131,13 @@
     },
     {
       "key": "emergency",
+      "value": "fire_alarm_box",
+      "description": "Fire Alarm Call Box",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-bell.svg?sanitize=true"
+    },
+    {
+      "key": "emergency",
       "value": "fire_extinguisher",
       "description": "Fire Extinguisher",
       "object_types": ["node"],
@@ -2145,7 +2152,7 @@
     },
     {
       "key": "emergency",
-      "value": "first_aid",
+      "value": "first_aid_kit",
       "description": "First Aid Kit",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-medkit.svg?sanitize=true"
@@ -2159,10 +2166,24 @@
     },
     {
       "key": "emergency",
+      "value": "lifeguard",
+      "description": "Lifeguard",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-life-ring.svg?sanitize=true"
+    },
+    {
+      "key": "emergency",
       "value": "phone",
       "description": "Emergency Phone",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/emergency-phone-15.svg?sanitize=true"
+    },
+    {
+      "key": "emergency",
+      "value": "siren",
+      "description": "Siren",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-volume-up.svg?sanitize=true"
     },
     {
       "key": "emergency",
@@ -6338,6 +6359,7 @@
     {"key": "blood:", "value": "platelets", "description": "Blood Components"},
     {"key": "blood:", "value": "stemcells", "description": "Blood Components"},
     {"key": "board_type", "description": "Type"},
+    {"key": "booth", "description": "Booth"},
     {"key": "boules", "description": "Type"},
     {"key": "boundary", "description": "Type"},
     {"key": "brand", "description": "Brand"},
@@ -6867,6 +6889,10 @@
     {"key": "service:vehicle:", "description": "Services"},
     {"key": "shelter_type", "description": "Type"},
     {"key": "shelter", "description": "Shelter"},
+    {"key": "siren:purpose", "description": "Purpose"},
+    {"key": "siren:type", "value": "pneumatic", "description": "Type"},
+    {"key": "siren:type", "value": "electronic", "description": "Type"},
+    {"key": "siren:type", "value": "other", "description": "Type"},
     {"key": "site", "description": "Type"},
     {"key": "smoking", "value": "no", "description": "Smoking"},
     {"key": "smoking", "value": "separated", "description": "Smoking"},

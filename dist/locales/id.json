@@ -2395,15 +2395,13 @@
                     "name": "Pegadaian"
                 },
                 "shop/pet": {
-                    "name": "Toko Peliharaan",
-                    "terms": "<translate with synonyms or related terms for 'Toko Hewan', separated by commas>"
+                    "name": "Toko Peliharaan"
                 },
                 "shop/photo": {
                     "name": "Toko Fotografi"
                 },
                 "shop/pyrotechnics": {
-                    "name": "Toko Kembang Api",
-                    "terms": "<translate with synonyms or related terms for 'Toko Bunga Api', separated by commas>"
+                    "name": "Toko Kembang Api"
                 },
                 "shop/radiotechnics": {
                     "name": "Toko Komponen Radio/Elektronik"
@@ -2415,8 +2413,7 @@
                     "name": "Toko Perlengkapan Menyelam"
                 },
                 "shop/seafood": {
-                    "name": "Toko HIdangan Laut",
-                    "terms": "<translate with synonyms or related terms for 'Toko masakan laut', separated by commas>"
+                    "name": "Toko HIdangan Laut"
                 },
                 "shop/second_hand": {
                     "name": "Jual Titip/Pasar Loak",
@@ -2436,15 +2433,13 @@
                     "terms": "Pasar Swalayan"
                 },
                 "shop/tailor": {
-                    "name": "Tukang Jahit",
-                    "terms": "<translate with synonyms or related terms for 'Penjahit', separated by commas>"
+                    "name": "Tukang Jahit"
                 },
                 "shop/tattoo": {
                     "name": "Jasa Pembuatan Tato"
                 },
                 "shop/tea": {
-                    "name": "Toko Teh",
-                    "terms": "<translate with synonyms or related terms for 'Kedai teh', separated by commas>"
+                    "name": "Toko Teh"
                 },
                 "shop/ticket": {
                     "name": "Penjual Tiket"

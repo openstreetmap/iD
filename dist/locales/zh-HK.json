@@ -3410,7 +3410,7 @@
                 },
                 "craft/key_cutter": {
                     "name": "配匙店",
-                    "terms": "鑰匙店,鎖匙店 "
+                    "terms": "鑰匙店,鎖匙店"
                 },
                 "craft/locksmith": {
                     "name": "鎖匠"
@@ -4871,7 +4871,7 @@
                 },
                 "shop/bicycle": {
                     "name": "單車店",
-                    "terms": "Bicycle Shop,單車店,單車舖,自行車店,腳踏車店    "
+                    "terms": "Bicycle Shop,單車店,單車舖,自行車店,腳踏車店"
                 },
                 "shop/bookmaker": {
                     "name": "投注站",
@@ -4911,7 +4911,7 @@
                 },
                 "shop/charity": {
                     "name": "慈善商店",
-                    "terms": "Charity Store, "
+                    "terms": "Charity Store,"
                 },
                 "shop/cheese": {
                     "name": "芝士店",
@@ -5583,7 +5583,6 @@
                 "attribution": {
                     "text": "條款和意見"
                 },
-                "description": "Premium DigitalGlobe 衛星圖",
                 "name": "DigitalGlobe Premium 航攝圖"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5596,7 +5595,6 @@
                 "attribution": {
                     "text": "條款和意見"
                 },
-                "description": "Standard DigitalGlobe 衛星圖",
                 "name": "DigitalGlobe Standard 航攝圖"
             },
             "DigitalGlobe-Standard-vintage": {

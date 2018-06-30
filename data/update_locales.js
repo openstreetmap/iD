@@ -93,7 +93,24 @@ function getResource(resource, callback) {
             results.forEach(function(result, i) {
                 if (resource === 'community' && Object.keys(result).length) {
                     locale[codes[i]] = { community: result };  // add namespace
+
                 } else {
+                    if (resource === 'presets') {
+                        // remove terms that were not really translated
+                        var presets = (result.presets && result.presets.presets) || {};
+                        for (const key of Object.keys(presets)) {
+                            var preset = presets[key];
+                            if (!preset.terms) continue;
+                            preset.terms = preset.terms.replace(/<.*>/, '').trim();
+                            if (!preset.terms) {
+                                delete preset.terms;
+                                if (_isEmpty(preset)) {
+                                    delete presets[key];
+                                }
+                            }
+                        }
+                    }
+
                     locale[codes[i]] = result;
                 }
             });
@@ -147,18 +164,27 @@ function getLanguages(resource, callback) {
 
 
 function asyncMap(inputs, func, callback) {
-    setTimeout(function() {
-        var remaining = inputs.length;
-        var results = [];
-        var error;
+    var index = 0;
+    var remaining = inputs.length;
+    var results = [];
+    var error;
 
-        inputs.forEach(function(d, i) {
-            func(d, function done(err, data) {
-                if (err) error = err;
-                results[i] = data;
-                remaining --;
-                if (!remaining) callback(error, results);
-            });
+    next();
+
+    function next() {
+        callFunc(index++);
+        if (index < inputs.length) {
+            setTimeout(next, 200);
+        }
+    }
+
+    function callFunc(i) {
+        var d = inputs[i];
+        func(d, function done(err, data) {
+            if (err) error = err;
+            results[i] = data;
+            remaining--;
+            if (!remaining) callback(error, results);
         });
-    }, 300);
+    }
 }

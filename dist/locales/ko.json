@@ -5882,7 +5882,6 @@
                 "attribution": {
                     "text": "이용 약관"
                 },
-                "description": "프리미엄 DigitalGlobe 위성 이미지",
                 "name": "DigitalGlobe 프리미엄 이미지"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5894,7 +5893,6 @@
                 "attribution": {
                     "text": "이용 약관"
                 },
-                "description": "일반 DigitalGlobe 위성 이미지",
                 "name": "DigitalGlobe 일반 이미지"
             },
             "EsriWorldImagery": {

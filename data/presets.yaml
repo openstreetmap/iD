@@ -241,6 +241,9 @@ en:
       board_type:
         # board_type=*
         label: Type
+      booth:
+        # booth=*
+        label: Booth
       boules:
         # boules=*
         label: Type
@@ -1332,6 +1335,19 @@ en:
       shop:
         # shop=*
         label: Type
+      siren/purpose:
+        # 'siren:purpose=*'
+        label: Purpose
+      siren/type:
+        # 'siren:type=*'
+        label: Type
+        options:
+          # 'siren:type=electronic'
+          electronic: Electronic
+          # 'siren:type=other'
+          other: Other
+          # 'siren:type=pneumatic'
+          pneumatic: Pneumatic
       site:
         # site=*
         label: Type
@@ -3065,6 +3081,10 @@ en:
       emergency/destination:
         # emergency=destination
         name: Emergency Access Destination
+      emergency/fire_alarm:
+        # emergency=fire_alarm_box
+        name: Fire Alarm Call Box
+        terms: '<translate with synonyms or related terms for ''Fire Alarm Call Box'', separated by commas>'
       emergency/fire_extinguisher:
         # emergency=fire_extinguisher
         name: Fire Extinguisher
@@ -3074,8 +3094,8 @@ en:
         name: Fire Hydrant
         # 'terms: fire plug'
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
-      emergency/first_aid:
-        # emergency=first_aid
+      emergency/first_aid_kit:
+        # emergency=first_aid_kit
         name: First Aid Kit
         # 'terms: bandage,first aid,med,med kit,medic*,medkit'
         terms: '<translate with synonyms or related terms for ''First Aid Kit'', separated by commas>'
@@ -3084,6 +3104,11 @@ en:
         name: Life Ring
         # 'terms: life buoy,kisby ring,kisbie ring,perry buoy'
         terms: '<translate with synonyms or related terms for ''Life Ring'', separated by commas>'
+      emergency/lifeguard:
+        # emergency=lifeguard
+        name: Lifeguard
+        # 'terms: CPR,rescue'
+        terms: '<translate with synonyms or related terms for ''Lifeguard'', separated by commas>'
       emergency/no:
         # emergency=no
         name: Emergency Access No
@@ -3097,6 +3122,11 @@ en:
       emergency/private:
         # emergency=private
         name: Emergency Access Private
+      emergency/siren:
+        # emergency=siren
+        name: Siren
+        # 'terms: air raid,loud,noise,storm,tornado,warning'
+        terms: '<translate with synonyms or related terms for ''Siren'', separated by commas>'
       emergency/water_tank:
         # emergency=water_tank
         name: Emergency Water Tank
@@ -3264,7 +3294,7 @@ en:
       highway/bridleway:
         # highway=bridleway
         name: Bridle Path
-        # 'terms: bridleway,equestrian,horse'
+        # 'terms: bridleway,equestrian,horse,trail'
         terms: '<translate with synonyms or related terms for ''Bridle Path'', separated by commas>'
       highway/bus_guideway:
         # highway=bus_guideway
@@ -3328,16 +3358,17 @@ en:
       highway/motorway:
         # highway=motorway
         name: Motorway
-        # 'terms: autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike'
+        # 'terms: autobahn,expressway,freeway,highway,interstate,parkway,road,street,thruway,turnpike'
         terms: '<translate with synonyms or related terms for ''Motorway'', separated by commas>'
       highway/motorway_junction:
         # highway=motorway_junction
         name: Motorway Junction / Exit
+        # 'terms: exit'
         terms: '<translate with synonyms or related terms for ''Motorway Junction / Exit'', separated by commas>'
       highway/motorway_link:
         # highway=motorway_link
         name: Motorway Link
-        # 'terms: ramp,on ramp,off ramp'
+        # 'terms: exit,ramp,road,street,on ramp,off ramp'
         terms: '<translate with synonyms or related terms for ''Motorway Link'', separated by commas>'
       highway/passing_place:
         # highway=passing_place
@@ -3362,11 +3393,12 @@ en:
       highway/primary:
         # highway=primary
         name: Primary Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Primary Road'', separated by commas>'
       highway/primary_link:
         # highway=primary_link
         name: Primary Link
-        # 'terms: ramp,on ramp,off ramp'
+        # 'terms: on ramp,off ramp,ramp,road,street'
         terms: '<translate with synonyms or related terms for ''Primary Link'', separated by commas>'
       highway/raceway:
         # highway=raceway
@@ -3376,6 +3408,7 @@ en:
       highway/residential:
         # highway=residential
         name: Residential Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Residential Road'', separated by commas>'
       highway/rest_area:
         # highway=rest_area
@@ -3385,19 +3418,22 @@ en:
       highway/road:
         # highway=road
         name: Unknown Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Unknown Road'', separated by commas>'
       highway/secondary:
         # highway=secondary
         name: Secondary Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Secondary Road'', separated by commas>'
       highway/secondary_link:
         # highway=secondary_link
         name: Secondary Link
-        # 'terms: ramp,on ramp,off ramp'
+        # 'terms: on ramp,off ramp,ramp,road,street'
         terms: '<translate with synonyms or related terms for ''Secondary Link'', separated by commas>'
       highway/service:
         # highway=service
         name: Service Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Service Road'', separated by commas>'
       highway/service/alley:
         # 'highway=service, service=alley'
@@ -3446,11 +3482,12 @@ en:
       highway/tertiary:
         # highway=tertiary
         name: Tertiary Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Tertiary Road'', separated by commas>'
       highway/tertiary_link:
         # highway=tertiary_link
         name: Tertiary Link
-        # 'terms: ramp,on ramp,off ramp'
+        # 'terms: on ramp,off ramp,ramp,road,street'
         terms: '<translate with synonyms or related terms for ''Tertiary Link'', separated by commas>'
       highway/track:
         # highway=track
@@ -3470,11 +3507,12 @@ en:
       highway/trunk:
         # highway=trunk
         name: Trunk Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Trunk Road'', separated by commas>'
       highway/trunk_link:
         # highway=trunk_link
         name: Trunk Link
-        # 'terms: ramp,on ramp,off ramp'
+        # 'terms: on ramp,off ramp,ramp,road,street'
         terms: '<translate with synonyms or related terms for ''Trunk Link'', separated by commas>'
       highway/turning_circle:
         # highway=turning_circle
@@ -3489,6 +3527,7 @@ en:
       highway/unclassified:
         # highway=unclassified
         name: Minor/Unclassified Road
+        # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Minor/Unclassified Road'', separated by commas>'
       historic:
         # historic=*
@@ -4240,7 +4279,7 @@ en:
       natural/cliff:
         # natural=cliff
         name: Cliff
-        # 'terms: escarpment'
+        # 'terms: crag,escarpment,rock face,scarp'
         terms: '<translate with synonyms or related terms for ''Cliff'', separated by commas>'
       natural/coastline:
         # natural=coastline

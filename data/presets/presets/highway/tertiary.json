@@ -18,6 +18,9 @@
     "tags": {
         "highway": "tertiary"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Tertiary Road"
 }

@@ -1,9 +1,6 @@
 describe('iD.serviceMapillary', function() {
     var dimensions = [64, 64],
-        ua = navigator.userAgent,
-        isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null),
-        uaMock = function () { return ua; },
-        context, server, mapillary, orig;
+        context, server, mapillary;
 
 
     before(function() {
@@ -24,28 +21,10 @@ describe('iD.serviceMapillary', function() {
         server = sinon.fakeServer.create();
         mapillary = iD.services.mapillary;
         mapillary.reset();
-
-        /* eslint-disable no-global-assign */
-        /* mock userAgent */
-        if (isPhantom) {
-            orig = navigator;
-            navigator = Object.create(orig, { userAgent: { get: uaMock }});
-        } else {
-            orig = navigator.__lookupGetter__('userAgent');
-            navigator.__defineGetter__('userAgent', uaMock);
-        }
     });
 
     afterEach(function() {
         server.restore();
-
-        /* restore userAgent */
-        if (isPhantom) {
-            navigator = orig;
-        } else {
-            navigator.__defineGetter__('userAgent', orig);
-        }
-        /* eslint-enable no-global-assign */
     });
 
 

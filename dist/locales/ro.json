@@ -1589,839 +1589,430 @@
             },
             "presets": {
                 "address": {
-                    "name": "Adresă",
-                    "terms": "<translate with synonyms or related terms for 'Address', separated by commas>"
+                    "name": "Adresă"
                 },
                 "advertising/billboard": {
-                    "name": "Billboard",
-                    "terms": "<translate with synonyms or related terms for 'Billboard', separated by commas>"
-                },
-                "aerialway/cable_car": {
-                    "terms": "<translate with synonyms or related terms for 'Cable Car', separated by commas>"
-                },
-                "aerialway/chair_lift": {
-                    "terms": "<translate with synonyms or related terms for 'Chair Lift', separated by commas>"
-                },
-                "aerialway/drag_lift": {
-                    "terms": "<translate with synonyms or related terms for 'Drag Lift', separated by commas>"
+                    "name": "Billboard"
                 },
                 "aerialway/gondola": {
-                    "name": "Gondolă",
-                    "terms": "<translate with synonyms or related terms for 'Gondola', separated by commas>"
-                },
-                "aerialway/goods": {
-                    "terms": "<translate with synonyms or related terms for 'Goods Aerialway', separated by commas>"
-                },
-                "aerialway/magic_carpet": {
-                    "terms": "<translate with synonyms or related terms for 'Magic Carpet Lift', separated by commas>"
+                    "name": "Gondolă"
                 },
                 "aerialway/mixed_lift": {
-                    "name": "Lift Mixat",
-                    "terms": "<translate with synonyms or related terms for 'Mixed Lift', separated by commas>"
-                },
-                "aerialway/platter": {
-                    "terms": "<translate with synonyms or related terms for 'Platter Lift', separated by commas>"
-                },
-                "aerialway/pylon": {
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Pylon', separated by commas>"
-                },
-                "aerialway/rope_tow": {
-                    "terms": "<translate with synonyms or related terms for 'Rope Tow Lift', separated by commas>"
-                },
-                "aerialway/t-bar": {
-                    "terms": "<translate with synonyms or related terms for 'T-bar Lift', separated by commas>"
+                    "name": "Lift Mixat"
                 },
                 "aeroway": {
                     "name": "Aeroway"
                 },
                 "aeroway/aerodrome": {
-                    "name": "Aeroport",
-                    "terms": "<translate with synonyms or related terms for 'Airport', separated by commas>"
-                },
-                "aeroway/apron": {
-                    "terms": "<translate with synonyms or related terms for 'Apron', separated by commas>"
-                },
-                "aeroway/gate": {
-                    "terms": "<translate with synonyms or related terms for 'Airport Gate', separated by commas>"
-                },
-                "aeroway/hangar": {
-                    "terms": "<translate with synonyms or related terms for 'Hangar', separated by commas>"
-                },
-                "aeroway/helipad": {
-                    "terms": "<translate with synonyms or related terms for 'Helipad', separated by commas>"
-                },
-                "aeroway/runway": {
-                    "terms": "<translate with synonyms or related terms for 'Runway', separated by commas>"
-                },
-                "aeroway/taxiway": {
-                    "terms": "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
-                },
-                "aeroway/terminal": {
-                    "terms": "<translate with synonyms or related terms for 'Airport Terminal', separated by commas>"
-                },
-                "amenity/animal_boarding": {
-                    "terms": "<translate with synonyms or related terms for 'Animal Boarding Facility', separated by commas>"
-                },
-                "amenity/animal_breeding": {
-                    "terms": "<translate with synonyms or related terms for 'Animal Breeding Facility', separated by commas>"
-                },
-                "amenity/animal_shelter": {
-                    "terms": "<translate with synonyms or related terms for 'Animal Shelter', separated by commas>"
+                    "name": "Aeroport"
                 },
                 "amenity/arts_centre": {
-                    "name": "Centru de Artă",
-                    "terms": "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
+                    "name": "Centru de Artă"
                 },
                 "amenity/atm": {
-                    "name": "Bancomat",
-                    "terms": "<translate with synonyms or related terms for 'ATM', separated by commas>"
+                    "name": "Bancomat"
                 },
                 "amenity/bank": {
-                    "name": "Banca",
-                    "terms": "<translate with synonyms or related terms for 'Bank', separated by commas>"
+                    "name": "Banca"
                 },
                 "amenity/bar": {
-                    "name": "Bar",
-                    "terms": "<translate with synonyms or related terms for 'Bar', separated by commas>"
-                },
-                "amenity/bbq": {
-                    "terms": "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
+                    "name": "Bar"
                 },
                 "amenity/bench": {
-                    "name": "Bancă",
-                    "terms": "<translate with synonyms or related terms for 'Bench', separated by commas>"
+                    "name": "Bancă"
                 },
                 "amenity/bicycle_parking": {
-                    "name": "Parcare biciclete",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
+                    "name": "Parcare biciclete"
                 },
                 "amenity/bicycle_rental": {
-                    "name": "Închiriere biciclete",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
-                },
-                "amenity/bicycle_repair_station": {
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Repair Tool Stand', separated by commas>"
+                    "name": "Închiriere biciclete"
                 },
                 "amenity/biergarten": {
-                    "name": "Biergarten",
-                    "terms": "<translate with synonyms or related terms for 'Beer Garden', separated by commas>"
+                    "name": "Biergarten"
                 },
                 "amenity/boat_rental": {
-                    "name": "Închiriere Barcă",
-                    "terms": "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
+                    "name": "Închiriere Barcă"
                 },
                 "amenity/bureau_de_change": {
-                    "name": "Schimbare Valută",
-                    "terms": "<translate with synonyms or related terms for 'Currency Exchange', separated by commas>"
+                    "name": "Schimbare Valută"
                 },
                 "amenity/cafe": {
-                    "name": "Cafenea",
-                    "terms": "<translate with synonyms or related terms for 'Cafe', separated by commas>"
+                    "name": "Cafenea"
                 },
                 "amenity/car_rental": {
-                    "name": "Închiriere Mașini",
-                    "terms": "<translate with synonyms or related terms for 'Car Rental', separated by commas>"
+                    "name": "Închiriere Mașini"
                 },
                 "amenity/car_sharing": {
-                    "name": "Car Sharing",
-                    "terms": "<translate with synonyms or related terms for 'Car Sharing', separated by commas>"
+                    "name": "Car Sharing"
                 },
                 "amenity/car_wash": {
-                    "name": "Spălătorie Auto",
-                    "terms": "<translate with synonyms or related terms for 'Car Wash', separated by commas>"
+                    "name": "Spălătorie Auto"
                 },
                 "amenity/casino": {
-                    "name": "Cazino",
-                    "terms": "<translate with synonyms or related terms for 'Casino', separated by commas>"
+                    "name": "Cazino"
                 },
                 "amenity/charging_station": {
-                    "name": "Benzinărie",
-                    "terms": "<translate with synonyms or related terms for 'Charging Station', separated by commas>"
+                    "name": "Benzinărie"
                 },
                 "amenity/childcare": {
-                    "name": "Grădiniță",
-                    "terms": "<translate with synonyms or related terms for 'Nursery/Childcare', separated by commas>"
+                    "name": "Grădiniță"
                 },
                 "amenity/cinema": {
-                    "name": "Cinema",
-                    "terms": "<translate with synonyms or related terms for 'Cinema', separated by commas>"
+                    "name": "Cinema"
                 },
                 "amenity/clinic": {
-                    "name": "Clinică",
-                    "terms": "<translate with synonyms or related terms for 'Clinic', separated by commas>"
+                    "name": "Clinică"
                 },
                 "amenity/clock": {
-                    "name": "Ceas",
-                    "terms": "<translate with synonyms or related terms for 'Clock', separated by commas>"
-                },
-                "amenity/college": {
-                    "terms": "<translate with synonyms or related terms for 'College Grounds', separated by commas>"
+                    "name": "Ceas"
                 },
                 "amenity/community_centre": {
-                    "name": "Centru Comunitar",
-                    "terms": "<translate with synonyms or related terms for 'Community Center', separated by commas>"
+                    "name": "Centru Comunitar"
                 },
                 "amenity/compressed_air": {
-                    "name": "Aer Comprimat",
-                    "terms": "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"
+                    "name": "Aer Comprimat"
                 },
                 "amenity/courthouse": {
-                    "name": "Tribunal",
-                    "terms": "<translate with synonyms or related terms for 'Courthouse', separated by commas>"
+                    "name": "Tribunal"
                 },
                 "amenity/crematorium": {
-                    "name": "Crematoriu",
-                    "terms": "<translate with synonyms or related terms for 'Crematorium', separated by commas>"
+                    "name": "Crematoriu"
                 },
                 "amenity/dentist": {
-                    "name": "Dentist",
-                    "terms": "<translate with synonyms or related terms for 'Dentist', separated by commas>"
+                    "name": "Dentist"
                 },
                 "amenity/doctors": {
-                    "name": "Doctor",
-                    "terms": "<translate with synonyms or related terms for 'Doctor', separated by commas>"
-                },
-                "amenity/dojo": {
-                    "terms": "<translate with synonyms or related terms for 'Dojo / Martial Arts Academy', separated by commas>"
+                    "name": "Doctor"
                 },
                 "amenity/drinking_water": {
-                    "name": "Apă de Băut",
-                    "terms": "<translate with synonyms or related terms for 'Drinking Water', separated by commas>"
+                    "name": "Apă de Băut"
                 },
                 "amenity/driving_school": {
-                    "name": "Școală de Șoferi",
-                    "terms": "<translate with synonyms or related terms for 'Driving School', separated by commas>"
+                    "name": "Școală de Șoferi"
                 },
                 "amenity/embassy": {
-                    "name": "Ambasadă",
-                    "terms": "<translate with synonyms or related terms for 'Embassy', separated by commas>"
+                    "name": "Ambasadă"
                 },
                 "amenity/fast_food": {
-                    "name": "Fast Food",
-                    "terms": "<translate with synonyms or related terms for 'Fast Food', separated by commas>"
+                    "name": "Fast Food"
                 },
                 "amenity/fire_station": {
-                    "name": "Pompieri",
-                    "terms": "<translate with synonyms or related terms for 'Fire Station', separated by commas>"
-                },
-                "amenity/food_court": {
-                    "terms": "<translate with synonyms or related terms for 'Food Court', separated by commas>"
+                    "name": "Pompieri"
                 },
                 "amenity/fountain": {
-                    "name": "Fântână",
-                    "terms": "<translate with synonyms or related terms for 'Fountain', separated by commas>"
+                    "name": "Fântână"
                 },
                 "amenity/fuel": {
-                    "name": "Benzinărie",
-                    "terms": "<translate with synonyms or related terms for 'Gas Station', separated by commas>"
+                    "name": "Benzinărie"
                 },
                 "amenity/grave_yard": {
-                    "name": "Cimitir",
-                    "terms": "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
-                },
-                "amenity/grit_bin": {
-                    "terms": "<translate with synonyms or related terms for 'Grit Bin', separated by commas>"
+                    "name": "Cimitir"
                 },
                 "amenity/hospital": {
-                    "name": "Spital",
-                    "terms": "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
+                    "name": "Spital"
                 },
                 "amenity/hunting_stand": {
-                    "name": "Stand de Vânătoare",
-                    "terms": "<translate with synonyms or related terms for 'Hunting Stand', separated by commas>"
+                    "name": "Stand de Vânătoare"
                 },
                 "amenity/ice_cream": {
-                    "name": "Magazin de Înghețată",
-                    "terms": "<translate with synonyms or related terms for 'Ice Cream Shop', separated by commas>"
+                    "name": "Magazin de Înghețată"
                 },
                 "amenity/internet_cafe": {
-                    "name": "Internet Cafe",
-                    "terms": "<translate with synonyms or related terms for 'Internet Cafe', separated by commas>"
+                    "name": "Internet Cafe"
                 },
                 "amenity/kindergarten": {
-                    "name": "Preșcoală/Grădiniță",
-                    "terms": "<translate with synonyms or related terms for 'Preschool/Kindergarten Grounds', separated by commas>"
+                    "name": "Preșcoală/Grădiniță"
                 },
                 "amenity/library": {
-                    "name": "Librărie",
-                    "terms": "<translate with synonyms or related terms for 'Library', separated by commas>"
+                    "name": "Librărie"
                 },
                 "amenity/marketplace": {
-                    "name": "Piață",
-                    "terms": "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
+                    "name": "Piață"
                 },
                 "amenity/motorcycle_parking": {
-                    "name": "Parcare de Motociclete",
-                    "terms": "<translate with synonyms or related terms for 'Motorcycle Parking', separated by commas>"
+                    "name": "Parcare de Motociclete"
                 },
                 "amenity/nightclub": {
-                    "name": "Club de Noapte",
-                    "terms": "<translate with synonyms or related terms for 'Nightclub', separated by commas>"
+                    "name": "Club de Noapte"
                 },
                 "amenity/parking": {
-                    "name": " Parcare de Mașini",
-                    "terms": "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
+                    "name": " Parcare de Mașini"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Intrare/Ieșire Garaj",
-                    "terms": "<translate with synonyms or related terms for 'Parking Garage Entrance/Exit', separated by commas>"
+                    "name": "Intrare/Ieșire Garaj"
                 },
                 "amenity/parking_space": {
-                    "name": "Loc de Parcare",
-                    "terms": "<translate with synonyms or related terms for 'Parking Space', separated by commas>"
+                    "name": "Loc de Parcare"
                 },
                 "amenity/pavilion": {
-                    "name": "Pavilion",
-                    "terms": "<translate with synonyms or related terms for 'Pavilion', separated by commas>"
+                    "name": "Pavilion"
                 },
                 "amenity/pharmacy": {
-                    "name": "Farmacie",
-                    "terms": "<translate with synonyms or related terms for 'Pharmacy', separated by commas>"
+                    "name": "Farmacie"
                 },
                 "amenity/place_of_worship": {
-                    "name": "Loc de Rugăciune",
-                    "terms": "<translate with synonyms or related terms for 'Place of Worship', separated by commas>"
+                    "name": "Loc de Rugăciune"
                 },
                 "amenity/place_of_worship/buddhist": {
-                    "name": "Templu Budist",
-                    "terms": "<translate with synonyms or related terms for 'Buddhist Temple', separated by commas>"
+                    "name": "Templu Budist"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "Biserică",
-                    "terms": "<translate with synonyms or related terms for 'Church', separated by commas>"
+                    "name": "Biserică"
                 },
                 "amenity/place_of_worship/hindu": {
-                    "name": "Templu Hinduist",
-                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                    "name": "Templu Hinduist"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "Sinagogă",
-                    "terms": "<translate with synonyms or related terms for 'Synagogue', separated by commas>"
+                    "name": "Sinagogă"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "Moschee",
-                    "terms": "<translate with synonyms or related terms for 'Mosque', separated by commas>"
+                    "name": "Moschee"
                 },
                 "amenity/place_of_worship/shinto": {
-                    "name": "Altar Shinto",
-                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                    "name": "Altar Shinto"
                 },
                 "amenity/place_of_worship/sikh": {
-                    "name": "Templu Sikh",
-                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                    "name": "Templu Sikh"
                 },
                 "amenity/place_of_worship/taoist": {
-                    "name": "Templu Taoist",
-                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
+                    "name": "Templu Taoist"
                 },
                 "amenity/planetarium": {
-                    "name": "Planetariu",
-                    "terms": "<translate with synonyms or related terms for 'Planetarium', separated by commas>"
+                    "name": "Planetariu"
                 },
                 "amenity/police": {
-                    "name": "Poliție",
-                    "terms": "<translate with synonyms or related terms for 'Police', separated by commas>"
+                    "name": "Poliție"
                 },
                 "amenity/post_box": {
-                    "name": "Cutie Poștală",
-                    "terms": "<translate with synonyms or related terms for 'Mailbox', separated by commas>"
+                    "name": "Cutie Poștală"
                 },
                 "amenity/post_office": {
-                    "name": "Oficiul Poștal",
-                    "terms": "<translate with synonyms or related terms for 'Post Office', separated by commas>"
+                    "name": "Oficiul Poștal"
                 },
                 "amenity/prison": {
-                    "name": "Închisoare",
-                    "terms": "<translate with synonyms or related terms for 'Prison Grounds', separated by commas>"
+                    "name": "Închisoare"
                 },
                 "amenity/pub": {
-                    "name": "Pub",
-                    "terms": "<translate with synonyms or related terms for 'Pub', separated by commas>"
+                    "name": "Pub"
                 },
                 "amenity/public_bath": {
-                    "name": "Baie Publică",
-                    "terms": "<translate with synonyms or related terms for 'Public Bath', separated by commas>"
-                },
-                "amenity/public_bookcase": {
-                    "terms": "<translate with synonyms or related terms for 'Public Bookcase', separated by commas>"
-                },
-                "amenity/ranger_station": {
-                    "terms": "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
+                    "name": "Baie Publică"
                 },
                 "amenity/recycling_centre": {
-                    "name": "Centru de Reciclare",
-                    "terms": "<translate with synonyms or related terms for 'Recycling Center', separated by commas>"
+                    "name": "Centru de Reciclare"
                 },
                 "amenity/register_office": {
                     "name": "Oficiu de Registrare"
                 },
                 "amenity/restaurant": {
-                    "name": "Restaurant",
-                    "terms": "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
-                },
-                "amenity/sanitary_dump_station": {
-                    "terms": "<translate with synonyms or related terms for 'RV Toilet Disposal', separated by commas>"
+                    "name": "Restaurant"
                 },
                 "amenity/school": {
-                    "name": "Școală",
-                    "terms": "<translate with synonyms or related terms for 'School Grounds', separated by commas>"
-                },
-                "amenity/shelter": {
-                    "terms": "<translate with synonyms or related terms for 'Shelter', separated by commas>"
+                    "name": "Școală"
                 },
                 "amenity/social_facility": {
-                    "name": "Facilitate Socială",
-                    "terms": "<translate with synonyms or related terms for 'Social Facility', separated by commas>"
-                },
-                "amenity/social_facility/food_bank": {
-                    "terms": "<translate with synonyms or related terms for 'Food Bank', separated by commas>"
-                },
-                "amenity/social_facility/group_home": {
-                    "terms": "<translate with synonyms or related terms for 'Elderly Group Home', separated by commas>"
-                },
-                "amenity/social_facility/homeless_shelter": {
-                    "terms": "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
-                },
-                "amenity/social_facility/nursing_home": {
-                    "terms": "<translate with synonyms or related terms for 'Nursing Home', separated by commas>"
+                    "name": "Facilitate Socială"
                 },
                 "amenity/studio": {
-                    "name": "Studio",
-                    "terms": "<translate with synonyms or related terms for 'Studio', separated by commas>"
+                    "name": "Studio"
                 },
                 "amenity/swimming_pool": {
                     "name": "Piscină"
                 },
                 "amenity/taxi": {
-                    "name": "Stand de Taxi",
-                    "terms": "<translate with synonyms or related terms for 'Taxi Stand', separated by commas>"
+                    "name": "Stand de Taxi"
                 },
                 "amenity/telephone": {
-                    "name": "Telefon",
-                    "terms": "<translate with synonyms or related terms for 'Telephone', separated by commas>"
+                    "name": "Telefon"
                 },
                 "amenity/theatre": {
-                    "name": "Teatru",
-                    "terms": "<translate with synonyms or related terms for 'Theater', separated by commas>"
+                    "name": "Teatru"
                 },
                 "amenity/toilets": {
-                    "name": "Toaletă",
-                    "terms": "<translate with synonyms or related terms for 'Toilets', separated by commas>"
+                    "name": "Toaletă"
                 },
                 "amenity/townhall": {
-                    "name": "Primărie",
-                    "terms": "<translate with synonyms or related terms for 'Town Hall', separated by commas>"
+                    "name": "Primărie"
                 },
                 "amenity/university": {
-                    "name": "Universitate",
-                    "terms": "<translate with synonyms or related terms for 'University Grounds', separated by commas>"
-                },
-                "amenity/vending_machine": {
-                    "terms": "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/cigarettes": {
-                    "terms": "<translate with synonyms or related terms for 'Cigarette Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/condoms": {
-                    "terms": "<translate with synonyms or related terms for 'Condom Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/drinks": {
-                    "terms": "<translate with synonyms or related terms for 'Drink Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/excrement_bags": {
-                    "terms": "<translate with synonyms or related terms for 'Excrement Bag Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/newspapers": {
-                    "terms": "<translate with synonyms or related terms for 'Newspaper Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "terms": "<translate with synonyms or related terms for 'Parcel Pickup/Dropoff Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/parking_tickets": {
-                    "terms": "<translate with synonyms or related terms for 'Parking Ticket Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/public_transport_tickets": {
-                    "terms": "<translate with synonyms or related terms for 'Transit Ticket Vending Machine', separated by commas>"
-                },
-                "amenity/vending_machine/sweets": {
-                    "terms": "<translate with synonyms or related terms for 'Snack Vending Machine', separated by commas>"
+                    "name": "Universitate"
                 },
                 "amenity/veterinary": {
-                    "name": "Medic Veterinar",
-                    "terms": "<translate with synonyms or related terms for 'Veterinary', separated by commas>"
-                },
-                "amenity/waste/dog_excrement": {
-                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
-                },
-                "amenity/waste_basket": {
-                    "terms": "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
+                    "name": "Medic Veterinar"
                 },
                 "amenity/waste_disposal": {
-                    "name": "Container de Gunoi",
-                    "terms": "<translate with synonyms or related terms for 'Garbage Dumpster', separated by commas>"
-                },
-                "amenity/waste_transfer_station": {
-                    "terms": "<translate with synonyms or related terms for 'Waste Transfer Station', separated by commas>"
-                },
-                "amenity/water_point": {
-                    "terms": "<translate with synonyms or related terms for 'RV Drinking Water', separated by commas>"
-                },
-                "amenity/watering_place": {
-                    "terms": "<translate with synonyms or related terms for 'Animal Watering Place', separated by commas>"
+                    "name": "Container de Gunoi"
                 },
                 "area": {
-                    "name": "Suprafață",
-                    "terms": "<translate with synonyms or related terms for 'Area', separated by commas>"
-                },
-                "area/highway": {
-                    "terms": "<translate with synonyms or related terms for 'Road Surface', separated by commas>"
+                    "name": "Suprafață"
                 },
                 "barrier": {
-                    "name": "Barieră",
-                    "terms": "<translate with synonyms or related terms for 'Barrier', separated by commas>"
+                    "name": "Barieră"
                 },
                 "barrier/block": {
-                    "name": "Blocaj",
-                    "terms": "<translate with synonyms or related terms for 'Block', separated by commas>"
-                },
-                "barrier/bollard": {
-                    "terms": "<translate with synonyms or related terms for 'Bollard', separated by commas>"
-                },
-                "barrier/border_control": {
-                    "terms": "<translate with synonyms or related terms for 'Border Control', separated by commas>"
-                },
-                "barrier/cattle_grid": {
-                    "terms": "<translate with synonyms or related terms for 'Cattle Grid', separated by commas>"
+                    "name": "Blocaj"
                 },
                 "barrier/city_wall": {
-                    "name": "Zid de Oraș",
-                    "terms": "<translate with synonyms or related terms for 'City Wall', separated by commas>"
-                },
-                "barrier/cycle_barrier": {
-                    "terms": "<translate with synonyms or related terms for 'Cycle Barrier', separated by commas>"
-                },
-                "barrier/ditch": {
-                    "terms": "<translate with synonyms or related terms for 'Trench', separated by commas>"
+                    "name": "Zid de Oraș"
                 },
                 "barrier/entrance": {
                     "name": "Intrare"
                 },
                 "barrier/fence": {
-                    "name": "Gard",
-                    "terms": "<translate with synonyms or related terms for 'Fence', separated by commas>"
+                    "name": "Gard"
                 },
                 "barrier/gate": {
-                    "name": "Poartă",
-                    "terms": "<translate with synonyms or related terms for 'Gate', separated by commas>"
-                },
-                "barrier/hedge": {
-                    "terms": "<translate with synonyms or related terms for 'Hedge', separated by commas>"
-                },
-                "barrier/kissing_gate": {
-                    "terms": "<translate with synonyms or related terms for 'Kissing Gate', separated by commas>"
-                },
-                "barrier/lift_gate": {
-                    "terms": "<translate with synonyms or related terms for 'Lift Gate', separated by commas>"
-                },
-                "barrier/retaining_wall": {
-                    "terms": "<translate with synonyms or related terms for 'Retaining Wall', separated by commas>"
-                },
-                "barrier/stile": {
-                    "terms": "<translate with synonyms or related terms for 'Stile', separated by commas>"
-                },
-                "barrier/toll_booth": {
-                    "terms": "<translate with synonyms or related terms for 'Toll Booth', separated by commas>"
+                    "name": "Poartă"
                 },
                 "barrier/wall": {
-                    "name": "Zid",
-                    "terms": "<translate with synonyms or related terms for 'Wall', separated by commas>"
+                    "name": "Zid"
                 },
                 "boundary/administrative": {
-                    "name": "Graniță Administrativă",
-                    "terms": "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
+                    "name": "Graniță Administrativă"
                 },
                 "building": {
-                    "name": "Clădire",
-                    "terms": "<translate with synonyms or related terms for 'Building', separated by commas>"
+                    "name": "Clădire"
                 },
                 "building/apartments": {
-                    "name": "Apartamente",
-                    "terms": "<translate with synonyms or related terms for 'Apartments', separated by commas>"
+                    "name": "Apartamente"
                 },
                 "building/barn": {
-                    "name": "Grajd",
-                    "terms": "<translate with synonyms or related terms for 'Barn', separated by commas>"
+                    "name": "Grajd"
                 },
                 "building/bunker": {
                     "name": "Bunker"
                 },
                 "building/cabin": {
-                    "name": "Cabină",
-                    "terms": "<translate with synonyms or related terms for 'Cabin', separated by commas>"
+                    "name": "Cabină"
                 },
                 "building/cathedral": {
-                    "name": "Catedrală",
-                    "terms": "<translate with synonyms or related terms for 'Cathedral Building', separated by commas>"
+                    "name": "Catedrală"
                 },
                 "building/chapel": {
-                    "name": "Capelă",
-                    "terms": "<translate with synonyms or related terms for 'Chapel Building', separated by commas>"
+                    "name": "Capelă"
                 },
                 "building/church": {
-                    "name": "Biserică",
-                    "terms": "<translate with synonyms or related terms for 'Church Building', separated by commas>"
+                    "name": "Biserică"
                 },
                 "building/college": {
-                    "name": "Colegiu",
-                    "terms": "<translate with synonyms or related terms for 'College Building', separated by commas>"
+                    "name": "Colegiu"
                 },
                 "building/commercial": {
-                    "name": "Clădire Comercială",
-                    "terms": "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
+                    "name": "Clădire Comercială"
                 },
                 "building/construction": {
-                    "name": "Clădire în Construcție",
-                    "terms": "<translate with synonyms or related terms for 'Building Under Construction', separated by commas>"
+                    "name": "Clădire în Construcție"
                 },
                 "building/detached": {
-                    "name": "Casă Detașată",
-                    "terms": "<translate with synonyms or related terms for 'Detached House', separated by commas>"
+                    "name": "Casă Detașată"
                 },
                 "building/dormitory": {
-                    "name": "Dormitoriu",
-                    "terms": "<translate with synonyms or related terms for 'Dormitory', separated by commas>"
+                    "name": "Dormitoriu"
                 },
                 "building/entrance": {
                     "name": "Intrare/Ieșire"
                 },
                 "building/garage": {
-                    "name": "Garaj",
-                    "terms": "<translate with synonyms or related terms for 'Garage', separated by commas>"
+                    "name": "Garaj"
                 },
                 "building/garages": {
-                    "name": "Garaje",
-                    "terms": "<translate with synonyms or related terms for 'Garages', separated by commas>"
+                    "name": "Garaje"
                 },
                 "building/greenhouse": {
-                    "name": "Seră",
-                    "terms": "<translate with synonyms or related terms for 'Greenhouse', separated by commas>"
+                    "name": "Seră"
                 },
                 "building/hospital": {
-                    "name": "Spital",
-                    "terms": "<translate with synonyms or related terms for 'Hospital Building', separated by commas>"
+                    "name": "Spital"
                 },
                 "building/hotel": {
-                    "name": "Hotel",
-                    "terms": "<translate with synonyms or related terms for 'Hotel Building', separated by commas>"
+                    "name": "Hotel"
                 },
                 "building/house": {
-                    "name": "Casă",
-                    "terms": "<translate with synonyms or related terms for 'House', separated by commas>"
+                    "name": "Casă"
                 },
                 "building/hut": {
-                    "name": "Colibă",
-                    "terms": "<translate with synonyms or related terms for 'Hut', separated by commas>"
+                    "name": "Colibă"
                 },
                 "building/industrial": {
-                    "name": "Clădire Industrială",
-                    "terms": "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
+                    "name": "Clădire Industrială"
                 },
                 "building/kindergarten": {
-                    "name": "Preșcoală/Grădiniță",
-                    "terms": "<translate with synonyms or related terms for 'Preschool/Kindergarten Building', separated by commas>"
+                    "name": "Preșcoală/Grădiniță"
                 },
                 "building/public": {
-                    "name": "Clădire Publică",
-                    "terms": "<translate with synonyms or related terms for 'Public Building', separated by commas>"
+                    "name": "Clădire Publică"
                 },
                 "building/residential": {
-                    "name": "Clădire Rezidențială",
-                    "terms": "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+                    "name": "Clădire Rezidențială"
                 },
                 "building/retail": {
-                    "name": "Clădire de Retail",
-                    "terms": "<translate with synonyms or related terms for 'Retail Building', separated by commas>"
+                    "name": "Clădire de Retail"
                 },
                 "building/roof": {
-                    "name": "Acoperiș",
-                    "terms": "<translate with synonyms or related terms for 'Roof', separated by commas>"
+                    "name": "Acoperiș"
                 },
                 "building/school": {
-                    "name": "Școală",
-                    "terms": "<translate with synonyms or related terms for 'School Building', separated by commas>"
+                    "name": "Școală"
                 },
                 "building/semidetached_house": {
-                    "name": "Casă Semi-detașată",
-                    "terms": "<translate with synonyms or related terms for 'Semi-Detached House', separated by commas>"
-                },
-                "building/shed": {
-                    "terms": "<translate with synonyms or related terms for 'Shed', separated by commas>"
-                },
-                "building/stable": {
-                    "terms": "<translate with synonyms or related terms for 'Stable', separated by commas>"
+                    "name": "Casă Semi-detașată"
                 },
                 "building/static_caravan": {
-                    "name": "Casă Mobilă Statică",
-                    "terms": "<translate with synonyms or related terms for 'Static Mobile Home', separated by commas>"
+                    "name": "Casă Mobilă Statică"
                 },
                 "building/terrace": {
-                    "name": "Case în Rând",
-                    "terms": "<translate with synonyms or related terms for 'Row Houses', separated by commas>"
+                    "name": "Case în Rând"
                 },
                 "building/train_station": {
                     "name": "Gară"
                 },
                 "building/university": {
-                    "name": "Universitate",
-                    "terms": "<translate with synonyms or related terms for 'University Building', separated by commas>"
+                    "name": "Universitate"
                 },
                 "building/warehouse": {
-                    "name": "Depozit",
-                    "terms": "<translate with synonyms or related terms for 'Warehouse', separated by commas>"
-                },
-                "camp_site/camp_pitch": {
-                    "terms": "<translate with synonyms or related terms for 'Camp Pitch', separated by commas>"
+                    "name": "Depozit"
                 },
                 "club": {
-                    "name": "Club",
-                    "terms": "<translate with synonyms or related terms for 'Club', separated by commas>"
-                },
-                "craft": {
-                    "terms": "<translate with synonyms or related terms for 'Craft', separated by commas>"
-                },
-                "craft/basket_maker": {
-                    "terms": "<translate with synonyms or related terms for 'Basket Maker', separated by commas>"
-                },
-                "craft/beekeeper": {
-                    "terms": "<translate with synonyms or related terms for 'Beekeeper', separated by commas>"
-                },
-                "craft/blacksmith": {
-                    "terms": "<translate with synonyms or related terms for 'Blacksmith', separated by commas>"
-                },
-                "craft/boatbuilder": {
-                    "terms": "<translate with synonyms or related terms for 'Boat Builder', separated by commas>"
-                },
-                "craft/bookbinder": {
-                    "terms": "<translate with synonyms or related terms for 'Bookbinder', separated by commas>"
+                    "name": "Club"
                 },
                 "craft/brewery": {
-                    "name": "Berărie",
-                    "terms": "<translate with synonyms or related terms for 'Brewery', separated by commas>"
-                },
-                "craft/carpenter": {
-                    "terms": "<translate with synonyms or related terms for 'Carpenter', separated by commas>"
-                },
-                "craft/carpet_layer": {
-                    "terms": "<translate with synonyms or related terms for 'Carpet Layer', separated by commas>"
-                },
-                "craft/caterer": {
-                    "terms": "<translate with synonyms or related terms for 'Caterer', separated by commas>"
-                },
-                "craft/clockmaker": {
-                    "terms": "<translate with synonyms or related terms for 'Clockmaker', separated by commas>"
-                },
-                "craft/distillery": {
-                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
-                },
-                "craft/dressmaker": {
-                    "terms": "<translate with synonyms or related terms for 'Dressmaker', separated by commas>"
+                    "name": "Berărie"
                 },
                 "craft/electrician": {
-                    "name": "Electrician",
-                    "terms": "<translate with synonyms or related terms for 'Electrician', separated by commas>"
-                },
-                "craft/electronics_repair": {
-                    "terms": "<translate with synonyms or related terms for 'Electronics Repair Shop', separated by commas>"
+                    "name": "Electrician"
                 },
                 "craft/gardener": {
-                    "name": "Grădinar",
-                    "terms": "<translate with synonyms or related terms for 'Gardener', separated by commas>"
-                },
-                "craft/glaziery": {
-                    "terms": "<translate with synonyms or related terms for 'Glaziery', separated by commas>"
+                    "name": "Grădinar"
                 },
                 "craft/handicraft": {
-                    "name": "Manufactură",
-                    "terms": "<translate with synonyms or related terms for 'Handicraft', separated by commas>"
-                },
-                "craft/hvac": {
-                    "terms": "<translate with synonyms or related terms for 'HVAC', separated by commas>"
+                    "name": "Manufactură"
                 },
                 "craft/insulator": {
-                    "name": "Insulator",
-                    "terms": "<translate with synonyms or related terms for 'Insulator', separated by commas>"
+                    "name": "Insulator"
                 },
                 "craft/jeweler": {
                     "name": "Giuvaer"
                 },
-                "craft/key_cutter": {
-                    "terms": "<translate with synonyms or related terms for 'Key Cutter', separated by commas>"
-                },
                 "craft/metal_construction": {
-                    "name": "Construcție de Metal",
-                    "terms": "<translate with synonyms or related terms for 'Metal Construction', separated by commas>"
+                    "name": "Construcție de Metal"
                 },
                 "craft/optician": {
                     "name": "Optician"
                 },
                 "craft/painter": {
-                    "name": "Pictor",
-                    "terms": "<translate with synonyms or related terms for 'Painter', separated by commas>"
+                    "name": "Pictor"
                 },
                 "craft/photographer": {
-                    "name": "Fotograf",
-                    "terms": "<translate with synonyms or related terms for 'Photographer', separated by commas>"
+                    "name": "Fotograf"
                 },
                 "craft/photographic_laboratory": {
-                    "name": "Laborator de Fotografie",
-                    "terms": "<translate with synonyms or related terms for 'Photographic Laboratory', separated by commas>"
-                },
-                "craft/plasterer": {
-                    "terms": "<translate with synonyms or related terms for 'Plasterer', separated by commas>"
-                },
-                "craft/plumber": {
-                    "terms": "<translate with synonyms or related terms for 'Plumber', separated by commas>"
-                },
-                "craft/pottery": {
-                    "terms": "<translate with synonyms or related terms for 'Pottery', separated by commas>"
-                },
-                "craft/rigger": {
-                    "terms": "<translate with synonyms or related terms for 'Rigger', separated by commas>"
-                },
-                "craft/roofer": {
-                    "terms": "<translate with synonyms or related terms for 'Roofer', separated by commas>"
+                    "name": "Laborator de Fotografie"
                 },
                 "craft/saddler": {
-                    "name": "Șelar",
-                    "terms": "<translate with synonyms or related terms for 'Saddler', separated by commas>"
-                },
-                "craft/sailmaker": {
-                    "terms": "<translate with synonyms or related terms for 'Sailmaker', separated by commas>"
-                },
-                "craft/sawmill": {
-                    "terms": "<translate with synonyms or related terms for 'Sawmill', separated by commas>"
-                },
-                "craft/scaffolder": {
-                    "terms": "<translate with synonyms or related terms for 'Scaffolder', separated by commas>"
+                    "name": "Șelar"
                 },
                 "craft/shoemaker": {
-                    "name": "Cizmar",
-                    "terms": "<translate with synonyms or related terms for 'Shoemaker', separated by commas>"
-                },
-                "craft/stonemason": {
-                    "terms": "<translate with synonyms or related terms for 'Stonemason', separated by commas>"
-                },
-                "craft/tiler": {
-                    "terms": "<translate with synonyms or related terms for 'Tiler', separated by commas>"
-                },
-                "craft/tinsmith": {
-                    "terms": "<translate with synonyms or related terms for 'Tinsmith', separated by commas>"
-                },
-                "craft/upholsterer": {
-                    "terms": "<translate with synonyms or related terms for 'Upholsterer', separated by commas>"
-                },
-                "craft/watchmaker": {
-                    "terms": "<translate with synonyms or related terms for 'Watchmaker', separated by commas>"
+                    "name": "Cizmar"
                 },
                 "craft/window_construction": {
                     "name": "Geamgiu"
@@ -2430,1758 +2021,1119 @@
                     "name": "Vinărie"
                 },
                 "embankment": {
-                    "name": "Chei",
-                    "terms": "<translate with synonyms or related terms for 'Embankment', separated by commas>"
+                    "name": "Chei"
                 },
                 "emergency/ambulance_station": {
-                    "name": "Stație de Ambulanță",
-                    "terms": "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
+                    "name": "Stație de Ambulanță"
                 },
                 "emergency/defibrillator": {
-                    "name": "Defibrilator",
-                    "terms": "<translate with synonyms or related terms for 'Defibrillator', separated by commas>"
-                },
-                "emergency/fire_hydrant": {
-                    "terms": "<translate with synonyms or related terms for 'Fire Hydrant', separated by commas>"
-                },
-                "emergency/phone": {
-                    "terms": "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
+                    "name": "Defibrilator"
                 },
                 "entrance": {
-                    "name": "Intrare/Ieșire",
-                    "terms": "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
+                    "name": "Intrare/Ieșire"
                 },
                 "footway/crossing": {
-                    "name": "Traversare",
-                    "terms": "<translate with synonyms or related terms for 'Street Crossing', separated by commas>"
+                    "name": "Traversare"
                 },
                 "footway/crosswalk": {
-                    "name": "Traversare de Pietoni",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Crosswalk', separated by commas>"
+                    "name": "Traversare de Pietoni"
                 },
                 "footway/sidewalk": {
-                    "name": "Drum de Pietoni",
-                    "terms": "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
+                    "name": "Drum de Pietoni"
                 },
                 "ford": {
-                    "name": "Vad",
-                    "terms": "<translate with synonyms or related terms for 'Ford', separated by commas>"
-                },
-                "golf/bunker": {
-                    "terms": "<translate with synonyms or related terms for 'Sand Trap', separated by commas>"
+                    "name": "Vad"
                 },
                 "golf/fairway": {
-                    "name": "Drum Maritim",
-                    "terms": "<translate with synonyms or related terms for 'Fairway', separated by commas>"
-                },
-                "golf/green": {
-                    "terms": "<translate with synonyms or related terms for 'Putting Green', separated by commas>"
-                },
-                "golf/hole": {
-                    "terms": "<translate with synonyms or related terms for 'Golf Hole', separated by commas>"
-                },
-                "golf/lateral_water_hazard_area": {
-                    "terms": "<translate with synonyms or related terms for 'Lateral Water Hazard', separated by commas>"
-                },
-                "golf/lateral_water_hazard_line": {
-                    "terms": "<translate with synonyms or related terms for 'Lateral Water Hazard', separated by commas>"
-                },
-                "golf/rough": {
-                    "terms": "<translate with synonyms or related terms for 'Rough', separated by commas>"
+                    "name": "Drum Maritim"
                 },
                 "golf/tee": {
-                    "name": "Casa de Ceai",
-                    "terms": "<translate with synonyms or related terms for 'Tee Box', separated by commas>"
-                },
-                "golf/water_hazard_area": {
-                    "terms": "<translate with synonyms or related terms for 'Water Hazard', separated by commas>"
-                },
-                "golf/water_hazard_line": {
-                    "terms": "<translate with synonyms or related terms for 'Water Hazard', separated by commas>"
+                    "name": "Casa de Ceai"
                 },
                 "healthcare/blood_donation": {
-                    "name": "Centru de Donație de Sânge",
-                    "terms": "<translate with synonyms or related terms for 'Blood Donor Center', separated by commas>"
+                    "name": "Centru de Donație de Sânge"
                 },
                 "highway": {
                     "name": "Autostradă"
                 },
-                "highway/bridleway": {
-                    "terms": "<translate with synonyms or related terms for 'Bridle Path', separated by commas>"
-                },
                 "highway/corridor": {
-                    "name": "Coridor Interior",
-                    "terms": "<translate with synonyms or related terms for 'Indoor Corridor', separated by commas>"
+                    "name": "Coridor Interior"
                 },
                 "highway/crossing": {
-                    "name": "Traversare de Stradă",
-                    "terms": "<translate with synonyms or related terms for 'Street Crossing', separated by commas>"
+                    "name": "Traversare de Stradă"
                 },
                 "highway/crosswalk": {
-                    "name": "Traversare pentru Pietoni",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Crosswalk', separated by commas>"
+                    "name": "Traversare pentru Pietoni"
                 },
                 "highway/cycleway": {
-                    "name": "Pistă biciclete",
-                    "terms": "<translate with synonyms or related terms for 'Cycle Path', separated by commas>"
+                    "name": "Pistă biciclete"
                 },
                 "highway/elevator": {
-                    "name": "Lift",
-                    "terms": "<translate with synonyms or related terms for 'Elevator', separated by commas>"
+                    "name": "Lift"
                 },
                 "highway/footway": {
-                    "name": "Potecă",
-                    "terms": "<translate with synonyms or related terms for 'Foot Path', separated by commas>"
-                },
-                "highway/give_way": {
-                    "terms": "<translate with synonyms or related terms for 'Yield Sign', separated by commas>"
-                },
-                "highway/living_street": {
-                    "terms": "<translate with synonyms or related terms for 'Living Street', separated by commas>"
-                },
-                "highway/mini_roundabout": {
-                    "terms": "<translate with synonyms or related terms for 'Mini-Roundabout', separated by commas>"
+                    "name": "Potecă"
                 },
                 "highway/motorway": {
-                    "name": "Autostradă",
-                    "terms": "<translate with synonyms or related terms for 'Motorway', separated by commas>"
+                    "name": "Autostradă"
                 },
                 "highway/motorway_junction": {
-                    "name": "Juncție de Autostradă / Ieșire",
-                    "terms": "<translate with synonyms or related terms for 'Motorway Junction / Exit', separated by commas>"
+                    "name": "Juncție de Autostradă / Ieșire"
                 },
                 "highway/motorway_link": {
-                    "name": "Intrare în Autostradă",
-                    "terms": "<translate with synonyms or related terms for 'Motorway Link', separated by commas>"
+                    "name": "Intrare în Autostradă"
                 },
                 "highway/path": {
-                    "name": "Potecă",
-                    "terms": "<translate with synonyms or related terms for 'Path', separated by commas>"
+                    "name": "Potecă"
                 },
                 "highway/primary": {
-                    "name": "Drum principal",
-                    "terms": "<translate with synonyms or related terms for 'Primary Road', separated by commas>"
+                    "name": "Drum principal"
                 },
                 "highway/primary_link": {
-                    "name": "Intrare în Drum Principal",
-                    "terms": "<translate with synonyms or related terms for 'Primary Link', separated by commas>"
-                },
-                "highway/raceway": {
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Motorsport)', separated by commas>"
+                    "name": "Intrare în Drum Principal"
                 },
                 "highway/residential": {
-                    "name": "Drum rezidențial",
-                    "terms": "<translate with synonyms or related terms for 'Residential Road', separated by commas>"
-                },
-                "highway/rest_area": {
-                    "terms": "<translate with synonyms or related terms for 'Rest Area', separated by commas>"
+                    "name": "Drum rezidențial"
                 },
                 "highway/road": {
-                    "name": "Stradă Necunoscută",
-                    "terms": "<translate with synonyms or related terms for 'Unknown Road', separated by commas>"
+                    "name": "Stradă Necunoscută"
                 },
                 "highway/secondary": {
-                    "name": "Drum secundar",
-                    "terms": "<translate with synonyms or related terms for 'Secondary Road', separated by commas>"
+                    "name": "Drum secundar"
                 },
                 "highway/secondary_link": {
-                    "name": "Intrare în Stradă Secundară",
-                    "terms": "<translate with synonyms or related terms for 'Secondary Link', separated by commas>"
+                    "name": "Intrare în Stradă Secundară"
                 },
                 "highway/service": {
-                    "name": "Stradă de Serviciu",
-                    "terms": "<translate with synonyms or related terms for 'Service Road', separated by commas>"
+                    "name": "Stradă de Serviciu"
                 },
                 "highway/service/alley": {
-                    "name": "Alee",
-                    "terms": "<translate with synonyms or related terms for 'Alley', separated by commas>"
-                },
-                "highway/service/drive-through": {
-                    "terms": "<translate with synonyms or related terms for 'Drive-Through', separated by commas>"
-                },
-                "highway/service/driveway": {
-                    "terms": "<translate with synonyms or related terms for 'Driveway', separated by commas>"
+                    "name": "Alee"
                 },
                 "highway/service/emergency_access": {
-                    "name": "Acces de Urgențe",
-                    "terms": "<translate with synonyms or related terms for 'Emergency Access', separated by commas>"
+                    "name": "Acces de Urgențe"
                 },
                 "highway/service/parking_aisle": {
-                    "name": "Drum de Parcare",
-                    "terms": "<translate with synonyms or related terms for 'Parking Aisle', separated by commas>"
+                    "name": "Drum de Parcare"
                 },
                 "highway/services": {
-                    "name": "Zonă de Serviciu",
-                    "terms": "<translate with synonyms or related terms for 'Service Area', separated by commas>"
-                },
-                "highway/speed_camera": {
-                    "terms": "<translate with synonyms or related terms for 'Speed Camera', separated by commas>"
+                    "name": "Zonă de Serviciu"
                 },
                 "highway/steps": {
-                    "name": "Scări",
-                    "terms": "<translate with synonyms or related terms for 'Steps', separated by commas>"
+                    "name": "Scări"
                 },
                 "highway/stop": {
-                    "name": "Semn de Oprire",
-                    "terms": "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
+                    "name": "Semn de Oprire"
                 },
                 "highway/street_lamp": {
-                    "name": "Lampă Stradală",
-                    "terms": "<translate with synonyms or related terms for 'Street Lamp', separated by commas>"
+                    "name": "Lampă Stradală"
                 },
                 "highway/tertiary": {
-                    "name": "Stradă Terțiară",
-                    "terms": "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
+                    "name": "Stradă Terțiară"
                 },
                 "highway/tertiary_link": {
-                    "name": "Intrare în Stradă Terțiară",
-                    "terms": "<translate with synonyms or related terms for 'Tertiary Link', separated by commas>"
-                },
-                "highway/track": {
-                    "terms": "<translate with synonyms or related terms for 'Unmaintained Track Road', separated by commas>"
+                    "name": "Intrare în Stradă Terțiară"
                 },
                 "highway/traffic_mirror": {
-                    "name": "Oglindă de Trafic",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Mirror', separated by commas>"
+                    "name": "Oglindă de Trafic"
                 },
                 "highway/traffic_signals": {
-                    "name": "Semnale de Trafic",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Signals', separated by commas>"
+                    "name": "Semnale de Trafic"
                 },
                 "highway/trunk": {
-                    "name": "Drum Expres",
-                    "terms": "<translate with synonyms or related terms for 'Trunk Road', separated by commas>"
+                    "name": "Drum Expres"
                 },
                 "highway/trunk_link": {
-                    "name": "Intrare în Drum Expres",
-                    "terms": "<translate with synonyms or related terms for 'Trunk Link', separated by commas>"
+                    "name": "Intrare în Drum Expres"
                 },
                 "highway/turning_circle": {
-                    "name": "Cerc de Cotitură",
-                    "terms": "<translate with synonyms or related terms for 'Turning Circle', separated by commas>"
-                },
-                "highway/turning_loop": {
-                    "terms": "<translate with synonyms or related terms for 'Turning Loop (Island)', separated by commas>"
+                    "name": "Cerc de Cotitură"
                 },
                 "highway/unclassified": {
-                    "name": "Stradă Minoră/Neclasificată",
-                    "terms": "<translate with synonyms or related terms for 'Minor/Unclassified Road', separated by commas>"
+                    "name": "Stradă Minoră/Neclasificată"
                 },
                 "historic": {
-                    "name": "Sit Istoric",
-                    "terms": "<translate with synonyms or related terms for 'Historic Site', separated by commas>"
+                    "name": "Sit Istoric"
                 },
                 "historic/archaeological_site": {
-                    "name": "Sit Arheologic",
-                    "terms": "<translate with synonyms or related terms for 'Archaeological Site', separated by commas>"
+                    "name": "Sit Arheologic"
                 },
                 "historic/boundary_stone": {
-                    "name": "Piatră de Graniță",
-                    "terms": "<translate with synonyms or related terms for 'Boundary Stone', separated by commas>"
+                    "name": "Piatră de Graniță"
                 },
                 "historic/castle": {
-                    "name": "Castel",
-                    "terms": "<translate with synonyms or related terms for 'Castle', separated by commas>"
+                    "name": "Castel"
                 },
                 "historic/memorial": {
-                    "name": "Memorial",
-                    "terms": "<translate with synonyms or related terms for 'Memorial', separated by commas>"
+                    "name": "Memorial"
                 },
                 "historic/monument": {
-                    "name": "Monument",
-                    "terms": "<translate with synonyms or related terms for 'Monument', separated by commas>"
+                    "name": "Monument"
                 },
                 "historic/ruins": {
-                    "name": "Ruine",
-                    "terms": "<translate with synonyms or related terms for 'Ruins', separated by commas>"
+                    "name": "Ruine"
                 },
                 "historic/tomb": {
-                    "name": "Mormânt",
-                    "terms": "<translate with synonyms or related terms for 'Tomb', separated by commas>"
-                },
-                "historic/wayside_cross": {
-                    "terms": "<translate with synonyms or related terms for 'Wayside Cross', separated by commas>"
-                },
-                "historic/wayside_shrine": {
-                    "terms": "<translate with synonyms or related terms for 'Wayside Shrine', separated by commas>"
+                    "name": "Mormânt"
                 },
                 "junction": {
-                    "name": "Juncție",
-                    "terms": "<translate with synonyms or related terms for 'Junction', separated by commas>"
+                    "name": "Juncție"
                 },
                 "landuse": {
-                    "name": "Utilizare Teren",
-                    "terms": "<translate with synonyms or related terms for 'Land Use', separated by commas>"
+                    "name": "Utilizare Teren"
                 },
                 "landuse/allotments": {
-                    "name": "Grădină Comunitară",
-                    "terms": "<translate with synonyms or related terms for 'Community Garden', separated by commas>"
+                    "name": "Grădină Comunitară"
                 },
                 "landuse/aquaculture": {
-                    "name": "Acvacultură",
-                    "terms": "<translate with synonyms or related terms for 'Aquaculture', separated by commas>"
+                    "name": "Acvacultură"
                 },
                 "landuse/basin": {
-                    "name": "Bazin",
-                    "terms": "<translate with synonyms or related terms for 'Basin', separated by commas>"
+                    "name": "Bazin"
                 },
                 "landuse/cemetery": {
-                    "name": "Cimitir",
-                    "terms": "<translate with synonyms or related terms for 'Cemetery', separated by commas>"
+                    "name": "Cimitir"
                 },
                 "landuse/churchyard": {
-                    "name": "Curte de Biserică",
-                    "terms": "<translate with synonyms or related terms for 'Churchyard', separated by commas>"
+                    "name": "Curte de Biserică"
                 },
                 "landuse/commercial": {
-                    "name": "Zonă Comercială",
-                    "terms": "<translate with synonyms or related terms for 'Commercial Area', separated by commas>"
+                    "name": "Zonă Comercială"
                 },
                 "landuse/construction": {
-                    "name": "Construcție",
-                    "terms": "<translate with synonyms or related terms for 'Construction', separated by commas>"
+                    "name": "Construcție"
                 },
                 "landuse/farm": {
                     "name": "Teren Agricol"
                 },
                 "landuse/farmland": {
-                    "name": "Teren Agricol",
-                    "terms": "<translate with synonyms or related terms for 'Farmland', separated by commas>"
+                    "name": "Teren Agricol"
                 },
                 "landuse/farmyard": {
-                    "name": "Curte Agricolă",
-                    "terms": "<translate with synonyms or related terms for 'Farmyard', separated by commas>"
+                    "name": "Curte Agricolă"
                 },
                 "landuse/forest": {
-                    "name": "Pădure",
-                    "terms": "<translate with synonyms or related terms for 'Forest', separated by commas>"
+                    "name": "Pădure"
                 },
                 "landuse/grass": {
-                    "name": "Iarbă",
-                    "terms": "<translate with synonyms or related terms for 'Grass', separated by commas>"
+                    "name": "Iarbă"
                 },
                 "landuse/harbour": {
-                    "name": "Port",
-                    "terms": "<translate with synonyms or related terms for 'Harbor', separated by commas>"
+                    "name": "Port"
                 },
                 "landuse/industrial": {
-                    "name": "Zonă Industrială",
-                    "terms": "<translate with synonyms or related terms for 'Industrial Area', separated by commas>"
-                },
-                "landuse/landfill": {
-                    "terms": "<translate with synonyms or related terms for 'Landfill', separated by commas>"
+                    "name": "Zonă Industrială"
                 },
                 "landuse/meadow": {
-                    "name": "Pajiște",
-                    "terms": "<translate with synonyms or related terms for 'Meadow', separated by commas>"
+                    "name": "Pajiște"
                 },
                 "landuse/military": {
-                    "name": "Zonă Militară",
-                    "terms": "<translate with synonyms or related terms for 'Military Area', separated by commas>"
+                    "name": "Zonă Militară"
                 },
                 "landuse/military/airfield": {
-                    "name": "Aeroport Militar",
-                    "terms": "<translate with synonyms or related terms for 'Military Airfield', separated by commas>"
+                    "name": "Aeroport Militar"
                 },
                 "landuse/military/barracks": {
-                    "name": "Baraci",
-                    "terms": "<translate with synonyms or related terms for 'Barracks', separated by commas>"
+                    "name": "Baraci"
                 },
                 "landuse/military/bunker": {
-                    "name": "Munker Militar",
-                    "terms": "<translate with synonyms or related terms for 'Military Bunker', separated by commas>"
+                    "name": "Munker Militar"
                 },
                 "landuse/military/checkpoint": {
-                    "name": "Punct de Control",
-                    "terms": "<translate with synonyms or related terms for 'Checkpoint', separated by commas>"
+                    "name": "Punct de Control"
                 },
                 "landuse/military/danger_area": {
-                    "name": "Zonă de Pericol",
-                    "terms": "<translate with synonyms or related terms for 'Danger Area', separated by commas>"
+                    "name": "Zonă de Pericol"
                 },
                 "landuse/military/naval_base": {
-                    "name": "Bază Navală",
-                    "terms": "<translate with synonyms or related terms for 'Naval Base', separated by commas>"
+                    "name": "Bază Navală"
                 },
                 "landuse/military/nuclear_explosion_site": {
-                    "name": "Sit de Explozie Nucleară",
-                    "terms": "<translate with synonyms or related terms for 'Nuclear Explosion Site', separated by commas>"
+                    "name": "Sit de Explozie Nucleară"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "Curs cu Obstacole",
-                    "terms": "<translate with synonyms or related terms for 'Obstacle Course', separated by commas>"
+                    "name": "Curs cu Obstacole"
                 },
                 "landuse/military/office": {
-                    "name": "Oficiu Militar",
-                    "terms": "<translate with synonyms or related terms for 'Military Office', separated by commas>"
+                    "name": "Oficiu Militar"
                 },
                 "landuse/military/range": {
-                    "name": "Gamă Militară",
-                    "terms": "<translate with synonyms or related terms for 'Military Range', separated by commas>"
+                    "name": "Gamă Militară"
                 },
                 "landuse/military/training_area": {
-                    "name": "Zonă de Training",
-                    "terms": "<translate with synonyms or related terms for 'Training Area', separated by commas>"
-                },
-                "landuse/orchard": {
-                    "terms": "<translate with synonyms or related terms for 'Orchard', separated by commas>"
-                },
-                "landuse/plant_nursery": {
-                    "terms": "<translate with synonyms or related terms for 'Plant Nursery', separated by commas>"
-                },
-                "landuse/quarry": {
-                    "terms": "<translate with synonyms or related terms for 'Quarry', separated by commas>"
-                },
-                "landuse/railway": {
-                    "terms": "<translate with synonyms or related terms for 'Railway Corridor', separated by commas>"
-                },
-                "landuse/recreation_ground": {
-                    "terms": "<translate with synonyms or related terms for 'Recreation Ground', separated by commas>"
+                    "name": "Zonă de Training"
                 },
                 "landuse/residential": {
-                    "name": "Zonă Rezidențială",
-                    "terms": "<translate with synonyms or related terms for 'Residential Area', separated by commas>"
+                    "name": "Zonă Rezidențială"
                 },
                 "landuse/retail": {
-                    "name": "Zonă de Retail",
-                    "terms": "<translate with synonyms or related terms for 'Retail Area', separated by commas>"
+                    "name": "Zonă de Retail"
                 },
                 "landuse/vineyard": {
-                    "name": "Curte de Vin",
-                    "terms": "<translate with synonyms or related terms for 'Vineyard', separated by commas>"
-                },
-                "leisure": {
-                    "terms": "<translate with synonyms or related terms for 'Leisure', separated by commas>"
-                },
-                "leisure/adult_gaming_centre": {
-                    "terms": "<translate with synonyms or related terms for 'Adult Gaming Center', separated by commas>"
-                },
-                "leisure/bird_hide": {
-                    "terms": "<translate with synonyms or related terms for 'Bird Hide', separated by commas>"
+                    "name": "Curte de Vin"
                 },
                 "leisure/bowling_alley": {
-                    "name": "Alee de Bowling",
-                    "terms": "<translate with synonyms or related terms for 'Bowling Alley', separated by commas>"
+                    "name": "Alee de Bowling"
                 },
                 "leisure/common": {
-                    "name": "Comun",
-                    "terms": "<translate with synonyms or related terms for 'Common', separated by commas>"
+                    "name": "Comun"
                 },
                 "leisure/dance": {
-                    "name": "Sală de Dans",
-                    "terms": "<translate with synonyms or related terms for 'Dance Hall', separated by commas>"
+                    "name": "Sală de Dans"
                 },
                 "leisure/dog_park": {
-                    "name": "Parc de Câini",
-                    "terms": "<translate with synonyms or related terms for 'Dog Park', separated by commas>"
-                },
-                "leisure/firepit": {
-                    "terms": "<translate with synonyms or related terms for 'Firepit', separated by commas>"
+                    "name": "Parc de Câini"
                 },
                 "leisure/fitness_centre": {
-                    "name": "Centru Fitness",
-                    "terms": "<translate with synonyms or related terms for 'Gym / Fitness Center', separated by commas>"
+                    "name": "Centru Fitness"
                 },
                 "leisure/fitness_centre/yoga": {
-                    "name": "Studio Yoga",
-                    "terms": "<translate with synonyms or related terms for 'Yoga Studio', separated by commas>"
+                    "name": "Studio Yoga"
                 },
                 "leisure/fitness_station": {
-                    "name": "Stație de Fitness în Aer Liber",
-                    "terms": "<translate with synonyms or related terms for 'Outdoor Fitness Station', separated by commas>"
+                    "name": "Stație de Fitness în Aer Liber"
                 },
                 "leisure/garden": {
-                    "name": "Grădină",
-                    "terms": "<translate with synonyms or related terms for 'Garden', separated by commas>"
+                    "name": "Grădină"
                 },
                 "leisure/golf_course": {
-                    "name": "Curs de Golf",
-                    "terms": "<translate with synonyms or related terms for 'Golf Course', separated by commas>"
+                    "name": "Curs de Golf"
                 },
                 "leisure/horse_riding": {
-                    "name": "Facilitate de Călărie",
-                    "terms": "<translate with synonyms or related terms for 'Horseback Riding Facility', separated by commas>"
-                },
-                "leisure/ice_rink": {
-                    "terms": "<translate with synonyms or related terms for 'Ice Rink', separated by commas>"
-                },
-                "leisure/marina": {
-                    "terms": "<translate with synonyms or related terms for 'Marina', separated by commas>"
+                    "name": "Facilitate de Călărie"
                 },
                 "leisure/miniature_golf": {
-                    "name": "Minigolf",
-                    "terms": "<translate with synonyms or related terms for 'Miniature Golf', separated by commas>"
+                    "name": "Minigolf"
                 },
                 "leisure/nature_reserve": {
-                    "name": "Rezervat Natural",
-                    "terms": "<translate with synonyms or related terms for 'Nature Reserve', separated by commas>"
+                    "name": "Rezervat Natural"
                 },
                 "leisure/park": {
-                    "name": "Parc",
-                    "terms": "<translate with synonyms or related terms for 'Park', separated by commas>"
+                    "name": "Parc"
                 },
                 "leisure/picnic_table": {
-                    "name": "Masă de Picnic",
-                    "terms": "<translate with synonyms or related terms for 'Picnic Table', separated by commas>"
+                    "name": "Masă de Picnic"
                 },
                 "leisure/pitch": {
-                    "name": "Teren de Sport",
-                    "terms": "<translate with synonyms or related terms for 'Sport Pitch', separated by commas>"
+                    "name": "Teren de Sport"
                 },
                 "leisure/pitch/american_football": {
-                    "name": "Teren de Fotbal American",
-                    "terms": "<translate with synonyms or related terms for 'American Football Field', separated by commas>"
+                    "name": "Teren de Fotbal American"
                 },
                 "leisure/pitch/baseball": {
-                    "name": "Teren de Baseball",
-                    "terms": "<translate with synonyms or related terms for 'Baseball Diamond', separated by commas>"
+                    "name": "Teren de Baseball"
                 },
                 "leisure/pitch/basketball": {
-                    "name": "Teren de Basket",
-                    "terms": "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
+                    "name": "Teren de Basket"
                 },
                 "leisure/pitch/beachvolleyball": {
-                    "name": "Teren de Volley de Plajă",
-                    "terms": "<translate with synonyms or related terms for 'Beach Volleyball Court', separated by commas>"
-                },
-                "leisure/pitch/bowls": {
-                    "terms": "<translate with synonyms or related terms for 'Bowling Green', separated by commas>"
+                    "name": "Teren de Volley de Plajă"
                 },
                 "leisure/pitch/cricket": {
-                    "name": "Teren de Cricket",
-                    "terms": "<translate with synonyms or related terms for 'Cricket Field', separated by commas>"
+                    "name": "Teren de Cricket"
                 },
                 "leisure/pitch/equestrian": {
-                    "name": "Teren de Călărit",
-                    "terms": "<translate with synonyms or related terms for 'Riding Arena', separated by commas>"
+                    "name": "Teren de Călărit"
                 },
                 "leisure/pitch/rugby_league": {
-                    "name": "Teren de Rugby",
-                    "terms": "<translate with synonyms or related terms for 'Rugby League Field', separated by commas>"
-                },
-                "leisure/pitch/rugby_union": {
-                    "terms": "<translate with synonyms or related terms for 'Rugby Union Field', separated by commas>"
+                    "name": "Teren de Rugby"
                 },
                 "leisure/pitch/skateboard": {
-                    "name": "Park de Skate",
-                    "terms": "<translate with synonyms or related terms for 'Skate Park', separated by commas>"
+                    "name": "Park de Skate"
                 },
                 "leisure/pitch/soccer": {
-                    "name": "Teren de Fotbal",
-                    "terms": "<translate with synonyms or related terms for 'Soccer Field', separated by commas>"
+                    "name": "Teren de Fotbal"
                 },
                 "leisure/pitch/table_tennis": {
-                    "name": "Masă de Ping Pong",
-                    "terms": "<translate with synonyms or related terms for 'Ping Pong Table', separated by commas>"
+                    "name": "Masă de Ping Pong"
                 },
                 "leisure/pitch/tennis": {
-                    "name": "Teren de Tenis",
-                    "terms": "<translate with synonyms or related terms for 'Tennis Court', separated by commas>"
+                    "name": "Teren de Tenis"
                 },
                 "leisure/pitch/volleyball": {
-                    "name": "Teren de Voley",
-                    "terms": "<translate with synonyms or related terms for 'Volleyball Court', separated by commas>"
+                    "name": "Teren de Voley"
                 },
                 "leisure/playground": {
-                    "name": "Loc de Joacă",
-                    "terms": "<translate with synonyms or related terms for 'Playground', separated by commas>"
+                    "name": "Loc de Joacă"
                 },
                 "leisure/resort": {
-                    "name": "Resort",
-                    "terms": "<translate with synonyms or related terms for 'Resort', separated by commas>"
-                },
-                "leisure/running_track": {
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Running)', separated by commas>"
-                },
-                "leisure/slipway": {
-                    "terms": "<translate with synonyms or related terms for 'Slipway', separated by commas>"
+                    "name": "Resort"
                 },
                 "leisure/sports_centre": {
-                    "name": "Centru / Complex de Sport",
-                    "terms": "<translate with synonyms or related terms for 'Sports Center / Complex', separated by commas>"
+                    "name": "Centru / Complex de Sport"
                 },
                 "leisure/sports_centre/swimming": {
-                    "name": "Facilitate de Înnot",
-                    "terms": "<translate with synonyms or related terms for 'Swimming Pool Facility', separated by commas>"
+                    "name": "Facilitate de Înnot"
                 },
                 "leisure/stadium": {
-                    "name": "Stadion",
-                    "terms": "<translate with synonyms or related terms for 'Stadium', separated by commas>"
+                    "name": "Stadion"
                 },
                 "leisure/swimming_pool": {
-                    "name": "Piscină",
-                    "terms": "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
-                },
-                "leisure/track": {
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Non-Motorsport)', separated by commas>"
+                    "name": "Piscină"
                 },
                 "leisure/water_park": {
-                    "name": "Parc Acvatic",
-                    "terms": "<translate with synonyms or related terms for 'Water Park', separated by commas>"
+                    "name": "Parc Acvatic"
                 },
                 "line": {
-                    "name": "Linie",
-                    "terms": "<translate with synonyms or related terms for 'Line', separated by commas>"
-                },
-                "man_made": {
-                    "terms": "<translate with synonyms or related terms for 'Man Made', separated by commas>"
-                },
-                "man_made/adit": {
-                    "terms": "<translate with synonyms or related terms for 'Adit', separated by commas>"
-                },
-                "man_made/breakwater": {
-                    "terms": "<translate with synonyms or related terms for 'Breakwater', separated by commas>"
+                    "name": "Linie"
                 },
                 "man_made/bridge": {
-                    "name": "Pod",
-                    "terms": "<translate with synonyms or related terms for 'Bridge', separated by commas>"
+                    "name": "Pod"
                 },
                 "man_made/chimney": {
-                    "name": "Șemineu",
-                    "terms": "<translate with synonyms or related terms for 'Chimney', separated by commas>"
-                },
-                "man_made/cutline": {
-                    "terms": "<translate with synonyms or related terms for 'Cut line', separated by commas>"
+                    "name": "Șemineu"
                 },
                 "man_made/embankment": {
                     "name": "Îmbarcare"
                 },
-                "man_made/flagpole": {
-                    "terms": "<translate with synonyms or related terms for 'Flagpole', separated by commas>"
-                },
-                "man_made/gasometer": {
-                    "terms": "<translate with synonyms or related terms for 'Gasometer', separated by commas>"
-                },
-                "man_made/groyne": {
-                    "terms": "<translate with synonyms or related terms for 'Groyne', separated by commas>"
-                },
                 "man_made/lighthouse": {
-                    "name": "Far",
-                    "terms": "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
-                },
-                "man_made/mast": {
-                    "terms": "<translate with synonyms or related terms for 'Mast', separated by commas>"
+                    "name": "Far"
                 },
                 "man_made/observation": {
-                    "name": "Turn de Observație",
-                    "terms": "<translate with synonyms or related terms for 'Observation Tower', separated by commas>"
-                },
-                "man_made/petroleum_well": {
-                    "terms": "<translate with synonyms or related terms for 'Oil Well', separated by commas>"
+                    "name": "Turn de Observație"
                 },
                 "man_made/pier": {
-                    "name": "Chei",
-                    "terms": "<translate with synonyms or related terms for 'Pier', separated by commas>"
+                    "name": "Chei"
                 },
                 "man_made/pipeline": {
-                    "name": "Condunctă",
-                    "terms": "<translate with synonyms or related terms for 'Pipeline', separated by commas>"
+                    "name": "Condunctă"
                 },
                 "man_made/pumping_station": {
-                    "name": "Stație de Pompare",
-                    "terms": "<translate with synonyms or related terms for 'Pumping Station', separated by commas>"
+                    "name": "Stație de Pompare"
                 },
                 "man_made/silo": {
-                    "name": "Siloz",
-                    "terms": "<translate with synonyms or related terms for 'Silo', separated by commas>"
+                    "name": "Siloz"
                 },
                 "man_made/storage_tank": {
-                    "name": "Rezervor de Stocare",
-                    "terms": "<translate with synonyms or related terms for 'Storage Tank', separated by commas>"
+                    "name": "Rezervor de Stocare"
                 },
                 "man_made/surveillance": {
-                    "name": "Supraveghere",
-                    "terms": "<translate with synonyms or related terms for 'Surveillance', separated by commas>"
+                    "name": "Supraveghere"
                 },
                 "man_made/surveillance_camera": {
-                    "name": "Cameră de Supraveghere",
-                    "terms": "<translate with synonyms or related terms for 'Surveillance Camera', separated by commas>"
-                },
-                "man_made/survey_point": {
-                    "terms": "<translate with synonyms or related terms for 'Survey Point', separated by commas>"
+                    "name": "Cameră de Supraveghere"
                 },
                 "man_made/tower": {
-                    "name": "Turn",
-                    "terms": "<translate with synonyms or related terms for 'Tower', separated by commas>"
+                    "name": "Turn"
                 },
                 "man_made/wastewater_plant": {
-                    "name": "Sta'ie de Epurare",
-                    "terms": "<translate with synonyms or related terms for 'Wastewater Plant', separated by commas>"
+                    "name": "Sta'ie de Epurare"
                 },
                 "man_made/water_tower": {
-                    "name": "Turn de Apă",
-                    "terms": "<translate with synonyms or related terms for 'Water Tower', separated by commas>"
+                    "name": "Turn de Apă"
                 },
                 "man_made/water_well": {
-                    "name": "Fântână",
-                    "terms": "<translate with synonyms or related terms for 'Water Well', separated by commas>"
-                },
-                "man_made/water_works": {
-                    "terms": "<translate with synonyms or related terms for 'Water Works', separated by commas>"
+                    "name": "Fântână"
                 },
                 "man_made/watermill": {
-                    "name": "Moară de Apă",
-                    "terms": "<translate with synonyms or related terms for 'Watermill', separated by commas>"
+                    "name": "Moară de Apă"
                 },
                 "man_made/windmill": {
-                    "name": "Moară de Vânt",
-                    "terms": "<translate with synonyms or related terms for 'Windmill', separated by commas>"
+                    "name": "Moară de Vânt"
                 },
                 "man_made/works": {
-                    "name": "Fabrică",
-                    "terms": "<translate with synonyms or related terms for 'Factory', separated by commas>"
-                },
-                "manhole": {
-                    "terms": "<translate with synonyms or related terms for 'Manhole', separated by commas>"
-                },
-                "manhole/drain": {
-                    "terms": "<translate with synonyms or related terms for 'Storm Drain', separated by commas>"
-                },
-                "manhole/telecom": {
-                    "terms": "<translate with synonyms or related terms for 'Telecom Manhole', separated by commas>"
+                    "name": "Fabrică"
                 },
                 "natural": {
-                    "name": "Natural",
-                    "terms": "<translate with synonyms or related terms for 'Natural', separated by commas>"
+                    "name": "Natural"
                 },
                 "natural/bare_rock": {
-                    "name": "Stâncă",
-                    "terms": "<translate with synonyms or related terms for 'Bare Rock', separated by commas>"
+                    "name": "Stâncă"
                 },
                 "natural/bay": {
-                    "name": "Golf",
-                    "terms": "<translate with synonyms or related terms for 'Bay', separated by commas>"
+                    "name": "Golf"
                 },
                 "natural/beach": {
-                    "name": "Plajă",
-                    "terms": "<translate with synonyms or related terms for 'Beach', separated by commas>"
+                    "name": "Plajă"
                 },
                 "natural/cave_entrance": {
-                    "name": "Intrare de Peșteră",
-                    "terms": "<translate with synonyms or related terms for 'Cave Entrance', separated by commas>"
+                    "name": "Intrare de Peșteră"
                 },
                 "natural/cliff": {
-                    "name": "Faleză",
-                    "terms": "<translate with synonyms or related terms for 'Cliff', separated by commas>"
+                    "name": "Faleză"
                 },
                 "natural/coastline": {
-                    "name": "Linie de Coastă",
-                    "terms": "<translate with synonyms or related terms for 'Coastline', separated by commas>"
-                },
-                "natural/fell": {
-                    "terms": "<translate with synonyms or related terms for 'Fell', separated by commas>"
+                    "name": "Linie de Coastă"
                 },
                 "natural/glacier": {
-                    "name": "Ghețar",
-                    "terms": "<translate with synonyms or related terms for 'Glacier', separated by commas>"
+                    "name": "Ghețar"
                 },
                 "natural/grassland": {
-                    "name": "Iarbă",
-                    "terms": "<translate with synonyms or related terms for 'Grassland', separated by commas>"
+                    "name": "Iarbă"
                 },
                 "natural/heath": {
-                    "name": "Landă",
-                    "terms": "<translate with synonyms or related terms for 'Heath', separated by commas>"
+                    "name": "Landă"
                 },
                 "natural/peak": {
-                    "name": "Vârf",
-                    "terms": "<translate with synonyms or related terms for 'Peak', separated by commas>"
+                    "name": "Vârf"
                 },
                 "natural/ridge": {
-                    "name": "Creastă",
-                    "terms": "<translate with synonyms or related terms for 'Ridge', separated by commas>"
-                },
-                "natural/saddle": {
-                    "terms": "<translate with synonyms or related terms for 'Saddle', separated by commas>"
+                    "name": "Creastă"
                 },
                 "natural/sand": {
-                    "name": "Nisip",
-                    "terms": "<translate with synonyms or related terms for 'Sand', separated by commas>"
+                    "name": "Nisip"
                 },
                 "natural/scree": {
-                    "name": "Pietriș",
-                    "terms": "<translate with synonyms or related terms for 'Scree', separated by commas>"
-                },
-                "natural/scrub": {
-                    "terms": "<translate with synonyms or related terms for 'Scrub', separated by commas>"
-                },
-                "natural/spring": {
-                    "terms": "<translate with synonyms or related terms for 'Spring', separated by commas>"
+                    "name": "Pietriș"
                 },
                 "natural/tree": {
-                    "name": "Copac",
-                    "terms": "<translate with synonyms or related terms for 'Tree', separated by commas>"
+                    "name": "Copac"
                 },
                 "natural/tree_row": {
-                    "name": "Rând de Copaci",
-                    "terms": "<translate with synonyms or related terms for 'Tree row', separated by commas>"
+                    "name": "Rând de Copaci"
                 },
                 "natural/volcano": {
-                    "name": "Vulcan",
-                    "terms": "<translate with synonyms or related terms for 'Volcano', separated by commas>"
+                    "name": "Vulcan"
                 },
                 "natural/water": {
-                    "name": "Apă",
-                    "terms": "<translate with synonyms or related terms for 'Water', separated by commas>"
+                    "name": "Apă"
                 },
                 "natural/water/lake": {
-                    "name": "Lac",
-                    "terms": "<translate with synonyms or related terms for 'Lake', separated by commas>"
+                    "name": "Lac"
                 },
                 "natural/water/pond": {
-                    "name": "Iaz",
-                    "terms": "<translate with synonyms or related terms for 'Pond', separated by commas>"
+                    "name": "Iaz"
                 },
                 "natural/water/reservoir": {
-                    "name": "Rezervor",
-                    "terms": "<translate with synonyms or related terms for 'Reservoir', separated by commas>"
+                    "name": "Rezervor"
                 },
                 "natural/wetland": {
-                    "name": "Zonă Umedă",
-                    "terms": "<translate with synonyms or related terms for 'Wetland', separated by commas>"
+                    "name": "Zonă Umedă"
                 },
                 "natural/wood": {
-                    "name": "Pădure",
-                    "terms": "<translate with synonyms or related terms for 'Wood', separated by commas>"
+                    "name": "Pădure"
                 },
                 "noexit/yes": {
-                    "name": "Fără Ieșire",
-                    "terms": "<translate with synonyms or related terms for 'No Exit', separated by commas>"
+                    "name": "Fără Ieșire"
                 },
                 "office": {
-                    "name": "Oficiu",
-                    "terms": "<translate with synonyms or related terms for 'Office', separated by commas>"
+                    "name": "Oficiu"
                 },
                 "office/administrative": {
                     "name": "Oficiu Administrativ"
-                },
-                "office/coworking": {
-                    "terms": "<translate with synonyms or related terms for 'Coworking Space', separated by commas>"
                 },
                 "office/educational_institution": {
                     "name": "Instituție Educațională"
                 },
                 "office/employment_agency": {
-                    "name": "Agenție de Muncă",
-                    "terms": "<translate with synonyms or related terms for 'Employment Agency', separated by commas>"
+                    "name": "Agenție de Muncă"
                 },
                 "office/estate_agent": {
-                    "name": "Oficiu de Proprietate Imobiliară",
-                    "terms": "<translate with synonyms or related terms for 'Real Estate Office', separated by commas>"
+                    "name": "Oficiu de Proprietate Imobiliară"
                 },
                 "office/financial": {
-                    "name": "Oficiu Financiar",
-                    "terms": "<translate with synonyms or related terms for 'Financial Office', separated by commas>"
+                    "name": "Oficiu Financiar"
                 },
                 "office/government": {
-                    "name": "Oficiu de Guvern",
-                    "terms": "<translate with synonyms or related terms for 'Government Office', separated by commas>"
+                    "name": "Oficiu de Guvern"
                 },
                 "office/government/register_office": {
-                    "name": "Oficiu de Registru",
-                    "terms": "<translate with synonyms or related terms for 'Register Office', separated by commas>"
+                    "name": "Oficiu de Registru"
                 },
                 "office/insurance": {
-                    "name": "Oficiu de Asigurare",
-                    "terms": "<translate with synonyms or related terms for 'Insurance Office', separated by commas>"
+                    "name": "Oficiu de Asigurare"
                 },
                 "office/lawyer": {
-                    "name": "Cabinet de Avocatură",
-                    "terms": "<translate with synonyms or related terms for 'Law Office', separated by commas>"
+                    "name": "Cabinet de Avocatură"
                 },
                 "office/lawyer/notary": {
                     "name": "Notar"
                 },
                 "office/ngo": {
-                    "name": "Oficiu NGO",
-                    "terms": "<translate with synonyms or related terms for 'NGO Office', separated by commas>"
+                    "name": "Oficiu NGO"
                 },
                 "office/physician": {
                     "name": "Fizician"
                 },
                 "office/political_party": {
-                    "name": "Partid Politic",
-                    "terms": "<translate with synonyms or related terms for 'Political Party', separated by commas>"
+                    "name": "Partid Politic"
                 },
                 "office/research": {
-                    "name": "Birou de Cercetare",
-                    "terms": "<translate with synonyms or related terms for 'Research Office', separated by commas>"
+                    "name": "Birou de Cercetare"
                 },
                 "office/telecommunication": {
-                    "name": "Oficiu Telecom",
-                    "terms": "<translate with synonyms or related terms for 'Telecom Office', separated by commas>"
+                    "name": "Oficiu Telecom"
                 },
                 "office/travel_agent": {
                     "name": "Agenție de Călătorii"
                 },
                 "piste": {
-                    "name": "Pistă de Schi",
-                    "terms": "<translate with synonyms or related terms for 'Piste/Ski Trail', separated by commas>"
+                    "name": "Pistă de Schi"
                 },
                 "place": {
                     "name": "Loc"
                 },
                 "place/city": {
-                    "name": "Oraș",
-                    "terms": "<translate with synonyms or related terms for 'City', separated by commas>"
+                    "name": "Oraș"
                 },
                 "place/farm": {
                     "name": "Fermă"
                 },
                 "place/hamlet": {
-                    "name": "Cătun",
-                    "terms": "<translate with synonyms or related terms for 'Hamlet', separated by commas>"
+                    "name": "Cătun"
                 },
                 "place/island": {
-                    "name": "Insulă",
-                    "terms": "<translate with synonyms or related terms for 'Island', separated by commas>"
-                },
-                "place/isolated_dwelling": {
-                    "terms": "<translate with synonyms or related terms for 'Isolated Dwelling', separated by commas>"
+                    "name": "Insulă"
                 },
                 "place/locality": {
-                    "name": "Localitate",
-                    "terms": "<translate with synonyms or related terms for 'Locality', separated by commas>"
+                    "name": "Localitate"
                 },
                 "place/neighbourhood": {
-                    "name": "Cartier",
-                    "terms": "<translate with synonyms or related terms for 'Neighborhood', separated by commas>"
+                    "name": "Cartier"
                 },
                 "place/quarter": {
-                    "name": "Cartier",
-                    "terms": "<translate with synonyms or related terms for 'Sub-Borough / Quarter', separated by commas>"
+                    "name": "Cartier"
                 },
                 "place/square": {
-                    "name": "Piață",
-                    "terms": "<translate with synonyms or related terms for 'Square', separated by commas>"
+                    "name": "Piață"
                 },
                 "place/suburb": {
-                    "name": "Suburbie",
-                    "terms": "<translate with synonyms or related terms for 'Borough / Suburb', separated by commas>"
+                    "name": "Suburbie"
                 },
                 "place/town": {
-                    "name": "Oraș",
-                    "terms": "<translate with synonyms or related terms for 'Town', separated by commas>"
+                    "name": "Oraș"
                 },
                 "place/village": {
-                    "name": "Sat",
-                    "terms": "<translate with synonyms or related terms for 'Village', separated by commas>"
+                    "name": "Sat"
                 },
                 "point": {
-                    "name": "Punct",
-                    "terms": "<translate with synonyms or related terms for 'Point', separated by commas>"
+                    "name": "Punct"
                 },
                 "power": {
                     "name": "Energie"
                 },
                 "power/generator": {
-                    "name": "Generator de Energie",
-                    "terms": "<translate with synonyms or related terms for 'Power Generator', separated by commas>"
+                    "name": "Generator de Energie"
                 },
                 "power/generator/source_nuclear": {
-                    "name": "Reactor Nuclear",
-                    "terms": "<translate with synonyms or related terms for 'Nuclear Reactor', separated by commas>"
+                    "name": "Reactor Nuclear"
                 },
                 "power/generator/source_wind": {
-                    "name": "Turbină de Vânt",
-                    "terms": "<translate with synonyms or related terms for 'Wind Turbine', separated by commas>"
+                    "name": "Turbină de Vânt"
                 },
                 "power/line": {
-                    "name": "Linie de Alimentare",
-                    "terms": "<translate with synonyms or related terms for 'Power Line', separated by commas>"
+                    "name": "Linie de Alimentare"
                 },
                 "power/minor_line": {
-                    "name": "Linie de Alimentare Minoră",
-                    "terms": "<translate with synonyms or related terms for 'Minor Power Line', separated by commas>"
-                },
-                "power/plant": {
-                    "terms": "<translate with synonyms or related terms for 'Power Station Grounds', separated by commas>"
+                    "name": "Linie de Alimentare Minoră"
                 },
                 "power/pole": {
-                    "name": "Stâlp de Energie",
-                    "terms": "<translate with synonyms or related terms for 'Power Pole', separated by commas>"
+                    "name": "Stâlp de Energie"
                 },
                 "power/sub_station": {
                     "name": "SubStație"
                 },
                 "power/substation": {
-                    "name": "Substație",
-                    "terms": "<translate with synonyms or related terms for 'Substation', separated by commas>"
+                    "name": "Substație"
                 },
                 "power/tower": {
-                    "name": "Turn de Înaltă Tensiune",
-                    "terms": "<translate with synonyms or related terms for 'High-Voltage Tower', separated by commas>"
+                    "name": "Turn de Înaltă Tensiune"
                 },
                 "power/transformer": {
-                    "name": "Transformator",
-                    "terms": "<translate with synonyms or related terms for 'Transformer', separated by commas>"
+                    "name": "Transformator"
                 },
                 "railway": {
                     "name": "Cale Ferată"
                 },
                 "railway/abandoned": {
-                    "name": "Cale Ferată Abandonată",
-                    "terms": "<translate with synonyms or related terms for 'Abandoned Railway', separated by commas>"
+                    "name": "Cale Ferată Abandonată"
                 },
                 "railway/crossing": {
-                    "name": "Traversare de Căi Ferate (Potecă)",
-                    "terms": "<translate with synonyms or related terms for 'Railway Crossing (Path)', separated by commas>"
+                    "name": "Traversare de Căi Ferate (Potecă)"
                 },
                 "railway/disused": {
-                    "name": "Cale Ferată Învechită",
-                    "terms": "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
+                    "name": "Cale Ferată Învechită"
                 },
                 "railway/funicular": {
-                    "name": "Frânghie",
-                    "terms": "<translate with synonyms or related terms for 'Funicular', separated by commas>"
+                    "name": "Frânghie"
                 },
                 "railway/level_crossing": {
-                    "name": "Traversare de Cale Ferată (Stradă)",
-                    "terms": "<translate with synonyms or related terms for 'Railway Crossing (Road)', separated by commas>"
+                    "name": "Traversare de Cale Ferată (Stradă)"
                 },
                 "railway/monorail": {
-                    "name": "Monoșină",
-                    "terms": "<translate with synonyms or related terms for 'Monorail', separated by commas>"
+                    "name": "Monoșină"
                 },
                 "railway/narrow_gauge": {
-                    "name": "Cale Ferată Îngustă",
-                    "terms": "<translate with synonyms or related terms for 'Narrow Gauge Rail', separated by commas>"
+                    "name": "Cale Ferată Îngustă"
                 },
                 "railway/rail": {
-                    "name": "Șină",
-                    "terms": "<translate with synonyms or related terms for 'Rail', separated by commas>"
+                    "name": "Șină"
                 },
                 "railway/subway": {
-                    "name": "Metrou",
-                    "terms": "<translate with synonyms or related terms for 'Subway', separated by commas>"
+                    "name": "Metrou"
                 },
                 "railway/subway_entrance": {
-                    "name": "Intrare Metrou",
-                    "terms": "<translate with synonyms or related terms for 'Subway Entrance', separated by commas>"
+                    "name": "Intrare Metrou"
                 },
                 "railway/tram": {
-                    "name": "Tranvai",
-                    "terms": "<translate with synonyms or related terms for 'Tram', separated by commas>"
+                    "name": "Tranvai"
                 },
                 "relation": {
-                    "name": "Relație",
-                    "terms": "<translate with synonyms or related terms for 'Relation', separated by commas>"
+                    "name": "Relație"
                 },
                 "roundabout": {
                     "name": "Sens Giratoriu"
                 },
                 "route/ferry": {
-                    "name": "Rută de Bac",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
+                    "name": "Rută de Bac"
                 },
                 "shop": {
-                    "name": "Magazin",
-                    "terms": "<translate with synonyms or related terms for 'Shop', separated by commas>"
+                    "name": "Magazin"
                 },
                 "shop/alcohol": {
                     "name": "Magazin de Băuturi Alcoolice",
                     "terms": "G"
                 },
                 "shop/anime": {
-                    "name": "Magazin Anime",
-                    "terms": "<translate with synonyms or related terms for 'Anime Shop', separated by commas>"
+                    "name": "Magazin Anime"
                 },
                 "shop/antiques": {
-                    "name": "Anticariat",
-                    "terms": "<translate with synonyms or related terms for 'Antiques Shop', separated by commas>"
+                    "name": "Anticariat"
                 },
                 "shop/appliance": {
-                    "name": "Magazin de Electrocasnice",
-                    "terms": "<translate with synonyms or related terms for 'Appliance Store', separated by commas>"
+                    "name": "Magazin de Electrocasnice"
                 },
                 "shop/art": {
-                    "name": "Magazin de Artă",
-                    "terms": "<translate with synonyms or related terms for 'Art Store', separated by commas>"
+                    "name": "Magazin de Artă"
                 },
                 "shop/baby_goods": {
-                    "name": "Magazin de Produse pentru Bebeluși",
-                    "terms": "<translate with synonyms or related terms for 'Baby Goods Store', separated by commas>"
+                    "name": "Magazin de Produse pentru Bebeluși"
                 },
                 "shop/bag": {
-                    "name": "Magazin de Bagaje",
-                    "terms": "<translate with synonyms or related terms for 'Bag/Luggage Store', separated by commas>"
+                    "name": "Magazin de Bagaje"
                 },
                 "shop/bakery": {
-                    "name": "Brutărie",
-                    "terms": "<translate with synonyms or related terms for 'Bakery', separated by commas>"
+                    "name": "Brutărie"
                 },
                 "shop/bathroom_furnishing": {
-                    "name": "Magazin de Mobilier pentru Băi",
-                    "terms": "<translate with synonyms or related terms for 'Bathroom Furnishing Store', separated by commas>"
+                    "name": "Magazin de Mobilier pentru Băi"
                 },
                 "shop/beauty": {
-                    "name": "Magazin Beauty",
-                    "terms": "<translate with synonyms or related terms for 'Beauty Shop', separated by commas>"
+                    "name": "Magazin Beauty"
                 },
                 "shop/beauty/nails": {
-                    "name": "Salon de Unghii",
-                    "terms": "<translate with synonyms or related terms for 'Nail Salon', separated by commas>"
+                    "name": "Salon de Unghii"
                 },
                 "shop/beauty/tanning": {
-                    "name": "Salon de Bronzat",
-                    "terms": "<translate with synonyms or related terms for 'Tanning Salon', separated by commas>"
+                    "name": "Salon de Bronzat"
                 },
                 "shop/bed": {
-                    "name": "Magazin de Saltele",
-                    "terms": "<translate with synonyms or related terms for 'Bedding/Mattress Store', separated by commas>"
+                    "name": "Magazin de Saltele"
                 },
                 "shop/beverages": {
-                    "name": "Magazin de Băuturi",
-                    "terms": "<translate with synonyms or related terms for 'Beverage Store', separated by commas>"
+                    "name": "Magazin de Băuturi"
                 },
                 "shop/bicycle": {
-                    "name": "Magazin de Biciclete",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Shop', separated by commas>"
+                    "name": "Magazin de Biciclete"
                 },
                 "shop/bookmaker": {
-                    "name": "Atelier de Cărți",
-                    "terms": "<translate with synonyms or related terms for 'Bookmaker', separated by commas>"
+                    "name": "Atelier de Cărți"
                 },
                 "shop/books": {
-                    "name": "Magazin de Cărți",
-                    "terms": "<translate with synonyms or related terms for 'Book Store', separated by commas>"
+                    "name": "Magazin de Cărți"
                 },
                 "shop/boutique": {
-                    "name": "Boutique",
-                    "terms": "<translate with synonyms or related terms for 'Boutique', separated by commas>"
+                    "name": "Boutique"
                 },
                 "shop/butcher": {
-                    "name": "Măcelărie",
-                    "terms": "<translate with synonyms or related terms for 'Butcher', separated by commas>"
+                    "name": "Măcelărie"
                 },
                 "shop/candles": {
-                    "name": "Magazin de Lumânări",
-                    "terms": "<translate with synonyms or related terms for 'Candle Shop', separated by commas>"
+                    "name": "Magazin de Lumânări"
                 },
                 "shop/car": {
-                    "name": "Magazin de Mașini",
-                    "terms": "<translate with synonyms or related terms for 'Car Dealership', separated by commas>"
+                    "name": "Magazin de Mașini"
                 },
                 "shop/car_repair": {
-                    "name": "Vulcanizare",
-                    "terms": "<translate with synonyms or related terms for 'Car Repair Shop', separated by commas>"
+                    "name": "Vulcanizare"
                 },
                 "shop/carpet": {
-                    "name": "Magazin de Covoare",
-                    "terms": "<translate with synonyms or related terms for 'Carpet Store', separated by commas>"
+                    "name": "Magazin de Covoare"
                 },
                 "shop/charity": {
-                    "name": "Magazin de Caritate",
-                    "terms": "<translate with synonyms or related terms for 'Charity Store', separated by commas>"
+                    "name": "Magazin de Caritate"
                 },
                 "shop/cheese": {
-                    "name": "Magazin de Brânzeturi",
-                    "terms": "<translate with synonyms or related terms for 'Cheese Store', separated by commas>"
+                    "name": "Magazin de Brânzeturi"
                 },
                 "shop/chemist": {
-                    "name": "Drogărie",
-                    "terms": "<translate with synonyms or related terms for 'Drugstore', separated by commas>"
+                    "name": "Drogărie"
                 },
                 "shop/chocolate": {
-                    "name": "Magazin de Ciocolată",
-                    "terms": "<translate with synonyms or related terms for 'Chocolate Store', separated by commas>"
+                    "name": "Magazin de Ciocolată"
                 },
                 "shop/clothes": {
-                    "name": "Magazin de Haine",
-                    "terms": "<translate with synonyms or related terms for 'Clothing Store', separated by commas>"
+                    "name": "Magazin de Haine"
                 },
                 "shop/coffee": {
-                    "name": "Magazin de Cafea",
-                    "terms": "<translate with synonyms or related terms for 'Coffee Store', separated by commas>"
+                    "name": "Magazin de Cafea"
                 },
                 "shop/computer": {
-                    "name": "Magazin de Calculatoare",
-                    "terms": "<translate with synonyms or related terms for 'Computer Store', separated by commas>"
+                    "name": "Magazin de Calculatoare"
                 },
                 "shop/confectionery": {
-                    "name": "Magazin de Dulciuri",
-                    "terms": "<translate with synonyms or related terms for 'Candy Store', separated by commas>"
+                    "name": "Magazin de Dulciuri"
                 },
                 "shop/convenience": {
-                    "name": "Magazin Universal",
-                    "terms": "<translate with synonyms or related terms for 'Convenience Store', separated by commas>"
+                    "name": "Magazin Universal"
                 },
                 "shop/copyshop": {
-                    "name": "Atelier de Copiere",
-                    "terms": "<translate with synonyms or related terms for 'Copy Store', separated by commas>"
+                    "name": "Atelier de Copiere"
                 },
                 "shop/cosmetics": {
-                    "name": "osmetic",
-                    "terms": "<translate with synonyms or related terms for 'Cosmetics Store', separated by commas>"
-                },
-                "shop/craft": {
-                    "terms": "<translate with synonyms or related terms for 'Arts and Crafts Store', separated by commas>"
+                    "name": "osmetic"
                 },
                 "shop/curtain": {
-                    "name": "Magazin de Perdele",
-                    "terms": "<translate with synonyms or related terms for 'Curtain Store', separated by commas>"
+                    "name": "Magazin de Perdele"
                 },
                 "shop/dairy": {
-                    "name": "Magazin de Lactate",
-                    "terms": "<translate with synonyms or related terms for 'Dairy Store', separated by commas>"
-                },
-                "shop/deli": {
-                    "terms": "<translate with synonyms or related terms for 'Deli', separated by commas>"
+                    "name": "Magazin de Lactate"
                 },
                 "shop/department_store": {
-                    "name": "Magazin Universal",
-                    "terms": "<translate with synonyms or related terms for 'Department Store', separated by commas>"
+                    "name": "Magazin Universal"
                 },
                 "shop/doityourself": {
-                    "name": "Magazin DIY",
-                    "terms": "<translate with synonyms or related terms for 'DIY Store', separated by commas>"
+                    "name": "Magazin DIY"
                 },
                 "shop/dry_cleaning": {
-                    "name": "Uscător",
-                    "terms": "<translate with synonyms or related terms for 'Dry Cleaner', separated by commas>"
+                    "name": "Uscător"
                 },
                 "shop/e-cigarette": {
-                    "name": "Magazin de Țigarete Electrice",
-                    "terms": "<translate with synonyms or related terms for 'E-Cigarette Shop', separated by commas>"
+                    "name": "Magazin de Țigarete Electrice"
                 },
                 "shop/electronics": {
-                    "name": "Magazin de Electronice",
-                    "terms": "<translate with synonyms or related terms for 'Electronics Store', separated by commas>"
+                    "name": "Magazin de Electronice"
                 },
                 "shop/erotic": {
-                    "name": "Magazin Erotic",
-                    "terms": "<translate with synonyms or related terms for 'Erotic Store', separated by commas>"
+                    "name": "Magazin Erotic"
                 },
                 "shop/fabric": {
-                    "name": "Magazin de Materiale",
-                    "terms": "<translate with synonyms or related terms for 'Fabric Store', separated by commas>"
-                },
-                "shop/farm": {
-                    "terms": "<translate with synonyms or related terms for 'Produce Stand', separated by commas>"
+                    "name": "Magazin de Materiale"
                 },
                 "shop/fashion": {
-                    "name": "Magazin de Modă",
-                    "terms": "<translate with synonyms or related terms for 'Fashion Store', separated by commas>"
+                    "name": "Magazin de Modă"
                 },
                 "shop/florist": {
-                    "name": "Florărie",
-                    "terms": "<translate with synonyms or related terms for 'Florist', separated by commas>"
-                },
-                "shop/frame": {
-                    "terms": "<translate with synonyms or related terms for 'Framing Shop', separated by commas>"
+                    "name": "Florărie"
                 },
                 "shop/funeral_directors": {
-                    "name": "Casă Funerală",
-                    "terms": "<translate with synonyms or related terms for 'Funeral Home', separated by commas>"
+                    "name": "Casă Funerală"
                 },
                 "shop/furniture": {
-                    "name": "Magazin de Mobilă",
-                    "terms": "<translate with synonyms or related terms for 'Furniture Store', separated by commas>"
+                    "name": "Magazin de Mobilă"
                 },
                 "shop/garden_centre": {
-                    "name": "Magazin de Grădinărit",
-                    "terms": "<translate with synonyms or related terms for 'Garden Center', separated by commas>"
-                },
-                "shop/gas": {
-                    "terms": "<translate with synonyms or related terms for 'Bottled Gas Shop', separated by commas>"
+                    "name": "Magazin de Grădinărit"
                 },
                 "shop/gift": {
-                    "name": "Magazin de Cadouri",
-                    "terms": "<translate with synonyms or related terms for 'Gift Shop', separated by commas>"
-                },
-                "shop/greengrocer": {
-                    "terms": "<translate with synonyms or related terms for 'Greengrocer', separated by commas>"
+                    "name": "Magazin de Cadouri"
                 },
                 "shop/hairdresser": {
-                    "name": "Frizer",
-                    "terms": "<translate with synonyms or related terms for 'Hairdresser', separated by commas>"
-                },
-                "shop/hardware": {
-                    "terms": "<translate with synonyms or related terms for 'Hardware Store', separated by commas>"
-                },
-                "shop/hearing_aids": {
-                    "terms": "<translate with synonyms or related terms for 'Hearing Aids Store', separated by commas>"
-                },
-                "shop/herbalist": {
-                    "terms": "<translate with synonyms or related terms for 'Herbalist', separated by commas>"
-                },
-                "shop/hifi": {
-                    "terms": "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
-                },
-                "shop/houseware": {
-                    "terms": "<translate with synonyms or related terms for 'Houseware Store', separated by commas>"
+                    "name": "Frizer"
                 },
                 "shop/interior_decoration": {
-                    "name": "Magazin de Decorații Interioare",
-                    "terms": "<translate with synonyms or related terms for 'Interior Decoration Store', separated by commas>"
+                    "name": "Magazin de Decorații Interioare"
                 },
                 "shop/jewelry": {
-                    "name": "Giuvaer",
-                    "terms": "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
+                    "name": "Giuvaer"
                 },
                 "shop/kitchen": {
-                    "name": "Magazin de Bucătărie",
-                    "terms": "<translate with synonyms or related terms for 'Kitchen Design Store', separated by commas>"
+                    "name": "Magazin de Bucătărie"
                 },
                 "shop/laundry": {
-                    "name": "Spălătorie",
-                    "terms": "<translate with synonyms or related terms for 'Laundry', separated by commas>"
-                },
-                "shop/leather": {
-                    "terms": "<translate with synonyms or related terms for 'Leather Store', separated by commas>"
-                },
-                "shop/locksmith": {
-                    "terms": "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
+                    "name": "Spălătorie"
                 },
                 "shop/lottery": {
-                    "name": "Loterie",
-                    "terms": "<translate with synonyms or related terms for 'Lottery Shop', separated by commas>"
+                    "name": "Loterie"
                 },
                 "shop/mall": {
-                    "name": "Mall",
-                    "terms": "<translate with synonyms or related terms for 'Mall', separated by commas>"
+                    "name": "Mall"
                 },
                 "shop/massage": {
-                    "name": "Masaj",
-                    "terms": "<translate with synonyms or related terms for 'Massage Shop', separated by commas>"
+                    "name": "Masaj"
                 },
                 "shop/medical_supply": {
-                    "name": "Magazin Alimentar Medical",
-                    "terms": "<translate with synonyms or related terms for 'Medical Supply Store', separated by commas>"
+                    "name": "Magazin Alimentar Medical"
                 },
                 "shop/mobile_phone": {
-                    "name": "Magazin de Telefoane Mobile",
-                    "terms": "<translate with synonyms or related terms for 'Mobile Phone Store', separated by commas>"
+                    "name": "Magazin de Telefoane Mobile"
                 },
                 "shop/money_lender": {
-                    "name": "Creditor de Bani",
-                    "terms": "<translate with synonyms or related terms for 'Money Lender', separated by commas>"
+                    "name": "Creditor de Bani"
                 },
                 "shop/motorcycle": {
-                    "name": "Magazin de Motociclete",
-                    "terms": "<translate with synonyms or related terms for 'Motorcycle Dealership', separated by commas>"
+                    "name": "Magazin de Motociclete"
                 },
                 "shop/music": {
-                    "name": "Magazin de Muzică",
-                    "terms": "<translate with synonyms or related terms for 'Music Store', separated by commas>"
+                    "name": "Magazin de Muzică"
                 },
                 "shop/musical_instrument": {
-                    "name": "Magazin de Instrumente Muzicale",
-                    "terms": "<translate with synonyms or related terms for 'Musical Instrument Store', separated by commas>"
+                    "name": "Magazin de Instrumente Muzicale"
                 },
                 "shop/newsagent": {
-                    "name": "Magazin de Ziare",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper/Magazine Shop', separated by commas>"
+                    "name": "Magazin de Ziare"
                 },
                 "shop/nutrition_supplements": {
-                    "name": "Magazin de Suplimente Nutritive",
-                    "terms": "<translate with synonyms or related terms for 'Nutrition Supplements Store', separated by commas>"
+                    "name": "Magazin de Suplimente Nutritive"
                 },
                 "shop/optician": {
-                    "name": "Optician",
-                    "terms": "<translate with synonyms or related terms for 'Optician', separated by commas>"
+                    "name": "Optician"
                 },
                 "shop/organic": {
-                    "name": "Magazin de Bunuri Organice",
-                    "terms": "<translate with synonyms or related terms for 'Organic Goods Store', separated by commas>"
+                    "name": "Magazin de Bunuri Organice"
                 },
                 "shop/outdoor": {
-                    "name": "Magazin în Aer Liber",
-                    "terms": "<translate with synonyms or related terms for 'Outdoors Store', separated by commas>"
+                    "name": "Magazin în Aer Liber"
                 },
                 "shop/paint": {
-                    "name": "Magazin de Pictură",
-                    "terms": "<translate with synonyms or related terms for 'Paint Store', separated by commas>"
-                },
-                "shop/pastry": {
-                    "terms": "<translate with synonyms or related terms for 'Pastry Shop', separated by commas>"
-                },
-                "shop/pawnbroker": {
-                    "terms": "<translate with synonyms or related terms for 'Pawn Shop', separated by commas>"
+                    "name": "Magazin de Pictură"
                 },
                 "shop/perfumery": {
-                    "name": "Magazin de Parfum",
-                    "terms": "<translate with synonyms or related terms for 'Perfume Store', separated by commas>"
+                    "name": "Magazin de Parfum"
                 },
                 "shop/pet": {
-                    "name": "Magazin de Animale",
-                    "terms": "<translate with synonyms or related terms for 'Pet Store', separated by commas>"
+                    "name": "Magazin de Animale"
                 },
                 "shop/photo": {
-                    "name": "Magazin de Fotografie",
-                    "terms": "<translate with synonyms or related terms for 'Photography Store', separated by commas>"
+                    "name": "Magazin de Fotografie"
                 },
                 "shop/pyrotechnics": {
-                    "name": "Magazin de Artificii",
-                    "terms": "<translate with synonyms or related terms for 'Fireworks Store', separated by commas>"
-                },
-                "shop/radiotechnics": {
-                    "terms": "<translate with synonyms or related terms for 'Radio/Electronic Component Store', separated by commas>"
+                    "name": "Magazin de Artificii"
                 },
                 "shop/religion": {
-                    "name": "Magazin Religios",
-                    "terms": "<translate with synonyms or related terms for 'Religious Store', separated by commas>"
+                    "name": "Magazin Religios"
                 },
                 "shop/scuba_diving": {
-                    "name": "Magazin de Scufundări",
-                    "terms": "<translate with synonyms or related terms for 'Scuba Diving Shop', separated by commas>"
+                    "name": "Magazin de Scufundări"
                 },
                 "shop/seafood": {
-                    "name": "Magazin de Fructe de Mare",
-                    "terms": "<translate with synonyms or related terms for 'Seafood Shop', separated by commas>"
+                    "name": "Magazin de Fructe de Mare"
                 },
                 "shop/second_hand": {
-                    "name": "Magazin de Depozite",
-                    "terms": "<translate with synonyms or related terms for 'Consignment/Thrift Store', separated by commas>"
+                    "name": "Magazin de Depozite"
                 },
                 "shop/shoes": {
-                    "name": "Magazin de Ghete",
-                    "terms": "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"
+                    "name": "Magazin de Ghete"
                 },
                 "shop/sports": {
-                    "name": "Magazin de Haine de Sport",
-                    "terms": "<translate with synonyms or related terms for 'Sporting Goods Store', separated by commas>"
-                },
-                "shop/stationery": {
-                    "terms": "<translate with synonyms or related terms for 'Stationery Store', separated by commas>"
-                },
-                "shop/storage_rental": {
-                    "terms": "<translate with synonyms or related terms for 'Storage Rental', separated by commas>"
+                    "name": "Magazin de Haine de Sport"
                 },
                 "shop/supermarket": {
-                    "name": "Supermarket",
-                    "terms": "<translate with synonyms or related terms for 'Supermarket', separated by commas>"
-                },
-                "shop/tailor": {
-                    "terms": "<translate with synonyms or related terms for 'Tailor', separated by commas>"
+                    "name": "Supermarket"
                 },
                 "shop/tattoo": {
-                    "name": "Artist de Tatuaje",
-                    "terms": "<translate with synonyms or related terms for 'Tattoo Parlor', separated by commas>"
+                    "name": "Artist de Tatuaje"
                 },
                 "shop/tea": {
-                    "name": "Magazin de Ceaiuri",
-                    "terms": "<translate with synonyms or related terms for 'Tea Store', separated by commas>"
+                    "name": "Magazin de Ceaiuri"
                 },
                 "shop/ticket": {
-                    "name": "Vânzător de Bilete",
-                    "terms": "<translate with synonyms or related terms for 'Ticket Seller', separated by commas>"
+                    "name": "Vânzător de Bilete"
                 },
                 "shop/tobacco": {
-                    "name": "Tăbăcărie",
-                    "terms": "<translate with synonyms or related terms for 'Tobacco Shop', separated by commas>"
+                    "name": "Tăbăcărie"
                 },
                 "shop/toys": {
-                    "name": "Magazin de Jucării",
-                    "terms": "<translate with synonyms or related terms for 'Toy Store', separated by commas>"
+                    "name": "Magazin de Jucării"
                 },
                 "shop/travel_agency": {
-                    "name": "Agenție de Călătorii",
-                    "terms": "<translate with synonyms or related terms for 'Travel Agency', separated by commas>"
+                    "name": "Agenție de Călătorii"
                 },
                 "shop/tyres": {
-                    "name": "Magazin de Roți",
-                    "terms": "<translate with synonyms or related terms for 'Tire Store', separated by commas>"
+                    "name": "Magazin de Roți"
                 },
                 "shop/vacant": {
                     "name": "Magazin Vacant"
                 },
                 "shop/vacuum_cleaner": {
-                    "name": "Magazin de Aspiratoare",
-                    "terms": "<translate with synonyms or related terms for 'Vacuum Cleaner Store', separated by commas>"
+                    "name": "Magazin de Aspiratoare"
                 },
                 "shop/variety_store": {
-                    "name": "Magazin de Varietăți",
-                    "terms": "<translate with synonyms or related terms for 'Variety Store', separated by commas>"
+                    "name": "Magazin de Varietăți"
                 },
                 "shop/video": {
-                    "name": "Magazin Video",
-                    "terms": "<translate with synonyms or related terms for 'Video Store', separated by commas>"
+                    "name": "Magazin Video"
                 },
                 "shop/video_games": {
-                    "name": "Magazin de Jocuri de Calculator",
-                    "terms": "<translate with synonyms or related terms for 'Video Game Store', separated by commas>"
+                    "name": "Magazin de Jocuri de Calculator"
                 },
                 "shop/watches": {
-                    "name": "Magazin de Ceasuri",
-                    "terms": "<translate with synonyms or related terms for 'Watches Shop', separated by commas>"
-                },
-                "shop/water_sports": {
-                    "terms": "<translate with synonyms or related terms for 'Watersport/Swim Shop', separated by commas>"
+                    "name": "Magazin de Ceasuri"
                 },
                 "shop/weapons": {
-                    "name": "Magazin de Arme",
-                    "terms": "<translate with synonyms or related terms for 'Weapon Shop', separated by commas>"
-                },
-                "shop/window_blind": {
-                    "terms": "<translate with synonyms or related terms for 'Window Blind Store', separated by commas>"
+                    "name": "Magazin de Arme"
                 },
                 "shop/wine": {
-                    "name": "Magazin de Vinuri",
-                    "terms": "<translate with synonyms or related terms for 'Wine Shop', separated by commas>"
+                    "name": "Magazin de Vinuri"
                 },
                 "tourism": {
-                    "name": "Turism",
-                    "terms": "<translate with synonyms or related terms for 'Tourism', separated by commas>"
+                    "name": "Turism"
                 },
                 "tourism/alpine_hut": {
-                    "name": "Cabană",
-                    "terms": "<translate with synonyms or related terms for 'Alpine Hut', separated by commas>"
+                    "name": "Cabană"
                 },
                 "tourism/apartment": {
-                    "name": "Apartament de Închiriat",
-                    "terms": "<translate with synonyms or related terms for 'Guest Apartment / Condo', separated by commas>"
+                    "name": "Apartament de Închiriat"
                 },
                 "tourism/aquarium": {
-                    "name": "Acvariu",
-                    "terms": "<translate with synonyms or related terms for 'Aquarium', separated by commas>"
-                },
-                "tourism/artwork": {
-                    "terms": "<translate with synonyms or related terms for 'Artwork', separated by commas>"
+                    "name": "Acvariu"
                 },
                 "tourism/attraction": {
-                    "name": "Atracție Turistică",
-                    "terms": "<translate with synonyms or related terms for 'Tourist Attraction', separated by commas>"
+                    "name": "Atracție Turistică"
                 },
                 "tourism/camp_site": {
-                    "name": "Teren de Camping",
-                    "terms": "<translate with synonyms or related terms for 'Campground', separated by commas>"
-                },
-                "tourism/caravan_site": {
-                    "terms": "<translate with synonyms or related terms for 'RV Park', separated by commas>"
+                    "name": "Teren de Camping"
                 },
                 "tourism/gallery": {
-                    "name": "Galerie de Artă",
-                    "terms": "<translate with synonyms or related terms for 'Art Gallery', separated by commas>"
+                    "name": "Galerie de Artă"
                 },
                 "tourism/guest_house": {
-                    "name": "Casă de Oaspeți",
-                    "terms": "<translate with synonyms or related terms for 'Guest House', separated by commas>"
+                    "name": "Casă de Oaspeți"
                 },
                 "tourism/hostel": {
-                    "name": "Hostel",
-                    "terms": "<translate with synonyms or related terms for 'Hostel', separated by commas>"
+                    "name": "Hostel"
                 },
                 "tourism/hotel": {
-                    "name": "Hotel",
-                    "terms": "<translate with synonyms or related terms for 'Hotel', separated by commas>"
+                    "name": "Hotel"
                 },
                 "tourism/information": {
-                    "name": "Informații",
-                    "terms": "<translate with synonyms or related terms for 'Information', separated by commas>"
+                    "name": "Informații"
                 },
                 "tourism/information/board": {
-                    "name": "Panou de Informații",
-                    "terms": "<translate with synonyms or related terms for 'Information Board', separated by commas>"
-                },
-                "tourism/information/guidepost": {
-                    "terms": "<translate with synonyms or related terms for 'Guidepost', separated by commas>"
+                    "name": "Panou de Informații"
                 },
                 "tourism/information/map": {
-                    "name": "Hartă",
-                    "terms": "<translate with synonyms or related terms for 'Map', separated by commas>"
+                    "name": "Hartă"
                 },
                 "tourism/information/office": {
-                    "name": "Oficiu de Informare Turistică",
-                    "terms": "<translate with synonyms or related terms for 'Tourist Information Office', separated by commas>"
+                    "name": "Oficiu de Informare Turistică"
                 },
                 "tourism/motel": {
-                    "name": "Motel",
-                    "terms": "<translate with synonyms or related terms for 'Motel', separated by commas>"
+                    "name": "Motel"
                 },
                 "tourism/museum": {
-                    "name": "Muzeu",
-                    "terms": "<translate with synonyms or related terms for 'Museum', separated by commas>"
+                    "name": "Muzeu"
                 },
                 "tourism/picnic_site": {
-                    "name": "Picnic",
-                    "terms": "<translate with synonyms or related terms for 'Picnic Site', separated by commas>"
+                    "name": "Picnic"
                 },
                 "tourism/theme_park": {
-                    "name": "Parc de Distracții",
-                    "terms": "<translate with synonyms or related terms for 'Theme Park', separated by commas>"
+                    "name": "Parc de Distracții"
                 },
                 "tourism/viewpoint": {
-                    "name": "Punct de Vedere",
-                    "terms": "<translate with synonyms or related terms for 'Viewpoint', separated by commas>"
+                    "name": "Punct de Vedere"
                 },
                 "tourism/zoo": {
-                    "name": "Grădină Zoologică",
-                    "terms": "<translate with synonyms or related terms for 'Zoo', separated by commas>"
-                },
-                "traffic_calming": {
-                    "terms": "<translate with synonyms or related terms for 'Traffic Calming', separated by commas>"
+                    "name": "Grădină Zoologică"
                 },
                 "traffic_calming/bump": {
-                    "name": "Cucui de Viteză",
-                    "terms": "<translate with synonyms or related terms for 'Speed Bump', separated by commas>"
-                },
-                "traffic_calming/chicane": {
-                    "terms": "<translate with synonyms or related terms for 'Traffic Chicane', separated by commas>"
-                },
-                "traffic_calming/choker": {
-                    "terms": "<translate with synonyms or related terms for 'Traffic Choker', separated by commas>"
+                    "name": "Cucui de Viteză"
                 },
                 "traffic_calming/cushion": {
                     "terms": "g"
                 },
-                "traffic_calming/dip": {
-                    "terms": "<translate with synonyms or related terms for 'Dip', separated by commas>"
-                },
                 "traffic_calming/hump": {
-                    "name": "Cucui de Viteză",
-                    "terms": "<translate with synonyms or related terms for 'Speed Hump', separated by commas>"
+                    "name": "Cucui de Viteză"
                 },
                 "traffic_calming/island": {
-                    "name": "Insulă de Trafic",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Island', separated by commas>"
-                },
-                "traffic_calming/rumble_strip": {
-                    "terms": "<translate with synonyms or related terms for 'Rumble Strip', separated by commas>"
+                    "name": "Insulă de Trafic"
                 },
                 "type/boundary": {
-                    "name": "Graniță",
-                    "terms": "<translate with synonyms or related terms for 'Boundary', separated by commas>"
+                    "name": "Graniță"
                 },
                 "type/boundary/administrative": {
-                    "name": "Graniță Administrativă",
-                    "terms": "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
+                    "name": "Graniță Administrativă"
                 },
                 "type/multipolygon": {
                     "name": "Multipoligon"
                 },
                 "type/restriction": {
-                    "name": "Restricție",
-                    "terms": "<translate with synonyms or related terms for 'Restriction', separated by commas>"
+                    "name": "Restricție"
                 },
                 "type/restriction/no_left_turn": {
-                    "name": "Fără Întoarcere la Stânga",
-                    "terms": "<translate with synonyms or related terms for 'No Left Turn', separated by commas>"
+                    "name": "Fără Întoarcere la Stânga"
                 },
                 "type/restriction/no_right_turn": {
-                    "name": "Fără Întoarcere la Dreapta",
-                    "terms": "<translate with synonyms or related terms for 'No Right Turn', separated by commas>"
+                    "name": "Fără Întoarcere la Dreapta"
                 },
                 "type/restriction/no_straight_on": {
-                    "name": "Fără Drum Continuu",
-                    "terms": "<translate with synonyms or related terms for 'No Straight On', separated by commas>"
+                    "name": "Fără Drum Continuu"
                 },
                 "type/restriction/no_u_turn": {
-                    "name": "Fără Întoarcere",
-                    "terms": "<translate with synonyms or related terms for 'No U-turn', separated by commas>"
+                    "name": "Fără Întoarcere"
                 },
                 "type/route": {
-                    "name": "Rută",
-                    "terms": "<translate with synonyms or related terms for 'Route', separated by commas>"
+                    "name": "Rută"
                 },
                 "type/route/bicycle": {
-                    "name": "Rută de Biciclete",
-                    "terms": "<translate with synonyms or related terms for 'Cycle Route', separated by commas>"
+                    "name": "Rută de Biciclete"
                 },
                 "type/route/bus": {
-                    "name": "Traseu Autobuz",
-                    "terms": "<translate with synonyms or related terms for 'Bus Route', separated by commas>"
+                    "name": "Traseu Autobuz"
                 },
                 "type/route/detour": {
-                    "name": "Rută Detur",
-                    "terms": "<translate with synonyms or related terms for 'Detour Route', separated by commas>"
+                    "name": "Rută Detur"
                 },
                 "type/route/ferry": {
-                    "name": "Rută de Bac",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
+                    "name": "Rută de Bac"
                 },
                 "type/route/foot": {
-                    "name": "Rută pe Jos",
-                    "terms": "<translate with synonyms or related terms for 'Foot Route', separated by commas>"
+                    "name": "Rută pe Jos"
                 },
                 "type/route/hiking": {
-                    "name": "Rută de Drumeție",
-                    "terms": "<translate with synonyms or related terms for 'Hiking Route', separated by commas>"
+                    "name": "Rută de Drumeție"
                 },
                 "type/route/horse": {
-                    "name": "Rută de Călărit",
-                    "terms": "<translate with synonyms or related terms for 'Riding Route', separated by commas>"
+                    "name": "Rută de Călărit"
                 },
                 "type/route/pipeline": {
-                    "name": "Rută de Conducte",
-                    "terms": "<translate with synonyms or related terms for 'Pipeline Route', separated by commas>"
+                    "name": "Rută de Conducte"
                 },
                 "type/route/power": {
-                    "name": "Rută de Energie",
-                    "terms": "<translate with synonyms or related terms for 'Power Route', separated by commas>"
+                    "name": "Rută de Energie"
                 },
                 "type/route/road": {
-                    "name": "Rută de Stadă",
-                    "terms": "<translate with synonyms or related terms for 'Road Route', separated by commas>"
+                    "name": "Rută de Stadă"
                 },
                 "type/route/train": {
-                    "name": "Rută de Tren",
-                    "terms": "<translate with synonyms or related terms for 'Train Route', separated by commas>"
+                    "name": "Rută de Tren"
                 },
                 "type/route/tram": {
-                    "name": "Rută de Tranvai",
-                    "terms": "<translate with synonyms or related terms for 'Tram Route', separated by commas>"
-                },
-                "type/route_master": {
-                    "terms": "<translate with synonyms or related terms for 'Route Master', separated by commas>"
+                    "name": "Rută de Tranvai"
                 },
                 "type/site": {
-                    "name": "Sit",
-                    "terms": "<translate with synonyms or related terms for 'Site', separated by commas>"
+                    "name": "Sit"
                 },
                 "vertex": {
-                    "name": "Altele",
-                    "terms": "<translate with synonyms or related terms for 'Other', separated by commas>"
+                    "name": "Altele"
                 },
                 "waterway": {
                     "name": "Drum Marin"
                 },
                 "waterway/boatyard": {
-                    "name": "Curte de Bărci",
-                    "terms": "<translate with synonyms or related terms for 'Boatyard', separated by commas>"
+                    "name": "Curte de Bărci"
                 },
                 "waterway/canal": {
-                    "name": "Canal",
-                    "terms": "<translate with synonyms or related terms for 'Canal', separated by commas>"
+                    "name": "Canal"
                 },
                 "waterway/dam": {
-                    "name": "Baraj",
-                    "terms": "<translate with synonyms or related terms for 'Dam', separated by commas>"
-                },
-                "waterway/ditch": {
-                    "terms": "<translate with synonyms or related terms for 'Ditch', separated by commas>"
+                    "name": "Baraj"
                 },
                 "waterway/drain": {
-                    "name": "Pârâu",
-                    "terms": "<translate with synonyms or related terms for 'Drain', separated by commas>"
-                },
-                "waterway/fuel": {
-                    "terms": "<translate with synonyms or related terms for 'Marine Fuel Station', separated by commas>"
+                    "name": "Pârâu"
                 },
                 "waterway/river": {
-                    "name": "Râu",
-                    "terms": "<translate with synonyms or related terms for 'River', separated by commas>"
+                    "name": "Râu"
                 },
                 "waterway/riverbank": {
-                    "name": "Mal",
-                    "terms": "<translate with synonyms or related terms for 'Riverbank', separated by commas>"
-                },
-                "waterway/sanitary_dump_station": {
-                    "terms": "<translate with synonyms or related terms for 'Marine Toilet Disposal', separated by commas>"
+                    "name": "Mal"
                 },
                 "waterway/stream": {
                     "name": "Fluviu",
-                    "terms": "<translate with synonyms or related terms for 'Stream', separated by commas>q"
-                },
-                "waterway/water_point": {
-                    "terms": "<translate with synonyms or related terms for 'Marine Drinking Water', separated by commas>"
+                    "terms": "q"
                 },
                 "waterway/waterfall": {
-                    "name": "Cascadă",
-                    "terms": "<translate with synonyms or related terms for 'Waterfall', separated by commas>"
-                },
-                "waterway/weir": {
-                    "terms": "<translate with synonyms or related terms for 'Weir', separated by commas>"
+                    "name": "Cascadă"
                 }
             }
         },
@@ -4194,14 +3146,12 @@
                 "attribution": {
                     "text": "Termeni & Feedback"
                 },
-                "description": "Imagini satelit DigitalGlobe Premium",
                 "name": "Imagini DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Termeni & Feedback"
                 },
-                "description": "Imagini de satelit DigitalGlobe standard.",
                 "name": "Imagini DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

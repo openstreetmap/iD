@@ -3084,8 +3084,7 @@
                     "terms": "Yol Durumu"
                 },
                 "attraction/amusement_ride": {
-                    "name": "Eğlence Yolculuğu",
-                    "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
+                    "name": "Eğlence Yolculuğu"
                 },
                 "attraction/animal": {
                     "name": "Hayvan",
@@ -5302,7 +5301,7 @@
                 },
                 "shop/hearing_aids": {
                     "name": "İşitme Cihazı Mağazası ",
-                    "terms": "İşitme Cihazı Mağazası "
+                    "terms": "İşitme Cihazı Mağazası"
                 },
                 "shop/herbalist": {
                     "name": "Şifalı Bitkiler Mağazası",
@@ -5836,7 +5835,6 @@
                 "attribution": {
                     "text": "Şartlar & Geri Bildirim"
                 },
-                "description": "DigitalGlobe Uydu Görüntüleri",
                 "name": "DigitalGlobe Uydu Görüntüleri"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5849,7 +5847,6 @@
                 "attribution": {
                     "text": "Şartlar ve Geri Bildirim"
                 },
-                "description": "Standart DigitalGlobe Uydu Görüntüleri",
                 "name": "Standart DigitalGlobe Uydu Görüntüleri"
             },
             "DigitalGlobe-Standard-vintage": {

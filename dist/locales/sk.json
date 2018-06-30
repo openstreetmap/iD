@@ -2922,7 +2922,7 @@
                 },
                 "area/highway": {
                     "name": "Plocha cesty",
-                    "terms": "plocha cesty, "
+                    "terms": "plocha cesty,"
                 },
                 "barrier": {
                     "name": "Bariéra",
@@ -3499,7 +3499,7 @@
                 },
                 "highway/service/emergency_access": {
                     "name": "Núdzový vstup",
-                    "terms": "Nudzovy pristup,naliehavý,naliehavy,stav núzde,stav nudze,Nudzovy vstup "
+                    "terms": "Nudzovy pristup,naliehavý,naliehavy,stav núzde,stav nudze,Nudzovy vstup"
                 },
                 "highway/service/parking_aisle": {
                     "name": "Parkovacia ulička",
@@ -4887,14 +4887,12 @@
                 "attribution": {
                     "text": "Podmienky & pripomienky"
                 },
-                "description": "Prémiové satelitné zábery DigitalGlobe.",
                 "name": "DigitalGlobe prémiové zábery"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Podmienky & pripomienky"
                 },
-                "description": "Štandardné satelitné zábery DigitalGlobe.",
                 "name": "DigitalGlobe štandardné zábery"
             },
             "EsriWorldImagery": {
