@@ -104,14 +104,11 @@ export function svgNotes(projection, context, dispatch) {
     }
 
     function drawNotes(selection) {
-        var enabled = svgNotes.enabled,
-            service = getService();
+        var enabled = svgNotes.enabled;
+        var service = getService();
 
         function dimensions() {
             return [window.innerWidth, window.innerHeight];
-        }
-        function done() {
-            console.log('placeholder done within svg/notes.upload.done');
         }
 
         layer = selection.selectAll('.layer-notes')
@@ -130,7 +127,7 @@ export function svgNotes(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                service.loadNotes(projection, dimensions(), done);
+                service.loadNotes(projection, dimensions());
             } else {
                 editOff();
             }
