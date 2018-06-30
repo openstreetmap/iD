@@ -120,7 +120,12 @@
 .layer-notes * {
     pointer-events: visible;
     cursor: pointer;
-    color: #eebb00;
+}
+.layer-notes .note-shadow {
+    color: #000;
+}
+.layer-notes .note-fill {
+    color: #ee3;
 }
 
 
