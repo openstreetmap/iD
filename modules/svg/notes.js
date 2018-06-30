@@ -10,6 +10,7 @@ export function svgNotes(projection, context, dispatch) {
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
+    var _selected;
 
     var noteEditor = uiNoteEditor(context);
 
@@ -62,6 +63,7 @@ export function svgNotes(projection, context, dispatch) {
     }
 
     function click(d) {
+        _selected = d;
         context.ui().sidebar.show(noteEditor, d);
     }
 
@@ -87,19 +89,37 @@ export function svgNotes(projection, context, dispatch) {
             .remove();
 
         var notesEnter = notes.enter()
-            .append('use')
-            .attr('class', function(d) { return 'note ' + d.id; })
-            .attr('width', '24px')
-            .attr('height', '24px')
-            .attr('x', '-12px')
-            .attr('y', '-12px')
-            .attr('xlink:href', '#fas-comment-alt')
+            .append('g')
+            .attr('class', function(d) { return 'note note-' + d.id; })
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
+        notesEnter
+            .append('use')
+            .attr('class', 'note-shadow')
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-24px')
+            .attr('xlink:href', '#fas-comment-alt')
+
+        notesEnter
+            .append('use')
+            .attr('class', 'note-fill')
+            .attr('width', '20px')
+            .attr('height', '20px')
+            .attr('x', '-10px')
+            .attr('y', '-22px')
+            .attr('xlink:href', '#fas-comment-alt')
+
         notes
             .merge(notesEnter)
+            .sort(function(a, b) {
+                return (a === _selected) ? 1
+                    : (b === _selected) ? -1
+                    : b.loc[1] - a.loc[1];  // sort Y
+            })
             .attr('transform', transform);
     }
 
