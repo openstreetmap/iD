@@ -64,7 +64,7 @@ function getTiles(projection) {
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]];
 
-    return d3_geoTile()
+    var tiles = d3_geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
         .size(projection.clipExtent()[1])
@@ -82,6 +82,8 @@ function getTiles(projection) {
                 )
             };
         });
+
+    return tiles;
 }
 
 function getLoc(attrs) {
