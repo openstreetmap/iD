@@ -718,7 +718,8 @@
         "streetside": {
             "tooltip": "来自微软公司的街景照片",
             "title": "照片叠加层 (必应 Streetside)",
-            "report": "报告该图像的隐私问题"
+            "report": "报告该图像的隐私问题",
+            "hires": "高分辨率"
         },
         "mapillary_images": {
             "tooltip": "来自Mapillary的街景照片",
@@ -6249,7 +6250,6 @@
                 "attribution": {
                     "text": "条款与反馈"
                 },
-                "description": "DigitalGlobe 优质卫星影像",
                 "name": "DigitalGlobe 优质影像"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6263,7 +6263,6 @@
                 "attribution": {
                     "text": "条款与反馈"
                 },
-                "description": "DigitalGlobe 标准卫星影像",
                 "name": "DigitalGlobe 标准影像"
             },
             "DigitalGlobe-Standard-vintage": {

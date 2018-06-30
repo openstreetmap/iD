@@ -1,0 +1,16 @@
+{
+    "icon": "fas-bell",
+    "fields": [
+        "indoor",
+        "ref",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "emergency": "fire_alarm_box"
+    },
+    "name": "Fire Alarm Call Box"
+}

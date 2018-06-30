@@ -2285,523 +2285,384 @@
                     "terms": "تله‌اسکی,تله سی یژ"
                 },
                 "aerialway/drag_lift": {
-                    "name": "آسانسور",
-                    "terms": "<translate with synonyms or related terms for 'Drag Lift', separated by commas>"
+                    "name": "آسانسور"
                 },
                 "aerialway/gondola": {
                     "name": "تله کابین",
                     "terms": "بلم, قایق"
                 },
                 "aerialway/goods": {
-                    "name": "محموله هوایی",
-                    "terms": "<translate with synonyms or related terms for 'Goods Aerialway', separated by commas>"
+                    "name": "محموله هوایی"
                 },
                 "aerialway/magic_carpet": {
-                    "name": "آسانسور اسکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سطح شیب‌دار بالابر'، با کاما جدا می‌شوند>"
+                    "name": "آسانسور اسکی"
                 },
                 "aerialway/mixed_lift": {
-                    "name": "بالابر چند منظوره",
-                    "terms": "<translate with synonyms or related terms for 'Mixed Lift', separated by commas>"
+                    "name": "بالابر چند منظوره"
                 },
                 "aerialway/platter": {
-                    "name": "بالابر بشقابی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دیسک بالابر'، با کاما جدا می‌شوند>"
+                    "name": "بالابر بشقابی"
                 },
                 "aerialway/pylon": {
-                    "name": "برج بالابر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'برج راه هوایی'، با کاما جدا می‌شوند>"
+                    "name": "برج بالابر"
                 },
                 "aerialway/rope_tow": {
-                    "name": "بالابر دو طنابه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بالابر بکسری'، با کاما جدا می‌شوند>"
+                    "name": "بالابر دو طنابه"
                 },
                 "aerialway/station": {
                     "name": "ایستگاه بالابر"
                 },
                 "aerialway/t-bar": {
-                    "name": "بالابر نوار T",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بالابر تی شکل'، با کاما جدا می‌شوند>"
+                    "name": "بالابر نوار T"
                 },
                 "aeroway": {
                     "name": "کاربری راه"
                 },
                 "aeroway/aerodrome": {
-                    "name": "فرودگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فرودگاه'، با کاما جدا می‌شوند>"
+                    "name": "فرودگاه"
                 },
                 "aeroway/apron": {
-                    "name": "صحن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'صحن'، با کاما جدا می‌شوند>"
+                    "name": "صحن"
                 },
                 "aeroway/gate": {
-                    "name": " دروازه فرودگاه ",
-                    "terms": "<translate with synonyms or related terms for 'Airport Gate', separated by commas>"
+                    "name": " دروازه فرودگاه "
                 },
                 "aeroway/hangar": {
-                    "name": "آشیانه هواپیما",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آشیانه هواپیما'، با کاما جدا می‌شوند>"
+                    "name": "آشیانه هواپیما"
                 },
                 "aeroway/helipad": {
-                    "name": "محل فرود هلی کوپتر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل فرود هلی کوپتر'، با کاما جدا می‌شوند>"
+                    "name": "محل فرود هلی کوپتر"
                 },
                 "aeroway/runway": {
-                    "name": "باند فرودگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر فرود'، با کاما جدا می‌شوند>"
+                    "name": "باند فرودگاه"
                 },
                 "aeroway/taxiway": {
-                    "name": "راه فرود به پارکینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فرود به پارک'، با کاما جدا می‌شوند>"
+                    "name": "راه فرود به پارکینگ"
                 },
                 "aeroway/terminal": {
-                    "name": "پایانه فرودگاه",
-                    "terms": "<translate with synonyms or related terms for 'Airport Terminal', separated by commas>"
-                },
-                "allotments/plot": {
-                    "terms": "<translate with synonyms or related terms for 'Community Garden Plot', separated by commas>"
+                    "name": "پایانه فرودگاه"
                 },
                 "amenity": {
                     "name": "کاربری"
                 },
-                "amenity/animal_boarding": {
-                    "terms": "<translate with synonyms or related terms for 'Animal Boarding Facility', separated by commas>"
-                },
                 "amenity/animal_breeding": {
-                    "name": "امکانات پرورش حیوانات",
-                    "terms": "<translate with synonyms or related terms for 'Animal Breeding Facility', separated by commas>"
+                    "name": "امکانات پرورش حیوانات"
                 },
                 "amenity/animal_shelter": {
-                    "name": "پناهگاه حیوانات",
-                    "terms": "<translate with synonyms or related terms for 'Animal Shelter', separated by commas>"
+                    "name": "پناهگاه حیوانات"
                 },
                 "amenity/arts_centre": {
-                    "name": "مرکز هنری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز هنری'، با کاما جدا می‌شوند>"
+                    "name": "مرکز هنری"
                 },
                 "amenity/atm": {
-                    "name": "خودپرداز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خودپرداز'، با کاما جدا می‌شوند>"
+                    "name": "خودپرداز"
                 },
                 "amenity/bank": {
-                    "name": "بانک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بانک'، با کاما جدا می‌شوند>"
+                    "name": "بانک"
                 },
                 "amenity/bar": {
-                    "name": "بار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بار'، با کاما جدا می‌شوند>"
+                    "name": "بار"
                 },
                 "amenity/bbq": {
-                    "name": "باربیکیو/گریل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باربیکیو / اجاق'، با کاما جدا می‌شوند>"
+                    "name": "باربیکیو/گریل"
                 },
                 "amenity/bench": {
-                    "name": "نیمکت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نیمکت'، با کاما جدا می‌شوند>"
+                    "name": "نیمکت"
                 },
                 "amenity/bicycle_parking": {
-                    "name": "پارکینگ دوچرخه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارکینگ دوچرخه'، با کاما جدا می‌شوند>"
+                    "name": "پارکینگ دوچرخه"
                 },
                 "amenity/bicycle_rental": {
-                    "name": "اجاره دوچرخه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اجاره دوچرخه'، با کاما جدا می‌شوند>"
+                    "name": "اجاره دوچرخه"
                 },
                 "amenity/bicycle_repair_station": {
-                    "name": "ایستگاه تعمیر دوچرخه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه تعمیر دوچرخه'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه تعمیر دوچرخه"
                 },
                 "amenity/biergarten": {
-                    "name": "باغ آبجو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باغ آبجو'، با کاما جدا می‌شوند>"
+                    "name": "باغ آبجو"
                 },
                 "amenity/boat_rental": {
-                    "name": "کرایه قایق",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کرایه قایق'، با کاما جدا می‌شوند>"
+                    "name": "کرایه قایق"
                 },
                 "amenity/bureau_de_change": {
-                    "name": "تبدیل ارز / صرافی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تبدیل ارز / صرافی'، با کاما جدا می‌شوند>"
+                    "name": "تبدیل ارز / صرافی"
                 },
                 "amenity/bus_station": {
                     "name": "پایانه اتوبوس / ترمینال"
                 },
                 "amenity/cafe": {
-                    "name": "کافه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کافه'، با کاما جدا می‌شوند>"
-                },
-                "amenity/car_pooling": {
-                    "terms": "<translate with synonyms or related terms for 'Car Pooling', separated by commas>"
+                    "name": "کافه"
                 },
                 "amenity/car_rental": {
-                    "name": "کرایه ماشین",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کرایه خودرو'، با کاما جدا می‌شوند>"
+                    "name": "کرایه ماشین"
                 },
                 "amenity/car_sharing": {
-                    "name": "به اشتراک گذاری خودرو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اشتراک گذاری خودرو'، با کاما جدا می‌شوند>"
+                    "name": "به اشتراک گذاری خودرو"
                 },
                 "amenity/car_wash": {
-                    "name": "کارواش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کارواش'، با کاما جدا می‌شوند>"
+                    "name": "کارواش"
                 },
                 "amenity/casino": {
-                    "name": "کازینو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کازینو'، با کاما جدا می‌شوند>"
+                    "name": "کازینو"
                 },
                 "amenity/charging_station": {
-                    "name": "ایستگاه شارژ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه شارژ'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه شارژ"
                 },
                 "amenity/childcare": {
-                    "name": "مهدکودک/مراقبت از کودکان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مهد کودک / مراقبت از کودکان'، با کاما جدا می‌شوند>"
+                    "name": "مهدکودک/مراقبت از کودکان"
                 },
                 "amenity/cinema": {
-                    "name": "سینما",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سینما'، با کاما جدا می‌شوند>"
+                    "name": "سینما"
                 },
                 "amenity/clinic": {
-                    "name": "کلینیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'درمانگاه'، با کاما جدا می‌شوند>"
-                },
-                "amenity/clinic/abortion": {
-                    "terms": "<translate with synonyms or related terms for 'Abortion Clinic', separated by commas>"
-                },
-                "amenity/clinic/fertility": {
-                    "terms": "<translate with synonyms or related terms for 'Fertility Clinic', separated by commas>"
+                    "name": "کلینیک"
                 },
                 "amenity/clock": {
-                    "name": "ساعت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساعت'، با کاما جدا می‌شوند>"
+                    "name": "ساعت"
                 },
                 "amenity/college": {
-                    "name": "محیط کالج",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محیط کالج'، با کاما جدا می‌شوند>"
+                    "name": "محیط کالج"
                 },
                 "amenity/community_centre": {
-                    "name": "مرکز اجتماع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز اجتماع'، با کاما جدا می‌شوند>"
+                    "name": "مرکز اجتماع"
                 },
                 "amenity/compressed_air": {
-                    "name": "هوای فشرده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'هوای فشرده'، با کاما جدا می‌شوند>"
+                    "name": "هوای فشرده"
                 },
                 "amenity/courthouse": {
-                    "name": "دادگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دادگاه'، با کاما جدا می‌شوند>"
+                    "name": "دادگاه"
                 },
                 "amenity/coworking_space": {
                     "name": "فضای کاری مشارکتی"
                 },
                 "amenity/crematorium": {
-                    "name": "مٌرده سوز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کوره لاشه سوز'، با کاما جدا می‌شوند>"
+                    "name": "مٌرده سوز"
                 },
                 "amenity/dentist": {
-                    "name": "دندانپزشک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دندانپزشک'، با کاما جدا می‌شوند>"
+                    "name": "دندانپزشک"
                 },
                 "amenity/doctors": {
-                    "name": "دکتر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دکتر'، با کاما جدا می‌شوند>"
+                    "name": "دکتر"
                 },
                 "amenity/dojo": {
-                    "name": "باشگاه / آموزشگاه هنرهای رزمی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باشگاه / آموزشگاه هنرهای رزمی'، با کاما جدا می‌شوند>"
+                    "name": "باشگاه / آموزشگاه هنرهای رزمی"
                 },
                 "amenity/drinking_water": {
-                    "name": "آب آشامیدنی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آب آشامیدنی'، با کاما جدا می‌شوند>"
+                    "name": "آب آشامیدنی"
                 },
                 "amenity/driving_school": {
-                    "name": "آموزشگاه رانندگی",
-                    "terms": "<translate with synonyms or related terms for 'Driving School', separated by commas>"
+                    "name": "آموزشگاه رانندگی"
                 },
                 "amenity/embassy": {
-                    "name": "سفارت خانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سفارت'، با کاما جدا می‌شوند>"
+                    "name": "سفارت خانه"
                 },
                 "amenity/fast_food": {
-                    "name": "فست فود",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'غذای آماده'، با کاما جدا می‌شوند>"
+                    "name": "فست فود"
                 },
                 "amenity/fire_station": {
-                    "name": "ایستگاه آتش نشانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه آتش نشانی'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه آتش نشانی"
                 },
                 "amenity/food_court": {
-                    "name": "فودکورت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بوفه غذا'، با کاما جدا می‌شوند>"
+                    "name": "فودکورت"
                 },
                 "amenity/fountain": {
-                    "name": "فواره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فواره'، با کاما جدا می‌شوند>"
+                    "name": "فواره"
                 },
                 "amenity/fuel": {
-                    "name": "پمپ گاز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پمپ گاز'، با کاما جدا می‌شوند>"
+                    "name": "پمپ گاز"
                 },
                 "amenity/grave_yard": {
-                    "name": "مقبره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مقبره'، با کاما جدا می‌شوند>"
+                    "name": "مقبره"
                 },
                 "amenity/grit_bin": {
-                    "name": "سطل شن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سطل شن'، با کاما جدا می‌شوند>"
+                    "name": "سطل شن"
                 },
                 "amenity/hospital": {
-                    "name": "محیط بیمارستان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محیط بیمارستان'، با کاما جدا می‌شوند>"
+                    "name": "محیط بیمارستان"
                 },
                 "amenity/hunting_stand": {
-                    "name": "ایستگاه شکار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه شکار'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه شکار"
                 },
                 "amenity/ice_cream": {
-                    "name": "بستنی فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بستنی فروشی'، با کاما جدا می‌شوند>"
+                    "name": "بستنی فروشی"
                 },
                 "amenity/internet_cafe": {
                     "name": "کافی‌نت",
                     "terms": "کافه‌ی اینترنت"
                 },
                 "amenity/kindergarten": {
-                    "name": "محوطه پیش دبستانی / مهدکودک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیش دبستانی / محیط کودکستان'، با کاما جدا می‌شوند>"
+                    "name": "محوطه پیش دبستانی / مهدکودک"
                 },
                 "amenity/library": {
-                    "name": "کتابخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کتابخانه'، با کاما جدا می‌شوند>"
+                    "name": "کتابخانه"
                 },
                 "amenity/love_hotel": {
-                    "name": "هتل عشق",
-                    "terms": "<translate with synonyms or related terms for 'Love Hotel', separated by commas>"
+                    "name": "هتل عشق"
                 },
                 "amenity/marketplace": {
-                    "name": "بازار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بازار'، با کاما جدا می‌شوند>"
-                },
-                "amenity/monastery": {
-                    "terms": "<translate with synonyms or related terms for 'Monastery Grounds', separated by commas>"
+                    "name": "بازار"
                 },
                 "amenity/motorcycle_parking": {
-                    "name": "پارکینگ موتور سیکلت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارکینگ موتور سیکلت'، با کاما جدا می‌شوند>"
+                    "name": "پارکینگ موتور سیکلت"
                 },
                 "amenity/music_school": {
-                    "name": "آموزشگاه موسیقی",
-                    "terms": "<translate with synonyms or related terms for 'Music School', separated by commas>"
+                    "name": "آموزشگاه موسیقی"
                 },
                 "amenity/nightclub": {
-                    "name": "کلوپ شبانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کلوپ شبانه'، با کاما جدا می‌شوند>"
+                    "name": "کلوپ شبانه"
                 },
                 "amenity/nursing_home": {
                     "name": "خانه سالمندان"
                 },
                 "amenity/parking": {
-                    "name": "پارکینگ خودرو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارکینگ خودرو'، با کاما جدا می‌شوند>"
+                    "name": "پارکینگ خودرو"
                 },
                 "amenity/parking_entrance": {
-                    "name": "ورودی/خروجی پارکینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'ورودی / خروجی پارکینگ'، با کاما جدا می‌شوند>"
+                    "name": "ورودی/خروجی پارکینگ"
                 },
                 "amenity/parking_space": {
-                    "name": "جای پارک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای'جای پارک'، با کاما جدا می‌شوند>"
-                },
-                "amenity/pavilion": {
-                    "terms": "<translate with synonyms or related terms for 'Pavilion', separated by commas>"
+                    "name": "جای پارک"
                 },
                 "amenity/pharmacy": {
-                    "name": "داروخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'داروخانه'، با کاما جدا می‌شوند>"
+                    "name": "داروخانه"
                 },
                 "amenity/place_of_worship": {
-                    "name": "مکانی از عبادتگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مکان مذهبی'، با کاما جدا می‌شوند>"
+                    "name": "مکانی از عبادتگاه"
                 },
                 "amenity/place_of_worship/buddhist": {
-                    "name": "معبد بودایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'معبد بودایی'، با کاما جدا می‌شوند>"
+                    "name": "معبد بودایی"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "کلیسا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کلیسا'، با کاما جدا می‌شوند>"
+                    "name": "کلیسا"
                 },
                 "amenity/place_of_worship/hindu": {
-                    "name": "معبد هندو",
-                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                    "name": "معبد هندو"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "کنیسه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کنیسه'، با کاما جدا می‌شوند>"
+                    "name": "کنیسه"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "مسجد",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسجد'، با کاما جدا می‌شوند>"
+                    "name": "مسجد"
                 },
                 "amenity/place_of_worship/shinto": {
-                    "name": "معبد شینتویی",
-                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                    "name": "معبد شینتویی"
                 },
                 "amenity/place_of_worship/sikh": {
-                    "name": "معبد سیک",
-                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                    "name": "معبد سیک"
                 },
                 "amenity/place_of_worship/taoist": {
-                    "name": "معبد تائو",
-                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
+                    "name": "معبد تائو"
                 },
                 "amenity/planetarium": {
-                    "name": "آسمان نما",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'آسمان نما'، با کاما جدا میشوند>"
+                    "name": "آسمان نما"
                 },
                 "amenity/police": {
-                    "name": "پليس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پلیس'، با کاما جدا می‌شوند>"
+                    "name": "پليس"
                 },
                 "amenity/post_box": {
-                    "name": "صندوق پستی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'صندوق پستی'، با کاما جدا می‌شوند>"
+                    "name": "صندوق پستی"
                 },
                 "amenity/post_office": {
-                    "name": "اداره پست",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اداره پست'، با کاما جدا می‌شوند>"
+                    "name": "اداره پست"
                 },
                 "amenity/prison": {
-                    "name": "محوطه زندان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محوطه زندان'، با کاما جدا می‌شوند>"
+                    "name": "محوطه زندان"
                 },
                 "amenity/pub": {
-                    "name": "میخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'میخانه'، با کاما جدا می‌شوند>"
+                    "name": "میخانه"
                 },
                 "amenity/public_bath": {
-                    "name": "حمام عمومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'حمام عمومی'، با کاما جدا می‌شوند>"
+                    "name": "حمام عمومی"
                 },
                 "amenity/public_bookcase": {
-                    "name": "قفسه کتاب عمومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'قفسه کتاب عمومی'، با کاما جدا می‌شوند>"
+                    "name": "قفسه کتاب عمومی"
                 },
                 "amenity/ranger_station": {
-                    "name": "ایستگاه جنگلبانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه جنگلبانی'، با کاما جدا می‌شوند>"
-                },
-                "amenity/recycling": {
-                    "terms": "<translate with synonyms or related terms for 'Recycling Container', separated by commas>"
+                    "name": "ایستگاه جنگلبانی"
                 },
                 "amenity/recycling_centre": {
-                    "name": "مرکز بازیافت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز بازیافت'، با کاما جدا می‌شوند>"
+                    "name": "مرکز بازیافت"
                 },
                 "amenity/register_office": {
                     "name": "اداره ثبت"
                 },
                 "amenity/restaurant": {
-                    "name": "رستوران",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'رستوران'، با کاما جدا می‌شوند>"
+                    "name": "رستوران"
                 },
                 "amenity/sanitary_dump_station": {
-                    "name": "دفع توالت RV",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفع توالت RV'، با کاما جدا می‌شوند>"
+                    "name": "دفع توالت RV"
                 },
                 "amenity/school": {
-                    "name": "محیط مدرسه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محیط مدرسه'، با کاما جدا می‌شوند>"
+                    "name": "محیط مدرسه"
                 },
                 "amenity/shelter": {
-                    "name": "پناه گاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پناهگاه'، با کاما جدا می‌شوند>"
+                    "name": "پناه گاه"
                 },
                 "amenity/shower": {
-                    "name": "دوش",
-                    "terms": "<translate with synonyms or related terms for 'Shower', separated by commas>"
+                    "name": "دوش"
                 },
                 "amenity/smoking_area": {
-                    "name": "منطقه سیگار کشیدن",
-                    "terms": "<translate with synonyms or related terms for 'Smoking Area', separated by commas>"
+                    "name": "منطقه سیگار کشیدن"
                 },
                 "amenity/social_facility": {
-                    "name": "امکانات اجتماعی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'امکانات اجتماعی'، با کاما جدا می‌شوند>"
+                    "name": "امکانات اجتماعی"
                 },
                 "amenity/social_facility/food_bank": {
-                    "name": "خیریه بانک غذا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بانک غذا'، با کاما جدا می‌شوند>"
+                    "name": "خیریه بانک غذا"
                 },
                 "amenity/social_facility/group_home": {
-                    "name": "خانه سالمندان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه سالمندان'، با کاما جدا می‌شوند>"
+                    "name": "خانه سالمندان"
                 },
                 "amenity/social_facility/homeless_shelter": {
-                    "name": "پناهگاه بی خانمان‌ها",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پناهگاه بی‌خانمان‌ها'، با کاما جدا می‌شوند>"
+                    "name": "پناهگاه بی خانمان‌ها"
                 },
                 "amenity/social_facility/nursing_home": {
-                    "name": "خانه سالمندان",
-                    "terms": "<translate with synonyms or related terms for 'Nursing Home', separated by commas>"
+                    "name": "خانه سالمندان"
                 },
                 "amenity/studio": {
-                    "name": "استدیو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'استودیو'، با کاما جدا می‌شوند>"
+                    "name": "استدیو"
                 },
                 "amenity/swimming_pool": {
                     "name": "استخر شنا"
                 },
                 "amenity/taxi": {
-                    "name": "ایستگاه تاکسی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه تاکسی'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه تاکسی"
                 },
                 "amenity/telephone": {
-                    "name": "تلفن عمومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تلفن عمومی'، با کاما جدا می‌شوند>"
+                    "name": "تلفن عمومی"
                 },
                 "amenity/theatre": {
-                    "name": "تئاتر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تئاتر'، با کاما جدا می‌شوند>"
+                    "name": "تئاتر"
                 },
                 "amenity/toilets": {
-                    "name": "سرویس بهداشتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سرویس بهداشتی'، با کاما جدا می‌شوند>"
+                    "name": "سرویس بهداشتی"
                 },
                 "amenity/townhall": {
-                    "name": "شهرداری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تالار شهر'، با کاما جدا می‌شوند>"
+                    "name": "شهرداری"
                 },
                 "amenity/university": {
-                    "name": "محوطه دانشگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محیط دانشگاه'، با کاما جدا می‌شوند>"
+                    "name": "محوطه دانشگاه"
                 },
                 "amenity/vending_machine": {
-                    "name": "دستگاه فروش خودکار",
-                    "terms": "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
+                    "name": "دستگاه فروش خودکار"
                 },
                 "amenity/vending_machine/cigarettes": {
-                    "name": "دستگاه فروش سیگار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'دستگاه فروش سیگار'، با کاما جدا می‌شوند>"
+                    "name": "دستگاه فروش سیگار"
                 },
                 "amenity/vending_machine/coffee": {
                     "name": "دستگاه فروش قهوه"
                 },
                 "amenity/vending_machine/condoms": {
-                    "name": "دستگاه فروش کاندوم",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'دستگاه فروش کاندوم'، با کاما جدا می‌شوند>"
+                    "name": "دستگاه فروش کاندوم"
                 },
                 "amenity/vending_machine/drinks": {
-                    "name": "دستگاه خودفروش آب آشامیدنی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'دستگاه خودفروش آب آشامیدنی'، با کاما جدا می‌شوند>"
+                    "name": "دستگاه خودفروش آب آشامیدنی"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "دستگاه خود توزیع کیسه پسماند",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دستگاه خود توزیع کیسه پسماند'، با کاما جدا می‌شوند>"
+                    "name": "دستگاه خود توزیع کیسه پسماند"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
-                    "name": "دستتگاه فروش لوازم بهداشتی زنان",
-                    "terms": "<translate with synonyms or related terms for 'Feminine Hygiene Vending Machine', separated by commas>"
+                    "name": "دستتگاه فروش لوازم بهداشتی زنان"
                 },
                 "amenity/vending_machine/food": {
                     "name": "دستگاه فروش خوراکی"
@@ -2813,223 +2674,147 @@
                     "name": "دستگاه خود فروش روزنامه"
                 },
                 "amenity/vending_machine/newspapers": {
-                    "name": "دستگاه فروش خودکار روزنامه",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper Vending Machine', separated by commas>"
+                    "name": "دستگاه فروش خودکار روزنامه"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "سرویس دریافت مرسولات پستی، دستگاه دریافت مرسولات پستی",
-                    "terms": "سرویس دریافت امانات پستی، دستگاه دریافت کننده مرسولات پستی "
+                    "terms": "سرویس دریافت امانات پستی، دستگاه دریافت کننده مرسولات پستی"
                 },
                 "amenity/vending_machine/parking_tickets": {
-                    "name": "دستگاه فروش خودکار کارت پارکینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دستگاه فروش خودکار کارت پارکینگ'، با کاما جدا می‌شوند>"
+                    "name": "دستگاه فروش خودکار کارت پارکینگ"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
-                    "name": "ماشین خودفروش بلیط حمل و نقل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ماشین خودفروش بلیط حمل و نقل'، با کاما جدا می‌شوند>"
+                    "name": "ماشین خودفروش بلیط حمل و نقل"
                 },
                 "amenity/vending_machine/sweets": {
-                    "name": "ماشین خودفروش خوراکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای'ماشین خودفروش خوراکی'، با کاما جدا می‌شوند>"
+                    "name": "ماشین خودفروش خوراکی"
                 },
                 "amenity/veterinary": {
-                    "name": "دامپزشکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دامپزشکی'، با کاما جدا می‌شوند>"
+                    "name": "دامپزشکی"
                 },
                 "amenity/waste/dog_excrement": {
-                    "name": "سطل زباله سگ",
-                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
+                    "name": "سطل زباله سگ"
                 },
                 "amenity/waste_basket": {
-                    "name": "سطل زباله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سطل زباله'، با کاما جدا می‌شوند>"
+                    "name": "سطل زباله"
                 },
                 "amenity/waste_disposal": {
-                    "name": "زباله‌دان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'زباله‌دان'، با کاما جدا می‌شوند>"
+                    "name": "زباله‌دان"
                 },
                 "amenity/waste_transfer_station": {
-                    "name": "ایستگاه انتقال زباله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه انتقال زباله'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه انتقال زباله"
                 },
                 "amenity/water_point": {
-                    "name": "آب قابل شرب RV",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای'آب قابل شرب RV'، با کاما جدا می‌شوند>"
-                },
-                "amenity/watering_place": {
-                    "terms": "<translate with synonyms or related terms for 'Animal Watering Place', separated by commas>"
+                    "name": "آب قابل شرب RV"
                 },
                 "area": {
-                    "name": "فضا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فضا'، با کاما جدا می‌شوند>"
+                    "name": "فضا"
                 },
                 "area/highway": {
-                    "name": "سطح جاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سطح جاده'، با کاما جدا می‌شوند>"
-                },
-                "attraction/amusement_ride": {
-                    "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
+                    "name": "سطح جاده"
                 },
                 "attraction/animal": {
-                    "name": "حیوان",
-                    "terms": "<translate with synonyms or related terms for 'Animal', separated by commas>"
-                },
-                "attraction/big_wheel": {
-                    "terms": "<translate with synonyms or related terms for 'Big Wheel', separated by commas>"
-                },
-                "attraction/bumper_car": {
-                    "terms": "<translate with synonyms or related terms for 'Bumper Car', separated by commas>"
+                    "name": "حیوان"
                 },
                 "attraction/bungee_jumping": {
-                    "name": "بانجی جامپینگ",
-                    "terms": "<translate with synonyms or related terms for 'Bungee Jumping', separated by commas>"
+                    "name": "بانجی جامپینگ"
                 },
                 "attraction/carousel": {
-                    "name": "چرخ فلک",
-                    "terms": "<translate with synonyms or related terms for 'Carousel', separated by commas>"
-                },
-                "attraction/dark_ride": {
-                    "terms": "<translate with synonyms or related terms for 'Dark Ride', separated by commas>"
-                },
-                "attraction/drop_tower": {
-                    "terms": "<translate with synonyms or related terms for 'Drop Tower', separated by commas>"
+                    "name": "چرخ فلک"
                 },
                 "attraction/pirate_ship": {
-                    "name": "کشتی دزدان دریایی",
-                    "terms": "<translate with synonyms or related terms for 'Pirate Ship', separated by commas>"
-                },
-                "attraction/river_rafting": {
-                    "terms": "<translate with synonyms or related terms for 'River Rafting', separated by commas>"
+                    "name": "کشتی دزدان دریایی"
                 },
                 "attraction/roller_coaster": {
-                    "name": "ترن هوایی",
-                    "terms": "<translate with synonyms or related terms for 'Roller Coaster', separated by commas>"
-                },
-                "attraction/train": {
-                    "terms": "<translate with synonyms or related terms for 'Tourist Train', separated by commas>"
+                    "name": "ترن هوایی"
                 },
                 "attraction/water_slide": {
-                    "name": "سرسره آبی",
-                    "terms": "<translate with synonyms or related terms for 'Water Slide', separated by commas>"
+                    "name": "سرسره آبی"
                 },
                 "barrier": {
-                    "name": "مانع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مانع'، با کاما جدا می‌شوند>"
+                    "name": "مانع"
                 },
                 "barrier/block": {
-                    "name": "بلوک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بلوک'، با کاما جدا می‌شوند>"
+                    "name": "بلوک"
                 },
                 "barrier/bollard": {
-                    "name": "بولارد",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بولارد'، با کاما جدا می‌شوند>"
+                    "name": "بولارد"
                 },
                 "barrier/border_control": {
-                    "name": "مرزبانی",
-                    "terms": "<translate with synonyms or related terms for 'Border Control', separated by commas>"
+                    "name": "مرزبانی"
                 },
                 "barrier/cattle_grid": {
-                    "name": "شبکه آهنی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای'Cattle Grid'  ، با کاما جدا می‌شوند>"
+                    "name": "شبکه آهنی"
                 },
                 "barrier/city_wall": {
-                    "name": "دیوار شهر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دیوار شهر'، با کاما جدا می‌شوند>"
+                    "name": "دیوار شهر"
                 },
                 "barrier/cycle_barrier": {
-                    "name": "مانع مستطیلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مانع مستطیلی'، با کاما جدا می‌شوند>"
+                    "name": "مانع مستطیلی"
                 },
                 "barrier/ditch": {
-                    "name": "خندق",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'خندق'، با کاما جدا می‌شوند>"
+                    "name": "خندق"
                 },
                 "barrier/entrance": {
                     "name": "ورودی"
                 },
                 "barrier/fence": {
-                    "name": "حصار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'Fence'، با کاما جدا می‌شوند>"
+                    "name": "حصار"
                 },
                 "barrier/gate": {
-                    "name": "دروازه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دروازه'، با کاما جدا می‌شوند>"
+                    "name": "دروازه"
                 },
                 "barrier/hedge": {
-                    "name": "پرچین",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'Hedge'، با کاما جدا می‌شوند>"
-                },
-                "barrier/kerb": {
-                    "terms": "<translate with synonyms or related terms for 'Kerb', separated by commas>"
+                    "name": "پرچین"
                 },
                 "barrier/kissing_gate": {
-                    "name": "دروازه مخصوص انسان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Kissing Gate'، با کاما جدا می‌شوند>"
+                    "name": "دروازه مخصوص انسان"
                 },
                 "barrier/lift_gate": {
-                    "name": "دروازه بالا رونده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'Lift Gate'، با کاما جدا می‌شوند>"
+                    "name": "دروازه بالا رونده"
                 },
                 "barrier/retaining_wall": {
-                    "name": "دیوار نگه دارنده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Retaining Wall' ، با کاما جدا می‌شوند>"
+                    "name": "دیوار نگه دارنده"
                 },
                 "barrier/stile": {
-                    "name": "حصار نردبانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Stile' ، با کاما جدا می‌شوند>"
+                    "name": "حصار نردبانی"
                 },
                 "barrier/toll_booth": {
-                    "name": "عوارضی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'Toll Booth'، با کاما جدا می‌شوند>"
+                    "name": "عوارضی"
                 },
                 "barrier/wall": {
-                    "name": "دیوار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دیوار'، با کاما جدا می‌شوند>"
+                    "name": "دیوار"
                 },
                 "boundary/administrative": {
-                    "name": "مرز حکومتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرز اداری'، با کاما جدا می‌شوند>"
+                    "name": "مرز حکومتی"
                 },
                 "building": {
-                    "name": "ساختمان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان"
                 },
                 "building/apartments": {
-                    "name": "آپارتمان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آپارتمان'، با کاما جدا می‌شوند>"
+                    "name": "آپارتمان"
                 },
                 "building/barn": {
                     "name": "انبار غله",
                     "terms": "انبار کاه"
                 },
-                "building/boathouse": {
-                    "terms": "<translate with synonyms or related terms for 'Boathouse', separated by commas>"
-                },
                 "building/bungalow": {
-                    "name": "بانگالو",
-                    "terms": "<translate with synonyms or related terms for 'Bungalow', separated by commas>"
+                    "name": "بانگالو"
                 },
                 "building/bunker": {
                     "name": "انباربزرگ"
                 },
                 "building/cabin": {
-                    "name": "کابین",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کابین'، با کاما جدا می‌شوند>"
+                    "name": "کابین"
                 },
                 "building/cathedral": {
-                    "name": "ساختمان کلیسای جامع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان کلیسای جامع'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان کلیسای جامع"
                 },
                 "building/chapel": {
-                    "name": "ساختمان کلیسای کوچک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان کلیسای کوچک'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان کلیسای کوچک"
                 },
                 "building/church": {
-                    "name": "ساختمان کلیسا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان کلیسا'، با کاما جدا می‌شوند>"
-                },
-                "building/civic": {
-                    "terms": "<translate with synonyms or related terms for 'Civic Building', separated by commas>"
+                    "name": "ساختمان کلیسا"
                 },
                 "building/college": {
                     "name": "ساختمان دانشکده",
@@ -3044,8 +2829,7 @@
                     "terms": "سازه, در حال ساخت, ساخت و ساز"
                 },
                 "building/detached": {
-                    "name": "خانه ویلایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه ویلایی'، با کاما جدا می‌شوند>"
+                    "name": "خانه ویلایی"
                 },
                 "building/dormitory": {
                     "name": "خوابگاه",
@@ -3054,139 +2838,96 @@
                 "building/entrance": {
                     "name": "ورود/خروج"
                 },
-                "building/farm": {
-                    "terms": "<translate with synonyms or related terms for 'Farm House', separated by commas>"
-                },
-                "building/farm_auxiliary": {
-                    "terms": "<translate with synonyms or related terms for 'Farm Building', separated by commas>"
-                },
                 "building/garage": {
-                    "name": "گاراژ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گاراژ'، با کاما جدا می‌شوند>"
+                    "name": "گاراژ"
                 },
                 "building/garages": {
-                    "name": "گاراژ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گاراژ'، با کاما جدا می‌شوند>"
+                    "name": "گاراژ"
                 },
                 "building/greenhouse": {
-                    "name": "گلخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گلخانه'، با کاما جدا می‌شوند>"
+                    "name": "گلخانه"
                 },
                 "building/hospital": {
-                    "name": "ساختمان بیمارستان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان بیمارستان'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان بیمارستان"
                 },
                 "building/hotel": {
-                    "name": "ساختمان هتل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان هتل'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان هتل"
                 },
                 "building/house": {
-                    "name": "خانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه'، با کاما جدا می‌شوند>"
+                    "name": "خانه"
                 },
                 "building/hut": {
-                    "name": "کلبه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کلبه'، با کاما جدا می‌شوند>"
+                    "name": "کلبه"
                 },
                 "building/industrial": {
-                    "name": "ساختمان صنعتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان صنعتی'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان صنعتی"
                 },
                 "building/kindergarten": {
-                    "name": "پیش دبستانی /ساختمان کودکستان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیش دبستانی / ساختمان کودکستان'، با کاما جدا می‌شوند>"
+                    "name": "پیش دبستانی /ساختمان کودکستان"
                 },
                 "building/mosque": {
-                    "name": "ساختمان مسجد",
-                    "terms": "<translate with synonyms or related terms for 'Mosque Building', separated by commas>"
+                    "name": "ساختمان مسجد"
                 },
                 "building/public": {
-                    "name": "ساختمان عمومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان عمومی'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان عمومی"
                 },
                 "building/residential": {
-                    "name": "ساختمان مسکونی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان مسکونی'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان مسکونی"
                 },
                 "building/retail": {
-                    "name": "ساختمان خرده فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان مرکز خرید'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان خرده فروشی"
                 },
                 "building/roof": {
-                    "name": "سقف",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سقف'، با کاما جدا می‌شوند>"
+                    "name": "سقف"
                 },
                 "building/ruins": {
-                    "name": "خرابه های ساختمان",
-                    "terms": "<translate with synonyms or related terms for 'Building Ruins', separated by commas>"
+                    "name": "خرابه های ساختمان"
                 },
                 "building/school": {
-                    "name": "ساختمان مدرسه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان مدرسه'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان مدرسه"
                 },
                 "building/semidetached_house": {
-                    "name": "خانه شبه ویلایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه شبه ویلایی'، با کاما جدا می‌شوند>"
-                },
-                "building/service": {
-                    "terms": "<translate with synonyms or related terms for 'Service Building', separated by commas>"
+                    "name": "خانه شبه ویلایی"
                 },
                 "building/shed": {
-                    "name": "سایبان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کپر'، با کاما جدا می‌شوند>"
+                    "name": "سایبان"
                 },
                 "building/stable": {
-                    "name": "اصطبل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اصطبل'، با کاما جدا می‌شوند>"
+                    "name": "اصطبل"
                 },
                 "building/stadium": {
-                    "name": "ساختمان استادیوم",
-                    "terms": "<translate with synonyms or related terms for 'Stadium Building', separated by commas>"
+                    "name": "ساختمان استادیوم"
                 },
                 "building/static_caravan": {
-                    "name": "خانه از پیش ساخته متحرک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه از پیش ساخته متحرک'، با کاما جدا می‌شوند>"
+                    "name": "خانه از پیش ساخته متحرک"
                 },
                 "building/temple": {
-                    "name": "ساختمان معبد",
-                    "terms": "<translate with synonyms or related terms for 'Temple Building', separated by commas>"
+                    "name": "ساختمان معبد"
                 },
                 "building/terrace": {
-                    "name": "خانه های ردیفی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه های ردیفی'، با کاما جدا می‌شوند>"
+                    "name": "خانه های ردیفی"
                 },
                 "building/train_station": {
                     "name": "ایستگاه قطار"
                 },
-                "building/transportation": {
-                    "terms": "<translate with synonyms or related terms for 'Transportation Building', separated by commas>"
-                },
                 "building/university": {
-                    "name": "ساختمان دانشگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان دانشگاه'، با کاما جدا می‌شوند>"
+                    "name": "ساختمان دانشگاه"
                 },
                 "building/warehouse": {
-                    "name": "انبار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'انبار'، با کاما جدا می‌شوند>"
+                    "name": "انبار"
                 },
                 "camp_site/camp_pitch": {
                     "name": "مکان برقراری چادر",
                     "terms": "مکان برقراری چادر، مکان قرار دادن خودرو کاروان"
                 },
-                "club": {
-                    "terms": "<translate with synonyms or related terms for 'Club', separated by commas>"
-                },
                 "craft": {
-                    "name": "پیشه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیشه'، با کاما جدا می‌شوند>"
+                    "name": "پیشه"
                 },
                 "craft/basket_maker": {
-                    "name": "سبد ساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سبد باف'، با کاما جدا می‌شوند>"
+                    "name": "سبد ساز"
                 },
                 "craft/beekeeper": {
-                    "name": "پرورش دهنده زنبور عسل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زنبوردار'، با کاما جدا می‌شوند>"
+                    "name": "پرورش دهنده زنبور عسل"
                 },
                 "craft/blacksmith": {
                     "name": "آهنگر",
@@ -3197,184 +2938,133 @@
                     "terms": "قایق ساز"
                 },
                 "craft/bookbinder": {
-                    "name": "صحافی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'صحاف'، با کاما جدا می‌شوند>"
+                    "name": "صحافی"
                 },
                 "craft/brewery": {
-                    "name": "آبجو سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای'آبجو سازی'، با کاما جدا می‌شوند>"
+                    "name": "آبجو سازی"
                 },
                 "craft/carpenter": {
-                    "name": "نجاری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نجار'، با کاما جدا می‌شوند>"
+                    "name": "نجاری"
                 },
                 "craft/carpet_layer": {
-                    "name": "قالیبافی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فراش'، با کاما جدا می‌شوند>"
+                    "name": "قالیبافی"
                 },
                 "craft/caterer": {
-                    "name": "آذوقه رسان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آذوقه رسان'، با کاما جدا می‌شوند>"
-                },
-                "craft/chimney_sweeper": {
-                    "terms": "<translate with synonyms or related terms for 'Chimney Sweeper', separated by commas>"
+                    "name": "آذوقه رسان"
                 },
                 "craft/clockmaker": {
-                    "name": "ساعت سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساعت‌ساز'، با کاما جدا می‌شوند>"
-                },
-                "craft/confectionery": {
-                    "terms": "<translate with synonyms or related terms for 'Candy Maker', separated by commas>"
-                },
-                "craft/distillery": {
-                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
+                    "name": "ساعت سازی"
                 },
                 "craft/dressmaker": {
-                    "name": "خیاطی زنانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خیاط زنانه'، با کاما جدا می‌شوند>"
+                    "name": "خیاطی زنانه"
                 },
                 "craft/electrician": {
-                    "name": "متخصص برق",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'برقکار'، با کاما جدا می‌شوند>"
+                    "name": "متخصص برق"
                 },
                 "craft/electronics_repair": {
-                    "name": "فروشگاه تعمیرات الکترونیک",
-                    "terms": "<translate with synonyms or related terms for 'Electronics Repair Shop', separated by commas>"
+                    "name": "فروشگاه تعمیرات الکترونیک"
                 },
                 "craft/gardener": {
-                    "name": "باغبان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باغبان'، با کاما جدا می‌شوند>"
+                    "name": "باغبان"
                 },
                 "craft/glaziery": {
-                    "name": "شیشه بری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای ' شیشه‌‌بری‌'، با کاما جدا می‌شوند>"
+                    "name": "شیشه بری"
                 },
                 "craft/handicraft": {
-                    "name": "صنایع دستی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'صنایع دستی کار'، با کاما جدا می‌شوند>"
+                    "name": "صنایع دستی"
                 },
                 "craft/hvac": {
-                    "name": "گرمایش و تهویه مطبوع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'HVAC'، با کاما جدا می‌شوند>"
+                    "name": "گرمایش و تهویه مطبوع"
                 },
                 "craft/insulator": {
-                    "name": "عایق سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'عایقکار'، با کاما جدا می‌شوند>"
+                    "name": "عایق سازی"
                 },
                 "craft/jeweler": {
                     "name": "جواهر سازی"
                 },
                 "craft/key_cutter": {
-                    "name": "برش های کلیدی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کلیدساز'، با کاما جدا می‌شوند>"
+                    "name": "برش های کلیدی"
                 },
                 "craft/locksmith": {
                     "name": "قفل ساز"
                 },
                 "craft/metal_construction": {
-                    "name": "ساخت و ساز فلزی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آهنگر'، با کاما جدا می‌شوند>"
+                    "name": "ساخت و ساز فلزی"
                 },
                 "craft/optician": {
                     "name": "عینک ساز"
                 },
                 "craft/painter": {
-                    "name": "نقاش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نقاش'، با کاما جدا می‌شوند>"
+                    "name": "نقاش"
                 },
                 "craft/photographer": {
-                    "name": "عکاس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'عکاس'، با کاما جدا می‌شوند>"
+                    "name": "عکاس"
                 },
                 "craft/photographic_laboratory": {
-                    "name": "آزمایشگاه عکس‌برداری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'لابراتوار عکاسی'، با کاما جدا می‌شوند>"
+                    "name": "آزمایشگاه عکس‌برداری"
                 },
                 "craft/plasterer": {
-                    "name": "گچ کار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گچ‌کار'، با کاما جدا می‌شوند>"
+                    "name": "گچ کار"
                 },
                 "craft/plumber": {
-                    "name": "لوله کش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'لوله‌کش'، با کاما جدا می‌شوند>"
+                    "name": "لوله کش"
                 },
                 "craft/pottery": {
-                    "name": "سفالگری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سفالگری'، با کاما جدا می‌شوند>"
+                    "name": "سفالگری"
                 },
                 "craft/rigger": {
-                    "name": "لولزم سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جرثقیل کار'، با کاما جدا می‌شوند>"
+                    "name": "لولزم سازی"
                 },
                 "craft/roofer": {
-                    "name": "سقف ساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سقف‌ساز'، با کاما جدا می‌شوند>"
+                    "name": "سقف ساز"
                 },
                 "craft/saddler": {
-                    "name": "زین ساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زین‌ساز'، با کاما جدا می‌شوند>"
+                    "name": "زین ساز"
                 },
                 "craft/sailmaker": {
-                    "name": "بادبان ساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بادبان‌ساز'، با کاما جدا می‌شوند>"
+                    "name": "بادبان ساز"
                 },
                 "craft/sawmill": {
-                    "name": "چوب بری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چوب بری'، با کاما جدا می‌شوند>"
+                    "name": "چوب بری"
                 },
                 "craft/scaffolder": {
-                    "name": "داربستی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'داربست'، با کاما جدا می‌شوند>"
-                },
-                "craft/sculptor": {
-                    "terms": "<translate with synonyms or related terms for 'Sculptor', separated by commas>"
+                    "name": "داربستی"
                 },
                 "craft/shoemaker": {
-                    "name": "کفاش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کفاش'، با کاما جدا می‌شوند>"
+                    "name": "کفاش"
                 },
                 "craft/stonemason": {
-                    "name": "سنگ تراش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سنگ‌تراش'، با کاما جدا میشوند>"
+                    "name": "سنگ تراش"
                 },
                 "craft/tailor": {
                     "name": "خیاط"
                 },
                 "craft/tiler": {
-                    "name": "آجر پز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کاشی‌کار'، با کاما جدا می‌شوند>"
+                    "name": "آجر پز"
                 },
                 "craft/tinsmith": {
-                    "name": "حلبساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'حلبی‌ساز'، با کاما جدا می‌شوند>"
+                    "name": "حلبساز"
                 },
                 "craft/upholsterer": {
-                    "name": "خیاط پرده و رومبلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خیاط مبل'، با کاما جدا می‌شوند>"
+                    "name": "خیاط پرده و رومبلی"
                 },
                 "craft/watchmaker": {
-                    "name": "ساعت ساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساعت ساز'، با کاما جدا می‌شوند>"
+                    "name": "ساعت ساز"
                 },
                 "craft/window_construction": {
-                    "name": "ساخت و ساز پنجره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پنجره‌ساز'، با کاما جدا می‌شوند>"
+                    "name": "ساخت و ساز پنجره"
                 },
                 "craft/winery": {
-                    "name": "شراب خانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'شراب خانه'، با کاما جدا می‌شوند>"
+                    "name": "شراب خانه"
                 },
                 "embankment": {
-                    "name": "خاک ریز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'Embankment'، با کاما جدا می‌شوند>"
+                    "name": "خاک ریز"
                 },
                 "emergency/ambulance_station": {
-                    "name": "ایستگاه آمبولانس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه آمبولانس'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه آمبولانس"
                 },
                 "emergency/defibrillator": {
-                    "name": "دستگاه شوک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دستگاه شوک'، با کاما جدا می‌شوند>"
+                    "name": "دستگاه شوک"
                 },
                 "emergency/designated": {
                     "name": "دسترسی اضطراری تعیین شده"
@@ -3383,11 +3073,7 @@
                     "name": "دسترسی اضطراری مقصد"
                 },
                 "emergency/fire_hydrant": {
-                    "name": "آتش نشانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'شیر آتش‌نشانی'، با کاما جدا می‌شوند>"
-                },
-                "emergency/life_ring": {
-                    "terms": "<translate with synonyms or related terms for 'Life Ring', separated by commas>"
+                    "name": "آتش نشانی"
                 },
                 "emergency/no": {
                     "name": "دسترسی اظطراری خیر"
@@ -3396,304 +3082,206 @@
                     "name": "دسترسی اظطراری رسمی"
                 },
                 "emergency/phone": {
-                    "name": "تلفن اورژانسی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تلفن اورژانسی'، با کاما جدا می‌شوند>"
+                    "name": "تلفن اورژانسی"
                 },
                 "emergency/private": {
                     "name": "دسترسی اضطراری شخصی"
                 },
                 "emergency/water_tank": {
-                    "name": "مخزن آب اضطراری",
-                    "terms": "<translate with synonyms or related terms for 'Emergency Water Tank', separated by commas>"
+                    "name": "مخزن آب اضطراری"
                 },
                 "emergency/yes": {
                     "name": "دسترسی اظطراری بله"
                 },
                 "entrance": {
-                    "name": "ورود/خروج",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'ورودی / خروجی'، با کاما جدا می‌شوند>"
+                    "name": "ورود/خروج"
                 },
                 "footway/crossing": {
-                    "name": "تقاطع خیابانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تقاطع خیابان'، با کاما جدا می‌شوند>"
-                },
-                "footway/crossing-raised": {
-                    "terms": "<translate with synonyms or related terms for 'Raised Street Crossing', separated by commas>"
+                    "name": "تقاطع خیابانی"
                 },
                 "footway/crosswalk": {
-                    "name": "محل عبور عابر پیاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل عبور عابر پیاده'، با کاما جدا می‌شوند>"
-                },
-                "footway/crosswalk-raised": {
-                    "terms": "<translate with synonyms or related terms for 'Raised Pedestrian Crosswalk', separated by commas>"
+                    "name": "محل عبور عابر پیاده"
                 },
                 "footway/sidewalk": {
-                    "name": "پیاده رو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیاده‌رو'، با کاما جدا می‌شوند>"
+                    "name": "پیاده رو"
                 },
                 "ford": {
-                    "name": "معبر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'معبر'، با کاما جدا می‌شوند>"
+                    "name": "معبر"
                 },
                 "golf/bunker": {
-                    "name": "تله شن و ماسه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تله شنی'، با کاما جدا می‌شوند>"
+                    "name": "تله شن و ماسه"
                 },
                 "golf/fairway": {
-                    "name": "چمن راه راه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Fairway'، با کاما جدا می‌شوند>"
+                    "name": "چمن راه راه"
                 },
                 "golf/green": {
-                    "name": "چمن سبز نزدیک سوراخ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Putting Green'، با کاما جدا می‌شوند>"
+                    "name": "چمن سبز نزدیک سوراخ"
                 },
                 "golf/hole": {
-                    "name": "سوراخ گلف",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سوراخ گلف'، با کاما جدا می‌شوند>"
+                    "name": "سوراخ گلف"
                 },
                 "golf/lateral_water_hazard_area": {
-                    "name": "خطر آب های کناری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خطر آب های کناری'، با کاما جدا می‌شوند>"
+                    "name": "خطر آب های کناری"
                 },
                 "golf/lateral_water_hazard_line": {
-                    "name": "خطر آب های کناری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای خطر آب های کناری'، با کاما جدا می‌شوند>"
+                    "name": "خطر آب های کناری"
                 },
                 "golf/rough": {
-                    "name": "منطقه زمخت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین خشن گلف'، با کاما جدا می‌شوند>"
+                    "name": "منطقه زمخت"
                 },
                 "golf/tee": {
-                    "name": "Tee Box",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مستطیل کاشت توپ گلف'، با کاما جدا می‌شوند>"
+                    "name": "Tee Box"
                 },
                 "golf/water_hazard_area": {
-                    "name": "خطر آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خطر آب'، با کاما جدا می‌شوند>"
+                    "name": "خطر آب"
                 },
                 "golf/water_hazard_line": {
-                    "name": "خطر آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خطر آب'، با کاما جدا می‌شوند>"
-                },
-                "healthcare": {
-                    "terms": "<translate with synonyms or related terms for 'Healthcare Facility', separated by commas>"
-                },
-                "healthcare/alternative": {
-                    "terms": "<translate with synonyms or related terms for 'Alternative Medicine', separated by commas>"
-                },
-                "healthcare/alternative/chiropractic": {
-                    "terms": "<translate with synonyms or related terms for 'Chiropractor', separated by commas>"
+                    "name": "خطر آب"
                 },
                 "healthcare/audiologist": {
-                    "name": "شنوایی سنجی",
-                    "terms": "<translate with synonyms or related terms for 'Audiologist', separated by commas>"
+                    "name": "شنوایی سنجی"
                 },
                 "healthcare/birthing_center": {
-                    "name": "زایشگاه",
-                    "terms": "<translate with synonyms or related terms for 'Birthing Center', separated by commas>"
+                    "name": "زایشگاه"
                 },
                 "healthcare/blood_donation": {
-                    "name": "مرکز اهدای خون",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز اهدای خون'، با کاما جدا می‌شوند>"
+                    "name": "مرکز اهدای خون"
                 },
                 "healthcare/hospice": {
-                    "name": "آسایشگاه",
-                    "terms": "<translate with synonyms or related terms for 'Hospice', separated by commas>"
+                    "name": "آسایشگاه"
                 },
                 "healthcare/laboratory": {
                     "name": "آزمایشگاه پزشکی"
                 },
                 "healthcare/midwife": {
-                    "name": "ماما",
-                    "terms": "<translate with synonyms or related terms for 'Midwife', separated by commas>"
-                },
-                "healthcare/occupational_therapist": {
-                    "terms": "<translate with synonyms or related terms for 'Occupational Therapist', separated by commas>"
+                    "name": "ماما"
                 },
                 "healthcare/optometrist": {
-                    "name": "چشم پزشک",
-                    "terms": "<translate with synonyms or related terms for 'Optometrist', separated by commas>"
+                    "name": "چشم پزشک"
                 },
                 "healthcare/physiotherapist": {
-                    "name": "فیزیوتراپیست",
-                    "terms": "<translate with synonyms or related terms for 'Physiotherapist', separated by commas>"
+                    "name": "فیزیوتراپیست"
                 },
                 "healthcare/podiatrist": {
-                    "name": "پاپزشک",
-                    "terms": "<translate with synonyms or related terms for 'Podiatrist', separated by commas>"
+                    "name": "پاپزشک"
                 },
                 "healthcare/psychotherapist": {
-                    "name": "روان‎‌درمانگر",
-                    "terms": "<translate with synonyms or related terms for 'Psychotherapist', separated by commas>"
-                },
-                "healthcare/rehabilitation": {
-                    "terms": "<translate with synonyms or related terms for 'Rehabilitation Facility', separated by commas>"
+                    "name": "روان‎‌درمانگر"
                 },
                 "healthcare/speech_therapist": {
-                    "name": "گفتار درمان",
-                    "terms": "<translate with synonyms or related terms for 'Speech Therapist', separated by commas>"
+                    "name": "گفتار درمان"
                 },
                 "highway": {
                     "name": "بزرگراه"
                 },
                 "highway/bridleway": {
-                    "name": "مسیر حیوانات اهلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'Bridle Path'، با کاما جدا می‌شوند>"
-                },
-                "highway/bus_guideway": {
-                    "terms": "<translate with synonyms or related terms for 'Bus Guideway', separated by commas>"
+                    "name": "مسیر حیوانات اهلی"
                 },
                 "highway/corridor": {
-                    "name": "راهروی داخلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راهرو داخلی'، با کاما جدا می‌شوند>"
+                    "name": "راهروی داخلی"
                 },
                 "highway/crossing": {
-                    "name": "تقاطع خیابانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تقاطع خیابان'، با کاما جدا می‌شوند>"
-                },
-                "highway/crossing-raised": {
-                    "terms": "<translate with synonyms or related terms for 'Raised Street Crossing', separated by commas>"
+                    "name": "تقاطع خیابانی"
                 },
                 "highway/crosswalk": {
-                    "name": "محل عبور عابر پیاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل عبور عابر پیاده'، با کاما جدا می‌شوند>"
-                },
-                "highway/crosswalk-raised": {
-                    "terms": "<translate with synonyms or related terms for 'Raised Pedestrian Crosswalk', separated by commas>"
+                    "name": "محل عبور عابر پیاده"
                 },
                 "highway/cycleway": {
-                    "name": "مسیر دوچرخه سواری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر دوچرخه'، با کاما جدا می‌شوند>"
+                    "name": "مسیر دوچرخه سواری"
                 },
                 "highway/elevator": {
-                    "name": "آسانسور",
-                    "terms": "<translate with synonyms or related terms for 'Elevator', separated by commas>"
+                    "name": "آسانسور"
                 },
                 "highway/footway": {
-                    "name": "مسیر پیاده روی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر پیاده'، با کاما جدا می‌شوند>"
+                    "name": "مسیر پیاده روی"
                 },
                 "highway/give_way": {
                     "name": "تابلو حق تقدم با خودرو روبرو",
                     "terms": "علامت توقف"
                 },
                 "highway/living_street": {
-                    "name": "خیابان  محدوده زندگی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خیابان محل زندگی'، با کاما جدا می‌شوند>"
+                    "name": "خیابان  محدوده زندگی"
                 },
                 "highway/mini_roundabout": {
-                    "name": "میدان کوچک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'Mini-Roundabout'، با کاما جدا می‌شوند>"
+                    "name": "میدان کوچک"
                 },
                 "highway/motorway": {
-                    "name": "بزرگراه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بزرگراه'، با کاما جدا می‌شوند>"
+                    "name": "بزرگراه"
                 },
                 "highway/motorway_junction": {
-                    "name": "تقاطع بزرگراه / خروج",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تقاطع بزرگراه/خروج'، با کاما جدا می‌شوند>"
+                    "name": "تقاطع بزرگراه / خروج"
                 },
                 "highway/motorway_link": {
-                    "name": "اتصال بزرگراه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوستن بزرگراه'، با کاما جدا می‌شوند>"
-                },
-                "highway/passing_place": {
-                    "terms": "<translate with synonyms or related terms for 'Passing Place', separated by commas>"
+                    "name": "اتصال بزرگراه"
                 },
                 "highway/path": {
-                    "name": "مسیر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر'، با کاما جدا می‌شوند>"
+                    "name": "مسیر"
                 },
                 "highway/pedestrian_area": {
-                    "name": "محل عابر پیاده",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Area', separated by commas>"
+                    "name": "محل عابر پیاده"
                 },
                 "highway/pedestrian_line": {
-                    "name": "خیابان عابرپیاده",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
+                    "name": "خیابان عابرپیاده"
                 },
                 "highway/primary": {
-                    "name": "جاده اصلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راه اصلی'، با کاما جدا می‌شوند>"
+                    "name": "جاده اصلی"
                 },
                 "highway/primary_link": {
-                    "name": "اتصال اصلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوستن راه اصلی'، با کاما جدا می‌شوند>"
-                },
-                "highway/raceway": {
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Motorsport)', separated by commas>"
+                    "name": "اتصال اصلی"
                 },
                 "highway/residential": {
-                    "name": "جاده ی مسکونی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده مسکونی'، با کاما جدا می‌شوند>"
+                    "name": "جاده ی مسکونی"
                 },
                 "highway/rest_area": {
-                    "name": "فضای استراحت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل استراحت'، با کاما جدا می‌شوند>"
+                    "name": "فضای استراحت"
                 },
                 "highway/road": {
-                    "name": "جاده ناشناخته",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده ناشناخته'، با کاما جدا می‌شوند>"
+                    "name": "جاده ناشناخته"
                 },
                 "highway/secondary": {
-                    "name": "جاده دوم",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده دوم'، با کاما جدا می‌شوند>"
+                    "name": "جاده دوم"
                 },
                 "highway/secondary_link": {
-                    "name": "اتصال دومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوستن دومی'، با کاما جدا می‌شوند>"
+                    "name": "اتصال دومی"
                 },
                 "highway/service": {
-                    "name": "جاده خدماتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده خدماتی'، با کاما جدا می‌شوند>"
+                    "name": "جاده خدماتی"
                 },
                 "highway/service/alley": {
-                    "name": "پس کوچه",
-                    "terms": "<translate with synonyms or related terms for 'Alley', separated by commas><ترجمه با مترادف یا اصطلاحات مشابه برای 'پس کوچه'، با کاما جدا می‌شوند>"
+                    "name": "پس کوچه"
                 },
                 "highway/service/drive-through": {
-                    "name": "پرداخت سواره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پرداخت سواره'، با کاما جدا می‌شوند>"
+                    "name": "پرداخت سواره"
                 },
                 "highway/service/driveway": {
-                    "name": "جاده به خانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'Driveway'، با کاما جدا می‌شوند>"
+                    "name": "جاده به خانه"
                 },
                 "highway/service/emergency_access": {
-                    "name": "دسترسی اورژانسی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دسترسی اورژانسی'، با کاما جدا می‌شوند>"
+                    "name": "دسترسی اورژانسی"
                 },
                 "highway/service/parking_aisle": {
-                    "name": "راهرو پارکینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راهرو پارکینگ'، با کاما جدا می‌شوند>"
+                    "name": "راهرو پارکینگ"
                 },
                 "highway/services": {
-                    "name": "فضای خدماتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جایگاه خدماتی'، با کاما جدا می‌شوند>"
+                    "name": "فضای خدماتی"
                 },
                 "highway/speed_camera": {
-                    "name": "دوربین سرعت",
-                    "terms": "<translate with synonyms or related terms for 'Speed Camera', separated by commas>"
+                    "name": "دوربین سرعت"
                 },
                 "highway/steps": {
-                    "name": "پله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پله'، با کاما جدا می‌شوند>"
+                    "name": "پله"
                 },
                 "highway/stop": {
-                    "name": "علامت توقف",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تابلو ایست'، با کاما جدا می‌شوند>"
+                    "name": "علامت توقف"
                 },
                 "highway/street_lamp": {
-                    "name": "چراغ خیابانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'روشنایی خیابان'، با کاما جدا می‌شوند>"
+                    "name": "چراغ خیابانی"
                 },
                 "highway/tertiary": {
-                    "name": "جاده سوم",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده سوم'، با کاما جدا می‌شوند>"
+                    "name": "جاده سوم"
                 },
                 "highway/tertiary_link": {
-                    "name": "اتصال سومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوند سوم'، با کاما جدا می‌شوند>"
+                    "name": "اتصال سومی"
                 },
                 "highway/track": {
                     "name": "جاده خاکی رها شده",
@@ -3704,928 +3292,619 @@
                     "terms": "آینه‌ی رفت‌آمد"
                 },
                 "highway/traffic_signals": {
-                    "name": "چراغ راهنمایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چراغ راهنمایی'، با کاما جدا می‌شوند>"
+                    "name": "چراغ راهنمایی"
                 },
                 "highway/trunk": {
-                    "name": "جاده ی ملی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده ملی'، با کاما جدا می‌شوند>"
+                    "name": "جاده ی ملی"
                 },
                 "highway/trunk_link": {
-                    "name": "اتصال جاده ملی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوند جاده ملی'، با کاما جدا می‌شوند>"
+                    "name": "اتصال جاده ملی"
                 },
                 "highway/turning_circle": {
-                    "name": "بنبست قابل دور زدن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بنبست قابل دور زدن'، با کاما جدا می‌شوند>"
+                    "name": "بنبست قابل دور زدن"
                 },
                 "highway/turning_loop": {
                     "name": "Turning Loop (Island)",
                     "terms": "حلقه برگردان (ایسلند)"
                 },
                 "highway/unclassified": {
-                    "name": "جاده طبقه‌بندی نشده/جزئی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده طبقه‌بندی نشده/جزئی'، با کاما جدا می‌شوند>"
+                    "name": "جاده طبقه‌بندی نشده/جزئی"
                 },
                 "historic": {
-                    "name": "مکان تاریخی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مکان تاریخی'، با کاما جدا می‌شوند>"
+                    "name": "مکان تاریخی"
                 },
                 "historic/archaeological_site": {
                     "name": "مکان باستان شناسی",
                     "terms": "سایت باستان شناسی"
                 },
                 "historic/boundary_stone": {
-                    "name": "سنگ مرزی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'مرز سنگی'، با کاما جدا می‌شوند>"
+                    "name": "سنگ مرزی"
                 },
                 "historic/castle": {
-                    "name": "قلعه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'قلعه'، با کاما جدا می‌شوند>"
+                    "name": "قلعه"
                 },
                 "historic/memorial": {
-                    "name": "یادبود",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'یادبود'، با کاما جدا می‌شوند>"
+                    "name": "یادبود"
                 },
                 "historic/monument": {
-                    "name": "مقبره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'اثر تاریخی'، با کاما جدا می‌شوند>"
+                    "name": "مقبره"
                 },
                 "historic/ruins": {
-                    "name": "ویرانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ویرانه'، با کاما جدا می‌شوند>"
+                    "name": "ویرانه"
                 },
                 "historic/tomb": {
-                    "name": "آرامگاه",
-                    "terms": "<translate with synonyms or related terms for 'Tomb', separated by commas>"
+                    "name": "آرامگاه"
                 },
                 "historic/wayside_cross": {
-                    "name": "صلیب کنار جاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'صلیب کنار جاده'، با کاما جدا می‌شوند>"
+                    "name": "صلیب کنار جاده"
                 },
                 "historic/wayside_shrine": {
-                    "name": "آرامگاه کنار جاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آرامگاه کنار جاده'، با کاما جدا می‌شوند>"
+                    "name": "آرامگاه کنار جاده"
                 },
                 "junction": {
-                    "name": "اتصال",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اتصال'، با کاما جدا می‌شوند>"
+                    "name": "اتصال"
                 },
                 "landuse": {
-                    "name": "کاربری زمین",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کاربری زمین'، با کاما جدا می‌شوند>"
+                    "name": "کاربری زمین"
                 },
                 "landuse/allotments": {
-                    "name": "باغچه عمومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باغچه عمومی'، با کاما جدا می‌شوند>"
+                    "name": "باغچه عمومی"
                 },
                 "landuse/aquaculture": {
-                    "name": "آبزی‌پروری",
-                    "terms": "<translate with synonyms or related terms for 'Aquaculture', separated by commas>"
+                    "name": "آبزی‌پروری"
                 },
                 "landuse/basin": {
-                    "name": "حوزه رودخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'حوضه'، با کاما جدا می‌شوند>"
-                },
-                "landuse/brownfield": {
-                    "terms": "<translate with synonyms or related terms for 'Brownfield', separated by commas>"
+                    "name": "حوزه رودخانه"
                 },
                 "landuse/cemetery": {
-                    "name": "قبرستان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'قبرستان - آرامگاه'، با کاما جدا می‌شوند>"
+                    "name": "قبرستان"
                 },
                 "landuse/churchyard": {
-                    "name": "حیاط کلیسا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'حیاط کلیسا'، با کاما جدا می‌شوند>"
+                    "name": "حیاط کلیسا"
                 },
                 "landuse/commercial": {
-                    "name": "منطقه تجاری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'منطقه تجاری'، با کاما جدا می‌شوند>"
+                    "name": "منطقه تجاری"
                 },
                 "landuse/construction": {
-                    "name": "ساخت و ساز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساخت و ساز'، با کاما جدا می‌شوند>"
+                    "name": "ساخت و ساز"
                 },
                 "landuse/farm": {
                     "name": "زمین‌های کشاورزی"
                 },
                 "landuse/farmland": {
-                    "name": "زمین‌های کشاورزی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین‌های کشاورزی'، با کاما جدا می‌شوند>"
+                    "name": "زمین‌های کشاورزی"
                 },
                 "landuse/farmyard": {
-                    "name": "محوطه مزرعه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'حیاط خانه کشاورزی'، با کاما جدا می‌شوند>"
+                    "name": "محوطه مزرعه"
                 },
                 "landuse/forest": {
-                    "name": "جنگل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جنگل'، با کاما جدا می‌شوند>"
-                },
-                "landuse/garages": {
-                    "terms": "<translate with synonyms or related terms for 'Garage Landuse', separated by commas>"
+                    "name": "جنگل"
                 },
                 "landuse/grass": {
-                    "name": "علف زار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چمن'، با کاما جدا می‌شوند>"
-                },
-                "landuse/greenfield": {
-                    "terms": "<translate with synonyms or related terms for 'Greenfield', separated by commas>"
-                },
-                "landuse/greenhouse_horticulture": {
-                    "terms": "<translate with synonyms or related terms for 'Greenhouse Horticulture', separated by commas>"
+                    "name": "علف زار"
                 },
                 "landuse/harbour": {
-                    "name": "بندرگاه",
-                    "terms": "<translate with synonyms or related terms for 'Harbor', separated by commas>"
+                    "name": "بندرگاه"
                 },
                 "landuse/industrial": {
-                    "name": "محیط صنعتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'منطقه صنعتی'، با کاما جدا می‌شوند>"
-                },
-                "landuse/industrial/scrap_yard": {
-                    "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
+                    "name": "محیط صنعتی"
                 },
                 "landuse/industrial/slaughterhouse": {
-                    "name": "کشتارگاه",
-                    "terms": "<translate with synonyms or related terms for 'Slaughterhouse', separated by commas>"
+                    "name": "کشتارگاه"
                 },
                 "landuse/landfill": {
-                    "name": "محل دفن مواد (زباله)",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل دفن زباله'، با کاما جدا می‌شوند>"
+                    "name": "محل دفن مواد (زباله)"
                 },
                 "landuse/meadow": {
-                    "name": "علفزار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'علفزار'، با کاما جدا می‌شوند>"
+                    "name": "علفزار"
                 },
                 "landuse/military": {
-                    "name": "محیط نظامی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'منطقه نظامی'، با کاما جدا می‌شوند>"
+                    "name": "محیط نظامی"
                 },
                 "landuse/military/airfield": {
-                    "name": "پایگاه هوایی نظامی",
-                    "terms": "<translate with synonyms or related terms for 'Military Airfield', separated by commas>"
+                    "name": "پایگاه هوایی نظامی"
                 },
                 "landuse/military/barracks": {
-                    "name": "پادگان",
-                    "terms": "<translate with synonyms or related terms for 'Barracks', separated by commas>"
+                    "name": "پادگان"
                 },
                 "landuse/military/bunker": {
-                    "name": "محدوده نظامی",
-                    "terms": "<translate with synonyms or related terms for 'Military Bunker', separated by commas>"
+                    "name": "محدوده نظامی"
                 },
                 "landuse/military/checkpoint": {
-                    "name": "ایست بازرسی",
-                    "terms": "<translate with synonyms or related terms for 'Checkpoint', separated by commas>"
+                    "name": "ایست بازرسی"
                 },
                 "landuse/military/danger_area": {
-                    "name": "محدوده خطرناک",
-                    "terms": "<translate with synonyms or related terms for 'Danger Area', separated by commas>"
+                    "name": "محدوده خطرناک"
                 },
                 "landuse/military/naval_base": {
-                    "name": "پایگاه نیروی دریایی",
-                    "terms": "<translate with synonyms or related terms for 'Naval Base', separated by commas>"
+                    "name": "پایگاه نیروی دریایی"
                 },
                 "landuse/military/nuclear_explosion_site": {
-                    "name": "محدوده انفجار اتمی",
-                    "terms": "<translate with synonyms or related terms for 'Nuclear Explosion Site', separated by commas>"
+                    "name": "محدوده انفجار اتمی"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "ميدان موانع",
-                    "terms": "<translate with synonyms or related terms for 'Obstacle Course', separated by commas>"
+                    "name": "ميدان موانع"
                 },
                 "landuse/military/office": {
-                    "name": "دفتر نظامی",
-                    "terms": "<translate with synonyms or related terms for 'Military Office', separated by commas>"
+                    "name": "دفتر نظامی"
                 },
                 "landuse/military/range": {
-                    "name": "محدوده نظامی",
-                    "terms": "<translate with synonyms or related terms for 'Military Range', separated by commas>"
+                    "name": "محدوده نظامی"
                 },
                 "landuse/military/training_area": {
-                    "name": "منطقه آموزشی",
-                    "terms": "<translate with synonyms or related terms for 'Training Area', separated by commas>"
+                    "name": "منطقه آموزشی"
                 },
                 "landuse/orchard": {
-                    "name": "باغ میوه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باغ'، با کاما جدا می‌شوند>"
+                    "name": "باغ میوه"
                 },
                 "landuse/plant_nursery": {
-                    "name": "گلخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'گلخانه'، با کاما جدا می‌شوند>"
+                    "name": "گلخانه"
                 },
                 "landuse/quarry": {
-                    "name": "معدن سنگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'معدن'، با کاما جدا می‌شوند>"
-                },
-                "landuse/railway": {
-                    "terms": "<translate with synonyms or related terms for 'Railway Corridor', separated by commas>"
+                    "name": "معدن سنگ"
                 },
                 "landuse/recreation_ground": {
-                    "name": "محوطه تفریحی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محوطه تفریحی'، با کاما جدا می‌شوند>"
-                },
-                "landuse/religious": {
-                    "terms": "<translate with synonyms or related terms for 'Religious Area', separated by commas>"
+                    "name": "محوطه تفریحی"
                 },
                 "landuse/residential": {
-                    "name": "منطقه مسکونی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'منطقه مسکونی'، با کاما جدا می‌شوند>"
+                    "name": "منطقه مسکونی"
                 },
                 "landuse/retail": {
-                    "name": "منطقه خرید و فروش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'منطقه خرید و فروش'، با کاما جدا می‌شوند>"
+                    "name": "منطقه خرید و فروش"
                 },
                 "landuse/vineyard": {
-                    "name": "باغ انگور",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تاکستان'، با کاما جدا می‌شوند>"
+                    "name": "باغ انگور"
                 },
                 "leisure": {
-                    "name": "اوقات فراغت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اوقات فراغت'، با کاما جدا می‌شوند>"
+                    "name": "اوقات فراغت"
                 },
                 "leisure/adult_gaming_centre": {
-                    "name": "مرکز بازی بزرگسالان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز بازی بزرگسالان'، با کاما جدا می‌شوند>"
-                },
-                "leisure/amusement_arcade": {
-                    "terms": "<translate with synonyms or related terms for 'Amusement Arcade', separated by commas>"
+                    "name": "مرکز بازی بزرگسالان"
                 },
                 "leisure/bird_hide": {
                     "name": "مکان تماشای پرندگان",
                     "terms": "مخفیگاه تماشای پرندگان"
                 },
                 "leisure/bowling_alley": {
-                    "name": "سالن بولینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سالن بولینگ'، با کاما جدا می‌شوند>"
+                    "name": "سالن بولینگ"
                 },
                 "leisure/common": {
-                    "name": "عمومی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'عمومی'، با کاما جدا میشوند>"
+                    "name": "عمومی"
                 },
                 "leisure/dance": {
                     "name": "سالن رقص",
                     "terms": "تالار رقص"
                 },
                 "leisure/dancing_school": {
-                    "name": "مدرسه رقص",
-                    "terms": "<translate with synonyms or related terms for 'Dance School', separated by commas>"
+                    "name": "مدرسه رقص"
                 },
                 "leisure/dog_park": {
-                    "name": "پارک سگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارک سگ‌ها'، با کاما جدا می‌شوند>"
+                    "name": "پارک سگ"
                 },
                 "leisure/firepit": {
-                    "name": "گودال آتش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گودال آتش'، با کاما جدا می‌شوند>"
+                    "name": "گودال آتش"
                 },
                 "leisure/fitness_centre": {
-                    "name": "باشگاه تناسب اندام",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز پرورش و تناسب اندام'، با کاما جدا می‌شوند>"
+                    "name": "باشگاه تناسب اندام"
                 },
                 "leisure/fitness_centre/yoga": {
-                    "name": "استودیو یوگا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'استودیو یوگا'، با کاما جدا می‌شوند>"
+                    "name": "استودیو یوگا"
                 },
                 "leisure/fitness_station": {
-                    "name": "ایستگاه ورزشی در فضای باز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه ورزشی در فضای باز'، با کاما جدا می‌شوند>"
-                },
-                "leisure/fitness_station/balance_beam": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Balance Beam', separated by commas>"
-                },
-                "leisure/fitness_station/box": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Box', separated by commas>"
-                },
-                "leisure/fitness_station/horizontal_bar": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Horizontal Bar', separated by commas>"
-                },
-                "leisure/fitness_station/horizontal_ladder": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Monkey Bars', separated by commas>"
-                },
-                "leisure/fitness_station/hyperextension": {
-                    "terms": "<translate with synonyms or related terms for 'Hyperextension Station', separated by commas>"
-                },
-                "leisure/fitness_station/parallel_bars": {
-                    "terms": "<translate with synonyms or related terms for 'Parallel Bars', separated by commas>"
+                    "name": "ایستگاه ورزشی در فضای باز"
                 },
                 "leisure/fitness_station/push-up": {
-                    "name": "محل شنا رفتن",
-                    "terms": "<translate with synonyms or related terms for 'Push-Up Station', separated by commas>"
-                },
-                "leisure/fitness_station/rings": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Rings', separated by commas>"
-                },
-                "leisure/fitness_station/sign": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Instruction Sign', separated by commas>"
+                    "name": "محل شنا رفتن"
                 },
                 "leisure/fitness_station/sit-up": {
-                    "name": "محل دراز و نشست",
-                    "terms": "<translate with synonyms or related terms for 'Sit-Up Station', separated by commas>"
-                },
-                "leisure/fitness_station/stairs": {
-                    "terms": "<translate with synonyms or related terms for 'Exercise Stairs', separated by commas>"
+                    "name": "محل دراز و نشست"
                 },
                 "leisure/garden": {
-                    "name": "باغ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باغ'، با کاما جدا می‌شوند>"
+                    "name": "باغ"
                 },
                 "leisure/golf_course": {
-                    "name": "زمین گلف",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین گلف'، با کاما جدا می‌شوند>"
+                    "name": "زمین گلف"
                 },
                 "leisure/hackerspace": {
-                    "name": "هکراسپیس",
-                    "terms": "<translate with synonyms or related terms for 'Hackerspace', separated by commas>"
+                    "name": "هکراسپیس"
                 },
                 "leisure/horse_riding": {
-                    "name": "باشگاه اسب سواری",
-                    "terms": "<translate with synonyms or related terms for 'Horseback Riding Facility', separated by commas>"
+                    "name": "باشگاه اسب سواری"
                 },
                 "leisure/ice_rink": {
-                    "name": "یخ بازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'یخ بازی'، با کاما جدا می‌شوند>"
+                    "name": "یخ بازی"
                 },
                 "leisure/marina": {
-                    "name": "تفرجگاه ساحلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بندرگاه قایق'، با کاما جدا می‌شوند>"
+                    "name": "تفرجگاه ساحلی"
                 },
                 "leisure/miniature_golf": {
-                    "name": "گلف مینیاتوری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'گلف مینیاتوری'، با کاما جدا میشوند>"
+                    "name": "گلف مینیاتوری"
                 },
                 "leisure/nature_reserve": {
-                    "name": "ذخیره‌گاه طبیعی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ذخیره‌گاه طبیعی'، با کاما جدا می‌شوند>"
-                },
-                "leisure/outdoor_seating": {
-                    "terms": "<translate with synonyms or related terms for 'Outdoor Seating Area', separated by commas>"
+                    "name": "ذخیره‌گاه طبیعی"
                 },
                 "leisure/park": {
-                    "name": "پارک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارک'، با کاما جدا می‌شوند>"
+                    "name": "پارک"
                 },
                 "leisure/picnic_table": {
-                    "name": "میز پیکنیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'میز پیکنیک'، با کاما جدا می‌شوند>"
+                    "name": "میز پیکنیک"
                 },
                 "leisure/pitch": {
-                    "name": "زمین ورزشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ورزشگاه'، با کاما جدا می‌شوند>"
+                    "name": "زمین ورزشی"
                 },
                 "leisure/pitch/american_football": {
-                    "name": "میدان فوتبال آمریکایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین فوتبال آمریکایی'، با کاما جدا می‌شوند>"
+                    "name": "میدان فوتبال آمریکایی"
                 },
                 "leisure/pitch/baseball": {
-                    "name": "الماسی شکل بیسبال",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مربع بزرگ زمین بیسبال'، با کاما جدا می‌شوند>"
+                    "name": "الماسی شکل بیسبال"
                 },
                 "leisure/pitch/basketball": {
-                    "name": "محوطه بسکتبال",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین بسکتبال'، با کاما جدا می‌شوند>"
-                },
-                "leisure/pitch/beachvolleyball": {
-                    "terms": "<translate with synonyms or related terms for 'Beach Volleyball Court', separated by commas>"
-                },
-                "leisure/pitch/boules": {
-                    "terms": "<translate with synonyms or related terms for 'Boules/Bocce Court', separated by commas>"
+                    "name": "محوطه بسکتبال"
                 },
                 "leisure/pitch/bowls": {
-                    "name": "چمن مخصوص بولینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چمن مخصوص بولینگ'، با کاما جدا می‌شوند>"
-                },
-                "leisure/pitch/cricket": {
-                    "terms": "<translate with synonyms or related terms for 'Cricket Field', separated by commas>"
-                },
-                "leisure/pitch/equestrian": {
-                    "terms": "<translate with synonyms or related terms for 'Riding Arena', separated by commas>"
+                    "name": "چمن مخصوص بولینگ"
                 },
                 "leisure/pitch/rugby_league": {
-                    "name": "زمین راگبی ۱۳ نفره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین راگبی ۱۳ نفره'، با کاما جدا می‌شوند>"
+                    "name": "زمین راگبی ۱۳ نفره"
                 },
                 "leisure/pitch/rugby_union": {
-                    "name": "زمین راگبی ۱۵ نفره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین راگبی ۱۵ نفره'، با کاما جدا می‌شوند>"
+                    "name": "زمین راگبی ۱۵ نفره"
                 },
                 "leisure/pitch/skateboard": {
-                    "name": "پارک اسکیت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین اسکیت'، با کاما جدا می‌شوند>"
+                    "name": "پارک اسکیت"
                 },
                 "leisure/pitch/soccer": {
-                    "name": "میدان فوتبال",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین فوتبال'، با کاما جدا می‌شوند>"
+                    "name": "میدان فوتبال"
                 },
                 "leisure/pitch/table_tennis": {
-                    "name": "میز پینگ پنگ",
-                    "terms": "<translate with synonyms or related terms for 'Ping Pong Table', separated by commas>"
+                    "name": "میز پینگ پنگ"
                 },
                 "leisure/pitch/tennis": {
-                    "name": "محوطه تنیس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین تنیس'، با کاما جدا می‌شوند>"
+                    "name": "محوطه تنیس"
                 },
                 "leisure/pitch/volleyball": {
-                    "name": "سالن والیبال",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین والیبال'، با کاما جدا می‌شوند>"
+                    "name": "سالن والیبال"
                 },
                 "leisure/playground": {
-                    "name": "زمین بازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'زمین بازی'، با کاما جدا می‌شوند>"
+                    "name": "زمین بازی"
                 },
                 "leisure/resort": {
                     "name": "پر رفت‌آمد",
                     "terms": "مکان پررفت‌آمد, اماکن پر رفت آمد,مکان‌های مطرح"
                 },
-                "leisure/running_track": {
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Running)', separated by commas>"
-                },
                 "leisure/sauna": {
-                    "name": "سونا",
-                    "terms": "<translate with synonyms or related terms for 'Sauna', separated by commas>"
+                    "name": "سونا"
                 },
                 "leisure/slipway": {
-                    "name": "قایق ساکن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر لغزشی کشتی'، با کاما جدا می‌شوند>"
+                    "name": "قایق ساکن"
                 },
                 "leisure/sports_centre": {
-                    "name": "مجتمع/مرکز ورزشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز/سالن ورزشی'، با کاما جدا می‌شوند>"
+                    "name": "مجتمع/مرکز ورزشی"
                 },
                 "leisure/sports_centre/swimming": {
-                    "name": "تاسیسات استخر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'امکانات استخر'، با کاما جدا می‌شوند>"
+                    "name": "تاسیسات استخر"
                 },
                 "leisure/stadium": {
-                    "name": "ورزشگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ورزشگاه'، با کاما جدا می‌شوند>"
+                    "name": "ورزشگاه"
                 },
                 "leisure/swimming_pool": {
-                    "name": "استخر شنا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'استخر شنا'، با کاما جدا می‌شوند>"
-                },
-                "leisure/track": {
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Non-Motorsport)', separated by commas>"
+                    "name": "استخر شنا"
                 },
                 "leisure/water_park": {
-                    "name": "پارک آبی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارک آبی'، با کاما جدا می‌شوند>"
+                    "name": "پارک آبی"
                 },
                 "line": {
-                    "name": "خط",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط'، با کاما جدا می‌شوند>"
+                    "name": "خط"
                 },
                 "man_made": {
-                    "name": "سازه ی انسانی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساخت بشر'، با کاما جدا می‌شوند>"
+                    "name": "سازه ی انسانی"
                 },
                 "man_made/adit": {
-                    "name": "گذرگاه افقی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گذرگاه افقی'، با کاما جدا می‌شوند>"
+                    "name": "گذرگاه افقی"
                 },
                 "man_made/antenna": {
-                    "name": "آنتن",
-                    "terms": "<translate with synonyms or related terms for 'Antenna', separated by commas>"
+                    "name": "آنتن"
                 },
                 "man_made/breakwater": {
-                    "name": "موج شکن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'موج شکن'، با کاما جدا می‌شوند>"
+                    "name": "موج شکن"
                 },
                 "man_made/bridge": {
-                    "name": "پل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پل'، با کاما جدا می‌شوند>"
+                    "name": "پل"
                 },
                 "man_made/chimney": {
-                    "name": "دودکش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دودکش'، با کاما جدا می‌شوند>"
+                    "name": "دودکش"
                 },
                 "man_made/crane": {
-                    "name": "جرثقیل",
-                    "terms": "<translate with synonyms or related terms for 'Crane', separated by commas>"
+                    "name": "جرثقیل"
                 },
                 "man_made/cutline": {
-                    "name": "خط برش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر جنگلی'، با کاما جدا می‌شوند>"
+                    "name": "خط برش"
                 },
                 "man_made/embankment": {
                     "name": "خاک ریز"
                 },
                 "man_made/flagpole": {
-                    "name": "میله پرچم",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'میله پرچم'، با کاما جدا می‌شوند>"
+                    "name": "میله پرچم"
                 },
                 "man_made/gasometer": {
-                    "name": "کنتور گاز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کنتور گاز'، با کاما جدا میشوند>"
+                    "name": "کنتور گاز"
                 },
                 "man_made/groyne": {
-                    "name": "آبشکن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آبشکن'، با کاما جدا می‌شوند>"
+                    "name": "آبشکن"
                 },
                 "man_made/lighthouse": {
-                    "name": "فانوس دریایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فانوس دریایی'، با کاما جدا می‌شوند>"
-                },
-                "man_made/mast": {
-                    "terms": "<translate with synonyms or related terms for 'Mast', separated by commas>"
-                },
-                "man_made/monitoring_station": {
-                    "terms": "<translate with synonyms or related terms for 'Monitoring Station', separated by commas>"
+                    "name": "فانوس دریایی"
                 },
                 "man_made/observation": {
-                    "name": "برج رصد",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دکل دیده‌بانی'، با کاما جدا می‌شوند>"
-                },
-                "man_made/observatory": {
-                    "terms": "<translate with synonyms or related terms for 'Observatory', separated by commas>"
+                    "name": "برج رصد"
                 },
                 "man_made/petroleum_well": {
-                    "name": "چاه نفت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چاه نفت'، با کاما جدا می‌شوند>"
+                    "name": "چاه نفت"
                 },
                 "man_made/pier": {
-                    "name": "اسکله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اسکله'، با کاما جدا می‌شوند>"
+                    "name": "اسکله"
                 },
                 "man_made/pipeline": {
-                    "name": "خط لوله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط لوله'، با کاما جدا می‌شوند>"
+                    "name": "خط لوله"
                 },
                 "man_made/pumping_station": {
-                    "name": "ایستگاه پمپاژ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه پمپاژ'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه پمپاژ"
                 },
                 "man_made/silo": {
-                    "name": "سیلو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سيلو'، با کاما جدا می‌شوند>"
+                    "name": "سیلو"
                 },
                 "man_made/storage_tank": {
-                    "name": "مخزن ذخیره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'مخزن ذخیره'، با کاما جدا می‌شوند>"
+                    "name": "مخزن ذخیره"
                 },
                 "man_made/surveillance": {
-                    "name": "تجهیزات نظارتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'تجهیزات نظارتی'، با کاما جدا میشوند>"
+                    "name": "تجهیزات نظارتی"
                 },
                 "man_made/surveillance_camera": {
-                    "name": "دوربین نظارت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دوربین نظارتی'، با کاما جدا می‌شوند>"
+                    "name": "دوربین نظارت"
                 },
                 "man_made/survey_point": {
-                    "name": "نقطه مطالعاتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نقطه مطالعاتی'، با کاما جدا می‌شوند>"
+                    "name": "نقطه مطالعاتی"
                 },
                 "man_made/tower": {
-                    "name": "دکل، برج",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'برج '، با کاما جدا می‌شوند>"
+                    "name": "دکل، برج"
                 },
                 "man_made/wastewater_plant": {
-                    "name": "تصفیه خانه ی فاضلاب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کارخانه فاضلاب'، با کاما جدا می‌شوند>"
+                    "name": "تصفیه خانه ی فاضلاب"
                 },
                 "man_made/water_tower": {
-                    "name": "برج مخزن آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'برج مخزن آب'، با کاما جدا می‌شوند>"
+                    "name": "برج مخزن آب"
                 },
                 "man_made/water_well": {
-                    "name": "چاه آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چاه آب'، با کاما جدا می‌شوند>"
+                    "name": "چاه آب"
                 },
                 "man_made/water_works": {
-                    "name": "امور آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تأسیسات آبرسانی'، با کاما جدا می‌شوند>"
+                    "name": "امور آب"
                 },
                 "man_made/watermill": {
-                    "name": "آسیاب آبی",
-                    "terms": "<translate with synonyms or related terms for 'Watermill', separated by commas>"
+                    "name": "آسیاب آبی"
                 },
                 "man_made/windmill": {
-                    "name": "آسیاب بادی",
-                    "terms": "<translate with synonyms or related terms for 'Windmill', separated by commas>"
+                    "name": "آسیاب بادی"
                 },
                 "man_made/works": {
-                    "name": "کارخانه",
-                    "terms": "<translate with synonyms or related terms for 'Factory', separated by commas>"
-                },
-                "manhole": {
-                    "terms": "<translate with synonyms or related terms for 'Manhole', separated by commas>"
-                },
-                "manhole/drain": {
-                    "terms": "<translate with synonyms or related terms for 'Storm Drain', separated by commas>"
-                },
-                "manhole/telecom": {
-                    "terms": "<translate with synonyms or related terms for 'Telecom Manhole', separated by commas>"
+                    "name": "کارخانه"
                 },
                 "natural": {
-                    "name": "طبیعی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'طبیعت'، با کاما جدا می‌شوند>"
+                    "name": "طبیعی"
                 },
                 "natural/bare_rock": {
-                    "name": "صخره",
-                    "terms": "<translate with synonyms or related terms for 'Bare Rock', separated by commas>"
+                    "name": "صخره"
                 },
                 "natural/bay": {
-                    "name": "خلیج کوچک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خلیج'، با کاما جدا می‌شوند>"
+                    "name": "خلیج کوچک"
                 },
                 "natural/beach": {
-                    "name": "ساحل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساحل'، با کاما جدا می‌شوند>"
+                    "name": "ساحل"
                 },
                 "natural/cave_entrance": {
-                    "name": "ورودی غار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'ورودی غار'، با کاما جدا می‌شوند>"
+                    "name": "ورودی غار"
                 },
                 "natural/cliff": {
-                    "name": "صخره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پرتگاه'، با کاما جدا می‌شوند>"
+                    "name": "صخره"
                 },
                 "natural/coastline": {
-                    "name": "خط ساحلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط ساحلی'، با کاما جدا می‌شوند>"
+                    "name": "خط ساحلی"
                 },
                 "natural/fell": {
-                    "name": "تپه سنگی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پای کوه'، با کاما جدا می‌شوند>"
+                    "name": "تپه سنگی"
                 },
                 "natural/glacier": {
-                    "name": "یخچال طبیعی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'یخچال طبیعی'، با کاما جدا می‌شوند>"
+                    "name": "یخچال طبیعی"
                 },
                 "natural/grassland": {
                     "name": "مرتع",
                     "terms": "چمن زار"
                 },
                 "natural/heath": {
-                    "name": "بوته زار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بوته زار'، با کاما جدا می‌شوند>"
-                },
-                "natural/mud": {
-                    "terms": "<translate with synonyms or related terms for 'Mud', separated by commas>"
+                    "name": "بوته زار"
                 },
                 "natural/peak": {
-                    "name": "قله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'قله'، با کاما جدا می‌شوند>"
+                    "name": "قله"
                 },
                 "natural/ridge": {
-                    "name": "پرتگاه",
-                    "terms": "<translate with synonyms or related terms for 'Ridge', separated by commas>"
+                    "name": "پرتگاه"
                 },
                 "natural/saddle": {
-                    "name": "گردنه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گردنه'، با کاما جدا می‌شوند>"
+                    "name": "گردنه"
                 },
                 "natural/sand": {
-                    "name": "شن",
-                    "terms": "<translate with synonyms or related terms for 'Sand', separated by commas>"
+                    "name": "شن"
                 },
                 "natural/scree": {
-                    "name": "سنگ ریزه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سنگلاخ'، با کاما جدا می‌شوند>"
+                    "name": "سنگ ریزه"
                 },
                 "natural/scrub": {
-                    "name": "خارزار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بوته‌زار'، با کاما جدا می‌شوند>"
+                    "name": "خارزار"
                 },
                 "natural/spring": {
-                    "name": "چشمه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چشمه'، با کاما جدا می‌شوند>"
+                    "name": "چشمه"
                 },
                 "natural/tree": {
-                    "name": "درخت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'درخت'، با کاما جدا می‌شوند>"
+                    "name": "درخت"
                 },
                 "natural/tree_row": {
-                    "name": "ردیف درخت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ردیف درخت'، با کاما جدا می‌شوند>"
+                    "name": "ردیف درخت"
                 },
                 "natural/volcano": {
-                    "name": "آتشفشان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آتشفشان'، با کاما جدا می‌شوند>"
+                    "name": "آتشفشان"
                 },
                 "natural/water": {
-                    "name": "آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آب'، با کاما جدا می‌شوند>"
+                    "name": "آب"
                 },
                 "natural/water/lake": {
-                    "name": "برکه ، استخر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دریاچه'، با کاما جدا می‌شوند>"
+                    "name": "برکه ، استخر"
                 },
                 "natural/water/pond": {
-                    "name": "دریاچه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'برکه'، با کاما جدا می‌شوند>"
+                    "name": "دریاچه"
                 },
                 "natural/water/reservoir": {
-                    "name": "آب انبار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'استخر ذخیره آب'، با کاما جدا می‌شوند>"
+                    "name": "آب انبار"
                 },
                 "natural/wetland": {
-                    "name": "تالاب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تالاب'، با کاما جدا می‌شوند>"
+                    "name": "تالاب"
                 },
                 "natural/wood": {
-                    "name": "چوب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'چوب'، با کاما جدا می‌شوند>"
-                },
-                "noexit/yes": {
-                    "terms": "<translate with synonyms or related terms for 'No Exit', separated by commas>"
+                    "name": "چوب"
                 },
                 "office": {
-                    "name": "اداره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اداره'، با کاما جدا می‌شوند>"
-                },
-                "office/accountant": {
-                    "terms": "<translate with synonyms or related terms for 'Accountant Office', separated by commas>"
+                    "name": "اداره"
                 },
                 "office/administrative": {
                     "name": "دفتر حکومتی"
                 },
-                "office/adoption_agency": {
-                    "terms": "<translate with synonyms or related terms for 'Adoption Agency', separated by commas>"
-                },
                 "office/advertising_agency": {
-                    "name": "آژانس تبلیغاتی",
-                    "terms": "<translate with synonyms or related terms for 'Advertising Agency', separated by commas>"
+                    "name": "آژانس تبلیغاتی"
                 },
                 "office/architect": {
-                    "name": "دفتر معماری",
-                    "terms": "<translate with synonyms or related terms for 'Architect Office', separated by commas>"
+                    "name": "دفتر معماری"
                 },
                 "office/association": {
-                    "name": "دفتر سازمان غیر انتفاعی",
-                    "terms": "<translate with synonyms or related terms for 'Nonprofit Organization Office', separated by commas>"
+                    "name": "دفتر سازمان غیر انتفاعی"
                 },
                 "office/charity": {
-                    "name": "دفتر خیریه",
-                    "terms": "<translate with synonyms or related terms for 'Charity Office', separated by commas>"
-                },
-                "office/company": {
-                    "terms": "<translate with synonyms or related terms for 'Corporate Office', separated by commas>"
+                    "name": "دفتر خیریه"
                 },
                 "office/coworking": {
-                    "name": "فضای کاری مشارکتی",
-                    "terms": "<translate with synonyms or related terms for 'Coworking Space', separated by commas>"
+                    "name": "فضای کاری مشارکتی"
                 },
                 "office/educational_institution": {
-                    "name": "مؤسسه آموزشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مؤسسه آموزشی'، با کاما جدا می‌شوند>"
+                    "name": "مؤسسه آموزشی"
                 },
                 "office/employment_agency": {
-                    "name": "آژانس کاریابی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آژانس کاریابی'، با کاما جدا می‌شوند>"
-                },
-                "office/energy_supplier": {
-                    "terms": "<translate with synonyms or related terms for 'Energy Supplier Office', separated by commas>"
+                    "name": "آژانس کاریابی"
                 },
                 "office/estate_agent": {
-                    "name": "دفتر املاک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر املاک و مستغلات'، با کاما جدا می‌شوند>"
+                    "name": "دفتر املاک"
                 },
                 "office/financial": {
-                    "name": "اداره مالی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر مالی'، با کاما جدا می‌شوند>"
-                },
-                "office/forestry": {
-                    "terms": "<translate with synonyms or related terms for 'Forestry Office', separated by commas>"
-                },
-                "office/foundation": {
-                    "terms": "<translate with synonyms or related terms for 'Foundation Office', separated by commas>"
+                    "name": "اداره مالی"
                 },
                 "office/government": {
-                    "name": "اداره دولتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اداره دولتی'، با کاما جدا می‌شوند>"
+                    "name": "اداره دولتی"
                 },
                 "office/government/register_office": {
-                    "name": "اداره ثبت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اداره ثبت'، با کاما جدا می‌شوند>"
+                    "name": "اداره ثبت"
                 },
                 "office/government/tax": {
-                    "name": "اداره مالیات و درآمد",
-                    "terms": "<translate with synonyms or related terms for 'Tax and Revenue Office', separated by commas>"
+                    "name": "اداره مالیات و درآمد"
                 },
                 "office/guide": {
-                    "name": "دفتر راهنمای تور",
-                    "terms": "<translate with synonyms or related terms for 'Tour Guide Office', separated by commas>"
+                    "name": "دفتر راهنمای تور"
                 },
                 "office/insurance": {
-                    "name": "دفتر بیمه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اداره بیمه'، با کاما جدا می‌شوند>"
+                    "name": "دفتر بیمه"
                 },
                 "office/it": {
-                    "name": "دفتر فناوری اطلاعات",
-                    "terms": "<translate with synonyms or related terms for 'Information Technology Office', separated by commas>"
+                    "name": "دفتر فناوری اطلاعات"
                 },
                 "office/lawyer": {
-                    "name": "دفتر حقوقی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر حقوقی'، با کاما جدا می‌شوند>"
+                    "name": "دفتر حقوقی"
                 },
                 "office/lawyer/notary": {
                     "name": "دفتر اسناد رسمی"
                 },
-                "office/moving_company": {
-                    "terms": "<translate with synonyms or related terms for 'Moving Company Office', separated by commas>"
-                },
                 "office/newspaper": {
-                    "name": "دفتر روزنامه",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper Office', separated by commas>"
+                    "name": "دفتر روزنامه"
                 },
                 "office/ngo": {
-                    "name": "سازمان غیر دولتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر سازمان غیر دولتی NGO'، با کاما جدا می‌شوند>"
+                    "name": "سازمان غیر دولتی"
                 },
                 "office/notary": {
-                    "name": "دفتر اسناد رسمی",
-                    "terms": "<translate with synonyms or related terms for 'Notary Office', separated by commas>"
+                    "name": "دفتر اسناد رسمی"
                 },
                 "office/physician": {
                     "name": "پزشک"
                 },
                 "office/political_party": {
-                    "name": "حزب سیاسی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'حزب سیاسی'، با کاما جدا می‌شوند>"
+                    "name": "حزب سیاسی"
                 },
                 "office/private_investigator": {
-                    "name": "دفتر تحقیقات خصوصی",
-                    "terms": "<translate with synonyms or related terms for 'Private Investigator Office', separated by commas>"
-                },
-                "office/quango": {
-                    "terms": "<translate with synonyms or related terms for 'Quasi-NGO Office', separated by commas>"
+                    "name": "دفتر تحقیقات خصوصی"
                 },
                 "office/research": {
-                    "name": "سازمان تحقیقاتی و پژوهشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر تحقیقاتی'، با کاما جدا می‌شوند>"
-                },
-                "office/surveyor": {
-                    "terms": "<translate with synonyms or related terms for 'Surveyor Office', separated by commas>"
+                    "name": "سازمان تحقیقاتی و پژوهشی"
                 },
                 "office/tax_advisor": {
-                    "name": "دفتر مشاور مالیاتی",
-                    "terms": "<translate with synonyms or related terms for 'Tax Advisor Office', separated by commas>"
+                    "name": "دفتر مشاور مالیاتی"
                 },
                 "office/telecommunication": {
-                    "name": "اداره مخابرات",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر مخابراتی '، با کاما جدا می‌شوند>"
+                    "name": "اداره مخابرات"
                 },
                 "office/travel_agent": {
                     "name": "آژانس مسافرتی"
                 },
                 "piste": {
-                    "name": "پیست/ مسیر اسکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیست / مسیر اسکی'، با کاما جدا می‌شوند>"
+                    "name": "پیست/ مسیر اسکی"
                 },
                 "place": {
                     "name": "محل"
                 },
                 "place/city": {
-                    "name": "شهر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'شهر'، با کاما جدا می‌شوند>"
+                    "name": "شهر"
                 },
                 "place/farm": {
                     "name": "مزرعه"
                 },
                 "place/hamlet": {
-                    "name": "دهکده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دهکده'، با کاما جدا می‌شوند>"
+                    "name": "دهکده"
                 },
                 "place/island": {
-                    "name": "جزیره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جزيره'، با کاما جدا می‌شوند>"
+                    "name": "جزیره"
                 },
                 "place/isolated_dwelling": {
-                    "name": "مسکن ایزوله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خانه تکی'، با کاما جدا می‌شوند>"
+                    "name": "مسکن ایزوله"
                 },
                 "place/locality": {
-                    "name": "محلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محل'، با کاما جدا می‌شوند>"
+                    "name": "محلی"
                 },
                 "place/neighbourhood": {
-                    "name": "همسایگی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'همسایگی'، با کاما جدا می‌شوند>"
+                    "name": "همسایگی"
                 },
                 "place/square": {
                     "name": "میدان"
                 },
                 "place/town": {
-                    "name": "شهرک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'شهرک'، با کاما جدا می‌شوند>"
+                    "name": "شهرک"
                 },
                 "place/village": {
-                    "name": "روستا",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'روستا'، با کاما جدا می‌شوند>"
+                    "name": "روستا"
                 },
                 "playground/slide": {
                     "name": "سرسره"
                 },
                 "point": {
-                    "name": "نقطه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نقطه'، با کاما جدا می‌شوند>"
+                    "name": "نقطه"
                 },
                 "power": {
                     "name": "نیرو"
                 },
                 "power/generator": {
-                    "name": "مولد برق",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مولد برق'، با کاما جدا می‌شوند>"
+                    "name": "مولد برق"
                 },
                 "power/generator/source_nuclear": {
                     "name": "راکتور هسته‌ای"
@@ -4634,34 +3913,28 @@
                     "name": "توربین بادی"
                 },
                 "power/line": {
-                    "name": "خط نیرو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط فشار قوی برق'، با کاما جدا می‌شوند>"
+                    "name": "خط نیرو"
                 },
                 "power/minor_line": {
-                    "name": "خط برق ضعیف",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط انتقال برق'، با کاما جدا می‌شوند>"
+                    "name": "خط برق ضعیف"
                 },
                 "power/plant": {
                     "name": "محدوده نیروگاه برق"
                 },
                 "power/pole": {
-                    "name": "مسیر برق متوسط",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تیر انتقال برق'، با کاما جدا می‌شوند>"
+                    "name": "مسیر برق متوسط"
                 },
                 "power/sub_station": {
                     "name": "ایستگاه فرعی"
                 },
                 "power/substation": {
-                    "name": "ایستگاه فرعی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه فرعی برق'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه فرعی"
                 },
                 "power/tower": {
-                    "name": "دکل ولتاژ قوی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دکل فشار قوی برق'، با کاما جدا می‌شوند>"
+                    "name": "دکل ولتاژ قوی"
                 },
                 "power/transformer": {
-                    "name": "مبدل برق",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کاهنده جریان برق'، با کاما جدا می‌شوند>"
+                    "name": "مبدل برق"
                 },
                 "public_transport/linear_platform_bus": {
                     "name": "ایستگاه اتوبوس"
@@ -4679,584 +3952,451 @@
                     "name": "راه آهن"
                 },
                 "railway/abandoned": {
-                    "name": "راه آهن متروکه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راه آهن متروکه'، با کاما جدا می‌شوند>"
+                    "name": "راه آهن متروکه"
                 },
                 "railway/crossing": {
-                    "name": "مسیر گذرنده از راه‌آهن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر گذرنده از راه‌آهن'، با کاما جدا می‌شوند>"
+                    "name": "مسیر گذرنده از راه‌آهن"
                 },
                 "railway/disused": {
-                    "name": "راه آهن بلا استفاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راه آهن منسوخ'، با کاما جدا می‌شوند>"
+                    "name": "راه آهن بلا استفاده"
                 },
                 "railway/funicular": {
-                    "name": "کابلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'واگن کابلی'، با کاما جدا می‌شوند>"
+                    "name": "کابلی"
                 },
                 "railway/level_crossing": {
-                    "name": "جاده گذرنده از راه‌آهن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده گذرنده از راه‌آهن'، با کاما جدا می‌شوند>"
+                    "name": "جاده گذرنده از راه‌آهن"
                 },
                 "railway/monorail": {
-                    "name": "مونوریل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مونوریل'، با کاما جدا می‌شوند>"
+                    "name": "مونوریل"
                 },
                 "railway/narrow_gauge": {
-                    "name": "راه آهن باریک کابلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راه آهن باریک'، با کاما جدا می‌شوند>"
+                    "name": "راه آهن باریک کابلی"
                 },
                 "railway/rail": {
-                    "name": "ریل قطار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط اهن'، با کاما جدا می‌شوند>"
+                    "name": "ریل قطار"
                 },
                 "railway/subway": {
-                    "name": "مترو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مترو'، با کاما جدا می‌شوند>"
+                    "name": "مترو"
                 },
                 "railway/subway_entrance": {
-                    "name": "ورودی مترو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'ورودی مترو'، با کاما جدا می‌شوند>"
+                    "name": "ورودی مترو"
                 },
                 "railway/tram": {
                     "name": "تراموا",
                     "terms": "تراموا, واگن برقی"
                 },
                 "relation": {
-                    "name": "رابطه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'رابطه'، با کاما جدا می‌شوند>"
+                    "name": "رابطه"
                 },
                 "roundabout": {
                     "name": "میدان"
                 },
                 "route/ferry": {
-                    "name": "مسیر کشتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر کشتیرانی '، با کاما جدا می‌شوند>"
+                    "name": "مسیر کشتی"
                 },
                 "shop": {
-                    "name": "فروشگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه"
                 },
                 "shop/agrarian": {
                     "name": "فروشگاه لوازم کشاورزی"
                 },
                 "shop/alcohol": {
-                    "name": "مغازه مشروب فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Liquor Store'، با کاما جدا می‌شوند>"
+                    "name": "مغازه مشروب فروشی"
                 },
                 "shop/anime": {
-                    "name": "فروشگاه اسباب بازی‌های انیمیشنی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه اسباب بازی‌های انیمیشنی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه اسباب بازی‌های انیمیشنی"
                 },
                 "shop/antiques": {
-                    "name": "فروشگاه عتیقه‌جات",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'عتیقه فروشی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه عتیقه‌جات"
                 },
                 "shop/art": {
-                    "name": "فروشگاه آثار هنری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه آثار هنری'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه آثار هنری"
                 },
                 "shop/baby_goods": {
-                    "name": "فروشگاه محصولات کودکان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه سیسمونی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه محصولات کودکان"
                 },
                 "shop/bag": {
-                    "name": "فروشگاه کیف/چمدان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه کیف / چمدان'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه کیف/چمدان"
                 },
                 "shop/bakery": {
-                    "name": "نانوایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نانوايى'، با کاما جدا می‌شوند>"
+                    "name": "نانوایی"
                 },
                 "shop/bathroom_furnishing": {
-                    "name": "فروشگاه شیرآلات",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه شیرآلات'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه شیرآلات"
                 },
                 "shop/beauty": {
-                    "name": "فروشگاه زیبایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سالن آرایش وزیبایی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه زیبایی"
                 },
                 "shop/beauty/nails": {
-                    "name": "سالن آرایش ناخن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سالن کاشت ناخن'، با کاما جدا می‌شوند>"
+                    "name": "سالن آرایش ناخن"
                 },
                 "shop/beauty/tanning": {
-                    "name": "سالن برنزه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سالن برنزه'، با کاما جدا می‌شوند>"
+                    "name": "سالن برنزه"
                 },
                 "shop/bed": {
-                    "name": "فروشگاه کالای خواب/ تشک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه کالای خواب/ تشک'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه کالای خواب/ تشک"
                 },
                 "shop/beverages": {
-                    "name": "فروشگاه آشامیدنی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه مواد آشامیدنی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه آشامیدنی"
                 },
                 "shop/bicycle": {
-                    "name": "فروشگاه دوچرخه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دوچرخه فروشی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه دوچرخه"
                 },
                 "shop/bookmaker": {
-                    "name": "صحافی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ناشر'، با کاما جدا میشوند>"
+                    "name": "صحافی"
                 },
                 "shop/books": {
-                    "name": "کتاب‌فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کتابفروشی'، با کاما جدا می‌شوند>"
+                    "name": "کتاب‌فروشی"
                 },
                 "shop/boutique": {
-                    "name": "بوتیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بوتیک'، با کاما جدا می‌شوند>"
+                    "name": "بوتیک"
                 },
                 "shop/butcher": {
-                    "name": "قصابی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'قصابى'، با کاما جدا می‌شوند>"
+                    "name": "قصابی"
                 },
                 "shop/candles": {
-                    "name": "شمع فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه شمع'، با کاما جدا می‌شوند>"
+                    "name": "شمع فروشی"
                 },
                 "shop/car": {
-                    "name": "نمایندگی خودرو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نمایندگی خودرو'، با کاما جدا می‌شوند>"
+                    "name": "نمایندگی خودرو"
                 },
                 "shop/car_parts": {
-                    "name": "فروشگاه قطعات خودرو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه قطعات خودرو'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه قطعات خودرو"
                 },
                 "shop/car_repair": {
-                    "name": "تعمیرگاه خودرو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تعمیرگاه خودرو'، با کاما جدا می‌شوند>"
+                    "name": "تعمیرگاه خودرو"
                 },
                 "shop/carpet": {
-                    "name": "فرش فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه فرش'، با کاما جدا می‌شوند>"
+                    "name": "فرش فروشی"
                 },
                 "shop/charity": {
-                    "name": "فروشگاه خیریه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه خیریه'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه خیریه"
                 },
                 "shop/cheese": {
-                    "name": "پنیر فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پنیر فروشی'، با کاما جدا می‌شوند>"
+                    "name": "پنیر فروشی"
                 },
                 "shop/chemist": {
-                    "name": "داروخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'داروخانه'، با کاما جدا می‌شوند>"
+                    "name": "داروخانه"
                 },
                 "shop/chocolate": {
-                    "name": "فروشگاه شکلات",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه شکلات'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه شکلات"
                 },
                 "shop/clothes": {
-                    "name": "فروشگاه لباس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه پوشاک'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لباس"
                 },
                 "shop/coffee": {
                     "name": "فروشگاه قهوه",
                     "terms": "کافی شاپ,کافیشاپ,قهوه خونه"
                 },
                 "shop/computer": {
-                    "name": "فروشگاه کامپیوتر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه رایانه'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه کامپیوتر"
                 },
                 "shop/confectionery": {
-                    "name": "فروشگاه آب‌نبات",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آبنبات فروشی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه آب‌نبات"
                 },
                 "shop/convenience": {
-                    "name": "فروشگاه کوچک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'Convenience Store'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه کوچک"
                 },
                 "shop/copyshop": {
-                    "name": "کپی / زیراکس / فوتوکپی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کپی / زیراکس / فوتوکپی'، با کاما جدا می‌شوند>"
+                    "name": "کپی / زیراکس / فوتوکپی"
                 },
                 "shop/cosmetics": {
-                    "name": "فروشگاه آرایشی و بهداشتی ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه آرایشی و بهداشتی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه آرایشی و بهداشتی "
                 },
                 "shop/craft": {
-                    "name": "فروشگاه هنر و صنایع دستی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه هنر و صنایع دستی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه هنر و صنایع دستی"
                 },
                 "shop/curtain": {
-                    "name": "پرده فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه پرده'، با کاما جدا می‌شوند>"
+                    "name": "پرده فروشی"
                 },
                 "shop/dairy": {
-                    "name": "فروشگاه لبنی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'لبنیاتی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لبنی"
                 },
                 "shop/deli": {
-                    "name": "اغذیه فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اغذیه فروشی'، با کاما جدا می‌شوند>"
+                    "name": "اغذیه فروشی"
                 },
                 "shop/department_store": {
-                    "name": "کل فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه بزرگ و کامل'، با کاما جدا می‌شوند>"
+                    "name": "کل فروشی"
                 },
                 "shop/doityourself": {
-                    "name": "فروشگاه DIY",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه ابزار آلات DIY'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه DIY"
                 },
                 "shop/dry_cleaning": {
-                    "name": "خشکشویی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خشکشویی'، با کاما جدا می‌شوند>"
+                    "name": "خشکشویی"
                 },
                 "shop/e-cigarette": {
-                    "name": "فروشگاه سیگار الکترونیکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه سیگار الکترونیکی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه سیگار الکترونیکی"
                 },
                 "shop/electronics": {
-                    "name": "فروشگاه الکترونیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم الکترونیکی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه الکترونیک"
                 },
                 "shop/erotic": {
-                    "name": "فروشگاه لوازم بزرگسالان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم بزرگسالان'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم بزرگسالان"
                 },
                 "shop/fabric": {
-                    "name": "پارچه فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارچه فروشی'، با کاما جدا می‌شوند>"
+                    "name": "پارچه فروشی"
                 },
                 "shop/farm": {
-                    "name": "جایگاه عرضه محصول",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جایگاه عرضه محصول'، با کاما جدا می‌شوند>"
+                    "name": "جایگاه عرضه محصول"
                 },
                 "shop/fashion": {
-                    "name": "فروشگاه مدو فشن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه مدو فشن'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه مدو فشن"
                 },
                 "shop/fishmonger": {
                     "name": "ماهی فروشی"
                 },
                 "shop/florist": {
-                    "name": "گل فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گفلروش'، با کاما جدا می‌شوند>"
+                    "name": "گل فروشی"
                 },
                 "shop/frame": {
-                    "name": "قاب سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'قاب سازی'، با کاما جدا می‌شوند>"
+                    "name": "قاب سازی"
                 },
                 "shop/funeral_directors": {
-                    "name": "غسالخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'غسالخانه'، با کاما جدا می‌شوند>"
+                    "name": "غسالخانه"
                 },
                 "shop/furnace": {
                     "name": "فروشگاه مشعل و اجاق"
                 },
                 "shop/furniture": {
-                    "name": "فروشگاه مبلمان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه مبلمان'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه مبلمان"
                 },
                 "shop/garden_centre": {
-                    "name": "مرکز خرید گل و گلدان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز خرید گل و گلدان'، با کاما جدا می‌شوند>"
+                    "name": "مرکز خرید گل و گلدان"
                 },
                 "shop/gift": {
-                    "name": "هدیه فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه اشیای کادویی'، با کاما جدا می‌شوند>"
+                    "name": "هدیه فروشی"
                 },
                 "shop/greengrocer": {
-                    "name": "سبزی فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'میوه و سبزی فروشی'، با کاما جدا می‌شوند>"
+                    "name": "سبزی فروشی"
                 },
                 "shop/hairdresser": {
-                    "name": "آرایش و پیرایش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آرایشگر'، با کاما جدا می‌شوند>"
+                    "name": "آرایش و پیرایش"
                 },
                 "shop/hardware": {
-                    "name": "فروشگاه سخت افزار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ابزار فروشی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه سخت افزار"
                 },
                 "shop/hearing_aids": {
-                    "name": "فروشگاه لوازم کمک شنوایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم کمک شنوایی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم کمک شنوایی"
                 },
                 "shop/herbalist": {
-                    "name": "عطاری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'عطاری'، با کاما جدا می‌شوند>"
+                    "name": "عطاری"
                 },
                 "shop/hifi": {
-                    "name": "فروشگاه لوازم صوتی Hifi",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم صوتی Hifi'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم صوتی Hifi"
                 },
                 "shop/houseware": {
-                    "name": "فروشگاه لوازم خانگی ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم خانگی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم خانگی "
                 },
                 "shop/interior_decoration": {
-                    "name": "فروشگاه تزئینات داخلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه تزئینات داخلی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه تزئینات داخلی"
                 },
                 "shop/jewelry": {
-                    "name": "جواهر فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جواهرساز'، با کاما جدا می‌شوند>"
+                    "name": "جواهر فروشی"
                 },
                 "shop/kitchen": {
-                    "name": "فروشگاه تزئینات آشپزخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه تزئینات آشپزخانه'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه تزئینات آشپزخانه"
                 },
                 "shop/laundry": {
-                    "name": "خشک‌شویی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خشک‌شویی'، با کاما جدا می‌شوند>"
+                    "name": "خشک‌شویی"
                 },
                 "shop/leather": {
                     "name": "فروشگاه چرم",
                     "terms": "دباغی, چرم فروشی"
                 },
                 "shop/locksmith": {
-                    "name": "قفل سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'قفل‌ساز'، با کاما جدا می‌شوند>"
+                    "name": "قفل سازی"
                 },
                 "shop/lottery": {
                     "name": "فروشگاه قرعه کشی",
                     "terms": "لاتاری"
                 },
                 "shop/mall": {
-                    "name": "مرکز خرید",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز خرید'، با کاما جدا میشوند>"
+                    "name": "مرکز خرید"
                 },
                 "shop/massage": {
-                    "name": "فروشگاه ماساژ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه ماساژ'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه ماساژ"
                 },
                 "shop/medical_supply": {
-                    "name": "فروشگاه تجهیزات پزشکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه تجهیزات پزشکی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه تجهیزات پزشکی"
                 },
                 "shop/mobile_phone": {
-                    "name": "فروشگاه تلفن همراه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه تلفن همراه'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه تلفن همراه"
                 },
                 "shop/money_lender": {
-                    "name": "وام دهنده پول",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'وام دهنده پول'، با کاما جدا می‌شوند>"
+                    "name": "وام دهنده پول"
                 },
                 "shop/motorcycle": {
-                    "name": "نمایندگی موتور سیکلت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نمایندگی موتور سیکلت'، با کاما جدا می‌شوند>"
+                    "name": "نمایندگی موتور سیکلت"
                 },
                 "shop/motorcycle_repair": {
                     "name": "تعمیرگاه موتورسیکلت"
                 },
                 "shop/music": {
-                    "name": "فروشگاه موسیقی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه موسیقی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه موسیقی"
                 },
                 "shop/musical_instrument": {
-                    "name": "فروشگاه سازهای موسیقی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه سازهای موسیقی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه سازهای موسیقی"
                 },
                 "shop/newsagent": {
-                    "name": "فروشگاه روزنامه/مجله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه روزنامه/مجله'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه روزنامه/مجله"
                 },
                 "shop/nutrition_supplements": {
-                    "name": "فروشگاه تغذیه مکمل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه تغذیه مکمل'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه تغذیه مکمل"
                 },
                 "shop/optician": {
-                    "name": "عینک سازی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'عینک سازی'، با کاما جدا می‌شوند>"
+                    "name": "عینک سازی"
                 },
                 "shop/organic": {
-                    "name": "فروشگاه محصولات ارگانیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه محصولات ارگانیک'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه محصولات ارگانیک"
                 },
                 "shop/outdoor": {
-                    "name": "فروشگاه لوازم کوهنوردی و کمپینگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم کوهنوردی و کمپینگ'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم کوهنوردی و کمپینگ"
                 },
                 "shop/paint": {
-                    "name": "فروشگاه رنگ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه رنگ'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه رنگ"
                 },
                 "shop/pastry": {
-                    "name": "شیرینی فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'شیرینی فروشی'، با کاما جدا می‌شوند>"
+                    "name": "شیرینی فروشی"
                 },
                 "shop/pawnbroker": {
-                    "name": "سمساری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سمساری'، با کاما جدا می‌شوند>"
+                    "name": "سمساری"
                 },
                 "shop/perfumery": {
                     "name": "عطر فروشی"
                 },
                 "shop/pet": {
-                    "name": "فروشگاه حیوانات خانگی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه حیوانات خانگی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه حیوانات خانگی"
                 },
                 "shop/photo": {
-                    "name": "فروشگاه عکاسی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه عکاسی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه عکاسی"
                 },
                 "shop/pyrotechnics": {
-                    "name": "فروشگاه لوازم آتش‌بازی ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم آتش‌بازی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم آتش‌بازی "
                 },
                 "shop/radiotechnics": {
-                    "name": "فروشگاه رادیو/اجزای الکترونیکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه رادیو/اجزای الکترونیکی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه رادیو/اجزای الکترونیکی"
                 },
                 "shop/religion": {
-                    "name": "فروشگاه مذهبی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه مذهبی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه مذهبی"
                 },
                 "shop/scuba_diving": {
-                    "name": "فروشگاه لوازم غواصی ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم غواصی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم غواصی "
                 },
                 "shop/seafood": {
-                    "name": "فروشگاه غذای دریایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه غذای دریایی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه غذای دریایی"
                 },
                 "shop/second_hand": {
-                    "name": "دست دوم فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دست دوم فروشی'، با کاما جدا می‌شوند>"
+                    "name": "دست دوم فروشی"
                 },
                 "shop/shoes": {
-                    "name": "کفش فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کفش فروشی'، با کاما جدا می‌شوند>"
+                    "name": "کفش فروشی"
                 },
                 "shop/sports": {
-                    "name": "فروشگاه لوازم ورزشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم ورزشی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم ورزشی"
                 },
                 "shop/stationery": {
-                    "name": "فروشگاه لوازم التحریر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه لوازم التحریر'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه لوازم التحریر"
                 },
                 "shop/storage_rental": {
-                    "name": "کرایه انبار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کرایه انبار'، با کاما جدا می‌شوند>"
+                    "name": "کرایه انبار"
                 },
                 "shop/supermarket": {
-                    "name": "سوپرمارکت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سوپرمارکت'، با کاما جدا میشوند>"
+                    "name": "سوپرمارکت"
                 },
                 "shop/tailor": {
-                    "name": "خیاط",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خیاط'، با کاما جدا می‌شوند>"
+                    "name": "خیاط"
                 },
                 "shop/tattoo": {
-                    "name": "سالن تاتو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سالن تاتو'، با کاما جدا می‌شوند>"
+                    "name": "سالن تاتو"
                 },
                 "shop/tea": {
-                    "name": "فروشگاه چای",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه چای'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه چای"
                 },
                 "shop/ticket": {
-                    "name": "بلیط فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بلیط فروشی'، با کاما جدا می‌شوند>"
+                    "name": "بلیط فروشی"
                 },
                 "shop/tobacco": {
-                    "name": "فروشگاه مواد افیونی تنباکو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه مواد افیونی تنباکو'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه مواد افیونی تنباکو"
                 },
                 "shop/toys": {
-                    "name": "اسباب بازی فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اسباب بازی فروشی'، با کاما جدا می‌شوند>"
+                    "name": "اسباب بازی فروشی"
                 },
                 "shop/travel_agency": {
-                    "name": "آژانس مسافرتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آژانس مسافرتی'، با کاما جدا می‌شوند>"
+                    "name": "آژانس مسافرتی"
                 },
                 "shop/tyres": {
-                    "name": "تایر فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تایر فروشی'، با کاما جدا می‌شوند>"
+                    "name": "تایر فروشی"
                 },
                 "shop/vacant": {
                     "name": "فروشگاه بدون فروشنده"
                 },
                 "shop/vacuum_cleaner": {
-                    "name": "فروشگاه جاروبرقی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه جاروبرقی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه جاروبرقی"
                 },
                 "shop/variety_store": {
-                    "name": "فروشگاه متنوع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه متنوع'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه متنوع"
                 },
                 "shop/video": {
-                    "name": "فیلم فروشی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فیلم فروشی'، با کاما جدا می‌شوند>"
+                    "name": "فیلم فروشی"
                 },
                 "shop/video_games": {
-                    "name": "فروشگاه بازی ویدئویی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه بازی ویدئویی'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه بازی ویدئویی"
                 },
                 "shop/watches": {
                     "name": "ساعت فروشی"
                 },
                 "shop/water_sports": {
-                    "name": "فروشگاه ورزش‌های آبی/شنا ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه ورزش‌های آبی/شنا '، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه ورزش‌های آبی/شنا "
                 },
                 "shop/weapons": {
-                    "name": "فروشگاه سلاح",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه سلاح'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه سلاح"
                 },
                 "shop/window_blind": {
                     "name": "فروشگاه پرده و کرکره",
                     "terms": "فروشگاه پرده، فروشگاه کرکره"
                 },
                 "shop/wine": {
-                    "name": "فروشگاه شراب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'فروشگاه شراب'، با کاما جدا می‌شوند>"
+                    "name": "فروشگاه شراب"
                 },
                 "tourism": {
-                    "name": "توریستی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'توریستی'، با کاما جدا می‌شوند>"
+                    "name": "توریستی"
                 },
                 "tourism/alpine_hut": {
-                    "name": "کلبه آلپ",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کلبه آلپ'، با کاما جدا می‌شوند>"
+                    "name": "کلبه آلپ"
                 },
                 "tourism/apartment": {
-                    "name": "آپارتمان مهمان / کاندو",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آپارتمان مهمان / کاندو'، با کاما جدا می‌شوند>"
+                    "name": "آپارتمان مهمان / کاندو"
                 },
                 "tourism/aquarium": {
                     "name": "آکواریوم",
                     "terms": "آکواریوم ماهی"
                 },
                 "tourism/artwork": {
-                    "name": "اثر هنری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اثر هنری'، با کاما جدا می‌شوند>"
+                    "name": "اثر هنری"
                 },
                 "tourism/attraction": {
-                    "name": "جاذبه‌های توریستی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاذبه‌های توریستی'، با کاما جدا می‌شوند>"
+                    "name": "جاذبه‌های توریستی"
                 },
                 "tourism/camp_site": {
-                    "name": "اردوگاه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اردوگاه'، با کاما جدا میشوند>"
+                    "name": "اردوگاه"
                 },
                 "tourism/caravan_site": {
-                    "name": "پارکینگ ماشین کاروان",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارکینگ ماشین کاروان'، با کاما جدا می‌شوند>"
+                    "name": "پارکینگ ماشین کاروان"
                 },
                 "tourism/gallery": {
-                    "name": "گالری هنری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گالری هنری'، با کاما جدا می‌شوند>"
+                    "name": "گالری هنری"
                 },
                 "tourism/guest_house": {
-                    "name": "مهمان خانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کلبه ییلاقی'، با کاما جدا می‌شوند>"
+                    "name": "مهمان خانه"
                 },
                 "tourism/hostel": {
-                    "name": "مسافرخانه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسافرخانه'، با کاما جدا می‌شوند>"
+                    "name": "مسافرخانه"
                 },
                 "tourism/hotel": {
-                    "name": "هتل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'هتل'، با کاما جدا می‌شوند>"
+                    "name": "هتل"
                 },
                 "tourism/information": {
-                    "name": "اطلاعات",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اطلاعات'، با کاما جدا می‌شوند>"
+                    "name": "اطلاعات"
                 },
                 "tourism/information/board": {
                     "name": "تابلوی اطلاعات",
@@ -5275,95 +4415,75 @@
                     "terms": "دفتر اطلاعات توریستی, کیوسک اطلاعات گردشگری"
                 },
                 "tourism/motel": {
-                    "name": "متل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'متل'، با کاما جدا می‌شوند>"
+                    "name": "متل"
                 },
                 "tourism/museum": {
-                    "name": "موزه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'موزه'، با کاما جدا می‌شوند>"
+                    "name": "موزه"
                 },
                 "tourism/picnic_site": {
-                    "name": "مکان پیک نیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مکان پیک نیک'، با کاما جدا می‌شوند>"
+                    "name": "مکان پیک نیک"
                 },
                 "tourism/theme_park": {
-                    "name": "پارک تفریحی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پارک تفریحی'، با کاما جدا می‌شوند>"
+                    "name": "پارک تفریحی"
                 },
                 "tourism/viewpoint": {
-                    "name": "منظره",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'منظره'، با کاما جدا می‌شوند>"
+                    "name": "منظره"
                 },
                 "tourism/zoo": {
-                    "name": "باغ وحش",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'باغ وحش'، با کاما جدا می‌شوند>"
+                    "name": "باغ وحش"
                 },
                 "traffic_calming": {
-                    "name": "آرام‌بخش ترافیک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آرام‌بخش ترافیک'، با کاما جدا می‌شوند>"
+                    "name": "آرام‌بخش ترافیک"
                 },
                 "traffic_calming/bump": {
-                    "name": "سرعت گیر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سرعت گیر'، با کاما جدا می‌شوند>"
+                    "name": "سرعت گیر"
                 },
                 "traffic_calming/chicane": {
                     "name": "پیچ سرعت گیر",
                     "terms": "سرعت گیر، سرعت کاه"
                 },
                 "traffic_calming/choker": {
-                    "name": "ترافیک خفه‌کن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ترافیک خفه‌کن'، با کاما جدا می‌شوند>"
+                    "name": "ترافیک خفه‌کن"
                 },
                 "traffic_calming/cushion": {
-                    "name": "سرعت گیر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سرعت گیر'، با کاما جدا می‌شوند>"
+                    "name": "سرعت گیر"
                 },
                 "traffic_calming/dip": {
                     "name": "آبراه کوچک",
                     "terms": "کانال باریک آب، آبراه وسط خیابان"
                 },
                 "traffic_calming/hump": {
-                    "name": "سرعت گیر عریض",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سرعت گیر عریض'، با کاما جدا می‌شوند>"
+                    "name": "سرعت گیر عریض"
                 },
                 "traffic_calming/island": {
-                    "name": "جزیره ترافیکی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جزیره ترافیکی'، با کاما جدا می‌شوند>"
+                    "name": "جزیره ترافیکی"
                 },
                 "traffic_calming/rumble_strip": {
-                    "name": "نوار رامبل",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'نوار رامبل'، با کاما جدا می‌شوند>"
+                    "name": "نوار رامبل"
                 },
                 "type/boundary": {
-                    "name": "مرز",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای  'مرز'، با کاما جدا می‌شوند>"
+                    "name": "مرز"
                 },
                 "type/boundary/administrative": {
-                    "name": "مرز حکومتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرز اداری'، با کاما جدا می‌شوند>"
+                    "name": "مرز حکومتی"
                 },
                 "type/multipolygon": {
                     "name": "چند ضلعی"
                 },
                 "type/restriction": {
-                    "name": "محدوده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محدوده'، با کاما جدا می‌شوند>"
+                    "name": "محدوده"
                 },
                 "type/restriction/no_left_turn": {
-                    "name": "گردش به چپ ممنوع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'گردش به چپ ممنوع'، با کاما جدا می‌شوند>"
+                    "name": "گردش به چپ ممنوع"
                 },
                 "type/restriction/no_right_turn": {
-                    "name": "گردش به راست ممنوع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'گردش به راست ممنوع'، با کاما جدا می‌شوند>"
+                    "name": "گردش به راست ممنوع"
                 },
                 "type/restriction/no_straight_on": {
-                    "name": "ورود به مسیر مستقیم ممنوع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'ورود به مسیر مستقیم ممنوع'، با کاما جدا می‌شوند>"
+                    "name": "ورود به مسیر مستقیم ممنوع"
                 },
                 "type/restriction/no_u_turn": {
-                    "name": "دور زدن ممنوع",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'دور زدن ممنوع'، با کاما جدا می‌شوند>"
+                    "name": "دور زدن ممنوع"
                 },
                 "type/restriction/only_left_turn": {
                     "name": "فقط پیچیدن به چپ"
@@ -5378,40 +4498,31 @@
                     "name": "فقط دورزدن"
                 },
                 "type/route": {
-                    "name": "مسیر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر'، با کاما جدا می‌شوند>"
+                    "name": "مسیر"
                 },
                 "type/route/bicycle": {
-                    "name": "مسیر دوچرخه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر دوچرخه'، با کاما جدا می‌شوند>"
+                    "name": "مسیر دوچرخه"
                 },
                 "type/route/bus": {
-                    "name": "مسیر اتوبوس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر اتوبوس'، با کاما جدا می‌شوند>"
+                    "name": "مسیر اتوبوس"
                 },
                 "type/route/detour": {
-                    "name": "مسیر جایگزین",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر انحرافی'، با کاما جدا می‌شوند>"
+                    "name": "مسیر جایگزین"
                 },
                 "type/route/ferry": {
-                    "name": "مسیر کشتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر کشتیرانی '، با کاما جدا می‌شوند>"
+                    "name": "مسیر کشتی"
                 },
                 "type/route/foot": {
-                    "name": "مسیر پیاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر پیاده'، با کاما جدا می‌شوند>"
+                    "name": "مسیر پیاده"
                 },
                 "type/route/hiking": {
-                    "name": "مسیر کوهنوردی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر کوهنوردی'، با کاما جدا می‌شوند>"
+                    "name": "مسیر کوهنوردی"
                 },
                 "type/route/horse": {
-                    "name": "مسیر سوارکاری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر سوارکاری'، با کاما جدا می‌شوند>"
+                    "name": "مسیر سوارکاری"
                 },
                 "type/route/pipeline": {
-                    "name": "مسیر خط لوله",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر خط لوله'، با کاما جدا می‌شوند>"
+                    "name": "مسیر خط لوله"
                 },
                 "type/route/piste": {
                     "name": "مسیر پیست اسکی"
@@ -5421,23 +4532,20 @@
                     "terms": "خط انتقال برق"
                 },
                 "type/route/road": {
-                    "name": "مسیر جاده",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر جاده'، با کاما جدا می‌شوند>"
+                    "name": "مسیر جاده"
                 },
                 "type/route/subway": {
                     "name": "خط مترو"
                 },
                 "type/route/train": {
-                    "name": "مسیر راه آهن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر راه آهن'، با کاما جدا می‌شوند>"
+                    "name": "مسیر راه آهن"
                 },
                 "type/route/tram": {
                     "name": "مسیر تراموا",
                     "terms": "مسیر تراموا, مسیر واگن برقی"
                 },
                 "type/route_master": {
-                    "name": "مسیر اصلی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مسیر اصلی'، با کاما جدا می‌شوند>"
+                    "name": "مسیر اصلی"
                 },
                 "type/site": {
                     "name": "سایت",
@@ -5454,60 +4562,50 @@
                     "name": "راه آبی"
                 },
                 "waterway/boatyard": {
-                    "name": "محوطه قایق",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'محوطه قایق'، با کاما جدا می‌شوند>"
+                    "name": "محوطه قایق"
                 },
                 "waterway/canal": {
-                    "name": "کانال",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کانال'، با کاما جدا می‌شوند>"
+                    "name": "کانال"
                 },
                 "waterway/dam": {
-                    "name": "سد",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سد'، با کاما جدا می‌شوند>"
+                    "name": "سد"
                 },
                 "waterway/ditch": {
-                    "name": "جوی آب",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'جوی آب'، با کاما جدا می‌شوند>"
+                    "name": "جوی آب"
                 },
                 "waterway/dock": {
-                    "name": "بارانداز تر / بارانداز خشک",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بارانداز تر / بارانداز خشک'، با کاما جدا می‌شوند>"
+                    "name": "بارانداز تر / بارانداز خشک"
                 },
                 "waterway/drain": {
                     "name": "فاضلاب",
                     "terms": "زهکش، آبگذر، ابگذر زهکش فاضلاب"
                 },
                 "waterway/fuel": {
-                    "name": "جایگاه سوخت دریایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جایگاه سوخت دریایی'، با کاما جدا می‌شوند>"
+                    "name": "جایگاه سوخت دریایی"
                 },
                 "waterway/river": {
                     "name": "رودخانه",
-                    "terms": "رودخانه، رود, "
+                    "terms": "رودخانه، رود,"
                 },
                 "waterway/riverbank": {
                     "name": "حاشیه رودخانه",
                     "terms": "رودکنار, حاشیه رود"
                 },
                 "waterway/sanitary_dump_station": {
-                    "name": "دفع توالت دریایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفع توالت دریایی'، با کاما جدا می‌شوند>"
+                    "name": "دفع توالت دریایی"
                 },
                 "waterway/stream": {
                     "name": "نهر",
                     "terms": "نهر, جریان, جوی"
                 },
                 "waterway/water_point": {
-                    "name": "آب آشامیدنی دریایی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آب آشامیدنی دریایی'، با کاما جدا می‌شوند>"
+                    "name": "آب آشامیدنی دریایی"
                 },
                 "waterway/waterfall": {
-                    "name": "آبشار",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آبشار'، با کاما جدا میشوند>"
+                    "name": "آبشار"
                 },
                 "waterway/weir": {
-                    "name": "بند",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بند'، با کاما جدا می‌شوند>"
+                    "name": "بند"
                 }
             }
         },
@@ -5520,7 +4618,6 @@
                 "attribution": {
                     "text": "قوانین و بازخورد"
                 },
-                "description": "تصاویر ماهواره‌ای DigitalGlobe Premium",
                 "name": "تصوایر DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5534,7 +4631,6 @@
                 "attribution": {
                     "text": "قوانین و بازخورد"
                 },
-                "description": "تصاویر ماهواره‌ای DigitalGlobe Standard",
                 "name": "تصاویر DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

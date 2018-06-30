@@ -223,6 +223,21 @@
     background-repeat: no-repeat no-repeat;
 }
 
+label.streetside-hires {
+    float: left;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.streetside-hires span {
+    margin-top: 2px;
+}
+.streetside-hires input[type="checkbox"] {
+    float: left;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+}
+
 
 /* Mapillary viewer */
 #mly .domRenderer .TagSymbol {

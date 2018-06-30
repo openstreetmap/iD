@@ -26,6 +26,15 @@ export function rendererBackground(context) {
 
 
     function background(selection) {
+        // If we are displaying an Esri basemap at high zoom,
+        // check its tilemap to see how high the zoom can go
+        if (context.map().zoom() > 18) {
+            var basemap = baseLayer.source();
+            if (basemap && /^EsriWorldImagery/.test(basemap.id)) {
+                var center = context.map().center();
+                basemap.fetchTilemap(center);
+            }
+        }
 
         var baseFilter = '';
         if (detected.cssfilters) {
@@ -114,16 +123,17 @@ export function rendererBackground(context) {
     background.updateImagery = function() {
         if (context.inIntro()) return;
 
-        var b = background.baseLayerSource(),
-            o = _overlayLayers
-                .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
-                .map(function (d) { return d.source().id; })
-                .join(','),
-            meters = geoOffsetToMeters(b.offset()),
-            epsilon = 0.01,
-            x = +meters[0].toFixed(2),
-            y = +meters[1].toFixed(2),
-            q = utilStringQs(window.location.hash.substring(1));
+        var b = background.baseLayerSource();
+        var o = _overlayLayers
+            .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
+            .map(function (d) { return d.source().id; })
+            .join(',');
+
+        var meters = geoOffsetToMeters(b.offset());
+        var epsilon = 0.01;
+        var x = +meters[0].toFixed(2);
+        var y = +meters[1].toFixed(2);
+        var q = utilStringQs(window.location.hash.substring(1));
 
         var id = b.id;
         if (id === 'custom') {
@@ -215,13 +225,12 @@ export function rendererBackground(context) {
         if (!osm) return background;
 
         var blacklists = context.connection().imageryBlacklists();
+        var template = d.template();
+        var fail = false;
+        var tested = 0;
+        var regex;
 
-        var template = d.template(),
-            fail = false,
-            tested = 0,
-            regex, i;
-
-        for (i = 0; i < blacklists.length; i++) {
+        for (var i = 0; i < blacklists.length; i++) {
             try {
                 regex = new RegExp(blacklists[i]);
                 fail = regex.test(template);
@@ -270,7 +279,6 @@ export function rendererBackground(context) {
 
     background.toggleOverlayLayer = function(d) {
         var layer;
-
         for (var i = 0; i < _overlayLayers.length; i++) {
             layer = _overlayLayers[i];
             if (layer.source() === d) {
@@ -350,12 +358,12 @@ export function rendererBackground(context) {
             return geoExtent([args[2], args[1]]);
         }
 
-        var dataImagery = data.imagery || [],
-            q = utilStringQs(window.location.hash.substring(1)),
-            requested = q.background || q.layer,
-            extent = parseMap(q.map),
-            first,
-            best;
+        var dataImagery = data.imagery || [];
+        var q = utilStringQs(window.location.hash.substring(1));
+        var requested = q.background || q.layer;
+        var extent = parseMap(q.map);
+        var first;
+        var best;
 
         // Add all the available imagery sources
         _backgroundSources = dataImagery.map(function(source) {

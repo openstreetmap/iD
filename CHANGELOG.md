@@ -28,6 +28,67 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.9.2
+##### Jun 28, 2018
+
+#### :sparkles: Usability
+* This release contains a few updates to the background imagery list
+
+
+# 2.9.1
+##### Jun 25, 2018
+
+#### :sparkles: Usability
+* Improve the resolution of Bing Streetside ([#5102], thanks [@jharpster], [@LorenMueller])
+  * Adjust viewer parameters to allow users to zoom in more
+  * Add checkbox to toggle between low resolution (faster) and high resolution (slower)
+* Switch low zoom map style based on latitude (improves width of roads closer to equator) ([#5101])
+* Don't zoom in so far when searching for a point ([#5099])
+* `amenity=shelter` no longer assumed to be a building for rendering or feature filtering ([#5084])
+
+[#5102]: https://github.com/openstreetmap/iD/issues/5102
+[#5101]: https://github.com/openstreetmap/iD/issues/5101
+[#5099]: https://github.com/openstreetmap/iD/issues/5099
+[#5084]: https://github.com/openstreetmap/iD/issues/5084
+[@jharpster]: https://github.com/jharpster
+[@LorenMueller]: https://github.com/LorenMueller
+
+#### :bug: Bugfixes
+* Add `royal_cypher` to list of tags that allow capital letters ([#5109])
+* Fix bug that caused '0' to be written into a numeric field when tabbing ([#5087])
+
+[#5109]: https://github.com/openstreetmap/iD/issues/5109
+[#5087]: https://github.com/openstreetmap/iD/issues/5087
+
+#### :mortar_board: Walkthrough / Help
+* Use "Esri World Imagery (Clarity)" imagery in the intro walkthrough
+
+#### :rocket: Presets
+* Add field `height` to `barrier=retaining_wall` preset ([#5113], thanks [@tordans])
+* Add preset for `emergency=lifeguard` ([#4918])
+* Add preset for `emergency=fire_alarm_box`
+* Add `height`, `name` fields to `natural=cliff` preset, improve search terms ([#5095])
+* Add booth field to telephone presets ([#5088])
+* Add "road" and "street" as search terms for all road presets ([#5103])
+* Add preset for `emergency=siren` ([#5100])
+* Add a preset for `emergency=first_aid_kit` ([#5097])
+* Add `indoor` and `ref` fields to `emergency=phone` preset
+* Add `name` field to `highway=motorway_junction` preset ([#5090], [#5092], thanks [@vershwal])
+* Add `building` and `bench` fields to `amenity=shelter` preset ([#5084])
+
+[#5113]: https://github.com/openstreetmap/iD/issues/5113
+[#5103]: https://github.com/openstreetmap/iD/issues/5103
+[#5100]: https://github.com/openstreetmap/iD/issues/5100
+[#5097]: https://github.com/openstreetmap/iD/issues/5097
+[#5095]: https://github.com/openstreetmap/iD/issues/5095
+[#5092]: https://github.com/openstreetmap/iD/issues/5092
+[#5090]: https://github.com/openstreetmap/iD/issues/5090
+[#5088]: https://github.com/openstreetmap/iD/issues/5088
+[#5084]: https://github.com/openstreetmap/iD/issues/5084
+[#4918]: https://github.com/openstreetmap/iD/issues/4918
+[@tordans]: https://github.com/tordans
+[@vershwal]: https://github.com/vershwal
+
 
 # 2.9.0
 ##### Jun 14, 2018

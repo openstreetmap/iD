@@ -1,5 +1,6 @@
 .DS_Store
 .esm-cache
+.vscode/
 /data/data.js
 /dist/*.js
 /dist/*.css

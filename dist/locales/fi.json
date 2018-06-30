@@ -5268,7 +5268,7 @@
                 },
                 "tourism/camp_site": {
                     "name": "Leirintäalue",
-                    "terms": "leiripaikka, karavaanialue, caravan park, matkailuvaunualue, telttailualue, camping "
+                    "terms": "leiripaikka, karavaanialue, caravan park, matkailuvaunualue, telttailualue, camping"
                 },
                 "tourism/caravan_site": {
                     "name": "Asuntoautopysäköinti"
@@ -5511,7 +5511,6 @@
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
                 },
-                "description": "Premium DigitalGlobe -satelliittikuvat",
                 "name": "DigitalGlobe Premium -sateliittikuvat"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5523,7 +5522,6 @@
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
                 },
-                "description": "Standard DigitalGlobe -satelliittikuvat",
                 "name": "DigitalGlobe standardit -satelliittikuvat"
             },
             "DigitalGlobe-Standard-vintage": {

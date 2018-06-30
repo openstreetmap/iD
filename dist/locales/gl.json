@@ -715,6 +715,11 @@
             "zoom": "Zoom na capa",
             "browse": "Buscar un arquivo"
         },
+        "streetside": {
+            "tooltip": "Fotos Streetside de Microsoft",
+            "title": "Superposición de fotos (Bing Streetside)",
+            "report": "Informar dun problema de privacidade con esta imaxe"
+        },
         "mapillary_images": {
             "tooltip": "Fotos ao nivel da rúa de Mapillary",
             "title": "Superposición de fotos (Mapillary)"
@@ -4002,7 +4007,8 @@
                     "name": "Escola de danza"
                 },
                 "leisure/dog_park": {
-                    "name": "Parque canino"
+                    "name": "Parque canino",
+                    "terms": "parque, can, canino, perro"
                 },
                 "leisure/firepit": {
                     "name": "Fogueira"
@@ -5318,7 +5324,6 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Imaxes de satélite Premium DigitalGlobe.",
                 "name": "Imaxes DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5332,7 +5337,6 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Imaxes de satélite DigitalGlobe estándar.",
                 "name": "Imaxes DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {

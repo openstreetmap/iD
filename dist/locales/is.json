@@ -2799,8 +2799,7 @@
             },
             "presets": {
                 "address": {
-                    "name": "Heimilisfang",
-                    "terms": "<heimilisfang,staðsetning>"
+                    "name": "Heimilisfang"
                 },
                 "advertising/billboard": {
                     "name": "Auglýsingaspjald"
@@ -2848,8 +2847,7 @@
                     "name": "Loftlína"
                 },
                 "aeroway/aerodrome": {
-                    "name": "Flugvöllur",
-                    "terms": "<flugvöllur>"
+                    "name": "Flugvöllur"
                 },
                 "aeroway/apron": {
                     "name": "Flughlað"
@@ -5642,7 +5640,6 @@
                 "attribution": {
                     "text": "Skilmálar og umsagnir"
                 },
-                "description": "Gervihnattamyndir frá DigitalGlobe (Premium).",
                 "name": "Myndir frá DigitalGlobe (Premium)"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5656,7 +5653,6 @@
                 "attribution": {
                     "text": "Skilmálar og umsagnir"
                 },
-                "description": "Gervihnattamyndir frá DigitalGlobe (Standard).",
                 "name": "Myndir frá DigitalGlobe (Standard)"
             },
             "DigitalGlobe-Standard-vintage": {

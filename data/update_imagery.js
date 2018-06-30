@@ -8,24 +8,38 @@ var cutoffDate = new Date();
 cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 const blacklist = {
-    'hike_n_bike': true,                  // 'Hike & Bike'
     'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
     'osmfr': true,                        // 'OpenStreetMap (French Style)'
     'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
     'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
     'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
+    'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
     'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
-    'skobbler': true,                     // 'Skobbler'
-    'openpt_map': true,                   // 'OpenPT Map (overlay)'
-    'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-    'qa_no_address': true,                // 'QA No Address'
+    'OpenTopoMap': true,                  // 'OpenTopoMap'
+
+    'hike_n_bike': true,                  // 'Hike & Bike'
     'landsat': true,                      // 'Landsat'
+    'skobbler': true,                     // 'Skobbler'
+    'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
+    'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
+    'tf-landscape': true,                 // 'Thunderforest Landscape'
+    'qa_no_address': true,                // 'QA No Address'
+    'wikimedia-map': true,                // 'Wikimedia Map'
+
+    'openinframap-petroleum': true,
+    'openinframap-power': true,
+    'openinframap-telecoms': true,
+    'openpt_map': true,
+    'openrailwaymap': true,
+    'openseamap': true,
+    'opensnowmap-overlay': true,
 
     'US-TIGER-Roads-2012': true,
     'US-TIGER-Roads-2014': true,
 
     'Waymarked_Trails-Cycling': true,
     'Waymarked_Trails-Hiking': true,
+    'Waymarked_Trails-Horse_Riding': true,
     'Waymarked_Trails-MTB': true,
     'Waymarked_Trails-Skating': true,
     'Waymarked_Trails-Winter_Sports': true,

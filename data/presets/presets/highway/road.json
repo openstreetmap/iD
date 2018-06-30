@@ -16,6 +16,9 @@
     "tags": {
         "highway": "road"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Unknown Road"
 }

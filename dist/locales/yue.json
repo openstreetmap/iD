@@ -1,5 +1,10 @@
 {
     "yue": {
+        "icons": {
+            "information": "知",
+            "remove": "徐",
+            "undo": "返事"
+        },
         "modes": {
             "add_area": {
                 "title": "範圍",
@@ -228,6 +233,7 @@
             "localized_translation_language": "揀話",
             "localized_translation_name": "名"
         },
+        "zoom_in_edit": "放大去修改",
         "logout": "簽走",
         "loading_auth": "駁上去公家街圖⋯⋯",
         "report_a_bug": "報錯",
@@ -245,9 +251,11 @@
             "title": "傳上去公家街圖",
             "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
             "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
+            "request_review": "想有人翻睇我修改。",
             "save": "傳上",
             "cancel": "唔記",
             "changes": "變更 {count} 個",
+            "download_changes": "公家街圖修改嘅檔案，傳落來",
             "warnings": "警告",
             "modified": "改咗",
             "deleted": "刪咗",
@@ -263,7 +271,8 @@
         "info_panels": {
             "key": "I",
             "background": {
-                "key": "B"
+                "key": "B",
+                "zoom": "放大縮細"
             },
             "history": {
                 "last_edit": "最近修改",
@@ -429,6 +438,7 @@
                 "keep_remote": "用佢",
                 "restore": "囘復",
                 "delete": "由佢唔要",
+                "download_changes": "或者，公家街圖修改嘅檔案，傳落來",
                 "done": "衝突通通解決！"
             }
         },
@@ -441,8 +451,16 @@
         },
         "success": {
             "just_edited": "你啱啱改咗公家街圖！",
+            "thank_you": "謝君修善輿圖。",
+            "thank_you_location": "謝君修善 {where} 之輿圖。",
+            "help_html": "君所修所改，幾分鐘就會上公家街圖。其他輿圖，或者遲啲收到。",
             "help_link_text": "明細",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "公家街圖處，睇返修改",
+            "changeset_id": "修改編號： {changeset_id}",
+            "like_osm": "中意公家街圖？出面睇下傾下：",
+            "missing": "有嘢無列明出來？",
+            "tell_us": "話過我知！"
         },
         "confirm": {
             "cancel": "唔做"
@@ -463,6 +481,7 @@
             "used_with": "同{type}一齊用"
         },
         "validations": {
+            "disconnected_highway": "道無駁通",
             "untagged_point": "未有籤嘅點",
             "untagged_point_tooltip": "揀種地貌，兼且寫呢處係乜來。",
             "untagged_line": "冇籤嘅綫",
@@ -471,6 +490,10 @@
             "untagged_area_tooltip": "揀種地貌，兼且寫呢範圍係乜來。",
             "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
             "deprecated_tags": "廢籤：{tags}"
+        },
+        "zoom": {
+            "in": "放大",
+            "out": "縮細"
         },
         "cannot_zoom": "今下模式，無得再縮。",
         "full_screen": "來回全螢幕",
@@ -486,7 +509,14 @@
             "view_on_mapillary": "去輿兵度睇張相"
         },
         "help": {
-            "title": "指南"
+            "title": "指南",
+            "editing": {
+                "upload_h": "傳上",
+                "upload": "傳上修改之前，要入\n [changeset comment]\n（https://wiki.openstreetmap.org/wiki/Good_changeset_comments）。按下**傳上**，送去公家街圖。在此併入輿圖，人人公開見到。"
+            },
+            "imagery": {
+                "sources_h": "圖來歷"
+            }
         },
         "intro": {
             "done": "搞掂",
@@ -526,6 +556,9 @@
             "title": "鍵盤快掣",
             "tooltip": "螢幕上睇到鍵盤快掣",
             "browsing": {
+                "navigation": {
+                    "zoom": "放大／縮細"
+                },
                 "help": {
                     "keyboard": "睇鍵盤快掣"
                 }
@@ -642,9 +675,11 @@
                         "hamlet": "村仔",
                         "housename": "屋名",
                         "housenumber": "一百二十三號",
+                        "housenumber!jp": "屋號／地號",
                         "place": "地",
                         "postcode": "郵政編號",
                         "province": "省",
+                        "province!jp": "縣",
                         "state": "州",
                         "street": "街",
                         "subdistrict": "分區",
@@ -715,6 +750,22 @@
                 "barrier": {
                     "label": "類"
                 },
+                "bath/open_air": {
+                    "label": "露天"
+                },
+                "bath/sand_bath": {
+                    "label": "沙浴"
+                },
+                "bath/type": {
+                    "options": {
+                        "foot_bath": "浸腳",
+                        "hot_spring": "溫泉",
+                        "onsen": "日本溫泉"
+                    }
+                },
+                "beauty": {
+                    "label": "舖類"
+                },
                 "bench": {
                     "label": "長凳"
                 },
@@ -733,17 +784,35 @@
                         "whole": "全血"
                     }
                 },
+                "board_type": {
+                    "label": "類"
+                },
+                "boules": {
+                    "label": "類"
+                },
                 "boundary": {
                     "label": "類"
                 },
                 "brand": {
                     "label": "牌"
                 },
+                "brewery": {
+                    "label": "生啤"
+                },
+                "bridge": {
+                    "label": "類"
+                },
                 "building": {
                     "label": "屋宇"
                 },
                 "building_area": {
                     "label": "屋宇"
+                },
+                "bunker_type": {
+                    "label": "類"
+                },
+                "cables": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "placeholder": "45, 90, 180, 270"
@@ -755,11 +824,17 @@
                 "castle_type": {
                     "label": "類"
                 },
+                "clothes": {
+                    "label": "衣"
+                },
                 "club": {
                     "label": "類"
                 },
                 "collection_times": {
                     "label": "收集時間"
+                },
+                "comment": {
+                    "label": "變更之留言"
                 },
                 "construction": {
                     "label": "類"
@@ -773,11 +848,17 @@
                 "craft": {
                     "label": "類"
                 },
+                "crop": {
+                    "label": "作物"
+                },
                 "crossing": {
                     "label": "類"
                 },
                 "currency_multi": {
                     "label": "錢類"
+                },
+                "cutting": {
+                    "label": "類"
                 },
                 "cycle_network": {
                     "label": "網絡"
@@ -835,8 +916,45 @@
                 "description": {
                     "label": "描述"
                 },
+                "devices": {
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "換得尿片"
+                },
+                "direction": {
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "方向",
+                    "options": {
+                        "E": "東",
+                        "ENE": "東北偏東",
+                        "ESE": "東南偏東",
+                        "N": "北",
+                        "NE": "東北",
+                        "NNE": "東北偏北",
+                        "NNW": "西北偏北",
+                        "NW": "西北",
+                        "S": "南",
+                        "SE": "東南",
+                        "SSE": "東南偏南",
+                        "SSW": "西南偏南",
+                        "SW": "西南",
+                        "W": "西",
+                        "WNW": "西北偏西",
+                        "WSW": "西北偏西"
+                    }
+                },
+                "direction_clock": {
+                    "label": "方向",
+                    "options": {
+                        "anticlockwise": "逆時針",
+                        "clockwise": "順時針"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "方向"
                 },
                 "display": {
                     "label": "顯示"
@@ -863,6 +981,9 @@
                 "email": {
                     "label": "電郵",
                     "placeholder": "example@example.com"
+                },
+                "embankment": {
+                    "label": "類"
                 },
                 "emergency": {
                     "label": "急症室"
@@ -895,6 +1016,9 @@
                 "fixme": {
                     "label": "整好我"
                 },
+                "ford": {
+                    "label": "類"
+                },
                 "fuel": {
                     "label": "燃料"
                 },
@@ -922,12 +1046,18 @@
                 "generator/type": {
                     "label": "類"
                 },
+                "government": {
+                    "label": "類"
+                },
                 "handicap": {
                     "label": "差點",
                     "placeholder": "1-18"
                 },
                 "handrail": {
                     "label": "扶手"
+                },
+                "healthcare": {
+                    "label": "類"
                 },
                 "height": {
                     "label": "高（米）"
@@ -960,6 +1090,9 @@
                 },
                 "indoor": {
                     "label": "戶內"
+                },
+                "industrial": {
+                    "label": "類"
                 },
                 "information": {
                     "label": "類"
@@ -1058,8 +1191,14 @@
                     "label": "限速",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60..."
+                },
                 "maxstay": {
                     "label": "留得時間"
+                },
+                "memorial": {
+                    "label": "類"
                 },
                 "mtb/scale": {
                     "label": "越野單車徑難度",
@@ -1191,6 +1330,7 @@
                     "label": "畀錢方式"
                 },
                 "phone": {
+                    "label": "電話",
                     "placeholder": "+852 12345678"
                 },
                 "piste/difficulty": {
@@ -1248,6 +1388,9 @@
                 },
                 "recycling_accepts": {
                     "label": "收得"
+                },
+                "ref_road_number": {
+                    "label": "道號"
                 },
                 "relation": {
                     "label": "類"
@@ -1347,6 +1490,12 @@
                     },
                     "placeholder": "轆仔、有轆、越野⋯⋯"
                 },
+                "social_facility": {
+                    "label": "類"
+                },
+                "source": {
+                    "label": "來歷"
+                },
                 "stars": {
                     "label": "星級"
                 },
@@ -1354,7 +1503,7 @@
                     "label": "停車指示",
                     "options": {
                         "all": "所有方向",
-                        "minor": "小車路"
+                        "minor": "車道仔"
                     }
                 },
                 "structure": {
@@ -1383,6 +1532,9 @@
                 "surface": {
                     "label": "表面"
                 },
+                "switch": {
+                    "label": "類"
+                },
                 "tactile_paving": {
                     "label": "盲人引路徑"
                 },
@@ -1404,7 +1556,13 @@
                         "pitlatrine": "廁坑／旱廁"
                     }
                 },
+                "tomb": {
+                    "label": "類"
+                },
                 "tourism": {
+                    "label": "類"
+                },
+                "tower/type": {
                     "label": "類"
                 },
                 "tracktype": {
@@ -1417,6 +1575,12 @@
                         "grade5": "軟：泥／沙／草"
                     },
                     "placeholder": "實、多數實、軟⋯⋯"
+                },
+                "trade": {
+                    "label": "類"
+                },
+                "traffic_calming": {
+                    "label": "類"
                 },
                 "traffic_signals": {
                     "label": "類"
@@ -1433,8 +1597,19 @@
                     },
                     "placeholder": "極好、好、差⋯⋯"
                 },
+                "transformer": {
+                    "label": "類"
+                },
                 "trees": {
                     "label": "樹"
+                },
+                "tunnel": {
+                    "label": "類"
+                },
+                "usage_rail": {
+                    "options": {
+                        "military": "軍"
+                    }
                 },
                 "visibility": {
                     "label": "顯隱",
@@ -1443,6 +1618,9 @@
                         "house": "過五米（十六呎）",
                         "street": "五到二十米（十六到六十五呎）"
                     }
+                },
+                "wall": {
+                    "label": "類"
                 },
                 "water": {
                     "label": "類"
@@ -1468,6 +1646,9 @@
                 },
                 "wikipedia": {
                     "label": "維基百科全書"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
                 }
             },
             "presets": {
@@ -1624,6 +1805,9 @@
                     "name": "墳地",
                     "terms": "Graveyard,墓地,墳地,墳場"
                 },
+                "amenity/hospital": {
+                    "name": "醫院地"
+                },
                 "amenity/library": {
                     "name": "圖書館",
                     "terms": "Library,圖書館,拉記"
@@ -1719,6 +1903,9 @@
                     "name": "範圍",
                     "terms": "Area,區域,範圍"
                 },
+                "area/highway": {
+                    "name": "道面"
+                },
                 "barrier": {
                     "name": "屏障",
                     "terms": "Barrier,屏障,阻擋,障礙,障礙物"
@@ -1743,6 +1930,9 @@
                     "name": "單車減速欄",
                     "terms": "Cycle Barrier,單車減速欄,單車矮欄"
                 },
+                "barrier/ditch": {
+                    "name": "坑"
+                },
                 "barrier/entrance": {
                     "name": "入口"
                 },
@@ -1757,6 +1947,9 @@
                 "barrier/hedge": {
                     "name": "樹籬",
                     "terms": "Hedge,樹籬"
+                },
+                "barrier/kerb": {
+                    "name": "路邊石"
                 },
                 "barrier/kissing_gate": {
                     "name": "單人轉門 ",
@@ -1818,6 +2011,9 @@
                     "name": "住宅樓宇",
                     "terms": "Residential Building,住宅建築物,住宅樓宇"
                 },
+                "building/retail": {
+                    "name": "舖屋宇"
+                },
                 "craft/watchmaker": {
                     "name": "鐘錶匠",
                     "terms": "Watchmaker,鐘錶匠"
@@ -1841,6 +2037,12 @@
                 "emergency/phone": {
                     "name": "求助電話",
                     "terms": "Emergency Phone,求助電話,緊急電話"
+                },
+                "footway/crosswalk": {
+                    "name": "行人過路"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "升起行人過路"
                 },
                 "footway/sidewalk": {
                     "name": "行人路",
@@ -1877,6 +2079,12 @@
                     "name": "馬徑",
                     "terms": "Bridle Path,馬徑,馬道"
                 },
+                "highway/crosswalk": {
+                    "name": "行人過路"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "升起行人過路"
+                },
                 "highway/cycleway": {
                     "name": "單車徑",
                     "terms": "Cycle Path,單車徑,自行車道"
@@ -1905,8 +2113,14 @@
                     "name": "徑",
                     "terms": "Path,徑,路徑"
                 },
+                "highway/pedestrian_area": {
+                    "name": "行人地"
+                },
+                "highway/pedestrian_line": {
+                    "name": "行人街"
+                },
                 "highway/primary": {
-                    "name": "大路",
+                    "name": "大道",
                     "terms": "Primary Road,主要道路,大路"
                 },
                 "highway/primary_link": {
@@ -1914,15 +2128,15 @@
                     "terms": "Primary Link,主要道路匝道,主要道路連接路,大路駁路"
                 },
                 "highway/residential": {
-                    "name": "住宅路",
+                    "name": "住宅道",
                     "terms": "Residential Road,住宅區道路,住宅路"
                 },
                 "highway/road": {
-                    "name": "未明路",
+                    "name": "未明道",
                     "terms": "Unknown Road,不明路,不知路,未明路,未知嘅路,未知種類的道路,未知種類道路"
                 },
                 "highway/secondary": {
-                    "name": "中路",
+                    "name": "中道",
                     "terms": "Secondary Road,中路,次要道路"
                 },
                 "highway/secondary_link": {
@@ -1930,7 +2144,7 @@
                     "terms": "Secondary Link,中路駁路,次級道路連接路,次要道路匝道"
                 },
                 "highway/service": {
-                    "name": "支路",
+                    "name": "支道",
                     "terms": "Service Road,支路,輔助道路"
                 },
                 "highway/service/alley": {
@@ -1966,19 +2180,22 @@
                     "terms": "Street Lamp,街燈,路燈,道燈"
                 },
                 "highway/tertiary": {
-                    "name": "細路",
+                    "name": "細道",
                     "terms": "Tertiary Road,三級道路,細路"
                 },
                 "highway/tertiary_link": {
                     "name": "細路駁路",
                     "terms": "Tertiary Link,三級道路匝道,三級道路連接路,細路駁路"
                 },
+                "highway/track": {
+                    "name": "無修道"
+                },
                 "highway/traffic_signals": {
                     "name": "紅綠燈",
                     "terms": "Traffic Signals,交通燈,紅綠燈"
                 },
                 "highway/trunk": {
-                    "name": "幹路",
+                    "name": "幹道",
                     "terms": "Trunk Road,幹線道路,幹路,幹道"
                 },
                 "highway/trunk_link": {
@@ -1988,6 +2205,9 @@
                 "highway/turning_circle": {
                     "name": "迴旋處",
                     "terms": "Turning Circle,回轉圈,廻旋處,環島,迴旋處"
+                },
+                "highway/unclassified": {
+                    "name": "道仔／無類道"
                 },
                 "historic": {
                     "name": "史蹟",
@@ -2025,6 +2245,9 @@
                     "name": "路邊神祠",
                     "terms": "Wayside Shrine,路邊神社,路邊神祠"
                 },
+                "landuse/aquaculture": {
+                    "name": "水產"
+                },
                 "landuse/basin": {
                     "name": "盆地",
                     "terms": "Basin,水池,盆地"
@@ -2033,9 +2256,18 @@
                     "name": "墳場",
                     "terms": "Cemetery,墓地,墳場"
                 },
+                "landuse/commercial": {
+                    "name": "商地"
+                },
                 "landuse/construction": {
                     "name": "地盤",
                     "terms": "Construction,地盤,建築工程,建築物"
+                },
+                "landuse/farm": {
+                    "name": "田地"
+                },
+                "landuse/farmland": {
+                    "name": "田地"
                 },
                 "landuse/farmyard": {
                     "name": "地堂",
@@ -2049,9 +2281,18 @@
                     "name": "草地",
                     "terms": "Grass,草地"
                 },
+                "landuse/industrial": {
+                    "name": "工地"
+                },
                 "landuse/meadow": {
                     "name": "牧地",
                     "terms": "Meadow,牧地,牧場"
+                },
+                "landuse/military": {
+                    "name": "軍地"
+                },
+                "landuse/military/airfield": {
+                    "name": "軍用機場"
                 },
                 "landuse/orchard": {
                     "name": "菓園",
@@ -2060,6 +2301,15 @@
                 "landuse/quarry": {
                     "name": "石塘",
                     "terms": "Quarry,石塘,石礦場,礦場"
+                },
+                "landuse/religious": {
+                    "name": "拜神地"
+                },
+                "landuse/residential": {
+                    "name": "住地"
+                },
+                "landuse/retail": {
+                    "name": "舖地"
                 },
                 "landuse/vineyard": {
                     "name": "葡萄園",
@@ -2204,6 +2454,9 @@
                     "name": "天然",
                     "terms": "Natural,天然,自然,自然物件"
                 },
+                "natural/bare_rock": {
+                    "name": "石地"
+                },
                 "natural/bay": {
                     "name": "灣",
                     "terms": "Bay,海灣,灣"
@@ -2211,6 +2464,9 @@
                 "natural/beach": {
                     "name": "灘",
                     "terms": "Beach,沙灘,海灘,灘"
+                },
+                "natural/cave_entrance": {
+                    "name": "洞口"
                 },
                 "natural/cliff": {
                     "name": "崖",
@@ -2338,6 +2594,9 @@
                     "name": "研究所",
                     "terms": "Research Office,研究所"
                 },
+                "office/surveyor": {
+                    "name": "量地官寫字樓"
+                },
                 "office/telecommunication": {
                     "name": "電話公司寫字樓",
                     "terms": "Telecom Office,電信公司,電話公司寫字樓"
@@ -2360,8 +2619,11 @@
                     "terms": "Hamlet,村仔,村莊"
                 },
                 "place/island": {
-                    "name": "島",
-                    "terms": "Island,島,島嶼"
+                    "name": "洲",
+                    "terms": "Island,洲,島,島嶼"
+                },
+                "place/islet": {
+                    "name": "洲仔"
                 },
                 "place/isolated_dwelling": {
                     "name": "孤離居所",
@@ -2423,6 +2685,9 @@
                 "railway/disused": {
                     "name": "停用鐵路",
                     "terms": "Disused Railway,停用鐵路,廢棄的鐵路"
+                },
+                "railway/level_crossing": {
+                    "name": "鐵道口（車道）"
                 },
                 "railway/monorail": {
                     "name": "單軌",
@@ -2611,9 +2876,15 @@
                     "name": "影相舖",
                     "terms": "Photography Store,影相舖,照相館"
                 },
+                "shop/pyrotechnics": {
+                    "name": "煙花舖"
+                },
                 "shop/radiotechnics": {
                     "name": "無綫電／電子零件舖",
                     "terms": "Radio Component Store,Electronic Component Store,無線電零件舖,無綫電零件舖,電子零件舖"
+                },
+                "shop/religion": {
+                    "name": "宗教舖"
                 },
                 "shop/shoes": {
                     "name": "鞋舖",
@@ -2733,6 +3004,30 @@
                     "name": "限制",
                     "terms": "Restriction,限制"
                 },
+                "type/restriction/no_left_turn": {
+                    "name": "不得左轉"
+                },
+                "type/restriction/no_right_turn": {
+                    "name": "不得右轉"
+                },
+                "type/restriction/no_straight_on": {
+                    "name": "不得直行"
+                },
+                "type/restriction/no_u_turn": {
+                    "name": "不得倒頭"
+                },
+                "type/restriction/only_left_turn": {
+                    "name": "只能左轉"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "只能右轉"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "只能直行"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "只能倒頭"
+                },
                 "type/route": {
                     "name": "路綫",
                     "terms": "Route,路綫,路線"
@@ -2835,15 +3130,33 @@
                 "attribution": {
                     "text": "條款同回應"
                 },
-                "description": "數碼地球，特等衞星相。",
                 "name": "數碼地球特等相。"
+            },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "條款同回應"
+                }
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "條款同回應"
                 },
-                "description": "數碼地球，一般衞星相。",
                 "name": "數碼地球一般相。"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "條款同回應"
+                }
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "條款同回應"
+                }
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "條款同回應"
+                }
             },
             "MAPNIK": {
                 "attribution": {
@@ -2858,6 +3171,11 @@
                 },
                 "description": "衞星同般空相。",
                 "name": "輿圖盒衛星"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "條款同回應"
+                }
             },
             "tf-cycle": {
                 "name": "雷林公家單車地圖"

@@ -1,9 +1,6 @@
 describe('iD.serviceOpenstreetcam', function() {
     var dimensions = [64, 64],
-        ua = navigator.userAgent,
-        isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null),
-        uaMock = function () { return ua; },
-        context, server, openstreetcam, orig;
+        context, server, openstreetcam;
 
     before(function() {
         iD.services.openstreetcam = iD.serviceOpenstreetcam;
@@ -23,28 +20,10 @@ describe('iD.serviceOpenstreetcam', function() {
         server = sinon.fakeServer.create();
         openstreetcam = iD.services.openstreetcam;
         openstreetcam.reset();
-
-        /* eslint-disable no-global-assign */
-        /* mock userAgent */
-        if (isPhantom) {
-            orig = navigator;
-            navigator = Object.create(orig, { userAgent: { get: uaMock }});
-        } else {
-            orig = navigator.__lookupGetter__('userAgent');
-            navigator.__defineGetter__('userAgent', uaMock);
-        }
     });
 
     afterEach(function() {
         server.restore();
-
-        /* restore userAgent */
-        if (isPhantom) {
-            navigator = orig;
-        } else {
-            navigator.__defineGetter__('userAgent', orig);
-        }
-        /* eslint-enable no-global-assign */
     });
 
 

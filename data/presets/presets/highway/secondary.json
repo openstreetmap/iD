@@ -18,6 +18,9 @@
     "tags": {
         "highway": "secondary"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Secondary Road"
 }

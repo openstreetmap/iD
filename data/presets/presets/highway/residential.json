@@ -17,6 +17,9 @@
     "tags": {
         "highway": "residential"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Residential Road"
 }
