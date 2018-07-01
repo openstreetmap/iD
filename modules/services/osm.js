@@ -665,7 +665,7 @@ export default {
             s / 2 - projection.translate()[1]
         ];
 
-        // what tiles cover the view
+        // what tiles cover the view?
         var tiler = d3_geoTile()
             .scaleExtent([tilezoom, tilezoom])
             .scale(s)
@@ -685,6 +685,8 @@ export default {
             };
         });
 
+        // remove inflight requests that no longer cover the view..
+        var hadRequests = !_isEmpty(cache.inflight);
         _filter(cache.inflight, function(v, i) {
             var wanted = _find(tiles, function(tile) { return i === tile.id; });
             if (!wanted) {
@@ -693,12 +695,16 @@ export default {
             return !wanted;
         }).map(abortRequest);
 
+        if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
+            dispatch.call('loaded');    // stop the spinner
+        }
 
+        // issue new requests..
         tiles.forEach(function(tile) {
             var id = tile.id;
             if (cache.loaded[id] || cache.inflight[id]) return;
             if (!loadingNotes && _isEmpty(cache.inflight)) {
-                dispatch.call('loading');    // start the spinner
+                dispatch.call('loading');   // start the spinner
             }
 
             cache.inflight[id] = that.loadFromAPI(
@@ -717,7 +723,7 @@ export default {
                             callback(err, _extend({ data: parsed }, tile));
                         }
                         if (_isEmpty(cache.inflight)) {
-                            dispatch.call('loaded');    // stop the spinner
+                            dispatch.call('loaded');     // stop the spinner
                         }
                     }
 
