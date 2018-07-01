@@ -62,20 +62,35 @@ export function svgNotes(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-    function click(d) {
-        _selected = d;
-        context.ui().sidebar.show(noteEditor, d);
+
+    function click(which) {
+        _selected = which;
+        context.map().centerEase(which.loc);
+
+        layer.selectAll('.note')
+            .classed('selected', function(d) { return d === _selected; });
+
+        context.ui().sidebar.show(noteEditor, which);
     }
 
-    function mouseover(d) {
-        context.ui().sidebar.show(noteEditor, d);
+
+    function mouseover(which) {
+        layer.selectAll('.note')
+            .classed('hovered', function(d) { return d === which; });
+
+        context.ui().sidebar.show(noteEditor, which);
     }
 
-    function mouseout(d) {
+
+    function mouseout() {
+        layer.selectAll('.note')
+            .classed('hovered', false);
+
         // TODO: check if the item was clicked. If so, it should remain on the sidebar.
         // TODO: handle multi-clicks. Otherwise, utilize behavior/select.js
         context.ui().sidebar.hide();
     }
+
 
     function update() {
         var service = getService();
@@ -88,9 +103,10 @@ export function svgNotes(projection, context, dispatch) {
         notes.exit()
             .remove();
 
+        // enter
         var notesEnter = notes.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id; })
+            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
@@ -102,7 +118,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-24px')
-            .attr('xlink:href', '#fas-comment-alt')
+            .attr('xlink:href', '#fas-comment-alt');
 
         notesEnter
             .append('use')
@@ -111,8 +127,9 @@ export function svgNotes(projection, context, dispatch) {
             .attr('height', '20px')
             .attr('x', '-10px')
             .attr('y', '-22px')
-            .attr('xlink:href', '#fas-comment-alt')
+            .attr('xlink:href', '#fas-comment-alt');
 
+        // update
         notes
             .merge(notesEnter)
             .sort(function(a, b) {
@@ -120,8 +137,10 @@ export function svgNotes(projection, context, dispatch) {
                     : (b === _selected) ? -1
                     : b.loc[1] - a.loc[1];  // sort Y
             })
+            .classed('selected', function(d) { return d === _selected; })
             .attr('transform', transform);
     }
+
 
     function drawNotes(selection) {
         var enabled = svgNotes.enabled;
