@@ -13,7 +13,10 @@ import {
     modeSelect
 } from '../modes';
 
-import { osmEntity } from '../osm';
+import {
+    osmEntity,
+    osmNote
+} from '../osm';
 
 
 export function behaviorSelect(context) {
@@ -115,14 +118,19 @@ export function behaviorSelect(context) {
         var datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__);
         var mode = context.mode();
 
-        var entity = datum && datum.properties && datum.properties.entity;
+        var entity;
+
+        // check if datum is a note
+        if (datum instanceof osmNote) { entity = datum; }
+        else { entity = datum && datum.properties && datum.properties.entity; }
+
         if (entity) datum = entity;
 
         if (datum && datum.type === 'midpoint') {
             datum = datum.parents[0];
         }
 
-        if (!(datum instanceof osmEntity)) {
+        if (!(datum instanceof osmEntity) && !(datum instanceof osmNote)) {
             // clicked nothing..
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));

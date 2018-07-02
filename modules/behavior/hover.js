@@ -111,14 +111,9 @@ export function behaviorHover(context) {
                 .classed('hover-suppressed', false);
 
             var entity;
-            if (datum instanceof osmEntity) {
+            if (datum instanceof osmNote || datum instanceof osmEntity) {
                 entity = datum;
-            }
-            // TODO: TAH - reintroduce if we need a check for osmNote here
-            // else if (datum instanceof osmNote) {
-            //     entity = datum;
-            // }
-             else {
+            } else {
                 entity = datum && datum.properties && datum.properties.entity;
             }
 
@@ -130,7 +125,7 @@ export function behaviorHover(context) {
                     return;
                 }
 
-                var selector = '.' + entity.id;
+                var selector =  (datum instanceof osmNote) ? 'note-' + entity.id : '.' + entity.id;
 
                 if (entity.type === 'relation') {
                     entity.members.forEach(function(member) {
@@ -143,7 +138,11 @@ export function behaviorHover(context) {
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                dispatch.call('hover', this, !suppressed && entity.id);
+                if (datum instanceof osmNote) {
+                    dispatch.call('hover', this, !suppressed && entity);
+                } else {
+                    dispatch.call('hover', this, !suppressed && entity.id);
+                }
 
             } else {
                 dispatch.call('hover', this, null);

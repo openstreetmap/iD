@@ -3,6 +3,8 @@ import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
+import { osmNote } from '../osm';
+
 import { uiNoteEditor } from '../ui';
 
 export function svgNotes(projection, context, dispatch) {
@@ -62,36 +64,6 @@ export function svgNotes(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-
-    function click(which) {
-        _selected = which;
-        context.map().centerEase(which.loc);
-
-        layer.selectAll('.note')
-            .classed('selected', function(d) { return d === _selected; });
-
-        context.ui().sidebar.show(noteEditor, which);
-    }
-
-
-    function mouseover(which) {
-        layer.selectAll('.note')
-            .classed('hovered', function(d) { return d === which; });
-
-        context.ui().sidebar.show(noteEditor, which);
-    }
-
-
-    function mouseout() {
-        layer.selectAll('.note')
-            .classed('hovered', false);
-
-        // TODO: check if the item was clicked. If so, it should remain on the sidebar.
-        // TODO: handle multi-clicks. Otherwise, utilize behavior/select.js
-        context.ui().sidebar.hide();
-    }
-
-
     function update() {
         var service = getService();
         var data = (service ? service.notes(projection) : []);
@@ -106,10 +78,7 @@ export function svgNotes(projection, context, dispatch) {
         // enter
         var notesEnter = notes.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
-            .on('click', click)
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout);
+            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
 
         notesEnter
             .append('use')
