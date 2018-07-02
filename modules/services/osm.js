@@ -40,10 +40,9 @@ var oauth = osmAuth({
 });
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
-var _tileCache = { loaded: {}, inflight: {} };
-var _noteCache = { loaded: {}, inflight: {}, rtree: rbush() };
+var _tileCache = { loaded: {}, inflight: {}, seen: {} };
+var _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
 var _changeset = {};
-var _seenEntity = {};
 
 var _connectionID = 1;
 var _tileZoom = 16;
@@ -191,61 +190,60 @@ var parsers = {
     note: function parseNote(obj, uid) {
         var attrs = obj.attributes;
         var childNodes = obj.childNodes;
-        var parsedNote = {};
+        var props = {};
 
-        parsedNote.loc = getLoc(attrs);
+        props.id = uid;
+        props.loc = getLoc(attrs);
 
         _forEach(childNodes, function(node) {
             if (node.nodeName !== '#text') {
                 var nodeName = node.nodeName;
                 // if the element is comments, parse the comments
                 if (nodeName === 'comments') {
-                    parsedNote[nodeName] = parseComments(node.childNodes);
+                    props[nodeName] = parseComments(node.childNodes);
                 } else {
-                    parsedNote[nodeName] = node.innerHTML;
+                    props[nodeName] = node.innerHTML;
                 }
             }
         });
 
-        parsedNote.id = uid;
-        parsedNote.type = 'note';
-
-        return {
-            minX: parsedNote.loc[0],
-            minY: parsedNote.loc[1],
-            maxX: parsedNote.loc[0],
-            maxY: parsedNote.loc[1],
-            data: new osmNote(parsedNote)
-        };
+        return new osmNote(props);
     }
 };
 
 
-function parse(xml, callback, options) {
-    options = _extend({ cache: true }, options);
-    if (!xml || !xml.childNodes) return;
+function parseXML(xml, callback, options) {
+    options = _extend({ skipSeen: true }, options);
+    if (!xml || !xml.childNodes) {
+        return callback({ message: 'No XML', status: -1 });
+    }
 
     var root = xml.childNodes[0];
     var children = root.childNodes;
+    utilIdleWorker(children, parseChild, done);
+
+
+    function done(results) {
+        callback(null, results);
+    }
 
     function parseChild(child) {
         var parser = parsers[child.nodeName];
-        if (!parser) return;
+        if (!parser) return null;
 
         var uid;
         if (child.nodeName === 'note') {
             uid = child.getElementsByTagName('id')[0].textContent;
         } else {
             uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
-            if (options.cache && _seenEntity[uid]) {
-                return null;  // avoid reparsing a "seen" entity
+            if (options.skipSeen) {
+                if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
+                _tileCache.seen[uid] = true;
             }
         }
 
         return parser(child, uid);
     }
-
-    utilIdleWorker(children, parseChild, callback);
 }
 
 
@@ -266,10 +264,9 @@ export default {
         _forEach(_noteCache.inflight, abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
-        _tileCache = { loaded: {}, inflight: {} };
-        _noteCache = { loaded: {}, inflight: {}, rtree: rbush() };
+        _tileCache = { loaded: {}, inflight: {}, seen: {} };
+        _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
         _changeset = {};
-        _seenEntity = {};
 
         return this;
     },
@@ -310,7 +307,7 @@ export default {
 
 
     loadFromAPI: function(path, callback, options) {
-        options = _extend({ cache: true }, options);
+        options = _extend({ skipSeen: true }, options);
         var that = this;
         var cid = _connectionID;
 
@@ -339,15 +336,11 @@ export default {
                 }
 
                 if (callback) {
-                    if (err) return callback(err, null);
-                    parse(xml, function (entities) {
-                        if (options.cache) {
-                            for (var i in entities) {
-                                _seenEntity[entities[i].id] = true;  // avoid re-parsing again later
-                            }
-                        }
-                        callback(null, entities);
-                    }, options);
+                    if (err) {
+                        return callback(err);
+                    } else {
+                        return parseXML(xml, callback, options);
+                    }
                 }
             }
         }
@@ -364,7 +357,7 @@ export default {
     loadEntity: function(id, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
-        var options = { cache: false };
+        var options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
@@ -379,7 +372,7 @@ export default {
     loadEntityVersion: function(id, version, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
-        var options = { cache: false };
+        var options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version,
@@ -397,7 +390,7 @@ export default {
         _forEach(_groupBy(_uniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's';
             var osmIDs = _map(v, osmEntity.id.toOSM);
-            var options = { cache: false };
+            var options = { skipSeen: false };
 
             _forEach(_chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(
@@ -701,23 +694,26 @@ export default {
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            var id = tile.id;
-            if (cache.loaded[id] || cache.inflight[id]) return;
+            if (cache.loaded[tile.id] || cache.inflight[tile.id]) return;
             if (!loadingNotes && _isEmpty(cache.inflight)) {
                 dispatch.call('loading');   // start the spinner
             }
 
-            var options = { cache: !loadingNotes };
-            cache.inflight[id] = that.loadFromAPI(
+            var options = { skipSeen: !loadingNotes };
+            cache.inflight[tile.id] = that.loadFromAPI(
                 path + tile.extent.toParam(),
                 function(err, parsed) {
-                    delete cache.inflight[id];
+                    delete cache.inflight[tile.id];
                     if (!err) {
-                        cache.loaded[id] = true;
+                        cache.loaded[tile.id] = true;
                     }
 
                     if (loadingNotes) {
-                        cache.rtree.load(parsed);
+                        var notes = parsed.map(function(d) {
+                            cache.note[d.id] = d;
+                            return { minX: d.loc[0], minY: d.loc[1], maxX: d.loc[0], maxY: d.loc[1], data: d };
+                        });
+                        cache.rtree.load(notes);
                         dispatch.call('loadedNotes');
                     } else {
                         if (callback) {
@@ -810,6 +806,19 @@ export default {
 
         return _noteCache.rtree.search(bbox)
             .map(function(d) { return d.data; });
+    },
+
+
+    getNote: function(id) {
+        return _noteCache.note[id];
+    },
+
+
+    replaceNote: function(n) {
+        if (n instanceof osmNote) {
+            _noteCache.note[n.id] = n;
+        }
+        return n;
     },
 
 
