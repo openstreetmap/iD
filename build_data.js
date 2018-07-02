@@ -62,8 +62,7 @@ module.exports = function buildData() {
 
         // Font Awesome icons used
         var faIcons = {
-            'fas-comment-alt': {},
-            'far-comment-alt': {}
+            'fas-comment-alt': {}
         };
 
         // Start clean
