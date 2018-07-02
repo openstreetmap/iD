@@ -137,8 +137,8 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656',
-            response = '<?xml version="1.0" encoding="UTF-8"?>' +
+        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
+        var response = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm version="0.6">' +
                 '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
                 '  <node id="105340439" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6555" lon="-74.5415"/>' +
@@ -293,11 +293,58 @@ describe('iD.serviceOsm', function () {
 
     });
 
+
+    describe('#loadNotes', function () {
+        var path = '/api/0.6/notes?bbox=-0.65094,51.312159,0.374908,51.3125';
+        var response = '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<osm version="0.6" generator="OpenStreetMap server">' +
+                '<note lon="0.1979819" lat="51.3122986">' +
+                '<id>814798</id>' +
+                '<url>https://api.openstreetmap.org/api/0.6/notes/814798</url>' +
+                '<comment_url>https://api.openstreetmap.org/api/0.6/notes/814798/comment</comment_url>' +
+                '<close_url>https://api.openstreetmap.org/api/0.6/notes/814798/close</close_url>' +
+                '<date_created>2016-12-13 11:02:44 UTC</date_created>' +
+                '<status>open</status>' +
+                '<comments>' +
+                    '<comment>' +
+                    '<date>2016-12-13 11:02:44 UTC</date>' +
+                    '<action>opened</action>' +
+                    '<text>Otford Scout Hut</text>' +
+                    '<html>&lt;p&gt;Otford Scout Hut&lt;/p&gt;</html>' +
+                    '</comment>' +
+                '</comments>' +
+                '</note>' +
+            '</osm>';
+
+        beforeEach(function() {
+            connection.reset();
+            server = sinon.fakeServer.create();
+            spy = sinon.spy();
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        it('returns an object', function (done) {
+            connection.loadFromAPI(path, function (err, xml) {
+                expect(err).to.not.be.ok;
+                expect(typeof xml).to.eql('object');
+                done();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                [200, { 'Content-Type': 'text/xml' }, response]);
+            server.respond();
+        });
+    });
+
+
     describe('#loadEntity', function () {
         var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
-                '</osm>',
-            wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+                '</osm>';
+        var wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="2817006" lat="0" lon="0" visible="true" timestamp="2009-10-11T18:03:23Z"/>' +
                 '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
                 '</osm>';
@@ -355,11 +402,12 @@ describe('iD.serviceOsm', function () {
         });
     });
 
+
     describe('#loadEntityVersion', function () {
         var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
-                '</osm>',
-            wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+                '</osm>';
+        var wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
                 '</osm>';
 
@@ -416,6 +464,7 @@ describe('iD.serviceOsm', function () {
         });
     });
 
+
     describe('#loadMultiple', function () {
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -428,7 +477,6 @@ describe('iD.serviceOsm', function () {
         it('loads nodes');
         it('loads ways');
         it('does not ignore repeat requests');
-
     });
 
 

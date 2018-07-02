@@ -129,6 +129,18 @@ export function svgNotes(projection, context, dispatch) {
             .attr('y', '-22px')
             .attr('xlink:href', '#fas-comment-alt');
 
+        // add dots if there's a comment thread
+        notesEnter.selectAll('.thread')
+            .data(function(d) { return d.comments.length > 1 ? [0] : []; })
+            .enter()
+            .append('use')
+            .attr('class', 'note-shadow thread')
+            .attr('width', '18px')
+            .attr('height', '18px')
+            .attr('x', '-9px')
+            .attr('y', '-22px')
+            .attr('xlink:href', '#iD-icon-more');
+
         // update
         notes
             .merge(notesEnter)
