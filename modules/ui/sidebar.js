@@ -1,5 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 
+import { selectAll as d3_selectAll } from 'd3-selection';
+
 import { osmNote } from '../osm';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
@@ -11,6 +13,7 @@ export function uiSidebar(context) {
     var noteEditor = uiNoteEditor(context);
     var _current;
     var _wasNote = false;
+    // var layer = d3_select(null);
 
 
     function sidebar(selection) {
@@ -28,6 +31,9 @@ export function uiSidebar(context) {
         function hover(what) {
             if ((what instanceof osmNote)) {
                 _wasNote = true;
+                var notes = d3_selectAll('.note');
+                notes
+                    .classed('hovered', function(d) { return d === what; });
                 context.ui().sidebar.show(noteEditor.note(what));
 
             } else if (!_current && context.hasEntity(what)) {
@@ -57,6 +63,8 @@ export function uiSidebar(context) {
 
             } else if (_wasNote) {
                 _wasNote = false;
+                d3_selectAll('.note')
+                    .classed('hovered', false);
                 context.ui().sidebar.hide();
             }
         }
