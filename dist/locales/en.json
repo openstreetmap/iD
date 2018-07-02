@@ -749,9 +749,11 @@
             "anonymous": "anonymous",
             "commentTitle": "Comments",
             "resolve": "Resolve",
+            "newComment": "New Comment",
+            "inputPlaceholder": "Enter a comment to share with other users.",
             "comment": "Comment",
             "commentResolve": "Comment & Resolve",
-            "save": "Save new note",
+            "save": "Save comment",
             "cancel": "Cancel"
         },
         "help": {
