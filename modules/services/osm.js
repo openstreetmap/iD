@@ -16,7 +16,7 @@ import { xml as d3_xml } from 'd3-request';
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
-import { geoExtent } from '../geo';
+import { geoExtent, geoVecAdd } from '../geo';
 
 import {
     osmEntity,
@@ -195,6 +195,18 @@ var parsers = {
         props.id = uid;
         props.loc = getLoc(attrs);
 
+        // if notes are coincident, move them apart slightly
+        var coincident = false;
+        var epsilon = 0.00001;
+        do {
+            if (coincident) {
+                props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
+            }
+            var bbox = geoExtent(props.loc).bbox();
+            coincident = _noteCache.rtree.search(bbox).length;
+        } while(coincident);
+
+        // parse note contents
         _forEach(childNodes, function(node) {
             if (node.nodeName !== '#text') {
                 var nodeName = node.nodeName;
@@ -207,7 +219,10 @@ var parsers = {
             }
         });
 
-        return new osmNote(props);
+        var note = new osmNote(props);
+        var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
+        _noteCache.rtree.insert(item);
+        return note;
     }
 };
 
