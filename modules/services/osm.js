@@ -237,11 +237,11 @@ function parse(xml, callback, options) {
             uid = child.getElementsByTagName('id')[0].textContent;
         } else {
             uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
+            if (options.cache && _seenEntity[uid]) {
+                return null;  // avoid reparsing a "seen" entity
+            }
         }
 
-        if (options.cache && _seenEntity[uid]) {
-            return null;
-        }
         return parser(child, uid);
     }
 
@@ -326,7 +326,7 @@ export default {
             // Logout and retry the request..
             if (isAuthenticated && err && (err.status === 400 || err.status === 401 || err.status === 403)) {
                 that.logout();
-                that.loadFromAPI(path, callback);
+                that.loadFromAPI(path, callback, options);
 
             // else, no retry..
             } else {
@@ -343,7 +343,7 @@ export default {
                     parse(xml, function (entities) {
                         if (options.cache) {
                             for (var i in entities) {
-                                _seenEntity[entities[i].id] = true;
+                                _seenEntity[entities[i].id] = true;  // avoid re-parsing again later
                             }
                         }
                         callback(null, entities);
@@ -707,6 +707,7 @@ export default {
                 dispatch.call('loading');   // start the spinner
             }
 
+            var options = { cache: !loadingNotes };
             cache.inflight[id] = that.loadFromAPI(
                 path + tile.extent.toParam(),
                 function(err, parsed) {
@@ -726,8 +727,8 @@ export default {
                             dispatch.call('loaded');     // stop the spinner
                         }
                     }
-
-                }
+                },
+                options
             );
         });
     },
