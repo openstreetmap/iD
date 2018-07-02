@@ -32,7 +32,7 @@ export function uiNoteEditor(context) {
 
     function noteHeader(selection) {
         selection.selectAll('.note-header')
-            .data(_note, function(d) { return d.id; })
+            .data([_note], function(d) { return d.id; })
             .enter()
             .append('h3')
             .attr('class', 'note-header')

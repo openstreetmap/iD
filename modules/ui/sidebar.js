@@ -1,18 +1,17 @@
 import _throttle from 'lodash-es/throttle';
+
+import { osmNote } from '../osm';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
 import { uiNoteEditor } from './note_editor';
 
-import {
-    osmNote
-} from '../osm';
 
 export function uiSidebar(context) {
+    var inspector = uiInspector(context);
+    var noteEditor = uiNoteEditor(context);
+    var _current;
+    var _wasNote = false;
 
-    var inspector = uiInspector(context),
-        noteEditor = uiNoteEditor(context),
-        current,
-        wasNote = false;
 
     function sidebar(selection) {
         var featureListWrap = selection
@@ -28,10 +27,10 @@ export function uiSidebar(context) {
 
         function hover(what) {
             if ((what instanceof osmNote)) {
-                wasNote = true;
-                context.ui().sidebar.show(noteEditor, what);
-            }
-            else if (!current && context.hasEntity(what)) {
+                _wasNote = true;
+                context.ui().sidebar.show(noteEditor.note(what));
+
+            } else if (!_current && context.hasEntity(what)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
@@ -48,15 +47,16 @@ export function uiSidebar(context) {
                         .call(inspector);
                 }
 
-            } else if (!current) {
+            } else if (!_current) {
                 featureListWrap
                     .classed('inspector-hidden', false);
                 inspectorWrap
                     .classed('inspector-hidden', true);
                 inspector
                     .state('hide');
-            } else if (wasNote) {
-                wasNote = false;
+
+            } else if (_wasNote) {
+                _wasNote = false;
                 context.ui().sidebar.hide();
             }
         }
@@ -66,7 +66,7 @@ export function uiSidebar(context) {
 
 
         sidebar.select = function(id, newFeature) {
-            if (!current && id) {
+            if (!_current && id) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
@@ -84,7 +84,7 @@ export function uiSidebar(context) {
                         .call(inspector);
                 }
 
-            } else if (!current) {
+            } else if (!_current) {
                 featureListWrap
                     .classed('inspector-hidden', false);
                 inspectorWrap
@@ -101,8 +101,8 @@ export function uiSidebar(context) {
             inspectorWrap
                 .classed('inspector-hidden', true);
 
-            if (current) current.remove();
-            current = selection
+            if (_current) _current.remove();
+            _current = selection
                 .append('div')
                 .attr('class', 'sidebar-component')
                 .call(component, element);
@@ -115,8 +115,8 @@ export function uiSidebar(context) {
             inspectorWrap
                 .classed('inspector-hidden', true);
 
-            if (current) current.remove();
-            current = null;
+            if (_current) _current.remove();
+            _current = null;
         };
     }
 
