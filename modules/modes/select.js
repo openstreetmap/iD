@@ -34,10 +34,12 @@ import {
     osmWay
 } from '../osm';
 
+import { serviceOsm } from '../services';
+
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
-import { uiEditMenu, uiSelectionList } from '../ui';
+import { uiEditMenu, uiSelectionList, uiNoteEditor } from '../ui';
 import { uiCmd } from '../ui/cmd';
 import { utilEntityOrMemberSelector, utilEntitySelector } from '../util';
 
@@ -70,6 +72,7 @@ export function modeSelect(context, selectedIDs) {
     var newFeature = false;
     var suppressMenu = true;
     var follow = false;
+    var noteEditor = uiNoteEditor(context);
 
 
     var wrap = context.container()
@@ -427,93 +430,104 @@ export function modeSelect(context, selectedIDs) {
             }
         }
 
+        var noteFound;
+        if (!checkSelectedIDs()) {
+            // check if any selectedIDs are within the loaded notes
+            var notes = serviceOsm.notes(context.projection);
+            var noteIDs = _map(notes, function(note) { return note.id; });
+            noteFound = noteIDs.some(function(note) {
+                return selectedIDs.includes(note);
+            });
+            if (!noteFound) return;
+        }
 
-        if (!checkSelectedIDs()) return;
-
-        var operations = _without(_values(Operations), Operations.operationDelete)
-            .map(function(o) { return o(selectedIDs, context); })
-            .filter(function(o) { return o.available(); });
-
-        // deprecation warning - Radial Menu to be removed in iD v3
-        var isRadialMenu = context.storage('edit-menu-style') === 'radial';
-        if (isRadialMenu) {
-            operations = operations.slice(0,7);
-            operations.unshift(Operations.operationDelete(selectedIDs, context));
+        if (noteFound) {
+            context.ui().sidebar.show(noteEditor.note('context.selectedNoteID')); // TODO: update to noteID reference
         } else {
-            operations.push(Operations.operationDelete(selectedIDs, context));
-        }
+            var operations = _without(_values(Operations), Operations.operationDelete)
+                .map(function(o) { return o(selectedIDs, context); })
+                .filter(function(o) { return o.available(); });
 
-        operations.forEach(function(operation) {
-            if (operation.behavior) {
-                behaviors.push(operation.behavior);
+            // deprecation warning - Radial Menu to be removed in iD v3
+            var isRadialMenu = context.storage('edit-menu-style') === 'radial';
+            if (isRadialMenu) {
+                operations = operations.slice(0,7);
+                operations.unshift(Operations.operationDelete(selectedIDs, context));
+            } else {
+                operations.push(Operations.operationDelete(selectedIDs, context));
             }
-        });
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
-
-        keybinding
-            .on(['[', 'pgup'], previousVertex)
-            .on([']', 'pgdown'], nextVertex)
-            .on(['{', uiCmd('⌘['), 'home'], firstVertex)
-            .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
-            .on(['\\', 'pause'], nextParent)
-            .on('⎋', esc, true)
-            .on('space', toggleMenu);
-
-        d3_select(document)
-            .call(keybinding);
-
-
-        // deprecation warning - Radial Menu to be removed in iD v3
-        editMenu = isRadialMenu
-            ? uiRadialMenu(context, operations)
-            : uiEditMenu(context, operations);
-
-        context.ui().sidebar
-            .select(singular() ? singular().id : null, newFeature);
-
-        context.history()
-            .on('undone.select', update)
-            .on('redone.select', update);
-
-        context.map()
-            .on('move.select', closeMenu)
-            .on('drawn.select', selectElements);
-
-        context.surface()
-            .on('dblclick.select', dblclick);
-
-
-        selectElements();
-
-        if (selectedIDs.length > 1) {
-            var entities = uiSelectionList(context, selectedIDs);
-            context.ui().sidebar.show(entities);
-        }
-
-        if (follow) {
-            var extent = geoExtent();
-            var graph = context.graph();
-            selectedIDs.forEach(function(id) {
-                var entity = context.entity(id);
-                extent._extend(entity.extent(graph));
+            operations.forEach(function(operation) {
+                if (operation.behavior) {
+                    behaviors.push(operation.behavior);
+                }
             });
 
-            var loc = extent.center();
-            context.map().centerEase(loc);
-        } else if (singular() && singular().type === 'way') {
-            context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
-        }
+            behaviors.forEach(function(behavior) {
+                context.install(behavior);
+            });
 
-        timeout = window.setTimeout(function() {
-            positionMenu();
-            if (!suppressMenu) {
-                showMenu();
+            keybinding
+                .on(['[', 'pgup'], previousVertex)
+                .on([']', 'pgdown'], nextVertex)
+                .on(['{', uiCmd('⌘['), 'home'], firstVertex)
+                .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
+                .on(['\\', 'pause'], nextParent)
+                .on('⎋', esc, true)
+                .on('space', toggleMenu);
+
+            d3_select(document)
+                .call(keybinding);
+
+
+            // deprecation warning - Radial Menu to be removed in iD v3
+            editMenu = isRadialMenu
+                ? uiRadialMenu(context, operations)
+                : uiEditMenu(context, operations);
+
+            context.ui().sidebar
+                .select(singular() ? singular().id : null, newFeature);
+
+            context.history()
+                .on('undone.select', update)
+                .on('redone.select', update);
+
+            context.map()
+                .on('move.select', closeMenu)
+                .on('drawn.select', selectElements);
+
+            context.surface()
+                .on('dblclick.select', dblclick);
+
+
+            selectElements();
+
+            if (selectedIDs.length > 1) {
+                var entities = uiSelectionList(context, selectedIDs);
+                context.ui().sidebar.show(entities);
             }
-        }, 270);  /* after any centerEase completes */
 
+            if (follow) {
+                var extent = geoExtent();
+                var graph = context.graph();
+                selectedIDs.forEach(function(id) {
+                    var entity = context.entity(id);
+                    extent._extend(entity.extent(graph));
+                });
+
+                var loc = extent.center();
+                context.map().centerEase(loc);
+            } else if (singular() && singular().type === 'way') {
+                context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
+            }
+
+            timeout = window.setTimeout(function() {
+                positionMenu();
+                if (!suppressMenu) {
+                    showMenu();
+                }
+            }, 270);  /* after any centerEase completes */
+        }
     };
 
 

@@ -121,7 +121,11 @@ export function behaviorSelect(context) {
         var entity;
 
         // check if datum is a note
-        if (datum instanceof osmNote) { entity = datum; }
+        if (datum instanceof osmNote) {
+            if (!isMultiselect) entity = datum;
+            else { entity = 'multiselectedNote'; } // if multiselected, ignore notes TODO: possibly give warning
+        }
+
         else { entity = datum && datum.properties && datum.properties.entity; }
 
         if (entity) datum = entity;

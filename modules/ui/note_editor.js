@@ -130,18 +130,7 @@ export function uiNoteEditor(context) {
                 // t[field.key] = utilGetSetValue(input) || undefined;
                 dispatch.call('change', this, t, onInput);
             };
-    }
-
-        // // Input
-        // var inputSection = selection.selectAll('.note-input')
-        //     .data([0]);
-
-        // // enter
-        // var inputEnter = inputSection.enter()
-        //     .append('div')
-        //     .attr('class', 'tempClassName');
-
-        // update
+        }
     }
 
     function buttons(selection) {
