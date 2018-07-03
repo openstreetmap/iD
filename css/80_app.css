@@ -3566,10 +3566,16 @@ img.tile-debug {
     vertical-align: middle;
 }
 
+.save-section .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 .save-section .buttons .action,
 .save-section .buttons .secondary-action {
-    display: inline-block;
-    margin: 0 20px 0 0;
+    width: 45%;
+    margin: 10px auto;
     text-align: center;
     vertical-align: middle;
 }

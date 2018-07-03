@@ -220,14 +220,14 @@ export function uiCommit(context) {
 
         buttonEnter
             .append('button')
-            .attr('class', 'secondary-action col5 button cancel-button')
+            .attr('class', 'secondary-action button cancel-button')
             .append('span')
             .attr('class', 'label')
             .text(t('commit.cancel'));
 
         buttonEnter
             .append('button')
-            .attr('class', 'action col5 button save-button')
+            .attr('class', 'action button save-button')
             .append('span')
             .attr('class', 'label')
             .text(t('commit.save'));

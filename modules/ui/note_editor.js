@@ -156,21 +156,44 @@ export function uiNoteEditor(context) {
 
         buttonEnter
             .append('button')
-            .attr('class', 'secondary-action col5 button cancel-button')
+            .attr('class', 'secondary-action button cancel-button')
             .append('span')
             .attr('class', 'label')
             .text(t('note.cancel'));
 
         buttonEnter
             .append('button')
-            .attr('class', 'action col5 button save-button')
+            .attr('class', 'action button save-button')
             .append('span')
             .attr('class', 'label')
             .text(t('note.save'));
 
+        var status;
+        if (_note.status) {
+            status = _note.status === 'open' ? t('note.close') : t('note.reopen');
+        }
+
+        buttonEnter
+            .append('button')
+            .attr('class', _note.status + '-button status-button action button')
+            .append('span')
+            .attr('class', 'label')
+            .text(status);
+
+
         // update
         buttonSection = buttonSection
             .merge(buttonEnter);
+
+        buttonSection.selectAll('.close-button')
+            .on('click.close', function() {
+                console.log('close button clicked');
+            });
+
+        buttonSection.selectAll('.reopen-button')
+            .on('click.reopen', function() {
+                console.log('reopen button clicked');
+            });
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', function() {
@@ -193,11 +216,6 @@ export function uiNoteEditor(context) {
         // New Comment
         var saveSection = selection.selectAll('.save-section')
             .data([0]);
-
-        // saveSection = saveSection.enter()
-        //     .append('h4')
-        //     .text(t('note.newComment'))
-        //     .merge(saveSection);
 
         saveSection = saveSection.enter()
             .append('div')

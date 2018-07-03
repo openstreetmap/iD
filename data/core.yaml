@@ -615,7 +615,8 @@ en:
     title: Edit note
     anonymous: anonymous
     commentTitle: Comments
-    resolve: Resolve
+    close: Resolve
+    reopen: Reopen
     newComment: New Comment
     inputPlaceholder: Enter a comment to share with other users.
     comment: Comment
