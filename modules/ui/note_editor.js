@@ -4,6 +4,7 @@ import { uiFormFields } from './form_fields';
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
+import { svgIcon } from '../svg';
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -48,11 +49,6 @@ export function uiNoteEditor(context) {
 
 
     function noteComments(selection) {
-        function noteCreator(d) {
-            var userName = d.user ? d.user : t('note.anonymous');
-            return String(userName + ' ' + localeDateString(d.date));
-        }
-
         var comments = selection.selectAll('.comments')
             .data([0]);
 
@@ -62,22 +58,42 @@ export function uiNoteEditor(context) {
             .merge(comments);
 
         var commentEnter = comments.selectAll('.comment')
-            .data(_note.comments, function(d) { return d.uid; })
+            .data(_note.comments)
             .enter()
             .append('div')
             .attr('class', 'comment');
 
-        commentEnter
-            .append('p')
-            .attr('class', 'commentText')
+        var avatar = commentEnter
+            .append('div')
+            .attr('class', 'comment-avatar');
+
+        avatar
+            .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
+
+        var main = commentEnter
+            .append('div')
+            .attr('class', 'comment-main');
+
+        var meta = main
+            .append('div')
+            .attr('class', 'comment-metadata');
+
+        meta
+            .append('div')
+            .attr('class', 'comment-author')
+            .text(function(d) { return d.user || t('note.anonymous'); });
+
+        meta
+            .append('div')
+            .attr('class', 'comment-date')
+            .text(function(d) { return d.action + ' ' + localeDateString(d.date); });
+
+        main
+            .append('div')
+            .attr('class', 'comment-text')
             .text(function(d) { return d.text; });
-
-        commentEnter
-            .append('p')
-            .attr('class', 'commentCreator')
-            .text(function(d) { return noteCreator(d); });
-
     }
+
 
     function saveHeader(selection) {
         var header = selection.selectAll('.notesSaveHeader')
@@ -89,8 +105,8 @@ export function uiNoteEditor(context) {
             .merge(header);
     }
 
-    function input(selection) {
 
+    function input(selection) {
         // Input
         var input = selection.selectAll('textarea')
             .data([0]);
