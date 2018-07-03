@@ -194,6 +194,53 @@ export function uiMapData(context) {
             .property('checked', showsOsm);
     }
 
+    function drawNotesItem(selection) {
+        var notes = layers.layer('notes'),
+            showsNotes = notes.enabled();
+
+        var ul = selection
+            .selectAll('.layer-list-notes')
+            .data(notes ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-notes');
+
+        var liEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-notes');
+
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('map_data.layers.notes.tooltip'))
+                .placement('top')
+            );
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function () { toggleLayer('notes'); });
+
+        labelEnter
+            .append('span')
+            .text(t('map_data.layers.notes.title'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        ul.selectAll('.list-item-notes')
+            .classed('active', showsNotes)
+            .selectAll('input')
+            .property('checked', showsNotes);
+    }
+
 
     function drawGpxItem(selection) {
         var gpx = layers.layer('gpx'),
@@ -368,6 +415,7 @@ export function uiMapData(context) {
     function update() {
         _dataLayerContainer
             .call(drawOsmItem)
+            .call(drawNotesItem)
             .call(drawPhotoItems)
             .call(drawGpxItem);
 

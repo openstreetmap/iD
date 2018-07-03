@@ -1,0 +1,75 @@
+
+/* OSM Notes Layer */
+.layer-notes {
+    pointer-events: none;
+}
+
+.layer-notes .note .note-shadow {
+    color: #000;
+    pointer-events: none;
+}
+.layer-notes .note .note-fill {
+    color: #ff3300;
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-point.png), pointer; /* FF */
+}
+.layer-notes .note.closed .note-fill {
+    color: #55dd00;
+}
+.layer-notes .note.hovered .note-fill {
+    color: #eebb00;
+}
+.layer-notes .note.selected .note-fill {
+    color: #ffee00;
+}
+
+/* OSM Note UI */
+.comment {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px auto;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.comment-main {
+    padding: 0 10px;
+    flex: 1 1 100%;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.comment-avatar {
+    flex: 0 0 40px;
+}
+.comment-avatar .icon.comment-avatar-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+.comment-metadata {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.comment-author {
+    font-weight: bold;
+    color: #333;
+}
+.comment-date {
+    color: #aaa;
+}
+.comment-text {
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Note editor UI */
+#new-comment-input {
+    width: 100%;
+    height: 100px;
+}

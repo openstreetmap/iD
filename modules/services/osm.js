@@ -8,16 +8,20 @@ import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
 import _uniq from 'lodash-es/uniq';
 
+import rbush from 'rbush';
+
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
-import { geoExtent } from '../geo';
+import { geoExtent, geoVecAdd } from '../geo';
+
 import {
     osmEntity,
     osmNode,
+    osmNote,
     osmRelation,
     osmWay
 } from '../osm';
@@ -25,7 +29,7 @@ import {
 import { utilRebind, utilIdleWorker } from '../util';
 
 
-var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded');
+var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
 var oauth = osmAuth({
     url: urlroot,
@@ -36,11 +40,13 @@ var oauth = osmAuth({
 });
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
-var _tiles = { loaded: {}, inflight: {} };
+var _tileCache = { loaded: {}, inflight: {}, seen: {} };
+var _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
 var _changeset = {};
-var _entityCache = {};
+
 var _connectionID = 1;
 var _tileZoom = 16;
+var _noteZoom = 13;
 var _rateLimitError;
 var _userChangesets;
 var _userDetails;
@@ -113,11 +119,36 @@ function getVisible(attrs) {
 }
 
 
+function parseComments(comments) {
+    var parsedComments = [];
+
+    // for each comment
+    for (var i = 0; i < comments.length; i++) {
+        var comment = comments[i];
+        if (comment.nodeName === 'comment') {
+            var childNodes = comment.childNodes;
+            var parsedComment = {};
+
+            for (var j = 0; j < childNodes.length; j++) {
+                var node = childNodes[j];
+                var nodeName = node.nodeName;
+                if (nodeName === '#text') continue;
+                parsedComment[nodeName] = node.textContent;
+            }
+            if (parsedComment) {
+                parsedComments.push(parsedComment);
+            }
+        }
+    }
+    return parsedComments;
+}
+
+
 var parsers = {
     node: function nodeData(obj, uid) {
         var attrs = obj.attributes;
         return new osmNode({
-            id:uid,
+            id: uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -157,29 +188,81 @@ var parsers = {
             tags: getTags(obj),
             members: getMembers(obj)
         });
+    },
+
+    note: function parseNote(obj, uid) {
+        var attrs = obj.attributes;
+        var childNodes = obj.childNodes;
+        var props = {};
+
+        props.id = uid;
+        props.loc = getLoc(attrs);
+
+        // if notes are coincident, move them apart slightly
+        var coincident = false;
+        var epsilon = 0.00001;
+        do {
+            if (coincident) {
+                props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
+            }
+            var bbox = geoExtent(props.loc).bbox();
+            coincident = _noteCache.rtree.search(bbox).length;
+        } while (coincident);
+
+        // parse note contents
+        for (var i = 0; i < childNodes.length; i++) {
+            var node = childNodes[i];
+            var nodeName = node.nodeName;
+            if (nodeName === '#text') continue;
+
+            // if the element is comments, parse the comments
+            if (nodeName === 'comments') {
+                props[nodeName] = parseComments(node.childNodes);
+            } else {
+                props[nodeName] = node.textContent;
+            }
+        }
+
+        var note = new osmNote(props);
+        var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
+        _noteCache.rtree.insert(item);
+        return note;
     }
 };
 
 
-function parse(xml, callback, options) {
-    options = _extend({ cache: true }, options);
-    if (!xml || !xml.childNodes) return;
+function parseXML(xml, callback, options) {
+    options = _extend({ skipSeen: true }, options);
+    if (!xml || !xml.childNodes) {
+        return callback({ message: 'No XML', status: -1 });
+    }
 
     var root = xml.childNodes[0];
     var children = root.childNodes;
+    utilIdleWorker(children, parseChild, done);
+
+
+    function done(results) {
+        callback(null, results);
+    }
 
     function parseChild(child) {
         var parser = parsers[child.nodeName];
-        if (parser) {
-            var uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
-            if (options.cache && _entityCache[uid]) {
-                return null;
-            }
-            return parser(child, uid);
-        }
-    }
+        if (!parser) return null;
 
-    utilIdleWorker(children, parseChild, callback);
+        var uid;
+        if (child.nodeName === 'note') {
+            uid = child.getElementsByTagName('id')[0].textContent;
+        } else {
+            uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
+            if (options.skipSeen) {
+                if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
+                _tileCache.seen[uid] = true;
+            }
+        }
+
+        return parser(child, uid);
+    }
 }
 
 
@@ -195,11 +278,15 @@ export default {
         _userChangesets = undefined;
         _userDetails = undefined;
         _rateLimitError = undefined;
-        _forEach(_tiles.inflight, abortRequest);
+
+        _forEach(_tileCache.inflight, abortRequest);
+        _forEach(_noteCache.inflight, abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
-        _tiles = { loaded: {}, inflight: {} };
+
+        _tileCache = { loaded: {}, inflight: {}, seen: {} };
+        _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
         _changeset = {};
-        _entityCache = {};
+
         return this;
     },
 
@@ -239,7 +326,7 @@ export default {
 
 
     loadFromAPI: function(path, callback, options) {
-        options = _extend({ cache: true }, options);
+        options = _extend({ skipSeen: true }, options);
         var that = this;
         var cid = _connectionID;
 
@@ -255,7 +342,7 @@ export default {
             // Logout and retry the request..
             if (isAuthenticated && err && (err.status === 400 || err.status === 401 || err.status === 403)) {
                 that.logout();
-                that.loadFromAPI(path, callback);
+                that.loadFromAPI(path, callback, options);
 
             // else, no retry..
             } else {
@@ -268,15 +355,11 @@ export default {
                 }
 
                 if (callback) {
-                    if (err) return callback(err, null);
-                    parse(xml, function (entities) {
-                        if (options.cache) {
-                            for (var i in entities) {
-                                _entityCache[entities[i].id] = true;
-                            }
-                        }
-                        callback(null, entities);
-                    }, options);
+                    if (err) {
+                        return callback(err);
+                    } else {
+                        return parseXML(xml, callback, options);
+                    }
                 }
             }
         }
@@ -293,7 +376,7 @@ export default {
     loadEntity: function(id, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
-        var options = { cache: false };
+        var options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
@@ -308,7 +391,7 @@ export default {
     loadEntityVersion: function(id, version, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
-        var options = { cache: false };
+        var options = { skipSeen: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version,
@@ -326,7 +409,7 @@ export default {
         _forEach(_groupBy(_uniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's';
             var osmIDs = _map(v, osmEntity.id.toOSM);
-            var options = { cache: false };
+            var options = { skipSeen: false };
 
             _forEach(_chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(
@@ -569,68 +652,98 @@ export default {
     },
 
 
-    loadTiles: function(projection, dimensions, callback) {
+    loadTiles: function(projection, dimensions, callback, loadingNotes) {
         if (_off) return;
 
         var that = this;
+
+        // check if loading entities, or notes
+        var path, cache, tilezoom;
+        if (loadingNotes) {
+            path = '/api/0.6/notes?bbox=';
+            cache = _noteCache;
+            tilezoom = _noteZoom;
+        } else {
+            path = '/api/0.6/map?bbox=';
+            cache = _tileCache;
+            tilezoom = _tileZoom;
+        }
+
         var s = projection.scale() * 2 * Math.PI;
         var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - _tileZoom);
+        var ts = 256 * Math.pow(2, z - tilezoom);
         var origin = [
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]
         ];
 
-        var tiles = d3_geoTile()
-            .scaleExtent([_tileZoom, _tileZoom])
+        // what tiles cover the view?
+        var tiler = d3_geoTile()
+            .scaleExtent([tilezoom, tilezoom])
             .scale(s)
             .size(dimensions)
-            .translate(projection.translate())()
-            .map(function(tile) {
-                var x = tile[0] * ts - origin[0];
-                var y = tile[1] * ts - origin[1];
+            .translate(projection.translate());
 
-                return {
-                    id: tile.toString(),
-                    extent: geoExtent(
-                        projection.invert([x, y + ts]),
-                        projection.invert([x + ts, y]))
-                };
-            });
+        var tiles = tiler().map(function(tile) {
+            var x = tile[0] * ts - origin[0];
+            var y = tile[1] * ts - origin[1];
 
-        _filter(_tiles.inflight, function(v, i) {
-            var wanted = _find(tiles, function(tile) {
-                return i === tile.id;
-            });
-            if (!wanted) delete _tiles.inflight[i];
+            return {
+                id: tile.toString(),
+                extent: geoExtent(
+                    projection.invert([x, y + ts]),
+                    projection.invert([x + ts, y])
+                )
+            };
+        });
+
+        // remove inflight requests that no longer cover the view..
+        var hadRequests = !_isEmpty(cache.inflight);
+        _filter(cache.inflight, function(v, i) {
+            var wanted = _find(tiles, function(tile) { return i === tile.id; });
+            if (!wanted) {
+                delete cache.inflight[i];
+            }
             return !wanted;
         }).map(abortRequest);
 
+        if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
+            dispatch.call('loaded');    // stop the spinner
+        }
+
+        // issue new requests..
         tiles.forEach(function(tile) {
-            var id = tile.id;
-
-            if (_tiles.loaded[id] || _tiles.inflight[id]) return;
-
-            if (_isEmpty(_tiles.inflight)) {
-                dispatch.call('loading');
+            if (cache.loaded[tile.id] || cache.inflight[tile.id]) return;
+            if (!loadingNotes && _isEmpty(cache.inflight)) {
+                dispatch.call('loading');   // start the spinner
             }
 
-            _tiles.inflight[id] = that.loadFromAPI(
-                '/api/0.6/map?bbox=' + tile.extent.toParam(),
+            var options = { skipSeen: !loadingNotes };
+            cache.inflight[tile.id] = that.loadFromAPI(
+                path + tile.extent.toParam(),
                 function(err, parsed) {
-                    delete _tiles.inflight[id];
+                    delete cache.inflight[tile.id];
                     if (!err) {
-                        _tiles.loaded[id] = true;
+                        cache.loaded[tile.id] = true;
                     }
 
-                    if (callback) {
-                        callback(err, _extend({ data: parsed }, tile));
+                    if (loadingNotes) {
+                        var notes = parsed.map(function(d) {
+                            cache.note[d.id] = d;
+                            return { minX: d.loc[0], minY: d.loc[1], maxX: d.loc[0], maxY: d.loc[1], data: d };
+                        });
+                        cache.rtree.load(notes);
+                        dispatch.call('loadedNotes');
+                    } else {
+                        if (callback) {
+                            callback(err, _extend({ data: parsed }, tile));
+                        }
+                        if (_isEmpty(cache.inflight)) {
+                            dispatch.call('loaded');     // stop the spinner
+                        }
                     }
-
-                    if (_isEmpty(_tiles.inflight)) {
-                        dispatch.call('loaded');
-                    }
-                }
+                },
+                options
             );
         });
     },
@@ -659,8 +772,8 @@ export default {
 
 
     loadedTiles: function(_) {
-        if (!arguments.length) return _tiles.loaded;
-        _tiles.loaded = _;
+        if (!arguments.length) return _tileCache.loaded;
+        _tileCache.loaded = _;
         return this;
     },
 
@@ -696,5 +809,46 @@ export default {
         }
 
         return oauth.authenticate(done);
+    },
+
+
+    loadNotes: function(projection, dimensions) {
+        this.loadTiles(projection, dimensions, null, true);  // true = loadingNotes
+    },
+
+
+    notes: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+
+        return _noteCache.rtree.search(bbox)
+            .map(function(d) { return d.data; });
+    },
+
+
+    getNote: function(id) {
+        return _noteCache.note[id];
+    },
+
+
+    replaceNote: function(n) {
+        if (n instanceof osmNote) {
+            _noteCache.note[n.id] = n;
+        }
+        return n;
+    },
+
+
+    loadedNotes: function(_) {
+        if (!arguments.length) return _noteCache.loaded;
+        _noteCache.loaded = _;
+        return this;
+    },
+
+
+    notesCache: function() {
+        return _noteCache;
     }
 };

@@ -536,6 +536,10 @@
                 "osm": {
                     "tooltip": "Map data from OpenStreetMap",
                     "title": "OpenStreetMap data"
+                },
+                "notes": {
+                    "tooltip": "Note data from OpenStreetMap",
+                    "title": "OpenStreetMap notes"
                 }
             },
             "fill_area": "Fill Areas",
@@ -738,6 +742,19 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "View this image on OpenStreetCam"
+        },
+        "note": {
+            "note": "Note",
+            "title": "Edit note",
+            "anonymous": "anonymous",
+            "commentTitle": "Comments",
+            "resolve": "Resolve",
+            "newComment": "New Comment",
+            "inputPlaceholder": "Enter a comment to share with other users.",
+            "comment": "Comment",
+            "commentResolve": "Comment & Resolve",
+            "save": "Save comment",
+            "cancel": "Cancel"
         },
         "help": {
             "title": "Help",
@@ -6668,7 +6685,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
+                "description": "Premium DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Premium Imagery"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6682,7 +6699,7 @@
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
-                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
+                "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
             },
             "DigitalGlobe-Standard-vintage": {
