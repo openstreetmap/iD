@@ -226,7 +226,7 @@ var parsers = {
         var note = new osmNote(props);
         var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
         _noteCache.rtree.insert(item);
-        _noteCache.note[id] = note;
+        _noteCache.note[note.id] = note;
         return note;
     }
 };

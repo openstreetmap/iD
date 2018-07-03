@@ -34,12 +34,10 @@ import {
     osmWay
 } from '../osm';
 
-import { serviceOsm } from '../services';
-
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
-import { uiEditMenu, uiSelectionList, uiNoteEditor } from '../ui';
+import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
 import { utilEntityOrMemberSelector, utilEntitySelector } from '../util';
 
@@ -72,7 +70,6 @@ export function modeSelect(context, selectedIDs) {
     var newFeature = false;
     var suppressMenu = true;
     var follow = false;
-    var noteEditor = uiNoteEditor(context);
 
 
     var wrap = context.container()
@@ -430,22 +427,8 @@ export function modeSelect(context, selectedIDs) {
             }
         }
 
-        var noteFound;
-        if (!checkSelectedIDs()) {
-            // check if any selectedIDs are within the loaded notes
-            var notes = serviceOsm.notes(context.projection);
-            var noteIDs = _map(notes, function(note) { return note.id; });
-            noteFound = noteIDs.some(function(note) {
-                return selectedIDs.includes(note);
-            });
-            if (!noteFound) return;
-        }
 
-        if (noteFound) {
-            context.ui().sidebar.show(noteEditor.note('context.selectedNoteID')); // TODO: update to noteID reference
-            return;
-        }
-
+        if (!checkSelectedIDs()) return;
 
         var operations = _without(_values(Operations), Operations.operationDelete)
             .map(function(o) { return o(selectedIDs, context); })
