@@ -1,6 +1,7 @@
 {
     "icon": "maki-playground",
     "fields": [
+        "capacity",
         "playground/baby",
         "wheelchair"
     ],
