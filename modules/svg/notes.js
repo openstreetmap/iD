@@ -9,12 +9,11 @@ import { uiNoteEditor } from '../ui';
 
 export function svgNotes(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    // var noteEditor = uiNoteEditor(context);
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
-    var _selected;
 
-    var noteEditor = uiNoteEditor(context);
 
     function init() {
         if (svgNotes.initialized) return;  // run once
@@ -66,40 +65,41 @@ export function svgNotes(projection, context, dispatch) {
 
 
     function click(which) {
-        _selected = which;
+        // _selected = which;
         context.map().centerEase(which.loc);
 
-        layer.selectAll('.note')
-            .classed('selected', function(d) { return d === _selected; });
+        // layer.selectAll('.note')
+        //     .classed('selected', function(d) { return d === _selected; });
 
         // context.ui().sidebar.show(noteEditor.note(which));
     }
 
 
-    function mouseover(which) {
-        layer.selectAll('.note')
-            .classed('hovered', function(d) { return d === which; });
+    // function mouseover(which) {
+    //     layer.selectAll('.note')
+    //         .classed('hovered', function(d) { return d === which; });
 
-        // context.ui().sidebar.show(noteEditor.note(which));
-    }
+    //     // context.ui().sidebar.show(noteEditor.note(which));
+    // }
 
 
-    function mouseout() {
-        layer.selectAll('.note')
-            .classed('hovered', false);
+    // function mouseout() {
+    //     layer.selectAll('.note')
+    //         .classed('hovered', false);
 
-        // TODO: check if the item was clicked. If so, it should remain on the sidebar.
-        // TODO: handle multi-clicks. Otherwise, utilize behavior/select.js
-        // context.ui().sidebar.hide();
-    }
+    //     // TODO: check if the item was clicked. If so, it should remain on the sidebar.
+    //     // TODO: handle multi-clicks. Otherwise, utilize behavior/select.js
+    //     // context.ui().sidebar.hide();
+    // }
 
 
     function update() {
         var service = getService();
+        var selectedID = context.selectedNoteID();
         var data = (service ? service.notes(projection) : []);
         var transform = svgPointTransform(projection);
         var notes = layer.selectAll('.note')
-            .data(data, function(d) { return d.key; });
+            .data(data, function(d) { return d.id; });
 
         // exit
         notes.exit()
@@ -108,7 +108,8 @@ export function svgNotes(projection, context, dispatch) {
         // enter
         var notesEnter = notes.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
+            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
+            .on('click', click);
 
         notesEnter
             .append('use')
@@ -144,11 +145,11 @@ export function svgNotes(projection, context, dispatch) {
         notes
             .merge(notesEnter)
             .sort(function(a, b) {
-                return (a === _selected) ? 1
-                    : (b === _selected) ? -1
+                return (a.id === selectedID) ? 1
+                    : (b.id === selectedID) ? -1
                     : b.loc[1] - a.loc[1];  // sort Y
             })
-            .classed('selected', function(d) { return d === _selected; })
+            .classed('selected', function(d) { return d.id === selectedID; })
             .attr('transform', transform);
     }
 

@@ -226,6 +226,7 @@ var parsers = {
         var note = new osmNote(props);
         var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
         _noteCache.rtree.insert(item);
+        _noteCache.note[id] = note;
         return note;
     }
 };
@@ -728,12 +729,8 @@ export default {
                     }
 
                     if (loadingNotes) {
-                        var notes = parsed.map(function(d) {
-                            cache.note[d.id] = d;
-                            return { minX: d.loc[0], minY: d.loc[1], maxX: d.loc[0], maxY: d.loc[1], data: d };
-                        });
-                        cache.rtree.load(notes);
                         dispatch.call('loadedNotes');
+
                     } else {
                         if (callback) {
                             callback(err, _extend({ data: parsed }, tile));

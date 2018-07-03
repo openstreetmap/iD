@@ -118,31 +118,16 @@ export function behaviorSelect(context) {
         var datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__);
         var mode = context.mode();
 
-        var entity;
-
-        // check if datum is a note
-        if (datum instanceof osmNote) {
-            if (!isMultiselect) entity = datum;
-            else { entity = 'multiselectedNote'; } // if multiselected, ignore notes TODO: possibly give warning
-        }
-
-        else { entity = datum && datum.properties && datum.properties.entity; }
-
+        var entity = datum && datum.properties && datum.properties.entity;
         if (entity) datum = entity;
 
         if (datum && datum.type === 'midpoint') {
             datum = datum.parents[0];
         }
 
-        if (!(datum instanceof osmEntity) && !(datum instanceof osmNote)) {
-            // clicked nothing..
-            if (!isMultiselect && mode.id !== 'browse') {
-                context.enter(modeBrowse(context));
-            }
-
-        } else {
-            // clicked an entity..
+        if (datum instanceof osmEntity) {    // clicked an entity..
             var selectedIDs = context.selectedIDs();
+            context.selectedNoteID(null);
 
             if (!isMultiselect) {
                 if (selectedIDs.length > 1 && (!suppressMenu && !isShowAlways)) {
@@ -169,6 +154,15 @@ export function behaviorSelect(context) {
                     selectedIDs = selectedIDs.concat([datum.id]);
                     context.enter(modeSelect(context, selectedIDs).suppressMenu(suppressMenu));
                 }
+            }
+
+        } else if (datum instanceof osmNote && !isMultiselect) {    // clicked a Note..
+            context.selectedNoteID(datum.id);
+
+        } else {    // clicked nothing..
+            context.selectedNoteID(null);
+            if (!isMultiselect && mode.id !== 'browse') {
+                context.enter(modeBrowse(context));
             }
         }
 
