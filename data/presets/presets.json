@@ -659,7 +659,7 @@
     "playground/seesaw": {"icon": "maki-playground", "geometry": ["point"], "tags": {"playground": "seesaw"}, "name": "Seesaw"},
     "playground/slide": {"icon": "maki-playground", "geometry": ["point", "line"], "tags": {"playground": "slide"}, "name": "Slide"},
     "playground/structure": {"icon": "maki-pitch", "geometry": ["point", "area"], "tags": {"playground": "structure"}, "name": "Play Structure"},
-    "playground/swing": {"icon": "maki-playground", "fields": ["playground/baby", "wheelchair"], "geometry": ["point"], "tags": {"playground": "swing"}, "name": "Swing"},
+    "playground/swing": {"icon": "maki-playground", "fields": ["capacity", "playground/baby", "wheelchair"], "geometry": ["point"], "tags": {"playground": "swing"}, "name": "Swing"},
     "playground/zipwire": {"icon": "maki-playground", "geometry": ["point", "line"], "tags": {"playground": "zipwire"}, "name": "Zip Wire"},
     "point": {"fields": ["name"], "geometry": ["point"], "tags": {}, "name": "Point", "matchScore": 0.1},
     "power/sub_station": {"icon": "temaki-power", "fields": ["substation", "operator", "building", "ref"], "geometry": ["point", "area"], "tags": {"power": "sub_station"}, "reference": {"key": "power", "value": "substation"}, "name": "Substation", "searchable": false},
