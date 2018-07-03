@@ -123,20 +123,23 @@ function parseComments(comments) {
     var parsedComments = [];
 
     // for each comment
-    _forEach(comments, function(comment) {
+    for (var i = 0; i < comments.length; i++) {
+        var comment = comments[i];
         if (comment.nodeName === 'comment') {
             var childNodes = comment.childNodes;
             var parsedComment = {};
 
-            _forEach(childNodes, function(node) {
-                if (node.nodeName !== '#text') {
-                    var nodeName = node.nodeName;
-                    parsedComment[nodeName] = node.innerHTML;
-                }
-            });
-            if (parsedComment) { parsedComments.push(parsedComment); }
+            for (var j = 0; j < childNodes.length; j++) {
+                var node = childNodes[j];
+                var nodeName = node.nodeName;
+                if (nodeName === '#text') continue;
+                parsedComment[nodeName] = node.textContent;
+            }
+            if (parsedComment) {
+                parsedComments.push(parsedComment);
+            }
         }
-    });
+    }
     return parsedComments;
 }
 
@@ -204,20 +207,21 @@ var parsers = {
             }
             var bbox = geoExtent(props.loc).bbox();
             coincident = _noteCache.rtree.search(bbox).length;
-        } while(coincident);
+        } while (coincident);
 
         // parse note contents
-        _forEach(childNodes, function(node) {
-            if (node.nodeName !== '#text') {
-                var nodeName = node.nodeName;
-                // if the element is comments, parse the comments
-                if (nodeName === 'comments') {
-                    props[nodeName] = parseComments(node.childNodes);
-                } else {
-                    props[nodeName] = node.innerHTML;
-                }
+        for (var i = 0; i < childNodes.length; i++) {
+            var node = childNodes[i];
+            var nodeName = node.nodeName;
+            if (nodeName === '#text') continue;
+
+            // if the element is comments, parse the comments
+            if (nodeName === 'comments') {
+                props[nodeName] = parseComments(node.childNodes);
+            } else {
+                props[nodeName] = node.textContent;
             }
-        });
+        }
 
         var note = new osmNote(props);
         var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
