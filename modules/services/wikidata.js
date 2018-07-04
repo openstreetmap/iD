@@ -1,4 +1,5 @@
-import { jsonpRequest } from '../util/jsonp_request';
+import { json as d3_json } from 'd3-request';
+
 import { utilQsString } from '../util';
 
 
@@ -19,15 +20,15 @@ export default {
         }
 
         lang = lang || 'en';
-        jsonpRequest(endpoint + utilQsString({
+        d3_json(endpoint + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             sites: lang.replace(/-/g, '_') + 'wiki',
             titles: title,
             languages: 'en', // shrink response by filtering to one language
-            callback: '{callback}'
-        }), function(data) {
-            if (!data || data.error) {
+            origin: '*'
+        }), function(err, data) {
+            if (err || !data || data.error) {
                 callback('', {});
             } else {
                 callback(title, data.entities || {});
