@@ -66,7 +66,7 @@ export function uiNoteEditor(context) {
 
         var avatar = commentEnter
             .append('div')
-            .attr('class', 'comment-avatar');
+            .attr('class', function(d) { return 'comment-avatar user-' + d.uid; });
 
         avatar
             .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));

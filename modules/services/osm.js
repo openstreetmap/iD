@@ -42,6 +42,7 @@ var oauth = osmAuth({
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { loaded: {}, inflight: {}, seen: {} };
 var _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
+var _userCache = {};
 var _changeset = {};
 
 var _connectionID = 1;
@@ -228,6 +229,29 @@ var parsers = {
         _noteCache.rtree.insert(item);
         _noteCache.note[note.id] = note;
         return note;
+    },
+
+    user: function parseUser(obj, uid) {
+        var attrs = obj.attributes;
+        var user = {
+            id: uid,
+            display_name: attrs.display_name && attrs.display_name.value,
+            account_created: attrs.account_created && attrs.account_created.value,
+            changesets_count: 0
+        };
+
+        var img = obj.getElementsByTagName('img');
+        if (img && img[0] && img[0].getAttribute('href')) {
+            user.image_url = img[0].getAttribute('href');
+        }
+
+        var changesets = obj.getElementsByTagName('changesets');
+        if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
+            user.changesets_count = changesets[0].getAttribute('count');
+        }
+
+        _userCache[uid] = user;
+        return user;
     }
 };
 
@@ -252,7 +276,9 @@ function parseXML(xml, callback, options) {
         if (!parser) return null;
 
         var uid;
-        if (child.nodeName === 'note') {
+        if (child.nodeName === 'user') {
+            uid = child.attributes.id.value;
+        } else if (child.nodeName === 'note') {
             uid = child.getElementsByTagName('id')[0].textContent;
         } else {
             uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
@@ -286,6 +312,7 @@ export default {
 
         _tileCache = { loaded: {}, inflight: {}, seen: {} };
         _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
+        _userCache = {};
         _changeset = {};
 
         return this;
@@ -504,16 +531,16 @@ export default {
     },
 
 
-    userDetails: function(callback) {
-        if (_userDetails) {
-            callback(undefined, _userDetails);
+    user: function(uid, callback) {
+        if (_userCache[uid] || !this.authenticated()) {   // require auth
+            callback(undefined, _userCache[uid]);
             return;
         }
 
         var that = this;
         var cid = _connectionID;
 
-        function done(err, user_details) {
+        function done(err, xml) {
             if (err) {
                 // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
                 if (err.status === 400 || err.status === 401 || err.status === 403) {
@@ -525,30 +552,50 @@ export default {
                 return callback({ message: 'Connection Switched', status: -1 });
             }
 
+            var options = { skipSeen: false };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(undefined, results[0]);
+                }
+            }, options);
+        }
 
-            var u = user_details.getElementsByTagName('user')[0];
-            var img = u.getElementsByTagName('img');
-            var image_url = '';
+        oauth.xhr({ method: 'GET', path: '/api/0.6/user/' + uid }, done);
+    },
 
-            if (img && img[0] && img[0].getAttribute('href')) {
-                image_url = img[0].getAttribute('href');
-            }
 
-            var changesets = u.getElementsByTagName('changesets');
-            var changesets_count = 0;
-
-            if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
-                changesets_count = changesets[0].getAttribute('count');
-            }
-
-            _userDetails = {
-                id: u.attributes.id.value,
-                display_name: u.attributes.display_name.value,
-                image_url: image_url,
-                changesets_count: changesets_count
-            };
-
+    userDetails: function(callback) {
+        if (_userDetails) {
             callback(undefined, _userDetails);
+            return;
+        }
+
+        var that = this;
+        var cid = _connectionID;
+
+        function done(err, xml) {
+            if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
+
+            var options = { skipSeen: false };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    _userDetails = results[0];
+                    return callback(undefined, _userDetails);
+                }
+            }, options);
         }
 
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
