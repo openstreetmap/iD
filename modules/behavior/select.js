@@ -163,6 +163,7 @@ export function behaviorSelect(context) {
                 .enter(modeSelectNote(context, datum.id));
 
         } else {    // clicked nothing..
+
             context.selectedNoteID(null);
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));

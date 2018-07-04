@@ -18,9 +18,10 @@ var _newComment;
 
 
 export function uiNoteEditor(context) {
-    var dispatch = d3_dispatch('change', 'cancel', 'save');
+    var dispatch = d3_dispatch('change', 'cancel', 'save', 'changeInput');
     var formFields = uiFormFields(context);
     var _fieldsArr;
+    var _modified = false;
     var _note;
 
     function localeDateString(s) {
@@ -95,6 +96,24 @@ export function uiNoteEditor(context) {
     }
 
 
+    function newComment(selection) {
+        if (!context.selectedNoteID()) return;
+        // New Comment
+        var saveSection = selection.selectAll('.save-section')
+            .data([0]);
+
+        saveSection = saveSection.enter()
+            .append('div')
+            .attr('class','save-section cf')
+            .merge(saveSection);
+
+        saveSection
+            .call(saveHeader)
+            .call(input)
+            .call(buttons);
+    }
+
+
     function saveHeader(selection) {
         var header = selection.selectAll('.notesSaveHeader')
             .data([0]);
@@ -118,7 +137,7 @@ export function uiNoteEditor(context) {
             .attr('placeholder', t('note.inputPlaceholder'))
             .attr('maxlength', 1000)
             .call(utilNoAuto)
-            // .on('input', change(true))
+            .on('input', change(true))
             .on('blur', change())
             .on('change', change())
             .merge(input);
@@ -126,9 +145,7 @@ export function uiNoteEditor(context) {
 
         function change(onInput) {
             return function() {
-                var t = {};
-                // t[field.key] = utilGetSetValue(input) || undefined;
-                dispatch.call('change', this, t, onInput);
+                dispatch.call('changeInput', this, onInput);
             };
         }
     }
@@ -201,22 +218,6 @@ export function uiNoteEditor(context) {
             });
     }
 
-    function newComment(selection) {
-        // New Comment
-        var saveSection = selection.selectAll('.save-section')
-            .data([0]);
-
-        saveSection = saveSection.enter()
-            .append('div')
-            .attr('class','save-section cf')
-            .merge(saveSection);
-
-        saveSection
-            .call(saveHeader)
-            .call(input)
-            .call(buttons);
-    }
-
 
     function render(selection) {
         var header = selection.selectAll('.header')
@@ -245,6 +246,7 @@ export function uiNoteEditor(context) {
             .call(noteHeader)
             .call(noteComments)
             .call(newComment);
+
     }
 
 

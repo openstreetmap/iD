@@ -101,7 +101,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
         context.surface()
             .selectAll('.note.selected')
-            .classed('selected', false);
+            .classed('selected hovered', false);
 
         context.map()
             .on('drawn.select', null);
