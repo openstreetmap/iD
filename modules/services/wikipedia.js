@@ -1,4 +1,5 @@
-import { jsonpRequest } from '../util/jsonp_request';
+import { json as d3_json } from 'd3-request';
+
 import { utilQsString } from '../util';
 
 
@@ -17,17 +18,17 @@ export default {
         }
 
         lang = lang || 'en';
-        jsonpRequest(endpoint.replace('en', lang) +
+        d3_json(endpoint.replace('en', lang) +
             utilQsString({
                 action: 'query',
                 list: 'search',
                 srlimit: '10',
                 srinfo: 'suggestion',
                 format: 'json',
-                callback: '{callback}',
+                origin: '*',
                 srsearch: query
-            }), function(data) {
-                if (!data || !data.query || !data.query.search || data.error) {
+            }), function(err, data) {
+                if (err || !data || !data.query || !data.query.search || data.error) {
                     callback('', []);
                 } else {
                     var results = data.query.search.map(function(d) { return d.title; });
@@ -45,16 +46,16 @@ export default {
         }
 
         lang = lang || 'en';
-        jsonpRequest(endpoint.replace('en', lang) +
+        d3_json(endpoint.replace('en', lang) +
             utilQsString({
                 action: 'opensearch',
                 namespace: 0,
                 suggest: '',
                 format: 'json',
-                callback: '{callback}',
+                origin: '*',
                 search: query
-            }), function(data) {
-                if (!data || data.error) {
+            }), function(err, data) {
+                if (err || !data || data.error) {
                     callback('', []);
                 } else {
                     callback(data[0], data[1] || []);
@@ -70,16 +71,16 @@ export default {
             return;
         }
 
-        jsonpRequest(endpoint.replace('en', lang) +
+        d3_json(endpoint.replace('en', lang) +
             utilQsString({
                 action: 'query',
                 prop: 'langlinks',
                 format: 'json',
-                callback: '{callback}',
+                origin: '*',
                 lllimit: 500,
                 titles: title
-            }), function(data) {
-                if (!data || !data.query || !data.query.pages || data.error) {
+            }), function(err, data) {
+                if (err || !data || !data.query || !data.query.pages || data.error) {
                     callback({});
                 } else {
                     var list = data.query.pages[Object.keys(data.query.pages)[0]],
