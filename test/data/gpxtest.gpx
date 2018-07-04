@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 2.2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata><bounds minlat="40.150275473401365" minlon="-74.389286041259766" maxlat="40.150275473401365" maxlon="-74.389286041259766"/></metadata>                
+<wpt lat="40.150275473401365" lon="-74.389286041259766">
+  <name>New Jersey</name>
+  <extensions>
+    <ogr:abbr>N.J.</ogr:abbr>
+    <ogr:area>19717.8</ogr:area>
+    <ogr:name_en>New Jersey</ogr:name_en>
+    <ogr:osm_id>316973311</ogr:osm_id>
+  </extensions>
+</wpt>
+</gpx>
