@@ -5,6 +5,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
+import { services } from '../services';
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -93,6 +94,33 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'comment-text')
             .text(function(d) { return d.text; });
+
+        comments
+            .call(replaceAvatars);
+    }
+
+
+    function replaceAvatars(selection) {
+        var osm = services.osm;
+        if (!osm) return;
+
+        var uids = {};  // gather uids in the comment thread
+        _note.comments.forEach(function(d) {
+            if (d.uid) uids[d.uid] = true;
+        });
+
+        Object.keys(uids).forEach(function(uid) {
+            osm.user(uid, function(err, user) {
+                if (!user || !user.image_url) return;
+
+                selection.selectAll('.comment-avatar.user-' + uid)
+                    .html('')
+                    .append('img')
+                    .attr('class', 'icon comment-avatar-icon')
+                    .attr('src', user.image_url)
+                    .attr('alt', user.display_name);
+            });
+        });
     }
 
 
