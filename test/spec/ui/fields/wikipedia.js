@@ -1,5 +1,5 @@
 describe('iD.uiFieldWikipedia', function() {
-    var entity, context, selection, field;
+    var entity, context, selection, field, server;
 
     function changeTags(changed) {
         var e = context.entity(entity.id),
@@ -22,6 +22,16 @@ describe('iD.uiFieldWikipedia', function() {
         }
     }
 
+    function createServer(options) {
+        var server =  sinon.fakeServer.create(options);
+        server.respondWith('GET',
+            new RegExp('\/w\/api\.php.*action=wbgetentities'),
+            [200, { 'Content-Type': 'application/json' },
+                '{"entities":{"Q216353":{"id":"Q216353"}}}']
+        );
+        return server;
+    }
+
     before(function() {
         iD.services.wikipedia = iD.serviceWikipedia;
         iD.services.wikidata = iD.serviceWikidata;
@@ -38,16 +48,11 @@ describe('iD.uiFieldWikipedia', function() {
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
         field = context.presets().field('wikipedia');
-        window.JSONP_DELAY = 0;
-        window.JSONP_FIX = {
-            entities: {
-                Q216353: { id: 'Q216353' }
-            }
-        };
+        server = createServer({ respondImmediately: true });
     });
 
     afterEach(function() {
-        window.JSONP_FIX = undefined;
+        server.restore();
     });
 
     it('recognizes lang:title format', function() {
@@ -109,10 +114,12 @@ describe('iD.uiFieldWikipedia', function() {
         var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
-        window.JSONP_DELAY = 60;
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);
+
+        // Create an XHR server that will respond after 60ms
+        createServer({ autoRespond: true, autoRespondAfter: 60 });
 
         // Set title to "Skip"
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
@@ -123,6 +130,10 @@ describe('iD.uiFieldWikipedia', function() {
         // t0
         expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
 
+        // Create a new XHR server that will respond after 60ms to
+        // separate requests after this point from those before
+        createServer({ autoRespond: true, autoRespondAfter: 60 });
+
         // t30:  graph change - Set title to "Title"
         window.setTimeout(function() {
             iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
@@ -130,14 +141,14 @@ describe('iD.uiFieldWikipedia', function() {
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
         }, 30);
 
-        // t60:  at t0 + 60ms (JSONP_DELAY), wikidata SHOULD NOT be set because graph has changed.
+        // t60:  at t0 + 60ms (delay), wikidata SHOULD NOT be set because graph has changed.
 
         // t70:  check that wikidata unchanged
         window.setTimeout(function() {
             expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
         }, 70);
 
-        // t90:  at t30 + 60ms (JSONP_DELAY), wikidata SHOULD be set because graph is unchanged.
+        // t90:  at t30 + 60ms (delay), wikidata SHOULD be set because graph is unchanged.
 
         // t100:  check that wikidata has changed
         window.setTimeout(function() {

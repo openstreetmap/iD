@@ -16,7 +16,6 @@ import {
     geoSphericalDistance
 } from '../geo';
 
-import { jsonpRequest } from '../util/jsonp_request';
 import { utilDetect } from '../util/detect';
 
 
@@ -217,12 +216,12 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     var bing = rendererBackgroundSource(data);
     var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // Same as P2 and JOSM
     var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
-            key + '&jsonp={callback}';
+            key;
     var cache = {};
     var inflight = {};
     var providers = [];
 
-    jsonpRequest(url, function(json) {
+    d3_json(url, function(err, json) {
         providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
             return {
                 attribution: provider.attribution,
@@ -257,7 +256,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
         var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
-                '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
+                '?zl=' + zoom + '&key=' + key;
 
         if (inflight[tileId]) return;
 
@@ -269,10 +268,15 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }
 
         inflight[tileId] = true;
-        jsonpRequest(url, function(result) {
+        d3_json(url, function(error, result) {
             delete inflight[tileId];
 
-            var err = (!result && 'Unknown Error') || result.errorDetails;
+            var err;
+            if (error) {
+                err = error;
+            } else if (!result && 'Unknown Error') {
+                err = result.errorDetails;
+            }
             if (err) {
                 return callback(err);
             } else {
@@ -383,7 +387,7 @@ rendererBackgroundSource.Esri = function(data) {
             url = 'https://serviceslab.arcgisonline.com/arcgis/rest/services/Clarity_World_Imagery/MapServer/';
         }
 
-        url += metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json&callback={callback}';
+        url += metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json';
 
         if (!cache[tileId]) {
             cache[tileId] = {};
@@ -411,11 +415,13 @@ rendererBackgroundSource.Esri = function(data) {
 
         } else {
             inflight[tileId] = true;
-            jsonpRequest(url, function(result) {
+            d3_json(url, function(error, result) {
                 delete inflight[tileId];
 
                 var err;
-                if (!result) {
+                if (error) {
+                    err = error;
+                } else if (!result) {
                     err = 'Unknown Error';
                 } else if (result.features && result.features.length < 1) {
                     err = 'No Results';
