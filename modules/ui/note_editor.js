@@ -65,11 +65,9 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'comment');
 
-        var avatar = commentEnter
+        commentEnter
             .append('div')
-            .attr('class', function(d) { return 'comment-avatar user-' + d.uid; });
-
-        avatar
+            .attr('class', function(d) { return 'comment-avatar user-' + d.uid; })
             .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
 
         var main = commentEnter
@@ -83,7 +81,20 @@ export function uiNoteEditor(context) {
         meta
             .append('div')
             .attr('class', 'comment-author')
-            .text(function(d) { return d.user || t('note.anonymous'); });
+            .each(function(d) {
+                var selection = d3_select(this);
+                var osm = services.osm;
+                if (osm && d.user) {
+                    selection = selection
+                        .append('a')
+                        .attr('class', 'comment-author-link')
+                        .attr('href', osm.userURL(d.user))
+                        .attr('tabindex', -1)
+                        .attr('target', '_blank');
+                }
+                selection
+                    .text(function(d) { return d.user || t('note.anonymous'); });
+            });
 
         meta
             .append('div')
