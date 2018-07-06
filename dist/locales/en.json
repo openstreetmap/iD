@@ -297,6 +297,12 @@
                     "create": "Added a turn restriction",
                     "delete": "Deleted a turn restriction"
                 }
+            },
+            "detachNode": {
+                "title": "Detach",
+                "key": "D",
+                "description": "Detach this node from these lines/areas.",
+                "annotation": "Detached a node from owning lines/areas."
             }
         },
         "restriction": {
