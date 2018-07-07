@@ -1,7 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { uiFormFields } from './form_fields';
 
-import { select as d3_select } from 'd3-selection';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
@@ -21,6 +24,7 @@ var _newComment;
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change', 'cancel', 'save', 'changeInput');
     var formFields = uiFormFields(context);
+    var commentLimit = 600;  // add a "more" link to comments longer than this length
     var _fieldsArr;
     var _modified = false;
     var _note;
@@ -103,11 +107,52 @@ export function uiNoteEditor(context) {
 
         main
             .append('div')
-            .attr('class', 'comment-text')
-            .text(function(d) { return d.text; });
+            .attr('class', function(d) {
+                var trunc = (d.text.length > commentLimit);
+                return 'comment-text' + (trunc ? ' truncated' : '');
+            })
+            .text(function(d) {
+                var trunc = (d.text.length > commentLimit);
+                return trunc ? d.text.slice(0, commentLimit) + '…' : d.text;
+            });
+
+        main
+            .each(function(d) {
+                var selection = d3_select(this);
+                var trunc = (d.text.length > commentLimit);
+                if (!trunc) return;
+
+                selection
+                    .append('a')
+                    .attr('class', 'comment-toggle-more')
+                    .attr('href', '#')
+                    .attr('tabindex', -1)
+                    .attr('target', '_blank')
+                    .text(t('note.more'))
+                    .on('click', toggleMore);
+            });
 
         comments
             .call(replaceAvatars);
+    }
+
+
+    function toggleMore() {
+        d3_event.preventDefault();
+
+        var selection = d3_select(this.parentNode);  // select .comment-main
+        var commentText = selection.selectAll('.comment-text');
+        var commentToggle = selection.selectAll('.comment-toggle-more');
+        var trunc = !commentText.classed('truncated');
+
+        commentText
+            .classed('truncated', trunc)
+            .text(function(d) {
+                return trunc ? d.text.slice(0, commentLimit) + '…' : d.text;
+            });
+
+        commentToggle
+            .text(t('note.' + (trunc ? 'more' : 'less')));
     }
 
 

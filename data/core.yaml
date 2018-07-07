@@ -614,6 +614,8 @@ en:
     note: Note
     title: Edit note
     anonymous: anonymous
+    more: More
+    less: Less
     commentTitle: Comments
     close: Resolve
     reopen: Reopen
