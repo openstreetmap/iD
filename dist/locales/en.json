@@ -300,7 +300,7 @@
             },
             "detachNode": {
                 "title": "Detach",
-                "key": "D",
+                "key": "T",
                 "description": "Detach this node from these lines/areas.",
                 "annotation": "Detached a node from owning lines/areas."
             }
