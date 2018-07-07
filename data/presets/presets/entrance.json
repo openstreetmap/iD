@@ -3,6 +3,11 @@
     "geometry": [
         "vertex"
     ],
+    "terms": [
+        "entrance",
+        "exit",
+        "door"
+    ],
     "tags": {
         "entrance": "*"
     },
