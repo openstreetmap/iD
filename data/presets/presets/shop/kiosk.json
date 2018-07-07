@@ -5,6 +5,7 @@
         "operator",
         "address",
         "building_area",
+        "levels",
         "opening_hours",
         "payment_multi"
     ],
@@ -14,6 +15,7 @@
     ],
     "tags": {
         "shop": "kiosk"
+        "building:levels": "1"
     },
     "name": "Kiosk"
 }
