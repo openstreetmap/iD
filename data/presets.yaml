@@ -3138,6 +3138,7 @@ en:
       entrance:
         # entrance=*
         name: Entrance/Exit
+        # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
       footway/crossing:
         # 'highway=footway, footway=crossing'

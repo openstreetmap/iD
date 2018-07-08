@@ -4117,7 +4117,7 @@
                 },
                 "entrance": {
                     "name": "Entrance/Exit",
-                    "terms": ""
+                    "terms": "entrance,exit,door"
                 },
                 "footway/crossing-raised": {
                     "name": "Raised Street Crossing",
