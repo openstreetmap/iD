@@ -44,6 +44,7 @@ var _tileCache = { loaded: {}, inflight: {}, seen: {} };
 var _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
 var _userCache = {};
 var _changeset = {};
+var _noteChangeset = {};
 
 var _connectionID = 1;
 var _tileZoom = 16;
@@ -309,11 +310,13 @@ export default {
         _forEach(_tileCache.inflight, abortRequest);
         _forEach(_noteCache.inflight, abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
+        if (_noteChangeset.inflight) abortRequest(_changeset.inflight);
 
         _tileCache = { loaded: {}, inflight: {}, seen: {} };
         _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
         _userCache = {};
         _changeset = {};
+        _noteChangeset = {};
 
         return this;
     },
@@ -894,5 +897,67 @@ export default {
 
     notesCache: function() {
         return _noteCache;
-    }
+    },
+
+
+    toggleNoteStatus: function(note, comment, callback) {
+        if (!(note instanceof osmNote) && !(this.getNote(note.id))) return;
+        if (!this.authenticated()) return;
+
+        var that = this;
+        var cid = _connectionID;
+
+        function done(err, xml) {
+            if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
+
+            return callback(xml);
+        }
+
+        var status = note.status === 'open' ? 'close' : 'reopen';
+
+        var path = '/api/0.6/notes/' + note.id + '/' + status;
+        path += comment ? '?text=' + comment : '';
+
+        _noteChangeset.inflight = oauth.xhr({ method: 'POST', path: path }, done);
+
+    },
+
+    addNoteComment: function(note, comment, callback) {
+        if (!(note instanceof osmNote) && !(this.getNote(note.id))) return;
+        if (!this.authenticated()) return;
+        if (!comment) return;
+
+        var that = this;
+        var cid = _connectionID;
+
+        function done(err, xml) {
+            if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
+
+            return callback(xml);
+        }
+
+        var path = '/api/0.6/notes/' + note.id + '/comment?text=' + comment;
+
+        _noteChangeset.inflight = oauth.xhr({ method: 'POST', path: path }, done);
+
+    },
+
 };

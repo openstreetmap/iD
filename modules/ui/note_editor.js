@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { uiFormFields } from './form_fields';
 
 import {
     event as d3_event,
@@ -15,14 +14,14 @@ import {
 } from '../util';
 
 import { utilDetect } from '../util/detect';
-
-var _newComment;
+import { modeBrowse } from '../modes';
 
 
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change', 'cancel', 'save', 'changeInput');
     var commentLimit = 600;  // add a "more" link to comments longer than this length
-    var _modified = false;
+    var _inputValue;
+    var _newComment;
     var _note;
 
     function localeDateString(s) {
@@ -38,6 +37,65 @@ export function uiNoteEditor(context) {
     function noteEditor(selection) {
         render(selection);
     }
+
+    function cancel() {
+        _newComment = false;
+        context.selectedNoteID(null);
+        context.enter(modeBrowse(context));
+    }
+
+    function save(updateFunction) {
+        var osm = context.connection();
+        if (!osm) {
+            context.enter(modeBrowse(context));
+            return;
+        }
+
+        // If user somehow got logged out mid-save, try to reauthenticate..
+        // This can happen if they were logged in from before, but the tokens are no longer valid.
+        if (!osm.authenticated()) {
+
+            // TODO: dispatch 'notAuthenticated' to give warning
+
+            osm.authenticate(function(err) {
+                if (err) {    // quit save mode..
+                    context.enter(modeBrowse(context));
+                    return;
+                } else {
+                    save(updateFunction);  // continue where we left off..
+                }
+            });
+            return;
+        }
+
+        function parseResults(results) {
+
+            // call success
+
+            // otherwise, call failure
+        }
+
+        function success(response) {
+            console.log('success!', response);
+        }
+
+        function failure(response) {
+            console.log('failure!', response);
+        }
+
+        updateFunction(parseResults);
+    }
+
+    function toggleNoteStatus(parseResults) {
+        if (!_note || !_note.status || !context.selectedNoteID) return;
+        services.osm.toggleNoteStatus(_note, _inputValue, parseResults);
+    }
+
+    function addNoteComment(parseResults) {
+        if (!_note || !_note.status || !context.selectedNoteID) return;
+        services.osm..addNoteComment(_note, _inputValue, parseResults);
+    }
+
 
 
     function noteHeader(selection) {
@@ -217,16 +275,18 @@ export function uiNoteEditor(context) {
             .attr('placeholder', t('note.inputPlaceholder'))
             .attr('maxlength', 1000)
             .call(utilNoAuto)
-            .on('input', change(true))
-            .on('blur', change())
-            .on('change', change())
+            .on('input', modified)
+            .on('blur', modified)
+            .on('change', modified)
             .merge(input);
 
 
-        function change(onInput) {
-            return function() {
-                dispatch.call('changeInput', this, onInput);
-            };
+        function modified(onInput) {
+            _modified = !!this.value;
+            _inputValue = this.value;
+
+            // TODO: fix this event handling & update button text to reflect if there is input
+            // dispatch.call('inputModified', this, _inputValue);
         }
     }
 
@@ -272,20 +332,13 @@ export function uiNoteEditor(context) {
             .merge(buttonEnter);
 
         buttonSection.selectAll('.close-button')
-            .on('click.close', function() {
-                console.log('close button clicked');
-            });
+            .on('click', function() { save(toggleNoteStatus) });
 
         buttonSection.selectAll('.reopen-button')
-            .on('click.reopen', function() {
-                console.log('reopen button clicked');
-            });
+            .on('click', function() { save(toggleNoteStatus) });
 
         buttonSection.selectAll('.cancel-button')
-            .on('click.cancel', function() {
-                // var selectedID = commitChanges.entityID(); TODO: cancel note event
-                // dispatch.call('cancel', this, selectedID);
-            });
+            .on('click.cancel', cancel);
 
         buttonSection.selectAll('.save-button')
             .attr('disabled', function() {
@@ -294,7 +347,8 @@ export function uiNoteEditor(context) {
             })
             .on('click.save', function() {
                 this.blur();    // avoid keeping focus on the button - #4641
-                // dispatch.call('saveNote', this, _newComment); TODO: saveNote event
+                save(addNoteComment);
+                dispatch.call('saveNote', this, _newComment); // TODO: saveNote event
             });
     }
 

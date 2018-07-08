@@ -53,9 +53,12 @@
     border-radius: 20px;
 }
 .comment-metadata {
-    display: flex;
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
     flex-flow: row nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
+
 }
 .comment-author {
     font-weight: bold;
@@ -67,6 +70,9 @@
 .comment-text {
     color: #333;
     margin-top: 10px;
+    overflow-y: hidden; /* TODO: give scroll bar or replace with accordion  */
+    max-height: 250px;
+
 }
 
 #new-comment-input {
