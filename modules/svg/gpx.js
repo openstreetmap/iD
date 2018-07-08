@@ -205,8 +205,8 @@ export function svgGpx(projection, context, dispatch) {
 
     drawGpx.files = function(fileList) {
         if (!fileList.length) return this;
-        var f = fileList[0],
-            reader = new FileReader();
+        var f = fileList[0];
+        var reader = new FileReader();
 
         reader.onload = (function(file) {
             _src = file.name;

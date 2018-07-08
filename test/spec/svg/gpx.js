@@ -2,16 +2,41 @@ describe('iD.svgGpx', function () {
     var context;
     var surface;
     var dispatch = d3.dispatch('change');
-    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
-        .translate([0, 0])
+    var projection = iD.geoRawMercator()
+        .translate([6934098.868981334, 4092682.5519805425])
         .scale(iD.geoZoomToScale(17))
-        .clipExtent([[0, 0], [Infinity, Infinity]]);
+        .clipExtent([[0, 0], [1000, 1000]]);
+
+    var gj = {
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'id': 316973311,
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [
+                        -74.38928604125977,
+                        40.150275473401365
+                    ]
+                },
+                'properties': {
+                    'abbr': 'N.J.',
+                    'area': 19717.8,
+                    'name': 'New Jersey',
+                    'name_en': 'New Jersey',
+                    'osm_id': 316973311
+                }
+            }
+        ]
+    };
 
     beforeEach(function () {
         context = iD.coreContext();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
-            .call(context.map().centerZoom([0, 0], 17));
+            .call(context.map().centerZoom([-74.389286, 40.1502754], 17));
+
         surface = context.surface();
     });
 
@@ -22,39 +47,15 @@ describe('iD.svgGpx', function () {
 
         var layers = surface.selectAll('g.layer-gpx').nodes();
         expect(layers.length).to.eql(1);
-        expect(d3.select(layers[0]).classed('layer-gpx')).to.be.true;
     });
 
     it('draws geojson', function () {
-        var gj = {
-                  'type': 'FeatureCollection',
-                  'features': [
-                    {
-                      'type': 'Feature',
-                      'geometry': {
-                        'type': 'Point',
-                        'coordinates': [
-                          -74.38928604125977,
-                          40.150275473401365
-                        ]
-                      },
-                      'properties': {
-                        'abbr': 'N.J.',
-                        'area': 19717.8,
-                        'name': 'New Jersey',
-                        'name_en': 'New Jersey',
-                        'osm_id': 316973311
-                      },
-                      'id': 316973311
-                    }
-                  ]
-                };
         var render = iD.svgGpx(projection, context, dispatch).geojson(gj);
         surface.call(render);
 
-        var elements = surface.selectAll('path.gpx').nodes();
-        expect(elements.length).to.eql(1);
-        expect(d3.select(elements[0]).classed('gpx')).to.be.true;
+        var path = surface.selectAll('path.gpx');
+        expect(path.nodes().length).to.eql(1);
+        expect(path.attr('d')).to.match(/^M.*z$/);
     });
 
     describe('#files', function() {
@@ -63,9 +64,9 @@ describe('iD.svgGpx', function () {
             var render = iD.svgGpx(projection, context, dispatch).files(files);
             surface.call(render);
 
-            var elements = surface.selectAll('path.gpx').nodes();
-            expect(elements.length).to.eql(1);
-            expect(d3.select(elements[0]).classed('gpx')).to.be.true;
+            var path = surface.selectAll('path.gpx');
+            expect(path.nodes().length).to.eql(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
         it('handles geojson files', function () {
@@ -73,9 +74,9 @@ describe('iD.svgGpx', function () {
             var render = iD.svgGpx(projection, context, dispatch).files(files);
             surface.call(render);
 
-            var elements = surface.selectAll('path.gpx').nodes();
-            expect(elements.length).to.eql(1);
-            expect(d3.select(elements[0]).classed('gpx')).to.be.true;
+            var path = surface.selectAll('path.gpx');
+            expect(path.nodes().length).to.eql(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
         it('handles kml files', function () {
@@ -83,74 +84,29 @@ describe('iD.svgGpx', function () {
             var render = iD.svgGpx(projection, context, dispatch).files(files);
             surface.call(render);
 
-            var elements = surface.selectAll('path.gpx').nodes();
-            expect(elements.length).to.eql(1);
-            expect(d3.select(elements[0]).classed('gpx')).to.be.true;
+            var path = surface.selectAll('path.gpx');
+            expect(path.nodes().length).to.eql(1);
+            expect(path.attr('d')).to.match(/^M.*z$/);
         });
     });
 
 
     describe('#showLabels', function() {
         it('shows labels by default', function () {
-            var gj = {
-                  'type': 'FeatureCollection',
-                  'features': [
-                    {
-                      'type': 'Feature',
-                      'geometry': {
-                        'type': 'Point',
-                        'coordinates': [
-                          -74.38928604125977,
-                          40.150275473401365
-                        ]
-                      },
-                      'properties': {
-                        'abbr': 'N.J.',
-                        'area': 19717.8,
-                        'name': 'New Jersey',
-                        'name_en': 'New Jersey',
-                        'osm_id': 316973311
-                      },
-                      'id': 316973311
-                    }
-                  ]
-                };
             var render = iD.svgGpx(projection, context, dispatch).geojson(gj);
             surface.call(render);
-            var elements = surface.selectAll('text.gpxlabel').nodes();
-            //expect(elements.length).to.eql(1);
-            //expect(d3.select(elements[0]).classed('text.gpxlabel')).to.be.true;
 
-            var halo = surface.selectAll('text.gpxlabel-halo').nodes();
-            //expect(halo.length).to.eql(1);
-            //expect(d3.select(elements[0]).classed('text.gpxlabel-halo')).to.be.true;
+            var label = surface.selectAll('text.gpxlabel');
+            expect(label.nodes().length).to.eql(1);
+            expect(label.text()).to.eql('New Jersey');
+
+            var halo = surface.selectAll('text.gpxlabel-halo');
+            expect(halo.nodes().length).to.eql(1);
+            expect(halo.text()).to.eql('New Jersey');
         });
 
 
         it('hides labels with showLabels(false)', function () {
-            var gj = {
-                  'type': 'FeatureCollection',
-                  'features': [
-                    {
-                      'type': 'Feature',
-                      'geometry': {
-                        'type': 'Point',
-                        'coordinates': [
-                          -74.38928604125977,
-                          40.150275473401365
-                        ]
-                      },
-                      'properties': {
-                        'abbr': 'N.J.',
-                        'area': 19717.8,
-                        'name': 'New Jersey',
-                        'name_en': 'New Jersey',
-                        'osm_id': 316973311
-                      },
-                      'id': 316973311
-                    }
-                  ]
-                };
             var render = iD.svgGpx(projection, context, dispatch).geojson(gj).showLabels(false);
             surface.call(render);
 
