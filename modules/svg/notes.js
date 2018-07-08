@@ -1,15 +1,13 @@
 import _throttle from 'lodash-es/throttle';
+
 import { select as d3_select } from 'd3-selection';
+
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
-import { osmNote } from '../osm';
-
-import { uiNoteEditor } from '../ui';
 
 export function svgNotes(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    // var noteEditor = uiNoteEditor(context);
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
@@ -31,6 +29,7 @@ export function svgNotes(projection, context, dispatch) {
         layer.style('display', 'none');
     }
 
+
     function getService() {
         if (services.osm && !_notes) {
             _notes = services.osm;
@@ -42,6 +41,7 @@ export function svgNotes(projection, context, dispatch) {
         return _notes;
     }
 
+
     function showLayer() {
         editOn();
 
@@ -52,6 +52,7 @@ export function svgNotes(projection, context, dispatch) {
             .style('opacity', 1)
             .on('end', function () { dispatch.call('change'); });
     }
+
 
     function hideLayer() {
         throttledRedraw.cancel();
@@ -69,6 +70,7 @@ export function svgNotes(projection, context, dispatch) {
             context.map().centerEase(which.loc);
         }
     }
+
 
     function update() {
         var service = getService();

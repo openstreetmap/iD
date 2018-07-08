@@ -10,12 +10,10 @@ import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { services } from '../services';
 import {
-    utilGetSetValue,
     utilNoAuto,
     utilRebind
 } from '../util';
 
-import { uiField } from './field';
 import { utilDetect } from '../util/detect';
 
 var _newComment;
@@ -23,9 +21,7 @@ var _newComment;
 
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change', 'cancel', 'save', 'changeInput');
-    var formFields = uiFormFields(context);
     var commentLimit = 600;  // add a "more" link to comments longer than this length
-    var _fieldsArr;
     var _modified = false;
     var _note;
 
@@ -337,7 +333,6 @@ export function uiNoteEditor(context) {
     noteEditor.note = function(_) {
         if (!arguments.length) return _note;
         _note = _;
-        _fieldsArr = null;
         return noteEditor;
     };
 
