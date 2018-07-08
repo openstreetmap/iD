@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.38928604125977,
+          40.150275473401365
+        ]
+      },
+      "properties": {
+        "abbr": "N.J.",
+        "area": 19717.8,
+        "name": "New Jersey",
+        "name_en": "New Jersey",
+        "osm_id": 316973311
+      },
+      "id": 316973311
+    }
+  ]
+};
