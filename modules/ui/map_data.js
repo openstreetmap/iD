@@ -86,7 +86,7 @@ export function uiMapData(context) {
 
 
     function drawPhotoItems(selection) {
-        var photoKeys = ['streetside','mapillary-images', 'mapillary-signs', 'openstreetcam-images'];
+        var photoKeys = ['streetside', 'mapillary-images', 'mapillary-signs', 'openstreetcam-images'];
         var photoLayers = layers.all().filter(function(obj) { return photoKeys.indexOf(obj.id) !== -1; });
         var data = photoLayers.filter(function(obj) { return obj.layer.supported(); });
 
@@ -147,105 +147,64 @@ export function uiMapData(context) {
     }
 
 
-    function drawOsmItem(selection) {
-        var osm = layers.layer('osm'),
-            showsOsm = osm.enabled();
+    function drawOsmItems(selection) {
+        var osmKeys = ['osm', 'notes'];
+        var osmLayers = layers.all().filter(function(obj) { return osmKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
             .selectAll('.layer-list-osm')
-            .data(osm ? [0] : []);
+            .data([0]);
 
-        // Exit
-        ul.exit()
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-osm')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item')
+            .data(osmLayers);
+
+        li.exit()
             .remove();
 
-        // Enter
-        var ulEnter = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-osm');
-
-        var liEnter = ulEnter
+        var liEnter = li.enter()
             .append('li')
-            .attr('class', 'list-item-osm');
+            .attr('class', function(d) { return 'list-item list-item-' + d.id; });
 
         var labelEnter = liEnter
             .append('label')
-            .call(tooltip()
-                .title(t('map_data.layers.osm.tooltip'))
-                .placement('bottom')
-            );
+            .each(function(d) {
+                d3_select(this)
+                    .call(tooltip()
+                        .title(t('map_data.layers.' + d.id + '.tooltip'))
+                        .placement('bottom')
+                    );
+            });
 
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('osm'); });
+            .on('change', function(d) { toggleLayer(d.id); });
 
         labelEnter
             .append('span')
-            .text(t('map_data.layers.osm.title'));
+            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+
 
         // Update
-        ul = ul
-            .merge(ulEnter);
+        li = li
+            .merge(liEnter);
 
-        ul.selectAll('.list-item-osm')
-            .classed('active', showsOsm)
+        li
+            .classed('active', function (d) { return d.layer.enabled(); })
             .selectAll('input')
-            .property('checked', showsOsm);
-    }
-
-    function drawNotesItem(selection) {
-        var notes = layers.layer('notes'),
-            showsNotes = notes.enabled();
-
-        var ul = selection
-            .selectAll('.layer-list-notes')
-            .data(notes ? [0] : []);
-
-        // Exit
-        ul.exit()
-            .remove();
-
-        // Enter
-        var ulEnter = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-notes');
-
-        var liEnter = ulEnter
-            .append('li')
-            .attr('class', 'list-item-notes');
-
-        var labelEnter = liEnter
-            .append('label')
-            .call(tooltip()
-                .title(t('map_data.layers.notes.tooltip'))
-                .placement('top')
-            );
-
-        labelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function () { toggleLayer('notes'); });
-
-        labelEnter
-            .append('span')
-            .text(t('map_data.layers.notes.title'));
-
-        // Update
-        ul = ul
-            .merge(ulEnter);
-
-        ul.selectAll('.list-item-notes')
-            .classed('active', showsNotes)
-            .selectAll('input')
-            .property('checked', showsNotes);
+            .property('checked', function (d) { return d.layer.enabled(); });
     }
 
 
     function drawGpxItem(selection) {
-        var gpx = layers.layer('gpx'),
-            hasGpx = gpx && gpx.hasGpx(),
-            showsGpx = hasGpx && gpx.enabled();
+        var gpx = layers.layer('gpx');
+        var hasGpx = gpx && gpx.hasGpx();
+        var showsGpx = hasGpx && gpx.enabled();
 
         var ul = selection
             .selectAll('.layer-list-gpx')
@@ -414,8 +373,7 @@ export function uiMapData(context) {
 
     function update() {
         _dataLayerContainer
-            .call(drawOsmItem)
-            .call(drawNotesItem)
+            .call(drawOsmItems)
             .call(drawPhotoItems)
             .call(drawGpxItem);
 
