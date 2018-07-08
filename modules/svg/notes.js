@@ -65,13 +65,6 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
-    function click(which) {
-        if (context.selectedNoteID() === which.id) {
-            context.map().centerEase(which.loc);
-        }
-    }
-
-
     function update() {
         var service = getService();
         var selectedID = context.selectedNoteID();
@@ -87,8 +80,7 @@ export function svgNotes(projection, context, dispatch) {
         // enter
         var notesEnter = notes.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
-            .on('click', click);
+            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
 
         notesEnter
             .append('use')
