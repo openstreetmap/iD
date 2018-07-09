@@ -440,7 +440,7 @@ export default {
 
         var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
 
-        if (isHidden) {
+        if (isHidden && _mlyViewer) {
             wrap
                 .selectAll('.photo-wrapper:not(.mly-wrapper)')
                 .classed('hide', true);
@@ -497,7 +497,7 @@ export default {
 
     initViewer: function(imageKey, context) {
         var that = this;
-        if (Mapillary && imageKey) {
+        if (window.Mapillary && imageKey) {
             var opts = {
                 baseImageSize: 320,
                 component: {
