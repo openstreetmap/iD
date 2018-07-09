@@ -755,7 +755,8 @@
             "newComment": "New Comment",
             "inputPlaceholder": "Enter a comment to share with other users.",
             "comment": "Comment",
-            "commentResolve": "Comment & Resolve",
+            "commentClose": "Comment & Resolve",
+            "commentReopen": "Comment & Reopen",
             "save": "Save comment",
             "cancel": "Cancel"
         },

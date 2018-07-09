@@ -23,6 +23,7 @@ export function uiNoteEditor(context) {
     var _inputValue;
     var _newComment;
     var _note;
+    var _modified;
 
     function localeDateString(s) {
         if (!s) return null;
@@ -93,7 +94,7 @@ export function uiNoteEditor(context) {
 
     function addNoteComment(parseResults) {
         if (!_note || !_note.status || !context.selectedNoteID) return;
-        services.osm..addNoteComment(_note, _inputValue, parseResults);
+        services.osm.addNoteComment(_note, _inputValue, parseResults);
     }
 
 
@@ -332,10 +333,10 @@ export function uiNoteEditor(context) {
             .merge(buttonEnter);
 
         buttonSection.selectAll('.close-button')
-            .on('click', function() { save(toggleNoteStatus) });
+            .on('click', function() { save(toggleNoteStatus); });
 
         buttonSection.selectAll('.reopen-button')
-            .on('click', function() { save(toggleNoteStatus) });
+            .on('click', function() { save(toggleNoteStatus); });
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', cancel);
