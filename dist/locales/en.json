@@ -710,7 +710,7 @@
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
         "gpx": {
-            "local_layer": "Local file",
+            "local_layer": "Add a GPX",
             "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
@@ -720,6 +720,12 @@
             "title": "Photo Overlay (Bing Streetside)",
             "report": "Report a privacy concern with this image",
             "hires": "High resolution"
+        },
+        "mvt": {
+            "local_layer": "Add a MVT",
+            "drag_drop": "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse",
+            "zoom": "Zoom to layer",
+            "browse": "Browse for a file"
         },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",

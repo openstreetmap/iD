@@ -181,6 +181,14 @@ export function rendererBackground(context) {
             imageryUsed.push('Bing Streetside');
         }
 
+        var mvt = context.layers().layer('mvt');
+        if (mvt && mvt.enabled() && mvt.hasMvt()) {
+            // Include a string like '.mvt data file' or '.geojson data file'
+            var matchmvt = mvt.getSrc().match(/(pbf|mvt|(?:geo)?json)$/i);
+            var extensionmvt = matchmvt ? ('.' + matchmvt[0].toLowerCase() + ' ') : '';
+            imageryUsed.push(extensionmvt + 'data file');
+        }
+
         var mapillary_images = context.layers().layer('mapillary-images');
         if (mapillary_images && mapillary_images.enabled()) {
             imageryUsed.push('Mapillary Images');
@@ -426,6 +434,13 @@ export function rendererBackground(context) {
             var gpx = context.layers().layer('gpx');
             if (gpx) {
                 gpx.url(q.gpx);
+            }
+        }
+
+        if (q.mvt) {
+            var mvt = context.layers().layer('mvt');
+            if (mvt) {
+                mvt.url(q.mvt);
             }
         }
 

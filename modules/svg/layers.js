@@ -1,3 +1,4 @@
+
 import _difference from 'lodash-es/difference';
 import _find from 'lodash-es/find';
 import _map from 'lodash-es/map';
@@ -9,6 +10,7 @@ import { select as d3_select } from 'd3-selection';
 import { svgDebug } from './debug';
 import { svgGpx } from './gpx';
 import { svgStreetside } from './streetside';
+import { svgMvt } from './mvt';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
 import { svgOpenstreetcamImages } from './openstreetcam_images';
@@ -23,6 +25,7 @@ export function svgLayers(projection, context) {
     var layers = [
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
+        { id: 'mvt', layer: svgMvt(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
         { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },

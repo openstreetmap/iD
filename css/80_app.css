@@ -2521,6 +2521,10 @@ div.full-screen > button:hover {
     transform: rotateY(180deg);
 }
 
+[dir='rtl'] .list-item-mvt-browse svg {
+    transform: rotateY(180deg);
+}
+
 /* make sure tooltip fits in map-control panel */
 /* if too wide, placement will be wrong the first time it displays */
 .layer-list li.best .tooltip-inner {
