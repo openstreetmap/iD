@@ -47,6 +47,7 @@
     "camera/mount": {"key": "camera:mount", "type": "combo", "label": "Camera Mount"},
     "camera/type": {"key": "camera:type", "type": "combo", "label": "Camera Type", "strings": {"options": {"fixed": "Fixed", "panning": "Panning", "dome": "Dome"}}},
     "capacity": {"key": "capacity", "type": "number", "minValue": 0, "label": "Capacity", "placeholder": "50, 100, 200..."},
+    "cash_in": {"key": "cash_in", "type": "check", "label": "Cash In"},
     "castle_type": {"key": "castle_type", "type": "combo", "label": "Type"},
     "clothes": {"key": "clothes", "type": "semiCombo", "label": "Clothes"},
     "club": {"key": "club", "type": "typeCombo", "label": "Type"},

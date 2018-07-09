@@ -2,6 +2,7 @@
     "icon": "maki-bank",
     "fields": [
         "operator",
+        "cash_in",
         "currency_multi",
         "drive_through"
     ],

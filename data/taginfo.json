@@ -6373,6 +6373,7 @@
     {"key": "camera:type", "value": "panning", "description": "Camera Type"},
     {"key": "camera:type", "value": "dome", "description": "Camera Type"},
     {"key": "capacity", "description": "Capacity"},
+    {"key": "cash_in", "description": "Cash In"},
     {"key": "castle_type", "description": "Type"},
     {"key": "clothes", "description": "Clothes"},
     {"key": "collection_times", "description": "Collection Times"},

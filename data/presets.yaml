@@ -298,6 +298,9 @@ en:
         label: Capacity
         # capacity field placeholder
         placeholder: '50, 100, 200...'
+      cash_in:
+        # cash_in=*
+        label: Cash In
       castle_type:
         # castle_type=*
         label: Type
