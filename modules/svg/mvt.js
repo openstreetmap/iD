@@ -4,17 +4,19 @@ import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 
 import { geoBounds as d3_geoBounds } from 'd3-geo';
-import { buffer as d3_buffer } from 'd3-fetch';
+import { request as d3_request } from 'd3-request';
+
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
+import vt from '@mapbox/vector-tile';
+import Protobuf from 'pbf';
+
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
-import vt from '@mapbox/vector-tile';
-import Protobuf from 'pbf';
 
 
 var _initialized = false;
@@ -130,8 +132,7 @@ export function svgMvt(projection, context, dispatch) {
     function vtToGeoJson(bufferdata) {
         var tile = new vt.VectorTile(new Protobuf(bufferdata.data));
         var layers = Object.keys(tile.layers);
-        if (!Array.isArray(layers))
-            layers = [layers];
+        if (!Array.isArray(layers)) { layers = [layers]; }
 
         var collection = {type: 'FeatureCollection', features: []};
 
@@ -165,9 +166,6 @@ export function svgMvt(projection, context, dispatch) {
 
     function parseSaveAndZoom(extension, bufferdata) {
         switch (extension) {
-            default:
-                drawMvt.geojson(JSON.parse(bufferdata.data)).fitZoom();
-                break;
             case '.pbf':
                 drawMvt.geojson(vtToGeoJson(bufferdata)).fitZoom();
                 break;
@@ -206,10 +204,15 @@ export function svgMvt(projection, context, dispatch) {
         return this;
     };
 
+
     drawMvt.url = function(url) {
-        d3_buffer(url).then(function(data) {
+        d3_request(url)
+            .responseType('arraybuffer')
+            .get(function(err, data) {
+                if (err || !data) return;
+
                 _src = url;
-                var match = url.match(/(pbf|mvt|(?:geo)?json)/i);
+                var match = url.match(/(pbf|mvt)/i);
                 var extension = match ? ('.' + match[0].toLowerCase()) : '';
                 var zxy = url.match(/\/(\d+)\/(\d+)\/(\d+)/);
                 var bufferdata = {
@@ -217,8 +220,9 @@ export function svgMvt(projection, context, dispatch) {
                     zxy : zxy
                 };
                 parseSaveAndZoom(extension, bufferdata);
-        });
-        return this;
+            });
+
+       return this;
     };
 
 
