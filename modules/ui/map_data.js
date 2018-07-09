@@ -311,7 +311,7 @@ export function uiMapData(context) {
                 d3_event.stopPropagation();
                 mvt.fitZoom();
             })
-            .call(svgIcon('#icon-search'));
+            .call(svgIcon('#iD-icon-search'));
 
         liEnter
             .append('button')
@@ -328,7 +328,7 @@ export function uiMapData(context) {
                     })
                     .node().click();
             })
-            .call(svgIcon('#icon-geolocate'));
+            .call(svgIcon('#iD-icon-geolocate'));
 
         var labelEnter = liEnter
             .append('label')
