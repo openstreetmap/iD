@@ -450,8 +450,8 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItem)
             .call(drawPhotoItems)
-            .call(drawGpxItem)
-            .call(drawMvtItem);
+            .call(drawGpxItem);
+            // .call(drawMvtItem);
 
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
