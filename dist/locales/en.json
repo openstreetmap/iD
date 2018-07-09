@@ -2513,6 +2513,9 @@
                         "other": "Other"
                     }
                 },
+                "site_type": {
+                    "label": "Archaeological Site Type"
+                },
                 "site": {
                     "label": "Type"
                 },

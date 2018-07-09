@@ -1351,6 +1351,9 @@ en:
       site:
         # site=*
         label: Type
+      site_type:
+        # site_type=*
+        label: Archaeological Site Type
       smoking:
         # smoking=*
         label: Smoking

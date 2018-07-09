@@ -6893,6 +6893,7 @@
     {"key": "siren:type", "value": "pneumatic", "description": "Type"},
     {"key": "siren:type", "value": "electronic", "description": "Type"},
     {"key": "siren:type", "value": "other", "description": "Type"},
+    {"key": "site_type", "description": "Archaeological Site Type"},
     {"key": "site", "description": "Type"},
     {"key": "smoking", "value": "no", "description": "Smoking"},
     {"key": "smoking", "value": "separated", "description": "Smoking"},
