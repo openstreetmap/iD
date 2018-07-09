@@ -1,12 +1,10 @@
 import _flatten from 'lodash-es/flatten';
 import _isEmpty from 'lodash-es/isEmpty';
-import _isUndefined from 'lodash-es/isUndefined';
 import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 
 import { geoBounds as d3_geoBounds } from 'd3-geo';
-import { text as d3_text } from 'd3-request';
-import { buffer } from 'd3-fetch';
+import { buffer as d3_buffer } from 'd3-fetch';
 import {
     event as d3_event,
     select as d3_select
@@ -152,7 +150,7 @@ export function svgMvt(projection, context, dispatch) {
 
 
     function getExtension(fileName) {
-        if (_isUndefined(fileName)) {
+        if (fileName === undefined) {
             return '';
         }
 
@@ -209,7 +207,7 @@ export function svgMvt(projection, context, dispatch) {
     };
 
     drawMvt.url = function(url) {
-        buffer(url).then(function(data) {
+        d3_buffer(url).then(function(data) {
                 _src = url;
                 var match = url.match(/(pbf|mvt|(?:geo)?json)/i);
                 var extension = match ? ('.' + match[0].toLowerCase()) : '';
@@ -230,12 +228,17 @@ export function svgMvt(projection, context, dispatch) {
             reader = new FileReader();
 
         reader.onload = (function(file) {
+
+return; // todo find x,y,z
+var data = [];
+var zxy = [0,0,0];
+
             _src = file.name;
             var extension = getExtension(file.name);
             var bufferdata = {
-                    data,
-                    zxy      //to-do find x,y,z
-                };
+                data: data,
+                zxy: zxy
+            };
             return function (e) {
                 bufferdata.data = e.target.result;
                 parseSaveAndZoom(extension, bufferdata);

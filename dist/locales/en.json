@@ -715,17 +715,17 @@
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
         },
-        "streetside": {
-            "tooltip": "Streetside photos from Microsoft",
-            "title": "Photo Overlay (Bing Streetside)",
-            "report": "Report a privacy concern with this image",
-            "hires": "High resolution"
-        },
         "mvt": {
             "local_layer": "Add a MVT",
             "drag_drop": "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse",
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
+        },
+        "streetside": {
+            "tooltip": "Streetside photos from Microsoft",
+            "title": "Photo Overlay (Bing Streetside)",
+            "report": "Report a privacy concern with this image",
+            "hires": "High resolution"
         },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",

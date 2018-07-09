@@ -1,6 +1,5 @@
 import _flatten from 'lodash-es/flatten';
 import _isEmpty from 'lodash-es/isEmpty';
-import _isUndefined from 'lodash-es/isUndefined';
 import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 
@@ -133,7 +132,7 @@ export function svgGpx(projection, context, dispatch) {
 
 
     function getExtension(fileName) {
-        if (_isUndefined(fileName)) {
+        if (fileName === undefined) {
             return '';
         }
 
