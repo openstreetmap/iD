@@ -15,10 +15,10 @@ body {
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
         "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
         sans-serif;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     min-width: 768px;
-    color:#333;
+    color: #333;
     overflow: hidden;
     -ms-user-select: none;
 }
@@ -123,8 +123,8 @@ div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, 
 }
 
 a, button, input, textarea {
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    -webkit-touch-callout:none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
 }
 
 a,
@@ -176,8 +176,8 @@ h4, h5 {
 
 p {
     font-size: 12px;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 p:last-child {
@@ -218,13 +218,13 @@ input[type=number],
 input[type=url],
 input[type=tel],
 input[type=email] {
-    background-color: white;
+    background-color: #fff;
     color: #333;
-    border:1px solid #ccc;
-    padding:5px 20px 5px 10px;
-    height:30px;
+    border: 1px solid #ccc;
+    padding: 5px 20px 5px 10px;
+    height: 30px;
     width: 100%;
-    border-radius:4px;
+    border-radius: 4px;
     text-overflow: ellipsis;
 }
 [dir='rtl'] textarea,
@@ -234,7 +234,7 @@ input[type=email] {
 [dir='rtl'] input[type=url],
 [dir='rtl'] input[type=tel],
 [dir='rtl'] input[type=email] {
-    padding:5px 10px 5px 20px;
+    padding: 5px 10px 5px 20px;
 }
 
 textarea:focus,
@@ -267,14 +267,14 @@ input[type="radio"] {
 /* tables */
 
 table {
-    background-color: white;
+    background-color: #fff;
     border-collapse: collapse;
-    width:100%;
-    border-spacing:0;
+    width: 100%;
+    border-spacing: 0;
 }
 
 table th {
-    text-align:left;
+    text-align: left;
 }
 
 table.tags, table.tags td, table.tags th {
@@ -289,19 +289,19 @@ table.tags, table.tags td, table.tags th {
 /* Grid
 ------------------------------------------------------- */
 
-.col0    { float:left; width:04.1666%; }
-.col1    { float:left; width:08.3333%; }
-.col2    { float:left; width:16.6666%; }
-.col3    { float:left; width:25.0000%; max-width: 300px; }
-.col4    { float:left; width:33.3333%; max-width: 400px; }
-.col5    { float:left; width:41.6666%; max-width: 500px; }
-.col6    { float:left; width:50.0000%; max-width: 600px; }
-.col7    { float:left; width:58.3333%; }
-.col8    { float:left; width:66.6666%; }
-.col9    { float:left; width:75.0000%; }
-.col10   { float:left; width:83.3333%; }
-.col11   { float:left; width:91.6666%; }
-.col12   { float:left; width:100.0000%; }
+.col0    { float: left; width: 04.1666%; }
+.col1    { float: left; width: 08.3333%; }
+.col2    { float: left; width: 16.6666%; }
+.col3    { float: left; width: 25.0000%; max-width: 300px; }
+.col4    { float: left; width: 33.3333%; max-width: 400px; }
+.col5    { float: left; width: 41.6666%; max-width: 500px; }
+.col6    { float: left; width: 50.0000%; max-width: 600px; }
+.col7    { float: left; width: 58.3333%; }
+.col8    { float: left; width: 66.6666%; }
+.col9    { float: left; width: 75.0000%; }
+.col10   { float: left; width: 83.3333%; }
+.col11   { float: left; width: 91.6666%; }
+.col12   { float: left; width: 100.0000%; }
 
 /* UI Lists
 ------------------------------------------------------- */
@@ -313,7 +313,7 @@ ul li { list-style: none;}
     padding: 5px 10px;
     display: block;
     height: 30px;
-    background-color: white;
+    background-color: #fff;
     color: #7092ff;
     cursor: pointer;
 }
@@ -345,7 +345,7 @@ ul li { list-style: none;}
 /* Utility Classes
 ------------------------------------------------------- */
 .fillL {
-    background: white;
+    background: #fff;
     color: #333;
 }
 
@@ -360,13 +360,13 @@ ul li { list-style: none;}
 }
 
 .fillD {
-    background:rgba(0,0,0,.5);
-    color: white;
+    background: rgba(0,0,0,.5);
+    color: #fff;
 }
 
 .fillD2 {
-    background:rgba(0,0,0,.75);
-    color: white;
+    background: rgba(0,0,0,.75);
+    color: #fff;
 }
 
 .fl { float: left;}
@@ -393,20 +393,20 @@ li.hide {
 
 .loading {
     background: url(img/loader_bg.gif);
-    background-size:5px 5px;
+    background-size: 5px 5px;
 }
 
 .panewrap {
-    position:absolute;
-    width:200%;
-    height:100%;
+    position: absolute;
+    width: 200%;
+    height: 100%;
     right: -100%;
 }
 
 
 .pane {
-    position:absolute;
-    width:50%;
+    position: absolute;
+    width: 50%;
     top: 0;
     bottom: 30px;
 }
@@ -424,14 +424,14 @@ li.hide {
 button {
     text-align: center;
     line-height: 20px;
-    border:0;
-    background: white;
+    border: 0;
+    background: #fff;
     font-weight: bold;
-    color:#333;
-    font-size:12px;
+    color: #333;
+    font-size: 12px;
     display: inline-block;
-    height:40px;
-    border-radius:4px;
+    height: 40px;
+    border-radius: 4px;
 }
 
 button:focus,
@@ -473,7 +473,7 @@ button.minor:hover {
 
 .button-wrap {
     display: inline-block;
-    padding-right:10px;
+    padding-right: 10px;
     margin: 0;
 }
 
@@ -490,7 +490,7 @@ button.minor:hover {
 }
 
 .joined button {
-    border-radius:0;
+    border-radius: 0;
     border-right: 1px solid rgba(0,0,0,.5);
 }
 [dir='rtl'] .joined button {
@@ -499,7 +499,7 @@ button.minor:hover {
 }
 
 .fillL .joined button {
-    border-right: 1px solid white;
+    border-right: 1px solid #fff;
 }
 
 .joined button:first-child {
@@ -519,7 +519,7 @@ button.minor:hover {
 
 button.action {
     background: #7092ff;
-    color: white;
+    color: #fff;
 }
 
 button[disabled].action,
@@ -864,7 +864,7 @@ a.hide-toggle {
 /* Feature list */
 
 .feature-list  {
-    width:100%;
+    width: 100%;
 }
 
 .no-results-item,
@@ -877,7 +877,7 @@ a.hide-toggle {
 }
 
 .feature-list-item {
-    background-color: white;
+    background-color: #fff;
     font-weight: bold;
     height: 40px;
     line-height: 20px;
@@ -917,11 +917,11 @@ a.hide-toggle {
 }
 
 .feature-list-item .entity-type {
-    color:#7092ff;
+    color: #7092ff;
 }
 
 .feature-list-item:hover .entity-type {
-    color:#597be7;
+    color: #597be7;
 }
 
 .feature-list-item .entity-name {
@@ -941,7 +941,7 @@ a.hide-toggle {
 /* Preset grid  */
 
 .preset-list  {
-    width:100%;
+    width: 100%;
     padding: 20px 20px 10px 20px;
     border-bottom: 1px solid #ccc;
 }
@@ -1650,7 +1650,7 @@ input[type=number] {
 
 .checkselect label:last-of-type {
     display: block;
-    background: white;
+    background: #fff;
     padding: 5px 10px;
     color: #7092ff;
 }
@@ -1962,7 +1962,7 @@ div.combobox {
     display: none;
     box-shadow: 0 4px 10px 1px rgba(0,0,0,.2);
     margin-top: -1px;
-    background: white;
+    background: #fff;
     max-height: 245px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -2478,7 +2478,7 @@ div.full-screen > button:hover {
 .layer-list li {
     position: relative;
     height: 30px;
-    background-color: white;
+    background-color: #fff;
     color: #7092ff;
 }
 
@@ -2737,12 +2737,6 @@ div.full-screen > button:hover {
 }
 
 /* Side panes */
-
-/*.map-data-control .map-pane,
-.background-control .map-pane,
-.help-control .map-pane {
-}
-*/
 .map-pane {
     position: fixed;
     top: 60px;
@@ -2818,7 +2812,7 @@ div.full-screen > button:hover {
 
 .help-wrap .toc {
     width: 40%;
-    float:right;
+    float: right;
     margin-left: 20px;
     margin-bottom: 20px;
     padding-left: 5px;
@@ -2996,11 +2990,11 @@ img.tile-debug {
 }
 
 .map-in-map-tiles {
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
+    transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -3158,7 +3152,7 @@ img.tile-debug {
     padding: 0 4px;
     margin-top: 10px;
     margin-right: 10px;
-    color: white;
+    color: #fff;
 }
 [dir='rtl'] .panel-content .button {
     margin-right: auto;
@@ -3189,8 +3183,8 @@ img.tile-debug {
 #about {
     width: 100%;
     position: absolute;
-    right:0;
-    bottom:0;
+    right: 0;
+    bottom: 0;
     border-radius: 0;
     pointer-events: none;
     display: flex;
@@ -3425,7 +3419,7 @@ img.tile-debug {
 }
 .source-switch a.live {
     background: #d32232;
-    color:#fff;
+    color: #fff;
 }
 
 .feature-warning a {
@@ -3488,13 +3482,13 @@ img.tile-debug {
     vertical-align: baseline;
     width: 11px;
     height: 11px;
-    fill: white;
+    fill: #fff;
 }
 
 /* For text (e.g. upcoming events) */
 .badge-text {
     display: inline-block;
-    color: white;
+    color: #fff;
     text-align: center;
     width: 16px;
     height: 16px;
@@ -3516,7 +3510,7 @@ img.tile-debug {
 .modal {
     top: 40px;
     display: inline-block;
-    position:absolute;
+    position: absolute;
     border-radius: 3px;
     overflow: hidden;
     left: 0;
@@ -3545,9 +3539,9 @@ img.tile-debug {
 
 .shaded:before {
     content:'';
-    background:rgba(0,0,0,0.5);
-    position:fixed;
-    left:0px; right:0px; top:0px; bottom:0px;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    left: 0px; right: 0px; top: 0px; bottom: 0px;
 }
 
 .modal-section {
@@ -4051,7 +4045,7 @@ svg.mouseclick use.right {
     min-width: 80px;
     padding: 10px;
     font-weight: normal;
-    background-color: white;
+    background-color: #fff;
 }
 
 .tail {
@@ -4074,14 +4068,14 @@ svg.mouseclick use.right {
     top: 50%;
     right: -5px;
     margin-top: -5px;
-    border-left-color: white;
+    border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
 
 .tail div {
     border-radius: 3px;
     padding: 10px;
-    background: white;
+    background: #fff;
     position: absolute;
     top: 180px;
     left: 0;
@@ -4099,7 +4093,7 @@ svg.mouseclick use.right {
     top: 50%;
     left: -5px;
     margin-top: -5px;
-    border-right-color: white;
+    border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
 
@@ -4115,7 +4109,7 @@ svg.mouseclick use.right {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
-    border-top-color: white;
+    border-top-color: #fff;
     border-width: 5px 5px 0;
 }
 
@@ -4123,7 +4117,7 @@ svg.mouseclick use.right {
     top: 50%;
     left: -5px;
     margin-top: -5px;
-    border-right-color: white;
+    border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
 
@@ -4131,7 +4125,7 @@ svg.mouseclick use.right {
     top: 50%;
     right: -5px;
     margin-top: -5px;
-    border-left-color: white;
+    border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
 
@@ -4139,7 +4133,7 @@ svg.mouseclick use.right {
     top: -5px;
     left: 50%;
     margin-left: -5px;
-    border-bottom-color: white;
+    border-bottom-color: #fff;
     border-width: 0 5px 5px;
 }
 
@@ -4332,7 +4326,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 
 
 .lasso-path {
-    fill-opacity:0.3;
+    fill-opacity: 0.3;
     stroke: #fff;
     stroke-width: 1;
     stroke-opacity: 1;
@@ -4367,7 +4361,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     height: 20px;
     overflow: visible;
     width: 10px;
-    background: white;
+    background: #fff;
     border-left: 1px solid #DDD;
 }
 
@@ -4414,7 +4408,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     flex: 0 0 auto;
     height: 40px;
     width: 40px;
-    color: white;
+    color: #fff;
     margin: 0px 20px;
     vertical-align: middle;
 }

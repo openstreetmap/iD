@@ -9,7 +9,6 @@ path.stroke.area.tag-aeroway,
 }
 
 /* narrow aeroways (taxiway) */
-
 path.shadow.tag-aeroway-taxiway,
 path.shadow.tag-taxiway {
     stroke-width: 16;
@@ -52,7 +51,6 @@ path.casing.tag-taxiway {
 
 
 /* wide aeroways (runway) */
-
 .preset-icon .icon.tag-aeroway-runway,
 .preset-icon .icon.tag-runway {
     color: #444;

@@ -4670,7 +4670,7 @@
       "value": "crossing",
       "description": "Railway Crossing (Path)",
       "object_types": ["node"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/cross-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
     },
     {
       "key": "railway",

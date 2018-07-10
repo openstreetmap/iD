@@ -4,26 +4,27 @@ import { osmPavedTags } from '../osm/tags';
 
 export function svgTagClasses() {
     var primaries = [
-            'building', 'highway', 'railway', 'waterway', 'aeroway',
-            'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-            'leisure', 'military', 'place', 'man_made'
-        ],
-        statuses = [
-            'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
-            'razed', 'demolished', 'obliterated', 'intermittent'
-        ],
-        secondaries = [
-            'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
-            'surface', 'tracktype', 'crossing', 'service', 'sport'
-        ],
-        tagClassRe = /^tag-/,
-        tags = function(entity) { return entity.tags; };
+        'building', 'highway', 'railway', 'waterway', 'aeroway',
+        'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
+        'leisure', 'military', 'place', 'man_made'
+    ];
+    var statuses = [
+        'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
+        'razed', 'demolished', 'obliterated', 'intermittent'
+    ];
+    var secondaries = [
+        'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
+        'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
+        'public_transport'
+    ];
+    var tagClassRe = /^tag-/;
+    var _tags = function(entity) { return entity.tags; };
 
 
     var tagClasses = function(selection) {
         selection.each(function tagClassesEach(entity) {
-            var value = this.className,
-                classes, primary, status;
+            var value = this.className;
+            var classes, primary, status;
 
             if (value.baseVal !== undefined) value = value.baseVal;
 
@@ -31,7 +32,7 @@ export function svgTagClasses() {
                 return name.length && !tagClassRe.test(name);
             }).join(' ');
 
-            var t = tags(entity), i, k, v;
+            var t = _tags(entity), i, k, v;
 
             // pick at most one primary classification tag..
             for (i = 0; i < primaries.length; i++) {
@@ -109,8 +110,8 @@ export function svgTagClasses() {
 
 
     tagClasses.tags = function(_) {
-        if (!arguments.length) return tags;
-        tags = _;
+        if (!arguments.length) return _tags;
+        _tags = _;
         return tagClasses;
     };
 

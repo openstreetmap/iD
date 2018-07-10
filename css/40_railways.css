@@ -1,5 +1,4 @@
 /* railways */
-
 .preset-icon .icon.tag-railway.other-line {
     color: #fff;
     fill: #777;
@@ -10,7 +9,6 @@
 }
 
 /* railway areas */
-
 path.stroke.area.tag-railway,
 .low-zoom path.stroke.area.tag-railway {
     stroke: white;
@@ -24,7 +22,6 @@ path.casing.area.tag-railway,
 }
 
 /* narrow widths */
-
 path.shadow.tag-railway {
     stroke-width: 16;
 }
@@ -50,7 +47,6 @@ path.stroke.tag-railway {
 
 
 /* styles */
-
 path.casing.tag-railway {
     stroke: #555;
 }
@@ -64,9 +60,11 @@ path.stroke.tag-railway {
     color: #999;
     fill: #eee;
 }
+path.casing.tag-railway-disused,
 path.casing.tag-railway-abandoned {
     stroke: #999;
 }
+path.stroke.tag-railway-disused,
 path.stroke.tag-railway-abandoned {
     stroke: #eee;
 }
@@ -81,46 +79,4 @@ path.casing.tag-railway-subway {
 }
 path.stroke.tag-railway-subway {
     stroke: #bbb;
-}
-
-
-/* railway platforms - like sidewalks */
-
-.preset-icon .icon.iD-highway-footway.tag-railway-platform {
-    color: #ae8681;
-    fill: #dcd9b9;
-}
-path.shadow.tag-railway-platform {
-    stroke-width: 16;
-}
-path.casing.tag-railway-platform {
-    stroke: #dcd9b9;
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-dasharray: none;
-}
-path.stroke.tag-railway-platform {
-    stroke: #ae8681;
-    stroke-width: 3;
-    stroke-linecap: butt;
-    stroke-dasharray: 6, 6;
-}
-
-.low-zoom path.shadow.tag-railway-platform {
-    stroke-width: 12;
-}
-.low-zoom path.casing.tag-railway-platform {
-    stroke-width: 3;
-}
-.low-zoom path.stroke.tag-railway-platform {
-    stroke-width: 1;
-    stroke-linecap: butt;
-    stroke-dasharray: 3, 3;
-}
-
-g.midpoint.tag-railway-platform .fill {
-    fill: #fff;
-    stroke: #333;
-    stroke-opacity: .8;
-    opacity: .8;
 }

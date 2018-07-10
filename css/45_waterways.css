@@ -1,5 +1,4 @@
 /* waterways */
-
 .preset-icon .icon.tag-waterway.other-line {
     color: #77d3de;
     fill: #77d3de;
@@ -25,7 +24,6 @@ path.stroke.tag-waterway {
 
 
 /* narrow waterways (default) */
-
 path.shadow.tag-waterway {
     stroke-width: 16;
 }
@@ -48,7 +46,6 @@ path.stroke.tag-waterway {
 
 
 /* wide waterways (river) */
-
 path.shadow.tag-waterway-river {
     stroke-width: 20;
 }
@@ -71,7 +68,6 @@ path.stroke.tag-waterway-river {
 
 
 /* ditch */
-
 .preset-icon .icon.tag-waterway-ditch {
     color: #8eabf3;
 }
@@ -81,7 +77,6 @@ path.stroke.tag-waterway-ditch {
 
 
 /* waterway areas */
-
 path.area.stroke.tag-waterway-dock,
 path.area.stroke.tag-waterway-boatyard,
 path.area.stroke.tag-waterway-fuel {

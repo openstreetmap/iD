@@ -223,41 +223,106 @@ path.fill.tag-building {
     background-color: rgba(224, 110, 95, 0.3);
 }
 
-/* piers */
-.preset-icon .icon.tag-man_made-pier {
-    color: #ae8681;
-    fill: #dcd9b9;
+
+/* "Special" paths - platforms, piers, crossings */
+.preset-icon .icon.tag-public_transport-platform,
+.preset-icon .icon.tag-railway-platform,
+.preset-icon .icon.tag-man_made-pier,
+.preset-icon .icon.tag-footway.tag-footway-crossing,
+.preset-icon .icon.tag-crossing {
+    color: #988;
+    fill: #dca;
 }
 
-.preset-icon-fill-area.tag-man_made-pier {
-    border-color: #ae8681;
-    background-color: #dcd9b9;
+.preset-icon-fill-area.tag-public_transport-platform,
+.preset-icon-fill-area.tag-railway-platform,
+.preset-icon-fill-area.tag-man_made-pier,
+.preset-icon-fill-area.tag-footway.tag-footway-crossing,
+.preset-icon-fill-area.tag-crossing {
+    border-color: #988;
+    background-color: #dca;
 }
 
-path.shadow.tag-man_made-pier {
+path.shadow.tag-public_transport-platform,
+path.shadow.tag-railway-platform,
+path.shadow.tag-man_made-pier,
+path.shadow.tag-footway.tag-footway-crossing,
+path.shadow.tag-crossing {
     stroke-width: 16;
 }
-path.casing.tag-man_made-pier {
-    stroke: #dcd9b9;
+path.casing.tag-public_transport-platform,
+path.casing.tag-railway-platform,
+path.casing.tag-man_made-pier,
+path.casing.tag-footway.tag-footway-crossing,
+path.casing.tag-crossing {
+    stroke: #dca;
     stroke-width: 5;
     stroke-linecap: round;
     stroke-dasharray: none;
 }
-path.stroke.tag-man_made-pier {
-    stroke: #ae8681;
+path.stroke.tag-public_transport-platform,
+path.stroke.tag-railway-platform,
+path.stroke.tag-man_made-pier,
+path.stroke.tag-footway.tag-footway-crossing,
+path.stroke.tag-crossing {
+    stroke: #988;
     stroke-width: 3;
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
 }
 
-.low-zoom path.shadow.tag-man_made-pier {
+.low-zoom path.shadow.tag-public_transport-platform,
+.low-zoom path.shadow.tag-railway-platform,
+.low-zoom path.shadow.tag-man_made-pier,
+.low-zoom path.shadow.tag-footway.tag-footway-crossing,
+.low-zoom path.shadow.tag-crossing {
     stroke-width: 12;
 }
-.low-zoom path.casing.tag-man_made-pier {
+.low-zoom path.casing.tag-public_transport-platform,
+.low-zoom path.casing.tag-railway-platform,
+.low-zoom path.casing.tag-man_made-pier,
+.low-zoom path.casing.tag-footway.tag-footway-crossing,
+.low-zoom path.casing.tag-crossing {
     stroke-width: 3;
 }
-.low-zoom path.stroke.tag-man_made-pier {
+.low-zoom path.stroke.tag-public_transport-platform,
+.low-zoom path.stroke.tag-railway-platform,
+.low-zoom path.stroke.tag-man_made-pier,
+.low-zoom path.stroke.tag-footway.tag-footway-crossing,
+.low-zoom path.stroke.tag-crossing {
     stroke-width: 1;
     stroke-linecap: butt;
     stroke-dasharray: 3, 3;
 }
+
+g.midpoint.tag-public_transport-platform .fill,
+g.midpoint.tag-railway-platform .fill,
+g.midpoint.tag-man_made-pier .fill,
+g.midpoint.tag-footway.tag-footway-crossing .fill,
+g.midpoint.tag-crossing .fill {
+    fill: #fff;
+    stroke: #333;
+    stroke-opacity: .8;
+    opacity: .8;
+}
+
+/* marked crossings, zebras */
+.preset-icon .icon.tag-crossing.tag-crossing-marked,
+.preset-icon .icon.tag-crossing.tag-crossing-zebra {
+    color: #444;
+    fill: #dca;
+}
+path.casing.tag-crossing.tag-crossing-marked,
+path.casing.tag-crossing.tag-crossing-zebra {
+    stroke: #dca;
+}
+path.stroke.tag-crossing.tag-crossing-marked,
+path.stroke.tag-crossing.tag-crossing-zebra {
+    stroke: #444;
+    stroke-dasharray: 6, 4;
+}
+.low-zoom path.stroke.tag-crossing.tag-crossing-marked,
+.low-zoom path.stroke.tag-crossing.tag-crossing-zebra {
+    stroke-dasharray: 3, 2;
+}
+
