@@ -2518,7 +2518,7 @@
                     }
                 },
                 "site_type": {
-                    "label": "Archaeological Site Type"
+                    "label": "Site Type"
                 },
                 "site": {
                     "label": "Type"

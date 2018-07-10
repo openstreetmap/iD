@@ -1,5 +1,5 @@
 {
     "key": "site_type",
     "type": "combo",
-    "label": "Archaeological Site Type"
+    "label": "Site Type"
 }
