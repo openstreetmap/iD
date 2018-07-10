@@ -598,6 +598,7 @@ en:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"
     report: Report a privacy concern with this image
+    view_on_bing: "View on Bing Maps"
     hires: "High resolution"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"

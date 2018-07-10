@@ -171,9 +171,24 @@
 
 
 /* Streetside Viewer (pannellum) */
-.ms-wrapper .photo-attribution .image_link {
+.ms-wrapper .photo-attribution .image-link {
     display: block;
 }
+.ms-wrapper .photo-attribution .attribution-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    pading: 0 5px;
+}
+.ms-wrapper .photo-attribution .image-view-link {
+    text-align: left;
+    margin: 0 5px;
+}
+.ms-wrapper .photo-attribution .image-report-link {
+    text-align: right;
+}
+
 .ms-wrapper .photo-attribution a:active,
 .ms-wrapper .photo-attribution a:hover {
     color: #0fffc4;
@@ -189,8 +204,6 @@
 }
 
 label.streetside-hires {
-    float: left;
-    padding: 0 10px;
     cursor: pointer;
 }
 .streetside-hires span {

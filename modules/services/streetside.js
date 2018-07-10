@@ -831,8 +831,12 @@ export default {
             return response.promise;
         }
 
+        var line1 = attribution
+            .append('div')
+            .attr('class', 'attribution-row');
+
         // Add hires checkbox
-        var label = attribution
+        var label = line1
             .append('label')
             .attr('class', 'streetside-hires');
 
@@ -868,33 +872,49 @@ export default {
             .text(t('streetside.hires'));
 
 
+        var captureInfo = line1
+            .append('div')
+            .attr('class', 'attribution-capture-info');
+
         // Add capture date
         if (d.captured_by) {
             var yyyy = (new Date()).getFullYear();
 
-            attribution
+            captureInfo
                 .append('a')
                 .attr('class', 'captured_by')
                 .attr('target', '_blank')
                 .attr('href', 'https://www.microsoft.com/en-us/maps/streetside')
                 .text('©' + yyyy + ' Microsoft');
 
-            attribution
+            captureInfo
                 .append('span')
                 .text('|');
         }
 
         if (d.captured_at) {
-            attribution
+            captureInfo
                 .append('span')
                 .attr('class', 'captured_at')
                 .text(localeTimestamp(d.captured_at));
         }
 
-        // Add image link
-        attribution
+        // Add image links
+        var line2 = attribution
+            .append('div')
+            .attr('class', 'attribution-row');
+
+        line2
             .append('a')
-            .attr('class', 'image_link')
+            .attr('class', 'image-view-link')
+            .attr('target', '_blank')
+            .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
+                '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
+            .text(t('streetside.view_on_bing'));
+
+        line2
+            .append('a')
+            .attr('class', 'image-report-link')
             .attr('target', '_blank')
             .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' + encodeURIComponent(d.key) +
                 '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')

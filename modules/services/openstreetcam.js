@@ -504,7 +504,7 @@ export default {
 
             attribution
                 .append('a')
-                .attr('class', 'image_link')
+                .attr('class', 'image-link')
                 .attr('target', '_blank')
                 .attr('href', 'https://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('openstreetcam.org');

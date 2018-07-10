@@ -623,7 +623,7 @@ export default {
 
             attribution
                 .append('a')
-                .attr('class', 'image_link')
+                .attr('class', 'image-link')
                 .attr('target', '_blank')
                 .attr('href', 'https://www.mapillary.com/app/?pKey=' + encodeURIComponent(d.key) +
                     '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
