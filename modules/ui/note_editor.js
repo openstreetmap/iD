@@ -18,7 +18,8 @@ import { modeBrowse } from '../modes';
 
 
 export function uiNoteEditor(context) {
-    var dispatch = d3_dispatch('change', 'cancel', 'save', 'changeInput');
+    // TODO: use 'toggleNote' and 'saveNote' to add 'thank you' warning to the sidebar
+    var dispatch = d3_dispatch('change', 'cancel', 'save', 'modifiedInput', 'updateNote', 'toggleNote', 'saveNote');
     var commentLimit = 600;  // add a "more" link to comments longer than this length
     var _inputValue;
     var _newComment;
@@ -69,19 +70,26 @@ export function uiNoteEditor(context) {
             return;
         }
 
-        function parseResults(results) {
+        function parseResults(results) { // TODO: simplify result parsing
+            dispatch.call('change', results);
 
             // call success
-
+            if (results) {
+                success(results);
+            }
             // otherwise, call failure
+            else {
+                failure(results);
+            }
         }
 
-        function success(response) {
-            console.log('success!', response);
+        function success(results) {
+            console.log('success!', results); // TODO: handle success
+            dispatch.apply('updateNote');
         }
 
-        function failure(response) {
-            console.log('failure!', response);
+        function failure(results) { // TODO: handle failure & errors
+            console.log('failure!', results);
         }
 
         updateFunction(parseResults);
@@ -256,7 +264,8 @@ export function uiNoteEditor(context) {
     function saveHeader(selection) {
         var header = selection.selectAll('.notesSaveHeader')
             .data([0]);
-        header = header.enter()
+
+        header.enter()
             .append('h4')
             .attr('class', '.notesSaveHeader')
             .text(t('note.newComment'))
@@ -265,29 +274,25 @@ export function uiNoteEditor(context) {
 
 
     function input(selection) {
-        // Input
-        var input = selection.selectAll('textarea')
-            .data([0]);
 
-        // enter
-        input = input.enter()
-            .append('textarea')
-            .attr('id', 'new-comment-input')
-            .attr('placeholder', t('note.inputPlaceholder'))
-            .attr('maxlength', 1000)
-            .call(utilNoAuto)
-            .on('input', modified)
-            .on('blur', modified)
-            .on('change', modified)
-            .merge(input);
+            var input = selection.selectAll('textarea')
+                .data([0]);
+
+            input.enter()
+                .append('textarea')
+                .attr('id', 'new-comment-input')
+                .attr('placeholder', t('note.inputPlaceholder'))
+                .attr('maxlength', 1000)
+                .call(utilNoAuto)
+                .on('input', change)
+                .on('blur', change)
+                .merge(input);
 
 
-        function modified(onInput) {
-            _modified = !!this.value;
+        function change() {
             _inputValue = this.value;
-
-            // TODO: fix this event handling & update button text to reflect if there is input
-            // dispatch.call('inputModified', this, _inputValue);
+            console.log(_inputValue);
+            dispatch.apply('modifiedInput');
         }
     }
 
@@ -332,11 +337,11 @@ export function uiNoteEditor(context) {
         buttonSection = buttonSection
             .merge(buttonEnter);
 
-        buttonSection.selectAll('.close-button')
-            .on('click', function() { save(toggleNoteStatus); });
-
-        buttonSection.selectAll('.reopen-button')
-            .on('click', function() { save(toggleNoteStatus); });
+        buttonSection.selectAll('.closed-button,.open-button')
+            .on('click', function() {
+                save(toggleNoteStatus);
+                dispatch.apply('toggleNote', this); // TODO: dispatch toggleNote event
+            });
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', cancel);
@@ -346,10 +351,13 @@ export function uiNoteEditor(context) {
                 var n = d3_select('#new-comment-input').node();
                 return (n && n.value.length) ? null : true;
             })
+            .on('modifiedInput', function() {
+                // TODO: determine how to toggle button on input via triggering 'modifiedInput' event
+            })
             .on('click.save', function() {
                 this.blur();    // avoid keeping focus on the button - #4641
                 save(addNoteComment);
-                dispatch.call('saveNote', this, _newComment); // TODO: saveNote event
+                dispatch.apply('saveNote', this, _newComment); // TODO: dispatch saveNote event
             });
     }
 
