@@ -145,17 +145,17 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
-    function parseSaveAndZoom(extension, data) {
+    function parseSaveAndZoom(extension, data, src) {
         switch (extension) {
             default:
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
+                drawGpx.geojson(toGeoJSON.gpx(toDom(data)), src).fitZoom();
                 break;
             case '.kml':
-                drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
+                drawGpx.geojson(toGeoJSON.kml(toDom(data)), src).fitZoom();
                 break;
             case '.geojson':
             case '.json':
-                drawGpx.geojson(JSON.parse(data)).fitZoom();
+                drawGpx.geojson(JSON.parse(data), src).fitZoom();
                 break;
         }
     }
@@ -181,10 +181,11 @@ export function svgGpx(projection, context, dispatch) {
     };
 
 
-    drawGpx.geojson = function(gj) {
+    drawGpx.geojson = function(gj, src) {
         if (!arguments.length) return _geojson;
         if (_isEmpty(gj) || _isEmpty(gj.features)) return this;
         _geojson = gj;
+        _src = src || 'unknown.geojson';
         dispatch.call('change');
         return this;
     };
@@ -193,9 +194,8 @@ export function svgGpx(projection, context, dispatch) {
     drawGpx.url = function(url) {
         d3_text(url, function(err, data) {
             if (!err) {
-                _src = url;
                 var extension = getExtension(url);
-                parseSaveAndZoom(extension, data);
+                parseSaveAndZoom(extension, data, url);
             }
         });
         return this;
@@ -208,10 +208,9 @@ export function svgGpx(projection, context, dispatch) {
         var reader = new FileReader();
 
         reader.onload = (function(file) {
-            _src = file.name;
             var extension = getExtension(file.name);
             return function (e) {
-                parseSaveAndZoom(extension, e.target.result);
+                parseSaveAndZoom(extension, e.target.result, file.name);
             };
         })(f);
 
