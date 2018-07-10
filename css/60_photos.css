@@ -241,39 +241,6 @@ label.streetside-hires {
     color: #20c4ff;
 }
 
-.osc-controls-wrap {
-    text-align: center;
-    position: absolute;
-    top: 10px;
-    width: 100%;
-    z-index: 10;
-}
-
-.osc-controls {
-    display: inline-block;
-    z-index: 10;
-}
-
-.osc-controls button {
-    height: 18px;
-    width: 18px;
-    background: rgba(0,0,0,0.65);
-    color: #eee;
-    border-radius: 0;
-}
-.osc-controls button:first-of-type {
-    border-radius: 3px 0 0 3px;
-}
-.osc-controls button:last-of-type {
-    border-radius: 0 3px 3px 0;
-}
-.osc-controls button:hover,
-.osc-controls button:active,
-.osc-controls button:focus {
-    background: rgba(0,0,0,0.85);
-    color: #fff;
-}
-
 .osc-image-wrap {
     transform-origin:0 0;
     -ms-transform-origin:0 0;
@@ -281,3 +248,39 @@ label.streetside-hires {
     -moz-transform-origin:0 0;
     -o-transform-origin:0 0;
 }
+
+
+/* photo-controls (step forward, back, rotate) */
+.photo-controls-wrap {
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    z-index: 10;
+}
+
+.photo-controls {
+    display: inline-block;
+    z-index: 10;
+}
+
+.photo-controls button,
+.photo-controls button:focus {
+    height: 18px;
+    width: 18px;
+    background: rgba(0,0,0,0.65);
+    color: #eee;
+    border-radius: 0;
+}
+.photo-controls button:first-of-type {
+    border-radius: 3px 0 0 3px;
+}
+.photo-controls button:last-of-type {
+    border-radius: 0 3px 3px 0;
+}
+.photo-controls button:hover,
+.photo-controls button:active {
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+}
+

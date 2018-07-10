@@ -338,9 +338,9 @@ export default {
 
         var controlsEnter = wrapEnter
             .append('div')
-            .attr('class', 'osc-controls-wrap')
+            .attr('class', 'photo-controls-wrap')
             .append('div')
-            .attr('class', 'osc-controls');
+            .attr('class', 'photo-controls');
 
         controlsEnter
             .append('button')

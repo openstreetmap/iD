@@ -18,7 +18,16 @@ import rbush from 'rbush';
 import { t } from '../util/locale';
 import { jsonpRequest } from '../util/jsonp_request';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
-import { geoExtent } from '../geo';
+
+import {
+    geoExtent,
+    geoMetersToLat,
+    geoMetersToLon,
+    geoPointInPolygon,
+    geoRotate,
+    geoVecLength
+} from '../geo';
+
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
@@ -599,6 +608,8 @@ export default {
      * loadViewer() create the streeside viewer.
      */
     loadViewer: function (context) {
+        var that = this;
+
         // create ms-wrapper, a photo wrapper class
         var wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
             .data([0]);
@@ -617,6 +628,23 @@ export default {
             .attr('id', 'viewer-streetside')
             .append('div')
             .attr('class', 'photo-attribution fillD');
+
+        var controlsEnter = wrapEnter
+            .append('div')
+            .attr('class', 'photo-controls-wrap')
+            .append('div')
+            .attr('class', 'photo-controls');
+
+        controlsEnter
+            .append('button')
+            .on('click.back', step(-1))
+            .text('◄');
+
+        controlsEnter
+            .append('button')
+            .on('click.forward', step(1))
+            .text('►');
+
 
         // create working canvas for stitching together images
         wrap = wrap
@@ -639,6 +667,82 @@ export default {
             .append('script')
             .attr('id', 'streetside-viewerjs')
             .attr('src', context.asset(pannellumViewerJS));
+
+
+        function step(stepBy) {
+            return function() {
+                var viewer = d3_select('#photoviewer');
+                var selected = viewer.empty() ? undefined : viewer.datum();
+                if (!selected) return;
+
+                var nextID = (stepBy === 1 ? selected.ne : selected.pr);
+                var yaw = _pannellumViewer.getYaw();
+                var ca = selected.ca + yaw;
+                var origin = selected.loc;
+
+                // construct a search trapezoid pointing out from current bubble
+                var meters = 35;
+                var p1 = [
+                    origin[0] + geoMetersToLon(meters / 5, origin[1]),
+                    origin[1]
+                ];
+                var p2 = [
+                    origin[0] + geoMetersToLon(meters / 2, origin[1]),
+                    origin[1] + geoMetersToLat(meters)
+                ];
+                var p3 = [
+                    origin[0] - geoMetersToLon(meters / 2, origin[1]),
+                    origin[1] + geoMetersToLat(meters)
+                ];
+                var p4 = [
+                    origin[0] - geoMetersToLon(meters / 5, origin[1]),
+                    origin[1]
+                ];
+
+                var poly = [p1, p2, p3, p4, p1];
+
+                // rotate it to face forward/backward
+                var angle = (stepBy === 1 ? ca : ca + 180) * (Math.PI / 180);
+                poly = geoRotate(poly, -angle, origin);
+
+                var extent = poly.reduce(function(extent, point) {
+                    return extent.extend(geoExtent(point));
+                }, geoExtent());
+
+                // find nearest other bubble in the search polygon
+                var minDist = Infinity;
+                _ssCache.bubbles.rtree.search(extent.bbox())
+                    .forEach(function(d) {
+                        if (d.data.key === selected.key) return;
+                        if (!geoPointInPolygon(d.data.loc, poly)) return;
+
+                        var dist = geoVecLength(d.data.loc, selected.loc);
+                        var theta = selected.ca - d.data.ca;
+                        var minTheta = Math.min(Math.abs(theta), 360 - Math.abs(theta));
+                        if (minTheta > 20) {
+                            dist += 5;  // penalize distance if camera angles don't match
+                        }
+
+                        if (dist < minDist) {
+                            nextID = d.data.key;
+                            minDist = dist;
+                        }
+                    });
+
+                var nextBubble = nextID && _ssCache.bubbles.points[nextID];
+                if (!nextBubble) return;
+
+                context.map().centerEase(nextBubble.loc);
+
+                that.selectImage(nextBubble)
+                    .then(function(r) {
+                        if (r.status === 'ok') {
+                            _sceneOptions.yaw = yaw;
+                            that.showViewer();
+                        }
+                    });
+            };
+        }
     },
 
     /**
