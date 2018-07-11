@@ -3,17 +3,24 @@
 .layer-notes {
     pointer-events: none;
 }
-
 .layer-notes .note .note-shadow {
-    color: #000;
     pointer-events: none;
 }
 .layer-notes .note .note-fill {
-    color: #ff3300;
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-point.png), pointer; /* FF */
 }
+
+.note-header-icon .note-shadow,
+.layer-notes .note .note-shadow {
+    color: #000;
+}
+.note-header-icon .note-fill,
+.layer-notes .note .note-fill {
+    color: #ff3300;
+}
+.note-header-icon.closed .note-fill,
 .layer-notes .note.closed .note-fill {
     color: #55dd00;
 }
@@ -24,26 +31,79 @@
     color: #ffee00;
 }
 
+/* slight adjustments to preset icon for note icons */
+.note-header-icon .preset-icon-28 {
+    top: 18px;
+}
+.note-header-icon .preset-icon-24 {
+    top: 20px;
+}
+.note-header-icon .preset-icon-24 .icon.note-fill {
+    width: 25px;
+    height: 23px;
+}
+
 /* OSM Note UI */
+.note-header {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.note-header-icon {
+    background-color: #fff;
+    padding: 10px;
+    flex: 0 0 62px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+[dir='rtl'] .note-header-icon {
+    border-right: unset;
+    border-left: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+}
+
+.note-header-icon .icon-wrap {
+    position: absolute;
+    top: 0px;
+}
+
+.note-header-label {
+    background-color: #f6f6f6;
+    padding: 0 10px;
+    flex: 1 1 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+}
+[dir='rtl'] .note-header-label {
+    border-radius: 5px 0 0 5px;
+}
+
+.comments-container {
+    background: #ececec;
+    padding: 1px 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
 .comment {
     background-color: #fff;
     border-radius: 5px;
     border: 1px solid #ccc;
-    padding: 10px;
     margin: 10px auto;
     display: flex;
     flex-flow: row nowrap;
 }
-
-.comment-main {
-    padding: 0 10px;
-    flex: 1 1 100%;
-    flex-flow: column nowrap;
-    overflow: hidden;
-    overflow-wrap: break-word;
-}
 .comment-avatar {
-    flex: 0 0 40px;
+    padding: 10px;
+    flex: 0 0 62px;
 }
 .comment-avatar .icon.comment-avatar-icon {
     width: 40px;
@@ -52,13 +112,16 @@
     border: 1px solid #ccc;
     border-radius: 20px;
 }
+.comment-main {
+    padding: 10px;
+    flex: 1 1 100%;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
 .comment-metadata {
-    display: -webkit-flex; /* Safari */
-    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
     flex-flow: row nowrap;
-    flex-wrap: wrap;
     justify-content: space-between;
-
 }
 .comment-author {
     font-weight: bold;
@@ -72,7 +135,6 @@
     margin-top: 10px;
     overflow-y: hidden; /* TODO: give scroll bar or replace with accordion  */
     max-height: 250px;
-
 }
 
 #new-comment-input {

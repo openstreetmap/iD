@@ -614,6 +614,7 @@ en:
     note: Note
     title: Edit note
     anonymous: anonymous
+    closed: "(Closed)"
     more: More
     less: Less
     commentTitle: Comments

@@ -15,12 +15,12 @@ export function uiNoteComments() {
 
 
     function noteComments(selection) {
-        var comments = selection.selectAll('.comments')
+        var comments = selection.selectAll('.comments-container')
             .data([0]);
 
         comments = comments.enter()
             .append('div')
-            .attr('class', 'comments')
+            .attr('class', 'comments-container')
             .merge(comments);
 
         var commentEnter = comments.selectAll('.comment')

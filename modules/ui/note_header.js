@@ -7,12 +7,37 @@ export function uiNoteHeader() {
 
 
     function noteHeader(selection) {
-        selection.selectAll('.note-header')
-            .data([_note], function(d) { return d.id; })
-            .enter()
-            .append('h3')
-            .attr('class', 'note-header')
-            .text(function(d) { return String(t('note.note') + ' ' + d.id); });
+        var header = selection.selectAll('.note-header')
+            .data([_note], function(d) { return d.id; });
+
+        header.exit()
+            .remove();
+
+        var headerEnter = header.enter()
+            .append('div')
+            .attr('class', 'note-header');
+
+        var iconEnter = headerEnter
+            .append('div')
+            .attr('class', function(d) { return 'note-header-icon ' + d.status; });
+
+        iconEnter
+            .append('div')
+            .attr('class', 'preset-icon-28')
+            .call(svgIcon('#fas-comment-alt', 'note-shadow'));
+
+        iconEnter
+            .append('div')
+            .attr('class', 'preset-icon-24')
+            .call(svgIcon('#fas-comment-alt', 'note-fill'));
+
+        headerEnter
+            .append('div')
+            .attr('class', 'note-header-label')
+            .text(function(d) {
+                return t('note.note') + ' ' + d.id + ' ' +
+                    (d.status === 'closed' ? t('note.closed') : '');
+            });
     }
 
 
