@@ -6,6 +6,7 @@ import _find from 'lodash-es/find';
 import _groupBy from 'lodash-es/groupBy';
 import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
+import _throttle from 'lodash-es/throttle';
 import _uniq from 'lodash-es/uniq';
 
 import rbush from 'rbush';
@@ -42,7 +43,7 @@ var oauth = osmAuth({
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { loaded: {}, inflight: {}, seen: {} };
 var _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
-var _userCache = {};
+var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
 var _noteChangeset = {};
 
@@ -136,7 +137,15 @@ function parseComments(comments) {
                 var nodeName = node.nodeName;
                 if (nodeName === '#text') continue;
                 parsedComment[nodeName] = node.textContent;
+
+                if (nodeName === 'uid') {
+                    var uid = node.textContent;
+                    if (uid && !_userCache.user[uid]) {
+                        _userCache.toLoad[uid] = true;
+                    }
+                }
             }
+
             if (parsedComment) {
                 parsedComments.push(parsedComment);
             }
@@ -251,7 +260,8 @@ var parsers = {
             user.changesets_count = changesets[0].getAttribute('count');
         }
 
-        _userCache[uid] = user;
+        _userCache.user[uid] = user;
+        delete _userCache.toLoad[uid];
         return user;
     }
 };
@@ -279,8 +289,14 @@ function parseXML(xml, callback, options) {
         var uid;
         if (child.nodeName === 'user') {
             uid = child.attributes.id.value;
+            if (options.skipSeen && _userCache.user[uid]) {
+                delete _userCache.toLoad[uid];
+                return null;
+            }
+
         } else if (child.nodeName === 'note') {
             uid = child.getElementsByTagName('id')[0].textContent;
+
         } else {
             uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
             if (options.skipSeen) {
@@ -314,7 +330,7 @@ export default {
 
         _tileCache = { loaded: {}, inflight: {}, seen: {} };
         _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
-        _userCache = {};
+        _userCache = { toLoad: {}, user: {} };
         _changeset = {};
         _noteChangeset = {};
 
@@ -434,6 +450,8 @@ export default {
     },
 
 
+    // load multiple entities
+    // callback may be called multiple times
     loadMultiple: function(ids, callback) {
         var that = this;
 
@@ -452,11 +470,6 @@ export default {
                 );
             });
         });
-    },
-
-
-    authenticated: function() {
-        return oauth.authenticated();
     },
 
 
@@ -534,9 +547,62 @@ export default {
     },
 
 
+    // load multiple users
+    // callback may be called multiple times
+    loadUsers: function(uids, callback) {
+        var toLoad = [];
+        var cached = [];
+
+        _uniq(uids).forEach(function(uid) {
+            if (_userCache.user[uid]) {
+                delete _userCache.toLoad[uid];
+                cached.push(_userCache.user[uid]);
+            } else {
+                toLoad.push(uid);
+            }
+        });
+
+        if (cached.length || !this.authenticated()) {
+            callback(undefined, cached);
+            if (!this.authenticated()) return;  // require auth
+        }
+
+
+        var that = this;
+        var cid = _connectionID;
+
+        function done(err, xml) {
+            if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
+
+            var options = { skipSeen: true };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(undefined, results);
+                }
+            }, options);
+        }
+
+        _chunk(toLoad, 150).forEach(function(arr) {
+            oauth.xhr({ method: 'GET', path: '/api/0.6/users?users=' + arr.join() }, done);
+        });
+    },
+
+
     user: function(uid, callback) {
-        if (_userCache[uid] || !this.authenticated()) {   // require auth
-            callback(undefined, _userCache[uid]);
+        if (_userCache.user[uid] || !this.authenticated()) {   // require auth
+            delete _userCache.toLoad[uid];
+            callback(undefined, _userCache.user[uid]);
             return;
         }
 
@@ -555,7 +621,7 @@ export default {
                 return callback({ message: 'Connection Switched', status: -1 });
             }
 
-            var options = { skipSeen: false };
+            var options = { skipSeen: true };
             return parseXML(xml, function(err, results) {
                 if (err) {
                     return callback(err);
@@ -590,7 +656,7 @@ export default {
                 return callback({ message: 'Connection Switched', status: -1 });
             }
 
-            var options = { skipSeen: false };
+            var options = { skipSeen: true };
             return parseXML(xml, function(err, results) {
                 if (err) {
                     return callback(err);
@@ -709,11 +775,17 @@ export default {
         var that = this;
 
         // check if loading entities, or notes
-        var path, cache, tilezoom;
+        var path, cache, tilezoom, throttleLoadUsers;
         if (loadingNotes) {
             path = '/api/0.6/notes?bbox=';
             cache = _noteCache;
             tilezoom = _noteZoom;
+            throttleLoadUsers = _throttle(function() {
+                var uids = Object.keys(_userCache.toLoad);
+                if (!uids.length) return;
+                that.loadUsers(uids, function() {});  // eagerly load user details
+            }, 750);
+
         } else {
             path = '/api/0.6/map?bbox=';
             cache = _tileCache;
@@ -779,6 +851,7 @@ export default {
                     }
 
                     if (loadingNotes) {
+                        throttleLoadUsers();
                         dispatch.call('loadedNotes');
 
                     } else {
@@ -831,6 +904,11 @@ export default {
         oauth.logout();
         dispatch.call('change');
         return this;
+    },
+
+
+    authenticated: function() {
+        return oauth.authenticated();
     },
 
 
