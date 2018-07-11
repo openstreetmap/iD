@@ -8,6 +8,10 @@ import {
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { services } from '../services';
+
+import { uiNoteComments } from './note_comments';
+import { uiNoteHeader } from './note_header';
+
 import {
     utilNoAuto,
     utilRebind
@@ -20,20 +24,12 @@ import { modeBrowse } from '../modes';
 export function uiNoteEditor(context) {
     // TODO: use 'toggleNote' and 'saveNote' to add 'thank you' warning to the sidebar
     var dispatch = d3_dispatch('change', 'cancel', 'save', 'modifiedInput', 'updateNote', 'toggleNote', 'saveNote');
-    var commentLimit = 600;  // add a "more" link to comments longer than this length
+    var noteHeader = uiNoteHeader();
+    var noteComments = uiNoteComments();
     var _inputValue;
     var _newComment;
     var _note;
     var _modified;
-
-    function localeDateString(s) {
-        if (!s) return null;
-        var detected = utilDetect();
-        var options = { day: 'numeric', month: 'short', year: 'numeric' };
-        var d = new Date(s);
-        if (isNaN(d.getTime())) return null;
-        return d.toLocaleDateString(detected.locale, options);
-    }
 
 
     function noteEditor(selection) {
@@ -95,151 +91,16 @@ export function uiNoteEditor(context) {
         updateFunction(parseResults);
     }
 
+
     function toggleNoteStatus(parseResults) {
         if (!_note || !_note.status || !context.selectedNoteID) return;
         services.osm.toggleNoteStatus(_note, _inputValue, parseResults);
     }
 
+
     function addNoteComment(parseResults) {
         if (!_note || !_note.status || !context.selectedNoteID) return;
         services.osm.addNoteComment(_note, _inputValue, parseResults);
-    }
-
-
-
-    function noteHeader(selection) {
-        selection.selectAll('.note-header')
-            .data([_note], function(d) { return d.id; })
-            .enter()
-            .append('h3')
-            .attr('class', 'note-header')
-            .text(function(d) { return String(t('note.note') + ' ' + d.id); });
-    }
-
-
-    function noteComments(selection) {
-        var comments = selection.selectAll('.comments')
-            .data([0]);
-
-        comments = comments.enter()
-            .append('div')
-            .attr('class', 'comments')
-            .merge(comments);
-
-        var commentEnter = comments.selectAll('.comment')
-            .data(_note.comments)
-            .enter()
-            .append('div')
-            .attr('class', 'comment');
-
-        commentEnter
-            .append('div')
-            .attr('class', function(d) { return 'comment-avatar user-' + d.uid; })
-            .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
-
-        var main = commentEnter
-            .append('div')
-            .attr('class', 'comment-main');
-
-        var meta = main
-            .append('div')
-            .attr('class', 'comment-metadata');
-
-        meta
-            .append('div')
-            .attr('class', 'comment-author')
-            .each(function(d) {
-                var selection = d3_select(this);
-                var osm = services.osm;
-                if (osm && d.user) {
-                    selection = selection
-                        .append('a')
-                        .attr('class', 'comment-author-link')
-                        .attr('href', osm.userURL(d.user))
-                        .attr('tabindex', -1)
-                        .attr('target', '_blank');
-                }
-                selection
-                    .text(function(d) { return d.user || t('note.anonymous'); });
-            });
-
-        meta
-            .append('div')
-            .attr('class', 'comment-date')
-            .text(function(d) { return d.action + ' ' + localeDateString(d.date); });
-
-        main
-            .append('div')
-            .attr('class', function(d) {
-                var trunc = (d.text.length > commentLimit);
-                return 'comment-text' + (trunc ? ' truncated' : '');
-            })
-            .text(function(d) {
-                var trunc = (d.text.length > commentLimit);
-                return trunc ? d.text.slice(0, commentLimit) + '…' : d.text;
-            });
-
-        main
-            .each(function(d) {
-                var selection = d3_select(this);
-                var trunc = (d.text.length > commentLimit);
-                if (!trunc) return;
-
-                selection
-                    .append('a')
-                    .attr('class', 'comment-toggle-more')
-                    .attr('href', '#')
-                    .attr('tabindex', -1)
-                    .attr('target', '_blank')
-                    .text(t('note.more'))
-                    .on('click', toggleMore);
-            });
-
-        comments
-            .call(replaceAvatars);
-    }
-
-
-    function toggleMore() {
-        d3_event.preventDefault();
-
-        var selection = d3_select(this.parentNode);  // select .comment-main
-        var commentText = selection.selectAll('.comment-text');
-        var commentToggle = selection.selectAll('.comment-toggle-more');
-        var trunc = !commentText.classed('truncated');
-
-        commentText
-            .classed('truncated', trunc)
-            .text(function(d) {
-                return trunc ? d.text.slice(0, commentLimit) + '…' : d.text;
-            });
-
-        commentToggle
-            .text(t('note.' + (trunc ? 'more' : 'less')));
-    }
-
-
-    function replaceAvatars(selection) {
-        var osm = services.osm;
-        if (!osm) return;
-
-        var uids = {};  // gather uids in the comment thread
-        _note.comments.forEach(function(d) {
-            if (d.uid) uids[d.uid] = true;
-        });
-
-        Object.keys(uids).forEach(function(uid) {
-            osm.user(uid, function(err, user) {
-                if (!user || !user.image_url) return;
-
-                selection.selectAll('.comment-avatar.user-' + uid)
-                    .html('')
-                    .append('img')
-                    .attr('class', 'icon comment-avatar-icon')
-                    .attr('src', user.image_url)
-                    .attr('alt', user.display_name);
-            });
-        });
     }
 
 
@@ -274,19 +135,18 @@ export function uiNoteEditor(context) {
 
 
     function input(selection) {
+        var input = selection.selectAll('textarea')
+            .data([0]);
 
-            var input = selection.selectAll('textarea')
-                .data([0]);
-
-            input.enter()
-                .append('textarea')
-                .attr('id', 'new-comment-input')
-                .attr('placeholder', t('note.inputPlaceholder'))
-                .attr('maxlength', 1000)
-                .call(utilNoAuto)
-                .on('input', change)
-                .on('blur', change)
-                .merge(input);
+        input.enter()
+            .append('textarea')
+            .attr('id', 'new-comment-input')
+            .attr('placeholder', t('note.inputPlaceholder'))
+            .attr('maxlength', 1000)
+            .call(utilNoAuto)
+            .on('input', change)
+            .on('blur', change)
+            .merge(input);
 
 
         function change() {
@@ -295,6 +155,7 @@ export function uiNoteEditor(context) {
             dispatch.apply('modifiedInput');
         }
     }
+
 
     function buttons(selection) {
         // Buttons
@@ -386,10 +247,9 @@ export function uiNoteEditor(context) {
             .enter()
             .append('div')
             .attr('class', 'modal-section note-editor')
-            .call(noteHeader)
-            .call(noteComments)
+            .call(noteHeader.note(_note))
+            .call(noteComments.note(_note))
             .call(newComment);
-
     }
 
 

@@ -11,8 +11,6 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import { svgNotes } from '../svg';
-
 import { services } from '../services';
 import { modeBrowse } from './browse';
 import { uiNoteEditor } from '../ui';
@@ -28,14 +26,13 @@ export function modeSelectNote(context, selectedNoteID) {
     var keybinding = d3_keybinding('select-note');
     var noteEditor = uiNoteEditor(context)
         .on('updateNote', function() {
-
             // .call(drawNotes); // TODO: update and redraw notes
-
             var note = checkSelectedID();
             if (!note) return;
             context.ui().sidebar
                 .show(noteEditor.note(note));
         });
+
     var behaviors = [
         behaviorHover(context),
         behaviorSelect(context),
