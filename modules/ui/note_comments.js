@@ -67,52 +67,11 @@ export function uiNoteComments() {
 
         mainEnter
             .append('div')
-            .attr('class', function(d) {
-                var trunc = (d.text.length > commentLimit);
-                return 'comment-text' + (trunc ? ' truncated' : '');
-            })
-            .text(function(d) {
-                var trunc = (d.text.length > commentLimit);
-                return trunc ? d.text.slice(0, commentLimit) + '…' : d.text;
-            });
-
-        mainEnter
-            .each(function(d) {
-                var selection = d3_select(this);
-                var trunc = (d.text.length > commentLimit);
-                if (!trunc) return;
-
-                selection
-                    .append('a')
-                    .attr('class', 'comment-toggle-more')
-                    .attr('href', '#')
-                    .attr('tabindex', -1)
-                    .attr('target', '_blank')
-                    .text(t('note.more'))
-                    .on('click', toggleMore);
-            });
+            .attr('class', 'comment-text')
+            .text(function(d) { return d.text; });
 
         comments
             .call(replaceAvatars);
-    }
-
-
-    function toggleMore() {
-        d3_event.preventDefault();
-
-        var selection = d3_select(this.parentNode);  // select .comment-main
-        var commentText = selection.selectAll('.comment-text');
-        var commentToggle = selection.selectAll('.comment-toggle-more');
-        var trunc = !commentText.classed('truncated');
-
-        commentText
-            .classed('truncated', trunc)
-            .text(function(d) {
-                return trunc ? d.text.slice(0, commentLimit) + '…' : d.text;
-            });
-
-        commentToggle
-            .text(t('note.' + (trunc ? 'more' : 'less')));
     }
 
 

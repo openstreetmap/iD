@@ -133,8 +133,11 @@
 .comment-text {
     color: #333;
     margin-top: 10px;
-    overflow-y: hidden; /* TODO: give scroll bar or replace with accordion  */
+    overflow-y: auto;
     max-height: 250px;
+}
+.comment-text::-webkit-scrollbar {
+    border-left: none;
 }
 
 #new-comment-input {
