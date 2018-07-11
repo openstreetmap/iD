@@ -49,7 +49,7 @@ var _noteChangeset = {};
 
 var _connectionID = 1;
 var _tileZoom = 16;
-var _noteZoom = 13;
+var _noteZoom = 12;
 var _rateLimitError;
 var _userChangesets;
 var _userDetails;
@@ -567,7 +567,6 @@ export default {
             if (!this.authenticated()) return;  // require auth
         }
 
-
         var that = this;
         var cid = _connectionID;
 
@@ -769,15 +768,18 @@ export default {
     },
 
 
-    loadTiles: function(projection, dimensions, callback, loadingNotes) {
+    loadTiles: function(projection, dimensions, callback, noteOptions) {
         if (_off) return;
 
         var that = this;
+        var loadingNotes = (noteOptions !== undefined);
 
         // check if loading entities, or notes
         var path, cache, tilezoom, throttleLoadUsers;
         if (loadingNotes) {
-            path = '/api/0.6/notes?bbox=';
+            noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
+            path = '/api/0.6/notes?limit=' + noteOptions.limit +
+                '&closed=' + noteOptions.closed + '&bbox=';
             cache = _noteCache;
             tilezoom = _noteZoom;
             throttleLoadUsers = _throttle(function() {
@@ -937,8 +939,9 @@ export default {
     },
 
 
-    loadNotes: function(projection, dimensions) {
-        this.loadTiles(projection, dimensions, null, true);  // true = loadingNotes
+    loadNotes: function(projection, dimensions, noteOptions) {
+        noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
+        this.loadTiles(projection, dimensions, null, noteOptions);
     },
 
 
