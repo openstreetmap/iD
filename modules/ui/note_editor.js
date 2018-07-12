@@ -1,9 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { services } from '../services';
@@ -78,17 +74,29 @@ export function uiNoteEditor(context) {
             .attr('id', 'new-comment-input')
             .attr('placeholder', t('note.inputPlaceholder'))
             .attr('maxlength', 1000)
+            .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
             .on('input', change)
             .on('blur', change);
 
         // update
         noteSave = noteSaveEnter
-            .merge(noteSave);
+            .merge(noteSave)
+            .call(noteSaveButtons);
 
-        change();
 
         function change() {
+            var input = d3_select(this);
+            var val = input.property('value').trim() || undefined;
+
+            // store the unsaved comment with the note itself
+            _note = _note.update({ newComment: val });
+
+            var osm = services.osm;
+            if (osm) {
+                osm.replaceNote(_note);  // update note cache
+            }
+
             noteSave
                 .call(noteSaveButtons);
         }
@@ -126,11 +134,10 @@ export function uiNoteEditor(context) {
         buttonSection = buttonSection
             .merge(buttonEnter);
 
-        buttonSection.selectAll('.status-button')
+        buttonSection.select('.status-button')   // select and propagate data
             .text(function(d) {
-                var n = d3_select('#new-comment-input').node();
                 var setStatus = (d.status === 'open' ? 'close' : 'open');
-                var andComment = ((n && n.value.length) ? '_comment' : '');
+                var andComment = (d.newComment ? '_comment' : '');
                 return t('note.' + setStatus + andComment);
             })
             .on('click.status', function() {
@@ -138,10 +145,9 @@ export function uiNoteEditor(context) {
                 // todo: the thing
             });
 
-        buttonSection.selectAll('.comment-button')
-            .attr('disabled', function() {
-                var n = d3_select('#new-comment-input').node();
-                return (n && n.value.length) ? null : true;
+        buttonSection.select('.comment-button')   // select and propagate data
+            .attr('disabled', function(d) {
+                return d.newComment ? null : true;
             })
             .on('click.save', function() {
                 this.blur();    // avoid keeping focus on the button - #4641
