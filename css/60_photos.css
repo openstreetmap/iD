@@ -8,6 +8,13 @@
     background-color: #fff;
 }
 
+@media screen and (min-width: 1600px) {
+    #photoviewer {
+        width: 490px;
+        height: 370px;
+    }
+}
+
 #photoviewer button.thumb-hide {
     border-radius: 0;
     padding: 5px;
