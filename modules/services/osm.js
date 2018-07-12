@@ -1,4 +1,5 @@
 import _chunk from 'lodash-es/chunk';
+import _cloneDeep from 'lodash-es/cloneDeep';
 import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
 import _filter from 'lodash-es/filter';
@@ -893,9 +894,27 @@ export default {
     },
 
 
-    loadedTiles: function(_) {
-        if (!arguments.length) return _tileCache.loaded;
-        _tileCache.loaded = _;
+    caches: function(obj) {
+        if (!arguments.length) {
+            return {
+                tile: _cloneDeep(_tileCache),
+                note: _cloneDeep(_noteCache),
+                user: _cloneDeep(_userCache)
+            };
+        }
+
+        if (obj.tile) {
+            _tileCache = obj.tile;
+            _tileCache.inflight = {};
+        }
+        if (obj.note) {
+            _noteCache = obj.note;
+            _tileCache.inflight = {};
+        }
+        if (obj.user) {
+            _userCache = obj.user;
+        }
+
         return this;
     },
 
@@ -966,18 +985,6 @@ export default {
             _noteCache.note[n.id] = n;
         }
         return n;
-    },
-
-
-    loadedNotes: function(_) {
-        if (!arguments.length) return _noteCache.loaded;
-        _noteCache.loaded = _;
-        return this;
-    },
-
-
-    notesCache: function() {
-        return _noteCache;
     },
 
 
