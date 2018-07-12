@@ -12,10 +12,45 @@
     border-radius: 0;
     padding: 5px;
     position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 48;
+    right: 5px;
+    top: 5px;
+    z-index: 50;
 }
+
+#photoviewer button.resize-handle-xy {
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 49;
+    cursor: nesw-resize;
+    height: 10px;
+    width: 10px;
+}
+
+#photoviewer button.resize-handle-x {
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 48;
+    cursor: ew-resize;
+    height: auto;
+    width: 5px;
+}
+
+#photoviewer button.resize-handle-y {
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 48;
+    cursor: ns-resize;
+    height: 5px;
+    width: 100%;
+}
+
 
 .photo-wrapper,
 .photo-wrapper img {

@@ -431,6 +431,13 @@ export default {
         // load mapillary signs sprite
         var defs = context.container().select('defs');
         defs.call(svgDefs(context).addSprites, ['mapillary-sprite']);
+
+        // Register viewer resize handler
+        context.ui().on('photoviewerResize', function() {
+            if (_mlyViewer) {
+                _mlyViewer.resize();
+            }
+        });
     },
 
 
