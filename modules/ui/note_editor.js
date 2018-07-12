@@ -4,9 +4,10 @@ import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 import { services } from '../services';
 
+import { modeBrowse } from '../modes';
+import { svgIcon } from '../svg';
 import { uiNoteComments } from './note_comments';
 import { uiNoteHeader } from './note_header';
-
 import {
     utilNoAuto,
     utilRebind
@@ -24,9 +25,17 @@ export function uiNoteEditor(context) {
         var header = selection.selectAll('.header')
             .data([0]);
 
-        header.enter()
+        var enter = header.enter()
             .append('div')
-            .attr('class', 'header fillL')
+            .attr('class', 'header fillL');
+
+        enter
+            .append('button')
+            .attr('class', 'fr note-editor-close')
+            .on('click', function() { context.enter(modeBrowse(context)); })
+            .call(svgIcon('#iD-icon-close'));
+
+        enter
             .append('h3')
             .text(t('note.title'));
 

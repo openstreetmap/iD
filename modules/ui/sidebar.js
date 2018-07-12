@@ -34,7 +34,11 @@ export function uiSidebar(context) {
                 var notes = d3_selectAll('.note');
                 notes
                     .classed('hovered', function(d) { return d === what; });
-                context.ui().sidebar.show(noteEditor.note(what));
+
+                sidebar.show(noteEditor.note(what));
+
+                selection.selectAll('.sidebar-component')
+                    .classed('inspector-hover', true);
 
             } else if (!_current && context.hasEntity(what)) {
                 featureListWrap
@@ -65,7 +69,7 @@ export function uiSidebar(context) {
                 _wasNote = false;
                 d3_selectAll('.note')
                     .classed('hovered', false);
-                context.ui().sidebar.hide();
+                sidebar.hide();
             }
         }
 

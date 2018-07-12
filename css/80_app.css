@@ -689,6 +689,7 @@ button.save.has-count .count::before {
 }
 
 .field-help-title button.close,
+.sidebar-component .header button.note-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
@@ -696,6 +697,7 @@ button.save.has-count .count::before {
     top: 0;
 }
 [dir='rtl'] .field-help-title button.close,
+[dir='rtl'] .sidebar-component .header button.note-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -1290,6 +1292,7 @@ a.hide-toggle {
 .inspector-hover .preset-input-wrap .label,
 .inspector-hover .form-field-multicombo,
 .inspector-hover .structure-extras-wrap,
+.inspector-hover .comments-container .comment,
 .inspector-hover input,
 .inspector-hover textarea,
 .inspector-hover label {
@@ -1329,7 +1332,7 @@ a.hide-toggle {
 /* hide but preserve in layout */
 .inspector-hover .entity-editor-pane button.minor,
 .inspector-hover .combobox-caret,
-.inspector-hover .entity-editor-pane .header button,
+.inspector-hover .header button,
 .inspector-hover .spin-control,
 .inspector-hover .form-field-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
