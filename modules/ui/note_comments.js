@@ -1,7 +1,4 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
@@ -10,7 +7,6 @@ import { utilDetect } from '../util/detect';
 
 
 export function uiNoteComments() {
-    var commentLimit = 600;  // add a "more" link to comments longer than this length
     var _note;
 
 

@@ -749,15 +749,13 @@
             "anonymous": "anonymous",
             "closed": "(Closed)",
             "commentTitle": "Comments",
-            "close": "Resolve",
-            "reopen": "Reopen",
             "newComment": "New Comment",
             "inputPlaceholder": "Enter a comment to share with other users.",
+            "close": "Close Note",
+            "open": "Reopen Note",
             "comment": "Comment",
-            "commentClose": "Comment & Resolve",
-            "commentReopen": "Comment & Reopen",
-            "save": "Save comment",
-            "cancel": "Cancel"
+            "close_comment": "Close and Comment",
+            "open_comment": "Reopen and Comment"
         },
         "help": {
             "title": "Help",

@@ -25,7 +25,7 @@ export function modeSelectNote(context, selectedNoteID) {
     var osm = services.osm;
     var keybinding = d3_keybinding('select-note');
     var noteEditor = uiNoteEditor(context)
-        .on('updateNote', function() {
+        .on('update', function() {
             // .call(drawNotes); // TODO: update and redraw notes
             var note = checkSelectedID();
             if (!note) return;
