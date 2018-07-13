@@ -15,7 +15,7 @@ import {
 
 
 export function uiNoteEditor(context) {
-    var dispatch = d3_dispatch('update');
+    var dispatch = d3_dispatch('change');
     var noteHeader = uiNoteHeader();
     var noteComments = uiNoteComments();
     var _note;
@@ -145,73 +145,34 @@ export function uiNoteEditor(context) {
 
         buttonSection.select('.status-button')   // select and propagate data
             .text(function(d) {
-                var setStatus = (d.status === 'open' ? 'close' : 'open');
+                var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('note.' + setStatus + andComment);
+                return t('note.' + action + andComment);
             })
-            .on('click.status', function() {
+            .on('click.status', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
-                // todo: the thing
+                var osm = services.osm;
+                if (osm) {
+                    var setStatus = (d.status === 'open' ? 'closed' : 'open');
+                    osm.postNoteUpdate(d, setStatus, function(err, note) {
+                        dispatch.call('change', note);
+                    });
+                }
             });
 
         buttonSection.select('.comment-button')   // select and propagate data
             .attr('disabled', function(d) {
                 return d.newComment ? null : true;
             })
-            .on('click.save', function() {
+            .on('click.save', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
-                // todo: the thing
+                var osm = services.osm;
+                if (osm) {
+                    osm.postNoteUpdate(d, d.status, function(err, note) {
+                        dispatch.call('change', note);
+                    });
+                }
             });
-    }
-
-
-    function save() {
-        // var osm = context.connection();
-        // if (!osm) {
-        //     context.enter(modeBrowse(context));
-        //     return;
-        // }
-
-        // // If user somehow got logged out mid-save, try to reauthenticate..
-        // // This can happen if they were logged in from before, but the tokens are no longer valid.
-        // if (!osm.authenticated()) {
-
-        //     // TODO: dispatch 'notAuthenticated' to give warning
-
-        //     osm.authenticate(function(err) {
-        //         if (err) {    // quit save mode..
-        //             context.enter(modeBrowse(context));
-        //             return;
-        //         } else {
-        //             save(updateFunction);  // continue where we left off..
-        //         }
-        //     });
-        //     return;
-        // }
-
-        // function parseResults(results) { // TODO: simplify result parsing
-        //     dispatch.call('change', results);
-
-        //     // call success
-        //     if (results) {
-        //         success(results);
-        //     }
-        //     // otherwise, call failure
-        //     else {
-        //         failure(results);
-        //     }
-        // }
-
-        // function success(results) {
-        //     console.log('success!', results); // TODO: handle success
-        //     dispatch.apply('updateNote');
-        // }
-
-        // function failure(results) { // TODO: handle failure & errors
-        //     console.log('failure!', results);
-        // }
-
-        // updateFunction(parseResults);
     }
 
 
