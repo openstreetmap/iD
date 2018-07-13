@@ -81,7 +81,7 @@ export function uiNoteComments() {
         });
 
         Object.keys(uids).forEach(function(uid) {
-            osm.user(uid, function(err, user) {
+            osm.loadUser(uid, function(err, user) {
                 if (!user || !user.image_url) return;
 
                 selection.selectAll('.comment-avatar.user-' + uid)

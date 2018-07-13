@@ -28,7 +28,11 @@ import {
     osmWay
 } from '../osm';
 
-import { utilRebind, utilIdleWorker } from '../util';
+import {
+    utilRebind,
+    utilIdleWorker,
+    utilQsString
+} from '../util';
 
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
@@ -43,10 +47,9 @@ var oauth = osmAuth({
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { loaded: {}, inflight: {}, seen: {} };
-var _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
+var _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, rtree: rbush() };
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
-var _noteChangeset = {};
 
 var _connectionID = 1;
 var _tileZoom = 16;
@@ -326,14 +329,13 @@ export default {
 
         _forEach(_tileCache.inflight, abortRequest);
         _forEach(_noteCache.inflight, abortRequest);
+        _forEach(_noteCache.inflightPost, abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
-        if (_noteChangeset.inflight) abortRequest(_changeset.inflight);
 
         _tileCache = { loaded: {}, inflight: {}, seen: {} };
-        _noteCache = { loaded: {}, inflight: {}, note: {}, rtree: rbush() };
+        _noteCache = { loaded: {}, inflight: {}, inflightPost: {}, note: {}, rtree: rbush() };
         _userCache = { toLoad: {}, user: {} };
         _changeset = {};
-        _noteChangeset = {};
 
         return this;
     },
@@ -373,6 +375,8 @@ export default {
     },
 
 
+    // Generic method to load data from the OSM API
+    // Can handle either auth or unauth calls.
     loadFromAPI: function(path, callback, options) {
         options = _extend({ skipSeen: true }, options);
         var that = this;
@@ -421,6 +425,9 @@ export default {
     },
 
 
+    // Load a single entity by id (ways and relations use the `/full` call)
+    // GET /api/0.6/node/#id
+    // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
@@ -436,6 +443,8 @@ export default {
     },
 
 
+    // Load a single entity with a specific version
+    // GET /api/0.6/[node|way|relation]/#id/#version
     loadEntityVersion: function(id, version, callback) {
         var type = osmEntity.id.type(id);
         var osmID = osmEntity.id.toOSM(id);
@@ -451,8 +460,9 @@ export default {
     },
 
 
-    // load multiple entities
-    // callback may be called multiple times
+    // Load multiple entities in chunks
+    // (note: callback may be called multiple times)
+    // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
 
@@ -474,6 +484,10 @@ export default {
     },
 
 
+    // Create, upload, and close a changeset
+    // PUT /api/0.6/changeset/create
+    // POST /api/0.6/changeset/#id/upload
+    // PUT /api/0.6/changeset/#id/close
     putChangeset: function(changeset, changes, callback) {
         if (_changeset.inflight) {
             return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
@@ -548,8 +562,9 @@ export default {
     },
 
 
-    // load multiple users
-    // callback may be called multiple times
+    // Load multiple users in chunks
+    // (note: callback may be called multiple times)
+    // GET /api/0.6/users?users=#id1,#id2,...,#idn
     loadUsers: function(uids, callback) {
         var toLoad = [];
         var cached = [];
@@ -599,7 +614,9 @@ export default {
     },
 
 
-    user: function(uid, callback) {
+    // Load a given user by id
+    // GET /api/0.6/user/#id
+    loadUser: function(uid, callback) {
         if (_userCache.user[uid] || !this.authenticated()) {   // require auth
             delete _userCache.toLoad[uid];
             callback(undefined, _userCache.user[uid]);
@@ -635,6 +652,8 @@ export default {
     },
 
 
+    // Load the details of the logged-in user
+    // GET /api/0.6/user/details
     userDetails: function(callback) {
         if (_userDetails) {
             callback(undefined, _userDetails);
@@ -671,6 +690,8 @@ export default {
     },
 
 
+    // Load previous changesets for the logged in user
+    // GET /api/0.6/changesets?user=#id
     userChangesets: function(callback) {
         if (_userChangesets) {
             callback(undefined, _userChangesets);
@@ -718,6 +739,8 @@ export default {
     },
 
 
+    // Fetch the status of the OSM API
+    // GET /api/capabilities
     status: function(callback) {
         var that = this;
         var cid = _connectionID;
@@ -757,30 +780,21 @@ export default {
     },
 
 
-    imageryBlacklists: function() {
-        return _blacklists;
-    },
-
-
-    tileZoom: function(_) {
-        if (!arguments.length) return _tileZoom;
-        _tileZoom = _;
-        return this;
-    },
-
-
+    // Load data (entities or notes) from the API in tiles
+    // GET /api/0.6/map?bbox=
+    // GET /api/0.6/notes?bbox=
     loadTiles: function(projection, dimensions, callback, noteOptions) {
         if (_off) return;
 
         var that = this;
-        var loadingNotes = (noteOptions !== undefined);
 
-        // check if loading entities, or notes
+        // are we loading entities or notes?
+        var loadingNotes = (noteOptions !== undefined);
         var path, cache, tilezoom, throttleLoadUsers;
+
         if (loadingNotes) {
             noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-            path = '/api/0.6/notes?limit=' + noteOptions.limit +
-                '&closed=' + noteOptions.closed + '&bbox=';
+            path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
             cache = _noteCache;
             tilezoom = _noteZoom;
             throttleLoadUsers = _throttle(function() {
@@ -788,7 +802,6 @@ export default {
                 if (!uids.length) return;
                 that.loadUsers(uids, function() {});  // eagerly load user details
             }, 750);
-
         } else {
             path = '/api/0.6/map?bbox=';
             cache = _tileCache;
@@ -872,6 +885,85 @@ export default {
     },
 
 
+    // Load notes from the API (just calls this.loadTiles)
+    // GET /api/0.6/notes?bbox=
+    loadNotes: function(projection, dimensions, noteOptions) {
+        noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
+        this.loadTiles(projection, dimensions, null, noteOptions);
+    },
+
+
+    // Create a note
+    // POST /api/0.6/notes?params
+    postNoteCreate: function(note, callback) {
+        // todo
+    },
+
+
+    // Update a note
+    // POST /api/0.6/notes/#id/comment?text=comment
+    // POST /api/0.6/notes/#id/close?text=comment
+    // POST /api/0.6/notes/#id/reopen?text=comment
+    postNoteUpdate: function(note, newStatus, callback) {
+        if (!this.authenticated()) {
+            return callback({ message: 'Not Authenticated', status: -3 }, note);
+        }
+        if (_noteCache.inflightPost[note.id]) {
+            return callback({ message: 'Note update already inflight', status: -2 }, note);
+        }
+
+        var that = this;
+        var cid = _connectionID;
+
+        var action;
+        if (note.status !== 'closed' && newStatus === 'closed') {
+            action = 'close';
+        } else if (note.status !== 'open' && newStatus === 'open') {
+            action = 'reopen';
+        } else {
+            action = 'comment';
+        }
+
+        var path = '/api/0.6/notes/' + note.id + '/' + action;
+        if (note.newComment) {
+            path += '?' + utilQsString({ text: note.newComment });
+        }
+
+        _noteCache.inflightPost[note.id] = oauth.xhr({ method: 'POST', path: path }, done);
+
+
+        function done(err, xml) {
+            if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
+
+            delete _noteCache.inflightPost[note.id];
+
+            if (xml) {  // we get the updated note back, remove from caches and reparse..
+                var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
+                _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+                delete _noteCache.note[note.id];
+
+                var options = { skipSeen: false };
+                return parseXML(xml, function(err, results) {
+                    if (err) {
+                        return callback(err);
+                    } else {
+                        return callback(undefined, results[0]);
+                    }
+                }, options);
+            }
+        }
+    },
+
+
     switch: function(options) {
         urlroot = options.urlroot;
 
@@ -894,6 +986,9 @@ export default {
     },
 
 
+    // get/set cached data
+    // This is used to save/restore the state when entering/exiting the walkthrough
+    // Also used for testing purposes.
     caches: function(obj) {
         if (!arguments.length) {
             return {
@@ -909,7 +1004,8 @@ export default {
         }
         if (obj.note) {
             _noteCache = obj.note;
-            _tileCache.inflight = {};
+            _noteCache.inflight = {};
+            _noteCache.inflightPost = {};
         }
         if (obj.user) {
             _userCache = obj.user;
@@ -958,12 +1054,19 @@ export default {
     },
 
 
-    loadNotes: function(projection, dimensions, noteOptions) {
-        noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-        this.loadTiles(projection, dimensions, null, noteOptions);
+    imageryBlacklists: function() {
+        return _blacklists;
     },
 
 
+    tileZoom: function(_) {
+        if (!arguments.length) return _tileZoom;
+        _tileZoom = _;
+        return this;
+    },
+
+
+    // get all cached notes covering the viewport
     notes: function(projection) {
         var viewport = projection.clipExtent();
         var min = [viewport[0][0], viewport[1][1]];
@@ -975,77 +1078,18 @@ export default {
     },
 
 
+    // get a single note from the cache
     getNote: function(id) {
         return _noteCache.note[id];
     },
 
 
+    // replace a single note in the cache
     replaceNote: function(n) {
         if (n instanceof osmNote) {
             _noteCache.note[n.id] = n;
         }
         return n;
-    },
-
-
-    toggleNoteStatus: function(note, comment, callback) {
-        if (!(note instanceof osmNote) && !(this.getNote(note.id))) return;
-        if (!this.authenticated()) return;
-
-        var that = this;
-        var cid = _connectionID;
-
-        function done(err, xml) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
-                }
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
-
-            return callback(xml);
-        }
-
-        var status = note.status === 'open' ? 'close' : 'reopen';
-
-        var path = '/api/0.6/notes/' + note.id + '/' + status;
-        path += comment ? '?text=' + comment : '';
-
-        _noteChangeset.inflight = oauth.xhr({ method: 'POST', path: path }, done);
-
-    },
-
-    addNoteComment: function(note, comment, callback) {
-        if (!(note instanceof osmNote) && !(this.getNote(note.id))) return;
-        if (!this.authenticated()) return;
-        if (!comment) return;
-
-        var that = this;
-        var cid = _connectionID;
-
-        function done(err, xml) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
-                }
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
-
-            return callback(xml);
-        }
-
-        var path = '/api/0.6/notes/' + note.id + '/comment?text=' + comment;
-
-        _noteChangeset.inflight = oauth.xhr({ method: 'POST', path: path }, done);
-
-    },
+    }
 
 };
