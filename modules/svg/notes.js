@@ -71,7 +71,7 @@ export function svgNotes(projection, context, dispatch) {
         var data = (service ? service.notes(projection) : []);
         var transform = svgPointTransform(projection);
         var notes = layer.selectAll('.note')
-            .data(data, function(d) { return d.id; });
+            .data(data, function(d) { return d.status + d.id; });
 
         // exit
         notes.exit()

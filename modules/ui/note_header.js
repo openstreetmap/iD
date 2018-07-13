@@ -8,7 +8,7 @@ export function uiNoteHeader() {
 
     function noteHeader(selection) {
         var header = selection.selectAll('.note-header')
-            .data([_note], function(d) { return d.id; });
+            .data([_note], function(d) { return d.status + d.id; });
 
         header.exit()
             .remove();

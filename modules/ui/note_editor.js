@@ -62,7 +62,7 @@ export function uiNoteEditor(context) {
     function noteSave(selection) {
         var isSelected = (_note && _note.id === context.selectedNoteID());
         var noteSave = selection.selectAll('.note-save-section')
-            .data((isSelected ? [_note] : []), function(d) { return d.id; });
+            .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
 
         // exit
         noteSave.exit()
@@ -115,7 +115,7 @@ export function uiNoteEditor(context) {
     function noteSaveButtons(selection) {
         var isSelected = (_note && _note.id === context.selectedNoteID());
         var buttonSection = selection.selectAll('.buttons')
-            .data((isSelected ? [_note] : []), function(d) { return d.id; });
+            .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
 
         // exit
         buttonSection.exit()
