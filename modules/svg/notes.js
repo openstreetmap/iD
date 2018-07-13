@@ -125,24 +125,6 @@ export function svgNotes(projection, context, dispatch) {
     }
 
 
-    function toggleEdit(service, enabled) {
-
-        function dimensions() {
-            return [window.innerWidth, window.innerHeight];
-        }
-
-        if (enabled) {
-            if (service && ~~context.map().zoom() >= minZoom) {
-                editOn();
-                service.loadNotes(projection, dimensions());
-                update();
-            } else {
-                editOff();
-            }
-        }
-    }
-
-
     function drawNotes(selection) {
         var enabled = svgNotes.enabled;
         var service = getService();
@@ -159,7 +141,19 @@ export function svgNotes(projection, context, dispatch) {
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
-        toggleEdit(service, enabled);
+        function dimensions() {
+            return [window.innerWidth, window.innerHeight];
+        }
+
+        if (enabled) {
+            if (service && ~~context.map().zoom() >= minZoom) {
+                editOn();
+                service.loadNotes(projection, dimensions());
+                update();
+            } else {
+                editOff();
+            }
+        }
     }
 
     drawNotes.enabled = function(_) {

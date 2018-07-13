@@ -137,7 +137,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
+        var path = '/aapi/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
         var response = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm version="0.6">' +
                 '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
@@ -288,53 +288,6 @@ describe('iD.serviceOsm', function () {
                     }
                 }
             );
-            server.respond();
-        });
-
-    });
-
-
-    describe('#loadNotes', function () {
-        var path = '/api/0.6/notes?bbox=-0.65094,51.312159,0.374908,51.3125';
-        var response = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm version="0.6" generator="OpenStreetMap server">' +
-                '<note lon="0.1979819" lat="51.3122986">' +
-                '<id>814798</id>' +
-                '<url>https://api.openstreetmap.org/api/0.6/notes/814798</url>' +
-                '<comment_url>https://api.openstreetmap.org/api/0.6/notes/814798/comment</comment_url>' +
-                '<close_url>https://api.openstreetmap.org/api/0.6/notes/814798/close</close_url>' +
-                '<date_created>2016-12-13 11:02:44 UTC</date_created>' +
-                '<status>open</status>' +
-                '<comments>' +
-                    '<comment>' +
-                    '<date>2016-12-13 11:02:44 UTC</date>' +
-                    '<action>opened</action>' +
-                    '<text>Otford Scout Hut</text>' +
-                    '<html>&lt;p&gt;Otford Scout Hut&lt;/p&gt;</html>' +
-                    '</comment>' +
-                '</comments>' +
-                '</note>' +
-            '</osm>';
-
-        beforeEach(function() {
-            connection.reset();
-            server = sinon.fakeServer.create();
-            spy = sinon.spy();
-        });
-
-        afterEach(function() {
-            server.restore();
-        });
-
-        it('returns an object', function (done) {
-            connection.loadFromAPI(path, function (err, xml) {
-                expect(err).to.not.be.ok;
-                expect(typeof xml).to.eql('object');
-                done();
-            });
-
-            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'text/xml' }, response]);
             server.respond();
         });
     });
@@ -582,6 +535,97 @@ describe('iD.serviceOsm', function () {
             server.respond();
         });
 
+    });
+
+    describe('#caches', function() {
+        it('loads reset caches', function (done) {
+            var resetCaches = {
+                tile: {
+                    inflight: {}, loaded: {}, seen: {}
+                },
+                note: {
+                    loaded: {}, inflight: {}, inflightPost: {}, note: {} // not including rtree
+                },
+                user: {
+                    toLoad: {}, user: {}
+                }
+            };
+            var caches = connection.caches();
+            expect(caches.tile).to.eql(resetCaches.tile);
+            expect(caches.note.loaded).to.eql(resetCaches.note.loaded);
+            expect(caches.user).to.eql(resetCaches.user);
+            done();
+        });
+
+        describe('sets/gets caches', function() {
+            it('sets/gets a tile', function (done) {
+                var obj = {
+                    tile: { loaded: { '1,2,16': true, '3,4,16': true } }
+                };
+                connection.caches(obj);
+                expect(connection.caches().tile.loaded['1,2,16']).to.eql(true);
+                expect(Object.keys(connection.caches().tile.loaded).length).to.eql(2);
+                done();
+            });
+
+            it('sets/gets a note', function (done) {
+                var note = iD.osmNote({ id: 1, loc: [0, 0] });
+                var note2 = iD.osmNote({ id: 2, loc: [0, 0] });
+                var obj = {
+                    note: { note: { 1: note, 2: note2 } }
+                };
+                connection.caches(obj);
+                expect(connection.caches().note.note[note.id]).to.eql(note);
+                expect(Object.keys(connection.caches().note.note).length).to.eql(2);
+                done();
+            });
+
+            it('sets/gets a user', function (done) {
+                var user = { id: 1, display_name: 'Name' };
+                var user2 = { id: 2, display_name: 'Name' };
+                var obj = {
+                    user: { user: { 1: user, 2: user2 } }
+                };
+                connection.caches(obj);
+                expect(connection.caches().user.user[user.id]).to.eql(user);
+                expect(Object.keys(connection.caches().user.user).length).to.eql(2);
+                done();
+            });
+        });
+
+    });
+
+
+    describe('#getNote', function() {
+            it('returns a note', function (done) {
+                var note = iD.osmNote({ id: 1, loc: [0, 0], });
+                var obj = {
+                    note: { note: { 1: note } }
+                };
+                connection.caches(obj);
+                var result = connection.getNote(1);
+                expect(result).to.deep.equal(note);
+                done();
+            });
+        });
+
+
+    describe('#replaceNote', function() {
+        it('returns a new note', function (done) {
+            var note = iD.osmNote({ id: 2, loc: [0, 0], });
+            var result = connection.replaceNote(note);
+            expect(result.id).to.eql(2);
+            done();
+        });
+
+        it('replaces a note', function (done) {
+            var note = iD.osmNote({ id: 2, loc: [0, 0], });
+            connection.replaceNote(note);
+            note.status = 'closed';
+            var result = connection.replaceNote(note);
+            expect(result.status).to.eql('closed');
+            done();
+        });
     });
 
 
