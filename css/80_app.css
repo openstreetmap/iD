@@ -3573,6 +3573,7 @@ img.tile-debug {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-bottom: 30px;
 }
 
 .save-section .buttons .action,

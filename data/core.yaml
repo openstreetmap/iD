@@ -623,6 +623,7 @@ en:
     comment: Comment
     close_comment: Close and Comment
     open_comment: Reopen and Comment
+    report: Report
   help:
     title: Help
     key: H

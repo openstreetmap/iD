@@ -9,7 +9,8 @@ import { svgIcon } from '../svg';
 import {
     uiNoteComments,
     uiNoteHeader,
-    uiViewOnOSM
+    uiNoteReport,
+    uiViewOnOSM,
 } from './index';
 
 import {
@@ -20,8 +21,8 @@ import {
 
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change');
-    var noteHeader = uiNoteHeader();
     var noteComments = uiNoteComments();
+    var noteHeader = uiNoteHeader();
     var _note;
 
 
@@ -67,7 +68,8 @@ export function uiNoteEditor(context) {
             .enter()
             .append('div')
             .attr('class', 'footer')
-            .call(uiViewOnOSM(context).what(_note));
+            .call(uiViewOnOSM(context).what(_note))
+            .call(uiNoteReport(context).note(_note));
     }
 
 
