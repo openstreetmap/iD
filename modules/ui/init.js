@@ -47,6 +47,8 @@ import { uiCmd } from './cmd';
 function buildResizeListener(target, eventName, dispatch, options) {
     var resizeOnX = !!options.resizeOnX;
     var resizeOnY = !!options.resizeOnY;
+    var minHeight = options.minHeight || 240;
+    var minWidth = options.minWidth || 320;
     var startX;
     var startY;
     var startWidth;
@@ -54,11 +56,13 @@ function buildResizeListener(target, eventName, dispatch, options) {
 
     function startResize() {
         if (resizeOnX) {
-            target.style('width', (startWidth + d3_event.clientX - startX) + 'px');
+            var newWidth = Math.max(minWidth, startWidth + d3_event.clientX - startX);
+            target.style('width', newWidth + 'px');
         }
 
         if (resizeOnY) {
-            target.style('height', (startHeight + startY - d3_event.clientY) + 'px');
+            var newHeight = Math.max(minHeight, startHeight + startY - d3_event.clientY);
+            target.style('height', newHeight + 'px');
         }
 
         dispatch.call(eventName, target);
