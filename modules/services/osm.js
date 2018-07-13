@@ -675,7 +675,7 @@ export default {
                 return callback({ message: 'Connection Switched', status: -1 });
             }
 
-            var options = { skipSeen: true };
+            var options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
                 if (err) {
                     return callback(err);
