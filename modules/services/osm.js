@@ -314,6 +314,25 @@ function parseXML(xml, callback, options) {
 }
 
 
+function wrapcb(thisArg, callback, cid) {
+    return function(err, result) {
+        if (err) {
+            // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+            if (err.status === 400 || err.status === 401 || err.status === 403) {
+                thisArg.logout();
+            }
+            return callback.call(thisArg, err);
+
+        } else if (thisArg.getConnectionId() !== cid) {
+            return callback.call(thisArg, { message: 'Connection Switched', status: -1 });
+
+        } else {
+            return callback.call(thisArg, err, result);
+        }
+    };
+}
+
+
 export default {
 
     init: function() {
@@ -489,68 +508,61 @@ export default {
     // POST /api/0.6/changeset/#id/upload
     // PUT /api/0.6/changeset/#id/close
     putChangeset: function(changeset, changes, callback) {
-        if (_changeset.inflight) {
-            return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
-        }
-
-        var that = this;
         var cid = _connectionID;
 
-        if (_changeset.open) {   // reuse existing open changeset..
-            createdChangeset(null, _changeset.open);
-        } else {                 // open a new changeset..
-            _changeset.inflight = oauth.xhr({
+        if (_changeset.inflight) {
+            return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
+
+        } else if (_changeset.open) {   // reuse existing open changeset..
+            return createdChangeset(null, _changeset.open);
+
+        } else {   // Open a new changeset..
+            var options = {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
                 content: JXON.stringify(changeset.asJXON())
-            }, createdChangeset);
+            };
+            _changeset.inflight = oauth.xhr(
+                options,
+                wrapcb(this, createdChangeset, cid)
+            );
         }
 
 
         function createdChangeset(err, changesetID) {
             _changeset.inflight = null;
-
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
-                }
-                return callback(err, changeset);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 }, changeset);
-            }
+            if (err) { return callback(err, changeset); }
 
             _changeset.open = changesetID;
             changeset = changeset.update({ id: changesetID });
 
             // Upload the changeset..
-            _changeset.inflight = oauth.xhr({
+            var options = {
                 method: 'POST',
                 path: '/api/0.6/changeset/' + changesetID + '/upload',
                 options: { header: { 'Content-Type': 'text/xml' } },
                 content: JXON.stringify(changeset.osmChangeJXON(changes))
-            }, uploadedChangeset);
+            };
+            _changeset.inflight = oauth.xhr(
+                options,
+                wrapcb(this, uploadedChangeset, cid)
+            );
         }
 
 
         function uploadedChangeset(err) {
             _changeset.inflight = null;
-
             if (err) return callback(err, changeset);
 
             // Upload was successful, safe to call the callback.
             // Add delay to allow for postgres replication #1646 #2678
-            window.setTimeout(function() {
-                callback(null, changeset);
-            }, 2500);
-
+            window.setTimeout(function() { callback(null, changeset); }, 2500);
             _changeset.open = null;
 
             // At this point, we don't really care if the connection was switched..
             // Only try to close the changeset if we're still talking to the same server.
-            if (that.getConnectionId() === cid) {
+            if (this.getConnectionId() === cid) {
                 // Still attempt to close changeset, but ignore response because #2667
                 oauth.xhr({
                     method: 'PUT',
@@ -583,20 +595,15 @@ export default {
             if (!this.authenticated()) return;  // require auth
         }
 
-        var that = this;
-        var cid = _connectionID;
+        _chunk(toLoad, 150).forEach(function(arr) {
+            oauth.xhr(
+                { method: 'GET', path: '/api/0.6/users?users=' + arr.join() },
+                wrapcb(this, done, _connectionID)
+            );
+        }.bind(this));
 
         function done(err, xml) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
-                }
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
+            if (err) { return callback(err); }
 
             var options = { skipSeen: true };
             return parseXML(xml, function(err, results) {
@@ -607,10 +614,6 @@ export default {
                 }
             }, options);
         }
-
-        _chunk(toLoad, 150).forEach(function(arr) {
-            oauth.xhr({ method: 'GET', path: '/api/0.6/users?users=' + arr.join() }, done);
-        });
     },
 
 
@@ -619,24 +622,16 @@ export default {
     loadUser: function(uid, callback) {
         if (_userCache.user[uid] || !this.authenticated()) {   // require auth
             delete _userCache.toLoad[uid];
-            callback(undefined, _userCache.user[uid]);
-            return;
+            return callback(undefined, _userCache.user[uid]);
         }
 
-        var that = this;
-        var cid = _connectionID;
+        oauth.xhr(
+            { method: 'GET', path: '/api/0.6/user/' + uid },
+            wrapcb(this, done, _connectionID)
+        );
 
         function done(err, xml) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
-                }
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
+            if (err) { return callback(err); }
 
             var options = { skipSeen: true };
             return parseXML(xml, function(err, results) {
@@ -647,33 +642,23 @@ export default {
                 }
             }, options);
         }
-
-        oauth.xhr({ method: 'GET', path: '/api/0.6/user/' + uid }, done);
     },
 
 
     // Load the details of the logged-in user
     // GET /api/0.6/user/details
     userDetails: function(callback) {
-        if (_userDetails) {
-            callback(undefined, _userDetails);
-            return;
+        if (_userDetails) {    // retrieve cached
+            return callback(undefined, _userDetails);
         }
 
-        var that = this;
-        var cid = _connectionID;
+        oauth.xhr(
+            { method: 'GET', path: '/api/0.6/user/details' },
+            wrapcb(this, done, _connectionID)
+        );
 
         function done(err, xml) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
-                }
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
+            if (err) { return callback(err); }
 
             var options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
@@ -685,70 +670,55 @@ export default {
                 }
             }, options);
         }
-
-        oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     },
 
 
     // Load previous changesets for the logged in user
     // GET /api/0.6/changesets?user=#id
     userChangesets: function(callback) {
-        if (_userChangesets) {
-            callback(undefined, _userChangesets);
-            return;
+        if (_userChangesets) {    // retrieve cached
+            return callback(undefined, _userChangesets);
         }
 
-        var that = this;
-        var cid = _connectionID;
+        this.userDetails(
+            wrapcb(this, gotDetails, _connectionID)
+        );
 
-        this.userDetails(function(err, user) {
-            if (err) {
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
 
-            function done(err, changesets) {
-                if (err) {
-                    // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                    if (err.status === 400 || err.status === 401 || err.status === 403) {
-                        that.logout();
-                    }
-                    return callback(err);
-                }
-                if (that.getConnectionId() !== cid) {
-                    return callback({ message: 'Connection Switched', status: -1 });
-                }
+        function gotDetails(err, user) {
+            if (err) { return callback(err); }
 
-                _userChangesets = Array.prototype.map.call(
-                    changesets.getElementsByTagName('changeset'),
-                    function (changeset) {
-                        return { tags: getTags(changeset) };
-                    }
-                ).filter(function (changeset) {
-                    var comment = changeset.tags.comment;
-                    return comment && comment !== '';
-                });
+            oauth.xhr(
+                { method: 'GET', path: '/api/0.6/changesets?user=' + user.id },
+                wrapcb(this, done, _connectionID)
+            );
+        }
 
-                callback(undefined, _userChangesets);
-            }
+        function done(err, xml) {
+            if (err) { return callback(err); }
 
-            oauth.xhr({ method: 'GET', path: '/api/0.6/changesets?user=' + user.id }, done);
-        });
+            _userChangesets = Array.prototype.map.call(
+                xml.getElementsByTagName('changeset'),
+                function (changeset) { return { tags: getTags(changeset) }; }
+            ).filter(function (changeset) {
+                var comment = changeset.tags.comment;
+                return comment && comment !== '';
+            });
+
+            return callback(undefined, _userChangesets);
+        }
     },
 
 
     // Fetch the status of the OSM API
     // GET /api/capabilities
     status: function(callback) {
-        var that = this;
-        var cid = _connectionID;
+        d3_xml(urlroot + '/api/capabilities').get(
+            wrapcb(this, done, _connectionID)
+        );
 
-        function done(xml) {
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 }, 'connectionSwitched');
-            }
+        function done(err, xml) {
+            if (err) { return callback(err); }
 
             // update blacklists
             var elements = xml.getElementsByTagName('blacklist');
@@ -763,20 +733,14 @@ export default {
                 _blacklists = regexes;
             }
 
-
             if (_rateLimitError) {
-                callback(_rateLimitError, 'rateLimited');
+                return callback(_rateLimitError, 'rateLimited');
             } else {
                 var apiStatus = xml.getElementsByTagName('status');
                 var val = apiStatus[0].getAttribute('api');
-
-                callback(undefined, val);
+                return callback(undefined, val);
             }
         }
-
-        d3_xml(urlroot + '/api/capabilities').get()
-            .on('load', done)
-            .on('error', callback);
     },
 
 
@@ -912,9 +876,6 @@ export default {
             return callback({ message: 'Note update already inflight', status: -2 }, note);
         }
 
-        var that = this;
-        var cid = _connectionID;
-
         var action;
         if (note.status !== 'closed' && newStatus === 'closed') {
             action = 'close';
@@ -929,37 +890,29 @@ export default {
             path += '?' + utilQsString({ text: note.newComment });
         }
 
-        _noteCache.inflightPost[note.id] = oauth.xhr({ method: 'POST', path: path }, done);
+        _noteCache.inflightPost[note.id] = oauth.xhr(
+            { method: 'POST', path: path },
+            wrapcb(this, done, _connectionID)
+        );
 
 
         function done(err, xml) {
             delete _noteCache.inflightPost[note.id];
+            if (err) { return callback(err); }
 
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    that.logout();
+            // we get the updated note back, remove from caches and reparse..
+            var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
+            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+            delete _noteCache.note[note.id];
+
+            var options = { skipSeen: false };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(undefined, results[0]);
                 }
-                return callback(err);
-            }
-            if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
-            }
-
-            if (xml) {  // we get the updated note back, remove from caches and reparse..
-                var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
-                _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-                delete _noteCache.note[note.id];
-
-                var options = { skipSeen: false };
-                return parseXML(xml, function(err, results) {
-                    if (err) {
-                        return callback(err);
-                    } else {
-                        return callback(undefined, results[0]);
-                    }
-                }, options);
-            }
+            }, options);
         }
     },
 
