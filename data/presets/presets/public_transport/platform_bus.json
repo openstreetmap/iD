@@ -8,7 +8,8 @@
         "surface",
         "lit",
         "bench",
-        "shelter"
+        "shelter",
+        "passenger_information_display"
     ],
     "geometry": [
         "point",

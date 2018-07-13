@@ -1080,6 +1080,9 @@ en:
           surface: Surface
           # parking=underground
           underground: Underground
+      passenger_information_display:
+        # passenger_information_display=*
+        label: Passenger information display
       payment_multi:
         # 'payment:=*'
         label: Payment Types
