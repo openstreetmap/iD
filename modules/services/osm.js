@@ -933,6 +933,8 @@ export default {
 
 
         function done(err, xml) {
+            delete _noteCache.inflightPost[note.id];
+
             if (err) {
                 // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
                 if (err.status === 400 || err.status === 401 || err.status === 403) {
@@ -943,8 +945,6 @@ export default {
             if (that.getConnectionId() !== cid) {
                 return callback({ message: 'Connection Switched', status: -1 });
             }
-
-            delete _noteCache.inflightPost[note.id];
 
             if (xml) {  // we get the updated note back, remove from caches and reparse..
                 var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
