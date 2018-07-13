@@ -365,8 +365,8 @@ export default {
     },
 
 
-    changesetURL: function(changesetId) {
-        return urlroot + '/changeset/' + changesetId;
+    changesetURL: function(changesetID) {
+        return urlroot + '/changeset/' + changesetID;
     },
 
 
@@ -391,6 +391,11 @@ export default {
 
     userURL: function(username) {
         return urlroot + '/user/' + username;
+    },
+
+
+    noteURL: function(note) {
+        return urlroot + '/note/' + note.id;
     },
 
 

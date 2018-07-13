@@ -1,37 +1,48 @@
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
+import {
+    osmEntity,
+    osmNote
+} from '../osm';
 
 
 export function uiViewOnOSM(context) {
-    var id;
+    var _what;   // an osmEntity or osmNote
+
 
     function viewOnOSM(selection) {
-        var entity = context.entity(id);
+        var url;
+        if (_what instanceof osmEntity) {
+            url = context.connection().entityURL(_what);
+        } else if (_what instanceof osmNote) {
+            url = context.connection().noteURL(_what);
+        }
 
-        selection.style('display', entity.isNew() ? 'none' : null);
-
+        var data = ((!_what || _what.isNew()) ? [] : [_what]);
         var link = selection.selectAll('.view-on-osm')
-            .data([0]);
+            .data(data, function(d) { return d.id; });
 
-        var enter = link.enter()
+        // exit
+        link.exit()
+            .remove();
+
+        // enter
+        var linkEnter = link.enter()
             .append('a')
             .attr('class', 'view-on-osm')
             .attr('target', '_blank')
+            .attr('href', url)
             .call(svgIcon('#iD-icon-out-link', 'inline'));
 
-        enter
+        linkEnter
             .append('span')
             .text(t('inspector.view_on_osm'));
-
-        link
-            .merge(enter)
-            .attr('href', context.connection().entityURL(entity));
     }
 
 
-    viewOnOSM.entityID = function(_) {
-        if (!arguments.length) return id;
-        id = _;
+    viewOnOSM.what = function(_) {
+        if (!arguments.length) return _what;
+        _what = _;
         return viewOnOSM;
     };
 
