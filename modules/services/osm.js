@@ -13,7 +13,6 @@ import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import {
     osmEntity,
@@ -22,8 +21,9 @@ import {
     osmWay
 } from '../osm';
 
-import { utilRebind, utilIdleWorker } from '../util';
+import { utilRebind, utilIdleWorker, utilTile } from '../util';
 
+var geoTile = utilTile();
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded');
 var urlroot = 'https://www.openstreetmap.org';
@@ -581,30 +581,8 @@ export default {
             s / 2 - projection.translate()[1]
         ];
 
-        var tiles = d3_geoTile()
-            .scaleExtent([_tileZoom, _tileZoom])
-            .scale(s)
-            .size(dimensions)
-            .translate(projection.translate())()
-            .map(function(tile) {
-                var x = tile[0] * ts - origin[0];
-                var y = tile[1] * ts - origin[1];
-
-                return {
-                    id: tile.toString(),
-                    extent: geoExtent(
-                        projection.invert([x, y + ts]),
-                        projection.invert([x + ts, y]))
-                };
-            });
-
-        _filter(_tiles.inflight, function(v, i) {
-            var wanted = _find(tiles, function(tile) {
-                return i === tile.id;
-            });
-            if (!wanted) delete _tiles.inflight[i];
-            return !wanted;
-        }).map(abortRequest);
+        var tiles = geoTile.filterNullIsland(geoTile.getTiles(_tileZoom, projection));
+        geoTile.removeInflightRequests(_tiles, tiles, abortRequest);
 
         tiles.forEach(function(tile) {
             var id = tile.id;

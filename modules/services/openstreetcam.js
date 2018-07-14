@@ -22,9 +22,9 @@ import {
 
 import rbush from 'rbush';
 
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 
+import { utilTile } from '../util';
 import { utilDetect } from '../util/detect';
 
 import {
@@ -33,18 +33,19 @@ import {
     utilSetTransform
 } from '../util';
 
+var geoTile = utilTile();
 
-var apibase = 'https://openstreetcam.org',
-    maxResults = 1000,
-    tileZoom = 14,
-    dispatch = d3_dispatch('loadedImages'),
-    imgZoom = d3_zoom()
-        .extent([[0, 0], [320, 240]])
-        .translateExtent([[0, 0], [320, 240]])
-        .scaleExtent([1, 15])
-        .on('zoom', zoomPan),
-    _oscCache,
-    _oscSelectedImage;
+var apibase = 'https://openstreetcam.org';
+var maxResults = 1000;
+var tileZoom = 14;
+var dispatch = d3_dispatch('loadedImages');
+var imgZoom = d3_zoom()
+    .extent([[0, 0], [320, 240]])
+    .translateExtent([[0, 0], [320, 240]])
+    .scaleExtent([1, 15])
+    .on('zoom', zoomPan);
+var _oscCache;
+var _oscSelectedImage;
 
 
 function abortRequest(i) {
@@ -74,48 +75,12 @@ function maxPageAtZoom(z) {
 }
 
 
-function getTiles(projection) {
-    var s = projection.scale() * 2 * Math.PI,
-        z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
-        ts = 256 * Math.pow(2, z - tileZoom),
-        origin = [
-            s / 2 - projection.translate()[0],
-            s / 2 - projection.translate()[1]];
-
-    return d3_geoTile()
-        .scaleExtent([tileZoom, tileZoom])
-        .scale(s)
-        .size(projection.clipExtent()[1])
-        .translate(projection.translate())()
-        .map(function(tile) {
-            var x = tile[0] * ts - origin[0],
-                y = tile[1] * ts - origin[1];
-
-            return {
-                id: tile.toString(),
-                xyz: tile,
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
-}
-
-
 function loadTiles(which, url, projection) {
     var s = projection.scale() * 2 * Math.PI,
         currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
-    var tiles = getTiles(projection).filter(function(t) {
-            return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
-        });
-
-    _filter(which.inflight, function(v, k) {
-        var wanted = _find(tiles, function(tile) { return k === (tile.id + ',0'); });
-        if (!wanted) delete which.inflight[k];
-        return !wanted;
-    }).map(abortRequest);
+    var tiles = geoTile.filterNullIsland(geoTile.getTiles(tileZoom, projection));
+    geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
 
     tiles.forEach(function(tile) {
         loadNextTilePage(which, currZoom, url, tile);

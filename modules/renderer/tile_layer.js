@@ -1,15 +1,14 @@
 import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoScaleToZoom, geoVecLength } from '../geo';
-import { utilPrefixCSSProperty } from '../util';
+import { utilPrefixCSSProperty, utilTile } from '../util';
 
 
 export function rendererTileLayer(context) {
     var tileSize = 256;
     var transformProp = utilPrefixCSSProperty('Transform');
-    var geotile = d3_geoTile();
+    var geotile = utilTile();
 
     var _projection;
     var _cache = {};
