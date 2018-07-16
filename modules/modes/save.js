@@ -30,11 +30,12 @@ import {
 
 import { services } from '../services';
 
+import { uiLoading } from '../ui';
+
 import {
     uiConflicts,
     uiConfirm,
     uiCommit,
-    uiLoading,
     uiSuccess
 } from '../ui';
 

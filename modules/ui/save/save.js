@@ -5,14 +5,14 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../lib/d3.keybinding.js';
 
-import { t } from '../util/locale';
-import { modeSave } from '../modes';
-import { svgIcon } from '../svg';
-import { uiCmd } from './cmd';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
+import { t } from '../../util/locale';
+import { modeSave } from '../../modes';
+import { svgIcon } from '../../svg';
+import { uiCmd } from '../cmd';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { tooltip } from '../../util/tooltip';
 
 
 export function uiSave(context) {

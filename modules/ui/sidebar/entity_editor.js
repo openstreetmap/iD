@@ -9,18 +9,18 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { actionChangeTags } from '../actions';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
-import { uiPresetIcon } from './preset_icon';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { actionChangeTags } from '../../actions';
+import { modeBrowse } from '../../modes';
+import { svgIcon } from '../../svg';
+import { uiPresetEditor } from './preset/preset_editor';
+import { uiPresetIcon } from './preset/preset_icon';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
-import { uiRawTagEditor } from './raw_tag_editor';
-import { uiTagReference } from './tag_reference';
-import { uiPresetEditor } from './preset_editor';
-import { utilCleanTags, utilRebind } from '../util';
+import { uiRawTagEditor } from '../raw_tag_editor';
+import { uiTagReference } from '../tag_reference';
+import { utilCleanTags, utilRebind } from '../../util';
 
 
 export function uiEntityEditor(context) {

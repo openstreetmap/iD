@@ -2,10 +2,10 @@ import _throttle from 'lodash-es/throttle';
 
 import { selectAll as d3_selectAll } from 'd3-selection';
 
-import { osmNote } from '../osm';
+import { osmNote } from '../../osm';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
-import { uiNoteEditor } from './note_editor';
+import { uiNoteEditor } from '../notes/note_editor';
 
 
 export function uiSidebar(context) {

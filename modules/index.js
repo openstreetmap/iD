@@ -43,7 +43,7 @@ export { rendererFeatures as Features } from './renderer/features';
 export { rendererMap as Map } from './renderer/map';
 export { rendererTileLayer as TileLayer } from './renderer/tile_layer';
 export { utilDetect as Detect } from './util/detect';
-export { uiPresetEditor as uiPreset } from './ui/preset_editor';
+export { uiPresetEditor as uiPreset } from './ui';
 
 export var debug = false;
 

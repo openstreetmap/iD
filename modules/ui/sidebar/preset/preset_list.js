@@ -5,16 +5,16 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../../lib/d3.keybinding.js';
 
-import { t, textDirection } from '../util/locale';
-import { actionChangePreset } from '../actions/index';
-import { operationDelete } from '../operations/index';
-import { modeBrowse } from '../modes/index';
-import { svgIcon } from '../svg/index';
+import { t, textDirection } from '../../../util/locale';
+import { actionChangePreset } from '../../../actions/index';
+import { operationDelete } from '../../../operations/index';
+import { modeBrowse } from '../../../modes/index';
+import { svgIcon } from '../../../svg/index';
 import { uiPresetIcon } from './preset_icon';
-import { uiTagReference } from './tag_reference';
-import { utilNoAuto, utilRebind } from '../util';
+import { uiTagReference } from '../../tag_reference';
+import { utilNoAuto, utilRebind } from '../../../util';
 
 
 export function uiPresetList(context) {

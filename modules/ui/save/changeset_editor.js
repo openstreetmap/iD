@@ -1,13 +1,13 @@
 import _uniqBy from 'lodash-es/uniqBy';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
-import { t } from '../util/locale';
-import { svgIcon } from '../svg';
-import { uiField } from './field';
-import { uiFormFields } from './form_fields';
-import { utilRebind, utilTriggerEvent } from '../util';
+import { t } from '../../util/locale';
+import { svgIcon } from '../../svg';
+import { uiField } from '../field';
+import { uiFormFields } from '../form_fields';
+import { utilRebind, utilTriggerEvent } from '../../util';
 
 
 export function uiChangesetEditor(context) {

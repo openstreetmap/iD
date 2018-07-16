@@ -1,17 +1,17 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { JXON } from '../util/jxon';
-import { actionDiscardTags } from '../actions';
-import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg';
-import { utilDetect } from '../util/detect';
+import { t } from '../../util/locale';
+import { JXON } from '../../util/jxon';
+import { actionDiscardTags } from '../../actions';
+import { osmChangeset } from '../../osm';
+import { svgIcon } from '../../svg';
+import { utilDetect } from '../../util/detect';
 
 import {
     utilDisplayName,
     utilDisplayType,
     utilEntityOrMemberSelector
-} from '../util';
+} from '../../util';
 
 
 export function uiCommitChanges(context) {

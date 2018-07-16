@@ -3,20 +3,20 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
-import { t } from '../util/locale';
-import { actionChangeMember, actionDeleteMember } from '../actions';
-import { modeBrowse, modeSelect } from '../modes';
-import { osmEntity } from '../osm';
-import { svgIcon } from '../svg';
-import { services } from '../services';
-import { uiDisclosure } from './disclosure';
+import { t } from '../../util/locale';
+import { actionChangeMember, actionDeleteMember } from '../../actions';
+import { modeBrowse, modeSelect } from '../../modes';
+import { osmEntity } from '../../osm';
+import { svgIcon } from '../../svg';
+import { services } from '../../services';
+import { uiDisclosure } from '../disclosure';
 import {
     utilDisplayName,
     utilDisplayType,
     utilNoAuto
-} from '../util';
+} from '../../util';
 
 
 export function uiRawMemberEditor(context) {

@@ -3,25 +3,25 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../lib/d3.keybinding.js';
 
 import * as sexagesimal from '@mapbox/sexagesimal';
-import { t } from '../util/locale';
-import { dmsCoordinatePair } from '../util/units';
-import { coreGraph } from '../core';
-import { geoExtent, geoChooseEdge } from '../geo';
-import { modeSelect } from '../modes';
-import { osmEntity } from '../osm';
-import { services } from '../services';
-import { svgIcon } from '../svg';
-import { uiCmd } from './cmd';
+import { t } from '../../util/locale';
+import { dmsCoordinatePair } from '../../util/units';
+import { coreGraph } from '../../core';
+import { geoExtent, geoChooseEdge } from '../../geo';
+import { modeSelect } from '../../modes';
+import { osmEntity } from '../../osm';
+import { services } from '../../services';
+import { svgIcon } from '../../svg';
+import { uiCmd } from '../cmd';
 
 import {
     utilDisplayName,
     utilDisplayType,
     utilEntityOrMemberSelector,
     utilNoAuto
-} from '../util';
+} from '../../util';
 
 
 export function uiFeatureList(context) {

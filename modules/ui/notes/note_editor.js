@@ -1,22 +1,25 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { services } from '../services';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { t } from '../../util/locale';
+import { services } from '../../services';
+import { modeBrowse } from '../../modes';
+import { svgIcon } from '../../svg';
 
 import {
     uiNoteComments,
     uiNoteHeader,
     uiNoteReport,
-    uiViewOnOSM,
 } from './index';
+
+import {
+    uiViewOnOSM
+} from '../index';
 
 import {
     utilNoAuto,
     utilRebind
-} from '../util';
+} from '../../util';
 
 
 export function uiNoteEditor(context) {

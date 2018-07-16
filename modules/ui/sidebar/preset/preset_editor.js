@@ -5,12 +5,12 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { modeBrowse } from '../modes';
-import { uiDisclosure } from './disclosure';
-import { uiField } from './field';
-import { uiFormFields } from './form_fields';
-import { utilRebind } from '../util';
+import { t } from '../../../util/locale';
+import { modeBrowse } from '../../../modes';
+import { uiDisclosure } from '../../disclosure';
+import { uiField } from '../../field';
+import { uiFormFields } from '../../form_fields';
+import { utilRebind } from '../../../util';
 
 
 export function uiPresetEditor(context) {

@@ -8,23 +8,23 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
-import { t } from '../util/locale';
+import { t } from '../../util/locale';
 
 import {
     actionAddEntity,
     actionAddMember,
     actionChangeMember,
     actionDeleteMember
-} from '../actions';
+} from '../../actions';
 
-import { modeSelect } from '../modes';
-import { osmEntity, osmRelation } from '../osm';
-import { services } from '../services';
-import { svgIcon } from '../svg';
-import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilNoAuto } from '../util';
+import { modeSelect } from '../../modes';
+import { osmEntity, osmRelation } from '../../osm';
+import { services } from '../../services';
+import { svgIcon } from '../../svg';
+import { uiDisclosure } from '../disclosure';
+import { utilDisplayName, utilNoAuto } from '../../util';
 
 
 export function uiRawMembershipEditor(context) {

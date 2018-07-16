@@ -2,8 +2,8 @@ import { interpolate as d3_interpolate } from 'd3-interpolate';
 import { selectAll as d3_selectAll } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
-import { uiPresetList } from './preset_list';
-import { uiViewOnOSM } from './view_on_osm';
+import { uiPresetList } from './preset/preset_list';
+import { uiViewOnOSM } from '../view_on_osm';
 
 
 export function uiInspector(context) {

@@ -5,20 +5,20 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../lib/d3.keybinding.js';
 
-import { t } from '../util/locale';
-import { JXON } from '../util/jxon';
-import { geoExtent } from '../geo';
-import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg';
-import { utilDetect } from '../util/detect';
+import { t } from '../../util/locale';
+import { JXON } from '../../util/jxon';
+import { geoExtent } from '../../geo';
+import { osmChangeset } from '../../osm';
+import { svgIcon } from '../../svg';
+import { utilDetect } from '../../util/detect';
 
 import {
     utilEntityOrMemberSelector,
     utilRebind,
     utilWrap
-} from '../util';
+} from '../../util';
 
 
 export function uiConflicts(context) {

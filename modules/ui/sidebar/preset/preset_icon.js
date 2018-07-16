@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
-import { svgIcon } from '../svg';
-import { utilFunctor } from '../util';
+import { svgIcon } from '../../../svg';
+import { utilFunctor } from '../../../util';
 
 
 export function uiPresetIcon() {
