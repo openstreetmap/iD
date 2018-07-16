@@ -82,14 +82,14 @@ export function svgNotes(projection, context, dispatch) {
             .append('g')
             .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
 
-        notesEnter
-            .append('use')
-            .attr('class', 'note-shadow')
-            .attr('width', '24px')
-            .attr('height', '24px')
-            .attr('x', '-12px')
-            .attr('y', '-24px')
-            .attr('xlink:href', '#fas-comment-alt');
+        // notesEnter
+        //     .append('use')
+        //     .attr('class', 'note-shadow')
+        //     .attr('width', '24px')
+        //     .attr('height', '24px')
+        //     .attr('x', '-12px')
+        //     .attr('y', '-24px')
+        //     .attr('xlink:href', '#iD-icon-note');
 
         notesEnter
             .append('use')
@@ -98,18 +98,18 @@ export function svgNotes(projection, context, dispatch) {
             .attr('height', '20px')
             .attr('x', '-10px')
             .attr('y', '-22px')
-            .attr('xlink:href', '#fas-comment-alt');
+            .attr('xlink:href', '#iD-icon-note');
 
         // add dots if there's a comment thread
         notesEnter.selectAll('.thread')
             .data(function(d) { return d.comments.length > 1 ? [0] : []; })
             .enter()
             .append('use')
-            .attr('class', 'note-shadow thread')
-            .attr('width', '18px')
-            .attr('height', '18px')
-            .attr('x', '-9px')
-            .attr('y', '-22px')
+            .attr('class', 'note-annotation thread')
+            .attr('width', '14px')
+            .attr('height', '14px')
+            .attr('x', '-7px')
+            .attr('y', '-20px')
             .attr('xlink:href', '#iD-icon-more');
 
         // update
