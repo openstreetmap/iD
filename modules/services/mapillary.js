@@ -7,6 +7,7 @@ import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
 import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
+import _difference from 'lodash-es/difference';
 
 import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -617,9 +618,11 @@ export default {
 
         // highlight sibling viewfields on either the selected or the hovered sequences
         var highlightedImageKeys = _union(hoveredImageKeys, selectedImageKeys);
+        var hoveredNotSelectedImageKeys = _difference(hoveredImageKeys, selectedImageKeys);
 
         d3_selectAll('.layer-mapillary-images .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
+            .classed('hovered-sequence', function(d) { return hoveredNotSelectedImageKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function(d) { return d.key === hoveredImageKey; })
             .classed('selected', function(d) { return d.key === selectedImageKey; });
 

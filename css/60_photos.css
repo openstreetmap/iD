@@ -141,8 +141,17 @@
 .layer-mapillary-images .viewfield-group * {
     fill: #39AF64;
 }
+.layer-mapillary-images .viewfield-group.highlighted * {
+    fill: #00BCFF;
+}
+.layer-mapillary-images .viewfield-group.highlighted.hovered-sequence * {
+    fill: #39AF64;
+}
 .layer-mapillary-images .sequence {
     stroke: #39AF64;
+}
+.layer-mapillary-images .sequence.selected {
+    stroke: #00BCFF;
 }
 
 
