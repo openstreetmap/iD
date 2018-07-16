@@ -2,8 +2,8 @@ import _debounce from 'lodash-es/debounce';
 
 import { event as d3_event } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { t } from '../../util/locale';
+import { svgIcon } from '../../svg/index';
 
 
 export function uiNotice(context) {

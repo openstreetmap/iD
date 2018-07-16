@@ -1,5 +1,5 @@
-import { t } from '../util/locale';
-import { uiModal } from './modal';
+import { t } from '../../util/locale';
+import { uiModal } from '../modal';
 
 
 export function uiRestore(context) {

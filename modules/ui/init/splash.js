@@ -1,6 +1,6 @@
-import { t } from '../util/locale';
-import { uiIntro } from './intro';
-import { uiModal } from './modal';
+import { t } from '../../util/locale';
+import { uiIntro } from '../intro';
+import { uiModal } from '../modal';
 
 
 export function uiSplash(context) {

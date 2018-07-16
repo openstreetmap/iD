@@ -1,9 +1,9 @@
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { geoExtent } from '../geo';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
-import { uiLoading } from './loading';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { geoExtent } from '../../geo';
+import { modeBrowse } from '../../modes';
+import { svgIcon } from '../../svg';
+import { uiLoading } from '../loading';
 
 
 export function uiGeolocate(context) {

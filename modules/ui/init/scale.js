@@ -1,6 +1,6 @@
-import { displayLength } from '../util/units';
-import { geoLonToMeters, geoMetersToLon } from '../geo';
-import { utilDetect } from '../util/detect';
+import { displayLength } from '../../util/units';
+import { geoLonToMeters, geoMetersToLon } from '../../geo';
+import { utilDetect } from '../../util/detect';
 
 
 export function uiScale(context) {

@@ -3,9 +3,9 @@ import _map from 'lodash-es/map';
 
 import { event as d3_event } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
+import { t } from '../../util/locale';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { tooltip } from '../../util/tooltip';
 
 
 export function uiFeatureInfo(context) {

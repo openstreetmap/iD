@@ -3,10 +3,10 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../lib/d3.keybinding.js';
 
-import { uiCmd } from './cmd';
-import { utilDetect } from '../util/detect';
+import { uiCmd } from '../cmd';
+import { utilDetect } from '../../util/detect';
 
 
 export function uiFullScreen(context) {

@@ -1,18 +1,18 @@
 import _debounce from 'lodash-es/debounce';
 
 import { select as d3_select } from 'd3-selection';
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../lib/d3.keybinding.js';
 
 import {
     modeAddArea,
     modeAddLine,
     modeAddPoint,
     modeBrowse
-} from '../modes';
+} from '../../modes';
 
-import { svgIcon } from '../svg';
-import { tooltip } from '../util/tooltip';
-import { uiTooltipHtml } from './tooltipHtml';
+import { svgIcon } from '../../svg';
+import { tooltip } from '../../util/tooltip';
+import { uiTooltipHtml } from '../tooltipHtml';
 
 
 export function uiModes(context) {

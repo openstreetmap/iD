@@ -1,6 +1,6 @@
-import { t } from '../util/locale';
-import { svgIcon } from '../svg';
-import { tooltip } from '../util/tooltip';
+import { t } from '../../util/locale';
+import { svgIcon } from '../../svg';
+import { tooltip } from '../../util/tooltip';
 
 
 // these are module variables so they are preserved through a ui.restart()

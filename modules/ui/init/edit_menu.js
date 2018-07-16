@@ -3,9 +3,9 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { geoVecFloor } from '../geo';
-import { textDirection } from '../util/locale';
-import { uiTooltipHtml } from './tooltipHtml';
+import { geoVecFloor } from '../../geo';
+import { textDirection } from '../../util/locale';
+import { uiTooltipHtml } from '../tooltipHtml';
 
 
 export function uiEditMenu(context, operations) {

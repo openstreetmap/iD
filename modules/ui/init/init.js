@@ -3,44 +3,47 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { d3keybinding as d3_keybinding } from '../../lib/d3.keybinding.js';
 
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
 
-import { behaviorHash } from '../behavior';
-import { modeBrowse } from '../modes';
-import { services } from '../services';
-import { svgDefs, svgIcon } from '../svg';
-import { utilGetDimensions } from '../util/dimensions';
+import { behaviorHash } from '../../behavior';
+import { modeBrowse } from '../../modes';
+import { services } from '../../services';
+import { svgDefs, svgIcon } from '../../svg';
+import { utilGetDimensions } from '../../util/dimensions';
 
-import { uiAccount } from './account';
-import { uiAttribution } from './attribution';
-import { uiBackground } from './background';
-import { uiContributors } from './contributors';
-import { uiFeatureInfo } from './feature_info';
-import { uiFullScreen } from './full_screen';
-import { uiGeolocate } from './geolocate';
-import { uiHelp } from './help';
-import { uiInfo } from './info';
-import { uiIntro } from './intro';
-import { uiLoading } from './loading';
-import { uiMapData } from './map_data';
-import { uiMapInMap } from './map_in_map';
-import { uiModes } from './modes';
-import { uiNotice } from './notice';
-import { uiRestore } from './restore';
-import { uiSave } from './save';
-import { uiScale } from './scale';
-import { uiShortcuts } from './shortcuts';
-import { uiSidebar } from './sidebar';
-import { uiSpinner } from './spinner';
-import { uiSplash } from './splash';
-import { uiStatus } from './status';
-import { uiUndoRedo } from './undo_redo';
-import { uiVersion } from './version';
-import { uiZoom } from './zoom';
-import { uiCmd } from './cmd';
+import { uiBackground } from '../background';
+import { uiCmd } from '../cmd';
+import { uiHelp } from '../help';
+import { uiInfo } from '../info';
+import { uiIntro } from '../intro';
+import { uiLoading } from '../loading';
+import { uiMapData } from '../map_data';
+import { uiMapInMap } from '../map_in_map';
+import { uiSave } from '../save';
+import { uiShortcuts } from '../shortcuts';
+import { uiSidebar } from '../sidebar';
+import {
+    uiAccount,
+    uiAttribution,
+    uiContributors,
+    uiEditMenu,
+    uiFeatureInfo,
+    uiFullScreen,
+    uiGeolocate,
+    uiModes,
+    uiNotice,
+    uiRestore,
+    uiScale,
+    uiSpinner,
+    uiSplash,
+    uiStatus,
+    uiUndoRedo,
+    uiVersion,
+    uiZoom
+} from './index';
 
 
 export function uiInit(context) {
