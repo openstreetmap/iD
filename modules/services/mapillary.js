@@ -21,7 +21,6 @@ import rbush from 'rbush';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import { svgDefs } from '../svg';
-import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
 var apibase = 'https://a.mapillary.com/v3/';
@@ -63,21 +62,6 @@ function maxPageAtZoom(z) {
     if (z === 18) return 40;
     if (z > 18)   return 80;
 }
-
-
-function localeTimestamp(s) {
-    if (!s) return null;
-    var detected = utilDetect();
-    var options = {
-        day: 'numeric', month: 'short', year: 'numeric',
-        hour: 'numeric', minute: 'numeric', second: 'numeric',
-        timeZone: 'UTC'
-    };
-    var d = new Date(s);
-    if (isNaN(d.getTime())) return null;
-    return d.toLocaleString(detected.locale, options);
-}
-
 
 function getTiles(projection) {
     var s = projection.scale() * 2 * Math.PI;
@@ -400,16 +384,11 @@ export default {
         var wrap = d3_select('#photoviewer').selectAll('.mly-wrapper')
             .data([0]);
 
-        var wrapEnter = wrap.enter()
+        wrap.enter()
             .append('div')
             .attr('id', 'mly')
             .attr('class', 'photo-wrapper mly-wrapper')
             .classed('hide', true);
-
-        wrapEnter
-            .append('div')
-            .attr('class', 'photo-attribution fillD');
-
 
         // load mapillary-viewercss
         d3_select('head').selectAll('#mapillary-viewercss')
@@ -593,42 +572,7 @@ export default {
                 });
             });
 
-        var wrap = d3_select('#photoviewer .mly-wrapper');
-        var attribution = wrap.selectAll('.photo-attribution').html('');
-
         if (d) {
-            if (d.captured_by) {
-                attribution
-                    .append('a')
-                    .attr('class', 'captured_by')
-                    .attr('target', '_blank')
-                    .attr('href', 'https://www.mapillary.com/app/user/' + encodeURIComponent(d.captured_by))
-                    .text('@' + d.captured_by);
-
-                attribution
-                    .append('span')
-                    .text('|');
-            }
-
-            if (d.captured_at) {
-                attribution
-                    .append('span')
-                    .attr('class', 'captured_at')
-                    .text(localeTimestamp(d.captured_at));
-
-                attribution
-                    .append('span')
-                    .text('|');
-            }
-
-            attribution
-                .append('a')
-                .attr('class', 'image-link')
-                .attr('target', '_blank')
-                .attr('href', 'https://www.mapillary.com/app/?pKey=' + encodeURIComponent(d.key) +
-                    '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-                .text('mapillary.com');
-
             this.updateDetections(d);
         }
 
