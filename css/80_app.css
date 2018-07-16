@@ -1349,8 +1349,7 @@ a.hide-toggle {
 .inspector-hover .more-fields,
 .inspector-hover .form-label-button-wrap,
 .inspector-hover .tag-reference-button,
-.inspector-hover .view-on-osm,
-.inspector-hover .note-report {
+.inspector-hover .footer * {
     opacity: 0;
 }
 
