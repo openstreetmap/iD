@@ -441,6 +441,9 @@ en:
       osm:
         tooltip: Map data from OpenStreetMap
         title: OpenStreetMap data
+      notes:
+        tooltip: Note data from OpenStreetMap
+        title: OpenStreetMap notes
     fill_area: Fill Areas
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
@@ -613,6 +616,20 @@ en:
     title: "Photo Overlay (OpenStreetCam)"
   openstreetcam:
     view_on_openstreetcam: "View this image on OpenStreetCam"
+  note:
+    note: Note
+    title: Edit note
+    anonymous: anonymous
+    closed: "(Closed)"
+    commentTitle: Comments
+    newComment: New Comment
+    inputPlaceholder: Enter a comment to share with other users.
+    close: Close Note
+    open: Reopen Note
+    comment: Comment
+    close_comment: Close and Comment
+    open_comment: Reopen and Comment
+    report: Report
   help:
     title: Help
     key: H

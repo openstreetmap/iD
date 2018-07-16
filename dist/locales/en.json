@@ -536,6 +536,10 @@
                 "osm": {
                     "tooltip": "Map data from OpenStreetMap",
                     "title": "OpenStreetMap data"
+                },
+                "notes": {
+                    "tooltip": "Note data from OpenStreetMap",
+                    "title": "OpenStreetMap notes"
                 }
             },
             "fill_area": "Fill Areas",
@@ -745,6 +749,21 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "View this image on OpenStreetCam"
+        },
+        "note": {
+            "note": "Note",
+            "title": "Edit note",
+            "anonymous": "anonymous",
+            "closed": "(Closed)",
+            "commentTitle": "Comments",
+            "newComment": "New Comment",
+            "inputPlaceholder": "Enter a comment to share with other users.",
+            "close": "Close Note",
+            "open": "Reopen Note",
+            "comment": "Comment",
+            "close_comment": "Close and Comment",
+            "open_comment": "Reopen and Comment",
+            "report": "Report"
         },
         "help": {
             "title": "Help",

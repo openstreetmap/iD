@@ -689,6 +689,7 @@ button.save.has-count .count::before {
 }
 
 .field-help-title button.close,
+.sidebar-component .header button.note-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
@@ -696,6 +697,7 @@ button.save.has-count .count::before {
     top: 0;
 }
 [dir='rtl'] .field-help-title button.close,
+[dir='rtl'] .sidebar-component .header button.note-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
@@ -733,11 +735,21 @@ button.save.has-count .count::before {
 .footer {
     position: absolute;
     bottom: 0;
+    margin: 0;
     padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
     z-index: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    display: flex;
+
+}
+
+.footer > a {
+    justify-content: center;
 }
 
 .sidebar-component .body {
@@ -1290,6 +1302,7 @@ a.hide-toggle {
 .inspector-hover .preset-input-wrap .label,
 .inspector-hover .form-field-multicombo,
 .inspector-hover .structure-extras-wrap,
+.inspector-hover .comments-container .comment,
 .inspector-hover input,
 .inspector-hover textarea,
 .inspector-hover label {
@@ -1329,14 +1342,14 @@ a.hide-toggle {
 /* hide but preserve in layout */
 .inspector-hover .entity-editor-pane button.minor,
 .inspector-hover .combobox-caret,
-.inspector-hover .entity-editor-pane .header button,
+.inspector-hover .header button,
 .inspector-hover .spin-control,
 .inspector-hover .form-field-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .form-label-button-wrap,
 .inspector-hover .tag-reference-button,
-.inspector-hover .view-on-osm {
+.inspector-hover .footer * {
     opacity: 0;
 }
 
@@ -3564,10 +3577,17 @@ img.tile-debug {
     vertical-align: middle;
 }
 
+.save-section .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
 .save-section .buttons .action,
 .save-section .buttons .secondary-action {
-    display: inline-block;
-    margin: 0 20px 0 0;
+    width: 45%;
+    margin: 10px auto;
     text-align: center;
     vertical-align: middle;
 }

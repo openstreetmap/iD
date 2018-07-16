@@ -513,7 +513,6 @@ export function modeSelect(context, selectedIDs) {
                 showMenu();
             }
         }, 270);  /* after any centerEase completes */
-
     };
 
 

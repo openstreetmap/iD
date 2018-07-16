@@ -71,7 +71,7 @@ export function uiIntro(context) {
         var background = context.background().baseLayerSource();
         var overlays = context.background().overlayLayerSources();
         var opacity = d3_selectAll('#map .layer-background').style('opacity');
-        var loadedTiles = osm && osm.loadedTiles();
+        var caches = osm && osm.caches();
         var baseEntities = context.history().graph().base().entities;
         var countryCode = services.geocoder.countryCode;
 
@@ -147,7 +147,7 @@ export function uiIntro(context) {
             curtain.remove();
             navwrap.remove();
             d3_selectAll('#map .layer-background').style('opacity', opacity);
-            if (osm) { osm.toggle(true).reset().loadedTiles(loadedTiles); }
+            if (osm) { osm.toggle(true).reset().caches(caches); }
             context.history().reset().merge(_values(baseEntities));
             context.background().baseLayerSource(background);
             overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });

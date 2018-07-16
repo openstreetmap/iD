@@ -1,6 +1,7 @@
 export { osmChangeset } from './changeset';
 export { osmEntity } from './entity';
 export { osmNode } from './node';
+export { osmNote } from './note';
 export { osmRelation } from './relation';
 export { osmWay } from './way';
 
