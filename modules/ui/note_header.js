@@ -24,12 +24,7 @@ export function uiNoteHeader() {
         iconEnter
             .append('div')
             .attr('class', 'preset-icon-28')
-            .call(svgIcon('#fas-comment-alt', 'note-shadow'));
-
-        iconEnter
-            .append('div')
-            .attr('class', 'preset-icon-24')
-            .call(svgIcon('#fas-comment-alt', 'note-fill'));
+            .call(svgIcon('#iD-icon-note', 'note-fill'));
 
         headerEnter
             .append('div')

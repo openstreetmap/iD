@@ -3,7 +3,7 @@
 .layer-notes {
     pointer-events: none;
 }
-.layer-notes .note .note-shadow {
+.layer-notes .note * {
     pointer-events: none;
 }
 .layer-notes .note .note-fill {
@@ -19,28 +19,25 @@
 .note-header-icon .note-fill,
 .layer-notes .note .note-fill {
     color: #ff3300;
+    stroke: #333;
 }
 .note-header-icon.closed .note-fill,
 .layer-notes .note.closed .note-fill {
     color: #55dd00;
+    stroke: #333;
 }
 .layer-notes .note.hovered .note-fill {
     color: #eebb00;
+    stroke: #333;
 }
 .layer-notes .note.selected .note-fill {
     color: #ffee00;
+    stroke: #333;
 }
 
 /* slight adjustments to preset icon for note icons */
 .note-header-icon .preset-icon-28 {
     top: 18px;
-}
-.note-header-icon .preset-icon-24 {
-    top: 20px;
-}
-.note-header-icon .preset-icon-24 .icon.note-fill {
-    width: 25px;
-    height: 23px;
 }
 
 /* OSM Note UI */
