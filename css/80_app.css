@@ -735,11 +735,21 @@ button.save.has-count .count::before {
 .footer {
     position: absolute;
     bottom: 0;
+    margin: 0;
     padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
     z-index: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    display: flex;
+
+}
+
+.footer > a {
+    justify-content: center;
 }
 
 .sidebar-component .body {
@@ -1339,7 +1349,8 @@ a.hide-toggle {
 .inspector-hover .more-fields,
 .inspector-hover .form-label-button-wrap,
 .inspector-hover .tag-reference-button,
-.inspector-hover .view-on-osm {
+.inspector-hover .view-on-osm,
+.inspector-hover .note-report {
     opacity: 0;
 }
 
