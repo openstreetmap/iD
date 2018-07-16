@@ -60,8 +60,7 @@ describe('iD.svgMvt', function () {
 
     describe('#url', function() {
         it('handles pbf url', function () {
-            var url = 'https://api.mapbox.com/v4/mapbox.mapbox-streets-v6/9/150/194.vector.pbf?access_token='
-                        +'pk.eyJ1IjoidmVyc2h3YWwiLCJhIjoiY2pocmk1c2J5M28wbDM1cGU1ZDdpeDB1eSJ9.KN1fjHMCdSUsYcuvwiXWIA';
+            var url = '../../data/mvttest.pbf';
             var render = iD.svgMvt(projection, context, dispatch).url(url);
             surface.call(render);
 
