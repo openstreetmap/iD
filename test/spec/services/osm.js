@@ -137,7 +137,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var path = '/aapi/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
+        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
         var response = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm version="0.6">' +
                 '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
@@ -593,6 +593,55 @@ describe('iD.serviceOsm', function () {
             });
         });
 
+    });
+
+    describe('#loadNotes', function() {
+        beforeEach(function() {
+            context.projection
+                .scale(116722210.56960216)
+                .translate([244505613.61327893, 74865520.92230521])
+                .clipExtent([[0,0], [609.34375, 826]]);
+        });
+
+        it('fires loadedNotes when notes are loaded', function() {
+            connection.on('loadedNotes', spy);
+            connection.loadNotes(context.projection, [64, 64], {});
+
+            var url = 'http://www.openstreetmap.org/api/0.6/notes?limit=10000&closed=7&bbox=-120.05859375,34.45221847282654,-119.970703125,34.52466147177173';
+            var notesXML = ''; // TODO: determine output even though this test note is closed and will be gone soon
+
+            server.respondWith('GET', url,
+                [200, { 'Content-Type': 'text/xml' }, notesXML ]);
+            server.respond();
+
+            expect(spy).to.have.been.calledOnce;
+        });
+    });
+
+
+    describe('#notes', function() {
+        beforeEach(function() {
+            var dimensions = [64, 64];
+            context.projection
+                .scale(667544.214430109)  // z14
+                .translate([-116508, 0])  // 10,0
+                .clipExtent([[0,0], dimensions]);
+        });
+        it('returns notes in the visible map area', function() {
+            var notes = [
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0] } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1] } }
+            ];
+
+            connection.caches('get').note.rtree.load(notes);
+            var res = connection.notes(context.projection);
+
+            expect(res).to.deep.eql([
+                { key: '0', loc: [10,0] },
+                { key: '1', loc: [10,0] }
+            ]);
+        });
     });
 
 

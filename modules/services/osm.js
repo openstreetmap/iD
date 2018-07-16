@@ -956,6 +956,15 @@ export default {
             };
         }
 
+        // access caches directly for testing (e.g., loading notes rtree)
+        if (obj === 'get') {
+            return {
+                tile: _tileCache,
+                note: _noteCache,
+                user: _userCache
+            };
+        }
+
         if (obj.tile) {
             _tileCache = obj.tile;
             _tileCache.inflight = {};
