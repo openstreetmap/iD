@@ -101,7 +101,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('xlink:href', '#iD-icon-note');
 
         // add dots if there's a comment thread
-        notesEnter.selectAll('.thread')
+        notesEnter.selectAll('.note-annotation')
             .data(function(d) { return d.comments.length > 1 ? [0] : []; })
             .enter()
             .append('use')

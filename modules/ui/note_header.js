@@ -8,7 +8,10 @@ export function uiNoteHeader() {
 
     function noteHeader(selection) {
         var header = selection.selectAll('.note-header')
-            .data([_note], function(d) { return d.status + d.id; });
+            .data(
+                (_note ? [_note] : []),
+                function(d) { return d.status + d.id; }
+            );
 
         header.exit()
             .remove();
@@ -25,6 +28,15 @@ export function uiNoteHeader() {
             .append('div')
             .attr('class', 'preset-icon-28')
             .call(svgIcon('#iD-icon-note', 'note-fill'));
+
+        iconEnter.each(function(d) {
+            if (d.comments.length > 1) {
+                iconEnter
+                    .append('div')
+                    .attr('class', 'note-icon-annotation')
+                    .call(svgIcon('#iD-icon-more', 'note-annotation'));
+            }
+        });
 
         headerEnter
             .append('div')

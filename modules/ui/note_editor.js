@@ -176,7 +176,7 @@ export function uiNoteEditor(context) {
 
         buttonSection.select('.comment-button')   // select and propagate data
             .attr('disabled', function(d) {
-                return d.newComment ? null : true;
+                return (d.status === 'open' && d.newComment) ? null : true;
             })
             .on('click.save', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641

@@ -40,6 +40,19 @@
     top: 18px;
 }
 
+.note-header-icon .note-icon-annotation {
+    position: absolute;
+    top: 21px;
+    left: 21px;
+    margin: auto;
+}
+
+.note-header-icon .note-icon-annotation .icon {
+    width: 18px;
+    height: 18px;
+}
+
+
 /* OSM Note UI */
 .note-header {
     background-color: #f6f6f6;
