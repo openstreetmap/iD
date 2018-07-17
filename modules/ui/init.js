@@ -283,6 +283,9 @@ export function uiInit(context) {
                 buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnY: true })
             );
 
+        var mapDimensions = map.dimensions();
+
+        // bind events
         window.onbeforeunload = function() {
             return context.save();
         };
@@ -291,30 +294,13 @@ export function uiInit(context) {
             context.history().unlock();
         };
 
-        var mapDimensions = map.dimensions();
-
-
-        function onResize() {
-            mapDimensions = utilGetDimensions(content, true);
-            map.dimensions(mapDimensions);
-        }
-
         d3_select(window)
             .on('resize.editor', onResize);
 
         onResize();
 
-        function pan(d) {
-            return function() {
-                d3_event.preventDefault();
-                context.pan(d, 100);
-            };
-        }
 
-
-        // pan amount
-        var pa = 80;
-
+        var pa = 80;  // pan amount
         var keybinding = d3_keybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
             .on('←', pan([pa, 0]))
@@ -363,6 +349,35 @@ export function uiInit(context) {
             context.container().call(uiIntro(context));
         }
 
+
+        function onResize() {
+            mapDimensions = utilGetDimensions(content, true);
+            map.dimensions(mapDimensions);
+
+            // shrink photo viewer if it is too big
+            // (-90 preserves space at top and bottom of map used by menus)
+            var photoDimensions = utilGetDimensions(photoviewer, true);
+            if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - 90)) {
+                var setPhotoDimensions = [
+                    Math.min(photoDimensions[0], mapDimensions[0]),
+                    Math.min(photoDimensions[1], mapDimensions[1] - 90),
+                ];
+
+                photoviewer
+                    .style('width', setPhotoDimensions[0] + 'px')
+                    .style('height', setPhotoDimensions[1] + 'px');
+
+                dispatch.call('photoviewerResize', photoviewer, setPhotoDimensions);
+            }
+        }
+
+
+        function pan(d) {
+            return function() {
+                d3_event.preventDefault();
+                context.pan(d, 100);
+            };
+        }
 
         function buildResizeListener(target, eventName, dispatch, options) {
             var resizeOnX = !!options.resizeOnX;
