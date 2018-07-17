@@ -2,6 +2,7 @@ import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
@@ -13,6 +14,7 @@ import { modeBrowse } from '../modes';
 import { services } from '../services';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
+import { utilRebind } from '../util';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -42,9 +44,50 @@ import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
+function buildResizeListener(target, eventName, dispatch, options) {
+    var resizeOnX = !!options.resizeOnX;
+    var resizeOnY = !!options.resizeOnY;
+    var minHeight = options.minHeight || 240;
+    var minWidth = options.minWidth || 320;
+    var startX;
+    var startY;
+    var startWidth;
+    var startHeight;
+
+    function startResize() {
+        if (resizeOnX) {
+            var newWidth = Math.max(minWidth, startWidth + d3_event.clientX - startX);
+            target.style('width', newWidth + 'px');
+        }
+
+        if (resizeOnY) {
+            var newHeight = Math.max(minHeight, startHeight + startY - d3_event.clientY);
+            target.style('height', newHeight + 'px');
+        }
+
+        dispatch.call(eventName, target);
+    }
+
+    function stopResize() {
+        d3_select(window)
+            .on('.' + eventName, null);
+    }
+
+    return function initResize() {
+        startX = d3_event.clientX;
+        startY = d3_event.clientY;
+        startWidth = target.node().getBoundingClientRect().width;
+        startHeight = target.node().getBoundingClientRect().height;
+
+        d3_select(window)
+            .on('mousemove.' + eventName, startResize, false)
+            .on('mouseup.' + eventName, stopResize, false);
+    };
+}
 
 export function uiInit(context) {
     var uiInitCounter = 0;
+    var dispatch = d3_dispatch('photoviewerResize');
 
 
     function render(container) {
@@ -256,6 +299,29 @@ export function uiInit(context) {
             .append('div')
             .call(svgIcon('#iD-icon-close'));
 
+        photoviewer
+            .append('button')
+            .attr('class', 'resize-handle-xy')
+            .on(
+                'mousedown',
+                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnX: true, resizeOnY: true })
+            );
+
+        photoviewer
+            .append('button')
+            .attr('class', 'resize-handle-x')
+            .on(
+                'mousedown',
+                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnX: true })
+            );
+
+        photoviewer
+            .append('button')
+            .attr('class', 'resize-handle-y')
+            .on(
+                'mousedown',
+                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnY: true })
+            );
 
         window.onbeforeunload = function() {
             return context.save();
@@ -370,5 +436,5 @@ export function uiInit(context) {
 
     ui.sidebar = uiSidebar(context);
 
-    return ui;
+    return utilRebind(ui, dispatch, 'on');
 }
