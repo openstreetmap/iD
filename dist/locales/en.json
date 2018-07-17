@@ -352,8 +352,8 @@
             "localized_translation_name": "Name"
         },
         "zoom_in_edit": "Zoom in to edit",
-        "login": "login",
-        "logout": "logout",
+        "login": "Log In",
+        "logout": "Log Out",
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
@@ -763,7 +763,10 @@
             "comment": "Comment",
             "close_comment": "Close and Comment",
             "open_comment": "Reopen and Comment",
-            "report": "Report"
+            "report": "Report",
+            "login": "You must log in to change or comment on this note.",
+            "upload_explanation": "Your comments will be publicly visible to all OpenStreetMap users.",
+            "upload_explanation_with_user": "Your comments as {user} will be publicly visible to all OpenStreetMap users."
         },
         "help": {
             "title": "Help",

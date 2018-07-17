@@ -150,11 +150,19 @@
     border-left: none;
 }
 
-#new-comment-input {
+.note-save {
+    padding: 10px;
+}
+
+.note-save #new-comment-input {
     width: 100%;
     height: 100px;
     max-height: 300px;
     min-height: 100px;
+}
+
+.note-save .detail-section {
+    margin: 10px 0;
 }
 
 .note-report {
