@@ -123,12 +123,16 @@
     border-radius: 20px;
 }
 .comment-main {
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     flex: 1 1 100%;
     flex-flow: column nowrap;
     overflow: hidden;
     overflow-wrap: break-word;
 }
+[dir='rtl'] .comment-main {
+    padding: 10px 0 10px 10px;
+}
+
 .comment-metadata {
     flex-flow: row nowrap;
     justify-content: space-between;
