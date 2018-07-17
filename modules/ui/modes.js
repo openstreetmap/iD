@@ -99,7 +99,11 @@ export function uiModes(context) {
 
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {
-                if (editable()) {
+                // TODO: allow zooming out beyond minZoom when adding new note. Currently prevented
+                if (
+                    (editable() && mode.id !== 'add-note')
+                    || (toggleNewNote() && mode.id === 'add-note')
+                ) {
                     if (mode.id === context.mode().id) {
                         context.enter(modeBrowse(context));
                     } else {
