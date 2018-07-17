@@ -82,15 +82,6 @@ export function svgNotes(projection, context, dispatch) {
             .append('g')
             .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
 
-        // notesEnter
-        //     .append('use')
-        //     .attr('class', 'note-shadow')
-        //     .attr('width', '24px')
-        //     .attr('height', '24px')
-        //     .attr('x', '-12px')
-        //     .attr('y', '-24px')
-        //     .attr('xlink:href', '#iD-icon-note');
-
         notesEnter
             .append('use')
             .attr('class', 'note-fill')

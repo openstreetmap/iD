@@ -39,6 +39,8 @@ export function modeSelectNote(context, selectedNoteID) {
         behaviorLasso(context),
     ];
 
+    var newFeature = false;
+
 
     function checkSelectedID() {
         if (!osm) return;
@@ -49,6 +51,11 @@ export function modeSelectNote(context, selectedNoteID) {
         return note;
     }
 
+    mode.newFeature = function(_) {
+        if (!arguments.length) return newFeature;
+        newFeature = _;
+        return mode;
+    };
 
     mode.enter = function() {
 

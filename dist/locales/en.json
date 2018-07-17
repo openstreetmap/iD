@@ -21,6 +21,11 @@
                 "description": "Add restaurants, monuments, postal boxes or other points to the map.",
                 "tail": "Click on the map to add a point."
             },
+            "add_note": {
+                "title": "Note",
+                "description": "Spotted an issue? Let other mappers know.",
+                "tail": "Click on the map to add a note."
+            },
             "browse": {
                 "title": "Browse",
                 "description": "Pan and zoom the map."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Added a point.",
                     "vertex": "Added a node to a way.",
-                    "relation": "Added a relation."
+                    "relation": "Added a relation.",
+                    "note": "Added a note."
                 }
             },
             "start": {

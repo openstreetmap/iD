@@ -3,10 +3,13 @@ import _debounce from 'lodash-es/debounce';
 import { select as d3_select } from 'd3-selection';
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
+import { svgNotes } from '../svg';
+
 import {
     modeAddArea,
     modeAddLine,
     modeAddPoint,
+    modeAddNote,
     modeBrowse
 } from '../modes';
 
@@ -19,13 +22,21 @@ export function uiModes(context) {
     var modes = [
         modeAddPoint(context),
         modeAddLine(context),
-        modeAddArea(context)
+        modeAddArea(context),
+        modeAddNote(context)
     ];
 
 
     function editable() {
         var mode = context.mode();
         return context.editable() && mode && mode.id !== 'save';
+    }
+
+
+    function toggleNewNote() {
+        return svgNotes().enabled()
+            && context.connection().authenticated()
+            && ~~context.map().zoom() >= 12;
     }
 
 
@@ -36,7 +47,10 @@ export function uiModes(context) {
         buttons = buttons.enter()
             .append('button')
             .attr('tabindex', -1)
-            .attr('class', function(mode) { return mode.id + ' add-button col4'; })
+            .attr('class', function(mode) { return mode.id + ' add-button col3'; })
+            // .classed('disabled', function(mode) {
+            //     return mode.id === 'add-note' && !svgNotes.enabled; // disable notes button
+            // })
             .on('click.mode-buttons', function(mode) {
                 // When drawing, ignore accidental clicks on mode buttons - #4042
                 var currMode = context.mode().id;
@@ -109,10 +123,13 @@ export function uiModes(context) {
             .on('enter.modes', update);
 
 
-
         function update() {
             selection.selectAll('button.add-button')
+                .filter(function(d) { return d.id !== 'add-note'; }) // disable all but add-note
                 .property('disabled', !editable());
+
+            selection.selectAll('button.add-note') // disable add-note
+                .property('disabled', !toggleNewNote());
         }
     };
 }

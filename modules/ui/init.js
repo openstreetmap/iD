@@ -101,7 +101,7 @@ export function uiInit(context) {
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap joined col3')
+            .attr('class', 'button-wrap joined col5')
             .call(uiModes(context), limiter);
 
         limiter

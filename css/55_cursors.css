@@ -82,6 +82,7 @@
 }
 
 .mode-add-point #map,
+.mode-add-note #map,
 .mode-browse.lasso #map,
 .mode-browse.lasso .way,
 .mode-browse.lasso .vertex,
