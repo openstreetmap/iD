@@ -156,7 +156,47 @@ describe('iD.presetIndex', function() {
         });
     });
 
-
+    describe('#overwrite', function() {
+        it('overwrites iD presets with provided list of presets', function() {
+            var testPresets = {
+                presets: {
+                    'amenity/fuel/shell': {
+                        tags: { 'amenity': 'fuel' },
+                        geometry: ['point','area'],
+                        suggestion: true
+                    },
+                    'highway/foo': {
+                        tags: { 'highway': 'foo' },
+                        geometry: ['area']
+                    },
+                    'leisure/track': {
+                        tags: { 'leisure': 'track' },
+                        geometry: ['line', 'area']
+                    },
+                    'natural': {
+                        tags: { 'natural': '*' },
+                        geometry: ['point', 'vertex', 'area']
+                    },
+                    'natural/peak': {
+                        tags: { 'natural': 'peak' },
+                        geometry: ['point', 'vertex']
+                    },
+                    'natural/tree_row': {
+                        tags: { 'natural': 'tree_row' },
+                        geometry: ['line']
+                    },
+                    'natural/wood': {
+                        tags: { 'natural': 'wood' },
+                        geometry: ['point', 'area']
+                    }
+                }
+            };
+            var currentPresets = iD.Context().presets();
+            var overwrittenPresets = iD.Context().overwritePresets(testPresets);
+            expect(currentPresets).to.not.eql(overwrittenPresets);
+        });
+    });
+     
     describe('expected matches', function() {
 
         it('prefers building to multipolygon', function() {

@@ -118,10 +118,7 @@ export function presetIndex() {
         return areaKeys;
     };
 
-
-    all.init = function() {
-        var d = data.presets;
-
+    all.build = function (d) {
         all.collection = [];
         _recent.collection = [];
         _fields = {};
@@ -172,6 +169,15 @@ export function presetIndex() {
             }
         }
 
+    };
+
+    all.overwrite = function (d) {
+        all.build(d);
+        return all;
+    };
+
+    all.init = function() {
+        all.build(data.presets);
         return all;
     };
 

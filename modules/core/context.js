@@ -306,7 +306,7 @@ export function coreContext() {
     /* Presets */
     var presets;
     context.presets = function() { return presets; };
-
+    context.overwritePresets = function(newPresets) { presets.overwrite(newPresets); };
 
     /* Map */
     var map;
