@@ -31,8 +31,8 @@
     right: 0;
     z-index: 49;
     cursor: nesw-resize;
-    height: 10px;
-    width: 10px;
+    height: 25px;
+    width: 25px;
 }
 
 #photoviewer button.resize-handle-x {
@@ -44,7 +44,7 @@
     z-index: 48;
     cursor: ew-resize;
     height: auto;
-    width: 5px;
+    width: 6px;
 }
 
 #photoviewer button.resize-handle-y {
@@ -54,7 +54,7 @@
     right: 0;
     z-index: 48;
     cursor: ns-resize;
-    height: 5px;
+    height: 6px;
     width: 100%;
 }
 
@@ -64,6 +64,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .photo-wrapper .photo-attribution {
@@ -221,7 +222,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    pading: 0 5px;
+    padding: 0 5px;
 }
 .ms-wrapper .photo-attribution .image-view-link {
     text-align: left;
@@ -297,6 +298,8 @@ label.streetside-hires {
 }
 
 .osc-image-wrap {
+    width: 100%;
+    height: 100%;
     transform-origin:0 0;
     -ms-transform-origin:0 0;
     -webkit-transform-origin:0 0;

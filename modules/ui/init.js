@@ -44,46 +44,6 @@ import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
-function buildResizeListener(target, eventName, dispatch, options) {
-    var resizeOnX = !!options.resizeOnX;
-    var resizeOnY = !!options.resizeOnY;
-    var minHeight = options.minHeight || 240;
-    var minWidth = options.minWidth || 320;
-    var startX;
-    var startY;
-    var startWidth;
-    var startHeight;
-
-    function startResize() {
-        if (resizeOnX) {
-            var newWidth = Math.max(minWidth, startWidth + d3_event.clientX - startX);
-            target.style('width', newWidth + 'px');
-        }
-
-        if (resizeOnY) {
-            var newHeight = Math.max(minHeight, startHeight + startY - d3_event.clientY);
-            target.style('height', newHeight + 'px');
-        }
-
-        dispatch.call(eventName, target);
-    }
-
-    function stopResize() {
-        d3_select(window)
-            .on('.' + eventName, null);
-    }
-
-    return function initResize() {
-        startX = d3_event.clientX;
-        startY = d3_event.clientY;
-        startWidth = target.node().getBoundingClientRect().width;
-        startHeight = target.node().getBoundingClientRect().height;
-
-        d3_select(window)
-            .on('mousemove.' + eventName, startResize, false)
-            .on('mouseup.' + eventName, stopResize, false);
-    };
-}
 
 export function uiInit(context) {
     var uiInitCounter = 0;
@@ -382,8 +342,8 @@ export function uiInit(context) {
                 .call(uiShortcuts(context));
         }
 
-        var osm = context.connection(),
-            auth = uiLoading(context).message(t('loading_auth')).blocking(true);
+        var osm = context.connection();
+        var auth = uiLoading(context).message(t('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -401,6 +361,56 @@ export function uiInit(context) {
         if (hash.startWalkthrough) {
             hash.startWalkthrough = false;
             context.container().call(uiIntro(context));
+        }
+
+
+        function buildResizeListener(target, eventName, dispatch, options) {
+            var resizeOnX = !!options.resizeOnX;
+            var resizeOnY = !!options.resizeOnY;
+            var minHeight = options.minHeight || 240;
+            var minWidth = options.minWidth || 320;
+            var startX;
+            var startY;
+            var startWidth;
+            var startHeight;
+
+            function startResize() {
+                var mapSize = context.map().dimensions();
+
+                if (resizeOnX) {
+                    var maxWidth = mapSize[0];
+                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, maxWidth);
+                    target.style('width', newWidth + 'px');
+                }
+
+                if (resizeOnY) {
+                    var maxHeight = mapSize[1] - 90;  // preserve space at top/bottom of map
+                    var newHeight = clamp((startHeight + startY - d3_event.clientY), minHeight, maxHeight);
+                    target.style('height', newHeight + 'px');
+                }
+
+                dispatch.call(eventName, target, utilGetDimensions(target, true));
+            }
+
+            function clamp(num, min, max) {
+                return Math.max(min, Math.min(num, max));
+            }
+
+            function stopResize() {
+                d3_select(window)
+                    .on('.' + eventName, null);
+            }
+
+            return function initResize() {
+                startX = d3_event.clientX;
+                startY = d3_event.clientY;
+                startWidth = target.node().getBoundingClientRect().width;
+                startHeight = target.node().getBoundingClientRect().height;
+
+                d3_select(window)
+                    .on('mousemove.' + eventName, startResize, false)
+                    .on('mouseup.' + eventName, stopResize, false);
+            };
         }
     }
 
