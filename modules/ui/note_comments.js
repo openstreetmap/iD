@@ -64,7 +64,7 @@ export function uiNoteComments() {
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .text(function(d) { return d.text; });
+            .html(function(d) { return d.html; });
 
         comments
             .call(replaceAvatars);

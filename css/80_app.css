@@ -1325,6 +1325,12 @@ a.hide-toggle {
     border: 1px solid #ccc;
 }
 
+/* no scrollbars */
+.inspector-hover div {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 /* hide and remove from layout */
 .inspector-hidden,
 .inspector-hover label input[type="checkbox"],
