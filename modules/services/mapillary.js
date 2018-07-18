@@ -29,7 +29,7 @@ var viewerjs = 'mapillary-js/mapillary.min.js';
 var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var maxResults = 1000;
 var tileZoom = 14;
-var dispatch = d3_dispatch('loadedImages', 'loadedSigns');
+var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'bearingChanged');
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
@@ -511,6 +511,7 @@ export default {
 
             _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
+            _mlyViewer.on('bearingchanged', bearingChanged);
             _mlyViewer.moveToKey(imageKey)
                 .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
@@ -544,6 +545,10 @@ export default {
                 context.map().centerEase(loc);
                 that.selectImage(undefined, node.key, true);
             }
+        }
+
+        function bearingChanged(e) {
+            dispatch.call('bearingChanged', undefined, e);
         }
     },
 
