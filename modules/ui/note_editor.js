@@ -91,7 +91,7 @@ export function uiNoteEditor(context) {
             .append('h4')
             .attr('class', '.note-save-header')
             .text(function() {
-                return _note.newFeature ? t('note.newDescription') : t('note.newComment');
+                return _note.isNew() ? t('note.newDescription') : t('note.newComment');
             });
 
         noteSaveEnter
@@ -142,7 +142,7 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'buttons');
 
-        if (_note.newFeature) {
+        if (_note.isNew()) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button add-note-button action')
@@ -215,10 +215,9 @@ export function uiNoteEditor(context) {
     }
 
 
-    noteEditor.note = function(_, __) {
+    noteEditor.note = function(_) {
         if (!arguments.length) return _note;
         _note = _;
-        _note.update({ newFeature: __ });
         return noteEditor;
     };
 

@@ -11,7 +11,7 @@ export function uiNoteComments() {
 
 
     function noteComments(selection) {
-        if (_note.newFeature) { return; }
+        if (_note.isNew()) { return; }
 
         var comments = selection.selectAll('.comments-container')
             .data([0]);

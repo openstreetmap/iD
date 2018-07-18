@@ -36,7 +36,7 @@ export function uiNoteHeader() {
                     .append('div')
                     .attr('class', 'note-icon-annotation')
                     .call(svgIcon('#iD-icon-more', 'note-annotation'));
-            } else if (_note.newFeature) {
+            } else if (_note.isNew()) {
                 iconEnter
                     .append('div')
                     .attr('class', 'note-icon-annotation')
@@ -48,7 +48,7 @@ export function uiNoteHeader() {
             .append('div')
             .attr('class', 'note-header-label')
             .text(function(d) {
-                if (_note.newFeature) { return t('note.new'); }
+                if (_note.isNew()) { return t('note.new'); }
                 return t('note.note') + ' ' + d.id + ' ' +
                     (d.status === 'closed' ? t('note.closed') : '');
             });
