@@ -123,6 +123,8 @@ export function modeSelectNote(context, selectedNoteID) {
 
         context.ui().sidebar
             .hide();
+
+        context.selectedNoteID(null);
     };
 
 
