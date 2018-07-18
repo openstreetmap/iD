@@ -266,3 +266,7 @@ export function utilNoAuto(selection) {
         .attr('autocapitalize', 'off')
         .attr('spellcheck', isText ? 'true' : 'false');
 }
+
+export function utilExternalPresets() {
+    return utilStringQs(window.location.hash).hasOwnProperty('presets');
+}

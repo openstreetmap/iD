@@ -1,6 +1,9 @@
 import _debounce from 'lodash-es/debounce';
 
-import { select as d3_select } from 'd3-selection';
+import { 
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
@@ -26,6 +29,12 @@ export function uiModes(context) {
     function editable() {
         var mode = context.mode();
         return context.editable() && mode && mode.id !== 'save';
+    }
+
+    function difference(mode) {
+        var match = mode.attr('class');
+        var defaultIndex = context.presets().defaultTypes().findIndex(function(d) { return new RegExp(d).test(match); });
+        return defaultIndex === -1;
     }
 
 
@@ -111,8 +120,12 @@ export function uiModes(context) {
 
 
         function update() {
-            selection.selectAll('button.add-button')
-                .property('disabled', !editable());
+            var modes = selection.selectAll('button.add-button');
+            modes.property('disabled', !editable());
+            d3_selectAll('button.add-button').each(function (d) {
+                var mode = d3_select(this);
+                mode.property('disabled', difference(mode));
+            });
         }
     };
 }

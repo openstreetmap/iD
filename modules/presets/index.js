@@ -8,6 +8,13 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
+import { utilStringQs } from '../util';
+
+import { json as d3_json } from 'd3-request';
+import { 
+    select as d3_select,
+    selectAll as d3_selectAll 
+} from 'd3-selection';
 
 export { presetCategory };
 export { presetCollection };
@@ -20,7 +27,7 @@ export function presetIndex() {
     // loading new data and returning defaults
 
     var all = presetCollection([]);
-    var _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
+    var _defaults = {};
     var _fields = {};
     var _universal = [];
     var _recent = presetCollection([]);
@@ -119,7 +126,7 @@ export function presetIndex() {
     };
 
     all.build = function (d) {
-        all.collection = [];
+		all.collection = [];
         _recent.collection = [];
         _fields = {};
         _universal = [];
@@ -148,13 +155,17 @@ export function presetIndex() {
 
         if (d.defaults) {
             var getItem = _bind(all.item, all);
-            _defaults = {
-                area: presetCollection(d.defaults.area.map(getItem)),
-                line: presetCollection(d.defaults.line.map(getItem)),
-                point: presetCollection(d.defaults.point.map(getItem)),
-                vertex: presetCollection(d.defaults.vertex.map(getItem)),
-                relation: presetCollection(d.defaults.relation.map(getItem))
-            };
+            _defaults = {};
+            _forEach(Object.keys(d.defaults), function (k) {
+                _defaults[k] = presetCollection(d.defaults[k].map(getItem));
+            });
+            // _defaults = {
+            //     area: presetCollection(d.defaults.area.map(getItem)),
+            //     line: presetCollection(d.defaults.line.map(getItem)),
+            //     point: presetCollection(d.defaults.point.map(getItem)),
+            //     vertex: presetCollection(d.defaults.vertex.map(getItem)),
+            //     relation: presetCollection(d.defaults.relation.map(getItem))
+            // };
         }
 
         for (var i = 0; i < all.collection.length; i++) {
@@ -171,13 +182,22 @@ export function presetIndex() {
 
     };
 
+    all.fromExternal = function(callback) {
+        var presetsUrl = utilStringQs(window.location.hash)['presets'];
+        d3_json(presetsUrl, function(err, presets) {
+            if (err) all.init();
+            all.overwrite(presets);
+        });
+        return all;
+    };
+    
     all.overwrite = function (d) {
         all.build(d);
         return all;
     };
 
     all.init = function() {
-        all.build(data.presets);
+		all.build(data.presets);
         return all;
     };
 
@@ -192,7 +212,12 @@ export function presetIndex() {
     all.defaults = function(geometry, n) {
         var rec = _recent.matchGeometry(geometry).collection.slice(0, 4);
         var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
-        return presetCollection(_uniq(rec.concat(def).concat(all.item(geometry))));
+        var fin = _uniq(rec.concat(def).concat(all.item(geometry))).filter(i => i !== undefined);
+        return presetCollection(fin);
+    };
+
+    all.defaultTypes = function() {
+        return Object.keys(_defaults);
     };
 
     all.choose = function(preset) {

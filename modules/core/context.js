@@ -40,7 +40,8 @@ import { utilDetect } from '../util/detect';
 
 import {
     utilCallWhenIdle,
-    utilRebind
+    utilRebind,
+    utilExternalPresets
 } from '../util';
 
 
@@ -493,7 +494,11 @@ export function coreContext() {
 
     background.init();
     features.init();
-    presets.init();
+    if (utilExternalPresets()) {
+        presets.fromExternal();
+    } else { 
+        presets.init();
+	}
     areaKeys = presets.areaKeys();
 
 

@@ -7,6 +7,7 @@ export { utilDisplayType } from './util';
 export { utilEditDistance } from './util';
 export { utilEntitySelector } from './util';
 export { utilEntityOrMemberSelector } from './util';
+export { utilExternalPresets } from './util';
 export { utilFastMouse } from './util';
 export { utilFunctor } from './util';
 export { utilGetAllNodes } from './util';
