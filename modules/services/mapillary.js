@@ -84,7 +84,7 @@ function loadTiles(which, url, projection) {
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
-    var tiles = geoTile.filterNullIsland(geoTile.getTiles(tileZoom, projection));
+    var tiles = geoTile.filterNullIsland(geoTile.getTiles(tileZoom, projection, projection.clipExtent()[1], 0));
     geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
 
     tiles.forEach(function(tile) {

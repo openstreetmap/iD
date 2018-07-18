@@ -94,7 +94,7 @@ function loadTiles(which, url, projection, margin) {
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
-    var tiles = geoTile.filterNullIsland(geoTile.getTiles(tileZoom, projection, margin));
+    var tiles = geoTile.filterNullIsland(geoTile.getTiles(tileZoom, projection, projection.clipExtent()[1], margin));
 
     tiles.forEach(function (tile) {
        loadNextTilePage(which, currZoom, url, tile);

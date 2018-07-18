@@ -778,15 +778,8 @@ export default {
             tilezoom = _tileZoom;
         }
 
-        var s = projection.scale() * 2 * Math.PI;
-        var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - tilezoom);
-        var origin = [
-            s / 2 - projection.translate()[0],
-            s / 2 - projection.translate()[1]
-        ];
 
-        var tiles = geoTile.filterNullIsland(geoTile.getTiles(_tileZoom, projection));
+        var tiles = geoTile.filterNullIsland(geoTile.getTiles(_tileZoom, projection, dimensions, 0));
 
         // remove inflight requests that no longer cover the view..
         var hadRequests = !_isEmpty(cache.inflight);

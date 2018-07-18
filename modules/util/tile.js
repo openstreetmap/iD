@@ -71,7 +71,7 @@ export function utilTile() {
      * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
      * an area around (and including) the current map view extents.
      */
-    tile.getTiles = function(tileZoom, projection, margin) {
+    tile.getTiles = function(tileZoom, projection, dimensions, margin) {
         // s is the current map scale
         // z is the 'Level of Detail', or zoom-level, where Level 1 is far from the earth, and Level 23 is close to the ground.
         // ts ('tile size') here is the formula for determining the width/height of the map in pixels, but with a modification.
@@ -88,7 +88,7 @@ export function utilTile() {
         var tiler = this
             .scaleExtent([tileZoom, tileZoom])
             .scale(s)
-            .size(projection.clipExtent()[1])
+            .size(dimensions)
             .translate(projection.translate())
             .margin(margin || 0);   // request nearby tiles so we can connect sequences.
 
