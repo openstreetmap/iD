@@ -627,6 +627,14 @@ export default {
             .attr('src', context.asset(pannellumViewerJS));
 
 
+        // Register viewer resize handler
+        context.ui().on('photoviewerResize', function() {
+            if (_pannellumViewer) {
+                _pannellumViewer.resize();
+            }
+        });
+
+
         function step(stepBy) {
             return function() {
                 var viewer = d3_select('#photoviewer');

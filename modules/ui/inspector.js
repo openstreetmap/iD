@@ -44,11 +44,12 @@ export function uiInspector(context) {
         var presetPane = wrap.selectAll('.preset-list-pane');
         var editorPane = wrap.selectAll('.entity-editor-pane');
 
-        var graph = context.graph(),
-            entity = context.entity(_entityID),
-            showEditor = _state === 'hover' ||
-                entity.isUsed(graph) ||
-                entity.isHighwayIntersection(graph);
+        var graph = context.graph();
+        var entity = context.entity(_entityID);
+
+        var showEditor = _state === 'hover' ||
+            entity.isUsed(graph) ||
+            entity.isHighwayIntersection(graph);
 
         if (showEditor) {
             wrap.style('right', '0%');
@@ -67,7 +68,9 @@ export function uiInspector(context) {
             .merge(footer);
 
         footer
-            .call(uiViewOnOSM(context).entityID(_entityID));
+            .call(uiViewOnOSM(context)
+                .what(context.hasEntity(_entityID))
+            );
 
 
         function showList(preset) {

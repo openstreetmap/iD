@@ -6762,6 +6762,10 @@
     {"key": "parking", "value": "carports", "description": "Type"},
     {"key": "parking", "value": "garage_boxes", "description": "Type"},
     {"key": "parking", "value": "lane", "description": "Type"},
+    {
+      "key": "passenger_information_display",
+      "description": "Passenger information display"
+    },
     {"key": "payment:", "description": "Payment Types"},
     {"key": "phases", "description": "Phases"},
     {"key": "phone", "description": "Telephone"},

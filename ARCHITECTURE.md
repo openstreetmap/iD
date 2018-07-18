@@ -352,7 +352,7 @@ Drawing is then accomplished with
         .merge(footer);
 
     footer
-        .call(uiViewOnOSM(context).entityID(entityID));
+        .call(uiViewOnOSM(context).what(entity));
 ```
 
 Some components are reconfigurable, and some provide functionality beyond

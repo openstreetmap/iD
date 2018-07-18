@@ -255,8 +255,16 @@ export function coreContext() {
             return [];
         }
     };
+
     context.activeID = function() {
         return mode && mode.activeID && mode.activeID();
+    };
+
+    var _selectedNoteID;
+    context.selectedNoteID = function(noteID) {
+        if (!arguments.length) return _selectedNoteID;
+        _selectedNoteID = noteID;
+        return context;
     };
 
 

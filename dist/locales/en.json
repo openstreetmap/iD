@@ -352,8 +352,8 @@
             "localized_translation_name": "Name"
         },
         "zoom_in_edit": "Zoom in to edit",
-        "login": "login",
-        "logout": "logout",
+        "login": "Log In",
+        "logout": "Log Out",
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
@@ -536,6 +536,10 @@
                 "osm": {
                     "tooltip": "Map data from OpenStreetMap",
                     "title": "OpenStreetMap data"
+                },
+                "notes": {
+                    "tooltip": "Note data from OpenStreetMap",
+                    "title": "OpenStreetMap notes"
                 }
             },
             "fill_area": "Fill Areas",
@@ -745,6 +749,24 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "View this image on OpenStreetCam"
+        },
+        "note": {
+            "note": "Note",
+            "title": "Edit note",
+            "anonymous": "anonymous",
+            "closed": "(Closed)",
+            "commentTitle": "Comments",
+            "newComment": "New Comment",
+            "inputPlaceholder": "Enter a comment to share with other users.",
+            "close": "Close Note",
+            "open": "Reopen Note",
+            "comment": "Comment",
+            "close_comment": "Close and Comment",
+            "open_comment": "Reopen and Comment",
+            "report": "Report",
+            "login": "You must log in to change or comment on this note.",
+            "upload_explanation": "Your comments will be publicly visible to all OpenStreetMap users.",
+            "upload_explanation_with_user": "Your comments as {user} will be publicly visible to all OpenStreetMap users."
         },
         "help": {
             "title": "Help",
@@ -2287,6 +2309,9 @@
                         "garage_boxes": "Garage Boxes",
                         "lane": "Roadside Lane"
                     }
+                },
+                "passenger_information_display": {
+                    "label": "Passenger information display"
                 },
                 "payment_multi": {
                     "label": "Payment Types"
