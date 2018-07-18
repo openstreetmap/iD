@@ -98,7 +98,7 @@ export function modeSelectNote(context, selectedNoteID) {
             .call(keybinding);
 
         context.ui().sidebar
-            .show(noteEditor.note(note));
+            .show(noteEditor.note(note, newFeature));
 
         context.map()
             .on('drawn.select', selectNote);

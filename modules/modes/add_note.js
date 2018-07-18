@@ -1,13 +1,16 @@
 import { t } from '../util/locale';
-import { actionAddNote } from '../actions';
 import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelectNote } from './index';
 import { osmNote } from '../osm';
+import { services } from '../services';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 
 
 export function modeAddNote(context) {
+
+    var dispatch = d3_dispatch('change');
+
     var mode = {
         id: 'add-note',
         button: 'note',
@@ -24,13 +27,20 @@ export function modeAddNote(context) {
 
 
     function add(loc) {
-        var note = osmNote({ loc: loc });
+        var note = osmNote({
+            loc: loc,
+            status: 'open',
+            comments: {},
+            newFeature: true
+        });
 
-        // actionAddNote(note);
+        services.osm.replaceNote(note);
+        dispatch.call('change');
 
-        context.enter(
-            modeSelectNote(context, [note.id]).newFeature(true)
-        );
+
+        context
+            .selectedNoteID(note.id)
+            .enter(modeSelectNote(context, [note.id]).newFeature(true));
     }
 
 

@@ -90,7 +90,9 @@ export function uiNoteEditor(context) {
         noteSaveEnter
             .append('h4')
             .attr('class', '.note-save-header')
-            .text(t('note.newComment'));
+            .text(function() {
+                return _note.newFeature ? t('note.newDescription') : t('note.newComment');
+            });
 
         noteSaveEnter
             .append('textarea')
@@ -140,18 +142,26 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'buttons');
 
-        buttonEnter
-            .append('button')
-            .attr('class', 'button status-button action')
-            .append('span')
-            .attr('class', 'label');
+        if (_note.newFeature) {
+            buttonEnter
+                .append('button')
+                .attr('class', 'button add-note-button action')
+                .append('span')
+                .attr('class', 'label');
+        } else {
+            buttonEnter
+                .append('button')
+                .attr('class', 'button status-button action')
+                .append('span')
+                .attr('class', 'label');
 
-        buttonEnter
-            .append('button')
-            .attr('class', 'button comment-button action')
-            .append('span')
-            .attr('class', 'label')
-            .text(t('note.comment'));
+            buttonEnter
+                .append('button')
+                .attr('class', 'button comment-button action')
+                .append('span')
+                .attr('class', 'label')
+                .text(t('note.comment'));
+        }
 
         // update
         buttonSection = buttonSection
@@ -187,12 +197,28 @@ export function uiNoteEditor(context) {
                     });
                 }
             });
+
+        buttonSection.select('.add-note-button')   // select and propagate data
+            .text(t('note.newNote'))
+            .attr('disabled', function(d) {
+                return (d.status === 'open' && d.newComment) ? null : true;
+            })
+            .on('click.save', function(d) {
+                this.blur();    // avoid keeping focus on the button - #4641
+                var osm = services.osm;
+                if (osm) {
+                    osm.postNoteAdd(d, d.status, function(err, note) {
+                        dispatch.call('change', note);
+                    });
+                }
+            });
     }
 
 
-    noteEditor.note = function(_) {
+    noteEditor.note = function(_, __) {
         if (!arguments.length) return _note;
         _note = _;
+        _note.update({ newFeature: __ });
         return noteEditor;
     };
 

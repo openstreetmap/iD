@@ -22,7 +22,8 @@ export function uiNoteHeader() {
 
         var iconEnter = headerEnter
             .append('div')
-            .attr('class', function(d) { return 'note-header-icon ' + d.status; });
+            .attr('class', function(d) { return 'note-header-icon ' + d.status; })
+            .classed('new', function(d) { return d.id < 0; });
 
         iconEnter
             .append('div')
@@ -35,6 +36,11 @@ export function uiNoteHeader() {
                     .append('div')
                     .attr('class', 'note-icon-annotation')
                     .call(svgIcon('#iD-icon-more', 'note-annotation'));
+            } else if (_note.newFeature) {
+                iconEnter
+                    .append('div')
+                    .attr('class', 'note-icon-annotation')
+                    .call(svgIcon('#iD-icon-plus', 'note-annotation'));
             }
         });
 
@@ -42,13 +48,14 @@ export function uiNoteHeader() {
             .append('div')
             .attr('class', 'note-header-label')
             .text(function(d) {
+                if (_note.newFeature) { return t('note.new'); }
                 return t('note.note') + ' ' + d.id + ' ' +
                     (d.status === 'closed' ? t('note.closed') : '');
             });
     }
 
 
-    noteHeader.note = function(_) {
+    noteHeader.note = function(_, __) {
         if (!arguments.length) return _note;
         _note = _;
         return noteHeader;

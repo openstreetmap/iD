@@ -43,25 +43,35 @@ export function svgNotes(projection, context, dispatch) {
 
 
     function showLayer() {
-        editOn();
+        // editOn();
 
         layer
+            .classed('disabled', false)
             .style('opacity', 0)
             .transition()
             .duration(250)
             .style('opacity', 1)
-            .on('end', function () { dispatch.call('change'); });
+            .on('end interrupt', function () {
+                dispatch.call('change');
+            });
     }
 
 
     function hideLayer() {
+        // editOff();
+
         throttledRedraw.cancel();
+        layer.interrupt();
 
         layer
             .transition()
             .duration(250)
             .style('opacity', 0)
-            .on('end', editOff);
+            .on('end interrupt', function () {
+                layer.classed('disabled', true);
+                dispatch.call('change');
+            });
+
     }
 
 
@@ -80,7 +90,8 @@ export function svgNotes(projection, context, dispatch) {
         // enter
         var notesEnter = notes.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
+            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
+            .classed('new', function(d){ return d.id < 0; });
 
         notesEnter
             .append('use')
@@ -102,6 +113,18 @@ export function svgNotes(projection, context, dispatch) {
             .attr('x', '-7px')
             .attr('y', '-20px')
             .attr('xlink:href', '#iD-icon-more');
+
+        // add plus if this is a new note
+        notesEnter.selectAll('.note-annotation')
+            .data(function(d) { return d.id < 0 ? [0] : []; })
+            .enter()
+            .append('use')
+            .attr('class', 'note-annotation thread')
+            .attr('width', '14px')
+            .attr('height', '14px')
+            .attr('x', '-7px')
+            .attr('y', '-20px')
+            .attr('xlink:href', '#iD-icon-plus');
 
         // update
         notes

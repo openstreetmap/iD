@@ -21,6 +21,11 @@
     color: #ff3300;
     stroke: #333;
 }
+.note-header-icon.new .note-fill,
+.layer-notes .note.new .note-fill {
+    color: #00bcdd;
+    stroke: #333;
+}
 .note-header-icon.closed .note-fill,
 .layer-notes .note.closed .note-fill {
     color: #55dd00;
@@ -99,7 +104,6 @@
 .comments-container {
     background: #ececec;
     padding: 1px 10px;
-    margin: 10px 0;
     border-radius: 8px;
 }
 
@@ -155,6 +159,10 @@
     height: 100px;
     max-height: 300px;
     min-height: 100px;
+}
+
+.note-save-section {
+    margin: 10px 0;
 }
 
 .note-report {

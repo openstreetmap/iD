@@ -159,6 +159,17 @@ function parseComments(comments) {
 }
 
 
+function encodeNoteRtree(note) {
+    return {
+        minX: note.loc[0],
+        minY: note.loc[1],
+        maxX: note.loc[0],
+        maxY: note.loc[1],
+        data: note
+    };
+}
+
+
 var parsers = {
     node: function nodeData(obj, uid) {
         var attrs = obj.attributes;
@@ -239,9 +250,10 @@ var parsers = {
         }
 
         var note = new osmNote(props);
-        var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
-        _noteCache.rtree.insert(item);
+        var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
+        _noteCache.rtree.insert(item);
+
         return note;
     },
 
@@ -906,7 +918,7 @@ export default {
             if (err) { return callback(err); }
 
             // we get the updated note back, remove from caches and reparse..
-            var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
+            var item = encodeNoteRtree(note);
             _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
             delete _noteCache.note[note.id];
 
@@ -1052,11 +1064,24 @@ export default {
 
 
     // replace a single note in the cache
-    replaceNote: function(n) {
-        if (n instanceof osmNote) {
-            _noteCache.note[n.id] = n;
+    replaceNote: function(note) {
+        if (!(note instanceof osmNote) || !note.id) return;
+
+        _noteCache.note[note.id] = note; // update (or insert) in _noteCache.note
+
+        function updateRtree(item) { // update (or insert) in _noteCache.rtree
+
+            // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
+
+            // remove note
+            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+            _noteCache.rtree.insert(item); // add note (updated)
+
         }
-        return n;
+
+        updateRtree(encodeNoteRtree(note));
+
+        return note;
     }
 
 };

@@ -635,6 +635,9 @@ en:
     close_comment: Close and Comment
     open_comment: Reopen and Comment
     report: Report
+    new: New Note
+    newDescription: "Describe the issue."
+    newNote: Add Note
   help:
     title: Help
     key: H

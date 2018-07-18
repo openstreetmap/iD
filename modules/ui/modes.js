@@ -48,10 +48,8 @@ export function uiModes(context) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', function(mode) { return mode.id + ' add-button col3'; })
-            // .classed('disabled', function(mode) {
-            //     return mode.id === 'add-note' && !svgNotes.enabled; // disable notes button
-            // })
             .on('click.mode-buttons', function(mode) {
+                //TODO: prevent modeBrowse when in modeAddNote & osm layer is turned off
                 // When drawing, ignore accidental clicks on mode buttons - #4042
                 var currMode = context.mode().id;
                 if (currMode.match(/^draw/) !== null) return;
@@ -100,10 +98,7 @@ export function uiModes(context) {
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {
                 // TODO: allow zooming out beyond minZoom when adding new note. Currently prevented
-                if (
-                    (editable() && mode.id !== 'add-note')
-                    || (toggleNewNote() && mode.id === 'add-note')
-                ) {
+                if ((editable() && mode.id !== 'add-note') || (toggleNewNote() && mode.id === 'add-note')) {
                     if (mode.id === context.mode().id) {
                         context.enter(modeBrowse(context));
                     } else {
