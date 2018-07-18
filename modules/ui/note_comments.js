@@ -99,6 +99,7 @@ export function uiNoteComments() {
         if (!s) return null;
         var detected = utilDetect();
         var options = { day: 'numeric', month: 'short', year: 'numeric' };
+        s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
         var d = new Date(s);
         if (isNaN(d.getTime())) return null;
         return d.toLocaleDateString(detected.locale, options);
