@@ -34,17 +34,17 @@ import {
 } from '../util';
 
 
-var apibase = 'https://openstreetcam.org',
-    maxResults = 1000,
-    tileZoom = 14,
-    dispatch = d3_dispatch('loadedImages'),
-    imgZoom = d3_zoom()
-        .extent([[0, 0], [320, 240]])
-        .translateExtent([[0, 0], [320, 240]])
-        .scaleExtent([1, 15])
-        .on('zoom', zoomPan),
-    _oscCache,
-    _oscSelectedImage;
+var apibase = 'https://openstreetcam.org';
+var maxResults = 1000;
+var tileZoom = 14;
+var dispatch = d3_dispatch('loadedImages');
+var imgZoom = d3_zoom()
+    .extent([[0, 0], [320, 240]])
+    .translateExtent([[0, 0], [320, 240]])
+    .scaleExtent([1, 15])
+    .on('zoom', zoomPan);
+var _oscCache;
+var _oscSelectedImage;
 
 
 function abortRequest(i) {
@@ -129,12 +129,12 @@ function loadNextTilePage(which, currZoom, url, tile) {
     var maxPages = maxPageAtZoom(currZoom);
     var nextPage = cache.nextPage[tile.id] || 1;
     var params = utilQsString({
-            ipp: maxResults,
-            page: nextPage,
-            // client_id: clientId,
-            bbTopLeft: [bbox.maxY, bbox.minX].join(','),
-            bbBottomRight: [bbox.minY, bbox.maxX].join(',')
-        }, true);
+        ipp: maxResults,
+        page: nextPage,
+        // client_id: clientId,
+        bbTopLeft: [bbox.maxY, bbox.minX].join(','),
+        bbBottomRight: [bbox.minY, bbox.maxX].join(',')
+    }, true);
 
     if (nextPage > maxPages) return;
 
@@ -365,6 +365,16 @@ export default {
         wrapEnter
             .append('div')
             .attr('class', 'osc-image-wrap');
+
+
+        // Register viewer resize handler
+        context.ui().on('photoviewerResize', function(dimensions) {
+            imgZoom = d3_zoom()
+                .extent([[0, 0], dimensions])
+                .translateExtent([[0, 0], dimensions])
+                .scaleExtent([1, 15])
+                .on('zoom', zoomPan);
+        });
 
 
         function rotate(deg) {

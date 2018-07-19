@@ -127,12 +127,16 @@
     border-radius: 20px;
 }
 .comment-main {
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     flex: 1 1 100%;
     flex-flow: column nowrap;
     overflow: hidden;
     overflow-wrap: break-word;
 }
+[dir='rtl'] .comment-main {
+    padding: 10px 0 10px 10px;
+}
+
 .comment-metadata {
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -154,14 +158,18 @@
     border-left: none;
 }
 
-#new-comment-input {
+.note-save {
+    padding: 10px;
+}
+
+.note-save #new-comment-input {
     width: 100%;
     height: 100px;
     max-height: 300px;
     min-height: 100px;
 }
 
-.note-save-section {
+.note-save .detail-section {
     margin: 10px 0;
 }
 

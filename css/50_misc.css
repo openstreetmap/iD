@@ -71,7 +71,7 @@ path.stroke.tag-barrier {
 /* bridges */
 path.casing.tag-bridge {
     stroke-opacity: 0.6;
-    stroke: #000;
+    stroke: #000 !important;
     stroke-linecap: butt;
     stroke-dasharray: none;
 }
