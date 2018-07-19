@@ -125,7 +125,8 @@ export function presetIndex() {
         return areaKeys;
     };
 
-    all.build = function (d) {
+    all.build = function () {
+        var d = data.presets;
 		all.collection = [];
         _recent.collection = [];
         _fields = {};
@@ -155,7 +156,6 @@ export function presetIndex() {
 
         if (d.defaults) {
             var getItem = _bind(all.item, all);
-            _defaults = {};
             _forEach(Object.keys(d.defaults), function (k) {
                 _defaults[k] = presetCollection(d.defaults[k].map(getItem));
             });
@@ -190,14 +190,15 @@ export function presetIndex() {
         });
         return all;
     };
-    
+
     all.overwrite = function (d) {
-        all.build(d);
+        data.presets = d;
+        all.build();
         return all;
     };
 
     all.init = function() {
-		all.build(data.presets);
+		all.build();
         return all;
     };
 
