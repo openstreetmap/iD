@@ -35,7 +35,7 @@ export function modeAddNote(context) {
         });
 
         services.osm.replaceNote(note);
-        dispatch.call('change');
+        dispatch.call('change', this);
 
 
         context

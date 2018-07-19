@@ -8,11 +8,14 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import {
     behaviorHover,
     behaviorLasso,
-    behaviorSelect
+    behaviorSelect,
+    behaviorDrag
 } from '../behavior';
+
 
 import { services } from '../services';
 import { modeBrowse } from './browse';
+import { modeDragNote } from './drag_note';
 import { uiNoteEditor } from '../ui';
 
 
@@ -37,6 +40,7 @@ export function modeSelectNote(context, selectedNoteID) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
+        modeDragNote(context).restoreSelectedNoteIDs(selectedNoteID).behavior
     ];
 
     var newFeature = false;
