@@ -66,12 +66,14 @@ export function utilTile() {
         return tiles;
     }
 
+
     /**
      * getTiles() returns array of d3 geo tiles.
      * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
      * an area around (and including) the current map view extents.
      */
-    tile.getTiles = function(tileZoom, projection, dimensions, margin) {
+    tile.getTiles = function(projection, dimensions, tilezoom, margin) {
+
         // s is the current map scale
         // z is the 'Level of Detail', or zoom-level, where Level 1 is far from the earth, and Level 23 is close to the ground.
         // ts ('tile size') here is the formula for determining the width/height of the map in pixels, but with a modification.
@@ -79,23 +81,24 @@ export function utilTile() {
         // As used here, by subtracting constant 'tileZoom' from z (the level), you end up with a much smaller value for the tile size (in pixels).
         var s = projection.scale() * 2 * Math.PI;
         var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - tileZoom);
+        var ts = 256 * Math.pow(2, z - tilezoom);
         var origin = [
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]
         ];
 
         var tiler = this
-            .scaleExtent([tileZoom, tileZoom])
+            .scaleExtent([tilezoom, tilezoom])
             .scale(s)
             .size(dimensions)
             .translate(projection.translate())
             .margin(margin || 0);   // request nearby tiles so we can connect sequences.
 
-        return tiler()
+        var tiles = tiler()
             .map(function(tile) {
                 var x = tile[0] * ts - origin[0];
                 var y = tile[1] * ts - origin[1];
+
                 return {
                     id: tile.toString(),
                     xyz: tile,
@@ -105,13 +108,17 @@ export function utilTile() {
                     )
                 };
             });
+
+        return tiles;
     };
+
 
     tile.filterNullIsland = function(tiles) {
         return tiles.filter(function(t) {
             return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
         });
     };
+
 
     // remove inflight requests that no longer cover the view..
     tile.removeInflightRequests = function(cache, tiles, callback, modifier) {
@@ -124,11 +131,13 @@ export function utilTile() {
         }).map(callback); // abort request
     };
 
+
     tile.scaleExtent = function(val) {
         if (!arguments.length) return _scaleExtent;
         _scaleExtent = val;
         return tile;
     };
+
 
     tile.size = function(val) {
         if (!arguments.length) return _size;
@@ -136,11 +145,13 @@ export function utilTile() {
         return tile;
     };
 
+
     tile.scale = function(val) {
         if (!arguments.length) return _scale;
         _scale = val;
         return tile;
     };
+
 
     tile.translate = function(val) {
         if (!arguments.length) return _translate;
@@ -148,11 +159,13 @@ export function utilTile() {
         return tile;
     };
 
+
     tile.zoomDelta = function(val) {
         if (!arguments.length) return _zoomDelta;
         _zoomDelta = +val;
         return tile;
     };
+
 
     // number to extend the rows/columns beyond those covering the viewport
     tile.margin = function(val) {
@@ -160,6 +173,7 @@ export function utilTile() {
         _margin = +val;
         return tile;
     };
+
 
     return tile;
 }

@@ -778,13 +778,13 @@ export default {
             tilezoom = _tileZoom;
         }
 
-
-        var tiles = geoTile.filterNullIsland(geoTile.getTiles(_tileZoom, projection, dimensions, 0));
+        // get tiles
+        var tiles = geoTile.getTiles(projection, dimensions, tilezoom, 0);
+        tiles = geoTile.filterNullIsland(tiles);
 
         // remove inflight requests that no longer cover the view..
         var hadRequests = !_isEmpty(cache.inflight);
         geoTile.removeInflightRequests(cache, tiles, abortRequest);
-
         if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
             dispatch.call('loaded');    // stop the spinner
         }
