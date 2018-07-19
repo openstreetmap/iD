@@ -201,6 +201,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         viewfields.enter()               // viewfields may or may not be drawn...
             .insert('path', 'circle')    // but if they are, draw below the circles
             .attr('class', 'viewfield')
+            .classed('pano', function() { return this.parentNode.__data__.pano; })
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
 
