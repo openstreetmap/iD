@@ -167,7 +167,7 @@ export function uiCommit(context) {
 
             userLink
                 .append('a')
-                .attr('class','user-info')
+                .attr('class', 'user-info')
                 .text(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
                 .attr('tabindex', -1)
