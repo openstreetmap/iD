@@ -36,7 +36,7 @@ export function uiModes(context) {
     function toggleNewNote() {
         return svgNotes().enabled()
             && context.connection().authenticated()
-            && ~~context.map().zoom() >= 12;
+            && ~~context.map().zoom() >= 16;
     }
 
 
