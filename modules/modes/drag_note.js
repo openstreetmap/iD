@@ -206,6 +206,23 @@ export function modeDragNote(context) {
         _lastLoc = loc;
     }
 
+    function move(entity) {
+        if (_isCancelled) return;
+        d3_event.sourceEvent.stopPropagation();
+
+        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
+
+        _lastLoc = context.projection.invert(d3_event.point);
+
+        doMove(entity);
+        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
+        if (nudge) {
+            startNudge(entity, nudge);
+        } else {
+            stopNudge();
+        }
+    }
+
 
     function end(entity) {
         if (_isCancelled) return;
