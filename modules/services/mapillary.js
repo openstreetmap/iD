@@ -18,10 +18,12 @@ import {
 
 import rbush from 'rbush';
 
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import { svgDefs } from '../svg';
-import { utilQsString, utilRebind } from '../util';
+import { utilDetect } from '../util/detect';
+import { utilQsString, utilRebind, utilTile } from '../util';
+
+var geoTile = utilTile();
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
@@ -63,33 +65,18 @@ function maxPageAtZoom(z) {
     if (z > 18)   return 80;
 }
 
-function getTiles(projection) {
-    var s = projection.scale() * 2 * Math.PI;
-    var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-    var ts = 256 * Math.pow(2, z - tileZoom);
-    var origin = [
-        s / 2 - projection.translate()[0],
-        s / 2 - projection.translate()[1]
-    ];
 
-    return d3_geoTile()
-        .scaleExtent([tileZoom, tileZoom])
-        .scale(s)
-        .size(projection.clipExtent()[1])
-        .translate(projection.translate())()
-        .map(function(tile) {
-            var x = tile[0] * ts - origin[0];
-            var y = tile[1] * ts - origin[1];
-
-            return {
-                id: tile.toString(),
-                xyz: tile,
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
+function localeTimestamp(s) {
+    if (!s) return null;
+    var detected = utilDetect();
+    var options = {
+        day: 'numeric', month: 'short', year: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric',
+        timeZone: 'UTC'
+    };
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleString(detected.locale, options);
 }
 
 
@@ -97,15 +84,11 @@ function loadTiles(which, url, projection) {
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
-    var tiles = getTiles(projection).filter(function(t) {
-        return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
-    });
+    var dimension = projection.clipExtent()[1];
+    var tiles = geoTile.getTiles(projection, dimension, tileZoom, 0);
+    tiles = geoTile.filterNullIsland(tiles);
 
-    _filter(which.inflight, function(v, k) {
-        var wanted = _find(tiles, function(tile) { return k === (tile.id + ',0'); });
-        if (!wanted) delete which.inflight[k];
-        return !wanted;
-    }).map(abortRequest);
+    geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
 
     tiles.forEach(function(tile) {
         loadNextTilePage(which, currZoom, url, tile);

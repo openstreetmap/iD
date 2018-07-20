@@ -17,7 +17,6 @@ import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent, geoVecAdd } from '../geo';
 
 import {
@@ -31,9 +30,11 @@ import {
 import {
     utilRebind,
     utilIdleWorker,
+    utilTile,
     utilQsString
 } from '../util';
 
+var geoTile = utilTile();
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
@@ -777,44 +778,13 @@ export default {
             tilezoom = _tileZoom;
         }
 
-        var s = projection.scale() * 2 * Math.PI;
-        var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - tilezoom);
-        var origin = [
-            s / 2 - projection.translate()[0],
-            s / 2 - projection.translate()[1]
-        ];
-
-        // what tiles cover the view?
-        var tiler = d3_geoTile()
-            .scaleExtent([tilezoom, tilezoom])
-            .scale(s)
-            .size(dimensions)
-            .translate(projection.translate());
-
-        var tiles = tiler().map(function(tile) {
-            var x = tile[0] * ts - origin[0];
-            var y = tile[1] * ts - origin[1];
-
-            return {
-                id: tile.toString(),
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
+        // get tiles
+        var tiles = geoTile.getTiles(projection, dimensions, tilezoom, 0);
+        tiles = geoTile.filterNullIsland(tiles);
 
         // remove inflight requests that no longer cover the view..
         var hadRequests = !_isEmpty(cache.inflight);
-        _filter(cache.inflight, function(v, i) {
-            var wanted = _find(tiles, function(tile) { return i === tile.id; });
-            if (!wanted) {
-                delete cache.inflight[i];
-            }
-            return !wanted;
-        }).map(abortRequest);
-
+        geoTile.removeInflightRequests(cache, tiles, abortRequest);
         if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
             dispatch.call('loaded');    // stop the spinner
         }
