@@ -1,3 +1,5 @@
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 import _find from 'lodash-es/find';
 
 import {
@@ -12,7 +14,7 @@ import { t } from '../util/locale';
 import {
     actionAddMidpoint,
     actionConnect,
-    actionMoveNode,
+    actionMoveNote,
     actionNoop
 } from '../actions';
 
@@ -51,6 +53,8 @@ export function modeDragNote(context) {
     var _activeEntity;
     var _startLoc;
     var _lastLoc;
+
+    var dispatch = d3_dispatch('change');
 
 
     function startNudge(entity, nudge) {
@@ -113,37 +117,10 @@ export function modeDragNote(context) {
 
 
     function start(entity) {
-        _wasMidpoint = entity.type === 'midpoint';
-        var hasHidden = context.features().hasHiddenConnections(entity, context.graph());
-        _isCancelled = d3_event.sourceEvent.shiftKey || hasHidden;
-
-
-        if (_isCancelled) {
-            if (hasHidden) {
-                uiFlash()
-                    .duration(4000)
-                    .text(t('modes.drag_node.connected_to_hidden'))();
-            }
-            return drag.cancel();
-        }
-
-        if (_wasMidpoint) {
-            var midpoint = entity;
-            entity = osmNote();
-            context.perform(actionAddMidpoint(midpoint, entity));
-            entity = context.entity(entity.id);   // get post-action entity
-
-            var vertex = context.surface().selectAll('.' + entity.id);
-            drag.target(vertex.node(), entity);
-
-        } else {
-            context.perform(actionNoop());
-        }
-
         _activeEntity = entity;
         _startLoc = entity.loc;
 
-        context.surface().selectAll('.' + _activeEntity.id)
+        context.surface().selectAll('.note-' + _activeEntity.id)
             .classed('active', true);
 
         context.enter(mode);
@@ -180,38 +157,22 @@ export function modeDragNote(context) {
             var d = datum();
             var target = d;
             var targetLoc = target && target.loc;
-            var targetNodes = d && d.properties && d.properties.nodes;
+            var targetNotes = d;
             var edge;
 
-            if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
-                loc = targetLoc;
+            // if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
+            //     loc = targetLoc;
 
-            } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
-                if (edge) {
-                    loc = edge.loc;
-                }
-            }
+            // } else if (targetNodes) {   // snap to way - a line target with `.nodes`
+            //     edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+            //     if (edge) {
+            //         loc = edge.loc;
+            //     }
+            // }
         }
 
-        context.replace(
-            actionMoveNode(entity.id, loc),
-            // moveAnnotation(entity) TODO: - likely replace
-        );
-
-        // Below here: validations
-        var isInvalid = false;
-
-        // Check if this connection to `target` could cause relations to break..
-        if (target) {
-            isInvalid = hasRelationConflict(entity, target, edge, context.graph());
-        }
-
-        // Check if this drag causes the geometry to break..
-        if (!isInvalid) {
-            isInvalid = hasInvalidGeometry(entity, context.graph());
-        }
-
+        actionMoveNote(entity.id, loc);
+        dispatch.call('change');
 
         var nope = context.surface().classed('nope');
         if (isInvalid === 'relation' || isInvalid === 'restriction') {
@@ -243,101 +204,6 @@ export function modeDragNote(context) {
         }
 
         _lastLoc = loc;
-    }
-
-
-    // Uses `actionConnect.disabled()` to know whether this connection is ok..
-    function hasRelationConflict(entity, target, edge, graph) {
-        var testGraph = graph.update();  // copy
-
-        // if snapping to way - add midpoint there and consider that the target..
-        if (edge) {
-            var midpoint = osmNote();
-            var action = actionAddMidpoint({
-                loc: edge.loc,
-                edge: [target.nodes[edge.index - 1], target.nodes[edge.index]]
-            }, midpoint);
-
-            testGraph = action(testGraph);
-            target = midpoint;
-        }
-
-        // can we connect to it?
-        var ids = [entity.id, target.id];
-        return actionConnect(ids).disabled(testGraph);
-    }
-
-
-    function hasInvalidGeometry(entity, graph) {
-        var parents = graph.parentWays(entity);
-        var i, j, k;
-
-        for (i = 0; i < parents.length; i++) {
-            var parent = parents[i];
-            var nodes = [];
-            var activeIndex = null;    // which multipolygon ring contains node being dragged
-
-            // test any parent multipolygons for valid geometry
-            var relations = graph.parentRelations(parent);
-            for (j = 0; j < relations.length; j++) {
-                if (!relations[j].isMultipolygon()) continue;
-
-                var rings = osmJoinWays(relations[j].members, graph);
-
-                // find active ring and test it for self intersections
-                for (k = 0; k < rings.length; k++) {
-                    nodes = rings[k].nodes;
-                    if (_find(nodes, function(n) { return n.id === entity.id; })) {
-                        activeIndex = k;
-                        if (geoHasSelfIntersections(nodes, entity.id)) {
-                            return true;
-                        }
-                    }
-                    rings[k].coords = nodes.map(function(n) { return n.loc; });
-                }
-
-                // test active ring for intersections with other rings in the multipolygon
-                for (k = 0; k < rings.length; k++) {
-                    if (k === activeIndex) continue;
-
-                    // make sure active ring doesnt cross passive rings
-                    if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {
-                        return true;
-                    }
-                }
-            }
-
-
-            // If we still haven't tested this node's parent way for self-intersections.
-            // (because it's not a member of a multipolygon), test it now.
-            if (activeIndex === null) {
-                nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
-                if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
-                    return true;
-                }
-            }
-
-        }
-
-        return false;
-    }
-
-
-    function move(entity) {
-        if (_isCancelled) return;
-        d3_event.sourceEvent.stopPropagation();
-
-        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
-
-        _lastLoc = context.projection.invert(d3_event.point);
-
-        doMove(entity);
-        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
-        if (nudge) {
-            startNudge(entity, nudge);
-        } else {
-            stopNudge();
-        }
     }
 
 
@@ -430,8 +296,8 @@ export function modeDragNote(context) {
         //     .on('keydown.drawWay', keydown)
         //     .on('keyup.drawWay', keyup);
 
-        context.history()
-            .on('undone.drag-node', cancel);
+        // context.history()
+        //     .on('undone.drag-node', cancel);
     };
 
 
@@ -440,15 +306,15 @@ export function modeDragNote(context) {
         context.uninstall(hover);
         context.uninstall(edit);
 
-        d3_select(window)
-            .on('keydown.hover', null)
-            .on('keyup.hover', null);
+        // d3_select(window)
+        //     .on('keydown.hover', null)
+        //     .on('keyup.hover', null);
 
-        context.history()
-            .on('undone.drag-node', null);
+        // context.history()
+        //     .on('undone.drag-node', null);
 
-        context.map()
-            .on('drawn.drag-node', null);
+        // context.map()
+        //     .on('drawn.drag-node', null);
 
         _activeEntity = null;
 
