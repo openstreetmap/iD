@@ -40,7 +40,7 @@ export function modeSelectNote(context, selectedNoteID) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
-        modeDragNote(context).restoreSelectedNoteIDs(selectedNoteID).behavior
+        // modeDragNote(context).restoreSelectedNoteIDs(selectedNoteID).behavior TAH - re-add
     ];
 
     var newFeature = false;

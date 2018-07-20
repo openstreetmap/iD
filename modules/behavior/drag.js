@@ -69,6 +69,7 @@ export function behaviorDrag() {
 
 
     function dragstart() {
+        console.log('TAH - drag start');
         _target = this;
         _event = eventOf(_target, arguments);
 
@@ -128,6 +129,7 @@ export function behaviorDrag() {
 
 
         function dragend() {
+            console.log('TAH - drag end');
             if (started) {
                 _event({ type: 'end' });
 
@@ -155,6 +157,7 @@ export function behaviorDrag() {
 
 
     function drag(selection) {
+        console.log('TAH - drag: ', selection);
         var matchesSelector = utilPrefixDOMProperty('matchesSelector');
         var delegate = dragstart;
 

@@ -4,6 +4,7 @@ export { modeAddPoint } from './add_point';
 export { modeAddNote } from './add_note';
 export { modeBrowse } from './browse';
 export { modeDragNode } from './drag_node';
+export { modeDragNote2 } from './drag_note2';
 export { modeDrawArea } from './draw_area';
 export { modeDrawLine } from './draw_line';
 export { modeMove } from './move';

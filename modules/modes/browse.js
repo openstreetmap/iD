@@ -8,7 +8,7 @@ import {
 } from '../behavior';
 
 import { modeDragNode } from './drag_node';
-import { modeDragNote } from './drag_note';
+import { modeDragNote2 } from './drag_note2';
 
 
 export function modeBrowse(context) {
@@ -25,7 +25,7 @@ export function modeBrowse(context) {
         behaviorSelect(context),
         behaviorLasso(context),
         modeDragNode(context).behavior,
-        modeDragNote(context).behavior // TAH - possibly change
+        modeDragNote2(context).behavior
     ];
 
 
