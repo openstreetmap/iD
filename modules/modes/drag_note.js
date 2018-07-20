@@ -117,6 +117,8 @@ export function modeDragNote(context) {
 
 
     function start(entity) {
+        _isCancelled = d3_event.sourceEvent.shiftKey;
+
         _activeEntity = entity;
         _startLoc = entity.loc;
 
@@ -190,6 +192,9 @@ export function modeDragNote(context) {
                     .text('')();
             }
         }
+
+        // Below here: validations
+        var isInvalid = false;
 
 
         var nopeDisabled = context.surface().classed('nope-disabled');
@@ -308,6 +313,9 @@ export function modeDragNote(context) {
     mode.enter = function() {
         context.install(hover);
         context.install(edit);
+
+        // context.selectedIDs(null); TODO: possibly add something like this
+        // context.selectedNoteID(_activeEntity);
 
         // d3_select(window)
         //     .on('keydown.drawWay', keydown)
