@@ -2980,7 +2980,7 @@
                 },
                 "aeroway/aerodrome": {
                     "name": "Airport",
-                    "terms": "airplane,airport,aerodrome"
+                    "terms": "aerodrome,aeroway,airplane,airport,jet,plane"
                 },
                 "aeroway/apron": {
                     "name": "Apron",
@@ -4636,7 +4636,7 @@
                 },
                 "landuse/military/airfield": {
                     "name": "Military Airfield",
-                    "terms": "air force,army,base,bomb,fight,force,guard,heli*,jet,marine,navy,plane,troop,war"
+                    "terms": "aerodrome,aeroway,air force,airplane,airport,army,base,bomb,fight,force,guard,heli*,jet,marine,navy,plane,troop,war"
                 },
                 "landuse/military/barracks": {
                     "name": "Barracks",

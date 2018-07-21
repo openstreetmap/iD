@@ -1825,7 +1825,7 @@ en:
       aeroway/aerodrome:
         # aeroway=aerodrome
         name: Airport
-        # 'terms: airplane,airport,aerodrome'
+        # 'terms: aerodrome,aeroway,airplane,airport,jet,plane'
         terms: '<translate with synonyms or related terms for ''Airport'', separated by commas>'
       aeroway/apron:
         # aeroway=apron
@@ -3692,7 +3692,7 @@ en:
       landuse/military/airfield:
         # military=airfield
         name: Military Airfield
-        # 'terms: air force,army,base,bomb,fight,force,guard,heli*,jet,marine,navy,plane,troop,war'
+        # 'terms: aerodrome,aeroway,air force,airplane,airport,army,base,bomb,fight,force,guard,heli*,jet,marine,navy,plane,troop,war'
         terms: '<translate with synonyms or related terms for ''Military Airfield'', separated by commas>'
       landuse/military/barracks:
         # military=barracks

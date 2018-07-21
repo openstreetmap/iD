@@ -65,7 +65,7 @@ export function modeSelect(context, selectedIDs) {
         behaviorSelect(context),
         behaviorLasso(context),
         modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior,
-        modeDragNote(context).restoreSelectedNoteIDs(selectedIDs).behavior // TODO: - likely remove
+        modeDragNote(context).restoreSelectedNoteID(selectedIDs).behavior // TODO: - likely remove
     ];
     var inspector;
     var editMenu;
