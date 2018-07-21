@@ -322,7 +322,7 @@ export function uiNoteEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var osm = services.osm;
                 if (osm) {
-                    osm.postNoteAdd(d, d.status, function(err, note) {
+                    osm.postNoteCreate(d, function(err, note) {
                         dispatch.call('change', note);
                     });
                 }

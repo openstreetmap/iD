@@ -861,7 +861,43 @@ export default {
     // Create a note
     // POST /api/0.6/notes?params
     postNoteCreate: function(note, callback) {
-        // todo
+        if (!this.authenticated()) {
+            return callback({ message: 'Not Authenticated', status: -3 }, note);
+        }
+        if (_noteCache.inflightPost[note.id]) {
+            return callback({ message: 'Note update already inflight', status: -2 }, note);
+        }
+
+        if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
+
+        var path = '/api/0.6/notes?' +
+        'lat=' + note.loc[1] +
+        '&lon=' + note.loc[0] +
+        '&' + utilQsString({ text: note.newComment });
+        _noteCache.inflightPost[note.id] = oauth.xhr(
+            { method: 'POST', path: path },
+            wrapcb(this, done, _connectionID)
+        );
+
+
+        function done(err, xml) {
+            delete _noteCache.inflightPost[note.id];
+            if (err) { return callback(err); }
+
+            // we get the updated note back, remove from caches and reparse..
+            var item = encodeNoteRtree(note);
+            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+            delete _noteCache.note[note.id];
+
+            var options = { skipSeen: false };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(undefined, results[0]);
+                }
+            }, options);
+        }
     },
 
 
@@ -884,6 +920,7 @@ export default {
             action = 'reopen';
         } else {
             action = 'comment';
+            if (!note.newComment) return; // when commenting, comment required
         }
 
         var path = '/api/0.6/notes/' + note.id + '/' + action;
