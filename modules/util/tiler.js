@@ -7,7 +7,6 @@ export function utilTiler() {
     var _scale = 256;
     var _scaleExtent = [0, 20];
     var _translate = [_size[0] / 2, _size[1] / 2];
-    var _zoomDelta = 0;
     var _margin = 0;
     var _skipNullIsland = false;
 
@@ -34,7 +33,7 @@ export function utilTiler() {
 
     function tiler() {
         var z = Math.max(Math.log(_scale) / Math.LN2 - 8, 0);
-        var z0 = bound(Math.round(z + _zoomDelta));
+        var z0 = bound(Math.round(z));
         var k = Math.pow(2, z - z0 + 8);
         var origin = [
             (_translate[0] - _scale / 2) / k,
@@ -138,12 +137,6 @@ export function utilTiler() {
         return tiler;
     };
 
-
-    tiler.zoomDelta = function(val) {
-        if (!arguments.length) return _zoomDelta;
-        _zoomDelta = +val;
-        return tiler;
-    };
 
     // number to extend the rows/columns beyond those covering the viewport
     tiler.margin = function(val) {
