@@ -1,3 +1,4 @@
+import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
@@ -22,7 +23,7 @@ import rbush from 'rbush';
 
 import { geoExtent } from '../geo';
 
-import { utilTile } from '../util';
+import { utilTiler } from '../util';
 import { utilDetect } from '../util/detect';
 
 import {
@@ -31,7 +32,7 @@ import {
     utilSetTransform
 } from '../util';
 
-var geoTile = utilTile();
+var geoTile = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://openstreetcam.org';
 var maxResults = 1000;
@@ -62,14 +63,22 @@ function maxPageAtZoom(z) {
 
 
 function loadTiles(which, url, projection) {
-    var s = projection.scale() * 2 * Math.PI,
-        currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
+    var s = projection.scale() * 2 * Math.PI;
+    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     var dimension = projection.clipExtent()[1];
-    var tiles = geoTile.getTiles(projection, dimension, tileZoom, 0);
-    tiles = geoTile.filterNullIsland(tiles);
+    var tiles = geoTile.getTiles(projection, dimension, tileZoom);
 
-    geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
+    // abort inflight requests that are no longer needed
+    var cache = _oscCache[which];
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
+
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
 
     tiles.forEach(function(tile) {
         loadNextTilePage(which, currZoom, url, tile);

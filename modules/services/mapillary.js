@@ -1,4 +1,5 @@
 /* global Mapillary:false */
+import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
@@ -19,9 +20,9 @@ import rbush from 'rbush';
 import { geoExtent } from '../geo';
 import { svgDefs } from '../svg';
 import { utilDetect } from '../util/detect';
-import { utilQsString, utilRebind, utilTile } from '../util';
+import { utilQsString, utilRebind, utilTiler } from '../util';
 
-var geoTile = utilTile();
+var geoTile = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
@@ -57,10 +58,18 @@ function loadTiles(which, url, projection) {
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     var dimension = projection.clipExtent()[1];
-    var tiles = geoTile.getTiles(projection, dimension, tileZoom, 0);
-    tiles = geoTile.filterNullIsland(tiles);
+    var tiles = geoTile.getTiles(projection, dimension, tileZoom);
 
-    geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
+    // abort inflight requests that are no longer needed
+    var cache = _mlyCache[which];
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
+
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
 
     tiles.forEach(function(tile) {
         loadNextTilePage(which, currZoom, url, tile);
