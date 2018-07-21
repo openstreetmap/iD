@@ -69,7 +69,6 @@ export function behaviorDrag() {
 
 
     function dragstart() {
-        console.log('TAH - drag start');
         _target = this;
         _event = eventOf(_target, arguments);
 
@@ -129,7 +128,6 @@ export function behaviorDrag() {
 
 
         function dragend() {
-            console.log('TAH - drag end');
             if (started) {
                 _event({ type: 'end' });
 
@@ -157,7 +155,6 @@ export function behaviorDrag() {
 
 
     function drag(selection) {
-        console.log('TAH - drag: ', selection);
         var matchesSelector = utilPrefixDOMProperty('matchesSelector');
         var delegate = dragstart;
 
@@ -168,16 +165,8 @@ export function behaviorDrag() {
                 for (; target && target !== root; target = target.parentNode) {
                     var datum = target.__data__;
 
-<<<<<<< HEAD
-                    var entity;
-                    if (datum instanceof osmNote) { entity = datum;}
-                    else {
-                        entity = datum && datum.properties && datum.properties.entity;
-                    }
-=======
                     var entity = datum instanceof osmNote ?
                         datum : datum && datum.properties && datum.properties.entity;
->>>>>>> drag-note
 
                     if (entity && target[matchesSelector](_selector)) {
                         return dragstart.call(target, entity);

@@ -1,5 +1,3 @@
-import _filter from 'lodash-es/filter';
-import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
@@ -50,18 +48,6 @@ var _oscSelectedImage;
 
 function abortRequest(i) {
     i.abort();
-}
-
-
-function nearNullIsland(x, y, z) {
-    if (z >= 7) {
-        var center = Math.pow(2, z - 1),
-            width = Math.pow(2, z - 6),
-            min = center - (width / 2),
-            max = center + (width / 2) - 1;
-        return x >= min && x <= max && y >= min && y <= max;
-    }
-    return false;
 }
 
 

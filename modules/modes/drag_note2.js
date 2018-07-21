@@ -136,7 +136,6 @@ export function modeDragNote2(context) {
             drag.target(vertex.node(), entity);
 
         } else {
-            console.log('else');
             context.perform(actionNoop());
         }
 
@@ -423,7 +422,6 @@ export function modeDragNote2(context) {
 
 
     mode.enter = function() {
-        console.log('TAH - mode.drag_note2 entered');
         context.install(hover);
         context.install(edit);
 
@@ -437,7 +435,6 @@ export function modeDragNote2(context) {
 
 
     mode.exit = function() {
-        console.log('TAH - mode.drag_note2 exited');
         context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
         context.uninstall(edit);
@@ -466,7 +463,6 @@ export function modeDragNote2(context) {
 
 
     mode.selectedIDs = function() {
-        console.log('TAH - mode.selectedIDs');
         if (!arguments.length) return _activeEntity ? [_activeEntity.id] : [];
         // no assign
         return mode;
@@ -474,7 +470,6 @@ export function modeDragNote2(context) {
 
 
     mode.activeID = function() {
-        console.log('TAH - mode.selectedIDs');
         if (!arguments.length) return _activeEntity && _activeEntity.id;
         // no assign
         return mode;
@@ -482,7 +477,6 @@ export function modeDragNote2(context) {
 
 
     mode.restoreSelectedIDs = function(_) {
-        console.log('TAH - mode.restoreSelectedIDs');
         if (!arguments.length) return _restoreSelectedIDs;
         _restoreSelectedIDs = _;
         return mode;
