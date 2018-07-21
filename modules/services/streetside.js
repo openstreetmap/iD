@@ -32,7 +32,7 @@ import { utilQsString, utilRebind, utilTile } from '../util';
 
 import Q from 'q';
 
-var geoTile = utilTile();
+var geoTile = utilTile().skipNullIsland(true);
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -95,8 +95,9 @@ function loadTiles(which, url, projection, margin) {
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     var dimension = projection.clipExtent()[1];
-    var tiles = geoTile.getTiles(projection, dimension, tileZoom, margin);
-    tiles = geoTile.filterNullIsland(tiles);
+    var tiles = geoTile
+        .margin(margin)
+        .getTiles(projection, dimension, tileZoom);
 
     tiles.forEach(function (tile) {
        loadNextTilePage(which, currZoom, url, tile);

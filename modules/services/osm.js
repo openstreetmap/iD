@@ -780,7 +780,6 @@ export default {
 
         // get tiles
         var tiles = geoTile.getTiles(projection, dimensions, tilezoom, 0);
-        tiles = geoTile.filterNullIsland(tiles);
 
         // remove inflight requests that no longer cover the view..
         var hadRequests = !_isEmpty(cache.inflight);

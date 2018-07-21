@@ -33,7 +33,7 @@ import {
     utilSetTransform
 } from '../util';
 
-var geoTile = utilTile();
+var geoTile = utilTile().skipNullIsland(true);
 
 var apibase = 'https://openstreetcam.org';
 var maxResults = 1000;
@@ -81,7 +81,6 @@ function loadTiles(which, url, projection) {
 
     var dimension = projection.clipExtent()[1];
     var tiles = geoTile.getTiles(projection, dimension, tileZoom, 0);
-    tiles = geoTile.filterNullIsland(tiles);
 
     geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
 

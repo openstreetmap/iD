@@ -23,7 +23,7 @@ import { svgDefs } from '../svg';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind, utilTile } from '../util';
 
-var geoTile = utilTile();
+var geoTile = utilTile().skipNullIsland(true);
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
@@ -86,7 +86,6 @@ function loadTiles(which, url, projection) {
 
     var dimension = projection.clipExtent()[1];
     var tiles = geoTile.getTiles(projection, dimension, tileZoom, 0);
-    tiles = geoTile.filterNullIsland(tiles);
 
     geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
 

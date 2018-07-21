@@ -11,10 +11,13 @@ export function utilTile() {
     var _translate = [_size[0] / 2, _size[1] / 2];
     var _zoomDelta = 0;
     var _margin = 0;
+    var _skipNullIsland = false;
+
 
     function bound(val) {
         return Math.min(_scaleExtent[1], Math.max(_scaleExtent[0], val));
     }
+
 
     function nearNullIsland(x, y, z) {
         if (z >= 7) {
@@ -27,7 +30,8 @@ export function utilTile() {
         return false;
     }
 
-    function tile() {
+
+    function tiler() {
         var z = Math.max(Math.log(_scale) / Math.LN2 - 8, 0);
         var z0 = bound(Math.round(z + _zoomDelta));
         var k = Math.pow(2, z - z0 + 8);
@@ -72,13 +76,7 @@ export function utilTile() {
      * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
      * an area around (and including) the current map view extents.
      */
-    tile.getTiles = function(projection, dimensions, tilezoom, margin) {
-
-        // s is the current map scale
-        // z is the 'Level of Detail', or zoom-level, where Level 1 is far from the earth, and Level 23 is close to the ground.
-        // ts ('tile size') here is the formula for determining the width/height of the map in pixels, but with a modification.
-        // See 'Ground Resolution and Map Scale': //https://msdn.microsoft.com/en-us/library/bb259689.aspx.
-        // As used here, by subtracting constant 'tileZoom' from z (the level), you end up with a much smaller value for the tile size (in pixels).
+    tiler.getTiles = function(projection, dimensions, tilezoom) {
         var s = projection.scale() * 2 * Math.PI;
         var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
         var ts = 256 * Math.pow(2, z - tilezoom);
@@ -87,18 +85,19 @@ export function utilTile() {
             s / 2 - projection.translate()[1]
         ];
 
-        var tiler = this
+        this
             .scaleExtent([tilezoom, tilezoom])
             .scale(s)
             .size(dimensions)
-            .translate(projection.translate())
-            .margin(margin || 0);   // request nearby tiles so we can connect sequences.
+            .translate(projection.translate());
 
-        var tiles = tiler()
+        return tiler()
             .map(function(tile) {
+                if (_skipNullIsland && nearNullIsland(tile[0], tile[1], tile[2])) {
+                    return false;
+                }
                 var x = tile[0] * ts - origin[0];
                 var y = tile[1] * ts - origin[1];
-
                 return {
                     id: tile.toString(),
                     xyz: tile,
@@ -107,21 +106,12 @@ export function utilTile() {
                         projection.invert([x + ts, y])
                     )
                 };
-            });
-
-        return tiles;
-    };
-
-
-    tile.filterNullIsland = function(tiles) {
-        return tiles.filter(function(t) {
-            return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
-        });
+            }).filter(Boolean);
     };
 
 
     // remove inflight requests that no longer cover the view..
-    tile.removeInflightRequests = function(cache, tiles, callback, modifier) {
+    tiler.removeInflightRequests = function(cache, tiles, callback, modifier) {
         return _filter(cache.inflight, function(v, i) {
             var wanted = _find(tiles, function(tile) { return i === tile.id + modifier; });
             if (!wanted) {
@@ -132,48 +122,54 @@ export function utilTile() {
     };
 
 
-    tile.scaleExtent = function(val) {
+    tiler.scaleExtent = function(val) {
         if (!arguments.length) return _scaleExtent;
         _scaleExtent = val;
-        return tile;
+        return tiler;
     };
 
 
-    tile.size = function(val) {
+    tiler.size = function(val) {
         if (!arguments.length) return _size;
         _size = val;
-        return tile;
+        return tiler;
     };
 
 
-    tile.scale = function(val) {
+    tiler.scale = function(val) {
         if (!arguments.length) return _scale;
         _scale = val;
-        return tile;
+        return tiler;
     };
 
 
-    tile.translate = function(val) {
+    tiler.translate = function(val) {
         if (!arguments.length) return _translate;
         _translate = val;
-        return tile;
+        return tiler;
     };
 
 
-    tile.zoomDelta = function(val) {
+    tiler.zoomDelta = function(val) {
         if (!arguments.length) return _zoomDelta;
         _zoomDelta = +val;
-        return tile;
+        return tiler;
     };
-
 
     // number to extend the rows/columns beyond those covering the viewport
-    tile.margin = function(val) {
+    tiler.margin = function(val) {
         if (!arguments.length) return _margin;
         _margin = +val;
-        return tile;
+        return tiler;
     };
 
 
-    return tile;
+    tiler.skipNullIsland = function(val) {
+        if (!arguments.length) return _skipNullIsland;
+        _skipNullIsland = val;
+        return tiler;
+    };
+
+
+    return tiler;
 }
