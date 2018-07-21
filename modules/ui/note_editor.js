@@ -40,7 +40,11 @@ export function uiNoteEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'fr note-editor-close')
-            .on('click', function() { context.enter(modeBrowse(context)); })
+            .on('click', function() {
+                var osm = services.osm;
+                if (_note.isNew()) { osm.removeNote(_note); } // delete new note
+                context.enter(modeBrowse(context));
+            })
             .call(svgIcon('#iD-icon-close'));
 
         headerEnter
@@ -318,7 +322,7 @@ export function uiNoteEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var osm = services.osm;
                 if (osm) {
-                    osm.postNoteAdd(d, d.status, function(err, note) {
+                    osm.postNoteCreate(d, function(err, note) {
                         dispatch.call('change', note);
                     });
                 }

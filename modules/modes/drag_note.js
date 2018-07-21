@@ -1,5 +1,3 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
-
 import _find from 'lodash-es/find';
 
 import {
@@ -7,14 +5,21 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
+import { geoVecInterp } from '../geo';
+
 import { t } from '../util/locale';
+
+import { services } from '../services';
+
 
 import {
     actionAddMidpoint,
     actionConnect,
-    actionMoveNote,
+    actionMoveNode,
     actionNoop
 } from '../actions';
 
@@ -32,8 +37,8 @@ import {
     geoViewportEdge
 } from '../geo';
 
-import { modeBrowse, modeSelect } from './index';
-import { osmJoinWays, osmNote } from '../osm';
+import { modeBrowse, modeSelectNote } from './index';
+import { osmJoinWays, osmNode } from '../osm';
 import { uiFlash } from '../ui';
 
 
@@ -46,15 +51,15 @@ export function modeDragNote(context) {
         .on('hover', context.ui().sidebar.hover);
     var edit = behaviorEdit(context);
 
+    var dispatch = d3_dispatch('redraw', 'change');
+
     var _nudgeInterval;
-    var _restoreSelectedNoteIDs = [];
+    var _restoreSelectedNoteID = [];
     var _wasMidpoint = false;
     var _isCancelled = false;
     var _activeEntity;
     var _startLoc;
     var _lastLoc;
-
-    var dispatch = d3_dispatch('change');
 
 
     function startNudge(entity, nudge) {
@@ -71,17 +76,6 @@ export function modeDragNote(context) {
             window.clearInterval(_nudgeInterval);
             _nudgeInterval = null;
         }
-    }
-
-
-    function moveAnnotation(entity) {
-        console.log('entity')
-        return t('operations.move.annotation.' + entity.geometry(context.graph()));
-    }
-
-
-    function connectAnnotation(entity) {
-        return t('operations.connect.annotation.' + entity.geometry(context.graph()));
     }
 
 
@@ -117,7 +111,7 @@ export function modeDragNote(context) {
 
 
     function start(entity) {
-        _isCancelled = d3_event.sourceEvent.shiftKey;
+        context.perform(actionNoop());
 
         _activeEntity = entity;
         _startLoc = entity.loc;
@@ -129,18 +123,22 @@ export function modeDragNote(context) {
     }
 
 
-    // related code
-    // - `behavior/draw.js` `datum()`
-    function datum() {
-        var event = d3_event && d3_event.sourceEvent;
-        if (!event || event.altKey) {
-            return {};
-        } else {
-            // When dragging, snap only to touch targets..
-            // (this excludes area fills and active drawing elements)
-            var d = event.target.__data__;
-            return (d && d.properties && d.properties.target) ? d : {};
-        }
+    function move(entity) {
+        if (_isCancelled) return;
+        d3_event.sourceEvent.stopPropagation();
+
+        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
+
+        _lastLoc = context.projection.invert(d3_event.point);
+
+        doMove(entity);
+        // var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
+        // if (nudge) {
+        //     startNudge(entity, nudge);
+        // } else {
+        //     stopNudge();
+        // }
+
     }
 
 
@@ -151,147 +149,20 @@ export function modeDragNote(context) {
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
-        if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
-            // related code
-            // - `mode/drag_node.js`     `doMode()`
-            // - `behavior/draw.js`      `click()`
-            // - `behavior/draw_way.js`  `move()`
-            var d = datum();
-            var target = d;
-            var targetLoc = target && target.loc;
-            var targetNotes = d;
-            var edge;
+        entity = entity.move(geoVecInterp(entity.loc, loc, 1));
 
-            // if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
-            //     loc = targetLoc;
-
-            // } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-            //     edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
-            //     if (edge) {
-            //         loc = edge.loc;
-            //     }
-            // }
+        var osm = services.osm;
+        if (osm) {
+            osm.replaceNote(entity);  // update note cache
         }
-
-        actionMoveNote(entity.id, loc);
-        dispatch.call('change');
-
-        var nope = context.surface().classed('nope');
-        if (isInvalid === 'relation' || isInvalid === 'restriction') {
-            if (!nope) {   // about to nope - show hint
-                uiFlash()
-                    .duration(4000)
-                    .text(t('operations.connect.' + isInvalid,
-                        { relation: context.presets().item('type/restriction').name() }
-                    ))();
-            }
-        } else {
-            if (nope) {   // about to un-nope, remove hint
-                uiFlash()
-                    .duration(1)
-                    .text('')();
-            }
-        }
-
-        // Below here: validations
-        var isInvalid = false;
-
-
-        var nopeDisabled = context.surface().classed('nope-disabled');
-        if (nopeDisabled) {
-            context.surface()
-                .classed('nope', false)
-                .classed('nope-suppressed', isInvalid);
-        } else {
-            context.surface()
-                .classed('nope', isInvalid)
-                .classed('nope-suppressed', false);
-        }
-
-        _lastLoc = loc;
-    }
-
-    function move(entity) {
-        if (_isCancelled) return;
-        d3_event.sourceEvent.stopPropagation();
-
-        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
-
-        _lastLoc = context.projection.invert(d3_event.point);
-
-        doMove(entity);
-        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
-        if (nudge) {
-            startNudge(entity, nudge);
-        } else {
-            stopNudge();
-        }
+        dispatch.call('change', this, 'difference');
     }
 
 
     function end(entity) {
-        if (_isCancelled) return;
-
-        var d = datum();
-        var nope = (d && d.properties && d.properties.nope) || context.surface().classed('nope');
-        var target = d && d.properties && d.properties.entity;   // entity to snap to
-
-        if (nope) {   // bounce back
-            context.perform(
-                _actionBounceBack(entity.id, _startLoc)
-            );
-
-        } else if (target && target.type === 'way') {
-            var choice = geoChooseEdge(context.childNodes(target), context.mouse(), context.projection, entity.id);
-            context.replace(
-                actionAddMidpoint({
-                    loc: choice.loc,
-                    edge: [target.nodes[choice.index - 1], target.nodes[choice.index]]
-                }, entity),
-                // connectAnnotation(target) TODO: - likely replace
-            );
-
-        } else if (target && target.type === 'node') {
-            context.replace(
-                actionConnect([target.id, entity.id]),
-                // connectAnnotation(target) TODO: - likely replace
-            );
-
-        } else if (_wasMidpoint) {
-            context.replace(
-                actionNoop(),
-                t('operations.add.annotation.vertex')
-            );
-
-        } else {
-            context.replace(
-                actionNoop(),
-                // moveAnnotation(entity) TODO: - likely replace
-            );
-        }
-
-        var reselection = _restoreSelectedNoteIDs.filter(function(id) {
-            return context.graph().hasEntity(id);
-        });
-
-        if (reselection.length) {
-            context.enter(modeSelect(context, reselection));
-        } else {
-            context.enter(modeBrowse(context));
-        }
-    }
-
-
-    function _actionBounceBack(nodeID, toLoc) {
-        var moveNode = actionMoveNode(nodeID, toLoc);
-        var action = function(graph, t) {
-            // last time through, pop off the bounceback perform.
-            // it will then overwrite the initial perform with a moveNode that does nothing
-            if (t === 1) context.pop();
-            return moveNode(graph, t);
-        };
-        action.transitionable = true;
-        return action;
+        context
+                .selectedNoteID(entity.id)
+                .enter(modeSelectNote(context, entity.id));
     }
 
 
@@ -302,7 +173,7 @@ export function modeDragNote(context) {
 
 
     var drag = behaviorDrag()
-        .selector('.layer-notes .note')
+        .selector('.layer-notes .new')
         .surface(d3_select('#map').node())
         .origin(origin)
         .on('start', start)
@@ -314,15 +185,12 @@ export function modeDragNote(context) {
         context.install(hover);
         context.install(edit);
 
-        // context.selectedIDs(null); TODO: possibly add something like this
-        // context.selectedNoteID(_activeEntity);
+        d3_select(window)
+            .on('keydown.drawWay', keydown)
+            .on('keyup.drawWay', keyup);
 
-        // d3_select(window)
-        //     .on('keydown.drawWay', keydown)
-        //     .on('keyup.drawWay', keyup);
-
-        // context.history()
-        //     .on('undone.drag-node', cancel);
+        context.history()
+            .on('undone.drag-note', cancel);
     };
 
 
@@ -331,15 +199,15 @@ export function modeDragNote(context) {
         context.uninstall(hover);
         context.uninstall(edit);
 
-        // d3_select(window)
-        //     .on('keydown.hover', null)
-        //     .on('keyup.hover', null);
+        d3_select(window)
+            .on('keydown.hover', null)
+            .on('keyup.hover', null);
 
-        // context.history()
-        //     .on('undone.drag-node', null);
+        context.history()
+            .on('undone.drag-note', null);
 
-        // context.map()
-        //     .on('drawn.drag-node', null);
+        context.map()
+            .on('drawn.drag-note', null);
 
         _activeEntity = null;
 
@@ -354,7 +222,7 @@ export function modeDragNote(context) {
     };
 
 
-    mode.selectedIDs = function() {
+    mode.selectedNoteID = function() {
         if (!arguments.length) return _activeEntity ? [_activeEntity.id] : [];
         // no assign
         return mode;
@@ -368,9 +236,9 @@ export function modeDragNote(context) {
     };
 
 
-    mode.restoreSelectedNoteIDs = function(_) {
-        if (!arguments.length) return _restoreSelectedNoteIDs;
-        _restoreSelectedNoteIDs = _;
+    mode.restoreSelectedNoteID = function(_) {
+        if (!arguments.length) return _restoreSelectedNoteID;
+        _restoreSelectedNoteID = _;
         return mode;
     };
 

@@ -17,7 +17,6 @@ import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent, geoVecAdd } from '../geo';
 
 import {
@@ -31,9 +30,11 @@ import {
 import {
     utilRebind,
     utilIdleWorker,
+    utilTile,
     utilQsString
 } from '../util';
 
+var geoTile = utilTile();
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
@@ -323,6 +324,20 @@ function parseXML(xml, callback, options) {
 
         return parser(child, uid);
     }
+}
+
+
+// replace or remove note from rtree
+function updateRtree(item, replace) { // update (or insert) in _noteCache.rtree
+
+    // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
+
+    // remove note
+    _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+    if (replace) {
+        _noteCache.rtree.insert(item); // add note (updated)
+    }
+
 }
 
 
@@ -789,44 +804,13 @@ export default {
             tilezoom = _tileZoom;
         }
 
-        var s = projection.scale() * 2 * Math.PI;
-        var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - tilezoom);
-        var origin = [
-            s / 2 - projection.translate()[0],
-            s / 2 - projection.translate()[1]
-        ];
-
-        // what tiles cover the view?
-        var tiler = d3_geoTile()
-            .scaleExtent([tilezoom, tilezoom])
-            .scale(s)
-            .size(dimensions)
-            .translate(projection.translate());
-
-        var tiles = tiler().map(function(tile) {
-            var x = tile[0] * ts - origin[0];
-            var y = tile[1] * ts - origin[1];
-
-            return {
-                id: tile.toString(),
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
+        // get tiles
+        var tiles = geoTile.getTiles(projection, dimensions, tilezoom, 0);
+        tiles = geoTile.filterNullIsland(tiles);
 
         // remove inflight requests that no longer cover the view..
         var hadRequests = !_isEmpty(cache.inflight);
-        _filter(cache.inflight, function(v, i) {
-            var wanted = _find(tiles, function(tile) { return i === tile.id; });
-            if (!wanted) {
-                delete cache.inflight[i];
-            }
-            return !wanted;
-        }).map(abortRequest);
-
+        geoTile.removeInflightRequests(cache, tiles, abortRequest);
         if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
             dispatch.call('loaded');    // stop the spinner
         }
@@ -877,7 +861,43 @@ export default {
     // Create a note
     // POST /api/0.6/notes?params
     postNoteCreate: function(note, callback) {
-        // todo
+        if (!this.authenticated()) {
+            return callback({ message: 'Not Authenticated', status: -3 }, note);
+        }
+        if (_noteCache.inflightPost[note.id]) {
+            return callback({ message: 'Note update already inflight', status: -2 }, note);
+        }
+
+        if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
+
+        var path = '/api/0.6/notes?' +
+        'lat=' + note.loc[1] +
+        '&lon=' + note.loc[0] +
+        '&' + utilQsString({ text: note.newComment });
+        _noteCache.inflightPost[note.id] = oauth.xhr(
+            { method: 'POST', path: path },
+            wrapcb(this, done, _connectionID)
+        );
+
+
+        function done(err, xml) {
+            delete _noteCache.inflightPost[note.id];
+            if (err) { return callback(err); }
+
+            // we get the updated note back, remove from caches and reparse..
+            var item = encodeNoteRtree(note);
+            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+            delete _noteCache.note[note.id];
+
+            var options = { skipSeen: false };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(undefined, results[0]);
+                }
+            }, options);
+        }
     },
 
 
@@ -900,6 +920,7 @@ export default {
             action = 'reopen';
         } else {
             action = 'comment';
+            if (!note.newComment) return; // when commenting, comment required
         }
 
         var path = '/api/0.6/notes/' + note.id + '/' + action;
@@ -1063,23 +1084,23 @@ export default {
     },
 
 
+    // remove a single note from the cache
+    removeNote: function(note) {
+        if (!(note instanceof osmNote) || !note.id) return;
+
+        delete _noteCache.note[note.id];
+
+        updateRtree(encodeNoteRtree(note), false);
+    },
+
+
     // replace a single note in the cache
     replaceNote: function(note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
         _noteCache.note[note.id] = note; // update (or insert) in _noteCache.note
 
-        function updateRtree(item) { // update (or insert) in _noteCache.rtree
-
-            // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
-
-            // remove note
-            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-            _noteCache.rtree.insert(item); // add note (updated)
-
-        }
-
-        updateRtree(encodeNoteRtree(note));
+        updateRtree(encodeNoteRtree(note), true);
 
         return note;
     }

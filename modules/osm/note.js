@@ -58,7 +58,7 @@ _extend(osmNote.prototype, {
     },
 
     move: function(loc) {
-        return this.update({loc: loc});
-    },
+        return this.update({ loc: loc });
+    }
 
 });

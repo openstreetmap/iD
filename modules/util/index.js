@@ -23,5 +23,6 @@ export { utilSessionMutex } from './session_mutex';
 export { utilStringQs } from './util';
 export { utilSuggestNames } from './suggest_names';
 export { utilTagText } from './util';
+export { utilTile } from './tile';
 export { utilTriggerEvent } from './trigger_event';
 export { utilWrap } from './util';

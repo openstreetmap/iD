@@ -16,6 +16,7 @@ import {
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
+import { services } from '../services/index.js';
 
 
 export function uiModes(context) {
@@ -97,7 +98,6 @@ export function uiModes(context) {
 
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {
-                // TODO: allow zooming out beyond minZoom when adding new note. Currently prevented
                 if ((editable() && mode.id !== 'add-note') || (toggleNewNote() && mode.id === 'add-note')) {
                     if (mode.id === context.mode().id) {
                         context.enter(modeBrowse(context));

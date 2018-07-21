@@ -12,6 +12,10 @@ import {
     behaviorDrag
 } from '../behavior';
 
+<<<<<<< HEAD
+=======
+import { modeDragNote } from '../modes';
+>>>>>>> drag-note
 
 import { services } from '../services';
 import { modeBrowse } from './browse';
@@ -40,7 +44,11 @@ export function modeSelectNote(context, selectedNoteID) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
+<<<<<<< HEAD
         // modeDragNote(context).restoreSelectedNoteIDs(selectedNoteID).behavior TAH - re-add
+=======
+        modeDragNote(context).behavior
+>>>>>>> drag-note
     ];
 
     var newFeature = false;
@@ -81,6 +89,7 @@ export function modeSelectNote(context, selectedNoteID) {
             } else {
                 selection
                     .classed('selected', true);
+                context.selectedNoteID(selectedNoteID);
             }
         }
 
@@ -101,13 +110,13 @@ export function modeSelectNote(context, selectedNoteID) {
         d3_select(document)
             .call(keybinding);
 
+        selectNote();
+
         context.ui().sidebar
             .show(noteEditor.note(note));
 
         context.map()
             .on('drawn.select', selectNote);
-
-        selectNote();
     };
 
 
