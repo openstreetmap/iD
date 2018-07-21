@@ -20,11 +20,13 @@ import {
     utilNoAuto,
     utilRebind
 } from '../util';
+import { uiNoteCategory } from './note_category';
 
 
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change');
     var noteComments = uiNoteComments();
+    var noteCategory = uiNoteCategory(context);
     var noteHeader = uiNoteHeader();
     var _note;
 
@@ -106,6 +108,10 @@ export function uiNoteEditor(context) {
         var noteSaveEnter = noteSave.enter()
             .append('div')
             .attr('class', 'note-save save-section cf');
+
+        if (_note.isNew()) {
+            noteSaveEnter.call(noteCategory.note(_note));
+        }
 
         noteSaveEnter
             .append('h4')

@@ -304,6 +304,22 @@ en:
       castle_type:
         # castle_type=*
         label: Type
+      category:
+        # 'none=*, option1=*, option2=*, option3=*, option4=*'
+        label: Category
+        options:
+          # none=yes
+          none: None
+          # option1=yes
+          option1: Option1
+          # option2=yes
+          option2: Option2
+          # option3=yes
+          option3: Option3
+          # option4=yes
+          option4: Option4
+        # category field placeholder
+        placeholder: Unknown
       clothes:
         # clothes=*
         label: Clothes

@@ -11,7 +11,7 @@ export function uiNoteComments() {
 
 
     function noteComments(selection) {
-        if (_note.isNew()) { return; }
+        if (_note.isNew()) return; // don't draw .comments-container
 
         var comments = selection.selectAll('.comments-container')
             .data([0]);

@@ -1,0 +1,21 @@
+{
+    "type": "radio",
+    "keys": [
+        "none",
+        "option1",
+        "option2",
+        "option3",
+        "option4"
+    ],
+    "label": "Category",
+    "placeholder": "Unknown",
+    "strings": {
+        "options": {
+            "none": "None",
+            "option1": "Option1",
+            "option2": "Option2",
+            "option3": "Option3",
+            "option4": "Option4"
+        }
+    }
+}
