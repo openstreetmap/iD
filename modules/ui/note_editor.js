@@ -256,19 +256,15 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'buttons');
 
-        if (_note.isNew()) {
-            buttonEnter
-                .append('button')
-                .attr('class', 'button add-note-button action')
-                .append('span')
-                .attr('class', 'label');
-        } else {
-            buttonEnter
-                .append('button')
-                .attr('class', 'button status-button action')
-                .append('span')
-                .attr('class', 'label');
+        buttonEnter
+            .append('button')
+            .attr('class', function() {
+                return _note.isNew() ? 'button add-note-button action' : 'button status-button action';
+            })
+            .append('span')
+            .attr('class', 'label');
 
+        if (!_note.isNew()) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button comment-button action')
