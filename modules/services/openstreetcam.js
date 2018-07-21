@@ -24,7 +24,7 @@ import rbush from 'rbush';
 
 import { geoExtent } from '../geo';
 
-import { utilTile } from '../util';
+import { utilTiler } from '../util';
 import { utilDetect } from '../util/detect';
 
 import {
@@ -33,7 +33,7 @@ import {
     utilSetTransform
 } from '../util';
 
-var geoTile = utilTile().skipNullIsland(true);
+var geoTile = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://openstreetcam.org';
 var maxResults = 1000;

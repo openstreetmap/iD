@@ -28,11 +28,11 @@ import {
 } from '../geo';
 
 import { utilDetect } from '../util/detect';
-import { utilQsString, utilRebind, utilTile } from '../util';
+import { utilQsString, utilRebind, utilTiler } from '../util';
 
 import Q from 'q';
 
-var geoTile = utilTile().skipNullIsland(true);
+var geoTile = utilTiler().skipNullIsland(true);
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';

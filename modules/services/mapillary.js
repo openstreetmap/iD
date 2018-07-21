@@ -21,9 +21,9 @@ import rbush from 'rbush';
 import { geoExtent } from '../geo';
 import { svgDefs } from '../svg';
 import { utilDetect } from '../util/detect';
-import { utilQsString, utilRebind, utilTile } from '../util';
+import { utilQsString, utilRebind, utilTiler } from '../util';
 
-var geoTile = utilTile().skipNullIsland(true);
+var geoTile = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';

@@ -4,7 +4,7 @@ import { range as d3_range } from 'd3-array';
 import { geoExtent } from '../geo';
 
 
-export function utilTile() {
+export function utilTiler() {
     var _size = [960, 500];
     var _scale = 256;
     var _scaleExtent = [0, 20];

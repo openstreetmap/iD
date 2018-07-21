@@ -30,11 +30,11 @@ import {
 import {
     utilRebind,
     utilIdleWorker,
-    utilTile,
+    utilTiler,
     utilQsString
 } from '../util';
 
-var geoTile = utilTile();
+var geoTile = utilTiler();
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
