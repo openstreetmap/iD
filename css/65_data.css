@@ -31,14 +31,6 @@
     color: #55dd00;
     stroke: #333;
 }
-.layer-notes .note.hovered .note-fill {
-    color: #eebb00;
-    stroke: #333;
-}
-.layer-notes .note.selected .note-fill {
-    color: #ffee00;
-    stroke: #333;
-}
 
 /* slight adjustments to preset icon for note icons */
 .note-header-icon .preset-icon-28 {

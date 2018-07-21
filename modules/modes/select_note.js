@@ -6,6 +6,7 @@ import {
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
+    behaviorBreathe,
     behaviorHover,
     behaviorLasso,
     behaviorSelect
@@ -36,6 +37,7 @@ export function modeSelectNote(context, selectedNoteID) {
         });
 
     var behaviors = [
+        behaviorBreathe(context),
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
@@ -120,7 +122,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
         context.surface()
             .selectAll('.note.selected')
-            .classed('selected hovered', false);
+            .classed('selected hover', false);
 
         context.map()
             .on('drawn.select', null);

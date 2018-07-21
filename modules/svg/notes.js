@@ -14,6 +14,12 @@ export function svgNotes(projection, context, dispatch) {
     var layer = d3_select(null);
     var _notes;
 
+    function markerPath(selection, klass) {
+        selection
+            .attr('class', klass)
+            .attr('transform', 'translate(-8, -22)')
+            .attr('d', 'm17.49424,0l-14.99506,0c-1.37845,0 -2.49918,1.12072 -2.49918,2.49918l0,11.24629c0,1.37845 1.12072,2.49918 2.49918,2.49918l3.74876,0l0,3.28017c0,0.38269 0.43736,0.60527 0.74585,0.37878l4.8773,-3.65895l5.62315,0c1.37845,0 2.49918,-1.12072 2.49918,-2.49918l0,-11.24629c0,-1.37845 -1.12072,-2.49918 -2.49918,-2.49918z');
+    }
 
     function init() {
         if (svgNotes.initialized) return;  // run once
@@ -96,11 +102,23 @@ export function svgNotes(projection, context, dispatch) {
             .classed('new', function(d){ return d.id < 0; });
 
         notesEnter
+            .append('path')
+            .call(markerPath, 'shadow');
+
+        notesEnter
+            .append('ellipse')
+            .attr('cx', 0.5)
+            .attr('cy', 1)
+            .attr('rx', 6.5)
+            .attr('ry', 3)
+            .attr('class', 'stroke');
+
+        notesEnter
             .append('use')
             .attr('class', 'note-fill')
             .attr('width', '20px')
             .attr('height', '20px')
-            .attr('x', '-10px')
+            .attr('x', '-8px')
             .attr('y', '-22px')
             .attr('xlink:href', '#iD-icon-note');
 
@@ -112,7 +130,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('class', 'note-annotation thread')
             .attr('width', '14px')
             .attr('height', '14px')
-            .attr('x', '-7px')
+            .attr('x', '-5px')
             .attr('y', '-20px')
             .attr('xlink:href', '#iD-icon-more');
 
@@ -124,7 +142,7 @@ export function svgNotes(projection, context, dispatch) {
             .attr('class', 'note-annotation thread')
             .attr('width', '14px')
             .attr('height', '14px')
-            .attr('x', '-7px')
+            .attr('x', '-5px')
             .attr('y', '-20px')
             .attr('xlink:href', '#iD-icon-plus');
 

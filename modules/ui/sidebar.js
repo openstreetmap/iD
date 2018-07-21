@@ -33,7 +33,7 @@ export function uiSidebar(context) {
                 _wasNote = true;
                 var notes = d3_selectAll('.note');
                 notes
-                    .classed('hovered', function(d) { return d === what; });
+                    .classed('hover', function(d) { return d === what; });
 
                 sidebar.show(noteEditor.note(what));
 
@@ -68,7 +68,7 @@ export function uiSidebar(context) {
             } else if (_wasNote) {
                 _wasNote = false;
                 d3_selectAll('.note')
-                    .classed('hovered', false);
+                    .classed('hover', false);
                 sidebar.hide();
             }
         }
