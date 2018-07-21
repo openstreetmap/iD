@@ -1,4 +1,5 @@
 import _extend from 'lodash-es/extend';
+import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
@@ -53,6 +54,7 @@ var _pannellumViewer;
 var _sceneOptions;
 var _dataUrlArray = [];
 
+
 /**
  * abortRequest().
  */
@@ -60,19 +62,6 @@ function abortRequest(i) {
     i.abort();
 }
 
-/**
- * nearNullIsland().
- */
-function nearNullIsland(x, y, z) {
-    if (z >= 7) {
-        var center = Math.pow(2, z - 1);
-        var width = Math.pow(2, z - 6);
-        var min = center - (width / 2);
-        var max = center + (width / 2) - 1;
-        return x >= min && x <= max && y >= min && y <= max;
-    }
-    return false;
-}
 
 /**
  * localeTimeStamp().
@@ -98,6 +87,17 @@ function loadTiles(which, url, projection, margin) {
     var tiles = geoTile
         .margin(margin)
         .getTiles(projection, dimension, tileZoom);
+
+    // abort inflight requests that are no longer needed
+    var cache = _ssCache[which];
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
+
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
 
     tiles.forEach(function (tile) {
        loadNextTilePage(which, currZoom, url, tile);

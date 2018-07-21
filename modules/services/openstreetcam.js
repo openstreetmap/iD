@@ -1,4 +1,3 @@
-import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
@@ -53,18 +52,6 @@ function abortRequest(i) {
 }
 
 
-function nearNullIsland(x, y, z) {
-    if (z >= 7) {
-        var center = Math.pow(2, z - 1),
-            width = Math.pow(2, z - 6),
-            min = center - (width / 2),
-            max = center + (width / 2) - 1;
-        return x >= min && x <= max && y >= min && y <= max;
-    }
-    return false;
-}
-
-
 function maxPageAtZoom(z) {
     if (z < 15)   return 2;
     if (z === 15) return 5;
@@ -76,13 +63,22 @@ function maxPageAtZoom(z) {
 
 
 function loadTiles(which, url, projection) {
-    var s = projection.scale() * 2 * Math.PI,
-        currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
+    var s = projection.scale() * 2 * Math.PI;
+    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     var dimension = projection.clipExtent()[1];
-    var tiles = geoTile.getTiles(projection, dimension, tileZoom, 0);
+    var tiles = geoTile.getTiles(projection, dimension, tileZoom);
 
-    geoTile.removeInflightRequests(which, tiles, abortRequest, ',0');
+    // abort inflight requests that are no longer needed
+    var cache = _oscCache[which];
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
+
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
 
     tiles.forEach(function(tile) {
         loadNextTilePage(which, currZoom, url, tile);

@@ -1,5 +1,3 @@
-import _filter from 'lodash-es/filter';
-import _find from 'lodash-es/find';
 import { range as d3_range } from 'd3-array';
 import { geoExtent } from '../geo';
 
@@ -19,7 +17,10 @@ export function utilTiler() {
     }
 
 
-    function nearNullIsland(x, y, z) {
+    function nearNullIsland(tile) {
+        var x = tile[0];
+        var y = tile[1];
+        var z = tile[2];
         if (z >= 7) {
             var center = Math.pow(2, z - 1);
             var width = Math.pow(2, z - 6);
@@ -93,7 +94,7 @@ export function utilTiler() {
 
         return tiler()
             .map(function(tile) {
-                if (_skipNullIsland && nearNullIsland(tile[0], tile[1], tile[2])) {
+                if (_skipNullIsland && nearNullIsland(tile)) {
                     return false;
                 }
                 var x = tile[0] * ts - origin[0];
@@ -107,18 +108,6 @@ export function utilTiler() {
                     )
                 };
             }).filter(Boolean);
-    };
-
-
-    // remove inflight requests that no longer cover the view..
-    tiler.removeInflightRequests = function(cache, tiles, callback, modifier) {
-        return _filter(cache.inflight, function(v, i) {
-            var wanted = _find(tiles, function(tile) { return i === tile.id + modifier; });
-            if (!wanted) {
-                delete cache.inflight[i];
-            }
-            return !wanted;
-        }).map(callback); // abort request
     };
 
 
