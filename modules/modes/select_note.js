@@ -80,6 +80,7 @@ export function modeSelectNote(context, selectedNoteID) {
             } else {
                 selection
                     .classed('selected', true);
+                context.selectedNoteID(selectedNoteID);
             }
         }
 
@@ -100,13 +101,13 @@ export function modeSelectNote(context, selectedNoteID) {
         d3_select(document)
             .call(keybinding);
 
+        selectNote();
+
         context.ui().sidebar
             .show(noteEditor.note(note));
 
         context.map()
             .on('drawn.select', selectNote);
-
-        selectNote();
     };
 
 

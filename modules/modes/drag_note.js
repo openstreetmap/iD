@@ -111,8 +111,6 @@ export function modeDragNote(context) {
 
 
     function start(entity) {
-        console.log('TAH - drag_note start()');
-
         context.perform(actionNoop());
 
         _activeEntity = entity;
@@ -158,12 +156,10 @@ export function modeDragNote(context) {
             osm.replaceNote(entity);  // update note cache
         }
         dispatch.call('change', this, 'difference');
-        console.log('moved: ', entity.loc);
     }
 
 
     function end(entity) {
-        console.log('TAH - drag_note end()');
         context
                 .selectedNoteID(entity.id)
                 .enter(modeSelectNote(context, entity.id));
