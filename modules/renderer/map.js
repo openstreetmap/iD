@@ -38,7 +38,8 @@ import {
     svgLines,
     svgMidpoints,
     svgPoints,
-    svgVertices
+    svgVertices,
+    svgNotes
 } from '../svg';
 
 import { uiFlash } from '../ui';
@@ -72,6 +73,8 @@ export function rendererMap(context) {
     var drawAreas = svgAreas(projection, context);
     var drawMidpoints = svgMidpoints(projection, context);
     var drawLabels = svgLabels(projection, context);
+
+    var drawNotes = svgNotes(projection, context);
 
     var _selection = d3_select(null);
     var supersurface = d3_select(null);
@@ -340,6 +343,9 @@ export function rendererMap(context) {
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
             .call(drawLabels, graph, data, filter, dimensions, fullRedraw)
             .call(drawPoints, graph, data, filter);
+
+        surface.selectAll('.data-layer-notes')
+            .call(drawNotes);
 
         dispatch.call('drawn', this, {full: true});
     }

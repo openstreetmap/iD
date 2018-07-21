@@ -11,6 +11,8 @@ import {
     behaviorSelect
 } from '../behavior';
 
+import { modeDragNote } from '../modes';
+
 import { services } from '../services';
 import { modeBrowse } from './browse';
 import { uiNoteEditor } from '../ui';
@@ -37,6 +39,7 @@ export function modeSelectNote(context, selectedNoteID) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
+        modeDragNote(context).behavior
     ];
 
     var newFeature = false;

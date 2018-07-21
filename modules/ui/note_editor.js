@@ -40,7 +40,11 @@ export function uiNoteEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'fr note-editor-close')
-            .on('click', function() { context.enter(modeBrowse(context)); })
+            .on('click', function() {
+                var osm = services.osm;
+                if (_note.isNew()) { osm.removeNote(_note); } // delete new note
+                context.enter(modeBrowse(context));
+            })
             .call(svgIcon('#iD-icon-close'));
 
         headerEnter

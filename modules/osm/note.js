@@ -55,6 +55,10 @@ _extend(osmNote.prototype, {
 
     isNew: function() {
         return this.id < 0;
+    },
+
+    move: function(loc) {
+        return this.update({ loc: loc });
     }
 
 });

@@ -327,6 +327,20 @@ function parseXML(xml, callback, options) {
 }
 
 
+// replace or remove note from rtree
+function updateRtree(item, replace) { // update (or insert) in _noteCache.rtree
+
+    // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
+
+    // remove note
+    _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+    if (replace) {
+        _noteCache.rtree.insert(item); // add note (updated)
+    }
+
+}
+
+
 function wrapcb(thisArg, callback, cid) {
     return function(err, result) {
         if (err) {
@@ -1033,23 +1047,23 @@ export default {
     },
 
 
+    // remove a single note from the cache
+    removeNote: function(note) {
+        if (!(note instanceof osmNote) || !note.id) return;
+
+        delete _noteCache.note[note.id];
+
+        updateRtree(encodeNoteRtree(note), false);
+    },
+
+
     // replace a single note in the cache
     replaceNote: function(note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
         _noteCache.note[note.id] = note; // update (or insert) in _noteCache.note
 
-        function updateRtree(item) { // update (or insert) in _noteCache.rtree
-
-            // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
-
-            // remove note
-            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-            _noteCache.rtree.insert(item); // add note (updated)
-
-        }
-
-        updateRtree(encodeNoteRtree(note));
+        updateRtree(encodeNoteRtree(note), true);
 
         return note;
     }

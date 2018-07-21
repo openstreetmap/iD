@@ -51,6 +51,8 @@ export function behaviorHash(context) {
         var newParams = {};
 
         delete q.id;
+        console.log('TAH - hash: context.selectedIDs()', context.selectedIDs());
+        console.log('TAH - hash: context.selectedNoteID()', context.selectedNoteID());
         var selected = context.selectedIDs().filter(function(id) {
             return !context.entity(id).isNew();
         });
