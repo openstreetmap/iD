@@ -329,7 +329,7 @@ function parseXML(xml, callback, options) {
 // replace or remove note from rtree
 function updateRtree(item, replace) { // update (or insert) in _noteCache.rtree
 
-    // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
+    // NOTE: other checks needed? (e.g., if cache.data.children.length decrements ...)
 
     // remove note
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
@@ -875,10 +875,13 @@ export default {
 
         if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
 
+        var comment = note.newComment;
+        if (note.newCategory && note.newCategory !== 'None') { comment += ' #' + note.newCategory; }
         var path = '/api/0.6/notes?' +
         'lat=' + note.loc[1] +
         '&lon=' + note.loc[0] +
-        '&' + utilQsString({ text: note.newComment });
+        '&' + utilQsString({ text: comment });
+
         _noteCache.inflightPost[note.id] = oauth.xhr(
             { method: 'POST', path: path },
             wrapcb(this, done, _connectionID)

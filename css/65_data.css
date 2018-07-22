@@ -93,6 +93,10 @@
     border-radius: 5px 0 0 5px;
 }
 
+.note-category {
+    margin: 20px 0px;
+}
+
 .comments-container {
     background: #ececec;
     padding: 1px 10px;

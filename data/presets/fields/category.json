@@ -1,0 +1,25 @@
+{
+    "type": "radio",
+    "keys": [
+        "none",
+        "updateDetails",
+        "missing",
+        "wrongLocation",
+        "groundtruth",
+        "doesNotExist",
+        "discussion"
+    ],
+    "label": "Category",
+    "placeholder": "Unknown",
+    "strings": {
+        "options": {
+            "none": "None",
+            "updateDetails": "Update or add details",
+            "missing": "Something is missing",
+            "wrongLocation": "Wrong location",
+            "groundtruth": "Ground truth or needs local confirmation",
+            "doesNotExist": "Does not or never existed",
+            "discussion": "Needs discussing"
+        }
+    }
+}

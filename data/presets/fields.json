@@ -49,6 +49,7 @@
     "capacity": {"key": "capacity", "type": "number", "minValue": 0, "label": "Capacity", "placeholder": "50, 100, 200..."},
     "cash_in": {"key": "cash_in", "type": "check", "label": "Cash In"},
     "castle_type": {"key": "castle_type", "type": "combo", "label": "Type"},
+    "category": {"type": "radio", "keys": ["none", "updateDetails", "missing", "wrongLocation", "groundtruth", "doesNotExist", "discussion"], "label": "Category", "placeholder": "Unknown", "strings": {"options": {"none": "None", "updateDetails": "Update or add details", "missing": "Something is missing", "wrongLocation": "Wrong location", "groundtruth": "Ground truth or needs local confirmation", "doesNotExist": "Does not or never existed", "discussion": "Needs discussing"}}},
     "clothes": {"key": "clothes", "type": "semiCombo", "label": "Clothes"},
     "club": {"key": "club", "type": "typeCombo", "label": "Type"},
     "collection_times": {"key": "collection_times", "type": "text", "label": "Collection Times"},

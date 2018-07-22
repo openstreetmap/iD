@@ -1667,6 +1667,19 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "category": {
+                    "label": "Category",
+                    "placeholder": "Unknown",
+                    "options": {
+                        "none": "None",
+                        "updateDetails": "Update or add details",
+                        "missing": "Something is missing",
+                        "wrongLocation": "Wrong location",
+                        "groundtruth": "Ground truth or needs local confirmation",
+                        "doesNotExist": "Does not or never existed",
+                        "discussion": "Needs discussing"
+                    }
+                },
                 "clothes": {
                     "label": "Clothes"
                 },
