@@ -329,7 +329,7 @@ function parseXML(xml, callback, options) {
 // replace or remove note from rtree
 function updateRtree(item, replace) { // update (or insert) in _noteCache.rtree
 
-    // TODO: other checks needed? (e.g., if cache.data.children.length decrements ...)
+    // NOTE: other checks needed? (e.g., if cache.data.children.length decrements ...)
 
     // remove note
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });

@@ -1,3 +1,5 @@
+import { geoVecInterp } from '../geo';
+
 describe('iD.osmNote', function () {
     it('returns a note', function () {
         expect(iD.osmNote()).to.be.an.instanceOf(iD.osmNote);
@@ -10,6 +12,40 @@ describe('iD.osmNote', function () {
         });
     });
 
-    // TODO: add tests for #update, or remove function
+    describe('#update', function() {
+        it('returns an updated note', function() {
+
+        });
+    });
+
+    describe('#isNew', function() {
+        it('returns true if a note is new', function() {
+            var note = iD.osmNote({
+                id: -1,
+                loc: [5, 10]
+            });
+            expect(note.isNew()).to.be.true;
+        });
+        it('returns false if a note is not new', function() {
+            var note = iD.osmNote({
+                id: 1,
+                loc: [5, 10]
+            });
+            expect(note.isNew()).to.be.false;
+        });
+    });
+
+    describe('#move', function() {
+        it('returns an moved note', function() {
+            var note = iD.osmNote({
+                id: 1,
+                loc: [5, 10]
+            });
+
+            var moveAmount = geoVecInterp(note.loc, [10, 10], 1);
+            note.move(moveAmount);
+            expect(note.loc).to.equal([10, 10]);
+        });
+    });
 
 });
