@@ -76,7 +76,8 @@ export function utilTiler() {
      * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
      * an area around (and including) the current map view extents.
      */
-    tiler.getTiles = function(projection, dimensions, tilezoom) {
+    tiler.getTiles = function(projection, tilezoom) {
+        var dimensions = projection.clipExtent()[1];
         var s = projection.scale() * 2 * Math.PI;
         var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
         var ts = 256 * Math.pow(2, z - tilezoom);

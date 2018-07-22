@@ -33,8 +33,8 @@ import {
     utilQsString
 } from '../util';
 
-var tiler = utilTiler();
 
+var tiler = utilTiler();
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
 var oauth = osmAuth({
@@ -752,7 +752,7 @@ export default {
     // Load data (entities or notes) from the API in tiles
     // GET /api/0.6/map?bbox=
     // GET /api/0.6/notes?bbox=
-    loadTiles: function(projection, dimensions, callback, noteOptions) {
+    loadTiles: function(projection, callback, noteOptions) {
         if (_off) return;
 
         var that = this;
@@ -778,7 +778,7 @@ export default {
         }
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.getTiles(projection, dimensions, tilezoom);
+        var tiles = tiler.getTiles(projection, tilezoom);
 
         // abort inflight requests that are no longer needed
         var hadRequests = !_isEmpty(cache.inflight);
@@ -831,9 +831,9 @@ export default {
 
     // Load notes from the API (just calls this.loadTiles)
     // GET /api/0.6/notes?bbox=
-    loadNotes: function(projection, dimensions, noteOptions) {
+    loadNotes: function(projection, noteOptions) {
         noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-        this.loadTiles(projection, dimensions, null, noteOptions);
+        this.loadTiles(projection, null, noteOptions);
     },
 
 

@@ -32,11 +32,11 @@ import {
     utilSetTransform
 } from '../util';
 
-var tiler = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://openstreetcam.org';
 var maxResults = 1000;
 var tileZoom = 14;
+var tiler = utilTiler().skipNullIsland(true);
 var dispatch = d3_dispatch('loadedImages');
 var imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
@@ -65,9 +65,7 @@ function maxPageAtZoom(z) {
 function loadTiles(which, url, projection) {
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
-
-    var dimension = projection.clipExtent()[1];
-    var tiles = tiler.getTiles(projection, dimension, tileZoom);
+    var tiles = tiler.getTiles(projection, tileZoom);
 
     // abort inflight requests that are no longer needed
     var cache = _oscCache[which];
@@ -123,8 +121,8 @@ function loadNextTilePage(which, currZoom, url, tile) {
             }
 
             var features = data.currentPageItems.map(function(item) {
-                var loc = [+item.lng, +item.lat],
-                    d;
+                var loc = [+item.lng, +item.lat];
+                var d;
 
                 if (which === 'images') {
                     d = {
@@ -172,14 +170,14 @@ function loadNextTilePage(which, currZoom, url, tile) {
 function partitionViewport(psize, projection) {
     var dimensions = projection.clipExtent()[1];
     psize = psize || 16;
-    var cols = d3_range(0, dimensions[0], psize),
-        rows = d3_range(0, dimensions[1], psize),
-        partitions = [];
+    var cols = d3_range(0, dimensions[0], psize);
+    var rows = d3_range(0, dimensions[1], psize);
+    var partitions = [];
 
     rows.forEach(function(y) {
         cols.forEach(function(x) {
-            var min = [x, y + psize],
-                max = [x + psize, y];
+            var min = [x, y + psize];
+            var max = [x + psize, y];
             partitions.push(
                 geoExtent(projection.invert(min), projection.invert(max)));
         });

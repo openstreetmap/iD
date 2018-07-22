@@ -33,7 +33,6 @@ import { utilQsString, utilRebind, utilTiler } from '../util';
 
 import Q from 'q';
 
-var tiler = utilTiler().skipNullIsland(true);
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -42,10 +41,12 @@ var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var maxResults = 2000;
 var tileZoom = 16.5;
+var tiler = utilTiler().skipNullIsland(true);
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var minHfov = 10;         // zoom in degrees:  20, 10, 5
 var maxHfov = 90;         // zoom out degrees
 var defaultHfov = 45;
+
 var _hires = false;
 var _resolution = 512;    // higher numbers are slower - 512, 1024, 2048, 4096
 var _currScene = 0;
@@ -82,11 +83,7 @@ function localeTimestamp(s) {
 function loadTiles(which, url, projection, margin) {
     var s = projection.scale() * 2 * Math.PI;
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
-
-    var dimension = projection.clipExtent()[1];
-    var tiles = tiler
-        .margin(margin)
-        .getTiles(projection, dimension, tileZoom);
+    var tiles = tiler.margin(margin).getTiles(projection, tileZoom);
 
     // abort inflight requests that are no longer needed
     var cache = _ssCache[which];

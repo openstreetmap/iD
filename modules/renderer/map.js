@@ -483,7 +483,7 @@ export function rendererMap(context) {
 
         // OSM
         if (map.editable()) {
-            context.loadTiles(projection, dimensions);
+            context.loadTiles(projection);
             drawVector(difference, extent);
         } else {
             editOff();
