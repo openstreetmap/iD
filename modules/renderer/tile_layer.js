@@ -272,7 +272,8 @@ export function rendererTileLayer(context) {
         _source = _;
         _tileSize = _source.tileSize;
         _cache = {};
-        tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
+        // tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);   // not yet
+        tiler.zoomExtent(_source.zoomExtent);
         return background;
     };
 

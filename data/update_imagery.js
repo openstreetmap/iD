@@ -91,6 +91,13 @@ sources.concat(whitelist).forEach(function(source) {
         template: source.url
     };
 
+
+    // supports 512px tiles
+    if (source.id === 'Mapbox') {
+        im.template = im.template.replace('.jpg', '@2x.jpg');
+        im.tileSize = 512;
+    }
+
     if (source.type === 'wms') {
         im.projection = supportedProjection;
     }
@@ -149,7 +156,7 @@ sources.concat(whitelist).forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['best', 'default', 'description', 'icon', 'overlay'].forEach(function(a) {
+    ['best', 'default', 'description', 'icon', 'overlay', 'tileSize'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }
