@@ -9,6 +9,9 @@ import { services } from '../services';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
 
+import { uiField } from './field';
+import { uiFormFields } from './form_fields';
+
 import {
     uiNoteComments,
     uiNoteHeader,
@@ -20,15 +23,17 @@ import {
     utilNoAuto,
     utilRebind
 } from '../util';
-import { uiNoteCategory } from './note_category';
 
 
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change');
     var noteComments = uiNoteComments();
-    var noteCategory = uiNoteCategory(context);
     var noteHeader = uiNoteHeader();
+
+    var formFields = uiFormFields(context);
+
     var _note;
+    var _fieldsArr;
 
 
     function noteEditor(selection) {
@@ -109,8 +114,38 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'note-save save-section cf');
 
+        // if new note, show categories to pick from
         if (_note.isNew()) {
-            noteSaveEnter.call(noteCategory.note(_note));
+            var presets = context.presets();
+
+            // NOTE: this key isn't a age and therefore there is no documentation (yet)
+            _fieldsArr = [
+                uiField(context, presets.field('category'), null, { show: true, revert: false }),
+            ];
+
+            _fieldsArr.forEach(function(field) {
+                field
+                    .on('change', changeCategory);
+            });
+
+            noteSaveEnter
+                .append('div')
+                .attr('class', 'note-category')
+                .call(formFields.fieldsArr(_fieldsArr));
+        }
+
+        function changeCategory() {
+            // NOTE: perhaps there is a better way to get value
+            var val = d3_select('input[name=\'category\']:checked').property('__data__') || undefined;
+
+            // store the unsaved category with the note itself
+            _note = _note.update({ newCategory: val });
+            var osm = services.osm;
+            if (osm) {
+                osm.replaceNote(_note);  // update note cache
+            }
+            noteSave
+                .call(noteSaveButtons);
         }
 
         noteSaveEnter
@@ -127,8 +162,8 @@ export function uiNoteEditor(context) {
             .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
-            .on('input', change)
-            .on('blur', change);
+            .on('input', changeInput)
+            .on('blur', changeInput);
 
         // update
         noteSave = noteSaveEnter
@@ -137,7 +172,7 @@ export function uiNoteEditor(context) {
             .call(noteSaveButtons);
 
 
-        function change() {
+        function changeInput() {
             var input = d3_select(this);
             var val = input.property('value').trim() || undefined;
 

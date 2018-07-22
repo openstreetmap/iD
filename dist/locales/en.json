@@ -1672,10 +1672,12 @@
                     "placeholder": "Unknown",
                     "options": {
                         "none": "None",
-                        "option1": "Option1",
-                        "option2": "Option2",
-                        "option3": "Option3",
-                        "option4": "Option4"
+                        "updateDetails": "Update or add details",
+                        "missing": "Something is missing",
+                        "wrongLocation": "Wrong location",
+                        "groundtruth": "Ground truth or needs local confirmation",
+                        "doesNotExist": "Does not or never existed",
+                        "discussion": "Needs discussing"
                     }
                 },
                 "clothes": {

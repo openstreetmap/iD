@@ -9,7 +9,6 @@ export function actionMoveNote(noteID, toLoc) {
 
         var note = services.osm.getNote(noteID);
         note.move(geoVecInterp(note.loc, toLoc, t));
-        console.log('moved: ', note.loc);
         // TODO: update
     };
 
