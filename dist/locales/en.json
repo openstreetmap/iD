@@ -302,7 +302,8 @@
                 "title": "Detach",
                 "key": "T",
                 "description": "Detach this node from these lines/areas.",
-                "annotation": "Detached a node from owning lines/areas."
+                "annotation": "Detached a node from owning lines/areas.",
+                "via_restriction": "This can't be detached because it would damage a turn restriction."
             }
         },
         "restriction": {

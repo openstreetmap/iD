@@ -79,7 +79,7 @@ describe('iD.actionDetachNode', function () {
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('a');
                 expect(targetNode).not.to.eql(undefined);
-                // .., and that the location is correct
+                // ... and that the location is correct
                 expect(targetNode.loc).to.eql([0, 0]);
                 // ... and that the tags are intact
                 expect(targetNode.tags).to.eql(tags);
@@ -149,7 +149,7 @@ describe('iD.actionDetachNode', function () {
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('b');
                 expect(targetNode).not.to.eql(undefined);
-                // .., and that the location is correct
+                // ... and that the location is correct
                 expect(targetNode.loc).to.eql([1, 0]);
                 // ... and that the tags are intact
                 expect(targetNode.tags).to.eql(tags);
@@ -240,7 +240,7 @@ describe('iD.actionDetachNode', function () {
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('a');
                 expect(targetNode).not.to.eql(undefined);
-                // .., and that the location is correct
+                // ... and that the location is correct
                 expect(targetNode.loc).to.eql([0, 0]);
                 // ... and that the tags are intact
                 expect(targetNode.tags).to.eql(tags);
@@ -312,7 +312,7 @@ describe('iD.actionDetachNode', function () {
                 // confirm that a still exists
                 var targetNode = assertionGraph.entity('b');
                 expect(targetNode).not.to.eql(undefined);
-                // .., and that the location is correct
+                // ... and that the location is correct
                 expect(targetNode.loc).to.eql([1, 0]);
                 // ... and that the tags are intact
                 expect(targetNode.tags).to.eql(tags);
@@ -416,7 +416,7 @@ describe('iD.actionDetachNode', function () {
             // confirm that a still exists
             var targetNode = assertionGraph.entity('c');
             expect(targetNode).not.to.eql(undefined);
-            // .., and that the location is correct
+            // ... and that the location is correct
             expect(targetNode.loc).to.eql([2, 0]);
             // ... and that the tags are intact
             expect(targetNode.tags).to.eql(tags);
@@ -529,12 +529,82 @@ describe('iD.actionDetachNode', function () {
             // confirm that a still exists
             var targetNode = assertionGraph.entity('c');
             expect(targetNode).not.to.eql(undefined);
-            // .., and that the location is correct
+            // ... and that the location is correct
             expect(targetNode.loc).to.eql([1, 1]);
             // ... and that the tags are intact
             expect(targetNode.tags).to.eql(tags);
             // ... and that the parentWay is empty
             expect(assertionGraph.parentWays(targetNode)).to.eql([]);
         });
+    });
+    describe('with relation', function () {
+        var graph;
+
+        beforeEach(function () {
+            // Set up a simple way
+            // a-b-c (0,0)-(1,0)-(2,0)
+            // Node b represents the target
+            // With a relationship for the way including b
+            graph = iD.Graph([
+                iD.Node({ id: 'a', loc: [0, 0] }),
+                iD.Node({ id: 'b', loc: [1, 0], tags: tags }),
+                iD.Node({ id: 'c', loc: [2, 0] }),
+                iD.Way({ id: 'w', nodes: ['a', 'b', 'c'] }),
+                iD.Relation({
+                    id: 'r',
+                    tags: {
+                        type: 'route',
+                        route: 'foot'
+                    },
+                    members: [
+                        { id: 'a', type: 'node', role: 'point' },
+                        { id: 'b', type: 'node', role: 'point' },
+                        { id: 'c', type: 'node', role: 'point' }
+                    ]
+                })
+            ]);
+        });
+
+        it('detached node not a member of relation', function () {
+            var assertionGraph = iD.actionDetachNode('b')(graph);
+
+            var targetNode = assertionGraph.entity('b');
+            // Confirm is not a member of the relation
+            expect(assertionGraph.parentRelations(targetNode).length).to.eql(0);
+        });
+
+        it('new node is a member of relation', function () {
+            var assertionGraph = iD.actionDetachNode('b')(graph);
+
+            // Find the new node
+            var targetWay = assertionGraph.entity('w');
+            var newNodeId = targetWay.nodes.filter(function (m) {
+                return m !== 'a' && m !== 'b' && m !== 'c';
+            })[0];
+            var newNode = assertionGraph.entity(newNodeId);
+
+            // Confirm is a member of the relation
+            expect(assertionGraph.parentRelations(newNode).length).to.eql(1);
+            expect(assertionGraph.parentRelations(newNode)[0].id).to.eql('r');
+        });
+
+        it('Relation membership has the same properties', function () {
+            var assertionGraph = iD.actionDetachNode('b')(graph);
+
+            // Find the new node
+            var targetWay = assertionGraph.entity('w');
+            var newNodeId = targetWay.nodes.filter(function (m) {
+                return m !== 'a' && m !== 'b' && m !== 'c';
+            })[0];
+
+            // Get the relation
+            var targetRelation = assertionGraph.entity('r');
+            // Find the member
+            var targetMember = targetRelation.memberById(newNodeId);
+
+            // Confirm membership is the same as original (except for the new id)
+            expect(targetMember).to.eql({ id: newNodeId, index: 1, type: 'node', role: 'point' });
+        });
+
     });
 });
