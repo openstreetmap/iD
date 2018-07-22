@@ -77,6 +77,17 @@ function abortRequest(i) {
 }
 
 
+function abortUnwantedRequests(cache, tiles) {
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k === tile.id; });
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
+}
+
+
 function getLoc(attrs) {
     var lon = attrs.lon && attrs.lon.value;
     var lat = attrs.lat && attrs.lat.value;
@@ -749,78 +760,44 @@ export default {
     },
 
 
-    // Load data (entities or notes) from the API in tiles
+    // Load data (entities) from the API in tiles
     // GET /api/0.6/map?bbox=
-    // GET /api/0.6/notes?bbox=
-    loadTiles: function(projection, callback, noteOptions) {
+    loadTiles: function(projection, callback) {
         if (_off) return;
 
         var that = this;
-
-        // are we loading entities or notes?
-        var loadingNotes = (noteOptions !== undefined);
-        var path, cache, tilezoom, throttleLoadUsers;
-
-        if (loadingNotes) {
-            noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-            path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
-            cache = _noteCache;
-            tilezoom = _noteZoom;
-            throttleLoadUsers = _throttle(function() {
-                var uids = Object.keys(_userCache.toLoad);
-                if (!uids.length) return;
-                that.loadUsers(uids, function() {});  // eagerly load user details
-            }, 750);
-        } else {
-            path = '/api/0.6/map?bbox=';
-            cache = _tileCache;
-            tilezoom = _tileZoom;
-        }
+        var path = '/api/0.6/map?bbox=';
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.getTiles(projection, tilezoom);
+        var tiles = tiler.getTiles(projection, _tileZoom);
 
         // abort inflight requests that are no longer needed
-        var hadRequests = !_isEmpty(cache.inflight);
-        _forEach(cache.inflight, function(v, k) {
-            var wanted = _find(tiles, function(tile) { return k === tile.id; });
-            if (!wanted) {
-                abortRequest(v);
-                delete cache.inflight[k];
-            }
-        });
-
-        if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
+        var hadRequests = !_isEmpty(_tileCache.inflight);
+        abortUnwantedRequests(_tileCache, tiles);
+        if (hadRequests && _isEmpty(_tileCache.inflight)) {
             dispatch.call('loaded');    // stop the spinner
         }
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            if (cache.loaded[tile.id] || cache.inflight[tile.id]) return;
-            if (!loadingNotes && _isEmpty(cache.inflight)) {
+            if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
+            if (_isEmpty(_tileCache.inflight)) {
                 dispatch.call('loading');   // start the spinner
             }
 
-            var options = { skipSeen: !loadingNotes };
-            cache.inflight[tile.id] = that.loadFromAPI(
+            var options = { skipSeen: true };
+            _tileCache.inflight[tile.id] = that.loadFromAPI(
                 path + tile.extent.toParam(),
                 function(err, parsed) {
-                    delete cache.inflight[tile.id];
+                    delete _tileCache.inflight[tile.id];
                     if (!err) {
-                        cache.loaded[tile.id] = true;
+                        _tileCache.loaded[tile.id] = true;
                     }
-
-                    if (loadingNotes) {
-                        throttleLoadUsers();
-                        dispatch.call('loadedNotes');
-
-                    } else {
-                        if (callback) {
-                            callback(err, _extend({ data: parsed }, tile));
-                        }
-                        if (_isEmpty(cache.inflight)) {
-                            dispatch.call('loaded');     // stop the spinner
-                        }
+                    if (callback) {
+                        callback(err, _extend({ data: parsed }, tile));
+                    }
+                    if (_isEmpty(_tileCache.inflight)) {
+                        dispatch.call('loaded');     // stop the spinner
                     }
                 },
                 options
@@ -829,11 +806,44 @@ export default {
     },
 
 
-    // Load notes from the API (just calls this.loadTiles)
+    // Load notes from the API in tiles
     // GET /api/0.6/notes?bbox=
     loadNotes: function(projection, noteOptions) {
         noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-        this.loadTiles(projection, null, noteOptions);
+        if (_off) return;
+
+        var that = this;
+        var path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
+        var throttleLoadUsers = _throttle(function() {
+            var uids = Object.keys(_userCache.toLoad);
+            if (!uids.length) return;
+            that.loadUsers(uids, function() {});  // eagerly load user details
+        }, 750);
+
+        // determine the needed tiles to cover the view
+        var tiles = tiler.getTiles(projection, _noteZoom);
+
+        // abort inflight requests that are no longer needed
+        abortUnwantedRequests(_noteCache, tiles);
+
+        // issue new requests..
+        tiles.forEach(function(tile) {
+            if (_noteCache.loaded[tile.id] || _noteCache.inflight[tile.id]) return;
+
+            var options = { skipSeen: false };
+            _noteCache.inflight[tile.id] = that.loadFromAPI(
+                path + tile.extent.toParam(),
+                function(err) {
+                    delete _noteCache.inflight[tile.id];
+                    if (!err) {
+                        _noteCache.loaded[tile.id] = true;
+                    }
+                    throttleLoadUsers();
+                    dispatch.call('loadedNotes');
+                },
+                options
+            );
+        });
     },
 
 

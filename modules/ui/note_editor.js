@@ -59,7 +59,7 @@ export function uiNoteEditor(context) {
         var editor = body.selectAll('.note-editor')
             .data([0]);
 
-        editor = editor.enter()
+        editor.enter()
             .append('div')
             .attr('class', 'modal-section note-editor')
             .merge(editor)
@@ -71,7 +71,7 @@ export function uiNoteEditor(context) {
         var footer = selection.selectAll('.footer')
             .data([0]);
 
-        footer = footer.enter()
+        footer.enter()
             .append('div')
             .attr('class', 'footer')
             .merge(footer)
