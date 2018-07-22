@@ -21,15 +21,14 @@ import {
 
 import rbush from 'rbush';
 
-import { geoExtent } from '../geo';
-
-import { utilTiler } from '../util';
+import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilDetect } from '../util/detect';
 
 import {
     utilQsString,
     utilRebind,
-    utilSetTransform
+    utilSetTransform,
+    utilTiler
 } from '../util';
 
 
@@ -63,8 +62,7 @@ function maxPageAtZoom(z) {
 
 
 function loadTiles(which, url, projection) {
-    var s = projection.scale() * 2 * Math.PI;
-    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
+    var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
     var tiles = tiler.getTiles(projection, tileZoom);
 
     // abort inflight requests that are no longer needed

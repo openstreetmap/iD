@@ -81,8 +81,6 @@ function localeTimestamp(s) {
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
 function loadTiles(which, url, projection, margin) {
-    var s = projection.scale() * 2 * Math.PI;
-    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
     var tiles = tiler.margin(margin).getTiles(projection, tileZoom);
 
     // abort inflight requests that are no longer needed
@@ -97,14 +95,14 @@ function loadTiles(which, url, projection, margin) {
     });
 
     tiles.forEach(function (tile) {
-       loadNextTilePage(which, currZoom, url, tile);
+       loadNextTilePage(which, url, tile);
     });
 }
 
 /**
  * loadNextTilePage() load data for the next tile page in line.
  */
-function loadNextTilePage(which, currZoom, url, tile) {
+function loadNextTilePage(which, url, tile) {
     var cache = _ssCache[which];
     var nextPage = cache.nextPage[tile.id] || 0;
     var id = tile.id + ',' + String(nextPage);
@@ -118,7 +116,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
         // [].shift() removes the first element, some statistics info, not a bubble point
         bubbles.shift();
 
-        var features = bubbles.map(function (bubble) {
+        var features = bubbles.map(function(bubble) {
             if (cache.points[bubble.id]) return null;  // skip duplicates
 
             var loc = [bubble.lo, bubble.la];
