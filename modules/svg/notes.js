@@ -124,27 +124,17 @@ export function svgNotes(projection, context, dispatch) {
 
         // add dots if there's a comment thread
         notesEnter.selectAll('.note-annotation')
-            .data(function(d) { return d.comments.length > 1 ? [0] : []; })
+            .data(function(d) { return [d]; })
             .enter()
             .append('use')
             .attr('class', 'note-annotation thread')
             .attr('width', '14px')
             .attr('height', '14px')
             .attr('x', '-5px')
-            .attr('y', '-20px')
-            .attr('xlink:href', '#iD-icon-more');
-
-        // add plus if this is a new note
-        notesEnter.selectAll('.note-annotation')
-            .data(function(d) { return d.id < 0 ? [0] : []; })
-            .enter()
-            .append('use')
-            .attr('class', 'note-annotation thread')
-            .attr('width', '14px')
-            .attr('height', '14px')
-            .attr('x', '-5px')
-            .attr('y', '-20px')
-            .attr('xlink:href', '#iD-icon-plus');
+            .attr('y', '-21px')
+            .attr('xlink:href', function(d) {
+                return '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
+            });
 
         // update
         notes

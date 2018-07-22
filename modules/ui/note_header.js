@@ -31,17 +31,11 @@ export function uiNoteHeader() {
             .call(svgIcon('#iD-icon-note', 'note-fill'));
 
         iconEnter.each(function(d) {
-            if (d.comments.length > 1) {
-                iconEnter
-                    .append('div')
-                    .attr('class', 'note-icon-annotation')
-                    .call(svgIcon('#iD-icon-more', 'note-annotation'));
-            } else if (_note.isNew()) {
-                iconEnter
-                    .append('div')
-                    .attr('class', 'note-icon-annotation')
-                    .call(svgIcon('#iD-icon-plus', 'note-annotation'));
-            }
+            var statusIcon = '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
+            iconEnter
+                .append('div')
+                .attr('class', 'note-icon-annotation')
+                .call(svgIcon(statusIcon, 'note-annotation'));
         });
 
         headerEnter
