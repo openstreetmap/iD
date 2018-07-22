@@ -22,7 +22,7 @@ import { svgDefs } from '../svg';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind, utilTiler } from '../util';
 
-var geoTile = utilTiler().skipNullIsland(true);
+var tiler = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
@@ -58,7 +58,7 @@ function loadTiles(which, url, projection) {
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     var dimension = projection.clipExtent()[1];
-    var tiles = geoTile.getTiles(projection, dimension, tileZoom);
+    var tiles = tiler.getTiles(projection, dimension, tileZoom);
 
     // abort inflight requests that are no longer needed
     var cache = _mlyCache[which];

@@ -33,7 +33,7 @@ import {
     utilQsString
 } from '../util';
 
-var geoTile = utilTiler();
+var tiler = utilTiler();
 
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
@@ -778,7 +778,7 @@ export default {
         }
 
         // determine the needed tiles to cover the view
-        var tiles = geoTile.getTiles(projection, dimensions, tilezoom);
+        var tiles = tiler.getTiles(projection, dimensions, tilezoom);
 
         // abort inflight requests that are no longer needed
         var hadRequests = !_isEmpty(cache.inflight);

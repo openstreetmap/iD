@@ -33,7 +33,7 @@ import { utilQsString, utilRebind, utilTiler } from '../util';
 
 import Q from 'q';
 
-var geoTile = utilTiler().skipNullIsland(true);
+var tiler = utilTiler().skipNullIsland(true);
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -84,7 +84,7 @@ function loadTiles(which, url, projection, margin) {
     var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
 
     var dimension = projection.clipExtent()[1];
-    var tiles = geoTile
+    var tiles = tiler
         .margin(margin)
         .getTiles(projection, dimension, tileZoom);
 
