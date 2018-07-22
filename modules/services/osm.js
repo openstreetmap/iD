@@ -769,7 +769,7 @@ export default {
         var path = '/api/0.6/map?bbox=';
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.getTiles(projection, _tileZoom);
+        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
         var hadRequests = !_isEmpty(_tileCache.inflight);
@@ -809,7 +809,7 @@ export default {
     // Load notes from the API in tiles
     // GET /api/0.6/notes?bbox=
     loadNotes: function(projection, noteOptions) {
-        noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
+        noteOptions = _extend({ limit: 10000, closed: 7 }, noteOptions);
         if (_off) return;
 
         var that = this;
@@ -821,7 +821,7 @@ export default {
         }, 750);
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.getTiles(projection, _noteZoom);
+        var tiles = tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
         abortUnwantedRequests(_noteCache, tiles);

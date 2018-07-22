@@ -28,7 +28,7 @@ var viewerjs = 'mapillary-js/mapillary.min.js';
 var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var maxResults = 1000;
 var tileZoom = 14;
-var tiler = utilTiler().skipNullIsland(true);
+var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 var dispatch = d3_dispatch('loadedImages', 'loadedSigns');
 var _mlyFallback = false;
 var _mlyCache;
@@ -54,7 +54,7 @@ function maxPageAtZoom(z) {
 
 function loadTiles(which, url, projection) {
     var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
-    var tiles = tiler.getTiles(projection, tileZoom);
+    var tiles = tiler.getTiles(projection);
 
     // abort inflight requests that are no longer needed
     var cache = _mlyCache[which];

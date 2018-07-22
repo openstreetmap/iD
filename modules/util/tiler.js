@@ -1,18 +1,19 @@
 import { range as d3_range } from 'd3-array';
-import { geoExtent } from '../geo';
+import { geoExtent, geoScaleToZoom } from '../geo';
 
 
 export function utilTiler() {
-    var _size = [960, 500];
+    var _size = [256, 256];
     var _scale = 256;
-    var _scaleExtent = [0, 20];
+    var _tileSize = 256;
+    var _zoomExtent = [0, 20];
     var _translate = [_size[0] / 2, _size[1] / 2];
     var _margin = 0;
     var _skipNullIsland = false;
 
 
     function bound(val) {
-        return Math.min(_scaleExtent[1], Math.max(_scaleExtent[0], val));
+        return Math.min(_zoomExtent[1], Math.max(_zoomExtent[0], val));
     }
 
 
@@ -32,7 +33,7 @@ export function utilTiler() {
 
 
     function tiler() {
-        var z = Math.max(Math.log(_scale) / Math.LN2 - 8, 0);
+        var z = geoScaleToZoom(_scale / (2 * Math.PI), _tileSize);
         var z0 = bound(Math.round(z));
         var k = Math.pow(2, z - z0 + 8);
         var origin = [
@@ -72,27 +73,23 @@ export function utilTiler() {
 
 
     /**
-     * getTiles() returns array of d3 geo tiles.
-     * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
-     * an area around (and including) the current map view extents.
+     * getTiles() returns an array of tiles that cover the map view
      */
-    tiler.getTiles = function(projection, tilezoom) {
-        var dimensions = projection.clipExtent()[1];
-        var s = projection.scale() * 2 * Math.PI;
-        var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - tilezoom);
+    tiler.getTiles = function(projection) {
         var origin = [
-            s / 2 - projection.translate()[0],
-            s / 2 - projection.translate()[1]
+            projection.scale() * Math.PI - projection.translate()[0],
+            projection.scale() * Math.PI - projection.translate()[1]
         ];
 
         this
-            .scaleExtent([tilezoom, tilezoom])
-            .scale(s)
-            .size(dimensions)
+            .size(projection.clipExtent()[1])
+            .scale(projection.scale() * 2 * Math.PI)
             .translate(projection.translate());
 
-        return tiler()
+        var tiles = tiler();
+        var ts = tiles.scale;
+
+        return tiles
             .map(function(tile) {
                 if (_skipNullIsland && nearNullIsland(tile)) {
                     return false;
@@ -111,9 +108,16 @@ export function utilTiler() {
     };
 
 
-    tiler.scaleExtent = function(val) {
-        if (!arguments.length) return _scaleExtent;
-        _scaleExtent = val;
+    tiler.tileSize = function(val) {
+        if (!arguments.length) return _tileSize;
+        _tileSize = val;
+        return tiler;
+    };
+
+
+    tiler.zoomExtent = function(val) {
+        if (!arguments.length) return _zoomExtent;
+        _zoomExtent = val;
         return tiler;
     };
 

@@ -219,7 +219,7 @@ Each imagery source should have the following properties:
 Optional properties:
 * `description` - A longer source description which, if included, will be displayed in a popup when viewing the background imagery list
 * `overlay` - If `true`, this is an overlay layer (a transparent layer rendered above base imagery layer). Defaults to `false`
-* `scaleExtent` - Allowable min and max zoom levels, defaults to `[0, 22]`
+* `zoomExtent` - Allowable min and max zoom levels, defaults to `[0, 22]`
 * `polygon` - Array of coordinate rings within which imagery is valid.  If omitted, imagery is assumed to be valid worldwide
 * `overzoom` - Can this imagery be scaled up when zooming in beyond the max zoom?  Defaults to `true`
 * `terms_url` - Url to link to when displaying the imagery terms

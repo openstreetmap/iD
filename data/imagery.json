@@ -7,7 +7,7 @@
       "template": "https://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2013_WM/MapServer/tile/{zoom}/{y}/{x}",
       "endDate": "2013-06-01T00:00:00.000Z",
       "startDate": "2013-05-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-123.02167, 48.44667],
@@ -60,7 +60,7 @@
       "template": "https://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2016_WM/MapServer/tile/{zoom}/{y}/{x}",
       "endDate": "2016-07-01T00:00:00.000Z",
       "startDate": "2016-05-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-123.02167, 48.44667],
@@ -110,7 +110,7 @@
       "name": "7th Series (OS7)",
       "type": "tms",
       "template": "https://ooc.openstreetmap.org/os7/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [6, 14],
+      "zoomExtent": [6, 14],
       "polygon": [
         [
           [-3.04697, 54.83947],
@@ -412,7 +412,7 @@
       "projection": "EPSG:4326",
       "endDate": "2017-05-01T00:00:00.000Z",
       "startDate": "2017-05-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [149.085, -35.1171],
@@ -481,6 +481,88 @@
         ]
       ],
       "terms_url": "https://actmapi-actgov.opendata.arcgis.com/datasets/884456bde6fd46d68e0c05479f55d548",
+      "terms_text": "© Jacobs Group (Australia) Pty Ltd and Australian Capital Territory"
+    },
+    {
+      "id": "ACT2018",
+      "name": "ACTmapi Imagery 2018",
+      "type": "wms",
+      "template": "https://data.actmapi.act.gov.au/arcgis/services/actmapi/imagery2018mga/ImageServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:4326",
+      "endDate": "2018-03-19T00:00:00.000Z",
+      "startDate": "2018-03-19T00:00:00.000Z",
+      "zoomExtent": [0, 21],
+      "polygon": [
+        [
+          [149.2695, -35.4381],
+          [149.2669, -35.348],
+          [149.3329, -35.3468],
+          [149.3334, -35.3648],
+          [149.3774, -35.364],
+          [149.3769, -35.3459],
+          [149.3989, -35.3455],
+          [149.3984, -35.3275],
+          [149.4094, -35.3273],
+          [149.4088, -35.3092],
+          [149.3978, -35.3095],
+          [149.3973, -35.2914],
+          [149.3533, -35.2923],
+          [149.3528, -35.2743],
+          [149.3089, -35.2751],
+          [149.3084, -35.2571],
+          [149.2644, -35.2579],
+          [149.2634, -35.2219],
+          [149.2415, -35.2223],
+          [149.241, -35.2043],
+          [149.219, -35.2047],
+          [149.218, -35.1687],
+          [149.1961, -35.1691],
+          [149.1956, -35.151],
+          [149.1737, -35.1514],
+          [149.1732, -35.1334],
+          [149.1512, -35.1338],
+          [149.1508, -35.1158],
+          [149.085, -35.1169],
+          [149.0854, -35.135],
+          [149.0635, -35.1353],
+          [149.0639, -35.1534],
+          [149.0201, -35.1541],
+          [149.0205, -35.1721],
+          [148.9985, -35.1725],
+          [148.999, -35.1905],
+          [148.9331, -35.1916],
+          [148.934, -35.2276],
+          [148.912, -35.228],
+          [148.9124, -35.246],
+          [148.8685, -35.2467],
+          [148.8689, -35.2647],
+          [148.8469, -35.265],
+          [148.8473, -35.2831],
+          [148.8034, -35.2837],
+          [148.8038, -35.3018],
+          [148.7818, -35.3021],
+          [148.7838, -35.3922],
+          [148.8058, -35.3919],
+          [148.8086, -35.5181],
+          [148.7976, -35.5182],
+          [148.7994, -35.5993],
+          [148.8766, -35.5982],
+          [148.8747, -35.517],
+          [148.8527, -35.5174],
+          [148.8508, -35.4363],
+          [148.8398, -35.4364],
+          [148.8388, -35.3914],
+          [149.0039, -35.3888],
+          [149.0048, -35.4248],
+          [149.0268, -35.4244],
+          [149.0277, -35.4605],
+          [149.0497, -35.4601],
+          [149.0511, -35.5142],
+          [149.1613, -35.5122],
+          [149.1594, -35.4402],
+          [149.2695, -35.4381]
+        ]
+      ],
       "terms_text": "© Jacobs Group (Australia) Pty Ltd and Australian Capital Territory",
       "best": true
     },
@@ -605,7 +687,7 @@
       "name": "AGIV Flanders GRB",
       "type": "tms",
       "template": "https://tile.informatievlaanderen.be/ws/raadpleegdiensten/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=grb_bsk&STYLE=&FORMAT=image/png&tileMatrixSet=GoogleMapsVL&tileMatrix={zoom}&tileRow={y}&tileCol={x}",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [4.40434, 50.78177],
@@ -735,7 +817,7 @@
       "name": "AGIV Flanders most recent aerial imagery",
       "type": "tms",
       "template": "https://tile.informatievlaanderen.be/ws/raadpleegdiensten/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=omwrgbmrvl&STYLE=&FORMAT=image/png&tileMatrixSet=GoogleMapsVL&tileMatrix={zoom}&tileRow={y}&tileCol={x}",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [4.7737, 50.79368],
@@ -904,7 +986,7 @@
       "template": "https://{switch:a,b,c}.agri.openstreetmap.org/layer/au_ga_agri/{zoom}/{x}/{y}.png",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2006-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "polygon": [
         [
           [112.28778, -28.78459],
@@ -1554,7 +1636,7 @@
       "template": "https://tiles.craig.fr/osm/wmts/1.0.0/ortho_2013/webmercator/{zoom}/{x}/{y}.jpeg",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [2.94012, 44.63388],
@@ -2053,7 +2135,7 @@
       "template": "https://tiles.craig.fr/ortho/wmts/1.0.0/ortho_2016/webmercator/{zoom}/{x}/{y}.jpeg",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [2.49389, 46.66829],
@@ -2098,7 +2180,7 @@
       "name": "BANO",
       "type": "tms",
       "template": "https://{switch:a,b,c}.layers.openstreetmap.fr/bano/{zoom}/{x}/{y}.png",
-      "scaleExtent": [12, 20],
+      "zoomExtent": [12, 20],
       "polygon": [
         [
           [-2.7, 43.9],
@@ -2679,7 +2761,7 @@
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/basemap/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
       "endDate": "2010-07-20T00:00:00.000Z",
       "startDate": "2013-07-19T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -2919,7 +3001,7 @@
       "name": "basemap.at",
       "type": "tms",
       "template": "https://maps{switch:1,2,3,4}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{zoom}/{y}/{x}.png",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [16.50733, 46.99293],
@@ -3125,7 +3207,7 @@
       "name": "basemap.at Beschriftungen (annotations)",
       "type": "tms",
       "template": "https://maps{switch:1,2,3,4}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{zoom}/{y}/{x}.png",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [16.50733, 46.99293],
@@ -3332,7 +3414,7 @@
       "name": "basemap.at Orthofoto",
       "type": "tms",
       "template": "https://maps{switch:1,2,3,4}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{zoom}/{y}/{x}.jpeg",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [16.50733, 46.99293],
@@ -3535,325 +3617,12 @@
       "icon": "https://www.basemap.at/images/logo_basemap.jpg"
     },
     {
-      "id": "bavaria-2m",
-      "name": "Bavaria (2 m)",
-      "type": "wms",
-      "template": "https://geodaten.bayern.de/ogc/ogc_dop200_oa.cgi?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=adv_dop200c&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-      "projection": "EPSG:4326",
-      "scaleExtent": [8, 18],
-      "polygon": [
-        [
-          [10.12359, 50.56846],
-          [10.14286, 50.55078],
-          [10.20281, 50.55742],
-          [10.25205, 50.51796],
-          [10.32698, 50.49345],
-          [10.41048, 50.41848],
-          [10.60317, 50.33109],
-          [10.62244, 50.2271],
-          [10.72521, 50.21066],
-          [10.72949, 50.24765],
-          [10.85153, 50.24354],
-          [10.71879, 50.32015],
-          [10.71236, 50.36524],
-          [10.85581, 50.39664],
-          [10.93717, 50.39664],
-          [10.99069, 50.36661],
-          [11.12772, 50.36661],
-          [11.1791, 50.31332],
-          [11.16197, 50.29417],
-          [11.24119, 50.2928],
-          [11.24975, 50.37344],
-          [11.24119, 50.47982],
-          [11.35895, 50.5234],
-          [11.43816, 50.50979],
-          [11.44244, 50.48936],
-          [11.42532, 50.4771],
-          [11.42532, 50.44166],
-          [11.48955, 50.42257],
-          [11.49169, 50.39801],
-          [11.51952, 50.39801],
-          [11.52594, 50.37617],
-          [11.59874, 50.40347],
-          [11.63727, 50.38845],
-          [11.79357, 50.4212],
-          [11.83639, 50.39255],
-          [11.92203, 50.42802],
-          [11.98626, 50.38709],
-          [11.98412, 50.35705],
-          [12.04835, 50.33109],
-          [12.09331, 50.32972],
-          [12.1297, 50.29828],
-          [12.14041, 50.27228],
-          [12.10615, 50.25586],
-          [12.11258, 50.23532],
-          [12.14897, 50.23669],
-          [12.19822, 50.20107],
-          [12.22391, 50.16406],
-          [12.20464, 50.14348],
-          [12.20678, 50.10779],
-          [12.24318, 50.09955],
-          [12.27743, 50.07208],
-          [12.49367, 49.98543],
-          [12.49796, 49.94136],
-          [12.55576, 49.92206],
-          [12.54934, 49.86827],
-          [12.48083, 49.78817],
-          [12.41018, 49.75775],
-          [12.46156, 49.70655],
-          [12.5472, 49.68023],
-          [12.58788, 49.55261],
-          [12.65425, 49.53455],
-          [12.66281, 49.43302],
-          [12.75274, 49.41073],
-          [12.7977, 49.34661],
-          [12.90475, 49.35638],
-          [12.99681, 49.33685],
-          [13.05462, 49.27543],
-          [13.13169, 49.21952],
-          [13.19164, 49.14395],
-          [13.2366, 49.12153],
-          [13.29655, 49.12293],
-          [13.37148, 49.08088],
-          [13.4143, 49.02897],
-          [13.4143, 48.97981],
-          [13.57916, 48.96997],
-          [13.63483, 48.94326],
-          [13.67765, 48.88698],
-          [13.73759, 48.89261],
-          [13.7847, 48.83346],
-          [13.84036, 48.77423],
-          [13.81681, 48.70646],
-          [13.84464, 48.70081],
-          [13.8425, 48.60038],
-          [13.76543, 48.5423],
-          [13.75258, 48.50401],
-          [13.67122, 48.50543],
-          [13.64339, 48.54371],
-          [13.45712, 48.5508],
-          [13.45712, 48.41598],
-          [13.40574, 48.36053],
-          [13.2837, 48.27511],
-          [13.09315, 48.26941],
-          [12.95827, 48.19097],
-          [12.87691, 48.18526],
-          [12.772, 48.09382],
-          [12.86407, 48.01368],
-          [12.89832, 47.95492],
-          [12.94543, 47.95636],
-          [12.99681, 47.88461],
-          [13.01394, 47.83434],
-          [12.93472, 47.7322],
-          [13.0589, 47.72499],
-          [13.11885, 47.63851],
-          [13.06532, 47.56922],
-          [13.05676, 47.47379],
-          [13.00323, 47.45208],
-          [12.76772, 47.55044],
-          [12.76986, 47.63274],
-          [12.73989, 47.67312],
-          [12.6671, 47.67024],
-          [12.57503, 47.6212],
-          [12.48083, 47.61975],
-          [12.41446, 47.67024],
-          [12.24318, 47.67745],
-          [12.2132, 47.69186],
-          [12.19179, 47.68177],
-          [12.2132, 47.66591],
-          [12.21106, 47.60388],
-          [12.17467, 47.59521],
-          [12.13827, 47.60388],
-          [11.89205, 47.60388],
-          [11.85137, 47.57933],
-          [11.63942, 47.58222],
-          [11.59445, 47.54899],
-          [11.59017, 47.51285],
-          [11.51738, 47.49839],
-          [11.4403, 47.50417],
-          [11.39534, 47.47524],
-          [11.42746, 47.44484],
-          [11.3461, 47.44339],
-          [11.27973, 47.39559],
-          [11.21336, 47.38834],
-          [11.24761, 47.43181],
-          [11.10203, 47.39269],
-          [10.965, 47.38979],
-          [10.97785, 47.43615],
-          [10.9179, 47.47524],
-          [10.8708, 47.47524],
-          [10.85581, 47.49405],
-          [10.90077, 47.5143],
-          [10.87294, 47.53598],
-          [10.81085, 47.51285],
-          [10.64385, 47.54899],
-          [10.59461, 47.55477],
-          [10.57962, 47.52876],
-          [10.46187, 47.54032],
-          [10.46615, 47.48392],
-          [10.48756, 47.47813],
-          [10.48756, 47.41298],
-          [10.45973, 47.40283],
-          [10.45973, 47.37529],
-          [10.41048, 47.37384],
-          [10.40834, 47.34339],
-          [10.32056, 47.28678],
-          [10.28202, 47.27806],
-          [10.28416, 47.26208],
-          [10.14714, 47.26208],
-          [10.1921, 47.30275],
-          [10.19424, 47.37384],
-          [10.16641, 47.37384],
-          [10.16641, 47.34629],
-          [10.10004, 47.34339],
-          [10.0615, 47.36369],
-          [10.06792, 47.41877],
-          [10.09361, 47.42601],
-          [10.09576, 47.44194],
-          [9.978, 47.48537],
-          [9.95659, 47.52731],
-          [9.8945, 47.52876],
-          [9.85596, 47.50851],
-          [9.81743, 47.54465],
-          [9.82171, 47.57644],
-          [9.77461, 47.58222],
-          [9.73821, 47.52586],
-          [9.67398, 47.53454],
-          [9.58406, 47.56488],
-          [9.63972, 47.60532],
-          [9.7168, 47.60388],
-          [9.85596, 47.676],
-          [9.978, 47.65582],
-          [10.02938, 47.68177],
-          [10.10004, 47.66735],
-          [10.13215, 47.676],
-          [10.14286, 47.70195],
-          [10.0615, 47.7725],
-          [10.11288, 47.8099],
-          [10.08291, 47.85302],
-          [10.1086, 47.90902],
-          [10.07649, 47.96496],
-          [10.13001, 48.02084],
-          [10.13429, 48.10669],
-          [10.10004, 48.12813],
-          [10.05508, 48.26228],
-          [9.96944, 48.36765],
-          [10.03153, 48.42593],
-          [10.02938, 48.46144],
-          [10.12359, 48.47705],
-          [10.15356, 48.4515],
-          [10.23492, 48.51252],
-          [10.31628, 48.51678],
-          [10.29915, 48.61878],
-          [10.24563, 48.6683],
-          [10.27346, 48.70646],
-          [10.3698, 48.68385],
-          [10.43189, 48.69939],
-          [10.45116, 48.72765],
-          [10.40192, 48.746],
-          [10.44046, 48.84896],
-          [10.43403, 48.95873],
-          [10.33769, 49.02055],
-          [10.24991, 49.03599],
-          [10.24991, 49.07387],
-          [10.20066, 49.10331],
-          [10.25205, 49.13274],
-          [10.12359, 49.19714],
-          [10.11931, 49.26285],
-          [10.15142, 49.28939],
-          [10.10432, 49.34522],
-          [10.14072, 49.39401],
-          [10.1086, 49.44555],
-          [10.11074, 49.50537],
-          [10.0722, 49.53316],
-          [10.01654, 49.47616],
-          [9.92662, 49.47894],
-          [9.92448, 49.55678],
-          [9.89878, 49.58177],
-          [9.85596, 49.53872],
-          [9.80672, 49.55678],
-          [9.86667, 49.60675],
-          [9.85382, 49.6442],
-          [9.81743, 49.66083],
-          [9.83455, 49.68993],
-          [9.79602, 49.72039],
-          [9.75748, 49.70793],
-          [9.74035, 49.68577],
-          [9.70609, 49.71624],
-          [9.67826, 49.71624],
-          [9.68254, 49.68854],
-          [9.62045, 49.69131],
-          [9.64615, 49.78955],
-          [9.55836, 49.77434],
-          [9.57121, 49.73561],
-          [9.50698, 49.75222],
-          [9.49199, 49.77987],
-          [9.46844, 49.76051],
-          [9.42562, 49.77849],
-          [9.40421, 49.76466],
-          [9.33356, 49.7702],
-          [9.32928, 49.73423],
-          [9.4085, 49.72593],
-          [9.42776, 49.69824],
-          [9.41492, 49.6442],
-          [9.38066, 49.63865],
-          [9.35925, 49.64974],
-          [9.33998, 49.63727],
-          [9.31215, 49.64836],
-          [9.27789, 49.62617],
-          [9.28432, 49.60814],
-          [9.2415, 49.57483],
-          [9.09805, 49.57205],
-          [9.06594, 49.60814],
-          [9.10019, 49.65113],
-          [9.09163, 49.6927],
-          [9.13017, 49.71208],
-          [9.13873, 49.74253],
-          [9.10876, 49.75637],
-          [9.13659, 49.79093],
-          [9.10019, 49.78955],
-          [9.07236, 49.82824],
-          [9.03596, 49.83514],
-          [9.01669, 50.02671],
-          [8.96317, 50.03084],
-          [8.95674, 50.05971],
-          [9.00171, 50.0707],
-          [9.02097, 50.11054],
-          [9.1216, 50.12289],
-          [9.15586, 50.11328],
-          [9.19654, 50.11878],
-          [9.18583, 50.13525],
-          [9.23507, 50.1476],
-          [9.37638, 50.12701],
-          [9.4085, 50.0817],
-          [9.52197, 50.09543],
-          [9.50484, 50.14211],
-          [9.53267, 50.16406],
-          [9.48985, 50.16954],
-          [9.49413, 50.24354],
-          [9.61403, 50.22163],
-          [9.66541, 50.23532],
-          [9.63544, 50.24901],
-          [9.66756, 50.27228],
-          [9.74249, 50.30922],
-          [9.72964, 50.35841],
-          [9.77032, 50.42939],
-          [9.86881, 50.40074],
-          [9.91805, 50.40893],
-          [10.03581, 50.47982],
-          [10.03795, 50.51115],
-          [10.12359, 50.56846]
-        ]
-      ],
-      "terms_url": "https://www.ldbv.bayern.de/",
-      "terms_text": "Bayerische Vermessungsverwaltung"
-    },
-    {
       "id": "bavaria-80cm",
       "name": "Bavaria (80 cm)",
       "type": "wms",
-      "template": "https://www.geodaten.bayern.de/ogc/ogc_dop80_oa.cgi?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=by_dop80c&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "https://geoservices.bayern.de/wms/v1/ogc_dop80_oa.cgi?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=by_dop80c&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [7, 18],
+      "zoomExtent": [7, 18],
       "polygon": [
         [
           [10.12359, 50.56846],
@@ -4166,7 +3935,7 @@
       "name": "Bavaria DOP 80cm",
       "type": "tms",
       "template": "https://mapproxy.osm.ch/tiles/BAYERNDOP80/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
-      "scaleExtent": [7, 18],
+      "zoomExtent": [7, 18],
       "polygon": [
         [
           [10.12359, 50.56846],
@@ -4479,7 +4248,7 @@
       "name": "BD Carthage",
       "type": "tms",
       "template": "https://{switch:a,b,c}.tile.openstreetmap.fr/route500hydro/{zoom}/{x}/{y}.png",
-      "scaleExtent": [6, 20],
+      "zoomExtent": [6, 20],
       "polygon": [
         [
           [-2.7, 43.9],
@@ -5058,7 +4827,7 @@
       "name": "BDOrtho IGN",
       "type": "tms",
       "template": "https://proxy-ign.openstreetmap.fr/94GjiyqD/bdortho/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [2, 21],
+      "zoomExtent": [2, 21],
       "polygon": [
         [
           [-2.7, 43.9],
@@ -5695,7 +5464,7 @@
       "template": "https://geoxxx.agrocampus-ouest.fr/owsifl/gwc/service/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=Benin:cotonou_pleiade_2016&STYLE=&FORMAT=image/jpeg&tileMatrixSet=EPSG:3857&tileMatrix=EPSG:3857:{zoom}&tileRow={y}&tileCol={x}",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [2.31954, 6.55745],
@@ -6313,7 +6082,7 @@
       "name": "Bing aerial imagery",
       "type": "bing",
       "template": "https://www.bing.com/maps",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "default": true,
       "description": "Satellite and aerial imagery.",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"
@@ -6325,7 +6094,7 @@
       "template": "https://sitmappe.comune.bologna.it/tms/tileserver/Ortofoto2017/{zoom}/{x}/{y}.png",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2017-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [11.22962, 44.53077],
@@ -6400,7 +6169,7 @@
       "template": "http://osmdata.asitvd.ch/tiles/bonvillars2013/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [6.66713, 46.83358],
@@ -6421,7 +6190,7 @@
       "template": "http://wms.openstreetmap.fr/tms/1.0.0/bordeaux_2012/{zoom}/{x}/{y}",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-0.59923, 45.04193],
@@ -6500,7 +6269,7 @@
       "template": "http://tms.bordeaux.inria.fr/bdx2016/{zoom}/{x}/{y}.jpg",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [-0.59923, 45.04193],
@@ -6655,7 +6424,7 @@
       "template": "http://{switch:a,b,c,d}.imagery.paulnorman.ca/tiles/bc_mosaic/{zoom}/{x}/{y}.png",
       "endDate": "2013-06-01T00:00:00.000Z",
       "startDate": "2009-01-01T00:00:00.000Z",
-      "scaleExtent": [9, 20],
+      "zoomExtent": [9, 20],
       "polygon": [
         [
           [-123.3176, 49.32726],
@@ -7128,7 +6897,7 @@
       "name": "Cadastre",
       "type": "tms",
       "template": "http://tms.cadastre.openstreetmap.fr/*/tout/{zoom}/{x}/{y}.png",
-      "scaleExtent": [12, 22],
+      "zoomExtent": [12, 22],
       "polygon": [
         [
           [-2.7, 43.9],
@@ -7707,7 +7476,7 @@
       "name": "Cadastre geoportail.lu",
       "type": "tms",
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/cadastre/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -8090,7 +7859,7 @@
       "name": "Cambodia, Laos, Thailand, Vietnam, Malaysia, Myanmar bilingual",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tile.osm-tools.org/osm/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [92.10238, 20.81356],
@@ -8187,7 +7956,7 @@
       "template": "https://tiles.openaerialmap.org/5ac65a9f91b5310010e0d489/0/5ac65a9f91b5310010e0d48a/{zoom}/{x}/{y}.png",
       "endDate": "2017-12-20T00:00:00.000Z",
       "startDate": "2017-12-11T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [-72.26734, 18.63561],
@@ -8533,7 +8302,7 @@
       "template": "https://mapproxy.osm.ch/tiles/fribourg_2016/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [6.79478, 46.57542],
@@ -9505,7 +9274,7 @@
       "projection": "EPSG:3857",
       "endDate": "2010-01-01T00:00:00.000Z",
       "startDate": "2010-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 18],
+      "zoomExtent": [14, 18],
       "polygon": [
         [
           [-7.31278, 36.98391],
@@ -9576,7 +9345,7 @@
       "template": "http://osmdata.asitvd.ch/tiles/cartoriviera2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [7.02235, 46.42856],
@@ -10332,7 +10101,7 @@
       "template": "https://{switch:a,b,c}.coct.aerial.openstreetmap.org.za/layer/za_coct_aerial_2013/{zoom}/{x}/{y}.jpg",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [18.44866, -33.89362],
@@ -10545,7 +10314,7 @@
       "template": "https://{switch:a,b,c}.coct.aerial.openstreetmap.org.za/layer/za_coct_aerial_2015/{zoom}/{x}/{y}.jpg",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [18.44866, -33.89362],
@@ -10760,7 +10529,7 @@
       "projection": "EPSG:3857",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.44624, 47.44143],
@@ -10778,7 +10547,7 @@
       "type": "wms",
       "template": "https://www.gis.stadt-zuerich.ch/maps/services/wms/WMS-ZH-STZH-OGD/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Uebersichtsplan&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.45788, 47.44582],
@@ -10980,7 +10749,7 @@
       "name": "Czech CUZK:KM tiles proxy",
       "type": "tms",
       "template": "https://osm-{switch:a,b,c}.zby.cz/tiles_cuzk.php/{zoom}/{x}/{y}.png",
-      "scaleExtent": [13, 18],
+      "zoomExtent": [13, 18],
       "polygon": [
         [
           [15.00637, 49.01774],
@@ -11321,7 +11090,7 @@
       "name": "Czech RUIAN budovy",
       "type": "tms",
       "template": "https://tile.poloha.net/budovy/{zoom}/{x}/{y}.png",
-      "scaleExtent": [12, 20],
+      "zoomExtent": [12, 20],
       "polygon": [
         [
           [15.00637, 49.01774],
@@ -11493,7 +11262,7 @@
       "name": "Czech RUIAN parcely",
       "type": "tms",
       "template": "https://tile.poloha.net/parcely/{zoom}/{x}/{y}.png",
-      "scaleExtent": [12, 20],
+      "zoomExtent": [12, 20],
       "polygon": [
         [
           [15.00637, 49.01774],
@@ -11769,7 +11538,7 @@
       "template": "http://e.tile.openstreetmap.hu/dunai-arviz-2013/{zoom}/{x}/{y}.jpg",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [10, 20],
+      "zoomExtent": [10, 20],
       "polygon": [
         [
           [19.07732, 47.69597],
@@ -12344,7 +12113,7 @@
       "name": "DigitalGlobe Premium Imagery",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.316c9a2e/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqZGFrZ2c2dzFlMWgyd2x0ZHdmMDB6NzYifQ.9Pl3XOO82ArX94fHV289Pg",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe",
       "terms_text": "Terms & Feedback",
       "default": true,
@@ -12356,7 +12125,7 @@
       "name": "DigitalGlobe Premium Imagery Vintage",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.2850d66c/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqOTBkcmZjNzJ5ZnozNHF6NnVkOGd6ODYifQ.grAnqgpCjOaeq-ozqt4QNw",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe",
       "terms_text": "Terms & Feedback",
       "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
@@ -12368,7 +12137,7 @@
       "name": "DigitalGlobe Standard Imagery",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.0a8e44ba/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqZGFrZ3pjczNpaHYycXFyMGo0djY3N2IifQ.90uebT4-ow1uqZKTUrf6RQ",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe",
       "terms_text": "Terms & Feedback",
       "default": true,
@@ -12380,7 +12149,7 @@
       "name": "DigitalGlobe Standard Imagery Vintage",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/digitalglobe.1412531a/{zoom}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqOTBlYWJ1ZDAza2YyeG14NWVodTA4OWUifQ.wVc8ZOuPuYVw39lhS2j3_g",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe",
       "terms_text": "Terms & Feedback",
       "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
@@ -14635,7 +14404,7 @@
       "name": "Esri World Imagery",
       "type": "tms",
       "template": "https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://wiki.openstreetmap.org/wiki/Esri",
       "terms_text": "Terms & Feedback",
       "default": true,
@@ -14647,7 +14416,7 @@
       "name": "Esri World Imagery (Clarity) Beta",
       "type": "tms",
       "template": "https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://wiki.openstreetmap.org/wiki/Esri",
       "terms_text": "Terms & Feedback",
       "default": true,
@@ -17779,7 +17548,7 @@
       "name": "Estonia Ortho (Maaamet)",
       "type": "tms",
       "template": "https://tiles.maaamet.ee/tm/tms/1.0.0/foto@GMC/{zoom}/{x}/{-y}.png",
-      "scaleExtent": [14, 18],
+      "zoomExtent": [14, 18],
       "polygon": [
         [
           [22.35364, 58.85385],
@@ -18579,7 +18348,7 @@
       "template": "http://osmdata.asitvd.ch/tiles/fiez2013/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [6.62313, 46.82339],
@@ -18600,7 +18369,7 @@
       "type": "wms",
       "template": "https://ogc.fiskeridir.no/wms.ashx?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=layer_262&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [3, 22],
+      "zoomExtent": [3, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -18644,7 +18413,7 @@
       "template": "http://e.tile.openstreetmap.hu/ortofoto2000/{zoom}/{x}/{y}.jpg",
       "endDate": "2000-01-01T00:00:00.000Z",
       "startDate": "2000-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 17],
+      "zoomExtent": [0, 17],
       "polygon": [
         [
           [16.11391, 46.8691],
@@ -19232,7 +19001,7 @@
       "template": "http://e.tile.openstreetmap.hu/ortofoto2005/{zoom}/{x}/{y}.jpg",
       "endDate": "2005-01-01T00:00:00.000Z",
       "startDate": "2005-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 17],
+      "zoomExtent": [0, 17],
       "polygon": [
         [
           [16.11391, 46.8691],
@@ -19818,7 +19587,7 @@
       "name": "Freemap.sk Car",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.freemap.sk/A/{zoom}/{x}/{y}.jpeg",
-      "scaleExtent": [8, 16],
+      "zoomExtent": [8, 16],
       "polygon": [
         [
           [19.83682, 49.25529],
@@ -19877,7 +19646,7 @@
       "name": "Freemap.sk Cyclo",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.freemap.sk/C/{zoom}/{x}/{y}.jpeg",
-      "scaleExtent": [8, 16],
+      "zoomExtent": [8, 16],
       "polygon": [
         [
           [19.83682, 49.25529],
@@ -19936,7 +19705,7 @@
       "name": "Freemap.sk Hiking",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.freemap.sk/T/{zoom}/{x}/{y}.jpeg",
-      "scaleExtent": [8, 16],
+      "zoomExtent": [8, 16],
       "polygon": [
         [
           [19.83682, 49.25529],
@@ -19995,7 +19764,7 @@
       "name": "Freemap.sk Ski",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.freemap.sk/K/{zoom}/{x}/{y}.jpeg",
-      "scaleExtent": [8, 16],
+      "zoomExtent": [8, 16],
       "polygon": [
         [
           [19.83682, 49.25529],
@@ -20055,7 +19824,7 @@
       "type": "wms",
       "template": "https://extranet.liikennevirasto.fi/inspirepalvelu/beta/wms?SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=dr_tielinkki_toim_lk&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [3, 20],
+      "zoomExtent": [3, 20],
       "polygon": [
         [
           [27.96569, 70.0988],
@@ -20169,7 +19938,7 @@
       "template": "https://imagery.openstreetmap.fr/tms/1.0.0/gaza_pleiades_20140706/{zoom}/{x}/{y}",
       "endDate": "2014-07-06T00:00:00.000Z",
       "startDate": "2014-07-06T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [34.49022, 31.59487],
@@ -20248,7 +20017,7 @@
       "template": "https://imagery.openstreetmap.fr/tms/1.0.0/gaza_pleiades_20140706_nir/{zoom}/{x}/{y}",
       "endDate": "2014-07-06T00:00:00.000Z",
       "startDate": "2014-07-06T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [34.49022, 31.59487],
@@ -20846,7 +20615,7 @@
       "type": "wms",
       "template": "https://maps.geogratis.gc.ca/wms/roads_en?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=roads&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [4, 20],
+      "zoomExtent": [4, 20],
       "polygon": [
         [
           [-141.0678, 60.2442],
@@ -21106,7 +20875,7 @@
       "type": "wms",
       "template": "https://cartes.geogratis.gc.ca/wms/roads_fr?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=routes&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [4, 20],
+      "zoomExtent": [4, 20],
       "polygon": [
         [
           [-141.0678, 60.2442],
@@ -22823,7 +22592,7 @@
       "template": "http://{switch:wmts1,wmts2}.geoportail.lu/opendata/wmts/ortho_10cm_proto_lidar/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2017-04-09T00:00:00.000Z",
       "startDate": "2017-04-09T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [6.05001, 49.82175],
@@ -22843,7 +22612,7 @@
       "type": "wms",
       "template": "http://mapy.geoportal.gov.pl/wss/service/img/guest/ORTO/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Raster&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}{header(User-Agent,Mozilla/5.0 (JOSM)}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [15.9751, 54.37092],
@@ -23067,7 +22836,7 @@
       "name": "Geoportal.gov.pl (Orthophotomap)",
       "type": "tms",
       "template": "https://wms.misek.pl/geoportal.orto/tms/{zoom}/{x}/{y}",
-      "scaleExtent": [6, 24],
+      "zoomExtent": [6, 24],
       "polygon": [
         [
           [15.9751, 54.37092],
@@ -23529,7 +23298,7 @@
       "template": "http://wms.openstreetmap.fr/tms/1.0.0/nancy_2012/{zoom}/{x}/{y}",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [6.06066, 48.60554],
@@ -23547,7 +23316,7 @@
       "name": "GURS: Building outlines",
       "type": "tms",
       "template": "http://wms.openstreetmap.de/tms/GURS-building-outlines/{zoom}/{x}/{y}.png",
-      "scaleExtent": [8, 19],
+      "zoomExtent": [8, 19],
       "polygon": [
         [
           [15.17101, 45.41273],
@@ -23740,7 +23509,7 @@
       "name": "GURS: Road lines",
       "type": "tms",
       "template": "http://wms.openstreetmap.de/tms/GURS-road-lines/{zoom}/{x}/{y}.png",
-      "scaleExtent": [8, 19],
+      "zoomExtent": [8, 19],
       "polygon": [
         [
           [15.17101, 45.41273],
@@ -24203,7 +23972,7 @@
       "template": "https://{switch:a,b,c}.hampshire.aerial.openstreetmap.org.uk/layer/gb_hampshire_aerial_fcir/{zoom}/{x}/{y}.png",
       "endDate": "2014-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 20],
+      "zoomExtent": [8, 20],
       "polygon": [
         [
           [-1.31567, 50.77809],
@@ -24393,7 +24162,7 @@
       "template": "https://{switch:a,b,c}.hampshire.aerial.openstreetmap.org.uk/layer/gb_hampshire_aerial_rgb/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 20],
+      "zoomExtent": [8, 20],
       "polygon": [
         [
           [-1.31567, 50.77809],
@@ -24581,7 +24350,7 @@
       "name": "Hillshade Hungary",
       "type": "tms",
       "template": "https://{switch:a,b,c}.map.turistautak.hu/tiles/shading/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [[[15, 45], [24, 45], [24, 49], [15, 49], [15, 45]]],
       "terms_text": "SRTM",
       "overlay": true
@@ -24591,7 +24360,7 @@
       "name": "IBGE Distrito Federal",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/styles/v1/wille/cirnnxni1000jg8nfppc8g7pm/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1Ijoid2lsbGUiLCJhIjoicFNVWk5VWSJ9.hluCd0YGvYHNlFi_utWe2g",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-48.2444, -16.0508],
@@ -24610,7 +24379,7 @@
       "name": "IBGE Mapa de Setores Rurais",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/tmpsantos.i00mo1kj/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJncjlmd0t3In0.DmZsIeOW-3x-C5eX-wAqTw",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-69.94793, -4.23168],
@@ -25700,7 +25469,7 @@
       "name": "IBGE Mapa de Setores Urbanos",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/tmpsantos.hgda0m6h/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJncjlmd0t3In0.DmZsIeOW-3x-C5eX-wAqTw",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-69.94793, -4.23168],
@@ -28311,7 +28080,7 @@
       "name": "IGN topographical map (TMS)",
       "type": "tms",
       "template": "https://ide.ign.gob.ar/geoservicios/rest/services/Mapas_IGN/mapa_topografico/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [1, 20],
+      "zoomExtent": [1, 20],
       "polygon": [
         [
           [-55.5438, -35.77219],
@@ -28696,7 +28465,7 @@
       "name": "Imagerie Drone (Haiti)",
       "type": "tms",
       "template": "http://wms.openstreetmap.fr/tms/1.0.0/iomhaiti/{zoom}/{x}/{y}",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [-72.15474, 19.6879],
@@ -29333,7 +29102,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R119_N09_20160327T050917&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-03-27T00:00:00.000Z",
       "startDate": "2016-03-27T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [79.01779, 8.82757],
@@ -29355,7 +29124,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80700162014211LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2014-07-31T00:00:00.000Z",
       "startDate": "2014-07-31T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [-152.70873, 62.30357],
@@ -29378,7 +29147,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=aral2&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-03-03T00:00:00.000Z",
       "startDate": "2016-03-03T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [58.049, 43.2623],
@@ -29403,7 +29172,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=aral1&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-09-09T00:00:00.000Z",
       "startDate": "2016-09-09T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [58.049, 43.2623],
@@ -29428,7 +29197,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R067_S40_20170417T140051&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-04-17T00:00:00.000Z",
       "startDate": "2017-04-17T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-62.9988, -40.7327],
@@ -29450,7 +29219,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R067_S40_20170127T140051&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-01-27T00:00:00.000Z",
       "startDate": "2017-01-27T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-62.9988, -40.7327],
@@ -29472,7 +29241,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81190582014075LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2014-03-16T00:00:00.000Z",
       "startDate": "2014-03-16T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [114.36, 2.02846],
@@ -29495,7 +29264,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81250592016107LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [104.00155, -0.00008],
@@ -29517,7 +29286,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80770232017156LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-06-05T00:00:00.000Z",
       "startDate": "2017-06-05T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-168.2544, 53.8749],
@@ -29539,7 +29308,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81800982013291LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-10-18T00:00:00.000Z",
       "startDate": "2013-10-18T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [3.24653, -54.47047],
@@ -29562,7 +29331,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R017_S67_20170223T022551&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-02-23T00:00:00.000Z",
       "startDate": "2017-02-23T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [96.1197, -67.6542],
@@ -29586,7 +29355,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R065_N47_20160929T102022&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-09-29T00:00:00.000Z",
       "startDate": "2016-09-29T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [10.55906, 45.95485],
@@ -29611,7 +29380,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82050982015344LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-12-10T00:00:00.000Z",
       "startDate": "2015-12-10T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-34.17701, -55.29693],
@@ -29634,7 +29403,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R086_N60_20160831T213532&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-08-31T00:00:00.000Z",
       "startDate": "2016-08-31T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-154.5102, 59.4577],
@@ -29658,7 +29427,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A0040712016264110KF&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-09-21T00:00:00.000Z",
       "startDate": "2016-09-21T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-72.75945, -15.68684],
@@ -29682,7 +29451,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R022_N06_20151221T103009&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-12-21T00:00:00.000Z",
       "startDate": "2015-12-21T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [1.83975, 6.2578],
@@ -29705,7 +29474,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R040_N01_20160311T164128&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-03-11T00:00:00.000Z",
       "startDate": "2016-03-11T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-92.05216, 1.3213],
@@ -29727,7 +29496,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80360072014245LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2014-09-02T00:00:00.000Z",
       "startDate": "2014-09-02T00:00:00.000Z",
-      "scaleExtent": [0, 11],
+      "zoomExtent": [0, 11],
       "polygon": [
         [
           [-84.34799, 74.38946],
@@ -29749,7 +29518,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82160152013239LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-08-27T00:00:00.000Z",
       "startDate": "2013-08-27T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [-13.04701, 64.21109],
@@ -29771,7 +29540,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00302052007154424_20150518041444_91492&z={zoom}&x={x}&y={-y}",
       "endDate": "2012-02-05T00:00:00.000Z",
       "startDate": "2012-02-05T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-78.532, -1.80509],
@@ -29793,7 +29562,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R009_S61_20160109&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-01-09T00:00:00.000Z",
       "startDate": "2016-01-09T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-56.13476, -61.63472],
@@ -29816,7 +29585,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=enderby&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-03-27T00:00:00.000Z",
       "startDate": "2017-01-25T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [45.4547, -68.5091],
@@ -29841,7 +29610,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100502015347LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-12-13T00:00:00.000Z",
       "startDate": "2015-12-13T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-24.75878, 14.74814],
@@ -29863,7 +29632,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=greenland&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [-43.9774, 59.7171],
@@ -30038,7 +29807,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R047_S54_20160411T044330&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-04-12T00:00:00.000Z",
       "startDate": "2016-04-12T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [73.06897, -53.27059],
@@ -30061,7 +29830,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82280982013259LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-09-16T00:00:00.000Z",
       "startDate": "2013-09-16T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [-69.8568, -55.55949],
@@ -30086,7 +29855,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_kangerlussuaq_20151008&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-10-08T00:00:00.000Z",
       "startDate": "2015-10-08T00:00:00.000Z",
-      "scaleExtent": [0, 17],
+      "zoomExtent": [0, 17],
       "polygon": [
         [
           [-50.6992, 66.9888],
@@ -30116,7 +29885,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_kangerlussuaq_20160518&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-05-18T00:00:00.000Z",
       "startDate": "2016-05-18T00:00:00.000Z",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
           [-50.7519, 66.9996],
@@ -30142,7 +29911,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R021_N44_20160807T083013&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-08-07T00:00:00.000Z",
       "startDate": "2016-08-07T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [35.93259, 44.96237],
@@ -30164,7 +29933,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R021_N44_20180429T082601&z={zoom}&x={x}&y={-y}",
       "endDate": "2018-04-29T00:00:00.000Z",
       "startDate": "2018-04-29T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [35.8787, 45.0348],
@@ -30186,7 +29955,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar2&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-07-17T00:00:00.000Z",
       "startDate": "2016-07-17T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [-79.05175, 81.91484],
@@ -30211,7 +29980,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=larsen_2018&z={zoom}&x={x}&y={-y}",
       "endDate": "2018-01-06T00:00:00.000Z",
       "startDate": "2018-01-06T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [-62.7282, -68.9652],
@@ -30237,7 +30006,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00311162013112731_20150618142416_109190&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-11-16T00:00:00.000Z",
       "startDate": "2013-11-16T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-28.21075, -56.72108],
@@ -30259,7 +30028,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81991002015286LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-10-13T00:00:00.000Z",
       "startDate": "2015-10-13T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-27.99293, -56.73479],
@@ -30282,7 +30051,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2B_R005_S69_20180222T061749&z={zoom}&x={x}&y={-y}",
       "endDate": "2018-02-22T00:00:00.000Z",
       "startDate": "2018-02-22T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [35.124, -70.3693],
@@ -30305,7 +30074,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-05-17T00:00:00.000Z",
       "startDate": "2013-05-17T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [-85.76109, 81.39333],
@@ -30335,7 +30104,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R042_S78_20170214T202521&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-02-14T00:00:00.000Z",
       "startDate": "2017-02-14T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [162.9125, -78.4514],
@@ -30360,7 +30129,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R092_S02_20160613T075613&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-06-13T00:00:00.000Z",
       "startDate": "2016-06-13T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [37.20666, -0.26685],
@@ -30382,7 +30151,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R092_S05_20160802T075556&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-08-02T00:00:00.000Z",
       "startDate": "2016-08-02T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [37.24769, -3.22921],
@@ -30404,7 +30173,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80940622015159LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-06-08T00:00:00.000Z",
       "startDate": "2015-06-08T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [150.38853, -2.80053],
@@ -30426,7 +30195,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=northsea_s2_2016&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-09-25T00:00:00.000Z",
       "startDate": "2016-09-25T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [5.1562, 52.8755],
@@ -30450,7 +30219,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=northsea_s2_2017&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-06-02T00:00:00.000Z",
       "startDate": "2017-06-02T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [5.1713, 53.0918],
@@ -30473,7 +30242,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=northsea_s2_2018&z={zoom}&x={x}&y={-y}",
       "endDate": "2018-05-08T00:00:00.000Z",
       "startDate": "2018-05-08T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [5.3179, 53.0918],
@@ -30497,7 +30266,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=caspian_2018&z={zoom}&x={x}&y={-y}",
       "endDate": "2018-05-16T00:00:00.000Z",
       "startDate": "2018-05-16T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [51.0243, 45.0729],
@@ -30520,7 +30289,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=ural_s2_2016&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-08-12T00:00:00.000Z",
       "startDate": "2016-08-12T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [59.19898, 64.89205],
@@ -30544,7 +30313,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=ndvina&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-09-13T00:00:00.000Z",
       "startDate": "2015-09-13T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [37.7291, 64.1971],
@@ -30568,7 +30337,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast&z={zoom}&x={x}&y={-y}",
       "endDate": "2012-07-09T00:00:00.000Z",
       "startDate": "2012-07-09T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [-81.62923, 82.4597],
@@ -30592,7 +30361,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast_2016&z={zoom}&x={x}&y={-y}",
       "endDate": "2012-07-15T00:00:00.000Z",
       "startDate": "2012-07-08T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [-78.89729, 82.17577],
@@ -30617,7 +30386,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00vis&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-08-21T00:00:00.000Z",
       "startDate": "2015-08-21T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [7.63568, 53.28027],
@@ -30640,7 +30409,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00ir&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-08-21T00:00:00.000Z",
       "startDate": "2015-08-21T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [7.63568, 53.28027],
@@ -30663,7 +30432,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=ngreenland_ast&z={zoom}&x={x}&y={-y}",
       "endDate": "2012-08-13T00:00:00.000Z",
       "startDate": "2005-06-21T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [-52.49222, 82.48972],
@@ -30690,7 +30459,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A1350972013086110KF&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-03-13T00:00:00.000Z",
       "startDate": "2013-03-13T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [73.2279, -53.20333],
@@ -30714,7 +30483,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R111_N09_20160604T154554&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-06-07T00:00:00.000Z",
       "startDate": "2016-06-07T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-80.01654, 8.84898],
@@ -30736,7 +30505,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A0120532016364110KF&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-12-30T00:00:00.000Z",
       "startDate": "2016-12-30T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-79.62539, 8.77083],
@@ -30760,7 +30529,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R078_N68_20160930T081002&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-09-30T00:00:00.000Z",
       "startDate": "2016-09-30T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [53.1802, 67.5344],
@@ -30787,7 +30556,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81511242016033LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-02-02T00:00:00.000Z",
       "startDate": "2016-02-02T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [-53.20922, -84.12525],
@@ -30811,7 +30580,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R136_N41_20150831T093006&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-08-31T00:00:00.000Z",
       "startDate": "2015-08-31T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [19.11233, 42.15316],
@@ -30833,7 +30602,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142622_03746_20110415_17533956&z={zoom}&x={x}&y={-y}",
       "endDate": "2011-04-15T00:00:00.000Z",
       "startDate": "2011-04-15T00:00:00.000Z",
-      "scaleExtent": [0, 15],
+      "zoomExtent": [0, 15],
       "polygon": [
         [
           [-51.23857, 68.79972],
@@ -30855,7 +30624,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81510432015030LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [67.9684, 22.36265],
@@ -30878,7 +30647,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R093_N41_20150828T092005&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-08-28T00:00:00.000Z",
       "startDate": "2015-08-28T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [23.80811, 41.58488],
@@ -30901,7 +30670,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81730602015040LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-02-09T00:00:00.000Z",
       "startDate": "2015-02-09T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [29.7663, 0.20689],
@@ -30923,7 +30692,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R078_N01_20160702T082522&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-07-02T00:00:00.000Z",
       "startDate": "2016-07-02T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [29.80514, 0.23586],
@@ -30945,7 +30714,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80611072014036LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2014-02-05T00:00:00.000Z",
       "startDate": "2014-02-05T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-180, -67.42635],
@@ -30967,7 +30736,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100972015347LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-12-13T00:00:00.000Z",
       "startDate": "2015-12-13T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-42.12875, -53.7205],
@@ -30989,7 +30758,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81130622013270LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-09-27T00:00:00.000Z",
       "startDate": "2013-09-27T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [120.84382, -3.59545],
@@ -31013,7 +30782,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80281222016035LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-02-04T00:00:00.000Z",
       "startDate": "2016-02-04T00:00:00.000Z",
-      "scaleExtent": [0, 10],
+      "zoomExtent": [0, 10],
       "polygon": [
         [
           [156.96951, -84.50098],
@@ -31040,7 +30809,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81030632015286LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-10-13T00:00:00.000Z",
       "startDate": "2015-10-13T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [136.4226, -4.2853],
@@ -31062,7 +30831,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R088_S05_20160812T011732&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-08-12T00:00:00.000Z",
       "startDate": "2016-08-12T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [136.8044, -4.2585],
@@ -31084,7 +30853,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=s2sval&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [16.6108, 76.4137],
@@ -31124,7 +30893,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142636_160xx_20110507_1822xxxx&z={zoom}&x={x}&y={-y}",
       "endDate": "2011-05-07T00:00:00.000Z",
       "startDate": "2011-05-07T00:00:00.000Z",
-      "scaleExtent": [0, 15],
+      "zoomExtent": [0, 15],
       "polygon": [
         [
           [-68.93977, 76.51133],
@@ -31148,7 +30917,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule2_2015.09.25&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-09-25T00:00:00.000Z",
       "startDate": "2015-09-25T00:00:00.000Z",
-      "scaleExtent": [0, 17],
+      "zoomExtent": [0, 17],
       "polygon": [
         [
           [-68.74292, 76.52636],
@@ -31174,7 +30943,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule_2015.10.06&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-10-06T00:00:00.000Z",
       "startDate": "2015-10-06T00:00:00.000Z",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "polygon": [
         [
           [-68.81924, 76.5251],
@@ -31199,7 +30968,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule_2015.09.25&z={zoom}&x={x}&y={-y}",
       "endDate": "2015-09-25T00:00:00.000Z",
       "startDate": "2015-09-25T00:00:00.000Z",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "polygon": [
         [
           [-68.77771, 76.50688],
@@ -31223,7 +30992,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R094_N79_20160812T105622&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-08-12T00:00:00.000Z",
       "startDate": "2016-08-12T00:00:00.000Z",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [78.45886, 80.72643],
@@ -31245,7 +31014,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80910682014358LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2014-12-24T00:00:00.000Z",
       "startDate": "2014-12-24T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [153.06138, -11.78923],
@@ -31268,7 +31037,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82330892016031LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-01-31T00:00:00.000Z",
       "startDate": "2016-01-31T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-72.86696, -41.51741],
@@ -31291,7 +31060,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R089_N52_20160623T024048&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-06-23T00:00:00.000Z",
       "startDate": "2016-06-23T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [126.36143, 51.37553],
@@ -31313,7 +31082,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=walps_autumn_2017&z={zoom}&x={x}&y={-y}",
       "endDate": "2017-10-17T00:00:00.000Z",
       "startDate": "2017-10-17T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [4.6412, 43.2493],
@@ -31342,7 +31111,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81490352013282LGN00&z={zoom}&x={x}&y={-y}",
       "endDate": "2013-10-09T00:00:00.000Z",
       "startDate": "2013-10-09T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [75.98364, 34.97851],
@@ -31364,7 +31133,7 @@
       "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R039_S15_20160510T145731&z={zoom}&x={x}&y={-y}",
       "endDate": "2016-05-10T00:00:00.000Z",
       "startDate": "2016-05-10T00:00:00.000Z",
-      "scaleExtent": [0, 14],
+      "zoomExtent": [0, 14],
       "polygon": [
         [
           [-71.18071, -14.49785],
@@ -31384,7 +31153,7 @@
       "name": "IPR ortofoto LAST (tmsproxy)",
       "type": "tms",
       "template": "https://osm-{switch:a,b,c}.zby.cz/tiles_ipr_last.php/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [1, 20],
+      "zoomExtent": [1, 20],
       "polygon": [
         [
           [14.81232, 49.93089],
@@ -31400,7 +31169,7 @@
       "name": "IPR ortofoto Low-Vegetation (tmsproxy)",
       "type": "tms",
       "template": "https://osm-{switch:a,b,c}.zby.cz/tiles_ipr_vege.php/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [1, 20],
+      "zoomExtent": [1, 20],
       "polygon": [
         [
           [14.30454, 49.99538],
@@ -31450,7 +31219,7 @@
       "name": "Ireland British War Office 1:25k GSGS 3906",
       "type": "tms",
       "template": "https://mapwarper.net/layers/tile/101/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
           [-9.31139, 51.43828],
@@ -31509,7 +31278,7 @@
       "name": "Israel Hiking",
       "type": "tms",
       "template": "https://israelhiking.osm.org.il/Tiles/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 16],
+      "zoomExtent": [7, 16],
       "polygon": [
         [
           [34.64563, 32.92073],
@@ -31564,7 +31333,7 @@
       "name": "Israel MTB",
       "type": "tms",
       "template": "https://israelhiking.osm.org.il/MTBTiles/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 16],
+      "zoomExtent": [7, 16],
       "polygon": [
         [
           [34.64563, 32.92073],
@@ -31993,7 +31762,7 @@
       "name": "Japan GSI ortho Imagery",
       "type": "tms",
       "template": "https://cyberjapandata.gsi.go.jp/xyz/ort/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [5, 19],
+      "zoomExtent": [5, 19],
       "polygon": [
         [
           [130.35021, 31.45741],
@@ -33982,7 +33751,7 @@
       "name": "Japan GSI Standard Map",
       "type": "tms",
       "template": "https://cyberjapandata.gsi.go.jp/xyz/std/{zoom}/{x}/{y}.png",
-      "scaleExtent": [5, 18],
+      "zoomExtent": [5, 18],
       "polygon": [
         [
           [141.85547, 44.64912],
@@ -34019,7 +33788,7 @@
       "template": "https://mapproxy.osm.ch/tiles/AGIS2014/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2014-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 19],
+      "zoomExtent": [8, 19],
       "polygon": [
         [
           [8.09602, 47.57882],
@@ -34636,7 +34405,7 @@
       "template": "https://mapproxy.osm.ch/tiles/AGIS2016/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 19],
+      "zoomExtent": [8, 19],
       "polygon": [
         [
           [7.70438, 47.55794],
@@ -34727,7 +34496,7 @@
       "template": "https://mapproxy.osm.ch/tiles/KTBASELLANDSCHAFT2015/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [18, 21],
+      "zoomExtent": [18, 21],
       "polygon": [
         [
           [7.37028, 47.41368],
@@ -34956,7 +34725,7 @@
       "template": "https://mapproxy.osm.ch/tiles/KTBASELSTADT2015/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [7.492, 47.4817],
@@ -34975,7 +34744,7 @@
       "template": "https://mapproxy.osm.ch/tiles/KTBASELSTADT2017/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2017-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [7.67138, 47.59522],
@@ -35036,7 +34805,7 @@
       "template": "https://mapproxy.osm.ch/tiles/sogis2014/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [15, 19],
+      "zoomExtent": [15, 19],
       "polygon": [
         [
           [7.95595, 47.47162],
@@ -35215,7 +34984,7 @@
       "projection": "EPSG:4326",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [15, 19],
+      "zoomExtent": [15, 19],
       "polygon": [
         [
           [7.57042, 47.15792],
@@ -35491,7 +35260,7 @@
       "name": "Kanton Thurgau OF 2017",
       "type": "tms",
       "template": "https://mapproxy.osm.ch/tiles/KTTHURGAU2017/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [8.63768, 47.70041],
@@ -35573,7 +35342,7 @@
       "template": "https://mapproxy.osm.ch/tiles/KTZUERICH2015/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [8.71338, 47.21388],
@@ -36084,7 +35853,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [8.71338, 47.21388],
@@ -36593,7 +36362,7 @@
       "type": "wms",
       "template": "https://openwms.statkart.no/skwms1/wms.adm_enheter?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=avtaltavgrensningslinje,territorialgrense,riksgrense,fylker,kommuner&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -36636,7 +36405,7 @@
       "type": "wms",
       "template": "https://openwms.statkart.no/skwms1/wms.nrl?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=nrl3_wms&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -36679,7 +36448,7 @@
       "type": "wms",
       "template": "https://wms.geonorge.no/skwms1/wms.matrikkel?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=matrikkel_WMS&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -36722,7 +36491,7 @@
       "type": "wms",
       "template": "https://openwms.statkart.no/skwms1/wms.topo4?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=hoydetall5linje,hoydetall5punkt,hoydepunkt,vannpunkt,hoydekurver_1m,hoydekurver_5m,N50Hoydekurver,N250Hoydekurver,N500Hoydekurver,N1000Hoydekurver,N2000Hoydekurver&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [9, 22],
+      "zoomExtent": [9, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -36765,7 +36534,7 @@
       "type": "wms",
       "template": "https://wms.geonorge.no/skwms1/wms.hoyde-dom_somlos_skyggerelieff?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=las_dom_skyggerelieff_somlos&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 24],
+      "zoomExtent": [0, 24],
       "polygon": [
         [
           [11.53568, 58.86659],
@@ -36930,7 +36699,7 @@
       "type": "wms",
       "template": "https://wms.geonorge.no/skwms1/wms.hoyde-dtm_somlos_skyggerelieff?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=las_dtm_skyggerelieff_somlos&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 24],
+      "zoomExtent": [0, 24],
       "polygon": [
         [
           [11.53568, 58.86659],
@@ -37095,7 +36864,7 @@
       "type": "wms",
       "template": "https://wms.geonorge.no/skwms1/wms.n5raster2?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=n5raster_foerstegang_metadata,n5raster_foerstegang&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [11, 20],
+      "zoomExtent": [11, 20],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -37137,7 +36906,7 @@
       "type": "wms",
       "template": "https://wms.geonorge.no/skwms1/wms.friluftsruter2?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Fotrute&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [6, 24],
+      "zoomExtent": [6, 24],
       "polygon": [
         [
           [11.53568, 58.86659],
@@ -37302,7 +37071,7 @@
       "name": "Kartverket Hillshade overlay",
       "type": "tms",
       "template": "https://opencache{switch:,2,3}.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=fjellskygge&zoom={zoom}&x={x}&y={y}",
-      "scaleExtent": [9, 15],
+      "zoomExtent": [9, 15],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -37345,7 +37114,7 @@
       "type": "wms",
       "template": "https://wms.geonorge.no/skwms1/wms.historiskekart?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=amt1&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [5, 15],
+      "zoomExtent": [5, 15],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -37386,7 +37155,7 @@
       "name": "Kartverket N50 topo",
       "type": "tms",
       "template": "https://opencache{switch:,2,3}.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={zoom}&x={x}&y={y}",
-      "scaleExtent": [3, 15],
+      "zoomExtent": [3, 15],
       "polygon": [
         [
           [11.53568, 58.86659],
@@ -37550,7 +37319,7 @@
       "name": "Kartverket Nautical Charts",
       "type": "tms",
       "template": "https://opencache{switch:,2,3}.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=sjokartraster&zoom={zoom}&x={x}&y={y}",
-      "scaleExtent": [3, 20],
+      "zoomExtent": [3, 20],
       "polygon": [
         [
           [-15.01273, -60.16205],
@@ -37605,7 +37374,7 @@
       "type": "wms",
       "template": "https://openwms.statkart.no/skwms1/wms.vegnett?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=all&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [3, 24],
+      "zoomExtent": [3, 24],
       "polygon": [
         [
           [11.53568, 58.86659],
@@ -37824,7 +37593,7 @@
       "type": "wms",
       "template": "http://mapserver.um.katowice.pl/services/ortowms/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=2&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [18.90884, 50.24006],
@@ -37879,7 +37648,7 @@
       "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/kelowna2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-05-14T00:00:00.000Z",
       "startDate": "2012-05-13T00:00:00.000Z",
-      "scaleExtent": [9, 20],
+      "zoomExtent": [9, 20],
       "polygon": [
         [
           [-119.58673, 49.79281],
@@ -37987,7 +37756,7 @@
       "name": "Kelowna Roads overlay",
       "type": "tms",
       "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/kelowna_overlay/{zoom}/{x}/{y}.png",
-      "scaleExtent": [9, 20],
+      "zoomExtent": [9, 20],
       "polygon": [
         [
           [-119.58673, 49.79281],
@@ -38096,7 +37865,7 @@
       "type": "wms",
       "template": "https://nfs.kystverket.no/arcgis/services/nfs/NFSSistOperativ/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=17,16,15,14,12,10,9,8,7,4&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [12, 19],
+      "zoomExtent": [12, 19],
       "polygon": [
         [
           [3.24857, 56.08599],
@@ -38139,7 +37908,7 @@
       "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/landsat_233055/{zoom}/{x}/{y}.png",
       "endDate": "2013-09-03T00:00:00.000Z",
       "startDate": "2013-09-03T00:00:00.000Z",
-      "scaleExtent": [5, 14],
+      "zoomExtent": [5, 14],
       "polygon": [
         [
           [-60.855, 6.1765],
@@ -38156,7 +37925,7 @@
       "name": "Lantmäteriet Economic Map (historic)",
       "type": "tms",
       "template": "https://mapproxy.openstreetmap.se/tms/1.0.0/ek_EPSG3857/{zoom}/{x}/{-y}.jpeg",
-      "scaleExtent": [3, 17],
+      "zoomExtent": [3, 17],
       "polygon": [
         [
           [12.71117, 55.2666],
@@ -38187,7 +37956,7 @@
       "type": "wms",
       "template": "https://api.lantmateriet.se/historiska-ortofoton/wms/v1/token/9b342b7d9f12d4ddb92277be9869d860/?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=OI.Histortho_60&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [5, 19],
+      "zoomExtent": [5, 19],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -38222,7 +37991,7 @@
       "type": "wms",
       "template": "https://api.lantmateriet.se/historiska-ortofoton/wms/v1/token/9b342b7d9f12d4ddb92277be9869d860/?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=OI.Histortho_75&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [5, 19],
+      "zoomExtent": [5, 19],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -38250,7 +38019,7 @@
       "template": "http://{switch:wmts1,wmts2}.geoportail.lu/opendata/wmts/ortho_latest/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2017-06-22T00:00:00.000Z",
       "startDate": "2017-06-14T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -38493,7 +38262,7 @@
       "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/landsat_047026/{zoom}/{x}/{y}.png",
       "endDate": "2013-09-12T00:00:00.000Z",
       "startDate": "2013-09-12T00:00:00.000Z",
-      "scaleExtent": [5, 13],
+      "zoomExtent": [5, 13],
       "polygon": [
         [
           [-121.93555, 47.78206],
@@ -38520,7 +38289,7 @@
       "template": "http://osmdata.asitvd.ch/tiles/lausanne2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [6.66668, 46.49441],
@@ -38548,7 +38317,7 @@
       "name": "LINZ NZ Aerial Imagery",
       "type": "tms",
       "template": "https://tiles-a.data-cdn.linz.govt.nz/services;key=3197c6d0e5cb494a95d58dc2de3216c2/tiles/v4/set=2/EPSG:3857/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [167.25037, -47.21957],
@@ -38638,7 +38407,7 @@
       "name": "LINZ NZ Topo50 Gridless Maps",
       "type": "tms",
       "template": "https://tiles-a.data-cdn.linz.govt.nz/services;key=3197c6d0e5cb494a95d58dc2de3216c2/tiles/v4/layer=2343/EPSG:3857/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [167.25037, -47.21957],
@@ -38729,7 +38498,7 @@
       "template": "https://ort10lt.openmap.lt/g16/{zoom}/{x}/{y}.jpeg",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2010-01-01T00:00:00.000Z",
-      "scaleExtent": [4, 18],
+      "zoomExtent": [4, 18],
       "polygon": [
         [
           [26.21384, 55.85075],
@@ -38845,7 +38614,7 @@
       "name": "Locator Overlay",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/openstreetmap.map-inh76ba2/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJjaml5MjVyb3MwMWV0M3hxYmUzdGdwbzE4In0.q548FjhsSJzvXsGlPsFxAQ",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "overzoom": false,
       "terms_url": "https://www.mapbox.com/about/maps",
       "terms_text": "Terms & Feedback",
@@ -38929,7 +38698,7 @@
       "projection": "EPSG:4326",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [19.55046, 51.68509],
@@ -39000,7 +38769,7 @@
       "projection": "EPSG:4326",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2017-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [19.55046, 51.68509],
@@ -39070,7 +38839,7 @@
       "template": "http://{switch:a,b,c,d,e,f,g,h}.tiles.cg44.makina-corpus.net/ortho-2012/{zoom}/{x}/{-y}.jpg",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-1.48638, 46.87691],
@@ -39408,7 +39177,7 @@
       "template": "https://siglon.londrina.pr.gov.br/arcgis/rest/services/Imagens/Ortofotos_2011_Paranacidade/MapServer/WMTS/tile/1.0.0/Imagens_Ortofotos_2011_Paranacidade/default/GoogleMapsCompatible/{zoom}/{y}/{x}",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-51.10903, -23.39275],
@@ -39714,7 +39483,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=4&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [159.00339, -31.48767],
@@ -39769,7 +39538,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=6&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [159.00339, -31.48767],
@@ -39824,7 +39593,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=1&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [159.00339, -31.48767],
@@ -39879,7 +39648,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=3&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [159.00339, -31.48767],
@@ -39934,7 +39703,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=2&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [159.00339, -31.48767],
@@ -39989,7 +39758,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=7&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [159.00339, -31.48767],
@@ -40043,7 +39812,7 @@
       "name": "LPI NSW Base Map",
       "type": "tms",
       "template": "https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Base_Map/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [1, 19],
+      "zoomExtent": [1, 19],
       "polygon": [
         [
           [140.99486, -28.95297],
@@ -40082,7 +39851,7 @@
       "name": "LPI NSW Imagery",
       "type": "tms",
       "template": "https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Imagery/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [1, 21],
+      "zoomExtent": [1, 21],
       "polygon": [
         [
           [140.98687, -28.98878],
@@ -40182,7 +39951,7 @@
       "type": "wms",
       "template": "https://maps.six.nsw.gov.au/arcgis/services/public/NSW_Imagery_Dates/MapServer/WMSServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}&LAYERS=0&STYLES=&FORMAT=image/png32&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [140.98687, -28.98878],
@@ -40281,7 +40050,7 @@
       "name": "LPI NSW Topographic Map",
       "type": "tms",
       "template": "https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Topo_Map/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [1, 16],
+      "zoomExtent": [1, 16],
       "polygon": [
         [
           [140.99884, -28.99924],
@@ -40502,7 +40271,7 @@
       "type": "wms",
       "template": "https://services.slip.wa.gov.au/public/services/SLIP_Public_Services/Transport/MapServer/WMSServer?LAYERS=8&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&FORMAT=image%2Fpng&SRS={proj}&BBOX={bbox}&WIDTH={width}&HEIGHT={height}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [129.00009, -31.68764],
@@ -40538,7 +40307,7 @@
       "type": "wms",
       "template": "https://gint.mainz.de/gint1-cgi/mapserv?map=/data/mapbender-int/umn-www/client/a62/luftbild.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Luftbild_f_mz_2016&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [17, 22],
+      "zoomExtent": [17, 22],
       "polygon": [
         [
           [8.10355, 49.865],
@@ -40575,7 +40344,7 @@
       "name": "Mapbox Satellite",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/mapbox.satellite/{zoom}/{x}/{y}.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJjaml5MjVyb3MwMWV0M3hxYmUzdGdwbzE4In0.q548FjhsSJzvXsGlPsFxAQ",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "terms_url": "https://www.mapbox.com/about/maps",
       "terms_text": "Terms & Feedback",
       "default": true,
@@ -41039,7 +40808,7 @@
       "projection": "EPSG:3857",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-76.23413, 37.92037],
@@ -41100,7 +40869,7 @@
       "type": "wms",
       "template": "https://geodata.md.gov/imap/services/Imagery/MD_ThreeInchImagery/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=MD_ThreeInchImagery&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-76.46299, 38.9808],
@@ -41766,7 +41535,7 @@
       "type": "wms",
       "template": "https://arcgisproxy.miljodirektoratet.no/arcgis/services/vern/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=naturvern_klasser_omrade,naturvern_punkt&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [-10.95725, 71.60964],
@@ -41831,7 +41600,7 @@
       "type": "wms",
       "template": "https://arcgisproxy.miljodirektoratet.no/arcgis/services/friluftsliv_statlig_sikra/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=friluftsliv_statlig_sikra&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -41932,7 +41701,7 @@
       "name": "MML Background Map",
       "type": "tms",
       "template": "http://tiles.kartat.kapsi.fi/taustakartta/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [2, 19],
+      "zoomExtent": [2, 19],
       "polygon": [
         [
           [27.96569, 70.0988],
@@ -42043,7 +41812,7 @@
       "name": "MML Orthophoto",
       "type": "tms",
       "template": "http://tiles.kartat.kapsi.fi/ortokuva/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [2, 19],
+      "zoomExtent": [2, 19],
       "polygon": [
         [
           [27.96569, 70.0988],
@@ -42155,7 +41924,7 @@
       "name": "MML Topographic Map",
       "type": "tms",
       "template": "http://tiles.kartat.kapsi.fi/peruskartta/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [2, 19],
+      "zoomExtent": [2, 19],
       "polygon": [
         [
           [27.96569, 70.0988],
@@ -42266,7 +42035,7 @@
       "name": "MTBmap.no",
       "type": "tms",
       "template": "https://mtbmap.no/tiles/osm/mtbmap/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [3, 14],
+      "zoomExtent": [3, 14],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -42310,7 +42079,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [11, 22],
+      "zoomExtent": [11, 22],
       "polygon": [
         [
           [11.48878, 48.053],
@@ -42381,7 +42150,7 @@
       "template": "https://geoportal.openlabs.cc/mapcache/tms/1.0.0/public-transport@GoogleMapsCompatibleExtended/{zoom}/{x}/{-y}.png",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2017-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [19.73762, 41.30154],
@@ -42403,7 +42172,7 @@
       "template": "https://geoportal.openlabs.cc/mapcache/tms/1.0.0/tirana@GoogleMapsCompatibleExtended/{zoom}/{x}/{-y}.png",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2017-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [19.70226, 41.1404],
@@ -42487,7 +42256,7 @@
       "template": "http://{switch:a,b,c,d}.imagery.paulnorman.ca/tiles/niger_oct_2012_321/{zoom}/{x}/{y}.png",
       "endDate": "2012-10-01T00:00:00.000Z",
       "startDate": "2012-10-01T00:00:00.000Z",
-      "scaleExtent": [1, 13],
+      "zoomExtent": [1, 13],
       "polygon": [
         [
           [-6.92922, 13.78574],
@@ -42514,7 +42283,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-05-03T00:00:00.000Z",
       "startDate": "2015-03-29T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-74.86599, 40.08543],
@@ -42611,7 +42380,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-05-03T00:00:00.000Z",
       "startDate": "2015-03-29T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-74.86599, 40.08543],
@@ -42706,7 +42475,7 @@
       "type": "tms",
       "template": "https://wmts.nlsc.gov.tw/wmts/EMAP5_OPENDATA/default/EPSG:3857/{zoom}/{y}/{x}",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 15],
+      "zoomExtent": [0, 15],
       "polygon": [
         [
           [120.45706, 26.39706],
@@ -42857,7 +42626,7 @@
       "name": "Nomes de Ruas IBGE Salvador-BA",
       "type": "tms",
       "template": "https://api.mapbox.com/styles/v1/wille/cj8lp78dn62wl2rquim47qo0g/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1Ijoid2lsbGUiLCJhIjoicFNVWk5VWSJ9.hluCd0YGvYHNlFi_utWe2g",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-38.48974, -12.81113],
@@ -42881,7 +42650,7 @@
       "name": "Nordic snowmobile overlay",
       "type": "tms",
       "template": "https://tiles.kelkkareitit.fi/kelkkareitit/{zoom}/{x}/{y}.png",
-      "scaleExtent": [3, 18],
+      "zoomExtent": [3, 18],
       "polygon": [
         [
           [27.53173, 60.21799],
@@ -42924,7 +42693,7 @@
       "name": "Norway Orthophoto",
       "type": "tms",
       "template": "https://waapi.webatlas.no/maptiles/tiles/webatlas-orto-newup/wa_grid/{zoom}/{x}/{y}.jpeg?api_key=b8e36d51-119a-423b-b156-d744d54123d5",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [11.53568, 58.86659],
@@ -43090,7 +42859,7 @@
       "type": "wms",
       "template": "http://npdwms.npd.no/NPD_FactMap.asp?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Surface_labels,Surface,Pipelines,Pipelines_labels,Fields_labels,Fields&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [6, 20],
+      "zoomExtent": [6, 20],
       "polygon": [
         [
           [8.51989, 57.6454],
@@ -43126,7 +42895,7 @@
       "type": "wms",
       "template": "https://gis3.nve.no/map/services/SkredSnoAktR/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Snoskred-Aktsomhetsomrader&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [5, 13],
+      "zoomExtent": [5, 13],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -43169,7 +42938,7 @@
       "type": "wms",
       "template": "https://gis3.nve.no/map/services/Nettanlegg1/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Sentralnett,Regionalnett,Distribusjonsnett,Sjokabler,Master og stolper,Transformatorstasjoner&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [6, 22],
+      "zoomExtent": [6, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -43212,7 +42981,7 @@
       "type": "wms",
       "template": "https://gis3.nve.no/map/services/Vannkraft1/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Vannkraftverk,Vannvei,Dam&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [6, 22],
+      "zoomExtent": [6, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -43255,7 +43024,7 @@
       "type": "wms",
       "template": "https://gis3.nve.no/map/services/Vindkraft/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Vindkraft_utbygd,Vindkraft_under_bygging,Vindkraftomrade_konsesjonsbehandling,Vindturbin_konsesjonsbehandling&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [6, 22],
+      "zoomExtent": [6, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -43300,7 +43069,7 @@
       "projection": "EPSG:3857",
       "endDate": "2018-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-74.91231, 45.03606],
@@ -43660,7 +43429,7 @@
       "name": "OpenStreetMap (Belgian Style - Dutch)",
       "type": "tms",
       "template": "https://tile.openstreetmap.be/osmbe-nl/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
           [5.47007, 49.49196],
@@ -44173,7 +43942,7 @@
       "name": "OpenStreetMap (Belgian Style - French)",
       "type": "tms",
       "template": "https://tile.openstreetmap.be/osmbe-fr/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
           [5.47007, 49.49196],
@@ -44686,7 +44455,7 @@
       "name": "OpenStreetMap (Standard)",
       "type": "tms",
       "template": "https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "terms_url": "https://www.openstreetmap.org",
       "terms_text": "© OpenStreetMap contributors, CC-BY-SA",
       "default": true,
@@ -44698,7 +44467,7 @@
       "name": "OpenStreetMap GPS traces",
       "type": "tms",
       "template": "https://{switch:a,b,c}.gps-tile.openstreetmap.org/lines/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "terms_url": "https://www.openstreetmap.org/copyright",
       "terms_text": "© OpenStreetMap contributors",
       "terms_html": "<span style='display: inline-block; padding: 0 8px; background-color: rgba(0,0,0,0.5);'><span style='color: #eee;'>GPS Direction:</span> <span style='font-size: 15px; padding-left: 2px; font-weight: bold;'> <span style='color: #0ee;'>&larr;</span> <span style='color: #96f;'>&darr;</span> <span style='color: #6e0;'>&uarr;</span> <span style='color: #f63;'>&rarr;</span> </span></span> © <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>.",
@@ -44711,7 +44480,7 @@
       "name": "openstreetmap.hu orthophotos",
       "type": "tms",
       "template": "http://adam.openstreetmap.hu/mapproxy/tiles/1.0.0/openstreetmap.hu.orthophotos/mercator/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [18.8577, 47.44553],
@@ -44917,7 +44686,7 @@
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2010/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2010-07-02T00:00:00.000Z",
       "startDate": "2010-06-24T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -45159,7 +44928,7 @@
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2013/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2013-07-20T00:00:00.000Z",
       "startDate": "2013-07-19T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -45401,7 +45170,7 @@
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2016/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2016-08-16T00:00:00.000Z",
       "startDate": "2013-08-30T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -45643,7 +45412,7 @@
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2017/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2017-06-22T00:00:00.000Z",
       "startDate": "2017-06-14T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -45934,7 +45703,7 @@
       "projection": "EPSG:3857",
       "endDate": "2006-01-01T00:00:00.000Z",
       "startDate": "2004-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 19],
+      "zoomExtent": [14, 19],
       "polygon": [
         [
           [-7.31278, 36.98391],
@@ -46006,7 +45775,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [1, 20],
+      "zoomExtent": [1, 20],
       "polygon": [
         [
           [-7.38968, 37.19205],
@@ -46099,7 +45868,7 @@
       "name": "OS 1:25k historic (OSM)",
       "type": "tms",
       "template": "https://ooc.openstreetmap.org/os1/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [6, 17],
+      "zoomExtent": [6, 17],
       "polygon": [
         [
           [-6.45854, 49.90441],
@@ -46395,7 +46164,7 @@
       "name": "OS New Popular Edition historic",
       "type": "tms",
       "template": "https://ooc.openstreetmap.org/npe/{zoom}/{x}/{y}.png",
-      "scaleExtent": [6, 15],
+      "zoomExtent": [6, 15],
       "polygon": [
         [
           [-3.68466, 55.23744],
@@ -46496,7 +46265,7 @@
       "name": "OS OpenData Locator",
       "type": "tms",
       "template": "http://tiles.itoworld.com/os_locator/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [-0.88639, 61.11666],
@@ -46531,7 +46300,7 @@
       "name": "OS OpenData StreetView",
       "type": "tms",
       "template": "https://{switch:a,b,c}.os.openstreetmap.org/sv/{zoom}/{x}/{y}.png",
-      "scaleExtent": [1, 18],
+      "zoomExtent": [1, 18],
       "polygon": [
         [
           [-5.82929, 50.02297],
@@ -46829,7 +46598,7 @@
       "name": "OS Scottish Popular historic",
       "type": "tms",
       "template": "https://ooc.openstreetmap.org/npescotland/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [6, 15],
+      "zoomExtent": [6, 15],
       "polygon": [
         [
           [-6.37546, 57.1045],
@@ -47125,7 +46894,7 @@
       "name": "OSMIE Baronies",
       "type": "tms",
       "template": "https://tile.openstreetmap.ie/barony/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47219,7 +46988,7 @@
       "name": "OSMIE Civil Parishes",
       "type": "tms",
       "template": "https://tile.openstreetmap.ie/civilparish/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47313,7 +47082,7 @@
       "name": "OSMIE Dail Election Areas",
       "type": "tms",
       "template": "https://tile.openstreetmap.ie/dail_ea/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47407,7 +47176,7 @@
       "name": "OSMIE EDs",
       "type": "tms",
       "template": "https://tile.openstreetmap.ie/ed/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47501,7 +47270,7 @@
       "name": "OSMIE Local Election Areas",
       "type": "tms",
       "template": "https://tile.openstreetmap.ie/local_ea/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47595,7 +47364,7 @@
       "name": "OSMIE T.ie Land not in Counties",
       "type": "tms",
       "template": "https://www.townlands.ie/tiles/not_counties/{zoom}/{x}/{y}.png",
-      "scaleExtent": [2, 19],
+      "zoomExtent": [2, 19],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47689,7 +47458,7 @@
       "name": "OSMIE Townlands",
       "type": "tms",
       "template": "https://tile.openstreetmap.ie/townland/{zoom}/{x}/{y}.png",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [-6.32987, 52.38838],
@@ -47920,7 +47689,7 @@
       "name": "Pangasinán/Bulacan (Philippines HiRes)",
       "type": "tms",
       "template": "https://gravitystorm.dev.openstreetmap.org/imagery/philippines/{zoom}/{x}/{y}.png",
-      "scaleExtent": [12, 19],
+      "zoomExtent": [12, 19],
       "polygon": [
         [
           [120.33659, 15.98577],
@@ -48517,7 +48286,7 @@
       "name": "PDOK aerial imagery Beeldmateriaal.nl 25cm latest",
       "type": "tms",
       "template": "https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wmts?FORMAT=image/jpeg&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=Actueel_ortho25&STYLE=&FORMAT=image/jpeg&tileMatrixSet=OGC:1.0:GoogleMapsCompatible&tileMatrix={zoom}&tileRow={y}&tileCol={x}",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [3.14377, 51.35984],
@@ -48661,7 +48430,7 @@
       "name": "PNOA Spain",
       "type": "tms",
       "template": "https://www.ign.es/wmts/pnoa-ma?request=GetTile&service=WMTS&VERSION=1.0.0&Layer=OI.OrthoimageCoverage&Style=default&Format=image/png&TileMatrixSet=GoogleMapsCompatible&TileMatrix={zoom}&TileRow={y}&TileCol={x}",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-17.88463, 28.44606],
@@ -49352,7 +49121,7 @@
       "type": "wms",
       "template": "http://wms.epodgik.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [15.9751, 54.37092],
@@ -49464,7 +49233,7 @@
       "type": "wms",
       "template": "https://debica.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki,adresy,EBU,EBT,S&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [21.53768, 50.01085],
@@ -49497,7 +49266,7 @@
       "type": "wms",
       "template": "https://lancut.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=EBT,budynki,adresy&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [22.17224, 50.10121],
@@ -49537,7 +49306,7 @@
       "type": "wms",
       "template": "https://lubaczow.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=S,EBT,adresy,budynki_ewid&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [23.29224, 50.09693],
@@ -49612,7 +49381,7 @@
       "type": "wms",
       "template": "https://spropczyce.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [21.60041, 50.21025],
@@ -49646,7 +49415,7 @@
       "type": "wms",
       "template": "https://powiatrzeszowski.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki,EBT,EBU&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [22.18219, 50.17339],
@@ -49684,7 +49453,7 @@
       "type": "wms",
       "template": "https://powiatrzeszowski.geoportal2.pl/map/wms/wms.php?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortofotomapa&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [22.18219, 50.17339],
@@ -49722,7 +49491,7 @@
       "type": "wms",
       "template": "https://stalowawola.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=EBT,adresy,budynki,centroidy&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [22.017, 50.35811],
@@ -49759,7 +49528,7 @@
       "projection": "EPSG:3857",
       "endDate": "2018-01-01T00:00:00.000Z",
       "startDate": "2018-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [16.72794, 52.48838],
@@ -49799,7 +49568,7 @@
       "projection": "EPSG:3857",
       "endDate": "2014-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [16.72794, 52.48838],
@@ -49839,7 +49608,7 @@
       "projection": "EPSG:3857",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [16.72794, 52.48838],
@@ -49877,7 +49646,7 @@
       "type": "wms",
       "template": "http://giswa1.mag.mepnet.cz/arcgis/services/MAP/letecke_snimky_posledni_snimkovani_cache/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [1, 20],
+      "zoomExtent": [1, 20],
       "polygon": [
         [
           [14.81232, 49.93089],
@@ -49894,7 +49663,7 @@
       "type": "wms",
       "template": "http://giswa1.mag.mepnet.cz/arcgis/services/MAP/mimovegetacni_snimkovani_cache/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [1, 20],
+      "zoomExtent": [1, 20],
       "polygon": [
         [
           [14.30454, 49.99538],
@@ -49945,7 +49714,7 @@
       "type": "wms",
       "template": "http://przemysl.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=adresy,budynki&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [22.72268, 49.76885],
@@ -49986,7 +49755,7 @@
       "type": "wms",
       "template": "http://przemysl.geoportal2.pl/map/wms/wms.php?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortofotomapa&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [22.72268, 49.76885],
@@ -50026,7 +49795,7 @@
       "name": "RABA-KGZ: Slovenia built-up areas",
       "type": "tms",
       "template": "http://wms.openstreetmap.de/tms/RABA3000/{zoom}/{x}/{y}.png",
-      "scaleExtent": [8, 19],
+      "zoomExtent": [8, 19],
       "polygon": [
         [
           [15.17101, 45.41273],
@@ -50218,7 +49987,7 @@
       "name": "RABA-KGZ: Slovenia farmland use",
       "type": "tms",
       "template": "http://wms.openstreetmap.de/tms/RABA/{zoom}/{x}/{y}.png",
-      "scaleExtent": [8, 19],
+      "zoomExtent": [8, 19],
       "polygon": [
         [
           [15.17101, 45.41273],
@@ -50411,7 +50180,7 @@
       "type": "wms",
       "template": "https://kart.ra.no/arcgis/services/Distribusjon/Kulturminner/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=3,6&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [13, 22],
+      "zoomExtent": [13, 22],
       "polygon": [
         [
           [-10.95725, 71.60964],
@@ -50640,7 +50409,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 13],
+      "zoomExtent": [0, 13],
       "polygon": [
         [
           [-42.30363, -22.43698],
@@ -50658,7 +50427,7 @@
       "name": "Route 500",
       "type": "tms",
       "template": "https://{switch:a,b,c}.tile.openstreetmap.fr/route500/{zoom}/{x}/{y}.png",
-      "scaleExtent": [12, 20],
+      "zoomExtent": [12, 20],
       "polygon": [
         [
           [-2.7, 43.9],
@@ -51238,7 +51007,7 @@
       "type": "wms",
       "template": "https://rudaslaska.geoportal2.pl/map/wmsorto/wms.php?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortofotomapa&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [18.84294, 50.32508],
@@ -51298,7 +51067,7 @@
       "type": "wms",
       "template": "http://wms.erzeszow.pl/?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=komunikacja,budynki,adresy&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [22.09538, 50.08157],
@@ -51346,7 +51115,7 @@
       "type": "wms",
       "template": "http://wms.erzeszow.pl/?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=rastry&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [22.09538, 50.08157],
@@ -51395,7 +51164,7 @@
       "template": "http://imagery-pr-usace-2013.s3-website-us-east-1.amazonaws.com/tiles/{zoom}/{x}/{y}.jpg",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-66.15007, 18.35002],
@@ -52338,7 +52107,7 @@
       "name": "SDFE aerial imagery",
       "type": "tms",
       "template": "https://osmtools.septima.dk/mapproxy/tiles/1.0.0/kortforsyningen_ortoforaar/EPSG3857/{zoom}/{x}/{y}.jpeg",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.37439, 54.95517],
@@ -52517,7 +52286,7 @@
       "type": "wms",
       "template": "https://kortforsyningen.kms.dk/cp_inspire?login=OpenStreetMapDK2015&password=Gall4Peters&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=CP.CadastralParcel&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [8.37439, 54.95517],
@@ -52694,7 +52463,7 @@
       "type": "wms",
       "template": "https://kortforsyningen.kms.dk/topo25?FORMAT=image/png&VERSION=1.1.1&login=OpenStreetMapDK2015&password=Gall4Peters&SERVICE=WMS&REQUEST=GetMap&Layers=topo25_klassisk&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [8.37439, 54.95517],
@@ -52871,7 +52640,7 @@
       "type": "wms",
       "template": "https://kortforsyningen.kms.dk/topo_skaermkort?FORMAT=image/png&VERSION=1.1.1&login=OpenStreetMapDK2015&password=Gall4Peters&SERVICE=WMS&REQUEST=GetMap&Layers=dtk_skaermkort&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [8.37439, 54.95517],
@@ -53048,7 +52817,7 @@
       "type": "wms",
       "template": "https://kortforsyningen.kms.dk/dhm?login=OpenStreetMapDK2015&password=Gall4Peters&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=dhm_overflade_skyggekort&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [8.37439, 54.95517],
@@ -53225,7 +52994,7 @@
       "type": "wms",
       "template": "https://kortforsyningen.kms.dk/dhm?login=OpenStreetMapDK2015&password=Gall4Peters&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=dhm_terraen_skyggekort&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [8.37439, 54.95517],
@@ -53426,7 +53195,7 @@
       "type": "wms",
       "template": "https://siemianowice.geoportal2.pl/map/wms/wms.php?FORMAT=image/png&transparent=true&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki,drogi,adresy,ulice&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [19.03103, 50.33933],
@@ -53459,7 +53228,7 @@
       "type": "wms",
       "template": "https://siemianowice.geoportal2.pl/map/wms/wms.php?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortofotomapa&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:4326",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [19.03103, 50.33933],
@@ -53805,7 +53574,7 @@
       "template": "http://osmdata.asitvd.ch/tiles/sigip2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [6.71057, 46.54396],
@@ -53833,7 +53602,7 @@
       "name": "Slovakia Historic Maps",
       "type": "tms",
       "template": "http://tms.freemap.sk/historicke/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 12],
+      "zoomExtent": [0, 12],
       "polygon": [
         [
           [16.81969, 47.49272],
@@ -53850,7 +53619,7 @@
       "name": "Snowmobile map Sweden",
       "type": "tms",
       "template": "https://tiles.skoterleder.org/tiles/{zoom}/{x}/{y}.png",
-      "scaleExtent": [5, 14],
+      "zoomExtent": [5, 14],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -53888,7 +53657,7 @@
       "template": "http://adam.openstreetmap.hu/mapproxy/tiles/1.0.0/Soskut-Tarnok-Pusztazamor-Diosd/mercator/{zoom}/{x}/{y}.png",
       "endDate": "2017-03-01T00:00:00.000Z",
       "startDate": "2017-03-01T00:00:00.000Z",
-      "scaleExtent": [11, 20],
+      "zoomExtent": [11, 20],
       "polygon": [
         [
           [18.79273, 47.37079],
@@ -54016,7 +53785,7 @@
       "name": "South Africa CD:NGI Aerial",
       "type": "tms",
       "template": "http://{switch:a,b,c}.aerial.openstreetmap.org.za/ngi-aerial/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [1, 22],
+      "zoomExtent": [1, 22],
       "polygon": [
         [
           [17.83968, -32.79834],
@@ -54326,7 +54095,7 @@
       "template": "https://geoservices.buergernetz.bz.it/geoserver/gwc/service/wmts/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=P_BZ_OF_2011_EPSG3857&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=GoogleMapsCompatible%3A{zoom}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
           [10.38615, 46.68821],
@@ -55295,299 +55064,272 @@
       "template": "https://geoservices.buergernetz.bz.it/geoserver/gwc/service/wmts/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=P_BZ_OF_2014_EPSG3857&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=GoogleMapsCompatible%3A{zoom}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg",
       "endDate": "2014-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
-          [12.23442, 46.84254],
-          [12.24913, 46.82785],
-          [12.24913, 46.81945],
-          [12.25753, 46.81735],
-          [12.26173, 46.80686],
-          [12.26594, 46.80686],
-          [12.26804, 46.79637],
-          [12.26173, 46.79427],
-          [12.27014, 46.78587],
-          [12.27224, 46.76908],
-          [12.28485, 46.76698],
-          [12.29745, 46.7439],
-          [12.30166, 46.7439],
-          [12.30166, 46.7376],
-          [12.28695, 46.7376],
-          [12.23652, 46.72081],
-          [12.18819, 46.71451],
-          [12.16298, 46.70192],
-          [12.10835, 46.69353],
-          [12.08944, 46.68303],
-          [12.05792, 46.68093],
-          [12.04531, 46.67464],
-          [12.03481, 46.67464],
-          [12.03061, 46.68303],
-          [12.0096, 46.68303],
-          [11.98438, 46.66834],
-          [11.94866, 46.66414],
-          [11.93816, 46.65575],
-          [11.90874, 46.64525],
-          [11.89193, 46.64525],
-          [11.8457, 46.62846],
-          [11.82049, 46.62636],
-          [11.80998, 46.60748],
-          [11.79528, 46.60328],
-          [11.78897, 46.59069],
-          [11.78057, 46.58859],
-          [11.76586, 46.55501],
-          [11.75325, 46.54871],
-          [11.73855, 46.52982],
-          [11.73224, 46.52982],
-          [11.72384, 46.51513],
-          [11.71543, 46.51513],
-          [11.71333, 46.50254],
-          [11.70913, 46.50254],
-          [11.70913, 46.49624],
-          [11.69652, 46.48575],
-          [11.69442, 46.47735],
-          [11.66711, 46.47525],
-          [11.66711, 46.44587],
-          [11.6608, 46.44587],
-          [11.64399, 46.45846],
-          [11.63769, 46.45846],
-          [11.63349, 46.44587],
-          [11.62508, 46.44797],
+          [11.71495, 46.51227],
+          [11.69889, 46.50218],
+          [11.6672, 46.49647],
+          [11.64515, 46.49743],
+          [11.63849, 46.50051],
+          [11.63495, 46.49486],
+          [11.64297, 46.49346],
+          [11.65174, 46.48271],
+          [11.64536, 46.47189],
+          [11.64179, 46.47439],
+          [11.62679, 46.4708],
+          [11.62987, 46.46377],
+          [11.61882, 46.44325],
+          [11.61936, 46.43957],
           [11.62508, 46.43957],
-          [11.61878, 46.43957],
-          [11.61458, 46.42278],
-          [11.61037, 46.42278],
-          [11.61037, 46.41649],
-          [11.62508, 46.41229],
-          [11.62508, 46.3934],
-          [11.61458, 46.38291],
-          [11.60617, 46.38291],
-          [11.60407, 46.37241],
-          [11.58306, 46.37241],
-          [11.58306, 46.34932],
-          [11.55995, 46.32414],
-          [11.53894, 46.32834],
-          [11.53894, 46.34513],
-          [11.52423, 46.34723],
-          [11.50111, 46.34723],
-          [11.49901, 46.32834],
-          [11.48851, 46.33044],
-          [11.49271, 46.32204],
-          [11.41917, 46.32414],
-          [11.41707, 46.25278],
-          [11.35613, 46.24858],
-          [11.34773, 46.25698],
-          [11.34563, 46.26747],
-          [11.34143, 46.26747],
-          [11.33722, 46.25068],
-          [11.31201, 46.24858],
-          [11.30991, 46.25278],
-          [11.3015, 46.25278],
-          [11.2889, 46.24019],
-          [11.2889, 46.2234],
-          [11.25108, 46.2234],
-          [11.24898, 46.2129],
-          [11.16283, 46.215],
-          [11.16283, 46.24858],
-          [11.12711, 46.24858],
-          [11.13131, 46.25278],
-          [11.12291, 46.25488],
-          [11.12501, 46.29895],
-          [11.16283, 46.29895],
-          [11.16283, 46.36821],
-          [11.16703, 46.36821],
-          [11.16703, 46.38081],
-          [11.17543, 46.3871],
-          [11.17754, 46.3997],
-          [11.20485, 46.3997],
-          [11.20695, 46.42068],
-          [11.19014, 46.42068],
-          [11.19014, 46.42698],
-          [11.19435, 46.42698],
-          [11.19855, 46.44167],
-          [11.20485, 46.44587],
-          [11.20695, 46.47315],
-          [11.19014, 46.47525],
-          [11.18804, 46.48365],
-          [11.15232, 46.47525],
-          [11.08298, 46.47525],
-          [11.08088, 46.43537],
-          [11.04096, 46.42068],
-          [11.01154, 46.42068],
-          [10.99894, 46.44587],
-          [10.98843, 46.44587],
-          [10.98423, 46.45217],
-          [10.96952, 46.45217],
-          [10.96112, 46.48365],
-          [10.95691, 46.48365],
-          [10.95481, 46.49414],
-          [10.94851, 46.49624],
-          [10.94431, 46.50673],
-          [10.91069, 46.49624],
-          [10.90018, 46.49624],
-          [10.89808, 46.51093],
-          [10.85606, 46.50254],
-          [10.84135, 46.54241],
-          [10.86446, 46.54661],
-          [10.86236, 46.55081],
-          [10.76571, 46.54031],
-          [10.72158, 46.55081],
-          [10.59762, 46.55291],
-          [10.5619, 46.54871],
-          [10.53668, 46.55291],
-          [10.50096, 46.54871],
-          [10.48415, 46.55501],
-          [10.46314, 46.55501],
-          [10.47155, 46.5676],
-          [10.47365, 46.59069],
-          [10.47785, 46.59069],
-          [10.47785, 46.61797],
-          [10.46944, 46.62636],
-          [10.44843, 46.63476],
-          [10.42532, 46.62846],
-          [10.3938, 46.63056],
-          [10.3896, 46.64525],
-          [10.3812, 46.64735],
-          [10.3833, 46.66414],
-          [10.3791, 46.66834],
-          [10.3791, 46.69353],
-          [10.3854, 46.72081],
-          [10.3896, 46.72081],
-          [10.3938, 46.7376],
-          [10.41692, 46.75229],
-          [10.41692, 46.78587],
-          [10.42112, 46.79847],
-          [10.42532, 46.79847],
-          [10.42532, 46.80686],
-          [10.43373, 46.81106],
-          [10.43793, 46.79007],
-          [10.44423, 46.78377],
-          [10.44843, 46.7439],
-          [10.45264, 46.7439],
-          [10.45684, 46.72711],
-          [10.46104, 46.72711],
-          [10.46524, 46.71032],
-          [10.46944, 46.71032],
-          [10.47365, 46.67254],
-          [10.47995, 46.67044],
-          [10.48415, 46.65575],
-          [10.48836, 46.65575],
-          [10.48415, 46.62846],
-          [10.48836, 46.62846],
-          [10.48836, 46.62217],
-          [10.49886, 46.62007],
-          [10.52828, 46.62427],
-          [10.49886, 46.63056],
-          [10.49886, 46.64525],
-          [10.50516, 46.64316],
-          [10.49886, 46.66204],
-          [10.51777, 46.65785],
-          [10.58921, 46.66204],
-          [10.63123, 46.65365],
-          [10.79302, 46.65575],
-          [10.79723, 46.65155],
-          [10.88127, 46.65155],
-          [10.89178, 46.65785],
-          [10.9275, 46.66414],
-          [10.94431, 46.67464],
-          [10.98003, 46.67464],
-          [11.00104, 46.68303],
-          [11.02415, 46.68303],
-          [11.05147, 46.69772],
-          [11.12711, 46.70822],
-          [11.13971, 46.71242],
-          [11.14392, 46.71871],
-          [11.17543, 46.72081],
-          [11.19855, 46.7334],
-          [11.24898, 46.7355],
-          [11.25318, 46.72291],
-          [11.2952, 46.72921],
-          [11.30571, 46.70822],
-          [11.31831, 46.70822],
-          [11.33722, 46.71871],
-          [11.38555, 46.72081],
-          [11.43178, 46.7376],
-          [11.50952, 46.7439],
-          [11.54734, 46.75649],
-          [11.56835, 46.75649],
-          [11.58306, 46.76698],
-          [11.60617, 46.76908],
-          [11.61037, 46.77538],
-          [11.69862, 46.79427],
-          [11.71753, 46.79427],
-          [11.72174, 46.79007],
-          [11.73855, 46.75859],
-          [11.74905, 46.75019],
-          [11.76166, 46.70192],
-          [11.76586, 46.70192],
-          [11.78687, 46.71661],
-          [11.8331, 46.72291],
-          [11.86041, 46.7376],
-          [11.90874, 46.7439],
-          [11.92135, 46.75229],
-          [11.95286, 46.75859],
-          [11.95917, 46.76488],
-          [11.99489, 46.77538],
-          [12.00749, 46.77538],
-          [12.0096, 46.77958],
-          [12.03061, 46.78168],
-          [12.05792, 46.79427],
-          [12.09995, 46.79847],
-          [12.13566, 46.81316],
-          [12.15878, 46.81316],
-          [12.18609, 46.82785],
-          [12.21551, 46.83205],
-          [12.23442, 46.84254]
+          [11.62508, 46.44797],
+          [11.63349, 46.44587],
+          [11.63769, 46.45846],
+          [11.64399, 46.45846],
+          [11.6608, 46.44587],
+          [11.66711, 46.44587],
+          [11.66711, 46.47525],
+          [11.69442, 46.47735],
+          [11.69652, 46.48575],
+          [11.70913, 46.49624],
+          [11.70913, 46.50254],
+          [11.71333, 46.50254],
+          [11.71495, 46.51227]
         ],
         [
-          [11.97388, 46.96637],
-          [11.99489, 46.96007],
-          [11.99489, 46.95587],
-          [12.0096, 46.95797],
-          [12.0117, 46.94748],
-          [12.0159, 46.94748],
-          [12.0117, 46.94118],
-          [12.018, 46.93908],
-          [12.02851, 46.92229],
-          [12.00749, 46.9118],
-          [11.97388, 46.9055],
-          [11.95707, 46.89501],
-          [11.91714, 46.88871],
-          [11.85831, 46.86982],
-          [11.8394, 46.86982],
-          [11.80158, 46.85303],
-          [11.76166, 46.84464],
-          [11.74905, 46.83415],
-          [11.68181, 46.81945],
-          [11.67971, 46.81526],
-          [11.6545, 46.81106],
-          [11.64399, 46.80476],
-          [11.63769, 46.80686],
-          [11.63139, 46.82155],
-          [11.62508, 46.82155],
-          [11.62298, 46.83205],
-          [11.61037, 46.84464],
-          [11.61668, 46.84884],
-          [11.61458, 46.85723],
-          [11.61037, 46.85723],
-          [11.61668, 46.86563],
-          [11.64609, 46.86563],
-          [11.68602, 46.88242],
-          [11.69022, 46.88871],
-          [11.74905, 46.89711],
-          [11.75325, 46.90341],
-          [11.78057, 46.9076],
-          [11.80158, 46.9202],
-          [11.8457, 46.92649],
-          [11.87722, 46.94118],
-          [11.89613, 46.94328],
-          [11.92135, 46.95797],
-          [11.96757, 46.96217],
-          [11.97388, 46.96637]
+          [11.61435, 46.41535],
+          [11.60161, 46.39731],
+          [11.60307, 46.38924],
+          [11.5932, 46.38265],
+          [11.56489, 46.38018],
+          [11.55878, 46.35076],
+          [11.55249, 46.34418],
+          [11.54423, 46.34483],
+          [11.53837, 46.35015],
+          [11.52445, 46.35502],
+          [11.47969, 46.36277],
+          [11.48052, 46.3551],
+          [11.46322, 46.34922],
+          [11.45556, 46.33396],
+          [11.42105, 46.32441],
+          [11.40517, 46.32387],
+          [11.39865, 46.31426],
+          [11.39994, 46.30709],
+          [11.39569, 46.3083],
+          [11.38188, 46.30052],
+          [11.36088, 46.29906],
+          [11.36078, 46.29682],
+          [11.38256, 46.29177],
+          [11.3871, 46.28143],
+          [11.39609, 46.27423],
+          [11.39862, 46.264],
+          [11.38756, 46.26029],
+          [11.37347, 46.2629],
+          [11.36836, 46.26135],
+          [11.35783, 46.26481],
+          [11.35495, 46.27564],
+          [11.33912, 46.28306],
+          [11.33379, 46.29049],
+          [11.33471, 46.2962],
+          [11.3129, 46.28256],
+          [11.31737, 46.27303],
+          [11.30645, 46.25786],
+          [11.29124, 46.2604],
+          [11.24743, 46.22933],
+          [11.20622, 46.2187],
+          [11.18267, 46.22496],
+          [11.17077, 46.23806],
+          [11.17994, 46.24434],
+          [11.18351, 46.25269],
+          [11.18935, 46.25354],
+          [11.19448, 46.2461],
+          [11.20029, 46.25566],
+          [11.16604, 46.26129],
+          [11.14885, 46.27904],
+          [11.13725, 46.28336],
+          [11.14293, 46.28934],
+          [11.15847, 46.29059],
+          [11.16439, 46.2986],
+          [11.1761, 46.30346],
+          [11.1847, 46.32104],
+          [11.18894, 46.32151],
+          [11.18696, 46.32673],
+          [11.1942, 46.33016],
+          [11.20204, 46.34212],
+          [11.19001, 46.35984],
+          [11.19263, 46.36578],
+          [11.20393, 46.36765],
+          [11.19792, 46.37232],
+          [11.21275, 46.39804],
+          [11.21345, 46.40675],
+          [11.20644, 46.4156],
+          [11.20485, 46.3997],
+          [11.17754, 46.3997],
+          [11.17543, 46.3871],
+          [11.16703, 46.38081],
+          [11.16703, 46.36821],
+          [11.16283, 46.36821],
+          [11.16283, 46.29895],
+          [11.12501, 46.29895],
+          [11.12291, 46.25488],
+          [11.13131, 46.25278],
+          [11.12711, 46.24858],
+          [11.16283, 46.24858],
+          [11.16283, 46.215],
+          [11.24898, 46.2129],
+          [11.25108, 46.2234],
+          [11.2889, 46.2234],
+          [11.2889, 46.24019],
+          [11.3015, 46.25278],
+          [11.30991, 46.25278],
+          [11.31201, 46.24858],
+          [11.33722, 46.25068],
+          [11.34143, 46.26747],
+          [11.34563, 46.26747],
+          [11.34773, 46.25698],
+          [11.35613, 46.24858],
+          [11.41707, 46.25278],
+          [11.41917, 46.32414],
+          [11.49271, 46.32204],
+          [11.48851, 46.33044],
+          [11.49901, 46.32834],
+          [11.50111, 46.34723],
+          [11.52423, 46.34723],
+          [11.53894, 46.34513],
+          [11.53894, 46.32834],
+          [11.55995, 46.32414],
+          [11.58306, 46.34932],
+          [11.58306, 46.37241],
+          [11.60407, 46.37241],
+          [11.60617, 46.38291],
+          [11.61458, 46.38291],
+          [11.62508, 46.3934],
+          [11.62508, 46.41229],
+          [11.61435, 46.41535]
+        ],
+        [
+          [11.20663, 46.41745],
+          [11.21026, 46.4206],
+          [11.20347, 46.42682],
+          [11.21416, 46.43556],
+          [11.21634, 46.44255],
+          [11.20903, 46.45293],
+          [11.21419, 46.45807],
+          [11.21736, 46.45731],
+          [11.21886, 46.46199],
+          [11.21626, 46.47277],
+          [11.20939, 46.481],
+          [11.20876, 46.49346],
+          [11.19608, 46.50241],
+          [11.1924, 46.501],
+          [11.18686, 46.50734],
+          [11.18002, 46.49823],
+          [11.17014, 46.49635],
+          [11.16095, 46.4878],
+          [11.12934, 46.48058],
+          [11.1103, 46.49643],
+          [11.10449, 46.4948],
+          [11.08812, 46.50128],
+          [11.08173, 46.53021],
+          [11.05915, 46.51508],
+          [11.03795, 46.51357],
+          [11.05006, 46.50784],
+          [11.05773, 46.49235],
+          [11.06278, 46.4894],
+          [11.06894, 46.46619],
+          [11.07625, 46.45487],
+          [11.0778, 46.44569],
+          [11.07301, 46.44042],
+          [11.05394, 46.44849],
+          [11.0414, 46.44569],
+          [11.02817, 46.46116],
+          [11.00952, 46.46917],
+          [11.00462, 46.47607],
+          [10.98695, 46.48289],
+          [10.96543, 46.48103],
+          [10.96285, 46.47718],
+          [10.96952, 46.45217],
+          [10.98423, 46.45217],
+          [10.98843, 46.44587],
+          [10.99894, 46.44587],
+          [11.01154, 46.42068],
+          [11.04096, 46.42068],
+          [11.08088, 46.43537],
+          [11.08298, 46.47525],
+          [11.15232, 46.47525],
+          [11.18804, 46.48365],
+          [11.19014, 46.47525],
+          [11.20695, 46.47315],
+          [11.20485, 46.44587],
+          [11.19855, 46.44167],
+          [11.19435, 46.42698],
+          [11.19014, 46.42698],
+          [11.19014, 46.42068],
+          [11.20695, 46.42068],
+          [11.20663, 46.41745]
+        ],
+        [
+          [10.47433, 46.55501],
+          [10.47617, 46.55749],
+          [10.47321, 46.56701],
+          [10.48305, 46.5777],
+          [10.48575, 46.58921],
+          [10.48221, 46.59199],
+          [10.48576, 46.59805],
+          [10.48291, 46.60512],
+          [10.49055, 46.61394],
+          [10.46952, 46.62628],
+          [10.47785, 46.61797],
+          [10.47785, 46.59069],
+          [10.47365, 46.59069],
+          [10.47155, 46.5676],
+          [10.46314, 46.55501],
+          [10.47433, 46.55501]
+        ],
+        [
+          [10.46925, 46.62643],
+          [10.44632, 46.63989],
+          [10.40935, 46.63389],
+          [10.40011, 46.63648],
+          [10.39873, 46.6455],
+          [10.38946, 46.65862],
+          [10.39057, 46.67089],
+          [10.3803, 46.68399],
+          [10.38615, 46.68821],
+          [10.39201, 46.69016],
+          [10.40215, 46.70624],
+          [10.41274, 46.70821],
+          [10.41622, 46.71479],
+          [10.4168, 46.71847],
+          [10.39934, 46.73435],
+          [10.43464, 46.75356],
+          [10.44107, 46.75413],
+          [10.44011, 46.77149],
+          [10.42123, 46.78861],
+          [10.42845, 46.79755],
+          [10.43626, 46.79843],
+          [10.43373, 46.81106],
+          [10.42532, 46.80686],
+          [10.42532, 46.79847],
+          [10.42112, 46.79847],
+          [10.41692, 46.78587],
+          [10.41692, 46.75229],
+          [10.3938, 46.7376],
+          [10.3896, 46.72081],
+          [10.3854, 46.72081],
+          [10.3791, 46.69353],
+          [10.3791, 46.66834],
+          [10.3833, 46.66414],
+          [10.3812, 46.64735],
+          [10.3896, 46.64525],
+          [10.3938, 46.63056],
+          [10.42532, 46.62846],
+          [10.44843, 46.63476],
+          [10.46925, 46.62643]
         ]
       ],
       "terms_url": "https://geoservices.buergernetz.bz.it/geokatalog/",
-      "terms_text": "© Autonomen Provinz Bozen/Provincia Autonoma di Bolzano CC-BY 3.0",
-      "best": true
+      "terms_text": "© Autonomen Provinz Bozen/Provincia Autonoma di Bolzano CC-BY 3.0"
     },
     {
       "id": "South-Tyrol-Orthofoto-2014-2015",
@@ -55596,7 +55338,7 @@
       "template": "https://geoservices.buergernetz.bz.it/geoserver/gwc/service/wmts/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=P_BZ_OF_2014_2015_EPSG3857&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=GoogleMapsCompatible%3A{zoom}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg",
       "endDate": "2015-11-01T00:00:00.000Z",
       "startDate": "2014-07-01T00:00:00.000Z",
-      "scaleExtent": [0, 18],
+      "zoomExtent": [0, 18],
       "polygon": [
         [
           [10.38615, 46.68821],
@@ -56079,7 +55821,7 @@
       "name": "South Tyrol Topomap",
       "type": "tms",
       "template": "https://geoservices.buergernetz.bz.it/geoserver/gwc/service/wmts/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=P_BZ_BASEMAP_TOPO&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=GoogleMapsCompatible%3A{zoom}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [10.38615, 46.68821],
@@ -57519,7 +57261,7 @@
       "type": "wms",
       "template": "https://ogc.ssb.no/wms.ashx?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=layer_193&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -57562,7 +57304,7 @@
       "type": "wms",
       "template": "https://ogc.ssb.no/wms.ashx?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=layer_198&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [31.90425, 70.43681],
@@ -57606,7 +57348,7 @@
       "template": "https://mapproxy.osm.ch/tiles/bern2016/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2016-01-01T00:00:00.000Z",
       "startDate": "2016-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [7.29431, 46.92376],
@@ -57709,7 +57451,7 @@
       "template": "https://mapproxy.osm.ch/tiles/bern2012/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 19],
+      "zoomExtent": [14, 19],
       "polygon": [
         [
           [7.3807, 47.00952],
@@ -57780,7 +57522,7 @@
       "template": "https://mapproxy.osm.ch/tiles/uster/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2008-01-01T00:00:00.000Z",
       "startDate": "2008-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.68, 47.32],
@@ -57799,7 +57541,7 @@
       "template": "https://mapproxy.osm.ch/tiles/zh_luftbild2011/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.44624, 47.44143],
@@ -57816,7 +57558,7 @@
       "name": "Stadtplan Zürich",
       "type": "tms",
       "template": "https://mapproxy.osm.ch/tiles/zh_stadtplan/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.56681, 47.34713],
@@ -58302,7 +58044,7 @@
       "name": "Stamen Terrain",
       "type": "tms",
       "template": "https://stamen-tiles-{switch:a,b,c,d}.a.ssl.fastly.net/terrain-background/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [4, 18],
+      "zoomExtent": [4, 18],
       "terms_url": "http://maps.stamen.com/#terrain",
       "terms_text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL",
       "icon": "https://stamen.com/wp-content/uploads/2016/07/stamen_compass_rose_small-01.png"
@@ -58314,7 +58056,7 @@
       "template": "https://{switch:a,b,c}.surrey.aerial.openstreetmap.org.uk/layer/gb_surrey_aerial/{zoom}/{x}/{y}.png",
       "endDate": "2009-01-01T00:00:00.000Z",
       "startDate": "2007-01-01T00:00:00.000Z",
-      "scaleExtent": [8, 21],
+      "zoomExtent": [8, 21],
       "polygon": [
         [
           [-0.75248, 51.08219],
@@ -58447,7 +58189,7 @@
       "projection": "EPSG:4326",
       "endDate": "2008-01-01T00:00:00.000Z",
       "startDate": "2008-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [18.92818, 50.32151],
@@ -58496,7 +58238,7 @@
       "projection": "EPSG:4326",
       "endDate": "2009-01-01T00:00:00.000Z",
       "startDate": "2009-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [18.92818, 50.32151],
@@ -58545,7 +58287,7 @@
       "projection": "EPSG:4326",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [18.92818, 50.32151],
@@ -58593,7 +58335,7 @@
       "template": "http://e.tile.openstreetmap.hu/szeged-2011-10cm/{zoom}/{x}/{y}.png",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [10, 22],
+      "zoomExtent": [10, 22],
       "polygon": [
         [
           [20.14599, 46.22811],
@@ -58661,7 +58403,7 @@
       "name": "Taiwan e-Map Open Data",
       "type": "tms",
       "template": "https://wmts.nlsc.gov.tw/wmts/EMAP6_OPENDATA/default/GoogleMapsCompatible/{zoom}/{y}/{x}",
-      "scaleExtent": [0, 15],
+      "zoomExtent": [0, 15],
       "polygon": [
         [
           [120.45706, 26.39706],
@@ -59110,7 +58852,7 @@
       "id": "TEClines",
       "name": "TEC bus lines",
       "type": "wms",
-      "template": "https://geodata.tec-wl.be/arcgis/rest/services/Lignes/MapServer/export?f=image&format=png8&transparent=True&SRS={proj}&bboxSR=3857&imageSR=3857&bbox={bbox}&size={width},{height}",
+      "template": "https://geodata.tec-wl.be/arcgis/services/Lignes/MapServer/WMSServer?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -59169,7 +58911,7 @@
       "id": "TECstops",
       "name": "TEC bus stops",
       "type": "wms",
-      "template": "https://geodata.tec-wl.be/arcgis/rest/services/Poteaux/MapServer/export?f=image&format=png8&transparent=True&SRS={proj}&bboxSR=3857&imageSR=3857&bbox={bbox}&size={width},{height}",
+      "template": "https://geodata.tec-wl.be/arcgis/services/Poteaux/MapServer/WMSServer?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -59277,7 +59019,7 @@
       "type": "tms",
       "template": "https://txgi.tnris.org/login/path/ecology-fiona-poem-romeo/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=texas&STYLE=&FORMAT=image/png&tileMatrixSet=0to20&tileMatrix=0to20:{zoom}&tileRow={y}&tileCol={x}",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-99.99854, 34.56018],
@@ -59317,7 +59059,7 @@
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/styles/v1/openstreetmapus/cj8dftc3q1ecn2tnx9qhwyj0c/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcHVzIiwiYSI6ImNpcnF4Ym43dDBoOXZmYW04bWhlNWdrY2EifQ.4SFexuTUuKkZeerO3dgtmw",
       "endDate": "2017-01-01T00:00:00.000Z",
       "startDate": "2017-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [-124.76179, 48.41301],
@@ -59464,7 +59206,7 @@
       "type": "wms",
       "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Hoehenschichtlinien 20m&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [15, 22],
+      "zoomExtent": [15, 22],
       "polygon": [
         [
           [10.43998, 47.59768],
@@ -60682,7 +60424,7 @@
       "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/topo/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
       "endDate": "2010-07-20T00:00:00.000Z",
       "startDate": "2013-07-19T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [5.96175, 50.17631],
@@ -61262,7 +61004,7 @@
       "projection": "EPSG:3857",
       "endDate": "2007-01-01T00:00:00.000Z",
       "startDate": "2007-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [1.192, 43.63288],
@@ -61359,7 +61101,7 @@
       "projection": "EPSG:3857",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [1.11351, 43.68676],
@@ -61430,7 +61172,7 @@
       "projection": "EPSG:3857",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [1.11351, 43.68676],
@@ -61501,7 +61243,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [1.11351, 43.68676],
@@ -61571,7 +61313,7 @@
       "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours/{zoom}/{x}/{y}",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2008-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [0.54575, 47.46526],
@@ -61733,7 +61475,7 @@
       "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours_2013/{zoom}/{x}/{y}",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 22],
+      "zoomExtent": [0, 22],
       "polygon": [
         [
           [0.77512, 47.32983],
@@ -61858,7 +61600,7 @@
       "type": "wms",
       "template": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Spar_Huvud_och_sidospar&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [7, 20],
+      "zoomExtent": [7, 20],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -61894,7 +61636,7 @@
       "type": "wms",
       "template": "https://geo-netinfo.trafikverket.se/mapservice/wms.axd/NetInfo?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Vagtrafiknat,Funkvagklass,Farjeled&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [13, 20],
+      "zoomExtent": [13, 20],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -61930,7 +61672,7 @@
       "type": "wms",
       "template": "https://geo-netinfo.trafikverket.se/mapservice/wms.axd/NetInfo?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Vagnummer,Vaghinder,Rastplats,Rastficka,Hallplats,Farthinder,BroTunnel,ATK_Matplats&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
-      "scaleExtent": [3, 20],
+      "zoomExtent": [3, 20],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -61965,7 +61707,7 @@
       "name": "Trafikverket Street Names",
       "type": "tms",
       "template": "https://mapproxy.openstreetmap.se/tiles/1.0.0/nvdb_names/EPSG3857/{zoom}/{x}/{y}.png",
-      "scaleExtent": [15, 19],
+      "zoomExtent": [15, 19],
       "polygon": [
         [
           [12.80182, 55.19612],
@@ -62000,7 +61742,7 @@
       "name": "U.S. Forest Roads Overlay",
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/styles/v1/glassman/cjf4qjmps0tgv2qpahj977mvz/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1IjoiZ2xhc3NtYW4iLCJhIjoiRjk3dWdwYyJ9.Tg_fMJWxygeKBgVTrZHmGA",
-      "scaleExtent": [0, 20],
+      "zoomExtent": [0, 20],
       "polygon": [
         [
           [-124.76179, 48.41301],
@@ -62135,7 +61877,7 @@
       "name": "U.S. Forest Service roads",
       "type": "tms",
       "template": "https://osm.cycle.travel/forest/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-124.76179, 48.41301],
@@ -62267,7 +62009,7 @@
       "name": "Übersichtsplan Zürich",
       "type": "tms",
       "template": "https://mapproxy.osm.ch/tiles/zh_uebersichtsplan/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
-      "scaleExtent": [0, 21],
+      "zoomExtent": [0, 21],
       "polygon": [
         [
           [8.45788, 47.44582],
@@ -62300,7 +62042,7 @@
       "template": "http://map.land.gov.ua/map/ortho_kiev/{zoom}/{x}/{-y}.jpg",
       "endDate": "2014-01-01T00:00:00.000Z",
       "startDate": "2014-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "polygon": [
         [
           [30.30752, 50.57184],
@@ -62474,7 +62216,7 @@
       "template": "http://212.26.144.110/tile2/orto_10000/{zoom}/{x}/{-y}.jpg",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "polygon": [
         [
           [23.6193, 51.65491],
@@ -63554,7 +63296,7 @@
       "name": "USGS Large Scale Imagery",
       "type": "tms",
       "template": "http://{switch:a,b,c}.tile.openstreetmap.us/usgs_large_scale/{zoom}/{x}/{y}.jpg",
-      "scaleExtent": [12, 20],
+      "zoomExtent": [12, 20],
       "polygon": [
         [
           [-123.25493, 48.7529],
@@ -64618,7 +64360,7 @@
       "name": "USGS Topographic Maps",
       "type": "tms",
       "template": "https://caltopo.s3.amazonaws.com/topo/{zoom}/{x}/{y}.png",
-      "scaleExtent": [0, 16],
+      "zoomExtent": [0, 16],
       "polygon": [
         [
           [-55.99594, 52.00107],
@@ -64788,7 +64530,7 @@
       "name": "Vector Streetmap for San Juan County WA",
       "type": "tms",
       "template": "https://sjcgis.org/arcgis/rest/services/Basemaps/General_Basemap_WM/MapServer/tile/{zoom}/{y}/{x}",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [-123.27402, 48.69297],
@@ -64814,7 +64556,7 @@
       "template": "http://wms.openstreetmap.fr/tms/1.0.0/PNRVercors-RHP-1999/{zoom}/{x}/{y}",
       "endDate": "1999-01-01T00:00:00.000Z",
       "startDate": "1999-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 19],
+      "zoomExtent": [0, 19],
       "polygon": [
         [
           [5.43565, 44.99918],
@@ -64915,7 +64657,7 @@
       "name": "Vienna: Beschriftungen (annotations)",
       "type": "tms",
       "template": "https://maps.wien.gv.at/wmts/beschriftung/normal/google3857/{zoom}/{y}/{x}.png",
-      "scaleExtent": [12, 19],
+      "zoomExtent": [12, 19],
       "polygon": [
         [
           [16.54475, 48.17286],
@@ -65014,7 +64756,7 @@
       "name": "Vienna: Mehrzweckkarte (general purpose)",
       "type": "tms",
       "template": "https://maps.wien.gv.at/wmts/fmzk/pastell/google3857/{zoom}/{y}/{x}.jpeg",
-      "scaleExtent": [10, 19],
+      "zoomExtent": [10, 19],
       "polygon": [
         [
           [16.54475, 48.17286],
@@ -65112,7 +64854,7 @@
       "name": "Vienna: Orthofoto (aerial image)",
       "type": "tms",
       "template": "https://maps.wien.gv.at/wmts/lb/farbe/google3857/{zoom}/{y}/{x}.jpeg",
-      "scaleExtent": [10, 19],
+      "zoomExtent": [10, 19],
       "polygon": [
         [
           [16.14995, 48.10832],
@@ -65137,7 +64879,7 @@
       "template": "http://osmdata.asitvd.ch/tiles/nyon2010/{zoom}/{x}/{y}.png",
       "endDate": "2010-01-01T00:00:00.000Z",
       "startDate": "2010-01-01T00:00:00.000Z",
-      "scaleExtent": [14, 20],
+      "zoomExtent": [14, 20],
       "polygon": [
         [
           [6.24859, 46.38252],
@@ -65897,7 +65639,7 @@
       "projection": "EPSG:3857",
       "endDate": "2015-01-01T00:00:00.000Z",
       "startDate": "2015-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [17.14217, 51.12846],
@@ -66009,7 +65751,7 @@
       "projection": "EPSG:4326",
       "endDate": "2011-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
-      "scaleExtent": [0, 23],
+      "zoomExtent": [0, 23],
       "polygon": [
         [
           [18.74396, 50.2753],

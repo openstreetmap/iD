@@ -41,7 +41,7 @@ var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var maxResults = 2000;
 var tileZoom = 16.5;
-var tiler = utilTiler().skipNullIsland(true);
+var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var minHfov = 10;         // zoom in degrees:  20, 10, 5
 var maxHfov = 90;         // zoom out degrees
@@ -81,7 +81,7 @@ function localeTimestamp(s) {
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
 function loadTiles(which, url, projection, margin) {
-    var tiles = tiler.margin(margin).getTiles(projection, tileZoom);
+    var tiles = tiler.margin(margin).getTiles(projection);
 
     // abort inflight requests that are no longer needed
     var cache = _ssCache[which];

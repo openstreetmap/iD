@@ -35,7 +35,7 @@ import {
 var apibase = 'https://openstreetcam.org';
 var maxResults = 1000;
 var tileZoom = 14;
-var tiler = utilTiler().skipNullIsland(true);
+var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 var dispatch = d3_dispatch('loadedImages');
 var imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
@@ -63,7 +63,7 @@ function maxPageAtZoom(z) {
 
 function loadTiles(which, url, projection) {
     var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
-    var tiles = tiler.getTiles(projection, tileZoom);
+    var tiles = tiler.getTiles(projection);
 
     // abort inflight requests that are no longer needed
     var cache = _oscCache[which];

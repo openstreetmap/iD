@@ -48,7 +48,7 @@ export function rendererBackgroundSource(data) {
     var best = !!source.best;
     var template = source.template;
 
-    source.scaleExtent = data.scaleExtent || [0, 22];
+    source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
 
@@ -171,8 +171,8 @@ export function rendererBackgroundSource(data) {
 
 
     source.validZoom = function(z) {
-        return source.scaleExtent[0] <= z &&
-            (source.overzoom || source.scaleExtent[1] > z);
+        return source.zoomExtent[0] <= z &&
+            (source.overzoom || source.zoomExtent[1] > z);
     };
 
 
@@ -347,13 +347,13 @@ rendererBackgroundSource.Esri = function(data) {
             }
 
             // if any tiles are missing at level 20 we restrict maxZoom to 19
-            esri.scaleExtent[1] = (hasTiles ? 22 : 19);
+            esri.zoomExtent[1] = (hasTiles ? 22 : 19);
         });
     };
 
     esri.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/');
-        var zoom = Math.min(tileCoord[2], esri.scaleExtent[1]);
+        var zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
         var centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
         var unknown = t('info_panels.background.unknown');
         var metadataLayer;

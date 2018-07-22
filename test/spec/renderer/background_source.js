@@ -44,28 +44,28 @@ describe('iD.rendererBackgroundSource', function() {
     });
 
     it('correctly displays an overlay with no overzoom specified', function() {
-        var source = iD.rendererBackgroundSource({ scaleExtent: [6,16] });
+        var source = iD.rendererBackgroundSource({ zoomExtent: [6,16] });
         expect(source.validZoom(10)).to.be.true;
         expect(source.validZoom(3)).to.be.false;
         expect(source.validZoom(17)).to.be.true;
     });
 
     it('correctly displays an overlay with an invalid overzoom', function() {
-        var source = iD.rendererBackgroundSource({ scaleExtent: [6,16], overzoom: 'gibberish'});
+        var source = iD.rendererBackgroundSource({ zoomExtent: [6,16], overzoom: 'gibberish'});
         expect(source.validZoom(10)).to.be.true;
         expect(source.validZoom(3)).to.be.false;
         expect(source.validZoom(17)).to.be.true;
     });
 
     it('correctly displays an overlay with overzoom:true', function() {
-        var source = iD.rendererBackgroundSource({ scaleExtent: [6,16], overzoom: true});
+        var source = iD.rendererBackgroundSource({ zoomExtent: [6,16], overzoom: true});
         expect(source.validZoom(10)).to.be.true;
         expect(source.validZoom(3)).to.be.false;
         expect(source.validZoom(17)).to.be.true;
     });
 
     it('correctly displays an overlay with overzoom:false', function() {
-        var source = iD.rendererBackgroundSource({ scaleExtent: [6,16], overzoom: false});
+        var source = iD.rendererBackgroundSource({ zoomExtent: [6,16], overzoom: false});
         expect(source.validZoom(10)).to.be.true;
         expect(source.validZoom(3)).to.be.false;
         expect(source.validZoom(17)).to.be.false;
