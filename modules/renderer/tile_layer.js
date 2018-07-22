@@ -6,10 +6,10 @@ import { utilPrefixCSSProperty, utilTiler } from '../util';
 
 
 export function rendererTileLayer(context) {
-    var tileSize = 256;
     var transformProp = utilPrefixCSSProperty('Transform');
     var tiler = utilTiler();
 
+    var _tileSize = 256;
     var _projection;
     var _cache = {};
     var _tileOrigin;
@@ -19,7 +19,7 @@ export function rendererTileLayer(context) {
 
     function tileSizeAtZoom(d, z) {
         var EPSILON = 0.002;
-        return ((tileSize * Math.pow(2, z - d[2])) / tileSize) + EPSILON;
+        return ((_tileSize * Math.pow(2, z - d[2])) / _tileSize) + EPSILON;
     }
 
 
@@ -64,7 +64,7 @@ export function rendererTileLayer(context) {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
-        _zoom = geoScaleToZoom(_projection.scale(), tileSize);
+        _zoom = geoScaleToZoom(_projection.scale(), _tileSize);
 
         var pixelOffset;
         if (_source) {
@@ -140,7 +140,7 @@ export function rendererTileLayer(context) {
         }
 
         function imageTransform(d) {
-            var ts = tileSize * Math.pow(2, _zoom - d[2]);
+            var ts = _tileSize * Math.pow(2, _zoom - d[2]);
             var scale = tileSizeAtZoom(d, _zoom);
             return 'translate(' +
                 ((d[0] * ts) - _tileOrigin[0]) + 'px,' +
@@ -149,7 +149,7 @@ export function rendererTileLayer(context) {
         }
 
         function tileCenter(d) {
-            var ts = tileSize * Math.pow(2, _zoom - d[2]);
+            var ts = _tileSize * Math.pow(2, _zoom - d[2]);
             return [
                 ((d[0] * ts) - _tileOrigin[0] + (ts / 2)),
                 ((d[1] * ts) - _tileOrigin[1] + (ts / 2))
@@ -270,8 +270,9 @@ export function rendererTileLayer(context) {
     background.source = function(_) {
         if (!arguments.length) return _source;
         _source = _;
+        _tileSize = _source.tileSize;
         _cache = {};
-        tiler.zoomExtent(_source.zoomExtent);
+        tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
         return background;
     };
 

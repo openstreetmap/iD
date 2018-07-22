@@ -48,9 +48,9 @@ export function rendererBackgroundSource(data) {
     var best = !!source.best;
     var template = source.template;
 
+    source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
-
 
     source.offset = function(_) {
         if (!arguments.length) return offset;
@@ -133,8 +133,8 @@ export function rendererBackgroundSource(data) {
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
             return template
-                .replace('{width}', 256)
-                .replace('{height}', 256)
+                .replace('{width}', this.tileSize)
+                .replace('{height}', this.tileSize)
                 .replace('{proj}', this.projection)
                 .replace('{bbox}', minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y);
         }
