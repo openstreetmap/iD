@@ -770,7 +770,7 @@ en:
       move_note: "Only new notes can be moved. To move a note, place the mouse cursor over the new note, then press and hold the {leftclick} left mouse button while dragging the note to its new location. Once acceptable, give the note a description and click `Add Note`."
       update_note_h: "Closing, Reopening, and Commenting"
       update_note: "An existing note can be updated by closing it, reopening it, or commenting on it. Closing a note indicates that the problem has been resolved. Reopening a note indicates that the original or a previous issue is not resolved, or that there is a new issue. A comment on a note is for discussion."
-      update_note_command: "To update a note, {leftclick} left-click on the note to select it and show the edit menu, then update as needed."
+      update_note_command: "To update a note, {leftclick} left-click on the note to select it and show the edit menu, then update as needed. Notes are not features and updates must be saved individually."
     imagery:
       title: Background Imagery
       intro: "The background imagery that appears beneath the map data is an important resource for mapping. This imagery can be aerial photos collected from satellites, airplanes, and drones, or it can be scanned historical maps or other freely available source data."
@@ -1135,7 +1135,8 @@ en:
         add_point: "'Add point' mode"
         add_line: "'Add line' mode"
         add_area: "'Add area' mode"
-        place_point: "Place a point"
+        add_note: "'Add note' mode"
+        place_point: "Place a point or note"
         disable_snap: "Hold to disable point snapping"
         stop_line: "Finish drawing a line or area"
       operations:
