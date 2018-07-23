@@ -21,7 +21,7 @@ import { uiNoteEditor } from '../ui';
 
 export function modeSelectNote(context, selectedNoteID) {
     var mode = {
-        id: 'select_note',
+        id: 'select-note',
         button: 'browse'
     };
 

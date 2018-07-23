@@ -111,8 +111,6 @@ export function modeDragNote(context) {
 
 
     function start(entity) {
-        context.perform(actionNoop());
-
         _activeEntity = entity;
         _startLoc = entity.loc;
 
@@ -155,7 +153,8 @@ export function modeDragNote(context) {
         if (osm) {
             osm.replaceNote(entity);  // update note cache
         }
-        dispatch.call('change', this, 'difference');
+
+        context.perform(actionNoop()); // TODO: replace with better call for redrawing
     }
 
 

@@ -29,7 +29,8 @@ export function uiSidebar(context) {
 
 
         function hover(what) {
-            if ((what instanceof osmNote)) {
+            if ((what instanceof osmNote) && (context.mode().id !== 'drag-note')) {
+                // TODO: figure out why `what` isn't an updated note. Won't hover since .loc doesn't match
                 _wasNote = true;
                 var notes = d3_selectAll('.note');
                 notes

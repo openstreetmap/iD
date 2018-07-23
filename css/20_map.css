@@ -68,9 +68,17 @@
 /* points & notes */
 
 g.note .stroke {
-    stroke: #444;
+    stroke: #222;
     stroke-width: 1;
-    fill: #444;
+    fill: #222;
+    opacity: 0.6;
+}
+
+g.note.active .stroke {
+    stroke: #222;
+    stroke-width: 1;
+    fill: #222;
+    opacity: 0.8;
 }
 
 g.point .stroke {
@@ -105,7 +113,7 @@ g.point.selected .shadow {
     stroke-opacity: 0.7;
 }
 
-g.note ellipse.stroke,
+/* g.note ellipse.stroke, */
 g.point ellipse.stroke {
     display: none;
 }

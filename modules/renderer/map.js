@@ -39,7 +39,6 @@ import {
     svgMidpoints,
     svgPoints,
     svgVertices,
-    svgNotes
 } from '../svg';
 
 import { uiFlash } from '../ui';
@@ -73,8 +72,6 @@ export function rendererMap(context) {
     var drawAreas = svgAreas(projection, context);
     var drawMidpoints = svgMidpoints(projection, context);
     var drawLabels = svgLabels(projection, context);
-
-    var drawNotes = svgNotes(projection, context);
 
     var _selection = d3_select(null);
     var supersurface = d3_select(null);
@@ -215,8 +212,7 @@ export function rendererMap(context) {
             .call(context.background());
 
         context.on('enter.map',  function() {
-            if (map.editable() && !_transformed) {
-
+            if ((map.editable() && !_transformed) || map.noteEditable()) {
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
                 var selectedAndParents = {};
@@ -344,9 +340,6 @@ export function rendererMap(context) {
             .call(drawLabels, graph, data, filter, dimensions, fullRedraw)
             .call(drawPoints, graph, data, filter);
 
-        surface.selectAll('.data-layer-notes')
-            .call(drawNotes);
-
         dispatch.call('drawn', this, {full: true});
     }
 
@@ -356,7 +349,7 @@ export function rendererMap(context) {
         surface.selectAll('.layer-osm *').remove();
 
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select_note') {
+        if (mode && mode.id !== 'save' && mode.id !== 'select-note') {
             context.enter(modeBrowse(context));
         }
 
@@ -488,10 +481,11 @@ export function rendererMap(context) {
             .call(drawLayers);
 
         // OSM
-        if (map.editable()) {
+        if (map.editable() || map.noteEditable()) { // NOTE: when `map.noteEditable()` is removed, `redraw()` keep being called on timer
             context.loadTiles(projection, dimensions);
             drawVector(difference, extent);
-        } else {
+        }
+        else {
             editOff();
         }
 
@@ -850,6 +844,14 @@ export function rendererMap(context) {
     map.editable = function() {
         var osmLayer = surface.selectAll('.data-layer-osm');
         if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+
+        return map.zoom() >= context.minEditableZoom();
+    };
+
+
+    map.noteEditable = function() {
+        var noteLayer = surface.selectAll('.data-layer-notes');
+        if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };

@@ -50,7 +50,7 @@ _extend(osmNote.prototype, {
     },
 
     update: function(attrs) {
-        return osmNote(this, attrs, {v: 1 + (this.v || 0)});
+        return osmNote(this, attrs); // {v: 1 + (this.v || 0)}
     },
 
     isNew: function() {
