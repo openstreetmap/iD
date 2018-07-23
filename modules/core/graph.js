@@ -52,9 +52,8 @@ coreGraph.prototype = {
 
 
     transient: function(entity, key, fn) {
-        var id = entity.id,
-            transients = this.transients[id] ||
-            (this.transients[id] = {});
+        var id = entity.id;
+        var transients = this.transients[id] || (this.transients[id] = {});
 
         if (transients[key] !== undefined) {
             return transients[key];
@@ -67,8 +66,8 @@ coreGraph.prototype = {
 
 
     parentWays: function(entity) {
-        var parents = this._parentWays[entity.id],
-            result = [];
+        var parents = this._parentWays[entity.id];
+        var result = [];
 
         if (parents) {
             for (var i = 0; i < parents.length; i++) {
@@ -92,8 +91,8 @@ coreGraph.prototype = {
 
 
     parentRelations: function(entity) {
-        var parents = this._parentRels[entity.id],
-            result = [];
+        var parents = this._parentRels[entity.id];
+        var result = [];
 
         if (parents) {
             for (var i = 0; i < parents.length; i++) {
@@ -134,8 +133,8 @@ coreGraph.prototype = {
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
     rebase: function(entities, stack, force) {
-        var base = this.base(),
-            i, j, k, id;
+        var base = this.base();
+        var i, j, k, id;
 
         for (i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -168,8 +167,8 @@ coreGraph.prototype = {
 
 
     _updateRebased: function() {
-        var base = this.base(),
-            i, k, child, id, keys;
+        var base = this.base();
+        var i, k, child, id, keys;
 
         keys = Object.keys(this._parentWays);
         for (i = 0; i < keys.length; i++) {
@@ -206,17 +205,13 @@ coreGraph.prototype = {
 
     // Updates calculated properties (parentWays, parentRels) for the specified change
     _updateCalculated: function(oldentity, entity, parentWays, parentRels) {
-
         parentWays = parentWays || this._parentWays;
         parentRels = parentRels || this._parentRels;
 
-        var type = entity && entity.type || oldentity && oldentity.type,
-            removed, added, ways, rels, i;
+        var type = entity && entity.type || oldentity && oldentity.type;
+        var removed, added, ways, rels, i;
 
-
-        if (type === 'way') {
-
-            // Update parentWays
+        if (type === 'way') {   // Update parentWays
             if (oldentity && entity) {
                 removed = _difference(oldentity.nodes, entity.nodes);
                 added = _difference(entity.nodes, oldentity.nodes);
@@ -236,9 +231,7 @@ coreGraph.prototype = {
                 parentWays[added[i]] = ways;
             }
 
-        } else if (type === 'relation') {
-
-            // Update parentRels
+        } else if (type === 'relation') {   // Update parentRels
             if (oldentity && entity) {
                 removed = _difference(oldentity.members, entity.members);
                 added = _difference(entity.members, oldentity);
@@ -262,8 +255,7 @@ coreGraph.prototype = {
 
 
     replace: function(entity) {
-        if (this.entities[entity.id] === entity)
-            return this;
+        if (this.entities[entity.id] === entity) return this;
 
         return this.update(function() {
             this._updateCalculated(this.entities[entity.id], entity);
@@ -281,11 +273,9 @@ coreGraph.prototype = {
 
 
     revert: function(id) {
-        var baseEntity = this.base().entities[id],
-            headEntity = this.entities[id];
-
-        if (headEntity === baseEntity)
-            return this;
+        var baseEntity = this.base().entities[id];
+        var headEntity = this.entities[id];
+        if (headEntity === baseEntity) return this;
 
         return this.update(function() {
             this._updateCalculated(headEntity, baseEntity);
@@ -296,7 +286,6 @@ coreGraph.prototype = {
 
     update: function() {
         var graph = this.frozen ? coreGraph(this, true) : this;
-
         for (var i = 0; i < arguments.length; i++) {
             arguments[i].call(graph, graph);
         }
