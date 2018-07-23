@@ -165,7 +165,13 @@
               "text": "shortcuts.editing.drawing.add_area"
             },
             {
-              "shortcuts": ["Left-click","shortcuts.key.space"],
+              "shortcuts": ["4"
+              ],
+              "text": "shortcuts.editing.drawing.add_note"
+            },
+            {
+              "shortcuts": ["Left-click","shortcuts.key.space"
+              ],
               "text": "shortcuts.editing.drawing.place_point"
             },
             {
