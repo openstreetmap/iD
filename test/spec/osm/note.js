@@ -1,5 +1,3 @@
-import { geoVecInterp } from '../geo';
-
 describe('iD.osmNote', function () {
     it('returns a note', function () {
         expect(iD.osmNote()).to.be.an.instanceOf(iD.osmNote);
@@ -39,12 +37,10 @@ describe('iD.osmNote', function () {
         it('returns an moved note', function() {
             var note = iD.osmNote({
                 id: 1,
-                loc: [5, 10]
+                loc: [5, 5]
             });
-
-            var moveAmount = geoVecInterp(note.loc, [10, 10], 1);
-            note.move(moveAmount);
-            expect(note.loc).to.equal([10, 10]);
+            note = note.move([10, 10]);
+            expect(note.loc).to.eql([10, 10]);
         });
     });
 
