@@ -177,13 +177,6 @@
 .layer-mapillary-images .viewfield-group * {
     fill: #55ff22;
 }
-.layer-mapillary-images .viewfield-group .viewfield {
-    display: none;
-}
-.layer-mapillary-images .viewfield-group.selected .viewfield,
-.layer-mapillary-images .viewfield-group .viewfield.pano {
-    display: inline;
-}
 .layer-mapillary-images .sequence {
     stroke: #55ff22;
 }
