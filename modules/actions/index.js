@@ -34,3 +34,4 @@ export { actionSplit } from './split';
 export { actionStraighten } from './straighten';
 export { actionUnrestrictTurn } from './unrestrict_turn';
 export { actionReflect } from './reflect.js';
+export { actionDetachNode } from './detach_node';

@@ -123,23 +123,19 @@
               "text": "shortcuts.browsing.vertex_selected.previous"
             },
             {
-              "shortcuts": ["]","↘"
-              ],
+              "shortcuts": ["]","↘"],
               "text": "shortcuts.browsing.vertex_selected.next"
             },
             {
-              "shortcuts": ["{","⇞"
-              ],
+              "shortcuts": ["{","⇞"],
               "text": "shortcuts.browsing.vertex_selected.first"
             },
             {
-              "shortcuts": ["}","⇟"
-              ],
+              "shortcuts": ["}","⇟"],
               "text": "shortcuts.browsing.vertex_selected.last"
             },
             {
-              "shortcuts": ["\\","shortcuts.key.pause"
-              ],
+              "shortcuts": ["\\","shortcuts.key.pause"],
               "text": "shortcuts.browsing.vertex_selected.change_parent"
             }
           ]
@@ -157,33 +153,27 @@
               "text": "shortcuts.editing.drawing.title"
             },
             {
-              "shortcuts": ["1"
-              ],
+              "shortcuts": ["1"],
               "text": "shortcuts.editing.drawing.add_point"
             },
             {
-              "shortcuts": ["2"
-              ],
+              "shortcuts": ["2"],
               "text": "shortcuts.editing.drawing.add_line"
             },
             {
-              "shortcuts": ["3"
-              ],
+              "shortcuts": ["3"],
               "text": "shortcuts.editing.drawing.add_area"
             },
             {
-              "shortcuts": ["Left-click","shortcuts.key.space"
-              ],
+              "shortcuts": ["Left-click","shortcuts.key.space"],
               "text": "shortcuts.editing.drawing.place_point"
             },
             {
-              "shortcuts": ["⌥"
-              ],
+              "shortcuts": ["⌥"],
               "text": "shortcuts.editing.drawing.disable_snap"
             },
             {
-              "shortcuts": ["↵","⎋"
-              ],
+              "shortcuts": ["↵","⎋"],
               "text": "shortcuts.editing.drawing.stop_line"
             },
             {
@@ -192,32 +182,27 @@
             },
             {
               "modifiers": ["⌘"],
-              "shortcuts": ["C"
-              ],
+              "shortcuts": ["C"],
               "text": "shortcuts.editing.commands.copy"
             },
             {
               "modifiers": ["⌘"],
-              "shortcuts": ["V"
-              ],
+              "shortcuts": ["V"],
               "text": "shortcuts.editing.commands.paste"
             },
             {
               "modifiers": ["⌘"],
-              "shortcuts": ["Z"
-              ],
+              "shortcuts": ["Z"],
               "text": "shortcuts.editing.commands.undo"
             },
             {
               "modifiers": ["⌘","⇧"],
-              "shortcuts": ["Z"
-              ],
+              "shortcuts": ["Z"],
               "text": "shortcuts.editing.commands.redo"
             },
             {
               "modifiers": ["⌘"],
-              "shortcuts": ["S"
-              ],
+              "shortcuts": ["S"],
               "text": "shortcuts.editing.commands.save"
             }
           ]
@@ -229,64 +214,56 @@
               "text": "shortcuts.editing.operations.title"
             },
             {
-              "shortcuts": ["operations.continue.key"
-              ],
+              "shortcuts": ["operations.continue.key"],
               "text": "shortcuts.editing.operations.continue_line"
             },
             {
-              "shortcuts": ["operations.merge.key"
-              ],
+              "shortcuts": ["operations.merge.key"],
               "text": "shortcuts.editing.operations.merge"
             },
             {
-              "shortcuts": ["operations.disconnect.key"
-              ],
+              "shortcuts": ["operations.disconnect.key"],
               "text": "shortcuts.editing.operations.disconnect"
             },
             {
-              "shortcuts": ["operations.split.key"
-              ],
+              "shortcuts": ["operations.detach_node.key"],
+              "text": "shortcuts.editing.operations.detach_node"
+            },
+            {
+              "shortcuts": ["operations.split.key"],
               "text": "shortcuts.editing.operations.split"
             },
             {
-              "shortcuts": ["operations.reverse.key"
-              ],
+              "shortcuts": ["operations.reverse.key"],
               "text": "shortcuts.editing.operations.reverse"
             },
             {
-              "shortcuts": ["operations.move.key"
-              ],
+              "shortcuts": ["operations.move.key"],
               "text": "shortcuts.editing.operations.move"
             },
             {
-              "shortcuts": ["operations.rotate.key"
-              ],
+              "shortcuts": ["operations.rotate.key"],
               "text": "shortcuts.editing.operations.rotate"
             },
             {
-              "shortcuts": ["operations.orthogonalize.key"
-              ],
+              "shortcuts": ["operations.orthogonalize.key"],
               "text": "shortcuts.editing.operations.orthogonalize"
             },
             {
-              "shortcuts": ["operations.circularize.key"
-              ],
+              "shortcuts": ["operations.circularize.key"],
               "text": "shortcuts.editing.operations.circularize"
             },
             {
-              "shortcuts": ["operations.reflect.key.long"
-              ],
+              "shortcuts": ["operations.reflect.key.long"],
               "text": "shortcuts.editing.operations.reflect_long"
             },
             {
-              "shortcuts": ["operations.reflect.key.short"
-              ],
+              "shortcuts": ["operations.reflect.key.short"],
               "text": "shortcuts.editing.operations.reflect_short"
             },
             {
               "modifiers": ["⌘"],
-              "shortcuts": ["⌫"
-              ],
+              "shortcuts": ["⌫"],
               "text": "shortcuts.editing.operations.delete"
             }
           ]
@@ -305,32 +282,27 @@
             },
             {
               "modifiers": ["⌘"],
-              "shortcuts": ["info_panels.key"
-              ],
+              "shortcuts": ["info_panels.key"],
               "text": "shortcuts.tools.info.all"
             },
             {
               "modifiers": ["⌘","⇧"],
-              "shortcuts": ["info_panels.background.key"
-              ],
+              "shortcuts": ["info_panels.background.key"],
               "text": "shortcuts.tools.info.background"
             },
             {
               "modifiers": ["⌘","⇧"],
-              "shortcuts": ["info_panels.history.key"
-              ],
+              "shortcuts": ["info_panels.history.key"],
               "text": "shortcuts.tools.info.history"
             },
             {
               "modifiers": ["⌘","⇧"],
-              "shortcuts": ["info_panels.location.key"
-              ],
+              "shortcuts": ["info_panels.location.key"],
               "text": "shortcuts.tools.info.location"
             },
             {
               "modifiers": ["⌘","⇧"],
-              "shortcuts": ["info_panels.measurement.key"
-              ],
+              "shortcuts": ["info_panels.measurement.key"],
               "text": "shortcuts.tools.info.measurement"
             }
           ]

@@ -48,9 +48,9 @@ export function rendererBackgroundSource(data) {
     var best = !!source.best;
     var template = source.template;
 
-    source.scaleExtent = data.scaleExtent || [0, 22];
+    source.tileSize = data.tileSize || 256;
+    source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
-
 
     source.offset = function(_) {
         if (!arguments.length) return offset;
@@ -133,8 +133,8 @@ export function rendererBackgroundSource(data) {
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
             return template
-                .replace('{width}', 256)
-                .replace('{height}', 256)
+                .replace('{width}', this.tileSize)
+                .replace('{height}', this.tileSize)
                 .replace('{proj}', this.projection)
                 .replace('{bbox}', minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y);
         }
@@ -171,8 +171,8 @@ export function rendererBackgroundSource(data) {
 
 
     source.validZoom = function(z) {
-        return source.scaleExtent[0] <= z &&
-            (source.overzoom || source.scaleExtent[1] > z);
+        return source.zoomExtent[0] <= z &&
+            (source.overzoom || source.zoomExtent[1] > z);
     };
 
 
@@ -347,13 +347,13 @@ rendererBackgroundSource.Esri = function(data) {
             }
 
             // if any tiles are missing at level 20 we restrict maxZoom to 19
-            esri.scaleExtent[1] = (hasTiles ? 22 : 19);
+            esri.zoomExtent[1] = (hasTiles ? 22 : 19);
         });
     };
 
     esri.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/');
-        var zoom = Math.min(tileCoord[2], esri.scaleExtent[1]);
+        var zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
         var centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
         var unknown = t('info_panels.background.unknown');
         var metadataLayer;

@@ -234,6 +234,13 @@ en:
       annotation:
         create: Added a turn restriction
         delete: Deleted a turn restriction
+    detach_node:
+      title: Detach
+      key: E
+      description: Detach this node from these lines/areas.
+      annotation: Detached a node from parent lines/areas.
+      restriction: "This node can't be detached because it would damage a \"{relation}\" relation."
+      connected_to_hidden: This node can't be detached because it is connected to a hidden feature.
   restriction:
     controls:
       distance: Distance
@@ -1142,6 +1149,7 @@ en:
         continue_line: "Continue a line at the selected node"
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect features at the selected node"
+        detach_node: "Detach selected node from parent lines/areas"
         split: "Split a line into two at the selected node"
         reverse: "Reverse a line"
         move: "Move selected features"

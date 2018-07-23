@@ -17,12 +17,10 @@ import {
 
 import rbush from 'rbush';
 
-import { geoExtent } from '../geo';
+import { geoExtent, geoScaleToZoom } from '../geo';
 import { svgDefs } from '../svg';
-import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind, utilTiler } from '../util';
 
-var geoTile = utilTiler().skipNullIsland(true);
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
@@ -30,7 +28,8 @@ var viewerjs = 'mapillary-js/mapillary.min.js';
 var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var maxResults = 1000;
 var tileZoom = 14;
-var dispatch = d3_dispatch('loadedImages', 'loadedSigns');
+var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
+var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'bearingChanged');
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
@@ -54,11 +53,8 @@ function maxPageAtZoom(z) {
 
 
 function loadTiles(which, url, projection) {
-    var s = projection.scale() * 2 * Math.PI;
-    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
-
-    var dimension = projection.clipExtent()[1];
-    var tiles = geoTile.getTiles(projection, dimension, tileZoom);
+    var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
+    var tiles = tiler.getTiles(projection);
 
     // abort inflight requests that are no longer needed
     var cache = _mlyCache[which];
@@ -475,6 +471,7 @@ export default {
 
             _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
+            _mlyViewer.on('bearingchanged', bearingChanged);
             _mlyViewer.moveToKey(imageKey)
                 .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
@@ -508,6 +505,10 @@ export default {
                 context.map().centerEase(loc);
                 that.selectImage(undefined, node.key, true);
             }
+        }
+
+        function bearingChanged(e) {
+            dispatch.call('bearingChanged', undefined, e);
         }
     },
 

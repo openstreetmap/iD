@@ -119,7 +119,7 @@ export function coreContext() {
         return context;
     };
 
-    context.loadTiles = utilCallWhenIdle(function(projection, dimensions, callback) {
+    context.loadTiles = utilCallWhenIdle(function(projection, callback) {
         var cid;
         function done(err, result) {
             if (connection.getConnectionId() !== cid) {
@@ -131,11 +131,11 @@ export function coreContext() {
         }
         if (connection && context.editable()) {
             cid = connection.getConnectionId();
-            connection.loadTiles(projection, dimensions, done);
+            connection.loadTiles(projection, done);
         }
     });
 
-    context.loadEntity = function(entityId, callback) {
+    context.loadEntity = function(entityID, callback) {
         var cid;
         function done(err, result) {
             if (connection.getConnectionId() !== cid) {
@@ -147,24 +147,24 @@ export function coreContext() {
         }
         if (connection) {
             cid = connection.getConnectionId();
-            connection.loadEntity(entityId, done);
+            connection.loadEntity(entityID, done);
         }
     };
 
-    context.zoomToEntity = function(entityId, zoomTo) {
+    context.zoomToEntity = function(entityID, zoomTo) {
         if (zoomTo !== false) {
-            this.loadEntity(entityId, function(err, result) {
+            this.loadEntity(entityID, function(err, result) {
                 if (err) return;
-                var entity = _find(result.data, function(e) { return e.id === entityId; });
+                var entity = _find(result.data, function(e) { return e.id === entityID; });
                 if (entity) { map.zoomTo(entity); }
             });
         }
 
         map.on('drawn.zoomToEntity', function() {
-            if (!context.hasEntity(entityId)) return;
+            if (!context.hasEntity(entityID)) return;
             map.on('drawn.zoomToEntity', null);
             context.on('enter.zoomToEntity', null);
-            context.enter(modeSelect(context, [entityId]));
+            context.enter(modeSelect(context, [entityID]));
         });
 
         context.on('enter.zoomToEntity', function() {
