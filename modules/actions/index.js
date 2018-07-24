@@ -23,7 +23,6 @@ export { actionMergePolygon } from './merge_polygon';
 export { actionMergeRemoteChanges } from './merge_remote_changes';
 export { actionMove } from './move';
 export { actionMoveNode } from './move_node';
-export { actionMoveNote } from './move_note';
 export { actionNoop } from './noop';
 export { actionOrthogonalize } from './orthogonalize';
 export { actionRestrictTurn } from './restrict_turn';
