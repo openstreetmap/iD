@@ -19,7 +19,7 @@ export function svgNotes(projection, context, dispatch) {
         selection
             .attr('class', klass)
             .attr('transform', 'translate(-8, -22)')
-            .attr('d', 'm17.49424,0l-14.99506,0c-1.37845,0 -2.49918,1.12072 -2.49918,2.49918l0,11.24629c0,1.37845 1.12072,2.49918 2.49918,2.49918l3.74876,0l0,3.28017c0,0.38269 0.43736,0.60527 0.74585,0.37878l4.8773,-3.65895l5.62315,0c1.37845,0 2.49918,-1.12072 2.49918,-2.49918l0,-11.24629c0,-1.37845 -1.12072,-2.49918 -2.49918,-2.49918z');
+            .attr('d', 'm17.5,0l-15,0c-1.37,0 -2.5,1.12 -2.5,2.5l0,11.25c0,1.37 1.12,2.5 2.5,2.5l3.75,0l0,3.28c0,0.38 0.43,0.6 0.75,0.37l4.87,-3.65l5.62,0c1.37,0 2.5,-1.12 2.5,-2.5l0,-11.25c0,-1.37 -1.12,-2.5 -2.5,-2.5z');
     }
 
     function init() {
@@ -103,16 +103,16 @@ export function svgNotes(projection, context, dispatch) {
             .classed('new', function(d) { return d.id < 0; });
 
         notesEnter
-            .append('path')
-            .call(markerPath, 'shadow');
-
-        notesEnter
             .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
             .attr('rx', 6.5)
             .attr('ry', 3)
             .attr('class', 'stroke');
+
+        notesEnter
+            .append('path')
+            .call(markerPath, 'shadow');
 
         notesEnter
             .append('use')

@@ -87,14 +87,8 @@ g.point .stroke {
     fill: #fff;
 }
 
+g.point .shadow,
 g.note .shadow {
-    fill: none;
-    stroke: #f6634f;
-    stroke-width: 8;
-    stroke-opacity: 0;
-}
-
-g.point .shadow {
     fill: none;
     stroke: #f6634f;
     stroke-width: 16;

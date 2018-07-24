@@ -58,7 +58,8 @@
 .mode-draw-area #map,
 .mode-add-line  #map,
 .mode-add-area  #map,
-.mode-drag-node #map {
+.mode-drag-node #map,
+.mode-drag-note #map {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
 }
