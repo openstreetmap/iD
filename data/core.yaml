@@ -779,13 +779,14 @@ en:
       boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"All relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
     notes:
       title: Notes
-      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data} **Map data** panel or press the shortcut key `` to enable the notes layer."
+      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data} **Map data** panel to enable the OpenStreetMap notes layer."
       add_note_h: "Adding Notes"
       add_note: "To add a new note, click the {note} **Note** button on the toolbar above the map, or press the shortcut key `4`. This will change the mouse cursor to a cross symbol. To place the new note on the map, position the mouse cursor where the note should go, then {leftclick} left-click or press `Space`."
-      move_note: "Only new notes can be moved. To move a note, place the mouse cursor over the new note, then press and hold the {leftclick} left mouse button while dragging the note to its new location. Once acceptable, give the note a description and click `Add Note`."
+      move_note: "Only new notes can be moved. To move a note, place the mouse cursor over the new note, then press and hold the {leftclick} left mouse button while dragging the note to its new location."
       update_note_h: "Closing, Reopening, and Commenting"
-      update_note: "An existing note can be updated by closing it, reopening it, or commenting on it. Closing a note indicates that the problem has been resolved. Reopening a note indicates that the original or a previous issue is not resolved, or that there is a new issue. A comment on a note is for discussion."
-      update_note_command: "To update a note, {leftclick} left-click on the note to select it and show the edit menu, then update as needed. Notes are not features and updates must be saved individually."
+      update_note: "An existing note can be updated by closing it, reopening it, or adding a comment to it. Closing a note indicates that the problem has been resolved. Reopening a note indicates that the original issue is not resolved."
+      save_note_h: "Saving Notes"
+      save_note: "You must save any note edits individually by clicking the buttons below the note comments. Note edits are **not** included in changesets that you upload to OpenStreetMap."
     imagery:
       title: Background Imagery
       intro: "The background imagery that appears beneath the map data is an important resource for mapping. This imagery can be aerial photos collected from satellites, airplanes, and drones, or it can be scanned historical maps or other freely available source data."

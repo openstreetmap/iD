@@ -154,7 +154,8 @@ export function uiHelp(context) {
             'move_note',
             'update_note_h',
             'update_note',
-            'update_note_command'
+            'save_note_h',
+            'save_note'
         ]],
 
         ['imagery', [
@@ -222,6 +223,7 @@ export function uiHelp(context) {
         'help.relations.boundary_h': 3,
         'help.notes.add_note_h': 3,
         'help.notes.update_note_h': 3,
+        'help.notes.save_note_h': 3,
         'help.imagery.sources_h': 3,
         'help.imagery.offsets_h': 3,
         'help.streetlevel.using_h': 3,
@@ -232,7 +234,7 @@ export function uiHelp(context) {
         point: icon('#iD-icon-point', 'pre-text'),
         line: icon('#iD-icon-line', 'pre-text'),
         area: icon('#iD-icon-area', 'pre-text'),
-        note: icon('#iD-icon-note', 'pre-text'),
+        note: icon('#iD-icon-note', 'pre-text add-note'),
         plus: icon('#iD-icon-plus', 'pre-text'),
         minus: icon('#iD-icon-minus', 'pre-text'),
         orthogonalize: icon('#iD-operation-orthogonalize', 'pre-text'),

@@ -20,16 +20,19 @@
 .layer-notes .note .note-fill {
     color: #ff3300;
     stroke: #333;
+    stroke-width: 40px;
 }
 .note-header-icon.new .note-fill,
 .layer-notes .note.new .note-fill {
     color: #ffee00;
     stroke: #333;
+    stroke-width: 40px;
 }
 .note-header-icon.closed .note-fill,
 .layer-notes .note.closed .note-fill {
     color: #55dd00;
     stroke: #333;
+    stroke-width: 40px;
 }
 
 /* slight adjustments to preset icon for note icons */

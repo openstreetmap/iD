@@ -588,19 +588,28 @@ button.save.has-count .count::before {
     right: -6px;
 }
 
+.help-wrap svg.icon.pre-text.add-note,
 button.add-note svg.icon {
     height: 15px;
     width: 15px;
     color: rgba(0,0,0,0.25);
-    stroke-width: 60;
-    stroke: black;
+    stroke: #333;
+    stroke-width: 60px;
     margin-top: 3px;
+}
+button.add-note svg.icon {
+    margin-left: unset;
     margin-right: 7px;
 }
 [dir='rtl'] button.add-note svg.icon {
     margin-left: 7px;
     margin-right: unset;
 }
+.help-wrap svg.icon.pre-text.add-note {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
 
 /* Icons */
 
