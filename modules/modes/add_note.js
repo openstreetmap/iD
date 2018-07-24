@@ -23,15 +23,11 @@ export function modeAddNote(context) {
 
 
     function add(loc) {
-        var note = osmNote({
-            id: -1,
-            loc: loc,
-            status: 'open',
-            comments: {},
-            newFeature: true
-        });
+        var osm = services.osm;
+        if (!osm) return;
 
-        services.osm.replaceNote(note);
+        var note = osmNote({ loc: loc, status: 'open', comments: [] });
+        osm.replaceNote(note);
 
         context
             .selectedNoteID(note.id)

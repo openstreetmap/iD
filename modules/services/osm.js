@@ -338,16 +338,14 @@ function parseXML(xml, callback, options) {
 
 
 // replace or remove note from rtree
-function updateRtree(item, replace) { // update (or insert) in _noteCache.rtree
-
+function updateRtree(item, replace) {
     // NOTE: other checks needed? (e.g., if cache.data.children.length decrements ...)
 
-    // remove note
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-    if (replace) {
-        _noteCache.rtree.insert(item); // add note (updated)
-    }
 
+    if (replace) {
+        _noteCache.rtree.insert(item);
+    }
 }
 
 

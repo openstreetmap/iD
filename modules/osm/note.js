@@ -39,7 +39,7 @@ _extend(osmNote.prototype, {
         }
 
         if (!this.id) {
-            this.id = osmNote.id();
+            this.id = osmNote.id() + '';  // as string
         }
 
         return this;
