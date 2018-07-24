@@ -38,7 +38,7 @@ import {
     svgLines,
     svgMidpoints,
     svgPoints,
-    svgVertices,
+    svgVertices
 } from '../svg';
 
 import { uiFlash } from '../ui';
@@ -484,8 +484,7 @@ export function rendererMap(context) {
         if (map.editable() || map.notesEditable()) {
             context.loadTiles(projection);
             drawVector(difference, extent);
-        }
-        else {
+        } else {
             editOff();
         }
 
