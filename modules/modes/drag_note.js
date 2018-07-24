@@ -3,28 +3,10 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
-import { geoVecInterp } from '../geo';
-
 import { services } from '../services';
-
-import {
-    actionNoop
-} from '../actions';
-
-import {
-    behaviorEdit,
-    behaviorHover,
-    behaviorDrag
-} from '../behavior';
-
-import {
-    geoVecSubtract,
-    geoViewportEdge
-} from '../geo';
-
-import { modeBrowse, modeSelectNote } from './index';
+import { behaviorEdit, behaviorDrag } from '../behavior';
+import { geoVecSubtract, geoViewportEdge } from '../geo';
+import { modeSelectNote } from './index';
 
 
 export function modeDragNote(context) {
@@ -32,22 +14,18 @@ export function modeDragNote(context) {
         id: 'drag-note',
         button: 'browse'
     };
-    var hover = behaviorHover(context).altDisables(true)
-        .on('hover', context.ui().sidebar.hover);
+
     var edit = behaviorEdit(context);
 
     var _nudgeInterval;
-    var _restoreSelectedNoteID = [];
-    var _isCancelled = false;
-    var _activeEntity;
     var _lastLoc;
 
 
-    function startNudge(entity, nudge) {
+    function startNudge(note, nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
-            doMove(entity, nudge);
+            doMove(note, nudge);
         }, 50);
     }
 
@@ -60,94 +38,57 @@ export function modeDragNote(context) {
     }
 
 
-    function origin(entity) {
-        return context.projection(entity.loc);
+    function origin(note) {
+        return context.projection(note.loc);
     }
 
 
-    function keydown() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
-            if (context.surface().classed('nope')) {
-                context.surface()
-                    .classed('nope-suppressed', true);
-            }
-            context.surface()
-                .classed('nope', false)
-                .classed('nope-disabled', true);
-        }
-    }
-
-
-    function keyup() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
-            if (context.surface().classed('nope-suppressed')) {
-                context.surface()
-                    .classed('nope', true);
-            }
-            context.surface()
-                .classed('nope-suppressed', false)
-                .classed('nope-disabled', false);
-        }
-    }
-
-
-    function start(entity) {
-        _activeEntity = entity;
-
-        context.surface().selectAll('.note-' + _activeEntity.id)
+    function start(note) {
+        context.surface().selectAll('.note-' + note.id)
             .classed('active', true);
 
         context.enter(mode);
     }
 
 
-    function move(entity) {
-        if (_isCancelled) return;
+    function move(note) {
         d3_event.sourceEvent.stopPropagation();
-
-        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
-
         _lastLoc = context.projection.invert(d3_event.point);
 
-        doMove(entity);
+        doMove(note);
         var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
         if (nudge) {
-            startNudge(entity, nudge);
+            startNudge(note, nudge);
         } else {
             stopNudge();
         }
-
     }
 
 
-    function doMove(entity, nudge) {
+    function doMove(note, nudge) {
         nudge = nudge || [0, 0];
 
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
-        entity = entity.move(geoVecInterp(entity.loc, loc, 1));
+        note = note.move(loc);
 
         var osm = services.osm;
         if (osm) {
-            osm.replaceNote(entity);  // update note cache
+            osm.replaceNote(note);  // update note cache
         }
 
-        context.perform(actionNoop()); // TODO: replace with better call for redrawing
+        // update note on screen (no need to do a full redraw)
+        context.surface().selectAll('.note-' + note.id)
+            .attr('transform', 'translate(' + currMouse[0] + ',' + currMouse[1] + ')');
     }
 
 
-    function end(entity) {
+    function end(note) {
         context
-                .selectedNoteID(entity.id)
-                .enter(modeSelectNote(context, entity.id));
-    }
-
-
-    function cancel() {
-        drag.cancel();
-        context.enter(modeBrowse(context));
+            .selectedNoteID(note.id)
+            .enter(modeSelectNote(context, note.id));
     }
 
 
@@ -161,69 +102,22 @@ export function modeDragNote(context) {
 
 
     mode.enter = function() {
-        context.install(hover);
         context.install(edit);
-
-        d3_select(window)
-            .on('keydown.drawWay', keydown)
-            .on('keyup.drawWay', keyup);
-
-        context.history()
-            .on('undone.drag-note', cancel);
     };
 
 
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
-        context.uninstall(hover);
         context.uninstall(edit);
 
-        d3_select(window)
-            .on('keydown.hover', null)
-            .on('keyup.hover', null);
-
-        context.history()
-            .on('undone.drag-note', null);
-
-        context.map()
-            .on('drawn.drag-note', null);
-
-        _activeEntity = null;
-
         context.surface()
-            .classed('nope', false)
-            .classed('nope-suppressed', false)
-            .classed('nope-disabled', false)
             .selectAll('.active')
             .classed('active', false);
 
         stopNudge();
     };
 
-
-    mode.selectedNoteID = function() {
-        if (!arguments.length) return _activeEntity ? _activeEntity.id : [];
-        // no assign
-        return mode;
-    };
-
-
-    mode.activeID = function() {
-        if (!arguments.length) return _activeEntity && _activeEntity.id;
-        // no assign
-        return mode;
-    };
-
-
-    mode.restoreSelectedNoteID = function(_) {
-        if (!arguments.length) return _restoreSelectedNoteID;
-        _restoreSelectedNoteID = _;
-        return mode;
-    };
-
-
     mode.behavior = drag;
-
 
     return mode;
 }
