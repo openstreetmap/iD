@@ -3,6 +3,7 @@ import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
@@ -51,7 +52,7 @@ export function svgNotes(projection, context, dispatch) {
 
 
     function showLayer() {
-        // editOn();
+        editOn();
 
         layer
             .classed('disabled', false)
@@ -66,7 +67,7 @@ export function svgNotes(projection, context, dispatch) {
 
 
     function hideLayer() {
-        // editOff();
+        editOff();
 
         throttledRedraw.cancel();
         layer.interrupt();
@@ -179,14 +180,19 @@ export function svgNotes(projection, context, dispatch) {
         }
     }
 
-    drawNotes.enabled = function(_) {
+    drawNotes.enabled = function(val) {
         if (!arguments.length) return svgNotes.enabled;
-        svgNotes.enabled = _;
+
+        svgNotes.enabled = val;
         if (svgNotes.enabled) {
             showLayer();
         } else {
             hideLayer();
+            if (context.selectedNoteID()) {
+                context.enter(modeBrowse(context));
+            }
         }
+
         dispatch.call('change');
         return this;
     };
