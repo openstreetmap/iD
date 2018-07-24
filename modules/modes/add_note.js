@@ -3,13 +3,9 @@ import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelectNote } from './index';
 import { osmNote } from '../osm';
 import { services } from '../services';
-import { dispatch as d3_dispatch } from 'd3-dispatch';
-
 
 
 export function modeAddNote(context) {
-
-    var dispatch = d3_dispatch('change');
 
     var mode = {
         id: 'add-note',

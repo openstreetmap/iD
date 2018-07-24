@@ -1,25 +1,15 @@
-import _find from 'lodash-es/find';
-
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { dispatch as d3_dispatch } from 'd3-dispatch';
-
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import { geoVecInterp } from '../geo';
 
-import { t } from '../util/locale';
-
 import { services } from '../services';
 
-
 import {
-    actionAddMidpoint,
-    actionConnect,
-    actionMoveNode,
     actionNoop
 } from '../actions';
 
@@ -30,16 +20,11 @@ import {
 } from '../behavior';
 
 import {
-    geoChooseEdge,
-    geoHasLineIntersections,
-    geoHasSelfIntersections,
     geoVecSubtract,
     geoViewportEdge
 } from '../geo';
 
 import { modeBrowse, modeSelectNote } from './index';
-import { osmJoinWays, osmNode } from '../osm';
-import { uiFlash } from '../ui';
 
 
 export function modeDragNote(context) {
@@ -51,14 +36,10 @@ export function modeDragNote(context) {
         .on('hover', context.ui().sidebar.hover);
     var edit = behaviorEdit(context);
 
-    var dispatch = d3_dispatch('redraw', 'change');
-
     var _nudgeInterval;
     var _restoreSelectedNoteID = [];
-    var _wasMidpoint = false;
     var _isCancelled = false;
     var _activeEntity;
-    var _startLoc;
     var _lastLoc;
 
 
@@ -112,7 +93,6 @@ export function modeDragNote(context) {
 
     function start(entity) {
         _activeEntity = entity;
-        _startLoc = entity.loc;
 
         context.surface().selectAll('.note-' + _activeEntity.id)
             .classed('active', true);
@@ -130,12 +110,12 @@ export function modeDragNote(context) {
         _lastLoc = context.projection.invert(d3_event.point);
 
         doMove(entity);
-        // var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
-        // if (nudge) {
-        //     startNudge(entity, nudge);
-        // } else {
-        //     stopNudge();
-        // }
+        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
+        if (nudge) {
+            startNudge(entity, nudge);
+        } else {
+            stopNudge();
+        }
 
     }
 
