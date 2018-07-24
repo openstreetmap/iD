@@ -885,10 +885,8 @@ export default {
 
         var comment = note.newComment;
         if (note.newCategory && note.newCategory !== 'None') { comment += ' #' + note.newCategory; }
-        var path = '/api/0.6/notes?' +
-        'lat=' + note.loc[1] +
-        '&lon=' + note.loc[0] +
-        '&' + utilQsString({ text: comment });
+
+        var path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
 
         _noteCache.inflightPost[note.id] = oauth.xhr(
             { method: 'POST', path: path },

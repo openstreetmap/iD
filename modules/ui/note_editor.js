@@ -114,39 +114,39 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'note-save save-section cf');
 
-        // if new note, show categories to pick from
-        if (_note.isNew()) {
-            var presets = context.presets();
+        // // if new note, show categories to pick from
+        // if (_note.isNew()) {
+        //     var presets = context.presets();
 
-            // NOTE: this key isn't a age and therefore there is no documentation (yet)
-            _fieldsArr = [
-                uiField(context, presets.field('category'), null, { show: true, revert: false }),
-            ];
+        //     // NOTE: this key isn't a age and therefore there is no documentation (yet)
+        //     _fieldsArr = [
+        //         uiField(context, presets.field('category'), null, { show: true, revert: false }),
+        //     ];
 
-            _fieldsArr.forEach(function(field) {
-                field
-                    .on('change', changeCategory);
-            });
+        //     _fieldsArr.forEach(function(field) {
+        //         field
+        //             .on('change', changeCategory);
+        //     });
 
-            noteSaveEnter
-                .append('div')
-                .attr('class', 'note-category')
-                .call(formFields.fieldsArr(_fieldsArr));
-        }
+        //     noteSaveEnter
+        //         .append('div')
+        //         .attr('class', 'note-category')
+        //         .call(formFields.fieldsArr(_fieldsArr));
+        // }
 
-        function changeCategory() {
-            // NOTE: perhaps there is a better way to get value
-            var val = d3_select('input[name=\'category\']:checked').property('__data__') || undefined;
+        // function changeCategory() {
+        //     // NOTE: perhaps there is a better way to get value
+        //     var val = d3_select('input[name=\'category\']:checked').property('__data__') || undefined;
 
-            // store the unsaved category with the note itself
-            _note = _note.update({ newCategory: val });
-            var osm = services.osm;
-            if (osm) {
-                osm.replaceNote(_note);  // update note cache
-            }
-            noteSave
-                .call(noteSaveButtons);
-        }
+        //     // store the unsaved category with the note itself
+        //     _note = _note.update({ newCategory: val });
+        //     var osm = services.osm;
+        //     if (osm) {
+        //         osm.replaceNote(_note);  // update note cache
+        //     }
+        //     noteSave
+        //         .call(noteSaveButtons);
+        // }
 
         noteSaveEnter
             .append('h4')

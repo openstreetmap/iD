@@ -304,26 +304,6 @@ en:
       castle_type:
         # castle_type=*
         label: Type
-      category:
-        # 'none=*, updateDetails=*, missing=*, wrongLocation=*, groundtruth=*, doesNotExist=*, discussion=*'
-        label: Category
-        options:
-          # discussion=yes
-          discussion: Needs discussing
-          # doesNotExist=yes
-          doesNotExist: Does not or never existed
-          # groundtruth=yes
-          groundtruth: Ground truth or needs local confirmation
-          # missing=yes
-          missing: Something is missing
-          # none=yes
-          none: None
-          # updateDetails=yes
-          updateDetails: Update or add details
-          # wrongLocation=yes
-          wrongLocation: Wrong location
-        # category field placeholder
-        placeholder: Unknown
       clothes:
         # clothes=*
         label: Clothes
