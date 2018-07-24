@@ -39,14 +39,14 @@
 
 .note-header-icon .note-icon-annotation {
     position: absolute;
-    top: 21px;
-    left: 21px;
+    top: 22px;
+    left: 22px;
     margin: auto;
 }
 
 .note-header-icon .note-icon-annotation .icon {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
 }
 
 
@@ -101,6 +101,7 @@
     background: #ececec;
     padding: 1px 10px;
     border-radius: 8px;
+    margin-top: 20px;
 }
 
 .comment {

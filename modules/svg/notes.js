@@ -99,7 +99,7 @@ export function svgNotes(projection, context, dispatch) {
         var notesEnter = notes.enter()
             .append('g')
             .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
-            .classed('new', function(d){ return d.id < 0; });
+            .classed('new', function(d) { return d.id < 0; });
 
         notesEnter
             .append('path')
@@ -122,16 +122,15 @@ export function svgNotes(projection, context, dispatch) {
             .attr('y', '-22px')
             .attr('xlink:href', '#iD-icon-note');
 
-        // add dots if there's a comment thread
         notesEnter.selectAll('.note-annotation')
             .data(function(d) { return [d]; })
             .enter()
             .append('use')
-            .attr('class', 'note-annotation thread')
-            .attr('width', '14px')
-            .attr('height', '14px')
-            .attr('x', '-5px')
-            .attr('y', '-21px')
+            .attr('class', 'note-annotation')
+            .attr('width', '10px')
+            .attr('height', '10px')
+            .attr('x', '-3px')
+            .attr('y', '-19px')
             .attr('xlink:href', function(d) {
                 return '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
             });
