@@ -86,6 +86,9 @@ export function modeDragNote(context) {
 
 
     function end(note) {
+        // force a reraw (there is no history change that would otherwise do this)
+        context.pan([0,0]);
+
         context
             .selectedNoteID(note.id)
             .enter(modeSelectNote(context, note.id));

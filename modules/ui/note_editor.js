@@ -330,6 +330,7 @@ export function uiNoteEditor(context) {
                     osm.removeNote(d);
                 }
                 context.enter(modeBrowse(context));
+                dispatch.call('change');
             });
 
         buttonSection.select('.save-button')   // select and propagate data

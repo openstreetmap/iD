@@ -480,8 +480,7 @@ export function rendererMap(context) {
             .call(drawLayers);
 
         // OSM
-        // NOTE: when `map.notesEditable()` is removed, `redraw()` keep being called on timer
-        if (map.editable() || map.notesEditable()) {
+        if (map.editable()) {
             context.loadTiles(projection);
             drawVector(difference, extent);
         } else {
