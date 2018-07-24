@@ -339,8 +339,6 @@ function parseXML(xml, callback, options) {
 
 // replace or remove note from rtree
 function updateRtree(item, replace) {
-    // NOTE: other checks needed? (e.g., if cache.data.children.length decrements ...)
-
     _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
 
     if (replace) {
@@ -899,9 +897,7 @@ export default {
             if (err) { return callback(err); }
 
             // we get the updated note back, remove from caches and reparse..
-            var item = encodeNoteRtree(note);
-            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-            delete _noteCache.note[note.id];
+            this.removeNote(note);
 
             var options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
@@ -953,9 +949,7 @@ export default {
             if (err) { return callback(err); }
 
             // we get the updated note back, remove from caches and reparse..
-            var item = encodeNoteRtree(note);
-            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-            delete _noteCache.note[note.id];
+            this.removeNote(note);
 
             var options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
@@ -1103,8 +1097,7 @@ export default {
         if (!(note instanceof osmNote) || !note.id) return;
 
         delete _noteCache.note[note.id];
-
-        updateRtree(encodeNoteRtree(note), false);
+        updateRtree(encodeNoteRtree(note), false);  // false = remove
     },
 
 
@@ -1112,10 +1105,8 @@ export default {
     replaceNote: function(note) {
         if (!(note instanceof osmNote) || !note.id) return;
 
-        _noteCache.note[note.id] = note; // update (or insert) in _noteCache.note
-
-        updateRtree(encodeNoteRtree(note), true);
-
+        _noteCache.note[note.id] = note;
+        updateRtree(encodeNoteRtree(note), true);  // true = replace
         return note;
     }
 
