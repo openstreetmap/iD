@@ -9,8 +9,8 @@ import { services } from '../services';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
 
-import { uiField } from './field';
-import { uiFormFields } from './form_fields';
+// import { uiField } from './field';
+// import { uiFormFields } from './form_fields';
 
 import {
     uiNoteComments,
@@ -30,10 +30,10 @@ export function uiNoteEditor(context) {
     var noteComments = uiNoteComments();
     var noteHeader = uiNoteHeader();
 
-    var formFields = uiFormFields(context);
+    // var formFields = uiFormFields(context);
 
     var _note;
-    var _fieldsArr;
+    // var _fieldsArr;
 
 
     function noteEditor(selection) {
@@ -48,8 +48,6 @@ export function uiNoteEditor(context) {
             .append('button')
             .attr('class', 'fr note-editor-close')
             .on('click', function() {
-                var osm = services.osm;
-                if (_note.isNew()) { osm.removeNote(_note); } // delete new note
                 context.enter(modeBrowse(context));
             })
             .call(svgIcon('#iD-icon-close'));
@@ -297,26 +295,56 @@ export function uiNoteEditor(context) {
             .append('div')
             .attr('class', 'buttons');
 
-        buttonEnter
-            .append('button')
-            .attr('class', function() {
-                return _note.isNew() ? 'button add-note-button action' : 'button status-button action';
-            })
-            .append('span')
-            .attr('class', 'label');
+        if (_note.isNew()) {
+            buttonEnter
+                .append('button')
+                .attr('class', 'button cancel-button secondary-action')
+                .text(t('confirm.cancel'));
 
-        if (!_note.isNew()) {
+            buttonEnter
+                .append('button')
+                .attr('class', 'button save-button action')
+                .text(t('note.save'));
+
+        } else {
+            buttonEnter
+                .append('button')
+                .attr('class', 'button status-button action');
+
             buttonEnter
                 .append('button')
                 .attr('class', 'button comment-button action')
-                .append('span')
-                .attr('class', 'label')
                 .text(t('note.comment'));
         }
+
 
         // update
         buttonSection = buttonSection
             .merge(buttonEnter);
+
+        buttonSection.select('.cancel-button')   // select and propagate data
+            .on('click.cancel', function(d) {
+                this.blur();    // avoid keeping focus on the button - #4641
+                var osm = services.osm;
+                if (osm) {
+                    osm.removeNote(d);
+                }
+                context.enter(modeBrowse(context));
+            });
+
+        buttonSection.select('.save-button')   // select and propagate data
+            .attr('disabled', function(d) {
+                return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
+            })
+            .on('click.save', function(d) {
+                this.blur();    // avoid keeping focus on the button - #4641
+                var osm = services.osm;
+                if (osm) {
+                    osm.postNoteCreate(d, function(err, note) {
+                        dispatch.call('change', note);
+                    });
+                }
+            });
 
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
@@ -340,26 +368,11 @@ export function uiNoteEditor(context) {
             .attr('disabled', function(d) {
                 return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
             })
-            .on('click.save', function(d) {
+            .on('click.comment', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var osm = services.osm;
                 if (osm) {
                     osm.postNoteUpdate(d, d.status, function(err, note) {
-                        dispatch.call('change', note);
-                    });
-                }
-            });
-
-        buttonSection.select('.add-note-button')   // select and propagate data
-            .text(t('note.newNote'))
-            .attr('disabled', function(d) {
-                return (d.status === 'open' && d.newComment) ? null : true;
-            })
-            .on('click.save', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.postNoteCreate(d, function(err, note) {
                         dispatch.call('change', note);
                     });
                 }
