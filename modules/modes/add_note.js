@@ -29,6 +29,9 @@ export function modeAddNote(context) {
         var note = osmNote({ loc: loc, status: 'open', comments: [] });
         osm.replaceNote(note);
 
+        // force a reraw (there is no history change that would otherwise do this)
+        context.pan([0,0]);
+
         context
             .selectedNoteID(note.id)
             .enter(modeSelectNote(context, note.id).newFeature(true));
