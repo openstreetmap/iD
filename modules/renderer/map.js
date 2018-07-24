@@ -212,7 +212,7 @@ export function rendererMap(context) {
             .call(context.background());
 
         context.on('enter.map',  function() {
-            if ((map.editable() && !_transformed) || map.noteEditable()) {
+            if (map.editable() && !_transformed) {
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
                 var selectedAndParents = {};
@@ -239,7 +239,6 @@ export function rendererMap(context) {
                     .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
 
                 dispatch.call('drawn', this, { full: false });
-
 
                 // redraw everything else later
                 scheduleRedraw();
@@ -481,7 +480,8 @@ export function rendererMap(context) {
             .call(drawLayers);
 
         // OSM
-        if (map.editable() || map.noteEditable()) { // NOTE: when `map.noteEditable()` is removed, `redraw()` keep being called on timer
+        // NOTE: when `map.notesEditable()` is removed, `redraw()` keep being called on timer
+        if (map.editable() || map.notesEditable()) {
             context.loadTiles(projection);
             drawVector(difference, extent);
         }
@@ -849,7 +849,7 @@ export function rendererMap(context) {
     };
 
 
-    map.noteEditable = function() {
+    map.notesEditable = function() {
         var noteLayer = surface.selectAll('.data-layer-notes');
         if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
 
