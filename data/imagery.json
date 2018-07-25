@@ -42137,6 +42137,7 @@
       "name": "MTBmap.no",
       "type": "tms",
       "template": "https://mtbmap.no/tiles/osm/mtbmap/{zoom}/{x}/{y}.jpg",
+      "tileSize": 512,
       "zoomExtent": [3, 14],
       "polygon": [
         [

@@ -96,6 +96,8 @@ sources.concat(whitelist).forEach(function(source) {
     if (source.id === 'Mapbox') {
         im.template = im.template.replace('.jpg', '@2x.jpg');
         im.tileSize = 512;
+    } else if (source.id === 'mtbmap-no') {
+        im.tileSize = 512;
     }
 
     if (source.type === 'wms') {
