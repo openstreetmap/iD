@@ -16,6 +16,7 @@ import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
+import { parseBboxEntities, authdParseBboxEntities } from '../util/worker_handler';
 import { geoExtent, geoVecAdd } from '../geo';
 
 import {
@@ -182,50 +183,6 @@ function encodeNoteRtree(note) {
 
 
 var parsers = {
-    node: function nodeData(obj, uid) {
-        var attrs = obj.attributes;
-        return new osmNode({
-            id: uid,
-            visible: getVisible(attrs),
-            version: attrs.version.value,
-            changeset: attrs.changeset && attrs.changeset.value,
-            timestamp: attrs.timestamp && attrs.timestamp.value,
-            user: attrs.user && attrs.user.value,
-            uid: attrs.uid && attrs.uid.value,
-            loc: getLoc(attrs),
-            tags: getTags(obj)
-        });
-    },
-
-    way: function wayData(obj, uid) {
-        var attrs = obj.attributes;
-        return new osmWay({
-            id: uid,
-            visible: getVisible(attrs),
-            version: attrs.version.value,
-            changeset: attrs.changeset && attrs.changeset.value,
-            timestamp: attrs.timestamp && attrs.timestamp.value,
-            user: attrs.user && attrs.user.value,
-            uid: attrs.uid && attrs.uid.value,
-            tags: getTags(obj),
-            nodes: getNodes(obj),
-        });
-    },
-
-    relation: function relationData(obj, uid) {
-        var attrs = obj.attributes;
-        return new osmRelation({
-            id: uid,
-            visible: getVisible(attrs),
-            version: attrs.version.value,
-            changeset: attrs.changeset && attrs.changeset.value,
-            timestamp: attrs.timestamp && attrs.timestamp.value,
-            user: attrs.user && attrs.user.value,
-            uid: attrs.uid && attrs.uid.value,
-            tags: getTags(obj),
-            members: getMembers(obj)
-        });
-    },
 
     note: function parseNote(obj, uid) {
         var attrs = obj.attributes;
@@ -293,6 +250,45 @@ var parsers = {
     }
 };
 
+
+function parseNodeWaysRels(simpleObject, callback, options) {
+    options = _extend({ skipSeen: true }, options);
+
+    if (!simpleObject || simpleObject.length === 0) {
+        return callback({ message: 'No XML', status: -1 });
+    }
+
+    var results = [];
+
+    for (var i = 0; i < simpleObject.length; i++) {
+        var child = simpleObject[i];
+        var uid = child.id;
+
+        if (options.skipSeen) {
+            if (_tileCache.seen[uid]) continue;  // avoid reparsing a "seen" entity
+            _tileCache.seen[uid] = true;
+        }
+
+        switch (child.id.charAt(0)) {
+            case 'n': {
+                results.push(osmNode(child));
+                break;
+            }
+            case 'w': {
+                results.push(osmWay(child));
+                break;
+            }
+            case 'r': {
+                results.push(osmRelation(child));
+                break;
+            }
+            default: {
+                return callback('Entity:' + child.id + ' not parsed', null)
+            }
+        }
+    }
+    callback(null, results);
+}
 
 function parseXML(xml, callback, options) {
     options = _extend({ skipSeen: true }, options);
@@ -439,7 +435,7 @@ export default {
         var that = this;
         var cid = _connectionID;
 
-        function done(err, xml) {
+        function done(err, rawEntities) {
             if (that.getConnectionId() !== cid) {
                 if (callback) callback({ message: 'Connection Switched', status: -1 });
                 return;
@@ -467,17 +463,16 @@ export default {
                     if (err) {
                         return callback(err);
                     } else {
-                        return parseXML(xml, callback, options);
+                        return parseNodeWaysRels(rawEntities, callback, options);
                     }
                 }
             }
         }
-
         if (this.authenticated()) {
-            return oauth.xhr({ method: 'GET', path: path }, done);
+            return authdParseBboxEntities(oauth.getXhrParams({ method: 'GET', path: path }), done);
         } else {
             var url = urlroot + path;
-            return d3_xml(url).get(done);
+            return parseBboxEntities(url, done);
         }
     },
 

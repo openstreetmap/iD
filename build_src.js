@@ -15,6 +15,8 @@ module.exports = function buildSrc() {
 
         // Start clean
         unlink('dist/iD.js');
+        unlink('dist/iD-worker.js');
+        unlink('dist/iD-worker.js.map');
         unlink('dist/iD.js.map');
 
         console.log('building src');
@@ -22,7 +24,7 @@ module.exports = function buildSrc() {
 
         building = true;
 
-        return rollup
+       const main =  rollup
             .rollup({
                 input: './modules/id.js',
                 plugins: [
@@ -48,12 +50,34 @@ module.exports = function buildSrc() {
                     sourcemap: true,
                     strict: false
                 });
+            });
+        const worker = rollup
+            .rollup({
+                input: './modules/worker.js',
+                plugins: [
+                    nodeResolve({
+                        module: true,
+                        main: true,
+                        browser: false
+                    }),
+                    commonjs(),
+                    json()
+                ],
             })
-            .then(function () {
+            .then(function(bundle) {
+                return bundle.write({
+                    format: 'iife',
+                    file: 'dist/iD-worker.js',
+                    sourcemap: true,
+                    strict: false
+                });
+            });
+        return Promise.all([main, worker])
+            .then(function() {
                 building = false;
                 console.timeEnd(colors.green('src built'));
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 building = false;
                 console.error(err);
                 process.exit(1);
