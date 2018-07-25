@@ -782,6 +782,10 @@
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
+        "keepRight": {
+            "tooltip": "Q/A data from keepright.at",
+            "title": "Keep Right"
+        },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
             "title": "Photo Overlay (Bing Streetside)",
