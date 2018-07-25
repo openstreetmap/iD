@@ -35,7 +35,8 @@ export function utilTiler() {
     function tiler() {
         var z = geoScaleToZoom(_scale / (2 * Math.PI), _tileSize);
         var z0 = bound(Math.round(z));
-        var k = Math.pow(2, z - z0 + 8);
+        var log2ts = Math.log(_tileSize) * Math.LOG2E;
+        var k = Math.pow(2, z - z0 + log2ts);
         var origin = [
             (_translate[0] - _scale / 2) / k,
             (_translate[1] - _scale / 2) / k

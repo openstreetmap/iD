@@ -18,7 +18,7 @@ export function rendererTileLayer(context) {
 
 
     function tileSizeAtZoom(d, z) {
-        var EPSILON = 0.002;
+        var EPSILON = 0.002;    // close seams
         return ((_tileSize * Math.pow(2, z - d[2])) / _tileSize) + EPSILON;
     }
 
@@ -272,8 +272,7 @@ export function rendererTileLayer(context) {
         _source = _;
         _tileSize = _source.tileSize;
         _cache = {};
-        // tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);   // not yet
-        tiler.zoomExtent(_source.zoomExtent);
+        tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
         return background;
     };
 
