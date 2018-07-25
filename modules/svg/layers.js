@@ -9,6 +9,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgDebug } from './debug';
 import { svgGpx } from './gpx';
+import { svgKeepRight } from './keepRight';
 import { svgStreetside } from './streetside';
 import { svgMvt } from './mvt';
 import { svgMapillaryImages } from './mapillary_images';
@@ -26,6 +27,7 @@ export function svgLayers(projection, context) {
     var layers = [
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
+        { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
         { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
         { id: 'mvt', layer: svgMvt(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},

@@ -739,6 +739,10 @@
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
         },
+        "keepRight": {
+            "tooltip": "Q/A data from keepright.at",
+            "title": "Keep Right"
+        },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
             "title": "Photo Overlay (Bing Streetside)",

@@ -609,6 +609,9 @@ en:
     drag_drop: "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse"
     zoom: "Zoom to layer"
     browse: "Browse for a file"
+  keepRight:
+    tooltip: Q/A data from keepright.at
+    title: Keep Right
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"
