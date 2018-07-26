@@ -352,8 +352,6 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Aproxime para editar",
-        "login": "Iniciar sessão",
-        "logout": "Terminar sessão",
         "loading_auth": "A fazer a ligação ao OpenStreetMap...",
         "report_a_bug": "Reportar um bug.",
         "help_translate": "Ajudar a traduzir.",
@@ -710,7 +708,6 @@
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Edição em ecrã inteiro.",
         "gpx": {
-            "local_layer": "Ficheiro local",
             "drag_drop": "Arraste e largue um ficheiro .gpx, .geojson ou .kml na página ou clique no botão da direita para selecionar um",
             "zoom": "Aproximar para a camada",
             "browse": "Encontrar ficheiro"
@@ -888,7 +885,6 @@
             },
             "streetlevel": {
                 "title": "Imagens ao nível de rua",
-                "intro": "As imagens ao nível de rua são bastante úteis para mapear sinais de trânsito, negócios e outros detalhes que não são visíveis em imagens aéreas ou de satélite. O editor iD suporta imagens ao nível de rua do [Mapillary](https://www.mapillary.com) e do [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Utilizar imagens ao nível de rua",
                 "using": "Para utilizar imagens ao nível de rua para mapear, clique no painel {data} **Dados do mapa** ao lado do mapa para ativar ou desativar a camada de imagens de rua que estão disponíveis.",
                 "photos": "Quando ativada, a camada de imagens de rua mostrará uma linha com uma sequência de imagens. Em níveis de aproximação mais elevados, surgirá um marcador com a forma dum circulo que mostrará a localização de cada fotografia, quanto maior a aproximação, surgirá um cone que mostra a direção que a câmara estava apontada quando a imagem foi capturada. ",
@@ -1262,7 +1258,6 @@
                     "add_point": "Modo 'adicionar ponto'",
                     "add_line": "Modo 'adicionar linha'",
                     "add_area": "Modo 'adicionar área'",
-                    "place_point": "Colocar um ponto",
                     "disable_snap": "Manter para desativar atração a pontos",
                     "stop_line": "Terminar de desenhar uma linha ou área"
                 },
@@ -3107,6 +3102,10 @@
                 "amenity/library": {
                     "name": "Biblioteca",
                     "terms": "Biblioteca, Livros, Consulta, Publica"
+                },
+                "amenity/love_hotel": {
+                    "name": "Motel só para casais",
+                    "terms": "Motel"
                 },
                 "amenity/marketplace": {
                     "name": "Mercado / Feira",

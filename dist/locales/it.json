@@ -21,6 +21,11 @@
                 "description": "Aggiungi alla mappa ristoranti, monumenti, cassette postali o altri punti.",
                 "tail": "Clicca sulla mappa per inserire un punto."
             },
+            "add_note": {
+                "title": "Nota",
+                "description": "Hai trovato un errore? Segnalalo agli altri mappatori.",
+                "tail": "Clicca sulla mappa per aggiungere una nota."
+            },
             "browse": {
                 "title": "Naviga",
                 "description": "Muovi ed ingrandisci la mappa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Aggiunto un punto.",
                     "vertex": "Aggiunto un nodo ad una strada.",
-                    "relation": "Aggiunta una relazione."
+                    "relation": "Aggiunta una relazione.",
+                    "note": "Una nota aggiunta."
                 }
             },
             "start": {
@@ -270,7 +276,7 @@
                 }
             },
             "reverse": {
-                "title": "Inverti Direzione",
+                "title": "Inverti direzione",
                 "description": "Inverti il senso di direzione di questa linea.",
                 "key": "V",
                 "annotation": "Cambiato verso ad una linea."
@@ -297,6 +303,14 @@
                     "create": "Limitazione aggiunta",
                     "delete": "Limitazione rimossa"
                 }
+            },
+            "detach_node": {
+                "title": "Stacca",
+                "key": "E",
+                "description": "Stacca questo nodo da linee/aree.",
+                "annotation": "Un nodo staccato da una linea/area genitore.",
+                "restriction": "Questo nodo non può essere staccato perché ciò danneggerebbe una relazione “{relation}”.",
+                "connected_to_hidden": "Questo nodo non può essere staccato perché è collegato ad un elemento nascosto."
             }
         },
         "restriction": {
@@ -352,8 +366,8 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Ingrandisci per modificare",
-        "login": "accedi",
-        "logout": "esci",
+        "login": "Accedi",
+        "logout": "Esci",
         "loading_auth": "Connettendomi ad OpenStreetMap...",
         "report_a_bug": "Segnala un bug",
         "help_translate": "Aiuta nelle traduzioni",
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "Dati delle mappe da OpenStreetMap",
                     "title": "Dati OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Dati delle note da OpenStreetMap",
+                    "title": "Note di OpenStreetMap"
                 }
             },
             "fill_area": "Riempimento aree",
@@ -707,18 +725,25 @@
             "in": "Ingrandisci",
             "out": "Rimpicciolisci"
         },
-        "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
+        "cannot_zoom": "Impossibile rimpicciolire ulteriormente nella modalità attuale.",
         "full_screen": "Passa a schermo intero",
         "gpx": {
-            "local_layer": "File locale",
+            "local_layer": "Aggiungi GPX",
             "drag_drop": "Trascina e rilascia un file .gpx, .geojson o .kml sulla pagina o clicca il pulsante a destra per sceglierne uno",
             "zoom": "Zoom sul livello",
+            "browse": "Scegli un file"
+        },
+        "mvt": {
+            "local_layer": "Aggiungi MVT",
+            "drag_drop": "Trascina e rilascia un file .mvt o .pbf sulla pagina oppure clicca il pulsante a destra per sceglierne uno",
+            "zoom": "Ingrandisci sul livello",
             "browse": "Scegli un file"
         },
         "streetside": {
             "tooltip": "Foto Streetside da Microsoft",
             "title": "Foto sovrimpresse (Bing Streetside)",
             "report": "Segnala un problema di privacy su questa foto",
+            "view_on_bing": "Vedi su Bing Maps",
             "hires": "Alta risoluzione"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Visualizza questa immagine con OpenStreetCam"
+        },
+        "note": {
+            "note": "Nota",
+            "title": "Modifica nota",
+            "anonymous": "anonimo",
+            "closed": "(Chiusa)",
+            "commentTitle": "Commenti",
+            "newComment": "Nuovo commento",
+            "inputPlaceholder": "Inserire un commento da condividere con gli altri utenti.",
+            "close": "Chiudi nota",
+            "open": "Riapri nota",
+            "comment": "Commenta",
+            "close_comment": "Chiudi e commenta",
+            "open_comment": "Riapri e commenta",
+            "report": "Segnala",
+            "new": "Nuova nota",
+            "newDescription": "Descrivi il problema.",
+            "save": "Salva nota",
+            "login": "Per poter modificare o commentare questa nota devi aver effettuato l’accesso.",
+            "upload_explanation": "I tuoi commenti saranno visibili pubblicamente da tutti gli utenti di OpenStreetMap.",
+            "upload_explanation_with_user": "I tuoi commenti come utente {user} saranno visibili pubblicamente da tutti gli utenti di OpenStreetMap."
         },
         "help": {
             "title": "Aiuto",
@@ -876,6 +922,17 @@
                 "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo.",
                 "boundary_add": "Per aggiungere un elemento ad una relazione confine, seleziona l'elemento e scorri verso il basso fino alla sezione \"Tutte le relazioni\" dell'editor dell'elemento, poi clicca sul pulsante {plus} aggiungi per aggiungere l'elemento ad una relazione vicina già esistente o per crearne una nuova."
             },
+            "notes": {
+                "title": "Note",
+                "intro": "Le *note* servono per far sapere agli altri utenti che un elemento della mappa ha bisogno di essere controllato o corretto. Le note segnano una posizione specifica della mappa. Per vedere le note esistenti o aggiungerne di nuove, clicca sul pannello {data} **Dati della mappa** e abilita il livello delle note OpenStreetMap. ",
+                "add_note_h": "Aggiunta di note",
+                "add_note": "Per aggiungere una nuova nota, clicca il pulsante {note} **Nota** sulla barra degli strumenti sopra la mappa oppure premi la scorciatoia da tastiera `4`. Il cursore del mouse diventerà un simbolo a forma di croce. Per piazzare una nuova nota sulla mappa, posiziona il cursore del mouse dove deve stare la nota e poi clicca col {leftclick} tasto sinistro del mouse oppure premi `Spazio`.",
+                "move_note": "Solo le nuove note possono essere spostate. Per muovere una nota, posiziona il cursore del mouse sulla nuova nota e poi premi e tieni premuto il {leftclick} tasto sinistro del mouse mentre la sposti nella sua nuova posizione.",
+                "update_note_h": "Chiusura, riapertura e aggiunta di commenti",
+                "update_note": "Una nota esistente può essere aggiornata chiudendola, riaprendola oppure commentandola. La chiusura di una nota indica che il problema è stato risolto. La riapertura di una nota indica che il problema originale non è stato risolto.",
+                "save_note_h": "Salvataggio delle note",
+                "save_note": "Devi effettuare il salvataggio delle modifiche alle note per ogni nota cliccando nei pulsanti sotto ai commenti della nota. Le modifiche alle note **non** sono incluse nei gruppi di modifica che carichi su OpenStreetMap."
+            },
             "imagery": {
                 "title": "Immagini di sfondo",
                 "intro": "Le immagini di sfondo che appaiono dietro i dati della mappa sono una risorsa importante per il mappatore. Queste immagini possono essere foto aeree scattate da satelliti, aeroplani o droni oppure ancora mappe antiche digitalizzate o dati fruibili liberamente.",
@@ -888,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "Foto a livello stradale",
-                "intro": "Le foto a livello stradale sono utili per mappare segnali stradali, attività commerciali e altri dettagli che non si possono vedere da foto satellitari o aeree. L'editor iD è compatibile con le foto a livello stradale di [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Le foto a livello stradale sono utili per mappare segnali stradali, attività commerciali e altri dettagli che non si possono vedere da foto satellitari o aeree. L’editor iD è compatibile con le foto a livello stradale di [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Utilizzo delle foto a livello stradale",
                 "using": "Per usare le foto a livello stradale, clicca sul pannello {data} **Dati mappa** a lato della mappa per abilitare o disabilitare i livelli di foto disponibili.",
                 "photos": "Quando abilitato, il livello delle foto mostra una linea lungo la sequenza di foto. A livelli di ingrandimento maggiori, un cerchio indica il punto in cui ogni foto è stata scattata, mentre a livelli di ingrandimento ancora più grandi, un cono mostra la direzione della fotocamera al momento dello scatto.",
@@ -1267,10 +1324,11 @@
                 "title": "Modifica",
                 "drawing": {
                     "title": "Disegna",
-                    "add_point": "modo 'aggiungi punto'",
-                    "add_line": "modo 'aggiungi linea'",
-                    "add_area": "modo 'aggiungi area'",
-                    "place_point": "Fai un punto",
+                    "add_point": "modo ‘aggiungi punto’",
+                    "add_line": "modo ‘aggiungi linea’",
+                    "add_area": "modo ‘aggiungi area’",
+                    "add_note": "modo ‘Aggiungi nota’",
+                    "place_point": "Posiziona un nodo o una nota",
                     "disable_snap": "Tieni premuto per disabilitare l'ancoraggio ai nodi preesistenti",
                     "stop_line": "Termine disegno di una linea o di un'area"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "Continua una linea dal nodo selezionato",
                     "merge": "Unisci (fondi) gli elementi selezionati",
                     "disconnect": "Disconnetti gli elementi dal nodo selezionato",
+                    "detach_node": "Stacca il nodo selezionato da linee/aree genitore",
                     "split": "Spezza una linea in due sul nodo selezionato",
                     "reverse": "Inverti la direzione di una linea",
                     "move": "Sposta gli elementi selezionati",
@@ -1622,6 +1681,9 @@
                 "capacity": {
                     "label": "Capienza",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Versamenti"
                 },
                 "castle_type": {
                     "label": "Tipo"
@@ -2278,6 +2340,9 @@
                         "underground": "Sotterraneo"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Display arrivi/partenze"
+                },
                 "payment_multi": {
                     "label": "Tipologie di pagamento"
                 },
@@ -2509,6 +2574,9 @@
                 },
                 "site": {
                     "label": "Tipo"
+                },
+                "site_type": {
+                    "label": "Tipo di sito"
                 },
                 "smoking": {
                     "label": "Zona fumatori",
@@ -4889,7 +4957,7 @@
                 },
                 "man_made/observatory": {
                     "name": "Osservatorio",
-                    "terms": "osservatorio,astronomico,meteorologico,vulcanologico,osservatorio meteorologico,osservatorio astronomico,radiotelescopio"
+                    "terms": "osservatorio,astronomico,meteorologico,vulcanologico,osservatorio meteorologico,osservatorio astronomico,radiotelescopio,specola"
                 },
                 "man_made/petroleum_well": {
                     "name": "Pozzo petrolifero",
@@ -6487,6 +6555,7 @@
                 "attribution": {
                     "text": "Termini & Feedback"
                 },
+                "description": "DigitalGlobe-Standard è un set curato di immagini che copre l’86% della terra emersa mondiale, con risoluzione disponibile dai 30 ai 60cm e copertura alternativa che usa Landsat. L’età media è di 2,31 anni anche se alcune aree vengono aggiornate due volte l’anno.",
                 "name": "Immagini DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -7309,6 +7378,10 @@
                 "description": "Mappatori e utenti OpenStreetMap nei dintorni di Portland, Maine",
                 "extendedDescription": "Maptime è letteralmente tempo per la mappatura. La nostra missione è quella di aprire le porte della cartografia a chiunque sia interessato, creando un posto e dei momenti per l’apprendimento collaborativo, l’esplorazione, la creazione di mappe usando strumenti e tecnologie per la mappatura."
             },
+            "us-ma-mailinglist": {
+                "name": "Mailinglist Talk-us-massachusetts",
+                "description": "Mailinglist per la comunità OSM del Massachusetts"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Miglioriamo OpenStreetMap nell’area di Cleveland",
@@ -7336,6 +7409,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Mappatori e utenti OpenStreetMap, sviluppatori e appassionati nell'area Metropolitana di New York"
+            },
+            "OSM-Portland-forum": {
+                "name": "Gruppo Google di OpenStreetMap PDX",
+                "description": "Forum e mailinglist degli utenti di OpenStreetMap nell’area di Portland",
+                "extendedDescription": "Questo gruppo serve a facilitare i miglioramenti di OpenStreetMap nell’area di Portland (stato dell’Oregon) e per sostenere applicazioni come Open trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",

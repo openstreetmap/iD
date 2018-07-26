@@ -21,6 +21,11 @@
                 "description": "Voeg restaurants, monumenten, brievenbussen of andere punten toe aan de kaart.",
                 "tail": "Klik in de kaart om een punt toe te voegen."
             },
+            "add_note": {
+                "title": "Opmerking bij kaart",
+                "description": "Een probleem gezien? Laat het aan andere mappers weten.",
+                "tail": "Klik op de kaart om een \"Opmerking bij kaart\" te maken."
+            },
             "browse": {
                 "title": "Blader",
                 "description": "Verschuif de kaart en zoom in of uit."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Punt toegevoegd.",
                     "vertex": "Knoop aan een weg toegevoegd.",
-                    "relation": "Relatie toegevoegd."
+                    "relation": "Relatie toegevoegd.",
+                    "note": "Opmerking bij kaart gemaakt."
                 }
             },
             "start": {
@@ -297,6 +303,13 @@
                     "create": "Afslagbeperking toegevoegd",
                     "delete": "Afslagbeperking weggehaald"
                 }
+            },
+            "detach_node": {
+                "title": "Losmaken",
+                "description": "Maak dit punt los van deze lijnen/vlakken.",
+                "annotation": "Punt losgemaakt van deze lijnen/vlakken.",
+                "restriction": "Dit punt kan niet losgemaakt worden omdat het  een \"{relation}\" relatie zou beschadigen.",
+                "connected_to_hidden": "Dit punt kan niet losgemaakt worden omdat het verbonden is met een verborgen object."
             }
         },
         "restriction": {
@@ -352,8 +365,8 @@
             "localized_translation_name": "Naam"
         },
         "zoom_in_edit": "Zoom in om te bewerken",
-        "login": "Log in",
-        "logout": "Afmelden",
+        "login": "Inloggen",
+        "logout": "Uitloggen",
         "loading_auth": "Aan het verbinden met OpenStreetMap …",
         "report_a_bug": "Meld een bug",
         "help_translate": "Help vertalen",
@@ -536,6 +549,10 @@
                 "osm": {
                     "tooltip": "Kaartgegevens van OpenStreetMap",
                     "title": "OpenStreetMap-gegevens"
+                },
+                "notes": {
+                    "tooltip": "Kaartopmerking van OpenStreetMap",
+                    "title": "Kaartopmerkingen van OpenStreetMap"
                 }
             },
             "fill_area": "Vlakken inkleuren",
@@ -710,10 +727,23 @@
         "cannot_zoom": "Kan niet verder uitzoomen in huidige modus",
         "full_screen": "Volledig scherm aan/uit",
         "gpx": {
-            "local_layer": "Lokaal bestand",
+            "local_layer": "GPX toevoegen",
             "drag_drop": "Sleep een .gpx-, .geojson- of .kml-bestand naar deze pagina of klik op de knop rechts om te bladeren",
             "zoom": "Laag in beeld brengen",
             "browse": "Selecteer een bestand"
+        },
+        "mvt": {
+            "local_layer": "MVT toevoegen",
+            "drag_drop": "Sleep een .mvt of .pbf bestand naar deze pagina, of klik op de knop rechts om te browsen.",
+            "zoom": "Laag in beeld brengen",
+            "browse": "Selecteer een bestand"
+        },
+        "streetside": {
+            "tooltip": "Foto's op straatniveau van Mircrosoft",
+            "title": "Fotolaag (Bing Streetside)",
+            "report": "Rapporteer een privacy-issue met deze afbeelding",
+            "view_on_bing": "Bekijk op Bing Maps",
+            "hires": "Hoge resolutie"
         },
         "mapillary_images": {
             "tooltip": "Foto's op straatniveau van Mapillary",
@@ -732,6 +762,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Bekijk deze afbeelding op OpenStreetCam"
+        },
+        "note": {
+            "note": "Kaartopmerking",
+            "title": "Kaartopmerking bewerken",
+            "anonymous": "anoniem",
+            "closed": "(Gesloten)",
+            "commentTitle": "Commentaren",
+            "newComment": "Nieuwe commentaar",
+            "inputPlaceholder": "Voeg een commentaar toe om te delen met anderen.",
+            "close": "Kaartopmerking afsluiten",
+            "open": "Kaartopmerking heropenen",
+            "comment": "Voeg commentaar toe",
+            "close_comment": "Sluiten met commentaar",
+            "open_comment": "Heropen met commentaar",
+            "report": "Melden",
+            "new": "Nieuwe kaartopmerking",
+            "newDescription": "Omschrijf het probleem.",
+            "save": "Kaartopmerking opslaan",
+            "login": "Je moet ingelogd zijn om deze kaartopmerking te veranderen of becommentariëren.",
+            "upload_explanation": "Je commentaren zullen zichtbaar zijn voor alle OpenStreetMap gebruikers.",
+            "upload_explanation_with_user": "Je commentaren als {user} zullen zichtbaar zijn voor alle OpenStreetMap gebruikers."
         },
         "help": {
             "title": "Hulp",
@@ -870,6 +921,17 @@
                 "boundary": "Een of *grens*-relatie (Engels: *boundary*) is een groep van een of meerdere lijnen die samen een administratieve grens vormen.",
                 "boundary_add": "Om een object aan een grensrelatie toe te voegen, selecteer je het \nobject en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van \nde objectbewerker. Je kan nu kiezen uit een lijst van relaties in de \nbuurt of een nieuwe aanmaken met \"Nieuwe relatie …\""
             },
+            "notes": {
+                "title": "Kaartopmerkingen",
+                "intro": "*Kaartopmerkingen* of Notes worden gebruikt om andere gebruikers te wijzen op een object dat verbeterd moet worden. Kaaropmerkingen duiden een specifieke plaats op de kaart aan. Om bestaande kaartopmerkingen te zien of er nieuwe toe te voegen, klik op het {data} **Kaartgegevens** paneel om de OpenStreetMap Kaartopmerkingen laag te activeren.",
+                "add_note_h": "Kaartopmerkingen toevoegen",
+                "add_note": "Om een nieuwe kaartopmerking toe te voegen, klik {note} **Kaartopmerking** knop op de toolbar boven de kaart, of klik op de sneltoets `4`. Dit zal de muisaanwijzer vervangen door een kruisje. Om de nieuwe kaartopmerking te maken, ga naar de juiste plaats en {leftclick} klik met je linkermuisknop of toets `Spatiebalk`.",
+                "move_note": "Enkel nieuwe kaartopmerkingen kunnen verplaatst worden. Om te verplaatsen, zet je muisaanwijzer boven de nieuwe kaartopmerking, {leftclick} klik met je linkermuisnknop en hou ingeduwd terwijl je de kaartopmerking verplaatst naar zijn nieuwe plaats.",
+                "update_note_h": "Sluiten, Heropenen en Becommentariëren",
+                "update_note": "Een bestaande kaartopmerking kan bijgewerkt worden door ze te sluiten, te heropenen of een commentaar toe te voegen. De kaartopmerking sluiten geeft aan dat het probleem is opgelost. Heropenen betekent dat het originele probleem niet is opgelost.",
+                "save_note_h": "Kaartopmerkingen opslaan",
+                "save_note": "Je moet bewerkingen van kaartopmerkingen individueel opslaan door op de knoppen onder de commentaren bij de kaartopmerking te klikken. Bewerking van kaartopmerkingen worden **niet** mee opgeslagen met wijzigingen aan de kaart zel die je oplaadt naar OpenStreetMap."
+            },
             "imagery": {
                 "title": "Achtergrondbeelden",
                 "intro": "Het achtergrondbeeld dat onder de kaartdata verschijnt, is een belangrijke bron voor het karteren. Deze beelden kunnen luchtfoto's zijn van satellieten, vliegtuigen en drones, het kunnen ingescande historische kaarten zijn of andere vrij beschikbare brondata.",
@@ -882,7 +944,7 @@
             },
             "streetlevel": {
                 "title": "Foto's op straatniveau",
-                "intro": "Foto's op straatniveau zijn nuttig voor het in kaart brengen van verkeersborden, bedrijven en andere details die niet zichtbaar zijn op luchtfoto's. iD ondersteunt dergelijke foto's van [Mapillary](https://www.mapillary.com) en [OpenStreetCam](https://www.openstreetcam.org). Gebruik nooit Google Streetview, de wettelijke consequenties daarvan zijn namelijk niet duidelijk.",
+                "intro": "Foto's op straatniveau zijn nuttig voor het in kaart brengen van verkeersborden, bedrijven en andere details die niet zichtbaar zijn op luchtfoto's. iD ondersteunt dergelijke foto's van  [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) en [OpenStreetCam](https://www.openstreetcam.org). Gebruik nooit Google Streetview, de wettelijke consequenties daarvan zijn namelijk niet duidelijk.",
                 "using_h": "Foto's op straatniveau gebruiken",
                 "using": "Om foto's op straatniveau te gebruiken, klik je op {data} **Kaartgegevens** naast de kaart om het betreffende paneel te openen. Daar kan je beschikbare foto lagen aan of uit te zetten.",
                 "photos": "Als je de fotolaag aanzet, worden lijnen langs fotoreeksen getoond. Wanneer je meer inzoomt, wordt op elke fotolocatie een cirkel getoond. Na nog meer inzoomen wordt een kegel zichtbaar die de richting van de camera aangeeft op het moment dat de foto gemaakt werd (maar die is vaak onnauwkeurig).",
@@ -1264,7 +1326,8 @@
                     "add_point": "'Punt toevoegen'-modus",
                     "add_line": "'Lijn toevoegen'-modus",
                     "add_area": "'Vlak toevoegen'-modus",
-                    "place_point": "Punt plaatsen",
+                    "add_note": "Modus 'Kaartopmerking toevoegen'",
+                    "place_point": "Plaats punt of kaartopmerking",
                     "disable_snap": "Ingedrukt houden om punt-magnetisme uit te zetten",
                     "stop_line": "Tekenen van lijn of vlak beëindigen"
                 },
@@ -1273,6 +1336,7 @@
                     "continue_line": "Lijn verderzetten bij geselecteerde knoop",
                     "merge": "Geselecteerde objecten samenvoegen",
                     "disconnect": "Objecten bij geselecteerde knoop losmaken",
+                    "detach_node": "Geslecteerd punt losmaken van de lijn of het vlak waar het toe behoort",
                     "split": "Lijn bij geselecteerde knoop in twee splitsen",
                     "reverse": "Lijn omkeren",
                     "move": "Geselecteerde objecten verplaatsen",
@@ -6680,18 +6744,22 @@
         },
         "community": {
             "cape-coast-youthmappers": {
-                "description": "Volg ons op Twitter: {url}"
+                "name": "University of Cape Coast YouthMappers",
+                "description": "Volg ons op Twitter: {url}",
+                "extendedDescription": "Dit is officiële account van de afdeling van Youth Mappers van de University of Cape Coast, Ghana. We houden van kaarten, open data en het helpen van kwetsbaren."
             },
             "osm-gh-facebook": {
                 "name": "OpenStreetMap Ghana op Facebook",
-                "description": "Facebook-groep voor mensen met interesse in OpenStreetMap."
+                "description": "Facebook-groep voor mensen met interesse in OpenStreetMap.",
+                "extendedDescription": "Mappers van de Ghaneese gemeenschap. We promoten projecten van OpenStreetMap en het Humanitarian OpenStreetMap Team (HOT)  in Ghana. Sluit je aan."
             },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Ghana op Twitter",
                 "description": "Volg ons op Twitter: {url}"
             },
             "talk-gh": {
-                "name": "Talk-gh mailinglijst"
+                "name": "Talk-gh mailinglijst",
+                "description": "Talk-gh is de officiële mailing list van de Ghanese OSM community."
             },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagascar-Facebookgroep",

@@ -21,12 +21,17 @@
                 "description": "Bættu veitingastöðum, minnismerkjum, póstkössum eða öðrum punktum við kortið.",
                 "tail": "Smelltu á kortið til að bæta við punkti."
             },
+            "add_note": {
+                "title": "Minnispunktur",
+                "description": "Fannstu hnökra? Láttu annað kortagerðarfólk vita.",
+                "tail": "Smelltu á kortið til að bæta við minnispunkti."
+            },
             "browse": {
                 "title": "Fletta",
                 "description": "Hliðraðu til og renndu að kortinu."
             },
             "draw_area": {
-                "tail": "Smelltu til að bæta hnúta við svæðið. Smelltu á fyrsta hnútinn til að klára svæðið."
+                "tail": "Smelltu til að bæta hnútum við svæðið. Smelltu á fyrsta hnútinn til að klára svæðið."
             },
             "draw_line": {
                 "tail": "Smelltu til að bæta fleiri hnútum við línuna. Smelltu á aðrar línur til að tengjast þeim, og tvísmelltu til að klára línuna."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Bætti punkti við.",
                     "vertex": "Bætti hnúti við leið.",
-                    "relation": "Bætti við venslum."
+                    "relation": "Bætti við venslum.",
+                    "note": "Bætti við minnispunkti."
                 }
             },
             "start": {
@@ -115,7 +121,7 @@
                 },
                 "annotation": {
                     "point": "Eyddi punkti.",
-                    "vertex": "Eyddi hnút af leið.",
+                    "vertex": "Eyddi hnúti af leið.",
                     "line": "Eyddi línu.",
                     "area": "Eyddi svæði.",
                     "relation": "Eyddi venslum.",
@@ -297,6 +303,14 @@
                     "create": "Bætti við takmörkunum á beygju",
                     "delete": "Eyddi takmörkunum á beygju"
                 }
+            },
+            "detach_node": {
+                "title": "Losa",
+                "key": "E",
+                "description": "Losa þennan hnút frá þessum línum/svæðum.",
+                "annotation": "Losaði hnút frá yfirliggjandi línum/svæðum.",
+                "restriction": "Ekki er hægt að losa þetta atriði því það myndi skemma \"{relation}\" vensl.",
+                "connected_to_hidden": "Ekki er hægt að losa þetta atriði þar sem það er tengt földu eigindi."
             }
         },
         "restriction": {
@@ -352,8 +366,8 @@
             "localized_translation_name": "Nafn"
         },
         "zoom_in_edit": "Renndu að til að breyta",
-        "login": "innskráning",
-        "logout": "útskráning",
+        "login": "Skrá inn",
+        "logout": "Skrá út",
         "loading_auth": "Tengist við OpenStreetMap...",
         "report_a_bug": "Tilkynna villu",
         "help_translate": "Hjálpa til við að þýða",
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "Kortagögn frá OpenStreetMap",
                     "title": "OpenStreetMap-gögn"
+                },
+                "notes": {
+                    "tooltip": "Gögn minnispunkts frá OpenStreetMap",
+                    "title": "OpenStreetMap minnispunktar"
                 }
             },
             "fill_area": "Fylla svæði",
@@ -710,10 +728,23 @@
         "cannot_zoom": "Get ekki rennt lengra frá í núverandi ham.",
         "full_screen": "Víxla skjáfylli af/á",
         "gpx": {
-            "local_layer": "Skrá á tölvunni",
+            "local_layer": "Bæta við GPX",
             "drag_drop": "Dragðu og slepptu .gpx, .geojson eða .kml-skrá á síðuna, eða smelltu á hnappinn til hægri til að leita að skrá",
             "zoom": "Renna að lagi",
             "browse": "Finna skrá"
+        },
+        "mvt": {
+            "local_layer": "Bæta við MVT",
+            "drag_drop": "Dragðu og slepptu .mvt eða pbf skrá á síðuna eða smelltu á takkann til hægri til að fletta",
+            "zoom": "Renna að lagi",
+            "browse": "Finna skrá"
+        },
+        "streetside": {
+            "tooltip": "Ljósmyndir í götuhæð frá Microsoft",
+            "title": "Ljósmyndaþekja (Bing Streetside)",
+            "report": "Sendu tilkynningu um að þú efist um að mynd þessi virði reglur um meðferð persónuupplýsinga",
+            "view_on_bing": "Skoða á Bing Maps",
+            "hires": "Háupplausn"
         },
         "mapillary_images": {
             "tooltip": "Ljósmyndir í götuhæð frá Mapillary",
@@ -732,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Skoða þessa mynd á OpenStreetCam"
+        },
+        "note": {
+            "note": "Minnispunktur",
+            "title": "Breyta minnispunkti",
+            "anonymous": "nafnlaus",
+            "closed": "(lokað)",
+            "commentTitle": "Athugasemdir",
+            "newComment": "Ný athugasemd",
+            "inputPlaceholder": "Settu inn athugasemd sem deilt er með öðrum notendum.",
+            "close": "Loka minnispunkti",
+            "open": "Enduropna minnispunkt",
+            "comment": "Athugasemd",
+            "close_comment": "Loka og gera athugasemd",
+            "open_comment": "Enduropna og gera athugasemd",
+            "report": "Tilkynna",
+            "new": "Nýr minnispunktur",
+            "newDescription": "Lýstu vandamálinu.",
+            "save": "Vista minnispunkt",
+            "login": "Þú verður að skrá þig inn til að breyta eða gera athugasemd við þennan minnispunkt.",
+            "upload_explanation": "Athugasemdir sem þú gerir verða sýnilegar öllum notendum OpenStreetMap.",
+            "upload_explanation_with_user": "Athugasemdir sem þú gerir sem {user} verða sýnilegar öllum notendum OpenStreetMap."
         },
         "help": {
             "title": "Hjálp",
@@ -833,7 +885,7 @@
                 "point_or_area_h": "Punktar eða svæði?",
                 "point_or_area": "Mörg fyrirbæri er hægt að tákna bæði sem punkt eða sem svæði. Meginreglan er að teikna byggingar og lóðir sem svæði þegar það er mögulegt. Settu síðan punkta inn í svæði byggingar til að tákna fyrirtæki, aðstöðu og annað slíkt sem staðsett er inni í byggingunni.",
                 "add_area_h": "Bæta við svæðum",
-                "add_area_command": "Til að bæta við cvæði, smelltu á {area} **Svæði** hnappinn á verkfærastikunni fyrir ofan kortið, eða ýttu á flýtilykilinn `3`. Þá breytist músarbendillinn í krossmið.",
+                "add_area_command": "Til að bæta við svæði, smelltu á {area} **Svæði** hnappinn á verkfærastikunni fyrir ofan kortið, eða ýttu á flýtilykilinn `3`. Þá breytist músarbendillinn í krossmið.",
                 "add_area_draw": "Næst skaltu setja bendilinn á eitt horn fitjunnar og {leftclick} vinstri-smella eða ýta á `Bilslá` til að fara að setja hnúta eftir útjaðri svæðisins. Haltu áfram að setja fleiri hnúta með því að smella eða ýta á `Bilslá`. Á meðan þessu stendur, geturðu breytt aðdrættinum eða dregið til kortið til að geta bætt við fleiri atriðum.",
                 "add_area_finish": "Til að ljúka svæði, ýttu á `{return}` eða smelltu aftur á annað hvort fyrsta eða síðasta hnútinn.",
                 "square_area_h": "Rétt horn",
@@ -870,6 +922,17 @@
                 "boundary": "Venslin *svæðamörk* er hópur einnar eða fleiri línufitja sem saman mynda stjórnsýslutengd mörk svæða.",
                 "boundary_add": "Til að bæta fitju við svæðamarkavensl, veldu þá fitjuna og skrunaðu niður í hlutann \"Öll vensl\" í fitjuritlinum, smelltu síðan á {plus} plúshnappinn til að bæta þessari fitju við einhver nærliggjandi vensl eða í ný vensl."
             },
+            "notes": {
+                "title": "Minnispunktar",
+                "intro": "*Minnispunktar* eru notaðir til að láta aðra notendur vita af eigindum sem krefjast viðgerða eða athygli. Minnispunktur tengist tiltekinni staðsetningu á kortinu. Til að skoða fyrirliggjandi minnispunkta eða til að bæta við nýjum, smelltu þá á {data} **Kortagögn** spjaldið til að virkja minnispunktalagið í OpenStreetMap.",
+                "add_note_h": "Bæta við minnispunktum",
+                "add_note": "Til að bæta við nýjum minnispunkti, smelltu á {note} **Minnispunktur** hnappinn á verkfærastikunni fyrir ofan kortið, eða ýttu á flýtilykilinn `4`. Þá breytist músarbendillinn í krossmið. Til að staðsetja nýja minnispunktinn á kortinu, settu þá músarbendilinn þar sem minnispunkturinn ætti að vera, síðan skaltu {leftclick} vinstri-smella eða ýta á `Bilslá`.",
+                "move_note": "Einungis er hægt að færa nýja minnispunkta. Til að færa minnispunkt, staðsettu þá músarbendilinn yfir minnispunktinum, ýttu og haltu niðri {leftclick} vinstri músarhnappnum á meðan minnispunkturinn er dreginn yfir á nýju staðsetninguna.",
+                "update_note_h": "Lokun, enduropnun og gerð athugasemda",
+                "update_note": "Hægt er að uppfæra fyrirliggjandi minnispunkt með því að loka honum, enduropna hann, eða með því að bæta athugasemd við hann. Lokun minnispunkts þýðir að vandamál hefur verið leyst. Enduropnun minnispunkts þýðir að upphaflegt vandamál hefur ekki verið leyst.",
+                "save_note_h": "Vista minnispunkta",
+                "save_note": "Þú verður að vista allar athugasemdir við minnispunkt hverja fyrir sig, með því að smella á hnappana fyrir neðan athugasemdirnar. Breytingar á minnispunktum eru **ekki** innifaldar í breytingasettum sem þú sendir inn á OpenStreetMap."
+            },
             "imagery": {
                 "title": "Bakgrunnsmyndir",
                 "intro": "Bakgrunnsmyndefnið sem birtist fyrir aftan kortagögnin er mikilvæg tilföng í kortagerð. Þetta geta verið loftmyndir teknar af gervitunglum, flugvélum eða drónum, nú eða söguleg landakort eða önnur tiltæk gögn.",
@@ -882,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "Ljósmyndir í götuhæð",
-                "intro": "Ljósmyndir teknar í götuhæð nýtast vel við að setja inn upplýsingar um umferðarmerki, fyrirtæki og önnur fyrirbæri sem ekki er gott að átta sig á af gervihnattamyndum og loftmyndum. iD ritillinn styður ljósmyndir í götuhæð frá [Mapillary](https://www.mapillary.com) og [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Ljósmyndir teknar í götuhæð nýtast vel við að setja inn upplýsingar um umferðarmerki, fyrirtæki og önnur fyrirbæri sem ekki er gott að átta sig á af gervihnattamyndum og loftmyndum. iD ritillinn styður ljósmyndir í götuhæð frá [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) og [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Nota ljósmyndir í götuhæð",
                 "using": "Til að nota ljósmyndir í götuhæð við kortagerð, smelltu á spjaldið {data} **Kortagögn** við hlið kortsins til að virkja tiltæk myndalög eða gera þau óvirk.",
                 "photos": "Þegar það er virkt, sýnir myndalag línu meðfram myndarununni. Við hærri aðdráttarstig merkir hringur staðsetningu hverrar myndar, og við enn hærri aðdráttarstig birtist keila sem sýnir stefnuna sem myndavélinni var beint í þegar myndin var tekin.",
@@ -1264,7 +1327,8 @@
                     "add_point": "'Bæta við punkti' hamur",
                     "add_line": "'Bæta við línu' hamur",
                     "add_area": "'Bæta við svæði' hamur",
-                    "place_point": "Setja punkt",
+                    "add_note": "'Bæta við minnispunkti' hamur",
+                    "place_point": "Setja punkt eða minnispunkt",
                     "disable_snap": "Halda niðri til að koma í veg fyrir grip í punkta",
                     "stop_line": "Ljúka við að teikna línu eða svæði"
                 },
@@ -1273,6 +1337,7 @@
                     "continue_line": "Halda áfram með línu við valinn hnút",
                     "merge": "Sameina (setja saman) valdar fitjur",
                     "disconnect": "Aftengja fitjur við valinn hnút",
+                    "detach_node": "Losa hnút frá yfirliggjandi línum/svæðum",
                     "split": "Aðskilja línu í tvennt við valinn hnút",
                     "reverse": "Snúa við línu",
                     "move": "Færa valdar fitjur",
@@ -1949,12 +2014,14 @@
                     }
                 },
                 "horse_riding": {
+                    "label": "Hestaferðir",
                     "options": {
                         "horse_riding": "Já",
                         "undefined": "Nei"
                     }
                 },
                 "horse_scale": {
+                    "label": "Erfiðleikastig reiðmennsku",
                     "options": {
                         "common": "Auðvelt: Engin vandamál eða erfiðleikar. (sjálfgefið)"
                     },
@@ -2475,6 +2542,15 @@
                 },
                 "shop": {
                     "label": "Tegund"
+                },
+                "siren/purpose": {
+                    "label": "Tilgangur"
+                },
+                "siren/type": {
+                    "label": "Tegund",
+                    "options": {
+                        "other": "Annað"
+                    }
                 },
                 "site": {
                     "label": "Tegund"
@@ -3705,8 +3781,14 @@
                 "emergency/destination": {
                     "name": "Neyðaraðgangur ef í fararleið"
                 },
+                "emergency/fire_extinguisher": {
+                    "name": "Slökkvitæki"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Brunahani"
+                },
+                "emergency/first_aid_kit": {
+                    "name": "Skyndihjálparkassi"
                 },
                 "emergency/life_ring": {
                     "name": "Bjarghringur"
@@ -3722,6 +3804,9 @@
                 },
                 "emergency/private": {
                     "name": "Einka neyðaraðgangur"
+                },
+                "emergency/siren": {
+                    "name": "Sírena"
                 },
                 "emergency/water_tank": {
                     "name": "Neyðarvatnstankur"
@@ -5241,6 +5326,9 @@
                 "shop/motorcycle": {
                     "name": "Mótorhjólaverslun"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "Mótorhjólaviðgerðaverslun"
+                },
                 "shop/music": {
                     "name": "Tónlistarbúð"
                 },
@@ -5632,6 +5720,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Nýjast frá Orthophoto Flanders © AGIV"
+                },
+                "name": "Nýjustu loftmyndir frá AGIV Flanders"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                },
+                "name": "AGIV Flanders 2013-2015 loftmyndir 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Gervihnatta- og loftmyndir.",
                 "name": "Loftmyndir frá Bing"
@@ -5732,6 +5838,12 @@
                 },
                 "name": "OSM Inspector: Merkingar"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "Nýjustu loftmyndir frá SPW(allonie)"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC stafrænar loftmyndir"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER vegir 2012"
             },
@@ -5746,6 +5858,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Vegur: Grænn útjaðar = óflokkað. Brúnn útjaðar = slóði. Yfirborð: möl = ljósbrún fylling, malbik = svart, hellur = grátt, jarðvegur = hvítt, steypa = blátt, gras = grænt. Árstíðabundið = hvítar rendur",
                 "name": "U.S. Forest vegayfirlag"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Framkvæmt með tilstilli Brussels UrbIS®© - Dreifing & höfundarréttur CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Framkvæmt með tilstilli Brussels UrbIS®© - Dreifing & höfundarréttur CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Framkvæmt með tilstilli Brussels UrbIS®© - Dreifing & höfundarréttur CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Framkvæmt með tilstilli Brussels UrbIS®© - Dreifing & höfundarréttur CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -5829,6 +5965,13 @@
                 },
                 "name": "OpenStreetMap (þýskur stíll)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Skönnun á ´Hagfræðikortum´ u.þ.b. 1950-1980",
+                "name": "Lantmäteriet hagfræðikort (söguleg)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, gögn eru með © þátttakendur í OpenStreetMap"
@@ -5858,6 +6001,47 @@
                     "text": "Kort © Thunderforest, gögn eru með © þátttakendur í OpenStreetMap"
                 },
                 "name": "Thunderforest landslag"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sænska járnbrautakerfið, þ.m.t. hliðarspor",
+                "name": "Trafikverket járnbrautakerfið"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sænska járnbrautakerfið með ýmsum valkostum fyrir kortalög",
+                "name": "Valkostir fyrir Trafikverket járnbrautakerfið"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sænska NVDB vegakerfið",
+                "name": "Trafikverket vegakerfið"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "name": "Viðbætur fyrir Trafikverket vegakerfið"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Götuheiti sænska NVDB",
+                "name": "Götuheiti fyrir Trafikverket"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Sænska vegakerfið með ýmsum valkostum fyrir kortalög",
+                "name": "Valkostir fyrir Trafikverket vegakerfið"
             }
         },
         "community": {
@@ -5945,7 +6129,20 @@
                 "description": "Twitter-hópur OpenStreetMap í Belgíu: @osm_be"
             },
             "talk-cz-mailinglist": {
-                "description": "Talk-ja er opinber póstlisti tékkneska OSM-hópsins"
+                "name": "Tékkneski póstlistinn (talk-cz)",
+                "description": "Talk-cz er opinber póstlisti tékkneska OSM-hópsins"
+            },
+            "dk-forum": {
+                "name": "Vefspjall (forum) OpenStreetMap Danmörk",
+                "description": "Vefspjall (forum) OpenStreetMap Danmörk"
+            },
+            "dk-irc": {
+                "name": "IRC-rás OpenStreetMap Danmörk",
+                "description": "Taktu þátt á #osm-dk á irc.oftc.net (gátt 6667)"
+            },
+            "dk-mailinglist": {
+                "name": "Talk-dk póstlistinn",
+                "description": "Póstlisti til að ræða OpenStreetMap í Danmörku"
             },
             "fr-twitter": {
                 "name": "Twitter-hópur OpenStreetMap í Frakklandi",
@@ -5967,10 +6164,20 @@
                 "description": "Telegram-hópur OpenStreetMap Spánn"
             },
             "se-facebook": {
-                "name": "OpenStreetMap Sweden Facebook"
+                "name": "OpenStreetMap Sweden Facebook",
+                "description": "OpenStreetMap í Svíþjóð á Facebook"
+            },
+            "se-forum": {
+                "name": "Vefspjall (forum) OpenStreetMap Svíþjóð",
+                "description": "Vefspjall (forum) OpenStreetMap Svíþjóð"
+            },
+            "se-irc": {
+                "name": "IRC-rás OpenStreetMap Svíþjóð",
+                "description": "Taktu þátt á #osm-se á irc.oftc.net (gátt 6667)"
             },
             "se-mailinglist": {
-                "name": "Talk-se póstlistinn"
+                "name": "Talk-se póstlistinn",
+                "description": "Póstlisti til að ræða OpenStreetMap í Svíþjóð"
             },
             "se-twitter": {
                 "name": "Twitter-hópur OpenStreetMap í Svíþjóð",
@@ -6106,13 +6313,31 @@
                 "name": "Twitter-hópur OpenStreetMap Argentína",
                 "description": "Fylgstu með okkur á Twitter á {url}"
             },
+            "Bahia-telegram": {
+                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+            },
+            "DF-telegram": {
+                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+            },
+            "OSM-br-telegram": {
+                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+            },
             "OSM-br-twitter": {
                 "name": "Twitter-hópur OpenStreetMap í Brasilíu",
                 "description": "Fylgstu með okkur á Twitter á {url}"
             },
+            "OSM-CL-facebook": {
+                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+            },
+            "OSM-CL-telegram": {
+                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap, spyrja spurninga eða taka þátt í fundum. Allir eru velkomnir!"
+            },
             "OSM-CL-twitter": {
                 "name": "Twitter-hópur OpenStreetMap í Síle",
                 "description": "Fylgstu með okkur á Twitter á {url}"
+            },
+            "OSM-CO-facebook": {
+                "extendedDescription": "Gakktu til liðs við teymið til að læra meira um OpenStreetMap. Allir eru velkomnir!"
             },
             "OSM-CO-mailinglist": {
                 "name": "Talk-co póstlistinn"
@@ -6143,6 +6368,9 @@
             "OSM-Reddit": {
                 "name": "OpenStreetMap á Reddit",
                 "description": "/r/openstreetmap/ er góður staður til að læra meira um OpenStreetMap.  Spurðu okkur um allt milli himins og jarðar!"
+            },
+            "OSM-Telegram": {
+                "name": "Telegram fyrir OpenStreetMap"
             },
             "OSM-Twitter": {
                 "name": "Twitter-hópur OpenStreetMap",

@@ -2,11 +2,18 @@
     "nn": {
         "icons": {
             "information": "info",
-            "remove": "fjern"
+            "remove": "fjern",
+            "undo": "angre"
         },
         "modes": {
             "add_area": {
                 "title": "Område"
+            },
+            "add_line": {
+                "title": "Linje"
+            },
+            "add_point": {
+                "title": "Punkt"
             }
         },
         "operations": {
@@ -46,8 +53,6 @@
             "localized_translation_name": "Namn"
         },
         "zoom_in_edit": "Zoom inn for å redigere",
-        "login": "Logg inn",
-        "logout": "Logg ut",
         "report_a_bug": "Rapporter ein feil",
         "help_translate": "Hjelp til med å omsette",
         "commit": {
@@ -235,8 +240,23 @@
             }
         },
         "imagery": {
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Villkår og tilbakemelding"
+                }
+            },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Vilkår og tilbakemelding"
+                }
+            },
             "MAPNIK": {
                 "name": "OpenStreetMap (standard)"
+            }
+        },
+        "community": {
+            "osm-gh-twitter": {
+                "description": "Følg oss på Twitter: {url}"
             }
         }
     }

@@ -314,8 +314,6 @@
             "localized_translation_name": "Naziv"
         },
         "zoom_in_edit": "Približaj za urejanje",
-        "login": "prijava",
-        "logout": "odjava",
         "loading_auth": "Vzpostavljanje povezave z OpenStreetMap ...",
         "report_a_bug": "Pošlji sporočilo napaki",
         "help_translate": "Sodelujte pri prevodu",
@@ -656,7 +654,6 @@
         "cannot_zoom": "V trenutnem načinu nadaljnje oddaljevanje pogleda ni mogoče.",
         "full_screen": "Preklopi celozaslonski način",
         "gpx": {
-            "local_layer": "Krajevna datoteka",
             "drag_drop": "Povlecite datoteko .gpx, .geojson ali .khm na stran, ali pa kliknite gumb na desni za brskanje med datotekami.",
             "zoom": "Približaj plasti",
             "browse": "Prebrskaj za datoteko"
@@ -1026,7 +1023,6 @@
                     "add_point": "Način dodajanja »Točk« ",
                     "add_line": "Način dodajanja »Črt« ",
                     "add_area": "Način dodajanja »Mnogokotnikov« ",
-                    "place_point": "Postavi točko",
                     "disable_snap": "Zadržite tipko za onemogočanje lepljenja točk",
                     "stop_line": "Končaj risanje črte ali površine"
                 },
@@ -5085,6 +5081,14 @@
             },
             "osm-mg-facebook": {
                 "name": "Facebook skupina OpenStreetMap Madagaskar"
+            },
+            "si-forum": {
+                "name": "Slovenski OpenStreetMap forum",
+                "description": "Forum skupnosti OpenStreetMap v Sloveniji"
+            },
+            "si-mailinglist": {
+                "name": "Slovenski OpenStreetMap dopisni seznam",
+                "description": "Dopisni seznam slovenske OpenStreetMap skupnosti"
             },
             "OSM-help": {
                 "name": "Pomoč OpenStreetMap"

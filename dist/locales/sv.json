@@ -21,6 +21,11 @@
                 "description": "Lägg till restauranger, butiker, postlådor och andra punkter på kartan.",
                 "tail": "Klicka på kartan för att lägga till en punkt."
             },
+            "add_note": {
+                "title": "Notering",
+                "description": "Hittat ett problem? Låt andra kartläggare få veta det. ",
+                "tail": "Klicka på kartan för att lägga till en notering. "
+            },
             "browse": {
                 "title": "Navigera",
                 "description": "Panorera och zooma kartan."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Lade till en punkt.",
                     "vertex": "Lade till en nod till en linje.",
-                    "relation": "Lade till en relation."
+                    "relation": "Lade till en relation.",
+                    "note": "Lägg till en notering. "
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "Lade till en svängrestriktion",
                     "delete": "Raderade en svängrestriktion"
                 }
+            },
+            "detach_node": {
+                "title": "Koppla isär",
+                "key": "E",
+                "description": "Koppla isär denna nod från dessa linjer/områden.",
+                "annotation": "Koppla isär en nod från föräldralinjer/-områden.",
+                "restriction": "Denna nod kan inte kopplas isär då det skulle skada en \"{relation}\"-relation.",
+                "connected_to_hidden": "Denna nod kan inte kopplas isär då den är kopplad till ett dolt objekt."
             }
         },
         "restriction": {
@@ -353,7 +367,7 @@
         },
         "zoom_in_edit": "Zooma in för att redigera",
         "login": "Logga in",
-        "logout": "logga ut",
+        "logout": "Logga ut",
         "loading_auth": "Ansluter till OpenStreetMap...",
         "report_a_bug": "Rapportera ett fel",
         "help_translate": "Hjälp till och översätta",
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "Kartdata från OpenStreetMap",
                     "title": "OpenStreetMap-data"
+                },
+                "notes": {
+                    "tooltip": "Noteringar från OpenStreetMap",
+                    "title": "OpenStreetMap-noteringar"
                 }
             },
             "fill_area": "Fyllda områden",
@@ -710,8 +728,14 @@
         "cannot_zoom": "Går ej att zooma ut ytterligare i nuvarande läge. ",
         "full_screen": "Växla fullskärm",
         "gpx": {
-            "local_layer": "Lokal fil",
+            "local_layer": "Lägg till en GPX",
             "drag_drop": "Dra och släpp en .gpx-, .geojson- eller .kml-fil på sidan, eller klicka på knappen till höger för att bläddra",
+            "zoom": "Zooma till lager",
+            "browse": "Bläddra efter en fil"
+        },
+        "mvt": {
+            "local_layer": "Lägg till en MVT",
+            "drag_drop": "Drag och släpp en .mvt- eller .pbf-fil på sidan, eller klicka på knappen till höger för att bläddra.",
             "zoom": "Zooma till lager",
             "browse": "Bläddra efter en fil"
         },
@@ -719,6 +743,7 @@
             "tooltip": "Gatubilder från Microsoft",
             "title": "Bildlager (Bing Streetside)",
             "report": "Rapportera ett integritetsproblem med den här bilden",
+            "view_on_bing": "Visa på Bing Maps",
             "hires": "Hög upplösning"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Visa denna bild på OpenStreetCam"
+        },
+        "note": {
+            "note": "Notering",
+            "title": "Ändra notering",
+            "anonymous": "anonym",
+            "closed": "(Stängd)",
+            "commentTitle": "Kommentarer",
+            "newComment": "Ny kommentar",
+            "inputPlaceholder": "Skriv en kommentar att dela med andra användare.",
+            "close": "Stäng notering",
+            "open": "Öppna notering igen",
+            "comment": "Kommentera",
+            "close_comment": "Stäng och kommentera",
+            "open_comment": "Öppna igen och kommentera",
+            "report": "Anmäl",
+            "new": "Ny notering",
+            "newDescription": "Beskriv problemet. ",
+            "save": "Spara notering",
+            "login": "Du måste logga in för att ändra eller kommentera den här noteringen.",
+            "upload_explanation": "Dina kommentarer kommer att vara synliga för alla OpenStreetMap-användare.",
+            "upload_explanation_with_user": "Dina kommentarer som {user} kommer att vara synliga för alla OpenStreetMap-användare."
         },
         "help": {
             "title": "Hjälp",
@@ -876,6 +922,17 @@
                 "boundary": "En *gräns*-relation är en grupp av en eller flera linjer som tillsammans formar en administrativ gräns.",
                 "boundary_add": "För att lägga till ett objekt till en gräns-relation, välj objektet och bläddra ned till sektionen \"Alla relationer\" i objektredigeraren. Klicka sedan på knappen {plus} **Lägg till** för att lägga till detta objekt till en närliggande existerande relation eller en ny relation."
             },
+            "notes": {
+                "title": "Noteringar",
+                "intro": "*Noteringar* används för att uppmärksamma andra användare att ett objekt behöver fixas eller bearbetas. Noteringar markerar en specifik plats på kartan. För att se existerande noteringar eller lägga till nya, klicka på panelen  {data} **Kartdata** för att aktivera lagret OpenStreetMap-noteringar. ",
+                "add_note_h": "Lägga till noteringar",
+                "add_note": "För att lägga till en ny notering, klicka på knappen {note} **Notering** i verktygsraden ovanför kartan, eller trycka kortkommandot `4`. Detta kommer att ändra muspekaren till ett kryss. För att placera den nya noteringen på kartan, placera muspekaren där noteringen ska vara och vänsterklicka {leftclick} eller tryck `Mellanslag`. ",
+                "move_note": "Bara nya noteringar kan flyttas. För att flytta en notering, placera muspekaren över den nya noteringen och tryck sedan och håll ned {leftclick} vänster musknapp medan du dra noteringen till dess nya placering. ",
+                "update_note_h": "Stänga, återöppna och kommentera",
+                "update_note": "En existerande notering kan uppdateras genom att stänga den, återöppna den, eller genom att lägga till en kommentar till den. Genom att stänga en notering indikerar du att problemet har lösts. Genom att återöppna en notering indikerar du att det ursprungliga problemet inte är löst. ",
+                "save_note_h": "Spara noteringar",
+                "save_note": "Du måste spara alla ändringar du gör på noteringar individuellt genom att klicka på knapparna under noteringens kommentarer. Ändringar på noteringar inkluderas **inte** i ändringset du laddar upp till OpenStreetMap."
+            },
             "imagery": {
                 "title": "Bakgrundsbilder",
                 "intro": "Bakgrundsbilderna som visas under kartdata är en viktig källa vid kartläggning. Dessa bilder kan vara flygfoton insamlade med satellit, flygplan eller drönare, eller så kan det vara inskannade historiska kartor eller andra fritt tillgängliga källor.",
@@ -888,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "Gatubilder",
-                "intro": "Gatubilder är användbart vid kartläggning av trafikmärken, företag och andra detaljer som du inte kan se från satellit- eller flygbilder. iD stöder gatubilder från [Mapillary](https://www.mapillary.com) och [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Gatufoton är användbara vid kartläggning av trafikmärken, företag, och andra detaljer du inte ser på satelit- eller flygfoton. iD stöder gatufoton från  [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) och [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Använda gatubilder",
                 "using": "För att använda gatubilder för kartläggning, klicka på panelen {data} **Kartdata** vid sidan av kartan för att aktivera eller avaktivera tillgängliga bildlager.",
                 "photos": "När aktiverad visar bildlagret en linje längst sekvensen av bilder. Vid högre inzoomning visas en cirkel för varje bild, och vid ännu högre zoom-nivå visar en kon riktningen kameran hade när bilden togs.",
@@ -1270,7 +1327,8 @@
                     "add_point": "'Lägg till punkt'-läge",
                     "add_line": "'Lägg till linje'-läge",
                     "add_area": "'Lägg till område'-läge",
-                    "place_point": "Placera en punkt",
+                    "add_note": "'Lägg till notering'-läge",
+                    "place_point": "Placera en punkt eller notering",
                     "disable_snap": "Hindra att punkter kopplas samman",
                     "stop_line": "Slutför linje eller område"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "Fortsätt en linje från markerad nod",
                     "merge": "Kombinera (sammanfoga) markerade objekt",
                     "disconnect": "Koppla isär objekt vid markerad nod",
+                    "detach_node": "Koppla isär vald nod från förälderlinjer/-områden",
                     "split": "Dela en linje i två vid markerad nod",
                     "reverse": "Byt riktning på en linje",
                     "move": "Flytta markerade objekt",
@@ -1622,6 +1681,9 @@
                 "capacity": {
                     "label": "Kapacitet",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Insättning av pengar"
                 },
                 "castle_type": {
                     "label": "Typ"
@@ -2278,6 +2340,9 @@
                         "underground": "Underjordisk"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Passagerarinformationssystem"
+                },
                 "payment_multi": {
                     "label": "Betalningssätt"
                 },
@@ -2509,6 +2574,9 @@
                 },
                 "site": {
                     "label": "Typ"
+                },
+                "site_type": {
+                    "label": "Typ av arkeologisk plats"
                 },
                 "smoking": {
                     "label": "Rökning",
@@ -4275,7 +4343,7 @@
                     "terms": "Stig, gång, led, spår, gångväg, vandringsled, vandra, vandring, promenad, löparbana, motionsspår"
                 },
                 "highway/pedestrian_area": {
-                    "name": "Gångfartsområde",
+                    "name": "Gågateområde",
                     "terms": "Gångfartsområde, gångfart, centrum, plaza, torg, gångväg, gångområde, gågata, gårdsgata"
                 },
                 "highway/pedestrian_line": {
@@ -5740,7 +5808,7 @@
                     "terms": "Relation, relaterat, förbindelse, förhållande, samband, anknytning, koppling, kontext"
                 },
                 "roundabout": {
-                    "name": "Rondell"
+                    "name": "Cirkulationsplats"
                 },
                 "route/ferry": {
                     "name": "Färjerutt",
@@ -7455,6 +7523,10 @@
                 "description": "Kartläggare och OpenStreetMap-användare runt Portland, Maine",
                 "extendedDescription": "Maptime ger, ganska bokstavligen, tid för kartläggning. Vårt uppdrag är att öppna dörrarna för kartografiska möjligheter för alla som är intresserade av att skapa tid och utrymme för samarbete, utforskning och kartskapande med hjälp av kartläggningsverktyg och -teknik."
             },
+            "us-ma-mailinglist": {
+                "name": "E-postlistan Talk-us-massachusetts",
+                "description": "E-postlista for OSM-gemenskapen i Massachusetts"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Förbättra OpenStreetMap kring Cleveland",
@@ -7482,6 +7554,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Kartläggare och OpenStreetMap-användare, utvecklare och entusiaster runt storstadsregionen New Yorks."
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap PDX på Google Group",
+                "description": "Forum och e-postlista för OpenStreetMap-användare runt Portland",
+                "extendedDescription": "Denna grupp syfta till att samordna förbättringar av OpenStreetMap runt Portland, Oregon, för att stöda tillämpningar så som Open Trip Planer."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",

@@ -141,7 +141,6 @@
         "redo": {
             "nothing": "Niks om weer te doen nie."
         },
-        "logout": "voetsek",
         "loading_auth": "Maak kontak met OpenStreetMap...",
         "status": {
             "error": "Kan nie aan die API koppel nie.",

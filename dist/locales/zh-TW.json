@@ -21,6 +21,11 @@
                 "description": "新增餐廳、古蹪、郵箱或其他事物至地圖上。",
                 "tail": "點擊地圖以新增一個點。"
             },
+            "add_note": {
+                "title": "備註",
+                "description": "發現了問題？讓其他製圖者知道。",
+                "tail": "在地圖上點擊以新增備註。"
+            },
             "browse": {
                 "title": "瀏覽",
                 "description": "平移及縮放地圖。"
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "已新增一點。",
                     "vertex": "已新增一節點至路徑上。",
-                    "relation": "已新增一項關係。"
+                    "relation": "已新增一項關係。",
+                    "note": "已新增備註。"
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "已增加轉向限制",
                     "delete": "已移除轉向限制"
                 }
+            },
+            "detach_node": {
+                "title": "分離",
+                "key": "E",
+                "description": "從這些線／區域分離此節點。",
+                "annotation": "已從父母線／區域分離節點",
+                "restriction": "此節點無法被分離，因為它會毀損「{relation}」關係。",
+                "connected_to_hidden": "此節點無法被分離，因為它連接到隱藏的圖徽。"
             }
         },
         "restriction": {
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "來自開放街圖的地圖資料",
                     "title": "開放街圖資料"
+                },
+                "notes": {
+                    "tooltip": "從開放街圖而來的註記資料",
+                    "title": "開放街圖註記"
                 }
             },
             "fill_area": "填充選項",
@@ -710,15 +728,22 @@
         "cannot_zoom": "在此模式下不能再縮小。",
         "full_screen": "啟動全螢幕",
         "gpx": {
-            "local_layer": "本機檔案",
+            "local_layer": "新增 GPX",
             "drag_drop": "拖放一個 .gpx, .geojson 或是 .kml 檔案到此頁面上，或是點選按鈕以瀏覽",
             "zoom": "縮放到圖層",
+            "browse": "瀏覽檔案"
+        },
+        "mvt": {
+            "local_layer": "新增 MVT",
+            "drag_drop": "將 .mvt 或 .pbf 拖曳到此頁面，或是點選右邊的按鈕以瀏覽",
+            "zoom": "縮放至圖層",
             "browse": "瀏覽檔案"
         },
         "streetside": {
             "tooltip": "微軟的街景照片",
             "title": "照片覆蓋層 (Bing Streetside)",
             "report": "回報關於此照片的隱私疑慮",
+            "view_on_bing": "在 Bing Maps 上檢視",
             "hires": "高解析度"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "在 OpenStreetCam 檢視這張圖片"
+        },
+        "note": {
+            "note": "註記",
+            "title": "編輯註記",
+            "anonymous": "匿名",
+            "closed": "（已關閉）",
+            "commentTitle": "評論",
+            "newComment": "新評論",
+            "inputPlaceholder": "輸入評論以與其他使用者分享。",
+            "close": "關閉註記",
+            "open": "重新開啟註記",
+            "comment": "評論",
+            "close_comment": "關閉並評論",
+            "open_comment": "重新開啟並評論",
+            "report": "回報",
+            "new": "新的備註",
+            "newDescription": "描述問題。",
+            "save": "儲存備註",
+            "login": "您必須登入以變更或評論此註記。",
+            "upload_explanation": "您的評論將會讓所有開放街圖的使用者都可以看到。",
+            "upload_explanation_with_user": "您對 {user} 的評論將會讓所有開放街圖的使用者都可以看到。"
         },
         "help": {
             "title": "說明文件",
@@ -876,6 +922,17 @@
                 "boundary": "*邊界*關聯是一個由一個或多個線段圖徵組成的行政邊界。",
                 "boundary_add": "要增加圖徵到邊界關聯，選擇圖徵在圖徵編輯器，向下滾動到\"所有關係\"部分，接著點 {plus} 加號按鈕，增加圖徵到鄰近已存在或是新的關聯中。"
             },
+            "notes": {
+                "title": "備註",
+                "intro": "*備註*是用於警告其他使用者有圖徽需要修復或注意。備註會在地圖上特定位置標記。要檢視既有的備註或加入新的，點擊 {data} **地圖圖資**面板以啟用開放街圖備註層。",
+                "add_note_h": "新增備註",
+                "add_note": "要加入新的備註，在地圖上的工具列點擊 {note} **備註**按鈕，或是按下鍵盤快捷鍵 `4`。這將會把您的滑鼠游標變更為十字符號。要在地圖上放置新的備註，將滑鼠游標放到要新增備註的地方，然後 {leftclick} 用左鍵點擊或按下 `Space` 鍵。",
+                "move_note": "僅有新的備註可以移動。要移動備註，將滑鼠游標放到新的備註上，然後按住 {leftclick} 滑鼠左鍵，並將備註拖曳到新的位置。",
+                "update_note_h": "關閉、重新開啟與評論",
+                "update_note": "既有的備註可以透過將其關閉、重新開啟或是對它新增評論來更新。關閉備註是指出問題已經解決。重新開啟備註則是指出原本的問題沒有被解決。",
+                "save_note_h": "儲存備註",
+                "save_note": "您必須分別儲存任何備註的編輯，只要按下在評論下方的按鈕就可以了。備註編輯**不**會包含在您上傳至開放街圖的變更集中。"
+            },
             "imagery": {
                 "title": "背景影像",
                 "intro": "背景影像出現在地圖資料下方，是繪製地圖時相當重要的資源。這些影像可能是從衛星、飛機和無人機收集的空拍影像，或是掃描歷史地圖或是其他自由可用的來源資料。",
@@ -888,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "街景照片",
-                "intro": "街景影像很適合拿來繪製交通號誌、商家以及其他從衛星和空拍影像難以看到的細節。iD 編輯器支援  [Mapillary](https://www.mapillary.com) 和[OpenStreetCam](https://www.openstreetcam.org) 的街景影像。",
+                "intro": "街道級的照片對於繪製交通號誌與其他您無法在衛星照片或航空照片上看到的細節來說很有用。iD 編輯器支援了從 [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside)、[Mapillary](https://www.mapillary.com) 與 [OpenStreetCam](https://www.openstreetcam.org) 而來的街道級照片。",
                 "using_h": "使用街景照片",
                 "using": "要使用街景影像來畫地圖，點地圖旁 {data} **地圖資料**面板，切換不同的影像圖層。",
                 "photos": "當啟用時，圖片圖層會顯示有一連串有圖片沿著一條線，在更高的縮放程度，圓圈標示代表圖片的位置，而在更高的縮放下面，方向標示會顯示照片拍攝時的鏡頭方向。",
@@ -1270,7 +1327,8 @@
                     "add_point": "'增加節點'模式",
                     "add_line": "'增加線段'模式",
                     "add_area": "'增加區域'模式",
-                    "place_point": "放置一個點",
+                    "add_note": "「新增備註」模式",
+                    "place_point": "放置點或備註",
                     "disable_snap": "按住可禁用點捕捉模式",
                     "stop_line": "完成繪製線段或區域"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "從選擇節點繼續繪製線條",
                     "merge": "合併選擇圖徵",
                     "disconnect": "在選擇節點斷開圖徵",
+                    "detach_node": "從父母線／區域分離選定的節點",
                     "split": "從選擇節點分割成兩條線段",
                     "reverse": "反轉線條",
                     "move": "移動選擇圖徵",
@@ -1572,6 +1631,9 @@
                 "board_type": {
                     "label": "種類"
                 },
+                "booth": {
+                    "label": "亭子"
+                },
                 "boules": {
                     "label": "類型"
                 },
@@ -1619,6 +1681,9 @@
                 "capacity": {
                     "label": "容量",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "存款"
                 },
                 "castle_type": {
                     "label": "種類"
@@ -2275,6 +2340,9 @@
                         "underground": "地下"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "乘客資訊顯示器"
+                },
                 "payment_multi": {
                     "label": "付款種類"
                 },
@@ -2399,7 +2467,7 @@
                     "label": "站台編號"
                 },
                 "ref_road_number": {
-                    "label": "道路邊號"
+                    "label": "道路編號"
                 },
                 "ref_route": {
                     "label": "路線編號"
@@ -2506,6 +2574,9 @@
                 },
                 "site": {
                     "label": "種類"
+                },
+                "site_type": {
+                    "label": "遺址類型"
                 },
                 "smoking": {
                     "label": "吸煙",
@@ -4012,6 +4083,10 @@
                 "emergency/destination": {
                     "name": "緊急通道目的地"
                 },
+                "emergency/fire_alarm": {
+                    "name": "火災警鈴",
+                    "terms": "火警警報點"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "滅火器",
                     "terms": "滅火器"
@@ -4027,6 +4102,10 @@
                 "emergency/life_ring": {
                     "name": "救生圈",
                     "terms": "救生圈"
+                },
+                "emergency/lifeguard": {
+                    "name": "救生員",
+                    "terms": "救生員"
                 },
                 "emergency/no": {
                     "name": "不開放緊急通行"
@@ -6009,8 +6088,8 @@
                     "terms": "銀樓,首飾店"
                 },
                 "shop/kiosk": {
-                    "name": "書報攤",
-                    "terms": "售貨亭"
+                    "name": "販賣亭",
+                    "terms": "書報攤,零售亭,售貨亭"
                 },
                 "shop/kitchen": {
                     "name": "廚房設計行",
@@ -6936,7 +7015,8 @@
             },
             "OSM-BGD-facebook": {
                 "name": "開放街圖孟加拉",
-                "description": "改進孟加拉的開放街圖"
+                "description": "改進孟加拉的開放街圖",
+                "extendedDescription": "在孟加拉畫地圖嗎？想要問問題，想要與社群連結？請加入 {url}，所有人都歡迎噢！ "
             },
             "OSM-India-facebook": {
                 "name": "開放街圖印度 - 參與社區畫圖",
@@ -7272,7 +7352,70 @@
                 "description": "匈牙利舉行聚會的平台"
             },
             "it-facebook": {
-                "name": "開放街圖義大利 Facebook"
+                "name": "開放街圖義大利 Facebook",
+                "description": "加入開放街圖義大利社群 Facebook"
+            },
+            "it-irc": {
+                "name": "開放街圖義大利 IRC",
+                "description": "在 irc.oftc.net (port 6667) 上面加入 #osm-it"
+            },
+            "it-mailinglist": {
+                "name": "Talk-it 郵件論壇",
+                "description": "Talk-at 是義大利社群的官方郵件論壇 "
+            },
+            "it-telegram": {
+                "name": "開放街圖義大利在 Telegram",
+                "description": "開放街圖義大利 Telegram 聊天室"
+            },
+            "it-twitter": {
+                "name": "開放街圖義大利 Twitter",
+                "description": "在 {url} 上追隨我們的 Twitter"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "改善羅馬區域的 OpenStreetMap",
+                "extendedDescription": "我們是一群熱情討論和分享自由地理資料集知識的人，特別是開放街圖的資料，以及管理、編輯和顯示地理資料的開放地理空間軟體，以及在拉吉歐推廣的團體。"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "開放街圖波爾察諾的郵件論壇",
+                "description": "開放街圖義大利波爾察諾地區的郵件論壇"
+            },
+            "talk-it-lazio": {
+                "name": "開放街圖義大利拉吉歐",
+                "description": "歡迎所有人加入！在 {signupUrl} 註冊",
+                "extendedDescription": "羅馬和拉吉歐區域的郵件論壇"
+            },
+            "Trentino-Mailing-List": {
+                "name": "開放街圖特倫托的郵件論壇",
+                "description": "開放街圖義大利特倫托地區的郵件論壇"
+            },
+            "no-forum": {
+                "name": "開放街圖挪威網頁論壇",
+                "description": "開放街圖挪威的網頁論壇"
+            },
+            "no-irc": {
+                "name": "開放街圖挪威 IRC",
+                "description": "在挪威的圖客與 OpenStreetMap 使用者、開發者與愛好者"
+            },
+            "no-mailinglist": {
+                "name": "開放街圖挪威郵件論壇",
+                "description": "在挪威的圖客與 OpenStreetMap 使用者、開發者與愛好者的郵件論壇"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "開放街圖波蘭 Facebook 社團",
+                "description": "波蘭的開放街圖圖客和使用者社團"
+            },
+            "OSM-PL-forum": {
+                "name": "開放街圖波蘭論壇",
+                "description": "開放街圖波蘭社群的論壇"
+            },
+            "si-forum": {
+                "name": "開放街圖斯洛維尼亞論壇",
+                "description": "開放街圖斯洛維尼亞社群的論壇"
+            },
+            "si-mailinglist": {
+                "name": "開放街圖斯洛維尼亞郵件論壇",
+                "description": "開放街圖在斯洛維尼亞的郵件論壇"
             },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es 郵件論壇",
@@ -7282,9 +7425,45 @@
                 "name": "Telegram 上的 @OSMes",
                 "description": "開放街圖西班牙 Telegram 聊天室"
             },
+            "osm-se": {
+                "name": "OpenStreetMap.se",
+                "description": "提供瑞典在地社群 OSM 服務和資訊"
+            },
+            "se-facebook": {
+                "name": "開放街圖瑞典 Facebook",
+                "description": "開放街圖瑞典的 Facebook"
+            },
+            "se-forum": {
+                "name": "開放街圖瑞典網頁論壇",
+                "description": "開放街圖瑞典的網頁論壇"
+            },
+            "se-irc": {
+                "name": "開放街圖瑞典 IRC",
+                "description": "在 irc.oftc.net (port 6667) 上面加入 #osm.se"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se 郵件論壇",
+                "description": "討論開放街圖在瑞典事物的郵件論壇"
+            },
+            "se-twitter": {
+                "name": "開放街圖瑞典 Twitter",
+                "description": "追隨我們的 Twitter： {url} "
+            },
             "Nottingham-OSM-pub-meetup": {
                 "name": "East Midlands (諾丁漢) 酒吧每月聚會",
-                "description": "East Midlands 圖客和使用者的社交聚會"
+                "description": "East Midlands 圖客和使用者的社交聚會",
+                "extendedDescription": "一開始 2011 年 3 月時有一群人在諾丁罕開始聚會，後來則大多在德比，以及不時在東密德蘭的其他地方。大多是社交性質的聚會，但也是相當好詢問有關地方 OSM 或是一般性質問題。在夏季時我們通常會趁有日光時在聚會場地附近出外畫地圖，這群人有個特別興趣，就是繪製公共空間，不時會為了畫地圖而聚會。"
+            },
+            "gb-irc": {
+                "extendedDescription": "在 irc.oftc.net (port 6667) 加入 #osm-gb，如果你問了問題，請耐心等候數分鐘等待回應"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM 古巴在 Telegram",
+                "description": "開放街圖古巴 Telegram 聊天室"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM 尼加拉瓜在 Telegram",
+                "description": "開放街圖尼加拉瓜 Telegram 聊天室"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "灣區的 OpenStreetMap 圖客",
@@ -7346,6 +7525,10 @@
                 "name": "開放街圖西雅圖",
                 "description": "在西雅圖的圖客與開放街圖使用者"
             },
+            "OSM-SoCal": {
+                "name": "開放街圖南加州",
+                "description": "讓我們玩樂吧，並且貢獻畫洛杉磯一帶，以及學習有關畫地圖的一切！"
+            },
             "OSM-South-Bay": {
                 "name": "OSM South Bay",
                 "description": "由為聖荷西寫程式主辦的地圖之夜",
@@ -7363,7 +7546,14 @@
             "OSM-US": {
                 "name": "開放街圖美國",
                 "description": "我們協助美國的開放街圖成長茁壯並改善它。",
-                "extendedDescription": "我們透過舉辦年度研討會、提供社群資源、建立合作關係以及推廣來支援開放街圖。在此加入開放街圖美國：{signupUrl}"
+                "extendedDescription": "我們透過舉辦年度研討會、提供社群資源、建立合作關係以及推廣來支援開放街圖。在此加入開放街圖美國：{signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map US 2018",
+                        "description": "加入在密西根底特律的 State of the Map US 開放街圖社群大會，與其他圖客、公司、政府機關以及非營利組織交流，都圍繞貢獻全球的免費編輯地圖。",
+                        "where": "密西根底特律"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "開放街圖猶他",
@@ -7397,6 +7587,47 @@
                 "name": "Maptime Australia Slack",
                 "description": "在 {signupUrl} 註冊"
             },
+            "Bahia-telegram": {
+                "name": "開放街圖巴伊亞 Telegram",
+                "description": "加入開放街圖巴伊亞 Telegram 聊天室",
+                "extendedDescription": "加入社群學習更多關於開放街圖的事情，詢問問題或是參加聚會，歡迎所有人噢！"
+            },
+            "DF-telegram": {
+                "name": "開放街圖巴西利亞 Telegram",
+                "description": "加入開放街圖巴西利亞 Telegram 聊天室",
+                "extendedDescription": "加入社群學習更多關於開放街圖的事情，詢問問題或是參加聚會，歡迎所有人噢！"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br 郵件論壇",
+                "description": "討論開放街圖在巴西事物的郵件論壇"
+            },
+            "OSM-br-telegram": {
+                "name": "開放街圖巴西 Telegram",
+                "description": "加入開放街圖巴西 Telegram 聊天室",
+                "extendedDescription": "加入社群學習更多關於開放街圖的事情，詢問問題或是參加聚會，歡迎所有人噢！"
+            },
+            "OSM-br-twitter": {
+                "name": "開放街圖巴西 Twitter",
+                "description": "在 {url} 上追隨我們的 Twitter"
+            },
+            "OSM-CL-facebook": {
+                "name": "開放街圖智利 Facebook",
+                "description": "加入開放街圖智利社群 Facebook",
+                "extendedDescription": "加入社群學習更多關於開放街圖的事情，詢問問題或是參加聚會，歡迎所有人噢！"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl 郵件論壇",
+                "description": "討論開放街圖在智利事物的郵件論壇"
+            },
+            "OSM-CL-telegram": {
+                "name": "開放街圖智利 Telegram",
+                "description": "加入開放街圖智利 Telegram 聊天室",
+                "extendedDescription": "加入社群學習更多關於開放街圖的事情，詢問問題或是參加聚會，歡迎所有人噢！"
+            },
+            "OSM-CL-twitter": {
+                "name": "開放街圖智利 Twitter",
+                "description": "在 {url} 上追隨我們的 Twitter"
+            },
             "Maptime-Bogota": {
                 "name": "Maptime Bogotá",
                 "description": "我們是一群關心波哥大一帶開放街圖狀況的圖客。",
@@ -7404,7 +7635,36 @@
             },
             "OSM-CO-facebook": {
                 "name": "開放街圖哥倫比亞 Facebook",
-                "description": "加入開放街圖哥倫比亞社群 Facebook"
+                "description": "加入開放街圖哥倫比亞社群 Facebook",
+                "extendedDescription": "加入社群學習更多關於開放街圖的事情，歡迎所有人噢！"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co 郵件論壇",
+                "description": "討論開放街圖在哥倫比亞事物的郵件論壇"
+            },
+            "OSM-CO-telegram": {
+                "name": "OSM 哥倫比亞在 Telegram",
+                "description": "開放街圖哥倫比亞 Telegram 聊天室"
+            },
+            "OSM-CO-twitter": {
+                "name": "開放街圖哥倫比亞 Twitter",
+                "description": "在 {url} 上追隨我們的 Twitter"
+            },
+            "OSM-CO": {
+                "name": "開放街圖哥倫比亞",
+                "description": "開放街圖哥倫比亞社群和 OSMCo 基金會的消息"
+            },
+            "OSM-EC-telegram": {
+                "name": "OSM 厄瓜多在 Telegram",
+                "description": "開放街圖厄瓜多 Telegram 聊天室"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM 巴拉圭在 Telegram",
+                "description": "開放街圖厄瓜多 Telegram 聊天室"
+            },
+            "OSM-PE-facebook": {
+                "name": "開放街圖祕魯 Facebook",
+                "description": "加入開放街圖祕魯社群 Facebook"
             },
             "OSM-PE-mailinglist": {
                 "name": "Talk-pe 郵件論壇",
@@ -7438,6 +7698,10 @@
             "OSM-Reddit": {
                 "name": "在 Reddit 上的 OpenStreetMap",
                 "description": "/r/openstreetmap/ 是一個取得更多關於 OpenStreetMap 資訊的好地方。什麼事都能問！"
+            },
+            "OSM-Telegram": {
+                "name": "開放街圖 Telegram",
+                "description": "加入開放街圖 Telegram 超級聊天室 {url}"
             },
             "OSM-Twitter": {
                 "name": "開放街圖 Twitter",

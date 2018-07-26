@@ -303,8 +303,6 @@
             "localized_translation_language": "Pasirinkti kalbą",
             "localized_translation_name": "Pavadinimas"
         },
-        "login": "prisijungti",
-        "logout": "atsijungti",
         "loading_auth": "Jungiamasi prie OpenStreetMap...",
         "report_a_bug": "Pranešti apie klaidą",
         "help_translate": "Padėkite versti",
@@ -562,7 +560,6 @@
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
         "gpx": {
-            "local_layer": "Vietinis failas",
             "drag_drop": "Tempkite ir numeskite .gpx, .geojson arba .kml failą ant puslapio arba spauskite mygtuką dešinėje, kad naršytumėte",
             "zoom": "Išdidinti sluoksnį",
             "browse": "Naršyti failo"

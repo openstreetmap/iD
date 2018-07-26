@@ -21,6 +21,11 @@
                 "description": "Aldoni restoraciojn, monumentojn, poŝtkestojn aŭ aliajn punktojn al la mapo.",
                 "tail": "Klaku sur la mapo por aldoni punkton."
             },
+            "add_note": {
+                "title": "Rimarko",
+                "description": "Ĉu vi rimarkis problemon? Sciigu aliajn mapigistojn.",
+                "tail": "Klaku sur la mapo por aldoni rimarkon."
+            },
             "browse": {
                 "title": "Foliumi",
                 "description": "Aldirekti kaj pligrandigi la mapon."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Aldonis punkton.",
                     "vertex": "Aldonis nodon al linio/areo.",
-                    "relation": "Aldonis rilaton."
+                    "relation": "Aldonis rilaton.",
+                    "note": "Aldonis rimarkon."
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "Aldonis turnan limigon.",
                     "delete": "Forigis turnan limigon."
                 }
+            },
+            "detach_node": {
+                "title": "Apartigi",
+                "key": "E",
+                "description": "Apartigi tiun ĉi nodon de tiujn ĉi linioj/areoj.",
+                "annotation": "Apartigis nodon de superaj linioj/areoj.",
+                "restriction": "Tiu ĉi nodo ne povas esti apartigita, ĉar tio ĉi detruus la rilaton “{relation}”.",
+                "connected_to_hidden": "Tiu ĉi nodo ne povas esti apartigita, ĉar ĝi estas kunigita al kaŝita elemento."
             }
         },
         "restriction": {
@@ -352,8 +366,8 @@
             "localized_translation_name": "Nomo"
         },
         "zoom_in_edit": "Pligrandigu por redakti",
-        "login": "ensaluti",
-        "logout": "elsaluti",
+        "login": "Ensaluti",
+        "logout": "Elsaluti",
         "loading_auth": "Konektado al OpenStreetMap…",
         "report_a_bug": "Raporti eraron",
         "help_translate": "Helpi traduki",
@@ -461,7 +475,7 @@
             "no_documentation_key": "Estas neniu disponebla dokumentaro pri ĉi tiu ŝlosilo",
             "documentation_redirect": "Ĉi tiu dokumentara paĝo estis movita al nova loko",
             "show_more": "Montri pli",
-            "view_on_osm": "Vidi en openstreetmap.org",
+            "view_on_osm": "Montri ĉe openstreetmap.org",
             "all_fields": "Ĉiuj kampoj",
             "all_tags": "Ĉiuj etikedoj",
             "all_members": "Ĉiuj anoj",
@@ -470,7 +484,7 @@
             "role": "Rolo",
             "choose": "Elektu specon de objekto",
             "results": "{n} rezultoj por {search}",
-            "reference": "Vidi en la vikio de OpenStreetMap",
+            "reference": "Montri ĉe OpenStreetMap-vikio",
             "back_tooltip": "Ŝanĝi objekton",
             "remove": "Forigi",
             "search": "Serĉi",
@@ -535,6 +549,10 @@
                 "osm": {
                     "tooltip": "Map-datumoj el OpenStreetMap",
                     "title": "OpenStreetMap-datumoj"
+                },
+                "notes": {
+                    "tooltip": "Rimarkoj el OpenStreetMap",
+                    "title": "OpenStreetMap-rimarkoj"
                 }
             },
             "fill_area": "Plenigi areojn",
@@ -708,8 +726,14 @@
         "cannot_zoom": "Ne povas plie plibonigi en nuna reĝimo.",
         "full_screen": "Baskuligi plenekranon",
         "gpx": {
-            "local_layer": "Loka dosiero",
+            "local_layer": "Aldoni GPX",
             "drag_drop": "Ŝovu kaj demetu .gpx, geojson aŭ .kml dosieron sur la paĝon, aŭ klaku la butonon ĉe dekstre por foliumi",
+            "zoom": "Pligrandigi tavolon",
+            "browse": "Esplori por dosieron"
+        },
+        "mvt": {
+            "local_layer": "Aldoni MVT",
+            "drag_drop": "Ŝovu kaj demetu .mvt aŭ .pbf dosieron sur la paĝon, aŭ klaku la butonon ĉe dekstre por esplori",
             "zoom": "Pligrandigi tavolon",
             "browse": "Esplori por dosieron"
         },
@@ -717,6 +741,7 @@
             "tooltip": "Strat-nivelaj fotoj de Microsoft",
             "title": "Fotara surtavolo (Bing Streetside)",
             "report": "Raporti privatecan problemon pri tiu ĉi foto",
+            "view_on_bing": "Montri ĉe Bing Mapoj",
             "hires": "Alta distingivo"
         },
         "mapillary_images": {
@@ -736,6 +761,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Montri tiun ĉi bildon ĉe OpenStreetCam"
+        },
+        "note": {
+            "note": "Rimarko",
+            "title": "Redakti rimarkon",
+            "anonymous": "anonimulo",
+            "closed": "(fermita)",
+            "commentTitle": "Komentoj",
+            "newComment": "Nova komento",
+            "inputPlaceholder": "Skribu komenton por sciigi aliajn uzantojn.",
+            "close": "Fermi rimarkon",
+            "open": "Remalfermi rimarkon",
+            "comment": "Komenti",
+            "close_comment": "Fermi kaj komenti",
+            "open_comment": "Remalfermi kaj komenti",
+            "report": "Raporti",
+            "new": "Nova rimarko",
+            "newDescription": "Priskribu la problemon.",
+            "save": "Konservi rimarkon",
+            "login": "Vi devas ensaluti por ŝanĝi aŭ komenti tiun ĉi rimarkon.",
+            "upload_explanation": "Viaj komentoj estos publike videblaj al ĉiuj uzantoj de OpenStreetMap.",
+            "upload_explanation_with_user": "Viaj komentoj kiel {user} estos publike videblaj al ĉiuj uzantoj de OpenStreetMap."
         },
         "help": {
             "title": "Helpo",
@@ -874,6 +920,17 @@
                 "boundary": "Rilato “limo” estas grupo da unu aŭ pli liniaj objektoj kiuj kune formas administran limon.",
                 "boundary_add": "Por aldoni objekton al liman rilaton, elektu ĝin kaj ŝovumu suben ĝis la sekcio “ĉiuj rilatoj”  de la odjekt-redaktilo, sekve klaku la butonon {plus} aldoni por aldoni tiun ĉi objekton al proksima ekzistanta rilato aŭ al nova rilato."
             },
+            "notes": {
+                "title": "Rimarkoj",
+                "intro": "“Rimarkoj” estas uzataj por informi aliajn uzantojn, ke objekto bezonas riparon aŭ kontrolon. Rimarko markas difinitan lokon sur la mapo. Por vidigi ekzistajn rimarkojn aŭ krei iun novan, klaku la panelon {data} **map-datumoj** por aktivigi la tavolon de rimarkoj.",
+                "add_note_h": "Aldoni rimarkojn",
+                "add_note": "Por aldoni rimarkon, klaku la butonon {note} **rimarko** sur la ilobreto supre de mapo aŭ premu la fulmoklavon `4`. Tiel la mus-kursoro ŝanĝiĝos al kruc-simbolo. Por loki novan rimarkon al la mapo, celu la mus-kursoron tien, kien la rimarko estu, kaj sekve {leftclick} maldekstre-klaku aŭ premu la `spacostangon`.",
+                "move_note": "Oni povas movi nur novajn rimarkon. Por movi rimarkon, direktu la mus-kursoron al la nova rimarko, kaj premtenu la {leftclick} maldekstran mus-butonon ŝovante la rimarkon al nova loko.",
+                "update_note_h": "Fermi, remalfermi aŭ komenti",
+                "update_note": "Ekzistan rimarkon oni povas aktualigi per ĝin fermi, remalfermi aŭ komenti. Fermado de rimarko indikas, ke la problemo estas solvita. Remalfermado de rimarko indikas, ke la originala problemo plue ne estas solvita.",
+                "save_note_h": "Konservi rimarkon",
+                "save_note": "Vi devas konservi ĉiun rimarkon aparte per butonoj sub komentoj de rimarko. Redaktoj de rimarkoj **ne** estas ampleksataj en ŝanĝaroj, kiujn vi alŝutas al OpenStreetMap."
+            },
             "imagery": {
                 "title": "Fona fotaro",
                 "intro": "Fona fotaro videbla malantaŭ map-datumoj estas grava fonto por mapigi. Tiu ĉi fotaro povas esti kolektita per satelitoj, aviadiloj aŭ flugrobotoj, aŭ ĝi povas esti skanita historia mapo aŭ aliaj libere disponeblaj datumoj.",
@@ -886,7 +943,7 @@
             },
             "streetlevel": {
                 "title": "Strat-nivelaj fotoj",
-                "intro": "Strat-nivelaj fotoj estas uzeblaj por mapigi trafiksignojn, firmaojn kaj aliajn detalojn nevideblajn sur satelita fotaro. La redaktilo iD subtenas strat-nivelaj fotoj de [Mapillary](https://www.mapillary.com) kaj [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Strat-nivelaj fotoj estas uzeblaj por mapigi trafiksignojn, firmaojn kaj aliajn detalojn nevideblajn sur satelita fotaro. La redaktilo iD subtenas strat-nivelaj fotoj de [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) kaj [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Uzi strat-nivelajn fotojn",
                 "using": "Por uzi strat-nivelajn fotojn por mapigi, klaku la panelon {data} **map-datumoj** flanke de la mapo por aktivigi aŭ malaktivigi disponeblajn fotajn tavolojn.",
                 "photos": "Kiam aktiva la fota tavolo vidigas linion laŭlonge de serio de fotoj. Ĉe pligrandigo cirkleto markos  pozicion de ĉiu foto kaj ĉe eĉ pli granda pligrandigo konuso markos direkton de objektivo de fotilo je kiam foto estis farita.",
@@ -1265,10 +1322,11 @@
                 "title": "Redaktado",
                 "drawing": {
                     "title": "Desegni",
-                    "add_point": "'Aldoni punkton'-reĝimo",
-                    "add_line": "'Aldoni linion'-reĝimo",
-                    "add_area": "'Aldoni areo'-reĝimo",
-                    "place_point": "Enmeti punkton",
+                    "add_point": "‘Aldoni punkton’-reĝimo",
+                    "add_line": "‘Aldoni linion’-reĝimo",
+                    "add_area": "‘Aldoni areon’-reĝimo",
+                    "add_note": "‘Aldoni rimarkon’-reĝimo",
+                    "place_point": "Enmeti punkton aŭ rimarkon",
                     "disable_snap": "Premteni por ne kapti punktojn",
                     "stop_line": "Fini desegni linion aŭ areon"
                 },
@@ -1277,6 +1335,7 @@
                     "continue_line": "Pluigi linion ĉe elektita nodo",
                     "merge": "Kunfandi elektitajn objektojn",
                     "disconnect": "Malkunigi objektojn de elektita nodo",
+                    "detach_node": "Apartigi elektitan nodon de superaj linioj/areoj",
                     "split": "Disduigi linon de elektita nodo",
                     "reverse": "Inversigi linion",
                     "move": "Movi elektitajn objektojn",
@@ -1620,6 +1679,9 @@
                 "capacity": {
                     "label": "Enhaveco",
                     "placeholder": "50, 100, 200…"
+                },
+                "cash_in": {
+                    "label": "Enpagoj"
                 },
                 "castle_type": {
                     "label": "Speco"
@@ -2276,6 +2338,9 @@
                         "underground": "Subtera"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Elektronika tabulo de forveturoj"
+                },
                 "payment_multi": {
                     "label": "Pagmanieroj"
                 },
@@ -2506,6 +2571,9 @@
                     }
                 },
                 "site": {
+                    "label": "Speco"
+                },
+                "site_type": {
                     "label": "Speco"
                 },
                 "smoking": {
@@ -3049,8 +3117,8 @@
                     "terms": "horlogho,horlogxo,tempmezurilo"
                 },
                 "amenity/college": {
-                    "name": "Kolegia (mezlerneja) tereno",
-                    "terms": "kolegio,mezlernejo,mezgrada lernejo"
+                    "name": "Tereno de postmezgrada lernejo (ISCED 4)",
+                    "terms": "kolegio,mezlernejo,mezgrada lernejo,studejo"
                 },
                 "amenity/community_centre": {
                     "name": "Komunuma centro",
@@ -3143,7 +3211,7 @@
                     "terms": "interreta kafejo,retumejo"
                 },
                 "amenity/kindergarten": {
-                    "name": "Infanĝardena tereno",
+                    "name": "Tereno de infanĝardeno (ISCED 0)",
                     "terms": "infanoghardeno,infanogxardeno,antaŭlernejo,kindergarteno,infanĝardeno,infanghardeno,infangxardeno,infanvartejo,lernludejo"
                 },
                 "amenity/library": {
@@ -3289,7 +3357,7 @@
                     "terms": "kampadejo,malpruaĵo"
                 },
                 "amenity/school": {
-                    "name": "Lerneja tereno",
+                    "name": "Tereno de lernejo (ISCED 1-3)",
                     "terms": "lernejo,edukejo,instruejo"
                 },
                 "amenity/scrapyard": {
@@ -3355,7 +3423,7 @@
                     "terms": "urbdomo,magistrato,magistratejo,urba registaro"
                 },
                 "amenity/university": {
-                    "name": "Universitata tereno",
+                    "name": "Tereno de altgrada lernejo (ISCED 5-7)",
                     "terms": "universitato,altgrada lernejo,instruejo,politeĥniko,politekniko,altlernejo,studejo"
                 },
                 "amenity/vending_machine": {
@@ -3648,8 +3716,8 @@
                     "terms": "biblioteko,komunuma centro,civila konstruaĵo,civitana konstruaĵo"
                 },
                 "building/college": {
-                    "name": "Kolegia konstruaĵo",
-                    "terms": "kolegio,universitato,politeĥniko,politekniko"
+                    "name": "Konstruaĵo de postmezgrada lernejo",
+                    "terms": "kolegio,universitato,politeĥniko,politekniko,studejo"
                 },
                 "building/commercial": {
                     "name": "Oficeja konstruaĵo",
@@ -3715,8 +3783,8 @@
                     "terms": "industrio,fabriko"
                 },
                 "building/kindergarten": {
-                    "name": "Infanĝardena konstruaĵo",
-                    "terms": "infanghardeno,infangxardeno,infanoĝardeno,antaŭlernejo,kindergarteno"
+                    "name": "Konstruaĵo de infanĝardeno",
+                    "terms": "infanghardeno,infangxardeno,infanoĝardeno,antaŭlernejo,kindergarteno,infanĝardeno"
                 },
                 "building/mosque": {
                     "name": "Moskea konstruaĵo",
@@ -3743,7 +3811,7 @@
                     "terms": "ruinoj,konstruaĵaĉo,domaĉo"
                 },
                 "building/school": {
-                    "name": "Lerneja konstruaĵo",
+                    "name": "Konstruaĵo de lernejo",
                     "terms": "lernejo,edukejo,instruejo"
                 },
                 "building/semidetached_house": {
@@ -3786,7 +3854,7 @@
                     "terms": "aŭtobusstacio,stacio,stacidomo,busstacio,flughaveno.haveno"
                 },
                 "building/university": {
-                    "name": "Universitata konstruaĵo",
+                    "name": "Konstruaĵo de altgrada lernejo",
                     "terms": "universitato,kolegio,politeĥniko,politekniko,altlernejo,alta lernejo"
                 },
                 "building/warehouse": {

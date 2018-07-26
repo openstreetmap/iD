@@ -1,5 +1,10 @@
 {
     "tr": {
+        "icons": {
+            "information": "bilgi",
+            "remove": "kaldır",
+            "undo": "geri al"
+        },
         "modes": {
             "add_area": {
                 "title": "Alan",
@@ -15,6 +20,10 @@
                 "title": "Nokta",
                 "description": "Restoran, anıt ya da posta kutusunu haritaya ekle.",
                 "tail": "Nokta eklemek için haritaya tıkla."
+            },
+            "add_note": {
+                "title": "Not",
+                "tail": "Not bırakmak için haritaya tıklayın."
             },
             "browse": {
                 "title": "Gözat",
@@ -35,7 +44,8 @@
                 "annotation": {
                     "point": "Nokta eklendi.",
                     "vertex": "Çizgiye bir bağlantı noktası eklendi.",
-                    "relation": "Bir küme eklendi."
+                    "relation": "Bir küme eklendi.",
+                    "note": "Not eklendi"
                 }
             },
             "start": {
@@ -288,6 +298,19 @@
                     "create": "Bir dönüş kısıtlaması eklendi.",
                     "delete": "Bir dönüş kısıtlaması silindi"
                 }
+            },
+            "detach_node": {
+                "title": "Ayırt"
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Uzaklık",
+                "via": "Üzerinden",
+                "via_node_only": "Sadece nokta"
+            },
+            "help": {
+                "indirect": "(dolaylı)"
             }
         },
         "undo": {
@@ -307,8 +330,8 @@
             "localized_translation_name": "İsim"
         },
         "zoom_in_edit": "Düzenlemek için yakınlaştırın",
-        "login": "giriş yap",
-        "logout": "çıkış yap",
+        "login": "Giriş Yap",
+        "logout": "Çıkış",
         "loading_auth": "OpenStreetMap'e bağlanıyor...",
         "report_a_bug": "Hata bildir",
         "help_translate": "Çeviriye yardım et",
@@ -489,6 +512,10 @@
                 "osm": {
                     "tooltip": "OpenStreetMap'ten harita verisi",
                     "title": "OpenStreetMap verisi"
+                },
+                "notes": {
+                    "tooltip": "OpenStreetMap'ın Not Verileri",
+                    "title": "OpenStreetMap'ın Notları"
                 }
             },
             "fill_area": "Alanları Doldur",
@@ -601,8 +628,19 @@
         },
         "success": {
             "just_edited": "OpenStreetMap'te bir değişiklik yaptın!",
+            "thank_you": "Haritayı iyileştirdiğiniz için teşekkür ederiz.",
+            "thank_you_location": "{where} çevresindeki haritayı iyileştirdiğiniz için teşekkür ederiz.",
+            "help_html": "Değişiklikleriniz birkaç dakika içinde OpenStreetMap'da görünmelidir. Başka sitelerden haritaların güncellesi daha uzun sürebilir.",
             "help_link_text": "Detaylar",
-            "help_link_url": "Yaptığın değişiklikleri nasıl görebileceğine dair detaylı bilgiyi şu adreste bulabilirsin - İngilizce: https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "Yaptığın değişiklikleri nasıl görebileceğine dair detaylı bilgiyi şu adreste bulabilirsin - İngilizce: https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Değişiklikleri OSM üzerinde gör",
+            "changeset_id": "Değişiklik Takımı #: {changeset_id}",
+            "like_osm": "OpenStreetMap beğendin mi? Başkalarıyla bağlantı kur:",
+            "more": "Daha fazla",
+            "events": "Etkinlikler",
+            "languages": "Diller: {languages}",
+            "missing": "Bu listede eksik bir şey mi var?",
+            "tell_us": "Bize söyle!"
         },
         "confirm": {
             "okay": "Tamam",
@@ -650,10 +688,13 @@
         "cannot_zoom": "Bu modda daha fazla uzaklaşılamaz.",
         "full_screen": "Tam Ekran",
         "gpx": {
-            "local_layer": "Dosya",
+            "local_layer": "GPX rotası ekle",
             "drag_drop": ".gpx, .geojson or .kml formatında bir dosya sürükle ve bırak ya da sağdaki tuşa basarak bir dosya seç",
             "zoom": "Yakınlaş",
             "browse": "Dosya seç"
+        },
+        "mvt": {
+            "local_layer": "MVT dosyası ekle"
         },
         "mapillary_images": {
             "tooltip": "Mapilary'den sokak fotoğrafları",
@@ -672,6 +713,24 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Bu imajı OpenStreetCam'de görüntüleyin"
+        },
+        "note": {
+            "note": "Not",
+            "title": "Notu düzenle",
+            "anonymous": "kimliği belirsiz",
+            "closed": "(Kapalı)",
+            "commentTitle": "Yorumlar",
+            "newComment": "Yeni Yorum",
+            "close": "Notu Kapat",
+            "open": "Notu Tekrar Aç",
+            "comment": "Yorum",
+            "close_comment": "Yorum yazıp Kapat",
+            "report": "Bildir",
+            "new": "Yeni Not",
+            "newDescription": "Sorunu açıklayın.",
+            "save": "Notu Kaydet",
+            "login": "Bu notu değiştirmek veya yorum yapmak için oturum açmanız gerekir.",
+            "upload_explanation": "Yorumlarınız genel olarak tüm OpenStreetMap kullanıcılarına görünür olacaktır."
         },
         "help": {
             "title": "Yardım",
@@ -1041,7 +1100,6 @@
                     "add_point": "'Nokta ekle' modu",
                     "add_line": "'Çizgi ekle' modu",
                     "add_area": "'Alan ekle' modu",
-                    "place_point": "Bir nokta yerleştir",
                     "disable_snap": "Nokta bitiştirmeyi iptal etmek için basılı tutun",
                     "stop_line": "Çizgi ya da alan çizimini tamamla"
                 },
@@ -6041,6 +6099,97 @@
                     "text": "Harita © Thunderforest, Veriler © OpenStreetMap destekçileri"
                 },
                 "name": "Thunderforest Arazi"
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "name": "Cape Coast Üniversitesi YouthMappers",
+                "description": "Bizi Twitter'dan takip edin: {url}",
+                "extendedDescription": "Bu, Gana'daki Cape Coast Üniversitesi'nin Gençlik Haritacıları bölümünün resmi tanıtıcısıdır. haritaları seviyoruz, verileri açıyoruz ve savunmasızlığa yardımcı oluyoruz."
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Gana Facebook'ta",
+                "description": "OpenStreetMap ile ilgilenen kişilerin Faceboo grubu."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Gana Twitter'da",
+                "description": "Bizi Twitter'dan takip edin: {url}"
+            },
+            "talk-gh": {
+                "name": "Talk-gh E-posta listesi",
+                "description": "Talk-gh, Gana OSM topluluğunun resmi posta listesidir."
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap Madagaskar Facebook Grubu",
+                "description": "OpenStreetMap ile ilgilenen insanlar için Malagasy Facebook grubu."
+            },
+            "talk-mg": {
+                "name": "Talk-mg E-posta listesi",
+                "description": "Paylaşmak ve tartışmak için Madagaskar'daki OpenStreetMap katılımcıları, toplulukları ve kullanıcıları için yer."
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladeş",
+                "description": "Bangladeşteki OpenStreetMap'ı geliştirin",
+                "extendedDescription": "Bangladeş'te Haritalama Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!"
+            },
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap Hindistan - Katılımcı mahalle haritalaması",
+                "description": "Hindistan'da OpenStreetMap'i geliştirin",
+                "extendedDescription": "Hindistan'da haritalama mı? Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "Asya 2018 Haritanın Durumu ",
+                        "where": "Hint Enstitüsü Yönetimi, Bangalore, Hindistan"
+                    }
+                }
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap Hindistan Posta Listesi",
+                "description": "Konuşma, Hindistan Topluluğu için resmi Posta Listesi"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap Hindistan Twitter'ı",
+                "description": "Sadece bir tweet uzağındayız: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "description": "Topluluk etkinlikleri, aktiviteleri hakkında bilgi edinmek için FSHM Facebook sayfası",
+                "extendedDescription": "FSHM, özgür yazılım / donanım, teknoloji, aktivizm ve OpenStreetMap ile ilgili etkinlikler düzenlemektedir. FB sayfası, etkinlikleriyle iletişim kurmanın en iyi yoludur."
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "description": "FSHM Riot grubu, Puducherry'deki ve çevresindeki haritalama etkinliklerini, olaylarını tartışmak, paylaşmak ve güncellemek için",
+                "extendedDescription": "FSHM topluluk üyeleri kendi OSM haritalama güncellemelerini / deneyimlerini Riot.im grubu aracılığıyla paylaşıyor, bu grup aynı zamanda özgür yazılım / donanım, teknoloji ve aktivizm ile ilgili konuları tartışmak için de kullanılıyor."
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Endonezya",
+                "description": "Endonezya'da OpenStreetMap'ı geliştirin",
+                "extendedDescription": "Endonezya'da haritalama mı? Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japonya Topluluğu",
+                "description": "Japonya'daki Mappers ve OpenStreetMap kullanıcıları"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japonya Posta Listesi"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japonya'nın Twitter'ı",
+                "description": "Twitter'daki Hashtag: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japonya",
+                "description": "Japonya'daki Mappers ve OpenStreetMap kullanıcıları"
+            },
+            "OSM-korea-telegram": {
+                "name": "OSM Kore Telegram Kanalı",
+                "description": "Kore'deki OpenStreetMap katılımcıları, toplulukları ve kullanıcılarını paylaşmak ve tartışmak için Resmi Olmayan bir Kanal."
+            },
+            "OSM-MY-facebook": {
+                "name": "Facebook'ta OpenStreetMap Malezya",
+                "description": "OpenStreetMap ile ilgili herhangi bir şey hakkında sohbet için!"
+            },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap Malezya Forumu",
+                "description": "Resmi OpenStreetMap Malezya Forumu"
             }
         }
     }

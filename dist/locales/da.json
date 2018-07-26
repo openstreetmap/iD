@@ -135,7 +135,7 @@
                 },
                 "connected_to_hidden": {
                     "single": "Dette objekt kan ikke slettes da det er forbundet til et skjult objekt.",
-                    "multiple": "Disse objekter kan ikke blive slettet da nogle af dem er forbundet til skjulte features."
+                    "multiple": "Disse kortobjekter kan ikke slettes, da nogle af dem er forbundet til skjulte kortobjekter."
                 }
             },
             "add_member": {
@@ -151,6 +151,7 @@
                     "line": "Forbandt en vej til en linje.",
                     "area": "Forbandt en vej til et område."
                 },
+                "relation": "Disse kortobjekter kan ikke forbindes, da deres relationsroller er i konflikt. ",
                 "restriction": "Disse kortobjekter kan ikke forbindes, da det ville skade en \"{relation}\"-relation."
             },
             "disconnect": {
@@ -169,6 +170,8 @@
                 "annotation": "Fusionerede {n} objekter.",
                 "not_eligible": "Disse objekter kan ikke fusioneres.",
                 "not_adjacent": "Disse objekter kan ikke fusioneres da deres endepunkter ikke er forbundet.",
+                "restriction": "Disse kortobjekter kan ikke fusioneres, da det ville ødelægge en \"{relation}\"-relation.",
+                "relation": "Disse kortobjekter kan ikke fusioneres, da deres relationsroller er i konflikt. ",
                 "incomplete_relation": "Disse objekter kan ikke fusioneres, da mindst et af dem ikke er blevet downloadet helt.",
                 "conflicting_tags": "Disse objekter kan ikke fusioneres fordi nogle af deres tags har konfliktende værdier."
             },
@@ -195,8 +198,8 @@
                     "multiple": "Disse objekter kan ikke flyttes da der ikke er nok af dem i synligt område."
                 },
                 "connected_to_hidden": {
-                    "single": "Dette objekt kan ikke flyttes da det er forbundet til en skjult feature.",
-                    "multiple": "Disse objekter kan ikke flyttes da nogle af dem er forbundet til skjulte features."
+                    "single": "Dette kortobjekt kan ikke flyttes, da det er forbundet til et skjult kortobjekt.",
+                    "multiple": "Disse kortobjekter kan ikke flyttes, da nogle af dem er forbundet til skjulte kortobjekter."
                 }
             },
             "reflect": {
@@ -237,8 +240,8 @@
                     "multiple": "Disse objekter kan ikke spejlvendes, da der ikke er nok af dem synligt i den nuværende visning."
                 },
                 "connected_to_hidden": {
-                    "single": "Dette objekt kan ikke spejlvendes, da det er forbundet med et skjult objekt.",
-                    "multiple": "Disse objekter kan ikke spejlvendes, da nogle af dem er forbundet med skjulte objekter."
+                    "single": "Dette kortobjekt kan ikke spejlvendes, da det er forbundet til et skjult kortobjekt.",
+                    "multiple": "Disse kortobjekter kan ikke spejlvendes, da nogle af dem er forbundet til skjulte kortobjekter."
                 }
             },
             "rotate": {
@@ -294,6 +297,13 @@
                     "create": "Tilføjede en svingbegrænsning",
                     "delete": "Slettede en svingbegrænsning"
                 }
+            },
+            "detach_node": {
+                "title": "Afkobl",
+                "description": "Afkobl denne node fra disse linjer/områder.",
+                "annotation": "Afkoblede en node fra overordnede linjer/områder.",
+                "restriction": "Denne node kan ikke afkobles, da det ville ødelægge en \"{relation}\"-relation.",
+                "connected_to_hidden": "Denne node kan ikke afkobles, da den er forbundet til et skjult kortobjekt."
             }
         },
         "restriction": {
@@ -349,8 +359,8 @@
             "localized_translation_name": "Navn"
         },
         "zoom_in_edit": "Zoom ind for at redigere",
-        "login": "login",
-        "logout": "log ud",
+        "login": "Log ind",
+        "logout": "Log ud",
         "loading_auth": "Forbinder til OpenStreetMap...",
         "report_a_bug": "Rapporterer en fejl",
         "help_translate": "Hjælp med at oversætte",
@@ -533,6 +543,10 @@
                 "osm": {
                     "tooltip": "Kortdata fra OpenStreetMap",
                     "title": "OpenStreetMap data"
+                },
+                "notes": {
+                    "tooltip": "Bemærkningsdata fra OpenStreetMap",
+                    "title": "OpenStreetMap-bemærkninger"
                 }
             },
             "fill_area": "Udfyldning af områder",
@@ -655,6 +669,7 @@
             "changeset_id": "Dit ændringssætnummer: {changeset_id}",
             "like_osm": "Kan du lide OpenStreetMap? Få kontakt med andre:",
             "more": "Mere",
+            "events": "Begivenheder",
             "languages": "Sprog: {languages}",
             "missing": "Mangler der noget på listen?",
             "tell_us": "Fortæl os det!"
@@ -694,7 +709,7 @@
             "untagged_area": "Område uden tags",
             "untagged_area_tooltip": "Vælg en objekttype der beskriver hvad slags område dette er.",
             "untagged_relation": "Ej tagget relation",
-            "untagged_relation_tooltip": "Vælg en objekttype der beskriver hvad slags relation dette er.",
+            "untagged_relation_tooltip": "Vælg en objekttype der beskriver hvilken slags relation dette er.",
             "many_deletions": "Du sletter {n} kortobjekter: {p} noder, {l} linjer, {a} områder, {r} relationer. Er du sikker på at du vil gøre dette? Dette vil slette dem fra kortet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Tagget {tag} antyder at linjen skulle være et område, men den er ikke et område",
             "deprecated_tags": "Frarådede tags: {tags}"
@@ -706,10 +721,23 @@
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuld skærmtilstand",
         "gpx": {
-            "local_layer": "Lokal fil",
+            "local_layer": "Tilføj en GPX",
             "drag_drop": "Træk og slip en .gpx, .geojson eller .kml ind på siden eller klik på knappen til højre for at browse",
             "zoom": "Zoom til lag",
             "browse": "Gennemse efter en fil"
+        },
+        "mvt": {
+            "local_layer": "Tilføj en MVT",
+            "drag_drop": "Træk og slip en .mvt eller .pbf-fil til siden, eller klik på knappen til højre for at vælge",
+            "zoom": "Zoom til lag",
+            "browse": "Vælg en fil"
+        },
+        "streetside": {
+            "tooltip": "Gadefotos fra Microsoft",
+            "title": "Foto-overlag (Bing Streetside)",
+            "report": "Rapporter en privatlivsbekymring angående dette billede",
+            "view_on_bing": "Vis på Bing Maps",
+            "hires": "Høj opløsning"
         },
         "mapillary_images": {
             "tooltip": "Gadeniveau-billeder fra Mapillary",
@@ -728,6 +756,24 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Vis dette billede på OpenStreetCam"
+        },
+        "note": {
+            "note": "Bemærkning",
+            "title": "Rediger bemærkning",
+            "anonymous": "anonym",
+            "closed": "(Lukket)",
+            "commentTitle": "Kommentarer",
+            "newComment": "Ny kommentar",
+            "inputPlaceholder": "Skriv en kommentar du vil dele med andre brugere.",
+            "close": "Luk bemærkning",
+            "open": "Genåben bemærkning",
+            "comment": "Kommentar",
+            "close_comment": "Luk og kommentér",
+            "open_comment": "Genåben og kommentér",
+            "report": "Rapportér",
+            "login": "Du skal logge ind for at ændre eller kommentere denne bemærkning.",
+            "upload_explanation": "Dine kommentarer vil blive offentligt tilgængelige for alle OpenStreetMap-brugere.",
+            "upload_explanation_with_user": "Dine kommentarer som bruger {user} vil blive offentligt tilgængelige for alle OpenStreetMap-brugere."
         },
         "help": {
             "title": "Hjælp",
@@ -779,6 +825,12 @@
             },
             "points": {
                 "title": "Punkter"
+            },
+            "areas": {
+                "intro": "*Områder* bruges til at indikere afgrænsningen af større objekter såsom søer, bygninger eller boligområder. Områder bør kortlægges langs kanten af det fysiske objekt de repræsenter, eksempelvis for en bygning langs dens fundament."
+            },
+            "relations": {
+                "title": "Relationer"
             },
             "imagery": {
                 "title": "Luftfoto i baggrunden",
@@ -965,7 +1017,7 @@
                 "mouse": "Du kan bruge ethvert pegeredskab til at redigere kortet, men denne gennemgang antager at du har en mus med både en højre og venstre-knap. **Hvis du vil tilslutte en mus, så gør det nu, klik derefter OK.**",
                 "leftclick": "Når du bliver bedt om at klikke eller dobbelt-klikke, menes der venstre museknap. På en trackpad kan det være en nedtrykning af selve fladen, eller et enkelt tryk ovenpå pladen. **Venstreklik {num} gange.**",
                 "rightclick": "Andre gange bliver du bedt om at højreklikke. Dette kan være kontrol-tasten (ctrl) samtidigt med en nedtrykning, eller et dobbelt-tryk ovenpå pladen af en trackpad. Nogle tastaturer har endda en 'menu'-knap som virker ligesom et højreklik. **Højreklik {num} gange.**",
-                "chapters": "Så langt, så godt! Du kan bruge knapperne i bunden til at springe mellem de forskellige dele af gennemgangren når du har lyst, eller til at genstarte en del hvis du sidder fast. Lad os komme i gang! **Klik '{next}' for at fortsætte.**"
+                "chapters": "Så langt, så godt! Du kan bruge knapperne i bunden til at springe mellem de forskellige dele af gennemgangen når du har lyst, eller til at genstarte en del hvis du sidder fast. Lad os komme i gang! **Klik '{next}' for at fortsætte.**"
             },
             "navigation": {
                 "title": "Navigation",
@@ -1005,6 +1057,7 @@
             },
             "areas": {
                 "title": "Områder",
+                "add_playground": "*Områder* bruges til at indikere afgrænsningen af større objekter såsom søer, bygninger eller boligområder.{br}De kan også bruges til mere detaljeret kortlægning af objekter som ellers i første omgang er tilføjet som et punkt. **Klik på {button} Område-knappen for at tilføje et nyt område.**   ",
                 "start_playground": "Lad os tilføje denne legeplads til kortet ved at optegne et område. Områder tegnes ved at placere *noder* langs objektets ydre kant. **Klik eller tast mellemrum for at placere den første node i et at legepladsens hjørner.**",
                 "continue_playground": "Fortsæt med at optegne området ved at placere flere noder langs legepladsens kant. Det er fint at forbinde området til de eksisterende stier.{br}Tip: Hvis du holder '{alt}'-knappen ned forbindes noden ikke til andre objekter. **Fortsæt med at optegne legepladsens område.**",
                 "finish_playground": "Afslut området ved at taste retur, eller klikke igen på enten den første eller den sidste node. **Afslut optegningen af legepladsens område.**",
@@ -1065,7 +1118,7 @@
                 "search_tank": "**Søg efter '{preset}'.**",
                 "choose_tank": "**Vælg {preset} fra listen.**",
                 "rightclick_tank": "**Højre-klik for at markere tanken du har tilføjet og vise redigeringsmenuen.**",
-                "circle_tank": "**Klik på {button}  knappen for at lave tanken som en rund cirkel.**",
+                "circle_tank": "**Klik på {button}-knappen for at lave tanken om til en perfekt cirkel.**",
                 "retry_circle": "Du klikkede ikke på gør rund knappen. Prøv igen.",
                 "play": "Sådan! Øv dig på et par bygninger mere, og prøv nogle af de andre funktioner i redigeringsmenuen. **Når du er klar til at fortsætte til næste del, klik '{next}'.**"
             },
@@ -1146,7 +1199,7 @@
                     "next": "Spring til næste node",
                     "first": "Spring til første node",
                     "last": "Spring til sidste node",
-                    "change_parent": "Skift tilhørende vej"
+                    "change_parent": "Skift overordnede vej"
                 }
             },
             "editing": {
@@ -1156,15 +1209,15 @@
                     "add_point": "\"Tilføj punkt\"-tilstand",
                     "add_line": "\"Tilføj linje\"-tilstand",
                     "add_area": "\"Tilføj område\"-tilstand",
-                    "place_point": "Placer et punkt",
                     "disable_snap": "Undlad at 'klistre' til eksisterende punkt",
                     "stop_line": "Afslut tegning af linje eller område"
                 },
                 "operations": {
                     "title": "Operationer",
                     "continue_line": "Fortsæt linje fra markerede node",
-                    "merge": "Kombiner (sammenflet) markerede kortobjekter",
+                    "merge": "Kombiner (fusioner) markerede kortobjekter",
                     "disconnect": "Separér kortobjekter ved markerede node",
+                    "detach_node": "Afkobl markerede node fra overordnede linjer/områder.",
                     "split": "Opdel linje i to ved markerede node",
                     "reverse": "Vend retning på linje",
                     "move": "Flyt markerede kortobjekter",
@@ -4979,6 +5032,9 @@
                     "name": "Butik",
                     "terms": "Butik, Forretning"
                 },
+                "shop/agrarian": {
+                    "name": "Grovvareforretning"
+                },
                 "shop/alcohol": {
                     "name": "Vinforhandler",
                     "terms": "Vinforhandler, Vinbutik, Vinforretning"
@@ -5005,7 +5061,7 @@
                 },
                 "shop/bag": {
                     "name": "Taske/Kuffertbutik",
-                    "terms": "Taske/Kuffertbutik, Lædervareforretning"
+                    "terms": "Taskebutik, Kuffertbutik, Lædervareforretning"
                 },
                 "shop/bakery": {
                     "name": "Bager",
@@ -5017,7 +5073,7 @@
                 },
                 "shop/beauty": {
                     "name": "Parfumebutik",
-                    "terms": "Parfumebutik, Skønhedbutik, Materialist"
+                    "terms": "Parfumebutik, Skønhedsbutik"
                 },
                 "shop/beauty/nails": {
                     "name": "Neglesalon",
@@ -5077,15 +5133,15 @@
                 },
                 "shop/charity": {
                     "name": "Velgørenhedsbutik",
-                    "terms": "Velgørenhedsbutik"
+                    "terms": "Genbrugsbutik, Velgørenhedsbutik"
                 },
                 "shop/cheese": {
                     "name": "Ostehandler",
                     "terms": "Ostehandler, Ostebutik, Osteforretning"
                 },
                 "shop/chemist": {
-                    "name": "Medicinbutik",
-                    "terms": "Medicinbutik, Materialist"
+                    "name": "Materialist",
+                    "terms": "Materialist"
                 },
                 "shop/chocolate": {
                     "name": "Chokoladeforretning",
@@ -5314,8 +5370,8 @@
                     "terms": "Friluftsudstyrsbutik, Friluftsudstyrsforretning, eventyr,sport,udendørs,"
                 },
                 "shop/paint": {
-                    "name": "Malerforretning",
-                    "terms": "Malerforretning, Malerbutik"
+                    "name": "Farvehandel",
+                    "terms": "Farvehandel, Malerforretning, Malerbutik"
                 },
                 "shop/pastry": {
                     "name": "Konditori",
@@ -5450,7 +5506,7 @@
                 },
                 "shop/wine": {
                     "name": "Vinforretning",
-                    "terms": "Vinforretning, Vinbutik"
+                    "terms": "Vinforretning, Vinbutik, Vinhandler"
                 },
                 "tourism": {
                     "name": "Turisme",
@@ -5556,7 +5612,7 @@
                 },
                 "traffic_calming/bump": {
                     "name": "Vejbump",
-                    "terms": "Vejbump"
+                    "terms": "Bump, Vejbump"
                 },
                 "traffic_calming/chicane": {
                     "name": "Trafikchikane",
@@ -5784,6 +5840,7 @@
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
                 "name": "DigitalGlobe Standard ældre fotos"
             },
             "EsriWorldImagery": {
@@ -5979,13 +6036,16 @@
         },
         "community": {
             "dk-forum": {
-                "name": "Dansk OpenStreetMap online forum"
+                "name": "OpenStreetMap Danmark webforum",
+                "description": "Dansk OpenStreetMap webforum"
             },
             "dk-irc": {
-                "name": "Dansk OpenStreetMap IRC-kanal"
+                "name": "OpenStreetMap Danmark IRC",
+                "description": "Kom ind i kanalen #osm-dk på irc.oftc.net (port 6667)"
             },
             "dk-mailinglist": {
-                "description": "En email-liste hvor OpenStreetMap i Danmark diskuteres"
+                "name": "Talk-dk mailinglisten",
+                "description": "En mailingliste hvor OpenStreetMap i Danmark diskuteres"
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap på Facebook",

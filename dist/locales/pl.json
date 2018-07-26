@@ -21,6 +21,11 @@
                 "description": "Dodaje do mapy restauracje, pomniki, skrzynki pocztowe i inne punkty.",
                 "tail": "Kliknij mapę, aby dodać punkt."
             },
+            "add_note": {
+                "title": "Uwaga",
+                "description": "Problem na mapie? Poinformuj o tym innych mapujących.",
+                "tail": "Kliknij na mapie by dodać uwagę."
+            },
             "browse": {
                 "title": "Przeglądaj",
                 "description": "Przesuwaj i zmieniaj przybliżenie mapy."
@@ -39,8 +44,9 @@
             "add": {
                 "annotation": {
                     "point": "Dodano punkt.",
-                    "vertex": "Dodano węzeł do linii.",
-                    "relation": "Dodano relację."
+                    "vertex": "Dodano punkt do linii.",
+                    "relation": "Dodano relację.",
+                    "note": "Uwaga dodana."
                 }
             },
             "start": {
@@ -111,7 +117,7 @@
                 "title": "Usuń",
                 "description": {
                     "single": "Trwale usuwa ten obiekt.",
-                    "multiple": "Trwale uwsuwa te obiekty."
+                    "multiple": "Trwale usuwa te obiekty."
                 },
                 "annotation": {
                     "point": "Usunięto węzeł.",
@@ -119,7 +125,7 @@
                     "line": "Usunięto linię.",
                     "area": "Usunięto obszar.",
                     "relation": "Usunięto relację.",
-                    "multiple": "Usunięto {n} obiektów."
+                    "multiple": "Usunięto {n} obiekty/obiektów."
                 },
                 "too_large": {
                     "single": "Ten obiekt nie może być usunięty, ponieważ nie jest wystarczająco widoczny.",
@@ -152,7 +158,7 @@
                     "area": "Połączono drogę z obszarem."
                 },
                 "relation": "Te obiekty nie mogą zostać połączone, ponieważ mają sprzeczne role w relacji.",
-                "restriction": "Te obiekty nie mogą zostać połączone, ponieważ popsułobby to relację „{relation}”."
+                "restriction": "Te obiekty nie mogą zostać połączone, ponieważ uszkodziłoby to relację „{relation}”."
             },
             "disconnect": {
                 "title": "Rozłącz",
@@ -170,7 +176,7 @@
                 "annotation": "Scal {n} obiektów.",
                 "not_eligible": "Te obiekty nie mogą zostać scalone.",
                 "not_adjacent": "Tych obiektów nie można scalić, ponieważ ich węzły nie są połączone.",
-                "restriction": "Te obiekty nie mogą zostać scalone, ponieważ popsułobby to relację „{relation}”.",
+                "restriction": "Te obiekty nie mogą zostać scalone, ponieważ uszkodziłoby to relację „{relation}”.",
                 "relation": "Te obiekty nie mogą zostać scalone, ponieważ mają sprzeczne role w relacji.",
                 "incomplete_relation": "Tych obiektów nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany.",
                 "conflicting_tags": "Tego obiektu nie można scalić, ponieważ ich tagi mają sprzeczne wartości."
@@ -236,7 +242,7 @@
                     "multiple": "Nie można odbić obiektów, ponieważ nie zostały całkowicie pobrane."
                 },
                 "too_large": {
-                    "single": "Nie można odbić obiektów, ponieważ nie jest wystarczająco widoczny.",
+                    "single": "Nie można odbić obiektu, ponieważ nie jest wystarczająco widoczny.",
                     "multiple": "Nie można odbić obiektów, ponieważ nie są wystarczająco widoczne."
                 },
                 "connected_to_hidden": {
@@ -297,19 +303,26 @@
                     "create": "Dodano zakaz/nakaz skrętu",
                     "delete": "Usunięto zakaz/nakaz skrętu"
                 }
+            },
+            "detach_node": {
+                "title": "Odłącz węzeł.",
+                "description": "Odłącza ten węzeł od tych linii/obszarów.",
+                "annotation": "Odłącza węzeł od linii/obszarów.",
+                "restriction": "Ten węzeł nie może być odłączony, gdyż spowodowałoby to uszkodzenie relacji \"{relation}\".",
+                "connected_to_hidden": "Ten węzeł nie może być odłączony, gdyż jest połączony z ukrytym obiektem."
             }
         },
         "restriction": {
             "controls": {
                 "distance": "Odległość",
-                "distance_up_to": "Do {distance}",
+                "distance_up_to": "Nie więcej niż {distance}",
                 "via": "Przez",
-                "via_node_only": "Tylko węzły",
-                "via_up_to_one": "Do 1 linii",
-                "via_up_to_two": "Do 2 linii"
+                "via_node_only": "Tylko węzeł",
+                "via_up_to_one": "Nie więcej niż 1 odcinek",
+                "via_up_to_two": "Nie więcej niż 2 odcinki"
             },
             "help": {
-                "indirect": "(niebezpośredni)",
+                "indirect": "(pośredni)",
                 "turn": {
                     "no_left_turn": "Zakaz skrętu w lewo {indirect}",
                     "no_right_turn": "Zakaz skrętu w prawo {indirect}",
@@ -319,20 +332,20 @@
                     "only_right_turn": "Nakaz skrętu w prawo {indirect}",
                     "only_u_turn": "Nakaz zawracania {indirect}",
                     "only_straight_on": "Nakaz jazdy prosto {indirect}",
-                    "allowed_left_turn": "Zezwolony skręt w lewo {indirect}",
-                    "allowed_right_turn": "Zezwolony skręt w prawo {indirect}",
-                    "allowed_u_turn": "Zezwolone zawracanie {indirect}",
-                    "allowed_straight_on": "Zezwolona jazda prosto {indirect}"
+                    "allowed_left_turn": "Skręt w lewo dozwolony {indirect}",
+                    "allowed_right_turn": "Skręt w prawo dozwolony {indirect}",
+                    "allowed_u_turn": "Zawracanie dozwolone {indirect}",
+                    "allowed_straight_on": "Jazda prosto dozwolona {indirect}"
                 },
-                "from": "Z",
+                "from": "OD",
                 "via": "PRZEZ",
                 "to": "DO",
                 "from_name": "{from}: {fromName}",
                 "from_name_to_name": "{from}: {fromName}, {to}: {toName}",
                 "via_names": "{via}: {viaNames}",
-                "select_from": "Kiliknij aby wybrać element „{from}”",
-                "select_from_name": "Kilkin aby wybrać {from} {fromName}",
-                "toggle": "Kilknij aby zastosować „{turn}”"
+                "select_from": "Kliknij, by wybrać odcinek {from}",
+                "select_from_name": "Kliknij, by wybrać {from} {fromName}",
+                "toggle": "Kliknij, by zastosować „{turn}”"
             }
         },
         "undo": {
@@ -352,8 +365,8 @@
             "localized_translation_name": "Nazwa"
         },
         "zoom_in_edit": "Przybliż, aby edytować",
-        "login": "login",
-        "logout": "wyloguj",
+        "login": "Logowanie",
+        "logout": "Wylogowanie",
         "loading_auth": "Łączenie z OpenStreetMap...",
         "report_a_bug": "Zgłoś błąd",
         "help_translate": "Pomóż przetłumaczyć",
@@ -510,7 +523,7 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
-            "custom_prompt": "Wprowadź szablon dla URL kafelków mapy. Obsługiwane symbole:\n   - {zoom}/{z}, {x}, {y} dla schematu adresowania kafelkówZ/X/Y\n   - {-y}/{ty} dla odwróconej współrzędnej Y w adresowaniu TMS\n   - {u} dla QuadTiles\n   - {switch:a,b,c} dla multipleksacji serwerów na poziomie DNS\n\nPrzykład:\n{example}",
+            "custom_prompt": "Wprowadź szablon dla URL kafelka mapy. Obsługiwane symbole:\n   - {zoom}/{z}, {x}, {y} dla schematu adresowania kafelkówZ/X/Y\n   - {-y} lub {ty} dla odwróconej współrzędnej Y w adresowaniu TMS\n   - {u} dla QuadTiles\n   - {switch:a,b,c} dla multipleksacji serwerów na poziomie DNS\n\nPrzykład:\n{example}",
             "overlays": "Nakładki",
             "imagery_source_faq": "Informacje o obrazie / Zgłoś problem",
             "reset": "Przywraca ustawienia",
@@ -536,6 +549,10 @@
                 "osm": {
                     "tooltip": "Dane map z OpenStreetMap",
                     "title": "Dane OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Uwagi z OpenStreetMap",
+                    "title": "Uwagi OpenStreetMap"
                 }
             },
             "fill_area": "Wypełnianie obszarów",
@@ -635,7 +652,7 @@
                 "delete": "Pozostaw usunięty",
                 "download_changes": "Lub pobierz plik zmian na OSM",
                 "done": "Rozwiązano wszystkie konflikty !",
-                "help": "Inny użytkownik zmienił te same obiekty co ty.\nKlinknij na każdym z nich, aby uzyskać więcej informacji o konflikcie i wybrać\nczy zostawić twoją wersję, czy wersję innego użytkownika.\n"
+                "help": "Inny użytkownik zmienił te same obiekty co ty.\nKlikając na każdym z poniższych obiektów uzyskasz więcej informacji o powstałym konflikcie i będziesz mógł zdecydować, czy mają zostać zapisane zmiany twoje czy tego innego użytkownika.\n\n"
             }
         },
         "merge_remote_changes": {
@@ -698,7 +715,7 @@
             "untagged_area": "Nieoznaczony obszar",
             "untagged_area_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten obszar.",
             "untagged_relation": "Pusta relacja - brak znaczników",
-            "untagged_relation_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta relacja.",
+            "untagged_relation_tooltip": "Wybierz rodzaj obiektu, który opisuje, czym jest ta relacja.",
             "many_deletions": "Usuwasz {n} obiekty/obiektów: {p} węzłów, {l} linii, {a} obszarów, {r} relacji. Na pewno chcesz to zrobić? To spowoduje, że znikną one z mapy, którą wszyscy widzą na openstreetmap.org.",
             "tag_suggests_area": "Znacznik {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
             "deprecated_tags": "Przestarzałe znaczniki: {tags}"
@@ -710,16 +727,23 @@
         "cannot_zoom": "Nie można bardziej oddalić widoku w obecnym trybie.",
         "full_screen": "Tryb pełnoekranowy",
         "gpx": {
-            "local_layer": "Lokalny plik",
-            "drag_drop": "Przeciągnij i upuść plik .gpx, .geojson lub .kml na stronę lub kliknij przycisk po prawej by go wybrać",
+            "local_layer": "Dodaj plik GPX",
+            "drag_drop": "Przeciągnij i upuść plik .gpx, .geojson lub .kml na stronę lub kliknij przycisk po prawej, by go wybrać",
             "zoom": "Przybliż do warstwy",
             "browse": "Wczytaj plik"
         },
+        "mvt": {
+            "local_layer": "Dodaj plik MVT",
+            "drag_drop": "Przeciągnij i upuść plik .mvt lub .pbf na stronę, lub wybierz plik klikając na przycisk po prawej stronie",
+            "zoom": "Przybliż do tej warstwy",
+            "browse": "Wybierz plik"
+        },
         "streetside": {
-            "tooltip": "Zdjęcia poziomu ulicy od Microsoft",
-            "title": "Zdjęcia poziomu ulicy (Bing Streetside)",
-            "report": "Zgłoś naruszenie prywatności w tym zdjęciu",
-            "hires": "Wyższa rozdzielczość"
+            "tooltip": "Zdjęcia ulic od Microsoftu",
+            "title": "Nakładka zdjęciowa (ulice z Bing)",
+            "report": "Zgłoś naruszenie prywatności na tym zdjęciu",
+            "view_on_bing": "Zobacz na mapie Bing",
+            "hires": "Wysoka rozdzielczość"
         },
         "mapillary_images": {
             "tooltip": "Zdjęcia z serwisu Mapillary",
@@ -738,6 +762,26 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Zobacz to zdjęcie na OpenStreetCam"
+        },
+        "note": {
+            "note": "Uwaga",
+            "title": "Edycja uwagi",
+            "anonymous": "anonimowo",
+            "closed": "(Zamknięta)",
+            "commentTitle": "Komentarze",
+            "newComment": "Nowy komentarz",
+            "close": "Rozwiąż uwagę",
+            "open": "Ponownie otwórz uwagę",
+            "comment": "Komentarz",
+            "close_comment": "Rozwiąż i skomentuj",
+            "open_comment": "Ponownie otwórz i skomentuj",
+            "report": "Zgłoś",
+            "new": "Nowa uwaga",
+            "newDescription": "Opisz problem.",
+            "save": "Zapisz uwagę",
+            "login": "Musisz się zalogować by zmienić stan lub skomentować uwagę.",
+            "upload_explanation": "Twoje komentarze będą widoczne dla wszystkich korzystających z OpenStreetMap.",
+            "upload_explanation_with_user": "Twoje komentarze jako {user} będą widoczne dla wszystkich użytkowników OpenStreetMap."
         },
         "help": {
             "title": "Pomoc",
@@ -759,19 +803,20 @@
                 "navigation_drag": "Możesz przeciągnąć mapę, naciskając i przytrzymując {leftclick} lewym przyciskiem myszy i poruszając myszą. Możesz także użyć klawiszy strzałek `↓ ',` ↑ `,` ← `,` → `na klawiaturze.",
                 "navigation_zoom": "Możesz powiększać i pomniejszać obraz, przewijając kółkiem myszy lub trackpadem, albo klikając przyciski {plus} / {minus} wzdłuż boku mapy. Możesz także użyć klawiszy `+`, `-` na klawiaturze.",
                 "features_h": "Właściwości mapy",
-                "features": "Używamy określenia *obiekty* aby opisać rzeczy pojawijające się na mapie, jak drogi, budynki, pounkty zainteresowań. Wszystkie obiekty z rzeczywistego świata można zmapować, czyli odwzorować, w OpenStreetMap. Obiekty są prezentowane na mapie za pomocą *węzłów*, *linii* i *obszarów*.",
+                "features": "Używamy określenia *obiekty*, aby opisać rzeczy pojawiające się na mapie, jak drogi, budynki, użyteczne miejsca. Wszystkie obiekty z rzeczywistego świata można zmapować, czyli odwzorować, w postaci obiektu w OpenStreetMap. Obiekty te są prezentowane na mapie za pomocą *punktów*, *linii* i *obszarów*.",
                 "nodes_ways": "W OpenStreetmap punkty są czasami nazywane * węzłami *, a linie i obszary są czasami nazywane * drogami *."
             },
             "editing": {
                 "title": "Edytowanie i zapisywanie",
                 "select_h": "Wybierz",
-                "select_left_click": "{leftclick} Kilknij lewy przyciskiem myszy na obiekcie, aby go wybrać. Taki element zostanie podświetlony, a boczny panel wyświetli jego atrybuty, np. nazwę i adres.",
-                "select_right_click": "{rightclick} Kilknij prawym przyciskiem myszy na obiekcie aby wyświetlić menu edycji, które pokazuje możliwe do wykonania akcje, jak np. obót, przesunięcie czy usunięcie.",
+                "select_left_click": "{leftclick} Kliknij lewym przyciskiem myszy na obiekcie, aby go wybrać. Taki element zostanie podświetlony, a boczny panel wyświetli jego atrybuty, np. nazwę i adres.",
+                "select_right_click": "{rightclick} Kliknij prawym przyciskiem myszy na obiekcie, aby wyświetlić menu edycji, które pokazuje możliwe do wykonania akcje, jak np. obrót, przesunięcie czy usunięcie.",
                 "multiselect_h": "wielokrotny wybór",
-                "multiselect_shift_click": "`{shift}`+{leftclick} trzymając shift i wybierając obiekty za pomocą LPM pozwala zaznaczać wiele obiektów. Pomaga to w przesuwaiu lub usuwaniu wielu elementów na raz.",
-                "multiselect_lasso": "Innym sposobem aby zaznaczyć wiele obiektów jest przytrzymanie klawisza `{shift}` i {leftclick} i narysawnie myszą lasso wokół obiektów, które mają być wybrane. Wszystkie węzły wewnątrz lasso zostaną zaznaczone.",
+                "multiselect_shift_click": "`{shift}`+{leftclick} trzymając shift i klikając lewym przyciskiem myszy wybiera wiele obiektów jednocześnie. Pomaga to w przesuwaniu lub usuwaniu wielu elementów na raz.",
+                "multiselect_lasso": "Innym sposobem na zaznaczenie wielu obiektów jest przytrzymanie klawisza `{shift}`, następnie naciśnięcie i trzymanie {leftclick} lewego przycisku myszy, i rysowanie tak myszą lasso wokół obiektów, które mają być wybrane. Wszystkie punkty wewnątrz lasso zostaną wybrane.",
                 "undo_redo_h": "Cofnij & Wykonaj ponowniep",
                 "save_h": "Zapisz",
+                "save": "Naciśnij {save} **Zapisz** by zakończyć edytowanie i wysłać zmiany do OpenStreetMap. Pamiętaj, by regularnie zapisywać swoją pracę!",
                 "upload_h": "Wyślij",
                 "backups_h": "Automatyczne kopie zapasowe",
                 "keyboard_h": "Skróty klawiszowe",
@@ -811,7 +856,7 @@
                 "edit_relation_h": "Edytowanie relacji",
                 "relation_types_h": "Rodzaje relacji",
                 "multipolygon_h": "Wielokąty",
-                "turn_restriction_h": "Ograniczenia skrętu",
+                "turn_restriction_h": "Zakazy/nakazy skrętu",
                 "route_h": "Trasy",
                 "boundary_h": "Granice"
             },
@@ -835,8 +880,28 @@
             },
             "field": {
                 "restrictions": {
+                    "title": "Pomoc dla zakazów/nakazów skrętu",
+                    "about": {
+                        "title": "Ogólnie",
+                        "about": "To pole pozwala na sprawdzenie i modyfikację nakazów/zakazów skrętu. Wyświetlany jest model wybranego skrzyżowania, wliczając w to pobliskie połączone drogi.",
+                        "from_via_to": "Nakaz/zakaz skrętu zawsze zawiera: jedną **drogę OD**, jedną **drogę DO**, oraz albo jeden **węzeł PRZEZ** lub jedną lub więcej **dróg PRZEZ**.",
+                        "maxdist": "Suwak \"{distField}\" określa, jak daleko szukać dodatkowych, połączonych dróg.",
+                        "maxvia": "Suwak \"{viaField}\" ustala jak wiele dróg \"przez\" ma być możliwych do użycia. Wskazówka: im mniej, tym lepiej."
+                    },
+                    "inspecting": {
+                        "title": "Sprawdzanie",
+                        "from_shadow": "{fromShadow} **część OD**",
+                        "allow_shadow": "{allowShadow} **TO Allowed**",
+                        "only_shadow": "{onlyShadow} **tylko DO**"
+                    },
+                    "modifying": {
+                        "title": "Edytowanie",
+                        "only_turn": "{onlyTurn} **tylko DO**"
+                    },
                     "tips": {
-                        "title": "Wskazówki"
+                        "title": "Wskazówki",
+                        "simple": "**Staraj się stosować proste, a nie rozbudowane zakazy/nakazy skrętu.**",
+                        "simple_example": "Na przykład zamiast używać odcinka drogi w roli PRZEZ, użyj węzła, o ile jest to na danym skrzyżowaniu możliwe."
                     }
                 }
             }
@@ -1168,7 +1233,6 @@
                     "add_point": "Tryb 'Dodawanie punktu'",
                     "add_line": "Tryb 'Dodawanie linii'",
                     "add_area": "Tryb 'Dodawanie obszaru'",
-                    "place_point": "Umieść punkt",
                     "disable_snap": "Przytrzymaj, by wyłączyć przyciąganie do punktu",
                     "stop_line": "Zakończ rysowanie linii lub obszaru"
                 },
@@ -1339,7 +1403,7 @@
                         "housename": "Nazwa domu",
                         "housenumber": "123",
                         "housenumber!jp": "Nr budynku/działki",
-                        "neighbourhood": "Okręg",
+                        "neighbourhood": "Osiedle",
                         "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Miejsc. (adres bez ulicy)",
                         "postcode": "Kod pocztowy",
@@ -1493,7 +1557,7 @@
                     "label": "Budynek"
                 },
                 "bunker_type": {
-                    "label": "Typ"
+                    "label": "Rodzaj"
                 },
                 "cables": {
                     "label": "Kable",
@@ -1519,7 +1583,7 @@
                     "placeholder": "50, 100, 200..."
                 },
                 "castle_type": {
-                    "label": "Typ"
+                    "label": "Rodzaj"
                 },
                 "clothes": {
                     "label": "Ubrania"
@@ -1749,10 +1813,10 @@
                     "label": "Rodzaj"
                 },
                 "fire_hydrant/position": {
-                    "label": "Pozycja",
+                    "label": "Lokalizacja",
                     "options": {
                         "green": "Zieleń",
-                        "lane": "Ulica",
+                        "lane": "Jezdnia",
                         "parking_lot": "Miejsce parkingowe",
                         "sidewalk": "Chodnik"
                     }
@@ -2119,9 +2183,9 @@
                 "oneway": {
                     "label": "Jednokierunkowa",
                     "options": {
-                        "alternating": "Ruch Wachadłowy",
+                        "alternating": "Ruch wahadłowy",
                         "no": "Nie",
-                        "reversible": "Okresowo Zmieniana",
+                        "reversible": "Okresowo zmieniana",
                         "undefined": "Domyślnie nie",
                         "yes": "Tak"
                     }
@@ -2129,9 +2193,9 @@
                 "oneway_yes": {
                     "label": "Jednokierunkowa",
                     "options": {
-                        "alternating": "Ruch Wachadłowy",
+                        "alternating": "Ruch wahadłowy",
                         "no": "Nie",
-                        "reversible": "Okresowo Zmieniana",
+                        "reversible": "Okresowo zmieniana",
                         "undefined": "Domyślnie tak",
                         "yes": "Tak"
                     }
@@ -2382,8 +2446,14 @@
                 "shop": {
                     "label": "Typ"
                 },
+                "siren/purpose": {
+                    "label": "Przeznaczenie"
+                },
                 "siren/type": {
-                    "label": "Rodzaj"
+                    "label": "Rodzaj",
+                    "options": {
+                        "other": "Inny"
+                    }
                 },
                 "site": {
                     "label": "Typ"
@@ -2799,6 +2869,10 @@
                 "aeroway/terminal": {
                     "name": "Terminal pasażerski",
                     "terms": "port lotniczy, terminal lotniczy, terminal pasażerski, terminal"
+                },
+                "allotments/plot": {
+                    "name": "Działka ogrodowa",
+                    "terms": "działka,ogródek"
                 },
                 "amenity": {
                     "name": "Usługa"
@@ -3486,7 +3560,7 @@
                     "terms": "stodoła"
                 },
                 "building/boathouse": {
-                    "name": "Dom Na Wodzie",
+                    "name": "Łódź mieszkalna",
                     "terms": "houseboat,boathouse,na wodzie"
                 },
                 "building/bungalow": {
@@ -3554,6 +3628,10 @@
                 "building/garages": {
                     "name": "Garaże",
                     "terms": "garaże"
+                },
+                "building/grandstand": {
+                    "name": "Trybuna (budynek)",
+                    "terms": "trybuna,trybuny"
                 },
                 "building/greenhouse": {
                     "name": "Szklarnia",
@@ -4017,6 +4095,9 @@
                 "healthcare/hospice": {
                     "name": "Hospicjum",
                     "terms": "hospicjum"
+                },
+                "healthcare/laboratory": {
+                    "name": "Laboratorium medyczne"
                 },
                 "healthcare/midwife": {
                     "name": "Położna",
@@ -4482,6 +4563,10 @@
                     "name": "Czatownia ornitologiczna",
                     "terms": "ornitologia, ptaki"
                 },
+                "leisure/bleachers": {
+                    "name": "Trybuna (odkryta)",
+                    "terms": "trybuna,trybuny"
+                },
                 "leisure/bowling_alley": {
                     "name": "Kręgielnia",
                     "terms": "Kręgle"
@@ -4905,6 +4990,9 @@
                     "name": "Szczyt",
                     "terms": "szczyt,wierzchołek"
                 },
+                "natural/reef": {
+                    "name": "Rafa"
+                },
                 "natural/ridge": {
                     "name": "Grzbiet Górski",
                     "terms": "grzbiet, grzbiet górski"
@@ -5291,6 +5379,9 @@
                 "public_transport/platform_tram": {
                     "name": "Przystanek tramwajowy / peron"
                 },
+                "public_transport/station_aerialway": {
+                    "name": "Stacja publicznej kolejki linowej"
+                },
                 "public_transport/station_bus": {
                     "name": "Dworzec autobusowy",
                     "terms": "dworzec autobusowy, pks"
@@ -5593,7 +5684,7 @@
                     "terms": "dom towarowy,dom handlowy"
                 },
                 "shop/doityourself": {
-                    "name": "Sklep dla majsterkowiczów",
+                    "name": "Market budowlany/sklep dla majsterkowiczów",
                     "terms": "sklep dla majsterkowiczów"
                 },
                 "shop/dry_cleaning": {
@@ -6246,6 +6337,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Najnowsza ortofotomapa Flandrii © AGIV"
+                },
+                "name": "Najnowsze zdjęcia lotnicze AGIV Flandria"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Ortofotomapa Flandrii © AGIV"
+                },
+                "name": "AGIV Flandria, zdjęcia lotnicze 2013-2015, 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flandria © AGIV"
+                },
+                "name": "AGIV Flandria GRB"
+            },
             "Bing": {
                 "description": "Zdjęcia satelitarne i lotnicze Bing.",
                 "name": "Bing (satelitarne)"
@@ -6267,6 +6376,7 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
+                "description": "DigitalGlobe-Standard to wyselekcjonowane obrazy pokrywające 86% lądu na Ziemi, czasem nawet o rozdzielczości 30-60cm na piksel, uzupełnione obrazami z Landsat. Średni wiek zdjeć to 2,31 roku, a niektóre obszary są uaktualniane dwa razy w roku.",
                 "name": "DigitalGlobe Standard (satelitarne)"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6458,7 +6568,9 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                }
+                },
+                "description": "Skan \"Map ekonomicznych\" ok. 1950-1980",
+                "name": "Mapa ekonomiczna Lantmäteriet (historyczna)"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6493,7 +6605,9 @@
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "description": "Szwedzka sieć kolejowa, uwzględnia bocznice",
+                "name": "Sieć kolejowa Trafikverket"
             },
             "trafikverket-baninfo-option": {
                 "attribution": {
@@ -6513,12 +6627,14 @@
             "trafikverket-vagnat-navn": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "description": "Szwedzkie nazwy ulic NVDB"
             },
             "trafikverket-vagnat-option": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "description": "Szwedzka sieć drogoa NVDV z wieloma warstwami mapowymi"
             }
         },
         "community": {
@@ -6548,11 +6664,19 @@
                 "description": "Ulepsz OpenStreetMap w Bangladeszu"
             },
             "OSM-India-facebook": {
-                "description": "Ulepsz OpenStreetMap w Indiach"
+                "description": "Ulepsz OpenStreetMap w Indiach",
+                "events": {
+                    "sotmasia2018": {
+                        "name": "State of the Map Azja 2018"
+                    }
+                }
             },
             "OSM-india-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Indie",
                 "description": "Talk-in  to oficjalna mailingowa lista dyskusyjna społeczności OSM w Indiach"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap India Twitter"
             },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonezja",
@@ -6613,8 +6737,14 @@
                 "name": "Lista dyskusyjna Talk-be",
                 "description": "Talk-be to oficjalna mailingowa lista dyskusyjna belgijskiej społeczności OSM "
             },
+            "be-maptime": {
+                "name": "Maptime Belgia"
+            },
             "be-matrix": {
                 "description": "Wszyscy mapujący są mile widziani!"
+            },
+            "hr-facebook": {
+                "description": "OpenStreetMap Chorwacja - grupa Facebookowa"
             },
             "czech-community": {
                 "name": "Czeska społeczność OSM"
@@ -6651,7 +6781,11 @@
                 "name": "Lista dyskusyjna OWL"
             },
             "osm-de": {
-                "name": "OpenStreetMap Niemcy"
+                "name": "OpenStreetMap Niemcy",
+                "description": "Miejsce z informacjami o OpenStreetMap w Niemczech"
+            },
+            "hu-facebook": {
+                "name": "OpenStreetMap Węgry na Facebook'u"
             },
             "it-mailinglist": {
                 "name": "Lista dyskusyjna Talk-it"
@@ -6663,7 +6797,8 @@
                 "name": "Lista dyskusyjna OpenStreetMap dla Południowego Tyrolu"
             },
             "no-mailinglist": {
-                "name": "Lista dyskusyjna OpenStreetMap Norwegia"
+                "name": "Lista dyskusyjna OpenStreetMap Norwegia",
+                "description": "Lista dyskusyjna dla mapujących i użytkownków OpenStreetMap w Norwegii"
             },
             "OSM-PL-facebook-group": {
                 "name": "OpenStreetMap Polska na Facebooku",
@@ -6672,6 +6807,14 @@
             "OSM-PL-forum": {
                 "name": "Forum OpenStreetMap Polska",
                 "description": "Forum dyskusyjne polskiej społeczności OpenStreetMap"
+            },
+            "si-forum": {
+                "name": "Forum OpenStreetMap Słowenia",
+                "description": "Forum społeczności OpenStreetMap w Słowenii"
+            },
+            "si-mailinglist": {
+                "name": "Mailingowa lista dyskusyjna OpenStreetMap Słowenia",
+                "description": "Mejlowa lista dyskusyjna społeczności OpenStreetMap w Słowenii"
             },
             "OSM-ES-mailinglist": {
                 "name": "Lista dyskusyjna Talk-es"
@@ -6740,7 +6883,13 @@
                 "name": "OpenStreetMap US Slack"
             },
             "OSM-US": {
-                "name": "OpenStreetMap US"
+                "name": "OpenStreetMap US",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map US 2018",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah"
@@ -6786,7 +6935,7 @@
                 "name": "Lista dyskusyjna Talk-co"
             },
             "OSM-CO-twitter": {
-                "name": "OpenStreetMap KolumbiaTwitter",
+                "name": "OpenStreetMap Kolumbia Twitter",
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
             "OSM-CO": {
@@ -6819,6 +6968,10 @@
                 "name": "OpenStreetMap  na Reddit",
                 "description": "/r/openstreetmap/ jest wspaniałym miejscem by dowiedzieć się więcej o OpenStreetMap."
             },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap na Telegramie",
+                "description": "Dołącz od globalnej grupy OpenStreetMap na Telegramie na {url}"
+            },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",
                 "description": "Obserwuj nas na Twitterze: {url}"
@@ -6827,7 +6980,9 @@
                 "name": "Fundacja OpenStreetMap ",
                 "events": {
                     "sotm2018": {
-                        "name": "State of the Map 2018"
+                        "name": "State of the Map 2018",
+                        "description": "Mediolan, Włochy",
+                        "where": "Mediolan, Włochy"
                     }
                 }
             }
