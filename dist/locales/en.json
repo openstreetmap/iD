@@ -7573,6 +7573,10 @@
                 "description": "Mappers and OpenStreetMap users, around Portland, ME",
                 "extendedDescription": "Maptime is, rather literally, time for mapmaking.  Our mission is to open the doors of cartographic possibility to anyone interested by creating a time and space for collaborative learning, exploration, and map creation using mapping tools and technologies."
             },
+            "us-ma-mailinglist": {
+                "name": "Talk-us-massachusetts Mailing List",
+                "description": "Email mailing list for the Massachusetts OSM community"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Improve OpenStreetMap in the Cleveland area",
@@ -7600,6 +7604,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap PDX Google Group",
+                "description": "Forum and mailing list for OpenStreetMap users in the Portland area",
+                "extendedDescription": "This group is to facilitate improvements to OpenStreetMap in the Portland, Oregon area to support applications such as the Open Trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
