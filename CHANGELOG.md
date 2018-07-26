@@ -36,7 +36,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 _Activate the OpenStreetMap notes layer by opening the Map Data pane (shortcut <kbd>F</kbd>)_
 * :wrench: We've added a new Detach Node operation to remove a tagged node from a way. Thanks [@Psigio]!<br/>
 _With a node selected, use the right-click edit menu to find the Detach command (shortcut <kbd>E</kbd>)_
-* :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizeable by dragging any of its edges.  Thanks [@kratico]!
+* :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizeable by dragging any of its edges.  Thanks [@kratico]!<br/>
 _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and resizing the viewer._
 
 [@thomas-hervey]: https://github.com/thomas-hervey
