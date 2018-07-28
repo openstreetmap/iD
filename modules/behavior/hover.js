@@ -8,7 +8,8 @@ import {
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import {
     osmEntity,
-    osmNote
+    osmNote,
+    krError
 } from '../osm';
 import { utilRebind } from '../util/rebind';
 
@@ -111,7 +112,7 @@ export function behaviorHover(context) {
                 .classed('hover-suppressed', false);
 
             var entity;
-            if (datum instanceof osmNote || datum instanceof osmEntity) {
+            if (datum instanceof osmNote || datum instanceof osmEntity || datum instanceof krError) {
                 entity = datum;
             } else {
                 entity = datum && datum.properties && datum.properties.entity;
@@ -125,7 +126,9 @@ export function behaviorHover(context) {
                     return;
                 }
 
-                var selector =  (datum instanceof osmNote) ? 'note-' + entity.id : '.' + entity.id;
+                var selector =
+                    (datum instanceof osmNote) ? 'note-' + entity.id :
+                    (datum instanceof krError) ? 'krError-' + entity.id : '.' + entity.id;
 
                 if (entity.type === 'relation') {
                     entity.members.forEach(function(member) {
@@ -138,7 +141,7 @@ export function behaviorHover(context) {
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                if (datum instanceof osmNote) {
+                if ((datum instanceof osmNote) || (datum instanceof krError)) {
                     dispatch.call('hover', this, !suppressed && entity);
                 } else {
                     dispatch.call('hover', this, !suppressed && entity.id);

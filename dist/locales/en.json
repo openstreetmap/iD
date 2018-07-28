@@ -477,6 +477,7 @@
             "documentation_redirect": "This documentation has been redirected to a new page",
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
+            "view_on_keepRight": "View on keepright.at",
             "all_fields": "All fields",
             "all_tags": "All tags",
             "all_members": "All members",
@@ -740,8 +741,9 @@
             "browse": "Browse for a file"
         },
         "keepRight": {
+            "keepRight": "Error -",
             "tooltip": "Q/A data from keepright.at",
-            "title": "Keep Right"
+            "title": "Edit Error"
         },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",

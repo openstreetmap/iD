@@ -348,7 +348,7 @@ export function rendererMap(context) {
         surface.selectAll('.layer-osm *').remove();
 
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select-note') {
+        if (mode && mode.id !== 'save' && mode.id !== 'select-note' && mode.id !== 'select-error') {
             context.enter(modeBrowse(context));
         }
 
