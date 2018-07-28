@@ -634,6 +634,11 @@ en:
     anonymous: anonymous
     closed: "(Closed)"
     commentTitle: Comments
+    status:
+      opened: "opened {when}"
+      reopened: "reopened {when}"
+      commented: "commented {when}"
+      closed: "closed {when}"
     newComment: New Comment
     inputPlaceholder: Enter a comment to share with other users.
     close: Close Note
