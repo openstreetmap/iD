@@ -20,10 +20,10 @@ export function svgKeepRight(projection, context, dispatch) {
 
 
     function getService() {
-        if (services.mapillary && !_keepRight) {
-            _keepRight = services.mapillary;
-            _keepRight.event.on('loadedSigns', throttledRedraw);
-        } else if (!services.mapillary && _keepRight) {
+        if (services.keepRight && !_keepRight) {
+            _keepRight = services.keepRight;
+            _keepRight.event.on('loadedKeepRight', throttledRedraw);
+        } else if (!services.keepRight && _keepRight) {
             _keepRight = null;
         }
         return _keepRight;
@@ -33,8 +33,6 @@ export function svgKeepRight(projection, context, dispatch) {
     function showLayer() {
         var service = getService();
         if (!service) return;
-
-        service.loadViewer(context);
         editOn();
     }
 
@@ -82,6 +80,8 @@ export function svgKeepRight(projection, context, dispatch) {
 
 
     function update() {
+        console.log('TAH - keepRight.update()');
+        return;
         var service = getService();
         var data = (service ? service.signs(projection) : []);
         var viewer = d3_select('#photoviewer');
@@ -144,7 +144,10 @@ export function svgKeepRight(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                service.loadSigns(context, projection);
+                var options = {
+                    ch: ['30', ]
+                };
+                service.loadKeepRight(context, projection, options);
             } else {
                 editOff();
             }
