@@ -80,46 +80,53 @@ export function svgKeepRight(projection, context, dispatch) {
 
 
     function update() {
-        console.log('TAH - keepRight.update()');
-        return;
         var service = getService();
-        var data = (service ? service.signs(projection) : []);
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
+        var selectedID = context.selectedNoteID(); // TODO: update with selectedErrorID
+        var data = (service ? service.keepRight(projection) : []);
         var transform = svgPointTransform(projection);
-
-        var signs = layer.selectAll('.icon-sign')
-            .data(data, function(d) { return d.key; });
+        var kr_errors = layer.selectAll('.kr_error')
+            .data(data, function(d) { return d.error_id; });
 
         // exit
-        signs.exit()
+        kr_errors.exit()
             .remove();
 
         // enter
-        var enter = signs.enter()
+        var kr_errorsEnter = kr_errors.enter()
+            .append('g')
+            .attr('class', function(d) { return 'kr_error kr_error-' + d.error_id; })
+            .classed('new', function(d) { return d.id < 0; });
+
+        kr_errorsEnter
+            .append('ellipse')
+            .attr('cx', 0.5)
+            .attr('cy', 1)
+            .attr('rx', 6.5)
+            .attr('ry', 3)
+            .attr('class', 'stroke');
+
+        // kr_errorsEnter
+        //     .append('path')
+        //     .call(markerPath, 'kr_error-shadow');
+
+        kr_errorsEnter
             .append('use')
-            .attr('class', 'icon-sign')
-            .attr('width', '24px')
-            .attr('height', '24px')
-            .attr('x', '-12px')
-            .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; })
-            .classed('selected', function(d) {
-                return _some(d.detections, function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-            })
-            .on('click', click);
+            .attr('class', 'kr_error-fill')
+            .attr('width', '20px')
+            .attr('height', '20px')
+            .attr('x', '-8px')
+            .attr('y', '-22px')
+            .attr('xlink:href', '#iD-icon-note'); // TODO: update icon
 
         // update
-        signs
-            .merge(enter)
+        kr_errors
+            .merge(kr_errorsEnter)
             .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
+                return (a.id === selectedID) ? 1
+                    : (b.id === selectedID) ? -1
                     : b.loc[1] - a.loc[1];  // sort Y
             })
+            .classed('selected', function(d) { return d.id === selectedID; })
             .attr('transform', transform);
     }
 
@@ -140,14 +147,18 @@ export function svgKeepRight(projection, context, dispatch) {
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
+        function exampleCallback(value1, value2, value3) { // TODO: rename, possibly remove function
+        }
+
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                var options = {
-                    ch: ['30', ]
+                var options = { // TODO: change out these options and place as default
+                    ch: [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413]
                 };
-                service.loadKeepRight(context, projection, options);
+
+                service.loadKeepRight(context, projection, options, exampleCallback);
             } else {
                 editOff();
             }

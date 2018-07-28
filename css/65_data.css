@@ -1,11 +1,14 @@
 
 /* OSM Notes Layer */
+.layer-keepRight,
 .layer-notes {
     pointer-events: none;
 }
+.layer-keepRight .kr_error,
 .layer-notes .note * {
     pointer-events: none;
 }
+.layer-keepRight .kr_error .kr_error-fill,
 .layer-notes .note .note-fill {
     pointer-events: visible;
     cursor: pointer; /* Opera */
@@ -13,11 +16,15 @@
 }
 
 .note-header-icon .note-shadow,
-.layer-notes .note .note-shadow {
+.layer-notes .note .note-shadow,
+.kr_error-header-icon .kr_error-shadow,
+.layer-keepRight .kr_error .kr_error-shadow {
     color: #000;
 }
 .note-header-icon .note-fill,
-.layer-notes .note .note-fill {
+.layer-notes .note .note-fill,
+.kr_error-header-icon .kr_error-fill,
+.layer-keepRight .kr_error .kr_error-fill {
     color: #ff3300;
     stroke: #333;
     stroke-width: 40px;
@@ -54,7 +61,8 @@
 
 
 /* OSM Note UI */
-.note-header {
+.note-header,
+.kr_error-header {
     background-color: #f6f6f6;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -63,7 +71,8 @@
     align-items: center;
 }
 
-.note-header-icon {
+.note-header-icon,
+.kr_error-header-icon {
     background-color: #fff;
     padding: 10px;
     flex: 0 0 62px;
@@ -73,18 +82,21 @@
     border-right: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
 }
-[dir='rtl'] .note-header-icon {
+[dir='rtl'] .note-header-icon,
+[dir='rtl'] .kr_error-header-icon {
     border-right: unset;
     border-left: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
 }
 
-.note-header-icon .icon-wrap {
+.note-header-icon .icon-wrap,
+.kr_error-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
 }
 
-.note-header-label {
+.note-header-label,
+.kr_error-header-label {
     background-color: #f6f6f6;
     padding: 0 15px;
     flex: 1 1 100%;
@@ -92,7 +104,8 @@
     font-weight: bold;
     border-radius: 0 5px 5px 0;
 }
-[dir='rtl'] .note-header-label {
+[dir='rtl'] .note-header-label,
+[dir='rtl'] .kr_error-header-label {
     border-radius: 5px 0 0 5px;
 }
 
