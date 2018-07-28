@@ -408,6 +408,7 @@ en:
     documentation_redirect: This documentation has been redirected to a new page
     show_more: Show More
     view_on_osm: View on openstreetmap.org
+    view_on_keepRight: View on keepright.at
     all_fields: All fields
     all_tags: All tags
     all_members: All members
@@ -644,8 +645,9 @@ en:
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   keepRight:
+    keepRight: Error -
     tooltip: Q/A data from keepright.at
-    title: Keep Right
+    title: Edit Error
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"

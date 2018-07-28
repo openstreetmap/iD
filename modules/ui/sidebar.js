@@ -9,18 +9,8 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import {
-    osmEntity,
-    osmNote
-} from '../osm';
-
-import {
-    uiDataEditor,
-    uiFeatureList,
-    uiInspector,
-    uiNoteEditor
-} from './index';
-
+import { osmEntity, osmNote, krError } from '../osm';
+import { uiDataEditor, uiFeatureList, uiInspector, uiNoteEditor, uiKeepRightEditor } from './index';
 import { textDirection } from '../util/locale';
 
 
@@ -28,9 +18,11 @@ export function uiSidebar(context) {
     var inspector = uiInspector(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
+    var keepRightEditor = uiKeepRightEditor(context);
     var _current;
     var _wasData = false;
     var _wasNote = false;
+    var _was_krError = false;
 
 
     function sidebar(selection) {
@@ -133,6 +125,18 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
+            } else if (what instanceof krError) {
+                _was_krError = true;
+                var kr_errors = d3_selectAll('.kr_error');
+                kr_errors
+                    .classed('hover', function(d) { return d === what; });
+
+                sidebar
+                    .show(keepRightEditor.error(what));
+
+                selection.selectAll('.sidebar-component')
+                    .classed('inspector-hover', true);
+
             } else if (!_current && (datum instanceof osmEntity)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
@@ -162,6 +166,10 @@ export function uiSidebar(context) {
                 _wasNote = false;
                 _wasData = false;
                 d3_selectAll('.note').classed('hover', false);
+                sidebar.hide();
+            } else if (_was_krError) {
+                d3_selectAll('.kr_error')
+                    .classed('hover', false);
                 sidebar.hide();
             }
         }

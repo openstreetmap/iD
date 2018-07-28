@@ -354,7 +354,8 @@ export function rendererMap(context) {
         surface.selectAll('.layer-touch *').remove();
 
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select-note' && mode.id !== 'select-data') {
+        if (mode && mode.id !== 'save' && mode.id !== 'select-note' &&
+            mode.id !== 'select-data' && && mode.id !== 'select-error') {
             context.enter(modeBrowse(context));
         }
 

@@ -10,6 +10,8 @@ import { request as d3_request } from 'd3-request';
 
 import { geoExtent } from '../geo';
 
+import { krError } from '../osm';
+
 import {
     utilRebind,
     utilTiler,
@@ -134,8 +136,9 @@ export default {
                 var features = data.features.map(function(feature) {
                     var loc = feature.geometry.coordinates;
                     var props = feature.properties;
-                    var d = {
+                    var d = new krError ({
                         loc: loc,
+                        id: props.error_id,
                         comment: props.comment || null,
                         description: props.description || '',
                         error_id: props.error_id,
@@ -144,9 +147,9 @@ export default {
                         object_type: props.object_type,
                         schema: props.schema,
                         title: props.title
-                    };
+                    });
 
-                    cache.keepRight[d.error_id] = d;
+                    cache.keepRight[d.id] = d;
 
                     return {
                         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -171,5 +174,10 @@ export default {
 
         return _keepRightCache.rtree.search(bbox)
             .map(function(d) { return d.data; });
+    },
+
+    // get a single error from the cache
+    getError: function(id) {
+        return _keepRightCache.keepRight[id];
     },
 };

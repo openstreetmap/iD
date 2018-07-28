@@ -85,7 +85,7 @@ export function svgKeepRight(projection, context, dispatch) {
         var data = (service ? service.keepRight(projection) : []);
         var transform = svgPointTransform(projection);
         var kr_errors = layer.selectAll('.kr_error')
-            .data(data, function(d) { return d.error_id; });
+            .data(data, function(d) { return d.id; });
 
         // exit
         kr_errors.exit()
@@ -94,7 +94,7 @@ export function svgKeepRight(projection, context, dispatch) {
         // enter
         var kr_errorsEnter = kr_errors.enter()
             .append('g')
-            .attr('class', function(d) { return 'kr_error kr_error-' + d.error_id; })
+            .attr('class', function(d) { return 'kr_error kr_error-' + d.id; })
             .classed('new', function(d) { return d.id < 0; });
 
         kr_errorsEnter

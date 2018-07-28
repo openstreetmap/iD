@@ -431,6 +431,10 @@ export default {
         return urlroot + '/note/' + note.id;
     },
 
+    keepRightURL: function(error) {
+        return 'https://www.keepright.at/report_map.php?schema=' + error.schema + '&error=' + error.id;
+    },
+
 
     // Generic method to load data from the OSM API
     // Can handle either auth or unauth calls.
