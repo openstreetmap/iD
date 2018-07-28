@@ -9,12 +9,8 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgData } from './data';
 import { svgDebug } from './debug';
-<<<<<<< HEAD
 import { svgGeolocate } from './geolocate';
-=======
-import { svgGpx } from './gpx';
 import { svgKeepRight } from './keepRight';
->>>>>>> added simple keepRight button under photoItems
 import { svgStreetside } from './streetside';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
