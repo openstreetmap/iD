@@ -130,7 +130,7 @@ export function svgMvt(projection, context, dispatch) {
 
 
     function vtToGeoJson(bufferdata) {
-        var tile = new vt.VectorTile(new Protobuf(bufferdata.data));
+        var tile = new vt.VectorTile(new Protobuf(bufferdata.data.response));
         var layers = Object.keys(tile.layers);
         if (!Array.isArray(layers)) { layers = [layers]; }
 
