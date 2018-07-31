@@ -586,6 +586,7 @@ button.add-note svg.icon {
 .field-help-title button.close,
 .sidebar-component .header button.data-editor-close,
 .sidebar-component .header button.note-editor-close,
+.sidebar-component .header button.keepRight-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
@@ -595,6 +596,7 @@ button.add-note svg.icon {
 [dir='rtl'] .field-help-title button.close,
 [dir='rtl'] .sidebar-component .header button.data-editor-close,
 [dir='rtl'] .sidebar-component .header button.note-editor-close,
+[dir='rtl'] .sidebar-component .header button.keepRight-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;

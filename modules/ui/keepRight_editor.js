@@ -9,11 +9,9 @@ import { services } from '../services';
 import { modeBrowse } from '../modes';
 import { svgIcon } from '../svg';
 
-// import { uiField } from './field';
-// import { uiFormFields } from './form_fields';
-
 import {
     uiKeepRightComment,
+    uiKeepRightDetails,
     uiKeepRightHeader,
     uiViewOnKeepRight,
 } from './index';
@@ -27,6 +25,7 @@ import {
 export function uiKeepRightEditor(context) {
     var dispatch = d3_dispatch('change');
     var keepRightComment = uiKeepRightComment();
+    var keepRightDetails = uiKeepRightDetails();
     var keepRightHeader = uiKeepRightHeader();
 
     var _error;
@@ -42,7 +41,7 @@ export function uiKeepRightEditor(context) {
 
         headerEnter
             .append('button')
-            .attr('class', 'fr note-editor-close')
+            .attr('class', 'fr keepRight-editor-close')
             .on('click', function() {
                 context.enter(modeBrowse(context));
             })
@@ -66,10 +65,11 @@ export function uiKeepRightEditor(context) {
 
         editor.enter()
             .append('div')
-            .attr('class', 'modal-section note-editor')
+            .attr('class', 'modal-section keepRight-editor')
             .merge(editor)
             .call(keepRightHeader.error(_error))
             // .call(keepRightComment.error(_error))
+            .call(keepRightDetails.error(_error))
             .call(errorSaveSection);
 
 
@@ -85,7 +85,7 @@ export function uiKeepRightEditor(context) {
 
 
     function errorSaveSection(selection) {
-        var isSelected = (_error && _error.id === context.selectedNoteID());
+        var isSelected = (_error && _error.id === context.selectedErrorID());
         var errorSave = selection.selectAll('.error-save')
             .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
 
@@ -96,19 +96,19 @@ export function uiKeepRightEditor(context) {
         // enter
         var errorSaveEnter = errorSave.enter()
             .append('div')
-            .attr('class', 'note-save save-section cf');
+            .attr('class', 'keepRight-save save-section cf');
 
         errorSaveEnter
             .append('h4')
             .attr('class', '.error-save-header')
             .text(function() {
-                return t('note.newComment');
+                return t('keepRight.newComment');
             });
 
         errorSaveEnter
             .append('textarea')
-            .attr('id', 'new-comment-input')
-            .attr('placeholder', t('note.inputPlaceholder'))
+            .attr('class', 'new-comment-input')
+            .attr('placeholder', t('keepRight.inputPlaceholder'))
             .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
@@ -126,12 +126,12 @@ export function uiKeepRightEditor(context) {
             var input = d3_select(this);
             var val = input.property('value').trim() || undefined;
 
-            // store the unsaved comment with the note itself
+            // store the unsaved comment with the error itself
             _error = _error.update({ newComment: val });
 
-            var osm = services.osm;
-            if (osm) {
-                osm.replaceNote(_error);  // update note cache
+            var keepRight = services.keepRight;
+            if (keepRight) {
+                keepRight.replaceError(_error);  // update keepright cache
             }
 
             errorSave
@@ -200,8 +200,8 @@ export function uiKeepRightEditor(context) {
 
         prose = prose.enter()
             .append('p')
-            .attr('class', 'note-save-prose')
-            .text(t('note.upload_explanation'))
+            .attr('class', 'error-save-prose')
+            .text(t('keepRight.upload_explanation'))
             .merge(prose);
 
         osm.userDetails(function(err, user) {
@@ -225,7 +225,7 @@ export function uiKeepRightEditor(context) {
                 .attr('target', '_blank');
 
             prose
-                .html(t('note.upload_explanation_with_user', { user: userLink.html() }));
+                .html(t('keepRight.upload_explanation_with_user', { user: userLink.html() }));
         });
     }
 
@@ -234,7 +234,7 @@ export function uiKeepRightEditor(context) {
         var osm = services.osm;
         var hasAuth = osm && osm.authenticated();
 
-        var isSelected = (_error && _error.id === context.selectedNoteID());
+        var isSelected = (_error && _error.id === context.selectedErrorID());
         var buttonSection = selection.selectAll('.buttons')
             .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
 
@@ -264,9 +264,9 @@ export function uiKeepRightEditor(context) {
         buttonSection.select('.cancel-button')   // select and propagate data
             .on('click.cancel', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.removeNote(d);
+                var keepRight = services.keepRight;
+                if (keepRight) {
+                    keepRight.removeError(d);
                 }
                 context.enter(modeBrowse(context));
                 dispatch.call('change');
@@ -278,29 +278,30 @@ export function uiKeepRightEditor(context) {
             })
             .on('click.save', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.postNoteCreate(d, function(err, note) {
-                        dispatch.call('change', note);
-                    });
+                var keepRight = services.keepRight;
+                if (keepRight) {
+                    // TODO: handle posting updates
+                    // keepRight.postKeepRightCreate(d, function(err, error) {
+                    //     dispatch.call('change', error);
+                    // });
                 }
             });
 
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
-                var action = (d.status === 'open' ? 'close' : 'open');
+                var action = (d.status === 'open' ? 'close' : 'open'); // TODO: possibly remove reopen since I don't think it's an option
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('note.' + action + andComment);
+                return t('keepRight.' + action + andComment);
             })
             .on('click.status', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    var setStatus = (d.status === 'open' ? 'closed' : 'open');
-                    osm.postNoteUpdate(d, setStatus, function(err, note) {
-                        dispatch.call('change', note);
-                    });
+                var keepRight = services.keepRight;
+                if (keepRight) {
+                    // TODO: handle posting updates
+                    // keepRight.postKeepRightUpdate(d, function(err, error) {
+                    //     dispatch.call('change', error);
+                    // });
                 }
             });
 
@@ -310,11 +311,12 @@ export function uiKeepRightEditor(context) {
             })
             .on('click.comment', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.postNoteUpdate(d, d.status, function(err, note) {
-                        dispatch.call('change', note);
-                    });
+                var keepRight = services.keepRight;
+                if (keepRight) {
+                    // TODO: handle posting updates
+                    // keepRight.postKeepRightUpdate(d, function(err, error) {
+                    //     dispatch.call('change', error);
+                    // });
                 }
             });
     }
