@@ -42,7 +42,6 @@ export function uiEntityEditor(context) {
         var entity = context.entity(_entityID);
         var tags = _clone(entity.tags);
 
-        console.log(context.validationRules());
         // Header
         var header = selection.selectAll('.header')
             .data([0]);

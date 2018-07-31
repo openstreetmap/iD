@@ -7,8 +7,15 @@ import _isObject from 'lodash-es/isObject';
 import _isString from 'lodash-es/isString';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-request';
+
+import { 
+    json as d3_json, 
+    text as d3_text
+} from 'd3-request';
+
 import { select as d3_select } from 'd3-selection';
+
+import mapcssParse from 'mapcss-parse/source/index';
 
 import {
     t,
@@ -23,6 +30,7 @@ import {
     dataLocales,
     dataEn
 } from '../../data';
+
 
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -40,12 +48,12 @@ import { utilDetect } from '../util/detect';
 
 import {
     utilCallWhenIdle,
-    utilRebind,
     utilExternalPresets,
-    utilExternalValidationRules
+    utilExternalValidationRules,
+    utilMapCSSRule,
+    utilRebind,
+    utilStringQs
 } from '../util';
-
-import { validationCollection  } from '../validations';
 
 export var areaKeys = {};
 
@@ -448,6 +456,15 @@ export function coreContext() {
         locale = locale.split('-')[0];
     }
 
+    if (utilExternalValidationRules()) {
+        var validationsUrl = utilStringQs(window.location.hash)['validations'];
+        d3_text(validationsUrl, function (err, mapcss) {
+            if (err) return;
+            var validations = _map(mapcssParse(mapcss), function(mapcssConfig) { return utilMapCSSRule(mapcsS) });
+            context.validationRules = function() { return validations; };
+        });
+    }
+
     history = coreHistory(context);
     context.graph = history.graph;
     context.changes = history.changes;
@@ -497,20 +514,12 @@ export function coreContext() {
     background.init();
     features.init();
     
-    // get external data if directed by query parameters 
     if (utilExternalPresets()) {
         presets.fromExternal();
     } else { 
         presets.init();
     }
-    
-    if (utilExternalValidationRules()) {
-        var validations = validationCollection();
-        validations.init(function(rules) {
-            context.validationRules = function() { return rules; };
-        });
-    }
-  
+
     areaKeys = presets.areaKeys();
 
 
