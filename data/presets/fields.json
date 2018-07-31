@@ -56,7 +56,7 @@
     "communication_multi": {"key": "communication:", "type": "multiCombo", "label": "Communication Types"},
     "construction": {"key": "construction", "type": "combo", "label": "Type"},
     "contact/webcam": {"key": "contact:webcam", "type": "url", "icon": "website", "label": "Webcam URL", "placeholder": "http://example.com/"},
-    "content": {"key": "content", "type": "combo", "label": "Content"},
+    "content": {"key": "content", "type": "combo", "label": "Content", "options": ["silage", "water", "oil", "fuel", "slurry", "gas", "manure", "sewage"]},
     "country": {"key": "country", "type": "combo", "label": "Country"},
     "covered": {"key": "covered", "type": "check", "label": "Covered"},
     "craft": {"key": "craft", "type": "typeCombo", "label": "Type"},

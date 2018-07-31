@@ -1,0 +1,18 @@
+{
+    "icon": "temaki-silo",
+    "fields": [
+        "content"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "Silage",
+        "Storage"
+    ],
+    "tags": {
+        "man_made": "bunker_silo"
+    },
+    "name": "Bunker Silo"
+}
