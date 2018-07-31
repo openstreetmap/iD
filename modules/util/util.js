@@ -270,3 +270,7 @@ export function utilNoAuto(selection) {
 export function utilExternalPresets() {
     return utilStringQs(window.location.hash).hasOwnProperty('presets');
 }
+
+export function utilExternalValidationRules() {
+    return utilStringQs(window.location.hash).hasOwnProperty('validations');
+}

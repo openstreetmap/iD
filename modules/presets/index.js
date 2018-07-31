@@ -182,7 +182,7 @@ export function presetIndex() {
 
     };
 
-    all.fromExternal = function(callback) {
+    all.fromExternal = function() {
         var presetsUrl = utilStringQs(window.location.hash)['presets'];
         d3_json(presetsUrl, function(err, presets) {
             if (err) all.init();

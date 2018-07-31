@@ -38,11 +38,11 @@ export function uiEntityEditor(context) {
     var rawTagEditor = uiRawTagEditor(context)
         .on('change', changeTags);
 
-
     function entityEditor(selection) {
         var entity = context.entity(_entityID);
         var tags = _clone(entity.tags);
 
+        console.log(context.validationRules());
         // Header
         var header = selection.selectAll('.header')
             .data([0]);

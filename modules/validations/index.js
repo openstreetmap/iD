@@ -1,3 +1,4 @@
+export { validationCollection } from './validation_collection';
 export { validationDeprecatedTag } from './deprecated_tag';
 export { validationDisconnectedHighway } from './disconnected_highway';
 export { validationManyDeletions } from './many_deletions';

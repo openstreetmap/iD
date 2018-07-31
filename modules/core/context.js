@@ -41,9 +41,11 @@ import { utilDetect } from '../util/detect';
 import {
     utilCallWhenIdle,
     utilRebind,
-    utilExternalPresets
+    utilExternalPresets,
+    utilExternalValidationRules
 } from '../util';
 
+import { validationCollection  } from '../validations';
 
 export var areaKeys = {};
 
@@ -494,11 +496,21 @@ export function coreContext() {
 
     background.init();
     features.init();
+    
+    // get external data if directed by query parameters 
     if (utilExternalPresets()) {
         presets.fromExternal();
     } else { 
         presets.init();
-	}
+    }
+    
+    if (utilExternalValidationRules()) {
+        var validations = validationCollection();
+        validations.init(function(rules) {
+            context.validationRules = function() { return rules; };
+        });
+    }
+  
     areaKeys = presets.areaKeys();
 
 
