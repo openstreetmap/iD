@@ -47,6 +47,27 @@ function abortUnwantedRequests(cache, tiles) {
 }
 
 
+function encodeErrorRtree(error) {
+    return {
+        minX: error.loc[0],
+        minY: error.loc[1],
+        maxX: error.loc[0],
+        maxY: error.loc[1],
+        data: error
+    };
+}
+
+
+// replace or remove error from rtree
+function updateRtree(item, replace) {
+    _keepRightCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+
+    if (replace) {
+        _keepRightCache.rtree.insert(item);
+    }
+}
+
+
 export default {
     init: function() {
         if (!_keepRightCache) {
@@ -179,5 +200,22 @@ export default {
     // get a single error from the cache
     getError: function(id) {
         return _keepRightCache.keepRight[id];
+    },
+
+    // replace a single note in the cache
+    replaceError: function(error) {
+        if (!(error instanceof krError) || !error.id) return;
+
+        _keepRightCache.note[error.id] = error;
+        updateRtree(encodeErrorRtree(error), true);  // true = replace
+        return error;
+    },
+
+    // remove a single note from the cache
+    removeError: function(error) {
+        if (!(error instanceof krError) || !error.id) return;
+
+        delete _keepRightCache.note[error.id];
+        updateRtree(encodeErrorRtree(error), false);  // false = remove
     },
 };

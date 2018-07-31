@@ -171,18 +171,21 @@
     border-left: none;
 }
 
-.note-save {
+.note-save,
+.keepRight-save {
     padding: 10px;
 }
 
-.note-save #new-comment-input {
+.note-save .new-comment-input,
+.keepRight-save .new-comment-input {
     width: 100%;
     height: 100px;
     max-height: 300px;
     min-height: 100px;
 }
 
-.note-save .detail-section {
+.note-save .detail-section,
+.keepRight-save .detail-section {
     margin: 10px 0;
 }
 
