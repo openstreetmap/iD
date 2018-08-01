@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # This is an example script that shows how to pull the latest version
 # of iD and replace the version string with a git short hash.

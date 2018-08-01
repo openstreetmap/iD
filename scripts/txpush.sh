@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # This script runs on TravisCI to push new translation strings to transifex
 
