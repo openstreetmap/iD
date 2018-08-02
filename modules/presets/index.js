@@ -183,7 +183,7 @@ export function presetIndex() {
     };
 
     all.fromExternal = function() {
-        var presetsUrl = utilStringQs(window.location.hash)['presets'];
+        var presetsUrl = utilStringQs(window.location.hash).presets;
         d3_json(presetsUrl, function(err, presets) {
             if (err) all.init();
             all.overwrite(presets);
@@ -213,7 +213,7 @@ export function presetIndex() {
     all.defaults = function(geometry, n) {
         var rec = _recent.matchGeometry(geometry).collection.slice(0, 4);
         var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
-        var fin = _uniq(rec.concat(def).concat(all.item(geometry))).filter(i => i !== undefined);
+        var fin = _uniq(rec.concat(def).concat(all.item(geometry))).filter(function(d) { return d !== undefined; });
         return presetCollection(fin);
     };
 

@@ -1,5 +1,3 @@
-// import { t } from '../util/locale';
-
 export function validationMapCSSChecks() {
     var validation = function(changes, graph, rules) {
         var warnings = [];
@@ -10,7 +8,7 @@ export function validationMapCSSChecks() {
                 var entity = entities[i];
                 for (var k = 0; k < rules.length; k++) {
                     var rule = rules[k];
-                    rules.findWarnings(entity, rules);
+                    rule.findWarnings(entity, graph, warnings);
                 }
             }
         }

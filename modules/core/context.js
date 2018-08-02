@@ -5,6 +5,7 @@ import _find from 'lodash-es/find';
 import _forOwn from 'lodash-es/forOwn';
 import _isObject from 'lodash-es/isObject';
 import _isString from 'lodash-es/isString';
+import _map from 'lodash-es/map';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -14,8 +15,6 @@ import {
 } from 'd3-request';
 
 import { select as d3_select } from 'd3-selection';
-
-import mapcssParse from 'mapcss-parse/source/index';
 
 import {
     t,
@@ -456,14 +455,14 @@ export function coreContext() {
         locale = locale.split('-')[0];
     }
 
-    if (utilExternalValidationRules()) {
-        var validationsUrl = utilStringQs(window.location.hash)['validations'];
-        d3_text(validationsUrl, function (err, mapcss) {
-            if (err) return;
-            var validations = _map(mapcssParse(mapcss), function(mapcssConfig) { return utilMapCSSRule(mapcsS) });
-            context.validationRules = function() { return validations; };
-        });
-    }
+    // if (utilExternalValidationRules()) {
+    //     var validationsUrl = utilStringQs(window.location.hash).validations;
+    //     d3_text(validationsUrl, function (err, mapcss) {
+    //         if (err) return;
+    //         var validations = _map(mapcssParse(mapcss), function(mapcssConfig) { return utilMapCSSRule(mapcssConfig); });
+    //         context.validationRules = function() { return validations; };
+    //     });
+    // }
 
     history = coreHistory(context);
     context.graph = history.graph;

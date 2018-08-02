@@ -284,7 +284,7 @@ export function coreHistory(context) {
             return _flatten(
                 _map(Validations, function(fn) { 
                     var warnings;
-                   if (fn === Validations.validationMapCSSChecks) {
+                    if (fn === Validations.validationMapCSSChecks && context.hasOwnProperty('validationRules')) {
                         warnings = fn()(changes, _stack[_index].graph, context.validationRules()); 
                     } else {
                         warnings = fn()(changes, _stack[_index].graph);
