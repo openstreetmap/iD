@@ -9,6 +9,7 @@ import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
+import _pickBy from 'lodash-es/pickBy';
 import _reject from 'lodash-es/reject';
 import _values from 'lodash-es/values';
 import _without from 'lodash-es/without';
@@ -281,15 +282,16 @@ export function coreHistory(context) {
 
 
         validate: function(changes) {
+            // strip mapcss checks if no mapcss to check against.
+            var validationsToRun = _pickBy(Validations, function(validation) {
+                return validation === Validations.validationMapCSSChecks && context.hasOwnProperty('validationRules') ||
+                       validation !== Validations.validationMapCSSChecks;
+            });
             return _flatten(
-                _map(Validations, function(fn) { 
-                    var warnings;
-                    if (fn === Validations.validationMapCSSChecks && context.hasOwnProperty('validationRules')) {
-                        warnings = fn()(changes, _stack[_index].graph, context.validationRules()); 
-                    } else {
-                        warnings = fn()(changes, _stack[_index].graph);
-                    }
-                    return warnings;
+                _map(validationsToRun, function(fn, name) {
+                    return name === 'validationMapCSSChecks' ?
+                        fn()(changes, _stack[_index].graph, context.validationRules()) :
+                        fn()(changes, _stack[_index].graph);
                 })
             );
         },

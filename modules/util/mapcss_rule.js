@@ -1,6 +1,7 @@
 import _isMatch from 'lodash-es/isMatch';
+import _reduce from 'lodash-es/reduce';
 
-export function utilMapCSSRule(selector) {
+export function utilMapCSSRule(selector, areaKeys) {
     var ruleChecks  = {
         equals: function (tags) {
             return _isMatch(tags, selector.equals);
@@ -61,11 +62,52 @@ export function utilMapCSSRule(selector) {
             return this.buildChecks().every(function(check) { return check(entity.tags); });
         
         },
+        // borrowed from Way#isArea()
+        inferGeometry() {
+            // keys is a map of osm key + all found values across the selector map.
+            var selectorKeys = _reduce(Object.keys(selector), function(expectedTags, key) {
+                var values;
+                if(/regex/gi.test(key)) {
+                    Object.keys(p[key]).forEach(function(regexKey) {
+                        values = p[key][rKey].map(function(val) { return val.replace(/\$|\^/g, '') })
+                        if (expectedTags.hasOwnProperty(regexKey)) {
+                            values = values.concat(expectedTags[regexKey])
+
+                        }
+                        expectedTags[regexKey] = values
+                    })
+                } 
+                if (key === 'equals') {
+                    var equalsKey = Object.keys(p[key])[0]
+                    values = [p[key][equalsKey]]
+                    if (expectedTags.hasOwnProperty(equalsKey)) {
+                        values = values.concat(expectedTags[equalsKey])
+                    }
+                    expectedTags[equalsKey] = values
+                }
+                return expectedTags
+            }, {})
+
+            if (Object.keys(keys).indexOf('area') > -1) {
+                inferredGeometry = 'area'; 
+                return;
+            }
+
+            for (var key in Object.keys(keys)) {
+                if (key in areaKeys) {
+                    if (keys[key] !== 'absence' && key in ) {
+
+                    }
+                }
+
+            }
+
+        },
         geometryMatches: function(entity, graph) {
             if (entity.type === 'node' || entity.type === 'relation') { 
                 return selector.geometry === entity.type; 
             } else if (entity.type === 'way') {
-                return selector.geometry === entity.geometry(graph);
+                return this.inferGeometry() === entity.geometry(graph);
             }
         
         },

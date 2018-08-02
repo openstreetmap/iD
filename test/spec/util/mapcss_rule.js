@@ -41,12 +41,6 @@ describe('iD.utilMapCSSRule', function() {
             'presence': 'amenity',
             'positiveRegex': { amenity: ['^school$', '^healthcare$'] },
             'error': 'amenity cannot be healthcare or school!'
-        },
-        {
-            'geometry': 'node',
-            'presence': 'amenity',
-            'negativeRegex': { amenity: ['^school$', '^healthcare$'] },
-            'error': 'amenity must be healtcare or school!'
         }
     ];
     var rules = selectors.map(function(s) { return iD.utilMapCSSRule(s); });

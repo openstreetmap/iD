@@ -121,7 +121,7 @@ export function presetIndex() {
                 areaKeys[key][value] = true;
             }
         });
-
+        console.log(areaKeys);
         return areaKeys;
     };
 
