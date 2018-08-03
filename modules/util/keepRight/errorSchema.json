@@ -1,6 +1,6 @@
 
 {
-    "types": {
+    "errorTypes": {
         "errors": {
             "_30": {
                 "title": "non-closed_areas",

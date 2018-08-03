@@ -1,9 +1,11 @@
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
 import { svgIcon } from '../svg';
+import { errorTypes } from '../util';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
@@ -16,8 +18,11 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiMapData(context) {
+    var dispatch = d3_dispatch('change');
+
     var key = t('map_data.key');
     var features = context.features().keys();
+    var errors = Object.keys(errorTypes.errors); // TODO: add warnings
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
@@ -29,6 +34,7 @@ export function uiMapData(context) {
     var _dataLayerContainer = d3_select(null);
     var _fillList = d3_select(null);
     var _featureList = d3_select(null);
+    var _QAList = d3_select(null);
 
 
     function showsFeature(d) {
@@ -44,6 +50,17 @@ export function uiMapData(context) {
     function clickFeature(d) {
         context.features().toggle(d);
         update();
+    }
+
+
+    function showsError(d) {
+        // return context.errors().enabled(d);
+    }
+
+
+    function clickError(d) {
+        // context.errors().toggle(d);
+        // update();
     }
 
 
@@ -411,6 +428,43 @@ export function uiMapData(context) {
     }
 
 
+    function drawQAButtons(selection) {
+        var QAButtons = d3_select('.layer-QA').selectAll('li').select('label').select('input');
+        var buttonSection = selection.selectAll('.QA-buttons')
+            .data([0]);
+
+        // exit
+        buttonSection.exit()
+            .remove();
+
+        // enter
+        var buttonEnter = buttonSection.enter()
+            .append('div')
+            .attr('class', 'QA-buttons');
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'button QA-toggle-on action')
+            .text(t('keepRight.toggle-on'))
+            .on('click', function() {
+                QAButtons.property('checked', true);
+                dispatch.call('change');
+            });
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'button QA-toggle-off action')
+            .text(t('keepRight.toggle-off'))
+            .on('click', function() {
+                QAButtons.property('checked', false);
+                dispatch.call('change');
+            });
+
+        buttonSection = buttonSection
+            .merge(buttonEnter);
+    }
+
+
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
             .data(data);
@@ -498,6 +552,17 @@ export function uiMapData(context) {
     }
 
 
+    function renderQA(selection) {
+        var container = selection.selectAll('layer-QA')
+            .data([0]);
+
+        _QAList = container.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-QA')
+            .merge(container);
+    }
+
+
     function update() {
         _dataLayerContainer
             .call(drawOsmItems)
@@ -510,6 +575,11 @@ export function uiMapData(context) {
 
         _featureList
             .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
+
+        _QAList
+            .call(drawListItems, errors, 'checkbox', 'keepRight.errorTypes.errors', clickError, showsError);
+        d3_select('.disclosure-wrap-QA')
+            .call(drawQAButtons);
     }
 
 
@@ -636,10 +706,22 @@ export function uiMapData(context) {
                 .content(renderFeatureList)
             );
 
+        // Q/A tools
+        content
+            .append('div')
+            .attr('class', 'map-data-QA')
+            .call(uiDisclosure(context, 'QA', false)
+                .title(t('map_data.QA'))
+                .content(renderQA)
+            );
+
 
         // add listeners
         context.features()
             .on('change.map_data-update', update);
+
+        // context.errors()
+        //     .on('change.map_data-update', update); // TODO: add errors list to context?
 
         update();
         setFill(_fillSelected);

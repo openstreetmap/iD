@@ -1,4 +1,3 @@
-import _some from 'lodash-es/some';
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './index';
@@ -16,6 +15,7 @@ export function svgKeepRight(projection, context, dispatch) {
         if (svgKeepRight.initialized) return;  // run once
         svgKeepRight.enabled = false;
         svgKeepRight.initialized = true;
+        svgKeepRight.visibleErrors = [30];
     }
 
 
@@ -49,7 +49,7 @@ export function svgKeepRight(projection, context, dispatch) {
 
 
     function editOff() {
-        layer.selectAll('.icon-sign').remove();
+        layer.selectAll('.kr_error').remove();
         layer.style('display', 'none');
     }
 
@@ -83,9 +83,10 @@ export function svgKeepRight(projection, context, dispatch) {
         var service = getService();
         var selectedID = context.selectedNoteID(); // TODO: update with selectedErrorID
         var data = (service ? service.keepRight(projection) : []);
+        var visibleData =  data; // getVisible(data); // TODO: only show sub-layers that are toggled on
         var transform = svgPointTransform(projection);
         var kr_errors = layer.selectAll('.kr_error')
-            .data(data, function(d) { return d.id; });
+            .data(visibleData, function(d) { return d.id; });
 
         // exit
         kr_errors.exit()
@@ -94,7 +95,8 @@ export function svgKeepRight(projection, context, dispatch) {
         // enter
         var kr_errorsEnter = kr_errors.enter()
             .append('g')
-            .attr('class', function(d) { return 'kr_error kr_error-' + d.id; })
+            .attr('class', function(d) {
+                return 'kr_error kr_error-' + d.id + ' kr_error_type_' + d.error_type; })
             .classed('new', function(d) { return d.id < 0; });
 
         kr_errorsEnter
@@ -114,9 +116,9 @@ export function svgKeepRight(projection, context, dispatch) {
             .attr('class', 'kr_error-fill')
             .attr('width', '20px')
             .attr('height', '20px')
-            .attr('x', '-8px')
-            .attr('y', '-22px')
-            .attr('xlink:href', '#iD-icon-note'); // TODO: update icon
+            .attr('x', '-4px')
+            .attr('y', '-24px')
+            .attr('xlink:href', '#iD-icon-bolt');
 
         // update
         kr_errors
@@ -179,8 +181,16 @@ export function svgKeepRight(projection, context, dispatch) {
     };
 
 
-    drawKeepRight.supported = function() {
-        return !!getService();
+    drawKeepRight.visibleErrors = function(_) {
+        if (!arguments.length) return svgKeepRight.visibleErrors;
+        svgKeepRight.visibleErrors.push(_);
+        if (svgKeepRight.visibleErrors) {
+            showLayer();
+        } else {
+            hideLayer();
+        }
+        dispatch.call('change');
+        return this;
     };
 
 
