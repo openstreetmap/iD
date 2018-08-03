@@ -1,7 +1,9 @@
+import { t } from '../locale';
 import { krError } from '../../osm';
-import { types } from './errorSchema.json';
 
+import { errorTypes } from './errorSchema.json';
 
+// TODO: remove these objects, here for reference
 var keepRightSchema = {
         'schema': '',
         'id': 0,
@@ -46,50 +48,57 @@ var keepRightSchemaFromWeb = {
     'title': 'intersections without junctions, highway-waterway'
 };
 
-export function utilGetErrorDetails(entity) {
+// TODO: clean up description parsing some: remove or ignore spurious characters
+export function parseErrorDescriptions(entity) {
     if (!(entity instanceof krError)) return;
 
     // find the matching template from the error schema
     var errorType = '_' + entity.error_type;
-    var matchingTemplate = types.errors[errorType] || types.warnings[errorType];
+    var matchingTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
     if (!matchingTemplate) return;
 
     // tokenize descriptions
     var errorDescriptions = entity.description.split(' ');
-    var schemaDescriptions = matchingTemplate.description.split(' ');
+    var templateDescriptions = matchingTemplate.description.split(' ');
 
+    var parsedDescriptions = [];
+    var re = new RegExp(/{\$[0-9]}/);
 
-    function iterator() {
+    var commonEntities = ['node', 'way', 'relation']; // TODO: expand this list, or implement a different translation function
 
-        var parsedDescription = [];
-        var re = new RegExp(/{\$[0-9]}/);
+    templateDescriptions.forEach(function(word, index) {
+        if (!re.test(word)) return;
 
-        schemaDescriptions.forEach(function(word, index) { // TODO: figure out how to get the word and the index in a foreach
-            if (!re.test(word)) return;
+        // get the word at this index, and at the next index value
+        var nextWord = templateDescriptions[index + 1] ? templateDescriptions[index + 1] : null;
 
-            // get the word at this index, and at the next index value
-            var nextWord = schemaDescriptions[index + 1] ? schemaDescriptions[index + 1] : null;
+        var parsedPhrase = '';
 
-            // also get the word at the same index from the errorDescription
+        // parse error description words
+        for (var i = index; i <= errorDescriptions.length - 1;  i++) {
+            if (errorDescriptions[i] !== nextWord) {
+                var currWord = errorDescriptions[i];
 
-            var parsedPhrase = '';
-
-
-            // while error terms do not equal the next schema term
-            for (var i = index; i <= errorDescriptions.length - 1;  i++) {
-                if (errorDescriptions[i] !== nextWord) {
-                    parsedPhrase += errorDescriptions[i];
+                // if any variables contain common words, like node, way, relation, translate those
+                if (commonEntities.includes(currWord)) {
+                    currWord = t('keepRight.entities.' + currWord);
                 }
-                parsedDescription.push(parsedPhrase);
-                break;
+
+                parsedPhrase += currWord;
             }
-        });
-    }
+            // add phrase (or single word) to variable list
+            parsedDescriptions.push(parsedPhrase);
+            break;
+        }
+    });
 
 
-    function getCommonWords() { // TODO: implement, see if a variable is a common word like 'node', so that we can translate it before sending it off
-    }
-
-
-    iterator();
+    return {
+        var1: parsedDescriptions[0] || '',
+        var2: parsedDescriptions[1] || '',
+        var3: parsedDescriptions[2] || '',
+        var4: parsedDescriptions[3] || '',
+        var5: parsedDescriptions[4] || '',
+        var6: parsedDescriptions[4] || '',
+    };
 }

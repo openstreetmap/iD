@@ -26,7 +26,7 @@ export function uiKeepRightEditor(context) {
     var dispatch = d3_dispatch('change');
     var keepRightComment = uiKeepRightComment();
     var keepRightDetails = uiKeepRightDetails();
-    var keepRightHeader = uiKeepRightHeader();
+    var keepRightHeader = uiKeepRightHeader(context);
 
     var _error;
 
@@ -249,7 +249,11 @@ export function uiKeepRightEditor(context) {
 
         buttonEnter
             .append('button')
-            .attr('class', 'button status-button action');
+            .attr('class', 'button resolve-button action');
+
+        buttonEnter
+            .append('button')
+            .attr('class', 'button ignore-button action');
 
         buttonEnter
             .append('button')
@@ -287,12 +291,28 @@ export function uiKeepRightEditor(context) {
                 }
             });
 
-        buttonSection.select('.status-button')   // select and propagate data
+        buttonSection.select('.resolve-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
-                var action = (d.status === 'open' ? 'close' : 'open'); // TODO: possibly remove reopen since I don't think it's an option
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('keepRight.' + action + andComment);
+                return t('keepRight.resolve' + andComment);
+            })
+            .on('click.status', function(d) {
+                this.blur();    // avoid keeping focus on the button - #4641
+                var keepRight = services.keepRight;
+                if (keepRight) {
+                    // TODO: handle posting updates
+                    // keepRight.postKeepRightUpdate(d, function(err, error) {
+                    //     dispatch.call('change', error);
+                    // });
+                }
+            });
+
+        buttonSection.select('.ignore-button')   // select and propagate data
+            .attr('disabled', (hasAuth ? null : true))
+            .text(function(d) {
+                var andComment = (d.newComment ? '_comment' : '');
+                return t('keepRight.ignore' + andComment);
             })
             .on('click.status', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
@@ -307,7 +327,7 @@ export function uiKeepRightEditor(context) {
 
         buttonSection.select('.comment-button')   // select and propagate data
             .attr('disabled', function(d) {
-                return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
+                return (hasAuth && d.newComment) ? null : true;
             })
             .on('click.comment', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641

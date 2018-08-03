@@ -1,2 +1,2 @@
-export { utilGetErrorDetails } from './keepRight_error';
-export { types } from './errorSchema.json';
+export { parseErrorDescriptions } from './keepRight_error';
+export { errorTypes } from './errorSchema.json';

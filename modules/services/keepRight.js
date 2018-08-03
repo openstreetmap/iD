@@ -186,7 +186,7 @@ export default {
     },
 
 
-    // get all cached notes covering the viewport
+    // get all cached errors covering the viewport
     keepRight: function(projection) {
         var viewport = projection.clipExtent();
         var min = [viewport[0][0], viewport[1][1]];
@@ -202,20 +202,20 @@ export default {
         return _keepRightCache.keepRight[id];
     },
 
-    // replace a single note in the cache
+    // replace a single error in the cache
     replaceError: function(error) {
         if (!(error instanceof krError) || !error.id) return;
 
-        _keepRightCache.note[error.id] = error;
+        _keepRightCache.keepRight[error.id] = error;
         updateRtree(encodeErrorRtree(error), true);  // true = replace
         return error;
     },
 
-    // remove a single note from the cache
+    // remove a single error from the cache
     removeError: function(error) {
         if (!(error instanceof krError) || !error.id) return;
 
-        delete _keepRightCache.note[error.id];
+        delete _keepRightCache.keepRight[error.id];
         updateRtree(encodeErrorRtree(error), false);  // false = remove
     },
 };
