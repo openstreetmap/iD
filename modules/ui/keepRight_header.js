@@ -43,9 +43,9 @@ export function uiKeepRightHeader(context) {
             .append('div')
             .attr('class', 'kr_error-header-label')
             .text(function(d) {
-                return t('keepRight.entities.' + d.object_type);
+                return t('keepRight.entities.' + d.object_type + ' ');
             })
-            .append('div')
+            .append('span')
             // .attr('href', getEntityLink()) // TODO: add / remove link if entity is/isn't in the graph
             .text(function(d) { return d.object_id; });
     }
