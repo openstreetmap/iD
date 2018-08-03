@@ -92,7 +92,7 @@ export function uiFieldText(field, context) {
 
     // parse as a number
     function parsed(val) {
-        return parseInt(val || 0, 10) || 0;
+        return parseFloat(val || 0, 10) || 0;
     }
 
     // clamp number to min/max
