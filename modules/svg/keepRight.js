@@ -181,6 +181,11 @@ export function svgKeepRight(projection, context, dispatch) {
     };
 
 
+    drawKeepRight.supported = function() {
+        return !!getService();
+    };
+
+
     drawKeepRight.visibleErrors = function(_) {
         if (!arguments.length) return svgKeepRight.visibleErrors;
         svgKeepRight.visibleErrors.push(_);
@@ -192,6 +197,7 @@ export function svgKeepRight(projection, context, dispatch) {
         dispatch.call('change');
         return this;
     };
+
 
 
     init();
