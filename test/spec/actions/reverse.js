@@ -286,7 +286,7 @@ describe('iD.actionReverse', function () {
                 .entity('backwards').members[0].role).to.eql('forward', 'backwards');
         });
 
-        it('transforms role=north ⟺ role=south in member relations', function () {
+        it('doesn\'t transform role=north ⟺ role=south in member relations', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'n1'}),
                 iD.osmNode({id: 'n2'}),
@@ -296,12 +296,12 @@ describe('iD.actionReverse', function () {
             ]);
 
             expect(iD.actionReverse('w1')(graph)
-                .entity('north').members[0].role).to.eql('south', 'north');
+                .entity('north').members[0].role).to.eql('north', 'north');
             expect(iD.actionReverse('w1')(graph)
-                .entity('south').members[0].role).to.eql('north', 'south');
+                .entity('south').members[0].role).to.eql('south', 'south');
         });
 
-        it('transforms role=east ⟺ role=west in member relations', function () {
+        it('doesn\'t transform role=east ⟺ role=west in member relations', function () {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'n1'}),
                 iD.osmNode({id: 'n2'}),
@@ -311,9 +311,9 @@ describe('iD.actionReverse', function () {
             ]);
 
             expect(iD.actionReverse('w1')(graph)
-                .entity('east').members[0].role).to.eql('west', 'east');
+                .entity('east').members[0].role).to.eql('east', 'east');
             expect(iD.actionReverse('w1')(graph)
-                .entity('west').members[0].role).to.eql('east', 'west');
+                .entity('west').members[0].role).to.eql('west', 'west');
         });
 
         it('ignores directionless roles in member relations', function () {
