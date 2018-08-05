@@ -11,6 +11,7 @@ export { uiCommitChanges } from './commit_changes';
 export { uiCommitWarnings } from './commit_warnings';
 export { uiConfirm } from './confirm';
 export { uiConflicts } from './conflicts';
+export { uiCustom } from './custom';
 export { uiContributors } from './contributors';
 export { uiCurtain } from './curtain';
 export { uiDisclosure } from './disclosure';

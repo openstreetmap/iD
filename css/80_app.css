@@ -4602,3 +4602,24 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     width: 100px;
     color: #7092ff;
 }
+
+.button-ok {
+    background-color: #6f92ff; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+    
+}
+.button-ok:focus {
+    background-color: #c1d0ff;
+}
+.button-cancel {
+    background-color: #cccccc; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+}
