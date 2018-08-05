@@ -1,16 +1,11 @@
 import { t } from '../util/locale';
-import { uiIntro } from './intro';
+import { uiBackground } from './background';
 import { uiModal } from './modal';
 
 
 export function uiCustom(context) {
 
     return function(selection) {
-
-        /*if (context.storage('sawCustom'))
-             return;
-
-        context.storage('sawCustom', true);*/
 
         var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modalSelection = uiModal(selection);
@@ -30,12 +25,7 @@ export function uiCustom(context) {
         introModal
             .append('div')
             .attr('class','modal-section')
-            .append('p').text(t('background.custom_prompt'))
-            /*.append('p').text(t('background.custom_token1'))
-            .append('p').text(t('background.custom_token2'))
-            .append('p').text(t('background.custom_token3'))
-            .append('p').text(t('background.custom_token4'))
-            .append('p').text(t('background.custom_example', { example: example }))*/
+            .append('p').text(t('background.custom_prompt', { example: example }))
             .append('textarea');
 
 
@@ -51,24 +41,25 @@ export function uiCustom(context) {
             .attr('class', 'modal-section');
 
 
-        var startEditing = buttonWrap
+        var cancelButton = buttonWrap
             .append('button')
             .attr('class', 'button-cancel')
             .on('click', modalSelection.close);
 
-        startEditing
+        cancelButton
             .append('div')
             .text('Cancel');
 
-        var walkthrough = buttonWrap
+        var okButton = buttonWrap
             .append('button')
             .attr('class', 'button-ok')
             .on('click', function() {
-                context.container().call(uiIntro(context));
+                var template = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+                context.container().call(uiBackground.edit, template);
                 modalSelection.close();
             });
 
-        walkthrough
+        okButton
             .append('div')
             .text('OK');
 

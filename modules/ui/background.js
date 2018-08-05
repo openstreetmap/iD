@@ -90,6 +90,7 @@ export function uiBackground(context) {
     function chooseBackground(d) {
         if (d.id === 'custom' && !d.template()) {
             return editCustom();
+
         }
 
         d3_event.preventDefault();
@@ -101,22 +102,19 @@ export function uiBackground(context) {
         document.activeElement.blur();
     }
 
-
-    function editCustom() {
-        d3_event.preventDefault();
-        //var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        /*var template = window.prompt(
-            t('background.custom_prompt', { example: example }),
-            _customSource.template() || example
-        );
-
+    function edit(a, template) {
         if (template) {
             context.storage('background-custom-template', template);
             _customSource.template(template);
             chooseBackground(_customSource);
         } else {
             _backgroundList.call(updateLayerSelections);
-        }*/
+        }
+    }
+
+    function editCustom() {
+        d3_event.preventDefault();
+
         context.container()
             .call(uiCustom(context));
     }
@@ -423,6 +421,7 @@ export function uiBackground(context) {
         uiBackground.hidePane = hidePane;
         uiBackground.togglePane = togglePane;
         uiBackground.setVisible = setVisible;
+        uiBackground.edit = edit;
     }
 
     return background;
