@@ -64,7 +64,7 @@ export function parseErrorDescriptions(entity) {
     var parsedDescriptions = [];
     var re = new RegExp(/{\$[0-9]}/);
 
-    var commonEntities = ['node', 'way', 'relation']; // TODO: expand this list, or implement a different translation function
+    var commonEntities = ['node', 'way', 'relation', 'highway', 'cycleway', 'waterway', 'riverbank']; // TODO: expand this list, or implement a different translation function
 
     templateDescriptions.forEach(function(word, index) {
         if (!re.test(word)) return;

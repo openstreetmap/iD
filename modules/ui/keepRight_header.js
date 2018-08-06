@@ -1,14 +1,44 @@
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
+import { event as d3_event } from 'd3-selection';
+import { geoChooseEdge } from '../geo';
+import { modeSelect } from '../modes';
 
 
 export function uiKeepRightHeader(context) {
     var _error;
 
 
-    function getEntityLink() {
+    function clickLink() {
+        var d = {};
 
-        var url = context.connection().entityURL(context.entity(_error.object_id));
+        var entityType =
+            _error.object_type === 'node' ? 'n' :
+            _error.object_type === 'way' ? 'w' :
+            _error.object_type === 'relation' ? 'r' :  null;
+
+        // if an entity has been loaded in the graph, select the entity
+        if (context.hasEntity(entityType + _error.object_id)) {
+            d = context.hasEntity(entityType + _error.object_id);
+        }
+
+        d3_event.preventDefault();
+        if (d.location) {
+            context.map().centerZoom([d.location[1], d.location[0]], 19);
+        }
+        else if (d.entity) {
+            if (d.entity.type === 'node') {
+                context.map().center(d.entity.loc);
+            } else if (d.entity.type === 'way') {
+                var center = context.projection(context.map().center());
+                var edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
+                context.map().center(edge.loc);
+            }
+            context.enter(modeSelect(context, [d.entity.id]));
+        } else {
+            // TODO: turn on osm layer
+            context.zoomToEntity(d.id);
+        }
     }
 
 
@@ -42,12 +72,11 @@ export function uiKeepRightHeader(context) {
         headerEnter
             .append('div')
             .attr('class', 'kr_error-header-label')
-            .text(function(d) {
-                return t('keepRight.entities.' + d.object_type + ' ');
-            })
+            .text(function(d) { return t('keepRight.entities.' + d.object_type) + ' '; })
             .append('span')
-            // .attr('href', getEntityLink()) // TODO: add / remove link if entity is/isn't in the graph
-            .text(function(d) { return d.object_id; });
+            .append('a')
+            .text(function(d) { return d.object_id; })
+            .on('click', clickLink);
     }
 
 

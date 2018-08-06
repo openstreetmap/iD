@@ -677,7 +677,7 @@ export function uiMapData(context) {
 
         // context.errors()
         //     .on('change.map_data-update', update); // TODO: add errors list to context?
-
+''
         update();
         setFill(_fillSelected);
 
