@@ -5025,6 +5025,10 @@
                     "name": "Bridge",
                     "terms": ""
                 },
+                "man_made/bunker_silo": {
+                    "name": "Bunker Silo",
+                    "terms": "Silage,Storage"
+                },
                 "man_made/chimney": {
                     "name": "Chimney",
                     "terms": ""
