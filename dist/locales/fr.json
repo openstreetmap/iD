@@ -21,6 +21,11 @@
                 "description": "Ajouter des restaurants, des monuments, des boîtes aux lettres ou d'autres points à la carte.",
                 "tail": "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument."
             },
+            "add_note": {
+                "title": "Note",
+                "description": "Vous avez repéré une erreur ? Faîtes-le savoir aux autres cartographes.",
+                "tail": "CLiquez sur la earte pour ajouter une note."
+            },
             "browse": {
                 "title": "Naviguer",
                 "description": "Naviguer ou zoomer sur la carte."
@@ -32,7 +37,7 @@
                 "tail": " Cliquez pour ajouter des nœuds à la ligne. Cliquez sur d'autres lignes pour y connecter la ligne, et double-cliquez pour terminer la ligne."
             },
             "drag_node": {
-                "connected_to_hidden": "Ceci ne peut être édité parce que c'est connecté à un élément caché."
+                "connected_to_hidden": "Cet élément ne peut être modifié parce qu'il est connecté à un élément caché."
             }
         },
         "operations": {
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "ajout d'un point.",
                     "vertex": "ajout d'un nœud à une ligne.",
-                    "relation": "création d'une relation."
+                    "relation": "création d'une relation.",
+                    "note": "Note ajoutée."
                 }
             },
             "start": {
@@ -152,7 +158,7 @@
                     "area": "connexion d'un chemin à un polygone."
                 },
                 "relation": "Ces éléments ne peuvent être connectés car ils ont des rôles de relations conflictuels.",
-                "restriction": "Ces éléments ne peuvent être connectés car cela endommagerait une relation \"{relation}\"."
+                "restriction": "Ces éléments ne peuvent être connectés car cela endommagerait une relation « {relation} »."
             },
             "disconnect": {
                 "title": "Séparer",
@@ -170,10 +176,10 @@
                 "annotation": "fusion de {n} éléments.",
                 "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
                 "not_adjacent": "Ces éléments ne peuvent être fusionnés car leurs extrémités ne sont pas connectés.",
-                "restriction": "Ces éléments ne peuvent être fusionnés car cela endommagerait une relation \"{relation}\".",
+                "restriction": "Ces éléments ne peuvent être fusionnés car cela endommagerait une relation « {relation} ».",
                 "relation": "Ces éléments ne peuvent être fusionnés car leurs rôles sont incompatibles dans une relation.",
                 "incomplete_relation": "Ces éléments ne peuvent pas être fusionnés parce qu'au moins l'un d'entre eux n'a pas été complètement téléchargé.",
-                "conflicting_tags": "Ces éléments ne peuvent être fusionnés car certains de leurs tags ont des valeurs conflictuelles."
+                "conflicting_tags": "Ces éléments ne peuvent être fusionnés car certains de leurs attributs ont des valeurs conflictuelles."
             },
             "move": {
                 "title": "Déplacer",
@@ -297,6 +303,14 @@
                     "create": "interdiction de tourner ajoutée.",
                     "delete": "interdiction de tourner supprimée."
                 }
+            },
+            "detach_node": {
+                "title": "Séparer",
+                "key": "E",
+                "description": "Séparer ce nœud de ces lignes ou polygones",
+                "annotation": "Séparation d'un nœud de ses lignes ou polygones parents.",
+                "restriction": "Ce nœud ne peut pas être séparé car cela endommagerait une relation « {relation} ».",
+                "connected_to_hidden": "Ce nœud ne peut pas être séparé car il est connecté à un élément caché."
             }
         },
         "restriction": {
@@ -332,19 +346,19 @@
                 "via_names": "{via} {viaNames}",
                 "select_from": "Cliquez pour sélectionner un segment {from}",
                 "select_from_name": "Cliquez pour sélectionner {from} {fromName}",
-                "toggle": "Cliquez pour « {turn} »"
+                "toggle": "Cliquez pour « {turn} »"
             }
         },
         "undo": {
-            "tooltip": "Annuler : {action}",
+            "tooltip": "Annuler : {action}",
             "nothing": "Rien à annuler."
         },
         "redo": {
-            "tooltip": "Rétablir : {action}",
+            "tooltip": "Rétablir : {action}",
             "nothing": "Rien à rétablir."
         },
-        "tooltip_keyhint": "Raccourci :",
-        "browser_notice": "Cet éditeur est supporté sous Firefox, Chrome, safari, Opera, et Internet  Explorer 11 et supérieur. Veuillez s'il vous plaît mettre à jour votre navigateur ou utiliser Potlach 2 pour éditer la carte.",
+        "tooltip_keyhint": "Raccourci :",
+        "browser_notice": "Cet éditeur est supporté sous Firefox, Chrome, safari, Opera, et Internet  Explorer 11 et supérieur. Veuillez s'il vous plaît mettre à jour votre navigateur ou utiliser Potlach 2 pour modifier la carte.",
         "translate": {
             "translate": "Traduire",
             "localized_translation_label": "Nom multi-langues",
@@ -352,18 +366,18 @@
             "localized_translation_name": "Nom"
         },
         "zoom_in_edit": " Zoomer pour Modifier ",
-        "login": "identifiant",
+        "login": "Connexion",
         "logout": "Déconnexion",
-        "loading_auth": "Connexion à OpenStreetMap...",
+        "loading_auth": "Connexion à OpenStreetMap…",
         "report_a_bug": "Rapporter un bug",
         "help_translate": "Aider à traduire",
         "feature_info": {
             "hidden_warning": "{count} éléments cachés",
-            "hidden_details": "Ces éléments sont actuellement cachés&nbsp;: {details}"
+            "hidden_details": "Ces éléments sont actuellement cachés : {details}"
         },
         "status": {
             "error": "Impossible de se connecter au serveur d'API.",
-            "offline": "Le serveur d'API est hors ligne. Veuillez essayer d'éditer plus tard.",
+            "offline": "Le serveur d'API est hors ligne. Essayez de modifier plus tard.",
             "readonly": "Le serveur d'API est en lecture seule. Vous devez attendre pour enregistrer vos changements.",
             "rateLimit": "Le serveur d'API limite les connexions anonymes. Vous pouvez résoudre ce problème en vous connectant."
         },
@@ -374,7 +388,7 @@
             "request_review": "Je souhaite que quelqu'un vérifie mes modifications",
             "save": "Envoyer",
             "cancel": "Annuler",
-            "changes": "{count} modification(s) :",
+            "changes": "{count} modification(s) :",
             "download_changes": "Télécharger le fichier osmChange",
             "warnings": "Attention",
             "modified": "Modifié",
@@ -382,7 +396,7 @@
             "created": "Créé",
             "about_changeset_comments": "À propos des commentaires de groupe de modifications",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/FR:Bons_commentaires_de_groupe_de_modifications",
-            "google_warning": "Vous avez mentionné Google dans ce commentaire : rappelez-vous que copier depuis Google Maps est strictement interdit.",
+            "google_warning": "Vous avez mentionné Google dans ce commentaire : rappelez-vous que copier depuis Google Maps est strictement interdit.",
             "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
@@ -412,7 +426,7 @@
                 "selected": "{n} dans la sélection",
                 "no_history": "Pas d'historique (Nouvel élément)",
                 "version": "Version",
-                "last_edit": "Dernière édition",
+                "last_edit": "Dernière modification",
                 "edited_by": "Edité par",
                 "changeset": "Groupe de modification",
                 "unknown": "Inconnu",
@@ -449,27 +463,27 @@
             "relation": "relation"
         },
         "geocoder": {
-            "search": "Rechercher dans le monde entier...",
+            "search": "Rechercher dans le monde entier…",
             "no_results_visible": "Aucun résultat sur la zone visible de la carte",
             "no_results_worldwide": "Aucun résultat trouvé"
         },
         "geolocate": {
             "title": "Me localiser",
-            "locating": "En cours de localisation, veuillez patienter..."
+            "locating": "Localisation, veuillez patienter…"
         },
         "inspector": {
             "no_documentation_combination": "Aucune documentation n'est disponible pour cette combinaison d'étiquettes",
             "no_documentation_key": "Aucune documentation n'est disponible pour cette clé",
             "documentation_redirect": "Cette documentation a été redirigée vers une nouvelle page",
             "show_more": "Plus d'informations",
-            "view_on_osm": "Visualiser sur openstreetmap.org",
-            "all_fields": "Tous les tags",
-            "all_tags": "Tous les tags",
+            "view_on_osm": "Consulter sur openstreetmap.org",
+            "all_fields": "Tous les champs",
+            "all_tags": "Tous les attributs",
             "all_members": "Tous les membres",
             "all_relations": "Toutes les relations",
-            "new_relation": "Nouvelle relation...",
+            "new_relation": "Nouvelle relation…",
             "role": "Rôle",
-            "choose": "Que souhaitez vous ajouter?",
+            "choose": "Que souhaitez-vous ajouter ?",
             "results": "{n} résultats pour {search}",
             "reference": "Consulter sur le Wiki d'OpenStreetMap",
             "back_tooltip": "Changer l'objet",
@@ -498,7 +512,7 @@
             "way": "Chemin",
             "relation": "Relation",
             "location": "Endroit",
-            "add_fields": "Ajouter un tag :"
+            "add_fields": "Ajouter un attribut :"
         },
         "background": {
             "title": "Fond de carte",
@@ -510,7 +524,7 @@
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "custom_button": "Modifier le fond personnalisé",
-            "custom_prompt": "Entrez un modèle URL de tuile. Les symboles valide sont : \n - {zoom} ou {z}, {x}, {y} pour schéma de tuile Z/X/Y\n- {-y} ou {ty} pour basculer vers le style de coordonées TMS Y\n- {u} pour le schéma quadri-tuiles\n- {switch:a,b,c} pour le multiplexage de serveur DNS\n\nExemple:\n{example}",
+            "custom_prompt": "Entrez un modèle URL de tuile. Les symboles valide sont : \n  - {zoom} ou {z}, {x}, {y} pour le schéma de tuile Z/X/Y\n  - {-y} ou {ty} pour basculer vers le style de coordonnés TMS Y\n  - {u} pour le schéma quadri-tuiles\n  - {switch:a,b,c} pour le multiplexage de serveurs DNS\n\nExemple:\n{example}",
             "overlays": "Calques",
             "imagery_source_faq": "Info imagerie / Signaler un problème",
             "reset": "réinitialiser",
@@ -525,7 +539,7 @@
                 "key": "/"
             },
             "fix_misalignment": "Ajuster le décalage du fond de carte",
-            "offset": "«Glissez» partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres."
+            "offset": "« Glissez » partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres."
         },
         "map_data": {
             "title": "Données cartographiques",
@@ -536,11 +550,15 @@
                 "osm": {
                     "tooltip": "Données de cartes d'OpenStreetMap",
                     "title": "Données OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Données des notes d'OpenStreetMap",
+                    "title": "Notes d'OpenStreetMap"
                 }
             },
             "fill_area": "Remplissage des zones",
             "map_features": "Éléments de la carte",
-            "autohidden": "Ces éléments ont été automatiquement cachés parce qu'un trop grand nombre d'entre eux seraient affichés à l'écran. Vous pouvez zoomer pour les éditer.",
+            "autohidden": "Ces éléments ont été automatiquement cachés parce qu'un trop grand nombre d'entre eux seraient affichés à l'écran. Vous pouvez zoomer pour les modifier.",
             "osmhidden": "Ces éléments ont été automatiquement cachés parce que le calque OpenStreetMap est caché."
         },
         "feature": {
@@ -610,19 +628,19 @@
         },
         "restore": {
             "heading": "Vous avez des changements non sauvegardés.",
-            "description": "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements ?",
+            "description": "Vous avez des changements non sauvegardés d'une session précédente. Souhaitez-vous restaurer ces changements ?",
             "restore": "Restaurer mes modifications",
             "reset": "Abandonner mes modifications"
         },
         "save": {
-            "title": "Sauvegarder...",
+            "title": "Sauvegarder…",
             "help": "Vérifiez vos modifications avant de pouvoir les envoyer sur OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
             "no_changes": "Aucune modification à sauvegarder",
             "error": "Des erreurs sont survenues en tentant de sauvegarder",
             "status_code": "Le serveur a renvoyé le code de statut {code}",
             "unknown_error_details": "Veuillez vérifier que votre ordinateur est connecté au réseau.",
-            "uploading": "Envoi des modifications vers OpenStreetMap...",
-            "conflict_progress": "Détection des conflits: {num} de {total}",
+            "uploading": "Envoi des modifications vers OpenStreetMap…",
+            "conflict_progress": "Détection des conflits : {num} de {total}",
             "unsaved_changes": "Vous avez des modifications non enregistrées",
             "conflict": {
                 "header": "Résoudre les modifications conflictuelles",
@@ -644,7 +662,7 @@
                 "location": "Cet élément a été déplacé à la fois par vous et {user}.",
                 "nodelist": "Les nœuds ont été changés à la fois par vous et {user}",
                 "memberlist": "Les membres de la relation  ont été changés à la fois par vous et {user}",
-                "tags": "Vous avez changé le tag <b>{tag}</b> en \"{local}\" et {user} l'a changé en \"{remote}\"."
+                "tags": "Vous avez changé l'attribut <b>{tag}</b> en « {local} » et {user} l'a changé en « {remote} »."
             }
         },
         "success": {
@@ -655,13 +673,13 @@
             "help_link_text": "Détails",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FR:FAQ#Je_viens_juste_de_faire_quelques_changements_sur_la_carte._Comment_puis-je_les_voir_.3F",
             "view_on_osm": "Voir les changements sur OSM",
-            "changeset_id": "Votre numéro d'ensemble de modification : {changeset_id}",
-            "like_osm": "Vous aimez OpenStreetMap ? Retrouvez d'autres contributeurs :",
+            "changeset_id": "Votre numéro d'ensemble de modification : {changeset_id}",
+            "like_osm": "Vous aimez OpenStreetMap ? Retrouvez d'autres contributeurs :",
             "more": "Plus",
             "events": "Événements",
-            "languages": "Langues: {languages}",
-            "missing": "Quelque-chose manque-t-il dans cette liste ?",
-            "tell_us": "Dîtes-nous en plus !"
+            "languages": "Langues : {languages}",
+            "missing": "Quelque-chose manque-t-il dans cette liste ?",
+            "tell_us": "Dîtes-nous en plus !"
         },
         "confirm": {
             "okay": "OK",
@@ -675,7 +693,7 @@
         },
         "source_switch": {
             "live": "live",
-            "lose_changes": "Vos dernières modifications n'ont pas été sauvées. Si vous changez de serveur de carte, celles-ci seront perdues. Êtes-vous sûr de vouloir changer de serveur de carte ?",
+            "lose_changes": "Vos dernières modifications n'ont pas été sauvées. Si vous changez de serveur de carte, celles-ci seront perdues. Êtes-vous sûr de vouloir changer de serveur de carte ?",
             "dev": "dev"
         },
         "version": {
@@ -699,9 +717,9 @@
             "untagged_area_tooltip": "Sélectionnez un type d'élément pour décrire cette surface.",
             "untagged_relation": "Relation sans attributs",
             "untagged_relation_tooltip": "Sélectionnez un type d’entité décrivant ce qu’est cette relation.",
-            "many_deletions": "Vous êtes en train de supprimer {n} éléments : {p} nœuds, {l} lignes, {a} polygones et {r} relations. En êtes-vous sûr ? Ils seront supprimés de la carte que tout le monde voit sur openstreetmap.org.",
+            "many_deletions": "Vous êtes en train de supprimer {n} éléments : {p} nœuds, {l} lignes, {a} polygones et {r} relations. En êtes-vous sûr ? Ils seront supprimés de la carte que tout le monde voit sur openstreetmap.org.",
             "tag_suggests_area": "Cet attribut {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
-            "deprecated_tags": "Attributs obsolètes : {tags}"
+            "deprecated_tags": "Attributs obsolètes : {tags}"
         },
         "zoom": {
             "in": "Zoomer",
@@ -710,15 +728,22 @@
         "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
         "full_screen": "Afficher/cacher le plein écran",
         "gpx": {
-            "local_layer": "Fichier local",
+            "local_layer": "Ajouter un fichier GPX",
             "drag_drop": "Glissez-déposez un fichier .gpx, .geojson ou .kml sur la page, ou cliquez sur le bouton de droite pour le rechercher dans votre ordinateur.",
             "zoom": "Zoomer sur la couche",
             "browse": "Sélectionnez un fichier"
+        },
+        "mvt": {
+            "local_layer": "Ajouter un fichier MVT",
+            "drag_drop": "Glissez-déposez un fichier .mvt ou .pbf sur la page ou cliquez sur le bouton à droite pour naviguer dans vos fichiers.",
+            "zoom": "Zoomer sur la couche",
+            "browse": "Sélectionner un fichier"
         },
         "streetside": {
             "tooltip": "Photos Streetside de Microsoft",
             "title": "Sucouche photo (Bing Streetside)",
             "report": "Signaler un problème relatif à la vie privée sur cette image",
+            "view_on_bing": "Consulter sur Bing Maps",
             "hires": "Haute résolution"
         },
         "mapillary_images": {
@@ -739,6 +764,27 @@
         "openstreetcam": {
             "view_on_openstreetcam": "Voir cette image sur OpenStreetCam"
         },
+        "note": {
+            "note": "Note",
+            "title": "Modifier la note",
+            "anonymous": "anonyme",
+            "closed": "(Fermée)",
+            "commentTitle": "Commentaires",
+            "newComment": "Nouveau commentaire",
+            "inputPlaceholder": "Saisissez un commentaire à partager avec d'autres utilisateurs.",
+            "close": "Fermer la note",
+            "open": "Ré-ouvrir la note",
+            "comment": "Commentaire",
+            "close_comment": "Commenter et fermer",
+            "open_comment": "Commenter et ré-ouvrir",
+            "report": "Signaler",
+            "new": "Nouvelle note",
+            "newDescription": "Décrivez le problème.",
+            "save": "Enregistrer la note",
+            "login": "Vous devez vous connecter pour modifier la note ou la commenter.",
+            "upload_explanation": "Vos commentaires seront visibles publiquement par les utilisateurs d'OpenStreetMap.",
+            "upload_explanation_with_user": "Vous commentaires en tant que {user} seront visibles publiquement par tous les utilisateurs d'OpenStreetMap."
+        },
         "help": {
             "title": "Aide",
             "key": "H",
@@ -748,7 +794,7 @@
                 "open_data_h": "Données libres",
                 "open_data": "Les modifications que vous faites sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Vos modification peuvent se baser sur vos connaissances personnelles, des enquêtes de terrain, des images aériennes ou des photos prises dans la rue. Copier des informations de sources commerciales telles que Google Maps [is strictly forbidden] (https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Avant de commencer",
-                "before_start": "Vous devez maîtriser OpenStreetMap et cet éditeur avant de commencer à modifier. iD comprend un guide pour vous apprendre les bases de la modification d'OpenStreetMap. Cliquez sur « Commencer le tutoriel » sur cet écran pour suivre le guide - cela ne prend que 15 minutes environ.",
+                "before_start": "Vous devez maîtriser OpenStreetMap et cet éditeur avant de commencer à modifier. iD comprend un guide pour vous apprendre les bases de la modification d'OpenStreetMap. Cliquez sur « Commencer le tutoriel » sur cet écran pour suivre le guide - cela ne prend que 15 minutes environ.",
                 "open_source_h": "Open source",
                 "open_source": "L'éditeur iD est un projet collaboratif open source, et vous êtes en train d'utiliser la version {version}. Le code source est disponible [sur GitHub](https://github.com/openstreetmap/iD).",
                 "open_source_help": "Vous pouvez contribuer à iD en [traduisant](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ou en [déclarant des bugs](https://github.com/openstreetmap/iD/issues)."
@@ -773,7 +819,7 @@
                 "undo_redo_h": "Annuler & Rétablir",
                 "undo_redo": "Vos modifications sont enregistrées localement dans votre navigateur tant que vous ne les envoyez pas sur les serveurs d'OpenStreetMap. Vous pouvez annuler vos action en appuyant sur le bouton {undo} **Annuler** et les refaire en appuyant sur le bouton {redo} **Refaire**.",
                 "save_h": "Sauvegarder",
-                "save": "Cliquez sur {save} **Enregistrer** pour envoyer vos modifications à OpenStreetMap. Enregistrez fréquemment !",
+                "save": "Cliquez sur {save} **Enregistrer** pour envoyer vos modifications à OpenStreetMap. Enregistrez fréquemment !",
                 "save_validation": "Sur l'écran de sauvegarde vous pourrez revoir ce que vous avez fait. iD effectuera aussi des vérifications de base pour chercher des informations manquantes et peut vous faire des suggestions ou vous avertir si quelque chose n'a pas l'air correct.",
                 "upload_h": "Téléverser",
                 "upload": "Avant d'envoyer vous changements vous devez entrer un [commentaire sur l'ensemble de changements](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Ensuite cliquez sur **Envoyer** pour envoyer vous changements à OpenStreetMap où ils seront ajoutés à la carte et deviendront visibles pour tout le monde.",
@@ -784,18 +830,18 @@
             },
             "feature_editor": {
                 "title": "Éditeur d'élément",
-                "intro": "*L'éditeur d'élément* apparaît à coté de la carte et permet de voir et d'éditer les informations relatives à l'élément sélectionne",
+                "intro": "*L'éditeur d'élément* apparaît à coté de la carte et permet de voir et de modifier les informations relatives à l'élément sélectionné.",
                 "definitions": "La première section indique le type d'élément. La seconde contient les *champs* qui indiquent les attributs de l'élément, comme son nom ou son adresse.",
                 "type_h": "Type d'élément",
                 "type": "Vous pouvez cliquer sur le type d'un élément pour le changer pour un autre type. Tout ce qui exist dans le monde réel peut être ajouter dans OpenStreetMap, Il y a donc de milliers de types possibles",
                 "type_picker": "Le sélectionneur de type affiche les types d'éléments les plus fréquents, tels que les parcs, hôpitaux, restaurants, routes et bâtiments. Vous pouvez tout cherchez en tapant ce que vous voulez dans le champs de recherche. Vous pouvez aussi cliquer sur l'icône {inspect} **Info** à côté du type de l'élément pour en apprendre plus.",
                 "fields_h": "Champs",
-                "fields_all_fields": "La section *Tous les champs* contient toutes les informations qui peuvent être éditées. Dans OpenStreetMap, tous les champs sont facultatifs. Vous pouvez toujours les laisser vides en cas de doute.",
+                "fields_all_fields": "La section « Tous les champs » contient toutes les informations qui peuvent être modifiées. Dans OpenStreetMap, tous les champs sont facultatifs. Vous pouvez toujours les laisser vides en cas de doute.",
                 "fields_example": "Chaque type d’élément affichera des champs différents. Par exemple, une route peut afficher des champs pour le type de surface et la limitation de vitesse et un restaurant peut afficher des champs pour le type de nourriture servie et ses horaires d'ouverture.",
-                "fields_add_field": "Vous pouvez aussi cliquer sur le menu déroulant \"Ajouter un champ\" pour ajouter plus d'informations, comme une description, un lien Wikipédia, un accès handicapé, et cetera...",
-                "tags_h": "Tags",
-                "tags_all_tags": "En dessous de la partie avec les champs, vous pouvez développer la section « Tous les tags » pour modifier les *tags* OpenStreetMap de l’élément sélectionné. Chaque tag consiste en une *clef* et une *valeur*, des données qui définissent tous les éléments enregistrés dans OpenStreetMap.",
-                "tags_resources": "Vous aurez besoin d'un niveau de connaissance intermédiaire sur OpenStreetMap pour modifier les tags d'un élément. Vous devriez consulter des ressources comme le [Wiki d’OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) ou [Taginfo](https://taginfo.openstreetmap.org/) pour en apprendre plus sur les pratiques de tagging acceptées dans OpenStreetMap."
+                "fields_add_field": "Vous pouvez aussi cliquer sur le menu déroulant « Ajouter un champ » pour ajouter plus d'informations, comme une description, un lien Wikipédia, un accès handicapé, et cetera…",
+                "tags_h": "Attributs",
+                "tags_all_tags": "En dessous de la partie avec les champs, vous pouvez développer la section « Tous les attributs » pour modifier les *attributs* OpenStreetMap de l’élément sélectionné. Chaque tag consiste en une *clef* et une *valeur*, des données qui définissent tous les éléments enregistrés dans OpenStreetMap.",
+                "tags_resources": "Vous aurez besoin d'un niveau de connaissance intermédiaire sur OpenStreetMap pour modifier les attributs d'un élément. Vous devriez consulter des ressources comme le [Wiki d’OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) ou [Taginfo](https://taginfo.openstreetmap.org/) pour en apprendre plus sur les pratiques de tagging acceptées dans OpenStreetMap."
             },
             "points": {
                 "title": "Points",
@@ -822,7 +868,7 @@
                 "connect_line_h": "Connecter des lignes",
                 "connect_line": "Il est important que les routes soient connectées correctement pour la carte, et essentiel pour la navigation.",
                 "connect_line_display": "Les connexions entre plusieurs routes sont matérialisées avec des cercles gris. Les points d'une ligne qui ne sont connectés à rien apparaissent comme des cercles blancs, plus grands.",
-                "connect_line_drag": "Pour connecter une ligne à un autre élément, faites glisser l'un des nœuds de la ligne vers cet élément jusqu'à ce qu'ils s'accrochent ensemble. Astuce: vous pouvez maintenir la touche `{alt}` enfoncée pour empêcher les nœuds de se connecter à d'autres éléments.",
+                "connect_line_drag": "Pour connecter une ligne à un autre élément, faites glisser l'un des nœuds de la ligne vers cet élément jusqu'à ce qu'ils s'accrochent ensemble. Astuce : vous pouvez maintenir la touche `{alt}` enfoncée pour empêcher les nœuds de se connecter à d'autres éléments.",
                 "connect_line_tag": "Si le croisement a un feu de signalisation ou un passage pour piétons, vous pouvez l'ajouter en sélectionnant le nœud de connexion et en utilisant l'éditeur d'élément pour choisir le type d'élément correct.",
                 "disconnect_line_h": "Séparer des lignes",
                 "disconnect_line_command": "Pour déconnecter une route d'un autre élément, faites un clic droit {rightclick} sur le nœud de connexion et sélectionnez la commande **Déconnecter** {disconnect} dans le menu d'édition.",
@@ -836,7 +882,7 @@
             "areas": {
                 "title": "Polygones",
                 "intro": "Les *polygones* sont utilisés pour montrer les délimitations d'éléments comme des lacs, des bâtiments et des zones résidentielles. Les polygones doivent être dessinés le long du bord des éléments qu'ils représentent, par exemple autour du pied d'un bâtiment.",
-                "point_or_area_h": "Des points ou un polygone ?",
+                "point_or_area_h": "Des points ou un polygone ?",
                 "point_or_area": "De nombreux éléments peuvent être représentés par des points ou des polygones. Vous devriez cartographier les bâtiments et les contours de propriétés avec des polygones lorsque c'est possible. Placez des points à l'intérieur d'un bâtiment pour représenter des entreprises, des équipements et d'autres éléments se trouvant à l'intérieur.",
                 "add_area_h": "Ajouter des polygones",
                 "add_area_command": "Pour ajouter un polygone, cliquez sur le bouton **Polygone** {area} de la barre d'outils au-dessus de la carte, ou pressez la touche `3`. Cela transformera le curseur de la souris en une croix.",
@@ -854,41 +900,52 @@
             "relations": {
                 "title": "Relations",
                 "intro": "Une *relation* est un élément spécial dans OpenStreetMap qui regroupe ensemble d'autres éléments. Les éléments qui appartiennent à une relation sont appelés *membres*, et chacun de ces membres peut avoir un *rôle* dans la relation.",
-                "edit_relation_h": "Éditer des Relations",
-                "edit_relation": "Au bas de l'éditeur d'éléments, vous pouvez développer la section \"Toutes les relations\" pour voir si l'élément sélectionné est membre d'une ou plusieurs relations. Vous pouvez alors cliquer sur la relation pour la sélectionner et l'éditer.",
-                "edit_relation_add": "Pour ajouter un élément à une relation, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section \"Toutes les relations\" de l'éditeur d'éléments. Vous pouvez choisir la relation dans une liste contenant les relations présentes aux environs, ou bien en créer une nouvelle avec l'option \"Nouvelle relation...\".",
+                "edit_relation_h": "Modifier des Relations",
+                "edit_relation": "Au bas de l'éditeur d'éléments, vous pouvez développer la section « Toutes les relations » pour voir si l'élément sélectionné est membre d'une ou plusieurs relations. Vous pouvez alors cliquer sur la relation pour la sélectionner et la modifier.",
+                "edit_relation_add": "Pour ajouter un élément à une relation, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section « Toutes les relations » de l'éditeur d'éléments. Vous pouvez choisir la relation dans une liste contenant les relations présentes aux environs, ou bien en créer une nouvelle avec l'option « Nouvelle relation… ».",
                 "edit_relation_delete": "Vous pouvez également cliquer sur le bouton **Supprimer** {delete}  pour supprimer un élément d'une relation. Si vous supprimez tous les éléments d'une relation, celle-ci sera automatiquement supprimée.",
                 "maintain_relation_h": "Maintenir des Relations",
-                "maintain_relation": "La plupart du temps, iD maintient automatiquement les relations lorsque vous éditez.\nVous devez toutefois faire attention quand vous remplacez des éléments qui sont membres de relations. Par exemple, si vous supprimez la section d'une route et que vous en créez une nouvelle pour la remplacer, vous devez impérativement ajouter la nouvelle section aux mêmes relations que l'ancienne (itinéraires, interdictions de tourner, etc...).",
+                "maintain_relation": "La plupart du temps, iD maintient automatiquement les relations lors de l'édition.\nVous devez toutefois faire attention quand vous remplacez des éléments qui sont membres de relations. Par exemple, si vous supprimez la section d'une route et que vous en créez une nouvelle pour la remplacer, vous devez impérativement ajouter la nouvelle section aux mêmes relations que l'ancienne (itinéraires, interdictions de tourner, etc…).",
                 "relation_types_h": "Types de Relation",
                 "multipolygon_h": "Multipolygones",
                 "multipolygon": "Une relation *multipolygone* est un groupe d'un ou plusieurs éléments *extérieurs* et d'un ou plusieurs éléments intérieurs. Les éléments extérieurs définissent les bords extérieurs du multipolygone, et les éléments intérieurs définissent les sous-polygones ou les trous à l'intérieur du multipolygone.",
                 "multipolygon_create": "Pour créer un multipolygone, par exemple un bâtiment avec un trou au milieu, dessinez le bord externe comme une aire et le bord intérieur comme une ligne ou un autre type d'aire. Ensuite, `{shift}`+{leftclick} cliquez-gauche pour sélectionner les deux éléments, {rightclick} cliquez-droit pour ouvrir le menu d'édition et sélectionnez la commande {merge} **Fusionner**.",
                 "multipolygon_merge": "La fusion de plusieurs lignes ou polygones créera une nouvelle relation multipolygone avec comme membres tous les polygones sélectionnés. iD choisira automatiquement les rôles intérieur et extérieur, en fonction des éléments contenus à l'intérieur d'autres éléments.",
                 "turn_restriction_h": "Interdictions de tourner",
-                "turn_restriction": "Une relation *restriction de tourner* est un groupe formé de plusieurs segments de routes à une intersection. Elle comporte une route *depuis*, un nœud ou des routes *via*, et une route *vers*.",
-                "turn_restriction_field": "Pour éditer les restrictions de tourner, sélectionnez un nœud où se croisent au moins deux routes. L'éditeur d'élément affichera alors un champ spécial \"Interdictions de tourner\" contenant un modèle de l'intersection.",
-                "turn_restriction_editing": "Dans le champ \"restrictions de tourner\", cliquez pour sélectionner une route \"depuis\", et voyez s'il est autorisé ou non de tourner sur une ou plusieurs routes \"vers\". Vous pouvez cliquer sur l'icône de direction pour basculer la position entre autorisé et interdit. iD créera automatiquement les relations et mettra à jour les rôles selon votre saisie.",
+                "turn_restriction": "Une relation *interdiction de tourner* est un groupe formé de plusieurs segments de routes à une intersection. Elle comporte une route *depuis*, un nœud ou des routes *via*, et une route *vers*.",
+                "turn_restriction_field": "Pour modifier les interdictions de tourner, sélectionnez un nœud où se croisent au moins deux routes. L'éditeur d'élément affichera alors un champ spécial « Interdictions de tourner » contenant un modèle de l'intersection.",
+                "turn_restriction_editing": "Dans le champ « interdictions de tourner », cliquez pour sélectionner une route « depuis », et voyez s'il est autorisé ou non de tourner sur une ou plusieurs routes « vers ». Vous pouvez cliquer sur l'icône de direction pour basculer la position entre autorisé et interdit. iD créera automatiquement les relations et mettra à jour les rôles selon votre saisie.",
                 "route_h": "Itinéraires",
                 "route": "Une relation *itinéraire* est un groupe d'une ou plusieurs lignes formant ensemble un réseau, comme un itinéraire de bus, un itinéraire ferroviaire, ou un itinéraire routier.",
-                "route_add": "Pour ajouter un élément à une relation itinéraire, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section \"Toutes les relations\" de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle.",
+                "route_add": "Pour ajouter un élément à une relation itinéraire, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section « Toutes les relations » de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle.",
                 "boundary_h": "Frontières",
                 "boundary": "Une relation *frontière* est un groupe d'une ou plusieurs lignes formant ensemble une frontière administrative.",
-                "boundary_add": "Pour ajouter un élément à une relation frontière, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section \"Toutes les relations\" de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle."
+                "boundary_add": "Pour ajouter un élément à une relation frontière, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section « Toutes les relations » de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle."
+            },
+            "notes": {
+                "title": "Notes",
+                "intro": "Les *notes* sont utiles pour alerter les autres utilisateurs qu'un élément a besoin de correction ou d'attention. Les notes marquent un emplacement spécifique sur la carte. Pour voir les notes existantes ou en ajouter une nouvelle, cliquez sur le panneau {data} **Données de carte** pour activer la couche des notes OpenStreetMap.",
+                "add_note_h": "Ajout de notes",
+                "add_note": "Pour ajouter une note, cliquez sur le bouton {note} **Note** dans la barre d'outils au dessus de la carte ou appuyez sur la touche raccourci `4`. Le curseur se ehangera en une croix. Pour placer la nouvelle note sur la carte, placez le curseur là où elle devrait se trouver puis faîtes un {leftclick} clic gauche ou appuyez sur la barre espace.",
+                "move_note": "Seules les nouvelles notes peuvent être repositionnées. Pour déplacer une note, placez votre curseur au-dessus puis enfoncez le {leftclick} bouton gauche de la souris et gardez-le enfoncé pendant que vous déplacez la note à son nouvel emplacement.",
+                "update_note_h": "Fermer, réouvrir et commenter",
+                "update_note": "On peut mettre à jour une note existante en la fermant, en la rouvrant ou en lui ajoutant un commentaire. Fermer la note indique que le problème a été résolu. La réouvrir indique que le problème de départ n'est pas résolu.",
+                "save_note_h": "Enregistrer ses notes",
+                "save_note": "Vous devez sfenregistrer chaque modification de note individuellement en cliquant sur les boutons sous les commentaires. Les modifications que vous apportez aux notes ne font **pas** partie des groupes de modifications que vous envoyez à OpenStreetMap."
             },
             "imagery": {
                 "title": "Fond de carte",
                 "intro": "Le fond de carte qui apparaît sous les données est un élément important pour cartographier. Il peut s'agir de photos aériennes émanant de satellites, d'avions, et de drones, ou de cartes historiques scannées, ou encore de toute autre source de données libre.",
                 "sources_h": "Sources des images",
-                "choosing": "Pour voir quelles sources sont disponibles pour éditer, cliquez sur le bouton **Paramètres du fond de carte** {layers} sur le côté de la carte.",
-                "sources": "Par défaut, une image satellite [Bing Maps](https://www.bing.com/maps/) est affichée en arrière-plan. Selon le lieu où vous éditez, d'autres images peuvent être disponibles. Certaines peuvent être plus récentes ou avec une meilleure résolution, si bien qu'il est utile de vérifier quelle est la meilleure image à utiliser pour cartographier.",
+                "choosing": "Pour voir quelles sources sont disponibles à l'édition, cliquez sur le bouton **Paramètres du fond de carte** {layers} sur le côté de la carte.",
+                "sources": "Par défaut, une image satellite [Bing Maps](https://www.bing.com/maps/) est affichée en arrière-plan. Selon le lieu que vous modifiez, d'autres images peuvent être disponibles. Certaines peuvent être plus récentes ou avec une meilleure résolution, si bien qu'il est utile de vérifier quelle est la meilleure image à utiliser pour cartographier.",
                 "offsets_h": "Ajustement du fond de carte",
-                "offset": "L'imagerie est parfois légèrement décalée par rapport aux données précises de la carte. Si vous constatez que de nombreuses routes ou de nombreux bâtiments sont décalés par rapport au fond de carte, c'est peut-être que l'imagerie n'est pas correctement alignée. Plutôt que de déplacer à tort les éléments de la carte, vous pouvez ajuster le fond de carte en utilisant la section \"Ajuster le décalage du fond de carte\" en bas du panneau Paramètres du fond de carte.",
+                "offset": "L'imagerie est parfois légèrement décalée par rapport aux données précises de la carte. Si vous constatez que de nombreuses routes ou de nombreux bâtiments sont décalés par rapport au fond de carte, c'est peut-être que l'imagerie n'est pas correctement alignée. Plutôt que de déplacer à tort les éléments de la carte, vous pouvez ajuster le fond de carte en utilisant la section « Ajuster le décalage du fond de carte » en bas du panneau Paramètres du fond de carte.",
                 "offset_change": "Cliquez sur les petits triangles pour ajuster finement le décalage de l'imagerie, ou maintenez enfoncé le bouton gauche de la souris et faites glisser l'image jusqu'à ce qu'elle soit correctement alignée."
             },
             "streetlevel": {
                 "title": "Photos de la rue",
-                "intro": "Les photos de la rue sont utiles pour cartographier la signalisation routière, les commerces, et d'autres détails que l'on ne peut pas voir sur l'imagerie aérienne. L'éditeur iD prend en charge les photos de la rue de [Mapillary](https://www.mapillary.com) et [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Les imageries au niveau de la rue sont utiles pour cartographier les panneaux de signalisation, les commerces et d'autres détails qu'on ne peut pas voir sur les images satellites ou aériennes. L'éditeur iD supporte les photos au niveau de la rue de [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) et [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Utiliser des photos de la rue.",
                 "using": "Pour utiliser les photos de la rue, cliquez sur le bouton **Données cartographiques** {data} sur le bord de la carte. Cela permettra d'activer ou de désactiver les surcouches photographiques disponibles.",
                 "photos": "Lorsque cela est activé, la couche photo montre une ligne entre les séquences de photo. Aux niveaux de zoom élevés, un cercle marque l'emplacement de chaque photo et aux zooms encore plus élevés, un cône indique la direction de l'appareil photo lorsque la photo a été prise.",
@@ -905,28 +962,28 @@
             },
             "field": {
                 "restrictions": {
-                    "title": "Aide des restrictions de tourner",
+                    "title": "Aide des interdictions de tourner",
                     "about": {
                         "title": "À propos",
-                        "about": "Ce champ vous permet d'inspecter et de modifier les restrictions de tourner. Il affiche un modèle de l'intersection sélectionnée avec les routes connectées proches.",
-                        "from_via_to": "Une restriction de tourner contient toujours: un **chemin DEPUIS**, un **chemin VERS**, et soit un **nœud VIA**, soit un ou plusieurs **chemins VIA**.",
-                        "maxdist": "Le curseur \"{distField}\" contrôle la distance jusqu'à laquelle chercher des routes connectées supplémentaires.",
-                        "maxvia": "Le curseur \"{viaField}\" ajuste le nombre de chemins via à inclure dans la recherche. (Astuce: plus c'est simple, mieux c'est)"
+                        "about": "Ce champ vous permet d'inspecter et de modifier les interdictions de tourner. Il affiche un modèle de l'intersection sélectionnée avec les routes connectées proches.",
+                        "from_via_to": "Une interdiction de tourner contient toujours : un **chemin DEPUIS**, un **chemin VERS**, et soit un **nœud VIA**, soit un ou plusieurs **chemins VIA**.",
+                        "maxdist": "Le curseur « {distField} » contrôle la distance jusqu'à laquelle chercher des routes connectées supplémentaires.",
+                        "maxvia": "Le curseur « {viaField} » ajuste le nombre de chemins via à inclure dans la recherche. (Astuce : plus c'est simple, mieux c'est)"
                     },
                     "inspecting": {
                         "title": "Inspecter",
-                        "about": "Survolez avec le curseur un segment **DEPUIS** pour voir s'il est soumis à des restrictions de tourner. Toutes les destinations possibles **VERS** seront ombrées et montreront si une restriction existe.",
+                        "about": "Survolez avec le curseur un segment **DEPUIS** pour voir s'il est soumis à des interdictions de tourner. Toutes les destinations possibles **VERS** seront ombrées et montreront si une restriction existe.",
                         "from_shadow": "{fromShadow} **DEPUIS le segment**",
                         "allow_shadow": "{allowShadow} **VERS autorisé**",
                         "restrict_shadow": "{restrictShadow} **VERS interdit**",
                         "only_shadow": "{onlyShadow} **VERS uniquement**",
-                        "restricted": "\"Interdit\" signifie qu'il y a une restriction de direction, par exemple \"Interdit de tourner à gauche\".",
-                        "only": "\"Uniquement\" signifie qu'un véhicule empruntant ce chemin n'a pas d'autre choix de direction, par exemple \"Direction obligatoire\"."
+                        "restricted": "« Interdit » signifie qu'il y a une interdiction de tourner, par exemple « Interdit de tourner à gauche ».",
+                        "only": "« Uniquement » signifie qu'un véhicule empruntant ce chemin n'a pas d'autre choix de direction, par exemple « Direction obligatoire »."
                     },
                     "modifying": {
                         "title": "Modifier",
-                        "about": "Pour modifier les restrictions de tourner, commencez par cliquer sur l'un des segments **DEPUIS** pour le sélectionner. Celui-ci va clignoter, et toutes les directions possibles **VERS** vont apparaître avec un symbole.",
-                        "indicators": "Puis cliquez sur un symbole de direction pour le basculer entre \"autorisé\", \"interdit\", et \"uniquement\".",
+                        "about": "Pour modifier les interdictions de tourner, commencez par cliquer sur l'un des segments **DEPUIS** pour le sélectionner. Celui-ci va clignoter, et toutes les directions possibles **VERS** vont apparaître avec un symbole.",
+                        "indicators": "Puis cliquez sur un symbole de direction pour le basculer entre « autorisé », « interdit », et « uniquement ».",
                         "allow_turn": "{allowTurn} **VERS autorisé**",
                         "restrict_turn": "{restrictTurn} **VERS interdit**",
                         "only_turn": "{onlyTurn} **VERS uniquement**"
@@ -935,9 +992,9 @@
                         "title": "Astuces",
                         "simple": "**Privilégiez les restrictions simples plutôt que les complexes.**",
                         "simple_example": "Par exemple, évitez de créer une restriction par un chemin via si un simple nœud via est suffisant.",
-                        "indirect": "**Certaines restrictions affichent le texte \"(indirect)\" et sont dessinées en transparence.**",
-                        "indirect_example": "Ces restrictions existent à cause d'une autre restriction proche. Par exemple, une restriction \"Obligation d'aller tout droit\" créera indirectement des restrictions \"Interdiction de tourner\" pour tous les autres chemins de l'intersection.",
-                        "indirect_noedit": "Vous ne pouvez pas éditer les restrictions indirectes. À la place, éditez la restriction directe la plus proche."
+                        "indirect": "**Certaines interdictions affichent le texte « (indirect) » et sont dessinées en transparence.**",
+                        "indirect_example": "Ces interdictions existent à cause d'une autre restriction proche. Par exemple, une restriction « Obligation d'aller tout droit » créera indirectement des restrictions « Interdiction de tourner » pour tous les autres chemins de l'intersection.",
+                        "indirect_noedit": "Vous ne pouvez pas modifier les interdictions indirectes. À la place, modifiez la restriction directe la plus proche."
                     }
                 }
             }
@@ -1077,8 +1134,8 @@
                 "words": "Cette visite guidée va vous présenter de nouveaux mots et concepts. Lorsque ce sera le cas, ils seront en *italique*.",
                 "mouse": "Vous pouvez utiliser n'importe quel périphérique de saisie pour modifier la carte, mais cette visite guidée part du principe que vous avez une souris avec des boutons gauche et droit. **Si vous voulez connecter une souris, faites-le maintenant puis cliquez sur OK.** ",
                 "leftclick": "Lorsque cette visite guidée vous demande de cliquer ou de double-cliquer, cela veut dire avec le bouton de gauche. Sur un pavé tactile, cela peut correspondre à un clic simple ou à taper avec un doigt. **Faites {num} clics gauche.**",
-                "rightclick": "Parfois, il faudra effectuer un clic droit. Cela peut aussi être un clic avec la touche Ctrl, ou taper avec  deux doigts sur un pavé tactile. Le clavier peut même avoir une touche \"menu\" qui fonctionne comme un clic droit. **Faites {num} clics droits.**",
-                "chapters": "Parfait, continuons ! Vous pouvez utiliser le bandeau ci-dessous pour recommencer une section en cas de problème ou choisir une autre section. C'est parti ! **Cliquez sur \"{next}\" pour continuer.**"
+                "rightclick": "Parfois, il faudra effectuer un clic droit. Cela peut aussi être un clic avec la touche Ctrl, ou taper avec  deux doigts sur un pavé tactile. Le clavier peut même avoir une touche « menu » qui fonctionne comme un clic droit. **Faites {num} clics droits.**",
+                "chapters": "Parfait, continuons ! Vous pouvez utiliser le bandeau ci-dessous pour recommencer une section en cas de problème ou choisir une autre section. C'est parti ! **Cliquez sur « {next} » pour continuer.**"
             },
             "navigation": {
                 "title": "Navigation",
@@ -1093,42 +1150,42 @@
                 "preset_townhall": "La partie supérieure de l'éditeur d'élément affiche le type d’élément. Ce point est de type {preset}.",
                 "fields_townhall": "La partie intermédiaire  de l'éditeur d'élément contient les attributs de l'élément, comme son nom ou son adresse.",
                 "close_townhall": "**Fermez l'éditeur d'élément avec la touche d'échappement ou en cliquant sur le bouton {button} dans le coin supérieur.**",
-                "search_street": "Vous pouvez chercher des éléments dans la vue courante ou dans le monde entier. **Cherchez \"{name}\"**",
+                "search_street": "Vous pouvez chercher des éléments dans la vue courante ou dans le monde entier. **Cherchez « {name} »**",
                 "choose_street": "**Choisissez la {name} dans la liste pour la sélectionner.**",
                 "selected_street": "Bien ! La *{name}* est maintenant sélectionnée.",
-                "editor_street": "Les champs affichés pour une rue sont différents que ceux pour une mairie / hôtel de ville.{br}Pour la rue sélectionnée, l'éditeur d'élément affiche des champs comme \"{field1}\" et \"{field2}\". **Fermez l'éditeur de fonctionnalité avec la touche d'échappement ou en cliquant sur le bouton {button}**",
-                "play": "Essayez de déplacer la carte et de sélectionner d'autres éléments pour voir les types d'objets qui peuvent être ajoutés à OpenStreetMap. **Pour passer au chapitre suivant, cliquez sur \"{next}\".**"
+                "editor_street": "Les champs affichés pour une rue sont différents que ceux pour une mairie / hôtel de ville.{br}Pour la rue sélectionnée, l'éditeur d'élément affiche des champs comme « {field1} » et « {field2} ». **Fermez l'éditeur de fonctionnalité avec la touche d'échappement ou en cliquant sur le bouton {button}**",
+                "play": "Essayez de déplacer la carte et de sélectionner d'autres éléments pour voir les types d'objets qui peuvent être ajoutés à OpenStreetMap. **Pour passer au chapitre suivant, cliquez sur « {next} ».**"
             },
             "points": {
                 "title": "Points",
                 "add_point": "Les *points* peuvent être utilisés pour représenter des éléments comme des magasins, restaurants et monuments.{br}Ils marquent une position précise et décrivent ce qu'il s'y trouve. **Cliquez sur le bouton {button} Point pour ajouter un nouveau point.**",
                 "place_point": "Pour placer un nouveau point sur la carte, placez le curseur de la souris à l'endroit désiré, puis faites un clic gauche ou appuyez sur la barre d'espace. **Déplacez le curseur sur ce bâtiment, puis faites un clic gauche ou appuyez sur la barre d'espace.**",
-                "search_cafe": "Beaucoup d'éléments peuvent être représentés, chacun par un point. Le point que vous venez d'ajouter est un café. **Cherchez \"{preset}\"**",
-                "choose_cafe": "**Choisissez \"{preset}\" dans la liste.**",
+                "search_cafe": "Beaucoup d'éléments peuvent être représentés, chacun par un point. Le point que vous venez d'ajouter est un café. **Cherchez « {preset} »**",
+                "choose_cafe": "**Choisissez « {preset} » dans la liste.**",
                 "feature_editor": "Le point est maintenant marqué comme un café. En utilisant l'éditeur d'élément, vous pouvez ajouter d'autres informations sur ce café.",
                 "add_name": "Dans OpenStreetMap, tous les champs sont optionnels. En cas de doute ou pour une partie inconnue, un champ peut être laissé vide.{br}Supposons que vous connaissiez ce café et son nom. **Ajoutez un nom pour le café.**",
                 "add_close": "L'éditeur d'élément se rappellera automatiquement de toutes vos modifications. **Après avoir ajouté le nom, appuyez sur la touche d'échappement, Entrée ou cliquez sur le bouton {button} pour fermer l'éditeur d'élément.**",
-                "reselect": "Souvent des points existent déjà mais ils peuvent parfois contenir des erreurs ou être incomplets. Vous pouvez éditer ces points. **Cliquez sur le café que vous venez de créer.**",
+                "reselect": "Souvent des points existent déjà mais ils peuvent parfois contenir des erreurs ou être incomplets. Vous pouvez modifier ces points. **Cliquez sur le café que vous venez de créer.**",
                 "update": "Ajoutons des détails sur ce café. Vous pouvez modifier le nom, préciser le type de cuisine ou son adresse. **Modifiez les informations du café**",
                 "update_close": "**Lorsque vous avez terminé vos modifications, appuyez sur la touche d'échappement ou Entrée ou cliquez sur le bouton {button} pour fermer l'éditeur d'élément.**",
                 "rightclick": "Vous pouvez effectuer un clic droit sur un élément pour voir le *menu d'édition*, qui fournit une liste d'opérations disponibles. **Effectuer un clic droit pour sélectionner le point créé et afficher son menu d'édition.**",
                 "delete": "Il est possible de supprimer des éléments qui n'existent pas réellement.{br}Supprimer un élément d'OpenStreetMap le retirera de la carte pour tout le monde, il faut donc être sûr de la disparition effective de l'objet réel avant de supprimer l'élément correspondant. **Cliquez sur le bouton {button} pour supprimer le point.**",
                 "undo": "Vous pouvez à tout moment annuler les dernières modifications tant que rien n'a été sauvegardé sur OpenStreetMap. **Cliquez sur le bouton {button} pour annuler la suppression du point et le faire revenir.**",
-                "play": "Maintenant que vous savez comment créer et éditer des points, vous pouvez vous entraîner avec quelques points supplémentaires ! **Pour passer au chapitre suivant, cliquez sur \"{next}\".**"
+                "play": "Maintenant que vous savez comment créer et modifier des points, vous pouvez vous entraîner avec quelques points supplémentaires ! **Pour passer au chapitre suivant, cliquez sur « {next} ».**"
             },
             "areas": {
                 "title": "Polygones",
                 "add_playground": "Les *Polygones* sont utilisés pour montrer les limites d'éléments comme les lacs, les bâtiments, et les zones résidentielles. {br}Ils peuvent aussi être utilisés pour cartographier finement des éléments représentés normalement par des points. **Cliquez sur le bouton Polygone {button} pour ajouter un nouveau polygone.**",
                 "start_playground": "Ajoutons une aire de jeu pour enfant sur la carte en dessinant un polygone. Les polygones sont dessinés en plaçant des *nœuds* pour définir les bords de l'élément. **Cliquez ou appuyez sur la barre d'espace pour placer le premier nœud sur l'un des angles de l'aire de jeu.**",
-                "continue_playground": "Continuez à dessiner le polygone en plaçant d'autres nœuds le long de l'aire de jeu. Vous pouvez connecter le polygone au chemin piéton existant. {br} Astuce : Vous pouvez maintenir la touche  {Alt} pour éviter aux nœuds de se connecter à d'autres éléments. ** continuez à dessiner le polygone de l'aire de jeux **",
+                "continue_playground": "Continuez à dessiner le polygone en plaçant d'autres nœuds le long de l'aire de jeu. Vous pouvez connecter le polygone au chemin piéton existant. {br} Astuce : Vous pouvez maintenir la touche  {Alt} pour éviter aux nœuds de se connecter à d'autres éléments. ** continuez à dessiner le polygone de l'aire de jeux **",
                 "finish_playground": "Terminez le polygone avec la touche Entrée ou en cliquant une nouvelle fois sur son premier ou son dernier nœud. **Terminez le polygone d'aire de jeu.**",
-                "search_playground": "**Cherchez \"{preset}\".**",
-                "choose_playground": "**Choisissez \"{preset}\" dans la liste.**",
+                "search_playground": "**Cherchez « {preset} ».**",
+                "choose_playground": "**Choisissez « {preset} » dans la liste.**",
                 "add_field": "L'aire de jeu n'a pas de nom officiel, donc ce champ sera laissé vide.{br}À la place, ajoutons des détails additionnels dans le champ Description. **Ouvrez la liste Ajouter champ.**",
-                "choose_field": "**Choisissez \"{field}\" dans la liste.**",
+                "choose_field": "**Choisissez « {field} » dans la liste.**",
                 "retry_add_field": "Vous n'avez pas sélectionné le champ {field}. Essayez encore.",
                 "describe_playground": "**Ajoutez une description, puis cliquez le bouton {button} pour fermer l'éditeur d'éléments.**",
-                "play": "Bravo ! Essayez de dessiner quelques polygones et surfaces supplémentaires et regardez d'autres types d'éléments que vous pouvez ajouter à OpenStreetMap. **Pour passer au chapitre suivant, cliquez sur \"{next}\".**"
+                "play": "Bravo ! Essayez de dessiner quelques polygones et surfaces supplémentaires et regardez d'autres types d'éléments que vous pouvez ajouter à OpenStreetMap. **Pour passer au chapitre suivant, cliquez sur « {next} ».**"
             },
             "lines": {
                 "title": "Lignes",
@@ -1137,7 +1194,7 @@
                 "intersect": "Cliquez, ou appuyez sur la barre d'espace, pour ajouter de nouveaux points à cette ligne.{br}Les routes font parties d'un réseau. C'est le cas également pour de nombreux autres types de lignes. Il est important que ces lignes soit connectées correctement pour les applications de navigation. **Cliquez sur la ligne {name} pour créer une intersection connectant les 2 lignes.**",
                 "retry_intersect": "La nouvelle route doit croiser la ligne {name}. Essayez à nouveau !",
                 "continue_line": "Continuez de tracer la ligne de la nouvelle route. Vous pouvez également déplacer la carte et zoomer si nécessaire.{br}Quand vous avez fini de tracer, cliquez à nouveau sur le dernier nœud. **Terminez de tracer la route.**",
-                "choose_category_road": "**Choisissez \"{category}\" dans la liste**",
+                "choose_category_road": "**Choisissez « {category} » dans la liste**",
                 "choose_preset_residential": "Il existe de nombreux types de routes, mais celle-ci est une route résidentielle. **Choisissez le type {preset}.**",
                 "retry_preset_residential": "Vous n'avez pas sélectionné le type {preset}. **Cliquez ici pour choisir à nouveau**",
                 "name_road": "**Donnez un nom à cette route, puis appuyez sur la touche d'échappement, Entrée, ou cliquez sur le bouton {button} pour fermer l'éditeur d'objet.**",
@@ -1158,7 +1215,7 @@
                 "multi_rightclick": "Bien ! Les deux lignes à supprimer sont maintenant sélectionnées. **Faites un clic droit sur l'une des lignes pour afficher le menu d'édition.**",
                 "multi_delete": "**Cliquez sur le bouton {button} pour supprimer les lignes en trop.**",
                 "retry_delete": "Vous n'avez pas cliqué sur le bouton Effacer. Réessayez.",
-                "play": "Bravo ! Utilisez ce que vous avez appris dans ce chapitre pour vous entraîner à modifier d'autres lignes. **Pour passer au chapitre suivant, cliquez sur \"{next}\".**"
+                "play": "Bravo ! Utilisez ce que vous avez appris dans ce chapitre pour vous entraîner à modifier d'autres lignes. **Pour passer au chapitre suivant, cliquez sur « {next} ».**"
             },
             "buildings": {
                 "title": "Bâtiments",
@@ -1166,8 +1223,8 @@
                 "start_building": "Ajoutons cette maison à la carte en dessinant ses contours.{br}Les bâtiments doivent être dessinés de la façon la plus précise possible en suivant leur forme. **Cliquez ou appuyez sur la barre d'espace pour placer un nœud de départ sur l'un des coins du bâtiment.**",
                 "continue_building": "Ajoutez d'autres nœuds pour tracer le contour du bâtiment. Rappelez-vous que vous pouvez zoomer pour voir plus de détails. {br}Terminez le bâtiment en appuyant sur Entrée, ou en cliquant sur le premier ou le dernier nœud. **Terminez le tracé du bâtiment.**",
                 "retry_building": "Quelques difficultés pour placer les points aux coins du bâtiment ? Réessayez !",
-                "choose_category_building": "**Choisissez \"{category}\" dans la liste.**",
-                "choose_preset_house": "Les types de bâtiments possibles sont très variés, mais celui-ci est une maison.{br}Lorsque vous avez un doute, choisissez simplement le type générique \"Bâtiment\". **Choisissez le type \"{preset}\"**",
+                "choose_category_building": "**Choisissez « {category} » dans la liste.**",
+                "choose_preset_house": "Les types de bâtiments possibles sont très variés, mais celui-ci est une maison.{br}Lorsque vous avez un doute, choisissez simplement le type générique « Bâtiment ». **Choisissez le type « {preset} »**",
                 "close": "**Appuyez sur la touche d'échappement ou cliquez le bouton {button} pour fermer l'éditeur d'objet.**",
                 "rightclick_building": "**Faites un clic droit pour sélectionner le bâtiment que vous avez créé et afficher le menu d'édition.**",
                 "square_building": "La maison sera encore mieux tracée si les coins sont des angles droits. **Cliquez sur le bouton {button} pour ajuster automatiquement la forme du bâtiment avec des angles droits.**",
@@ -1176,16 +1233,16 @@
                 "add_tank": "Nous allons tracer ce réservoir rond. **Cliquez sur le bouton {button} Polygone pour ajouter un nouveau polygone.**",
                 "start_tank": "Comment tracer un cercle parfait ? Commencez par un polygone simple, avec seulement quelques nœuds bien placés sur le contour. **Cliquez ou appuyez sur la barre d'espace pour ajouter le premier nœud sur le contour du réservoir.**",
                 "continue_tank": "Ajoutez quelques nœuds supplémentaires le long du bord. Le cercle sera créé à l'extérieur des nœuds que vous dessinez.{br}Terminez le polygone en appuyant sur Entrée ou en cliquant à nouveau sur le premier ou le dernier nœud. **Terminez de tracer le réservoir.**",
-                "search_tank": "**Cherchez \"{preset}\"**",
-                "choose_tank": "**Choisissez \"{preset}\" dans la liste.**",
+                "search_tank": "**Cherchez « {preset} »**",
+                "choose_tank": "**Choisissez « {preset} » dans la liste.**",
                 "rightclick_tank": "**Faites un clic droit pour sélectionner le polygone du réservoir que vous avez créé et afficher le menu d'édition.**",
                 "circle_tank": "**Cliquez sur le bouton {button} pour ajuster la forme du réservoir et former automatiquement un cercle.**",
                 "retry_circle": "Vous n'avez pas cliqué sur le bouton Arrondir / rendre circulaire. Réessayez.",
-                "play": "Bravo ! Entraînez-vous à tracer quelques bâtiments supplémentaires, et essayez quelques-unes des autres commandes du menu d'édition. **Pour passer au chapitre suivant, cliquez sur \"{next}\".**"
+                "play": "Bravo ! Entraînez-vous à tracer quelques bâtiments supplémentaires, et essayez quelques-unes des autres commandes du menu d'édition. **Pour passer au chapitre suivant, cliquez sur « {next} ».**"
             },
             "startediting": {
                 "title": "Sortir du tutoriel et contribuer",
-                "help": "Vous êtes maintenant prêt pour contribuer à OpenStreetMap !{br}Vous pouvez recommencer ce tutorial à tout moment ou lire plus de documentation en cliquant sur le bouton Aide {button} ou en appuyant sur la touche '{key}'.",
+                "help": "Vous êtes maintenant prêt pour contribuer à OpenStreetMap !{br}Vous pouvez recommencer ce tutoriel à tout moment ou lire plus de documentation en cliquant sur le bouton Aide {button} ou en appuyant sur la touche « {key} ».",
                 "shortcuts": "Vous pouvez voir une liste des commandes avec leurs raccourcis claviers en appuyant sur la touche '{key}'.",
                 "save": "N'oubliez pas de sauver régulièrement vos modifications !",
                 "start": "Commencer à cartographier !"
@@ -1270,7 +1327,8 @@
                     "add_point": "Mode 'Ajouter un point'",
                     "add_line": "Mode 'Ajouter une ligne'",
                     "add_area": "Mode 'Ajouter un polygone'",
-                    "place_point": "Placer un point",
+                    "add_note": "Mode 'Ajouter une note'",
+                    "place_point": "Placer un point ou une note",
                     "disable_snap": "Désactiver l'attraction des points à proximité",
                     "stop_line": "Terminer de tracer une ligne ou un polygone"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "Reprendre le tracé d'une ligne à partir du point sélectionné",
                     "merge": "Fusionner les éléments sélectionnés",
                     "disconnect": "Déconnecter les éléments au nœud sélectionné",
+                    "detach_node": "Séparer le nœud choisi de ses chemins ou polygones parents",
                     "split": "Couper une ligne en deux au nœud sélectionné",
                     "reverse": "Inverser une ligne",
                     "move": "Déplacer les éléments sélectionnés",
@@ -1572,6 +1631,9 @@
                 "board_type": {
                     "label": "Type"
                 },
+                "booth": {
+                    "label": "Type de cabine"
+                },
                 "boules": {
                     "label": "Type"
                 },
@@ -1619,6 +1681,9 @@
                 "capacity": {
                     "label": "Capacité",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Dépôt"
                 },
                 "castle_type": {
                     "label": "Type"
@@ -1968,12 +2033,12 @@
                 "horse_scale": {
                     "label": "Difficulté à cheval",
                     "options": {
-                        "common": "Facile : pas de problème ou de difficulté. (par défaut)",
-                        "critical": "Limite : passable uniquement pour des cavaliers et des chevaux expérimentés. Obstacles majeurs. Les ponts devraient être examinés avec attention.",
-                        "dangerous": "Dangereux : passable uniquement pour des cavaliers et des chevaux très expérimentés et seulement par beau temps. Descendre du cheval.",
-                        "demanding": "Utiliser avec prudence : voie inégale, passages difficiles occasionnels.",
-                        "difficult": "Difficile : voie étroite et exposée. Peut contenir des obstacles par dessus lesquels passer et des passages étroits.",
-                        "impossible": "Impossible : Vois ou pont impossible à franchir pour les chevaux. Trop étroit, support insuffisant, obstacles comme des échelles. Danger de mort."
+                        "common": "Facile : pas de problème ou de difficulté. (par défaut)",
+                        "critical": "Limite : passable uniquement pour des cavaliers et des chevaux expérimentés. Obstacles majeurs. Les ponts devraient être examinés avec attention.",
+                        "dangerous": "Dangereux : passable uniquement pour des cavaliers et des chevaux très expérimentés et seulement par beau temps. Descendre du cheval.",
+                        "demanding": "Utiliser avec prudence : voie inégale, passages difficiles occasionnels.",
+                        "difficult": "Difficile : voie étroite et exposée. Peut contenir des obstacles par dessus lesquels passer et des passages étroits.",
+                        "impossible": "Impossible : Voie ou pont impossible à franchir pour les chevaux. Trop étroit, support insuffisant, obstacles comme des échelles. Danger de mort."
                     },
                     "placeholder": "Difficile, Dangereux..."
                 },
@@ -2145,13 +2210,13 @@
                 "mtb/scale": {
                     "label": "Difficulté VTT",
                     "options": {
-                        "0": "0 : Gravier/terre battue, grandes courbes, pas d'obstacles",
-                        "1": "1 : Sol parfois meuble, courbes grandes à sérrées, petits obstacles",
-                        "2": "2 : Sol souvent meuble, épingles à cheveux faciles, petits sauts",
-                        "3": "3 : Revêtement glissant, épingles serrées, grosses ruptures de pente ",
-                        "4": "4 : Revêtement avec des rochers, des épingles à cheveux dangereuses",
-                        "5": "5 : Difficulté maximale, champs de blocs, glissements de terrain",
-                        "6": "6 : Non praticable, ou seulement par les meilleurs vététistes"
+                        "0": "0 : Gravier/terre battue, grandes courbes, pas d'obstacles",
+                        "1": "1 : Sol parfois meuble, courbes grandes à sérrées, petits obstacles",
+                        "2": "2 : Sol souvent meuble, épingles à cheveux faciles, petits sauts",
+                        "3": "3 : Revêtement glissant, épingles serrées, grosses ruptures de pente ",
+                        "4": "4 : Revêtement avec des rochers, des épingles à cheveux dangereuses",
+                        "5": "5 : Difficulté maximale, champs de blocs, glissements de terrain",
+                        "6": "6 : Non praticable, ou seulement par les meilleurs vététistes"
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
@@ -2169,12 +2234,12 @@
                 "mtb/scale/uphill": {
                     "label": "Difficulté VTT en montée",
                     "options": {
-                        "0": "0 : Inclinaison < 10 % , sol compact, pas d'obstacles",
-                        "1": "1 : Inclinaison < 15 %, sol compact, quelques petits obstacles",
-                        "2": "2 : Inclinaison < 20 %, revêtement stable, pierres/racines",
-                        "3": "3 : Inclinaison < 25 %, revêtement variable, pierres/branches",
-                        "4": "4 : Inclinaison < 30 %, conditions difficiles, rochers/branches",
-                        "5": "5 : Abrupt, le vélo doit généralement être porté ou poussé"
+                        "0": "0 : Inclinaison < 10 % , sol compact, pas d'obstacles",
+                        "1": "1 : Inclinaison < 15 %, sol compact, quelques petits obstacles",
+                        "2": "2 : Inclinaison < 20 %, revêtement stable, pierres/racines",
+                        "3": "3 : Inclinaison < 25 %, revêtement variable, pierres/branches",
+                        "4": "4 : Inclinaison < 30 %, conditions difficiles, rochers/branches",
+                        "5": "5 : Abrupt, le vélo doit généralement être porté ou poussé"
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
@@ -2233,7 +2298,7 @@
                         "alternating": "En alternance",
                         "no": "Non",
                         "reversible": "Réversible",
-                        "undefined": "Par défaut : Non",
+                        "undefined": "Par défaut : Non",
                         "yes": "Oui"
                     }
                 },
@@ -2243,7 +2308,7 @@
                         "alternating": "En alternance",
                         "no": "Non",
                         "reversible": "Réversible",
-                        "undefined": "Par défaut : Oui",
+                        "undefined": "Par défaut : Oui",
                         "yes": "Oui"
                     }
                 },
@@ -2274,6 +2339,9 @@
                         "surface": "En surface",
                         "underground": "Souterrain"
                     }
+                },
+                "passenger_information_display": {
+                    "label": "Affichage d'informations aux voyageurs"
                 },
                 "payment_multi": {
                     "label": "Types de paiement"
@@ -2439,12 +2507,12 @@
                 "sac_scale": {
                     "label": "Difficulté de la randonnée",
                     "options": {
-                        "alpine_hiking": "T4 : randonnée alpine",
-                        "demanding_alpine_hiking": "T5 : randonnée alpine exigeante",
-                        "demanding_mountain_hiking": "T3 : randonnée de montagne exigeante",
-                        "difficult_alpine_hiking": "T6 : randonnée alpine difficile",
-                        "hiking": "T1 : randonnée",
-                        "mountain_hiking": "T2 : randonnée de montagne"
+                        "alpine_hiking": "T4 : randonnée alpine",
+                        "demanding_alpine_hiking": "T5 : randonnée alpine exigeante",
+                        "demanding_mountain_hiking": "T3 : randonnée de montagne exigeante",
+                        "difficult_alpine_hiking": "T6 : randonnée alpine difficile",
+                        "hiking": "T1 : randonnée",
+                        "mountain_hiking": "T2 : randonnée de montagne"
                     },
                     "placeholder": "Randonnée de montagne, randonnée alpine…"
                 },
@@ -2507,10 +2575,13 @@
                 "site": {
                     "label": "Type de site"
                 },
+                "site_type": {
+                    "label": "Type de Site"
+                },
                 "smoking": {
                     "label": "Fumeur",
                     "options": {
-                        "dedicated": "Réservé aux fumeurs (ex. : club de fumeurs)",
+                        "dedicated": "Réservé aux fumeurs (ex. : club de fumeurs)",
                         "isolated": "Zone non-fumeur et fumeur dans des salles réservées, isolées physiquement",
                         "no": "Interdiction de fumer",
                         "outside": "Autorisé en extérieur",
@@ -2522,14 +2593,14 @@
                 "smoothness": {
                     "label": "Régularité du sol, aptitude à rouler sur la surface",
                     "options": {
-                        "bad": "À roues, robuste : VTT, voiture, pousse-pousse",
-                        "excellent": "À roulettes : rollers, patins, planche à roulettes",
-                        "good": "À roues fines : vélo de course",
+                        "bad": "À roues, robuste : VTT, voiture, pousse-pousse",
+                        "excellent": "À roulettes : rollers, patins, planche à roulettes",
+                        "good": "À roues fines : vélo de course",
                         "horrible": "Véhicule tout-terrain lourd",
                         "impassable": "Infranchissable / pas de véhicules à roues",
-                        "intermediate": "À roues : vélo de ville, fauteuil roulant, voiture avec faible garde au sol",
+                        "intermediate": "À roues : vélo de ville, fauteuil roulant, voiture avec faible garde au sol",
                         "very_bad": "Véhicule à garde au sol élevée, véhicule tout-terrain léger",
-                        "very_horrible": "Véhicule spécifique tout-terrain : tracteur, 4x4"
+                        "very_horrible": "Véhicule spécifique tout-terrain : tracteur, 4x4"
                     },
                     "placeholder": "Roulettes, roues, tout-terrain, …"
                 },
@@ -2614,7 +2685,7 @@
                     "options": {
                         "ALPR": "Lecture automatique de plaque d'immatriculation",
                         "camera": "Caméra de surveillance",
-                        "guard": "Humain : gardien, vigile"
+                        "guard": "Humain : gardien, vigile"
                     }
                 },
                 "surveillance/zone": {
@@ -2700,12 +2771,12 @@
                 "trail_visibility": {
                     "label": "Visibilité du sentier",
                     "options": {
-                        "bad": "Mauvais : pas de balisage, sentier parfois non visible",
-                        "excellent": "Excellent : chemin clairement identifiable ou balisage fréquent",
-                        "good": "Bon : balisage globalement visible",
-                        "horrible": "Horrible : sentier souvent non visible, nécessite de s'orienter",
-                        "intermediate": "Intermédiaire : peu de balisage, sentier identifiable",
-                        "no": "Non : pas de sentier visible, nécessite de bonnes compétences d'orientation"
+                        "bad": "Mauvais : pas de balisage, sentier parfois non visible",
+                        "excellent": "Excellent : chemin clairement identifiable ou balisage fréquent",
+                        "good": "Bon : balisage globalement visible",
+                        "horrible": "Horrible : sentier souvent non visible, nécessite de s'orienter",
+                        "intermediate": "Intermédiaire : peu de balisage, sentier identifiable",
+                        "no": "Non : pas de sentier visible, nécessite de bonnes compétences d'orientation"
                     },
                     "placeholder": "Excellent, bon, mauvais…"
                 },
@@ -3975,7 +4046,8 @@
                     "name": "Accessible aux services d'urgences"
                 },
                 "emergency/fire_alarm": {
-                    "name": "Boîte d'alarme incendie"
+                    "name": "Boîte d'alarme incendie",
+                    "terms": "Alarme, incendie, boîte, feu, sécurité"
                 },
                 "emergency/fire_extinguisher": {
                     "name": "Extincteur d'incendie",
@@ -4437,7 +4509,7 @@
                 },
                 "landuse/farmland": {
                     "name": "Zone agricole",
-                    "terms": "Terre agricole : cultures et élevage"
+                    "terms": "Terre agricole : cultures et élevage"
                 },
                 "landuse/farmyard": {
                     "name": "Cour de ferme",
@@ -4915,7 +4987,7 @@
                 },
                 "man_made/storage_tank": {
                     "name": "Réservoir de stockage",
-                    "terms": "Silo de stockage"
+                    "terms": "Silo de stockage,réservoir,citerne"
                 },
                 "man_made/surveillance": {
                     "name": "Caméra de surveillance",
@@ -6159,7 +6231,7 @@
                 },
                 "tourism/artwork": {
                     "name": "Œuvre d'art",
-                    "terms": "Œuvre d'art,Œuvre artistique,statue,peinture,sculpture,fresque,mosaïque"
+                    "terms": "Œuvre d'art,Œuvre artistique,statue,peinture,sculpture,fresque,mosaïque,graffiti"
                 },
                 "tourism/attraction": {
                     "name": "Attraction touristique",
@@ -6517,6 +6589,7 @@
                 "attribution": {
                     "text": "Termes & commentaires"
                 },
+                "description": "DigitalGlobe-Standard est un ensemble organisé d'images, fournies par Landsat, couvrant 86% de la surface de la Terre, avec une résolution de 30-60cm lorsque disponible. L'âge moyen de ces images est 2,31 ans, avec certaines régions mises à jour 2 fois par an.",
                 "name": "Images DigitalGlobe standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -7339,6 +7412,10 @@
                 "description": "Cartographes et utilisateurs d'OpenStreetMap autour de Portland, ME",
                 "extendedDescription": "Maptime est, plutôt littéralement, l'heure de cartographier. Notre mission est d'ouvrir les portes des possibilités cartographiques à tous ceux qui sont intéressés par la création d'un temps et d'un espace collaboratif d'apprentissage, d'exploration et de création de cartes avec des outils et des technologies de cartographie."
             },
+            "us-ma-mailinglist": {
+                "name": "Liste de diffusion talk-us-massachusetts",
+                "description": "Il s'agit de la liste de diffusion pour la communauté du Massachusetts d'OSM"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Améliorez OpenStreetMap dans la région de Cleveland",
@@ -7366,6 +7443,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Cartographes et utilisateurs d'OpenStreetMap, développeurs et passionnés dans la région métropolitaine de New York"
+            },
+            "OSM-Portland-forum": {
+                "name": "Groupe Google OpenStreetMap PDX",
+                "description": "Forum et liste de diffusion pour les utilisateurs d'OpenStreetMap dans la région de Portland",
+                "extendedDescription": "Ce groupe a pour objectif de faciliter les contributions à OpenStreetMap dans la région de Portland, Oregon, et de soutenir des applications comme Open Trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",

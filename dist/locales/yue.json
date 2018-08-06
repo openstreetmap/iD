@@ -234,7 +234,6 @@
             "localized_translation_name": "名"
         },
         "zoom_in_edit": "放大去修改",
-        "logout": "簽走",
         "loading_auth": "駁上去公家街圖⋯⋯",
         "report_a_bug": "報錯",
         "help_translate": "幫手繙",
@@ -468,7 +467,8 @@
         "splash": {
             "welcome": "歡迎來到艾第公家街圖造圖。",
             "text": "艾第爾件架生，易用之時，亦功用多多，用來投稿修改去，世界至好，任用嘅世界地圖片。現時版本係{version}。想多啲資料，睇下 {website}同埋去{github}報告出錯。",
-            "walkthrough": "開始逐步解釋"
+            "walkthrough": "開始逐步解釋",
+            "start": "卽改"
         },
         "source_switch": {
             "live": "運行之中",
@@ -2632,6 +2632,9 @@
                 "place/locality": {
                     "name": "地方",
                     "terms": "Locality,地方,地點,地點（無人定居）"
+                },
+                "place/square": {
+                    "name": "前地"
                 },
                 "place/town": {
                     "name": "鎮",

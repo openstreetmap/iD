@@ -211,8 +211,6 @@
             "localized_translation_language": "Изберете јазик",
             "localized_translation_name": "Име"
         },
-        "login": "најава",
-        "logout": "одјава",
         "loading_auth": "Се поврзувам со OpenStreetMap...",
         "report_a_bug": "Пријави грешка",
         "help_translate": "Помогнете со преводот",

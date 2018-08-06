@@ -4,7 +4,8 @@
         "name",
         "operator",
         "voltage",
-        "ref"
+        "ref",
+        "layer"
     ],
     "geometry": [
         "line"

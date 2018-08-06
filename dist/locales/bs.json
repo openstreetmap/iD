@@ -186,7 +186,6 @@
             "localized_translation_language": "Izaberite jezik",
             "localized_translation_name": "Naziv"
         },
-        "logout": "Odjavite se",
         "loading_auth": "Povezivanje na OpenStreetMap...",
         "status": {
             "error": "Nemoguće povezati na API.",

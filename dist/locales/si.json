@@ -197,7 +197,6 @@
             "localized_translation_language": "භාෂාවක් තෝරාගන්න",
             "localized_translation_name": "නම"
         },
-        "logout": "ඉවත් වන්න ",
         "loading_auth": "OpenStreetMap වෙත සම්බන්ද වෙමින්...",
         "feature_info": {
             "hidden_warning": "සෙගවුන ලක්ෂණ {count} ක්",

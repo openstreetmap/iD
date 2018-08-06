@@ -5717,7 +5717,7 @@
       "key": "tourism",
       "value": "artwork",
       "description": "Artwork",
-      "object_types": ["node", "area"],
+      "object_types": ["node", "way", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
     },
     {

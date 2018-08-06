@@ -304,8 +304,6 @@
             "localized_translation_name": "Nama"
         },
         "zoom_in_edit": "Zum lebih dekat untuk menyunting",
-        "login": "log masuk",
-        "logout": "log keluar",
         "loading_auth": "Berhubung ke OpenStreetMap...",
         "report_a_bug": "Laporkan suatu pepijat",
         "help_translate": "Bantu penterjemahan",
@@ -626,7 +624,6 @@
         "cannot_zoom": "Had zum jauh telah dicapai dalam mod yang sedang dipakai.",
         "full_screen": "Togol Skrin Penuh",
         "gpx": {
-            "local_layer": "Fail tempatan",
             "drag_drop": "Tarik dan lepaskan suatu fail .gpx, .geojson atau .kml masuk halaman ini, atau klik butang di sebelah kanan untuk mengimbas",
             "zoom": "Zum ke lapisan",
             "browse": "Semak imbas untuk fail"

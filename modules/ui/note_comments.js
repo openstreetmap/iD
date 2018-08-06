@@ -61,7 +61,9 @@ export function uiNoteComments() {
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
-            .text(function(d) { return d.action + ' ' + localeDateString(d.date); });
+            .text(function(d) {
+                return t('note.status.' + d.action, { when: localeDateString(d.date) });
+            });
 
         mainEnter
             .append('div')

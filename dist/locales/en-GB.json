@@ -352,8 +352,6 @@
             "localized_translation_name": "Name"
         },
         "zoom_in_edit": "Zoom in to edit",
-        "login": "login",
-        "logout": "logout",
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
@@ -710,7 +708,6 @@
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
         "gpx": {
-            "local_layer": "Local file",
             "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
             "zoom": "Zoom to layer",
             "browse": "Browse for a file"
@@ -885,7 +882,6 @@
             },
             "streetlevel": {
                 "title": "Street Level Photos",
-                "intro": "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Mapillary](https://www.mapillary.com) and [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Using Street Level Photos",
                 "using": "To use street level photos for mapping, click the {data} **Map data** panel on the side of the map to enable or disable the available photo layers.",
                 "photos": "When enabled, the photo layer displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken.",
@@ -1267,7 +1263,6 @@
                     "add_point": "'Add point' mode",
                     "add_line": "'Add line' mode",
                     "add_area": "'Add area' mode",
-                    "place_point": "Place a point",
                     "disable_snap": "Hold to disable point snapping",
                     "stop_line": "Finish drawing a line or area"
                 },

@@ -108,8 +108,6 @@
             "localized_translation_language": "மொழியை தேர்ந்தெடு",
             "localized_translation_name": "பெயர்"
         },
-        "login": "உள் நுழை",
-        "logout": "விடுபதிகை",
         "help_translate": "மொழிப்பெயர்க்க  உதவவும்.",
         "commit": {
             "cancel": "ரத்து",

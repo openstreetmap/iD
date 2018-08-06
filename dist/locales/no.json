@@ -326,8 +326,6 @@
             "localized_translation_name": "Navn"
         },
         "zoom_in_edit": "Zoom inn for å redigere",
-        "login": "logg inn",
-        "logout": "logg ut",
         "loading_auth": "Kobler til OpenStreetMap...",
         "report_a_bug": "Rapporter feil",
         "help_translate": "Hjelp til med oversettelse",
@@ -643,7 +641,6 @@
         "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
         "full_screen": "Skru av/på fullskjerm.",
         "gpx": {
-            "local_layer": "Lokal fil",
             "drag_drop": "Dra og slipp en .gpx, .geojson eller .kml-fil på siden, eller trykk knappen til høyre for å bla etter fil",
             "zoom": "Zoom til lag",
             "browse": "Bla etter en fil"

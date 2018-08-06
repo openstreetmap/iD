@@ -6166,7 +6166,7 @@
       "id": "Bonvillars-2013",
       "name": "Bonvillars Orthophoto 2013",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/bonvillars2013/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/bonvillars2013/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -6180,7 +6180,7 @@
           [6.66713, 46.83358]
         ]
       ],
-      "terms_url": "http://osmdata.asitvd.ch/",
+      "terms_url": "https://osmdata.asitvd.ch/",
       "terms_text": "Bonvillars - Orthophoto technique 2013"
     },
     {
@@ -9342,7 +9342,7 @@
       "id": "Cartoriviera-2012",
       "name": "Cartoriviera - Orthophoto 2012",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/cartoriviera2012/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/cartoriviera2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -10919,7 +10919,7 @@
       "id": "Czech_pLPIS",
       "name": "Czech pLPIS",
       "type": "wms",
-      "template": "http://eagri.cz/public/app/wms/plpis.fcgi?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=LPIS_FB4,LPIS_FB4_KOD&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&TRANSPARENT=true",
+      "template": "https://eagri.cz/public/app/wms/plpis.fcgi?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=LPIS_FB4,LPIS_FB4_KOD&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&TRANSPARENT=true",
       "projection": "EPSG:4326",
       "polygon": [
         [
@@ -18345,7 +18345,7 @@
       "id": "Fiez-2013",
       "name": "Fiez Orthophoto 2013",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/fiez2013/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/fiez2013/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -18360,7 +18360,7 @@
           [6.62313, 46.82339]
         ]
       ],
-      "terms_url": "http://osmdata.asitvd.ch/",
+      "terms_url": "https://osmdata.asitvd.ch/",
       "terms_text": "Fiez - Orthophoto technique 2013"
     },
     {
@@ -38286,7 +38286,7 @@
       "id": "Lausanne-2012",
       "name": "Lausanne - Orthophoto technique 2012",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/lausanne2012/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/lausanne2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -41690,7 +41690,7 @@
           [31.90425, 70.43681]
         ]
       ],
-      "terms_url": "http://kart.naturbase.no/",
+      "terms_url": "https://kart.naturbase.no",
       "terms_text": "© Miljødirektoratet",
       "description": "Norwegian national parks, nature reserves and other protected areas and objects from Naturbase, including Svalbard/Spitsbergen",
       "icon": "http://www.miljodirektoratet.no/Framework/favicon-32.png",
@@ -42137,6 +42137,7 @@
       "name": "MTBmap.no",
       "type": "tms",
       "template": "https://mtbmap.no/tiles/osm/mtbmap/{zoom}/{x}/{y}.jpg",
+      "tileSize": 512,
       "zoomExtent": [3, 14],
       "polygon": [
         [
@@ -42243,7 +42244,7 @@
       ],
       "terms_url": "http://www.geodatenservice-muenchen.de/",
       "terms_text": "Datenquelle: dl-de/by-2-0: Landeshauptstadt München – Kommunalreferat – GeodatenService – www.geodatenservice-muenchen.de",
-      "icon": "http://www.muenchen.de/media/css/images/favicon_114x114.png"
+      "icon": "https://www.muenchen.de/media/css/images/favicon_114x114.png"
     },
     {
       "id": "openlabs-geoportal-public-transport",
@@ -46366,7 +46367,7 @@
       "id": "OS-OpenData_Locator",
       "name": "OS OpenData Locator",
       "type": "tms",
-      "template": "http://tiles.itoworld.com/os_locator/{zoom}/{x}/{y}.png",
+      "template": "https://tiles.itoworld.com/os_locator/{zoom}/{x}/{y}.png",
       "zoomExtent": [0, 22],
       "polygon": [
         [
@@ -53673,7 +53674,7 @@
       "id": "SIGIP-2012",
       "name": "SIGIP - Orthophoto 2012",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/sigip2012/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/sigip2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -61700,7 +61701,7 @@
       "id": "trafikverket-baninfo",
       "name": "Trafikverket Railway Network",
       "type": "wms",
-      "template": "http://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Spar_Huvud_och_sidospar&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "https://geo-baninfo.trafikverket.se/mapservice/wms.axd/BanInfo?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Spar_Huvud_och_sidospar&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "zoomExtent": [7, 20],
       "polygon": [
@@ -64978,7 +64979,7 @@
       "id": "Ville_de_Nyon-HD-2010",
       "name": "Ville de Nyon - Orthophoto 2010 HD 5cm/pi",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/nyon2010/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/nyon2010/{zoom}/{x}/{y}.png",
       "endDate": "2010-01-01T00:00:00.000Z",
       "startDate": "2010-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -65294,7 +65295,7 @@
           [9.96805, 47.54631]
         ]
       ],
-      "terms_url": "http://www.vorarlberg.at/vorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
+      "terms_url": "https://www.vorarlberg.atvorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
       "terms_text": "Datenquelle: Land Vorarlberg – data.vorarlberg.gv.at",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/at/VoGISFlchenwidmungsplan.png"
     },
@@ -65557,7 +65558,7 @@
           [9.96805, 47.54631]
         ]
       ],
-      "terms_url": "http://www.vorarlberg.at/vorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
+      "terms_url": "https://www.vorarlberg.atvorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
       "terms_text": "Datenquelle: Land Vorarlberg – data.vorarlberg.gv.at",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/at/VoGISFlchenwidmungsplan.png"
     },
@@ -65603,7 +65604,7 @@
           [9.54367, 47.48479]
         ]
       ],
-      "terms_url": "http://www.vorarlberg.at/vorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
+      "terms_url": "https://www.vorarlberg.atvorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
       "terms_text": "Datenquelle: Land Vorarlberg – data.vorarlberg.gv.at",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/at/VoGISFlchenwidmungsplan.png"
     },
@@ -65649,7 +65650,7 @@
           [9.54367, 47.48479]
         ]
       ],
-      "terms_url": "http://www.vorarlberg.at/vorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
+      "terms_url": "https://www.vorarlberg.atvorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
       "terms_text": "Datenquelle: Land Vorarlberg – data.vorarlberg.gv.at",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/at/VoGISFlchenwidmungsplan.png"
     },
@@ -65729,7 +65730,7 @@
           [10.17039, 46.82979]
         ]
       ],
-      "terms_url": "http://www.vorarlberg.at/vorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
+      "terms_url": "https://www.vorarlberg.atvorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm",
       "terms_text": "Datenquelle: Land Vorarlberg – data.vorarlberg.gv.at",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/at/VoGISFlchenwidmungsplan.png"
     },

@@ -307,8 +307,6 @@
             "localized_translation_name": "ಹೆಸರು"
         },
         "zoom_in_edit": "ಪರಿಷ್ಕರಿಸಲು zoom ಮಾಡಿ",
-        "login": "ಲಾಗಿನ್",
-        "logout": "ಹೊರನಡೆ",
         "loading_auth": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್ ಗೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ.....",
         "report_a_bug": "ದೋಷವನ್ನು ವಿವರಿಸಿ. ",
         "help_translate": "ಅನುವಾದಕ್ಕೆ ನೀವು ಸಹಾಯಮಾಡಿ. ",
@@ -566,9 +564,6 @@
             "deprecated_tags": "‍ಉಪಯೋಗಿಸದ ಗುರುತುಪಟ್ಟಿಗಳು: {tags}"
         },
         "full_screen": "‍ಪೂರ್ಣ ಪರದೆಗೆ ಹಿಂದಿರುಗು",
-        "gpx": {
-            "local_layer": "ಸ್ಥಳೀಯ ಕಡತ"
-        },
         "mapillary_images": {
             "tooltip": "ರಸ್ತೆ ಮಟ್ಟದ ಚಿತ್ರಗಳು ಮ್ಯಾಪಿಲರೀ ಇಂದ ",
             "title": "ಚಿತ್ರಗಳ ಹೊ‍ದಿಕೆ (Mapillary)"

@@ -1,8 +1,10 @@
 {
     "icon": "maki-shelter",
     "fields": [
-        "bin",
-        "bench"
+        "name",
+        "building_area",
+        "bench",
+        "bin"
     ],
     "geometry": [
         "point",
@@ -11,7 +13,7 @@
     ],
     "tags": {
         "amenity": "shelter",
-    "shelter_type": "pavilion"
+        "shelter_type": "pavilion"
     },
     "name": "Pavilion"
 }

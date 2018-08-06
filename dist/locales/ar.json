@@ -321,8 +321,6 @@
             "localized_translation_name": "الاسم"
         },
         "zoom_in_edit": "كبّر الخريطة للتعديل",
-        "login": "تسجيل دخول",
-        "logout": "تسجيل خروج",
         "loading_auth": "جار الإتصال بـ OpenStreetMap ...",
         "report_a_bug": "أبلغ عن خطأ أو مشكلة",
         "help_translate": "ساعد في الترجمة",
@@ -667,7 +665,6 @@
         "cannot_zoom": "لايمكن التصغير أكثر من ذلك في الوضع الحالي.",
         "full_screen": "التبديل إلى وضع ملء الشاشة",
         "gpx": {
-            "local_layer": "ملف محلي",
             "drag_drop": "اسحب وأفلت ملفات gpx. أو geojson. أو kml. في الصفحة، أو انقر على الزر في اليمين للتصفح واختيار ملف",
             "zoom": "تكبير إلى الطبقة",
             "browse": "تصفح لاختيار ملف"
@@ -1098,7 +1095,6 @@
                     "add_point": "نمط \"إضافة نقطة\"",
                     "add_line": "نمط \"إضافة خط\"",
                     "add_area": "نمط \"إضافة مساحة\"",
-                    "place_point": "إضافة نقطة",
                     "disable_snap": "اضغط مع الاستمرار لتعطيل ميزة الانجذاب للنقاط",
                     "stop_line": "إنهاء رسم خط أو مساحة"
                 },
@@ -5169,6 +5165,11 @@
                 "attribution": {
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
                 }
+            }
+        },
+        "community": {
+            "cape-coast-youthmappers": {
+                "description": "تابعنا على تويتر: {url}"
             }
         }
     }

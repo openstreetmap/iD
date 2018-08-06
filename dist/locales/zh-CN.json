@@ -21,6 +21,11 @@
                 "description": "添加餐馆、纪念碑、邮筒或其他点到地图上。",
                 "tail": "在地图上单击，添加一个点。"
             },
+            "add_note": {
+                "title": "笔记",
+                "description": "发现有问题的地方？告知其他绘图者。",
+                "tail": "在地图上点击，添加一条笔记。"
+            },
             "browse": {
                 "title": "浏览",
                 "description": "移动和缩放地图。"
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "添加点。",
                     "vertex": "添加节点到路径。",
-                    "relation": "添加关系。"
+                    "relation": "添加关系。",
+                    "note": "添加笔记。"
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "添加转向限制",
                     "delete": "删除转向限制"
                 }
+            },
+            "detach_node": {
+                "title": "隔离",
+                "key": "E",
+                "description": "将该节点从路径/区域中隔离。",
+                "annotation": "从父路径/区域中隔离了一个节点。",
+                "restriction": "该节点无法被隔离，因为这样会破坏“{relation}”关系。",
+                "connected_to_hidden": "该节点无法被隔离，因为其与一隐藏要素相连。"
             }
         },
         "restriction": {
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "来自 OpenStreetMap 的地图数据",
                     "title": "OpenStreetMap 数据"
+                },
+                "notes": {
+                    "tooltip": "来自 OpenStreetMap 的笔记",
+                    "title": "OpenStreetMap 笔记"
                 }
             },
             "fill_area": "填充区域",
@@ -710,8 +728,14 @@
         "cannot_zoom": "在此模式下不能再缩小",
         "full_screen": "切换全屏",
         "gpx": {
-            "local_layer": "本地文件",
+            "local_layer": "上传 GPX 文件",
             "drag_drop": "将.gpx、.geojson或.kml文件拖放到页面上，或单击右侧的按钮浏览",
+            "zoom": "缩放到图层",
+            "browse": "浏览文件"
+        },
+        "mvt": {
+            "local_layer": "上传 MVT 文件",
+            "drag_drop": "将 .mvt 或 .pbf 文件拖放到页面上，或单击右侧的按钮浏览",
             "zoom": "缩放到图层",
             "browse": "浏览文件"
         },
@@ -719,6 +743,7 @@
             "tooltip": "来自微软公司的街景照片",
             "title": "照片叠加层 (必应 Streetside)",
             "report": "报告该图像的隐私问题",
+            "view_on_bing": "在必应地图上查看",
             "hires": "高分辨率"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "在 OpenStreetCam 上查看该图像"
+        },
+        "note": {
+            "note": "笔记",
+            "title": "编辑笔记",
+            "anonymous": "匿名用户",
+            "closed": "(已关闭)",
+            "commentTitle": "评论",
+            "newComment": "发表新评论",
+            "inputPlaceholder": "输入评论并分享给其他用户。",
+            "close": "解决笔记",
+            "open": "重启笔记",
+            "comment": "评论",
+            "close_comment": "解决并评论",
+            "open_comment": "重启并评论",
+            "report": "举报",
+            "new": "新笔记",
+            "newDescription": "描述该处的问题或错误。",
+            "save": "保存笔记",
+            "login": "你必须登录才能修改或评论该笔记。",
+            "upload_explanation": "你的评论将会对所有 OpenStreetMap 用户公开可见。",
+            "upload_explanation_with_user": "{user}，你的评论将会对所有 OpenStreetMap 用户公开可见。"
         },
         "help": {
             "title": "帮助",
@@ -796,6 +842,9 @@
             },
             "relations": {
                 "title": "关系"
+            },
+            "notes": {
+                "title": "笔记"
             },
             "imagery": {
                 "title": "背景影像",
@@ -1153,7 +1202,8 @@
                     "add_point": "'增加 点' 模式",
                     "add_line": "'增加 线' 模式",
                     "add_area": "'增加区域' 模式",
-                    "place_point": "放置一个点",
+                    "add_note": "'增加笔记' 模式",
+                    "place_point": "放置一个节点或一条笔记",
                     "disable_snap": "按住以禁用节点吸附",
                     "stop_line": "完成绘制线段或区域"
                 },
@@ -1162,6 +1212,7 @@
                     "continue_line": "在选中节点上继续绘制线",
                     "merge": "合并选中的要素",
                     "disconnect": "在选中节点上分离要素",
+                    "detach_node": "将选中的节点从其父路径/区域中隔离",
                     "split": "在选中节点上分割线",
                     "reverse": "反转线的方向",
                     "move": "移动选中的要素",

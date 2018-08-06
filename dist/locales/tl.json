@@ -290,8 +290,6 @@
             "localized_translation_language": "Pumili ng wika",
             "localized_translation_name": "Pangalan"
         },
-        "login": "mag-login",
-        "logout": "Mag-logout",
         "loading_auth": "Kumokonekta sa OpenStreetMap ...",
         "report_a_bug": "Magulat ng bug.",
         "help_translate": "Tumulong sa pagasasalin.",

@@ -348,8 +348,6 @@
             "localized_translation_name": "Nimi"
         },
         "zoom_in_edit": "Aloita muokkaaminen lähentämällä karttaa",
-        "login": "kirjaudu",
-        "logout": "kirjaudu ulos",
         "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
         "report_a_bug": "Ilmoita ongelmasta",
         "help_translate": "Auta kääntämisessä",
@@ -702,7 +700,6 @@
         "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
         "full_screen": "Koko näytön tila",
         "gpx": {
-            "local_layer": "Paikallinen tiedosto",
             "drag_drop": "Vedä ja pudota gpx-, geojson- tai kml-tiedosto tälle sivulle tai selaa tiedostoja napsauttamalla painiketta oikealla.",
             "zoom": "Sovita tasoon",
             "browse": "Selaa tiedostoja"
@@ -1066,7 +1063,6 @@
                     "add_point": "Uusi paikkapiste",
                     "add_line": "Uusi viiva",
                     "add_area": "Uusi alue",
-                    "place_point": "Sijoita piste",
                     "stop_line": "Viivan tai alueen viimeinen piste"
                 },
                 "operations": {
@@ -1349,6 +1345,9 @@
                 "board_type": {
                     "label": "Tyyppi"
                 },
+                "booth": {
+                    "label": "Koppi"
+                },
                 "boules": {
                     "label": "Tyyppi"
                 },
@@ -1357,6 +1356,9 @@
                 },
                 "brand": {
                     "label": "Brändi"
+                },
+                "brewery": {
+                    "label": "Hanaoluita"
                 },
                 "bridge": {
                     "label": "Tyyppi",
@@ -1737,6 +1739,14 @@
                         "common": "Helppo: Ei ongelmia tai haasteita (oletus)",
                         "critical": "Rajallinen: Saavutettavissa vain kokeneille ratsastajille ja hevosille. Merkittäviä esteitä. Sillat tulee tarkastaa huolella.",
                         "dangerous": "Vaarallinen: Saavutettavissa vain erittäin kokeneille ratsastajille ja hevosille hyvällä säällä. Jalkaisin."
+                    },
+                    "placeholder": "Vaikea, vaarallinen..."
+                },
+                "horse_stables": {
+                    "label": "Hevostalli",
+                    "options": {
+                        "stables": "Kyllä",
+                        "undefined": "Ei"
                     }
                 },
                 "iata": {
@@ -1757,6 +1767,9 @@
                 },
                 "indoor": {
                     "label": "Sisätila"
+                },
+                "industrial": {
+                    "label": "Tyyppi"
                 },
                 "information": {
                     "label": "Tyyppi"
@@ -1786,6 +1799,9 @@
                 "kerb": {
                     "label": "Reunakiveyksen muoto"
                 },
+                "label": {
+                    "label": "Nimike"
+                },
                 "lamp_type": {
                     "label": "Tyyppi"
                 },
@@ -1797,7 +1813,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Kerros"
+                    "label": "Kerros",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Lehtien pudotuskierto",
@@ -1875,7 +1892,8 @@
                     "placeholder": "40, 50, 60..."
                 },
                 "maxspeed/advisory": {
-                    "label": "Suositusnopeus"
+                    "label": "Suositusnopeus",
+                    "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
                     "label": "Sallittu enimmäisaika"
@@ -1974,6 +1992,7 @@
                 "oneway": {
                     "label": "Yksisuuntaisuus",
                     "options": {
+                        "alternating": "Vaihteleva",
                         "no": "Ei",
                         "reversible": "Epäsäännöllisesti vaihtuva",
                         "undefined": "Oletettavasti ei",
@@ -2020,6 +2039,9 @@
                 },
                 "payment_multi": {
                     "label": "Maksutavat"
+                },
+                "phases": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "phone": {
                     "label": "Puhelin",
@@ -2099,6 +2121,9 @@
                 },
                 "railway": {
                     "label": "Tyyppi"
+                },
+                "railway/position": {
+                    "placeholder": "Etäisyys yhden desimaalin tarkkuudella (123.4)"
                 },
                 "railway/signal/direction": {
                     "label": "Vaikuttaa kulkusuunnassa",
@@ -2224,6 +2249,12 @@
                 },
                 "shop": {
                     "label": "Tyyppi"
+                },
+                "siren/type": {
+                    "label": "Tyyppi",
+                    "options": {
+                        "pneumatic": "Pneumaattinen"
+                    }
                 },
                 "site": {
                     "label": "Tyyppi"
@@ -2432,6 +2463,7 @@
                 "transformer": {
                     "label": "Tyyppi",
                     "options": {
+                        "auxiliary": "Avustava",
                         "converter": "Muuntaja",
                         "distribution": "Jakauma",
                         "generator": "Generaattori"
@@ -4491,6 +4523,9 @@
                 "office/private_investigator": {
                     "name": "Yksityisetsivä"
                 },
+                "office/quango": {
+                    "name": "Kansalaisjärjestön toimisto"
+                },
                 "office/research": {
                     "name": "Tutkimustoimisto"
                 },
@@ -5387,6 +5422,15 @@
                 "type/restriction/no_u_turn": {
                     "name": "Ei saa tehdä U-käännöstä"
                 },
+                "type/restriction/only_left_turn": {
+                    "name": "Kääntyminen vain vasemmalle"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Kääntyminen vain oikealle"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Pakollinen ajosuunta suoraan"
+                },
                 "type/route": {
                     "name": "Reitti",
                     "terms": "matkareitti, rengasreitti, lenkki, kulkuohjeet, ohjaus, reititys, navigointi, kurssi, traili"
@@ -5609,6 +5653,9 @@
                 "description": "Keltainen = Tekijänoikeudeton kartta-aineisto Yhdysvaltain väestönlaskentaviranomaiselta. Punainen = Aineisto ei löydy OpenStreetMapista",
                 "name": "TIGER Roads 2017"
             },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Valtatie: Vihreä kehys = luokittelematon. Ruskea kehys = track. Pinta: gravel = vaaleanruskea täyttö, asfaltti = musta, pinnoitettu = harmaa, ground =white, concrete = blue, grass = green. Seasonal = white bars"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, OpenStreetMapin tekijät, CC by-SA 3.0"
@@ -5643,6 +5690,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "Itävallan taustakartta, Itävallan hallinnon tietoihin pohjautuva.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -5688,6 +5736,11 @@
                 },
                 "name": "OpenStreetMap (saksalainen tyyli)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                }
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, aineisto ©OpenStreetMapin tekijät"
@@ -5710,9 +5763,35 @@
                     "text": "Kartat © Thunderforest, Aineisto © OpenStreetMapin tekijät"
                 },
                 "name": "Thunderforest-maisema"
+            },
+            "trafikverket-baninfo": {
+                "description": "Ruotsin rautatieverkosto, sivuraiteet mukaanlukien."
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Ruotsinkieliset NVDB:n tiennimet"
             }
         },
         "community": {
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Paranna Bangladeshin OpenStreetMapia"
+            },
+            "OSM-India-facebook": {
+                "description": "Paranna Intian OpenStreetMapia"
+            },
             "it-twitter": {
                 "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
             },

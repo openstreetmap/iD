@@ -21,6 +21,10 @@
                 "description": "Přidat do mapy restaurace, poštovní schránky, zastávky či jiné body.",
                 "tail": "Klikněte na mapu a přidejte tak bod."
             },
+            "add_note": {
+                "title": "Poznámka",
+                "tail": "Klikněte do mapy pro přidání poznámky."
+            },
             "browse": {
                 "title": "Procházet",
                 "description": "Posunutí a zvětšení mapy."
@@ -306,6 +310,11 @@
             },
             "help": {
                 "indirect": "(nepřímé)",
+                "turn": {
+                    "no_left_turn": "Zákaz odbočení vlevo {indirect}",
+                    "no_right_turn": "Zákaz odbočení vpravo {indirect}",
+                    "no_u_turn": "Zákaz otáčení {indirect}"
+                },
                 "from": "Z",
                 "via": "PŘES",
                 "to": "DO",
@@ -331,8 +340,6 @@
             "localized_translation_name": "Název"
         },
         "zoom_in_edit": "Pro editaci přibližte",
-        "login": "přihlášení",
-        "logout": "odhlásit",
         "loading_auth": "Připojování na OpenStreetMap…",
         "report_a_bug": "Nahlásit chybu",
         "help_translate": "Pomoct s překladem",
@@ -636,6 +643,8 @@
             "view_on_osm": "Zobrazit změny na OSM",
             "changeset_id": "Vaše sada změn #: {changeset_id}",
             "like_osm": "Líbí se Vám OpenStreetMap? Spojte se s ostatními:",
+            "more": "Více",
+            "events": "Události",
             "languages": "Jazyky: {languages}",
             "tell_us": "Řekněte nám o tom!"
         },
@@ -686,10 +695,17 @@
         "cannot_zoom": "Aktuální nastavení nedovoluje větší zvětšení.",
         "full_screen": "Na celou obrazovku",
         "gpx": {
-            "local_layer": "Místní soubor",
+            "local_layer": "Přidat GPX",
             "drag_drop": "Přetáhni a pusť .gpx, .geojson nebo .kml soubor na stránku, nebo klikni tlačítko napravo k prohlížení",
             "zoom": "Přibliž na vrstvu",
             "browse": "Hledej soubor"
+        },
+        "mvt": {
+            "local_layer": "Přidat MVT",
+            "zoom": "Přiblížit na vrstvu"
+        },
+        "streetside": {
+            "hires": "Vysoké rozlišení"
         },
         "mapillary_images": {
             "tooltip": "Fotografie z úrovně ulice z Mapillary",
@@ -708,6 +724,19 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Zobrazit tento obrázek na OpenStreetCam"
+        },
+        "note": {
+            "note": "Poznámka",
+            "title": "Upravit poznámku",
+            "anonymous": "anonymní",
+            "closed": "(uzavřeno)",
+            "commentTitle": "Komentáře",
+            "newComment": "Nový komentář",
+            "close": "Zavřít poznámku",
+            "open": "Znovuotevřít poznámku",
+            "comment": "Komentář",
+            "new": "Nová poznámka",
+            "save": "Uložit poznámku"
         },
         "help": {
             "title": "Nápověda",
@@ -732,6 +761,7 @@
                 "title": "Úpravy & ukládání",
                 "select_h": "Výběr",
                 "multiselect_h": "Vícenásobný výběr",
+                "undo_redo_h": "Zpět - Vpřed",
                 "save_h": "Uložit",
                 "save": "Stiskněte{save} **Uložit** pro ukončení svých úprav a jejich nahrání na OpenStreetMap. Pamatujte na časté ukládání své práce!",
                 "save_validation": "Na obrazovce ukládání budete mít šanci prohlédnout si své úpravy. iD také provede některé základní kontroly ohledně chybějících informací a případně Vám může pomoci návrhy a varováními, pokud se něco nebude zdát v pořádku.",
@@ -765,6 +795,30 @@
                 "square_area_h": "Pravoúhlé rohy",
                 "modify_area_h": "Úprava ploch",
                 "delete_area_h": "Odstraňování ploch"
+            },
+            "relations": {
+                "title": "Relace",
+                "edit_relation_h": "Úpravy relací",
+                "multipolygon_h": "Multipolygony",
+                "boundary_h": "Hranice"
+            },
+            "streetlevel": {
+                "title": "Pouliční fotky",
+                "using_h": "Používání pouličních fotek"
+            },
+            "gps": {
+                "title": "GPS stopy",
+                "using_h": "Používání GPS stop"
+            },
+            "field": {
+                "restrictions": {
+                    "about": {
+                        "title": "O"
+                    },
+                    "tips": {
+                        "title": "Tipy"
+                    }
+                }
             }
         },
         "intro": {
@@ -1072,6 +1126,12 @@
                     "title": "Vybrání prvků",
                     "select_one": "Zvolit jednu vlastnost",
                     "select_multi": "Zvolit více vlastností"
+                },
+                "with_selected": {
+                    "edit_menu": "Přepnout menu úprav"
+                },
+                "vertex_selected": {
+                    "title": "S vybraným uzlem"
                 }
             },
             "editing": {
@@ -1081,25 +1141,32 @@
                     "add_point": "Režim 'Přidat bod'",
                     "add_line": "Režim 'Přidat čáru'",
                     "add_area": "Režim 'Přidat plochu'",
-                    "place_point": "Umístit bod",
                     "disable_snap": "Přidržte pro zakázání přichytávání bodů"
                 },
                 "operations": {
                     "title": "Operace",
                     "reverse": "Vrátit čáru",
-                    "circularize": "Zakulacení uzavřených čar, nebo ploch"
+                    "circularize": "Zakulacení uzavřených čar, nebo ploch",
+                    "delete": "Smazat zvolené vlastnosti"
                 },
                 "commands": {
                     "title": "Příkazy",
                     "copy": "Kopírovat vybrané vlastnosti",
                     "paste": "Vložit vybrané vlastnosti",
+                    "undo": "Vrátit poslední akci",
+                    "redo": "Zopakovat poslední akci",
                     "save": "Uložit změny"
                 }
             },
             "tools": {
                 "title": "Nástroje",
                 "info": {
-                    "title": "Informace"
+                    "title": "Informace",
+                    "all": "Přepnout všechny informační panely",
+                    "background": "Přepnout panel pozadí",
+                    "history": "Přepnout panel historie",
+                    "location": "Přepnout panel umístění",
+                    "measurement": "Přepnout panel měření"
                 }
             }
         },
@@ -1516,6 +1583,9 @@
                         "cycleway:right": "Po pravé straně"
                     }
                 },
+                "dance/style": {
+                    "label": "Taneční styly"
+                },
                 "date": {
                     "label": "Datum"
                 },
@@ -1583,6 +1653,9 @@
                 },
                 "display": {
                     "label": "Zobrazení"
+                },
+                "distance": {
+                    "label": "Celková vzdálenost"
                 },
                 "dock": {
                     "label": "Typ"
@@ -1735,6 +1808,25 @@
                     "label": "Počet košů",
                     "placeholder": "1, 2, 4..."
                 },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Ano",
+                        "undefined": "Ne"
+                    }
+                },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Ano",
+                        "undefined": "Ne"
+                    }
+                },
+                "horse_stables": {
+                    "label": "Jezdecká stáj",
+                    "options": {
+                        "stables": "Ano",
+                        "undefined": "Ne"
+                    }
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1753,6 +1845,9 @@
                 },
                 "indoor": {
                     "label": "Uvnitř"
+                },
+                "industrial": {
+                    "label": "Druh"
                 },
                 "information": {
                     "label": "Typ"
@@ -1873,6 +1968,9 @@
                 "maxspeed": {
                     "label": "Povolená rychlost",
                     "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60…"
                 },
                 "maxstay": {
                     "label": "Povoleno zůstat max."
@@ -2113,6 +2211,9 @@
                 "recycling_accepts": {
                     "label": "Určení"
                 },
+                "ref": {
+                    "label": "Referenční kód"
+                },
                 "ref/isil": {
                     "label": "Kód ISIL"
                 },
@@ -2224,6 +2325,17 @@
                 "shop": {
                     "label": "Typ"
                 },
+                "siren/purpose": {
+                    "label": "Účel"
+                },
+                "siren/type": {
+                    "label": "druh",
+                    "options": {
+                        "electronic": "Elektronická",
+                        "other": "Ostatní",
+                        "pneumatic": "Pneumatická"
+                    }
+                },
                 "site": {
                     "label": "Typ"
                 },
@@ -2302,6 +2414,7 @@
                     "placeholder": "Není známo"
                 },
                 "structure_waterway": {
+                    "label": "Struktura",
                     "options": {
                         "tunnel": "Tunel"
                     },
@@ -2431,7 +2544,8 @@
                         "auto": "Autotransformátor",
                         "converter": "Převodník",
                         "generator": "Generátor",
-                        "phase_angle_regulator": "Regulátor fázového úhlu"
+                        "phase_angle_regulator": "Regulátor fázového úhlu",
+                        "yes": "Neznámé"
                     }
                 },
                 "trees": {
@@ -2440,6 +2554,9 @@
                 "tunnel": {
                     "label": "Typ",
                     "placeholder": "Výchozí"
+                },
+                "usage_rail": {
+                    "label": "Druh použití"
                 },
                 "visibility": {
                     "label": "Viditelnost",
@@ -2497,6 +2614,9 @@
                 "wheelchair": {
                     "label": "Pro vozíčkáře"
                 },
+                "wholesale": {
+                    "label": "Velkoobchod"
+                },
                 "width": {
                     "label": "Šířka (v metrech)"
                 },
@@ -2523,6 +2643,9 @@
                 "advertising/billboard": {
                     "name": "Reklamní poutač",
                     "terms": "reklama,billboard,plakát"
+                },
+                "advertising/column": {
+                    "name": "Reklamní sloup"
                 },
                 "aerialway": {
                     "name": "Lanovka/vlek"
@@ -3026,6 +3149,9 @@
                     "name": "Automat na cigarety",
                     "terms": "automat,cigarety,prodejní automat"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Automat na kávu"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Automat na kondomy",
                     "terms": "automat,prodejní automat,kondom,prezervativ"
@@ -3034,12 +3160,24 @@
                     "name": "Automat na nápoje",
                     "terms": "automat,prodejní automat,nápoj,nápoje,pití,plechovky,lahve,limonáda,kafe,káva,pivo"
                 },
+                "amenity/vending_machine/electronics": {
+                    "name": "Elektronický prodejní automat"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Prodejní automat na mince"
+                },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Automat na pytlíky na exkrementy",
                     "terms": "automat,prodejní automat,pytlík,pes,psí exkrementy,psí hovna,exkrement,hovno,hovínko"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Automat dámské hygieny"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Jídelní automat"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Automat na zmrzlinu"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Automat na noviny"
@@ -3099,8 +3237,14 @@
                     "name": "Plocha silnice",
                     "terms": "plocha silnice,povrch silnice,plocha cesty,povrch cesty"
                 },
+                "attraction/amusement_ride": {
+                    "name": "Zábavní jízda"
+                },
                 "attraction/animal": {
                     "name": "Zvíře"
+                },
+                "attraction/big_wheel": {
+                    "name": "Ruské kolo"
                 },
                 "attraction/bumper_car": {
                     "name": "Autodrom"
@@ -3110,6 +3254,15 @@
                 },
                 "attraction/carousel": {
                     "name": "Kolotoč"
+                },
+                "attraction/maze": {
+                    "name": "Bludiště"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Pirátská loď"
+                },
+                "attraction/river_rafting": {
+                    "name": "Říční rafting"
                 },
                 "attraction/roller_coaster": {
                     "name": "Horská dráha"
@@ -3260,6 +3413,12 @@
                 },
                 "building/entrance": {
                     "name": "Vchod/východ (zastaralý tag)"
+                },
+                "building/farm": {
+                    "name": "Zemědělský dům"
+                },
+                "building/farm_auxiliary": {
+                    "name": "Zemědělská budova"
                 },
                 "building/garage": {
                     "name": "Garáž",
@@ -3415,9 +3574,15 @@
                     "name": "Catering",
                     "terms": "catering,dodavatel občerstvení,dodavatelství občerstvení"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Kominík"
+                },
                 "craft/clockmaker": {
                     "name": "Hodinář (ne hodinky)",
                     "terms": "hodinářství,hodinář,hodiny"
+                },
+                "craft/confectionery": {
+                    "name": "Cukrář"
                 },
                 "craft/distillery": {
                     "name": "Lihovar"
@@ -3519,6 +3684,9 @@
                     "name": "Lešenář",
                     "terms": "lešenář,lešenářství,lešení"
                 },
+                "craft/sculptor": {
+                    "name": "Sochař"
+                },
                 "craft/shoemaker": {
                     "name": "Švec",
                     "terms": "švec,ševcovství,obuvník,obuvnictví"
@@ -3572,9 +3740,18 @@
                 "emergency/destination": {
                     "name": "Vjezd záchranným vozidlům jen do místa"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Ohlašovna požárů"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "Hasící přístroj"
+                },
                 "emergency/fire_hydrant": {
                     "name": "Požární hydrant",
                     "terms": "požární hydrant, hasičský hydrant, pumpa"
+                },
+                "emergency/first_aid_kit": {
+                    "name": "Lékárnička první pomoci"
                 },
                 "emergency/life_ring": {
                     "name": "Kruh života"
@@ -3591,6 +3768,9 @@
                 },
                 "emergency/private": {
                     "name": "Vjezd záchranným vozidlům jen s povolením"
+                },
+                "emergency/siren": {
+                    "name": "Siréna"
                 },
                 "emergency/yes": {
                     "name": "Vjezd záchranných vozidel povolen"
@@ -3680,6 +3860,9 @@
                 },
                 "healthcare/hospice": {
                     "name": "Hospic"
+                },
+                "healthcare/laboratory": {
+                    "name": "Zdravotnická laboratoř"
                 },
                 "healthcare/midwife": {
                     "name": "Porodní bába",
@@ -3986,6 +4169,9 @@
                     "name": "Hospodářský les",
                     "terms": "les,hospodářský les"
                 },
+                "landuse/garages": {
+                    "name": "Garáže"
+                },
                 "landuse/grass": {
                     "name": "Tráva",
                     "terms": "tráva"
@@ -4084,6 +4270,9 @@
                     "name": "Rekreační území",
                     "terms": "rekreace,prostranství pro rekreaci,náves,hřiště,obecní zeleň"
                 },
+                "landuse/religious": {
+                    "name": "Posvátné území"
+                },
                 "landuse/residential": {
                     "name": "Rezidenční oblast",
                     "terms": "obytná oblast,rezidenční oblast,byty,domy,bydlení,obytné,sídelní"
@@ -4119,6 +4308,9 @@
                 "leisure/dance": {
                     "name": "Tančírna",
                     "terms": "taneční sál,tančírna,jive,džajv,swing,tango,waltz,valčík,polka"
+                },
+                "leisure/dancing_school": {
+                    "name": "Taneční škola"
                 },
                 "leisure/dog_park": {
                     "name": "Psí park",
@@ -4290,6 +4482,9 @@
                     "name": "Štola",
                     "terms": "štola,důl,vstup do dolu,důlní,horní,tunel"
                 },
+                "man_made/antenna": {
+                    "name": "Anténa"
+                },
                 "man_made/breakwater": {
                     "name": "Vlnolam",
                     "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
@@ -4332,9 +4527,15 @@
                     "name": "Stožár",
                     "terms": "anténa,vysílací věž,BTS,BTSka,mobilní vysílač,vysílač GSM,televizní vysílač,rozhlasový vysílač"
                 },
+                "man_made/monitoring_station": {
+                    "name": "Monitorovací stanice"
+                },
                 "man_made/observation": {
                     "name": "Rozhledna",
                     "terms": "rozhledna,pozorovatelna,věž"
+                },
+                "man_made/observatory": {
+                    "name": "Observatoř"
                 },
                 "man_made/petroleum_well": {
                     "name": "Ropný vrt",
@@ -4403,6 +4604,12 @@
                     "name": "Továrna",
                     "terms": "montáž,výroba,pivovar,auto,závod,továrna,zpracování,rafinerie"
                 },
+                "manhole": {
+                    "name": "Šachta"
+                },
+                "manhole/telecom": {
+                    "name": "Telekomunikační šachta"
+                },
                 "natural": {
                     "name": "Přírodní objekt",
                     "terms": "příroda,přírodní,naturální,přirozený"
@@ -4446,6 +4653,9 @@
                 "natural/heath": {
                     "name": "Vřesoviště",
                     "terms": "vřesoviště,vřes"
+                },
+                "natural/mud": {
+                    "name": "Bahno"
                 },
                 "natural/peak": {
                     "name": "Vrchol",
@@ -4519,8 +4729,26 @@
                     "name": "Kanceláře",
                     "terms": "kancelář,kancelářský,úřad,úřadovna,administrativa,office,sídlo"
                 },
+                "office/accountant": {
+                    "name": "Účetnictví"
+                },
                 "office/administrative": {
                     "name": "Místní úřad"
+                },
+                "office/adoption_agency": {
+                    "name": "Adopční agentura"
+                },
+                "office/advertising_agency": {
+                    "name": "Reklamní agentura"
+                },
+                "office/architect": {
+                    "name": "Kancelář architekta"
+                },
+                "office/association": {
+                    "name": "Kancelář neziskové organizace"
+                },
+                "office/charity": {
+                    "name": "Kancelář charity"
                 },
                 "office/coworking": {
                     "name": "Místo pro spolupráci",
@@ -4781,6 +5009,9 @@
                 },
                 "public_transport/station_tram": {
                     "name": "Tramvajová stanice"
+                },
+                "public_transport/station_trolleybus": {
+                    "name": "Trolejbusová stanice/terminál"
                 },
                 "public_transport/stop_area": {
                     "name": "Oblast zastávky"
@@ -5173,6 +5404,9 @@
                     "name": "Klenotnictví",
                     "terms": "zlatnictví,šperky,klenotník,klenoty,klenotnictví,bižutérie,náramky,náušnice,prsteny"
                 },
+                "shop/kiosk": {
+                    "name": "Kiosek"
+                },
                 "shop/kitchen": {
                     "name": "Kuchyňské studio",
                     "terms": "kuchyně,kuchyňský,kuchyňské linky,kuchyně na míru"
@@ -5216,6 +5450,9 @@
                 "shop/motorcycle": {
                     "name": "Obchod s motocykly",
                     "terms": "prodejna motocyklů,prodejna motorek,motocykly,motorky"
+                },
+                "shop/motorcycle_repair": {
+                    "name": "Opravna motocyklů"
                 },
                 "shop/music": {
                     "name": "Obchod s hudbou",
@@ -5376,6 +5613,9 @@
                     "name": "Zbraně a střelivo",
                     "terms": "zbraně,střelivo,pistole,pušky,puška,nůž,nože,army"
                 },
+                "shop/wholesale": {
+                    "name": "Velkoobchodní sklad"
+                },
                 "shop/window_blind": {
                     "name": "Obchod s roletami",
                     "terms": "roleta,rolety,žaluzie,okenice"
@@ -5415,6 +5655,9 @@
                 "tourism/caravan_site": {
                     "name": "Místo pro karavany",
                     "terms": "místo pro karavany,kemp,camp,camping,karavan"
+                },
+                "tourism/chalet": {
+                    "name": "Prázdninová vesnice"
                 },
                 "tourism/gallery": {
                     "name": "Galerie umění",
@@ -5685,6 +5928,9 @@
             }
         },
         "imagery": {
+            "AGIVFlandersGRB": {
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Satelitní a letecké snímky.",
                 "name": "Letecké snímky Bing"
@@ -5786,6 +6032,18 @@
             "US-TIGER-Roads-2017": {
                 "name": "TIGER Roads 2017"
             },
+            "UrbISOrtho2016": {
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "name": "UrbisAdm NL"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, přispěvatelé OpenStreetMap, CC BY-SA 3.0"
@@ -5865,10 +6123,18 @@
                 },
                 "name": "OpenStreetMap (německý styl)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                }
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, data © přispěvatelé OpenStreetMap"
                 }
+            },
+            "skobbler": {
+                "name": "skobbler"
             },
             "stamen-terrain-background": {
                 "name": "Terén Stamen"
@@ -5876,11 +6142,43 @@
             "tf-cycle": {
                 "attribution": {
                     "text": "Mapy © Thunderforest, data © přispěvatelé OpenStreetMap"
-                }
+                },
+                "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
                     "text": "Mapy © Thunderforest, data © přispěvatelé OpenStreetMap"
+                },
+                "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
                 }
             }
         },

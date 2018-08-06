@@ -21494,7 +21494,8 @@
       "id": "w136",
       "nodes": ["n612", "n613", "n614", "n615", "n612"],
       "tags": {
-        "amenity": "shelter"
+        "amenity": "shelter",
+        "building": "yes"
       }
     },
     "w137": {
@@ -23457,6 +23458,7 @@
       "nodes": ["n2018", "n1626", "n1627", "n2017", "n2018"],
       "tags": {
         "amenity": "shelter",
+        "building": "yes",
         "shelter_type": "picnic_shelter"
       }
     },
@@ -24072,6 +24074,7 @@
       "nodes": ["n2050", "n2051", "n2052", "n2053", "n2050"],
       "tags": {
         "amenity": "shelter",
+        "building": "yes",
         "shelter_type": "picnic_shelter"
       }
     },
@@ -24370,6 +24373,7 @@
       "nodes": ["n2054", "n2055", "n2056", "n2057", "n2054"],
       "tags": {
         "amenity": "shelter",
+        "building": "yes",
         "shelter_type": "picnic_shelter"
       }
     },
@@ -24753,6 +24757,7 @@
       "nodes": ["n217", "n218", "n219", "n220", "n217"],
       "tags": {
         "amenity": "shelter",
+        "building": "yes",
         "shelter_type": "picnic_shelter"
       }
     },
@@ -24835,6 +24840,7 @@
       "nodes": ["n221", "n222", "n223", "n224", "n221"],
       "tags": {
         "amenity": "shelter",
+        "building": "yes",
         "shelter_type": "picnic_shelter"
       }
     },
@@ -26081,6 +26087,7 @@
       "nodes": ["n3021", "n3022", "n3023", "n3024", "n3021"],
       "tags": {
         "amenity": "shelter",
+        "building": "yes",
         "shelter_type": "picnic_shelter"
       }
     },
@@ -28716,7 +28723,8 @@
       "nodes": ["n4669", "n4670", "n4671", "n4672", "n4669"],
       "tags": {
         "amenity": "shelter",
-        "shelter_type": "picnic_shelters"
+        "building": "yes",
+        "shelter_type": "picnic_shelter"
       }
     },
     "w815": {

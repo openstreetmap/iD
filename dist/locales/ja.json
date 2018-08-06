@@ -21,6 +21,11 @@
                 "description": "レストランや記念碑、郵便ボックス等、ポイント情報を追加",
                 "tail": "クリックした地点にポイントを追加します"
             },
+            "add_note": {
+                "title": "メモ",
+                "description": "問題を指摘したら他のマッパーに知らせましょう。",
+                "tail": "マップをクリックしてメモを追加します。"
+            },
             "browse": {
                 "title": "ブラウズ",
                 "description": "マップの拡大縮小"
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "ポイントの追加",
                     "vertex": "ウェイへのノード追加",
-                    "relation": "リレーションを追加しました。"
+                    "relation": "リレーションを追加しました。",
+                    "note": "メモを追加しました。"
                 }
             },
             "start": {
@@ -156,7 +162,7 @@
             },
             "disconnect": {
                 "title": "接続解除",
-                "description": "ウェイの接続を解除して切り離す",
+                "description": "ウェイの接続を解除して切り離します。",
                 "key": "D",
                 "annotation": "ウェイの接続を解除",
                 "not_connected": "ライン/エリアの接続を解除できません",
@@ -297,6 +303,14 @@
                     "create": "進行方向制限を追加しました",
                     "delete": "進行方向制限を削除しました"
                 }
+            },
+            "detach_node": {
+                "title": "取り外し",
+                "key": "E",
+                "description": "このノードをライン／エリアから取り外します。",
+                "annotation": "ノードを元のライン／エリアから取り外す。",
+                "restriction": "\"{relation}\" リレーションを壊してしまうため、このノードは取り外しできません。",
+                "connected_to_hidden": "このノードは非表示の地物に接続しているため、削除できません。"
             }
         },
         "restriction": {
@@ -369,8 +383,8 @@
         },
         "commit": {
             "title": "OpenStreetMapへアップロード",
-            "upload_explanation": "あなたがアップロードした編集内容は、OpenStreetMapを利用しているすべてのユーザが閲覧できるようになります。",
-            "upload_explanation_with_user": "編集した内容を {user} アカウントでアップロードし、OpenStreetMapを利用しているすべてのユーザが閲覧できるようにします。",
+            "upload_explanation": "あなたがアップロードした編集内容は、OpenStreetMapのデータを利用しているすべてのマップで閲覧できるようになります。",
+            "upload_explanation_with_user": " {user} アカウントでアップロードした編集内容は、OpenStreetMapを利用しているすべてのマップで閲覧できるようになります。",
             "request_review": "編集のレビューを希望します。",
             "save": "アップロード",
             "cancel": "キャンセル",
@@ -534,8 +548,12 @@
             "data_layers": "データレイヤの選択",
             "layers": {
                 "osm": {
-                    "tooltip": "Map data from OpenStreetMap",
-                    "title": "OpenStreetMap data"
+                    "tooltip": "OpenStreetMapのマップデータ",
+                    "title": "OpenStreetMapのデータ"
+                },
+                "notes": {
+                    "tooltip": "OpenStreetMapのメモデータ",
+                    "title": "OpenStreetMapのメモ"
                 }
             },
             "fill_area": "エリアの塗りつぶし有無",
@@ -710,8 +728,14 @@
         "cannot_zoom": "現在のモードでは、これ以上ズームアウトできません。",
         "full_screen": "フルスクリーンにする",
         "gpx": {
-            "local_layer": "ローカル・ファイル",
+            "local_layer": "GPXを追加",
             "drag_drop": "ページ上に .gpx, .geojson, .kml ファイルをドラッグ＆ドロップするか、右のボタンを押して参照するかしてください",
+            "zoom": "レイヤにズーム",
+            "browse": "ファイルをブラウズ"
+        },
+        "mvt": {
+            "local_layer": "MVTを追加",
+            "drag_drop": "ページ上に .mvtや.pbfファイルをドラッグ＆ドロップするか、画面右側のボタンをクリックしてください",
             "zoom": "レイヤにズーム",
             "browse": "ファイルをブラウズ"
         },
@@ -719,6 +743,7 @@
             "tooltip": "Microsoftによる街路写真",
             "title": "写真の重ね合わせ(Bing街路)",
             "report": "この画像のプライバシーについてレポートする",
+            "view_on_bing": "Bing 地図で確認",
             "hires": "高解像度"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "この画像をOpenStreetCamで見る"
+        },
+        "note": {
+            "note": "メモ",
+            "title": "メモを編集",
+            "anonymous": "匿名ユーザー",
+            "closed": "(クローズ済)",
+            "commentTitle": "コメント",
+            "newComment": "新しいコメント",
+            "inputPlaceholder": "他のユーザーと共有するコメントを入力。",
+            "close": "メモをクローズ",
+            "open": "メモを再オープン",
+            "comment": "コメント",
+            "close_comment": "クローズしてコメント",
+            "open_comment": "再オープンしてコメント",
+            "report": "報告",
+            "new": "新しいメモ",
+            "newDescription": "問題の内容を記述します。",
+            "save": "メモを保存",
+            "login": "ログインしないとこのメモを変更したりコメントをつけたりできません。",
+            "upload_explanation": "あなたのコメントはOpenStreetMap の全ユーザーに公開されます。",
+            "upload_explanation_with_user": "{user} としてのあなたのコメントはOpenStreetMap の全ユーザーに公開されます。"
         },
         "help": {
             "title": "ヘルプ",
@@ -876,6 +922,17 @@
                 "boundary": "*境界*リレーションは、行政界を形成するひとつ以上のラインの地物のグループです。",
                 "boundary_add": "ある地物を境界リレーションに追加するには、その地物を選んで地物エディタの「すべてのリレーション」セクションまで下にスクロールして、{plus}追加ボタンをクリックして近くにある既存のリレーションまたは新しいリレーションに追加します。 "
             },
+            "notes": {
+                "title": "メモ",
+                "intro": "*メモ*は修正や連絡が必要な地物について、他のユーザーにアラートを送るために使います。メモはマップ上に指定された位置を示します。既存のメモを閲覧したり新しく追加する場合には、{data} **地図データ**パネルをクリックしてOpenStreetMapメモのレイヤを有効化してください。",
+                "add_note_h": "メモの追加",
+                "add_note": "新しいメモを追加する際には、マップ上部にあるツールバーの{note} **メモ**ボタンをクリックするか、ショートカットキー`4`を押してください。するとマウスカーソルのシンボルが十字型に変わります。新しいメモをマップに置く際には、マウスカーソルをメモがあるべき場所に置いて、{leftclick}左クリックするか、スペースキーを押してください。",
+                "move_note": "新しいメモだけが移動できます。メモを動かす際には、新しいメモの上にマウスカーソルを置いて、{leftclick}左マウスボタンを押したままメモを新しい位置にドラッグします。",
+                "update_note_h": "クローズ、再オープン、コメント",
+                "update_note": "既存のメモはクローズ済にしたり、再オープンしたり、コメントを追加したりして更新することができます。メモのクローズは問題が解決されたことを示します。メモの再オープンは元々の問題が解決されていないことを示します。",
+                "save_note_h": "メモの保存",
+                "save_note": "メモを編集したら、メモのコメントの下にあるボタンをクリックして個々に保存しなければなりません。メモの編集はOpenStreetMapにアップロードする変更セットには含まれ**ません**。"
+            },
             "imagery": {
                 "title": "背景画像",
                 "intro": "マップデータの下に表示される背景画像はマッピングの重要な情報源です。この画像は宇宙衛星、航空機、ドローンによって収集された写真の場合や、歴史的な地図をスキャンしたものであったりその他のフリーに利用できる情報源のデータであったりします。",
@@ -888,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "街路写真",
-                "intro": "衛星／航空写真では見えない交通標識、ビジネスの種類、その他の詳細情報などをマッピングするのには街路写真が役立ちます。iDエディタは[Mapillary](https://www.mapillary.com)や[OpenStreetCam](https://www.openstreetcam.org)の街路写真をサポートしています。",
+                "intro": "衛星／航空写真では見えない交通標識、ビジネスの種類、その他の詳細情報などをマッピングするのには街路写真が役立ちます。iDエディタは[Bing Streetside](https://www.microsoft.com/en-us/maps/streetside)や[Mapillary](https://www.mapillary.com)や[OpenStreetCam](https://www.openstreetcam.org)の街路写真をサポートしています。",
                 "using_h": "街路写真の利用",
                 "using": "街路写真をマッピングに利用するには、マップ脇にある{data}**地図データ設定**パネルをクリックして利用可能な写真レイヤを有効化／無効化してください。",
                 "photos": "有効化すると、写真レイヤには写真の撮影順に沿ったラインが表示されます。高ズームレベルでは、各写真の位置に円形のマークがあり、より高ズームレベルでは撮影時のカメラの向きが円錐形で示されます。",
@@ -1270,7 +1327,8 @@
                     "add_point": "「ポイントの追加」モード",
                     "add_line": "「ラインの追加」モード",
                     "add_area": "「エリアの追加」モード",
-                    "place_point": "ポイントを配置",
+                    "add_note": "「メモの追加」モード",
+                    "place_point": "ポイントまたはメモを置く",
                     "disable_snap": "押下中はポイント接近時の自動接続(SNAP)を無効化",
                     "stop_line": "ラインやエリアの描画を終了"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "選択モードでラインを継続",
                     "merge": "選択した地物を連結(マージ)",
                     "disconnect": "選択したノードで地物を切り離し",
+                    "detach_node": "選択したノードを元のライン／エリアから取り外す。",
                     "split": "選択したノードでラインを2つに分割",
                     "reverse": "ラインを反転",
                     "move": "選択した地物を移動",
@@ -1622,6 +1681,9 @@
                 "capacity": {
                     "label": "収容数",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "入金"
                 },
                 "castle_type": {
                     "label": "種類"
@@ -1970,6 +2032,14 @@
                 },
                 "horse_scale": {
                     "label": "乗馬の難易度",
+                    "options": {
+                        "common": "簡易: 問題や難しさは無い。(既定値)",
+                        "critical": "ボーダーライン: 経験のある騎手と馬なら通過可能。大きな障害物あり。橋は要注意。",
+                        "dangerous": "危険: よく熟練した騎手と馬で好天時のみ通過可能。馬から下りる。",
+                        "demanding": "注意して利用: でこぼこな道、たまに困難な通路。",
+                        "difficult": "困難: 狭くて荒れた道。乗り越えるべき障害物や狭い通路の可能性あり。",
+                        "impossible": "通過不能: 馬では道または橋が通過できない。極端に狭い、サポート不足、はしごのような障害物。生命の危険あり。"
+                    },
                     "placeholder": "困難, 危険..."
                 },
                 "horse_stables": {
@@ -2270,6 +2340,9 @@
                         "underground": "地下"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "乗客向け情報掲示板"
+                },
                 "payment_multi": {
                     "label": "支払の種類"
                 },
@@ -2501,6 +2574,9 @@
                 },
                 "site": {
                     "label": "種類"
+                },
+                "site_type": {
+                    "label": "遺跡の種類"
                 },
                 "smoking": {
                     "label": "喫煙の可否",
@@ -3429,7 +3505,7 @@
                 },
                 "amenity/veterinary": {
                     "name": "獣医",
-                    "terms": "獣医, ペット医, 病院, 医療, 動物病院"
+                    "terms": "獣医, ペット医, 病院, 医療, 動物病院, 犬猫病院, 動物"
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "犬の便入れ",
@@ -4013,8 +4089,8 @@
                     "terms": "火災通報ボックス, 火災通報装置"
                 },
                 "emergency/fire_extinguisher": {
-                    "name": "消化器",
-                    "terms": "消化器"
+                    "name": "消火器",
+                    "terms": "消火器"
                 },
                 "emergency/fire_hydrant": {
                     "name": "消火栓/消防水利",
@@ -5469,127 +5545,127 @@
                     "terms": "変圧器"
                 },
                 "public_transport/linear_platform": {
-                    "name": "交通機関の乗り場",
-                    "terms": "プラットホーム, 待合所, 乗り場"
+                    "name": "交通機関のプラットホーム/のりば",
+                    "terms": "プラットホーム, 待合所, 乗り場, ホーム, 駅, 乗降所, 停車場, 停留所, のりば"
                 },
                 "public_transport/linear_platform_aerialway": {
-                    "name": "ロープウェイ（乗り場）",
-                    "terms": "ロープウェイ, チェアリフト, 牽引リフト, スキーリフト, リフト"
+                    "name": "ロープウェイのりば/プラットホーム",
+                    "terms": "ロープウェイ, チェアリフト, 牽引リフト, スキーリフト, リフト, のりば, ホーム, プラットホーム, 索道駅, 駅"
                 },
                 "public_transport/linear_platform_bus": {
-                    "name": "バス（乗り場）",
-                    "terms": "バス停, バス乗り場, バスのりば, バス"
+                    "name": "バスのりば/プラットホーム",
+                    "terms": "バス停, バス乗り場, バスのりば, バス, BRT, バスターミナル, バスステーション, バスストップ, BS, のりば, ホーム, プラットホーム, 停留所, 駅"
                 },
                 "public_transport/linear_platform_ferry": {
-                    "name": "フェリー（乗り場）",
-                    "terms": "フェリー乗り場, フェリー"
+                    "name": "旅客船のりば/プラットホーム",
+                    "terms": "フェリー乗り場, フェリー, 港, 船着場, 船, 客船, 旅客船, フェリーターミナル, 舟, 連絡船, 渡し船, 渡船, のりば, ホーム, プラットホーム"
                 },
                 "public_transport/linear_platform_light_rail": {
-                    "name": "ライトレール（乗り場）",
-                    "terms": "ライトレール乗り場, ライトレール"
+                    "name": "ライトレールのりば/プラットホーム",
+                    "terms": "ライトレール乗り場, ライトレール, LRT, 路面電車, トラム, 駅, 停留所, 電停, 停車場, 乗降所, のりば, ホーム, プラットホーム"
                 },
                 "public_transport/linear_platform_monorail": {
-                    "name": "モノレール（乗り場）",
-                    "terms": "モノレール乗り場, モノレール"
+                    "name": "モノレールのりば/プラットホーム",
+                    "terms": "モノレール乗り場, モノレール, 駅, 停車場, 停留場, のりば, ホーム, プラットホーム"
                 },
                 "public_transport/linear_platform_subway": {
-                    "name": "地下鉄（乗り場）",
-                    "terms": "地下鉄乗り場, 地下鉄"
+                    "name": "地下鉄のりば/プラットホーム",
+                    "terms": "地下鉄乗り場, 地下鉄, のりば, ホーム, プラットホーム, 駅, メトロ, 地下駅, 地下鉄駅, 停車場, 停留場"
                 },
                 "public_transport/linear_platform_train": {
-                    "name": "鉄道（乗り場）",
-                    "terms": "鉄道乗り場, 鉄道, 列車, 電車"
+                    "name": "鉄道のりば/プラットホーム",
+                    "terms": "鉄道乗り場, 鉄道, 列車, 電車, のりば, ホーム, プラットホーム, 駅, 停車場, 停留場"
                 },
                 "public_transport/linear_platform_tram": {
-                    "name": "トラム（乗り場）",
-                    "terms": "トラム乗り場, トラム"
+                    "name": "路面電車のりば/プラットホーム",
+                    "terms": "トラム乗り場, トラム, 路面電車, LRT, ライトレール, 市電, ちんちん電車, チンチン電車, のりば, ホーム, プラットホーム, 駅, 電停, 停留場, 停車場, 乗降所"
                 },
                 "public_transport/linear_platform_trolleybus": {
-                    "name": "トロリーバス（乗り場）",
-                    "terms": "トロリーバス乗り場, トロリーバス"
+                    "name": "トロリーバスのりば/プラットホーム",
+                    "terms": "トロリーバス乗り場, トロリーバス, のりば, ホーム, プラットホーム, バス停, バス乗り場, バスのりば, バス, バスターミナル, バスステーション, バスストップ, BS, のりば, ホーム, プラットホーム, 停留所"
                 },
                 "public_transport/platform": {
-                    "name": "交通機関の乗り場（全般）",
-                    "terms": "交通機関の乗り場, 乗り場, プラットホーム"
+                    "name": "交通機関（全般）の乗り場/プラットホーム",
+                    "terms": "プラットホーム, 待合所, 乗り場, ホーム, 駅, 乗降所, 停車場, 停留所, 電停, のりば"
                 },
                 "public_transport/platform_aerialway": {
-                    "name": "ロープウェイ（乗り場）",
-                    "terms": "ロープウェイ, チェアリフト, 牽引リフト, スキーリフト, リフト"
+                    "name": "ロープウェイのりば/プラットホーム",
+                    "terms": "ロープウェイ, チェアリフト, 牽引リフト, スキーリフト, リフト, のりば, ホーム, プラットホーム, 索道駅, 駅"
                 },
                 "public_transport/platform_bus": {
-                    "name": "バス停（乗り場）",
-                    "terms": "バス停, バス, バス停留所, バス乗り場"
+                    "name": "バス停のりば/プラットホーム",
+                    "terms": "バス停, バス乗り場, バスのりば, バス, BRT, バスターミナル, バスステーション, バスストップ, BS, のりば, ホーム, プラットホーム, 停留所, 駅"
                 },
                 "public_transport/platform_ferry": {
-                    "name": "フェリー（乗り場）",
-                    "terms": "フェリー乗り場, フェリー"
+                    "name": "旅客船のりば/プラットホーム",
+                    "terms": "フェリー乗り場, フェリー, 港, 船着場, 船, 客船, 旅客船, フェリーターミナル, 舟, 連絡船, 渡し船, 渡船, のりば, ホーム, プラットホーム"
                 },
                 "public_transport/platform_light_rail": {
-                    "name": "ライトレール（乗り場）",
-                    "terms": "ライトレール乗り場, ライトレール"
+                    "name": "ライトレールのりば/プラットホーム",
+                    "terms": "ライトレール乗り場, ライトレール, LRT, 路面電車, トラム, 駅, 停留所, 電停, 停車場, 乗降所, のりば, ホーム, プラットホーム"
                 },
                 "public_transport/platform_monorail": {
-                    "name": "モノレール（乗り場）",
-                    "terms": "モノレール乗り場, モノレール"
+                    "name": "モノレールのりば/プラットホーム",
+                    "terms": "モノレール乗り場, モノレール, 駅, 停車場, 停留場, のりば, ホーム, プラットホーム"
                 },
                 "public_transport/platform_subway": {
-                    "name": "地下鉄（乗り場）",
-                    "terms": "地下鉄乗り場, 地下鉄, プラットホーム"
+                    "name": "地下鉄のりば/プラットホーム",
+                    "terms": "地下鉄乗り場, 地下鉄, のりば, ホーム, プラットホーム, 駅, メトロ, 地下駅, 地下鉄駅, 停車場, 停留場"
                 },
                 "public_transport/platform_train": {
-                    "name": "鉄道（乗り場）",
-                    "terms": "鉄道乗り場, 鉄道, 電車, 列車, プラットホーム"
+                    "name": "鉄道のりば/プラットホーム",
+                    "terms": "鉄道乗り場, 鉄道, 列車, 電車, のりば, ホーム, プラットホーム, 駅, 停車場, 停留場"
                 },
                 "public_transport/platform_tram": {
-                    "name": "トラム（乗り場）",
-                    "terms": "トラム乗り場, トラム"
+                    "name": "路面電車のりば/プラットホーム",
+                    "terms": "トラム乗り場, トラム, 路面電車, LRT, ライトレール, 市電, ちんちん電車, チンチン電車, のりば, ホーム, プラットホーム, 駅, 電停, 停留場, 停車場, 乗降所"
                 },
                 "public_transport/platform_trolleybus": {
-                    "name": "トロリーバス（乗り場）",
-                    "terms": "トロリーバス乗り場, トロリーバス"
+                    "name": "トロリーバスのりば/プラットホーム",
+                    "terms": "トロリーバス乗り場, トロリーバス, のりば, ホーム, プラットホーム, バス停, バス乗り場, バスのりば, バス, バスターミナル, バスステーション, バスストップ, BS, のりば, ホーム, プラットホーム, 停留所"
                 },
                 "public_transport/station": {
-                    "name": "駅（全般）",
-                    "terms": "駅"
+                    "name": "交通機関（全般）の駅",
+                    "terms": "駅, 停留所, 停車場, 乗降所, のりば"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "ロープウェイ（駅）",
+                    "name": "ロープウェイの駅",
                     "terms": "ロープウェイ駅, ロープウェイ, リフト, スキーリフト, チェアリフト, 牽引リフト"
                 },
                 "public_transport/station_bus": {
-                    "name": "バス（駅/ターミナル）",
+                    "name": "バスターミナル/バスの駅",
                     "terms": "バス, バスターミナル, バスステーション"
                 },
                 "public_transport/station_ferry": {
-                    "name": "フェリー（駅/ターミナル）",
+                    "name": "旅客船ターミナル/旅客港",
                     "terms": "フェリーターミナル, フェリー"
                 },
                 "public_transport/station_light_rail": {
-                    "name": "ライトレール（駅）",
+                    "name": "ライトレールの駅",
                     "terms": "ライトレール駅, ライトレール"
                 },
                 "public_transport/station_monorail": {
-                    "name": "モノレール（駅）",
+                    "name": "モノレールの駅",
                     "terms": "モノレール駅, モノレール"
                 },
                 "public_transport/station_subway": {
-                    "name": "地下鉄（駅）",
+                    "name": "地下鉄の駅",
                     "terms": "地下鉄駅, 地下鉄, サブウェイ"
                 },
                 "public_transport/station_train": {
-                    "name": "鉄道（駅）",
+                    "name": "鉄道の停車場/駅",
                     "terms": "鉄道駅, 鉄道, 駅, 電車, 列車"
                 },
                 "public_transport/station_train_halt": {
-                    "name": "小駅(英国用)",
+                    "name": "鉄道の停留所/駅",
                     "terms": "小さな駅, 小駅, 駅, 鉄道"
                 },
                 "public_transport/station_tram": {
-                    "name": "トラム（駅）",
+                    "name": "路面電車の駅",
                     "terms": "トラム駅, トラム"
                 },
                 "public_transport/station_trolleybus": {
-                    "name": "トロリーバス（駅/ターミナル）",
+                    "name": "トロリーバスターミナル/駅",
                     "terms": "トロリーバス, トロリーバスターミナル"
                 },
                 "public_transport/stop_area": {
@@ -5645,7 +5721,7 @@
                 },
                 "railway/buffer_stop": {
                     "name": "車止め（鉄道）",
-                    "terms": "車止め,"
+                    "terms": "車止め"
                 },
                 "railway/crossing": {
                     "name": "踏切 (歩道)",
@@ -5664,7 +5740,7 @@
                     "terms": "ケーブルカー"
                 },
                 "railway/halt": {
-                    "name": "小駅(英国用)"
+                    "name": "鉄道駅（停留場）"
                 },
                 "railway/level_crossing": {
                     "name": "踏切 (車道)",
@@ -5687,11 +5763,11 @@
                     "terms": "モノレール"
                 },
                 "railway/narrow_gauge": {
-                    "name": "軽便鉄道",
-                    "terms": "軽便鉄道, ナローゲージ, 線路"
+                    "name": "ナローゲージ",
+                    "terms": "軽便鉄道, ナローゲージ, 線路, 特殊狭軌, 狭軌"
                 },
                 "railway/platform": {
-                    "name": "鉄道停車場 / プラットホーム"
+                    "name": "プラットホーム（旧）"
                 },
                 "railway/rail": {
                     "name": "線路",
@@ -5796,7 +5872,7 @@
                 },
                 "shop/bed": {
                     "name": "寝具店",
-                    "terms": "ベッド店, マットレス店, 寝具店, 家具, 枕"
+                    "terms": "ベッド店, マットレス店, 寝具店, 家具, 枕, ふとん, 布団, ふとん店"
                 },
                 "shop/beverages": {
                     "name": "飲料店",
@@ -6257,7 +6333,7 @@
                 },
                 "tourism/apartment": {
                     "name": "リゾートマンション",
-                    "terms": "リゾートマンション, リゾート, 別荘, 保養"
+                    "terms": "リゾートマンション, リゾート, 別荘, 保養, 保養所, 保養施設"
                 },
                 "tourism/aquarium": {
                     "name": "水族館",
@@ -7447,6 +7523,10 @@
                 "description": "Mappers and OpenStreetMap users, around Portland, ME",
                 "extendedDescription": "Maptime is, rather literally, time for mapmaking.  Our mission is to open the doors of cartographic possibility to anyone interested by creating a time and space for collaborative learning, exploration, and map creation using mapping tools and technologies."
             },
+            "us-ma-mailinglist": {
+                "name": "Talk-us-massachusetts Mailing List",
+                "description": "Email mailing list for the Massachusetts OSM community"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Improve OpenStreetMap in the Cleveland area",
@@ -7474,6 +7554,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap PDX Google Group",
+                "description": "Forum and mailing list for OpenStreetMap users in the Portland area",
+                "extendedDescription": "This group is to facilitate improvements to OpenStreetMap in the Portland, Oregon area to support applications such as the Open Trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",

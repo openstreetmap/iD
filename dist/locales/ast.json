@@ -307,8 +307,6 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Averar pa editar",
-        "login": "aniciu de sesión",
-        "logout": "zarrar sesión",
         "loading_auth": "Coneutando con OpenStreetMap...",
         "report_a_bug": "Informar d'un fallu",
         "help_translate": "Ayudar a traducir",
@@ -619,7 +617,6 @@
         "cannot_zoom": "Nun puede alloñase más nel mou actual.",
         "full_screen": "Conmutar pantalla completa",
         "gpx": {
-            "local_layer": "Ficheru llocal",
             "drag_drop": "Abasna y suelta un ficheru .gpx, .geojson o .kml na páxina, o prime nel botón de la drecha pa restolar",
             "zoom": "Averar a capa",
             "browse": "Buscar un ficheru"
@@ -742,8 +739,7 @@
                     "title": "Dibuxar",
                     "add_point": "Mou «amestar puntu»",
                     "add_line": "Mou «amestar llinia»",
-                    "add_area": "Mou «amestar área»",
-                    "place_point": "Asitiar un puntu"
+                    "add_area": "Mou «amestar área»"
                 },
                 "operations": {
                     "title": "Operaciones"

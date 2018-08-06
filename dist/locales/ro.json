@@ -227,8 +227,6 @@
             "localized_translation_language": "Alege limba",
             "localized_translation_name": "Nume"
         },
-        "login": "login",
-        "logout": "logout",
         "loading_auth": "Conectare la OpenStreetMap..",
         "report_a_bug": "Raportează o greșeală",
         "help_translate": "Ajută la traducere",
@@ -492,7 +490,6 @@
             "deprecated_tags": "Tag-uri învechite: {tags}"
         },
         "gpx": {
-            "local_layer": "Fișier local",
             "zoom": "Mărește la strat",
             "browse": "Caută fișier"
         },
@@ -702,8 +699,7 @@
             "editing": {
                 "title": "Editare",
                 "drawing": {
-                    "title": "Desenare",
-                    "place_point": "Plasează und punct"
+                    "title": "Desenare"
                 },
                 "operations": {
                     "title": "Operațiuni",

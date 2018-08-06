@@ -1,5 +1,10 @@
 {
     "et": {
+        "icons": {
+            "information": "info",
+            "remove": "eemalda",
+            "undo": "tühista"
+        },
         "modes": {
             "add_area": {
                 "title": "Ala",
@@ -15,6 +20,11 @@
                 "title": "Punkt",
                 "description": "Lisa kaardile restorane, monumente, postkaste ja muid punkte.",
                 "tail": "Klõpsa kaardil, et lisada punkt."
+            },
+            "add_note": {
+                "title": "Teade",
+                "description": "Avastasid vea? Anna teistele kaardistajatele sellest märku.",
+                "tail": "Klõpsa kaardil, et lisada teade."
             },
             "browse": {
                 "title": "Sirvi",
@@ -32,7 +42,8 @@
                 "annotation": {
                     "point": "Punkt lisatud.",
                     "vertex": "Joonele lisatud sõlm.",
-                    "relation": "Relatsioon lisatud."
+                    "relation": "Relatsioon lisatud.",
+                    "note": "Teade lisatud."
                 }
             },
             "start": {
@@ -265,6 +276,9 @@
                     "create": "Lisatud pöörde piirang",
                     "delete": "Kustutatud pöörde piirang"
                 }
+            },
+            "detach_node": {
+                "title": "Võta lahti"
             }
         },
         "undo": {
@@ -315,18 +329,44 @@
         },
         "info_panels": {
             "background": {
+                "title": "Taust",
                 "source": "Allikas",
                 "description": "Kirjeldus",
                 "resolution": "Resolutsioon",
-                "accuracy": "Täpsus"
+                "accuracy": "Täpsus",
+                "unknown": "Teadmata"
             },
             "history": {
                 "title": "Ajalugu",
+                "selected": "{n} valitud",
+                "no_history": "Ajalugu puudub (uus detail)",
                 "version": "Versioon",
                 "last_edit": "Viimane muudatus",
                 "edited_by": "Muutis",
                 "changeset": "Muudatuskogum",
-                "unknown": "Teadmata"
+                "unknown": "Teadmata",
+                "link_text": "Ajalugu openstreetmap.org'is."
+            },
+            "location": {
+                "key": "A",
+                "title": "Asukoht",
+                "unknown_location": "Teadmata asukoht"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Mõõtmine",
+                "selected": "{n} valitud",
+                "geometry": "Geomeetria",
+                "closed_line": "suletud joon",
+                "closed_area": "suletud ala",
+                "center": "Keskpunkt",
+                "perimeter": "Välisäär",
+                "length": "Pikkus",
+                "area": "Ala",
+                "centroid": "Tsentroid",
+                "location": "Asukoht",
+                "metric": "Meeter",
+                "imperial": "Inglise"
             }
         },
         "geometry": {
@@ -419,6 +459,10 @@
                 "osm": {
                     "tooltip": "Kaardiandmed OpenStreetMapist",
                     "title": "OpenStreetMapi andmed"
+                },
+                "notes": {
+                    "tooltip": "Teate andmed OpenStreetMapist",
+                    "title": "OpenStreetMap teated"
                 }
             },
             "fill_area": "Täida alad",
@@ -568,10 +612,23 @@
         "cannot_zoom": "Ei ole võimalik rohkem välja suumida selles vaates.",
         "full_screen": "Lülita täisekraanile",
         "gpx": {
-            "local_layer": "Lokaalne fail",
+            "local_layer": "Lisa GPX",
             "drag_drop": "Lohista lehele .gpx-, .geojson- või .kml-fail või klõpsa nuppu paremal, et sirvida",
             "zoom": "Suumi kihini",
             "browse": "Sirvi faili"
+        },
+        "mvt": {
+            "local_layer": "Lisa MVT",
+            "drag_drop": "Lohista lehele .mvt või .pbf fail või klõpsa nuppu paremal, et sirvida",
+            "zoom": "Suumi kihini",
+            "browse": "Lehitse arvutist"
+        },
+        "streetside": {
+            "tooltip": "Tänava-tasandi fotod Microsoftilt",
+            "title": "Fotokate (Bing Streetside)",
+            "report": "Teata privaatsusmurest selle pildiga",
+            "view_on_bing": "Vaata Bing Mapsis",
+            "hires": "Kõrge resolutsioon"
         },
         "mapillary_images": {
             "tooltip": "Tänavatasandi fotod Mapillaryst",
@@ -588,10 +645,34 @@
             "tooltip": "Tänavatasandi fotod OpenStreetCamist",
             "title": "Fotokate (OpenStreetCam)"
         },
+        "note": {
+            "note": "Märge",
+            "title": "Muuda märget",
+            "anonymous": "anonüümne",
+            "closed": "(Suletud)",
+            "commentTitle": "Kommentaarid",
+            "newComment": "Uus kommentaar",
+            "inputPlaceholder": "Lisa kommentaar teistega jagamiseks.",
+            "close": "Sulge märge",
+            "open": "Taasava märge",
+            "comment": "Kommentaar",
+            "close_comment": "Sulge ja kommenteeri",
+            "open_comment": "Taasava ja kommenteeri",
+            "report": "Teavita",
+            "new": "Uus märge",
+            "newDescription": "Kirjelda mure.",
+            "save": "Salvesta teade",
+            "login": "Sa pead olema sisse logitud, et muuta või kommenteerida seda teadet.",
+            "upload_explanation": "Sinu kommentaarid on avalikult nähtavad kõigile OpenStreetMapi kasutajatele.",
+            "upload_explanation_with_user": "Sinu kommentaarid kasutajana {user} on avalikult nähtavad kõigile OpenStreetMapi kasutajatele."
+        },
         "help": {
             "title": "Abi",
             "editing": {
                 "keyboard_h": "Kiirklahvid"
+            },
+            "notes": {
+                "title": "Teated"
             }
         },
         "intro": {
@@ -1490,8 +1571,8 @@
                     "name": "Kolledžiala"
                 },
                 "amenity/community_centre": {
-                    "name": "Kultuurikeskus",
-                    "terms": "keskus,üritused,hall,rahvamaja,kogukonna keskus,külakeskus"
+                    "name": "Kogukonna keskus",
+                    "terms": "keskus,üritused,hall,rahvamaja,kultuurikeskus,külakeskus,spordikeskus,külamaja"
                 },
                 "amenity/compressed_air": {
                     "name": "Suruõhk",
@@ -2668,6 +2749,10 @@
                 "man_made/chimney": {
                     "name": "Korsten"
                 },
+                "man_made/clearcut": {
+                    "name": "Raiesmik",
+                    "terms": "lageraie,raiestik,kännustik"
+                },
                 "man_made/crane": {
                     "name": "Kraana"
                 },
@@ -2780,6 +2865,10 @@
                 "natural/peak": {
                     "name": "Mäetipp",
                     "terms": "tipp"
+                },
+                "natural/reef": {
+                    "name": "Kari",
+                    "terms": "riff,korall"
                 },
                 "natural/ridge": {
                     "name": "Mäehari",
@@ -3260,6 +3349,10 @@
                 "shop/motorcycle": {
                     "name": "Mootorrattapood",
                     "terms": "tsiklid"
+                },
+                "shop/motorcycle_repair": {
+                    "name": "Mootorratta remondikoda",
+                    "terms": "remont,hooldus"
                 },
                 "shop/music": {
                     "name": "Muusikapood"

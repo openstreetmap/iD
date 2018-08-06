@@ -346,8 +346,6 @@
             "localized_translation_name": "Név"
         },
         "zoom_in_edit": "Nagyíts a szerkesztéshez",
-        "login": "bejelentkezés",
-        "logout": "kijelentkezés",
         "loading_auth": "Csatlakozás az OpenStreetMap kiszolgálóhoz…",
         "report_a_bug": "Hibajelentés",
         "help_translate": "Segíts a fordításban",
@@ -696,7 +694,6 @@
         "cannot_zoom": "Nem lehet jobban távolítani ebben a módban.",
         "full_screen": "Váltás teljes képernyőre",
         "gpx": {
-            "local_layer": "Helyi fájl",
             "drag_drop": "Húzzon és ejtsen egy .gpx, .geojson vagy .kml fájlt az oldalra, vagy kattintson a jobb oldalon lévő gombra a tallózáshoz",
             "zoom": "Nagyítás a rétegre",
             "browse": "Tallózzon egy fájlt"
@@ -1136,7 +1133,6 @@
                     "add_point": "„Pont hozzáadás” mód",
                     "add_line": "„Vonal hozzáadás” mód",
                     "add_area": "„Terület hozzáadás” mód",
-                    "place_point": "Helyezz el egy pontot",
                     "disable_snap": "Tartsd a pont illesztés kikapcsolásához",
                     "stop_line": "Fejezd be a vonal vagy terület rajzolását"
                 },
@@ -1437,6 +1433,9 @@
                 },
                 "board_type": {
                     "label": "Típus"
+                },
+                "booth": {
+                    "label": "Fülke"
                 },
                 "boules": {
                     "label": "Típus"
@@ -2505,7 +2504,7 @@
                     "label": "Típus"
                 },
                 "tracktype": {
-                    "label": "Úttípus",
+                    "label": "Mezőgazdasági/erdészeti út típusa",
                     "options": {
                         "grade1": "Szilárd: burkolt vagy tömör felületű makadámút",
                         "grade2": "Főképp szilárd: murvával/kővel tömörített földút",
@@ -2913,8 +2912,8 @@
                     "terms": "jogosítvány, KRESZ"
                 },
                 "amenity/embassy": {
-                    "name": "Nagykövetség",
-                    "terms": "Követség,  Konzulátus, külképviselet"
+                    "name": "Külképviselet",
+                    "terms": "nagykövetség, követség,  konzulátus, külképviselet"
                 },
                 "amenity/fast_food": {
                     "name": "Gyorsétterem",
@@ -4078,8 +4077,8 @@
                     "terms": "Harmadrendű főút csatlakozás"
                 },
                 "highway/track": {
-                    "name": "Nem karbantartott földút",
-                    "terms": "földút,nem karbantartott"
+                    "name": "Nem karbantartott mezőgazdasági/erdészeti út",
+                    "terms": "erdészeti út, földút, mezőgazdasági út, tanyasi út, földút"
                 },
                 "highway/traffic_mirror": {
                     "name": "Közlekedési tükör",
@@ -4328,6 +4327,10 @@
                     "name": "Felnőtt játékközpont",
                     "terms": "játékterem"
                 },
+                "leisure/beach_resort": {
+                    "name": "Fürdőhely, vízparti strand",
+                    "terms": "strand, fürdő, vízpart, tengerpart"
+                },
                 "leisure/bird_hide": {
                     "name": "Madárles",
                     "terms": "madárles"
@@ -4433,7 +4436,7 @@
                     "terms": "Kosárlabdapálya"
                 },
                 "leisure/pitch/beachvolleyball": {
-                    "name": "Strandröplabda pálya",
+                    "name": "Strandröplabdapálya",
                     "terms": "strand,röplabda,röpi,pálya"
                 },
                 "leisure/pitch/bowls": {
@@ -4675,8 +4678,8 @@
                     "terms": "Öböl"
                 },
                 "natural/beach": {
-                    "name": "Strand",
-                    "terms": "Strand"
+                    "name": "Természetes strand",
+                    "terms": "Strand, vízpart, tengerpart, fürdőhely"
                 },
                 "natural/cave_entrance": {
                     "name": "Barlangbejárat",

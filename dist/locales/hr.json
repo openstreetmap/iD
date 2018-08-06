@@ -1,5 +1,9 @@
 {
     "hr": {
+        "icons": {
+            "information": "info",
+            "remove": "ukloni"
+        },
         "modes": {
             "add_area": {
                 "title": "Područje",
@@ -25,6 +29,9 @@
             },
             "draw_line": {
                 "tail": "Klikni za dodavanje više točaka linije. Klikni na druge linije da ih spojiš i dvaput klikni da završiš liniju."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Ovo se ne može uređivati jer je spojeno na skriveni element karte."
             }
         },
         "operations": {
@@ -285,6 +292,21 @@
                     "create": "Zabrana skretanja je dodana",
                     "delete": "Zabrana skretanja je uklonjena"
                 }
+            },
+            "detach_node": {
+                "title": "Odvoji",
+                "key": "E",
+                "description": "Odvoji ovaj čvor s ovih linija/područja."
+            }
+        },
+        "restriction": {
+            "controls": {
+                "distance": "Udaljenost"
+            },
+            "help": {
+                "from": "POLAZIŠTE",
+                "via": "PREKO",
+                "to": "ODREDIŠTE"
             }
         },
         "undo": {
@@ -295,7 +317,7 @@
             "tooltip": "Ponovi: {action}",
             "nothing": "Nema ništa za ponoviti."
         },
-        "tooltip_keyhint": "Prečac:",
+        "tooltip_keyhint": "Kratica:",
         "browser_notice": "Ovaj uređivač je podržan u Firefoxu, Chromeu, Safariju, Operi i Internet Exploreru 11 ili novijoj verziji. Molim nadogradi svoj internet preglednik ili koristi Potlatch 2 program za uređivanje karte.",
         "translate": {
             "translate": "Prevedi",
@@ -303,8 +325,7 @@
             "localized_translation_language": "Odaberi jezik",
             "localized_translation_name": "Ime"
         },
-        "login": "prijava",
-        "logout": "odjava",
+        "zoom_in_edit": "Približi za uređivanje",
         "loading_auth": "Spajanje na OpenStreetMap...",
         "report_a_bug": "Prijavi grešku",
         "help_translate": "Pomozi prevesti iD uređivač",
@@ -331,11 +352,38 @@
             "created": "Stvoreno",
             "about_changeset_comments": "O komentarima promjena",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Spomenuo/la si Google u ovom komentaru: molim te zapamti da je kopiranje s Google karata strogo zabranjeno."
+            "google_warning": "Spomenuo/la si Google u ovom komentaru: molim te zapamti da je kopiranje s Google karata strogo zabranjeno.",
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "Uređivali {users}",
             "truncated_list": "Uređivali {users} i {count} drugih"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Pozadina",
+                "zoom": "Zum",
+                "source": "Izvor",
+                "description": "Opis",
+                "resolution": "Rezolucija",
+                "accuracy": "Preciznost"
+            },
+            "history": {
+                "key": "H",
+                "title": "Povijest",
+                "version": "Verzija"
+            },
+            "location": {
+                "key": "L",
+                "title": "Lokacija"
+            },
+            "measurement": {
+                "key": "M",
+                "geometry": "Geometrija",
+                "area": "Područje"
+            }
         },
         "geometry": {
             "point": "točka",
@@ -562,16 +610,18 @@
             "deprecated_tags": "Zastarjele oznake: {tags}"
         },
         "zoom": {
-            "in": "Povećaj prikaz",
-            "out": "Smanji prikaz"
+            "in": "Približi",
+            "out": "Udalji"
         },
         "cannot_zoom": "Nije moguće više udaljiti u trenutnom môdu.",
         "full_screen": "Slika preko cijelog zaslona",
         "gpx": {
-            "local_layer": "Lokalna datoteka",
             "drag_drop": "Dovuci i ispusti .gpx, .geojson ili .kml datoteku na stranicu ili klikni gumb s desne strane za pretraživanje datoteka.",
             "zoom": "Približi na sloj",
             "browse": "Potraži datoteku"
+        },
+        "mvt": {
+            "zoom": "Približi na sloj"
         },
         "mapillary_images": {
             "tooltip": "Ulične fotografije s Mapillary servisa",
@@ -597,6 +647,13 @@
                 "title": "Pregled",
                 "navigation_h": "Navigacija",
                 "features_h": "Elementi karte"
+            },
+            "editing": {
+                "keyboard_h": "Tipkovne kratice",
+                "keyboard": "Možeš vidjeti popis tipkovnih kratica kada pritisneš tipku `?`."
+            },
+            "areas": {
+                "title": "Područja"
             }
         },
         "intro": {
@@ -845,8 +902,8 @@
             }
         },
         "shortcuts": {
-            "title": "Tipkovni prečaci",
-            "tooltip": "Prikaži tipkovne prečace.",
+            "title": "Tipkovne kratice",
+            "tooltip": "Prikaži tipkovne kratice.",
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -882,7 +939,7 @@
                 "help": {
                     "title": "Pomoć",
                     "help": "Prikaži pomoć/dokumentaciju",
-                    "keyboard": "Prikaži tipkovne prečace"
+                    "keyboard": "Prikaži tipkovne kratice"
                 },
                 "display_options": {
                     "title": "Postavke prikaza",
@@ -919,7 +976,6 @@
                     "add_point": "Dodaj točku",
                     "add_line": "Dodaj liniju",
                     "add_area": "Dodaj područje",
-                    "place_point": "Postavi točku",
                     "disable_snap": "Drži za deaktiviranje hvatanja na elemente",
                     "stop_line": "Završi crtanje linije ili područja"
                 },
@@ -947,6 +1003,12 @@
                     "save": "Spremi promjene"
                 }
             }
+        },
+        "units": {
+            "north": "S",
+            "south": "J",
+            "east": "I",
+            "west": "Z"
         },
         "presets": {
             "categories": {
@@ -3719,11 +3781,33 @@
                 },
                 "name": "DigitalGlobe Premium snimke"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Uvjeti i povratne informacije"
+                }
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Uvjeti i povratne informacije"
                 },
                 "name": "DigitalGlobe Standard snimke"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Uvjeti i povratne informacije"
+                }
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Uvjeti i povratne informacije"
+                },
+                "description": "Esri svijet snimke",
+                "name": "Esri svijet snimke"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Uvjeti i povratne informacije"
+                }
             },
             "MAPNIK": {
                 "attribution": {
@@ -3780,6 +3864,15 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Označavanje"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER ceste 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "name": "TIGER ceste 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "name": "TIGER ceste 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "name": "Waymarked Trails: Biciklizam"

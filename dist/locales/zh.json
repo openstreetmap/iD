@@ -164,7 +164,6 @@
             "localized_translation_language": "选择语言",
             "localized_translation_name": "名称"
         },
-        "logout": "退出",
         "loading_auth": "连接OpenStreetMap...",
         "status": {
             "error": "无法连接到API。",

@@ -303,8 +303,6 @@
             "localized_translation_language": "Zvoľte jazyk",
             "localized_translation_name": "Meno"
         },
-        "login": "prihlásenie",
-        "logout": "odhlásiť",
         "loading_auth": "Pripája sa k OpenStreetMap...",
         "report_a_bug": "Nahlásiť chybu",
         "help_translate": "Pomoc s prekladom",
@@ -626,7 +624,6 @@
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
         "gpx": {
-            "local_layer": "Lokálny súbor",
             "drag_drop": "Pretiahnite a pustite .gpx, .geojson or .kml súbor na stránku, alebo kliknite na tlačítko napravo pre výber",
             "zoom": "Priblížiť na vrstvu",
             "browse": "Vybrať súbor"
@@ -972,7 +969,6 @@
                     "add_point": "\"Pridať bod\" mód",
                     "add_line": "\"Pridať čiaru\" mód",
                     "add_area": "\"Pridať plochu\" mód",
-                    "place_point": "Umiestniť bod",
                     "disable_snap": "Podržanie zruší prichytávanie k bodu",
                     "stop_line": "Dokončiť kreslenie čiary alebo plochy"
                 },

@@ -316,8 +316,6 @@
             "localized_translation_name": "نام"
         },
         "zoom_in_edit": "برای ویرایش زوم کنید",
-        "login": "ورود",
-        "logout": "خروج",
         "loading_auth": "در حال اتصال به OpenStreetMap...",
         "report_a_bug": "گزارش یک اشکال",
         "help_translate": "کمک به ترجمه",
@@ -468,8 +466,13 @@
             "overlays": "پوشش ها",
             "imagery_source_faq": "اطلاعات تصویر / گزارش یک مشکل",
             "reset": "باز نشاندن",
+            "display_options": "گزینه‌های نمایش",
             "brightness": "روشنایی",
+            "contrast": "پادنمایی",
+            "saturation": "سیری",
+            "sharpness": "آشکاری",
             "minimap": {
+                "description": "نمایش نقشهٔ کوچک",
                 "tooltip": "برای پیدا کردن محل منطقه نشان داده شده، یک نقشه کوچک نمایی نشان بده",
                 "key": "/"
             },
@@ -477,11 +480,11 @@
             "offset": "برای تنظیم افست تصاویر، محدوده خاکستری زیر را بکشید یا مقادیر را به متر در کادر زیر وارد کنید."
         },
         "map_data": {
-            "title": "نقشه داده",
-            "description": "نقشه داده",
+            "title": "داده‌های نقشه",
+            "description": "داده‌های نقشه",
             "key": "F",
-            "data_layers": "لایها داده ها",
-            "fill_area": "محدوده‌ها را پر کنید",
+            "data_layers": "لایه‌های داده",
+            "fill_area": "پُری محدوده‌ها",
             "map_features": "عناصر نقشه",
             "autohidden": "این عناصر به صورت خودکار مخفی شدند چون تعداد زیادی از آنها بر روی صفحه نمایش میافت. برای ویرایش آنها زوم کنید."
         },
@@ -531,7 +534,7 @@
                 "tooltip": "پیشنهاد شده، در حال ساخت و ساز، رها شده، تخریب شده و غیره."
             },
             "others": {
-                "description": "دیگران",
+                "description": "سایر",
                 "tooltip": "هر چیز دیگر"
             }
         },
@@ -652,7 +655,7 @@
                 "open_source_h": "سورس باز"
             },
             "overview": {
-                "navigation_h": "مسیریابی",
+                "navigation_h": "حرکت در نقشه",
                 "features_h": "ویژگی‌های نقشه"
             },
             "editing": {
@@ -779,7 +782,7 @@
             "or": "-یا-",
             "browsing": {
                 "navigation": {
-                    "title": "مسیریابی"
+                    "title": "حرکت در نقشه"
                 },
                 "help": {
                     "title": "کمک"
@@ -791,7 +794,6 @@
                     "title": "نقشه برداری",
                     "add_line": "حالت 'افزودن خط'",
                     "add_area": "حالت 'افزودن ناحیه'",
-                    "place_point": "ایجاد نقطه",
                     "stop_line": "اتمام رسم خط یا ناحیه"
                 },
                 "operations": {
@@ -3075,6 +3077,9 @@
                 "emergency/fire_hydrant": {
                     "name": "آتش نشانی"
                 },
+                "emergency/lifeguard": {
+                    "name": "نجات غریق"
+                },
                 "emergency/no": {
                     "name": "دسترسی اظطراری خیر"
                 },
@@ -3167,6 +3172,9 @@
                 },
                 "healthcare/psychotherapist": {
                     "name": "روان‎‌درمانگر"
+                },
+                "healthcare/rehabilitation": {
+                    "name": "توانبخشی"
                 },
                 "healthcare/speech_therapist": {
                     "name": "گفتار درمان"
@@ -3569,7 +3577,7 @@
                     "name": "زمین بازی"
                 },
                 "leisure/resort": {
-                    "name": "پر رفت‌آمد",
+                    "name": "مجتمع تفریحی",
                     "terms": "مکان پررفت‌آمد, اماکن پر رفت آمد,مکان‌های مطرح"
                 },
                 "leisure/sauna": {
@@ -3635,8 +3643,14 @@
                 "man_made/lighthouse": {
                     "name": "فانوس دریایی"
                 },
+                "man_made/mast": {
+                    "name": "دکل مخابراتی"
+                },
                 "man_made/observation": {
                     "name": "برج رصد"
+                },
+                "man_made/observatory": {
+                    "name": "رصد خانه"
                 },
                 "man_made/petroleum_well": {
                     "name": "چاه نفت"
@@ -3804,8 +3818,11 @@
                 "office/financial": {
                     "name": "اداره مالی"
                 },
+                "office/forestry": {
+                    "name": "دفتر جنگلداری"
+                },
                 "office/government": {
-                    "name": "اداره دولتی"
+                    "name": "دفتر دولتی"
                 },
                 "office/government/register_office": {
                     "name": "اداره ثبت"
@@ -3894,8 +3911,17 @@
                 "place/village": {
                     "name": "روستا"
                 },
+                "playground/roundabout": {
+                    "name": "چرخ و فلک"
+                },
+                "playground/seesaw": {
+                    "name": "الاکلنگ"
+                },
                 "playground/slide": {
                     "name": "سرسره"
+                },
+                "playground/swing": {
+                    "name": "تاب"
                 },
                 "point": {
                     "name": "نقطه"
@@ -4314,6 +4340,9 @@
                 },
                 "shop/ticket": {
                     "name": "بلیط فروشی"
+                },
+                "shop/tiles": {
+                    "name": "کاشی فروشی"
                 },
                 "shop/tobacco": {
                     "name": "فروشگاه مواد افیونی تنباکو"
@@ -4841,6 +4870,24 @@
         "community": {
             "cape-coast-youthmappers": {
                 "description": "ما را در توییتر دنبال کنید: {url}"
+            },
+            "OSM-IDN-facebook": {
+                "description": "بهبود OpenStreetMap در اندونزی"
+            },
+            "OSM-japan-facebook": {
+                "name": "انجمن OpenStreetMap ژاپن",
+                "description": "نقشه برداران و کاربران OpenStreetMap در ژاپن"
+            },
+            "OSM-japan-twitter": {
+                "description": "هشتگ در توییتر"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap نپال",
+                "description": "بهبود OpenStreetMap در نپال"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap  سری لانکا",
+                "description": "بهبود OpenStreetMap   در سری لانکا"
             },
             "Central-Pennsylvania-OSM": {
                 "name": "پنسیلوانیا مرکزی OSM",

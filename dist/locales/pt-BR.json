@@ -21,6 +21,11 @@
                 "description": "Adicione restaurantes, monumentos, caixas de correio ou outros pontos ao mapa.",
                 "tail": "Clique no mapa para adicionar um ponto."
             },
+            "add_note": {
+                "title": "Nota",
+                "description": "Detectou um problema? Deixe outros mapeadores saberem.",
+                "tail": "Clique no mapa para adicionar uma nota."
+            },
             "browse": {
                 "title": "Navegar",
                 "description": "Mover e ampliar o mapa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Adicionou um ponto.",
                     "vertex": "Adicionou um ponto numa linha.",
-                    "relation": "Adicionou uma relação."
+                    "relation": "Adicionou uma relação.",
+                    "note": "Adicionou uma nota."
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "Adicionada uma restrição de curva",
                     "delete": "Excluída uma restrição de curva"
                 }
+            },
+            "detach_node": {
+                "title": "Desanexar",
+                "key": "E",
+                "description": "Desanexe esse nó dessas linhas/áreas.",
+                "annotation": "Separou um nó das linhas/áreas.",
+                "restriction": "Este nó não pode ser desanexado porque danificaria uma relação \"{relation}\".",
+                "connected_to_hidden": "Este nó não pode ser desanexado porque está conectado a um recurso oculto."
             }
         },
         "restriction": {
@@ -352,8 +366,8 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Aproxime o zoom para editar",
-        "login": "login",
-        "logout": "sair",
+        "login": "Entrar",
+        "logout": "Sair",
         "loading_auth": "Conectando ao OpenStreetMap...",
         "report_a_bug": "Reportar um erro",
         "help_translate": "Ajude na tradução",
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "Dados do mapa do OpenStreetMap",
                     "title": "Dados do OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Observe as notas no OpenStreetMap",
+                    "title": "Notas do OpenStreetMap"
                 }
             },
             "fill_area": "Areas de Preenchimento",
@@ -710,15 +728,22 @@
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Alterar para Tela Cheia",
         "gpx": {
-            "local_layer": "Arquivo local",
+            "local_layer": "Adicionar um GPX",
             "drag_drop": "Arraste e solte um arquivo .gpx, .geojson ou .kml na página, ou clique o botão à direita para procurar",
             "zoom": "Aproximar a camada",
             "browse": "Procurar um arquivo"
+        },
+        "mvt": {
+            "local_layer": "Adicionar um MVT",
+            "drag_drop": "Arraste e solte um arquivo .mvt ou .pbf na página ou clique no botão à direita para navegar",
+            "zoom": "Zoom para camada",
+            "browse": "Procure um arquivo"
         },
         "streetside": {
             "tooltip": "Fotos da Streetside da Microsoft",
             "title": "Sobreposição de fotos (Bing Streetside)",
             "report": "Denunciar uma preocupação de privacidade com esta imagem",
+            "view_on_bing": "Visualizar no Bing Maps",
             "hires": "Alta resolução"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Ver esta imagem no OpenStreetCam"
+        },
+        "note": {
+            "note": "Nota",
+            "title": "Editar nota",
+            "anonymous": "anônimo",
+            "closed": "(Fechado)",
+            "commentTitle": "Comentários",
+            "newComment": "Novo comentário",
+            "inputPlaceholder": "Digite um comentário para compartilhar com outros usuários.",
+            "close": "Fechar nota",
+            "open": "Reabrir nota",
+            "comment": "Comentário",
+            "close_comment": "Fechar e comentar",
+            "open_comment": "Reabrir e comentar",
+            "report": "Reportar",
+            "new": "Nova nota",
+            "newDescription": "Descreva o problema.",
+            "save": "Salvar nota",
+            "login": "Você deve fazer login para alterar ou comentar esta nota.",
+            "upload_explanation": "Seus comentários serão publicamente visíveis para todos os usuários do OpenStreetMap.",
+            "upload_explanation_with_user": "Seus comentários como {user} serão publicamente visíveis para todos os usuários do OpenStreetMap."
         },
         "help": {
             "title": "Ajuda",
@@ -876,6 +922,17 @@
                 "boundary": "Uma relação *limite* é um grupo de um ou mais recursos de linha que juntos formam um limite administrativo.",
                 "boundary_add": "Para adicionar um elemento a uma relação de fronteira, selecione o elemento e desça até à secção \"Todas as relações\" do editor de elementos e clique no botão adicionar {plus} para adicionar os elementos próximos que existam na relação ou numa nova relação."
             },
+            "notes": {
+                "title": "Notas",
+                "intro": "*Notas* são usadas para alertar outros usuários de que um recurso requer correção ou atenção. As notas marcam uma localização específica no mapa. Para visualizar anotações existentes ou adicionar novas anotações, clique no painel {data} ** Dados do mapa ** para ativar a camada de anotações do OpenStreetMap.",
+                "add_note_h": "Adicionando Notas",
+                "add_note": "Para adicionar uma nova nota, clique no botão {nota}  **Nota** na barra de ferramentas acima do mapa ou pressione a tecla de atalho `4`. Isso mudará o cursor do mouse para um símbolo cruzado. Para colocar a nova nota no mapa, posicione o cursor do mouse onde a nota deve ir, então {leftclick} clique com o botão esquerdo ou pressione `Space`.",
+                "move_note": "Apenas novas notas podem ser movidas. Para mover uma nota, coloque o cursor do mouse sobre a nova nota, depois pressione e segure o botão esquerdo do mouse enquanto arrasta a nota para o novo local.",
+                "update_note_h": "Encerramento, Reabertura e Comentando",
+                "update_note": "Uma nota existente pode ser atualizada ao fechá-la, reabri-la ou adicionar um comentário a ela. Fechar uma nota indica que o problema foi resolvido. A reabertura de uma anotação indica que o problema original não foi resolvido.",
+                "save_note_h": "Salvando Notas",
+                "save_note": "Você deve salvar qualquer nota editada individualmente clicando nos botões abaixo dos comentários da nota. As edições de nota **não** estão incluídas nos conjuntos de alterações que você envia ao OpenStreetMap."
+            },
             "imagery": {
                 "title": "Imagens de Fundo",
                 "intro": "As imagens de fundo que aparecem abaixo dos dados do mapa são um recurso importante para o mapeamento. Essas imagens podem ser fotos aéreas coletadas de satélites, aviões e drones, ou podem ser mapas históricos digitalizados ou outros dados de fonte disponíveis gratuitamente.",
@@ -888,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "Fotos de Rua",
-                "intro": "As imagens ao nível de rua são bastante úteis para mapear sinais de trânsito, negócios e outros detalhes que não são visíveis em imagens aéreas ou de satélite. O editor iD suporta imagens ao nível de rua do [Mapillary](https://www.mapillary.com) e do [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "As fotos no nível da rua são úteis para mapear sinais de trânsito, empresas e outros detalhes que você não consegue ver de imagens aéreas e de satélite. O editor iD suporta fotos de nível de rua de [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), e [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Usando Fotos de Rua",
                 "using": "Para utilizar imagens ao nível de rua para mapear, clique no painel {data} **Dados do mapa** ao lado do mapa para ativar ou desativar a camada de imagens de rua que estão disponíveis.",
                 "photos": "Quando ativado, a camada de foto exibe uma linha ao longo da seqüência de fotos. Em níveis de zoom mais altos, um círculo marca em cada local da foto e, em níveis de zoom ainda maiores, um cone indica a direção em que a câmera estava voltada quando a foto foi tirada.",
@@ -1270,7 +1327,8 @@
                     "add_point": "modo 'Adicionar ponto' ",
                     "add_line": "modo 'Adicionar linha'",
                     "add_area": "modo 'Adicionar area'",
-                    "place_point": "Adicione um ponto",
+                    "add_note": "Modo 'Adicionar nota'",
+                    "place_point": "Coloque um ponto ou nota",
                     "disable_snap": "Pressione para desabilitar o agarramento de nós",
                     "stop_line": "Concluir desenhando uma linha ou área"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "Continuar a linha no nó selecionado",
                     "merge": "Combinar (juntar) elementos selecionados",
                     "disconnect": "Desconectar elementos no nó selecionado",
+                    "detach_node": "Desanexar o nó selecionado das linhas/áreas",
                     "split": "Dividir a linha em duas no nó selecionado",
                     "reverse": "Reverter a linha",
                     "move": "Mover elementos selecionados",
@@ -1622,6 +1681,9 @@
                 "capacity": {
                     "label": "Capacidade",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Dinheiro em"
                 },
                 "castle_type": {
                     "label": "Tipo"
@@ -2278,6 +2340,9 @@
                         "underground": "Subterrâneo"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Exposição de informação do passageiro"
+                },
                 "payment_multi": {
                     "label": "Tipos de Pagamento"
                 },
@@ -2509,6 +2574,9 @@
                 },
                 "site": {
                     "label": "Tipo"
+                },
+                "site_type": {
+                    "label": "Tipo de site"
                 },
                 "smoking": {
                     "label": "Fumantes",
@@ -3393,7 +3461,8 @@
                     "name": "Máquina de Venda de Comida"
                 },
                 "amenity/vending_machine/fuel": {
-                    "name": "Bomba de Gasolina"
+                    "name": "Bomba de Gasolina",
+                    "terms": "bomba de gasolina,bomba de combustível,bomba de diesel,gasolina,combustível,propano,diesel,biodiesel"
                 },
                 "amenity/vending_machine/ice_cream": {
                     "name": "Máquina de Venda de Sorvete"
@@ -4014,7 +4083,8 @@
                     "terms": "salva-vidas, salva vidas, bóia"
                 },
                 "emergency/lifeguard": {
-                    "name": "Salva-vidas"
+                    "name": "Salva-vidas",
+                    "terms": "salva-vidas,salva vidas,guarda-vidas,guarda vidas,bombeiro,resgate,cpr,rcp,rcr"
                 },
                 "emergency/no": {
                     "name": "Acesso de Emergência Não Permitido"
@@ -4595,7 +4665,7 @@
                 },
                 "leisure/amusement_arcade": {
                     "name": "Fliperama",
-                    "terms": "Fliperama, parque de diversões"
+                    "terms": "Fliperama, parque de diversões, vídeo game, jogos, jogos eletrônicos, console"
                 },
                 "leisure/beach_resort": {
                     "name": "Resort em Praia"
@@ -4988,11 +5058,11 @@
                 },
                 "natural/bay": {
                     "name": "Baía",
-                    "terms": "baía, enseada"
+                    "terms": "baía, enseada, mar, costa, água"
                 },
                 "natural/beach": {
                     "name": "Praia",
-                    "terms": "praia, areia"
+                    "terms": "praia, areia, cobertura de solo, mar, solo"
                 },
                 "natural/cave_entrance": {
                     "name": "Entrada de caverna",
@@ -5000,7 +5070,7 @@
                 },
                 "natural/cliff": {
                     "name": "Penhasco",
-                    "terms": "Penhasco, Falésia, Cânion"
+                    "terms": "Penhasco, Falésia, Cânion, acidente geográfico, morro, montanha"
                 },
                 "natural/coastline": {
                     "name": "Orla Marítima",
@@ -5008,7 +5078,7 @@
                 },
                 "natural/fell": {
                     "name": "Encosta",
-                    "terms": "Fell, Morro, Cerro, Coxilha, Montanha, Outeiro"
+                    "terms": "Fell, Morro, Cerro, Coxilha, Montanha, Outeiro, acidente geográfico"
                 },
                 "natural/glacier": {
                     "name": "Geleira",
@@ -5016,21 +5086,23 @@
                 },
                 "natural/grassland": {
                     "name": "Pradaria",
-                    "terms": "Pradaria"
+                    "terms": "Pradaria, vegetação, vegetação rasteira, gramínea"
                 },
                 "natural/heath": {
                     "name": "Urzal",
-                    "terms": "Urzal"
+                    "terms": "Urzal, vegetação, arbustos, charneca"
                 },
                 "natural/mud": {
-                    "name": "Lama"
+                    "name": "Lama",
+                    "terms": "solo, lamaçal, mangue, lama, cobertura de solo"
                 },
                 "natural/peak": {
                     "name": "Cume",
                     "terms": "Pico, Topo de Montanha, Serra, Montanha, Monte"
                 },
                 "natural/reef": {
-                    "name": "Recife"
+                    "name": "Recife",
+                    "terms": "coral, recife, mar, rocha, solo, arrecife, recife de corais, corais"
                 },
                 "natural/ridge": {
                     "name": "Cumeeira",
@@ -5050,7 +5122,7 @@
                 },
                 "natural/scrub": {
                     "name": "Arbustos",
-                    "terms": "Moita, Arbusto, Matagal"
+                    "terms": "Moita, Arbusto, Matagal, vegetação"
                 },
                 "natural/spring": {
                     "name": "Nascente",
@@ -5058,11 +5130,11 @@
                 },
                 "natural/tree": {
                     "name": "Árvore",
-                    "terms": "Árvore"
+                    "terms": "Árvore, vegetação, planta"
                 },
                 "natural/tree_row": {
                     "name": "Fileira de árvores",
-                    "terms": "Fileira de árvores"
+                    "terms": "Fileira de árvores, vegetação, plantas"
                 },
                 "natural/volcano": {
                     "name": "Vulcão",
@@ -5074,23 +5146,23 @@
                 },
                 "natural/water/lake": {
                     "name": "Lago",
-                    "terms": "Lago, laguna, lacustre"
+                    "terms": "Lago, laguna, lacustre, água, lagoa"
                 },
                 "natural/water/pond": {
                     "name": "Lagoa",
-                    "terms": "Lagoa"
+                    "terms": "Lagoa, lago, água, lacustre"
                 },
                 "natural/water/reservoir": {
                     "name": "Represa",
-                    "terms": "Lago Artificial, Albufeira, Açude"
+                    "terms": "Lago Artificial, Albufeira, Açude, lago, água, lacustre, barragem"
                 },
                 "natural/wetland": {
                     "name": "Zona Úmida",
-                    "terms": "zona úmida, pântano, charco, paul, sapal, turfa"
+                    "terms": "zona úmida, pântano, charco, paul, sapal, turfa, solo, cobertura de solo"
                 },
                 "natural/wood": {
                     "name": "Mata Nativa",
-                    "terms": "floresta, bosque, selva"
+                    "terms": "floresta, bosque, selva, vegetação, fauna"
                 },
                 "noexit/yes": {
                     "name": "Rua sem Saída",
@@ -5309,6 +5381,9 @@
                 "place/village": {
                     "name": "Povoado",
                     "terms": "vila, povoado, distrito, aldeia"
+                },
+                "playground/balance_beam": {
+                    "name": "Jogar saldo de feixe"
                 },
                 "playground/basket_spinner": {
                     "name": "Girador de cesta"
@@ -5533,6 +5608,9 @@
                 },
                 "public_transport/stop_position_bus": {
                     "name": "Local de parada de ônibus"
+                },
+                "public_transport/stop_position_ferry": {
+                    "name": "Localização de parada de balsa "
                 },
                 "public_transport/stop_position_light_rail": {
                     "name": "Local de parada do VLT"
@@ -6519,28 +6597,28 @@
                     "text": "Termos e Comentários"
                 },
                 "description": "O DigitalGlobe-Premium é um mosaico composto de mapa base DigitalGlobe com regiões selecionadas preenchidas com imagens Vivid ou personalizadas de área de interesse, resolução de 50 cm ou superior, e atualizadas com mais frequência com atualizações contínuas.",
-                "name": "Imagens premium da DigitalGlobe"
+                "name": "Imagens DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
                 "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
-                "name": "Data das imagens de satélite premium da DigitalGlobe"
+                "name": "Data das imagens de satélite DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
                 "description": "O DigitalGlobe-Standard é um conjunto curado de imagens que cobre 86% da massa terrestre do planeta, com resolução de 30-60 cm onde disponível, provida pela Landsat. A idade média é de 2,31 anos, com algumas áreas atualizadas 2x por ano.",
-                "name": "Imagens comuns da DigitalGlobe"
+                "name": "Imagens DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
                     "text": "Termos e Comentários"
                 },
                 "description": "Limites de imagens e datas de captura. Os rótulos aparecem no nível de zoom 13 e superior.",
-                "name": "Data das imagens de satélite comuns da DigitalGlobe"
+                "name": "Data das imagens de satélite DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -7036,6 +7114,9 @@
             "talk-au": {
                 "name": "Lista de Discussão Talk-au"
             },
+            "OSM-AR-facebook": {
+                "name": "Facebook OpenStreetMap Argentina"
+            },
             "OSM-AR-mailinglist": {
                 "name": "Lista de Discussão Talk-ar",
                 "description": "Lista histórica.  Em desuso hoje."
@@ -7054,6 +7135,8 @@
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
             },
             "DF-telegram": {
+                "name": "Grupo de Telegram do OpenStreetMap Brasília",
+                "description": "Participe do grupo de Telegram do OpenStreetMap Brasília",
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
             },
             "OSM-br-mailinglist": {

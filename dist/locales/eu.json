@@ -1,5 +1,10 @@
 {
     "eu": {
+        "icons": {
+            "information": "info",
+            "remove": "kendu",
+            "undo": "ezeztatu"
+        },
         "modes": {
             "add_area": {
                 "title": "Lekua",

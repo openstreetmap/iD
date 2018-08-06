@@ -1,6 +1,6 @@
 {
   "name": "iD",
-  "version": "2.9.2",
+  "version": "2.10.0",
   "description": "A friendly editor for OpenStreetMap",
   "main": "iD.js",
   "repository": "openstreetmap/iD",
@@ -72,7 +72,7 @@
     "mocha-phantomjs-core": "^2.1.0",
     "name-suggestion-index": "0.1.6",
     "npm-run-all": "^4.0.0",
-    "osm-community-index": "0.4.5",
+    "osm-community-index": "0.4.6",
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.85.0",
     "rollup": "~0.63.2",

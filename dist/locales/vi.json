@@ -21,6 +21,11 @@
                 "description": "Thêm nhà hàng, đài tưởng niệm, hòm thư, hoặc địa điểm khác vào bản đồ.",
                 "tail": "Nhấn vào bản đồ để thêm địa điểm."
             },
+            "add_note": {
+                "title": "Ghi chú",
+                "description": "Nhận ra khuyết điểm? Hãy báo cho người khác biết.",
+                "tail": "Nhấn chuột vào bản đồ để đăng ghi chú."
+            },
             "browse": {
                 "title": "Xem",
                 "description": "Di chuyển và thu phóng bản đồ."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "thêm địa điểm",
                     "vertex": "thêm nốt vào lối",
-                    "relation": "thêm quan hệ"
+                    "relation": "thêm quan hệ",
+                    "note": "đăng ghi chú"
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "thêm hạn chế rẽ",
                     "delete": "bỏ hạn chế rẽ"
                 }
+            },
+            "detach_node": {
+                "title": "Rút trích",
+                "key": "R",
+                "description": "Rút trích điểm riêng từ các đường kẻ hoặc vùng này.",
+                "annotation": "rút trích điểm từ đường kẻ hoặc vùng",
+                "restriction": "Không thể rút trích nốt này vì điều này sẽ làm hư một quan hệ “{relation}”.",
+                "connected_to_hidden": "Không thể rút trích nốt này vì nó nối liền với một đối tượng ẩn."
             }
         },
         "restriction": {
@@ -352,8 +366,8 @@
             "localized_translation_name": "Tên"
         },
         "zoom_in_edit": "Phong to để sửa đổi",
-        "login": "đăng nhập",
-        "logout": "đăng xuất",
+        "login": "Đăng nhập",
+        "logout": "Đăng xuất",
         "loading_auth": "Đang kết nối với OpenStreetMap…",
         "report_a_bug": "Báo cáo lỗi",
         "help_translate": "Hợp tác biên dịch",
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "Dữ liệu từ OpenStreetMap",
                     "title": "Dữ liệu OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Dữ liệu ghi chú từ OpenStreetMap",
+                    "title": "Ghi chú OpenStreetMap"
                 }
             },
             "fill_area": "Cách Tô màu các Vùng",
@@ -710,15 +728,22 @@
         "cannot_zoom": "Không thể thu nhỏ hơn trong chế độ hiện tại.",
         "full_screen": "Bật/tắt Chế độ Toàn màn hình",
         "gpx": {
-            "local_layer": "Tập tin địa phương",
+            "local_layer": "Thêm GPX",
             "drag_drop": "Kéo thả một tập tin .gpx, .geojson, hoặc .kml vào trang hoặc bấm nút bên phải để duyệt",
             "zoom": "Phóng vừa lớp",
+            "browse": "Duyệt tập tin"
+        },
+        "mvt": {
+            "local_layer": "Thêm MVT",
+            "drag_drop": "Kéo thả tập tin .mvt hoặc .pbf vào trang, hoặc bấm nút bên phải để duyệt tập tin",
+            "zoom": "Phong vừa lớp",
             "browse": "Duyệt tập tin"
         },
         "streetside": {
             "tooltip": "Hình ảnh Streetside của Microsoft",
             "title": "Lớp phủ Hình ảnh (Bing Streetside)",
             "report": "Báo cáo lo ngại riêng tư trong hình",
+            "view_on_bing": "Xem tại Bản đồ Bing",
             "hires": "Độ phân giải cao"
         },
         "mapillary_images": {
@@ -738,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Xem hình này trên OpenStreetCam"
+        },
+        "note": {
+            "note": "Ghi chú",
+            "title": "Sửa ghi chú",
+            "anonymous": "vô danh",
+            "closed": "(Giải quyết)",
+            "commentTitle": "Bình luận",
+            "newComment": "Bình luận Mới",
+            "inputPlaceholder": "Nhập lời bình luận để người dùng khác xem.",
+            "close": "Giải quyết Ghi chú",
+            "open": "Mở lại Ghi chú",
+            "comment": "Bình luận",
+            "close_comment": "Giải quyết và Bình luận",
+            "open_comment": "Mở lại và Bình luận",
+            "report": "Báo cáo",
+            "new": "Ghi chú Mới",
+            "newDescription": "Miêu tả khuyết điểm.",
+            "save": "Lưu Ghi chú",
+            "login": "Bạn phải đăng nhập để thay đổi hoặc bình luận về ghi chú này.",
+            "upload_explanation": "Lời bình luận của bạn sẽ xuất hiện để mọi người dùng OpenStreetMap xem.",
+            "upload_explanation_with_user": "Lời bình luận bạn đăng lên dưới tên {user} sẽ xuất hiện để mọi người dùng OpenStreetMap xem."
         },
         "help": {
             "title": "Trợ giúp",
@@ -876,6 +922,17 @@
                 "boundary": "Quan hệ *biên giới* nhóm lại một hay nhiều đường kẻ thành biên giới của một đơn vị hành chính.",
                 "boundary_add": "Để xếp một đối tượng vào một quan hệ biên giới, chọn đối tượng và bấm nút {plus} **Thêm** trong phần “Tất cả các quan hệ” của thanh bên. Bạn có thể chọn quan hệ từ một danh sách quan hệ lân cận hoặc tạo một quan hệ mới dùng mục “Quan hệ mới…”. "
             },
+            "notes": {
+                "title": "Ghi chú",
+                "intro": "Lời *ghi chú* báo động cho người dùng khác rằng một đối tượng nào đó cần được sửa chữa hoặc một địa điểm cần được chú ý. Một lời ghi chú ứng với một địa điểm cụ thể trên bản đồ. Để xem các ghi chú đã tồn tại hoặc đăng ghi chú mới, bấm nút {data} **Dữ liệu Bản đồ** ở bên phải của bản đồ để kích hoạt lớp phủ ghi chú OpenStreetMap.",
+                "add_note_h": "Đăng Ghi chú",
+                "add_note": "Để tạo ghi chú mới, bấm nút {note} **Ghi chú** trên thanh công cụ bên trên bản đồ hoặc bấm phím tắt `4`. Con trỏ sẽ biến thành chữ thập. Để đặt ghi chú mới trên bản đồ, đặt con trỏ tại vị trí muốn ghi chú, rồi {leftclick} nhấn chuột trái hoặc bấm `Dấu cách`.",
+                "move_note": "Để di chuyển một ghi chú mới, đặt con trỏ trên nó và kéo nó đến vị trí khác dùng {leftclick} chuột trái. Không thể di chuyển một ghi chú đã được đăng.",
+                "update_note_h": "Giải quyết, Mở lại, và Bình luận",
+                "update_note": "Bạn có thể cập nhật ghi chú bằng cách giải quyết, mở lại, hoặc đăng lời bình luận. Đánh dấu giải quyết đối với lời ghi chú nếu khuyết điểm đã được khắc phục. Mở lại ghi chú nếu khuyết điểm vẫn chưa được khắc phục.",
+                "save_note_h": "Đăng Ghi chú",
+                "save_note": "Bạn phải đăng mỗi một thay đổi ghi chú bằng cách bấm nút bên dưới các bình luận của ghi chú. Lưu ý rằng việc đăng bộ thay đổi lên OpenStreetMap sẽ **không** bao gồm các thay đổi ghi chú."
+            },
             "imagery": {
                 "title": "Hình nền",
                 "intro": "Hình nền đằng sau bản đồ là tài nguyên quan trọng trong việc vẽ bản đồ. Hình nền có thể chụp từ vệ tinh, máy bay, và máy bay không người lái, hoặc quét từ sách bản đồ lịch sử, hoặc lấy từ cơ sở dữ liệu mở.",
@@ -888,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "Hình ảnh Cấp phố",
-                "intro": "Hình ảnh cấp phố giúp bạn bổ sung bảng giao thông, kinh doanh, và nhiều chi tiết không nhìn được từ hình ảnh chụp từ không trung hoặc vệ tinh. Chương trình iD lấy hình ảnh cấp phố nguồn mở từ [Mapillary](https://www.mapillary.com) và [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Hình ảnh cấp phố giúp bạn bổ sung bảng giao thông, kinh doanh, và nhiều chi tiết không nhìn được từ hình ảnh chụp từ không trung hoặc vệ tinh. Chương trình iD lấy hình ảnh cấp phố nguồn mở từ [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), và [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Sử dụng Hình ảnh Cấp phố",
                 "using": "Để sử dụng hình ảnh cấp phố trong việc vẽ bản đồ, bấm nút {data} **Dữ liệu Bản đồ** ở bên phải của bản đồ và bật các lớp dữ liệu có sẵn.",
                 "photos": "Khi lớp hình ảnh được kích hoạt, bản đồ hiển thị đường kẻ theo đường đi của các máy chụp hình. Nếu phóng to đủ mức, mỗi vị trí chụp hình được đánh dấu bằng hình tròn. Nếu phóng to hơn, một hình nón cho biết hương nhìn vào lúc chụp hình.",
@@ -1270,7 +1327,8 @@
                     "add_point": "Chế độ “thêm địa điểm”",
                     "add_line": "Chế độ “thêm đường kẻ”",
                     "add_area": "Chế độ “thêm vùng”",
-                    "place_point": "Đặt địa điểm hoặc nốt",
+                    "add_note": "Chế độ tạo ghi chú",
+                    "place_point": "Đặt địa điểm hoặc tạo ghi chú",
                     "disable_snap": "Giữ xuống để tránh nối liền với đối tượng khác khi đặt địa điểm hoặc nốt",
                     "stop_line": "Kết thúc vẽ đường kẻ hoặc vùng"
                 },
@@ -1279,6 +1337,7 @@
                     "continue_line": "Vẽ tiếp đường kẻ từ nốt được chọn",
                     "merge": "Gộp các đối tượng được chọn",
                     "disconnect": "Tháo gỡ các đối tượng tại nốt được chọn",
+                    "detach_node": "Rút trích điểm từ nốt được chọn trên đường kẻ hoặc vùng",
                     "split": "Cắt đôi các đường kẻ tại nốt được chọn",
                     "reverse": "Đảo ngược chiều đường kẻ",
                     "move": "Di chuyển các đối tượng được chọn",
@@ -1622,6 +1681,9 @@
                 "capacity": {
                     "label": "Sức chứa",
                     "placeholder": "50, 100, 200…"
+                },
+                "cash_in": {
+                    "label": "Nhận tiền"
                 },
                 "castle_type": {
                     "label": "Kiểu"
@@ -2278,6 +2340,9 @@
                         "underground": "Ngầm"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Hệ thống Thông tin Hành khách"
+                },
                 "payment_multi": {
                     "label": "Phương thức Thanh toán"
                 },
@@ -2509,6 +2574,9 @@
                 },
                 "site": {
                     "label": "Loại"
+                },
+                "site_type": {
+                    "label": "Loại Di chỉ"
                 },
                 "smoking": {
                     "label": "Hút thuốc",
@@ -4403,8 +4471,8 @@
                     "terms": "nơi lịch sử, tưởng niệm lịch sử, kỷ niệm lịch sử, kỉ niệm lịch sử, noi lich su, tuong niem lich su, ky niem lich su, ki niem lich su"
                 },
                 "historic/archaeological_site": {
-                    "name": "Khu vực Khảo cổ",
-                    "terms": "khu vực khảo cổ, khẩo cổ học, khu vuc khao co, khao co hoc"
+                    "name": "Di chỉ Khảo cổ",
+                    "terms": "di chỉ khảo cổ, di chỉ, địa điểm khảo cổ học, khu vực khảo cổ, khẩo cổ học, di chi khao co, di chi, dia diem khao co hoc, khu vuc khao co, khao co hoc"
                 },
                 "historic/boundary_stone": {
                     "name": "Mốc Biên giới",
@@ -6632,6 +6700,7 @@
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
+                "description": "DigitalGlobe Tiêu chuẩn là tập hợp hình ảnh được lựa chọn chiếm 86% tổng diện tích đất đai của Trái Đất có độ phân giải 30–60 cm ở nơi nào có sẵn; ở nơi nào không có sẵn thì có hình ảnh Landsat thay thế. Hình ảnh được chụp cách đây trung bình 2,31 năm, một số khu vực được cập nhật mỗi năm hai lần.",
                 "name": "DigitalGlobe Tiêu chuẩn"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -7437,6 +7506,10 @@
                 "description": "Những người lập bản đồ và người dùng OpenStreetMap ở vùng Portland, Maine",
                 "extendedDescription": "Maptime đúng là thì giờ để lập bản đồ. Chúng ta nhằm mục đích mở cửa bản đồ học để cho mọi người có quan tâm có thể lập bản đồ, bằng cách để dành thì giờ và không gian để cộng tác tìm hiểu, khám phá, và lập bản đồ dùng công cụ và công nghệ bản đồ."
             },
+            "us-ma-mailinglist": {
+                "name": "Danh sách thư talk-us-massachusetts",
+                "description": "Danh sách thư của cộng đồng OSM tại Massachusetts"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Cải thiện OpenStreetMap tại khu vực Cleveland",
@@ -7464,6 +7537,10 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap Thành phố New York",
                 "description": "Những người lập bản đồ và những người sử dụng, nhà phát triển, và người hâm mộ OpenStreetMap ở khu vực đô thị New York"
+            },
+            "OSM-Portland-forum": {
+                "name": "Nhóm Google OpenStreetMap PDX",
+                "description": "Diễn đàn và danh sách thư của những người OpenStreetMap ở vùng Portland"
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
@@ -7611,7 +7688,8 @@
                 "description": "Theo dõi chúng tôi trên Twitter: {url}"
             },
             "Maptime-Bogota": {
-                "name": "Maptime Bogotá"
+                "name": "Maptime Bogotá",
+                "description": "Chúng ta là nhóm người lập bản đồ quan tâm đến việc đóng góp vào OpenStreetMap ở vùng Bogotá."
             },
             "OSM-CO-facebook": {
                 "name": "Facebook OpenStreetMap Colombia",

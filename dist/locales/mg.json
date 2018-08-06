@@ -18,7 +18,13 @@
             },
             "add_point": {
                 "title": "Teboka",
+                "description": "Hanampy toeram-pisakafoana, toerana miavaka, boatim-paositra na teboka hafa ao amin'ny sarintany.",
                 "tail": "Tsindrio eo amin'ny sarintany raha hanampy teboka."
+            },
+            "add_note": {
+                "title": "Fanamarihana",
+                "description": "Misy tsy mety hitanao ve? Teneno ny mpanao sarintany hafa.",
+                "tail": "Tsindrio eo amin'ny sarintany raha hanampy fanamarihana."
             },
             "browse": {
                 "title": "Hisava.",
@@ -39,7 +45,8 @@
                 "annotation": {
                     "point": "Nanampy teboka.",
                     "vertex": "Nanampy vona.",
-                    "relation": "Nanampy fifandraisana."
+                    "relation": "Nanampy fifandraisana.",
+                    "note": "Nanampy fanamarihana."
                 }
             },
             "start": {
@@ -150,7 +157,8 @@
                 "annotation": "Nanambatra singa {n}.",
                 "not_eligible": "Tsy mety atambatra ireto singa ireto.",
                 "not_adjacent": "Tsy mety atambatra ireto singa ireto satria tsy mifampitohy ny faran'izy ireo.",
-                "incomplete_relation": "Tsy mety atambatra ireto singa ireto satria misy tsy azo manontolo tamin'ny nakàna azy."
+                "incomplete_relation": "Tsy mety atambatra ireto singa ireto satria misy tsy azo manontolo tamin'ny nakàna azy.",
+                "conflicting_tags": "Tsy mety atambatra ireo singa ireo satria mifanipaka ny tenifototra voafaritra sasany."
             },
             "move": {
                 "title": "Hamindra",
@@ -180,9 +188,45 @@
                 }
             },
             "reflect": {
+                "title": {
+                    "long": "Hamototra araka ny lavany.",
+                    "short": "Hamototra araka ny hafohiny."
+                },
+                "description": {
+                    "long": {
+                        "single": "Hamototra ito singa ito manodidina ny lavany.",
+                        "multiple": "Hamototra ireto singa ireto manodidina ny lavany."
+                    },
+                    "short": {
+                        "single": "Hamototra ito singa ito manodidina ny hafohiny.",
+                        "multiple": "Hamototra ireto singa ireto manodidina ny hafohiny."
+                    }
+                },
                 "key": {
                     "long": "T",
                     "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Namototra ilay singa manodidina ny halavany.",
+                        "multiple": "Namototra ireo singa manodidina ny halavany."
+                    },
+                    "short": {
+                        "single": "Namototra ilay singa manodidina ny hafohiny.",
+                        "multiple": "Namototra ireo singa manodidina ny hafohiny."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Tsy mety afototra ito singa ito satria mbola tsy azo manontolo.",
+                    "multiple": "Tsy mety afototra ireo singa ireo satria mbola tsy azo manontolo."
+                },
+                "too_large": {
+                    "single": "Tsy mety afototra ito singa ito satria tsy ampy ny faritra miseho aminy.",
+                    "multiple": "Tsy mety afototra ireo singa ireo satria tsy ampy ny faritra miseho aminy."
+                },
+                "connected_to_hidden": {
+                    "single": "Tsy mety afototra ito singa ito satria mipetaka amina singa tsy miseho.",
+                    "multiple": "Tsy mety afototra ireo singa ireo satria mipetaka amina singa tsy miseho ny sasany aminy."
                 }
             },
             "rotate": {
@@ -191,6 +235,7 @@
                     "single": "Hanodina an'ito singa ito manodidina ny ivony.",
                     "multiple": "Hanodina an'ireto singa ireto manodidina ny ivony."
                 },
+                "key": "R",
                 "annotation": {
                     "line": "Nanodina an'ilay tsipika.",
                     "area": "Nanodina an'ilay faritra.",
@@ -212,14 +257,17 @@
             "reverse": {
                 "title": "Hamototra",
                 "description": "Hamototra ny fizotran'ito tsipika ito.",
+                "key": "V",
                 "annotation": "Namototra an'ilay tsipika."
             },
             "split": {
                 "title": "Hizara",
                 "description": {
                     "line": "Hizara an'ito tsipika ito ho roa eto amin'ito vona ito.",
-                    "area": "Hizara ny sisin'ito faritra ito ho roa."
+                    "area": "Hizara ny sisin'ito faritra ito ho roa.",
+                    "multiple": "Hanapaka ny tsipika/sisin'ny faritra ho roa eto amin'ity teboka ity."
                 },
+                "key": "X",
                 "annotation": {
                     "line": "Hanapaka tsipika",
                     "area": "Hanapaka sisina faritra",
@@ -228,6 +276,19 @@
                 "not_eligible": "Tsy mety tapahana amin'ny fanombohany na ny fiafarany ny tsipika.",
                 "multiple_ways": "Misy tsipika maro loatra eto ka tsy mety tapahana.",
                 "connected_to_hidden": "Tsy mety tapahana ity satria mifampitohy amina zavatra tsy miseho."
+            },
+            "restriction": {
+                "annotation": {
+                    "create": "Nanampy fameperam-pihodinana",
+                    "delete": "Nanala ilay fameperam-pihodinana"
+                }
+            },
+            "detach_node": {
+                "title": "Hanendaka",
+                "key": "E",
+                "description": "Hanendaka ito vona ito avy amin'ireo tsipika/faritra.",
+                "annotation": "Nanendaka ilay vona tamin'ireo tsipika/faritra nisy azy.",
+                "connected_to_hidden": "Tsy mety endahana ito vona ito satria mipetaka amina singa tsy miseho."
             }
         },
         "restriction": {
@@ -238,24 +299,432 @@
                 "via_node_only": "Teboka ihany"
             },
             "help": {
+                "indirect": "(an-kolaka)",
+                "turn": {
+                    "no_left_turn": "TSY MISY Fihodinana Miankavia {indirect}",
+                    "no_right_turn": "TSY MISY Fihodinana Miankavanana {indirect}",
+                    "no_u_turn": "TSY MISY Fihodinana Manao U {indirect}",
+                    "no_straight_on": "TSY MISY Fandrosoana Mahitsy {indirect}",
+                    "only_left_turn": "Mihodina Miankavia IHANY {indirect}",
+                    "only_right_turn": "Mihodina Miankavanana IHANY {indirect}",
+                    "only_u_turn": "Mihodina Manao U IHANY {indirect}",
+                    "only_straight_on": "Mandroso Mahitsy IHANY {indirect}",
+                    "allowed_left_turn": "Mahazo mihodina miankavia {indirect}",
+                    "allowed_right_turn": "Mahazo mihodina miankavanana {indirect}",
+                    "allowed_u_turn": "Mahazo mihodina manao U {indirect}",
+                    "allowed_straight_on": "Mahazo mandroso mahitsy {indirect}"
+                },
                 "from": "AVY AO",
                 "via": "MANARAKA NY",
                 "to": "HATRAO"
             }
         },
+        "undo": {
+            "tooltip": "Hanafoana ny: {action}",
+            "nothing": "Tsy misy hofoanana."
+        },
+        "redo": {
+            "tooltip": "Hamerina ny: {action}",
+            "nothing": "Tsy misy haverina."
+        },
+        "tooltip_keyhint": "Tsindry maika:",
+        "browser_notice": "Ao amin'ny navigateur Firefox, Chrome, Safari, Opera ary Internet Explorer 11 na amboniny ihany no mandeha ity fitaovana ity. Havaozy azafady ny navigateur ampiasainao na mampiasà Potlatch 2 hahafahanao manova ny sarintany.",
+        "translate": {
+            "translate": "Handika",
+            "localized_translation_label": "Ananarana amin'ny fiteny maromaro",
+            "localized_translation_language": "Hisafidy fiteny",
+            "localized_translation_name": "Anarana"
+        },
         "zoom_in_edit": "Hakaikezo raha hanova",
+        "login": "Hiditra",
+        "logout": "Hivoaka",
+        "loading_auth": "An-dalam-pifandraisana amin'ny OpenStreetMap...",
+        "report_a_bug": "Hampita tsy fetezana",
+        "help_translate": "Hanampy handika",
+        "feature_info": {
+            "hidden_warning": "Singa miafina {count}",
+            "hidden_details": "Miafina ireto singa ireto zao: {details}"
+        },
+        "status": {
+            "error": "Tsy afaka mifandray amin'ny API.",
+            "offline": "Tsy mandeha ny API amin'izao. Manandràmana indray mandeha rehefa afaka kelikely.",
+            "readonly": "Maody mamaky fotsiny ny API. Mila miandry ianao hihazonana ny fanovana nataonao.",
+            "rateLimit": "Mametra ny fifandraisana avy amin'olon-tsy fantatra ny API. Azonao andramana atao ny miditra amin'ny alalan'ny kaontinao."
+        },
+        "commit": {
+            "title": "Handefa mankany amin'ny OpenStreetMap",
+            "upload_explanation": "Ny fanovana alefanao dia ho hita amin'ny sarintany rehetra izay mampiasa ny angon-drakitra OpenStreetMap.",
+            "upload_explanation_with_user": "Ny fanovana alefanao amin'ny maha {user} anao dia ho hita amin'ny sarintany rehetra izay mampiasa ny angon-drakitra OpenStreetMap.",
+            "request_review": "Tiako hisy hanamarina ny fanovana nataoko.",
+            "save": "Handefa",
+            "cancel": "Hanafoana",
+            "changes": "Fanovana {count}",
+            "download_changes": "Haka ny rakitra osmChange",
+            "warnings": "Fampitandremana",
+            "modified": "Voaova",
+            "deleted": "Voafafa",
+            "created": "Voaforona",
+            "about_changeset_comments": "Mombamomba ny fanehoan-kevitra ao amin'ny vondron'ova",
+            "google_warning": "Voalazanao ao amin'ity fanehoan-kevitra ity ny hoe Google: tadidio fa tsy azo atao tanteraka ny mandika avy amin'ny Google Maps."
+        },
+        "contributors": {
+            "list": "Fanovana nataon'i {users}",
+            "truncated_list": "Fanovana nataon'i {users} sy {count} hafa"
+        },
         "info_panels": {
+            "key": "I",
             "background": {
-                "zoom": "Hakaiky"
+                "key": "B",
+                "title": "Lafika",
+                "zoom": "Hakaiky",
+                "source": "Loharano",
+                "description": "Famariparitana",
+                "unknown": "Tsy fantatra",
+                "show_tiles": "Hampiseho ny kapila",
+                "hide_tiles": "Hanafina ny kapila"
+            },
+            "history": {
+                "key": "H",
+                "title": "Raki-panovana",
+                "selected": "{n} voafidy",
+                "no_history": "Tsy Misy Raki-panovana (Singa Vaovao)",
+                "last_edit": "Fanovana Farany",
+                "edited_by": "Fanovana Nataon'i",
+                "changeset": "Vondron'ova",
+                "unknown": "Tsy fantatra",
+                "link_text": "Raki-panovana ao amin'ny openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Toerana",
+                "unknown_location": "Tsy Fantatra ny Toerana"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Fandrefesana",
+                "selected": "{n} voafidy",
+                "geometry": "Bika",
+                "closed_line": "tsipika mihidy",
+                "closed_area": "faritra mihidy",
+                "center": "Ivo",
+                "perimeter": "Manodidina",
+                "length": "Halava",
+                "area": "Velarana",
+                "location": "Toerana",
+                "node_count": "Isan'ny vona"
             }
+        },
+        "geometry": {
+            "point": "teboka",
+            "line": "tsipika",
+            "area": "faritra"
+        },
+        "geocoder": {
+            "search": "Hitady maneran-tany...",
+            "no_results_visible": "Tsy nisy vokatra teo amin'ny faritra miseho amin'ny sarintany",
+            "no_results_worldwide": "Tsy nisy vokatra hita"
+        },
+        "geolocate": {
+            "title": "Hampiseho ny Toerana Misy Ahy",
+            "locating": "Andraso fa mbola mamantatra ny toerana..."
+        },
+        "inspector": {
+            "no_documentation_combination": "Tsy misy tahirin-kevitra fantatra momba an'ity fitambarana tag  ity",
+            "no_documentation_key": "Tsy misy tahirin-kevitra fantatra momba ity clé ity",
+            "documentation_redirect": "Ity tahirin-kevitra ity dia niova ho any amina pejy vaovao",
+            "show_more": "Hampiseho Misimisy Kokoa",
+            "view_on_osm": "Hijery ao amin'ny openstreetmap.org",
+            "all_fields": "Ny saha rehetra",
+            "all_tags": "Ny tags rehetra",
+            "all_members": "Ny mpikambana rehetra",
+            "role": "Anjara asa",
+            "choose": "Safidio ny karazan'ny singa",
+            "results": "Vokatra {n} hoan'ny {search}",
+            "reference": "Hijery ao amin'ny OpenStreetMap Wiki",
+            "back_tooltip": "Hanova ny singa",
+            "remove": "Hanala",
+            "search": "Hikaroka",
+            "multiselect": "Singa voafidy",
+            "unknown": "Tsy fantatra",
+            "feature_list": "Hikaroka singa",
+            "edit": "Hanova ny singa",
+            "check": {
+                "yes": "Eny",
+                "no": "Tsia",
+                "reverser": "Hanova ny fizotra"
+            },
+            "radio": {
+                "structure": {
+                    "type": "Karazany",
+                    "default": "Tsy miova",
+                    "layer": "Sosona"
+                }
+            },
+            "add": "Hanampy",
+            "none": "Tsy misy",
+            "node": "Vona",
+            "way": "Làlana",
+            "location": "Toerana",
+            "add_fields": "Hanampy saha:"
+        },
+        "background": {
+            "title": "Lafika",
+            "description": "Fikirana ny lafika",
+            "key": "B",
+            "backgrounds": "Lafika",
+            "none": "Tsy misy",
+            "best_imagery": "Ny loharanon-tsary tsara indrindra fantatra hoan'ity toerana ity",
+            "switch": "Hiverina amin'ity lafika ity",
+            "custom": "Manokana",
+            "custom_button": "Hanova ny sosona manokana",
+            "custom_prompt": "Ampidiro ny modelin'ny URL. Ny famantarana azo ampiasaina dia:\n - {zoom} or {z}, {x}, {y} hoan'ny tetika Z/X/Y an'ny kapila\n - {-y} or {ty} hoan'ny coordonnées Y endrika TMS mivadika\n - {u} hoan'ny tetika quadtile\n - {switch:a,b,c} hoan'ny DNS server multiplexing\n\nOhatra:\n{example}",
+            "overlays": "Rakotra",
+            "imagery_source_faq": "Fanazavana Momba ny Sary / Hampita Olana",
+            "reset": "Hamerina amin'ny voalohany",
+            "display_options": "Safidy Momba ny Fisehoana",
+            "brightness": "Hazava",
+            "contrast": "Fifanalaviran-kazavana",
+            "saturation": "Haben'ny loko",
+            "sharpness": "Haranitra",
+            "minimap": {
+                "description": "Hampiseho ny sarintany kely",
+                "tooltip": "Hampiseho sarintany jerena lavitra mba hanampy amin'ny fahitana ny toerana misy ny sarintany miseho."
+            },
+            "fix_misalignment": "Hanamboatra ny fihitsin'ny ny sary",
+            "offset": "Akisaho mankany amin'izay tianao eo amin'ny faritra volondavenona eto ambany mba hanovana ny fihitsin'ny sary, na ampidiro ny sandan'ny fikisahana amin'ny metatra."
+        },
+        "map_data": {
+            "title": "Angon-draki-tsarintany",
+            "description": "Angon-draki-tsarintany",
+            "key": "F",
+            "data_layers": "Sosona Angon-drakitra",
+            "layers": {
+                "osm": {
+                    "tooltip": "Angon-draki-tsarintany avy amin'ny OpenStreetMap",
+                    "title": "Angon-drakitra OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Angon-drakitra momba ny fanamarihana avy amin'ny OpenStreetMap",
+                    "title": "Fanamarihana OpenStreetMap"
+                }
+            },
+            "fill_area": "Hameno ireo Faritra",
+            "map_features": "Singa ao amin'ny Sarintany",
+            "autohidden": "Fanahy iniana nafenina ireo singa ireo satria maro loatra no ho niseho teo amin'ny efijery. Hakaikezo raha hanova azy ireo.",
+            "osmhidden": "Fanahy iniana nafenina ireo singa ireo satria miafina ny sosona OpenStreetMap."
+        },
+        "feature": {
+            "points": {
+                "description": "Teboka",
+                "tooltip": "Toerana"
+            },
+            "traffic_roads": {
+                "tooltip": "Arabe, Làlana, sns."
+            },
+            "service_roads": {
+                "description": "Làlana Mankamina Tranon'olona",
+                "tooltip": "Làlana Mankamina Tranon'olona, Làlana Miditra Amina Toeram-pihantsonana, Làlan-tsarety, sns."
+            },
+            "paths": {
+                "description": "Làla-masaka",
+                "tooltip": "Làlana amin'ny Sisin'arabe, Làlan'ny Mpandeha an-tongotra, Làlan'ny Bisikileta, sns."
+            },
+            "buildings": {
+                "description": "Trano",
+                "tooltip": "Trano, Toeram-pialofana, Garazy, sns."
+            },
+            "landuse": {
+                "description": "Momba izay Mandrakotra ny Tany",
+                "tooltip": "Ala, Tanimboly, Valan-javaboary, Faritra Fonenana, Tsena, sns."
+            },
+            "boundaries": {
+                "description": "Sisiny",
+                "tooltip": "Sisintany"
+            },
+            "water": {
+                "description": "Momba ny Rano",
+                "tooltip": "Renirano, Farihy, Kamory, Dobo, sns."
+            },
+            "rail": {
+                "description": "Momba ny Lalam-by",
+                "tooltip": "Lalam-by"
+            },
+            "power": {
+                "description": "Momba ny Herinaratra",
+                "tooltip": "Fitarihana Herinaratra, Toeram-pamokarana Herinaratra, Tobin-herinaratra, sns."
+            },
+            "past_future": {
+                "description": "Lasa/Ho avy",
+                "tooltip": "Andalam-pangatahana, Fanamboarana, Tsy Miasa Intsony, Rava, sns."
+            },
+            "others": {
+                "description": "Hafa",
+                "tooltip": "Izay Zavatra Hafa Rehetra"
+            }
+        },
+        "area_fill": {
+            "wireframe": {
+                "description": "Tsy feno (Endrika Tariby)",
+                "tooltip": "Ny fampiharana ny endrika tariby dia manamora ny fahitana ny sary lafika ao ambany.",
+                "key": "W"
+            },
+            "partial": {
+                "description": "Feno amin'ny Ampahany"
+            },
+            "full": {
+                "description": "Feno Tanteraka",
+                "tooltip": "Natao miseho feno tanteraka ireo faritra."
+            }
+        },
+        "restore": {
+            "heading": "Misy fanovana nataonao mbola tsy voatahiry",
+            "description": "Tianao haverina ve ny fanovana mbola tsy voatahiry tamin'izay nataonao teo aloha?",
+            "restore": "Hamerina ny fanovana nataoko",
+            "reset": "Hamela ny fanovana nataoko"
+        },
+        "save": {
+            "title": "Hitahiry",
+            "help": "Hamarino ny fanovana nataonao ary alefaso any amin'ny OpenStreetMap, mba ho hitan'ny mpampiasa hafa.",
+            "no_changes": "Tsy misy fanovana hotahirizina.",
+            "error": "Nisy tsy nety tamin'ny fanandramana hitahiry ny fanovana",
+            "unknown_error_details": "Hamarino azafady hoe mandeha ny fifandraisana internet ampiasainao.",
+            "uploading": "Eo am-pandefasana ny fanovana mankany amin'ny OpenStreetMap...",
+            "conflict_progress": "Mitady ireo fifanindriana: {num} amin'ny {total}",
+            "unsaved_changes": "Misy fanovana nataonao mbola tsy voatahiry",
+            "conflict": {
+                "header": "Handamina ny fanovana mifanindry",
+                "count": "Fifanindriana {num} amin'ny {total}",
+                "previous": "< Teo Aloha",
+                "next": "Manaraka >",
+                "keep_local": "Hihazona ny ahy",
+                "keep_remote": "Hampiasa ny azy",
+                "restore": "Hamerina",
+                "delete": "Hamela ho Voafafa",
+                "download_changes": "Na alaivo ny rakitra osmChange",
+                "done": "Voalamina ny fifanindriana rehetra!",
+                "help": "Nisy mpampiasa hafa nanova ny sasany amin'ny singan-tsarintany novainao.\nTsindio ny tsirairay amin'ireo singa eto ambany hahafantaranao misimisy kokoa momba ny fifanindriana, dia misafidia na hihazona\nny fanovana nataonao na ny an'ny mpampiasa hafa.\n"
+            }
+        },
+        "merge_remote_changes": {
+            "conflict": {
+                "deleted": "Nofafan'i {user} ity singa ity.",
+                "location": "Samy nanova toerana ity singa ity ianareo sy {user}.",
+                "nodelist": "Samy nanova ireo vona ianareo sy {user}.",
+                "tags": "Novainao ho \"{local}\" ny tag <b>{tag}</b> nefa i {user} nanova azy ho \"{remote}\"."
+            }
+        },
+        "success": {
+            "just_edited": "Efa nanova an'i OpenStreetMap izay!",
+            "thank_you": "Misaotra anao manatsara ny sarintany.",
+            "thank_you_location": "Misaotra anao manatsara ny sarintany manodidina an'i {where}.",
+            "help_html": "Tokony hiseho ao amin'ny OpenStreetMap ny fanovana nataonao ao anatin'ny minitra vitsivitsy. Mety ho elaela kosa ny sarintany any amin'ny toeran-kafa vao miova.",
+            "help_link_text": "Antsipiriany",
+            "view_on_osm": "Hijery ny Fiovana ao amin'ny OSM",
+            "changeset_id": "Ny vondron'ova nataonao #: {changeset_id}",
+            "like_osm": "Tianao ve i OpenStreetMap? Mifandraisa amin'ny hafa:",
+            "more": "Misimisy kokoa",
+            "events": "Hetsika",
+            "languages": "Fiteny: {languages}",
+            "missing": "Misy banga ve ito lisitra ito?",
+            "tell_us": "Teneno!"
+        },
+        "confirm": {
+            "okay": "OK",
+            "cancel": "Hanafoana"
+        },
+        "splash": {
+            "welcome": "Tongasoa eto amin'ny éditeur OpenStreetMap iD",
+            "text": "iD dia fitaovana mora ampiasaina nefa matanjaka mba handraisana anjara amin'ny sarintany misokatra tsara indrindra eto an-tany. Ity dia fivoahana faha {version}. Raha te hahalala misimisy kokoa dia tsidiho ny {website} ary tatero ao amin'ny {github} ny tsy fetezana.",
+            "walkthrough": "Hanomboka ny Fanoroana",
+            "start": "Hanova amin'izay"
+        },
+        "source_switch": {
+            "lose_changes": "Misy fanovana nataonao mbola tsy voatahiry. Raha mivery any amin'ny sarintany ianao dia very ireo. Azonao antoka ve fa te hiverina any amin'ny sarintany tokoa ianao?"
+        },
+        "version": {
+            "whats_new": "Inona no zava-baovao ao amin'ny iD fivoahana faha {version}"
+        },
+        "tag_reference": {
+            "description": "Famariparitana",
+            "on_wiki": "{tag} ao amin'ny wiki.osm.org",
+            "used_with": "ampiasaina miaraka amin'ny {type}"
+        },
+        "validations": {
+            "disconnected_highway": "Nanasaraka ny làlana",
+            "disconnected_highway_tooltip": "Ny làlana dia tokony hifandray amin'ny làlana hafa na amin'ny fidirana amina trano.",
+            "untagged_point": "Teboka tsy misy tag",
+            "untagged_point_tooltip": "Safidio izay karana singa mahalaza hoe inona ito teboka ito.",
+            "untagged_line": "Tsipika tsy misy tag",
+            "untagged_line_tooltip": "Safidio izay karazana singa mahalaza hoe inona ito tsipika ito.",
+            "untagged_area": "Faritra tsy misy tag",
+            "untagged_area_tooltip": "Safidio izay karana singa mahalaza hoe inona ito faritra ito.",
+            "untagged_relation": "Relation tsy misy tag",
+            "untagged_relation_tooltip": "Safidio izay karana singa mahalaza hoe inona ito relation ito.",
+            "many_deletions": "Eo am-pamafana singa {n} ianao: teboka {p}, tsipika {l}, faritra {a}, relations {r}. Azonao antoka ve izay ataonao? Ity dia hamafa azy ireo tao amin'ny sarintany izay hitan'ny olon-drehetra ao amin'ny openstreetmap.org.",
+            "deprecated_tags": "Tags tsy fampiasa intsony: {tags}"
         },
         "zoom": {
             "in": "Hanakaiky",
             "out": "Hanalavitra"
         },
         "cannot_zoom": "Tsy afaka manalavitra noho izao intsony amin'ity maody ity.",
+        "full_screen": "Hameno ny Efijery",
         "gpx": {
+            "local_layer": "Hanampy GPX",
             "zoom": "Hanangeza araky ny sosona"
+        },
+        "mvt": {
+            "zoom": "Hanangeza araky ny sosona"
+        },
+        "note": {
+            "note": "Fanamarihana",
+            "title": "Hanova ny fanamarihana",
+            "anonymous": "olon-tsy fantatra",
+            "closed": "(Mikatona)",
+            "commentTitle": "Fanehoan-kevitra",
+            "newComment": "Fanehoan-kevitra Vaovao",
+            "inputPlaceholder": "Mampidira fanehoan-kevitra hozaraina amin'ny mpampiasa hafa.",
+            "close": "Hanakatona ny fanamarihana",
+            "open": "Hanokatra ny fanamarihana indray",
+            "comment": "Fanehoan-kevitra",
+            "close_comment": "Hanakatona sy Haneho Hevitra",
+            "open_comment": "Hanokatra Indray sy Haneho Hevitra",
+            "report": "Hitatitra",
+            "new": "Fanamarihana Vaovao",
+            "newDescription": "Hazavao ny tsy fetezana",
+            "save": "Hitahiry ny Fanamarihana",
+            "login": "Mila miditra amin'ny alalan'ny kaontinao ianao mba ho afaka hanova na haneho hevitra amin'ity fanamarihana ity.",
+            "upload_explanation": "Ny fanehoan-kevitrao dia ho hitan'ny besinimaro mampiasa ny OpenStreetMap.",
+            "upload_explanation_with_user": "Ny fanehoan-kevitrao amin'ny maha {user} anao dia ho hitan'ny besinimaro mampiasa ny OpenStreetMap."
+        },
+        "help": {
+            "title": "Fanampiana",
+            "key": "H",
+            "help": {
+                "title": "Fanampiana",
+                "welcome": "Tongasoa eto amin'ny éditeur iD hoan'ny [OpenStreetMap] (https://www.openstreetmap.org/). Amin'ny alalan'ity éditeur ity ianao dia afaka manova an'i OpenStreetMap avy ato amin'ny navigateur ampiasainao.",
+                "open_data_h": "Hanokatra Rakitra",
+                "open_data": "Ny fanovana ataonao amin'ity sarintany ity dia ho hitan'ny olona rehetra mampiasa ny OpenStreetMap. Azonao atao miorina amin'ny fahalalana manokana, ny fidinana ifotony, na ny sary avy eny ambony na ny sary ety amin'ny tany, ny fanovana ataonao. [Tsy azo atao mihitsy] (https://www.openstreetmap.org/copyright) ny mandika avy amin'ny loharano natao hitadiavam-bola toy ny Google Maps.",
+                "before_start_h": "Alohan'ny hanombohanao",
+                "before_start": "Tokony ho efa mifankazatra ny OpenStreetMap sy ity éditeur ity ianao mialohan'ny hanaovanao fanovana. Misy fanoroana atolotr'i iD hampianarana anao ny fototra amin'ny fanovana an'i OpenStreetMap. Tsindrio eo amin'ny \"Hanomboka ny Fanoroana\" eto amin'ity efijery ity raha hanomboka hianatra - 15 minitra eo ho eo fotsiny ny halavan'ilay izy.",
+                "open_source_h": "Hanokatra Loharano",
+                "open_source_help": "Afaka manampy ny iD ianao amin'ny alalan'ny [fandikàna](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) na [fitaterana tsy fetezana](https://github.com/openstreetmap/iD/issues)."
+            },
+            "overview": {
+                "title": "Jery Ankapobeny",
+                "navigation_h": "Fivezivezena",
+                "navigation_drag": "Raha hanakisaka ny sarintany dia tsindrio maharitra ny {leftclick} bokotra havian'ny souris ary akisaho ny souris. Azonao ampiasaina ihany koa ireo bokotra `↓`, `↑`, `←`, `→` an'ny clavier.",
+                "navigation_zoom": "Raha hijery manakaiky na manalavitra dia ampiasao ny bokotra mihodina amin'ny souris na ny trackpad, na ampiasao ireo bokotra {plus} / {minus} etsy amin'ny sarintany. Azonao ampiasaina koa ireo bokotra `+`, `-` eo amin'ny clavier anao.",
+                "features_h": "Singa ao amin'ny Sarintany",
+                "features": "Ampiasaintsika ny teny hoe *singa* mba hilazana ireo zavatra izay miseho eo amin'ny sarintany, toy ny làlana, trano na toerana. Azo ampidirina ho singa ao amin'ny OpenStreetMap avokoa izay zavatra misy rehetra amin'ny tontolo tena izy. Ireo singa ao amin'ny sarintany dia aseho amin'ny alalan'ny *teboka*, *tsipika*, na *faritra*.",
+                "nodes_ways": "Ao amin'ny OpenStreetMap, ny teboka indraindray dia antsoina koa hoe *vona*, ary ny tsipika sy sy ny faritra dia antsoina indraindray hoe *soritra*."
+            },
+            "editing": {
+                "title": "Manova & Mitahiry",
+                "select_h": "Hisafidy",
+                "select_left_click": "{leftclick} Tsindrio amin'ny alalan'ny bokotra havia amin'ny souris eo amin'ny singa iray raha hisafidy azy io. Hisongadina izy avy eo, ary hiseho eo amin'ny takelaka etsy amin'ny sisiny ny mombamomba ilay singa, toy ny anarany na ny adiresiny.",
+                "save_h": "Hitahiry"
+            }
         },
         "intro": {
             "graph": {
@@ -277,6 +746,21 @@
                 "navigation": {
                     "zoom": "Hanakaiky / Hanalavitra"
                 }
+            },
+            "editing": {
+                "commands": {
+                    "save": "Hitahiry ny fanovana"
+                }
+            }
+        },
+        "community": {
+            "osm-mg-facebook": {
+                "name": "Vondrona Facebook OpenStreetMap Madagascar",
+                "description": "Vondrona Facebook malagasy ho an'izay liana amin'ny OpenStreetMap."
+            },
+            "talk-mg": {
+                "name": "Mailaka fiseraserana Talk-mg",
+                "description": "Toerana ahafahan'ny mpandray anjara sy ny mpampiasa ny OpenStreetMap eto Madagasikara mifanakalo hevitra sy miresaka."
             }
         }
     }

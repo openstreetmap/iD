@@ -23,7 +23,6 @@
             "localized_translation_language": "هەڵبژاردنی زمان",
             "localized_translation_name": "ناو"
         },
-        "logout": "چوونە دەرەوە",
         "report_a_bug": "ناردنی هەڵە",
         "help_translate": "یارمەتیدان بۆ وەرگێڕان",
         "commit": {
@@ -83,6 +82,11 @@
             },
             "startediting": {
                 "title": "دەستپێکردنی دەستکاری"
+            }
+        },
+        "community": {
+            "it-twitter": {
+                "description": "لەسەر تویتەر شوێنمان بکەوە {url}"
             }
         }
     }

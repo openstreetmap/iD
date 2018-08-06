@@ -21,6 +21,11 @@
                 "description": "Añade restaurantes, monumentos, buzones postales, negocios u otros puntos al mapa.",
                 "tail": "Haga clic en el mapa para añadir un punto."
             },
+            "add_note": {
+                "title": "Nota",
+                "description": "¿Has encontrado un problema? Deja que otros mapeadores lo sepan.",
+                "tail": "Haz clic en el mapa para añadir una nota."
+            },
             "browse": {
                 "title": "Navegar",
                 "description": "Desplazar y acercar el mapa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Punto añadido.",
                     "vertex": "Nodo añadido a una vía.",
-                    "relation": "Relación añadida."
+                    "relation": "Relación añadida.",
+                    "note": "Nota añadir."
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "Restricción de giro añadida",
                     "delete": "Restricción de giro eliminada"
                 }
+            },
+            "detach_node": {
+                "title": "Desconectar",
+                "key": "E",
+                "description": "Desconectar este nodo de estas líneas/áreas.",
+                "annotation": "Desconectado un nodo de las líneas/áreas padre.",
+                "restriction": "Este nodo no se puede desconectar porque podría afectar a una relación \"{relation}\".",
+                "connected_to_hidden": "Este nodo no se puede desconectar porque está conectado a un elemento oculto."
             }
         },
         "restriction": {
@@ -352,7 +366,7 @@
             "localized_translation_name": "Nombre"
         },
         "zoom_in_edit": "Acercar para editar",
-        "login": "iniciar sesión",
+        "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
         "loading_auth": "Conectando a OpenStreetMap...",
         "report_a_bug": "Reportar un error",
@@ -536,6 +550,10 @@
                 "osm": {
                     "tooltip": "Datos del mapa de OpenStreetMap",
                     "title": "Datos de OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Datos de Notas de OpenStreetMap",
+                    "title": "Notas de OpenStreetMap"
                 }
             },
             "fill_area": "Pintar las áreas",
@@ -710,15 +728,23 @@
         "cannot_zoom": "No se puede alejar más la imagen en el modo actual.",
         "full_screen": "Cambiar a pantalla completa",
         "gpx": {
-            "local_layer": "Archivo local",
+            "local_layer": "Añadir un GPX",
             "drag_drop": "Arrastre y suelte un archivo .gpx, .geojson o .kml en la página o haga clic en el botón a la derecha para explorar",
+            "zoom": "Acercar a la capa",
+            "browse": "Buscar un archivo"
+        },
+        "mvt": {
+            "local_layer": "Añadir un MVT",
+            "drag_drop": "Arrastre y suelte un archivo .mvt o .pbf en la página, o haga clic en el botón de la derecha para navegar",
             "zoom": "Acercar a la capa",
             "browse": "Buscar un archivo"
         },
         "streetside": {
             "tooltip": "Fotografías Streetside de Microsoft",
             "title": "Capa de fotos (Bing Streetside)",
-            "report": "Informar un problema de privacidad con esta imagen"
+            "report": "Informar un problema de privacidad con esta imagen",
+            "view_on_bing": "Ver en Bing Maps",
+            "hires": "Alta resolución"
         },
         "mapillary_images": {
             "tooltip": "Fotos a nivel calle de Mapillary",
@@ -737,6 +763,27 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Ver esta imagen en OpenStreetCam"
+        },
+        "note": {
+            "note": "Nota",
+            "title": "Editar nota",
+            "anonymous": "anónimo",
+            "closed": "(Cerrada)",
+            "commentTitle": "Comentarios",
+            "newComment": "Nuevo comentario",
+            "inputPlaceholder": "Ingrese un comentario para compartir con otros usuarios.",
+            "close": "Cerrar nota",
+            "open": "Reabrir nota",
+            "comment": "Comentar",
+            "close_comment": "Cerrar y comentar",
+            "open_comment": "Reabrir y comentar",
+            "report": "Informar",
+            "new": "Nueva Nota",
+            "newDescription": "Describir el problema.",
+            "save": "Guardar la Nota",
+            "login": "Debe iniciar sesión para cambiar o comentar esta nota.",
+            "upload_explanation": "Sus comentarios serán públicamente visibles para todos los usuarios de OpenStreetMap.",
+            "upload_explanation_with_user": "Sus comentarios como {user} serán públicamente visibles para todos los usuarios de OpenStreetMap."
         },
         "help": {
             "title": "Ayuda",
@@ -875,6 +922,17 @@
                 "boundary": "Una relación *límite* es un grupo de uno o más elementos de línea que juntas forman un límite administrativo.",
                 "boundary_add": "Para agregar un elemento a una relación de límite, seleccione el elemento y desplácese hacia abajo a la sección \"Todas las relaciones\" del editor de elemento, luego haga clic en el botón {plus} agregar para agregar este elemento a una relación cercana existente o a una nueva relación."
             },
+            "notes": {
+                "title": "Notas",
+                "intro": "Las *Notas* se usan para a alertar a otros usuarios que un elemento debe ser corregido o requiere atención. Las notas señalan una localización específica en el mapa. Para ver las notas existentes o añadir nuevas, haz clic en el panel {data} **Datos del mapa** para activar la capa de notas de OpenStreetMap.",
+                "add_note_h": "Añadiendo Notas",
+                "add_note": "Para añadir una nueva nota, haz clic en el botón {note} **Nota** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `4`. Esto cambiará el cursor del ratón a un símbolo de cruz. Para colocar la nueva nota en el mana, posiciona el cursor del ratón donde deba ir la nota y, a continuación, haz clic con el botón izquierdo del ratón o presiona `Espacio`.",
+                "move_note": "Sólo se pueden mover las nuevas notas. Para mover una nota, coloca el cursor del ratón sobre la nueva nota, luego mantén presionado el {leftclick} botón izquierdo del ratón mientras arrastra el punto a su nueva ubicación.",
+                "update_note_h": "Cerrando, Reabriendo y Comentando",
+                "update_note": "Se puede actualizar una nota cerrándola, reabriéndola, o añadiéndole un comentario. Cerrar la nota indica que el problema ha sido resuelto. Reabrirla que el problema original no ha sido resuelto.",
+                "save_note_h": "Guardando las Notas",
+                "save_note": "Debes guardar las ediciones de cualquier nota de forma individual haciendo clic en los botones que se encuentran bajo los comentarios de la nota. Las ediciones de notas **no** se incluyen en los conjuntos de cambios que se suben a OpenStreetMap."
+            },
             "imagery": {
                 "title": "Imágenes de fondo",
                 "intro": "Las imágenes de fondo que aparecen debajo de los datos del mapa son un recurso importante para el mapeo. Estas imágenes pueden ser fotografías aéreas recopiladas de satélites, aviones y aviones no tripulados, o pueden escanearse mapas históricos u otros datos de origen disponibles libremente.",
@@ -887,7 +945,7 @@
             },
             "streetlevel": {
                 "title": "Fotos a nivel de calle",
-                "intro": "Las fotos a nivel de calle son útiles para mapear señales de tráfico, negocios y otros detalles que no se pueden ver desde imágenes satelitales y aéreas. El editor iD admite fotos a nivel de calle de [Mapillary](https://www.mapillary.com) y [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Las fotos a nivel de calle son útiles para mapear señales de tráfico, negocios y otros detalles que no se pueden ver desde imágenes satelitales y aéreas. El editor iD admite fotos a nivel de calle de [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) y [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Usar fotos a nivel de calle",
                 "using": "Para usar fotos a nivel de calle para mapear, haga clic en el panel {data} **Datos de mapa** en el lateral del mapa para habilitar o deshabilitar las capas de fotos disponibles.",
                 "photos": "Cuando está habilitada, la capa de la foto muestra una línea a lo largo de la secuencia de fotos. En niveles de zoom más altos, se indica con un círculo en cada foto la ubicación, y en niveles de zoom aún más altos, se indica con un cono la dirección que estaba mirando la cámara cuando se tomó la foto.",
@@ -1269,7 +1327,8 @@
                     "add_point": "Modo 'añadir punto'",
                     "add_line": "Modo 'añadir línea'",
                     "add_area": "Modo 'añadir área'",
-                    "place_point": "Coloca un punto",
+                    "add_note": "Modo 'Añadir nota'",
+                    "place_point": "Coloca un punto o una nota",
                     "disable_snap": "Mantener presionado para desactivar el ajuste de punto",
                     "stop_line": "Finaliza el dibujo de una línea o área"
                 },
@@ -1278,6 +1337,7 @@
                     "continue_line": "Continua una línea en el nodo seleccionado",
                     "merge": "Combina (fusiona) los elementos seleccionados",
                     "disconnect": "Desconecta los elementos en el nodo seleccionado",
+                    "detach_node": "Desconectar el nodo seleccionado de las líneas/áreas padre.",
                     "split": "Divida una línea en dos en el nodo seleccionado",
                     "reverse": "Invierte una línea",
                     "move": "Mueve los elementos seleccionados",
@@ -1571,6 +1631,9 @@
                 "board_type": {
                     "label": "Tipo"
                 },
+                "booth": {
+                    "label": "Cabina"
+                },
                 "boules": {
                     "label": "Tipo"
                 },
@@ -1618,6 +1681,9 @@
                 "capacity": {
                     "label": "Capacidad",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Pagar en efectivo"
                 },
                 "castle_type": {
                     "label": "Tipo"
@@ -2274,6 +2340,9 @@
                         "underground": "Subterráneo"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Pantalla de información del pasajero"
+                },
                 "payment_multi": {
                     "label": "Formas de pago"
                 },
@@ -2492,8 +2561,22 @@
                 "shop": {
                     "label": "Tipo"
                 },
+                "siren/purpose": {
+                    "label": "Propósito"
+                },
+                "siren/type": {
+                    "label": "Tipo",
+                    "options": {
+                        "electronic": "Elctrónica",
+                        "other": "Otros",
+                        "pneumatic": "Neumática"
+                    }
+                },
                 "site": {
                     "label": "Tipo"
+                },
+                "site_type": {
+                    "label": "Tipo de sitio"
                 },
                 "smoking": {
                     "label": "Fumar",
@@ -4001,6 +4084,10 @@
                 "emergency/destination": {
                     "name": "Acceso de emergencia como destino"
                 },
+                "emergency/fire_alarm": {
+                    "name": "Alarma anti incendios",
+                    "terms": "'alarma de incendios'"
+                },
                 "emergency/fire_extinguisher": {
                     "name": "Extintor de incendios",
                     "terms": "Extintor de incendios, incendio, fuego, matafuego"
@@ -4009,9 +4096,17 @@
                     "name": "Hidrante contra incendios",
                     "terms": "boca de incendio,hidrante de incendio, hidrante contra incendios"
                 },
+                "emergency/first_aid_kit": {
+                    "name": "Kit de primeros auxilios",
+                    "terms": "'kit de primeros auxilios' 'botiquín de primeros auxilios'"
+                },
                 "emergency/life_ring": {
                     "name": "Salvavidas",
                     "terms": "boya, boya salvavidas, anillo kisby, anillo kisby, boya perry"
+                },
+                "emergency/lifeguard": {
+                    "name": "Salvavidas",
+                    "terms": "'salvavidas'"
                 },
                 "emergency/no": {
                     "name": "Acceso de emergencia no permitido"
@@ -4025,6 +4120,10 @@
                 },
                 "emergency/private": {
                     "name": "Acceso de emergencia privado"
+                },
+                "emergency/siren": {
+                    "name": "Sirena",
+                    "terms": "'alarma' 'sirena'"
                 },
                 "emergency/water_tank": {
                     "name": "Depósito de agua de emergencia",
@@ -6561,6 +6660,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Orthophoto Flanders más reciente © AGIV"
+                },
+                "name": "Imágenes aéreas más recientes de AGIV Flanders"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Orthophoto Flanders © AGIV"
+                },
+                "name": "Imágenes aéreas de AGIV Flandes 2013-2015 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Imágenes satelitales y aéreas.",
                 "name": "Imágenes aéreas Bing"
@@ -6569,6 +6686,7 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
+                "description": "DigitalGlobe-Premium es un mosaico compuesto por el mapa base de DigitalGlobe con regiones seleccionadas llenas de imágenes con +Vivid o de áreas de interés personalizadas, resolución de 50 cm o superior, y actualizadas con mayor frecuencia con actualizaciones continuas.",
                 "name": "Imágenes DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -6582,6 +6700,7 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
+                "description": "DigitalGlobe-Standard es un conjunto de imágenes seleccionadas que cubren el 86% de la superficie terrestre, con una resolución de 30-60 cm, donde esté disponible, rellenado por Landsat. La antigüedad promedio es de 2.31 años, con algunas áreas actualizadas 2 veces por año.",
                 "name": "Imágenes DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6661,6 +6780,12 @@
                 },
                 "name": "Inspector OSM: Etiquetado"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "Imágenes aéreas más recientes de SPW(allonie)"
+            },
+            "SPW_PICC": {
+                "name": "Imágenes numéricas PICC de SPW(allonie)"
+            },
             "US-TIGER-Roads-2012": {
                 "name": "Carreteras TIGER 2012"
             },
@@ -6675,6 +6800,30 @@
             "US_Forest_Service_roads_overlay": {
                 "description": "Carretera: marco verde = sin clasificar. marco marrón = pista. Superficie: grava = relleno marrón claro, asfalto = negro, pavimentado = gris, tierra = blanco, hormigón = azul, hierba/pasto = verde. Estacional = barras blancas",
                 "name": "Superposición de carreteras forestales de los EE.UU."
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realizado por medio de Brussels UrbIS®© - Distribución y Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realizado por medio de Brussels UrbIS®© - Distribución y Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realizado por medio de Brussels UrbIS®© - Distribución y Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realizado por medio de Brussels UrbIS®© - Distribución y Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6758,6 +6907,13 @@
                 },
                 "name": "OpenStreetMap (estilo alemán)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Escaneo de ´mapas económicos´ ca 1950-1980",
+                "name": "Mapa económico Landmäteriet (histórico)"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, datos © contribuidores OpenStreetMap"
@@ -6787,13 +6943,55 @@
                     "text": "Mapas © Thunderforest, datos © contribuidores OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Red de trenes de Suecia, incluyendo apartaderos",
+                "name": "Red de trenes de Trafikverket"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Red de trenes de Suecia, con múltiples opciones de capas sobre el mapa",
+                "name": "Trafikverket Railway Network options"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Red de carreteras sueca NVDB",
+                "name": "Red de carreteras Trafikverket"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Detalles adicionales de la NVDB sueca: referencia de autopista, reductores de tráfico, área de descanso, parada de autobús, puente, túnel, cámara de velocidad",
+                "name": "Trafikverket Road Network extra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Nombres de calles suecas NVDB",
+                "name": "Trafikverket Street Names"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Red de carreteras suecas NVDB con varias opciones de capas de mapas",
+                "name": "Trafikverket Road Network options"
             }
         },
         "community": {
             "cape-coast-youthmappers": {
                 "name": "Universidad de Cape Coast YouthMappers",
                 "description": "Síguenos en Twitter en {url}",
-                "extendedDescription": "Este es el identificador oficial del capítulo de Jóvenes Cartografistas de la Universidad de Cape Coast, Ghana. Nos encantan los mapas, los datos abiertos y ayudar a los vulnerables."
+                "extendedDescription": "Este es el identificador oficial del capítulo de Jóvenes Cartografistas de la Universidad de Cape Coast, Ghana. Nos encantan los mapas, los datos abiertos y ayudar a las personas vulnerables."
             },
             "osm-gh-facebook": {
                 "name": "OpenStreetMap Ghana en Facebook",
@@ -7030,6 +7228,18 @@
                 "name": "Twitter OpenStreetMap Bélgica",
                 "description": "OSM Bélgica en Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "Grupo de Facebook de OpenStreetMap de Croacia",
+                "description": "Grupo de Facebook de OpenStreetMap de Croacia"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Croacia en IRC",
+                "description": "Únete a #osm-hr en irc.freenode.org (puerto 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Lista de correo Talk-hr",
+                "description": "Lista de correo Talk-hr"
+            },
             "czech-community": {
                 "name": "Comunidad checa OSM",
                 "description": "Portal de mapas, sitio web y contactos sobre miembros de OSM en Chequia"
@@ -7200,6 +7410,14 @@
                 "name": "Foro de OpenStreetMap Polonia",
                 "description": "Foro de la comunidad polaca OpenStreetMap"
             },
+            "si-forum": {
+                "name": "Foro de OpenStreetMap Eslovenia",
+                "description": "Foro de la comunidad OpenStreetMap en Eslovenia"
+            },
+            "si-mailinglist": {
+                "name": "Lista de correo de OpenStreetMap en Eslovenia",
+                "description": "Lista de correo de la comunidad de OpenStreetMap en Eslovenia"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Lista de correo Talk-es",
                 "description": "Una lista de correo para discutir OpenStreetMap en España"
@@ -7305,6 +7523,10 @@
                 "description": "Mapeadores y usuarios de OpenStreetMap, en Portland, ME",
                 "extendedDescription": "Maptime es, literalmente, el momento de hacer mapas. Nuestra misión es abrir las puertas de la posibilidad cartográfica a cualquier persona interesada creando un tiempo y espacio para el aprendizaje colaborativo, la exploración y la creación de mapas utilizando herramientas y tecnologías de mapeo."
             },
+            "us-ma-mailinglist": {
+                "name": "Lista de correo de Talk-us-massachusetts",
+                "description": "Lista de correo de la comunidad OSM de Massachusetts"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Mejore OpenStreetMap en el área de Cleveland",
@@ -7332,6 +7554,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Mapeadores y usuarios de OpenStreetMap, desarrolladores y entusiastas en el área Metropolitana de Nueva York"
+            },
+            "OSM-Portland-forum": {
+                "name": "Grupo de Google de OpenStreetMap PDX",
+                "description": "Foro y lista de correo para usuarios de OpenStreetMap en el área de Portland",
+                "extendedDescription": "Este grupo es para facilitar las mejoras en OpenStreetMap en el área de Portland, Oregon, para dar soporte a aplicaciones como Open Trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
@@ -7364,7 +7591,14 @@
             "OSM-US": {
                 "name": "OpenStreetMap EE.UU.",
                 "description": "Ayudamos a crecer y mejorar OpenStreetMap en los Estados Unidos.",
-                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}"
+                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}",
+                "events": {
+                    "sotmus2018": {
+                        "name": "State of the Map EE.UU. 2018",
+                        "description": "Únase a la comunidad de OpenStreetMap en State of the Map EE.UU. en Detroit, Michigan. Conéctese con otros mapeadores, empresas, agencias gubernamentales y organizaciones sin fines de lucro, todos colaborando en torno al mapa del mundo libre y editable.",
+                        "where": "Detroit, Michigan"
+                    }
+                }
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",

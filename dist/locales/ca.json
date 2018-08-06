@@ -21,6 +21,9 @@
                 "description": "Afegiu restaurants, monuments, bústies de correus o altres punts al mapa.",
                 "tail": "Cliqueu al mapa per a afegir un punt."
             },
+            "add_note": {
+                "tail": "Cliqueu al mapa per a afegir una nota."
+            },
             "browse": {
                 "title": "Navega",
                 "description": "Allunyeu o apropeu el mapa"
@@ -297,6 +300,11 @@
                     "create": "Heu afegit una restricció de gir",
                     "delete": "Heu eliminat una restricció de gir"
                 }
+            },
+            "detach_node": {
+                "title": "Desconnecta",
+                "description": "Desconnecta aquest node de les seves línies/àrees.",
+                "annotation": "S'ha desconnectat un node de les línies/àrees pare."
             }
         },
         "restriction": {
@@ -352,8 +360,8 @@
             "localized_translation_name": "Nom"
         },
         "zoom_in_edit": "Apropeu-vos més per editar",
-        "login": "inicia sessió",
-        "logout": "Tancar la sessió",
+        "login": "Inicia la sessió",
+        "logout": "Tanca la sessió",
         "loading_auth": "Connectant a OpenStreetMap...",
         "report_a_bug": "Informa d'un error",
         "help_translate": "Ajuda a traduir-lo",
@@ -709,10 +717,13 @@
         "cannot_zoom": "No es pot allunyar més la vista al mode actual.",
         "full_screen": "Passar a pantalla completa",
         "gpx": {
-            "local_layer": "Fitxer local",
+            "local_layer": "Afegeix un GPX",
             "drag_drop": "Arrossegueu i deixeu anar un fitxer .gpx, .geojon o .kml a la pàgina, o feuclic al botó de la dreta per a ubicar-lo",
             "zoom": "Escala a la capa",
             "browse": "Navega cap a un fitxer"
+        },
+        "mvt": {
+            "local_layer": "Afegeix un MVT"
         },
         "streetside": {
             "tooltip": "Fotografies a peu de carrer de Microsoft",
@@ -735,6 +746,11 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Visualitzeu la imatge a OpenStreetCam"
+        },
+        "note": {
+            "note": "Nota",
+            "title": "Edita la nota",
+            "anonymous": "anònim"
         },
         "help": {
             "title": "Ajuda",
@@ -1051,8 +1067,7 @@
                     "title": "Dibuixant",
                     "add_point": "Mode \"Afegir punt\"",
                     "add_line": "Mode \"Afegir línia\"",
-                    "add_area": "Mode \"Afegir Àrea\"",
-                    "place_point": "Seleccioneu un punt"
+                    "add_area": "Mode \"Afegir Àrea\""
                 },
                 "operations": {
                     "title": "Operaccions",
@@ -5215,6 +5230,22 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "name": "Universitat de Cape Coast YouthMappers",
+                "description": "Segueix-nos a Twitter: {url}",
+                "extendedDescription": "Aquest és l'identificacdor oficial dels Joves Cartografistes de la Universitat de Cape Coast, Ghana. Ens encanten els mapes, les dades obertes i ajudar a les persones vulnerables."
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana a Facebook",
+                "description": "Grup de Facebook per a gent interessada en OpenStreetMap."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana a Twitter",
+                "description": "Segueix-nos a Twitter: {url}"
+            },
+            "talk-gh": {
+                "name": "Llista de correu Talk-gh"
+            },
             "OSM-India-facebook": {
                 "description": "Millora OpenStreetMap a l'Índia"
             },
