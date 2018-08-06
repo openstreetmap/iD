@@ -8,6 +8,7 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { modeBrowse } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
@@ -75,6 +76,11 @@ export function uiMapData(context) {
         var layer = layers.layer(which);
         if (layer) {
             layer.enabled(enabled);
+
+            if (!enabled && (which === 'osm' || which === 'notes')) {
+                context.enter(modeBrowse(context));
+            }
+
             update();
         }
     }
