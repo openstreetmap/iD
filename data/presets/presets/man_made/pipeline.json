@@ -3,7 +3,8 @@
     "fields": [
         "location",
         "operator",
-        "substance"
+        "substance",
+        "layer"
     ],
     "geometry": [
         "line"
