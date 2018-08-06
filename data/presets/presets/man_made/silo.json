@@ -1,8 +1,8 @@
 {
     "icon": "temaki-silo",
     "fields": [
-        "building_area",
-        "crop"
+        "crop",
+        "building_area"
     ],
     "geometry": [
         "point",
