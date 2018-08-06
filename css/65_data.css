@@ -6,7 +6,8 @@
 .layer-notes .note * {
     pointer-events: none;
 }
-.layer-notes .note .note-fill {
+.mode-browse .layer-notes .note .note-fill,
+.mode-select .layer-notes .note .note-fill {
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-point.png), pointer; /* FF */

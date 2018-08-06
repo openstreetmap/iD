@@ -88,6 +88,10 @@
 
 /* markers and sequences */
 .viewfield-group {
+    pointer-events: none;
+}
+.mode-browse .viewfield-group,
+.mode-select .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }
