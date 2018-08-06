@@ -1,8 +1,9 @@
 import { t } from '../util/locale';
 import { parseErrorDescriptions, errorTypes } from '../util';
+import { select as d3_select } from 'd3-selection';
 
 
-export function uiKeepRightDetails() {
+export function uiKeepRightDetails(context) {
     var _error;
     var _template;
     var _templateErrorType;
@@ -11,6 +12,8 @@ export function uiKeepRightDetails() {
     var _parent_error_type = '';
     var _titleBase;
 
+    var _links;
+
 
     function initDetails() {
         if (errorTypes.errors['_' + _error.error_type]) {
@@ -18,7 +21,7 @@ export function uiKeepRightDetails() {
             _template = errorTypes.errors[_templateErrorType];
             _category = 'errors';
         } else if (errorTypes.warnings[_templateErrorType]) {
-            _template = errorTypes.errors[_templateErrorType];
+            _template = errorTypes.warnings[_templateErrorType];
             _category = 'warnings';
         } else { return; }
 
@@ -54,6 +57,7 @@ export function uiKeepRightDetails() {
             .append('div')
             .attr('class', 'kr_error-details kr_error-details-container');
 
+
         // title
         var title = detailsEnter
             .append('div')
@@ -68,7 +72,7 @@ export function uiKeepRightDetails() {
 
                 // if this is a subtype, append it's parent title
                 if (_parent_error_type) {
-                    title = t(_titleBase + _parent_error_type + '.description' + ':\n');
+                    title = t(_titleBase + _parent_error_type + '.description') + ':\n';
                 }
 
                 // append title
@@ -78,6 +82,7 @@ export function uiKeepRightDetails() {
 
                 return title;
             });
+
 
         // description
         var description = detailsEnter
@@ -90,9 +95,18 @@ export function uiKeepRightDetails() {
 
         description
             .append('div')
+            .attr('class', 'kr_error-details-description-text')
             .text(function(d) {
                 return t(_titleBase + _templateErrorType + '.tooltip', parseErrorDescriptions(d));
             });
+
+        // TODO: add links to ids in description
+        // d3_select('.kr_error-details-description-text').enter()
+        //     .append('span')
+        //     .append('a')
+        //     .text(function(d) { return d.object_id; })
+        //     .on('click', function() { console.log('hi'); });
+
     }
 
 

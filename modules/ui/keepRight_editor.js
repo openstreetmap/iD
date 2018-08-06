@@ -25,7 +25,7 @@ import {
 export function uiKeepRightEditor(context) {
     var dispatch = d3_dispatch('change');
     var keepRightComment = uiKeepRightComment();
-    var keepRightDetails = uiKeepRightDetails();
+    var keepRightDetails = uiKeepRightDetails(context);
     var keepRightHeader = uiKeepRightHeader(context);
 
     var _error;

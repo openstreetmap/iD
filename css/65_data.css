@@ -337,13 +337,14 @@
     color: #b07f7e;
 }
 
-.kr_error-details-description {
+.kr_error-details-title {
     text-align: left;
     margin-bottom: 20px;
 }
 
 .kr_error-details-description {
     text-align: left;
+    margin-bottom: 10px;
 }
 
 .QA-buttons {

@@ -803,7 +803,11 @@
             "entities": {
                 "node": "node",
                 "way": "way",
-                "relation": "relation"
+                "relation": "relation",
+                "highway": "highway",
+                "cycleway": "cycleway",
+                "waterway": "waterway",
+                "riverbank": "riverbank"
             },
             "errorTypes": {
                 "errors": {
@@ -836,11 +840,11 @@
                         "tooltip": "This {var1} has an empty tag: {var2}"
                     },
                     "_71": {
-                        "description": "",
+                        "description": "way without tags",
                         "tooltip": "This way has no tags"
                     },
                     "_72": {
-                        "description": "",
+                        "description": "node without tags",
                         "tooltip": "This node is not member of any way and doesn't have any tags"
                     },
                     "_90": {
