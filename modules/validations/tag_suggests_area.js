@@ -12,7 +12,11 @@ export function validationTagSuggestsArea() {
         var presence = ['landuse', 'amenities', 'tourism', 'shop'];
         for (var i = 0; i < presence.length; i++) {
             if (tags[presence[i]] !== undefined) {
-                return presence[i] + '=' + tags[presence[i]];
+                if (presence[i] === 'tourism' && tags[presence[i]] === 'artwork') {
+                    continue;   // exception for tourism=artwork - #5206
+                } else {
+                    return presence[i] + '=' + tags[presence[i]];
+                }
             }
         }
 
