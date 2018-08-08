@@ -1,5 +1,5 @@
 import _isMatch from 'lodash-es/isMatch';
-import _reduce from 'lodash-es/reduce';
+import _intersection from 'lodash-es/intersection';
 
 export function utilMapCSSRule(selector, areaKeys) {
     var ruleChecks  = {
@@ -63,53 +63,53 @@ export function utilMapCSSRule(selector, areaKeys) {
         
         },
         // borrowed from Way#isArea()
-        inferGeometry() {
-            // keys is a map of osm key + all found values across the selector map.
-            var selectorKeys = _reduce(Object.keys(selector), function(expectedTags, key) {
-                var values;
-                if(/regex/gi.test(key)) {
-                    Object.keys(p[key]).forEach(function(regexKey) {
-                        values = p[key][rKey].map(function(val) { return val.replace(/\$|\^/g, '') })
-                        if (expectedTags.hasOwnProperty(regexKey)) {
-                            values = values.concat(expectedTags[regexKey])
-
-                        }
-                        expectedTags[regexKey] = values
-                    })
-                } 
-                if (key === 'equals') {
-                    var equalsKey = Object.keys(p[key])[0]
-                    values = [p[key][equalsKey]]
-                    if (expectedTags.hasOwnProperty(equalsKey)) {
-                        values = values.concat(expectedTags[equalsKey])
-                    }
-                    expectedTags[equalsKey] = values
+        inferGeometry: function (tagMap, areaKeys) {
+            var lineKeys = {
+                highway: {
+                    rest_area: true,
+                    services: true
+                },
+                railway: {
+                    roundhouse: true,
+                    station: true,
+                    traverser: true,
+                    turntable: true,
+                    wash: true
                 }
-                return expectedTags
-            }, {})
+            };
+            var isAreaKeyBlackList = function(key) {
+                return _intersection(tagMap[key], Object.keys(areaKeys[key])).length > 0;
+            };
+            var isLineKeysWhiteList = function(key) {
+                return _intersection(tagMap[key], Object.keys(lineKeys[key])).length > 0;
+            };
 
-            if (Object.keys(keys).indexOf('area') > -1) {
-                inferredGeometry = 'area'; 
-                return;
+            if (tagMap.hasOwnProperty('area')) {
+                if (tagMap.area.indexOf('yes') > -1) {
+                    return 'area';
+                }
+                if (tagMap.area.indexOf('no') > -1) {
+                    return 'line';
+                }
             }
 
-            for (var key in Object.keys(keys)) {
-                if (key in areaKeys) {
-                    if (keys[key] !== 'absence' && key in ) {
-
-                    }
+            for (var key in tagMap) {
+                if (key in areaKeys && !isAreaKeyBlackList(key)) {
+                    return 'area';
                 }
-
+                if (key in lineKeys && isLineKeysWhiteList(key)) {
+                    return 'area';
+                }
             }
 
+            return 'line';
         },
         geometryMatches: function(entity, graph) {
             if (entity.type === 'node' || entity.type === 'relation') { 
                 return selector.geometry === entity.type; 
             } else if (entity.type === 'way') {
-                return this.inferGeometry() === entity.geometry(graph);
+                return 'area' === entity.geometry(graph);
             }
-        
         },
         findWarnings: function (entity, graph, warnings) {
             if (this.geometryMatches(entity, graph) && this.matches(entity)) {
