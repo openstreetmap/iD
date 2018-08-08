@@ -1,7 +1,8 @@
 import _isMatch from 'lodash-es/isMatch';
 import _intersection from 'lodash-es/intersection';
+import { tagMap } from 'mapcss-parse';
 
-export function utilMapCSSRule(selector, areaKeys) {
+export function utilMapCSSRule(selector, context) {
     var ruleChecks  = {
         equals: function (tags) {
             return _isMatch(tags, selector.equals);
@@ -63,7 +64,8 @@ export function utilMapCSSRule(selector, areaKeys) {
         
         },
         // borrowed from Way#isArea()
-        inferGeometry: function (tagMap, areaKeys) {
+        inferGeometry: function (tagMap, context) {
+            var areaKeys = context.presets().areaKeys();
             var lineKeys = {
                 highway: {
                     rest_area: true,
@@ -108,7 +110,7 @@ export function utilMapCSSRule(selector, areaKeys) {
             if (entity.type === 'node' || entity.type === 'relation') { 
                 return selector.geometry === entity.type; 
             } else if (entity.type === 'way') {
-                return 'area' === entity.geometry(graph);
+                return this.inferGeometry(tagMap(selector), context) === entity.geometry(graph);
             }
         },
         findWarnings: function (entity, graph, warnings) {

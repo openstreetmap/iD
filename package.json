@@ -36,6 +36,7 @@
     "@mapbox/vector-tile": "^1.3.1",
     "diacritics": "1.3.0",
     "lodash-es": "4.17.10",
+    "mapcss-parse": "github:DigitalGlobe/mapcss-parse#12",
     "marked": "0.4.0",
     "node-diff3": "1.0.0",
     "osm-auth": "1.0.2",

@@ -7,7 +7,7 @@ import _isObject from 'lodash-es/isObject';
 import _isString from 'lodash-es/isString';
 import _map from 'lodash-es/map';
 
-// import mapcssParse from 'mapcss-parse';
+import { parse as parseMapCSS } from 'mapcss-parse';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -314,12 +314,6 @@ export function coreContext() {
         return features.hasHiddenConnections(entity, graph);
     };
 
-
-    /* Presets */
-    var presets;
-    context.presets = function() { return presets; };
-    context.overwritePresets = function(newPresets) { presets.overwrite(newPresets); };
-
     /* Map */
     var map;
     context.map = function() { return map; };
@@ -457,14 +451,24 @@ export function coreContext() {
         locale = locale.split('-')[0];
     }
 
-    // if (utilExternalValidationRules()) {
-    //     var validationsUrl = utilStringQs(window.location.hash).validations;
-    //     d3_text(validationsUrl, function (err, mapcss) {
-    //         if (err) return;
-    //         var validations = _map(mapcssParse(mapcss), function(mapcssConfig) { return utilMapCSSRule(mapcssConfig, context.presets().areaKeys()); });
-    //         context.validationRules = function() { return validations; };
-    //     });
-    // }
+    /* Presets */
+    var presets;
+    presets = presetIndex();
+    if (utilExternalPresets()) {
+        presets.fromExternal();
+    } else {
+        presets.init();
+    }
+    context.presets = function() { return presets; };
+    
+    if (utilExternalValidationRules()) {
+        var validationsUrl = utilStringQs(window.location.hash).validations;
+        d3_text(validationsUrl, function (err, mapcss) {
+            if (err) return;
+            var validations = _map(parseMapCSS(mapcss), function(mapcssConfig) { return utilMapCSSRule(mapcssConfig, context); });
+            context.validationRules = function() { return validations; };
+        });
+    }
 
     history = coreHistory(context);
     context.graph = history.graph;
@@ -494,7 +498,6 @@ export function coreContext() {
     connection = services.osm;
     background = rendererBackground(context);
     features = rendererFeatures(context);
-    presets = presetIndex();
 
     map = rendererMap(context);
     context.mouse = map.mouse;
@@ -512,17 +515,9 @@ export function coreContext() {
         }
     });
 
+    areaKeys = presets.areaKeys();
     background.init();
     features.init();
-    
-    if (utilExternalPresets()) {
-        presets.fromExternal();
-    } else { 
-        presets.init();
-    }
-
-    areaKeys = presets.areaKeys();
-
 
     return utilRebind(context, dispatch, 'on');
 }

@@ -45,7 +45,7 @@ describe('iD.utilMapCSSRule', function() {
     ];
     var rules = selectors.map(function(s) { return iD.utilMapCSSRule(s); });
     it ('turns selector object in mapcssRule', function () {
-        var ruleKeys = ['ruleChecks', 'type','buildChecks','matches','geometryMatches','findWarnings'];
+        var ruleKeys = ['ruleChecks', 'type','buildChecks','matches', 'inferGeometry', 'geometryMatches','findWarnings'];
         rules.forEach(function(rule) {
             expect(Object.keys(rule)).to.eql(ruleKeys);
         });
@@ -246,6 +246,81 @@ describe('iD.utilMapCSSRule', function() {
             });
         });
     });
+    describe('#inferGeometry', function() {
+        var amenityDerivedArea = {
+            selector: {
+                'geometry': 'closedway',
+                'presence': 'amenity',
+                'positiveRegex': { amenity: ['^school$', '^healthcare$'] },
+                'error': 'amenity cannot be healthcare or school!'
+            },
+            tagMap: {
+                amenity: [ 'school', 'healthcare' ]
+            }
+        };
+        
+        var areaDerivedArea = {
+            selector: {
+                'geometry': 'closedway',
+                'equals': { area: 'yes' },
+            },
+            tagMap: {
+                amenity: [ 'school', 'healthcare' ],
+                area: [ 'yes' ]
+            }
+        };
+
+        var badAreaDerivedLine = {
+            selector: {
+                'geometry': 'closedway',
+                'equals': { 'area': 'no' }
+            },
+            tagMap: {
+                area: ['no']
+            }
+        };
+
+        var roundHouseRailwayDerivedArea = {
+            selector: {
+                'geometry': 'closedway',
+                'equals': { 'railway': 'roundhouse' }
+            }, 
+            tagMap: {
+                railway: ['roundhouse']
+            }
+        };
+
+        var justClosedWayDerivedLine = {
+            selector: {
+                'geometry': 'closedway'
+            },
+            tagMap: {}
+        };
+
+        var areaKeys = iD.Context().presets().areaKeys();
+        var rule, geom;
+        
+        rule = iD.utilMapCSSRule(amenityDerivedArea.selector);
+        geom = rule.inferGeometry(amenityDerivedArea.tagMap, areaKeys);
+        expect(geom).to.be.eql('area');
+
+        rule = iD.utilMapCSSRule(areaDerivedArea.selector);
+        geom = rule.inferGeometry(areaDerivedArea.tagMap, areaKeys);
+        expect(geom).to.be.eql('area');
+
+        rule = iD.utilMapCSSRule(badAreaDerivedLine.selector);
+        geom = rule.inferGeometry(badAreaDerivedLine.tagMap);
+        expect(geom).to.be.eql('line');
+
+        rule = iD.utilMapCSSRule(roundHouseRailwayDerivedArea.selector);
+        geom = rule.inferGeometry(roundHouseRailwayDerivedArea.tagMap, areaKeys);
+        expect(geom).to.be.eql('area');
+
+        rule = iD.utilMapCSSRule(justClosedWayDerivedLine.selector);
+        geom = rule.inferGeometry(justClosedWayDerivedLine.tagMap);
+        expect(geom).to.be.eql('line');
+
+    });
     describe('#findWarnings', function() {
         it('adds found warnings to warnings array', function() {
             var graph = iD.Graph([entities]);
@@ -257,12 +332,12 @@ describe('iD.utilMapCSSRule', function() {
                 });
             });
             
-            warnings.forEach(function(warning) {
+            // warnings.forEach(function(warning) {
                 // console.log(warning);
                 // expect(warning.message).to.not.be.null;
                 // expect(['mapcss_warning', 'mapcss_error'].indexOf(warning.id)).to.be.greaterThan(-1);
                 // expect(warning.entity).to.be.instanceOf(iD.Entity);
-            });
+            // });
         });
     });
 });

@@ -186,6 +186,7 @@ export function presetIndex() {
         d3_json(presetsUrl, function(err, presets) {
             if (err) all.init();
             all.overwrite(presets);
+            all.areaKeys();
         });
         return all;
     };

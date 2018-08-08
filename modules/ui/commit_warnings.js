@@ -5,6 +5,7 @@ import { tooltip } from '../util/tooltip';
 import { utilEntityOrMemberSelector } from '../util';
 import _reduce from 'lodash-es/reduce';
 import _forEach from 'lodash-es/forEach';
+import _uniqBy from 'lodash-es/uniqBy';
 
 export function uiCommitWarnings(context) {
 
@@ -24,7 +25,7 @@ export function uiCommitWarnings(context) {
         }, {});
 
         _forEach(validations, function(instances, type) {
-
+            instances = _uniqBy(instances, function(val) { return val.id + '_' + val.message.replace(/\s+/g,''); });
             var section = type + '-section';
             var instanceItem = type + '-item';
 
