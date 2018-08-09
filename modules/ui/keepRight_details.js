@@ -12,8 +12,6 @@ export function uiKeepRightDetails(context) {
     var _parent_error_type = '';
     var _titleBase;
 
-    var _links;
-
 
     function initDetails() {
         if (errorTypes.errors['_' + _error.error_type]) {

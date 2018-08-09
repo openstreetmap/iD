@@ -9,17 +9,17 @@ export function uiKeepRightHeader(context) {
     var _error;
 
 
-    function clickLink() {
+    function clickLink(datum) {
         var d = {};
 
         var entityType =
-            _error.object_type === 'node' ? 'n' :
-            _error.object_type === 'way' ? 'w' :
-            _error.object_type === 'relation' ? 'r' :  null;
+            datum.object_type === 'node' ? 'n' :
+            datum.object_type === 'way' ? 'w' :
+            datum.object_type === 'relation' ? 'r' :  null;
 
         // if an entity has been loaded in the graph, select the entity
-        if (context.hasEntity(entityType + _error.object_id)) {
-            d = context.hasEntity(entityType + _error.object_id);
+        if (context.hasEntity(entityType + datum.object_id)) {
+            d = context.hasEntity(entityType + datum.object_id);
         }
 
         d3_event.preventDefault();
@@ -36,8 +36,9 @@ export function uiKeepRightHeader(context) {
             }
             context.enter(modeSelect(context, [d.entity.id]));
         } else {
-            // TODO: turn on osm layer
-            context.zoomToEntity(d.id);
+            context.layers().layer('osm').enabled(true);
+            context.zoomToEntity(entityType + datum.object_id);
+            // TODO: select entity that has been zoomed to
         }
     }
 
@@ -76,7 +77,7 @@ export function uiKeepRightHeader(context) {
             .append('span')
             .append('a')
             .text(function(d) { return d.object_id; })
-            .on('click', clickLink);
+            .on('click', function(d) { clickLink(d); } );
     }
 
 
