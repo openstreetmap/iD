@@ -185,7 +185,6 @@ export default {
             });
     },
 
-
     // get all cached errors covering the viewport
     keepRight: function(projection) {
         var viewport = projection.clipExtent();

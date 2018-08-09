@@ -49,7 +49,7 @@ export function uiKeepRightEditor(context) {
 
         headerEnter
             .append('h3')
-            .text(t('keepRight.title'));
+            .text(t('QA.keepRight.title'));
 
 
         var body = selection.selectAll('.body')
@@ -102,13 +102,13 @@ export function uiKeepRightEditor(context) {
             .append('h4')
             .attr('class', '.error-save-header')
             .text(function() {
-                return t('keepRight.newComment');
+                return t('QA.keepRight.newComment');
             });
 
         errorSaveEnter
             .append('textarea')
             .attr('class', 'new-comment-input')
-            .attr('placeholder', t('keepRight.inputPlaceholder'))
+            .attr('placeholder', t('QA.keepRight.inputPlaceholder'))
             .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
@@ -201,7 +201,7 @@ export function uiKeepRightEditor(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'error-save-prose')
-            .text(t('keepRight.upload_explanation'))
+            .text(t('QA.keepRight.upload_explanation'))
             .merge(prose);
 
         osm.userDetails(function(err, user) {
@@ -225,7 +225,7 @@ export function uiKeepRightEditor(context) {
                 .attr('target', '_blank');
 
             prose
-                .html(t('keepRight.upload_explanation_with_user', { user: userLink.html() }));
+                .html(t('QA.keepRight.upload_explanation_with_user', { user: userLink.html() }));
         });
     }
 
@@ -295,7 +295,7 @@ export function uiKeepRightEditor(context) {
             .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('keepRight.resolve' + andComment);
+                return t('QA.keepRight.resolve' + andComment);
             })
             .on('click.status', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
@@ -312,7 +312,7 @@ export function uiKeepRightEditor(context) {
             .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('keepRight.ignore' + andComment);
+                return t('QA.keepRight.ignore' + andComment);
             })
             .on('click.status', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641

@@ -16,9 +16,7 @@
 }
 
 .note-header-icon .note-shadow,
-.layer-notes .note .note-shadow,
-.kr_error-header-icon .kr_error-shadow,
-.layer-keepRight .kr_error .kr_error-shadow {
+.layer-notes .note .note-shadow {
     color: #000;
 }
 
