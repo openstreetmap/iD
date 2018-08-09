@@ -144,8 +144,8 @@ export function svgKeepRight(projection, context, dispatch) {
             .attr('class', 'kr_error-fill')
             .attr('width', '20px')
             .attr('height', '20px')
-            .attr('x', '-4px')
-            .attr('y', '-24px')
+            .attr('x', '-8px')
+            .attr('y', '-22px')
             .attr('xlink:href', '#iD-icon-bolt');
 
         // update
