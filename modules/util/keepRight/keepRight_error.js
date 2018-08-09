@@ -81,7 +81,7 @@ export function parseErrorDescriptions(entity) {
 
                 // if any variables contain common words, like node, way, relation, translate those
                 if (commonEntities.includes(currWord)) {
-                    currWord = t('keepRight.entities.' + currWord);
+                    currWord = t('QA.keepRight.entities.' + currWord);
                 }
 
                 parsedPhrase += currWord;

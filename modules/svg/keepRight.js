@@ -1,5 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
+
+import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
@@ -9,6 +11,13 @@ export function svgKeepRight(projection, context, dispatch) {
     var minZoom = 12;
     var layer = d3_select(null);
     var _keepRight;
+
+    function markerPath(selection, klass) {
+        selection
+            .attr('class', klass)
+            .attr('transform', 'translate(-4, -24)')
+            .attr('d', 'M11.6,6.2H7.1l1.4-5.1C8.6,0.6,8.1,0,7.5,0H2.2C1.7,0,1.3,0.3,1.3,0.8L0,10.2c-0.1,0.6,0.4,1.1,0.9,1.1h4.6l-1.8,7.6C3.6,19.4,4.1,20,4.7,20c0.3,0,0.6-0.2,0.8-0.5l6.9-11.9C12.7,7,12.3,6.2,11.6,6.2z');
+    }
 
 
     function init() {
@@ -34,12 +43,31 @@ export function svgKeepRight(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
         editOn();
+
+        layer
+            .classed('disabled', false)
+            .style('opacity', 0)
+            .transition()
+            .duration(250)
+            .style('opacity', 1)
+            .on('end interrupt', function () {
+                dispatch.call('change');
+            });
     }
 
 
     function hideLayer() {
         throttledRedraw.cancel();
         editOff();
+
+        layer
+            .transition()
+            .duration(250)
+            .style('opacity', 0)
+            .on('end interrupt', function () {
+                layer.classed('disabled', true);
+                dispatch.call('change');
+            });
     }
 
 
@@ -107,9 +135,9 @@ export function svgKeepRight(projection, context, dispatch) {
             .attr('ry', 3)
             .attr('class', 'stroke');
 
-        // kr_errorsEnter
-        //     .append('path')
-        //     .call(markerPath, 'kr_error-shadow');
+        kr_errorsEnter
+            .append('path')
+            .call(markerPath, 'shadow');
 
         kr_errorsEnter
             .append('use')
@@ -156,7 +184,7 @@ export function svgKeepRight(projection, context, dispatch) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                var options = { // TODO: change out these options and place as default
+                var options = {
                     ch: [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413]
                 };
 
@@ -175,6 +203,9 @@ export function svgKeepRight(projection, context, dispatch) {
             showLayer();
         } else {
             hideLayer();
+            if (context.selectedErrorID()) {
+                context.enter(modeBrowse(context));
+            }
         }
         dispatch.call('change');
         return this;

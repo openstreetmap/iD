@@ -72,7 +72,7 @@ export function uiKeepRightHeader(context) {
         headerEnter
             .append('div')
             .attr('class', 'kr_error-header-label')
-            .text(function(d) { return t('keepRight.entities.' + d.object_type) + ' '; })
+            .text(function(d) { return t('QA.keepRight.entities.' + d.object_type) + ' '; })
             .append('span')
             .append('a')
             .text(function(d) { return d.object_id; })

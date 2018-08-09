@@ -32,7 +32,7 @@ export function uiKeepRightDetails(context) {
             _parent_error_type = '_' + base_error_type;
         }
 
-        _titleBase = 'keepRight.errorTypes.' + _category + '.';
+        _titleBase = 'QA.keepRight.errorTypes.' + _category + '.';
 
     }
 
@@ -64,7 +64,7 @@ export function uiKeepRightDetails(context) {
             .attr('class', 'kr_error-details-title');
 
         title.append('h4')
-            .text(function() { return t('keepRight.detail_title'); });
+            .text(function() { return t('QA.keepRight.detail_title'); });
 
         title.append('div')
             .text(function() {
@@ -72,7 +72,7 @@ export function uiKeepRightDetails(context) {
 
                 // if this is a subtype, append it's parent title
                 if (_parent_error_type) {
-                    title = t(_titleBase + _parent_error_type + '.description') + ':\n';
+                    title = t(_titleBase + _parent_error_type + '.description') + ': \n';
                 }
 
                 // append title
@@ -91,7 +91,7 @@ export function uiKeepRightDetails(context) {
 
         description
             .append('h4')
-            .text(function() { return t('keepRight.detail_description'); });
+            .text(function() { return t('QA.keepRight.detail_description'); });
 
         description
             .append('div')
