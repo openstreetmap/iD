@@ -4,6 +4,7 @@ import {
 } from 'd3-selection';
 
 import { services } from '../services';
+import { actionNoop } from '../actions';
 import { behaviorEdit, behaviorDrag } from '../behavior';
 import { geoVecSubtract, geoViewportEdge } from '../geo';
 import { modeSelectNote } from './index';
@@ -47,7 +48,9 @@ export function modeDragNote(context) {
         context.surface().selectAll('.note-' + note.id)
             .classed('active', true);
 
+        context.perform(actionNoop());
         context.enter(mode);
+        context.selectedNoteID(note.id);
     }
 
 
@@ -79,15 +82,12 @@ export function modeDragNote(context) {
             osm.replaceNote(note);  // update note cache
         }
 
-        // update note on screen (no need to do a full redraw)
-        context.surface().selectAll('.note-' + note.id)
-            .attr('transform', 'translate(' + currMouse[0] + ',' + currMouse[1] + ')');
+        context.replace(actionNoop());   // trigger redraw
     }
 
 
     function end(note) {
-        // force a reraw (there is no history change that would otherwise do this)
-        context.pan([0,0]);
+        context.replace(actionNoop());   // trigger redraw
 
         context
             .selectedNoteID(note.id)

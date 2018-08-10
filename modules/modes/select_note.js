@@ -12,7 +12,10 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import { modeDragNote } from '../modes';
+import {
+    modeDragNode,
+    modeDragNote
+} from '../modes';
 
 import { services } from '../services';
 import { modeBrowse } from './browse';
@@ -41,6 +44,7 @@ export function modeSelectNote(context, selectedNoteID) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
+        modeDragNode(context).behavior,
         modeDragNote(context).behavior
     ];
 
