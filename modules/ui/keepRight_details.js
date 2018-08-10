@@ -98,6 +98,7 @@ export function uiKeepRightDetails(context) {
                 return t(_titleBase + _templateErrorType + '.tooltip', parseErrorDescriptions(d));
             });
 
+        // var description_text = d3_select('.kr_error-details-description-text').text();
         // TODO: add links to ids in description
         // d3_select('.kr_error-details-description-text').enter()
         //     .append('span')

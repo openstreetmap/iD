@@ -52,6 +52,8 @@ var keepRightSchemaFromWeb = {
 export function parseErrorDescriptions(entity) {
     if (!(entity instanceof krError)) return;
 
+    var _links = [];
+
     // find the matching template from the error schema
     var errorType = '_' + entity.error_type;
     var matchingTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
@@ -79,6 +81,13 @@ export function parseErrorDescriptions(entity) {
             if (errorDescriptions[i] !== nextWord) {
                 var currWord = errorDescriptions[i];
 
+                // strip leading # if present
+                if (currWord.charAt(0) === '#') {
+                    currWord = currWord.slice(1, currWord.length);
+                    // and add index to list of links
+                    _links.push(currWord);
+                }
+
                 // if any variables contain common words, like node, way, relation, translate those
                 if (commonEntities.includes(currWord)) {
                     currWord = t('QA.keepRight.entities.' + currWord);
@@ -94,6 +103,7 @@ export function parseErrorDescriptions(entity) {
 
 
     return {
+        links: _links,
         var1: parsedDescriptions[0] || '',
         var2: parsedDescriptions[1] || '',
         var3: parsedDescriptions[2] || '',
