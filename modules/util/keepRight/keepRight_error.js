@@ -1,3 +1,5 @@
+import { event as d3_event } from 'd3-selection';
+
 import { t } from '../locale';
 import { krError } from '../../osm';
 
@@ -52,8 +54,6 @@ var keepRightSchemaFromWeb = {
 export function parseErrorDescriptions(entity) {
     if (!(entity instanceof krError)) return;
 
-    var _links = [];
-
     // find the matching template from the error schema
     var errorType = '_' + entity.error_type;
     var matchingTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
@@ -67,6 +67,23 @@ export function parseErrorDescriptions(entity) {
     var re = new RegExp(/{\$[0-9]}/);
 
     var commonEntities = ['node', 'way', 'relation', 'highway', 'cycleway', 'waterway', 'riverbank']; // TODO: expand this list, or implement a different translation function
+
+    function fillPlaceholder(d) {
+        return '<span><a class="kr_error_description-id">' + d + '</a></span>';
+    }
+
+    function getEntityBase(lastWord) {
+        var result;
+        commonEntities.forEach(function(entity) {
+            if (entity.includes(lastWord)) { result = entity; }
+            return;
+        });
+
+        if (result) {
+            result = result.includes('node') ? 'n' : result.includes('way') ? 'w' : result.includes('relation') ? 'r' : null;
+        }
+        return result;
+    }
 
     templateDescriptions.forEach(function(word, index) {
         if (!re.test(word)) return;
@@ -84,8 +101,17 @@ export function parseErrorDescriptions(entity) {
                 // strip leading # if present
                 if (currWord.charAt(0) === '#') {
                     currWord = currWord.slice(1, currWord.length);
-                    // and add index to list of links
-                    _links.push(currWord);
+
+                    // get the entity type of the id
+                    var lastWord = errorDescriptions[i-1];
+                    var base;
+                    if (lastWord) { base = getEntityBase(lastWord); }
+                    if (!base) {
+                        base = getEntityBase(parsedDescriptions.slice(-1)[0].split(' ').slice(-1)[0]);
+                    }
+
+                    // wrap id with linking span
+                    currWord = fillPlaceholder(base + currWord);
                 }
 
                 // if any variables contain common words, like node, way, relation, translate those
@@ -103,12 +129,18 @@ export function parseErrorDescriptions(entity) {
 
 
     return {
-        links: _links,
         var1: parsedDescriptions[0] || '',
         var2: parsedDescriptions[1] || '',
         var3: parsedDescriptions[2] || '',
         var4: parsedDescriptions[3] || '',
         var5: parsedDescriptions[4] || '',
-        var6: parsedDescriptions[4] || '',
+        var6: parsedDescriptions[5] || '',
     };
 }
+
+
+export function clickLink(context, id) {
+        d3_event.preventDefault();
+        context.layers().layer('osm').enabled(true);
+        context.zoomToEntity(id);
+    }

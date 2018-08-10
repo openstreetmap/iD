@@ -1,6 +1,8 @@
 import { t } from '../util/locale';
 import { parseErrorDescriptions, errorTypes } from '../util';
-import { select as d3_select } from 'd3-selection';
+import { select as d3_selectAll } from 'd3-selection';
+
+import { clickLink } from '../util/keepRight';
 
 
 export function uiKeepRightDetails(context) {
@@ -94,17 +96,12 @@ export function uiKeepRightDetails(context) {
         description
             .append('div')
             .attr('class', 'kr_error-details-description-text')
-            .text(function(d) {
+            .html(function(d) {
                 return t(_titleBase + _templateErrorType + '.tooltip', parseErrorDescriptions(d));
             });
 
-        // var description_text = d3_select('.kr_error-details-description-text').text();
-        // TODO: add links to ids in description
-        // d3_select('.kr_error-details-description-text').enter()
-        //     .append('span')
-        //     .append('a')
-        //     .text(function(d) { return d.object_id; })
-        //     .on('click', function() { console.log('hi'); });
+        description.selectAll('.kr_error_description-id')
+            .on('click', function() { clickLink(context, this.text); });
 
     }
 
