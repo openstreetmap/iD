@@ -373,6 +373,7 @@ en:
     line: line
     area: area
     relation: relation
+    note: note
   geocoder:
     search: Search worldwide...
     no_results_visible: No results in visible map area

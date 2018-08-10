@@ -460,7 +460,8 @@
             "vertex": "vertex",
             "line": "line",
             "area": "area",
-            "relation": "relation"
+            "relation": "relation",
+            "note": "note"
         },
         "geocoder": {
             "search": "Search worldwide...",
