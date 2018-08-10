@@ -59,7 +59,7 @@ export function uiKeepRightHeader(context) {
 
         var iconEnter = headerEnter
             .append('div')
-            .attr('class', function(d) { return 'kr_error-header-icon '; })
+            .attr('class', 'kr_error-header-icon')
             .classed('new', function(d) { return d.id < 0; });
 
         iconEnter

@@ -26,7 +26,7 @@ var _keepRightCache = { loaded: {}, inflight: {}, keepRight: {}, rtree: rbush()}
 var _off;
 var _keepRightZoom = 16;
 
-var apiBase = 'https://www.keepright.at/export.php?';
+var apiBase = 'https://www.keepright.at/';
 
 
 function abortRequest(i) {
@@ -91,6 +91,7 @@ export default {
 
         var that = this;
         var path = apiBase +
+            'export.php?' +
             'format=' + options.format +
             '&ch=' + options.ch.join() + '&';
 
@@ -182,6 +183,32 @@ export default {
                 dispatch.call('loadedKeepRight');
 
                 callback(err, data);
+            });
+    },
+
+    postKeepRightUpdate: function(d, callback) {
+        // TODO: check if a user is authenticated
+        // if (!this.authenticated()) {
+        //     return callback({ message: 'Not Authenticated', status: -3 }, d);
+        // }
+        // if (_keepRightCache.inflightPost[d.id]) {
+        //     return callback({ message: 'Error update already inflight', status: -2 }, d);
+        // }
+
+        var path = apiBase + 'comment.php?';
+        if (d.state) { path += '&st=' + d.state; }
+        if (d.newComment) { path += '&' + utilQsString({'co': d.newComment }); }
+
+        path += '&schema=' + d.schema + '&id=' + d.error_id;
+
+        d3_request(path)
+            .mimeType('application/json')
+            .response(function(xhr) {
+                return JSON.parse(xhr.responseText);
+            })
+            .post(function(err, data) {
+                console.log('error:', err);
+                console.log('data: ', data);
             });
     },
 

@@ -68,8 +68,8 @@ export function uiKeepRightEditor(context) {
             .attr('class', 'modal-section keepRight-editor')
             .merge(editor)
             .call(keepRightHeader.error(_error))
-            // .call(keepRightComment.error(_error))
             .call(keepRightDetails.error(_error))
+            .call(keepRightComment.error(_error))
             .call(errorSaveSection);
 
 
@@ -101,14 +101,16 @@ export function uiKeepRightEditor(context) {
         errorSaveEnter
             .append('h4')
             .attr('class', '.error-save-header')
-            .text(function() {
-                return t('QA.keepRight.newComment');
+            .text(function(d) {
+                return d.comment ? t('QA.keepRight.updateComment') : t('QA.keepRight.newComment');
             });
 
         errorSaveEnter
             .append('textarea')
             .attr('class', 'new-comment-input')
-            .attr('placeholder', t('QA.keepRight.inputPlaceholder'))
+            .attr('placeholder', function(d) {
+                return d.comment ? t('QA.keepRight.updateInputPlaceholder') : t('QA.keepRight.newInputPlaceholder');
+            })
             .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
@@ -276,35 +278,21 @@ export function uiKeepRightEditor(context) {
                 dispatch.call('change');
             });
 
-        buttonSection.select('.save-button')   // select and propagate data
-            .attr('disabled', function(d) {
-                return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
-            })
-            .on('click.save', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var keepRight = services.keepRight;
-                if (keepRight) {
-                    // TODO: handle posting updates
-                    // keepRight.postKeepRightCreate(d, function(err, error) {
-                    //     dispatch.call('change', error);
-                    // });
-                }
-            });
-
         buttonSection.select('.resolve-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
+                // NOTE: no state is available because keepRight export only exports open errors
                 var andComment = (d.newComment ? '_comment' : '');
                 return t('QA.keepRight.resolve' + andComment);
             })
-            .on('click.status', function(d) {
+            .on('click.state', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    // TODO: handle posting updates
-                    // keepRight.postKeepRightUpdate(d, function(err, error) {
-                    //     dispatch.call('change', error);
-                    // });
+                    d.state = 'ignore_t';
+                    keepRight.postKeepRightUpdate(d, function(err, error) {
+                        dispatch.call('change', error);
+                    });
                 }
             });
 
@@ -314,14 +302,14 @@ export function uiKeepRightEditor(context) {
                 var andComment = (d.newComment ? '_comment' : '');
                 return t('QA.keepRight.ignore' + andComment);
             })
-            .on('click.status', function(d) {
+            .on('click.state', function(d) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    // TODO: handle posting updates
-                    // keepRight.postKeepRightUpdate(d, function(err, error) {
-                    //     dispatch.call('change', error);
-                    // });
+                    d.state = 'ignore';
+                    keepRight.postKeepRightUpdate(d, function(err, error) {
+                        dispatch.call('change', error);
+                    });
                 }
             });
 
@@ -333,10 +321,9 @@ export function uiKeepRightEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    // TODO: handle posting updates
-                    // keepRight.postKeepRightUpdate(d, function(err, error) {
-                    //     dispatch.call('change', error);
-                    // });
+                    keepRight.postKeepRightUpdate(d, function(err, error) {
+                        dispatch.call('change', error);
+                    });
                 }
             });
     }

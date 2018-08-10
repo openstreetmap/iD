@@ -931,8 +931,11 @@ en:
       title: Edit Error
       detail_title: Error
       detail_description: Description
-      inputPlaceholder: Enter a comment to share with other users.
+      comment_header: Comment
+      newInputPlaceholder: Enter a comment to share with other users.
+      updateInputPlaceholder: Update the comment above to share with other users.
       newComment: New Comment
+      updateComment: Update Comment
       upload_explanation: Your comments will be publicly visible to all keepRight.at users.
       upload_explanation_with_user: "Your comments as {user} will be publicly visible to all keepRight.at users."
       resolve_comment: Comment and Resolve
