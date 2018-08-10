@@ -99,13 +99,14 @@ export function parseErrorDescriptions(entity) {
                 var currWord = errorDescriptions[i];
 
                 // strip leading # if present
-                if (currWord.charAt(0) === '#') {
-                    currWord = currWord.slice(1, currWord.length);
+                if (currWord.charAt(0) === '#' || errorDescriptions[i-1] === '(id') {
+                    currWord = currWord.replace(/\D/g,'');
 
                     // get the entity type of the id
                     var lastWord = errorDescriptions[i-1];
+                    var secondLastWord = errorDescriptions[i-2];
                     var base;
-                    if (lastWord) { base = getEntityBase(lastWord); }
+                    if (lastWord) { base = getEntityBase(lastWord) || getEntityBase(secondLastWord); }
                     if (!base) {
                         base = getEntityBase(parsedDescriptions.slice(-1)[0].split(' ').slice(-1)[0]);
                     }
