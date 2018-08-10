@@ -1,46 +1,11 @@
 import { t } from '../util/locale';
+import { utilEntityRoot } from '../util';
+import { clickLink } from '../util/keepRight';
 import { svgIcon } from '../svg';
-import { event as d3_event } from 'd3-selection';
-import { geoChooseEdge } from '../geo';
-import { modeSelect } from '../modes';
 
 
 export function uiKeepRightHeader(context) {
     var _error;
-
-
-    function clickLink(datum) {
-        var d = {};
-
-        var entityType =
-            datum.object_type === 'node' ? 'n' :
-            datum.object_type === 'way' ? 'w' :
-            datum.object_type === 'relation' ? 'r' :  null;
-
-        // if an entity has been loaded in the graph, select the entity
-        if (context.hasEntity(entityType + datum.object_id)) {
-            d = context.hasEntity(entityType + datum.object_id);
-        }
-
-        d3_event.preventDefault();
-        if (d.location) {
-            context.map().centerZoom([d.location[1], d.location[0]], 19);
-        }
-        else if (d.entity) {
-            if (d.entity.type === 'node') {
-                context.map().center(d.entity.loc);
-            } else if (d.entity.type === 'way') {
-                var center = context.projection(context.map().center());
-                var edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
-                context.map().center(edge.loc);
-            }
-            context.enter(modeSelect(context, [d.entity.id]));
-        } else {
-            context.layers().layer('osm').enabled(true);
-            context.zoomToEntity(entityType + datum.object_id);
-            // TODO: select entity that has been zoomed to
-        }
-    }
 
 
     function keepRightHeader(selection) {
@@ -77,7 +42,7 @@ export function uiKeepRightHeader(context) {
             .append('span')
             .append('a')
             .text(function(d) { return d.object_id; })
-            .on('click', function(d) { clickLink(d); } );
+            .on('click', function(d) { clickLink(context, (utilEntityRoot(d.object_type) + d.object_id)); });
     }
 
 
