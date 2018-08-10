@@ -347,6 +347,11 @@ en:
       changeset: Changeset
       unknown: Unknown
       link_text: History on openstreetmap.org
+      note_no_history: "No History (New Note)"
+      note_comments: Comments
+      note_created_date: Created Date
+      note_created_user: Created By
+      note_link_text: Note on openstreetmap.org
     location:
       key: L
       title: Location
