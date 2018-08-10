@@ -1,6 +1,5 @@
 /* globals chai:false */
 /* eslint no-extend-native:off */
-
 iD.debug = true;
 
 // disable things that use the network

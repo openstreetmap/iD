@@ -7,8 +7,6 @@ import _isObject from 'lodash-es/isObject';
 import _isString from 'lodash-es/isString';
 import _map from 'lodash-es/map';
 
-import { parse as parseMapCSS } from 'mapcss-parse';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { 
@@ -465,7 +463,7 @@ export function coreContext() {
         var validationsUrl = utilStringQs(window.location.hash).validations;
         d3_text(validationsUrl, function (err, mapcss) {
             if (err) return;
-            var validations = _map(parseMapCSS(mapcss), function(mapcssConfig) { return utilMapCSSRule(mapcssConfig, context); });
+            var validations = _map(mapcss, function(mapcss) { return utilMapCSSRule(mapcss, context.presets().areaKeys()); });
             context.validationRules = function() { return validations; };
         });
     }

@@ -1,8 +1,8 @@
 import _isMatch from 'lodash-es/isMatch';
 import _intersection from 'lodash-es/intersection';
-import { tagMap } from 'mapcss-parse';
+import _reduce from 'lodash-es/reduce';
 
-export function utilMapCSSRule(selector, context) {
+export function utilMapCSSRule(selector, areaKeys) {
     var ruleChecks  = {
         equals: function (tags) {
             return _isMatch(tags, selector.equals);
@@ -59,13 +59,49 @@ export function utilMapCSSRule(selector, context) {
                 .map(function(key) { return ruleChecks[key]; });
 
         },
+        buildTagMap: function() {
+            var selectorKeys = Object.keys(selector);
+            var tagMap = _reduce(selectorKeys, function (expectedTags, key) {
+                var values;
+                if (/regex/gi.test(key)) {
+                    Object.keys(selector[key]).forEach(function(regexKey) {
+                        values = selector[key][regexKey].map(function(val) {
+                            return val.replace(/\$|\^/g, '');
+                        });
+                        
+                        if (expectedTags.hasOwnProperty(regexKey)) {
+                            values = values.concat(expectedTags[regexKey]);
+                        }
+                        
+                        expectedTags[regexKey] = values;
+                    });
+                } 
+                if (/(greater|less)Than(Equal)?|equals|presence/g.test(key)) {
+                    var tagKey = /presence/.test(key) ? selector[key] : Object.keys(selector[key])[0];
+                    
+                    values = (key === 'equals') ? [selector[key][tagKey]] : [];
+                    
+                    if (expectedTags.hasOwnProperty(tagKey)) {
+                        values = (key === 'equals') ? values.concat(expectedTags[tagKey]) : [];
+                    }
+                    
+                    expectedTags[tagKey] = values;
+                }
+                return expectedTags;
+            }, {});
+            return tagMap;
+        },
         matches: function(entity) {
             return this.buildChecks().every(function(check) { return check(entity.tags); });
         
         },
+        areaKeys: function() {
+            return areaKeys;
+        },
         // borrowed from Way#isArea()
-        inferGeometry: function (tagMap, context) {
-            var areaKeys = context.presets().areaKeys();
+        inferGeometry: function () {
+            var tagMap = this.buildTagMap();
+            var areaKeys = this.areaKeys();
             var lineKeys = {
                 highway: {
                     rest_area: true,
@@ -110,7 +146,7 @@ export function utilMapCSSRule(selector, context) {
             if (entity.type === 'node' || entity.type === 'relation') { 
                 return selector.geometry === entity.type; 
             } else if (entity.type === 'way') {
-                return this.inferGeometry(tagMap(selector), context) === entity.geometry(graph);
+                return this.inferGeometry(areaKeys) === entity.geometry(graph);
             }
         },
         findWarnings: function (entity, graph, warnings) {

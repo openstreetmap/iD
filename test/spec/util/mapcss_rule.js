@@ -43,9 +43,13 @@ describe('iD.utilMapCSSRule', function() {
             'error': 'amenity cannot be healthcare or school!'
         }
     ];
-    var rules = selectors.map(function(s) { return iD.utilMapCSSRule(s); });
+    var areaKeys = iD.Context().presets().areaKeys();
+    var rules = selectors.map(function(s) { return iD.utilMapCSSRule(s, areaKeys); });
     it ('turns selector object in mapcssRule', function () {
-        var ruleKeys = ['ruleChecks', 'type','buildChecks','matches', 'inferGeometry', 'geometryMatches','findWarnings'];
+        var ruleKeys = [
+            'ruleChecks', 'type','buildChecks', 'buildTagMap', 'matches', 
+            'areaKeys', 'inferGeometry', 'geometryMatches','findWarnings'
+        ];
         rules.forEach(function(rule) {
             expect(Object.keys(rule)).to.eql(ruleKeys);
         });
@@ -53,7 +57,7 @@ describe('iD.utilMapCSSRule', function() {
     describe('#type', function() {
         it('is either error or warning', function() {
             selectors.forEach(function(s) {
-                expect(['error', 'warning'].indexOf(iD.utilMapCSSRule(s).type)).to.be.greaterThan(-1);
+                expect(['error', 'warning'].indexOf(iD.utilMapCSSRule(s, areaKeys).type)).to.be.greaterThan(-1);
             });
         });
     });
@@ -75,6 +79,28 @@ describe('iD.utilMapCSSRule', function() {
             });
         });
     });
+    describe('#buildTagMap', function() {
+        it('builds tag map from selector config', function () {
+            var selector = {
+                'geometry':'node',
+                'equals':{'amenity':'marketplace'},
+                'positiveRegex': { 'marketplace:type': ['open', 'indoor', 'mall']},
+                'greaterThan': { 'width': 10, 'area': 300 },
+                'presence': 'opening_hours',
+                'absence':'name',
+                'warning':'throwWarning: "[amenity=marketplace]: MapRules preset \'Market\': must be coupled with name";'
+            };
+            var tagMap = {
+                'amenity':['marketplace'],
+                'marketplace:type':['open','indoor','mall'],
+                'width':[],
+                'opening_hours':[]
+            };
+
+            var rule = iD.utilMapCSSRule(selector, areaKeys);
+            expect(rule.buildTagMap()).to.be.eql(tagMap);
+        });
+    });
     describe('#matches', function() {
         it('determines if an entity matches the MapCSS rule checks', function() {
             var node  = iD.Entity({ type: 'node', tags: { power: 'tower' }});
@@ -84,17 +110,23 @@ describe('iD.utilMapCSSRule', function() {
             });
         });
     });
+    describe('areaKeys', function() { 
+        it('returns areaKeys used to construct rule', function() {
+            var rule = iD.utilMapCSSRule(selectors[0], areaKeys);
+            expect(rule.areaKeys()).to.eql(areaKeys);
+        });
+    });
     describe('#ruleChecks', function() {
         describe('equals', function() {
             it('is true when entity.tags intersects selector.equals', function() {
                 var pseudoSelector = { equals: {'amenity': 'school'} };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector); 
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys); 
                 var school = iD.Entity({ type: 'node', tags: { amenity: 'school' }});
                 expect(pseudoRule.ruleChecks.equals(school.tags)).to.be.true;
             });
             it('is false when entity.tags intersects selector.equals', function() {
                 var pseudoSelector = { equals: { 'man_made': 'water_tap'} };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var school = iD.Entity({ type: 'node', tags: { amenity: 'school' } } );
                 expect(pseudoRule.ruleChecks.equals(school.tags)).to.be.false;
             });
@@ -102,13 +134,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('notEquals', function() {
             it('is true when entity.tags does not intersect selector.notEquals', function() {
                 var pseudoSelector = { notEquals: { 'man_made': 'water_tap'} };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var school = iD.Entity({ type: 'node', tags: { amenity: 'school' } } );
                 expect(pseudoRule.ruleChecks.notEquals(school.tags)).to.be.true;
             });
             it('is false when entity.tags does not intersect selector.notEquals', function() {
                 var pseudoSelector = { notEquals: { 'amenity': 'school'} };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var school = iD.Entity({ type: 'node', tags: { amenity: 'school' } } );
                 expect(pseudoRule.ruleChecks.notEquals(school.tags)).to.be.false;
             });
@@ -116,13 +148,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('presence', function() {
             it('is true when entity.tags\' key s include selector.presence', function() {
                 var pseudoSelector = { presence: 'name' };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var kHouse = iD.Entity({ type: 'node', tags: { amenity: 'marketplace', name: 'Kensington Square' }});
                 expect(pseudoRule.ruleChecks.presence(kHouse.tags)).to.be.true;
             });
             it('is false when entity tags\' keys do not include selector.presence', function() {
                 var pseudoSelector = { presence: 'name' };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var notKHouse = iD.Entity({ type: 'node', tags: { amenity: 'marketplace' }});
                 expect(pseudoRule.ruleChecks.presence(notKHouse.tags)).to.be.false;
             });
@@ -130,13 +162,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('absence', function() {
             it('is true when entity.tags\' keys do not include selector.absence', function() {
                 var pseudoSelector = { absence: 'name' };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var notKHouse = iD.Entity({ type: 'node', tags: { amenity: 'marketplace' }});
                 expect(pseudoRule.ruleChecks.absence(notKHouse.tags)).to.be.true;
             });
             it('is false when entity.tags\' keys include selector.absence', function() {
                 var pseudoSelector = { absence: 'name' };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var kHouse = iD.Entity({ type: 'node', tags: { amenity: 'marketplace', name: 'Kensington Square' }});
                 expect(pseudoRule.ruleChecks.presence(kHouse.tags)).to.be.false;
             });
@@ -144,13 +176,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('greaterThan', function() {
             it('is true when entity.tags\' equivalent value is greater than selector.greaterThan', function() {
                 var pseudoSelector = { greaterThan: { height: 10 }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var tallSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 9000 }});
                 expect(pseudoRule.ruleChecks.greaterThan(tallSchool.tags)).to.be.true;
             });
             it('is false when entity.tags\' equivalent value is less than or equal to selector.greaterThan', function() {
                 var pseudoSelector = { greaterThan: { height: 10 }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var smallSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 9 }});
                 expect(pseudoRule.ruleChecks.greaterThan(smallSchool.tags)).to.be.false;
             });        
@@ -158,13 +190,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('greaterThanEqual', function() {
             it('is true when entity.tags\' equivalent value is greater than or equal to selector.greaterThanEqual', function() {
                 var pseudoSelector = { greaterThanEqual: { height: 10 } };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var okHeightSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 10 }});
                 expect(pseudoRule.ruleChecks.greaterThanEqual(okHeightSchool.tags)).to.be.true;
             });
             it('is false when entity.tags\' equivalent value is less than to selector.greaterThanEqual', function() {
                 var pseudoSelector = { greaterThanEqual: { height: 10 }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var smallSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 9 }});
                 expect(pseudoRule.ruleChecks.greaterThanEqual(smallSchool.tags)).to.be.false;
             });
@@ -172,13 +204,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('lessThan', function() {
             it('is true when entity.tags\' equivalent value is less than to selector.lessThan', function() {
                 var pseudoSelector = { lessThan: { height: 10 } };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var smallSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 3 }});
                 expect(pseudoRule.ruleChecks.lessThan(smallSchool.tags)).to.be.tru;
             });
             it('is false when entity.tags\' equivalent value is greater than or equal to selector.lessThan', function() {
                 var pseudoSelector = { lessThan: { height: 10 } };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var notOkHeightSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 10 }});
                 expect(pseudoRule.ruleChecks.lessThan(notOkHeightSchool.tags)).to.be.false;
             });
@@ -186,13 +218,13 @@ describe('iD.utilMapCSSRule', function() {
         describe('lessThanEqual', function() {
             it('is true when entity.tags\' equivalent value is less than or equal to to selector.lessThan', function() {
                 var pseudoSelector = { lessThanEqual: { height: 10 } };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var okHeightSchool = iD.Entity({ type: 'node', tags: { 'amenity': 'school', 'height': 10 }});
                 expect(pseudoRule.ruleChecks.lessThanEqual(okHeightSchool.tags)).to.be.true;
             });
             it('is false when entity.tags\' equivalent value is greater than to selector.lessThan', function() {
                 var pseudoSelector = { lessThanEqual: { height: 10 } };
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var notOkHeightSchool = iD.Entity({ type: 'node', tags: { amenity: 'school', height: 11 }});
                 expect(pseudoRule.ruleChecks.lessThanEqual(notOkHeightSchool.tags)).to.be.false;
             });
@@ -200,7 +232,7 @@ describe('iD.utilMapCSSRule', function() {
         describe('positiveRegex', function() {
             it('is true when entity.tags\' equivalent value matches regular expression built from selector.positiveRegex', function() {
                 var pseudoSelector = { positiveRegex: { amenity: ['^school$', '^healthcare$'] }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var okAmenities = [
                     iD.Entity({ type: 'node', tags: { amenity: 'school' }}),
                     iD.Entity({ type: 'node', tags: { amenity: 'healthcare' }})
@@ -211,7 +243,7 @@ describe('iD.utilMapCSSRule', function() {
             });
             it('is false when entity.tags\' equivalent value does not match regular expression built from selector.positiveRegex', function() {
                 var pseudoSelector = { positiveRegex: { amenity: ['^school$', '^healthcare$'] }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var notOkAmenities = [
                     iD.Entity({ type: 'node', tags: { amenity: 'parking' }}),
                     iD.Entity({ type: 'node', tags: { amenity: 'place_of_worship' }})
@@ -224,7 +256,7 @@ describe('iD.utilMapCSSRule', function() {
         describe('negativeRegex', function() {
             it('is true when entity.tags\' equivalent value does not match regular exprsesion built from selector.negativeRegex', function() {
                 var pseudoSelector = { negativeRegex: { amenity: ['^school$', '^healthcare$'] }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var notOkAmenities = [
                     iD.Entity({ type: 'node', tags: { amenity: 'parking' }}),
                     iD.Entity({ type: 'node', tags: { amenity: 'place_of_worship' }})
@@ -235,7 +267,7 @@ describe('iD.utilMapCSSRule', function() {
             });
             it('is false when entity.tags\' equivalent value matches regular expression built from selector.negativeRegex', function() {
                 var pseudoSelector = { negativeRegex: { amenity: ['^school$', '^healthcare$'] }};
-                var pseudoRule = iD.utilMapCSSRule(pseudoSelector);
+                var pseudoRule = iD.utilMapCSSRule(pseudoSelector, areaKeys);
                 var okAmenities = [
                     iD.Entity({ type: 'node', tags: { amenity: 'school' }}),
                     iD.Entity({ type: 'node', tags: { amenity: 'healthcare' }})
@@ -247,79 +279,54 @@ describe('iD.utilMapCSSRule', function() {
         });
     });
     describe('#inferGeometry', function() {
-        var amenityDerivedArea = {
-            selector: {
+        it ('infers selector geometry from its tags', function() {
+            var amenityDerivedArea = {
                 'geometry': 'closedway',
                 'presence': 'amenity',
                 'positiveRegex': { amenity: ['^school$', '^healthcare$'] },
                 'error': 'amenity cannot be healthcare or school!'
-            },
-            tagMap: {
-                amenity: [ 'school', 'healthcare' ]
-            }
-        };
-        
-        var areaDerivedArea = {
-            selector: {
+            };
+            
+            var areaDerivedArea = {
                 'geometry': 'closedway',
                 'equals': { area: 'yes' },
-            },
-            tagMap: {
-                amenity: [ 'school', 'healthcare' ],
-                area: [ 'yes' ]
-            }
-        };
+            };
 
-        var badAreaDerivedLine = {
-            selector: {
+            var badAreaDerivedLine = {
                 'geometry': 'closedway',
                 'equals': { 'area': 'no' }
-            },
-            tagMap: {
-                area: ['no']
-            }
-        };
+            };
 
-        var roundHouseRailwayDerivedArea = {
-            selector: {
+            var roundHouseRailwayDerivedArea = {
                 'geometry': 'closedway',
                 'equals': { 'railway': 'roundhouse' }
-            }, 
-            tagMap: {
-                railway: ['roundhouse']
-            }
-        };
+            };
 
-        var justClosedWayDerivedLine = {
-            selector: {
+            var justClosedWayDerivedLine = {
                 'geometry': 'closedway'
-            },
-            tagMap: {}
-        };
+            };
 
-        var areaKeys = iD.Context().presets().areaKeys();
-        var rule, geom;
-        
-        rule = iD.utilMapCSSRule(amenityDerivedArea.selector);
-        geom = rule.inferGeometry(amenityDerivedArea.tagMap, areaKeys);
-        expect(geom).to.be.eql('area');
+            var rule, geom;
+            rule = iD.utilMapCSSRule(amenityDerivedArea, areaKeys);
+            geom = rule.inferGeometry();
+            expect(geom).to.be.eql('area');
 
-        rule = iD.utilMapCSSRule(areaDerivedArea.selector);
-        geom = rule.inferGeometry(areaDerivedArea.tagMap, areaKeys);
-        expect(geom).to.be.eql('area');
+            rule = iD.utilMapCSSRule(areaDerivedArea, areaKeys);
+            geom = rule.inferGeometry();
+            expect(geom).to.be.eql('area');
 
-        rule = iD.utilMapCSSRule(badAreaDerivedLine.selector);
-        geom = rule.inferGeometry(badAreaDerivedLine.tagMap);
-        expect(geom).to.be.eql('line');
+            rule = iD.utilMapCSSRule(badAreaDerivedLine, areaKeys);
+            geom = rule.inferGeometry();
+            expect(geom).to.be.eql('line');
 
-        rule = iD.utilMapCSSRule(roundHouseRailwayDerivedArea.selector);
-        geom = rule.inferGeometry(roundHouseRailwayDerivedArea.tagMap, areaKeys);
-        expect(geom).to.be.eql('area');
+            rule = iD.utilMapCSSRule(roundHouseRailwayDerivedArea, areaKeys);
+            geom = rule.inferGeometry();
+            expect(geom).to.be.eql('area');
 
-        rule = iD.utilMapCSSRule(justClosedWayDerivedLine.selector);
-        geom = rule.inferGeometry(justClosedWayDerivedLine.tagMap);
-        expect(geom).to.be.eql('line');
-
+            rule = iD.utilMapCSSRule(justClosedWayDerivedLine, areaKeys);
+            geom = rule.inferGeometry();
+            expect(geom).to.be.eql('line');
+        });
     });
     describe('#findWarnings', function() {
         it('adds found warnings to warnings array', function() {
@@ -332,12 +339,11 @@ describe('iD.utilMapCSSRule', function() {
                 });
             });
             
-            // warnings.forEach(function(warning) {
-                // console.log(warning);
-                // expect(warning.message).to.not.be.null;
-                // expect(['mapcss_warning', 'mapcss_error'].indexOf(warning.id)).to.be.greaterThan(-1);
-                // expect(warning.entity).to.be.instanceOf(iD.Entity);
-            // });
+            warnings.forEach(function(warning) {
+                expect(warning.message).to.not.be.null;
+                expect(['mapcss_warning', 'mapcss_error'].indexOf(warning.id)).to.be.greaterThan(-1);
+                expect(warning.entity).to.be.instanceOf(iD.Entity);
+            });
         });
     });
 });

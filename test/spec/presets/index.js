@@ -192,7 +192,7 @@ describe('iD.presetIndex', function() {
                 }
             };
             var currentPresets = iD.Context().presets();
-            var overwrittenPresets = iD.Context().overwritePresets(testPresets);
+            var overwrittenPresets = iD.Context().presets().overwrite(testPresets);
             expect(currentPresets).to.not.eql(overwrittenPresets);
         });
     });

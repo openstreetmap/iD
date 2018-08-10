@@ -1,5 +1,5 @@
 export function validationMapCSSChecks() {
-    var validation = function(changes, graph, rules, areaKeys) {
+    var validation = function(changes, graph, rules) {
         var warnings = [];
         var createdModified = ['created', 'modified'];
         for (var i = 0; i < createdModified.length; i++) {

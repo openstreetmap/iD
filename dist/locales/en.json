@@ -376,6 +376,7 @@
             "cancel": "Cancel",
             "changes": "{count} Changes",
             "download_changes": "Download osmChange file",
+            "errors": "Errors",
             "warnings": "Warnings",
             "modified": "Modified",
             "deleted": "Deleted",
@@ -6895,6 +6896,27 @@
                 },
                 "name": "Hike & Bike"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi snowmobile trails from OSM (Nordic coverage)",
+                "name": "Nordic snowmobile overlay"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic of Swedish orthophotos from the period 1949-1970.",
+                "name": "Lantmäteriet Historic Orthophoto 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic of Swedish orthophotos from the period 1970-1980. To be expanded.",
+                "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Terms & Feedback"
@@ -6931,8 +6953,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scan of ´Economic maps´ ca 1950-1980",
-                "name": "Lantmäteriet Economic Map (historic)"
+                "description": "Scan of ´Economic maps´ ca. 1950-1980",
+                "name": "Lantmäteriet Economic Map ca 1950-1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6945,6 +6967,13 @@
                     "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snowmobile trails",
+                "name": "Snowmobile map Sweden"
             },
             "stamen-terrain-background": {
                 "attribution": {
