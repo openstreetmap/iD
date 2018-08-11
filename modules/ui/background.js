@@ -17,10 +17,12 @@ import { svgIcon } from '../svg';
 import { uiBackgroundDisplayOptions } from './background_display_options';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
+import { uiCustom } from './custom';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
+import { uiModal } from './modal';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
@@ -88,6 +90,7 @@ export function uiBackground(context) {
     function chooseBackground(d) {
         if (d.id === 'custom' && !d.template()) {
             return editCustom();
+
         }
 
         d3_event.preventDefault();
@@ -99,15 +102,7 @@ export function uiBackground(context) {
         document.activeElement.blur();
     }
 
-
-    function editCustom() {
-        d3_event.preventDefault();
-        var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        var template = window.prompt(
-            t('background.custom_prompt', { example: example }),
-            _customSource.template() || example
-        );
-
+    function edit(a, template) {
         if (template) {
             context.storage('background-custom-template', template);
             _customSource.template(template);
@@ -115,6 +110,13 @@ export function uiBackground(context) {
         } else {
             _backgroundList.call(updateLayerSelections);
         }
+    }
+
+    function editCustom() {
+        d3_event.preventDefault();
+
+        context.container()
+            .call(uiCustom(context));
     }
 
 
@@ -419,6 +421,7 @@ export function uiBackground(context) {
         uiBackground.hidePane = hidePane;
         uiBackground.togglePane = togglePane;
         uiBackground.setVisible = setVisible;
+        uiBackground.edit = edit;
     }
 
     return background;
