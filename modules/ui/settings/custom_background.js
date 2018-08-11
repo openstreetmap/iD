@@ -1,75 +1,74 @@
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 import { t } from '../../util/locale';
-import { uiBackground } from '../background';
-import { uiModal } from '../modal';
+import { uiConfirm } from '../confirm';
+import { utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiSettingsCustomBackground(context) {
+    var dispatch = d3_dispatch('change');
 
-    return function(selection) {
 
+    function render(selection) {
         var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        var modalSelection = uiModal(selection);
+        var modal = uiConfirm(selection).okButton();
 
-        modalSelection.select('.modal')
-            .attr('class', 'modal-splash modal col6');
+        modal
+            .classed('settings-custom-background', true);
 
-        var introModal = modalSelection.select('.content')
-            .append('div')
-            .attr('class', 'fillL');
-
-        introModal
-            .append('div')
-            .attr('class','modal-section cf')
+        modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_background.heading'));
+            .text(t('settings.custom_background.header'));
 
-        introModal
-            .append('div')
-            .attr('class','modal-section')
+
+        var textSection = modal.select('.modal-section.message-text');
+
+        textSection
             .append('pre')
+            .attr('class', 'instructions')
             .text(t('settings.custom_background.instructions', { example: example }));
 
-        introModal
-            .append('textarea');
+        textSection
+            .append('textarea')
+            .call(utilNoAuto);
 
 
-        /*var textAreaWrap = introModal
-            .append('div')
-            .attr('class', 'modal-section');
+        // insert a cancel button, and adjust the button widths
+        var buttonSection = modal.select('.modal-section.buttons');
 
-        var urlArea = textAreaWrap
-            .append('textarea');*/
-
-        var buttonWrap = introModal
-            .append('div')
-            .attr('class', 'modal-section');
-
-        var cancelButton = buttonWrap
-            .append('button')
-            .attr('class', 'button-cancel')
-            .on('click', modalSelection.close);
-
-        cancelButton
-            .append('div')
-            .text('Cancel');
-
-        var okButton = buttonWrap
-            .append('button')
-            .attr('class', 'button-ok')
-            .on('click', function() {
-                var template = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-                context.container().call(uiBackground.edit, template);
-                modalSelection.close();
-            });
-
-        okButton
-            .append('div')
-            .text('OK');
+        buttonSection
+            .insert('button', '.ok-button')
+            .attr('class', 'button col3 cancel-button secondary-action')
+            .text(t('confirm.cancel'));
 
 
-        modalSelection.select('button.close')
-            .attr('class','hide');
+        buttonSection.select('.cancel-button')
+            .on('click.cancel', clickCancel);
+
+        buttonSection.select('.ok-button')
+            .classed('col3', true)
+            .classed('col4', false)
+            .attr('disabled', isSaveDisabled)
+            .on('click.save', clickSave);
 
 
-    };
+        function isSaveDisabled() {
+            return null;
+        }
+
+
+        function clickCancel() {
+            this.blur();
+            modal.close();
+        }
+
+
+        function clickSave() {
+            this.blur();
+            modal.close();
+            dispatch.call('change');
+        }
+    }
+
+    return utilRebind(render, dispatch, 'on');
 }

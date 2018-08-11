@@ -3875,6 +3875,19 @@ svg.mouseclick use.right {
 }
 
 
+/* Settings Modals
+------------------------------------------------------- */
+.settings-custom-background .instructions {
+    margin-bottom: 20px;
+}
+.settings-custom-background textarea {
+    height: 60px;
+}
+.settings-custom-background .buttons .button.col3 {
+    float: none;   /* undo float left */
+}
+
+
 /* Save Mode
 ------------------------------------------------------- */
 .mode-save a.user-info {
@@ -4603,23 +4616,4 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     color: #7092ff;
 }
 
-.button-ok {
-    background-color: #6f92ff; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-    
-}
-.button-ok:focus {
-    background-color: #c1d0ff;
-}
-.button-cancel {
-    background-color: #cccccc; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-}
+

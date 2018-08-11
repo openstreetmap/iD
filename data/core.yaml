@@ -515,7 +515,7 @@ en:
   settings:
     custom_background:
       tooltip: Edit custom background
-      heading: Custom Background Settings
+      header: Custom Background Settings
       instructions: "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
   restore:
     heading: You have unsaved changes
