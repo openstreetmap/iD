@@ -165,7 +165,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'view-history-on-osm')
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
-                .attr('href', osm.noteURL(note.id))
+                .attr('href', osm.noteURL(note))
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
                 .text(t('info_panels.history.note_link_text'));
