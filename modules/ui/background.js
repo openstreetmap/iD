@@ -148,7 +148,7 @@ export function uiBackground(context) {
             .append('button')
             .attr('class', 'layer-browse')
             .call(tooltip()
-                .title(t('background.custom_button'))
+                .title(t('settings.custom_background.tooltip'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)

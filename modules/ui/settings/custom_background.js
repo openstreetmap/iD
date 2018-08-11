@@ -20,12 +20,16 @@ export function uiSettingsCustomBackground(context) {
         introModal
             .append('div')
             .attr('class','modal-section cf')
-            .append('h3').text(t('background.custom_heading'));
+            .append('h3')
+            .text(t('settings.custom_background.heading'));
 
         introModal
             .append('div')
             .attr('class','modal-section')
-            .append('p').text(t('background.custom_prompt', { example: example }))
+            .append('pre')
+            .text(t('settings.custom_background.instructions', { example: example }));
+
+        introModal
             .append('textarea');
 
 
@@ -39,7 +43,6 @@ export function uiSettingsCustomBackground(context) {
         var buttonWrap = introModal
             .append('div')
             .attr('class', 'modal-section');
-
 
         var cancelButton = buttonWrap
             .append('button')
