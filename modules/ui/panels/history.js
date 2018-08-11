@@ -227,11 +227,16 @@ export function uiPanelHistory(context) {
             .on('drawn.info-history', function() {
                 selection.call(redraw);
             });
+
+        context
+            .on('enter.info-history', function() {
+                selection.call(redraw);
+            });
     };
 
     panel.off = function() {
-        context.map()
-            .on('drawn.info-history', null);
+        context.map().on('drawn.info-history', null);
+        context.on('enter.info-history', null);
     };
 
     panel.id = 'history';

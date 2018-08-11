@@ -193,11 +193,16 @@ export function uiPanelMeasurement(context) {
             .on('drawn.info-measurement', function() {
                 selection.call(redraw);
             });
+
+        context
+            .on('enter.info-measurement', function() {
+                selection.call(redraw);
+            });
     };
 
     panel.off = function() {
-        context.map()
-            .on('drawn.info-measurement', null);
+        context.map().on('drawn.info-measurement', null);
+        context.on('enter.info-measurement', null);
     };
 
     panel.id = 'measurement';
