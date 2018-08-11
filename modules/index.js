@@ -15,6 +15,7 @@ export * from './svg/index';
 export * from './ui/fields/index';
 export * from './ui/intro/index';
 export * from './ui/panels/index';
+export * from './ui/settings/index';
 export * from './ui/index';
 export * from './util/index';
 export * from './lib/index';

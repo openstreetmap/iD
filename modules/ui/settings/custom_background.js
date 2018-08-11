@@ -1,9 +1,9 @@
-import { t } from '../util/locale';
-import { uiBackground } from './background';
-import { uiModal } from './modal';
+import { t } from '../../util/locale';
+import { uiBackground } from '../background';
+import { uiModal } from '../modal';
 
 
-export function uiCustom(context) {
+export function uiSettingsCustomBackground(context) {
 
     return function(selection) {
 

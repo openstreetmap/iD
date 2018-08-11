@@ -17,12 +17,12 @@ import { svgIcon } from '../svg';
 import { uiBackgroundDisplayOptions } from './background_display_options';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
-import { uiCustom } from './custom';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiModal } from './modal';
+import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
@@ -90,7 +90,6 @@ export function uiBackground(context) {
     function chooseBackground(d) {
         if (d.id === 'custom' && !d.template()) {
             return editCustom();
-
         }
 
         d3_event.preventDefault();
@@ -116,7 +115,7 @@ export function uiBackground(context) {
         d3_event.preventDefault();
 
         context.container()
-            .call(uiCustom(context));
+            .call(uiSettingsCustomBackground(context));
     }
 
 
@@ -153,7 +152,7 @@ export function uiBackground(context) {
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
-            .call(svgIcon('#iD-icon-edit'));
+            .call(svgIcon('#iD-icon-more'));
 
         enter.filter(function(d) { return d.best(); })
             .append('div')
