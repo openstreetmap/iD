@@ -21,7 +21,6 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
-import { uiModal } from './modal';
 import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle } from '../util';
@@ -42,6 +41,9 @@ export function uiBackground(context) {
 
     var backgroundDisplayOptions = uiBackgroundDisplayOptions(context);
     var backgroundOffset = uiBackgroundOffset(context);
+
+    var settingsCustomBackground = uiSettingsCustomBackground(context)
+        .on('change', customChanged);
 
 
     function setTooltips(selection) {
@@ -101,21 +103,22 @@ export function uiBackground(context) {
         document.activeElement.blur();
     }
 
-    function edit(a, template) {
-        if (template) {
-            context.storage('background-custom-template', template);
-            _customSource.template(template);
+
+    function customChanged(d) {
+        if (d && d.template) {
+            _customSource.template(d.template);
             chooseBackground(_customSource);
         } else {
-            _backgroundList.call(updateLayerSelections);
+            _customSource.template('');
+            chooseBackground(context.background().findSource('none'));
         }
     }
 
+
     function editCustom() {
         d3_event.preventDefault();
-
         context.container()
-            .call(uiSettingsCustomBackground(context));
+            .call(settingsCustomBackground);
     }
 
 
@@ -420,7 +423,6 @@ export function uiBackground(context) {
         uiBackground.hidePane = hidePane;
         uiBackground.togglePane = togglePane;
         uiBackground.setVisible = setVisible;
-        uiBackground.edit = edit;
     }
 
     return background;

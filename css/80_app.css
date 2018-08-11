@@ -2553,6 +2553,8 @@ div.full-screen > button:hover {
     background-color: #ececec;
 }
 
+.layer-list li.active button,
+.layer-list li.switch button,
 .layer-list li.active,
 .layer-list li.switch {
     background: #e8ebff;
@@ -2564,10 +2566,7 @@ div.full-screen > button:hover {
     float: right;
 }
 
-[dir='rtl'] .list-item-gpx-browse svg {
-    transform: rotateY(180deg);
-}
-
+[dir='rtl'] .list-item-gpx-browse svg,
 [dir='rtl'] .list-item-mvt-browse svg {
     transform: rotateY(180deg);
 }
