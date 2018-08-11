@@ -201,6 +201,13 @@ export function coreContext() {
         var canSave;
         if (mode && mode.id === 'save') {
             canSave = false;
+
+            // Attempt to prevent user from creating duplicate changes - see #5200
+            if (services.osm && services.osm.isChangesetInflight()) {
+                history.clearSaved();
+                return;
+            }
+
         } else {
             canSave = context.selectedIDs().every(function(id) {
                 var entity = context.hasEntity(id);

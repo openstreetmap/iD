@@ -985,6 +985,11 @@ export default {
     },
 
 
+    isChangesetInflight: function() {
+        return !!_changeset.inflight;
+    },
+
+
     // get/set cached data
     // This is used to save/restore the state when entering/exiting the walkthrough
     // Also used for testing purposes.
