@@ -252,7 +252,7 @@
     "sport_racing_motor": {"key": "sport", "type": "semiCombo", "label": "Sports", "options": ["motor", "karting", "motocross"]},
     "sport_racing_nonmotor": {"key": "sport", "type": "semiCombo", "label": "Sports", "options": ["bmx", "cycling", "dog_racing", "horse_racing", "running"]},
     "sport": {"key": "sport", "type": "semiCombo", "label": "Sports"},
-    "stars": {"key": "stars", "type": "number", "minValue": 0, "label": "Stars"},
+    "stars": {"key": "stars", "type": "combo", "label": "Stars"},
     "start_date": {"key": "start_date", "type": "text", "universal": true, "label": "Start Date"},
     "step_count": {"key": "step_count", "type": "number", "minValue": 0, "label": "Number of Steps"},
     "stop": {"key": "stop", "type": "combo", "label": "Stop Type", "strings": {"options": {"all": "All Ways", "minor": "Minor Road"}}},

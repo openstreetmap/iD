@@ -1,6 +1,5 @@
 {
     "key": "stars",
-    "type": "number",
-    "minValue": 0,
+    "type": "combo",
     "label": "Stars"
 }
