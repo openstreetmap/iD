@@ -330,8 +330,8 @@ rendererBackgroundSource.Esri = function(data) {
         var x = (Math.floor((center[0] + 180) / 360 * Math.pow(2, z)));
         var y = (Math.floor((1 - Math.log(Math.tan(center[1] * Math.PI / 180) + 1 / Math.cos(center[1] * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, z)));
 
-        // fetch an 8x8 grid because responses to leverage cache
-        var tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+/, 'tilemap') + '/' + z + '/' + y + ' /' + x + '/8/8';
+        // fetch an 8x8 grid to leverage cache
+        var tilemapUrl = dummyUrl.replace(/tile\/[0-9]+\/[0-9]+\/[0-9]+\?blankTile=false/, 'tilemap') + '/' + z + '/' + y + '/' + x + '/8/8';
 
         // make the request and introspect the response from the tilemap server
         d3_json(tilemapUrl, function (err, tilemap) {
