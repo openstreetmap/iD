@@ -6252,6 +6252,7 @@
     {"key": "access", "value": "designated", "description": "Allowed Access"},
     {"key": "access", "value": "destination", "description": "Allowed Access"},
     {"key": "access", "value": "dismount", "description": "Allowed Access"},
+    {"key": "access", "value": "permit", "description": "Allowed Access"},
     {"key": "foot", "value": "yes", "description": "Allowed Access"},
     {"key": "foot", "value": "no", "description": "Allowed Access"},
     {"key": "foot", "value": "permissive", "description": "Allowed Access"},
@@ -6259,6 +6260,7 @@
     {"key": "foot", "value": "designated", "description": "Allowed Access"},
     {"key": "foot", "value": "destination", "description": "Allowed Access"},
     {"key": "foot", "value": "dismount", "description": "Allowed Access"},
+    {"key": "foot", "value": "permit", "description": "Allowed Access"},
     {"key": "motor_vehicle", "value": "yes", "description": "Allowed Access"},
     {"key": "motor_vehicle", "value": "no", "description": "Allowed Access"},
     {
@@ -6286,6 +6288,11 @@
       "value": "dismount",
       "description": "Allowed Access"
     },
+    {
+      "key": "motor_vehicle",
+      "value": "permit",
+      "description": "Allowed Access"
+    },
     {"key": "bicycle", "value": "yes", "description": "Allowed Access"},
     {"key": "bicycle", "value": "no", "description": "Allowed Access"},
     {"key": "bicycle", "value": "permissive", "description": "Allowed Access"},
@@ -6293,6 +6300,7 @@
     {"key": "bicycle", "value": "designated", "description": "Allowed Access"},
     {"key": "bicycle", "value": "destination", "description": "Allowed Access"},
     {"key": "bicycle", "value": "dismount", "description": "Allowed Access"},
+    {"key": "bicycle", "value": "permit", "description": "Allowed Access"},
     {"key": "horse", "value": "yes", "description": "Allowed Access"},
     {"key": "horse", "value": "no", "description": "Allowed Access"},
     {"key": "horse", "value": "permissive", "description": "Allowed Access"},
@@ -6300,6 +6308,7 @@
     {"key": "horse", "value": "designated", "description": "Allowed Access"},
     {"key": "horse", "value": "destination", "description": "Allowed Access"},
     {"key": "horse", "value": "dismount", "description": "Allowed Access"},
+    {"key": "horse", "value": "permit", "description": "Allowed Access"},
     {"key": "addr:block_number", "description": "Address"},
     {"key": "addr:city", "description": "Address"},
     {"key": "addr:conscriptionnumber", "description": "Address"},

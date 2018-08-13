@@ -36,37 +36,42 @@ en:
         options:
           designated:
             # access=designated
-            description: Access permitted according to signs or specific local laws
+            description: Access allowed according to signs or specific local laws
             # access=designated
             title: Designated
           destination:
             # access=destination
-            description: Access permitted only to reach a destination
+            description: Access allowed only to reach a destination
             # access=destination
             title: Destination
           dismount:
             # access=dismount
-            description: Access permitted but rider must dismount
+            description: Access allowed but rider must dismount
             # access=dismount
             title: Dismount
           'no':
             # access=no
-            description: Access not permitted to the general public
+            description: Access not allowed to the general public
             # access=no
             title: Prohibited
           permissive:
             # access=permissive
-            description: Access permitted until such time as the owner revokes the permission
+            description: Access allowed until such time as the owner revokes the permission
             # access=permissive
             title: Permissive
+          permit:
+            # access=permit
+            description: Access allowed only with a valid permit or license
+            # access=permit
+            title: Permit
           private:
             # access=private
-            description: Access permitted only with permission of the owner on an individual basis
+            description: Access allowed only with permission of the owner on an individual basis
             # access=private
             title: Private
           'yes':
             # access=yes
-            description: Access permitted by law; a right of way
+            description: Access allowed by law; a right of way
             # access=yes
             title: Allowed
         # access field placeholder
