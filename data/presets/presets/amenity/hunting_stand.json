@@ -1,5 +1,8 @@
 {
     "icon": "temaki-binoculars",
+    "fields": [
+        "access_simple"
+    ],
     "geometry": [
         "point",
         "vertex",
