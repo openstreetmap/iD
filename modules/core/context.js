@@ -8,12 +8,7 @@ import _isString from 'lodash-es/isString';
 import _map from 'lodash-es/map';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import { 
-    json as d3_json, 
-    text as d3_text
-} from 'd3-request';
-
+import { json as d3_json } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
 
 import {
@@ -461,9 +456,11 @@ export function coreContext() {
     
     if (utilExternalValidationRules()) {
         var validationsUrl = utilStringQs(window.location.hash).validations;
-        d3_text(validationsUrl, function (err, mapcss) {
+        d3_json(validationsUrl, function (err, mapcssConfigs) {
             if (err) return;
-            var validations = _map(mapcss, function(mapcss) { return utilMapCSSRule(mapcss, context.presets().areaKeys()); });
+            var validations = _map(mapcssConfigs, function(mapcssConfig) {
+                 return utilMapCSSRule(mapcssConfig, context.presets().areaKeys()); 
+            });
             context.validationRules = function() { return validations; };
         });
     }

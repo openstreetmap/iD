@@ -59,8 +59,11 @@ export function utilMapCSSRule(selector, areaKeys) {
                 .map(function(key) { return ruleChecks[key]; });
 
         },
+        selector: function() {
+            return selector;
+        },
         buildTagMap: function() {
-            var selectorKeys = Object.keys(selector);
+            var selector = this.selector(), selectorKeys = Object.keys(selector);
             var tagMap = _reduce(selectorKeys, function (expectedTags, key) {
                 var values;
                 if (/regex/gi.test(key)) {
@@ -146,7 +149,7 @@ export function utilMapCSSRule(selector, areaKeys) {
             if (entity.type === 'node' || entity.type === 'relation') { 
                 return selector.geometry === entity.type; 
             } else if (entity.type === 'way') {
-                return this.inferGeometry(areaKeys) === entity.geometry(graph);
+                return this.inferGeometry() === entity.geometry(graph);
             }
         },
         findWarnings: function (entity, graph, warnings) {

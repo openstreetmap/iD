@@ -47,7 +47,7 @@ describe('iD.utilMapCSSRule', function() {
     var rules = selectors.map(function(s) { return iD.utilMapCSSRule(s, areaKeys); });
     it ('turns selector object in mapcssRule', function () {
         var ruleKeys = [
-            'ruleChecks', 'type','buildChecks', 'buildTagMap', 'matches', 
+            'ruleChecks', 'type','buildChecks', 'selector', 'buildTagMap', 'matches', 
             'areaKeys', 'inferGeometry', 'geometryMatches','findWarnings'
         ];
         rules.forEach(function(rule) {
@@ -110,7 +110,13 @@ describe('iD.utilMapCSSRule', function() {
             });
         });
     });
-    describe('areaKeys', function() { 
+    describe('#selector', function() {
+        it('returns selector used to construct rule', function() {
+            var rule = iD.utilMapCSSRule(selectors[1], areaKeys);
+            expect(rule.selector()).to.eql(selectors[1]);
+        });
+    });
+    describe('#areaKeys', function() { 
         it('returns areaKeys used to construct rule', function() {
             var rule = iD.utilMapCSSRule(selectors[0], areaKeys);
             expect(rule.areaKeys()).to.eql(areaKeys);
