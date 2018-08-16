@@ -1,8 +1,11 @@
 import _find from 'lodash-es/find';
+import _omit from 'lodash-es/omit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
+
+import whichPolygon from 'which-polygon';
 
 import { data } from '../../data';
 import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
@@ -209,18 +212,24 @@ export function rendererBackground(context) {
 
 
     background.sources = function(extent) {
+        if (!data.imagery || !data.imagery.query) return [];   // called before init()?
+
+        var matchIDs = {};
+        var matchImagery = data.imagery.query.bbox(extent.rectangle(), true) || [];
+        matchImagery.forEach(function(d) { matchIDs[d.id] = true; });
+
         return _backgroundSources.filter(function(source) {
-            return source.intersects(extent);
+            return matchIDs[source.id];
         });
     };
 
 
-    background.dimensions = function(_) {
-        if (!_) return;
-        baseLayer.dimensions(_);
+    background.dimensions = function(d) {
+        if (!d) return;
+        baseLayer.dimensions(d);
 
         _overlayLayers.forEach(function(layer) {
-            layer.dimensions(_);
+            layer.dimensions(d);
         });
     };
 
@@ -366,15 +375,39 @@ export function rendererBackground(context) {
             return geoExtent([args[2], args[1]]);
         }
 
-        var dataImagery = data.imagery || [];
         var q = utilStringQs(window.location.hash.substring(1));
         var requested = q.background || q.layer;
         var extent = parseMap(q.map);
         var first;
         var best;
 
+
+        data.imagery = data.imagery || [];
+        data.imagery.features = {};
+
+        // build efficient index and querying for data.imagery
+        var world = [[[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]]];
+        var features = data.imagery.map(function(source) {
+            var feature = {
+                type: 'Feature',
+                id: source.id,
+                properties: _omit(source, ['polygon']),
+                geometry: {
+                    type: 'MultiPolygon',
+                    coordinates: [ source.polygon || world ]
+                }
+            };
+            data.imagery.features[source.id] = feature;
+            return feature;
+        });
+        data.imagery.query = whichPolygon({
+            type: 'FeatureCollection',
+            features: features
+        });
+
+
         // Add all the available imagery sources
-        _backgroundSources = dataImagery.map(function(source) {
+        _backgroundSources = data.imagery.map(function(source) {
             if (source.type === 'bing') {
                 return rendererBackgroundSource.Bing(source, dispatch);
             } else if (/^EsriWorldImagery/.test(source.id)) {

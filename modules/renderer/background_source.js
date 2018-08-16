@@ -9,13 +9,7 @@ import {
 import { json as d3_json } from 'd3-request';
 
 import { t } from '../util/locale';
-
-import {
-    geoExtent,
-    geoPolygonIntersectsPolygon,
-    geoSphericalDistance
-} from '../geo';
-
+import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilDetect } from '../util/detect';
 
 
@@ -116,7 +110,7 @@ export function rendererBackgroundSource(data) {
                 var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
                 switch (this.projection) {
-                    case 'EPSG:4326': // todo: alternative codes of WGS 84?
+                    case 'EPSG:4326':
                         return {
                             x: lon * 180 / Math.PI,
                             y: lat * 180 / Math.PI
@@ -159,14 +153,6 @@ export function rendererBackgroundSource(data) {
                 }
                 return u;
             });
-    };
-
-
-    source.intersects = function(extent) {
-        extent = extent.polygon();
-        return !data.polygon || data.polygon.some(function(polygon) {
-            return geoPolygonIntersectsPolygon(polygon, extent, true);
-        });
     };
 
 
