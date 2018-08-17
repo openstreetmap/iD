@@ -171,10 +171,10 @@ export function rendererBackground(context) {
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
-        var gpx = context.layers().layer('gpx');
-        if (gpx && gpx.enabled() && gpx.hasGpx()) {
+        var data = context.layers().layer('data');
+        if (data && data.enabled() && data.hasData()) {
             // Include a string like '.gpx data file' or '.geojson data file'
-            var match = gpx.getSrc().match(/(kml|gpx|(?:geo)?json)$/i);
+            var match = data.getSrc().match(/(kml|gpx|pbf|mvt|(?:geo)?json)$/i);
             var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
             imageryUsed.push(extension + 'data file');
         }
@@ -182,14 +182,6 @@ export function rendererBackground(context) {
         var streetside = context.layers().layer('streetside');
         if (streetside && streetside.enabled()) {
             imageryUsed.push('Bing Streetside');
-        }
-
-        var mvt = context.layers().layer('mvt');
-        if (mvt && mvt.enabled() && mvt.hasMvt()) {
-            // Include a string like '.mvt data file' or '.geojson data file'
-            var matchmvt = mvt.getSrc().match(/(pbf|mvt|(?:geo)?json)$/i);
-            var extensionmvt = matchmvt ? ('.' + matchmvt[0].toLowerCase() + ' ') : '';
-            imageryUsed.push(extensionmvt + 'data file');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');
@@ -464,16 +456,9 @@ export function rendererBackground(context) {
         });
 
         if (q.gpx) {
-            var gpx = context.layers().layer('gpx');
+            var gpx = context.layers().layer('data');
             if (gpx) {
                 gpx.url(q.gpx);
-            }
-        }
-
-        if (q.mvt) {
-            var mvt = context.layers().layer('mvt');
-            if (mvt) {
-                mvt.url(q.mvt);
             }
         }
 

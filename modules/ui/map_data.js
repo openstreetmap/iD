@@ -207,14 +207,14 @@ export function uiMapData(context) {
     }
 
 
-    function drawGpxItem(selection) {
-        var gpx = layers.layer('gpx');
-        var hasGpx = gpx && gpx.hasGpx();
-        var showsGpx = hasGpx && gpx.enabled();
+    function drawDataItems(selection) {
+        var dataLayer = layers.layer('data');
+        var hasData = dataLayer && dataLayer.hasData();
+        var showsData = hasData && dataLayer.enabled();
 
         var ul = selection
-            .selectAll('.layer-list-gpx')
-            .data(gpx ? [0] : []);
+            .selectAll('.layer-list-data')
+            .data(dataLayer ? [0] : []);
 
         // Exit
         ul.exit()
@@ -223,15 +223,15 @@ export function uiMapData(context) {
         // Enter
         var ulEnter = ul.enter()
             .append('ul')
-            .attr('class', 'layer-list layer-list-gpx');
+            .attr('class', 'layer-list layer-list-data');
 
         var liEnter = ulEnter
             .append('li')
-            .attr('class', 'list-item-gpx');
+            .attr('class', 'list-item-data');
 
         liEnter
             .append('button')
-            .attr('class', 'list-item-gpx-extent')
+            .attr('class', 'list-item-data-extent')
             .call(tooltip()
                 .title(t('gpx.zoom'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -239,13 +239,13 @@ export function uiMapData(context) {
             .on('click', function() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                gpx.fitZoom();
+                dataLayer.fitZoom();
             })
             .call(svgIcon('#iD-icon-search'));
 
         liEnter
             .append('button')
-            .attr('class', 'list-item-gpx-browse')
+            .attr('class', 'list-item-data-browse')
             .call(tooltip()
                 .title(t('gpx.browse'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -254,7 +254,7 @@ export function uiMapData(context) {
                 d3_select(document.createElement('input'))
                     .attr('type', 'file')
                     .on('change', function() {
-                        gpx.files(d3_event.target.files);
+                        dataLayer.files(d3_event.target.files);
                     })
                     .node().click();
             })
@@ -270,7 +270,7 @@ export function uiMapData(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('gpx'); });
+            .on('change', function() { toggleLayer('data'); });
 
         labelEnter
             .append('span')
@@ -280,96 +280,15 @@ export function uiMapData(context) {
         ul = ul
             .merge(ulEnter);
 
-        ul.selectAll('.list-item-gpx')
-            .classed('active', showsGpx)
+        ul.selectAll('.list-item-data')
+            .classed('active', showsData)
             .selectAll('label')
-            .classed('deemphasize', !hasGpx)
+            .classed('deemphasize', !hasData)
             .selectAll('input')
-            .property('disabled', !hasGpx)
-            .property('checked', showsGpx);
+            .property('disabled', !hasData)
+            .property('checked', showsData);
     }
 
-    function drawMvtItem(selection) {
-        var mvt = layers.layer('mvt'),
-            hasMvt = mvt && mvt.hasMvt(),
-            showsMvt = hasMvt && mvt.enabled();
-
-        var ul = selection
-            .selectAll('.layer-list-mvt')
-            .data(mvt ? [0] : []);
-
-        // Exit
-        ul.exit()
-            .remove();
-
-        // Enter
-        var ulEnter = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-mvt');
-
-        var liEnter = ulEnter
-            .append('li')
-            .attr('class', 'list-item-mvt');
-
-        liEnter
-            .append('button')
-            .attr('class', 'list-item-mvt-extent')
-            .call(tooltip()
-                .title(t('mvt.zoom'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function() {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                mvt.fitZoom();
-            })
-            .call(svgIcon('#iD-icon-search'));
-
-        liEnter
-            .append('button')
-            .attr('class', 'list-item-mvt-browse')
-            .call(tooltip()
-                .title(t('mvt.browse'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function() {
-                d3_select(document.createElement('input'))
-                    .attr('type', 'file')
-                    .on('change', function() {
-                        mvt.files(d3_event.target.files);
-                    })
-                    .node().click();
-            })
-            .call(svgIcon('#iD-icon-geolocate'));
-
-        var labelEnter = liEnter
-            .append('label')
-            .call(tooltip()
-                .title(t('mvt.drag_drop'))
-                .placement('top')
-            );
-
-        labelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('mvt'); });
-
-        labelEnter
-            .append('span')
-            .text(t('mvt.local_layer'));
-
-        // Update
-        ul = ul
-            .merge(ulEnter);
-
-        ul.selectAll('.list-item-mvt')
-            .classed('active', showsMvt)
-            .selectAll('label')
-            .classed('deemphasize', !hasMvt)
-            .selectAll('input')
-            .property('disabled', !hasMvt)
-            .property('checked', showsMvt);
-    }
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
@@ -462,8 +381,7 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawPhotoItems)
-            .call(drawGpxItem);
-            // .call(drawMvtItem);
+            .call(drawDataItems);
 
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);

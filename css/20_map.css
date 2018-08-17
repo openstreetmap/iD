@@ -307,60 +307,30 @@ g.turn circle {
 }
 
 
-/* GPX Paths */
+/* Other Data (gpx, kml, geojson, mvt, pbf) */
 
-.layer-gpx {
+.layer-geojson {
     pointer-events: none;
 }
 
-path.gpx {
+.layer-geojson path {
     stroke: #ff26d4;
     stroke-width: 2;
     fill: none;
 }
 
-text.gpxlabel-halo,
-text.gpxlabel {
+.layer-geojson text.label-halo,
+.layer-geojson text.label {
     font-size: 10px;
     font-weight: bold;
     dominant-baseline: middle;
 }
 
-text.gpxlabel {
+.layer-geojson text.label {
     fill: #ff26d4;
 }
 
-text.gpxlabel-halo {
-    opacity: 0.7;
-    stroke: #000;
-    stroke-width: 5px;
-    stroke-miterlimit: 1;
-}
-
-/* MVT Paths */
-
-.layer-mvt {
-    pointer-events: none;
-}
-
-path.mvt {
-    stroke: #ff26d4;
-    stroke-width: 2;
-    fill: none;
-}
-
-text.mvtlabel-halo,
-text.mvtlabel {
-    font-size: 10px;
-    font-weight: bold;
-    dominant-baseline: middle;
-}
-
-text.mvtlabel {
-    fill: #ff26d4;
-}
-
-text.mvtlabel-halo {
+.layer-geojson text.label-halo {
     opacity: 0.7;
     stroke: #000;
     stroke-width: 5px;

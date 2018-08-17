@@ -1,4 +1,4 @@
-describe('iD.svgGpx', function () {
+describe('iD.svgData', function () {
     var context;
     var surface;
     var dispatch = d3.dispatch('change');
@@ -41,19 +41,19 @@ describe('iD.svgGpx', function () {
     });
 
 
-    it('creates layer-gpx', function () {
-        var render = iD.svgGpx(projection, context, dispatch);
+    it('creates layer-geojson', function () {
+        var render = iD.svgData(projection, context, dispatch);
         surface.call(render);
 
-        var layers = surface.selectAll('g.layer-gpx').nodes();
+        var layers = surface.selectAll('g.layer-geojson').nodes();
         expect(layers.length).to.eql(1);
     });
 
     it('draws geojson', function () {
-        var render = iD.svgGpx(projection, context, dispatch).geojson(gj);
+        var render = iD.svgData(projection, context, dispatch).geojson(gj);
         surface.call(render);
 
-        var path = surface.selectAll('path.gpx');
+        var path = surface.selectAll('path');
         expect(path.nodes().length).to.eql(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
     });
@@ -61,30 +61,30 @@ describe('iD.svgGpx', function () {
     describe('#files', function() {
         it('handles gpx files', function () {
             var files = '../../data/gpxtest.gpx';
-            var render = iD.svgGpx(projection, context, dispatch).files(files);
+            var render = iD.svgData(projection, context, dispatch).files(files);
             surface.call(render);
 
-            var path = surface.selectAll('path.gpx');
+            var path = surface.selectAll('path');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
         it('handles geojson files', function () {
             var files = '../../data/gpxtest.json';
-            var render = iD.svgGpx(projection, context, dispatch).files(files);
+            var render = iD.svgData(projection, context, dispatch).files(files);
             surface.call(render);
 
-            var path = surface.selectAll('path.gpx');
+            var path = surface.selectAll('path');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
         });
 
         it('handles kml files', function () {
             var files = '../../data/gpxtest.kml';
-            var render = iD.svgGpx(projection, context, dispatch).files(files);
+            var render = iD.svgData(projection, context, dispatch).files(files);
             surface.call(render);
 
-            var path = surface.selectAll('path.gpx');
+            var path = surface.selectAll('path');
             expect(path.nodes().length).to.eql(1);
             expect(path.attr('d')).to.match(/^M.*z$/);
         });
@@ -93,25 +93,25 @@ describe('iD.svgGpx', function () {
 
     describe('#showLabels', function() {
         it('shows labels by default', function () {
-            var render = iD.svgGpx(projection, context, dispatch).geojson(gj);
+            var render = iD.svgData(projection, context, dispatch).geojson(gj);
             surface.call(render);
 
-            var label = surface.selectAll('text.gpxlabel');
+            var label = surface.selectAll('text.label');
             expect(label.nodes().length).to.eql(1);
             expect(label.text()).to.eql('New Jersey');
 
-            var halo = surface.selectAll('text.gpxlabel-halo');
+            var halo = surface.selectAll('text.label-halo');
             expect(halo.nodes().length).to.eql(1);
             expect(halo.text()).to.eql('New Jersey');
         });
 
 
         it('hides labels with showLabels(false)', function () {
-            var render = iD.svgGpx(projection, context, dispatch).geojson(gj).showLabels(false);
+            var render = iD.svgData(projection, context, dispatch).geojson(gj).showLabels(false);
             surface.call(render);
 
-            expect(surface.selectAll('text.gpxlabel').empty()).to.be.ok;
-            expect(surface.selectAll('text.gpxlabel-halo').empty()).to.be.ok;
+            expect(surface.selectAll('text.label').empty()).to.be.ok;
+            expect(surface.selectAll('text.label-halo').empty()).to.be.ok;
         });
     });
 

@@ -2566,8 +2566,7 @@ div.full-screen > button:hover {
     float: right;
 }
 
-[dir='rtl'] .list-item-gpx-browse svg,
-[dir='rtl'] .list-item-mvt-browse svg {
+[dir='rtl'] .list-item-data-browse svg {
     transform: rotateY(180deg);
 }
 

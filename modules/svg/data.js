@@ -4,16 +4,24 @@ import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 
 import { geoBounds as d3_geoBounds } from 'd3-geo';
-import { text as d3_text } from 'd3-request';
+
+import {
+    request as d3_request,
+    text as d3_text
+} from 'd3-request';
+
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
+import toGeoJSON from '@mapbox/togeojson';
+import vt from '@mapbox/vector-tile';
+import Protobuf from 'pbf';
+
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
-import toGeoJSON from '@mapbox/togeojson';
 
 
 var _initialized = false;
@@ -21,7 +29,7 @@ var _enabled = false;
 var _geojson;
 
 
-export function svgGpx(projection, context, dispatch) {
+export function svgData(projection, context, dispatch) {
     var _showLabels = true;
     var detected = utilDetect();
     var layer;
@@ -42,24 +50,24 @@ export function svgGpx(projection, context, dispatch) {
 
         d3_select('body')
             .attr('dropzone', 'copy')
-            .on('drop.localgpx', function() {
+            .on('drop.svgData', function() {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawGpx.files(d3_event.dataTransfer.files);
+                drawData.files(d3_event.dataTransfer.files);
             })
-            .on('dragenter.localgpx', over)
-            .on('dragexit.localgpx', over)
-            .on('dragover.localgpx', over);
+            .on('dragenter.svgData', over)
+            .on('dragexit.svgData', over)
+            .on('dragover.svgData', over);
 
         _initialized = true;
     }
 
 
-    function drawGpx(selection) {
+    function drawData(selection) {
         var getPath = svgPath(projection).geojson;
 
-        layer = selection.selectAll('.layer-gpx')
+        layer = selection.selectAll('.layer-geojson')
             .data(_enabled ? [0] : []);
 
         layer.exit()
@@ -67,7 +75,7 @@ export function svgGpx(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-gpx')
+            .attr('class', 'layer-geojson')
             .merge(layer);
 
 
@@ -80,7 +88,7 @@ export function svgGpx(projection, context, dispatch) {
 
         paths = paths.enter()
             .append('path')
-            .attr('class', 'gpx')
+            .attr('class', 'pathdata')
             .merge(paths);
 
         paths
@@ -91,8 +99,8 @@ export function svgGpx(projection, context, dispatch) {
         labelData = labelData.filter(getPath);
 
         layer
-            .call(drawLabels, 'gpxlabel-halo', labelData)
-            .call(drawLabels, 'gpxlabel', labelData);
+            .call(drawLabels, 'label-halo', labelData)
+            .call(drawLabels, 'label', labelData);
 
 
         function drawLabels(selection, textClass, data) {
@@ -126,11 +134,6 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
-    function toDom(x) {
-        return (new DOMParser()).parseFromString(x, 'text/xml');
-    }
-
-
     function getExtension(fileName) {
         if (fileName === undefined) {
             return '';
@@ -145,43 +148,76 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
-    function parseSaveAndZoom(extension, data, src) {
+    function toDom(textdata) {
+        return (new DOMParser()).parseFromString(textdata, 'text/xml');
+    }
+
+
+    function vtToGeoJSON(bufferdata) {
+        var tile = new vt.VectorTile(new Protobuf(bufferdata.data.response));
+        var layers = Object.keys(tile.layers);
+        if (!Array.isArray(layers)) { layers = [layers]; }
+
+        var collection = {type: 'FeatureCollection', features: []};
+
+        layers.forEach(function (layerID) {
+            var layer = tile.layers[layerID];
+            if (layer) {
+                for (var i = 0; i < layer.length; i++) {
+                    var feature = layer.feature(i).toGeoJSON(bufferdata.zxy[2], bufferdata.zxy[3], bufferdata.zxy[1]);
+                    if (layers.length > 1) feature.properties.vt_layer = layerID;
+                    collection.features.push(feature);
+                }
+            }
+        });
+
+        return collection;
+    }
+
+
+    function parseSaveAndZoom(extension, data, name) {
         switch (extension) {
-            default:
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data)), src).fitZoom();
+            case '.gpx':
+                drawData.geojson(toGeoJSON.gpx(toDom(data)), name).fitZoom();
                 break;
             case '.kml':
-                drawGpx.geojson(toGeoJSON.kml(toDom(data)), src).fitZoom();
+                drawData.geojson(toGeoJSON.kml(toDom(data)), name).fitZoom();
+                break;
+            case '.pbf':
+                drawData.geojson(vtToGeoJSON(data), name).fitZoom();
+                break;
+            case '.mvt':
+                drawData.geojson(vtToGeoJSON(data), name).fitZoom();
                 break;
             case '.geojson':
             case '.json':
-                drawGpx.geojson(JSON.parse(data), src).fitZoom();
+                drawData.geojson(JSON.parse(data), name).fitZoom();
                 break;
         }
     }
 
 
-    drawGpx.showLabels = function(_) {
+    drawData.showLabels = function(val) {
         if (!arguments.length) return _showLabels;
-        _showLabels = _;
+        _showLabels = val;
         return this;
     };
 
 
-    drawGpx.enabled = function(_) {
+    drawData.enabled = function(val) {
         if (!arguments.length) return _enabled;
-        _enabled = _;
+        _enabled = val;
         dispatch.call('change');
         return this;
     };
 
 
-    drawGpx.hasGpx = function() {
+    drawData.hasData = function() {
         return (!(_isEmpty(_geojson) || _isEmpty(_geojson.features)));
     };
 
 
-    drawGpx.geojson = function(gj, src) {
+    drawData.geojson = function(gj, src) {
         if (!arguments.length) return _geojson;
         if (_isEmpty(gj) || _isEmpty(gj.features)) return this;
         _geojson = gj;
@@ -191,41 +227,82 @@ export function svgGpx(projection, context, dispatch) {
     };
 
 
-    drawGpx.url = function(url) {
-        d3_text(url, function(err, data) {
-            if (!err) {
-                var extension = getExtension(url);
-                parseSaveAndZoom(extension, data, url);
-            }
-        });
+    drawData.url = function(url) {
+        var extension = getExtension(url);
+        if (extension === 'mvt' || extension === 'pbf') {
+            d3_request(url)
+                .responseType('arraybuffer')
+                .get(function(err, data) {
+                    if (err || !data) return;
+                    _src = url;
+                    var match = url.match(/(pbf|mvt)/i);
+                    var extension = match ? ('.' + match[0].toLowerCase()) : '';
+                    var zxy = url.match(/\/(\d+)\/(\d+)\/(\d+)/);
+                    var bufferdata = {
+                        data : data,
+                        zxy : zxy
+                    };
+                    parseSaveAndZoom(extension, bufferdata);
+                });
+        } else {
+            d3_text(url, function(err, data) {
+                if (!err) {
+                    parseSaveAndZoom(extension, data, url);
+                }
+            });
+        }
+
         return this;
     };
 
 
-    drawGpx.files = function(fileList) {
+    drawData.files = function(fileList) {
         if (!fileList.length) return this;
         var f = fileList[0];
         var reader = new FileReader();
+        var extension = getExtension(f.name);
 
-        reader.onload = (function(file) {
-            var extension = getExtension(file.name);
-            return function (e) {
-                parseSaveAndZoom(extension, e.target.result, file.name);
-            };
-        })(f);
+        if (extension === 'mvt' || extension === 'pbf') {
+            reader.onload = (function(file) {
+                return; // todo find x,y,z
+                var data = [];
+                var zxy = [0,0,0];
 
-        reader.readAsText(f);
+                _src = file.name;
+                var extension = getExtension(file.name);
+                var bufferdata = {
+                    data: data,
+                    zxy: zxy
+                };
+                return function (e) {
+                    bufferdata.data = e.target.result;
+                    parseSaveAndZoom(extension, bufferdata);
+                };
+            })(f);
+
+            reader.readAsArrayBuffer(f);
+
+        } else {
+            reader.onload = (function(file) {
+                return function (e) {
+                    parseSaveAndZoom(extension, e.target.result, file.name);
+                };
+            })(f);
+
+            reader.readAsText(f);
+        }
+
         return this;
     };
 
 
-    drawGpx.getSrc = function () {
+    drawData.getSrc = function() {
         return _src;
     };
 
 
-    drawGpx.fitZoom = function() {
-        if (!this.hasGpx()) return this;
+    drawData.fitZoom = function() {
+        if (!this.hasData()) return this;
 
         var map = context.map();
         var viewport = map.trimmedExtent().polygon();
@@ -262,5 +339,5 @@ export function svgGpx(projection, context, dispatch) {
 
 
     init();
-    return drawGpx;
+    return drawData;
 }

@@ -324,7 +324,7 @@ correspondence with entities:
 * `iD.svgLayers` - sets up a number of layers that ensure that map elements
   appear in an appropriate z-order.
 * `iD.svgOsm` - sets up the OSM-specific data layers
-* `iD.svgGpx` - draws gpx traces
+* `iD.svgData` - draws any other overlaid vector data (gpx, kml, geojson, mvt, pbf)
 * `iD.svgDebug` - draws debugging information
 
 ### Other UI
