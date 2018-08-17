@@ -3875,14 +3875,24 @@ svg.mouseclick use.right {
 
 /* Settings Modals
 ------------------------------------------------------- */
-.settings-custom-background .instructions {
-    margin-bottom: 20px;
-}
-.settings-custom-background textarea {
+.settings-modal textarea {
     height: 60px;
 }
-.settings-custom-background .buttons .button.col3 {
+.settings-modal .buttons .button.col3 {
     float: none;   /* undo float left */
+}
+
+.settings-custom-background .instructions-template {
+    margin-bottom: 20px;
+}
+
+
+.settings-custom-data .instructions-file {
+    margin-bottom: 10px;
+}
+.settings-custom-data .field-file,
+.settings-custom-data .instructions-template {
+    margin-bottom: 20px;
 }
 
 

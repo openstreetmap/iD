@@ -12,6 +12,7 @@ import { modeBrowse } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
+import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
@@ -20,6 +21,9 @@ export function uiMapData(context) {
     var features = context.features().keys();
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
+
+    var settingsCustomData = uiSettingsCustomData(context)
+        .on('change', customChanged);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
@@ -207,7 +211,7 @@ export function uiMapData(context) {
     }
 
 
-    function drawDataItems(selection) {
+    function drawCustomDataItems(selection) {
         var dataLayer = layers.layer('data');
         var hasData = dataLayer && dataLayer.hasData();
         var showsData = hasData && dataLayer.enabled();
@@ -231,7 +235,15 @@ export function uiMapData(context) {
 
         liEnter
             .append('button')
-            .attr('class', 'list-item-data-extent')
+            .call(tooltip()
+                .title(t('settings.custom_data.tooltip'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editCustom)
+            .call(svgIcon('#iD-icon-more'));
+
+        liEnter
+            .append('button')
             .call(tooltip()
                 .title(t('gpx.zoom'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -243,22 +255,22 @@ export function uiMapData(context) {
             })
             .call(svgIcon('#iD-icon-search'));
 
-        liEnter
-            .append('button')
-            .attr('class', 'list-item-data-browse')
-            .call(tooltip()
-                .title(t('gpx.browse'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function() {
-                d3_select(document.createElement('input'))
-                    .attr('type', 'file')
-                    .on('change', function() {
-                        dataLayer.files(d3_event.target.files);
-                    })
-                    .node().click();
-            })
-            .call(svgIcon('#iD-icon-geolocate'));
+        // liEnter
+        //     .append('button')
+        //     .attr('class', 'list-item-data-browse')
+        //     .call(tooltip()
+        //         .title(t('gpx.browse'))
+        //         .placement((textDirection === 'rtl') ? 'right' : 'left')
+        //     )
+        //     .on('click', function() {
+        //         d3_select(document.createElement('input'))
+        //             .attr('type', 'file')
+        //             .on('change', function() {
+        //                 dataLayer.files(d3_event.target.files);
+        //             })
+        //             .node().click();
+        //     })
+        //     .call(svgIcon('#iD-icon-geolocate'));
 
         var labelEnter = liEnter
             .append('label')
@@ -287,6 +299,25 @@ export function uiMapData(context) {
             .selectAll('input')
             .property('disabled', !hasData)
             .property('checked', showsData);
+    }
+
+
+    function editCustom() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsCustomData);
+    }
+
+
+    function customChanged(d) {
+console.log('custom was changed');
+        // if (d && d.template) {
+        //     _customSource.template(d.template);
+        //     chooseBackground(_customSource);
+        // } else {
+        //     _customSource.template('');
+        //     chooseBackground(context.background().findSource('none'));
+        // }
     }
 
 
@@ -381,7 +412,7 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawPhotoItems)
-            .call(drawDataItems);
+            .call(drawCustomDataItems);
 
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);

@@ -638,6 +638,19 @@
                 "template": {
                     "placeholder": "Enter a url template"
                 }
+            },
+            "custom_data": {
+                "tooltip": "Edit custom data layer",
+                "header": "Custom Data Settings",
+                "file": {
+                    "instructions": "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson/.json, .pbf, .mvt",
+                    "label": "Browse files"
+                },
+                "or": "Or",
+                "template": {
+                    "instructions": "Enter a vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme",
+                    "placeholder": "Enter a url template"
+                }
             }
         },
         "restore": {

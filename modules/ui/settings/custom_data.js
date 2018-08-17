@@ -1,42 +1,66 @@
 import _cloneDeep from 'lodash-es/cloneDeep';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiSettingsCustomBackground(context) {
+export function uiSettingsCustomData(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
         var _origSettings = {
-            template: context.storage('background-custom-template')
+            file: context.storage('settings-custom-data-file'),
+            template: context.storage('settings-custom-data-template')
         };
         var _currSettings = _cloneDeep(_origSettings);
-        var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+        // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
         modal
-            .classed('settings-modal settings-custom-background', true);
+            .classed('settings-modal settings-custom-data', true);
 
         modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_background.header'));
+            .text(t('settings.custom_data.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
 
         textSection
             .append('pre')
+            .attr('class', 'instructions-file')
+            .text(t('settings.custom_data.file.instructions'));
+
+        textSection
+            .append('input')
+            .attr('class', 'field-file')
+            .attr('type', 'file')
+            .on('change', function() {
+                var files = d3_event.target.files;
+                if (files && files.length) {
+                    _currSettings.file = files[0];
+                } else {
+                    _currSettings.file = undefined;
+                }
+            });
+
+        textSection
+            .append('h4')
+            .text(t('settings.custom_data.or'));
+
+        textSection
+            .append('pre')
             .attr('class', 'instructions-template')
-            .text(t('settings.custom_background.instructions', { example: example }));
+            .text(t('settings.custom_data.template.instructions'));
 
         textSection
             .append('textarea')
             .attr('class', 'field-template')
-            .attr('placeholder', t('settings.custom_background.template.placeholder'))
+            .attr('placeholder', t('settings.custom_data.template.placeholder'))
             .call(utilNoAuto)
             .property('value', _currSettings.template);
 
@@ -68,7 +92,8 @@ export function uiSettingsCustomBackground(context) {
         // restore the original template
         function clickCancel() {
             textSection.select('.field-template').property('value', _origSettings.template);
-            context.storage('background-custom-template', _origSettings.template);
+            context.storage('settings-custom-data-template', _origSettings.template);
+            context.storage('settings-custom-data-file', _origSettings.file);
             this.blur();
             modal.close();
         }
@@ -76,7 +101,8 @@ export function uiSettingsCustomBackground(context) {
         // accept the current template
         function clickSave() {
             _currSettings.template = textSection.select('.field-template').property('value');
-            context.storage('background-custom-template', _currSettings.template);
+            context.storage('settings-custom-data-template', _currSettings.template);
+            context.storage('settings-custom-data-file', _currSettings.file);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

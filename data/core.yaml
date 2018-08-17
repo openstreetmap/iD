@@ -519,6 +519,16 @@ en:
       instructions: "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
       template:
         placeholder: Enter a url template
+    custom_data:
+      tooltip: Edit custom data layer
+      header: Custom Data Settings
+      file:
+        instructions: "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson/.json, .pbf, .mvt"
+        label: "Browse files"
+      or: "Or"
+      template:
+        instructions: "Enter a vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
+        placeholder: Enter a url template
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
