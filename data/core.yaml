@@ -460,6 +460,10 @@ en:
       notes:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap notes
+      custom:
+        tooltip: "Drag and drop a data file onto the page, or click the button to setup"
+        title: Custom Map Data
+        zoom: Zoom to data
     fill_area: Fill Areas
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
@@ -620,16 +624,6 @@ en:
     out: Zoom out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
-  gpx:
-    local_layer: "Add a GPX"
-    drag_drop: "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse"
-    zoom: "Zoom to layer"
-    browse: "Browse for a file"
-  mvt:
-    local_layer: "Add a MVT"
-    drag_drop: "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse"
-    zoom: "Zoom to layer"
-    browse: "Browse for a file"
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"

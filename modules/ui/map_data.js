@@ -245,7 +245,7 @@ export function uiMapData(context) {
         liEnter
             .append('button')
             .call(tooltip()
-                .title(t('gpx.zoom'))
+                .title(t('map_data.layers.custom.zoom'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', function() {
@@ -255,27 +255,10 @@ export function uiMapData(context) {
             })
             .call(svgIcon('#iD-icon-search'));
 
-        // liEnter
-        //     .append('button')
-        //     .attr('class', 'list-item-data-browse')
-        //     .call(tooltip()
-        //         .title(t('gpx.browse'))
-        //         .placement((textDirection === 'rtl') ? 'right' : 'left')
-        //     )
-        //     .on('click', function() {
-        //         d3_select(document.createElement('input'))
-        //             .attr('type', 'file')
-        //             .on('change', function() {
-        //                 dataLayer.files(d3_event.target.files);
-        //             })
-        //             .node().click();
-        //     })
-        //     .call(svgIcon('#iD-icon-geolocate'));
-
         var labelEnter = liEnter
             .append('label')
             .call(tooltip()
-                .title(t('gpx.drag_drop'))
+                .title(t('map_data.layers.custom.tooltip'))
                 .placement('top')
             );
 
@@ -286,7 +269,7 @@ export function uiMapData(context) {
 
         labelEnter
             .append('span')
-            .text(t('gpx.local_layer'));
+            .text(t('map_data.layers.custom.title'));
 
         // Update
         ul = ul
