@@ -211,7 +211,7 @@ export function rendererBackground(context) {
         matchImagery.forEach(function(d) { matchIDs[d.id] = true; });
 
         return _backgroundSources.filter(function(source) {
-            return matchIDs[source.id];
+            return matchIDs[source.id] || !source.polygon;   // no polygon = worldwide
         });
     };
 
@@ -378,20 +378,18 @@ export function rendererBackground(context) {
         data.imagery.features = {};
 
         // build efficient index and querying for data.imagery
-        var world = [[[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]]];
         var features = data.imagery.map(function(source) {
+            if (!source.polygon) return null;
             var feature = {
                 type: 'Feature',
-                id: source.id,
-                properties: _omit(source, ['polygon']),
-                geometry: {
-                    type: 'MultiPolygon',
-                    coordinates: [ source.polygon || world ]
-                }
+                properties: { id: source.id },
+                geometry: { type: 'MultiPolygon', coordinates: [ source.polygon ] }
             };
+
             data.imagery.features[source.id] = feature;
             return feature;
-        });
+        }).filter(Boolean);
+
         data.imagery.query = whichPolygon({
             type: 'FeatureCollection',
             features: features
