@@ -348,7 +348,7 @@
     {
       "key": "amenity",
       "value": "biergarten",
-      "description": "Beer Garden",
+      "description": "Biergarten",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/beer-15.svg?sanitize=true"
     },

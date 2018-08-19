@@ -3136,7 +3136,7 @@
                     "terms": "bike,repair,chain,pump"
                 },
                 "amenity/biergarten": {
-                    "name": "Beer Garden",
+                    "name": "Biergarten",
                     "terms": "beer,bier,booze"
                 },
                 "amenity/boat_rental": {

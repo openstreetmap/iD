@@ -1932,9 +1932,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Bicycle Repair Tool Stand'', separated by commas>'
       amenity/biergarten:
         # amenity=biergarten
-        name: Beer Garden
+        name: Biergarten
         # 'terms: beer,bier,booze'
-        terms: '<translate with synonyms or related terms for ''Beer Garden'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Biergarten'', separated by commas>'
       amenity/boat_rental:
         # amenity=boat_rental
         name: Boat Rental
