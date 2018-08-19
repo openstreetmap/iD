@@ -2174,7 +2174,7 @@ en:
       amenity/pharmacy:
         # amenity=pharmacy
         name: Pharmacy
-        # 'terms: drug*,med*,prescription'
+        # 'terms: apothecary,drug*,med*,prescription'
         terms: '<translate with synonyms or related terms for ''Pharmacy'', separated by commas>'
       amenity/place_of_worship:
         # amenity=place_of_worship
@@ -5231,7 +5231,7 @@ en:
       shop/chemist:
         # shop=chemist
         name: Drugstore
-        # 'terms: med*,drug*,gift'
+        # 'terms: apothecary,med*,drug*,gift'
         terms: '<translate with synonyms or related terms for ''Drugstore'', separated by commas>'
       shop/chocolate:
         # shop=chocolate
