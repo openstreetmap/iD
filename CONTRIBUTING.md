@@ -390,7 +390,7 @@ Addtionaly here is a step-by-step workflow example for beginners:
 
 7. Add Files and commit them `git add <files> ; git commit -m "Description of what you did"` .. repeat repeat as needed..
 
-8. Push Changes to your GitHub account `git push --set-upstream origin master`
+8. Push Changes to your GitHub account `git push origin <working-branch-name>`. The next push also works without the branche name: `git push origin`.
 
 9.  Go to GitHub for your fork of iD at https://github.com/<yourgithubaccount/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a Pull Request for it.
 
