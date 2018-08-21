@@ -1,5 +1,4 @@
 import _find from 'lodash-es/find';
-import _omit from 'lodash-es/omit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';

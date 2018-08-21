@@ -4,6 +4,7 @@ import serviceOpenstreetcam from './openstreetcam';
 import serviceOsm from './osm';
 import serviceStreetside from './streetside';
 import serviceTaginfo from './taginfo';
+import serviceVectorTile from './vector_tile';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
 
@@ -14,6 +15,7 @@ export var services = {
     osm: serviceOsm,
     streetside: serviceStreetside,
     taginfo: serviceTaginfo,
+    vectorTile: serviceVectorTile,
     wikidata: serviceWikidata,
     wikipedia: serviceWikipedia
 };
@@ -25,6 +27,7 @@ export {
     serviceOsm,
     serviceStreetside,
     serviceTaginfo,
+    serviceVectorTile,
     serviceWikidata,
     serviceWikipedia
 };
