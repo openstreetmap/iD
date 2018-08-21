@@ -295,8 +295,8 @@ export function uiMapData(context) {
     function customChanged(d) {
         var dataLayer = layers.layer('data');
 
-        if (d && d.template) {
-            dataLayer.template(d.template);
+        if (d && d.url) {
+            dataLayer.url(d.url);
         } else if (d && d.fileList) {
             dataLayer.fileList(d.fileList);
         }

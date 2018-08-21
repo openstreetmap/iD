@@ -31,7 +31,7 @@ function vtToGeoJSON(bufferdata) {
         var layer = tile.layers[layerID];
         if (layer) {
             for (var i = 0; i < layer.length; i++) {
-                var feature = layer.feature(i).toGeoJSON(bufferdata.zxy[2], bufferdata.zxy[3], bufferdata.zxy[1]);
+                var feature = layer.feature(i).toGeoJSON(bufferdata.xyz[0], bufferdata.xyz[1], bufferdata.xyz[2]);
                 if (layers.length > 1) feature.properties.vt_layer = layerID;
                 collection.features.push(feature);
             }
@@ -64,9 +64,14 @@ function loadTile(source, tile) {
             delete source.inflight[tile.id];
             if (err || !data) return;
 
+            var bufferdata = {
+                data: data,
+                xyz: tile.xyz
+            };
+
             source.loaded[tile.id] = {
-                bufferdata: data,
-                geojson: vtToGeoJSON(data)
+                bufferdata: bufferdata,
+                geojson: vtToGeoJSON(bufferdata)
             };
 
             dispatch.call('loadedData');

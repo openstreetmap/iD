@@ -15,7 +15,7 @@ export function uiSettingsCustomData(context) {
         var dataLayer = context.layers().layer('data');
         var _origSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
-            template: context.storage('settings-custom-data-template')
+            url: context.storage('settings-custom-data-url')
         };
         var _currSettings = _cloneDeep(_origSettings);
 
@@ -45,8 +45,8 @@ export function uiSettingsCustomData(context) {
             .on('change', function() {
                 var files = d3_event.target.files;
                 if (files && files.length) {
-                    _currSettings.template = '';
-                    textSection.select('.field-template').property('value', '');
+                    _currSettings.url = '';
+                    textSection.select('.field-url').property('value', '');
                     _currSettings.fileList = files;
                 } else {
                     _currSettings.fileList = null;
@@ -59,15 +59,15 @@ export function uiSettingsCustomData(context) {
 
         textSection
             .append('pre')
-            .attr('class', 'instructions-template')
-            .text(t('settings.custom_data.template.instructions'));
+            .attr('class', 'instructions-url')
+            .text(t('settings.custom_data.url.instructions'));
 
         textSection
             .append('textarea')
-            .attr('class', 'field-template')
-            .attr('placeholder', t('settings.custom_data.template.placeholder'))
+            .attr('class', 'field-url')
+            .attr('placeholder', t('settings.custom_data.url.placeholder'))
             .call(utilNoAuto)
-            .property('value', _currSettings.template);
+            .property('value', _currSettings.url);
 
 
         // insert a cancel button, and adjust the button widths
@@ -94,23 +94,23 @@ export function uiSettingsCustomData(context) {
         }
 
 
-        // restore the original template
+        // restore the original url
         function clickCancel() {
-            textSection.select('.field-template').property('value', _origSettings.template);
-            context.storage('settings-custom-data-template', _origSettings.template);
+            textSection.select('.field-url').property('value', _origSettings.url);
+            context.storage('settings-custom-data-url', _origSettings.url);
             this.blur();
             modal.close();
         }
 
-        // accept the current template
+        // accept the current url
         function clickSave() {
-            _currSettings.template = textSection.select('.field-template').property('value').trim();
+            _currSettings.url = textSection.select('.field-url').property('value').trim();
 
             // one or the other but not both
-            if (_currSettings.template) { _currSettings.fileList = null; }
-            if (_currSettings.fileList) { _currSettings.template = ''; }
+            if (_currSettings.url) { _currSettings.fileList = null; }
+            if (_currSettings.fileList) { _currSettings.url = ''; }
 
-            context.storage('settings-custom-data-template', _currSettings.template);
+            context.storage('settings-custom-data-url', _currSettings.url);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);
