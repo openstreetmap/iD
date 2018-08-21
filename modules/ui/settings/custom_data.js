@@ -12,11 +12,13 @@ export function uiSettingsCustomData(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
+        var dataLayer = context.layers().layer('data');
         var _origSettings = {
-            file: context.storage('settings-custom-data-file'),
+            fileList: (dataLayer && dataLayer.fileList()) || null,
             template: context.storage('settings-custom-data-template')
         };
         var _currSettings = _cloneDeep(_origSettings);
+
         // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
@@ -39,12 +41,15 @@ export function uiSettingsCustomData(context) {
             .append('input')
             .attr('class', 'field-file')
             .attr('type', 'file')
+            .property('files', _currSettings.fileList)  // works for all except IE11
             .on('change', function() {
                 var files = d3_event.target.files;
                 if (files && files.length) {
-                    _currSettings.file = files[0];
+                    _currSettings.template = '';
+                    textSection.select('.field-template').property('value', '');
+                    _currSettings.fileList = files;
                 } else {
-                    _currSettings.file = undefined;
+                    _currSettings.fileList = null;
                 }
             });
 
@@ -93,16 +98,19 @@ export function uiSettingsCustomData(context) {
         function clickCancel() {
             textSection.select('.field-template').property('value', _origSettings.template);
             context.storage('settings-custom-data-template', _origSettings.template);
-            context.storage('settings-custom-data-file', _origSettings.file);
             this.blur();
             modal.close();
         }
 
         // accept the current template
         function clickSave() {
-            _currSettings.template = textSection.select('.field-template').property('value');
+            _currSettings.template = textSection.select('.field-template').property('value').trim();
+
+            // one or the other but not both
+            if (_currSettings.template) { _currSettings.fileList = null; }
+            if (_currSettings.fileList) { _currSettings.template = ''; }
+
             context.storage('settings-custom-data-template', _currSettings.template);
-            context.storage('settings-custom-data-file', _currSettings.file);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

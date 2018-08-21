@@ -41,11 +41,11 @@ describe('iD.svgData', function () {
     });
 
 
-    it('creates layer-geojson', function () {
+    it('creates layer-mapdata', function () {
         var render = iD.svgData(projection, context, dispatch);
         surface.call(render);
 
-        var layers = surface.selectAll('g.layer-geojson').nodes();
+        var layers = surface.selectAll('g.layer-mapdata').nodes();
         expect(layers.length).to.eql(1);
     });
 

@@ -2,6 +2,7 @@ import _flatten from 'lodash-es/flatten';
 import _isEmpty from 'lodash-es/isEmpty';
 import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
+import _throttle from 'lodash-es/throttle';
 
 import { geoBounds as d3_geoBounds } from 'd3-geo';
 
@@ -20,6 +21,7 @@ import vt from '@mapbox/vector-tile';
 import Protobuf from 'pbf';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
+import { services } from '../services';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
 
@@ -30,9 +32,13 @@ var _geojson;
 
 
 export function svgData(projection, context, dispatch) {
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
     var detected = utilDetect();
-    var layer;
+    var layer = d3_select(null);
+    var _vtService;
+    var _fileList;
+    var _template;  // todo, if template is set, use vectorTile service
     var _src;
 
 
@@ -54,7 +60,7 @@ export function svgData(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawData.files(d3_event.dataTransfer.files);
+                drawData.fileList(d3_event.dataTransfer.files);
             })
             .on('dragenter.svgData', over)
             .on('dragexit.svgData', over)
@@ -64,24 +70,71 @@ export function svgData(projection, context, dispatch) {
     }
 
 
+    function getService() {
+        if (services.vectorTile && !_vtService) {
+            _vtService = services.vectorTile;
+            _vtService.event.on('loadedData', throttledRedraw);
+        } else if (!services.vectorTile && _vtService) {
+            _vtService = null;
+        }
+
+        return _vtService;
+    }
+
+
+    function showLayer() {
+        layerOn();
+
+        layer
+            .style('opacity', 0)
+            .transition()
+            .duration(250)
+            .style('opacity', 1)
+            .on('end', function () { dispatch.call('change'); });
+    }
+
+
+    function hideLayer() {
+        throttledRedraw.cancel();
+
+        layer
+            .transition()
+            .duration(250)
+            .style('opacity', 0)
+            .on('end', layerOff);
+    }
+
+
+    function layerOn() {
+        layer.style('display', 'block');
+    }
+
+
+    function layerOff() {
+        layer.selectAll('.viewfield-group').remove();
+        layer.style('display', 'none');
+    }
+
+
     function drawData(selection) {
         var getPath = svgPath(projection).geojson;
+        var hasData = drawData.hasData();
 
-        layer = selection.selectAll('.layer-geojson')
-            .data(_enabled ? [0] : []);
+        layer = selection.selectAll('.layer-mapdata')
+            .data(_enabled && hasData ? [0] : []);
 
         layer.exit()
             .remove();
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-geojson')
+            .attr('class', 'layer-mapdata')
             .merge(layer);
 
 
         var paths = layer
             .selectAll('path')
-            .data([_geojson]);
+            .data(hasData ? [_geojson] : []);
 
         paths.exit()
             .remove();
@@ -95,7 +148,7 @@ export function svgData(projection, context, dispatch) {
             .attr('d', getPath);
 
 
-        var labelData = _showLabels && _geojson.features ? _geojson.features : [];
+        var labelData = (_showLabels && hasData && _geojson.features) || [];
         labelData = labelData.filter(getPath);
 
         layer
@@ -175,26 +228,34 @@ export function svgData(projection, context, dispatch) {
     }
 
 
-    function parseSaveAndZoom(extension, data, name) {
+    drawData.setFile = function(extension, data, src) {
+        var gj;
         switch (extension) {
             case '.gpx':
-                drawData.geojson(toGeoJSON.gpx(toDom(data)), name).fitZoom();
+                gj = toGeoJSON.gpx(toDom(data));
                 break;
             case '.kml':
-                drawData.geojson(toGeoJSON.kml(toDom(data)), name).fitZoom();
+                gj = toGeoJSON.kml(toDom(data));
                 break;
             case '.pbf':
-                drawData.geojson(vtToGeoJSON(data), name).fitZoom();
+                gj = vtToGeoJSON(data);
                 break;
             case '.mvt':
-                drawData.geojson(vtToGeoJSON(data), name).fitZoom();
+                gj = vtToGeoJSON(data);
                 break;
             case '.geojson':
             case '.json':
-                drawData.geojson(JSON.parse(data), name).fitZoom();
+                gj = JSON.parse(data);
                 break;
         }
-    }
+
+        if (!gj || _isEmpty(gj) || _isEmpty(gj.features)) return;
+        _geojson = gj;
+        _src = src || 'unknown.geojson';
+
+        dispatch.call('change');
+        return this.fitZoom();
+    };
 
 
     drawData.showLabels = function(val) {
@@ -207,6 +268,12 @@ export function svgData(projection, context, dispatch) {
     drawData.enabled = function(val) {
         if (!arguments.length) return _enabled;
         _enabled = val;
+        if (_enabled) {
+            showLayer();
+        } else {
+            hideLayer();
+        }
+
         dispatch.call('change');
         return this;
     };
@@ -217,12 +284,70 @@ export function svgData(projection, context, dispatch) {
     };
 
 
+    drawData.template = function(val) {
+        if (!arguments.length) return _template;
+
+        _template = val;
+        _fileList = null;
+        _geojson = null;
+        _src = 'vector tiles';
+
+        dispatch.call('change');
+        return this;
+    };
+
+
     drawData.geojson = function(gj, src) {
         if (!arguments.length) return _geojson;
-        if (_isEmpty(gj) || _isEmpty(gj.features)) return this;
+
+        _template = null;
+        _fileList = null;
         _geojson = gj;
         _src = src || 'unknown.geojson';
+
         dispatch.call('change');
+        return this;
+    };
+
+
+    drawData.fileList = function(fileList) {
+        if (!arguments.length) return _fileList;
+
+        _template = null;
+        _fileList = fileList;
+        _geojson = null;
+        _src = null;
+
+        if (!fileList || !fileList.length) return this;
+        var f = fileList[0];
+        var reader = new FileReader();
+        var extension = getExtension(f.name);
+
+        if (extension === 'mvt' || extension === 'pbf') {
+            reader.onload = (function(file) {
+                return; // todo find x,y,z
+                var data = [];
+                var zxy = [0,0,0];
+
+                var bufferdata = { data: data, zxy: zxy };
+                return function (e) {
+                    bufferdata.data = e.target.result;
+                    drawData.setFile(extension, bufferdata, file.name);
+                };
+            })(f);
+
+            reader.readAsArrayBuffer(f);
+
+        } else {
+            reader.onload = (function(file) {
+                return function (e) {
+                    drawData.setFile(extension, e.target.result, file.name);
+                };
+            })(f);
+
+            reader.readAsText(f);
+        }
+
         return this;
     };
 
@@ -238,58 +363,15 @@ export function svgData(projection, context, dispatch) {
                     var match = url.match(/(pbf|mvt)/i);
                     var extension = match ? ('.' + match[0].toLowerCase()) : '';
                     var zxy = url.match(/\/(\d+)\/(\d+)\/(\d+)/);
-                    var bufferdata = {
-                        data : data,
-                        zxy : zxy
-                    };
-                    parseSaveAndZoom(extension, bufferdata);
+                    var bufferdata = { data : data, zxy : zxy };
+                    drawData.setFile(extension, bufferdata, url);
                 });
         } else {
             d3_text(url, function(err, data) {
                 if (!err) {
-                    parseSaveAndZoom(extension, data, url);
+                    drawData.setFile(extension, data, url);
                 }
             });
-        }
-
-        return this;
-    };
-
-
-    drawData.files = function(fileList) {
-        if (!fileList.length) return this;
-        var f = fileList[0];
-        var reader = new FileReader();
-        var extension = getExtension(f.name);
-
-        if (extension === 'mvt' || extension === 'pbf') {
-            reader.onload = (function(file) {
-                return; // todo find x,y,z
-                var data = [];
-                var zxy = [0,0,0];
-
-                _src = file.name;
-                var extension = getExtension(file.name);
-                var bufferdata = {
-                    data: data,
-                    zxy: zxy
-                };
-                return function (e) {
-                    bufferdata.data = e.target.result;
-                    parseSaveAndZoom(extension, bufferdata);
-                };
-            })(f);
-
-            reader.readAsArrayBuffer(f);
-
-        } else {
-            reader.onload = (function(file) {
-                return function (e) {
-                    parseSaveAndZoom(extension, e.target.result, file.name);
-                };
-            })(f);
-
-            reader.readAsText(f);
         }
 
         return this;

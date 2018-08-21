@@ -293,14 +293,13 @@ export function uiMapData(context) {
 
 
     function customChanged(d) {
-console.log('custom was changed');
-        // if (d && d.template) {
-        //     _customSource.template(d.template);
-        //     chooseBackground(_customSource);
-        // } else {
-        //     _customSource.template('');
-        //     chooseBackground(context.background().findSource('none'));
-        // }
+        var dataLayer = layers.layer('data');
+
+        if (d && d.template) {
+            dataLayer.template(d.template);
+        } else if (d && d.fileList) {
+            dataLayer.fileList(d.fileList);
+        }
     }
 
 
