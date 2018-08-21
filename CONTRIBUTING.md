@@ -392,7 +392,7 @@ Additionally here is a step-by-step workflow example for beginners:
 
 8. Push Changes to your GitHub account `git push origin <working-branch-name>`. The next push also works without the branch name: `git push origin`.
 
-9.  Go to GitHub for your fork of iD at https://github.com/<yourgithubaccount/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a Pull Request for it.
+9.  Go to GitHub for your fork of iD at https://github.com/<yourgithubaccount>/iD. GitHub will already know about your recently pushed branch, and ask if you want to create a Pull Request for it.
 
 10. Your Pull Request will be seen by the maintainers of iD. They can merge it or ask for changes. You can update your Pull Request with Steps 7 and 8, Step 9 is required only once per Pull Request.
 
@@ -406,7 +406,17 @@ you can clean up by deleting the branch from your GitHub-iD-Clone and your local
 ## Restart with another PR after some while
 
 If you did not use your copy of iD for some while, other Pull Request gets merged and you don't have the latest version of iD. You can replace your master with whatever is in our master. If you have not done so yet: Add the main repo as an "upstream" remote:
+
 `git remote add upstream git@github.com:openstreetmap/iD.git`
+
 Then change to the master branch and get everything from upstream (the main repository)
+
 `git checkout master ; git fetch --all && git reset --hard upstream/master`
 
+
+## Submitting directly on GitHub (Documentation, Spell fixes, etc.)
+
+If you want to submit with need of testing, you can do this in GitHub without git.
+You also need a GitHub account but you can submit directly from your Browser, see
+this [GitHub Help Article](https://help.github.com/articles/editing-files-in-another-user-s-repository/).
+Please don't use this to change Code and create untested Pull Requests.
