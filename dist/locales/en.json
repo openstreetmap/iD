@@ -4915,6 +4915,10 @@
                     "name": "American Football Field",
                     "terms": ""
                 },
+                "leisure/pitch/badminton": {
+                    "name": "Badminton Court",
+                    "terms": ""
+                },
                 "leisure/pitch/baseball": {
                     "name": "Baseball Diamond",
                     "terms": ""

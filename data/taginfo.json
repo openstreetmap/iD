@@ -3353,6 +3353,13 @@
     },
     {
       "key": "sport",
+      "value": "badminton",
+      "description": "Badminton Court",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/tennis-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
       "value": "baseball",
       "description": "Baseball Diamond",
       "object_types": ["node", "area"],

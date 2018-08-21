@@ -3980,6 +3980,10 @@ en:
         # 'leisure=pitch, sport=american_football'
         name: American Football Field
         terms: '<translate with synonyms or related terms for ''American Football Field'', separated by commas>'
+      leisure/pitch/badminton:
+        # 'leisure=pitch, sport=badminton'
+        name: Badminton Court
+        terms: '<translate with synonyms or related terms for ''Badminton Court'', separated by commas>'
       leisure/pitch/baseball:
         # 'leisure=pitch, sport=baseball'
         name: Baseball Diamond
