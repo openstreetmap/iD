@@ -418,8 +418,28 @@ Then change to the master branch and get everything from upstream (the main repo
 
 `git checkout master ; git fetch --all && git reset --hard upstream/master`
 
-# Submitting directly in the Browser
+
+## Submitting directly in the Browser
 
 If you want to submit Documentation, Spelling improvements, etc. which do not need testing,
-you can do this with your browser in GitHub. You also need a GitHub account and this [GitHub Help Article](https://help.github.com/articles/editing-files-in-another-user-s-repository/).
+you can do this with your browser in GitHub. You also need a GitHub account and this [Article about Editing](https://help.github.com/articles/editing-files-in-another-user-s-repository/).
+You might also finde this [about Pull Requests](https://help.github.com/articles/about-pull-requests/) usefull.
 Please don't use this to change Code and create untested Pull Requests.
+
+# Step by Step with Browser
+
+Additionally here is a step-by-step workflow example for beginners:
+
+1. [Login](https://github.com/login) to your GitHub account or [create](https://services.github.com/on-demand/intro-to-github/create-github-account) a GitHub account, if you do not already have one.
+
+2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
+
+3. Create a New Branch by clicking on "Branch: master" and entering the name of a new branch (choose a descriptive name)
+
+4. Navigate to the file you want to edit and click on "Edit this file" and apply your changes to the file. Alternatively, you could also "Create a new file"
+
+5. When finished editing the file enter a commit text (and description if there is more to describe), commit directly to the newly created branch.
+
+6. Navigate back to your "id" project - https://github.com/{{user}}/iD
+
+7. Follow https://help.github.com/articles/about-pull-requests/ to create a new pull request for your change
