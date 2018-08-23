@@ -169,11 +169,11 @@ export function svgPath(projection, graph, isArea) {
     };
 
     svgpath.geojson = function(d) {
-        if (d.id !== undefined) {
-            if (d.id in cache) {
-                return cache[d.id];
+        if (d.__hashcode__ !== undefined) {
+            if (d.__hashcode__ in cache) {
+                return cache[d.__hashcode__];
             } else {
-                return cache[d.id] = path(d);
+                return cache[d.__hashcode__] = path(d);
             }
         } else {
             return path(d);
