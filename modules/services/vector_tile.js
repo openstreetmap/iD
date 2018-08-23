@@ -7,7 +7,7 @@ import { request as d3_request } from 'd3-request';
 import Protobuf from 'pbf';
 import vt from '@mapbox/vector-tile';
 
-import { utilRebind, utilTiler } from '../util';
+import { utilHashcode, utilRebind, utilTiler } from '../util';
 
 
 var tiler = utilTiler().tileSize(512);
@@ -20,25 +20,28 @@ function abortRequest(i) {
 }
 
 
-function vtToGeoJSON(bufferdata) {
-    var tile = new vt.VectorTile(new Protobuf(bufferdata.data.response));
-    var layers = Object.keys(tile.layers);
+function vtToGeoJSON(data, tile) {
+    var vectorTile = new vt.VectorTile(new Protobuf(data.response));
+    var layers = Object.keys(vectorTile.layers);
     if (!Array.isArray(layers)) { layers = [layers]; }
 
-    var collection = { type: 'FeatureCollection', features: [] };
-
-    layers.forEach(function (layerID) {
-        var layer = tile.layers[layerID];
+    var features = [];
+    layers.forEach(function(layerID) {
+        var layer = vectorTile.layers[layerID];
         if (layer) {
             for (var i = 0; i < layer.length; i++) {
-                var feature = layer.feature(i).toGeoJSON(bufferdata.xyz[0], bufferdata.xyz[1], bufferdata.xyz[2]);
-                if (layers.length > 1) feature.properties.vt_layer = layerID;
-                collection.features.push(feature);
+                var feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+                if (layers.length > 1) {
+                    feature.properties.vt_layer = layerID;
+                }
+                // force unique id generation
+                feature.__hashcode__ = utilHashcode(JSON.stringify(feature));
+                features.push(feature);
             }
         }
     });
 
-    return collection;
+    return features;
 }
 
 
@@ -60,18 +63,13 @@ function loadTile(source, tile) {
     source.inflight[tile.id] = d3_request(url)
         .responseType('arraybuffer')
         .get(function(err, data) {
-            source.loaded[tile.id] = true;
+            source.loaded[tile.id] = {};
             delete source.inflight[tile.id];
             if (err || !data) return;
 
-            var bufferdata = {
-                data: data,
-                xyz: tile.xyz
-            };
-
             source.loaded[tile.id] = {
-                bufferdata: bufferdata,
-                geojson: vtToGeoJSON(bufferdata)
+                data: data,
+                features: vtToGeoJSON(data, tile)
             };
 
             dispatch.call('loadedData');
@@ -112,12 +110,23 @@ export default {
         var source = _vtCache[sourceID];
         if (!source) return [];
 
-        // for now, return the FeatureCollection for each tile
         var tiles = tiler.getTiles(projection);
-        return tiles.map(function(tile) {
-            var loaded = source.loaded[tile.id];
-            return loaded && loaded.geojson;
-        }).filter(Boolean);
+        var seen = {};
+        var results = [];
+
+        for (var i = 0; i < tiles.length; i++) {
+            var loaded = source.loaded[tiles[i].id];
+            if (!loaded || !loaded.features) continue;
+
+            for (var j = 0; j < loaded.features.length; j++) {
+                var feature = loaded.features[j];
+                if (seen[feature.__hashcode__]) continue;
+                seen[feature.__hashcode__] = true;
+                results.push(feature);
+            }
+        }
+
+        return results;
     },
 
 

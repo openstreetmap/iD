@@ -4,7 +4,11 @@ import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
 import _throttle from 'lodash-es/throttle';
 
-import { geoBounds as d3_geoBounds } from 'd3-geo';
+import {
+    geoBounds as d3_geoBounds,
+    geoPath as d3_geoPath
+} from 'd3-geo';
+
 import { text as d3_text } from 'd3-request';
 
 import {
@@ -18,6 +22,7 @@ import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
 import { svgPath } from './index';
 import { utilDetect } from '../util/detect';
+import { utilHashcode } from '../util';
 
 
 var _initialized = false;
@@ -110,6 +115,41 @@ export function svgData(projection, context, dispatch) {
     }
 
 
+    // ensure that all geojson features in a collection have IDs
+    function ensureIDs(gj) {
+        if (!gj) return null;
+
+        if (gj.type === 'FeatureCollection') {
+            for (var i = 0; i < gj.features.length; i++) {
+                ensureFeatureID(gj.features[i]);
+            }
+        } else {
+            ensureFeatureID(gj);
+        }
+        return gj;
+    }
+
+
+    // ensure that each single Feature object has a unique ID
+    function ensureFeatureID(feature) {
+        if (!feature) return;
+        feature.__hashcode__ = utilHashcode(JSON.stringify(feature));
+        return feature;
+    }
+
+
+    // Prefer an array of Features instead of a FeatureCollection
+    function getFeatures(gj) {
+        if (!gj) return [];
+
+        if (gj.type === 'FeatureCollection') {
+            return gj.features;
+        } else {
+            return [gj];
+        }
+    }
+
+
     function drawData(selection) {
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
@@ -133,45 +173,42 @@ export function svgData(projection, context, dispatch) {
             vtService.loadTiles(sourceID, _template, projection);
             geoData = vtService.data(sourceID, projection);
         } else {
-            geoData = _geojson ? [_geojson] : [];
+            geoData = getFeatures(_geojson);
         }
+        geoData = geoData.filter(getPath);
+
 
         var paths = layer
             .selectAll('path')
-            .data(geoData);
+            .data(geoData, function(d) { return d.__hashcode__; });
 
+        // exit
         paths.exit()
             .remove();
 
+        // enter/update
         paths = paths.enter()
             .append('path')
             .attr('class', 'pathdata')
-            .merge(paths);
-
-        paths
+            .merge(paths)
             .attr('d', getPath);
 
 
-        var labelData = [];
         if (_showLabels) {
-            geoData.forEach(function(f) {
-                if (f.type === 'FeatureCollection') {
-                    labelData = labelData.concat(f.features);
-                } else {
-                    labelData.push(f);
-                }
-            });
-            labelData = labelData.filter(getPath);
+            layer
+                .call(drawLabels, 'label-halo', geoData)
+                .call(drawLabels, 'label', geoData);
         }
-
-        layer
-            .call(drawLabels, 'label-halo', labelData)
-            .call(drawLabels, 'label', labelData);
 
 
         function drawLabels(selection, textClass, data) {
+            var labelPath = d3_geoPath(projection);
+            var labelData = data.filter(function(d) {
+                return d.properties && (d.properties.desc || d.properties.name);
+            });
+
             var labels = selection.selectAll('text.' + textClass)
-                .data(data);
+                .data(labelData, function(d) { return d.__hashcode__; });
 
             // exit
             labels.exit()
@@ -183,17 +220,14 @@ export function svgData(projection, context, dispatch) {
                 .attr('class', textClass)
                 .merge(labels)
                 .text(function(d) {
-                    if (d.properties) {
-                        return d.properties.desc || d.properties.name;
-                    }
-                    return null;
+                    return d.properties.desc || d.properties.name;
                 })
                 .attr('x', function(d) {
-                    var centroid = getPath.centroid(d);
+                    var centroid = labelPath.centroid(d);
                     return centroid[0] + 11;
                 })
                 .attr('y', function(d) {
-                    var centroid = getPath.centroid(d);
+                    var centroid = labelPath.centroid(d);
                     return centroid[1];
                 });
         }
@@ -236,7 +270,7 @@ export function svgData(projection, context, dispatch) {
         }
 
         if (!_isEmpty(gj)) {
-            _geojson = gj;
+            _geojson = ensureIDs(gj);
             _src = src || 'unknown.geojson';
             return this.fitZoom();
         }
@@ -295,7 +329,7 @@ export function svgData(projection, context, dispatch) {
         _src = null;
 
         if (!_isEmpty(gj)) {
-            _geojson = gj;
+            _geojson = ensureIDs(gj);
             _src = src || 'unknown.geojson';
         }
 
@@ -343,7 +377,6 @@ export function svgData(projection, context, dispatch) {
                     drawData.setFile(extension, data, url);
                 }
             });
-
         } else {
             drawData.template(url);
         }
@@ -358,12 +391,12 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.fitZoom = function() {
-        // note: only works on a FeatureCollection
-        if (_isEmpty(_geojson) || _isEmpty(_geojson.features)) return;
+        var features = getFeatures(_geojson);
+        if (!features.length) return;
 
         var map = context.map();
         var viewport = map.trimmedExtent().polygon();
-        var coords = _reduce(_geojson.features, function(coords, feature) {
+        var coords = _reduce(features, function(coords, feature) {
             var c = feature.geometry.coordinates;
 
             /* eslint-disable no-fallthrough */
