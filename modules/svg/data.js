@@ -133,7 +133,7 @@ export function svgData(projection, context, dispatch) {
     // ensure that each single Feature object has a unique ID
     function ensureFeatureID(feature) {
         if (!feature) return;
-        feature.__hashcode__ = utilHashcode(JSON.stringify(feature));
+        feature.__featurehash__ = utilHashcode(JSON.stringify(feature));
         return feature;
     }
 
@@ -180,7 +180,7 @@ export function svgData(projection, context, dispatch) {
 
         var paths = layer
             .selectAll('path')
-            .data(geoData, function(d) { return d.__hashcode__; });
+            .data(geoData, function(d) { return d.__featurehash__; });
 
         // exit
         paths.exit()
@@ -194,21 +194,19 @@ export function svgData(projection, context, dispatch) {
             .attr('d', getPath);
 
 
-        if (_showLabels) {
-            layer
-                .call(drawLabels, 'label-halo', geoData)
-                .call(drawLabels, 'label', geoData);
-        }
+        layer
+            .call(drawLabels, 'label-halo', geoData)
+            .call(drawLabels, 'label', geoData);
 
 
         function drawLabels(selection, textClass, data) {
             var labelPath = d3_geoPath(projection);
             var labelData = data.filter(function(d) {
-                return d.properties && (d.properties.desc || d.properties.name);
+                return _showLabels && d.properties && (d.properties.desc || d.properties.name);
             });
 
             var labels = selection.selectAll('text.' + textClass)
-                .data(labelData, function(d) { return d.__hashcode__; });
+                .data(labelData, function(d) { return d.__featurehash__; });
 
             // exit
             labels.exit()
@@ -272,10 +270,11 @@ export function svgData(projection, context, dispatch) {
         if (!_isEmpty(gj)) {
             _geojson = ensureIDs(gj);
             _src = src || 'unknown.geojson';
-            return this.fitZoom();
+            this.fitZoom();
         }
 
         dispatch.call('change');
+        return this;
     };
 
 
@@ -373,9 +372,8 @@ export function svgData(projection, context, dispatch) {
         if (re.test(extension)) {
             _template = null;
             d3_text(url, function(err, data) {
-                if (!err) {
-                    drawData.setFile(extension, data, url);
-                }
+                if (err) return;
+                drawData.setFile(extension, data, url);
             });
         } else {
             drawData.template(url);

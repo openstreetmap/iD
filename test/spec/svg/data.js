@@ -7,29 +7,78 @@ describe('iD.svgData', function () {
         .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [1000, 1000]]);
 
-    var gj = {
-        'type': 'FeatureCollection',
-        'features': [
-            {
-                'type': 'Feature',
-                'id': 316973311,
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [
-                        -74.38928604125977,
-                        40.150275473401365
-                    ]
-                },
-                'properties': {
-                    'abbr': 'N.J.',
-                    'area': 19717.8,
-                    'name': 'New Jersey',
-                    'name_en': 'New Jersey',
-                    'osm_id': 316973311
-                }
-            }
-        ]
-    };
+    var geojson =
+        '{' +
+        '  "type": "FeatureCollection",' +
+        '  "features": [' +
+        '    {' +
+        '      "type": "Feature",' +
+        '      "geometry": {' +
+        '        "type": "Point",' +
+        '        "coordinates": [-74.38928604125977, 40.150275473401365]' +
+        '      },' +
+        '      "properties": {' +
+        '        "abbr": "N.J.",' +
+        '        "area": 19717.8,' +
+        '        "name": "New Jersey",' +
+        '        "name_en": "New Jersey",' +
+        '        "osm_id": 316973311' +
+        '      },' +
+        '      "id": 316973311' +
+        '    }' +
+        '  ]' +
+        '}';
+
+    var gj = JSON.parse(geojson);
+
+    var gpx =
+        '<?xml version="1.0"?>' +
+        '<gpx version="1.1" creator="GDAL 2.2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">' +
+        '<metadata><bounds minlat="40.150275473401365" minlon="-74.389286041259766" maxlat="40.150275473401365" maxlon="-74.389286041259766"/></metadata>' +
+        '<wpt lat="40.150275473401365" lon="-74.389286041259766">' +
+        '  <name>New Jersey</name>' +
+        '  <extensions>' +
+        '    <ogr:abbr>N.J.</ogr:abbr>' +
+        '    <ogr:area>19717.8</ogr:area>' +
+        '    <ogr:name_en>New Jersey</ogr:name_en>' +
+        '    <ogr:osm_id>316973311</ogr:osm_id>' +
+        '  </extensions>' +
+        '</wpt>' +
+        '</gpx>';
+
+    var kml =
+        '<?xml version="1.0" encoding="utf-8" ?>' +
+        '<kml xmlns="http://www.opengis.net/kml/2.2">' +
+        '<Document id="root_doc">' +
+        '<Schema name="gpxtest" id="gpxtest">' +
+        '    <SimpleField name="abbr" type="string"></SimpleField>' +
+        '    <SimpleField name="area" type="float"></SimpleField>' +
+        '    <SimpleField name="name_en" type="string"></SimpleField>' +
+        '    <SimpleField name="osm_id" type="int"></SimpleField>' +
+        '</Schema>' +
+        '<Folder><name>gpxtest</name>' +
+        '  <Placemark>' +
+        '    <name>New Jersey</name>' +
+        '    <ExtendedData><SchemaData schemaUrl="#gpxtest">' +
+        '        <SimpleData name="abbr">N.J.</SimpleData>' +
+        '        <SimpleData name="area">19717.8</SimpleData>' +
+        '        <SimpleData name="name_en">New Jersey</SimpleData>' +
+        '        <SimpleData name="osm_id">316973311</SimpleData>' +
+        '    </SchemaData></ExtendedData>' +
+        '      <Point><coordinates>-74.3892860412598,40.1502754734014</coordinates></Point>' +
+        '  </Placemark>' +
+        '</Folder>' +
+        '</Document>' +
+        '</kml>';
+
+
+    // this is because PhantomJS hasn't implemented a proper File constructor
+    function makeFile(contents, fileName, mimeType) {
+        var blob = new Blob([contents], { type: mimeType });
+        blob.lastModifiedDate = new Date();
+        blob.name = fileName;
+        return blob;
+    }
 
     beforeEach(function () {
         context = iD.coreContext();
@@ -58,35 +107,56 @@ describe('iD.svgData', function () {
         expect(path.attr('d')).to.match(/^M.*z$/);
     });
 
-    describe('#files', function() {
-        it('handles gpx files', function () {
-            var files = '../../data/gpxtest.gpx';
-            var render = iD.svgData(projection, context, dispatch).files(files);
-            surface.call(render);
+    describe('#fileList', function() {
+        it('handles gpx files', function (done) {
+            var files = [ makeFile(gpx, 'test.gpx', 'application/gpx+xml') ];
+            var render = iD.svgData(projection, context, dispatch);
+            var spy = sinon.spy();
+            dispatch.on('change', spy);
+            render.fileList(files);
 
-            var path = surface.selectAll('path');
-            expect(path.nodes().length).to.eql(1);
-            expect(path.attr('d')).to.match(/^M.*z$/);
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                surface.call(render);
+                var path = surface.selectAll('path');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                done();
+            }, 200);
         });
 
-        it('handles geojson files', function () {
-            var files = '../../data/gpxtest.json';
-            var render = iD.svgData(projection, context, dispatch).files(files);
-            surface.call(render);
+        it('handles kml files', function (done) {
+            var files = [ makeFile(kml, 'test.kml', 'application/vnd.google-earth.kml+xml') ];
+            var render = iD.svgData(projection, context, dispatch);
+            var spy = sinon.spy();
+            dispatch.on('change', spy);
+            render.fileList(files);
 
-            var path = surface.selectAll('path');
-            expect(path.nodes().length).to.eql(1);
-            expect(path.attr('d')).to.match(/^M.*z$/);
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                surface.call(render);
+                var path = surface.selectAll('path');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                done();
+            }, 200);
         });
 
-        it('handles kml files', function () {
-            var files = '../../data/gpxtest.kml';
-            var render = iD.svgData(projection, context, dispatch).files(files);
-            surface.call(render);
+        it('handles geojson files', function (done) {
+            var files = [ makeFile(geojson, 'test.geojson', 'application/vnd.geo+json') ];
+            var render = iD.svgData(projection, context, dispatch);
+            var spy = sinon.spy();
+            dispatch.on('change', spy);
+            render.fileList(files);
 
-            var path = surface.selectAll('path');
-            expect(path.nodes().length).to.eql(1);
-            expect(path.attr('d')).to.match(/^M.*z$/);
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                surface.call(render);
+                var path = surface.selectAll('path');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                done();
+            }, 200);
         });
     });
 

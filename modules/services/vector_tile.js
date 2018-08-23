@@ -34,8 +34,9 @@ function vtToGeoJSON(data, tile) {
                 if (layers.length > 1) {
                     feature.properties.vt_layer = layerID;
                 }
-                // force unique id generation
-                feature.__hashcode__ = utilHashcode(JSON.stringify(feature));
+                // force some unique id generation
+                feature.__featurehash__ = utilHashcode(JSON.stringify(feature));
+                feature.__propertyhash__ = utilHashcode(JSON.stringify(feature.properties || {}));
                 features.push(feature);
             }
         }
@@ -120,8 +121,8 @@ export default {
 
             for (var j = 0; j < loaded.features.length; j++) {
                 var feature = loaded.features[j];
-                if (seen[feature.__hashcode__]) continue;
-                seen[feature.__hashcode__] = true;
+                if (seen[feature.__featurehash__]) continue;
+                seen[feature.__featurehash__] = true;
                 results.push(feature);
             }
         }
