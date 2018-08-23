@@ -4,6 +4,7 @@ import _forEach from 'lodash-es/forEach';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
 
+import bboxClip from '@turf/bbox-clip';
 import Protobuf from 'pbf';
 import vt from '@mapbox/vector-tile';
 
@@ -34,6 +35,9 @@ function vtToGeoJSON(data, tile) {
                 if (layers.length > 1) {
                     feature.properties.vt_layer = layerID;
                 }
+                // clip to tile bounds
+                feature = bboxClip(feature, tile.extent.rectangle());
+
                 // force some unique id generation
                 feature.__featurehash__ = utilHashcode(JSON.stringify(feature));
                 feature.__propertyhash__ = utilHashcode(JSON.stringify(feature.properties || {}));
