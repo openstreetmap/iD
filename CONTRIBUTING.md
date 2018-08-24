@@ -290,17 +290,25 @@ you're going to update the presets, [review the Presets README](/data/presets/RE
 
 ## JavaScript
 
-We use the [Airbnb style for JavaScript](https://github.com/airbnb/javascript) with
-only one difference:
+iD uses ES5 syntax throughout the code, with one exception:
+[ES6 modules](http://exploringjs.com/es6/ch_modules.html) using `import` and
+`export` constructs. These are processed by [Rollup.js](https://rollupjs.org/guide/en)
+and not present in the distributed iD bundle.
 
-**4 space soft tabs always for JavaScript, not 2.**
+ES5 syntax is required for:
+* IE11, which about 15-20% of our users still use
+* PhantomJS which runs our tests (it would be great to replace this!)
+
+We will introduce ES6 syntax eventually when it makes sense to do so.
+
+We use the [ES5 Airbnb style guide for JavaScript](https://github.com/airbnb/javascript/tree/es5-deprecated/es5) with
+only one difference:  **4 space soft tabs always for JavaScript, not 2.**
 
 No aligned `=`, no aligned arguments, spaces are either indents or the 1
 space between expressions. No hard tabs, ever.
 
 JavaScript code should pass through [ESLint](http://eslint.org/) with no
-warnings. iD uses [ES6 modules](http://exploringjs.com/es6/ch_modules.html) to
-handle connect code together, so we support `import` and `export` constructs.
+warnings.
 
 
 ## HTML
