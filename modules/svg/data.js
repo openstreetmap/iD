@@ -16,6 +16,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import stringify from 'fast-json-stable-stringify';
 import toGeoJSON from '@mapbox/togeojson';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
@@ -133,7 +134,7 @@ export function svgData(projection, context, dispatch) {
     // ensure that each single Feature object has a unique ID
     function ensureFeatureID(feature) {
         if (!feature) return;
-        feature.__featurehash__ = utilHashcode(JSON.stringify(feature));
+        feature.__featurehash__ = utilHashcode(stringify(feature));
         return feature;
     }
 
