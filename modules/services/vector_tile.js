@@ -37,9 +37,6 @@ function vtToGeoJSON(data, tile, mergeCache) {
             for (var i = 0; i < layer.length; i++) {
                 var feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
                 var geometry = feature.geometry;
-                if (layers.length > 1) {
-                    feature.properties.vt_layer = layerID;
-                }
 
                 // Treat all Polygons as MultiPolygons
                 if (geometry.type === 'Polygon') {
@@ -59,9 +56,10 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     if (!feature.geometry.coordinates[0].length) continue;   // not actually on this tile
                 }
 
-                // force some unique id generation
+                // Generate some unique IDs and add some metadata
                 var featurehash = utilHashcode(stringify(feature));
                 var propertyhash = utilHashcode(stringify(feature.properties || {}));
+                feature.__layerID__ = layerID.replace(/[^_a-zA-Z0-9\-]/g, '_');
                 feature.__featurehash__ = featurehash;
                 feature.__propertyhash__ = propertyhash;
                 features.push(feature);

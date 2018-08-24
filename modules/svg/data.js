@@ -151,6 +151,15 @@ export function svgData(projection, context, dispatch) {
     }
 
 
+    function featureClasses(d) {
+        return [
+            'data' + d.__featurehash__,
+            d.geometry.type,
+            d.__layerID__ || ''
+        ].join(' ');
+    }
+
+
     function drawData(selection) {
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
@@ -190,7 +199,7 @@ export function svgData(projection, context, dispatch) {
         // enter/update
         paths = paths.enter()
             .append('path')
-            .attr('class', 'pathdata')
+            .attr('class', function(d) { return 'pathdata ' + featureClasses(d); })
             .merge(paths)
             .attr('d', getPath);
 
@@ -216,7 +225,7 @@ export function svgData(projection, context, dispatch) {
             // enter/update
             labels = labels.enter()
                 .append('text')
-                .attr('class', textClass)
+                .attr('class', function(d) { return textClass + ' ' + featureClasses(d); })
                 .merge(labels)
                 .text(function(d) {
                     return d.properties.desc || d.properties.name;

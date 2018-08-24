@@ -306,33 +306,3 @@ g.turn circle {
     stroke: #68f;
 }
 
-
-/* Other Data (gpx, kml, geojson, mvt, pbf) */
-
-.layer-mapdata {
-    pointer-events: none;
-}
-
-.layer-mapdata path {
-    stroke: #ff26d4;
-    stroke-width: 2;
-    fill: none;
-}
-
-.layer-mapdata text.label-halo,
-.layer-mapdata text.label {
-    font-size: 10px;
-    font-weight: bold;
-    dominant-baseline: middle;
-}
-
-.layer-mapdata text.label {
-    fill: #ff26d4;
-}
-
-.layer-mapdata text.label-halo {
-    opacity: 0.7;
-    stroke: #000;
-    stroke-width: 5px;
-    stroke-miterlimit: 1;
-}

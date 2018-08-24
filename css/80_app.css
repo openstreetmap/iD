@@ -1204,7 +1204,7 @@ a.hide-toggle {
 }
 
 
-/* preset form basics */
+/* Preset Editor */
 
 .preset-editor {
     overflow: hidden;
@@ -2414,6 +2414,133 @@ input.key-trap {
     padding: 0px;
     border: 1px solid rgba(0,0,0,0);
 }
+
+
+/* OSM Note UI */
+.note-header {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.note-header-icon {
+    background-color: #fff;
+    padding: 10px;
+    flex: 0 0 62px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+[dir='rtl'] .note-header-icon {
+    border-right: unset;
+    border-left: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+}
+
+.note-header-icon .icon-wrap {
+    position: absolute;
+    top: 0px;
+}
+
+.note-header-label {
+    background-color: #f6f6f6;
+    padding: 0 15px;
+    flex: 1 1 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+}
+[dir='rtl'] .note-header-label {
+    border-radius: 5px 0 0 5px;
+}
+
+.note-category {
+    margin: 20px 0px;
+}
+
+.comments-container {
+    background: #ececec;
+    padding: 1px 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.comment {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    display: flex;
+    flex-flow: row nowrap;
+}
+.comment-avatar {
+    padding: 10px;
+    flex: 0 0 62px;
+}
+.comment-avatar .icon.comment-avatar-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+.comment-main {
+    padding: 10px 10px 10px 0;
+    flex: 1 1 100%;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+[dir='rtl'] .comment-main {
+    padding: 10px 0 10px 10px;
+}
+
+.comment-metadata {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.comment-author {
+    font-weight: bold;
+    color: #333;
+}
+.comment-date {
+    color: #aaa;
+}
+.comment-text {
+    color: #333;
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 250px;
+}
+.comment-text::-webkit-scrollbar {
+    border-left: none;
+}
+
+.note-save {
+    padding: 10px;
+}
+
+.note-save #new-comment-input {
+    width: 100%;
+    height: 100px;
+    max-height: 300px;
+    min-height: 100px;
+}
+
+.note-save .detail-section {
+    margin: 10px 0;
+}
+
+.note-report {
+    float: right;
+}
+
+
 
 /* Fullscreen button */
 div.full-screen {
