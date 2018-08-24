@@ -151,6 +151,21 @@ export function svgData(projection, context, dispatch) {
     }
 
 
+    function featureKey(d) {
+        return d.__featurehash__;
+    }
+
+
+    function isPolygon(d) {
+        return d.geometry.type === 'Polygon' || d.geometry.type === 'MultiPolygon';
+    }
+
+
+    function clipPathID(d) {
+        return 'data-' + d.__featurehash__ + '-clippath';
+    }
+
+
     function featureClasses(d) {
         return [
             'data' + d.__featurehash__,
@@ -176,8 +191,12 @@ export function svgData(projection, context, dispatch) {
             .attr('class', 'layer-mapdata')
             .merge(layer);
 
+        var surface = context.surface();
+        if (!surface || surface.empty()) return;  // not ready to draw yet, starting up
 
-        var geoData;
+
+        // Gather data
+        var geoData, polygonData;
         if (_template && vtService) {   // fetch data from vector tile service
             var sourceID = _template;
             vtService.loadTiles(sourceID, _template, projection);
@@ -186,11 +205,50 @@ export function svgData(projection, context, dispatch) {
             geoData = getFeatures(_geojson);
         }
         geoData = geoData.filter(getPath);
+        polygonData = geoData.filter(isPolygon);
 
 
-        var paths = layer
+        // Draw clip paths for polygons
+        var clipPaths = surface.selectAll('defs').selectAll('.clipPath-data')
+           .data(polygonData, featureKey);
+
+        clipPaths.exit()
+           .remove();
+
+        var clipPathsEnter = clipPaths.enter()
+           .append('clipPath')
+           .attr('class', 'clipPath-data')
+           .attr('id', clipPathID);
+
+        clipPathsEnter
+           .append('path');
+
+        clipPaths.merge(clipPathsEnter)
+           .selectAll('path')
+           .attr('d', getPath);
+
+
+       // Draw fill, shadow, stroke layers
+        var datagroups = layer
+            .selectAll('g.datagroup')
+            .data(['fill', 'shadow', 'stroke']);
+
+        datagroups = datagroups.enter()
+            .append('g')
+            .attr('class', function(d) { return 'datagroup datagroup-' + d; })
+            .merge(datagroups);
+
+
+       // Draw paths
+        var pathData = {
+            shadow: geoData,
+            stroke: geoData,
+            fill: polygonData
+        };
+
+        var paths = datagroups
             .selectAll('path')
-            .data(geoData, function(d) { return d.__featurehash__; });
+            .data(function(layer) { return pathData[layer]; }, featureKey);
 
         // exit
         paths.exit()
@@ -199,11 +257,20 @@ export function svgData(projection, context, dispatch) {
         // enter/update
         paths = paths.enter()
             .append('path')
-            .attr('class', function(d) { return 'pathdata ' + featureClasses(d); })
+            .attr('class', function(d) {
+                var datagroup = this.parentNode.__data__;
+                var area = (datagroup === 'fill' ? 'area ' : '');
+                return 'pathdata ' + area + datagroup + ' ' + featureClasses(d);
+            })
+            .attr('clip-path', function(d) {
+                var datagroup = this.parentNode.__data__;
+                return datagroup === 'fill' ? ('url(#' + clipPathID(d) + ')') : null;
+            })
             .merge(paths)
             .attr('d', getPath);
 
 
+        // Draw labels
         layer
             .call(drawLabels, 'label-halo', geoData)
             .call(drawLabels, 'label', geoData);
@@ -216,7 +283,7 @@ export function svgData(projection, context, dispatch) {
             });
 
             var labels = selection.selectAll('text.' + textClass)
-                .data(labelData, function(d) { return d.__featurehash__; });
+                .data(labelData, featureKey);
 
             // exit
             labels.exit()
@@ -312,7 +379,7 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.hasData = function() {
-        return !!(_template || _geojson);
+        return !!(_template || !_isEmpty(_geojson));
     };
 
 
