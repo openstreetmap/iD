@@ -328,7 +328,7 @@ export function svgData(projection, context, dispatch) {
     }
 
 
-    drawData.setFile = function(extension, data, src) {
+    drawData.setFile = function(extension, data) {
         _template = null;
         _fileList = null;
         _geojson = null;
@@ -419,7 +419,10 @@ export function svgData(projection, context, dispatch) {
         _template = val;
         _fileList = null;
         _geojson = null;
-        _src = src || 'vectortile:' + val;
+
+        // strip off the querystring/hash from the template,
+        // it often includes the access token
+        _src = src || ('vectortile:' + val.split(/[?#]/)[0]);
 
         dispatch.call('change');
         return this;
@@ -456,9 +459,9 @@ export function svgData(projection, context, dispatch) {
         var f = fileList[0];
         var extension = getExtension(f.name);
         var reader = new FileReader();
-        reader.onload = (function(file) {
+        reader.onload = (function() {
             return function(e) {
-                drawData.setFile(extension, e.target.result, file.name);
+                drawData.setFile(extension, e.target.result);
             };
         })(f);
 
@@ -480,7 +483,7 @@ export function svgData(projection, context, dispatch) {
             _template = null;
             d3_text(url, function(err, data) {
                 if (err) return;
-                drawData.setFile(extension, data, url);
+                drawData.setFile(extension, data);
             });
         } else {
             drawData.template(url);
