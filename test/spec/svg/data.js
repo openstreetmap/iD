@@ -91,7 +91,7 @@ describe('iD.svgData', function () {
 
 
     it('creates layer-mapdata', function () {
-        var render = iD.svgData(projection, context, dispatch);
+        var render = iD.svgData(projection, context, dispatch).geojson(gj);
         surface.call(render);
 
         var layers = surface.selectAll('g.layer-mapdata').nodes();
@@ -102,7 +102,11 @@ describe('iD.svgData', function () {
         var render = iD.svgData(projection, context, dispatch).geojson(gj);
         surface.call(render);
 
-        var path = surface.selectAll('path');
+        var path;
+        path = surface.selectAll('path.shadow');
+        expect(path.nodes().length).to.eql(1);
+        expect(path.attr('d')).to.match(/^M.*z$/);
+        path = surface.selectAll('path.stroke');
         expect(path.nodes().length).to.eql(1);
         expect(path.attr('d')).to.match(/^M.*z$/);
     });
@@ -118,7 +122,11 @@ describe('iD.svgData', function () {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 surface.call(render);
-                var path = surface.selectAll('path');
+                var path;
+                path = surface.selectAll('path.shadow');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                path = surface.selectAll('path.stroke');
                 expect(path.nodes().length).to.eql(1);
                 expect(path.attr('d')).to.match(/^M.*z$/);
                 done();
@@ -135,7 +143,11 @@ describe('iD.svgData', function () {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 surface.call(render);
-                var path = surface.selectAll('path');
+                var path;
+                path = surface.selectAll('path.shadow');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                path = surface.selectAll('path.stroke');
                 expect(path.nodes().length).to.eql(1);
                 expect(path.attr('d')).to.match(/^M.*z$/);
                 done();
@@ -152,7 +164,11 @@ describe('iD.svgData', function () {
             window.setTimeout(function() {
                 expect(spy).to.have.been.calledOnce;
                 surface.call(render);
-                var path = surface.selectAll('path');
+                var path;
+                path = surface.selectAll('path.shadow');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                path = surface.selectAll('path.stroke');
                 expect(path.nodes().length).to.eql(1);
                 expect(path.attr('d')).to.match(/^M.*z$/);
                 done();
