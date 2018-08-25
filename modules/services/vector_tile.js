@@ -1,3 +1,4 @@
+import _clone from 'lodash-es/clone';
 import _find from 'lodash-es/find';
 import _isEqual from 'lodash-es/isEqual';
 import _forEach from 'lodash-es/forEach';
@@ -172,7 +173,10 @@ export default {
                 var hash = feature.__featurehash__;
                 if (seen[hash]) continue;
                 seen[hash] = true;
-                results.push(feature);
+
+                // return a shallow clone, because the hash may change
+                // later if this feature gets merged with another
+                results.push(_clone(feature));
             }
         }
 
