@@ -60,12 +60,18 @@
 }
 
 .layer-mapdata path.shadow {
+    pointer-events: stroke;
     stroke: #f6634f;
     stroke-width: 16;
     stroke-opacity: 0;
     fill: none;
 }
-.layer-mapdata path.shadow.related:not(.selected),
+.layer-mapdata path.MultiPoint.shadow,
+.layer-mapdata path.Point.shadow {
+    pointer-events: fill;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
 .layer-mapdata path.shadow.hover:not(.selected) {
     stroke-opacity: 0.4;
 }
@@ -96,6 +102,10 @@
 }
 .layer-mapdata text.label {
     fill: #ff26d4;
+}
+.layer-mapdata text.label.hover,
+.layer-mapdata text.label.selected {
+    fill: #f6634f;
 }
 .layer-mapdata text.label-halo {
     opacity: 0.7;

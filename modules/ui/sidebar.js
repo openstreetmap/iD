@@ -2,7 +2,7 @@ import _throttle from 'lodash-es/throttle';
 
 import { selectAll as d3_selectAll } from 'd3-selection';
 
-import { osmNote } from '../osm';
+import { osmEntity, osmNote } from '../osm';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
 import { uiNoteEditor } from './note_editor';
@@ -13,7 +13,6 @@ export function uiSidebar(context) {
     var noteEditor = uiNoteEditor(context);
     var _current;
     var _wasNote = false;
-    // var layer = d3_select(null);
 
 
     function sidebar(selection) {
@@ -22,26 +21,27 @@ export function uiSidebar(context) {
             .attr('class', 'feature-list-pane')
             .call(uiFeatureList(context));
 
-
         var inspectorWrap = selection
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
 
-        function hover(what) {
-            if ((what instanceof osmNote) && (context.mode().id !== 'drag-note')) {
-                // TODO: figure out why `what` isn't an updated note. Won't hover since .loc doesn't match
-                _wasNote = true;
-                var notes = d3_selectAll('.note');
-                notes
-                    .classed('hover', function(d) { return d === what; });
+        function hover(datum) {
+            if (datum && datum.__featurehash__) {   // hovering on data
+                console.log ('hover on data ' + datum.__featurehash__);
+                // show something
 
-                sidebar.show(noteEditor.note(what));
+            } else if (datum instanceof osmNote) {
+                if (context.mode().id === 'drag-note') return;
+                _wasNote = true;
+
+                sidebar
+                    .show(noteEditor.note(datum));
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (!_current && context.hasEntity(what)) {
+            } else if (!_current && (datum instanceof osmEntity)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
@@ -49,10 +49,10 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
-                if (inspector.entityID() !== what || inspector.state() !== 'hover') {
+                if (inspector.entityID() !== datum.id || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
-                        .entityID(what);
+                        .entityID(datum.id);
 
                     inspectorWrap
                         .call(inspector);

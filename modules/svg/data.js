@@ -170,8 +170,9 @@ export function svgData(projection, context, dispatch) {
         return [
             'data' + d.__featurehash__,
             d.geometry.type,
+            isPolygon(d) ? 'area' : '',
             d.__layerID__ || ''
-        ].join(' ');
+        ].filter(Boolean).join(' ');
     }
 
 
@@ -228,7 +229,7 @@ export function svgData(projection, context, dispatch) {
            .attr('d', getPath);
 
 
-       // Draw fill, shadow, stroke layers
+        // Draw fill, shadow, stroke layers
         var datagroups = layer
             .selectAll('g.datagroup')
             .data(['fill', 'shadow', 'stroke']);
@@ -239,7 +240,7 @@ export function svgData(projection, context, dispatch) {
             .merge(datagroups);
 
 
-       // Draw paths
+        // Draw paths
         var pathData = {
             shadow: geoData,
             stroke: geoData,
@@ -259,8 +260,7 @@ export function svgData(projection, context, dispatch) {
             .append('path')
             .attr('class', function(d) {
                 var datagroup = this.parentNode.__data__;
-                var area = (datagroup === 'fill' ? 'area ' : '');
-                return 'pathdata ' + area + datagroup + ' ' + featureClasses(d);
+                return 'pathdata ' + datagroup + ' ' + featureClasses(d);
             })
             .attr('clip-path', function(d) {
                 var datagroup = this.parentNode.__data__;

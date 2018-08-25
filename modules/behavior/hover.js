@@ -110,13 +110,32 @@ export function behaviorHover(context) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            var entity;
-            if (datum instanceof osmNote || datum instanceof osmEntity) {
+            // What are we hovering over?
+            var entity, selector;
+            if (datum && datum.__featurehash__) {
                 entity = datum;
-            } else {
-                entity = datum && datum.properties && datum.properties.entity;
+                selector = '.data' + datum.__featurehash__;
+
+            } else if (datum instanceof osmNote) {
+                entity = datum;
+                selector = '.note-' + datum.id;
+
+            } else if (datum instanceof osmEntity) {
+                entity = datum;
+                selector = '.' + entity.id;
+                if (entity.type === 'relation') {
+                    entity.members.forEach(function(member) { selector += ', .' + member.id; });
+                }
+
+            } else if (datum && datum.properties && (datum.properties.entity instanceof osmEntity)) {
+                entity = datum.properties.entity;
+                selector = '.' + entity.id;
+                if (entity.type === 'relation') {
+                    entity.members.forEach(function(member) { selector += ', .' + member.id; });
+                }
             }
 
+            // Update hover state and dispatch event
             if (entity && entity.id !== _newId) {
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;
@@ -125,24 +144,11 @@ export function behaviorHover(context) {
                     return;
                 }
 
-                var selector =  (datum instanceof osmNote) ? 'note-' + entity.id : '.' + entity.id;
-
-                if (entity.type === 'relation') {
-                    entity.members.forEach(function(member) {
-                        selector += ', .' + member.id;
-                    });
-                }
-
                 var suppressed = _altDisables && d3_event && d3_event.altKey;
-
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                if (datum instanceof osmNote) {
-                    dispatch.call('hover', this, !suppressed && entity);
-                } else {
-                    dispatch.call('hover', this, !suppressed && entity.id);
-                }
+                dispatch.call('hover', this, !suppressed && entity);
 
             } else {
                 dispatch.call('hover', this, null);
