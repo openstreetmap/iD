@@ -179,6 +179,7 @@ export function svgData(projection, context, dispatch) {
     function drawData(selection) {
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
+        var getAreaPath = svgPath(projection, null, true).geojson;
         var hasData = drawData.hasData();
 
         layer = selection.selectAll('.layer-mapdata')
@@ -226,7 +227,7 @@ export function svgData(projection, context, dispatch) {
 
         clipPaths.merge(clipPathsEnter)
            .selectAll('path')
-           .attr('d', getPath);
+           .attr('d', getAreaPath);
 
 
         // Draw fill, shadow, stroke layers
@@ -242,9 +243,9 @@ export function svgData(projection, context, dispatch) {
 
         // Draw paths
         var pathData = {
+            fill: polygonData,
             shadow: geoData,
-            stroke: geoData,
-            fill: polygonData
+            stroke: geoData
         };
 
         var paths = datagroups
@@ -267,7 +268,10 @@ export function svgData(projection, context, dispatch) {
                 return datagroup === 'fill' ? ('url(#' + clipPathID(d) + ')') : null;
             })
             .merge(paths)
-            .attr('d', getPath);
+            .attr('d', function(d) {
+                var datagroup = this.parentNode.__data__;
+                return datagroup === 'fill' ? getAreaPath(d) : getPath(d);
+            });
 
 
         // Draw labels

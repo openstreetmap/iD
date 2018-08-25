@@ -11,6 +11,7 @@ import { geoVecLength } from '../geo';
 import {
     modeBrowse,
     modeSelect,
+    modeSelectData,
     modeSelectNote
 } from '../modes';
 
@@ -157,13 +158,17 @@ export function behaviorSelect(context) {
                 }
             }
 
+        } else if (datum && datum.__featurehash__ && !isMultiselect) {    // clicked Data..
+            context
+                .selectedNoteID(null)
+                .enter(modeSelectData(context, datum));
+
         } else if (datum instanceof osmNote && !isMultiselect) {    // clicked a Note..
             context
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
 
         } else {    // clicked nothing..
-
             context.selectedNoteID(null);
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));

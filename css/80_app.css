@@ -2594,6 +2594,7 @@ input.key-trap {
 .data-editor.raw-tag-editor button {
     display: none;
 }
+.data-editor.raw-tag-editor .tag-row .key-wrap,
 .data-editor.raw-tag-editor .tag-row .input-wrap-position {
     width: 50%;
 }
@@ -4060,7 +4061,7 @@ svg.mouseclick use.right {
 /* Settings Modals
 ------------------------------------------------------- */
 .settings-modal textarea {
-    height: 60px;
+    height: 70px;
 }
 .settings-modal .buttons .button.col3 {
     float: none;   /* undo float left */
@@ -4071,7 +4072,7 @@ svg.mouseclick use.right {
 }
 
 
-.settings-custom-data .instructions-file {
+.settings-custom-data .instructions-url {
     margin-bottom: 10px;
 }
 .settings-custom-data .field-file,

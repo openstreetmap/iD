@@ -46,7 +46,7 @@ export function uiDataEditor(context) {
         var editor = body.selectAll('.data-editor')
             .data([0]);
 
-        editor = editor.enter()
+        editor.enter()
             .append('div')
             .attr('class', 'modal-section data-editor')
             .merge(editor)

@@ -8,6 +8,7 @@
 }
 .mode-browse .layer-notes .note .note-fill,
 .mode-select .layer-notes .note .note-fill,
+.mode-select-data .layer-notes .note .note-fill,
 .mode-select-note .layer-notes .note .note-fill {
     pointer-events: visible;
     cursor: pointer; /* Opera */

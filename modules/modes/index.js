@@ -11,4 +11,5 @@ export { modeMove } from './move';
 export { modeRotate } from './rotate';
 export { modeSave } from './save';
 export { modeSelect } from './select';
+export { modeSelectData } from './select_data';
 export { modeSelectNote } from './select_note';
