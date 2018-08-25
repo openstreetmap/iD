@@ -262,7 +262,7 @@ export function uiMapData(context) {
             .append('label')
             .each(function(d) {
                 d3_select(this).call(
-                    tooltip().title(d.tooltip).placement('bottom')
+                    tooltip().title(d.tooltip).placement('top')
                 );
             });
 
