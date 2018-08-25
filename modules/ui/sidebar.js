@@ -2,16 +2,25 @@ import _throttle from 'lodash-es/throttle';
 
 import { selectAll as d3_selectAll } from 'd3-selection';
 
-import { osmEntity, osmNote } from '../osm';
-import { uiFeatureList } from './feature_list';
-import { uiInspector } from './inspector';
-import { uiNoteEditor } from './note_editor';
+import {
+    osmEntity,
+    osmNote
+} from '../osm';
+
+import {
+    uiDataEditor,
+    uiFeatureList,
+    uiInspector,
+    uiNoteEditor
+} from './index';
 
 
 export function uiSidebar(context) {
     var inspector = uiInspector(context);
+    var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
     var _current;
+    var _wasData = false;
     var _wasNote = false;
 
 
@@ -28,8 +37,12 @@ export function uiSidebar(context) {
 
         function hover(datum) {
             if (datum && datum.__featurehash__) {   // hovering on data
-                console.log ('hover on data ' + datum.__featurehash__);
-                // show something
+                _wasData = true;
+                sidebar
+                    .show(dataEditor.datum(datum));
+
+                selection.selectAll('.sidebar-component')
+                    .classed('inspector-hover', true);
 
             } else if (datum instanceof osmNote) {
                 if (context.mode().id === 'drag-note') return;
@@ -66,10 +79,10 @@ export function uiSidebar(context) {
                 inspector
                     .state('hide');
 
-            } else if (_wasNote) {
+            } else if (_wasData || _wasNote) {
                 _wasNote = false;
-                d3_selectAll('.note')
-                    .classed('hover', false);
+                _wasData = false;
+                d3_selectAll('.note').classed('hover', false);
                 sidebar.hide();
             }
         }

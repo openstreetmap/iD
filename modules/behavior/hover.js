@@ -6,10 +6,7 @@ import {
 } from 'd3-selection';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-import {
-    osmEntity,
-    osmNote
-} from '../osm';
+import { osmEntity, osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
 
 
@@ -154,7 +151,6 @@ export function behaviorHover(context) {
                 dispatch.call('hover', this, null);
             }
         }
-
     };
 
 

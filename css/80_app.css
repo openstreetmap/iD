@@ -717,6 +717,7 @@ button.add-note svg.icon {
 }
 
 .field-help-title button.close,
+.sidebar-component .header button.data-editor-close,
 .sidebar-component .header button.note-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
@@ -725,6 +726,7 @@ button.add-note svg.icon {
     top: 0;
 }
 [dir='rtl'] .field-help-title button.close,
+[dir='rtl'] .sidebar-component .header button.data-editor-close,
 [dir='rtl'] .sidebar-component .header button.note-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
@@ -1391,6 +1393,10 @@ a.hide-toggle {
 .inspector-hover .tag-row .key-wrap,
 .inspector-hover .tag-row .form-field.input-wrap-position {
     width: 50%;
+}
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .input-wrap-position {
+    height: 31px;
 }
 
 .inspector-hover .tag-row:first-child input.value {
@@ -2540,6 +2546,57 @@ input.key-trap {
     float: right;
 }
 
+
+/* Map Data Inspector */
+.data-header {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.data-header-icon {
+    background-color: #fff;
+    padding: 10px;
+    flex: 0 0 62px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+[dir='rtl'] .data-header-icon {
+    border-right: unset;
+    border-left: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+}
+
+.data-header-icon .icon-wrap {
+    position: absolute;
+    top: 0px;
+}
+
+.data-header-label {
+    background-color: #f6f6f6;
+    padding: 0 15px;
+    flex: 1 1 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+}
+[dir='rtl'] .data-header-label {
+    border-radius: 5px 0 0 5px;
+}
+
+/* tag editor - no buttons */
+.data-editor.raw-tag-editor button {
+    display: none;
+}
+.data-editor.raw-tag-editor .tag-row .input-wrap-position {
+    width: 50%;
+}
 
 
 /* Fullscreen button */
