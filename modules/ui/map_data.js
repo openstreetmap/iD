@@ -147,10 +147,8 @@ export function uiMapData(context) {
 
 
         // Update
-        li = li
-            .merge(liEnter);
-
         li
+            .merge(liEnter)
             .classed('active', layerEnabled)
             .selectAll('input')
             .property('checked', layerEnabled);
@@ -201,13 +199,102 @@ export function uiMapData(context) {
 
 
         // Update
-        li = li
-            .merge(liEnter);
-
         li
+            .merge(liEnter)
             .classed('active', function (d) { return d.layer.enabled(); })
             .selectAll('input')
             .property('checked', function (d) { return d.layer.enabled(); });
+    }
+
+
+    // Beta feature - sample vector layers to support Detroit Mapping Challenge
+    // https://github.com/osmus/detroit-mapping-challenge
+    function drawVectorItems(selection) {
+        var vtData = [
+            {
+                name: 'Detroit Neighborhoods/Parks',
+                src: 'neighborhoods-parks',
+                tooltip: 'Neighborhood boundaries and parks as compiled by City of Detroit in concert with community groups.',
+                template: 'https://{switch:a,b,c,d}.tiles.mapbox.com/v4/jonahadkins.cjksmur6x34562qp9iv1u3ksf-54hev,jonahadkins.cjksmqxdx33jj2wp90xd9x2md-4e5y2/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoiam9uYWhhZGtpbnMiLCJhIjoiRlVVVkx3VSJ9.9sdVEK_B_VkEXPjssU5MqA'
+            }, {
+                name: 'Detroit Composite POIs',
+                src: 'composite-poi',
+                tooltip: 'Fire Inspections, Business Licenses, and other public location data collated from the City of Detroit.',
+                template: 'https://{switch:a,b,c,d}.tiles.mapbox.com/v4/jonahadkins.cjksmm6a02sli31myxhsr7zf3-2sw8h/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoiam9uYWhhZGtpbnMiLCJhIjoiRlVVVkx3VSJ9.9sdVEK_B_VkEXPjssU5MqA'
+            }, {
+                name: 'Detroit All-The-Places POIs',
+                src: 'alltheplaces-poi',
+                tooltip: 'Public domain business location data created by web scrapers.',
+                template: 'https://{switch:a,b,c,d}.tiles.mapbox.com/v4/jonahadkins.cjksmswgk340g2vo06p1w9w0j-8fjjc/{z}/{x}/{y}.vector.pbf?access_token=pk.eyJ1Ijoiam9uYWhhZGtpbnMiLCJhIjoiRlVVVkx3VSJ9.9sdVEK_B_VkEXPjssU5MqA'
+            }
+        ];
+
+        var dataLayer = layers.layer('data');
+
+        var header = selection.selectAll('.layer-list-vectortile-header')
+            .data([0]);
+
+        header.enter()
+            .append('h4')
+            .attr('class', 'layer-list-vectortile-header')
+            .text('Vector Tiles (beta)');
+
+        var ul = selection
+            .selectAll('.layer-list-vectortile')
+            .data([0]);
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-vectortile')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item')
+            .data(vtData);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', function(d) { return 'list-item list-item-' + d.src; });
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function(d) {
+                d3_select(this).call(
+                    tooltip().title(d.tooltip).placement('bottom')
+                );
+            });
+
+        labelEnter
+            .append('input')
+            .attr('type', 'radio')
+            .attr('name', 'vectortile')
+            .on('change', selectVTLayer);
+
+        labelEnter
+            .append('span')
+            .text(function(d) { return d.name; });
+
+        // Update
+        li
+            .merge(liEnter)
+            .classed('active', isVTLayerSelected)
+            .selectAll('input')
+            .property('checked', isVTLayerSelected);
+
+
+        function isVTLayerSelected(d) {
+            return dataLayer && dataLayer.template() === d.template;
+        }
+
+        function selectVTLayer(d) {
+            context.storage('settings-custom-data-url', d.template);
+            if (dataLayer) {
+                dataLayer.template(d.template, d.src);
+                dataLayer.enabled(true);
+            }
+        }
     }
 
 
@@ -394,6 +481,7 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawPhotoItems)
+            .call(drawVectorItems)       // beta - detroit mapping challenge
             .call(drawCustomDataItems);
 
         _fillList
