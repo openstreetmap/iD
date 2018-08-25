@@ -350,7 +350,7 @@ export function svgData(projection, context, dispatch) {
 
         if (!_isEmpty(gj)) {
             _geojson = ensureIDs(gj);
-            _src = src || 'unknown.geojson';
+            _src = extension + ' data file';
             this.fitZoom();
         }
 
@@ -387,13 +387,39 @@ export function svgData(projection, context, dispatch) {
     };
 
 
-    drawData.template = function(val) {
+    drawData.template = function(val, src) {
         if (!arguments.length) return _template;
+
+        // test source against OSM imagery blacklists..
+        var osm = context.connection();
+        if (osm) {
+            var blacklists = osm.imageryBlacklists();
+            var fail = false;
+            var tested = 0;
+            var regex;
+
+            for (var i = 0; i < blacklists.length; i++) {
+                try {
+                    regex = new RegExp(blacklists[i]);
+                    fail = regex.test(val);
+                    tested++;
+                    if (fail) break;
+                } catch (e) {
+                    /* noop */
+                }
+            }
+
+            // ensure at least one test was run.
+            if (!tested) {
+                regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+                fail = regex.test(val);
+            }
+        }
 
         _template = val;
         _fileList = null;
         _geojson = null;
-        _src = 'vector tiles';
+        _src = src || 'vectortile:' + val;
 
         dispatch.call('change');
         return this;

@@ -172,10 +172,7 @@ export function rendererBackground(context) {
 
         var data = context.layers().layer('data');
         if (data && data.enabled() && data.hasData()) {
-            // Include a string like '.gpx data file' or '.geojson data file'
-            var match = data.getSrc().match(/(kml|gpx|pbf|mvt|(?:geo)?json)$/i);
-            var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
-            imageryUsed.push(extension + 'data file');
+            imageryUsed.push(data.getSrc());
         }
 
         var streetside = context.layers().layer('streetside');
