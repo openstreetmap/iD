@@ -558,6 +558,11 @@
                 "notes": {
                     "tooltip": "Note data from OpenStreetMap",
                     "title": "OpenStreetMap notes"
+                },
+                "custom": {
+                    "tooltip": "Drag and drop a data file onto the page, or click the button to setup",
+                    "title": "Custom Map Data",
+                    "zoom": "Zoom to data"
                 }
             },
             "fill_area": "Fill Areas",
@@ -637,6 +642,19 @@
                 "instructions": "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
                 "template": {
                     "placeholder": "Enter a url template"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Edit custom data layer",
+                "header": "Custom Map Data Settings",
+                "file": {
+                    "instructions": "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Browse files"
+                },
+                "or": "Or",
+                "url": {
+                    "instructions": "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme",
+                    "placeholder": "Enter a url"
                 }
             }
         },
@@ -741,18 +759,6 @@
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
-        "gpx": {
-            "local_layer": "Add a GPX",
-            "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
-            "zoom": "Zoom to layer",
-            "browse": "Browse for a file"
-        },
-        "mvt": {
-            "local_layer": "Add a MVT",
-            "drag_drop": "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse",
-            "zoom": "Zoom to layer",
-            "browse": "Browse for a file"
-        },
         "streetside": {
             "tooltip": "Streetside photos from Microsoft",
             "title": "Photo Overlay (Bing Streetside)",

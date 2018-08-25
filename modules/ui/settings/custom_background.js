@@ -19,7 +19,7 @@ export function uiSettingsCustomBackground(context) {
         var modal = uiConfirm(selection).okButton();
 
         modal
-            .classed('settings-custom-background', true);
+            .classed('settings-modal settings-custom-background', true);
 
         modal.select('.modal-section.header')
             .append('h3')
@@ -30,11 +30,12 @@ export function uiSettingsCustomBackground(context) {
 
         textSection
             .append('pre')
-            .attr('class', 'instructions')
+            .attr('class', 'instructions-template')
             .text(t('settings.custom_background.instructions', { example: example }));
 
         textSection
             .append('textarea')
+            .attr('class', 'field-template')
             .attr('placeholder', t('settings.custom_background.template.placeholder'))
             .call(utilNoAuto)
             .property('value', _currSettings.template);
@@ -66,7 +67,7 @@ export function uiSettingsCustomBackground(context) {
 
         // restore the original template
         function clickCancel() {
-            textSection.select('textarea').property('value', _origSettings.template);
+            textSection.select('.field-template').property('value', _origSettings.template);
             context.storage('background-custom-template', _origSettings.template);
             this.blur();
             modal.close();
@@ -74,7 +75,7 @@ export function uiSettingsCustomBackground(context) {
 
         // accept the current template
         function clickSave() {
-            _currSettings.template = textSection.select('textarea').property('value');
+            _currSettings.template = textSection.select('.field-template').property('value');
             context.storage('background-custom-template', _currSettings.template);
             this.blur();
             modal.close();

@@ -1,5 +1,4 @@
 import _find from 'lodash-es/find';
-import _omit from 'lodash-es/omit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
@@ -171,10 +170,10 @@ export function rendererBackground(context) {
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
-        var gpx = context.layers().layer('gpx');
-        if (gpx && gpx.enabled() && gpx.hasGpx()) {
+        var data = context.layers().layer('data');
+        if (data && data.enabled() && data.hasData()) {
             // Include a string like '.gpx data file' or '.geojson data file'
-            var match = gpx.getSrc().match(/(kml|gpx|(?:geo)?json)$/i);
+            var match = data.getSrc().match(/(kml|gpx|pbf|mvt|(?:geo)?json)$/i);
             var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
             imageryUsed.push(extension + 'data file');
         }
@@ -182,14 +181,6 @@ export function rendererBackground(context) {
         var streetside = context.layers().layer('streetside');
         if (streetside && streetside.enabled()) {
             imageryUsed.push('Bing Streetside');
-        }
-
-        var mvt = context.layers().layer('mvt');
-        if (mvt && mvt.enabled() && mvt.hasMvt()) {
-            // Include a string like '.mvt data file' or '.geojson data file'
-            var matchmvt = mvt.getSrc().match(/(pbf|mvt|(?:geo)?json)$/i);
-            var extensionmvt = matchmvt ? ('.' + matchmvt[0].toLowerCase() + ' ') : '';
-            imageryUsed.push(extensionmvt + 'data file');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');
@@ -219,7 +210,7 @@ export function rendererBackground(context) {
         matchImagery.forEach(function(d) { matchIDs[d.id] = true; });
 
         return _backgroundSources.filter(function(source) {
-            return matchIDs[source.id];
+            return matchIDs[source.id] || !source.polygon;   // no polygon = worldwide
         });
     };
 
@@ -386,20 +377,18 @@ export function rendererBackground(context) {
         data.imagery.features = {};
 
         // build efficient index and querying for data.imagery
-        var world = [[[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]]];
         var features = data.imagery.map(function(source) {
+            if (!source.polygon) return null;
             var feature = {
                 type: 'Feature',
-                id: source.id,
-                properties: _omit(source, ['polygon']),
-                geometry: {
-                    type: 'MultiPolygon',
-                    coordinates: [ source.polygon || world ]
-                }
+                properties: { id: source.id },
+                geometry: { type: 'MultiPolygon', coordinates: [ source.polygon ] }
             };
+
             data.imagery.features[source.id] = feature;
             return feature;
-        });
+        }).filter(Boolean);
+
         data.imagery.query = whichPolygon({
             type: 'FeatureCollection',
             features: features
@@ -464,16 +453,9 @@ export function rendererBackground(context) {
         });
 
         if (q.gpx) {
-            var gpx = context.layers().layer('gpx');
+            var gpx = context.layers().layer('data');
             if (gpx) {
                 gpx.url(q.gpx);
-            }
-        }
-
-        if (q.mvt) {
-            var mvt = context.layers().layer('mvt');
-            if (mvt) {
-                mvt.url(q.mvt);
             }
         }
 

@@ -451,9 +451,7 @@ export function modeSelect(context, selectedIDs) {
             }
         });
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
+        behaviors.forEach(context.install);
 
         keybinding
             .on(['[', 'pgup'], previousVertex)
@@ -522,10 +520,7 @@ export function modeSelect(context, selectedIDs) {
         if (timeout) window.clearTimeout(timeout);
         if (inspector) wrap.call(inspector.close);
 
-        behaviors.forEach(function(behavior) {
-            context.uninstall(behavior);
-        });
-
+        behaviors.forEach(context.uninstall);
         keybinding.off();
         closeMenu();
         editMenu = undefined;

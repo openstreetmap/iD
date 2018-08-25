@@ -120,9 +120,7 @@ export function modeRotate(context, entityIDs) {
 
 
     mode.enter = function() {
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
+        behaviors.forEach(context.install);
 
         context.surface()
             .on('mousemove.rotate', doRotate)
@@ -141,9 +139,7 @@ export function modeRotate(context, entityIDs) {
 
 
     mode.exit = function() {
-        behaviors.forEach(function(behavior) {
-            context.uninstall(behavior);
-        });
+        behaviors.forEach(context.uninstall);
 
         context.surface()
             .on('mousemove.rotate', null)

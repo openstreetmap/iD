@@ -17,27 +17,18 @@ import {
     modeDragNote
 } from '../modes';
 
-import { services } from '../services';
 import { modeBrowse } from './browse';
-import { uiNoteEditor } from '../ui';
+import { uiDataEditor } from '../ui';
 
 
-export function modeSelectNote(context, selectedNoteID) {
+export function modeSelectData(context, selectedDatum) {
     var mode = {
-        id: 'select-note',
+        id: 'select-data',
         button: 'browse'
     };
 
-    var osm = services.osm;
-    var keybinding = d3_keybinding('select-note');
-    var noteEditor = uiNoteEditor(context)
-        .on('change', function() {
-            context.map().pan([0,0]);  // trigger a redraw
-            var note = checkSelectedID();
-            if (!note) return;
-            context.ui().sidebar
-                .show(noteEditor.note(note));
-        });
+    var keybinding = d3_keybinding('select-data');
+    var dataEditor = uiDataEditor(context);
 
     var behaviors = [
         behaviorBreathe(context),
@@ -48,24 +39,10 @@ export function modeSelectNote(context, selectedNoteID) {
         modeDragNote(context).behavior
     ];
 
-    var newFeature = false;
 
-
-    function checkSelectedID() {
-        if (!osm) return;
-        var note = osm.getNote(selectedNoteID);
-        if (!note) {
-            context.enter(modeBrowse(context));
-        }
-        return note;
-    }
-
-
-    // class the note as selected, or return to browse mode if the note is gone
-    function selectNote(drawn) {
-        if (!checkSelectedID()) return;
-
-        var selection = context.surface().selectAll('.layer-notes .note-' + selectedNoteID);
+    // class the data as selected, or return to browse mode if the data is gone
+    function selectData(drawn) {
+        var selection = context.surface().selectAll('.layer-mapdata .data' + selectedDatum.__featurehash__);
 
         if (selection.empty()) {
             // Return to browse mode if selected DOM elements have
@@ -74,11 +51,8 @@ export function modeSelectNote(context, selectedNoteID) {
             if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
                 context.enter(modeBrowse(context));
             }
-
         } else {
-            selection
-                .classed('selected', true);
-            context.selectedNoteID(selectedNoteID);
+            selection.classed('selected', true);
         }
     }
 
@@ -88,28 +62,18 @@ export function modeSelectNote(context, selectedNoteID) {
     }
 
 
-    mode.newFeature = function(_) {
-        if (!arguments.length) return newFeature;
-        newFeature = _;
-        return mode;
-    };
-
-
     mode.enter = function() {
-        var note = checkSelectedID();
-        if (!note) return;
-
         behaviors.forEach(context.install);
         keybinding.on('⎋', esc, true);
         d3_select(document).call(keybinding);
 
-        selectNote();
+        selectData();
 
         context.ui().sidebar
-            .show(noteEditor.note(note));
+            .show(dataEditor.datum(selectedDatum));
 
         context.map()
-            .on('drawn.select', selectNote);
+            .on('drawn.select-data', selectData);
     };
 
 
@@ -118,16 +82,14 @@ export function modeSelectNote(context, selectedNoteID) {
         keybinding.off();
 
         context.surface()
-            .selectAll('.layer-notes .selected')
+            .selectAll('.layer-mapdata .selected')
             .classed('selected hover', false);
 
         context.map()
-            .on('drawn.select', null);
+            .on('drawn.select-data', null);
 
         context.ui().sidebar
             .hide();
-
-        context.selectedNoteID(null);
     };
 
 
