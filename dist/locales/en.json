@@ -4585,6 +4585,10 @@
                     "name": "Wayside Shrine",
                     "terms": ""
                 },
+                "internet_access/wlan": {
+                    "name": "Wi-Fi Hotspot",
+                    "terms": "wi-fi,wifi,hotspot"
+                },
                 "junction": {
                     "name": "Junction",
                     "terms": ""

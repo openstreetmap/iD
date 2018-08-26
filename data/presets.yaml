@@ -3585,6 +3585,11 @@ en:
         # historic=wayside_shrine
         name: Wayside Shrine
         terms: '<translate with synonyms or related terms for ''Wayside Shrine'', separated by commas>'
+      internet_access/wlan:
+        # internet_access=wlan
+        name: Wi-Fi Hotspot
+        # 'terms: wi-fi,wifi,hotspot'
+        terms: '<translate with synonyms or related terms for ''Wi-Fi Hotspot'', separated by commas>'
       junction:
         # junction=yes
         name: Junction
