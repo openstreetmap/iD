@@ -252,7 +252,7 @@ export function uiMapData(context) {
 
         containerEnter
             .append('ul')
-            .attr('class', 'layer-list layer-list-vectortile')
+            .attr('class', 'layer-list layer-list-vectortile');
 
         containerEnter
             .append('div')
