@@ -430,7 +430,12 @@
                 "edited_by": "נערך על ידי",
                 "changeset": "ערכת שינויים",
                 "unknown": "לא ידוע",
-                "link_text": "היסטוריה ב־openstreetmap.org"
+                "link_text": "היסטוריה ב־openstreetmap.org",
+                "note_no_history": "אין היסטוריה (הערה חדשה)",
+                "note_comments": "תגובות",
+                "note_created_date": "מועד יצירה",
+                "note_created_user": "נוצר על ידי",
+                "note_link_text": "הערה ב־openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "קודקוד",
             "line": "קו",
             "area": "שטח",
-            "relation": "יחס"
+            "relation": "יחס",
+            "note": "הערה"
         },
         "geocoder": {
             "search": "חיפוש בכל העולם…",
@@ -523,8 +529,6 @@
             "best_imagery": "מקור התמונה המוכר והטוב ביותר למיקום זה",
             "switch": "חזרה לרקע זה",
             "custom": "התאמה אישית",
-            "custom_button": "עריכת רקע בהתאמה אישית",
-            "custom_prompt": "נא להקליד כתובת תבנית. האסימונים התקניים הם:\n   - {zoom} או {z}, {x}, {y} לסכימת אריחים מסוג Z/X/Y\n   - {‎-y} או {ty} לנקודות ציון הפוכות בציר Y בסגנון TMS\n   - {u} לסכימת אריחים מרובעת (QuadTile)\n   - {switch:a,b,c} למעבר בין DNS של שרתים\n\nדוגמה:\n{example}",
             "overlays": "שכבות על",
             "imagery_source_faq": "פרטי צילום / דיווח על תקלה",
             "reset": "איפוס",
@@ -624,6 +628,16 @@
             "full": {
                 "description": "מילוי מלא",
                 "tooltip": "השטחים מצויירים עם מילוי מלא."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "עריכת רקע בהתאמה אישית",
+                "header": "הגדרות רקע בהתאמה אישית",
+                "instructions": "נא להקליד כתובת תבנית. האסימונים התקניים הם:\n     {zoom} או {z}, {x}, {y} לסכימת אריחים מסוג Z/X/Y\n     {‎-y} או {ty} לנקודות ציון הפוכות בציר Y בסגנון TMS\n     {u} לסכימת אריחים מרובעת (QuadTile)\n     {switch:a,b,c} למעבר בין DNS של שרתים\n\nדוגמה:\n{example}",
+                "template": {
+                    "placeholder": "נא להקליד תבנית כתובת"
+                }
             }
         },
         "restore": {
@@ -727,18 +741,6 @@
         },
         "cannot_zoom": "לא ניתן להתקרב יותר במצב הנוכחי.",
         "full_screen": "החלפת מצב מסך מלא",
-        "gpx": {
-            "local_layer": "תוסיף GPX",
-            "drag_drop": "יש לגרור ולהשליך קובצי ‎.gpx,‏ ‎.geojson או ‎.kml לעמוד או ללחוץ על הכפתור שמשמאל לעיון",
-            "zoom": "התקרבות לשכבה",
-            "browse": "עיון אחר קובץ"
-        },
-        "mvt": {
-            "local_layer": "תוסיף MVT",
-            "drag_drop": "גרור והורד קובץ .mvt או .pbf או לחץ על כפתור",
-            "zoom": "התמקד לשכבה",
-            "browse": "חפש קובץ"
-        },
         "streetside": {
             "tooltip": "תמונות של Streetside מבית Microsoft",
             "title": "שכבת תמונות (Bing Streetside)",
@@ -770,6 +772,12 @@
             "anonymous": "אלמוני",
             "closed": "(נסגרה)",
             "commentTitle": "תגובות",
+            "status": {
+                "opened": "נפתח {when}",
+                "reopened": "נפתח מחדש  {when}",
+                "commented": "נוסף תגובה {when}",
+                "closed": "נסגר {when}"
+            },
             "newComment": "תגובה חדשה",
             "inputPlaceholder": "נא להקליד תגובה שתשותף עם משתמשים אחרים.",
             "close": "סגירת הערה",
@@ -777,7 +785,7 @@
             "comment": "תגובה",
             "close_comment": "סגירה והוספת תגובה",
             "open_comment": "פתיחה מחדש והוספת תגובה",
-            "report": "דיוו",
+            "report": "דיוח",
             "new": "הערה חדשה",
             "newDescription": "תיאור הבעיה.",
             "save": "שמירת ההערה",
@@ -1327,7 +1335,7 @@
                     "add_point": "מצב ‚הוספת נקודה’",
                     "add_line": "מצב ‚הוספת קו’",
                     "add_area": "מצב ’הוספת שטח’",
-                    "add_note": "מצב ‚הוספת הערה’",
+                    "add_note": "מצב ’הוספת הערה’",
                     "place_point": "הצבת נקודה או הערה",
                     "disable_snap": "יש להחזיק כדי להשבית הצמדת נקודות",
                     "stop_line": "סיום ציור קו או שטח"
@@ -1441,31 +1449,34 @@
                     "label": "הכניסה מותרת",
                     "options": {
                         "designated": {
-                            "description": "הגישה מותרת לפי שילוט או חוקים מקומיים",
+                            "description": "הגישה מותרת בהתאם לשילוט או חוקים מקומיים מסוימים",
                             "title": "מיועד"
                         },
                         "destination": {
-                            "description": "הגישה מותרת רק כדי להגיע לאזור בהמשך",
+                            "description": "הגישה מותרת רק לצורך הגעה ליעד",
                             "title": "יעד"
                         },
                         "dismount": {
-                            "description": "הגישה מותרת ללא רכיבה",
+                            "description": "הגישה מותרת אך ללא רכיבה",
                             "title": "ירידה מסוס/אופניים"
                         },
                         "no": {
-                            "description": "הכניסה אסורה לקהל הרחב",
+                            "description": "הגישה לציבור חסומה",
                             "title": "הכניסה אסורה"
                         },
                         "permissive": {
-                            "description": "הגישה מותרת כל עוד בעל המקום עוד מרשה זאת",
+                            "description": "הגישה מותרת עד להודעה חדשה",
                             "title": "מתירני"
                         },
+                        "permit": {
+                            "description": "הגישה מותרת רק עם רישיון או היתר בתוקף",
+                            "title": "היתר"
+                        },
                         "private": {
-                            "description": "הכניסה מותרת רק עם אישור מבעל המקום על בסיס פרטני",
+                            "description": "הגישה מותרת רק עם הרשאת הבעלים באופן פרטני",
                             "title": "פרטי"
                         },
                         "yes": {
-                            "description": "הכניסה מותרת לפי חוק",
                             "title": "מותר"
                         }
                     },
@@ -3052,8 +3063,8 @@
                     "terms": "עמדת תיקון אופניים"
                 },
                 "amenity/biergarten": {
-                    "name": "גן בירה",
-                    "terms": "גינת בירה,ביר גארדן,ביר גרדן"
+                    "name": "ביר גרדן",
+                    "terms": "בירגרטן, גן בירה, בירגרדן, ביר גארדן"
                 },
                 "amenity/boat_rental": {
                     "name": "השכרת סירה",
@@ -4840,6 +4851,10 @@
                 "leisure/pitch/american_football": {
                     "name": "מגרש פוטבול",
                     "terms": "מגרש פוטבול"
+                },
+                "leisure/pitch/badminton": {
+                    "name": "מגרש בדמינטון",
+                    "terms": "בדמינטון,כדור נוצה"
                 },
                 "leisure/pitch/baseball": {
                     "name": "מגרש בייסבול",
@@ -6896,9 +6911,7 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                },
-                "description": "סריקה של ´מפות כלכליות´ סביב 1950-1980",
-                "name": "המפה הכלכלית של Lantmäteriet (היסטורי)"
+                }
             },
             "qa_no_address": {
                 "attribution": {
@@ -6974,6 +6987,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "מיפוי בוטסואנה בפייסבוק",
+                "description": "העמוד של OpenStreetMap בבוטסואנה"
+            },
+            "bw-twitter": {
+                "name": "מיפוי בוטסואנה בטוויטר",
+                "description": "הטוויטר של OpenStreetMap בבוטסואנה"
+            },
             "cape-coast-youthmappers": {
                 "name": "הממפים הצעירים של אוניברסיטת קייפ קוסט",
                 "description": "ניתן לעקוב אחרינו בטוויטר: {url}",
@@ -7337,6 +7358,18 @@
             "hu-meetup": {
                 "name": "קבוצת המפגשים של OpenStreetMap הונגרי",
                 "description": "הפלטפורמה לכינוס מפגשים בהונגריה"
+            },
+            "is-facebook": {
+                "name": "OSM איסלנד בפייסבוק",
+                "description": "העמוד של OpenStreetMap באיסלנד"
+            },
+            "is-mailinglist": {
+                "name": "קבוצת הדיוור Talk-is",
+                "description": "Talk-is היא קבוצת הדיוור הרשמית של קהילת OSM האיסלנדית"
+            },
+            "is-twitter": {
+                "name": "OSM איסלנד בטוויטר",
+                "description": "הטוויטר של OpenStreetMap באיסלנד"
             },
             "it-facebook": {
                 "name": "הפייסבוק של OpenStreetMap איטליה",
@@ -7754,6 +7787,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap פרו",
                 "description": "חדשות ומשאבים לקהילת OpenStreetMap פרו"
+            },
+            "LATAM-Facebook": {
+                "name": " הפייסבוק של OpenStreetMap אמריקה הלטינית",
+                "description": "OpenStreetMap אמריקה הלטינית בפייסבוק"
+            },
+            "LATAM-Telegram": {
+                "name": "הטלגרם של OpenStreetMap אמריקה הלטינית",
+                "description": "טלגרם של OpenStreetMap עבור אמריקה הלטינית"
+            },
+            "LATAM-Twitter": {
+                "name": "הטוויטר של OpenStreetMap אמריקה הלטינית",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap אמריקה הלטינית",
+                "description": "תמיכה ב־OpenStreetMap באמריקה הלטינית",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam הוא הכנס השנתי של כל הממפים והמשתמשים ב־OpenStreetMap באמריקה הלטינית. התכנית כוללת הרצאות בזק, פאנלים, סדנאות ומפאתונים (האקתונים של מיפוי) שקשורים ב־OpenStreetMap.",
+                        "where": "בואנוס איירס, ארגנטינה"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap בפייסבוק",

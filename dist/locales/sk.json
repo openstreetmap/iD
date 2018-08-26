@@ -450,7 +450,6 @@
             "best_imagery": "Najviac známy zdroj obrázkov pre túto polohu",
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
-            "custom_button": "Upraviť volitelné pozadie",
             "reset": "vynulovať",
             "minimap": {
                 "tooltip": "Zobraziť oddialenú mapu pre ľahšie lokalizovanie práve zobrazenej oblasti.",
@@ -623,11 +622,6 @@
         },
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
-        "gpx": {
-            "drag_drop": "Pretiahnite a pustite .gpx, .geojson or .kml súbor na stránku, alebo kliknite na tlačítko napravo pre výber",
-            "zoom": "Priblížiť na vrstvu",
-            "browse": "Vybrať súbor"
-        },
         "mapillary_images": {
             "tooltip": "Fotografie ulíc z Mapillary",
             "title": "Vrstva fotografií (Mapillary)"
@@ -1058,31 +1052,24 @@
                     "label": "Povolený vstup",
                     "options": {
                         "designated": {
-                            "description": "Povolenie vstupu je riadené dopravnými značkami alebo miestnymi zákonmi",
                             "title": "Vyznačené"
                         },
                         "destination": {
-                            "description": "Vstup povolený iba dosiahnutie cieľa",
                             "title": "Prejazd zakázaný"
                         },
                         "dismount": {
-                            "description": "Vstup povolený, ale jazdci musia zosadnúť",
                             "title": "Zosadnutie z vozidla"
                         },
                         "no": {
-                            "description": "Verejnosti vstup zakázaný",
                             "title": "Zakázané"
                         },
                         "permissive": {
-                            "description": "Vstup povolený pokiaľ majiteľ povolenie neodvolá",
                             "title": "Povolený"
                         },
                         "private": {
-                            "description": "Vstup možný iba s povolením vlastníka na individuálnom základe",
                             "title": "Súkromné"
                         },
                         "yes": {
-                            "description": "Vstup povolený zo zákona",
                             "title": "Povolené"
                         }
                     },
@@ -2509,10 +2496,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Stojan s náradím na opravu bicyklov",
                     "terms": "stojan s naradim na opravu bicyklov,bicykel,oprava,naradie,náradie"
-                },
-                "amenity/biergarten": {
-                    "name": "Záhradná piváreň",
-                    "terms": "zahradna pivaren,pivnica,hostinec,krčma,krcma,vonkajšie posedenie,vonkajsie posedenie"
                 },
                 "amenity/boat_rental": {
                     "name": "Prenájom lodí",

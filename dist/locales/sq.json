@@ -1,5 +1,10 @@
 {
     "sq": {
+        "icons": {
+            "information": "info",
+            "remove": "hiq",
+            "undo": "zhbëj"
+        },
         "modes": {
             "add_area": {
                 "title": "Sipërfaqe",
@@ -15,6 +20,10 @@
                 "title": "Pikë",
                 "description": "Shtoni restorante, monumente, kuti postare, ose pika të tjera në hartë.",
                 "tail": "Klikoni në hartë për të shtuar një pikë."
+            },
+            "add_note": {
+                "title": "Shënim",
+                "tail": "Klikoni në hartë për të shtuar shënim."
             },
             "browse": {
                 "title": "Shfleto",
@@ -32,7 +41,8 @@
                 "annotation": {
                     "point": "U shtua një pikë.",
                     "vertex": "U shtua një nyjë në një linjë.",
-                    "relation": "U shtua një lidhje."
+                    "relation": "U shtua një lidhje.",
+                    "note": "U shtua një shënim."
                 }
             },
             "start": {
@@ -100,12 +110,20 @@
             },
             "delete": {
                 "title": "Fshij",
+                "description": {
+                    "single": "Fshijeni këtë karakteristik përkohësisht",
+                    "multiple": "Fshijini këto karakteristika përkohësisht."
+                },
                 "annotation": {
                     "point": "U fshi një pik.",
                     "vertex": "U fshi një nyjë nga një linjë.",
                     "line": "U fshi një vijë.",
                     "area": "U fshi një sipërfaqe.",
-                    "relation": "U fshi një lidhje."
+                    "relation": "U fshi një lidhje.",
+                    "multiple": "U fshin {n} karakteristika."
+                },
+                "too_large": {
+                    "single": "Kjo karakteristik s'mund fshihet se pse s'është e mjaftueshme të dukshme."
                 }
             },
             "connect": {
@@ -266,7 +284,6 @@
             "description": "Parametrat e sfondit",
             "none": "Asnjë",
             "custom": "E personalizuar",
-            "custom_button": "Redakto sfondin të personalizuar",
             "reset": "Rikthe vlerat",
             "minimap": {
                 "tooltip": "Shfaq një hartë të zvogluar për të treguar vendosjen e zonës të dukshme."

@@ -136,15 +136,10 @@
                     "label": "Yn Caniatau Mynediad",
                     "options": {
                         "designated": {
-                            "description": "Yn caniatau mynediad yn ôl arwyddion neu is-ddeddfau lleol",
                             "title": "Dynodedig"
                         },
                         "destination": {
-                            "description": "Yn caniatau mynediad ond i gyrraedd cyrchfan",
                             "title": "Cyrchfan"
-                        },
-                        "no": {
-                            "description": "Dim caniatad mynediad i'r cyhoedd"
                         }
                     }
                 },

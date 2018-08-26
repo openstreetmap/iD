@@ -472,7 +472,6 @@
             "best_imagery": "Den beste ortofotokilden til denne plasseringen",
             "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
-            "custom_button": "Endre egendefinert bakgrunn",
             "overlays": "Overlegg",
             "reset": "tilbakestill",
             "brightness": "Lysstyrke",
@@ -640,11 +639,6 @@
         },
         "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
         "full_screen": "Skru av/på fullskjerm.",
-        "gpx": {
-            "drag_drop": "Dra og slipp en .gpx, .geojson eller .kml-fil på siden, eller trykk knappen til høyre for å bla etter fil",
-            "zoom": "Zoom til lag",
-            "browse": "Bla etter en fil"
-        },
         "mapillary_images": {
             "tooltip": "Bilder på gate-nivå fra Mapillary",
             "title": "Bilde-overlegg (Mapillary)"
@@ -1019,27 +1013,21 @@
                     "label": "Tillatt for",
                     "options": {
                         "designated": {
-                            "description": "Tilgang tillatt i henhold til skilt eller spesifike lokale lover",
                             "title": "Utpekt"
                         },
                         "destination": {
-                            "description": "Tilgang kun tillatt for å nå et mål",
                             "title": "Mål"
                         },
                         "no": {
-                            "description": "Tilgang ikke tillatt for allmennheten",
                             "title": "Forbudt"
                         },
                         "permissive": {
-                            "description": "Tilgang tillatt frem til eieren trekker tillatelsen tilbake",
                             "title": "Begrenset"
                         },
                         "private": {
-                            "description": "Tilgang tillatt kun ved tillatelse fra eieren på individuell basis",
                             "title": "Privat"
                         },
                         "yes": {
-                            "description": "Tilgang gitt av lov; fri tilgang",
                             "title": "Tillatt"
                         }
                     },

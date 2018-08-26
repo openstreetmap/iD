@@ -393,7 +393,6 @@
             "none": "Wala",
             "best_imagery": "Pinakakilalang pinagmulan ng imaheng ito para sa lokasyon na ito",
             "custom": "Custom",
-            "custom_button": "I-edit ang custom na background",
             "reset": "I-reset",
             "minimap": {
                 "tooltip": "Ipakita ang naka-zoom out na mapa upang makatulong na mahanap ang mga lugar na kasalukuyang ipinapakita."
@@ -598,31 +597,24 @@
                     "label": "Pinapayagan ng access",
                     "options": {
                         "designated": {
-                            "description": "Access na pinahihintulutan alinsunod sa mga palatandaan o mga tiyak na lokal na batas",
                             "title": "Itinalagang"
                         },
                         "destination": {
-                            "description": "Access na pinahihintulutan para maabot ang destinasyon lamang",
                             "title": "Destinasyon"
                         },
                         "dismount": {
-                            "description": "Access na pinahihintulutan pero ang sumakay ay kailangan bumaba",
                             "title": "Bumaba"
                         },
                         "no": {
-                            "description": "Access na hindi pinahihintulutan sa publiko.",
                             "title": "Bawal"
                         },
                         "permissive": {
-                            "description": "Access na pinahihintulutan hanggang sa panahon na bawiin ng may-ari ang permiso.",
                             "title": "mapagpahintulot"
                         },
                         "private": {
-                            "description": "Access na pinahihintulutan kapag may pahintulot ng may-ari o ang isang indibidwal na batayan lamang.",
                             "title": "Pribado"
                         },
                         "yes": {
-                            "description": "Access na pinahihintulutan sa pamamagitan ng batas; isang karapatan ng paraan",
                             "title": "Pinapayagan"
                         }
                     },

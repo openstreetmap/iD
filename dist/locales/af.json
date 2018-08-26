@@ -233,22 +233,15 @@
                 "access": {
                     "options": {
                         "designated": {
-                            "description": "Voorgeskrewe toegang",
                             "title": "Toegewys"
                         },
                         "destination": {
-                            "description": "Beperkte toegang",
                             "title": "Eindbestemming"
                         },
                         "no": {
-                            "description": "Geen toegang vir algemene publiek",
                             "title": "Toegang Verbode"
                         },
-                        "permissive": {
-                            "description": "Voorwaardelike toegang"
-                        },
                         "private": {
-                            "description": "Toegang slegs soos gereël met eienaar",
                             "title": "Privaat"
                         },
                         "yes": {

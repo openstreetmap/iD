@@ -69,6 +69,9 @@
             "cancel_draw": {
                 "annotation": "Nanafoana ny fanoritana."
             },
+            "change_tags": {
+                "annotation": "Nanova ny tags."
+            },
             "circularize": {
                 "title": "Hanaboribory.",
                 "description": {
@@ -437,6 +440,7 @@
             "all_fields": "Ny saha rehetra",
             "all_tags": "Ny tags rehetra",
             "all_members": "Ny mpikambana rehetra",
+            "all_relations": "Ny relations rehetra",
             "role": "Anjara asa",
             "choose": "Safidio ny karazan'ny singa",
             "results": "Vokatra {n} hoan'ny {search}",
@@ -469,15 +473,13 @@
         },
         "background": {
             "title": "Lafika",
-            "description": "Fikirana ny lafika",
+            "description": "Fikiràna ny lafika",
             "key": "B",
             "backgrounds": "Lafika",
             "none": "Tsy misy",
             "best_imagery": "Ny loharanon-tsary tsara indrindra fantatra hoan'ity toerana ity",
             "switch": "Hiverina amin'ity lafika ity",
             "custom": "Manokana",
-            "custom_button": "Hanova ny sosona manokana",
-            "custom_prompt": "Ampidiro ny modelin'ny URL. Ny famantarana azo ampiasaina dia:\n - {zoom} or {z}, {x}, {y} hoan'ny tetika Z/X/Y an'ny kapila\n - {-y} or {ty} hoan'ny coordonnées Y endrika TMS mivadika\n - {u} hoan'ny tetika quadtile\n - {switch:a,b,c} hoan'ny DNS server multiplexing\n\nOhatra:\n{example}",
             "overlays": "Rakotra",
             "imagery_source_faq": "Fanazavana Momba ny Sary / Hampita Olana",
             "reset": "Hamerina amin'ny voalohany",
@@ -614,7 +616,7 @@
             }
         },
         "success": {
-            "just_edited": "Efa nanova an'i OpenStreetMap izay!",
+            "just_edited": "Efa nanova an'i OpenStreetMap ianao izay!",
             "thank_you": "Misaotra anao manatsara ny sarintany.",
             "thank_you_location": "Misaotra anao manatsara ny sarintany manodidina an'i {where}.",
             "help_html": "Tokony hiseho ao amin'ny OpenStreetMap ny fanovana nataonao ao anatin'ny minitra vitsivitsy. Mety ho elaela kosa ny sarintany any amin'ny toeran-kafa vao miova.",
@@ -669,19 +671,18 @@
         },
         "cannot_zoom": "Tsy afaka manalavitra noho izao intsony amin'ity maody ity.",
         "full_screen": "Hameno ny Efijery",
-        "gpx": {
-            "local_layer": "Hanampy GPX",
-            "zoom": "Hanangeza araky ny sosona"
-        },
-        "mvt": {
-            "zoom": "Hanangeza araky ny sosona"
-        },
         "note": {
             "note": "Fanamarihana",
             "title": "Hanova ny fanamarihana",
             "anonymous": "olon-tsy fantatra",
             "closed": "(Mikatona)",
             "commentTitle": "Fanehoan-kevitra",
+            "status": {
+                "opened": "voasokatra {when}",
+                "reopened": "voasokatra indray {when}",
+                "commented": "voatsikera {when}",
+                "closed": "voakatona {when}"
+            },
             "newComment": "Fanehoan-kevitra Vaovao",
             "inputPlaceholder": "Mampidira fanehoan-kevitra hozaraina amin'ny mpampiasa hafa.",
             "close": "Hanakatona ny fanamarihana",
@@ -708,6 +709,7 @@
                 "before_start_h": "Alohan'ny hanombohanao",
                 "before_start": "Tokony ho efa mifankazatra ny OpenStreetMap sy ity éditeur ity ianao mialohan'ny hanaovanao fanovana. Misy fanoroana atolotr'i iD hampianarana anao ny fototra amin'ny fanovana an'i OpenStreetMap. Tsindrio eo amin'ny \"Hanomboka ny Fanoroana\" eto amin'ity efijery ity raha hanomboka hianatra - 15 minitra eo ho eo fotsiny ny halavan'ilay izy.",
                 "open_source_h": "Hanokatra Loharano",
+                "open_source": "Ny éditeur iD dia tetikasa ifarimbonana manana kaody misokatra, ary ny fivoahana faha-{version} ity ampiasainao ity. Ny loharanon'ny kaody dia azo alaina [ao amin'ny GitHub](https://github.com/openstreetmap/iD).",
                 "open_source_help": "Afaka manampy ny iD ianao amin'ny alalan'ny [fandikàna](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) na [fitaterana tsy fetezana](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
@@ -723,7 +725,25 @@
                 "title": "Manova & Mitahiry",
                 "select_h": "Hisafidy",
                 "select_left_click": "{leftclick} Tsindrio amin'ny alalan'ny bokotra havia amin'ny souris eo amin'ny singa iray raha hisafidy azy io. Hisongadina izy avy eo, ary hiseho eo amin'ny takelaka etsy amin'ny sisiny ny mombamomba ilay singa, toy ny anarany na ny adiresiny.",
-                "save_h": "Hitahiry"
+                "select_right_click": "{rightclick} Tsindrio amin'ny bokotra havanana amin'ny souris eo amin'ny singa iray mba hipoiran'ny menio fikiràna, izay hampiseho izay azo atao aminy, toy ny manodina, manova toerana, ary mamafa.",
+                "multiselect_h": "Hisafidy maromaro",
+                "multiselect_shift_click": "`{shift}`+{leftclick} Manindria ny bokotra havia an'ny souris raha hisafidy singa maromaro indray miaraka. Izany dia manamora ny fanovana toerana na famafàna zavatra maromaro.",
+                "undo_redo_h": "Hanafoana & Hamerina",
+                "undo_redo": "Ireo fanovana nataonao dia voatahiry an-toerana ao amin'ny navigateur ampiasainao mandra-pisafidinao handefa azy mankany amin'ny serveur OpenStreetMap. Raha hanafoana ny fanovana nataonao dia tsindrio ny bokotra {undo} **Hanafoana**, ary raha hamerina azy dia tsindrio ny bokotra {redo} **Hamerina**.",
+                "save_h": "Hitahiry",
+                "save": "Tsindrio ny {save} **Hitahiry** raha hamarana ny fanovana nataonao ary handefa azy any amin'ny OpenStreetMap. Tadidio fa tokony hotahirizinao matetitetika ny asa ataonao!",
+                "save_validation": "Azonao lazaina eo amin'ny efitry ny fitehirizana izay zavatra nataonao. Hanamarina amin'ny fomba tsotsotra izay rakitra banga ihany koa iD ary mety hanome soso-kevitra hilainao na fampitandremana raha misy zavatra toa tsy mety.",
+                "upload_h": "Handefa",
+                "upload": "Mialoha ny handefasanao ny fanovana nataonao dia mila mampiditra [fanehoan-kevitra momba ny fanovana] (https://wiki.openstreetmap.org/wiki/Good_changeset_comments) ianao. Avy eo dia tsindrio ny **Handefa** mba handefasana ny fanovana nataonao any amin'ny OpenStreetMap, mba hitambatra amin'izay efa ao amin'ny sarintany ka ho hitan'ny besinimaro."
+            },
+            "feature_editor": {
+                "fields_h": "Saha"
+            },
+            "points": {
+                "title": "Teboka",
+                "intro": "Azo ampiasaina ny *teboka* mba hanehoana zava-misy toy ny fivarotana, toeram-pisakafoana na toerana miavaka. Mampiseho toerana misy zavatra izy ary mamaritra izay misy eo.",
+                "add_point_h": "Manampy Teboka",
+                "add_point": "Raha hanampy teboka dia tsindrio ny bokotra {point} **Teboka** eo amin'ny barre d'outils eo ambonin'ny sarintany, na ampiasao ny tsindry maika `1`. Hiova ho sary lakroa ny curseur an'ny souris rehefa manao izany ianao."
             }
         },
         "intro": {

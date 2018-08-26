@@ -507,8 +507,6 @@
             "best_imagery": "Best known imagery source for this location",
             "switch": "Switch back to this background",
             "custom": "Custom",
-            "custom_button": "Edit custom background",
-            "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
             "overlays": "Overlays",
             "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
@@ -707,11 +705,6 @@
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
-        "gpx": {
-            "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
-            "zoom": "Zoom to layer",
-            "browse": "Browse for a file"
-        },
         "streetside": {
             "report": "Report a privacy concern with this image"
         },
@@ -1374,31 +1367,24 @@
                     "label": "Allowed Access",
                     "options": {
                         "designated": {
-                            "description": "Access permitted according to signs or specific local laws",
                             "title": "Designated"
                         },
                         "destination": {
-                            "description": "Access permitted only to reach a destination",
                             "title": "Destination"
                         },
                         "dismount": {
-                            "description": "Access permitted but rider must dismount",
                             "title": "Dismount"
                         },
                         "no": {
-                            "description": "Access not permitted to the general public",
                             "title": "Prohibited"
                         },
                         "permissive": {
-                            "description": "Access permitted until such time as the owner revokes the permission",
                             "title": "Permissive"
                         },
                         "private": {
-                            "description": "Access permitted only with permission of the owner on an individual basis",
                             "title": "Private"
                         },
                         "yes": {
-                            "description": "Access permitted by law; a right of way",
                             "title": "Allowed"
                         }
                     },
@@ -2926,9 +2912,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Bicycle Repair Tool Stand"
-                },
-                "amenity/biergarten": {
-                    "name": "Beer Garden"
                 },
                 "amenity/boat_rental": {
                     "name": "Boat Rental"

@@ -523,8 +523,6 @@
             "best_imagery": "Nguồn hình ảnh hữu ích nhất đối với nơi này",
             "switch": "Quay về hình nền này",
             "custom": "Tùy biến",
-            "custom_button": "Sửa hình nền tùy biến",
-            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   - {zoom} hoặc {z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   - {-y} hoặc {ty} cho tọa độ Y kiểu TMS phản chiếu\n   - {u} cho định dạng quadtile\n   - {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
             "overlays": "Lớp phủ",
             "imagery_source_faq": "Chi tiết Hình ảnh / Báo cáo Vấn đề",
             "reset": "đặt lại",
@@ -727,18 +725,6 @@
         },
         "cannot_zoom": "Không thể thu nhỏ hơn trong chế độ hiện tại.",
         "full_screen": "Bật/tắt Chế độ Toàn màn hình",
-        "gpx": {
-            "local_layer": "Thêm GPX",
-            "drag_drop": "Kéo thả một tập tin .gpx, .geojson, hoặc .kml vào trang hoặc bấm nút bên phải để duyệt",
-            "zoom": "Phóng vừa lớp",
-            "browse": "Duyệt tập tin"
-        },
-        "mvt": {
-            "local_layer": "Thêm MVT",
-            "drag_drop": "Kéo thả tập tin .mvt hoặc .pbf vào trang, hoặc bấm nút bên phải để duyệt tập tin",
-            "zoom": "Phong vừa lớp",
-            "browse": "Duyệt tập tin"
-        },
         "streetside": {
             "tooltip": "Hình ảnh Streetside của Microsoft",
             "title": "Lớp phủ Hình ảnh (Bing Streetside)",
@@ -770,6 +756,12 @@
             "anonymous": "vô danh",
             "closed": "(Giải quyết)",
             "commentTitle": "Bình luận",
+            "status": {
+                "opened": "tạo {when}",
+                "reopened": "mở lại {when}",
+                "commented": "bình luận {when}",
+                "closed": "giải quyết {when}"
+            },
             "newComment": "Bình luận Mới",
             "inputPlaceholder": "Nhập lời bình luận để người dùng khác xem.",
             "close": "Giải quyết Ghi chú",
@@ -1441,31 +1433,24 @@
                     "label": "Quyền Truy cập",
                     "options": {
                         "designated": {
-                            "description": "Được xây với mục đích cho phép vận chuyển bằng phương thức này, theo bảng hay luật pháp địa phương",
                             "title": "Theo mục đích"
                         },
                         "destination": {
-                            "description": "Chỉ cho phép truy cập để tới nơi",
                             "title": "Nơi đến"
                         },
                         "dismount": {
-                            "description": "Chỉ cho phép nếu xuống đi bộ",
                             "title": "Bắt xuống đi bộ"
                         },
                         "no": {
-                            "description": "Công chúng không được phép truy cập",
                             "title": "Cấm"
                         },
                         "permissive": {
-                            "description": "Chủ cho phép rộng rãi nhưng có thể cấm sau",
                             "title": "Chủ cho phép"
                         },
                         "private": {
-                            "description": "Chỉ có những người được chủ cho phép truy cập",
                             "title": "Tư nhân"
                         },
                         "yes": {
-                            "description": "Mọi người được phép truy cập theo luật pháp",
                             "title": "Cho phép"
                         }
                     },
@@ -3050,10 +3035,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Quầy Sửa Xe đạp",
                     "terms": "quầy sửa xe đạp, xích, bơm, quay sua xe dap, xich, bom"
-                },
-                "amenity/biergarten": {
-                    "name": "Vườn Bia",
-                    "terms": "vườn bia, vườn uống bia, vườn nhậu, vuon bia, vuon uong bia, vuon nhau"
                 },
                 "amenity/boat_rental": {
                     "name": "Cho thuê Tàu",
@@ -4965,6 +4946,10 @@
                     "name": "Cầu",
                     "terms": "cầu, cau"
                 },
+                "man_made/bunker_silo": {
+                    "name": "Xilô Boong ke",
+                    "terms": "xilô boong ke, xi-lô boong ke, xi lô boong ke, xilô boongke, xi-lô boong-ke, xi lô boong ke, xilo boong ke, xi-lo boong ke, xi lo boong ke, xilo boonke, xi-lo boong-ke, xi lo boong ke"
+                },
                 "man_made/chimney": {
                     "name": "Ống khói",
                     "terms": "ống khói, lò sưởi, ong khoi, lo suoi"
@@ -6875,6 +6860,25 @@
                 },
                 "name": "Đi bộ & Đạp xe"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Đường xe máy trượt tuyết Kelkkareitit.fi từ OSM (Bắc Âu)",
+                "name": "Lớp phủ xe máy trượt tuyết Bắc Âu"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "name": "Hình ảnh trực giao lịch sử Lantmäteriet 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "name": "Hình ảnh trực giao lịch sử Lantmäteriet 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
@@ -6910,9 +6914,7 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                },
-                "description": "Hình quét các “bản đồ kinh tế” những năm 1950–1980",
-                "name": "Bản đồ Kinh tế Lantmäteriet (lịch sử)"
+                }
             },
             "qa_no_address": {
                 "attribution": {
@@ -6925,6 +6927,13 @@
                     "text": "© Hình bản đồ: skobbler Dữ liệu bản đồ: những người đóng góp vào OpenStreetMap"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Đường xe máy trượt tuyết",
+                "name": "Bản đồ xe máy trượt tuyết Thụy Điển"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6988,6 +6997,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana tại Facebook",
+                "description": "Trang OpenStreetMap tại Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana tại Twitter",
+                "description": "Twitter OpenStreetMap tại Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "YouthMappers Đại học Cape Coast",
                 "description": "Theo dõi chúng tôi trên Twitter: {url}"
@@ -7338,6 +7355,18 @@
             "hu-meetup": {
                 "name": "Họp mặt OpenStreetMap Hungary",
                 "description": "Trang tổ chức cuộc họp mặt tại Hungary"
+            },
+            "is-facebook": {
+                "name": "OSM Iceland tại Facebook",
+                "description": "Trang OpenStreetMap tại Iceland"
+            },
+            "is-mailinglist": {
+                "name": "Danh sách thư talk-is",
+                "description": "talk-is là danh sách thư chính thức của cộng đồng OSM Iceland"
+            },
+            "is-twitter": {
+                "name": "OSM Iceland tại Twittter",
+                "description": "Twitter OpenStreetMap tại Iceland"
             },
             "it-facebook": {
                 "name": "Facebook OpenStreetMap Ý",
@@ -7743,6 +7772,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "Tin tức về và tài nguyên cho cộng đồng OpenStreetMap Peru"
+            },
+            "LATAM-Facebook": {
+                "name": "Facebook OpenStreetMap Mỹ Latinh",
+                "description": "OpenStreetMap Mỹ Latinh tại Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "Telegram OpenStreetMap Mỹ Latinh",
+                "description": "Telegram OpenStreetMap dành cho Mỹ Latinh"
+            },
+            "LATAM-Twitter": {
+                "name": "Twitter OpenStreetMap Mỹ Latinh",
+                "description": "Theo dõi chúng tôi trên Twitter: {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Mỹ Latinh",
+                "description": "Hỗ trợ OpenStreetMap tại Mỹ Latinh",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Mỹ Latinh 2018",
+                        "description": "State of the Map Mỹ Latinh là hội nghị hàng năng dành cho tất cả mọi người xây dựng và sử dụng OpenStreetMap tại Mỹ Latinh. Chương trình bao gồm các bài thuyêt trình, phiên thảo luận, hội thảo, và phiên vẽ bản đồ đều có liên quan đến OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap tại Facebook",

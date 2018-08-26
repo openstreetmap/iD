@@ -486,7 +486,6 @@
             "best_imagery": "Bu yer için bilinen en iyi uydu görüntüsü",
             "switch": "Bu arka plana geçiş yap",
             "custom": "Özel",
-            "custom_button": "Özel arka planı düzenle",
             "overlays": "Katmanlar",
             "imagery_source_faq": "İmge Bilgisi / Problem Bildir",
             "reset": "sıfırla",
@@ -687,15 +686,6 @@
         },
         "cannot_zoom": "Bu modda daha fazla uzaklaşılamaz.",
         "full_screen": "Tam Ekran",
-        "gpx": {
-            "local_layer": "GPX rotası ekle",
-            "drag_drop": ".gpx, .geojson or .kml formatında bir dosya sürükle ve bırak ya da sağdaki tuşa basarak bir dosya seç",
-            "zoom": "Yakınlaş",
-            "browse": "Dosya seç"
-        },
-        "mvt": {
-            "local_layer": "MVT dosyası ekle"
-        },
         "mapillary_images": {
             "tooltip": "Mapilary'den sokak fotoğrafları",
             "title": "Fotoğraf Katmanı (Mapilary)"
@@ -1209,31 +1199,24 @@
                     "label": "Giriş İzni",
                     "options": {
                         "designated": {
-                            "description": "Giriş, imlere ya da yerel yasalara göre olurlanmış",
                             "title": "Ayrılmış"
                         },
                         "destination": {
-                            "description": "Giriş, yalnız varılacak yere ulaşmak için izin verilmiş",
                             "title": "Varış Yeri"
                         },
                         "dismount": {
-                            "description": "Girişe izin verilmiş, ancak sürücü araçtan inmek zorunda",
                             "title": "Araçtan inmek"
                         },
                         "no": {
-                            "description": "Giriş kamuya açık değildir",
                             "title": "Yasak"
                         },
                         "permissive": {
-                            "description": "Sahibi geri çekene kadar giriş açık",
                             "title": "İzin verilmiş"
                         },
                         "private": {
-                            "description": "Giriş, sahibinin oluruna bağlı",
                             "title": "Özel"
                         },
                         "yes": {
-                            "description": "Yasaca girişe izin verilmiş; geçme önceliği",
                             "title": "Serbest"
                         }
                     },
@@ -2684,10 +2667,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Bisiklet Tamircisi",
                     "terms": "Bisiklet Tamircisi"
-                },
-                "amenity/biergarten": {
-                    "name": "Bira İçilen Bahçe",
-                    "terms": "Bira İçilen Bahçe, Bira Bahçesi"
                 },
                 "amenity/boat_rental": {
                     "name": "Bot Kiralama",

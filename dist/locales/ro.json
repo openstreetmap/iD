@@ -356,7 +356,6 @@
             "best_imagery": "Cea mai cunoscută sursă de imagine pentru această locație",
             "switch": "Schimbă înapoi la acest fundal",
             "custom": "Personalizat",
-            "custom_button": "Editează fundalul customizat",
             "reset": "resetează",
             "minimap": {
                 "key": "/"
@@ -488,10 +487,6 @@
             "untagged_relation": "Relație fără taguri",
             "tag_suggests_area": "Tag-ul {tag} sugerează că linia trebuie sa fie o suprafață, dar nu e.",
             "deprecated_tags": "Tag-uri învechite: {tags}"
-        },
-        "gpx": {
-            "zoom": "Mărește la strat",
-            "browse": "Caută fișier"
         },
         "mapillary": {
             "view_on_mapillary": "Vezi această imagine pe Mapillary"
@@ -768,18 +763,15 @@
                     "label": "Acces Permis",
                     "options": {
                         "designated": {
-                            "description": "Acces permis potrivit semnalizării sau legilor locale",
                             "title": "Desemnat"
                         },
                         "destination": {
-                            "description": "Acces permis doar pentru a ajunge la o destinație",
                             "title": "Destinație"
                         },
                         "dismount": {
                             "title": "Demonta"
                         },
                         "no": {
-                            "description": "Acces interzis publicului larg",
                             "title": "Interzis"
                         },
                         "permissive": {
@@ -1041,11 +1033,48 @@
                 "description": {
                     "label": "Descripție"
                 },
+                "direction_cardinal": {
+                    "options": {
+                        "E": "Est",
+                        "ENE": "Est-Nord-Est",
+                        "ESE": "Est-Sud-Est",
+                        "N": "Nord",
+                        "NE": "Nord-Est",
+                        "NNE": "Nord-Nord-Est",
+                        "NNW": "Nord-Nord-Vest",
+                        "NW": "Nord-Vest",
+                        "S": "Sud",
+                        "SE": "Sud-Est",
+                        "SSE": "Sud-Sud-Est",
+                        "SSW": "Sud-Sud-Vest",
+                        "SW": "Sud-Vest",
+                        "W": "Vest",
+                        "WNW": "Vest-Nord-Vest",
+                        "WSW": "Vest-Sud-Vest"
+                    }
+                },
+                "direction_clock": {
+                    "options": {
+                        "anticlockwise": "Sens antiorar",
+                        "clockwise": "Sens orar"
+                    }
+                },
+                "direction_vertex": {
+                    "options": {
+                        "forward": "Înainte"
+                    }
+                },
                 "display": {
                     "label": "Afișare"
                 },
+                "distance": {
+                    "label": "Distanţă totală"
+                },
                 "dock": {
                     "label": "Tip"
+                },
+                "duration": {
+                    "label": "Durată"
                 },
                 "electrified": {
                     "options": {
@@ -1059,6 +1088,10 @@
                 "email": {
                     "label": "Email",
                     "placeholder": "example@example.com"
+                },
+                "embankment": {
+                    "label": "Tip",
+                    "placeholder": "Implicit"
                 },
                 "emergency": {
                     "label": "Urgență"
@@ -1098,6 +1131,10 @@
                 "fixme": {
                     "label": "Repară-mă"
                 },
+                "ford": {
+                    "label": "Tip",
+                    "placeholder": "Implicit"
+                },
                 "fuel": {
                     "label": "Benzină"
                 },
@@ -1125,9 +1162,15 @@
                 "generator/type": {
                     "label": "Tip"
                 },
+                "government": {
+                    "label": "Tip"
+                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"
+                },
+                "healthcare": {
+                    "label": "Tip"
                 },
                 "height": {
                     "label": "Înălțime (Metri)"
@@ -1143,6 +1186,12 @@
                 },
                 "hoops": {
                     "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Da",
+                        "undefined": "Nu"
+                    }
                 },
                 "iata": {
                     "label": "IATA"
@@ -1325,9 +1374,13 @@
                     "placeholder": "3, 4, 5..."
                 },
                 "parking": {
-                    "label": "Tip"
+                    "label": "Tip",
+                    "options": {
+                        "surface": "Suprafaţă"
+                    }
                 },
                 "phone": {
+                    "label": "Telefon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -1344,7 +1397,9 @@
                     "options": {
                         "hike": "Drumeție",
                         "nordic": "Nordic",
-                        "playground": "Loc de Joacă"
+                        "playground": "Loc de Joacă",
+                        "sled": "Sanie",
+                        "sleigh": "Sanie"
                     }
                 },
                 "place": {
@@ -1622,9 +1677,6 @@
                 },
                 "amenity/bicycle_rental": {
                     "name": "Închiriere biciclete"
-                },
-                "amenity/biergarten": {
-                    "name": "Biergarten"
                 },
                 "amenity/boat_rental": {
                     "name": "Închiriere Barcă"
@@ -3306,6 +3358,9 @@
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "description": "Urmăriţi-ne pe Twitter : {url}"
+            },
             "Bay-Area-OpenStreetMappers": {
                 "description": "Îmbunătățește OpenStreetMap în Bay Area"
             }

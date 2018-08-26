@@ -22,6 +22,7 @@
                 "tail": "Cliqueu al mapa per a afegir un punt."
             },
             "add_note": {
+                "title": "Nota",
                 "tail": "Cliqueu al mapa per a afegir una nota."
             },
             "browse": {
@@ -424,7 +425,10 @@
                 "edited_by": "Modificat per",
                 "changeset": "Conjunt de modificacions",
                 "unknown": "Desconegut",
-                "link_text": "Història a openstreetmap.og"
+                "link_text": "Història a openstreetmap.og",
+                "note_comments": "Comentaris",
+                "note_created_user": "Creat per",
+                "note_link_text": "Nota a openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -454,7 +458,8 @@
             "vertex": "vèrtex",
             "line": "línia",
             "area": "àrea",
-            "relation": "relació"
+            "relation": "relació",
+            "note": "nota"
         },
         "geocoder": {
             "search": "Cerca mundialment...",
@@ -517,7 +522,6 @@
             "best_imagery": "Font d'imatgeria millor coneguda per a aquesta ubicació",
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
-            "custom_button": "Editar el fons personalitzat",
             "overlays": "Capes",
             "imagery_source_faq": "Informació d'imatge / Comunicar un problema",
             "reset": "reiniciar",
@@ -716,15 +720,6 @@
         },
         "cannot_zoom": "No es pot allunyar més la vista al mode actual.",
         "full_screen": "Passar a pantalla completa",
-        "gpx": {
-            "local_layer": "Afegeix un GPX",
-            "drag_drop": "Arrossegueu i deixeu anar un fitxer .gpx, .geojon o .kml a la pàgina, o feuclic al botó de la dreta per a ubicar-lo",
-            "zoom": "Escala a la capa",
-            "browse": "Navega cap a un fitxer"
-        },
-        "mvt": {
-            "local_layer": "Afegeix un MVT"
-        },
         "streetside": {
             "tooltip": "Fotografies a peu de carrer de Microsoft",
             "hires": "Alta resolució"
@@ -750,7 +745,10 @@
         "note": {
             "note": "Nota",
             "title": "Edita la nota",
-            "anonymous": "anònim"
+            "anonymous": "anònim",
+            "closed": "(tancat)",
+            "commentTitle": "Comentaris",
+            "comment": "Comentari"
         },
         "help": {
             "title": "Ajuda",
@@ -1166,31 +1164,24 @@
                     "label": "Accés permès",
                     "options": {
                         "designated": {
-                            "description": "Accés garantit seguint les normes de les senyals o les normes locals específiques.",
                             "title": "Específic"
                         },
                         "destination": {
-                            "description": "Accés permès només per arribar a un destí",
                             "title": "Destinació"
                         },
                         "dismount": {
-                            "description": "Accés permès però el pilot ha de baixar del mitjà ",
                             "title": "Baixar del mitjà de transport"
                         },
                         "no": {
-                            "description": "No es permet l'accés al públic en general",
                             "title": "Prohibit"
                         },
                         "permissive": {
-                            "description": "Accés garantit fins que el propietari ho prohibeixi.",
                             "title": "Permissiu"
                         },
                         "private": {
-                            "description": "Accés permès només amb autorització individualitzada del propietari",
                             "title": "Privat"
                         },
                         "yes": {
-                            "description": "Accés garantit per llei; us dona dret de pas",
                             "title": "Permès"
                         }
                     },
@@ -1737,6 +1728,9 @@
                         "undefined": "No"
                     }
                 },
+                "horse_scale": {
+                    "placeholder": "Difícil, perillós..."
+                },
                 "horse_stables": {
                     "options": {
                         "stables": "Sí",
@@ -1985,7 +1979,9 @@
                 "oneway": {
                     "label": "Sentit únic",
                     "options": {
+                        "alternating": "Alternat",
                         "no": "No",
+                        "reversible": "Reversible",
                         "undefined": "Sobreentès que no",
                         "yes": "Sí"
                     }
@@ -1993,7 +1989,9 @@
                 "oneway_yes": {
                     "label": "Sentit únic",
                     "options": {
+                        "alternating": "Alternat",
                         "no": "No",
+                        "reversible": "Reversible",
                         "undefined": "Sobreentès que sí",
                         "yes": "Sí"
                     }
@@ -2034,6 +2032,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
+                    "label": "Telèfon",
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
@@ -2232,6 +2231,17 @@
                 },
                 "shop": {
                     "label": "Tipus"
+                },
+                "siren/purpose": {
+                    "label": "Propòsit"
+                },
+                "siren/type": {
+                    "label": "Tipus",
+                    "options": {
+                        "electronic": "Electrònica",
+                        "other": "Altres",
+                        "pneumatic": "Pneumàtica"
+                    }
                 },
                 "site": {
                     "label": "Tipus"
@@ -2457,8 +2467,12 @@
                 "usage_rail": {
                     "label": "Tipus d'ús",
                     "options": {
+                        "branch": "Branca",
                         "industrial": "Industrial",
-                        "military": "Militar"
+                        "main": "Principal",
+                        "military": "Militar",
+                        "test": "Proves",
+                        "tourism": "Turisme"
                     }
                 },
                 "vending": {
@@ -2675,9 +2689,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Lloc de reparació de Bicicletes"
-                },
-                "amenity/biergarten": {
-                    "name": "Biergarten"
                 },
                 "amenity/boat_rental": {
                     "name": "Lloguer d'embarcacions"
@@ -2999,6 +3010,9 @@
                 "amenity/vending_machine/cigarettes": {
                     "name": "Màquina de tabac"
                 },
+                "amenity/vending_machine/coffee": {
+                    "name": "Expenedora de cafè"
+                },
                 "amenity/vending_machine/condoms": {
                     "name": "Expenedor de preservatius"
                 },
@@ -3010,6 +3024,12 @@
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Màquina de vènding d'articles d'higiene femenina"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Sortidor de benzina"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Expenedora de gelats"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Màquina expenedora de diaris"
@@ -3025,6 +3045,9 @@
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Màquina de venda de títols de transport públic"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Expenedora de segells"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Màquina de vènding de comestibles"
@@ -3066,6 +3089,15 @@
                 },
                 "attraction/pirate_ship": {
                     "name": "Vaixell pirata"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Muntanya russa"
+                },
+                "attraction/train": {
+                    "name": "Tren turístic"
+                },
+                "attraction/water_slide": {
+                    "name": "tobogan d'aigua"
                 },
                 "barrier": {
                     "name": "Barrera",
@@ -4104,7 +4136,7 @@
                     "terms": "Pic, cim, cimadal, pollegó, agulla."
                 },
                 "natural/saddle": {
-                    "name": "Seient"
+                    "name": "Collada"
                 },
                 "natural/sand": {
                     "name": "Sorra"
@@ -5002,6 +5034,24 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Ortofoto de Flandes més recent © AGIV"
+                },
+                "name": "imatgeria aèria més recent AGIV Flandes"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Ortofoto Flandes © AGIV"
+                },
+                "name": "AGIV Flandes 2013-2015 imatgeria aèria 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flandes © AGIV"
+                },
+                "name": "AGIV Flandes GRB"
+            },
             "Bing": {
                 "description": "Imatges aèries i de satèl·lit.",
                 "name": "Imatges aèries de Bing"
@@ -5010,6 +5060,7 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
+                "description": "DigitalGlobe-Premium és un mosaic compost del mapa base de DigitalGlobe amb algunes regions millorades amb +Vivid o imatgeria personalitzada de l'àrea d'interès, resolució de 50cm o millor, i actualitzada freqüentment.",
                 "name": "Imatges de DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
@@ -5023,6 +5074,7 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
+                "description": "DigitalGlobe-Standard és un conjunt d'imatgeria seleccionat que cobreix un 86% de la superfície terrestre, amb una resolució d'entre 30 i 60cm allà on és disponible i completat pel Landsat. De mitjana l'edat és de 2,31 anys, i algunes zones s'actualitzen dues vegades cada any.",
                 "name": "Imatges de DigitalGlobe estàndard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -5036,21 +5088,21 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Imatges aèries de Esri",
-                "name": "Imatges aèries de Esri"
+                "description": "Imatges aèries d'Esri",
+                "name": "Imatges aèries d'Esri"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
-                    "text": "Termes & Comentaris"
+                    "text": "Termes i comentaris"
                 },
-                "description": " L'arxiu Esri pot ser més clar i acotat que la capa per defecte ",
-                "name": "Imatges aèries de Esri (Claredat) Beta"
+                "description": " L'arxiu Esri pot ser més clar i acurat que la capa per defecte.",
+                "name": "Imatges aèries d'Esri (Claredat) Beta"
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
-                "description": "La capa d'OpenStreetmap predeterminada",
+                "description": "La capa d'OpenStreetMap predeterminada.",
                 "name": "OpenStreetMap (Estàndard)"
             },
             "Mapbox": {
@@ -5062,45 +5114,51 @@
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Adreces"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Geometria"
             },
             "OSM_Inspector-Highways": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Carreteres"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Àrea"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Llocs"
             },
             "OSM_Inspector-Routing": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Planificació de ruta"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspector OSM: Etiquetatge"
+            },
+            "SPW_ORTHO_LAST": {
+                "name": "imatgeria aèria més recent de SPW (Valònia)"
+            },
+            "SPW_PICC": {
+                "name": "imatgeria numèrica PICC de SPW (Valònia)"
             },
             "US-TIGER-Roads-2012": {
                 "name": "Carreteres TIGER 2012"
@@ -5114,35 +5172,60 @@
                 "name": "Carreteres TIGER 2017"
             },
             "US_Forest_Service_roads_overlay": {
+                "description": "Carretera: Contorn verd = sense classificar. Contorn marró = pista. Superfície: grava = emplenat marró clar, Asfalt = negre, pavimentat = gris, terra = blanc, ciment = blau, gespa = verd. Estacional = franges blanques",
                 "name": "Capa superposada dels Camins Forestals dels EUA"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realitzat gràcies a Brussels UrbIS®© - Distribució i copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realitzat gràcies a Brussels UrbIS®© - Distribució i copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realitzat gràcies a Brussels UrbIS®© - Distribució i copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realitzat gràcies a Brussels UrbIS®© - Distribució i copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org, col·laboradors d'OpenStreetMap, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Ciclisme"
             },
             "Waymarked_Trails-Hiking": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org, col·laboradors d'OpenStreetMap, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Senderisme"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org, col·laboradors d'OpenStreetMap, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Ciclisme de Muntanya"
             },
             "Waymarked_Trails-Skating": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org, col·laboradors d'OpenStreetMap, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Patinatge"
             },
             "Waymarked_Trails-Winter_Sports": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contribuïdors, CC by-SA 3.0"
+                    "text": "© waymarkedtrails.org, col·laboradors d'OpenStreetMap, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Esports d'hivern"
             },
@@ -5157,46 +5240,74 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Capa d'ortofoto proveïda per basemap.at. \"Successora\" de geoimage.at imagery.",
+                "description": "Capa d'ortofoto proveïda per basemap.at. \"Successora\" de la imatgeria de geoimage.at.",
                 "name": "Ortofoto basemap.at "
             },
             "hike_n_bike": {
                 "attribution": {
-                    "text": "© OpenStreetMap col·laboradors"
+                    "text": "© col·laboradors d'OpenStreetMap"
                 },
                 "name": "Excursió i bicicleta"
+            },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Camins de motoneu de Kelkkareitit.fi des d'OSM (àrea nòrdica de cobertura)",
+                "name": "capa nòrdica de motoneu"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic d'ortofotos sueques del període 1955-1965. Poden coincidir imatges antigues i noves.",
+                "name": "Ortofoto històrica de Lantmäteriet 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic d'ortofotos sueques del període 1970-1980. Es troba en construcció.",
+                "name": "Ortofoto històrica de Lantmäteriet 1975"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Visualitza característiques importants per ajudar a orientar-te.",
+                "description": "Visualitza característiques importants per a ajudar a orientar-vos.",
                 "name": "Localitzador superposat"
             },
             "openpt_map": {
                 "attribution": {
-                    "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenPT Map (superposat)"
             },
             "osm-gps": {
                 "attribution": {
-                    "text": "© OpenStreetMap col·laboradors"
+                    "text": "© col·laboradors d'OpenStreetMap"
                 },
                 "description": "Traces GPS públiques pujades a OpenStreetMap.",
                 "name": "Traces GPS d'OpenStreetMap"
             },
             "osm-mapnik-black_and_white": {
                 "attribution": {
-                    "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenStreetMap (Estàndard Blanc i Negre)"
             },
             "osm-mapnik-german_style": {
                 "attribution": {
-                    "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
+                    "text": "© col·laboradors d'OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenStreetMap (Estil alemany)"
+            },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Escaneig de «mapes econòmics» ca. 1950–1980",
+                "name": "Mapa econòmic de Lantmäteriet 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -5206,9 +5317,16 @@
             },
             "skobbler": {
                 "attribution": {
-                    "text": "© Quadrícules: skobbler Dades del mapa: OpenStreetMap col·laboradors"
+                    "text": "© Quadrícules: skobbler Dades del mapa: col·laboradors d'OpenStreetMap"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Camins de motoneu",
+                "name": "Mapa de motoneu de Suècia"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -5218,15 +5336,57 @@
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Mapes © Thunderforest, Dades © OpenStreetMap col·laboradors"
+                    "text": "Mapes © Thunderforest, Dades © col·laboradors d'OpenStreetMap"
                 },
                 "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Mapes © Thunderforest, Dades © OpenStreetMap col·laboradors"
+                    "text": "Mapes © Thunderforest, Dades © col·laboradors d'OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Xarxa ferroviària sueca, incloses les vies auxiliars",
+                "name": "Xarxa ferroviària de Trafikverket"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Xarxa ferroviària sueca amb diverses opcions per a capes de mapes",
+                "name": "Opcions de la xarxa ferroviària de Trafikverket"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Xarxa viària sueca de NVDB",
+                "name": "Xarxa viària de Trafikverket"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Detalls addicionals del NVDB suec: referències d'autopistes, reductors de velocitat, àrees de descans, parades d'autobús, ponts, túnels, càmeres de velocitat",
+                "name": "Xarxa viària extra de Trafikverket"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Noms de carrer suecs de NVDB",
+                "name": "Noms de carrer de Trafikverket"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Xarxa de carreteres sueca de NVDB amb diverses opcions per a capes de mapes",
+                "name": "Opcions de la xarxa viària de Trafikverket"
             }
         },
         "community": {

@@ -21,6 +21,11 @@
                 "description": "Dodajanje restavracij, spomenikov, poštnih nabiralnikov ali drugih točk na zemljevid.",
                 "tail": "Za dodajanje točke kliknite na zemljevid."
             },
+            "add_note": {
+                "title": "Opomba",
+                "description": "Ali ste opazili problem? Obvestite urejevalce zemljevida.",
+                "tail": "S klikom na zemljevid lahko dodate opombo."
+            },
             "browse": {
                 "title": "Prebrskaj",
                 "description": "Premikanje po zemljevidu in približanje pogleda."
@@ -30,6 +35,9 @@
             },
             "draw_line": {
                 "tail": "Kliknite za dodajanje vozlišč na črto. S klikom na drugo črto se črti povežeta, z dvoklikom pa se risanje konča."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Predmeta ni mogoče urejati, ker je povezan s skritim predmetom."
             }
         },
         "operations": {
@@ -37,7 +45,8 @@
                 "annotation": {
                     "point": "dodajanje točke ×",
                     "vertex": "dodano vozlišče ×",
-                    "relation": "dodajanje zveze ×"
+                    "relation": "dodajanje zveze ×",
+                    "note": "Opomba je dodana."
                 }
             },
             "start": {
@@ -290,6 +299,9 @@
                     "create": "dodajanje omejitve zavijanja ×",
                     "delete": "odstranjevanje omejitev zavijanja ×"
                 }
+            },
+            "detach_node": {
+                "title": "Odpni"
             }
         },
         "restriction": {
@@ -314,6 +326,8 @@
             "localized_translation_name": "Naziv"
         },
         "zoom_in_edit": "Približaj za urejanje",
+        "login": "Prijava",
+        "logout": "Odjava",
         "loading_auth": "Vzpostavljanje povezave z OpenStreetMap ...",
         "report_a_bug": "Pošlji sporočilo napaki",
         "help_translate": "Sodelujte pri prevodu",
@@ -385,6 +399,8 @@
                 "title": "Merilo",
                 "selected": "{n} izbranih",
                 "geometry": "Geometrija",
+                "closed_line": "zaprta črta",
+                "closed_area": "zaprt mnogokotnik",
                 "center": "Središče",
                 "perimeter": "Obseg",
                 "length": "Dolžina",
@@ -464,7 +480,6 @@
             "best_imagery": "Najbolj znan slikovni vir ozadja za to območje",
             "switch": "Preklopi nazaj na to ozadje.",
             "custom": "Po meri",
-            "custom_button": "Uredi ozadje po meri",
             "reset": "ponastavi",
             "display_options": "Možnosti prikaza",
             "brightness": "Svetlost",
@@ -616,7 +631,7 @@
             "welcome": "Dobrodošli v iD, urejevalniku podatkov OpenStreetMap",
             "text": "Urejevalnik iD je zmogljivo, uporabniku prijazno orodje za vnašanje podatkov na najboljši brezplačni svetovni zemljevid. Uporabljena je zadnja različica {version}. Več podrobnosti o urejevalniku je na voljo na {website}, poročila o hroščih pa se zbirajo na spletišču {github}.",
             "walkthrough": "Predstavitev orodja",
-            "start": "Uredi takoj"
+            "start": "Začni z urejanjem"
         },
         "source_switch": {
             "live": "objavljeno",
@@ -653,10 +668,10 @@
         },
         "cannot_zoom": "V trenutnem načinu nadaljnje oddaljevanje pogleda ni mogoče.",
         "full_screen": "Preklopi celozaslonski način",
-        "gpx": {
-            "drag_drop": "Povlecite datoteko .gpx, .geojson ali .khm na stran, ali pa kliknite gumb na desni za brskanje med datotekami.",
-            "zoom": "Približaj plasti",
-            "browse": "Prebrskaj za datoteko"
+        "streetside": {
+            "tooltip": "Ulične fotografije z Microsofta",
+            "view_on_bing": "Ogled na zemljevidih Bing",
+            "hires": "Visoka ločljivost"
         },
         "mapillary_images": {
             "tooltip": "Fotografije ulic prek storitve Mapillary",
@@ -676,6 +691,11 @@
         "openstreetcam": {
             "view_on_openstreetcam": "Pokaži sliko na spletišču OpenStreetCam"
         },
+        "note": {
+            "note": "Opomba",
+            "title": "Uredi opombo",
+            "closed": "(zaprto)"
+        },
         "help": {
             "title": "Pomoč",
             "key": "H",
@@ -684,7 +704,17 @@
                 "welcome": "Dobrodošli v urejevalniku iD za [OpenStreetMap](https://www.openstreetmap.org/). S tem urejevalnikom lahko OpenStreetMap posodobite neposredno iz brskalnika."
             },
             "overview": {
+                "title": "Pregled",
+                "navigation_h": "Usmerjanje",
                 "features_h": "Značilnosti zemljevida"
+            },
+            "editing": {
+                "title": "Urejanje in shranjevanje",
+                "select_h": "Izbor",
+                "undo_redo_h": "Razveljavi in Ponovno uveljavi",
+                "save_h": "Shrani",
+                "upload_h": "Pošlji",
+                "backups_h": "Samodejne varnostne kopije"
             },
             "field": {
                 "restrictions": {
@@ -1023,6 +1053,7 @@
                     "add_point": "Način dodajanja »Točk« ",
                     "add_line": "Način dodajanja »Črt« ",
                     "add_area": "Način dodajanja »Mnogokotnikov« ",
+                    "add_note": "Način dodajanja »Opomb« ",
                     "disable_snap": "Zadržite tipko za onemogočanje lepljenja točk",
                     "stop_line": "Končaj risanje črte ali površine"
                 },
@@ -1129,31 +1160,24 @@
                     "label": "Dovoljen dostop",
                     "options": {
                         "designated": {
-                            "description": "Dostop je dovoljen v skladu z znaki ali posebnimi krajevnimi zakoni",
                             "title": "Namembno"
                         },
                         "destination": {
-                            "description": "Dostop je dovoljen samo za dostavo",
                             "title": "Za dostavo"
                         },
                         "dismount": {
-                            "description": "Dovoljen dostop, toda jezdec razjaha",
                             "title": "Razjahati"
                         },
                         "no": {
-                            "description": "Dostop za splošno javnost ni dovoljen",
                             "title": "Prepovedano"
                         },
                         "permissive": {
-                            "description": "Dostop je dovoljen začasno, dokler lastnik dovoljenja ne prekliče",
                             "title": "Začasno dovoljen"
                         },
                         "private": {
-                            "description": "Dostop je dovoljen samo z osebnim dovoljenjem lastnika",
                             "title": "Zasebno"
                         },
                         "yes": {
-                            "description": "Dostopno po zakonu; služnostna pravica",
                             "title": "Dovoljeno"
                         }
                     },
@@ -1597,6 +1621,10 @@
                 "fixme": {
                     "label": "Popravi me"
                 },
+                "ford": {
+                    "label": "Vrsta",
+                    "placeholder": "Default"
+                },
                 "fuel": {
                     "label": "Bencinska črpalka"
                 },
@@ -1782,6 +1810,9 @@
                     "label": "Omejitev hitrosti",
                     "placeholder": "40, 50, 60 ..."
                 },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60 ..."
+                },
                 "maxstay": {
                     "label": "Najdaljši postanek"
                 },
@@ -1920,6 +1951,9 @@
                 "payment_multi": {
                     "label": "Vrste plačila"
                 },
+                "phases": {
+                    "placeholder": "1, 2, 3 ..."
+                },
                 "phone": {
                     "placeholder": "+386 1 234 5678"
                 },
@@ -1969,6 +2003,9 @@
                 },
                 "plant/output/electricity": {
                     "placeholder": "500 MW, 1000 MW, 2000 MW ..."
+                },
+                "playground/baby": {
+                    "label": "Otroški sedež"
                 },
                 "population": {
                     "label": "Število prebivalcev"
@@ -2427,10 +2464,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Stojalo za popravilo koles",
                     "terms": "popravljalnica,kolesarnica"
-                },
-                "amenity/biergarten": {
-                    "name": "Vrt pivnica",
-                    "terms": "pivnica, pivski vrt"
                 },
                 "amenity/boat_rental": {
                     "name": "Izposoja plovil",
@@ -4901,6 +4934,12 @@
             }
         },
         "imagery": {
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
+                "name": "AGIV Flanders GRB"
+            },
             "Bing": {
                 "description": "Satelitski posnetki in posnetki iz zraka",
                 "name": "Satelitski posnetki Bing"
@@ -4995,6 +5034,27 @@
                 },
                 "name": "OSM Inspector: oznake"
             },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "name": "TIGER Roads 2017"
+            },
+            "UrbISOrtho2016": {
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbisAdmFR": {
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "name": "UrbisAdm NL"
+            },
             "Waymarked_Trails-Cycling": {
                 "name": "Waymarked Trails: kolesarjenje"
             },
@@ -5027,6 +5087,21 @@
                 },
                 "name": "Pohodništvo in kolesarstvo"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                }
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                }
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                }
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
@@ -5058,13 +5133,56 @@
                 },
                 "name": "OpenStreetMap (nemški slog)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                }
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Pole, podatki skupnost © OpenStreetMap"
                 }
             },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                }
+            },
+            "tf-cycle": {
+                "name": "Thunderforest OpenCycleMap"
+            },
             "tf-landscape": {
                 "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                }
             }
         },
         "community": {
@@ -5077,18 +5195,24 @@
             },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Ghana na Twitterju",
-                "description": "Sledi nam na Twitterju: {url}"
+                "description": "Sledite nam na Twitterju: {url}"
             },
             "osm-mg-facebook": {
                 "name": "Facebook skupina OpenStreetMap Madagaskar"
             },
+            "OSM-MY-facebook": {
+                "description": "Za klepet o čemerkoli v zvezi z OpenStreetMap!"
+            },
+            "be-irc": {
+                "description": "Pridružite se #osmbe na irc.oftc.net (vrata 6667)"
+            },
             "si-forum": {
-                "name": "Slovenski OpenStreetMap forum",
+                "name": "Slovenski forum OpenStreetMap",
                 "description": "Forum skupnosti OpenStreetMap v Sloveniji"
             },
             "si-mailinglist": {
-                "name": "Slovenski OpenStreetMap dopisni seznam",
-                "description": "Dopisni seznam slovenske OpenStreetMap skupnosti"
+                "name": "Slovenski dopisni seznam OpenStreetMap",
+                "description": "Dopisni seznam slovenske skupnosti OpenStreetMap"
             },
             "OSM-help": {
                 "name": "Pomoč OpenStreetMap"

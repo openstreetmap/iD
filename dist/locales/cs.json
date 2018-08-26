@@ -23,6 +23,7 @@
             },
             "add_note": {
                 "title": "Poznámka",
+                "description": "Zjistili jste problém? Dejte vědět ostatním mapovačům.",
                 "tail": "Klikněte do mapy pro přidání poznámky."
             },
             "browse": {
@@ -44,7 +45,8 @@
                 "annotation": {
                     "point": "Přidán bod.",
                     "vertex": "Přidán bod k linii.",
-                    "relation": "Přidána relace."
+                    "relation": "Přidána relace.",
+                    "note": "Přidána poznámka."
                 }
             },
             "start": {
@@ -320,7 +322,8 @@
                 "to": "DO",
                 "from_name": "{from} {fromName}",
                 "from_name_to_name": "{from} {fromName} {to} {toName}",
-                "via_names": "{via} {viaNames}"
+                "via_names": "{via} {viaNames}",
+                "toggle": "Klikněte pro \"{turn}\""
             }
         },
         "undo": {
@@ -340,6 +343,8 @@
             "localized_translation_name": "Název"
         },
         "zoom_in_edit": "Pro editaci přibližte",
+        "login": "Přihlásit",
+        "logout": "Odhlásit",
         "loading_auth": "Připojování na OpenStreetMap…",
         "report_a_bug": "Nahlásit chybu",
         "help_translate": "Pomoct s překladem",
@@ -495,8 +500,6 @@
             "best_imagery": "Nejlepší známý zdroj podkladů pro toto místo",
             "switch": "Přepnout zpět na toto pozadí",
             "custom": "Vlastní",
-            "custom_button": "Editovat vlastní pozadí",
-            "custom_prompt": "Vložte šablonu pro URL dlaždic. Platné proměnné jsou:\n- {zoom} nebo {z}, {x}, {y} u schématu Z/X/Y\n- {-y} nebo {y} u prohozených souřadnic Y typu TMS\n- {u} u schématu hierarchicky čtvrcených dlaždic\n- {switch:a,b,c} u multiplexingu serveru DNS\n\nPříklad:\n{example}",
             "overlays": "Překryvné vrstvy",
             "imagery_source_faq": "O podkladu / Nahlásit problém",
             "reset": "vrátit na začátek",
@@ -694,16 +697,6 @@
         },
         "cannot_zoom": "Aktuální nastavení nedovoluje větší zvětšení.",
         "full_screen": "Na celou obrazovku",
-        "gpx": {
-            "local_layer": "Přidat GPX",
-            "drag_drop": "Přetáhni a pusť .gpx, .geojson nebo .kml soubor na stránku, nebo klikni tlačítko napravo k prohlížení",
-            "zoom": "Přibliž na vrstvu",
-            "browse": "Hledej soubor"
-        },
-        "mvt": {
-            "local_layer": "Přidat MVT",
-            "zoom": "Přiblížit na vrstvu"
-        },
         "streetside": {
             "hires": "Vysoké rozlišení"
         },
@@ -1242,31 +1235,34 @@
                     "label": "Povolený vstup/vjezd",
                     "options": {
                         "designated": {
-                            "description": "Přístup je povolen podle značení či místních předpisů",
                             "title": "Vyhrazen"
                         },
                         "destination": {
-                            "description": "Průjezd zakázán, průchod zakázán apod.",
+                            "description": "Přístup je povolen pouze k dosažení cíle",
                             "title": "Jen do místa"
                         },
                         "dismount": {
-                            "description": "Vstup povolen, ale cyklista (jezdec apod.) musí sesednout",
+                            "description": "Přístup je povolen, ale jezdec musí sesednout",
                             "title": "Sesednout"
                         },
                         "no": {
-                            "description": "Přístup širší veřejnosti zakázán",
+                            "description": "Přístup není veřejnosti povolen",
                             "title": "Zakázán"
                         },
                         "permissive": {
-                            "description": "Vstup je povolen do té doby, než majitel povolení zruší",
+                            "description": "Přístup je povolen, dokud majitel povolení nezamítne",
                             "title": "Do odvolání"
                         },
+                        "permit": {
+                            "description": "Přístup povolen pouze s platným oprávněním nebo licencí",
+                            "title": "Na povolení"
+                        },
                         "private": {
-                            "description": "Přístup je povolen jen s individuálním svolením majitele",
+                            "description": "Přístup povolen pouze s individuálním povolením vlastníka",
                             "title": "S povolením"
                         },
                         "yes": {
-                            "description": "Přístup oficiálně, ze zákona povolen",
+                            "description": "Přístup povolen právem; právo na cestu",
                             "title": "Povolen"
                         }
                     },
@@ -1432,6 +1428,9 @@
                 "board_type": {
                     "label": "Typ"
                 },
+                "booth": {
+                    "label": "Stánek"
+                },
                 "boules": {
                     "label": "Typ"
                 },
@@ -1479,6 +1478,9 @@
                 "capacity": {
                     "label": "Kapacita",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Hotovost"
                 },
                 "castle_type": {
                     "label": "Typ"
@@ -1819,6 +1821,9 @@
                         "horse_riding": "Ano",
                         "undefined": "Ne"
                     }
+                },
+                "horse_scale": {
+                    "placeholder": "Obtížné, nebezpečné…"
                 },
                 "horse_stables": {
                     "label": "Jezdecká stáj",
@@ -2556,7 +2561,16 @@
                     "placeholder": "Výchozí"
                 },
                 "usage_rail": {
-                    "label": "Druh použití"
+                    "label": "Druh použití",
+                    "options": {
+                        "industrial": "Průmysl",
+                        "military": "Armáda",
+                        "test": "Test",
+                        "tourism": "Turismus"
+                    }
+                },
+                "vending": {
+                    "label": "Druhy zboží"
                 },
                 "visibility": {
                     "label": "Viditelnost",
@@ -2577,6 +2591,7 @@
                 "volcano/type": {
                     "label": "Druh sopky",
                     "options": {
+                        "shield": "Štít",
                         "stratovolcano": "Stratovulkán"
                     }
                 },
@@ -2782,10 +2797,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Montážní stojan na kola",
                     "terms": "stojan,kolo,stojan na kolo,montážní stojan,opravna kol,cykloopravna,samoobslužná opravna kol"
-                },
-                "amenity/biergarten": {
-                    "name": "Pivní zahrádka",
-                    "terms": "zahrádka,venku,posezení,pivo,pod širým nebem"
                 },
                 "amenity/boat_rental": {
                     "name": "Půjčovna lodí",
@@ -3792,7 +3803,8 @@
                     "terms": "přechod pro chodce,zebra,přechod,přechod pro pěší"
                 },
                 "footway/crosswalk-raised": {
-                    "name": "Příčný práh s přechodem"
+                    "name": "Zvýšený přechod pro chodce typu zebra",
+                    "terms": "zpomalovací stůl s přechodem typu zebra,rychlostní stůl s přechodem typu zebra"
                 },
                 "footway/sidewalk": {
                     "name": "Chodník po straně silnice",
@@ -3906,12 +3918,17 @@
                     "name": "Bod přechodu pro chodce",
                     "terms": "přechod,zebra"
                 },
+                "highway/crossing-raised": {
+                    "name": "Bod zvýšeného přechodu pro chodce",
+                    "terms": "zpomalovací stůl s přechodem,rychlostní stůl s přechodem"
+                },
                 "highway/crosswalk": {
                     "name": "Bod přechodu typu zebra",
                     "terms": "přechod pro chodce,zebra,přechod,přechod pro pěší"
                 },
                 "highway/crosswalk-raised": {
-                    "name": "Příčný práh s přechodem"
+                    "name": "Bod zvýšeného přechodu pro chodce typu zebra",
+                    "terms": "zpomalovací stůl s přechodem typu zebra,rychlostní stůl s přechodem typu zebra"
                 },
                 "highway/cycleway": {
                     "name": "Cyklostezka",
@@ -3948,6 +3965,10 @@
                 "highway/motorway_link": {
                     "name": "Dálnice - nájezd",
                     "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
+                },
+                "highway/passing_place": {
+                    "name": "Místo k vyhýbání",
+                    "terms": "vyhýbací záliv"
                 },
                 "highway/path": {
                     "name": "Pěšina",
@@ -5928,7 +5949,22 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "Nejaktuálnější ortofoto Flanders © AGIV"
+                },
+                "name": "Nejaktuálnější letecké snímky AGIV Flanders"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "Ortofoto Flanders © AGIV"
+                },
+                "name": "10cm letecké snímky AGIV Flanders 2013-2015"
+            },
             "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "GRB Flanders © AGIV"
+                },
                 "name": "AGIV Flanders GRB"
             },
             "Bing": {
@@ -5948,7 +5984,7 @@
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
-                    "text": "Podmínky použití & zpětná vazba"
+                    "text": "Podmínky použití a zpětná vazba"
                 },
                 "name": "Standardní snímky DigitalGlobe"
             },
@@ -5959,13 +5995,17 @@
             },
             "EsriWorldImagery": {
                 "attribution": {
-                    "text": "Podmínky použití & zpětná vazba"
-                }
+                    "text": "Podmínky použití a zpětná vazba"
+                },
+                "description": "Světové snímky Esri.",
+                "name": "Světové snímky Esri"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
                     "text": "Podmínky použití a zpětná vazba"
-                }
+                },
+                "description": "Archivní snímky Esri, které mohou být čistší a přesnější jak výchozí vrstva.",
+                "name": "Světové snímky Esri (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {
@@ -6022,6 +6062,9 @@
                     "text": "© Geofabrik GmbH, přispěvatelé OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspektor: Štítkování"
+            },
+            "SPW_ORTHO_LAST": {
+                "name": "Nejaktuálnější snímky SPW(allonie)"
             },
             "US-TIGER-Roads-2012": {
                 "name": "TIGER Roads 2012"
@@ -6094,7 +6137,7 @@
             },
             "mapbox_locator_overlay": {
                 "attribution": {
-                    "text": "Podmínky použití & zpětná vazba"
+                    "text": "Podmínky použití a zpětná vazba"
                 },
                 "name": "Překryv lokátoru"
             },
@@ -6134,6 +6177,9 @@
                 }
             },
             "skobbler": {
+                "attribution": {
+                    "text": "© Dlaždice: skobbler, mapová data: přispěvatelé OpenStreetMap"
+                },
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
@@ -6154,7 +6200,8 @@
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "name": "Železniční síť Trafikverket"
             },
             "trafikverket-baninfo-option": {
                 "attribution": {
@@ -6164,7 +6211,8 @@
             "trafikverket-vagnat": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "name": "Silniční síť Trafikverket"
             },
             "trafikverket-vagnat-extra": {
                 "attribution": {
@@ -6174,17 +6222,147 @@
             "trafikverket-vagnat-navn": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "name": "Názvy ulic Trafikverket"
             },
             "trafikverket-vagnat-option": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "name": "Volby silniční sítě Trafikverket"
             }
         },
         "community": {
+            "cape-coast-youthmappers": {
+                "name": "YouthMappers univerzity v Cape Coast",
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana na Facebooku",
+                "description": "Facebooková skupina pro lidi zajímající se o OpenStreetMap."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana na Twitteru",
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "osm-mg-facebook": {
+                "name": "Facebooková skupina OpenStreetMap Madagaskar"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladéš",
+                "description": "Vylepšete OpenStreetMap v Bangladéši"
+            },
+            "OSM-India-facebook": {
+                "description": "Vylepšete OpenStreetMap v Indii"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter OpenStreetMap Indie",
+                "description": "Zrovna jsme vytweetli: {url}"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonésie",
+                "description": "Vylepšete OpenStreetMap v Indonésii"
+            },
+            "OSM-japan-facebook": {
+                "name": "Japonská komunita OpenStreetMap",
+                "description": "Mapovači a uživatelé OpenStreetMap v Japonsku"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter OpenStreetMap Japonsko",
+                "description": "Hashtag na Twitteru: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japonsko",
+                "description": "Mapovači a uživatelé OpenStreetMap v Japonsku"
+            },
+            "OSM-korea-telegram": {
+                "name": "Telegramový kanál OSM Korea"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malajsie na Facebooku",
+                "description": "Pro chatování o čemkoliv ohledně OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "Malajské fórum OpenStreetMap",
+                "description": "Oficiální malajské fórum OpenStreetMap"
+            },
+            "OSM-MY-matrix": {
+                "description": "Všichni mapovači jsou vítáni! Zaregistrujte se na {signupUrl}"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolsko",
+                "description": "Vylepšete OpenStreetMap v Mongolsku"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Vylepšete OpenStreetMap v Myanmaru"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepál",
+                "description": "Vylepšete OpenStreetMap v Nepálu"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Srí Lanka",
+                "description": "Vylepšete OpenStreetMap na Srí Lance"
+            },
+            "OSM-TW-facebook": {
+                "name": "Tchajwanská komunita OpenStreetMap"
+            },
+            "al-forum": {
+                "name": "Albánské fórum OSM",
+                "description": "Albánské fórum OpenStreetMap"
+            },
+            "at-twitter": {
+                "name": "Twitter OpenStreetMap Rakousko",
+                "description": "OpenStreetMap Rakousko na Twitteru: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Rakousko"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Bělorusko"
+            },
+            "be-facebook": {
+                "description": "Mapovači a uživatelé OpenStreetMap v Belgii"
+            },
+            "czech-community": {
+                "name": "Česká OSM komunita",
+                "description": "Mapový portál, webové stránky a kontakty na členy OSM v ČR"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ na Facebooku"
+            },
+            "osmcz-twitter": {
+                "name": "Český twitter @osmcz"
+            },
             "talk-cz-mailinglist": {
+                "name": "Český mailing list (talk-cz)",
                 "description": "Talk-cz je hlavní komunikační kanál české komunity"
+            },
+            "dk-forum": {
+                "name": "Webové fórum OpenStreetMap Dánsko"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap Francie na Twitteru",
+                "description": "OpenStreetMap Francie na Twitteru: {url}"
+            },
+            "de-berlin-meetup": {
+                "description": "Mapovači a uživatelé OpenStreetMap v oblasti Berlína"
+            },
+            "de-berlin-twitter": {
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "hu-facebook": {
+                "description": "Mapovači a uživatelé OpenStreetMap v Maďarsku"
+            },
+            "it-facebook": {
+                "name": "Facebook OpenStreetMap Itálie"
+            },
+            "it-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
+            "OSM-Rome-meetup": {
+                "description": "Vylepšete OpenStreetMap na území Říma"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -6203,19 +6381,41 @@
                 "name": "Mapování DC",
                 "description": "Vylepšete OpenStreetMap na území DC"
             },
+            "OpenCleveland-meetup": {
+                "description": "Vylepšete OpenStreetMap na území Clevelandu"
+            },
+            "OSM-Boston": {
+                "description": "Mapovači a uživatelé OpenStreetMap na území Bostonu"
+            },
             "OSM-Chattanooga": {
                 "name": "OSM Chattanooga",
                 "description": "Uživatelská skupina OpenStreetMap pro Chatanoogu"
+            },
+            "OSM-Colorado": {
+                "description": "Mapovači a uživatelé OpenStreetMap ve státě Colorado, USA"
             },
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC"
             },
             "OSM-Portland": {
-                "name": "OpenStreetMap Portland"
+                "name": "OpenStreetMap Portland",
+                "description": "Mapovači a uživatelé OpenStreetMap na území Portlandu"
+            },
+            "OSM-Seattle": {
+                "description": "Mapovači a uživatelé OpenStreetMap na území Seattlu"
+            },
+            "OSM-Tampa-Bay": {
+                "description": "Mapovači a uživatelé OpenStreetMap na území Tampa Bay"
             },
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US Slack",
                 "description": "Všichni jsou vítaní! Přihlaste se na {signupUrl}"
+            },
+            "OSM-Utah": {
+                "description": "Mapovači a uživatelé OpenStreetMap na území Salt Lake City"
+            },
+            "OSM-Wyoming": {
+                "description": "Mapovači a uživatelé OpenStreetMap ve státě Wyoming"
             },
             "Maptime-Australia-Slack": {
                 "name": "Maptime Australia Slack",

@@ -430,7 +430,12 @@
                 "edited_by": "编辑者",
                 "changeset": "变更集合",
                 "unknown": "未知",
-                "link_text": "在 openstreetmap.org 上的历史记录"
+                "link_text": "在 openstreetmap.org 上的历史记录",
+                "note_no_history": "无历史记录（新笔记）",
+                "note_comments": "评论数",
+                "note_created_date": "创建时间",
+                "note_created_user": "创建者",
+                "note_link_text": "在 openstreetmap.org 上的笔记"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "顶点",
             "line": "线",
             "area": "区域",
-            "relation": "关系"
+            "relation": "关系",
+            "note": "笔记"
         },
         "geocoder": {
             "search": "在全球搜索...",
@@ -523,8 +529,6 @@
             "best_imagery": "此地最知名的影像数据源",
             "switch": "切换回该底图",
             "custom": "自定义",
-            "custom_button": "编辑自定义背景",
-            "custom_prompt": "输入地图瓦片URL地址。有效的参数有：\n   - {zoom} 或 {z}, {x}, {y} 作为 Z/X/Y 坐标系\n   - {-y} 或 {ty} 作为翻转的 TMS 算法 Y 坐标\n   - {u} 作为四叉树坐标编码\n   - {switch:a,b,c} 作为 DNS 服务器解析的并行连接子域\n\n示例：\n{example}",
             "overlays": "叠加图层",
             "imagery_source_faq": "影像信息 / 报告问题",
             "reset": "重置",
@@ -624,6 +628,16 @@
             "full": {
                 "description": "全部填充",
                 "tooltip": "在区域内全部填充。"
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "编辑自定义背景",
+                "header": "自定义背景设置",
+                "instructions": "输入地图瓦片URL地址。有效的参数有：\n   {zoom} 或 {z}, {x}, {y} 作为 Z/X/Y 坐标系\n   {-y} 或 {ty} 作为翻转的 TMS 算法 Y 坐标\n   {u} 作为四叉树坐标编码\n   {switch:a,b,c} 作为 DNS 服务器解析的并行连接子域\n\n示例：\n{example}",
+                "template": {
+                    "placeholder": "输入URL地址"
+                }
             }
         },
         "restore": {
@@ -727,18 +741,6 @@
         },
         "cannot_zoom": "在此模式下不能再缩小",
         "full_screen": "切换全屏",
-        "gpx": {
-            "local_layer": "上传 GPX 文件",
-            "drag_drop": "将.gpx、.geojson或.kml文件拖放到页面上，或单击右侧的按钮浏览",
-            "zoom": "缩放到图层",
-            "browse": "浏览文件"
-        },
-        "mvt": {
-            "local_layer": "上传 MVT 文件",
-            "drag_drop": "将 .mvt 或 .pbf 文件拖放到页面上，或单击右侧的按钮浏览",
-            "zoom": "缩放到图层",
-            "browse": "浏览文件"
-        },
         "streetside": {
             "tooltip": "来自微软公司的街景照片",
             "title": "照片叠加层 (必应 Streetside)",
@@ -770,6 +772,12 @@
             "anonymous": "匿名用户",
             "closed": "(已关闭)",
             "commentTitle": "评论",
+            "status": {
+                "opened": "创建于 {when}",
+                "reopened": "重启于 {when}",
+                "commented": "评论于 {when}",
+                "closed": "关闭于 {when}"
+            },
             "newComment": "发表新评论",
             "inputPlaceholder": "输入评论并分享给其他用户。",
             "close": "解决笔记",
@@ -1316,31 +1324,24 @@
                     "label": "允许通行",
                     "options": {
                         "designated": {
-                            "description": "只限标志指定或特定本地法律容许的人士、车辆进入",
                             "title": "指定"
                         },
                         "destination": {
-                            "description": "只限前往目的地人士进入",
                             "title": "目的地"
                         },
                         "dismount": {
-                            "description": "允许通行但必须下车",
                             "title": "下车"
                         },
                         "no": {
-                            "description": "禁止一般公众进入",
                             "title": "禁止"
                         },
                         "permissive": {
-                            "description": "容许进入，直至拥有者撤回许可",
                             "title": "默许"
                         },
                         "private": {
-                            "description": "须拥有者个别批准，方可进入",
                             "title": "私人"
                         },
                         "yes": {
-                            "description": "按法律及路权，有权使用",
                             "title": "允许"
                         }
                     },
@@ -1361,14 +1362,14 @@
                     "placeholders": {
                         "block_number": "街区编号",
                         "block_number!jp": "街区号",
-                        "city": "地级市/自治州",
+                        "city": "地级市/地区/自治州/盟",
                         "city!jp": "市/镇/村/东京都特别区",
                         "city!vn": "市/镇",
                         "conscriptionnumber": "123号",
                         "country": "国家",
                         "county": "郡",
                         "county!jp": "郡 (日本)",
-                        "district": "市辖区/县/县级市",
+                        "district": "市辖区/县级市/县/自治县/旗/旗/特区/林区",
                         "district!vn": "郡/镇/区",
                         "floor": "楼层",
                         "hamlet": "村庄",
@@ -1379,7 +1380,7 @@
                         "neighbourhood!jp": "丁目/字/小字",
                         "place": "地方",
                         "postcode": "邮政编码",
-                        "province": "省/自治区/特别行政区",
+                        "province": "省/自治区/特别行政区/直辖市",
                         "province!jp": "日本县",
                         "quarter": "地方",
                         "quarter!jp": "大字/町",
@@ -2768,7 +2769,7 @@
                     "terms": "物资缆车"
                 },
                 "aerialway/magic_carpet": {
-                    "name": "魔毯电梯",
+                    "name": "滑雪场魔毯传送带",
                     "terms": "魔毯,传送带式电梯"
                 },
                 "aerialway/mixed_lift": {
@@ -2880,10 +2881,6 @@
                     "name": "自行车维修工具站",
                     "terms": "自行车维修工具站"
                 },
-                "amenity/biergarten": {
-                    "name": "啤酒花园",
-                    "terms": "啤酒花园"
-                },
                 "amenity/boat_rental": {
                     "name": "船舶租赁处",
                     "terms": "船舶租赁处"
@@ -2898,6 +2895,10 @@
                 "amenity/cafe": {
                     "name": "咖啡馆",
                     "terms": "咖啡,茶,咖啡厅,咖啡馆,茶座,摩卡,拿铁,馥芮白,玛奇朵,卡布奇诺,红茶,黄茶,清茶,青茶,绿茶,花茶,黑茶,白茶,乌龙,咖啡豆,餐馆,餐厅"
+                },
+                "amenity/car_pooling": {
+                    "name": "拼车",
+                    "terms": "拼车"
                 },
                 "amenity/car_rental": {
                     "name": "汽车租赁",
@@ -3222,8 +3223,8 @@
                     "name": "游泳池"
                 },
                 "amenity/taxi": {
-                    "name": "出租车站",
-                    "terms": "出租车站,的士站,计程车站"
+                    "name": "出租车停车处",
+                    "terms": "出租车停车处,的士停车处,计程车停车处"
                 },
                 "amenity/telephone": {
                     "name": "电话",
@@ -3259,11 +3260,11 @@
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "避孕套售货机",
-                    "terms": "避孕套,安全套,避孕,售货,售卖,自助,自动,付货,零售,贩卖,售货机,贩卖机"
+                    "terms": "计生用品,避孕套,安全套,避孕,售货,售卖,自助,自动,付货,零售,贩卖,售货机,贩卖机"
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "饮料售货机",
-                    "terms": "饮料,饮品,售货,售卖,自助,自动,付货,零售,贩卖,售货机,贩卖机,水,果汁,汽水,咖啡,奶茶,茶"
+                    "terms": "饮料,饮品,售货,售卖,自助,自动,付货,零售,贩卖,售货机,贩卖机,水,矿泉水,果汁,汽水,咖啡,奶茶,茶"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "电器售货机",
@@ -3713,7 +3714,7 @@
                 },
                 "craft/electronics_repair": {
                     "name": "电子用品修理商店",
-                    "terms": "电子修理商店,电子用品修理点"
+                    "terms": "电子修理商店,电子用品修理点,家电维修"
                 },
                 "craft/gardener": {
                     "name": "园艺工",
@@ -3860,6 +3861,9 @@
                 "emergency/fire_hydrant": {
                     "name": "消防栓",
                     "terms": "消防栓"
+                },
+                "emergency/first_aid_kit": {
+                    "name": "急救包"
                 },
                 "emergency/life_ring": {
                     "name": "救生圈",
@@ -4132,7 +4136,7 @@
                     "terms": "辅助道路"
                 },
                 "highway/service/alley": {
-                    "name": "窄路 (机动车通行)",
+                    "name": "窄路/巷",
                     "terms": "胡同,巷,弄堂,里弄,小巷,巷,弄,巷弄（可通行机动车）"
                 },
                 "highway/service/drive-through": {
@@ -5781,6 +5785,10 @@
                     "name": "摩托车店",
                     "terms": "摩托车行,摩托车"
                 },
+                "shop/motorcycle_repair": {
+                    "name": "摩托车修理店",
+                    "terms": "摩托车修理店"
+                },
                 "shop/music": {
                     "name": "音乐店",
                     "terms": "音乐店"
@@ -6600,6 +6608,10 @@
             "OSM-japan-website": {
                 "name": "OpenStreetMap 日本",
                 "description": "位于日本的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-korea-telegram": {
+                "name": "OSM 韩国电报频道",
+                "description": "非官方的频道，用于韩国的 OpenStreetMap 贡献者、社区和用户的分享与讨论。"
             },
             "OSM-MY-forum": {
                 "name": "OpenStreetMap 马来西亚论坛",

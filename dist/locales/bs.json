@@ -317,27 +317,21 @@
                 "access": {
                     "options": {
                         "designated": {
-                            "description": "Pristup dozvoljen u skladu sa saobraćajnim znakovima ili posebnim lokalnim zakonima",
                             "title": "Namjenski"
                         },
                         "destination": {
-                            "description": "Pristup dozvoljen samo kako bi se dostiglo odredište",
                             "title": "Odredište"
                         },
                         "no": {
-                            "description": "Pristup nije dozvoljen za širu javnost",
                             "title": "Zabranjeno"
                         },
                         "permissive": {
-                            "description": "Pristup dozvoljen sve dok vlasnik ne povuče dozvolu",
                             "title": "Propustljiv"
                         },
                         "private": {
-                            "description": "Pristup dozvoljen samo uz dozvolu vlasnika na ličnoj bazi",
                             "title": "Privatan"
                         },
                         "yes": {
-                            "description": "Pristup dozvoljen zakonom: pravo prvenstva prolaza",
                             "title": "Dozvoljeno"
                         }
                     },

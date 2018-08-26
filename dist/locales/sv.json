@@ -22,9 +22,9 @@
                 "tail": "Klicka på kartan för att lägga till en punkt."
             },
             "add_note": {
-                "title": "Notering",
+                "title": "Anteckning",
                 "description": "Hittat ett problem? Låt andra kartläggare få veta det. ",
-                "tail": "Klicka på kartan för att lägga till en notering. "
+                "tail": "Klicka på kartan för att lägga till en anteckning. "
             },
             "browse": {
                 "title": "Navigera",
@@ -46,7 +46,7 @@
                     "point": "Lade till en punkt.",
                     "vertex": "Lade till en nod till en linje.",
                     "relation": "Lade till en relation.",
-                    "note": "Lägg till en notering. "
+                    "note": "Lagt till en anteckning."
                 }
             },
             "start": {
@@ -430,7 +430,12 @@
                 "edited_by": "Redigerad av",
                 "changeset": "Ändringsset",
                 "unknown": "Okänd",
-                "link_text": "Historik på openstreetmap.org"
+                "link_text": "Historik på openstreetmap.org",
+                "note_no_history": "Ingen historik (ny anteckning)",
+                "note_comments": "Kommentarer",
+                "note_created_date": "Skapad den",
+                "note_created_user": "Skapad av",
+                "note_link_text": "Anteckning på openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "hörn",
             "line": "linje",
             "area": "område",
-            "relation": "relation"
+            "relation": "relation",
+            "note": "anteckning"
         },
         "geocoder": {
             "search": "Sök hela världen...",
@@ -523,8 +529,6 @@
             "best_imagery": "Populäraste källan till flygfoton för den här platsen",
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
-            "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga nycklar är:\n  - {zoom} eller {z}, {x}, {y} enligt Z/X/Y-schema\n  - {-y} eller {ty} för Y-koordinat enligt omvänd TMS-stil\n  - {u} för QuadTile-scheman\n  - {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
             "overlays": "Bildlager",
             "imagery_source_faq": "Info om flygfotot / Rapportera ett problem",
             "reset": "ta bort",
@@ -552,8 +556,8 @@
                     "title": "OpenStreetMap-data"
                 },
                 "notes": {
-                    "tooltip": "Noteringar från OpenStreetMap",
-                    "title": "OpenStreetMap-noteringar"
+                    "tooltip": "Anteckning från OpenStreetMap",
+                    "title": "OpenStreetMap-anteckningar"
                 }
             },
             "fill_area": "Fyllda områden",
@@ -624,6 +628,16 @@
             "full": {
                 "description": "Fullt ifyllda",
                 "tooltip": "Områden är ritade fullt ifyllda."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Ändra anpassad bakgrund",
+                "header": "Inställningar för anpassad bakgrund",
+                "instructions": "Ange en URL-mall för plattor. Giltiga nycklar är:\n   {zoom} eller {z}, {x}, {y} enligt Z/X/Y-schema\n   {-y} eller {ty} för Y-koordinat enligt omvänd TMS-stil\n   {u} för QuadTile-scheman\n   {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
+                "template": {
+                    "placeholder": "Ange en url-mall"
+                }
             }
         },
         "restore": {
@@ -727,18 +741,6 @@
         },
         "cannot_zoom": "Går ej att zooma ut ytterligare i nuvarande läge. ",
         "full_screen": "Växla fullskärm",
-        "gpx": {
-            "local_layer": "Lägg till en GPX",
-            "drag_drop": "Dra och släpp en .gpx-, .geojson- eller .kml-fil på sidan, eller klicka på knappen till höger för att bläddra",
-            "zoom": "Zooma till lager",
-            "browse": "Bläddra efter en fil"
-        },
-        "mvt": {
-            "local_layer": "Lägg till en MVT",
-            "drag_drop": "Drag och släpp en .mvt- eller .pbf-fil på sidan, eller klicka på knappen till höger för att bläddra.",
-            "zoom": "Zooma till lager",
-            "browse": "Bläddra efter en fil"
-        },
         "streetside": {
             "tooltip": "Gatubilder från Microsoft",
             "title": "Bildlager (Bing Streetside)",
@@ -765,23 +767,29 @@
             "view_on_openstreetcam": "Visa denna bild på OpenStreetCam"
         },
         "note": {
-            "note": "Notering",
-            "title": "Ändra notering",
+            "note": "Anteckning",
+            "title": "Ändra anteckning",
             "anonymous": "anonym",
             "closed": "(Stängd)",
             "commentTitle": "Kommentarer",
+            "status": {
+                "opened": "öppnad {when}",
+                "reopened": "återöppnad {when}",
+                "commented": "kommenterad {when}",
+                "closed": "stängd {when}"
+            },
             "newComment": "Ny kommentar",
             "inputPlaceholder": "Skriv en kommentar att dela med andra användare.",
-            "close": "Stäng notering",
-            "open": "Öppna notering igen",
+            "close": "Stäng anteckning",
+            "open": "Öppna anteckning igen",
             "comment": "Kommentera",
             "close_comment": "Stäng och kommentera",
             "open_comment": "Öppna igen och kommentera",
             "report": "Anmäl",
-            "new": "Ny notering",
+            "new": "Ny anteckning",
             "newDescription": "Beskriv problemet. ",
-            "save": "Spara notering",
-            "login": "Du måste logga in för att ändra eller kommentera den här noteringen.",
+            "save": "Spara anteckning",
+            "login": "Du måste logga in för att ändra eller kommentera den här anteckningen.",
             "upload_explanation": "Dina kommentarer kommer att vara synliga för alla OpenStreetMap-användare.",
             "upload_explanation_with_user": "Dina kommentarer som {user} kommer att vara synliga för alla OpenStreetMap-användare."
         },
@@ -794,7 +802,7 @@
                 "open_data_h": "Öppen data",
                 "open_data": "Ändringar du gör på kartan kommer att vara synliga för alla som använder OpenStreetMap. Dina ändringar kan vara baserade på egen kunskap, undersökningar på plats eller bilder  som samlats in från flyg eller på gatunivå. Kopiering från kommersiella källor, till exempel Google Maps, är [strängt förbjudet](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Innan du börjar",
-                "before_start": "Du bör vara bekant med OpenStreetMap och denna redigerare innan du börja redigera. iD har en genomgång för att lära dig grunderna i att redigera på OpenStreetMap. Klicka på \"Starta genomgången\" på skärmen för att komma till genomgången - det tat bara omkring 15 minuter. ",
+                "before_start": "Du bör vara bekant med OpenStreetMap och denna redigerare innan du börja redigera. iD har en genomgång för att lära dig grunderna i att redigera på OpenStreetMap. Klicka på \"Starta genomgången\" på skärmen för att komma till genomgången – det tat bara omkring 15 minuter. ",
                 "open_source_h": "Öppen källkod",
                 "open_source": "iD-redigeraren är ett open source-projekt gemensamt framtaget av dess användare, och du använder nu version {version}. Källkoden finns tillgänglig [på GitHub](https://github.com/openstreetmap/iD).",
                 "open_source_help": "Du kan hjälpa iD genom att [översätta text](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) och [rapportera buggar](https://github.com/openstreetmap/iD/issues)."
@@ -894,7 +902,7 @@
                 "modify_area_dragnode": "Ofta ser du områden som inte har korrekt form, t.ex. en byggnad som inte helt matchar med bakgrundsbilden. För att justera formen på ett område, {leftclick} vänsterklicka först på den för att markera den. Alla noder längst området kommer att visas som små cirklar. Du kan dra och flytta noderna till bättre platser.",
                 "modify_area_addnode": "Du kan även skapa nya noder längst ett område genom att {leftclick}**x2** dubbelklicka på kanten till området eller genom att dra i den lilla triangeln mellan noder.",
                 "delete_area_h": "Radera områden",
-                "delete_area": "Om ett område är helt fel, t.ex. om en byggnad inte existerar i verkligheten, är det ok att radera den. Var försiktig när du radera objekt - bakgrundsbilden du använder kan vara föråldrad, och en byggnad som ser fel ut kan helt enkelt vara nybyggd.",
+                "delete_area": "Om ett område är helt fel, t.ex. om en byggnad inte existerar i verkligheten, är det ok att radera den. Var försiktig när du radera objekt – bakgrundsbilden du använder kan vara föråldrad, och en byggnad som ser fel ut kan helt enkelt vara nybyggd.",
                 "delete_area_command": "För att radera ett område, {rightclick} högerklicka på området för att markera det och visa redigeramenyn. Använd sedan kommandot {delete} **Radera**."
             },
             "relations": {
@@ -923,15 +931,15 @@
                 "boundary_add": "För att lägga till ett objekt till en gräns-relation, välj objektet och bläddra ned till sektionen \"Alla relationer\" i objektredigeraren. Klicka sedan på knappen {plus} **Lägg till** för att lägga till detta objekt till en närliggande existerande relation eller en ny relation."
             },
             "notes": {
-                "title": "Noteringar",
-                "intro": "*Noteringar* används för att uppmärksamma andra användare att ett objekt behöver fixas eller bearbetas. Noteringar markerar en specifik plats på kartan. För att se existerande noteringar eller lägga till nya, klicka på panelen  {data} **Kartdata** för att aktivera lagret OpenStreetMap-noteringar. ",
-                "add_note_h": "Lägga till noteringar",
-                "add_note": "För att lägga till en ny notering, klicka på knappen {note} **Notering** i verktygsraden ovanför kartan, eller trycka kortkommandot `4`. Detta kommer att ändra muspekaren till ett kryss. För att placera den nya noteringen på kartan, placera muspekaren där noteringen ska vara och vänsterklicka {leftclick} eller tryck `Mellanslag`. ",
-                "move_note": "Bara nya noteringar kan flyttas. För att flytta en notering, placera muspekaren över den nya noteringen och tryck sedan och håll ned {leftclick} vänster musknapp medan du dra noteringen till dess nya placering. ",
+                "title": "Anteckningar",
+                "intro": "*Anteckningar* används för att uppmärksamma andra användare att ett objekt behöver fixas eller bearbetas. Anteckningar markerar en specifik plats på kartan. För att se existerande anteckningar eller lägga till nya, klicka på panelen  {data} **Kartdata** för att aktivera lagret OpenStreetMap-anteckningar. ",
+                "add_note_h": "Lägga till anteckningar",
+                "add_note": "För att lägga till en ny anteckning, klicka på knappen {note} **Anteckning** i verktygsraden ovanför kartan, eller trycka kortkommandot `4`. Detta kommer att ändra muspekaren till ett kryss. För att placera den nya anteckningen på kartan, placera muspekaren där anteckningen ska vara och vänsterklicka {leftclick} eller tryck `Mellanslag`. ",
+                "move_note": "Bara nya anteckningar kan flyttas. För att flytta en anteckning, placera muspekaren över den nya anteckningen och tryck sedan och håll ned {leftclick} vänster musknapp medan du dra anteckningen till dess nya placering. ",
                 "update_note_h": "Stänga, återöppna och kommentera",
-                "update_note": "En existerande notering kan uppdateras genom att stänga den, återöppna den, eller genom att lägga till en kommentar till den. Genom att stänga en notering indikerar du att problemet har lösts. Genom att återöppna en notering indikerar du att det ursprungliga problemet inte är löst. ",
-                "save_note_h": "Spara noteringar",
-                "save_note": "Du måste spara alla ändringar du gör på noteringar individuellt genom att klicka på knapparna under noteringens kommentarer. Ändringar på noteringar inkluderas **inte** i ändringset du laddar upp till OpenStreetMap."
+                "update_note": "En existerande anteckning kan uppdateras genom att stänga den, återöppna den, eller genom att lägga till en kommentar till den. Genom att stänga en anteckning indikerar du att problemet har lösts. Genom att återöppna en anteckning indikerar du att det ursprungliga problemet inte är löst. ",
+                "save_note_h": "Spara anteckningar",
+                "save_note": "Du måste spara alla ändringar du gör på anteckningar individuellt genom att klicka på knapparna under anteckningens kommentarer. Ändringar på anteckningar inkluderas **inte** i ändringsset du laddar upp till OpenStreetMap."
             },
             "imagery": {
                 "title": "Bakgrundsbilder",
@@ -957,7 +965,7 @@
                 "survey": "För information om hur du utför en GPS-uppmätning, läs [Kartlägg med en smartmobil, GPS eller papper](http://learnosm.org/en/mobile-mapping/).",
                 "using_h": "Använda GPS-spår",
                 "using": "För att använda ett GPS-spår vid kartläggning, dra och släpp datafilen på kartredigeraren. Om den har ett känt format kommer den att ritas på kartan med en ljus lila linje. Klicka på panelen {data} **Kartdata** vid sidan av kartan för att aktivera, avaktivera eller zooma din GPS-data.",
-                "tracing": "GPS-spåret skickas inte till OpenStreetMap - bästa sättet att använda den är att rita på kartan användandes den som guide för nya objekt du lägger till.",
+                "tracing": "GPS-spåret skickas inte till OpenStreetMap – bästa sättet att använda den är att rita på kartan användandes den som guide för nya objekt du lägger till.",
                 "upload": "Du kan även [ladda upp dina GPS-data till OpenStreetMap](https://www.openstreetmap.org/trace/create) så att andra kan använda det."
             },
             "field": {
@@ -1327,8 +1335,8 @@
                     "add_point": "'Lägg till punkt'-läge",
                     "add_line": "'Lägg till linje'-läge",
                     "add_area": "'Lägg till område'-läge",
-                    "add_note": "'Lägg till notering'-läge",
-                    "place_point": "Placera en punkt eller notering",
+                    "add_note": "'Lägg till anteckning'-läge",
+                    "place_point": "Placera en punkt eller anteckning",
                     "disable_snap": "Hindra att punkter kopplas samman",
                     "stop_line": "Slutför linje eller område"
                 },
@@ -1454,11 +1462,15 @@
                         },
                         "no": {
                             "description": "Tillträde ej tillåten för allmänheten",
-                            "title": "Förbjudet"
+                            "title": "Förbjuden"
                         },
                         "permissive": {
                             "description": "Tillträde tillåten fram till dess ägare återkallar tillståndet",
                             "title": "Påbjuden"
+                        },
+                        "permit": {
+                            "description": "Tillträde tillåten enbart med giltigt tillstånd eller licens",
+                            "title": "Tillstånd"
                         },
                         "private": {
                             "description": "Tillträde tillåten endast med tillstånd av ägaren på individuell basis",
@@ -1466,7 +1478,7 @@
                         },
                         "yes": {
                             "description": "Tillträde är tillåtet enligt lag",
-                            "title": "Tillåtna"
+                            "title": "Tillåten"
                         }
                     },
                     "placeholder": "Ej specificerat",
@@ -2031,7 +2043,7 @@
                     }
                 },
                 "horse_scale": {
-                    "label": "Svårighetsgrad - Ridning",
+                    "label": "Svårighetsgrad – Ridning",
                     "options": {
                         "common": "Lätt: Inga problem eller svårigheter (standard).",
                         "critical": "Gränsfall: Passar endast för erfarna ryttare och hästar. Större hinder. Broar bör undersökas noggrant.",
@@ -2208,7 +2220,7 @@
                     "label": "Mäter"
                 },
                 "mtb/scale": {
-                    "label": "Svårighetsgrad - Mountainbike",
+                    "label": "Svårighetsgrad – Mountainbike",
                     "options": {
                         "0": "0: Fast grus/packad jord, inga hinder, breda kurvor",
                         "1": "1: Delvis löst underlag, små hinder, breda kurvor",
@@ -2232,7 +2244,7 @@
                     "placeholder": "Enkel, medel, svår..."
                 },
                 "mtb/scale/uphill": {
-                    "label": "Svårighetsgrad - Mountainbike uppför",
+                    "label": "Svårighetsgrad – Mountainbike uppför",
                     "options": {
                         "0": "0: Genomsnittlig lutning <10%, grus/packad jord, inga hinder",
                         "1": "1: Genomsnittlig lutning <15%, grus/packad jord, få små hinder",
@@ -3053,7 +3065,7 @@
                 },
                 "amenity/biergarten": {
                     "name": "Ölträdgård",
-                    "terms": "ölträdgård, Biergarten, uteservering,ölcafé, utecafé, trädgårdspub, öl, sprit"
+                    "terms": "ölträdgård, Biergarten, uteservering, servering, ölcafé, utecafé, trädgårdspub, utepub, pub, öl, sprit, utebar, trädgårdsbar, bar, krog"
                 },
                 "amenity/boat_rental": {
                     "name": "Båtuthyrning",
@@ -4079,10 +4091,10 @@
                     "terms": "Defibrillator, hjärtstartare, hjärthjälp"
                 },
                 "emergency/designated": {
-                    "name": "Åtkomst för utryckningsfordon - Avsedd för"
+                    "name": "Åtkomst för utryckningsfordon – Avsedd för"
                 },
                 "emergency/destination": {
-                    "name": "Åtkomst för utryckningsfordon - Destination"
+                    "name": "Åtkomst för utryckningsfordon – Destination"
                 },
                 "emergency/fire_alarm": {
                     "name": "Nödtelefon",
@@ -4109,17 +4121,17 @@
                     "terms": "badvakt, livräddare, CPR, räddning, strandvakt, Lifeguard"
                 },
                 "emergency/no": {
-                    "name": "Åtkomst för utryckningsfordon - Nej"
+                    "name": "Åtkomst för utryckningsfordon – Nej"
                 },
                 "emergency/official": {
-                    "name": "Åtkomst för utryckningsfordon - Officiellt"
+                    "name": "Åtkomst för utryckningsfordon – Officiellt"
                 },
                 "emergency/phone": {
                     "name": "Nödtelefon",
                     "terms": "Nödtelefon, alarmeringscentral, nödnummer, larmtelefon, alarmtelefon"
                 },
                 "emergency/private": {
-                    "name": "Åtkomst för utryckningsfordon - Ja"
+                    "name": "Åtkomst för utryckningsfordon – Privat"
                 },
                 "emergency/siren": {
                     "name": "Siren",
@@ -4130,7 +4142,7 @@
                     "terms": "Vattentank för brandsläckning, vattentank, nödtank, brandsläckningstank, brand, brandsläckning, nöd, vatten, tank, kris, reservoar, räddning, vattensamling, lagringstank, tank, cistern, vattentorn"
                 },
                 "emergency/yes": {
-                    "name": "Åtkomst för utryckningsfordon - Ja"
+                    "name": "Åtkomst för utryckningsfordon – Ja"
                 },
                 "entrance": {
                     "name": "In-/Utgång",
@@ -4841,6 +4853,10 @@
                     "name": "Plan för amerikansk fotboll",
                     "terms": "Amerikansk fotboll, Amerikansk fotbollsplan, football"
                 },
+                "leisure/pitch/badminton": {
+                    "name": "Badmintonplan",
+                    "terms": "Badmintonplan, badminton, Badmintonbana, fjäderboll"
+                },
                 "leisure/pitch/baseball": {
                     "name": "Baseballplan",
                     "terms": "Baseball, baseballplan, baseball-plan"
@@ -4965,6 +4981,10 @@
                     "name": "Bro",
                     "terms": "bro, viadukt, akvedukt, vägport, överfart, spång, övergång, förbindelse, fällbro, vridbro"
                 },
+                "man_made/bunker_silo": {
+                    "name": "Plansilo",
+                    "terms": "Plansilo, Ensilage, pressfoder, silo, lager, foder, djurfoder, spannmålslagring, spannmål, spannmålssilo,fodersilo"
+                },
                 "man_made/chimney": {
                     "name": "Skorsten",
                     "terms": "skorsten, rökgång"
@@ -5034,7 +5054,7 @@
                 },
                 "man_made/silo": {
                     "name": "Silo",
-                    "terms": "Silo, spannmålslagring, spannmål, spannmålssilo, fodersilo"
+                    "terms": "Ensilage, pressfoder, silo, lager, foder, djurfoder, spannmålslagring, spannmål, spannmålssilo,fodersilo"
                 },
                 "man_made/storage_tank": {
                     "name": "Lagringstank",
@@ -6670,7 +6690,7 @@
                 "attribution": {
                     "text": "Ortofoto Flandern © AGIV"
                 },
-                "name": "AGIV Flandern 2013-2015 flygfoton 10cm"
+                "name": "AGIV Flandern 2013–2015 flygfoton 10 cm"
             },
             "AGIVFlandersGRB": {
                 "attribution": {
@@ -6700,7 +6720,7 @@
                 "attribution": {
                     "text": "Villkor & återkoppling"
                 },
-                "description": "DigitalGlobe-Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30-60 cm upplösning där den är tillgänglig och Landsat för övrig yta. Medelåldern är 2,31 år och vissa områden uppdaterade 2 gånger per år.",
+                "description": "DigitalGlobe-Standard är en kuraterad bildserie som täcker 86% av jordens landmassa, med 30–60 cm upplösning där den är tillgänglig och Landsat för övrig yta. Medelåldern är 2,31 år och vissa områden uppdaterade 2 gånger per år.",
                 "name": "DigitalGlobe Standard-bilder"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6803,25 +6823,25 @@
             },
             "UrbISOrtho2016": {
                 "attribution": {
-                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© – Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2016"
             },
             "UrbISOrtho2017": {
                 "attribution": {
-                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© – Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
             },
             "UrbisAdmFR": {
                 "attribution": {
-                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© – Distribution & Copyright CIRB"
                 },
                 "name": "UrbisAdm FR"
             },
             "UrbisAdmNL": {
                 "attribution": {
-                    "text": "Realiserad med hjälp från Bryssel UrbIS®© - Distribution & Copyright CIRB"
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© – Distribution & Copyright CIRB"
                 },
                 "name": "UrbisAdm NL"
             },
@@ -6875,6 +6895,27 @@
                 },
                 "name": "Vandring & cykel"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi snöskoterleder från OSM (Nordisk täckning)",
+                "name": "Bildlager med nordiska skoterleder"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaik av svenska ortofoton från perioden 1955–1965. Äldre och yngre bilder kan förekomma.",
+                "name": "Lantmäteriets historiska ortofoton 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaik av svenska ortofoton från perioden 1970–1980. Är under uppbyggnad.",
+                "name": "Lantmäteriets historiska ortofoton 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Villkor & återkoppling"
@@ -6911,8 +6952,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Inskanning av den Ekonomiska kartan från ca 1950–1980",
-                "name": "Lantmäteriets Ekonomiska karta (historisk)"
+                "description": "Inskanning av \"Ekonomisk karta\" från ungefär 1950–1980",
+                "name": "Lantmäteriets Ekonomiska karta 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6925,6 +6966,13 @@
                     "text": "© Plattor: skobbler Kartdata: OpenStreetMaps contributors"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snöskoterleder",
+                "name": "Snöskoterkarta, Sverige"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6976,7 +7024,7 @@
                 "attribution": {
                     "text": "© Trafikverket, CC0"
                 },
-                "description": "Svenska nationella vägdatabasen, NVDB - Gatunamn",
+                "description": "Svenska nationella vägdatabasen, NVDB – Gatunamn",
                 "name": "Trafikverkets gaturnamn"
             },
             "trafikverket-vagnat-option": {
@@ -6988,6 +7036,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Kartlägg Botswana på Facebook",
+                "description": "Sida om OpenStreetMap i Botswana"
+            },
+            "bw-twitter": {
+                "name": "Kartlägg Botswana på Twitter",
+                "description": "Twitter om OpenStreetMap i Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
                 "description": "Följ oss på Twitter: {url}",
@@ -7020,7 +7076,7 @@
                 "extendedDescription": "Kartlägger i Bangladesh? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {url}. Alla är välkomna!"
             },
             "OSM-India-facebook": {
-                "name": "OpenStreetMap Indien - Användarstödd kartläggning av grannskapet",
+                "name": "OpenStreetMap Indien – Användarstödd kartläggning av grannskapet",
                 "description": "Förbättra OpenStreetMap i Indien",
                 "extendedDescription": "Kartlägger i Indien? Har du frågor, vill komma i kontakt med gemenskapen här? Gå med på {url}. Alla är välkomna!",
                 "events": {
@@ -7040,12 +7096,12 @@
                 "description": "Vi är bara ett tweet iväg: {url}"
             },
             "OSM-India-Puducherry-Facebook": {
-                "name": "Rörelsen för fri mjukvara och hårdvara - Facebook",
+                "name": "Rörelsen för fri mjukvara och hårdvara – Facebook",
                 "description": "Facebook-sidan FSHM för att få veta om evenemang och aktiviteter",
                 "extendedDescription": "FSHM organiserar evenemang relaterade till gratis mjukvara/hårdvara, teknologi, aktivism och OpenStreetMap. Dess Facebook-sida är det bästa vägen att hålla kontakten med dess evenemang."
             },
             "OSM-India-Puducherry-Matrix": {
-                "name": "Rörelsen för fri mjukvara och hårdvara - Matrix",
+                "name": "Rörelsen för fri mjukvara och hårdvara – Matrix",
                 "description": "FSHM:s Riot-grupp för att diskutera, dela och uppdatera om kartläggningsaktiviteter och evenemang i och omkring Puducherry",
                 "extendedDescription": "FSHM:s medlemmar delar sina kartläggningsuppdateringar / -erfarenheter i OSM genom Riot.im-gruppen, denna grupp används även för att diskutera saker relaterade till fri mjukvara / hårdvara, teknologi och aktivism."
             },
@@ -7157,7 +7213,7 @@
             },
             "al-maptime-tirana": {
                 "name": "Maptime Tirana",
-                "description": "Sociala evenemang organiserade runt kartläggning - nybörjare är varmt välkomna!",
+                "description": "Sociala evenemang organiserade runt kartläggning – nybörjare är varmt välkomna!",
                 "extendedDescription": "Maptime är en öppen inlärningsmiljö för alla kunskapsnivåer, och erbjuder riktat pedagogiskt stöd till nybörjaren. Maptime är både flexibel och strukturerad, vilket skapar möjlighet för kartläggningsguider, workshops, pågående projekt med gemensamt mål samt arbetstid för oberoende projekt eller samarbetande."
             },
             "al-telegram": {
@@ -7211,7 +7267,7 @@
             },
             "be-maptime": {
                 "name": "Maptime Belgien",
-                "description": "Sociala evenemang organiserade runt kartläggning - nybörjare är varmt välkomna!",
+                "description": "Sociala evenemang organiserade runt kartläggning – nybörjare är varmt välkomna!",
                 "extendedDescription": "Maptime är en öppen inlärningsmiljö för alla kunskapsnivåer, och erbjuder riktat pedagogiskt stöd till nybörjaren. Maptime är både flexibel och strukturerad, vilket skapar möjlighet för kartläggningsguider, workshops, pågående projekt med gemensamt mål samt arbetstid för oberoende projekt eller samarbetande."
             },
             "be-matrix": {
@@ -7246,11 +7302,11 @@
             },
             "osmcz-facebook": {
                 "name": "OpenStreetMap CZ på Facebook",
-                "description": "Följ tjeckiska gemenskapen på Facebook - inklusive översatt WeeklyOSM!"
+                "description": "Följ tjeckiska gemenskapen på Facebook – inklusive översatt WeeklyOSM!"
             },
             "osmcz-twitter": {
                 "name": "Tjeckiska twitter @osmcz",
-                "description": "Följ tjeckiska gemenskapen på Twitter - inklusive översatt WeeklyOSM!"
+                "description": "Följ tjeckiska gemenskapen på Twitter – inklusive översatt WeeklyOSM!"
             },
             "talk-cz-mailinglist": {
                 "name": "Tjeckisk e-postlista (talk-cz)",
@@ -7351,6 +7407,18 @@
             "hu-meetup": {
                 "name": "OpenStreetMap Ungern på Meetup",
                 "description": "Plattformen för att organisera träffar i Ungen"
+            },
+            "is-facebook": {
+                "name": "OSM Island på Facebook",
+                "description": "Sida om OpenStreetMap på Island"
+            },
+            "is-mailinglist": {
+                "name": "E-postlistan Talk-is",
+                "description": "Talk-is är den officiella e-postlistan för den isländska OSM-gemenskapen"
+            },
+            "is-twitter": {
+                "name": "OSM Island på Twitter",
+                "description": "Twitter om OpenStreetMap på Island"
             },
             "it-facebook": {
                 "name": "OpenStreetMap Italien på Facebook",
@@ -7582,7 +7650,7 @@
             "OSM-Tampa-Bay": {
                 "name": "OpenStreetMap Tampa Bay",
                 "description": "Kartläggare och OpenStreetMap-användare runt Tampa Bay",
-                "extendedDescription": "Gruppen OSM Tampa Bay är till för att lokalinvånare ska förenas och bygga upp den optimala kartan över Tampa Bay med OpenStreetMap, den fria och redigerbara kartan över världen. Om du gillar kartor, data, open source, GPS, vandring, cykling, etc., kommer du att älska att arbeta med OpenStreetMap\n-- så gå med! Vi kommer samman, kartlägger och pratar om nya ämnen ungefär en gång i månaden."
+                "extendedDescription": "Gruppen OSM Tampa Bay är till för att lokalinvånare ska förenas och bygga upp den optimala kartan över Tampa Bay med OpenStreetMap, den fria och redigerbara kartan över världen. Om du gillar kartor, data, open source, GPS, vandring, cykling, etc., kommer du att älska att arbeta med OpenStreetMap\n– så gå med! Vi kommer samman, kartlägger och pratar om nya ämnen ungefär en gång i månaden."
             },
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US på Slack",
@@ -7686,12 +7754,17 @@
             },
             "OSM-br-telegram": {
                 "name": "Telegram för OpenStreetMap Brasilien",
-                "description": "Anslut till gemenskapen på OpenStreetMap Brasilien via Telegram",
+                "description": "Anslut till gemenskapen i OpenStreetMap Brasilien via Telegram",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
             },
             "OSM-br-twitter": {
                 "name": "OpenStreetMap Brasilien på Twitter",
                 "description": "Följ oss på Twitter på {url}"
+            },
+            "RS-telegram": {
+                "name": "Telegram-grupp för OpenStreetMap Rio Grande do Sul",
+                "description": "Anslut till gemenskapen i OpenStreetMap Rio Grande do Sul via Telegram",
+                "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
             },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap Chile på Facebook",
@@ -7768,6 +7841,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "Nyheter och resurser för OpenStreetMap Peru-gemenskapen"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam på Facebook",
+                "description": "OpenStreetMap Latam på Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "Telegram för OpenStreetMap Latam",
+                "description": "OpenStreetMap-Telegram för Latinamerika"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam på Twitter",
+                "description": "Följ oss på Twitter på {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "Stöder OpenStreetMap i Latinamerika",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam är en årlig konferens för alla kartläggare och användare av OpenStreetMap i Latinamerika. Programmet innehåller föreläsningar, paneldebatter, workshops och mapathons relaterade till OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap på Facebook",
