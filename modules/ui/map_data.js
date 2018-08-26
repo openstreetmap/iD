@@ -8,6 +8,7 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
@@ -210,6 +211,7 @@ export function uiMapData(context) {
     // Beta feature - sample vector layers to support Detroit Mapping Challenge
     // https://github.com/osmus/detroit-mapping-challenge
     function drawVectorItems(selection) {
+        var dataLayer = layers.layer('data');
         var vtData = [
             {
                 name: 'Detroit Neighborhoods/Parks',
@@ -229,24 +231,45 @@ export function uiMapData(context) {
             }
         ];
 
-        var dataLayer = layers.layer('data');
+        // Only show this if the map is around Detroit..
+        var detroit = geoExtent([-83.5, 42.1], [-82.8, 42.5]);
+        var showVectorItems = (context.map().zoom() > 9 && detroit.contains(context.map().center()));
 
-        var header = selection.selectAll('.layer-list-vectortile-header')
-            .data([0]);
+        var container = selection.selectAll('.vectortile-container')
+            .data(showVectorItems ? [0] : []);
 
-        header.enter()
+        container.exit()
+            .remove();
+
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'vectortile-container');
+
+        containerEnter
             .append('h4')
-            .attr('class', 'layer-list-vectortile-header')
-            .text('Vector Tiles (beta)');
+            .attr('class', 'vectortile-header')
+            .text('Detroit Vector Tiles (Beta)');
 
-        var ul = selection
-            .selectAll('.layer-list-vectortile')
-            .data([0]);
-
-        ul = ul.enter()
+        containerEnter
             .append('ul')
             .attr('class', 'layer-list layer-list-vectortile')
-            .merge(ul);
+
+        containerEnter
+            .append('div')
+            .attr('class', 'vectortile-footer')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#iD-icon-out-link', 'inline'))
+            .attr('href', 'https://github.com/osmus/detroit-mapping-challenge')
+            .append('span')
+            .text('About these layers');
+
+        container = container
+            .merge(containerEnter);
+
+
+        var ul = container.selectAll('.layer-list-vectortile');
 
         var li = ul.selectAll('.list-item')
             .data(vtData);
@@ -481,8 +504,8 @@ export function uiMapData(context) {
         _dataLayerContainer
             .call(drawOsmItems)
             .call(drawPhotoItems)
-            .call(drawVectorItems)       // beta - detroit mapping challenge
-            .call(drawCustomDataItems);
+            .call(drawCustomDataItems)
+            .call(drawVectorItems);      // Beta - Detroit mapping challenge
 
         _fillList
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
