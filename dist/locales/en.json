@@ -7104,6 +7104,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana on Facebook",
+                "description": "Page of OpenStreetMap in Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana on Twitter",
+                "description": "Twitter of OpenStreetMap in Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
                 "description": "Follow us on Twitter: {url}",
@@ -7468,6 +7476,18 @@
                 "name": "OpenStreetMap Hungary Meetup",
                 "description": "The platform for organizing meetups in Hungary"
             },
+            "is-facebook": {
+                "name": "OSM Iceland on Facebook",
+                "description": "Page of OpenStreetMap in Iceland"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is Mailing List",
+                "description": "Talk-is is the official mailing list for the Icelandic OSM community"
+            },
+            "is-twitter": {
+                "name": "OSM Iceland on Twittter",
+                "description": "Twitter of OpenStreetMap in Iceland"
+            },
             "it-facebook": {
                 "name": "OpenStreetMap Italy Facebook",
                 "description": "Join the OpenStreetMap Italy community on Facebook"
@@ -7809,6 +7829,11 @@
                 "name": "OpenStreetMap Brasil Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
+            "RS-telegram": {
+                "name": "OpenStreetMap Rio Grande do Sul Telegram Group",
+                "description": "Join the OpenStreetMap Rio Grande do Sul community on Telegram",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap Chile Facebook",
                 "description": "Join the OpenStreetMap Chile community on Facebook",
@@ -7884,6 +7909,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "News and resources for the OpenStreetMap Peru community"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam Facebook",
+                "description": "OpenStreetMap Latam on Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap Latam Telegram",
+                "description": "OpenStreetMap Telegram for Latin America"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "Supporting OpenStreetMap in Latin America",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam is the annual conference for all mappers and users of OpenStreetMap in Latin America. The program includes talks, panels, workshops, and mapathons related to OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap on Facebook",
