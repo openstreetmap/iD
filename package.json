@@ -75,7 +75,7 @@
     "mocha-phantomjs-core": "^2.1.0",
     "name-suggestion-index": "0.1.6",
     "npm-run-all": "^4.0.0",
-    "osm-community-index": "0.4.6",
+    "osm-community-index": "0.4.7",
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.85.0",
     "rollup": "~0.64.1",
