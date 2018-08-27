@@ -50,7 +50,6 @@ var keepRightSchemaFromWeb = {
     'title': 'intersections without junctions, highway-waterway'
 };
 
-// TODO: clean up description parsing some: remove or ignore spurious characters
 export function parseErrorDescriptions(entity) {
     if (!(entity instanceof krError)) return;
 
@@ -60,11 +59,12 @@ export function parseErrorDescriptions(entity) {
     if (!matchingTemplate) return;
 
     // tokenize descriptions
-    var errorDescriptions = entity.description.split(' ');
-    var templateDescriptions = matchingTemplate.description.split(' ');
+    var errorDescription = entity.description.split(' ');
+    var templateDescription = matchingTemplate.description.split(' ');
 
     var parsedDescriptions = [];
-    var re = new RegExp(/{\$[0-9]}/);
+    var variable_re = new RegExp(/{\$[0-9]}/);
+    var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
 
     var commonEntities = ['node', 'way', 'relation', 'highway', 'cycleway', 'waterway', 'riverbank']; // TODO: expand this list, or implement a different translation function
 
@@ -85,26 +85,26 @@ export function parseErrorDescriptions(entity) {
         return result;
     }
 
-    templateDescriptions.forEach(function(word, index) {
-        if (!re.test(word)) return;
+    templateDescription.forEach(function(word, index) {
+        if (!variable_re.test(word)) return;
 
         // get the word at this index, and at the next index value
-        var nextWord = templateDescriptions[index + 1] ? templateDescriptions[index + 1] : null;
+        var nextWord = templateDescription[index + 1] ? templateDescription[index + 1] : null;
 
         var parsedPhrase = '';
 
         // parse error description words
-        for (var i = index; i <= errorDescriptions.length - 1;  i++) {
-            if (errorDescriptions[i] !== nextWord) {
-                var currWord = errorDescriptions[i];
+        for (var i = index; i <= errorDescription.length - 1;  i++) {
+            if (errorDescription[i] !== nextWord) {
+                var currWord = errorDescription[i];
 
-                // strip leading # if present
-                if (currWord.charAt(0) === '#' || errorDescriptions[i-1] === '(id') {
+                // select just numeric part of id
+                if (currWord.charAt(0) === '#' || errorDescription[i-1] === '(id') { // NOTE: hacky way of selecting the token before
                     currWord = currWord.replace(/\D/g,'');
 
                     // get the entity type of the id
-                    var lastWord = errorDescriptions[i-1];
-                    var secondLastWord = errorDescriptions[i-2];
+                    var lastWord = errorDescription[i-1];
+                    var secondLastWord = errorDescription[i-2];
                     var base;
                     if (lastWord) { base = getEntityBase(lastWord) || getEntityBase(secondLastWord); }
                     if (!base) {
@@ -120,9 +120,13 @@ export function parseErrorDescriptions(entity) {
                     currWord = t('QA.keepRight.entities.' + currWord);
                 }
 
+                // add phrase (or single word) to variable list
                 parsedPhrase += currWord;
             }
-            // add phrase (or single word) to variable list
+            // if any variables have html, escape them
+            if (html_re.test(parsedPhrase)) {
+                parsedPhrase = '\\' +  parsedPhrase + '\\';
+            }
             parsedDescriptions.push(parsedPhrase);
             break;
         }

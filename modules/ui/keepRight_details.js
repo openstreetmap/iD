@@ -11,11 +11,12 @@ export function uiKeepRightDetails(context) {
     var _templateErrorType;
     var _category;
     var _categoryElements;
-    var _parent_error_type = '';
+    var _parent_error_type;
     var _titleBase;
 
 
     function initDetails() {
+        _parent_error_type = '';
         if (errorTypes.errors['_' + _error.error_type]) {
             _templateErrorType = '_' + _error.error_type;
             _template = errorTypes.errors[_templateErrorType];
