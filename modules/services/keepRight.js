@@ -83,7 +83,7 @@ export default {
         _keepRightCache = { loaded: {}, inflight: {}, keepRight: {}, rtree: rbush()};
     },
 
-    loadKeepRight: function(context, projection, options, callback) {
+    loadKeepRightErrors: function(context, projection, options, callback) {
         options = _extend({ 'format': 'geojson' }, options);
         if (_off) return;
 
