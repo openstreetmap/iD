@@ -132,7 +132,7 @@ export function svgAreas(projection, context) {
             fill: areas
         };
 
-        var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath')
+        var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
            .filter(filter)
            .data(data.clip, osmEntity.key);
 
@@ -141,7 +141,7 @@ export function svgAreas(projection, context) {
 
         var clipPathsEnter = clipPaths.enter()
            .append('clipPath')
-           .attr('class', 'clipPath')
+           .attr('class', 'clipPath-osm')
            .attr('id', function(entity) { return entity.id + '-clippath'; });
 
         clipPathsEnter

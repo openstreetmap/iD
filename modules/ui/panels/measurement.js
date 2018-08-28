@@ -11,7 +11,7 @@ import { t } from '../../util/locale';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { geoExtent } from '../../geo';
 import { utilDetect } from '../../util/detect';
-
+import { services } from '../../services';
 
 
 export function uiPanelMeasurement(context) {
@@ -43,21 +43,40 @@ export function uiPanelMeasurement(context) {
         return result;
     }
 
+
     function nodeCount(feature) {
       if (feature.type === 'LineString') return feature.coordinates.length;
-
-      if (feature.type === 'Polygon') {
-          return feature.coordinates[0].length - 1;
-      }
+      if (feature.type === 'Polygon') return feature.coordinates[0].length - 1;
     }
 
 
     function redraw(selection) {
         var resolver = context.graph();
-        var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+        var selectedNoteID = context.selectedNoteID();
+        var osm = services.osm;
+
+        var selected, center, entity, note, geometry;
+
+        if (selectedNoteID && osm) {       // selected 1 note
+            selected = [ t('note.note') + ' ' + selectedNoteID ];
+            note = osm.getNote(selectedNoteID);
+            center = note.loc;
+            geometry = 'note';
+
+        } else {                           // selected 1..n entities
+            var extent = geoExtent();
+            selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+            if (selected.length) {
+                for (var i = 0; i < selected.length; i++) {
+                    entity = context.entity(selected[i]);
+                    extent._extend(entity.extent(resolver));
+                }
+                center = extent.center();
+                geometry = entity.geometry(resolver);
+            }
+        }
+
         var singular = selected.length === 1 ? selected[0] : null;
-        var extent = geoExtent();
-        var entity;
 
         selection.html('');
 
@@ -68,19 +87,12 @@ export function uiPanelMeasurement(context) {
 
         if (!selected.length) return;
 
-        var center;
-        for (var i = 0; i < selected.length; i++) {
-            entity = context.entity(selected[i]);
-            extent._extend(entity.extent(resolver));
-        }
-        center = extent.center();
-
 
         var list = selection
             .append('ul');
         var coordItem;
 
-        // multiple features, just display extent center..
+        // multiple selected features, just display extent center..
         if (!singular) {
             coordItem = list
                 .append('li')
@@ -92,16 +104,13 @@ export function uiPanelMeasurement(context) {
             return;
         }
 
-        // single feature, display details..
-        if (!entity) return;
-        var geometry = entity.geometry(resolver);
-
+        // single selected feature, display details..
         if (geometry === 'line' || geometry === 'area') {
-            var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
-                feature = entity.asGeoJSON(resolver),
-                length = radiansToMeters(d3_geoLength(toLineString(feature))),
-                lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length')),
-                centroid = d3_geoCentroid(feature);
+            var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
+            var feature = entity.asGeoJSON(resolver);
+            var length = radiansToMeters(d3_geoLength(toLineString(feature)));
+            var lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length'));
+            var centroid = d3_geoCentroid(feature);
 
             list
                 .append('li')
@@ -157,7 +166,8 @@ export function uiPanelMeasurement(context) {
                 });
 
         } else {
-            var centerLabel = t('info_panels.measurement.' + (entity.type === 'node' ? 'location' : 'center'));
+            var centerLabel = t('info_panels.measurement.' +
+                (note || entity.type === 'node' ? 'location' : 'center'));
 
             list
                 .append('li')
@@ -183,11 +193,16 @@ export function uiPanelMeasurement(context) {
             .on('drawn.info-measurement', function() {
                 selection.call(redraw);
             });
+
+        context
+            .on('enter.info-measurement', function() {
+                selection.call(redraw);
+            });
     };
 
     panel.off = function() {
-        context.map()
-            .on('drawn.info-measurement', null);
+        context.map().on('drawn.info-measurement', null);
+        context.on('enter.info-measurement', null);
     };
 
     panel.id = 'measurement';

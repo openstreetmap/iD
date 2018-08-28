@@ -53,7 +53,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.10.0';
+    context.version = '2.11.0';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -201,6 +201,13 @@ export function coreContext() {
         var canSave;
         if (mode && mode.id === 'save') {
             canSave = false;
+
+            // Attempt to prevent user from creating duplicate changes - see #5200
+            if (services.osm && services.osm.isChangesetInflight()) {
+                history.clearSaved();
+                return;
+            }
+
         } else {
             canSave = context.selectedIDs().every(function(id) {
                 var entity = context.hasEntity(id);

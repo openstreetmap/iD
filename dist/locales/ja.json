@@ -175,7 +175,7 @@
                 "key": "C",
                 "annotation": "{n} 個の地物をマージ",
                 "not_eligible": "地物情報がマージできません",
-                "not_adjacent": "短点が接続されていないため、地物をマージできません。",
+                "not_adjacent": "端点が接続されていないため、地物をマージできません。",
                 "restriction": "\"{relation}\" リレーションを壊してしまうため、これらの地物はマージできません。",
                 "relation": "リレーションのロールが競合しているため、地物をマージできません",
                 "incomplete_relation": "地物全体がダウンロードされていないため、マージさせることができません。",
@@ -430,7 +430,12 @@
                 "edited_by": "編集者",
                 "changeset": "変更セット",
                 "unknown": "不明",
-                "link_text": "openstreetmap.org上の履歴"
+                "link_text": "openstreetmap.org上の履歴",
+                "note_no_history": "履歴なし(新しいメモ)",
+                "note_comments": "コメント",
+                "note_created_date": "作成日",
+                "note_created_user": "作成者",
+                "note_link_text": "openstreetmap.orgのメモ"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "交点",
             "line": "ライン",
             "area": "エリア",
-            "relation": "リレーション"
+            "relation": "リレーション",
+            "note": "メモ"
         },
         "geocoder": {
             "search": "世界中のデータから検索",
@@ -523,8 +529,6 @@
             "best_imagery": "表示中の場所に最適な航空写真",
             "switch": "背景に切り替え",
             "custom": "カスタム",
-            "custom_button": "カスタム背景の設定",
-            "custom_prompt": "URLテンプレートを入力。正しい形式:\n   - {zoom} または {z}, {x}, {y} （Z/X/Y タイルスキーム）\n   - {-y} または {ty} （flipped TMS-style Y coordinates）\n   - {u} （quadtileスキーム）\n   - {switch:a,b,c} （DNS server multiplexing）\n\nサンプル:\n{example}",
             "overlays": "オーバーレイの選択",
             "imagery_source_faq": "画像の情報 / 問題を報告",
             "reset": "設定リセット",
@@ -554,6 +558,11 @@
                 "notes": {
                     "tooltip": "OpenStreetMapのメモデータ",
                     "title": "OpenStreetMapのメモ"
+                },
+                "custom": {
+                    "tooltip": "ページ上にデータファイルをドラッグ＆ドロップするか、画面右側のボタンをクリックして設定してください",
+                    "title": "カスタム地図データ",
+                    "zoom": "データにズーム"
                 }
             },
             "fill_area": "エリアの塗りつぶし有無",
@@ -624,6 +633,29 @@
             "full": {
                 "description": "完全塗りつぶし",
                 "tooltip": "エリアがすべて塗りつぶされます。"
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "カスタム背景の設定",
+                "header": "カスタム背景画像設定",
+                "instructions": "タイルのURLテンプレートを入力。正しい形式:\n   - {zoom} または {z}, {x}, {y} （Z/X/Y タイルスキーム）\n   - {-y} または {ty} （flipped TMS-style Y coordinates）\n   - {u} （quadtileスキーム）\n   - {switch:a,b,c} （DNS server multiplexing）\n\nサンプル:\n{example}",
+                "template": {
+                    "placeholder": "URLテンプレートを入力"
+                }
+            },
+            "custom_data": {
+                "tooltip": "カスタムデータレイヤの編集",
+                "header": "カスタム地図データ設定",
+                "file": {
+                    "instructions": "ローカルのデータファイルを選択。サポート対象：\n   .gpx, .kml, .geojson, .json",
+                    "label": "ファイルをブラウズ"
+                },
+                "or": "または",
+                "url": {
+                    "instructions": "データファイルのURL、またはベクタータイルのURLテンプレートを入力。有効なトークン：\n   {zoom}、またはZ/X/Yタイルスキーマ用 {z}, {x}, {y}",
+                    "placeholder": "URLを入力"
+                }
             }
         },
         "restore": {
@@ -727,18 +759,6 @@
         },
         "cannot_zoom": "現在のモードでは、これ以上ズームアウトできません。",
         "full_screen": "フルスクリーンにする",
-        "gpx": {
-            "local_layer": "GPXを追加",
-            "drag_drop": "ページ上に .gpx, .geojson, .kml ファイルをドラッグ＆ドロップするか、右のボタンを押して参照するかしてください",
-            "zoom": "レイヤにズーム",
-            "browse": "ファイルをブラウズ"
-        },
-        "mvt": {
-            "local_layer": "MVTを追加",
-            "drag_drop": "ページ上に .mvtや.pbfファイルをドラッグ＆ドロップするか、画面右側のボタンをクリックしてください",
-            "zoom": "レイヤにズーム",
-            "browse": "ファイルをブラウズ"
-        },
         "streetside": {
             "tooltip": "Microsoftによる街路写真",
             "title": "写真の重ね合わせ(Bing街路)",
@@ -770,6 +790,12 @@
             "anonymous": "匿名ユーザー",
             "closed": "(クローズ済)",
             "commentTitle": "コメント",
+            "status": {
+                "opened": "オープン日付 {when}",
+                "reopened": "再オープン日付 {when}",
+                "commented": "コメント日付 {when}",
+                "closed": "クローズ日付 {when}"
+            },
             "newComment": "新しいコメント",
             "inputPlaceholder": "他のユーザーと共有するコメントを入力。",
             "close": "メモをクローズ",
@@ -1394,13 +1420,13 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "障害物"
+                    "name": "障害物の地物"
                 },
                 "category-building": {
-                    "name": "建物"
+                    "name": "建物の地物"
                 },
                 "category-golf": {
-                    "name": "ゴルフ"
+                    "name": "ゴルフの地物"
                 },
                 "category-landuse": {
                     "name": "土地利用の地物"
@@ -1421,13 +1447,13 @@
                     "name": "線路の地物"
                 },
                 "category-restriction": {
-                    "name": "進行方向制限"
+                    "name": "進行方向制限の地物"
                 },
                 "category-road": {
                     "name": "道路の地物"
                 },
                 "category-route": {
-                    "name": "ルート"
+                    "name": "ルートの地物"
                 },
                 "category-water-area": {
                     "name": "水域の地物"
@@ -1449,7 +1475,7 @@
                             "title": "目的外通行の禁止"
                         },
                         "dismount": {
-                            "description": "下車すれば通行可能",
+                            "description": "降りれば通行可能",
                             "title": "下車"
                         },
                         "no": {
@@ -1460,8 +1486,12 @@
                             "description": "所有者が通行制限しない限り通行可",
                             "title": "所有者許諾あり"
                         },
+                        "permit": {
+                            "description": "妥当な許可や利用許諾がある場合のみ通行が許可されている",
+                            "title": "許可"
+                        },
                         "private": {
-                            "description": "通行時には所有者の許可を得る必要がある",
+                            "description": "通行時には所有者から個々に許可を得る必要がある",
                             "title": "私有"
                         },
                         "yes": {
@@ -2159,10 +2189,10 @@
                     "label": "長さ (m)"
                 },
                 "level": {
-                    "label": "階数"
+                    "label": "フロア番号（日本の1階は0）"
                 },
                 "levels": {
-                    "label": "階数",
+                    "label": "総階数",
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
@@ -2794,7 +2824,7 @@
                     }
                 },
                 "trees": {
-                    "label": "木の数"
+                    "label": "樹種"
                 },
                 "tunnel": {
                     "label": "種類",
@@ -3005,7 +3035,7 @@
                 },
                 "amenity/animal_boarding": {
                     "name": "ペットホテル",
-                    "terms": "ペットホテル, 動物, ホテル"
+                    "terms": "ペットホテル, 動物, ホテル, ペット"
                 },
                 "amenity/animal_breeding": {
                     "name": "動物繁殖施設",
@@ -3013,7 +3043,7 @@
                 },
                 "amenity/animal_shelter": {
                     "name": "動物保護施設",
-                    "terms": "アニマルシェルター, 動物保護センター, 鳥獣保護施設"
+                    "terms": "アニマルシェルター, 動物保護センター, 鳥獣保護施設, 動物, 鳥獣, アニマル"
                 },
                 "amenity/arts_centre": {
                     "name": "アートセンター",
@@ -3053,7 +3083,7 @@
                 },
                 "amenity/biergarten": {
                     "name": "ビアガーデン",
-                    "terms": "ビアガーデン, ビール, 酒, アルコール, 軽食, 呑む, 飲む, 飲食店, 食べる, 食事, 料理, 飲み屋"
+                    "terms": "ビアガーデン, ビアホール, ビール, 酒, 飲む, 呑む, 飲食店, アルコール"
                 },
                 "amenity/boat_rental": {
                     "name": "貸しボート",
@@ -3375,7 +3405,7 @@
                 },
                 "amenity/smoking_area": {
                     "name": "喫煙所",
-                    "terms": "喫煙所, 喫煙エリア, たばこ, タバコ, 公園, 駅前, 広場"
+                    "terms": "喫煙所, 喫煙エリア, たばこ, タバコ, 公園, 駅前, 広場, 煙草, 灰皿"
                 },
                 "amenity/social_facility": {
                     "name": "福祉施設",
@@ -3434,7 +3464,7 @@
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "たばこ自動販売機",
-                    "terms": "たばこ, 自動販売機, 自販機, 嗜好品, タバコ"
+                    "terms": "たばこ, 自動販売機, 自販機, 嗜好品, タバコ, 煙草"
                 },
                 "amenity/vending_machine/coffee": {
                     "name": "コーヒー自販機",
@@ -3505,11 +3535,11 @@
                 },
                 "amenity/veterinary": {
                     "name": "獣医",
-                    "terms": "獣医, ペット医, 病院, 医療, 動物病院, 犬猫病院, 動物"
+                    "terms": "獣医, ペット医, 病院, 医療, 動物病院, 犬猫病院, 動物, ペット, 鳥獣, アニマル"
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "犬の便入れ",
-                    "terms": "犬の便入れ, 動物"
+                    "terms": "犬の便入れ, 動物, ペット, 犬"
                 },
                 "amenity/waste_basket": {
                     "name": "ゴミ箱",
@@ -3529,7 +3559,7 @@
                 },
                 "amenity/watering_place": {
                     "name": "動物の水飲み場",
-                    "terms": "動物の水飲み場, 水場"
+                    "terms": "動物の水飲み場, 水場, 動物, ペット"
                 },
                 "area": {
                     "name": "エリア",
@@ -3545,7 +3575,7 @@
                 },
                 "attraction/animal": {
                     "name": "動物",
-                    "terms": "動物"
+                    "terms": "動物, アニマル, 鳥獣"
                 },
                 "attraction/big_wheel": {
                     "name": "大観覧車",
@@ -3904,15 +3934,15 @@
                 },
                 "craft/carpenter": {
                     "name": "工務店",
-                    "terms": "工務店, 職人, 工房, 大工, リフォーム"
+                    "terms": "工務店, 職人, 工房, 大工, リフォーム, 建具店, 表具店, 指物店, 経師, 建具師, 指物師"
                 },
                 "craft/carpet_layer": {
                     "name": "畳・カーペット工事店",
-                    "terms": "畳・カーペット工事店, 職人, 工房"
+                    "terms": "畳・カーペット工事店, 職人, 工房, 畳, カーペット, インテリア"
                 },
                 "craft/caterer": {
                     "name": "仕出し料理店",
-                    "terms": "仕出し料理店, ケータリング, ホカ弁, 弁当"
+                    "terms": "仕出し料理店, ケータリング, ホカ弁, 弁当, 持ち帰り, 持ち帰り専門店, 持帰り, ランチパック, 仕出し, 弁当屋"
                 },
                 "craft/chimney_sweeper": {
                     "name": "煙突掃除人",
@@ -3943,8 +3973,8 @@
                     "terms": "家電修理店, 電気機器修理店, 修理店, リペアショップ, 職人, 工房"
                 },
                 "craft/gardener": {
-                    "name": "庭師",
-                    "terms": "庭師, 職人, 工房"
+                    "name": "造園業",
+                    "terms": "庭師, 職人, 工房, 造園, 造園業, 樹木"
                 },
                 "craft/glaziery": {
                     "name": "ガラス細工師",
@@ -4691,7 +4721,7 @@
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "遊技場（成人向け）",
-                    "terms": "遊技場, パチンコ, パチスロ, スロット, 娯楽, アダルト, レジャー, パチンコ店, パチンコ屋, スロットルマシン"
+                    "terms": "遊技場, パチンコ, パチスロ, スロット, 娯楽, アダルト, レジャー, パチンコ店, パチンコ屋, スロットマシン, ギャンブル"
                 },
                 "leisure/amusement_arcade": {
                     "name": "ゲームセンター",
@@ -4841,6 +4871,10 @@
                     "name": "アメリカンフットボール場",
                     "terms": "アメリカンフットボール場, アメフト競技場, スポーツ, 運動, 競技"
                 },
+                "leisure/pitch/badminton": {
+                    "name": "バドミントンコート",
+                    "terms": "バドミントンコート, バドミントン場, スポーツ, 運動, 競技"
+                },
                 "leisure/pitch/baseball": {
                     "name": "野球場",
                     "terms": "野球場, 球場, スポーツ, 運動, 競技"
@@ -4964,6 +4998,10 @@
                 "man_made/bridge": {
                     "name": "橋",
                     "terms": "橋, 橋梁, 高架"
+                },
+                "man_made/bunker_silo": {
+                    "name": "バンカーサイロ",
+                    "terms": "バンカーサイロ, サイロ"
                 },
                 "man_made/chimney": {
                     "name": "煙突",
@@ -5316,7 +5354,7 @@
                 },
                 "office/moving_company": {
                     "name": "引っ越し業者",
-                    "terms": "引っ越し業者"
+                    "terms": "引っ越し業者, 引越業者, 引越"
                 },
                 "office/newspaper": {
                     "name": "新聞社",
@@ -5380,7 +5418,7 @@
                     "name": "地名"
                 },
                 "place/city": {
-                    "name": "市名",
+                    "name": "市制地方自治体",
                     "terms": "市名, 地名"
                 },
                 "place/farm": {
@@ -5427,11 +5465,11 @@
                     "terms": "Borough, Suburb, 区, 行政区, 区界"
                 },
                 "place/town": {
-                    "name": "町",
+                    "name": "町制地方自治体",
                     "terms": "町, 地名"
                 },
                 "place/village": {
-                    "name": "村",
+                    "name": "村制の地方自治体",
                     "terms": "村, 地名"
                 },
                 "playground/balance_beam": {
@@ -5992,7 +6030,7 @@
                 },
                 "shop/e-cigarette": {
                     "name": "電子タバコ店",
-                    "terms": "電子タバコ店, 嗜好品, タバコ, たばこ"
+                    "terms": "電子タバコ店, 嗜好品, タバコ, たばこ, 煙草"
                 },
                 "shop/electronics": {
                     "name": "家電販売店（小型製品）",
@@ -6004,7 +6042,7 @@
                 },
                 "shop/fabric": {
                     "name": "生地屋",
-                    "terms": "布地, 織物, 反物, ファブリック店, 生地, 裏地, 衣料, 服, 裁縫, 衣類"
+                    "terms": "布地, 織物, 反物, ファブリック店, 生地, 裏地, 衣料, 服, 裁縫, 衣類, 生地店, 布地店, お店"
                 },
                 "shop/farm": {
                     "name": "農産物直売所",
@@ -6186,11 +6224,11 @@
                 },
                 "shop/pet": {
                     "name": "ペットショップ",
-                    "terms": "ペット売り場, ペット, 家禽, ペットショップ, 動物"
+                    "terms": "ペット売り場, ペット, 家禽, ペットショップ, 動物, 愛玩動物"
                 },
                 "shop/pet_grooming": {
                     "name": "ペット美容室",
-                    "terms": "ペット美容室, 動物美容, ペット, 美容, 犬の美容室, 愛犬美容, 犬, 猫"
+                    "terms": "ペット美容室, 動物美容, ペット, 美容, 犬の美容室, 愛犬美容, 犬, 猫, 動物"
                 },
                 "shop/photo": {
                     "name": "写真店",
@@ -6262,7 +6300,7 @@
                 },
                 "shop/tobacco": {
                     "name": "たばこ店",
-                    "terms": "たばこ店, たばこ屋, タバコ, たばこ, 嗜好品"
+                    "terms": "たばこ店, たばこ屋, タバコ, たばこ, 嗜好品, タバコ店, タバコ屋, 煙草"
                 },
                 "shop/toys": {
                     "name": "玩具店",
@@ -6875,6 +6913,27 @@
                 },
                 "name": "Hike & Bike"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi snowmobile trails from OSM (Nordic coverage)",
+                "name": "Nordic snowmobile オーバーレイ"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic of Swedish orthophotos from the period 1955–1965. Older and younger pictures may occur.",
+                "name": "Lantmäteriet Historic Orthophoto 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
+                "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "規約 & フィードバック"
@@ -6911,8 +6970,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scan of ´Economic maps´ ca 1950-1980",
-                "name": "Lantmäteriet Economic Map (historic)"
+                "description": "Scan of \"Economic maps\" ca. 1950–1980",
+                "name": "Lantmäteriet Economic Map 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6925,6 +6984,13 @@
                     "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snowmobile trails",
+                "name": "Snowmobile map Sweden"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6988,6 +7054,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana on Facebook",
+                "description": "Page of OpenStreetMap in Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana on Twitter",
+                "description": "Twitter of OpenStreetMap in Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
                 "description": "Follow us on Twitter: {url}",
@@ -7352,6 +7426,18 @@
                 "name": "OpenStreetMap Hungary Meetup",
                 "description": "The platform for organizing meetups in Hungary"
             },
+            "is-facebook": {
+                "name": "OSM Iceland on Facebook",
+                "description": "Page of OpenStreetMap in Iceland"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is Mailing List",
+                "description": "Talk-is is the official mailing list for the Icelandic OSM community"
+            },
+            "is-twitter": {
+                "name": "OSM Iceland on Twittter",
+                "description": "Twitter of OpenStreetMap in Iceland"
+            },
             "it-facebook": {
                 "name": "OpenStreetMap Italy Facebook",
                 "description": "Join the OpenStreetMap Italy community on Facebook"
@@ -7693,6 +7779,11 @@
                 "name": "OpenStreetMap Brasil Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
+            "RS-telegram": {
+                "name": "OpenStreetMap Rio Grande do Sul Telegram Group",
+                "description": "Join the OpenStreetMap Rio Grande do Sul community on Telegram",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap Chile Facebook",
                 "description": "Join the OpenStreetMap Chile community on Facebook",
@@ -7768,6 +7859,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "News and resources for the OpenStreetMap Peru community"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam Facebook",
+                "description": "OpenStreetMap Latam on Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap Latam Telegram",
+                "description": "OpenStreetMap Telegram for Latin America"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "Supporting OpenStreetMap in Latin America",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam is the annual conference for all mappers and users of OpenStreetMap in Latin America. The program includes talks, panels, workshops, and mapathons related to OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "Facebook上のOpenStreetMap",

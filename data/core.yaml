@@ -347,6 +347,11 @@ en:
       changeset: Changeset
       unknown: Unknown
       link_text: History on openstreetmap.org
+      note_no_history: "No History (New Note)"
+      note_comments: Comments
+      note_created_date: Created Date
+      note_created_user: Created By
+      note_link_text: Note on openstreetmap.org
     location:
       key: L
       title: Location
@@ -373,6 +378,7 @@ en:
     line: line
     area: area
     relation: relation
+    note: note
   geocoder:
     search: Search worldwide...
     no_results_visible: No results in visible map area
@@ -429,8 +435,6 @@ en:
     best_imagery: Best known imagery source for this location
     switch: Switch back to this background
     custom: Custom
-    custom_button: Edit custom background
-    custom_prompt: "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
     overlays: Overlays
     imagery_source_faq: Imagery Info / Report a Problem
     reset: reset
@@ -457,6 +461,10 @@ en:
       notes:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap notes
+      custom:
+        tooltip: "Drag and drop a data file onto the page, or click the button to setup"
+        title: Custom Map Data
+        zoom: Zoom to data
     fill_area: Fill Areas
     map_features: Map Features
     QA:
@@ -512,6 +520,23 @@ en:
     full:
       description: Full Fill
       tooltip: "Areas are drawn fully filled."
+  settings:
+    custom_background:
+      tooltip: Edit custom background
+      header: Custom Background Settings
+      instructions: "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
+      template:
+        placeholder: Enter a url template
+    custom_data:
+      tooltip: Edit custom data layer
+      header: Custom Map Data Settings
+      file:
+        instructions: "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json"
+        label: "Browse files"
+      or: "Or"
+      url:
+        instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
+        placeholder: Enter a url
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"

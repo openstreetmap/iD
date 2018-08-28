@@ -457,7 +457,6 @@
             "best_imagery": "La meyor fonte d'imáxenes pa esti lugar",
             "switch": "Volver a esti fondu",
             "custom": "Personalizáu",
-            "custom_button": "Editar fondu personalizáu",
             "reset": "reaniciar",
             "minimap": {
                 "tooltip": "Amuesa un mapa alloñáu p'ayudar a alcontrar l'área que se ve actualmente.",
@@ -616,11 +615,6 @@
         },
         "cannot_zoom": "Nun puede alloñase más nel mou actual.",
         "full_screen": "Conmutar pantalla completa",
-        "gpx": {
-            "drag_drop": "Abasna y suelta un ficheru .gpx, .geojson o .kml na páxina, o prime nel botón de la drecha pa restolar",
-            "zoom": "Averar a capa",
-            "browse": "Buscar un ficheru"
-        },
         "mapillary_images": {
             "tooltip": "Fotos a nivel de rúa de Mapillary",
             "title": "Capa de fotos (Mapillary)"
@@ -806,31 +800,24 @@
                     "label": "Accesu permitíu",
                     "options": {
                         "designated": {
-                            "description": "Accesu permitíu acordies con señales o lleis llocales especifiques",
                             "title": "Designáu"
                         },
                         "destination": {
-                            "description": "Accesu permitíu sólo de pasu a un destín",
                             "title": "Destín"
                         },
                         "dismount": {
-                            "description": "Accesu permitíu pero tien de desmontar",
                             "title": "Desmontáu"
                         },
                         "no": {
-                            "description": "Accesu nun permitíu al públicu en xeneral",
                             "title": "Torgáu"
                         },
                         "permissive": {
-                            "description": "Accesu permitíu mentanto'l propietariu nun quite'l permisu",
                             "title": "Permisivu"
                         },
                         "private": {
-                            "description": "Accesu permitíu sólo col permisu del propietariu de manera individual",
                             "title": "Priváu"
                         },
                         "yes": {
-                            "description": "Accesu permitíu por llei; un drechu de pasu",
                             "title": "Permitíu"
                         }
                     },
@@ -2194,10 +2181,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Caballete pa reparar bicicletes"
-                },
-                "amenity/biergarten": {
-                    "name": "Cervecería al aire llibre",
-                    "terms": "Biergarten"
                 },
                 "amenity/boat_rental": {
                     "name": "Alquiler de barcos",

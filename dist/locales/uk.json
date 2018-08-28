@@ -430,7 +430,12 @@
                 "edited_by": "Змінено: ",
                 "changeset": "Набір змін",
                 "unknown": "Невідомо",
-                "link_text": "Історія на openstreetmap.org"
+                "link_text": "Історія на openstreetmap.org",
+                "note_no_history": "Без історії (нова нотатка)",
+                "note_comments": "Коментарі",
+                "note_created_date": "Дата створення",
+                "note_created_user": "Створена",
+                "note_link_text": "Нотатка з openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "вершина",
             "line": "лінія",
             "area": "полігон",
-            "relation": "зв’язок"
+            "relation": "зв’язок",
+            "note": "нотатка"
         },
         "geocoder": {
             "search": "Шукати по всьому світу…",
@@ -523,8 +529,6 @@
             "best_imagery": "Найкращі супутникові знімки для цього місця",
             "switch": "Ввімкнути цей шар",
             "custom": "Власний фон",
-            "custom_button": "Параметри власного фону",
-            "custom_prompt": "Введіть шаблон URL для квадратів мапи. Використовуйте:\n   - {zoom} обо {z}, {x}, {y} для Z/X/Y схеми\n   - {-y} або {ty} для оберненної Y-координати в TMS-стилі\n   - {u} для схеми QuadTiles\n   - {switch:a,b,c} у разі використання DNS мультиплексування на сервері\n\nПриклад:\n{example}",
             "overlays": "Шари",
             "imagery_source_faq": "Про фонове зображення/Повідомити про проблему",
             "reset": "скинути",
@@ -624,6 +628,16 @@
             "full": {
                 "description": "Повна заливка",
                 "tooltip": "Полігони будуть показуватись повністю зафарбованими."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Параметри власного фону",
+                "header": "Налаштування власного фону",
+                "instructions": "Введіть шаблон URL для тайлів мапи. Використовуйте:\n   - {zoom} обо {z}, {x}, {y} для Z/X/Y схеми\n   - {-y} або {ty} для оберненної Y-координати в TMS-стилі\n   - {u} для схеми QuadTiles\n   - {switch:a,b,c} у разі використання DNS мультиплексування на сервері\n\nПриклад:\n{example}",
+                "template": {
+                    "placeholder": "Введіть шаблон Url"
+                }
             }
         },
         "restore": {
@@ -727,18 +741,6 @@
         },
         "cannot_zoom": "Не можливо зменшити масштаб в поточному режимі.",
         "full_screen": "Розвернути на весь екран",
-        "gpx": {
-            "local_layer": "Додати GPX",
-            "drag_drop": "Перетягніть файл .gpx, .geojson або .kml на сторінку чи клацніть кнопку праворуч для вибору файлу",
-            "zoom": "Масштабувати до шару",
-            "browse": "Вибрати файл"
-        },
-        "mvt": {
-            "local_layer": "Додати MVT",
-            "drag_drop": "Перетягніть файл .mvt або .pbf на сторінку чи натисніть кнопку праворуч для вибору файлу",
-            "zoom": "Наблизити до шару",
-            "browse": "Виберіть файл"
-        },
         "streetside": {
             "tooltip": "Streetside фото від Microsoft",
             "title": "Фото шар (Bing Streetside)",
@@ -770,6 +772,12 @@
             "anonymous": "анонімно",
             "closed": "(Закриті)",
             "commentTitle": "Коментарі",
+            "status": {
+                "opened": "відкрито {when}",
+                "reopened": "перевідкрито {when}",
+                "commented": "прокоментовано {when}",
+                "closed": "закрито {when}"
+            },
             "newComment": "Новий коментар",
             "inputPlaceholder": "Додайте коментар для поширення інформації для інших учасників.",
             "close": "Закрити нотатку",
@@ -1441,7 +1449,7 @@
                     "label": " Пересування дозволено",
                     "options": {
                         "designated": {
-                            "description": "Доступ дозволений відповідними знаками чи на законодавчому рівні",
+                            "description": "Доступ дозволений відповідно до знаків або відповідних місцевих законів",
                             "title": "Зазначений"
                         },
                         "destination": {
@@ -1459,6 +1467,10 @@
                         "permissive": {
                             "description": "Доступ дозволений, доки власник не вирішить інакше",
                             "title": "З дозволу"
+                        },
+                        "permit": {
+                            "description": "Доступ дозволений тільки за наявності дійсної перепустки",
+                            "title": "Перепустка"
                         },
                         "private": {
                             "description": "Доступ дозволений лише за персональним дозволом власника",
@@ -4965,6 +4977,10 @@
                     "name": "Контур мосту",
                     "terms": "міст,контур,споруда,перехід,проїзд"
                 },
+                "man_made/bunker_silo": {
+                    "name": "Силосна яма",
+                    "terms": "силос,яма,бункер,корм,сховище"
+                },
                 "man_made/chimney": {
                     "name": "Димохід",
                     "terms": "труба,дим,димохід,викиди"
@@ -6875,6 +6891,27 @@
                 },
                 "name": "Туристині та велоспедні"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi – траси для снігоходів з даних OSM (Скандинавія)",
+                "name": "Скандинавія, траси для снігоходів"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Мозаїка Шведських ортофото за період 1955-1965 рр. Можуть траплятись як старі так і нові зображення.",
+                "name": "Lantmäteriet Історичні ортофото 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Мозаїка Шведських ортофото за період 1970-1980 рр. Можуть траплятись як старі так і нові зображення.",
+                "name": "Lantmäteriet Історичні ортофото 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Умови використання та Відгуки"
@@ -6911,8 +6948,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Скан  ´Economic maps´ ca 1950-1980",
-                "name": "Lantmäteriet Economic Map (історична)"
+                "description": "Скан  \"Economic maps\" прибл. 1950-1980",
+                "name": "Lantmäteriet Economic Map 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6925,6 +6962,13 @@
                     "text": "© Тайли: skobbler Дані: Учасники OpenStreetMap"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Маршрути для снігоходів",
+                "name": "Маршрути для снігоходів Швеція"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -7202,35 +7246,83 @@
             },
             "be-irc": {
                 "name": "OpenStreetMap Бельгія IRC",
-                "description": "Приєднуйтесь до #osmbe на irc.oftc.net (port 6667)"
+                "description": "Приєднуйтесь до #osmbe на irc.oftc.net (port 6667)",
+                "extendedDescription": "Приєднуйтесь до #osmbe на irc.oftc.net (порт 6667), він з'єднаний з чатом на Matrix"
             },
             "be-mailinglist": {
                 "name": "Talk-be Список розсилки",
                 "description": "Talk-be є офіційним списком розсилки для бельгійської спільноти OSM"
             },
             "be-maptime": {
-                "name": "Maptime Бельгія"
+                "name": "Maptime Бельгія",
+                "description": "Соціальні заходи, пов'язані з мапінгом - в першу чергу запрошуємо початківців!",
+                "extendedDescription": "Maptime - це відкрите навчальне середовище для всіх, з різним ступенем  знань, пропонуе особисту ​​освітню підтримку для початківців. Maptime одночасно є гнучким та структурованим, створюючи простір для посібників з мапінгу, семінарів, поточних проектів із спільною метою та незалежним / спільним робочим часом."
             },
             "be-matrix": {
-                "description": "Ласкаво просимо усіх картографів!"
+                "name": "OpenStreetMap Бельгія Matrix чат",
+                "description": "Ласкаво просимо всіх маперів!",
+                "extendedDescription": "Більшість обговорень виідбувається на каналі OpenStreetMap Belgium. Ви можете запитувати там будь-що! Інші розділи для обговорення конкретних предметів."
             },
             "be-meetup": {
-                "extendedDescription": "Фізичні зустрічі з іншими дуже корисні, картографи задають питання і багато чого навчаються. Особливо приємно бачити нових авторів!"
+                "name": "Зустрічі OpenStreetMap Бельгія",
+                "description": "Реальні зустрічі всіх, хто цікавиться OpenStreetMap",
+                "extendedDescription": "Реальні зустрічі з іншими дуже корисні, мапери обговорюють питання і багато чого навчаються. Особливо приємно бачити нових учасників!"
             },
             "be-twitter": {
                 "name": "OpenStreetMap Бельгія Twitter",
                 "description": "OSM Бельгія у Twitter: @osm_be"
             },
+            "hr-facebook": {
+                "name": "OpenStreetMap Хорватія група в Facebook",
+                "description": "OpenStreetMap Хорватія група у Facebook"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Хорватія IRC",
+                "description": "Приєднуйтесь до #osm-hr на irc.freenode.org (port 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr Список розсилки",
+                "description": "Talk-hr Список розсилки"
+            },
+            "czech-community": {
+                "name": "OSM спільнота Чехії",
+                "description": "Портал з мапою, вебсайт та контакти з іншими учасниками OSM в Чехії"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap Чехія у Facebook",
+                "description": "Стежте за подіями чеської спільноти у Facebook - включаючи переклади WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter Чехія OSM @osmcz",
+                "description": "Стежте за подіями чеської спільноти у Twitter - включаючи переклади WeeklyOSM!"
+            },
             "talk-cz-mailinglist": {
+                "name": "Список розсилки (talk-cz)",
                 "description": "Talk-cz – офіційний список розсилки OSM спільноти Чехії."
             },
             "dk-forum": {
                 "name": "Форум OpenStreetMap Данія",
                 "description": "Форум OpenStreetMap Данія"
             },
+            "dk-irc": {
+                "name": "OpenStreetMap Данія IRC",
+                "description": "Приєднуйтесь до #osm-dk на irc.oftc.net (port 6667)"
+            },
+            "dk-mailinglist": {
+                "name": "Talk-dk Список розсилки",
+                "description": "Список розсилки для обговорення OpenStreetMap в Данії"
+            },
             "fi-forum": {
                 "name": "Форум OpenStreetMap FI",
                 "description": "Форум OpenStreetMap Фінляндія"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap Фінляндія IRC",
+                "description": "Приєднуйтесь до #osm-fi на irc.oftc.net (port 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi Список розсилки",
+                "description": "Talk-fi є офіційним списком розсилки для фінської спільноти OSM"
             },
             "fr-facebook": {
                 "name": "Сторінка OpenStreetMap Франція у Facebook",
@@ -7240,6 +7332,10 @@
                 "name": "Форум OpenStreetMap Франція",
                 "description": "Форум OpenStreetMap Франція"
             },
+            "fr-irc": {
+                "name": "OpenStreetMap Франція IRC",
+                "description": "Приєднуйтесь до #osm-fr на irc.oftc.net (port 6667)"
+            },
             "fr-mailinglist": {
                 "name": "Talk-fr Список розсилки",
                 "description": "Talk-fr Список розсилки"
@@ -7248,8 +7344,17 @@
                 "name": "OpenStreetMap Франція у Twitter",
                 "description": "OpenStreetMap Франція у Twitter: {url}"
             },
+            "de-berlin-mailinglist": {
+                "name": "Берлін - Список розсилки",
+                "description": "Список розсилки берлінської спільноти OSM"
+            },
             "de-berlin-meetup": {
+                "name": "OpenStreetMap Берлін - Зустріч в Бранденбурзі ",
                 "description": "Учасники та користувачі OpenStreetMap з Берліна"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin в Telegram",
+                "description": "OpenStreetMap Берлін чат в Telegram"
             },
             "de-berlin-twitter": {
                 "name": "OpenStreetMap Берлін Twitter",
@@ -7259,9 +7364,25 @@
                 "name": "Форум OpenStreetMap DE",
                 "description": "Форум OpenStreetMap Німеччина"
             },
+            "de-irc": {
+                "name": "OpenStreetMap Німеччина IRC",
+                "description": "Приєднуйтесь до #osm-de на irc.oftc.net (port 6667)"
+            },
             "de-mailinglist": {
                 "name": "Talk-de Список розсилки",
                 "description": "Talk-de – офіційний список розсилки OSM спільноти Німеччини."
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "OWL Список розсилки",
+                "description": "Спсок розсилки OSM спілноти з регіону Східна Вестфалія-Ліппе"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Німеччина Telegram",
+                "description": "Приєднуйтесь до об'єднаної групи спільноти OpenStreetMap Німеччина у Telegram - {url}"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Німеччина",
+                "description": "Інформація про OpenStreetMap в Німеччині"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap Угорщина у Facebook",
@@ -7271,33 +7392,87 @@
                 "name": "Форум OpenStreetMap HU",
                 "description": "Форум OpenStreetMap Угорщина"
             },
+            "hu-meetup": {
+                "name": "OpenStreetMap Угорщина - Зустрічі",
+                "description": "Платформа для організації зустрічей маперів в Угорщині"
+            },
             "it-facebook": {
                 "name": "OpenStreetMap Італія у Facebook",
                 "description": "Приєднуйтесь до спільноти OpenStreetMap Італія у Facebook"
+            },
+            "it-irc": {
+                "name": "OpenStreetMap Італія IRC",
+                "description": "Приєднуйтесь до #osm-it на irc.oftc.net (port 6667)"
+            },
+            "it-mailinglist": {
+                "name": "Talk-it Список розсилки",
+                "description": "Talk-it – офіційний список розсилки OSM спільноти Італії."
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia в Telegram",
+                "description": "OpenStreetMap Італія чат Telegram"
             },
             "it-twitter": {
                 "name": "OpenStreetMap Італія Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
             },
             "OSM-Rome-meetup": {
-                "description": "Покращити OpenStreetMap навкруги Риму"
+                "name": "Зустріч маперів Риму",
+                "description": "Покращити OpenStreetMap навкруги Риму",
+                "extendedDescription": "Ми прагнемо бути джерелом інформації для обговорення та обміну знаннями щодо використання вільних географічних наборів даних, зокрема OpenStreetMap та іншого відкритого програмного забезпечення для роботи з геопросторовими даними, яке дозволяє керувати, змінювати та поширювати географічні дані та виступаємо за його використання в Лаціо."
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "Список розсилки OpenStreetMap Південного Тіролю",
+                "description": "Регіональний список розсилки OpenStreetMap Італія Південного Тіролю"
             },
             "talk-it-lazio": {
+                "name": "OpenStreetMap Італія, Лаціо",
+                "description": "Запрошуємо всіх! Зареєструйтеся на {signupUrl}",
                 "extendedDescription": "Список розсилки спільноти Риму та Лаціо"
+            },
+            "Trentino-Mailing-List": {
+                "name": "Список розсилки OpenStreetMap Трентіно",
+                "description": "Регіональний список розсилки OpenStreetMap Італія Трентіно"
             },
             "no-forum": {
                 "name": "Форум OpenStreetMap Норвегія",
                 "description": "Форум OpenStreetMap Норвегія"
             },
+            "no-irc": {
+                "name": "OpenStreetMap Норвегія IRC",
+                "description": "Місце для обговорення для маперів та користувачів OpenStreetMap, розробників та  ентузіастів з Норвегії"
+            },
+            "no-mailinglist": {
+                "name": "Список розсилки OpenStreetMap Норвегія",
+                "description": "Список розсилки для маперів та користувачів OpenStreetMap, розробників та ентузіастів з Норвегії"
+            },
             "OSM-PL-facebook-group": {
-                "name": "Група Facebook OpenStreetMap в Польщі"
+                "name": "Група Facebook OpenStreetMap в Польщі",
+                "description": "Група для маперів та користувачів OpenStreetMap в Польщі"
             },
             "OSM-PL-forum": {
                 "name": "Форум OpenStreetMap Польща",
                 "description": "Форум польської спільноти OpenStreetMap"
             },
+            "si-forum": {
+                "name": "Форум OpenStreetMap Словенія",
+                "description": "Форум словенської спільноти OpenStreetMap"
+            },
+            "si-mailinglist": {
+                "name": "Список розсилки OpenStreetMap Словенія",
+                "description": "Список розсилки словенської спільноти OpenStreetMap"
+            },
             "OSM-ES-mailinglist": {
-                "name": "Talk-es Список розсилки"
+                "name": "Talk-es Список розсилки",
+                "description": "Список розсилки для обговорення OpenStreetMap в Іспанії"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes в Telegram",
+                "description": "OpenStreetMap Іспанія чат Telegram"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se",
+                "description": "Надає послуги та інформацію на основі OSM для місцевої спільноти  в Швеції"
             },
             "se-facebook": {
                 "name": "OpenStreetMap Швеція у Facebook",
@@ -7307,18 +7482,78 @@
                 "name": "Форум OpenStreetMap Швеція",
                 "description": "Форум OpenStreetMap Швеція"
             },
+            "se-irc": {
+                "name": "OpenStreetMap Швеція IRC",
+                "description": "Приєднуйтесь до #osm.se на irc.oftc.net (port 6667)"
+            },
             "se-mailinglist": {
-                "name": "Talk-se Список розсилки"
+                "name": "Talk-se Список розсилки",
+                "description": "Список розсилки для обговорення OpenStreetMap в Швеції"
             },
             "se-twitter": {
                 "name": "OpenStreetMap Швеція у Twitter",
                 "description": "Приєднуйтесь до нас у Twitter: {url}"
             },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Іст-Мідлендс (Ноттінгем) Щомісячні зустрічі в пабі",
+                "description": "Збори для мапперів та користувачів Східного Мідлендса",
+                "extendedDescription": "Група організовує зустрічі з березня 2011 року, спочатку в Ноттінгемі, і нещодавно в Дербі, і час від часу в інших місцях Східного Мідлендса. Це збори для приємного спільного проведення часу та обговорення питань пов'язаних з OSM. В літні місяці ми зазвичай проводимо невеличкий огляд території та мапінг, впродовж години, досліджуючи місцевість навколо місця зустрічі. Група в цілому особливо зацікавлена ​​в тому, щоб позначати дорожню інфраструктуру для всіх учасників руху, і час від часу проводить збори з цією метою."
+            },
             "gb-mailinglist": {
+                "name": "Talk-gb Список розсилки",
                 "description": "Talk-gb - це основне місце спілкування для британської (включаючи Північну Ірландію) спільноти OSM"
             },
+            "mappa-mercia-group": {
+                "name": "Місцева група Mappa Mercia",
+                "description": "Місце для ентузіастів OpenStreetMap у Мідлендс",
+                "extendedDescription": "Mappa Mercia - це проект з розвитку OpenStreetMap у Вест-Мідлендс, Великобританія. Ми проводимо спільні заходи, проводимо навчання та підтримуємо місцеві організації, які бажають зробити свої дані відкритими."
+            },
+            "gb-irc": {
+                "name": "OpenStreetMap United Kingdom IRC",
+                "description": "Приєднуйтесь до #osm-gb на irc.oftc.net (port 6667)",
+                "extendedDescription": "Приєднуйтесь до #osm-gb на irc.oftc.net (порт 6667), будь ласка, будьте терплячі та зачекайте кілька хвилин, після того як ви поставите питання"
+            },
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "Запрошуємо всіх! Зареєструйтеся на {signupUrl}"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Ванкувер",
+                "description": "Мапери та користувачі OpenStreetMap у Ванкувері, Британська Колумбія"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Куба в Telegram",
+                "description": "OpenStreetMap Куба чат в Telegram"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM Нікарагуа в Telegram",
+                "description": "OpenStreetMap Нікарагуа чат в Telegram"
+            },
             "Bay-Area-OpenStreetMappers": {
-                "description": "Покращити OpenStreetMap в районі Затоки Сан-Франциско"
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Покращити OpenStreetMap в районі Затоки Сан-Франциско",
+                "extendedDescription": "Ця група має на меті це розбудову спільноти OpenStreetMap в районі затоки Сан-Франціско. Наші заходи відкриті для всіх, від ентузіастів відкритого коду до  велосипедистів, спеціалістів з ГІС, геокористувачів та інших."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Онлайн-мапінг товариство, розташоване в State College, PA"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Code for San Jose Slack",
+                "description": "Запрошуємо всіх! Зареєструйтеся на {signupUrl}, потім приєднуйтесь до каналу #osm."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Даллас - Форт Уорт OSM",
+                "description": "Група учасників OSM з Далласа - Форт Уорта",
+                "extendedDescription": "Даллас, Форт Уорт та всі міста, між ними, об'єдані творчими і технічно підкованими людьми. Мета цієї групи - знайти нові способи використання дивовижного ресурсу OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Зустріч маперів-ентузіастів в Філадельфії",
+                "extendedDescription": "GeoPhilly об'єднує розробників, географів, користувачів даних, ентузіастів відкритого коду, хактивістів та всіх хто любить мапи у нашій загальній любові до мап та історії, які вони розповідають. Якщо ви використовуєте мапи у вашій роботі або просто хочете дізнатись більше, ці зустрічі для вас! Наші заходи спрямовані на те, щоб бути відкритими, доброзичливими, освітніми та соціальними, від простого спілкування до коротких виступів чи навіть семінарів. Приходьте, ми створюємо різноманітну, геопросторову спільноту в Філадельфії разом з вами!"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota"
             },
             "Mapping-DC-meetup": {
                 "description": "Покращити OpenStreetMap навколо Вашингтона, округ Колумбія",

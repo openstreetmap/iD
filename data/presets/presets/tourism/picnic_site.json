@@ -4,6 +4,8 @@
         "name",
         "operator",
         "address",
+        "access_simple",
+        "capacity",
         "smoking"
     ],
     "geometry": [

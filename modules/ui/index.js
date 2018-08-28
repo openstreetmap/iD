@@ -13,6 +13,8 @@ export { uiConfirm } from './confirm';
 export { uiConflicts } from './conflicts';
 export { uiContributors } from './contributors';
 export { uiCurtain } from './curtain';
+export { uiDataEditor } from './data_editor';
+export { uiDataHeader } from './data_header';
 export { uiDisclosure } from './disclosure';
 export { uiEditMenu } from './edit_menu';
 export { uiEntityEditor } from './entity_editor';

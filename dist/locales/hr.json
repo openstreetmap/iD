@@ -2,7 +2,8 @@
     "hr": {
         "icons": {
             "information": "info",
-            "remove": "ukloni"
+            "remove": "ukloni",
+            "undo": "poništi"
         },
         "modes": {
             "add_area": {
@@ -19,6 +20,11 @@
                 "title": "Točka",
                 "description": "Dodaj restorane, spomenike, poštanske sandučiće ili druge točke na kartu.",
                 "tail": "Klikni na kartu za dodavanje točke."
+            },
+            "add_note": {
+                "title": "Bilješka",
+                "description": "Primijetio/la si grešku? Obavijesti druge doprinositelje.",
+                "tail": "Klikni na kartu za dodavanje bilješke."
             },
             "browse": {
                 "title": "Pretraži",
@@ -39,7 +45,8 @@
                 "annotation": {
                     "point": "Točka je dodana.",
                     "vertex": "Putu je dodana točka.",
-                    "relation": "Relacija je dodana."
+                    "relation": "Relacija je dodana.",
+                    "note": "Bilješka je dodana."
                 }
             },
             "start": {
@@ -149,7 +156,9 @@
                     "vertex": "Put povezan na drugi put.",
                     "line": "Put je spojen na liniju.",
                     "area": "Put je spojen na područje."
-                }
+                },
+                "relation": "Ovi elementi se ne mogu povezati jer imaju konfliktne uloge u relacijama.",
+                "restriction": "Ovi elementi se ne mogu povezati jer bi to oštetilo relaciju: \"{relation}\"."
             },
             "disconnect": {
                 "title": "Razdvoji",
@@ -167,6 +176,8 @@
                 "annotation": "{n} elemenata je spojeno.",
                 "not_eligible": "Ovi elementi se ne mogu spojiti.",
                 "not_adjacent": "Ovi elementi se ne mogu spojiti jer njihove krajnje točke nisu spojene.",
+                "restriction": "Ovi elementi se ne mogu spojiti jer bi to oštetilo relaciju: \"{relation}\".",
+                "relation": "Ovi elementi se ne mogu spojiti jer imaju konfliktne uloge u relacijama.",
                 "incomplete_relation": "Ovi se elementi ne mogu spojiti jer bar jedan od njih nije potpuno preuzet s interneta.",
                 "conflicting_tags": "Ovi elementi se ne mogu spojiti jer se neke njihove oznake ne podudaraju."
             },
@@ -179,7 +190,7 @@
                 "key": "M",
                 "annotation": {
                     "point": "Točka je premještena.",
-                    "vertex": "Točka je premještena na put.",
+                    "vertex": "Točka unutar puta je premještena.",
                     "line": "Linija je premještena.",
                     "area": "Područje je premješteno.",
                     "multiple": "Više elemenata je premješteno."
@@ -296,17 +307,44 @@
             "detach_node": {
                 "title": "Odvoji",
                 "key": "E",
-                "description": "Odvoji ovaj čvor s ovih linija/područja."
+                "description": "Odvoji ovaj čvor s ovih linija/područja.",
+                "annotation": "Čvor je odvojen s roditeljskih linija/područja.",
+                "restriction": "Ovaj čvor se ne može odvojiti jer bi to oštetilo relaciju: \"{relation}\".",
+                "connected_to_hidden": "Ovaj čvor se ne može odvojiti jer je spojen na skriveni element."
             }
         },
         "restriction": {
             "controls": {
-                "distance": "Udaljenost"
+                "distance": "Udaljenost",
+                "distance_up_to": "Do {distance}",
+                "via": "Preko",
+                "via_node_only": "Samo točka"
             },
             "help": {
+                "indirect": "(posredno)",
+                "turn": {
+                    "no_left_turn": "BEZ lijevih skretanja {indirect}",
+                    "no_right_turn": "BEZ desnih skretnja {indirect}",
+                    "no_u_turn": "BEZ polukružnog okretanja {indirect}",
+                    "no_straight_on": "BEZ prolaska ravno {indirect}",
+                    "only_left_turn": "SAMO lijeva skretanja {indirect}",
+                    "only_right_turn": "SAMO desna skretanja {indirect}",
+                    "only_u_turn": "SAMO polukružna okretanja {indirect}",
+                    "only_straight_on": "SAMO prolazak ravno {indirect}",
+                    "allowed_left_turn": "Lijevo skretanje dozvoljeno {indirect}",
+                    "allowed_right_turn": "Desno skretanje dozvoljeno {indirect}",
+                    "allowed_u_turn": "Polukružno okretanje dozvoljeno {indirect}",
+                    "allowed_straight_on": "Dozvoljen prolazak ravno {indirect}"
+                },
                 "from": "POLAZIŠTE",
                 "via": "PREKO",
-                "to": "ODREDIŠTE"
+                "to": "ODREDIŠTE",
+                "from_name": "{from} {fromName}",
+                "from_name_to_name": "{from} {fromName} {to} {toName}",
+                "via_names": "{via} {viaNames}",
+                "select_from": "Klikni za odabiranje segmenta {from}",
+                "select_from_name": "Klikni za odabiranje {from} {fromName}",
+                "toggle": "Klikni za \"{turn}\""
             }
         },
         "undo": {
@@ -326,6 +364,8 @@
             "localized_translation_name": "Ime"
         },
         "zoom_in_edit": "Približi za uređivanje",
+        "login": "Prijava",
+        "logout": "Odjava",
         "loading_auth": "Spajanje na OpenStreetMap...",
         "report_a_bug": "Prijavi grešku",
         "help_translate": "Pomozi prevesti iD uređivač",
@@ -343,11 +383,13 @@
             "title": "Postavi na OpenStreetMap",
             "upload_explanation": "Promjene koje postaviš biti će vidljive na svim kartama koje koriste podatke OpenStreetMapa.",
             "upload_explanation_with_user": "Promjene koje postaviš kao {user} biti će vidljive na svim kartama koje koriste podatke OpenStreetMapa.",
+            "request_review": "Želim da netko pregleda moja uređivanja.",
             "save": "Postavi",
             "cancel": "Otkaži",
             "changes": "{count} Promjena",
+            "download_changes": "Preuzmi osmChange datoteku promjena",
             "warnings": "Upozorenja",
-            "modified": "Promijenjeno",
+            "modified": "Uređeno",
             "deleted": "Obrisano",
             "created": "Stvoreno",
             "about_changeset_comments": "O komentarima promjena",
@@ -365,24 +407,50 @@
                 "key": "B",
                 "title": "Pozadina",
                 "zoom": "Zum",
+                "vintage": "Starost",
                 "source": "Izvor",
                 "description": "Opis",
                 "resolution": "Rezolucija",
-                "accuracy": "Preciznost"
+                "accuracy": "Preciznost",
+                "unknown": "Nepoznato",
+                "show_tiles": "Prikaži sličice",
+                "hide_tiles": "Sakrij sličice",
+                "show_vintage": "Prikaži starost",
+                "hide_vintage": "Sakrij starost"
             },
             "history": {
                 "key": "H",
                 "title": "Povijest",
-                "version": "Verzija"
+                "selected": "{n} odabranih",
+                "no_history": "Bez povijesti (Novi element)",
+                "version": "Verzija",
+                "last_edit": "Posljednje uređivanje",
+                "edited_by": "Uređeno od",
+                "changeset": "Promjena",
+                "unknown": "Nepoznat",
+                "link_text": "Povijest na openstreetmap.org"
             },
             "location": {
                 "key": "L",
-                "title": "Lokacija"
+                "title": "Lokacija",
+                "unknown_location": "Nepoznata lokacija"
             },
             "measurement": {
                 "key": "M",
+                "title": "Mjerenje",
+                "selected": "{n} odabranih",
                 "geometry": "Geometrija",
-                "area": "Područje"
+                "closed_line": "zatvorena linija",
+                "closed_area": "zatvoreno područje",
+                "center": "Centar",
+                "perimeter": "Opseg",
+                "length": "Duljina",
+                "area": "Površina",
+                "centroid": "Centroid",
+                "location": "Lokacija",
+                "metric": "Metrički",
+                "imperial": "Imperijalno",
+                "node_count": "Broj točaka"
             }
         },
         "geometry": {
@@ -447,14 +515,24 @@
         "background": {
             "title": "Podloga",
             "description": "Postavke podloge",
+            "key": "B",
+            "backgrounds": "Pozadine",
             "none": "Nijedna",
             "best_imagery": "Najpoznatiji izvornik snimaka za ovo područje",
             "switch": "Vrati nazad na ovu podlogu",
             "custom": "Podesivo",
-            "custom_button": "Uredi prilagođenu podlogu",
+            "overlays": "Preklopi",
+            "imagery_source_faq": "Info o snimcima / Prijavi problem",
             "reset": "resetiraj",
+            "display_options": "Postavke prikaza",
+            "brightness": "Svjetlina",
+            "contrast": "Kontrast",
+            "saturation": "Zasićenost",
+            "sharpness": "Oštrina",
             "minimap": {
-                "tooltip": "Prikaži udaljeni prikaz karte za lakše lociranje trenutno prikazanog područja."
+                "description": "Pokaži mini kartu",
+                "tooltip": "Prikaži udaljeni prikaz karte za lakše lociranje trenutno prikazanog područja.",
+                "key": "/"
             },
             "fix_misalignment": "Popravi odstupanje snimaka",
             "offset": "Pomakni bilo gdje na donjem sivom području za usklađivanje snimaka, ili unesi iznose odstupanja u metrima."
@@ -462,7 +540,17 @@
         "map_data": {
             "title": "Podaci karte",
             "description": "Podaci karte",
+            "key": "F",
             "data_layers": "Slojevi podataka",
+            "layers": {
+                "osm": {
+                    "tooltip": "Podaci karte sa OpenStreetMapa",
+                    "title": "OpenStreetMap podaci"
+                },
+                "notes": {
+                    "title": "OpenStreetMap bilješke"
+                }
+            },
             "fill_area": "Ispuni područja",
             "map_features": "Elementi karte",
             "autohidden": "Ovi elementi su automatski skriveni jer ih je previše za prikaz na zaslonu. Možeš približiti prikaz za njihovo uređivanje."
@@ -520,7 +608,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Bez ispune (žičani način)",
-                "tooltip": "Omogućavanjem žičanog načina jednostavnije je vidjeti  snimke koje služe kao podloga za kartiranje."
+                "tooltip": "Omogućavanjem žičanog načina jednostavnije je vidjeti  snimke koje služe kao podloga za kartiranje.",
+                "key": "W"
             },
             "partial": {
                 "description": "Djelomična ispuna",
@@ -533,7 +622,9 @@
         },
         "restore": {
             "heading": "Imaš nespremljenih promjena",
-            "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?"
+            "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?",
+            "restore": "Vrati moje promjene",
+            "reset": "Zanemari moje promjene"
         },
         "save": {
             "title": "Spremi",
@@ -543,6 +634,7 @@
             "status_code": "Poslužitelj je vratio status kôd {code}",
             "unknown_error_details": "Molim provjeri jesi li spojen na internet.",
             "uploading": "Postavljam promjene na OpenStreetMap...",
+            "conflict_progress": "Provjeravam konflikte: {num} od {total}",
             "unsaved_changes": "Imaš nespremljenih promjena.",
             "conflict": {
                 "header": "Riješi konfliktna uređivanja",
@@ -553,6 +645,7 @@
                 "keep_remote": "Koristi njihovo",
                 "restore": "Vrati",
                 "delete": "Ostavi obrisano",
+                "download_changes": "Ili preuzmi osmChange datoteku",
                 "done": "Sve nedoumice su riješene!",
                 "help": "Drugi korisnik je uredio neke elemente karte koje si i ti uredio/la.\nKlikni na svaki element ispod za dobivanje više detalja o konfliktu i odaberi treba li zadržati\ntvoje promjene ili promjene drugog korisnika.\n"
             }
@@ -568,8 +661,19 @@
         },
         "success": {
             "just_edited": "Upravo si uredio/la OpenStreetMap!",
+            "thank_you": "Hvala ti za poboljšanje karte.",
+            "thank_you_location": "Hvala ti za poboljšanje karte u blizini {where}.",
+            "help_html": "Tvoje promjene bi se trebale pojaviti na OpenStreetMapu kroz par minuta. Druge karte će trebati više vremena za ažuriranje podataka.",
             "help_link_text": "Detalji",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Pogledaj promjene na OSM",
+            "changeset_id": "Tvoje promjene #: {changeset_id}",
+            "like_osm": "Sviđa ti se OpenStreetMap? Poveži se sa ostalima:",
+            "more": "Više",
+            "events": "Događaji",
+            "languages": "Jezici: {languages}",
+            "missing": "Je li nešto nedostaje na ovom popisu?",
+            "tell_us": "Reci nam!"
         },
         "confirm": {
             "okay": "U redu",
@@ -578,7 +682,8 @@
         "splash": {
             "welcome": "Dobrodošli na iD OpenStreetMap uređivač",
             "text": "iD je vrlo jednostavan ali moćan alat za doprinošenje najboljoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledaj {website} i prijavi greške u softveru na {github}.",
-            "walkthrough": "Počni prohod"
+            "walkthrough": "Počni prohod",
+            "start": "Odmah uređuj"
         },
         "source_switch": {
             "live": "uživo",
@@ -606,6 +711,7 @@
             "untagged_area_tooltip": "Odaberi element karte koji opisuje što ovo područje predstavlja.",
             "untagged_relation": "Neoznačena relacija",
             "untagged_relation_tooltip": "Odaberi element karte koji opisuje što ova relacija predstavlja.",
+            "many_deletions": "Brišeš {n} elemenata: {p} točaka, {l} linija, {a} područja, {r} relacija. Jesi li siguran/na da želiš to učiniti? Time ćeš obrisati elemente sa karte koju svi vide na openstreetmap.org.",
             "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
             "deprecated_tags": "Zastarjele oznake: {tags}"
         },
@@ -615,13 +721,12 @@
         },
         "cannot_zoom": "Nije moguće više udaljiti u trenutnom môdu.",
         "full_screen": "Slika preko cijelog zaslona",
-        "gpx": {
-            "drag_drop": "Dovuci i ispusti .gpx, .geojson ili .kml datoteku na stranicu ili klikni gumb s desne strane za pretraživanje datoteka.",
-            "zoom": "Približi na sloj",
-            "browse": "Potraži datoteku"
-        },
-        "mvt": {
-            "zoom": "Približi na sloj"
+        "streetside": {
+            "tooltip": "Ulične fotografije od Microsofta",
+            "title": "Foto preklop (Bing Streetside)",
+            "report": "Prijavi problem sa privatnosti na ovoj slici",
+            "view_on_bing": "Pogledaj na Bing Maps karti",
+            "hires": "Visoka rezolucija"
         },
         "mapillary_images": {
             "tooltip": "Ulične fotografije s Mapillary servisa",
@@ -633,6 +738,37 @@
         },
         "mapillary": {
             "view_on_mapillary": "Pogledaj ovu sliku na Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Ulične fotografije s OpenStreetCam servisa",
+            "title": "Foto preklop (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Pogledaj ovu sliku na OpenStreetCam"
+        },
+        "note": {
+            "note": "Bilješka",
+            "title": "Uredi bilješku",
+            "anonymous": "anoniman",
+            "closed": "(Zatvoreno)",
+            "commentTitle": "Komentari",
+            "status": {
+                "opened": "otvoreno {when}",
+                "reopened": "ponovno otvoreno {when}",
+                "commented": "komentirano {when}",
+                "closed": "zatvoreno {when}"
+            },
+            "newComment": "Novi komentar",
+            "inputPlaceholder": "Unesi komentar kako bi ga podijelio sa drugim korisnicima.",
+            "close": "Zatvori bilješku",
+            "open": "Ponovno otvori bilješku",
+            "comment": "Komentar",
+            "close_comment": "Zatvori i dodaj komentar",
+            "open_comment": "Ponovno otvori i komentiraj",
+            "report": "Prijavi",
+            "new": "Nova bilješka",
+            "newDescription": "Opiši problem.",
+            "save": "Spremi bilješku"
         },
         "help": {
             "title": "Pomoć",
@@ -646,14 +782,104 @@
             "overview": {
                 "title": "Pregled",
                 "navigation_h": "Navigacija",
-                "features_h": "Elementi karte"
+                "features_h": "Elementi karte",
+                "nodes_ways": "Na OpenStreetMapu, točke se ponekad nazivaju *čvorovi*, a linije i područja su ponekad navedeni kao *putevi*."
             },
             "editing": {
+                "title": "Uređivanje i spremanje",
+                "select_h": "Odaberi",
+                "multiselect_h": "Višestruko odabiranje",
+                "undo_redo_h": "Poništi i ponovi",
+                "save_h": "Spremi",
+                "upload_h": "Spremi",
+                "backups_h": "Automatske sigurnosne kopije",
                 "keyboard_h": "Tipkovne kratice",
                 "keyboard": "Možeš vidjeti popis tipkovnih kratica kada pritisneš tipku `?`."
             },
+            "feature_editor": {
+                "title": "Uređivač elemenata",
+                "type_h": "Vrsta elementa",
+                "fields_h": "Polja",
+                "tags_h": "Oznake"
+            },
+            "points": {
+                "title": "Točke",
+                "add_point_h": "Dodavanje točaka",
+                "move_point_h": "Pomicanje točaka",
+                "delete_point_h": "Brisanje točaka"
+            },
+            "lines": {
+                "title": "Linije",
+                "add_line_h": "Dodavanje linija",
+                "add_line_finish": "Za završavanje linije, pritisni `{return}` ili ponovno klikni na posljednju točku.",
+                "modify_line_h": "Uređivanje linija",
+                "connect_line_h": "Spajanje linija",
+                "disconnect_line_h": "Razdvajanje linija",
+                "move_line_h": "Pomicanje linija",
+                "delete_line_h": "Brisanje linija"
+            },
             "areas": {
-                "title": "Područja"
+                "title": "Područja",
+                "intro": "*Područja* se koriste za prikaz granica elemenata poput jezera, zgrada i naseljenih područja. Područja se trebaju iscrtati oko ruba elementa kojeg prikazuju, npr. oko temelja zgrade.",
+                "point_or_area_h": "Točke ili područja?",
+                "add_area_h": "Dodavanje područja",
+                "square_area_h": "Stavi pod pravi kut ćoškove",
+                "modify_area_h": "Uređivanje područja",
+                "delete_area_h": "Brisanje područja"
+            },
+            "relations": {
+                "title": "Relacije",
+                "edit_relation_h": "Uređivanje relacija",
+                "maintain_relation_h": "Održavanje relacija",
+                "relation_types_h": "Vrste relacija",
+                "multipolygon_h": "Multipoligoni",
+                "multipolygon_create": "Za stvaranje multipoligona, npr. zgrade sa \"rupom\", nacrtaj vanjski rub područja i unutarnju granicu kao liniju ili kao područje druge vrste, npr. travnjak. Zatim `{shift}`+{leftclick} lijevi-klik za odabiranje oba elementa, {rightclick} desni-klik za prikaz izbornika za uređivanje i odaberi {merge} **Spoji** naredbu. ",
+                "turn_restriction_h": "Zabrane skretanja",
+                "route_h": "Rute",
+                "boundary_h": "Granice"
+            },
+            "notes": {
+                "title": "Bilješke",
+                "add_note_h": "Dodavanje bilješki",
+                "update_note_h": "Zatvaranje, ponovno otvaranje i komentiranje",
+                "save_note_h": "Spremanje bilješki"
+            },
+            "imagery": {
+                "title": "Pozadinske snimke",
+                "sources_h": "Izvornici snimaka",
+                "offsets_h": "Podešavanje odstupanja snimaka"
+            },
+            "streetlevel": {
+                "title": "Ulične fotografije",
+                "using_h": "Korištenje uličnih fotografija"
+            },
+            "gps": {
+                "title": "GNSS tragovi",
+                "using_h": "Korištenje GNSS tragova"
+            },
+            "field": {
+                "restrictions": {
+                    "title": "Pomoć za zabrane skretanja",
+                    "about": {
+                        "title": "O zabranama"
+                    },
+                    "inspecting": {
+                        "title": "Uvid",
+                        "from_shadow": "{fromShadow} **Segment POLAZIŠTE**",
+                        "allow_shadow": "{allowShadow} **Dozvoljeno ODREDIŠTE**",
+                        "restrict_shadow": "{restrictShadow} **Zabranjeno ODREDIŠTE**",
+                        "only_shadow": "{onlyShadow} **Samo ODREDIŠTE**"
+                    },
+                    "modifying": {
+                        "title": "Uređivanje",
+                        "allow_turn": "{allowTurn} **Dozvoljeno ODREDIŠTE**",
+                        "restrict_turn": "{restrictTurn} **Zabranjeno ODREDIŠTE**",
+                        "only_turn": "{onlyTurn} **Samo ODREDIŠTE**"
+                    },
+                    "tips": {
+                        "title": "Savjeti"
+                    }
+                }
             }
         },
         "intro": {
@@ -789,7 +1015,7 @@
                 "welcome": "Dobrodošao/la! Ovaj prohod će te naučiti osnovama uređivanja OpenStreetMapa.",
                 "practice": "Svi podaci u ovom prohodu su samo za vježbu i bilo kakve promjene koje napraviš neće se spremiti.",
                 "words": "Ovaj prohod će ti predstaviti neke nove riječi i koncepte. Kad predstavimo novu riječ, koristit ćemo *kurziv*.",
-                "mouse": "Možeš koristiti bilo koji uređaj za unos kako bi uredio/la kartu, ali ovaj prohod pretpostavlja da koristiš miš sa lijevom i desnom tipkom. **Ako želiš spojiti miša, napravi to sada i onda klikni na U redu.**",
+                "mouse": "Možeš koristiti bilo koji uređaj za unos kako bi uredio/la kartu, ali ovaj prohod pretpostavlja da koristiš miš sa lijevom i desnom tipkom. **Ako želiš spojiti miša, napravi to sada i onda klikni na: U redu.**",
                 "leftclick": "Kada te ovaj prohod zatraži da klikneš ili dvoklikneš, podrazumjeva se da je to s lijevom tipkom miša. Na trackpadu to može biti jedan klik ili klik jednim prstom. **Klikni lijevom tipkom miša {num} puta.**",
                 "rightclick": "Nekad ćemo te zamoliti da klikneš desnu tipku na mišu. To može biti isto kao i Ctrl-klik ili klik s dva prsta na trackpadu. Tvoja tipkovnica možda ima i tipku 'menu' (obično desno od razmaknice) koja radi kao desni klik. **Klikni desnom tipkom miša {num} puta.**",
                 "chapters": "Zasad nam ide odlično! Možeš koristiti gumbe ispod za preskakanje poglavlja u bilo kojem trenutku ili za ponavljanje poglavlja ispočetka ako zapneš. Počnimo! **Klikni '{next}' za nastavak.**"
@@ -828,11 +1054,13 @@
                 "rightclick": "Desnom tipkom miša možeš kliknuti na element za dobivanje *izbornika za uređivanje* koji prikazuje listu operacija koje možeš odraditi. **Desnom tipkom miša odaberi točku koju si napravio/la za prikazivanje izbornika.**",
                 "delete": "U redu je obrisati elemente koji ne postoje u stvarnom svijetu.{br}Brisanje elementa s OpenStreetMapa ga briše s karte koju svi koriste, zato je potrebno biti siguran da element više ne postoji prije nego ga obrišeš. **Klikni na gumb {button} za brisanje točke.",
                 "undo": "Uvijek možeš poništiti svoje promjene dok god ne snimiš svoje uređivanje na OpenStreetMap. **Klikni na gumb {button} za poništavanje brisanja i vraćanje točke nazad.** ",
-                "play": "Sad kada znaš kako stvoriti i urediti točke, pokušaj stvoriti još neke točke za vježbu! **Kad si spreman/a nastaviti na sljedeće poglavlje, klikni '{next}'.**"
+                "play": "Sada kada znaš kako stvoriti i urediti točke, pokušaj stvoriti još neke točke za vježbu! **Kad si spreman/a nastaviti na sljedeće poglavlje, klikni '{next}'.**"
             },
             "areas": {
                 "title": "Područja",
+                "add_playground": "*Područja* se koriste za prikaz granica elemenata karte kao što su jezera, zgrade i naseljena područja.{br}Također se mogu koristiti za detaljnije kartiranje mnogih elemenata karte koje bi inače kartirali kao točke. **Klikni na gumb {button} Područje za dodavanje novog područja.**",
                 "start_playground": "Idemo dodati ovo igralište na kartu crtajući područje. Područja se crtaju postavljanjem *čvorova* uzduž vanjske granice elementa. **Klikni ili pritisni razmaknicu za postavljanje početnog čvora na jedan od uglova igrališta.**",
+                "continue_playground": "Nastavi crtati područje postavljanjem ostalih čvorova uzduž ruba igrališta. U redu je povezati područje na postojeće pješačke staze.{br}Savjet: Možeš držati tipku '{alt}' na tipkovnici da spriječiš povezivanje čvora s drugim elementima karte. **Nastavi crtati područje igrališta.** ",
                 "finish_playground": "Završi crtanje područja pritiskom tipke enter, ili tako da ponovno klikneš na početni ili posljednji čvor. **Završi crtanje područja igrališta.**",
                 "search_playground": "**Nađi '{preset}' pomoću tražilice.**",
                 "choose_playground": "**Odaberi {preset} sa liste.**",
@@ -859,7 +1087,7 @@
                 "start_drag_endpoint": "Kada je linija odabrana, možeš povući bilo koji njezin čvor tako da klikneš na njega i držiš stisnutu lijevu tipku miša dok ga premještaš. **Povuci krajnju točku na ispravno mjesto gdje bi trebalo biti raskrižje ulica.**",
                 "finish_drag_endpoint": "Ovo mjesto se čini u redu. **Otpusti lijevu tipku miša za završavanje pomaka.** ",
                 "start_drag_midpoint": "Mali trokut je iscrtan na *srednjoj točki* između dva čvora. Drugi način za stvaranje novog čvora je povući tu srednju točku na novu lokaciju. **Povuci središnji trokut za stvaranje novog čvora duž zavoja ceste.**",
-                "continue_drag_midpoint": "Ova linija izgleda puno bolje! Nastavi prilagođavati ovu liniju dvoklikom ili povlačenjem središnjeg trokuta dok krivulja ne bude odgovarala obliku ceste. **Kada si zadovoljan/a s izgledom linije, klikni na U redu.**",
+                "continue_drag_midpoint": "Ova linija izgleda puno bolje! Nastavi prilagođavati ovu liniju dvoklikom ili povlačenjem središnjeg trokuta dok krivulja ne bude odgovarala obliku ceste. **Kada si zadovoljan/a s izgledom linije, klikni na: U redu.**",
                 "delete_lines": "Linije koje ne postoje u stvarosti se mogu obrisati.{br}Ovdje imamo primjer s ulicom {street} koju je grad isplanirao, ali nije nikad izgradio. Možemo ispraviti ovaj dio karte brisanjem linija koje su višak.",
                 "rightclick_intersection": "Posljednja prava ulica je '{street1}', stoga ćemo *razdvojiti* '{street2}' na ovom raskrižju i obrisati sve iznad nje. **Desnom tipkom klikni na čvornu točku raskrižja.**",
                 "split_intersection": "**Klikni na gumb {button} za razvajanje {street}.**",
@@ -897,6 +1125,8 @@
             },
             "startediting": {
                 "title": "Započni uređivanje",
+                "help": "Sada si spreman/a za uređivanje OpenStreetMap karte!{br}Možeš bilo kada ponoviti ovaj prohod ili potražiti više dokumentacije klikom na gumb {button} Pomoć ili pritiskom tipke '{key}'.",
+                "shortcuts": "Možeš vidjeti popis naredbi s njihovim tipkovnim kraticama kada pritisneš tipku '{key}'.",
                 "save": "Ne zaboravi redovno spremiti tvoje promjene!",
                 "start": "Počni kartirati!"
             }
@@ -904,6 +1134,9 @@
         "shortcuts": {
             "title": "Tipkovne kratice",
             "tooltip": "Prikaži tipkovne kratice.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -954,7 +1187,8 @@
                     "title": "Označavanje elemenata",
                     "select_one": "Označavanje pojedinog elementa",
                     "select_multi": "Odabir više elemenata",
-                    "lasso": "Crtanje obruba za odabir elemenata"
+                    "lasso": "Crtanje obruba za odabir elemenata",
+                    "search": "Pronađi elemente koji odgovaraju tekstu"
                 },
                 "with_selected": {
                     "title": "Sa odabranim elementom",
@@ -976,6 +1210,8 @@
                     "add_point": "Dodaj točku",
                     "add_line": "Dodaj liniju",
                     "add_area": "Dodaj područje",
+                    "add_note": "Dodaj bilješku",
+                    "place_point": "Postavi točku ili bilješku",
                     "disable_snap": "Drži za deaktiviranje hvatanja na elemente",
                     "stop_line": "Završi crtanje linije ili područja"
                 },
@@ -984,6 +1220,7 @@
                     "continue_line": "Nastavi liniju na odabranoj točki",
                     "merge": "Kombiniraj (spoji) odabrane elemente",
                     "disconnect": "Razdvoji elemente na odabranoj točki",
+                    "detach_node": "Odvoji odabrani čvor s roditeljskih linija/područja",
                     "split": "Razdijeli liniju na dvije u odabranoj točki",
                     "reverse": "Obrni smjer linije",
                     "move": "Premjesti odabrane elemente",
@@ -1002,13 +1239,40 @@
                     "redo": "Ponovi posljednju radnju",
                     "save": "Spremi promjene"
                 }
+            },
+            "tools": {
+                "title": "Alati",
+                "info": {
+                    "title": "Informacije",
+                    "all": "Aktiviranje svih informacijskih okvira",
+                    "background": "Aktiviranje okvira pozadina",
+                    "history": "Aktiviranje okvira povijesti",
+                    "location": "Aktiviranje okvira lokacije",
+                    "measurement": "Aktiviranje okvira za mjerenje"
+                }
             }
         },
         "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} ft²",
+            "square_miles": "{quantity} mi²",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
             "north": "S",
             "south": "J",
             "east": "I",
-            "west": "Z"
+            "west": "Z",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
         },
         "presets": {
             "categories": {
@@ -1060,31 +1324,24 @@
                     "label": "Dozvoljen pristup",
                     "options": {
                         "designated": {
-                            "description": "Pristup dozvoljen prema znakovima ili prema lokalnom zakonu",
                             "title": "Označeno"
                         },
                         "destination": {
-                            "description": "Pristup dozvoljen samo za pristup destinaciji",
                             "title": "Destinacija"
                         },
                         "dismount": {
-                            "description": "Pristup dozvoljen ali vozač mora sići",
                             "title": "Bez vožnje"
                         },
                         "no": {
-                            "description": "Pristup nije dozvoljen javnosti",
                             "title": "Zabranjeno"
                         },
                         "permissive": {
-                            "description": "Pristup dozvoljen dok vlasnik ne zabrani",
                             "title": "Dopustivo"
                         },
                         "private": {
-                            "description": "Pristup dozvoljen samo s dozvolom vlasnika na pojedinačnoj bazi",
                             "title": "Privatno"
                         },
                         "yes": {
-                            "description": "Regulirano zakonom, pravilo desne strane",
                             "title": "Dozvoljeno"
                         }
                     },
@@ -1152,7 +1409,7 @@
                     "placeholder": "2, 4, 8..."
                 },
                 "aerialway/summer/access": {
-                    "label": "Pristup (ljeto)",
+                    "label": "Pristup (ljeti)",
                     "options": {
                         "both": "Oba",
                         "entry": "Ulaz",
@@ -1363,6 +1620,9 @@
                 "handrail": {
                     "label": "Rukohvat"
                 },
+                "height": {
+                    "label": "Visina (u metrima)"
+                },
                 "highway": {
                     "label": "Vrsta"
                 },
@@ -1458,10 +1718,10 @@
                     "label": "Duljina (u metrima)"
                 },
                 "level": {
-                    "label": "Razina"
+                    "label": "Kat"
                 },
                 "levels": {
-                    "label": "Razina",
+                    "label": "Broj katova",
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
@@ -1472,6 +1732,9 @@
                 },
                 "man_made": {
                     "label": "Vrsta"
+                },
+                "maxheight": {
+                    "label": "Max visina"
                 },
                 "maxspeed": {
                     "label": "Ograničenje brzine",
@@ -1536,7 +1799,7 @@
                     "label": "Jednosmjerna",
                     "options": {
                         "no": "Ne",
-                        "undefined": "Pretpostavlja se da je Ne",
+                        "undefined": "Pretpostavka je da nije jednosmjerna",
                         "yes": "Da"
                     }
                 },
@@ -1544,7 +1807,7 @@
                     "label": "Jednosmjerno",
                     "options": {
                         "no": "Ne",
-                        "undefined": "Pretpostavlja se da je Da",
+                        "undefined": "Pretpostavka je da je jednosmjerna",
                         "yes": "Da"
                     }
                 },
@@ -1572,6 +1835,9 @@
                         "surface": "Površinski",
                         "underground": "Podzemni"
                     }
+                },
+                "payment_multi": {
+                    "label": "Načini plaćanja"
                 },
                 "phone": {
                     "placeholder": "+385 01 123 4567"
@@ -1715,6 +1981,9 @@
                     },
                     "placeholder": "Mali kotačići, kotači, off-road"
                 },
+                "source": {
+                    "label": "Izvornici"
+                },
                 "structure": {
                     "label": "Konstrukcija",
                     "options": {
@@ -1759,6 +2028,9 @@
                 "tourism": {
                     "label": "Vrsta"
                 },
+                "tourism_attraction": {
+                    "label": "Turizam"
+                },
                 "tracktype": {
                     "label": "Vrsta poljskog ili šumskog puta",
                     "options": {
@@ -1787,6 +2059,11 @@
                 },
                 "trees": {
                     "label": "Drveće"
+                },
+                "usage_rail": {
+                    "options": {
+                        "tourism": "Turizam"
+                    }
                 },
                 "water": {
                     "label": "Vrsta"
@@ -1912,9 +2189,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Stalak sa alatima za bicikle"
-                },
-                "amenity/biergarten": {
-                    "name": "Pivnica na otvorenom"
                 },
                 "amenity/boat_rental": {
                     "name": "Najam brodova",
@@ -2219,6 +2493,9 @@
                 "barrier/cycle_barrier": {
                     "name": "Biciklistička prepreka"
                 },
+                "barrier/ditch": {
+                    "name": "Rov"
+                },
                 "barrier/entrance": {
                     "name": "Ulaz"
                 },
@@ -2231,6 +2508,9 @@
                 },
                 "barrier/hedge": {
                     "name": "Živica"
+                },
+                "barrier/kerb": {
+                    "name": "Rubnjak"
                 },
                 "barrier/kissing_gate": {
                     "name": "Rotirajući prolaz za ljude"
@@ -2596,6 +2876,9 @@
                 "highway/path": {
                     "name": "Staza"
                 },
+                "highway/pedestrian_line": {
+                    "name": "Pješačka ulica"
+                },
                 "highway/primary": {
                     "name": "Državna cesta"
                 },
@@ -2757,6 +3040,9 @@
                 },
                 "landuse/quarry": {
                     "name": "Kamenolom"
+                },
+                "landuse/religious": {
+                    "name": "Religiozno područje"
                 },
                 "landuse/residential": {
                     "name": "Stambena zona"
@@ -3667,7 +3953,7 @@
                     "name": "Zabranjeno desno skretanje"
                 },
                 "type/restriction/no_straight_on": {
-                    "name": "Zabranjeno produživanje ravno"
+                    "name": "Zabranjeno prolaženje ravno"
                 },
                 "type/restriction/no_u_turn": {
                     "name": "Zabranjeno polukružno okretanje"
@@ -3801,8 +4087,8 @@
                 "attribution": {
                     "text": "Uvjeti i povratne informacije"
                 },
-                "description": "Esri svijet snimke",
-                "name": "Esri svijet snimke"
+                "description": "Esri snimke svijeta.",
+                "name": "Esri World snimke"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {

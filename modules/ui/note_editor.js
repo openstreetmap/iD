@@ -160,14 +160,45 @@ export function uiNoteEditor(context) {
             .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
-            .on('input', changeInput)
-            .on('blur', changeInput);
+            .on('keydown.note-input', keydown)
+            .on('input.note-input', changeInput)
+            .on('blur.note-input', changeInput);
 
         // update
         noteSave = noteSaveEnter
             .merge(noteSave)
             .call(userDetails)
             .call(noteSaveButtons);
+
+
+        // fast submit if user presses cmd+enter
+        function keydown() {
+            if (!(d3_event.keyCode === 13 && d3_event.metaKey)) return;
+
+            var osm = services.osm;
+            if (!osm) return;
+
+            var hasAuth = osm.authenticated();
+            if (!hasAuth) return;
+
+            if (!_note.newComment) return;
+
+            d3_event.preventDefault();
+
+            d3_select(this)
+                .on('keydown.note-input', null);
+
+            // focus on button and submit
+            window.setTimeout(function() {
+                if (_note.isNew()) {
+                    noteSave.selectAll('.save-button').node().focus();
+                    clickSave(_note);
+                } else  {
+                    noteSave.selectAll('.comment-button').node().focus();
+                    clickComment(_note);
+                }
+            }, 10);
+        }
 
 
         function changeInput() {
@@ -323,29 +354,11 @@ export function uiNoteEditor(context) {
             .merge(buttonEnter);
 
         buttonSection.select('.cancel-button')   // select and propagate data
-            .on('click.cancel', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.removeNote(d);
-                }
-                context.enter(modeBrowse(context));
-                dispatch.call('change');
-            });
+            .on('click.cancel', clickCancel);
 
-        buttonSection.select('.save-button')   // select and propagate data
-            .attr('disabled', function(d) {
-                return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
-            })
-            .on('click.save', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.postNoteCreate(d, function(err, note) {
-                        dispatch.call('change', note);
-                    });
-                }
-            });
+        buttonSection.select('.save-button')     // select and propagate data
+            .attr('disabled', isSaveDisabled)
+            .on('click.save', clickSave);
 
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
@@ -354,30 +367,61 @@ export function uiNoteEditor(context) {
                 var andComment = (d.newComment ? '_comment' : '');
                 return t('note.' + action + andComment);
             })
-            .on('click.status', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    var setStatus = (d.status === 'open' ? 'closed' : 'open');
-                    osm.postNoteUpdate(d, setStatus, function(err, note) {
-                        dispatch.call('change', note);
-                    });
-                }
-            });
+            .on('click.status', clickStatus);
 
         buttonSection.select('.comment-button')   // select and propagate data
-            .attr('disabled', function(d) {
-                return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
-            })
-            .on('click.comment', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var osm = services.osm;
-                if (osm) {
-                    osm.postNoteUpdate(d, d.status, function(err, note) {
-                        dispatch.call('change', note);
-                    });
-                }
+            .attr('disabled', isSaveDisabled)
+            .on('click.comment', clickComment);
+
+
+        function isSaveDisabled(d) {
+            return (hasAuth && d.status === 'open' && d.newComment) ? null : true;
+        }
+    }
+
+
+
+    function clickCancel(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        var osm = services.osm;
+        if (osm) {
+            osm.removeNote(d);
+        }
+        context.enter(modeBrowse(context));
+        dispatch.call('change');
+    }
+
+
+    function clickSave(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        var osm = services.osm;
+        if (osm) {
+            osm.postNoteCreate(d, function(err, note) {
+                dispatch.call('change', note);
             });
+        }
+    }
+
+
+    function clickStatus(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        var osm = services.osm;
+        if (osm) {
+            var setStatus = (d.status === 'open' ? 'closed' : 'open');
+            osm.postNoteUpdate(d, setStatus, function(err, note) {
+                dispatch.call('change', note);
+            });
+        }
+    }
+
+    function clickComment(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        var osm = services.osm;
+        if (osm) {
+            osm.postNoteUpdate(d, d.status, function(err, note) {
+                dispatch.call('change', note);
+            });
+        }
     }
 
 

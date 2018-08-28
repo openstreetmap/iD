@@ -1,10 +1,9 @@
 export { svgAreas } from './areas.js';
+export { svgData } from './data.js';
 export { svgDebug } from './debug.js';
 export { svgDefs } from './defs.js';
-export { svgGpx } from './gpx.js';
-export { svgKeepRight } from './keepRight';
-export { svgMvt } from './mvt.js';
 export { svgIcon } from './icon.js';
+export { svgKeepRight } from './keepRight';
 export { svgLabels } from './labels.js';
 export { svgLayers } from './layers.js';
 export { svgLines } from './lines.js';

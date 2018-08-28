@@ -430,7 +430,12 @@
                 "edited_by": "Modificato da",
                 "changeset": "Gruppo di modifiche",
                 "unknown": "Sconosciuto",
-                "link_text": "Cronologia su openstreetmap.org"
+                "link_text": "Cronologia su openstreetmap.org",
+                "note_no_history": "Nessuna cronologia (nota nuova)",
+                "note_comments": "Commenti",
+                "note_created_date": "Data di creazione",
+                "note_created_user": "Creata da",
+                "note_link_text": "Nota su openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "vertice",
             "line": "linea",
             "area": "area",
-            "relation": "relazione"
+            "relation": "relazione",
+            "note": "nota"
         },
         "geocoder": {
             "search": "Cerca in tutto il mondo...",
@@ -523,8 +529,6 @@
             "best_imagery": "Migliore sorgente di immagini per questo luogo",
             "switch": "Ritorna a questo sfondo",
             "custom": "Personalizzato",
-            "custom_button": "Modifica sfondo personalizzato",
-            "custom_prompt": "Inserisci un modello di URL per i tasselli. Sono validi i valori:\n- {zoom} oppure {z}, {x}, {y} per il modello dei tasselli Z/X/Y\n- {-y} oppure {ty} per le coordinate Y in stile TMS rovesciato\n- {u} per il modello QuadTile\n- {switch:a,b,c} per il multiplexing del server DNS\n\nEsempio:\n{example}",
             "overlays": "Livelli sovrapposti",
             "imagery_source_faq": "Informazioni sulle immagini satellitari / Segnala un problema",
             "reset": "reset",
@@ -624,6 +628,16 @@
             "full": {
                 "description": "Riempimento totale",
                 "tooltip": "Le aree vengono completamente riempite."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Modifica sfondo personalizzato",
+                "header": "Impostazioni sfondo personalizzato",
+                "instructions": "Inserire un modello di URL. I token validi sono:\n{zoom} oppure {z}, {x}, {y} per lo schema dei tasselli Z/X/Y\n{-y} oppure {ty} per le coordinate Y stile TMS rovesciato\n{u} per lo schema quadtile\n{switch:a,b,c} per il bilanciamento del carico via DNS\n\nEsempio:\n{example}",
+                "template": {
+                    "placeholder": "Inserisci un modello di URL "
+                }
             }
         },
         "restore": {
@@ -727,18 +741,6 @@
         },
         "cannot_zoom": "Impossibile rimpicciolire ulteriormente nella modalità attuale.",
         "full_screen": "Passa a schermo intero",
-        "gpx": {
-            "local_layer": "Aggiungi GPX",
-            "drag_drop": "Trascina e rilascia un file .gpx, .geojson o .kml sulla pagina o clicca il pulsante a destra per sceglierne uno",
-            "zoom": "Zoom sul livello",
-            "browse": "Scegli un file"
-        },
-        "mvt": {
-            "local_layer": "Aggiungi MVT",
-            "drag_drop": "Trascina e rilascia un file .mvt o .pbf sulla pagina oppure clicca il pulsante a destra per sceglierne uno",
-            "zoom": "Ingrandisci sul livello",
-            "browse": "Scegli un file"
-        },
         "streetside": {
             "tooltip": "Foto Streetside da Microsoft",
             "title": "Foto sovrimpresse (Bing Streetside)",
@@ -770,6 +772,12 @@
             "anonymous": "anonimo",
             "closed": "(Chiusa)",
             "commentTitle": "Commenti",
+            "status": {
+                "opened": "aperta il {when}",
+                "reopened": "riaperta il {when}",
+                "commented": "commentata il {when}",
+                "closed": "chiusa il {when}"
+            },
             "newComment": "Nuovo commento",
             "inputPlaceholder": "Inserire un commento da condividere con gli altri utenti.",
             "close": "Chiudi nota",
@@ -1441,24 +1449,28 @@
                     "label": "Accesso consentito",
                     "options": {
                         "designated": {
-                            "description": "Accesso consentito stando ai cartelli stradali od alle norme locali",
+                            "description": "Accesso consentito secondo i cartelli stradali o specifiche norme locali",
                             "title": "Preferenziale"
                         },
                         "destination": {
-                            "description": "Accesso consentito solo se la destinazione coincide con l'elemento stesso",
+                            "description": "Accesso consentito solo per raggiungere una destinazione",
                             "title": "Destinazione"
                         },
                         "dismount": {
-                            "description": "Accesso consentito, ma si deve scendere dal veicolo",
+                            "description": "Accesso consentito ma si deve scendere dal veicolo",
                             "title": "Scendere dal veicolo"
                         },
                         "no": {
-                            "description": "Accesso consentito ai soli autorizzati",
+                            "description": "Accesso non consentito al pubblico",
                             "title": "Vietato"
                         },
                         "permissive": {
                             "description": "Accesso consentito fino a quando il proprietario lo consente",
                             "title": "Permissivo"
+                        },
+                        "permit": {
+                            "description": "Accesso consentito solo ai possessori di un’autorizzazione o una licenza",
+                            "title": "Autorizzazione"
                         },
                         "private": {
                             "description": "Accesso consentito solo con il permesso individuale del proprietario",
@@ -1466,7 +1478,7 @@
                         },
                         "yes": {
                             "description": "Accesso consentito a norma di legge; diritto di passaggio",
-                            "title": "Permesso"
+                            "title": "Consentito"
                         }
                     },
                     "placeholder": "Non specificato",
@@ -3050,10 +3062,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Stazione di riparazione biciclette",
                     "terms": "riparazione,bibiclette,meccanico,bici,cicli"
-                },
-                "amenity/biergarten": {
-                    "name": "Birreria all'aperto",
-                    "terms": "birreria,distesa"
                 },
                 "amenity/boat_rental": {
                     "name": "Noleggio barche",
@@ -4910,6 +4918,10 @@
                     "name": "Ponte",
                     "terms": "ponte,viadotto,pontile,arco,strallato,cavalcavia"
                 },
+                "man_made/bunker_silo": {
+                    "name": "Bunker silo",
+                    "terms": "insilato,silaggio,stoccaggio,immagazzinamento,magazzino"
+                },
                 "man_made/chimney": {
                     "name": "Ciminiera",
                     "terms": "torre,camino"
@@ -6730,6 +6742,27 @@
                 },
                 "name": "Hike & Bike"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi piste per motoslitte da OSM (copre l’area scandinava)",
+                "name": "Motoslitte della Scandinavia (sovrapposta)"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaico di ortofoto svedesi del periodo 1955–1965. Potrebbe contenere foto più antiche o più recenti.",
+                "name": "Ortofoto storiche di Lantmäteriet, 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaico di ortofoto svedesi del periodo 1970–1980. Non ancora concluso.",
+                "name": "Ortofoto storiche di Lantmäteriet, 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Termini & Feedback"
@@ -6766,8 +6799,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scansione di ‘Mappe economiche’ ca 1950-1980",
-                "name": "Mappa economica Lantmäteriet (antica)"
+                "description": "Digitalizzazione di “Economic maps” ca. 1950–1980",
+                "name": "Cartina economica Lantmäteriet 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6780,6 +6813,13 @@
                     "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Piste per motoslitte",
+                "name": "Mappa svedese per motoslitte"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6843,6 +6883,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mappando il Botswana su Facebook",
+                "description": "Pagina di OpenStreetMap nel Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mappando il Botswana su Twitter",
+                "description": "Twitter di OpenStreetMap nel Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "Giovani mappatori dell’università di Cape Coast",
                 "description": "Seguici su Twitter: {url}",
@@ -7206,6 +7254,18 @@
             "hu-meetup": {
                 "name": "Meetup di OpenStreetMap in Ungheria",
                 "description": "La piattaforma per organizzare incontri in Ungheria"
+            },
+            "is-facebook": {
+                "name": "OSM dell’Islanda su Facebook",
+                "description": "Pagina di OpenStreetMap in Islanda"
+            },
+            "is-mailinglist": {
+                "name": "Mailinglist talk-is",
+                "description": "Talk-is è la mailinglist ufficiale della comunità OSM islandese"
+            },
+            "is-twitter": {
+                "name": "OSM Islanda su Twitter",
+                "description": "Twitter di OpenStreetMap in Islanda"
             },
             "it-facebook": {
                 "name": "Facebook di OpenStreetMap dell’Italia",
@@ -7623,6 +7683,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap del Perù",
                 "description": "Novità e risorse per la comunità di OpenStreetMap del Perù"
+            },
+            "LATAM-Facebook": {
+                "name": "Facebook di OpenStreetMap dell’America Latina",
+                "description": "OpenStreetMap dell’America Latina su Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "Telegram di OpenStreetMap dell’America Latina",
+                "description": "Telegram di OpenStreetMap per l’America Latina"
+            },
+            "LATAM-Twitter": {
+                "name": "Twitter di OpenStreetMap dell’America Latina",
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap dell’America Latina",
+                "description": "Sosteniamo OpenStreetMap in America Latina",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map America Latina 2018",
+                        "description": "State of the Map America Latina è la conferenza annuale per tutti i mappatori e gli utenti di OpenStreetMap in America Latina. Il programma include discussioni, gruppi, lezioni e mapathon riguardanti OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap su Facebook",

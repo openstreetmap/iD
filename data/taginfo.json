@@ -348,7 +348,7 @@
     {
       "key": "amenity",
       "value": "biergarten",
-      "description": "Beer Garden",
+      "description": "Biergarten",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/beer-15.svg?sanitize=true"
     },
@@ -3353,6 +3353,13 @@
     },
     {
       "key": "sport",
+      "value": "badminton",
+      "description": "Badminton Court",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/tennis-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
       "value": "baseball",
       "description": "Baseball Diamond",
       "object_types": ["node", "area"],
@@ -3563,6 +3570,13 @@
       "value": "bridge",
       "description": "Bridge",
       "object_types": ["area"]
+    },
+    {
+      "key": "man_made",
+      "value": "bunker_silo",
+      "description": "Bunker Silo",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/silo.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -6245,6 +6259,7 @@
     {"key": "access", "value": "designated", "description": "Allowed Access"},
     {"key": "access", "value": "destination", "description": "Allowed Access"},
     {"key": "access", "value": "dismount", "description": "Allowed Access"},
+    {"key": "access", "value": "permit", "description": "Allowed Access"},
     {"key": "foot", "value": "yes", "description": "Allowed Access"},
     {"key": "foot", "value": "no", "description": "Allowed Access"},
     {"key": "foot", "value": "permissive", "description": "Allowed Access"},
@@ -6252,6 +6267,7 @@
     {"key": "foot", "value": "designated", "description": "Allowed Access"},
     {"key": "foot", "value": "destination", "description": "Allowed Access"},
     {"key": "foot", "value": "dismount", "description": "Allowed Access"},
+    {"key": "foot", "value": "permit", "description": "Allowed Access"},
     {"key": "motor_vehicle", "value": "yes", "description": "Allowed Access"},
     {"key": "motor_vehicle", "value": "no", "description": "Allowed Access"},
     {
@@ -6279,6 +6295,11 @@
       "value": "dismount",
       "description": "Allowed Access"
     },
+    {
+      "key": "motor_vehicle",
+      "value": "permit",
+      "description": "Allowed Access"
+    },
     {"key": "bicycle", "value": "yes", "description": "Allowed Access"},
     {"key": "bicycle", "value": "no", "description": "Allowed Access"},
     {"key": "bicycle", "value": "permissive", "description": "Allowed Access"},
@@ -6286,6 +6307,7 @@
     {"key": "bicycle", "value": "designated", "description": "Allowed Access"},
     {"key": "bicycle", "value": "destination", "description": "Allowed Access"},
     {"key": "bicycle", "value": "dismount", "description": "Allowed Access"},
+    {"key": "bicycle", "value": "permit", "description": "Allowed Access"},
     {"key": "horse", "value": "yes", "description": "Allowed Access"},
     {"key": "horse", "value": "no", "description": "Allowed Access"},
     {"key": "horse", "value": "permissive", "description": "Allowed Access"},
@@ -6293,6 +6315,7 @@
     {"key": "horse", "value": "designated", "description": "Allowed Access"},
     {"key": "horse", "value": "destination", "description": "Allowed Access"},
     {"key": "horse", "value": "dismount", "description": "Allowed Access"},
+    {"key": "horse", "value": "permit", "description": "Allowed Access"},
     {"key": "addr:block_number", "description": "Address"},
     {"key": "addr:city", "description": "Address"},
     {"key": "addr:conscriptionnumber", "description": "Address"},

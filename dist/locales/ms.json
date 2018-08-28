@@ -446,7 +446,6 @@
             "best_imagery": "Sumber imejan terbaik yang diketahui bagi lokasi ini",
             "switch": "Tukar balik ke latar belakang ini",
             "custom": "Penyuai",
-            "custom_button": "Tukar latar belakang tersuai",
             "reset": "set semula",
             "minimap": {
                 "tooltip": "Tunjukkan peta yang dizum keluar untuk membantu mencari kawasan yang dipaparkan saat ini.",
@@ -623,11 +622,6 @@
         },
         "cannot_zoom": "Had zum jauh telah dicapai dalam mod yang sedang dipakai.",
         "full_screen": "Togol Skrin Penuh",
-        "gpx": {
-            "drag_drop": "Tarik dan lepaskan suatu fail .gpx, .geojson atau .kml masuk halaman ini, atau klik butang di sebelah kanan untuk mengimbas",
-            "zoom": "Zum ke lapisan",
-            "browse": "Semak imbas untuk fail"
-        },
         "mapillary_images": {
             "tooltip": "Gambar jalan dari Mapillary",
             "title": "Tindihan Gambar (Mapillary)"
@@ -914,19 +908,15 @@
                     "label": "Capaian Dibenarkan",
                     "options": {
                         "designated": {
-                            "description": "Capaian yang dibenarkan menurut papan tanda atau undang-undang tempatan yang khusus",
                             "title": "Bertanda"
                         },
                         "destination": {
-                            "description": "Capaian dibenarkan hanya untuk sampai ke destinasi sahaja",
                             "title": "Destinasi"
                         },
                         "dismount": {
-                            "description": "Capaian dibenarkan tetapi pengayuh basikal diwajibkan turun dari basikal",
                             "title": "Turun Dari Basikal"
                         },
                         "no": {
-                            "description": "Capaian tidak dibenarkan untuk orang awam",
                             "title": "Dilarang"
                         },
                         "private": {

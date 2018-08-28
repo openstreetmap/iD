@@ -28,6 +28,110 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.11.0
+##### Aug 26, 2018
+
+#### :mega: Release Highlights
+* :1234: We've rolled out support for vector tiles in iD! This work was done as part of [Princi Vershwal's 2018 Google Summer of Code project](https://medium.com/@vershwal/vector-tile-support-for-openstreetmaps-id-editor-40b1cb77f63b). Thanks [@vershwal]!<br/>
+_Opening the Map Data pane (shortcut <kbd>F</kbd>) and choose "Custom Map Data" to add a vector tile source._
+* :trophy: To get ready for [State of the Map US](https://2018.stateofthemap.us/), let's make Detroit, USA the [best mapped city in the world](https://www.openstreetmap.us/2018/07/detroit-mapping-challenge-sotmus2018/)!  iD includes 3 vector tile layers of public data, built by [@jonahadkins], to support the Detroit Mapping Challenge.  More info is available on the [osmus/detroid-mapping-challenge repository](https://github.com/osmus/detroit-mapping-challenge).<br/>
+_When mapping around Detroit, try out the special Detroit vector tile layers on the Map Data pane (shortcut <kbd>F</kbd>)_
+
+[@vershwal]: https://github.com/vershwal
+[@jonahadkins]: https://github.com/jonahadkins
+
+#### :tada: New Features
+* Add support for vector tile data ([#3742], [#5072], [#5243], thanks [@vershwal] and [@geohacker])
+  * Replaced the "GPX"/"Local Data" layer with "Custom Map Data" on Map Data pane.
+  * We've added several vector tile sources to the Map Data pane.  They will be available if the user is editing around Detroit.  This is a "Beta" feature to demonstrate the technology. (thanks [@jonahadkins])
+  * :warning: We refactored `svgGpx`->`svgData` module, which now handles both data files and data from vector tile urls. (Important: the URL parameter for loading gpx files has **not** changed, and remains compatible with applications like the HOT Task Manager).
+  * Added `serviceVectorTile` for fetching and caching data from vector tile servers, and merging and deduplicating features that cross tile boundaries.
+
+[#5243]: https://github.com/openstreetmap/iD/issues/5243
+[#5072]: https://github.com/openstreetmap/iD/issues/5072
+[#3742]: https://github.com/openstreetmap/iD/issues/3742
+[@vershwal]: https://github.com/vershwal
+[@geohacker]: https://github.com/geohacker
+[@jonahadkins]: https://github.com/jonahadkins
+
+#### :sparkles: Usability
+* Replace "Custom Imagery" alert box with a modal settings screen ([#5207], thanks [@vershwal])
+  * This allows the user to see more of the url template, and makes copy/pasting easier. ([#4802], [#4806])
+* Show selected note details on the History Panel ([#5158])
+* Show location of selected note on the Measurement Panel ([#5158])
+* Allow submit note comments with shortcut <kbd>cmd</kbd>+<kbd>enter</kbd> ([#5193])
+* Disable note and streetview interactivity while the user is drawing ([#5202])
+
+[#5207]: https://github.com/openstreetmap/iD/issues/5207
+[#5202]: https://github.com/openstreetmap/iD/issues/5202
+[#5193]: https://github.com/openstreetmap/iD/issues/5193
+[#5158]: https://github.com/openstreetmap/iD/issues/5158
+[#4806]: https://github.com/openstreetmap/iD/issues/4806
+[#4802]: https://github.com/openstreetmap/iD/issues/4802
+[@vershwal]: https://github.com/vershwal
+
+#### :bug: Bugfixes
+* Fix dragging of points and notes while a note is selected
+* Fix shadow colors on restriction editor help screens ([#5248])
+* Fix errors when using certain fields after saving to OSM or switching live/dev server ([#4898], [#5229])
+* Fix issue causing uploads to never complete, when reusing an existing open changeset, e.g. conflict resolution (#5228)
+* Fix 404 not found error when fetching metadata for Esri background imagery ([#5222], thanks [@jgravois])
+* Prevent users from restoring history and saving duplicate changes after they start uploading a changeset ([#5200])
+* Disable Add Note <kbd>'4'</kbd> shortcut when notes layer is not enabled ([#5190])
+* Don't reverse cardinal direction roles on relations anymore ([#2004-comment])
+* Allow float/decimal values for height field ([#5184], [#5198], thanks [@jguthrie100])
+
+[#5248]: https://github.com/openstreetmap/iD/issues/5248
+[#5229]: https://github.com/openstreetmap/iD/issues/5229
+[#5228]: https://github.com/openstreetmap/iD/issues/5228
+[#5222]: https://github.com/openstreetmap/iD/issues/5222
+[#5200]: https://github.com/openstreetmap/iD/issues/5200
+[#5198]: https://github.com/openstreetmap/iD/issues/5198
+[#5190]: https://github.com/openstreetmap/iD/issues/5190
+[#5184]: https://github.com/openstreetmap/iD/issues/5184
+[#4898]: https://github.com/openstreetmap/iD/issues/4898
+[#2004-comment]: https://github.com/openstreetmap/iD/pull/2004#issuecomment-407995998
+[@jgravois]: https://github.com/jgravois
+[@jguthrie100]: https://github.com/jguthrie100
+
+#### :earth_asia: Localization
+* Fix note status string to be translateable ([#5189])
+
+[#5189]: https://github.com/openstreetmap/iD/issues/5189
+
+#### :hourglass: Performance
+* Speedup imagery index with which-polygon ([#5226])
+
+[#5226]: https://github.com/openstreetmap/iD/issues/5226
+
+#### :rocket: Presets
+* Add "apothecary" as a search term for pharmacies and chemists ([#5235])
+* Add `listed_status` to whitelist of tags that autocomplete uppercase ([#5231])
+* Use Biergarten as the preset name, and don't add `building=yes` ([#5232])
+* Add preset for `sport=badminton` ([#5233], thanks [@rene78])
+* Add simple `access` field for several presets (campsite, picnic, bbq)
+* Support `access=permit` in `access` and `access_simple` fields ([#5223])
+* Change `stars` from integer field to combo, support capital 'S' ([#5216])
+* Support building tags on gasometers and silos
+* Add preset for `man_made=bunker_silo` ([#5157], [#5195], thanks [@manfredbrandl])
+* Add `layer` field to a few more presets ([#5204], thanks [@Lukas458])
+* Allow `tourism=artwork` on line geometry, silence `tag_suggests_area` warning ([#5206])
+
+[#5235]: https://github.com/openstreetmap/iD/issues/5235
+[#5233]: https://github.com/openstreetmap/iD/issues/5233
+[#5232]: https://github.com/openstreetmap/iD/issues/5232
+[#5231]: https://github.com/openstreetmap/iD/issues/5231
+[#5223]: https://github.com/openstreetmap/iD/issues/5223
+[#5216]: https://github.com/openstreetmap/iD/issues/5216
+[#5206]: https://github.com/openstreetmap/iD/issues/5206
+[#5204]: https://github.com/openstreetmap/iD/issues/5204
+[#5195]: https://github.com/openstreetmap/iD/issues/5195
+[#5157]: https://github.com/openstreetmap/iD/issues/5157
+[@rene78]: https://github.com/rene78
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@Lukas458]: https://github.com/Lukas458
+
+
 # 2.10.0
 ##### Jul 26, 2018
 
@@ -44,7 +148,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 [@kratico]: https://github.com/kratico
 
 #### :tada: New Features
-* Add support for OpenStreetMap notes ([#2629], [#5107], [#5162], thanks [@thomas-hervey])
+* Add support for OpenStreetMap notes ([#2629], [#5107], [#5162], thanks [@thomas-hervey] and [@kamicut])
 * Add Detach Node operation ([#4320], [#5127], thanks [@Psigio])
 * Add support for high resolution image tile sizes
   * This improves the appearance of the Mapbox Satellite layer and fixes the display of MTB-Norway layer ([#5179])
@@ -65,6 +169,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 [#4320]: https://github.com/openstreetmap/iD/issues/4320
 [#2629]: https://github.com/openstreetmap/iD/issues/2629
 [@thomas-hervey]: https://github.com/thomas-hervey
+[@kamicut]: https://github.com/kamicut
 [@Psigio]: https://github.com/Psigio
 [@kratico]: https://github.com/kratico
 

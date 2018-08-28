@@ -285,27 +285,21 @@
                 "access": {
                     "options": {
                         "designated": {
-                            "description": "只限标志指定或特定本地法律容许人士进入",
                             "title": "特定的"
                         },
                         "destination": {
-                            "description": "只限前往目的地人士进入",
                             "title": "目的地"
                         },
                         "no": {
-                            "description": "禁止一般公众进入",
                             "title": "禁止的"
                         },
                         "permissive": {
-                            "description": "容许进入，直至拥有者撇回许可",
                             "title": "获许可进入"
                         },
                         "private": {
-                            "description": "须拥有者个别批准，方可进入",
                             "title": "私人"
                         },
                         "yes": {
-                            "description": "按法律及路权，有权使用",
                             "title": "允许的"
                         }
                     },

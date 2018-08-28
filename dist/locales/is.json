@@ -523,8 +523,6 @@
             "best_imagery": "Best þekkti brunnur myndefnis fyrir þessa staðsetningu",
             "switch": "Skipta aftur í þennan bakgrunn",
             "custom": "Sérsniðið",
-            "custom_button": "Breyta sérsniðnum bakgrunni",
-            "custom_prompt": "Settu inn sniðmát slóðar á kortatígul. Gild viðföng eru:\n   - {zoom} eða {z}, {x}, {y} fyrir Z/X/Y tíglaskema\n   - {-y} eða {ty} fyrir flett TMS-stíls Y-hnit\n   - {u} fyrir fjórtígla skema (quadtile)\n   - {switch:a,b,c} fyrir fléttugreiningu á DNS-þjóni (multiplexing)\n\nDæmi:\n{example}",
             "overlays": "Þekjur",
             "imagery_source_faq": "Upplýsingar myndefnis / Tilkynna vandamál",
             "reset": "endurstilla",
@@ -727,18 +725,6 @@
         },
         "cannot_zoom": "Get ekki rennt lengra frá í núverandi ham.",
         "full_screen": "Víxla skjáfylli af/á",
-        "gpx": {
-            "local_layer": "Bæta við GPX",
-            "drag_drop": "Dragðu og slepptu .gpx, .geojson eða .kml-skrá á síðuna, eða smelltu á hnappinn til hægri til að leita að skrá",
-            "zoom": "Renna að lagi",
-            "browse": "Finna skrá"
-        },
-        "mvt": {
-            "local_layer": "Bæta við MVT",
-            "drag_drop": "Dragðu og slepptu .mvt eða pbf skrá á síðuna eða smelltu á takkann til hægri til að fletta",
-            "zoom": "Renna að lagi",
-            "browse": "Finna skrá"
-        },
         "streetside": {
             "tooltip": "Ljósmyndir í götuhæð frá Microsoft",
             "title": "Ljósmyndaþekja (Bing Streetside)",
@@ -1441,31 +1427,24 @@
                     "label": "Leyfður aðgangur",
                     "options": {
                         "designated": {
-                            "description": "Aðgangur heimill samkvæmt skiltum eða sértækum staðbundnum reglum",
                             "title": "Ætlað fyrir"
                         },
                         "destination": {
-                            "description": "Aðgangur leyfður aðeins ef í fararleið",
                             "title": "Áfangastaður"
                         },
                         "dismount": {
-                            "description": "Aðgangur leyfður en það þarf að fara af baki",
                             "title": "Af baki"
                         },
                         "no": {
-                            "description": "Aðgangur óheimill almenningi",
                             "title": "Aðgangur bannaður"
                         },
                         "permissive": {
-                            "description": "Aðgangur heimill þar til eigandi dregur leyfi til baka",
                             "title": "Með leyfi"
                         },
                         "private": {
-                            "description": "Aðgangur heimill eingöngu með samþykki landeiganda",
                             "title": "Einka"
                         },
                         "yes": {
-                            "description": "Aðgangur leyfður með lögum; leiðarréttur",
                             "title": "Leyft"
                         }
                     },
@@ -2990,9 +2969,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Hjólaviðgerðastandur"
-                },
-                "amenity/biergarten": {
-                    "name": "Bjórgarður"
                 },
                 "amenity/boat_rental": {
                     "name": "Bátaleiga"
@@ -5968,9 +5944,7 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                },
-                "description": "Skönnun á ´Hagfræðikortum´ u.þ.b. 1950-1980",
-                "name": "Lantmäteriet hagfræðikort (söguleg)"
+                }
             },
             "qa_no_address": {
                 "attribution": {

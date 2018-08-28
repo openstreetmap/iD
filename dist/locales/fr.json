@@ -23,7 +23,7 @@
             },
             "add_note": {
                 "title": "Note",
-                "description": "Vous avez repéré une erreur ? Faîtes-le savoir aux autres cartographes.",
+                "description": "Vous avez repéré une erreur ? Faites-le savoir aux autres cartographes.",
                 "tail": "CLiquez sur la earte pour ajouter une note."
             },
             "browse": {
@@ -430,7 +430,12 @@
                 "edited_by": "Edité par",
                 "changeset": "Groupe de modification",
                 "unknown": "Inconnu",
-                "link_text": "Historique sur openstreetmap.org"
+                "link_text": "Historique sur openstreetmap.org",
+                "note_no_history": "Pas d'historique (nouvelle note)",
+                "note_comments": "Commentaires",
+                "note_created_date": "Date de création",
+                "note_created_user": "Crée pare",
+                "note_link_text": "Note sur openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "sommet",
             "line": "ligne",
             "area": "polygone",
-            "relation": "relation"
+            "relation": "relation",
+            "note": "note"
         },
         "geocoder": {
             "search": "Rechercher dans le monde entier…",
@@ -523,8 +529,6 @@
             "best_imagery": "Meilleur fond de carte connu pour cet endroit",
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
-            "custom_button": "Modifier le fond personnalisé",
-            "custom_prompt": "Entrez un modèle URL de tuile. Les symboles valide sont : \n  - {zoom} ou {z}, {x}, {y} pour le schéma de tuile Z/X/Y\n  - {-y} ou {ty} pour basculer vers le style de coordonnés TMS Y\n  - {u} pour le schéma quadri-tuiles\n  - {switch:a,b,c} pour le multiplexage de serveurs DNS\n\nExemple:\n{example}",
             "overlays": "Calques",
             "imagery_source_faq": "Info imagerie / Signaler un problème",
             "reset": "réinitialiser",
@@ -727,18 +731,6 @@
         },
         "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
         "full_screen": "Afficher/cacher le plein écran",
-        "gpx": {
-            "local_layer": "Ajouter un fichier GPX",
-            "drag_drop": "Glissez-déposez un fichier .gpx, .geojson ou .kml sur la page, ou cliquez sur le bouton de droite pour le rechercher dans votre ordinateur.",
-            "zoom": "Zoomer sur la couche",
-            "browse": "Sélectionnez un fichier"
-        },
-        "mvt": {
-            "local_layer": "Ajouter un fichier MVT",
-            "drag_drop": "Glissez-déposez un fichier .mvt ou .pbf sur la page ou cliquez sur le bouton à droite pour naviguer dans vos fichiers.",
-            "zoom": "Zoomer sur la couche",
-            "browse": "Sélectionner un fichier"
-        },
         "streetside": {
             "tooltip": "Photos Streetside de Microsoft",
             "title": "Sucouche photo (Bing Streetside)",
@@ -770,6 +762,12 @@
             "anonymous": "anonyme",
             "closed": "(Fermée)",
             "commentTitle": "Commentaires",
+            "status": {
+                "opened": "ouverte {when}",
+                "reopened": "réouverte {when}",
+                "commented": "commentée {when}",
+                "closed": "fermée {when}"
+            },
             "newComment": "Nouveau commentaire",
             "inputPlaceholder": "Saisissez un commentaire à partager avec d'autres utilisateurs.",
             "close": "Fermer la note",
@@ -1441,31 +1439,35 @@
                     "label": "Accès autorisé",
                     "options": {
                         "designated": {
-                            "description": "Accès autorisé par des panneaux ou par une réglementation locale",
+                            "description": "Accès autorisé selon la signalisation ou la réglementation locale ",
                             "title": "Prévu spécifiquement pour certains types de véhicules"
                         },
                         "destination": {
-                            "description": "Circulation interdite, sauf pour accéder aux zones desservies",
+                            "description": "Accès autorisé uniquement pour atteindre une destination",
                             "title": "Interdit sauf riverains"
                         },
                         "dismount": {
-                            "description": "Accès autorisé mais mettre pied à terre",
+                            "description": "Accès autorisé avec pied à terre",
                             "title": "Mettre pied à terre"
                         },
                         "no": {
-                            "description": "Accès interdit au public",
+                            "description": "Accès non autorisé au public",
                             "title": "Interdit"
                         },
                         "permissive": {
-                            "description": "Accès laissé libre par le propriétaire, révocable à tout moment",
+                            "description": "Accès autorisé jusqu'à ce que le propriétaire révoques la permission",
                             "title": "Accès toléré"
                         },
+                        "permit": {
+                            "description": "Accès autorisés uniquement avec une licence ou permis valide",
+                            "title": "Permis"
+                        },
                         "private": {
-                            "description": "Accès autorisé sur demande au propriétaire",
+                            "description": "Accès autorisés uniquement sur autorisation nominative du propriétaire",
                             "title": "Privé"
                         },
                         "yes": {
-                            "description": "Accès autorisé par servitude de passage",
+                            "description": "Accès autorisé par la loi ; droit de passage",
                             "title": "Autorisé"
                         }
                     },
@@ -3050,10 +3052,6 @@
                     "name": "Stand d'outils de réparation de vélos",
                     "terms": "Magasin de vélos, Atelier de réparation de vélos, bicycle repair station"
                 },
-                "amenity/biergarten": {
-                    "name": "Brasserie de plein air - Biergarten",
-                    "terms": "Brasserie, bière, boissons alcolisées, biergarten"
-                },
                 "amenity/boat_rental": {
                     "name": "Location de bateau",
                     "terms": "Location de bateaux, boat rental"
@@ -3351,8 +3349,8 @@
                     "terms": "Station de vidange, sanitaires, mobilehome ,camping, toilettes chimiques"
                 },
                 "amenity/school": {
-                    "name": "Établissement scolaire - élémentaire ou secondaire",
-                    "terms": "école élémentaire, école primaire, collège, lycée, \ncycles primaires et secondaires, enseignements élémentaire et secondaire, \nenseignement élémentaire, enseignement secondaire, \nétablissement d'enseignement élémentaire, établissement d'enseignement secondaire, \nécole, écoliers, CP-CE1-CE2-CM1-CM2, college, lycee, school"
+                    "name": "École élémentaire ou secondaire",
+                    "terms": "école élémentaire, école primaire, école secondaire, collège, lycée, \ncycles primaires et secondaires, enseignements élémentaire et secondaire, \nenseignement élémentaire, enseignement secondaire, \nétablissement d'enseignement élémentaire, établissement d'enseignement secondaire,\nécole, écoliers, CP-CE1-CE2-CM1-CM2, ecole, college, lycee, school"
                 },
                 "amenity/scrapyard": {
                     "name": "Casse automobile"
@@ -4914,6 +4912,10 @@
                 "man_made/bridge": {
                     "name": "Pont",
                     "terms": "Pont"
+                },
+                "man_made/bunker_silo": {
+                    "name": "Silo-couloir",
+                    "terms": "Silo-couloir, trémie"
                 },
                 "man_made/chimney": {
                     "name": "Cheminée",
@@ -6764,6 +6766,25 @@
                 },
                 "name": "Randonnée & Vélo"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Chemins motoneige de Kelkkareitit.fi depuis les données OSM (couverture nordique)",
+                "name": "Surcouche motoneige nordique"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "name": "Ortophotos historiques Lantmäteriet 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "name": "Ortophotos historiques Lantmäteriet 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Termes & commentaires"
@@ -6799,9 +6820,7 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                },
-                "description": "Numérisation de ´Economic maps´ de 1950-1980",
-                "name": "Carte économique (historique) de Lantmäteriet"
+                }
             },
             "qa_no_address": {
                 "attribution": {
@@ -6814,6 +6833,13 @@
                     "text": "© Tuile: données skobbler Map : contributeurs OpenStreetMap"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Chemins motoneige",
+                "name": "Carte motoneige en Suède"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6877,9 +6903,17 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana sur Facebook",
+                "description": "Page OpenStreetMap au Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana sur Twitter",
+                "description": "Fil Twitter OpenStreetMap au Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "YouthMappers de l'université de Cape Coast",
-                "description": "Suivez-nous sur Twitter: {url}",
+                "description": "Suivez-nous sur Twitter : {url}",
                 "extendedDescription": "C'est le compte officiel du cahpitre Youth Mappers de l'université de Cape Coast, au Ghana. Nous aimons les cartes, la donnée libre et aider les communautés vulnérables."
             },
             "osm-gh-facebook": {
@@ -6889,7 +6923,7 @@
             },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Ghana sur Twitter",
-                "description": "Suivez-nous sur Twitter: {url}"
+                "description": "Suivez-nous sur Twitter : {url}"
             },
             "talk-gh": {
                 "name": "Liste de diffusion Talk-gh",
@@ -6953,7 +6987,7 @@
             },
             "OSM-japan-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Japon",
-                "description": "Hashtag sur Twitter: {url}"
+                "description": "Hashtag sur Twitter : {url}"
             },
             "OSM-japan-website": {
                 "name": "OpenStreetMap Japon",
@@ -7063,7 +7097,7 @@
             },
             "at-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Autriche",
-                "description": "OpenStreetMap Autriche sur Twitter: {url}"
+                "description": "OpenStreetMap Autriche sur Twitter : {url}"
             },
             "osmgraz-meetup": {
                 "name": "Rencontres OSM communautaires de Graz",
@@ -7115,7 +7149,7 @@
             },
             "be-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Belgique",
-                "description": "OSM Belgique sur Twitter: @osm_be"
+                "description": "OSM Belgique sur Twitter : @osm_be"
             },
             "hr-facebook": {
                 "name": "Groupe Facebook d'OpenStreetMap Croatie",
@@ -7139,7 +7173,7 @@
             },
             "osmcz-twitter": {
                 "name": "Twitter tchèque @osmcz",
-                "description": "Suivez la communauté tchèque sur Twitter - dont la traduction des HebdoOSM !"
+                "description": "Suivez la communauté tchèque sur Twitter — dont la traduction des HebdoOSM !"
             },
             "talk-cz-mailinglist": {
                 "name": "Liste de diffusion tchèque (talk-cz)",
@@ -7187,7 +7221,7 @@
             },
             "fr-twitter": {
                 "name": "OpenStreetMap France sur Twitter",
-                "description": "OpenStreetMap France sur Twitter: {url}"
+                "description": "OpenStreetMap France sur Twitter : {url}"
             },
             "de-berlin-mailinglist": {
                 "name": "Liste de diffusion pour Berlin",
@@ -7203,7 +7237,7 @@
             },
             "de-berlin-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Berlin",
-                "description": "Suivez-nous sur Twitter: {url}"
+                "description": "Suivez-nous sur Twitter : {url}"
             },
             "de-forum": {
                 "name": "Forum d'OpenStreetMap DE",
@@ -7240,6 +7274,18 @@
             "hu-meetup": {
                 "name": "Réunion d'OpenStreetMap Hongrie",
                 "description": "La plate-forme pour l'organisation des réunions en Hongrie"
+            },
+            "is-facebook": {
+                "name": "OSM Islande sur Facebook",
+                "description": "Page OpenStreetMap en Islande"
+            },
+            "is-mailinglist": {
+                "name": "Liste de diffusion Talk-is",
+                "description": "Talk-is est la liste de diffusion officielle pour la communauté OSM islandaise"
+            },
+            "is-twitter": {
+                "name": "OSM Islande sur Twitter",
+                "description": "Fil Twitter d'OpenStreetMap en Islande"
             },
             "it-facebook": {
                 "name": "Facebook d'OpenStreetMap Italie",
@@ -7337,7 +7383,7 @@
             },
             "se-twitter": {
                 "name": "OpenStreetMap Suède sur Twitter",
-                "description": "Suivez-nous sur Twitter: {url}"
+                "description": "Suivez-nous sur Twitter : {url}"
             },
             "Nottingham-OSM-pub-meetup": {
                 "name": "Rencontres mensuelles dans un pub de East Midlands (Nottingham)",
@@ -7657,6 +7703,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Pérou",
                 "description": "Nouvelles et ressources pour la communauté d'OpenStreetMap au Pérou"
+            },
+            "LATAM-Facebook": {
+                "name": "Facebook d'OpenStreetMap Amérique Latine",
+                "description": "OpenStreetMap Amérique Latine sur Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "Télégram d'OpenStreetMap Amérique Latine",
+                "description": "Télégram OpenStreetMap pour l'Amérique Latine"
+            },
+            "LATAM-Twitter": {
+                "name": "Fil Twitter d'OpenStreetMap Amérique Latine",
+                "description": "Suivez-nous sur Twitter à l'adresse {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Amérique Latine",
+                "description": "Supporte OpenStreetMap en Amérique Latine",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "Le State of the Map Latam est la conférence annuelle pour tous les cartographes et les utilisateurs d'OpenStreetMap en Amérique Latine. Le programme comprend des présentations, des tables rondes, des ateliers et des mapathons sur le thème d'OpenStreetMap.",
+                        "where": "Buenos Aires, Argentine"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap sur Facebook",

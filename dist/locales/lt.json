@@ -401,7 +401,6 @@
             "best_imagery": "Geriausia žinoma ortofotografija šiai vietai",
             "switch": "Persijungti atgal į šį foną",
             "custom": "Savas",
-            "custom_button": "Redaguoti pasirinktiną foną",
             "reset": "iš naujo",
             "minimap": {
                 "tooltip": "Rodyti atitolintą žemėlapį, kad būtų lengviau rasti šiuo metu rodomą vietą."
@@ -559,11 +558,6 @@
         },
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
-        "gpx": {
-            "drag_drop": "Tempkite ir numeskite .gpx, .geojson arba .kml failą ant puslapio arba spauskite mygtuką dešinėje, kad naršytumėte",
-            "zoom": "Išdidinti sluoksnį",
-            "browse": "Naršyti failo"
-        },
         "mapillary_images": {
             "tooltip": "Gatvės lygio nuotraukos iš Mapillary",
             "title": "Nuotraukų perdanga (Mapillary)"
@@ -710,31 +704,24 @@
                     "label": "Leidžiamas priėjimas",
                     "options": {
                         "designated": {
-                            "description": "Priėjimas galimas remiantis ženklais ir savitais vietos įstatymais",
                             "title": "Skirtas"
                         },
                         "destination": {
-                            "description": "Priėjimas leistinas tik atvykti į tikslą",
                             "title": "Tikslinis"
                         },
                         "dismount": {
-                            "description": "Priėjimas leidžiamas, bet dviratininkas turi nulipti nuo dviračio",
                             "title": "Nulipti"
                         },
                         "no": {
-                            "description": "Priėjimas draudžiamas plačiajai visuomenei",
                             "title": "Draudžiamas"
                         },
                         "permissive": {
-                            "description": "Priėjimas leistinas, kai savininkas konkrečiu laiku panaikina draudimą",
                             "title": "Leistinas"
                         },
                         "private": {
-                            "description": "Priėjimas leistinas tik su savininko leidimu",
                             "title": "Privatus"
                         },
                         "yes": {
-                            "description": "Priėjimas leidžiamas įstatymų; pirmumo teisė",
                             "title": "Leidžiamas"
                         }
                     },

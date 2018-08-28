@@ -36,37 +36,42 @@ en:
         options:
           designated:
             # access=designated
-            description: Access permitted according to signs or specific local laws
+            description: Access allowed according to signs or specific local laws
             # access=designated
             title: Designated
           destination:
             # access=destination
-            description: Access permitted only to reach a destination
+            description: Access allowed only to reach a destination
             # access=destination
             title: Destination
           dismount:
             # access=dismount
-            description: Access permitted but rider must dismount
+            description: Access allowed but rider must dismount
             # access=dismount
             title: Dismount
           'no':
             # access=no
-            description: Access not permitted to the general public
+            description: Access not allowed to the general public
             # access=no
             title: Prohibited
           permissive:
             # access=permissive
-            description: Access permitted until such time as the owner revokes the permission
+            description: Access allowed until such time as the owner revokes the permission
             # access=permissive
             title: Permissive
+          permit:
+            # access=permit
+            description: Access allowed only with a valid permit or license
+            # access=permit
+            title: Permit
           private:
             # access=private
-            description: Access permitted only with permission of the owner on an individual basis
+            description: Access allowed only with permission of the owner on an individual basis
             # access=private
             title: Private
           'yes':
             # access=yes
-            description: Access permitted by law; a right of way
+            description: Access allowed by law; a right of way
             # access=yes
             title: Allowed
         # access field placeholder
@@ -1927,9 +1932,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Bicycle Repair Tool Stand'', separated by commas>'
       amenity/biergarten:
         # amenity=biergarten
-        name: Beer Garden
+        name: Biergarten
         # 'terms: beer,bier,booze'
-        terms: '<translate with synonyms or related terms for ''Beer Garden'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Biergarten'', separated by commas>'
       amenity/boat_rental:
         # amenity=boat_rental
         name: Boat Rental
@@ -2169,7 +2174,7 @@ en:
       amenity/pharmacy:
         # amenity=pharmacy
         name: Pharmacy
-        # 'terms: drug*,med*,prescription'
+        # 'terms: apothecary,drug*,med*,prescription'
         terms: '<translate with synonyms or related terms for ''Pharmacy'', separated by commas>'
       amenity/place_of_worship:
         # amenity=place_of_worship
@@ -3975,6 +3980,10 @@ en:
         # 'leisure=pitch, sport=american_football'
         name: American Football Field
         terms: '<translate with synonyms or related terms for ''American Football Field'', separated by commas>'
+      leisure/pitch/badminton:
+        # 'leisure=pitch, sport=badminton'
+        name: Badminton Court
+        terms: '<translate with synonyms or related terms for ''Badminton Court'', separated by commas>'
       leisure/pitch/baseball:
         # 'leisure=pitch, sport=baseball'
         name: Baseball Diamond
@@ -4112,6 +4121,11 @@ en:
         # man_made=bridge
         name: Bridge
         terms: '<translate with synonyms or related terms for ''Bridge'', separated by commas>'
+      man_made/bunker_silo:
+        # man_made=bunker_silo
+        name: Bunker Silo
+        # 'terms: Silage,Storage'
+        terms: '<translate with synonyms or related terms for ''Bunker Silo'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney
@@ -5221,7 +5235,7 @@ en:
       shop/chemist:
         # shop=chemist
         name: Drugstore
-        # 'terms: med*,drug*,gift'
+        # 'terms: apothecary,med*,drug*,gift'
         terms: '<translate with synonyms or related terms for ''Drugstore'', separated by commas>'
       shop/chocolate:
         # shop=chocolate

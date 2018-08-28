@@ -516,8 +516,6 @@
             "best_imagery": "Bedst kendte luftfotokilde for denne her lokalitet",
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
-            "custom_button": "Rediger brugerdefineret baggrund",
-            "custom_prompt": "Indtast en URL-skabelon for kort-fliser. Gyldige formater er:\n   - {zoom} eller {z}, {x}, {y} for Z/X/Y flise-skemaer\n   - {-y} eller {ty} for omvendte Y-koordinater i TMS-stil\n   - {u} for quad-flise-skemaer\n   - {switch:a,b,c} for multipleksning af DNS-opslag\n\nEksempel:\n{example}",
             "overlays": "Overlægninger",
             "imagery_source_faq": "Luftfoto-information / anmeld problem",
             "reset": "nulstil",
@@ -720,18 +718,6 @@
         },
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuld skærmtilstand",
-        "gpx": {
-            "local_layer": "Tilføj en GPX",
-            "drag_drop": "Træk og slip en .gpx, .geojson eller .kml ind på siden eller klik på knappen til højre for at browse",
-            "zoom": "Zoom til lag",
-            "browse": "Gennemse efter en fil"
-        },
-        "mvt": {
-            "local_layer": "Tilføj en MVT",
-            "drag_drop": "Træk og slip en .mvt eller .pbf-fil til siden, eller klik på knappen til højre for at vælge",
-            "zoom": "Zoom til lag",
-            "browse": "Vælg en fil"
-        },
         "streetside": {
             "tooltip": "Gadefotos fra Microsoft",
             "title": "Foto-overlag (Bing Streetside)",
@@ -1321,31 +1307,24 @@
                     "label": "Tilladt adgang",
                     "options": {
                         "designated": {
-                            "description": "Adgang tilladt ifølge trafikskilte eller lokale bestemmelser",
                             "title": "Bestemt netop til dette formål"
                         },
                         "destination": {
-                            "description": "Ærindekørsel tilladt",
                             "title": "Destination"
                         },
                         "dismount": {
-                            "description": "Kørsel forbudt, cyklist skal trække",
                             "title": "Trækken tilladt"
                         },
                         "no": {
-                            "description": "Adgang ikke tilladt for offentligheden",
                             "title": "Forbudt"
                         },
                         "permissive": {
-                            "description": "Adgang tilladt indtil ejer tilbagekalder tilladelsen",
                             "title": "Adgang efter tilladelse"
                         },
                         "private": {
-                            "description": "Adgang kun tilladt ved udstedelse af individuelle tilladelser fra ejer",
                             "title": "Privat"
                         },
                         "yes": {
-                            "description": "Adgang tilladt ifølge loven",
                             "title": "Tilladt"
                         }
                     },
@@ -2822,10 +2801,6 @@
                     "name": "Cykelreparationsværktøj",
                     "terms": "Cykelreparationsværktøj"
                 },
-                "amenity/biergarten": {
-                    "name": "Ølhave",
-                    "terms": "Ølhave, Ølstue"
-                },
                 "amenity/boat_rental": {
                     "name": "Bådudlejning",
                     "terms": "Bådudlejning, lystbådudlejning"
@@ -3002,7 +2977,7 @@
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcykelparkering",
-                    "terms": "Motorcykelparkering"
+                    "terms": "Motorcykelparkering,mc,parkering,motorcykel"
                 },
                 "amenity/music_school": {
                     "name": "Musikskole",
@@ -5125,7 +5100,7 @@
                 },
                 "shop/car_repair": {
                     "name": "Autoværksted",
-                    "terms": "Autoværksted, Bilværksted"
+                    "terms": "Autoværksted, Bilværksted,automekaniker,mekaniker"
                 },
                 "shop/carpet": {
                     "name": "Tæppeforhandler",
@@ -5339,7 +5314,11 @@
                 },
                 "shop/motorcycle": {
                     "name": "Motorcykelforhandler",
-                    "terms": "Motorcykelforhandler"
+                    "terms": "Motorcykelforhandler,mc,forretning,motorcykel"
+                },
+                "shop/motorcycle_repair": {
+                    "name": "Motorcykelværksted",
+                    "terms": "mekaniker,mc,værksted,mc værksted,motorcykel"
                 },
                 "shop/music": {
                     "name": "Musikbutik",

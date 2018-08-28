@@ -168,7 +168,17 @@ export function svgPath(projection, graph, isArea) {
         }
     };
 
-    svgpath.geojson = path;
+    svgpath.geojson = function(d) {
+        if (d.__featurehash__ !== undefined) {
+            if (d.__featurehash__ in cache) {
+                return cache[d.__featurehash__];
+            } else {
+                return cache[d.__featurehash__] = path(d);
+            }
+        } else {
+            return path(d);
+        }
+    };
 
     return svgpath;
 }

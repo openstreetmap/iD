@@ -14,6 +14,7 @@ export { utilGetAllNodes } from './util';
 export { errorTypes, parseErrorDescriptions, clickLink } from './keepRight';
 export { utilGetPrototypeOf } from './util';
 export { utilGetSetValue } from './get_set_value';
+export { utilHashcode } from './util';
 export { utilIdleWorker } from './idle_worker';
 export { utilNoAuto } from './util';
 export { utilPrefixCSSProperty } from './util';

@@ -21,6 +21,11 @@
                 "description": "Lisää ravintoloita, turistinähtävyyksiä, postilaatikoita ja muita paikkapisteitä kartalle.",
                 "tail": "Lisää paikkapiste napsauttamalla karttaa."
             },
+            "add_note": {
+                "title": "Karttailmoitus",
+                "description": "Huomasitko virheen? Kerro siitä muille kartoittajille.",
+                "tail": "Tee karttailmoitus napsauttamalla karttaa."
+            },
             "browse": {
                 "title": "Selaa",
                 "description": "Loitonna, lähennä ja panoroi karttaa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Paikkapiste lisätty.",
                     "vertex": "Piste lisätty viivaan.",
-                    "relation": "Relaatio lisätty."
+                    "relation": "Relaatio lisätty.",
+                    "note": "Karttailmoitus lisättiin."
                 }
             },
             "start": {
@@ -348,6 +354,8 @@
             "localized_translation_name": "Nimi"
         },
         "zoom_in_edit": "Aloita muokkaaminen lähentämällä karttaa",
+        "login": "Kirjaudu sisään",
+        "logout": "Kirjaudu ulos",
         "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
         "report_a_bug": "Ilmoita ongelmasta",
         "help_translate": "Auta kääntämisessä",
@@ -402,12 +410,18 @@
                 "key": "H",
                 "title": "Historia",
                 "selected": "{n} valittu",
+                "no_history": "Ei historiaa (tuore karttakohde)",
                 "version": "Versio",
                 "last_edit": "Viimeisin muokkaus",
                 "edited_by": "Muokkaaja",
                 "changeset": "Muutoskokoelma",
                 "unknown": "Ei tiedossa",
-                "link_text": "Muutoshistoria openstreetmap.org-sivustolla"
+                "link_text": "Muutoshistoria openstreetmap.org-sivustolla",
+                "note_no_history": "Ei historiaa (tuore karttailmoitus)",
+                "note_comments": "Kommentit",
+                "note_created_date": "Lähetetty",
+                "note_created_user": "Lähettäjä",
+                "note_link_text": "Karttailmoitus OpenStreetMapissa"
             },
             "location": {
                 "key": "L",
@@ -437,7 +451,8 @@
             "vertex": "keskipiste",
             "line": "viiva",
             "area": "alue",
-            "relation": "relaatio"
+            "relation": "relaatio",
+            "note": "karttailmoitus"
         },
         "geocoder": {
             "search": "Etsi maailmanlaajuisesti...",
@@ -456,7 +471,7 @@
             "view_on_osm": "Näytä openstreetmap.org-sivustolla",
             "all_fields": "Kaikki kentät",
             "all_tags": "Kaikki ominaisuustiedot",
-            "all_members": "Kaikki osapuolet",
+            "all_members": "Kaikki jäsenet",
             "all_relations": "Kaikki relaatiot",
             "new_relation": "Uusi relaatio...",
             "role": "Rooli",
@@ -500,7 +515,6 @@
             "best_imagery": "Paras ilmakuvalähde tälle sijainnille",
             "switch": "Vaihda takaisin tähän taustaan",
             "custom": "Mukautettu",
-            "custom_button": "Muokkaa omaa taustaa",
             "overlays": "Lisänäkymät",
             "imagery_source_faq": "Tietoja aineistosta / Ilmoita ongelmasta",
             "reset": "Palauta",
@@ -526,6 +540,10 @@
                 "osm": {
                     "tooltip": "Näytä OpenStreetMapin kartta-aineisto",
                     "title": "OpenStreetMapin kartta-aineisto"
+                },
+                "notes": {
+                    "tooltip": "Näytä OpenStreetMapin karttailmoitukset",
+                    "title": "OpenStreetMapin karttailmoitukset"
                 }
             },
             "fill_area": "Alueen taustatäyttö",
@@ -596,6 +614,16 @@
             "full": {
                 "description": "Täyttö kokonaan",
                 "tooltip": "Alueen taustatäyttö on käytössä koko alueen laajuudella."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Muokkaa mukautettua taustaa",
+                "header": "Mukautetun taustan asetukset",
+                "instructions": "Syötä taustakartan osoite. Käytettävissä olevat muuttujat:\n   {zoom} tai {z}, {x}, {y} Z/X/Y-koordinaatistoa varten\n   {-y} tai {ty} TMS-tyylin käännettyjä y-koordinaatteja varten\n   {u} neloisrakennetta varten\n   {switch:a,b,c} DNS-palvelimen multipleksointia varten\n\nEsimerkki:\n{example}",
+                "template": {
+                    "placeholder": "Syötä taustakartan osoite"
+                }
             }
         },
         "restore": {
@@ -699,10 +727,12 @@
         },
         "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
         "full_screen": "Koko näytön tila",
-        "gpx": {
-            "drag_drop": "Vedä ja pudota gpx-, geojson- tai kml-tiedosto tälle sivulle tai selaa tiedostoja napsauttamalla painiketta oikealla.",
-            "zoom": "Sovita tasoon",
-            "browse": "Selaa tiedostoja"
+        "streetside": {
+            "tooltip": "Microsoftin katunäkymäkuvat",
+            "title": "Kuvakerros (Bing-katunäkymä)",
+            "report": "Ilmoita kuvan yksityisyysloukkauksesta",
+            "view_on_bing": "Näytä Bing-kartoissa",
+            "hires": "Korkearesoluutio"
         },
         "mapillary_images": {
             "tooltip": "Katunäkymäkuvat (Mapillary)",
@@ -722,6 +752,33 @@
         "openstreetcam": {
             "view_on_openstreetcam": "Näytä tämä kuva OpenStreetCam-palvelussa"
         },
+        "note": {
+            "note": "Karttailmoitus",
+            "title": "Muokkaa karttailmoitusta",
+            "anonymous": "tuntematon",
+            "closed": "(Ratkaistu)",
+            "commentTitle": "Kommentit",
+            "status": {
+                "opened": "avattu {when}",
+                "reopened": "avattu uudelleen {when}",
+                "commented": "kommentoitu {when}",
+                "closed": "ratkaistu {when}"
+            },
+            "newComment": "Uusi kommentti",
+            "inputPlaceholder": "Jaa mielipiteesi muille käyttäjille kommentoimalla.",
+            "close": "Ratkaise",
+            "open": "Avaa uudelleen",
+            "comment": "Kommentoi",
+            "close_comment": "Ratkaise ja kommentoi",
+            "open_comment": "Avaa uudelleen ja kommentoi",
+            "report": "Ilmoita",
+            "new": "Uusi karttailmoitus",
+            "newDescription": "Kuvaile ongelmaa",
+            "save": "Tallenna",
+            "login": "Muokkaa tai kommentoi ilmoitusta kirjautumalla sisään.",
+            "upload_explanation": "Kommentti näkyy kaikille OpenStreetMapin käyttäjille.",
+            "upload_explanation_with_user": "Kommentti käyttäjänä {user} näkyy kaikille OpenStreetMapin käyttäjille."
+        },
         "help": {
             "title": "Ohje",
             "key": "H",
@@ -729,21 +786,21 @@
                 "title": "Ohje",
                 "welcome": "Tervetuloa [OpenStreetMapin](https://www.openstreetmap.org/) iD-kartanmuokkausohjelmaan, jolla OpenStreetMap-aineistoa voi muokata suoraan selaimessa.",
                 "open_data_h": "Avoin data",
-                "open_data": "Tekemäsi muokkaukset näkyvät kaikille käyttäjille. Muokkauksesi voi perustua paikallistuntemukseen, paikan päällä tehtyihin havaintoihin tai ilmakuva- ja katutasokuvamateriaaleihin. Tietojen kopiointi kaupallisista lähteistä, kuten Google-kartoista [on ehdottomasti kielletty] (https://www.openstreetmap.org/copyright).",
+                "open_data": "Tekemäsi muokkaukset näkyvät kaikille käyttäjille. Muokkauksesi voi perustua paikallistuntemukseen, paikan päällä tehtyihin havaintoihin tai ilmakuva- ja katutasokuvamateriaaleihin. Tietojen kopiointi kaupallisista lähteistä, kuten Google-kartoista, [on ehdottomasti kielletty](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Ennen aloittamista",
-                "before_start": "Tutustu OpenStreetMapiin ja tähän muokkausohjelmaan ennen muokkaamisen aloittamista. iD-ohjelmassa on aloitusopas, jonka avulla voit harjoitella interaktiivisesti OpenStreetMapin muokkaamista. Aloita harjoittelu napsauttamalla Aloita aloitusopas - se vie vain 15 minuuttia.",
+                "before_start": "Tutustu huolellisesti OpenStreetMapiin ja tähän muokkausohjelmaan ennen muokkaamisen aloittamista. Tämän kartanmuokkausohjelman aloitusoppaan avulla voit harjoitella interaktiivisesti OpenStreetMapin muokkaamista. Aloita harjoittelu napsauttamalla Aloita aloitusopas - se vie vain 15 minuuttia.",
                 "open_source_h": "Avoin lähdekoodi",
                 "open_source": "Tämä avoimen lähdekoodin iD-ohjelman versio {version} perustuu vapaaehtoisten käyttäjien työhön. Lähdekoodi on saatavilla [GitHub-palvelusta](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Voit osallistua projektiin auttamalla ohjelman [kääntämisessä](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) tai [raportoida ongelmista](https://github.com/openstreetmap/iD/issues)."
+                "open_source_help": "Voit osallistua projektiin auttamalla ohjelman [kääntämisessä](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) tai [ilmoittamalla ohjelmistovirheistä](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Perusteet",
                 "navigation_h": "Liikkuminen",
-                "navigation_drag": "Liiku kartalla painamalla ja pitämällä pohjassa {leftclick} hiiren vasenta painiketta ja liikuttelemalla hiirtä. Voit myös käyttää näppäimistön nuolinäppäimiä `↓`, `↑`, `←`, `→` .",
-                "navigation_zoom": "Loitonna tai lähennä hiiren rullalla, kosketuslevyllä tai napsauttamalla {plus} ja {minus} -painikkeita karttaikkunan oikeassa laidassa. Voit myös käyttää näppäimistön `+`, `-` -näppäimiä. ",
+                "navigation_drag": "Liiku kartalla pitämällä pohjassa {leftclick} hiiren vasenta painiketta ja liikuttelemalla hiirtä. Voit myös käyttää näppäimistön nuolinäppäimiä `↓`, `↑`, `←` ja `→`.",
+                "navigation_zoom": "Loitonna ja lähennä hiiren rullalla, kosketuslevyllä tai napsauttamalla {plus} ja {minus} -painikkeita karttaikkunan oikeassa laidassa. Voit myös käyttää näppäimistön näppäimiä `+` ja `-`.",
                 "features_h": "Karttaominaisuudet",
-                "features": "Kartalla näkyviä teitä, rakennuksia ja muita paikkoja kutsutaan *karttakohteiksi* tai lyhyemmin *kohteiksi*. Kaikki maailmassa olemassa olevat kohteet voidaan lisätä OpenStreetMapiin. Karttakohteet jaetaan *pisteisiin*, *viivoihin* ja *alueisiin*.",
-                "nodes_ways": "OpenstreetMapissa pisteet jaetaan vielä *viivapisteiksi* ja *paikkapisteiksi* riippuen siitä, onko se viivan osana vai itsenäinen paikkaa kuvaava piste."
+                "features": "Kartalla näkyviä teitä, rakennuksia ja muita paikkoja kutsutaan *karttakohteiksi* tai lyhyemmin *kohteiksi*. Kaikki maailmassa olemassa olevat kohteet voidaan lisätä OpenStreetMapiin. Karttakohteet jaetaan niiden muodon mukaan *pisteisiin*, *viivoihin* ja *alueisiin*.",
+                "nodes_ways": "OpenstreetMapissa pisteet jaetaan vielä *viivapisteiksi* ja *paikkapisteiksi* riippuen siitä, onko piste viivan osana vai itsenäinen paikkaa kuvaava piste."
             },
             "editing": {
                 "title": "Muokkaaminen ja tallentaminen",
@@ -752,93 +809,150 @@
                 "select_right_click": "Avaa toimintovalikko napsauttamalla kohdetta hiiren {rightclick} oikealla painikkeella. Valikon kautta voi esimerkiksi kääntää, siirtää ja poistaa kohteen.",
                 "multiselect_h": "Usean kohteen valitseminen",
                 "multiselect_shift_click": "Valitse useita karttakohteita painamalla `{shift}`+{leftclick} hiiren vasenta painiketta. Useiden kohteiden poistaminen tai siirtäminen helpottuu.",
-                "multiselect_lasso": "Vaihtoehtoisesti pidä `{shift}`-näppäin pohjassa ja samanaikaisesti pidä {leftclick} hiiren vasen painike pohjassa ja vedä alue haluttujen kohteiden yli.",
+                "multiselect_lasso": "Vaihtoehtoisesti pidä sekä `{shift}`-näppäin että {leftclick} hiiren vasen painike pohjassa ja vedä alue kohteiden yli. Kaikki alueen sisään jäävät kohteet valitaan.",
                 "undo_redo_h": "Kumoa ja tee uudelleen",
                 "undo_redo": "Muokkaukset tallennetaan väliaikaisesti tietokoneellesi, kunnes tallennat ne OpenStreetMapin palvelimelle. Kumoa yksittäisiä muokkauksia napsauttamalla {undo} **Kumoa**-painiketta ja kumoa toiminnon kumoaminen napsauttamalla {redo} **Tee uudelleen** -painiketta.",
                 "save_h": "Tallentaminen",
-                "save": "Lähetä ja tallenna muutokset muokkaukset OpenStreetMapin palvelimelle napsauttamalla {save} **Tallenna** . Muista tallentaa muokkaukset säännöllisesti!",
-                "save_validation": "Tallennettaessa iD käy läpi muokkaukset ja etsii perustasoisia virheitä, jolloin voit tarkistaa ja korjata puutteet ja virheet.",
+                "save": "Lähetä ja tallenna muutokset muokkaukset OpenStreetMapin palvelimelle napsauttamalla {save} **Tallenna**. Muista tallentaa muokkaukset säännöllisesti!",
+                "save_validation": "Tallennettaessa iD käy muutokset läpi perustasoisten virheiden varalta, minkä jälkeen voit tarkistaa ja korjata puutteet ja virheet.",
                 "upload_h": "Lähettäminen",
                 "upload": "Ennen muutosten lähettämistä sinun pitää kuvailla [karttaan tehtyjä muutoksia](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Lopulta voit lähettää muutokset OpenStreetMapiin napsauttamalla **Tallenna**. Tällöin ne ovat julkisesti kaikkien nähtävissä perinteisessä karttanäkymässä muutaman minuutin kuluttua.",
                 "backups_h": "Automaattinen varmuuskopiointi",
-                "backups": "Jos et voi viimeistellä muokkauksia samalla kerralla esimerkiksi tietokoneesi hajottua tai suljettuasi selaimen välilehden, on muokkaukset kuitenkin tallennettu selaimen muistiin. Voit palata myöhemmin samalla selaimella ja tietokoneella ja palauttaa tallentamattomat muutokset.",
+                "backups": "Jos et voi viimeistellä muokkauksia yhdellä kerralla esimerkiksi tietokoneesi rikkouduttua tai suljettuasi vahingossa selaimen välilehden, on muokkaukset kuitenkin tallennettu selaimen muistiin. Voit palata myöhemmin samalla selaimella ja tietokoneella ja palauttaa tallentamattomat muutokset.",
                 "keyboard_h": "Pikanäppäimet",
                 "keyboard": "Avaa lista kaikista pikanäppäimistä painamalla `?`-näppäintä"
             },
             "feature_editor": {
                 "title": "Kohdemuokkain",
-                "intro": "*Kohdemuokkain* näkyy muokkausnäkymän vasemmassa laidassa. Sitä käytetään karttakohteen ominaisuuksien tarkasteluun ja muokkaamiseen.",
+                "intro": "*Kohdemuokkain* näkyy karttaikkunan vasemmassa laidassa. Sitä käytetään karttakohteen ominaisuuksien tarkasteluun ja muokkaamiseen.",
                 "definitions": "Yläosassa näkyy karttakohteen tyyppi. Keskiosa sisältää *kenttiä*, jotka kuvaavat kohteen ominaisuuksia, kuten nimen ja osoitteen. ",
-                "type_h": "Ominaisuustyyppi",
-                "type": "Voit klikata karttakohteen tyyppiä vaihtaaksesi kohteen eri tyyppiseksi. Kaikki, mikä on olemassa, voidaan lisätä OpenStreetMapiin, joten on olemassa tuhansia kohdetyyppejä joista valita.",
+                "type_h": "Kohdetyyppi",
+                "type": "Vaihda karttakohteen tyyppiä napsauttamalla kohdemuokkaimen yläosasta nykyistä tyypiä. Erilaisia kohdetyyppejä on tuhansia, joten tutustu huolella vaihtoehtoihin ja valitse kaikista kuvaavin kohdetyyppi.",
                 "type_picker": "Kohdemuokkain näyttää kaikkein tavallisimmat kohdetyypit kuten puistot, sairaalat, ravintolat, tiet ja rakennukset. Voit hakea mitä tyyppiä tahansa kirjoittamalla hakulaatikkoon, mitä olet etsimässä. Voit myös klikata {inspect} **Tietoa** -ikonia kohteen tyypin vieressä saadaksesi kohdetyypistä lisätietoa.",
                 "fields_h": "Kentät",
-                "fields_all_fields": "\"Kaikki kentät\" -osa sisältää kaikki karttakohteen tiedot, joita voit muokata. OpenStreetMapissa kaikkien kenttien täyttäminen on vapaavalintaista, ja voit jättää kentän tyhjäksi jos olet epävarma.",
-                "fields_example": "Eri tyyppisille karttakohteille näkyy erilaiset kentät. Esimerkiksi tien kohdalla näkyy kentät tien päällysteelle ja nopeusrajoitukselle, kun taas ravintolan kohdalla näkyy kentät aukioloajoille ja sille, millaista ruokaa ravintola tarjoaa.",
-                "fields_add_field": "Voit klikata myös \"Lisää kenttä\" -pudotusvalikkoa lisätäksesi uusia kenttiä, kuten kuvauksen, Wikipedia-linkin, esteettömyyden pyörätuolin käyttäjille ja niin edelleen. ",
-                "tags_h": "Tägit eli ominaisuustiedot",
-                "tags_all_tags": "Voit laajentaa kenttien alapuolella olevan \"Kaikki ominaisuustiedot\" -osan lisätäksesi karttakohteelle mitä tahansa OpenStreetMapin *tägejä* ja muokataksesi niitä. Jokainen tägi sisältää *avaimen* ja *arvon*, tietotyypit jotka määrittävät kaikki OpenStreetMapiin tallennetut karttakohteet.",
-                "tags_resources": "Karttakohteiden muokkaaminen edellyttää perustason osaamista OpenStreetMapin ominaisuuksista. Lisätietoa erilaisista ominaisuuksista ja karttakohteista on saatavilla esimerkiksi [OpenStreetMapin Wikistä](https://wiki.openstreetmap.org/wiki/Fi:Main_Page) tai [Taginfo-sivustolla](https://taginfo.openstreetmap.org/)."
+                "fields_all_fields": "Kaikki kentät -osio sisältää kaikki muokattavissa olevat karttakohteen ominaisuudet. Minkään kentän täyttäminen ei ole pakollista.",
+                "fields_example": "Kohdemuokkain näyttää kohdetyypin mukaan erilaisia kenttiä. Esimerkiksi tielle voi muokata nopeusrajoitusta ja päällystemateriaalia, kun taas ravintolan kohdalla näkyy kentät aukioloajoille ja ruokavalikoimalle.",
+                "fields_add_field": "Lisää uusia kenttiä napsauttamalla Lisää kenttä -pudotusvalikkoa: saatavilla on esimerkiksi kuvaus, Wikipedia-artikkelin linkki ja esteettömyyskuvaus.",
+                "tags_h": "Ominaisuustiedot",
+                "tags_all_tags": "Kenttien alapuolella olevassa Kaikki ominaisuustiedot -osiossa voi muokata kaikkia OpenStreetMap-palvelussa käytettäviä *ominaisuustietoja*. Jokainen ominaisuustieto koostuu kahdesta osasta: *avaimesta* ja *arvosta*. Avain näytetään Kaikki ominaisuustiedot -osiossa vasemmassa sarakkeessa ja arvo oikeassa sarakkeessa.",
+                "tags_resources": "Karttakohteiden muokkaaminen edellyttää perustason osaamista OpenStreetMapin ominaisuuksista. Lisätietoa erilaisista ominaisuuksista ja karttakohteista on saatavilla esimerkiksi [OpenStreetMapin Wikistä](https://wiki.openstreetmap.org/wiki/Fi:Main_Page) ja [Taginfo-sivustolla](https://taginfo.openstreetmap.org/)."
             },
             "points": {
                 "title": "Paikkapisteet",
-                "intro": "*Paikkapisteillä* voidaan merkitä kauppojen, ravintoloiden ja patsaiden kaltaisia karttakohteita. Niillä on yksittäinen sijainti ja ne kertovat, mitä siellä on.",
+                "intro": "*Paikkapisteillä* voidaan merkitä kauppojen, ravintoloiden ja patsaiden kaltaisia karttakohteita, joilla on pistemäinen sijainti.",
                 "add_point_h": "Paikkapisteiden lisääminen",
-                "add_point": "Lisätäksesi paikkapisteen, klikkaa {point} **Paikkapiste** -painiketta työkalupalkissa kartan yläpuolella, tai paina pikanäppäintä `1`. Tämä muuttaa hiiren osoittimen ristimäiseksi.",
-                "add_point_finish": "Sijoittaaksesi uuden paikkapisteen kartalle, vie hiiri sinne, mihin haluat paikkapisteen, ja paina {leftclick} hiiren vasenta painiketta tai `Välilyönti` -näppäintä.",
-                "move_point_h": "Paikkapisteiden liikuttaminen",
-                "move_point": "Liikuttaaksesi paikkapistettä, aseta hiiren osoitin pisteen päälle ja paina {leftclick} hiiren vasenta painiketta. Pidä painike pohjassa ja raahaa paikkapiste uuteen sijaintiin.",
+                "add_point": "Lisää paikkapiste napsauttamalla {point} **Paikkapiste** -painiketta yläpalkista tai painamalla pikanäppäintä `1`. Hiiren osoitin muuttuu ristin muotoiseksi.",
+                "add_point_finish": "Vie hiiri kartalla haluttuun kohtaan ja napsauta {leftclick} hiiren vasenta painiketta tai paina `Välilyönti` -näppäintä.",
+                "move_point_h": "Paikkapisteiden siirtäminen",
+                "move_point": "Siirrä paikkapistettä viemällä hiiren osoitin sen päälle ja paina {leftclick} hiiren vasenta painiketta. Pidä painike pohjassa ja raahaa paikkapiste uuteen sijaintiin.",
                 "delete_point_h": "Paikkapisteiden poistaminen",
-                "delete_point": "Voit poistaa kohteita, joita ei ole oikeasti olemassa. Kohteen poistaminen poistaa sen muidenkin kartalta, joten varmista ennen poistamista, että kohdetta ei todella ole.",
-                "delete_point_command": "Poistaaksesi pisteen, klikkaa pistettä {rightclick} hiiren oikealla näppäimellä ja valitse avautuvasta pikavalikosta {delete} **Poista**."
+                "delete_point": "Voit poistaa kohteita, joita ei ole oikeasti olemassa. Kohteen poistaminen poistaa sen muidenkin kartalta, joten poista vain kohteita joista olet täysin varma.",
+                "delete_point_command": "Poista paikkapiste napsauttamalla {rightclick} hiiren oikealla näppäimellä ja valitse toimintovalikosta {delete} **Poista**."
             },
             "lines": {
                 "title": "Viivat",
                 "intro": "*Viivoilla* merkitään esimerkiksi katuja, rautateitä ja jokia. Viivat pitäisi piirtää niiden esittämän kohteen keskilinjaa pitkin.",
                 "add_line_h": "Viivojen lisääminen",
-                "add_line": "Lisätäksesi viivan, klikkaa {line} **Viiva** -painiketta työkalupalkissa kartan yläpuolella, tai paina pikanäppäintä `2`. Tämä muuttaa hiiren osoittimen ristimäiseksi.",
-                "add_line_draw": "Seuraavaksi siirrä hiiren osoitin sinne, mistä haluat viivan alkavan, ja paina {leftclick} hiiren vasenta painiketta tai `Välilyönti` -näppäintä. Lisää viivan loput pisteet klikkaamalla tai `Välilyönti` -näppäimellä. Voit lähentää, loitontaa tai raahata karttaa piirtäessäsi.",
-                "add_line_finish": "Lopettaaksesi viivan piirtämisen, paina `{Enter}` tai klikkaa viivan viimeistä pistettä uudestaan.",
+                "add_line": "Lisää viiva napsauttamalla {line} **Viiva** -painiketta yläpalkista tai painamalla pikanäppäintä `2`. Hiiren osoitin muuttuu ristin muotoiseksi.",
+                "add_line_draw": "Siirrä hiiren osoitin viivan aloituspisteeseen ja paina {leftclick} hiiren vasenta painiketta tai `Välilyönti`-näppäintä. Lisää viivan loput pisteet napsauttamalla kutakin tai `Välilyönti`-näppäimellä. Voit lähentää, loitontaa tai raahata karttaa piirtämisen aikana.",
+                "add_line_finish": "Lopeta viivan piirtäminen painamalla `{Enter}` tai napsauttamalla viivan viimeistä pistettä uudestaan.",
                 "modify_line_h": "Viivojen muokkaaminen",
-                "modify_line_dragnode": "Viivat eivät usein ole oikean muotoisia, esimerkiksi tie ei vastaa ilmakuvaa. Muokataksesi viivan muotoa, ensin valitse viiva {leftclick} hiiren vasemmalla painikkeella. Tämä saa viivan pisteet näkymään pieninä ympyröinä. Sitten voit raahata pisteet parempiin sijainteihin.",
-                "modify_line_addnode": "Voit myös luoda viivaan uusia pisteitä joko {leftclick}**x2** kaksoisklikkaamalla viivaa tai raahamalla viivan pisteiden välissä olevaa pikkukolmiota.",
+                "modify_line_dragnode": "Viivat eivät usein ole aivan oikean muotoisia: esimerkiksi tie ei vastaa ilmakuvaa. Aloita viivan muotoilu napsauttamalla viivaa {leftclick} hiiren vasemmalla painikkeella. Viivapisteet tulevat näkyviin pieninä ympyröinä, joita raahamalla voit muotoilla viivaa uudelleen.",
+                "modify_line_addnode": "Voit myös lisätä viivapisteitä joko {leftclick}**x 2** kaksoisnapsauttamalla viivaa tai raahamalla viivan pisteiden välissä olevaa pikkukolmiota.",
                 "connect_line_h": "Viivojen yhdistäminen",
-                "connect_line": "Teiden yhdistyminen oikein on tärkeää kartalla ja välttämätöntä ajo-ohjeiden tarjoamisessa.",
+                "connect_line": "Teiden yhdistyminen oikein on tärkeää kartalla ja välttämätöntä reittiohjeiden määrittämistä varten.",
                 "connect_line_display": "Teiden risteykset näkyvät harmaina ympyröinä. Jos viivojen päätepisteet eivät yhdisty mihinkään, ne näkyvät suurempina valkoisina ympyröinä.",
-                "connect_line_drag": "Yhdistääksesi viivan toiseen kohteeseen, raahaa yksi viivan pisteistä toisen kohteen päälle, kunnes kohteet tarttuvat yhteen. Vinkki: Voit estää karttakohteen yhdistymisen muihin kohteisiin pitämällä `{alt}`-painiketta pohjassa.",
-                "connect_line_tag": "Jos tiedät, että risteyksessä on liikennevalot tai suojatie, voit lisätä ne valitsemalla tiet yhdistävän pisteen ja käyttämällä kohdemuokkainta.",
+                "connect_line_drag": "Yhdistä viiva toiseen kohteeseen raahaamalla viivapiste toisen kohteen päälle, kunnes kohteet tarttuvat yhteen. Vinkki: Voit estää karttakohteen yhdistymisen muihin kohteisiin pitämällä `{alt}`-painiketta pohjassa.",
+                "connect_line_tag": "Jos risteyksessä on liikennevalot tai suojatie, voit lisätä ne kohdemuokkaimessa napsauttamalla tiet yhdistävää pistettä.",
                 "disconnect_line_h": "Viivojen erottaminen",
-                "disconnect_line_command": "Erottaaksesi tien toisesta kohteesta, klikkaa kohteet yhdistävää pistettä {rightclick} hiiren oikealla näppäimellä ja valitse avautuvasta pikavalikosta {disconnect} **Erota**.",
-                "move_line_h": "Viivojen liikuttaminen",
-                "move_line_command": "Liikuttaaksesi kokonaista viivaa, klikkaa viivaa {rightclick} hiiren oikealla näppäimellä ja valitse avautuvasta pikavalikosta {move} **Siirrä**. Sitten liikuta hiirtä ja paina {leftclick} hiiren vasenta painiketta asettaaksesi viivan uuteen paikkaan.",
+                "disconnect_line_command": "Erota kaksi tietä toisistaan napsauttamalla yhdistävää pistettä {rightclick} hiiren oikealla näppäimellä ja valitsemalla toimintovalikosta {disconnect} **Erota**.",
+                "move_line_h": "Viivojen siirtäminen",
+                "move_line_command": "Siirrä kokonainen viiva uuteen paikkaan napsauttamalla viivaa {rightclick} hiiren oikealla näppäimellä ja valitsemalla toimintovalikosta {move} **Siirrä**. Siirrä viivaa hiirtä liikuttamalla uuteen paikkaan ja vahvista sijainti painamalla {leftclick} hiiren vasenta painiketta.",
                 "move_line_connected": "Viivat, jotka ovat yhdistyneinä toisiin kohteisiin, pysyvät yhdistyneinä, kun liikutat viivan uuteen paikkaan. iD estää sinua siirtämästä viivaa toisen yhdistetyn viivan yli.",
                 "delete_line_h": "Viivojen poistaminen",
-                "delete_line": "Voit poistaa viivan jos se on täysin virheellinen, esimerkiksi tien jota ei ole oikeasti olemassa. Ole varovainen poistaessasi kohteita: ilmakuva saattaa olla vanhentunut ja virheelliseltä näyttävä tie taas uusi.",
-                "delete_line_command": "Poistaaksesi viivan, klikkaa viivaa {rightclick} hiiren oikealla näppäimellä ja valitse avautuvasta pikavalikosta {delete} **Poista**."
+                "delete_line": "Voit poistaa viivan jos se on täysin virheellinen, esimerkiksi tien jota ei ole oikeasti olemassa. Ole varovainen poistaessasi kohteita: ilmakuva saattaa olla vanhentunut ja virheelliseltä näyttävä tie taas olla uusi.",
+                "delete_line_command": "Poista viiva napsauttamalla sitä {rightclick} hiiren oikealla näppäimellä ja valitsemalla toimintovalikosta {delete} **Poista**."
             },
             "areas": {
                 "title": "Alueet",
-                "intro": "*Alueilla* kuvataan sellaisten kohteiden kuin järvien, rakennusten ja asuinalueiden rajoja. Alueet pitäisi piirtää kulkemaan niiden esittämän kohteen rajaa pitkin, esimerkiksi rakennuksen pohjan ympäri.",
+                "intro": "*Alueilla* esitetään esimerkiksi järvien, rakennusten ja asuinalueiden rajoja. Alueet piirretään niiden esittämän kohteen ympärille, esimerkiksi rakennuksen seiniä pitkin.",
                 "point_or_area_h": "Paikkapiste vai alue?",
-                "point_or_area": "Monet kohteet voi esittää niin paikkapisteinä kuin alueinakin. Sinun pitäisi kartoittaa esimerkiksi rakennukset ja maankäytölliset rajat alueiksi aina kun mahdollista. Voit sijoittaa paikkapisteitä rakennuksen alueen sisäpuolelle esittämään yrityksiä, palveluita ja muita rakennuksen sisällä olevia kohteita.",
+                "point_or_area": "Monet kohteet voi esittää niin paikkapisteinä kuin alueinakin. Rakennukset ja maankäytölliset rajat tulee lähtökohtaisesti merkitä aina alueina. Voit sijoittaa paikkapisteitä rakennuksen alueen sisäpuolelle esittämään yrityksiä, palveluita ja muita rakennuksen sisällä olevia kohteita.",
                 "add_area_h": "Alueiden lisääminen",
-                "add_area_command": "Lisätäksesi alueen, klikkaa {area} **Alue** -painiketta työkalupalkissa kartan yläpuolella, tai paina pikanäppäintä `3`. Tämä muuttaa hiiren kursorin ristimäiseksi.",
-                "add_area_draw": "Seuraavaksi siirrä hiiren kursori yhteen alueen kulmista, ja paina {leftclick} hiiren vasenta painiketta tai `Välilyönti` -näppäintä. Lisää alueen rajan loput pisteet klikkaamalla tai `Välilyönti` -näppäimellä. Voit lähentää, loitontaa tai raahata karttaa piirtäessäsi.",
-                "add_area_finish": "Lopettaaksesi alueen piirtämisen, paina `{Enter}` tai klikkaa alueen rajan ensimmäistä tai viimeistä pistettä uudestaan.",
-                "square_area_h": "Muuttaminen suorakulmaiseksi",
-                "square_area_command": "Monilla aluemaisilla kohteilla kuten rakennuksilla on suorat kulmat. Muuttaaksesi alueen kulmat suoriksi, klikkaa alueen reunaa {rightclick} hiiren oikealla näppäimellä ja valitse avautuvasta pikavalikosta {orthogonalize} **Muuta suorakulmaiseksi**.",
+                "add_area_command": "Lisää alue napsauttamalla {line} **Alue** -painiketta yläpalkista tai painamalla pikanäppäintä `3`. Hiiren osoitin muuttuu ristin muotoiseksi.",
+                "add_area_draw": "Siirrä hiiren osoitin alueen kulmaan ja paina {leftclick} hiiren vasenta painiketta tai `Välilyönti`-näppäintä. Lisää alueen rajaa pitkin loput pisteet napsauttamalla kutakin tai `Välilyönti`-näppäimellä. Voit lähentää, loitontaa tai raahata karttaa piirtämisen aikana.",
+                "add_area_finish": "Lopeta alueen piirtäminen painamalla `{Enter}` tai napsauttamalla viivan viimeistä pistettä uudestaan.",
+                "square_area_h": "Suorakulmaiseksi muuttaminen",
+                "square_area_command": "Monilla aluemaisilla kohteilla kuten rakennuksilla on suorat kulmat. Muuta alueen kulmat suoriksi napsauttamalla alueen reunaa {rightclick} hiiren oikealla painikkeella ja valitsemalla toimintovalikosta {orthogonalize} **Muuta suorakulmaiseksi**.",
                 "modify_area_h": "Alueiden muokkaaminen",
-                "modify_area_dragnode": "Alueet eivät usein ole oikean muotoisia, esimerkiksi rakennus ei vastaa ilmakuvaa. Muokataksesi alueen muotoa, ensin valitse alue {leftclick} hiiren vasemmalla painikkeella. Tämä saa alueen pisteet näkymään pieninä ympyröinä. Sitten voit raahata pisteet parempiin sijainteihin.",
-                "modify_area_addnode": "Voit myös luoda alueeseen uusia pisteitä joko {leftclick}**x2** kaksoisklikkaamalla alueen reunaa tai raahamalla alueen reunan pisteiden välissä olevia pikkukolmioita.",
+                "modify_area_dragnode": "Alueet eivät usein ole aivan oikean muotoisia: esimerkiksi rakennus ei vastaa ilmakuvaa. Aloita viivan muotoilu napsauttamalla aluetta {leftclick} hiiren vasemmalla painikkeella. Alueen muodostavat viivapisteet tulevat näkyviin pieninä ympyröinä, joita raahamalla voit muotoilla viivaa uudelleen.",
+                "modify_area_addnode": "Voit myös lisätä viivapisteitä joko {leftclick}**x 2** kaksoisnapsauttamalla aluetta rajaavaa viivaa tai raahamalla viivapisteiden välissä olevaa pikkukolmiota.",
                 "delete_area_h": "Alueiden poistaminen",
                 "delete_area": "Voit poistaa alueen jos se on täysin virheellinen, esimerkiksi rakennuksen jota ei ole oikeasti olemassa. Ole varovainen poistaessasi kohteita: ilmakuva saattaa olla vanhentunut ja virheelliseltä näyttävä rakennus taas uusi.",
-                "delete_area_command": "Poistaaksesi alueen, klikkaa aluetta {rightclick} hiiren oikealla näppäimellä ja valitse avautuvasta pikavalikosta {delete} **Poista**."
+                "delete_area_command": "Poista alue napsauttamalla sitä {rightclick} hiiren oikealla näppäimellä ja valitsemalla toimintovalikosta {delete} **Poista**."
             },
             "relations": {
-                "relation_types_h": "Relaatiotyypit"
+                "title": "Relaatiot",
+                "intro": "*Relaatioilla* ryhmitellään johonkin ominaisuuteen liittyviä karttakohteita toisiinsa. Relaatioon kuuluvia karttakohteita kutsutaan *jäseniksi*, ja jokaisella jäsenellä on *rooli* relaatiossa.",
+                "edit_relation_h": "Relaatioiden muokkaaminen",
+                "edit_relation": "Alimmaisena kohdemuokkaimessa on Kaikki relaatiot -osio, josta näkyy kyseisen karttakohteen kaikki mahdolliset relaatiojäsenyydet. Voit muokata relaatiota napsauttamalla sitä.",
+                "edit_relation_add": "Voit lisätä karttakohteen jonkin relaation jäseneksi napsauttamalla {plus}-painiketta Kaikki relaatiot -osiossa. Pudotusvalikossa esitetään lähistöllä käytettyjä relaatioita; voit myös luoda täysin uuden relaation valitsemalla Uusi relaatio.",
+                "edit_relation_delete": "Voit poistaa karttakohteen relaatiosta napsauttamalla {delete} **Poista**. Jos poistat relaation viimeisen jäsenen eikä relaatio koostu enää yhdestäkään karttakohteesta, myös itse relaatio poistetaan automaattisesti.",
+                "maintain_relation_h": "Relaatioiden hallinta",
+                "maintain_relation": "Relaatiot päivittyvät pitkälti automaattisesti karttaan tehtyjen muutosten mukaisesti. Ole kuitenkin tarkkana, kun korvaat relaation jäseninä olevia karttakohteita kokonaan uusilla: jos esimerkiksi poistat kadun ja piirrät sen uudestaan toiselle linjaukselle, joudut lisäämään käsin kaikki mahdolliset relaatiot, kuten linja-autolinjat ja kääntymisrajoitukset, uudelle katuosuudelle.",
+                "relation_types_h": "Relaatiotyypit",
+                "multipolygon_h": "Monikulmiot",
+                "multipolygon": "*Monikulmio* on yhdestä tai useammasta ulkorajasta (outer) sekä yhdestä tai useammasta sisärajasta (inner) koostuva relaatio. Outer-relaatioilla määritellään monikulmion ulkorajat ja inner-relaatioilla monikulmion sisällä olevia alueita, jotka eivät kuulu monikulmioon. Tällainen kohde voi olla esimerkiksi sisäpihallinen rakennus.",
+                "multipolygon_create": "Luo monikulmio piirtämällä ulkoraja, esimerkiksi rakennuksen ulkoseinät, alueena ja sisärajat, esimerkiksi sisäpihat, viivoina. Valitse kumpikin kohde samanaikaisesti näppäinyhdistelmällä `{shift}`+{leftclick}, sitten avaa toimintovalikko {rightclick} napsauttamalla hiiren oikealla painikkeella ja valitse {merge} **Linkitä**.",
+                "multipolygon_merge": "Useampien viivojen tai alueiden linkittäminen luo monikulmiorelaation, jossa kaikki valitut viivat tai alueet ovat jäseninä. Sisä- ja ulkorajat määritetään automaattisesti.",
+                "turn_restriction_h": "Kääntymisrajoitukset",
+                "turn_restriction": "*Kääntymisrajoitus* on useiden tieosuuksien muodostama relaatio niiden risteämäkohdassa. Kääntymisrajoituksien merkitsemiseen käytetään operaattoreita *mistä*, *kautta* ja *mihin*.",
+                "turn_restriction_field": "Aloita kääntymisrajoituksen muokkaaminen napsauttamalla vähintään kahden tien risteystä. Avautuvassa kohdemuokkaimessa on näkymä Kääntymisrajoitukset, jossa esitetään havainnekuva valitusta risteyksestä.",
+                "turn_restriction_editing": "Valitse ensimmäiseksi tie, jolta kääntymisrajoitus vaikuttaa kääntymismahdollisuuksiin. Näet tällöin, mitä teitä on mahdollista valita kääntymisrajoituksen mihin-teiksi. Voit vaihtaa sallitun ja kielletyn kääntymissuunnan välillä napsauttamalla kääntymiskuvakkeita.",
+                "route_h": "Reitit",
+                "route": "*Reitti* on yhden tai useita viivoja sisältävä relaatio, jolla voidaan esitää linja-auto- ja junalinjoja sekä kansainvälisiä tiereittejä.",
+                "route_add": "Kohdemuokkaimen Kaikki relaatiot -osiossa napsauta {plus}-painiketta, jolloin luettelossa näytetään lähistöllä käytetyt reittirelaatiot. Lisää kyseinen tie reittirelaation osaksi napsauttamalla sitä luettelosta. Voit myös luoda kokonaan uuden relaation.",
+                "boundary_h": "Rajat",
+                "boundary": "*Rajarelaatio* on yksi tai useampi viiva, jotka yhdessä muodostavat hallinnollisen rajan. Tällainen raja voi olla esimerkiksi kaupunginosa tai valtio.",
+                "boundary_add": "Lisää karttakohde rajarelaation osaksi napsauttamalla karttakohdetta ja sitten avautuvan karttamuokkaimen alaosan Kaikki relaatiot -osiosta {plus}-painiketta. Valitse pudotusvalikosta jokin lähellä olevista relaatioista, hae relaatiota hakutoiminnolla tai luo kokonaan uusi relaatio."
+            },
+            "notes": {
+                "title": "Karttailmoitukset",
+                "intro": "*Karttailmoituksella* voi ilmoittaa kartalla olevista virheistä muille käyttäjille. Selaa jo luotuja karttailmoituksia tai luo uusia napsauttamalla {data} **Kartta-aineisto** ikkunan oikeasta laidasta ja sitten valitsemalla \"OpenStreetMapin karttailmoitukset\".",
+                "add_note_h": "Karttailmoituksen tekeminen",
+                "add_note": "Lähetä karttailmoitus napsauttamalla  {note} **Karttailmoitus** ylälaidan palkista tai pikanäppäimellä `4`. Hiiren osoitin muuttuu ristinmuotoiseksi. {leftclick} Napsauta virheen sijaintia kartalla tai vie hiiri sen kohdalla ja paina `Välilyöntiä`.",
+                "move_note": "Vain lähettämättömien karttailmoitusten sijaintia voi muuttaa. Muuta karttailmoituksen sijaintia napsauttamalla ja pitämällä pohjassa {leftclick} hiiren vasemmalla painikkeella sekä vetämällä uuteen sijaintiin.",
+                "update_note_h": "Ratkaiseminen, uudelleenavaaminen ja kommentointi",
+                "update_note": "Rekisteröityä karttailmoitusta voi päivittää ratkaisemalla, kommentoimalla tai avaamalla sen uudelleen. Tapauksen ratkaiseminen tarkoittaa, että ongelma on korjattu. Uudelleenavattu tapaus voi tarkoittaa esimerkiksi sitä, että ongelma on ilmennyt pian uudelleen tai sitä ei ole korjattu kokonaan.",
+                "save_note_h": "Karttailmoituksen tallentaminen",
+                "save_note": "Jokainen karttailmoitus tulee tallentaa erikseen sen kommenttien alapuolella olevilla painikkeilla. Karttailmoitukset **eivät** siis sisälly muutoskokoelmiin, joilla muokataan OpenStreetMap-karttaa."
+            },
+            "imagery": {
+                "title": "Ilmakuvat",
+                "intro": "Kartoittamisen tukena käytettävät ilmakuvat kartta-aineiston taustalla ovat tärkeä apu karttojen lähteenä. Ilmakuvat voivat olla kirjaimellisesti satelliteilla, lentokoneilla ja miehittämättömillä ilma-aluksilla kerättyä aineistoa tai vaihtoehtoisesti historiallisista kartoista muista vapaasti hyödynnettävistä lähteistä kerättyä aineistoa.",
+                "sources_h": "Palveluntarjoajat",
+                "choosing": "Tutustu saatavilla oleviin palveluihin napsauttamalla {layers} **Taustan asetukset** oikeasta laidasta.",
+                "sources": "Oletuksena taustakuvana on [Bing-karttojen](https://www.bing.com/maps/) satelliittikuvaaineisto. Sijainnista riippuen saatavilla saattaa olla myös muuta, mahdollisesti tuoreempaa tai korkealaatuisempaa aineistoa, joten eri vaihtoehtojen kokeileminen kannattaa.",
+                "offsets_h": "Ilmakuvavirheen korjaaminen",
+                "offset": "Joskus ilmakuva ei osu tarkalleen kerättyyn kartta-aineistoon. Jos virhe on selvästi järjestelmällinen, voi vika olla myös ilmakuva- eikä kerätyssä kartta-aineistossa. Älä lähde siirtämään kaikkia karttakohteita, vaan kokeile säätää ilmakuvan asemointia kartta-aineiston mukaiseksi Korjaa ilmakuvavirhe -toiminnolla, joka löytyy alimmaisena Taustan asetukset -näkymästä.",
+                "offset_change": "Liikuttele ilmakuvaa napsauttelemalla pieniä kolmioita tai vetämällä {leftclick} hiiren vasemmalla painikkeella harmaata suorakulmiota. Asemoi ilmakuva ja kartta-aineisto ilmakuvavirheen korjaamiseksi."
+            },
+            "streetlevel": {
+                "title": "Katunäkymäkuvat",
+                "intro": "Katunäkymäkuvat ovat käytännöllisiä liikennemerkkien, kauppojen ja muiden yksityiskohtien kartoittamisessa, kun ilmakuvien tarkkuus ei ole riittävä. iD-karttaohjelmassa hyödynnettävissä ovat [Bing-katunäkymäpalvelun](https://www.microsoft.com/en-us/maps/streetside), [Mapillaryn](https://www.mapillary.com) ja [OpenStreetCamin](https://www.openstreetcam.org) kuva-aineisto.",
+                "using_h": "Katunäkymäkuvien käyttö",
+                "using": "Valitse oikeasta laidasta {data} **Kartta-aineisto**. Tässä näkymässä voit vaihtaa erilaisten tausta-aineistojen välillä.",
+                "photos": "Kun katunäkymäkuvat on valittu näkyviin ja niitä on saatavilla, näkyy kyseinen tie korostettuna. Lähelle suurennettuna jokainen kuva näkyy ympyränä, ja kaikista lähimpänä maanpintaa ympyrän ympärillä oleva kolmio näyttää kuvan suunnan.",
+                "viewer": "Kuva avautuu sitä napsauttamalla kartan alalaitaan. Kuvan ympärillä on nuolet, joita napsauttamalla voi siirtyä edelliseen ja seuraavaan kuvaan. Lisäksi siinä esitetään kuvan ottaneen käyttäjän nimi, kuvauspäivämäärä ja linkki alkuperäiseen kuvaan."
             },
             "gps": {
-                "title": "GPS-jäljet"
+                "title": "GPS-jäljet",
+                "intro": "Käyttäjien keräämät GPS-jäljet ovat arvokasta lähdemateriaalia OSM-karttaprojektille. Tämä ohjelma tukee *.gpx-*, *.geojson-* ja *.kml*-tiedostomuotoja. Voit kerätä GPS-jälkiä älypuhelimella tai -kellolla sekä muilla GPS- tai Glonass-laitteilla.",
+                "survey": "Tutustu [käyttäjiemme kokeilemiin tapoihin](https://wiki.openstreetmap.org/wiki/Fi:Karttatietojen_ker%C3%A4%C3%A4minen) kartta-aineiston keräämiseen muun muassa älypuhelimella, GPS-laitteella ja paperilla.",
+                "using_h": "GPS-jälkien käyttö",
+                "using": "Vedä ja pudota GPS-jälkitiedosto kartanmuokkausnäkymään, jolloin GPS-jäljet ilmestyvät kartalle violetteina viivoina. Voit piilottaa ja palauttaa jäljet takaisin näkyviin oikean laidan {data} **Kartta-aineisto** -näkymästä.",
+                "tracing": "Tällä tavalla hyödynnettyinä GPS-jälkiä ei tallenneta OpenStreetMapiin. Hyödynnä siis kaikki jälkien tarjoama aineisto samantien!",
+                "upload": "Jos aineisto on laajempi eikä sen hyödyntäminen ole mahdollista ensimmäisellä kerralla tai siitä voi olla hyötyä myös muille käyttäjille, se kannattaa [tallentaa OpenStreetMapin jälkitietokantaan](https://www.openstreetmap.org/trace/create) kaikkien kartoittajien tausta-aineistoksi."
             },
             "field": {
                 "restrictions": {
@@ -901,26 +1015,27 @@
                 "practice": "Voit harjoitella vapaasti, sillä tämän aloitusoppaan aikana tekemäsi muutokset eivät tallennu muiden nähtäville.",
                 "words": "Aloitusoppaassa esitellään keskeisintä OpenStreetMapissa käytettävää termistöä, joka on *kursivoitu*.",
                 "mouse": "Karttaa voi muokata millä tahansa laitteella, mutta suosittelemme tämän aloitusoppaan käyttöön kahdella painikkeella varustettua hiirtä. **Jos haluat kytkeä hiiren, tee se nyt ja napsauta OK.**",
-                "leftclick": "Jos pyydämme sinua kaksoisnapsauttamaan, tee se hiiren vasemmalla painikkeella. Kosketuslevyllä sama toiminto saattaa olla yksi napsautus tai hipaisu. **Kaksoisnapsauta missä tahansa {num} kertaa.**",
-                "rightclick": "Joskus pyydämme napsauttamaan hiiren oikealla painikkeella. Joissakin laitteissa se voi edellyttää Ctrl-painikkeen painamista samanaikaisesti, kosketuslevyllä kahden sormen napautusta tai kosketusnäytöllä pitkää painallusta. Osassa näppäimistöjä voi olla myös erillinen painike. **Napsauta hiiren oikeaa painiketta {num} kertaa.**",
+                "leftclick": "Jos pyydämme sinua napsauttamaan tai kaksoisnapsauttamaan, tee se hiiren vasemmalla painikkeella. Kosketuslevyllä sama toiminto saattaa olla yksi napsautus tai hipaisu. **Napsauta hiiren vasemmalla painikkeella missä tahansa {num} kertaa.**",
+                "rightclick": "Joskus pyydämme napsauttamaan hiiren oikealla painikkeella. Joissakin laitteissa se voi edellyttää Ctrl-painikkeen painamista samanaikaisesti, kosketuslevyllä kahden sormen napautusta tai kosketusnäytöllä pitkää painallusta. Joissakin näppäimistöissä voi olla myös erillinen painike. **Napsauta hiiren oikeaa painiketta {num} kertaa.**",
                 "chapters": "Hyvä! Nyt puhumme yhteistä kieltä. Alaosan painikkeilla voit helposti ohittaa joitakin aloitusoppaan osioita tai kerrata edellisen uudelleen. Aloitetaan! **Jatka napsauttamalla \"{next}\".**"
             },
             "navigation": {
                 "title": "Käyttöliittymä",
-                "drag": "Kartalla näkyy OpenStreetMapiin piirretyt kohteet taustakuvan päällä.{br}Liiku kartalla pitämällä hiiren vasen painike pohjassa ja liikuta hiirtä. Voit myös käyttää näppäimistön nuolinäppäimiä. **Vedä karttaa!**",
+                "drag": "Kartalla näkyy OpenStreetMapiin piirretyt kohteet taustakuvan päällä.{br}Liiku kartalla pitämällä hiiren vasen painike pohjassa ja liikuttamalla hiirtä. Voit myös käyttää näppäimistön nuolinäppäimiä. **Vedä karttaa!**",
+                "zoom": "Lähennä ja loitonna karttaa hiiren rullalla, kosketuslevyllä tai näppäimistön näppäimillä  {plus} ja {minus}. **Lähennä tai loitonna karttaa!**",
                 "features": "Kartalla näkyviä paikkoja ja kohteita kutsutaan *karttakohteiksi*. Mikä tahansa todellisuudessa olemassa oleva kohde voidaan merkitä OpenStreetMapiin karttakohteena.",
-                "points_lines_areas": "Karttakohde voidaan merkitä *pisteenä, viivana tai alueena*.",
+                "points_lines_areas": "Karttakohde voidaan merkitä *pisteenä, viivana* tai *alueena*.",
                 "nodes_ways": "Pisteet jaetaan vielä *viivapisteiksi* ja *paikkapisteiksi* riippuen siitä, onko se viivan osana vai itsenäinen paikkaa kuvaava piste.",
                 "click_townhall": "Minkä tahansa karttakohteen voi valita napsauttamalla sitä. **Valitse paikkapiste napsauttamalla sitä.**",
                 "selected_townhall": "Hienoa! Paikkapiste on nyt valittu, jolloin se on korostettu sykkivällä hehkulla.",
                 "editor_townhall": "Kun karttakohde on valittu, kartan rinnalle avautuu *kohdemuokkain*.",
                 "preset_townhall": "Sen yläosassa näkyy karttakohteen tyyppi. Esimerkiksi tämä paikkapiste näyttäisi olevan {preset}.",
                 "fields_townhall": "Kohdemuokkain koostuu *kentistä*, joilla kuvataan karttakohteen ominaisuuksia, kuten nimi ja osoite.",
-                "close_townhall": "**Sulje kohdemuokkain napauttamalla näppäimistöstä Esc tai napsauttamalla {button}-painiketta yläkulmasta.**",
+                "close_townhall": "**Sulje kohdemuokkain painamalla näppäimistöstä Esc tai napsauttamalla {button}-painiketta yläkulmasta.**",
                 "search_street": "Tällä hakukentällä voit hakea kohteita nykyisestä näkymästä tai maailmanlaajuisesti. **Etsi hakusanalla \"{name}\".**",
                 "choose_street": "**Valitse {name} napsauttamalla sitä listalta.**",
                 "selected_street": "Hyvä! {name} on valittu.",
-                "editor_street": "Kadun kohdemuokkainnäkymä on hieman erilainen verrattuna kaupungintaloon.{br}Muokattavia tietoja ovat esimerkiksi \"{field1}\" ja \"{field2}\". **Sulje kohdemuokkain painamalla Esc näppäimistöstä tai napsauttamalla {button}-painiketta.**",
+                "editor_street": "Kadun kohdemuokkainnäkymä on hieman erilainen kaupungintaloon verrattuna.{br}Muokattavia tietoja ovat esimerkiksi \"{field1}\" ja \"{field2}\". **Sulje kohdemuokkain painamalla näppäimistön Esc-painiketta tai napsauttamalla {button}-painiketta.**",
                 "play": "Siirtele hieman karttaa ja tutustu kartalla oleviin paikkapisteisiin, jotta saat kuvan millaisia paikkoja OpenStreetMapissa on. **Kun olet valmis, napsauta \"{next}\".**"
             },
             "points": {
@@ -930,35 +1045,41 @@
                 "search_cafe": "Paikkapisteet soveltuvat hyvin monenlaisten karttakohteiden merkitsemiseen. Äsken lisäämäsi piste on kahvila. **Etsi \"{preset}\".**",
                 "choose_cafe": "**Valitse {preset} listalta.**",
                 "feature_editor": "Piste on nyt merkitty kahvilaksi. Kohdemuokkaimella voi täydentää sen tietoja.",
-                "add_name": "OpenStreetMapissa minkään kentän täyttäminen ei ole pakollista, ja voit jättää kenttiä tyhjäksi.{br}Kuvitellaan, että tunnet tämän kahvilan paikallistuntemukselta ja muistat sen nimen. **Kirjoita kahvilalle nimi.**",
+                "add_name": "OpenStreetMapissa minkään kentän täyttäminen ei ole pakollista, eli voit jättää kenttiä tyhjäksi.{br}Kuvitellaan, että tunnet tämän kahvilan paikallistuntemukselta ja muistat sen nimen. **Kirjoita kahvilalle nimi.**",
                 "add_close": "Kohdemuokkain tallentaa muutokset automaattisesti. **Kun olet kirjoittanut nimen, sulje kohdemuokkain painamalla Esc- tai Enter-näppäintä tai napsauttamalla {button}-painiketta.**",
                 "reselect": "Usein paikkapisteet on jo lisätty kartalle, mutta niiden tiedot voivat olla vanhentuneita tai puutteellisia. Näitä tietoja voi korjata tai täydentää. **Valitse äsken luomasi kahvila napsauttamalla sitä.**",
                 "update": "Lisätään kahvilalle tietoja. Voit vaihtaa nimen, lisätä keittiökulttuurin tai osoitteen. **Muuta kahvilan tietoja.**",
-                "rightclick": "Napsauttamalla karttakohdetta hiiren oikealla painikkeella näkyviin tulee pikavalikko, jossa näytetään käytettävissä olevat muokkaustoiminnot. **Avaa pikavalikko napsauttamalla paikkapistettä hiiren oikealla painikkeella.**",
+                "update_close": "**Kun olet valmis, sulje kohdemuokkain painamalla Esc- tai Enter-näppäintä tai napsauttamalla {button}-painiketta.**",
+                "rightclick": "Napsauttamalla karttakohdetta hiiren oikealla painikkeella näkyviin tulee toimintovalikko, jossa on käytettävissä olevat muokkaustoiminnot. **Avaa toimintovalikko napsauttamalla paikkapistettä hiiren oikealla painikkeella.**",
                 "delete": "Poista karttakohteet, joita ei ole enää tai ole koskaan ollutkaan olemassa.{br}Poistaessasi karttakohteen se poistetaan kaikken näkemästä OpenStreetMap-tietokannasta, joten älä tee muutoksia ilman täydellistä varmuutta. **Poista paikkapiste napsauttamalla {button}-painiketta.**",
                 "undo": "Voit kumota minkä tahansa muutoksen, kunnes tallennat ja lähetät muutokset OpenStreetMap-tietokantaan. **Kumoa poisto ja palauta paikkapiste napsauttamalla {button}-painiketta.**",
-                "play": "Homma hallussa! Harjoittele nyt luomalla muutamia uusia paikkapisteitä. **Kun olet valmis, napsauta \"{next}\".**"
+                "play": "Homma hallussa! Harjoittele nyt luomalla muutamia uusia paikkapisteitä. **Kun olet valmis, napsauta {next}.**"
             },
             "areas": {
                 "title": "Alueet",
+                "add_playground": "*Alueilla* merkitään esimerkiksi järvien, rakennusten ja asuinalueiden rajoja.{br}Lisäksi paikkapisteet voi yleensä merkitä myös tarkemmin alueina. **Luo uusi alue napsauttamalla {button}-painiketta.**",
                 "start_playground": "Lisää tämä leikkipuisto kartalle piirtämällä alue. Alueet koostuvat alueen ulkoreunaa rajaavista *viivapisteistä*. **Osoita aloituspisteen paikka napsauttamalla kartalla tai painamalla välilyöntiä jossakin leikkipuiston nurkassa.**",
+                "continue_playground": "Jatka alueen piirtämistä sijoittamalla viivapisteitä leikkipuiston reunoille. Napsauta myös leikkipuistoon johtavan polun kohdalla.{br}Vinkki: Voit estää karttakohteen yhdistymisen muihiin kohteisiin pitämällä Alt-painiketta pohjassa. **Jatka leikkipuiston piirtämistä.**",
+                "finish_playground": "Viimeistele alue napsauttamalla ensimmäistä tai viimeistä viivapistettä uudelleen tai painamalla Enteriä. **Lopeta leikkipuiston piirtäminen.**",
                 "search_playground": "**Etsi hakusanalla \"{preset}\".**",
                 "choose_playground": "**Valitse {preset} listalta.**",
                 "add_field": "Leikkipuistolla ei ole virallista nimeä, joten ei kirjoiteta Nimi-kenttään mitään.{br}Lisää sen sijaan leikkipuiston tietoja Kuvaus-kenttään. **Avaa Lisää kenttä -pudotusluettelo.**",
                 "choose_field": "**Valitse {field} listalta.**",
                 "retry_add_field": "Et valinnut {field}-kenttää. Yritetäänpä uudelleen.",
                 "describe_playground": "**Kirjoita kuvaus ja sulje sitten kohdemuokkain napsauttamalla {button}-painiketta.**",
-                "play": "Loistohomma! Piirtele vielä pari muuta aluetta ja tutustu, millaisia alueita voit lisätä OpenStreetMapin. **Kun olet valmis, napsauta \"{next}\".**"
+                "play": "Loistohomma! Piirtele vielä pari muuta aluetta ja tutustu, millaisia alueita voit lisätä OpenStreetMapin. **Kun olet valmis, napsauta {next}.**"
             },
             "lines": {
                 "title": "Viivat",
                 "add_line": "*Viivoilla* merkitään esimerkiksi katuja, rautateitä ja jokia. **Aloita uuden viivan piirtäminen napsauttamalla {button} Viiva.**",
                 "start_line": "Tästä puuttuu tie, lisää se kartalle!{br}OpenStreetMapissa piirrä viiva tien keskilinjaa pitkin. Voit tarvittaessa lähentää, loitontaa ja siirrellä karttaa piirtämisen aikana. **Aloita viiva napsauttamalla kartalta puuttuvan tien pohjoispäätyä.**",
-                "intersect": "Jatka viivaa napsauttamalla lisää viivapisteitä. Voit myös käyttää välilyöntiä.{br}Kadut ovat muiden viivojen tavoit usein osa laajempaa verkostoa. Uusien viivojen yhdistäminen olemassa olevaan verkostoon on tärkeää muun muassa reititysohjelmistojen oikean toiminnan vuoksi. **Yhdistä uusi katu nykyiseen verkostoon napsauttamalla {name}a.**",
+                "intersect": "Jatka viivaa napsauttamalla lisää viivapisteitä. Voit myös käyttää välilyöntiä.{br}Kadut ovat muiden viivojen tavoin usein osa laajempaa verkostoa. Uusien viivojen yhdistäminen olemassa olevaan verkostoon on tärkeää muun muassa reititysohjelmistojen oikean toiminnan vuoksi. **Yhdistä uusi katu nykyiseen verkostoon napsauttamalla {name}iä.**",
                 "retry_intersect": "Katu tulee yhdistää {name}uun, kokeile uudestaan!",
                 "continue_line": "Jatka uuden kadun piirtämistä. Muista, että voit tarvittaessa lähentää, loitontaa tai liikutella karttaa.{br}Napsauta lopuksi viimeistä viivapistettä uudelleen. **Lopeta kadun piirtäminen.**",
+                "choose_category_road": "**Valitse {category} listalta.**",
                 "choose_preset_residential": "Teitä ja katuja on monenlaisia, mutta nyt kyseessä on asuinaluekatu. **Valitse {preset}.**",
                 "retry_preset_residential": "Et valinnut katutyypiksi {preset}a. **Palaa takaisin napsauttamalla tästä.**",
+                "name_road": "**Anna kadulle nimi ja sulje sitten kohdemuokkain napsauttamalla {button}-painiketta tai painamalla Enter- tai Esc-näppäintä.**",
                 "did_name_road": "Hyvältä näyttää! Harjoitellaanpa sitten jo luodun viivan uudelleenmuotoilua.",
                 "update_line": "Joskus on tarpeen muuttaa olemassa olevan viivan muotoa. Esimerkiksi tämä katu näyttäisi olevan liian suora todellisuuteen nähden.",
                 "add_node": "Viivaa ei tarvitse poistaa, vaan lisäämällä viivapisteitä sen muotoa voidaan muuttaa. Helpointa on kaksoisnapsauttaa viivaa, jolloin viivaan tulee uusi liikuteltava viivapiste. **Luo uusi viivapiste kaksoisnapsauttamalla viivaa.**",
@@ -966,19 +1087,35 @@
                 "finish_drag_endpoint": "Nyt on parempi. **Vahvista viivapisteen uusi paikka vapauttamalla hiiren painike.**",
                 "start_drag_midpoint": "Kahden viivapisteen puolivälissä on pieni kolmio. Voit luoda uuden viivapisteen myös tarttumalla pikkukolmioon ja vetämällä sen haluttuun kohtaan. **Tartu pikkukolmioon ja vedä sillä tie mutkan suuntaiseksi.**",
                 "continue_drag_midpoint": "No nyt alkaa näyttää hyvältä! Jatka kuitenkin vielä jommallakummalla tyylillä, kunnes katu on ilmakuvan mukainen. **Kun olet valmis, napsauta OK.**",
-                "delete_lines": "Jos katua ei ole olemassa, se tulee poistaa kartalta.{br}Esimerkiksi {street}a suunniteltiin toteutettavaksi, mutta sitä ei koskaan rakennettu. Kartan käyttökelpoisuutta voi parantaa helposti ja nopeasti poistamalla turhat kohteet.",
+                "delete_lines": "Jos katua ei ole olemassa, se tulee poistaa kartalta.{br}Esimerkiksi {street} suunniteltiin toteutettavaksi, mutta sitä ei koskaan rakennettu. Kartan käyttökelpoisuutta voi parantaa helposti ja nopeasti poistamalla turhat kohteet.",
                 "rightclick_intersection": "Ylin oikeasti rakennettu katu on {street1}, joten *jaa* {street2} *kahtia* tässä risteyksessä, ja poista kaikki sen yläpuolelta. **Napsauta risteyskohtaa hiiren oikealla painikkeella.**",
                 "split_intersection": "**Jaa {street} kahteen osaan napsauttamalla {button}-painiketta.**",
                 "retry_split": "Et napsauttanut Jaa-painiketta, yritä uudelleen.",
+                "did_split_multi": "Hyvin menee! {street1} on nyt jaettu kahteen osaan, joista ylemmän voi poistaa. **Napsauta {street2}iä ja poista sen yläosa.**",
                 "did_split_single": "**Valitse {street2} (sen yläosa!) napsauttamalla sitä.**",
                 "multi_select": "{selected} on nyt valittu, ja valitaan myös {other1}. Napsauta sitä pitäen samalla Shift-näppäin pohjassa. **Napsauta {other2}a ja pidä Shift-näppäin pohjassa.**",
                 "multi_rightclick": "Näin! Molemmat poistettavat kadut on nyt valittu. **Napsauta jompaakumpaa katua hiiren oikealla painikkeella.**",
                 "multi_delete": "**Poista kadut napsauttamalla {button}-painiketta.**",
                 "retry_delete": "Et napsauttanut Poista-painiketta, yritä uudelleen.",
-                "play": "Hienoa! Harjoittele viivoihin liittyviä toimintoja nyt piirtämällä lisää ja muokkaamalla muita viivoja. **Kun olet valmis, napsauta \"{next}\".**"
+                "play": "Hienoa! Harjoittele viivoihin liittyviä toimintoja nyt piirtämällä lisää ja muokkaamalla muita viivoja. **Kun olet valmis, napsauta {next}.**"
             },
             "buildings": {
-                "title": "Rakennukset"
+                "title": "Rakennukset",
+                "add_building": "OpenStreetMap on maailman laajin rakennustietokanta.{br}Voit osallistua sen parantamiseen piirtämällä kartalta puuttuvia rakennuksia. **Lisää uusi alue napsauttamalla {button} Alue.**",
+                "start_building": "Lisätään tämä talo kartalle piirtämällä sen ulkorajat.{br}Rakennukset tulisi piirtää mahdollisimman tarkasti niiden seinälinjaa mukaillen. **Napsauta hiirellä tai vie hiiren osoitin rakennuksen nurkan kohdalle ja paina välilyöntiä.**",
+                "continue_building": "Jatka lisäämällä viivapisteitä rakennuksen seinälinjaa pitkin. Muista, että voit tarvittaessa lähentää karttaa tarkempien yksityiskohtien havaitsemiseksi.{br}Viimeistele rakennus painamalla enteriä tai napsauttamalla uudelleen ensimmäistä tai viimeistä viivapistettä. **Lopeta rakennuksen piirtäminen.**",
+                "retry_building": "Nyt ei mennytkään ihan putkeen. Ei se mitään, kokeile rohkeasti uudelleen!",
+                "choose_category_building": "**Valitse {category} listalta.**",
+                "choose_preset_house": "Rakennuksiakin on monenlaisia, mutta tämä on selvästi omakotitalo.{br}Jos et ole varma, voit valita vain yleispiirteisemmän ominaisuustyypin Rakennus. **Valitse ominaisuustyyppi {preset].**",
+                "close": "**Sulje kohdemuokkain painamalla Esc-näppäintä tai napsauttamalla {button}-painiketta.**",
+                "rightclick_building": "**Avaa nyt toimintovalikko napsauttamalla taloa hiiren oikealla painikkeella.**",
+                "square_building": "Rakennus näyttää vieläkin komeammalta puhtaasti suorakulmaisena. **Muuta rakennuksen kulmat suorakulmaiseksi napsauttamalla {button}-painiketta.**",
+                "retry_square": "Napsautit väärää painiketta, yritä uudelleen.",
+                "done_square": "Huomasitko, kuinka talon kulmat asettuivat paikoilleen? Harjoitellaan vielä toinen näppärä kikka.",
+                "add_tank": "Piirretäänpä seuraavaksi tämä ympyränmuotoinen varastosäiliö. **Aloita alueen piirtäminen valitsemalla {button} Alue.**",
+                "start_tank": "Älä suotta piirrä liian täydellistä ympyrää: riittää, että piirrät karkean ympyrän, joka on oikeankokoinen eli säiliön reunat koskettavat ympyrän kehää. **Sijoita ensimmäinen piste viemällä osoitin säiliön reunalle ja sitten napsauttamalla hiiren vasemmalla painikkeella tai painamalla välilyöntiä.**",
+                "continue_tank": "Lisää vielä muutama viivapiste säiliön reunaa pitkin. Seuraavassa vaiheessa luomme ympyrän piirtämäsi viivan perusteella.{br}Viimeistele alue painamalla Enteriä tai napsauttamalla ensimmäistä tai viimeistä viivapistettä uudelleen. **Lopeta säiliön piirtäminen.**",
+                "choose_tank": "**Valitse {preset} listalta.**"
             },
             "startediting": {
                 "title": "Aloita kartanmuokkaus!",
@@ -1033,7 +1170,7 @@
                     "title": "Näyttöasetukset",
                     "background": "Näytä taustan asetukset",
                     "background_switch": "Vaihda takaisin viimeisimpään taustaan",
-                    "map_data": "Näytä karttatietoasetukset",
+                    "map_data": "Näytä kartta-aineistoasetukset",
                     "fullscreen": "Siirry koko näytön tilaan",
                     "wireframe": "Muuta alueen taustatäyttö -asetusta",
                     "minimap": "Ota pienoiskartta käyttöön/pois käytöstä"
@@ -1042,11 +1179,12 @@
                     "title": "Kohteiden valitseminen",
                     "select_one": "Valitse yksi karttakohde",
                     "select_multi": "Valitse useita karttakohteita",
-                    "lasso": "Vedä valintaruutu kohteiden päälle"
+                    "lasso": "Vedä valintaruutu kohteiden päälle",
+                    "search": "Hae kohteen nimellä"
                 },
                 "with_selected": {
                     "title": "Kohde valittuna",
-                    "edit_menu": "Näytä/piilota pikatoiminnot"
+                    "edit_menu": "Näytä/piilota toimintovalikko"
                 },
                 "vertex_selected": {
                     "title": "Piste valittuna",
@@ -1063,6 +1201,9 @@
                     "add_point": "Uusi paikkapiste",
                     "add_line": "Uusi viiva",
                     "add_area": "Uusi alue",
+                    "add_note": "Uusi karttailmoitus",
+                    "place_point": "Sijoita piste tai karttailmoitus",
+                    "disable_snap": "Estä tarttuminen muihin karttakohteisiin",
                     "stop_line": "Viivan tai alueen viimeinen piste"
                 },
                 "operations": {
@@ -1105,7 +1246,11 @@
             "meters": "{quantity} m",
             "kilometers": "{quantity} km",
             "square_meters": "{quantity} m²",
-            "square_kilometers": "{quantity} km²"
+            "square_kilometers": "{quantity} km²",
+            "north": "P",
+            "south": "E",
+            "east": "I",
+            "west": "L"
         },
         "presets": {
             "categories": {
@@ -1157,31 +1302,24 @@
                     "label": "Käyttöoikeus",
                     "options": {
                         "designated": {
-                            "description": "Liikennemerkki tai erityinen paikallinen säädös sallii pääsyn",
                             "title": "Tarkoitettu"
                         },
                         "destination": {
-                            "description": "Pääsy sallittu vain, jos kohde on alueella",
                             "title": "Läpikulku"
                         },
                         "dismount": {
-                            "description": "Pääsy sallittu, mutta ajoneuvon kuljettajan on jalkauduttava",
                             "title": "Jalkautumisvelvollisuus"
                         },
                         "no": {
-                            "description": "Ei pääsyä ilman erityislupaa",
                             "title": "Kielletty"
                         },
                         "permissive": {
-                            "description": "Pääsy sallittu, kunnes omistaja peruuttaa luvan",
                             "title": "Luvanvarainen"
                         },
                         "private": {
-                            "description": "Pääsy sallittu vain omistajan erityisluvalla",
                             "title": "Yksityinen"
                         },
                         "yes": {
-                            "description": "Laki sallii pääsyn alueelle",
                             "title": "Sallittu"
                         }
                     },
@@ -1395,6 +1533,9 @@
                 "capacity": {
                     "label": "Paikkamäärä",
                     "placeholder": "5, 10, 20, 100..."
+                },
+                "cash_in": {
+                    "label": "Käteisen talletus"
                 },
                 "castle_type": {
                     "label": "Tyyppi"
@@ -2044,7 +2185,7 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
-                    "label": "Puhelin",
+                    "label": "Puhelinnumero",
                     "placeholder": "+358 40 123 4567"
                 },
                 "piste/difficulty": {
@@ -2159,7 +2300,7 @@
                     "label": "Tienumero"
                 },
                 "ref_route": {
-                    "label": "Reittinumero"
+                    "label": "Linjanumero"
                 },
                 "ref_runway": {
                     "label": "Kiitoratanumero",
@@ -2700,10 +2841,6 @@
                     "name": "Polkupyörän huoltoteline",
                     "terms": "teline, pidike, huolto, pyörä, polkupyörä, pyörän, polkupyörän"
                 },
-                "amenity/biergarten": {
-                    "name": "Ulkoilmaolutravintola",
-                    "terms": "ravintola, olut, terassi, juoma, juomaterassi, juottola, juomala, alkoholi, juominen, olutterassi"
-                },
                 "amenity/boat_rental": {
                     "name": "Venevuokraamo",
                     "terms": "vene, laiva, paatti, jolla, veneenvuokraus, venevuokra, vuokra, venevuokraus, venevuokraamo, veneenvuokraamo"
@@ -2720,15 +2857,16 @@
                     "terms": "Kahvila, Kahvitupa, Teehuone"
                 },
                 "amenity/car_pooling": {
-                    "name": "Yhteiskäyttöauton noutopiste",
-                    "terms": "yhteiskäyttö, jako, jakaminen, jakamis, auto, jakoauto, yhteisauto, vuokra, vuokra-auto, vuokraaminen, vuokraus, ajoneuvo"
+                    "name": "Kimppakyyti",
+                    "terms": "yhteiskäyttö, jako, jakaminen, jakamis, auto, jakoauto, yhteisauto, vuokra, vuokra-auto, vuokraaminen, vuokraus, ajoneuvo, kimppa"
                 },
                 "amenity/car_rental": {
                     "name": "Autonvuokraus",
                     "terms": "autovuokraamo, autonvuokraus, auton vuokraus, auto, vuokra-auto, auton vuokraaminen, vuokraaminen"
                 },
                 "amenity/car_sharing": {
-                    "name": "Kimppakyyti"
+                    "name": "Yhteiskäyttöauto",
+                    "terms": "yhteiskäyttö, jako, jakaminen, jakamis, auto, jakoauto, yhteisauto, vuokra, vuokra-auto, vuokraaminen, vuokraus, ajoneuvo, sunfleet, drivenow"
                 },
                 "amenity/car_wash": {
                     "name": "Autopesula",
@@ -4041,6 +4179,9 @@
                 "leisure/adult_gaming_centre": {
                     "name": "Uhkapelipelaamo"
                 },
+                "leisure/beach_resort": {
+                    "name": "Rantalomakohde"
+                },
                 "leisure/bird_hide": {
                     "name": "Lintutorni"
                 },
@@ -4327,10 +4468,11 @@
                     "name": "Paljas kallio"
                 },
                 "natural/bay": {
-                    "name": "Satama"
+                    "name": "Lahti"
                 },
                 "natural/beach": {
-                    "name": "Ranta"
+                    "name": "Ranta",
+                    "terms": "uimaranta, hiekkaranta, uiminen, uima, uinti"
                 },
                 "natural/cave_entrance": {
                     "name": "Luolan suuaukko"
@@ -5548,7 +5690,7 @@
         },
         "imagery": {
             "Bing": {
-                "description": "Satelliitti- ja ilmakuvat.",
+                "description": "Satelliitti- ja ilmakuvat",
                 "name": "Bing-ilmakuvat"
             },
             "DigitalGlobe-Premium": {
@@ -5597,7 +5739,7 @@
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
                 },
-                "description": "Satelliitti- ja ilmakuvat.",
+                "description": "Satelliitti- ja ilmakuvat",
                 "name": "Mapbox-satelliittikuvat"
             },
             "OSM_Inspector-Addresses": {
@@ -5705,11 +5847,28 @@
                 },
                 "name": "Vaellus ja pyöräily"
             },
+            "kelkkareitit": {
+                "description": "Kelkkareitit.fi-moottorikelkkareitit Pohjoismaissa",
+                "name": "Pohjoismaiset moottorikelkkareitit"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Maanmittauslaitos, CC0"
+                },
+                "name": "Maanmittauslaitoksen historiallinen ortokuva vuodelta 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Maanmittauslaitos, CC0"
+                },
+                "name": "Maanmittauslaitoksen historiallinen ortokuva vuodelta 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
                 },
-                "description": "Korostaa tärkeimpiä kohteita."
+                "description": "Näyttää merkittävimmät karttakohteet kauas loitonnettaessa",
+                "name": "Karkean sijainnin lisänäkymä"
             },
             "openpt_map": {
                 "attribution": {
@@ -5739,7 +5898,8 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                }
+                },
+                "name": "Maanmittauslaitoksen talouskartta 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -5751,6 +5911,10 @@
                 "attribution": {
                     "text": "© Karttakuvat: skobbler Kartta-aineisto: OpenStreetMapin tekijät"
                 }
+            },
+            "skoterleder": {
+                "description": "Moottorikelkkareitit",
+                "name": "Ruotsin moottorikelkkareitit"
             },
             "tf-cycle": {
                 "attribution": {
@@ -5791,6 +5955,24 @@
             },
             "OSM-India-facebook": {
                 "description": "Paranna Intian OpenStreetMapia"
+            },
+            "fi-forum": {
+                "name": "OpenStreetMap Suomen keskustelualue",
+                "description": "OpenStreetMap Suomen keskustelualue verkossa"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap Suomen irc-kanava",
+                "description": "Osallistu #osm-fi-kanavalle osoitteessa irc.oftc.net (portti 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi-sähköpostituslista",
+                "description": "Talk-fi on Suomen OSM-yhteisön virallinen sähköpostituslista"
+            },
+            "de-mailinglist": {
+                "description": "Talk-de on Saksan OSM-yhteisön virallinen sähköpostituslista"
+            },
+            "it-mailinglist": {
+                "description": "Talk-it on Italian OSM-yhteisön virallinen sähköpostituslista"
             },
             "it-twitter": {
                 "description": "Seuraa Twitter-tiliämme osoitteessa {url}"

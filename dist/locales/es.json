@@ -23,8 +23,8 @@
             },
             "add_note": {
                 "title": "Nota",
-                "description": "¿Has encontrado un problema? Deja que otros mapeadores lo sepan.",
-                "tail": "Haz clic en el mapa para añadir una nota."
+                "description": "¿Encontró un problema? Permite que otros mapeadores lo sepan.",
+                "tail": "Haga clic en el mapa para agregar una nota."
             },
             "browse": {
                 "title": "Navegar",
@@ -46,7 +46,7 @@
                     "point": "Punto añadido.",
                     "vertex": "Nodo añadido a una vía.",
                     "relation": "Relación añadida.",
-                    "note": "Nota añadir."
+                    "note": "Agregó una nota."
                 }
             },
             "start": {
@@ -305,12 +305,12 @@
                 }
             },
             "detach_node": {
-                "title": "Desconectar",
+                "title": "Separar",
                 "key": "E",
-                "description": "Desconectar este nodo de estas líneas/áreas.",
-                "annotation": "Desconectado un nodo de las líneas/áreas padre.",
-                "restriction": "Este nodo no se puede desconectar porque podría afectar a una relación \"{relation}\".",
-                "connected_to_hidden": "Este nodo no se puede desconectar porque está conectado a un elemento oculto."
+                "description": "Separe este nodo de estas líneas / áreas.",
+                "annotation": "Separó un nodo de líneas / áreas padre.",
+                "restriction": "Este nodo no se puede separar porque dañaría una relación \"{relation}\".",
+                "connected_to_hidden": "Este nodo no se puede separar porque está conectado a un elemento oculto."
             }
         },
         "restriction": {
@@ -390,7 +390,7 @@
             "cancel": "Cancelar",
             "changes": "{count} Cambios",
             "download_changes": "Descargar archivo osmChange",
-            "warnings": "Avisos",
+            "warnings": "Advertencias",
             "modified": "Modificado",
             "deleted": "Eliminado",
             "created": "Creado",
@@ -430,7 +430,12 @@
                 "edited_by": "Editado por",
                 "changeset": "Conjunto de cambios",
                 "unknown": "Desconocido",
-                "link_text": "Historial en openstreetmap.org"
+                "link_text": "Historial en openstreetmap.org",
+                "note_no_history": "Sin historial (Nota nueva)",
+                "note_comments": "Comentarios",
+                "note_created_date": "Fecha de creación",
+                "note_created_user": "Creado por",
+                "note_link_text": "Nota en openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "vértice",
             "line": "línea",
             "area": "área",
-            "relation": "relación"
+            "relation": "relación",
+            "note": "nota"
         },
         "geocoder": {
             "search": "Buscar mundialmente…",
@@ -523,9 +529,7 @@
             "best_imagery": "La mejor fuente de imágenes para esta ubicación",
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
-            "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Ingrese una plantilla de URL de tesela. Los tokens válidos son:\n  - {zoom} o {z}, {x}, {y} para el esquema de tesela Z/X/Y\n  - {-y} o {ty} para las coordenadas Y invertidas estilo TMS\n  - {u} para el esquema quadtile\n  - {switch: a, b, c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
-            "overlays": "Superposiciones",
+            "overlays": "Capas",
             "imagery_source_faq": "Información de imágenes / Informar un problema",
             "reset": "reiniciar",
             "display_options": "Opciones de pantalla",
@@ -583,7 +587,7 @@
                 "tooltip": "Edificios, garajes, cobertizos, etc."
             },
             "landuse": {
-                "description": "Elementos de uso de suelo",
+                "description": "Elementos de uso del suelo",
                 "tooltip": "Bosques, tierras de cultivo, parques, áreas residenciales, áreas comerciales, etc."
             },
             "boundaries": {
@@ -624,6 +628,16 @@
             "full": {
                 "description": "Relleno completo",
                 "tooltip": "Áreas se dibujan totalmente rellenas."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Editar fondo personalizado",
+                "header": "Ajustes de fondo personalizado",
+                "instructions": "Ingrese una plantilla de URL de tesela. Los tokens válidos son:\n {zoom} o {z}, {x}, {y} para el esquema de tesela Z/X/Y\n {-y} o {ty} para las coordenadas Y invertidas estilo TMS\n {u} para el esquema cuádruple\n {switch: a, b, c} para multiplexación de servidores DNS\n\nEjemplo:\n{example}",
+                "template": {
+                    "placeholder": "Ingrese una plantilla de url"
+                }
             }
         },
         "restore": {
@@ -727,18 +741,6 @@
         },
         "cannot_zoom": "No se puede alejar más la imagen en el modo actual.",
         "full_screen": "Cambiar a pantalla completa",
-        "gpx": {
-            "local_layer": "Añadir un GPX",
-            "drag_drop": "Arrastre y suelte un archivo .gpx, .geojson o .kml en la página o haga clic en el botón a la derecha para explorar",
-            "zoom": "Acercar a la capa",
-            "browse": "Buscar un archivo"
-        },
-        "mvt": {
-            "local_layer": "Añadir un MVT",
-            "drag_drop": "Arrastre y suelte un archivo .mvt o .pbf en la página, o haga clic en el botón de la derecha para navegar",
-            "zoom": "Acercar a la capa",
-            "browse": "Buscar un archivo"
-        },
         "streetside": {
             "tooltip": "Fotografías Streetside de Microsoft",
             "title": "Capa de fotos (Bing Streetside)",
@@ -770,6 +772,12 @@
             "anonymous": "anónimo",
             "closed": "(Cerrada)",
             "commentTitle": "Comentarios",
+            "status": {
+                "opened": "abierto {when}",
+                "reopened": "reabierto {when}",
+                "commented": "comentado {when}",
+                "closed": "cerrado {when}"
+            },
             "newComment": "Nuevo comentario",
             "inputPlaceholder": "Ingrese un comentario para compartir con otros usuarios.",
             "close": "Cerrar nota",
@@ -778,9 +786,9 @@
             "close_comment": "Cerrar y comentar",
             "open_comment": "Reabrir y comentar",
             "report": "Informar",
-            "new": "Nueva Nota",
-            "newDescription": "Describir el problema.",
-            "save": "Guardar la Nota",
+            "new": "Nueva nota",
+            "newDescription": "Describa el problema.",
+            "save": "Guardar nota",
             "login": "Debe iniciar sesión para cambiar o comentar esta nota.",
             "upload_explanation": "Sus comentarios serán públicamente visibles para todos los usuarios de OpenStreetMap.",
             "upload_explanation_with_user": "Sus comentarios como {user} serán públicamente visibles para todos los usuarios de OpenStreetMap."
@@ -822,7 +830,7 @@
                 "save": "Haga clic en {save} **Guardar** para finalizar los cambios y enviarlos a OpenStreetMap. ¡Debe recordar guardar el trabajo frecuentemente!",
                 "save_validation": "En la pantalla de guardar se tiene la oportunidad de revisar lo realizado. iD también realizará algunas verificaciones básicas de datos faltantes y puede ofrecer sugerencias y advertencias útiles si algo no parece correcto.",
                 "upload_h": "Subir",
-                "upload": "Antes de cargar los cambios, debe ingresar un [comentario del conjunto de cambios](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). A continuación, haga clic en **Subir** para enviar sus cambios a OpenStreetMap, donde se fusionarán en el mapa y serán públicamente visibles para todos.",
+                "upload": "Antes de cargar los cambios, debe ingresar un [comentario del conjunto de cambios](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). A continuación, haga clic en **Subir** para enviar sus cambios a OpenStreetMap, donde se combinarán en el mapa y serán públicamente visibles para todos.",
                 "backups_h": "Copias de respaldo automáticas",
                 "backups": "Si no logra finalizar las ediciones de una sola vez, por ejemplo si su computadora falla o cierra el navegador, sus ediciones aun se mantendrán en la memoria del navegador. Podrá regresar luego (utilizando el mismo navegador en la misma computadora) y iD le dará la opción de restaurar su trabajo.",
                 "keyboard_h": "Atajos de teclado",
@@ -851,7 +859,7 @@
                 "add_point_finish": "Para colocar el nuevo punto en el mapa, coloque el cursor del mouse donde debe ir el punto, luego haga clic con el botón izquierdo del ratón o presione `Espacio`.",
                 "move_point_h": "Moviendo puntos",
                 "move_point": "Para mover un punto, coloque el cursor del mouse sobre el punto y luego mantenga presionado el botón izquierdo del ratón mientras arrastra el punto a su nueva ubicación.",
-                "delete_point_h": "Borrando puntos",
+                "delete_point_h": "Eliminando puntos",
                 "delete_point": "Está bien eliminar los elementos que no existen en el mundo real. Al eliminar un elemento de OpenStreetMap, se elimina del mapa que todos utilizan, por lo que debe asegurarse de que el elemento realmente no exista antes de eliminarlo.",
                 "delete_point_command": "Para eliminar un punto, haga clic con el botón derecho en el punto para seleccionarlo y mostrar el menú de edición, luego use el comando {delete} **Borrar*."
             },
@@ -875,7 +883,7 @@
                 "move_line_h": "Moviendo líneas",
                 "move_line_command": "Para mover una línea completa, haga clic con el botón derecho en la línea y seleccione el comando {move} **Mover** del menú de edición. A continuación, mueva el ratón y haga clic con el {leftclic} botón izquierdo para colocar la línea en una nueva ubicación.",
                 "move_line_connected": "Las líneas que están conectadas a otros elementos permanecerán conectadas a mientras mueva la línea a una nueva ubicación. iD puede evitar que mueva una línea a través de otra línea conectada.",
-                "delete_line_h": "Borrando líneas",
+                "delete_line_h": "Eliminando líneas",
                 "delete_line": "Si una línea esta completamente incorrecta, por ejemplo, una ruta que no existe en el mundo real, está bien borrarla. Tenga cuidado al eliminar elementos: las imágenes de fondo que está utilizando podrían estar desactualizadas, y una carretera que parece estar mal podría simplemente estar recién construida.",
                 "delete_line_command": "Para eliminar una línea, haga clic con el botón derecho en la línea para seleccionarla y mostrar el menú de edición, luego use el comando {delete} **Borrar**."
             },
@@ -893,7 +901,7 @@
                 "modify_area_h": "Modificación de áreas",
                 "modify_area_dragnode": "A menudo, verá áreas que no tienen la forma correcta, por ejemplo, un edificio que no coincide con las imágenes de fondo. Para ajustar la forma de un área, primero, haga clic en el {leftclick} botón izquierdo del ratón para seleccionarla. Todos los nodos del área se dibujarán como pequeños círculos. A continuación, puede arrastrar los nodos a ubicaciones mejores.",
                 "modify_area_addnode": "También puede crear nuevos nodos a lo largo de un área mediante {leftclick} **x2** haciendo doble clic en el borde del área o arrastrando los triángulos pequeños en los puntos medios entre los nodos.",
-                "delete_area_h": "Eliminado de áreas",
+                "delete_area_h": "Eliminando áreas",
                 "delete_area": "Si un área es completamente incorrecta, por ejemplo, un edificio que no existe en el mundo real, está bien que se elimine. Tenga cuidado al eliminar elementos: las imágenes de fondo que está utilizando pueden estar desactualizadas, y un edificio que parece incorrecto podría simplemente estar recién construido.",
                 "delete_area_command": "Para eliminar un área, haga clic con el  {rightclick} botón derecho en el área para seleccionarla y mostrar el menú de edición, luego use el comando {delete} **Eliminar**."
             },
@@ -902,14 +910,14 @@
                 "intro": "Una *relación* es un tipo especial de elemento en OpenStreetMap que agrupa otros elementos. Los elementos que pertenecen a una relación se llaman *miembros*, y cada miembro puede tener un *rol* en la relación.",
                 "edit_relation_h": "Edición de relaciones",
                 "edit_relation": "En la parte inferior del editor de elementos, puede expandir la sección \"Todas las relaciones\" para ver si el elemento seleccionado es miembro de alguna relación. A continuación, puede hacer clic en la relación para seleccionarla y editarla.",
-                "edit_relation_add": "Para agregar un elemento a una relación, seleccione la función y luego haga clic en el botón {plus} agregar en la sección \"Todas las relaciones\" del editor de funciones. Puede elegir de una lista de relaciones cercanas, o elegir la opción \"Nueva relación...\".",
+                "edit_relation_add": "Para agregar un elemento a una relación, seleccione el elemento y luego haga clic en el botón {plus} agregar en la sección \"Todas las relaciones\" del editor de funciones. Puede elegir de una lista de relaciones cercanas, o elegir la opción \"Nueva relación...\".",
                 "edit_relation_delete": "También puede hacer clic en el botón {delete} **Eliminar** para eliminar el elemento seleccionado de la relación. Si elimina todos los miembros de una relación, la relación se eliminará automáticamente.",
                 "maintain_relation_h": "Mantener relaciones",
                 "maintain_relation": "En su mayor parte, iD mantendrá relaciones automáticamente mientras edita. Debe tener cuidado al reemplazar los elementos que podrían ser miembros de las relaciones. Por ejemplo, si elimina una sección de la carretera y dibuja una nueva sección de la carretera para reemplazarla, debe agregar la nueva sección a las mismas relaciones (rutas, restricciones de giro, etc.) que la original.",
                 "relation_types_h": "Tipos de relación",
                 "multipolygon_h": "Multipolígonos",
                 "multipolygon": "Una relación *multipolígono* es un grupo de uno o más elementos *externos* y uno o más elementos internos. Los elementos externos definen los bordes exteriores del multipolígono, y los elementos internos definen subáreas o agujeros recortados desde el interior del multipolígono.",
-                "multipolygon_create": "Para crear un multipolígono, por ejemplo, un edificio con un agujero, dibuje el borde externo como un área y el borde interior como una línea o un tipo diferente de área. Luego `{shift}`+{leftclick} haga clic con el botón izquierdo para seleccionar ambas funciones, haga clic con el botón derecho en el menú para mostrar el menú de edición y seleccione el comando {merge} **Combinar**.",
+                "multipolygon_create": "Para crear un multipolígono, por ejemplo, un edificio con un agujero, dibuje el borde externo como un área y el borde interior como una línea o un tipo diferente de área. Luego `{shift}`+{leftclick} haga clic con el botón izquierdo para seleccionar ambos elementos, haga clic con el {rightclick} botón derecho en el menú para mostrar el menú de edición y seleccione el comando {merge} **Combinar**.",
                 "multipolygon_merge": "Combinar varias líneas o áreas creará una nueva relación multipolígono con todas las áreas seleccionadas como miembros. iD elegirá los roles internos y externos de forma automática, en función de los elementos que se encuentran dentro de otros elementos.",
                 "turn_restriction_h": "Restricciones de giro",
                 "turn_restriction": "Una relación de *restricción de giro* es un grupo de varios segmentos de camino en una intersección. Las restricciones de giro constan de un camino *desde*, nodo o carreteras *vía*, y un camino *hasta*.",
@@ -924,14 +932,14 @@
             },
             "notes": {
                 "title": "Notas",
-                "intro": "Las *Notas* se usan para a alertar a otros usuarios que un elemento debe ser corregido o requiere atención. Las notas señalan una localización específica en el mapa. Para ver las notas existentes o añadir nuevas, haz clic en el panel {data} **Datos del mapa** para activar la capa de notas de OpenStreetMap.",
-                "add_note_h": "Añadiendo Notas",
-                "add_note": "Para añadir una nueva nota, haz clic en el botón {note} **Nota** en la barra de herramientas sobre el mapa, o presione la tecla de método abreviado `4`. Esto cambiará el cursor del ratón a un símbolo de cruz. Para colocar la nueva nota en el mana, posiciona el cursor del ratón donde deba ir la nota y, a continuación, haz clic con el botón izquierdo del ratón o presiona `Espacio`.",
-                "move_note": "Sólo se pueden mover las nuevas notas. Para mover una nota, coloca el cursor del ratón sobre la nueva nota, luego mantén presionado el {leftclick} botón izquierdo del ratón mientras arrastra el punto a su nueva ubicación.",
-                "update_note_h": "Cerrando, Reabriendo y Comentando",
-                "update_note": "Se puede actualizar una nota cerrándola, reabriéndola, o añadiéndole un comentario. Cerrar la nota indica que el problema ha sido resuelto. Reabrirla que el problema original no ha sido resuelto.",
-                "save_note_h": "Guardando las Notas",
-                "save_note": "Debes guardar las ediciones de cualquier nota de forma individual haciendo clic en los botones que se encuentran bajo los comentarios de la nota. Las ediciones de notas **no** se incluyen en los conjuntos de cambios que se suben a OpenStreetMap."
+                "intro": "Las *Notas* se usan para a alertar a otros usuarios que un elemento debe ser corregido o requiere atención. Las notas señalan una ubicación específica en el mapa. Para ver las notas existentes o añadir nuevas, haga clic en el panel {data} **Datos del mapa** para activar la capa de notas de OpenStreetMap.",
+                "add_note_h": "Añadiendo notas",
+                "add_note": "Para agregar una nueva nota, haga clic en el botón {note} **Nota** en la barra de herramientas sobre el mapa, o presione la tecla de atajo `4`. Esto cambiará el cursor del ratón a un símbolo de cruz. Para colocar la nueva nota en el mapa, coloque el cursor del mouse donde debe ir la nota, luego haga clic con el {leftclick} botón izquierdo del ratón o presione `Espacio`.",
+                "move_note": "Solo se pueden mover las notas nuevas. Para mover una nota, coloque el cursor del ratón sobre la nueva nota, luego presione y mantenga presionado el {leftclick} botón izquierdo del ratón mientras arrastra la nota a su nueva ubicación.",
+                "update_note_h": "Cierre, reapertura y comentarios",
+                "update_note": "Una nota existente se puede actualizar cerrándola, volviendo a abrirla o añadiéndole un comentario. Cerrar una nota indica que el problema se ha resuelto. La reapertura de una nota indica que el problema original no está resuelto.",
+                "save_note_h": "Guardar notas",
+                "save_note": "Debe guardar las ediciones de notas de forma individual haciendo clic en los botones que se encuentran debajo de los comentarios de la nota. Las ediciones de nota **no** se incluyen en los conjuntos de cambios que se suben a OpenStreetMap."
             },
             "imagery": {
                 "title": "Imágenes de fondo",
@@ -983,7 +991,7 @@
                     "modifying": {
                         "title": "Modificando",
                         "about": "Para modificar las restricciones de giro, primero haga clic en cualquier segmento de partida **DESDE** para seleccionarlo. El segmento seleccionado emitirá un pulso, y todos los posibles destinos **HASTA** aparecerán como símbolos de giro.",
-                        "indicators": "Luego, haga clic en un símbolo de giro para alternar entre \"Permitido\", \"Restringido\" y \"Solo\".",
+                        "indicators": "Luego, hacer clic en un señal de giro para alternar entre \"Permitido\", \"Restringido\" y \"Solo\".",
                         "allow_turn": "{allowTurn} **HASTA Permitido**",
                         "restrict_turn": "{restrictTurn} **HASTA Restringido**",
                         "only_turn": "{onlyTurn} **HASTA Solo**"
@@ -1281,8 +1289,8 @@
                 "title": "Navegando",
                 "navigation": {
                     "title": "Navegación",
-                    "pan": "Panorámica del mapa",
-                    "pan_more": "Panorámica del mapa a una pantalla",
+                    "pan": "Desplazar el mapa",
+                    "pan_more": "Desplazar el mapa de a una pantalla",
                     "zoom": "Acercar / Alejar",
                     "zoom_more": "Acercar / Alejar un montón"
                 },
@@ -1301,7 +1309,7 @@
                     "minimap": "Alterna el minimapa"
                 },
                 "selecting": {
-                    "title": "Seleccionando elementos",
+                    "title": "Seleccionar elementos",
                     "select_one": "Selecciona un solo elemento",
                     "select_multi": "Selecciona múltiples elementos",
                     "lasso": "Dibuja un lazo de selección alrededor de los elementos",
@@ -1328,7 +1336,7 @@
                     "add_line": "Modo 'añadir línea'",
                     "add_area": "Modo 'añadir área'",
                     "add_note": "Modo 'Añadir nota'",
-                    "place_point": "Coloca un punto o una nota",
+                    "place_point": "Coloque un punto o nota",
                     "disable_snap": "Mantener presionado para desactivar el ajuste de punto",
                     "stop_line": "Finaliza el dibujo de una línea o área"
                 },
@@ -1337,7 +1345,7 @@
                     "continue_line": "Continua una línea en el nodo seleccionado",
                     "merge": "Combina (fusiona) los elementos seleccionados",
                     "disconnect": "Desconecta los elementos en el nodo seleccionado",
-                    "detach_node": "Desconectar el nodo seleccionado de las líneas/áreas padre.",
+                    "detach_node": "Separar el nodo seleccionado de las líneas / áreas padre",
                     "split": "Divida una línea en dos en el nodo seleccionado",
                     "reverse": "Invierte una línea",
                     "move": "Mueve los elementos seleccionados",
@@ -1418,7 +1426,7 @@
                     "name": "Elementos de sendero"
                 },
                 "category-rail": {
-                    "name": "Elementos de ferrocarril"
+                    "name": "Elementos de riel"
                 },
                 "category-restriction": {
                     "name": "Elementos de restricción"
@@ -1441,11 +1449,11 @@
                     "label": "Acceso permitido",
                     "options": {
                         "designated": {
-                            "description": "Acceso permitido según señales u ordenanzas locales específicas",
+                            "description": "Acceso permitido según señales o leyes locales específicas",
                             "title": "Designado"
                         },
                         "destination": {
-                            "description": "Acceso permitido sólo para llegar a un destino",
+                            "description": "Acceso permitido solo para llegar a un destino",
                             "title": "Destino"
                         },
                         "dismount": {
@@ -1457,15 +1465,19 @@
                             "title": "Prohibido"
                         },
                         "permissive": {
-                            "description": "Acceso permitido hasta el momento en que el propietario revoque el permiso",
+                            "description": "Acceso permitido hasta que el propietario revoque el permiso",
                             "title": "Permisivo"
                         },
+                        "permit": {
+                            "description": "Acceso permitido solo con un permiso o licencia válida",
+                            "title": "Permiso"
+                        },
                         "private": {
-                            "description": "Acceso permitido sólo con permiso del propietario de manera individual",
+                            "description": "Acceso permitido solo con el permiso del propietario de forma individual",
                             "title": "Privado"
                         },
                         "yes": {
-                            "description": "Acceso permitido por ley; un derecho de paso",
+                            "description": "Acceso permitido por la ley; un derecho de paso",
                             "title": "Permitido"
                         }
                     },
@@ -3052,7 +3064,7 @@
                     "terms": "reparación, estación, puesto, bicicletería, taller, bicicleta, bici, cadena, bomba, inflador"
                 },
                 "amenity/biergarten": {
-                    "name": "Bar al aire libre",
+                    "name": "Biergarten (Bar al aire libre)",
                     "terms": "cerveza, bar, terraza, jardín, al aire libre, biergarten"
                 },
                 "amenity/boat_rental": {
@@ -3528,8 +3540,8 @@
                     "terms": "casa rodante, autocaravana, caravana, motorhome, camper, agua potable, agua, recarga"
                 },
                 "amenity/watering_place": {
-                    "name": "Lugar con agua para animales",
-                    "terms": "agua, animales, bebedero, estanque, posa"
+                    "name": "Abrevadero para animales",
+                    "terms": "agua, animales, bebedero, estanque, posa, abrevadero, pilón, fuente, manantial, pozo"
                 },
                 "area": {
                     "name": "Área",
@@ -4841,6 +4853,10 @@
                     "name": "Campo de fútbol americano",
                     "terms": "cancha, campo, fútbol, football, americano, gridiron"
                 },
+                "leisure/pitch/badminton": {
+                    "name": "Cancha de bádminton",
+                    "terms": "bádminton, badminton, cancha"
+                },
                 "leisure/pitch/baseball": {
                     "name": "Diamante de béisbol",
                     "terms": "campo de beisbol, béisbol, beisbol, baseball"
@@ -4964,6 +4980,10 @@
                 "man_made/bridge": {
                     "name": "Puente",
                     "terms": "puente"
+                },
+                "man_made/bunker_silo": {
+                    "name": "Silo búnker",
+                    "terms": "silo búnker, silo, bunker"
                 },
                 "man_made/chimney": {
                     "name": "Chimenea",
@@ -6875,6 +6895,27 @@
                 },
                 "name": "Hike & Bike"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi caminos de motonieve de OSM (cobertura nórdica)",
+                "name": "Capa de transparencia motonieve nórdica"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaico de ortofotos suecas del período 1955-1965. Se pueden obtener imágenes más antiguas y más nuevas.",
+                "name": "Ortofotos históricas Lantmäteriet 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaico de ortofotos suecas del período 1970-1980. En construcción.",
+                "name": "Lantmäteriet Orthofoto Histórico 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Términos y comentarios"
@@ -6911,8 +6952,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Escaneo de ´mapas económicos´ ca 1950-1980",
-                "name": "Mapa económico Landmäteriet (histórico)"
+                "description": "Escaneo de \"mapas económicos\" ca. 1950-1980",
+                "name": "Mapa económico de Lantmäteriet 1950-1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6925,6 +6966,13 @@
                     "text": "© teselas: skobbler, datos del mapa: contribuidores OpenStreetMap"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Caminos de motonieve",
+                "name": "Mapa de motonieve Suecia"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6988,6 +7036,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapeo de Botswana en Facebook",
+                "description": "Página de OpenStreetMap en Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapeo de Botswana en Twitter",
+                "description": "Twitter de OpenStreetMap en Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "Universidad de Cape Coast YouthMappers",
                 "description": "Síguenos en Twitter en {url}",
@@ -7220,7 +7276,7 @@
                 "extendedDescription": "La mayoría de las charlas ocurren en el canal \"OpenStreetMap Belgium\". ¡Puede preguntar cualquier cosa allí! Las otras salas son para temas específicos."
             },
             "be-meetup": {
-                "name": "Meetup de encuentro OpenStreetMap Bélgica",
+                "name": "Meetup de OpenStreetMap Bélgica",
                 "description": "Reuniones en la vida real de todos los interesados en OpenStreetMap",
                 "extendedDescription": "Las reuniones presenciales son geniales para conocer a otros mapeadores, hacerles preguntas y aprender mucho. ¡Son especialmente bienvenidos los nuevos contribuidores!"
             },
@@ -7351,6 +7407,18 @@
             "hu-meetup": {
                 "name": "Meetup de OpenStreetMap Hungría",
                 "description": "La plataforma para organizar encuentros en Hungría"
+            },
+            "is-facebook": {
+                "name": "OSM Islandia en Facebook",
+                "description": "Página de OpenStreetMap en Islandia"
+            },
+            "is-mailinglist": {
+                "name": "Lista de correo de Talk-is",
+                "description": "Talk-is es la lista de correo oficial de la comunidad islandesa OSM"
+            },
+            "is-twitter": {
+                "name": "OSM Islandia en Twitter",
+                "description": "Twitter de OpenStreetMap en Islandia"
             },
             "it-facebook": {
                 "name": "Facebook de OpenStreetMap Italia",
@@ -7768,6 +7836,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Perú",
                 "description": "Noticias y recursos para la comunidad de OpenStreetMap Perú"
+            },
+            "LATAM-Facebook": {
+                "name": "Facebook de OpenStreetMap Latam",
+                "description": "OpenStreetMap Latam en Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "Telegram de OpenStreetMap Latam",
+                "description": "Telegram de OpenStreetMap para América Latina"
+            },
+            "LATAM-Twitter": {
+                "name": "Twitter de OpenStreetMap Latam",
+                "description": "Síganos en Twitter en {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "Soporte de OpenStreetMap en América Latina",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam es la conferencia anual para todos los creadores de mapas y usuarios de OpenStreetMap en América Latina. El programa incluye charlas, paneles, talleres y mapatones relacionados con OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap en Facebook",

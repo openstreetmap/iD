@@ -2,21 +2,11 @@ import _values from 'lodash-es/values';
 
 import { select as d3_select } from 'd3-selection';
 
-import { geoPolygonIntersectsPolygon } from '../geo';
 import { data, dataImperial, dataDriveLeft } from '../../data';
 import { svgPath } from './index';
 
 
 export function svgDebug(projection, context) {
-
-    function multipolygons(imagery) {
-        return imagery.map(function(data) {
-            return {
-                type: 'MultiPolygon',
-                coordinates: [ data.polygon ]
-            };
-        });
-    }
 
     function drawDebug(selection) {
         var showsTile = context.getDebug('tile');
@@ -89,16 +79,11 @@ export function svgDebug(projection, context) {
 
 
         var extent = context.map().extent();
-        var dataImagery = data.imagery || [];
-        var availableImagery = showsImagery && multipolygons(dataImagery.filter(function(source) {
-            if (!source.polygon) return false;
-            return source.polygon.some(function(polygon) {
-                return geoPolygonIntersectsPolygon(polygon, extent, true);
-            });
-        }));
+        var matchImagery = (showsImagery && data.imagery.query.bbox(extent.rectangle(), true)) || [];
+        var features = matchImagery.map(function(d) { return data.imagery.features[d.id]; });
 
         var imagery = layer.selectAll('path.debug-imagery')
-            .data(showsImagery ? availableImagery : []);
+            .data(features);
 
         imagery.exit()
             .remove();

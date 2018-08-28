@@ -335,7 +335,6 @@
             "best_imagery": "此地至出名相源",
             "switch": "轉返去爾個背景",
             "custom": "自訂",
-            "custom_button": "改自訂背景",
             "reset": "重設",
             "minimap": {
                 "tooltip": "開個縮圖，幫手搵返家下睇到嘅範圍。"
@@ -617,31 +616,24 @@
                     "label": "准過",
                     "options": {
                         "designated": {
-                            "description": "通行與否，按法例或路牌指定",
                             "title": "指名"
                         },
                         "destination": {
-                            "description": "限往目的地",
                             "title": "目的地"
                         },
                         "dismount": {
-                            "description": "過得，要落車推。",
                             "title": "落車推"
                         },
                         "no": {
-                            "description": "公眾不通",
                             "title": "禁入"
                         },
                         "permissive": {
-                            "description": "可通，直至地主唔畀。",
                             "title": "任過"
                         },
                         "private": {
-                            "description": "要地主批准",
                             "title": "私家"
                         },
                         "yes": {
-                            "description": "按法例可通，有權過路。",
                             "title": "准許"
                         }
                     },

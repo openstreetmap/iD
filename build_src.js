@@ -27,7 +27,10 @@ module.exports = function buildSrc() {
                 input: './modules/id.js',
                 plugins: [
                     includePaths( {
-                        paths: ['node_modules/d3/node_modules']  // npm2 or windows
+                        paths: ['node_modules/d3/node_modules'],  // npm2 or windows
+                        include: {
+                            'martinez-polygon-clipping': 'node_modules/martinez-polygon-clipping/dist/martinez.umd.js'
+                        }
                     }),
                     nodeResolve({
                         module: true,

@@ -21,6 +21,11 @@
                 "description": "Engadir restaurantes, monumentos, caixas do correo ou outros puntos ao mapa.",
                 "tail": "Fai clic no mapa para engadir un punto."
             },
+            "add_note": {
+                "title": "Nota",
+                "description": "Atopaches un problema? Faillo saber a outros mapeadores.",
+                "tail": "Fai clic no mapa para engadir unha nota."
+            },
             "browse": {
                 "title": "Buscar",
                 "description": "Desprazar e ampliar o mapa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Punto engadido.",
                     "vertex": "Engadiuse un nó a unha vía.",
-                    "relation": "Relación engadida."
+                    "relation": "Relación engadida.",
+                    "note": "Nota engadida."
                 }
             },
             "start": {
@@ -297,6 +303,10 @@
                     "create": "Engadida unha restrición de xiro.",
                     "delete": "Eliminada unha restrición de xiro."
                 }
+            },
+            "detach_node": {
+                "title": "Extraer",
+                "key": "E"
             }
         },
         "restriction": {
@@ -509,8 +519,6 @@
             "best_imagery": "Mellor fonte de imaxes coñecida deste sitio",
             "switch": "Voltar a este fondo",
             "custom": "Personalizado",
-            "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introducir un modelo URL de mosaico. Os tokens válidos son:\n   - {zoom}/{z}, {x}, {y} para o esquema de mosaico Z/X/Y\n   - {-y} ou {ty} para coordenadas Y invertidas estilo TMS\n   - {u} para o esquema quadtile\n   - {switch:a,b,c} para multiplexado de servidores DNS\n\nExemplo:\n{example}",
             "overlays": "Superposicións",
             "imagery_source_faq": "Información das imaxes/Informar dun problema",
             "reset": "reiniciar",
@@ -538,7 +546,7 @@
                     "title": "Datos OpenStreetMap"
                 },
                 "notes": {
-                    "tooltip": "Nota de datos de OpenStreetMap",
+                    "tooltip": "Datos das notas de OpenStreetMap",
                     "title": "Notas de OpenStreetMap"
                 }
             },
@@ -713,18 +721,6 @@
         },
         "cannot_zoom": "Non se pode reducir máis no modo actual.",
         "full_screen": "Pasar a pantalla completa",
-        "gpx": {
-            "local_layer": "Engadir un GPX",
-            "drag_drop": "Arrastra e solta un ficheiro .gpx, .geojson ou .kml sobre a páxina, ou fai clic no botón da dereita para buscalo",
-            "zoom": "Zoom na capa",
-            "browse": "Buscar un ficheiro"
-        },
-        "mvt": {
-            "local_layer": "Engadir un MVT",
-            "drag_drop": "Arrastra e solta un ficheiro .mvt ou .pbf sobre a páxina, ou fai clic no botón da dereita para buscalo",
-            "zoom": "Ampliar á capa",
-            "browse": "Buscar un ficheiro"
-        },
         "streetside": {
             "tooltip": "Fotos Streetside de Microsoft",
             "title": "Superposición de fotos (Bing Streetside)",
@@ -756,6 +752,12 @@
             "anonymous": "anónimo",
             "closed": "(Pechado)",
             "commentTitle": "Comentarios",
+            "status": {
+                "opened": "aberta {when}",
+                "reopened": "reaberta {when}",
+                "commented": "comentada {when}",
+                "closed": "pechada {when}"
+            },
             "newComment": "Novo comentario",
             "inputPlaceholder": "Introducir un comentario para compartir con outros usuarios.",
             "close": "Pechar a nota",
@@ -764,6 +766,9 @@
             "close_comment": "Pechar e comentar",
             "open_comment": "Volver a abrir e comentar",
             "report": "Informar dun problema",
+            "new": "Nova nota",
+            "newDescription": "Describe o problema.",
+            "save": "Gardar nota",
             "login": "Debe acceder para poder facer cambios ou comentarios nesta nota.",
             "upload_explanation": "Os seus comentarios serán públicos e visibles para calquera usuario de OpenStreetMap.",
             "upload_explanation_with_user": "Os seus comentarios como  {user} serán públicos e visibles para todos os usuarios de OpenStreetMap."
@@ -1214,6 +1219,8 @@
                     "add_point": "Modo 'engadir punto'",
                     "add_line": "Modo 'engadir liña'",
                     "add_area": "Modo 'engadir área'",
+                    "add_note": "Modo 'engadir nota'",
+                    "place_point": "Situar un punto ou unha nota",
                     "disable_snap": "Manter premido para desactivar o axuste do punto",
                     "stop_line": "Rematar de debuxar unha liña ou área"
                 },
@@ -1325,31 +1332,24 @@
                     "label": "Permítese o acceso",
                     "options": {
                         "designated": {
-                            "description": "Acceso libre e regulado por sinais e ordenanzas locais",
                             "title": "Designado"
                         },
                         "destination": {
-                            "description": "Acceso permitido só para chegar a un destino determinado",
                             "title": "Destino"
                         },
                         "dismount": {
-                            "description": "Permítese o acceso mais sempre a pé",
                             "title": "Baixar ou desmontar"
                         },
                         "no": {
-                            "description": "Acceso restrinxido ao público xeral",
                             "title": "Prohibido"
                         },
                         "permissive": {
-                            "description": "Acceso permitido até que o propietario revogue o permiso",
                             "title": "Permisivo"
                         },
                         "private": {
-                            "description": "Acceso permitido só coa autorización do propietario de forma individual",
                             "title": "Privado"
                         },
                         "yes": {
-                            "description": "Acceso permitido pola lei; un dereito de paso",
                             "title": "Permitido"
                         }
                     },
@@ -2828,10 +2828,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Lugar para ferramentas de reparación de bicicletas",
                     "terms": "bici, bicicleta, reparación, inchar"
-                },
-                "amenity/biergarten": {
-                    "name": "Xardín da cervexa",
-                    "terms": "cervexa, alcohol, biergarten"
                 },
                 "amenity/boat_rental": {
                     "name": "Aluguer de botes",

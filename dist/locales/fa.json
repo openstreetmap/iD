@@ -462,7 +462,6 @@
             "best_imagery": "بهترین منبع تصویری شناخته شده برای این مکان",
             "switch": "بازگشت به این پس‌زمینه",
             "custom": "سفارشی",
-            "custom_button": "ویرایش پشت زمینه سفارشی",
             "overlays": "پوشش ها",
             "imagery_source_faq": "اطلاعات تصویر / گزارش یک مشکل",
             "reset": "باز نشاندن",
@@ -632,9 +631,6 @@
         },
         "cannot_zoom": "در حالت فعلی بیش از این نمیتوان کوچک نمایی کرد.",
         "full_screen": "تعویض صفحه‌نمایش کامل",
-        "gpx": {
-            "browse": "جستجو برای فایل"
-        },
         "mapillary_images": {
             "tooltip": "عکس‌های خیابانی از Mapillary",
             "title": "لایه پوشش عکس (Mapillary)"
@@ -883,31 +879,24 @@
                     "label": "دسترسی مجاز",
                     "options": {
                         "designated": {
-                            "description": "دسترسی با توجه به علائم و قوانین محلی مجاز است",
                             "title": "تعیین شده"
                         },
                         "destination": {
-                            "description": "دسترسی فقط برای رسیدن به مقصدی مجاز است",
                             "title": "مقصد"
                         },
                         "dismount": {
-                            "description": "دسترسی تنها با پیاده شدن راننده مجاز است",
                             "title": "پیاده کردن"
                         },
                         "no": {
-                            "description": "دسترسی برای عموم مردم مجاز نیست",
                             "title": "ممنوع"
                         },
                         "permissive": {
-                            "description": "دسترسی تا وقتی صاحبش مجوز را لغو نکند مجاز است",
                             "title": "مجاز"
                         },
                         "private": {
-                            "description": "دسترسی فقط با اجازه از صاحب بصورت انفرادی مجاز است",
                             "title": "خصوصی"
                         },
                         "yes": {
-                            "description": "دسترسی مجاز طبق قانون: حق از راه",
                             "title": "مجاز"
                         }
                     },
@@ -2379,9 +2368,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "ایستگاه تعمیر دوچرخه"
-                },
-                "amenity/biergarten": {
-                    "name": "باغ آبجو"
                 },
                 "amenity/boat_rental": {
                     "name": "کرایه قایق"

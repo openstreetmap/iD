@@ -16,6 +16,7 @@
         "shop": "chemist"
     },
     "terms": [
+        "apothecary",
         "med*",
         "drug*",
         "gift"

@@ -21,6 +21,11 @@
                 "description": "Adicionar lojas, restaurantes, escolas, números de porta, passadeiras, locais, etc.",
                 "tail": "Clique no mapa para adicionar um ponto."
             },
+            "add_note": {
+                "title": "Nota",
+                "description": "Detetou um erro? Transmita aos outros mapeadores",
+                "tail": "Clique no mapa para adicionar uma nota"
+            },
             "browse": {
                 "title": "Navegar",
                 "description": "Aproximar e mover o mapa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Ponto adicionado.",
                     "vertex": "Nó adicionado a uma linha.",
-                    "relation": "Relação adicionada."
+                    "relation": "Relação adicionada.",
+                    "note": "Adicionou uma nota"
                 }
             },
             "start": {
@@ -297,6 +303,14 @@
                     "create": "Restrição de viragem adicionada.",
                     "delete": "Restrição de viragem eliminada."
                 }
+            },
+            "detach_node": {
+                "title": "Destacar",
+                "key": "E",
+                "description": "Destacar este nó destas linhas/áreas",
+                "annotation": "Destacar este nó das linhas/áreas principais",
+                "restriction": "Este nó não pode ser destacado, isso iria danificar a relação \"{relation}\"",
+                "connected_to_hidden": "Este nó não pode ser destacado, já que está interligado a um elemento oculto"
             }
         },
         "restriction": {
@@ -352,6 +366,8 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Aproxime para editar",
+        "login": "Autenticar",
+        "logout": "Sair",
         "loading_auth": "A fazer a ligação ao OpenStreetMap...",
         "report_a_bug": "Reportar um bug.",
         "help_translate": "Ajudar a traduzir.",
@@ -414,7 +430,12 @@
                 "edited_by": "Editado por",
                 "changeset": "Conjunto de alterações",
                 "unknown": "Desconhecido",
-                "link_text": "Histórico em openstreetmap.org"
+                "link_text": "Histórico em openstreetmap.org",
+                "note_no_history": "Sem histórico (Nova Nota)",
+                "note_comments": "Comentários",
+                "note_created_date": "Data de criação",
+                "note_created_user": "Criada por",
+                "note_link_text": "Nota em openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -444,7 +465,8 @@
             "vertex": "vértice",
             "line": "linha",
             "area": "área",
-            "relation": "relação"
+            "relation": "relação",
+            "note": "nota"
         },
         "geocoder": {
             "search": "Pesquisar no mundo inteiro...",
@@ -507,8 +529,6 @@
             "best_imagery": "Melhor fonte de imagem para esse lugar",
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
-            "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Indique um URL para modelo de mosaicos. Os tokens válidos são:\n   - {zoom} ou {z}, {x}, {y} para Z/X/Y esquema de mosaico\n   - {-y} ou {ty} para estilo TMS invertido, coordenadas Y\n   - {u} para esquemas de mosaicos divididos em quatro\n   - {switch:a,b,c} para servidores DNS\n\nExamplo:\n{example}",
             "overlays": "Camadas superiores",
             "imagery_source_faq": "Informação da imagem / Reportar um problema",
             "reset": "reiniciar",
@@ -534,6 +554,10 @@
                 "osm": {
                     "tooltip": "Dados do mapa de OpenStreetMap",
                     "title": "Dados OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Dados da nota do OpenStreetMap",
+                    "title": "Notas OpenstreetMap"
                 }
             },
             "fill_area": "Preenchimento de Áreas",
@@ -604,6 +628,16 @@
             "full": {
                 "description": "Preenchimento Total",
                 "tooltip": "As áreas são mostradas totalmente preenchidas."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Editar fundo customizado",
+                "header": "Definições do fundo customizado",
+                "instructions": "Introduza o endereço URL do mosaico. Os tokens válidos são:\n {zoom} or {z}, {x}, {y} para esquemas com mosaico Z/X/Y \n{-y} ou {ty} para estilos TMS invertidos com coordenadas Y\n{u} para esquemas de mosaicos quadriculares\n{switch:a,b,c} para servidores DNS\n\nExamplo:\n{example}",
+                "template": {
+                    "placeholder": "Indicar o endereço url do modelo"
+                }
             }
         },
         "restore": {
@@ -707,15 +741,11 @@
         },
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Edição em ecrã inteiro.",
-        "gpx": {
-            "drag_drop": "Arraste e largue um ficheiro .gpx, .geojson ou .kml na página ou clique no botão da direita para selecionar um",
-            "zoom": "Aproximar para a camada",
-            "browse": "Encontrar ficheiro"
-        },
         "streetside": {
             "tooltip": "Fotos ao nível da rua da Microsoft",
             "title": "Camada superior com imagens de rua Bing",
             "report": "Reporte uma preocupação com a privacidade nesta imagem",
+            "view_on_bing": "Ver no Bing Maps",
             "hires": "Alta resolução"
         },
         "mapillary_images": {
@@ -735,6 +765,33 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Ver esta imagem no OpenStreetCam"
+        },
+        "note": {
+            "note": "Nota",
+            "title": "Editar nota",
+            "anonymous": "Anónimo",
+            "closed": "(concluído)",
+            "commentTitle": "Comentários",
+            "status": {
+                "opened": "Aberto {when}",
+                "reopened": "Reaberto {when}",
+                "commented": "comentado {when}",
+                "closed": "Encerrado {when}"
+            },
+            "newComment": "Novo comentário",
+            "inputPlaceholder": "Deixe um comentário para partilhar com outros utilizadores",
+            "close": "Encerrar Nota",
+            "open": "Reabrir Nota",
+            "comment": "Comentário",
+            "close_comment": "Encerrar e comentar",
+            "open_comment": "Reabrir e comentar",
+            "report": "Reportar",
+            "new": "Nova Nota",
+            "newDescription": "Descreva a situação",
+            "save": "Guardar Nota",
+            "login": "Deve autenticar-se para alterar ou comentar esta nota.",
+            "upload_explanation": "Os seus comentários serão visíveis publicamente a todos os utilizadores do OpenStreetMap.",
+            "upload_explanation_with_user": "Os seus comentários como {user} serão visivéis publicamente a todos os utilizadores do OpenStreetMap."
         },
         "help": {
             "title": "Ajuda",
@@ -872,6 +929,12 @@
                 "boundary_h": "Fronteiras",
                 "boundary": "Uma relação de *fronteira* consiste num grupo de um ou mais elementos de linha que juntos formam um limite administrativo.",
                 "boundary_add": "Para adicionar um elemento a uma relação de fronteira, selecione o elemento e desça até à secção \"Todas as relações\" do editor de elementos e clique no botão adicionar {plus} para adicionar os elementos próximos que existam na relação ou numa nova relação."
+            },
+            "notes": {
+                "title": "Notas",
+                "add_note_h": "Adicionando Notas",
+                "update_note_h": "Concluir, Reabrir e Comentar",
+                "save_note_h": "Guardar Notas"
             },
             "imagery": {
                 "title": "Imagem de fundo",
@@ -1258,6 +1321,8 @@
                     "add_point": "Modo 'adicionar ponto'",
                     "add_line": "Modo 'adicionar linha'",
                     "add_area": "Modo 'adicionar área'",
+                    "add_note": "Modo 'Adicionar nota'",
+                    "place_point": "Coloque um ponto ou nota",
                     "disable_snap": "Manter para desativar atração a pontos",
                     "stop_line": "Terminar de desenhar uma linha ou área"
                 },
@@ -1266,6 +1331,7 @@
                     "continue_line": "Continuar uma linha no nó selecionado",
                     "merge": "Combinar (fundir) elementos selecionados",
                     "disconnect": "Desligar elementos no nó selecionado",
+                    "detach_node": "Destacar o nó seleccionado das linhas/áreas principais",
                     "split": "Separar uma linha em duas no nó selecionado",
                     "reverse": "Inverter uma linha",
                     "move": "Mover elementos selecionados",
@@ -1369,31 +1435,24 @@
                     "label": "Acesso autorizado",
                     "options": {
                         "designated": {
-                            "description": "Acesso permitido de acordo com a sinalética e/ou legislação local específica; como p. ex. o Código da Estrada",
                             "title": "Indicado"
                         },
                         "destination": {
-                            "description": "Acesso permitido apenas para chegar a determinado destino; como p. ex. parques de estacionamento ou centros comerciais",
                             "title": "Destino"
                         },
                         "dismount": {
-                            "description": "Acesso permitido mas o cavaleiro deve desmontar",
                             "title": "Desmontar"
                         },
                         "no": {
-                            "description": "Acesso não permitido ao público em geral",
                             "title": "Proibido"
                         },
                         "permissive": {
-                            "description": "Acesso permitido até o proprietário revogar a permissão",
                             "title": "Permissivo"
                         },
                         "private": {
-                            "description": "Acesso permitido apenas com permissão do proprietário de forma individual",
                             "title": "Privado"
                         },
                         "yes": {
-                            "description": "Acesso permitido por lei",
                             "title": "Permitido"
                         }
                     },
@@ -1822,7 +1881,7 @@
                     "label": "Exceções"
                 },
                 "faces": {
-                    "label": "Caras"
+                    "label": "Faces"
                 },
                 "fax": {
                     "label": "Fax",
@@ -2937,10 +2996,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Ponto de reparação de bicicletas self-service",
                     "terms": "Bicycle Repair Tool Station"
-                },
-                "amenity/biergarten": {
-                    "name": "Jardim da cerveja",
-                    "terms": "Beer Garden, Biergarten"
                 },
                 "amenity/boat_rental": {
                     "name": "Aluguer de barcos",
@@ -6454,8 +6509,16 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapeando Botsuana no Facebook",
+                "description": "Página do OpenStreetMap no Botsuana"
+            },
+            "bw-twitter": {
+                "name": "Mapeando Botsuana no Twitter",
+                "description": "Twitter do OpenStreetMap no Botsuana"
+            },
             "cape-coast-youthmappers": {
-                "description": "Segue-nos no Twitter: {url}"
+                "description": "Siga-nos no Twitter: {url}"
             },
             "osm-gh-facebook": {
                 "name": "OpenStreetMap Gana no Facebook",
@@ -6536,20 +6599,81 @@
                 "name": "Lista de Discussão Talk-au"
             },
             "OSM-AR-mailinglist": {
-                "name": "Lista de Discussão Talk-ar"
+                "name": "Lista de Discussão Talk-ar",
+                "description": "Lista histórica.  Em desuso atualmente."
+            },
+            "OSM-AR-telegram": {
+                "name": "Telegram OpenStreetMap Argentina",
+                "description": "Junte-se à comunidade OpenStreetMap Argentina no Telegram"
+            },
+            "OSM-AR-twitter": {
+                "description": "Siga-nos no Twitter em {url}"
             },
             "OSM-BO-mailinglist": {
-                "name": "Lista de Discussão Talk-bo"
+                "name": "Lista de Discussão Talk-bo",
+                "description": "Lista de discussão oficial da comunidade OpenStreetMap Boliviana",
+                "extendedDescription": "Mapeando na Bolívia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!"
+            },
+            "Bahia-telegram": {
+                "name": "Grupo Telegram OpenStreetMap Bahia",
+                "description": "Junte-se à comunidade OpenStreetMap Bahia no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
+            },
+            "DF-telegram": {
+                "name": "Grupo de Telegram do OpenStreetMap Brasília",
+                "description": "Junte-se à comunidade OpenStreetMap Brasília no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
             },
             "OSM-br-mailinglist": {
                 "name": "Lista de Discussão Talk-br",
                 "description": "Uma lista de discussão para falar sobre o OpenStreetMap no Brasil"
             },
+            "OSM-br-telegram": {
+                "name": "Telegram OpenStreetMap Brasil",
+                "description": "Junte-se à comunidade OpenStreetMap Brasil no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar das nossas reuniões. Todos são bem-vindos!"
+            },
+            "OSM-br-twitter": {
+                "name": "Twitter OpenStreetMap Brasil",
+                "description": "Siga-nos no Twitter em {url}"
+            },
+            "RS-telegram": {
+                "name": "Grupo Telegram OpenStreetMap Rio Grande do Sul",
+                "description": "Junte-se à comunidade OpenStreetMap Rio Grande do Sul no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
+            },
+            "OSM-CL-facebook": {
+                "name": "Facebook OpenStreetMap Chile ",
+                "description": "Junte-se à comunidade OpenStreetMap Chile no Facebook",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
+            },
             "OSM-CL-mailinglist": {
-                "name": "Lista de Discussão Talk-cl"
+                "name": "Lista de Discussão Talk-cl",
+                "description": "Uma lista de discussão para falar sobre o OpenStreetMap no Chile"
+            },
+            "OSM-CL-telegram": {
+                "name": "Telegram OpenStreetMap Chile ",
+                "description": "Junte-se à comunidade OpenStreetMap Chile no Telegram",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
+            },
+            "OSM-CL-twitter": {
+                "name": "Twitter OpenStreetMap Chile",
+                "description": "Siga-nos no Twitter em {url}"
+            },
+            "OSM-CO-facebook": {
+                "description": "Junte-se à comunidade OpenStreetMap Colômbia no Facebook",
+                "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap. Todos são bem-vindos!"
             },
             "OSM-CO-mailinglist": {
-                "name": "Lista de Discussão Talk-co"
+                "name": "Lista de Discussão Talk-co",
+                "description": "Uma lista de discussão para falar sobre o OpenStreetMap na Colômbia"
+            },
+            "OSM-CO-telegram": {
+                "name": "OSM Colômbia no Telegram"
+            },
+            "OSM-CO-twitter": {
+                "name": "Twitter OpenStreetMap Colômbia ",
+                "description": "Siga-nos no Twitter em {url}"
             },
             "OSM-PE-mailinglist": {
                 "name": "Lista de Discussão Talk-pe"

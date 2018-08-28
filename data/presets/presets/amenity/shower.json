@@ -5,7 +5,8 @@
         "opening_hours",
         "fee",
         "supervised",
-        "building_area"
+        "building_area",
+        "access_simple"
     ],
     "geometry": [
         "point",

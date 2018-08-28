@@ -430,7 +430,12 @@
                 "edited_by": "編輯由",
                 "changeset": "變更組合",
                 "unknown": "未知",
-                "link_text": "在 openstreetmap.org 上的歷史"
+                "link_text": "在 openstreetmap.org 上的歷史",
+                "note_no_history": "無歷史 (新節點) ",
+                "note_comments": " 評論",
+                "note_created_date": "創建日期",
+                "note_created_user": "創建者",
+                "note_link_text": "openstreetmap.org 註記"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "頂點",
             "line": "線",
             "area": "區域",
-            "relation": "關係"
+            "relation": "關係",
+            "note": "註記"
         },
         "geocoder": {
             "search": "搜尋全世界...",
@@ -523,8 +529,6 @@
             "best_imagery": "這個地點已知最佳的影像來源",
             "switch": "切換回此背景",
             "custom": "客製化",
-            "custom_button": "編輯自訂的背景",
-            "custom_prompt": "輸入標題網址模版。有效的代碼是： \n- {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n- {-y} or {ty} for flipped TMS-style Y coordinates\n- {u} for quadtile scheme\n- {switch:a,b,c} for DNS server multiplexing\n\n範例：\n{example}",
             "overlays": "覆疊",
             "imagery_source_faq": "影像資訊 / 問題回報",
             "reset": "重設",
@@ -554,6 +558,11 @@
                 "notes": {
                     "tooltip": "從開放街圖而來的註記資料",
                     "title": "開放街圖註記"
+                },
+                "custom": {
+                    "tooltip": "拖曳資料檔案到頁面上，或點選按鈕以設定",
+                    "title": "自訂地圖資料",
+                    "zoom": "縮放到資料"
                 }
             },
             "fill_area": "填充選項",
@@ -624,6 +633,29 @@
             "full": {
                 "description": "全部填充",
                 "tooltip": "區域全部用顏色填充"
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "編輯自訂的背景",
+                "header": "自訂背景圖片設定",
+                "instructions": "輸入標題網址模版。有效的代碼是： \n  {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n  {-y} or {ty} for flipped TMS-style Y coordinates\n  {u} for quadtile scheme\n {switch:a,b,c} for DNS server multiplexing\n\n範例：\n{example}",
+                "template": {
+                    "placeholder": "編輯網址模版"
+                }
+            },
+            "custom_data": {
+                "tooltip": "編輯自訂資料圖層",
+                "header": "自訂地圖資料設定",
+                "file": {
+                    "instructions": "選擇本機資料檔案。支援的檔案類型：\n   .gpx, .kml, .geojson, .json",
+                    "label": "瀏覽檔案"
+                },
+                "or": "或",
+                "url": {
+                    "instructions": "輸入資料檔案 URL 或向量圖磚 URL 模板。有效的代號是：\n   {zoom} 或 {z}, {x}, {y} 為 Z/X/Y 圖磚結構",
+                    "placeholder": "輸入 URL"
+                }
             }
         },
         "restore": {
@@ -727,18 +759,6 @@
         },
         "cannot_zoom": "在此模式下不能再縮小。",
         "full_screen": "啟動全螢幕",
-        "gpx": {
-            "local_layer": "新增 GPX",
-            "drag_drop": "拖放一個 .gpx, .geojson 或是 .kml 檔案到此頁面上，或是點選按鈕以瀏覽",
-            "zoom": "縮放到圖層",
-            "browse": "瀏覽檔案"
-        },
-        "mvt": {
-            "local_layer": "新增 MVT",
-            "drag_drop": "將 .mvt 或 .pbf 拖曳到此頁面，或是點選右邊的按鈕以瀏覽",
-            "zoom": "縮放至圖層",
-            "browse": "瀏覽檔案"
-        },
         "streetside": {
             "tooltip": "微軟的街景照片",
             "title": "照片覆蓋層 (Bing Streetside)",
@@ -770,6 +790,12 @@
             "anonymous": "匿名",
             "closed": "（已關閉）",
             "commentTitle": "評論",
+            "status": {
+                "opened": "已開啟 {when}",
+                "reopened": "再次開啟 {when}",
+                "commented": "評論 {when}",
+                "closed": "關閉 {when}"
+            },
             "newComment": "新評論",
             "inputPlaceholder": "輸入評論以與其他使用者分享。",
             "close": "關閉註記",
@@ -1441,31 +1467,35 @@
                     "label": "允許通行限制",
                     "options": {
                         "designated": {
-                            "description": "只限標誌指定或特定本地法律容許人士進入",
+                            "description": "根據標誌或當地法律可以通過",
                             "title": "指定"
                         },
                         "destination": {
-                            "description": "只限前往目的地人士進入",
+                            "description": "僅供前往目的地時通過",
                             "title": "目的地"
                         },
                         "dismount": {
-                            "description": "允許進入但駕駛需下車",
+                            "description": "可以通過，但騎士必須下車",
                             "title": "下車"
                         },
                         "no": {
-                            "description": "禁止一般公眾進入",
+                            "description": "不供一般大眾使用",
                             "title": "禁止進入"
                         },
                         "permissive": {
-                            "description": "容許進入，直至擁有者撇回許可",
+                            "description": "直到擁有者撤銷許可前都可以通過",
                             "title": "獲許可進入"
                         },
+                        "permit": {
+                            "description": "僅持有有效許可證時方可通過",
+                            "title": "許可證"
+                        },
                         "private": {
-                            "description": "須擁有者個別批准，方可進入",
+                            "description": "僅在擁有者允許的情況下才能通行",
                             "title": "私人"
                         },
                         "yes": {
-                            "description": "按法律及路權; 有權使用",
+                            "description": "法律允許通行；一種方式",
                             "title": "可使用"
                         }
                     },
@@ -3052,7 +3082,7 @@
                     "terms": "單車維修工具站,自行車自助維修站,單車自助維修站"
                 },
                 "amenity/biergarten": {
-                    "name": "啤酒花園",
+                    "name": "啤酒花園 ",
                     "terms": "啤酒花園,屋外花園酒店"
                 },
                 "amenity/boat_rental": {
@@ -4840,6 +4870,10 @@
                     "name": "美式足球場",
                     "terms": "美式足球場"
                 },
+                "leisure/pitch/badminton": {
+                    "name": "羽毛球場",
+                    "terms": "羽毛球場"
+                },
                 "leisure/pitch/baseball": {
                     "name": "棒球場",
                     "terms": "棒球場"
@@ -4963,6 +4997,10 @@
                 "man_made/bridge": {
                     "name": "橋樑",
                     "terms": "橋樑,橋,陸橋,天橋"
+                },
+                "man_made/bunker_silo": {
+                    "name": "地面筒倉",
+                    "terms": "地面筒倉;筒倉"
                 },
                 "man_made/chimney": {
                     "name": "煙囪",
@@ -6874,6 +6912,27 @@
                 },
                 "name": "健行與自行車"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "來自 OSM 的 Kelkkareitit.fi 雪車賽道（包含北歐）",
+                "name": "北歐雪車覆蓋層"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "瑞典自1955-1965的正射影像馬賽克。可能會同時出現較舊與較新的照片。",
+                "name": "Lantmäteriet 歷史正射影像 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "瑞典自1970-1980的正射影像馬賽克。正在建構中。",
+                "name": "Lantmäteriet 歷史正射影像 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "使用條款與意見回饋"
@@ -6910,8 +6969,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "掃描 1950-1980 的「經濟地圖」",
-                "name": "Lantmäteriet 經濟地圖（歷史地圖）"
+                "description": "掃描「經濟地圖」1950-1980",
+                "name": "Lantmäteriet 經濟地圖 1950-1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6924,6 +6983,13 @@
                     "text": "© 圖磚：skobbler 圖資：OpenStreetMap 貢獻者"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snowmobile 路徑",
+                "name": "Snowmobile 地圖瑞典"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6987,6 +7053,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "在 Facebook 上的 Mapping Botswana",
+                "description": "OpenStreetMap in Botswana 專頁"
+            },
+            "bw-twitter": {
+                "name": "在 Twitter 上的 Mapping Botswana",
+                "description": "OpenStreetMap in Botswana 的 Twitter"
+            },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
                 "description": "追隨我們的 Twitter： {url} ",
@@ -7351,6 +7425,18 @@
                 "name": "開放街圖匈牙利 Meetup",
                 "description": "匈牙利舉行聚會的平台"
             },
+            "is-facebook": {
+                "name": "在 Facebook 上的 OSM Iceland",
+                "description": "OpenStreetMap in Iceland 專頁"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is 郵件清單",
+                "description": "Talk-is 是冰島 OSM 社群的官方郵件清單"
+            },
+            "is-twitter": {
+                "name": "在 Twittter 上的 OSM Iceland",
+                "description": "OpenStreetMap in Iceland 的 Twitter"
+            },
             "it-facebook": {
                 "name": "開放街圖義大利 Facebook",
                 "description": "加入開放街圖義大利社群 Facebook"
@@ -7454,8 +7540,27 @@
                 "description": "East Midlands 圖客和使用者的社交聚會",
                 "extendedDescription": "一開始 2011 年 3 月時有一群人在諾丁罕開始聚會，後來則大多在德比，以及不時在東密德蘭的其他地方。大多是社交性質的聚會，但也是相當好詢問有關地方 OSM 或是一般性質問題。在夏季時我們通常會趁有日光時在聚會場地附近出外畫地圖，這群人有個特別興趣，就是繪製公共空間，不時會為了畫地圖而聚會。"
             },
+            "gb-mailinglist": {
+                "name": "Talk-gb 郵件論壇",
+                "description": "Talk-gb 是大英國協 (包括北愛爾蘭) 社群的官方郵件論壇 "
+            },
+            "mappa-mercia-group": {
+                "name": "Mappa Mercia 地方社群",
+                "description": "英格蘭中部區一帶開放街圖熱情參與者的園地",
+                "extendedDescription": "Mappa Mercia 計畫宗旨是幫忙英國英格蘭中部區開放街圖的成長，我們運行社群活動，提供訓練和支援當地組織，最終希望能夠開放他們的資料。"
+            },
             "gb-irc": {
+                "name": "開放街圖聯合王國 IRC",
+                "description": "在 irc.oftc.net (port 6667) 上面加入 #osm-gb",
                 "extendedDescription": "在 irc.oftc.net (port 6667) 加入 #osm-gb，如果你問了問題，請耐心等候數分鐘等待回應"
+            },
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "歡迎所有人加入！在 {signupUrl} 註冊。"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "開放街圖溫哥華",
+                "description": "英屬哥倫比亞溫哥華一帶的圖客與開放街圖使用者"
             },
             "OSM-CU-telegram": {
                 "name": "OSM 古巴在 Telegram",
@@ -7498,10 +7603,29 @@
                 "description": "改善華府區域的 OpenStreetMap",
                 "extendedDescription": "我們是一群致力於改善華府區域的 OpenStreetMap 的群組。我們也努力教導其他人關於 OSM 的生態系、資料分析、製圖與 GIS。我們每隔一個月聚會一次，每次僅聚焦在我們的城市中的一個地區。"
             },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "緬因州波特蘭區域的圖客與 OpenStreetMap 使用者",
+                "extendedDescription": "以字面來說，Maptime 是畫地圖的時間，我們的宗旨是開創一扇讓任何能製作地圖的時間和空問，大家共同學習，探索和運用製作地圖工具和技術製作地圖。"
+            },
+            "us-ma-mailinglist": {
+                "name": "Talk-us 麻塞諸塞州郵件論壇",
+                "description": "麻塞諸塞州 OSM 社群 email 郵件論壇"
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "改善克里夫蘭區域的 OpenStreetMap",
+                "extendedDescription": "Open Geo Cleveland 宗旨是成為人們熱情討論和分享自由地理資料集知識的資源，特別是開放街圖的資料，以及管理、編輯和顯示地理資料的開放地理空間軟體，以及在東北伊犁洛州推廣的團體。我們同時也是 maptime 的在地社群 =)"
+            },
             "OSM-Boston": {
                 "name": "開放街圖波士頓",
                 "description": "波士頓的圖客與開放街圖使用者",
                 "extendedDescription": "開放街圖是一份自由開放的維基風格世界地圖，每天都有數十萬像您這樣的人們做出貢獻。編輯地圖很簡單，而且很有趣！不管是在戶內或是戶外都可以加入我們，來建立波士頓地區與世界其他地方最好的地圖吧！"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "開放街圖中薩利希海",
+                "description": "華盛頓州弗農山區域的圖客與 OpenStreetMap 使用者",
+                "extendedDescription": "OpenStreetMap 是一幅由像你這樣的人所製作的世界地圖。它是由你所建構，並如同維基百科那樣自由提供給所有人的地圖。看看 osm.org 以取得更多資訊，然後在聚會上加入我們來說說地圖的故事、對 OSM 貢獻然後玩得開心！"
             },
             "OSM-Chattanooga": {
                 "name": "OSM 查塔努加",
@@ -7516,6 +7640,11 @@
                 "name": "OpenStreetMap NYC",
                 "description": "在紐約都會區的圖客與 OpenStreetMap 使用者、開發者與愛好者"
             },
+            "OSM-Portland-forum": {
+                "name": "開放街圖 PDX Google 群組",
+                "description": "波特蘭一帶開放街圖使用者活動的論壇和郵件論壇",
+                "extendedDescription": "團隊宗旨是增進奧勒岡波蘭一帶開放街圖的發展，像是應用如 Open Trip Planner。"
+            },
             "OSM-Portland": {
                 "name": "OpenStreetMap 波特蘭",
                 "description": "波特蘭區域的圖客與 OpenStreetMap 使用者",
@@ -7527,7 +7656,8 @@
             },
             "OSM-SoCal": {
                 "name": "開放街圖南加州",
-                "description": "讓我們玩樂吧，並且貢獻畫洛杉磯一帶，以及學習有關畫地圖的一切！"
+                "description": "讓我們玩樂吧，並且貢獻畫洛杉磯一帶，以及學習有關畫地圖的一切！",
+                "extendedDescription": "開放街圖南加州擁抱任何對共同畫開放街圖有興趣的人。開放街圖是維基百科式運作的地圖，是全世界尺度自由開源的地圖，由全球超過 1,000,000 人的志工製作。我們歡迎所有人，如果你不大知道開放街圖，我們會教你，如果你有關於畫地圖計畫，甚至野外實察，也是很棒的事情！"
             },
             "OSM-South-Bay": {
                 "name": "OSM South Bay",
@@ -7587,6 +7717,44 @@
                 "name": "Maptime Australia Slack",
                 "description": "在 {signupUrl} 註冊"
             },
+            "talk-au": {
+                "name": "Talk-au 郵件論壇",
+                "description": "讓澳洲圖客聊天的園地"
+            },
+            "OSM-AR-facebook": {
+                "name": "開放街圖阿根廷 Facebook",
+                "description": "加入開放街圖阿根廷社群 Facebook",
+                "extendedDescription": "在地社群消息"
+            },
+            "OSM-AR-forum": {
+                "name": "開放街圖阿根廷的網頁論壇",
+                "description": "加入開放街圖阿根廷的網頁論壇",
+                "extendedDescription": "適合長篇或重要討論，回應時間慢。"
+            },
+            "OSM-AR-irc": {
+                "name": "開放街圖阿根廷 IRC",
+                "description": "在 irc.oftc.net (port 6667) 上面加入 #osm-ar",
+                "extendedDescription": "你會發現社群中最 geeky 的使用者。"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar 郵件論壇",
+                "description": "從前用過的郵件論壇，如今已經不再使用。"
+            },
+            "OSM-AR-telegram": {
+                "name": "開放街圖阿根廷 Telegram",
+                "description": "加入開放街圖阿根廷 Telegram 聊天室",
+                "extendedDescription": "社群最活躍的頻道，適合聊天和馬上解答你的問題，歡迎所有人！"
+            },
+            "OSM-AR-twitter": {
+                "name": "開放街圖阿根廷 Twitter",
+                "description": "在 {url} 上追隨我們的 Twitter ",
+                "extendedDescription": "一般在地社群和開放街圖消息。"
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo 郵件論壇",
+                "description": "Talk-bo 是玻利維亞社群的官方郵件論壇 ",
+                "extendedDescription": "在玻利維亞畫地圖嗎？想要問問題，想要與社群連結？請加入 {Url}，所有人都歡迎噢！"
+            },
             "Bahia-telegram": {
                 "name": "開放街圖巴伊亞 Telegram",
                 "description": "加入開放街圖巴伊亞 Telegram 聊天室",
@@ -7609,6 +7777,11 @@
             "OSM-br-twitter": {
                 "name": "開放街圖巴西 Twitter",
                 "description": "在 {url} 上追隨我們的 Twitter"
+            },
+            "RS-telegram": {
+                "name": "開放街圖南里奧格蘭德州 Telegram 群組",
+                "description": "加入在 Telegram 上的開放街圖南里奧格蘭德州社群",
+                "extendedDescription": "加入社群以得知更多關於開放街圖的資訊，也可以問問題或是參與我們的會面。每個人都很歡迎加入！"
             },
             "OSM-CL-facebook": {
                 "name": "開放街圖智利 Facebook",
@@ -7685,6 +7858,29 @@
             "OSM-PE": {
                 "name": "開放街圖祕魯",
                 "description": "開放街圖社群的新聞和資源頁面"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam Facebook",
+                "description": "在 Facebook 上的 OpenStreetMap Latam"
+            },
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap Latam Telegram",
+                "description": "拉丁美洲的 OpenStreetMap Telegram"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam Twitter",
+                "description": "在 {url} 上追蹤我們的 Twitter"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "支援在拉丁美洲的開放街圖",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam 是拉丁美洲開放街圖圖客和使用者的年度大會，大會有包括演講、論壇、工作坊和圖客趴等開放街圖有關的活動。",
+                        "where": "阿根庭布宜諾艾利斯"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "開放街圖 Facebook",

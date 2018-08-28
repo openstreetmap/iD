@@ -34,12 +34,15 @@ export function uiField(context, presetField, entity, options) {
     var _tags = {};
 
 
+    // field implementation
     field.impl = uiFields[field.type](field, context)
         .on('change', function(t, onInput) {
             dispatch.call('change', field, t, onInput);
         });
 
+    // if this field cares about the entity, pass it along
     if (entity && field.impl.entity) {
+        field.entityID = entity.id;
         field.impl.entity(entity);
     }
 

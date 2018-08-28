@@ -434,8 +434,6 @@
             "none": "Puudub",
             "switch": "Vaheta tagasi selle tausta vastu",
             "custom": "Kohandatud",
-            "custom_button": "Muuda kohandatud tausta",
-            "custom_prompt": "Sisesta paanide internetiaadressi vormel. Sobivad järgmised sõned:\n   - {zoom} või {z}, {x}, {y}, kui kasutad paaniskeemi Z/X/Y\n   - {-y} või {ty}, kui kasutad TMS-skeemi ümberpööratud Y-koordinaate\n   - {u}, kui kasutad ruutpaani skeemi (quadtile)\n   - {switch:a,b,c}, kui kasutad DNS-serveri multipleksimist\n\nNäide:\n{example}",
             "overlays": "Ülekatted",
             "imagery_source_faq": "Pildimaterjali teave / teata probleemist",
             "reset": "lähtesta",
@@ -611,18 +609,6 @@
         },
         "cannot_zoom": "Ei ole võimalik rohkem välja suumida selles vaates.",
         "full_screen": "Lülita täisekraanile",
-        "gpx": {
-            "local_layer": "Lisa GPX",
-            "drag_drop": "Lohista lehele .gpx-, .geojson- või .kml-fail või klõpsa nuppu paremal, et sirvida",
-            "zoom": "Suumi kihini",
-            "browse": "Sirvi faili"
-        },
-        "mvt": {
-            "local_layer": "Lisa MVT",
-            "drag_drop": "Lohista lehele .mvt või .pbf fail või klõpsa nuppu paremal, et sirvida",
-            "zoom": "Suumi kihini",
-            "browse": "Lehitse arvutist"
-        },
         "streetside": {
             "tooltip": "Tänava-tasandi fotod Microsoftilt",
             "title": "Fotokate (Bing Streetside)",
@@ -766,31 +752,24 @@
                     "label": "Pääs lubatud",
                     "options": {
                         "designated": {
-                            "description": "Pääs lubatud märkide või kohalike eriseadustega",
                             "title": "Määratud"
                         },
                         "destination": {
-                            "description": "Pääs lubatud ainult sihtpunkti jõudmiseks",
                             "title": "Sihtkoht"
                         },
                         "dismount": {
-                            "description": "Pääs lubatud, kui liikleja tuleb sadulast maha",
                             "title": "Sadulast maas"
                         },
                         "no": {
-                            "description": "Avalik juurdepääs puudub",
                             "title": "Keelatud"
                         },
                         "permissive": {
-                            "description": "Juurdepääs on lubatud ajani, mil omanik tühistab loa",
                             "title": "Omanik lubab"
                         },
                         "private": {
-                            "description": "Juurdepääs lubatud ainult omaniku eriloal",
                             "title": "Era"
                         },
                         "yes": {
-                            "description": "Juurdepääs seaduse alusel; igameheõigus",
                             "title": "Lubatud"
                         }
                     },
@@ -1514,9 +1493,6 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Jalgrattaremondi pukk"
-                },
-                "amenity/biergarten": {
-                    "name": "Õlleaed"
                 },
                 "amenity/boat_rental": {
                     "name": "Paadi laenutus"

@@ -299,7 +299,6 @@
             "best_imagery": "Sumber citra terbaik yang diketahui untuk lokasi ini",
             "switch": "Beralih ke latar belakang ini",
             "custom": "Custom",
-            "custom_button": "Ubah tampilan latar kustom",
             "reset": "ulang",
             "minimap": {
                 "tooltip": "Menampilkan peta diperkecil untuk membantu penentuan letak area yang sedang dilihat."
@@ -487,27 +486,21 @@
                     "label": "Akses diperbolehkan",
                     "options": {
                         "designated": {
-                            "description": "Akses diperbolehkan sesuai dengan tanda atau peraturan lokal yang spesifik",
                             "title": "Ditunjuk"
                         },
                         "destination": {
-                            "description": "Akses diperbolehkan hanya untuk mencapai tujuan",
                             "title": "Tujuan"
                         },
                         "no": {
-                            "description": "Akses terbatas untuk umum",
                             "title": "Terlarang"
                         },
                         "permissive": {
-                            "description": "Akses diperbolehkan sampai batas pemilik membatalkan izin",
                             "title": "Dibolehkan"
                         },
                         "private": {
-                            "description": "Akses diperbolehkan hanya dengan perizinan dari pemilik pada tingkatan pribadi",
                             "title": "Pribadi"
                         },
                         "yes": {
-                            "description": "Akses diperbolehkan oleh hukum; hak pengguna jalan",
                             "title": "Diizinkan"
                         }
                     },
@@ -1107,9 +1100,6 @@
                 "amenity/bicycle_rental": {
                     "name": "Penyewaan Sepeda",
                     "terms": "Penyewaan Sepeda"
-                },
-                "amenity/biergarten": {
-                    "name": "Taman Bir"
                 },
                 "amenity/boat_rental": {
                     "name": "Penyewaan Perahu Boat"

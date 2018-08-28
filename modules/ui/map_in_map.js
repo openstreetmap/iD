@@ -22,7 +22,7 @@ import {
 } from '../geo';
 
 import { rendererTileLayer } from '../renderer';
-import { svgDebug, svgGpx } from '../svg';
+import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
 import { utilGetDimensions } from '../util/dimensions';
 
@@ -33,7 +33,7 @@ export function uiMapInMap(context) {
         var backgroundLayer = rendererTileLayer(context);
         var overlayLayers = {};
         var projection = geoRawMercator();
-        var gpxLayer = svgGpx(projection, context).showLabels(false);
+        var dataLayer = svgData(projection, context).showLabels(false);
         var debugLayer = svgDebug(projection, context);
         var zoom = d3_zoom()
             .scaleExtent([geoZoomToScale(0.5), geoZoomToScale(24)])
@@ -242,7 +242,7 @@ export function uiMapInMap(context) {
                 .append('svg')
                 .attr('class', 'map-in-map-data')
                 .merge(dataLayers)
-                .call(gpxLayer)
+                .call(dataLayer)
                 .call(debugLayer);
 
 

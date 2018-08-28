@@ -430,7 +430,12 @@
                 "edited_by": "Edited By",
                 "changeset": "Changeset",
                 "unknown": "Unknown",
-                "link_text": "History on openstreetmap.org"
+                "link_text": "History on openstreetmap.org",
+                "note_no_history": "No History (New Note)",
+                "note_comments": "Comments",
+                "note_created_date": "Created Date",
+                "note_created_user": "Created By",
+                "note_link_text": "Note on openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -460,7 +465,8 @@
             "vertex": "vertex",
             "line": "line",
             "area": "area",
-            "relation": "relation"
+            "relation": "relation",
+            "note": "note"
         },
         "geocoder": {
             "search": "Search worldwide...",
@@ -524,8 +530,6 @@
             "best_imagery": "Best known imagery source for this location",
             "switch": "Switch back to this background",
             "custom": "Custom",
-            "custom_button": "Edit custom background",
-            "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
             "overlays": "Overlays",
             "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
@@ -555,6 +559,11 @@
                 "notes": {
                     "tooltip": "Note data from OpenStreetMap",
                     "title": "OpenStreetMap notes"
+                },
+                "custom": {
+                    "tooltip": "Drag and drop a data file onto the page, or click the button to setup",
+                    "title": "Custom Map Data",
+                    "zoom": "Zoom to data"
                 }
             },
             "fill_area": "Fill Areas",
@@ -629,6 +638,29 @@
             "full": {
                 "description": "Full Fill",
                 "tooltip": "Areas are drawn fully filled."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Edit custom background",
+                "header": "Custom Background Settings",
+                "instructions": "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
+                "template": {
+                    "placeholder": "Enter a url template"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Edit custom data layer",
+                "header": "Custom Map Data Settings",
+                "file": {
+                    "instructions": "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Browse files"
+                },
+                "or": "Or",
+                "url": {
+                    "instructions": "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme",
+                    "placeholder": "Enter a url"
+                }
             }
         },
         "restore": {
@@ -1821,31 +1853,35 @@
                     "options": {
                         "yes": {
                             "title": "Allowed",
-                            "description": "Access permitted by law; a right of way"
+                            "description": "Access allowed by law; a right of way"
                         },
                         "no": {
                             "title": "Prohibited",
-                            "description": "Access not permitted to the general public"
+                            "description": "Access not allowed to the general public"
                         },
                         "permissive": {
                             "title": "Permissive",
-                            "description": "Access permitted until such time as the owner revokes the permission"
+                            "description": "Access allowed until such time as the owner revokes the permission"
                         },
                         "private": {
                             "title": "Private",
-                            "description": "Access permitted only with permission of the owner on an individual basis"
+                            "description": "Access allowed only with permission of the owner on an individual basis"
                         },
                         "designated": {
                             "title": "Designated",
-                            "description": "Access permitted according to signs or specific local laws"
+                            "description": "Access allowed according to signs or specific local laws"
                         },
                         "destination": {
                             "title": "Destination",
-                            "description": "Access permitted only to reach a destination"
+                            "description": "Access allowed only to reach a destination"
                         },
                         "dismount": {
                             "title": "Dismount",
-                            "description": "Access permitted but rider must dismount"
+                            "description": "Access allowed but rider must dismount"
+                        },
+                        "permit": {
+                            "title": "Permit",
+                            "description": "Access allowed only with a valid permit or license"
                         }
                     }
                 },
@@ -3480,7 +3516,7 @@
                     "terms": "bike,repair,chain,pump"
                 },
                 "amenity/biergarten": {
-                    "name": "Beer Garden",
+                    "name": "Biergarten",
                     "terms": "beer,bier,booze"
                 },
                 "amenity/boat_rental": {
@@ -3681,7 +3717,7 @@
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy",
-                    "terms": "drug*,med*,prescription"
+                    "terms": "apothecary,drug*,med*,prescription"
                 },
                 "amenity/place_of_worship": {
                     "name": "Place of Worship",
@@ -5259,6 +5295,10 @@
                     "name": "American Football Field",
                     "terms": ""
                 },
+                "leisure/pitch/badminton": {
+                    "name": "Badminton Court",
+                    "terms": ""
+                },
                 "leisure/pitch/baseball": {
                     "name": "Baseball Diamond",
                     "terms": ""
@@ -5386,6 +5426,10 @@
                 "man_made/bridge": {
                     "name": "Bridge",
                     "terms": ""
+                },
+                "man_made/bunker_silo": {
+                    "name": "Bunker Silo",
+                    "terms": "Silage,Storage"
                 },
                 "man_made/chimney": {
                     "name": "Chimney",
@@ -6357,7 +6401,7 @@
                 },
                 "shop/chemist": {
                     "name": "Drugstore",
-                    "terms": "med*,drug*,gift"
+                    "terms": "apothecary,med*,drug*,gift"
                 },
                 "shop/chocolate": {
                     "name": "Chocolate Store",
@@ -7293,6 +7337,27 @@
                 },
                 "name": "Hike & Bike"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi snowmobile trails from OSM (Nordic coverage)",
+                "name": "Nordic snowmobile overlay"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic of Swedish orthophotos from the period 1955–1965. Older and younger pictures may occur.",
+                "name": "Lantmäteriet Historic Orthophoto 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
+                "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Terms & Feedback"
@@ -7329,8 +7394,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scan of ´Economic maps´ ca 1950-1980",
-                "name": "Lantmäteriet Economic Map (historic)"
+                "description": "Scan of \"Economic maps\" ca. 1950–1980",
+                "name": "Lantmäteriet Economic Map 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -7343,6 +7408,13 @@
                     "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snowmobile trails",
+                "name": "Snowmobile map Sweden"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -7406,6 +7478,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana on Facebook",
+                "description": "Page of OpenStreetMap in Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana on Twitter",
+                "description": "Twitter of OpenStreetMap in Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
                 "description": "Follow us on Twitter: {url}",
@@ -7770,6 +7850,18 @@
                 "name": "OpenStreetMap Hungary Meetup",
                 "description": "The platform for organizing meetups in Hungary"
             },
+            "is-facebook": {
+                "name": "OSM Iceland on Facebook",
+                "description": "Page of OpenStreetMap in Iceland"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is Mailing List",
+                "description": "Talk-is is the official mailing list for the Icelandic OSM community"
+            },
+            "is-twitter": {
+                "name": "OSM Iceland on Twittter",
+                "description": "Twitter of OpenStreetMap in Iceland"
+            },
             "it-facebook": {
                 "name": "OpenStreetMap Italy Facebook",
                 "description": "Join the OpenStreetMap Italy community on Facebook"
@@ -7941,6 +8033,10 @@
                 "description": "Mappers and OpenStreetMap users, around Portland, ME",
                 "extendedDescription": "Maptime is, rather literally, time for mapmaking.  Our mission is to open the doors of cartographic possibility to anyone interested by creating a time and space for collaborative learning, exploration, and map creation using mapping tools and technologies."
             },
+            "us-ma-mailinglist": {
+                "name": "Talk-us-massachusetts Mailing List",
+                "description": "Email mailing list for the Massachusetts OSM community"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Improve OpenStreetMap in the Cleveland area",
@@ -7968,6 +8064,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap PDX Google Group",
+                "description": "Forum and mailing list for OpenStreetMap users in the Portland area",
+                "extendedDescription": "This group is to facilitate improvements to OpenStreetMap in the Portland, Oregon area to support applications such as the Open Trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
@@ -8102,6 +8203,11 @@
                 "name": "OpenStreetMap Brasil Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
+            "RS-telegram": {
+                "name": "OpenStreetMap Rio Grande do Sul Telegram Group",
+                "description": "Join the OpenStreetMap Rio Grande do Sul community on Telegram",
+                "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap Chile Facebook",
                 "description": "Join the OpenStreetMap Chile community on Facebook",
@@ -8177,6 +8283,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "News and resources for the OpenStreetMap Peru community"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam Facebook",
+                "description": "OpenStreetMap Latam on Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap Latam Telegram",
+                "description": "OpenStreetMap Telegram for Latin America"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "Supporting OpenStreetMap in Latin America",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map Latam 2018",
+                        "description": "State of the Map Latam is the annual conference for all mappers and users of OpenStreetMap in Latin America. The program includes talks, panels, workshops, and mapathons related to OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap on Facebook",

@@ -556,7 +556,7 @@ export default {
             return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
 
         } else if (_changeset.open) {   // reuse existing open changeset..
-            return createdChangeset(null, _changeset.open);
+            return createdChangeset.call(this, null, _changeset.open);
 
         } else {   // Open a new changeset..
             var options = {
@@ -986,6 +986,11 @@ export default {
     toggle: function(_) {
         _off = !_;
         return this;
+    },
+
+
+    isChangesetInflight: function() {
+        return !!_changeset.inflight;
     },
 
 

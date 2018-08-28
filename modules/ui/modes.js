@@ -60,7 +60,7 @@ export function uiModes(context) {
 
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {
-                if (mode.id === 'add-note' && !notesEditable()) return;
+                if (mode.id === 'add-note' && !(notesEnabled() && notesEditable())) return;
                 if (mode.id !== 'add-note' && !editable()) return;
 
                 if (mode.id === context.mode().id) {
