@@ -2509,7 +2509,8 @@ input.key-trap {
 }
 
 .note-save,
-.keepRight-save {
+.keepRight-save,
+.kr_error-details {
     padding: 10px;
 }
 
@@ -2533,6 +2534,12 @@ input.key-trap {
 
 /* Keep Right Errors
 ------------------------------------------------------- */
+.kr_error-header-icon .kr_error .kr_error-fill,
+.layer-keepRight .kr_error .kr_error-fill {
+    stroke: #333;
+    stroke-width: 1.3px; /* NOTE: likely a better way to scale the icon stroke */
+}
+
 .kr_error_type_40,
 .kr_error_type_41,
 .kr_error_type_42,
