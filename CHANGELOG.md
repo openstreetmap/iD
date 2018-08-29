@@ -28,6 +28,15 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.11.1
+##### Aug 29, 2018
+
+#### :bug: Bugfixes
+* Fix handling of `.gpx` files passed in via url ([#5253])
+
+[#5253]: https://github.com/openstreetmap/iD/issues/5253
+
+
 # 2.11.0
 ##### Aug 26, 2018
 
