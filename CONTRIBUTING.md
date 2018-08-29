@@ -395,7 +395,7 @@ Additionally here is a step-by-step workflow example for beginners:
 
 3. Set up [Git](https://help.github.com/articles/set-up-git/) and prepare for Authenticating with GitHub from Git.
 
-4. Clone or download your local copy of iD from your GitHub account using https `git clone https://github.com:<yourgithubaccount>/iD.git` or using ssh `git clone git@github.com:{{yourgithubaccount}}/iD.git`. In your local copy you'll have a "remote" called origin.
+4. Clone or download your local copy of iD from your GitHub account using https `git clone https://github.com/<yourgithubaccount>/iD.git` or using ssh `git clone git@github.com:{{yourgithubaccount}}/iD.git`. In your local copy you'll have a "remote" called origin.
 
 5. Switch to the iD directory, create a working branch (choose a descriptive name) and switch to it : `cd iD ; git checkout -b <working-branch-name>`. Never do anything in master branch.
 
