@@ -452,7 +452,7 @@ export function rendererBackground(context) {
         if (q.gpx) {
             var gpx = context.layers().layer('data');
             if (gpx) {
-                gpx.url(q.gpx);
+                gpx.url(q.gpx, '.gpx');
             }
         }
 
