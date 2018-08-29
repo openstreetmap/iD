@@ -22666,7 +22666,7 @@
       "id": "lu.geoportail.opendata.ortho_10cm_proto_lidar",
       "name": "geoportail.lu LIDAR prototype Nordstad 2017",
       "type": "tms",
-      "template": "http://{switch:wmts1,wmts2}.geoportail.lu/opendata/wmts/ortho_10cm_proto_lidar/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+      "template": "https://{switch:wmts1,wmts2}.geoportail.lu/opendata/wmts/ortho_10cm_proto_lidar/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2017-04-09T00:00:00.000Z",
       "startDate": "2017-04-09T00:00:00.000Z",
       "zoomExtent": [0, 21],
@@ -38124,7 +38124,7 @@
       "id": "lu.geoportail.opendata.ortholatest",
       "name": "Latest available ortho geoportail.lu",
       "type": "tms",
-      "template": "http://{switch:wmts1,wmts2}.geoportail.lu/opendata/wmts/ortho_latest/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+      "template": "https://{switch:wmts1,wmts2}.geoportail.lu/opendata/wmts/ortho_latest/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
       "endDate": "2017-06-22T00:00:00.000Z",
       "startDate": "2017-06-14T00:00:00.000Z",
       "zoomExtent": [0, 20],
@@ -41920,8 +41920,8 @@
           [6.51691, 51.81714]
         ]
       ],
-      "terms_url": "http://www.rvr-online.de/",
-      "terms_text": "Datengrundlage: Regionalverband Ruhr, www.rvr-online.de"
+      "terms_url": "https://www.metropoleruhr.de/regionalverband-ruhr.html",
+      "terms_text": "Datengrundlage: Regionalverband Ruhr"
     },
     {
       "id": "miljodirektoratet-vern",
