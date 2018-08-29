@@ -430,7 +430,10 @@
                 "edited_by": "Aangepast door",
                 "changeset": "Wijzigingenset",
                 "unknown": "Onbekend",
-                "link_text": "Geschiedenis op openstreetmap.org"
+                "link_text": "Geschiedenis op openstreetmap.org",
+                "note_comments": "Commentaar",
+                "note_created_date": "Aanmaakdatum",
+                "note_created_user": "Aangemaakt door"
             },
             "location": {
                 "key": "L",
@@ -1445,6 +1448,9 @@
                         },
                         "permissive": {
                             "title": "Privéterrein maar gebruik toegelaten door eigenaar"
+                        },
+                        "permit": {
+                            "title": "Toestaan"
                         },
                         "private": {
                             "title": "Privé"
@@ -6876,7 +6882,7 @@
         },
         "community": {
             "bw-facebook": {
-                "name": "Mapping Botswana op Facebook",
+                "name": "Botswana mappen op Facebook",
                 "description": "Pagina van OpenStreetMap in Botswana"
             },
             "bw-twitter": {
@@ -7432,7 +7438,8 @@
             },
             "OSM-CL-facebook": {
                 "name": "Facebook",
-                "description": "Neem deel aan de OpenStreetMap Chili community op Facebook"
+                "description": "Neem deel aan de OpenStreetMap Chili community op Facebook",
+                "extendedDescription": "Sluit je aan bij onze gemeenschap om meer te leren over OpenStreetMap, om vragen te stellen of om deel te nemen aan onze besprekingen. Iedereen is welkom!"
             },
             "OSM-CL-mailinglist": {
                 "name": "Talk-cl Mailinglijst",
@@ -7440,7 +7447,8 @@
             },
             "OSM-CL-telegram": {
                 "name": "OpenStreetMap Chili Telegram",
-                "description": "OpenStreetMap Chili op Telegram"
+                "description": "OpenStreetMap Chili op Telegram",
+                "extendedDescription": "Sluit je aan bij onze gemeenschap om meer te leren over OpenStreetMap, om vragen te stellen of om deel te nemen aan onze besprekingen. Iedereen is welkom!"
             },
             "OSM-CL-twitter": {
                 "name": "OpenStreetMap Chili Twitter",
@@ -7472,12 +7480,22 @@
             "OSM-PE-telegram": {
                 "name": "OpenStreetMap Peru Telegram"
             },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap op Facebook"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap op Reddit",
                 "description": "Op /r/openstreetmap/ vind een levendige dialoog plaats over OpenStreetMap. Hier kun je alles vragen!"
             },
             "OSM-Telegram": {
                 "name": "OpenStreetMap Telegram"
+            },
+            "OSMF": {
+                "events": {
+                    "sotm2018": {
+                        "where": "Milaan, Italië"
+                    }
+                }
             }
         }
     }

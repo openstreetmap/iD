@@ -558,6 +558,11 @@
                 "notes": {
                     "tooltip": "נתוני הערה מ־OpenStreetMap",
                     "title": "הערות OpenStreetMap"
+                },
+                "custom": {
+                    "tooltip": "ניתן לגרור ולהשליך קובץ נתונים לעמוד או ללחוץ על הכפתור כדי להגדיר",
+                    "title": "נתוני מפה בהתאמה אישית",
+                    "zoom": "התקרבות לנתונים"
                 }
             },
             "fill_area": "אזורי מילוי",
@@ -637,6 +642,19 @@
                 "instructions": "נא להקליד כתובת תבנית. האסימונים התקניים הם:\n     {zoom} או {z}, {x}, {y} לסכימת אריחים מסוג Z/X/Y\n     {‎-y} או {ty} לנקודות ציון הפוכות בציר Y בסגנון TMS\n     {u} לסכימת אריחים מרובעת (QuadTile)\n     {switch:a,b,c} למעבר בין DNS של שרתים\n\nדוגמה:\n{example}",
                 "template": {
                     "placeholder": "נא להקליד תבנית כתובת"
+                }
+            },
+            "custom_data": {
+                "tooltip": "עריכת שכבת נתונים בהתאמה אישית",
+                "header": "הגדרות נתוני מפה בהתאמה אישית",
+                "file": {
+                    "instructions": "נא לבחור בקובץ נתונים מקומי. הסוגים הנתמכים הם:\n   ‎.gpx, .kml, .geojson, .json",
+                    "label": "עיון בקבצים"
+                },
+                "or": "או",
+                "url": {
+                    "instructions": "נא להקליד כתובת קובץ נתונים או תבנית כתובת אריחים וקטוריים. ממלאי המקום הזמינים הם:\n{zoom} או {z}, {x}, {y} עבור סכמת אריחים Z/X/Y",
+                    "placeholder": "נא להקליד כתובת"
                 }
             }
         },
@@ -4980,6 +4998,10 @@
                     "name": "גשר",
                     "terms": "גשר"
                 },
+                "man_made/bunker_silo": {
+                    "name": "בור תחמיץ",
+                    "terms": "מבנה תחמיץ מבטון, ממגורה, סילו, מתבן, אסם"
+                },
                 "man_made/chimney": {
                     "name": "ארובה",
                     "terms": "ארובה"
@@ -6876,6 +6898,23 @@
                 },
                 "name": "טיולים ואופניים"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "‎© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi מסלולי תחבורה בשלג מ־OSM (כיסוי נורדי)",
+                "name": "שכבת מסלולי שלג נורדיים"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "‎© Lantmäteriet, CC0"
+                }
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "‎© Lantmäteriet, CC0"
+                }
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "תנאים ומשוב"
@@ -6924,6 +6963,13 @@
                     "text": "© אריחים: skobbler נתוני מפה: מתנדבי OpenStreetMap"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "‎© Skoterleder.org"
+                },
+                "description": "מסלולי תחבורת שלג",
+                "name": "מפת תחבורת שלג בשוודיה"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -7711,6 +7757,11 @@
             "OSM-br-twitter": {
                 "name": "הטוויטר של OpenStreetMap ברזיל",
                 "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "RS-telegram": {
+                "name": "קבוצת הטלגרם של OpenStreetMap ריו גראנדה דו סול",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap ריו גראנדה דו סול בטלגרם",
+                "extendedDescription": "ניתן להצטרף לקהילה וללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
             },
             "OSM-CL-facebook": {
                 "name": "הפייסבוק של OpenStreetMap צ׳ילה",

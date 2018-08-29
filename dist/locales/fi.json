@@ -624,6 +624,12 @@
                 "template": {
                     "placeholder": "Syötä taustakartan osoite"
                 }
+            },
+            "custom_data": {
+                "file": {
+                    "label": "Selaa tiedostoja"
+                },
+                "or": "Tai"
             }
         },
         "restore": {
@@ -1115,10 +1121,17 @@
                 "add_tank": "Piirretäänpä seuraavaksi tämä ympyränmuotoinen varastosäiliö. **Aloita alueen piirtäminen valitsemalla {button} Alue.**",
                 "start_tank": "Älä suotta piirrä liian täydellistä ympyrää: riittää, että piirrät karkean ympyrän, joka on oikeankokoinen eli säiliön reunat koskettavat ympyrän kehää. **Sijoita ensimmäinen piste viemällä osoitin säiliön reunalle ja sitten napsauttamalla hiiren vasemmalla painikkeella tai painamalla välilyöntiä.**",
                 "continue_tank": "Lisää vielä muutama viivapiste säiliön reunaa pitkin. Seuraavassa vaiheessa luomme ympyrän piirtämäsi viivan perusteella.{br}Viimeistele alue painamalla Enteriä tai napsauttamalla ensimmäistä tai viimeistä viivapistettä uudelleen. **Lopeta säiliön piirtäminen.**",
-                "choose_tank": "**Valitse {preset} listalta.**"
+                "search_tank": "**Etsi hakusanalla \"{preset}\".**",
+                "choose_tank": "**Valitse {preset} listalta.**",
+                "rightclick_tank": "**Avaa nyt toimintovalikko napsauttamalla varastosäiliötä hiiren oikealla painikkeella.**",
+                "circle_tank": "**Tee varastosäiliöstä ympyrän muotoinen napsauttamalla {button}-painiketta.**",
+                "retry_circle": "Napsautit väärää painiketta, yritä uudelleen.",
+                "play": "Mahtavaa! Harjoittele vielä lisää piirtämällä muutama muukin rakennus ja kokeilemalla toimintovalikon kaikkia toimintoja. **Kun olet valmis, napsauta {next}.**"
             },
             "startediting": {
                 "title": "Aloita kartanmuokkaus!",
+                "help": "Olet nyt valmis OpenStreetMapiin!{br}Voit käyfdä tämän aloitusoppaan läpi uudelleen tai tutustua käyttöohjeeseen milloin tahansa napsauttamalla {button} Ohje tai painamalla {key}-näppäintä.",
+                "shortcuts": "Tutustu käytettävissä oleviin pikanäppäimiin painamalla {key}-näppäintä.",
                 "save": "Muista tallentaa muutokset säännöllisesti!",
                 "start": "Aloita kartanmuokkaus!"
             }
@@ -1243,10 +1256,18 @@
             }
         },
         "units": {
+            "feet": "{quantity} jalkaa",
+            "miles": "{quantity} mailia",
+            "square_feet": "{quantity} neliöjalkaa",
+            "square_miles": "{quantity} neliömailia",
+            "acres": "{quantity} eekkeriä",
             "meters": "{quantity} m",
             "kilometers": "{quantity} km",
             "square_meters": "{quantity} m²",
             "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
             "north": "P",
             "south": "E",
             "east": "I",

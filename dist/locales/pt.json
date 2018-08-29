@@ -4409,8 +4409,8 @@
                     "terms": "Relva, Grama"
                 },
                 "landuse/greenfield": {
-                    "name": "Terreno com loteamento planeado",
-                    "terms": "loteamento"
+                    "name": "Terreno com loteamento planeado ",
+                    "terms": "loteamento, terreno para obras, terreno para construção"
                 },
                 "landuse/greenhouse_horticulture": {
                     "name": "Estufa Horticultura"
@@ -4539,8 +4539,8 @@
                     "terms": "Bowling Alley, Bowling, Boulingue, Bólingue, boliche"
                 },
                 "leisure/common": {
-                    "name": "Terreno Baldio",
-                    "terms": "Common, Baldio, Baldios"
+                    "name": "baldio (terrenos de propriedade colectiva utilizados pela comunidade)",
+                    "terms": "baldio, propriedade colectiva, terreno sem dono, terreno sem proprietário, terreno sem titular"
                 },
                 "leisure/dance": {
                     "name": "Salão de dança",
@@ -4974,7 +4974,7 @@
                 },
                 "natural/scrub": {
                     "name": "Matagal",
-                    "terms": "Scrub"
+                    "terms": "matagal, terreno sem uso, terreno com matagal, terreno com mato, matos, terreno abandonado"
                 },
                 "natural/spring": {
                     "name": "Nascente de água",

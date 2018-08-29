@@ -557,6 +557,11 @@
                 "notes": {
                     "tooltip": "Rimarkoj el OpenStreetMap",
                     "title": "OpenStreetMap-rimarkoj"
+                },
+                "custom": {
+                    "tooltip": "Ŝovu kaj demetu datum-dosieron sur la paĝon, aŭ klaku la butonon por agordi",
+                    "title": "Propraj map-datumoj",
+                    "zoom": "Pligrandigu al datumoj"
                 }
             },
             "fill_area": "Plenigi areojn",
@@ -633,9 +638,22 @@
             "custom_background": {
                 "tooltip": "Redakti propran fonon",
                 "header": "Agordoj de propra fono",
-                "instructions": "Entajpu URL-skemon de kaheloj. Ĝustaj ĵetonoj estas:\n {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n {-y} aŭ {ty} por renversaj TMS-stilaj Y-koordinatoj\n {u} por kvarkahela (quadtile) skemo\n {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
+                "instructions": "Entajpu ligilon de kaheloj. Ĝustaj ĵetonoj estas:\n {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n {-y} aŭ {ty} por renversaj TMS-stilaj Y-koordinatoj\n {u} por kvarkahela (quadtile) skemo\n {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
                 "template": {
                     "placeholder": "Redakti ligilon de ŝablono"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Redakti propran datum-tavolon",
+                "header": "Agordoj de propraj map-datumoj",
+                "file": {
+                    "instructions": "Elektu lokan dosieron kun datumoj. Subtenataj tipoj estas:\n .gpx, .kml, .geojson, .json",
+                    "label": "Foliumi por dosiero"
+                },
+                "or": "aŭ",
+                "url": {
+                    "instructions": "Entajpu ligilon de datumoj ŝablonon de vektoraj kaheloj. Ĝustaj ĵetonoj estas:\n {zoom} aŭ {z}, {x}, {y} por Z/X/Y kahela skemo",
+                    "placeholder": "Entajpu ligilon"
                 }
             }
         },
@@ -7058,7 +7076,7 @@
             },
             "talk-gh": {
                 "name": "Dissendolisto talk-gh",
-                "description": "Talk-gh estas oficiala dissendolisto por OSM-komunumo en Ganao."
+                "description": "Talk-gh estas oficiala dissendolisto por la OSM-komunumo en Ganao."
             },
             "osm-mg-facebook": {
                 "name": "Facebook-grupo OpenStreetMap Madagascar",
@@ -7087,7 +7105,7 @@
             },
             "OSM-india-mailinglist": {
                 "name": "Dissendolisto OpenStreetMap India",
-                "description": "Talk-in estas oficiala dissendolisto por OSM-komunumo en Barato"
+                "description": "Talk-in estas oficiala dissendolisto por la OSM-komunumo en Barato"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India ĉe Twitter",
@@ -7114,7 +7132,7 @@
             },
             "OSM-japan-mailinglist": {
                 "name": "Dissendolisto OpenStreetMap Japanujo",
-                "description": "Talk-ja estas oficiala dissendolisto por OSM-komunumo en Japanujo"
+                "description": "Talk-ja estas oficiala dissendolisto por la OSM-komunumo en Japanujo"
             },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap Japanujo ĉe Twitter",
@@ -7165,7 +7183,7 @@
             },
             "OSM-PH-slack": {
                 "name": "OpenStreetMap PH ĉe Slack",
-                "description": "Bonvenon al ĉiuj! Aliĝu al ni ĉe {signupUrl}"
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}"
             },
             "OSM-PH-telegram": {
                 "name": "OpenStreetMap PH ĉe Telegram",
@@ -7212,7 +7230,7 @@
             "al-maptime-tirana": {
                 "name": "Maptime Tirana",
                 "description": "Sociaj okazaĵoj organizitaj por mapigi – komencantoj estas akceptindaj!",
-                "extendedDescription": "Maptime estas malferma lernada medio por ĉiuj niveloj de scio, kiu precipe preparita por komencantoj. Maptime estas kaj fleksebla kaj strukturebla, liverante lokon por mapigaj gvidiloj, instruadoj, nunaj projektoj kun difinita komuna celo, per aŭ individua aŭ kolektiva laboro."
+                "extendedDescription": "Maptime estas malferma lernada medio por ĉiuj niveloj de scio, kiu estas precipe preparita por komencantoj. Maptime estas kaj fleksebla kaj strukturebla, liverante lokon por mapigaj gvidiloj, instruadoj, nunaj projektoj kun difinita komuna celo, per aŭ individua aŭ kolektiva laboro."
             },
             "al-telegram": {
                 "name": "Telegram-kanalo OSM Albanujo",
@@ -7224,7 +7242,7 @@
             },
             "at-mailinglist": {
                 "name": "Dissendolisto talk-at",
-                "description": "Talk-at estas oficiala dissendolisto por OSM-komunumo en Aŭstrujo"
+                "description": "Talk-at estas oficiala dissendolisto por la OSM-komunumo en Aŭstrujo"
             },
             "at-twitter": {
                 "name": "OpenStreetMap AT ĉe Twitter",
@@ -7234,13 +7252,306 @@
                 "name": "Kunveno en Graz",
                 "description": "Ĉiumonata renkonto de OpenStreetMap-komunumo en Graz"
             },
+            "osmgraz-twitter": {
+                "name": "Kunveno en Graz ĉe Twitter",
+                "description": "Renkonto de OpenStreetMap-komunumo en Graz ĉe Twitter"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Österreich",
+                "description": "Platformo de informoj pri OpenStreetMap en Aŭstrujo"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Беларусь",
+                "description": "Talegram-grupo OpenStreetMap Belorusujo"
+            },
+            "be-facebook": {
+                "name": "Facebook-grupo OpenStreetMap Belgujo",
+                "description": "OpenStreetMap Belgujo ĉe Facebook"
+            },
+            "be-forum": {
+                "name": "Forumo OpenStreetMap BE",
+                "description": "Forum-sekcio OpenStreetMap Belgujo"
+            },
+            "be-irc": {
+                "name": "OpenStreetMap Belgujo ĉe IRC",
+                "description": "Aliĝu al #osmbe ĉe irc.oftc.net (pordo 6667)",
+                "extendedDescription": "Aliĝu al #osmbe ĉe irc.oftc.net (pordo 6667), ĝi estas kunigita kun la diskuta Matrix-kanalo"
+            },
+            "be-mailinglist": {
+                "name": "Dissendolisto talk-be",
+                "description": "Talk-be estas oficiala dissendolisto por la OSM-komunumo en Belgujo"
+            },
+            "be-maptime": {
+                "name": "Maptime Belgium",
+                "description": "Sociaj okazaĵoj organizitaj por mapigi – komencantoj estas akceptindaj!",
+                "extendedDescription": "Maptime estas malferma lernada medio por ĉiuj niveloj de scio, kiu estas precipe preparita por komencantoj. Maptime estas kaj fleksebla kaj strukturebla, liverante lokon por mapigaj gvidiloj, instruadoj, nunaj projektoj kun difinita komuna celo, per aŭ individua aŭ kolektiva laboro."
+            },
+            "be-matrix": {
+                "name": "Matrix-kanalo OpenStreetMap BE",
+                "description": "Ĉiuj mapigistoj estas akceptindaj!",
+                "extendedDescription": "Plejparto da diskutoj estas en la kanalo “OpenStreetMap Belgium”. Demandu pri io ajn! En aliaj kanaloj oni diskutas pri specifaj temoj."
+            },
+            "be-meetup": {
+                "name": "OpenStreetMap BE ĉe Meetup",
+                "description": "Renkontiĝoj en la reala mondo por ĉiu, kiu interesiĝas pri OpenStreetMap",
+                "extendedDescription": "Renkontiĝoj en la reala mondo estas bonaj ŝancoj por renkonti aliajn mapigistojn, demandi ilin kaj multe lerni. Precipe bonvenon novaj kontribuantoj!"
+            },
+            "be-twitter": {
+                "name": "OpenStreetMap BE ĉe Twitter",
+                "description": "OSM Belgujo ĉe Twitter: @osm_be"
+            },
+            "hr-facebook": {
+                "name": "OpenStreetMap Kroatujo ĉe Facebook",
+                "description": "Facebook-grupo OpenStreetMap Kroatujo"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Kroatujo ĉe IRC",
+                "description": "Aliĝu al #osm-hr ĉe irc.freenode.org (pordo 6667)"
+            },
+            "hr-mailinglist": {
+                "name": "Dissendolisto talk-hr",
+                "description": "Dissendolisto talk-hr"
+            },
+            "czech-community": {
+                "name": "Česká komunita OpenStreetMap",
+                "description": "Mapo, retejo kaj kontakto al OSM-mapigistoj en Ĉeĥujo"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ ĉe Facebook",
+                "description": "Sekvu la Ĉeĥan komunumon ĉe Facebook – inkluzivante tradukitan WeeklyOSM!"
+            },
+            "osmcz-twitter": {
+                "name": "Ĉeĥa Twitter-kanalo @osmcz",
+                "description": "Sekvu la Ĉeĥan komunumon ĉe Facebook – inkluzivante tradukitan WeeklyOSM!"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Ĉeĥa dissendolisto talk-cz",
+                "description": "Talk-cz estas oficiala dissendolisto por la OSM-komunumo en Ĉeĥujo"
+            },
+            "dk-forum": {
+                "name": "Forumo OpenStreetMap Danmark",
+                "description": "Forum-sekcio OpenStreetMap Danujo"
+            },
+            "dk-irc": {
+                "name": "OpenStreetMap Danujo ĉe IRC",
+                "description": "Aliĝu al #osm-dk ĉe irc.oftc.net (pordo 6667)"
+            },
+            "dk-mailinglist": {
+                "name": "Dissendolisto talk-dk",
+                "description": "Dissendolisto por diskuti pri OpenStreetMap en Danujo"
+            },
+            "fi-forum": {
+                "name": "Forumo OpenStreetMap FI",
+                "description": "Forum-sekcio OpenStreetMap Suomujo"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap Suomujo ĉe IRC",
+                "description": "Aliĝu al #osm-fi ĉe irc.oftc.net (pordo 6667)"
+            },
+            "fi-mailinglist": {
+                "name": "Dissendolisto talk-fi",
+                "description": "Talk-fi estas oficiala dissendolisto por la OSM-komunumo en Suomujo"
+            },
+            "fr-facebook": {
+                "name": "OpenStreetMap France ĉe Facebook",
+                "description": "Facebook-grupo OpenStreetMap Francujo"
+            },
+            "fr-forum": {
+                "name": "Forumo OpenStreetMap France",
+                "description": "Forum-sekcio OpenStreetMap Francujo"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap Francujo ĉe IRC",
+                "description": "Aliĝu al #osm-fr ĉe irc.oftc.net (pordo 6667)"
+            },
+            "fr-mailinglist": {
+                "name": "Dissendolisto talk-fr",
+                "description": "Dissendolisto talk-fr"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap France ĉe Twitter",
+                "description": "OpenStreetMap Francujo ĉe Twitter: {url}"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Dissendolisto Berlin",
+                "description": "Dissendolisto por la OSM-komunumo en Berlino"
+            },
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap Berlin-Brandenburg ĉe Meetup",
+                "description": "Mapigistoj de uzantoj de OpenStreetMap proksime de Berlino"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Berlino"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlin ĉe Twitter",
+                "description": "Sekvu nin ĉe Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "Forumo OpenStreetMap DE",
+                "description": "Forum-sekcio OpenStreetMap Germanujo"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Germanujo ĉe IRC",
+                "description": "Aliĝu al #osm-de ĉe irc.oftc.net (pordo 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Dissendolisto talk-de",
+                "description": "Talk-de estas oficiala dissendolisto por OSM-komunumo en Germanujo"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Dissendolisto OWL",
+                "description": "Dissendolisto por la OSM-komunumo Ostwestfalen-Lippe"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Germanujo ĉe Telegram",
+                "description": "Aliĝu al la Telegram-supergrupo pri OpenStreetMap en Germanujo ĉe {url}"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Deutschland",
+                "description": "Platformo de informoj pri OpenStreetMap en Germanujo"
+            },
+            "hu-facebook": {
+                "name": "OpenStreetMap HU ĉe Facebook",
+                "description": "OpenStreetMap Hungarujo ĉe Facebook"
+            },
+            "hu-forum": {
+                "name": "Forumo OpenStreetMap HU",
+                "description": "Forum-sekcio OpenStreetMap Hungarujo"
+            },
+            "hu-meetup": {
+                "name": "OpenStreetMap HU ĉe Meetup",
+                "description": "Platformo por organizi kunvenojn en Hungarujo"
+            },
+            "is-facebook": {
+                "name": "OpenStreetMap Íslandi ĉe Facebook",
+                "description": "Facebook-paĝo pri OpenStreetMap en Islando"
+            },
+            "is-mailinglist": {
+                "name": "Dissendolisto talk-is",
+                "description": "Talk-is estas oficiala dissendolisto por la OSM-komunumo en Islando"
+            },
+            "is-twitter": {
+                "name": "OpenStreetMap Íslandi ĉe Twitter",
+                "description": "Twitter-paĝo pri OpenStreetMap en Islando"
+            },
+            "it-facebook": {
+                "name": "OpenStreetMap Italia ĉe Facebook",
+                "description": "Facebook-paĝo de OpenStreetMap-komunumo en Italujo"
+            },
+            "it-irc": {
+                "name": "OpenStreetMap Italia ĉe IRC",
+                "description": "Aliĝu al #osm-it ĉe irc.oftc.net (pordo 6667)"
+            },
+            "it-mailinglist": {
+                "name": "Dissendolisto talk-it",
+                "description": "Talk-at estas oficiala dissendolisto por la OSM-komunumo en Italujo"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Italujo"
+            },
+            "it-twitter": {
+                "name": "OpenStreetMap Italia ĉe Twitter",
+                "description": "Sekvu nin ĉe Twitter ĉe {url}"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Plibonigi OpenStreetMap proksime de Romo",
+                "extendedDescription": "Ni celas esti rimedon por homoj por diskuti kaj kunhavigi scion pri uzi liberajn geografiajn datumojn (precipe OpenStreetMap) kaj liberan programaron por administri, redakti kaj vidigi geografiajn datumojn, kaj promoti ĝian uzon en Latio."
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "Dissendolisto talk-it-southtyrol",
+                "description": "Regiona dissendolisto pri OpenStreetMap en Sud-Tirolo"
+            },
+            "talk-it-lazio": {
+                "name": "Dissendolisto talk-it-lazio",
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}",
+                "extendedDescription": "Dissendolisto por mapigistoj proksime de Romo kaj Latio."
+            },
+            "Trentino-Mailing-List": {
+                "name": "Dissendolisto talk-it-trentino",
+                "description": "Regiona dissendolisto pri OpenStreetMap en Trento"
+            },
+            "no-forum": {
+                "name": "Forumo OpenStreetMap Norge",
+                "description": "Forum-sekcio OpenStreetMap Norvegujo"
+            },
+            "no-irc": {
+                "name": "OpenStreetMap Norge ĉe IRC",
+                "description": "Babila kanalo por uzantoj, mapigistoj, programistoj kaj ŝatantoj de OpenStreetMap en Norvegujo"
+            },
+            "no-mailinglist": {
+                "name": "Dissendolisto OpensStreetMap Norge",
+                "description": "Dissendolisto por uzantoj, mapigistoj, programistoj kaj ŝatantoj de OpenStreetMap en Norvegujo"
+            },
             "OSM-PL-facebook-group": {
                 "name": "Facebook-grupo OpenStreetMap Polska",
                 "description": "Grupo por mapigistoj kaj uzantoj de OpenStreetMap en Polujo."
             },
             "OSM-PL-forum": {
                 "name": "Forum-sekcio OpenStreetMap Polska",
-                "description": "Diskutejo por pola komunumo de OpenStreetMap"
+                "description": "Diskutejo por OpenStreetMap-komunumo en Polujo"
+            },
+            "si-forum": {
+                "name": "Forumo OpenStreetMap Slovenija",
+                "description": "Diskutejo por OpenStreetMap-komunumo en Slovenujo"
+            },
+            "si-mailinglist": {
+                "name": "Dissendolisto talk-si",
+                "description": "Dissendolisto por OpenStreetMap-komunumo en Slovenujo"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Dissendolisto talk-es",
+                "description": "Dissendolisto por diskuti pri OpenStreetMap en Hispanujo"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Hispanujo"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se",
+                "description": "Liveras OSM-servojn kaj informojn por la loka komunumo en Svedujo"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Sverige ĉe Facebook",
+                "description": "Facebook-grupo OpenStreetMap Svedujo"
+            },
+            "se-forum": {
+                "name": "Forumo OpenStreetMap Sverige",
+                "description": "Forum-sekcio OpenStreetMap Svedujo"
+            },
+            "se-irc": {
+                "name": "OpenStreetMap Sverige ĉe IRC",
+                "description": "Aliĝu al #osm.se ĉe irc.oftc.net (pordo 6667)"
+            },
+            "se-mailinglist": {
+                "name": "Dissendolisto talk-se",
+                "description": "Dissendolisto por diskuti pri OpenStreetMap en Svedujo"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap SE ĉe Twitter",
+                "description": "Sekvu nin ĉe Twitter: {url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Ĉiumonata taverna renkontiĝo en East Midlands (Nottingham)",
+                "description": "Sociaj renkontiĝoj por uzantoj kaj mapigistoj en East Midlands",
+                "extendedDescription": "La grupo renkontiĝas de post marto 2011, komence en Nottingham kaj lastatempe en Derby kaj iam ie en East Midlands. Tiuj ĉi renkontiĝoj estas sociaj, sed ili estas bonegaj okazoj por demandi pri OpenStreetMap aŭ loke aŭ ĝenerale. Somere ni kutime iomete mapigas proksime de renkontejo. La grupo specife interesiĝas pri mapigi publikajn alirajn vojojn kaj renkontiĝoj de tempo al tempo temas pri tio."
+            },
+            "gb-mailinglist": {
+                "name": "Dissendolisto talk-gb",
+                "description": "Talk-gb estas ĉefa komunika dissendolisto por OSM-komunumo en Britujo (inkluzive Nord-Irlandon)"
+            },
+            "mappa-mercia-group": {
+                "name": "Loka grupo Mappa Mercia",
+                "description": "Hejmo de OpenStreetMap-ŝatantoj en Midlands",
+                "extendedDescription": "Mappa Mercia estas projekto por disvastigi OpenStreetMap en West Midlands, Britujo. Ni organizas komunumajn eventojn, instruas kaj subtenas lokajn organizaĵojn, kiuj volas malfermi siajn datumojn."
+            },
+            "gb-irc": {
+                "name": "OpenStreetMap United Kingdom IRC",
+                "description": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667)",
+                "extendedDescription": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667), bonvolu esti pacienca kaj atendi kelkajn minutojn post demandi"
             },
             "OSM-US": {
                 "events": {

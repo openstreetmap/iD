@@ -558,6 +558,11 @@
                 "notes": {
                     "tooltip": "Anteckning från OpenStreetMap",
                     "title": "OpenStreetMap-anteckningar"
+                },
+                "custom": {
+                    "tooltip": "Drag och släpp en datafil på sidan, eller klicka på knappen för att ställa in",
+                    "title": "Anpassad kartdata",
+                    "zoom": "Zooma till data"
                 }
             },
             "fill_area": "Fyllda områden",
@@ -637,6 +642,19 @@
                 "instructions": "Ange en URL-mall för plattor. Giltiga nycklar är:\n   {zoom} eller {z}, {x}, {y} enligt Z/X/Y-schema\n   {-y} eller {ty} för Y-koordinat enligt omvänd TMS-stil\n   {u} för QuadTile-scheman\n   {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
                 "template": {
                     "placeholder": "Ange en url-mall"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Redigera anpassat kartlager",
+                "header": "Inställningar för anpassad kartdata",
+                "file": {
+                    "instructions": "Välj en lokal datafil. Filtyper som stöds är:\n .gpx, .kml, .geojson, .json",
+                    "label": "Bläddra efter fil"
+                },
+                "or": "Eller",
+                "url": {
+                    "instructions": "Ange en datafil-URL eller en URL-mall för vektorplattor. Giltiga symboler är:\n {zoom} eller {z}, {x}, {y} för Z/X/Y-plattscheme",
+                    "placeholder": "Ange en url"
                 }
             }
         },

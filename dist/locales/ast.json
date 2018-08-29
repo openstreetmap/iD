@@ -4752,6 +4752,249 @@
                 },
                 "name": "Paisaxe de Thunderforest"
             }
+        },
+        "community": {
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana en Twitter",
+                "description": "Síguenos en Twitter en {url}"
+            },
+            "talk-gh": {
+                "name": "Llista de corréu Talk-gh"
+            },
+            "OSM-India-facebook": {
+                "events": {
+                    "sotmasia2018": {
+                        "name": "State of the Map Asia 2018",
+                        "description": "Xúnite al aconceyamientu rexonal d'OpenStreetMap de 2018 nel State of the Map Asia na India"
+                    }
+                }
+            },
+            "OSM-india-mailinglist": {
+                "name": "Llista de corréu d'OpenStreetMap India"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter d'OpenStreetMap India",
+                "description": "Tamos a solo un tweet: {url}"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Free Software Hardware Movement - Facebook"
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Free Software Hardware Movement - Matrix"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesia"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Llista de corréu d'OpenStreetMap Xapón"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter d'OpenStreetMap Xapón",
+                "description": "Hashtag en Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Xapón"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolia"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Llista de corréu Talk-ph"
+            },
+            "OSM-PH-slack": {
+                "name": "Slack d'OpenStreetMap PH"
+            },
+            "OSM-PH-telegram": {
+                "name": "Telegram d'OpenStreetMap PH"
+            },
+            "OSM-RU-forum": {
+                "name": "Foru OpenStreetMap RU",
+                "description": "Foru web d'OpenStreetMap Rusia"
+            },
+            "OSM-RU-telegram": {
+                "name": "Telegram d'OpenStreetMap RU"
+            },
+            "OSM-LKA-facebook": {
+                "name": "OpenStreetMap Sri Lanka"
+            },
+            "OSM-TW-facebook": {
+                "name": "Comunidá d'OpenStreetMap Taiwan"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "Llista de corréu d'OpenStreetMap Taiwán"
+            },
+            "OSM-TH-facebook": {
+                "name": "Grupu de Facebook d'OpenStreetMap TH"
+            },
+            "OSM-TH-forum": {
+                "name": "Foru OpenStreetMap TH",
+                "description": "Foru web d'OpenStreetMap Tailandia"
+            },
+            "al-forum": {
+                "name": "Foru OSM d'Albania",
+                "description": "Foru d'OpenStreetMap d'Albania"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana"
+            },
+            "al-telegram": {
+                "name": "Canal de Telegram OSM d'Albania",
+                "description": "Canal de Telegram d'OpenStreetMap d'Albania"
+            },
+            "at-forum": {
+                "name": "Foru d'OpenStreetMap Austria"
+            },
+            "at-mailinglist": {
+                "name": "Llista de corréu Talk-at"
+            },
+            "at-twitter": {
+                "name": "Twitter OpenStreetMap Austria",
+                "description": "OpenStreetMap Austria en Twitter: {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Austria"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Bielorrusia",
+                "description": "Grupu de telegram d'OpenStreetMap Bielorrusia"
+            },
+            "be-facebook": {
+                "name": "Comunidá OpenStreetMap BE"
+            },
+            "be-forum": {
+                "name": "Foru d'OpenStreetMap BE",
+                "description": "Foru web d'OpenStreetMap Bélxica"
+            },
+            "be-irc": {
+                "name": "IRC d'OpenStreetMap Bélxica"
+            },
+            "be-mailinglist": {
+                "name": "Llista de corréu Talk-be"
+            },
+            "be-maptime": {
+                "name": "Maptime Bélxica"
+            },
+            "be-matrix": {
+                "name": "Canal Matrix d'OpenStreetMap BE"
+            },
+            "be-meetup": {
+                "name": "Meetup d'OpenStreetMap Bélgica"
+            },
+            "be-twitter": {
+                "name": "Twitter OpenStreetMap Bélxica",
+                "description": "OSM Bélxica en Twitter: @osm_be"
+            },
+            "hr-mailinglist": {
+                "name": "Llista de corréu Talk-hr",
+                "description": "Llista de corréu Talk-hr"
+            },
+            "czech-community": {
+                "name": "Comunidá OSM de Chequia"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ en Facebook"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter checu @osmcz"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Llista de corréu checa (talk-cz)"
+            },
+            "dk-forum": {
+                "name": "Foru web d'OpenStreetMap Dinamarca",
+                "description": "Foru web d'OpenStreetMap Dinamarca"
+            },
+            "dk-irc": {
+                "name": "IRC d'OpenStreetMap Dinamarca"
+            },
+            "dk-mailinglist": {
+                "name": "Llista de corréu Talk-dk"
+            },
+            "fi-forum": {
+                "name": "Foru d'OpenStreetMap FI",
+                "description": "Foru web d'OpenStreetMap Finlandia"
+            },
+            "fi-irc": {
+                "name": "IRC d'OpenStreetMap Finlandia"
+            },
+            "fi-mailinglist": {
+                "name": "Llista de corréu Talk-fi"
+            },
+            "fr-facebook": {
+                "name": "Páxina de Facebook d'OpenStreetMap Francia",
+                "description": "Páxina de Facebook d'OpenStreetMap Francia"
+            },
+            "fr-forum": {
+                "name": "Foru web d'OpenStreetMap Francia",
+                "description": "Foru web d'OpenStreetMap Francia"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap Francia en IRC"
+            },
+            "fr-mailinglist": {
+                "name": "Llista de corréu Talk-fr",
+                "description": "Llista de corréu Talk-fr"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap Francia en Twitter",
+                "description": "OpenStreetMap Francia en Twitter: {url}"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Llista de corréu de Berlín"
+            },
+            "de-berlin-meetup": {
+                "name": "Meetup d'OpenStreetMap Berlín-Brandenburgu"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin en Telegram",
+                "description": "Charra de Telegram d'OpenStreetMap Berlín"
+            },
+            "de-berlin-twitter": {
+                "name": "Twitter d'OpenStreetMap Berlín",
+                "description": "Síguenos en Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "Foru d'OpenStreetMap DE",
+                "description": "Foru web d'OpenStreetMap Alemaña"
+            },
+            "de-irc": {
+                "name": "IRC d'OpenStreetMap Alemaña"
+            },
+            "de-mailinglist": {
+                "name": "Llista de corréu Talk-de"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Llista de corréu OWL"
+            },
+            "de-telegram": {
+                "name": "Telegram d'OpenStreetMap Alemaña"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Alemaña"
+            },
+            "hu-facebook": {
+                "name": "Facebook d'OpenStreetMap HU"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Llista de corréu Talk-es",
+                "description": "Llista de corréu p'alderiques sobro OpenStreetMap n'España"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes en Telegram",
+                "description": "Grupu de Telegram d'OpenStreetMap España"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se"
+            },
+            "se-facebook": {
+                "name": "Facebook d'OpenStreetMap Suecia"
+            }
         }
     }
 }

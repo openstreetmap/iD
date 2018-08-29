@@ -365,7 +365,7 @@
             "localized_translation_language": "Chọn ngôn ngữ",
             "localized_translation_name": "Tên"
         },
-        "zoom_in_edit": "Phong to để sửa đổi",
+        "zoom_in_edit": "Phóng to để sửa đổi",
         "login": "Đăng nhập",
         "logout": "Đăng xuất",
         "loading_auth": "Đang kết nối với OpenStreetMap…",
@@ -430,7 +430,12 @@
                 "edited_by": "Người Sửa đổi",
                 "changeset": "Bộ thay đổi",
                 "unknown": "Không rõ",
-                "link_text": "Lịch sử tại openstreetmap.org"
+                "link_text": "Lịch sử tại openstreetmap.org",
+                "note_no_history": "Không có Lịch sử (Ghi chú Mới Tạo)",
+                "note_comments": "Bình luận",
+                "note_created_date": "Ngày Tạo",
+                "note_created_user": "Người Tạo",
+                "note_link_text": "Ghi chú tại openstreetmap.org"
             },
             "location": {
                 "key": "V",
@@ -460,7 +465,8 @@
             "vertex": "đỉnh",
             "line": "đường kẻ",
             "area": "vùng",
-            "relation": "quan hệ"
+            "relation": "quan hệ",
+            "note": "ghi chú"
         },
         "geocoder": {
             "search": "Tìm kiếm trên toàn thế giới…",
@@ -552,6 +558,11 @@
                 "notes": {
                     "tooltip": "Dữ liệu ghi chú từ OpenStreetMap",
                     "title": "Ghi chú OpenStreetMap"
+                },
+                "custom": {
+                    "tooltip": "Kéo thả một tập tin dữ liệu vào trang hoặc bấm nút để thiết lập",
+                    "title": "Dữ liệu Bản đồ Tùy biến",
+                    "zoom": "Phóng vừa dữ liệu"
                 }
             },
             "fill_area": "Cách Tô màu các Vùng",
@@ -622,6 +633,29 @@
             "full": {
                 "description": "Tô Hẳn",
                 "tooltip": "Các vùng được tô màu hoàn toàn."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Sửa hình nền tùy biến",
+                "header": "Tùy chọn Hình nền Tùy biến",
+                "instructions": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   {zoom} hoặc {z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   {-y} hoặc {ty} cho tọa độ Y kiểu TMS phản chiếu\n   {u} cho định dạng quadtile\n   {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
+                "template": {
+                    "placeholder": "Nhập định dạng URL"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Sửa lớp dữ liệu tùy biến",
+                "header": "Thiết lập Dữ liệu Bản đồ Tùy biến",
+                "file": {
+                    "instructions": "Chọn tập tin dữ liệu trên máy. Các kiểu tập tin sau được hỗ trợ:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Duyệt tập tin"
+                },
+                "or": "Hoặc",
+                "url": {
+                    "instructions": "Nhập URL của tập tin dữ liệu hoặc định dạng URL của các mảnh bản đồ vectơ. Bạn có thể sử dụng các dấu hiệu:\n   {zoom} hoặc {z}, {x}, và {y} cho định dạng Z/X/Y",
+                    "placeholder": "Nhập URL"
+                }
             }
         },
         "restore": {
@@ -1433,24 +1467,35 @@
                     "label": "Quyền Truy cập",
                     "options": {
                         "designated": {
+                            "description": "Được xây với mục đích cho phép vận chuyển bằng phương thức này, theo bảng hay luật pháp địa phương",
                             "title": "Theo mục đích"
                         },
                         "destination": {
+                            "description": "Chỉ cho phép truy cập để tới nơi",
                             "title": "Nơi đến"
                         },
                         "dismount": {
+                            "description": "Chỉ cho phép nếu xuống đi bộ",
                             "title": "Bắt xuống đi bộ"
                         },
                         "no": {
+                            "description": "Công chúng không được phép truy cập",
                             "title": "Cấm"
                         },
                         "permissive": {
+                            "description": "Chủ cho phép rộng rãi nhưng có thể cấm sau",
                             "title": "Chủ cho phép"
                         },
+                        "permit": {
+                            "description": "Chỉ cho phép nếu có giấy phép hợp lệ",
+                            "title": "Giấy phép"
+                        },
                         "private": {
+                            "description": "Chỉ có những người được chủ cho phép truy cập",
                             "title": "Tư nhân"
                         },
                         "yes": {
+                            "description": "Mọi người được phép truy cập theo luật pháp",
                             "title": "Cho phép"
                         }
                     },
@@ -3035,6 +3080,10 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Quầy Sửa Xe đạp",
                     "terms": "quầy sửa xe đạp, xích, bơm, quay sua xe dap, xich, bom"
+                },
+                "amenity/biergarten": {
+                    "name": "Vườn Bia",
+                    "terms": "vườn bia, vườn uống bia, vườn nhậu, vuon bia, vuon uong bia, vuon nhau"
                 },
                 "amenity/boat_rental": {
                     "name": "Cho thuê Tàu",
@@ -4821,6 +4870,10 @@
                 "leisure/pitch/american_football": {
                     "name": "Sân cỏ Bóng bầu dục Mỹ",
                     "terms": "sân cỏ bóng bầu dục mỹ, sân bóng bầu dục mỹ, san co bong bau duc my, san bong bau duc my"
+                },
+                "leisure/pitch/badminton": {
+                    "name": "Sân Cầu lông",
+                    "terms": "sân cầu lông, sân đánh cầu, sân cầu, san cau long, san danh cau, san cau"
                 },
                 "leisure/pitch/baseball": {
                     "name": "Sân cỏ Bóng chày",
@@ -6871,12 +6924,14 @@
                 "attribution": {
                     "text": "© Lantmäteriet, CC0"
                 },
+                "description": "Hỗn hợp các hình ảnh trực giao Thụy Điển vào thời kỳ 1955–1965, có thể bao gồm các hình ảnh cũ hơn hoặc mới hơn.",
                 "name": "Hình ảnh trực giao lịch sử Lantmäteriet 1960"
             },
             "lantmateriet-orto1975": {
                 "attribution": {
                     "text": "© Lantmäteriet, CC0"
                 },
+                "description": "Hỗn hợp các hình ảnh trực giao Thụy Điển vào thời kỳ 1970–1980, sẽ được mở rộng.",
                 "name": "Hình ảnh trực giao lịch sử Lantmäteriet 1975"
             },
             "mapbox_locator_overlay": {
@@ -6914,7 +6969,9 @@
             "osmse-ekonomiska": {
                 "attribution": {
                     "text": "© Lantmäteriet"
-                }
+                },
+                "description": "Hình quét các “bản đồ kinh tế” những năm 1950–1980",
+                "name": "Bản đồ kinh tế Lantmäteriet 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -7151,7 +7208,9 @@
                 "description": "talk-tw là danh sách thư chính thức của cộng đồng Đài Loan"
             },
             "OSM-TH-CNX-meetup": {
-                "name": "Họp mặt OSM Chiềng Mai"
+                "name": "Họp mặt OSM Chiềng Mai",
+                "description": "Họp mặt không thường xuyên của cộng đồng OpenStreetMap tại Chiềng Mai",
+                "extendedDescription": "Các thành viên cộng đồng OpenStreetMap gặp nhau vài tháng một lần tại Chiềng Mai. Hãy liên lạc với chúng tôi và truy cập {url} để biết khi nào có cuộc họp mặt sau."
             },
             "OSM-TH-facebook": {
                 "name": "Nhóm Facebook OpenStreetMap Thái Lan",
@@ -7467,14 +7526,16 @@
                 "description": "Theo dõi chúng tôi trên Twitter: {url}"
             },
             "Nottingham-OSM-pub-meetup": {
-                "name": "Họp mặt Đông Midlands (Nottingham) hàng tháng tại quán rượu"
+                "name": "Họp mặt Đông Midlands (Nottingham) hàng tháng tại quán rượu",
+                "description": "Tụ tập xã hội dành cho những người lập bản đồ và người sử dụng tại Đông Midlands"
             },
             "gb-mailinglist": {
                 "name": "Danh sách thư talk-gb",
                 "description": "talk-gb là danh sách thư chính thức của cộng đồng OSM tại Anh (bao gồm Bắc Ireland)"
             },
             "mappa-mercia-group": {
-                "name": "Nhóm địa phương Mappa Mercia"
+                "name": "Nhóm địa phương Mappa Mercia",
+                "description": "Nơi tụ tập những người hâm mộ OpenStreetMap tại Midlands"
             },
             "gb-irc": {
                 "name": "IRC OpenStreetMap Vương quốc Anh",
@@ -7569,7 +7630,8 @@
             },
             "OSM-Portland-forum": {
                 "name": "Nhóm Google OpenStreetMap PDX",
-                "description": "Diễn đàn và danh sách thư của những người OpenStreetMap ở vùng Portland"
+                "description": "Diễn đàn và danh sách thư của những người OpenStreetMap ở vùng Portland",
+                "extendedDescription": "Nhóm này cộng tác cải thiện OpenStreetMap tại khu vực Portland, Oregon, để hỗ trợ các ứng dụng như OpenTripPlanner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
@@ -7697,6 +7759,11 @@
             "OSM-br-twitter": {
                 "name": "Twitter OpenStreetMap Brasil",
                 "description": "Theo dõi chúng tôi trên Twitter: {url}"
+            },
+            "RS-telegram": {
+                "name": "Nhóm Telegram OpenStreetMap Rio Grande do Sul",
+                "description": "Hãy tham gia cộng đồng OpenStreetMap Rio Grande do Sul tại Telegram",
+                "extendedDescription": "Mời mọi người tham gia cộng đồng để tìm hiểu thêm về OpenStreetMap, hỏi đáp, và tham dự các cuộc họp mặt của chúng ta."
             },
             "OSM-CL-facebook": {
                 "name": "Facebook OpenStreetMap Chile",

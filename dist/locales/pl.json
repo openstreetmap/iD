@@ -558,6 +558,11 @@
                 "notes": {
                     "tooltip": "Uwagi z OpenStreetMap",
                     "title": "Uwagi OpenStreetMap"
+                },
+                "custom": {
+                    "tooltip": "Przeciągnij i upuść plik danych na stronę lub kliknij przycisk, aby ustawić",
+                    "title": "Własne dane mapy",
+                    "zoom": "Powiększ do danych"
                 }
             },
             "fill_area": "Wypełnianie obszarów",
@@ -637,6 +642,19 @@
                 "instructions": "Wprowadź szablon dla URL kafelka mapy. Obsługiwane symbole:\n   {zoom}/{z}, {x}, {y} dla schematu adresowania kafelkówZ/X/Y\n   {-y} lub {ty} dla odwróconej współrzędnej Y w adresowaniu TMS\n   {u} dla QuadTiles\n   {switch:a,b,c} dla multipleksacji serwerów na poziomie DNS\n\nPrzykład:\n{example}",
                 "template": {
                     "placeholder": "Wprowadź szablon url"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Edytuj własną warstwę danych",
+                "header": "Ustawienia własnych danych mapy",
+                "file": {
+                    "instructions": "Wybierz lokalny plik danych. Wspierane typy, to:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Przeglądaj pliki"
+                },
+                "or": "Lub",
+                "url": {
+                    "instructions": "Wprowadź URL do pliku danych lub szablonu wektorowych kafelków. Poprawne adresy to:\n   {zoom} lub {z}, {x}, {y} lub Z/X/Y dla kafelków.",
+                    "placeholder": "Wprowadź adres URL"
                 }
             }
         },
@@ -2256,7 +2274,7 @@
                     "placeholder": "0, 1, 2, 3..."
                 },
                 "name": {
-                    "label": "Nazwa",
+                    "label": "Nazwa [~s dla litery ś]",
                     "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)"
                 },
                 "natural": {

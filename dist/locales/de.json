@@ -638,7 +638,7 @@
         "settings": {
             "custom_background": {
                 "tooltip": "Bearbeite benutzerdefinierten Hintergrund",
-                "header": "Einstellungen des benutzerdefinierten Hintergrunds",
+                "header": "Benutzerdefinierten Hintergrund einstellen",
                 "instructions": "Gib eine Kachel-URL-Vorlage ein. Gültige Variablen sind:\n- {zoom} oder {z}, {x}, {y} für das Z/X/Y Kachel-Schema\n- {-y} oder {ty} für umgedrehte TMS-Stil Y-Koordinaten\n- {u} für das Quadtile Schema\n- {switch:a,b,c} für DNS-Server Multiplexing\n\nBeispiel:\n{example}",
                 "template": {
                     "placeholder": "Gib eine URL-Vorlage ein"
@@ -646,7 +646,7 @@
             },
             "custom_data": {
                 "tooltip": "Bearbeite benutzerdefinierte Kartendaten",
-                "header": "Einstellungen für benutzerdefinierte Kartendaten",
+                "header": "Benutzerdefinierte Kartendaten einstellen",
                 "file": {
                     "instructions": "Wähle ein lokales Datenfile. Unterstützte Typen sind:\n   .gpx, .kml, .geojson und .json",
                     "label": "Durchsuche Files"

@@ -558,6 +558,11 @@
                 "notes": {
                     "tooltip": "Observe as notas no OpenStreetMap",
                     "title": "Notas do OpenStreetMap"
+                },
+                "custom": {
+                    "tooltip": "Arraste e solte um arquivo de dados na página ou clique no botão para configurar",
+                    "title": "Dados de mapa personalizados",
+                    "zoom": "Zoom para dados"
                 }
             },
             "fill_area": "Areas de Preenchimento",
@@ -637,6 +642,19 @@
                 "instructions": "Insira um modelo de URL de quadros. Tokens válidos são:\n   {zoom} ou {z}, {x}, {y} para o esquema Z/X/Y dos quadros\n   {-y} ou {ty} para coordenadas invertidas, estilo TMS\n   {u} para esquema quadtile\n   {switch:a,b,c} para multiplexação de servidor DNS\n\nExemplo:\n{example}",
                 "template": {
                     "placeholder": "Insira um modelo de URL"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Editar camada de dados personalizada",
+                "header": "Configurações de dados do mapa personalizado",
+                "file": {
+                    "instructions": "Escolha um arquivo de dados local. Tipos suportados são:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Procurar arquivos"
+                },
+                "or": "Ou",
+                "url": {
+                    "instructions": "Insira um URL de arquivo de dados ou um modelo de URL de tile de vetor. Tokens válidos são:\n   {zoom} ou {z}, {x}, {y} para esquema de telha de Z/X/Y ",
+                    "placeholder": "Insira um URL"
                 }
             }
         },
@@ -1695,7 +1713,7 @@
                     "placeholder": "50, 100, 200..."
                 },
                 "cash_in": {
-                    "label": "Dinheiro em"
+                    "label": "Depósito"
                 },
                 "castle_type": {
                     "label": "Tipo"
@@ -2204,7 +2222,7 @@
                     "placeholder": "40, 50, 60..."
                 },
                 "maxspeed/advisory": {
-                    "label": "Limite de Velocidade Consultivo",
+                    "label": "Limite de Velocidade Recomendado",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2353,7 +2371,7 @@
                     }
                 },
                 "passenger_information_display": {
-                    "label": "Exposição de informação do passageiro"
+                    "label": "Painel de informações"
                 },
                 "payment_multi": {
                     "label": "Tipos de Pagamento"
@@ -2588,7 +2606,7 @@
                     "label": "Tipo"
                 },
                 "site_type": {
-                    "label": "Tipo de site"
+                    "label": "Tipo de local"
                 },
                 "smoking": {
                     "label": "Fumantes",
@@ -3062,7 +3080,8 @@
                     "terms": "Bicicleta, Ciclismo, Reparo, Oficina de Bicicletas"
                 },
                 "amenity/biergarten": {
-                    "name": "Biergarten"
+                    "name": "Biergarten",
+                    "terms": "cerveja, cerva, birra, cervejaria,"
                 },
                 "amenity/boat_rental": {
                     "name": "Aluguel de Barcos",
@@ -3650,7 +3669,7 @@
                 },
                 "barrier/kerb": {
                     "name": "Meio-fio",
-                    "terms": "Freio"
+                    "terms": "meio fio, guia, calçada"
                 },
                 "barrier/kissing_gate": {
                     "name": "Quebra Corpo",
@@ -4276,8 +4295,8 @@
                     "terms": "Hipovia, Picadeiro, Caminho para Cavalgada, calvagada, Trilha de Equitação, cavalo, hipismo"
                 },
                 "highway/bus_guideway": {
-                    "name": "Guideway de ônibus",
-                    "terms": "Guiamento de ônibus"
+                    "name": "Ônibus Guiado",
+                    "terms": "Ônibus guiado, trilho de ônibus, via exclusiva de ônibus,tróleibus guiado, carril de ônibus"
                 },
                 "highway/bus_stop": {
                     "name": "Parada de ônibus / Plataforma"
@@ -4340,7 +4359,7 @@
                 },
                 "highway/passing_place": {
                     "name": "Lugar de passagem",
-                    "terms": "Lugar de passagem"
+                    "terms": "Lugar de ultrapassagem"
                 },
                 "highway/path": {
                     "name": "Caminho Informal",
@@ -4567,7 +4586,7 @@
                 },
                 "landuse/garages": {
                     "name": "Uso da terra da garagem",
-                    "terms": "Uso da terra de garagem"
+                    "terms": "garagem, estacionamento,"
                 },
                 "landuse/grass": {
                     "name": "Gramado",
@@ -4591,7 +4610,7 @@
                 },
                 "landuse/industrial/scrap_yard": {
                     "name": "Ferro-Velho",
-                    "terms": "Pátio de sucata"
+                    "terms": "Pátio de sucata, sucata, metal, ferro velho"
                 },
                 "landuse/industrial/slaughterhouse": {
                     "name": "Matadouro",
@@ -4675,7 +4694,7 @@
                 },
                 "landuse/religious": {
                     "name": "Área Religiosa",
-                    "terms": "Área Religiosa"
+                    "terms": "Área Religiosa, igreja, religião, culto, terreiro, mesquita, sinagoga,"
                 },
                 "landuse/residential": {
                     "name": "Área residencial",
@@ -4703,7 +4722,7 @@
                 },
                 "leisure/beach_resort": {
                     "name": "Resort em Praia",
-                    "terms": "Resort na praia"
+                    "terms": "Resort na praia, praia, mar, hotel, hospedagem"
                 },
                 "leisure/bird_hide": {
                     "name": "Local de observação de pássaros",
@@ -4711,7 +4730,7 @@
                 },
                 "leisure/bleachers": {
                     "name": "Arquibancada simples",
-                    "terms": "Arquibancadas"
+                    "terms": "Arquibancadas, esporte, estádio, ginásio, platéia"
                 },
                 "leisure/bowling_alley": {
                     "name": "Pista de Boliche",
@@ -4727,7 +4746,7 @@
                 },
                 "leisure/dancing_school": {
                     "name": "Escola de Dança",
-                    "terms": "Escola de dança"
+                    "terms": "Escola de dança, swing, tango, jazz, dança, baile, forró, samba"
                 },
                 "leisure/dog_park": {
                     "name": "Cachorródromo",
@@ -4751,11 +4770,11 @@
                 },
                 "leisure/fitness_station/balance_beam": {
                     "name": "Trave de Equilíbrio",
-                    "terms": "Feixe de Equilíbrio de Exercício"
+                    "terms": "Equilíbrio, atividade física, academia, ginástica"
                 },
                 "leisure/fitness_station/box": {
                     "name": "Caixa de exercício",
-                    "terms": "Caixa de exercício"
+                    "terms": "Caixa de exercício, ginástica, academia, pular,"
                 },
                 "leisure/fitness_station/horizontal_bar": {
                     "name": "Barra Fixa Horizontal"
@@ -5428,7 +5447,7 @@
                     "terms": "vila, povoado, distrito, aldeia"
                 },
                 "playground/balance_beam": {
-                    "name": "Jogar saldo de feixe"
+                    "name": "Tronco de equilíbrio"
                 },
                 "playground/basket_spinner": {
                     "name": "Girador de cesta"
@@ -5655,7 +5674,7 @@
                     "name": "Local de parada de ônibus"
                 },
                 "public_transport/stop_position_ferry": {
-                    "name": "Localização de parada de balsa "
+                    "name": "Ponto de parada de balsa "
                 },
                 "public_transport/stop_position_light_rail": {
                     "name": "Local de parada do VLT"
