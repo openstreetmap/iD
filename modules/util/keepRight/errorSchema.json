@@ -168,7 +168,7 @@
             },
             "_230": {
                 "title": "layer conflicts",
-                "description": ""
+                "description": "Connected ways should be on the same layer. Crossings on intermediate nodes of ways on different layers are obviously wrong. Junctions on end-nodes of ways on different layers are also deprecated, but common practice. So you may ignore this part of the check and switch them off separately. Please note that bridges are set to layer +1, and tunnels to -1, anything else to layer 0 implicitly if no layer tag is present."
             },
             "_231": {
                 "title": "mixed layers intersection",
@@ -184,7 +184,7 @@
             },
             "_280": {
                 "title": "boundaries",
-                "description": ""
+                "description": "Administrative Boundaries can be expressed either by tagging ways or by adding them to a relation. They should be closed-loop sequences of ways, they must not self-intersect or split and they must have a name and an admin_level."
                 },
             "_281": {
                 "title": "missing name",
@@ -276,7 +276,7 @@
             },
             "_400": {
                 "title": "geometry glitches",
-                "description": ""
+                "description": "Impossible sharp angles on highways and junctions. These may be caused by missing turn restrictions on junctions or glitches along the linestring of ways"
             },
             "_401": {
                 "title": "missing turn restriction",
