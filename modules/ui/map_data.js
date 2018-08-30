@@ -8,24 +8,28 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { utilDrawListItems } from '../util/draw_list_items';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiSettingsCustomData } from './settings/custom_data';
+import { uiSettingsKeepRight } from './settings/keepRight';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiMapData(context) {
     var key = t('map_data.key');
     var features = context.features().keys();
-    var QAs = ['keepRight'];
     // var errors = Object.keys(errorTypes.errors); // TODO: add warnings
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
     var settingsCustomData = uiSettingsCustomData(context)
+        .on('change', customChanged);
+
+    var settingsKeepRight = uiSettingsKeepRight(context, update)
         .on('change', customChanged);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
@@ -42,43 +46,10 @@ export function uiMapData(context) {
     }
 
 
-    function autoHiddenFeature(d) {
-        if (d.type === 'kr_error') return context.errors().autoHidden(d);
-        return context.features().autoHidden(d);
-    }
-
-
     function clickFeature(d) {
         context.features().toggle(d);
         update();
     }
-
-
-    function showsQA(d) {
-
-        var QAKeys = [d];
-        var QALayers = layers.all().filter(function(obj) { return QAKeys.indexOf(obj.id) !== -1; });
-        var data = QALayers.filter(function(obj) { return obj.layer.supported(); });
-
-        function layerSupported(d) {
-            return d.layer && d.layer.supported();
-        }
-        function layerEnabled(d) {
-            return layerSupported(d) && d.layer.enabled();
-        }
-
-        return layerEnabled(data[0]);
-
-    }
-
-    // function clickError(d) {
-
-    // }
-
-
-    // function showsError(d) {
-
-    // }
 
 
     function showsFill(d) {
@@ -125,6 +96,58 @@ export function uiMapData(context) {
 
     function toggleLayer(which) {
         setLayer(which, !showsLayer(which));
+    }
+
+
+    function drawOsmItems(selection) {
+        var osmKeys = ['osm', 'notes'];
+        var osmLayers = layers.all().filter(function(obj) { return osmKeys.indexOf(obj.id) !== -1; });
+
+        var ul = selection
+            .selectAll('.layer-list-osm')
+            .data([0]);
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-osm')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item')
+            .data(osmLayers);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', function(d) { return 'list-item list-item-' + d.id; });
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function(d) {
+                d3_select(this)
+                    .call(tooltip()
+                        .title(t('map_data.layers.' + d.id + '.tooltip'))
+                        .placement('bottom')
+                    );
+            });
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function(d) { toggleLayer(d.id); });
+
+        labelEnter
+            .append('span')
+            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+
+
+        // Update
+        li
+            .merge(liEnter)
+            .classed('active', function (d) { return d.layer.enabled(); })
+            .selectAll('input')
+            .property('checked', function (d) { return d.layer.enabled(); });
     }
 
 
@@ -185,58 +208,6 @@ export function uiMapData(context) {
             .classed('active', layerEnabled)
             .selectAll('input')
             .property('checked', layerEnabled);
-    }
-
-
-    function drawOsmItems(selection) {
-        var osmKeys = ['osm', 'notes'];
-        var osmLayers = layers.all().filter(function(obj) { return osmKeys.indexOf(obj.id) !== -1; });
-
-        var ul = selection
-            .selectAll('.layer-list-osm')
-            .data([0]);
-
-        ul = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-osm')
-            .merge(ul);
-
-        var li = ul.selectAll('.list-item')
-            .data(osmLayers);
-
-        li.exit()
-            .remove();
-
-        var liEnter = li.enter()
-            .append('li')
-            .attr('class', function(d) { return 'list-item list-item-' + d.id; });
-
-        var labelEnter = liEnter
-            .append('label')
-            .each(function(d) {
-                d3_select(this)
-                    .call(tooltip()
-                        .title(t('map_data.layers.' + d.id + '.tooltip'))
-                        .placement('bottom')
-                    );
-            });
-
-        labelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function(d) { toggleLayer(d.id); });
-
-        labelEnter
-            .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
-
-
-        // Update
-        li
-            .merge(liEnter)
-            .classed('active', function (d) { return d.layer.enabled(); })
-            .selectAll('input')
-            .property('checked', function (d) { return d.layer.enabled(); });
     }
 
 
@@ -427,10 +398,87 @@ export function uiMapData(context) {
     }
 
 
+    function drawQAItems(selection) {
+        var QAKeys = ['keepRight'];
+        var QALayers = layers.all().filter(function(obj) { return QAKeys.indexOf(obj.id) !== -1; });
+        var data = QALayers.filter(function(obj) { return obj.layer.supported(); });
+
+        function layerSupported(d) {
+            return d.layer && d.layer.supported();
+        }
+        function layerEnabled(d) {
+            return layerSupported(d) && d.layer.enabled();
+        }
+
+        var ul = selection
+            .selectAll('.layer-list-QA')
+            .data([0]);
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-QA')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item-QA')
+            .data(data);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', function(d) { return 'list-item-QA list-item-' + d.id; });
+
+        // add settings button
+        liEnter
+            .append('button')
+            .call(tooltip()
+                .title(t('settings.keepRight.tooltip'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editKeepRight)
+            .call(svgIcon('#iD-icon-more'));
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function(d) {
+                d3_select(this)
+                    .call(tooltip()
+                        .title(t('QA.' + d.id.replace('-', '_') + '.tooltip'))
+                        .placement('top')
+                    );
+            });
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function(d) { toggleLayer(d.id); });
+
+        labelEnter
+            .append('span')
+            .text(function(d) { return t('QA.' + d.id.replace('-', '_') + '.title'); });
+
+
+        // Update
+        li
+            .merge(liEnter)
+            .classed('active', layerEnabled)
+            .selectAll('input')
+            .property('checked', layerEnabled);
+    }
+
+
     function editCustom() {
         d3_event.preventDefault();
         context.container()
             .call(settingsCustomData);
+    }
+
+
+    function editKeepRight() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsKeepRight);
     }
 
 
@@ -442,98 +490,6 @@ export function uiMapData(context) {
         } else if (d && d.fileList) {
             dataLayer.fileList(d.fileList);
         }
-    }
-
-    // function drawQAButtons(selection) {
-
-    //     var QAButtons = d3_select('.layer-QA').selectAll('li').select('label').select('input');
-
-    //     var buttonSection = selection.selectAll('.QA-buttons')
-    //         .data([0]);
-
-    //     // exit
-    //     buttonSection.exit()
-    //         .remove();
-
-    //     // enter
-    //     var buttonEnter = buttonSection.enter()
-    //         .append('div')
-    //         .attr('class', 'QA-buttons');
-
-    //     buttonEnter
-    //         .append('button')
-    //         .attr('class', 'button QA-toggle-on action')
-    //         .text(t('QA.keepRight.toggle-on'))
-    //         .on('click', function() {
-    //             QAButtons.property('checked', true);
-    //             dispatch.call('change');
-    //         });
-
-    //     buttonEnter
-    //         .append('button')
-    //         .attr('class', 'button QA-toggle-off action')
-    //         .text(t('QA.keepRight.toggle-off'))
-    //         .on('click', function() {
-    //             QAButtons.property('checked', false);
-    //             dispatch.call('change');
-    //         });
-
-    //     buttonSection = buttonSection
-    //         .merge(buttonEnter);
-    // }
-
-    function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
-            .data(data);
-
-        // Exit
-        items.exit()
-            .remove();
-
-        // Enter
-        var enter = items.enter()
-            .append('li')
-            .attr('class', 'layer')
-            .call(tooltip()
-                .html(true)
-                .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip'),
-                        key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
-
-
-                    if ((name === 'feature' || name === 'keepRight') && autoHiddenFeature(d)) {
-                        var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
-                        tip += '<div>' + msg + '</div>';
-                    }
-                    return uiTooltipHtml(tip, key);
-                })
-                .placement('top')
-            );
-
-        var label = enter
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', type)
-            .attr('name', name)
-            .on('change', change);
-
-        label
-            .append('span')
-            .text(function(d) { return t(name + '.' + d + '.description'); });
-
-        // Update
-        items = items
-            .merge(enter);
-
-        items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active)
-            .property('indeterminate', function(d) {
-                return ((name === 'feature' || name === 'keepRight') && autoHiddenFeature(d));
-            });
     }
 
 
@@ -575,20 +531,10 @@ export function uiMapData(context) {
             .data([0]);
 
         _QAList = container.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-QA')
+            .append('div')
+            .attr('class', 'QA-layer-container')
             .merge(container);
     }
-
-    // function renderKeepRightList(selection) {
-    //     var container = selection.selectAll('layer-keepRight')
-    //         .data([0]);
-
-    //     _KeepRightList = container.enter()
-    //         .append('ul')
-    //         .attr('class', 'layer-list layer-keepRight')
-    //         .merge(container);
-    // }
 
 
     function update() {
@@ -599,18 +545,13 @@ export function uiMapData(context) {
             .call(drawVectorItems);      // Beta - Detroit mapping challenge
 
         _fillList
-            .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
+            .call(utilDrawListItems, context, fills, 'radio', 'area_fill', setFill, showsFill);
 
         _featureList
-            .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
+            .call(utilDrawListItems, context, features, 'checkbox', 'feature', clickFeature, showsFeature);
 
         _QAList
-            .call(drawListItems, QAs, 'checkbox', 'QA', function(d) { toggleLayer(d); }, showsQA);
-
-        // _KeepRightList
-        //     .call(drawListItems, errors, 'checkbox', 'QA.keepRight.errorTypes.errors', clickError, showsError);
-        // d3_select('.disclosure-wrap-QA')
-        //     .call(drawQAButtons);
+            .call(drawQAItems);
     }
 
 
@@ -742,19 +683,9 @@ export function uiMapData(context) {
             .append('div')
             .attr('class', 'map-data-QA')
             .call(uiDisclosure(context, 'QA', false)
-                .title(t('map_data.QA.title'))
+                .title(t('map_data.quality_assurance'))
                 .content(renderQAList)
             );
-
-        // // adding keepRight sublayers
-        // QA_list
-        //     .append('div')
-        //     .attr('class', 'keepRight-errors')
-        //     .call(uiDisclosure(context, 'keepRight', false)
-        //         .title(t('map_data.QA.keepRight'))
-        //         .content(renderKeepRightList)
-        //     );
-
 
         // add listeners
         context.features()

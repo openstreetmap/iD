@@ -568,10 +568,7 @@
             },
             "fill_area": "Fill Areas",
             "map_features": "Map Features",
-            "QA": {
-                "title": "Quality Assurance",
-                "keepRight": "KeepRight"
-            },
+            "quality_assurance": "Quality Assurance",
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
         },
@@ -661,6 +658,11 @@
                     "instructions": "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme",
                     "placeholder": "Enter a url"
                 }
+            },
+            "keepRight": {
+                "tooltip": "Edit keepRight layer",
+                "header": "Custom KeepRight Settings",
+                "instructions": "Toggle individual error sublayers, or turn them all on or off."
             }
         },
         "restore": {
@@ -780,7 +782,8 @@
             "keepRight": {
                 "tooltip": "automatically detected errors from keepright.at",
                 "description": "Keep Right",
-                "title": "Edit Error",
+                "title": "Keep Right",
+                "edit_title": "Edit Error",
                 "detail_title": "Error",
                 "detail_description": "Description",
                 "comment_header": "Comment",

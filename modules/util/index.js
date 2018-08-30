@@ -4,6 +4,7 @@ export { utilCleanTags } from './clean_tags';
 export { utilDisplayName } from './util';
 export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';
+export { utilDrawListItems } from './draw_list_items';
 export { utilEntityRoot } from './util';
 export { utilEditDistance } from './util';
 export { utilEntitySelector } from './util';

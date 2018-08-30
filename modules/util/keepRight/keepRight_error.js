@@ -125,6 +125,7 @@ export function parseErrorDescriptions(entity) {
             }
             // if any variables have html, escape them
             if (html_re.test(parsedPhrase)) {
+                // parsedPhrase = '\\' +  parsedPhrase + '\\';
                 parsedPhrase = '\\' +  parsedPhrase + '\\';
             }
             parsedDescriptions.push(parsedPhrase);

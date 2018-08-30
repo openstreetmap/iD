@@ -24,7 +24,7 @@ export function svgKeepRight(projection, context, dispatch) {
         if (svgKeepRight.initialized) return;  // run once
         svgKeepRight.enabled = false;
         svgKeepRight.initialized = true;
-        svgKeepRight.visibleErrors = [30];
+        svgKeepRight.activeErrors = [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413];
     }
 
 
@@ -185,7 +185,7 @@ export function svgKeepRight(projection, context, dispatch) {
                 editOn();
                 update();
                 var options = {
-                    ch: [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413]
+                    ch: svgKeepRight.activeErrors
                 };
 
                 service.loadKeepRightErrors(context, projection, options, exampleCallback);
@@ -217,10 +217,10 @@ export function svgKeepRight(projection, context, dispatch) {
     };
 
 
-    drawKeepRight.visibleErrors = function(_) {
-        if (!arguments.length) return svgKeepRight.visibleErrors;
-        svgKeepRight.visibleErrors.push(_);
-        if (svgKeepRight.visibleErrors) {
+    drawKeepRight.activeSubLayerList = function(_) {
+        if (!arguments.length) return svgKeepRight.activeErrors;
+        svgKeepRight.activeErrors.push(_);
+        if (svgKeepRight.activeErrors) {
             showLayer();
         } else {
             hideLayer();
@@ -228,7 +228,6 @@ export function svgKeepRight(projection, context, dispatch) {
         dispatch.call('change');
         return this;
     };
-
 
 
     init();

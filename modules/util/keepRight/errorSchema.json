@@ -11,15 +11,15 @@
                 "description": "The first node (id {$1}) of this one-way is not connected to any other way"
             },
             "_41": {
-                "title": "",
+                "title": "dead-ended one-ways",
                 "description": "The last node (id {$1}) of this one-way is not connected to any other way"
             },
             "_42": {
-                "title": "",
+                "title": "dead-ended one-ways",
                 "description": "This node cannot be reached because one-ways only lead away from here"
             },
             "_43": {
-                "title": "",
+                "title": "dead-ended one-ways",
                 "description": "You cannot escape from this node because one-ways only lead to here"
             },
             "_50": {
@@ -31,11 +31,11 @@
                 "description": "This {$1} has an empty tag: {$2}"
             },
             "_71": {
-                "title": "",
+                "title": "missing tags",
                 "description": "This way has no tags"
             },
             "_72": {
-                "title": "",
+                "title": "missing tags",
                 "description": "This node is not member of any way and does not have any tags"
             },
             "_90": {
@@ -151,11 +151,11 @@
                 "description": "These errors contain self intersecting ways"
             },
             "_211": {
-                "title": "",
+                "title": "loopings",
                 "description": "This way contains more than one node at least twice. Nodes are {$1}. This may or may not be an error"
             },
             "_212": {
-                "title": "",
+                "title": "loopings",
                 "description": "This way has only two different nodes and contains one of them more than once"
             },
             "_220": {
@@ -163,7 +163,7 @@
                 "description": "This {$1} is tagged ''{$2}={$3}''where {$4} looks like {$5}"
             },
             "_221": {
-                "title": "",
+                "title": "misspelled tags",
                 "description": "The key of this {$1}''s tag is ''key'': {$2}"
             },
             "_230": {

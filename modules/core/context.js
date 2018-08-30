@@ -30,6 +30,7 @@ import { presetIndex } from '../presets';
 
 import {
     rendererBackground,
+    rendererErrors,
     rendererFeatures,
     rendererMap
 } from '../renderer';
@@ -316,6 +317,10 @@ export function coreContext() {
         return features.hasHiddenConnections(entity, graph);
     };
 
+    /* QA Errors */
+    var errors;
+    context.errors = function() { return errors; };
+
 
     /* Presets */
     var presets;
@@ -486,6 +491,7 @@ export function coreContext() {
 
     connection = services.osm;
     background = rendererBackground(context);
+    errors = rendererErrors(context);
     features = rendererFeatures(context);
     presets = presetIndex();
 

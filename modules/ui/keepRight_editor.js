@@ -49,7 +49,7 @@ export function uiKeepRightEditor(context) {
 
         headerEnter
             .append('h3')
-            .text(t('QA.keepRight.title'));
+            .text(t('QA.keepRight.edit_title'));
 
 
         var body = selection.selectAll('.body')
