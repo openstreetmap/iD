@@ -65,6 +65,7 @@ export function parseErrorDescriptions(entity) {
     var parsedDescriptions = [];
     var variable_re = new RegExp(/{\$[0-9]}/);
     var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
+    var span_re = new RegExp(/<\/span>/);
 
     var commonEntities = ['node', 'way', 'relation', 'highway', 'cycleway', 'waterway', 'riverbank']; // TODO: expand this list, or implement a different translation function
 
@@ -123,15 +124,14 @@ export function parseErrorDescriptions(entity) {
                 // add phrase (or single word) to variable list
                 parsedPhrase += currWord;
             }
-            // if any variables have html, escape them
-            if (html_re.test(parsedPhrase)) {
+            // if any variables have html (excluding spans which are added ^), escape them
+            if (html_re.test(parsedPhrase) && !span_re.test(parsedPhrase)) {
                 parsedPhrase = '\\' +  parsedPhrase + '\\';
             }
             parsedDescriptions.push(parsedPhrase);
             break;
         }
     });
-
 
     return {
         var1: parsedDescriptions[0] || '',
