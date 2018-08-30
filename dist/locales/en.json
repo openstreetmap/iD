@@ -6313,6 +6313,10 @@
                     "name": "Consignment/Thrift Store",
                     "terms": "secondhand,second hand,resale,thrift,used"
                 },
+                "shop/sewing": {
+                    "name": "Sewing Supply Shop",
+                    "terms": "haberdashery"
+                },
                 "shop/shoes": {
                     "name": "Shoe Store",
                     "terms": ""

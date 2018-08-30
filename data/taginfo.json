@@ -5527,6 +5527,13 @@
     },
     {
       "key": "shop",
+      "value": "sewing",
+      "description": "Sewing Supply Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "shoes",
       "description": "Shoe Store",
       "object_types": ["node", "area"],
