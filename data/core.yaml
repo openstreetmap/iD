@@ -787,7 +787,7 @@ en:
             description: 'This way has only two different nodes and contains one of them more than once.'
           _220:
             title: 'misspelled tags'
-            description: 'This {var1} is tagged {var2}={var3} where {var4} looks like {var5}.'
+            description: 'This {var1} is tagged {var2}={var3} where "{var4}" looks like "{var5}".'
           _221:
             title: ''
             description: 'The key of this {var1} tag is key {var2}.'
@@ -859,7 +859,7 @@ en:
             description: 'If this roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this roundabout is in a country with left-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with left-hand traffic then its orientation goes the wrong way around.'
           _313:
             title: 'faintly connected'
-            description: 'This roundabout has only {var1} other roads connected. Roundabouts typically have three.'
+            description: 'This roundabout has only {var1} other road(s) connected. Roundabouts typically have 3 or more.'
           _320:
             title: '*_link connections'
             description: 'This way is tagged as highway={var1}_link but doesn''t have a connection to any other {var1} or {var1}_link.'
@@ -877,7 +877,7 @@ en:
             description: ''
           _401:
             title: 'missing turn restriction'
-            description: 'ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var1} to {var2}.'
+            description: 'ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}.'
           _402:
             title: 'impossible angles'
             description: 'this way bends in a very sharp angle here.'
