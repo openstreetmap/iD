@@ -53,34 +53,13 @@ var keepRightSchemaFromWeb = {
 export function parseErrorDescriptions(entity) {
     if (!(entity instanceof krError)) return;
 
-    var _220 = false;
-    var _splitVar2;
-    var _splitVar3;
-    var _401 = false;
-
     // find the matching template from the error schema
     var errorType = '_' + entity.error_type;
     var matchingTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
     if (!matchingTemplate) return;
 
-    // handle special cases
-    // error _170
-    if (errorType === '_170') { return { var1: entity.description }; }
-
-    // error _220
-    if (errorType === '_220')  { _220 = true; }
-
-    if (errorType === '_401') { _401 = true; }
-
-    // tokenize descriptions
-    var errorDescription = entity.description.split(' ');
-    var templateDescription = matchingTemplate.description.split(' ');
-
-    var parsedDescriptions = [];
-    var variable_re = new RegExp(/{\$[0-9]}/);
+    var parsedDetails = [];
     var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
-    var span_re = new RegExp(/<\/span>/);
-    var digit_re = new RegExp(/^\d+$/);
 
     var commonEntities = [
         'node',
@@ -94,97 +73,50 @@ export function parseErrorDescriptions(entity) {
 
     function fillPlaceholder(d) { return '<span><a class="kr_error_description-id">' + d + '</a></span>'; }
 
-    function getEntityBase(lastWord) {
+    // regex pattern should capture groups to extract appropriate details
+    var errorDescription = entity.description;
+    var errorRe = new RegExp(matchingTemplate.description);
 
-        var result;
-        commonEntities.forEach(function(entity) {
-            if (entity.includes(lastWord)) { result = entity; }
-            return;
-        });
+    var errorMatch = errorRe.exec(errorDescription);
 
-        if (result) {
-            return result.includes('node') ? 'n' :
-                result.includes('way') ? 'w' :
-                result.includes('relation') ? 'r' : null;
+    if (!errorMatch) {
+        // TODO: Remove, for regex dev testing
+        console.log('Unmatched:', errorType, errorDescription, errorRe);
+        return
+    };
 
-        }
-         // special handling for error _401
-        else if (_401 && parsedDescriptions[0]) { return 'w'; } // hacky check to see if var1 id is entered
-        return result;
-    }
+    // index 0 is the whole match, groups start from 1
+    for (var i = 1; i < errorMatch.length; i++) {
+        var group = errorMatch[i];
 
-    function isID(word, i) {
-        // select just numeric part of id
-        if (word.charAt(0) === '#' || errorDescription[i-1] === '(id') { // NOTE: hacky way of selecting the token before
-            return word.replace(/\D/g,'');
-        }
-        // if it's just an id (e.g., error _401)
-        else if (digit_re.test(word) && _401) { return word; }
-        return false;
-    }
+        // IDs captured have an associated type
+        if ('IDs' in matchingTemplate && matchingTemplate.IDs[i-1]) {
+            var prefix = matchingTemplate.IDs[i-1];
 
-    function getIDType(i) {
-        var lastWord = errorDescription[i-1];
-        var secondLastWord = errorDescription[i-2];
-        if (lastWord) { return getEntityBase(lastWord) || getEntityBase(lastWord.slice(0, -1)) || getEntityBase(secondLastWord); }
-
-        return getEntityBase(parsedDescriptions.slice(-1)[0].split(' ').slice(-1)[0]);
-    }
-
-    templateDescription.forEach(function(word, index) {
-        if (!variable_re.test(word)) return;
-
-        // get the word at this index, and at the next index value
-        var nextWord = templateDescription[index + 1] ? templateDescription[index + 1] : null;
-
-        var parsedPhrase = '';
-
-        // parse error description words
-        for (var i = index; i <= errorDescription.length - 1;  i++) {
-            if (errorDescription[i] !== nextWord) {
-                var currWord = errorDescription[i];
-
-                // if the word is an id, clean and link it
-                if (isID(currWord, i)) {
-                    // get the entity type of the id
-                    var base = getIDType(i);
-                    // wrap id with linking span
-                    currWord = fillPlaceholder(base + currWord);
-                }
-
-                // if any variables contain common words, like node, way, relation, translate those
-                if (commonEntities.includes(currWord)) {
-                    currWord = t('QA.keepRight.entities.' + currWord);
-                }
-
-                // special handling for error _220
-                if (_220 && index === 4) {
-                    _splitVar2 = currWord.split('=')[0];
-                    _splitVar3 = currWord.split('=')[1];
-                    parsedDescriptions.push(_splitVar2);
-                    parsedDescriptions.push(_splitVar3);
-                    break;
-                }
-
-                // add phrase (or single word) to variable list
-                parsedPhrase += currWord;
+            // wrap id with linking span if valid
+            if (['n','w','r'].includes(prefix)) {
+                group = fillPlaceholder(prefix + group);
             }
-            // if any variables have html (excluding spans which are added ^), escape them
-            if (html_re.test(parsedPhrase) && !span_re.test(parsedPhrase)) {
-                parsedPhrase = '\\' +  parsedPhrase + '\\';
-            }
-            parsedDescriptions.push(parsedPhrase);
-            break;
+        } else if (html_re.test(group)) {
+            // escape any html
+            group = '\\' +  group + '\\';
         }
-    });
+
+        // translate common words (e.g. node, way, relation)
+        if (commonEntities.includes(group)) {
+            group = t('QA.keepRight.entities.' + group);
+        }
+
+        parsedDetails.push(group);
+    }
 
     return {
-        var1: parsedDescriptions[0] || '',
-        var2: parsedDescriptions[1] || '',
-        var3: parsedDescriptions[2] || '',
-        var4: parsedDescriptions[3] || '',
-        var5: parsedDescriptions[4] || '',
-        var6: parsedDescriptions[5] || '',
+        var1: parsedDetails[0] || '',
+        var2: parsedDetails[1] || '',
+        var3: parsedDetails[2] || '',
+        var4: parsedDetails[3] || '',
+        var5: parsedDetails[4] || '',
+        var6: parsedDetails[5] || '',
     };
 }
 
