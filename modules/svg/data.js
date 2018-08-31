@@ -317,7 +317,7 @@ export function svgData(projection, context, dispatch) {
         if (!fileName) return;
 
         var re = /\.(gpx|kml|(geo)?json)$/i;
-        var match = fileName.match(re);
+        var match = fileName.toLowerCase().match(re);
         return match && match.length && match[0];
     }
 
