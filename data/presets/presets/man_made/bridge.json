@@ -1,9 +1,16 @@
 {
+  "fields": [
+    "name"
+    "bridge"
+    "layer"
+    "maxweight"
+  ],
   "geometry": [
     "area"
   ],
   "tags": {
     "man_made": "bridge"
+    "layer": "1"
   },
   "name": "Bridge"
 }
