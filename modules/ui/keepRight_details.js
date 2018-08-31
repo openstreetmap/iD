@@ -72,12 +72,12 @@ export function uiKeepRightDetails(context) {
 
                 // if this is a subtype, append it's parent title
                 if (_parent_error_type) {
-                    title = t(_titleBase + _parent_error_type + '.description') + ': \n';
+                    title = t(_titleBase + _parent_error_type + '.title') + ': \n';
                 }
 
                 // append title
                 if (_error.error_type) {
-                    title += t(_titleBase + _templateErrorType + '.description');
+                    title += t(_titleBase + _templateErrorType + '.title');
                 }
 
                 return title;
@@ -97,7 +97,7 @@ export function uiKeepRightDetails(context) {
             .append('div')
             .attr('class', 'kr_error-details-description-text')
             .html(function(d) {
-                return t(_titleBase + _templateErrorType + '.tooltip', parseErrorDescriptions(d));
+                return t(_titleBase + _templateErrorType + '.description', parseErrorDescriptions(d));
             });
 
         description.selectAll('.kr_error_description-id')

@@ -160,7 +160,7 @@
             },
             "_220": {
                 "title": "misspelled tags",
-                "description": "This {$1} is tagged ''{$2}={$3}''where {$4} looks like {$5}"
+                "description": "This {$1} is tagged '{$2}={$3}' where {$4} looks like {$5}"
             },
             "_221": {
                 "title": "",

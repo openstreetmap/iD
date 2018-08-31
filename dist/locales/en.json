@@ -808,326 +808,326 @@
                 "errorTypes": {
                     "errors": {
                         "_30": {
-                            "description": "non-closed_areas",
-                            "tooltip": "This way is tagged with {var1}={var2} and should be closed-loop."
+                            "title": "non-closed_areas",
+                            "description": "This way is tagged with {var1}={var2} and should be closed-loop."
                         },
                         "_40": {
-                            "description": "dead-ended one-ways",
-                            "tooltip": "The first node (id {var1}) of this one-way is not connected to any other way."
+                            "title": "dead-ended one-ways",
+                            "description": "The first node (id {var1}) of this one-way is not connected to any other way."
                         },
                         "_41": {
-                            "description": "",
-                            "tooltip": "The last node (id {var1}) of this one-way is not connected to any other way."
+                            "title": "",
+                            "description": "The last node (id {var1}) of this one-way is not connected to any other way."
                         },
                         "_42": {
-                            "description": "",
-                            "tooltip": "This node cannot be reached because one-ways only lead away from here."
+                            "title": "",
+                            "description": "This node cannot be reached because one-ways only lead away from here."
                         },
                         "_43": {
-                            "description": "",
-                            "tooltip": "You cannot escape from this node because one-ways only lead to here."
+                            "title": "",
+                            "description": "You cannot escape from this node because one-ways only lead to here."
                         },
                         "_50": {
-                            "description": "almost-junctions",
-                            "tooltip": "This node is very close but not connected to way #{var1}."
+                            "title": "almost-junctions",
+                            "description": "This node is very close but not connected to way #{var1}."
                         },
                         "_70": {
-                            "description": "missing tags",
-                            "tooltip": "This {var1} has an empty tag: {var2}."
+                            "title": "missing tags",
+                            "description": "This {var1} has an empty tag: {var2}."
                         },
                         "_71": {
-                            "description": "way without tags",
-                            "tooltip": "This way has no tags."
+                            "title": "way without tags",
+                            "description": "This way has no tags."
                         },
                         "_72": {
-                            "description": "node without tags",
-                            "tooltip": "This node is not member of any way and doesn't have any tags."
+                            "title": "node without tags",
+                            "description": "This node is not member of any way and doesn't have any tags."
                         },
                         "_90": {
-                            "description": "motorways without ref",
-                            "tooltip": "This way is tagged as motorway and therefore needs a ref nat_ref or int_ref tag."
+                            "title": "motorways without ref",
+                            "description": "This way is tagged as motorway and therefore needs a ref nat_ref or int_ref tag."
                         },
                         "_100": {
-                            "description": "places of worship without religion",
-                            "tooltip": "This {var1} is tagged as place of worship and therefore needs a religion tag."
+                            "title": "places of worship without religion",
+                            "description": "This {var1} is tagged as place of worship and therefore needs a religion tag."
                         },
                         "_110": {
-                            "description": "point of interest without name",
-                            "tooltip": "This node is tagged as {var1} and therefore needs a name tag."
+                            "title": "point of interest without name",
+                            "description": "This node is tagged as {var1} and therefore needs a name tag."
                         },
                         "_120": {
-                            "description": "ways without nodes",
-                            "tooltip": "This way has just one single node."
+                            "title": "ways without nodes",
+                            "description": "This way has just one single node."
                         },
                         "_130": {
-                            "description": "floating islands",
-                            "tooltip": "This way is not connected to the rest of the map."
+                            "title": "floating islands",
+                            "description": "This way is not connected to the rest of the map."
                         },
                         "_150": {
-                            "description": "railway crossing without tag",
-                            "tooltip": "This crossing of a highway and a railway needs to be tagged as railway=crossing or railway=level_crossing."
+                            "title": "railway crossing without tag",
+                            "description": "This crossing of a highway and a railway needs to be tagged as railway=crossing or railway=level_crossing."
                         },
                         "_160": {
-                            "description": "wrongly used railway tag",
-                            "tooltip": "There are ways in different layers coming together in this railway crossing. There are ways tagged as tunnel or bridge coming together in this railway crossing."
+                            "title": "wrongly used railway tag",
+                            "description": "There are ways in different layers coming together in this railway crossing. There are ways tagged as tunnel or bridge coming together in this railway crossing."
                         },
                         "_170": {
-                            "description": "FIXME tagged items",
-                            "tooltip": "{var1}"
+                            "title": "FIXME tagged items",
+                            "description": "{var1}"
                         },
                         "_180": {
-                            "description": "relations without type",
-                            "tooltip": "This relation has no type tag which is mandatory for relations."
+                            "title": "relations without type",
+                            "description": "This relation has no type tag which is mandatory for relations."
                         },
                         "_190": {
-                            "description": "intersections without junctions",
-                            "tooltip": "Finds way crossings on same layer without common node as a junction."
+                            "title": "intersections without junctions",
+                            "description": "Finds way crossings on same layer without common node as a junction."
                         },
                         "_191": {
-                            "description": "highway-highway",
-                            "tooltip": "This {var1} intersects the {var2} #{var3} but there is no junction node."
+                            "title": "highway-highway",
+                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
                         },
                         "_192": {
-                            "description": "highway-waterway",
-                            "tooltip": "This {var1} intersects the {var2} #{var3}."
+                            "title": "highway-waterway",
+                            "description": "This {var1} intersects the {var2} #{var3}."
                         },
                         "_193": {
-                            "description": "highway-riverbank",
-                            "tooltip": "This {var1} intersects the {var2} #{var3}."
+                            "title": "highway-riverbank",
+                            "description": "This {var1} intersects the {var2} #{var3}."
                         },
                         "_194": {
-                            "description": "waterway-waterway",
-                            "tooltip": "This {var1} intersects the {var2} #{var3} but there is no junction node."
+                            "title": "waterway-waterway",
+                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
                         },
                         "_195": {
-                            "description": "cycleway-cycleway",
-                            "tooltip": "This {var1} intersects the {var2} #{var3} but there is no junction node."
+                            "title": "cycleway-cycleway",
+                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
                         },
                         "_196": {
-                            "description": "highway-cycleway",
-                            "tooltip": "This {var1} intersects the {var2} #{var3} but there is no junction node."
+                            "title": "highway-cycleway",
+                            "description": "This {var1} intersects the {var2} #{var3} but there is no junction node."
                         },
                         "_197": {
-                            "description": "cycleway-waterway",
-                            "tooltip": "This {var1} intersects the {var2} #{var3}."
+                            "title": "cycleway-waterway",
+                            "description": "This {var1} intersects the {var2} #{var3}."
                         },
                         "_198": {
-                            "description": "cycleway-riverbank",
-                            "tooltip": "This {var1} intersects the {var2} #{var3}."
+                            "title": "cycleway-riverbank",
+                            "description": "This {var1} intersects the {var2} #{var3}."
                         },
                         "_200": {
-                            "description": "overlapping ways",
-                            "tooltip": "Finds overlapping ways on same layer."
+                            "title": "overlapping ways",
+                            "description": "Finds overlapping ways on same layer."
                         },
                         "_201": {
-                            "description": "highway-highway",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "highway-highway",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_202": {
-                            "description": "highway-waterway",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "highway-waterway",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_203": {
-                            "description": "highway-riverbank",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "highway-riverbank",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_204": {
-                            "description": "waterway-waterway",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "waterway-waterway",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_205": {
-                            "description": "cycleway-cycleway",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "cycleway-cycleway",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_206": {
-                            "description": "highway-cycleway",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "highway-cycleway",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_207": {
-                            "description": "cycleway-waterway",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "cycleway-waterway",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_208": {
-                            "description": "cycleway-riverbank",
-                            "tooltip": "This {var1} overlaps the {var2} #{var3}."
+                            "title": "cycleway-riverbank",
+                            "description": "This {var1} overlaps the {var2} #{var3}."
                         },
                         "_210": {
-                            "description": "loopings",
-                            "tooltip": "These errors contain self intersecting ways."
+                            "title": "loopings",
+                            "description": "These errors contain self intersecting ways."
                         },
                         "_211": {
-                            "description": "",
-                            "tooltip": "This way contains more than one node at least twice. Nodes are {var1}. This may or may not be an error."
+                            "title": "",
+                            "description": "This way contains more than one node at least twice. Nodes are {var1}. This may or may not be an error."
                         },
                         "_212": {
-                            "description": "",
-                            "tooltip": "This way has only two different nodes and contains one of them more than once."
+                            "title": "",
+                            "description": "This way has only two different nodes and contains one of them more than once."
                         },
                         "_220": {
-                            "description": "misspelled tags",
-                            "tooltip": "This {var1} is tagged {var2}={var3} where {var4} looks like {var5}."
+                            "title": "misspelled tags",
+                            "description": "This {var1} is tagged {var2}={var3} where {var4} looks like {var5}."
                         },
                         "_221": {
-                            "description": "",
-                            "tooltip": "The key of this {var1} tag is key {var2}."
+                            "title": "",
+                            "description": "The key of this {var1} tag is key {var2}."
                         },
                         "_230": {
-                            "description": "layer conflicts",
-                            "tooltip": ""
+                            "title": "layer conflicts",
+                            "description": ""
                         },
                         "_231": {
-                            "description": "mixed layers intersection",
-                            "tooltip": "This node is a junction of ways on different layers: {var1}."
+                            "title": "mixed layers intersection",
+                            "description": "This node is a junction of ways on different layers: {var1}."
                         },
                         "_232": {
-                            "description": "strange layers",
-                            "tooltip": "This {var1} is tagged with layer {var2}. This need not be an error but it looks strange."
+                            "title": "strange layers",
+                            "description": "This {var1} is tagged with layer {var2}. This need not be an error but it looks strange."
                         },
                         "_270": {
-                            "description": "motorways connected directly",
-                            "tooltip": "This node is a junction of a motorway and a highway other than motorway, motorway_link, trunk, rest_area or construction. Service or unclassified is only valid if it has access=no/private or it leads to a motorway service area or if it is a service=parking_aisle."
+                            "title": "motorways connected directly",
+                            "description": "This node is a junction of a motorway and a highway other than motorway, motorway_link, trunk, rest_area or construction. Service or unclassified is only valid if it has access=no/private or it leads to a motorway service area or if it is a service=parking_aisle."
                         },
                         "_280": {
-                            "description": "boundaries",
-                            "tooltip": ""
+                            "title": "boundaries",
+                            "description": ""
                         },
                         "_281": {
-                            "description": "missing name",
-                            "tooltip": "This boundary has no name."
+                            "title": "missing name",
+                            "description": "This boundary has no name."
                         },
                         "_282": {
-                            "description": "missing admin level",
-                            "tooltip": "The boundary of {var1} has no valid numeric admin_level. Please do not use admin levels like for example 6;7. Always tag the lowest admin_level of all boundaries."
+                            "title": "missing admin level",
+                            "description": "The boundary of {var1} has no valid numeric admin_level. Please do not use admin levels like for example 6;7. Always tag the lowest admin_level of all boundaries."
                         },
                         "_283": {
-                            "description": "no closed loop",
-                            "tooltip": "The boundary of {var1} is not closed-loop."
+                            "title": "no closed loop",
+                            "description": "The boundary of {var1} is not closed-loop."
                         },
                         "_284": {
-                            "description": "splitting boundary",
-                            "tooltip": "The boundary of {var1} splits here."
+                            "title": "splitting boundary",
+                            "description": "The boundary of {var1} splits here."
                         },
                         "_285": {
-                            "description": "admin_level too high",
-                            "tooltip": "This boundary-way has admin_level {var1} but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations."
+                            "title": "admin_level too high",
+                            "description": "This boundary-way has admin_level {var1} but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations."
                         },
                         "_290": {
-                            "description": "restrictions",
-                            "tooltip": "Analyses all relations tagged type=restriction or following variations type=restriction:hgv type=restriction:caravan type=restriction:motorcar type=restriction:bus type=restriction:agricultural type=restriction:motorcycle type=restriction:bicycle and type=restriction:hazmat."
+                            "title": "restrictions",
+                            "description": "Analyses all relations tagged type=restriction or following variations type=restriction:hgv type=restriction:caravan type=restriction:motorcar type=restriction:bus type=restriction:agricultural type=restriction:motorcycle type=restriction:bicycle and type=restriction:hazmat."
                         },
                         "_291": {
-                            "description": "missing type",
-                            "tooltip": "This turn-restriction has no known restriction type."
+                            "title": "missing type",
+                            "description": "This turn-restriction has no known restriction type."
                         },
                         "_292": {
-                            "description": "missing from way",
-                            "tooltip": "A turn-restriction needs exactly one {var1} member. This one has {var2}."
+                            "title": "missing from way",
+                            "description": "A turn-restriction needs exactly one {var1} member. This one has {var2}."
                         },
                         "_293": {
-                            "description": "missing to way",
-                            "tooltip": "A turn-restriction needs exactly one {var1} member. This one has {var2}."
+                            "title": "missing to way",
+                            "description": "A turn-restriction needs exactly one {var1} member. This one has {var2}."
                         },
                         "_294": {
-                            "description": "from or to not a way",
-                            "tooltip": "From- and To-members of turn restrictions need to be ways. {var1}."
+                            "title": "from or to not a way",
+                            "description": "From- and To-members of turn restrictions need to be ways. {var1}."
                         },
                         "_295": {
-                            "description": "via is not on the way ends",
-                            "tooltip": "via (node #{var1}) is not the first or the last member of from (way #{var2})."
+                            "title": "via is not on the way ends",
+                            "description": "via (node #{var1}) is not the first or the last member of from (way #{var2})."
                         },
                         "_296": {
-                            "description": "wrong restriction angle",
-                            "tooltip": "restriction type is {var1} but angle is {var2} degrees. Maybe the restriction type is not appropriate?."
+                            "title": "wrong restriction angle",
+                            "description": "restriction type is {var1} but angle is {var2} degrees. Maybe the restriction type is not appropriate?"
                         },
                         "_297": {
-                            "description": "wrong direction of to member",
-                            "tooltip": "wrong direction of to way {var1}."
+                            "title": "wrong direction of to member",
+                            "description": "wrong direction of to way {var1}."
                         },
                         "_298": {
-                            "description": "already restricted by oneway",
-                            "tooltip": "entry already prohibited by oneway tag on {var1}."
+                            "title": "already restricted by oneway",
+                            "description": "entry already prohibited by oneway tag on {var1}."
                         },
                         "_310": {
-                            "description": "roundabouts",
-                            "tooltip": "Analyses ways with tag junction=roundabout. More then one way can form a roundabout. It supports tag oneway=-1."
+                            "title": "roundabouts",
+                            "description": "Analyses ways with tag junction=roundabout. More then one way can form a roundabout. It supports tag oneway=-1."
                         },
                         "_311": {
-                            "description": "not closed loop",
-                            "tooltip": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)."
+                            "title": "not closed loop",
+                            "description": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)."
                         },
                         "_312": {
-                            "description": "wrong direction",
-                            "tooltip": "If this roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this roundabout is in a country with left-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with left-hand traffic then its orientation goes the wrong way around."
+                            "title": "wrong direction",
+                            "description": "If this roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this roundabout is in a country with left-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with left-hand traffic then its orientation goes the wrong way around."
                         },
                         "_313": {
-                            "description": "faintly connected",
-                            "tooltip": "This roundabout has only {var1} other roads connected. Roundabouts typically have three."
+                            "title": "faintly connected",
+                            "description": "This roundabout has only {var1} other roads connected. Roundabouts typically have three."
                         },
                         "_320": {
-                            "description": "*_link connections",
-                            "tooltip": "This way is tagged as highway={var1}_link but doesn't have a connection to any other {var1} or {var1}_link."
+                            "title": "*_link connections",
+                            "description": "This way is tagged as highway={var1}_link but doesn't have a connection to any other {var1} or {var1}_link."
                         },
                         "_350": {
-                            "description": "bridge-tags",
-                            "tooltip": "This bridge doesn't have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var1}."
+                            "title": "bridge-tags",
+                            "description": "This bridge doesn't have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var1}."
                         },
                         "_370": {
-                            "description": "doubled places",
-                            "tooltip": "This node has tags in common with the surrounding way #{var1} and seems to be redundand | This node has tags in common with the surrounding way #{var1} (including the name {var2}) and seems to be redundand."
+                            "title": "doubled places",
+                            "description": "This node has tags in common with the surrounding way #{var1} and seems to be redundand | This node has tags in common with the surrounding way #{var1} (including the name {var2}) and seems to be redundand."
                         },
                         "_380": {
-                            "description": "non-physical use of sport-tag",
-                            "tooltip": "This way is tagged {var1} but has no physical tag like e.g. leisure, building, amenity or highway."
+                            "title": "non-physical use of sport-tag",
+                            "description": "This way is tagged {var1} but has no physical tag like e.g. leisure, building, amenity or highway."
                         },
                         "_400": {
-                            "description": "geometry glitches",
-                            "tooltip": ""
+                            "title": "geometry glitches",
+                            "description": ""
                         },
                         "_401": {
-                            "description": "missing turn restriction",
-                            "tooltip": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var1} to {var2}."
+                            "title": "missing turn restriction",
+                            "description": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var1} to {var2}."
                         },
                         "_402": {
-                            "description": "impossible angles",
-                            "tooltip": "this way bends in a very sharp angle here."
+                            "title": "impossible angles",
+                            "description": "this way bends in a very sharp angle here."
                         },
                         "_410": {
-                            "description": "website",
-                            "tooltip": "Web pages are analyzed. Web page is defined by any of the following tags website=* url=* website:mobile=* contact:website=* contact:url=* image=* source:website=* or source:url=*."
+                            "title": "website",
+                            "description": "Web pages are analyzed. Web page is defined by any of the following tags website=* url=* website:mobile=* contact:website=* contact:url=* image=* source:website=* or source:url=*."
                         },
                         "_411": {
-                            "description": "http error",
-                            "tooltip": "The URL (<a target=\"_blank\" href=\"{var1}\">{var1}</a>) cannot be opened (HTTP status code {var2})."
+                            "title": "http error",
+                            "description": "The URL cannot be opened (HTTP status code {var2})."
                         },
                         "_412": {
-                            "description": "domain hijacking",
-                            "tooltip": "Possible domain squatting: <a target=\\\"_blank\\\" href=\"{var1}\">{var1}</a>. Suspicious text is: \"{var2}\"."
+                            "title": "domain hijacking",
+                            "description": "Possible domain squatting: The URL has Suspicious text: \"{var2}\"."
                         },
                         "_413": {
-                            "description": "non-match",
-                            "tooltip": "Content of the URL (<a target=\\\"_blank\\\" href=\"{var1}\">{var1}</a>) did not contain these keywords: ({var2})."
+                            "title": "non-match",
+                            "description": "Content of the URL did not contain these keywords: ({var2})."
                         }
                     },
                     "warnings": {
                         "_20": {
-                            "description": "multiple nodes on the same spot",
-                            "tooltip": "There is more than one node in this spot. Offending node IDs: {var1}."
+                            "title": "multiple nodes on the same spot",
+                            "description": "There is more than one node in this spot. Offending node IDs: {var1}."
                         },
                         "_60": {
-                            "description": "depreciated tags",
-                            "tooltip": "This {var1} uses deprecated tag {var2}={var3}. Please use {var4} instead!"
+                            "title": "depreciated tags",
+                            "description": "This {var1} uses deprecated tag {var2}={var3}. Please use {var4} instead!"
                         },
                         "_300": {
-                            "description": "missing maxspeed",
-                            "tooltip": "missing maxspeed tag."
+                            "title": "missing maxspeed",
+                            "description": "missing maxspeed tag."
                         },
                         "_360": {
-                            "description": "language unknown",
-                            "tooltip": "It would be nice if this {var1} had an additional tag name:XX={var2} where XX shows the language of its name {var2}."
+                            "title": "language unknown",
+                            "description": "It would be nice if this {var1} had an additional tag name:XX={var2} where XX shows the language of its name {var2}."
                         },
                         "_390": {
-                            "description": "missing tracktype",
-                            "tooltip": "This track doesn't have a tracktype."
+                            "title": "missing tracktype",
+                            "description": "This track doesn't have a tracktype."
                         }
                     }
                 }
