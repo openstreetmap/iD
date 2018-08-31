@@ -24,7 +24,8 @@
             },
             "_50": {
                 "title": "almost-junctions",
-                "description": "This node is very close but not connected to way #{$1}"
+                "description": "This node is very close but not connected to way #(\\d+)",
+                "IDs": ["w"]
             },
             "_70": {
                 "title": "missing tags",
@@ -48,7 +49,7 @@
             },
             "_110": {
                 "title": "point of interest without name",
-                "description": "This node is tagged as {$1} and therefore needs a name tag"
+                "description": "This node is tagged as (\\w+) and therefore needs a name tag"
             },
             "_120": {
                 "title": "ways without nodes",
@@ -68,7 +69,7 @@
             },
             "_170": {
                 "title": "FIXME tagged items",
-                "description": "{$1}"
+                "description": "(.*)"
             },
             "_180": {
                 "title": "relations without type",
@@ -80,7 +81,8 @@
             },
             "_191": {
                 "title": "highway-highway",
-                "description": "This {$1} intersects the {$2} #{$3} but there is no junction node"
+                "description": "This (highway) intersects the (highway) #(\\d+) but there is no junction node",
+                "IDs": ["", "", "w"]
             },
             "_192": {
                 "title": "highway-waterway",
@@ -88,7 +90,8 @@
             },
             "_193": {
                 "title": "highway-riverbank",
-                "description": "This {$1} intersects the {$2} #{$3}"
+                "description": "This (riverbank) intersects the (highway) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_194": {
                 "title": "waterway-waterway",
@@ -100,7 +103,8 @@
             },
             "_196": {
                 "title": "highway-cycleway",
-                "description": "This {$1} intersects the {$2} #{$3} but there is no junction node"
+                "description": "This (\\w+(?:/\\w+)?) intersects the (highway) #(\\d+) but there is no junction node",
+                "IDs": ["", "", "w"]
             },
             "_197": {
                 "title": "cycleway-waterway",
@@ -160,7 +164,7 @@
             },
             "_220": {
                 "title": "misspelled tags",
-                "description": "This {$1} is tagged '{$2}={$3}' where {$4} looks like {$5}"
+                "description": "This (node|way|relation) is tagged '(\\w+)=(\\w+)' where &quot;(\\w+)&quot; looks like &quot;(\\w+)&quot;"
             },
             "_221": {
                 "title": "",
@@ -232,7 +236,7 @@
             },
             "_296": {
                 "title": "wrong restriction angle",
-                "description": "restriction type is {$1} but angle is {$2} degrees. Maybe the restriction type is not appropriate?"
+                "description": "restriction type is (\\w+) but angle is (\\d+) degrees. Maybe the restriction type is not appropriate?"
             },
             "_297": {
                 "title": "wrong direction of to member",
@@ -256,7 +260,7 @@
             },
             "_313": {
                 "title": "faintly connected",
-                "description": "This roundabout has only {$1} other roads connected. Roundabouts typically have three"
+                "description": "This roundabout has only (\\d) other roads connected. Roundabouts typically have three"
             },
             "_320": {
                 "title": "*_link connections",
@@ -272,7 +276,7 @@
             },
             "_380": {
                 "title": "non-physical use of sport-tag",
-                "description": "This way is tagged {$1} but has no physical tag like e.g. leisure, building, amenity or highway"
+                "description": "This way is tagged (sport=\\w+) but has no physical tag like e.g. leisure, building, amenity or highway"
             },
             "_400": {
                 "title": "geometry glitches",
@@ -280,7 +284,8 @@
             },
             "_401": {
                 "title": "missing turn restriction",
-                "description": "ways {$1} and {$2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {$1} to {$2}"
+                "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way (\\d+) to (\\d+)",
+                "IDs": ["w", "w", "w", "w"]
             },
             "_402": {
                 "title": "impossible angles",
@@ -292,7 +297,8 @@
             },
             "_411": {
                 "title": "http error",
-                "description": "The URL (<a target=''_blank'' href=''{$1}''>{$1}</a>) cannot be opened (HTTP status code {$2})"
+                "description": "The URL \\(<a target=\"_blank\" href=\"(.+?)\">\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)",
+                "TODO": "For some reason this regex doesn't match, possible related to quotes (see _220)"
             },
             "_412": {
                 "title": "domain hijacking",
@@ -318,7 +324,7 @@
             },
             "_360": {
                 "title": "language unknown",
-                "description": "It would be nice if this {$1} had an additional tag ''name:XX={$2}''where XX shows the language of its name ''{$2}''"
+                "description": "It would be nice if this (node|way|relation) had an additional tag ''name:XX=(\\.+?)''where XX shows the language of its name ''\\2''"
             },
             "_390": {
                 "title": "missing tracktype",
