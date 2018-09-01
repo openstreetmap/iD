@@ -2780,6 +2780,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/landmark-15.svg?sanitize=true"
     },
     {
+      "key": "internet_access",
+      "value": "wlan",
+      "description": "Wi-Fi Hotspot, Internet Access",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-wifi.svg?sanitize=true"
+    },
+    {
       "key": "junction",
       "value": "yes",
       "description": "Junction",
@@ -6611,11 +6618,6 @@
       "description": "Internet Access"
     },
     {"key": "internet_access", "value": "no", "description": "Internet Access"},
-    {
-      "key": "internet_access",
-      "value": "wlan",
-      "description": "Internet Access"
-    },
     {
       "key": "internet_access",
       "value": "wired",
