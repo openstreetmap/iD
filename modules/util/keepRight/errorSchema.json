@@ -4,15 +4,17 @@
         "errors": {
             "_30": {
                 "title": "non-closed_areas",
-                "description": "This way is tagged with ''{$1}={$2}''and should be closed-loop"
+                "description": "This way is tagged with ''([\\w:]+)=(\\w+)''and should be closed-loop"
             },
             "_40": {
                 "title": "dead-ended one-ways",
-                "description": "The first node (id {$1}) of this one-way is not connected to any other way"
+                "description": "The first node \\(id (\\d+)\\) of this one-way is not connected to any other way",
+                "IDs": ["n"]
             },
             "_41": {
                 "title": "",
-                "description": "The last node (id {$1}) of this one-way is not connected to any other way"
+                "description": "The last node \\(id (\\d+)\\) of this one-way is not connected to any other way",
+                "IDs": ["n"]
             },
             "_42": {
                 "title": "",
@@ -29,7 +31,7 @@
             },
             "_70": {
                 "title": "missing tags",
-                "description": "This {$1} has an empty tag: {$2}"
+                "description": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;"
             },
             "_71": {
                 "title": "",
@@ -45,11 +47,11 @@
             },
             "_100": {
                 "title": "places of worship without religion",
-                "description": "This {$1} is tagged as place of worship and therefore needs a religion tag"
+                "description": "This (node|way|relation) is tagged as place of worship and therefore needs a religion tag"
             },
             "_110": {
                 "title": "point of interest without name",
-                "description": "This node is tagged as (\\w+) and therefore needs a name tag"
+                "description": "This node is tagged as ([\\w:]+) and therefore needs a name tag"
             },
             "_120": {
                 "title": "ways without nodes",
@@ -86,33 +88,38 @@
             },
             "_192": {
                 "title": "highway-waterway",
-                "description": "This {$1} intersects the {$2} #{$3}"
+                "description": "This (highway|waterway) intersects the (highway|waterway) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_193": {
                 "title": "highway-riverbank",
-                "description": "This (riverbank) intersects the (highway) #(\\d+)",
+                "description": "This (highway|riverbank) intersects the (highway|riverbank) #(\\d+)",
                 "IDs": ["", "", "w"]
             },
             "_194": {
                 "title": "waterway-waterway",
-                "description": "This {$1} intersects the {$2} #{$3} but there is no junction node"
+                "description": "This (waterway) intersects the (waterway) #(\\d+) but there is no junction node",
+                "IDs": ["", "", "w"]
             },
             "_195": {
                 "title": "cycleway-cycleway",
-                "description": "This {$1} intersects the {$2} #{$3} but there is no junction node"
+                "description": "This (cycleway/footpath) intersects the (cycleway/footpath) #(\\d+) but there is no junction node",
+                "IDs": ["", "", "w"]
             },
             "_196": {
                 "title": "highway-cycleway",
-                "description": "This (\\w+(?:/\\w+)?) intersects the (highway) #(\\d+) but there is no junction node",
+                "description": "This (highway|cycleway/footpath) intersects the (highway|cycleway/footpath) #(\\d+) but there is no junction node",
                 "IDs": ["", "", "w"]
             },
             "_197": {
                 "title": "cycleway-waterway",
-                "description": "This {$1} intersects the {$2} #{$3}"
+                "description": "This (waterway|cycleway/footpath) intersects the (waterway|cycleway/footpath) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_198": {
                 "title": "cycleway-riverbank",
-                "description": "This {$1} intersects the {$2} #{$3}"
+                "description": "This (riverbank|cycleway/footpath) intersects the (riverbank|cycleway/footpath) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_200": {
                 "title": "overlapping ways",
@@ -120,35 +127,43 @@
             },
             "_201": {
                 "title": "highway-highway",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (highway) overlaps the (highway) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_202": {
                 "title": "highway-waterway",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (highway|waterway) overlaps the (highway|waterway) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_203": {
                 "title": "highway-riverbank",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (highway|riverbank) overlaps the (highway|riverbank) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_204": {
                 "title": "waterway-waterway",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (waterway) overlaps the (waterway) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_205": {
                 "title": "cycleway-cycleway",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (cycleway/footpath) overlaps the (cycleway/footpath) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_206": {
                 "title": "highway-cycleway",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (highway|cycleway/footpath) overlaps the (highway|cycleway/footpath) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_207": {
                 "title": "cycleway-waterway",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (waterway|cycleway/footpath) overlaps the (waterway|cycleway/footpath) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_208": {
                 "title": "cycleway-riverbank",
-                "description": "This {$1} overlaps the {$2} #{$3}"
+                "description": "This (riverbank|cycleway/footpath) overlaps the (riverbank|cycleway/footpath) #(\\d+)",
+                "IDs": ["", "", "w"]
             },
             "_210": {
                 "title": "loopings",
@@ -156,7 +171,9 @@
             },
             "_211": {
                 "title": "",
-                "description": "This way contains more than one node at least twice. Nodes are {$1}. This may or may not be an error"
+                "description": "This way contains more than one node at least twice. Nodes are #(\\d+), ((?:#\\d+(?:, )?)+)\\. This may or may not be an error",
+                "IDs": ["n", ""],
+                "TODO": "Second group is arbitrary list of node IDs in form: #ID, #ID, #ID..."
             },
             "_212": {
                 "title": "",
@@ -164,11 +181,11 @@
             },
             "_220": {
                 "title": "misspelled tags",
-                "description": "This (node|way|relation) is tagged '(\\w+)=(\\w+)' where &quot;(\\w+)&quot; looks like &quot;(\\w+)&quot;"
+                "description": "This (node|way|relation) is tagged '([\\w:]+)=(.+)' where &quot;(\\2|\\3)&quot; looks like &quot;([\\w\\s]+)&quot;"
             },
             "_221": {
                 "title": "",
-                "description": "The key of this {$1}''s tag is ''key'': {$2}"
+                "description": "The key of this (node|way|relation)''s tag is ''key'': key=(.+)"
             },
             "_230": {
                 "title": "layer conflicts",
@@ -176,11 +193,13 @@
             },
             "_231": {
                 "title": "mixed layers intersection",
-                "description": "This node is a junction of ways on different layers: {$1}"
+                "description": "This node is a junction of ways on different layers: #(\\d+)\\((-?\\d+)\\),((?:#\\d+\\(-?\\d+\\),?)+)",
+                "IDs": ["w", ""],
+                "TODO": "Third group is arbitrary list of way IDs and their layer value in form: #ID(layer),#ID(layer),#ID(layer)..."
             },
             "_232": {
                 "title": "strange layers",
-                "description": "This {$1} is tagged with layer {$2}. This need not be an error but it looks strange"
+                "description": "This (bridge|tunnel) is tagged with layer (-?\\d+)\\. This need not be an error but it looks strange"
             },
             "_270": {
                 "title": "motorways connected directly",
@@ -189,26 +208,26 @@
             "_280": {
                 "title": "boundaries",
                 "description": "Administrative Boundaries can be expressed either by tagging ways or by adding them to a relation. They should be closed-loop sequences of ways, they must not self-intersect or split and they must have a name and an admin_level."
-                },
+            },
             "_281": {
                 "title": "missing name",
                 "description": "This boundary has no name"
             },
             "_282": {
                 "title": "missing admin level",
-                "description": "The boundary of {$1} has no valid numeric admin_level. Please do not use admin levels like for example 6;7. Always tag the lowest admin_level of all boundaries"
+                "description": "The boundary of (.+) has no (?:valid numeric )?admin_level\\..*"
             },
             "_283": {
                 "title": "no closed loop",
-                "description": "The boundary of {$1} is not closed-loop"
+                "description": "The boundary of (.+) is not closed-loop"
             },
             "_284": {
                 "title": "splitting boundary",
-                "description": "The boundary of {$1} splits here"
+                "description": "The boundary of (.+) splits here"
             },
             "_285": {
                 "title": "admin_level too high",
-                "description": "This boundary-way has admin_level {$1} but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations"
+                "description": "This boundary-way has admin_level (-?\\d+) but belongs to a relation with lower admin_level (higher priority); it should have the lowest admin_level of all relations"
             },
             "_290": {
                 "title": "restrictions",
@@ -216,23 +235,25 @@
             },
             "_291": {
                 "title": "missing type",
-                "description": "This turn-restriction has no known restriction type"
+                "description": "This turn-restriction has no (?:known )?restriction type"
             },
             "_292": {
                 "title": "missing from way",
-                "description": "A turn-restriction needs exactly one {$1} member. This one has {$2}"
+                "description": "A turn-restriction needs exactly one from member\\. This one has (\\d+)"
             },
             "_293": {
                 "title": "missing to way",
-                "description": "A turn-restriction needs exactly one {$1} member. This one has {$2}"
+                "description": "A turn-restriction needs exactly one to member\\. This one has (\\d+)"
             },
             "_294": {
                 "title": "from or to not a way",
-                "description": "From- and To-members of turn restrictions need to be ways. {$1}"
+                "description": "From- and To-members of turn restrictions need to be ways\\. (.+)",
+                "TODO": "Group can be any combination of to/from: to node #ID | from node #ID | to relation #ID | from relation #ID"
             },
             "_295": {
                 "title": "via is not on the way ends",
-                "description": "via (node #{$1}) is not the first or the last member of from (way #{$2})"
+                "description": "via \\(node #(\\d+)\\) is not the first or the last member of from \\(way #(\\d+)\\)",
+                "IDs": ["n", "w"]
             },
             "_296": {
                 "title": "wrong restriction angle",
@@ -240,11 +261,13 @@
             },
             "_297": {
                 "title": "wrong direction of to member",
-                "description": "wrong direction of to way {$1}"
+                "description": "wrong direction of to way (\\d+)",
+                "IDs": ["w"]
             },
             "_298": {
                 "title": "already restricted by oneway",
-                "description": "entry already prohibited by oneway tag on {$1}"
+                "description": "entry already prohibited by oneway tag on (\\d+)",
+                "IDs": ["w"]
             },
             "_310": {
                 "title": "roundabouts",
@@ -252,11 +275,11 @@
             },
             "_311": {
                 "title": "not closed loop",
-                "description": "This way is part of a roundabout but is not closed-loop. (split carriageways approaching a roundabout should not be tagged as roundabout)"
+                "description": "This way is part of a roundabout but is not closed-loop\\. \\(split carriageways approaching a roundabout should not be tagged as roundabout\\)"
             },
             "_312": {
                 "title": "wrong direction",
-                "description": "If this roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this roundabout is in a country with left-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with left-hand traffic then its orientation goes the wrong way around"
+                "description": "If this ((?:mini_)?roundabout) is in a country with (left|right)-hand traffic then its orientation goes the wrong way around"
             },
             "_313": {
                 "title": "faintly connected",
@@ -264,19 +287,21 @@
             },
             "_320": {
                 "title": "*_link connections",
-                "description": "This way is tagged as highway={$1}_link but doesn''t have a connection to any other {$1} or {$1}_link"
+                "description": "This way is tagged as highway=(\\w+)_link but doesn''t have a connection to any other \\1 or \\1_link"
             },
             "_350": {
                 "title": "bridge-tags",
-                "description": "This bridge does not have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {$1}"
+                "description": "This bridge does not have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: (.+)",
+                "NOTE": "Group can be arbitrary list of form: key=value,key=value,key=value..."
             },
             "_370": {
                 "title": "doubled places",
-                "description": "This node has tags in common with the surrounding way #{$1} (tah fix this-->)((including the name ''The Garage'')) and seems to be redundand | This node has tags in common with the surrounding way #{$1} (including the name ''{$2}'') and seems to be redundand"
+                "description": "This node has tags in common with the surrounding way #(\\d+) ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
+                "IDs": ["w", ""]
             },
             "_380": {
                 "title": "non-physical use of sport-tag",
-                "description": "This way is tagged (sport=\\w+) but has no physical tag like e.g. leisure, building, amenity or highway"
+                "description": "This way is tagged sport=(\\w+) but has no physical tag like e.g. leisure, building, amenity or highway"
             },
             "_400": {
                 "title": "geometry glitches",
@@ -284,7 +309,7 @@
             },
             "_401": {
                 "title": "missing turn restriction",
-                "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way (\\d+) to (\\d+)",
+                "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way (\\1|\\2) to (\\1|\\2)",
                 "IDs": ["w", "w", "w", "w"]
             },
             "_402": {
@@ -297,16 +322,16 @@
             },
             "_411": {
                 "title": "http error",
-                "description": "The URL \\(<a target=\"_blank\" href=\"(.+?)\">\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)",
-                "TODO": "For some reason this regex doesn't match, possible related to quotes (see _220)"
+                "description": "The URL \\(<a target=_blank href=(.+)>\\1</a>\\) cannot be opened \\(HTTP status code (\\d+)\\)",
+                "NOTE": "It seems the HTML attributes don't have quotes when the code reads them"
             },
             "_412": {
                 "title": "domain hijacking",
-                "description": "Possible domain squatting: <a target=''_blank'' href=''{$1}''>{$1}</a>. Suspicious text is: ''{$2}''"
+                "description": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>. Suspicious text is: ''(.+)''"
             },
             "_413": {
                 "title": "non-match",
-                "description": "Content of the URL (<a target=''_blank'' href=''{$1}''>{$1}</a>) did not contain these keywords: ({$2})"
+                "description": "Content of the URL (<a target=_blank href=(.+)>\\1</a>) did not contain these keywords: \\((.+)\\)"
             }
         },
         "warnings": {
