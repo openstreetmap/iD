@@ -82,8 +82,8 @@ export function parseErrorDescriptions(entity) {
     if (!errorMatch) {
         // TODO: Remove, for regex dev testing
         console.log('Unmatched:', errorType, errorDescription, errorRe);
-        return
-    };
+        return;
+    }
 
     // index 0 is the whole match, groups start from 1
     for (var i = 1; i < errorMatch.length; i++) {
