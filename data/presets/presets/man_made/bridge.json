@@ -9,6 +9,9 @@
     "area"
   ],
   "tags": {
+    "man_made": "bridge"
+  },
+  "addTags": {
     "man_made": "bridge",
     "layer": "1"
   },
