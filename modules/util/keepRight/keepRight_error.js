@@ -70,6 +70,31 @@ export function parseErrorDescriptions(entity) {
 
     function fillPlaceholder(d) { return '<span><a class="kr_error_description-id">' + d + '</a></span>'; }
 
+    // arbitrary list of way IDs and their layer value in form: #ID(layer),#ID(layer),#ID(layer)...
+    function parseError231(list) {
+        var newList = [];
+        var items = list.split(',');
+
+        items.forEach(function(item) {
+            var id;
+            var layer;
+
+            // item of form "#ID(layer)"
+            item = item.split('(');
+
+            // ID has # at the front
+            id = item[0].slice(1);
+            id = fillPlaceholder('w' + id);
+
+            // layer has trailing )
+            layer = item[1].slice(0,-1);
+
+            newList.push(id + ' (layer: ' + layer + ')');
+        });
+
+        return newList.join(', ');
+    }
+
     // regex pattern should capture groups to extract appropriate details
     var errorDescription = entity.description;
     var errorRe = new RegExp(matchingTemplate.description);
@@ -89,12 +114,15 @@ export function parseErrorDescriptions(entity) {
     for (var i = 1; i < errorMatch.length; i++) {
         var group = errorMatch[i];
 
-        // IDs captured have an associated type
+        // Clean and link IDs if present in the error
         if ('IDs' in matchingTemplate && matchingTemplate.IDs[i-1]) {
             var prefix = matchingTemplate.IDs[i-1];
 
-            // wrap id with linking span if valid
-            if (['n','w','r'].includes(prefix)) {
+            // some errors have more complex ID lists/variance
+            if (prefix === '231') {
+                group = parseError231(group);
+            } else if (['n','w','r'].includes(prefix)) {
+                // wrap with linking span if simple case
                 group = fillPlaceholder(prefix + group);
             }
         } else if (html_re.test(group)) {

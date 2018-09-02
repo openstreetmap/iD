@@ -1082,7 +1082,7 @@ en:
             description: ''
           _231:
             title: 'mixed layers intersection'
-            description: 'This node is a junction of ways on different layers: {var1}({var2}), {var3}.'
+            description: 'This node is a junction of ways on different layers: {var1}.'
           _232:
             title: 'strange layers'
             description: 'This {var1} is tagged with layer {var2}. This need not be an error but it looks strange.'
