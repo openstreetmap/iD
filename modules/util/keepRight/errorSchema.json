@@ -193,9 +193,8 @@
             },
             "_231": {
                 "title": "mixed layers intersection",
-                "description": "This node is a junction of ways on different layers: #(\\d+)\\((-?\\d+)\\),((?:#\\d+\\(-?\\d+\\),?)+)",
-                "IDs": ["w", ""],
-                "TODO": "Third group is arbitrary list of way IDs and their layer value in form: #ID(layer),#ID(layer),#ID(layer)..."
+                "description": "This node is a junction of ways on different layers: ((?:#\\d+\\(-?\\d+\\),?)+)",
+                "IDs": ["231"]
             },
             "_232": {
                 "title": "strange layers",
