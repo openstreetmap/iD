@@ -58,9 +58,6 @@ export function parseErrorDescriptions(entity) {
     var matchingTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
     if (!matchingTemplate) return;
 
-    var parsedDetails = [];
-    var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
-
     var commonEntities = [
         'node',
         'way',
@@ -85,6 +82,9 @@ export function parseErrorDescriptions(entity) {
         return;
     }
 
+    var parsedDetails = {};
+    var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
+
     // index 0 is the whole match, groups start from 1
     for (var i = 1; i < errorMatch.length; i++) {
         var group = errorMatch[i];
@@ -107,17 +107,10 @@ export function parseErrorDescriptions(entity) {
             group = t('QA.keepRight.entities.' + group);
         }
 
-        parsedDetails.push(group);
+        parsedDetails['var' + i] = group;
     }
 
-    return {
-        var1: parsedDetails[0] || '',
-        var2: parsedDetails[1] || '',
-        var3: parsedDetails[2] || '',
-        var4: parsedDetails[3] || '',
-        var5: parsedDetails[4] || '',
-        var6: parsedDetails[5] || '',
-    };
+    return parsedDetails;
 }
 
 
