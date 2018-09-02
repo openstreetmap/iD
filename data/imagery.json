@@ -44955,6 +44955,16 @@
       "terms_text": "openstreetmap.hu"
     },
     {
+      "id": "OpenTopoMap",
+      "name": "OpenTopoMap",
+      "type": "tms",
+      "template": "https://{switch:a,b,c}.tile.opentopomap.org/{zoom}/{x}/{y}.png",
+      "zoomExtent": [3, 17],
+      "terms_url": "https://tile.opentopomap.org/about#verwendung",
+      "terms_text": "Kartendaten: © OpenStreetMap-Mitwirkende, SRTM | Kartendarstellung: © OpenTopoMap (CC-BY-SA)",
+      "icon": "https://osmlab.github.io/editor-layer-index/sources/world/OpenTopoMap.png"
+    },
+    {
       "id": "lu.geoportail.opendata.ortho2010",
       "name": "Ortho 2010 geoportail.lu",
       "type": "tms",
