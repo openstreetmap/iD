@@ -104,6 +104,9 @@ export function parseErrorDescriptions(entity) {
     errorTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
     if (!errorTemplate) return;
 
+    // some descriptions are just fixed text
+    if (!('regex' in errorTemplate)) return;
+
     // regex pattern should match description with variable details captured as groups
     errorDescription = entity.description;
     errorRegex = new RegExp(errorTemplate.description);
