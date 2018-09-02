@@ -957,7 +957,7 @@
                         },
                         "_211": {
                             "title": "",
-                            "description": "This way contains more than one node multiple times. Nodes are {var1}, {var2}. This may or may not be an error."
+                            "description": "This way contains more than one node multiple times. Nodes are {var1}. This may or may not be an error."
                         },
                         "_212": {
                             "title": "",
