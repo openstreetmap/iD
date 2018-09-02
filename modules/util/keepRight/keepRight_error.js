@@ -71,7 +71,21 @@ export function parseErrorDescriptions(entity) {
 
     function fillPlaceholder(d) { return '<span><a class="kr_error_description-id">' + d + '</a></span>'; }
 
-    // arbitrary list of form: #ID(layer),#ID(layer),#ID(layer)...
+    // arbitrary node list of form: #ID, #ID, #ID...
+    function parseError211(list) {
+        var newList = [];
+        var items = list.split(', ');
+
+        items.forEach(function(item) {
+            // ID has # at the front
+            var id = fillPlaceholder('n' + item.slice(1));
+            newList.push(id);
+        });
+
+        return newList.join(', ');
+    }
+
+    // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
     function parseError231(list) {
         var newList = [];
         var items = list.split(',');
@@ -123,18 +137,25 @@ export function parseErrorDescriptions(entity) {
         // index 0 is the whole match, skip it
         if (!index) return;
 
-        // Clean and link IDs if present in the group
+        // link IDs if present in the group
         idType = 'IDs' in errorTemplate ? errorTemplate.IDs[index-1] : '';
         if (idType) {
-            // some errors have more complex ID lists/variance
-            if (idType === '231') {
-                group = parseError231(group);
-            } else if (['n','w','r'].includes(idType)) {
+            switch (idType) {
                 // simple case just needs a linking span
-                group = fillPlaceholder(idType + group);
+                case 'n':
+                case 'w':
+                case 'r':
+                    group = fillPlaceholder(idType + group);
+                    break;
+                // some errors have more complex ID lists/variance
+                case '211':
+                    group = parseError211(group);
+                    break;
+                case '231':
+                    group = parseError231(group);
             }
         } else if (html_re.test(group)) {
-            // escape any html
+            // escape any html in non-IDs
             group = '\\' +  group + '\\';
         }
 

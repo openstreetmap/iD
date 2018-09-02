@@ -195,9 +195,8 @@
             },
             "_211": {
                 "title": "",
-                "description": "This way contains more than one node at least twice. Nodes are #(\\d+), ((?:#\\d+(?:, )?)+)\\. This may or may not be an error",
-                "IDs": ["n"],
-                "TODO": "Second group is arbitrary list of node IDs in form: #ID, #ID, #ID...",
+                "description": "This way contains more than one node at least twice\\. Nodes are ((?:#\\d+(?:, )?)+)\\. This may or may not be an error",
+                "IDs": ["211"],
                 "regex": true
             },
             "_212": {
