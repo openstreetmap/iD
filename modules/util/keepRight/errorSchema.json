@@ -373,7 +373,7 @@
             },
             "_412": {
                 "title": "domain hijacking",
-                "description": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>. Suspicious text is: ''(.+)''",
+                "description": "Possible domain squatting: <a target=_blank href=(.+)>\\1</a>\\. Suspicious text is: ''(.+)''",
                 "regex": true
             },
             "_413": {
@@ -385,11 +385,14 @@
         "warnings": {
             "_20": {
                 "title": "multiple nodes on the same spot",
-                "description": "There is more than one node in this spot. Offending node IDs: {$1}"
+                "description": "There is more than one node in this spot\\. Offending node IDs: ((?:#\\d+,?)+)",
+                "IDs": ["20"],
+                "regex": true
             },
             "_60": {
                 "title": "depreciated tags",
-                "description": "This {$1} uses deprecated tag {$2} = {$3}. Please use {$4} instead!"
+                "description": "This (node|way|relation) uses deprecated tag '([\\w:]+)=(.+)'\\. Please use &quot;(.+)&quot; instead!",
+                "regex": true
             },
             "_300": {
                 "title": "missing maxspeed",
@@ -397,7 +400,7 @@
             },
             "_360": {
                 "title": "language unknown",
-                "description": "It would be nice if this (node|way|relation) had an additional tag ''name:XX=(\\.+?)''where XX shows the language of its name ''\\2''",
+                "description": "It would be nice if this (node|way|relation) had an additional tag 'name:XX=(.+)' where XX shows the language of its name '\\2'",
                 "regex": true
             },
             "_390": {
