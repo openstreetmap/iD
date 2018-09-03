@@ -695,6 +695,15 @@ en:
           _72:
             title: 'node without tags'
             description: 'This node is not member of any way and doesn''t have any tags.'
+          _73:
+            title: 'tracktype with no highway tag'
+            description: 'This way has a "tracktype" tag but no "highway" tag.'
+          _74:
+            title: 'empty tag'
+            description: 'This {var1} has an empty tag: "{var2}".'
+          _75:
+            title: 'name without tags'
+            description: 'This {var1} has a name ("{var2}") but no other tags.'
           _90:
             title: 'motorways without ref'
             description: 'This way is tagged as motorway and therefore needs a ref nat_ref or int_ref tag.'
