@@ -4813,6 +4813,12 @@
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/ferry-line.svg?sanitize=true"
     },
     {
+      "key": "seamark:type",
+      "value": "buoy_lateral",
+      "description": "Lateral Buoy",
+      "object_types": ["node"]
+    },
+    {
       "key": "shop",
       "description": "Shop, Type",
       "object_types": ["node", "area"],
@@ -6905,6 +6911,136 @@
       "description": "Hiking Difficulty"
     },
     {"key": "sanitary_dump_station", "description": "Toilet Disposal"},
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "channel_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "channel_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "waterway_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "waterway_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "danger_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "danger_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "preferred_channel_port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "preferred_channel_starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red;white;red;white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green;white;green;white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red;green;red",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green;red;green",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "yellow",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:shape",
+      "value": "spar",
+      "description": "Shape"
+    },
+    {
+      "key": "seamark:buoy_lateral:shape",
+      "value": "conical",
+      "description": "Shape"
+    },
+    {
+      "key": "seamark:buoy_lateral:shape",
+      "value": "can",
+      "description": "Shape"
+    },
+    {
+      "key": "seamark:buoy_lateral:shape",
+      "value": "pillar",
+      "description": "Shape"
+    },
+    {
+      "key": "seamark:buoy_lateral:shape",
+      "value": "spherical",
+      "description": "Shape"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "iala-a",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "iala-b",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "other",
+      "description": "System"
+    },
     {"key": "seasonal", "description": "Seasonal"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},
