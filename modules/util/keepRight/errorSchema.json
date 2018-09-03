@@ -281,8 +281,8 @@
             },
             "_294": {
                 "title": "from or to not a way",
-                "description": "From- and To-members of turn restrictions need to be ways\\. (.+)",
-                "TODO": "Group can be any combination of to/from: to node #ID | from node #ID | to relation #ID | from relation #ID",
+                "description": "From- and To-members of turn restrictions need to be ways\\. ((?:(?:from|to) (?:node|relation) #\\d+,?)+)",
+                "IDs": ["294"],
                 "regex": true
             },
             "_295": {
