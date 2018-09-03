@@ -35,8 +35,7 @@
             },
             "_70": {
                 "title": "missing tags",
-                "description": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;",
-                "regex": true
+                "description": ""
             },
             "_71": {
                 "title": "",
@@ -45,6 +44,19 @@
             "_72": {
                 "title": "",
                 "description": "This node is not member of any way and does not have any tags"
+            },
+            "_73": {
+                "title": "",
+                "description": "This way has a tracktype tag but no highway tag"
+            },
+            "_74": {
+                "title": "missing tags",
+                "description": "This (node|way|relation) has an empty tag: &quot;([\\w:]+)=&quot;",
+                "regex": true
+            },
+            "_75": {
+                "description": "This (node|way|relation) has a name \\((.+)\\) but no other tag",
+                "regex": true
             },
             "_90": {
                 "title": "motorways without ref",
