@@ -1470,7 +1470,7 @@
                         },
                         "_60": {
                             "title": "depreciated tags",
-                            "description": "This {var1} uses deprecated tag {var2}={var3}. Please use {var4} instead!"
+                            "description": "This {var1} uses deprecated tag \"{var2}\"=\"{var3}\". Please use {var4} instead!"
                         },
                         "_300": {
                             "title": "missing maxspeed",
@@ -1478,7 +1478,7 @@
                         },
                         "_360": {
                             "title": "language unknown",
-                            "description": "It would be nice if this {var1} had an additional tag name:XX={var2} where XX shows the language of its name {var2}."
+                            "description": "It would be nice if this {var1} had an additional tag \"name:XX\"=\"{var2}\" where XX shows the language of its name \"{var2}\"."
                         },
                         "_390": {
                             "title": "missing tracktype",

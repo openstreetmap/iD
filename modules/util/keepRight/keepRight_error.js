@@ -141,6 +141,20 @@ export function parseErrorDescriptions(entity) {
         return newList.join(', ');
     }
 
+    // arbitrary node list of form: #ID,#ID,#ID...
+    function parseWarning20(list) {
+        var newList = [];
+        var items = list.split(',');
+
+        items.forEach(function(item) {
+            // ID has # at the front
+            var id = fillPlaceholder('n' + item.slice(1));
+            newList.push(id);
+        });
+
+        return newList.join(', ');
+    }
+
     if (!(entity instanceof krError)) return;
 
     // find the matching template from the error schema
@@ -186,6 +200,9 @@ export function parseErrorDescriptions(entity) {
                     break;
                 case '294':
                     group = parseError294(group);
+                    break;
+                case '20':
+                    group = parseWarning20(group);
             }
         } else if (html_re.test(group)) {
             // escape any html in non-IDs
