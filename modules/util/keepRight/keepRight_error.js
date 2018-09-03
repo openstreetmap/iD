@@ -111,6 +111,36 @@ export function parseErrorDescriptions(entity) {
         return newList.join(', ');
     }
 
+    // arbitrary node/relation list of form: from node #ID,to relation #ID,to node #ID...
+    function parseError294(list) {
+        var newList = [];
+        var items = list.split(',');
+
+        items.forEach(function(item) {
+            var role;
+            var idType;
+            var id;
+
+            // item of form "from/to node/relation #ID"
+            item = item.split(' ');
+
+            // to/from role is more clear in quotes
+            role = '"' + item[0] + '"';
+
+            // first letter of node/relation provides the type
+            idType = item[1].slice(0,1);
+
+            // ID has # at the front
+            id = item[2].slice(1);
+            id = fillPlaceholder(idType + id);
+
+            item = [role, item[1], id].join(' ');
+            newList.push(item);
+        });
+
+        return newList.join(', ');
+    }
+
     if (!(entity instanceof krError)) return;
 
     // find the matching template from the error schema
@@ -153,6 +183,9 @@ export function parseErrorDescriptions(entity) {
                     break;
                 case '231':
                     group = parseError231(group);
+                    break;
+                case '294':
+                    group = parseError294(group);
             }
         } else if (html_re.test(group)) {
             // escape any html in non-IDs
