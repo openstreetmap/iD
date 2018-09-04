@@ -618,6 +618,13 @@
     },
     {
       "key": "amenity",
+      "value": "language_school",
+      "description": "Language School",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/school-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "library",
       "description": "Library",
       "object_types": ["node", "area"],
@@ -6662,6 +6669,7 @@
     {"key": "label", "description": "Label"},
     {"key": "lamp_type", "description": "Type"},
     {"key": "lanes", "description": "Lanes"},
+    {"key": "language:", "description": "Languages"},
     {"key": "layer", "description": "Layer"},
     {"key": "leaf_cycle", "value": "evergreen", "description": "Leaf Cycle"},
     {"key": "leaf_cycle", "value": "deciduous", "description": "Leaf Cycle"},

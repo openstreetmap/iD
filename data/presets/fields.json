@@ -144,6 +144,7 @@
     "lamp_type": {"key": "lamp_type", "type": "combo", "label": "Type"},
     "landuse": {"key": "landuse", "type": "typeCombo", "label": "Type"},
     "lanes": {"key": "lanes", "type": "number", "minValue": 0, "label": "Lanes", "placeholder": "1, 2, 3..."},
+    "language_multi": {"key": "language:", "type": "multiCombo", "label": "Languages"},
     "layer": {"key": "layer", "type": "number", "label": "Layer", "placeholder": "0"},
     "leaf_cycle_singular": {"key": "leaf_cycle", "type": "combo", "label": "Leaf Cycle", "strings": {"options": {"evergreen": "Evergreen", "deciduous": "Deciduous", "semi_evergreen": "Semi-Evergreen", "semi_deciduous": "Semi-Deciduous"}}},
     "leaf_cycle": {"key": "leaf_cycle", "type": "combo", "label": "Leaf Cycle", "strings": {"options": {"evergreen": "Evergreen", "deciduous": "Deciduous", "semi_evergreen": "Semi-Evergreen", "semi_deciduous": "Semi-Deciduous", "mixed": "Mixed"}}},

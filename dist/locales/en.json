@@ -2142,6 +2142,9 @@
                     "label": "Lanes",
                     "placeholder": "1, 2, 3..."
                 },
+                "language_multi": {
+                    "label": "Languages"
+                },
                 "layer": {
                     "label": "Layer",
                     "placeholder": "0"
@@ -3296,6 +3299,10 @@
                 "amenity/kindergarten": {
                     "name": "Preschool/Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"
+                },
+                "amenity/language_school": {
+                    "name": "Language School",
+                    "terms": "esl"
                 },
                 "amenity/library": {
                     "name": "Library",

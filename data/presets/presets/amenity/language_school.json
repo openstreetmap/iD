@@ -2,18 +2,19 @@
     "icon": "maki-school",
     "fields": [
         "name",
+        "language_multi",
         "operator",
-        "address",
-        "phone",
-        "website",
-        "wheelchair"
+        "address"
     ],
     "geometry": [
         "point",
         "area"
     ],
+    "terms": [
+        "esl"
+    ],
     "tags": {
-        "amenity": "school"
+        "amenity": "language_school"
     },
-    "name": "Language school"
+    "name": "Language School"
 }

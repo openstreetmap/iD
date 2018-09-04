@@ -794,6 +794,9 @@ en:
         label: Lanes
         # lanes field placeholder
         placeholder: '1, 2, 3...'
+      language_multi:
+        # 'language:=*'
+        label: Languages
       layer:
         # layer=*
         label: Layer
@@ -2120,6 +2123,11 @@ en:
         name: Preschool/Kindergarten Grounds
         # 'terms: kindergarden,pre-school'
         terms: '<translate with synonyms or related terms for ''Preschool/Kindergarten Grounds'', separated by commas>'
+      amenity/language_school:
+        # amenity=language_school
+        name: Language School
+        # 'terms: esl'
+        terms: '<translate with synonyms or related terms for ''Language School'', separated by commas>'
       amenity/library:
         # amenity=library
         name: Library
