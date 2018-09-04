@@ -242,14 +242,24 @@ export function uiFieldCombo(field, context) {
             if (!val) return;
             container.classed('active', false);
             utilGetSetValue(input, '');
+
             if (isMulti) {
-                field.keys.push(field.key + val);
-                t[field.key + val] = 'yes';
+                var key = field.key + val;
+                if (_entity) {
+                    // don't set a multicombo value to 'yes' if it already has a non-'no' value
+                    // e.g. `language:de=main`
+                    var old = _entity.tags[key] || '';
+                    if (old && old.toLowerCase() !== 'no') return;
+                }
+                field.keys.push(key);
+                t[key] = 'yes';
+
             } else if (isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
                 arr.push(val);
                 t[field.key] = _compact(_uniq(arr)).join(';');
             }
+
             window.setTimeout(function() { input.node().focus(); }, 10);
 
         } else {
@@ -332,25 +342,27 @@ export function uiFieldCombo(field, context) {
 
             if (isMulti) {
                 // Build _multiData array containing keys already set..
-                Object.keys(tags).forEach(function(key) {
-                    if (key.indexOf(field.key) !== 0 || tags[key].toLowerCase() !== 'yes') return;
+                for (var k in tags) {
+                    if (k.indexOf(field.key) !== 0) continue;
+                    var v = (tags[k] || '').toLowerCase();
+                    if (v === '' || v === 'no') continue;
 
-                    var suffix = key.substring(field.key.length);
+                    var suffix = k.substring(field.key.length);
                     _multiData.push({
-                        key: key,
+                        key: k,
                         value: displayValue(suffix)
                     });
-                });
+                }
 
                 // Set keys for form-field modified (needed for undo and reset buttons)..
                 field.keys = _map(_multiData, 'key');
 
             } else if (isSemi) {
                 var arr = _compact(_uniq((tags[field.key] || '').split(';')));
-                _multiData = arr.map(function(key) {
+                _multiData = arr.map(function(k) {
                     return {
-                        key: key,
-                        value: displayValue(key)
+                        key: k,
+                        value: displayValue(k)
                     };
                 });
             }
