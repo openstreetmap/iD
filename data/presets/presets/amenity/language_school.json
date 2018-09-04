@@ -2,9 +2,11 @@
     "icon": "maki-school",
     "fields": [
         "name",
-        "language_multi",
         "operator",
-        "address"
+        "address",
+        "building_area",
+        "opening_hours",
+        "language_multi"
     ],
     "geometry": [
         "point",
