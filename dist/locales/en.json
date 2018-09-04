@@ -4785,6 +4785,10 @@
                     "name": "Amusement Arcade",
                     "terms": "pay-to-play games,video games,driving simulators,pinball machines"
                 },
+                "leisure/bandstand": {
+                    "name": "Bandstand",
+                    "terms": ""
+                },
                 "leisure/beach_resort": {
                     "name": "Beach Resort",
                     "terms": ""

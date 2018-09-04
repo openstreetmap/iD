@@ -3116,6 +3116,13 @@
     },
     {
       "key": "leisure",
+      "value": "bandstand",
+      "description": "Bandstand",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/music-15.svg?sanitize=true"
+    },
+    {
+      "key": "leisure",
       "value": "beach_resort",
       "description": "Beach Resort",
       "object_types": ["node", "area"],

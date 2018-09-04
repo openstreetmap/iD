@@ -2,6 +2,7 @@
     "icon": "maki-music",
     "fields": [
         "name",
+        "building_area",
         "operator"
     ],
     "geometry": [
@@ -9,8 +10,7 @@
         "area"
     ],
     "tags": {
-        "leisure": "bandstand",
-        "building": "roof"
+        "leisure": "bandstand"
     },
     "name": "Bandstand"
 }
