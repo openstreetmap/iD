@@ -1,6 +1,5 @@
 {
     "fields": [
-       "direction",
        "lit"
     ],
     "geometry": [

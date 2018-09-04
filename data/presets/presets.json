@@ -12,7 +12,7 @@
     "waterway": {"fields": ["name", "waterway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"waterway": "*"}, "searchable": false, "name": "Waterway"},
     "address": {"fields": ["address"], "geometry": ["point", "vertex", "area"], "tags": {"addr:*": "*"}, "addTags": {}, "removeTags": {}, "reference": {"key": "addr"}, "name": "Address", "matchScore": 0.15},
     "advertising/billboard": {"fields": ["direction", "lit"], "geometry": ["point", "vertex", "line"], "tags": {"advertising": "billboard"}, "name": "Billboard"},
-    "advertising/column": {"fields": ["direction", "lit"], "geometry": ["point", "area"], "tags": {"advertising": "column"}, "name": "Advertising Column"},
+    "advertising/column": {"fields": ["lit"], "geometry": ["point", "area"], "tags": {"advertising": "column"}, "name": "Advertising Column"},
     "aerialway/station": {"icon": "maki-aerialway", "geometry": ["point", "vertex", "area"], "fields": ["aerialway/access", "aerialway/summer/access", "elevation", "building_area"], "tags": {"aerialway": "station"}, "name": "Aerialway Station", "searchable": false},
     "aerialway/cable_car": {"geometry": ["line"], "terms": ["tramway", "ropeway"], "fields": ["name", "aerialway/occupancy", "aerialway/capacity", "aerialway/duration", "aerialway/heating"], "tags": {"aerialway": "cable_car"}, "name": "Cable Car"},
     "aerialway/chair_lift": {"geometry": ["line"], "fields": ["name", "aerialway/occupancy", "aerialway/capacity", "aerialway/duration", "aerialway/bubble", "aerialway/heating"], "tags": {"aerialway": "chair_lift"}, "name": "Chair Lift"},
