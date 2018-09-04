@@ -2422,7 +2422,8 @@
                         "sleigh": "Sleigh",
                         "ice_skate": "Ice Skate",
                         "snow_park": "Snow Park",
-                        "playground": "Playground"
+                        "playground": "Playground",
+                        "connection": "Connection"
                     }
                 },
                 "place": {

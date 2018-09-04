@@ -1144,6 +1144,8 @@ en:
         # 'piste:type=*'
         label: Type
         options:
+          # 'piste:type=connection'
+          connection: Connection
           # 'piste:type=downhill'
           downhill: Downhill
           # 'piste:type=hike'

@@ -6876,6 +6876,7 @@
     {"key": "piste:type", "value": "ice_skate", "description": "Type"},
     {"key": "piste:type", "value": "snow_park", "description": "Type"},
     {"key": "piste:type", "value": "playground", "description": "Type"},
+    {"key": "piste:type", "value": "connection", "description": "Type"},
     {"key": "plant", "description": "Plant"},
     {"key": "plant:output:electricity", "description": "Power Output"},
     {"key": "baby", "description": "Baby Seat"},
