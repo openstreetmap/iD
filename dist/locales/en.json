@@ -5019,7 +5019,7 @@
                 },
                 "leisure/swimming_pool": {
                     "name": "Swimming Pool",
-                    "terms": "dive,water"
+                    "terms": "dive,water,aquatics"
                 },
                 "leisure/track": {
                     "name": "Racetrack (Non-Motorsport)",

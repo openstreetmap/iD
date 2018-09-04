@@ -4089,7 +4089,7 @@ en:
       leisure/swimming_pool:
         # leisure=swimming_pool
         name: Swimming Pool
-        # 'terms: dive,water'
+        # 'terms: dive,water,aquatics'
         terms: '<translate with synonyms or related terms for ''Swimming Pool'', separated by commas>'
       leisure/track:
         # leisure=track
