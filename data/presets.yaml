@@ -5574,6 +5574,11 @@ en:
         name: Consignment/Thrift Store
         # 'terms: secondhand,second hand,resale,thrift,used'
         terms: '<translate with synonyms or related terms for ''Consignment/Thrift Store'', separated by commas>'
+      shop/sewing:
+        # shop=sewing
+        name: Sewing Supply Shop
+        # 'terms: haberdashery'
+        terms: '<translate with synonyms or related terms for ''Sewing Supply Shop'', separated by commas>'
       shop/shoes:
         # shop=shoes
         name: Shoe Store
