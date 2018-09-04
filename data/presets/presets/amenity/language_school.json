@@ -1,0 +1,19 @@
+{
+    "icon": "maki-school",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "school"
+    },
+    "name": "Language school"
+}
