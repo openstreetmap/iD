@@ -534,7 +534,7 @@
     "man_made/adit": {"icon": "maki-triangle", "geometry": ["point", "area"], "fields": ["operator", "direction"], "terms": ["entrance", "underground", "mine", "cave"], "tags": {"man_made": "adit"}, "name": "Adit"},
     "man_made/antenna": {"icon": "temaki-antenna", "fields": ["height", "communication_multi"], "geometry": ["point"], "terms": ["broadcast", "cell phone", "cell", "communication", "mobile phone", "radio", "television", "transmission", "tv"], "tags": {"man_made": "antenna"}, "name": "Antenna"},
     "man_made/breakwater": {"geometry": ["line", "area"], "tags": {"man_made": "breakwater"}, "name": "Breakwater"},
-    "man_made/bridge": {"geometry": ["area"], "tags": {"man_made": "bridge"}, "name": "Bridge"},
+    "man_made/bridge": {"fields": ["name", "bridge", "layer", "maxweight"], "geometry": ["area"], "tags": {"man_made": "bridge"}, "addTags": {"man_made": "bridge", "layer": "1"}, "removeTags": {"man_made": "bridge", "layer": "*"}, "reference": {"key": "man_made", "value": "bridge"}, "name": "Bridge"},
     "man_made/bunker_silo": {"icon": "temaki-silo", "fields": ["content"], "geometry": ["point", "area"], "terms": ["Silage", "Storage"], "tags": {"man_made": "bunker_silo"}, "name": "Bunker Silo"},
     "man_made/chimney": {"icon": "temaki-chimney", "geometry": ["point", "area"], "tags": {"man_made": "chimney"}, "name": "Chimney"},
     "man_made/clearcut": {"icon": "maki-logging", "geometry": ["area"], "tags": {"man_made": "clearcut"}, "terms": ["cut", "forest", "lumber", "tree", "wood"], "name": "Clearcut Forest"},
