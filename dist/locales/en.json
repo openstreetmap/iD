@@ -1890,7 +1890,7 @@
                     "label": "Display"
                 },
                 "distance": {
-                    "label": "Total Distance"
+                    "label": "Distance"
                 },
                 "dock": {
                     "label": "Type"
@@ -4397,6 +4397,10 @@
                     "name": "Living Street",
                     "terms": ""
                 },
+                "highway/milestone": {
+                    "name": "Highway Milestone",
+                    "terms": "milestone,marker"
+                },
                 "highway/mini_roundabout": {
                     "name": "Mini-Roundabout",
                     "terms": ""
@@ -6716,6 +6720,10 @@
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
                     "terms": "petrol,gas,diesel,boat"
+                },
+                "waterway/milestone": {
+                    "name": "Waterway Milestone",
+                    "terms": "milestone,marker"
                 },
                 "waterway/river": {
                     "name": "River",

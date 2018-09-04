@@ -82,7 +82,7 @@
     "direction": {"key": "direction", "type": "number", "label": "Direction (Degrees Clockwise)", "placeholder": "45, 90, 180, 270"},
     "dispensing": {"key": "dispensing", "type": "check", "label": "Dispenses Prescriptions", "default": "yes"},
     "display": {"key": "display", "type": "combo", "label": "Display", "options": ["analog", "digital", "sundial", "unorthodox"]},
-    "distance": {"key": "distance", "type": "text", "label": "Total Distance"},
+    "distance": {"key": "distance", "type": "text", "label": "Distance"},
     "dock": {"key": "dock", "type": "combo", "label": "Type"},
     "drive_through": {"key": "drive_through", "type": "check", "label": "Drive-Through"},
     "duration": {"key": "duration", "type": "text", "label": "Duration", "placeholder": "00:00"},

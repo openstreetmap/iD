@@ -506,7 +506,7 @@ en:
         label: Display
       distance:
         # distance=*
-        label: Total Distance
+        label: Distance
       dock:
         # dock=*
         label: Type
@@ -3366,6 +3366,11 @@ en:
         # highway=living_street
         name: Living Street
         terms: '<translate with synonyms or related terms for ''Living Street'', separated by commas>'
+      highway/milestone:
+        # highway=milestone
+        name: Highway Milestone
+        # 'terms: milestone,marker'
+        terms: '<translate with synonyms or related terms for ''Highway Milestone'', separated by commas>'
       highway/mini_roundabout:
         # highway=mini_roundabout
         name: Mini-Roundabout
@@ -6004,6 +6009,11 @@ en:
         name: Marine Fuel Station
         # 'terms: petrol,gas,diesel,boat'
         terms: '<translate with synonyms or related terms for ''Marine Fuel Station'', separated by commas>'
+      waterway/milestone:
+        # waterway=milestone
+        name: Waterway Milestone
+        # 'terms: milestone,marker'
+        terms: '<translate with synonyms or related terms for ''Waterway Milestone'', separated by commas>'
       waterway/river:
         # waterway=river
         name: River

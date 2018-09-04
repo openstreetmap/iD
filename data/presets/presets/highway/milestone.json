@@ -5,15 +5,15 @@
         "vertex"
     ],
     "fields": [
-        "railway/position",
+        "distance",
         "direction_vertex"
     ],
     "tags": {
-        "railway": "milestone"
+        "highway": "milestone"
     },
     "terms": [
         "milestone",
         "marker"
     ],
-    "name": "Railway Milestone"
+    "name": "Highway Milestone"
 }

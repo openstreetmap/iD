@@ -2461,6 +2461,13 @@
     },
     {
       "key": "highway",
+      "value": "milestone",
+      "description": "Highway Milestone",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/milestone.svg?sanitize=true"
+    },
+    {
+      "key": "highway",
       "value": "mini_roundabout",
       "description": "Mini-Roundabout",
       "object_types": ["node"],
@@ -6204,6 +6211,13 @@
     },
     {
       "key": "waterway",
+      "value": "milestone",
+      "description": "Waterway Milestone",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/milestone.svg?sanitize=true"
+    },
+    {
+      "key": "waterway",
       "value": "river",
       "description": "River",
       "object_types": ["way"],
@@ -6497,7 +6511,7 @@
     {"key": "direction", "description": "Direction (Degrees Clockwise)"},
     {"key": "dispensing", "description": "Dispenses Prescriptions"},
     {"key": "display", "description": "Display"},
-    {"key": "distance", "description": "Total Distance"},
+    {"key": "distance", "description": "Distance"},
     {"key": "dock", "description": "Type"},
     {"key": "drive_through", "description": "Drive-Through"},
     {"key": "duration", "description": "Duration"},
