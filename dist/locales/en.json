@@ -1440,7 +1440,7 @@
                         },
                         "_370": {
                             "title": "doubled places",
-                            "description": "This node has tags in common with the surrounding way #{var1} {var2}and seems to be redundant"
+                            "description": "This node has tags in common with the surrounding way #{var1} {var2}and seems to be redundant."
                         },
                         "_380": {
                             "title": "non-physical use of sport-tag",
@@ -1452,7 +1452,8 @@
                         },
                         "_401": {
                             "title": "missing turn restriction",
-                            "description": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}."
+                            "description": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}.",
+                            "addition": " from way {var3} to {var4}."
                         },
                         "_402": {
                             "title": "impossible angles",

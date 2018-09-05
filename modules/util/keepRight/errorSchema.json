@@ -217,7 +217,7 @@
             },
             "_220": {
                 "title": "misspelled tags",
-                "description": "This (node|way|relation) is tagged '([\\w:]+)=(.+)' where &quot;(\\2|\\3)&quot; looks like &quot;([\\w\\s]+)&quot;",
+                "description": "This (node|way|relation) is tagged '([\\w]+)(:([\\w]+))?=(.+)' where &quot;(\\2|\\3|\\4|\\5)&quot; looks like &quot;([\\w\\s]+)&quot;",
                 "regex": true
             },
             "_221": {
@@ -340,7 +340,7 @@
             },
             "_320": {
                 "title": "*_link connections",
-                "description": "This way is tagged as highway=(\\w+)_link but doesn''t have a connection to any other \\1 or \\1_link",
+                "description": "This way is tagged as highway=(\\w+)_link but doesn't have a connection to any other \\1 or \\1_link",
                 "regex": true
             },
             "_350": {
@@ -362,11 +362,11 @@
             },
             "_400": {
                 "title": "geometry glitches",
-                "description": "Impossible sharp angles on highways and junctions. These may be caused by missing turn restrictions on junctions or glitches along the linestring of ways"
+                "description": ""
             },
             "_401": {
                 "title": "missing turn restriction",
-                "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way (\\1|\\2) to (\\1|\\2)",
+                "description": "ways (\\d+) and (\\d+) join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning( from way (\\1|\\2) to (\\1|\\2))?",
                 "IDs": ["w", "w", "w", "w"],
                 "regex": true
             },
