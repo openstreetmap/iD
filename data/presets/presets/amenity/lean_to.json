@@ -1,0 +1,18 @@
+{
+    "icon": "maki-shelter",
+    "fields": [
+        "name",
+        "operator",
+        "building_area",
+        "fireplace"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "shelter",
+        "shelter_type": "lean_to"
+    },
+    "name": "Lean-To"
+}

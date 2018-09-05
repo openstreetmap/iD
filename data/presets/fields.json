@@ -99,6 +99,7 @@
     "fence_type": {"key": "fence_type", "type": "combo", "label": "Type"},
     "fire_hydrant/position": {"key": "fire_hydrant:position", "type": "combo", "label": "Position", "strings": {"options": {"lane": "Lane", "parking_lot": "Parking Lot", "sidewalk": "Sidewalk", "green": "Green"}}},
     "fire_hydrant/type": {"key": "fire_hydrant:type", "type": "combo", "label": "Type", "strings": {"options": {"pillar": "Pillar/Aboveground", "underground": "Underground", "wall": "Wall", "pond": "Pond"}}},
+    "fireplace": {"key": "fireplace", "type": "check", "label": "Fireplace"},
     "fitness_station": {"key": "fitness_station", "type": "typeCombo", "label": "Equipment Type"},
     "fixme": {"key": "fixme", "type": "textarea", "label": "Fix Me", "universal": true},
     "ford": {"key": "ford", "type": "typeCombo", "label": "Type", "placeholder": "Default"},

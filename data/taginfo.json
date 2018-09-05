@@ -569,6 +569,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fuel-15.svg?sanitize=true"
     },
     {
+      "key": "shelter_type",
+      "value": "gazebo",
+      "description": "Gazebo",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
       "key": "amenity",
       "value": "grave_yard",
       "description": "Graveyard",
@@ -622,6 +629,13 @@
       "description": "Language School",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/school-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "lean_to",
+      "description": "Lean-To",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -6577,6 +6591,7 @@
     {"key": "fire_hydrant:type", "value": "underground", "description": "Type"},
     {"key": "fire_hydrant:type", "value": "wall", "description": "Type"},
     {"key": "fire_hydrant:type", "value": "pond", "description": "Type"},
+    {"key": "fireplace", "description": "Fireplace"},
     {"key": "fitness_station", "description": "Equipment Type"},
     {"key": "fixme", "description": "Fix Me"},
     {"key": "ford", "description": "Type"},

@@ -592,6 +592,9 @@ en:
           underground: Underground
           # 'fire_hydrant:type=wall'
           wall: Wall
+      fireplace:
+        # fireplace=*
+        label: Fireplace
       fitness_station:
         # fitness_station=*
         label: Equipment Type
@@ -2091,6 +2094,10 @@ en:
         name: Gas Station
         # 'terms: petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel'
         terms: '<translate with synonyms or related terms for ''Gas Station'', separated by commas>'
+      amenity/gazebo:
+        # 'amenity=shelter, shelter_type=gazebo'
+        name: Gazebo
+        terms: '<translate with synonyms or related terms for ''Gazebo'', separated by commas>'
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
@@ -2130,6 +2137,10 @@ en:
         name: Language School
         # 'terms: esl'
         terms: '<translate with synonyms or related terms for ''Language School'', separated by commas>'
+      amenity/lean_to:
+        # 'amenity=shelter, shelter_type=lean_to'
+        name: Lean-To
+        terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
       amenity/library:
         # amenity=library
         name: Library

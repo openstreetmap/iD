@@ -1963,6 +1963,9 @@
                         "pond": "Pond"
                     }
                 },
+                "fireplace": {
+                    "label": "Fireplace"
+                },
                 "fitness_station": {
                     "label": "Equipment Type"
                 },
@@ -3273,6 +3276,10 @@
                     "name": "Gas Station",
                     "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
                 },
+                "amenity/gazebo": {
+                    "name": "Gazebo",
+                    "terms": ""
+                },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
                     "terms": ""
@@ -3304,6 +3311,10 @@
                 "amenity/language_school": {
                     "name": "Language School",
                     "terms": "esl"
+                },
+                "amenity/lean_to": {
+                    "name": "Lean-To",
+                    "terms": ""
                 },
                 "amenity/library": {
                     "name": "Library",

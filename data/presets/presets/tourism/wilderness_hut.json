@@ -4,7 +4,8 @@
     "name",
     "operator",
     "address",
-    "building_area"
+    "building_area",
+    "fireplace"
   ],
   "geometry": [
     "point",
