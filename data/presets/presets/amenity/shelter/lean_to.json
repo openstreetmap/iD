@@ -3,8 +3,7 @@
     "fields": [
         "name",
         "operator",
-        "building_area",
-        "fireplace"
+        "building_area"
     ],
     "geometry": [
         "point",

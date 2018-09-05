@@ -569,13 +569,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fuel-15.svg?sanitize=true"
     },
     {
-      "key": "shelter_type",
-      "value": "gazebo",
-      "description": "Gazebo",
-      "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
-    },
-    {
       "key": "amenity",
       "value": "grave_yard",
       "description": "Graveyard",
@@ -629,13 +622,6 @@
       "description": "Language School",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/school-15.svg?sanitize=true"
-    },
-    {
-      "key": "shelter_type",
-      "value": "lean_to",
-      "description": "Lean-To",
-      "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -705,13 +691,6 @@
       "description": "Car Parking",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-15.svg?sanitize=true"
-    },
-    {
-      "key": "shelter_type",
-      "value": "pavilion",
-      "description": "Pavilion",
-      "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -885,6 +864,27 @@
       "key": "amenity",
       "value": "shelter",
       "description": "Shelter",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "gazebo",
+      "description": "Gazebo",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "lean_to",
+      "description": "Lean-To",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "pavilion",
+      "description": "Pavilion",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },

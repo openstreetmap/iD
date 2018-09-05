@@ -3276,10 +3276,6 @@
                     "name": "Gas Station",
                     "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
                 },
-                "amenity/gazebo": {
-                    "name": "Gazebo",
-                    "terms": ""
-                },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
                     "terms": ""
@@ -3311,10 +3307,6 @@
                 "amenity/language_school": {
                     "name": "Language School",
                     "terms": "esl"
-                },
-                "amenity/lean_to": {
-                    "name": "Lean-To",
-                    "terms": ""
                 },
                 "amenity/library": {
                     "name": "Library",
@@ -3354,10 +3346,6 @@
                 },
                 "amenity/parking": {
                     "name": "Car Parking",
-                    "terms": ""
-                },
-                "amenity/pavilion": {
-                    "name": "Pavilion",
                     "terms": ""
                 },
                 "amenity/pharmacy": {
@@ -3459,6 +3447,18 @@
                 "amenity/shelter": {
                     "name": "Shelter",
                     "terms": "lean-to,gazebo,picnic"
+                },
+                "amenity/shelter/gazebo": {
+                    "name": "Gazebo",
+                    "terms": ""
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Lean-To",
+                    "terms": ""
+                },
+                "amenity/shelter/pavilion": {
+                    "name": "Pavilion",
+                    "terms": ""
                 },
                 "amenity/shower": {
                     "name": "Shower",
