@@ -8,7 +8,7 @@ import rbush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
 
-import { geoExtent } from '../geo';
+import { geoExtent, geoVecAdd } from '../geo';
 
 import { krError } from '../osm';
 
@@ -158,6 +158,19 @@ export default {
                 var features = data.features.map(function(feature) {
                     var loc = feature.geometry.coordinates;
                     var props = feature.properties;
+
+                    // TODO: finish implementing overlapping error offset
+                    // // if errors are coincident, move them apart slightly
+                    // var coincident = false;
+                    // var epsilon = 0.00001;
+                    // do {
+                    //     if (coincident) {
+                    //         loc = geoVecAdd(loc, [epsilon, epsilon]);
+                    //     }
+                    //     var bbox = geoExtent(loc).bbox();
+                    //     coincident = cache.rtree.search(bbox).length;
+                    // } while (coincident);
+
                     var d = new krError ({
                         loc: loc,
                         id: props.error_id,

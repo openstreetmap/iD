@@ -4,8 +4,9 @@ import { t } from '../locale';
 import { krError } from '../../osm';
 
 import { errorTypes } from './errorSchema.json';
+import { parseError } from './parse_error';
 
-// TODO: remove these objects, here for reference
+// TODO: for reference; remove
 var keepRightSchema = {
         'schema': '',
         'id': 0,
@@ -38,7 +39,7 @@ var keepRightSchema = {
         'txt4': '',
         'txt5': ''
     };
-
+// TODO: for reference; remove
 var keepRightSchemaFromWeb = {
     'error_type': '192',
     'object_type': 'way',
@@ -69,92 +70,6 @@ export function parseErrorDescriptions(entity) {
     var errorRegex;
     var errorMatch;
 
-    function fillPlaceholder(d) { return '<span><a class="kr_error_description-id">' + d + '</a></span>'; }
-
-    // arbitrary node list of form: #ID, #ID, #ID...
-    function parseError211(list) {
-        var newList = [];
-        var items = list.split(', ');
-
-        items.forEach(function(item) {
-            // ID has # at the front
-            var id = fillPlaceholder('n' + item.slice(1));
-            newList.push(id);
-        });
-
-        return newList.join(', ');
-    }
-
-    // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
-    function parseError231(list) {
-        var newList = [];
-        var items = list.split(',');
-
-        items.forEach(function(item) {
-            var id;
-            var layer;
-
-            // item of form "#ID(layer)"
-            item = item.split('(');
-
-            // ID has # at the front
-            id = item[0].slice(1);
-            id = fillPlaceholder('w' + id);
-
-            // layer has trailing )
-            layer = item[1].slice(0,-1);
-
-            // TODO: translation
-            newList.push(id + ' (layer: ' + layer + ')');
-        });
-
-        return newList.join(', ');
-    }
-
-    // arbitrary node/relation list of form: from node #ID,to relation #ID,to node #ID...
-    function parseError294(list) {
-        var newList = [];
-        var items = list.split(',');
-
-        items.forEach(function(item) {
-            var role;
-            var idType;
-            var id;
-
-            // item of form "from/to node/relation #ID"
-            item = item.split(' ');
-
-            // to/from role is more clear in quotes
-            role = '"' + item[0] + '"';
-
-            // first letter of node/relation provides the type
-            idType = item[1].slice(0,1);
-
-            // ID has # at the front
-            id = item[2].slice(1);
-            id = fillPlaceholder(idType + id);
-
-            item = [role, item[1], id].join(' ');
-            newList.push(item);
-        });
-
-        return newList.join(', ');
-    }
-
-    // arbitrary node list of form: #ID,#ID,#ID...
-    function parseWarning20(list) {
-        var newList = [];
-        var items = list.split(',');
-
-        items.forEach(function(item) {
-            // ID has # at the front
-            var id = fillPlaceholder('n' + item.slice(1));
-            newList.push(id);
-        });
-
-        return newList.join(', ');
-    }
-
     if (!(entity instanceof krError)) return;
 
     // find the matching template from the error schema
@@ -183,27 +98,8 @@ export function parseErrorDescriptions(entity) {
 
         // link IDs if present in the group
         idType = 'IDs' in errorTemplate ? errorTemplate.IDs[index-1] : '';
-        if (idType) {
-            switch (idType) {
-                // simple case just needs a linking span
-                case 'n':
-                case 'w':
-                case 'r':
-                    group = fillPlaceholder(idType + group);
-                    break;
-                // some errors have more complex ID lists/variance
-                case '211':
-                    group = parseError211(group);
-                    break;
-                case '231':
-                    group = parseError231(group);
-                    break;
-                case '294':
-                    group = parseError294(group);
-                    break;
-                case '20':
-                    group = parseWarning20(group);
-            }
+        if (idType && group) {
+            group = parseError(group, idType);
         } else if (html_re.test(group)) {
             // escape any html in non-IDs
             group = '\\' +  group + '\\';

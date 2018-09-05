@@ -877,7 +877,7 @@ en:
             description: 'This bridge doesn''t have a tag in common with its surrounding ways that shows the purpose of this bridge. There should be one of these tags: {var1}.'
           _370:
             title: 'doubled places'
-            description: 'This node has tags in common with the surrounding way #{var1} {var2}and seems to be redundant'
+            description: 'This node has tags in common with the surrounding way #{var1} {var2}and seems to be redundant.'
           _380:
             title: 'non-physical use of sport-tag'
             description: 'This way is tagged "sport"="{var1}" but has no physical tag like e.g. leisure, building, amenity or highway.'
@@ -887,6 +887,7 @@ en:
           _401:
             title: 'missing turn restriction'
             description: 'ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}.'
+            addition: ' from way {var3} to {var4}.'
           _402:
             title: 'impossible angles'
             description: 'this way bends in a very sharp angle here.'
