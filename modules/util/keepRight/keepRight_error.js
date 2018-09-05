@@ -51,37 +51,8 @@ var keepRightSchemaFromWeb = {
 };
 
 export function parseErrorDescriptions(entity) {
-    if (!(entity instanceof krError)) return;
-
-    var _220 = false;
-    var _splitVar2;
-    var _splitVar3;
-    var _401 = false;
-
-    // find the matching template from the error schema
-    var errorType = '_' + entity.error_type;
-    var matchingTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
-    if (!matchingTemplate) return;
-
-    // handle special cases
-    // error _170
-    if (errorType === '_170') { return { var1: entity.description }; }
-
-    // error _220
-    if (errorType === '_220')  { _220 = true; }
-
-    if (errorType === '_401') { _401 = true; }
-
-    // tokenize descriptions
-    var errorDescription = entity.description.split(' ');
-    var templateDescription = matchingTemplate.description.split(' ');
-
-    var parsedDescriptions = [];
-    var variable_re = new RegExp(/{\$[0-9]}/);
+    var parsedDetails = {};
     var html_re = new RegExp(/<\/[a-z][\s\S]*>/);
-    var span_re = new RegExp(/<\/span>/);
-    var digit_re = new RegExp(/^\d+$/);
-
     var commonEntities = [
         'node',
         'way',
@@ -92,100 +63,161 @@ export function parseErrorDescriptions(entity) {
         'riverbank'
     ]; // TODO: expand this list, or implement a different translation function
 
+    var errorType;
+    var errorTemplate;
+    var errorDescription;
+    var errorRegex;
+    var errorMatch;
+
     function fillPlaceholder(d) { return '<span><a class="kr_error_description-id">' + d + '</a></span>'; }
 
-    function getEntityBase(lastWord) {
+    // arbitrary node list of form: #ID, #ID, #ID...
+    function parseError211(list) {
+        var newList = [];
+        var items = list.split(', ');
 
-        var result;
-        commonEntities.forEach(function(entity) {
-            if (entity.includes(lastWord)) { result = entity; }
-            return;
+        items.forEach(function(item) {
+            // ID has # at the front
+            var id = fillPlaceholder('n' + item.slice(1));
+            newList.push(id);
         });
 
-        if (result) {
-            return result.includes('node') ? 'n' :
-                result.includes('way') ? 'w' :
-                result.includes('relation') ? 'r' : null;
-
-        }
-         // special handling for error _401
-        else if (_401 && parsedDescriptions[0]) { return 'w'; } // hacky check to see if var1 id is entered
-        return result;
+        return newList.join(', ');
     }
 
-    function isID(word, i) {
-        // select just numeric part of id
-        if (word.charAt(0) === '#' || errorDescription[i-1] === '(id') { // NOTE: hacky way of selecting the token before
-            return word.replace(/\D/g,'');
-        }
-        // if it's just an id (e.g., error _401)
-        else if (digit_re.test(word) && _401) { return word; }
-        return false;
+    // arbitrary way list of form: #ID(layer),#ID(layer),#ID(layer)...
+    function parseError231(list) {
+        var newList = [];
+        var items = list.split(',');
+
+        items.forEach(function(item) {
+            var id;
+            var layer;
+
+            // item of form "#ID(layer)"
+            item = item.split('(');
+
+            // ID has # at the front
+            id = item[0].slice(1);
+            id = fillPlaceholder('w' + id);
+
+            // layer has trailing )
+            layer = item[1].slice(0,-1);
+
+            // TODO: translation
+            newList.push(id + ' (layer: ' + layer + ')');
+        });
+
+        return newList.join(', ');
     }
 
-    function getIDType(i) {
-        var lastWord = errorDescription[i-1];
-        var secondLastWord = errorDescription[i-2];
-        if (lastWord) { return getEntityBase(lastWord) || getEntityBase(lastWord.slice(0, -1)) || getEntityBase(secondLastWord); }
+    // arbitrary node/relation list of form: from node #ID,to relation #ID,to node #ID...
+    function parseError294(list) {
+        var newList = [];
+        var items = list.split(',');
 
-        return getEntityBase(parsedDescriptions.slice(-1)[0].split(' ').slice(-1)[0]);
+        items.forEach(function(item) {
+            var role;
+            var idType;
+            var id;
+
+            // item of form "from/to node/relation #ID"
+            item = item.split(' ');
+
+            // to/from role is more clear in quotes
+            role = '"' + item[0] + '"';
+
+            // first letter of node/relation provides the type
+            idType = item[1].slice(0,1);
+
+            // ID has # at the front
+            id = item[2].slice(1);
+            id = fillPlaceholder(idType + id);
+
+            item = [role, item[1], id].join(' ');
+            newList.push(item);
+        });
+
+        return newList.join(', ');
     }
 
-    templateDescription.forEach(function(word, index) {
-        if (!variable_re.test(word)) return;
+    // arbitrary node list of form: #ID,#ID,#ID...
+    function parseWarning20(list) {
+        var newList = [];
+        var items = list.split(',');
 
-        // get the word at this index, and at the next index value
-        var nextWord = templateDescription[index + 1] ? templateDescription[index + 1] : null;
+        items.forEach(function(item) {
+            // ID has # at the front
+            var id = fillPlaceholder('n' + item.slice(1));
+            newList.push(id);
+        });
 
-        var parsedPhrase = '';
+        return newList.join(', ');
+    }
 
-        // parse error description words
-        for (var i = index; i <= errorDescription.length - 1;  i++) {
-            if (errorDescription[i] !== nextWord) {
-                var currWord = errorDescription[i];
+    if (!(entity instanceof krError)) return;
 
-                // if the word is an id, clean and link it
-                if (isID(currWord, i)) {
-                    // get the entity type of the id
-                    var base = getIDType(i);
-                    // wrap id with linking span
-                    currWord = fillPlaceholder(base + currWord);
-                }
+    // find the matching template from the error schema
+    errorType = '_' + entity.error_type;
+    errorTemplate = errorTypes.errors[errorType] || errorTypes.warnings[errorType];
+    if (!errorTemplate) return;
 
-                // if any variables contain common words, like node, way, relation, translate those
-                if (commonEntities.includes(currWord)) {
-                    currWord = t('QA.keepRight.entities.' + currWord);
-                }
+    // some descriptions are just fixed text
+    if (!('regex' in errorTemplate)) return;
 
-                // special handling for error _220
-                if (_220 && index === 4) {
-                    _splitVar2 = currWord.split('=')[0];
-                    _splitVar3 = currWord.split('=')[1];
-                    parsedDescriptions.push(_splitVar2);
-                    parsedDescriptions.push(_splitVar3);
+    // regex pattern should match description with variable details captured as groups
+    errorDescription = entity.description;
+    errorRegex = new RegExp(errorTemplate.description);
+    errorMatch = errorRegex.exec(errorDescription);
+    if (!errorMatch) {
+        // TODO: Remove, for regex dev testing
+        console.log('Unmatched:', errorType, errorDescription, errorRegex);
+        return;
+    }
+
+    errorMatch.forEach(function(group, index) {
+        var idType;
+
+        // index 0 is the whole match, skip it
+        if (!index) return;
+
+        // link IDs if present in the group
+        idType = 'IDs' in errorTemplate ? errorTemplate.IDs[index-1] : '';
+        if (idType) {
+            switch (idType) {
+                // simple case just needs a linking span
+                case 'n':
+                case 'w':
+                case 'r':
+                    group = fillPlaceholder(idType + group);
                     break;
-                }
-
-                // add phrase (or single word) to variable list
-                parsedPhrase += currWord;
+                // some errors have more complex ID lists/variance
+                case '211':
+                    group = parseError211(group);
+                    break;
+                case '231':
+                    group = parseError231(group);
+                    break;
+                case '294':
+                    group = parseError294(group);
+                    break;
+                case '20':
+                    group = parseWarning20(group);
             }
-            // if any variables have html (excluding spans which are added ^), escape them
-            if (html_re.test(parsedPhrase) && !span_re.test(parsedPhrase)) {
-                parsedPhrase = '\\' +  parsedPhrase + '\\';
-            }
-            parsedDescriptions.push(parsedPhrase);
-            break;
+        } else if (html_re.test(group)) {
+            // escape any html in non-IDs
+            group = '\\' +  group + '\\';
         }
+
+        // translate common words (e.g. node, way, relation)
+        if (commonEntities.includes(group)) {
+            group = t('QA.keepRight.entities.' + group);
+        }
+
+        parsedDetails['var' + index] = group;
     });
 
-    return {
-        var1: parsedDescriptions[0] || '',
-        var2: parsedDescriptions[1] || '',
-        var3: parsedDescriptions[2] || '',
-        var4: parsedDescriptions[3] || '',
-        var5: parsedDescriptions[4] || '',
-        var6: parsedDescriptions[5] || '',
-    };
+    return parsedDetails;
 }
 
 

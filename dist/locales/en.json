@@ -833,7 +833,7 @@
                         },
                         "_70": {
                             "title": "missing tags",
-                            "description": "This {var1} has an empty tag: {var2}."
+                            "description": "This {var1} has an empty tag: \"{var2}\"."
                         },
                         "_71": {
                             "title": "way without tags",
@@ -842,6 +842,18 @@
                         "_72": {
                             "title": "node without tags",
                             "description": "This node is not member of any way and doesn't have any tags."
+                        },
+                        "_73": {
+                            "title": "tracktype with no highway tag",
+                            "description": "This way has a \"tracktype\" tag but no \"highway\" tag."
+                        },
+                        "_74": {
+                            "title": "empty tag",
+                            "description": "This {var1} has an empty tag: \"{var2}\"."
+                        },
+                        "_75": {
+                            "title": "name without tags",
+                            "description": "This {var1} has a name (\"{var2}\") but no other tags."
                         },
                         "_90": {
                             "title": "motorways without ref",
@@ -957,7 +969,7 @@
                         },
                         "_211": {
                             "title": "",
-                            "description": "This way contains more than one node at least twice. Nodes are {var1}. This may or may not be an error."
+                            "description": "This way contains more than one node multiple times. Nodes are {var1}. This may or may not be an error."
                         },
                         "_212": {
                             "title": "",
@@ -965,11 +977,11 @@
                         },
                         "_220": {
                             "title": "misspelled tags",
-                            "description": "This {var1} is tagged {var2}={var3} where {var4} looks like {var5}."
+                            "description": "This {var1} is tagged \"{var2}\"=\"{var3}\" where \"{var4}\" looks like \"{var5}\"."
                         },
                         "_221": {
                             "title": "",
-                            "description": "The key of this {var1} tag is key {var2}."
+                            "description": "This {var1} has a tag with key \"key\"=\"{var2}\"."
                         },
                         "_230": {
                             "title": "layer conflicts",
@@ -1021,19 +1033,19 @@
                         },
                         "_292": {
                             "title": "missing from way",
-                            "description": "A turn-restriction needs exactly one {var1} member. This one has {var2}."
+                            "description": "A turn-restriction needs exactly one \"from\" member. This one has {var1}."
                         },
                         "_293": {
                             "title": "missing to way",
-                            "description": "A turn-restriction needs exactly one {var1} member. This one has {var2}."
+                            "description": "A turn-restriction needs exactly one \"to\" member. This one has {var1}."
                         },
                         "_294": {
                             "title": "from or to not a way",
-                            "description": "From- and To-members of turn restrictions need to be ways. {var1}."
+                            "description": "\"from\" and \"to\" members of turn restrictions need to be ways. {var1}."
                         },
                         "_295": {
                             "title": "via is not on the way ends",
-                            "description": "via (node #{var1}) is not the first or the last member of from (way #{var2})."
+                            "description": "\"via\" (node #{var1}) is not the first or the last member of \"from\" (way #{var2})."
                         },
                         "_296": {
                             "title": "wrong restriction angle",
@@ -1057,11 +1069,11 @@
                         },
                         "_312": {
                             "title": "wrong direction",
-                            "description": "If this roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this roundabout is in a country with left-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with right-hand traffic then its orientation goes the wrong way around | If this mini_roundabout is in a country with left-hand traffic then its orientation goes the wrong way around."
+                            "description": "If this {var1} is in a country with {var2}-hand traffic then its orientation goes the wrong way around"
                         },
                         "_313": {
                             "title": "faintly connected",
-                            "description": "This roundabout has only {var1} other roads connected. Roundabouts typically have three."
+                            "description": "This roundabout has only {var1} other road(s) connected. Roundabouts typically have 3 or more."
                         },
                         "_320": {
                             "title": "*_link connections",
@@ -1073,11 +1085,11 @@
                         },
                         "_370": {
                             "title": "doubled places",
-                            "description": "This node has tags in common with the surrounding way #{var1} and seems to be redundand | This node has tags in common with the surrounding way #{var1} (including the name {var2}) and seems to be redundand."
+                            "description": "This node has tags in common with the surrounding way #{var1} {var2}and seems to be redundant"
                         },
                         "_380": {
                             "title": "non-physical use of sport-tag",
-                            "description": "This way is tagged {var1} but has no physical tag like e.g. leisure, building, amenity or highway."
+                            "description": "This way is tagged \"sport\"=\"{var1}\" but has no physical tag like e.g. leisure, building, amenity or highway."
                         },
                         "_400": {
                             "title": "geometry glitches",
@@ -1085,7 +1097,7 @@
                         },
                         "_401": {
                             "title": "missing turn restriction",
-                            "description": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var1} to {var2}."
+                            "description": "ways {var1} and {var2} join in a very sharp angle here and there is no oneway tag or turn restriction that prevents turning from way {var3} to {var4}."
                         },
                         "_402": {
                             "title": "impossible angles",
@@ -1115,7 +1127,7 @@
                         },
                         "_60": {
                             "title": "depreciated tags",
-                            "description": "This {var1} uses deprecated tag {var2}={var3}. Please use {var4} instead!"
+                            "description": "This {var1} uses deprecated tag \"{var2}\"=\"{var3}\". Please use {var4} instead!"
                         },
                         "_300": {
                             "title": "missing maxspeed",
@@ -1123,7 +1135,7 @@
                         },
                         "_360": {
                             "title": "language unknown",
-                            "description": "It would be nice if this {var1} had an additional tag name:XX={var2} where XX shows the language of its name {var2}."
+                            "description": "It would be nice if this {var1} had an additional tag \"name:XX\"=\"{var2}\" where XX shows the language of its name \"{var2}\"."
                         },
                         "_390": {
                             "title": "missing tracktype",
