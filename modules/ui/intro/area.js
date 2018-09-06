@@ -17,12 +17,12 @@ import { icon, pad, transitionTime } from './helper';
 
 
 export function uiIntroArea(context, reveal) {
-    var dispatch = d3_dispatch('done'),
-        playground = [-85.63552, 41.94159],
-        playgroundPreset = context.presets().item('leisure/playground'),
-        descriptionField = context.presets().field('description'),
-        timeouts = [],
-        areaId;
+    var dispatch = d3_dispatch('done');
+    var playground = [-85.63552, 41.94159];
+    var playgroundPreset = context.presets().item('leisure/playground');
+    var descriptionField = context.presets().field('description');
+    var timeouts = [];
+    var _areaID;
 
 
     var chapter = {
@@ -51,7 +51,7 @@ export function uiIntroArea(context, reveal) {
     function addArea() {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
-        areaId = null;
+        _areaID = null;
 
         var msec = transitionTime(playground, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
@@ -85,7 +85,7 @@ export function uiIntroArea(context, reveal) {
             return chapter.restart();
         }
 
-        areaId = null;
+        _areaID = null;
         context.map().zoomEase(19.5, 500);
 
         timeout(function() {
@@ -120,7 +120,7 @@ export function uiIntroArea(context, reveal) {
             return chapter.restart();
         }
 
-        areaId = null;
+        _areaID = null;
         revealPlayground(playground,
             t('intro.areas.continue_playground', { alt: uiCmd.display('⌥') }),
             { duration: 250 }
@@ -144,7 +144,7 @@ export function uiIntroArea(context, reveal) {
                     return;
                 }
             } else if (mode.id === 'select') {
-                areaId = context.selectedIDs()[0];
+                _areaID = context.selectedIDs()[0];
                 return continueTo(searchPresets);
             } else {
                 return chapter.restart();
@@ -164,7 +164,7 @@ export function uiIntroArea(context, reveal) {
             return chapter.restart();
         }
 
-        areaId = null;
+        _areaID = null;
         revealPlayground(playground,
             t('intro.areas.finish_playground'), { duration: 250 }
         );
@@ -181,7 +181,7 @@ export function uiIntroArea(context, reveal) {
             if (mode.id === 'draw-area') {
                 return;
             } else if (mode.id === 'select') {
-                areaId = context.selectedIDs()[0];
+                _areaID = context.selectedIDs()[0];
                 return continueTo(searchPresets);
             } else {
                 return chapter.restart();
@@ -197,12 +197,12 @@ export function uiIntroArea(context, reveal) {
 
 
     function searchPresets() {
-        if (!areaId || !context.hasEntity(areaId)) {
+        if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
-            context.enter(modeSelect(context, [areaId]));
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
+            context.enter(modeSelect(context, [_areaID]));
         }
 
         // disallow scrolling
@@ -222,14 +222,14 @@ export function uiIntroArea(context, reveal) {
         }, 400);  // after preset list pane visible..
 
         context.on('enter.intro', function(mode) {
-            if (!areaId || !context.hasEntity(areaId)) {
+            if (!_areaID || !context.hasEntity(_areaID)) {
                 return continueTo(addArea);
             }
 
             var ids = context.selectedIDs();
-            if (mode.id !== 'select' || !ids.length || ids[0] !== areaId) {
+            if (mode.id !== 'select' || !ids.length || ids[0] !== _areaID) {
                 // keep the user's area selected..
-                context.enter(modeSelect(context, [areaId]));
+                context.enter(modeSelect(context, [_areaID]));
 
                 // reset pane, in case user somehow happened to change it..
                 d3_select('.inspector-wrap .panewrap').style('right', '-100%');
@@ -278,11 +278,11 @@ export function uiIntroArea(context, reveal) {
 
 
     function clickAddField() {
-        if (!areaId || !context.hasEntity(areaId)) {
+        if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
 
@@ -299,7 +299,7 @@ export function uiIntroArea(context, reveal) {
 
             // It's possible for the user to add a description in a previous step..
             // If they did this already, just continue to next step.
-            var entity = context.entity(areaId);
+            var entity = context.entity(_areaID);
             if (entity.tags.description) {
                 return continueTo(play);
             }
@@ -351,11 +351,11 @@ export function uiIntroArea(context, reveal) {
 
 
     function chooseDescriptionField() {
-        if (!areaId || !context.hasEntity(areaId)) {
+        if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
 
@@ -400,11 +400,11 @@ export function uiIntroArea(context, reveal) {
 
 
     function describePlayground() {
-        if (!areaId || !context.hasEntity(areaId)) {
+        if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
 
@@ -432,11 +432,11 @@ export function uiIntroArea(context, reveal) {
 
 
     function retryChooseDescription() {
-        if (!areaId || !context.hasEntity(areaId)) {
+        if (!_areaID || !context.hasEntity(_areaID)) {
             return addArea();
         }
         var ids = context.selectedIDs();
-        if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== _areaID) {
             return searchPresets();
         }
 
