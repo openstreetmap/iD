@@ -1,5 +1,5 @@
 {
-    "icon": "maki-car",
+    "icon": "fas-charging-station",
     "fields": [
         "operator",
         "capacity"

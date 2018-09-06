@@ -78,7 +78,8 @@
       "key": "advertising",
       "value": "column",
       "description": "Advertising Column",
-      "object_types": ["node", "area"]
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/storage_tank.svg?sanitize=true"
     },
     {
       "key": "aerialway",
@@ -191,7 +192,8 @@
       "key": "aeroway",
       "value": "runway",
       "description": "Runway",
-      "object_types": ["way", "area"]
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-plane-departure.svg?sanitize=true"
     },
     {
       "key": "aeroway",
@@ -412,7 +414,7 @@
       "value": "charging_station",
       "description": "Charging Station",
       "object_types": ["node"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-charging-station.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -1597,7 +1599,8 @@
       "key": "building",
       "value": "hut",
       "description": "Hut",
-      "object_types": ["area"]
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"
     },
     {
       "key": "building",
@@ -1952,7 +1955,7 @@
       "value": "painter",
       "description": "Painter",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-paint-roller.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -3209,7 +3212,7 @@
       "value": "fitness_centre",
       "description": "Gym / Fitness Center",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-dumbbell.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3611,7 +3614,8 @@
       "key": "man_made",
       "value": "bridge",
       "description": "Bridge",
-      "object_types": ["area"]
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -4205,7 +4209,7 @@
       "value": "lawyer",
       "description": "Law Office",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/suitcase-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-balance-scale.svg?sanitize=true"
     },
     {
       "key": "lawyer",
@@ -4219,7 +4223,7 @@
       "value": "moving_company",
       "description": "Moving Company Office",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/warehouse-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-people-carry.svg?sanitize=true"
     },
     {
       "key": "office",
@@ -5243,7 +5247,7 @@
       "value": "furniture",
       "description": "Furniture Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-couch.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5320,7 +5324,7 @@
       "value": "houseware",
       "description": "Houseware Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-blender.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5369,7 +5373,7 @@
       "value": "locksmith",
       "description": "Locksmith",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-key.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5460,7 +5464,7 @@
       "value": "optician",
       "description": "Optician",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-glasses.svg?sanitize=true"
     },
     {
       "key": "organic",
@@ -5481,7 +5485,7 @@
       "value": "paint",
       "description": "Paint Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-paint-roller.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5600,7 +5604,7 @@
       "value": "storage_rental",
       "description": "Storage Rental",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
     },
     {
       "key": "shop",
