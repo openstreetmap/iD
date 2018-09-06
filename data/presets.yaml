@@ -1303,6 +1303,115 @@ en:
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
+      seamark/beacon_isolated_danger/shape:
+        # 'seamark:beacon_isolated_danger:shape=*'
+        label: Shape
+      seamark/beacon_lateral/category:
+        # 'seamark:beacon_lateral:category=*'
+        label: Category
+        options:
+          # 'seamark:beacon_lateral:category=danger_left'
+          danger_left: Danger Left
+          # 'seamark:beacon_lateral:category=danger_right'
+          danger_right: Danger Right
+          # 'seamark:beacon_lateral:category=port'
+          port: Port
+          # 'seamark:beacon_lateral:category=starboard'
+          starboard: Starboard
+          # 'seamark:beacon_lateral:category=waterway_left'
+          waterway_left: Waterway Left
+          # 'seamark:beacon_lateral:category=waterway_right'
+          waterway_right: Waterway Right
+      seamark/beacon_lateral/colour:
+        # 'seamark:beacon_lateral:colour=*'
+        label: Colour
+        options:
+          # 'seamark:beacon_lateral:colour=green'
+          green: Green
+          # 'seamark:beacon_lateral:colour=grey'
+          grey: Grey
+          # 'seamark:beacon_lateral:colour=red'
+          red: Red
+      seamark/beacon_lateral/shape:
+        # 'seamark:beacon_lateral:shape=*'
+        label: Shape
+      seamark/beacon_lateral/system:
+        # 'seamark:beacon_lateral:system=*'
+        label: System
+        options:
+          # 'seamark:beacon_lateral:system=cevni'
+          cevni: CEVNI
+          # 'seamark:beacon_lateral:system=iala-a'
+          iala-a: IALA A
+          # 'seamark:beacon_lateral:system=iala-b'
+          iala-b: IALA B
+          # 'seamark:beacon_lateral:system=other'
+          other: Other
+      seamark/buoy_lateral/category:
+        # 'seamark:buoy_lateral:category=*'
+        label: Category
+        options:
+          # 'seamark:buoy_lateral:category=channel_left'
+          channel_left: Channel Left
+          # 'seamark:buoy_lateral:category=channel_right'
+          channel_right: Channel Right
+          # 'seamark:buoy_lateral:category=danger_left'
+          danger_left: Danger Left
+          # 'seamark:buoy_lateral:category=danger_right'
+          danger_right: Danger Right
+          # 'seamark:buoy_lateral:category=port'
+          port: Port
+          # 'seamark:buoy_lateral:category=preferred_channel_port'
+          preferred_channel_port: Preferred Channel Port
+          # 'seamark:buoy_lateral:category=preferred_channel_starboard'
+          preferred_channel_starboard: Preferred Channel Starboard
+          # 'seamark:buoy_lateral:category=starboard'
+          starboard: Starboard
+          # 'seamark:buoy_lateral:category=waterway_left'
+          waterway_left: Waterway Left
+          # 'seamark:buoy_lateral:category=waterway_right'
+          waterway_right: Waterway Right
+      seamark/buoy_lateral/colour:
+        # 'seamark:buoy_lateral:colour=*'
+        label: Colour
+        options:
+          # 'seamark:buoy_lateral:colour=green'
+          green: Green
+          # 'seamark:buoy_lateral:colour=green;red;green'
+          green;red;green: Green-Red-Green
+          # 'seamark:buoy_lateral:colour=green;white;green;white'
+          green;white;green;white: Green-White-Green-White
+          # 'seamark:buoy_lateral:colour=red'
+          red: Red
+          # 'seamark:buoy_lateral:colour=red;green;red'
+          red;green;red: Red-Green-Red
+          # 'seamark:buoy_lateral:colour=red;white;red;white'
+          red;white;red;white: Red-White-Red-White
+          # 'seamark:buoy_lateral:colour=white'
+          white: White
+          # 'seamark:buoy_lateral:colour=yellow'
+          yellow: Yellow
+      seamark/buoy_lateral/shape:
+        # 'seamark:buoy_lateral:shape=*'
+        label: Shape
+      seamark/buoy_lateral/system:
+        # 'seamark:buoy_lateral:system=*'
+        label: System
+        options:
+          # 'seamark:buoy_lateral:system=cevni'
+          cevni: CEVNI
+          # 'seamark:buoy_lateral:system=iala-a'
+          iala-a: IALA A
+          # 'seamark:buoy_lateral:system=iala-b'
+          iala-b: IALA B
+          # 'seamark:buoy_lateral:system=other'
+          other: Other
+      seamark/mooring/category:
+        # 'seamark:mooring:category=*'
+        label: Category
+      seamark/type:
+        # 'seamark:type=*'
+        label: Seamark
       seasonal:
         # seasonal=*
         label: Seasonal
@@ -5128,6 +5237,39 @@ en:
         # route=ferry
         name: Ferry Route
         terms: '<translate with synonyms or related terms for ''Ferry Route'', separated by commas>'
+      seamark:
+        # 'seamark:type=*'
+        name: Seamark
+      seamark/beacon_isolated_danger:
+        # 'seamark:type=beacon_isolated_danger'
+        name: Danger Beacon
+        # 'terms: beacon isolated danger,isolated danger beacon,iala'
+        terms: '<translate with synonyms or related terms for ''Danger Beacon'', separated by commas>'
+      seamark/beacon_lateral:
+        # 'seamark:type=beacon_lateral'
+        name: Channel Beacon
+        # 'terms: lateral beacon,beacon lateral,cevni,channel marker,iala,lateral mark'
+        terms: '<translate with synonyms or related terms for ''Channel Beacon'', separated by commas>'
+      seamark/buoy_lateral:
+        # 'seamark:type=buoy_lateral'
+        name: Channel Buoy
+        # 'terms: lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark'
+        terms: '<translate with synonyms or related terms for ''Channel Buoy'', separated by commas>'
+      seamark/buoy_lateral/green:
+        # 'seamark:type=buoy_lateral, seamark:buoy_lateral:colour=green'
+        name: Green Buoy
+        # 'terms: lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark'
+        terms: '<translate with synonyms or related terms for ''Green Buoy'', separated by commas>'
+      seamark/buoy_lateral/red:
+        # 'seamark:type=buoy_lateral, seamark:buoy_lateral:colour=red'
+        name: Red Buoy
+        # 'terms: lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark'
+        terms: '<translate with synonyms or related terms for ''Red Buoy'', separated by commas>'
+      seamark/mooring:
+        # 'seamark:type=mooring'
+        name: Mooring
+        # 'terms: dolphin,pile,bollard,buoy,post'
+        terms: '<translate with synonyms or related terms for ''Mooring'', separated by commas>'
       shop:
         # shop=*
         name: Shop

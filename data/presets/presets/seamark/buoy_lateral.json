@@ -1,0 +1,26 @@
+{
+    "fields": [
+        "ref",
+        "operator",
+        "seamark/buoy_lateral/colour",
+        "seamark/buoy_lateral/category",
+        "seamark/buoy_lateral/shape",
+        "seamark/buoy_lateral/system"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "lateral buoy",
+    	"buoy lateral",
+	 	"cevni",
+     	"channel marker",
+        "iala",
+        "lateral mark"
+    ],
+    "tags": {
+        "seamark:type": "buoy_lateral"
+    },
+    "name": "Channel Buoy"
+}

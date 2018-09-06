@@ -1,0 +1,20 @@
+{
+    "fields": [
+        "ref",
+        "operator",
+        "seamark/beacon_isolated_danger/shape"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "beacon isolated danger",
+    	"isolated danger beacon",
+        "iala"
+    ],
+    "tags": {
+        "seamark:type": "beacon_isolated_danger"
+    },
+    "name": "Danger Beacon"
+}

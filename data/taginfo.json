@@ -59,6 +59,12 @@
       "object_types": ["node", "way"]
     },
     {
+      "key": "seamark:type",
+      "description": "Seamark",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/harbor-15.svg?sanitize=true"
+    },
+    {
       "key": "waterway",
       "description": "Waterway, Type",
       "object_types": ["node", "way", "area"]
@@ -4834,6 +4840,42 @@
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/ferry-line.svg?sanitize=true"
     },
     {
+      "key": "seamark:type",
+      "value": "beacon_isolated_danger",
+      "description": "Danger Beacon",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:type",
+      "value": "beacon_lateral",
+      "description": "Channel Beacon",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:type",
+      "value": "buoy_lateral",
+      "description": "Channel Buoy",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green",
+      "description": "Green Buoy, Colour",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red",
+      "description": "Red Buoy, Colour",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:type",
+      "value": "mooring",
+      "description": "Mooring",
+      "object_types": ["node"]
+    },
+    {
       "key": "shop",
       "description": "Shop, Type",
       "object_types": ["node", "area"],
@@ -6942,6 +6984,175 @@
       "description": "Hiking Difficulty"
     },
     {"key": "sanitary_dump_station", "description": "Toilet Disposal"},
+    {"key": "seamark:beacon_isolated_danger:shape", "description": "Shape"},
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "waterway_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "waterway_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "danger_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "danger_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:colour",
+      "value": "red",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:beacon_lateral:colour",
+      "value": "green",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:beacon_lateral:colour",
+      "value": "grey",
+      "description": "Colour"
+    },
+    {"key": "seamark:beacon_lateral:shape", "description": "Shape"},
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "iala-a",
+      "description": "System"
+    },
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "iala-b",
+      "description": "System"
+    },
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "cevni",
+      "description": "System"
+    },
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "other",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "channel_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "channel_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "waterway_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "waterway_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "danger_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "danger_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "preferred_channel_port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "preferred_channel_starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red;white;red;white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green;white;green;white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red;green;red",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green;red;green",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "yellow",
+      "description": "Colour"
+    },
+    {"key": "seamark:buoy_lateral:shape", "description": "Shape"},
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "iala-a",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "iala-b",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "cevni",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "other",
+      "description": "System"
+    },
+    {"key": "seamark:mooring:category", "description": "Category"},
     {"key": "seasonal", "description": "Seasonal"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},
