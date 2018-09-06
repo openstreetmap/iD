@@ -54,9 +54,9 @@ export function behaviorLasso(context) {
         function lassoed() {
             if (!lasso) return [];
 
-            var graph = context.graph(),
-                bounds = lasso.extent().map(context.projection.invert),
-                extent = geoExtent(normalize(bounds[0], bounds[1]));
+            var graph = context.graph();
+            var bounds = lasso.extent().map(context.projection.invert);
+            var extent = geoExtent(normalize(bounds[0], bounds[1]));
 
             return _map(context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&

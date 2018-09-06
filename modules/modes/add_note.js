@@ -6,7 +6,6 @@ import { services } from '../services';
 
 
 export function modeAddNote(context) {
-
     var mode = {
         id: 'add-note',
         button: 'note',

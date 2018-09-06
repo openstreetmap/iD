@@ -9,7 +9,8 @@ import { uiFlash } from '../ui';
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation() {
-    var _operation, keybinding;
+    var keybinding;
+    var _operation;
 
     var behavior = function () {
         if (_operation && _operation.available()) {
