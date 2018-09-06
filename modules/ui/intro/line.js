@@ -161,11 +161,6 @@ export function uiIntroLine(context, reveal) {
         }, 550);  // after easing..
 
         context.history().on('change.intro', function() {
-            var entity = _tulipRoadID && context.hasEntity(_tulipRoadID);
-            if (!entity) {
-                return chapter.restart();
-            }
-
             if (isLineConnected()) {
                 continueTo(continueLine);
             }
