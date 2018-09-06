@@ -844,8 +844,8 @@
                             "description": "This node is not member of any way and doesn't have any tags."
                         },
                         "_73": {
-                            "title": "tracktype with no highway tag",
-                            "description": "This way has a \"tracktype\" tag but no \"highway\" tag."
+                            "title": "no highway tag",
+                            "description": "This way has a \"{var1}\" tag but no \"highway\" tag."
                         },
                         "_74": {
                             "title": "empty tag",

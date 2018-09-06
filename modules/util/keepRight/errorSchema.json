@@ -47,7 +47,8 @@
             },
             "_73": {
                 "title": "",
-                "description": "This way has a tracktype tag but no highway tag"
+                "description": "This way has a ([\\w:]+) tag but no highway tag",
+                "regex": true
             },
             "_74": {
                 "title": "missing tags",
