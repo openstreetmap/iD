@@ -1963,6 +1963,9 @@
                         "pond": "Pond"
                     }
                 },
+                "fireplace": {
+                    "label": "Fireplace"
+                },
                 "fitness_station": {
                     "label": "Equipment Type"
                 },
@@ -3345,10 +3348,6 @@
                     "name": "Car Parking",
                     "terms": ""
                 },
-                "amenity/pavilion": {
-                    "name": "Pavilion",
-                    "terms": ""
-                },
                 "amenity/pharmacy": {
                     "name": "Pharmacy",
                     "terms": "apothecary,drug*,med*,prescription"
@@ -3448,6 +3447,18 @@
                 "amenity/shelter": {
                     "name": "Shelter",
                     "terms": "lean-to,gazebo,picnic"
+                },
+                "amenity/shelter/gazebo": {
+                    "name": "Gazebo",
+                    "terms": ""
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Lean-To",
+                    "terms": ""
+                },
+                "amenity/shelter/pavilion": {
+                    "name": "Pavilion",
+                    "terms": ""
                 },
                 "amenity/shower": {
                     "name": "Shower",

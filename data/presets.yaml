@@ -592,6 +592,9 @@ en:
           underground: Underground
           # 'fire_hydrant:type=wall'
           wall: Wall
+      fireplace:
+        # fireplace=*
+        label: Fireplace
       fitness_station:
         # fitness_station=*
         label: Equipment Type
@@ -2177,10 +2180,6 @@ en:
         # amenity=parking_space
         name: Parking Space
         terms: '<translate with synonyms or related terms for ''Parking Space'', separated by commas>'
-      amenity/pavilion:
-        # 'amenity=shelter, shelter_type=pavilion'
-        name: Pavilion
-        terms: '<translate with synonyms or related terms for ''Pavilion'', separated by commas>'
       amenity/pharmacy:
         # amenity=pharmacy
         name: Pharmacy
@@ -2312,6 +2311,18 @@ en:
         name: Shelter
         # 'terms: lean-to,gazebo,picnic'
         terms: '<translate with synonyms or related terms for ''Shelter'', separated by commas>'
+      amenity/shelter/gazebo:
+        # 'amenity=shelter, shelter_type=gazebo'
+        name: Gazebo
+        terms: '<translate with synonyms or related terms for ''Gazebo'', separated by commas>'
+      amenity/shelter/lean_to:
+        # 'amenity=shelter, shelter_type=lean_to'
+        name: Lean-To
+        terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
+      amenity/shelter/pavilion:
+        # 'amenity=shelter, shelter_type=pavilion'
+        name: Pavilion
+        terms: '<translate with synonyms or related terms for ''Pavilion'', separated by commas>'
       amenity/shower:
         # amenity=shower
         name: Shower
