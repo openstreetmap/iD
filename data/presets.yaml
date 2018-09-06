@@ -2460,11 +2460,16 @@ en:
         name: Newspaper Vending Machine
         # 'terms: newspaper'
         terms: '<translate with synonyms or related terms for ''Newspaper Vending Machine'', separated by commas>'
+      amenity/vending_machine/parcel_pickup:
+        # 'amenity=vending_machine, vending=parcel_pickup'
+        name: Parcel Pickup Locker
+        # 'terms: amazon,locker,mail,parcel,pickup'
+        terms: '<translate with synonyms or related terms for ''Parcel Pickup Locker'', separated by commas>'
       amenity/vending_machine/parcel_pickup_dropoff:
         # 'amenity=vending_machine, vending=parcel_pickup;parcel_mail_in'
-        name: Parcel Pickup/Dropoff Vending Machine
-        # 'terms: parcel,mail,pickup'
-        terms: '<translate with synonyms or related terms for ''Parcel Pickup/Dropoff Vending Machine'', separated by commas>'
+        name: Parcel Pickup/Dropoff Locker
+        # 'terms: mail,parcel,pickup'
+        terms: '<translate with synonyms or related terms for ''Parcel Pickup/Dropoff Locker'', separated by commas>'
       amenity/vending_machine/parking_tickets:
         # 'amenity=vending_machine, vending=parking_tickets'
         name: Parking Ticket Vending Machine

@@ -3573,8 +3573,12 @@
                     "terms": "newspaper"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Parcel Pickup/Dropoff Vending Machine",
-                    "terms": "parcel,mail,pickup"
+                    "name": "Parcel Pickup/Dropoff Locker",
+                    "terms": "mail,parcel,pickup"
+                },
+                "amenity/vending_machine/parcel_pickup": {
+                    "name": "Parcel Pickup Locker",
+                    "terms": "amazon,locker,mail,parcel,pickup"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parking Ticket Vending Machine",

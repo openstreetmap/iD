@@ -1082,7 +1082,14 @@
     {
       "key": "vending",
       "value": "parcel_pickup;parcel_mail_in",
-      "description": "Parcel Pickup/Dropoff Vending Machine",
+      "description": "Parcel Pickup/Dropoff Locker",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/vending_machine.svg?sanitize=true"
+    },
+    {
+      "key": "vending",
+      "value": "parcel_pickup",
+      "description": "Parcel Pickup Locker",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/vending_machine.svg?sanitize=true"
     },
