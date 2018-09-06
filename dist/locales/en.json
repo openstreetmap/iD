@@ -2556,6 +2556,52 @@
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
+                "seamark/buoy_lateral/category": {
+                    "label": "Category",
+                    "options": {
+                        "port": "Port",
+                        "starboard": "Starboard",
+                        "channel_left": "Channel Left",
+                        "channel_right": "Channel Right",
+                        "waterway_left": "Waterway Left",
+                        "waterway_right": "Waterway Right",
+                        "danger_left": "Danger Left",
+                        "danger_right": "Danger Right",
+                        "preferred_channel_port": "Preferred Channel Port",
+                        "preferred_channel_starboard": "Preferred Channel Starboard"
+                    }
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Colour",
+                    "options": {
+                        "red": "Red",
+                        "green": "Green",
+                        "red;white;red;white": "Red-White-Red-White",
+                        "green;white;green;white": "Green-White-Green-White",
+                        "red;green;red": "Red-Green-Red",
+                        "green;red;green": "Green-Red-Green",
+                        "white": "White",
+                        "yellow": "Yellow"
+                    }
+                },
+                "seamark/buoy_lateral/shape": {
+                    "label": "Shape",
+                    "options": {
+                        "spar": "Spar",
+                        "conical": "Conical",
+                        "can": "Can",
+                        "pillar": "Pillar",
+                        "spherical": "Spherical"
+                    }
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Other"
+                    }
+                },
                 "seasonal": {
                     "label": "Seasonal"
                 },
@@ -5931,6 +5977,10 @@
                 "route/ferry": {
                     "name": "Ferry Route",
                     "terms": ""
+                },
+                "seamark/type/buoy_lateral": {
+                    "name": "Lateral Buoy",
+                    "terms": "buoy lateral,cevni,channel marker,iala,lateral mark"
                 },
                 "shop": {
                     "name": "Shop",
