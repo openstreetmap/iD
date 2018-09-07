@@ -2082,6 +2082,7 @@ div.combobox {
 }
 .field-help-nav-item.active {
     color: #7092ff;
+    border-bottom: 2px solid;
 }
 .field-help-nav-item:hover {
     color: #597be7;
@@ -3964,6 +3965,7 @@ img.tile-debug {
 }
 .modal-shortcuts .tab.active {
     color: #7092ff;
+    border-bottom: 2px solid;
 }
 .modal-shortcuts .tab:hover {
     color: #597be7;
