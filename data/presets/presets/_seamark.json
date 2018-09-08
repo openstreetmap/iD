@@ -1,0 +1,17 @@
+{
+    "icon": "maki-harbor",
+    "fields": [
+        "seamark/type"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "seamark:type": "*"
+    },
+    "searchable": false,
+    "name": "Seamark"
+}

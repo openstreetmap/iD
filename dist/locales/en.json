@@ -2564,6 +2564,86 @@
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
+                "seamark/beacon_isolated_danger/shape": {
+                    "label": "Shape"
+                },
+                "seamark/beacon_lateral/category": {
+                    "label": "Category",
+                    "options": {
+                        "port": "Port",
+                        "starboard": "Starboard",
+                        "waterway_left": "Waterway Left",
+                        "waterway_right": "Waterway Right",
+                        "danger_left": "Danger Left",
+                        "danger_right": "Danger Right"
+                    }
+                },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Colour",
+                    "options": {
+                        "red": "Red",
+                        "green": "Green",
+                        "grey": "Grey"
+                    }
+                },
+                "seamark/beacon_lateral/shape": {
+                    "label": "Shape"
+                },
+                "seamark/beacon_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "cevni": "CEVNI",
+                        "other": "Other"
+                    }
+                },
+                "seamark/buoy_lateral/category": {
+                    "label": "Category",
+                    "options": {
+                        "port": "Port",
+                        "starboard": "Starboard",
+                        "channel_left": "Channel Left",
+                        "channel_right": "Channel Right",
+                        "waterway_left": "Waterway Left",
+                        "waterway_right": "Waterway Right",
+                        "danger_left": "Danger Left",
+                        "danger_right": "Danger Right",
+                        "preferred_channel_port": "Preferred Channel Port",
+                        "preferred_channel_starboard": "Preferred Channel Starboard"
+                    }
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Colour",
+                    "options": {
+                        "red": "Red",
+                        "green": "Green",
+                        "red;white;red;white": "Red-White-Red-White",
+                        "green;white;green;white": "Green-White-Green-White",
+                        "red;green;red": "Red-Green-Red",
+                        "green;red;green": "Green-Red-Green",
+                        "white": "White",
+                        "yellow": "Yellow"
+                    }
+                },
+                "seamark/buoy_lateral/shape": {
+                    "label": "Shape"
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "cevni": "CEVNI",
+                        "other": "Other"
+                    }
+                },
+                "seamark/mooring/category": {
+                    "label": "Category"
+                },
+                "seamark/type": {
+                    "label": "Seamark"
+                },
                 "seasonal": {
                     "label": "Seasonal"
                 },
@@ -2981,6 +3061,10 @@
                 },
                 "roundabout": {
                     "name": "Roundabout",
+                    "terms": ""
+                },
+                "seamark": {
+                    "name": "Seamark",
                     "terms": ""
                 },
                 "waterway": {
@@ -5946,6 +6030,30 @@
                 "route/ferry": {
                     "name": "Ferry Route",
                     "terms": ""
+                },
+                "seamark/beacon_isolated_danger": {
+                    "name": "Danger Beacon",
+                    "terms": "beacon isolated danger,isolated danger beacon,iala"
+                },
+                "seamark/beacon_lateral": {
+                    "name": "Channel Beacon",
+                    "terms": "lateral beacon,beacon lateral,cevni,channel marker,iala,lateral mark"
+                },
+                "seamark/buoy_lateral": {
+                    "name": "Channel Buoy",
+                    "terms": "lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark"
+                },
+                "seamark/buoy_lateral/green": {
+                    "name": "Green Buoy",
+                    "terms": "lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark"
+                },
+                "seamark/buoy_lateral/red": {
+                    "name": "Red Buoy",
+                    "terms": "lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark"
+                },
+                "seamark/mooring": {
+                    "name": "Mooring",
+                    "terms": "dolphin,pile,bollard,buoy,post"
                 },
                 "shop": {
                     "name": "Shop",
