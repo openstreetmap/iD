@@ -2736,6 +2736,9 @@
                 "surveillance/zone": {
                     "label": "Surveillance Zone"
                 },
+                "swimming_pool": {
+                    "label": "Type"
+                },
                 "switch": {
                     "label": "Type",
                     "options": {

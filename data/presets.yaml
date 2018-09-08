@@ -1519,6 +1519,9 @@ en:
       surveillance/zone:
         # 'surveillance:zone=*'
         label: Surveillance Zone
+      swimming_pool:
+        # swimming_pool=*
+        label: Type
       switch:
         # switch=*
         label: Type

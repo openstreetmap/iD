@@ -7061,6 +7061,7 @@
       "description": "Surveillance Type"
     },
     {"key": "surveillance:zone", "description": "Surveillance Zone"},
+    {"key": "swimming_pool", "description": "Type"},
     {"key": "switch", "value": "mechanical", "description": "Type"},
     {"key": "switch", "value": "circuit_breaker", "description": "Type"},
     {"key": "switch", "value": "disconnector", "description": "Type"},
