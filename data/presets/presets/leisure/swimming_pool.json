@@ -5,7 +5,10 @@
         "access_simple",
         "operator",
         "address",
-        "lit"
+        "lit",
+        "location_pool",
+        "length",
+        "swimming_pool"
     ],
     "geometry": [
         "point",

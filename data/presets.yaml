@@ -873,6 +873,16 @@ en:
       location:
         # location=*
         label: Location
+      location_pool:
+        # location=*
+        label: Location
+        options:
+          # location=indoor
+          indoor: Indoor
+          # location=outdoor
+          outdoor: Outdoor
+          # location=roof
+          roof: Rooftop
       man_made:
         # man_made=*
         label: Type
@@ -1509,6 +1519,9 @@ en:
       surveillance/zone:
         # 'surveillance:zone=*'
         label: Surveillance Zone
+      swimming_pool:
+        # swimming_pool=*
+        label: Type
       switch:
         # switch=*
         label: Type

@@ -6718,6 +6718,9 @@
     {"key": "level", "description": "Level"},
     {"key": "building:levels", "description": "Levels"},
     {"key": "lit", "description": "Lit"},
+    {"key": "location", "value": "outdoor", "description": "Location"},
+    {"key": "location", "value": "indoor", "description": "Location"},
+    {"key": "location", "value": "roof", "description": "Location"},
     {"key": "location", "description": "Location"},
     {"key": "map_size", "description": "Coverage"},
     {"key": "map_type", "description": "Type"},
@@ -7058,6 +7061,7 @@
       "description": "Surveillance Type"
     },
     {"key": "surveillance:zone", "description": "Surveillance Zone"},
+    {"key": "swimming_pool", "description": "Type"},
     {"key": "switch", "value": "mechanical", "description": "Type"},
     {"key": "switch", "value": "circuit_breaker", "description": "Type"},
     {"key": "switch", "value": "disconnector", "description": "Type"},

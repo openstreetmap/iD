@@ -2204,6 +2204,14 @@
                 "lit": {
                     "label": "Lit"
                 },
+                "location_pool": {
+                    "label": "Location",
+                    "options": {
+                        "outdoor": "Outdoor",
+                        "indoor": "Indoor",
+                        "roof": "Rooftop"
+                    }
+                },
                 "location": {
                     "label": "Location"
                 },
@@ -2727,6 +2735,9 @@
                 },
                 "surveillance/zone": {
                     "label": "Surveillance Zone"
+                },
+                "swimming_pool": {
+                    "label": "Type"
                 },
                 "switch": {
                     "label": "Type",
