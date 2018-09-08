@@ -1,0 +1,5 @@
+{
+    "key": "wreck:visible_at_high_tide",
+    "type": "check",
+    "label": "Visible At High Tide"
+}

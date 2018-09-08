@@ -2824,6 +2824,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/landmark-15.svg?sanitize=true"
     },
     {
+      "key": "historic",
+      "value": "wreck",
+      "description": "Shipwreck",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/ruins.svg?sanitize=true"
+    },
+    {
       "key": "internet_access",
       "value": "wlan",
       "description": "Wi-Fi Hotspot, Internet Access",
@@ -6673,6 +6680,12 @@
     {"key": "healthcare:speciality", "description": "Specialties"},
     {"key": "height", "description": "Height (Meters)"},
     {"key": "historic:civilization", "description": "Historic Civilization"},
+    {"key": "wreck:date_sunk", "description": "Date Sunk"},
+    {
+      "key": "wreck:visible_at_high_tide",
+      "description": "Visible At High Tide"
+    },
+    {"key": "wreck:visible_at_low_tide", "description": "Visible At Low Tide"},
     {"key": "hoops", "description": "Hoops"},
     {
       "key": "horse_scale",
@@ -7182,6 +7195,7 @@
       "description": "System"
     },
     {"key": "seamark:mooring:category", "description": "Category"},
+    {"key": "seamark:wreck:category", "description": "Category"},
     {"key": "seasonal", "description": "Seasonal"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},

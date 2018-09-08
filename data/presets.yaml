@@ -681,6 +681,15 @@ en:
       historic/civilization:
         # 'historic:civilization=*'
         label: Historic Civilization
+      historic/wreck/date_sunk:
+        # 'wreck:date_sunk=*'
+        label: Date Sunk
+      historic/wreck/visible_at_high_tide:
+        # 'wreck:visible_at_high_tide=*'
+        label: Visible At High Tide
+      historic/wreck/visible_at_low_tide:
+        # 'wreck:visible_at_low_tide=*'
+        label: Visible At Low Tide
       hoops:
         # hoops=*
         label: Hoops
@@ -1425,6 +1434,9 @@ en:
       seamark/type:
         # 'seamark:type=*'
         label: Seamark
+      seamark/wreck/category:
+        # 'seamark:wreck:category=*'
+        label: Category
       seasonal:
         # seasonal=*
         label: Seasonal
@@ -3738,6 +3750,11 @@ en:
         # historic=wayside_shrine
         name: Wayside Shrine
         terms: '<translate with synonyms or related terms for ''Wayside Shrine'', separated by commas>'
+      historic/wreck:
+        # historic=wreck
+        name: Shipwreck
+        # 'terms: hull,mast,maritime,remains,ship,boat'
+        terms: '<translate with synonyms or related terms for ''Shipwreck'', separated by commas>'
       internet_access/wlan:
         # internet_access=wlan
         name: Wi-Fi Hotspot

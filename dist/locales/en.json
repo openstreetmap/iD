@@ -2045,6 +2045,15 @@
                 "historic/civilization": {
                     "label": "Historic Civilization"
                 },
+                "historic/wreck/date_sunk": {
+                    "label": "Date Sunk"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Visible At High Tide"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Visible At Low Tide"
+                },
                 "hoops": {
                     "label": "Hoops",
                     "placeholder": "1, 2, 4..."
@@ -2643,6 +2652,9 @@
                 },
                 "seamark/type": {
                     "label": "Seamark"
+                },
+                "seamark/wreck/category": {
+                    "label": "Category"
                 },
                 "seasonal": {
                     "label": "Seasonal"
@@ -4706,6 +4718,10 @@
                 "historic/wayside_shrine": {
                     "name": "Wayside Shrine",
                     "terms": ""
+                },
+                "historic/wreck": {
+                    "name": "Shipwreck",
+                    "terms": "hull,mast,maritime,remains,ship,boat"
                 },
                 "internet_access/wlan": {
                     "name": "Wi-Fi Hotspot",
