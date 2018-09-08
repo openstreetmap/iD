@@ -5,7 +5,9 @@
         "access_simple",
         "operator",
         "address",
-        "lit"
+        "lit",
+        "location_pool",
+        "length"
     ],
     "geometry": [
         "point",

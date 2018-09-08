@@ -156,6 +156,7 @@
     "level": {"key": "level", "type": "combo", "label": "Level", "universal": true},
     "levels": {"key": "building:levels", "type": "number", "minValue": 0, "label": "Levels", "placeholder": "2, 4, 6..."},
     "lit": {"key": "lit", "type": "check", "label": "Lit"},
+    "location_pool": {"key": "location", "type": "typeCombo", "label": "Location", "strings": {"options": {"outdoor": "Outdoor", "indoor": "Indoor", "roof": "Rooftop"}}},
     "location": {"key": "location", "type": "combo", "label": "Location"},
     "man_made": {"key": "man_made", "type": "typeCombo", "label": "Type"},
     "manhole": {"key": "manhole", "type": "typeCombo", "label": "Type"},

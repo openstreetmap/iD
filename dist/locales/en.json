@@ -2204,6 +2204,14 @@
                 "lit": {
                     "label": "Lit"
                 },
+                "location_pool": {
+                    "label": "Location",
+                    "options": {
+                        "outdoor": "Outdoor",
+                        "indoor": "Indoor",
+                        "roof": "Rooftop"
+                    }
+                },
                 "location": {
                     "label": "Location"
                 },

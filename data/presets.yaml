@@ -873,6 +873,16 @@ en:
       location:
         # location=*
         label: Location
+      location_pool:
+        # location=*
+        label: Location
+        options:
+          # location=indoor
+          indoor: Indoor
+          # location=outdoor
+          outdoor: Outdoor
+          # location=roof
+          roof: Rooftop
       man_made:
         # man_made=*
         label: Type
