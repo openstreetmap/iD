@@ -61,7 +61,7 @@ export function uiPresetList(context) {
                 .call(svgIcon('#iD-icon-close'));
         }
 
-        function keydown() {
+        function initialKeydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
                 (d3_event.keyCode === d3_keybinding.keyCodes['⌫'] ||
@@ -69,6 +69,8 @@ export function uiPresetList(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 operationDelete([id], context)();
+
+            // hack to let undo work when search is autofocused
             } else if (search.property('value').length === 0 &&
                 (d3_event.ctrlKey || d3_event.metaKey) &&
                 d3_event.keyCode === d3_keybinding.keyCodes.z) {
@@ -76,7 +78,21 @@ export function uiPresetList(context) {
                 d3_event.stopPropagation();
                 context.undo();
             } else if (!d3_event.ctrlKey && !d3_event.metaKey) {
-                d3_select(this).on('keydown', null);
+                // don't check for delete/undo hack on future keydown events
+                d3_select(this).on('keydown', keydown);
+                keydown.call(this);
+            }
+        }
+
+        function keydown() {
+            // down arrow
+            if (d3_event.keyCode === d3_keybinding.keyCodes['↓'] &&
+                // if insertion point is at the end of the string
+                search.node().selectionStart === search.property('value').length) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                // move focus to the first item in the preset list
+                list.select('.preset-list-button').node().focus();
             }
         }
 
@@ -114,7 +130,7 @@ export function uiPresetList(context) {
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .call(utilNoAuto)
-            .on('keydown', keydown)
+            .on('keydown', initialKeydown)
             .on('keypress', keypress)
             .on('input', inputevent);
 
@@ -159,6 +175,73 @@ export function uiPresetList(context) {
             .style('opacity', 1);
     }
 
+    function itemKeydown(){
+        // the actively focused item
+        var item = d3_select(this.closest('.preset-list-item'));
+        var parentItem = d3_select(item.node().parentElement.closest('.preset-list-item'));
+
+        // arrow down, move focus to the next, lower item
+        if (d3_event.keyCode === d3_keybinding.keyCodes['↓']) {
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+            // the next item in the list at the same level
+            var nextItem = d3_select(item.node().nextElementSibling);
+            // if there is no next item in this list
+            if (nextItem.empty()) {
+                // if there is a parent item
+                if (!parentItem.empty()) {
+                    // the item is the last item of a sublist,
+                    // select the next item at the parent level
+                    nextItem = d3_select(parentItem.node().nextElementSibling);
+                }
+            // if the focused item is expanded
+            } else if (d3_select(this).classed('expanded')) {
+                // select the first subitem instead
+                nextItem = item.select('.subgrid .preset-list-item:first-child');
+            }
+            if (!nextItem.empty()) {
+                // focus on the next item
+                nextItem.select('.preset-list-button').node().focus();
+            }
+
+        // arrow up, move focus to the previous, higher item
+        } else if (d3_event.keyCode === d3_keybinding.keyCodes['↑']) {
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+            // the previous item in the list at the same level
+            var previousItem = d3_select(item.node().previousElementSibling);
+
+            // if there is no previous item in this list
+            if (previousItem.empty()) {
+                // if there is a parent item
+                if (!parentItem.empty()) {
+                    // the item is the first subitem of a sublist,
+                    // select the parent item
+                    previousItem = parentItem;
+                }
+            // if the previous item is expanded
+            } else if (previousItem.select('.preset-list-button').classed('expanded')) {
+                // select the last subitem of the sublist of the previous item
+                previousItem = previousItem.select('.subgrid .preset-list-item:last-child');
+            }
+            if (!previousItem.empty()) {
+                // focus on the previous item
+                previousItem.select('.preset-list-button').node().focus();
+            }
+            else {
+                // the focus is at the top of the list, move focus back to the search field
+                var search = d3_select(this.closest('.preset-list-pane')).select('.preset-search-input');
+                search.node().focus();
+            }
+        }
+        else if (d3_event.keyCode === d3_keybinding.keyCodes['→'] ||
+            d3_event.keyCode === d3_keybinding.keyCodes['←']) {
+            // for consistency, don't propagate any arrow keys
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+        }
+    }
+
 
     function CategoryItem(preset) {
         var box, sublist, shown = false;
@@ -167,6 +250,17 @@ export function uiPresetList(context) {
             var wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap category col12');
 
+            function click() {
+                var isExpanded = d3_select(this).classed('expanded');
+                var iconName = isExpanded ?
+                    (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
+                d3_select(this)
+                    .classed('expanded', !isExpanded);
+                d3_select(this).selectAll('div.label svg.icon use')
+                    .attr('href', iconName);
+                item.choose();
+            }
+
             var button = wrap
                 .append('button')
                 .attr('class', 'preset-list-button')
@@ -174,15 +268,29 @@ export function uiPresetList(context) {
                 .call(uiPresetIcon()
                     .geometry(context.geometry(id))
                     .preset(preset))
-                .on('click', function() {
-                    var isExpanded = d3_select(this).classed('expanded');
-                    var iconName = isExpanded ?
-                        (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
-                    d3_select(this)
-                        .classed('expanded', !isExpanded);
-                    d3_select(this).selectAll('div.label svg.icon use')
-                        .attr('href', iconName);
-                    item.choose();
+                .on('click', click)
+                .on('keydown', function() {
+                    // right arrow, expand the focused item
+                    if (d3_event.keyCode === d3_keybinding.keyCodes['→']) {
+                        d3_event.preventDefault();
+                        d3_event.stopPropagation();
+                        // if the item isn't expanded
+                        if (!d3_select(this).classed('expanded')) {
+                            // toggle expansion (expand the item)
+                            click.call(this);
+                        }
+                    // left arrow, collapse the focused item
+                    } else if (d3_event.keyCode === d3_keybinding.keyCodes['←']) {
+                        d3_event.preventDefault();
+                        d3_event.stopPropagation();
+                        // if the item is expanded
+                        if (d3_select(this).classed('expanded')) {
+                            // toggle expansion (collapse the item)
+                            click.call(this);
+                        }
+                    } else {
+                        itemKeydown.call(this);
+                    }
                 });
 
             var label = button
@@ -245,6 +353,7 @@ export function uiPresetList(context) {
                     .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', item.choose)
+                .on('keydown', itemKeydown)
                 .append('div')
                 .attr('class', 'label')
                 .text(preset.name());
