@@ -2227,6 +2227,9 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "material": {
+                    "label": "Material"
+                },
                 "maxheight": {
                     "label": "Max Height",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
@@ -6590,6 +6593,18 @@
                 "tourism/artwork": {
                     "name": "Artwork",
                     "terms": "mural,sculpture,statue"
+                },
+                "tourism/artwork/mural": {
+                    "name": "Mural",
+                    "terms": "fresco,wall painting"
+                },
+                "tourism/artwork/sculpture": {
+                    "name": "Sculpture",
+                    "terms": "statue,figure,carving"
+                },
+                "tourism/artwork/statue": {
+                    "name": "Statue",
+                    "terms": "sculpture,figure,carving"
                 },
                 "tourism/attraction": {
                     "name": "Tourist Attraction",

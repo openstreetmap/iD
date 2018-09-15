@@ -895,6 +895,9 @@ en:
       map_type:
         # map_type=*
         label: Type
+      material:
+        # material=*
+        label: Material
       maxheight:
         # maxheight=*
         label: Max Height
@@ -5896,6 +5899,21 @@ en:
         name: Artwork
         # 'terms: mural,sculpture,statue'
         terms: '<translate with synonyms or related terms for ''Artwork'', separated by commas>'
+      tourism/artwork/mural:
+        # 'tourism=artwork, artwork_type=mural'
+        name: Mural
+        # 'terms: fresco,wall painting'
+        terms: '<translate with synonyms or related terms for ''Mural'', separated by commas>'
+      tourism/artwork/sculpture:
+        # 'tourism=artwork, artwork_type=sculpture'
+        name: Sculpture
+        # 'terms: statue,figure,carving'
+        terms: '<translate with synonyms or related terms for ''Sculpture'', separated by commas>'
+      tourism/artwork/statue:
+        # 'tourism=artwork, artwork_type=statue'
+        name: Statue
+        # 'terms: sculpture,figure,carving'
+        terms: '<translate with synonyms or related terms for ''Statue'', separated by commas>'
       tourism/attraction:
         # tourism=attraction
         name: Tourist Attraction

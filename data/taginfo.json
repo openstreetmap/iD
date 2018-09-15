@@ -5837,6 +5837,27 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
     },
     {
+      "key": "artwork_type",
+      "value": "mural",
+      "description": "Mural",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+    },
+    {
+      "key": "artwork_type",
+      "value": "sculpture",
+      "description": "Sculpture",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+    },
+    {
+      "key": "artwork_type",
+      "value": "statue",
+      "description": "Statue",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+    },
+    {
       "key": "tourism",
       "value": "attraction",
       "description": "Tourist Attraction",
@@ -6766,6 +6787,7 @@
     {"key": "location", "description": "Location"},
     {"key": "map_size", "description": "Coverage"},
     {"key": "map_type", "description": "Type"},
+    {"key": "material", "description": "Material"},
     {"key": "maxheight", "description": "Max Height"},
     {"key": "maxspeed", "description": "Speed Limit"},
     {"key": "maxspeed:advisory", "description": "Advisory Speed Limit"},
