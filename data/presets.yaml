@@ -601,7 +601,7 @@ en:
       fixme:
         # fixme=*
         label: Fix Me
-      flag_type:
+      flag/type:
         # 'flag:type=*'
         label: Flag Type
       ford:

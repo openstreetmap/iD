@@ -2,7 +2,7 @@
     "icon": "maki-embassy",
     "fields": [
         "operator",
-        "flag_type",
+        "flag/type",
         "country",
         "lit",
         "height"
