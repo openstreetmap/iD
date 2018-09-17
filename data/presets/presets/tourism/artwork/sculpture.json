@@ -15,6 +15,10 @@
         "tourism": "artwork",
         "artwork_type": "sculpture"
     },
+    "reference": {
+        "key": "artwork_type",
+        "value": "sculpture"
+    },
     "terms": [
         "statue",
         "figure",

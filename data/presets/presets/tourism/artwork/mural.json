@@ -14,6 +14,10 @@
         "tourism": "artwork",
         "artwork_type": "mural"
     },
+    "reference": {
+        "key": "artwork_type",
+        "value": "mural"
+    },
     "terms": [
         "fresco",
         "wall painting"
