@@ -8,7 +8,8 @@
         "height"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "man_made": "flagpole"
