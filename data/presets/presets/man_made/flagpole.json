@@ -1,5 +1,12 @@
 {
     "icon": "maki-embassy",
+    "fields": [
+        "operator",
+        "flag_type",
+        "country",
+        "lit",
+        "height"
+    ],
     "geometry": [
         "point"
     ],

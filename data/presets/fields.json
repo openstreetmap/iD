@@ -102,6 +102,7 @@
     "fireplace": {"key": "fireplace", "type": "check", "label": "Fireplace"},
     "fitness_station": {"key": "fitness_station", "type": "typeCombo", "label": "Equipment Type"},
     "fixme": {"key": "fixme", "type": "textarea", "label": "Fix Me", "universal": true},
+    "flag_type": {"key": "flag:type", "type": "combo", "label": "Flag Type"},
     "ford": {"key": "ford", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "frequency": {"key": "frequency", "type": "combo", "label": "Operating Frequency"},
     "fuel_multi": {"key": "fuel:", "type": "multiCombo", "label": "Fuel Types"},

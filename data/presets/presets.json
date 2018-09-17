@@ -544,7 +544,7 @@
     "man_made/clearcut": {"icon": "maki-logging", "geometry": ["area"], "tags": {"man_made": "clearcut"}, "terms": ["cut", "forest", "lumber", "tree", "wood"], "name": "Clearcut Forest"},
     "man_made/crane": {"icon": "temaki-crane", "fields": ["operator", "height", "crane/type"], "geometry": ["point", "line", "vertex", "area"], "tags": {"man_made": "crane"}, "name": "Crane"},
     "man_made/cutline": {"icon": "maki-logging", "geometry": ["line"], "tags": {"man_made": "cutline"}, "name": "Cut line"},
-    "man_made/flagpole": {"icon": "maki-embassy", "geometry": ["point"], "tags": {"man_made": "flagpole"}, "name": "Flagpole"},
+    "man_made/flagpole": {"icon": "maki-embassy", "fields": ["operator", "flag_type", "country", "lit", "height"], "geometry": ["point"], "tags": {"man_made": "flagpole"}, "name": "Flagpole"},
     "man_made/gasometer": {"icon": "temaki-storage_tank", "fields": ["content", "building_area"], "geometry": ["point", "area"], "terms": ["gas holder"], "tags": {"man_made": "gasometer"}, "name": "Gasometer"},
     "man_made/groyne": {"geometry": ["line", "area"], "tags": {"man_made": "groyne"}, "name": "Groyne"},
     "man_made/lighthouse": {"icon": "maki-lighthouse", "fields": ["building_area"], "geometry": ["point", "area"], "tags": {"man_made": "lighthouse"}, "name": "Lighthouse"},
