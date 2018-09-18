@@ -6675,6 +6675,7 @@
     {"key": "fireplace", "description": "Fireplace"},
     {"key": "fitness_station", "description": "Equipment Type"},
     {"key": "fixme", "description": "Fix Me"},
+    {"key": "flag:type", "description": "Flag Type"},
     {"key": "ford", "description": "Type"},
     {"key": "frequency", "description": "Operating Frequency"},
     {"key": "fuel:", "description": "Fuel Types"},

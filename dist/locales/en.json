@@ -1972,6 +1972,9 @@
                 "fixme": {
                     "label": "Fix Me"
                 },
+                "flag/type": {
+                    "label": "Flag Type"
+                },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
