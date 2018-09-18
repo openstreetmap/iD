@@ -165,6 +165,7 @@
     "manhole": {"key": "manhole", "type": "typeCombo", "label": "Type"},
     "map_size": {"key": "map_size", "type": "typeCombo", "label": "Coverage"},
     "map_type": {"key": "map_type", "type": "typeCombo", "label": "Type"},
+    "material": {"key": "material", "type": "combo", "universal": true, "label": "Material"},
     "maxheight": {"key": "maxheight", "type": "combo", "label": "Max Height", "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"", "snake_case": false},
     "maxspeed": {"key": "maxspeed", "type": "maxspeed", "label": "Speed Limit", "placeholder": "40, 50, 60..."},
     "maxspeed/advisory": {"key": "maxspeed:advisory", "type": "maxspeed", "label": "Advisory Speed Limit", "placeholder": "40, 50, 60..."},
