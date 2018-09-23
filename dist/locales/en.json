@@ -3569,10 +3569,6 @@
                     "name": "Lean-To",
                     "terms": ""
                 },
-                "amenity/shelter/pavilion": {
-                    "name": "Pavilion",
-                    "terms": ""
-                },
                 "amenity/shower": {
                     "name": "Shower",
                     "terms": "rain closet"
@@ -4004,6 +4000,10 @@
                 "building/mosque": {
                     "name": "Mosque Building",
                     "terms": ""
+                },
+                "building/pavilion": {
+                    "name": "Pavilion Building",
+                    "terms": "sports"
                 },
                 "building/public": {
                     "name": "Public Building",

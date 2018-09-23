@@ -2459,10 +2459,6 @@ en:
         # 'amenity=shelter, shelter_type=lean_to'
         name: Lean-To
         terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
-      amenity/shelter/pavilion:
-        # 'amenity=shelter, shelter_type=pavilion'
-        name: Pavilion
-        terms: '<translate with synonyms or related terms for ''Pavilion'', separated by commas>'
       amenity/shower:
         # amenity=shower
         name: Shower
@@ -2944,6 +2940,11 @@ en:
         # building=mosque
         name: Mosque Building
         terms: '<translate with synonyms or related terms for ''Mosque Building'', separated by commas>'
+      building/pavilion:
+        # building=pavilion
+        name: Pavilion Building
+        # 'terms: sports'
+        terms: '<translate with synonyms or related terms for ''Pavilion Building'', separated by commas>'
       building/public:
         # building=public
         name: Public Building

@@ -890,13 +890,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
     {
-      "key": "shelter_type",
-      "value": "pavilion",
-      "description": "Pavilion",
-      "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
-    },
-    {
       "key": "amenity",
       "value": "shower",
       "description": "Shower",
@@ -1635,6 +1628,13 @@
       "description": "Mosque Building",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/place-of-worship-15.svg?sanitize=true"
+    },
+    {
+      "key": "building",
+      "value": "pavilion",
+      "description": "Pavilion Building",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
     {
       "key": "building",
