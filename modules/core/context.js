@@ -456,8 +456,9 @@ export function coreContext() {
     
     if (utilExternalValidationRules()) {
         var validationsUrl = utilStringQs(window.location.hash).validations;
-        d3_json(validationsUrl, function (err, mapcssConfigs) {
+        d3_json(validationsUrl, function (err, mapcss) {
             if (err) return;
+			var mapcssConfigs = mapcss.rules;
             var validations = _map(mapcssConfigs, function(mapcssConfig) {
                  return utilMapCSSRule(mapcssConfig, context.presets().areaKeys()); 
             });
