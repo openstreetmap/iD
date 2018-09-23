@@ -81,7 +81,7 @@ export function uiFieldAccess(field, context) {
 
 
     access.options = function(type) {
-        var options = ['no', 'permissive', 'private', 'destination'];
+        var options = ['no', 'permissive', 'private', 'permit', 'destination'];
 
         if (type !== 'access') {
             options.unshift('yes');

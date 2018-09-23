@@ -1,17 +1,26 @@
 import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { modeBrowse } from '../modes';
 import { svgPointTransform } from './index';
 import { services } from '../services';
 
 
 export function svgNotes(projection, context, dispatch) {
+    if (!dispatch) { dispatch = d3_dispatch('change'); }
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var layer = d3_select(null);
     var _notes;
 
+    function markerPath(selection, klass) {
+        selection
+            .attr('class', klass)
+            .attr('transform', 'translate(-8, -22)')
+            .attr('d', 'm17.5,0l-15,0c-1.37,0 -2.5,1.12 -2.5,2.5l0,11.25c0,1.37 1.12,2.5 2.5,2.5l3.75,0l0,3.28c0,0.38 0.43,0.6 0.75,0.37l4.87,-3.65l5.62,0c1.37,0 2.5,-1.12 2.5,-2.5l0,-11.25c0,-1.37 -1.12,-2.5 -2.5,-2.5z');
+    }
 
     function init() {
         if (svgNotes.initialized) return;  // run once
@@ -46,22 +55,32 @@ export function svgNotes(projection, context, dispatch) {
         editOn();
 
         layer
+            .classed('disabled', false)
             .style('opacity', 0)
             .transition()
             .duration(250)
             .style('opacity', 1)
-            .on('end', function () { dispatch.call('change'); });
+            .on('end interrupt', function () {
+                dispatch.call('change');
+            });
     }
 
 
     function hideLayer() {
+        editOff();
+
         throttledRedraw.cancel();
+        layer.interrupt();
 
         layer
             .transition()
             .duration(250)
             .style('opacity', 0)
-            .on('end', editOff);
+            .on('end interrupt', function () {
+                layer.classed('disabled', true);
+                dispatch.call('change');
+            });
+
     }
 
 
@@ -80,37 +99,42 @@ export function svgNotes(projection, context, dispatch) {
         // enter
         var notesEnter = notes.enter()
             .append('g')
-            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; });
+            .attr('class', function(d) { return 'note note-' + d.id + ' ' + d.status; })
+            .classed('new', function(d) { return d.id < 0; });
 
-        // notesEnter
-        //     .append('use')
-        //     .attr('class', 'note-shadow')
-        //     .attr('width', '24px')
-        //     .attr('height', '24px')
-        //     .attr('x', '-12px')
-        //     .attr('y', '-24px')
-        //     .attr('xlink:href', '#iD-icon-note');
+        notesEnter
+            .append('ellipse')
+            .attr('cx', 0.5)
+            .attr('cy', 1)
+            .attr('rx', 6.5)
+            .attr('ry', 3)
+            .attr('class', 'stroke');
+
+        notesEnter
+            .append('path')
+            .call(markerPath, 'shadow');
 
         notesEnter
             .append('use')
             .attr('class', 'note-fill')
             .attr('width', '20px')
             .attr('height', '20px')
-            .attr('x', '-10px')
+            .attr('x', '-8px')
             .attr('y', '-22px')
             .attr('xlink:href', '#iD-icon-note');
 
-        // add dots if there's a comment thread
         notesEnter.selectAll('.note-annotation')
-            .data(function(d) { return d.comments.length > 1 ? [0] : []; })
+            .data(function(d) { return [d]; })
             .enter()
             .append('use')
-            .attr('class', 'note-annotation thread')
-            .attr('width', '14px')
-            .attr('height', '14px')
-            .attr('x', '-7px')
-            .attr('y', '-20px')
-            .attr('xlink:href', '#iD-icon-more');
+            .attr('class', 'note-annotation')
+            .attr('width', '10px')
+            .attr('height', '10px')
+            .attr('x', '-3px')
+            .attr('y', '-19px')
+            .attr('xlink:href', function(d) {
+                return '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
+            });
 
         // update
         notes
@@ -156,14 +180,19 @@ export function svgNotes(projection, context, dispatch) {
         }
     }
 
-    drawNotes.enabled = function(_) {
+    drawNotes.enabled = function(val) {
         if (!arguments.length) return svgNotes.enabled;
-        svgNotes.enabled = _;
+
+        svgNotes.enabled = val;
         if (svgNotes.enabled) {
             showLayer();
         } else {
             hideLayer();
+            if (context.selectedNoteID()) {
+                context.enter(modeBrowse(context));
+            }
         }
+
         dispatch.call('change');
         return this;
     };

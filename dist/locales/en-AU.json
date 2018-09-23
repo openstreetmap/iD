@@ -1,0 +1,17 @@
+{
+    "en-AU": {
+        "presets": {
+            "presets": {
+                "amenity/fuel": {
+                    "name": "Service Station"
+                },
+                "footway/sidewalk": {
+                    "name": "Footpath"
+                },
+                "tourism/caravan_site": {
+                    "name": "Caravan Site"
+                }
+            }
+        }
+    }
+}

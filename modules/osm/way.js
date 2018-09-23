@@ -31,8 +31,7 @@ _extend(osmWay.prototype, {
 
 
     copy: function(resolver, copies) {
-        if (copies[this.id])
-            return copies[this.id];
+        if (copies[this.id]) return copies[this.id];
 
         var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
@@ -239,9 +238,9 @@ _extend(osmWay.prototype, {
     unclose: function() {
         if (!this.isClosed()) return this;
 
-        var nodes = this.nodes.slice(),
-            connector = this.first(),
-            i = nodes.length - 1;
+        var nodes = this.nodes.slice();
+        var connector = this.first();
+        var i = nodes.length - 1;
 
         // remove trailing connectors..
         while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
@@ -260,9 +259,9 @@ _extend(osmWay.prototype, {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is always preserved when adding a node.
     addNode: function(id, index) {
-        var nodes = this.nodes.slice(),
-            isClosed = this.isClosed(),
-            max = isClosed ? nodes.length - 1 : nodes.length;
+        var nodes = this.nodes.slice();
+        var isClosed = this.isClosed();
+        var max = isClosed ? nodes.length - 1 : nodes.length;
 
         if (index === undefined) {
             index = max;
@@ -309,9 +308,9 @@ _extend(osmWay.prototype, {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved when updating a node.
     updateNode: function(id, index) {
-        var nodes = this.nodes.slice(),
-            isClosed = this.isClosed(),
-            max = nodes.length - 1;
+        var nodes = this.nodes.slice();
+        var isClosed = this.isClosed();
+        var max = nodes.length - 1;
 
         if (index === undefined || index < 0 || index > max) {
             throw new RangeError('index ' + index + ' out of range 0..' + max);
@@ -353,13 +352,13 @@ _extend(osmWay.prototype, {
     // Replaces each occurrence of node id needle with replacement.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
-    replaceNode: function(needle, replacement) {
-        var nodes = this.nodes.slice(),
-            isClosed = this.isClosed();
+    replaceNode: function(needleID, replacementID) {
+        var nodes = this.nodes.slice();
+        var isClosed = this.isClosed();
 
         for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i] === needle) {
-                nodes[i] = replacement;
+            if (nodes[i] === needleID) {
+                nodes[i] = replacementID;
             }
         }
 
@@ -374,12 +373,12 @@ _extend(osmWay.prototype, {
     },
 
 
-    // Removes each occurrence of node id needle with replacement.
+    // Removes each occurrence of node id.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
     removeNode: function(id) {
-        var nodes = this.nodes.slice(),
-            isClosed = this.isClosed();
+        var nodes = this.nodes.slice();
+        var isClosed = this.isClosed();
 
         nodes = nodes
             .filter(function(node) { return node !== id; })

@@ -1,8 +1,8 @@
 {
     "icon": "temaki-storage_tank",
     "fields": [
-        "building_area",
-        "content"
+        "content",
+        "building_area"
     ],
     "geometry": [
         "point",

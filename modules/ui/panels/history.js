@@ -8,21 +8,21 @@ import { utilDetect } from '../../util/detect';
 export function uiPanelHistory(context) {
     var osm;
 
-    function displayTimestamp(entity) {
-        if (!entity.timestamp) return t('info_panels.history.unknown');
+    function displayTimestamp(timestamp) {
+        if (!timestamp) return t('info_panels.history.unknown');
         var detected = utilDetect();
         var options = {
             day: 'numeric', month: 'short', year: 'numeric',
             hour: 'numeric', minute: 'numeric', second: 'numeric'
         };
-        var d = new Date(entity.timestamp);
+        var d = new Date(timestamp);
         if (isNaN(d.getTime())) return t('info_panels.history.unknown');
         return d.toLocaleString(detected.locale, options);
     }
 
 
-    function displayUser(selection, entity) {
-        if (!entity.user) {
+    function displayUser(selection, userName) {
+        if (!userName) {
             selection
                 .append('span')
                 .text(t('info_panels.history.unknown'));
@@ -32,7 +32,7 @@ export function uiPanelHistory(context) {
         selection
             .append('span')
             .attr('class', 'user-name')
-            .text(entity.user);
+            .text(userName);
 
         var links = selection
             .append('div')
@@ -42,7 +42,7 @@ export function uiPanelHistory(context) {
             links
                 .append('a')
                 .attr('class', 'user-osm-link')
-                .attr('href', osm.userURL(entity.user))
+                .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .text('OSM');
@@ -51,15 +51,15 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'user-hdyc-link')
-            .attr('href', 'https://hdyc.neis-one.org/?' + entity.user)
+            .attr('href', 'https://hdyc.neis-one.org/?' + userName)
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text('HDYC');
     }
 
 
-    function displayChangeset(selection, entity) {
-        if (!entity.changeset) {
+    function displayChangeset(selection, changeset) {
+        if (!changeset) {
             selection
                 .append('span')
                 .text(t('info_panels.history.unknown'));
@@ -69,7 +69,7 @@ export function uiPanelHistory(context) {
         selection
             .append('span')
             .attr('class', 'changeset-id')
-            .text(entity.changeset);
+            .text(changeset);
 
         var links = selection
             .append('div')
@@ -79,7 +79,7 @@ export function uiPanelHistory(context) {
             links
                 .append('a')
                 .attr('class', 'changeset-osm-link')
-                .attr('href', osm.changesetURL(entity.changeset))
+                .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .text('OSM');
@@ -88,7 +88,7 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'changeset-osmcha-link')
-            .attr('href', 'https://osmcha.mapbox.com/changesets/' + entity.changeset)
+            .attr('href', 'https://osmcha.mapbox.com/changesets/' + changeset)
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text('OSMCha');
@@ -96,10 +96,21 @@ export function uiPanelHistory(context) {
 
 
     function redraw(selection) {
-        var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
-        var singular = selected.length === 1 ? selected[0] : null;
-
+        var selectedNoteID = context.selectedNoteID();
         osm = context.connection();
+
+        var selected, note, entity;
+        if (selectedNoteID && osm) {       // selected 1 note
+            selected = [ t('note.note') + ' ' + selectedNoteID ];
+            note = osm.getNote(selectedNoteID);
+        } else {                           // selected 1..n entities
+            selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+            if (selected.length) {
+                entity = context.entity(selected[0]);
+            }
+        }
+
+        var singular = selected.length === 1 ? selected[0] : null;
 
         selection.html('');
 
@@ -110,9 +121,60 @@ export function uiPanelHistory(context) {
 
         if (!singular) return;
 
-        var entity = context.entity(singular);
+        if (entity) {
+            selection.call(redrawEntity, entity);
+        } else if (note) {
+            selection.call(redrawNote, note);
+        }
+    }
 
-        if (!entity.version) {
+
+    function redrawNote(selection, note) {
+        if (!note || note.isNew()) {
+            selection
+                .append('div')
+                .text(t('info_panels.history.note_no_history'));
+            return;
+        }
+
+        var list = selection
+            .append('ul');
+
+        list
+            .append('li')
+            .text(t('info_panels.history.note_comments') + ':')
+            .append('span')
+            .text(note.comments.length);
+
+        if (note.comments.length) {
+            list
+                .append('li')
+                .text(t('info_panels.history.note_created_date') + ':')
+                .append('span')
+                .text(displayTimestamp(note.comments[0].date));
+
+            list
+                .append('li')
+                .text(t('info_panels.history.note_created_user') + ':')
+                .call(displayUser, note.comments[0].user);
+        }
+
+        if (osm) {
+            selection
+                .append('a')
+                .attr('class', 'view-history-on-osm')
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .attr('href', osm.noteURL(note))
+                .call(svgIcon('#iD-icon-out-link', 'inline'))
+                .append('span')
+                .text(t('info_panels.history.note_link_text'));
+        }
+    }
+
+
+    function redrawEntity(selection, entity) {
+        if (!entity || entity.isNew()) {
             selection
                 .append('div')
                 .text(t('info_panels.history.no_history'));
@@ -132,17 +194,17 @@ export function uiPanelHistory(context) {
             .append('li')
             .text(t('info_panels.history.last_edit') + ':')
             .append('span')
-            .text(displayTimestamp(entity));
+            .text(displayTimestamp(entity.timestamp));
 
         list
             .append('li')
             .text(t('info_panels.history.edited_by') + ':')
-            .call(displayUser, entity);
+            .call(displayUser, entity.user);
 
         list
             .append('li')
             .text(t('info_panels.history.changeset') + ':')
-            .call(displayChangeset, entity);
+            .call(displayChangeset, entity.changeset);
 
         if (osm) {
             selection
@@ -165,11 +227,16 @@ export function uiPanelHistory(context) {
             .on('drawn.info-history', function() {
                 selection.call(redraw);
             });
+
+        context
+            .on('enter.info-history', function() {
+                selection.call(redraw);
+            });
     };
 
     panel.off = function() {
-        context.map()
-            .on('drawn.info-history', null);
+        context.map().on('drawn.info-history', null);
+        context.on('enter.info-history', null);
     };
 
     panel.id = 'history';

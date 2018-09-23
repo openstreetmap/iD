@@ -42,8 +42,7 @@ _extend(osmRelation.prototype, {
 
 
     copy: function(resolver, copies) {
-        if (copies[this.id])
-            return copies[this.id];
+        if (copies[this.id]) return copies[this.id];
 
         var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 

@@ -8,6 +8,7 @@ import {
 } from '../behavior';
 
 import { modeDragNode } from './drag_node';
+import { modeDragNote } from './drag_note';
 
 
 export function modeBrowse(context) {
@@ -23,14 +24,13 @@ export function modeBrowse(context) {
         behaviorHover(context).on('hover', context.ui().sidebar.hover),
         behaviorSelect(context),
         behaviorLasso(context),
-        modeDragNode(context).behavior
+        modeDragNode(context).behavior,
+        modeDragNote(context).behavior
     ];
 
 
     mode.enter = function() {
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
+        behaviors.forEach(context.install);
 
         // Get focus on the body.
         if (document.activeElement && document.activeElement.blur) {
@@ -47,9 +47,7 @@ export function modeBrowse(context) {
 
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
-        behaviors.forEach(function(behavior) {
-            context.uninstall(behavior);
-        });
+        behaviors.forEach(context.uninstall);
 
         if (sidebar) {
             context.ui().sidebar.hide();

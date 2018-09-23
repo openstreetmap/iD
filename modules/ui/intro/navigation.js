@@ -12,15 +12,15 @@ import { icon, pointBox, transitionTime } from './helper';
 
 
 export function uiIntroNavigation(context, reveal) {
-    var dispatch = d3_dispatch('done'),
-        timeouts = [],
-        hallId = 'n2061',
-        townHall = [-85.63591, 41.94285],
-        springStreetId = 'w397',
-        springStreetEndId = 'n1834',
-        springStreet = [-85.63582, 41.94255],
-        onewayField = context.presets().field('oneway'),
-        maxspeedField = context.presets().field('maxspeed');
+    var dispatch = d3_dispatch('done');
+    var timeouts = [];
+    var hallId = 'n2061';
+    var townHall = [-85.63591, 41.94285];
+    var springStreetId = 'w397';
+    var springStreetEndId = 'n1834';
+    var springStreet = [-85.63582, 41.94255];
+    var onewayField = context.presets().field('oneway');
+    var maxspeedField = context.presets().field('maxspeed');
 
 
     var chapter = {
@@ -409,9 +409,9 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function checkSearchResult() {
-        var first = d3_select('.feature-list-item:nth-child(0n+2)'),  // skip "No Results" item
-            firstName = first.select('.entity-name'),
-            name = t('intro.graph.name.spring-street');
+        var first = d3_select('.feature-list-item:nth-child(0n+2)');  // skip "No Results" item
+        var firstName = first.select('.entity-name');
+        var name = t('intro.graph.name.spring-street');
 
         if (!firstName.empty() && firstName.text() === name) {
             reveal(first.node(),

@@ -21,6 +21,7 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
+import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
@@ -40,6 +41,9 @@ export function uiBackground(context) {
 
     var backgroundDisplayOptions = uiBackgroundDisplayOptions(context);
     var backgroundOffset = uiBackgroundOffset(context);
+
+    var settingsCustomBackground = uiSettingsCustomBackground(context)
+        .on('change', customChanged);
 
 
     function setTooltips(selection) {
@@ -100,21 +104,21 @@ export function uiBackground(context) {
     }
 
 
-    function editCustom() {
-        d3_event.preventDefault();
-        var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-        var template = window.prompt(
-            t('background.custom_prompt', { example: example }),
-            _customSource.template() || example
-        );
-
-        if (template) {
-            context.storage('background-custom-template', template);
-            _customSource.template(template);
+    function customChanged(d) {
+        if (d && d.template) {
+            _customSource.template(d.template);
             chooseBackground(_customSource);
         } else {
-            _backgroundList.call(updateLayerSelections);
+            _customSource.template('');
+            chooseBackground(context.background().findSource('none'));
         }
+    }
+
+
+    function editCustom() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsCustomBackground);
     }
 
 
@@ -147,11 +151,11 @@ export function uiBackground(context) {
             .append('button')
             .attr('class', 'layer-browse')
             .call(tooltip()
-                .title(t('background.custom_button'))
+                .title(t('settings.custom_background.tooltip'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
-            .call(svgIcon('#iD-icon-edit'));
+            .call(svgIcon('#iD-icon-more'));
 
         enter.filter(function(d) { return d.best(); })
             .append('div')

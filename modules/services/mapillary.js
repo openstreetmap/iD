@@ -1,5 +1,4 @@
 /* global Mapillary:false */
-import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
@@ -18,10 +17,10 @@ import {
 
 import rbush from 'rbush';
 
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
-import { geoExtent } from '../geo';
+import { geoExtent, geoScaleToZoom } from '../geo';
 import { svgDefs } from '../svg';
-import { utilQsString, utilRebind } from '../util';
+import { utilQsString, utilRebind, utilTiler } from '../util';
+
 
 var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
@@ -29,7 +28,8 @@ var viewerjs = 'mapillary-js/mapillary.min.js';
 var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var maxResults = 1000;
 var tileZoom = 14;
-var dispatch = d3_dispatch('loadedImages', 'loadedSigns');
+var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
+var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'bearingChanged');
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
@@ -42,18 +42,6 @@ function abortRequest(i) {
 }
 
 
-function nearNullIsland(x, y, z) {
-    if (z >= 7) {
-        var center = Math.pow(2, z - 1);
-        var width = Math.pow(2, z - 6);
-        var min = center - (width / 2);
-        var max = center + (width / 2) - 1;
-        return x >= min && x <= max && y >= min && y <= max;
-    }
-    return false;
-}
-
-
 function maxPageAtZoom(z) {
     if (z < 15)   return 2;
     if (z === 15) return 5;
@@ -63,49 +51,21 @@ function maxPageAtZoom(z) {
     if (z > 18)   return 80;
 }
 
-function getTiles(projection) {
-    var s = projection.scale() * 2 * Math.PI;
-    var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-    var ts = 256 * Math.pow(2, z - tileZoom);
-    var origin = [
-        s / 2 - projection.translate()[0],
-        s / 2 - projection.translate()[1]
-    ];
-
-    return d3_geoTile()
-        .scaleExtent([tileZoom, tileZoom])
-        .scale(s)
-        .size(projection.clipExtent()[1])
-        .translate(projection.translate())()
-        .map(function(tile) {
-            var x = tile[0] * ts - origin[0];
-            var y = tile[1] * ts - origin[1];
-
-            return {
-                id: tile.toString(),
-                xyz: tile,
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
-}
-
 
 function loadTiles(which, url, projection) {
-    var s = projection.scale() * 2 * Math.PI;
-    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
+    var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
+    var tiles = tiler.getTiles(projection);
 
-    var tiles = getTiles(projection).filter(function(t) {
-        return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
+    // abort inflight requests that are no longer needed
+    var cache = _mlyCache[which];
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
+
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
     });
-
-    _filter(which.inflight, function(v, k) {
-        var wanted = _find(tiles, function(tile) { return k === (tile.id + ',0'); });
-        if (!wanted) delete which.inflight[k];
-        return !wanted;
-    }).map(abortRequest);
 
     tiles.forEach(function(tile) {
         loadNextTilePage(which, currZoom, url, tile);
@@ -410,6 +370,13 @@ export default {
         // load mapillary signs sprite
         var defs = context.container().select('defs');
         defs.call(svgDefs(context).addSprites, ['mapillary-sprite']);
+
+        // Register viewer resize handler
+        context.ui().on('photoviewerResize', function() {
+            if (_mlyViewer) {
+                _mlyViewer.resize();
+            }
+        });
     },
 
 
@@ -504,6 +471,7 @@ export default {
 
             _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
+            _mlyViewer.on('bearingchanged', bearingChanged);
             _mlyViewer.moveToKey(imageKey)
                 .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
@@ -537,6 +505,10 @@ export default {
                 context.map().centerEase(loc);
                 that.selectImage(undefined, node.key, true);
             }
+        }
+
+        function bearingChanged(e) {
+            dispatch.call('bearingChanged', undefined, e);
         }
     },
 

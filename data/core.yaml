@@ -16,6 +16,10 @@ en:
       title: Point
       description: "Add restaurants, monuments, postal boxes or other points to the map."
       tail: Click on the map to add a point.
+    add_note:
+      title: Note
+      description: "Spotted an issue? Let other mappers know."
+      tail: Click on the map to add a note.
     browse:
       title: Browse
       description: Pan and zoom the map.
@@ -31,6 +35,7 @@ en:
         point: Added a point.
         vertex: Added a node to a way.
         relation: Added a relation.
+        note: Added a note.
     start:
       annotation:
         line: Started a line.
@@ -229,6 +234,13 @@ en:
       annotation:
         create: Added a turn restriction
         delete: Deleted a turn restriction
+    detach_node:
+      title: Detach
+      key: E
+      description: Detach this node from these lines/areas.
+      annotation: Detached a node from parent lines/areas.
+      restriction: "This node can't be detached because it would damage a \"{relation}\" relation."
+      connected_to_hidden: This node can't be detached because it is connected to a hidden feature.
   restriction:
     controls:
       distance: Distance
@@ -336,6 +348,11 @@ en:
       changeset: Changeset
       unknown: Unknown
       link_text: History on openstreetmap.org
+      note_no_history: "No History (New Note)"
+      note_comments: Comments
+      note_created_date: Created Date
+      note_created_user: Created By
+      note_link_text: Note on openstreetmap.org
     location:
       key: L
       title: Location
@@ -362,6 +379,7 @@ en:
     line: line
     area: area
     relation: relation
+    note: note
   geocoder:
     search: Search worldwide...
     no_results_visible: No results in visible map area
@@ -417,8 +435,6 @@ en:
     best_imagery: Best known imagery source for this location
     switch: Switch back to this background
     custom: Custom
-    custom_button: Edit custom background
-    custom_prompt: "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
     overlays: Overlays
     imagery_source_faq: Imagery Info / Report a Problem
     reset: reset
@@ -445,6 +461,10 @@ en:
       notes:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap notes
+      custom:
+        tooltip: "Drag and drop a data file onto the page, or click the button to setup"
+        title: Custom Map Data
+        zoom: Zoom to data
     fill_area: Fill Areas
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
@@ -497,6 +517,23 @@ en:
     full:
       description: Full Fill
       tooltip: "Areas are drawn fully filled."
+  settings:
+    custom_background:
+      tooltip: Edit custom background
+      header: Custom Background Settings
+      instructions: "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
+      template:
+        placeholder: Enter a url template
+    custom_data:
+      tooltip: Edit custom data layer
+      header: Custom Map Data Settings
+      file:
+        instructions: "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json"
+        label: "Browse files"
+      or: "Or"
+      url:
+        instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
+        placeholder: Enter a url
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
@@ -588,16 +625,6 @@ en:
     out: Zoom out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
-  gpx:
-    local_layer: "Add a GPX"
-    drag_drop: "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse"
-    zoom: "Zoom to layer"
-    browse: "Browse for a file"
-  mvt:
-    local_layer: "Add a MVT"
-    drag_drop: "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse"
-    zoom: "Zoom to layer"
-    browse: "Browse for a file"
   streetside:
     tooltip: "Streetside photos from Microsoft"
     title: "Photo Overlay (Bing Streetside)"
@@ -623,6 +650,11 @@ en:
     anonymous: anonymous
     closed: "(Closed)"
     commentTitle: Comments
+    status:
+      opened: "opened {when}"
+      reopened: "reopened {when}"
+      commented: "commented {when}"
+      closed: "closed {when}"
     newComment: New Comment
     inputPlaceholder: Enter a comment to share with other users.
     close: Close Note
@@ -631,6 +663,9 @@ en:
     close_comment: Close and Comment
     open_comment: Reopen and Comment
     report: Report
+    new: New Note
+    newDescription: "Describe the issue."
+    save: Save Note
     login: You must log in to change or comment on this note.
     upload_explanation: "Your comments will be publicly visible to all OpenStreetMap users."
     upload_explanation_with_user: "Your comments as {user} will be publicly visible to all OpenStreetMap users."
@@ -763,6 +798,16 @@ en:
       boundary_h: "Boundaries"
       boundary: "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
       boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"All relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+    notes:
+      title: Notes
+      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data} **Map data** panel to enable the OpenStreetMap notes layer."
+      add_note_h: "Adding Notes"
+      add_note: "To add a new note, click the {note} **Note** button on the toolbar above the map, or press the shortcut key `4`. This will change the mouse cursor to a cross symbol. To place the new note on the map, position the mouse cursor where the note should go, then {leftclick} left-click or press `Space`."
+      move_note: "Only new notes can be moved. To move a note, place the mouse cursor over the new note, then press and hold the {leftclick} left mouse button while dragging the note to its new location."
+      update_note_h: "Closing, Reopening, and Commenting"
+      update_note: "An existing note can be updated by closing it, reopening it, or adding a comment to it. Closing a note indicates that the problem has been resolved. Reopening a note indicates that the original issue is not resolved."
+      save_note_h: "Saving Notes"
+      save_note: "You must save any note edits individually by clicking the buttons below the note comments. Note edits are **not** included in changesets that you upload to OpenStreetMap."
     imagery:
       title: Background Imagery
       intro: "The background imagery that appears beneath the map data is an important resource for mapping. This imagery can be aerial photos collected from satellites, airplanes, and drones, or it can be scanned historical maps or other freely available source data."
@@ -774,7 +819,7 @@ en:
       offset_change: "Click on the small triangles to adjust the imagery offset in small steps, or hold the left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Mapillary](https://www.mapillary.com) and [OpenStreetCam](https://www.openstreetcam.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [OpenStreetCam](https://www.openstreetcam.org)."
       using_h: "Using Street Level Photos"
       using: "To use street level photos for mapping, click the {data} **Map data** panel on the side of the map to enable or disable the available photo layers."
       photos: "When enabled, the photo layer displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
@@ -1127,7 +1172,8 @@ en:
         add_point: "'Add point' mode"
         add_line: "'Add line' mode"
         add_area: "'Add area' mode"
-        place_point: "Place a point"
+        add_note: "'Add note' mode"
+        place_point: "Place a point or note"
         disable_snap: "Hold to disable point snapping"
         stop_line: "Finish drawing a line or area"
       operations:
@@ -1135,6 +1181,7 @@ en:
         continue_line: "Continue a line at the selected node"
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect features at the selected node"
+        detach_node: "Detach selected node from parent lines/areas"
         split: "Split a line into two at the selected node"
         reverse: "Reverse a line"
         move: "Move selected features"

@@ -6,7 +6,7 @@ import { utilGetSetValue, utilNoAuto } from '../util';
 
 
 export function uiFormFields(context) {
-    var fieldsArr;
+    var _fieldsArr;
 
 
     function formFields(selection, klass) {
@@ -15,9 +15,8 @@ export function uiFormFields(context) {
 
 
     function render(selection, klass) {
-
-        var shown = fieldsArr.filter(function(field) { return field.isShown(); }),
-            notShown = fieldsArr.filter(function(field) { return !field.isShown(); });
+        var shown = _fieldsArr.filter(function(field) { return field.isShown(); });
+        var notShown = _fieldsArr.filter(function(field) { return !field.isShown(); });
 
         var container = selection.selectAll('.form-fields-container')
             .data([0]);
@@ -29,7 +28,7 @@ export function uiFormFields(context) {
 
 
         var fields = container.selectAll('.wrap-form-field')
-            .data(shown, function(d) { return d.id; });
+            .data(shown, function(d) { return d.id + (d.entityID || ''); });
 
         fields.exit()
             .remove();
@@ -112,9 +111,9 @@ export function uiFormFields(context) {
     }
 
 
-    formFields.fieldsArr = function(_) {
-        if (!arguments.length) return fieldsArr;
-        fieldsArr = _;
+    formFields.fieldsArr = function(val) {
+        if (!arguments.length) return _fieldsArr;
+        _fieldsArr = val;
         return formFields;
     };
 

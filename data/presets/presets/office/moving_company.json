@@ -1,5 +1,5 @@
 {
-    "icon": "maki-warehouse",
+    "icon": "fas-people-carry",
     "fields": [
         "name",
         "address",

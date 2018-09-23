@@ -21,10 +21,10 @@ const presetSchema = require('./data/presets/schema/preset.json');
 const suggestions = require('name-suggestion-index/name-suggestions.json');
 
 // fontawesome icons
-const fontawesome = require('@fortawesome/fontawesome');
-const fas = require('@fortawesome/fontawesome-free-solid').default;
-const far = require('@fortawesome/fontawesome-free-regular').default;
-const fab = require('@fortawesome/fontawesome-free-brands').default;
+const fontawesome = require('@fortawesome/fontawesome-svg-core');
+const fas = require('@fortawesome/free-solid-svg-icons').fas;
+const far = require('@fortawesome/free-regular-svg-icons').far;
+const fab = require('@fortawesome/free-brands-svg-icons').fab;
 fontawesome.library.add(fas, far, fab);
 
 

@@ -91,10 +91,10 @@ export function localize(obj) {
             'postcode', 'province', 'quarter', 'state', 'subdistrict', 'suburb'
         ];
         addrTags.forEach(function(k) {
-            var key = 'intro.graph.' + k,
-                tag = 'addr:' + k,
-                val = obj.tags && obj.tags[tag],
-                str = t(key, { default: val });
+            var key = 'intro.graph.' + k;
+            var tag = 'addr:' + k;
+            var val = obj.tags && obj.tags[tag];
+            var str = t(key, { default: val });
 
             if (str) {
                 if (str.match(/^<.*>$/) !== null) {
@@ -114,10 +114,10 @@ export function localize(obj) {
 export function isMostlySquare(points) {
     // note: uses 15 here instead of the 12 from actionOrthogonalize because
     // actionOrthogonalize can actually straighten some larger angles as it iterates
-    var threshold = 15, // degrees within right or straight
-        lowerBound = Math.cos((90 - threshold) * Math.PI / 180),  // near right
-        upperBound = Math.cos(threshold * Math.PI / 180),         // near straight
-        mag;
+    var threshold = 15; // degrees within right or straight
+    var lowerBound = Math.cos((90 - threshold) * Math.PI / 180);  // near right
+    var upperBound = Math.cos(threshold * Math.PI / 180);         // near straight
+    var mag;
 
     for (var i = 0; i < points.length; i++) {
         mag = Math.abs(normalizedDotProduct(i, points));
@@ -130,11 +130,11 @@ export function isMostlySquare(points) {
 
 
     function normalizedDotProduct(i, points) {
-        var a = points[(i - 1 + points.length) % points.length],
-            b = points[i],
-            c = points[(i + 1) % points.length],
-            p = subtractPoints(a, b),
-            q = subtractPoints(c, b);
+        var a = points[(i - 1 + points.length) % points.length];
+        var b = points[i];
+        var c = points[(i + 1) % points.length];
+        var p = subtractPoints(a, b);
+        var q = subtractPoints(c, b);
 
         p = normalizePoint(p);
         q = normalizePoint(q);

@@ -40,11 +40,7 @@ export function actionReverse(wayID, options) {
         forward: 'backward',
         backward: 'forward',
         forwards: 'backward',
-        backwards: 'forward',
-        north: 'south',
-        south: 'north',
-        east: 'west',
-        west: 'east'
+        backwards: 'forward'
     };
     var onewayReplacements = {
         yes: '-1',

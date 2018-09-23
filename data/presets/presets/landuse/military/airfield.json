@@ -13,15 +13,25 @@
         "military": "airfield"
     },
     "addTags": {
+        "aeroway": "aerodrome",
         "landuse": "military",
         "military": "airfield"
     },
     "removeTags": {
+        "aeroway": "aerodrome",
         "landuse": "military",
         "military": "airfield"
     },
+    "reference": {
+        "key": "military",
+        "value": "airfield"
+    },
     "terms": [
+        "aerodrome",
+        "aeroway",
         "air force",
+        "airplane",
+        "airport",
         "army",
         "base",
         "bomb",

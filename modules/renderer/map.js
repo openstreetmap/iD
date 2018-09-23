@@ -213,7 +213,6 @@ export function rendererMap(context) {
 
         context.on('enter.map',  function() {
             if (map.editable() && !_transformed) {
-
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
                 var selectedAndParents = {};
@@ -240,7 +239,6 @@ export function rendererMap(context) {
                     .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
 
                 dispatch.call('drawn', this, { full: false });
-
 
                 // redraw everything else later
                 scheduleRedraw();
@@ -350,7 +348,7 @@ export function rendererMap(context) {
         surface.selectAll('.layer-osm *').remove();
 
         var mode = context.mode();
-        if (mode && mode.id !== 'save' && mode.id !== 'select_note') {
+        if (mode && mode.id !== 'save' && mode.id !== 'select-note' && mode.id !== 'select-data') {
             context.enter(modeBrowse(context));
         }
 
@@ -483,7 +481,7 @@ export function rendererMap(context) {
 
         // OSM
         if (map.editable()) {
-            context.loadTiles(projection, dimensions);
+            context.loadTiles(projection);
             drawVector(difference, extent);
         } else {
             editOff();
@@ -844,6 +842,14 @@ export function rendererMap(context) {
     map.editable = function() {
         var osmLayer = surface.selectAll('.data-layer-osm');
         if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+
+        return map.zoom() >= context.minEditableZoom();
+    };
+
+
+    map.notesEditable = function() {
+        var noteLayer = surface.selectAll('.data-layer-notes');
+        if (!noteLayer.empty() && noteLayer.classed('disabled')) return false;
 
         return map.zoom() >= context.minEditableZoom();
     };

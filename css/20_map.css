@@ -65,7 +65,21 @@
 }
 
 
-/* points */
+/* points & notes */
+
+g.note .stroke {
+    stroke: #222;
+    stroke-width: 1;
+    fill: #222;
+    opacity: 0.6;
+}
+
+g.note.active .stroke {
+    stroke: #222;
+    stroke-width: 1;
+    fill: #222;
+    opacity: 0.8;
+}
 
 g.point .stroke {
     stroke: #444;
@@ -73,26 +87,31 @@ g.point .stroke {
     fill: #fff;
 }
 
-g.point .shadow {
+g.point .shadow,
+g.note .shadow {
     fill: none;
     stroke: #f6634f;
     stroke-width: 16;
     stroke-opacity: 0;
 }
 
+g.note.related:not(.selected) .shadow,
+g.note.hover:not(.selected) .shadow,
 g.point.related:not(.selected) .shadow,
 g.point.hover:not(.selected) .shadow {
     stroke-opacity: 0.5;
 }
 
+g.note.selected .shadow,
 g.point.selected .shadow {
     stroke-opacity: 0.7;
 }
 
+/* g.note ellipse.stroke, */
 g.point ellipse.stroke {
     display: none;
 }
-
+.mode-drag-note g.note.active ellipse.stroke,
 .mode-drag-node g.point.active ellipse.stroke {
     display: block;
 }
@@ -287,63 +306,3 @@ g.turn circle {
     stroke: #68f;
 }
 
-
-/* GPX Paths */
-
-.layer-gpx {
-    pointer-events: none;
-}
-
-path.gpx {
-    stroke: #ff26d4;
-    stroke-width: 2;
-    fill: none;
-}
-
-text.gpxlabel-halo,
-text.gpxlabel {
-    font-size: 10px;
-    font-weight: bold;
-    dominant-baseline: middle;
-}
-
-text.gpxlabel {
-    fill: #ff26d4;
-}
-
-text.gpxlabel-halo {
-    opacity: 0.7;
-    stroke: #000;
-    stroke-width: 5px;
-    stroke-miterlimit: 1;
-}
-
-/* MVT Paths */
-
-.layer-mvt {
-    pointer-events: none;
-}
-
-path.mvt {
-    stroke: #ff26d4;
-    stroke-width: 2;
-    fill: none;
-}
-
-text.mvtlabel-halo,
-text.mvtlabel {
-    font-size: 10px;
-    font-weight: bold;
-    dominant-baseline: middle;
-}
-
-text.mvtlabel {
-    fill: #ff26d4;
-}
-
-text.mvtlabel-halo {
-    opacity: 0.7;
-    stroke: #000;
-    stroke-width: 5px;
-    stroke-miterlimit: 1;
-}

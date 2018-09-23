@@ -8,15 +8,15 @@ import { utilGetDimensions } from '../util/dimensions';
 
 
 export function behaviorTail() {
-    var text,
-        container,
-        xmargin = 25,
-        tooltipSize = [0, 0],
-        selectionSize = [0, 0];
+    var container;
+    var xmargin = 25;
+    var tooltipSize = [0, 0];
+    var selectionSize = [0, 0];
+    var _text;
 
 
     function tail(selection) {
-        if (!text) return;
+        if (!_text) return;
 
         d3_select(window)
             .on('resize.tail', function() { selectionSize = utilGetDimensions(selection); });
@@ -27,7 +27,7 @@ export function behaviorTail() {
             .attr('class', 'tail tooltip-inner');
 
         container.append('div')
-            .text(text);
+            .text(_text);
 
         selection
             .on('mousemove.tail', mousemove)
@@ -72,7 +72,7 @@ export function behaviorTail() {
 
 
     tail.off = function(selection) {
-        if (!text) return;
+        if (!_text) return;
 
         container
             .on('mousemove.tail', null)
@@ -88,9 +88,9 @@ export function behaviorTail() {
     };
 
 
-    tail.text = function(_) {
-        if (!arguments.length) return text;
-        text = _;
+    tail.text = function(val) {
+        if (!arguments.length) return _text;
+        _text = val;
         return tail;
     };
 

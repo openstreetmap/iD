@@ -322,8 +322,6 @@
             "localized_translation_name": "名稱"
         },
         "zoom_in_edit": "放大以編輯",
-        "login": "登入",
-        "logout": "登出",
         "loading_auth": "正在連接 OpenStreetMap...",
         "report_a_bug": "報告錯誤",
         "help_translate": "協助翻譯",
@@ -472,7 +470,6 @@
             "best_imagery": "這地點最為人所知的背景影像",
             "switch": "切換回這個背景",
             "custom": "自訂",
-            "custom_button": "編輯自訂背景",
             "overlays": "覆蓋層",
             "reset": "重設",
             "display_options": "顯示選項",
@@ -655,12 +652,6 @@
         },
         "cannot_zoom": "在這個模式下不能再縮小。",
         "full_screen": "切換全螢幕",
-        "gpx": {
-            "local_layer": "本機檔案",
-            "drag_drop": "拖移一個 .gpx, .geojson 或者 .kml 檔案到頁面或者按右側按鈕瀏覽。",
-            "zoom": "放大至圖層",
-            "browse": "瀏覽檔案"
-        },
         "mapillary_images": {
             "tooltip": "來自Mapillary的街道圖層相片",
             "title": "相片重疊 (Mapillary)"
@@ -1043,7 +1034,6 @@
                     "add_point": "'增加節'模式",
                     "add_line": "'增加線'模式",
                     "add_area": "'增加範圍'模式",
-                    "place_point": "放置一個點",
                     "disable_snap": "長按可停用點捕捉",
                     "stop_line": "完成繪製線或範圍"
                 },
@@ -1133,31 +1123,24 @@
                     "label": "允許通過",
                     "options": {
                         "designated": {
-                            "description": "通行與否，按法例或路牌指定",
                             "title": "指定"
                         },
                         "destination": {
-                            "description": "限往目的地",
                             "title": "目的地"
                         },
                         "dismount": {
-                            "description": "允許通過但騎單車者需要下車",
                             "title": "下車"
                         },
                         "no": {
-                            "description": "禁止一般公眾進入",
                             "title": "禁入"
                         },
                         "permissive": {
-                            "description": "容許進入，直至擁有者撇回許可",
                             "title": "自由通過"
                         },
                         "private": {
-                            "description": "須擁有者個別批准，方可進入",
                             "title": "私人"
                         },
                         "yes": {
-                            "description": "按法例可通；通行權",
                             "title": "准許"
                         }
                     },
@@ -2560,10 +2543,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "單車維修站",
                     "terms": "單車維修站,維修單車,自行車維修站,維修自行車"
-                },
-                "amenity/biergarten": {
-                    "name": "露天啤酒店",
-                    "terms": "啤酒店,戶外啤酒店,啤酒花園"
                 },
                 "amenity/boat_rental": {
                     "name": "租艇",

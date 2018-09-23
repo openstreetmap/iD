@@ -1,0 +1,19 @@
+{
+    "key": "seamark:buoy_lateral:category",
+    "type": "combo",
+    "label": "Category",
+    "strings": {
+        "options": {
+            "port": "Port",
+            "starboard": "Starboard",
+            "channel_left":"Channel Left",
+            "channel_right":"Channel Right",
+            "waterway_left":"Waterway Left",
+            "waterway_right":"Waterway Right",
+            "danger_left":"Danger Left",
+            "danger_right":"Danger Right",
+            "preferred_channel_port":"Preferred Channel Port",
+            "preferred_channel_starboard":"Preferred Channel Starboard"
+        }
+    }
+}

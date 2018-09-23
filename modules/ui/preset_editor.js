@@ -14,13 +14,13 @@ import { utilRebind } from '../util';
 
 
 export function uiPresetEditor(context) {
-    var dispatch = d3_dispatch('change'),
-        formFields = uiFormFields(context),
-        state,
-        fieldsArr,
-        preset,
-        tags,
-        entityId;
+    var dispatch = d3_dispatch('change');
+    var formFields = uiFormFields(context);
+    var _state;
+    var _fieldsArr;
+    var _preset;
+    var _tags;
+    var _entityID;
 
 
     function presetEditor(selection) {
@@ -32,36 +32,36 @@ export function uiPresetEditor(context) {
 
 
     function render(selection) {
-        if (!fieldsArr) {
-            var entity = context.entity(entityId),
-                geometry = context.geometry(entityId),
-                presets = context.presets();
+        if (!_fieldsArr) {
+            var entity = context.entity(_entityID);
+            var geometry = context.geometry(_entityID);
+            var presets = context.presets();
 
-            fieldsArr = [];
+            _fieldsArr = [];
 
-            preset.fields.forEach(function(field) {
+            _preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {
-                    fieldsArr.push(
+                    _fieldsArr.push(
                         uiField(context, field, entity)
                     );
                 }
             });
 
             if (entity.isHighwayIntersection(context.graph()) && presets.field('restrictions')) {
-                fieldsArr.push(
+                _fieldsArr.push(
                     uiField(context, presets.field('restrictions'), entity)
                 );
             }
 
             presets.universal().forEach(function(field) {
-                if (preset.fields.indexOf(field) === -1) {
-                    fieldsArr.push(
+                if (_preset.fields.indexOf(field) === -1) {
+                    _fieldsArr.push(
                         uiField(context, field, entity, { show: false })
                     );
                 }
             });
 
-            fieldsArr.forEach(function(field) {
+            _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
                         dispatch.call('change', field, t, onInput);
@@ -69,15 +69,15 @@ export function uiPresetEditor(context) {
             });
         }
 
-        fieldsArr.forEach(function(field) {
+        _fieldsArr.forEach(function(field) {
             field
-                .state(state)
-                .tags(tags);
+                .state(_state)
+                .tags(_tags);
         });
 
 
         selection
-            .call(formFields.fieldsArr(fieldsArr), 'inspector-inner fillL3');
+            .call(formFields.fieldsArr(_fieldsArr), 'inspector-inner fillL3');
 
 
         selection.selectAll('.wrap-form-field input')
@@ -90,35 +90,35 @@ export function uiPresetEditor(context) {
     }
 
 
-    presetEditor.preset = function(_) {
-        if (!arguments.length) return preset;
-        if (preset && preset.id === _.id) return presetEditor;
-        preset = _;
-        fieldsArr = null;
+    presetEditor.preset = function(val) {
+        if (!arguments.length) return _preset;
+        if (_preset && _preset.id === val.id) return presetEditor;
+        _preset = val;
+        _fieldsArr = null;
         return presetEditor;
     };
 
 
-    presetEditor.state = function(_) {
-        if (!arguments.length) return state;
-        state = _;
+    presetEditor.state = function(val) {
+        if (!arguments.length) return _state;
+        _state = val;
         return presetEditor;
     };
 
 
-    presetEditor.tags = function(_) {
-        if (!arguments.length) return tags;
-        tags = _;
-        // Don't reset fieldsArr here.
+    presetEditor.tags = function(val) {
+        if (!arguments.length) return _tags;
+        _tags = val;
+        // Don't reset _fieldsArr here.
         return presetEditor;
     };
 
 
-    presetEditor.entityID = function(_) {
-        if (!arguments.length) return entityId;
-        if (entityId === _) return presetEditor;
-        entityId = _;
-        fieldsArr = null;
+    presetEditor.entityID = function(val) {
+        if (!arguments.length) return _entityID;
+        if (_entityID === val) return presetEditor;
+        _entityID = val;
+        _fieldsArr = null;
         return presetEditor;
     };
 

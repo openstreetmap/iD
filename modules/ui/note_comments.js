@@ -11,6 +11,8 @@ export function uiNoteComments() {
 
 
     function noteComments(selection) {
+        if (_note.isNew()) return; // don't draw .comments-container
+
         var comments = selection.selectAll('.comments-container')
             .data([0]);
 
@@ -59,12 +61,14 @@ export function uiNoteComments() {
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
-            .text(function(d) { return d.action + ' ' + localeDateString(d.date); });
+            .text(function(d) {
+                return t('note.status.' + d.action, { when: localeDateString(d.date) });
+            });
 
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .text(function(d) { return d.text; });
+            .html(function(d) { return d.html; });
 
         comments
             .call(replaceAvatars);
@@ -99,6 +103,7 @@ export function uiNoteComments() {
         if (!s) return null;
         var detected = utilDetect();
         var options = { day: 'numeric', month: 'short', year: 'numeric' };
+        s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
         var d = new Date(s);
         if (isNaN(d.getTime())) return null;
         return d.toLocaleDateString(detected.locale, options);

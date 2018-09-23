@@ -36,6 +36,7 @@ import {
 
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
+import { modeDragNote } from './drag_note';
 import * as Operations from '../operations/index';
 import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
@@ -63,7 +64,8 @@ export function modeSelect(context, selectedIDs) {
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
-        modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior
+        modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior,
+        modeDragNote(context).behavior
     ];
     var inspector;
     var editMenu;
@@ -449,9 +451,7 @@ export function modeSelect(context, selectedIDs) {
             }
         });
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
+        behaviors.forEach(context.install);
 
         keybinding
             .on(['[', 'pgup'], previousVertex)
@@ -520,10 +520,7 @@ export function modeSelect(context, selectedIDs) {
         if (timeout) window.clearTimeout(timeout);
         if (inspector) wrap.call(inspector.close);
 
-        behaviors.forEach(function(behavior) {
-            context.uninstall(behavior);
-        });
-
+        behaviors.forEach(context.uninstall);
         keybinding.off();
         closeMenu();
         editMenu = undefined;

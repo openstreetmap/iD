@@ -10,6 +10,38 @@ describe('iD.osmNote', function () {
         });
     });
 
-    // TODO: add tests for #update, or remove function
+    describe('#update', function() {
+        it('returns an updated note', function() {
+
+        });
+    });
+
+    describe('#isNew', function() {
+        it('returns true if a note is new', function() {
+            var note = iD.osmNote({
+                id: -1,
+                loc: [5, 10]
+            });
+            expect(note.isNew()).to.be.true;
+        });
+        it('returns false if a note is not new', function() {
+            var note = iD.osmNote({
+                id: 1,
+                loc: [5, 10]
+            });
+            expect(note.isNew()).to.be.false;
+        });
+    });
+
+    describe('#move', function() {
+        it('returns an moved note', function() {
+            var note = iD.osmNote({
+                id: 1,
+                loc: [5, 5]
+            });
+            note = note.move([10, 10]);
+            expect(note.loc).to.eql([10, 10]);
+        });
+    });
 
 });

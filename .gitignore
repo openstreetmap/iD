@@ -7,6 +7,7 @@
 /dist/*.map
 /dist/img/*.svg
 /dist/mapillary-js/
+/dist/pannellum-streetside/
 /node_modules/
 /.tx/tmp/
 npm-debug.log

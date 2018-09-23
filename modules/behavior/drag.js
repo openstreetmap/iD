@@ -9,6 +9,8 @@ import {
     touches as d3_touches
 } from 'd3-selection';
 
+import { osmNote } from '../osm';
+
 import { utilRebind } from '../util/rebind';
 
 import {
@@ -162,7 +164,10 @@ export function behaviorDrag() {
                 var target = d3_event.target;
                 for (; target && target !== root; target = target.parentNode) {
                     var datum = target.__data__;
-                    var entity = datum && datum.properties && datum.properties.entity;
+
+                    var entity = datum instanceof osmNote ?
+                        datum : datum && datum.properties && datum.properties.entity;
+
                     if (entity && target[matchesSelector](_selector)) {
                         return dragstart.call(target, entity);
                     }

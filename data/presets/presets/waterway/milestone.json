@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-milestone",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "distance",
+        "direction_vertex"
+    ],
+    "tags": {
+        "waterway": "milestone"
+    },
+    "terms": [
+        "milestone",
+        "marker"
+    ],
+    "name": "Waterway Milestone"
+}

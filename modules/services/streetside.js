@@ -1,4 +1,5 @@
 import _extend from 'lodash-es/extend';
+import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
@@ -17,7 +18,6 @@ import {
 import rbush from 'rbush';
 import { t } from '../util/locale';
 import { jsonpRequest } from '../util/jsonp_request';
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 
 import {
     geoExtent,
@@ -29,9 +29,10 @@ import {
 } from '../geo';
 
 import { utilDetect } from '../util/detect';
-import { utilQsString, utilRebind } from '../util';
+import { utilQsString, utilRebind, utilTiler } from '../util';
 
 import Q from 'q';
+
 
 var bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 var streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -40,10 +41,12 @@ var pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
 var pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 var maxResults = 2000;
 var tileZoom = 16.5;
+var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 var dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
 var minHfov = 10;         // zoom in degrees:  20, 10, 5
 var maxHfov = 90;         // zoom out degrees
 var defaultHfov = 45;
+
 var _hires = false;
 var _resolution = 512;    // higher numbers are slower - 512, 1024, 2048, 4096
 var _currScene = 0;
@@ -52,6 +55,7 @@ var _pannellumViewer;
 var _sceneOptions;
 var _dataUrlArray = [];
 
+
 /**
  * abortRequest().
  */
@@ -59,19 +63,6 @@ function abortRequest(i) {
     i.abort();
 }
 
-/**
- * nearNullIsland().
- */
-function nearNullIsland(x, y, z) {
-    if (z >= 7) {
-        var center = Math.pow(2, z - 1);
-        var width = Math.pow(2, z - 6);
-        var min = center - (width / 2);
-        var max = center + (width / 2) - 1;
-        return x >= min && x <= max && y >= min && y <= max;
-    }
-    return false;
-}
 
 /**
  * localeTimeStamp().
@@ -85,68 +76,33 @@ function localeTimestamp(s) {
     return d.toLocaleString(detected.locale, options);
 }
 
-/**
- * getTiles() returns array of d3 geo tiles.
- * Using d3.geo.tiles.js from lib, gets tile extents for each grid tile in a grid created from
- * an area around (and including) the current map view extents.
- */
-function getTiles(projection, margin) {
-    // s is the current map scale
-    // z is the 'Level of Detail', or zoom-level, where Level 1 is far from the earth, and Level 23 is close to the ground.
-    // ts ('tile size') here is the formula for determining the width/height of the map in pixels, but with a modification.
-    // See 'Ground Resolution and Map Scale': //https://msdn.microsoft.com/en-us/library/bb259689.aspx.
-    // As used here, by subtracting constant 'tileZoom' from z (the level), you end up with a much smaller value for the tile size (in pixels).
-    var s = projection.scale() * 2 * Math.PI;
-    var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-    var ts = 256 * Math.pow(2, z - tileZoom);
-    var origin = [
-        s / 2 - projection.translate()[0],
-        s / 2 - projection.translate()[1]
-    ];
-
-    var tiler = d3_geoTile()
-        .scaleExtent([tileZoom, tileZoom])
-        .scale(s)
-        .size(projection.clipExtent()[1])
-        .translate(projection.translate())
-        .margin(margin || 0);   // request nearby tiles so we can connect sequences.
-
-    return tiler()
-        .map(function(tile) {
-            var x = tile[0] * ts - origin[0];
-            var y = tile[1] * ts - origin[1];
-            return {
-                id: tile.toString(),
-                xyz: tile,
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
-}
 
 /**
  * loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
  */
 function loadTiles(which, url, projection, margin) {
-    var s = projection.scale() * 2 * Math.PI;
-    var currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
+    var tiles = tiler.margin(margin).getTiles(projection);
 
-    // breakup the map view into tiles
-    var tiles = getTiles(projection, margin).filter(function (t) {
-        return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
+    // abort inflight requests that are no longer needed
+    var cache = _ssCache[which];
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k.indexOf(tile.id + ',') === 0; });
+
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
     });
 
     tiles.forEach(function (tile) {
-       loadNextTilePage(which, currZoom, url, tile);
+       loadNextTilePage(which, url, tile);
     });
 }
 
 /**
  * loadNextTilePage() load data for the next tile page in line.
  */
-function loadNextTilePage(which, currZoom, url, tile) {
+function loadNextTilePage(which, url, tile) {
     var cache = _ssCache[which];
     var nextPage = cache.nextPage[tile.id] || 0;
     var id = tile.id + ',' + String(nextPage);
@@ -160,7 +116,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
         // [].shift() removes the first element, some statistics info, not a bubble point
         bubbles.shift();
 
-        var features = bubbles.map(function (bubble) {
+        var features = bubbles.map(function(bubble) {
             if (cache.points[bubble.id]) return null;  // skip duplicates
 
             var loc = [bubble.lo, bubble.la];
@@ -667,6 +623,14 @@ export default {
             .append('script')
             .attr('id', 'streetside-viewerjs')
             .attr('src', context.asset(pannellumViewerJS));
+
+
+        // Register viewer resize handler
+        context.ui().on('photoviewerResize', function() {
+            if (_pannellumViewer) {
+                _pannellumViewer.resize();
+            }
+        });
 
 
         function step(stepBy) {

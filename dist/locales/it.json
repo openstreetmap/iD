@@ -21,6 +21,11 @@
                 "description": "Aggiungi alla mappa ristoranti, monumenti, cassette postali o altri punti.",
                 "tail": "Clicca sulla mappa per inserire un punto."
             },
+            "add_note": {
+                "title": "Nota",
+                "description": "Hai trovato un errore? Segnalalo agli altri mappatori.",
+                "tail": "Clicca sulla mappa per aggiungere una nota."
+            },
             "browse": {
                 "title": "Naviga",
                 "description": "Muovi ed ingrandisci la mappa."
@@ -40,7 +45,8 @@
                 "annotation": {
                     "point": "Aggiunto un punto.",
                     "vertex": "Aggiunto un nodo ad una strada.",
-                    "relation": "Aggiunta una relazione."
+                    "relation": "Aggiunta una relazione.",
+                    "note": "Una nota aggiunta."
                 }
             },
             "start": {
@@ -270,7 +276,7 @@
                 }
             },
             "reverse": {
-                "title": "Inverti Direzione",
+                "title": "Inverti direzione",
                 "description": "Inverti il senso di direzione di questa linea.",
                 "key": "V",
                 "annotation": "Cambiato verso ad una linea."
@@ -297,6 +303,14 @@
                     "create": "Limitazione aggiunta",
                     "delete": "Limitazione rimossa"
                 }
+            },
+            "detach_node": {
+                "title": "Stacca",
+                "key": "E",
+                "description": "Stacca questo nodo da linee/aree.",
+                "annotation": "Un nodo staccato da una linea/area genitore.",
+                "restriction": "Questo nodo non può essere staccato perché ciò danneggerebbe una relazione “{relation}”.",
+                "connected_to_hidden": "Questo nodo non può essere staccato perché è collegato ad un elemento nascosto."
             }
         },
         "restriction": {
@@ -352,8 +366,8 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Ingrandisci per modificare",
-        "login": "accedi",
-        "logout": "esci",
+        "login": "Accedi",
+        "logout": "Esci",
         "loading_auth": "Connettendomi ad OpenStreetMap...",
         "report_a_bug": "Segnala un bug",
         "help_translate": "Aiuta nelle traduzioni",
@@ -416,7 +430,12 @@
                 "edited_by": "Modificato da",
                 "changeset": "Gruppo di modifiche",
                 "unknown": "Sconosciuto",
-                "link_text": "Cronologia su openstreetmap.org"
+                "link_text": "Cronologia su openstreetmap.org",
+                "note_no_history": "Nessuna cronologia (nota nuova)",
+                "note_comments": "Commenti",
+                "note_created_date": "Data di creazione",
+                "note_created_user": "Creata da",
+                "note_link_text": "Nota su openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -446,7 +465,8 @@
             "vertex": "vertice",
             "line": "linea",
             "area": "area",
-            "relation": "relazione"
+            "relation": "relazione",
+            "note": "nota"
         },
         "geocoder": {
             "search": "Cerca in tutto il mondo...",
@@ -509,8 +529,6 @@
             "best_imagery": "Migliore sorgente di immagini per questo luogo",
             "switch": "Ritorna a questo sfondo",
             "custom": "Personalizzato",
-            "custom_button": "Modifica sfondo personalizzato",
-            "custom_prompt": "Inserisci un modello di URL per i tasselli. Sono validi i valori:\n- {zoom} oppure {z}, {x}, {y} per il modello dei tasselli Z/X/Y\n- {-y} oppure {ty} per le coordinate Y in stile TMS rovesciato\n- {u} per il modello QuadTile\n- {switch:a,b,c} per il multiplexing del server DNS\n\nEsempio:\n{example}",
             "overlays": "Livelli sovrapposti",
             "imagery_source_faq": "Informazioni sulle immagini satellitari / Segnala un problema",
             "reset": "reset",
@@ -536,6 +554,10 @@
                 "osm": {
                     "tooltip": "Dati delle mappe da OpenStreetMap",
                     "title": "Dati OpenStreetMap"
+                },
+                "notes": {
+                    "tooltip": "Dati delle note da OpenStreetMap",
+                    "title": "Note di OpenStreetMap"
                 }
             },
             "fill_area": "Riempimento aree",
@@ -606,6 +628,16 @@
             "full": {
                 "description": "Riempimento totale",
                 "tooltip": "Le aree vengono completamente riempite."
+            }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Modifica sfondo personalizzato",
+                "header": "Impostazioni sfondo personalizzato",
+                "instructions": "Inserire un modello di URL. I token validi sono:\n{zoom} oppure {z}, {x}, {y} per lo schema dei tasselli Z/X/Y\n{-y} oppure {ty} per le coordinate Y stile TMS rovesciato\n{u} per lo schema quadtile\n{switch:a,b,c} per il bilanciamento del carico via DNS\n\nEsempio:\n{example}",
+                "template": {
+                    "placeholder": "Inserisci un modello di URL "
+                }
             }
         },
         "restore": {
@@ -707,18 +739,13 @@
             "in": "Ingrandisci",
             "out": "Rimpicciolisci"
         },
-        "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
+        "cannot_zoom": "Impossibile rimpicciolire ulteriormente nella modalità attuale.",
         "full_screen": "Passa a schermo intero",
-        "gpx": {
-            "local_layer": "File locale",
-            "drag_drop": "Trascina e rilascia un file .gpx, .geojson o .kml sulla pagina o clicca il pulsante a destra per sceglierne uno",
-            "zoom": "Zoom sul livello",
-            "browse": "Scegli un file"
-        },
         "streetside": {
             "tooltip": "Foto Streetside da Microsoft",
             "title": "Foto sovrimpresse (Bing Streetside)",
             "report": "Segnala un problema di privacy su questa foto",
+            "view_on_bing": "Vedi su Bing Maps",
             "hires": "Alta risoluzione"
         },
         "mapillary_images": {
@@ -738,6 +765,33 @@
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Visualizza questa immagine con OpenStreetCam"
+        },
+        "note": {
+            "note": "Nota",
+            "title": "Modifica nota",
+            "anonymous": "anonimo",
+            "closed": "(Chiusa)",
+            "commentTitle": "Commenti",
+            "status": {
+                "opened": "aperta il {when}",
+                "reopened": "riaperta il {when}",
+                "commented": "commentata il {when}",
+                "closed": "chiusa il {when}"
+            },
+            "newComment": "Nuovo commento",
+            "inputPlaceholder": "Inserire un commento da condividere con gli altri utenti.",
+            "close": "Chiudi nota",
+            "open": "Riapri nota",
+            "comment": "Commenta",
+            "close_comment": "Chiudi e commenta",
+            "open_comment": "Riapri e commenta",
+            "report": "Segnala",
+            "new": "Nuova nota",
+            "newDescription": "Descrivi il problema.",
+            "save": "Salva nota",
+            "login": "Per poter modificare o commentare questa nota devi aver effettuato l’accesso.",
+            "upload_explanation": "I tuoi commenti saranno visibili pubblicamente da tutti gli utenti di OpenStreetMap.",
+            "upload_explanation_with_user": "I tuoi commenti come utente {user} saranno visibili pubblicamente da tutti gli utenti di OpenStreetMap."
         },
         "help": {
             "title": "Aiuto",
@@ -876,6 +930,17 @@
                 "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo.",
                 "boundary_add": "Per aggiungere un elemento ad una relazione confine, seleziona l'elemento e scorri verso il basso fino alla sezione \"Tutte le relazioni\" dell'editor dell'elemento, poi clicca sul pulsante {plus} aggiungi per aggiungere l'elemento ad una relazione vicina già esistente o per crearne una nuova."
             },
+            "notes": {
+                "title": "Note",
+                "intro": "Le *note* servono per far sapere agli altri utenti che un elemento della mappa ha bisogno di essere controllato o corretto. Le note segnano una posizione specifica della mappa. Per vedere le note esistenti o aggiungerne di nuove, clicca sul pannello {data} **Dati della mappa** e abilita il livello delle note OpenStreetMap. ",
+                "add_note_h": "Aggiunta di note",
+                "add_note": "Per aggiungere una nuova nota, clicca il pulsante {note} **Nota** sulla barra degli strumenti sopra la mappa oppure premi la scorciatoia da tastiera `4`. Il cursore del mouse diventerà un simbolo a forma di croce. Per piazzare una nuova nota sulla mappa, posiziona il cursore del mouse dove deve stare la nota e poi clicca col {leftclick} tasto sinistro del mouse oppure premi `Spazio`.",
+                "move_note": "Solo le nuove note possono essere spostate. Per muovere una nota, posiziona il cursore del mouse sulla nuova nota e poi premi e tieni premuto il {leftclick} tasto sinistro del mouse mentre la sposti nella sua nuova posizione.",
+                "update_note_h": "Chiusura, riapertura e aggiunta di commenti",
+                "update_note": "Una nota esistente può essere aggiornata chiudendola, riaprendola oppure commentandola. La chiusura di una nota indica che il problema è stato risolto. La riapertura di una nota indica che il problema originale non è stato risolto.",
+                "save_note_h": "Salvataggio delle note",
+                "save_note": "Devi effettuare il salvataggio delle modifiche alle note per ogni nota cliccando nei pulsanti sotto ai commenti della nota. Le modifiche alle note **non** sono incluse nei gruppi di modifica che carichi su OpenStreetMap."
+            },
             "imagery": {
                 "title": "Immagini di sfondo",
                 "intro": "Le immagini di sfondo che appaiono dietro i dati della mappa sono una risorsa importante per il mappatore. Queste immagini possono essere foto aeree scattate da satelliti, aeroplani o droni oppure ancora mappe antiche digitalizzate o dati fruibili liberamente.",
@@ -888,7 +953,7 @@
             },
             "streetlevel": {
                 "title": "Foto a livello stradale",
-                "intro": "Le foto a livello stradale sono utili per mappare segnali stradali, attività commerciali e altri dettagli che non si possono vedere da foto satellitari o aeree. L'editor iD è compatibile con le foto a livello stradale di [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
+                "intro": "Le foto a livello stradale sono utili per mappare segnali stradali, attività commerciali e altri dettagli che non si possono vedere da foto satellitari o aeree. L’editor iD è compatibile con le foto a livello stradale di [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Utilizzo delle foto a livello stradale",
                 "using": "Per usare le foto a livello stradale, clicca sul pannello {data} **Dati mappa** a lato della mappa per abilitare o disabilitare i livelli di foto disponibili.",
                 "photos": "Quando abilitato, il livello delle foto mostra una linea lungo la sequenza di foto. A livelli di ingrandimento maggiori, un cerchio indica il punto in cui ogni foto è stata scattata, mentre a livelli di ingrandimento ancora più grandi, un cono mostra la direzione della fotocamera al momento dello scatto.",
@@ -1267,10 +1332,11 @@
                 "title": "Modifica",
                 "drawing": {
                     "title": "Disegna",
-                    "add_point": "modo 'aggiungi punto'",
-                    "add_line": "modo 'aggiungi linea'",
-                    "add_area": "modo 'aggiungi area'",
-                    "place_point": "Fai un punto",
+                    "add_point": "modo ‘aggiungi punto’",
+                    "add_line": "modo ‘aggiungi linea’",
+                    "add_area": "modo ‘aggiungi area’",
+                    "add_note": "modo ‘Aggiungi nota’",
+                    "place_point": "Posiziona un nodo o una nota",
                     "disable_snap": "Tieni premuto per disabilitare l'ancoraggio ai nodi preesistenti",
                     "stop_line": "Termine disegno di una linea o di un'area"
                 },
@@ -1279,6 +1345,7 @@
                     "continue_line": "Continua una linea dal nodo selezionato",
                     "merge": "Unisci (fondi) gli elementi selezionati",
                     "disconnect": "Disconnetti gli elementi dal nodo selezionato",
+                    "detach_node": "Stacca il nodo selezionato da linee/aree genitore",
                     "split": "Spezza una linea in due sul nodo selezionato",
                     "reverse": "Inverti la direzione di una linea",
                     "move": "Sposta gli elementi selezionati",
@@ -1382,24 +1449,28 @@
                     "label": "Accesso consentito",
                     "options": {
                         "designated": {
-                            "description": "Accesso consentito stando ai cartelli stradali od alle norme locali",
+                            "description": "Accesso consentito secondo i cartelli stradali o specifiche norme locali",
                             "title": "Preferenziale"
                         },
                         "destination": {
-                            "description": "Accesso consentito solo se la destinazione coincide con l'elemento stesso",
+                            "description": "Accesso consentito solo per raggiungere una destinazione",
                             "title": "Destinazione"
                         },
                         "dismount": {
-                            "description": "Accesso consentito, ma si deve scendere dal veicolo",
+                            "description": "Accesso consentito ma si deve scendere dal veicolo",
                             "title": "Scendere dal veicolo"
                         },
                         "no": {
-                            "description": "Accesso consentito ai soli autorizzati",
+                            "description": "Accesso non consentito al pubblico",
                             "title": "Vietato"
                         },
                         "permissive": {
                             "description": "Accesso consentito fino a quando il proprietario lo consente",
                             "title": "Permissivo"
+                        },
+                        "permit": {
+                            "description": "Accesso consentito solo ai possessori di un’autorizzazione o una licenza",
+                            "title": "Autorizzazione"
                         },
                         "private": {
                             "description": "Accesso consentito solo con il permesso individuale del proprietario",
@@ -1407,7 +1478,7 @@
                         },
                         "yes": {
                             "description": "Accesso consentito a norma di legge; diritto di passaggio",
-                            "title": "Permesso"
+                            "title": "Consentito"
                         }
                     },
                     "placeholder": "Non specificato",
@@ -1622,6 +1693,9 @@
                 "capacity": {
                     "label": "Capienza",
                     "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Versamenti"
                 },
                 "castle_type": {
                     "label": "Tipo"
@@ -2278,6 +2352,9 @@
                         "underground": "Sotterraneo"
                     }
                 },
+                "passenger_information_display": {
+                    "label": "Display arrivi/partenze"
+                },
                 "payment_multi": {
                     "label": "Tipologie di pagamento"
                 },
@@ -2509,6 +2586,9 @@
                 },
                 "site": {
                     "label": "Tipo"
+                },
+                "site_type": {
+                    "label": "Tipo di sito"
                 },
                 "smoking": {
                     "label": "Zona fumatori",
@@ -2982,10 +3062,6 @@
                 "amenity/bicycle_repair_station": {
                     "name": "Stazione di riparazione biciclette",
                     "terms": "riparazione,bibiclette,meccanico,bici,cicli"
-                },
-                "amenity/biergarten": {
-                    "name": "Birreria all'aperto",
-                    "terms": "birreria,distesa"
                 },
                 "amenity/boat_rental": {
                     "name": "Noleggio barche",
@@ -4842,6 +4918,10 @@
                     "name": "Ponte",
                     "terms": "ponte,viadotto,pontile,arco,strallato,cavalcavia"
                 },
+                "man_made/bunker_silo": {
+                    "name": "Bunker silo",
+                    "terms": "insilato,silaggio,stoccaggio,immagazzinamento,magazzino"
+                },
                 "man_made/chimney": {
                     "name": "Ciminiera",
                     "terms": "torre,camino"
@@ -4889,7 +4969,7 @@
                 },
                 "man_made/observatory": {
                     "name": "Osservatorio",
-                    "terms": "osservatorio,astronomico,meteorologico,vulcanologico,osservatorio meteorologico,osservatorio astronomico,radiotelescopio"
+                    "terms": "osservatorio,astronomico,meteorologico,vulcanologico,osservatorio meteorologico,osservatorio astronomico,radiotelescopio,specola"
                 },
                 "man_made/petroleum_well": {
                     "name": "Pozzo petrolifero",
@@ -6487,6 +6567,7 @@
                 "attribution": {
                     "text": "Termini & Feedback"
                 },
+                "description": "DigitalGlobe-Standard è un set curato di immagini che copre l’86% della terra emersa mondiale, con risoluzione disponibile dai 30 ai 60cm e copertura alternativa che usa Landsat. L’età media è di 2,31 anni anche se alcune aree vengono aggiornate due volte l’anno.",
                 "name": "Immagini DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
@@ -6661,6 +6742,27 @@
                 },
                 "name": "Hike & Bike"
             },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi piste per motoslitte da OSM (copre l’area scandinava)",
+                "name": "Motoslitte della Scandinavia (sovrapposta)"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaico di ortofoto svedesi del periodo 1955–1965. Potrebbe contenere foto più antiche o più recenti.",
+                "name": "Ortofoto storiche di Lantmäteriet, 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaico di ortofoto svedesi del periodo 1970–1980. Non ancora concluso.",
+                "name": "Ortofoto storiche di Lantmäteriet, 1975"
+            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Termini & Feedback"
@@ -6697,8 +6799,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scansione di ‘Mappe economiche’ ca 1950-1980",
-                "name": "Mappa economica Lantmäteriet (antica)"
+                "description": "Digitalizzazione di “Economic maps” ca. 1950–1980",
+                "name": "Cartina economica Lantmäteriet 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6711,6 +6813,13 @@
                     "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
                 },
                 "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Piste per motoslitte",
+                "name": "Mappa svedese per motoslitte"
             },
             "stamen-terrain-background": {
                 "attribution": {
@@ -6774,6 +6883,14 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mappando il Botswana su Facebook",
+                "description": "Pagina di OpenStreetMap nel Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mappando il Botswana su Twitter",
+                "description": "Twitter di OpenStreetMap nel Botswana"
+            },
             "cape-coast-youthmappers": {
                 "name": "Giovani mappatori dell’università di Cape Coast",
                 "description": "Seguici su Twitter: {url}",
@@ -7138,6 +7255,18 @@
                 "name": "Meetup di OpenStreetMap in Ungheria",
                 "description": "La piattaforma per organizzare incontri in Ungheria"
             },
+            "is-facebook": {
+                "name": "OSM dell’Islanda su Facebook",
+                "description": "Pagina di OpenStreetMap in Islanda"
+            },
+            "is-mailinglist": {
+                "name": "Mailinglist talk-is",
+                "description": "Talk-is è la mailinglist ufficiale della comunità OSM islandese"
+            },
+            "is-twitter": {
+                "name": "OSM Islanda su Twitter",
+                "description": "Twitter di OpenStreetMap in Islanda"
+            },
             "it-facebook": {
                 "name": "Facebook di OpenStreetMap dell’Italia",
                 "description": "Unisciti alla comunità italiana di OpenStreetMap su Facebook"
@@ -7309,6 +7438,10 @@
                 "description": "Mappatori e utenti OpenStreetMap nei dintorni di Portland, Maine",
                 "extendedDescription": "Maptime è letteralmente tempo per la mappatura. La nostra missione è quella di aprire le porte della cartografia a chiunque sia interessato, creando un posto e dei momenti per l’apprendimento collaborativo, l’esplorazione, la creazione di mappe usando strumenti e tecnologie per la mappatura."
             },
+            "us-ma-mailinglist": {
+                "name": "Mailinglist Talk-us-massachusetts",
+                "description": "Mailinglist per la comunità OSM del Massachusetts"
+            },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
                 "description": "Miglioriamo OpenStreetMap nell’area di Cleveland",
@@ -7336,6 +7469,11 @@
             "OSM-NYC": {
                 "name": "OpenStreetMap NYC",
                 "description": "Mappatori e utenti OpenStreetMap, sviluppatori e appassionati nell'area Metropolitana di New York"
+            },
+            "OSM-Portland-forum": {
+                "name": "Gruppo Google di OpenStreetMap PDX",
+                "description": "Forum e mailinglist degli utenti di OpenStreetMap nell’area di Portland",
+                "extendedDescription": "Questo gruppo serve a facilitare i miglioramenti di OpenStreetMap nell’area di Portland (stato dell’Oregon) e per sostenere applicazioni come Open trip Planner."
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
@@ -7545,6 +7683,29 @@
             "OSM-PE": {
                 "name": "OpenStreetMap del Perù",
                 "description": "Novità e risorse per la comunità di OpenStreetMap del Perù"
+            },
+            "LATAM-Facebook": {
+                "name": "Facebook di OpenStreetMap dell’America Latina",
+                "description": "OpenStreetMap dell’America Latina su Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "Telegram di OpenStreetMap dell’America Latina",
+                "description": "Telegram di OpenStreetMap per l’America Latina"
+            },
+            "LATAM-Twitter": {
+                "name": "Twitter di OpenStreetMap dell’America Latina",
+                "description": "Seguici su Twitter all’indirizzo {url}"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap dell’America Latina",
+                "description": "Sosteniamo OpenStreetMap in America Latina",
+                "events": {
+                    "sotm-latam-2018": {
+                        "name": "State of the Map America Latina 2018",
+                        "description": "State of the Map America Latina è la conferenza annuale per tutti i mappatori e gli utenti di OpenStreetMap in America Latina. Il programma include discussioni, gruppi, lezioni e mapathon riguardanti OpenStreetMap.",
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
             },
             "OSM-Facebook": {
                 "name": "OpenStreetMap su Facebook",

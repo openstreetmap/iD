@@ -4,7 +4,11 @@
         "name",
         "access_simple",
         "operator",
-        "address"
+        "address",
+        "lit",
+        "location_pool",
+        "length",
+        "swimming_pool"
     ],
     "geometry": [
         "point",
@@ -12,7 +16,8 @@
     ],
     "terms": [
         "dive",
-        "water"
+        "water",
+        "aquatics"
     ],
     "tags": {
         "leisure": "swimming_pool"

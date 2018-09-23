@@ -23,8 +23,8 @@ export function behaviorCopy(context) {
 
 
     function getDescendants(id, graph, descendants) {
-        var entity = graph.entity(id),
-            i, children;
+        var entity = graph.entity(id);
+        var children;
 
         descendants = descendants || {};
 
@@ -36,7 +36,7 @@ export function behaviorCopy(context) {
             children = [];
         }
 
-        for (i = 0; i < children.length; i++) {
+        for (var i = 0; i < children.length; i++) {
             if (!descendants[children[i]]) {
                 descendants[children[i]] = true;
                 descendants = getDescendants(children[i], graph, descendants);
@@ -50,11 +50,12 @@ export function behaviorCopy(context) {
     function doCopy() {
         if (!getSelectionText()) d3_event.preventDefault();
 
-        var graph = context.graph(),
-            selected = groupEntities(context.selectedIDs(), graph),
-            canCopy = [],
-            skip = {},
-            i, entity;
+        var graph = context.graph();
+        var selected = groupEntities(context.selectedIDs(), graph);
+        var canCopy = [];
+        var skip = {};
+        var entity;
+        var i;
 
         for (i = 0; i < selected.relation.length; i++) {
             entity = selected.relation[i];

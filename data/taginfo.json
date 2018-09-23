@@ -59,6 +59,12 @@
       "object_types": ["node", "way"]
     },
     {
+      "key": "seamark:type",
+      "description": "Seamark",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/harbor-15.svg?sanitize=true"
+    },
+    {
       "key": "waterway",
       "description": "Waterway, Type",
       "object_types": ["node", "way", "area"]
@@ -78,7 +84,8 @@
       "key": "advertising",
       "value": "column",
       "description": "Advertising Column",
-      "object_types": ["node", "area"]
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/storage_tank.svg?sanitize=true"
     },
     {
       "key": "aerialway",
@@ -191,7 +198,8 @@
       "key": "aeroway",
       "value": "runway",
       "description": "Runway",
-      "object_types": ["way", "area"]
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-plane-departure.svg?sanitize=true"
     },
     {
       "key": "aeroway",
@@ -348,7 +356,7 @@
     {
       "key": "amenity",
       "value": "biergarten",
-      "description": "Beer Garden",
+      "description": "Biergarten",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/beer-15.svg?sanitize=true"
     },
@@ -412,7 +420,7 @@
       "value": "charging_station",
       "description": "Charging Station",
       "object_types": ["node"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-charging-station.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -618,6 +626,13 @@
     },
     {
       "key": "amenity",
+      "value": "language_school",
+      "description": "Language School",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/school-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "library",
       "description": "Library",
       "object_types": ["node", "area"],
@@ -684,13 +699,6 @@
       "description": "Car Parking",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-15.svg?sanitize=true"
-    },
-    {
-      "key": "shelter_type",
-      "value": "pavilion",
-      "description": "Pavilion",
-      "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -864,6 +872,20 @@
       "key": "amenity",
       "value": "shelter",
       "description": "Shelter",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "gazebo",
+      "description": "Gazebo",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "lean_to",
+      "description": "Lean-To",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
@@ -1059,7 +1081,14 @@
     {
       "key": "vending",
       "value": "parcel_pickup;parcel_mail_in",
-      "description": "Parcel Pickup/Dropoff Vending Machine",
+      "description": "Parcel Pickup/Dropoff Locker",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/vending_machine.svg?sanitize=true"
+    },
+    {
+      "key": "vending",
+      "value": "parcel_pickup",
+      "description": "Parcel Pickup Locker",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/vending_machine.svg?sanitize=true"
     },
@@ -1576,7 +1605,8 @@
       "key": "building",
       "value": "hut",
       "description": "Hut",
-      "object_types": ["area"]
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"
     },
     {
       "key": "building",
@@ -1598,6 +1628,13 @@
       "description": "Mosque Building",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/place-of-worship-15.svg?sanitize=true"
+    },
+    {
+      "key": "building",
+      "value": "pavilion",
+      "description": "Pavilion Building",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
     {
       "key": "building",
@@ -1931,7 +1968,7 @@
       "value": "painter",
       "description": "Painter",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-paint-roller.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -2461,6 +2498,13 @@
     },
     {
       "key": "highway",
+      "value": "milestone",
+      "description": "Highway Milestone",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/milestone.svg?sanitize=true"
+    },
+    {
+      "key": "highway",
       "value": "mini_roundabout",
       "description": "Mini-Roundabout",
       "object_types": ["node"],
@@ -2778,6 +2822,20 @@
       "description": "Wayside Shrine",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/landmark-15.svg?sanitize=true"
+    },
+    {
+      "key": "historic",
+      "value": "wreck",
+      "description": "Shipwreck",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/ruins.svg?sanitize=true"
+    },
+    {
+      "key": "internet_access",
+      "value": "wlan",
+      "description": "Wi-Fi Hotspot, Internet Access",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-wifi.svg?sanitize=true"
     },
     {
       "key": "junction",
@@ -3102,6 +3160,13 @@
     },
     {
       "key": "leisure",
+      "value": "bandstand",
+      "description": "Bandstand",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/music-15.svg?sanitize=true"
+    },
+    {
+      "key": "leisure",
       "value": "beach_resort",
       "description": "Beach Resort",
       "object_types": ["node", "area"],
@@ -3167,7 +3232,7 @@
       "value": "fitness_centre",
       "description": "Gym / Fitness Center",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-dumbbell.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3350,6 +3415,13 @@
       "description": "American Football Field",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/america-football-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "badminton",
+      "description": "Badminton Court",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/tennis-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3562,7 +3634,15 @@
       "key": "man_made",
       "value": "bridge",
       "description": "Bridge",
-      "object_types": ["area"]
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
+    },
+    {
+      "key": "man_made",
+      "value": "bunker_silo",
+      "description": "Bunker Silo",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/silo.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -4149,7 +4229,7 @@
       "value": "lawyer",
       "description": "Law Office",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/suitcase-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-balance-scale.svg?sanitize=true"
     },
     {
       "key": "lawyer",
@@ -4163,7 +4243,7 @@
       "value": "moving_company",
       "description": "Moving Company Office",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/warehouse-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-people-carry.svg?sanitize=true"
     },
     {
       "key": "office",
@@ -4792,6 +4872,42 @@
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/ferry-line.svg?sanitize=true"
     },
     {
+      "key": "seamark:type",
+      "value": "beacon_isolated_danger",
+      "description": "Danger Beacon",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:type",
+      "value": "beacon_lateral",
+      "description": "Channel Beacon",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:type",
+      "value": "buoy_lateral",
+      "description": "Channel Buoy",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green",
+      "description": "Green Buoy, Colour",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red",
+      "description": "Red Buoy, Colour",
+      "object_types": ["node"]
+    },
+    {
+      "key": "seamark:type",
+      "value": "mooring",
+      "description": "Mooring",
+      "object_types": ["node"]
+    },
+    {
       "key": "shop",
       "description": "Shop, Type",
       "object_types": ["node", "area"],
@@ -5187,7 +5303,7 @@
       "value": "furniture",
       "description": "Furniture Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-couch.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5264,7 +5380,7 @@
       "value": "houseware",
       "description": "Houseware Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-blender.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5313,7 +5429,7 @@
       "value": "locksmith",
       "description": "Locksmith",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-key.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5404,7 +5520,7 @@
       "value": "optician",
       "description": "Optician",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-glasses.svg?sanitize=true"
     },
     {
       "key": "organic",
@@ -5425,7 +5541,7 @@
       "value": "paint",
       "description": "Paint Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-paint-roller.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5513,6 +5629,13 @@
     },
     {
       "key": "shop",
+      "value": "sewing",
+      "description": "Sewing Supply Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "shoes",
       "description": "Shoe Store",
       "object_types": ["node", "area"],
@@ -5537,7 +5660,7 @@
       "value": "storage_rental",
       "description": "Storage Rental",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5717,7 +5840,28 @@
       "key": "tourism",
       "value": "artwork",
       "description": "Artwork",
-      "object_types": ["node", "area"],
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+    },
+    {
+      "key": "artwork_type",
+      "value": "mural",
+      "description": "Mural",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+    },
+    {
+      "key": "artwork_type",
+      "value": "sculpture",
+      "description": "Sculpture",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
+    },
+    {
+      "key": "artwork_type",
+      "value": "statue",
+      "description": "Statue",
+      "object_types": ["node", "way", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/art-gallery-15.svg?sanitize=true"
     },
     {
@@ -6183,6 +6327,13 @@
     },
     {
       "key": "waterway",
+      "value": "milestone",
+      "description": "Waterway Milestone",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/milestone.svg?sanitize=true"
+    },
+    {
+      "key": "waterway",
       "value": "river",
       "description": "River",
       "object_types": ["way"],
@@ -6245,6 +6396,7 @@
     {"key": "access", "value": "designated", "description": "Allowed Access"},
     {"key": "access", "value": "destination", "description": "Allowed Access"},
     {"key": "access", "value": "dismount", "description": "Allowed Access"},
+    {"key": "access", "value": "permit", "description": "Allowed Access"},
     {"key": "foot", "value": "yes", "description": "Allowed Access"},
     {"key": "foot", "value": "no", "description": "Allowed Access"},
     {"key": "foot", "value": "permissive", "description": "Allowed Access"},
@@ -6252,6 +6404,7 @@
     {"key": "foot", "value": "designated", "description": "Allowed Access"},
     {"key": "foot", "value": "destination", "description": "Allowed Access"},
     {"key": "foot", "value": "dismount", "description": "Allowed Access"},
+    {"key": "foot", "value": "permit", "description": "Allowed Access"},
     {"key": "motor_vehicle", "value": "yes", "description": "Allowed Access"},
     {"key": "motor_vehicle", "value": "no", "description": "Allowed Access"},
     {
@@ -6279,6 +6432,11 @@
       "value": "dismount",
       "description": "Allowed Access"
     },
+    {
+      "key": "motor_vehicle",
+      "value": "permit",
+      "description": "Allowed Access"
+    },
     {"key": "bicycle", "value": "yes", "description": "Allowed Access"},
     {"key": "bicycle", "value": "no", "description": "Allowed Access"},
     {"key": "bicycle", "value": "permissive", "description": "Allowed Access"},
@@ -6286,6 +6444,7 @@
     {"key": "bicycle", "value": "designated", "description": "Allowed Access"},
     {"key": "bicycle", "value": "destination", "description": "Allowed Access"},
     {"key": "bicycle", "value": "dismount", "description": "Allowed Access"},
+    {"key": "bicycle", "value": "permit", "description": "Allowed Access"},
     {"key": "horse", "value": "yes", "description": "Allowed Access"},
     {"key": "horse", "value": "no", "description": "Allowed Access"},
     {"key": "horse", "value": "permissive", "description": "Allowed Access"},
@@ -6293,6 +6452,7 @@
     {"key": "horse", "value": "designated", "description": "Allowed Access"},
     {"key": "horse", "value": "destination", "description": "Allowed Access"},
     {"key": "horse", "value": "dismount", "description": "Allowed Access"},
+    {"key": "horse", "value": "permit", "description": "Allowed Access"},
     {"key": "addr:block_number", "description": "Address"},
     {"key": "addr:city", "description": "Address"},
     {"key": "addr:conscriptionnumber", "description": "Address"},
@@ -6467,7 +6627,7 @@
     {"key": "direction", "description": "Direction (Degrees Clockwise)"},
     {"key": "dispensing", "description": "Dispenses Prescriptions"},
     {"key": "display", "description": "Display"},
-    {"key": "distance", "description": "Total Distance"},
+    {"key": "distance", "description": "Distance"},
     {"key": "dock", "description": "Type"},
     {"key": "drive_through", "description": "Drive-Through"},
     {"key": "duration", "description": "Duration"},
@@ -6512,8 +6672,10 @@
     {"key": "fire_hydrant:type", "value": "underground", "description": "Type"},
     {"key": "fire_hydrant:type", "value": "wall", "description": "Type"},
     {"key": "fire_hydrant:type", "value": "pond", "description": "Type"},
+    {"key": "fireplace", "description": "Fireplace"},
     {"key": "fitness_station", "description": "Equipment Type"},
     {"key": "fixme", "description": "Fix Me"},
+    {"key": "flag:type", "description": "Flag Type"},
     {"key": "ford", "description": "Type"},
     {"key": "frequency", "description": "Operating Frequency"},
     {"key": "fuel:", "description": "Fuel Types"},
@@ -6540,6 +6702,12 @@
     {"key": "healthcare:speciality", "description": "Specialties"},
     {"key": "height", "description": "Height (Meters)"},
     {"key": "historic:civilization", "description": "Historic Civilization"},
+    {"key": "wreck:date_sunk", "description": "Date Sunk"},
+    {
+      "key": "wreck:visible_at_high_tide",
+      "description": "Visible At High Tide"
+    },
+    {"key": "wreck:visible_at_low_tide", "description": "Visible At Low Tide"},
     {"key": "hoops", "description": "Hoops"},
     {
       "key": "horse_scale",
@@ -6590,11 +6758,6 @@
     {"key": "internet_access", "value": "no", "description": "Internet Access"},
     {
       "key": "internet_access",
-      "value": "wlan",
-      "description": "Internet Access"
-    },
-    {
-      "key": "internet_access",
       "value": "wired",
       "description": "Internet Access"
     },
@@ -6609,6 +6772,7 @@
     {"key": "label", "description": "Label"},
     {"key": "lamp_type", "description": "Type"},
     {"key": "lanes", "description": "Lanes"},
+    {"key": "language:", "description": "Languages"},
     {"key": "layer", "description": "Layer"},
     {"key": "leaf_cycle", "value": "evergreen", "description": "Leaf Cycle"},
     {"key": "leaf_cycle", "value": "deciduous", "description": "Leaf Cycle"},
@@ -6631,9 +6795,13 @@
     {"key": "level", "description": "Level"},
     {"key": "building:levels", "description": "Levels"},
     {"key": "lit", "description": "Lit"},
+    {"key": "location", "value": "outdoor", "description": "Location"},
+    {"key": "location", "value": "indoor", "description": "Location"},
+    {"key": "location", "value": "roof", "description": "Location"},
     {"key": "location", "description": "Location"},
     {"key": "map_size", "description": "Coverage"},
     {"key": "map_type", "description": "Type"},
+    {"key": "material", "description": "Material"},
     {"key": "maxheight", "description": "Max Height"},
     {"key": "maxspeed", "description": "Speed Limit"},
     {"key": "maxspeed:advisory", "description": "Advisory Speed Limit"},
@@ -6815,6 +6983,7 @@
     {"key": "piste:type", "value": "ice_skate", "description": "Type"},
     {"key": "piste:type", "value": "snow_park", "description": "Type"},
     {"key": "piste:type", "value": "playground", "description": "Type"},
+    {"key": "piste:type", "value": "connection", "description": "Type"},
     {"key": "plant", "description": "Plant"},
     {"key": "plant:output:electricity", "description": "Power Output"},
     {"key": "baby", "description": "Baby Seat"},
@@ -6880,6 +7049,176 @@
       "description": "Hiking Difficulty"
     },
     {"key": "sanitary_dump_station", "description": "Toilet Disposal"},
+    {"key": "seamark:beacon_isolated_danger:shape", "description": "Shape"},
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "waterway_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "waterway_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "danger_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:category",
+      "value": "danger_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:beacon_lateral:colour",
+      "value": "red",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:beacon_lateral:colour",
+      "value": "green",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:beacon_lateral:colour",
+      "value": "grey",
+      "description": "Colour"
+    },
+    {"key": "seamark:beacon_lateral:shape", "description": "Shape"},
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "iala-a",
+      "description": "System"
+    },
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "iala-b",
+      "description": "System"
+    },
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "cevni",
+      "description": "System"
+    },
+    {
+      "key": "seamark:beacon_lateral:system",
+      "value": "other",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "channel_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "channel_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "waterway_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "waterway_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "danger_left",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "danger_right",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "preferred_channel_port",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:category",
+      "value": "preferred_channel_starboard",
+      "description": "Category"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red;white;red;white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green;white;green;white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "red;green;red",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "green;red;green",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "white",
+      "description": "Colour"
+    },
+    {
+      "key": "seamark:buoy_lateral:colour",
+      "value": "yellow",
+      "description": "Colour"
+    },
+    {"key": "seamark:buoy_lateral:shape", "description": "Shape"},
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "iala-a",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "iala-b",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "cevni",
+      "description": "System"
+    },
+    {
+      "key": "seamark:buoy_lateral:system",
+      "value": "other",
+      "description": "System"
+    },
+    {"key": "seamark:mooring:category", "description": "Category"},
+    {"key": "seamark:wreck:category", "description": "Category"},
     {"key": "seasonal", "description": "Seasonal"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},
@@ -6970,6 +7309,7 @@
       "description": "Surveillance Type"
     },
     {"key": "surveillance:zone", "description": "Surveillance Zone"},
+    {"key": "swimming_pool", "description": "Type"},
     {"key": "switch", "value": "mechanical", "description": "Type"},
     {"key": "switch", "value": "circuit_breaker", "description": "Type"},
     {"key": "switch", "value": "disconnector", "description": "Type"},

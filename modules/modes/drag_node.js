@@ -446,9 +446,6 @@ export function modeDragNode(context) {
         context.history()
             .on('undone.drag-node', null);
 
-        context.map()
-            .on('drawn.drag-node', null);
-
         _activeEntity = null;
 
         context.surface()

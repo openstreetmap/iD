@@ -14,12 +14,16 @@
         "internet_access/ssid"
     ],
     "terms": [
+        "aerodrome",
+        "aeroway",
         "airplane",
         "airport",
-        "aerodrome"
+        "jet",
+        "plane"
     ],
     "tags": {
         "aeroway": "aerodrome"
     },
+    "matchScore": 0.9,
     "name": "Airport"
 }

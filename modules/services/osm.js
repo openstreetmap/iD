@@ -2,7 +2,6 @@ import _chunk from 'lodash-es/chunk';
 import _cloneDeep from 'lodash-es/cloneDeep';
 import _extend from 'lodash-es/extend';
 import _forEach from 'lodash-es/forEach';
-import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _groupBy from 'lodash-es/groupBy';
 import _isEmpty from 'lodash-es/isEmpty';
@@ -17,7 +16,6 @@ import { xml as d3_xml } from 'd3-request';
 
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent, geoVecAdd } from '../geo';
 
 import {
@@ -31,10 +29,12 @@ import {
 import {
     utilRebind,
     utilIdleWorker,
+    utilTiler,
     utilQsString
 } from '../util';
 
 
+var tiler = utilTiler();
 var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
 var oauth = osmAuth({
@@ -74,6 +74,17 @@ function abortRequest(i) {
     if (i) {
         i.abort();
     }
+}
+
+
+function abortUnwantedRequests(cache, tiles) {
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k === tile.id; });
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
 }
 
 
@@ -159,6 +170,17 @@ function parseComments(comments) {
 }
 
 
+function encodeNoteRtree(note) {
+    return {
+        minX: note.loc[0],
+        minY: note.loc[1],
+        maxX: note.loc[0],
+        maxY: note.loc[1],
+        data: note
+    };
+}
+
+
 var parsers = {
     node: function nodeData(obj, uid) {
         var attrs = obj.attributes;
@@ -239,9 +261,10 @@ var parsers = {
         }
 
         var note = new osmNote(props);
-        var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
-        _noteCache.rtree.insert(item);
+        var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
+        _noteCache.rtree.insert(item);
+
         return note;
     },
 
@@ -310,6 +333,16 @@ function parseXML(xml, callback, options) {
         }
 
         return parser(child, uid);
+    }
+}
+
+
+// replace or remove note from rtree
+function updateRtree(item, replace) {
+    _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
+
+    if (replace) {
+        _noteCache.rtree.insert(item);
     }
 }
 
@@ -519,7 +552,7 @@ export default {
             return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
 
         } else if (_changeset.open) {   // reuse existing open changeset..
-            return createdChangeset(null, _changeset.open);
+            return createdChangeset.call(this, null, _changeset.open);
 
         } else {   // Open a new changeset..
             var options = {
@@ -749,103 +782,44 @@ export default {
     },
 
 
-    // Load data (entities or notes) from the API in tiles
+    // Load data (entities) from the API in tiles
     // GET /api/0.6/map?bbox=
-    // GET /api/0.6/notes?bbox=
-    loadTiles: function(projection, dimensions, callback, noteOptions) {
+    loadTiles: function(projection, callback) {
         if (_off) return;
 
         var that = this;
+        var path = '/api/0.6/map?bbox=';
 
-        // are we loading entities or notes?
-        var loadingNotes = (noteOptions !== undefined);
-        var path, cache, tilezoom, throttleLoadUsers;
+        // determine the needed tiles to cover the view
+        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
-        if (loadingNotes) {
-            noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-            path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
-            cache = _noteCache;
-            tilezoom = _noteZoom;
-            throttleLoadUsers = _throttle(function() {
-                var uids = Object.keys(_userCache.toLoad);
-                if (!uids.length) return;
-                that.loadUsers(uids, function() {});  // eagerly load user details
-            }, 750);
-        } else {
-            path = '/api/0.6/map?bbox=';
-            cache = _tileCache;
-            tilezoom = _tileZoom;
-        }
-
-        var s = projection.scale() * 2 * Math.PI;
-        var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
-        var ts = 256 * Math.pow(2, z - tilezoom);
-        var origin = [
-            s / 2 - projection.translate()[0],
-            s / 2 - projection.translate()[1]
-        ];
-
-        // what tiles cover the view?
-        var tiler = d3_geoTile()
-            .scaleExtent([tilezoom, tilezoom])
-            .scale(s)
-            .size(dimensions)
-            .translate(projection.translate());
-
-        var tiles = tiler().map(function(tile) {
-            var x = tile[0] * ts - origin[0];
-            var y = tile[1] * ts - origin[1];
-
-            return {
-                id: tile.toString(),
-                extent: geoExtent(
-                    projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y])
-                )
-            };
-        });
-
-        // remove inflight requests that no longer cover the view..
-        var hadRequests = !_isEmpty(cache.inflight);
-        _filter(cache.inflight, function(v, i) {
-            var wanted = _find(tiles, function(tile) { return i === tile.id; });
-            if (!wanted) {
-                delete cache.inflight[i];
-            }
-            return !wanted;
-        }).map(abortRequest);
-
-        if (hadRequests && !loadingNotes && _isEmpty(cache.inflight)) {
+        // abort inflight requests that are no longer needed
+        var hadRequests = !_isEmpty(_tileCache.inflight);
+        abortUnwantedRequests(_tileCache, tiles);
+        if (hadRequests && _isEmpty(_tileCache.inflight)) {
             dispatch.call('loaded');    // stop the spinner
         }
 
         // issue new requests..
         tiles.forEach(function(tile) {
-            if (cache.loaded[tile.id] || cache.inflight[tile.id]) return;
-            if (!loadingNotes && _isEmpty(cache.inflight)) {
+            if (_tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
+            if (_isEmpty(_tileCache.inflight)) {
                 dispatch.call('loading');   // start the spinner
             }
 
-            var options = { skipSeen: !loadingNotes };
-            cache.inflight[tile.id] = that.loadFromAPI(
+            var options = { skipSeen: true };
+            _tileCache.inflight[tile.id] = that.loadFromAPI(
                 path + tile.extent.toParam(),
                 function(err, parsed) {
-                    delete cache.inflight[tile.id];
+                    delete _tileCache.inflight[tile.id];
                     if (!err) {
-                        cache.loaded[tile.id] = true;
+                        _tileCache.loaded[tile.id] = true;
                     }
-
-                    if (loadingNotes) {
-                        throttleLoadUsers();
-                        dispatch.call('loadedNotes');
-
-                    } else {
-                        if (callback) {
-                            callback(err, _extend({ data: parsed }, tile));
-                        }
-                        if (_isEmpty(cache.inflight)) {
-                            dispatch.call('loaded');     // stop the spinner
-                        }
+                    if (callback) {
+                        callback(err, _extend({ data: parsed }, tile));
+                    }
+                    if (_isEmpty(_tileCache.inflight)) {
+                        dispatch.call('loaded');     // stop the spinner
                     }
                 },
                 options
@@ -854,18 +828,86 @@ export default {
     },
 
 
-    // Load notes from the API (just calls this.loadTiles)
+    // Load notes from the API in tiles
     // GET /api/0.6/notes?bbox=
-    loadNotes: function(projection, dimensions, noteOptions) {
-        noteOptions = _extend({ limit: 10000, closed: 7}, noteOptions);
-        this.loadTiles(projection, dimensions, null, noteOptions);
+    loadNotes: function(projection, noteOptions) {
+        noteOptions = _extend({ limit: 10000, closed: 7 }, noteOptions);
+        if (_off) return;
+
+        var that = this;
+        var path = '/api/0.6/notes?limit=' + noteOptions.limit + '&closed=' + noteOptions.closed + '&bbox=';
+        var throttleLoadUsers = _throttle(function() {
+            var uids = Object.keys(_userCache.toLoad);
+            if (!uids.length) return;
+            that.loadUsers(uids, function() {});  // eagerly load user details
+        }, 750);
+
+        // determine the needed tiles to cover the view
+        var tiles = tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
+
+        // abort inflight requests that are no longer needed
+        abortUnwantedRequests(_noteCache, tiles);
+
+        // issue new requests..
+        tiles.forEach(function(tile) {
+            if (_noteCache.loaded[tile.id] || _noteCache.inflight[tile.id]) return;
+
+            var options = { skipSeen: false };
+            _noteCache.inflight[tile.id] = that.loadFromAPI(
+                path + tile.extent.toParam(),
+                function(err) {
+                    delete _noteCache.inflight[tile.id];
+                    if (!err) {
+                        _noteCache.loaded[tile.id] = true;
+                    }
+                    throttleLoadUsers();
+                    dispatch.call('loadedNotes');
+                },
+                options
+            );
+        });
     },
 
 
     // Create a note
     // POST /api/0.6/notes?params
     postNoteCreate: function(note, callback) {
-        // todo
+        if (!this.authenticated()) {
+            return callback({ message: 'Not Authenticated', status: -3 }, note);
+        }
+        if (_noteCache.inflightPost[note.id]) {
+            return callback({ message: 'Note update already inflight', status: -2 }, note);
+        }
+
+        if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
+
+        var comment = note.newComment;
+        if (note.newCategory && note.newCategory !== 'None') { comment += ' #' + note.newCategory; }
+
+        var path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
+
+        _noteCache.inflightPost[note.id] = oauth.xhr(
+            { method: 'POST', path: path },
+            wrapcb(this, done, _connectionID)
+        );
+
+
+        function done(err, xml) {
+            delete _noteCache.inflightPost[note.id];
+            if (err) { return callback(err); }
+
+            // we get the updated note back, remove from caches and reparse..
+            this.removeNote(note);
+
+            var options = { skipSeen: false };
+            return parseXML(xml, function(err, results) {
+                if (err) {
+                    return callback(err);
+                } else {
+                    return callback(undefined, results[0]);
+                }
+            }, options);
+        }
     },
 
 
@@ -888,6 +930,7 @@ export default {
             action = 'reopen';
         } else {
             action = 'comment';
+            if (!note.newComment) return; // when commenting, comment required
         }
 
         var path = '/api/0.6/notes/' + note.id + '/' + action;
@@ -906,9 +949,7 @@ export default {
             if (err) { return callback(err); }
 
             // we get the updated note back, remove from caches and reparse..
-            var item = { minX: note.loc[0], minY: note.loc[1], maxX: note.loc[0], maxY: note.loc[1], data: note };
-            _noteCache.rtree.remove(item, function isEql(a, b) { return a.data.id === b.data.id; });
-            delete _noteCache.note[note.id];
+            this.removeNote(note);
 
             var options = { skipSeen: false };
             return parseXML(xml, function(err, results) {
@@ -941,6 +982,11 @@ export default {
     toggle: function(_) {
         _off = !_;
         return this;
+    },
+
+
+    isChangesetInflight: function() {
+        return !!_changeset.inflight;
     },
 
 
@@ -1051,12 +1097,22 @@ export default {
     },
 
 
+    // remove a single note from the cache
+    removeNote: function(note) {
+        if (!(note instanceof osmNote) || !note.id) return;
+
+        delete _noteCache.note[note.id];
+        updateRtree(encodeNoteRtree(note), false);  // false = remove
+    },
+
+
     // replace a single note in the cache
-    replaceNote: function(n) {
-        if (n instanceof osmNote) {
-            _noteCache.note[n.id] = n;
-        }
-        return n;
+    replaceNote: function(note) {
+        if (!(note instanceof osmNote) || !note.id) return;
+
+        _noteCache.note[note.id] = note;
+        updateRtree(encodeNoteRtree(note), true);  // true = replace
+        return note;
     }
 
 };

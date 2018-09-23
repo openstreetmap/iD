@@ -1,7 +1,15 @@
 {
     "icon": "maki-embassy",
+    "fields": [
+        "operator",
+        "flag/type",
+        "country",
+        "lit",
+        "height"
+    ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "man_made": "flagpole"

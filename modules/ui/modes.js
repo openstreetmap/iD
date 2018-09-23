@@ -1,8 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { 
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
@@ -10,6 +9,7 @@ import {
     modeAddArea,
     modeAddLine,
     modeAddPoint,
+    modeAddNote,
     modeBrowse
 } from '../modes';
 
@@ -17,65 +17,32 @@ import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 
+import _includes from 'lodash-es/includes';
 
 export function uiModes(context) {
     var modes = [
         modeAddPoint(context),
         modeAddLine(context),
-        modeAddArea(context)
+        modeAddArea(context),
+        modeAddNote(context)
     ];
-
 
     function editable() {
         var mode = context.mode();
         return context.editable() && mode && mode.id !== 'save';
     }
 
-    function difference(mode) {
-        var match = mode.attr('class');
-        var defaultIndex = context.presets().defaultTypes().findIndex(function(d) { return new RegExp(d).test(match); });
-        return defaultIndex === -1;
+    function notesEnabled() {
+        var noteLayer = context.layers().layer('notes');
+        return noteLayer && noteLayer.enabled();
     }
 
+    function notesEditable() {
+        var mode = context.mode();
+        return context.map().notesEditable() && mode && mode.id !== 'save';
+    }
 
     return function(selection) {
-        var buttons = selection.selectAll('button.add-button')
-            .data(modes);
-
-        buttons = buttons.enter()
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('class', function(mode) { return mode.id + ' add-button col4'; })
-            .on('click.mode-buttons', function(mode) {
-                // When drawing, ignore accidental clicks on mode buttons - #4042
-                var currMode = context.mode().id;
-                if (currMode.match(/^draw/) !== null) return;
-
-                if (mode.id === currMode) {
-                    context.enter(modeBrowse(context));
-                } else {
-                    context.enter(mode);
-                }
-            })
-            .call(tooltip()
-                .placement('bottom')
-                .html(true)
-                .title(function(mode) {
-                    return uiTooltipHtml(mode.description, mode.key);
-                })
-            );
-
-        buttons
-            .each(function(d) {
-                d3_select(this)
-                    .call(svgIcon('#iD-icon-' + d.button, 'pre-text'));
-            });
-
-        buttons
-            .append('span')
-            .attr('class', 'label')
-            .text(function(mode) { return mode.title; });
-
         context
             .on('enter.editor', function(entered) {
                 selection.selectAll('button.add-button')
@@ -94,12 +61,13 @@ export function uiModes(context) {
 
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {
-                if (editable()) {
-                    if (mode.id === context.mode().id) {
-                        context.enter(modeBrowse(context));
-                    } else {
-                        context.enter(mode);
-                    }
+                if (mode.id === 'add-note' && !(notesEnabled() && notesEditable())) return;
+                if (mode.id !== 'add-note' && !editable()) return;
+
+                if (mode.id === context.mode().id) {
+                    context.enter(modeBrowse(context));
+                } else {
+                    context.enter(mode);
                 }
             });
         });
@@ -117,15 +85,67 @@ export function uiModes(context) {
         context
             .on('enter.modes', update);
 
+        update();
 
 
         function update() {
-            var modes = selection.selectAll('button.add-button');
-            modes.property('disabled', !editable());
-            d3_selectAll('button.add-button').each(function (d) {
-                var mode = d3_select(this);
-                mode.property('disabled', difference(mode));
-            });
+            var showNotes = notesEnabled();
+            var data = showNotes ? modes : modes.slice(0, 3);
+
+            selection
+                .classed('col3', !showNotes)  // 25%
+                .classed('col4', showNotes);  // 33%
+
+            var buttons = selection.selectAll('button.add-button')
+                .data(data, function(d) { return d.id; });
+
+            // exit
+            buttons.exit()
+                .remove();
+
+            // enter
+            var buttonsEnter = buttons.enter()
+                .append('button')
+                .attr('tabindex', -1)
+                .attr('class', function(d) { return d.id + ' add-button'; })
+                .on('click.mode-buttons', function(mode) {
+                    // When drawing, ignore accidental clicks on mode buttons - #4042
+                    var currMode = context.mode().id;
+                    if (currMode.match(/^draw/) !== null) return;
+
+                    if (mode.id === currMode) {
+                        context.enter(modeBrowse(context));
+                    } else {
+                        context.enter(mode);
+                    }
+                })
+                .call(tooltip()
+                    .placement('bottom')
+                    .html(true)
+                    .title(function(mode) {
+                        return uiTooltipHtml(mode.description, mode.key);
+                    })
+                );
+
+            buttonsEnter
+                .each(function(d) {
+                    d3_select(this)
+                        .call(svgIcon('#iD-icon-' + d.button, 'pre-text'));
+                });
+
+            buttonsEnter
+                .append('span')
+                .attr('class', 'label')
+                .text(function(mode) { return mode.title; });
+
+            // update
+            buttons = buttons
+                .merge(buttonsEnter)
+                .classed('col3', showNotes)    // 25%
+                .classed('col4', !showNotes)   // 33%
+                .property('disabled', function(d) {
+                    return d.id === 'add-note' ? !notesEditable() : !editable();
+                });
         }
     };
 }

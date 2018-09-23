@@ -1,0 +1,22 @@
+{
+    "icon": "maki-school",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "language_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "esl"
+    ],
+    "tags": {
+        "amenity": "language_school"
+    },
+    "name": "Language School"
+}

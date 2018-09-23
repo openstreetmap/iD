@@ -1,16 +1,15 @@
 import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
-import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoScaleToZoom, geoVecLength } from '../geo';
-import { utilPrefixCSSProperty } from '../util';
+import { utilPrefixCSSProperty, utilTiler } from '../util';
 
 
 export function rendererTileLayer(context) {
-    var tileSize = 256;
     var transformProp = utilPrefixCSSProperty('Transform');
-    var geotile = d3_geoTile();
+    var tiler = utilTiler();
 
+    var _tileSize = 256;
     var _projection;
     var _cache = {};
     var _tileOrigin;
@@ -18,22 +17,9 @@ export function rendererTileLayer(context) {
     var _source;
 
 
-    // blacklist overlay tiles around Null Island..
-    function nearNullIsland(x, y, z) {
-        if (z >= 7) {
-            var center = Math.pow(2, z - 1);
-            var width = Math.pow(2, z - 6);
-            var min = center - (width / 2);
-            var max = center + (width / 2) - 1;
-            return x >= min && x <= max && y >= min && y <= max;
-        }
-        return false;
-    }
-
-
     function tileSizeAtZoom(d, z) {
-        var EPSILON = 0.002;
-        return ((tileSize * Math.pow(2, z - d[2])) / tileSize) + EPSILON;
+        var EPSILON = 0.002;    // close seams
+        return ((_tileSize * Math.pow(2, z - d[2])) / _tileSize) + EPSILON;
     }
 
 
@@ -78,7 +64,7 @@ export function rendererTileLayer(context) {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
-        _zoom = geoScaleToZoom(_projection.scale(), tileSize);
+        _zoom = geoScaleToZoom(_projection.scale(), _tileSize);
 
         var pixelOffset;
         if (_source) {
@@ -95,7 +81,7 @@ export function rendererTileLayer(context) {
             _projection.translate()[1] + pixelOffset[1]
         ];
 
-        geotile
+        tiler
             .scale(_projection.scale() * 2 * Math.PI)
             .translate(translate);
 
@@ -117,7 +103,9 @@ export function rendererTileLayer(context) {
         var showDebug = context.getDebug('tile') && !_source.overlay;
 
         if (_source.validZoom(_zoom)) {
-            geotile().forEach(function(d) {
+            tiler.skipNullIsland(!!_source.overlay);
+
+            tiler().forEach(function(d) {
                 addSource(d);
                 if (d[3] === '') return;
                 if (typeof d[3] !== 'string') return; // Workaround for #2295
@@ -128,14 +116,10 @@ export function rendererTileLayer(context) {
             });
 
             requests = uniqueBy(requests, 3).filter(function(r) {
-                if (!!_source.overlay && nearNullIsland(r[0], r[1], r[2])) {
-                    return false;
-                }
                 // don't re-request tiles which have failed in the past
                 return _cache[r[3]] !== false;
             });
         }
-
 
         function load(d) {
             _cache[d[3]] = true;
@@ -156,7 +140,7 @@ export function rendererTileLayer(context) {
         }
 
         function imageTransform(d) {
-            var ts = tileSize * Math.pow(2, _zoom - d[2]);
+            var ts = _tileSize * Math.pow(2, _zoom - d[2]);
             var scale = tileSizeAtZoom(d, _zoom);
             return 'translate(' +
                 ((d[0] * ts) - _tileOrigin[0]) + 'px,' +
@@ -165,7 +149,7 @@ export function rendererTileLayer(context) {
         }
 
         function tileCenter(d) {
-            var ts = tileSize * Math.pow(2, _zoom - d[2]);
+            var ts = _tileSize * Math.pow(2, _zoom - d[2]);
             return [
                 ((d[0] * ts) - _tileOrigin[0] + (ts / 2)),
                 ((d[1] * ts) - _tileOrigin[1] + (ts / 2))
@@ -180,7 +164,7 @@ export function rendererTileLayer(context) {
 
         // Pick a representative tile near the center of the viewport
         // (This is useful for sampling the imagery vintage)
-        var dims = geotile.size();
+        var dims = tiler.size();
         var mapCenter = [dims[0] / 2, dims[1] / 2];
         var minDist = Math.max(dims[0], dims[1]);
         var nearCenter;
@@ -277,8 +261,8 @@ export function rendererTileLayer(context) {
 
 
     background.dimensions = function(_) {
-        if (!arguments.length) return geotile.size();
-        geotile.size(_);
+        if (!arguments.length) return tiler.size();
+        tiler.size(_);
         return background;
     };
 
@@ -286,8 +270,9 @@ export function rendererTileLayer(context) {
     background.source = function(_) {
         if (!arguments.length) return _source;
         _source = _;
+        _tileSize = _source.tileSize;
         _cache = {};
-        geotile.scaleExtent(_source.scaleExtent);
+        tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
         return background;
     };
 

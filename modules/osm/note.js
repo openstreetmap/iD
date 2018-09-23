@@ -39,7 +39,7 @@ _extend(osmNote.prototype, {
         }
 
         if (!this.id) {
-            this.id = osmNote.id();
+            this.id = osmNote.id() + '';  // as string
         }
 
         return this;
@@ -50,11 +50,15 @@ _extend(osmNote.prototype, {
     },
 
     update: function(attrs) {
-        return osmNote(this, attrs, {v: 1 + (this.v || 0)});
+        return osmNote(this, attrs); // {v: 1 + (this.v || 0)}
     },
 
     isNew: function() {
         return this.id < 0;
+    },
+
+    move: function(loc) {
+        return this.update({ loc: loc });
     }
 
 });

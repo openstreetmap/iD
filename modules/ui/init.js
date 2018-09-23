@@ -2,6 +2,7 @@ import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
@@ -13,6 +14,7 @@ import { modeBrowse } from '../modes';
 import { services } from '../services';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
+import { utilRebind } from '../util';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -45,6 +47,7 @@ import { uiCmd } from './cmd';
 
 export function uiInit(context) {
     var uiInitCounter = 0;
+    var dispatch = d3_dispatch('photoviewerResize');
 
 
     function render(container) {
@@ -256,7 +259,33 @@ export function uiInit(context) {
             .append('div')
             .call(svgIcon('#iD-icon-close'));
 
+        photoviewer
+            .append('button')
+            .attr('class', 'resize-handle-xy')
+            .on(
+                'mousedown',
+                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnX: true, resizeOnY: true })
+            );
 
+        photoviewer
+            .append('button')
+            .attr('class', 'resize-handle-x')
+            .on(
+                'mousedown',
+                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnX: true })
+            );
+
+        photoviewer
+            .append('button')
+            .attr('class', 'resize-handle-y')
+            .on(
+                'mousedown',
+                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnY: true })
+            );
+
+        var mapDimensions = map.dimensions();
+
+        // bind events
         window.onbeforeunload = function() {
             return context.save();
         };
@@ -265,30 +294,13 @@ export function uiInit(context) {
             context.history().unlock();
         };
 
-        var mapDimensions = map.dimensions();
-
-
-        function onResize() {
-            mapDimensions = utilGetDimensions(content, true);
-            map.dimensions(mapDimensions);
-        }
-
         d3_select(window)
             .on('resize.editor', onResize);
 
         onResize();
 
-        function pan(d) {
-            return function() {
-                d3_event.preventDefault();
-                context.pan(d, 100);
-            };
-        }
 
-
-        // pan amount
-        var pa = 80;
-
+        var pa = 80;  // pan amount
         var keybinding = d3_keybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
             .on('←', pan([pa, 0]))
@@ -316,8 +328,8 @@ export function uiInit(context) {
                 .call(uiShortcuts(context));
         }
 
-        var osm = context.connection(),
-            auth = uiLoading(context).message(t('loading_auth')).blocking(true);
+        var osm = context.connection();
+        var auth = uiLoading(context).message(t('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -335,6 +347,85 @@ export function uiInit(context) {
         if (hash.startWalkthrough) {
             hash.startWalkthrough = false;
             context.container().call(uiIntro(context));
+        }
+
+
+        function onResize() {
+            mapDimensions = utilGetDimensions(content, true);
+            map.dimensions(mapDimensions);
+
+            // shrink photo viewer if it is too big
+            // (-90 preserves space at top and bottom of map used by menus)
+            var photoDimensions = utilGetDimensions(photoviewer, true);
+            if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - 90)) {
+                var setPhotoDimensions = [
+                    Math.min(photoDimensions[0], mapDimensions[0]),
+                    Math.min(photoDimensions[1], mapDimensions[1] - 90),
+                ];
+
+                photoviewer
+                    .style('width', setPhotoDimensions[0] + 'px')
+                    .style('height', setPhotoDimensions[1] + 'px');
+
+                dispatch.call('photoviewerResize', photoviewer, setPhotoDimensions);
+            }
+        }
+
+
+        function pan(d) {
+            return function() {
+                d3_event.preventDefault();
+                context.pan(d, 100);
+            };
+        }
+
+        function buildResizeListener(target, eventName, dispatch, options) {
+            var resizeOnX = !!options.resizeOnX;
+            var resizeOnY = !!options.resizeOnY;
+            var minHeight = options.minHeight || 240;
+            var minWidth = options.minWidth || 320;
+            var startX;
+            var startY;
+            var startWidth;
+            var startHeight;
+
+            function startResize() {
+                var mapSize = context.map().dimensions();
+
+                if (resizeOnX) {
+                    var maxWidth = mapSize[0];
+                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, maxWidth);
+                    target.style('width', newWidth + 'px');
+                }
+
+                if (resizeOnY) {
+                    var maxHeight = mapSize[1] - 90;  // preserve space at top/bottom of map
+                    var newHeight = clamp((startHeight + startY - d3_event.clientY), minHeight, maxHeight);
+                    target.style('height', newHeight + 'px');
+                }
+
+                dispatch.call(eventName, target, utilGetDimensions(target, true));
+            }
+
+            function clamp(num, min, max) {
+                return Math.max(min, Math.min(num, max));
+            }
+
+            function stopResize() {
+                d3_select(window)
+                    .on('.' + eventName, null);
+            }
+
+            return function initResize() {
+                startX = d3_event.clientX;
+                startY = d3_event.clientY;
+                startWidth = target.node().getBoundingClientRect().width;
+                startHeight = target.node().getBoundingClientRect().height;
+
+                d3_select(window)
+                    .on('mousemove.' + eventName, startResize, false)
+                    .on('mouseup.' + eventName, stopResize, false);
+            };
         }
     }
 
@@ -370,5 +461,5 @@ export function uiInit(context) {
 
     ui.sidebar = uiSidebar(context);
 
-    return ui;
+    return utilRebind(ui, dispatch, 'on');
 }

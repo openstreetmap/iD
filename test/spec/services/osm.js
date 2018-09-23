@@ -658,12 +658,28 @@ describe('iD.serviceOsm', function () {
             });
         });
 
+    describe('#removeNote', function() {
+        it('removes a note that is new', function(done) {
+            var note = iD.osmNote({ id: -1, loc: [0, 0], });
+            connection.replaceNote(note);
+            connection.removeNote(note);
+            var result = connection.getNote(-1);
+            expect(result).to.eql(undefined);
+            done();
+        });
+    });
+
 
     describe('#replaceNote', function() {
         it('returns a new note', function (done) {
             var note = iD.osmNote({ id: 2, loc: [0, 0], });
             var result = connection.replaceNote(note);
             expect(result.id).to.eql(2);
+            expect(connection.caches().note.note[2]).to.eql(note);
+            var rtree = connection.caches().note.rtree;
+            var result_rtree = rtree.search({ 'minX': -1, 'minY': -1, 'maxX': 1, 'maxY': 1 });
+            expect(result_rtree.length).to.eql(1);
+            expect(result_rtree[0].data).to.eql(note);
             done();
         });
 
@@ -673,6 +689,12 @@ describe('iD.serviceOsm', function () {
             note.status = 'closed';
             var result = connection.replaceNote(note);
             expect(result.status).to.eql('closed');
+
+            var rtree = connection.caches().note.rtree;
+            var result_rtree = rtree.search({ 'minX': -1, 'minY': -1, 'maxX': 1, 'maxY': 1 });
+            expect(result_rtree.length).to.eql(1);
+            expect(result_rtree[0].data.status).to.eql('closed');
+
             done();
         });
     });

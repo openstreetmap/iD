@@ -138,7 +138,6 @@ export function behaviorDraw(context) {
                 return;
             }
         }
-
         dispatch.call('click', this, context.map().mouseCoordinates(), d);
     }
 

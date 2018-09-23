@@ -6,7 +6,10 @@
 .layer-notes .note * {
     pointer-events: none;
 }
-.layer-notes .note .note-fill {
+.mode-browse .layer-notes .note .note-fill,
+.mode-select .layer-notes .note .note-fill,
+.mode-select-data .layer-notes .note .note-fill,
+.mode-select-note .layer-notes .note .note-fill {
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-point.png), pointer; /* FF */
@@ -20,155 +23,95 @@
 .layer-notes .note .note-fill {
     color: #ff3300;
     stroke: #333;
+    stroke-width: 40px;
+}
+.note-header-icon.new .note-fill,
+.layer-notes .note.new .note-fill {
+    color: #ffee00;
+    stroke: #333;
+    stroke-width: 40px;
 }
 .note-header-icon.closed .note-fill,
 .layer-notes .note.closed .note-fill {
     color: #55dd00;
     stroke: #333;
-}
-.layer-notes .note.hovered .note-fill {
-    color: #eebb00;
-    stroke: #333;
-}
-.layer-notes .note.selected .note-fill {
-    color: #ffee00;
-    stroke: #333;
+    stroke-width: 40px;
 }
 
 /* slight adjustments to preset icon for note icons */
 .note-header-icon .preset-icon-28 {
     top: 18px;
 }
-
 .note-header-icon .note-icon-annotation {
     position: absolute;
-    top: 21px;
-    left: 21px;
+    top: 22px;
+    left: 22px;
     margin: auto;
 }
-
 .note-header-icon .note-icon-annotation .icon {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
 }
 
 
-/* OSM Note UI */
-.note-header {
-    background-color: #f6f6f6;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
+/* Custom Map Data (geojson, gpx, kml, vector tile) */
+
+.layer-mapdata {
+    pointer-events: none;
 }
 
-.note-header-icon {
-    background-color: #fff;
-    padding: 10px;
-    flex: 0 0 62px;
-    position: relative;
-    width: 60px;
-    height: 60px;
-    border-right: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
+.layer-mapdata path.shadow {
+    pointer-events: stroke;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+    fill: none;
 }
-[dir='rtl'] .note-header-icon {
-    border-right: unset;
-    border-left: 1px solid #ccc;
-    border-radius: 0 5px 5px 0;
+.layer-mapdata path.MultiPoint.shadow,
+.layer-mapdata path.Point.shadow {
+    pointer-events: fill;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+.layer-mapdata path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.layer-mapdata path.shadow.selected {
+    stroke-opacity: 0.7;
 }
 
-.note-header-icon .icon-wrap {
-    position: absolute;
-    top: 0px;
+.layer-mapdata path.stroke {
+    stroke: #ff26d4;
+    stroke-width: 2;
+    fill: none;
 }
 
-.note-header-label {
-    background-color: #f6f6f6;
-    padding: 0 15px;
-    flex: 1 1 100%;
-    font-size: 14px;
+.layer-mapdata path.fill {
+    stroke-width: 0;
+    stroke-opacity: 0.3;
+    stroke: #ff26d4;
+    fill: #ff26d4;
+    fill-opacity: 0.3;
+    fill-rule: evenodd;
+}
+
+.layer-mapdata text.label-halo,
+.layer-mapdata text.label {
+    font-size: 10px;
     font-weight: bold;
-    border-radius: 0 5px 5px 0;
+    dominant-baseline: middle;
 }
-[dir='rtl'] .note-header-label {
-    border-radius: 5px 0 0 5px;
+.layer-mapdata text.label {
+    fill: #ff26d4;
 }
-
-.comments-container {
-    background: #ececec;
-    padding: 1px 10px;
-    margin: 10px 0;
-    border-radius: 8px;
+.layer-mapdata text.label.hover,
+.layer-mapdata text.label.selected {
+    fill: #f6634f;
 }
-
-.comment {
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin: 10px auto;
-    display: flex;
-    flex-flow: row nowrap;
-}
-.comment-avatar {
-    padding: 10px;
-    flex: 0 0 62px;
-}
-.comment-avatar .icon.comment-avatar-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-}
-.comment-main {
-    padding: 10px 10px 10px 0;
-    flex: 1 1 100%;
-    flex-flow: column nowrap;
-    overflow: hidden;
-    overflow-wrap: break-word;
-}
-[dir='rtl'] .comment-main {
-    padding: 10px 0 10px 10px;
+.layer-mapdata text.label-halo {
+    opacity: 0.7;
+    stroke: #000;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
 }
 
-.comment-metadata {
-    flex-flow: row nowrap;
-    justify-content: space-between;
-}
-.comment-author {
-    font-weight: bold;
-    color: #333;
-}
-.comment-date {
-    color: #aaa;
-}
-.comment-text {
-    color: #333;
-    margin-top: 10px;
-    overflow-y: auto;
-    max-height: 250px;
-}
-.comment-text::-webkit-scrollbar {
-    border-left: none;
-}
-
-.note-save {
-    padding: 10px;
-}
-
-.note-save #new-comment-input {
-    width: 100%;
-    height: 100px;
-    max-height: 300px;
-    min-height: 100px;
-}
-
-.note-save .detail-section {
-    margin: 10px 0;
-}
-
-.note-report {
-    float: right;
-}

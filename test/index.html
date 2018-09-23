@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <title>Mocha Tests</title>
@@ -7,6 +8,7 @@
     <link rel='stylesheet' href='../dist/iD.css'>
     <!-- <script src='../node_modules/d3/build/d3.js'></script> -->
 </head>
+
 <body style="overflow:scroll">
     <div id='mocha'></div>
 
@@ -17,13 +19,14 @@
     <script src='../node_modules/happen/happen.js'></script>
 
     <script>
-    if (typeof initMochaPhantomJS === 'function') {
-        initMochaPhantomJS()
-    }
+        if (typeof initMochaPhantomJS === 'function') {
+            initMochaPhantomJS()
+        }
     </script>
 
     <!-- include source files here... -->
     <script src='../dist/iD.js'></script>
+
     <script src='spec/spec_helpers.js'></script>
 
     <!-- include spec files below... -->
@@ -59,6 +62,7 @@
     <script src='spec/actions/straighten.js'></script>
     <script src='spec/actions/unrestrict_turn.js'></script>
     <script src='spec/actions/reflect.js'></script>
+    <script src='spec/actions/detach_node.js'></script>
 
     <script src='spec/behavior/hash.js'></script>
     <script src='spec/behavior/hover.js'></script>
@@ -81,6 +85,7 @@
     <script src='spec/lib/locale.js'></script>
 
     <script src='spec/modes/add_point.js'></script>
+    <script src='spec/modes/add_note.js'></script>
 
     <script src='spec/osm/changeset.js'></script>
     <script src='spec/osm/entity.js'></script>
@@ -88,6 +93,7 @@
     <script src='spec/osm/multipolygon.js'></script>
     <script src='spec/osm/lanes.js'></script>
     <script src='spec/osm/node.js'></script>
+    <script src='spec/osm/note.js'></script>
     <script src='spec/osm/relation.js'></script>
     <script src='spec/osm/way.js'></script>
 
@@ -109,11 +115,12 @@
     <script src='spec/services/taginfo.js'></script>
 
     <script src='spec/svg/areas.js'></script>
-    <script src='spec/svg/gpx.js'></script>
+    <script src='spec/svg/data.js'></script>
     <script src='spec/svg/icon.js'></script>
     <script src='spec/svg/layers.js'></script>
     <script src='spec/svg/lines.js'></script>
     <script src='spec/svg/midpoints.js'></script>
+    <script src='spec/svg/mvt.js'></script>
     <script src='spec/svg/osm.js'></script>
     <script src='spec/svg/points.js'></script>
     <script src='spec/svg/svg.js'></script>
@@ -135,9 +142,11 @@
     <script src='spec/util/session_mutex.js'></script>
     <script src='spec/util/suggest_names.js'></script>
     <script src='spec/util/util.js'></script>
-    <script src='spec/util/mapcss_rule.js'></script>
+
+    <script src='spec/operations/detach_node.js'></script>
     <script>
-    window.mocha.run();
+        window.mocha.run();
     </script>
 </body>
+
 </html>

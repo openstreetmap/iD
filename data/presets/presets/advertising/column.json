@@ -1,6 +1,6 @@
 {
+    "icon": "temaki-storage_tank",
     "fields": [
-       "direction",
        "lit"
     ],
     "geometry": [

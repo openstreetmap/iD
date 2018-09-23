@@ -15,7 +15,6 @@ const blacklist = {
     'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
     'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
     'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
-    'OpenTopoMap': true,                  // 'OpenTopoMap'
 
     'hike_n_bike': true,                  // 'Hike & Bike'
     'landsat': true,                      // 'Landsat'
@@ -91,6 +90,15 @@ sources.concat(whitelist).forEach(function(source) {
         template: source.url
     };
 
+
+    // supports 512px tiles
+    if (source.id === 'Mapbox') {
+        im.template = im.template.replace('.jpg', '@2x.jpg');
+        im.tileSize = 512;
+    } else if (source.id === 'mtbmap-no') {
+        im.tileSize = 512;
+    }
+
     if (source.type === 'wms') {
         im.projection = supportedProjection;
     }
@@ -116,7 +124,7 @@ sources.concat(whitelist).forEach(function(source) {
 
     var extent = source.extent || {};
     if (extent.min_zoom || extent.max_zoom) {
-        im.scaleExtent = [
+        im.zoomExtent = [
             extent.min_zoom || 0,
             extent.max_zoom || 22
         ];
@@ -149,7 +157,7 @@ sources.concat(whitelist).forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['best', 'default', 'description', 'icon', 'overlay'].forEach(function(a) {
+    ['best', 'default', 'description', 'icon', 'overlay', 'tileSize'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }

@@ -4,6 +4,7 @@
         "name",
         "operator",
         "address",
+        "access_simple",
         "capacity",
         "fee",
         "internet_access",

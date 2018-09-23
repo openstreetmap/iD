@@ -1,6 +1,5 @@
 /* Basics
 ------------------------------------------------------- */
-
 /*
   Opera misbehaves when the window is resized vertically unless 100% width + height are
   applied to both html and body. https://gist.github.com/jfirebaugh/bd225bcfdd3a633850c4
@@ -202,7 +201,6 @@ a:hover {
 
 /* Forms
 ------------------------------------------------------- */
-
 textarea  {
     resize: vertical;
     font:normal 12px/20px "-apple-system", BlinkMacSystemFont,
@@ -288,7 +286,6 @@ table.tags, table.tags td, table.tags th {
 
 /* Grid
 ------------------------------------------------------- */
-
 .col0    { float: left; width: 04.1666%; }
 .col1    { float: left; width: 08.3333%; }
 .col2    { float: left; width: 16.6666%; }
@@ -305,7 +302,6 @@ table.tags, table.tags td, table.tags th {
 
 /* UI Lists
 ------------------------------------------------------- */
-
 ul li { list-style: none;}
 
 .toggle-list > label {
@@ -348,22 +344,18 @@ ul li { list-style: none;}
     background: #fff;
     color: #333;
 }
-
 .fillL2 {
     background: #f6f6f6;
     color: #333;
 }
-
 .fillL3 {
     background: #ececec;
     color: #333;
 }
-
 .fillD {
     background: rgba(0,0,0,.5);
     color: #fff;
 }
-
 .fillD2 {
     background: rgba(0,0,0,.75);
     color: #fff;
@@ -396,31 +388,9 @@ li.hide {
     background-size: 5px 5px;
 }
 
-.panewrap {
-    position: absolute;
-    width: 200%;
-    height: 100%;
-    right: -100%;
-}
 
-
-.pane {
-    position: absolute;
-    width: 50%;
-    top: 0;
-    bottom: 30px;
-}
-
-.pane:first-child {
-    left: 0;
-}
-
-.pane:last-child {
-    right: 0;
-}
-
-/* Buttons */
-
+/* Buttons
+------------------------------------------------------- */
 button {
     text-align: center;
     line-height: 20px;
@@ -588,8 +558,31 @@ button.save.has-count .count::before {
     right: -6px;
 }
 
-/* Icons */
+.help-wrap svg.icon.pre-text.add-note,
+button.add-note svg.icon {
+    height: 15px;
+    width: 15px;
+    color: rgba(0,0,0,0.25);
+    stroke: #333;
+    stroke-width: 60px;
+    margin-top: 3px;
+}
+button.add-note svg.icon {
+    margin-left: unset;
+    margin-right: 7px;
+}
+[dir='rtl'] button.add-note svg.icon {
+    margin-left: 7px;
+    margin-right: unset;
+}
+.help-wrap svg.icon.pre-text.add-note {
+    margin-left: 3px;
+    margin-right: 3px;
+}
 
+
+/* Icons
+------------------------------------------------------- */
 .icon {
     vertical-align: top;
     width: 20px;
@@ -641,9 +634,8 @@ button.save.has-count .count::before {
 }
 
 
-/* ToolBar / Persistent UI Elements
+/* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
-
 #bar {
     position: fixed;
     padding: 10px 0;
@@ -664,7 +656,6 @@ button.save.has-count .count::before {
 
 /* Header for modals / panes
 ------------------------------------------------------- */
-
 .header {
     border-bottom: 1px solid #ccc;
     height: 60px;
@@ -694,6 +685,7 @@ button.save.has-count .count::before {
 }
 
 .field-help-title button.close,
+.sidebar-component .header button.data-editor-close,
 .sidebar-component .header button.note-editor-close,
 .entity-editor-pane .header button.preset-close,
 .preset-list-pane .header button.preset-choose {
@@ -702,6 +694,7 @@ button.save.has-count .count::before {
     top: 0;
 }
 [dir='rtl'] .field-help-title button.close,
+[dir='rtl'] .sidebar-component .header button.data-editor-close,
 [dir='rtl'] .sidebar-component .header button.note-editor-close,
 [dir='rtl'] .entity-editor-pane .header button.preset-close,
 [dir='rtl'] .preset-list-pane .header button.preset-choose {
@@ -750,7 +743,6 @@ button.save.has-count .count::before {
     justify-content: space-between;
     list-style: none;
     display: flex;
-
 }
 
 .footer > a {
@@ -766,9 +758,8 @@ button.save.has-count .count::before {
 }
 
 
-/* Hide-Toggle
+/* Hide/Toggle collapsable sections (aka Disclosure)
 ------------------------------------------------------- */
-
 .hide-toggle .icon.pre-text {
     vertical-align: text-top;
     width: 16px;
@@ -789,9 +780,8 @@ a.hide-toggle {
 }
 
 
-/* Inspector
+/* Sidebar / Inspector
 ------------------------------------------------------- */
-
 #sidebar {
     position: relative;
     float: left;
@@ -810,6 +800,28 @@ a.hide-toggle {
     top: 0;
     left: 0;
     bottom: 0;
+    right: 0;
+}
+
+.panewrap {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    right: -100%;
+}
+
+.pane {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    bottom: 30px;
+}
+
+.pane:first-child {
+    left: 0;
+}
+
+.pane:last-child {
     right: 0;
 }
 
@@ -834,15 +846,12 @@ a.hide-toggle {
 .feature-list-pane .inspector-body {
     top: 120px;
 }
-
 .preset-list-pane .inspector-body {
     top: 120px;
 }
-
 .entity-editor-pane .inspector-body {
     top: 60px;
 }
-
 .selection-list-pane .inspector-body {
     top: 60px;
 }
@@ -878,12 +887,12 @@ a.hide-toggle {
     font-weight: bold;
 }
 
-/* Feature list */
 
+/* Feature List / Search Results
+------------------------------------------------------- */
 .feature-list  {
     width: 100%;
 }
-
 .no-results-item,
 .geocode-item,
 .feature-list-item {
@@ -952,11 +961,8 @@ a.hide-toggle {
 }
 
 
-/* Presets
+/* Preset List and Icons
 ------------------------------------------------------- */
-
-/* Preset grid  */
-
 .preset-list  {
     width: 100%;
     padding: 20px 20px 10px 20px;
@@ -1134,7 +1140,6 @@ a.hide-toggle {
 .preset-list-item button.tag-reference-button:hover {
     background: #f1f1f1;
 }
-
 .preset-list-item button.tag-reference-button .icon {
     opacity: .5;
 }
@@ -1181,27 +1186,23 @@ a.hide-toggle {
 }
 
 
-/* preset form basics */
-
+/* Entity/Preset Editor
+------------------------------------------------------- */
 .preset-editor {
     overflow: hidden;
     padding-bottom: 10px;
 }
-
 .preset-editor a.hide-toggle {
     margin: 0 20px 5px 20px;
 }
-
 .preset-editor .form-fields-container {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
 }
-
 .preset-editor .form-fields-container:empty {
     display: none;
 }
-
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
     margin-bottom: 0;
 }
@@ -1301,8 +1302,8 @@ a.hide-toggle {
     border-bottom: 1px solid #ccc
 }
 
-/* Preset form (hover mode) */
-
+/* Inspector (hover styles)
+------------------------------------------------------- */
 .inspector-hover .checkselect label:last-of-type,
 .inspector-hover .preset-input-wrap .label,
 .inspector-hover .form-field-multicombo,
@@ -1323,6 +1324,12 @@ a.hide-toggle {
 .inspector-hover .form-field-multicombo .chips {
     background: #eee;
     border: 1px solid #ccc;
+}
+
+/* no scrollbars */
+.inspector-hover div {
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 /* hide and remove from layout */
@@ -1362,6 +1369,10 @@ a.hide-toggle {
 .inspector-hover .tag-row .key-wrap,
 .inspector-hover .tag-row .form-field.input-wrap-position {
     width: 50%;
+}
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .input-wrap-position {
+    height: 31px;
 }
 
 .inspector-hover .tag-row:first-child input.value {
@@ -1427,8 +1438,8 @@ a.hide-toggle {
     overflow: hidden;
 }
 
-/* adding additional preset fields */
-
+/* More Fields dropdown
+------------------------------------------------------- */
 .more-fields {
     padding: 0 20px 20px 20px;
     font-weight: bold;
@@ -1464,10 +1475,8 @@ a.hide-toggle {
 }
 
 
-/* preset form access */
-/* preset form cycleway */
-/* preset form structure extras */
-
+/* Field - Access, Cycleway, Structure
+------------------------------------------------------- */
 .structure-extras-wrap li,
 .form-field-cycleway .preset-input-wrap li,
 .form-field-access .preset-input-wrap li {
@@ -1536,8 +1545,8 @@ a.hide-toggle {
 }
 
 
-/* preset form multicombo */
-
+/* Field - Multicombo
+------------------------------------------------------- */
 .form-field-multicombo {
     border: 1px solid #cfcfcf;
     border-top: 0px;
@@ -1547,11 +1556,9 @@ a.hide-toggle {
     border-radius: 0 0 4px 4px;
     overflow: hidden;
 }
-
 .form-field-multicombo:focus {
     border-bottom: 0px;
 }
-
 .form-field-multicombo.active {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -1596,8 +1603,8 @@ a.hide-toggle {
 }
 
 
-/* preset form numbers */
-
+/* Field - Numeric
+------------------------------------------------------- */
 input[type=number] {
     position: relative;
     padding-right: 20%;
@@ -1650,13 +1657,11 @@ input[type=number] {
     left: 0; right: 0; bottom: 0; top: 0;
     margin: auto;
 }
-
 .spin-control button.decrement::after {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
-
 .spin-control button.increment::after {
     border-bottom: 5px solid #ccc;
     border-left: 5px solid transparent;
@@ -1664,27 +1669,23 @@ input[type=number] {
 }
 
 
-/* preset form checkbox */
-
+/* Field - Checkbox
+------------------------------------------------------- */
 .checkselect label:last-of-type {
     display: block;
     background: #fff;
     padding: 5px 10px;
     color: #7092ff;
 }
-
 .checkselect label:hover {
     background: #f1f1f1;
 }
-
 .checkselect .set {
     color: inherit;
 }
-
 .checkselect label:not(.set) input[type="checkbox"] {
     opacity: .5;
 }
-
 .checkselect .reverser.button {
     display: block;
     float: right;
@@ -1700,21 +1701,23 @@ input[type=number] {
     display: none;
 }
 
-/* Preset form radio button */
 
+/* Field - Radio button
+------------------------------------------------------- */
 .toggle-list button.remove {
     border-radius: 0 0 3px 3px;
 }
-
 .toggle-list button.remove .icon {
     position: absolute;
     left: 5px;
 }
-
 .toggle-list button.remove::before {
     content: none;
 }
 
+
+/* Field - Maxspeed
+------------------------------------------------------- */
 #preset-input-maxspeed_advisory,
 #preset-input-maxspeed {
     border-right: none;
@@ -1736,7 +1739,9 @@ input[type=number] {
     border-radius: 0 0 0 4px;
 }
 
-/* Wikipedia field */
+
+/* Field - Wikipedia
+------------------------------------------------------- */
 .form-field .wiki-lang {
     border-radius: 0;
 }
@@ -1756,7 +1761,9 @@ input[type=number] {
     left: 32px;
 }
 
-/* Localized field */
+
+/* Field - Localized Name
+------------------------------------------------------- */
 .form-field .localized-main {
     padding-right: 12%;
 }
@@ -1787,7 +1794,6 @@ input[type=number] {
 .form-field .localized-wrap {
     padding: 0 10px;
 }
-
 .form-field .localized-wrap .entry {
     position: relative;
     overflow: hidden;
@@ -1810,18 +1816,17 @@ input[type=number] {
     border-radius: 0;
     border-top-width: 0;
 }
-
 .form-field .localized-wrap .entry .localized-value {
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
 }
-
 .form-field .localized-wrap .form-label button {
     border-top-right-radius: 3px;
 }
 
-/* Preset form address */
 
+/* Field - Address
+------------------------------------------------------- */
 .addr-row input {
     border-right: 0;
     border-bottom: 0;
@@ -1860,8 +1865,9 @@ input[type=number] {
     border-radius: 0 0 0 4px;
 }
 
-/* Restrictions editor */
 
+/* Field - Restriction Editor
+------------------------------------------------------- */
 .form-field-restrictions .restriction-controls-container {
     background-color: #fff;
     border-top: 1px solid #ccc;
@@ -1951,8 +1957,9 @@ input[type=number] {
     color: #78f;
 }
 
-/* Changeset editor while comment text is empty */
 
+/* Field - Changeset Comment
+------------------------------------------------------- */
 .form-field-comment:not(.present) #preset-input-comment {
     border-color: rgb(230, 100, 100);
 }
@@ -1973,8 +1980,9 @@ input[type=number] {
     border-color: rgb(230, 100, 100);
 }
 
-/* combobox dropdown */
 
+/* Field - Combobox
+------------------------------------------------------- */
 div.combobox {
     z-index: 9999;
     display: none;
@@ -2031,8 +2039,9 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
-/* Field Help */
 
+/* Field Help
+------------------------------------------------------- */
 .field-help-body {
     display: block;
     position: absolute;
@@ -2073,6 +2082,7 @@ div.combobox {
 }
 .field-help-nav-item.active {
     color: #7092ff;
+    border-bottom: 2px solid;
 }
 .field-help-nav-item:hover {
     color: #597be7;
@@ -2132,8 +2142,8 @@ div.combobox {
 }
 
 
-/* Raw Tag Editor */
-
+/* Raw Tag Editor
+------------------------------------------------------- */
 .tag-list {
     padding-top: 10px;
 }
@@ -2259,7 +2269,6 @@ div.combobox {
 }
 
 /* Adding form fields to tag editor */
-
 .raw-tag-editor .add-tag {
     width: 40%;
     height: 30px;
@@ -2277,7 +2286,6 @@ div.combobox {
 }
 
 /* Tag reference */
-
 button.minor.tag-reference-loading {
     background-color: #f5f5f5;
 }
@@ -2339,8 +2347,8 @@ img.tag-reference-wiki-image {
 }
 
 
-/* Raw relation membership editor */
-
+/* Raw Member / Membership Editor
+------------------------------------------------------- */
 .raw-member-editor .member-list li:first-child,
 .raw-membership-editor .member-list li:first-child {
     padding-top: 10px;
@@ -2386,29 +2394,189 @@ input.key-trap {
     border: 1px solid rgba(0,0,0,0);
 }
 
-/* Fullscreen button */
-div.full-screen {
-    float: right;
-    width: 40px;
-    margin-right: 10px;
+
+/* OSM Note Editor
+------------------------------------------------------- */
+.note-header {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
-div.full-screen .tooltip {
-    min-width: 160px;
+.note-header-icon {
+    background-color: #fff;
+    padding: 10px;
+    flex: 0 0 62px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+[dir='rtl'] .note-header-icon {
+    border-right: unset;
+    border-left: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
 }
 
-div.full-screen > button, div.full-screen > button.active {
+.note-header-icon .icon-wrap {
+    position: absolute;
+    top: 0px;
+}
+
+.note-header-label {
+    background-color: #f6f6f6;
+    padding: 0 15px;
+    flex: 1 1 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+}
+[dir='rtl'] .note-header-label {
+    border-radius: 5px 0 0 5px;
+}
+
+.note-category {
+    margin: 20px 0px;
+}
+
+.comments-container {
+    background: #ececec;
+    padding: 1px 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.comment {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    display: flex;
+    flex-flow: row nowrap;
+}
+.comment-avatar {
+    padding: 10px;
+    flex: 0 0 62px;
+}
+.comment-avatar .icon.comment-avatar-icon {
     width: 40px;
     height: 40px;
-    background: transparent;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+.comment-main {
+    padding: 10px 10px 10px 0;
+    flex: 1 1 100%;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+[dir='rtl'] .comment-main {
+    padding: 10px 0 10px 10px;
 }
 
-div.full-screen > button:hover {
-    background-color: rgba(0, 0, 0, .8);
+.comment-metadata {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.comment-author {
+    font-weight: bold;
+    color: #333;
+}
+.comment-date {
+    color: #aaa;
+}
+.comment-text {
+    color: #333;
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 250px;
+}
+.comment-text::-webkit-scrollbar {
+    border-left: none;
 }
 
-/* Map Controls */
+.note-save {
+    padding: 10px;
+}
 
+.note-save #new-comment-input {
+    width: 100%;
+    height: 100px;
+    max-height: 300px;
+    min-height: 100px;
+}
+
+.note-save .detail-section {
+    margin: 10px 0;
+}
+
+.note-report {
+    float: right;
+}
+
+
+/* Custom Data Editor
+------------------------------------------------------- */
+.data-header {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.data-header-icon {
+    background-color: #fff;
+    padding: 10px;
+    flex: 0 0 62px;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+[dir='rtl'] .data-header-icon {
+    border-right: unset;
+    border-left: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+}
+
+.data-header-icon .icon-wrap {
+    position: absolute;
+    top: 0px;
+}
+
+.data-header-label {
+    background-color: #f6f6f6;
+    padding: 0 15px;
+    flex: 1 1 100%;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+}
+[dir='rtl'] .data-header-label {
+    border-radius: 5px 0 0 5px;
+}
+
+/* tag editor - no buttons */
+.data-editor.raw-tag-editor button {
+    display: none;
+}
+.data-editor.raw-tag-editor .tag-row .key-wrap,
+.data-editor.raw-tag-editor .tag-row .input-wrap-position {
+    width: 50%;
+}
+
+
+/* Map Controls
+------------------------------------------------------- */
 .map-controls {
     right: 0;
     top: 132px;
@@ -2436,7 +2604,32 @@ div.full-screen > button:hover {
     background: #7092ff;
 }
 
-/* Zoomer */
+
+/* Fullscreen Button (disabled)
+------------------------------------------------------- */
+div.full-screen {
+    float: right;
+    width: 40px;
+    margin-right: 10px;
+}
+
+div.full-screen .tooltip {
+    min-width: 160px;
+}
+
+div.full-screen > button, div.full-screen > button.active {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+}
+
+div.full-screen > button:hover {
+    background-color: rgba(0, 0, 0, .8);
+}
+
+
+/* Zoom Buttons
+------------------------------------------------------- */
 .zoombuttons > button.zoom-in {
     border-radius: 4px 0 0 0;
 }
@@ -2444,7 +2637,9 @@ div.full-screen > button:hover {
     border-radius: 0 4px 0 0;
 }
 
-/* Geolocator */
+
+/* Geolocate Button
+------------------------------------------------------- */
 .geolocate-control {
     margin-bottom: 10px;
 }
@@ -2455,7 +2650,9 @@ div.full-screen > button:hover {
     border-radius: 0 0 4px 0;
 }
 
-/* Pane Buttons */
+
+/* Background / Map Data / Help Pane buttons
+------------------------------------------------------- */
 .help-control > button {
     border-radius: 0 0 0 4px;
 }
@@ -2475,8 +2672,8 @@ div.full-screen > button:hover {
 }
 
 
-/* Background / Map Data Settings */
-
+/* Background / Map Data Settings
+------------------------------------------------------- */
 .map-data-control,
 .background-control {
     position: relative;
@@ -2507,23 +2704,21 @@ div.full-screen > button:hover {
 .layer-list > li:first-child {
     border-radius: 3px 3px 0 0;
 }
-
 .layer-list > li:last-child {
     border-radius: 0 0 3px 3px;
 }
-
 .layer-list > li:only-child {
     border-radius: 3px;
 }
-
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
-
 .layer-list li:hover {
     background-color: #ececec;
 }
 
+.layer-list li.active button,
+.layer-list li.switch button,
 .layer-list li.active,
 .layer-list li.switch {
     background: #e8ebff;
@@ -2535,11 +2730,7 @@ div.full-screen > button:hover {
     float: right;
 }
 
-[dir='rtl'] .list-item-gpx-browse svg {
-    transform: rotateY(180deg);
-}
-
-[dir='rtl'] .list-item-mvt-browse svg {
+[dir='rtl'] .list-item-data-browse svg {
     transform: rotateY(180deg);
 }
 
@@ -2562,9 +2753,45 @@ div.full-screen > button:hover {
     text-overflow: ellipsis;
 }
 
+.map-data-control .layer-list button,
+.background-control .layer-list button {
+    float: right;
+    height: 100%;
+    width: 10%;
+    border-left: 1px solid #ccc;
+    border-radius: 0;
+}
+[dir='rtl'] .map-data-control .layer-list button,
+[dir='rtl'] .background-control .layer-list button {
+    float: left;
+    border-left: none;
+    border-right: 1px solid #ccc;
+}
 
-/* Background Display Options */
+.map-data-control .layer-list button .icon,
+.background-control .layer-list button .icon {
+    opacity: 0.5;
+}
 
+.map-data-control .layer-list button:first-of-type,
+.background-control .layer-list button:first-of-type {
+    border-radius: 0 3px 3px 0;
+}
+[dir='rtl'] .map-data-control .layer-list button:first-of-type,
+[dir='rtl'] .background-control .layer-list button:first-of-type {
+    border-radius: 3px 0 0 3px;
+}
+
+.map-data-control .vectortile-container .vectortile-header {
+    padding-bottom: 5px;
+}
+.map-data-control .vectortile-container .vectortile-footer {
+    padding-bottom: 10px;
+}
+
+
+/* Background - Display Options Sliders
+------------------------------------------------------- */
 .display-options-container {
     padding: 10px;
 }
@@ -2597,8 +2824,8 @@ div.full-screen > button:hover {
 }
 
 
-/* Adjust Alignment controls */
-
+/* Background - Adjust Alignment
+------------------------------------------------------- */
 .background-control .nudge-container {
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -2725,36 +2952,8 @@ div.full-screen > button:hover {
 }
 
 
-.map-data-control .layer-list button,
-.background-control .layer-list button {
-    float: right;
-    height: 100%;
-    width: 10%;
-    border-left: 1px solid #ccc;
-    border-radius: 0;
-}
-[dir='rtl'] .map-data-control .layer-list button,
-[dir='rtl'] .background-control .layer-list button {
-    float: left;
-    border-left: none;
-    border-right: 1px solid #ccc;
-}
-
-.map-data-control .layer-list button .icon,
-.background-control .layer-list button .icon {
-    opacity: 0.5;
-}
-
-.map-data-control .layer-list button:first-of-type,
-.background-control .layer-list button:first-of-type {
-    border-radius: 0 3px 3px 0;
-}
-[dir='rtl'] .map-data-control .layer-list button:first-of-type,
-[dir='rtl'] .background-control .layer-list button:first-of-type {
-    border-radius: 3px 0 0 3px;
-}
-
-/* Side panes */
+/* Side Panes - Background / Map Data / Help
+------------------------------------------------------- */
 .map-pane {
     position: fixed;
     top: 60px;
@@ -2800,9 +2999,9 @@ div.full-screen > button:hover {
     padding-bottom: 15px;
 }
 
-/* Help */
 
-
+/* Help
+------------------------------------------------------- */
 .help-wrap p {
     font-size: 15px;
     margin-bottom: 20px;
@@ -2903,9 +3102,8 @@ div.full-screen > button:hover {
 }
 
 
-/* Tiles
+/* Raster Background Tiles
 ------------------------------------------------------- */
-
 img.tile {
     position: absolute;
     transform-origin: 0 0;
@@ -2965,7 +3163,6 @@ img.tile-debug {
 
 /* Map
 ------------------------------------------------------- */
-
 #map {
     position: relative;
     overflow: hidden;
@@ -2992,6 +3189,7 @@ img.tile-debug {
     right: 0;
     bottom: 0;
 }
+
 
 /* Map-In-Map
 ------------------------------------------------------- */
@@ -3050,7 +3248,7 @@ img.tile-debug {
 }
 
 
-/* Debug
+/* Debug Data
 ------------------------------------------------------- */
 .debug {
     stroke: currentColor;
@@ -3089,7 +3287,8 @@ img.tile-debug {
     padding: 0 5px;
 }
 
-/* Info Box
+
+/* Information Panels
 ------------------------------------------------------- */
 .info-panels {
     display: flex;
@@ -3146,7 +3345,6 @@ img.tile-debug {
 .panel-title button.close:hover {
     color: #fff;
 }
-
 .panel-title button.close .icon {
     height: 20px;
     width: 16px;
@@ -3195,9 +3393,8 @@ img.tile-debug {
 }
 
 
-/* About Section
+/* About Section, Attribution, Footer
 ------------------------------------------------------- */
-
 #about {
     width: 100%;
     position: absolute;
@@ -3262,8 +3459,9 @@ img.tile-debug {
     height: 30px;
 }
 
-/* footer flash message */
 
+/* Footer - Flash messages
+------------------------------------------------------- */
 #flash-wrap {
     display: flex;
     flex: 0 0 100%;
@@ -3345,8 +3543,8 @@ img.tile-debug {
 }
 
 
-/* footer scale */
-
+/* Footer - Scale bar, About, Source Switcher
+------------------------------------------------------- */
 #scale-block {
     vertical-align: bottom;
     width: 250px;
@@ -3392,7 +3590,6 @@ img.tile-debug {
     shape-rendering: crispEdges;
 }
 
-
 #about-list {
     text-align: right;
     margin-right: 10px;
@@ -3420,7 +3617,6 @@ img.tile-debug {
     margin-right: 5px;
     padding: 5px 5px 5px 0;
 }
-
 
 #about-list li:last-child {
     border-left: 0;
@@ -3474,8 +3670,8 @@ img.tile-debug {
     color: #ccf;
 }
 
-/* Notification Badges */
-
+/* Notification Badges
+------------------------------------------------------- */
 /* For an icon (e.g. new version) */
 .badge {
     display: inline-block;
@@ -3522,9 +3718,8 @@ img.tile-debug {
 }
 
 
-/* Modals
+/* Modals / Prompts
 ------------------------------------------------------- */
-
 .modal {
     top: 40px;
     display: inline-block;
@@ -3540,7 +3735,6 @@ img.tile-debug {
 .modal .loader {
     margin-bottom: 10px;
 }
-
 .modal .description {
     text-align: center;
 }
@@ -3554,7 +3748,6 @@ img.tile-debug {
     right: 0;
     overflow: auto;
 }
-
 .shaded:before {
     content:'';
     background: rgba(0,0,0,0.5);
@@ -3566,11 +3759,9 @@ img.tile-debug {
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
-
 .modal-section.header h3 {
     padding: 0;
 }
-
 .modal-section.buttons {
     text-align: center;
 }
@@ -3644,7 +3835,7 @@ img.tile-debug {
     color: #e06c5e;
 }
 
-/* Success Modal
+/* Success Screen / Community Index
 ------------------------------------------------------- */
 .save-success.body {
     overflow-y: scroll;
@@ -3774,6 +3965,7 @@ img.tile-debug {
 }
 .modal-shortcuts .tab.active {
     color: #7092ff;
+    border-bottom: 2px solid;
 }
 .modal-shortcuts .tab:hover {
     color: #597be7;
@@ -3843,6 +4035,28 @@ svg.mouseclick use.right {
 .modal-shortcuts .shortcut-keys .gesture {
     color: #333;
     padding: 3px;
+}
+
+
+/* Settings Modals
+------------------------------------------------------- */
+.settings-modal textarea {
+    height: 70px;
+}
+.settings-modal .buttons .button.col3 {
+    float: none;   /* undo float left */
+}
+
+.settings-custom-background .instructions-template {
+    margin-bottom: 20px;
+}
+
+.settings-custom-data .instructions-url {
+    margin-bottom: 10px;
+}
+.settings-custom-data .field-file,
+.settings-custom-data .instructions-template {
+    margin-bottom: 20px;
 }
 
 
@@ -3947,9 +4161,9 @@ svg.mouseclick use.right {
 
 .changeset-list li:first-child { border-top: 0;}
 
+
 /* Conflict resolution
 ------------------------------------------------------- */
-
 .conflicts-help {
     padding: 20px;
     background-color: #ffffbb;
@@ -3997,9 +4211,9 @@ svg.mouseclick use.right {
     height: 30px;
 }
 
-/* Notices
-------------------------------------------------------- */
 
+/* Notices (Zoom in to Edit)
+------------------------------------------------------- */
 .notice {
     position: absolute;
     top: 45px;
@@ -4031,9 +4245,9 @@ svg.mouseclick use.right {
     margin-right: 0;
 }
 
+
 /* Tooltips
 ------------------------------------------------------- */
-
 .tooltip {
     position: absolute;
     display: none;
@@ -4274,8 +4488,8 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 }
 
 
-/* radial menu (deprecated) */
-
+/* Contextual Radial Menu (deprecated)
+------------------------------------------------------- */
 .radial-menu-tooltip {
     opacity: 0.8;
     display: none;
@@ -4313,8 +4527,9 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     color: rgba(40,40,40,.5);
 }
 
-/* edit menu */
 
+/* Contextual Edit Menu
+------------------------------------------------------- */
 .edit-menu-tooltip {
     display: none;
     position: absolute;
@@ -4348,13 +4563,14 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     color: #79f;
     pointer-events: none;
 }
-
 .edit-menu-item.disabled use {
     fill: rgba(32,32,32,.2);
     color: rgba(40,40,40,.2);
 }
 
 
+/* Lasso
+------------------------------------------------------- */
 .lasso-path {
     fill-opacity: 0.3;
     stroke: #fff;
@@ -4363,22 +4579,19 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     stroke-dasharray: 5, 5;
 }
 
+
 /* Media Queries
 ------------------------------------------------------- */
-
 @media only screen and (max-width: 840px) {
     /* override hide for save button */
     #bar .save .label { display: block;}
 }
-
 @media screen and (max-width: 1200px) {
     .user-list { display: none !important; }
 }
-
 @media screen and (max-width: 1000px) {
     #userLink { display: none !important; }
 }
-
 @media screen and (max-width: 900px) {
     #scale-block { display: none !important; }
 }
@@ -4386,7 +4599,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 
 /* Scrollbars
  ----------------------------------------------------- */
-
 ::-webkit-scrollbar {
     height: 20px;
     overflow: visible;
@@ -4413,9 +4625,9 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     background-color: rgba(0,0,0,.05);
 }
 
+
 /* Intro walkthrough
  ----------------------------------------------------- */
-
 .curtain-darkness {
     pointer-events: all;
     fill-opacity: 0.7;
@@ -4577,3 +4789,5 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     width: 100px;
     color: #7092ff;
 }
+
+
