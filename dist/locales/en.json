@@ -1972,6 +1972,9 @@
                 "fixme": {
                     "label": "Fix Me"
                 },
+                "flag/type": {
+                    "label": "Flag Type"
+                },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
@@ -2044,6 +2047,15 @@
                 },
                 "historic/civilization": {
                     "label": "Historic Civilization"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Date Sunk"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Visible At High Tide"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Visible At Low Tide"
                 },
                 "hoops": {
                     "label": "Hoops",
@@ -2226,6 +2238,9 @@
                 },
                 "map_type": {
                     "label": "Type"
+                },
+                "material": {
+                    "label": "Material"
                 },
                 "maxheight": {
                     "label": "Max Height",
@@ -2643,6 +2658,9 @@
                 },
                 "seamark/type": {
                     "label": "Seamark"
+                },
+                "seamark/wreck/category": {
+                    "label": "Category"
                 },
                 "seasonal": {
                     "label": "Seasonal"
@@ -3551,10 +3569,6 @@
                     "name": "Lean-To",
                     "terms": ""
                 },
-                "amenity/shelter/pavilion": {
-                    "name": "Pavilion",
-                    "terms": ""
-                },
                 "amenity/shower": {
                     "name": "Shower",
                     "terms": "rain closet"
@@ -3986,6 +4000,10 @@
                 "building/mosque": {
                     "name": "Mosque Building",
                     "terms": ""
+                },
+                "building/pavilion": {
+                    "name": "Pavilion Building",
+                    "terms": "sports"
                 },
                 "building/public": {
                     "name": "Public Building",
@@ -4706,6 +4724,10 @@
                 "historic/wayside_shrine": {
                     "name": "Wayside Shrine",
                     "terms": ""
+                },
+                "historic/wreck": {
+                    "name": "Shipwreck",
+                    "terms": "hull,mast,maritime,remains,ship,boat"
                 },
                 "internet_access/wlan": {
                     "name": "Wi-Fi Hotspot",
@@ -6590,6 +6612,18 @@
                 "tourism/artwork": {
                     "name": "Artwork",
                     "terms": "mural,sculpture,statue"
+                },
+                "tourism/artwork/mural": {
+                    "name": "Mural",
+                    "terms": "fresco,wall painting"
+                },
+                "tourism/artwork/sculpture": {
+                    "name": "Sculpture",
+                    "terms": "statue,figure,carving"
+                },
+                "tourism/artwork/statue": {
+                    "name": "Statue",
+                    "terms": "sculpture,figure,carving"
                 },
                 "tourism/attraction": {
                     "name": "Tourist Attraction",
