@@ -4563,8 +4563,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Tree'', separated by commas>'
       natural/tree_row:
         # natural=tree_row
-        name: Tree row
-        terms: '<translate with synonyms or related terms for ''Tree row'', separated by commas>'
+        name: Tree Row
+        terms: '<translate with synonyms or related terms for ''Tree Row'', separated by commas>'
       natural/volcano:
         # natural=volcano
         name: Volcano

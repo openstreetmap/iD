@@ -3990,7 +3990,7 @@
     {
       "key": "natural",
       "value": "tree_row",
-      "description": "Tree row",
+      "description": "Tree Row",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-15.svg?sanitize=true"
     },
