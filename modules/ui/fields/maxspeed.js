@@ -49,8 +49,14 @@ export function uiFieldMaxspeed(field, context) {
             .on('change', change)
             .on('blur', change);
 
-        var childNodes = context.graph().childNodes(context.entity(entity.id)),
+        var loc;
+        if (entity.type === 'node') {
+            loc = entity.loc;
+        }
+        else {
+            var childNodes = context.graph().childNodes(context.entity(entity.id));
             loc = childNodes[~~(childNodes.length/2)].loc;
+        }
 
         isImperial = _some(dataImperial.features, function(f) {
             return _some(f.geometry.coordinates, function(d) {

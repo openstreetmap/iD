@@ -1,0 +1,21 @@
+{
+    "icon": "maki-square-stroked",
+    "fields": [
+        "traffic_sign",
+        "direction_vertex",
+        "maxspeed"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "traffic_sign": "maxspeed"
+    },
+    "terms": [
+        "max speed",
+        "maximum speed",
+        "road",
+        "highway"
+    ],
+    "name": "Speed Limit Sign"
+}

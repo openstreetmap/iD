@@ -301,6 +301,7 @@
     "tracktype": {"key": "tracktype", "type": "combo", "label": "Track Type", "placeholder": "Solid, Mostly Solid, Soft...", "strings": {"options": {"grade1": "Solid: paved or heavily compacted hardcore surface", "grade2": "Mostly Solid: gravel/rock with some soft material mixed in", "grade3": "Even mixture of hard and soft materials", "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in", "grade5": "Soft: soil/sand/grass"}}},
     "trade": {"key": "trade", "type": "typeCombo", "label": "Type"},
     "traffic_calming": {"key": "traffic_calming", "type": "typeCombo", "label": "Type"},
+    "traffic_sign": {"key": "traffic_sign", "type": "typeCombo", "label": "Traffic Sign"},
     "traffic_signals": {"key": "traffic_signals", "type": "combo", "label": "Type", "default": "signal"},
     "traffic_signals/direction": {"key": "traffic_signals:direction", "type": "combo", "label": "Direction", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},
     "trail_visibility": {"key": "trail_visibility", "type": "combo", "label": "Trail Visibility", "placeholder": "Excellent, Good, Bad...", "strings": {"options": {"excellent": "Excellent: unambiguous path or markers everywhere", "good": "Good: markers visible, sometimes require searching", "intermediate": "Intermediate: few markers, path mostly visible", "bad": "Bad: no markers, path sometimes invisible/pathless", "horrible": "Horrible: often pathless, some orientation skills required", "no": "No: pathless, excellent orientation skills required"}}},
