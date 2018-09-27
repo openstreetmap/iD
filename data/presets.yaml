@@ -2788,6 +2788,11 @@ en:
         # barrier=kerb
         name: Kerb
         terms: '<translate with synonyms or related terms for ''Kerb'', separated by commas>'
+      barrier/kerb/lowered:
+        # 'barrier=kerb, kerb=lowered'
+        name: Lowered Kerb
+        # 'terms: curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp'
+        terms: '<translate with synonyms or related terms for ''Lowered Kerb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate

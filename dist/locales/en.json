@@ -3849,6 +3849,10 @@
                     "name": "Kerb",
                     "terms": ""
                 },
+                "barrier/kerb/lowered": {
+                    "name": "Lowered Kerb",
+                    "terms": "curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp"
+                },
                 "barrier/kissing_gate": {
                     "name": "Kissing Gate",
                     "terms": ""
