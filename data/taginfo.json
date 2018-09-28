@@ -6081,6 +6081,26 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/diamond.svg?sanitize=true"
     },
     {
+      "key": "traffic_sign",
+      "description": "Traffic Sign",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/square-stroked-15.svg?sanitize=true"
+    },
+    {
+      "key": "traffic_sign",
+      "value": "city_limit",
+      "description": "City Limit Sign",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/square-stroked-15.svg?sanitize=true"
+    },
+    {
+      "key": "traffic_sign",
+      "value": "maxspeed",
+      "description": "Speed Limit Sign",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/square-stroked-15.svg?sanitize=true"
+    },
+    {
       "key": "type",
       "value": "multipolygon",
       "description": "Multipolygon",
@@ -7343,6 +7363,21 @@
     {"key": "tracktype", "value": "grade4", "description": "Track Type"},
     {"key": "tracktype", "value": "grade5", "description": "Track Type"},
     {"key": "trade", "description": "Type"},
+    {
+      "key": "traffic_sign:direction",
+      "value": "forward",
+      "description": "Direction"
+    },
+    {
+      "key": "traffic_sign:direction",
+      "value": "backward",
+      "description": "Direction"
+    },
+    {
+      "key": "traffic_sign:direction",
+      "value": "both",
+      "description": "Direction"
+    },
     {"key": "traffic_signals", "description": "Type"},
     {
       "key": "traffic_signals:direction",

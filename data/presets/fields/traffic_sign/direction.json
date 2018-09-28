@@ -1,0 +1,12 @@
+{
+    "key": "traffic_sign:direction",
+    "type": "combo",
+    "label": "Direction",
+    "strings": {
+        "options": {
+          "forward": "Forward",
+          "backward": "Backward",
+          "both": "Both / All"
+        }
+    }
+}
