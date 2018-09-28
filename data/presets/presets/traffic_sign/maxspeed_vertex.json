@@ -2,7 +2,7 @@
     "icon": "maki-square-stroked",
     "fields": [
         "traffic_sign",
-        "direction_vertex",
+        "traffic_sign/direction",
         "maxspeed"
     ],
     "geometry": [

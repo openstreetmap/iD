@@ -7356,6 +7356,21 @@
     {"key": "tracktype", "value": "grade4", "description": "Track Type"},
     {"key": "tracktype", "value": "grade5", "description": "Track Type"},
     {"key": "trade", "description": "Type"},
+    {
+      "key": "traffic_sign:direction",
+      "value": "forward",
+      "description": "Direction"
+    },
+    {
+      "key": "traffic_sign:direction",
+      "value": "backward",
+      "description": "Direction"
+    },
+    {
+      "key": "traffic_sign:direction",
+      "value": "both",
+      "description": "Direction"
+    },
     {"key": "traffic_signals", "description": "Type"},
     {
       "key": "traffic_signals:direction",

@@ -2906,6 +2906,14 @@
                 "traffic_sign": {
                     "label": "Traffic Sign"
                 },
+                "traffic_sign/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
+                },
                 "traffic_signals": {
                     "label": "Type"
                 },

@@ -1733,6 +1733,16 @@ en:
       traffic_sign:
         # traffic_sign=*
         label: Traffic Sign
+      traffic_sign/direction:
+        # 'traffic_sign:direction=*'
+        label: Direction
+        options:
+          # 'traffic_sign:direction=backward'
+          backward: Backward
+          # 'traffic_sign:direction=both'
+          both: Both / All
+          # 'traffic_sign:direction=forward'
+          forward: Forward
       traffic_signals:
         # traffic_signals=*
         label: Type
