@@ -234,11 +234,22 @@ export function uiPresetList(context) {
                 search.node().focus();
             }
         }
-        else if (d3_event.keyCode === d3_keybinding.keyCodes['→'] ||
-            d3_event.keyCode === d3_keybinding.keyCodes['←']) {
-            // for consistency, don't propagate any arrow keys
+        // arrow left, move focus to the parent item if there is one
+        else if (d3_event.keyCode === d3_keybinding.keyCodes['←']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
+
+            // if there is a parent item
+            if (!parentItem.empty()) {
+                // focus on the parent item
+                parentItem.select('.preset-list-button').node().focus();
+            }
+        }
+        // arrow right, choose this item
+        else if (d3_event.keyCode === d3_keybinding.keyCodes['→']) {
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+            item.datum().choose();
         }
     }
 
