@@ -2325,6 +2325,11 @@ en:
         # amenity=parking
         name: Car Parking
         terms: '<translate with synonyms or related terms for ''Car Parking'', separated by commas>'
+      amenity/parking/multi-storey:
+        # 'amenity=parking, parking=multi-storey'
+        name: Multilevel Car Parking
+        # 'terms: multistorey car park,parking garage,parkade,parking structure,parking ramp,parking deck,parking building,indoor parking'
+        terms: '<translate with synonyms or related terms for ''Multilevel Car Parking'', separated by commas>'
       amenity/parking_entrance:
         # amenity=parking_entrance
         name: Parking Garage Entrance/Exit

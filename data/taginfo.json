@@ -701,6 +701,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-15.svg?sanitize=true"
     },
     {
+      "key": "parking",
+      "value": "multi-storey",
+      "description": "Multilevel Car Parking, Type",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-garage-15.svg?sanitize=true"
+    },
+    {
       "key": "amenity",
       "value": "pharmacy",
       "description": "Pharmacy",
@@ -6951,7 +6958,6 @@
     {"key": "par", "description": "Par"},
     {"key": "park_ride", "description": "Park and Ride"},
     {"key": "parking", "value": "surface", "description": "Type"},
-    {"key": "parking", "value": "multi-storey", "description": "Type"},
     {"key": "parking", "value": "underground", "description": "Type"},
     {"key": "parking", "value": "sheds", "description": "Type"},
     {"key": "parking", "value": "carports", "description": "Type"},
