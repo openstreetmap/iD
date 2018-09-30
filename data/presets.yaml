@@ -2472,6 +2472,11 @@ en:
         # 'amenity=shelter, shelter_type=lean_to'
         name: Lean-To
         terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
+      amenity/shelter/picnic_shelter:
+        # 'amenity=shelter, shelter_type=picnic_shelter'
+        name: Picnic Shelter
+        # 'terms: pavilion'
+        terms: '<translate with synonyms or related terms for ''Picnic Shelter'', separated by commas>'
       amenity/shower:
         # amenity=shower
         name: Shower

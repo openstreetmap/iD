@@ -890,6 +890,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
     {
+      "key": "shelter_type",
+      "value": "picnic_shelter",
+      "description": "Picnic Shelter",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
       "key": "amenity",
       "value": "shower",
       "description": "Shower",
