@@ -2345,7 +2345,7 @@
                 },
                 "leisure/pitch/baseball": {
                     "name": "棒球場",
-                    "terms": "Baseball Diamond,棒球場"
+                    "terms": "Baseball Field,棒球場"
                 },
                 "leisure/pitch/basketball": {
                     "name": "籃球場",
