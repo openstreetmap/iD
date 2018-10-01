@@ -4198,8 +4198,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Badminton Court'', separated by commas>'
       leisure/pitch/baseball:
         # 'leisure=pitch, sport=baseball'
-        name: Baseball Diamond
-        terms: '<translate with synonyms or related terms for ''Baseball Diamond'', separated by commas>'
+        name: Baseball Field
+        terms: '<translate with synonyms or related terms for ''Baseball Field'', separated by commas>'
       leisure/pitch/basketball:
         # 'leisure=pitch, sport=basketball'
         name: Basketball Court
