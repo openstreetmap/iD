@@ -1680,6 +1680,9 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
+                "bridge/support": {
+                    "label": "Type"
+                },
                 "building_area": {
                     "label": "Building"
                 },
@@ -3909,6 +3912,14 @@
                 },
                 "boundary/administrative": {
                     "name": "Administrative Boundary",
+                    "terms": ""
+                },
+                "bridge/support": {
+                    "name": "Bridge Support",
+                    "terms": ""
+                },
+                "bridge/support/pier": {
+                    "name": "Bridge Pier",
                     "terms": ""
                 },
                 "building": {
