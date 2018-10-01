@@ -3433,7 +3433,7 @@
     {
       "key": "sport",
       "value": "baseball",
-      "description": "Baseball Diamond",
+      "description": "Baseball Field",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/baseball-15.svg?sanitize=true"
     },

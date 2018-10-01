@@ -16,6 +16,6 @@
         "key": "sport",
         "value": "baseball"
     },
-    "terms": [],
-    "name": "Baseball Diamond"
+    "terms": ["baseball diamond", "baseball field", "baseball stadium", "baseball", "sandlot", "ball park", "field", "stadium", "field"],
+    "name": "Baseball Field"
 }
