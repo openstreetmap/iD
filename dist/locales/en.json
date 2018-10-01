@@ -3939,6 +3939,10 @@
                     "name": "Cabin",
                     "terms": ""
                 },
+                "building/carport": {
+                    "name": "Carport",
+                    "terms": "covered parking space,garage,car,porch"
+                },
                 "building/cathedral": {
                     "name": "Cathedral Building",
                     "terms": ""
@@ -5146,6 +5150,10 @@
                 "leisure/pitch/soccer": {
                     "name": "Soccer Field",
                     "terms": "football"
+                },
+                "leisure/pitch/softball": {
+                    "name": "Softball Field",
+                    "terms": "softball,diamond"
                 },
                 "leisure/pitch/table_tennis": {
                     "name": "Ping Pong Table",

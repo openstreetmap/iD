@@ -2875,6 +2875,11 @@ en:
         # building=cabin
         name: Cabin
         terms: '<translate with synonyms or related terms for ''Cabin'', separated by commas>'
+      building/carport:
+        # building=carport
+        name: Carport
+        # 'terms: covered parking space,garage,car,porch'
+        terms: '<translate with synonyms or related terms for ''Carport'', separated by commas>'
       building/cathedral:
         # building=cathedral
         name: Cathedral Building
@@ -4249,6 +4254,11 @@ en:
         name: Soccer Field
         # 'terms: football'
         terms: '<translate with synonyms or related terms for ''Soccer Field'', separated by commas>'
+      leisure/pitch/softball:
+        # 'leisure=pitch, sport=softball'
+        name: Softball Field
+        # 'terms: softball,diamond'
+        terms: '<translate with synonyms or related terms for ''Softball Field'', separated by commas>'
       leisure/pitch/table_tennis:
         # 'leisure=pitch, sport=table_tennis'
         name: Ping Pong Table
