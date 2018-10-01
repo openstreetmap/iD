@@ -2545,6 +2545,11 @@ en:
         name: Theater
         # 'terms: theatre,performance,play,musical'
         terms: '<translate with synonyms or related terms for ''Theater'', separated by commas>'
+      amenity/theatre/type/amphi:
+        # 'amenity=theatre, theatre:type=amphi'
+        name: Amphitheatre
+        # 'terms: open air,outdoor,greek,ampi'
+        terms: '<translate with synonyms or related terms for ''Amphitheatre'', separated by commas>'
       amenity/toilets:
         # amenity=toilets
         name: Toilets

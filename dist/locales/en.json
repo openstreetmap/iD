@@ -3639,6 +3639,10 @@
                     "name": "Theater",
                     "terms": "theatre,performance,play,musical"
                 },
+                "amenity/theatre/type/amphi": {
+                    "name": "Amphitheatre",
+                    "terms": "open air,outdoor,greek,ampi"
+                },
                 "amenity/toilets": {
                     "name": "Toilets",
                     "terms": "bathroom,restroom,outhouse,privy,head,lavatory,latrine,water closet,WC,W.C."
