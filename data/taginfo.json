@@ -960,6 +960,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/theatre-15.svg?sanitize=true"
     },
     {
+      "key": "theatre:type",
+      "value": "amphi",
+      "description": "Amphitheatre",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/theatre-15.svg?sanitize=true"
+    },
+    {
       "key": "amenity",
       "value": "toilets",
       "description": "Toilets",
