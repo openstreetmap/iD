@@ -3587,6 +3587,10 @@
                     "name": "Lean-To",
                     "terms": ""
                 },
+                "amenity/shelter/picnic_shelter": {
+                    "name": "Picnic Shelter",
+                    "terms": "pavilion"
+                },
                 "amenity/shelter/public_transport": {
                     "name": "Transit Shelter",
                     "terms": "bus stop,metro stop,waiting"
