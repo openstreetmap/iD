@@ -1,0 +1,28 @@
+{
+    "icon": "maki-shelter",
+    "fields": [
+        "name",
+        "shelter_type",
+        "building_area",
+        "bench",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bus stop",
+        "metro stop",
+        "waiting"
+    ],
+    "tags": {
+        "amenity": "shelter",
+        "shelter_type": "public_transport"
+    },
+    "reference": {
+        "key": "shelter_type",
+        "value": "public_transport"
+    },
+    "name": "Transit Shelter"
+}
