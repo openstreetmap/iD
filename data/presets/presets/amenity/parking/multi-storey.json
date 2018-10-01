@@ -1,0 +1,34 @@
+{
+    "icon": "maki-parking-garage",
+    "fields": ["name", "building", "levels", "height", "address"],
+    "geometry": ["area"],
+    "terms": [
+        "multistorey car park",
+        "parking garage",
+        "parkade",
+        "parking structure",
+        "parking ramp",
+        "parking deck",
+        "parking building",
+        "indoor parking"
+    ],
+    "tags": {
+        "amenity": "parking",
+        "parking": "multi-storey"
+    },
+    "addTags": {
+        "building": "parking",
+        "amenity": "parking",
+        "parking": "multi-storey"
+    },
+    "removeTags": {
+        "building": "parking",
+        "amenity": "parking",
+        "parking": "multi-storey"
+    },
+    "reference": {
+        "key": "parking",
+        "value": "multi-storey"
+    },
+    "name": "Multilevel Car Parking"
+}
