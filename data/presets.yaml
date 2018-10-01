@@ -431,6 +431,9 @@ en:
       description:
         # description=*
         label: Description
+      design:
+        # design=*
+        label: Design
       devices:
         # devices=*
         label: Devices
@@ -4983,6 +4986,7 @@ en:
       power/tower:
         # power=tower
         name: High-Voltage Tower
+        # 'terms: power'
         terms: '<translate with synonyms or related terms for ''High-Voltage Tower'', separated by commas>'
       power/transformer:
         # power=transformer

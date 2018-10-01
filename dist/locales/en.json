@@ -1836,6 +1836,9 @@
                 "description": {
                     "label": "Description"
                 },
+                "design": {
+                    "label": "Design"
+                },
                 "devices": {
                     "label": "Devices",
                     "placeholder": "1, 2, 3..."
@@ -5798,7 +5801,7 @@
                 },
                 "power/tower": {
                     "name": "High-Voltage Tower",
-                    "terms": ""
+                    "terms": "power"
                 },
                 "power/transformer": {
                     "name": "Transformer",

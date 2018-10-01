@@ -6635,6 +6635,7 @@
     {"key": "denomination", "description": "Denomination"},
     {"key": "denotation", "description": "Denotation"},
     {"key": "description", "description": "Description"},
+    {"key": "design", "description": "Design"},
     {"key": "devices", "description": "Devices"},
     {"key": "diaper", "description": "Diaper Changing Available"},
     {"key": "direction", "value": "N", "description": "Direction"},
