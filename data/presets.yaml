@@ -266,6 +266,9 @@ en:
         label: Type
         # bridge field placeholder
         placeholder: Default
+      bridge/support:
+        # 'bridge:support=*'
+        label: Type
       building:
         # building=*
         label: Building
@@ -2857,6 +2860,14 @@ en:
         # boundary=administrative
         name: Administrative Boundary
         terms: '<translate with synonyms or related terms for ''Administrative Boundary'', separated by commas>'
+      bridge/support:
+        # 'bridge:support=*'
+        name: Bridge Support
+        terms: '<translate with synonyms or related terms for ''Bridge Support'', separated by commas>'
+      bridge/support/pier:
+        # 'bridge:support=pier'
+        name: Bridge Pier
+        terms: '<translate with synonyms or related terms for ''Bridge Pier'', separated by commas>'
       building:
         # building=*
         name: Building

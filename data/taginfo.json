@@ -1450,6 +1450,19 @@
       "object_types": ["way"]
     },
     {
+      "key": "bridge:support",
+      "description": "Bridge Support, Type",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
+    },
+    {
+      "key": "bridge:support",
+      "value": "pier",
+      "description": "Bridge Pier",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
+    },
+    {
       "key": "building",
       "description": "Building",
       "object_types": ["node", "area"],
