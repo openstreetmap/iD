@@ -220,6 +220,7 @@
     "railway/signal/direction": {"key": "railway:signal:direction", "type": "combo", "label": "Direction", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},
     "rating": {"key": "rating", "type": "combo", "label": "Power Rating", "snake_case": false},
     "recycling_accepts": {"key": "recycling:", "type": "multiCombo", "label": "Accepts"},
+    "recycling_type": {"key": "recycling_type", "type": "combo", "label": "Type", "placeholder": "Container, Center", "strings": {"options": {"container": "Container", "centre": "Center"}}},
     "ref_aeroway_gate": {"key": "ref", "type": "text", "label": "Gate Number"},
     "ref_golf_hole": {"key": "ref", "type": "text", "label": "Hole Number", "placeholder": "1-18"},
     "ref_highway_junction": {"key": "ref", "type": "text", "label": "Junction Number"},

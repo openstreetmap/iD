@@ -1,6 +1,7 @@
 {
     "icon": "maki-recycling",
     "fields": [
+        "recycling_type",
         "recycling_accepts",
         "collection_times"
     ],
@@ -21,17 +22,6 @@
     "tags": {
         "amenity": "recycling"
     },
-    "addTags": {
-        "amenity": "recycling",
-        "recycling_type": "container"
-    },
-    "removeTags": {
-        "amenity": "recycling",
-        "recycling_type": "container"
-    },
-    "reference": {
-        "key": "amenity",
-        "value": "recycling"
-    },
-    "name": "Recycling Container"
+    "name": "Recycling",
+    "searchable": false
 }

@@ -1267,6 +1267,16 @@ en:
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
+      recycling_type:
+        # recycling_type=*
+        label: Type
+        options:
+          # recycling_type=centre
+          centre: Center
+          # recycling_type=container
+          container: Container
+        # recycling_type field placeholder
+        placeholder: 'Container, Center'
       ref:
         # ref=*
         label: Reference Code
@@ -2451,14 +2461,17 @@ en:
         terms: '<translate with synonyms or related terms for ''Ranger Station'', separated by commas>'
       amenity/recycling:
         # amenity=recycling
-        name: Recycling Container
-        # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
-        terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
+        name: Recycling
       amenity/recycling_centre:
         # 'amenity=recycling, recycling_type=centre'
         name: Recycling Center
         # 'terms: bottle,can,dump,glass,garbage,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Recycling Center'', separated by commas>'
+      amenity/recycling_container:
+        # 'amenity=recycling, recycling_type=container'
+        name: Recycling Container
+        # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
+        terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
       amenity/register_office:
         # amenity=register_office
         name: Register Office

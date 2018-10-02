@@ -2521,6 +2521,14 @@
                 "recycling_accepts": {
                     "label": "Accepts"
                 },
+                "recycling_type": {
+                    "label": "Type",
+                    "placeholder": "Container, Center",
+                    "options": {
+                        "container": "Container",
+                        "centre": "Center"
+                    }
+                },
                 "ref_aeroway_gate": {
                     "label": "Gate Number"
                 },
@@ -3226,6 +3234,10 @@
                     "name": "Nursing Home",
                     "terms": ""
                 },
+                "amenity/recycling": {
+                    "name": "Recycling",
+                    "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
+                },
                 "amenity/register_office": {
                     "name": "Register Office",
                     "terms": ""
@@ -3570,7 +3582,7 @@
                     "name": "Recycling Center",
                     "terms": "bottle,can,dump,glass,garbage,rubbish,scrap,trash"
                 },
-                "amenity/recycling": {
+                "amenity/recycling_container": {
                     "name": "Recycling Container",
                     "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
                 },

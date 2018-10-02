@@ -250,6 +250,13 @@
     },
     {
       "key": "amenity",
+      "value": "recycling",
+      "description": "Recycling",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/recycling-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "register_office",
       "description": "Register Office",
       "object_types": ["node", "area"],
@@ -843,14 +850,14 @@
     {
       "key": "recycling_type",
       "value": "centre",
-      "description": "Recycling Center",
+      "description": "Recycling Center, Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/recycling-15.svg?sanitize=true"
     },
     {
-      "key": "amenity",
-      "value": "recycling",
-      "description": "Recycling Container",
+      "key": "recycling_type",
+      "value": "container",
+      "description": "Recycling Container, Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/recycling-15.svg?sanitize=true"
     },
