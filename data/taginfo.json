@@ -2294,7 +2294,7 @@
       "key": "conveying",
       "description": "Moving Walkway, Escalator",
       "object_types": ["way"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
     },
     {
       "key": "traffic_calming",

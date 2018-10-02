@@ -1,13 +1,17 @@
 {
-    "icon": "temaki-pedestrian",
+    "icon": "iD-highway-footway",
     "fields": [
-        "name", "conveying", "access_simple", "lit", "surface", "width"
+        "name",
+        "conveying",
+        "access_simple",
+        "lit",
+        "width"
     ],
     "geometry": [
         "line"
     ],
     "terms": [
-        "moving sidewalk", 
+        "moving sidewalk",
         "autwalk",
         "skywalk",
         "travolator",

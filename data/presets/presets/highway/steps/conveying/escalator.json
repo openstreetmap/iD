@@ -1,13 +1,20 @@
 {
     "icon": "maki-entrance",
     "fields": [
-        "name", "incline_steps", "conveying", "access_simple", "lit", "surface", "width", "handrail", "step_count"
+        "name",
+        "incline_steps",
+        "conveying",
+        "access_simple",
+        "lit",
+        "width",
+        "handrail",
+        "step_count"
     ],
     "geometry": [
         "line"
     ],
     "terms": [
-        "moving staircase", 
+        "moving staircase",
         "moving stairway",
         "people mover"
     ],
