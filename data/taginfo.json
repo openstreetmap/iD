@@ -2291,6 +2291,12 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/entrance-alt1-15.svg?sanitize=true"
     },
     {
+      "key": "conveying",
+      "description": "Moving Walkway, Escalator",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+    },
+    {
       "key": "traffic_calming",
       "value": "table",
       "description": "Raised Street Crossing, Raised Pedestrian Crosswalk, Speed Table",
@@ -6624,6 +6630,21 @@
     {"key": "construction", "description": "Type"},
     {"key": "contact:webcam", "description": "Webcam URL"},
     {"key": "content", "description": "Content"},
+    {
+      "key": "conveying",
+      "value": "forward",
+      "description": "Movement Direction"
+    },
+    {
+      "key": "conveying",
+      "value": "backward",
+      "description": "Movement Direction"
+    },
+    {
+      "key": "conveying",
+      "value": "reversible",
+      "description": "Movement Direction"
+    },
     {"key": "country", "description": "Country"},
     {"key": "covered", "description": "Covered"},
     {"key": "crane:type", "value": "portal_crane", "description": "Crane Type"},

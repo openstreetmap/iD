@@ -340,6 +340,16 @@ en:
       content:
         # content=*
         label: Content
+      conveying:
+        # conveying=*
+        label: Movement Direction
+        options:
+          # conveying=backward
+          backward: Backward
+          # conveying=forward
+          forward: Forward
+          # conveying=reversible
+          reversible: Reversible
       country:
         # country=*
         label: Country
@@ -3378,6 +3388,11 @@ en:
         name: Entrance/Exit
         # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
+      footway/conveying/moving-walkway:
+        # 'highway=footway, conveying=*'
+        name: Moving Walkway
+        # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
+        terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
       footway/crossing:
         # 'highway=footway, footway=crossing'
         name: Street Crossing
@@ -3713,6 +3728,11 @@ en:
         name: Steps
         # 'terms: stairs,staircase'
         terms: '<translate with synonyms or related terms for ''Steps'', separated by commas>'
+      highway/steps/conveying/escalator:
+        # 'highway=steps, conveying=*'
+        name: Escalator
+        # 'terms: moving staircase,moving stairway,people mover'
+        terms: '<translate with synonyms or related terms for ''Escalator'', separated by commas>'
       highway/stop:
         # highway=stop
         name: Stop Sign

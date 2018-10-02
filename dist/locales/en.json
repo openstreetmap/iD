@@ -1747,6 +1747,14 @@
                 "content": {
                     "label": "Content"
                 },
+                "conveying": {
+                    "label": "Movement Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "reversible": "Reversible"
+                    }
+                },
                 "country": {
                     "label": "Country"
                 },
@@ -4402,6 +4410,10 @@
                     "name": "Entrance/Exit",
                     "terms": "entrance,exit,door"
                 },
+                "footway/conveying/moving-walkway": {
+                    "name": "Moving Walkway",
+                    "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
+                },
                 "footway/crossing-raised": {
                     "name": "Raised Street Crossing",
                     "terms": "flat top,hump,speed,slow"
@@ -4685,6 +4697,10 @@
                 "highway/steps": {
                     "name": "Steps",
                     "terms": "stairs,staircase"
+                },
+                "highway/steps/conveying/escalator": {
+                    "name": "Escalator",
+                    "terms": "moving staircase,moving stairway,people mover"
                 },
                 "highway/stop": {
                     "name": "Stop Sign",
