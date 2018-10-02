@@ -3,9 +3,6 @@ import _intersection from 'lodash-es/intersection';
 import _reduce from 'lodash-es/reduce';
 import _every from 'lodash-es/every';
 
-var ruleChecks,
-    validationRules;
-
 var buildRuleChecks = function() {
     return {
         equals: function (equals) {
@@ -81,17 +78,35 @@ var buildRuleChecks = function() {
     };
 };
 
+var buildLineKeys = function() {
+    return {
+        highway: {
+            rest_area: true,
+            services: true
+        },
+        railway: {
+            roundhouse: true,
+            station: true,
+            traverser: true,
+            turntable: true,
+            wash: true
+        }
+    };
+};
 
 export default {
-    init: function() {
-        ruleChecks  = buildRuleChecks();
-        validationRules = [];
+    init: function(areaKeys) {
+        this._ruleChecks  = buildRuleChecks();
+        this._validationRules = [];
+        this._areaKeys = areaKeys;
+        this._lineKeys = buildLineKeys();
     },
     // list of rules only relevant to tag checks...
     filterRuleChecks: function(selector) {
+        var _ruleChecks = this._ruleChecks;
         return _reduce(Object.keys(selector), function(rules, key) {
             if (['geometry', 'error', 'warning'].indexOf(key) === -1) {
-                rules.push(ruleChecks[key](selector[key]));
+                rules.push(_ruleChecks[key](selector[key]));
             }
             return rules;
         }, []);
@@ -123,8 +138,14 @@ export default {
                 
             } else if (/(greater|less)Than(Equal)?|presence/g.test(key)) {
                 var tagKey = /presence/.test(key) ? selector[key] : Object.keys(selector[key])[0];
-                expectedTags[tagKey] = [];
+                
+                values = [selector[key][tagKey]];
 
+                if (expectedTags.hasOwnProperty(tagKey)) {
+                    values = values.concat(expectedTags[tagKey]);
+                }
+            
+                expectedTags[tagKey] = values;
             }
 
             return expectedTags;
@@ -133,25 +154,15 @@ export default {
         return tagMap;
     },
     // inspired by osmWay#isArea()
-    inferGeometry: function(tagMap, areaKeys) {
-        var lineKeys = {
-            highway: {
-                rest_area: true,
-                services: true
-            },
-            railway: {
-                roundhouse: true,
-                station: true,
-                traverser: true,
-                turntable: true,
-                wash: true
-            }
-        };
+    inferGeometry: function(tagMap) {
+        var _lineKeys = this._lineKeys;
+        var _areaKeys = this._areaKeys;
+
         var isAreaKeyBlackList = function(key) {
-            return _intersection(tagMap[key], Object.keys(areaKeys[key])).length > 0;
+            return _intersection(tagMap[key], Object.keys(_areaKeys[key])).length > 0;
         };
         var isLineKeysWhiteList = function(key) {
-            return _intersection(tagMap[key], Object.keys(lineKeys[key])).length > 0;
+            return _intersection(tagMap[key], Object.keys(_lineKeys[key])).length > 0;
         };
 
         if (tagMap.hasOwnProperty('area')) {
@@ -164,10 +175,10 @@ export default {
         }
         
         for (var key in tagMap) {
-            if (key in areaKeys && !isAreaKeyBlackList(key)) {
+            if (key in _areaKeys && !isAreaKeyBlackList(key)) {
                 return 'area';
             }
-            if (key in lineKeys && isLineKeysWhiteList(key)) {
+            if (key in _lineKeys && isLineKeysWhiteList(key)) {
                 return 'area';
             }
         }
@@ -175,7 +186,8 @@ export default {
         return 'line';
     },
     // adds from mapcss-parse selector check...
-    addRule: function(selector, areaKeys) {
+    addRule: function(selector) {
+        var _areaKeys = this._areaKeys;
         var rule = {
             // checks relevant to mapcss-selector
             checks: this.filterRuleChecks(selector),
@@ -186,7 +198,7 @@ export default {
                 });
             },
             // borrowed from Way#isArea()
-            inferredGeometry: this.inferGeometry(this.buildTagMap(selector), areaKeys), 
+            inferredGeometry: this.inferGeometry(this.buildTagMap(selector), this._areaKeys), 
             geometryMatches: function(entity, graph) {
                 if (entity.type === 'node' || entity.type === 'relation') { 
                     return selector.geometry === entity.type; 
@@ -206,8 +218,11 @@ export default {
                 }
             }
         };
-        validationRules.push(rule);
+        this._validationRules.push(rule);
     },
+    clearRules: function() { this._validationRules = []; },
     // returns validationRules...
-    validationRules: function() { return validationRules; }
+    validationRules: function() { return this._validationRules; },
+    // returns ruleChecks
+    ruleChecks: function() { return this._ruleChecks; }
 };

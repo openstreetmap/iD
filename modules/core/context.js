@@ -464,10 +464,9 @@ export function coreContext() {
         var validationsUrl = utilStringQs(window.location.hash).validations;
         d3_json(validationsUrl, function (err, mapcss) {
             if (err) return;
-            services.maprules.init();
-            var areaKeys = context.presets().areaKeys();
+            services.maprules.init(context.presets().areaKeys());
             _each(mapcss, function(mapcssSelector) {
-                return services.maprules.addRule(mapcssSelector, areaKeys); 
+                return services.maprules.addRule(mapcssSelector); 
             });
             context.validationRules = true;
         });
