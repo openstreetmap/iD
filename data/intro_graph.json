@@ -209,7 +209,7 @@
       "id": "n1026",
       "loc": [-85.634762, 41.946056],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -221,7 +221,7 @@
       "id": "n1028",
       "loc": [-85.634622, 41.946175],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -6503,7 +6503,7 @@
       "id": "n2411",
       "loc": [-85.63456, 41.945731],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -8823,7 +8823,7 @@
       "id": "n293",
       "loc": [-85.635816, 41.942673],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -9484,7 +9484,7 @@
       "id": "n308",
       "loc": [-85.63577, 41.940183],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -11846,7 +11846,7 @@
       "id": "n363",
       "loc": [-85.632915, 41.943981],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -11894,7 +11894,7 @@
       "id": "n364",
       "loc": [-85.632724, 41.943969],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -11986,7 +11986,7 @@
       "id": "n366",
       "loc": [-85.632684, 41.944109],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -12078,7 +12078,7 @@
       "id": "n368",
       "loc": [-85.63287, 41.944135],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -15592,7 +15592,7 @@
       "id": "n4463",
       "loc": [-85.620103, 41.950884],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -16955,7 +16955,7 @@
       "id": "n4686",
       "loc": [-85.635883, 41.94012],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -16967,7 +16967,7 @@
       "id": "n4688",
       "loc": [-85.635768, 41.940051],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -16983,7 +16983,7 @@
       "id": "n4690",
       "loc": [-85.635661, 41.940107],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -19230,7 +19230,7 @@
       "id": "n602",
       "loc": [-85.637038, 41.942543],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -19762,7 +19762,7 @@
       "id": "n720",
       "loc": [-85.634363, 41.945548],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -19790,7 +19790,7 @@
       "id": "n726",
       "loc": [-85.633568, 41.944829],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -19814,7 +19814,7 @@
       "id": "n730",
       "loc": [-85.634344, 41.945699],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "highway": "crossing"
       }
     },
@@ -21430,7 +21430,7 @@
       "id": "w129",
       "nodes": ["n309", "n602", "n603"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -21694,7 +21694,7 @@
       "id": "w159",
       "nodes": ["n714", "n720", "n721"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -21718,7 +21718,7 @@
       "id": "w161",
       "nodes": ["n713", "n726", "n722"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -21727,7 +21727,7 @@
       "id": "w162",
       "nodes": ["n727", "n2411", "n728"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -21736,7 +21736,7 @@
       "id": "w163",
       "nodes": ["n729", "n730", "n731"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -22211,7 +22211,7 @@
       "id": "w219",
       "nodes": ["n719", "n1026", "n1027"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -22227,7 +22227,7 @@
       "id": "w220",
       "nodes": ["n1027", "n1028", "n1019"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -26143,7 +26143,7 @@
       "id": "w58",
       "nodes": ["n240", "n293", "n294"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -26329,7 +26329,7 @@
       "id": "w60",
       "nodes": ["n239", "n308", "n307"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28338,7 +28338,7 @@
       "id": "w770",
       "nodes": ["n4462", "n4463", "n4464"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28505,7 +28505,7 @@
       "id": "w79",
       "nodes": ["n362", "n363", "n334"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28601,7 +28601,7 @@
       "id": "w80",
       "nodes": ["n334", "n364", "n365"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28685,7 +28685,7 @@
       "id": "w81",
       "nodes": ["n365", "n366", "n367"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28738,7 +28738,7 @@
       "id": "w816",
       "nodes": ["n239", "n4686", "n4687"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28747,7 +28747,7 @@
       "id": "w817",
       "nodes": ["n4687", "n4688", "n4689"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28756,7 +28756,7 @@
       "id": "w818",
       "nodes": ["n4689", "n4690", "n307"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }
@@ -28772,7 +28772,7 @@
       "id": "w82",
       "nodes": ["n724", "n368", "n369"],
       "tags": {
-        "crossing": "zebra",
+        "crossing": "marked",
         "footway": "crossing",
         "highway": "footway"
       }

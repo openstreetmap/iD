@@ -1,19 +1,24 @@
 {
-    "icon": "iD-highway-footway",
     "fields": [
         "crossing",
-        "access",
-        "surface",
         "kerb",
         "tactile_paving"
     ],
     "geometry": [
-        "line"
+        "vertex"
     ],
+    "addTags": {
+        "highway": "crossing",
+        "crossing": "unmarked",
+        "traffic_calming": "table"
+    },
+    "removeTags": {
+        "highway": "crossing",
+        "crossing": "unmarked",
+        "traffic_calming": "table"
+    },
     "tags": {
-        "highway": "footway",
-        "footway": "crossing",
-        "crossing": "zebra",
+        "highway": "crossing",
         "traffic_calming": "table"
     },
     "reference": {
@@ -21,11 +26,10 @@
         "value": "table"
     },
     "terms": [
-        "zebra crossing",
         "flat top",
         "hump",
         "speed",
         "slow"
     ],
-    "name": "Raised Pedestrian Crosswalk"
+    "name": "Unmarked Crossing (Raised)"
 }

@@ -100,7 +100,7 @@
       "geometry": "line",
       "name": "Path Features",
       "members": [
-        "highway/footway/crosswalk",
+        "highway/footway/marked",
         "highway/footway/sidewalk",
         "highway/steps",
         "highway/path",

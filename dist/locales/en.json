@@ -4534,21 +4534,29 @@
                     "name": "Indoor Corridor",
                     "terms": "gallery,hall,hallway,indoor,passage,passageway"
                 },
-                "highway/crossing-raised": {
-                    "name": "Raised Street Crossing",
+                "highway/crossing/zebra-raised": {
+                    "name": "Marked Crosswalk (Raised)",
+                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                },
+                "highway/crossing/zebra": {
+                    "name": "Marked Crosswalk",
+                    "terms": "zebra crossing,marked crossing,crosswalk"
+                },
+                "highway/crossing/marked-raised": {
+                    "name": "Marked Crosswalk (Raised)",
+                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                },
+                "highway/crossing/marked": {
+                    "name": "Marked Crosswalk",
+                    "terms": "zebra crossing,marked crossing,crosswalk"
+                },
+                "highway/crossing/unmarked-raised": {
+                    "name": "Unmarked Crossing (Raised)",
                     "terms": "flat top,hump,speed,slow"
                 },
-                "highway/crossing": {
-                    "name": "Street Crossing",
+                "highway/crossing/unmarked": {
+                    "name": "Unmarked Crossing",
                     "terms": ""
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Raised Pedestrian Crosswalk",
-                    "terms": "zebra crossing,flat top,hump,speed,slow"
-                },
-                "highway/crosswalk": {
-                    "name": "Pedestrian Crosswalk",
-                    "terms": "zebra crossing"
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path",
@@ -4562,28 +4570,36 @@
                     "name": "Foot Path",
                     "terms": "hike,hiking,trackway,trail,walk"
                 },
-                "highway/footway/conveying/moving-walkway": {
+                "highway/footway/zebra-raised": {
+                    "name": "Marked Crosswalk (Raised)",
+                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                },
+                "highway/footway/zebra": {
+                    "name": "Marked Crosswalk",
+                    "terms": "zebra crossing,marked crossing,crosswalk"
+                },
+                "highway/footway/conveying": {
                     "name": "Moving Walkway",
                     "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
                 },
-                "highway/footway/crossing-raised": {
-                    "name": "Raised Street Crossing",
-                    "terms": "flat top,hump,speed,slow"
+                "highway/footway/marked-raised": {
+                    "name": "Marked Crosswalk (Raised)",
+                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
                 },
-                "highway/footway/crossing": {
-                    "name": "Street Crossing",
-                    "terms": ""
-                },
-                "highway/footway/crosswalk-raised": {
-                    "name": "Raised Pedestrian Crosswalk",
-                    "terms": "zebra crossing,flat top,hump,speed,slow"
-                },
-                "highway/footway/crosswalk": {
-                    "name": "Pedestrian Crosswalk",
-                    "terms": "zebra crossing"
+                "highway/footway/marked": {
+                    "name": "Marked Crosswalk",
+                    "terms": "zebra crossing,marked crossing,crosswalk"
                 },
                 "highway/footway/sidewalk": {
                     "name": "Sidewalk",
+                    "terms": "pavement,sidepath"
+                },
+                "highway/footway/unmarked-raised": {
+                    "name": "Unmarked Crossing (Raised)",
+                    "terms": "flat top,hump,speed,slow"
+                },
+                "highway/footway/unmarked": {
+                    "name": "Unmarked Crossing",
                     "terms": ""
                 },
                 "highway/give_way": {
@@ -4698,7 +4714,7 @@
                     "name": "Steps",
                     "terms": "stairs,staircase"
                 },
-                "highway/steps/conveying/escalator": {
+                "highway/steps/conveying": {
                     "name": "Escalator",
                     "terms": "moving staircase,moving stairway,people mover"
                 },

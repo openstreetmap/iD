@@ -2487,21 +2487,29 @@
     {
       "key": "traffic_calming",
       "value": "table",
-      "description": "Raised Street Crossing, Raised Pedestrian Crosswalk, Speed Table",
-      "object_types": ["node"]
-    },
-    {
-      "key": "highway",
-      "value": "crossing",
-      "description": "Street Crossing",
-      "object_types": ["node"]
+      "description": "Marked Crosswalk (Raised), Unmarked Crossing (Raised), Speed Table",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
     },
     {
       "key": "crossing",
       "value": "zebra",
-      "description": "Pedestrian Crosswalk",
+      "description": "Marked Crosswalk",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+    },
+    {
+      "key": "crossing",
+      "value": "marked",
+      "description": "Marked Crosswalk",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+    },
+    {
+      "key": "highway",
+      "value": "crossing",
+      "description": "Unmarked Crossing",
+      "object_types": ["node"]
     },
     {
       "key": "highway",
@@ -2532,16 +2540,16 @@
     },
     {
       "key": "footway",
-      "value": "crossing",
-      "description": "Street Crossing",
-      "object_types": ["way"]
-    },
-    {
-      "key": "footway",
       "value": "sidewalk",
       "description": "Sidewalk",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
+    },
+    {
+      "key": "footway",
+      "value": "crossing",
+      "description": "Unmarked Crossing",
+      "object_types": ["way"]
     },
     {
       "key": "highway",

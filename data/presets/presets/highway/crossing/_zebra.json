@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "crossing",
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "crossing",
+        "crossing": "zebra"
+    },
+    "reference": {
+        "key": "highway",
+        "value": "crossing"
+    },
+    "terms": [
+        "zebra crossing",
+        "marked crossing",
+        "crosswalk"
+    ],
+    "name": "Marked Crosswalk",
+    "searchable": false
+}

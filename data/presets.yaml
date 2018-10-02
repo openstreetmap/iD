@@ -3534,25 +3534,31 @@ en:
         name: Indoor Corridor
         # 'terms: gallery,hall,hallway,indoor,passage,passageway'
         terms: '<translate with synonyms or related terms for ''Indoor Corridor'', separated by commas>'
-      highway/crossing:
+      highway/crossing/marked:
+        # 'highway=crossing, crossing=marked'
+        name: Marked Crosswalk
+        # 'terms: zebra crossing,marked crossing,crosswalk'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
+      highway/crossing/marked-raised:
+        # 'highway=crossing, crossing=marked, traffic_calming=table'
+        name: Marked Crosswalk (Raised)
+        # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
+      highway/crossing/unmarked:
         # highway=crossing
-        name: Street Crossing
-        terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
-      highway/crossing-raised:
+        name: Unmarked Crossing
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
+      highway/crossing/unmarked-raised:
         # 'highway=crossing, traffic_calming=table'
-        name: Raised Street Crossing
+        name: Unmarked Crossing (Raised)
         # 'terms: flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
-      highway/crosswalk:
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'
+      highway/crossing/zebra:
         # 'highway=crossing, crossing=zebra'
-        name: Pedestrian Crosswalk
-        # 'terms: zebra crossing'
-        terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
-      highway/crosswalk-raised:
+        name: Marked Crosswalk
+      highway/crossing/zebra-raised:
         # 'highway=crossing, crossing=zebra, traffic_calming=table'
-        name: Raised Pedestrian Crosswalk
-        # 'terms: zebra crossing,flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
+        name: Marked Crosswalk (Raised)
       highway/cycleway:
         # highway=cycleway
         name: Cycle Path
@@ -3568,34 +3574,41 @@ en:
         name: Foot Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
-      highway/footway/conveying/moving-walkway:
+      highway/footway/conveying:
         # 'highway=footway, conveying=*'
         name: Moving Walkway
         # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
         terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
-      highway/footway/crossing:
-        # 'highway=footway, footway=crossing'
-        name: Street Crossing
-        terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
-      highway/footway/crossing-raised:
-        # 'highway=footway, footway=crossing, traffic_calming=table'
-        name: Raised Street Crossing
-        # 'terms: flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
-      highway/footway/crosswalk:
-        # 'highway=footway, footway=crossing, crossing=zebra'
-        name: Pedestrian Crosswalk
-        # 'terms: zebra crossing'
-        terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
-      highway/footway/crosswalk-raised:
-        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
-        name: Raised Pedestrian Crosswalk
-        # 'terms: zebra crossing,flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
+      highway/footway/marked:
+        # 'highway=footway, footway=crossing, crossing=marked'
+        name: Marked Crosswalk
+        # 'terms: zebra crossing,marked crossing,crosswalk'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
+      highway/footway/marked-raised:
+        # 'highway=footway, footway=crossing, crossing=marked, traffic_calming=table'
+        name: Marked Crosswalk (Raised)
+        # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/footway/sidewalk:
         # 'highway=footway, footway=sidewalk'
         name: Sidewalk
+        # 'terms: pavement,sidepath'
         terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
+      highway/footway/unmarked:
+        # 'highway=footway, footway=crossing'
+        name: Unmarked Crossing
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
+      highway/footway/unmarked-raised:
+        # 'highway=footway, footway=crossing, traffic_calming=table'
+        name: Unmarked Crossing (Raised)
+        # 'terms: flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'
+      highway/footway/zebra:
+        # 'highway=footway, footway=crossing, crossing=zebra'
+        name: Marked Crosswalk
+      highway/footway/zebra-raised:
+        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
+        name: Marked Crosswalk (Raised)
       highway/give_way:
         # highway=give_way
         name: Yield Sign
@@ -3728,7 +3741,7 @@ en:
         name: Steps
         # 'terms: stairs,staircase'
         terms: '<translate with synonyms or related terms for ''Steps'', separated by commas>'
-      highway/steps/conveying/escalator:
+      highway/steps/conveying:
         # 'highway=steps, conveying=*'
         name: Escalator
         # 'terms: moving staircase,moving stairway,people mover'
