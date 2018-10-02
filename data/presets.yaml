@@ -3388,34 +3388,6 @@ en:
         name: Entrance/Exit
         # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
-      footway/conveying/moving-walkway:
-        # 'highway=footway, conveying=*'
-        name: Moving Walkway
-        # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
-        terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
-      footway/crossing:
-        # 'highway=footway, footway=crossing'
-        name: Street Crossing
-        terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
-      footway/crossing-raised:
-        # 'highway=footway, footway=crossing, traffic_calming=table'
-        name: Raised Street Crossing
-        # 'terms: flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
-      footway/crosswalk:
-        # 'highway=footway, footway=crossing, crossing=zebra'
-        name: Pedestrian Crosswalk
-        # 'terms: zebra crossing'
-        terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
-      footway/crosswalk-raised:
-        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
-        name: Raised Pedestrian Crosswalk
-        # 'terms: zebra crossing,flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
-      footway/sidewalk:
-        # 'highway=footway, footway=sidewalk'
-        name: Sidewalk
-        terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
       ford:
         # ford=yes
         name: Ford
@@ -3596,6 +3568,34 @@ en:
         name: Foot Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
+      highway/footway/conveying/moving-walkway:
+        # 'highway=footway, conveying=*'
+        name: Moving Walkway
+        # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
+        terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
+      highway/footway/crossing:
+        # 'highway=footway, footway=crossing'
+        name: Street Crossing
+        terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
+      highway/footway/crossing-raised:
+        # 'highway=footway, footway=crossing, traffic_calming=table'
+        name: Raised Street Crossing
+        # 'terms: flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
+      highway/footway/crosswalk:
+        # 'highway=footway, footway=crossing, crossing=zebra'
+        name: Pedestrian Crosswalk
+        # 'terms: zebra crossing'
+        terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
+      highway/footway/crosswalk-raised:
+        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
+        name: Raised Pedestrian Crosswalk
+        # 'terms: zebra crossing,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
+      highway/footway/sidewalk:
+        # 'highway=footway, footway=sidewalk'
+        name: Sidewalk
+        terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
       highway/give_way:
         # highway=give_way
         name: Yield Sign

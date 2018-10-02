@@ -2291,38 +2291,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/entrance-alt1-15.svg?sanitize=true"
     },
     {
-      "key": "conveying",
-      "description": "Moving Walkway, Escalator",
-      "object_types": ["way"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
-    },
-    {
-      "key": "traffic_calming",
-      "value": "table",
-      "description": "Raised Street Crossing, Raised Pedestrian Crosswalk, Speed Table",
-      "object_types": ["way"]
-    },
-    {
-      "key": "footway",
-      "value": "crossing",
-      "description": "Street Crossing",
-      "object_types": ["way"]
-    },
-    {
-      "key": "crossing",
-      "value": "zebra",
-      "description": "Pedestrian Crosswalk",
-      "object_types": ["way"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
-    },
-    {
-      "key": "footway",
-      "value": "sidewalk",
-      "description": "Sidewalk",
-      "object_types": ["way"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
-    },
-    {
       "key": "ford",
       "value": "yes",
       "description": "Ford",
@@ -2517,10 +2485,23 @@
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
     },
     {
+      "key": "traffic_calming",
+      "value": "table",
+      "description": "Raised Street Crossing, Raised Pedestrian Crosswalk, Speed Table",
+      "object_types": ["node"]
+    },
+    {
       "key": "highway",
       "value": "crossing",
       "description": "Street Crossing",
       "object_types": ["node"]
+    },
+    {
+      "key": "crossing",
+      "value": "zebra",
+      "description": "Pedestrian Crosswalk",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
     },
     {
       "key": "highway",
@@ -2540,6 +2521,25 @@
       "key": "highway",
       "value": "footway",
       "description": "Foot Path",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
+    },
+    {
+      "key": "conveying",
+      "description": "Moving Walkway, Escalator",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
+    },
+    {
+      "key": "footway",
+      "value": "crossing",
+      "description": "Street Crossing",
+      "object_types": ["way"]
+    },
+    {
+      "key": "footway",
+      "value": "sidewalk",
+      "description": "Sidewalk",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
     },

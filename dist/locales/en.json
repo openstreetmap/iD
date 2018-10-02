@@ -4410,30 +4410,6 @@
                     "name": "Entrance/Exit",
                     "terms": "entrance,exit,door"
                 },
-                "footway/conveying/moving-walkway": {
-                    "name": "Moving Walkway",
-                    "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
-                },
-                "footway/crossing-raised": {
-                    "name": "Raised Street Crossing",
-                    "terms": "flat top,hump,speed,slow"
-                },
-                "footway/crossing": {
-                    "name": "Street Crossing",
-                    "terms": ""
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Raised Pedestrian Crosswalk",
-                    "terms": "zebra crossing,flat top,hump,speed,slow"
-                },
-                "footway/crosswalk": {
-                    "name": "Pedestrian Crosswalk",
-                    "terms": "zebra crossing"
-                },
-                "footway/sidewalk": {
-                    "name": "Sidewalk",
-                    "terms": ""
-                },
                 "ford": {
                     "name": "Ford",
                     "terms": ""
@@ -4585,6 +4561,30 @@
                 "highway/footway": {
                     "name": "Foot Path",
                     "terms": "hike,hiking,trackway,trail,walk"
+                },
+                "highway/footway/conveying/moving-walkway": {
+                    "name": "Moving Walkway",
+                    "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
+                },
+                "highway/footway/crossing-raised": {
+                    "name": "Raised Street Crossing",
+                    "terms": "flat top,hump,speed,slow"
+                },
+                "highway/footway/crossing": {
+                    "name": "Street Crossing",
+                    "terms": ""
+                },
+                "highway/footway/crosswalk-raised": {
+                    "name": "Raised Pedestrian Crosswalk",
+                    "terms": "zebra crossing,flat top,hump,speed,slow"
+                },
+                "highway/footway/crosswalk": {
+                    "name": "Pedestrian Crosswalk",
+                    "terms": "zebra crossing"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Sidewalk",
+                    "terms": ""
                 },
                 "highway/give_way": {
                     "name": "Yield Sign",
