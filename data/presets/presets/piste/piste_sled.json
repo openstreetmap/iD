@@ -1,0 +1,27 @@
+{
+    "icon": "fas-snowflake",
+    "fields": [
+        "name",
+        "piste_sled/difficulty",
+        "piste_sled/grooming",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ski",
+        "sled",
+        "luge",
+        "sleigh",
+        "sledge",
+        "piste"
+    ],
+    "tags": {
+        "piste:type": "sled"
+    },
+    "name": "Sled Piste"
+}

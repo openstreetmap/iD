@@ -1,0 +1,26 @@
+{
+    "icon": "maki-skiing",
+    "fields": [
+        "name",
+        "piste_skitour/difficulty",
+        "piste_skitour/grooming",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ski",
+        "skitour",
+        "crosscountry",
+        "ski touring",
+        "piste"
+    ],
+    "tags": {
+        "piste:type": "skitour"
+    },
+    "name": "Ski Touring Trail"
+}

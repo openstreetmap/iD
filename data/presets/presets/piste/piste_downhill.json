@@ -2,9 +2,9 @@
     "icon": "maki-skiing",
     "fields": [
         "name",
-        "piste/type",
-        "piste/difficulty",
-        "piste/grooming",
+        "piste_downhill/type",
+        "piste_downhill/difficulty",
+        "piste_downhill/grooming",
         "oneway",
         "lit"
     ],
@@ -15,15 +15,13 @@
     ],
     "terms": [
         "ski",
-        "sled",
-        "sleigh",
+        "alpine",
         "snowboard",
-        "nordic",
         "downhill",
-        "snowmobile"
+        "piste"
     ],
     "tags": {
-        "piste:type": "*"
+        "piste:type": "downhill"
     },
-    "name": "Piste/Ski Trail"
+    "name": "Downhill Piste/Ski Run"
 }
