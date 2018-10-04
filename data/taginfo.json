@@ -4414,9 +4414,52 @@
     },
     {
       "key": "piste:type",
-      "description": "Piste/Ski Trail",
+      "value": "downhill",
+      "description": "Downhill Piste/Ski Run, Type",
       "object_types": ["node", "way", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "hike",
+      "description": "Snowshoeing or Winter Hiking Trail",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "ice_skate",
+      "description": "Ice Skating Piste",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "nordic",
+      "description": "Nordic or Crosscountry Piste/Ski Trail",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "skitour",
+      "description": "Ski Touring Trail",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "sled",
+      "description": "Sled Piste",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "sleigh",
+      "description": "Animal-pulled Sleigh Piste",
+      "object_types": ["node", "way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
     },
     {
       "key": "place",
@@ -7085,6 +7128,9 @@
       "value": "backcountry",
       "description": "Grooming"
     },
+    {"key": "piste:type", "value": "snow_park", "description": "Type"},
+    {"key": "piste:type", "value": "playground", "description": "Type"},
+    {"key": "piste:type", "value": "connection", "description": "Type"},
     {
       "key": "piste:grooming",
       "value": "classic+skating",
@@ -7092,16 +7138,6 @@
     },
     {"key": "piste:grooming", "value": "scooter", "description": "Grooming"},
     {"key": "piste:grooming", "value": "skating", "description": "Grooming"},
-    {"key": "piste:type", "value": "downhill", "description": "Type"},
-    {"key": "piste:type", "value": "nordic", "description": "Type"},
-    {"key": "piste:type", "value": "skitour", "description": "Type"},
-    {"key": "piste:type", "value": "sled", "description": "Type"},
-    {"key": "piste:type", "value": "hike", "description": "Type"},
-    {"key": "piste:type", "value": "sleigh", "description": "Type"},
-    {"key": "piste:type", "value": "ice_skate", "description": "Type"},
-    {"key": "piste:type", "value": "snow_park", "description": "Type"},
-    {"key": "piste:type", "value": "playground", "description": "Type"},
-    {"key": "piste:type", "value": "connection", "description": "Type"},
     {"key": "plant", "description": "Plant"},
     {"key": "plant:output:electricity", "description": "Power Output"},
     {"key": "baby", "description": "Baby Seat"},

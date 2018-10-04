@@ -2427,7 +2427,7 @@
                     "label": "Telephone",
                     "placeholder": "+31 42 123 4567"
                 },
-                "piste/difficulty": {
+                "piste_downhill/difficulty": {
                     "label": "Difficulty",
                     "placeholder": "Easy, Intermediate, Advanced...",
                     "options": {
@@ -2440,30 +2440,131 @@
                         "extreme": "Extreme (climbing equipment required)"
                     }
                 },
-                "piste/grooming": {
+                "piste_downhill/grooming": {
                     "label": "Grooming",
                     "options": {
                         "classic": "Classic",
                         "mogul": "Mogul",
-                        "backcountry": "Backcountry",
+                        "backcountry": "Backcountry - no grooming"
+                    }
+                },
+                "piste_downhill/type": {
+                    "label": "Type",
+                    "options": {
+                        "downhill": "Downhill",
+                        "snow_park": "Snow Park",
+                        "playground": "Playground",
+                        "connection": "Connection between pistes"
+                    }
+                },
+                "piste_hike/difficulty": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice",
+                        "easy": "Easy",
+                        "intermediate": "Intermediate",
+                        "advanced": "Advanced",
+                        "expert": "Expert",
+                        "freeride": "Freeride",
+                        "extreme": "Extreme"
+                    }
+                },
+                "piste_hike/grooming": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic - Winter Hiking",
+                        "backcountry": "Backcountry - Snowshoeing"
+                    }
+                },
+                "piste_nordic/difficulty": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice - Flat, no effort needed",
+                        "easy": "Easy - Soft hills, short steep section",
+                        "intermediate": "Intermediate - Steep section",
+                        "advanced": "Advanced - Narrow, steep or icy section, sharp turn",
+                        "expert": "Expert - Dangerous terrain around"
+                    }
+                },
+                "piste_nordic/grooming": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic",
+                        "backcountry": "Backcountry, no grooming",
                         "classic+skating": "Classic and Skating",
                         "scooter": "Scooter/Snowmobile",
                         "skating": "Skating"
                     }
                 },
-                "piste/type": {
+                "piste_nordic/type": {
                     "label": "Type",
                     "options": {
-                        "downhill": "Downhill",
-                        "nordic": "Nordic",
-                        "skitour": "Skitour",
-                        "sled": "Sled",
-                        "hike": "Hike",
-                        "sleigh": "Sleigh",
-                        "ice_skate": "Ice Skate",
-                        "snow_park": "Snow Park",
+                        "downhill": "Nordic",
                         "playground": "Playground",
-                        "connection": "Connection"
+                        "connection": "Connection between pistes"
+                    }
+                },
+                "piste_skitour/difficulty": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "novice - L: inclination <30 degree",
+                        "easy": "Easy - WS: inclination 30-35 degree",
+                        "intermediate": "Intermediate - ZS: inclination 35-40 degree",
+                        "advanced": "Advanced - S: inclination 40-45 degree",
+                        "expert": "Expert - SS: inclination 45–50 degree",
+                        "freeride": "Freeride - AS: inclination 50–55 degree",
+                        "extreme": "Extreme - EX: inclination >55 degree"
+                    }
+                },
+                "piste_skitour/grooming": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic",
+                        "mogul": "Mogul",
+                        "backcountry": "Backcountry"
+                    }
+                },
+                "piste_sled/difficulty": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice",
+                        "easy": "Easy",
+                        "intermediate": "Intermediate",
+                        "advanced": "Advanced",
+                        "expert": "Expert",
+                        "freeride": "Freeride",
+                        "extreme": "Extreme"
+                    }
+                },
+                "piste_sled/grooming": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic - prepared",
+                        "backcountry": "Backcountry - no grooming"
+                    }
+                },
+                "piste_sleigh/difficulty": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice",
+                        "easy": "Easy",
+                        "intermediate": "Intermediate",
+                        "advanced": "Advanced",
+                        "expert": "Expert",
+                        "freeride": "Freeride",
+                        "extreme": "Extreme"
+                    }
+                },
+                "piste_sleigh/grooming": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic - prepared",
+                        "backcountry": "Backcountry - no grooming"
                     }
                 },
                 "place": {
@@ -5714,9 +5815,33 @@
                     "name": "Water Utility Office",
                     "terms": "water board,utility"
                 },
-                "piste": {
-                    "name": "Piste/Ski Trail",
-                    "terms": "ski,sled,sleigh,snowboard,nordic,downhill,snowmobile"
+                "piste/piste_downhill": {
+                    "name": "Downhill Piste/Ski Run",
+                    "terms": "ski,alpine,snowboard,downhill,piste"
+                },
+                "piste/piste_hike": {
+                    "name": "Snowshoeing or Winter Hiking Trail",
+                    "terms": "hike,winter hiking,snowshoe,snowshoeing,piste,ski"
+                },
+                "piste/piste_ice_skate": {
+                    "name": "Ice Skating Piste",
+                    "terms": "ice,skating,ski,piste"
+                },
+                "piste/piste_nordic": {
+                    "name": "Nordic or Crosscountry Piste/Ski Trail",
+                    "terms": "ski,nordic,crosscountry,skating,piste"
+                },
+                "piste/piste_skitour": {
+                    "name": "Ski Touring Trail",
+                    "terms": "ski,skitour,crosscountry,ski touring,piste"
+                },
+                "piste/piste_sled": {
+                    "name": "Sled Piste",
+                    "terms": "ski,sled,luge,sleigh,sledge,piste"
+                },
+                "piste/piste_sleigh": {
+                    "name": "Animal-pulled Sleigh Piste",
+                    "terms": "ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse"
                 },
                 "place/farm": {
                     "name": "Farm",
