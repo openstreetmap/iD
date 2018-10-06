@@ -2,14 +2,13 @@
     "icon": "maki-skiing",
     "fields": [
         "name",
-        "piste_downhill/type",
-        "piste_downhill/difficulty",
-        "piste_downhill/grooming",
+        "piste/type_downhill",
+        "piste/difficulty_downhill",
+        "piste/grooming_downhill",
         "oneway",
         "lit"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],

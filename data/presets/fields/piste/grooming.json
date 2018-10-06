@@ -6,7 +6,10 @@
         "options": {
             "classic": "Classic",
             "mogul": "Mogul",
-            "backcountry": "Backcountry"
+            "backcountry": "Backcountry",
+            "classic+skating": "Classic and Skating",
+            "scooter": "Scooter/Snowmobile",
+            "skating": "Skating"
         }
     }
 }

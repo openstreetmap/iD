@@ -1148,7 +1148,27 @@ en:
         label: Telephone
         # phone field placeholder
         placeholder: +31 42 123 4567
-      piste_downhill/difficulty:
+      piste/difficulty:
+        # 'piste:difficulty=*'
+        label: Difficulty
+        options:
+          # 'piste:difficulty=advanced'
+          advanced: Advanced
+          # 'piste:difficulty=easy'
+          easy: Easy
+          # 'piste:difficulty=expert'
+          expert: Expert
+          # 'piste:difficulty=extreme'
+          extreme: Extreme
+          # 'piste:difficulty=freeride'
+          freeride: Freeride
+          # 'piste:difficulty=intermediate'
+          intermediate: Intermediate
+          # 'piste:difficulty=novice'
+          novice: Novice
+        # piste/difficulty field placeholder
+        placeholder: 'Easy, Intermediate, Advanced...'
+      piste/difficulty_downhill:
         # 'piste:difficulty=*'
         label: Difficulty
         options:
@@ -1166,59 +1186,9 @@ en:
           intermediate: Intermediate (blue square)
           # 'piste:difficulty=novice'
           novice: Novice (instructional)
-        # piste_downhill/difficulty field placeholder
+        # piste/difficulty_downhill field placeholder
         placeholder: 'Easy, Intermediate, Advanced...'
-      piste_downhill/grooming:
-        # 'piste:grooming=*'
-        label: Grooming
-        options:
-          # 'piste:grooming=backcountry'
-          backcountry: Backcountry - no grooming
-          # 'piste:grooming=classic'
-          classic: Classic
-          # 'piste:grooming=mogul'
-          mogul: Mogul
-      piste_downhill/type:
-        # 'piste:type=*'
-        label: Type
-        options:
-          # 'piste:type=connection'
-          connection: Connection between pistes
-          # 'piste:type=downhill'
-          downhill: Downhill
-          # 'piste:type=playground'
-          playground: Playground
-          # 'piste:type=snow_park'
-          snow_park: Snow Park
-      piste_hike/difficulty:
-        # 'piste:difficulty=*'
-        label: Difficulty
-        options:
-          # 'piste:difficulty=advanced'
-          advanced: Advanced
-          # 'piste:difficulty=easy'
-          easy: Easy
-          # 'piste:difficulty=expert'
-          expert: Expert
-          # 'piste:difficulty=extreme'
-          extreme: Extreme
-          # 'piste:difficulty=freeride'
-          freeride: Freeride
-          # 'piste:difficulty=intermediate'
-          intermediate: Intermediate
-          # 'piste:difficulty=novice'
-          novice: Novice
-        # piste_hike/difficulty field placeholder
-        placeholder: 'Easy, Intermediate, Advanced...'
-      piste_hike/grooming:
-        # 'piste:grooming=*'
-        label: Grooming
-        options:
-          # 'piste:grooming=backcountry'
-          backcountry: Backcountry - Snowshoeing
-          # 'piste:grooming=classic'
-          classic: Classic - Winter Hiking
-      piste_nordic/difficulty:
+      piste/difficulty_nordic:
         # 'piste:difficulty=*'
         label: Difficulty
         options:
@@ -1232,9 +1202,63 @@ en:
           intermediate: Intermediate - Steep section
           # 'piste:difficulty=novice'
           novice: 'Novice - Flat, no effort needed'
-        # piste_nordic/difficulty field placeholder
+        # piste/difficulty_nordic field placeholder
         placeholder: 'Easy, Intermediate, Advanced...'
-      piste_nordic/grooming:
+      piste/difficulty_skitour:
+        # 'piste:difficulty=*'
+        label: Difficulty
+        options:
+          # 'piste:difficulty=advanced'
+          advanced: 'Advanced - S: 40-45° incline'
+          # 'piste:difficulty=easy'
+          easy: 'Easy - WS: 30-35° incline'
+          # 'piste:difficulty=expert'
+          expert: 'Expert - SS: 45–50° incline'
+          # 'piste:difficulty=extreme'
+          extreme: 'Extreme - EX: >55° incline'
+          # 'piste:difficulty=freeride'
+          freeride: 'Freeride - AS: 50–55° incline'
+          # 'piste:difficulty=intermediate'
+          intermediate: 'Intermediate - ZS: 35-40° incline'
+          # 'piste:difficulty=novice'
+          novice: 'Novice - L: <30° incline'
+        # piste/difficulty_skitour field placeholder
+        placeholder: 'Easy, Intermediate, Advanced...'
+      piste/grooming:
+        # 'piste:grooming=*'
+        label: Grooming
+        options:
+          # 'piste:grooming=backcountry'
+          backcountry: Backcountry
+          # 'piste:grooming=classic'
+          classic: Classic
+          # 'piste:grooming=classic+skating'
+          classic+skating: Classic and Skating
+          # 'piste:grooming=mogul'
+          mogul: Mogul
+          # 'piste:grooming=scooter'
+          scooter: Scooter/Snowmobile
+          # 'piste:grooming=skating'
+          skating: Skating
+      piste/grooming_downhill:
+        # 'piste:grooming=*'
+        label: Grooming
+        options:
+          # 'piste:grooming=backcountry'
+          backcountry: Backcountry - no grooming
+          # 'piste:grooming=classic'
+          classic: Classic
+          # 'piste:grooming=mogul'
+          mogul: Mogul
+      piste/grooming_hike:
+        # 'piste:grooming=*'
+        label: Grooming
+        options:
+          # 'piste:grooming=backcountry'
+          backcountry: Backcountry - Snowshoeing
+          # 'piste:grooming=classic'
+          classic: Classic - Winter Hiking
+      piste/grooming_nordic:
         # 'piste:grooming=*'
         label: Grooming
         options:
@@ -1248,7 +1272,43 @@ en:
           scooter: Scooter/Snowmobile
           # 'piste:grooming=skating'
           skating: Skating
-      piste_nordic/type:
+      piste/type:
+        # 'piste:type=*'
+        label: Type
+        options:
+          # 'piste:type=connection'
+          connection: Connection
+          # 'piste:type=downhill'
+          downhill: Downhill
+          # 'piste:type=hike'
+          hike: Hike
+          # 'piste:type=ice_skate'
+          ice_skate: Ice Skate
+          # 'piste:type=nordic'
+          nordic: Nordic
+          # 'piste:type=playground'
+          playground: Playground
+          # 'piste:type=skitour'
+          skitour: Skitour
+          # 'piste:type=sled'
+          sled: Sled
+          # 'piste:type=sleigh'
+          sleigh: Sleigh
+          # 'piste:type=snow_park'
+          snow_park: Snow Park
+      piste/type_downhill:
+        # 'piste:type=*'
+        label: Type
+        options:
+          # 'piste:type=connection'
+          connection: Connection between pistes
+          # 'piste:type=downhill'
+          downhill: Downhill
+          # 'piste:type=playground'
+          playground: Playground
+          # 'piste:type=snow_park'
+          snow_park: Snow Park
+      piste/type_nordic:
         # 'piste:type=*'
         label: Type
         options:
@@ -1258,92 +1318,6 @@ en:
           downhill: Nordic
           # 'piste:type=playground'
           playground: Playground
-      piste_skitour/difficulty:
-        # 'piste:difficulty=*'
-        label: Difficulty
-        options:
-          # 'piste:difficulty=advanced'
-          advanced: 'Advanced - S: inclination 40-45 degree'
-          # 'piste:difficulty=easy'
-          easy: 'Easy - WS: inclination 30-35 degree'
-          # 'piste:difficulty=expert'
-          expert: 'Expert - SS: inclination 45–50 degree'
-          # 'piste:difficulty=extreme'
-          extreme: 'Extreme - EX: inclination >55 degree'
-          # 'piste:difficulty=freeride'
-          freeride: 'Freeride - AS: inclination 50–55 degree'
-          # 'piste:difficulty=intermediate'
-          intermediate: 'Intermediate - ZS: inclination 35-40 degree'
-          # 'piste:difficulty=novice'
-          novice: 'novice - L: inclination <30 degree'
-        # piste_skitour/difficulty field placeholder
-        placeholder: 'Easy, Intermediate, Advanced...'
-      piste_skitour/grooming:
-        # 'piste:grooming=*'
-        label: Grooming
-        options:
-          # 'piste:grooming=backcountry'
-          backcountry: Backcountry
-          # 'piste:grooming=classic'
-          classic: Classic
-          # 'piste:grooming=mogul'
-          mogul: Mogul
-      piste_sled/difficulty:
-        # 'piste:difficulty=*'
-        label: Difficulty
-        options:
-          # 'piste:difficulty=advanced'
-          advanced: Advanced
-          # 'piste:difficulty=easy'
-          easy: Easy
-          # 'piste:difficulty=expert'
-          expert: Expert
-          # 'piste:difficulty=extreme'
-          extreme: Extreme
-          # 'piste:difficulty=freeride'
-          freeride: Freeride
-          # 'piste:difficulty=intermediate'
-          intermediate: Intermediate
-          # 'piste:difficulty=novice'
-          novice: Novice
-        # piste_sled/difficulty field placeholder
-        placeholder: 'Easy, Intermediate, Advanced...'
-      piste_sled/grooming:
-        # 'piste:grooming=*'
-        label: Grooming
-        options:
-          # 'piste:grooming=backcountry'
-          backcountry: Backcountry - no grooming
-          # 'piste:grooming=classic'
-          classic: Classic - prepared
-      piste_sleigh/difficulty:
-        # 'piste:difficulty=*'
-        label: Difficulty
-        options:
-          # 'piste:difficulty=advanced'
-          advanced: Advanced
-          # 'piste:difficulty=easy'
-          easy: Easy
-          # 'piste:difficulty=expert'
-          expert: Expert
-          # 'piste:difficulty=extreme'
-          extreme: Extreme
-          # 'piste:difficulty=freeride'
-          freeride: Freeride
-          # 'piste:difficulty=intermediate'
-          intermediate: Intermediate
-          # 'piste:difficulty=novice'
-          novice: Novice
-        # piste_sleigh/difficulty field placeholder
-        placeholder: 'Easy, Intermediate, Advanced...'
-      piste_sleigh/grooming:
-        # 'piste:grooming=*'
-        label: Grooming
-        options:
-          # 'piste:grooming=backcountry'
-          backcountry: Backcountry - no grooming
-          # 'piste:grooming=classic'
-          classic: Classic - prepared
       place:
         # place=*
         label: Type
@@ -5023,41 +4997,46 @@ en:
         name: Water Utility Office
         # 'terms: water board,utility'
         terms: '<translate with synonyms or related terms for ''Water Utility Office'', separated by commas>'
-      piste/piste_downhill:
+      piste/downhill:
         # 'piste:type=downhill'
         name: Downhill Piste/Ski Run
         # 'terms: ski,alpine,snowboard,downhill,piste'
         terms: '<translate with synonyms or related terms for ''Downhill Piste/Ski Run'', separated by commas>'
-      piste/piste_hike:
+      piste/hike:
         # 'piste:type=hike'
         name: Snowshoeing or Winter Hiking Trail
         # 'terms: hike,winter hiking,snowshoe,snowshoeing,piste,ski'
         terms: '<translate with synonyms or related terms for ''Snowshoeing or Winter Hiking Trail'', separated by commas>'
-      piste/piste_ice_skate:
+      piste/ice_skate:
         # 'piste:type=ice_skate'
         name: Ice Skating Piste
         # 'terms: ice,skating,ski,piste'
         terms: '<translate with synonyms or related terms for ''Ice Skating Piste'', separated by commas>'
-      piste/piste_nordic:
+      piste/nordic:
         # 'piste:type=nordic'
         name: Nordic or Crosscountry Piste/Ski Trail
         # 'terms: ski,nordic,crosscountry,skating,piste'
         terms: '<translate with synonyms or related terms for ''Nordic or Crosscountry Piste/Ski Trail'', separated by commas>'
-      piste/piste_skitour:
+      piste/piste:
+        # 'piste:type=*'
+        name: Winter Sport Trails
+        # 'terms: ski,nordic,crosscountry,downhill,alpine,snowboard,skitour,ski touring,sled,luge,sleigh,sledge,ski-joring,husky,horse,winter hiking,snowshoe,snowshoeing,ice,skating'
+        terms: '<translate with synonyms or related terms for ''Winter Sport Trails'', separated by commas>'
+      piste/skitour:
         # 'piste:type=skitour'
         name: Ski Touring Trail
         # 'terms: ski,skitour,crosscountry,ski touring,piste'
         terms: '<translate with synonyms or related terms for ''Ski Touring Trail'', separated by commas>'
-      piste/piste_sled:
+      piste/sled:
         # 'piste:type=sled'
         name: Sled Piste
         # 'terms: ski,sled,luge,sleigh,sledge,piste'
         terms: '<translate with synonyms or related terms for ''Sled Piste'', separated by commas>'
-      piste/piste_sleigh:
+      piste/sleigh:
         # 'piste:type=sleigh'
-        name: Animal-pulled Sleigh Piste
+        name: Sleigh Piste
         # 'terms: ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse'
-        terms: '<translate with synonyms or related terms for ''Animal-pulled Sleigh Piste'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Sleigh Piste'', separated by commas>'
       place:
         # place=*
         name: Place

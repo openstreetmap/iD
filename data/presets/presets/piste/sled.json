@@ -2,29 +2,25 @@
     "icon": "fas-snowflake",
     "fields": [
         "name",
-        "piste_sled/difficulty",
-        "piste_sled/grooming",
+        "piste/difficulty",
+        "piste/grooming",
         "oneway",
         "lit"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
     "terms": [
         "ski",
-        "piste",
         "sled",
         "luge",
         "sleigh",
         "sledge",
-        "ski-joring",
-        "husky",
-        "horse"
+        "piste"
     ],
     "tags": {
-        "piste:type": "sleigh"
+        "piste:type": "sled"
     },
-    "name": "Animal-pulled Sleigh Piste"
+    "name": "Sled Piste"
 }

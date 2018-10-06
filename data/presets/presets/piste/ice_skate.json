@@ -7,7 +7,6 @@
         "lit"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
