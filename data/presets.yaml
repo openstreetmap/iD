@@ -5027,12 +5027,17 @@ en:
         name: Power Generator
         # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
-      power/generator/source_nuclear:
+      power/generator/method/photovoltaic:
+        # 'power=generator, generator:source=solar, generator:method=photovoltaic, generator:type=solar_photovoltaic_panel'
+        name: Solar Panel
+        # 'terms: photovoltaic module,PV module,sunlight'
+        terms: '<translate with synonyms or related terms for ''Solar Panel'', separated by commas>'
+      power/generator/source/nuclear:
         # 'power=generator, generator:source=nuclear, generator:method=fission'
         name: Nuclear Reactor
         # 'terms: fission,generator,nuclear,nuke,reactor'
         terms: '<translate with synonyms or related terms for ''Nuclear Reactor'', separated by commas>'
-      power/generator/source_wind:
+      power/generator/source/wind:
         # 'power=generator, generator:source=wind, generator:method=wind_turbine'
         name: Wind Turbine
         # 'terms: generator,turbine,windmill,wind'

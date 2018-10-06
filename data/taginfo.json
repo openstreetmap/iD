@@ -4628,6 +4628,13 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"
     },
     {
+      "key": "generator:type",
+      "value": "solar_photovoltaic_panel",
+      "description": "Solar Panel",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-solar-panel.svg?sanitize=true"
+    },
+    {
       "key": "generator:method",
       "value": "fission",
       "description": "Nuclear Reactor",

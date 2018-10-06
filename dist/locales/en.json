@@ -5842,11 +5842,15 @@
                     "name": "Power Generator",
                     "terms": "hydro,solar,turbine,wind"
                 },
-                "power/generator/source_nuclear": {
+                "power/generator/method/photovoltaic": {
+                    "name": "Solar Panel",
+                    "terms": "photovoltaic module,PV module,sunlight"
+                },
+                "power/generator/source/nuclear": {
                     "name": "Nuclear Reactor",
                     "terms": "fission,generator,nuclear,nuke,reactor"
                 },
-                "power/generator/source_wind": {
+                "power/generator/source/wind": {
                     "name": "Wind Turbine",
                     "terms": "generator,turbine,windmill,wind"
                 },
