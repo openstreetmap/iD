@@ -6689,6 +6689,7 @@
     {"key": "castle_type", "description": "Type"},
     {"key": "clothes", "description": "Clothes"},
     {"key": "collection_times", "description": "Collection Times"},
+    {"key": "colour", "description": "Colour"},
     {"key": "comment", "description": "Changeset Comment"},
     {"key": "communication:", "description": "Communication Types"},
     {"key": "construction", "description": "Type"},

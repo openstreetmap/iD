@@ -978,7 +978,7 @@
     "type/route/horse": {"icon": "iD-route-horse", "fields": ["name", "ref_route", "operator", "network_horse", "description", "distance"], "geometry": ["relation"], "tags": {"type": "route", "route": "horse"}, "name": "Riding Route"},
     "type/route/light_rail": {"icon": "iD-route-light-rail", "fields": ["name", "ref_route", "operator", "network"], "geometry": ["relation"], "tags": {"type": "route", "route": "light_rail"}, "name": "Light Rail Route"},
     "type/route/pipeline": {"icon": "iD-route-pipeline", "fields": ["name", "ref_route", "operator"], "geometry": ["relation"], "tags": {"type": "route", "route": "pipeline"}, "name": "Pipeline Route"},
-    "type/route/piste": {"icon": "iD-route-piste", "fields": ["name", "ref_route", "operator", "network"], "geometry": ["relation"], "tags": {"type": "route", "route": "piste"}, "name": "Piste/Ski Route"},
+    "type/route/piste": {"icon": "iD-route-piste", "fields": ["name", "piste/type", "colour", "ref_route", "operator"], "geometry": ["relation"], "tags": {"type": "route", "route": "piste"}, "name": "Piste/Ski Route"},
     "type/route/power": {"icon": "iD-route-power", "fields": ["name", "ref_route", "operator"], "geometry": ["relation"], "tags": {"type": "route", "route": "power"}, "name": "Power Route"},
     "type/route/road": {"icon": "iD-route-road", "fields": ["name", "ref_route", "network_road"], "geometry": ["relation"], "tags": {"type": "route", "route": "road"}, "name": "Road Route"},
     "type/route/subway": {"icon": "iD-route-subway", "fields": ["name", "ref_route", "operator", "network"], "geometry": ["relation"], "tags": {"type": "route", "route": "subway"}, "name": "Subway Route"},

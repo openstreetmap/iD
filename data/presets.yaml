@@ -321,6 +321,9 @@ en:
       collection_times:
         # collection_times=*
         label: Collection Times
+      colour:
+        # colour=*
+        label: Colour
       comment:
         # comment=*
         label: Changeset Comment

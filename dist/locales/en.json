@@ -1730,6 +1730,9 @@
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "colour": {
+                    "label": "Colour"
+                },
                 "comment": {
                     "label": "Changeset Comment",
                     "placeholder": "Brief description of your contributions (required)"
