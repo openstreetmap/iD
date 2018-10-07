@@ -182,7 +182,9 @@ export default {
     init: function() {
         inflight = {};
         taginfoCache = {};
-        popularKeys = {};
+        popularKeys = {
+            postal_code: true   // #5377
+        };
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
