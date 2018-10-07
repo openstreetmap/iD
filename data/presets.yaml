@@ -323,7 +323,7 @@ en:
         label: Collection Times
       colour:
         # colour=*
-        label: Colour
+        label: Color
       comment:
         # comment=*
         label: Changeset Comment

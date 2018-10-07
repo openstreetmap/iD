@@ -53,7 +53,7 @@
     "clothes": {"key": "clothes", "type": "semiCombo", "label": "Clothes"},
     "club": {"key": "club", "type": "typeCombo", "label": "Type"},
     "collection_times": {"key": "collection_times", "type": "text", "label": "Collection Times"},
-    "colour": {"key": "colour", "type": "text", "label": "Colour"},
+    "colour": {"key": "colour", "type": "text", "label": "Color"},
     "comment": {"key": "comment", "type": "textarea", "label": "Changeset Comment", "placeholder": "Brief description of your contributions (required)"},
     "communication_multi": {"key": "communication:", "type": "multiCombo", "label": "Communication Types"},
     "construction": {"key": "construction", "type": "combo", "label": "Type"},
