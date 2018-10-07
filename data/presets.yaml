@@ -1317,8 +1317,8 @@ en:
         options:
           # 'piste:type=connection'
           connection: Connection between pistes
-          # 'piste:type=downhill'
-          downhill: Nordic
+          # 'piste:type=nordic'
+          nordic: Nordic
           # 'piste:type=playground'
           playground: Playground
       place:

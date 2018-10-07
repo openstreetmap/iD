@@ -2528,7 +2528,7 @@
                 "piste/type_nordic": {
                     "label": "Type",
                     "options": {
-                        "downhill": "Nordic",
+                        "nordic": "Nordic",
                         "playground": "Playground",
                         "connection": "Connection between pistes"
                     }

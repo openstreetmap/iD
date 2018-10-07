@@ -211,7 +211,7 @@
     "piste/grooming_nordic": {"key": "piste:grooming", "type": "combo", "label": "Grooming", "strings": {"options": {"classic": "Classic", "backcountry": "Backcountry, no grooming", "classic+skating": "Classic and Skating", "scooter": "Scooter/Snowmobile", "skating": "Skating"}}},
     "piste/grooming": {"key": "piste:grooming", "type": "combo", "label": "Grooming", "strings": {"options": {"classic": "Classic", "mogul": "Mogul", "backcountry": "Backcountry", "classic+skating": "Classic and Skating", "scooter": "Scooter/Snowmobile", "skating": "Skating"}}},
     "piste/type_downhill": {"key": "piste:type", "type": "typeCombo", "label": "Type", "strings": {"options": {"downhill": "Downhill", "snow_park": "Snow Park", "playground": "Playground", "connection": "Connection between pistes"}}},
-    "piste/type_nordic": {"key": "piste:type", "type": "typeCombo", "label": "Type", "strings": {"options": {"downhill": "Nordic", "playground": "Playground", "connection": "Connection between pistes"}}},
+    "piste/type_nordic": {"key": "piste:type", "type": "typeCombo", "label": "Type", "strings": {"options": {"nordic": "Nordic", "playground": "Playground", "connection": "Connection between pistes"}}},
     "piste/type": {"key": "piste:type", "type": "typeCombo", "label": "Type", "strings": {"options": {"downhill": "Downhill", "nordic": "Nordic", "skitour": "Skitour", "sled": "Sled", "hike": "Hike", "sleigh": "Sleigh", "ice_skate": "Ice Skate", "snow_park": "Snow Park", "playground": "Playground", "connection": "Connection"}}},
     "place": {"key": "place", "type": "typeCombo", "label": "Type"},
     "plant": {"key": "plant", "type": "combo", "label": "Plant"},
