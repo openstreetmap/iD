@@ -1398,14 +1398,14 @@
     {
       "key": "barrier",
       "value": "kerb",
-      "description": "Kerb",
+      "description": "Curb",
       "object_types": ["node", "way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
     },
     {
       "key": "kerb",
       "value": "lowered",
-      "description": "Lowered Kerb",
+      "description": "Lowered Curb",
       "object_types": ["node", "way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
     },
@@ -5024,13 +5024,13 @@
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green",
-      "description": "Green Buoy, Colour",
+      "description": "Green Buoy, Color",
       "object_types": ["node"]
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red",
-      "description": "Red Buoy, Colour",
+      "description": "Red Buoy, Color",
       "object_types": ["node"]
     },
     {
@@ -7244,17 +7244,17 @@
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "red",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "green",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "grey",
-      "description": "Colour"
+      "description": "Color"
     },
     {"key": "seamark:beacon_lateral:shape", "description": "Shape"},
     {
@@ -7330,32 +7330,32 @@
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red;white;red;white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green;white;green;white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red;green;red",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green;red;green",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "yellow",
-      "description": "Colour"
+      "description": "Color"
     },
     {"key": "seamark:buoy_lateral:shape", "description": "Shape"},
     {

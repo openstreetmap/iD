@@ -2698,7 +2698,7 @@
                     }
                 },
                 "seamark/beacon_lateral/colour": {
-                    "label": "Colour",
+                    "label": "Color",
                     "options": {
                         "red": "Red",
                         "green": "Green",
@@ -2733,7 +2733,7 @@
                     }
                 },
                 "seamark/buoy_lateral/colour": {
-                    "label": "Colour",
+                    "label": "Color",
                     "options": {
                         "red": "Red",
                         "green": "Green",
@@ -3981,11 +3981,11 @@
                     "terms": ""
                 },
                 "barrier/kerb": {
-                    "name": "Kerb",
+                    "name": "Curb",
                     "terms": ""
                 },
                 "barrier/kerb/lowered": {
-                    "name": "Lowered Kerb",
+                    "name": "Lowered Curb",
                     "terms": "curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp"
                 },
                 "barrier/kissing_gate": {

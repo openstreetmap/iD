@@ -1491,7 +1491,7 @@ en:
           waterway_right: Waterway Right
       seamark/beacon_lateral/colour:
         # 'seamark:beacon_lateral:colour=*'
-        label: Colour
+        label: Color
         options:
           # 'seamark:beacon_lateral:colour=green'
           green: Green
@@ -1540,7 +1540,7 @@ en:
           waterway_right: Waterway Right
       seamark/buoy_lateral/colour:
         # 'seamark:buoy_lateral:colour=*'
-        label: Colour
+        label: Color
         options:
           # 'seamark:buoy_lateral:colour=green'
           green: Green
@@ -2961,13 +2961,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Hedge'', separated by commas>'
       barrier/kerb:
         # barrier=kerb
-        name: Kerb
-        terms: '<translate with synonyms or related terms for ''Kerb'', separated by commas>'
+        name: Curb
+        terms: '<translate with synonyms or related terms for ''Curb'', separated by commas>'
       barrier/kerb/lowered:
         # 'barrier=kerb, kerb=lowered'
-        name: Lowered Kerb
+        name: Lowered Curb
         # 'terms: curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp'
-        terms: '<translate with synonyms or related terms for ''Lowered Kerb'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Lowered Curb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate
