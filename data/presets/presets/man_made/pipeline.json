@@ -9,6 +9,13 @@
     "geometry": [
         "line"
     ],
+    "terms": [
+        "oil",
+        "natural gas",
+        "water",
+        "sewer",
+        "sewage"
+    ],
     "tags": {
         "man_made": "pipeline"
     },

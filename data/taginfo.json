@@ -4670,6 +4670,12 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"
     },
     {
+      "key": "location",
+      "value": "underground",
+      "description": "Underground Power Cable",
+      "object_types": ["way"]
+    },
+    {
       "key": "power",
       "value": "generator",
       "description": "Power Generator",
