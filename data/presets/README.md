@@ -224,7 +224,7 @@ For number fields, the lowest valid value. There is no default.
 
 ##### `max_value`
 
-For number fields, the greatest valid value. There is no defualt.
+For number fields, the greatest valid value. There is no default.
 
 ## Icons
 
