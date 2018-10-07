@@ -1,29 +1,26 @@
 {
-    "icon": "maki-skiing",
+    "icon": "fas-snowflake",
     "fields": [
         "name",
-        "piste/type",
         "piste/difficulty",
         "piste/grooming",
         "oneway",
         "lit"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
     "terms": [
         "ski",
         "sled",
+        "luge",
         "sleigh",
-        "snowboard",
-        "nordic",
-        "downhill",
-        "snowmobile"
+        "sledge",
+        "piste"
     ],
     "tags": {
-        "piste:type": "*"
+        "piste:type": "sled"
     },
-    "name": "Piste/Ski Trail"
+    "name": "Sled Piste"
 }

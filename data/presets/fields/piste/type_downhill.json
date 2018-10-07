@@ -1,0 +1,13 @@
+{
+    "key": "piste:type",
+    "type": "typeCombo",
+    "label": "Type",
+    "strings": {
+        "options": {
+            "downhill": "Downhill",
+            "snow_park": "Snow Park",
+            "playground": "Playground",
+            "connection": "Connection between pistes"
+        }
+    }
+}

@@ -1730,6 +1730,9 @@
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "colour": {
+                    "label": "Colour"
+                },
                 "comment": {
                     "label": "Changeset Comment",
                     "placeholder": "Brief description of your contributions (required)"
@@ -2427,7 +2430,7 @@
                     "label": "Telephone",
                     "placeholder": "+31 42 123 4567"
                 },
-                "piste/difficulty": {
+                "piste/difficulty_downhill": {
                     "label": "Difficulty",
                     "placeholder": "Easy, Intermediate, Advanced...",
                     "options": {
@@ -2440,6 +2443,68 @@
                         "extreme": "Extreme (climbing equipment required)"
                     }
                 },
+                "piste/difficulty_nordic": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice - Flat, no effort needed",
+                        "easy": "Easy - Soft hills, short steep section",
+                        "intermediate": "Intermediate - Steep section",
+                        "advanced": "Advanced - Narrow, steep or icy section, sharp turn",
+                        "expert": "Expert - Dangerous terrain around"
+                    }
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice - L: <30° incline",
+                        "easy": "Easy - WS: 30-35° incline",
+                        "intermediate": "Intermediate - ZS: 35-40° incline",
+                        "advanced": "Advanced - S: 40-45° incline",
+                        "expert": "Expert - SS: 45–50° incline",
+                        "freeride": "Freeride - AS: 50–55° incline",
+                        "extreme": "Extreme - EX: >55° incline"
+                    }
+                },
+                "piste/difficulty": {
+                    "label": "Difficulty",
+                    "placeholder": "Easy, Intermediate, Advanced...",
+                    "options": {
+                        "novice": "Novice",
+                        "easy": "Easy",
+                        "intermediate": "Intermediate",
+                        "advanced": "Advanced",
+                        "expert": "Expert",
+                        "freeride": "Freeride",
+                        "extreme": "Extreme"
+                    }
+                },
+                "piste/grooming_downhill": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic",
+                        "mogul": "Mogul",
+                        "backcountry": "Backcountry - no grooming"
+                    }
+                },
+                "piste/grooming_hike": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic - Winter Hiking",
+                        "backcountry": "Backcountry - Snowshoeing"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "label": "Grooming",
+                    "options": {
+                        "classic": "Classic",
+                        "backcountry": "Backcountry, no grooming",
+                        "classic+skating": "Classic and Skating",
+                        "scooter": "Scooter/Snowmobile",
+                        "skating": "Skating"
+                    }
+                },
                 "piste/grooming": {
                     "label": "Grooming",
                     "options": {
@@ -2449,6 +2514,23 @@
                         "classic+skating": "Classic and Skating",
                         "scooter": "Scooter/Snowmobile",
                         "skating": "Skating"
+                    }
+                },
+                "piste/type_downhill": {
+                    "label": "Type",
+                    "options": {
+                        "downhill": "Downhill",
+                        "snow_park": "Snow Park",
+                        "playground": "Playground",
+                        "connection": "Connection between pistes"
+                    }
+                },
+                "piste/type_nordic": {
+                    "label": "Type",
+                    "options": {
+                        "downhill": "Nordic",
+                        "playground": "Playground",
+                        "connection": "Connection between pistes"
                     }
                 },
                 "piste/type": {
@@ -5714,9 +5796,37 @@
                     "name": "Water Utility Office",
                     "terms": "water board,utility"
                 },
-                "piste": {
-                    "name": "Piste/Ski Trail",
-                    "terms": "ski,sled,sleigh,snowboard,nordic,downhill,snowmobile"
+                "piste/downhill": {
+                    "name": "Downhill Piste/Ski Run",
+                    "terms": "ski,alpine,snowboard,downhill,piste"
+                },
+                "piste/hike": {
+                    "name": "Snowshoeing or Winter Hiking Trail",
+                    "terms": "hike,winter hiking,snowshoe,snowshoeing,piste,ski"
+                },
+                "piste/ice_skate": {
+                    "name": "Ice Skating Piste",
+                    "terms": "ice,skating,ski,piste"
+                },
+                "piste/nordic": {
+                    "name": "Nordic or Crosscountry Piste/Ski Trail",
+                    "terms": "ski,nordic,crosscountry,skating,piste"
+                },
+                "piste/piste": {
+                    "name": "Winter Sport Trails",
+                    "terms": "ski,nordic,crosscountry,downhill,alpine,snowboard,skitour,ski touring,sled,luge,sleigh,sledge,ski-joring,husky,horse,winter hiking,snowshoe,snowshoeing,ice,skating"
+                },
+                "piste/skitour": {
+                    "name": "Ski Touring Trail",
+                    "terms": "ski,skitour,crosscountry,ski touring,piste"
+                },
+                "piste/sled": {
+                    "name": "Sled Piste",
+                    "terms": "ski,sled,luge,sleigh,sledge,piste"
+                },
+                "piste/sleigh": {
+                    "name": "Sleigh Piste",
+                    "terms": "ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse"
                 },
                 "place/farm": {
                     "name": "Farm",

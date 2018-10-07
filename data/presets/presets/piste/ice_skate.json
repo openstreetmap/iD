@@ -1,0 +1,23 @@
+{
+    "icon": "fas-snowflake",
+    "fields": [
+        "name",
+        "sport_ice",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ice",
+        "skating",
+        "ski",
+        "piste"
+    ],
+    "tags": {
+        "piste:type": "ice_skate"
+    },
+    "name": "Ice Skating Piste"
+}

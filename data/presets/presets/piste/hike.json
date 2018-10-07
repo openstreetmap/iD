@@ -1,0 +1,26 @@
+{
+    "icon": "fas-snowflake",
+    "fields": [
+        "name",
+        "piste/difficulty",
+        "piste/grooming_hike",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "hike",
+        "winter hiking",
+        "snowshoe",
+        "snowshoeing",
+        "piste",
+        "ski"
+    ],
+    "tags": {
+        "piste:type": "hike"
+    },
+    "name": "Snowshoeing or Winter Hiking Trail"
+}
