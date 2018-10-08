@@ -902,6 +902,18 @@ a.hide-toggle {
     border-radius: 0;
 }
 
+.geocode-item {
+    width: 50%;
+    background-color: #ccc;
+    left: 25%;
+    margin-top: 30px;
+    border-radius: 2px;
+}
+
+.geocode-item:hover {
+    background-color: #aaa;
+}
+
 .feature-list-item {
     background-color: #fff;
     font-weight: bold;
