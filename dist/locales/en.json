@@ -2769,6 +2769,9 @@
                 "seasonal": {
                     "label": "Seasonal"
                 },
+                "seats": {
+                    "label": "Seats"
+                },
                 "second_hand": {
                     "label": "Sells Used",
                     "placeholder": "Yes, No, Only",
@@ -7383,34 +7386,6 @@
                 },
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
-            },
-            "eufar-balaton": {
-                "attribution": {
-                    "text": "EUFAR Balaton ortofotó 2010"
-                },
-                "description": "1940 geo-tagged photography from Balaton Limnological Institute.",
-                "name": "EUFAR Balaton orthophotos"
-            },
-            "finds.jp_KBN_2500": {
-                "attribution": {
-                    "text": "GSI KIBAN 2500"
-                },
-                "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
-                "name": "Japan GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
-                "name": "Japan GSI ortho Imagery"
-            },
-            "gsi.go.jp_std_map": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI Standard Map. Widely covered.",
-                "name": "Japan GSI Standard Map"
             },
             "hike_n_bike": {
                 "attribution": {

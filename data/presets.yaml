@@ -1585,6 +1585,9 @@ en:
       seasonal:
         # seasonal=*
         label: Seasonal
+      seats:
+        # seats=*
+        label: Seats
       second_hand:
         # second_hand=*
         label: Sells Used

@@ -1,7 +1,10 @@
 {
     "icon": "temaki-bench",
     "fields": [
-        "backrest"
+        "backrest",
+        "material",
+        "seats",
+        "colour"
     ],
     "geometry": [
         "point",
