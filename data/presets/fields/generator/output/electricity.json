@@ -1,6 +1,7 @@
 {
     "key": "generator:output:electricity",
-    "type": "text",
+    "type": "typeCombo",
     "label": "Power Output",
-    "placeholder": "50 MW, 100 MW, 200 MW..."
+    "placeholder": "50 MW, 100 MW, 200 MW...",
+    "snake_case": false
 }

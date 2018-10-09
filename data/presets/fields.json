@@ -114,7 +114,7 @@
     "gauge": {"key": "gauge", "type": "combo", "label": "Gauge"},
     "gender": {"type": "radio", "keys": ["male", "female", "unisex"], "label": "Gender", "placeholder": "Unknown", "strings": {"options": {"male": "Male", "female": "Female", "unisex": "Unisex"}}},
     "generator/method": {"key": "generator:method", "type": "combo", "label": "Method"},
-    "generator/output/electricity": {"key": "generator:output:electricity", "type": "text", "label": "Power Output", "placeholder": "50 MW, 100 MW, 200 MW..."},
+    "generator/output/electricity": {"key": "generator:output:electricity", "type": "typeCombo", "label": "Power Output", "placeholder": "50 MW, 100 MW, 200 MW...", "snake_case": false},
     "generator/source": {"key": "generator:source", "type": "combo", "label": "Source"},
     "generator/type": {"key": "generator:type", "type": "combo", "label": "Type"},
     "government": {"key": "government", "type": "typeCombo", "label": "Type"},
