@@ -4,6 +4,7 @@
         "ref"
     ],
     "geometry": [
+        "point",
         "vertex"
     ],
     "terms": [
