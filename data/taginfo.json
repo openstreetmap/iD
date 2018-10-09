@@ -7381,6 +7381,7 @@
     {"key": "seamark:mooring:category", "description": "Category"},
     {"key": "seamark:wreck:category", "description": "Category"},
     {"key": "seasonal", "description": "Seasonal"},
+    {"key": "seats", "description": "Seats"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},
     {"key": "second_hand", "value": "only", "description": "Sells Used"},
