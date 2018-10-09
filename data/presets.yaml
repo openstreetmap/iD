@@ -25,6 +25,8 @@ en:
         name: Road Features
       category-route:
         name: Route Features
+      category-utility:
+        name: Utility Features
       category-water-area:
         name: Water Features
       category-water-line:
@@ -4608,6 +4610,7 @@ en:
       man_made/pipeline:
         # man_made=pipeline
         name: Pipeline
+        # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline'', separated by commas>'
       man_made/pumping_station:
         # man_made=pumping_station
@@ -5175,6 +5178,10 @@ en:
       power:
         # power=*
         name: Power
+      power/cable/underground:
+        # 'power=cable, location=underground'
+        name: Underground Power Cable
+        terms: '<translate with synonyms or related terms for ''Underground Power Cable'', separated by commas>'
       power/generator:
         # power=generator
         name: Power Generator

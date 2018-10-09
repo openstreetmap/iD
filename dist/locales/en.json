@@ -1455,6 +1455,9 @@
                 "category-route": {
                     "name": "Route Features"
                 },
+                "category-utility": {
+                    "name": "Utility Features"
+                },
                 "category-water-area": {
                     "name": "Water Features"
                 },
@@ -5450,7 +5453,7 @@
                 },
                 "man_made/pipeline": {
                     "name": "Pipeline",
-                    "terms": ""
+                    "terms": "oil,natural gas,water,sewer,sewage"
                 },
                 "man_made/pumping_station": {
                     "name": "Pumping Station",
@@ -5950,6 +5953,10 @@
                 },
                 "power/sub_station": {
                     "name": "Substation",
+                    "terms": ""
+                },
+                "power/cable/underground": {
+                    "name": "Underground Power Cable",
                     "terms": ""
                 },
                 "power/generator": {
