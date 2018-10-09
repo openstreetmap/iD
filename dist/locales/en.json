@@ -2770,7 +2770,8 @@
                     "label": "Seasonal"
                 },
                 "seats": {
-                    "label": "Seats"
+                    "label": "Seats",
+                    "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
                     "label": "Sells Used",

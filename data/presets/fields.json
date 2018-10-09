@@ -263,7 +263,7 @@
     "seamark/type": {"key": "seamark:type", "type": "combo", "universal": true, "label": "Seamark"},
     "seamark/wreck/category": {"key": "seamark:wreck:category", "type": "combo", "label": "Category"},
     "seasonal": {"key": "seasonal", "type": "check", "label": "Seasonal"},
-    "seats": {"key": "seats", "type": "number", "label": "Seats"},
+    "seats": {"key": "seats", "type": "number", "minValue": 0, "label": "Seats", "placeholder": "2, 4, 6..."},
     "second_hand": {"key": "second_hand", "type": "combo", "label": "Sells Used", "placeholder": "Yes, No, Only", "strings": {"options": {"yes": "Yes", "no": "No", "only": "Only"}}},
     "service_rail": {"key": "service", "type": "combo", "label": "Service Type", "strings": {"options": {"spur": "Spur", "yard": "Yard", "siding": "Siding", "crossover": "Crossover"}}},
     "service_times": {"key": "service_times", "type": "text", "label": "Service Times"},

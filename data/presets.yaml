@@ -1588,6 +1588,8 @@ en:
       seats:
         # seats=*
         label: Seats
+        # seats field placeholder
+        placeholder: '2, 4, 6...'
       second_hand:
         # second_hand=*
         label: Sells Used
