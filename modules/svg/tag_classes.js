@@ -15,7 +15,7 @@ export function svgTagClasses() {
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
-        'public_transport'
+        'public_transport', 'location'
     ];
     var tagClassRe = /^tag-/;
     var _tags = function(entity) { return entity.tags; };
