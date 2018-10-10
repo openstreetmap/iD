@@ -1,9 +1,11 @@
-/* power */
+/* power and pipeline */
 .preset-icon .icon.tag-man_made-pipeline,
 .preset-icon .icon.tag-power {
     color: #939393;
     fill: #939393;
 }
+
+/* power */
 
 path.stroke.tag-power {
     stroke: #939393;
@@ -13,6 +15,21 @@ path.casing.tag-power {
     stroke: none;
 }
 
+/* pipeline */
+
+path.stroke.tag-man_made-pipeline {
+    stroke: #CBD0D8;
+    stroke-linecap: butt;
+    stroke-width: 3;
+    stroke-dasharray: 80, 1.25;
+}
+path.casing.tag-man_made-pipeline {
+    stroke: #666;
+    stroke-width: 4.5;
+}
+.low-zoom path.stroke.tag-man_made-pipeline {
+    stroke-dasharray: 40, 1;
+}
 
 /* boundaries */
 path.stroke.tag-boundary {
@@ -145,10 +162,12 @@ path.casing.tag-highway-bridleway.tag-bridge {
 
 
 /* tunnels */
-path.stroke.tag-tunnel {
+path.stroke.tag-tunnel,
+path.line.stroke.tag-location-underground {
     stroke-opacity: 0.3;
 }
-path.casing.tag-tunnel {
+path.casing.tag-tunnel,
+path.line.casing.tag-location-underground {
     stroke-opacity: 0.5;
     stroke-linecap: butt;
     stroke-dasharray: none;
@@ -325,4 +344,3 @@ path.stroke.tag-crossing.tag-crossing-zebra {
 .low-zoom path.stroke.tag-crossing.tag-crossing-zebra {
     stroke-dasharray: 3, 2;
 }
-
