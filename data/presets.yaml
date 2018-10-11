@@ -1301,28 +1301,6 @@ en:
           sleigh: Sleigh
           # 'piste:type=snow_park'
           snow_park: Snow Park
-      piste/type_downhill:
-        # 'piste:type=*'
-        label: Type
-        options:
-          # 'piste:type=connection'
-          connection: Connection between pistes
-          # 'piste:type=downhill'
-          downhill: Downhill
-          # 'piste:type=playground'
-          playground: Playground
-          # 'piste:type=snow_park'
-          snow_park: Snow Park
-      piste/type_nordic:
-        # 'piste:type=*'
-        label: Type
-        options:
-          # 'piste:type=connection'
-          connection: Connection between pistes
-          # 'piste:type=nordic'
-          nordic: Nordic
-          # 'piste:type=playground'
-          playground: Playground
       place:
         # place=*
         label: Type
