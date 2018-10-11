@@ -2,6 +2,7 @@
     "icon": "fas-snowflake",
     "fields": [
         "name",
+        "piste/type",
         "piste/difficulty",
         "piste/grooming_hike",
         "oneway",

@@ -2,6 +2,7 @@
     "icon": "fas-snowflake",
     "fields": [
         "name",
+        "piste/type",
         "sport_ice",
         "oneway",
         "lit"
