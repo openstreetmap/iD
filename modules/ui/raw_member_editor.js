@@ -23,9 +23,24 @@ export function uiRawMemberEditor(context) {
     var taginfo = services.taginfo,
         _entityID;
 
+    function downloadMember(d) {
+        d3_event.preventDefault();
+        // display the loading indicator
+        d3_select(this.parentNode).classed('tag-reference-loading', true);
+        context.loadEntity(d.id);
+    }
+
 
     function selectMember(d) {
         d3_event.preventDefault();
+
+        var entity = context.entity(d.id);
+        var mapExtent = context.map().extent();
+        if (!entity.intersects(mapExtent, context.graph())) {
+            // zoom to the entity if its extent is not visible now
+            context.map().zoomTo(entity);
+        }
+
         context.enter(modeSelect(context, [d.id]));
     }
 
@@ -125,9 +140,19 @@ export function uiRawMemberEditor(context) {
                             .text(function(d) { return utilDisplayName(d.member); });
 
                     } else {
-                        d3_select(this).append('label')
+                        var incompleteLabel = d3_select(this).append('label')
                             .attr('class', 'form-label')
                             .text(t('inspector.incomplete', { id: d.id }));
+
+                        var wrap = incompleteLabel.append('div')
+                            .attr('class', 'form-label-button-wrap');
+
+                        wrap.append('button')
+                            .attr('class', 'download-icon')
+                            .attr('title', t('icons.download'))
+                            .attr('tabindex', -1)
+                            .call(svgIcon('#iD-icon-load'))
+                            .on('click', downloadMember);
                     }
                 });
 
