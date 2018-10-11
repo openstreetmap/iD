@@ -130,7 +130,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     });
                     return false;  // because no `d` data worth loading into an rbush
 
-                } else if (which === 'map_features') {
+                } else if (which === 'objects') {
                     d = {
                         loc: loc,
                         key: feature.properties.key,
@@ -162,7 +162,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
             if (which === 'images' || which === 'sequences') {
                 dispatch.call('loadedImages');
-            } else if (which === 'map_features') {
+            } else if (which === 'objects') {
                 dispatch.call('loadedSigns');
             }
 
@@ -335,7 +335,7 @@ export default {
     loadSigns: function(context, projection) {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?', projection);
-        loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&', projection);
+        loadTiles('objects', apibase + 'map_features?layers=trafficsigns&', projection);
     },
 
 
