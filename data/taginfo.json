@@ -710,7 +710,7 @@
     {
       "key": "parking",
       "value": "multi-storey",
-      "description": "Multilevel Car Parking, Type",
+      "description": "Multilevel Parking Garage, Type",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
     },

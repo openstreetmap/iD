@@ -3572,7 +3572,7 @@
                     "terms": "car,parking lot"
                 },
                 "amenity/parking/multi-storey": {
-                    "name": "Multilevel Car Parking",
+                    "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
                 },
                 "amenity/pharmacy": {

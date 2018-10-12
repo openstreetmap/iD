@@ -237,6 +237,7 @@ path.fill.tag-building {
     stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
+.preset-icon-fill-area.tag-parking-multi-storey,
 .preset-icon-fill-area.tag-building {
     border-color: rgb(224, 110, 95);
     background-color: rgba(224, 110, 95, 0.3);
