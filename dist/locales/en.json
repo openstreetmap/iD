@@ -3568,12 +3568,12 @@
                     "terms": ""
                 },
                 "amenity/parking": {
-                    "name": "Car Parking",
-                    "terms": ""
+                    "name": "Parking Lot",
+                    "terms": "car,parking lot"
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Multilevel Car Parking",
-                    "terms": "multistorey car park,parking garage,parkade,parking structure,parking ramp,parking deck,parking building,indoor parking"
+                    "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy",

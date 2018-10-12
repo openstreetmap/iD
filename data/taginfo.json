@@ -703,16 +703,16 @@
     {
       "key": "amenity",
       "value": "parking",
-      "description": "Car Parking",
+      "description": "Parking Lot",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
     },
     {
       "key": "parking",
       "value": "multi-storey",
       "description": "Multilevel Car Parking, Type",
       "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-garage-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
     },
     {
       "key": "amenity",

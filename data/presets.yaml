@@ -2447,12 +2447,13 @@ en:
         name: Nursing Home
       amenity/parking:
         # amenity=parking
-        name: Car Parking
-        terms: '<translate with synonyms or related terms for ''Car Parking'', separated by commas>'
+        name: Parking Lot
+        # 'terms: car,parking lot'
+        terms: '<translate with synonyms or related terms for ''Parking Lot'', separated by commas>'
       amenity/parking/multi-storey:
         # 'amenity=parking, parking=multi-storey'
         name: Multilevel Car Parking
-        # 'terms: multistorey car park,parking garage,parkade,parking structure,parking ramp,parking deck,parking building,indoor parking'
+        # 'terms: car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure'
         terms: '<translate with synonyms or related terms for ''Multilevel Car Parking'', separated by commas>'
       amenity/parking_entrance:
         # amenity=parking_entrance
