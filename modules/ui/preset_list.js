@@ -235,7 +235,7 @@ export function uiPresetList(context) {
             }
         }
         // arrow left, move focus to the parent item if there is one
-        else if (d3_event.keyCode === d3_keybinding.keyCodes['←']) {
+        else if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
 
@@ -246,7 +246,7 @@ export function uiPresetList(context) {
             }
         }
         // arrow right, choose this item
-        else if (d3_event.keyCode === d3_keybinding.keyCodes['→']) {
+        else if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             item.datum().choose();
@@ -282,7 +282,7 @@ export function uiPresetList(context) {
                 .on('click', click)
                 .on('keydown', function() {
                     // right arrow, expand the focused item
-                    if (d3_event.keyCode === d3_keybinding.keyCodes['→']) {
+                    if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
                         // if the item isn't expanded
@@ -291,7 +291,7 @@ export function uiPresetList(context) {
                             click.call(this);
                         }
                     // left arrow, collapse the focused item
-                    } else if (d3_event.keyCode === d3_keybinding.keyCodes['←']) {
+                    } else if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
                         // if the item is expanded

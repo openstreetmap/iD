@@ -1129,7 +1129,8 @@ a.hide-toggle {
     border-radius: 3px 0 0 3px;
 }
 
-.preset-list-button:hover .label {
+.preset-list-button:hover .label,
+.preset-list-button:focus .label {
     background-color: #ececec;
 }
 
