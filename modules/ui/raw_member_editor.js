@@ -141,7 +141,14 @@ export function uiRawMemberEditor(context) {
 
                     } else {
                         var incompleteLabel = d3_select(this).append('label')
-                            .attr('class', 'form-label')
+                            .attr('class', 'form-label');
+                        
+                        incompleteLabel.append('span')
+                            .attr('class', 'member-entity-type')
+                            .text(t('inspector.'+d.type, { id: d.id }));
+
+                        incompleteLabel.append('span')
+                            .attr('class', 'member-entity-name')
                             .text(t('inspector.incomplete', { id: d.id }));
 
                         var wrap = incompleteLabel.append('div')
