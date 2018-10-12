@@ -22,6 +22,7 @@
         "building",
         "building/house",
         "building/apartments",
+        "building/garage",
         "building/retail",
         "building/commercial",
         "building/industrial",
