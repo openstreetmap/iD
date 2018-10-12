@@ -335,7 +335,7 @@ export default {
     loadSigns: function(context, projection) {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?', projection);
-        loadTiles('objects', apibase + 'objects?', projection);
+        loadTiles('objects', apibase + 'map_features?layers=trafficsigns&', projection);
     },
 
 
@@ -636,7 +636,7 @@ export default {
 
 
         function loadDetection(detectionKey) {
-            var url = apibase + 'detections/' +
+            var url = apibase + 'image_detections/' +
                     detectionKey + '?' + utilQsString({ client_id: clientId });
 
             d3_request(url)

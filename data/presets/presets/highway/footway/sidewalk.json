@@ -1,26 +1,26 @@
 {
     "icon": "iD-highway-footway",
     "fields": [
-        "crossing",
-        "access",
         "surface",
-        "kerb",
-        "tactile_paving"
+        "lit",
+        "width",
+        "structure",
+        "access"
     ],
     "geometry": [
         "line"
     ],
     "tags": {
         "highway": "footway",
-        "footway": "crossing",
-        "crossing": "zebra"
+        "footway": "sidewalk"
     },
     "reference": {
         "key": "footway",
-        "value": "crossing"
+        "value": "sidewalk"
     },
     "terms": [
-        "zebra crossing"
+        "pavement",
+        "sidepath"
     ],
-    "name": "Pedestrian Crosswalk"
+    "name": "Sidewalk"
 }

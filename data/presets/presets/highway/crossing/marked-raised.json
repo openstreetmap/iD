@@ -10,7 +10,7 @@
     ],
     "tags": {
         "highway": "crossing",
-        "crossing": "zebra",
+        "crossing": "marked",
         "traffic_calming": "table"
     },
     "reference": {
@@ -19,10 +19,12 @@
     },
     "terms": [
         "zebra crossing",
+        "marked crossing",
+        "crosswalk",
         "flat top",
         "hump",
         "speed",
         "slow"
     ],
-    "name": "Raised Pedestrian Crosswalk"
+    "name": "Marked Crosswalk (Raised)"
 }

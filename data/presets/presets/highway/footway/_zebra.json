@@ -1,4 +1,5 @@
 {
+    "icon": "iD-highway-footway",
     "fields": [
         "crossing",
         "access",
@@ -11,12 +12,18 @@
     ],
     "tags": {
         "highway": "footway",
-        "footway": "crossing"
+        "footway": "crossing",
+        "crossing": "zebra"
     },
     "reference": {
         "key": "footway",
         "value": "crossing"
     },
-    "terms": [],
-    "name": "Street Crossing"
+    "terms": [
+        "zebra crossing",
+        "marked crossing",
+        "crosswalk"
+    ],
+    "name": "Marked Crosswalk",
+    "searchable": false
 }

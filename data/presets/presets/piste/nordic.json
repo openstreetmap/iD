@@ -1,0 +1,26 @@
+{
+    "icon": "maki-skiing",
+    "fields": [
+        "name",
+        "piste/type",
+        "piste/difficulty_nordic",
+        "piste/grooming_nordic",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ski",
+        "nordic",
+        "crosscountry",
+        "skating",
+        "piste"
+    ],
+    "tags": {
+        "piste:type": "nordic"
+    },
+    "name": "Nordic or Crosscountry Piste/Ski Trail"
+}

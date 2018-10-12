@@ -2954,7 +2954,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Trim tag keys, and prevent duplicate tag keys (#2043)
 * Fix inline tag help for fields that handle multiple tags
 * Add 'width', 'length', 'lit' for appropriate presets (cycleways, sidewalks, sports pitch, etc)
-* Render embarkment/cutting with dashed casing
+* Render embankment/cutting with dashed casing
 * Rendering fixes for buildings, tunnels
 * Add population field for various place presets
 * Improvements to circularize action (#2194)

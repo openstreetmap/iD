@@ -1,9 +1,14 @@
 {
     "fields": [
+        "design",
         "ref"
     ],
     "geometry": [
+        "point",
         "vertex"
+    ],
+    "terms": [
+        "power"
     ],
     "tags": {
         "power": "tower"

@@ -3,27 +3,24 @@
     "fields": [
         "name",
         "piste/type",
-        "piste/difficulty",
+        "piste/difficulty_skitour",
         "piste/grooming",
         "oneway",
         "lit"
     ],
     "geometry": [
-        "point",
         "line",
         "area"
     ],
     "terms": [
         "ski",
-        "sled",
-        "sleigh",
-        "snowboard",
-        "nordic",
-        "downhill",
-        "snowmobile"
+        "skitour",
+        "crosscountry",
+        "ski touring",
+        "piste"
     ],
     "tags": {
-        "piste:type": "*"
+        "piste:type": "skitour"
     },
-    "name": "Piste/Ski Trail"
+    "name": "Ski Touring Trail"
 }

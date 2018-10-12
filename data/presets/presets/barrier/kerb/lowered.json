@@ -1,0 +1,27 @@
+{
+    "icon": "maki-wheelchair",
+    "fields": [
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "barrier": "kerb",
+        "kerb": "lowered"
+    },
+    "reference": {
+        "key": "kerb",
+        "value": "lowered"
+    },
+    "terms": [
+        "curb cut",
+        "curb ramp",
+        "kerb ramp",
+        "dropped kerb",
+        "pram ramp"
+    ],
+    "name": "Lowered Curb"
+}

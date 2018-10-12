@@ -7,6 +7,14 @@
     "geometry": [
         "vertex"
     ],
+    "addTags": {
+        "highway": "crossing",
+        "crossing": "unmarked"
+    },
+    "removeTags": {
+        "highway": "crossing",
+        "crossing": "unmarked"
+    },
     "tags": {
         "highway": "crossing"
     },
@@ -15,5 +23,5 @@
         "value": "crossing"
     },
     "terms": [],
-    "name": "Street Crossing"
+    "name": "Unmarked Crossing"
 }

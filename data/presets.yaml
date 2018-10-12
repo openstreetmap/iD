@@ -25,6 +25,8 @@ en:
         name: Road Features
       category-route:
         name: Route Features
+      category-utility:
+        name: Utility Features
       category-water-area:
         name: Water Features
       category-water-line:
@@ -266,6 +268,9 @@ en:
         label: Type
         # bridge field placeholder
         placeholder: Default
+      bridge/support:
+        # 'bridge:support=*'
+        label: Type
       building:
         # building=*
         label: Building
@@ -318,6 +323,9 @@ en:
       collection_times:
         # collection_times=*
         label: Collection Times
+      colour:
+        # colour=*
+        label: Color
       comment:
         # comment=*
         label: Changeset Comment
@@ -337,6 +345,16 @@ en:
       content:
         # content=*
         label: Content
+      conveying:
+        # conveying=*
+        label: Movement Direction
+        options:
+          # conveying=backward
+          backward: Backward
+          # conveying=forward
+          forward: Forward
+          # conveying=reversible
+          reversible: Reversible
       country:
         # country=*
         label: Country
@@ -431,6 +449,9 @@ en:
       description:
         # description=*
         label: Description
+      design:
+        # design=*
+        label: Design
       devices:
         # devices=*
         label: Devices
@@ -1137,6 +1158,26 @@ en:
         label: Difficulty
         options:
           # 'piste:difficulty=advanced'
+          advanced: Advanced
+          # 'piste:difficulty=easy'
+          easy: Easy
+          # 'piste:difficulty=expert'
+          expert: Expert
+          # 'piste:difficulty=extreme'
+          extreme: Extreme
+          # 'piste:difficulty=freeride'
+          freeride: Freeride
+          # 'piste:difficulty=intermediate'
+          intermediate: Intermediate
+          # 'piste:difficulty=novice'
+          novice: Novice
+        # piste/difficulty field placeholder
+        placeholder: 'Easy, Intermediate, Advanced...'
+      piste/difficulty_downhill:
+        # 'piste:difficulty=*'
+        label: Difficulty
+        options:
+          # 'piste:difficulty=advanced'
           advanced: Advanced (black diamond)
           # 'piste:difficulty=easy'
           easy: Easy (green circle)
@@ -1150,7 +1191,43 @@ en:
           intermediate: Intermediate (blue square)
           # 'piste:difficulty=novice'
           novice: Novice (instructional)
-        # piste/difficulty field placeholder
+        # piste/difficulty_downhill field placeholder
+        placeholder: 'Easy, Intermediate, Advanced...'
+      piste/difficulty_nordic:
+        # 'piste:difficulty=*'
+        label: Difficulty
+        options:
+          # 'piste:difficulty=advanced'
+          advanced: 'Advanced - Narrow, steep or icy section, sharp turn'
+          # 'piste:difficulty=easy'
+          easy: 'Easy - Soft hills, short steep section'
+          # 'piste:difficulty=expert'
+          expert: Expert - Dangerous terrain around
+          # 'piste:difficulty=intermediate'
+          intermediate: Intermediate - Steep section
+          # 'piste:difficulty=novice'
+          novice: 'Novice - Flat, no effort needed'
+        # piste/difficulty_nordic field placeholder
+        placeholder: 'Easy, Intermediate, Advanced...'
+      piste/difficulty_skitour:
+        # 'piste:difficulty=*'
+        label: Difficulty
+        options:
+          # 'piste:difficulty=advanced'
+          advanced: 'Advanced - S: 40-45° incline'
+          # 'piste:difficulty=easy'
+          easy: 'Easy - WS: 30-35° incline'
+          # 'piste:difficulty=expert'
+          expert: 'Expert - SS: 45–50° incline'
+          # 'piste:difficulty=extreme'
+          extreme: 'Extreme - EX: >55° incline'
+          # 'piste:difficulty=freeride'
+          freeride: 'Freeride - AS: 50–55° incline'
+          # 'piste:difficulty=intermediate'
+          intermediate: 'Intermediate - ZS: 35-40° incline'
+          # 'piste:difficulty=novice'
+          novice: 'Novice - L: <30° incline'
+        # piste/difficulty_skitour field placeholder
         placeholder: 'Easy, Intermediate, Advanced...'
       piste/grooming:
         # 'piste:grooming=*'
@@ -1164,6 +1241,38 @@ en:
           classic+skating: Classic and Skating
           # 'piste:grooming=mogul'
           mogul: Mogul
+          # 'piste:grooming=scooter'
+          scooter: Scooter/Snowmobile
+          # 'piste:grooming=skating'
+          skating: Skating
+      piste/grooming_downhill:
+        # 'piste:grooming=*'
+        label: Grooming
+        options:
+          # 'piste:grooming=backcountry'
+          backcountry: Backcountry - no grooming
+          # 'piste:grooming=classic'
+          classic: Classic
+          # 'piste:grooming=mogul'
+          mogul: Mogul
+      piste/grooming_hike:
+        # 'piste:grooming=*'
+        label: Grooming
+        options:
+          # 'piste:grooming=backcountry'
+          backcountry: Backcountry - Snowshoeing
+          # 'piste:grooming=classic'
+          classic: Classic - Winter Hiking
+      piste/grooming_nordic:
+        # 'piste:grooming=*'
+        label: Grooming
+        options:
+          # 'piste:grooming=backcountry'
+          backcountry: 'Backcountry, no grooming'
+          # 'piste:grooming=classic'
+          classic: Classic
+          # 'piste:grooming=classic+skating'
+          classic+skating: Classic and Skating
           # 'piste:grooming=scooter'
           scooter: Scooter/Snowmobile
           # 'piste:grooming=skating'
@@ -1251,6 +1360,16 @@ en:
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
+      recycling_type:
+        # recycling_type=*
+        label: Type
+        options:
+          # recycling_type=centre
+          centre: Center
+          # recycling_type=container
+          container: Container
+        # recycling_type field placeholder
+        placeholder: 'Container, Center'
       ref:
         # ref=*
         label: Reference Code
@@ -1352,7 +1471,7 @@ en:
           waterway_right: Waterway Right
       seamark/beacon_lateral/colour:
         # 'seamark:beacon_lateral:colour=*'
-        label: Colour
+        label: Color
         options:
           # 'seamark:beacon_lateral:colour=green'
           green: Green
@@ -1401,7 +1520,7 @@ en:
           waterway_right: Waterway Right
       seamark/buoy_lateral/colour:
         # 'seamark:buoy_lateral:colour=*'
-        label: Colour
+        label: Color
         options:
           # 'seamark:buoy_lateral:colour=green'
           green: Green
@@ -1446,6 +1565,11 @@ en:
       seasonal:
         # seasonal=*
         label: Seasonal
+      seats:
+        # seats=*
+        label: Seats
+        # seats field placeholder
+        placeholder: '2, 4, 6...'
       second_hand:
         # second_hand=*
         label: Sells Used
@@ -1730,6 +1854,19 @@ en:
       traffic_calming:
         # traffic_calming=*
         label: Type
+      traffic_sign:
+        # traffic_sign=*
+        label: Traffic Sign
+      traffic_sign/direction:
+        # 'traffic_sign:direction=*'
+        label: Direction
+        options:
+          # 'traffic_sign:direction=backward'
+          backward: Backward
+          # 'traffic_sign:direction=both'
+          both: Both / All
+          # 'traffic_sign:direction=forward'
+          forward: Forward
       traffic_signals:
         # traffic_signals=*
         label: Type
@@ -2312,6 +2449,11 @@ en:
         # amenity=parking
         name: Car Parking
         terms: '<translate with synonyms or related terms for ''Car Parking'', separated by commas>'
+      amenity/parking/multi-storey:
+        # 'amenity=parking, parking=multi-storey'
+        name: Multilevel Car Parking
+        # 'terms: multistorey car park,parking garage,parkade,parking structure,parking ramp,parking deck,parking building,indoor parking'
+        terms: '<translate with synonyms or related terms for ''Multilevel Car Parking'', separated by commas>'
       amenity/parking_entrance:
         # amenity=parking_entrance
         name: Parking Garage Entrance/Exit
@@ -2417,14 +2559,17 @@ en:
         terms: '<translate with synonyms or related terms for ''Ranger Station'', separated by commas>'
       amenity/recycling:
         # amenity=recycling
-        name: Recycling Container
-        # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
-        terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
+        name: Recycling
       amenity/recycling_centre:
         # 'amenity=recycling, recycling_type=centre'
         name: Recycling Center
         # 'terms: bottle,can,dump,glass,garbage,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Recycling Center'', separated by commas>'
+      amenity/recycling_container:
+        # 'amenity=recycling, recycling_type=container'
+        name: Recycling Container
+        # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
+        terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
       amenity/register_office:
         # amenity=register_office
         name: Register Office
@@ -2459,6 +2604,16 @@ en:
         # 'amenity=shelter, shelter_type=lean_to'
         name: Lean-To
         terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
+      amenity/shelter/picnic_shelter:
+        # 'amenity=shelter, shelter_type=picnic_shelter'
+        name: Picnic Shelter
+        # 'terms: pavilion'
+        terms: '<translate with synonyms or related terms for ''Picnic Shelter'', separated by commas>'
+      amenity/shelter/public_transport:
+        # 'amenity=shelter, shelter_type=public_transport'
+        name: Transit Shelter
+        # 'terms: bus stop,metro stop,waiting'
+        terms: '<translate with synonyms or related terms for ''Transit Shelter'', separated by commas>'
       amenity/shower:
         # amenity=shower
         name: Shower
@@ -2514,6 +2669,11 @@ en:
         name: Theater
         # 'terms: theatre,performance,play,musical'
         terms: '<translate with synonyms or related terms for ''Theater'', separated by commas>'
+      amenity/theatre/type/amphi:
+        # 'amenity=theatre, theatre:type=amphi'
+        name: Amphitheatre
+        # 'terms: open air,outdoor,greek,ampi'
+        terms: '<translate with synonyms or related terms for ''Amphitheatre'', separated by commas>'
       amenity/toilets:
         # amenity=toilets
         name: Toilets
@@ -2786,8 +2946,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Hedge'', separated by commas>'
       barrier/kerb:
         # barrier=kerb
-        name: Kerb
-        terms: '<translate with synonyms or related terms for ''Kerb'', separated by commas>'
+        name: Curb
+        terms: '<translate with synonyms or related terms for ''Curb'', separated by commas>'
+      barrier/kerb/lowered:
+        # 'barrier=kerb, kerb=lowered'
+        name: Lowered Curb
+        # 'terms: curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp'
+        terms: '<translate with synonyms or related terms for ''Lowered Curb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate
@@ -2816,6 +2981,14 @@ en:
         # boundary=administrative
         name: Administrative Boundary
         terms: '<translate with synonyms or related terms for ''Administrative Boundary'', separated by commas>'
+      bridge/support:
+        # 'bridge:support=*'
+        name: Bridge Support
+        terms: '<translate with synonyms or related terms for ''Bridge Support'', separated by commas>'
+      bridge/support/pier:
+        # 'bridge:support=pier'
+        name: Bridge Pier
+        terms: '<translate with synonyms or related terms for ''Bridge Pier'', separated by commas>'
       building:
         # building=*
         name: Building
@@ -2844,6 +3017,11 @@ en:
         # building=cabin
         name: Cabin
         terms: '<translate with synonyms or related terms for ''Cabin'', separated by commas>'
+      building/carport:
+        # building=carport
+        name: Carport
+        # 'terms: covered parking space,garage,car,porch'
+        terms: '<translate with synonyms or related terms for ''Carport'', separated by commas>'
       building/cathedral:
         # building=cathedral
         name: Cathedral Building
@@ -3321,29 +3499,6 @@ en:
         name: Entrance/Exit
         # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
-      footway/crossing:
-        # 'highway=footway, footway=crossing'
-        name: Street Crossing
-        terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
-      footway/crossing-raised:
-        # 'highway=footway, footway=crossing, traffic_calming=table'
-        name: Raised Street Crossing
-        # 'terms: flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
-      footway/crosswalk:
-        # 'highway=footway, footway=crossing, crossing=zebra'
-        name: Pedestrian Crosswalk
-        # 'terms: zebra crossing'
-        terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
-      footway/crosswalk-raised:
-        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
-        name: Raised Pedestrian Crosswalk
-        # 'terms: zebra crossing,flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
-      footway/sidewalk:
-        # 'highway=footway, footway=sidewalk'
-        name: Sidewalk
-        terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
       ford:
         # ford=yes
         name: Ford
@@ -3490,25 +3645,31 @@ en:
         name: Indoor Corridor
         # 'terms: gallery,hall,hallway,indoor,passage,passageway'
         terms: '<translate with synonyms or related terms for ''Indoor Corridor'', separated by commas>'
-      highway/crossing:
+      highway/crossing/marked:
+        # 'highway=crossing, crossing=marked'
+        name: Marked Crosswalk
+        # 'terms: zebra crossing,marked crossing,crosswalk'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
+      highway/crossing/marked-raised:
+        # 'highway=crossing, crossing=marked, traffic_calming=table'
+        name: Marked Crosswalk (Raised)
+        # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
+      highway/crossing/unmarked:
         # highway=crossing
-        name: Street Crossing
-        terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
-      highway/crossing-raised:
+        name: Unmarked Crossing
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
+      highway/crossing/unmarked-raised:
         # 'highway=crossing, traffic_calming=table'
-        name: Raised Street Crossing
+        name: Unmarked Crossing (Raised)
         # 'terms: flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
-      highway/crosswalk:
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'
+      highway/crossing/zebra:
         # 'highway=crossing, crossing=zebra'
-        name: Pedestrian Crosswalk
-        # 'terms: zebra crossing'
-        terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
-      highway/crosswalk-raised:
+        name: Marked Crosswalk
+      highway/crossing/zebra-raised:
         # 'highway=crossing, crossing=zebra, traffic_calming=table'
-        name: Raised Pedestrian Crosswalk
-        # 'terms: zebra crossing,flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
+        name: Marked Crosswalk (Raised)
       highway/cycleway:
         # highway=cycleway
         name: Cycle Path
@@ -3524,6 +3685,41 @@ en:
         name: Foot Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
+      highway/footway/conveying:
+        # 'highway=footway, conveying=*'
+        name: Moving Walkway
+        # 'terms: moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor'
+        terms: '<translate with synonyms or related terms for ''Moving Walkway'', separated by commas>'
+      highway/footway/marked:
+        # 'highway=footway, footway=crossing, crossing=marked'
+        name: Marked Crosswalk
+        # 'terms: zebra crossing,marked crossing,crosswalk'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk'', separated by commas>'
+      highway/footway/marked-raised:
+        # 'highway=footway, footway=crossing, crossing=marked, traffic_calming=table'
+        name: Marked Crosswalk (Raised)
+        # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
+      highway/footway/sidewalk:
+        # 'highway=footway, footway=sidewalk'
+        name: Sidewalk
+        # 'terms: pavement,sidepath'
+        terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
+      highway/footway/unmarked:
+        # 'highway=footway, footway=crossing'
+        name: Unmarked Crossing
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing'', separated by commas>'
+      highway/footway/unmarked-raised:
+        # 'highway=footway, footway=crossing, traffic_calming=table'
+        name: Unmarked Crossing (Raised)
+        # 'terms: flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Unmarked Crossing (Raised)'', separated by commas>'
+      highway/footway/zebra:
+        # 'highway=footway, footway=crossing, crossing=zebra'
+        name: Marked Crosswalk
+      highway/footway/zebra-raised:
+        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
+        name: Marked Crosswalk (Raised)
       highway/give_way:
         # highway=give_way
         name: Yield Sign
@@ -3656,6 +3852,11 @@ en:
         name: Steps
         # 'terms: stairs,staircase'
         terms: '<translate with synonyms or related terms for ''Steps'', separated by commas>'
+      highway/steps/conveying:
+        # 'highway=steps, conveying=*'
+        name: Escalator
+        # 'terms: moving staircase,moving stairway,people mover'
+        terms: '<translate with synonyms or related terms for ''Escalator'', separated by commas>'
       highway/stop:
         # highway=stop
         name: Stop Sign
@@ -4172,8 +4373,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Badminton Court'', separated by commas>'
       leisure/pitch/baseball:
         # 'leisure=pitch, sport=baseball'
-        name: Baseball Diamond
-        terms: '<translate with synonyms or related terms for ''Baseball Diamond'', separated by commas>'
+        name: Baseball Field
+        terms: '<translate with synonyms or related terms for ''Baseball Field'', separated by commas>'
       leisure/pitch/basketball:
         # 'leisure=pitch, sport=basketball'
         name: Basketball Court
@@ -4218,6 +4419,11 @@ en:
         name: Soccer Field
         # 'terms: football'
         terms: '<translate with synonyms or related terms for ''Soccer Field'', separated by commas>'
+      leisure/pitch/softball:
+        # 'leisure=pitch, sport=softball'
+        name: Softball Field
+        # 'terms: softball,diamond'
+        terms: '<translate with synonyms or related terms for ''Softball Field'', separated by commas>'
       leisure/pitch/table_tennis:
         # 'leisure=pitch, sport=table_tennis'
         name: Ping Pong Table
@@ -4382,6 +4588,7 @@ en:
       man_made/pipeline:
         # man_made=pipeline
         name: Pipeline
+        # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline'', separated by commas>'
       man_made/pumping_station:
         # man_made=pumping_station
@@ -4563,8 +4770,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Tree'', separated by commas>'
       natural/tree_row:
         # natural=tree_row
-        name: Tree row
-        terms: '<translate with synonyms or related terms for ''Tree row'', separated by commas>'
+        name: Tree Row
+        terms: '<translate with synonyms or related terms for ''Tree Row'', separated by commas>'
       natural/volcano:
         # natural=volcano
         name: Volcano
@@ -4779,11 +4986,46 @@ en:
         name: Water Utility Office
         # 'terms: water board,utility'
         terms: '<translate with synonyms or related terms for ''Water Utility Office'', separated by commas>'
-      piste:
+      piste/downhill:
+        # 'piste:type=downhill'
+        name: Downhill Piste/Ski Run
+        # 'terms: ski,alpine,snowboard,downhill,piste'
+        terms: '<translate with synonyms or related terms for ''Downhill Piste/Ski Run'', separated by commas>'
+      piste/hike:
+        # 'piste:type=hike'
+        name: Snowshoeing or Winter Hiking Trail
+        # 'terms: hike,winter hiking,snowshoe,snowshoeing,piste,ski'
+        terms: '<translate with synonyms or related terms for ''Snowshoeing or Winter Hiking Trail'', separated by commas>'
+      piste/ice_skate:
+        # 'piste:type=ice_skate'
+        name: Ice Skating Piste
+        # 'terms: ice,skating,ski,piste'
+        terms: '<translate with synonyms or related terms for ''Ice Skating Piste'', separated by commas>'
+      piste/nordic:
+        # 'piste:type=nordic'
+        name: Nordic or Crosscountry Piste/Ski Trail
+        # 'terms: ski,nordic,crosscountry,skating,piste'
+        terms: '<translate with synonyms or related terms for ''Nordic or Crosscountry Piste/Ski Trail'', separated by commas>'
+      piste/piste:
         # 'piste:type=*'
-        name: Piste/Ski Trail
-        # 'terms: ski,sled,sleigh,snowboard,nordic,downhill,snowmobile'
-        terms: '<translate with synonyms or related terms for ''Piste/Ski Trail'', separated by commas>'
+        name: Winter Sport Trails
+        # 'terms: ski,nordic,crosscountry,downhill,alpine,snowboard,skitour,ski touring,sled,luge,sleigh,sledge,ski-joring,husky,horse,winter hiking,snowshoe,snowshoeing,ice,skating'
+        terms: '<translate with synonyms or related terms for ''Winter Sport Trails'', separated by commas>'
+      piste/skitour:
+        # 'piste:type=skitour'
+        name: Ski Touring Trail
+        # 'terms: ski,skitour,crosscountry,ski touring,piste'
+        terms: '<translate with synonyms or related terms for ''Ski Touring Trail'', separated by commas>'
+      piste/sled:
+        # 'piste:type=sled'
+        name: Sled Piste
+        # 'terms: ski,sled,luge,sleigh,sledge,piste'
+        terms: '<translate with synonyms or related terms for ''Sled Piste'', separated by commas>'
+      piste/sleigh:
+        # 'piste:type=sleigh'
+        name: Sleigh Piste
+        # 'terms: ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse'
+        terms: '<translate with synonyms or related terms for ''Sleigh Piste'', separated by commas>'
       place:
         # place=*
         name: Place
@@ -4914,17 +5156,26 @@ en:
       power:
         # power=*
         name: Power
+      power/cable/underground:
+        # 'power=cable, location=underground'
+        name: Underground Power Cable
+        terms: '<translate with synonyms or related terms for ''Underground Power Cable'', separated by commas>'
       power/generator:
         # power=generator
         name: Power Generator
         # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
-      power/generator/source_nuclear:
+      power/generator/method/photovoltaic:
+        # 'power=generator, generator:source=solar, generator:method=photovoltaic, generator:type=solar_photovoltaic_panel'
+        name: Solar Panel
+        # 'terms: photovoltaic module,PV module,sunlight'
+        terms: '<translate with synonyms or related terms for ''Solar Panel'', separated by commas>'
+      power/generator/source/nuclear:
         # 'power=generator, generator:source=nuclear, generator:method=fission'
         name: Nuclear Reactor
         # 'terms: fission,generator,nuclear,nuke,reactor'
         terms: '<translate with synonyms or related terms for ''Nuclear Reactor'', separated by commas>'
-      power/generator/source_wind:
+      power/generator/source/wind:
         # 'power=generator, generator:source=wind, generator:method=wind_turbine'
         name: Wind Turbine
         # 'terms: generator,turbine,windmill,wind'
@@ -4960,6 +5211,7 @@ en:
       power/tower:
         # power=tower
         name: High-Voltage Tower
+        # 'terms: power'
         terms: '<translate with synonyms or related terms for ''High-Voltage Tower'', separated by commas>'
       power/transformer:
         # power=transformer
@@ -6079,6 +6331,36 @@ en:
         name: Speed Table
         # 'terms: flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Speed Table'', separated by commas>'
+      traffic_sign:
+        # traffic_sign=*
+        name: Traffic Sign
+        # 'terms: road,highway'
+        terms: '<translate with synonyms or related terms for ''Traffic Sign'', separated by commas>'
+      traffic_sign/city_limit:
+        # traffic_sign=city_limit
+        name: City Limit Sign
+        # 'terms: town,village,hamlet,boundary,edge,border,road,highway'
+        terms: '<translate with synonyms or related terms for ''City Limit Sign'', separated by commas>'
+      traffic_sign/city_limit_vertex:
+        # traffic_sign=city_limit
+        name: City Limit Sign
+        # 'terms: town,village,hamlet,boundary,edge,border,road,highway'
+        terms: '<translate with synonyms or related terms for ''City Limit Sign'', separated by commas>'
+      traffic_sign/maxspeed:
+        # traffic_sign=maxspeed
+        name: Speed Limit Sign
+        # 'terms: max speed,maximum speed,road,highway'
+        terms: '<translate with synonyms or related terms for ''Speed Limit Sign'', separated by commas>'
+      traffic_sign/maxspeed_vertex:
+        # traffic_sign=maxspeed
+        name: Speed Limit Sign
+        # 'terms: max speed,maximum speed,road,highway'
+        terms: '<translate with synonyms or related terms for ''Speed Limit Sign'', separated by commas>'
+      traffic_sign_vertex:
+        # traffic_sign=*
+        name: Traffic Sign
+        # 'terms: road,highway'
+        terms: '<translate with synonyms or related terms for ''Traffic Sign'', separated by commas>'
       type/boundary:
         # type=boundary
         name: Boundary

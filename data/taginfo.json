@@ -250,6 +250,13 @@
     },
     {
       "key": "amenity",
+      "value": "recycling",
+      "description": "Recycling",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/recycling-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "register_office",
       "description": "Register Office",
       "object_types": ["node", "area"],
@@ -701,6 +708,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-15.svg?sanitize=true"
     },
     {
+      "key": "parking",
+      "value": "multi-storey",
+      "description": "Multilevel Car Parking, Type",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-garage-15.svg?sanitize=true"
+    },
+    {
       "key": "amenity",
       "value": "pharmacy",
       "description": "Pharmacy",
@@ -836,14 +850,14 @@
     {
       "key": "recycling_type",
       "value": "centre",
-      "description": "Recycling Center",
+      "description": "Recycling Center, Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/recycling-15.svg?sanitize=true"
     },
     {
-      "key": "amenity",
-      "value": "recycling",
-      "description": "Recycling Container",
+      "key": "recycling_type",
+      "value": "container",
+      "description": "Recycling Container, Type",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/recycling-15.svg?sanitize=true"
     },
@@ -886,6 +900,20 @@
       "key": "shelter_type",
       "value": "lean_to",
       "description": "Lean-To",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "picnic_shelter",
+      "description": "Picnic Shelter",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
+    },
+    {
+      "key": "shelter_type",
+      "value": "public_transport",
+      "description": "Transit Shelter",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shelter-15.svg?sanitize=true"
     },
@@ -956,6 +984,13 @@
       "key": "amenity",
       "value": "theatre",
       "description": "Theater",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/theatre-15.svg?sanitize=true"
+    },
+    {
+      "key": "theatre:type",
+      "value": "amphi",
+      "description": "Amphitheatre",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/theatre-15.svg?sanitize=true"
     },
@@ -1363,7 +1398,14 @@
     {
       "key": "barrier",
       "value": "kerb",
-      "description": "Kerb",
+      "description": "Curb",
+      "object_types": ["node", "way"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
+    },
+    {
+      "key": "kerb",
+      "value": "lowered",
+      "description": "Lowered Curb",
       "object_types": ["node", "way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
     },
@@ -1413,6 +1455,19 @@
       "value": "administrative",
       "description": "Administrative Boundary",
       "object_types": ["way"]
+    },
+    {
+      "key": "bridge:support",
+      "description": "Bridge Support, Type",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
+    },
+    {
+      "key": "bridge:support",
+      "value": "pier",
+      "description": "Bridge Pier",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
     },
     {
       "key": "building",
@@ -1474,6 +1529,13 @@
       "description": "Cabin",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/home-15.svg?sanitize=true"
+    },
+    {
+      "key": "building",
+      "value": "carport",
+      "description": "Carport",
+      "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-warehouse.svg?sanitize=true"
     },
     {
       "key": "building",
@@ -2236,32 +2298,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/entrance-alt1-15.svg?sanitize=true"
     },
     {
-      "key": "traffic_calming",
-      "value": "table",
-      "description": "Raised Street Crossing, Raised Pedestrian Crosswalk, Speed Table",
-      "object_types": ["way"]
-    },
-    {
-      "key": "footway",
-      "value": "crossing",
-      "description": "Street Crossing",
-      "object_types": ["way"]
-    },
-    {
-      "key": "crossing",
-      "value": "zebra",
-      "description": "Pedestrian Crosswalk",
-      "object_types": ["way"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
-    },
-    {
-      "key": "footway",
-      "value": "sidewalk",
-      "description": "Sidewalk",
-      "object_types": ["way"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
-    },
-    {
       "key": "ford",
       "value": "yes",
       "description": "Ford",
@@ -2456,9 +2492,30 @@
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
     },
     {
+      "key": "traffic_calming",
+      "value": "table",
+      "description": "Marked Crosswalk (Raised), Unmarked Crossing (Raised), Speed Table",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+    },
+    {
+      "key": "crossing",
+      "value": "zebra",
+      "description": "Marked Crosswalk",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+    },
+    {
+      "key": "crossing",
+      "value": "marked",
+      "description": "Marked Crosswalk",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/pedestrian.svg?sanitize=true"
+    },
+    {
       "key": "highway",
       "value": "crossing",
-      "description": "Street Crossing",
+      "description": "Unmarked Crossing",
       "object_types": ["node"]
     },
     {
@@ -2481,6 +2538,25 @@
       "description": "Foot Path",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
+    },
+    {
+      "key": "conveying",
+      "description": "Moving Walkway, Escalator",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
+    },
+    {
+      "key": "footway",
+      "value": "sidewalk",
+      "description": "Sidewalk",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-footway.svg?sanitize=true"
+    },
+    {
+      "key": "footway",
+      "value": "crossing",
+      "description": "Unmarked Crossing",
+      "object_types": ["way"]
     },
     {
       "key": "highway",
@@ -3426,7 +3502,7 @@
     {
       "key": "sport",
       "value": "baseball",
-      "description": "Baseball Diamond",
+      "description": "Baseball Field",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/baseball-15.svg?sanitize=true"
     },
@@ -3499,6 +3575,13 @@
       "description": "Soccer Field",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/soccer-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "softball",
+      "description": "Softball Field",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/baseball-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3990,7 +4073,7 @@
     {
       "key": "natural",
       "value": "tree_row",
-      "description": "Tree row",
+      "description": "Tree Row",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/park-15.svg?sanitize=true"
     },
@@ -4331,9 +4414,58 @@
     },
     {
       "key": "piste:type",
-      "description": "Piste/Ski Trail",
-      "object_types": ["node", "way", "area"],
+      "value": "downhill",
+      "description": "Downhill Piste/Ski Run, Type",
+      "object_types": ["way", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "hike",
+      "description": "Snowshoeing or Winter Hiking Trail, Type",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "ice_skate",
+      "description": "Ice Skating Piste, Type",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "nordic",
+      "description": "Nordic or Crosscountry Piste/Ski Trail, Type",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "description": "Winter Sport Trails",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "skitour",
+      "description": "Ski Touring Trail, Type",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skiing-15.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "sled",
+      "description": "Sled Piste, Type",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
+    },
+    {
+      "key": "piste:type",
+      "value": "sleigh",
+      "description": "Sleigh Piste, Type",
+      "object_types": ["way", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-snowflake.svg?sanitize=true"
     },
     {
       "key": "place",
@@ -4538,11 +4670,24 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"
     },
     {
+      "key": "location",
+      "value": "underground",
+      "description": "Underground Power Cable",
+      "object_types": ["way"]
+    },
+    {
       "key": "power",
       "value": "generator",
       "description": "Power Generator",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"
+    },
+    {
+      "key": "generator:type",
+      "value": "solar_photovoltaic_panel",
+      "description": "Solar Panel",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-solar-panel.svg?sanitize=true"
     },
     {
       "key": "generator:method",
@@ -4892,13 +5037,13 @@
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green",
-      "description": "Green Buoy, Colour",
+      "description": "Green Buoy, Color",
       "object_types": ["node"]
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red",
-      "description": "Red Buoy, Colour",
+      "description": "Red Buoy, Color",
       "object_types": ["node"]
     },
     {
@@ -6074,6 +6219,26 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/diamond.svg?sanitize=true"
     },
     {
+      "key": "traffic_sign",
+      "description": "Traffic Sign",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/square-stroked-15.svg?sanitize=true"
+    },
+    {
+      "key": "traffic_sign",
+      "value": "city_limit",
+      "description": "City Limit Sign",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/square-stroked-15.svg?sanitize=true"
+    },
+    {
+      "key": "traffic_sign",
+      "value": "maxspeed",
+      "description": "Speed Limit Sign",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/square-stroked-15.svg?sanitize=true"
+    },
+    {
       "key": "type",
       "value": "multipolygon",
       "description": "Multipolygon",
@@ -6537,11 +6702,27 @@
     {"key": "castle_type", "description": "Type"},
     {"key": "clothes", "description": "Clothes"},
     {"key": "collection_times", "description": "Collection Times"},
+    {"key": "colour", "description": "Color"},
     {"key": "comment", "description": "Changeset Comment"},
     {"key": "communication:", "description": "Communication Types"},
     {"key": "construction", "description": "Type"},
     {"key": "contact:webcam", "description": "Webcam URL"},
     {"key": "content", "description": "Content"},
+    {
+      "key": "conveying",
+      "value": "forward",
+      "description": "Movement Direction"
+    },
+    {
+      "key": "conveying",
+      "value": "backward",
+      "description": "Movement Direction"
+    },
+    {
+      "key": "conveying",
+      "value": "reversible",
+      "description": "Movement Direction"
+    },
     {"key": "country", "description": "Country"},
     {"key": "covered", "description": "Covered"},
     {"key": "crane:type", "value": "portal_crane", "description": "Crane Type"},
@@ -6601,6 +6782,7 @@
     {"key": "denomination", "description": "Denomination"},
     {"key": "denotation", "description": "Denotation"},
     {"key": "description", "description": "Description"},
+    {"key": "design", "description": "Design"},
     {"key": "devices", "description": "Devices"},
     {"key": "diaper", "description": "Diaper Changing Available"},
     {"key": "direction", "value": "N", "description": "Direction"},
@@ -6924,7 +7106,6 @@
     {"key": "par", "description": "Par"},
     {"key": "park_ride", "description": "Park and Ride"},
     {"key": "parking", "value": "surface", "description": "Type"},
-    {"key": "parking", "value": "multi-storey", "description": "Type"},
     {"key": "parking", "value": "underground", "description": "Type"},
     {"key": "parking", "value": "sheds", "description": "Type"},
     {"key": "parking", "value": "carports", "description": "Type"},
@@ -6974,13 +7155,6 @@
     },
     {"key": "piste:grooming", "value": "scooter", "description": "Grooming"},
     {"key": "piste:grooming", "value": "skating", "description": "Grooming"},
-    {"key": "piste:type", "value": "downhill", "description": "Type"},
-    {"key": "piste:type", "value": "nordic", "description": "Type"},
-    {"key": "piste:type", "value": "skitour", "description": "Type"},
-    {"key": "piste:type", "value": "sled", "description": "Type"},
-    {"key": "piste:type", "value": "hike", "description": "Type"},
-    {"key": "piste:type", "value": "sleigh", "description": "Type"},
-    {"key": "piste:type", "value": "ice_skate", "description": "Type"},
     {"key": "piste:type", "value": "snow_park", "description": "Type"},
     {"key": "piste:type", "value": "playground", "description": "Type"},
     {"key": "piste:type", "value": "connection", "description": "Type"},
@@ -7083,17 +7257,17 @@
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "red",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "green",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "grey",
-      "description": "Colour"
+      "description": "Color"
     },
     {"key": "seamark:beacon_lateral:shape", "description": "Shape"},
     {
@@ -7169,32 +7343,32 @@
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red;white;red;white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green;white;green;white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red;green;red",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green;red;green",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "yellow",
-      "description": "Colour"
+      "description": "Color"
     },
     {"key": "seamark:buoy_lateral:shape", "description": "Shape"},
     {
@@ -7220,6 +7394,7 @@
     {"key": "seamark:mooring:category", "description": "Category"},
     {"key": "seamark:wreck:category", "description": "Category"},
     {"key": "seasonal", "description": "Seasonal"},
+    {"key": "seats", "description": "Seats"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},
     {"key": "second_hand", "value": "only", "description": "Sells Used"},
@@ -7336,6 +7511,21 @@
     {"key": "tracktype", "value": "grade4", "description": "Track Type"},
     {"key": "tracktype", "value": "grade5", "description": "Track Type"},
     {"key": "trade", "description": "Type"},
+    {
+      "key": "traffic_sign:direction",
+      "value": "forward",
+      "description": "Direction"
+    },
+    {
+      "key": "traffic_sign:direction",
+      "value": "backward",
+      "description": "Direction"
+    },
+    {
+      "key": "traffic_sign:direction",
+      "value": "both",
+      "description": "Direction"
+    },
     {"key": "traffic_signals", "description": "Type"},
     {
       "key": "traffic_signals:direction",

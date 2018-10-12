@@ -10,14 +10,16 @@
     ],
     "tags": {
         "highway": "crossing",
-        "crossing": "zebra"
+        "crossing": "marked"
     },
     "reference": {
         "key": "highway",
         "value": "crossing"
     },
     "terms": [
-        "zebra crossing"
+        "zebra crossing",
+        "marked crossing",
+        "crosswalk"
     ],
-    "name": "Pedestrian Crosswalk"
+    "name": "Marked Crosswalk"
 }

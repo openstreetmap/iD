@@ -1,0 +1,12 @@
+{
+    "key": "recycling_type",
+    "type": "combo",
+    "label": "Type",
+    "placeholder": "Container, Center",
+    "strings": {
+        "options": {
+            "container": "Container",
+            "centre": "Center"
+        }
+    }
+}
