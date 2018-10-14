@@ -122,6 +122,16 @@ export function uiRawMemberEditor(context) {
             enter
                 .each(function(d) {
                     if (d.member) {
+
+                        // highlight the member feature in the map while hovering on the list item
+                        var selectorPrefix = d.type === 'node' ? 'g.' : 'path.';
+                        d3_select(this).on('mouseover', function() {
+                            context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', true);
+                        });
+                        d3_select(this).on('mouseout', function() {
+                            context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', false);
+                        });
+
                         var label = d3_select(this).append('label')
                             .attr('class', 'form-label')
                             .append('a')
@@ -142,7 +152,7 @@ export function uiRawMemberEditor(context) {
                     } else {
                         var incompleteLabel = d3_select(this).append('label')
                             .attr('class', 'form-label');
-                        
+
                         incompleteLabel.append('span')
                             .attr('class', 'member-entity-type')
                             .text(t('inspector.'+d.type, { id: d.id }));
