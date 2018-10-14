@@ -265,6 +265,18 @@ text.point {
     opacity: 0.8;
 }
 
+/* Highlighting */
+
+g.point.highlighted .shadow,
+path.shadow.highlighted {
+    stroke-opacity: 0.95;
+    stroke: #7092ff;
+}
+g.vertex.highlighted .shadow {
+    stroke-width: 7;
+    stroke-opacity: 0.95;
+    stroke: #7092ff;
+}
 
 /* Turn Restrictions */
 

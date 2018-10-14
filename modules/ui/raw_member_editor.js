@@ -126,10 +126,10 @@ export function uiRawMemberEditor(context) {
                         // highlight the member feature in the map while hovering on the list item
                         var selectorPrefix = d.type === 'node' ? 'g.' : 'path.';
                         d3_select(this).on('mouseover', function() {
-                            context.surface().selectAll(selectorPrefix+d.id).classed('related', true);
+                            context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', true);
                         });
                         d3_select(this).on('mouseout', function() {
-                            context.surface().selectAll(selectorPrefix+d.id).classed('related', false);
+                            context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', false);
                         });
 
                         var label = d3_select(this).append('label')
