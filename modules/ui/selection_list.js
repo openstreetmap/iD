@@ -1,4 +1,7 @@
-import { event as d3_event } from 'd3-selection';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
 
 import { t } from '../util/locale';
 import { modeSelect } from '../modes';
@@ -63,6 +66,18 @@ export function uiSelectionList(context, selectedIDs) {
                 .append('div')
                 .attr('class', 'feature-list-item')
                 .on('click', selectEntity);
+
+            enter
+                .each(function(d) {
+                // highlight the feature in the map while hovering on the list item
+                var selectorPrefix = d.type === 'node' ? 'g.' : 'path.';
+                d3_select(this).on('mouseover', function() {
+                    context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', true);
+                });
+                d3_select(this).on('mouseout', function() {
+                    context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', false);
+                });
+            });
 
             var label = enter
                 .append('button')
