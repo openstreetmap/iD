@@ -146,10 +146,6 @@ export function uiRawMemberEditor(context) {
                         var label = d3_select(this).append('label')
                             .attr('class', 'form-label');
 
-                        // add the button wrap beneath the label text
-                        var buttonWrap = label.append('div')
-                            .attr('class', 'form-label-button-wrap');
-
                         var labelLink = label.append('a')
                             .attr('href', '#')
                             .on('click', selectMember);
@@ -164,6 +160,9 @@ export function uiRawMemberEditor(context) {
                         labelLink.append('span')
                             .attr('class', 'member-entity-name')
                             .text(function(d) { return utilDisplayName(d.member); });
+
+                        var buttonWrap = label.append('div')
+                            .attr('class', 'form-label-button-wrap');
 
                         buttonWrap.append('button')
                             .attr('class', 'download-icon')

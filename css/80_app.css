@@ -1254,10 +1254,10 @@ a.hide-toggle {
     right: 0;
     height: 100%;
     background: transparent;
-    text-align: right;
 }
 [dir='rtl'] .form-label-button-wrap {
-    text-align: left;
+    right: auto;
+    left: 0;
 }
 
 .form-label-button-wrap .tag-reference-button {
