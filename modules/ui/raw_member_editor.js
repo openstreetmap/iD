@@ -30,6 +30,17 @@ export function uiRawMemberEditor(context) {
         context.loadEntity(d.id);
     }
 
+    function zoomToMember(d) {
+        d3_event.preventDefault();
+
+        var entity = context.entity(d.id);
+        context.map().zoomTo(entity);
+
+        // highlight the feature in case it wasn't previously on-screen
+        var selectorPrefix = d.type === 'node' ? 'g.' : 'path.';
+        context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', true);
+    }
+
 
     function selectMember(d) {
         d3_event.preventDefault();
@@ -133,21 +144,32 @@ export function uiRawMemberEditor(context) {
                         });
 
                         var label = d3_select(this).append('label')
-                            .attr('class', 'form-label')
-                            .append('a')
+                            .attr('class', 'form-label');
+
+                        var labelLink = label.append('a')
                             .attr('href', '#')
                             .on('click', selectMember);
 
-                        label.append('span')
+                        labelLink.append('span')
                             .attr('class', 'member-entity-type')
                             .text(function(d) {
                                 var matched = context.presets().match(d.member, context.graph());
                                 return (matched && matched.name()) || utilDisplayType(d.member.id);
                             });
 
-                        label.append('span')
+                        labelLink.append('span')
                             .attr('class', 'member-entity-name')
                             .text(function(d) { return utilDisplayName(d.member); });
+
+                        var buttonWrap = label.append('div')
+                            .attr('class', 'form-label-button-wrap');
+
+                        buttonWrap.append('button')
+                            .attr('class', 'download-icon')
+                            .attr('title', t('icons.zoom_to'))
+                            .attr('tabindex', -1)
+                            .call(svgIcon('#iD-icon-geolocate'))
+                            .on('click', zoomToMember);
 
                     } else {
                         var incompleteLabel = d3_select(this).append('label')
@@ -186,6 +208,7 @@ export function uiRawMemberEditor(context) {
             enter
                 .append('button')
                 .attr('tabindex', -1)
+                .attr('title', t('icons.remove'))
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMember)
                 .call(svgIcon('#iD-operation-delete'));

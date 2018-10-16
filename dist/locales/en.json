@@ -4,7 +4,8 @@
             "download": "download",
             "information": "info",
             "remove": "remove",
-            "undo": "undo"
+            "undo": "undo",
+            "zoom_to": "zoom to"
         },
         "modes": {
             "add_area": {
