@@ -4,7 +4,9 @@
         "name",
         "ref_route",
         "network_bicycle",
-        "cycle_network"
+        "cycle_network",
+        "to", 
+        "from"
     ],
     "geometry": [
         "relation"
