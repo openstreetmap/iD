@@ -3,7 +3,6 @@ import { actionAddEntity } from '../actions';
 import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
-import { geoChooseEdge } from '../geo';
 import { actionAddMidpoint } from '../actions';
 
 
@@ -39,7 +38,7 @@ export function modeAddPoint(context) {
     }
 
 
-    function addWay(loc, edge, d) {
+    function addWay(loc, edge) {
         var node =  osmNode();
 
         context.perform(
