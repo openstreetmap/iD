@@ -10,7 +10,8 @@
         "internet_access/fee",
         "internet_access/ssid",
         "smoking",
-        "outdoor_seating"
+        "outdoor_seating",
+        "takeaway"
     ],
     "geometry": [
         "point",
