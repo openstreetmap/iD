@@ -100,6 +100,13 @@ export function svgTagClasses() {
                 }
             }
 
+            // Style unpaved taxiways
+            if (primary === 'aeroway') {
+                if (t.aeroway === 'taxiway' && t.surface === 'unpaved') {
+                    classes += ' tag-unpaved';
+                }
+            }
+
             classes = classes.trim();
 
             if (classes !== value) {
