@@ -174,6 +174,10 @@ describe('iD.svgData', function () {
                 done();
             }, 200);
         });
+
+        it('handles shape files',function(done){
+            
+        });
     });
 
 

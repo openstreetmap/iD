@@ -519,10 +519,16 @@ export function svgData(projection, context, dispatch) {
         var extension = getExtension(testUrl) || defaultExtension;
         if (extension) {
             _template = null;
-            d3_text(url, function(err, data) {
-                if (err) return;
-                drawData.setFile(extension, data);
-            });
+            switch(extension){
+                case '.shp':
+                    drawData.setFile(extension,url);
+                    break;
+                default:
+                    d3_text(url, function(err, data) {
+                        if (err) return;
+                        drawData.setFile(extension, data);
+                    });
+            }
         } else {
             drawData.template(url);
         }
