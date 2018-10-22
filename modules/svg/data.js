@@ -328,12 +328,12 @@ export function svgData(projection, context, dispatch) {
     }
 
     function shapeToGeoJson(arrayBufferData,callback){
-        var gj = { type:"FeatureCollection" , features:[]};
+        var gj = { type:'FeatureCollection' , features:[]};
         shapfileOpen(arrayBufferData)
         .then(function(source){
             // Read all features till done
             source.read().then(function repeat(result){
-                if(result.done){
+                if (result.done){
                     callback(gj);
                     return;
                 } else {
@@ -341,7 +341,7 @@ export function svgData(projection, context, dispatch) {
                     return source.read().then(repeat);
                 }
             });
-        })
+        });
     }
 
 
@@ -369,7 +369,7 @@ export function svgData(projection, context, dispatch) {
         }
 
         function _callback(res){
-            if(res){
+            if (res){
                 gj = res;
             }
 
@@ -495,7 +495,7 @@ export function svgData(projection, context, dispatch) {
             };
         })(f);
 
-        switch(extension){
+        switch (extension){
             case '.shp':
                 reader.readAsArrayBuffer(f);
                 break;
@@ -519,7 +519,7 @@ export function svgData(projection, context, dispatch) {
         var extension = getExtension(testUrl) || defaultExtension;
         if (extension) {
             _template = null;
-            switch(extension){
+            switch (extension){
                 case '.shp':
                     drawData.setFile(extension,url);
                     break;
