@@ -45,6 +45,7 @@
     "pannellum": "2.4.1",
     "q": "1.5.1",
     "rbush": "2.0.2",
+    "shapefile": "^0.6.6",
     "which-polygon": "2.2.0",
     "wmf-sitematrix": "0.1.4"
   },
