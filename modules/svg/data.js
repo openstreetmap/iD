@@ -327,6 +327,23 @@ export function svgData(projection, context, dispatch) {
         return (new DOMParser()).parseFromString(textdata, 'text/xml');
     }
 
+    function shapeToGeoJson(arrayBufferData,callback){
+        var gj = { type:"FeatureCollection" , features:[]};
+        shapfileOpen(arrayBufferData)
+        .then(function(source){
+            // Read all features till done
+            source.read().then(function repeat(result){
+                if(result.done){
+                    callback(gj);
+                    return;
+                } else {
+                    gj.features.push(result.value);
+                    return source.read().then(repeat);
+                }
+            });
+        })
+    }
+
 
     drawData.setFile = function(extension, data) {
         _template = null;
@@ -347,23 +364,15 @@ export function svgData(projection, context, dispatch) {
                 gj = JSON.parse(data);
                 break;
             case '.shp':
-                shapfileOpen(data)
-                        .then(function(source){
-                            gj = { type:"FeatureCollection" , features:[]};
-                            source.read().then(function repeat(result){
-                                if(result.done){
-                                    _callback();
-                                    return;
-                                } else {
-                                    gj.features.push(result.value);
-                                    return source.read().then(repeat);
-                                }
-                                
-                            });
-                        })
+                shapeToGeoJson(data,_callback);
+                break;
         }
 
-        var _callback = function(){
+        function _callback(res){
+            if(res){
+                gj = res;
+            }
+
             if (!_isEmpty(gj)) {
                 _geojson = ensureIDs(gj);
                 _src = extension + ' data file';
@@ -374,8 +383,6 @@ export function svgData(projection, context, dispatch) {
         }
 
         _callback();
-
-        
         return this;
     };
 
