@@ -18,6 +18,7 @@ import {
 
 import stringify from 'fast-json-stable-stringify';
 import toGeoJSON from '@mapbox/togeojson';
+import {open as shapfileOpen} from 'shapefile';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
@@ -316,7 +317,7 @@ export function svgData(projection, context, dispatch) {
     function getExtension(fileName) {
         if (!fileName) return;
 
-        var re = /\.(gpx|kml|(geo)?json)$/i;
+        var re = /\.(shp|gpx|kml|(geo)?json)$/i;
         var match = fileName.toLowerCase().match(re);
         return match && match.length && match[0];
     }
@@ -345,15 +346,36 @@ export function svgData(projection, context, dispatch) {
             case '.json':
                 gj = JSON.parse(data);
                 break;
+            case '.shp':
+                shapfileOpen(data)
+                        .then(function(source){
+                            gj = { type:"FeatureCollection" , features:[]};
+                            source.read().then(function repeat(result){
+                                if(result.done){
+                                    _callback();
+                                    return;
+                                } else {
+                                    gj.features.push(result.value);
+                                    return source.read().then(repeat);
+                                }
+                                
+                            });
+                        })
         }
 
-        if (!_isEmpty(gj)) {
-            _geojson = ensureIDs(gj);
-            _src = extension + ' data file';
-            this.fitZoom();
+        var _callback = function(){
+            if (!_isEmpty(gj)) {
+                _geojson = ensureIDs(gj);
+                _src = extension + ' data file';
+                drawData.fitZoom();
+            }
+    
+            dispatch.call('change');
         }
 
-        dispatch.call('change');
+        _callback();
+
+        
         return this;
     };
 
@@ -457,6 +479,8 @@ export function svgData(projection, context, dispatch) {
         if (!fileList || !fileList.length) return this;
         var f = fileList[0];
         var extension = getExtension(f.name);
+       
+
         var reader = new FileReader();
         reader.onload = (function() {
             return function(e) {
@@ -464,7 +488,14 @@ export function svgData(projection, context, dispatch) {
             };
         })(f);
 
-        reader.readAsText(f);
+        switch(extension){
+            case '.shp':
+                reader.readAsArrayBuffer(f);
+                break;
+            default :
+                reader.readAsText(f);
+                break;
+        }
 
         return this;
     };
