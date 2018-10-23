@@ -354,28 +354,24 @@ export function svgData(projection, context, dispatch) {
         var gj;
         switch (extension) {
             case '.gpx':
-                gj = toGeoJSON.gpx(xmlToDom(data));
+                done(toGeoJSON.gpx(xmlToDom(data)));
                 done();
                 break;
             case '.kml':
-                gj = toGeoJSON.kml(xmlToDom(data));
+                done(toGeoJSON.kml(xmlToDom(data)));
                 done();
                 break;
             case '.geojson':
             case '.json':
-                gj = JSON.parse(data);
-                done();
+                done(JSON.parse(data));
+                
                 break;
             case '.shp':
                 shapeToGeoJson(data,done);
                 break;
         }
 
-        function done(res){
-            if (res){
-                gj = res;
-            }
-
+        function done(gj){
             if (!_isEmpty(gj)) {
                 _geojson = ensureIDs(gj);
                 _src = extension + ' data file';
@@ -385,7 +381,6 @@ export function svgData(projection, context, dispatch) {
             dispatch.call('change');
         }
 
-        done();
         return this;
     };
 
