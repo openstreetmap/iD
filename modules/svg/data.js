@@ -18,7 +18,7 @@ import {
 
 import stringify from 'fast-json-stable-stringify';
 import toGeoJSON from '@mapbox/togeojson';
-import {open as shapfileOpen} from 'shapefile';
+import {open as shp} from 'shapefile';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
@@ -329,7 +329,7 @@ export function svgData(projection, context, dispatch) {
 
     function shapeToGeoJson(arrayBufferData,callback){
         var gj = { type:'FeatureCollection' , features:[]};
-        shapfileOpen(arrayBufferData)
+        shp(arrayBufferData)
         .then(function(source){
             // Read all features till done
             source.read().then(function repeat(result){
@@ -355,20 +355,23 @@ export function svgData(projection, context, dispatch) {
         switch (extension) {
             case '.gpx':
                 gj = toGeoJSON.gpx(xmlToDom(data));
+                done();
                 break;
             case '.kml':
                 gj = toGeoJSON.kml(xmlToDom(data));
+                done();
                 break;
             case '.geojson':
             case '.json':
                 gj = JSON.parse(data);
+                done();
                 break;
             case '.shp':
-                shapeToGeoJson(data,_callback);
+                shapeToGeoJson(data,done);
                 break;
         }
 
-        function _callback(res){
+        function done(res){
             if (res){
                 gj = res;
             }
@@ -382,7 +385,7 @@ export function svgData(projection, context, dispatch) {
             dispatch.call('change');
         }
 
-        _callback();
+        done();
         return this;
     };
 
