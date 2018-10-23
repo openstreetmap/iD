@@ -351,20 +351,16 @@ export function svgData(projection, context, dispatch) {
         _geojson = null;
         _src = null;
 
-        var gj;
         switch (extension) {
             case '.gpx':
                 done(toGeoJSON.gpx(xmlToDom(data)));
-                done();
                 break;
             case '.kml':
                 done(toGeoJSON.kml(xmlToDom(data)));
-                done();
                 break;
             case '.geojson':
             case '.json':
                 done(JSON.parse(data));
-                
                 break;
             case '.shp':
                 shapeToGeoJson(data,done);
