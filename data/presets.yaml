@@ -633,6 +633,9 @@ en:
       frequency:
         # frequency=*
         label: Operating Frequency
+      from:
+        # from=*
+        label: From
       fuel:
         # fuel=*
         label: Fuel
@@ -1800,6 +1803,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      to:
+        # to =*
+        label: To
       toilets/disposal:
         # 'toilets:disposal=*'
         label: Disposal

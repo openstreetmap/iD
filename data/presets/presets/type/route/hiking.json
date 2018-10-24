@@ -6,7 +6,9 @@
         "operator",
         "network_foot",
         "description",
-        "distance"
+        "distance",
+        "to", 
+        "from"
     ],
     "geometry": [
         "relation"

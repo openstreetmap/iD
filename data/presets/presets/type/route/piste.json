@@ -5,7 +5,9 @@
         "piste/type",
         "colour",
         "ref_route",
-        "operator"
+        "operator",
+        "to", 
+        "from"
     ],
     "geometry": [
         "relation"

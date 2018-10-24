@@ -6860,6 +6860,7 @@
     {"key": "flag:type", "description": "Flag Type"},
     {"key": "ford", "description": "Type"},
     {"key": "frequency", "description": "Operating Frequency"},
+    {"key": "from", "description": "From"},
     {"key": "fuel:", "description": "Fuel Types"},
     {"key": "fuel", "description": "Fuel"},
     {"key": "gauge", "description": "Gauge"},
@@ -7493,6 +7494,7 @@
     {"key": "takeaway", "value": "yes", "description": "Takeaway"},
     {"key": "takeaway", "value": "no", "description": "Takeaway"},
     {"key": "takeaway", "value": "only", "description": "Takeaway"},
+    {"key": "to ", "description": "To"},
     {"key": "toilets:disposal", "value": "flush", "description": "Disposal"},
     {
       "key": "toilets:disposal",

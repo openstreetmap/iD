@@ -2004,6 +2004,9 @@
                 "frequency": {
                     "label": "Operating Frequency"
                 },
+                "from": {
+                    "label": "From"
+                },
                 "fuel_multi": {
                     "label": "Fuel Types"
                 },
@@ -2953,6 +2956,9 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "to": {
+                    "label": "To"
                 },
                 "toilets/disposal": {
                     "label": "Disposal",
@@ -7412,6 +7418,13 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg municipality"
+                },
+                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+                "name": "Helsingborg Orthophoto"
+            },
             "hike_n_bike": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors"
@@ -7502,6 +7515,13 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
