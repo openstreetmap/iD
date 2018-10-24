@@ -529,7 +529,7 @@ en:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
       file:
-        instructions: "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json"
+        instructions: "Choose a local data file. Supported types are:\n   .gpx, .kml, .geojson, .json .shp"
         label: "Browse files"
       or: "Or"
       url:
