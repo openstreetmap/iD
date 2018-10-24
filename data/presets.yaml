@@ -1804,7 +1804,7 @@ en:
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
       to:
-        # to =*
+        # to=*
         label: To
       toilets/disposal:
         # 'toilets:disposal=*'
