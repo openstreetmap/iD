@@ -1,0 +1,13 @@
+{
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point",
+    "area"
+  ],
+  "tags": {
+    "place": "city_block"
+  },
+  "name": "City block"
+}
