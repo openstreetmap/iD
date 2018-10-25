@@ -19,6 +19,7 @@ import {
     actionDeleteMember
 } from '../actions';
 
+import { highlightEntity } from './entity_highlight';
 import { modeSelect } from '../modes';
 import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
@@ -172,6 +173,15 @@ export function uiRawMembershipEditor(context) {
             var enter = items.enter()
                 .append('li')
                 .attr('class', 'member-row member-row-normal form-field');
+
+            enter.each(function(d){
+                d3_select(this).on('mouseover', function() {
+                    highlightEntity(context, d.relation, true);
+                });
+                d3_select(this).on('mouseout', function() {
+                    highlightEntity(context, d.relation, false);
+                });
+            });
 
             var label = enter
                 .append('label')
