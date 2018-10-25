@@ -6,7 +6,9 @@
         "operator",
         "network_horse",
         "description",
-        "distance"
+        "distance",
+        "to", 
+        "from"
     ],
     "geometry": [
         "relation"
