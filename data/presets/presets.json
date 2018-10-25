@@ -668,6 +668,7 @@
     "piste/sled": {"icon": "fas-snowflake", "fields": ["name", "piste/type", "piste/difficulty", "piste/grooming", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ski", "sled", "luge", "sleigh", "sledge", "piste"], "tags": {"piste:type": "sled"}, "name": "Sled Piste"},
     "piste/sleigh": {"icon": "fas-snowflake", "fields": ["name", "piste/type", "piste/difficulty", "piste/grooming", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ski", "piste", "sled", "luge", "sleigh", "sledge", "ski-joring", "husky", "horse"], "tags": {"piste:type": "sleigh"}, "name": "Sleigh Piste"},
     "place/farm": {"icon": "maki-farm", "geometry": ["point", "area"], "fields": ["name"], "tags": {"place": "farm"}, "name": "Farm", "searchable": false},
+    "place/city_block": {"icon": "maki-triangle-stroked", "fields": ["name"], "geometry": ["point", "area"], "tags": {"place": "city_block"}, "name": "City Block"},
     "place/city": {"icon": "maki-city", "fields": ["name", "population"], "geometry": ["point", "area"], "tags": {"place": "city"}, "name": "City"},
     "place/hamlet": {"icon": "maki-triangle-stroked", "fields": ["name", "population"], "geometry": ["point", "area"], "tags": {"place": "hamlet"}, "name": "Hamlet"},
     "place/island": {"icon": "maki-mountain", "geometry": ["point", "area"], "fields": ["name"], "terms": ["archipelago", "atoll", "bar", "cay", "isle", "islet", "key", "reef"], "tags": {"place": "island"}, "name": "Island"},

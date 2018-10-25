@@ -4476,6 +4476,13 @@
     },
     {
       "key": "place",
+      "value": "city_block",
+      "description": "City Block",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/triangle-stroked-15.svg?sanitize=true"
+    },
+    {
+      "key": "place",
       "value": "city",
       "description": "City",
       "object_types": ["node", "area"],

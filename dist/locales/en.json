@@ -5830,6 +5830,10 @@
                     "name": "Farm",
                     "terms": ""
                 },
+                "place/city_block": {
+                    "name": "City Block",
+                    "terms": ""
+                },
                 "place/city": {
                     "name": "City",
                     "terms": ""

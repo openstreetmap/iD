@@ -5040,6 +5040,10 @@ en:
         # place=city
         name: City
         terms: '<translate with synonyms or related terms for ''City'', separated by commas>'
+      place/city_block:
+        # place=city_block
+        name: City Block
+        terms: '<translate with synonyms or related terms for ''City Block'', separated by commas>'
       place/farm:
         # place=farm
         name: Farm
