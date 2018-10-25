@@ -175,6 +175,7 @@ export function uiRawMembershipEditor(context) {
                 .attr('class', 'member-row member-row-normal form-field');
 
             enter.each(function(d){
+                // highlight the relation in the map while hovering on the list item
                 d3_select(this).on('mouseover', function() {
                     highlightEntity(context, d.relation, true);
                 });

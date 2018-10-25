@@ -2,8 +2,8 @@ import _forEach from 'lodash-es/forEach';
 
 export function highlightEntity(context, entity, highlighted) {
 
-    // highlight the member feature in the map while hovering on the list item
     var selectorPrefix = entity.type === 'node' ? 'g.' : 'path.';
+    // set the class for the SVG to add or remove the highlighted styling
     context.surface().selectAll(selectorPrefix+entity.id).classed('highlighted', highlighted);
     if (entity.members) {
         // recursively highlight members so that relations will appear highlighted

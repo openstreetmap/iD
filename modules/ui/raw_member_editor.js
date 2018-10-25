@@ -134,6 +134,7 @@ export function uiRawMemberEditor(context) {
                 .each(function(d) {
                     if (d.member) {
 
+                        // highlight the member feature in the map while hovering on the list item
                         d3_select(this).on('mouseover', function() {
                             highlightEntity(context, d.member, true);
                         });
