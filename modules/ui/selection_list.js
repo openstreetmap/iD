@@ -70,7 +70,7 @@ export function uiSelectionList(context, selectedIDs) {
 
             enter
                 .each(function(d) {
-
+                // highlight the feature in the map while hovering on the list item
                 d3_select(this).on('mouseover', function() {
                     highlightEntity(context, d, true);
                 });
