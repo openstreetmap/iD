@@ -318,7 +318,7 @@ export function uiHelp(context) {
 
         function clickHelp(d, i) {
             var rtl = (textDirection === 'rtl');
-            pane.property('scrollTop', 0);
+            content.property('scrollTop', 0);
             doctitle.html(d.title);
 
             body.html(d.html);
