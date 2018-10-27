@@ -7,7 +7,6 @@ import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
 
 import { t } from '../util/locale';
 import { actionChangeMember, actionDeleteMember } from '../actions';
-import { highlightEntity } from './entity_highlight';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
@@ -16,7 +15,8 @@ import { uiDisclosure } from './disclosure';
 import {
     utilDisplayName,
     utilDisplayType,
-    utilNoAuto
+    utilNoAuto,
+    utilHighlightEntity
 } from '../util';
 
 
@@ -38,7 +38,7 @@ export function uiRawMemberEditor(context) {
         context.map().zoomTo(entity);
 
         // highlight the feature in case it wasn't previously on-screen
-        highlightEntity(context, d.member, true);
+        utilHighlightEntity(d.id, true, context);
     }
 
 
@@ -136,10 +136,10 @@ export function uiRawMemberEditor(context) {
 
                         // highlight the member feature in the map while hovering on the list item
                         d3_select(this).on('mouseover', function() {
-                            highlightEntity(context, d.member, true);
+                            utilHighlightEntity(d.id, true, context);
                         });
                         d3_select(this).on('mouseout', function() {
-                            highlightEntity(context, d.member, false);
+                            utilHighlightEntity(d.id, false, context);
                         });
 
                         var label = d3_select(this).append('label')

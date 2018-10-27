@@ -19,13 +19,12 @@ import {
     actionDeleteMember
 } from '../actions';
 
-import { highlightEntity } from './entity_highlight';
 import { modeSelect } from '../modes';
 import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilNoAuto } from '../util';
+import { utilDisplayName, utilNoAuto, utilHighlightEntity } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
@@ -177,10 +176,10 @@ export function uiRawMembershipEditor(context) {
             enter.each(function(d){
                 // highlight the relation in the map while hovering on the list item
                 d3_select(this).on('mouseover', function() {
-                    highlightEntity(context, d.relation, true);
+                    utilHighlightEntity(d.relation.id, true, context);
                 });
                 d3_select(this).on('mouseout', function() {
-                    highlightEntity(context, d.relation, false);
+                    utilHighlightEntity(d.relation.id, false, context);
                 });
             });
 
