@@ -7,7 +7,7 @@ import { t } from '../util/locale';
 import { modeSelect } from '../modes';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
-import { utilDisplayName } from '../util';
+import { utilDisplayName, utilHighlightEntity } from '../util';
 
 
 export function uiSelectionList(context, selectedIDs) {
@@ -70,12 +70,11 @@ export function uiSelectionList(context, selectedIDs) {
             enter
                 .each(function(d) {
                 // highlight the feature in the map while hovering on the list item
-                var selectorPrefix = d.type === 'node' ? 'g.' : 'path.';
                 d3_select(this).on('mouseover', function() {
-                    context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', true);
+                    utilHighlightEntity(d.id, true, context);
                 });
                 d3_select(this).on('mouseout', function() {
-                    context.surface().selectAll(selectorPrefix+d.id).classed('highlighted', false);
+                    utilHighlightEntity(d.id, false, context);
                 });
             });
 

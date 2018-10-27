@@ -24,7 +24,7 @@ import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilNoAuto } from '../util';
+import { utilDisplayName, utilNoAuto, utilHighlightEntity } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
@@ -172,6 +172,16 @@ export function uiRawMembershipEditor(context) {
             var enter = items.enter()
                 .append('li')
                 .attr('class', 'member-row member-row-normal form-field');
+
+            enter.each(function(d){
+                // highlight the relation in the map while hovering on the list item
+                d3_select(this).on('mouseover', function() {
+                    utilHighlightEntity(d.relation.id, true, context);
+                });
+                d3_select(this).on('mouseout', function() {
+                    utilHighlightEntity(d.relation.id, false, context);
+                });
+            });
 
             var label = enter
                 .append('label')
