@@ -163,11 +163,13 @@ path.casing.tag-highway-bridleway.tag-bridge {
 
 /* tunnels */
 path.stroke.tag-tunnel,
-path.line.stroke.tag-location-underground {
+path.line.stroke.tag-location-underground,
+path.line.stroke.tag-location-underwater {
     stroke-opacity: 0.3;
 }
 path.casing.tag-tunnel,
-path.line.casing.tag-location-underground {
+path.line.casing.tag-location-underground,
+path.line.stroke.tag-location-underwater {
     stroke-opacity: 0.5;
     stroke-linecap: butt;
     stroke-dasharray: none;
