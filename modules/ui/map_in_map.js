@@ -253,12 +253,12 @@ export function uiMapInMap(context) {
             viewport = viewport.enter()
                 .append('svg')
                 .attr('class', 'map-in-map-viewport')
-                .each(function(d) {
+                .each(function() {
                     d3_select(this).append('g')
-                        .attr('id', 'map-in-map-features')
+                        .attr('id', 'map-in-map-features');
 
                     d3_select(this).append('g')
-                        .attr('id', 'map-in-map-bbox')
+                        .attr('id', 'map-in-map-bbox');
                 })
                 .merge(viewport);
 
@@ -266,33 +266,33 @@ export function uiMapInMap(context) {
 
             var selected = getSelectedElements();
 
-            var geojson = { "name": "Minimap Features",
-                            "type": "FeatureCollection",
-                            "features": []
+            var geojson = { 'name':'Minimap Features',
+                            'type': 'FeatureCollection',
+                            'features': []
                         };
 
             selected.forEach(function(obj) {
                 var classList = obj.classList.value;
-                var feature = { "type": "Feature",
-                                "geometry": {
-                                    "type": "",
-                                    "coordinates": []
+                var feature = { 'type': 'Feature',
+                                'geometry': {
+                                    'type': '',
+                                    'coordinates': []
                                 },
-                                "properties": {
-                                    "id": obj.__data__.id,
-                                    "classList": classList
+                                'properties': {
+                                    'id': obj.__data__.id,
+                                    'classList': classList
                                 }
                             };
                 var nodes = [];
 
-                if (classList.includes("area")) {
+                if (classList.includes('area')) {
                     feature.geometry.type = 'Polygon';
                     nodes = obj.__data__.nodes;
                     feature.geometry.coordinates.push([]);
                     nodes.forEach(function(n) {
                         feature.geometry.coordinates[0].push(context.graph().hasEntity(n).loc);
                     });
-                } else if (classList.includes("line")) {
+                } else if (classList.includes('line')) {
                     feature.geometry.type = 'LineString';
                     nodes = obj.__data__.nodes;
                     nodes.forEach(function(n) {
@@ -301,12 +301,12 @@ export function uiMapInMap(context) {
                 } else if (/point|vertex/.test(classList)) {
                     if (!obj.__data__.loc) return;
                     feature.geometry.type = 'Point';
-                    feature.geometry.coordinates = obj.__data__.loc
+                    feature.geometry.coordinates = obj.__data__.loc;
                 } else {
                     return;
                 }
 
-                geojson["features"].push(feature);
+                geojson.features.push(feature);
             });
 
             var path = viewport.select('#map-in-map-features').selectAll('.map-in-map-selection')
@@ -319,13 +319,13 @@ export function uiMapInMap(context) {
                 .append('path')
                 .merge(path)
                 .attr('d', getPath)
-                .attr("class", function(d) {
+                .attr('class', function(d) {
                     return d.properties.classList;
                 })
                 .classed('map-in-map-selection', true)
-                .style("fill", function(d) {
-                    return (d.geometry.type === "Point" || d.properties.classList.includes("fill")) ? "#f00" : "none";
-                })
+                .style('fill', function(d) {
+                    return (d.geometry.type === 'Point' || d.properties.classList.includes('fill')) ? '#f00' : 'none';
+                });
 
             path
                 .exit()
@@ -335,7 +335,7 @@ export function uiMapInMap(context) {
             if (gesture !== 'pan') {
                 var bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
-                var path = viewport.select('#map-in-map-bbox').selectAll('.map-in-map-bbox')
+                path = viewport.select('#map-in-map-bbox').selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
                 path.enter()
@@ -390,17 +390,17 @@ export function uiMapInMap(context) {
 
         function getSelectedElements() {
             var query_selector = utilEntityOrMemberSelector(context.selectedIDs(), context.graph())
-                                    .split(",")
+                                    .split(',')
                                     .map(function(s) {
                                         return '#map ' + s;
                                     })
                                     .join(', ');
 
-            selected = Array.from(d3_selectAll(query_selector)._groups[0]);
+            var selected = Array.from(d3_selectAll(query_selector)._groups[0]);
 
             for (var i = 0; i < selected.length; i++) {
-                if (selected[i].__data__["members"]) {
-                    selected.concat(selected[i].__data__["members"]);
+                if (selected[i].__data__.members) {
+                    selected.concat(selected[i].__data__.members);
                     selected[i] = null;
                 }
             }
