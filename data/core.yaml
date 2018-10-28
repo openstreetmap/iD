@@ -1,8 +1,10 @@
 en:
   icons:
+    download: download
     information: info
     remove: remove
     undo: undo
+    zoom_to: zoom to
   modes:
     add_area:
       title: Area

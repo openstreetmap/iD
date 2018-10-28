@@ -7,7 +7,9 @@
         "name",
         "operator",
         "duration",
-        "access"
+        "access", 
+        "to", 
+        "from"
     ],
     "tags": {
         "route": "ferry"

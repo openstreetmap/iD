@@ -4,7 +4,9 @@
         "name",
         "ref_route",
         "operator",
-        "network_foot"
+        "network_foot",
+        "to", 
+        "from"
     ],
     "geometry": [
         "relation"

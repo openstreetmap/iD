@@ -3,6 +3,7 @@ import { actionAddEntity } from '../actions';
 import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
+import { actionAddMidpoint } from '../actions';
 
 
 export function modeAddPoint(context) {
@@ -37,8 +38,17 @@ export function modeAddPoint(context) {
     }
 
 
-    function addWay(loc) {
-        add(loc);
+    function addWay(loc, edge) {
+        var node =  osmNode();
+
+        context.perform(
+            actionAddMidpoint({loc: loc, edge: edge}, node),
+            t('operations.add.annotation.vertex')
+        );
+
+        context.enter(
+            modeSelect(context, [node.id]).newFeature(true)
+        );
     }
 
 

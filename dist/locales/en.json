@@ -1,9 +1,11 @@
 {
     "en": {
         "icons": {
+            "download": "download",
             "information": "info",
             "remove": "remove",
-            "undo": "undo"
+            "undo": "undo",
+            "zoom_to": "zoom to"
         },
         "modes": {
             "add_area": {
@@ -1455,6 +1457,9 @@
                 "category-route": {
                     "name": "Route Features"
                 },
+                "category-utility": {
+                    "name": "Utility Features"
+                },
                 "category-water-area": {
                     "name": "Water Features"
                 },
@@ -1731,7 +1736,7 @@
                     "label": "Collection Times"
                 },
                 "colour": {
-                    "label": "Colour"
+                    "label": "Color"
                 },
                 "comment": {
                     "label": "Changeset Comment",
@@ -1998,6 +2003,9 @@
                 },
                 "frequency": {
                     "label": "Operating Frequency"
+                },
+                "from": {
+                    "label": "From"
                 },
                 "fuel_multi": {
                     "label": "Fuel Types"
@@ -2516,23 +2524,6 @@
                         "skating": "Skating"
                     }
                 },
-                "piste/type_downhill": {
-                    "label": "Type",
-                    "options": {
-                        "downhill": "Downhill",
-                        "snow_park": "Snow Park",
-                        "playground": "Playground",
-                        "connection": "Connection between pistes"
-                    }
-                },
-                "piste/type_nordic": {
-                    "label": "Type",
-                    "options": {
-                        "downhill": "Nordic",
-                        "playground": "Playground",
-                        "connection": "Connection between pistes"
-                    }
-                },
                 "piste/type": {
                     "label": "Type",
                     "options": {
@@ -2698,7 +2689,7 @@
                     }
                 },
                 "seamark/beacon_lateral/colour": {
-                    "label": "Colour",
+                    "label": "Color",
                     "options": {
                         "red": "Red",
                         "green": "Green",
@@ -2733,7 +2724,7 @@
                     }
                 },
                 "seamark/buoy_lateral/colour": {
-                    "label": "Colour",
+                    "label": "Color",
                     "options": {
                         "red": "Red",
                         "green": "Green",
@@ -2768,6 +2759,10 @@
                 },
                 "seasonal": {
                     "label": "Seasonal"
+                },
+                "seats": {
+                    "label": "Seats",
+                    "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
                     "label": "Sells Used",
@@ -2961,6 +2956,9 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "to": {
+                    "label": "To"
                 },
                 "toilets/disposal": {
                     "label": "Disposal",
@@ -3577,12 +3575,12 @@
                     "terms": ""
                 },
                 "amenity/parking": {
-                    "name": "Car Parking",
-                    "terms": ""
+                    "name": "Parking Lot",
+                    "terms": "car,parking lot"
                 },
                 "amenity/parking/multi-storey": {
-                    "name": "Multilevel Car Parking",
-                    "terms": "multistorey car park,parking garage,parkade,parking structure,parking ramp,parking deck,parking building,indoor parking"
+                    "name": "Multilevel Parking Garage",
+                    "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy",
@@ -3985,11 +3983,11 @@
                     "terms": ""
                 },
                 "barrier/kerb": {
-                    "name": "Kerb",
+                    "name": "Curb",
                     "terms": ""
                 },
                 "barrier/kerb/lowered": {
-                    "name": "Lowered Kerb",
+                    "name": "Lowered Curb",
                     "terms": "curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp"
                 },
                 "barrier/kissing_gate": {
@@ -5450,7 +5448,7 @@
                 },
                 "man_made/pipeline": {
                     "name": "Pipeline",
-                    "terms": ""
+                    "terms": "oil,natural gas,water,sewer,sewage"
                 },
                 "man_made/pumping_station": {
                     "name": "Pumping Station",
@@ -5836,6 +5834,10 @@
                     "name": "Farm",
                     "terms": ""
                 },
+                "place/city_block": {
+                    "name": "City Block",
+                    "terms": ""
+                },
                 "place/city": {
                     "name": "City",
                     "terms": ""
@@ -5952,15 +5954,23 @@
                     "name": "Substation",
                     "terms": ""
                 },
+                "power/cable/underground": {
+                    "name": "Underground Power Cable",
+                    "terms": ""
+                },
                 "power/generator": {
                     "name": "Power Generator",
                     "terms": "hydro,solar,turbine,wind"
                 },
-                "power/generator/source_nuclear": {
+                "power/generator/method/photovoltaic": {
+                    "name": "Solar Panel",
+                    "terms": "photovoltaic module,PV module,sunlight"
+                },
+                "power/generator/source/nuclear": {
                     "name": "Nuclear Reactor",
                     "terms": "fission,generator,nuclear,nuke,reactor"
                 },
-                "power/generator/source_wind": {
+                "power/generator/source/wind": {
                     "name": "Wind Turbine",
                     "terms": "generator,turbine,windmill,wind"
                 },

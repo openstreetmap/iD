@@ -140,7 +140,7 @@ describe('iD.serviceOsm', function () {
         var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
         var response = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm version="0.6">' +
-                '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
+                '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541"/>' +
                 '  <node id="105340439" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6555" lon="-74.5415"/>' +
                 '  <node id="105340442" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6556" lon="-74.5416"/>' +
                 '  <way id="40376199" visible="true" version="1" changeset="2403012" timestamp="2009-09-07T16:01:13Z" user="NJDataUploads" uid="148169">' +

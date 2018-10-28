@@ -210,6 +210,21 @@ the user can not type their own value, they must choose one of the given values.
 If a combo field does not specify `options` or `strings`, the field will fetch
 common tag values from the Taginfo service to use as dropdown values.
 
+##### `snake_case`
+
+For combo fields, spaces are replaced with underscores in the tag value if `snake_case` is `true`. The default is `true`.
+
+##### `caseSensitive`
+
+For combo fields, case-sensitve field values are allowed if `caseSensitive` is `true`. The default is `false`.
+
+##### `min_value`
+
+For number fields, the lowest valid value. There is no default.
+
+##### `max_value`
+
+For number fields, the greatest valid value. There is no default.
 
 ## Icons
 

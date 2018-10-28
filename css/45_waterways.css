@@ -4,7 +4,6 @@
     fill: #77d3de;
 }
 .preset-icon .icon.iD-category-water,
-.preset-icon .icon.tag-route-ferry,
 .preset-icon .icon.tag-type-waterway,
 .preset-icon .icon.tag-waterway {
     color: #77d3de;
@@ -95,3 +94,26 @@ path.area.fill.tag-waterway-fuel {
     fill: rgba(255, 255, 255, 0.3);
 }
 
+/* ferry routes  */
+.preset-icon .icon.tag-route-ferry {
+    color: #58a9ed;
+    fill: #fff;
+}
+path.shadow.tag-route-ferry {
+    stroke-width: 16;
+}
+path.stroke.tag-route-ferry {
+    stroke-width: 3;
+    stroke-linecap: butt;
+    stroke-dasharray: 12,8;
+}
+.low-zoom path.shadow.tag-route-ferry {
+    stroke-width: 12;
+}
+.low-zoom path.stroke.tag-route-ferry {
+    stroke-width: 2;
+    stroke-dasharray: 6,4;
+}
+path.stroke.tag-route-ferry {
+    stroke: #58a9ed;
+}

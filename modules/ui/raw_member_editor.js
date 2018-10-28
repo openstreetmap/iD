@@ -15,7 +15,8 @@ import { uiDisclosure } from './disclosure';
 import {
     utilDisplayName,
     utilDisplayType,
-    utilNoAuto
+    utilNoAuto,
+    utilHighlightEntity
 } from '../util';
 
 
@@ -23,9 +24,34 @@ export function uiRawMemberEditor(context) {
     var taginfo = services.taginfo,
         _entityID;
 
+    function downloadMember(d) {
+        d3_event.preventDefault();
+        // display the loading indicator
+        d3_select(this.parentNode).classed('tag-reference-loading', true);
+        context.loadEntity(d.id);
+    }
+
+    function zoomToMember(d) {
+        d3_event.preventDefault();
+
+        var entity = context.entity(d.id);
+        context.map().zoomTo(entity);
+
+        // highlight the feature in case it wasn't previously on-screen
+        utilHighlightEntity(d.id, true, context);
+    }
+
 
     function selectMember(d) {
         d3_event.preventDefault();
+
+        var entity = context.entity(d.id);
+        var mapExtent = context.map().extent();
+        if (!entity.intersects(mapExtent, context.graph())) {
+            // zoom to the entity if its extent is not visible now
+            context.map().zoomTo(entity);
+        }
+
         context.enter(modeSelect(context, [d.id]));
     }
 
@@ -107,27 +133,64 @@ export function uiRawMemberEditor(context) {
             enter
                 .each(function(d) {
                     if (d.member) {
+
+                        // highlight the member feature in the map while hovering on the list item
+                        d3_select(this).on('mouseover', function() {
+                            utilHighlightEntity(d.id, true, context);
+                        });
+                        d3_select(this).on('mouseout', function() {
+                            utilHighlightEntity(d.id, false, context);
+                        });
+
                         var label = d3_select(this).append('label')
-                            .attr('class', 'form-label')
-                            .append('a')
+                            .attr('class', 'form-label');
+
+                        var labelLink = label.append('a')
                             .attr('href', '#')
                             .on('click', selectMember);
 
-                        label.append('span')
+                        labelLink.append('span')
                             .attr('class', 'member-entity-type')
                             .text(function(d) {
                                 var matched = context.presets().match(d.member, context.graph());
                                 return (matched && matched.name()) || utilDisplayType(d.member.id);
                             });
 
-                        label.append('span')
+                        labelLink.append('span')
                             .attr('class', 'member-entity-name')
                             .text(function(d) { return utilDisplayName(d.member); });
 
+                        var buttonWrap = label.append('div')
+                            .attr('class', 'form-label-button-wrap');
+
+                        buttonWrap.append('button')
+                            .attr('class', 'download-icon')
+                            .attr('title', t('icons.zoom_to'))
+                            .attr('tabindex', -1)
+                            .call(svgIcon('#iD-icon-geolocate'))
+                            .on('click', zoomToMember);
+
                     } else {
-                        d3_select(this).append('label')
-                            .attr('class', 'form-label')
+                        var incompleteLabel = d3_select(this).append('label')
+                            .attr('class', 'form-label');
+
+                        incompleteLabel.append('span')
+                            .attr('class', 'member-entity-type')
+                            .text(t('inspector.'+d.type, { id: d.id }));
+
+                        incompleteLabel.append('span')
+                            .attr('class', 'member-entity-name')
                             .text(t('inspector.incomplete', { id: d.id }));
+
+                        var wrap = incompleteLabel.append('div')
+                            .attr('class', 'form-label-button-wrap');
+
+                        wrap.append('button')
+                            .attr('class', 'download-icon')
+                            .attr('title', t('icons.download'))
+                            .attr('tabindex', -1)
+                            .call(svgIcon('#iD-icon-load'))
+                            .on('click', downloadMember);
                     }
                 });
 
@@ -144,6 +207,7 @@ export function uiRawMemberEditor(context) {
             enter
                 .append('button')
                 .attr('tabindex', -1)
+                .attr('title', t('icons.remove'))
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMember)
                 .call(svgIcon('#iD-operation-delete'));

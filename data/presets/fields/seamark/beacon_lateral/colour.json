@@ -1,7 +1,7 @@
 {
     "key": "seamark:beacon_lateral:colour",
     "type": "combo",
-    "label": "Colour",
+    "label": "Color",
     "strings": {
         "options": {
             "red": "Red",

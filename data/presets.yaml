@@ -25,6 +25,8 @@ en:
         name: Road Features
       category-route:
         name: Route Features
+      category-utility:
+        name: Utility Features
       category-water-area:
         name: Water Features
       category-water-line:
@@ -323,7 +325,7 @@ en:
         label: Collection Times
       colour:
         # colour=*
-        label: Colour
+        label: Color
       comment:
         # comment=*
         label: Changeset Comment
@@ -631,6 +633,9 @@ en:
       frequency:
         # frequency=*
         label: Operating Frequency
+      from:
+        # from=*
+        label: From
       fuel:
         # fuel=*
         label: Fuel
@@ -1299,28 +1304,6 @@ en:
           sleigh: Sleigh
           # 'piste:type=snow_park'
           snow_park: Snow Park
-      piste/type_downhill:
-        # 'piste:type=*'
-        label: Type
-        options:
-          # 'piste:type=connection'
-          connection: Connection between pistes
-          # 'piste:type=downhill'
-          downhill: Downhill
-          # 'piste:type=playground'
-          playground: Playground
-          # 'piste:type=snow_park'
-          snow_park: Snow Park
-      piste/type_nordic:
-        # 'piste:type=*'
-        label: Type
-        options:
-          # 'piste:type=connection'
-          connection: Connection between pistes
-          # 'piste:type=downhill'
-          downhill: Nordic
-          # 'piste:type=playground'
-          playground: Playground
       place:
         # place=*
         label: Type
@@ -1491,7 +1474,7 @@ en:
           waterway_right: Waterway Right
       seamark/beacon_lateral/colour:
         # 'seamark:beacon_lateral:colour=*'
-        label: Colour
+        label: Color
         options:
           # 'seamark:beacon_lateral:colour=green'
           green: Green
@@ -1540,7 +1523,7 @@ en:
           waterway_right: Waterway Right
       seamark/buoy_lateral/colour:
         # 'seamark:buoy_lateral:colour=*'
-        label: Colour
+        label: Color
         options:
           # 'seamark:buoy_lateral:colour=green'
           green: Green
@@ -1585,6 +1568,11 @@ en:
       seasonal:
         # seasonal=*
         label: Seasonal
+      seats:
+        # seats=*
+        label: Seats
+        # seats field placeholder
+        placeholder: '2, 4, 6...'
       second_hand:
         # second_hand=*
         label: Sells Used
@@ -1815,6 +1803,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      to:
+        # to=*
+        label: To
       toilets/disposal:
         # 'toilets:disposal=*'
         label: Disposal
@@ -2462,13 +2453,14 @@ en:
         name: Nursing Home
       amenity/parking:
         # amenity=parking
-        name: Car Parking
-        terms: '<translate with synonyms or related terms for ''Car Parking'', separated by commas>'
+        name: Parking Lot
+        # 'terms: car,parking lot'
+        terms: '<translate with synonyms or related terms for ''Parking Lot'', separated by commas>'
       amenity/parking/multi-storey:
         # 'amenity=parking, parking=multi-storey'
-        name: Multilevel Car Parking
-        # 'terms: multistorey car park,parking garage,parkade,parking structure,parking ramp,parking deck,parking building,indoor parking'
-        terms: '<translate with synonyms or related terms for ''Multilevel Car Parking'', separated by commas>'
+        name: Multilevel Parking Garage
+        # 'terms: car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure'
+        terms: '<translate with synonyms or related terms for ''Multilevel Parking Garage'', separated by commas>'
       amenity/parking_entrance:
         # amenity=parking_entrance
         name: Parking Garage Entrance/Exit
@@ -2966,13 +2958,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Hedge'', separated by commas>'
       barrier/kerb:
         # barrier=kerb
-        name: Kerb
-        terms: '<translate with synonyms or related terms for ''Kerb'', separated by commas>'
+        name: Curb
+        terms: '<translate with synonyms or related terms for ''Curb'', separated by commas>'
       barrier/kerb/lowered:
         # 'barrier=kerb, kerb=lowered'
-        name: Lowered Kerb
+        name: Lowered Curb
         # 'terms: curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp'
-        terms: '<translate with synonyms or related terms for ''Lowered Kerb'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Lowered Curb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate
@@ -4608,6 +4600,7 @@ en:
       man_made/pipeline:
         # man_made=pipeline
         name: Pipeline
+        # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline'', separated by commas>'
       man_made/pumping_station:
         # man_made=pumping_station
@@ -5052,6 +5045,10 @@ en:
         # place=city
         name: City
         terms: '<translate with synonyms or related terms for ''City'', separated by commas>'
+      place/city_block:
+        # place=city_block
+        name: City Block
+        terms: '<translate with synonyms or related terms for ''City Block'', separated by commas>'
       place/farm:
         # place=farm
         name: Farm
@@ -5175,17 +5172,26 @@ en:
       power:
         # power=*
         name: Power
+      power/cable/underground:
+        # 'power=cable, location=underground'
+        name: Underground Power Cable
+        terms: '<translate with synonyms or related terms for ''Underground Power Cable'', separated by commas>'
       power/generator:
         # power=generator
         name: Power Generator
         # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
-      power/generator/source_nuclear:
+      power/generator/method/photovoltaic:
+        # 'power=generator, generator:source=solar, generator:method=photovoltaic, generator:type=solar_photovoltaic_panel'
+        name: Solar Panel
+        # 'terms: photovoltaic module,PV module,sunlight'
+        terms: '<translate with synonyms or related terms for ''Solar Panel'', separated by commas>'
+      power/generator/source/nuclear:
         # 'power=generator, generator:source=nuclear, generator:method=fission'
         name: Nuclear Reactor
         # 'terms: fission,generator,nuclear,nuke,reactor'
         terms: '<translate with synonyms or related terms for ''Nuclear Reactor'', separated by commas>'
-      power/generator/source_wind:
+      power/generator/source/wind:
         # 'power=generator, generator:source=wind, generator:method=wind_turbine'
         name: Wind Turbine
         # 'terms: generator,turbine,windmill,wind'

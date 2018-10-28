@@ -703,16 +703,16 @@
     {
       "key": "amenity",
       "value": "parking",
-      "description": "Car Parking",
+      "description": "Parking Lot",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
     },
     {
       "key": "parking",
       "value": "multi-storey",
-      "description": "Multilevel Car Parking, Type",
+      "description": "Multilevel Parking Garage, Type",
       "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/parking-garage-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -1404,14 +1404,14 @@
     {
       "key": "barrier",
       "value": "kerb",
-      "description": "Kerb",
+      "description": "Curb",
       "object_types": ["node", "way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
     },
     {
       "key": "kerb",
       "value": "lowered",
-      "description": "Lowered Kerb",
+      "description": "Lowered Curb",
       "object_types": ["node", "way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
     },
@@ -4482,6 +4482,13 @@
     },
     {
       "key": "place",
+      "value": "city_block",
+      "description": "City Block",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/triangle-stroked-15.svg?sanitize=true"
+    },
+    {
+      "key": "place",
       "value": "city",
       "description": "City",
       "object_types": ["node", "area"],
@@ -4676,11 +4683,24 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"
     },
     {
+      "key": "location",
+      "value": "underground",
+      "description": "Underground Power Cable",
+      "object_types": ["way"]
+    },
+    {
       "key": "power",
       "value": "generator",
       "description": "Power Generator",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/power.svg?sanitize=true"
+    },
+    {
+      "key": "generator:type",
+      "value": "solar_photovoltaic_panel",
+      "description": "Solar Panel",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-solar-panel.svg?sanitize=true"
     },
     {
       "key": "generator:method",
@@ -5030,13 +5050,13 @@
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green",
-      "description": "Green Buoy, Colour",
+      "description": "Green Buoy, Color",
       "object_types": ["node"]
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red",
-      "description": "Red Buoy, Colour",
+      "description": "Red Buoy, Color",
       "object_types": ["node"]
     },
     {
@@ -6695,7 +6715,7 @@
     {"key": "castle_type", "description": "Type"},
     {"key": "clothes", "description": "Clothes"},
     {"key": "collection_times", "description": "Collection Times"},
-    {"key": "colour", "description": "Colour"},
+    {"key": "colour", "description": "Color"},
     {"key": "comment", "description": "Changeset Comment"},
     {"key": "communication:", "description": "Communication Types"},
     {"key": "construction", "description": "Type"},
@@ -6853,6 +6873,7 @@
     {"key": "flag:type", "description": "Flag Type"},
     {"key": "ford", "description": "Type"},
     {"key": "frequency", "description": "Operating Frequency"},
+    {"key": "from", "description": "From"},
     {"key": "fuel:", "description": "Fuel Types"},
     {"key": "fuel", "description": "Fuel"},
     {"key": "gauge", "description": "Gauge"},
@@ -7250,17 +7271,17 @@
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "red",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "green",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:beacon_lateral:colour",
       "value": "grey",
-      "description": "Colour"
+      "description": "Color"
     },
     {"key": "seamark:beacon_lateral:shape", "description": "Shape"},
     {
@@ -7336,32 +7357,32 @@
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red;white;red;white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green;white;green;white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "red;green;red",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "green;red;green",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "white",
-      "description": "Colour"
+      "description": "Color"
     },
     {
       "key": "seamark:buoy_lateral:colour",
       "value": "yellow",
-      "description": "Colour"
+      "description": "Color"
     },
     {"key": "seamark:buoy_lateral:shape", "description": "Shape"},
     {
@@ -7387,6 +7408,7 @@
     {"key": "seamark:mooring:category", "description": "Category"},
     {"key": "seamark:wreck:category", "description": "Category"},
     {"key": "seasonal", "description": "Seasonal"},
+    {"key": "seats", "description": "Seats"},
     {"key": "second_hand", "value": "yes", "description": "Sells Used"},
     {"key": "second_hand", "value": "no", "description": "Sells Used"},
     {"key": "second_hand", "value": "only", "description": "Sells Used"},
@@ -7485,6 +7507,7 @@
     {"key": "takeaway", "value": "yes", "description": "Takeaway"},
     {"key": "takeaway", "value": "no", "description": "Takeaway"},
     {"key": "takeaway", "value": "only", "description": "Takeaway"},
+    {"key": "to", "description": "To"},
     {"key": "toilets:disposal", "value": "flush", "description": "Disposal"},
     {
       "key": "toilets:disposal",
