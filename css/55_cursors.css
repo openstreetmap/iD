@@ -6,6 +6,7 @@
 }
 
 .map-in-map,
+.map-in-map #map-in-map-features .map-in-map-selection, /* extra specific to over-ride later assignments */
 #map {
     cursor: auto; /* Opera */
     cursor: url(img/cursor-grab.png) 9 9, auto; /* FF */

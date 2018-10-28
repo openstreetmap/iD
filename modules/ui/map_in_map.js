@@ -2,7 +2,8 @@ import { geoPath as d3_geoPath } from 'd3-geo';
 
 import {
     event as d3_event,
-    select as d3_select
+    select as d3_select,
+    selectAll as d3_selectAll
 } from 'd3-selection';
 
 import {
@@ -25,6 +26,7 @@ import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
 import { utilGetDimensions } from '../util/dimensions';
+import { utilEntityOrMemberSelector } from '../util';
 
 
 export function uiMapInMap(context) {
@@ -245,22 +247,94 @@ export function uiMapInMap(context) {
                 .call(dataLayer)
                 .call(debugLayer);
 
-
-            // redraw viewport bounding box
-            if (gesture !== 'pan') {
-                var getPath = d3_geoPath(projection);
-                var bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
-
-                viewport = wrap.selectAll('.map-in-map-viewport')
+            viewport = wrap.selectAll('.map-in-map-viewport')
                     .data([0]);
 
-                viewport = viewport.enter()
-                    .append('svg')
-                    .attr('class', 'map-in-map-viewport')
-                    .merge(viewport);
+            viewport = viewport.enter()
+                .append('svg')
+                .attr('class', 'map-in-map-viewport')
+                .each(function(d) {
+                    d3_select(this).append('g')
+                        .attr('id', 'map-in-map-features')
 
+                    d3_select(this).append('g')
+                        .attr('id', 'map-in-map-bbox')
+                })
+                .merge(viewport);
 
-                var path = viewport.selectAll('.map-in-map-bbox')
+            var getPath = d3_geoPath(projection);
+
+            var selected = getSelectedElements();
+
+            var geojson = { "name": "feature",
+                            "type": "FeatureCollection",
+                            "features": []
+                        };
+
+            selected.forEach(function(obj) {
+                var feature = { "type": "Feature",
+                                "geometry": {
+                                    "type": "",
+                                    "coordinates": []
+                                },
+                                "properties": {
+                                    "id": obj.__data__.id,
+                                    "classList": obj.classList.value
+                                }
+                            };
+                var nodes = [];
+
+                if (obj.classList.value.includes("area")) {
+                    feature.geometry.type = 'Polygon';
+                    nodes = obj.__data__.nodes;
+                    feature.geometry.coordinates.push([]);
+                    nodes.forEach(function(n) {
+                        feature.geometry.coordinates[0].push(context.graph().hasEntity(n).loc);
+                    });
+                } else if (obj.classList.value.includes("line")) {
+                    feature.geometry.type = 'LineString';
+                    nodes = obj.__data__.nodes;
+                    nodes.forEach(function(n) {
+                        feature.geometry.coordinates.push(context.graph().hasEntity(n).loc);
+                    });
+                } else if (obj.classList.value.includes("point") || obj.classList.value.includes("vertex")) {
+                    if (!obj.__data__.loc) return;
+                    feature.geometry.type = 'Point';
+                    feature.geometry.coordinates = obj.__data__.loc
+                } else {
+                    return;
+                }
+
+                geojson["features"].push(feature);
+            });
+
+            var path = viewport.select('#map-in-map-features').selectAll('.map-in-map-selection')
+                .data(geojson.features);
+
+            path
+                .attr('d', getPath);
+
+            path.enter()
+                .append('path')
+                .merge(path)
+                .attr('d', getPath)
+                .attr("class", function(d, i) {
+                    return d.properties.classList;
+                })
+                .classed('map-in-map-selection', true)
+                .style("fill", function(d, i) {
+                    return (d.geometry.type === "Point" || d.properties.classList.includes("fill")) ? "#f00" : "none";
+                })
+
+            path
+                .exit()
+                .remove();
+            
+            // redraw viewport bounding box
+            if (gesture !== 'pan') {
+                var bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
+
+                var path = viewport.select('#map-in-map-bbox').selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
                 path.enter()
@@ -311,6 +385,24 @@ export function uiMapInMap(context) {
                         redraw();
                     });
             }
+        }
+
+        function getSelectedElements() {
+            var query_selector = utilEntityOrMemberSelector(context.selectedIDs(), context.graph())
+                                    .split(",")
+                                    .map(s => '#map ' + s)
+                                    .join(', ');
+
+            selected = Array.from(d3_selectAll(query_selector)._groups[0]);
+
+            for (var i = 0; i < selected.length; i++) {
+                if (selected[i].__data__["members"]) {
+                    selected.concat(selected[i].__data__["members"]);
+                    selected[i] = null;
+                }
+            }
+
+            return selected.filter(s => s !== null);
         }
 
 
