@@ -2,7 +2,6 @@ import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
@@ -11,10 +10,8 @@ import { tooltip } from '../util/tooltip';
 
 import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes';
-import { services } from '../services';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind } from '../util';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -31,6 +28,7 @@ import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiModes } from './modes';
 import { uiNotice } from './notice';
+import { uiPhotoviewer } from './photoviewer';
 import { uiRestore } from './restore';
 import { uiSave } from './save';
 import { uiScale } from './scale';
@@ -47,8 +45,6 @@ import { uiCmd } from './cmd';
 
 export function uiInit(context) {
     var uiInitCounter = 0;
-    var dispatch = d3_dispatch('photoviewerResize');
-
 
     function render(container) {
         container
@@ -71,7 +67,6 @@ export function uiInit(context) {
         container
             .append('div')
             .attr('id', 'sidebar')
-            .attr('class', 'col4')
             .call(ui.sidebar);
 
         var content = container
@@ -95,38 +90,55 @@ export function uiInit(context) {
             .call(uiInfo(context))
             .call(uiNotice(context));
 
+        var leadingArea = bar
+            .append('div')
+            .attr('class', 'leading-area');
+
+        var sidebarButton = leadingArea
+            .append('div')
+            .attr('class', 'button-wrap sidebar-collapse')
+            .append('button')
+            .attr('class', 'col12')
+            .attr('tabindex', -1)
+            .on('click', ui.sidebar.toggleCollapse)
+            .call(tooltip().title(t('sidebar_button.tooltip')).placement('bottom'));
+        var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
+        sidebarButton
+            .call(svgIcon('#iD-icon-sidebar-'+iconSuffix, 'pre-text'))
+            .append('span')
+            .attr('class', 'label')
+            .text(t('sidebar_button.title'));
+
         bar
             .append('div')
-            .attr('class', 'spacer col4');
-
-        var limiter = bar.append('div')
-            .attr('class', 'limiter');
-
-        limiter
+            .attr('class', 'center-area')
             .append('div')
-            .attr('class', 'button-wrap joined col3')
-            .call(uiModes(context), limiter);
+            .attr('class', 'modes button-wrap joined')
+            .call(uiModes(context), bar);
 
-        limiter
+        var trailingArea = bar
             .append('div')
-            .attr('class', 'button-wrap joined col1')
-            .call(uiUndoRedo(context));
+            .attr('class', 'trailing-area');
 
-        limiter
-            .append('div')
-            .attr('class', 'button-wrap col1')
-            .call(uiSave(context));
-
-        bar
+        trailingArea
             .append('div')
             .attr('class', 'full-screen')
             .call(uiFullScreen(context));
 
-        bar
+        trailingArea
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
+        trailingArea
+            .append('div')
+            .attr('class', 'button-wrap joined')
+            .call(uiUndoRedo(context));
+
+        trailingArea
+            .append('div')
+            .attr('class', 'button-wrap save-wrap')
+            .call(uiSave(context));
 
         var controls = bar
             .append('div')
@@ -242,46 +254,12 @@ export function uiInit(context) {
             .call(uiContributors(context));
 
 
-        var photoviewer = content
+        content
             .append('div')
             .attr('id', 'photoviewer')
             .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hide', true);
-
-        photoviewer
-            .append('button')
-            .attr('class', 'thumb-hide')
-            .on('click', function () {
-                if (services.streetside) { services.streetside.hideViewer(); }
-                if (services.mapillary) { services.mapillary.hideViewer(); }
-                if (services.openstreetcam) { services.openstreetcam.hideViewer(); }
-            })
-            .append('div')
-            .call(svgIcon('#iD-icon-close'));
-
-        photoviewer
-            .append('button')
-            .attr('class', 'resize-handle-xy')
-            .on(
-                'mousedown',
-                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnX: true, resizeOnY: true })
-            );
-
-        photoviewer
-            .append('button')
-            .attr('class', 'resize-handle-x')
-            .on(
-                'mousedown',
-                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnX: true })
-            );
-
-        photoviewer
-            .append('button')
-            .attr('class', 'resize-handle-y')
-            .on(
-                'mousedown',
-                buildResizeListener(photoviewer, 'photoviewerResize', dispatch, { resizeOnY: true })
-            );
+            .classed('hide', true)
+            .call(ui.photoviewer);
 
         var mapDimensions = map.dimensions();
 
@@ -295,10 +273,9 @@ export function uiInit(context) {
         };
 
         d3_select(window)
-            .on('resize.editor', onResize);
+            .on('resize.editor', ui.onResize);
 
-        onResize();
-
+        ui.onResize();
 
         var pa = 80;  // pan amount
         var keybinding = d3_keybinding('main')
@@ -350,81 +327,10 @@ export function uiInit(context) {
         }
 
 
-        function onResize() {
-            mapDimensions = utilGetDimensions(content, true);
-            map.dimensions(mapDimensions);
-
-            // shrink photo viewer if it is too big
-            // (-90 preserves space at top and bottom of map used by menus)
-            var photoDimensions = utilGetDimensions(photoviewer, true);
-            if (photoDimensions[0] > mapDimensions[0] || photoDimensions[1] > (mapDimensions[1] - 90)) {
-                var setPhotoDimensions = [
-                    Math.min(photoDimensions[0], mapDimensions[0]),
-                    Math.min(photoDimensions[1], mapDimensions[1] - 90),
-                ];
-
-                photoviewer
-                    .style('width', setPhotoDimensions[0] + 'px')
-                    .style('height', setPhotoDimensions[1] + 'px');
-
-                dispatch.call('photoviewerResize', photoviewer, setPhotoDimensions);
-            }
-        }
-
-
         function pan(d) {
             return function() {
                 d3_event.preventDefault();
                 context.pan(d, 100);
-            };
-        }
-
-        function buildResizeListener(target, eventName, dispatch, options) {
-            var resizeOnX = !!options.resizeOnX;
-            var resizeOnY = !!options.resizeOnY;
-            var minHeight = options.minHeight || 240;
-            var minWidth = options.minWidth || 320;
-            var startX;
-            var startY;
-            var startWidth;
-            var startHeight;
-
-            function startResize() {
-                var mapSize = context.map().dimensions();
-
-                if (resizeOnX) {
-                    var maxWidth = mapSize[0];
-                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, maxWidth);
-                    target.style('width', newWidth + 'px');
-                }
-
-                if (resizeOnY) {
-                    var maxHeight = mapSize[1] - 90;  // preserve space at top/bottom of map
-                    var newHeight = clamp((startHeight + startY - d3_event.clientY), minHeight, maxHeight);
-                    target.style('height', newHeight + 'px');
-                }
-
-                dispatch.call(eventName, target, utilGetDimensions(target, true));
-            }
-
-            function clamp(num, min, max) {
-                return Math.max(min, Math.min(num, max));
-            }
-
-            function stopResize() {
-                d3_select(window)
-                    .on('.' + eventName, null);
-            }
-
-            return function initResize() {
-                startX = d3_event.clientX;
-                startY = d3_event.clientY;
-                startWidth = target.node().getBoundingClientRect().width;
-                startHeight = target.node().getBoundingClientRect().height;
-
-                d3_select(window)
-                    .on('mousemove.' + eventName, startResize, false)
-                    .on('mouseup.' + eventName, stopResize, false);
             };
         }
     }
@@ -461,5 +367,15 @@ export function uiInit(context) {
 
     ui.sidebar = uiSidebar(context);
 
-    return utilRebind(ui, dispatch, 'on');
+    ui.photoviewer = uiPhotoviewer(context);
+
+    ui.onResize = function() {
+        var content = d3_select('#content');
+        var mapDimensions = utilGetDimensions(content, true);
+        context.map().dimensions(mapDimensions);
+
+        ui.photoviewer.onMapResize();
+    };
+
+    return ui;
 }

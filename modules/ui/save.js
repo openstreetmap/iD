@@ -69,9 +69,7 @@ export function uiSave(context) {
                 .style('background', background);
 
             button.select('span.count')
-                .text(numChanges)
-                .style('background', background)
-                .style('border-color', background);
+                .text(numChanges);
         }
 
 
@@ -88,6 +86,8 @@ export function uiSave(context) {
             .call(tooltipBehavior);
 
         button
+            .append('div')
+            .attr('class', 'save-inner-wrap')
             .call(svgIcon('#iD-icon-save', 'pre-text'))
             .append('span')
             .attr('class', 'label')

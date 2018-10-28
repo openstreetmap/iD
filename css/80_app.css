@@ -83,17 +83,9 @@ body {
     margin-right: 10px;
 }
 
-.limiter {
-    position: relative;
-    max-width: 1200px;
-}
-
 .spinner {
     opacity: .5;
-    float: right;
-}
-[dir='rtl'] .spinner {
-    float: left;
+    display: inline-block;
 }
 
 .spinner img {
@@ -446,6 +438,13 @@ button.minor:hover {
     padding-right: 10px;
     margin: 0;
 }
+[dir='rtl'] .button-wrap {
+    padding-left: 10px;
+}
+.button-wrap button {
+    white-space: nowrap;
+    padding: 0px 8px;
+}
 
 .button-wrap button:only-child {
     width: 100%;
@@ -456,7 +455,6 @@ button.minor:hover {
 }
 [dir='rtl'] .button-wrap:last-of-type {
     padding-left: 0;
-    padding-right: 10px;
 }
 
 .joined button {
@@ -511,51 +509,38 @@ button.secondary-action:focus,
 button.secondary-action:hover {
     background: #cccccc;
 }
+.button-wrap.sidebar-collapse,
+.button-wrap.save-wrap {
+    min-width: 33.3333%;
+}
+.button-wrap.modes {
+    width: 100%;
+}
 
+button.undo-button,
+button.redo-button {
+    width: 44px;
+}
+button.save {
+    padding: 0;
+    display: flex;
+}
+button.save .save-inner-wrap {
+    flex: 1;
+}
 button.save .count {
     display: none;
 }
-
 button.save.has-count .count {
-    display: block;
-    position: absolute;
-    top: 5px;
-    background: #fff;
-    border-color: #fff;
-    opacity: 0.5;
+    display: inline-block;
     color: #333;
-    padding: 10px;
-    height: 30px;
-    line-height: 12px;
-    border-radius: 4px;
-    margin: auto;
-    margin-left: 9.3333%;
+    border: 0px solid rgba(51, 51, 51, 0.2);
+    border-left-width: 1px;
+    padding: 0px 12px;
 }
 [dir='rtl'] button.save.has-count .count {
-    margin-left: auto;
-    margin-right: 8%;
-}
-
-button.save.has-count .count::before {
-    content: "";
-    margin: auto;
-    width: 0;
-    height: 0;
-    position: absolute;
-    left: -6px;
-    top: 0;
-    bottom: 0;
-    border-top:    6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-right-width: 6px;
-    border-right-style: solid;
-    border-right-color: inherit;
-}
-[dir='rtl'] button.save.has-count .count::before {
-    border-left: 6px solid rgba(255,255,255,.5);
-    border-right: none;
-    left: auto;
-    right: -6px;
+    border-left-width: 0px;
+    border-right-width: 1px;
 }
 
 .help-wrap svg.icon.pre-text.add-note,
@@ -637,20 +622,57 @@ button.add-note svg.icon {
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
 #bar {
-    position: fixed;
-    padding: 10px 0;
+    position: absolute;
+    padding: 10px;
     left: 0;
     top: 0;
     right: 0;
     height: 60px;
     z-index: 9;
-    min-width: 768px;
+    min-width: 600px;
 }
 
-[dir='rtl'] #bar .spacer,
-[dir='rtl'] #bar .button-wrap,
 [dir='rtl'] #bar .button-wrap button {
     float: right;
+}
+#bar .center-area,
+#bar .trailing-area {
+    min-width: 50%;
+}
+.sidebar-collapsed #bar .leading-area,
+.sidebar-collapsed #bar .center-area,
+.sidebar-collapsed #bar .trailing-area {
+    min-width: 33.3333%;
+}
+#bar .center-area {
+    float: left;
+}
+[dir='rtl'] #bar .center-area {
+    float: right;
+}
+.sidebar-collapsed #bar .center-area {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    float: none;
+}
+#bar .leading-area {
+    float: left;
+    display: none;
+}
+[dir='rtl'] #bar .leading-area {
+    float: right;
+}
+.sidebar-collapsed #bar .leading-area {
+    display: inline-block;
+}
+#bar .trailing-area {
+    float: right;
+    text-align: right;
+}
+[dir='rtl'] #bar .trailing-area {
+    float: left;
+    text-align: left;
 }
 
 
@@ -779,6 +801,26 @@ a.hide-toggle {
     padding-bottom: 5px;
 }
 
+#sidebar-resizer {
+    position: absolute;
+    top: 0;
+    right: -6px;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
+}
+.sidebar-collapsed #sidebar-resizer {
+    /* make target wider to avoid the user accidentally resizing window */
+    width: 10px;
+    right: -10px;
+}
+[dir='rtl'] #sidebar-resizer {
+    right: auto;
+    left: -6px;
+}
+.sidebar-collapsed[dir='rtl'] #sidebar-resizer {
+    left: -10px;
+}
 
 /* Sidebar / Inspector
 ------------------------------------------------------- */
@@ -786,13 +828,16 @@ a.hide-toggle {
     position: relative;
     float: left;
     height: 100%;
-    overflow: hidden;
     z-index: 10;
     background: #f6f6f6;
     -ms-user-select: element;
+    border: 0px solid #ccc;
+    border-right-width: 1px;
 }
 [dir='rtl'] #sidebar {
     float: right;
+    border-right-width: 0px;
+    border-left-width: 1px;
 }
 
 .sidebar-component {
@@ -828,6 +873,8 @@ a.hide-toggle {
 .inspector-wrap {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 .inspector-hidden {
@@ -2620,9 +2667,10 @@ input.key-trap {
 /* Fullscreen Button (disabled)
 ------------------------------------------------------- */
 div.full-screen {
-    float: right;
+    display: inline-block;
     width: 40px;
     margin-right: 10px;
+    display: none;
 }
 
 div.full-screen .tooltip {
@@ -4261,6 +4309,7 @@ svg.mouseclick use.right {
     display: none;
     color: #333;
     font-size: 12px;
+    white-space: initial;
 }
 
 .tooltip.in {
@@ -4459,13 +4508,6 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-.add-point .tooltip {
-    left: 33.3333% !important;
-}
-[dir='rtl'] .add-point .tooltip {
-    left: inherit !important;
-}
-
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
@@ -4590,10 +4632,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 
 /* Media Queries
 ------------------------------------------------------- */
-@media only screen and (max-width: 840px) {
-    /* override hide for save button */
-    #bar .save .label { display: block;}
-}
 @media screen and (max-width: 1200px) {
     .user-list { display: none !important; }
 }
@@ -4797,5 +4835,3 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     width: 100px;
     color: #7092ff;
 }
-
-
