@@ -266,12 +266,13 @@ export function uiMapInMap(context) {
 
             var selected = getSelectedElements();
 
-            var geojson = { "name": "feature",
+            var geojson = { "name": "Minimap Features",
                             "type": "FeatureCollection",
                             "features": []
                         };
 
             selected.forEach(function(obj) {
+                var classList = obj.classList.value;
                 var feature = { "type": "Feature",
                                 "geometry": {
                                     "type": "",
@@ -279,25 +280,25 @@ export function uiMapInMap(context) {
                                 },
                                 "properties": {
                                     "id": obj.__data__.id,
-                                    "classList": obj.classList.value
+                                    "classList": classList
                                 }
                             };
                 var nodes = [];
 
-                if (obj.classList.value.includes("area")) {
+                if (classList.includes("area")) {
                     feature.geometry.type = 'Polygon';
                     nodes = obj.__data__.nodes;
                     feature.geometry.coordinates.push([]);
                     nodes.forEach(function(n) {
                         feature.geometry.coordinates[0].push(context.graph().hasEntity(n).loc);
                     });
-                } else if (obj.classList.value.includes("line")) {
+                } else if (classList.includes("line")) {
                     feature.geometry.type = 'LineString';
                     nodes = obj.__data__.nodes;
                     nodes.forEach(function(n) {
                         feature.geometry.coordinates.push(context.graph().hasEntity(n).loc);
                     });
-                } else if (obj.classList.value.includes("point") || obj.classList.value.includes("vertex")) {
+                } else if (/point|vertex/.test(classList)) {
                     if (!obj.__data__.loc) return;
                     feature.geometry.type = 'Point';
                     feature.geometry.coordinates = obj.__data__.loc
@@ -390,7 +391,9 @@ export function uiMapInMap(context) {
         function getSelectedElements() {
             var query_selector = utilEntityOrMemberSelector(context.selectedIDs(), context.graph())
                                     .split(",")
-                                    .map(s => '#map ' + s)
+                                    .map(function(s) {
+                                        return '#map ' + s;
+                                    })
                                     .join(', ');
 
             selected = Array.from(d3_selectAll(query_selector)._groups[0]);
@@ -402,7 +405,9 @@ export function uiMapInMap(context) {
                 }
             }
 
-            return selected.filter(s => s !== null);
+            return selected.filter(function(s) {
+                return s !== null;
+            });
         }
 
 
