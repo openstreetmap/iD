@@ -318,11 +318,11 @@ export function uiMapInMap(context) {
                 .append('path')
                 .merge(path)
                 .attr('d', getPath)
-                .attr("class", function(d, i) {
+                .attr("class", function(d) {
                     return d.properties.classList;
                 })
                 .classed('map-in-map-selection', true)
-                .style("fill", function(d, i) {
+                .style("fill", function(d) {
                     return (d.geometry.type === "Point" || d.properties.classList.includes("fill")) ? "#f00" : "none";
                 })
 
