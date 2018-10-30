@@ -2004,6 +2004,9 @@
                 "frequency": {
                     "label": "Operating Frequency"
                 },
+                "from": {
+                    "label": "From"
+                },
                 "fuel_multi": {
                     "label": "Fuel Types"
                 },
@@ -2953,6 +2956,9 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "to": {
+                    "label": "To"
                 },
                 "toilets/disposal": {
                     "label": "Disposal",
@@ -5822,6 +5828,10 @@
                 },
                 "place/farm": {
                     "name": "Farm",
+                    "terms": ""
+                },
+                "place/city_block": {
+                    "name": "City Block",
                     "terms": ""
                 },
                 "place/city": {

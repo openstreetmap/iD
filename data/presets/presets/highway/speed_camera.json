@@ -6,7 +6,8 @@
     ],
     "fields": [
         "direction",
-        "ref"
+        "ref",
+        "maxspeed"
      ],
     "tags": {
         "highway": "speed_camera"

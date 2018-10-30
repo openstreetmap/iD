@@ -633,6 +633,9 @@ en:
       frequency:
         # frequency=*
         label: Operating Frequency
+      from:
+        # from=*
+        label: From
       fuel:
         # fuel=*
         label: Fuel
@@ -1800,6 +1803,9 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      to:
+        # to=*
+        label: To
       toilets/disposal:
         # 'toilets:disposal=*'
         label: Disposal
@@ -5034,6 +5040,10 @@ en:
         # place=city
         name: City
         terms: '<translate with synonyms or related terms for ''City'', separated by commas>'
+      place/city_block:
+        # place=city_block
+        name: City Block
+        terms: '<translate with synonyms or related terms for ''City Block'', separated by commas>'
       place/farm:
         # place=farm
         name: Farm
