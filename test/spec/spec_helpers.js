@@ -50,4 +50,18 @@ if (!Array.prototype.find) {
       return undefined;
     }
   });
+
+  // Unit8Array.slice polyfill (For PhantomJS / IE11)
+  // https://tc39.github.io/ecma262/#sec-%typedarray%.prototype.slice
+
+  if (!Uint8Array.prototype.slice) {
+    Object.defineProperty(Uint8Array.prototype, 'slice', {
+      value: Array.prototype.slice
+    });
+  }
+  
+  
+
+
+  
 }

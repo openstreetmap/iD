@@ -71,6 +71,7 @@ describe('iD.svgData', function () {
         '</Document>' +
         '</kml>';
 
+    var shapeBase64 = 'AAAnCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQOgDAAABAAAAAAAAEOqYUsAs0wk6PBNEQAAAABDqmFLALNMJOjwTREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAKAQAAAAAAABDqmFLALNMJOjwTREA=';
 
     // this is because PhantomJS hasn't implemented a proper File constructor
     function makeFile(contents, fileName, mimeType) {
@@ -175,10 +176,34 @@ describe('iD.svgData', function () {
             }, 200);
         });
 
-        it('handles shape files',function(done){
-            
+        it('handles shape files', function(done){
+            var binary_string =  window.atob(shapeBase64);
+            var len = binary_string.length;
+            var typedArray = new Uint8Array( len );
+            for (var i = 0; i < len; i++)        {
+                typedArray[i] = binary_string.charCodeAt(i);
+            }
+            var files = [makeFile(typedArray.buffer,'test.shp','application/shp')];
+            var render = iD.svgData(projection, context, dispatch);
+            var spy = sinon.spy();
+            dispatch.on('change', spy);
+            render.fileList(files);
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                surface.call(render);
+                var path;
+                path = surface.selectAll('path.shadow');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                path = surface.selectAll('path.stroke');
+                expect(path.nodes().length).to.eql(1);
+                expect(path.attr('d')).to.match(/^M.*z$/);
+                done();
+            }, 200);
         });
     });
+    
 
 
     describe('#showLabels', function() {
