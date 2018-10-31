@@ -1310,7 +1310,7 @@
       "key": "attraction",
       "value": "summer_toboggan",
       "description": "Summer Toboggan",
-      "object_types": ["way"],
+      "object_types": ["way"]
     },
     {
       "key": "attraction",
