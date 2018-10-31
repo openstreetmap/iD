@@ -3466,6 +3466,10 @@
                     "name": "Dentist",
                     "terms": "tooth,teeth"
                 },
+                "amenity/dive_centre": {
+                    "name": "Dive Center",
+                    "terms": "diving"
+                },
                 "amenity/doctors": {
                     "name": "Doctor",
                     "terms": "medic*,physician"
