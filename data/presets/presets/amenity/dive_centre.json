@@ -5,14 +5,17 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "payment_multi",
+        "scuba_diving"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "diving"
+        "diving",
+        "scuba"
     ],
     "tags": {
         "amenity": "dive_centre"

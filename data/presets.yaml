@@ -1453,6 +1453,9 @@ en:
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
+      scuba_diving:
+        # 'scuba_diving:=*'
+        label: Services
       seamark/beacon_isolated_danger/shape:
         # 'seamark:beacon_isolated_danger:shape=*'
         label: Shape
@@ -2331,7 +2334,7 @@ en:
       amenity/dive_centre:
         # amenity=dive_centre
         name: Dive Center
-        # 'terms: diving'
+        # 'terms: diving,scuba'
         terms: '<translate with synonyms or related terms for ''Dive Center'', separated by commas>'
       amenity/doctors:
         # amenity=doctors
@@ -6045,6 +6048,7 @@ en:
       shop/scuba_diving:
         # shop=scuba_diving
         name: Scuba Diving Shop
+        # 'terms: diving,scuba'
         terms: '<translate with synonyms or related terms for ''Scuba Diving Shop'', separated by commas>'
       shop/seafood:
         # shop=seafood

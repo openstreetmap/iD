@@ -2674,6 +2674,9 @@
                 "sanitary_dump_station": {
                     "label": "Toilet Disposal"
                 },
+                "scuba_diving": {
+                    "label": "Services"
+                },
                 "seamark/beacon_isolated_danger/shape": {
                     "label": "Shape"
                 },
@@ -3468,7 +3471,7 @@
                 },
                 "amenity/dive_centre": {
                     "name": "Dive Center",
-                    "terms": "diving"
+                    "terms": "diving,scuba"
                 },
                 "amenity/doctors": {
                     "name": "Doctor",
@@ -6704,7 +6707,7 @@
                 },
                 "shop/scuba_diving": {
                     "name": "Scuba Diving Shop",
-                    "terms": ""
+                    "terms": "diving,scuba"
                 },
                 "shop/seafood": {
                     "name": "Seafood Shop",

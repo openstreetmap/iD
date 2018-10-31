@@ -7244,6 +7244,7 @@
       "description": "Hiking Difficulty"
     },
     {"key": "sanitary_dump_station", "description": "Toilet Disposal"},
+    {"key": "scuba_diving:", "description": "Services"},
     {"key": "seamark:beacon_isolated_danger:shape", "description": "Shape"},
     {
       "key": "seamark:beacon_lateral:category",
