@@ -2707,6 +2707,7 @@ en:
       amenity/vehicle_inspection:
         # amenity=vehicle_inspection
         name: Vehicle Inspection
+        # 'terms: car inspection'
         terms: '<translate with synonyms or related terms for ''Vehicle Inspection'', separated by commas>'
       amenity/vending_machine:
         # amenity=vending_machine
