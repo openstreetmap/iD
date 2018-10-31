@@ -3765,6 +3765,10 @@
                     "name": "University Grounds",
                     "terms": "college"
                 },
+                "amenity/vehicle_inspection": {
+                    "name": "Vehicle Inspection",
+                    "terms": "car inspection"
+                },
                 "amenity/vending_machine": {
                     "name": "Vending Machine",
                     "terms": ""

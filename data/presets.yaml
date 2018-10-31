@@ -2704,6 +2704,10 @@ en:
         name: University Grounds
         # 'terms: college'
         terms: '<translate with synonyms or related terms for ''University Grounds'', separated by commas>'
+      amenity/vehicle_inspection:
+        # amenity=vehicle_inspection
+        name: Vehicle Inspection
+        terms: '<translate with synonyms or related terms for ''Vehicle Inspection'', separated by commas>'
       amenity/vending_machine:
         # amenity=vending_machine
         name: Vending Machine

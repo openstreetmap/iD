@@ -1024,6 +1024,13 @@
     },
     {
       "key": "amenity",
+      "value": "vehicle_inspection",
+      "description": "Vehicle Inspection",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "vending_machine",
       "description": "Vending Machine",
       "object_types": ["node"],
