@@ -91,10 +91,6 @@ export function uiModes(context) {
             var showNotes = notesEnabled();
             var data = showNotes ? modes : modes.slice(0, 3);
 
-            selection
-                .classed('col3', !showNotes)  // 25%
-                .classed('col4', showNotes);  // 33%
-
             var buttons = selection.selectAll('button.add-button')
                 .data(data, function(d) { return d.id; });
 
