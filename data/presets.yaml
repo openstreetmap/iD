@@ -2337,6 +2337,11 @@ en:
         name: Dentist
         # 'terms: tooth,teeth'
         terms: '<translate with synonyms or related terms for ''Dentist'', separated by commas>'
+      amenity/dive_centre:
+        # amenity=dive_centre
+        name: Dive Center
+        # 'terms: diving'
+        terms: '<translate with synonyms or related terms for ''Dive Center'', separated by commas>'
       amenity/doctors:
         # amenity=doctors
         name: Doctor

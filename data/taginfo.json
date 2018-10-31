@@ -515,6 +515,13 @@
     },
     {
       "key": "amenity",
+      "value": "dive_centre",
+      "description": "Dive Center",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/swimming-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "doctors",
       "description": "Doctor",
       "object_types": ["node", "area"],
