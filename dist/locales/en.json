@@ -3922,6 +3922,10 @@
                     "name": "Roller Coaster",
                     "terms": "theme park,amusement ride"
                 },
+                "attraction/summer_toboggan": {
+                    "name": "Summer Toboggan",
+                    "terms": "alpine slide,mountain coaster"
+                },
                 "attraction/train": {
                     "name": "Tourist Train",
                     "terms": "theme park,rackless train,road train,Tschu-Tschu train,dotto train,park train"

@@ -2894,6 +2894,11 @@ en:
         name: Roller Coaster
         # 'terms: theme park,amusement ride'
         terms: '<translate with synonyms or related terms for ''Roller Coaster'', separated by commas>'
+      attraction/summer_toboggan:
+        # attraction=summer_toboggan
+        name: Summer Toboggan
+        # 'terms: alpine slide,mountain coaster'
+        terms: '<translate with synonyms or related terms for ''Summer Toboggan'', separated by commas>'
       attraction/train:
         # attraction=train
         name: Tourist Train
