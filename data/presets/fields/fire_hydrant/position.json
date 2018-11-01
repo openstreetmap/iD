@@ -4,10 +4,10 @@
     "label": "Position",
     "strings": {
         "options": {
-            "lane": "Lane",
-            "parking_lot": "Parking Lot",
-            "sidewalk": "Sidewalk",
-            "green": "Green"
+            "lane": "on the side of a road lane",
+            "parking_lot": "in a parking_lot",
+            "sidewalk": "on a sidewalk",
+            "green": "in a grassy area"
         }
     }
 }

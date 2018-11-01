@@ -589,30 +589,36 @@ en:
       fence_type:
         # fence_type=*
         label: Type
+      fire_hydrant/diameter:
+        # 'fire_hydrant:diameter=*'
+        label: 'Nominal diameter (in mm, inches or letters).'
       fire_hydrant/position:
         # 'fire_hydrant:position=*'
         label: Position
         options:
           # 'fire_hydrant:position=green'
-          green: Green
+          green: in a grassy area
           # 'fire_hydrant:position=lane'
-          lane: Lane
+          lane: on the side of a road lane
           # 'fire_hydrant:position=parking_lot'
-          parking_lot: Parking Lot
+          parking_lot: in a parking_lot
           # 'fire_hydrant:position=sidewalk'
-          sidewalk: Sidewalk
+          sidewalk: on a sidewalk
+      fire_hydrant/pressure:
+        # 'fire_hydrant:pressure=*'
+        label: Pressure in bar or suction
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
-        label: Type
+        label: The shape of the hydrant.
         options:
           # 'fire_hydrant:type=pillar'
-          pillar: Pillar/Aboveground
-          # 'fire_hydrant:type=pond'
-          pond: Pond
+          pillar: A pillar type hydrant.
+          # 'fire_hydrant:type=pipe'
+          pipe: 'A simple capped pipe, without the usual hydrant shape.'
           # 'fire_hydrant:type=underground'
-          underground: Underground
+          underground: A fire hydrant simple outlet located underground.
           # 'fire_hydrant:type=wall'
-          wall: Wall
+          wall: A wall-mounted fire hydrant.
       fireplace:
         # fireplace=*
         label: Fireplace

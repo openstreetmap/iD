@@ -1971,22 +1971,28 @@
                 "fence_type": {
                     "label": "Type"
                 },
+                "fire_hydrant/diameter": {
+                    "label": "Nominal diameter (in mm, inches or letters)."
+                },
                 "fire_hydrant/position": {
                     "label": "Position",
                     "options": {
-                        "lane": "Lane",
-                        "parking_lot": "Parking Lot",
-                        "sidewalk": "Sidewalk",
-                        "green": "Green"
+                        "lane": "on the side of a road lane",
+                        "parking_lot": "in a parking_lot",
+                        "sidewalk": "on a sidewalk",
+                        "green": "in a grassy area"
                     }
                 },
+                "fire_hydrant/pressure": {
+                    "label": "Pressure in bar or suction"
+                },
                 "fire_hydrant/type": {
-                    "label": "Type",
+                    "label": "The shape of the hydrant.",
                     "options": {
-                        "pillar": "Pillar/Aboveground",
-                        "underground": "Underground",
-                        "wall": "Wall",
-                        "pond": "Pond"
+                        "pillar": "A pillar type hydrant.",
+                        "underground": "A fire hydrant simple outlet located underground.",
+                        "wall": "A wall-mounted fire hydrant.",
+                        "pipe": "A simple capped pipe, without the usual hydrant shape."
                     }
                 },
                 "fireplace": {
@@ -7441,11 +7447,39 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg municipality"
+                },
+                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+                "name": "Helsingborg Orthophoto"
+            },
             "hike_n_bike": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors"
                 },
                 "name": "Hike & Bike"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+                "name": "Kalmar North Orthophoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+                "name": "Kalmar South Orthophoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -7467,6 +7501,20 @@
                 },
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topographic map of Sweden 1:50 000",
+                "name": "Lantmäteriet Topographic Map"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Orthophotos from the municipality of Linköping 2010, open data",
+                "name": "Linköping Orthophoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -7531,6 +7579,13 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {

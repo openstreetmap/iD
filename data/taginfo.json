@@ -6858,6 +6858,10 @@
     {"key": "fee", "description": "Fee"},
     {"key": "fence_type", "description": "Type"},
     {
+      "key": "fire_hydrant:diameter",
+      "description": "Nominal diameter (in mm, inches or letters)."
+    },
+    {
       "key": "fire_hydrant:position",
       "value": "lane",
       "description": "Position"
@@ -6877,10 +6881,30 @@
       "value": "green",
       "description": "Position"
     },
-    {"key": "fire_hydrant:type", "value": "pillar", "description": "Type"},
-    {"key": "fire_hydrant:type", "value": "underground", "description": "Type"},
-    {"key": "fire_hydrant:type", "value": "wall", "description": "Type"},
-    {"key": "fire_hydrant:type", "value": "pond", "description": "Type"},
+    {
+      "key": "fire_hydrant:pressure",
+      "description": "Pressure in bar or suction"
+    },
+    {
+      "key": "fire_hydrant:type",
+      "value": "pillar",
+      "description": "The shape of the hydrant."
+    },
+    {
+      "key": "fire_hydrant:type",
+      "value": "underground",
+      "description": "The shape of the hydrant."
+    },
+    {
+      "key": "fire_hydrant:type",
+      "value": "wall",
+      "description": "The shape of the hydrant."
+    },
+    {
+      "key": "fire_hydrant:type",
+      "value": "pipe",
+      "description": "The shape of the hydrant."
+    },
     {"key": "fireplace", "description": "Fireplace"},
     {"key": "fitness_station", "description": "Equipment Type"},
     {"key": "fixme", "description": "Fix Me"},

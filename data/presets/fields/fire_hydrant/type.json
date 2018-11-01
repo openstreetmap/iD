@@ -1,13 +1,13 @@
 {
     "key": "fire_hydrant:type",
     "type": "combo",
-    "label": "Type",
+    "label": "The shape of the hydrant.",
     "strings": {
         "options": {
-            "pillar": "Pillar/Aboveground",
-            "underground": "Underground",
-            "wall": "Wall",
-            "pond": "Pond"
+            "pillar": "A pillar type hydrant.",
+            "underground": "A fire hydrant simple outlet located underground.",
+            "wall": "A wall-mounted fire hydrant.",
+            "pipe": "A simple capped pipe, without the usual hydrant shape."
         }
     }
 }
