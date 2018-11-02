@@ -80,15 +80,15 @@ export function uiSave(context) {
 
         var button = selection
             .append('button')
-            .attr('class', 'save col12 disabled')
+            .attr('class', 'save disabled')
             .attr('tabindex', -1)
             .on('click', save)
             .call(tooltipBehavior);
 
         button
-            .append('div')
-            .attr('class', 'save-inner-wrap')
-            .call(svgIcon('#iD-icon-save', 'pre-text'))
+            .call(svgIcon('#iD-icon-save'));
+
+        button
             .append('span')
             .attr('class', 'label')
             .text(t('save.title'));

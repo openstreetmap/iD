@@ -61,6 +61,7 @@ body {
     #content > #bar {
         width: 100vw;
     }
+/*
     #content.inactive > #bar > .spacer.col4 {
         width: 0px;
     }
@@ -69,6 +70,7 @@ body {
         transition-duration: 200ms;
         transition-timing-function: step-end;
     }
+*/
 }
 
 #defs {
@@ -92,12 +94,9 @@ body {
     height: 40px;
     width: 40px;
     border-radius: 4px;
-    margin-right: 10px;
     background: black;
 }
 [dir='rtl'] .spinner img {
-    margin-left: 10px;
-    margin-right: auto;
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -278,18 +277,8 @@ table.tags, table.tags td, table.tags th {
 
 /* Grid
 ------------------------------------------------------- */
-.col0    { float: left; width: 04.1666%; }
-.col1    { float: left; width: 08.3333%; }
-.col2    { float: left; width: 16.6666%; }
-.col3    { float: left; width: 25.0000%; max-width: 300px; }
-.col4    { float: left; width: 33.3333%; max-width: 400px; }
-.col5    { float: left; width: 41.6666%; max-width: 500px; }
 .col6    { float: left; width: 50.0000%; max-width: 600px; }
-.col7    { float: left; width: 58.3333%; }
 .col8    { float: left; width: 66.6666%; }
-.col9    { float: left; width: 75.0000%; }
-.col10   { float: left; width: 83.3333%; }
-.col11   { float: left; width: 91.6666%; }
 .col12   { float: left; width: 100.0000%; }
 
 /* UI Lists
@@ -326,7 +315,7 @@ ul li { list-style: none;}
 }
 
 .toggle-list > label.active {
-    background: #E8EBFF;
+    background: #e8ebff;
 }
 
 
@@ -433,7 +422,7 @@ button.minor:hover {
     background-color: #f1f1f1;
 }
 
-.button-wrap {
+/*.button-wrap {
     display: inline-block;
     padding-right: 10px;
     margin: 0;
@@ -455,7 +444,7 @@ button.minor:hover {
 }
 [dir='rtl'] .button-wrap:last-of-type {
     padding-left: 0;
-}
+}*/
 
 .joined button {
     border-radius: 0;
@@ -489,18 +478,15 @@ button.action {
     background: #7092ff;
     color: #fff;
 }
-
 button[disabled].action,
 button[disabled].action:hover {
     background: #cccccc;
     color: #888;
 }
-
 button.action:focus,
 button.action:hover {
-    background: #597BE7;
+    background: #597be7;
 }
-
 button.secondary-action {
     background: #ececec;
 }
@@ -508,61 +494,6 @@ button.secondary-action {
 button.secondary-action:focus,
 button.secondary-action:hover {
     background: #cccccc;
-}
-.button-wrap.sidebar-collapse,
-.button-wrap.save-wrap {
-    min-width: 33.3333%;
-}
-.button-wrap.modes {
-    width: 100%;
-}
-
-button.undo-button,
-button.redo-button {
-    width: 44px;
-}
-button.save {
-    padding: 0;
-    display: flex;
-}
-button.save .save-inner-wrap {
-    flex: 1;
-}
-button.save .count {
-    display: none;
-}
-button.save.has-count .count {
-    display: inline-block;
-    color: #333;
-    border: 0px solid rgba(51, 51, 51, 0.2);
-    border-left-width: 1px;
-    padding: 0px 12px;
-}
-[dir='rtl'] button.save.has-count .count {
-    border-left-width: 0px;
-    border-right-width: 1px;
-}
-
-.help-wrap svg.icon.pre-text.add-note,
-button.add-note svg.icon {
-    height: 15px;
-    width: 15px;
-    color: rgba(0,0,0,0.25);
-    stroke: #333;
-    stroke-width: 60px;
-    margin-top: 3px;
-}
-button.add-note svg.icon {
-    margin-left: unset;
-    margin-right: 7px;
-}
-[dir='rtl'] button.add-note svg.icon {
-    margin-left: 7px;
-    margin-right: unset;
-}
-.help-wrap svg.icon.pre-text.add-note {
-    margin-left: 3px;
-    margin-right: 3px;
 }
 
 
@@ -622,6 +553,9 @@ button.add-note svg.icon {
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
 #bar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     position: absolute;
     padding: 10px;
     left: 0;
@@ -629,51 +563,103 @@ button.add-note svg.icon {
     right: 0;
     height: 60px;
     z-index: 9;
-    min-width: 600px;
 }
 
-[dir='rtl'] #bar .button-wrap button {
-    float: right;
+.tool-group {
+    display: flex;
+    flex: 0 1 auto;
+    flex-flow: row nowrap;
 }
-#bar .center-area,
-#bar .trailing-area {
-    min-width: 50%;
+.tool-group.leading-area {
+    justify-content: flex-start;
 }
-.sidebar-collapsed #bar .leading-area,
-.sidebar-collapsed #bar .center-area,
-.sidebar-collapsed #bar .trailing-area {
-    min-width: 33.3333%;
+.tool-group.center-area {
+    justify-content: center;
 }
-#bar .center-area {
-    float: left;
+.tool-group.trailing-area {
+    justify-content: flex-end;
 }
-[dir='rtl'] #bar .center-area {
-    float: right;
+
+.tool-group > div {
+    display: flex;
+    margin: 0 5px;
 }
-.sidebar-collapsed #bar .center-area {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    float: none;
+
+.tool-group button {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: row nowrap;
+    padding: 0 10px;
+    min-width: 30px;
 }
-#bar .leading-area {
-    float: left;
-    display: none;
+
+.tool-group button .icon {
+    flex: 0 0 20px;
 }
-[dir='rtl'] #bar .leading-area {
-    float: right;
+.tool-group button .label {
+    flex: 0 1 auto;
+    padding: 0 5px;
 }
-.sidebar-collapsed #bar .leading-area {
+
+
+button.save .count {
+    visibility: hidden;
     display: inline-block;
+    border: 0px solid #ccc;
+    border-left-width: 1px;
+    padding: 0px 8px;
+    min-width: 32px;
+    text-align: center;
 }
-#bar .trailing-area {
-    float: right;
-    text-align: right;
+[dir='rtl'] button.save .count {
+    border-left-width: 0px;
+    border-right-width: 1px;
 }
-[dir='rtl'] #bar .trailing-area {
-    float: left;
-    text-align: left;
+button.save.has-count .count {
+    visibility: visible;
 }
+
+/* if no count, shift label over where the count would be, preserving width */
+button.save .label {
+    margin-right: -12px;
+    margin-left: 15px;
+}
+[dir='rtl'] button.save .label {
+    margin-left: -12px;
+    margin-right: 15px;
+}
+button.save.has-count .label {
+    margin-right: 3px;
+    margin-left: 0;
+}
+[dir='rtl'] button.save.has-count .label {
+    margin-left: 3px;
+    margin-right: 0;
+}
+
+
+.help-wrap svg.icon.pre-text.add-note,
+button.add-note svg.icon {
+    height: 15px;
+    width: 15px;
+    color: rgba(0,0,0,0.25);
+    stroke: #333;
+    stroke-width: 60px;
+    margin-top: 3px;
+}
+button.add-note svg.icon {
+    margin-left: unset;
+    margin-right: 4px;
+}
+[dir='rtl'] button.add-note svg.icon {
+    margin-left: 4px;
+    margin-right: unset;
+}
+.help-wrap svg.icon.pre-text.add-note {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
 
 
 /* Header for modals / panes
@@ -771,14 +757,6 @@ button.add-note svg.icon {
     justify-content: center;
 }
 
-.sidebar-component .body {
-    width: 100%;
-    overflow: auto;
-    top: 60px;
-    bottom: 0;
-    position: absolute;
-}
-
 
 /* Hide/Toggle collapsable sections (aka Disclosure)
 ------------------------------------------------------- */
@@ -799,6 +777,25 @@ a.hide-toggle {
     font-size: 14px;
     font-weight: bold;
     padding-bottom: 5px;
+}
+
+
+/* Sidebar / Inspector
+------------------------------------------------------- */
+#sidebar {
+    position: relative;
+    float: left;
+    height: 100%;
+    z-index: 10;
+    background: #f6f6f6;
+    -ms-user-select: element;
+    border: 0px solid #ccc;
+    border-right-width: 1px;
+}
+[dir='rtl'] #sidebar {
+    float: right;
+    border-right-width: 0px;
+    border-left-width: 1px;
 }
 
 #sidebar-resizer {
@@ -822,23 +819,6 @@ a.hide-toggle {
     left: -10px;
 }
 
-/* Sidebar / Inspector
-------------------------------------------------------- */
-#sidebar {
-    position: relative;
-    float: left;
-    height: 100%;
-    z-index: 10;
-    background: #f6f6f6;
-    -ms-user-select: element;
-    border: 0px solid #ccc;
-    border-right-width: 1px;
-}
-[dir='rtl'] #sidebar {
-    float: right;
-    border-right-width: 0px;
-    border-left-width: 1px;
-}
 
 .sidebar-component {
     position: absolute;
@@ -846,6 +826,14 @@ a.hide-toggle {
     left: 0;
     bottom: 0;
     right: 0;
+}
+
+.sidebar-component .body {
+    width: 100%;
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
 }
 
 .panewrap {
@@ -933,6 +921,7 @@ a.hide-toggle {
     font-size: 18px;
     font-weight: bold;
 }
+
 
 
 /* Feature List / Search Results
@@ -3019,6 +3008,8 @@ div.full-screen > button:hover {
     top: 60px;
     bottom: 30px;
     right: 0;
+    width: 33.3333%;
+    max-width: 400px;
     padding-bottom: 50px;
     overflow: hidden;
     z-index: -1;
@@ -3026,6 +3017,11 @@ div.full-screen > button:hover {
 [dir='rtl'] .map-pane {
     left: 0;
     right: auto !important;
+}
+
+.map-pane.help-wrap {
+    width: 50.0000%;
+    max-width: 600px;
 }
 
 .pane-heading {
@@ -3826,6 +3822,10 @@ img.tile-debug {
     text-align: center;
 }
 
+.modal-section.buttons button {
+    min-width: 130px;
+}
+
 .modal-section.buttons .action {
     display: inline-block;
     margin: 0 10px;
@@ -4102,9 +4102,6 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .settings-modal textarea {
     height: 70px;
-}
-.settings-modal .buttons .button.col3 {
-    float: none;   /* undo float left */
 }
 
 .settings-custom-background .instructions-template {
@@ -4508,12 +4505,12 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-.add-point .tooltip .tooltip-arrow {
-    left: 60px;
+button.sidebar-toggle .tooltip .tooltip-arrow {
+    left: 32px;
 }
-[dir='rtl'] .add-point .tooltip .tooltip-arrow {
+[dir='rtl'] button.sidebar-toggle .tooltip .tooltip-arrow {
     left: auto;
-    right: 60px;
+    right: 32px;
 }
 
 li:first-of-type .badge .tooltip,

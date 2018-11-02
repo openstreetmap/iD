@@ -125,7 +125,7 @@ export function uiModes(context) {
             buttonsEnter
                 .each(function(d) {
                     d3_select(this)
-                        .call(svgIcon('#iD-icon-' + d.button, 'pre-text'));
+                        .call(svgIcon('#iD-icon-' + d.button));
                 });
 
             buttonsEnter
@@ -136,8 +136,6 @@ export function uiModes(context) {
             // update
             buttons = buttons
                 .merge(buttonsEnter)
-                .classed('col3', showNotes)    // 25%
-                .classed('col4', !showNotes)   // 33%
                 .property('disabled', function(d) {
                     return d.id === 'add-note' ? !notesEditable() : !editable();
                 });

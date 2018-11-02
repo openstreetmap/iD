@@ -74,6 +74,7 @@ export function uiInit(context) {
             .attr('id', 'content')
             .attr('class', 'active');
 
+        // Top toolbar
         var bar = content
             .append('div')
             .attr('id', 'bar')
@@ -90,56 +91,62 @@ export function uiInit(context) {
             .call(uiInfo(context))
             .call(uiNotice(context));
 
+        // Leading area button group (sidebar toggle)
         var leadingArea = bar
             .append('div')
-            .attr('class', 'leading-area');
+            .attr('class', 'tool-group leading-area');
 
         var sidebarButton = leadingArea
-            .append('div')
-            .attr('class', 'button-wrap sidebar-collapse')
             .append('button')
-            .attr('class', 'col12')
+            .attr('class', 'sidebar-toggle')
             .attr('tabindex', -1)
             .on('click', ui.sidebar.toggleCollapse)
             .call(tooltip().title(t('sidebar_button.tooltip')).placement('bottom'));
+
         var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
         sidebarButton
-            .call(svgIcon('#iD-icon-sidebar-'+iconSuffix, 'pre-text'))
-            .append('span')
-            .attr('class', 'label')
-            .text(t('sidebar_button.title'));
+            .call(svgIcon('#iD-icon-sidebar-' + iconSuffix));
+            // .append('span')
+            // .attr('class', 'label')
+            // .text(t('sidebar_button.title'));
 
+        leadingArea
+            .append('div')
+            .attr('class', 'full-screen bar-group')
+            .call(uiFullScreen(context));
+
+
+        // Center area button group (mode buttons)
         bar
             .append('div')
-            .attr('class', 'center-area')
+            .attr('class', 'tool-group center-area')
             .append('div')
-            .attr('class', 'modes button-wrap joined')
+            .attr('class', 'modes joined')
             .call(uiModes(context), bar);
 
+
+        // Center area button group (undo/redo save buttons)
         var trailingArea = bar
             .append('div')
-            .attr('class', 'trailing-area');
+            .attr('class', 'tool-group trailing-area');
 
         trailingArea
             .append('div')
-            .attr('class', 'full-screen')
-            .call(uiFullScreen(context));
+            .attr('class', 'joined')
+            .call(uiUndoRedo(context));
+
+        trailingArea
+            .append('div')
+            .attr('class', 'save-wrap')
+            .call(uiSave(context));
 
         trailingArea
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
-        trailingArea
-            .append('div')
-            .attr('class', 'button-wrap joined')
-            .call(uiUndoRedo(context));
 
-        trailingArea
-            .append('div')
-            .attr('class', 'button-wrap save-wrap')
-            .call(uiSave(context));
-
+        // Map controls
         var controls = bar
             .append('div')
             .attr('class', 'map-controls');
