@@ -373,8 +373,8 @@
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
-        "sidebar_button": {
-            "title": "Sidebar",
+        "sidebar": {
+            "key": "`",
             "tooltip": "Toggle the sidebar."
         },
         "feature_info": {
@@ -1329,6 +1329,7 @@
                     "background_switch": "Switch back to last background",
                     "map_data": "Show map data options",
                     "fullscreen": "Enter full screen mode",
+                    "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
                     "minimap": "Toggle minimap"
                 },

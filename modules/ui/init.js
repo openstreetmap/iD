@@ -37,6 +37,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
+import { uiTooltipHtml } from './tooltipHtml';
 import { uiUndoRedo } from './undo_redo';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
@@ -101,14 +102,17 @@ export function uiInit(context) {
             .attr('class', 'sidebar-toggle')
             .attr('tabindex', -1)
             .on('click', ui.sidebar.toggleCollapse)
-            .call(tooltip().title(t('sidebar_button.tooltip')).placement('bottom'));
+            .call(tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(function(mode) {
+                    return uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key'));
+                })
+            );
 
         var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
         sidebarButton
             .call(svgIcon('#iD-icon-sidebar-' + iconSuffix));
-            // .append('span')
-            // .attr('class', 'label')
-            // .text(t('sidebar_button.title'));
 
         leadingArea
             .append('div')
@@ -287,6 +291,7 @@ export function uiInit(context) {
         var pa = 80;  // pan amount
         var keybinding = d3_keybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
+            .on(t('sidebar.key'), ui.sidebar.toggleCollapse)
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
