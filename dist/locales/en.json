@@ -7441,11 +7441,33 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
-            "hike_n_bike": {
+            "helsingborg-orto": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "© Helsingborg municipality"
                 },
-                "name": "Hike & Bike"
+                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+                "name": "Helsingborg Orthophoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+                "name": "Kalmar North Orthophoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+                "name": "Kalmar South Orthophoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -7467,6 +7489,20 @@
                 },
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topographic map of Sweden 1:50 000",
+                "name": "Lantmäteriet Topographic Map"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Orthophotos from the municipality of Linköping 2010, open data",
+                "name": "Linköping Orthophoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -7531,6 +7567,13 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
