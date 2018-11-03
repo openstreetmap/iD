@@ -90,7 +90,7 @@ function filterValues(allowUpperCase) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
         if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return parseFloat(d.fraction) > 0.0 || d.in_wiki;
+        return parseFloat(d.fraction) > 0.0;
     };
 }
 
