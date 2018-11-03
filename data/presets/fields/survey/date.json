@@ -1,0 +1,6 @@
+{
+    "key": "survey:date",
+    "type": "text",
+    "universal": true,
+    "label": "Date of last site survey (YYYY-MM-DD)"
+}

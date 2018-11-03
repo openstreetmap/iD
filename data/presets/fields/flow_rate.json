@@ -1,0 +1,5 @@
+{
+    "key": "flow_rate",
+    "type": "number",
+    "label": "Nominal flow rate with unit of measure."
+}
