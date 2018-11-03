@@ -105,9 +105,7 @@ export function uiInit(context) {
             .call(tooltip()
                 .placement('bottom')
                 .html(true)
-                .title(function(mode) {
-                    return uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key'));
-                })
+                .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
             );
 
         var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
@@ -381,10 +379,17 @@ export function uiInit(context) {
 
     ui.photoviewer = uiPhotoviewer(context);
 
-    ui.onResize = function() {
+    ui.onResize = function(withPan) {
+        var map = context.map();
         var content = d3_select('#content');
         var mapDimensions = utilGetDimensions(content, true);
-        context.map().dimensions(mapDimensions);
+
+        if (withPan !== undefined) {
+            map.redrawEnable(false);
+            map.pan(withPan);
+            map.redrawEnable(true);
+        }
+        map.dimensions(mapDimensions);
 
         ui.photoviewer.onMapResize();
     };

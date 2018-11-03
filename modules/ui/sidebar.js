@@ -1,6 +1,8 @@
 import _throttle from 'lodash-es/throttle';
 
 import { drag as d3_drag } from 'd3-drag';
+import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
+
 import {
     select as d3_select,
     event as d3_event,
@@ -32,43 +34,67 @@ export function uiSidebar(context) {
 
 
     function sidebar(selection) {
+        var minWidth = 280;
+        var sidebarWidth;
+        var containerWidth;
+        var dragOffset;
 
         var resizer = selection
             .append('div')
             .attr('id', 'sidebar-resizer');
 
-        // set the initial width constraints
-        selection.style('min-width', '280px');
+        // Set the initial width constraints
+        selection.style('min-width', minWidth + 'px');
         selection.style('max-width', '400px');
         selection.style('width', '33.3333%');
 
         var container = d3_select('#id-container');
         resizer.call(d3_drag()
             .container(container.node())
+            .on('start', function() {
+                // offset from edge of sidebar-resizer
+                dragOffset = d3_event.sourceEvent.offsetX - 1;
+
+                sidebarWidth = selection.node().getBoundingClientRect().width;
+                containerWidth = container.node().getBoundingClientRect().width;
+                var widthPct = (sidebarWidth / containerWidth) * 100;
+                selection
+                    .style('width', widthPct + '%')    // lock in current width
+                    .style('max-width', '85%');        // but allow larger widths
+            })
             .on('drag', function() {
+                var isRTL = (textDirection === 'rtl');
+                var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
-                var containerWidthPx = container.node().getBoundingClientRect().width;
+                var x = d3_event.x - dragOffset;
+                sidebarWidth = isRTL ? containerWidth - x : x;
 
-                var xMarginProperty = textDirection === 'rtl' ? 'margin-right' : 'margin-left';
+                var isCollapsed = container.classed('sidebar-collapsed');
+                var shouldCollapse = sidebarWidth < minWidth;
 
-                // subtact 1px so the mouse stays in the div and maintains the col-resize cursor
-                var newWidthPx = textDirection === 'rtl' ? containerWidthPx - d3_event.x-1 : d3_event.x-1;
-
-                var shouldCollapse = newWidthPx < 280;
                 container.classed('sidebar-collapsed', shouldCollapse);
-                // allow large widths
-                selection.style('max-width', '85%');
-                if (shouldCollapse) {
-                    selection.style(xMarginProperty,'-400px')
-                        .style('width', '400px');
-                }
-                else {
 
-                    var newWidthPercent = (newWidthPx / containerWidthPx) * 100;
-                    selection.style(xMarginProperty, null)
-                        .style('width', newWidthPercent+'%');
+                if (shouldCollapse) {
+                    if (!isCollapsed) {
+                        selection
+                            .style(xMarginProperty, '-400px')
+                            .style('width', '400px');
+
+                        context.ui().onResize([sidebarWidth - d3_event.dx, 0]);
+                    }
+
+                } else {
+                    var widthPct = (sidebarWidth / containerWidth) * 100;
+                    selection
+                        .style(xMarginProperty, null)
+                        .style('width', widthPct + '%');
+
+                    if (isCollapsed) {
+                        context.ui().onResize([-sidebarWidth, 0]);
+                    } else {
+                        context.ui().onResize([-d3_event.dx, 0]);
+                    }
                 }
-                context.ui().onResize();
             })
         );
 
@@ -195,48 +221,64 @@ export function uiSidebar(context) {
             _current = null;
         };
 
-        sidebar.toggleCollapse = function(shouldCollapse) {
 
+        sidebar.toggleCollapse = function(shouldCollapse) {
             if (d3_event) {
                 d3_event.preventDefault();
             }
 
             var container = d3_select('#id-container');
-            var collapsing;
+            var isCollapsing;
             var isCollapsed = container.classed('sidebar-collapsed');
+
             if (typeof shouldCollapse !== 'undefined') {
-                if (shouldCollapse === isCollapsed) {
-                    return;
-                }
-                collapsing = shouldCollapse;
+                if (shouldCollapse === isCollapsed) return;
+                isCollapsing = shouldCollapse;
             } else {
-                collapsing = !isCollapsed;
+                isCollapsing = !isCollapsed;
             }
-            var sidebar = d3_select('#sidebar');
+
             var xMarginProperty = textDirection === 'rtl' ? 'margin-right' : 'margin-left';
-            if (collapsing) {
-                var preSidebarWidthInPx = sidebar.node().getBoundingClientRect().width;
-                sidebar.style('width', preSidebarWidthInPx+'px');
-                sidebar.transition()
-                    .style('width', '400px')
-                    .style(xMarginProperty,'-400px')
-                    .on('end',function(){
-                        context.ui().onResize();
-                    });
-                    container.classed('sidebar-collapsed', true);
-            }  else {
-                var containerWidthPx = container.node().getBoundingClientRect().width;
-                var postSidebarWidthInPx = Math.max(containerWidthPx*0.333333, 280);
-                sidebar.transition()
-                    .style('width', postSidebarWidthInPx)
-                    .style(xMarginProperty, '0px')
-                    .on('end',function(){
-                        sidebar.style('width', '33.3333%');
-                        context.ui().onResize();
-                    });
-                    container.classed('sidebar-collapsed', false);
+
+            var sidebar = d3_select('#sidebar');
+            sidebarWidth = sidebar.node().getBoundingClientRect().width;
+
+            // switch from % to px
+            sidebar.style('width', sidebarWidth + 'px');
+
+            var startMargin, endMargin, lastMargin;
+            if (isCollapsing) {
+                startMargin = lastMargin = 0;
+                endMargin = -sidebarWidth;
+            } else {
+                startMargin = lastMargin = -sidebarWidth;
+                endMargin = 0;
             }
+
+            sidebar.transition()
+                .style(xMarginProperty, endMargin + 'px')
+                .tween('panner', function() {
+                    var i = d3_interpolateNumber(startMargin, endMargin);
+                    return function(t) {
+                        var dx = lastMargin - Math.round(i(t));
+                        lastMargin = lastMargin - dx;
+                        context.ui().onResize([dx, 0]);
+                    };
+                })
+                .on('end', function() {
+                    container.classed('sidebar-collapsed', isCollapsing);
+
+                    // switch back from px to %
+                    if (!isCollapsing) {
+                        var containerWidth = container.node().getBoundingClientRect().width;
+                        var widthPct = (sidebarWidth / containerWidth) * 100;
+                        sidebar
+                            .style(xMarginProperty, null)
+                            .style('width', widthPct + '%');
+                    }
+                });
         };
+
         // toggle the sidebar collapse when double-clicking the resizer
         resizer.on('dblclick', sidebar.toggleCollapse);
     }
