@@ -26,7 +26,8 @@ path.stroke.tag-landuse,
 path.stroke.tag-natural,
 path.stroke.tag-leisure-nature_reserve,
 path.stroke.tag-leisure-pitch,
-path.stroke.tag-leisure-park {
+path.stroke.tag-leisure-park,
+path.stroke.tag-barrier-hedge {
     stroke: rgb(140, 208, 95);
 }
 path.fill.tag-landuse,
@@ -274,4 +275,3 @@ path.fill.tag-natural-glacier {
     border-color: rgb(170, 170, 170);
     background: rgba(170, 170, 170, 0.3);
 }
-
