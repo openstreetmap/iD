@@ -98,6 +98,7 @@ export function uiInit(context) {
             .attr('class', 'tool-group leading-area');
 
         var sidebarButton = leadingArea
+            .append('div')
             .append('button')
             .attr('class', 'sidebar-toggle')
             .attr('tabindex', -1)
