@@ -107,7 +107,7 @@ export function uiRawTagEditor(context) {
             .classed('readonly', isReadOnly);
 
         var innerWrap = enter.append('div')
-            .attr('class', 'inner-wrap')
+            .attr('class', 'inner-wrap');
 
         innerWrap
             .append('div')
