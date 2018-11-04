@@ -569,15 +569,17 @@ button.secondary-action:hover {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
+    width: 100%;
 }
 .tool-group.leading-area {
+    flex-shrink: 2;
     justify-content: flex-start;
 }
 .tool-group.center-area {
     justify-content: center;
 }
 .tool-group.trailing-area {
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .tool-group > div {
