@@ -197,7 +197,7 @@ export function uiSidebar(context) {
 
         sidebar.toggleCollapse = function(shouldCollapse) {
 
-            if (d3_event && typeof d3_event.preventDefault == 'function') {
+            if (d3_event && typeof d3_event.preventDefault === 'function') {
                 d3_event.preventDefault();
             }
 
