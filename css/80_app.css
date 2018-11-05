@@ -57,20 +57,11 @@ body {
 
 /* Firefox has its own ideas about fixed positioning when a css filter is active - #4348 */
 /* https://stackoverflow.com/questions/37949942/firefox-position-bug-by-parent-with-filter */
+/* TODO: check whether this is necessary now with flexbox */
 @-moz-document url-prefix() {
     #content > #bar {
         width: 100vw;
     }
-/*
-    #content.inactive > #bar > .spacer.col4 {
-        width: 0px;
-    }
-    #content.active > #bar > .spacer.col4 {
-        width: 33.3333%;
-        transition-duration: 200ms;
-        transition-timing-function: step-end;
-    }
-*/
 }
 
 #defs {
@@ -79,32 +70,6 @@ body {
     width: 0;
     height: 0;
 }
-
-.spacer {
-    height: 40px;
-    margin-right: 10px;
-}
-
-.spinner {
-    opacity: .5;
-    display: inline-block;
-}
-
-.spinner img {
-    height: 40px;
-    width: 40px;
-    border-radius: 4px;
-    background: black;
-}
-[dir='rtl'] .spinner img {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-}
-
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
@@ -141,7 +106,6 @@ h3 {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 h4, h5 {
     font-size: 12px;
     font-weight: bold;
@@ -169,23 +133,18 @@ p {
     margin: 0;
     padding: 0;
 }
-
 p:last-child {
     padding-bottom: 0;
 }
-
 em {
     font-style: italic;
 }
-
 strong {
     font-weight: bold;
 }
-
 a:visited, a {
     color: #7092ff;
 }
-
 a:hover {
     color: #597be7;
 }
@@ -277,9 +236,9 @@ table.tags, table.tags td, table.tags th {
 
 /* Grid
 ------------------------------------------------------- */
-.col6    { float: left; width: 50.0000%; max-width: 600px; }
-.col8    { float: left; width: 66.6666%; }
-.col12   { float: left; width: 100.0000%; }
+.col6  { float: left; width: 50.0000%; max-width: 600px; }
+.col8  { float: left; width: 66.6666%; }
+.col12 { float: left; width: 100.0000%; }
 
 /* UI Lists
 ------------------------------------------------------- */
@@ -417,34 +376,9 @@ button.minor {
 button.minor .icon {
     opacity: .5;
 }
-
 button.minor:hover {
     background-color: #f1f1f1;
 }
-
-/*.button-wrap {
-    display: inline-block;
-    padding-right: 10px;
-    margin: 0;
-}
-[dir='rtl'] .button-wrap {
-    padding-left: 10px;
-}
-.button-wrap button {
-    white-space: nowrap;
-    padding: 0px 8px;
-}
-
-.button-wrap button:only-child {
-    width: 100%;
-}
-
-.button-wrap:last-of-type {
-    padding-right: 0;
-}
-[dir='rtl'] .button-wrap:last-of-type {
-    padding-left: 0;
-}*/
 
 .joined button {
     border-radius: 0;
@@ -458,14 +392,12 @@ button.minor:hover {
 .fillL .joined button {
     border-right: 1px solid #fff;
 }
-
 .joined button:first-child {
     border-radius: 4px 0 0 4px;
 }
 [dir='rtl'] .joined button:first-child {
     border-radius: 0 4px 4px 0;
 }
-
 .joined button:last-child {
     border-right-width: 0;
     border-radius: 0 4px 4px 0;
@@ -528,15 +460,12 @@ button.secondary-action:hover {
 .icon.light {
     color: #fff;
 }
-
 .icon.created {
     color: #00ca07;
 }
-
 .icon.modified {
     color: #666;
 }
-
 .icon.deleted {
     color: #ea0000;
 }
@@ -586,7 +515,6 @@ button.secondary-action:hover {
     display: flex;
     margin: 0 5px;
 }
-
 .tool-group button {
     display: flex;
     flex: 1 1 auto;
@@ -594,7 +522,6 @@ button.secondary-action:hover {
     padding: 0 10px;
     min-width: 30px;
 }
-
 .tool-group button .icon {
     flex: 0 0 20px;
 }
@@ -602,7 +529,6 @@ button.secondary-action:hover {
     flex: 0 1 auto;
     padding: 0 5px;
 }
-
 
 button.save .count {
     visibility: hidden;
@@ -639,7 +565,6 @@ button.save.has-count .label {
     margin-right: 0;
 }
 
-
 .help-wrap svg.icon.pre-text.add-note,
 button.add-note svg.icon {
     height: 15px;
@@ -662,6 +587,26 @@ button.add-note svg.icon {
     margin-right: 3px;
 }
 
+.spinner {
+    opacity: .5;
+    display: flex;
+    flex-shrink: 2;
+    justify-content: flex-end;
+}
+.spinner img {
+    height: 40px;
+    width: 40px;
+    border-radius: 4px;
+    background: black;
+}
+[dir='rtl'] .spinner img {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
 
 
 /* Header for modals / panes

@@ -45,7 +45,14 @@ import { uiCmd } from './cmd';
 
 
 export function uiInit(context) {
-    var uiInitCounter = 0;
+    // Selectors for elements that can be collapsed if they overflow
+    // (can't use a media query for this because it depends on sidebar width, not screen width)
+    var headerCollapsable = 'button > span.label';
+    var footerCollapsable = '';
+
+    var _initCounter = 0;
+    var _initCallback;
+
 
     function render(container) {
         container
@@ -92,7 +99,7 @@ export function uiInit(context) {
             .call(uiInfo(context))
             .call(uiNotice(context));
 
-        // Leading area button group (sidebar toggle)
+        // Leading area button group (Sidebar toggle)
         var leadingArea = bar
             .append('div')
             .attr('class', 'tool-group leading-area');
@@ -119,7 +126,7 @@ export function uiInit(context) {
             .call(uiFullScreen(context));
 
 
-        // Center area button group (mode buttons)
+        // Center area button group (Point/Line/Area/Note mode buttons)
         bar
             .append('div')
             .attr('class', 'tool-group center-area')
@@ -128,7 +135,7 @@ export function uiInit(context) {
             .call(uiModes(context), bar);
 
 
-        // Center area button group (undo/redo save buttons)
+        // Trailing area button group (Undo/Redo save buttons)
         var trailingArea = bar
             .append('div')
             .attr('class', 'tool-group trailing-area');
@@ -143,13 +150,15 @@ export function uiInit(context) {
             .attr('class', 'save-wrap')
             .call(uiSave(context));
 
-        trailingArea
+
+        // For now, just put spinner at the end
+        bar
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
 
-        // Map controls
+        // Map controls (appended to #bar, but absolutely positioned)
         var controls = bar
             .append('div')
             .attr('class', 'map-controls');
@@ -305,7 +314,7 @@ export function uiInit(context) {
 
         context.enter(modeBrowse(context));
 
-        if (!uiInitCounter++) {
+        if (!_initCounter++) {
             if (!hash.startWalkthrough) {
                 context.container()
                     .call(uiSplash(context))
@@ -330,7 +339,7 @@ export function uiInit(context) {
                 });
         }
 
-        uiInitCounter++;
+        _initCounter++;
 
         if (hash.startWalkthrough) {
             hash.startWalkthrough = false;
@@ -347,10 +356,8 @@ export function uiInit(context) {
     }
 
 
-    var renderCallback;
-
     function ui(node, callback) {
-        renderCallback = callback;
+        _initCallback = callback;
         var container = d3_select(node);
         context.container(container);
         context.loadLocale(function(err) {
@@ -370,7 +377,7 @@ export function uiInit(context) {
             if (!err) {
                 context.container().selectAll('*').remove();
                 render(context.container());
-                if (renderCallback) renderCallback();
+                if (_initCallback) _initCallback();
             }
         });
     };
