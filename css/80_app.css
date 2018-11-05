@@ -16,7 +16,6 @@ body {
         sans-serif;
     margin: 0;
     padding: 0;
-    min-width: 768px;
     color: #333;
     overflow: hidden;
     -ms-user-select: none;
@@ -32,7 +31,6 @@ body {
 .id-container {
     height: 100%;
     width: 100%;
-    min-width: 768px;
 }
 
 #content {
@@ -606,6 +604,19 @@ button.add-note svg.icon {
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
+}
+
+
+#bar.narrow .tool-group {
+    width: unset;
+}
+#bar.narrow .spinner,
+#bar.narrow button .label {
+    display: none;
+}
+#bar.narrow button .count {
+    border-left-width: 0;
+    border-right-width: 0;
 }
 
 

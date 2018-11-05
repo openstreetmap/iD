@@ -45,13 +45,9 @@ import { uiCmd } from './cmd';
 
 
 export function uiInit(context) {
-    // Selectors for elements that can be collapsed if they overflow
-    // (can't use a media query for this because it depends on sidebar width, not screen width)
-    var headerCollapsable = 'button > span.label';
-    var footerCollapsable = '';
-
     var _initCounter = 0;
     var _initCallback;
+    var _needWidth = {};
 
 
     function render(container) {
@@ -400,7 +396,35 @@ export function uiInit(context) {
         map.dimensions(mapDimensions);
 
         ui.photoviewer.onMapResize();
+
+        // check if header or footer have overflowed
+        ui.checkOverflow('#bar');
+        ui.checkOverflow('#footer');
     };
+
+
+    // Call checkOverflow when resizing or whenever the contents change.
+    ui.checkOverflow = function(selector, reset) {
+        if (reset) {
+            delete _needWidth[selector];
+        }
+
+        var element = d3_select(selector);
+        var scrollWidth = element.property('scrollWidth');
+        var clientWidth = element.property('clientWidth');
+        var needed = _needWidth[selector] || scrollWidth;
+
+        if (scrollWidth > clientWidth) {    // overflow happening
+            element.classed('narrow', true);
+            if (!_needWidth[selector]) {
+                _needWidth[selector] = scrollWidth;
+            }
+
+        } else if (scrollWidth >= needed) {
+            element.classed('narrow', false);
+        }
+    };
+
 
     return ui;
 }
