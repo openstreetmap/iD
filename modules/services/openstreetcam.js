@@ -327,7 +327,7 @@ export default {
 
 
         // Register viewer resize handler
-        context.ui().on('photoviewerResize', function(dimensions) {
+        context.ui().photoviewer.on('resize', function(dimensions) {
             imgZoom = d3_zoom()
                 .extent([[0, 0], dimensions])
                 .translateExtent([[0, 0], dimensions])

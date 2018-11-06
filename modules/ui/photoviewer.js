@@ -11,7 +11,7 @@ import { services } from '../services';
 
 export function uiPhotoviewer(context) {
 
-    var dispatch = d3_dispatch('photoviewerResize');
+    var dispatch = d3_dispatch('resize');
 
     function photoviewer(selection) {
         selection
@@ -30,7 +30,7 @@ export function uiPhotoviewer(context) {
             .attr('class', 'resize-handle-xy')
             .on(
                 'mousedown',
-                buildResizeListener(selection, 'photoviewerResize', dispatch, { resizeOnX: true, resizeOnY: true })
+                buildResizeListener(selection, 'resize', dispatch, { resizeOnX: true, resizeOnY: true })
             );
 
         selection
@@ -38,7 +38,7 @@ export function uiPhotoviewer(context) {
             .attr('class', 'resize-handle-x')
             .on(
                 'mousedown',
-                buildResizeListener(selection, 'photoviewerResize', dispatch, { resizeOnX: true })
+                buildResizeListener(selection, 'resize', dispatch, { resizeOnX: true })
             );
 
         selection
@@ -46,7 +46,7 @@ export function uiPhotoviewer(context) {
             .attr('class', 'resize-handle-y')
             .on(
                 'mousedown',
-                buildResizeListener(selection, 'photoviewerResize', dispatch, { resizeOnY: true })
+                buildResizeListener(selection, 'resize', dispatch, { resizeOnY: true })
             );
 
 
@@ -117,7 +117,7 @@ export function uiPhotoviewer(context) {
                 .style('width', setPhotoDimensions[0] + 'px')
                 .style('height', setPhotoDimensions[1] + 'px');
 
-            dispatch.call('photoviewerResize', photoviewer, setPhotoDimensions);
+            dispatch.call('resize', photoviewer, setPhotoDimensions);
         }
     };
 
