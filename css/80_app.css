@@ -4585,19 +4585,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 }
 
 
-/* Media Queries
-------------------------------------------------------- */
-@media screen and (max-width: 1200px) {
-    .user-list { display: none !important; }
-}
-@media screen and (max-width: 1000px) {
-    #userLink { display: none !important; }
-}
-@media screen and (max-width: 900px) {
-    #scale-block { display: none !important; }
-}
-
-
 /* Scrollbars
  ----------------------------------------------------- */
 ::-webkit-scrollbar {
