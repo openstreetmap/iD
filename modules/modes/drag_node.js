@@ -1,4 +1,5 @@
 import _find from 'lodash-es/find';
+import _intersection from 'lodash-es/intersection';
 
 import {
     event as d3_event,
@@ -75,8 +76,23 @@ export function modeDragNode(context) {
     }
 
 
-    function connectAnnotation(entity) {
-        return t('operations.connect.annotation.' + entity.geometry(context.graph()));
+    function connectAnnotation(nodeEntity, targetEntity) {
+        var nodeGeometry = nodeEntity.geometry(context.graph());
+        var targetGeometry = targetEntity.geometry(context.graph());
+        if (nodeGeometry === 'vertex' && targetGeometry === 'vertex') {
+            var nodeParentWayIDs = context.graph().parentWays(nodeEntity);
+            var targetParentWayIDs = context.graph().parentWays(targetEntity);
+            var sharedParentWays = _intersection(nodeParentWayIDs, targetParentWayIDs);
+            // if both vertices are part of the same way
+            if (sharedParentWays.length !== 0) {
+                // if the nodes are next to each other, they are merged
+                if (sharedParentWays[0].areAdjacent(nodeEntity.id, targetEntity.id)) {
+                    return t('operations.connect.annotation.from_vertex.to_adjacent_vertex');
+                }
+                return t('operations.connect.annotation.from_vertex.to_sibling_vertex');
+            }
+        }
+        return t('operations.connect.annotation.from_' + nodeGeometry + '.to_' + targetGeometry);
     }
 
 
@@ -359,13 +375,13 @@ export function modeDragNode(context) {
                     loc: choice.loc,
                     edge: [target.nodes[choice.index - 1], target.nodes[choice.index]]
                 }, entity),
-                connectAnnotation(target)
+                connectAnnotation(entity, target)
             );
 
         } else if (target && target.type === 'node') {
             context.replace(
                 actionConnect([target.id, entity.id]),
-                connectAnnotation(target)
+                connectAnnotation(entity, target)
             );
 
         } else if (_wasMidpoint) {
