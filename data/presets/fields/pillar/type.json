@@ -1,0 +1,11 @@
+{
+    "key": "pillar:type",
+    "type": "combo",
+    "label": "Description of pillar hydrants.",
+    "strings": {
+        "options": {
+            "dry_barrel": "The water shutoff valve is below ground.",
+            "wet_barrel": "The barrel is pressurized at all times."            
+        }
+    }
+}

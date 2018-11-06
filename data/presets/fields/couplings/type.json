@@ -1,0 +1,15 @@
+{
+    "key": "couplings:type",
+    "type": "combo",
+    "label": "Coupling standard.",
+    "placeholder": "Bayonet, Storz, UNI…",
+    "options": {
+            "Bayonet",
+            "Barcelona",
+            "Guillemin",
+            "Klaue",
+            "Sprawny",
+            "Storz",
+            "UNI"
+    }
+}

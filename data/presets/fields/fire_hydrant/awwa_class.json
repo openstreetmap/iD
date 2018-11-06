@@ -1,0 +1,13 @@
+{
+    "key": "fire_hydrant:awwa_class",
+    "type": "combo",
+    "label": "AWWA Class (US only)",
+    "strings": {
+        "options": {
+            "AA": "more than 1500 US gal/min (light blue)",
+            "A": "between 1500 and 1000 US gal/min (green)",
+            "B": "between 1000 and 500 US gal/min (yellow)",
+            "C": "less than 500 US gal/min (red)"
+        }
+    }
+}
