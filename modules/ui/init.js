@@ -105,7 +105,7 @@ export function uiInit(context) {
             .append('button')
             .attr('class', 'sidebar-toggle')
             .attr('tabindex', -1)
-            .on('click', ui.sidebar.toggleCollapse)
+            .on('click', ui.sidebar.toggle)
             .call(tooltip()
                 .placement('bottom')
                 .html(true)
@@ -295,7 +295,7 @@ export function uiInit(context) {
         var pa = 80;  // pan amount
         var keybinding = d3_keybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
-            .on(t('sidebar.key'), ui.sidebar.toggleCollapse)
+            .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))

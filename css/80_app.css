@@ -755,19 +755,19 @@ a.hide-toggle {
     width: 6px;
     cursor: col-resize;
 }
-.sidebar-collapsed #sidebar-resizer {
-    /* make target wider to avoid the user accidentally resizing window */
-    width: 10px;
-    right: -10px;
-}
 [dir='rtl'] #sidebar-resizer {
     right: auto;
     left: -6px;
 }
-.sidebar-collapsed[dir='rtl'] #sidebar-resizer {
+
+#sidebar.collapsed #sidebar-resizer {
+    /* make target wider to avoid the user accidentally resizing window */
+    width: 10px;
+    right: -10px;
+}
+[dir='rtl'] #sidebar.collapsed #sidebar-resizer {
     left: -10px;
 }
-
 
 .sidebar-component {
     position: absolute;
