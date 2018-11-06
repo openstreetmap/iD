@@ -165,10 +165,23 @@ export function uiSidebar(context) {
         sidebar.hover = _throttle(hover, 200);
 
 
+        sidebar.intersects = function(extent) {
+            var rect = selection.node().getBoundingClientRect();
+            return extent.intersects([
+                context.projection.invert([0, rect.height]),
+                context.projection.invert([rect.width, 0])
+            ]);
+        };
+
+
         sidebar.select = function(id, newFeature) {
             if (!_current && id) {
-                // uncollapse the sidebar to show the editor
-                sidebar.expand(true);
+                // uncollapse the sidebar
+                if (selection.classed('collapsed')) {
+                    var entity = context.entity(id);
+                    var extent = entity.extent(context.graph());
+                    sidebar.expand(sidebar.intersects(extent));
+                }
 
                 featureListWrap
                     .classed('inspector-hidden', true);
@@ -294,6 +307,7 @@ export function uiSidebar(context) {
 
     sidebar.hover = function() {};
     sidebar.hover.cancel = function() {};
+    sidebar.intersects = function() {};
     sidebar.select = function() {};
     sidebar.show = function() {};
     sidebar.hide = function() {};
