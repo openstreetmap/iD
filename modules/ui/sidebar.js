@@ -223,8 +223,11 @@ export function uiSidebar(context) {
 
 
         sidebar.toggleCollapse = function(shouldCollapse) {
-            if (d3_event) {
-                d3_event.preventDefault();
+            var e = d3_event;
+            if (e.sourceEvent) {
+                e.sourceEvent.preventDefault();
+            } else if (e) {
+                e.preventDefault();
             }
 
             var container = d3_select('#id-container');
