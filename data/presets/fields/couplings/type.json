@@ -3,7 +3,7 @@
     "type": "combo",
     "label": "Coupling standard.",
     "placeholder": "Bayonet, Storz, UNI…",
-    "options": {
+    "options": [
             "Bayonet",
             "Barcelona",
             "Guillemin",
@@ -11,5 +11,5 @@
             "Sprawny",
             "Storz",
             "UNI"
-    }
+    ]
 }

@@ -1,0 +1,7 @@
+{
+    "key": "cap:colour",
+    "default": "red",
+    "type": "combo",
+    "label": "Colour of the caps",
+    "options": [ "blue", "green", "red", "yellow", "grey" ]
+}

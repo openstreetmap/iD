@@ -1,0 +1,6 @@
+{
+    "key": "reflective:colour",
+    "default": "red",
+    "type": "text",
+    "label": "Colour of reflective material"
+}

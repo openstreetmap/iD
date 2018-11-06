@@ -1,0 +1,7 @@
+{
+    "key": "bonnet:colour",
+    "default": "red",
+    "type": "combo",
+    "label": "Colour of the top section (bonnet)",
+    "options": [ "blue", "green", "red", "yellow", "grey" ]
+}

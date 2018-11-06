@@ -2,5 +2,5 @@
     "key": "couplings:diameters",
     "type": "text",
     "label": "Each coupling diameter (separated by ;)",
-    "placeholder": "E.g. 45 mm;45 mm;110 mm",
+    "placeholder": "E.g. 45 mm;45 mm;110 mm"
 }
