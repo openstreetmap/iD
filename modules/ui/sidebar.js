@@ -168,7 +168,7 @@ export function uiSidebar(context) {
         sidebar.select = function(id, newFeature) {
             if (!_current && id) {
                 // uncollapse the sidebar to show the editor
-                sidebar.expand();
+                sidebar.expand(true);
 
                 featureListWrap
                     .classed('inspector-hidden', true);
@@ -223,23 +223,23 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.expand = function() {
+        sidebar.expand = function(moveMap) {
             if (selection.classed('collapsed')) {
-                sidebar.toggle();
+                sidebar.toggle(moveMap);
             }
         };
 
 
-        sidebar.collapse = function() {
+        sidebar.collapse = function(moveMap) {
             if (!selection.classed('collapsed')) {
-                sidebar.toggle();
+                sidebar.toggle(moveMap);
             }
         };
 
 
-        sidebar.toggle = function() {
+        sidebar.toggle = function(moveMap) {
             var e = d3_event;
-            if (e.sourceEvent) {
+            if (e && e.sourceEvent) {
                 e.sourceEvent.preventDefault();
             } else if (e) {
                 e.preventDefault();
@@ -270,7 +270,7 @@ export function uiSidebar(context) {
                     return function(t) {
                         var dx = lastMargin - Math.round(i(t));
                         lastMargin = lastMargin - dx;
-                        context.ui().onResize([dx, 0]);
+                        context.ui().onResize(moveMap ? undefined : [dx, 0]);
                     };
                 })
                 .on('end', function() {
