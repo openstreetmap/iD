@@ -53,15 +53,6 @@ body {
     transition-duration: 200ms;
 }
 
-/* Firefox has its own ideas about fixed positioning when a css filter is active - #4348 */
-/* https://stackoverflow.com/questions/37949942/firefox-position-bug-by-parent-with-filter */
-/* TODO: check whether this is necessary now with flexbox */
-@-moz-document url-prefix() {
-    #content > #bar {
-        width: 100vw;
-    }
-}
-
 #defs {
     /* Can't be display: none or the clippaths are ignored. */
     position: absolute;
