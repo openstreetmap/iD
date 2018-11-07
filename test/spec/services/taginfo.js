@@ -206,7 +206,7 @@ describe('iD.serviceTaginfo', function() {
             );
         });
 
-        it('does not get values for extremely popular keys', function() {
+        it('does not get values for extremely unpopular keys', function() {
             var callback = sinon.spy();
             taginfo.values({key: 'name', query: 'ste'}, callback);
 

@@ -72,8 +72,10 @@ path.stroke.tag-natural-tree_row {
 
 
 /* barriers */
-path.stroke.tag-barrier {
+path.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: #ddd;
+}
+path.stroke.tag-barrier {
     stroke-width: 3px;
     stroke-linecap: round;
     stroke-dasharray: 15, 5, 1, 5;

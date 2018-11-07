@@ -350,11 +350,7 @@ button.active {
 }
 
 button.minor {
-    position: absolute;
-    top: 0;
-    right: 0;
     height: 100%;
-    width: 10%;
     border-radius: 0;
     background-color: #fafafa;
 }
@@ -2148,7 +2144,11 @@ div.combobox {
 .tag-row {
     width: 100%;
     position: relative;
-    clear: both;
+}
+.tag-row .inner-wrap {
+    width: 100%;
+    position: relative;
+    display: flex;
 }
 
 .tag-row.readonly,
@@ -2174,13 +2174,8 @@ div.combobox {
 
 .tag-row .key-wrap,
 .tag-row .input-wrap-position {
-    width: 40%;
-    float: left;
+    flex: 1 0.5 100%;
     height: 30px;
-}
-[dir='rtl'] .tag-row .key-wrap,
-[dir='rtl'] .tag-row .input-wrap-position {
-    float: right;
 }
 
 .tag-row input.key {
@@ -2209,15 +2204,13 @@ div.combobox {
 }
 
 .tag-row button {
-    position: absolute;
     height: 31px;
-    right: 10%;
+    flex: 0 0 33px;
     border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
 }
 [dir='rtl'] .tag-row button {
-    left: 10%;
     border-left-width: 1px;
     border-right-width: 0;
 }
@@ -2251,16 +2244,10 @@ div.combobox {
 }
 
 .tag-row .tag-reference-button {
-    right: 0;
     border-radius: 0;
-    width: 10%;
-    top: 0;
     background: #fafafa;
 }
 [dir='rtl'] .tag-row .tag-reference-button {
-    left: auto;
-    right: auto;
-    margin-right: 35px;
     border-left-width: 1px;
     border-right-width: 0;
 }
@@ -2316,7 +2303,6 @@ button.minor.tag-reference-loading {
 }
 
 .raw-tag-editor .tag-reference-body {
-    float: left;
     width: 100%;
 }
 
@@ -2325,7 +2311,7 @@ button.minor.tag-reference-loading {
     color: #333;
 }
 
-.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body {
+.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
     border-bottom: 1px solid #ccc;
 }
 
