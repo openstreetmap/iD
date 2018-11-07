@@ -85,7 +85,7 @@ describe('iD.serviceTaginfo', function() {
             );
         });
 
-        it('includes unpopular keys with a wiki page', function() {
+        it('does not include unpopular keys with a wiki page', function() {
             var callback = sinon.spy();
             taginfo.keys({query: 'amen'}, callback);
 
@@ -96,10 +96,7 @@ describe('iD.serviceTaginfo', function() {
             );
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [
-                {'title':'amenity', 'value':'amenity'},
-                {'title':'amenityother', 'value':'amenityother'}
-            ]);
+            expect(callback).to.have.been.calledWith(null, [{'title':'amenity', 'value':'amenity'}]);
         });
 
         it('sorts keys with \':\' below keys without \':\'', function() {
@@ -220,7 +217,7 @@ describe('iD.serviceTaginfo', function() {
             expect(callback).to.have.been.calledWith(null, []);
         });
 
-        it('includes unpopular values with a wiki page', function() {
+        it('does not include unpopular values with a wiki page', function() {
             var callback = sinon.spy();
             taginfo.values({key: 'amenity', query: 'par'}, callback);
 
@@ -233,7 +230,6 @@ describe('iD.serviceTaginfo', function() {
 
             expect(callback).to.have.been.calledWith(null, [
                 {'value':'parking','title':'A place for parking cars'},
-                {'value':'party','title':'A place for partying'}
             ]);
         });
 
