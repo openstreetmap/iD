@@ -190,7 +190,9 @@ export function presetIndex() {
     };
 
     all.choose = function(preset) {
-        _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+        if (preset.searchable !== false) {
+            _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+        }
         return all;
     };
 
