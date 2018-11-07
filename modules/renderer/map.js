@@ -662,13 +662,11 @@ export function rendererMap(context) {
 
     map.dimensions = function(_) {
         if (!arguments.length) return dimensions;
-        var center = map.center();
         dimensions = _;
         drawLayers.dimensions(dimensions);
         context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
         mouse = utilFastMouse(supersurface.node());
-        setCenter(center);
 
         scheduleRedraw();
         return map;

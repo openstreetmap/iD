@@ -1,3 +1,6 @@
+
+import { geoBounds as d3_geoBounds } from 'd3-geo';
+
 import {
     event as d3_event,
     select as d3_select
@@ -12,11 +15,8 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import {
-    modeDragNode,
-    modeDragNote
-} from '../modes';
-
+import { geoExtent } from '../geo';
+import { modeDragNode, modeDragNote } from '../modes';
 import { modeBrowse } from './browse';
 import { uiDataEditor } from '../ui';
 
@@ -69,8 +69,12 @@ export function modeSelectData(context, selectedDatum) {
 
         selectData();
 
-        context.ui().sidebar
-            .show(dataEditor.datum(selectedDatum));
+        var sidebar = context.ui().sidebar;
+        sidebar.show(dataEditor.datum(selectedDatum));
+
+        // expand the sidebar, avoid obscuring the data if needed
+        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        sidebar.expand(sidebar.intersects(extent));
 
         context.map()
             .on('drawn.select-data', selectData);

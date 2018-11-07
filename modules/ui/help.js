@@ -384,7 +384,7 @@ export function uiHelp(context) {
 
 
         var pane = selection.append('div')
-            .attr('class', 'help-wrap map-pane fillL col6 hide');
+            .attr('class', 'help-wrap map-pane fillL hide');
 
         var tooltipBehavior = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')

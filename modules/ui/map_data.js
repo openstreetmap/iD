@@ -578,7 +578,7 @@ export function uiMapData(context) {
 
         var pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane col4 hide');
+            .attr('class', 'fillL map-pane hide');
 
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')

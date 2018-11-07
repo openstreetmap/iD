@@ -23,7 +23,7 @@ export function uiConfirm(selection) {
     modalSelection.okButton = function() {
         buttons
             .append('button')
-            .attr('class', 'button ok-button action col4')
+            .attr('class', 'button ok-button action')
             .on('click.confirm', function() {
                 modalSelection.remove();
             })

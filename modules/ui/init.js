@@ -37,6 +37,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
+import { uiTooltipHtml } from './tooltipHtml';
 import { uiUndoRedo } from './undo_redo';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
@@ -44,7 +45,10 @@ import { uiCmd } from './cmd';
 
 
 export function uiInit(context) {
-    var uiInitCounter = 0;
+    var _initCounter = 0;
+    var _initCallback;
+    var _needWidth = {};
+
 
     function render(container) {
         container
@@ -74,6 +78,7 @@ export function uiInit(context) {
             .attr('id', 'content')
             .attr('class', 'active');
 
+        // Top toolbar
         var bar = content
             .append('div')
             .attr('id', 'bar')
@@ -90,56 +95,66 @@ export function uiInit(context) {
             .call(uiInfo(context))
             .call(uiNotice(context));
 
+        // Leading area button group (Sidebar toggle)
         var leadingArea = bar
             .append('div')
-            .attr('class', 'leading-area');
+            .attr('class', 'tool-group leading-area');
 
         var sidebarButton = leadingArea
             .append('div')
-            .attr('class', 'button-wrap sidebar-collapse')
             .append('button')
-            .attr('class', 'col12')
+            .attr('class', 'sidebar-toggle')
             .attr('tabindex', -1)
-            .on('click', ui.sidebar.toggleCollapse)
-            .call(tooltip().title(t('sidebar_button.tooltip')).placement('bottom'));
+            .on('click', ui.sidebar.toggle)
+            .call(tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
+            );
+
         var iconSuffix = textDirection === 'rtl' ? 'right' : 'left';
         sidebarButton
-            .call(svgIcon('#iD-icon-sidebar-'+iconSuffix, 'pre-text'))
-            .append('span')
-            .attr('class', 'label')
-            .text(t('sidebar_button.title'));
+            .call(svgIcon('#iD-icon-sidebar-' + iconSuffix));
 
-        bar
+        leadingArea
             .append('div')
-            .attr('class', 'center-area')
-            .append('div')
-            .attr('class', 'modes button-wrap joined')
-            .call(uiModes(context), bar);
-
-        var trailingArea = bar
-            .append('div')
-            .attr('class', 'trailing-area');
-
-        trailingArea
-            .append('div')
-            .attr('class', 'full-screen')
+            .attr('class', 'full-screen bar-group')
             .call(uiFullScreen(context));
 
-        trailingArea
+
+        // Center area button group (Point/Line/Area/Note mode buttons)
+        bar
             .append('div')
-            .attr('class', 'spinner')
-            .call(uiSpinner(context));
+            .attr('class', 'tool-group center-area')
+            .append('div')
+            .attr('class', 'modes joined')
+            .call(uiModes(context), bar);
+
+
+        // Trailing area button group (Undo/Redo save buttons)
+        var trailingArea = bar
+            .append('div')
+            .attr('class', 'tool-group trailing-area');
 
         trailingArea
             .append('div')
-            .attr('class', 'button-wrap joined')
+            .attr('class', 'joined')
             .call(uiUndoRedo(context));
 
         trailingArea
             .append('div')
-            .attr('class', 'button-wrap save-wrap')
+            .attr('class', 'save-wrap')
             .call(uiSave(context));
 
+
+        // For now, just put spinner at the end
+        bar
+            .append('div')
+            .attr('class', 'spinner')
+            .call(uiSpinner(context));
+
+
+        // Map controls (appended to #bar, but absolutely positioned)
         var controls = bar
             .append('div')
             .attr('class', 'map-controls');
@@ -280,6 +295,7 @@ export function uiInit(context) {
         var pa = 80;  // pan amount
         var keybinding = d3_keybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
+            .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
@@ -294,7 +310,7 @@ export function uiInit(context) {
 
         context.enter(modeBrowse(context));
 
-        if (!uiInitCounter++) {
+        if (!_initCounter++) {
             if (!hash.startWalkthrough) {
                 context.container()
                     .call(uiSplash(context))
@@ -319,7 +335,7 @@ export function uiInit(context) {
                 });
         }
 
-        uiInitCounter++;
+        _initCounter++;
 
         if (hash.startWalkthrough) {
             hash.startWalkthrough = false;
@@ -336,10 +352,8 @@ export function uiInit(context) {
     }
 
 
-    var renderCallback;
-
     function ui(node, callback) {
-        renderCallback = callback;
+        _initCallback = callback;
         var container = d3_select(node);
         context.container(container);
         context.loadLocale(function(err) {
@@ -359,7 +373,7 @@ export function uiInit(context) {
             if (!err) {
                 context.container().selectAll('*').remove();
                 render(context.container());
-                if (renderCallback) renderCallback();
+                if (_initCallback) _initCallback();
             }
         });
     };
@@ -369,13 +383,48 @@ export function uiInit(context) {
 
     ui.photoviewer = uiPhotoviewer(context);
 
-    ui.onResize = function() {
+    ui.onResize = function(withPan) {
+        var map = context.map();
         var content = d3_select('#content');
         var mapDimensions = utilGetDimensions(content, true);
-        context.map().dimensions(mapDimensions);
+
+        if (withPan !== undefined) {
+            map.redrawEnable(false);
+            map.pan(withPan);
+            map.redrawEnable(true);
+        }
+        map.dimensions(mapDimensions);
 
         ui.photoviewer.onMapResize();
+
+        // check if header or footer have overflowed
+        ui.checkOverflow('#bar');
+        ui.checkOverflow('#footer');
     };
+
+
+    // Call checkOverflow when resizing or whenever the contents change.
+    ui.checkOverflow = function(selector, reset) {
+        if (reset) {
+            delete _needWidth[selector];
+        }
+
+        var element = d3_select(selector);
+        var scrollWidth = element.property('scrollWidth');
+        var clientWidth = element.property('clientWidth');
+        var needed = _needWidth[selector] || scrollWidth;
+
+        if (scrollWidth > clientWidth) {    // overflow happening
+            element.classed('narrow', true);
+            if (!_needWidth[selector]) {
+                _needWidth[selector] = scrollWidth;
+            }
+
+        } else if (scrollWidth >= needed) {
+            element.classed('narrow', false);
+        }
+    };
+
 
     return ui;
 }

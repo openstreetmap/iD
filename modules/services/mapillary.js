@@ -372,7 +372,7 @@ export default {
         defs.call(svgDefs(context).addSprites, ['mapillary-sprite']);
 
         // Register viewer resize handler
-        context.ui().on('photoviewerResize', function() {
+        context.ui().photoviewer.on('resize', function() {
             if (_mlyViewer) {
                 _mlyViewer.resize();
             }

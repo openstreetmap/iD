@@ -626,7 +626,7 @@ export default {
 
 
         // Register viewer resize handler
-        context.ui().on('photoviewerResize', function() {
+        context.ui().photoviewer.on('resize', function() {
             if (_pannellumViewer) {
                 _pannellumViewer.resize();
             }
