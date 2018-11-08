@@ -258,6 +258,9 @@ export function uiSidebar(context) {
                 e.preventDefault();
             }
 
+            // Don't allow sidebar to toggle when the user is in the walkthrough.
+            if (context.inIntro()) return;
+
             var isCollapsed = selection.classed('collapsed');
             var isCollapsing = !isCollapsed;
             var xMarginProperty = textDirection === 'rtl' ? 'margin-right' : 'margin-left';
