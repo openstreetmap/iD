@@ -3328,7 +3328,7 @@
       "value": "fishing",
       "description": "Fishing Spot",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/aquarium-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-fish.svg?sanitize=true"
     },
     {
       "key": "leisure",
