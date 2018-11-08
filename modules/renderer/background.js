@@ -376,14 +376,22 @@ export function rendererBackground(context) {
         // build efficient index and querying for data.imagery
         var features = data.imagery.map(function(source) {
             if (!source.polygon) return null;
+
+            // Add an extra array nest to each element in `source.polygon`
+            // so the rings are not treated as a bunch of holes:
+            // what we have: [ [[outer],[hole],[hole]] ]
+            // what we want: [ [[outer]],[[outer]],[[outer]] ]
+            var rings = source.polygon.map(function(ring) { return [ring]; });
+
             var feature = {
                 type: 'Feature',
                 properties: { id: source.id },
-                geometry: { type: 'MultiPolygon', coordinates: [ source.polygon ] }
+                geometry: { type: 'MultiPolygon', coordinates: rings }
             };
 
             data.imagery.features[source.id] = feature;
             return feature;
+
         }).filter(Boolean);
 
         data.imagery.query = whichPolygon({
