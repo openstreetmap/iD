@@ -56,13 +56,6 @@ export function uiInit(context) {
 
         var map = context.map();
 
-        var hash = behaviorHash(context);
-        hash();
-
-        if (!hash.hadHash) {
-            map.centerZoom([0, 0], 2);
-        }
-
         container
             .append('svg')
             .attr('id', 'defs')
@@ -89,11 +82,6 @@ export function uiInit(context) {
             .attr('id', 'map')
             .attr('dir', 'ltr')
             .call(map);
-
-        content
-            .call(uiMapInMap(context))
-            .call(uiInfo(context))
-            .call(uiNotice(context));
 
         // Leading area button group (Sidebar toggle)
         var leadingArea = bar
@@ -147,7 +135,7 @@ export function uiInit(context) {
             .call(uiSave(context));
 
 
-        // For now, just put spinner at the end
+        // For now, just put spinner at the end of the #bar
         bar
             .append('div')
             .attr('class', 'spinner')
@@ -185,6 +173,7 @@ export function uiInit(context) {
             .call(uiHelp(context));
 
 
+        // Add attribution and footer
         var about = content
             .append('div')
             .attr('id', 'about');
@@ -269,6 +258,24 @@ export function uiInit(context) {
             .call(uiContributors(context));
 
 
+        // Setup map dimensions and move map to initial center/zoom.
+        // This should happen after #content and toolbars exist.
+        ui.onResize();
+
+        var hash = behaviorHash(context);
+        hash();
+        if (!hash.hadHash) {
+            map.centerZoom([0, 0], 2);
+        }
+
+
+        // Add absolutely-positioned elements that sit on top of the map
+        // This should happen after the map is ready (center/zoom)
+        content
+            .call(uiMapInMap(context))
+            .call(uiInfo(context))
+            .call(uiNotice(context));
+
         content
             .append('div')
             .attr('id', 'photoviewer')
@@ -276,9 +283,8 @@ export function uiInit(context) {
             .classed('hide', true)
             .call(ui.photoviewer);
 
-        var mapDimensions = map.dimensions();
 
-        // bind events
+        // Bind events
         window.onbeforeunload = function() {
             return context.save();
         };
@@ -290,20 +296,19 @@ export function uiInit(context) {
         d3_select(window)
             .on('resize.editor', ui.onResize);
 
-        ui.onResize();
 
-        var pa = 80;  // pan amount
+        var panPixels = 80;
         var keybinding = d3_keybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
             .on(t('sidebar.key'), ui.sidebar.toggle)
-            .on('←', pan([pa, 0]))
-            .on('↑', pan([0, pa]))
-            .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]))
-            .on(['⇧←', uiCmd('⌘←')], pan([mapDimensions[0], 0]))
-            .on(['⇧↑', uiCmd('⌘↑')], pan([0, mapDimensions[1]]))
-            .on(['⇧→', uiCmd('⌘→')], pan([-mapDimensions[0], 0]))
-            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -mapDimensions[1]]));
+            .on('←', pan([panPixels, 0]))
+            .on('↑', pan([0, panPixels]))
+            .on('→', pan([-panPixels, 0]))
+            .on('↓', pan([0, -panPixels]))
+            .on(['⇧←', uiCmd('⌘←')], pan([map.dimensions()[0], 0]))
+            .on(['⇧↑', uiCmd('⌘↑')], pan([0, map.dimensions()[1]]))
+            .on(['⇧→', uiCmd('⌘→')], pan([-map.dimensions()[0], 0]))
+            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]));
 
         d3_select(document)
             .call(keybinding);
