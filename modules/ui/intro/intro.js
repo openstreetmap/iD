@@ -84,14 +84,21 @@ export function uiIntro(context) {
         context.history().merge(_values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
 
+        // Setup imagery
         var imagery = context.background().findSource(INTRO_IMAGERY);
         if (imagery) {
             context.background().baseLayerSource(imagery);
         } else {
             context.background().bing();
         }
-        overlays.forEach(function (d) {
+        overlays.forEach(function(d) {
             context.background().toggleOverlayLayer(d);
+        });
+
+        // Setup data layers (only OSM)
+        var layers = context.layers();
+        layers.all().forEach(function(item) {
+            item.layer.enabled(item.id === 'osm');
         });
 
         // Mock geocoder
@@ -150,7 +157,7 @@ export function uiIntro(context) {
             if (osm) { osm.toggle(true).reset().caches(caches); }
             context.history().reset().merge(_values(baseEntities));
             context.background().baseLayerSource(background);
-            overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
+            overlays.forEach(function(d) { context.background().toggleOverlayLayer(d); });
             if (history) { context.history().fromJSON(history, false); }
             context.map().centerZoom(center, zoom);
             window.location.replace(hash);
