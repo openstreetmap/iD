@@ -33,6 +33,12 @@
       "object_types": ["node", "way"]
     },
     {
+      "key": "embankment",
+      "value": "yes",
+      "description": "Embankment",
+      "object_types": ["way"]
+    },
+    {
       "key": "highway",
       "description": "Highway, Type",
       "object_types": ["node", "way", "area"]
@@ -2193,12 +2199,6 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/alcohol-shop-15.svg?sanitize=true"
     },
     {
-      "key": "embankment",
-      "value": "yes",
-      "description": "Embankment",
-      "object_types": ["way"]
-    },
-    {
       "key": "emergency",
       "value": "designated",
       "description": "Emergency Access Designated",
@@ -3709,12 +3709,6 @@
     },
     {
       "key": "man_made",
-      "value": "embankment",
-      "description": "Embankment",
-      "object_types": ["way"]
-    },
-    {
-      "key": "man_made",
       "value": "adit",
       "description": "Adit",
       "object_types": ["node", "area"],
@@ -3774,6 +3768,12 @@
       "description": "Cut line",
       "object_types": ["way"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/logging-15.svg?sanitize=true"
+    },
+    {
+      "key": "man_made",
+      "value": "embankment",
+      "description": "Embankment",
+      "object_types": ["way"]
     },
     {
       "key": "man_made",

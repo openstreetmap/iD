@@ -3448,7 +3448,6 @@ en:
       embankment:
         # embankment=yes
         name: Embankment
-        terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
       emergency/ambulance_station:
         # emergency=ambulance_station
         name: Ambulance Station
@@ -4563,6 +4562,7 @@ en:
       man_made/embankment:
         # man_made=embankment
         name: Embankment
+        terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
       man_made/flagpole:
         # man_made=flagpole
         name: Flagpole
