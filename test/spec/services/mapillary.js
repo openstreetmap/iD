@@ -32,9 +32,9 @@ describe('iD.serviceMapillary', function() {
         it('Initializes cache one time', function() {
             var cache = mapillary.cache();
             expect(cache).to.have.property('images');
-            expect(cache).to.have.property('objects');
+            expect(cache).to.have.property('image_detections');
+            expect(cache).to.have.property('map_features');
             expect(cache).to.have.property('sequences');
-            expect(cache).to.have.property('detections');
 
             mapillary.init();
             var cache2 = mapillary.cache();
@@ -275,7 +275,7 @@ describe('iD.serviceMapillary', function() {
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], detections: detections } }
             ];
 
-            mapillary.cache().objects.rtree.load(features);
+            mapillary.cache().map_features.rtree.load(features);
             var res = mapillary.signs(context.projection);
 
             expect(res).to.deep.eql([
@@ -297,7 +297,7 @@ describe('iD.serviceMapillary', function() {
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], detections: detections } }
             ];
 
-            mapillary.cache().objects.rtree.load(features);
+            mapillary.cache().map_features.rtree.load(features);
             var res = mapillary.signs(context.projection);
             expect(res).to.have.length.of.at.most(3);
         });
