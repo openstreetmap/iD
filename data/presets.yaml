@@ -3371,6 +3371,11 @@ en:
         name: Firepit
         # 'terms: fireplace,campfire'
         terms: '<translate with synonyms or related terms for ''Firepit'', separated by commas>'
+      leisure/fishing:
+        # leisure=fishing
+        name: Fishing Spot
+        # 'terms: angler'
+        terms: '<translate with synonyms or related terms for ''Fishing Spot'', separated by commas>'
       leisure/fitness_centre:
         # leisure=fitness_centre
         name: Gym / Fitness Center
