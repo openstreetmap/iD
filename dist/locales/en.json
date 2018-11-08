@@ -5168,6 +5168,10 @@
                     "name": "Firepit",
                     "terms": "fireplace,campfire"
                 },
+                "leisure/fishing": {
+                    "name": "Fishing Spot",
+                    "terms": "angler"
+                },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Center",
                     "terms": "health,gym,leisure,studio"
