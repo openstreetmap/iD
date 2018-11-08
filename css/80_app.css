@@ -2369,6 +2369,11 @@ img.tag-reference-wiki-image {
     background: rgba(0,0,0,.8);
 }
 
+/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
+.raw-membership-editor.inspector-inner {
+    margin-bottom: 150px;
+}
+
 /* hidden field to prevent user from tabbing out of the sidebar */
 input.key-trap {
     height: 0px;
