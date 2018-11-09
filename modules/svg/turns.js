@@ -12,16 +12,9 @@ export function svgTurns(projection) {
             return '#iD-turn-yes' + u;
         }
 
-        var layer = selection.selectAll('.data-layer-osm').selectAll('.layer-turns')
-            .data([0]);
+        var drawLayer = selection.selectAll('.layer-osm.points .points-group.turns');
 
-        layer = layer.enter()
-            .append('g')
-            .attr('class', 'layer-osm layer-turns')
-            .merge(layer);
-
-
-        var groups = layer.selectAll('g.turn')
+        var groups = drawLayer.selectAll('g.turn')
             .data(turns, function(d) { return d.key; });
 
         groups.exit()

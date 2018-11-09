@@ -268,7 +268,7 @@ export function uiFieldRestrictions(field, context) {
             .translate(geoVecSubtract(c, extentCenter))
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
+        var drawLayers = svgLayers(projection, context).only(['osm','touch']).dimensions(d);
         var drawVertices = svgVertices(projection, context);
         var drawLines = svgLines(projection, context);
         var drawTurns = svgTurns(projection, context);

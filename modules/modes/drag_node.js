@@ -429,7 +429,7 @@ export function modeDragNode(context) {
 
 
     var drag = behaviorDrag()
-        .selector('.layer-points-targets .target')
+        .selector('.layer-touch.points .target')
         .surface(d3_select('#map').node())
         .origin(origin)
         .on('start', start)

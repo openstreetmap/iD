@@ -152,9 +152,11 @@ export function svgAreas(projection, context) {
            .attr('d', path);
 
 
-        var layer = selection.selectAll('.layer-areas .layer-areas-areas');
+        var drawLayer = selection.selectAll('.layer-osm.areas');
+        var touchLayer = selection.selectAll('.layer-touch.areas');
 
-        var areagroup = layer
+        // Draw areas..
+        var areagroup = drawLayer
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 
@@ -188,7 +190,6 @@ export function svgAreas(projection, context) {
             .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
-
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {
@@ -200,8 +201,8 @@ export function svgAreas(projection, context) {
             .attr('d', path);
 
 
-        // touch targets
-        selection.selectAll('.layer-areas .layer-areas-targets')
+        // Draw touch targets..
+        touchLayer
             .call(drawTargets, graph, data.stroke, filter);
     }
 
