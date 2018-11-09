@@ -746,7 +746,7 @@
       "value": "buddhist",
       "description": "Buddhist Temple",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/buddhism-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-buddhist-15.svg?sanitize=true"
     },
     {
       "key": "religion",
@@ -3939,7 +3939,7 @@
       "value": "watermill",
       "description": "Watermill",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/buddhism-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-buddhist-15.svg?sanitize=true"
     },
     {
       "key": "man_made",
