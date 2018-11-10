@@ -390,8 +390,12 @@ export function uiInit(context) {
 
     ui.onResize = function(withPan) {
         var map = context.map();
-        var content = d3_select('#content');
-        var mapDimensions = utilGetDimensions(content, true);
+
+        // Recalc dimensions of map and sidebar.. (`true` = force recalc)
+        // This will call `getBoundingClientRect` and trigger reflow,
+        //  but the values will be cached for later use.
+        var mapDimensions = utilGetDimensions(d3_select('#content'), true);
+        utilGetDimensions(d3_select('#sidebar'), true);
 
         if (withPan !== undefined) {
             map.redrawEnable(false);
