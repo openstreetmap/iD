@@ -33,7 +33,8 @@
 
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
-.node.target {
+.node.target,
+.turn .target {
     pointer-events: fill;
     fill-opacity: 0.8;
     fill: currentColor;
@@ -49,6 +50,7 @@
     stroke-linecap: round;
     stroke-linejoin: round;
 }
+
 
 /* `.target-nope` objects are explicitly forbidden to join to */
 .surface:not(.nope-disabled) .node.target.target-nope,
@@ -269,15 +271,9 @@ g.vertex.highlighted .shadow {
 }
 
 /* Turn Restrictions */
-g.turn rect,
-g.turn circle {
+.points-group.turns g.turn rect,
+.points-group.turns g.turn circle {
     fill: none;
-    pointer-events: all;
-}
-
-.form-field-restrictions .vertex {
-    cursor: auto !important;
-    pointer-events: none;
 }
 
 /* Turn restriction paths and vertices */
