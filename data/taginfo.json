@@ -569,6 +569,48 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fast-food-15.svg?sanitize=true"
     },
     {
+      "key": "cuisine",
+      "value": "burger",
+      "description": "Burger Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fast-food-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "chicken",
+      "description": "Chicken Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-drumstick-bite.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "fish_and_chips",
+      "description": "Fish & Chips Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-fish.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "kebab",
+      "description": "Kebab Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "pizza",
+      "description": "Pizza Shop, Pizza Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-pizza-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "sandwich",
+      "description": "Sandwich Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
       "key": "amenity",
       "value": "fire_station",
       "description": "Fire Station",
@@ -880,6 +922,125 @@
       "description": "Restaurant",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "american",
+      "description": "American Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "asian",
+      "description": "Asian Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-noodle-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "chinese",
+      "description": "Chinese Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-noodle-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "french",
+      "description": "French Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "german",
+      "description": "German Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "greek",
+      "description": "Greek Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "indian",
+      "description": "Indian Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "italian",
+      "description": "Italian Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "japanese",
+      "description": "Japanese Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-noodle-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "mexican",
+      "description": "Mexican Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "noodle",
+      "description": "Noodle Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-noodle-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "seafood",
+      "description": "Seafood Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-seafood-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "steak_house",
+      "description": "Steakhouse",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/slaughterhouse-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "sushi",
+      "description": "Sushi Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-fish.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "thai",
+      "description": "Thai Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-noodle-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "turkish",
+      "description": "Turkish Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
+    },
+    {
+      "key": "cuisine",
+      "value": "vietnamese",
+      "description": "Vietnamese Restaurant",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-noodle-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -1972,7 +2133,7 @@
       "value": "confectionery",
       "description": "Candy Maker",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bakery-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/confectionary-15.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -3266,7 +3427,7 @@
       "value": "beach_resort",
       "description": "Beach Resort",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beach.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/beach-15.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -3545,7 +3706,7 @@
       "value": "beachvolleyball",
       "description": "Beach Volleyball Court",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/volleyball-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3594,7 +3755,7 @@
       "value": "skateboard",
       "description": "Skate Park",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/pitch-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/skateboard-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3629,7 +3790,7 @@
       "value": "volleyball",
       "description": "Volleyball Court",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/basketball-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/volleyball-15.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -3664,7 +3825,7 @@
       "value": "slipway",
       "description": "Slipway",
       "object_types": ["node", "way"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/beach.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/slipway-15.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -5342,7 +5503,7 @@
       "value": "confectionery",
       "description": "Candy Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/confectionary-15.svg?sanitize=true"
     },
     {
       "key": "shop",

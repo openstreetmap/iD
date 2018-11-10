@@ -1,0 +1,44 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "cuisine",
+        "address",
+        "building_area",
+        "opening_hours",
+        "capacity",
+        "takeaway",
+        "delivery",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "coffee",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "american"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "american"
+    },
+    "name": "American Restaurant"
+}
