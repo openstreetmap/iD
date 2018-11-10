@@ -405,7 +405,7 @@
       "value": "car_rental",
       "description": "Car Rental",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-rental-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -426,7 +426,7 @@
       "value": "casino",
       "description": "Casino",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/dice.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/casino-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -2147,7 +2147,7 @@
       "value": "shoemaker",
       "description": "Shoemaker",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/tools.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shoe-15.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -2182,7 +2182,7 @@
       "value": "watchmaker",
       "description": "Watchmaker",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/clock.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/watch-15.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -3245,7 +3245,7 @@
       "value": "adult_gaming_centre",
       "description": "Adult Gaming Center",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/dice.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/casino-15.svg?sanitize=true"
     },
     {
       "key": "leisure",
@@ -3739,7 +3739,7 @@
       "value": "bridge",
       "description": "Bridge",
       "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-archway.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bridge-15.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -3814,7 +3814,7 @@
       "value": "mast",
       "description": "Mast",
       "object_types": ["node"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/antenna.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/communications-tower-15.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -3939,14 +3939,14 @@
       "value": "watermill",
       "description": "Watermill",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/religious-buddhist-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/watermill-15.svg?sanitize=true"
     },
     {
       "key": "man_made",
       "value": "windmill",
       "description": "Windmill",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/windmill.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/windmill-15.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -5272,7 +5272,7 @@
       "value": "car_repair",
       "description": "Car Repair Shop",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-repair-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5573,7 +5573,7 @@
       "value": "jewelry",
       "description": "Jeweler",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/jewelry-store-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5699,7 +5699,7 @@
       "value": "optician",
       "description": "Optician",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-glasses.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/optician-15.svg?sanitize=true"
     },
     {
       "key": "organic",
@@ -5818,7 +5818,7 @@
       "value": "shoes",
       "description": "Shoe Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shoe-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5951,7 +5951,7 @@
       "value": "watches",
       "description": "Watches Shop",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/watch-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -6578,7 +6578,7 @@
       "value": "waterfall",
       "description": "Waterfall",
       "object_types": ["node"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/water-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/waterfall-15.svg?sanitize=true"
     },
     {
       "key": "waterway",
