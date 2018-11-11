@@ -4399,6 +4399,13 @@
     },
     {
       "key": "office",
+      "value": "religion",
+      "description": "Religious Office",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/suitcase-15.svg?sanitize=true"
+    },
+    {
+      "key": "office",
       "value": "research",
       "description": "Research Office",
       "object_types": ["node", "area"],

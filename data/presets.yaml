@@ -4985,6 +4985,10 @@ en:
         name: Quasi-NGO Office
         # 'terms: ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous'
         terms: '<translate with synonyms or related terms for ''Quasi-NGO Office'', separated by commas>'
+      office/religion:
+        # office=religion
+        name: Religious Office
+        terms: '<translate with synonyms or related terms for ''Religious Office'', separated by commas>'
       office/research:
         # office=research
         name: Research Office
