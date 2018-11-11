@@ -3517,27 +3517,27 @@
                     "terms": "restaurant,takeaway"
                 },
                 "amenity/fast_food/burger": {
-                    "name": "Burger Shop",
+                    "name": "Burger Fast Food",
                     "terms": "breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
                 "amenity/fast_food/chicken": {
-                    "name": "Chicken Shop",
+                    "name": "Chicken Fast Food",
                     "terms": "breakfast,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
                 "amenity/fast_food/fish_and_chips": {
-                    "name": "Fish & Chips Shop",
+                    "name": "Fish & Chips Fast Food",
                     "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries"
                 },
                 "amenity/fast_food/kebab": {
-                    "name": "Kebab Shop",
+                    "name": "Kebab Fast Food",
                     "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
                 "amenity/fast_food/pizza": {
-                    "name": "Pizza Shop",
+                    "name": "Pizza Fast Food",
                     "terms": "dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice"
                 },
                 "amenity/fast_food/sandwich": {
-                    "name": "Sandwich Shop",
+                    "name": "Sandwich Fast Food",
                     "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
                 "amenity/fire_station": {

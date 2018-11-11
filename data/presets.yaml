@@ -2366,34 +2366,34 @@ en:
         terms: '<translate with synonyms or related terms for ''Fast Food'', separated by commas>'
       amenity/fast_food/burger:
         # 'amenity=fast_food, cuisine=burger'
-        name: Burger Shop
+        name: Burger Fast Food
         # 'terms: breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table'
-        terms: '<translate with synonyms or related terms for ''Burger Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Burger Fast Food'', separated by commas>'
       amenity/fast_food/chicken:
         # 'amenity=fast_food, cuisine=chicken'
-        name: Chicken Shop
+        name: Chicken Fast Food
         # 'terms: breakfast,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
-        terms: '<translate with synonyms or related terms for ''Chicken Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Chicken Fast Food'', separated by commas>'
       amenity/fast_food/fish_and_chips:
         # 'amenity=fast_food, cuisine=fish_and_chips'
-        name: Fish & Chips Shop
+        name: Fish & Chips Fast Food
         # 'terms: breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries'
-        terms: '<translate with synonyms or related terms for ''Fish & Chips Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Fish & Chips Fast Food'', separated by commas>'
       amenity/fast_food/kebab:
         # 'amenity=fast_food, cuisine=kebab'
-        name: Kebab Shop
+        name: Kebab Fast Food
         # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
-        terms: '<translate with synonyms or related terms for ''Kebab Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Kebab Fast Food'', separated by commas>'
       amenity/fast_food/pizza:
         # 'amenity=fast_food, cuisine=pizza'
-        name: Pizza Shop
+        name: Pizza Fast Food
         # 'terms: dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice'
-        terms: '<translate with synonyms or related terms for ''Pizza Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Pizza Fast Food'', separated by commas>'
       amenity/fast_food/sandwich:
         # 'amenity=fast_food, cuisine=sandwich'
-        name: Sandwich Shop
+        name: Sandwich Fast Food
         # 'terms: breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table'
-        terms: '<translate with synonyms or related terms for ''Sandwich Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Sandwich Fast Food'', separated by commas>'
       amenity/ferry_terminal:
         # amenity=ferry_terminal
         name: Ferry Station / Terminal

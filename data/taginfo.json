@@ -571,42 +571,42 @@
     {
       "key": "cuisine",
       "value": "burger",
-      "description": "Burger Shop",
+      "description": "Burger Fast Food",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fast-food-15.svg?sanitize=true"
     },
     {
       "key": "cuisine",
       "value": "chicken",
-      "description": "Chicken Shop",
+      "description": "Chicken Fast Food",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-drumstick-bite.svg?sanitize=true"
     },
     {
       "key": "cuisine",
       "value": "fish_and_chips",
-      "description": "Fish & Chips Shop",
+      "description": "Fish & Chips Fast Food",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-fish.svg?sanitize=true"
     },
     {
       "key": "cuisine",
       "value": "kebab",
-      "description": "Kebab Shop",
+      "description": "Kebab Fast Food",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
     },
     {
       "key": "cuisine",
       "value": "pizza",
-      "description": "Pizza Shop, Pizza Restaurant",
+      "description": "Pizza Fast Food, Pizza Restaurant",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-pizza-15.svg?sanitize=true"
     },
     {
       "key": "cuisine",
       "value": "sandwich",
-      "description": "Sandwich Shop",
+      "description": "Sandwich Fast Food",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/restaurant-15.svg?sanitize=true"
     },
