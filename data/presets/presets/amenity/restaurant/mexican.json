@@ -1,0 +1,49 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "cuisine",
+        "address",
+        "building_area",
+        "opening_hours",
+        "capacity",
+        "takeaway",
+        "delivery",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "tacos",
+        "burritos",
+        "enchiladas",
+        "fajitas",
+        "nachos",
+        "tortillas",
+        "salsa",
+        "tamales",
+        "quesadillas"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "mexican"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "mexican"
+    },
+    "name": "Mexican Restaurant"
+}
