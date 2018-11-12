@@ -14,7 +14,7 @@ describe('iD.behaviorSelect', function() {
             .append('div')
             .attr('class', 'inspector-wrap');
 
-        context.surface().select('.data-layer-osm').selectAll('circle')
+        context.surface().select('.data-layer.osm').selectAll('circle')
             .data([a, b])
             .enter().append('circle')
             .attr('class', function(d) { return d.id; });

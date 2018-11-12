@@ -214,67 +214,75 @@ export function svgRelationMemberTags(graph) {
 
 
 export function svgSegmentWay(way, graph, activeID) {
-    var isActiveWay = (way.nodes.indexOf(activeID) !== -1);
-    var features = { passive: [], active: [] };
-    var start = {};
-    var end = {};
-    var node, type;
+    // When there is no activeID, we can memoize this expensive computation
+    if (activeID === undefined) {
+        return graph.transient(way, 'waySegments', getWaySegments);
+    } else {
+        return getWaySegments();
+    }
 
-    for (var i = 0; i < way.nodes.length; i++) {
-        node = graph.entity(way.nodes[i]);
-        type = svgPassiveVertex(node, graph, activeID);
-        end = { node: node, type: type };
+    function getWaySegments() {
+        var isActiveWay = (way.nodes.indexOf(activeID) !== -1);
+        var features = { passive: [], active: [] };
+        var start = {};
+        var end = {};
+        var node, type;
 
-        if (start.type !== undefined) {
-            if (start.node.id === activeID || end.node.id === activeID) {
-                // push nothing
-            } else if (isActiveWay && (start.type === 2 || end.type === 2)) {   // one adjacent vertex
-                pushActive(start, end, i);
-            } else if (start.type === 0 && end.type === 0) {   // both active vertices
-                pushActive(start, end, i);
-            } else {
-                pushPassive(start, end, i);
+        for (var i = 0; i < way.nodes.length; i++) {
+            node = graph.entity(way.nodes[i]);
+            type = svgPassiveVertex(node, graph, activeID);
+            end = { node: node, type: type };
+
+            if (start.type !== undefined) {
+                if (start.node.id === activeID || end.node.id === activeID) {
+                    // push nothing
+                } else if (isActiveWay && (start.type === 2 || end.type === 2)) {   // one adjacent vertex
+                    pushActive(start, end, i);
+                } else if (start.type === 0 && end.type === 0) {   // both active vertices
+                    pushActive(start, end, i);
+                } else {
+                    pushPassive(start, end, i);
+                }
             }
+
+            start = end;
         }
 
-        start = end;
-    }
+        return features;
 
-    return features;
+        function pushActive(start, end, index) {
+            features.active.push({
+                type: 'Feature',
+                id: way.id + '-' + index + '-nope',
+                properties: {
+                    nope: true,
+                    target: true,
+                    entity: way,
+                    nodes: [start.node, end.node],
+                    index: index
+                },
+                geometry: {
+                    type: 'LineString',
+                    coordinates: [start.node.loc, end.node.loc]
+                }
+            });
+        }
 
-
-    function pushActive(start, end, index) {
-        features.active.push({
-            type: 'Feature',
-            id: way.id + '-' + index + '-nope',
-            properties: {
-                nope: true,
-                target: true,
-                entity: way,
-                nodes: [start.node, end.node],
-                index: index
-            },
-            geometry: {
-                type: 'LineString',
-                coordinates: [start.node.loc, end.node.loc]
-            }
-        });
-    }
-
-    function pushPassive(start, end, index) {
-        features.passive.push({
-            type: 'Feature',
-            id: way.id + '-' + index,
-            properties: {
-                target: true,
-                entity: way,
-                nodes: [start.node, end.node],
-                index: index
-            },
-            geometry: {
-                type: 'LineString',
-                coordinates: [start.node.loc, end.node.loc]
-            }
-        });
+        function pushPassive(start, end, index) {
+            features.passive.push({
+                type: 'Feature',
+                id: way.id + '-' + index,
+                properties: {
+                    target: true,
+                    entity: way,
+                    nodes: [start.node, end.node],
+                    index: index
+                },
+                geometry: {
+                    type: 'LineString',
+                    coordinates: [start.node.loc, end.node.loc]
+                }
+            });
+        }
     }
 }
