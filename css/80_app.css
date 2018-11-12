@@ -504,6 +504,7 @@ button.secondary-action:hover {
     display: flex;
     flex: 1 1 auto;
     flex-flow: row nowrap;
+    align-items: center;
     padding: 0 10px;
     min-width: 30px;
 }
