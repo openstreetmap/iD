@@ -41,7 +41,9 @@ export function behaviorDraw(context) {
     // related code
     // - `mode/drag_node.js` `datum()`
     function datum() {
-        if (d3_event.altKey) return {};
+        var mode = context.mode();
+        var isNote = mode && (mode.id.indexOf('note') !== -1);
+        if (d3_event.altKey || isNote) return {};
 
         var element;
         if (d3_event.type === 'keydown') {
