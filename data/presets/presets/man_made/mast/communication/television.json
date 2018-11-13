@@ -15,9 +15,11 @@
         "communication mast",
         "communication tower",
         "guyed tower",
+        "television mast",
         "television tower",
         "transmission mast",
         "transmission tower",
+        "tv mast",
         "tv tower"
     ],
     "tags": {

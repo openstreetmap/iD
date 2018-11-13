@@ -4718,7 +4718,7 @@ en:
       man_made/mast/communication/mobile_phone:
         # 'man_made=mast, tower:type=communication, communication:mobile_phone=yes'
         name: Mobile Phone Mast
-        # 'terms: antenna,cell mast,cell phone mast,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,television tower,transmission mast,transmission tower'
+        # 'terms: antenna,cell mast,cell phone mast,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,transmission mast,transmission tower'
         terms: '<translate with synonyms or related terms for ''Mobile Phone Mast'', separated by commas>'
       man_made/mast/communication/radio:
         # 'man_made=mast, tower:type=communication, communication:radio=yes'
@@ -4728,7 +4728,7 @@ en:
       man_made/mast/communication/television:
         # 'man_made=mast, tower:type=communication, communication:television=yes'
         name: Television Broadcast Mast
-        # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,television tower,transmission mast,transmission tower,tv tower'
+        # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,television mast,television tower,transmission mast,transmission tower,tv mast,tv tower'
         terms: '<translate with synonyms or related terms for ''Television Broadcast Mast'', separated by commas>'
       man_made/monitoring_station:
         # man_made=monitoring_station
