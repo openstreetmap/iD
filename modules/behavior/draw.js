@@ -7,12 +7,11 @@ import {
     touches as d3_touches
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
-import { utilRebind } from '../util/rebind';
+import { utilKeybinding, utilRebind } from '../util';
 
 
 var _usedTails = {};
@@ -25,7 +24,7 @@ export function behaviorDraw(context) {
         'move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
     );
 
-    var keybinding = d3_keybinding('draw');
+    var keybinding = utilKeybinding('draw');
 
     var hover = behaviorHover(context).altDisables(true)
         .on('hover', context.ui().sidebar.hover);

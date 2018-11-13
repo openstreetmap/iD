@@ -10,8 +10,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiBackgroundDisplayOptions } from './background_display_options';
@@ -23,7 +21,7 @@ import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle } from '../util';
+import { utilCallWhenIdle, utilKeybinding } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -412,7 +410,7 @@ export function uiBackground(context) {
 
         update();
 
-        var keybinding = d3_keybinding('background')
+        var keybinding = utilKeybinding('background')
             .on(key, togglePane)
             .on(uiCmd('⌘' + key), quickSwitch)
             .on([t('map_data.key'), t('help.key')], hidePane);

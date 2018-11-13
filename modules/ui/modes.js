@@ -1,7 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
 import { select as d3_select } from 'd3-selection';
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
     modeAddArea,
@@ -13,6 +12,7 @@ import {
 
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
+import { utilKeybinding } from '../util';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
@@ -56,7 +56,7 @@ export function uiModes(context) {
                     .classed('mode-' + exited.id, false);
             });
 
-        var keybinding = d3_keybinding('mode-buttons');
+        var keybinding = utilKeybinding('mode-buttons');
 
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {

@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
@@ -15,6 +13,7 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
+import { utilKeybinding } from '../util';
 
 
 export function uiMapData(context) {
@@ -646,7 +645,7 @@ export function uiMapData(context) {
         update();
         setFill(_fillSelected);
 
-        var keybinding = d3_keybinding('features')
+        var keybinding = utilKeybinding('features')
             .on(key, togglePane)
             .on(t('area_fill.wireframe.key'), toggleWireframe)
             .on([t('background.key'), t('help.key')], hidePane);

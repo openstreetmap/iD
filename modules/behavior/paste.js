@@ -6,8 +6,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     actionCopyEntities,
     actionMove
@@ -21,10 +19,11 @@ import {
 
 import { modeMove } from '../modes';
 import { uiCmd } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function behaviorPaste(context) {
-    var keybinding = d3_keybinding('paste');
+    var keybinding = utilKeybinding('paste');
 
 
     function doPaste() {

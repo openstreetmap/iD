@@ -5,8 +5,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
@@ -14,19 +12,19 @@ import { modeBrowse } from '../modes/index';
 import { svgIcon } from '../svg/index';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
-import { utilNoAuto, utilRebind } from '../util';
+import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
 
 export function uiPresetList(context) {
-    var dispatch = d3_dispatch('choose'),
-        id,
-        currentPreset,
-        autofocus = false;
+    var dispatch = d3_dispatch('choose');
+    var _entityID;
+    var _currentPreset;
+    var _autofocus = false;
 
 
     function presetList(selection) {
-        var entity = context.entity(id),
-            geometry = context.geometry(id);
+        var entity = context.entity(_entityID);
+        var geometry = context.geometry(_entityID);
 
         // Treat entities on addr:interpolation lines as points, not vertices (#3241)
         if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {
@@ -45,11 +43,11 @@ export function uiPresetList(context) {
             .append('h3')
             .text(t('inspector.choose'));
 
-        if (context.entity(id).isUsed(context.graph())) {
+        if (context.entity(_entityID).isUsed(context.graph())) {
             messagewrap
                 .append('button')
                 .attr('class', 'preset-choose')
-                .on('click', function() { dispatch.call('choose', this, currentPreset); })
+                .on('click', function() { dispatch.call('choose', this, _currentPreset); })
                 .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
         } else {
             messagewrap
@@ -64,16 +62,16 @@ export function uiPresetList(context) {
         function initialKeydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
-                (d3_event.keyCode === d3_keybinding.keyCodes['⌫'] ||
-                 d3_event.keyCode === d3_keybinding.keyCodes['⌦'])) {
+                (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
+                 d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                operationDelete([id], context)();
+                operationDelete([_entityID], context)();
 
             // hack to let undo work when search is autofocused
             } else if (search.property('value').length === 0 &&
                 (d3_event.ctrlKey || d3_event.metaKey) &&
-                d3_event.keyCode === d3_keybinding.keyCodes.z) {
+                d3_event.keyCode === utilKeybinding.keyCodes.z) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 context.undo();
@@ -86,7 +84,7 @@ export function uiPresetList(context) {
 
         function keydown() {
             // down arrow
-            if (d3_event.keyCode === d3_keybinding.keyCodes['↓'] &&
+            if (d3_event.keyCode === utilKeybinding.keyCodes['↓'] &&
                 // if insertion point is at the end of the string
                 search.node().selectionStart === search.property('value').length) {
                 d3_event.preventDefault();
@@ -137,7 +135,7 @@ export function uiPresetList(context) {
         searchWrap
             .call(svgIcon('#iD-icon-search', 'pre-text'));
 
-        if (autofocus) {
+        if (_autofocus) {
             search.node().focus();
         }
 
@@ -168,7 +166,7 @@ export function uiPresetList(context) {
         items.enter()
             .append('div')
             .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
-            .classed('current', function(item) { return item.preset === currentPreset; })
+            .classed('current', function(item) { return item.preset === _currentPreset; })
             .each(function(item) { d3_select(this).call(item); })
             .style('opacity', 0)
             .transition()
@@ -181,7 +179,7 @@ export function uiPresetList(context) {
         var parentItem = d3_select(item.node().parentElement.closest('.preset-list-item'));
 
         // arrow down, move focus to the next, lower item
-        if (d3_event.keyCode === d3_keybinding.keyCodes['↓']) {
+        if (d3_event.keyCode === utilKeybinding.keyCodes['↓']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             // the next item in the list at the same level
@@ -205,7 +203,7 @@ export function uiPresetList(context) {
             }
 
         // arrow up, move focus to the previous, higher item
-        } else if (d3_event.keyCode === d3_keybinding.keyCodes['↑']) {
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes['↑']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             // the previous item in the list at the same level
@@ -215,8 +213,7 @@ export function uiPresetList(context) {
             if (previousItem.empty()) {
                 // if there is a parent item
                 if (!parentItem.empty()) {
-                    // the item is the first subitem of a sublist,
-                    // select the parent item
+                    // the item is the first subitem of a sublist select the parent item
                     previousItem = parentItem;
                 }
             // if the previous item is expanded
@@ -224,29 +221,27 @@ export function uiPresetList(context) {
                 // select the last subitem of the sublist of the previous item
                 previousItem = previousItem.select('.subgrid .preset-list-item:last-child');
             }
+
             if (!previousItem.empty()) {
                 // focus on the previous item
                 previousItem.select('.preset-list-button').node().focus();
-            }
-            else {
+            } else {
                 // the focus is at the top of the list, move focus back to the search field
                 var search = d3_select(this.closest('.preset-list-pane')).select('.preset-search-input');
                 search.node().focus();
             }
-        }
+
         // arrow left, move focus to the parent item if there is one
-        else if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
-
-            // if there is a parent item
+            // if there is a parent item, focus on the parent item
             if (!parentItem.empty()) {
-                // focus on the parent item
                 parentItem.select('.preset-list-button').node().focus();
             }
-        }
+
         // arrow right, choose this item
-        else if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             item.datum().choose();
@@ -277,12 +272,12 @@ export function uiPresetList(context) {
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
                 .call(uiPresetIcon()
-                    .geometry(context.geometry(id))
+                    .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', click)
                 .on('keydown', function() {
                     // right arrow, expand the focused item
-                    if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
+                    if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
                         // if the item isn't expanded
@@ -291,7 +286,7 @@ export function uiPresetList(context) {
                             click.call(this);
                         }
                     // left arrow, collapse the focused item
-                    } else if (d3_event.keyCode === d3_keybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
+                    } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
                         // if the item is expanded
@@ -348,7 +343,6 @@ export function uiPresetList(context) {
         };
 
         item.preset = preset;
-
         return item;
     }
 
@@ -361,7 +355,7 @@ export function uiPresetList(context) {
             wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .call(uiPresetIcon()
-                    .geometry(context.geometry(id))
+                    .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', item.choose)
                 .on('keydown', itemKeydown)
@@ -375,9 +369,8 @@ export function uiPresetList(context) {
 
         item.choose = function() {
             context.presets().choose(preset);
-
             context.perform(
-                actionChangePreset(id, currentPreset, preset),
+                actionChangePreset(_entityID, _currentPreset, preset),
                 t('operations.change_tags.annotation')
             );
 
@@ -390,30 +383,30 @@ export function uiPresetList(context) {
         };
 
         item.preset = preset;
-        item.reference = uiTagReference(preset.reference(context.geometry(id)), context);
+        item.reference = uiTagReference(preset.reference(context.geometry(_entityID)), context);
 
         return item;
     }
 
 
-    presetList.autofocus = function(_) {
-        if (!arguments.length) return autofocus;
-        autofocus = _;
+    presetList.autofocus = function(val) {
+        if (!arguments.length) return _autofocus;
+        _autofocus = val;
         return presetList;
     };
 
 
-    presetList.entityID = function(_) {
-        if (!arguments.length) return id;
-        id = _;
-        presetList.preset(context.presets().match(context.entity(id), context.graph()));
+    presetList.entityID = function(val) {
+        if (!arguments.length) return _entityID;
+        _entityID = val;
+        presetList.preset(context.presets().match(context.entity(_entityID), context.graph()));
         return presetList;
     };
 
 
-    presetList.preset = function(_) {
-        if (!arguments.length) return currentPreset;
-        currentPreset = _;
+    presetList.preset = function(val) {
+        if (!arguments.length) return _currentPreset;
+        _currentPreset = val;
         return presetList;
     };
 

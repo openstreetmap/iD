@@ -11,7 +11,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 
 import {
@@ -40,7 +39,8 @@ import {
 
 import {
     utilDisplayName,
-    utilDisplayType
+    utilDisplayType,
+    utilKeybinding
 } from '../util';
 
 
@@ -49,7 +49,7 @@ var _isSaving = false;
 
 export function modeSave(context) {
     var mode = { id: 'save' };
-    var keybinding = d3_keybinding('modeSave');
+    var keybinding = utilKeybinding('modeSave');
 
     var loading = uiLoading(context)
         .message(t('save.uploading'))

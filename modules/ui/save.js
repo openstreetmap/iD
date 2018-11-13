@@ -5,13 +5,12 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 import { modeSave } from '../modes';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
+import { utilKeybinding } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -101,7 +100,7 @@ export function uiSave(context) {
         updateCount();
 
 
-        var keybinding = d3_keybinding('uiSave')
+        var keybinding = utilKeybinding('uiSave')
             .on(key, save, true);
 
         d3_select(document)

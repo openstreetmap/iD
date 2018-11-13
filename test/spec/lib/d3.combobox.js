@@ -10,7 +10,7 @@ describe('d3.combobox', function() {
     ];
 
     function simulateKeypress(key) {
-        var keyCode = iD.lib.d3keybinding.keyCodes[key];
+        var keyCode = iD.utilKeybinding.keyCodes[key];
         var value = input.property('value');
         var start = input.property('selectionStart');
         var finis = input.property('selectionEnd');

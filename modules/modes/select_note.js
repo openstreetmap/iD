@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     behaviorBreathe,
     behaviorHover,
@@ -12,14 +10,10 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import {
-    modeDragNode,
-    modeDragNote
-} from '../modes';
-
+import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { services } from '../services';
-import { modeBrowse } from './browse';
 import { uiNoteEditor } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function modeSelectNote(context, selectedNoteID) {
@@ -29,7 +23,7 @@ export function modeSelectNote(context, selectedNoteID) {
     };
 
     var osm = services.osm;
-    var keybinding = d3_keybinding('select-note');
+    var keybinding = utilKeybinding('select-note');
     var noteEditor = uiNoteEditor(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw

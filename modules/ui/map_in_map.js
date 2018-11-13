@@ -10,8 +10,6 @@ import {
     zoomIdentity as d3_zoomIdentity
 } from 'd3-zoom';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 import {
     geoRawMercator,
@@ -23,7 +21,7 @@ import {
 
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
-import { utilSetTransform } from '../util';
+import { utilKeybinding, utilSetTransform } from '../util';
 import { utilGetDimensions } from '../util/dimensions';
 
 
@@ -336,7 +334,7 @@ export function uiMapInMap(context) {
 
         redraw();
 
-        var keybinding = d3_keybinding('map-in-map')
+        var keybinding = utilKeybinding('map-in-map')
             .on(t('background.minimap.key'), toggle);
 
         d3_select(document)

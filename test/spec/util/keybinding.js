@@ -1,8 +1,8 @@
-describe('d3.keybinding', function() {
+describe('utilKeybinding', function() {
     var keybinding, spy, input;
 
     beforeEach(function () {
-        keybinding = iD.lib.d3keybinding('keybinding-test');
+        keybinding = iD.utilKeybinding('keybinding-test');
         spy = sinon.spy();
         input = d3.select('body')
             .append('input');

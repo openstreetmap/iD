@@ -3,8 +3,8 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { uiFlash } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 /* Creates a keybinding behavior for an operation */
@@ -14,7 +14,7 @@ export function behaviorOperation() {
 
     var behavior = function () {
         if (_operation && _operation.available()) {
-            keybinding = d3_keybinding('behavior.key.' + _operation.id);
+            keybinding = utilKeybinding('behavior.key.' + _operation.id);
             keybinding.on(_operation.keys, function() {
                 d3_event.preventDefault();
                 var disabled = _operation.disabled();

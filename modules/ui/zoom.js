@@ -3,12 +3,11 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
+import { utilKeybinding } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -73,7 +72,7 @@ export function uiZoom(context) {
                 .call(svgIcon('#iD-icon-' + d.icon, 'light'));
         });
 
-        var keybinding = d3_keybinding('zoom');
+        var keybinding = utilKeybinding('zoom');
 
         ['plus', 'ffplus', '=', 'ffequals'].forEach(function(key) {
             keybinding.on([key], zoomIn);

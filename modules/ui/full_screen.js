@@ -3,15 +3,14 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { uiCmd } from './cmd';
+import { utilKeybinding } from '../util';
 import { utilDetect } from '../util/detect';
 
 
 export function uiFullScreen(context) {
     var element = context.container().node(),
-        keybinding = d3_keybinding('full-screen');
+        keybinding = utilKeybinding('full-screen');
         // button;
 
 

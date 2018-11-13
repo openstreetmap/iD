@@ -3,12 +3,11 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiInfoPanels } from './panels';
+import { utilKeybinding } from '../util';
 
 
 export function uiInfo(context) {
@@ -118,7 +117,7 @@ export function uiInfo(context) {
 
         redraw();
 
-        var keybinding = d3_keybinding('info')
+        var keybinding = utilKeybinding('info')
             .on(uiCmd('⌘' + t('info_panels.key')), toggle);
 
         ids.forEach(function(k) {

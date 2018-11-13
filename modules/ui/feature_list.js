@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { dmsCoordinatePair } from '../util/units';
@@ -20,12 +18,13 @@ import {
     utilDisplayName,
     utilDisplayType,
     utilEntityOrMemberSelector,
+    utilKeybinding,
     utilNoAuto
 } from '../util';
 
 
 export function uiFeatureList(context) {
-    var keybinding = d3_keybinding('uiFeatureList');
+    var keybinding = utilKeybinding('uiFeatureList');
     var _geocodeResults;
 
 

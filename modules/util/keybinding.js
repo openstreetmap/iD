@@ -4,31 +4,22 @@ import {
 } from 'd3-selection';
 
 
-/*
- * This code is licensed under the MIT license.
- *
- * Copyright © 2013, iD authors.
- *
- * Portions copyright © 2011, Keith Cirkel
- * See https://github.com/keithamus/jwerty
- *
- */
-export function d3keybinding(namespace) {
-    var bindings = [];
+export function utilKeybinding(namespace) {
+    var _keybindings = [];
 
 
     function testBindings(isCapturing) {
-        var didMatch = false,
-            i, binding;
+        var didMatch = false;
+        var i, binding;
 
         // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
         // so we don't strictly match on the shift key, but we prioritize
-        // shifted bindings first, and fallback to unshifted only if no match.
+        // shifted keybindings first, and fallback to unshifted only if no match.
         // (This lets us differentiate between '←'/'⇧←' or '⌘Z'/'⌘⇧Z')
 
-        // priority match shifted bindings first
-        for (i = 0; i < bindings.length; i++) {
-            binding = bindings[i];
+        // priority match shifted keybindings first
+        for (i = 0; i < _keybindings.length; i++) {
+            binding = _keybindings[i];
             if (!binding.event.modifiers.shiftKey) continue;  // no shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(binding, true)) {
@@ -37,10 +28,10 @@ export function d3keybinding(namespace) {
             }
         }
 
-        // then unshifted bindings
+        // then unshifted keybindings
         if (didMatch) return;
-        for (i = 0; i < bindings.length; i++) {
-            binding = bindings[i];
+        for (i = 0; i < _keybindings.length; i++) {
+            binding = _keybindings[i];
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(binding, false)) {
@@ -115,7 +106,7 @@ export function d3keybinding(namespace) {
 
 
     keybinding.off = function(selection) {
-        bindings = [];
+        _keybindings = [];
         selection = selection || d3_select(document);
         selection.on('keydown.capture' + namespace, null);
         selection.on('keydown.bubble' + namespace, null);
@@ -148,17 +139,17 @@ export function d3keybinding(namespace) {
                 // Normalise matching errors
                 if (code[j] === '++') code[j] = '+';
 
-                if (code[j] in d3keybinding.modifierCodes) {
-                    binding.event.modifiers[d3keybinding.modifierProperties[d3keybinding.modifierCodes[code[j]]]] = true;
+                if (code[j] in utilKeybinding.modifierCodes) {
+                    binding.event.modifiers[utilKeybinding.modifierProperties[utilKeybinding.modifierCodes[code[j]]]] = true;
                 } else {
-                    binding.event.key = d3keybinding.keys[code[j]] || code[j];
-                    if (code[j] in d3keybinding.keyCodes) {
-                        binding.event.keyCode = d3keybinding.keyCodes[code[j]];
+                    binding.event.key = utilKeybinding.keys[code[j]] || code[j];
+                    if (code[j] in utilKeybinding.keyCodes) {
+                        binding.event.keyCode = utilKeybinding.keyCodes[code[j]];
                     }
                 }
             }
 
-            bindings.push(binding);
+            _keybindings.push(binding);
         }
 
         return keybinding;
@@ -168,7 +159,12 @@ export function d3keybinding(namespace) {
 }
 
 
-d3keybinding.modifierCodes = {
+/*
+ * See https://github.com/keithamus/jwerty
+ */
+
+
+utilKeybinding.modifierCodes = {
     // Shift key, ⇧
     '⇧': 16, shift: 16,
     // CTRL key, on Mac: ⌃
@@ -179,14 +175,14 @@ d3keybinding.modifierCodes = {
     '⌘': 91, meta: 91, cmd: 91, 'super': 91, win: 91
 };
 
-d3keybinding.modifierProperties = {
+utilKeybinding.modifierProperties = {
     16: 'shiftKey',
     17: 'ctrlKey',
     18: 'altKey',
     91: 'metaKey'
 };
 
-d3keybinding.keys = {
+utilKeybinding.keys = {
     // Backspace key, on Mac: ⌫ (Backspace)
     '⌫': 'Backspace', backspace: 'Backspace',
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
@@ -287,7 +283,7 @@ d3keybinding.keys = {
     f25: 'F25'
 };
 
-d3keybinding.keyCodes = {
+utilKeybinding.keyCodes = {
     // Backspace key, on Mac: ⌫ (Backspace)
     '⌫': 8, backspace: 8,
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
@@ -362,26 +358,26 @@ d3keybinding.keyCodes = {
 // NUMPAD 0-9
 var i = 95, n = 0;
 while (++i < 106) {
-    d3keybinding.keyCodes['num-' + n] = i;
+    utilKeybinding.keyCodes['num-' + n] = i;
     ++n;
 }
 
 // 0-9
 i = 47; n = 0;
 while (++i < 58) {
-    d3keybinding.keyCodes[n] = i;
+    utilKeybinding.keyCodes[n] = i;
     ++n;
 }
 
 // F1-F25
 i = 111; n = 1;
 while (++i < 136) {
-    d3keybinding.keyCodes['f' + n] = i;
+    utilKeybinding.keyCodes['f' + n] = i;
     ++n;
 }
 
 // a-z
 i = 64;
 while (++i < 91) {
-    d3keybinding.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
+    utilKeybinding.keyCodes[String.fromCharCode(i).toLowerCase()] = i;
 }

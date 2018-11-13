@@ -7,12 +7,12 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { utilKeybinding } from '../util';
 import { uiCmd } from '../ui';
 
 
 export function behaviorCopy(context) {
-    var keybinding = d3_keybinding('copy');
+    var keybinding = utilKeybinding('copy');
 
 
     function groupEntities(ids, graph) {

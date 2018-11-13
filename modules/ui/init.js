@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
@@ -12,6 +10,7 @@ import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
+import { utilKeybinding } from '../util';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -298,7 +297,7 @@ export function uiInit(context) {
 
 
         var panPixels = 80;
-        var keybinding = d3_keybinding('main')
+        var keybinding = utilKeybinding('main')
             .on('⌫', function() { d3_event.preventDefault(); })
             .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([panPixels, 0]))

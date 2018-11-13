@@ -6,8 +6,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     behaviorBreathe,
     behaviorHover,
@@ -16,9 +14,9 @@ import {
 } from '../behavior';
 
 import { geoExtent } from '../geo';
-import { modeDragNode, modeDragNote } from '../modes';
-import { modeBrowse } from './browse';
+import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { uiDataEditor } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function modeSelectData(context, selectedDatum) {
@@ -27,7 +25,7 @@ export function modeSelectData(context, selectedDatum) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('select-data');
+    var keybinding = utilKeybinding('select-data');
     var dataEditor = uiDataEditor(context);
 
     var behaviors = [
