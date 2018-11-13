@@ -4710,16 +4710,31 @@ en:
         name: Mast
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Mast'', separated by commas>'
+      man_made/mast/communication:
+        # 'man_made=mast, tower:type=communication'
+        name: Communication Mast
+        # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
+        terms: '<translate with synonyms or related terms for ''Communication Mast'', separated by commas>'
+      man_made/mast/communication/mobile_phone:
+        # 'man_made=mast, tower:type=communication, communication:mobile_phone=yes'
+        name: Mobile Phone Mast
+        # 'terms: antenna,cell mast,cell phone mast,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,television tower,transmission mast,transmission tower'
+        terms: '<translate with synonyms or related terms for ''Mobile Phone Mast'', separated by commas>'
+      man_made/mast/communication/radio:
+        # 'man_made=mast, tower:type=communication, communication:radio=yes'
+        name: Radio Broadcast Mast
+        # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,radio mast,radio tower,transmission mast,transmission tower'
+        terms: '<translate with synonyms or related terms for ''Radio Broadcast Mast'', separated by commas>'
+      man_made/mast/communication/television:
+        # 'man_made=mast, tower:type=communication, communication:television=yes'
+        name: Television Broadcast Mast
+        # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,television tower,transmission mast,transmission tower,tv tower'
+        terms: '<translate with synonyms or related terms for ''Television Broadcast Mast'', separated by commas>'
       man_made/monitoring_station:
         # man_made=monitoring_station
         name: Monitoring Station
         # 'terms: weather,earthquake,seismology,air,gps'
         terms: '<translate with synonyms or related terms for ''Monitoring Station'', separated by commas>'
-      man_made/observation:
-        # 'man_made=tower, tower:type=observation'
-        name: Observation Tower
-        # 'terms: lookout tower,fire tower'
-        terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/observatory:
         # man_made=observatory
         name: Observatory
@@ -4759,7 +4774,7 @@ en:
         name: Surveillance
         # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
         terms: '<translate with synonyms or related terms for ''Surveillance'', separated by commas>'
-      man_made/surveillance_camera:
+      man_made/surveillance/camera:
         # 'man_made=surveillance, surveillance:type=camera'
         name: Surveillance Camera
         # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
@@ -4773,6 +4788,16 @@ en:
         # man_made=tower
         name: Tower
         terms: '<translate with synonyms or related terms for ''Tower'', separated by commas>'
+      man_made/tower/communication:
+        # 'man_made=tower, tower:type=communication'
+        name: Communication Tower
+        # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
+        terms: '<translate with synonyms or related terms for ''Communication Tower'', separated by commas>'
+      man_made/tower/observation:
+        # 'man_made=tower, tower:type=observation'
+        name: Observation Tower
+        # 'terms: lookout tower,fire tower'
+        terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/wastewater_plant:
         # man_made=wastewater_plant
         name: Wastewater Plant
