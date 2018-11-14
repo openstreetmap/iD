@@ -3978,18 +3978,39 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/communications-tower-15.svg?sanitize=true"
     },
     {
+      "key": "tower:type",
+      "value": "communication",
+      "description": "Communication Mast, Communication Tower",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/communications-tower-15.svg?sanitize=true"
+    },
+    {
+      "key": "communication:mobile_phone",
+      "value": "yes",
+      "description": "Mobile Phone Mast",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/communications-tower-15.svg?sanitize=true"
+    },
+    {
+      "key": "communication:radio",
+      "value": "yes",
+      "description": "Radio Broadcast Mast",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/communications-tower-15.svg?sanitize=true"
+    },
+    {
+      "key": "communication:television",
+      "value": "yes",
+      "description": "Television Broadcast Mast",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/communications-tower-15.svg?sanitize=true"
+    },
+    {
       "key": "man_made",
       "value": "monitoring_station",
       "description": "Monitoring Station",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/antenna.svg?sanitize=true"
-    },
-    {
-      "key": "tower:type",
-      "value": "observation",
-      "description": "Observation Tower",
-      "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/tower.svg?sanitize=true"
     },
     {
       "key": "man_made",
@@ -4040,16 +4061,16 @@
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/storage_tank.svg?sanitize=true"
     },
     {
-      "key": "surveillance:type",
-      "value": "camera",
-      "description": "Surveillance Camera, Surveillance Type",
+      "key": "man_made",
+      "value": "surveillance",
+      "description": "Surveillance",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/attraction-15.svg?sanitize=true"
     },
     {
-      "key": "man_made",
-      "value": "surveillance",
-      "description": "Surveillance",
+      "key": "surveillance:type",
+      "value": "camera",
+      "description": "Surveillance Camera, Surveillance Type",
       "object_types": ["node"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/attraction-15.svg?sanitize=true"
     },
@@ -4064,6 +4085,13 @@
       "key": "man_made",
       "value": "tower",
       "description": "Tower",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/tower.svg?sanitize=true"
+    },
+    {
+      "key": "tower:type",
+      "value": "observation",
+      "description": "Observation Tower",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/tower.svg?sanitize=true"
     },
