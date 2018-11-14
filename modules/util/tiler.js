@@ -111,6 +111,31 @@ export function utilTiler() {
     };
 
 
+    /**
+     * getGeoJSON() returns a FeatureCollection for debugging tiles
+     */
+    tiler.getGeoJSON = function(projection) {
+        var features = tiler.getTiles(projection).map(function(tile) {
+            return {
+                type: 'Feature',
+                properties: {
+                    id: tile.id,
+                    name: tile.id
+                },
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [ tile.extent.polygon() ]
+                }
+            };
+        });
+
+        return {
+            type: 'FeatureCollection',
+            features: features
+        };
+    };
+
+
     tiler.tileSize = function(val) {
         if (!arguments.length) return _tileSize;
         _tileSize = val;
