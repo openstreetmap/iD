@@ -10,7 +10,6 @@ import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilKeybinding } from '../util';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -297,7 +296,7 @@ export function uiInit(context) {
 
 
         var panPixels = 80;
-        var keybinding = utilKeybinding('main')
+        context.keybinding()
             .on('⌫', function() { d3_event.preventDefault(); })
             .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([panPixels, 0]))
@@ -308,9 +307,6 @@ export function uiInit(context) {
             .on(['⇧↑', uiCmd('⌘↑')], pan([0, map.dimensions()[1]]))
             .on(['⇧→', uiCmd('⌘→')], pan([-map.dimensions()[0], 0]))
             .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]));
-
-        d3_select(document)
-            .call(keybinding);
 
         context.enter(modeBrowse(context));
 
@@ -372,6 +368,7 @@ export function uiInit(context) {
 
 
     ui.restart = function(arg) {
+        context.keybinding().clear();
         context.locale(arg);
         context.loadLocale(function(err) {
             if (!err) {

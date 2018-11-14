@@ -55,7 +55,7 @@ export function behaviorHover(context) {
     }
 
 
-    var hover = function(selection) {
+    function behavior(selection) {
         _selection = selection;
         _newId = null;
 
@@ -150,10 +150,10 @@ export function behaviorHover(context) {
                 dispatch.call('hover', this, null);
             }
         }
-    };
+    }
 
 
-    hover.off = function(selection) {
+    behavior.off = function(selection) {
         selection.selectAll('.hover')
             .classed('hover', false);
         selection.selectAll('.hover-suppressed')
@@ -172,12 +172,12 @@ export function behaviorHover(context) {
     };
 
 
-    hover.altDisables = function(_) {
+    behavior.altDisables = function(val) {
         if (!arguments.length) return _altDisables;
-        _altDisables = _;
-        return hover;
+        _altDisables = val;
+        return behavior;
     };
 
 
-    return utilRebind(hover, dispatch, 'on');
+    return utilRebind(behavior, dispatch, 'on');
 }

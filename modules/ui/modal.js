@@ -34,7 +34,8 @@ export function uiModal(selection, blocking) {
             .duration(200)
             .style('top','0px');
 
-        keybinding.off();
+        d3_select(document)
+            .call(keybinding.unbind);
     };
 
 

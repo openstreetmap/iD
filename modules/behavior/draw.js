@@ -190,7 +190,7 @@ export function behaviorDraw(context) {
     }
 
 
-    function draw(selection) {
+    function behavior(selection) {
         context.install(hover);
         context.install(edit);
 
@@ -215,11 +215,11 @@ export function behaviorDraw(context) {
         d3_select(document)
             .call(keybinding);
 
-        return draw;
+        return behavior;
     }
 
 
-    draw.off = function(selection) {
+    behavior.off = function(selection) {
         context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
         context.uninstall(edit);
@@ -240,15 +240,15 @@ export function behaviorDraw(context) {
             // note: keyup.space-block, click.draw-block should remain
 
         d3_select(document)
-            .call(keybinding.off);
+            .call(keybinding.unbind);
     };
 
 
-    draw.tail = function(_) {
+    behavior.tail = function(_) {
         tail.text(_);
-        return draw;
+        return behavior;
     };
 
 
-    return utilRebind(draw, dispatch, 'on');
+    return utilRebind(behavior, dispatch, 'on');
 }

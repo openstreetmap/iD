@@ -11,7 +11,6 @@ import { uiIntro } from './intro';
 import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilKeybinding } from '../util';
 
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
@@ -476,12 +475,8 @@ export function uiHelp(context) {
 
         clickHelp(docs[0], 0);
 
-        var keybinding = utilKeybinding('help')
-            .on(key, togglePane)
-            .on([t('background.key'), t('map_data.key')], hidePane);
-
-        d3_select(document)
-            .call(keybinding);
+        context.keybinding()
+            .on(key, togglePane);
 
         uiHelp.hidePane = hidePane;
         uiHelp.togglePane = togglePane;

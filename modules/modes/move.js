@@ -159,7 +159,8 @@ export function modeMove(context, entityIDs, baseGraph) {
         context.history()
             .on('undone.move', null);
 
-        keybinding.off();
+        d3_select(document)
+            .call(keybinding.unbind);
     };
 
 

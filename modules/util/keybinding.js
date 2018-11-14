@@ -1,3 +1,5 @@
+import _isFunction from 'lodash-es/isFunction';
+
 import {
     event as d3_event,
     select as d3_select
@@ -5,11 +7,12 @@ import {
 
 
 export function utilKeybinding(namespace) {
-    var _keybindings = [];
+    var _keybindings = {};
 
 
     function testBindings(isCapturing) {
         var didMatch = false;
+        var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
         var i, binding;
 
         // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
@@ -18,8 +21,8 @@ export function utilKeybinding(namespace) {
         // (This lets us differentiate between '←'/'⇧←' or '⌘Z'/'⌘⇧Z')
 
         // priority match shifted keybindings first
-        for (i = 0; i < _keybindings.length; i++) {
-            binding = _keybindings[i];
+        for (i = 0; i < bindings.length; i++) {
+            binding = bindings[i];
             if (!binding.event.modifiers.shiftKey) continue;  // no shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(binding, true)) {
@@ -30,8 +33,8 @@ export function utilKeybinding(namespace) {
 
         // then unshifted keybindings
         if (didMatch) return;
-        for (i = 0; i < _keybindings.length; i++) {
-            binding = _keybindings[i];
+        for (i = 0; i < bindings.length; i++) {
+            binding = bindings[i];
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(binding, false)) {
@@ -99,26 +102,53 @@ export function utilKeybinding(namespace) {
 
     function keybinding(selection) {
         selection = selection || d3_select(document);
-        selection.on('keydown.capture' + namespace, capture, true);
-        selection.on('keydown.bubble' + namespace, bubble, false);
+        selection.on('keydown.capture.' + namespace, capture, true);
+        selection.on('keydown.bubble.' + namespace, bubble, false);
         return keybinding;
     }
 
-
-    keybinding.off = function(selection) {
+    // was: keybinding.off()
+    keybinding.unbind = function(selection) {
         _keybindings = [];
         selection = selection || d3_select(document);
-        selection.on('keydown.capture' + namespace, null);
-        selection.on('keydown.bubble' + namespace, null);
+        selection.on('keydown.capture.' + namespace, null);
+        selection.on('keydown.bubble.' + namespace, null);
         return keybinding;
     };
 
 
-    keybinding.on = function(codes, callback, capture) {
+    keybinding.clear = function() {
+        _keybindings = {};
+        return keybinding;
+    };
+
+
+    // Remove one or more keycode bindings.
+    keybinding.off = function(codes, capture) {
         var arr = [].concat(codes);
+
         for (var i = 0; i < arr.length; i++) {
-            var code = arr[i];
+            var id = arr[i] + (capture ? '-capture' : '-bubble');
+            delete _keybindings[id];
+        }
+        return keybinding;
+    };
+
+
+    // Add one or more keycode bindings.
+    keybinding.on = function(codes, callback, capture) {
+        if (!_isFunction(callback)) {
+            return keybinding.off(codes, capture);
+        }
+
+        var arr = [].concat(codes);
+
+        for (var i = 0; i < arr.length; i++) {
+            var id = arr[i] + (capture ? '-capture' : '-bubble');
             var binding = {
+                id: id,
+                capture: capture,
+                callback: callback,
                 event: {
                     key: undefined,  // preferred
                     keyCode: 0,      // fallback
@@ -128,32 +158,35 @@ export function utilKeybinding(namespace) {
                         altKey: false,
                         metaKey: false
                     }
-                },
-                capture: capture,
-                callback: callback
+                }
             };
 
-            code = code.toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
+            if (_keybindings[id]) {
+                console.warn('warning: duplicate keybinding for "' + id + '"'); // eslint-disable-line no-console
+            }
 
-            for (var j = 0; j < code.length; j++) {
+            _keybindings[id] = binding;
+
+            var matches = arr[i].toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
+            for (var j = 0; j < matches.length; j++) {
                 // Normalise matching errors
-                if (code[j] === '++') code[j] = '+';
+                if (matches[j] === '++') matches[j] = '+';
 
-                if (code[j] in utilKeybinding.modifierCodes) {
-                    binding.event.modifiers[utilKeybinding.modifierProperties[utilKeybinding.modifierCodes[code[j]]]] = true;
+                if (matches[j] in utilKeybinding.modifierCodes) {
+                    var prop = utilKeybinding.modifierProperties[utilKeybinding.modifierCodes[matches[j]]];
+                    binding.event.modifiers[prop] = true;
                 } else {
-                    binding.event.key = utilKeybinding.keys[code[j]] || code[j];
-                    if (code[j] in utilKeybinding.keyCodes) {
-                        binding.event.keyCode = utilKeybinding.keyCodes[code[j]];
+                    binding.event.key = utilKeybinding.keys[matches[j]] || matches[j];
+                    if (matches[j] in utilKeybinding.keyCodes) {
+                        binding.event.keyCode = utilKeybinding.keyCodes[matches[j]];
                     }
                 }
             }
-
-            _keybindings.push(binding);
         }
 
         return keybinding;
     };
+
 
     return keybinding;
 }
@@ -162,7 +195,6 @@ export function utilKeybinding(namespace) {
 /*
  * See https://github.com/keithamus/jwerty
  */
-
 
 utilKeybinding.modifierCodes = {
     // Shift key, ⇧

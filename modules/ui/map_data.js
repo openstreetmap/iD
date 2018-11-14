@@ -13,7 +13,6 @@ import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilKeybinding } from '../util';
 
 
 export function uiMapData(context) {
@@ -645,13 +644,9 @@ export function uiMapData(context) {
         update();
         setFill(_fillSelected);
 
-        var keybinding = utilKeybinding('features')
+        context.keybinding()
             .on(key, togglePane)
-            .on(t('area_fill.wireframe.key'), toggleWireframe)
-            .on([t('background.key'), t('help.key')], hidePane);
-
-        d3_select(document)
-            .call(keybinding);
+            .on(t('area_fill.wireframe.key'), toggleWireframe);
 
         uiMapData.hidePane = hidePane;
         uiMapData.togglePane = togglePane;

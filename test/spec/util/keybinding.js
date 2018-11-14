@@ -9,7 +9,7 @@ describe('utilKeybinding', function() {
     });
 
     afterEach(function () {
-        keybinding.off(d3.select(document));
+        d3.select(document).call(keybinding.unbind);
         input.remove();
     });
 
@@ -86,13 +86,13 @@ describe('utilKeybinding', function() {
             expect(spy).to.have.been.calledOnce;
         });
 
-        it('resets bindings when keybinding.off is called', function () {
+        it('resets bindings when keybinding.unbind is called', function () {
             d3.select(document).call(keybinding.on('A', spy));
             happen.keydown(document, {keyCode: 65});
             expect(spy).to.have.been.calledOnce;
 
             spy = sinon.spy();
-            d3.select(document).call(keybinding.off);
+            d3.select(document).call(keybinding.unbind);
             d3.select(document).call(keybinding.on('A', spy));
             happen.keydown(document, {keyCode: 65});
             expect(spy).to.have.been.calledOnce;

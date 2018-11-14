@@ -63,7 +63,9 @@ export function modeSelectData(context, selectedDatum) {
     mode.enter = function() {
         behaviors.forEach(context.install);
         keybinding.on('⎋', esc, true);
-        d3_select(document).call(keybinding);
+
+        d3_select(document)
+            .call(keybinding);
 
         selectData();
 
@@ -81,7 +83,9 @@ export function modeSelectData(context, selectedDatum) {
 
     mode.exit = function() {
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
 
         context.surface()
             .selectAll('.layer-mapdata .selected')

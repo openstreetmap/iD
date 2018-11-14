@@ -8,18 +8,17 @@ import { dataShortcuts } from '../../data';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
-import { utilKeybinding } from '../util';
 import { utilDetect } from '../util/detect';
 
 
-export function uiShortcuts() {
+export function uiShortcuts(context) {
     var detected = utilDetect();
     var _activeTab = 0;
     var _modalSelection;
     var _selection = d3_select(null);
 
 
-    var keybinding = utilKeybinding('shortcuts')
+    context.keybinding()
         .on(t('shortcuts.toggle.key'), function () {
             if (d3_selectAll('.modal-shortcuts').size()) {  // already showing
                 if (_modalSelection) {
@@ -31,10 +30,6 @@ export function uiShortcuts() {
                 shortcutsModal(_modalSelection);
             }
         });
-
-    d3_select(document)
-        .call(keybinding);
-
 
 
     function shortcutsModal(_modalSelection) {

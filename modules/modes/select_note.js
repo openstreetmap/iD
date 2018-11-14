@@ -95,7 +95,9 @@ export function modeSelectNote(context, selectedNoteID) {
 
         behaviors.forEach(context.install);
         keybinding.on('⎋', esc, true);
-        d3_select(document).call(keybinding);
+
+        d3_select(document)
+            .call(keybinding);
 
         selectNote();
 
@@ -112,7 +114,9 @@ export function modeSelectNote(context, selectedNoteID) {
 
     mode.exit = function() {
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
 
         context.surface()
             .selectAll('.layer-notes .selected')

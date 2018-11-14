@@ -487,7 +487,7 @@ export function modeSave(context) {
 
     function keybindingOff() {
         d3_select(document)
-            .call(keybinding.off);
+            .call(keybinding.unbind);
     }
 
 

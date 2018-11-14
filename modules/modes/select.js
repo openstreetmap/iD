@@ -511,7 +511,10 @@ export function modeSelect(context, selectedIDs) {
         if (inspector) wrap.call(inspector.close);
 
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
+
         closeMenu();
         editMenu = undefined;
 

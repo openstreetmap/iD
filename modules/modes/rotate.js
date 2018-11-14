@@ -142,7 +142,8 @@ export function modeRotate(context, entityIDs) {
         context.history()
             .on('undone.rotate', null);
 
-        keybinding.off();
+        d3_select(document)
+            .call(keybinding.unbind);
     };
 
 

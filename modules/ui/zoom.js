@@ -7,7 +7,6 @@ import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilKeybinding } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -72,19 +71,14 @@ export function uiZoom(context) {
                 .call(svgIcon('#iD-icon-' + d.icon, 'light'));
         });
 
-        var keybinding = utilKeybinding('zoom');
-
         ['plus', 'ffplus', '=', 'ffequals'].forEach(function(key) {
-            keybinding.on([key], zoomIn);
-            keybinding.on([uiCmd('⌘' + key)], zoomInFurther);
+            context.keybinding().on([key], zoomIn);
+            context.keybinding().on([uiCmd('⌘' + key)], zoomInFurther);
         });
 
         ['_', '-', 'ffminus', 'dash'].forEach(function(key) {
-            keybinding.on([key], zoomOut);
-            keybinding.on([uiCmd('⌘' + key)], zoomOutFurther);
+            context.keybinding().on([key], zoomOut);
+            context.keybinding().on([uiCmd('⌘' + key)], zoomOutFurther);
         });
-
-        d3_select(document)
-            .call(keybinding);
     };
 }

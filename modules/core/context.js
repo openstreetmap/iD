@@ -10,38 +10,18 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
 
-import {
-    t,
-    currentLocale,
-    addTranslation,
-    setLocale
-} from '../util/locale';
+import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
-
-import {
-    dataLocales,
-    dataEn
-} from '../../data';
-
+import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { presetIndex } from '../presets';
-
-import {
-    rendererBackground,
-    rendererFeatures,
-    rendererMap
-} from '../renderer';
-
+import { rendererBackground, rendererFeatures, rendererMap } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
-
-import {
-    utilCallWhenIdle,
-    utilRebind
-} from '../util';
+import { utilCallWhenIdle, utilKeybinding, utilRebind } from '../util';
 
 
 export var areaKeys = {};
@@ -104,9 +84,17 @@ export function coreContext() {
     };
 
 
-    /* Straight accessors. Avoid using these if you can. */
-    var ui, connection, history;
+    /* User interface and keybinding */
+    var ui;
     context.ui = function() { return ui; };
+
+    var keybinding = utilKeybinding('context');
+    context.keybinding = function() { return keybinding; };
+    d3_select(document).call(keybinding);
+
+
+    /* Straight accessors. Avoid using these if you can. */
+    var connection, history;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
 

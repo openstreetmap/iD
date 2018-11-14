@@ -18,13 +18,11 @@ import {
     utilDisplayName,
     utilDisplayType,
     utilEntityOrMemberSelector,
-    utilKeybinding,
     utilNoAuto
 } from '../util';
 
 
 export function uiFeatureList(context) {
-    var keybinding = utilKeybinding('uiFeatureList');
     var _geocodeResults;
 
 
@@ -66,11 +64,8 @@ export function uiFeatureList(context) {
         context.map()
             .on('drawn.feature-list', mapDrawn);
 
-        keybinding
+        context.keybinding()
             .on(uiCmd('⌘F'), focusSearch);
-
-        d3_select(document)
-            .call(keybinding);
 
 
         function focusSearch() {

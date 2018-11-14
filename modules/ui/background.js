@@ -21,7 +21,7 @@ import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle, utilKeybinding } from '../util';
+import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -410,13 +410,9 @@ export function uiBackground(context) {
 
         update();
 
-        var keybinding = utilKeybinding('background')
+        context.keybinding()
             .on(key, togglePane)
-            .on(uiCmd('⌘' + key), quickSwitch)
-            .on([t('map_data.key'), t('help.key')], hidePane);
-
-        d3_select(document)
-            .call(keybinding);
+            .on(uiCmd('⌘' + key), quickSwitch);
 
         uiBackground.hidePane = hidePane;
         uiBackground.togglePane = togglePane;

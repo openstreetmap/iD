@@ -7,14 +7,13 @@ import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiInfoPanels } from './panels';
-import { utilKeybinding } from '../util';
 
 
 export function uiInfo(context) {
-    var ids = Object.keys(uiInfoPanels),
-        wasActive = ['measurement'],
-        panels = {},
-        active = {};
+    var ids = Object.keys(uiInfoPanels);
+    var wasActive = ['measurement'];
+    var panels = {};
+    var active = {};
 
     // create panels
     ids.forEach(function(k) {
@@ -117,18 +116,15 @@ export function uiInfo(context) {
 
         redraw();
 
-        var keybinding = utilKeybinding('info')
+        context.keybinding()
             .on(uiCmd('⌘' + t('info_panels.key')), toggle);
 
         ids.forEach(function(k) {
             var key = t('info_panels.' + k + '.key', { default: null });
             if (!key) return;
-            keybinding
+            context.keybinding()
                 .on(uiCmd('⌘⇧' + key), function() { toggle(k); });
         });
-
-        d3_select(document)
-            .call(keybinding);
     }
 
     return info;

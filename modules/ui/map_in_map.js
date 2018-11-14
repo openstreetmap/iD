@@ -21,7 +21,7 @@ import {
 
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
-import { utilKeybinding, utilSetTransform } from '../util';
+import { utilSetTransform } from '../util';
 import { utilGetDimensions } from '../util/dimensions';
 
 
@@ -334,11 +334,8 @@ export function uiMapInMap(context) {
 
         redraw();
 
-        var keybinding = utilKeybinding('map-in-map')
+        context.keybinding()
             .on(t('background.minimap.key'), toggle);
-
-        d3_select(document)
-            .call(keybinding);
     }
 
     return map_in_map;

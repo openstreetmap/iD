@@ -12,7 +12,6 @@ import {
 
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
-import { utilKeybinding } from '../util';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
@@ -56,10 +55,8 @@ export function uiModes(context) {
                     .classed('mode-' + exited.id, false);
             });
 
-        var keybinding = utilKeybinding('mode-buttons');
-
         modes.forEach(function(mode) {
-            keybinding.on(mode.key, function() {
+            context.keybinding().on(mode.key, function() {
                 if (mode.id === 'add-note' && !(notesEnabled() && notesEditable())) return;
                 if (mode.id !== 'add-note' && !editable()) return;
 
@@ -70,9 +67,6 @@ export function uiModes(context) {
                 }
             });
         });
-
-        d3_select(document)
-            .call(keybinding);
 
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });

@@ -1,16 +1,11 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { modeSave } from '../modes';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilKeybinding } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
@@ -100,11 +95,8 @@ export function uiSave(context) {
         updateCount();
 
 
-        var keybinding = utilKeybinding('uiSave')
+        context.keybinding()
             .on(key, save, true);
-
-        d3_select(document)
-            .call(keybinding);
 
         context.history()
             .on('change.save', updateCount);
