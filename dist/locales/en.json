@@ -2005,6 +2005,13 @@
                 "fire_hydrant/diameter": {
                     "label": "Nominal diameter (in mm, inches or letters)."
                 },
+                "fire_hydrant/opening": {
+                    "label": "Direction to open the valve.",
+                    "options": {
+                        "cw": "clockwise",
+                        "ccw": "counterclockwise"
+                    }
+                },
                 "fire_hydrant/position": {
                     "label": "Position",
                     "options": {
@@ -3188,7 +3195,7 @@
                     "label": "Water source"
                 },
                 "water_volume": {
-                    "label": "Volume of the water reserve (only tanks and pools)."
+                    "label": "Volume of the water reserve. Tanks and pools only (default in m^3)."
                 },
                 "water": {
                     "label": "Type"

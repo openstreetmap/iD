@@ -630,6 +630,14 @@ en:
       fire_hydrant/diameter:
         # 'fire_hydrant:diameter=*'
         label: 'Nominal diameter (in mm, inches or letters).'
+      fire_hydrant/opening:
+        # 'fire_hydrant:opening=*'
+        label: Direction to open the valve.
+        options:
+          # 'fire_hydrant:opening=ccw'
+          ccw: counterclockwise
+          # 'fire_hydrant:opening=cw'
+          cw: clockwise
       fire_hydrant/position:
         # 'fire_hydrant:position=*'
         label: Position
@@ -2080,7 +2088,7 @@ en:
         label: Water source
       water_volume:
         # water_volume=*
-        label: Volume of the water reserve (only tanks and pools).
+        label: Volume of the water reserve. Tanks and pools only (default in m^3).
       waterway:
         # waterway=*
         label: Type

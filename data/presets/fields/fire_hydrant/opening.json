@@ -1,0 +1,11 @@
+{
+    "key": "fire_hydrant:opening",
+    "type": "combo",
+    "label": "Direction to open the valve.",
+    "strings": {
+        "options": {
+            "cw": "clockwise",
+            "ccw": "counterclockwise"
+        }
+    }
+}

@@ -6897,6 +6897,16 @@
       "description": "Nominal diameter (in mm, inches or letters)."
     },
     {
+      "key": "fire_hydrant:opening",
+      "value": "cw",
+      "description": "Direction to open the valve."
+    },
+    {
+      "key": "fire_hydrant:opening",
+      "value": "ccw",
+      "description": "Direction to open the valve."
+    },
+    {
       "key": "fire_hydrant:position",
       "value": "lane",
       "description": "Position"
@@ -7741,7 +7751,7 @@
     {"key": "water_source", "description": "Water source"},
     {
       "key": "water_volume",
-      "description": "Volume of the water reserve (only tanks and pools)."
+      "description": "Volume of the water reserve. Tanks and pools only (default in m^3)."
     },
     {"key": "water", "description": "Type"},
     {"key": "website", "description": "Website"},

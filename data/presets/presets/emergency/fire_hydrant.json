@@ -20,6 +20,7 @@
         "reflective/colour",
         "manufacturer",
         "model",
+        "fire_hydrant/opening",
         "fire_hydrant/count",
         "fire_hydrant/style",
         "ref",
