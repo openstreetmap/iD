@@ -106,7 +106,10 @@ export function uiRawTagEditor(context) {
             .attr('class', 'tag-row cf')
             .classed('readonly', isReadOnly);
 
-        enter
+        var innerWrap = enter.append('div')
+            .attr('class', 'inner-wrap');
+
+        innerWrap
             .append('div')
             .attr('class', 'key-wrap')
             .append('input')
@@ -117,7 +120,7 @@ export function uiRawTagEditor(context) {
             .on('blur', keyChange)
             .on('change', keyChange);
 
-        enter
+        innerWrap
             .append('div')
             .attr('class', 'input-wrap-position')
             .append('input')
@@ -129,7 +132,7 @@ export function uiRawTagEditor(context) {
             .on('change', valueChange)
             .on('keydown.push-more', pushMore);
 
-        enter
+        innerWrap
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
@@ -169,9 +172,10 @@ export function uiRawTagEditor(context) {
                     reference.showing(false);
                 }
 
-                row
-                    .call(reference.button)
-                    .call(reference.body);
+                row.select('.inner-wrap')
+                    .call(reference.button);
+
+                row.call(reference.body);
             });
 
         items.selectAll('input.key')

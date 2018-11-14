@@ -154,10 +154,20 @@
             },
             "connect": {
                 "annotation": {
-                    "point": "Connected a way to a point.",
-                    "vertex": "Connected a way to another.",
-                    "line": "Connected a way to a line.",
-                    "area": "Connected a way to an area."
+                    "from_vertex": {
+                        "to_point": "Connected a way to a point.",
+                        "to_vertex": "Connected a way to another.",
+                        "to_line": "Connected a way to a line.",
+                        "to_area": "Connected a way to an area.",
+                        "to_adjacent_vertex": "Merged adjacent points in a way.",
+                        "to_sibling_vertex": "Connected a way to itself."
+                    },
+                    "from_point": {
+                        "to_point": "Merged a point with another.",
+                        "to_vertex": "Merged a point with a point in a way.",
+                        "to_line": "Moved a point to a line.",
+                        "to_area": "Moved a point to an area."
+                    }
                 },
                 "relation": "These features can't be connected because they have conflicting relation roles.",
                 "restriction": "These features can't be connected because it would damage a \"{relation}\" relation."
@@ -373,9 +383,9 @@
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
-        "sidebar_button": {
-            "title": "Sidebar",
-            "tooltip": "Open the sidebar."
+        "sidebar": {
+            "key": "`",
+            "tooltip": "Toggle the sidebar."
         },
         "feature_info": {
             "hidden_warning": "{count} hidden features",
@@ -1329,6 +1339,7 @@
                     "background_switch": "Switch back to last background",
                     "map_data": "Show map data options",
                     "fullscreen": "Enter full screen mode",
+                    "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
                     "minimap": "Toggle minimap"
                 },
@@ -3256,6 +3267,10 @@
                     "name": "Traffic Circle",
                     "terms": ""
                 },
+                "embankment": {
+                    "name": "Embankment",
+                    "terms": ""
+                },
                 "highway": {
                     "name": "Highway",
                     "terms": ""
@@ -3576,6 +3591,30 @@
                     "name": "Fast Food",
                     "terms": "restaurant,takeaway"
                 },
+                "amenity/fast_food/burger": {
+                    "name": "Burger Fast Food",
+                    "terms": "breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/fast_food/chicken": {
+                    "name": "Chicken Fast Food",
+                    "terms": "breakfast,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/fast_food/fish_and_chips": {
+                    "name": "Fish & Chips Fast Food",
+                    "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries"
+                },
+                "amenity/fast_food/kebab": {
+                    "name": "Kebab Fast Food",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/fast_food/pizza": {
+                    "name": "Pizza Fast Food",
+                    "terms": "dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice"
+                },
+                "amenity/fast_food/sandwich": {
+                    "name": "Sandwich Fast Food",
+                    "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
                 "amenity/fire_station": {
                     "name": "Fire Station",
                     "terms": ""
@@ -3755,6 +3794,78 @@
                 "amenity/restaurant": {
                     "name": "Restaurant",
                     "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/american": {
+                    "name": "American Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/asian": {
+                    "name": "Asian Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/chinese": {
+                    "name": "Chinese Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/french": {
+                    "name": "French Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/german": {
+                    "name": "German Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/greek": {
+                    "name": "Greek Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,gyros,pitas,olives"
+                },
+                "amenity/restaurant/indian": {
+                    "name": "Indian Restaurant",
+                    "terms": "bar,breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,curry"
+                },
+                "amenity/restaurant/italian": {
+                    "name": "Italian Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,pasta,pizza"
+                },
+                "amenity/restaurant/japanese": {
+                    "name": "Japanese Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/mexican": {
+                    "name": "Mexican Restaurant",
+                    "terms": "bar,breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,tacos,burritos,enchiladas,fajitas,nachos,tortillas,salsa,tamales,quesadillas"
+                },
+                "amenity/restaurant/noodle": {
+                    "name": "Noodle Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,ramen noodles,soup,soba noodles,cellophane noodles,rice noodles"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "Pizza Restaurant",
+                    "terms": "bar,dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice"
+                },
+                "amenity/restaurant/seafood": {
+                    "name": "Seafood Restaurant",
+                    "terms": "bar,breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,fish,shellfish,molluscs,crustaceans,clams,oysters,lobsters,crab,shrimp,squid,octopus"
+                },
+                "amenity/restaurant/steakhouse": {
+                    "name": "Steakhouse",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,steak house,chop house,beef"
+                },
+                "amenity/restaurant/sushi": {
+                    "name": "Sushi Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/thai": {
+                    "name": "Thai Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/turkish": {
+                    "name": "Turkish Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+                },
+                "amenity/restaurant/vietnamese": {
+                    "name": "Vietnamese Restaurant",
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "RV Toilet Disposal",
@@ -4520,10 +4631,6 @@
                     "name": "Winery",
                     "terms": ""
                 },
-                "embankment": {
-                    "name": "Embankment",
-                    "terms": ""
-                },
                 "emergency/designated": {
                     "name": "Emergency Access Designated",
                     "terms": ""
@@ -5232,6 +5339,10 @@
                     "name": "Firepit",
                     "terms": "fireplace,campfire"
                 },
+                "leisure/fishing": {
+                    "name": "Fishing Spot",
+                    "terms": "angler"
+                },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Center",
                     "terms": "health,gym,leisure,studio"
@@ -5456,10 +5567,6 @@
                     "name": "Man Made",
                     "terms": ""
                 },
-                "man_made/embankment": {
-                    "name": "Embankment",
-                    "terms": ""
-                },
                 "man_made/adit": {
                     "name": "Adit",
                     "terms": "entrance,underground,mine,cave"
@@ -5496,6 +5603,10 @@
                     "name": "Cut line",
                     "terms": ""
                 },
+                "man_made/embankment": {
+                    "name": "Embankment",
+                    "terms": ""
+                },
                 "man_made/flagpole": {
                     "name": "Flagpole",
                     "terms": ""
@@ -5516,13 +5627,25 @@
                     "name": "Mast",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
                 },
+                "man_made/mast/communication": {
+                    "name": "Communication Mast",
+                    "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
+                },
+                "man_made/mast/communication/mobile_phone": {
+                    "name": "Mobile Phone Mast",
+                    "terms": "antenna,cell mast,cell phone mast,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,transmission mast,transmission tower"
+                },
+                "man_made/mast/communication/radio": {
+                    "name": "Radio Broadcast Mast",
+                    "terms": "antenna,broadcast tower,communication mast,communication tower,guyed tower,radio mast,radio tower,transmission mast,transmission tower"
+                },
+                "man_made/mast/communication/television": {
+                    "name": "Television Broadcast Mast",
+                    "terms": "antenna,broadcast tower,communication mast,communication tower,guyed tower,television mast,television tower,transmission mast,transmission tower,tv mast,tv tower"
+                },
                 "man_made/monitoring_station": {
                     "name": "Monitoring Station",
                     "terms": "weather,earthquake,seismology,air,gps"
-                },
-                "man_made/observation": {
-                    "name": "Observation Tower",
-                    "terms": "lookout tower,fire tower"
                 },
                 "man_made/observatory": {
                     "name": "Observatory",
@@ -5552,12 +5675,12 @@
                     "name": "Storage Tank",
                     "terms": "water,oil,gas,petrol"
                 },
-                "man_made/surveillance_camera": {
-                    "name": "Surveillance Camera",
-                    "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
-                },
                 "man_made/surveillance": {
                     "name": "Surveillance",
+                    "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
+                },
+                "man_made/surveillance/camera": {
+                    "name": "Surveillance Camera",
                     "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
                 },
                 "man_made/survey_point": {
@@ -5567,6 +5690,14 @@
                 "man_made/tower": {
                     "name": "Tower",
                     "terms": ""
+                },
+                "man_made/tower/communication": {
+                    "name": "Communication Tower",
+                    "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
+                },
+                "man_made/tower/observation": {
+                    "name": "Observation Tower",
+                    "terms": "lookout tower,fire tower"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Wastewater Plant",
@@ -5863,6 +5994,10 @@
                 "office/quango": {
                     "name": "Quasi-NGO Office",
                     "terms": "ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous"
+                },
+                "office/religion": {
+                    "name": "Religious Office",
+                    "terms": ""
                 },
                 "office/research": {
                     "name": "Research Office",
@@ -7405,9 +7540,6 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -7415,6 +7547,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -7523,11 +7659,26 @@
                 "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
                 "name": "Helsingborg Orthophoto"
             },
-            "hike_n_bike": {
+            "kalmar-orto-2014": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "© Kalmar municipality"
                 },
-                "name": "Hike & Bike"
+                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+                "name": "Kalmar North Orthophoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+                "name": "Kalmar South Orthophoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kalmar-orto-2014": {
                 "attribution": {

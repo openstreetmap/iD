@@ -1,9 +1,10 @@
+
+import { geoBounds as d3_geoBounds } from 'd3-geo';
+
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
     behaviorBreathe,
@@ -12,13 +13,10 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import {
-    modeDragNode,
-    modeDragNote
-} from '../modes';
-
-import { modeBrowse } from './browse';
+import { geoExtent } from '../geo';
+import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { uiDataEditor } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function modeSelectData(context, selectedDatum) {
@@ -27,7 +25,7 @@ export function modeSelectData(context, selectedDatum) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('select-data');
+    var keybinding = utilKeybinding('select-data');
     var dataEditor = uiDataEditor(context);
 
     var behaviors = [
@@ -65,12 +63,18 @@ export function modeSelectData(context, selectedDatum) {
     mode.enter = function() {
         behaviors.forEach(context.install);
         keybinding.on('⎋', esc, true);
-        d3_select(document).call(keybinding);
+
+        d3_select(document)
+            .call(keybinding);
 
         selectData();
 
-        context.ui().sidebar
-            .show(dataEditor.datum(selectedDatum));
+        var sidebar = context.ui().sidebar;
+        sidebar.show(dataEditor.datum(selectedDatum));
+
+        // expand the sidebar, avoid obscuring the data if needed
+        var extent = geoExtent(d3_geoBounds(selectedDatum));
+        sidebar.expand(sidebar.intersects(extent));
 
         context.map()
             .on('drawn.select-data', selectData);
@@ -79,7 +83,9 @@ export function modeSelectData(context, selectedDatum) {
 
     mode.exit = function() {
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
 
         context.surface()
             .selectAll('.layer-mapdata .selected')

@@ -20,7 +20,6 @@ export function geoExtent(min, max) {
     }
 }
 
-// $FlowFixMe
 geoExtent.prototype = new Array(2);
 
 _extend(geoExtent.prototype, {

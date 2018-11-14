@@ -15,7 +15,7 @@ export function behaviorTail() {
     var _text;
 
 
-    function tail(selection) {
+    function behavior(selection) {
         if (!_text) return;
 
         d3_select(window)
@@ -71,7 +71,7 @@ export function behaviorTail() {
     }
 
 
-    tail.off = function(selection) {
+    behavior.off = function(selection) {
         if (!_text) return;
 
         container
@@ -88,12 +88,12 @@ export function behaviorTail() {
     };
 
 
-    tail.text = function(val) {
+    behavior.text = function(val) {
         if (!arguments.length) return _text;
         _text = val;
-        return tail;
+        return behavior;
     };
 
 
-    return tail;
+    return behavior;
 }

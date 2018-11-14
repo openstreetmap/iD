@@ -33,7 +33,8 @@
 
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
-.node.target {
+.node.target,
+.turn .target {
     pointer-events: fill;
     fill-opacity: 0.8;
     fill: currentColor;
@@ -49,6 +50,7 @@
     stroke-linecap: round;
     stroke-linejoin: round;
 }
+
 
 /* `.target-nope` objects are explicitly forbidden to join to */
 .surface:not(.nope-disabled) .node.target.target-nope,
@@ -66,7 +68,6 @@
 
 
 /* points & notes */
-
 g.note .stroke {
     stroke: #222;
     stroke-width: 1;
@@ -118,21 +119,17 @@ g.point ellipse.stroke {
 
 
 /* vertices and midpoints */
-
 g.vertex .fill {
     fill: #000;
 }
-
 g.vertex .stroke {
     stroke: #666;
     stroke-width: 1;
     fill: white;
 }
-
 g.vertex.shared .stroke {
     fill: #bbb;
 }
-
 g.midpoint .fill {
     fill: #eee;
     stroke: #444;
@@ -160,7 +157,6 @@ g.vertex.selected .shadow {
 
 
 /* lines */
-
 .preset-icon .icon.iD-other-line {
     color: #fff;
     fill: #777;
@@ -198,7 +194,6 @@ path.line.stroke {
 
 
 /* Labels / Markers */
-
 text {
     font-size: 10px;
     color: #222;
@@ -238,7 +233,7 @@ text.pointlabel {
   dominant-baseline: auto;
 }
 
-.layer-labels-halo text {
+.labels-group.halo text {
     opacity: 0.7;
     stroke: #fff;
     stroke-width: 5px;
@@ -246,9 +241,8 @@ text.pointlabel {
 }
 
 text.nolabel {
-    opacity: 0;
+    opacity: 0 !important;
 }
-
 text.point {
     font-size: 10px;
 }
@@ -259,14 +253,12 @@ text.point {
     stroke-width: 2px;
     stroke-miterlimit: 1;
 }
-
 .icon.areaicon {
     fill: #222;
     opacity: 0.8;
 }
 
 /* Highlighting */
-
 g.point.highlighted .shadow,
 path.shadow.highlighted {
     stroke-opacity: 0.95;
@@ -279,16 +271,9 @@ g.vertex.highlighted .shadow {
 }
 
 /* Turn Restrictions */
-
-g.turn rect,
-g.turn circle {
+.points-group.turns g.turn rect,
+.points-group.turns g.turn circle {
     fill: none;
-    pointer-events: all;
-}
-
-.form-field-restrictions .vertex {
-    cursor: auto !important;
-    pointer-events: none;
 }
 
 /* Turn restriction paths and vertices */

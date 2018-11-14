@@ -2448,6 +2448,36 @@ en:
         name: Fast Food
         # 'terms: restaurant,takeaway'
         terms: '<translate with synonyms or related terms for ''Fast Food'', separated by commas>'
+      amenity/fast_food/burger:
+        # 'amenity=fast_food, cuisine=burger'
+        name: Burger Fast Food
+        # 'terms: breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Burger Fast Food'', separated by commas>'
+      amenity/fast_food/chicken:
+        # 'amenity=fast_food, cuisine=chicken'
+        name: Chicken Fast Food
+        # 'terms: breakfast,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Chicken Fast Food'', separated by commas>'
+      amenity/fast_food/fish_and_chips:
+        # 'amenity=fast_food, cuisine=fish_and_chips'
+        name: Fish & Chips Fast Food
+        # 'terms: breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries'
+        terms: '<translate with synonyms or related terms for ''Fish & Chips Fast Food'', separated by commas>'
+      amenity/fast_food/kebab:
+        # 'amenity=fast_food, cuisine=kebab'
+        name: Kebab Fast Food
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Kebab Fast Food'', separated by commas>'
+      amenity/fast_food/pizza:
+        # 'amenity=fast_food, cuisine=pizza'
+        name: Pizza Fast Food
+        # 'terms: dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice'
+        terms: '<translate with synonyms or related terms for ''Pizza Fast Food'', separated by commas>'
+      amenity/fast_food/sandwich:
+        # 'amenity=fast_food, cuisine=sandwich'
+        name: Sandwich Fast Food
+        # 'terms: breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Sandwich Fast Food'', separated by commas>'
       amenity/ferry_terminal:
         # amenity=ferry_terminal
         name: Ferry Station / Terminal
@@ -2677,6 +2707,96 @@ en:
         name: Restaurant
         # 'terms: bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table'
         terms: '<translate with synonyms or related terms for ''Restaurant'', separated by commas>'
+      amenity/restaurant/american:
+        # 'amenity=restaurant, cuisine=american'
+        name: American Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''American Restaurant'', separated by commas>'
+      amenity/restaurant/asian:
+        # 'amenity=restaurant, cuisine=asian'
+        name: Asian Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Asian Restaurant'', separated by commas>'
+      amenity/restaurant/chinese:
+        # 'amenity=restaurant, cuisine=chinese'
+        name: Chinese Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Chinese Restaurant'', separated by commas>'
+      amenity/restaurant/french:
+        # 'amenity=restaurant, cuisine=french'
+        name: French Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''French Restaurant'', separated by commas>'
+      amenity/restaurant/german:
+        # 'amenity=restaurant, cuisine=german'
+        name: German Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''German Restaurant'', separated by commas>'
+      amenity/restaurant/greek:
+        # 'amenity=restaurant, cuisine=greek'
+        name: Greek Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,gyros,pitas,olives'
+        terms: '<translate with synonyms or related terms for ''Greek Restaurant'', separated by commas>'
+      amenity/restaurant/indian:
+        # 'amenity=restaurant, cuisine=indian'
+        name: Indian Restaurant
+        # 'terms: bar,breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,curry'
+        terms: '<translate with synonyms or related terms for ''Indian Restaurant'', separated by commas>'
+      amenity/restaurant/italian:
+        # 'amenity=restaurant, cuisine=italian'
+        name: Italian Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,pasta,pizza'
+        terms: '<translate with synonyms or related terms for ''Italian Restaurant'', separated by commas>'
+      amenity/restaurant/japanese:
+        # 'amenity=restaurant, cuisine=japanese'
+        name: Japanese Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Japanese Restaurant'', separated by commas>'
+      amenity/restaurant/mexican:
+        # 'amenity=restaurant, cuisine=mexican'
+        name: Mexican Restaurant
+        # 'terms: bar,breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,tacos,burritos,enchiladas,fajitas,nachos,tortillas,salsa,tamales,quesadillas'
+        terms: '<translate with synonyms or related terms for ''Mexican Restaurant'', separated by commas>'
+      amenity/restaurant/noodle:
+        # 'amenity=restaurant, cuisine=noodle'
+        name: Noodle Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,ramen noodles,soup,soba noodles,cellophane noodles,rice noodles'
+        terms: '<translate with synonyms or related terms for ''Noodle Restaurant'', separated by commas>'
+      amenity/restaurant/pizza:
+        # 'amenity=restaurant, cuisine=pizza'
+        name: Pizza Restaurant
+        # 'terms: bar,dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice'
+        terms: '<translate with synonyms or related terms for ''Pizza Restaurant'', separated by commas>'
+      amenity/restaurant/seafood:
+        # 'amenity=restaurant, cuisine=seafood'
+        name: Seafood Restaurant
+        # 'terms: bar,breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,fish,shellfish,molluscs,crustaceans,clams,oysters,lobsters,crab,shrimp,squid,octopus'
+        terms: '<translate with synonyms or related terms for ''Seafood Restaurant'', separated by commas>'
+      amenity/restaurant/steakhouse:
+        # 'amenity=restaurant, cuisine=steak_house'
+        name: Steakhouse
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,steak house,chop house,beef'
+        terms: '<translate with synonyms or related terms for ''Steakhouse'', separated by commas>'
+      amenity/restaurant/sushi:
+        # 'amenity=restaurant, cuisine=sushi'
+        name: Sushi Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Sushi Restaurant'', separated by commas>'
+      amenity/restaurant/thai:
+        # 'amenity=restaurant, cuisine=thai'
+        name: Thai Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Thai Restaurant'', separated by commas>'
+      amenity/restaurant/turkish:
+        # 'amenity=restaurant, cuisine=turkish'
+        name: Turkish Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Turkish Restaurant'', separated by commas>'
+      amenity/restaurant/vietnamese:
+        # 'amenity=restaurant, cuisine=vietnamese'
+        name: Vietnamese Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table'
+        terms: '<translate with synonyms or related terms for ''Vietnamese Restaurant'', separated by commas>'
       amenity/sanitary_dump_station:
         # amenity=sanitary_dump_station
         name: RV Toilet Disposal
@@ -3532,7 +3652,6 @@ en:
       embankment:
         # embankment=yes
         name: Embankment
-        terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
       emergency/ambulance_station:
         # emergency=ambulance_station
         name: Ambulance Station
@@ -4343,6 +4462,11 @@ en:
         name: Firepit
         # 'terms: fireplace,campfire'
         terms: '<translate with synonyms or related terms for ''Firepit'', separated by commas>'
+      leisure/fishing:
+        # leisure=fishing
+        name: Fishing Spot
+        # 'terms: angler'
+        terms: '<translate with synonyms or related terms for ''Fishing Spot'', separated by commas>'
       leisure/fitness_centre:
         # leisure=fitness_centre
         name: Gym / Fitness Center
@@ -4647,6 +4771,7 @@ en:
       man_made/embankment:
         # man_made=embankment
         name: Embankment
+        terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
       man_made/flagpole:
         # man_made=flagpole
         name: Flagpole
@@ -4669,16 +4794,31 @@ en:
         name: Mast
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Mast'', separated by commas>'
+      man_made/mast/communication:
+        # 'man_made=mast, tower:type=communication'
+        name: Communication Mast
+        # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
+        terms: '<translate with synonyms or related terms for ''Communication Mast'', separated by commas>'
+      man_made/mast/communication/mobile_phone:
+        # 'man_made=mast, tower:type=communication, communication:mobile_phone=yes'
+        name: Mobile Phone Mast
+        # 'terms: antenna,cell mast,cell phone mast,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,transmission mast,transmission tower'
+        terms: '<translate with synonyms or related terms for ''Mobile Phone Mast'', separated by commas>'
+      man_made/mast/communication/radio:
+        # 'man_made=mast, tower:type=communication, communication:radio=yes'
+        name: Radio Broadcast Mast
+        # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,radio mast,radio tower,transmission mast,transmission tower'
+        terms: '<translate with synonyms or related terms for ''Radio Broadcast Mast'', separated by commas>'
+      man_made/mast/communication/television:
+        # 'man_made=mast, tower:type=communication, communication:television=yes'
+        name: Television Broadcast Mast
+        # 'terms: antenna,broadcast tower,communication mast,communication tower,guyed tower,television mast,television tower,transmission mast,transmission tower,tv mast,tv tower'
+        terms: '<translate with synonyms or related terms for ''Television Broadcast Mast'', separated by commas>'
       man_made/monitoring_station:
         # man_made=monitoring_station
         name: Monitoring Station
         # 'terms: weather,earthquake,seismology,air,gps'
         terms: '<translate with synonyms or related terms for ''Monitoring Station'', separated by commas>'
-      man_made/observation:
-        # 'man_made=tower, tower:type=observation'
-        name: Observation Tower
-        # 'terms: lookout tower,fire tower'
-        terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/observatory:
         # man_made=observatory
         name: Observatory
@@ -4718,7 +4858,7 @@ en:
         name: Surveillance
         # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
         terms: '<translate with synonyms or related terms for ''Surveillance'', separated by commas>'
-      man_made/surveillance_camera:
+      man_made/surveillance/camera:
         # 'man_made=surveillance, surveillance:type=camera'
         name: Surveillance Camera
         # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
@@ -4732,6 +4872,16 @@ en:
         # man_made=tower
         name: Tower
         terms: '<translate with synonyms or related terms for ''Tower'', separated by commas>'
+      man_made/tower/communication:
+        # 'man_made=tower, tower:type=communication'
+        name: Communication Tower
+        # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
+        terms: '<translate with synonyms or related terms for ''Communication Tower'', separated by commas>'
+      man_made/tower/observation:
+        # 'man_made=tower, tower:type=observation'
+        name: Observation Tower
+        # 'terms: lookout tower,fire tower'
+        terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/wastewater_plant:
         # man_made=wastewater_plant
         name: Wastewater Plant
@@ -5064,6 +5214,10 @@ en:
         name: Quasi-NGO Office
         # 'terms: ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous'
         terms: '<translate with synonyms or related terms for ''Quasi-NGO Office'', separated by commas>'
+      office/religion:
+        # office=religion
+        name: Religious Office
+        terms: '<translate with synonyms or related terms for ''Religious Office'', separated by commas>'
       office/research:
         # office=research
         name: Research Office

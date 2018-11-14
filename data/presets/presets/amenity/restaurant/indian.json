@@ -1,0 +1,41 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "cuisine",
+        "address",
+        "building_area",
+        "opening_hours",
+        "capacity",
+        "takeaway",
+        "delivery",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "curry"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "indian"
+    },
+    "name": "Indian Restaurant"
+}

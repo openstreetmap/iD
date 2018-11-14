@@ -86,7 +86,7 @@ export function behaviorHash(context) {
     }
 
 
-    function hash() {
+    function behavior() {
         context.map()
             .on('move.hash', throttledUpdate);
 
@@ -97,7 +97,6 @@ export function behaviorHash(context) {
             .on('hashchange.hash', hashchange);
 
         if (window.location.hash) {
-
             var q = utilStringQs(window.location.hash.substring(1));
 
             if (q.id) {
@@ -119,19 +118,19 @@ export function behaviorHash(context) {
             }
 
             if (q.walkthrough === 'true') {
-                hash.startWalkthrough = true;
+                behavior.startWalkthrough = true;
             }
 
             hashchange();
 
             if (q.map) {
-                hash.hadHash = true;
+                behavior.hadHash = true;
             }
         }
     }
 
 
-    hash.off = function() {
+    behavior.off = function() {
         throttledUpdate.cancel();
 
         context.map()
@@ -147,5 +146,5 @@ export function behaviorHash(context) {
     };
 
 
-    return hash;
+    return behavior;
 }

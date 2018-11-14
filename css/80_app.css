@@ -16,7 +16,6 @@ body {
         sans-serif;
     margin: 0;
     padding: 0;
-    min-width: 768px;
     color: #333;
     overflow: hidden;
     -ms-user-select: none;
@@ -32,7 +31,6 @@ body {
 .id-container {
     height: 100%;
     width: 100%;
-    min-width: 768px;
 }
 
 #content {
@@ -55,57 +53,12 @@ body {
     transition-duration: 200ms;
 }
 
-/* Firefox has its own ideas about fixed positioning when a css filter is active - #4348 */
-/* https://stackoverflow.com/questions/37949942/firefox-position-bug-by-parent-with-filter */
-@-moz-document url-prefix() {
-    #content > #bar {
-        width: 100vw;
-    }
-    #content.inactive > #bar > .spacer.col4 {
-        width: 0px;
-    }
-    #content.active > #bar > .spacer.col4 {
-        width: 33.3333%;
-        transition-duration: 200ms;
-        transition-timing-function: step-end;
-    }
-}
-
 #defs {
     /* Can't be display: none or the clippaths are ignored. */
     position: absolute;
     width: 0;
     height: 0;
 }
-
-.spacer {
-    height: 40px;
-    margin-right: 10px;
-}
-
-.spinner {
-    opacity: .5;
-    display: inline-block;
-}
-
-.spinner img {
-    height: 40px;
-    width: 40px;
-    border-radius: 4px;
-    margin-right: 10px;
-    background: black;
-}
-[dir='rtl'] .spinner img {
-    margin-left: 10px;
-    margin-right: auto;
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-}
-
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
@@ -142,7 +95,6 @@ h3 {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 h4, h5 {
     font-size: 12px;
     font-weight: bold;
@@ -170,23 +122,18 @@ p {
     margin: 0;
     padding: 0;
 }
-
 p:last-child {
     padding-bottom: 0;
 }
-
 em {
     font-style: italic;
 }
-
 strong {
     font-weight: bold;
 }
-
 a:visited, a {
     color: #7092ff;
 }
-
 a:hover {
     color: #597be7;
 }
@@ -278,19 +225,9 @@ table.tags, table.tags td, table.tags th {
 
 /* Grid
 ------------------------------------------------------- */
-.col0    { float: left; width: 04.1666%; }
-.col1    { float: left; width: 08.3333%; }
-.col2    { float: left; width: 16.6666%; }
-.col3    { float: left; width: 25.0000%; max-width: 300px; }
-.col4    { float: left; width: 33.3333%; max-width: 400px; }
-.col5    { float: left; width: 41.6666%; max-width: 500px; }
-.col6    { float: left; width: 50.0000%; max-width: 600px; }
-.col7    { float: left; width: 58.3333%; }
-.col8    { float: left; width: 66.6666%; }
-.col9    { float: left; width: 75.0000%; }
-.col10   { float: left; width: 83.3333%; }
-.col11   { float: left; width: 91.6666%; }
-.col12   { float: left; width: 100.0000%; }
+.col6  { float: left; width: 50.0000%; max-width: 600px; }
+.col8  { float: left; width: 66.6666%; }
+.col12 { float: left; width: 100.0000%; }
 
 /* UI Lists
 ------------------------------------------------------- */
@@ -326,7 +263,7 @@ ul li { list-style: none;}
 }
 
 .toggle-list > label.active {
-    background: #E8EBFF;
+    background: #e8ebff;
 }
 
 
@@ -413,11 +350,7 @@ button.active {
 }
 
 button.minor {
-    position: absolute;
-    top: 0;
-    right: 0;
     height: 100%;
-    width: 10%;
     border-radius: 0;
     background-color: #fafafa;
 }
@@ -428,33 +361,8 @@ button.minor {
 button.minor .icon {
     opacity: .5;
 }
-
 button.minor:hover {
     background-color: #f1f1f1;
-}
-
-.button-wrap {
-    display: inline-block;
-    padding-right: 10px;
-    margin: 0;
-}
-[dir='rtl'] .button-wrap {
-    padding-left: 10px;
-}
-.button-wrap button {
-    white-space: nowrap;
-    padding: 0px 8px;
-}
-
-.button-wrap button:only-child {
-    width: 100%;
-}
-
-.button-wrap:last-of-type {
-    padding-right: 0;
-}
-[dir='rtl'] .button-wrap:last-of-type {
-    padding-left: 0;
 }
 
 .joined button {
@@ -469,14 +377,12 @@ button.minor:hover {
 .fillL .joined button {
     border-right: 1px solid #fff;
 }
-
 .joined button:first-child {
     border-radius: 4px 0 0 4px;
 }
 [dir='rtl'] .joined button:first-child {
     border-radius: 0 4px 4px 0;
 }
-
 .joined button:last-child {
     border-right-width: 0;
     border-radius: 0 4px 4px 0;
@@ -489,18 +395,15 @@ button.action {
     background: #7092ff;
     color: #fff;
 }
-
 button[disabled].action,
 button[disabled].action:hover {
     background: #cccccc;
     color: #888;
 }
-
 button.action:focus,
 button.action:hover {
-    background: #597BE7;
+    background: #597be7;
 }
-
 button.secondary-action {
     background: #ececec;
 }
@@ -508,61 +411,6 @@ button.secondary-action {
 button.secondary-action:focus,
 button.secondary-action:hover {
     background: #cccccc;
-}
-.button-wrap.sidebar-collapse,
-.button-wrap.save-wrap {
-    min-width: 33.3333%;
-}
-.button-wrap.modes {
-    width: 100%;
-}
-
-button.undo-button,
-button.redo-button {
-    width: 44px;
-}
-button.save {
-    padding: 0;
-    display: flex;
-}
-button.save .save-inner-wrap {
-    flex: 1;
-}
-button.save .count {
-    display: none;
-}
-button.save.has-count .count {
-    display: inline-block;
-    color: #333;
-    border: 0px solid rgba(51, 51, 51, 0.2);
-    border-left-width: 1px;
-    padding: 0px 12px;
-}
-[dir='rtl'] button.save.has-count .count {
-    border-left-width: 0px;
-    border-right-width: 1px;
-}
-
-.help-wrap svg.icon.pre-text.add-note,
-button.add-note svg.icon {
-    height: 15px;
-    width: 15px;
-    color: rgba(0,0,0,0.25);
-    stroke: #333;
-    stroke-width: 60px;
-    margin-top: 3px;
-}
-button.add-note svg.icon {
-    margin-left: unset;
-    margin-right: 7px;
-}
-[dir='rtl'] button.add-note svg.icon {
-    margin-left: 7px;
-    margin-right: unset;
-}
-.help-wrap svg.icon.pre-text.add-note {
-    margin-left: 3px;
-    margin-right: 3px;
 }
 
 
@@ -597,15 +445,12 @@ button.add-note svg.icon {
 .icon.light {
     color: #fff;
 }
-
 .icon.created {
     color: #00ca07;
 }
-
 .icon.modified {
     color: #666;
 }
-
 .icon.deleted {
     color: #ea0000;
 }
@@ -622,6 +467,9 @@ button.add-note svg.icon {
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
 #bar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     position: absolute;
     padding: 10px;
     left: 0;
@@ -629,50 +477,134 @@ button.add-note svg.icon {
     right: 0;
     height: 60px;
     z-index: 9;
-    min-width: 600px;
 }
 
-[dir='rtl'] #bar .button-wrap button {
-    float: right;
+.tool-group {
+    display: flex;
+    flex: 0 1 auto;
+    flex-flow: row nowrap;
+    width: 100%;
 }
-#bar .center-area,
-#bar .trailing-area {
-    min-width: 50%;
+.tool-group.leading-area {
+    flex-shrink: 2;
+    justify-content: flex-start;
 }
-.sidebar-collapsed #bar .leading-area,
-.sidebar-collapsed #bar .center-area,
-.sidebar-collapsed #bar .trailing-area {
-    min-width: 33.3333%;
+.tool-group.center-area {
+    justify-content: center;
 }
-#bar .center-area {
-    float: left;
+.tool-group.trailing-area {
+    justify-content: flex-start;
 }
-[dir='rtl'] #bar .center-area {
-    float: right;
+
+.tool-group > div {
+    display: flex;
+    margin: 0 5px;
 }
-.sidebar-collapsed #bar .center-area {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    float: none;
+.tool-group button {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 0 10px;
+    min-width: 30px;
 }
-#bar .leading-area {
-    float: left;
+.tool-group button .icon {
+    flex: 0 0 20px;
+}
+.tool-group button .label {
+    flex: 0 1 auto;
+    padding: 0 5px;
+}
+
+button.save .count {
+    visibility: hidden;
+    display: inline-block;
+    border: 0px solid #ccc;
+    border-left-width: 1px;
+    padding: 0px 8px;
+    min-width: 32px;
+    text-align: center;
+}
+[dir='rtl'] button.save .count {
+    border-left-width: 0px;
+    border-right-width: 1px;
+}
+button.save.has-count .count {
+    visibility: visible;
+}
+
+/* if no count, shift label over where the count would be, preserving width */
+button.save .label {
+    margin-right: -12px;
+    margin-left: 15px;
+}
+[dir='rtl'] button.save .label {
+    margin-left: -12px;
+    margin-right: 15px;
+}
+button.save.has-count .label {
+    margin-right: 3px;
+    margin-left: 0;
+}
+[dir='rtl'] button.save.has-count .label {
+    margin-left: 3px;
+    margin-right: 0;
+}
+
+.help-wrap svg.icon.pre-text.add-note,
+button.add-note svg.icon {
+    height: 15px;
+    width: 15px;
+    color: rgba(0,0,0,0.25);
+    stroke: #333;
+    stroke-width: 60px;
+    margin-top: 3px;
+}
+button.add-note svg.icon {
+    margin-left: unset;
+    margin-right: 4px;
+}
+[dir='rtl'] button.add-note svg.icon {
+    margin-left: 4px;
+    margin-right: unset;
+}
+.help-wrap svg.icon.pre-text.add-note {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.spinner {
+    opacity: .5;
+    display: flex;
+    flex-shrink: 2;
+    justify-content: flex-end;
+}
+.spinner img {
+    height: 40px;
+    width: 40px;
+    border-radius: 4px;
+    background: black;
+}
+[dir='rtl'] .spinner img {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+
+#bar.narrow .tool-group {
+    width: unset;
+}
+#bar.narrow .spinner,
+#bar.narrow button .label {
     display: none;
 }
-[dir='rtl'] #bar .leading-area {
-    float: right;
-}
-.sidebar-collapsed #bar .leading-area {
-    display: inline-block;
-}
-#bar .trailing-area {
-    float: right;
-    text-align: right;
-}
-[dir='rtl'] #bar .trailing-area {
-    float: left;
-    text-align: left;
+#bar.narrow button .count {
+    border-left-width: 0;
+    border-right-width: 0;
 }
 
 
@@ -771,14 +703,6 @@ button.add-note svg.icon {
     justify-content: center;
 }
 
-.sidebar-component .body {
-    width: 100%;
-    overflow: auto;
-    top: 60px;
-    bottom: 0;
-    position: absolute;
-}
-
 
 /* Hide/Toggle collapsable sections (aka Disclosure)
 ------------------------------------------------------- */
@@ -801,26 +725,6 @@ a.hide-toggle {
     padding-bottom: 5px;
 }
 
-#sidebar-resizer {
-    position: absolute;
-    top: 0;
-    right: -6px;
-    height: 100%;
-    width: 6px;
-    cursor: col-resize;
-}
-.sidebar-collapsed #sidebar-resizer {
-    /* make target wider to avoid the user accidentally resizing window */
-    width: 10px;
-    right: -10px;
-}
-[dir='rtl'] #sidebar-resizer {
-    right: auto;
-    left: -6px;
-}
-.sidebar-collapsed[dir='rtl'] #sidebar-resizer {
-    left: -10px;
-}
 
 /* Sidebar / Inspector
 ------------------------------------------------------- */
@@ -840,12 +744,42 @@ a.hide-toggle {
     border-left-width: 1px;
 }
 
+#sidebar-resizer {
+    position: absolute;
+    top: 0;
+    right: -6px;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
+}
+[dir='rtl'] #sidebar-resizer {
+    right: auto;
+    left: -6px;
+}
+
+#sidebar.collapsed #sidebar-resizer {
+    /* make target wider to avoid the user accidentally resizing window */
+    width: 10px;
+    right: -10px;
+}
+[dir='rtl'] #sidebar.collapsed #sidebar-resizer {
+    left: -10px;
+}
+
 .sidebar-component {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
+}
+
+.sidebar-component .body {
+    width: 100%;
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
 }
 
 .panewrap {
@@ -933,6 +867,7 @@ a.hide-toggle {
     font-size: 18px;
     font-weight: bold;
 }
+
 
 
 /* Feature List / Search Results
@@ -2210,7 +2145,11 @@ div.combobox {
 .tag-row {
     width: 100%;
     position: relative;
-    clear: both;
+}
+.tag-row .inner-wrap {
+    width: 100%;
+    position: relative;
+    display: flex;
 }
 
 .tag-row.readonly,
@@ -2236,13 +2175,8 @@ div.combobox {
 
 .tag-row .key-wrap,
 .tag-row .input-wrap-position {
-    width: 40%;
-    float: left;
+    flex: 1 0.5 100%;
     height: 30px;
-}
-[dir='rtl'] .tag-row .key-wrap,
-[dir='rtl'] .tag-row .input-wrap-position {
-    float: right;
 }
 
 .tag-row input.key {
@@ -2271,15 +2205,13 @@ div.combobox {
 }
 
 .tag-row button {
-    position: absolute;
     height: 31px;
-    right: 10%;
+    flex: 0 0 33px;
     border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
 }
 [dir='rtl'] .tag-row button {
-    left: 10%;
     border-left-width: 1px;
     border-right-width: 0;
 }
@@ -2313,16 +2245,10 @@ div.combobox {
 }
 
 .tag-row .tag-reference-button {
-    right: 0;
     border-radius: 0;
-    width: 10%;
-    top: 0;
     background: #fafafa;
 }
 [dir='rtl'] .tag-row .tag-reference-button {
-    left: auto;
-    right: auto;
-    margin-right: 35px;
     border-left-width: 1px;
     border-right-width: 0;
 }
@@ -2378,7 +2304,6 @@ button.minor.tag-reference-loading {
 }
 
 .raw-tag-editor .tag-reference-body {
-    float: left;
     width: 100%;
 }
 
@@ -2387,7 +2312,7 @@ button.minor.tag-reference-loading {
     color: #333;
 }
 
-.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body {
+.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
     border-bottom: 1px solid #ccc;
 }
 
@@ -2443,6 +2368,11 @@ img.tag-reference-wiki-image {
 
 .add-relation:hover {
     background: rgba(0,0,0,.8);
+}
+
+/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
+.raw-membership-editor.inspector-inner {
+    margin-bottom: 150px;
 }
 
 /* hidden field to prevent user from tabbing out of the sidebar */
@@ -3019,6 +2949,8 @@ div.full-screen > button:hover {
     top: 60px;
     bottom: 30px;
     right: 0;
+    width: 33.3333%;
+    max-width: 400px;
     padding-bottom: 50px;
     overflow: hidden;
     z-index: -1;
@@ -3026,6 +2958,11 @@ div.full-screen > button:hover {
 [dir='rtl'] .map-pane {
     left: 0;
     right: auto !important;
+}
+
+.map-pane.help-wrap {
+    width: 50.0000%;
+    max-width: 600px;
 }
 
 .pane-heading {
@@ -3826,6 +3763,10 @@ img.tile-debug {
     text-align: center;
 }
 
+.modal-section.buttons button {
+    min-width: 130px;
+}
+
 .modal-section.buttons .action {
     display: inline-block;
     margin: 0 10px;
@@ -4102,9 +4043,6 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .settings-modal textarea {
     height: 70px;
-}
-.settings-modal .buttons .button.col3 {
-    float: none;   /* undo float left */
 }
 
 .settings-custom-background .instructions-template {
@@ -4508,12 +4446,12 @@ svg.mouseclick use.right {
 }
 
 /* Move over tooltips that are near the edge of screen */
-.add-point .tooltip .tooltip-arrow {
-    left: 60px;
+button.sidebar-toggle .tooltip .tooltip-arrow {
+    left: 32px;
 }
-[dir='rtl'] .add-point .tooltip .tooltip-arrow {
+[dir='rtl'] button.sidebar-toggle .tooltip .tooltip-arrow {
     left: auto;
-    right: 60px;
+    right: 32px;
 }
 
 li:first-of-type .badge .tooltip,
@@ -4627,19 +4565,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     stroke-width: 1;
     stroke-opacity: 1;
     stroke-dasharray: 5, 5;
-}
-
-
-/* Media Queries
-------------------------------------------------------- */
-@media screen and (max-width: 1200px) {
-    .user-list { display: none !important; }
-}
-@media screen and (max-width: 1000px) {
-    #userLink { display: none !important; }
-}
-@media screen and (max-width: 900px) {
-    #scale-block { display: none !important; }
 }
 
 

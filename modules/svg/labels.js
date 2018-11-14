@@ -672,17 +672,23 @@ export function svgLabels(projection, context) {
         }
 
 
-        var layer = selection.selectAll('.layer-labels');
-        var halo = layer.selectAll('.layer-labels-halo');
-        var label = layer.selectAll('.layer-labels-label');
-        var debug = layer.selectAll('.layer-labels-debug');
+        var layer = selection.selectAll('.layer-osm.labels');
+        layer.selectAll('.labels-group')
+            .data(['halo', 'label', 'debug'])
+            .enter()
+            .append('g')
+            .attr('class', function(d) { return 'labels-group ' + d; });
+
+        var halo = layer.selectAll('.labels-group.halo');
+        var label = layer.selectAll('.labels-group.label');
+        var debug = layer.selectAll('.labels-group.debug');
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
         drawPointLabels(halo, labelled.point, filter, 'pointlabel-halo', positions.point);
 
         // lines
-        drawLinePaths(halo, labelled.line, filter, '', positions.line);
+        drawLinePaths(layer, labelled.line, filter, '', positions.line);
         drawLineLabels(label, labelled.line, filter, 'linelabel', positions.line);
         drawLineLabels(halo, labelled.line, filter, 'linelabel-halo', positions.line);
 
@@ -701,8 +707,8 @@ export function svgLabels(projection, context) {
 
 
     function filterLabels(selection) {
-        var layers = selection
-            .selectAll('.layer-labels-label, .layer-labels-halo');
+        var drawLayer = selection.selectAll('.layer-osm.labels');
+        var layers = drawLayer.selectAll('.labels-group.halo, .labels-group.label');
 
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
@@ -733,7 +739,7 @@ export function svgLabels(projection, context) {
 
 
         // draw the mouse bbox if debugging is on..
-        var debug = selection.selectAll('.layer-labels-debug');
+        var debug = selection.selectAll('.labels-group.debug');
         var gj = [];
         if (context.getDebug('collision')) {
             gj = bbox ? [{

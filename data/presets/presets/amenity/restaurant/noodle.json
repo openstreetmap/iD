@@ -1,0 +1,48 @@
+{
+    "icon": "maki-restaurant-noodle",
+    "fields": [
+        "name",
+        "cuisine",
+        "address",
+        "building_area",
+        "opening_hours",
+        "capacity",
+        "takeaway",
+        "delivery",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "ramen noodles",
+        "soup",
+        "soba noodles",
+        "cellophane noodles",
+        "rice noodles"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "noodle"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "noodle"
+    },
+    "name": "Noodle Restaurant"
+}

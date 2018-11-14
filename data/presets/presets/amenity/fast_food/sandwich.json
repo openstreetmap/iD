@@ -1,0 +1,42 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "takeaway",
+        "delivery",
+        "drive_through",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "cafe",
+        "café",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "sandwich"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "sandwich"
+    },
+    "name": "Sandwich Fast Food"
+}
