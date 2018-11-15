@@ -3,13 +3,13 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 
 import { actionMove } from '../actions';
 import { behaviorEdit } from '../behavior';
 import { geoViewportEdge, geoVecSubtract } from '../geo';
 import { modeBrowse, modeSelect } from './index';
+import { utilKeybinding } from '../util';
 
 import {
     operationCircularize,
@@ -27,7 +27,7 @@ export function modeMove(context, entityIDs, baseGraph) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('move');
+    var keybinding = utilKeybinding('move');
     var behaviors = [
         behaviorEdit(context),
         operationCircularize(entityIDs, context).behavior,
@@ -159,7 +159,8 @@ export function modeMove(context, entityIDs, baseGraph) {
         context.history()
             .on('undone.move', null);
 
-        keybinding.off();
+        d3_select(document)
+            .call(keybinding.unbind);
     };
 
 

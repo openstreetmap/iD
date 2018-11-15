@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
@@ -298,7 +296,7 @@ export function uiInit(context) {
 
 
         var panPixels = 80;
-        var keybinding = d3_keybinding('main')
+        context.keybinding()
             .on('⌫', function() { d3_event.preventDefault(); })
             .on(t('sidebar.key'), ui.sidebar.toggle)
             .on('←', pan([panPixels, 0]))
@@ -309,9 +307,6 @@ export function uiInit(context) {
             .on(['⇧↑', uiCmd('⌘↑')], pan([0, map.dimensions()[1]]))
             .on(['⇧→', uiCmd('⌘→')], pan([-map.dimensions()[0], 0]))
             .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]));
-
-        d3_select(document)
-            .call(keybinding);
 
         context.enter(modeBrowse(context));
 
@@ -373,6 +368,7 @@ export function uiInit(context) {
 
 
     ui.restart = function(arg) {
+        context.keybinding().clear();
         context.locale(arg);
         context.loadLocale(function(err) {
             if (!err) {

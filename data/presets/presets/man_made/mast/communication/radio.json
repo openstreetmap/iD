@@ -1,0 +1,33 @@
+{
+    "icon": "maki-communications-tower",
+    "fields": [
+        "tower/type",
+        "tower/construction",
+        "height",
+        "communication_multi"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "antenna",
+        "broadcast tower",
+        "communication mast",
+        "communication tower",
+        "guyed tower",
+        "radio mast",
+        "radio tower",
+        "transmission mast",
+        "transmission tower"
+    ],
+    "tags": {
+        "man_made": "mast",
+        "tower:type": "communication",
+        "communication:radio": "yes"
+    },
+    "reference": {
+        "key": "communication:radio",
+        "value": "yes"
+    },
+    "name": "Radio Broadcast Mast"
+}

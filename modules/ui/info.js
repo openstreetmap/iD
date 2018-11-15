@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
@@ -12,10 +10,10 @@ import { uiInfoPanels } from './panels';
 
 
 export function uiInfo(context) {
-    var ids = Object.keys(uiInfoPanels),
-        wasActive = ['measurement'],
-        panels = {},
-        active = {};
+    var ids = Object.keys(uiInfoPanels);
+    var wasActive = ['measurement'];
+    var panels = {};
+    var active = {};
 
     // create panels
     ids.forEach(function(k) {
@@ -118,18 +116,15 @@ export function uiInfo(context) {
 
         redraw();
 
-        var keybinding = d3_keybinding('info')
+        context.keybinding()
             .on(uiCmd('⌘' + t('info_panels.key')), toggle);
 
         ids.forEach(function(k) {
             var key = t('info_panels.' + k + '.key', { default: null });
             if (!key) return;
-            keybinding
+            context.keybinding()
                 .on(uiCmd('⌘⇧' + key), function() { toggle(k); });
         });
-
-        d3_select(document)
-            .call(keybinding);
     }
 
     return info;

@@ -1,12 +1,9 @@
 /* global Mapillary:false */
 import _find from 'lodash-es/find';
-import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
-import _map from 'lodash-es/map';
 import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
 
-import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
 import {
@@ -213,57 +210,29 @@ function parsePagination(links) {
 }
 
 
-// partition viewport into `psize` x `psize` regions
-function partitionViewport(psize, projection) {
-    var dimensions = projection.clipExtent()[1];
-    psize = psize || 16;
-    var cols = d3_range(0, dimensions[0], psize);
-    var rows = d3_range(0, dimensions[1], psize);
-    var partitions = [];
+// partition viewport into higher zoom tiles
+function partitionViewport(projection) {
+    var z = geoScaleToZoom(projection.scale());
+    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    var tiler = utilTiler().zoomExtent([z2, z2]);
 
-    rows.forEach(function(y) {
-        cols.forEach(function(x) {
-            var min = [x, y + psize];
-            var max = [x + psize, y];
-            partitions.push(
-                geoExtent(projection.invert(min), projection.invert(max)));
-        });
-    });
-
-    return partitions;
+    return tiler.getTiles(projection)
+        .map(function(tile) { return tile.extent; });
 }
 
 
 // no more than `limit` results per partition.
-function searchLimited(psize, limit, projection, rtree) {
-    limit = limit || 3;
+function searchLimited(limit, projection, rtree) {
+    limit = limit || 5;
 
-    var partitions = partitionViewport(psize, projection);
-    var results;
+    return partitionViewport(projection)
+        .reduce(function(result, extent) {
+            var found = rtree.search(extent.bbox())
+                .slice(0, limit)
+                .map(function(d) { return d.data; });
 
-    // console.time('previous');
-    results =  _flatten(_map(partitions, function(extent) {
-        return rtree.search(extent.bbox())
-            .slice(0, limit)
-            .map(function(d) { return d.data; });
-    }));
-    // console.timeEnd('previous');
-
-    // console.time('new');
-    // results = partitions.reduce(function(result, extent) {
-    //     var found = rtree.search(extent.bbox())
-    //         .map(function(d) { return d.data; })
-    //         .sort(function(a, b) {
-    //             return a.loc[1] - b.loc[1];
-    //             // return a.key.localeCompare(b.key);
-    //         })
-    //         .slice(0, limit);
-
-    //     return (found.length ? result.concat(found) : result);
-    // }, []);
-    // console.timeEnd('new');
-
-    return results;
+            return (found.length ? result.concat(found) : result);
+        }, []);
 }
 
 
@@ -309,14 +278,14 @@ export default {
 
 
     images: function(projection) {
-        var psize = 16, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.images.rtree);
+        var limit = 5;
+        return searchLimited(limit, projection, _mlyCache.images.rtree);
     },
 
 
     signs: function(projection) {
-        var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _mlyCache.map_features.rtree);
+        var limit = 5;
+        return searchLimited(limit, projection, _mlyCache.map_features.rtree);
     },
 
 

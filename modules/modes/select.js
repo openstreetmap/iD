@@ -9,7 +9,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 
 import { actionAddMidpoint } from '../actions';
@@ -23,30 +22,21 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import {
-    geoExtent,
-    geoChooseEdge,
-    geoPointInPolygon
-} from '../geo';
-
-import {
-    osmNode,
-    osmWay
-} from '../osm';
-
+import { geoExtent, geoChooseEdge, geoPointInPolygon } from '../geo';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
+import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
-import { utilEntityOrMemberSelector, utilEntitySelector } from '../util';
+import { utilEntityOrMemberSelector, utilEntitySelector, utilKeybinding } from '../util';
 
 // deprecation warning - Radial Menu to be removed in iD v3
 import { uiRadialMenu } from '../ui';
 
 
-var relatedParent;
+var _relatedParent;
 
 
 export function modeSelect(context, selectedIDs) {
@@ -55,7 +45,7 @@ export function modeSelect(context, selectedIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('select');
+    var keybinding = utilKeybinding('select');
     var timeout = null;
     var behaviors = [
         behaviorCopy(context),
@@ -132,7 +122,7 @@ export function modeSelect(context, selectedIDs) {
     function singularParent() {
         var parents = commonParents();
         if (!parents || parents.length === 0) {
-            relatedParent = null;
+            _relatedParent = null;
             return null;
         }
 
@@ -140,12 +130,12 @@ export function modeSelect(context, selectedIDs) {
         // parents, and we want to remember which parent line we started on.
 
         if (parents.length === 1) {
-            relatedParent = parents[0];  // remember this parent for later
-            return relatedParent;
+            _relatedParent = parents[0];  // remember this parent for later
+            return _relatedParent;
         }
 
-        if (parents.indexOf(relatedParent) !== -1) {
-            return relatedParent;   // prefer the previously seen parent
+        if (parents.indexOf(_relatedParent) !== -1) {
+            return _relatedParent;   // prefer the previously seen parent
         }
 
         return parents[0];
@@ -292,8 +282,8 @@ export function modeSelect(context, selectedIDs) {
                 .classed('related', false);
 
             singularParent();
-            if (relatedParent) {
-                surface.selectAll(utilEntitySelector([relatedParent]))
+            if (_relatedParent) {
+                surface.selectAll(utilEntitySelector([_relatedParent]))
                     .classed('related', true);
             }
 
@@ -412,19 +402,19 @@ export function modeSelect(context, selectedIDs) {
             var parents = _uniq(commonParents());
             if (!parents || parents.length < 2) return;
 
-            var index = parents.indexOf(relatedParent);
+            var index = parents.indexOf(_relatedParent);
             if (index < 0 || index > parents.length - 2) {
-                relatedParent = parents[0];
+                _relatedParent = parents[0];
             } else {
-                relatedParent = parents[index + 1];
+                _relatedParent = parents[index + 1];
             }
 
             var surface = context.surface();
             surface.selectAll('.related')
                 .classed('related', false);
 
-            if (relatedParent) {
-                surface.selectAll(utilEntitySelector([relatedParent]))
+            if (_relatedParent) {
+                surface.selectAll(utilEntitySelector([_relatedParent]))
                     .classed('related', true);
             }
         }
@@ -521,7 +511,10 @@ export function modeSelect(context, selectedIDs) {
         if (inspector) wrap.call(inspector.close);
 
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
+
         closeMenu();
         editMenu = undefined;
 

@@ -1,11 +1,5 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { modeSave } from '../modes';
@@ -101,11 +95,8 @@ export function uiSave(context) {
         updateCount();
 
 
-        var keybinding = d3_keybinding('uiSave')
+        context.keybinding()
             .on(key, save, true);
-
-        d3_select(document)
-            .call(keybinding);
 
         context.history()
             .on('change.save', updateCount);

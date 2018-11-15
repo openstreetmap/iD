@@ -180,7 +180,7 @@ export function behaviorSelect(context) {
     }
 
 
-    var behavior = function(selection) {
+    function behavior(selection) {
         lastMouse = null;
         suppressMenu = true;
         p1 = null;
@@ -208,7 +208,7 @@ export function behaviorSelect(context) {
             context.surface()
                 .classed('behavior-multiselect', true);
         }
-    };
+    }
 
 
     behavior.off = function(selection) {

@@ -1,7 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
 import { select as d3_select } from 'd3-selection';
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
     modeAddArea,
@@ -56,10 +55,8 @@ export function uiModes(context) {
                     .classed('mode-' + exited.id, false);
             });
 
-        var keybinding = d3_keybinding('mode-buttons');
-
         modes.forEach(function(mode) {
-            keybinding.on(mode.key, function() {
+            context.keybinding().on(mode.key, function() {
                 if (mode.id === 'add-note' && !(notesEnabled() && notesEditable())) return;
                 if (mode.id !== 'add-note' && !editable()) return;
 
@@ -70,9 +67,6 @@ export function uiModes(context) {
                 }
             });
         });
-
-        d3_select(document)
-            .call(keybinding);
 
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });

@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
@@ -73,19 +71,14 @@ export function uiZoom(context) {
                 .call(svgIcon('#iD-icon-' + d.icon, 'light'));
         });
 
-        var keybinding = d3_keybinding('zoom');
-
         ['plus', 'ffplus', '=', 'ffequals'].forEach(function(key) {
-            keybinding.on([key], zoomIn);
-            keybinding.on([uiCmd('⌘' + key)], zoomInFurther);
+            context.keybinding().on([key], zoomIn);
+            context.keybinding().on([uiCmd('⌘' + key)], zoomInFurther);
         });
 
         ['_', '-', 'ffminus', 'dash'].forEach(function(key) {
-            keybinding.on([key], zoomOut);
-            keybinding.on([uiCmd('⌘' + key)], zoomOutFurther);
+            context.keybinding().on([key], zoomOut);
+            context.keybinding().on([uiCmd('⌘' + key)], zoomOutFurther);
         });
-
-        d3_select(document)
-            .call(keybinding);
     };
 }

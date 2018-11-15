@@ -6,8 +6,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     behaviorBreathe,
     behaviorHover,
@@ -16,9 +14,9 @@ import {
 } from '../behavior';
 
 import { geoExtent } from '../geo';
-import { modeDragNode, modeDragNote } from '../modes';
-import { modeBrowse } from './browse';
+import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { uiDataEditor } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function modeSelectData(context, selectedDatum) {
@@ -27,7 +25,7 @@ export function modeSelectData(context, selectedDatum) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('select-data');
+    var keybinding = utilKeybinding('select-data');
     var dataEditor = uiDataEditor(context);
 
     var behaviors = [
@@ -65,7 +63,9 @@ export function modeSelectData(context, selectedDatum) {
     mode.enter = function() {
         behaviors.forEach(context.install);
         keybinding.on('⎋', esc, true);
-        d3_select(document).call(keybinding);
+
+        d3_select(document)
+            .call(keybinding);
 
         selectData();
 
@@ -83,7 +83,9 @@ export function modeSelectData(context, selectedDatum) {
 
     mode.exit = function() {
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
 
         context.surface()
             .selectAll('.layer-mapdata .selected')

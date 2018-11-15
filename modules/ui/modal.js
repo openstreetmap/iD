@@ -3,13 +3,12 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { svgIcon } from '../svg';
+import { utilKeybinding } from '../util';
 
 
 export function uiModal(selection, blocking) {
-    var keybinding = d3_keybinding('modal');
+    var keybinding = utilKeybinding('modal');
     var previous = selection.select('div.modal');
     var animate = previous.empty();
 
@@ -35,7 +34,8 @@ export function uiModal(selection, blocking) {
             .duration(200)
             .style('top','0px');
 
-        keybinding.off();
+        d3_select(document)
+            .call(keybinding.unbind);
     };
 
 

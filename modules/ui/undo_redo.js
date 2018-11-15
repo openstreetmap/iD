@@ -5,8 +5,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
@@ -65,12 +63,9 @@ export function uiUndoRedo(context) {
                 .call(svgIcon('#iD-icon-' + iconName));
         });
 
-        var keybinding = d3_keybinding('undo')
+        context.keybinding()
             .on(commands[0].cmd, function() { d3_event.preventDefault(); commands[0].action(); })
             .on(commands[1].cmd, function() { d3_event.preventDefault(); commands[1].action(); });
-
-        d3_select(document)
-            .call(keybinding);
 
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });

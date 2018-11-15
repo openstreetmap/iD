@@ -6,8 +6,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 
 import {
@@ -34,6 +32,8 @@ import {
 import { modeBrowse, modeSelect } from './index';
 import { osmJoinWays, osmNode } from '../osm';
 import { uiFlash } from '../ui';
+import { utilKeybinding } from '../util';
+
 
 
 export function modeDragNode(context) {
@@ -102,7 +102,7 @@ export function modeDragNode(context) {
 
 
     function keydown() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope')) {
                 context.surface()
                     .classed('nope-suppressed', true);
@@ -115,7 +115,7 @@ export function modeDragNode(context) {
 
 
     function keyup() {
-        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope-suppressed')) {
                 context.surface()
                     .classed('nope', true);

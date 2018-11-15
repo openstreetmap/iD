@@ -16,6 +16,7 @@ export { utilGetSetValue } from './get_set_value';
 export { utilHashcode } from './util';
 export { utilHighlightEntity } from './util';
 export { utilIdleWorker } from './idle_worker';
+export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';

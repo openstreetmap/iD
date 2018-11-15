@@ -3,10 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import marked from 'marked';
-import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiBackground } from './background';
@@ -14,6 +11,8 @@ import { uiIntro } from './intro';
 import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
+
+import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { icon } from './intro/helper';
 
@@ -476,12 +475,8 @@ export function uiHelp(context) {
 
         clickHelp(docs[0], 0);
 
-        var keybinding = d3_keybinding('help')
-            .on(key, togglePane)
-            .on([t('background.key'), t('map_data.key')], hidePane);
-
-        d3_select(document)
-            .call(keybinding);
+        context.keybinding()
+            .on(key, togglePane);
 
         uiHelp.hidePane = hidePane;
         uiHelp.togglePane = togglePane;
