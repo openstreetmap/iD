@@ -11,35 +11,45 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
-        beach: 'beach',
-        cemetery: 'cemetery',
-        construction: 'construction',
-        farm: 'farmland',
-        farmland: 'farmland',
-        forest: 'forest',
-        wood: 'forest',
-        grave_yard: 'cemetery',
-        grass: 'grass',
-        meadow: 'meadow',
-        military: 'construction',
-        orchard: 'orchard',
-        sand: 'beach',
-        scrub: 'scrub',
-        wetland: 'wetland',
+        landuse: {
+            cemetery: 'cemetery',
+            construction: 'construction',
+            farm: 'farmland',
+            farmland: 'farmland',
+            forest: 'forest',
+            grave_yard: 'cemetery',
+            grass: 'grass',
+            meadow: 'meadow',
+            military: 'construction',
+            orchard: 'orchard'
+        },
+        natural: {
+            beach: 'beach',
+            sand: 'beach',
+            scrub: 'scrub',
+            wetland: 'wetland',
+            wood: 'forest'
+        }
     };
 
-    var patternKeys = ['landuse', 'natural', 'amenity'];
-
-
     function setPattern(d) {
-        for (var i = 0; i < patternKeys.length; i++) {
-            if (d.tags.building && d.tags.building !== 'no') continue;
+        // Skip pattern filling if this is a building (buildings don't get patterns applied)
+        if (d.tags.building && d.tags.building !== 'no') {
+            this.style.fill = this.style.stroke = '';
+            return;
+        }
 
-            if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
-                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
-                return;
+        for (var tag in patterns) {
+            var value = d.tags[tag];
+            if (value) {
+                var pattern = patterns[tag][value];
+                if (pattern) {
+                    this.style.fill = this.style.stroke = 'url("#pattern-' + pattern + '")';
+                    return;
+                }
             }
         }
+
         this.style.fill = this.style.stroke = '';
     }
 
