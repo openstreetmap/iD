@@ -79,7 +79,6 @@ export function svgDefs(context) {
                 ['orchard', 'orchard'],
                 ['farmland', 'farmland'],
                 ['beach', 'dots'],
-                ['scrub', 'dots'],
                 ['meadow', 'grass'],
                 ['grass', 'grass'],
                 ['forest', 'forest'],
