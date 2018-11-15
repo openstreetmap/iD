@@ -80,8 +80,8 @@ export function svgDefs(context) {
                 ['farmland', 'farmland'],
                 ['beach', 'dots'],
                 ['scrub', 'dots'],
-                ['meadow', 'dots'],
-                ['grass', 'dots'],
+                ['meadow', 'grass'],
+                ['grass', 'grass'],
                 ['forest', 'forest'],
                 ['wood', 'forest']
             ])
