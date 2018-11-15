@@ -11,24 +11,25 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
+        // tag - value - rules (pattern)
         landuse: {
-            cemetery: 'cemetery',
-            construction: 'construction',
-            farm: 'farmland',
-            farmland: 'farmland',
-            forest: 'forest',
-            grave_yard: 'cemetery',
-            grass: 'grass',
-            meadow: 'meadow',
-            military: 'construction',
-            orchard: 'orchard'
+            cemetery: [ { pattern: 'cemetery' } ],
+            construction: [ { pattern: 'construction' } ],
+            farm: [ { pattern: 'farmland' } ],
+            farmland: [ { pattern: 'farmland' } ],
+            forest: [ { pattern: 'forest' } ],
+            grave_yard: [ { pattern: 'cemetery' } ],
+            grass: [ { pattern: 'grass' } ],
+            meadow: [ { pattern: 'meadow' } ],
+            military: [ { pattern: 'construction' } ],
+            orchard: [ { pattern: 'orchard' } ]
         },
         natural: {
-            beach: 'beach',
-            sand: 'beach',
-            scrub: 'scrub',
-            wetland: 'wetland',
-            wood: 'forest'
+            beach: [ { pattern: 'beach' } ],
+            sand: [ { pattern: 'beach' } ],
+            scrub: [ { pattern: 'scrub' } ],
+            wetland: [ { pattern: 'wetland' } ],
+            wood: [ { pattern: 'forest' } ]
         }
     };
 
@@ -39,13 +40,24 @@ export function svgAreas(projection, context) {
             return;
         }
 
-        for (var tag in patterns) {
-            var value = d.tags[tag];
-            if (value) {
-                var pattern = patterns[tag][value];
-                if (pattern) {
-                    this.style.fill = this.style.stroke = 'url("#pattern-' + pattern + '")';
-                    return;
+        for (var p in patterns) { // this iterates over potential tag values
+            if (patterns.hasOwnProperty(p)) {
+                var value = d.tags[p];
+                if (value) {
+                    var rules = patterns[p];
+                    for (var r in rules) { // this iterates over potential tag values
+                        if (rules.hasOwnProperty(r)) {
+                            if (value === r) {
+                                var cases = rules[r];
+                                for (var c in cases) { // this iterates over rules for a tag-value pair
+                                    var match = cases[c];
+                                    // todo: no checks yet -- first case is good to go
+                                    this.style.fill = this.style.stroke = 'url("#pattern-' + match.pattern + '")';
+                                    return;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
