@@ -82,6 +82,9 @@ export function svgDefs(context) {
                 ['meadow', 'grass'],
                 ['grass', 'grass'],
                 ['forest', 'forest'],
+                ['forest_broadleaved', 'forest_broadleaved'],
+                ['forest_needleleaved', 'forest_needleleaved'],
+                ['forest_leafless', 'forest_leafless'],
                 ['wood', 'forest']
             ])
             .enter()

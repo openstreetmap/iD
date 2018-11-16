@@ -56,6 +56,9 @@ path.fill.tag-landuse-grass {
     background-color: rgba(140, 208, 95, 0.3);
 }
 .pattern-color-forest,
+.pattern-color-forest_broadleaved,
+.pattern-color-forest_needleleaved,
+.pattern-color-forest_leafless,
 .pattern-color-wood,
 .pattern-color-grass {
     fill: rgba(140, 208, 95, 0.3);

@@ -17,7 +17,12 @@ export function svgAreas(projection, context) {
             construction: [ { pattern: 'construction' } ],
             farm: [ { pattern: 'farmland' } ],
             farmland: [ { pattern: 'farmland' } ],
-            forest: [ { pattern: 'forest' } ],
+            forest: [
+                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
+                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
+                { leaf_type: 'leafless', pattern: 'forest_leafless' },
+                { pattern: 'forest' }
+            ],
             grave_yard: [ { pattern: 'cemetery' } ],
             grass: [ { pattern: 'grass' } ],
             meadow: [ { pattern: 'meadow' } ],
@@ -29,7 +34,12 @@ export function svgAreas(projection, context) {
             sand: [ { pattern: 'beach' } ],
             scrub: [ { pattern: 'scrub' } ],
             wetland: [ { pattern: 'wetland' } ],
-            wood: [ { pattern: 'forest' } ]
+            wood: [
+                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
+                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
+                { leaf_type: 'leafless', pattern: 'forest_leafless' },
+                { pattern: 'forest' }
+            ]
         }
     };
 
@@ -51,9 +61,23 @@ export function svgAreas(projection, context) {
                                 var cases = rules[r];
                                 for (var c in cases) { // this iterates over rules for a tag-value pair
                                     var match = cases[c];
-                                    // todo: no checks yet -- first case is good to go
-                                    this.style.fill = this.style.stroke = 'url("#pattern-' + match.pattern + '")';
-                                    return;
+
+                                    var matched = true;
+                                    for (var m in match) { // this iterates over any additional rules for a tag-value pair
+                                        if (m !== 'pattern' && match.hasOwnProperty(m)) {
+                                            // The only rule is a required tag-value pair
+                                            var v = d.tags[m];
+                                            if (!v || v !== match[m]) {
+                                                matched = false;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    if (matched) {
+                                        this.style.fill = this.style.stroke = 'url("#pattern-' + match.pattern + '")';
+                                        return;
+                                    }
                                 }
                             }
                         }
