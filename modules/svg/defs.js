@@ -73,7 +73,11 @@ export function svgDefs(context) {
             .data([
                 // pattern name, pattern image name
                 ['wetland', 'wetland'],
-                ['scrub', 'wetland'],
+                ['wetland_marsh', 'wetland_marsh'],
+                ['wetland_swamp', 'wetland_swamp'],
+                ['wetland_bog', 'wetland_bog'],
+                ['wetland_reedbed', 'wetland_reedbed'],
+                ['scrub', 'bushes'],
                 ['construction', 'construction'],
                 ['cemetery', 'cemetery'],
                 ['orchard', 'orchard'],
@@ -82,7 +86,9 @@ export function svgDefs(context) {
                 ['meadow', 'grass'],
                 ['grass', 'grass'],
                 ['forest', 'forest'],
-                ['wood', 'forest']
+                ['forest_broadleaved', 'forest_broadleaved'],
+                ['forest_needleleaved', 'forest_needleleaved'],
+                ['forest_leafless', 'forest_leafless']
             ])
             .enter()
             .append('pattern')
