@@ -11,33 +11,35 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
+        // tag - value - pattern name
+        // -or-
         // tag - value - rules (optional tag-values, pattern name)
         // (matches earlier rules first, so fallback should be last entry)
         amenity: {
-            grave_yard: [ { pattern: 'cemetery' } ]
+            grave_yard: 'cemetery'
         },
         landuse: {
-            cemetery: [ { pattern: 'cemetery' } ],
-            construction: [ { pattern: 'construction' } ],
-            farm: [ { pattern: 'farmland' } ],
-            farmland: [ { pattern: 'farmland' } ],
+            cemetery: 'cemetery',
+            construction: 'construction',
+            farm: 'farmland',
+            farmland: 'farmland',
             forest: [
                 { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
                 { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
                 { leaf_type: 'leafless', pattern: 'forest_leafless' },
-                { pattern: 'forest' }
+                { pattern: 'forest' } // same as 'leaf_type:mixed'
             ],
-            grave_yard: [ { pattern: 'cemetery' } ],
-            grass: [ { pattern: 'grass' } ],
-            meadow: [ { pattern: 'meadow' } ],
-            military: [ { pattern: 'construction' } ],
-            orchard: [ { pattern: 'orchard' } ]
+            grave_yard: 'cemetery',
+            grass: 'grass',
+            meadow: 'meadow',
+            military: 'construction',
+            orchard: 'orchard'
         },
         natural: {
-            beach: [ { pattern: 'beach' } ],
-            grassland: [ { pattern: 'grass' } ],
-            sand: [ { pattern: 'beach' } ],
-            scrub: [ { pattern: 'scrub' } ],
+            beach: 'beach',
+            grassland: 'grass',
+            sand: 'beach',
+            scrub: 'scrub',
             wetland: [
                 { wetland: 'marsh', pattern: 'wetland_marsh' },
                 { wetland: 'swamp', pattern: 'wetland_swamp' },
@@ -49,7 +51,7 @@ export function svgAreas(projection, context) {
                 { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
                 { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
                 { leaf_type: 'leafless', pattern: 'forest_leafless' },
-                { pattern: 'forest' }
+                { pattern: 'forest' } // same as 'leaf_type:mixed'
             ]
         }
     };
@@ -71,24 +73,29 @@ export function svgAreas(projection, context) {
                         if (entityValue === value) {
 
                             var rules = values[value];
-                            for (var ruleKey in rules) {
-                                var rule = rules[ruleKey];
+                            if (typeof rules === 'string') { // short syntax - pattern name
+                                this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
+                                return;
+                            } else { // long syntax - rule array
+                                for (var ruleKey in rules) {
+                                    var rule = rules[ruleKey];
 
-                                var pass = true;
-                                for (var criterion in rule) {
-                                    if (criterion !== 'pattern') { // reserved for pattern name
-                                        // The only rule is a required tag-value pair
-                                        var v = d.tags[criterion];
-                                        if (!v || v !== rule[criterion]) {
-                                            pass = false;
-                                            break;
+                                    var pass = true;
+                                    for (var criterion in rule) {
+                                        if (criterion !== 'pattern') { // reserved for pattern name
+                                            // The only rule is a required tag-value pair
+                                            var v = d.tags[criterion];
+                                            if (!v || v !== rule[criterion]) {
+                                                pass = false;
+                                                break;
+                                            }
                                         }
                                     }
-                                }
 
-                                if (pass) {
-                                    this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
-                                    return;
+                                    if (pass) {
+                                        this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
+                                        return;
+                                    }
                                 }
                             }
                         }
