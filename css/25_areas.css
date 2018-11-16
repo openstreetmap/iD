@@ -199,7 +199,11 @@ path.fill.tag-power-plant {
 }
 
 /* Teal things */
-.pattern-color-wetland {
+.pattern-color-wetland,
+.pattern-color-wetland_marsh,
+.pattern-color-wetland_swamp,
+.pattern-color-wetland_bog,
+.pattern-color-wetland_reedbed {
     fill: rgba(153, 225, 170, 0.3);
 }
 path.stroke.tag-natural-wetland {

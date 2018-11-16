@@ -11,7 +11,11 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
-        // tag - value - rules (pattern)
+        // tag - value - rules (optional tag-values, pattern name)
+        // (matches earlier rules first, so fallback should be last entry)
+        amenity: {
+            grave_yard: [ { pattern: 'cemetery' } ]
+        },
         landuse: {
             cemetery: [ { pattern: 'cemetery' } ],
             construction: [ { pattern: 'construction' } ],
@@ -31,9 +35,16 @@ export function svgAreas(projection, context) {
         },
         natural: {
             beach: [ { pattern: 'beach' } ],
+            grassland: [ { pattern: 'grass' } ],
             sand: [ { pattern: 'beach' } ],
             scrub: [ { pattern: 'scrub' } ],
-            wetland: [ { pattern: 'wetland' } ],
+            wetland: [
+                { wetland: 'marsh', pattern: 'wetland_marsh' },
+                { wetland: 'swamp', pattern: 'wetland_swamp' },
+                { wetland: 'bog', pattern: 'wetland_bog' },
+                { wetland: 'reedbed', pattern: 'wetland_reedbed' },
+                { pattern: 'wetland' }
+            ],
             wood: [
                 { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
                 { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
@@ -50,34 +61,34 @@ export function svgAreas(projection, context) {
             return;
         }
 
-        for (var p in patterns) { // this iterates over potential tag values
-            if (patterns.hasOwnProperty(p)) {
-                var value = d.tags[p];
-                if (value) {
-                    var rules = patterns[p];
-                    for (var r in rules) { // this iterates over potential tag values
-                        if (rules.hasOwnProperty(r)) {
-                            if (value === r) {
-                                var cases = rules[r];
-                                for (var c in cases) { // this iterates over rules for a tag-value pair
-                                    var match = cases[c];
+        for (var tag in patterns) {
+            if (patterns.hasOwnProperty(tag)) {
+                var entityValue = d.tags[tag];
+                if (entityValue) {
 
-                                    var matched = true;
-                                    for (var m in match) { // this iterates over any additional rules for a tag-value pair
-                                        if (m !== 'pattern' && match.hasOwnProperty(m)) {
-                                            // The only rule is a required tag-value pair
-                                            var v = d.tags[m];
-                                            if (!v || v !== match[m]) {
-                                                matched = false;
-                                                break;
-                                            }
+                    var values = patterns[tag];
+                    for (var value in values) {
+                        if (entityValue === value) {
+
+                            var rules = values[value];
+                            for (var ruleKey in rules) {
+                                var rule = rules[ruleKey];
+
+                                var pass = true;
+                                for (var criterion in rule) {
+                                    if (criterion !== 'pattern') { // reserved for pattern name
+                                        // The only rule is a required tag-value pair
+                                        var v = d.tags[criterion];
+                                        if (!v || v !== rule[criterion]) {
+                                            pass = false;
+                                            break;
                                         }
                                     }
+                                }
 
-                                    if (matched) {
-                                        this.style.fill = this.style.stroke = 'url("#pattern-' + match.pattern + '")';
-                                        return;
-                                    }
+                                if (pass) {
+                                    this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
+                                    return;
                                 }
                             }
                         }
