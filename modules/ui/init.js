@@ -286,12 +286,14 @@ export function uiInit(context) {
         window.onbeforeunload = function() {
             return context.save();
         };
-
         window.onunload = function() {
             context.history().unlock();
         };
 
         d3_select(window)
+            .on('gesturestart.editor', eventCancel)
+            .on('gesturechange.editor', eventCancel)
+            .on('gestureend.editor', eventCancel)
             .on('resize.editor', ui.onResize);
 
 
@@ -348,6 +350,10 @@ export function uiInit(context) {
                 d3_event.preventDefault();
                 context.pan(d, 100);
             };
+        }
+
+        function eventCancel() {
+            d3_event.preventDefault();
         }
     }
 

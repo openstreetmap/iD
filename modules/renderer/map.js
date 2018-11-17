@@ -178,15 +178,45 @@ export function rendererMap(context) {
             .selectAll('.surface')
             .attr('id', 'surface');
 
+
+        var prevScale;
+
         surface
             .call(drawLabels.observe)
+            .on('gesturestart.surface', function() {
+                prevScale = d3_event.scale;
+            })
+            .on('gesturechange.surface', function() {
+                // Remap Safari gesture events to wheel events - #5492
+                // We want these disabled most places, but enabled for zoom/unzoom on map surface
+                // https://developer.mozilla.org/en-US/docs/Web/API/GestureEvent
+                var e = d3_event;
+                e.preventDefault();
+
+                var deltaY = (e.scale > prevScale) ? -15 : 20;
+                prevScale = e.scale;
+
+                var props = {
+                    deltaY: deltaY ,
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    screenX: e.screenX,
+                    screenY: e.screenY,
+                    x: e.x,
+                    y: e.y
+                };
+                var e2 = new WheelEvent('wheel', props);
+                _selection.node().dispatchEvent(e2);
+            })
             .on('mousedown.zoom', function() {
                 if (d3_event.button === 2) {
                     d3_event.stopPropagation();
                 }
             }, true)
             .on('mouseup.zoom', function() {
-                if (resetTransform()) immediateRedraw();
+                if (resetTransform()) {
+                    immediateRedraw();
+                }
             })
             .on('mousemove.map', function() {
                 mousemove = d3_event;
