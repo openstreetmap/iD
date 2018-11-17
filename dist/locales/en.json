@@ -1681,9 +1681,6 @@
                 "board_type": {
                     "label": "Type"
                 },
-                "bonnet/colour": {
-                    "label": "Colour of the top section (bonnet)"
-                },
                 "booth": {
                     "label": "Booth"
                 },
@@ -1734,9 +1731,6 @@
                         "dome": "Dome"
                     }
                 },
-                "cap/colour": {
-                    "label": "Colour of the caps"
-                },
                 "capacity": {
                     "label": "Capacity",
                     "placeholder": "50, 100, 200..."
@@ -1786,18 +1780,6 @@
                 },
                 "country": {
                     "label": "Country"
-                },
-                "couplings": {
-                    "label": "Number of couplings",
-                    "placeholder": "1, 2, 3…"
-                },
-                "couplings/diameters": {
-                    "label": "Each coupling diameter (separated by ;)",
-                    "placeholder": "E.g. 45 mm;45 mm;110 mm"
-                },
-                "couplings/type": {
-                    "label": "Coupling standard.",
-                    "placeholder": "Bayonet, Storz, UNI…"
                 },
                 "covered": {
                     "label": "Covered"
@@ -2000,28 +1982,8 @@
                 "fence_type": {
                     "label": "Type"
                 },
-                "fire_hydrant/awwa_class": {
-                    "label": "AWWA Class (US only)",
-                    "options": {
-                        "AA": "more than 1500 US gal/min (light blue)",
-                        "A": "between 1500 and 1000 US gal/min (green)",
-                        "B": "between 1000 and 500 US gal/min (yellow)",
-                        "C": "less than 500 US gal/min (red)"
-                    }
-                },
-                "fire_hydrant/count": {
-                    "label": "Number of hydrants, if there are more than one.",
-                    "placeholder": "1, 2, 3…"
-                },
                 "fire_hydrant/diameter": {
                     "label": "Nominal diameter (in mm, inches or letters)."
-                },
-                "fire_hydrant/opening": {
-                    "label": "Direction to open the valve.",
-                    "options": {
-                        "cw": "clockwise",
-                        "ccw": "counterclockwise"
-                    }
                 },
                 "fire_hydrant/position": {
                     "label": "Position",
@@ -2034,9 +1996,6 @@
                 },
                 "fire_hydrant/pressure": {
                     "label": "Pressure in bar or suction"
-                },
-                "fire_hydrant/style": {
-                    "label": "Style (for special designs)"
                 },
                 "fire_hydrant/type": {
                     "label": "The shape of the hydrant.",
@@ -2058,9 +2017,6 @@
                 },
                 "flag/type": {
                     "label": "Flag Type"
-                },
-                "flow_rate": {
-                    "label": "Nominal flow rate with unit of measure."
                 },
                 "ford": {
                     "label": "Type",
@@ -2323,9 +2279,6 @@
                 "manhole": {
                     "label": "Type"
                 },
-                "manufacturer": {
-                    "label": "Manufacturers' name"
-                },
                 "map_size": {
                     "label": "Coverage"
                 },
@@ -2355,9 +2308,6 @@
                 },
                 "memorial": {
                     "label": "Type"
-                },
-                "model": {
-                    "label": "Model"
                 },
                 "monitoring_multi": {
                     "label": "Monitoring"
@@ -2508,13 +2458,6 @@
                 "phone": {
                     "label": "Telephone",
                     "placeholder": "+31 42 123 4567"
-                },
-                "pillar/type": {
-                    "label": "Description of pillar hydrants.",
-                    "options": {
-                        "dry_barrel": "The water shutoff valve is below ground.",
-                        "wet_barrel": "The barrel is pressurized at all times."
-                    }
                 },
                 "piste/difficulty_downhill": {
                     "label": "Difficulty",
@@ -2715,9 +2658,6 @@
                 },
                 "ref/isil": {
                     "label": "ISIL Code"
-                },
-                "reflective/colour": {
-                    "label": "Colour of reflective material"
                 },
                 "relation": {
                     "label": "Type"
@@ -7540,6 +7480,9 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -7547,10 +7490,6 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
-            },
-            "US-TIGER-Roads-2018": {
-                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
-                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -7659,26 +7598,11 @@
                 "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
                 "name": "Helsingborg Orthophoto"
             },
-            "kalmar-orto-2014": {
+            "hike_n_bike": {
                 "attribution": {
-                    "text": "© Kalmar municipality"
+                    "text": "© OpenStreetMap contributors"
                 },
-                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
-                "name": "Kalmar North Orthophoto 2014"
-            },
-            "kalmar-orto-2016": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
-                "name": "Kalmar South Orthophoto 2016"
-            },
-            "kalmar-orto-2018": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
-                "name": "Kalmar Urban Orthophoto 2018"
+                "name": "Hike & Bike"
             },
             "kalmar-orto-2014": {
                 "attribution": {

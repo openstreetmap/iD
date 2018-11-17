@@ -248,9 +248,6 @@ en:
       board_type:
         # board_type=*
         label: Type
-      bonnet/colour:
-        # 'bonnet:colour=*'
-        label: Colour of the top section (bonnet)
       booth:
         # booth=*
         label: Booth
@@ -306,9 +303,6 @@ en:
           fixed: Fixed
           # 'camera:type=panning'
           panning: Panning
-      cap/colour:
-        # 'cap:colour=*'
-        label: Colour of the caps
       capacity:
         # capacity=*
         label: Capacity
@@ -364,21 +358,6 @@ en:
       country:
         # country=*
         label: Country
-      couplings:
-        # couplings=*
-        label: Number of couplings
-        # couplings field placeholder
-        placeholder: '1, 2, 3…'
-      couplings/diameters:
-        # 'couplings:diameters=*'
-        label: Each coupling diameter (separated by ;)
-        # couplings/diameters field placeholder
-        placeholder: E.g. 45 mm;45 mm;110 mm
-      couplings/type:
-        # 'couplings:type=*'
-        label: Coupling standard.
-        # couplings/type field placeholder
-        placeholder: 'Bayonet, Storz, UNI…'
       covered:
         # covered=*
         label: Covered
@@ -610,34 +589,9 @@ en:
       fence_type:
         # fence_type=*
         label: Type
-      fire_hydrant/awwa_class:
-        # 'fire_hydrant:awwa_class=*'
-        label: AWWA Class (US only)
-        options:
-          # 'fire_hydrant:awwa_class=A'
-          A: between 1500 and 1000 US gal/min (green)
-          # 'fire_hydrant:awwa_class=AA'
-          AA: more than 1500 US gal/min (light blue)
-          # 'fire_hydrant:awwa_class=B'
-          B: between 1000 and 500 US gal/min (yellow)
-          # 'fire_hydrant:awwa_class=C'
-          C: less than 500 US gal/min (red)
-      fire_hydrant/count:
-        # 'fire_hydrant:count=*'
-        label: 'Number of hydrants, if there are more than one.'
-        # fire_hydrant/count field placeholder
-        placeholder: '1, 2, 3…'
       fire_hydrant/diameter:
         # 'fire_hydrant:diameter=*'
         label: 'Nominal diameter (in mm, inches or letters).'
-      fire_hydrant/opening:
-        # 'fire_hydrant:opening=*'
-        label: Direction to open the valve.
-        options:
-          # 'fire_hydrant:opening=ccw'
-          ccw: counterclockwise
-          # 'fire_hydrant:opening=cw'
-          cw: clockwise
       fire_hydrant/position:
         # 'fire_hydrant:position=*'
         label: Position
@@ -653,9 +607,6 @@ en:
       fire_hydrant/pressure:
         # 'fire_hydrant:pressure=*'
         label: Pressure in bar or suction
-      fire_hydrant/style:
-        # 'fire_hydrant:style=*'
-        label: Style (for special designs)
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
         label: The shape of the hydrant.
@@ -680,9 +631,6 @@ en:
       flag/type:
         # 'flag:type=*'
         label: Flag Type
-      flow_rate:
-        # flow_rate=*
-        label: Nominal flow rate with unit of measure.
       ford:
         # ford=*
         label: Type
@@ -983,9 +931,6 @@ en:
       manhole:
         # manhole=*
         label: Type
-      manufacturer:
-        # manufacturer=*
-        label: Manufacturers' name
       map_size:
         # map_size=*
         label: Coverage
@@ -1019,9 +964,6 @@ en:
       memorial:
         # memorial=*
         label: Type
-      model:
-        # model=*
-        label: Model
       monitoring_multi:
         # 'monitoring:=*'
         label: Monitoring
@@ -1220,14 +1162,6 @@ en:
         label: Telephone
         # phone field placeholder
         placeholder: +31 42 123 4567
-      pillar/type:
-        # 'pillar:type=*'
-        label: Description of pillar hydrants.
-        options:
-          # 'pillar:type=dry_barrel'
-          dry_barrel: The water shutoff valve is below ground.
-          # 'pillar:type=wet_barrel'
-          wet_barrel: The barrel is pressurized at all times.
       piste/difficulty:
         # 'piste:difficulty=*'
         label: Difficulty
@@ -1484,9 +1418,6 @@ en:
         label: Taxiway Name
         # ref_taxiway field placeholder
         placeholder: e.g. A5
-      reflective/colour:
-        # 'reflective:colour=*'
-        label: Colour of reflective material
       relation:
         # type=*
         label: Type

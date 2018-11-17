@@ -1,7 +1,0 @@
-{
-    "key": "fire_hydrant:count",
-    "minValue": 1,
-    "type": "number",
-    "label": "Number of hydrants, if there are more than one.",
-    "placeholder": "1, 2, 3…"
-}

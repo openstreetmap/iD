@@ -6914,10 +6914,6 @@
     {"key": "blood:", "value": "platelets", "description": "Blood Components"},
     {"key": "blood:", "value": "stemcells", "description": "Blood Components"},
     {"key": "board_type", "description": "Type"},
-    {
-      "key": "bonnet:colour",
-      "description": "Colour of the top section (bonnet)"
-    },
     {"key": "booth", "description": "Booth"},
     {"key": "boules", "description": "Type"},
     {"key": "boundary", "description": "Type"},
@@ -6931,7 +6927,6 @@
     {"key": "camera:type", "value": "fixed", "description": "Camera Type"},
     {"key": "camera:type", "value": "panning", "description": "Camera Type"},
     {"key": "camera:type", "value": "dome", "description": "Camera Type"},
-    {"key": "cap:colour", "description": "Colour of the caps"},
     {"key": "capacity", "description": "Capacity"},
     {"key": "cash_in", "description": "Cash In"},
     {"key": "castle_type", "description": "Type"},
@@ -6959,12 +6954,6 @@
       "description": "Movement Direction"
     },
     {"key": "country", "description": "Country"},
-    {"key": "couplings", "description": "Number of couplings"},
-    {
-      "key": "couplings:diameters",
-      "description": "Each coupling diameter (separated by ;)"
-    },
-    {"key": "couplings:type", "description": "Coupling standard."},
     {"key": "covered", "description": "Covered"},
     {"key": "crane:type", "value": "portal_crane", "description": "Crane Type"},
     {
@@ -7072,42 +7061,8 @@
     {"key": "fee", "description": "Fee"},
     {"key": "fence_type", "description": "Type"},
     {
-      "key": "fire_hydrant:awwa_class",
-      "value": "AA",
-      "description": "AWWA Class (US only)"
-    },
-    {
-      "key": "fire_hydrant:awwa_class",
-      "value": "A",
-      "description": "AWWA Class (US only)"
-    },
-    {
-      "key": "fire_hydrant:awwa_class",
-      "value": "B",
-      "description": "AWWA Class (US only)"
-    },
-    {
-      "key": "fire_hydrant:awwa_class",
-      "value": "C",
-      "description": "AWWA Class (US only)"
-    },
-    {
-      "key": "fire_hydrant:count",
-      "description": "Number of hydrants, if there are more than one."
-    },
-    {
       "key": "fire_hydrant:diameter",
       "description": "Nominal diameter (in mm, inches or letters)."
-    },
-    {
-      "key": "fire_hydrant:opening",
-      "value": "cw",
-      "description": "Direction to open the valve."
-    },
-    {
-      "key": "fire_hydrant:opening",
-      "value": "ccw",
-      "description": "Direction to open the valve."
     },
     {
       "key": "fire_hydrant:position",
@@ -7133,7 +7088,6 @@
       "key": "fire_hydrant:pressure",
       "description": "Pressure in bar or suction"
     },
-    {"key": "fire_hydrant:style", "description": "Style (for special designs)"},
     {
       "key": "fire_hydrant:type",
       "value": "pillar",
@@ -7158,10 +7112,6 @@
     {"key": "fitness_station", "description": "Equipment Type"},
     {"key": "fixme", "description": "Fix Me"},
     {"key": "flag:type", "description": "Flag Type"},
-    {
-      "key": "flow_rate",
-      "description": "Nominal flow rate with unit of measure."
-    },
     {"key": "ford", "description": "Type"},
     {"key": "frequency", "description": "Operating Frequency"},
     {"key": "from", "description": "From"},
@@ -7286,7 +7236,6 @@
     {"key": "location", "value": "indoor", "description": "Location"},
     {"key": "location", "value": "roof", "description": "Location"},
     {"key": "location", "description": "Location"},
-    {"key": "manufacturer", "description": "Manufacturers' name"},
     {"key": "map_size", "description": "Coverage"},
     {"key": "map_type", "description": "Type"},
     {"key": "material", "description": "Material"},
@@ -7296,7 +7245,6 @@
     {"key": "maxstay", "description": "Max Stay"},
     {"key": "maxweight", "description": "Max Weight"},
     {"key": "memorial", "description": "Type"},
-    {"key": "model", "description": "Model"},
     {"key": "monitoring:", "description": "Monitoring"},
     {
       "key": "mtb:scale",
@@ -7425,16 +7373,6 @@
     {"key": "payment:", "description": "Payment Types"},
     {"key": "phases", "description": "Phases"},
     {"key": "phone", "description": "Telephone"},
-    {
-      "key": "pillar:type",
-      "value": "dry_barrel",
-      "description": "Description of pillar hydrants."
-    },
-    {
-      "key": "pillar:type",
-      "value": "wet_barrel",
-      "description": "Description of pillar hydrants."
-    },
     {"key": "piste:difficulty", "value": "novice", "description": "Difficulty"},
     {"key": "piste:difficulty", "value": "easy", "description": "Difficulty"},
     {
@@ -7507,10 +7445,6 @@
       "description": "Gate Number, Hole Number, Junction Number, Platform Number, Road Number, Route Number, Runway Number, Stop Number, Taxiway Name, Reference Code"
     },
     {"key": "ref:isil", "description": "ISIL Code"},
-    {
-      "key": "reflective:colour",
-      "description": "Colour of reflective material"
-    },
     {"key": "type", "description": "Type"},
     {"key": "religion", "description": "Religion"},
     {"key": "restriction", "description": "Type"},
