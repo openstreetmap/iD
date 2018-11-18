@@ -94,6 +94,10 @@ path.fill.tag-natural-water {
     border-color: rgb(119, 211, 222);
     background-color: rgba(119, 211, 222, 0.3);
 }
+.pattern-color-waves,
+.pattern-color-pond {
+    fill: rgba(119, 211, 222, 0.3);
+}
 
 /* Yellow things */
 .pattern-color-beach,
@@ -181,6 +185,11 @@ path.fill.tag-landuse-military {
     border-color: rgb(214, 136, 26);
     background-color: rgba(214, 136, 26, 0.3);
 }
+.pattern-color-landfill
+{
+    fill: rgba(214, 136, 26, 0.3);
+}
+
 
 /* Pink things */
 path.stroke.tag-landuse-industrial,
@@ -216,23 +225,27 @@ path.stroke.tag-natural-wetland {
 
 /* Light Green things */
 .pattern-color-cemetery,
+.pattern-color-cemetery_christian,
+.pattern-color-cemetery_buddhist,
+.pattern-color-cemetery_muslim,
+.pattern-color-cemetery_jewish,
 .pattern-color-orchard,
+.pattern-color-vineyard,
 .pattern-color-meadow,
-.pattern-color-farm,
 .pattern-color-farmland {
     fill: rgba(191, 232, 63, 0.2);
 }
 path.stroke.tag-landuse-cemetery,
 path.stroke.tag-landuse-orchard,
+path.stroke.tag-landuse-vineyard,
 path.stroke.tag-landuse-meadow,
-path.stroke.tag-landuse-farm,
 path.stroke.tag-landuse-farmland {
     stroke: rgb(191, 232, 63);
 }
 .preset-icon-fill-area.tag-landuse-cemetery,
 .preset-icon-fill-area.tag-landuse-orchard,
+.preset-icon-fill-area.tag-landuse-vineyard,
 .preset-icon-fill-area.tag-landuse-meadow,
-.preset-icon-fill-area.tag-landuse-farm,
 .preset-icon-fill-area.tag-landuse-farmland {
     background-color: rgba(191, 232, 63, 0.2);
 }
@@ -248,6 +261,9 @@ path.fill.tag-landuse-farmyard {
 .preset-icon-fill-area.tag-landuse-farmyard {
     border-color: rgb(226, 177, 111);
     background: rgba(245, 220, 186, 0.3);
+}
+.pattern-color-farmyard {
+    fill: rgba(245, 220, 186, 0.3);
 }
 
 /* Dark Gray things */
@@ -279,6 +295,10 @@ path.fill.tag-landuse-quarry {
 .preset-icon-fill-area.tag-landuse-quarry {
     border-color: rgb(170, 170, 170);
     background-color: rgba(140, 140, 140, 0.5);
+}
+.pattern-color-quarry
+{
+    fill: rgba(140, 140, 140, 0.5);
 }
 
 /* Light gray overrides */

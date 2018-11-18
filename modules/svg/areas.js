@@ -19,10 +19,16 @@ export function svgAreas(projection, context) {
             grave_yard: 'cemetery'
         },
         landuse: {
-            cemetery: 'cemetery',
+            cemetery: [
+                { religion: 'christian', pattern: 'cemetery_christian' },
+                { religion: 'buddhist', pattern: 'cemetery_buddhist' },
+                { religion: 'muslim', pattern: 'cemetery_muslim' },
+                { religion: 'jewish', pattern: 'cemetery_jewish' },
+                { pattern: 'cemetery' }
+            ],
             construction: 'construction',
-            farm: 'farmland',
             farmland: 'farmland',
+            farmyard: 'farmyard',
             forest: [
                 { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
                 { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
@@ -31,15 +37,22 @@ export function svgAreas(projection, context) {
             ],
             grave_yard: 'cemetery',
             grass: 'grass',
+            landfill: 'landfill',
             meadow: 'meadow',
             military: 'construction',
-            orchard: 'orchard'
+            orchard: 'orchard',
+            quarry: 'quarry',
+            vineyard: 'vineyard'
         },
         natural: {
             beach: 'beach',
             grassland: 'grass',
             sand: 'beach',
             scrub: 'scrub',
+            water: [
+                { water: 'pond', pattern: 'pond' },
+                { pattern: 'waves' }
+            ],
             wetland: [
                 { wetland: 'marsh', pattern: 'wetland_marsh' },
                 { wetland: 'swamp', pattern: 'wetland_swamp' },
@@ -56,16 +69,16 @@ export function svgAreas(projection, context) {
         }
     };
 
-    function setPattern(d) {
+    function setPattern(entity) {
         // Skip pattern filling if this is a building (buildings don't get patterns applied)
-        if (d.tags.building && d.tags.building !== 'no') {
+        if (entity.tags.building && entity.tags.building !== 'no') {
             this.style.fill = this.style.stroke = '';
             return;
         }
 
         for (var tag in patterns) {
             if (patterns.hasOwnProperty(tag)) {
-                var entityValue = d.tags[tag];
+                var entityValue = entity.tags[tag];
                 if (entityValue) {
 
                     var values = patterns[tag];
@@ -84,7 +97,7 @@ export function svgAreas(projection, context) {
                                     for (var criterion in rule) {
                                         if (criterion !== 'pattern') { // reserved for pattern name
                                             // The only rule is a required tag-value pair
-                                            var v = d.tags[criterion];
+                                            var v = entity.tags[criterion];
                                             if (!v || v !== rule[criterion]) {
                                                 pass = false;
                                                 break;
@@ -261,7 +274,7 @@ export function svgAreas(projection, context) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
-                    setPattern.apply(this, arguments);
+                    setPattern.call(this, entity);
                 }
             })
             .call(svgTagClasses())
