@@ -284,6 +284,10 @@ path.fill.tag-landuse-quarry {
     border-color: rgb(170, 170, 170);
     background-color: rgba(140, 140, 140, 0.5);
 }
+.pattern-color-quarry
+{
+    fill: rgba(140, 140, 140, 0.5);
+}
 
 /* Light gray overrides */
 path.stroke.tag-natural-cave_entrance,

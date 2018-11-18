@@ -92,7 +92,8 @@ export function svgDefs(context) {
                 ['forest', 'forest'],
                 ['forest_broadleaved', 'forest_broadleaved'],
                 ['forest_needleleaved', 'forest_needleleaved'],
-                ['forest_leafless', 'forest_leafless']
+                ['forest_leafless', 'forest_leafless'],
+                ['quarry', 'quarry']
             ])
             .enter()
             .append('pattern')

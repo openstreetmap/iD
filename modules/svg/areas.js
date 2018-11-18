@@ -39,7 +39,8 @@ export function svgAreas(projection, context) {
             grass: 'grass',
             meadow: 'meadow',
             military: 'construction',
-            orchard: 'orchard'
+            orchard: 'orchard',
+            quarry: 'quarry'
         },
         natural: {
             beach: 'beach',
