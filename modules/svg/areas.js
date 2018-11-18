@@ -49,6 +49,10 @@ export function svgAreas(projection, context) {
             grassland: 'grass',
             sand: 'beach',
             scrub: 'scrub',
+            water: [
+                { water: 'pond', pattern: 'pond' },
+                { pattern: 'waves' }
+            ],
             wetland: [
                 { wetland: 'marsh', pattern: 'wetland_marsh' },
                 { wetland: 'swamp', pattern: 'wetland_swamp' },
