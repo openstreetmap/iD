@@ -27,8 +27,8 @@ export function svgAreas(projection, context) {
                 { pattern: 'cemetery' }
             ],
             construction: 'construction',
-            farm: 'farmland',
             farmland: 'farmland',
+            farmyard: 'farmyard',
             forest: [
                 { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
                 { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
@@ -37,10 +37,12 @@ export function svgAreas(projection, context) {
             ],
             grave_yard: 'cemetery',
             grass: 'grass',
+            landfill: 'landfill',
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
-            quarry: 'quarry'
+            quarry: 'quarry',
+            vineyard: 'vineyard'
         },
         natural: {
             beach: 'beach',
