@@ -189,18 +189,24 @@ export function uiFieldLocalized(field, context) {
                 var label = wrap
                     .append('label')
                     .attr('class','form-label')
-                    .text(t('translate.localized_translation_label'))
                     .attr('for','localized-lang');
 
                 label
+                    .append('span')
+                    .attr('class', 'label-text')
+                    .text(t('translate.localized_translation_label'));
+
+                label
+                    .append('div')
+                    .attr('class', 'form-label-button-wrap')
                     .append('button')
-                    .attr('class', 'minor remove')
+                    .attr('class', 'minor remove-icon')
                     .on('click', function(d){
                         d3_event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;
                         dispatch.call('change', this, t);
-                        d3_select(this.parentNode.parentNode)
+                        d3_select(this.parentNode.parentNode.parentNode)
                             .style('top','0')
                             .style('max-height','240px')
                             .transition()

@@ -107,7 +107,11 @@ export function uiField(context, presetField, entity, options) {
             var label = enter
                 .append('label')
                 .attr('class', 'form-label')
-                .attr('for', function(d) { return 'preset-input-' + d.safeid; })
+                .attr('for', function(d) { return 'preset-input-' + d.safeid; });
+                
+            label
+                .append('span')
+                .attr('class', 'label-text')
                 .text(function(d) { return d.label(); });
 
             var wrap = label
@@ -228,4 +232,3 @@ export function uiField(context, presetField, entity, options) {
 
     return utilRebind(field, dispatch, 'on');
 }
-
