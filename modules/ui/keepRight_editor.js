@@ -289,7 +289,8 @@ export function uiKeepRightEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    d.state = 'ignore_t';
+
+                    d.state = d.state === 'ignore_t' ? '' : 'ignore_t';
                     keepRight.postKeepRightUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });
@@ -306,7 +307,7 @@ export function uiKeepRightEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var keepRight = services.keepRight;
                 if (keepRight) {
-                    d.state = 'ignore';
+                    d.state = d.state === 'ignore' ? '' : 'ignore';
                     keepRight.postKeepRightUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });

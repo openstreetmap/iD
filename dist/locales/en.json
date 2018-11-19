@@ -8287,9 +8287,6 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -8297,6 +8294,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -8313,6 +8314,12 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -8371,6 +8378,7 @@
                 "name": "basemap.at Orthofoto"
             },
             "eufar-balaton": {
+<<<<<<< HEAD
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
                 },
@@ -8399,10 +8407,62 @@
                 "name": "Japan GSI Standard Map"
             },
             "hike_n_bike": {
+=======
+>>>>>>> added: notes and todos for keepRight
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "EUFAR Balaton ortofotó 2010"
                 },
-                "name": "Hike & Bike"
+                "description": "1940 geo-tagged photography from Balaton Limnological Institute.",
+                "name": "EUFAR Balaton orthophotos"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
+                "name": "Japan GSI KIBAN 2500"
+            },
+            "gsi.go.jp": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
+                "name": "Japan GSI ortho Imagery"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI Standard Map. Widely covered.",
+                "name": "Japan GSI Standard Map"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg municipality"
+                },
+                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+                "name": "Helsingborg Orthophoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+                "name": "Kalmar North Orthophoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+                "name": "Kalmar South Orthophoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -8424,6 +8484,20 @@
                 },
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topographic map of Sweden 1:50 000",
+                "name": "Lantmäteriet Topographic Map"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Orthophotos from the municipality of Linköping 2010, open data",
+                "name": "Linköping Orthophoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -8488,6 +8562,13 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
