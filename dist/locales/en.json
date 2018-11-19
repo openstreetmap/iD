@@ -1135,7 +1135,7 @@
             "keepRight": {
                 "tooltip": "automatically detected errors from keepright.at",
                 "description": "Keep Right",
-                "title": "Edit Error",
+                "title": "Edit KeepRight Error",
                 "detail_title": "Error",
                 "detail_description": "Description",
                 "comment_header": "Comment",
