@@ -66,6 +66,8 @@ export function uiFieldRestrictions(field, context) {
     var _intersection;
     var _fromWayID;
 
+    var _redrawHandler;
+
 
     function restrictions(selection) {
         _parent = selection;
@@ -301,6 +303,14 @@ export function uiFieldRestrictions(field, context) {
                 });
         }
 
+        if (!_redrawHandler) {
+            _redrawHandler = setInterval(function() {
+                if (d3_select('#sidebar-resizer').classed('dragging')) {
+                    utilSetDimensions(_container, null);
+                    redraw();
+                }
+            }, 50);
+        }
 
         // This can happen if we've lowered the detail while a FROM way
         // is selected, and that way is no longer part of the intersection.
@@ -661,6 +671,8 @@ export function uiFieldRestrictions(field, context) {
 
         d3_select(window)
             .on('resize.restrictions', null);
+
+        clearInterval(_redrawHandler);
     };
 
 
