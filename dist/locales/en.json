@@ -3155,6 +3155,9 @@
                 "width": {
                     "label": "Width (Meters)"
                 },
+                "wikidata": {
+                    "label": "Wikidata"
+                },
                 "wikipedia": {
                     "label": "Wikipedia"
                 },

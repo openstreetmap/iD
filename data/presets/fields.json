@@ -342,6 +342,7 @@
     "wheelchair": {"key": "wheelchair", "type": "radio", "options": ["yes", "limited", "no"], "icon": "maki-wheelchair", "universal": true, "label": "Wheelchair Access"},
     "wholesale": {"key": "wholesale", "type": "typeCombo", "label": "Wholesale"},
     "width": {"key": "width", "type": "number", "minValue": 0, "label": "Width (Meters)"},
+    "wikidata": {"key": "wikidata", "type": "wikidata", "icon": "wikipedia", "universal": true, "label": "Wikidata"},
     "wikipedia": {"key": "wikipedia", "keys": ["wikipedia", "wikidata"], "type": "wikipedia", "icon": "wikipedia", "universal": true, "label": "Wikipedia"},
     "windings": {"key": "windings", "type": "number", "minValue": 1, "label": "Windings", "placeholder": "1, 2, 3..."},
     "windings/configuration": {"key": "windings:configuration", "type": "combo", "label": "Windings Configuration", "strings": {"options": {"star": "Star / Wye", "delta": "Delta", "open-delta": "Open Delta", "zigzag": "Zig Zag", "open": "Open", "scott": "Scott", "leblanc": "Leblanc"}}}

@@ -7863,8 +7863,8 @@
     {"key": "wheelchair", "description": "Wheelchair Access"},
     {"key": "wholesale", "description": "Wholesale"},
     {"key": "width", "description": "Width (Meters)"},
+    {"key": "wikidata", "description": "Wikidata, Wikipedia"},
     {"key": "wikipedia", "description": "Wikipedia"},
-    {"key": "wikidata", "description": "Wikipedia"},
     {"key": "windings", "description": "Windings"},
     {
       "key": "windings:configuration",
