@@ -19,6 +19,7 @@ body {
     color: #333;
     overflow: hidden;
     -ms-user-select: none;
+    -ms-content-zooming: none;
 }
 
 .unsupported {
