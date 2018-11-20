@@ -295,21 +295,6 @@ export function uiFieldRestrictions(field, context) {
 
             surface
                 .call(breathe);
-
-            d3_select(window)
-                .on('resize.restrictions', function() {
-                    utilSetDimensions(_container, null);
-                    redraw();
-                });
-        }
-
-        if (!_redrawHandler) {
-            _redrawHandler = setInterval(function() {
-                if (d3_select('#sidebar-resizer').classed('dragging')) {
-                    utilSetDimensions(_container, null);
-                    redraw();
-                }
-            }, 50);
         }
 
         // This can happen if we've lowered the detail while a FROM way
@@ -344,6 +329,11 @@ export function uiFieldRestrictions(field, context) {
                 .classed('selected', true)
                 .classed('related', true);
         }
+
+        document.addEventListener('resizeWindow', function (e) {
+            utilSetDimensions(_container, null);
+            redraw();
+        }, false);
 
         updateHints(null);
 

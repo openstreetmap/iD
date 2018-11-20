@@ -411,6 +411,13 @@ export function uiInit(context) {
         // check if header or footer have overflowed
         ui.checkOverflow('#bar');
         ui.checkOverflow('#footer');
+
+        // Use older code so it works on Explorer
+        var resizeWindowEvent = document.createEvent('Event');
+
+        resizeWindowEvent.initEvent('resizeWindow', true, true);
+
+        document.dispatchEvent(resizeWindowEvent);
     };
 
 
