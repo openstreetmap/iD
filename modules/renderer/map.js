@@ -81,7 +81,7 @@ export function rendererMap(context) {
     var dimensions = [1, 1];
     var _dblClickEnabled = true;
     var _redrawEnabled = true;
-    var _scaleLast;
+    var _gestureTransformStart;
     var _transformStart = projection.transform();
     var _transformLast;
     var _transformed = false;
@@ -181,7 +181,9 @@ export function rendererMap(context) {
 
         surface
             .call(drawLabels.observe)
-            .on('gesturestart.surface', gestureStart)
+            .on('gesturestart.surface', function() {
+                _gestureTransformStart = projection.transform();
+            })
             .on('gesturechange.surface', gestureChange)
             .on('mousedown.zoom', function() {
                 if (d3_event.button === 2) {
@@ -366,9 +368,6 @@ export function rendererMap(context) {
         }
     }
 
-    function gestureStart() {
-        _scaleLast = d3_event.scale;
-    }
 
     function gestureChange() {
         // Remap Safari gesture events to wheel events - #5492
@@ -377,12 +376,9 @@ export function rendererMap(context) {
         var e = d3_event;
         e.preventDefault();
 
-        var deltaY = (e.scale > _scaleLast) ? -10 : 10;
-        _scaleLast = e.scale;
-
         var props = {
-            ctrlKey: true,
-            deltaY: deltaY,
+            deltaMode: 0,    // dummy values to ignore in zoomPan
+            deltaY: 1,       // dummy values to ignore in zoomPan
             clientX: e.clientX,
             clientY: e.clientY,
             screenX: e.screenX,
@@ -390,7 +386,11 @@ export function rendererMap(context) {
             x: e.x,
             y: e.y
         };
+
         var e2 = new WheelEvent('wheel', props);
+        e2._scale = e.scale;         // preserve the original scale
+        e2._rotation = e.rotation;   // preserve the original rotation
+
         _selection.node().dispatchEvent(e2);
     }
 
@@ -399,10 +399,13 @@ export function rendererMap(context) {
         var event = (manualEvent || d3_event);
         var source = event.sourceEvent;
         var eventTransform = event.transform;
+        var x = eventTransform.x;
+        var y = eventTransform.y;
+        var k = eventTransform.k;
 
-        if (_transformStart.x === eventTransform.x &&
-            _transformStart.y === eventTransform.y &&
-            _transformStart.k === eventTransform.k) {
+        if (_transformStart.x === x &&
+            _transformStart.y === y &&
+            _transformStart.k === k) {
             return;  // no change
         }
 
@@ -412,47 +415,81 @@ export function rendererMap(context) {
         if (source && source.type === 'wheel') {
             var dX = source.deltaX;
             var dY = source.deltaY;
+            var x2 = x;
+            var y2 = y;
+            var k2 = k;
+            var t0, p0, p1;
 
-            // Normalize mousewheel scroll speed - #3029
+            // Normalize mousewheel scroll speed (Firefox) - #3029
             // If wheel delta is provided in LINE units, recalculate it in PIXEL units
             // We are essentially redoing the calculations that occur here:
             //   https://github.com/d3/d3-zoom/blob/78563a8348aa4133b07cac92e2595c2227ca7cd7/src/zoom.js#L203
             // See this for more info:
             //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
             if (source.deltaMode === 1 /* LINE */) {
-                // pick sensible scroll amount if user scrolling fast or slow..
+                // Convert from lines to pixels, more if the user is scrolling fast.
+                // (I made up the exp function to roughly match Firefox to what Chrome does)
                 var lines = clamp(Math.abs(source.deltaY), 0, 12);
                 var sign = (source.deltaY > 0) ? 1 : -1;
-                dY = sign * Math.exp((lines - 1) * 0.35) * 4.000244140625;
+                dY = sign * Math.exp((lines - 1) * 0.5) * 4.000244140625;
 
-                var t0 = _transformed ? _transformLast : _transformStart;
-                var p0 = mouse(source);
-                var p1 = t0.invert(p0);
-                var k2 = t0.k * Math.pow(2, -dY / 500);
-                var x2 = p0[0] - p1[0] * k2;
-                var y2 = p0[1] - p1[1] * k2;
+                // recalculate x2,y2,k2
+                t0 = _transformed ? _transformLast : _transformStart;
+                p0 = mouse(source);
+                p1 = t0.invert(p0);
+                k2 = t0.k * Math.pow(2, -dY / 500);
+                x2 = p0[0] - p1[0] * k2;
+                y2 = p0[1] - p1[1] * k2;
 
+            // 2 finger map pinch zooming (Safari) - #5492
+            // These are fake `wheel` events we made from Safari `gesturechange` events..
+            } else if (source._scale) {
+                // recalculate x2,y2,k2
+                t0 = _gestureTransformStart;
+                p0 = mouse(source);
+                p1 = t0.invert(p0);
+                k2 = t0.k * source._scale;
+                x2 = p0[0] - p1[0] * k2;
+                y2 = p0[1] - p1[1] * k2;
+
+            // 2 finger map panning (all browsers) - #5492
+            // Panning via the `wheel` event will always have:
+            // - `ctrlKey = false`
+            // - `deltaX`,`deltaY` are round integer pixels
+            } else if (!source.ctrlKey && isInteger(dX) && isInteger(dY)) {
+                p1 = projection.translate();
+                x2 = p1[0] - dX;
+                y2 = p1[1] - dY;
+                k2 = projection.scale();
+
+            // 2 finger map pinch zooming (all browsers except Safari) - #5492
+            // Pinch zooming via the `wheel` event will always have:
+            // - `ctrlKey = true`
+            // - `deltaY` is not round integer pixels (ignore `deltaX`)
+            } else if (source.ctrlKey && !isInteger(dY)) {
+                dY *= 6;   // slightly scale up whatever the browser gave us
+
+                // recalculate x2,y2,k2
+                t0 = _transformed ? _transformLast : _transformStart;
+                p0 = mouse(source);
+                p1 = t0.invert(p0);
+                k2 = t0.k * Math.pow(2, -dY / 500);
+                x2 = p0[0] - p1[0] * k2;
+                y2 = p0[1] - p1[1] * k2;
+            }
+
+            // something changed - replace the event transform
+            if (x2 !== x || y2 !== y || k2 !== k) {
+                x = x2;
+                y = y2;
+                k = k2;
                 eventTransform = d3_zoomIdentity.translate(x2, y2).scale(k2);
                 _selection.node().__zoom = eventTransform;
             }
 
-            // Support 2 finger map panning - #5492
-            // Panning via the `wheel` event will always have
-            // - `ctrlKey = false`
-            // - `deltaX`,`deltaY` are perfect integer pixels
-            if (!source.ctrlKey && isInteger(dX) && isInteger(dY)) {
-                var p = projection.translate();
-                var k = projection.scale();
-
-                p[0] -= dX;
-                p[1] -= dY;
-                eventTransform = d3_zoomIdentity.translate(p[0], p[1]).scale(k);
-                _selection.node().__zoom = eventTransform;
-            }
         }
 
-
-        if (geoScaleToZoom(eventTransform.k, TILESIZE) < minzoom) {
+        if (geoScaleToZoom(k, TILESIZE) < minzoom) {
             surface.interrupt();
             uiFlash().text(t('cannot_zoom'))();
             setZoom(context.minEditableZoom(), true);
@@ -463,15 +500,15 @@ export function rendererMap(context) {
 
         projection.transform(eventTransform);
 
-        var scale = eventTransform.k / _transformStart.k;
-        var tX = (eventTransform.x / scale - _transformStart.x) * scale;
-        var tY = (eventTransform.y / scale - _transformStart.y) * scale;
+        var scale = k / _transformStart.k;
+        var tX = (x / scale - _transformStart.x) * scale;
+        var tY = (y / scale - _transformStart.y) * scale;
 
         if (context.inIntro()) {
             curtainProjection.transform({
-                x: eventTransform.x - tX,
-                y: eventTransform.y - tY,
-                k: eventTransform.k
+                x: x - tX,
+                y: y - tY,
+                k: k
             });
         }
 
