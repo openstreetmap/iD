@@ -7493,6 +7493,12 @@
                 },
                 "name": "UrbIS-Ortho 2017"
             },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
+            },
             "UrbisAdmFR": {
                 "attribution": {
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"

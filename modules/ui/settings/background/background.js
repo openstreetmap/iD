@@ -10,19 +10,19 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg';
+import { t, textDirection } from '../../../util/locale';
+import { svgIcon } from '../../../svg';
 import { uiBackgroundDisplayOptions } from './background_display_options';
 import { uiBackgroundOffset } from './background_offset';
-import { uiCmd } from './cmd';
-import { uiDisclosure } from './disclosure';
-import { uiHelp } from './help';
-import { uiMapData } from './map_data';
-import { uiMapInMap } from './map_in_map';
-import { uiSettingsCustomBackground } from './settings/custom_background';
-import { uiTooltipHtml } from './tooltipHtml';
-import { utilCallWhenIdle } from '../util';
-import { tooltip } from '../util/tooltip';
+import { uiCmd } from '../../cmd';
+import { uiDisclosure } from '../../disclosure';
+import { uiHelp } from '../../help';
+import { uiMapData } from '../../map_data';
+import { uiMapInMap } from '../../map_in_map';
+import { uiSettingsCustomBackground } from '../custom';
+import { uiTooltipHtml } from '../../tooltipHtml';
+import { utilCallWhenIdle } from '../../../util';
+import { tooltip } from '../../../util/tooltip';
 
 
 export function uiBackground(context) {

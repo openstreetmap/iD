@@ -13,7 +13,7 @@ import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
-import { uiBackground } from './background';
+import { uiBackground } from './settings';
 import { uiContributors } from './contributors';
 import { uiFeatureInfo } from './feature_info';
 import { uiFullScreen } from './full_screen';

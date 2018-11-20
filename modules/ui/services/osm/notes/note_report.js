@@ -1,8 +1,8 @@
-import { t } from '../util/locale';
-import { svgIcon } from '../svg';
+import { t } from '../../../../util/locale';
+import { svgIcon } from '../../../../svg';
 import {
     osmNote
-} from '../osm';
+} from '../../../../osm';
 
 
 export function uiNoteReport() {

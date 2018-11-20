@@ -6,14 +6,14 @@ import _unionBy from 'lodash-es/unionBy';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { osmChangeset } from '../osm';
-import { uiChangesetEditor } from './changeset_editor';
+import { t } from '../../../../../util/locale';
+import { osmChangeset } from '../../../../../osm';
+import { uiChangesetEditor } from '../../../../changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
-import { uiRawTagEditor } from './raw_tag_editor';
-import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util';
+import { uiRawTagEditor } from '../../../../raw_tag_editor';
+import { utilDetect } from '../../../../../util/detect';
+import { utilRebind } from '../../../../../util';
 
 
 var _changeset;

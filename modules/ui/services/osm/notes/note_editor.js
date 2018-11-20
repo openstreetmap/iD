@@ -4,25 +4,20 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { services } from '../services';
-import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
+import { utilNoAuto, utilRebind } from '../../../../util';
+import { t } from '../../../../util/locale';
+import { services } from '../../../../services';
+import { modeBrowse } from '../../../../modes';
+import { svgIcon } from '../../../../svg';
 
 // import { uiField } from './field';
 // import { uiFormFields } from './form_fields';
 
-import {
-    uiNoteComments,
-    uiNoteHeader,
-    uiNoteReport,
-    uiViewOnOSM,
-} from './index';
+import { uiViewOnOSM } from '../../../index';
 
-import {
-    utilNoAuto,
-    utilRebind
-} from '../util';
+import { uiNoteComments } from './note_comments';
+import { uiNoteHeader } from './note_header';
+import { uiNoteReport } from './note_report';
 
 
 export function uiNoteEditor(context) {

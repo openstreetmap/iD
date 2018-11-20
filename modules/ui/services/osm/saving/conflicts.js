@@ -5,19 +5,19 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { JXON } from '../util/jxon';
-import { geoExtent } from '../geo';
-import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg';
-import { utilDetect } from '../util/detect';
+import { t } from '../../../../util/locale';
+import { JXON } from '../../../../util/jxon';
+import { geoExtent } from '../../../../geo';
+import { osmChangeset } from '../../../../osm';
+import { svgIcon } from '../../../../svg';
+import { utilDetect } from '../../../../util/detect';
 
 import {
     utilEntityOrMemberSelector,
     utilKeybinding,
     utilRebind,
     utilWrap
-} from '../util';
+} from '../../../../util';
 
 
 export function uiConflicts(context) {

@@ -8,10 +8,12 @@ import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes';
-import { uiBackground } from './background';
+import {
+    uiBackground,
+    uiSettingsCustomData
+} from './settings';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
-import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
 

@@ -6,7 +6,7 @@ import {
 import marked from 'marked';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
-import { uiBackground } from './background';
+import { uiBackground } from './index';
 import { uiIntro } from './intro';
 import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';

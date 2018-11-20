@@ -3,9 +3,9 @@ import _cloneDeep from 'lodash-es/cloneDeep';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 
-import { t } from '../../util/locale';
-import { uiConfirm } from '../confirm';
-import { utilNoAuto, utilRebind } from '../../util';
+import { t } from '../../../util/locale';
+import { uiConfirm } from '../../index';
+import { utilNoAuto, utilRebind } from '../../../util';
 
 
 export function uiSettingsCustomData(context) {

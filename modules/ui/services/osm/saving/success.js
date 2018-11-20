@@ -3,12 +3,12 @@ import _filter from 'lodash-es/filter';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { data } from '../../data';
-import { svgIcon } from '../svg';
-import { uiDisclosure } from '../ui';
-import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util/rebind';
+import { t } from '../../../../util/locale';
+import { data } from '../../../../../data';
+import { svgIcon } from '../../../../svg';
+import { uiDisclosure } from '../../..';
+import { utilDetect } from '../../../../util/detect';
+import { utilRebind } from '../../../../util/rebind';
 
 
 export function uiSuccess(context) {

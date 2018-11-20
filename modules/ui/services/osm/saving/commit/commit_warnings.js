@@ -1,8 +1,8 @@
-import { t } from '../util/locale';
-import { modeSelect } from '../modes';
-import { svgIcon } from '../svg';
-import { tooltip } from '../util/tooltip';
-import { utilEntityOrMemberSelector } from '../util';
+import { t } from '../../../../../util/locale';
+import { modeSelect } from '../../../../../modes';
+import { svgIcon } from '../../../../../svg';
+import { tooltip } from '../../../../../util/tooltip';
+import { utilEntityOrMemberSelector } from '../../../../../util';
 
 
 export function uiCommitWarnings(context) {
