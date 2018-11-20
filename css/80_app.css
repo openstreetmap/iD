@@ -522,13 +522,14 @@ button.save .count {
     display: inline-block;
     border: 0px solid #ccc;
     border-left-width: 1px;
-    padding: 0px 8px;
+    padding: 0px 0px 0px 8px;
     min-width: 32px;
     text-align: center;
 }
 [dir='rtl'] button.save .count {
     border-left-width: 0px;
     border-right-width: 1px;
+    padding: 0px 8px 0px 0px;
 }
 button.save.has-count .count {
     visibility: visible;
