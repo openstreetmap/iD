@@ -81,6 +81,7 @@ export function rendererMap(context) {
     var dimensions = [1, 1];
     var _dblClickEnabled = true;
     var _redrawEnabled = true;
+    var _scaleLast;
     var _transformStart = projection.transform();
     var _transformLast;
     var _transformed = false;
@@ -178,36 +179,10 @@ export function rendererMap(context) {
             .selectAll('.surface')
             .attr('id', 'surface');
 
-
-        var prevScale;
-
         surface
             .call(drawLabels.observe)
-            .on('gesturestart.surface', function() {
-                prevScale = d3_event.scale;
-            })
-            .on('gesturechange.surface', function() {
-                // Remap Safari gesture events to wheel events - #5492
-                // We want these disabled most places, but enabled for zoom/unzoom on map surface
-                // https://developer.mozilla.org/en-US/docs/Web/API/GestureEvent
-                var e = d3_event;
-                e.preventDefault();
-
-                var deltaY = (e.scale > prevScale) ? -15 : 20;
-                prevScale = e.scale;
-
-                var props = {
-                    deltaY: deltaY ,
-                    clientX: e.clientX,
-                    clientY: e.clientY,
-                    screenX: e.screenX,
-                    screenY: e.screenY,
-                    x: e.x,
-                    y: e.y
-                };
-                var e2 = new WheelEvent('wheel', props);
-                _selection.node().dispatchEvent(e2);
-            })
+            .on('gesturestart.surface', gestureStart)
+            .on('gesturechange.surface', gestureChange)
             .on('mousedown.zoom', function() {
                 if (d3_event.button === 2) {
                     d3_event.stopPropagation();
@@ -391,6 +366,34 @@ export function rendererMap(context) {
         }
     }
 
+    function gestureStart() {
+        _scaleLast = d3_event.scale;
+    }
+
+    function gestureChange() {
+        // Remap Safari gesture events to wheel events - #5492
+        // We want these disabled most places, but enabled for zoom/unzoom on map surface
+        // https://developer.mozilla.org/en-US/docs/Web/API/GestureEvent
+        var e = d3_event;
+        e.preventDefault();
+
+        var deltaY = (e.scale > _scaleLast) ? -10 : 10;
+        _scaleLast = e.scale;
+
+        var props = {
+            ctrlKey: true,
+            deltaY: deltaY,
+            clientX: e.clientX,
+            clientY: e.clientY,
+            screenX: e.screenX,
+            screenY: e.screenY,
+            x: e.x,
+            y: e.y
+        };
+        var e2 = new WheelEvent('wheel', props);
+        _selection.node().dispatchEvent(e2);
+    }
+
 
     function zoomPan(manualEvent) {
         var event = (manualEvent || d3_event);
@@ -403,27 +406,51 @@ export function rendererMap(context) {
             return;  // no change
         }
 
-        // Normalize mousewheel - #3029
-        // If wheel delta is provided in LINE units, recalculate it in PIXEL units
-        // We are essentially redoing the calculations that occur here:
-        //   https://github.com/d3/d3-zoom/blob/78563a8348aa4133b07cac92e2595c2227ca7cd7/src/zoom.js#L203
-        // See this for more info:
-        //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
-        if (source && source.type === 'wheel' && source.deltaMode === 1 /* LINE */) {
-            // pick sensible scroll amount if user scrolling fast or slow..
-            var lines = Math.abs(source.deltaY);
-            var scroll = lines > 2 ? 40 : lines * 10;
+        // Special handling of 'wheel' events:
+        // They might be triggered by the user scrolling the mouse wheel,
+        // or 2-finger pinch/zoom gestures, the transform may need adjustment.
+        if (source && source.type === 'wheel') {
+            var dX = source.deltaX;
+            var dY = source.deltaY;
 
-            var t0 = _transformed ? _transformLast : _transformStart;
-            var p0 = mouse(source);
-            var p1 = t0.invert(p0);
-            var k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500);
-            var x2 = p0[0] - p1[0] * k2;
-            var y2 = p0[1] - p1[1] * k2;
+            // Normalize mousewheel scroll speed - #3029
+            // If wheel delta is provided in LINE units, recalculate it in PIXEL units
+            // We are essentially redoing the calculations that occur here:
+            //   https://github.com/d3/d3-zoom/blob/78563a8348aa4133b07cac92e2595c2227ca7cd7/src/zoom.js#L203
+            // See this for more info:
+            //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
+            if (source.deltaMode === 1 /* LINE */) {
+                // pick sensible scroll amount if user scrolling fast or slow..
+                var lines = clamp(Math.abs(source.deltaY), 0, 12);
+                var sign = (source.deltaY > 0) ? 1 : -1;
+                dY = sign * Math.exp((lines - 1) * 0.35) * 4.000244140625;
 
-            eventTransform = d3_zoomIdentity.translate(x2,y2).scale(k2);
-            _selection.node().__zoom = eventTransform;
+                var t0 = _transformed ? _transformLast : _transformStart;
+                var p0 = mouse(source);
+                var p1 = t0.invert(p0);
+                var k2 = t0.k * Math.pow(2, -dY / 500);
+                var x2 = p0[0] - p1[0] * k2;
+                var y2 = p0[1] - p1[1] * k2;
+
+                eventTransform = d3_zoomIdentity.translate(x2, y2).scale(k2);
+                _selection.node().__zoom = eventTransform;
+            }
+
+            // Support 2 finger map panning - #5492
+            // Panning via the `wheel` event will always have
+            // - `ctrlKey = false`
+            // - `deltaX`,`deltaY` are perfect integer pixels
+            if (!source.ctrlKey && isInteger(dX) && isInteger(dY)) {
+                var p = projection.translate();
+                var k = projection.scale();
+
+                p[0] -= dX;
+                p[1] -= dY;
+                eventTransform = d3_zoomIdentity.translate(p[0], p[1]).scale(k);
+                _selection.node().__zoom = eventTransform;
+            }
         }
+
 
         if (geoScaleToZoom(eventTransform.k, TILESIZE) < minzoom) {
             surface.interrupt();
@@ -455,6 +482,15 @@ export function rendererMap(context) {
         scheduleRedraw();
 
         dispatch.call('move', this, map);
+
+
+        function clamp(num, min, max) {
+            return Math.max(min, Math.min(num, max));
+        }
+
+        function isInteger(val) {
+            return typeof val === 'number' && isFinite(val) && Math.floor(val) === val;
+        }
     }
 
 
