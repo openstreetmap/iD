@@ -25,7 +25,6 @@ export { utilRebind } from './rebind';
 export { utilSetTransform } from './util';
 export { utilSessionMutex } from './session_mutex';
 export { utilStringQs } from './util';
-export { utilSuggestNames } from './suggest_names';
 export { utilTagText } from './util';
 export { utilTiler } from './tiler';
 export { utilTriggerEvent } from './trigger_event';

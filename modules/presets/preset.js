@@ -28,8 +28,8 @@ export function presetPreset(id, preset, fields) {
 
 
     preset.matchScore = function(entity) {
-        var tags = preset.tags,
-            score = 0;
+        var tags = preset.tags;
+        var score = 0;
 
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
