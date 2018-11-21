@@ -219,6 +219,7 @@ function suggestionsToPresets(presets) {
             addTags: suggestion.tags,
             removeTags: suggestion.tags,
             reference: preset.reference,
+            matchScore: 2,
             suggestion: true
         };
     }
