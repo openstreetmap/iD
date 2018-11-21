@@ -175,9 +175,22 @@ input[type=email] {
     padding: 5px 10px 5px 20px;
 }
 
+.disabled,
+textarea[disabled],
+input[type=text][disabled],
+input[type=search][disabled],
+input[type=number][disabled],
+input[type=url][disabled],
+input[type=tel][disabled],
+input[type=email][disabled] {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
 textarea:focus,
 input:focus {
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
 }
 
 input[type="checkbox"],
@@ -194,6 +207,7 @@ input[type="radio"] {
     margin-left: 5px;
     margin-right: 0;
 }
+
 
 /* remove bottom border radius when combobox is open */
 .combobox + * textarea:focus,
@@ -2143,7 +2157,6 @@ div.combobox {
 .tag-list {
     padding-top: 10px;
 }
-
 .tag-row {
     width: 100%;
     position: relative;
@@ -2158,7 +2171,7 @@ div.combobox {
 .tag-row.readonly input.key,
 .tag-row.readonly input.value,
 .tag-row.readonly button.remove {
-    color: #777777;
+    color: #777;
     background-color: #eee;
     cursor: not-allowed;
 }

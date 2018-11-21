@@ -36,6 +36,7 @@ export function uiFieldLocalized(field, context) {
         input = selection.selectAll('.localized-main')
             .data([0]);
 
+        // enter/update
         input = input.enter()
             .append('input')
             .attr('type', 'text')
@@ -45,9 +46,14 @@ export function uiFieldLocalized(field, context) {
             .call(utilNoAuto)
             .merge(input);
 
-        if (field.id === 'name') {
-            var presets = context.presets();
-            var preset = presets.match(_entity, context.graph());
+        var presets = context.presets();
+        var preset = presets.match(_entity, context.graph());
+        var isSuggestion = preset.suggestion;
+
+        if (field.id === 'name' && isSuggestion) {
+            // field.keys = Object.keys(preset.removeTags)
+
+        } else if (field.id === 'name' && !isSuggestion) {
             var isFallback = preset.isFallback();
             var pTag = preset.id.split('/', 2);
             var pKey = pTag[0];
@@ -91,6 +97,7 @@ export function uiFieldLocalized(field, context) {
         }
 
         input
+            .property('disabled', isSuggestion)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
