@@ -46,12 +46,48 @@ export function uiFieldLocalized(field, context) {
             .merge(input);
 
         if (field.id === 'name') {
-            // var preset = context.presets().match(_entity, context.graph());
-            // input
-            //     .call(d3_combobox()
-            //         .container(context.container())
-            //         .fetcher(suggestNames(preset, dataSuggestions))
-            //     );
+            var presets = context.presets();
+            var preset = presets.match(_entity, context.graph());
+            var isFallback = preset.isFallback();
+            var pTag = preset.id.split('/', 2);
+            var pKey = pTag[0];
+            var pValue = pTag[1];
+
+            var allSuggestions = presets.collection.filter(function(p) {
+                return p.suggestion === true;
+            });
+
+            // This code attempts to determine if the matched preset is the
+            // kind of preset that even can benefit from name suggestions..
+            // - true = shops, cafes, hotels, etc. (also generic and fallback presets)
+            // - false = churches, parks, hospitals, etc. (things not in the index)
+            var goodSuggestions = allSuggestions.filter(function(s) {
+                if (isFallback) return true;
+                var sTag = s.id.split('/', 2);
+                var sKey = sTag[0];
+                var sValue = sTag[1];
+                return pKey === sKey && (!pValue || pValue === sValue);
+            });
+
+            // Show the suggestions.. If the user picks one, change the tags..
+            if (allSuggestions.length && goodSuggestions.length) {
+                input
+                    .call(d3_combobox()
+                        .container(context.container())
+                        .fetcher(suggestNames(preset, allSuggestions))
+                        .minItems(1)
+                        .on('accept', function(d) {
+                            var tags = _entity.tags;
+                            var geometry = _entity.geometry(context.graph());
+                            var removed = preset.removeTags(tags, geometry);
+                            for (var k in tags) {
+                                tags[k] = removed[k];  // set removed tags to `undefined`
+                            }
+                            tags = d.suggestion.applyTags(tags, geometry);
+                            dispatch.call('change', this, tags);
+                        })
+                    );
+            }
         }
 
         input
@@ -87,31 +123,36 @@ export function uiFieldLocalized(field, context) {
 
 
     function suggestNames(preset, suggestions) {
-        preset = preset.id.split('/', 2);
-        var k = preset[0];
-        var v = preset[1];
+        var pTag = preset.id.split('/', 2);
+        var pKey = pTag[0];
+        var pValue = pTag[1];
 
         return function(value, callback) {
-            var result = [];
+            var results = [];
             if (value && value.length > 2) {
-                if (suggestions[k] && suggestions[k][v]) {
-                    for (var sugg in suggestions[k][v]) {
-                        var dist = utilEditDistance(value, sugg.substring(0, value.length));
-                        if (dist < 3) {
-                            result.push({
-                                title: sugg,
-                                value: sugg,
-                                dist: dist
-                            });
-                        }
+                for (var i = 0; i < suggestions.length; i++) {
+                    var s = suggestions[i];
+                    var sTag = s.id.split('/', 2);
+                    var sKey = sTag[0];
+                    var sValue = sTag[1];
+                    var name = s.name();
+                    var dist = utilEditDistance(value, name.substring(0, value.length));
+                    var matchesPreset = (pKey === sKey && (!pValue || pValue === sValue));
+
+                    if (dist < 1 || (matchesPreset && dist < 3)) {
+                        var obj = {
+                            title: name,
+                            value: name,
+                            suggestion: s,
+                            dist: dist + (matchesPreset ? 0 : 1)  // penalize if not matched preset
+                        };
+                        results.push(obj);
                     }
                 }
-                result.sort(function(a, b) {
-                    return a.dist - b.dist;
-                });
+                results.sort(function(a, b) { return a.dist - b.dist; });
             }
-            result = result.slice(0,3);
-            callback(result);
+            results = results.slice(0, 10);
+            callback(results);
         };
     }
 
