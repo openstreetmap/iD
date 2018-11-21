@@ -85,11 +85,11 @@ export function uiFieldLocalized(field, context) {
                         .on('accept', function(d) {
                             var tags = _entity.tags;
                             var geometry = _entity.geometry(context.graph());
-                            var removed = preset.removeTags(tags, geometry);
+                            var removed = preset.unsetTags(tags, geometry);
                             for (var k in tags) {
                                 tags[k] = removed[k];  // set removed tags to `undefined`
                             }
-                            tags = d.suggestion.applyTags(tags, geometry);
+                            tags = d.suggestion.setTags(tags, geometry);
                             dispatch.call('change', this, tags);
                         })
                     );
