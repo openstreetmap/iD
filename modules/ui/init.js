@@ -412,7 +412,7 @@ export function uiInit(context) {
         ui.checkOverflow('#bar');
         ui.checkOverflow('#footer');
 
-        // Use older code so it works on Explorer
+        // Use outdated code so it works on Explorer
         var resizeWindowEvent = document.createEvent('Event');
 
         resizeWindowEvent.initEvent('resizeWindow', true, true);

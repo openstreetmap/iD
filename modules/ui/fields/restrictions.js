@@ -332,7 +332,7 @@ export function uiFieldRestrictions(field, context) {
 
         document.addEventListener('resizeWindow', function () {
             utilSetDimensions(_container, null);
-            redraw(10);
+            redraw(2);
         }, false);
 
         updateHints(null);
