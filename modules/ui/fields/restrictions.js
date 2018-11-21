@@ -66,7 +66,7 @@ export function uiFieldRestrictions(field, context) {
     var _intersection;
     var _fromWayID;
 
-    var _redrawHandler;
+    var _lastXPos;
 
 
     function restrictions(selection) {
@@ -330,9 +330,9 @@ export function uiFieldRestrictions(field, context) {
                 .classed('related', true);
         }
 
-        document.addEventListener('resizeWindow', function (e) {
+        document.addEventListener('resizeWindow', function () {
             utilSetDimensions(_container, null);
-            redraw();
+            redraw(10);
         }, false);
 
         updateHints(null);
@@ -435,10 +435,20 @@ export function uiFieldRestrictions(field, context) {
             updateHints(datum);
         }
 
+        _lastXPos = _lastXPos || sdims[0];
 
-        function redraw() {
-            if (context.hasEntity(_vertexID)) {
-                _container.call(renderViewer);
+        function redraw(minChange) {
+            var xPos = -1;
+
+            if (minChange) {
+                xPos = utilGetDimensions(d3_select('#sidebar'))[0];
+            }
+
+            if (!minChange || (minChange && Math.abs(xPos - _lastXPos) >= minChange)) {
+                if (context.hasEntity(_vertexID)) {
+                    _lastXPos = xPos;
+                    _container.call(renderViewer);
+                }
             }
         }
 
@@ -661,8 +671,6 @@ export function uiFieldRestrictions(field, context) {
 
         d3_select(window)
             .on('resize.restrictions', null);
-
-        clearInterval(_redrawHandler);
     };
 
 
