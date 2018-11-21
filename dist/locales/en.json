@@ -7822,6 +7822,11 @@
                 "name": "OpenStreetMap India Mailinglist",
                 "description": "Talk-in is the official Mailinglist for Indian Community"
             },
+            "OSM-India-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - Mailing List",
+                "description": "FSHM Puducherry mailing list to discuss mapping in Puducherry and other things.",
+                "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap."
+            },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India Twitter",
                 "description": "We are just a tweet away: {url}"
@@ -8189,6 +8194,10 @@
                 "name": "OpenStreetMap mailing list for Trentino",
                 "description": "OpenStreetMap Italy regional talk list for Trentino"
             },
+            "kosovo-telegram": {
+                "name": "OpenStreetMap Kosovo on Telegram",
+                "description": "Semi-official all-Kosovo Telegram public group. We welcome all mappers from anywhere in any language."
+            },
             "no-forum": {
                 "name": "OpenStreetMap Norway Web Forum",
                 "description": "OpenStreetMap Norway web forum"
@@ -8321,6 +8330,10 @@
                 "name": "MaptimeME",
                 "description": "Mappers and OpenStreetMap users, around Portland, ME",
                 "extendedDescription": "Maptime is, rather literally, time for mapmaking.  Our mission is to open the doors of cartographic possibility to anyone interested by creating a time and space for collaborative learning, exploration, and map creation using mapping tools and technologies."
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA Twitter",
+                "description": "Follow us on Twitter at {url}"
             },
             "us-ma-mailinglist": {
                 "name": "Talk-us-massachusetts Mailing List",
@@ -8596,6 +8609,10 @@
                     }
                 }
             },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discord",
+                "description": "Get in touch with other mappers via Discord"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap on Facebook",
                 "description": "Like us on Facebook for news and updates about OpenStreetMap."
@@ -8604,6 +8621,10 @@
                 "name": "OpenStreetMap Help",
                 "description": "Ask a question and get answers on OSM's community-driven question and answer site.",
                 "extendedDescription": "{url} is for everyone who needs help with OpenStreetMap.  Whether you are a beginner mapper or have a technical question, we're here to help!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "Join #osm on irc.oftc.net (port 6667)"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",
