@@ -10,26 +10,26 @@ import {
 import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { t } from '../../util/locale';
-import { dataSuggestions, dataWikipedia } from '../../../data';
+import { dataWikipedia } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
 import { utilDetect } from '../../util/detect';
 import {
+    utilEditDistance,
     utilGetSetValue,
     utilNoAuto,
-    utilRebind,
-    utilSuggestNames
+    utilRebind
 } from '../../util';
 
 
 export function uiFieldLocalized(field, context) {
-    var dispatch = d3_dispatch('change', 'input'),
-        wikipedia = services.wikipedia,
-        input = d3_select(null),
-        localizedInputs = d3_select(null),
-        wikiTitles,
-        entity;
+    var dispatch = d3_dispatch('change', 'input');
+    var wikipedia = services.wikipedia;
+    var input = d3_select(null);
+    var localizedInputs = d3_select(null);
+    var wikiTitles;
+    var _entity;
 
 
     function localized(selection) {
@@ -46,12 +46,12 @@ export function uiFieldLocalized(field, context) {
             .merge(input);
 
         if (field.id === 'name') {
-            var preset = context.presets().match(entity, context.graph());
-            input
-                .call(d3_combobox()
-                    .container(context.container())
-                    .fetcher(utilSuggestNames(preset, dataSuggestions))
-                );
+            // var preset = context.presets().match(_entity, context.graph());
+            // input
+            //     .call(d3_combobox()
+            //         .container(context.container())
+            //         .fetcher(suggestNames(preset, dataSuggestions))
+            //     );
         }
 
         input
@@ -86,6 +86,36 @@ export function uiFieldLocalized(field, context) {
     }
 
 
+    function suggestNames(preset, suggestions) {
+        preset = preset.id.split('/', 2);
+        var k = preset[0];
+        var v = preset[1];
+
+        return function(value, callback) {
+            var result = [];
+            if (value && value.length > 2) {
+                if (suggestions[k] && suggestions[k][v]) {
+                    for (var sugg in suggestions[k][v]) {
+                        var dist = utilEditDistance(value, sugg.substring(0, value.length));
+                        if (dist < 3) {
+                            result.push({
+                                title: sugg,
+                                value: sugg,
+                                dist: dist
+                            });
+                        }
+                    }
+                }
+                result.sort(function(a, b) {
+                    return a.dist - b.dist;
+                });
+            }
+            result = result.slice(0,3);
+            callback(result);
+        };
+    }
+
+
     function addNew() {
         d3_event.preventDefault();
         var data = localizedInputs.selectAll('div.entry').data();
@@ -115,12 +145,12 @@ export function uiFieldLocalized(field, context) {
 
 
     function changeLang(d) {
-        var lang = utilGetSetValue(d3_select(this)),
-            t = {},
-            language = _find(dataWikipedia, function(d) {
-                return d[0].toLowerCase() === lang.toLowerCase() ||
-                    d[1].toLowerCase() === lang.toLowerCase();
-            });
+        var lang = utilGetSetValue(d3_select(this));
+        var t = {};
+        var language = _find(dataWikipedia, function(d) {
+            return d[0].toLowerCase() === lang.toLowerCase() ||
+                d[1].toLowerCase() === lang.toLowerCase();
+        });
 
         if (language) lang = language[2];
 
@@ -164,8 +194,8 @@ export function uiFieldLocalized(field, context) {
 
 
     function render(selection, data) {
-        var wraps = selection.selectAll('div.entry').
-            data(data, function(d) { return d.lang; });
+        var wraps = selection.selectAll('div.entry')
+            .data(data, function(d) { return d.lang; });
 
         wraps.exit()
             .transition()
@@ -178,7 +208,8 @@ export function uiFieldLocalized(field, context) {
         var innerWrap = wraps.enter()
             .insert('div', ':first-child');
 
-        innerWrap.attr('class', 'entry')
+        innerWrap
+            .attr('class', 'entry')
             .each(function() {
                 var wrap = d3_select(this);
                 var langcombo = d3_combobox()
@@ -247,9 +278,9 @@ export function uiFieldLocalized(field, context) {
         var entry = selection.selectAll('.entry');
 
         utilGetSetValue(entry.select('.localized-lang'), function(d) {
-                var lang = _find(dataWikipedia, function(lang) { return lang[2] === d.lang; });
-                return lang ? lang[1] : d.lang;
-            });
+            var lang = _find(dataWikipedia, function(lang) { return lang[2] === d.lang; });
+            return lang ? lang[1] : d.lang;
+        });
 
         utilGetSetValue(entry.select('.localized-value'),
             function(d) { return d.value; });
@@ -270,9 +301,9 @@ export function uiFieldLocalized(field, context) {
 
         utilGetSetValue(input, tags[field.key] || '');
 
-        var postfixed = [], k, m;
-        for (k in tags) {
-            m = k.match(/^(.*):([a-zA-Z_-]+)$/);
+        var postfixed = [];
+        for (var k in tags) {
+            var m = k.match(/^(.*):([a-zA-Z_-]+)$/);
             if (m && m[1] === field.key && m[2]) {
                 postfixed.push({ lang: m[2], value: tags[k] });
             }
@@ -287,9 +318,9 @@ export function uiFieldLocalized(field, context) {
     };
 
 
-    localized.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+    localized.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
         return localized;
     };
 
