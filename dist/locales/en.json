@@ -5470,7 +5470,7 @@
                 },
                 "leisure/slipway": {
                     "name": "Slipway",
-                    "terms": "boat launch,boat ramp"
+                    "terms": "boat launch,boat ramp,boat landing"
                 },
                 "leisure/sports_centre": {
                     "name": "Sports Center / Complex",

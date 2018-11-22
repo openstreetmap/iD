@@ -4622,7 +4622,7 @@ en:
       leisure/slipway:
         # leisure=slipway
         name: Slipway
-        # 'terms: boat launch,boat ramp'
+        # 'terms: boat launch,boat ramp,boat landing'
         terms: '<translate with synonyms or related terms for ''Slipway'', separated by commas>'
       leisure/sports_centre:
         # leisure=sports_centre
