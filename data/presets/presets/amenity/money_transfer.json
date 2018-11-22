@@ -1,0 +1,31 @@
+{
+    "icon": "maki-bank",
+    "fields": [
+	    "name",
+        "brand",
+        "address",
+        "building_area",
+        "opening_hours",
+        "currency_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "money order",
+        "check",
+        "bill",
+        "currency",
+        "finance",
+        "wire transfer",
+        "cable",
+        "person to person",
+        "cash to cash",
+        "exchange"
+    ],
+    "tags": {
+        "amenity": "money_transfer"
+    },
+    "name": "Money Transfer Station"
+}
