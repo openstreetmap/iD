@@ -2472,6 +2472,11 @@ en:
         name: Monastery Grounds
         # 'terms: abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,monastery,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple'
         terms: '<translate with synonyms or related terms for ''Monastery Grounds'', separated by commas>'
+      amenity/money_transfer:
+        # amenity=money_transfer
+        name: Money Transfer Station
+        # 'terms: money order,check,bill,currency,finance,wire transfer,cable,person to person,cash to cash,exchange'
+        terms: '<translate with synonyms or related terms for ''Money Transfer Station'', separated by commas>'
       amenity/motorcycle_parking:
         # amenity=motorcycle_parking
         name: Motorcycle Parking
@@ -2507,6 +2512,16 @@ en:
         # amenity=parking_space
         name: Parking Space
         terms: '<translate with synonyms or related terms for ''Parking Space'', separated by commas>'
+      amenity/payment_centre:
+        # amenity=payment_centre
+        name: Payment Center
+        # 'terms: check,tax pay,bill pay,currency,finance,cash,money'
+        terms: '<translate with synonyms or related terms for ''Payment Center'', separated by commas>'
+      amenity/payment_terminal:
+        # amenity=payment_terminal
+        name: Payment Terminal
+        # 'terms: interactive kiosk,ekiosk,atm,bill pay,tax pay,phone pay,finance,cash,money transfer,card'
+        terms: '<translate with synonyms or related terms for ''Payment Terminal'', separated by commas>'
       amenity/pharmacy:
         # amenity=pharmacy
         name: Pharmacy
@@ -5877,6 +5892,10 @@ en:
         name: Carpet Store
         # 'terms: rug'
         terms: '<translate with synonyms or related terms for ''Carpet Store'', separated by commas>'
+      shop/catalogue:
+        # shop=catalogue
+        name: Catalog Shop
+        terms: '<translate with synonyms or related terms for ''Catalog Shop'', separated by commas>'
       shop/charity:
         # shop=charity
         name: Charity Store
@@ -5924,6 +5943,10 @@ en:
         # shop=cosmetics
         name: Cosmetics Store
         terms: '<translate with synonyms or related terms for ''Cosmetics Store'', separated by commas>'
+      shop/country_store:
+        # shop=country_store
+        name: Country Store
+        terms: '<translate with synonyms or related terms for ''Country Store'', separated by commas>'
       shop/craft:
         # shop=craft
         name: Arts and Crafts Store
@@ -6036,6 +6059,11 @@ en:
         name: Hairdresser
         # 'terms: barber'
         terms: '<translate with synonyms or related terms for ''Hairdresser'', separated by commas>'
+      shop/hairdresser_supply:
+        # shop=hairdresser_supply
+        name: Hairdresser Supply Store
+        # 'terms: barber,shampoo,conditioner'
+        terms: '<translate with synonyms or related terms for ''Hairdresser Supply Store'', separated by commas>'
       shop/hardware:
         # shop=hardware
         name: Hardware Store
@@ -6164,6 +6192,11 @@ en:
         # shop=paint
         name: Paint Store
         terms: '<translate with synonyms or related terms for ''Paint Store'', separated by commas>'
+      shop/party:
+        # shop=party
+        name: Party Supply Store
+        # 'terms: balloons,costumes,decorations,invitations'
+        terms: '<translate with synonyms or related terms for ''Party Supply Store'', separated by commas>'
       shop/pastry:
         # shop=pastry
         name: Pastry Shop

@@ -1,0 +1,28 @@
+{
+    "icon": "maki-bank",
+    "fields": [
+	    "name",
+        "brand",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "check",
+        "tax pay",
+        "bill pay",
+        "currency",
+        "finance",
+        "cash",
+        "money"
+    ],
+    "tags": {
+        "amenity": "payment_centre"
+    },
+    "name": "Payment Center"
+}

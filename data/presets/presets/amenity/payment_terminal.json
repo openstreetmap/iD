@@ -1,0 +1,29 @@
+{
+    "icon": "maki-bank",
+    "fields": [
+	    "name",
+        "brand",
+        "address",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "interactive kiosk",
+        "ekiosk",
+        "atm",
+        "bill pay",
+        "tax pay",
+        "phone pay",
+        "finance",
+        "cash",
+        "money transfer",
+        "card"
+    ],
+    "tags": {
+        "amenity": "payment_terminal"
+    },
+    "name": "Payment Terminal"
+}

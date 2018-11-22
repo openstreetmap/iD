@@ -723,6 +723,13 @@
     },
     {
       "key": "amenity",
+      "value": "money_transfer",
+      "description": "Money Transfer Station",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
       "value": "motorcycle_parking",
       "description": "Motorcycle Parking",
       "object_types": ["node", "area"],
@@ -768,6 +775,20 @@
       "description": "Multilevel Parking Garage, Type",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/car-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
+      "value": "payment_centre",
+      "description": "Payment Center",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"
+    },
+    {
+      "key": "amenity",
+      "value": "payment_terminal",
+      "description": "Payment Terminal",
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bank-15.svg?sanitize=true"
     },
     {
       "key": "amenity",
@@ -5486,6 +5507,13 @@
     },
     {
       "key": "shop",
+      "value": "catalogue",
+      "description": "Catalog Shop",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
       "value": "charity",
       "description": "Charity Store",
       "object_types": ["node", "area"],
@@ -5558,6 +5586,13 @@
       "key": "shop",
       "value": "cosmetics",
       "description": "Cosmetics Store",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "country_store",
+      "description": "Country Store",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
@@ -5705,6 +5740,13 @@
       "key": "shop",
       "value": "greengrocer",
       "description": "Greengrocer",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "hairdresser_supply",
+      "description": "Hairdresser Supply Store",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
@@ -5917,6 +5959,13 @@
       "description": "Paint Store",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-paint-roller.svg?sanitize=true"
+    },
+    {
+      "key": "shop",
+      "value": "party",
+      "description": "Party Supply Store",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/shop-15.svg?sanitize=true"
     },
     {
       "key": "shop",
