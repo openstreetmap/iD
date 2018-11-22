@@ -21,7 +21,7 @@ export function uiFieldAccess(field, context) {
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'cf preset-input-wrap')
+            .attr('class', 'preset-input-wrap')
             .append('ul')
             .merge(wrap);
 
@@ -39,17 +39,17 @@ export function uiFieldAccess(field, context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'cf preset-access-' + d; });
+            .attr('class', function(d) { return 'preset-access-' + d; });
 
         enter
             .append('span')
-            .attr('class', 'col6 label preset-label-access')
+            .attr('class', 'label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
             .text(function(d) { return field.t('types.' + d); });
 
         enter
             .append('div')
-            .attr('class', 'col6 preset-input-access-wrap')
+            .attr('class', 'preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
             .attr('class', 'preset-input-access')

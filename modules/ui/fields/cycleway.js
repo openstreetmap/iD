@@ -28,7 +28,7 @@ export function uiFieldCycleway(field, context) {
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'cf preset-input-wrap')
+            .attr('class', 'preset-input-wrap')
             .merge(wrap);
 
 
@@ -45,17 +45,17 @@ export function uiFieldCycleway(field, context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'cf preset-cycleway-' + stripcolon(d); });
+            .attr('class', function(d) { return 'preset-cycleway-' + stripcolon(d); });
 
         enter
             .append('span')
-            .attr('class', 'col6 label preset-label-cycleway')
+            .attr('class', 'label preset-label-cycleway')
             .attr('for', function(d) { return 'preset-input-cycleway-' + stripcolon(d); })
             .text(function(d) { return field.t('types.' + d); });
 
         enter
             .append('div')
-            .attr('class', 'col6 preset-input-cycleway-wrap')
+            .attr('class', 'preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })

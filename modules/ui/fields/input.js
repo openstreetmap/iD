@@ -37,6 +37,7 @@ export function uiFieldText(field, context) {
             .attr('type', field.type)
             .attr('id', fieldId)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
+            .classed(field.type, true)
             .call(utilNoAuto)
             .merge(input);
 
@@ -68,13 +69,15 @@ export function uiFieldText(field, context) {
             enter
                 .append('button')
                 .datum(rtl ? 1 : -1)
-                .attr('class', rtl ? 'increment' : 'decrement')
+                .attr('class', 'button-input-action minor')
+                .classed(rtl ? 'increment' : 'decrement', true)
                 .attr('tabindex', -1);
 
             enter
                 .append('button')
                 .datum(rtl ? -1 : 1)
-                .attr('class', rtl ? 'decrement' : 'increment')
+                .attr('class', 'button-input-action minor')
+                .classed(rtl ? 'decrement' : 'increment', true)
                 .attr('tabindex', -1);
 
             spinControl = spinControl

@@ -161,7 +161,6 @@ input[type=email] {
     border: 1px solid #ccc;
     padding: 5px 20px 5px 10px;
     height: 30px;
-    width: 100%;
     border-radius: 4px;
     text-overflow: ellipsis;
 }
@@ -1205,6 +1204,8 @@ a.hide-toggle {
 }
 
 .form-field {
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 10px;
     width: 100%;
     -webkit-transition: margin-bottom 200ms;
@@ -1222,26 +1223,22 @@ a.hide-toggle {
     position: relative;
     font-weight: bold;
     border: 1px solid #cfcfcf;
-    padding: 5px 0 5px 10px;
     background: #f6f6f6;
-    display: block;
     border-radius: 4px 4px 0 0;
     overflow: hidden;
+    flex: 1 1 100%;
+    display: flex;
 }
-[dir='rtl'] .form-label {
+.form-label .label-text {
+    flex: 1 1 auto;
+    padding: 5px 0 5px 10px;
+}
+[dir='rtl'] .form-label .label-text {
     padding: 5px 10px 5px 0;
 }
-
 .form-label-button-wrap {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
     background: transparent;
-}
-[dir='rtl'] .form-label-button-wrap {
-    right: auto;
-    left: 0;
+    flex: 0 1 auto;
 }
 
 .form-label-button-wrap .tag-reference-button {
@@ -1263,7 +1260,6 @@ a.hide-toggle {
     border-left: none;
     border-right: 1px solid #ccc;
     border-radius: 4px 0 0 0;
-    width: 31px;
 }
 .form-label button:hover {
     background: #f1f1f1;
@@ -1288,6 +1284,7 @@ a.hide-toggle {
     border-radius: 0 0 4px 4px;
     overflow: hidden;
     position: relative;
+    flex: 1;
 }
 
 .form-field textarea {
@@ -1296,6 +1293,27 @@ a.hide-toggle {
 
 .inspector-border {
     border-bottom: 1px solid #ccc
+}
+
+/* Fields - corner radius for fields with following elements on the same line
+------------------------------------------------------- */
+[dir='ltr'] .inspector-wrap:not(.inspector-hover) .form-field .wiki-title,
+[dir='ltr'] .inspector-wrap:not(.inspector-hover) .form-field .localized-main,
+[dir='ltr'] .inspector-wrap:not(.inspector-hover) .form-field .member-role,
+[dir='ltr'] .inspector-wrap:not(.inspector-hover) .form-field .spin-control button:first-child,
+[dir='ltr'] .inspector-wrap:not(.inspector-hover) .form-field input[type='text'].number,
+[dir='ltr'] #preset-input-maxspeed,
+[dir='ltr'] #preset-input-maxspeed_advisory {
+    border-bottom-right-radius: 0;
+}
+[dir='rtl'] .inspector-wrap:not(.inspector-hover) .form-field .wiki-title,
+[dir='rtl'] .inspector-wrap:not(.inspector-hover) .form-field .localized-main,
+[dir='rtl'] .inspector-wrap:not(.inspector-hover) .form-field .member-role,
+[dir='rtl'] .inspector-wrap:not(.inspector-hover) .form-field .spin-control button:first-child,
+[dir='rtl'] .inspector-wrap:not(.inspector-hover) .form-field input[type='text'].number,
+[dir='rtl'] #preset-input-maxspeed,
+[dir='rtl'] #preset-input-maxspeed_advisory {
+    border-bottom-left-radius: 0;
 }
 
 /* Inspector (hover styles)
@@ -1348,7 +1366,6 @@ a.hide-toggle {
 }
 
 /* hide but preserve in layout */
-.inspector-hover .entity-editor-pane button.minor,
 .inspector-hover .combobox-caret,
 .inspector-hover .header button,
 .inspector-hover .spin-control,
@@ -1360,12 +1377,12 @@ a.hide-toggle {
 .inspector-hover .footer * {
     opacity: 0;
 }
+/* hide and do not affect layout */
+.inspector-hover .entity-editor-pane button.minor {
+    display: none;
+}
 
 /* Styles for raw tag inspector on hover */
-.inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .form-field.input-wrap-position {
-    width: 50%;
-}
 .inspector-hover .tag-row .key-wrap,
 .inspector-hover .tag-row .input-wrap-position {
     height: 31px;
@@ -1466,10 +1483,6 @@ a.hide-toggle {
     padding: 5px 10px;
 }
 
-[dir='rtl'] .preset-input-wrap .col6 {
-    float: right;
-}
-
 
 /* Field - Access, Cycleway, Structure
 ------------------------------------------------------- */
@@ -1477,11 +1490,17 @@ a.hide-toggle {
 .form-field-cycleway .preset-input-wrap li,
 .form-field-access .preset-input-wrap li {
     border-bottom: 1px solid #ccc;
+    display: flex;
 }
 .structure-extras-wrap li:last-child,
 .form-field-cycleway .preset-input-wrap li:last-child,
 .form-field-access .preset-input-wrap li:last-child {
     border-bottom: 0;
+}
+.structure-extras-wrap li > *,
+.form-field-cycleway .preset-input-wrap li > *,
+.form-field-access .preset-input-wrap li > * {
+    flex: 1;
 }
 .structure-input-type-wrap input,
 .structure-input-layer-wrap input,
@@ -1490,12 +1509,24 @@ a.hide-toggle {
     border-radius: 0;
     border-width: 0;
     border-left-width: 1px;
+    width: 100%;
 }
 [dir='rtl'] .structure-input-type-wrap input,
 [dir='rtl'] .structure-input-layer-wrap input,
 [dir='rtl'] .preset-input-cycleway-wrap input,
 [dir='rtl'] .preset-input-access-wrap input {
     border-left-width: 0;
+    border-right-width: 1px;
+}
+.structure-extras-wrap .spin-control button {
+    border-bottom: 0;
+}
+[dir='ltr'] .structure-extras-wrap .spin-control button {
+    border-right: 0;
+    border-left-width: 1px;
+}
+[dir='rtl'] .structure-extras-wrap .spin-control button {
+    border-left: 0;
     border-right-width: 1px;
 }
 
@@ -1551,6 +1582,7 @@ a.hide-toggle {
     display: block;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
+    flex: 1 1 auto;
 }
 .form-field-multicombo:focus {
     border-bottom: 0px;
@@ -1601,50 +1633,10 @@ a.hide-toggle {
 
 /* Field - Numeric
 ------------------------------------------------------- */
-input[type=number] {
-    position: relative;
-    padding-right: 20%;
-}
-
 .spin-control {
-    width: 64px;
-    height: 30px;
-    display: inline-block;
-    margin-left: -64px;
-    margin-bottom: -11px;
     position: relative;
+    display: flex;
 }
-[dir='rtl'] .spin-control{
-    margin-left: 0;
-    margin-right: -64px;
-}
-
-.spin-control button {
-    right: 1px;
-    position: relative;
-    float: left;
-    height: 100%;
-    width: 32px;
-    border-left: 1px solid #ccc;
-    border-radius: 0;
-    background: rgba(0, 0, 0, 0);
-}
-[dir='rtl'] .spin-control button{
-    border-left: 0;
-    border-right: 1px solid #ccc;
-}
-
-.spin-control button.decrement {
-    border-bottom-right-radius: 3px;
-}
-[dir='rtl'] .spin-control button.decrement {
-    border-bottom-right-radius: 0;
-}
-[dir='rtl'] .spin-control button.increment {
-    border-bottom-left-radius: 3px;
-    right: 0;
-}
-
 .spin-control button.decrement::after,
 .spin-control button.increment::after {
     content:"";
@@ -1717,18 +1709,17 @@ input[type=number] {
 #preset-input-maxspeed_advisory,
 #preset-input-maxspeed {
     border-right: none;
-    border-radius: 0 0 0 4px;
-    width: 80%;
+    flex: 1;
 }
 [dir='rtl'] #preset-input-maxspeed_advisory,
 [dir='rtl'] #preset-input-maxspeed {
     border-right: 1px solid #ccc;
-    border-radius: 0 0 4px 0;
 }
 
 .form-field .maxspeed-unit {
     border-radius: 0 0 4px 0;
-    width: 20%;
+    flex: 0 1 20%;
+    min-width: 70px;
 }
 [dir='rtl'] .form-field .maxspeed-unit {
     border-right: 0;
@@ -1740,55 +1731,32 @@ input[type=number] {
 ------------------------------------------------------- */
 .form-field .wiki-lang {
     border-radius: 0;
-}
-.form-field .wiki-title {
-    padding-right: 20%;
-}
-[dir='rtl'] .form-field .wiki-title {
-    padding-left: 20%;
-    padding-right: 10px;
-}
-
-.form-field .wiki-title ~ .combobox-caret {
-    right: 32px;
-}
-[dir='rtl'] .form-field .wiki-title ~ .combobox-caret {
-    right: auto;
-    left: 32px;
+    flex-basis: 100%;
 }
 
 
 /* Field - Localized Name
 ------------------------------------------------------- */
-.form-field .localized-main {
-    padding-right: 12%;
-}
-[dir='rtl'] .form-field .localized-main {
-    padding-left: 12%;
-    padding-right: 10px;
-}
-
 .form-field .button-input-action {
     position: relative;
-    right: 1px;
-    width: 32px;
-    margin-left: -32px;
     border: 1px solid #ccc;
     border-top-width: 0;
-    border-right-width: 0;
+    border-left-width: 0;
     border-radius: 0 0 4px 0;
     height: 30px;
     vertical-align: top;
+    width: 32px;
+    flex: 0 1 auto;
 }
 [dir='rtl'] .form-field .button-input-action {
-    margin-left: 0;
-    margin-right: -32px;
-    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 0;
     border-radius: 0 0 0 4px;
 }
 
 .form-field .localized-wrap {
     padding: 0 10px;
+    flex-basis: 100%;
 }
 .form-field .localized-wrap .entry {
     position: relative;
@@ -1811,13 +1779,12 @@ input[type=number] {
 .form-field .localized-wrap .entry .localized-lang {
     border-radius: 0;
     border-top-width: 0;
+    width: 100%;
 }
 .form-field .localized-wrap .entry .localized-value {
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
-}
-.form-field .localized-wrap .form-label button {
-    border-top-right-radius: 3px;
+    width: 100%;
 }
 
 
@@ -2169,6 +2136,7 @@ div.combobox {
     border-radius: 0;
     border-bottom: 1px solid #ccc;
     border-left: 1px solid #ccc;
+    width: 100%;
 }
 [dir='rtl'] .tag-row input {
     border-left: none;
@@ -2177,7 +2145,7 @@ div.combobox {
 
 .tag-row .key-wrap,
 .tag-row .input-wrap-position {
-    flex: 1 0.5 100%;
+    flex: 1;
     height: 30px;
 }
 
@@ -2208,7 +2176,7 @@ div.combobox {
 
 .tag-row button {
     height: 31px;
-    flex: 0 0 33px;
+    width: 32px;
     border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
@@ -2358,6 +2326,7 @@ img.tag-reference-wiki-image {
 .member-row-new .member-entity-input {
     border-radius: 4px 4px 0 0;
     border: 1px solid #cfcfcf;
+    flex-basis: 100%;
 }
 
 .add-relation {
