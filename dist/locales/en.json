@@ -3630,7 +3630,7 @@
                 },
                 "amenity/parking": {
                     "name": "Parking Lot",
-                    "terms": "car,parking lot"
+                    "terms": "automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking"
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Multilevel Parking Garage",

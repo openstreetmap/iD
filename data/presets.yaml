@@ -2497,7 +2497,7 @@ en:
       amenity/parking:
         # amenity=parking
         name: Parking Lot
-        # 'terms: car,parking lot'
+        # 'terms: automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking'
         terms: '<translate with synonyms or related terms for ''Parking Lot'', separated by commas>'
       amenity/parking/multi-storey:
         # 'amenity=parking, parking=multi-storey'
