@@ -373,3 +373,27 @@ path.stroke.tag-attraction-summer_toboggan {
 path.casing.tag-attraction-summer_toboggan {
     stroke: #666;
 }
+path.shadow.tag-attraction-water_slide {
+	stroke-width: 16;
+}
+path.casing.tag-attraction-water_slide {
+	stroke-width: 7;
+}
+path.stroke.tag-attraction-water_slide {
+	stroke-width: 5;
+}
+.low-zoom path.shadow.tag-attraction-water_slide {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-attraction-water_slide {
+    stroke-width: 5;
+}
+.low-zoom path.stroke.tag-attraction-water_slide {
+	stroke-width: 3;
+}
+path.stroke.tag-attraction-water_slide {
+    stroke: #aae0cb;
+}
+path.casing.tag-attraction-water_slide {
+    stroke: #3d6c71;
+}
