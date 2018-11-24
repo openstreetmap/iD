@@ -23,10 +23,13 @@ export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var nominatim = services.geocoder;
     var input;
-    var entity;
+    var _entity;
 
 
     function i(selection) {
+        var preset = _entity && context.presets().match(_entity, context.graph());
+        var isSuggestion = preset && preset.suggestion && field.id === 'brand';
+
         var fieldId = 'preset-input-' + field.safeid;
 
         input = selection.selectAll('input')
@@ -41,12 +44,14 @@ export function uiFieldText(field, context) {
             .merge(input);
 
         input
+            .property('disabled', !!isSuggestion)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
 
-        if (field.type === 'tel' && nominatim && entity) {
-            var center = entity.extent(context.graph()).center();
+
+        if (field.type === 'tel' && nominatim && _entity) {
+            var center = _entity.extent(context.graph()).center();
             nominatim.countryCode(center, function (err, countryCode) {
                 if (err || !dataPhoneFormats[countryCode]) return;
                 selection.selectAll('#' + fieldId)
@@ -86,6 +91,16 @@ export function uiFieldText(field, context) {
                     input.node().value = parsed(input.node().value) + d;
                     change()();
                 });
+
+        } else if (preset && field.id === 'brand') {
+            var pTag = preset.id.split('/', 2);
+            var pKey = pTag[0];
+            if (isSuggestion) {
+                // A "suggestion" preset (brand name)
+                // Put suggestion keys in `field.keys` so delete button can remove them all.
+                field.keys = Object.keys(preset.removeTags)
+                    .filter(function(k) { return k !== pKey; });
+            }
         }
     }
 
@@ -124,9 +139,9 @@ export function uiFieldText(field, context) {
     }
 
 
-    i.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+    i.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
         return i;
     };
 

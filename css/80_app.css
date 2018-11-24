@@ -353,13 +353,6 @@ button:hover {
     background-color: #ececec;
 }
 
-button[disabled],
-button.disabled {
-    background-color: rgba(255,255,255,.25);
-    color: rgba(0,0,0,.4);
-    cursor: auto;
-}
-
 button.active {
     background: #7092ff;
 }
@@ -378,6 +371,15 @@ button.minor .icon {
 }
 button.minor:hover {
     background-color: #f1f1f1;
+}
+
+button[disabled],
+button.disabled,
+button.minor[disabled],
+button.minor.disabled {
+    background-color: rgba(255,255,255,.25);
+    color: rgba(0,0,0,.4);
+    cursor: not-allowed;
 }
 
 .joined button {
@@ -1235,9 +1237,10 @@ a.hide-toggle {
 .form-label {
     position: relative;
     font-weight: bold;
+    color: #333;
+    background: #f6f6f6;
     border: 1px solid #cfcfcf;
     padding: 5px 0 5px 10px;
-    background: #f6f6f6;
     display: block;
     border-radius: 4px 4px 0 0;
     overflow: hidden;
@@ -1774,15 +1777,15 @@ input[type=number] {
 
 /* Field - Localized Name
 ------------------------------------------------------- */
-.form-field .localized-main {
+.localized-main {
     padding-right: 12%;
 }
-[dir='rtl'] .form-field .localized-main {
+[dir='rtl'] .localized-main {
     padding-left: 12%;
     padding-right: 10px;
 }
 
-.form-field .button-input-action {
+button.localized-add {
     position: relative;
     right: 1px;
     width: 32px;
@@ -1794,22 +1797,22 @@ input[type=number] {
     height: 30px;
     vertical-align: top;
 }
-[dir='rtl'] .form-field .button-input-action {
+[dir='rtl'] button.localized-add {
     margin-left: 0;
     margin-right: -32px;
     border-right-width: 1px;
     border-radius: 0 0 0 4px;
 }
 
-.form-field .localized-wrap {
+.localized-wrap {
     padding: 0 10px;
 }
-.form-field .localized-wrap .entry {
+.localized-wrap .entry {
     position: relative;
     overflow: hidden;
 }
 
-.form-field .localized-wrap .entry::before {
+.localized-wrap .entry::before {
     content: "";
     display: block;
     position: absolute;
@@ -1822,16 +1825,25 @@ input[type=number] {
     margin: auto;
 }
 
-.form-field .localized-wrap .entry .localized-lang {
+.localized-wrap .entry .localized-lang {
     border-radius: 0;
     border-top-width: 0;
 }
-.form-field .localized-wrap .entry .localized-value {
+.localized-wrap .entry .localized-value {
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
 }
-.form-field .localized-wrap .form-label button {
+.localized-wrap .form-label button {
     border-top-right-radius: 3px;
+}
+
+button.localized-add[disabled],
+.localized-wrap .form-label button[disabled],
+.localized-wrap .localized-lang[disabled],
+.localized-wrap .localized-value[disabled] {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
 }
 
 
