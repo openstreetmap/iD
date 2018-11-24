@@ -301,7 +301,6 @@ export default {
 
     docs: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
-        params = _extend({ lang: currentLocale }, params);
         params = clean(setSort(params));
 
         var path = 'key/wiki_pages?';
