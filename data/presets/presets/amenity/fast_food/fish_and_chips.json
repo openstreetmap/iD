@@ -1,0 +1,43 @@
+{
+    "icon": "fas-fish",
+    "fields": [
+        "name",
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "takeaway",
+        "delivery",
+        "drive_through",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "cafe",
+        "café",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "french fries"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "fish_and_chips"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "fish_and_chips"
+    },
+    "name": "Fish & Chips Fast Food"
+}

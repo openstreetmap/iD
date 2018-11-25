@@ -6,6 +6,7 @@ import _omit from 'lodash-es/omit';
 import { json as d3_json } from 'd3-request';
 
 import { utilQsString } from '../util';
+import { currentLocale } from '../util/locale';
 
 
 var apibase = 'https://taginfo.openstreetmap.org/api/4/',
@@ -90,7 +91,7 @@ function filterValues(allowUpperCase) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
         if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return parseFloat(d.fraction) > 0.0 || d.in_wiki;
+        return parseFloat(d.fraction) > 0.0;
     };
 }
 
@@ -189,7 +190,7 @@ export default {
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
         // to yield meaningful autocomplete results.. see #3955
-        var params = { rp: 100, sortname: 'values_all', sortorder: 'desc', page: 1, debounce: false };
+        var params = { rp: 100, sortname: 'values_all', sortorder: 'desc', page: 1, debounce: false, lang: currentLocale };
         this.keys(params, function(err, data) {
             if (err) return;
             data.forEach(function(d) {
@@ -209,7 +210,7 @@ export default {
     keys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1, lang: currentLocale }, params);
 
         var url = apibase + 'keys/all?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
@@ -228,7 +229,7 @@ export default {
     multikeys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1, lang: currentLocale }, params);
         var prefix = params.query;
 
         var url = apibase + 'keys/all?' + utilQsString(params);
@@ -255,7 +256,7 @@ export default {
 
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(setFilter(params)));
-        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1, lang: currentLocale }, params);
 
         var url = apibase + 'key/values?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
@@ -282,7 +283,7 @@ export default {
         var doRequest = params.debounce ? debouncedRequest : request;
         var geometry = params.geometry;
         params = clean(setSortMembers(params));
-        params = _extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1, lang: currentLocale }, params);
 
         var url = apibase + 'relation/roles?' + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {

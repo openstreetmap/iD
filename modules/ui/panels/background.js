@@ -20,8 +20,8 @@ export function uiPanelBackground(context) {
     var debouncedRedraw = _debounce(redraw, 250);
 
     function redraw(selection) {
-        var source = background.baseLayerSource(),
-            isDG = (source.id.match(/^DigitalGlobe/i) !== null);
+        var source = background.baseLayerSource();
+        var isDG = (source.id.match(/^DigitalGlobe/i) !== null);
 
         if (currSourceName !== source.name()) {
             currSourceName = source.name();

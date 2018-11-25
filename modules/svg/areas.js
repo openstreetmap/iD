@@ -11,32 +11,112 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
-        beach: 'beach',
-        cemetery: 'cemetery',
-        construction: 'construction',
-        farm: 'farmland',
-        farmland: 'farmland',
-        grave_yard: 'cemetery',
-        meadow: 'meadow',
-        military: 'construction',
-        orchard: 'orchard',
-        sand: 'beach',
-        scrub: 'scrub',
-        wetland: 'wetland',
+        // tag - value - pattern name
+        // -or-
+        // tag - value - rules (optional tag-values, pattern name)
+        // (matches earlier rules first, so fallback should be last entry)
+        amenity: {
+            grave_yard: 'cemetery'
+        },
+        landuse: {
+            cemetery: [
+                { religion: 'christian', pattern: 'cemetery_christian' },
+                { religion: 'buddhist', pattern: 'cemetery_buddhist' },
+                { religion: 'muslim', pattern: 'cemetery_muslim' },
+                { religion: 'jewish', pattern: 'cemetery_jewish' },
+                { pattern: 'cemetery' }
+            ],
+            construction: 'construction',
+            farmland: 'farmland',
+            farmyard: 'farmyard',
+            forest: [
+                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
+                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
+                { leaf_type: 'leafless', pattern: 'forest_leafless' },
+                { pattern: 'forest' } // same as 'leaf_type:mixed'
+            ],
+            grave_yard: 'cemetery',
+            grass: 'grass',
+            landfill: 'landfill',
+            meadow: 'meadow',
+            military: 'construction',
+            orchard: 'orchard',
+            quarry: 'quarry',
+            vineyard: 'vineyard'
+        },
+        natural: {
+            beach: 'beach',
+            grassland: 'grass',
+            sand: 'beach',
+            scrub: 'scrub',
+            water: [
+                { water: 'pond', pattern: 'pond' },
+                { pattern: 'waves' }
+            ],
+            wetland: [
+                { wetland: 'marsh', pattern: 'wetland_marsh' },
+                { wetland: 'swamp', pattern: 'wetland_swamp' },
+                { wetland: 'bog', pattern: 'wetland_bog' },
+                { wetland: 'reedbed', pattern: 'wetland_reedbed' },
+                { pattern: 'wetland' }
+            ],
+            wood: [
+                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
+                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
+                { leaf_type: 'leafless', pattern: 'forest_leafless' },
+                { pattern: 'forest' } // same as 'leaf_type:mixed'
+            ]
+        }
     };
 
-    var patternKeys = ['landuse', 'natural', 'amenity'];
+    function setPattern(entity) {
+        // Skip pattern filling if this is a building (buildings don't get patterns applied)
+        if (entity.tags.building && entity.tags.building !== 'no') {
+            this.style.fill = this.style.stroke = '';
+            return;
+        }
 
+        for (var tag in patterns) {
+            if (patterns.hasOwnProperty(tag)) {
+                var entityValue = entity.tags[tag];
+                if (entityValue) {
 
-    function setPattern(d) {
-        for (var i = 0; i < patternKeys.length; i++) {
-            if (d.tags.building && d.tags.building !== 'no') continue;
+                    var values = patterns[tag];
+                    for (var value in values) {
+                        if (entityValue === value) {
 
-            if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
-                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
-                return;
+                            var rules = values[value];
+                            if (typeof rules === 'string') { // short syntax - pattern name
+                                this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
+                                return;
+                            } else { // long syntax - rule array
+                                for (var ruleKey in rules) {
+                                    var rule = rules[ruleKey];
+
+                                    var pass = true;
+                                    for (var criterion in rule) {
+                                        if (criterion !== 'pattern') { // reserved for pattern name
+                                            // The only rule is a required tag-value pair
+                                            var v = entity.tags[criterion];
+                                            if (!v || v !== rule[criterion]) {
+                                                pass = false;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    if (pass) {
+                                        this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+
         this.style.fill = this.style.stroke = '';
     }
 
@@ -152,9 +232,11 @@ export function svgAreas(projection, context) {
            .attr('d', path);
 
 
-        var layer = selection.selectAll('.layer-areas .layer-areas-areas');
+        var drawLayer = selection.selectAll('.layer-osm.areas');
+        var touchLayer = selection.selectAll('.layer-touch.areas');
 
-        var areagroup = layer
+        // Draw areas..
+        var areagroup = drawLayer
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 
@@ -188,20 +270,19 @@ export function svgAreas(projection, context) {
             .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
-
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
-                    setPattern.apply(this, arguments);
+                    setPattern.call(this, entity);
                 }
             })
             .call(svgTagClasses())
             .attr('d', path);
 
 
-        // touch targets
-        selection.selectAll('.layer-areas .layer-areas-targets')
+        // Draw touch targets..
+        touchLayer
             .call(drawTargets, graph, data.stroke, filter);
     }
 

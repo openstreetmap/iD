@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import {
     behaviorBreathe,
     behaviorHover,
@@ -12,14 +10,10 @@ import {
     behaviorSelect
 } from '../behavior';
 
-import {
-    modeDragNode,
-    modeDragNote
-} from '../modes';
-
+import { modeBrowse, modeDragNode, modeDragNote } from '../modes';
 import { services } from '../services';
-import { modeBrowse } from './browse';
 import { uiNoteEditor } from '../ui';
+import { utilKeybinding } from '../util';
 
 
 export function modeSelectNote(context, selectedNoteID) {
@@ -29,7 +23,7 @@ export function modeSelectNote(context, selectedNoteID) {
     };
 
     var osm = services.osm;
-    var keybinding = d3_keybinding('select-note');
+    var keybinding = utilKeybinding('select-note');
     var noteEditor = uiNoteEditor(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw
@@ -101,12 +95,17 @@ export function modeSelectNote(context, selectedNoteID) {
 
         behaviors.forEach(context.install);
         keybinding.on('⎋', esc, true);
-        d3_select(document).call(keybinding);
+
+        d3_select(document)
+            .call(keybinding);
 
         selectNote();
 
-        context.ui().sidebar
-            .show(noteEditor.note(note));
+        var sidebar = context.ui().sidebar;
+        sidebar.show(noteEditor.note(note));
+
+        // expand the sidebar, avoid obscuring the note if needed
+        sidebar.expand(sidebar.intersects(note.extent()));
 
         context.map()
             .on('drawn.select', selectNote);
@@ -115,7 +114,9 @@ export function modeSelectNote(context, selectedNoteID) {
 
     mode.exit = function() {
         behaviors.forEach(context.uninstall);
-        keybinding.off();
+
+        d3_select(document)
+            .call(keybinding.unbind);
 
         context.surface()
             .selectAll('.layer-notes .selected')

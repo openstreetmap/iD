@@ -132,18 +132,19 @@ describe('iD.serviceStreetside', function() {
             ]);
         });
 
-        it('limits results no more than 3 stacked bubbles in one spot', function() {
+        it('limits results no more than 5 stacked bubbles in one spot', function() {
             var features = [
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequence_id: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequence_id: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 3, loc: [10, 0], ca: 90, pr: 2, ne: 4, pano: true, sequence_id: 1 } },
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 4, loc: [10, 0], ca: 90, pr: 3, ne: 5, pano: true, sequence_id: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 5, loc: [10, 0], ca: 90, pr: 4, ne: undefined, pano: true, sequence_id: 1 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 5, loc: [10, 0], ca: 90, pr: 4, ne: 6, pano: true, sequence_id: 1 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: 6, loc: [10, 0], ca: 90, pr: 5, ne: undefined, pano: true, sequence_id: 1 } }
             ];
 
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
-            expect(res).to.have.length.of.at.most(3);
+            expect(res).to.have.length.of.at.most(5);
         });
     });
 

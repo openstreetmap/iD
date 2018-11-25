@@ -235,7 +235,14 @@ export function uiFieldRestrictions(field, context) {
         var filter = utilFunctor(true);
         var projection = geoRawMercator();
 
-        var d = utilGetDimensions(selection);
+        // Reflow warning: `utilGetDimensions` calls `getBoundingClientRect`
+        // Instead of asking the restriction-container for its dimensions,
+        //  we can ask the #sidebar, which can have its dimensions cached.
+        // width: calc as sidebar - padding
+        // height: hardcoded (from `80_app.css`)
+        // var d = utilGetDimensions(selection);
+        var sdims = utilGetDimensions(d3_select('#sidebar'));
+        var d = [ sdims[0] - 50, 370 ];
         var c = geoVecScale(d, 0.5);
         var z = 22;
 
@@ -268,7 +275,7 @@ export function uiFieldRestrictions(field, context) {
             .translate(geoVecSubtract(c, extentCenter))
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
+        var drawLayers = svgLayers(projection, context).only(['osm','touch']).dimensions(d);
         var drawVertices = svgVertices(projection, context);
         var drawLines = svgLines(projection, context);
         var drawTurns = svgTurns(projection, context);

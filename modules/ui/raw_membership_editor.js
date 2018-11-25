@@ -186,6 +186,8 @@ export function uiRawMembershipEditor(context) {
             var label = enter
                 .append('label')
                 .attr('class', 'form-label')
+                .append('span')
+                .attr('class', 'label-text')
                 .append('a')
                 .attr('href', '#')
                 .on('click', selectRelation);

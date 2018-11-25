@@ -1,31 +1,15 @@
 import _invert from 'lodash-es/invert';
 import _mapValues from 'lodash-es/mapValues';
 
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
-import {
-    actionCopyEntities,
-    actionMove
-} from '../actions';
-
-import {
-    geoExtent,
-    geoPointInPolygon,
-    geoVecSubtract
-} from '../geo';
-
+import { actionCopyEntities, actionMove } from '../actions';
+import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
 import { modeMove } from '../modes';
 import { uiCmd } from '../ui';
 
 
 export function behaviorPaste(context) {
-    var keybinding = d3_keybinding('paste');
-
 
     function doPaste() {
         d3_event.preventDefault();
@@ -79,17 +63,16 @@ export function behaviorPaste(context) {
     }
 
 
-    function paste() {
-        keybinding.on(uiCmd('⌘V'), doPaste);
-        d3_select(document).call(keybinding);
-        return paste;
+    function behavior() {
+        context.keybinding().on(uiCmd('⌘V'), doPaste);
+        return behavior;
     }
 
 
-    paste.off = function() {
-        d3_select(document).call(keybinding.off);
+    behavior.off = function() {
+        context.keybinding().off(uiCmd('⌘V'));
     };
 
 
-    return paste;
+    return behavior;
 }

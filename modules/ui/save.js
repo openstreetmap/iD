@@ -1,11 +1,5 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
-
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { modeSave } from '../modes';
@@ -69,9 +63,7 @@ export function uiSave(context) {
                 .style('background', background);
 
             button.select('span.count')
-                .text(numChanges)
-                .style('background', background)
-                .style('border-color', background);
+                .text(numChanges);
         }
 
 
@@ -82,13 +74,15 @@ export function uiSave(context) {
 
         var button = selection
             .append('button')
-            .attr('class', 'save col12 disabled')
+            .attr('class', 'save disabled')
             .attr('tabindex', -1)
             .on('click', save)
             .call(tooltipBehavior);
 
         button
-            .call(svgIcon('#iD-icon-save', 'pre-text'))
+            .call(svgIcon('#iD-icon-save'));
+
+        button
             .append('span')
             .attr('class', 'label')
             .text(t('save.title'));
@@ -101,11 +95,8 @@ export function uiSave(context) {
         updateCount();
 
 
-        var keybinding = d3_keybinding('uiSave')
+        context.keybinding()
             .on(key, save, true);
-
-        d3_select(document)
-            .call(keybinding);
 
         context.history()
             .on('change.save', updateCount);

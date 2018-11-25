@@ -7,36 +7,18 @@ export function svgOsm(projection, context, dispatch) {
             .data(['covered', 'areas', 'lines', 'points', 'labels'])
             .enter()
             .append('g')
-            .attr('class', function(d) { return 'layer-osm layer-' + d; });
+            .attr('class', function(d) { return 'layer-osm ' + d; });
 
-        selection.selectAll('.layer-areas').selectAll('.layer-areas-group')
-            .data(['areas', 'targets'])
+        selection.selectAll('.layer-osm.points').selectAll('.points-group')
+            .data(['points', 'midpoints', 'vertices', 'turns'])
             .enter()
             .append('g')
-            .attr('class', function(d) { return 'layer-areas-group layer-areas-' + d; });
-
-        selection.selectAll('.layer-lines').selectAll('.layer-lines-group')
-            .data(['lines', 'targets'])
-            .enter()
-            .append('g')
-            .attr('class', function(d) { return 'layer-lines-group layer-lines-' + d; });
-
-        selection.selectAll('.layer-points').selectAll('.layer-points-group')
-            .data(['points', 'midpoints', 'vertices', 'turns', 'targets'])
-            .enter()
-            .append('g')
-            .attr('class', function(d) { return 'layer-points-group layer-points-' + d; });
-
-        selection.selectAll('.layer-labels').selectAll('.layer-labels-group')
-            .data(['halo', 'label', 'debug'])
-            .enter()
-            .append('g')
-            .attr('class', function(d) { return 'layer-labels-group layer-labels-' + d; });
+            .attr('class', function(d) { return 'points-group ' + d; });
     }
 
 
     function showLayer() {
-        var layer = context.surface().selectAll('.data-layer-osm');
+        var layer = context.surface().selectAll('.data-layer.osm');
         layer.interrupt();
 
         layer
@@ -52,7 +34,7 @@ export function svgOsm(projection, context, dispatch) {
 
 
     function hideLayer() {
-        var layer = context.surface().selectAll('.data-layer-osm');
+        var layer = context.surface().selectAll('.data-layer.osm');
         layer.interrupt();
 
         layer

@@ -86,7 +86,7 @@ export function svgTagClasses() {
             }
 
             // For highways, look for surface tagging..
-            if (primary === 'highway') {
+            if (primary === 'highway' || primary === 'aeroway') {
                 var paved = (t.highway !== 'track');
                 for (k in t) {
                     v = t[k];

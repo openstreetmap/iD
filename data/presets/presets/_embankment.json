@@ -3,8 +3,9 @@
         "line"
     ],
     "tags": {
-        "man_made": "embankment"
+        "embankment": "yes"
     },
     "name": "Embankment",
+    "matchScore": 0.2,
     "searchable": false
 }

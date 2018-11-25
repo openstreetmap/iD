@@ -7,12 +7,11 @@ import {
     touches as d3_touches
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
-import { utilRebind } from '../util/rebind';
+import { utilKeybinding, utilRebind } from '../util';
 
 
 var _usedTails = {};
@@ -25,7 +24,7 @@ export function behaviorDraw(context) {
         'move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
     );
 
-    var keybinding = d3_keybinding('draw');
+    var keybinding = utilKeybinding('draw');
 
     var hover = behaviorHover(context).altDisables(true)
         .on('hover', context.ui().sidebar.hover);
@@ -41,7 +40,9 @@ export function behaviorDraw(context) {
     // related code
     // - `mode/drag_node.js` `datum()`
     function datum() {
-        if (d3_event.altKey) return {};
+        var mode = context.mode();
+        var isNote = mode && (mode.id.indexOf('note') !== -1);
+        if (d3_event.altKey || isNote) return {};
 
         var element;
         if (d3_event.type === 'keydown') {
@@ -189,7 +190,7 @@ export function behaviorDraw(context) {
     }
 
 
-    function draw(selection) {
+    function behavior(selection) {
         context.install(hover);
         context.install(edit);
 
@@ -214,11 +215,11 @@ export function behaviorDraw(context) {
         d3_select(document)
             .call(keybinding);
 
-        return draw;
+        return behavior;
     }
 
 
-    draw.off = function(selection) {
+    behavior.off = function(selection) {
         context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
         context.uninstall(edit);
@@ -239,15 +240,15 @@ export function behaviorDraw(context) {
             // note: keyup.space-block, click.draw-block should remain
 
         d3_select(document)
-            .call(keybinding.off);
+            .call(keybinding.unbind);
     };
 
 
-    draw.tail = function(_) {
+    behavior.tail = function(_) {
         tail.text(_);
-        return draw;
+        return behavior;
     };
 
 
-    return utilRebind(draw, dispatch, 'on');
+    return utilRebind(behavior, dispatch, 'on');
 }

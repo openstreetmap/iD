@@ -249,6 +249,7 @@
     "route": {"key": "route", "type": "combo", "label": "Type"},
     "sac_scale": {"key": "sac_scale", "type": "combo", "label": "Hiking Difficulty", "placeholder": "Mountain Hiking, Alpine Hiking...", "strings": {"options": {"hiking": "T1: Hiking", "mountain_hiking": "T2: Mountain Hiking", "demanding_mountain_hiking": "T3: Demanding Mountain Hiking", "alpine_hiking": "T4: Alpine Hiking", "demanding_alpine_hiking": "T5: Demanding Alpine Hiking", "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"}}},
     "sanitary_dump_station": {"key": "sanitary_dump_station", "type": "check", "label": "Toilet Disposal"},
+    "scuba_diving": {"key": "scuba_diving:", "type": "multiCombo", "label": "Services", "options": ["repair", "courses", "rental", "filling", "air_filling", "nitrox_filling", "trimix_filling", "oxygen_filling"]},
     "seamark/beacon_isolated_danger/shape": {"key": "seamark:beacon_isolated_danger:shape", "type": "combo", "label": "Shape"},
     "seamark/beacon_lateral/category": {"key": "seamark:beacon_lateral:category", "type": "combo", "label": "Category", "strings": {"options": {"port": "Port", "starboard": "Starboard", "waterway_left": "Waterway Left", "waterway_right": "Waterway Right", "danger_left": "Danger Left", "danger_right": "Danger Right"}}},
     "seamark/beacon_lateral/colour": {"key": "seamark:beacon_lateral:colour", "type": "combo", "label": "Color", "strings": {"options": {"red": "Red", "green": "Green", "grey": "Grey"}}},

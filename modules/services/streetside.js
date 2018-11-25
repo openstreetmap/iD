@@ -1,12 +1,9 @@
 import _extend from 'lodash-es/extend';
 import _find from 'lodash-es/find';
-import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
-import _map from 'lodash-es/map';
 import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { range as d3_range } from 'd3-array';
 import { timer as d3_timer } from 'd3-timer';
 
 import {
@@ -25,6 +22,7 @@ import {
     geoMetersToLon,
     geoPointInPolygon,
     geoRotate,
+    geoScaleToZoom,
     geoVecLength
 } from '../geo';
 
@@ -233,45 +231,30 @@ function getBubbles(url, tile, callback) {
     });
 }
 
-/**
- * partitionViewport() partition viewport into `psize` x `psize` regions.
- */
-function partitionViewport(psize, projection) {
-    var dimensions = projection.clipExtent()[1];
-    psize = psize || 16;
 
-    var cols = d3_range(0, dimensions[0], psize);
-    var rows = d3_range(0, dimensions[1], psize);
-    var partitions = [];
+// partition viewport into higher zoom tiles
+function partitionViewport(projection) {
+    var z = geoScaleToZoom(projection.scale());
+    var z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    var tiler = utilTiler().zoomExtent([z2, z2]);
 
-    rows.forEach(function (y) {
-        cols.forEach(function (x) {
-            var min = [x, y + psize];
-            var max = [x + psize, y];
-            partitions.push(geoExtent(projection.invert(min), projection.invert(max)));
-        });
-    });
-
-    return partitions;
+    return tiler.getTiles(projection)
+        .map(function(tile) { return tile.extent; });
 }
 
 
-/**
- * searchLimited().
- */
-function searchLimited(psize, limit, projection, rtree) {
-    limit = limit || 3;
+// no more than `limit` results per partition.
+function searchLimited(limit, projection, rtree) {
+    limit = limit || 5;
 
-    var partitions = partitionViewport(psize, projection);
-    var results;
+    return partitionViewport(projection)
+        .reduce(function(result, extent) {
+            var found = rtree.search(extent.bbox())
+                .slice(0, limit)
+                .map(function(d) { return d.data; });
 
-    results = _flatten(_map(partitions, function (extent) {
-        return rtree.search(extent.bbox())
-            .slice(0, limit)
-            .map(function (d) { return d.data; });
-    }));
-
-    return results;
+            return (found.length ? result.concat(found) : result);
+        }, []);
 }
 
 
@@ -485,8 +468,8 @@ export default {
      * bubbles()
      */
     bubbles: function (projection) {
-        var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, _ssCache.bubbles.rtree);
+        var limit = 5;
+        return searchLimited(limit, projection, _ssCache.bubbles.rtree);
     },
 
 
@@ -626,7 +609,7 @@ export default {
 
 
         // Register viewer resize handler
-        context.ui().on('photoviewerResize', function() {
+        context.ui().photoviewer.on('resize', function() {
             if (_pannellumViewer) {
                 _pannellumViewer.resize();
             }

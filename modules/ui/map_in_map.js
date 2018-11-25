@@ -10,8 +10,6 @@ import {
     zoomIdentity as d3_zoomIdentity
 } from 'd3-zoom';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 import {
     geoRawMercator,
@@ -336,11 +334,8 @@ export function uiMapInMap(context) {
 
         redraw();
 
-        var keybinding = d3_keybinding('map-in-map')
+        context.keybinding()
             .on(t('background.minimap.key'), toggle);
-
-        d3_select(document)
-            .call(keybinding);
     }
 
     return map_in_map;

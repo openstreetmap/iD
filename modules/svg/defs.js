@@ -72,14 +72,33 @@ export function svgDefs(context) {
         var patterns = defs.selectAll('pattern')
             .data([
                 // pattern name, pattern image name
-                ['wetland', 'wetland'],
+                ['beach', 'dots'],
                 ['construction', 'construction'],
                 ['cemetery', 'cemetery'],
-                ['orchard', 'orchard'],
+                ['cemetery_christian', 'cemetery_christian'],
+                ['cemetery_buddhist', 'cemetery_buddhist'],
+                ['cemetery_muslim', 'cemetery_muslim'],
+                ['cemetery_jewish', 'cemetery_jewish'],
                 ['farmland', 'farmland'],
-                ['beach', 'dots'],
-                ['scrub', 'dots'],
-                ['meadow', 'dots']
+                ['farmyard', 'farmyard'],
+                ['forest', 'forest'],
+                ['forest_broadleaved', 'forest_broadleaved'],
+                ['forest_needleleaved', 'forest_needleleaved'],
+                ['forest_leafless', 'forest_leafless'],
+                ['grass', 'grass'],
+                ['landfill', 'landfill'],
+                ['meadow', 'grass'],
+                ['orchard', 'orchard'],
+                ['pond', 'pond'],
+                ['quarry', 'quarry'],
+                ['scrub', 'bushes'],
+                ['vineyard', 'vineyard'],
+                ['waves', 'waves'],
+                ['wetland', 'wetland'],
+                ['wetland_marsh', 'wetland_marsh'],
+                ['wetland_swamp', 'wetland_swamp'],
+                ['wetland_bog', 'wetland_bog'],
+                ['wetland_reedbed', 'wetland_reedbed']
             ])
             .enter()
             .append('pattern')

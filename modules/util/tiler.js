@@ -12,8 +12,8 @@ export function utilTiler() {
     var _skipNullIsland = false;
 
 
-    function bound(val) {
-        return Math.min(_zoomExtent[1], Math.max(_zoomExtent[0], val));
+    function clamp(num, min, max) {
+        return Math.max(min, Math.min(num, max));
     }
 
 
@@ -34,7 +34,9 @@ export function utilTiler() {
 
     function tiler() {
         var z = geoScaleToZoom(_scale / (2 * Math.PI), _tileSize);
-        var z0 = bound(Math.round(z));
+        var z0 = clamp(Math.round(z), _zoomExtent[0], _zoomExtent[1]);
+        var tileMin = 0;
+        var tileMax = Math.pow(2, z0) - 1;
         var log2ts = Math.log(_tileSize) * Math.LOG2E;
         var k = Math.pow(2, z - z0 + log2ts);
         var origin = [
@@ -43,12 +45,12 @@ export function utilTiler() {
         ];
 
         var cols = d3_range(
-            Math.max(0, Math.floor(-origin[0]) - _margin),
-            Math.max(0, Math.ceil(_size[0] / k - origin[0]) + _margin)
+            clamp(Math.floor(-origin[0]) - _margin,               tileMin, tileMax + 1),
+            clamp(Math.ceil(_size[0] / k - origin[0]) + _margin,  tileMin, tileMax + 1)
         );
         var rows = d3_range(
-            Math.max(0, Math.floor(-origin[1]) - _margin),
-            Math.max(0, Math.ceil(_size[1] / k - origin[1]) + _margin)
+            clamp(Math.floor(-origin[1]) - _margin,               tileMin, tileMax + 1),
+            clamp(Math.ceil(_size[1] / k - origin[1]) + _margin,  tileMin, tileMax + 1)
         );
 
         var tiles = [];
@@ -106,6 +108,31 @@ export function utilTiler() {
                     )
                 };
             }).filter(Boolean);
+    };
+
+
+    /**
+     * getGeoJSON() returns a FeatureCollection for debugging tiles
+     */
+    tiler.getGeoJSON = function(projection) {
+        var features = tiler.getTiles(projection).map(function(tile) {
+            return {
+                type: 'Feature',
+                properties: {
+                    id: tile.id,
+                    name: tile.id
+                },
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [ tile.extent.polygon() ]
+                }
+            };
+        });
+
+        return {
+            type: 'FeatureCollection',
+            features: features
+        };
     };
 
 

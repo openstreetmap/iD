@@ -35,42 +35,44 @@ export function presetIndex() {
     };
 
     all.match = function(entity, resolver) {
-        var geometry = entity.geometry(resolver);
-        var address;
+        return resolver.transient(entity, 'presetMatch', function() {
+            var geometry = entity.geometry(resolver);
+            var address;
 
-        // Treat entities on addr:interpolation lines as points, not vertices - #3241
-        if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
-            geometry = 'point';
-        }
-
-        var geometryMatches = _index[geometry];
-        var best = -1;
-        var match;
-
-        for (var k in entity.tags) {
-            // If any part of an address is present,
-            // allow fallback to "Address" preset - #4353
-            if (k.match(/^addr:/) !== null && geometryMatches['addr:*']) {
-                address = geometryMatches['addr:*'][0];
+            // Treat entities on addr:interpolation lines as points, not vertices - #3241
+            if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
+                geometry = 'point';
             }
 
-            var keyMatches = geometryMatches[k];
-            if (!keyMatches) continue;
+            var geometryMatches = _index[geometry];
+            var best = -1;
+            var match;
 
-            for (var i = 0; i < keyMatches.length; i++) {
-                var score = keyMatches[i].matchScore(entity);
-                if (score > best) {
-                    best = score;
-                    match = keyMatches[i];
+            for (var k in entity.tags) {
+                // If any part of an address is present,
+                // allow fallback to "Address" preset - #4353
+                if (k.match(/^addr:/) !== null && geometryMatches['addr:*']) {
+                    address = geometryMatches['addr:*'][0];
+                }
+
+                var keyMatches = geometryMatches[k];
+                if (!keyMatches) continue;
+
+                for (var i = 0; i < keyMatches.length; i++) {
+                    var score = keyMatches[i].matchScore(entity);
+                    if (score > best) {
+                        best = score;
+                        match = keyMatches[i];
+                    }
                 }
             }
-        }
 
-        if (address && (!match || match.isFallback())) {
-            match = address;
-        }
+            if (address && (!match || match.isFallback())) {
+                match = address;
+            }
 
-        return match || all.item(geometry);
+            return match || all.item(geometry);
+        });
     };
 
 
@@ -190,7 +192,9 @@ export function presetIndex() {
     };
 
     all.choose = function(preset) {
-        _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+        if (preset.searchable !== false) {
+            _recent = presetCollection(_uniq([preset].concat(_recent.collection)));
+        }
         return all;
     };
 

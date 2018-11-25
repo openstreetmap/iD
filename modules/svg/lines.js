@@ -175,9 +175,11 @@ export function svgLines(projection, context) {
         });
 
 
-        var covered = selection.selectAll('.layer-covered');                      // under areas
-        var uncovered = selection.selectAll('.layer-lines .layer-lines-lines');   // over areas
+        var covered = selection.selectAll('.layer-osm.covered');     // under areas
+        var uncovered = selection.selectAll('.layer-osm.lines');     // over areas
+        var touchLayer = selection.selectAll('.layer-touch.lines');
 
+        // Draw lines..
         [covered, uncovered].forEach(function(selection) {
             var range = (selection === covered ? d3_range(-10,0) : d3_range(0,11));
             var layergroup = selection
@@ -243,8 +245,8 @@ export function svgLines(projection, context) {
             }
         });
 
-        // touch targets
-        selection.selectAll('.layer-lines .layer-lines-targets')
+        // Draw touch targets..
+        touchLayer
             .call(drawTargets, graph, ways, filter);
     }
 

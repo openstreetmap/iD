@@ -136,7 +136,7 @@ export function behaviorBreathe() {
     }
 
 
-    var breathe = function(surface) {
+    function behavior(surface) {
         _done = false;
         _timer = d3_timer(function() {
             // wait for elements to actually become selected
@@ -148,10 +148,10 @@ export function behaviorBreathe() {
             _timer.stop();
             return true;
         }, 20);
-    };
+    }
 
 
-    breathe.off = function() {
+    behavior.off = function() {
         _done = true;
         if (_timer) {
             _timer.stop();
@@ -162,5 +162,5 @@ export function behaviorBreathe() {
     };
 
 
-    return breathe;
+    return behavior;
 }

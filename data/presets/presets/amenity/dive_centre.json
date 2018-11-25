@@ -1,0 +1,24 @@
+{
+    "icon": "maki-swimming",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "payment_multi",
+        "scuba_diving"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "diving",
+        "scuba"
+    ],
+    "tags": {
+        "amenity": "dive_centre"
+    },
+    "name": "Dive Center"
+}
