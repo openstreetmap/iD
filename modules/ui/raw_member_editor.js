@@ -45,6 +45,9 @@ export function uiRawMemberEditor(context) {
     function selectMember(d) {
         d3_event.preventDefault();
 
+        // remove the hover-highlight styling
+        utilHighlightEntity(d.id, false, context);
+
         var entity = context.entity(d.id);
         var mapExtent = context.map().extent();
         if (!entity.intersects(mapExtent, context.graph())) {
