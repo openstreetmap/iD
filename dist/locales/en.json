@@ -534,7 +534,11 @@
             "way": "Way",
             "relation": "Relation",
             "location": "Location",
-            "add_fields": "Add field:"
+            "add_fields": "Add field:",
+            "lock": {
+                "brand": "This brand name is locked. You can delete it or edit the tags in the \"All tags\" section.",
+                "official": "This official name is locked. You can delete it or edit the tags in the \"All tags\" section."
+            }
         },
         "background": {
             "title": "Background",

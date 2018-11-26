@@ -1,9 +1,14 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
+import {
+    select as d3_select,
+    event as d3_event
+} from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { services } from '../../services';
+import { tooltip } from '../../util/tooltip';
+
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -22,15 +27,20 @@ export {
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var nominatim = services.geocoder;
-    var input;
+    var input = d3_select(null);
     var _entity;
+    var _brandTip;
+
+    if (field.id === 'brand') {
+        _brandTip = tooltip().title(t('inspector.lock.brand')).placement('bottom');
+    }
 
 
     function i(selection) {
         var preset = _entity && context.presets().match(_entity, context.graph());
         var isSuggestion = preset && preset.suggestion && field.id === 'brand';
 
-        var fieldId = 'preset-input-' + field.safeid;
+        var fieldID = 'preset-input-' + field.safeid;
 
         input = selection.selectAll('input')
             .data([0]);
@@ -38,23 +48,27 @@ export function uiFieldText(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', field.type)
-            .attr('id', fieldId)
+            .attr('id', fieldID)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
             .call(utilNoAuto)
             .merge(input);
 
         input
-            .property('disabled', !!isSuggestion)
+            .classed('disabled', !!isSuggestion)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
 
 
+        if (field.id === 'brand') {
+            selection.call(isSuggestion ? _brandTip : _brandTip.destroy);
+        }
+
         if (field.type === 'tel' && nominatim && _entity) {
             var center = _entity.extent(context.graph()).center();
             nominatim.countryCode(center, function (err, countryCode) {
                 if (err || !dataPhoneFormats[countryCode]) return;
-                selection.selectAll('#' + fieldId)
+                selection.selectAll('#' + fieldID)
                     .attr('placeholder', dataPhoneFormats[countryCode]);
             });
 

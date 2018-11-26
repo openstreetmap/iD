@@ -175,22 +175,16 @@ input[type=email] {
     padding: 5px 10px 5px 20px;
 }
 
-.disabled,
-textarea[disabled],
-input[type=text][disabled],
-input[type=search][disabled],
-input[type=number][disabled],
-input[type=url][disabled],
-input[type=tel][disabled],
-input[type=email][disabled] {
-    color: #777;
-    background-color: #eee;
-    cursor: not-allowed;
-}
-
 textarea:focus,
 input:focus {
     background-color: #f1f1f1;
+}
+
+textarea.disabled,
+input.disabled {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
 }
 
 input[type="checkbox"],
@@ -217,18 +211,15 @@ input[type="radio"] {
 }
 
 /* tables */
-
 table {
     background-color: #fff;
     border-collapse: collapse;
     width: 100%;
     border-spacing: 0;
 }
-
 table th {
     text-align: left;
 }
-
 table.tags, table.tags td, table.tags th {
     border: 1px solid #ccc;
     padding: 4px;
@@ -261,22 +252,18 @@ ul li { list-style: none;}
 .toggle-list > label:hover {
     background-color: #ececec;
 }
-
 .toggle-list > label:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
-
 .toggle-list > label:last-child {
     border-radius: 0 0 3px 3px;
 }
-
 .toggle-list label > span {
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
 .toggle-list > label.active {
     background: #e8ebff;
 }
@@ -373,9 +360,7 @@ button.minor:hover {
     background-color: #f1f1f1;
 }
 
-button[disabled],
 button.disabled,
-button.minor[disabled],
 button.minor.disabled {
     background-color: rgba(255,255,255,.25);
     color: rgba(0,0,0,.4);
@@ -408,14 +393,11 @@ button.minor.disabled {
     border-radius: 4px 0 0 4px;
 }
 
+
+/* Action buttons */
 button.action {
     background: #7092ff;
     color: #fff;
-}
-button[disabled].action,
-button[disabled].action:hover {
-    background: #cccccc;
-    color: #888;
 }
 button.action:focus,
 button.action:hover {
@@ -424,10 +406,16 @@ button.action:hover {
 button.secondary-action {
     background: #ececec;
 }
-
 button.secondary-action:focus,
 button.secondary-action:hover {
     background: #cccccc;
+}
+
+button[disabled].action,
+button[disabled].action:hover {
+    background: #cccccc;
+    color: #888;
+    cursor: not-allowed;
 }
 
 
@@ -1298,6 +1286,7 @@ a.hide-toggle {
 
 .form-field > input,
 .form-field > textarea,
+.form-field .localized-input-wrap > input,
 .form-field .preset-input-wrap {
     border: 1px solid #ccc;
     min-height: 30px;
@@ -1804,15 +1793,15 @@ button.localized-add {
     border-radius: 0 0 0 4px;
 }
 
-.localized-wrap {
+.localized-multilingual {
     padding: 0 10px;
 }
-.localized-wrap .entry {
+.localized-multilingual .entry {
     position: relative;
     overflow: hidden;
 }
 
-.localized-wrap .entry::before {
+.localized-multilingual .entry::before {
     content: "";
     display: block;
     position: absolute;
@@ -1825,22 +1814,22 @@ button.localized-add {
     margin: auto;
 }
 
-.localized-wrap .entry .localized-lang {
+.localized-multilingual .entry .localized-lang {
     border-radius: 0;
     border-top-width: 0;
 }
-.localized-wrap .entry .localized-value {
+.localized-multilingual .entry .localized-value {
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
 }
-.localized-wrap .form-label button {
+.localized-multilingual .form-label button {
     border-top-right-radius: 3px;
 }
 
-button.localized-add[disabled],
-.localized-wrap .form-label button[disabled],
-.localized-wrap .localized-lang[disabled],
-.localized-wrap .localized-value[disabled] {
+button.localized-add.disabled,
+.localized-multilingual .form-label button.disabled,
+.localized-multilingual .localized-lang.disabled,
+.localized-multilingual .localized-value.disabled {
     color: #777;
     background-color: #eee;
     cursor: not-allowed;
