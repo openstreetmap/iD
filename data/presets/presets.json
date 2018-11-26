@@ -235,7 +235,7 @@
     "barrier/ditch": {"icon": "maki-roadblock", "geometry": ["line", "area"], "tags": {"barrier": "ditch"}, "name": "Trench", "matchScore": 0.25},
     "barrier/fence": {"icon": "maki-fence", "fields": ["fence_type", "height"], "geometry": ["line"], "tags": {"barrier": "fence"}, "name": "Fence", "matchScore": 0.25},
     "barrier/gate": {"icon": "maki-barrier", "fields": ["access"], "geometry": ["vertex", "line"], "tags": {"barrier": "gate"}, "name": "Gate"},
-    "barrier/guard_rail": {"icon": "maki-barrier", "geometry": ["vertex", "line"], "tags": {"barrier": "guard_rail"}, "name": "Guard Rail", "terms": ["railing", "guardrail", "traffic barrier", "crash barrier", "median barrier", "roadside barrier", "Armco barrier"], "matchScore": 0.75},
+    "barrier/guard_rail": {"icon": "maki-barrier", "geometry": ["line"], "tags": {"barrier": "guard_rail"}, "name": "Guard Rail", "terms": ["railing", "guardrail", "traffic barrier", "crash barrier", "median barrier", "roadside barrier", "Armco barrier"], "matchScore": 0.75},
     "barrier/hedge": {"fields": ["height"], "geometry": ["line", "area"], "tags": {"barrier": "hedge"}, "name": "Hedge", "matchScore": 0.25},
     "barrier/kerb": {"icon": "maki-wheelchair", "fields": ["kerb", "tactile_paving"], "geometry": ["vertex", "line"], "tags": {"barrier": "kerb"}, "name": "Curb"},
     "barrier/kerb/lowered": {"icon": "maki-wheelchair", "fields": ["kerb", "tactile_paving"], "geometry": ["vertex", "line"], "tags": {"barrier": "kerb", "kerb": "lowered"}, "reference": {"key": "kerb", "value": "lowered"}, "terms": ["curb cut", "curb ramp", "kerb ramp", "dropped kerb", "pram ramp"], "name": "Lowered Curb"},

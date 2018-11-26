@@ -1,7 +1,6 @@
 {
     "icon": "maki-barrier",
     "geometry": [
-        "vertex",
         "line"
     ],
     "tags": {
