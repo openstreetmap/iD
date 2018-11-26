@@ -3100,6 +3100,11 @@ en:
         # barrier=gate
         name: Gate
         terms: '<translate with synonyms or related terms for ''Gate'', separated by commas>'
+      barrier/guard_rail:
+        # barrier=guard_rail
+        name: Guard Rail
+        # 'terms: railing,guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier'
+        terms: '<translate with synonyms or related terms for ''Guard Rail'', separated by commas>'
       barrier/hedge:
         # barrier=hedge
         name: Hedge

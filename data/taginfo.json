@@ -1599,6 +1599,13 @@
     },
     {
       "key": "barrier",
+      "value": "guard_rail",
+      "description": "Guard Rail",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/barrier-15.svg?sanitize=true"
+    },
+    {
+      "key": "barrier",
       "value": "hedge",
       "description": "Hedge",
       "object_types": ["way", "area"]
