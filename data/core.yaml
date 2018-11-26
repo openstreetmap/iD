@@ -439,8 +439,7 @@ en:
     location: Location
     add_fields: "Add field:"
     lock:
-      brand: 'This brand name is locked. You can delete it or edit the tags in the "All tags" section.'
-      official: 'This official name is locked. You can delete it or edit the tags in the "All tags" section.'
+      suggestion: 'The "{label}" field is locked because there is a wikidata tag. You can delete it or edit the tags in the "All tags" section.'
   background:
     title: Background
     description: Background settings

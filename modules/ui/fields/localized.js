@@ -31,8 +31,12 @@ export function uiFieldLocalized(field, context) {
     var _selection = d3_select(null);
     var _multilingual = [];
     var _isLocked = false;
-    var _brandTip = tooltip().title(t('inspector.lock.brand')).placement('bottom');
-    var _buttonTip = tooltip().title(t('translate.translate')).placement('left');
+    var _brandTip = tooltip()
+        .title(t('inspector.lock.suggestion', { label: field.label }))
+        .placement('bottom');
+    var _buttonTip = tooltip()
+        .title(t('translate.translate'))
+        .placement('left');
     var _wikiTitles;
     var _entity;
 

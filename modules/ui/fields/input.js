@@ -32,7 +32,9 @@ export function uiFieldText(field, context) {
     var _brandTip;
 
     if (field.id === 'brand') {
-        _brandTip = tooltip().title(t('inspector.lock.brand')).placement('bottom');
+        _brandTip = tooltip()
+            .title(t('inspector.lock.suggestion', { label: field.label }))
+            .placement('bottom');
     }
 
 
