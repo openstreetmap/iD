@@ -35,6 +35,10 @@ export function uiRawMembershipEditor(context) {
 
     function selectRelation(d) {
         d3_event.preventDefault();
+
+        // remove the hover-highlight styling
+        utilHighlightEntity(d.relation.id, false, context);
+
         context.enter(modeSelect(context, [d.relation.id]));
     }
 
@@ -186,6 +190,8 @@ export function uiRawMembershipEditor(context) {
             var label = enter
                 .append('label')
                 .attr('class', 'form-label')
+                .append('span')
+                .attr('class', 'label-text')
                 .append('a')
                 .attr('href', '#')
                 .on('click', selectRelation);

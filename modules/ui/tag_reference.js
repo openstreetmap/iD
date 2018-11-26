@@ -187,7 +187,7 @@ export function uiTagReference(tag) {
 
         _body = _body.enter()
             .append('div')
-            .attr('class', 'tag-reference-body cf')
+            .attr('class', 'tag-reference-body')
             .style('max-height', '0')
             .style('opacity', '0')
             .merge(_body);

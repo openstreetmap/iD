@@ -452,16 +452,6 @@ export function rendererMap(context) {
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
-            // 2 finger map panning (all browsers) - #5492
-            // Panning via the `wheel` event will always have:
-            // - `ctrlKey = false`
-            // - `deltaX`,`deltaY` are round integer pixels
-            } else if (!source.ctrlKey && isInteger(dX) && isInteger(dY)) {
-                p1 = projection.translate();
-                x2 = p1[0] - dX;
-                y2 = p1[1] - dY;
-                k2 = projection.scale();
-
             // 2 finger map pinch zooming (all browsers except Safari) - #5492
             // Pinch zooming via the `wheel` event will always have:
             // - `ctrlKey = true`
@@ -476,6 +466,27 @@ export function rendererMap(context) {
                 k2 = t0.k * Math.pow(2, -dY / 500);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
+
+            // Trackpad scroll zooming with shift or alt/option key down
+            } else if ((source.altKey || source.shiftKey) && isInteger(dY)) {
+
+                // recalculate x2,y2,k2
+                t0 = _transformed ? _transformLast : _transformStart;
+                p0 = mouse(source);
+                p1 = t0.invert(p0);
+                k2 = t0.k * Math.pow(2, -dY / 500);
+                x2 = p0[0] - p1[0] * k2;
+                y2 = p0[1] - p1[1] * k2;
+
+            // 2 finger map panning (all browsers) - #5492
+            // Panning via the `wheel` event will always have:
+            // - `ctrlKey = false`
+            // - `deltaX`,`deltaY` are round integer pixels
+            } else if (!source.ctrlKey && isInteger(dX) && isInteger(dY)) {
+                p1 = projection.translate();
+                x2 = p1[0] - dX;
+                y2 = p1[1] - dY;
+                k2 = projection.scale();
             }
 
             // something changed - replace the event transform

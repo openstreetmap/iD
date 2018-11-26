@@ -373,7 +373,7 @@
         "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
         "translate": {
             "translate": "Translate",
-            "localized_translation_label": "Multilingual name",
+            "localized_translation_label": "Multilingual Name",
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
@@ -3608,6 +3608,10 @@
                     "name": "Monastery Grounds",
                     "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,monastery,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
                 },
+                "amenity/money_transfer": {
+                    "name": "Money Transfer Station",
+                    "terms": "money order,check,bill,currency,finance,wire transfer,cable,person to person,cash to cash,exchange"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcycle Parking",
                     "terms": ""
@@ -3630,11 +3634,19 @@
                 },
                 "amenity/parking": {
                     "name": "Parking Lot",
-                    "terms": "car,parking lot"
+                    "terms": "automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking"
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
+                },
+                "amenity/payment_centre": {
+                    "name": "Payment Center",
+                    "terms": "check,tax pay,bill pay,currency,finance,cash,money"
+                },
+                "amenity/payment_terminal": {
+                    "name": "Payment Terminal",
+                    "terms": "interactive kiosk,ekiosk,atm,bill pay,tax pay,phone pay,finance,cash,money transfer,card"
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy",
@@ -4107,6 +4119,10 @@
                 "barrier/gate": {
                     "name": "Gate",
                     "terms": ""
+                },
+                "barrier/guard_rail": {
+                    "name": "Guard Rail",
+                    "terms": "railing,guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier"
                 },
                 "barrier/hedge": {
                     "name": "Hedge",
@@ -5462,7 +5478,7 @@
                 },
                 "leisure/slipway": {
                     "name": "Slipway",
-                    "terms": "boat launch,boat ramp"
+                    "terms": "boat launch,boat ramp,boat landing"
                 },
                 "leisure/sports_centre": {
                     "name": "Sports Center / Complex",
@@ -6568,6 +6584,10 @@
                     "name": "Carpet Store",
                     "terms": "rug"
                 },
+                "shop/catalogue": {
+                    "name": "Catalog Shop",
+                    "terms": ""
+                },
                 "shop/charity": {
                     "name": "Charity Store",
                     "terms": "thrift,op shop,nonprofit"
@@ -6610,6 +6630,10 @@
                 },
                 "shop/cosmetics": {
                     "name": "Cosmetics Store",
+                    "terms": ""
+                },
+                "shop/country_store": {
+                    "name": "Country Store",
                     "terms": ""
                 },
                 "shop/craft": {
@@ -6695,6 +6719,10 @@
                 "shop/greengrocer": {
                     "name": "Greengrocer",
                     "terms": "fruit,vegetable"
+                },
+                "shop/hairdresser_supply": {
+                    "name": "Hairdresser Supply Store",
+                    "terms": "barber,shampoo,conditioner"
                 },
                 "shop/hairdresser": {
                     "name": "Hairdresser",
@@ -6815,6 +6843,10 @@
                 "shop/paint": {
                     "name": "Paint Store",
                     "terms": ""
+                },
+                "shop/party": {
+                    "name": "Party Supply Store",
+                    "terms": "balloons,costumes,decorations,invitations"
                 },
                 "shop/pastry": {
                     "name": "Pastry Shop",

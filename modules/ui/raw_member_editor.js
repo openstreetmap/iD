@@ -45,6 +45,9 @@ export function uiRawMemberEditor(context) {
     function selectMember(d) {
         d3_event.preventDefault();
 
+        // remove the hover-highlight styling
+        utilHighlightEntity(d.id, false, context);
+
         var entity = context.entity(d.id);
         var mapExtent = context.map().extent();
         if (!entity.intersects(mapExtent, context.graph())) {
@@ -145,7 +148,10 @@ export function uiRawMemberEditor(context) {
                         var label = d3_select(this).append('label')
                             .attr('class', 'form-label');
 
-                        var labelLink = label.append('a')
+                        var labelLink = label
+                            .append('span')
+                            .attr('class', 'label-text')
+                            .append('a')
                             .attr('href', '#')
                             .on('click', selectMember);
 
@@ -174,11 +180,15 @@ export function uiRawMemberEditor(context) {
                         var incompleteLabel = d3_select(this).append('label')
                             .attr('class', 'form-label');
 
-                        incompleteLabel.append('span')
+                        var labelText = incompleteLabel
+                            .append('span')
+                            .attr('class', 'label-text');
+
+                        labelText.append('span')
                             .attr('class', 'member-entity-type')
                             .text(t('inspector.'+d.type, { id: d.id }));
 
-                        incompleteLabel.append('span')
+                        labelText.append('span')
                             .attr('class', 'member-entity-name')
                             .text(t('inspector.incomplete', { id: d.id }));
 

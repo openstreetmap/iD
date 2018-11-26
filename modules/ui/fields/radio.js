@@ -125,17 +125,17 @@ export function uiFieldRadio(field, context) {
         // Enter
         var typeEnter = typeItem.enter()
             .insert('li', ':first-child')
-            .attr('class', 'cf structure-type-item');
+            .attr('class', 'structure-type-item');
 
         typeEnter
             .append('span')
-            .attr('class', 'col6 label structure-label-type')
+            .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
             .text(t('inspector.radio.structure.type'));
 
         typeEnter
             .append('div')
-            .attr('class', 'col6 structure-input-type-wrap');
+            .attr('class', 'structure-input-type-wrap');
 
         // Update
         typeItem = typeItem
@@ -170,17 +170,17 @@ export function uiFieldRadio(field, context) {
         // Enter
         var layerEnter = layerItem.enter()
             .append('li')
-            .attr('class', 'cf structure-layer-item');
+            .attr('class', 'structure-layer-item');
 
         layerEnter
             .append('span')
-            .attr('class', 'col6 label structure-label-layer')
+            .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
             .text(t('inspector.radio.structure.layer'));
 
         layerEnter
             .append('div')
-            .attr('class', 'col6 structure-input-layer-wrap');
+            .attr('class', 'structure-input-layer-wrap');
 
         // Update
         layerItem = layerItem
