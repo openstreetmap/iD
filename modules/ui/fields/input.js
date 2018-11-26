@@ -56,14 +56,11 @@ export function uiFieldText(field, context) {
 
         input
             .classed('disabled', !!isSuggestion)
+            .attr('readonly', isSuggestion || null)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
 
-
-        if (field.id === 'brand') {
-            selection.call(isSuggestion ? _brandTip : _brandTip.destroy);
-        }
 
         if (field.type === 'tel' && nominatim && _entity) {
             var center = _entity.extent(context.graph()).center();
@@ -116,8 +113,10 @@ export function uiFieldText(field, context) {
                 // A "suggestion" preset (brand name)
                 // Put suggestion keys in `field.keys` so delete button can remove them all.
                 field.keys = Object.keys(preset.removeTags)
-                    .filter(function(k) { return k !== pKey; });
+                    .filter(function(k) { return k !== pKey && k !== 'name'; });
             }
+
+            selection.call(isSuggestion ? _brandTip : _brandTip.destroy);
         }
     }
 

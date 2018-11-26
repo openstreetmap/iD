@@ -28,6 +28,8 @@ export function uiFieldLocalized(field, context) {
     var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
+    var _selection = d3_select(null);
+    var _multilingual = [];
     var _isLocked = false;
     var _brandTip = tooltip().title(t('inspector.lock.brand')).placement('bottom');
     var _buttonTip = tooltip().title(t('translate.translate')).placement('left');
@@ -35,7 +37,7 @@ export function uiFieldLocalized(field, context) {
     var _entity;
 
 
-    function checkLocked() {
+    function calcLocked() {
         var preset = _entity && context.presets().match(_entity, context.graph());
         var isSuggestion = preset && preset.suggestion;
         var showsBrand = preset && preset.fields
@@ -44,8 +46,21 @@ export function uiFieldLocalized(field, context) {
     }
 
 
+    function calcMultilingual(tags) {
+        _multilingual = [];
+        for (var k in tags) {
+            var m = k.match(/^(.*):([a-zA-Z_-]+)$/);
+            if (m && m[1] === field.key && m[2]) {
+                _multilingual.push({ lang: m[2], value: tags[k] });
+            }
+        }
+        _multilingual.reverse();
+    }
+
+
     function localized(selection) {
-        checkLocked();
+        _selection = selection;
+        calcLocked();
         var preset = _entity && context.presets().match(_entity, context.graph());
 
         var wrap = selection.selectAll('.localized-input-wrap')
@@ -127,7 +142,7 @@ export function uiFieldLocalized(field, context) {
 
         input
             .classed('disabled', !!_isLocked)
-            .attr('readonly', _isLocked)
+            .attr('readonly', _isLocked || null)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
@@ -149,6 +164,10 @@ export function uiFieldLocalized(field, context) {
             .on('click', addNew);
 
 
+        if (_entity && !_multilingual.length) {
+            calcMultilingual(_entity.tags);
+        }
+
         localizedInputs = selection.selectAll('.localized-multilingual')
             .data([0]);
 
@@ -157,9 +176,12 @@ export function uiFieldLocalized(field, context) {
             .attr('class', 'localized-multilingual')
             .merge(localizedInputs);
 
+        localizedInputs
+            .call(renderMultilingual);
+
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!_isLocked)
-            .attr('readonly', _isLocked);
+            .attr('readonly', _isLocked || null);
 
 
 
@@ -202,17 +224,16 @@ export function uiFieldLocalized(field, context) {
             d3_event.preventDefault();
             if (_isLocked) return;
 
-            var data = localizedInputs.selectAll('div.entry').data();
             var defaultLang = utilDetect().locale.toLowerCase().split('-')[0];
-            var langExists = _find(data, function(datum) { return datum.lang === defaultLang;});
+            var langExists = _find(_multilingual, function(datum) { return datum.lang === defaultLang;});
             var isLangEn = defaultLang.indexOf('en') > -1;
             if (isLangEn || langExists) {
                 defaultLang = '';
             }
-            data.push({ lang: defaultLang, value: '' });
+            _multilingual.push({ lang: defaultLang, value: '' });
 
             localizedInputs
-                .call(renderMultilingual, data);
+                .call(renderMultilingual);
         }
 
 
@@ -284,9 +305,9 @@ export function uiFieldLocalized(field, context) {
     }
 
 
-    function renderMultilingual(selection, data) {
+    function renderMultilingual(selection) {
         var wraps = selection.selectAll('div.entry')
-            .data(data, function(d) { return d.lang; });
+            .data(_multilingual, function(d) { return d.lang; });
 
         wraps.exit()
             .transition()
@@ -310,6 +331,7 @@ export function uiFieldLocalized(field, context) {
 
                 var label = wrap
                     .append('label')
+                    .attr('class', 'form-label');
 
                 label
                     .append('span')
@@ -320,7 +342,7 @@ export function uiFieldLocalized(field, context) {
                     .append('div')
                     .attr('class', 'form-label-button-wrap')
                     .append('button')
-                    .attr('class', 'minor remove-icon')
+                    .attr('class', 'minor remove-icon-multilingual')
                     .on('click', function(d){
                         if (_isLocked) return;
                         d3_event.preventDefault();
@@ -395,16 +417,10 @@ export function uiFieldLocalized(field, context) {
 
         utilGetSetValue(input, tags[field.key] || '');
 
-        var postfixed = [];
-        for (var k in tags) {
-            var m = k.match(/^(.*):([a-zA-Z_-]+)$/);
-            if (m && m[1] === field.key && m[2]) {
-                postfixed.push({ lang: m[2], value: tags[k] });
-            }
-        }
+        calcMultilingual(tags);
 
-        localizedInputs
-            .call(renderMultilingual, postfixed.reverse());
+        _selection
+            .call(localized);
     };
 
 
@@ -416,6 +432,7 @@ export function uiFieldLocalized(field, context) {
     localized.entity = function(val) {
         if (!arguments.length) return _entity;
         _entity = val;
+        _multilingual = [];
         return localized;
     };
 

@@ -1743,6 +1743,11 @@ a.hide-toggle {
 
 /* Field - Localized Name
 ------------------------------------------------------- */
+.localized-input-wrap {
+    display: flex;
+    flex: 1 1 100%;
+}
+
 .form-field .localized-add {
     position: relative;
     border: 1px solid #ccc;
