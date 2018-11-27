@@ -129,4 +129,97 @@ describe('iD.svgLines', function () {
         });
     });
 
+    describe('oneway-markers', function() {
+        it('has marker layer for oneway ways', function() {
+            // use 1e-2 to make sure segments are long enough to get
+            // markers, but not so long that they get split and have
+            // multiple marker segments.
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+
+            var i_o = iD.osmWay({id: 'implied-oneway', tags: {waterway: 'stream'}, nodes: [a.id, b.id]});
+            var e_o = iD.osmWay({id: 'explicit-oneway', tags: {highway: 'residential', oneway: 'yes'}, nodes: [a.id, c.id]});
+            var e_b = iD.osmWay({id: 'explicit-backwards', tags: {highway: 'residential', oneway: '-1'}, nodes: [b.id, c.id]});
+
+            var graph = iD.coreGraph([a, b, c, i_o, e_o, e_b]);
+
+            surface.call(iD.svgLines(projection, context), graph, [i_o, e_o, e_b], all);
+
+            var selection = surface.selectAll('g.onewaygroup > path');
+
+            expect(selection.size()).to.eql(3);
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+        });
+
+        it('has two marker layers for alternating oneway ways', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+
+            var e_a = iD.osmWay({id: 'explicit-alternating', tags: {highway: 'residential', oneway: 'alternating'}, nodes: [a.id, b.id]});
+
+            var graph = iD.coreGraph([a, b, e_a]);
+
+            surface.call(iD.svgLines(projection, context), graph, [e_a], all);
+
+            var selection = surface.selectAll('g.onewaygroup > path');
+            expect(selection.size()).to.eql(2);
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+        });
+
+        it('has no marker layer for oneway=no ways', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+
+            var e_no = iD.osmWay({id: 'explicit-no-oneway', tags: {highway: 'residential', oneway: 'no'}, nodes: [a.id, b.id]});
+            var i_no = iD.osmWay({id: 'implied-no-oneway', tags: {highway: 'residential' }, nodes: [a.id, c.id]});
+
+            var graph = iD.coreGraph([a, b, c, e_no, i_no]);
+
+            surface.call(iD.svgLines(projection, context), graph, [i_no, e_no], all);
+            var selection = surface.selectAll('g.onewaygroup > path');
+            expect(selection.empty()).to.be.true;
+        });
+    });
+
+    describe('sided-markers', function() {
+        it('has marker layer for sided way', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+            var d = iD.osmNode({id: 'd', loc: [1e-2, 1e-2]});
+
+            var i_n = iD.osmWay({id: 'implied-natural', tags: {natural: 'cliff'}, nodes: [a.id, b.id]});
+            var i_nc = iD.osmWay({id: 'implied-coastline', tags: {natural: 'coastline'}, nodes: [a.id, c.id]});
+            var i_b = iD.osmWay({id: 'implied-barrier', tags: {barrier: 'city_wall'}, nodes: [a.id, d.id]});
+            var i_mm = iD.osmWay({id: 'implied-man_made', tags: {man_made: 'embankment'}, nodes: [b.id, c.id]});
+
+            var graph = iD.coreGraph([a, b, c, d, i_n, i_nc, i_b, i_mm]);
+
+            surface.call(iD.svgLines(projection, context), graph, [i_n, i_nc, i_b, i_mm], all);
+            var selection = surface.selectAll('g.sidedgroup > path');
+            expect(selection.size()).to.eql(4);
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-natural)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-coastline)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-barrier)');
+            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-man_made)');
+        });
+
+        it('has no marker layer for two_sided way', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+
+            var e_ts = iD.osmWay({id: 'explicit-two-sided', tags: {barrier: 'city_wall', two_sided: 'yes'}, nodes: [a.id, b.id]});
+
+            var graph = iD.coreGraph([a, b, e_ts]);
+
+            surface.call(iD.svgLines(projection, context), graph, [e_ts], all);
+            var selection = surface.selectAll('g.sidedgroup > path');
+            expect(selection.empty()).to.be.true;
+        });
+    });
 });

@@ -338,6 +338,71 @@ describe('iD.osmWay', function() {
         });
     });
 
+    describe('#sidednessIdentifier', function() {
+        it('returns tag when the tag has implied sidedness', function() {
+            expect(iD.Way({tags: { natural: 'cliff' }}).sidednessIdentifier()).to.eql('natural');
+            expect(iD.Way({tags: { natural: 'coastline' }}).sidednessIdentifier()).to.eql('coastline');
+            expect(iD.Way({tags: { barrier: 'retaining_wall' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(iD.Way({tags: { barrier: 'kerb' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(iD.Way({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(iD.Way({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).to.eql('barrier');
+            expect(iD.Way({tags: { man_made: 'embankment' }}).sidednessIdentifier()).to.eql('man_made');
+        });
+
+        it('returns null when tag does not have implied sidedness', function() {
+            expect(iD.Way({tags: { natural: 'ridge' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.Way({tags: { barrier: 'fence' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.Way({tags: { man_made: 'dyke' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.Way({tags: { highway: 'motorway' }}).sidednessIdentifier()).to.be.null;
+        });
+    });
+    describe('#isSided', function() {
+        it('returns false when the way has no tags', function() {
+            expect(iD.Way().isSided()).to.be.false;
+        });
+
+        it('returns false when the way has two_sided=yes', function() {
+            expect(iD.Way({tags: { two_sided: 'yes' }}).isSided()).to.be.false;
+        });
+
+        it('returns true when the tag has implied sidedness', function() {
+            expect(iD.Way({tags: { natural: 'cliff' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { natural: 'coastline' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'retaining_wall' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'kerb' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'guard_rail' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'city_wall' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { man_made: 'embankment' }}).isSided()).to.be.true;
+        });
+
+        it('returns false when two_sided=yes overrides tag with implied sidedness', function() {
+            expect(iD.Way({tags: { natural: 'cliff', two_sided: 'yes' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { natural: 'coastline', two_sided: 'yes' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { barrier: 'retaining_wall', two_sided: 'yes' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { barrier: 'kerb', two_sided: 'yes' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { barrier: 'guard_rail', two_sided: 'yes' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { barrier: 'city_wall', two_sided: 'yes' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { man_made: 'embankment', two_sided: 'yes' }}).isSided()).to.be.false;
+        });
+
+        it('returns true when two_sided=no is on tag with implied sidedness', function() {
+            expect(iD.Way({tags: { natural: 'cliff', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { natural: 'coastline', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'retaining_wall', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'kerb', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'guard_rail', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { barrier: 'city_wall', two_sided: 'no' }}).isSided()).to.be.true;
+            expect(iD.Way({tags: { man_made: 'embankment', two_sided: 'no' }}).isSided()).to.be.true;
+        });
+
+        it('returns false when the tag does not have implied sidedness', function() {
+            expect(iD.Way({tags: { natural: 'ridge' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { barrier: 'fence' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { man_made: 'dyke' }}).isSided()).to.be.false;
+            expect(iD.Way({tags: { highway: 'motorway' }}).isSided()).to.be.false;
+        });
+    });
+
     describe('#isArea', function() {
         before(function() {
             iD.Context();

@@ -7,7 +7,7 @@ import _map from 'lodash-es/map';
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgOneWaySegments,
+    svgMarkerSegments,
     svgPath,
     svgRelationMemberTags,
     svgSegmentWay,
@@ -148,11 +148,45 @@ export function svgLines(projection, context) {
             };
         }
 
+        function addMarkers(layergroup, pathclass, groupclass, groupdata, marker) {
+            var markergroup = layergroup
+                .selectAll('g.' + groupclass)
+                .data([pathclass]);
+
+            markergroup = markergroup.enter()
+                .append('g')
+                .attr('class', groupclass)
+                .merge(markergroup);
+
+            var markers = markergroup
+                .selectAll('path')
+                .filter(filter)
+                .data(
+                    function data() { return groupdata[this.parentNode.__data__] || []; },
+                    function key(d) { return [d.id, d.index]; }
+                );
+
+            markers.exit()
+                .remove();
+
+            markers = markers.enter()
+                .append('path')
+                .attr('class', pathclass)
+                .attr('marker-mid', marker)
+                .merge(markers)
+                .attr('d', function(d) { return d.d; });
+
+            if (detected.ie) {
+                markers.each(function() { this.parentNode.insertBefore(this, this); });
+            }
+        }
+
 
         var getPath = svgPath(projection, graph);
         var ways = [];
         var pathdata = {};
         var onewaydata = {};
+        var sideddata = {};
         var oldMultiPolygonOuters = {};
 
         for (var i = 0; i < entities.length; i++) {
@@ -170,8 +204,21 @@ export function svgLines(projection, context) {
         pathdata = _groupBy(ways, function(way) { return way.layer(); });
 
         _forOwn(pathdata, function(v, k) {
-            var arr = _filter(v, function(d) { return d.isOneWay(); });
-            onewaydata[k] = _flatten(_map(arr, svgOneWaySegments(projection, graph, 35)));
+            var onewayArr = _filter(v, function(d) { return d.isOneWay(); });
+            var onewaySegments = svgMarkerSegments(
+                projection, graph, 35,
+                function shouldReverse(entity) { return entity.tags.oneway === '-1'; },
+                function bothDirections(entity) {
+                    return entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating';
+                });
+            onewaydata[k] = _flatten(_map(onewayArr, onewaySegments));
+
+            var sidedArr = _filter(v, function(d) { return d.isSided(); });
+            var sidedSegments = svgMarkerSegments(
+                projection, graph, 30,
+                function shouldReverse() { return false; },
+                function bothDirections() { return false; });
+            sideddata[k] = _flatten(_map(sidedArr, sidedSegments));
         });
 
 
@@ -212,37 +259,12 @@ export function svgLines(projection, context) {
             layergroup.selectAll('g.line-stroke-highlighted')
                 .call(drawLineGroup, 'stroke', true);
 
-
-            var onewaygroup = layergroup
-                .selectAll('g.onewaygroup')
-                .data(['oneway']);
-
-            onewaygroup = onewaygroup.enter()
-                .append('g')
-                .attr('class', 'onewaygroup')
-                .merge(onewaygroup);
-
-            var oneways = onewaygroup
-                .selectAll('path')
-                .filter(filter)
-                .data(
-                    function data() { return onewaydata[this.parentNode.__data__] || []; },
-                    function key(d) { return [d.id, d.index]; }
-                );
-
-            oneways.exit()
-                .remove();
-
-            oneways = oneways.enter()
-                .append('path')
-                .attr('class', 'oneway')
-                .attr('marker-mid', 'url(#oneway-marker)')
-                .merge(oneways)
-                .attr('d', function(d) { return d.d; });
-
-            if (detected.ie) {
-                oneways.each(function() { this.parentNode.insertBefore(this, this); });
-            }
+            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#oneway-marker)');
+            addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
+                       function marker(d) {
+                           var category = graph.entity(d.id).sidednessIdentifier();
+                           return 'url(#sided-marker-' + category + ')';
+                       });
         });
 
         // Draw touch targets..
