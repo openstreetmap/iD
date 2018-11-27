@@ -362,7 +362,7 @@ export function uiPresetList(context) {
                     .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', item.choose)
-                .on('keydown', itemKeydown)
+                .on('keydown', itemKeydown);
 
             var label = button
                 .append('div')
@@ -370,7 +370,7 @@ export function uiPresetList(context) {
                 .append('div')
                 .attr('class', 'label-inner');
 
-            var parts = label.selectAll('.namepart')
+            label.selectAll('.namepart')
                 .data(preset.name().split(' - '))
                 .enter()
                 .append('div')
