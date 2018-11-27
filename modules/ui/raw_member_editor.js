@@ -145,8 +145,9 @@ export function uiRawMemberEditor(context) {
                             utilHighlightEntity(d.id, false, context);
                         });
 
-                        var label = d3_select(this).append('label')
-                            .attr('class', 'form-label');
+                        var label = d3_select(this)
+                            .append('label')
+                            .attr('class', 'form-field-label');
 
                         var labelLink = label
                             .append('span')
@@ -155,21 +156,21 @@ export function uiRawMemberEditor(context) {
                             .attr('href', '#')
                             .on('click', selectMember);
 
-                        labelLink.append('span')
+                        labelLink
+                            .append('span')
                             .attr('class', 'member-entity-type')
                             .text(function(d) {
                                 var matched = context.presets().match(d.member, context.graph());
                                 return (matched && matched.name()) || utilDisplayType(d.member.id);
                             });
 
-                        labelLink.append('span')
+                        labelLink
+                            .append('span')
                             .attr('class', 'member-entity-name')
                             .text(function(d) { return utilDisplayName(d.member); });
 
-                        var buttonWrap = label.append('div')
-                            .attr('class', 'form-label-button-wrap');
-
-                        buttonWrap.append('button')
+                        label
+                            .append('button')
                             .attr('class', 'download-icon')
                             .attr('title', t('icons.zoom_to'))
                             .attr('tabindex', -1)
@@ -177,25 +178,26 @@ export function uiRawMemberEditor(context) {
                             .on('click', zoomToMember);
 
                     } else {
-                        var incompleteLabel = d3_select(this).append('label')
-                            .attr('class', 'form-label');
+                        var incompleteLabel = d3_select(this)
+                            .append('label')
+                            .attr('class', 'form-field-label');
 
                         var labelText = incompleteLabel
                             .append('span')
                             .attr('class', 'label-text');
 
-                        labelText.append('span')
+                        labelText
+                            .append('span')
                             .attr('class', 'member-entity-type')
                             .text(t('inspector.'+d.type, { id: d.id }));
 
-                        labelText.append('span')
+                        labelText
+                            .append('span')
                             .attr('class', 'member-entity-name')
                             .text(t('inspector.incomplete', { id: d.id }));
 
-                        var wrap = incompleteLabel.append('div')
-                            .attr('class', 'form-label-button-wrap');
-
-                        wrap.append('button')
+                        incompleteLabel
+                            .append('button')
                             .attr('class', 'download-icon')
                             .attr('title', t('icons.download'))
                             .attr('tabindex', -1)

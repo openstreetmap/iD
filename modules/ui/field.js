@@ -106,20 +106,16 @@ export function uiField(context, presetField, entity, options) {
         if (options.wrap) {
             var label = enter
                 .append('label')
-                .attr('class', 'form-label')
+                .attr('class', 'form-field-label')
                 .attr('for', function(d) { return 'preset-input-' + d.safeid; });
-                
+
             label
                 .append('span')
                 .attr('class', 'label-text')
                 .text(function(d) { return d.label(); });
 
-            var wrap = label
-                .append('div')
-                .attr('class', 'form-label-button-wrap');
-
             if (options.remove) {
-                wrap
+                label
                     .append('button')
                     .attr('class', 'remove-icon')
                     .attr('title', t('icons.remove'))
@@ -128,7 +124,7 @@ export function uiField(context, presetField, entity, options) {
             }
 
             if (options.revert) {
-                wrap
+                label
                     .append('button')
                     .attr('class', 'modified-icon')
                     .attr('title', t('icons.undo'))
@@ -142,10 +138,10 @@ export function uiField(context, presetField, entity, options) {
         container = container
             .merge(enter);
 
-        container.selectAll('.form-label-button-wrap .remove-icon')
+        container.selectAll('.form-field-label > .remove-icon')
             .on('click', remove);
 
-        container.selectAll('.form-label-button-wrap .modified-icon')
+        container.selectAll('.form-field-label > .modified-icon')
             .on('click', revert);
 
         container
@@ -179,7 +175,7 @@ export function uiField(context, presetField, entity, options) {
                 if (help) {
                     d3_select(this)
                         .call(help.body)
-                        .select('.form-label-button-wrap')
+                        .select('.form-field-label')
                         .call(help.button);
                 }
 
@@ -187,7 +183,7 @@ export function uiField(context, presetField, entity, options) {
                 if (reference) {
                     d3_select(this)
                         .call(reference.body)
-                        .select('.form-label-button-wrap')
+                        .select('.form-field-label')
                         .call(reference.button);
                 }
 

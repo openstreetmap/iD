@@ -1237,7 +1237,7 @@ a.hide-toggle {
     margin-bottom: 0;
 }
 
-.form-label {
+.form-field-label {
     position: relative;
     font-weight: bold;
     color: #333;
@@ -1248,49 +1248,45 @@ a.hide-toggle {
     flex: 1 1 100%;
     display: flex;
 }
-.form-label .label-text {
+.form-field-label .label-text {
     flex: 1 1 auto;
     padding: 5px 0 5px 10px;
 }
-[dir='rtl'] .form-label .label-text {
+[dir='rtl'] .form-field-label .label-text {
     padding: 5px 10px 5px 0;
 }
-.form-label-button-wrap {
-    background: transparent;
-    flex: 0 1 auto;
-}
 
-.form-label-button-wrap .tag-reference-button {
+.form-field-label .tag-reference-button {
     border-radius: 0 3px 0 0;
 }
 
-.form-label-button-wrap .icon {
+.form-field-label .icon {
     opacity: .5;
 }
 
-.form-label button {
+.form-field-label button {
     border-left: 1px solid #ccc;
     width: 32px;
     height: 100%;
     border-radius: 0;
     background: #f6f6f6;
 }
-[dir='rtl'] .form-label button {
+[dir='rtl'] .form-field-label button {
     border-left: none;
     border-right: 1px solid #ccc;
     border-radius: 4px 0 0 0;
 }
-.form-label button:hover {
+.form-field-label button:hover {
     background: #f1f1f1;
 }
 
-.form-label .modified-icon,
+.form-field-label .modified-icon,
 .form-field .remove-icon {
     display: none;
 }
 
-.modified .form-label .modified-icon,
-.present .form-label .remove-icon {
+.modified .form-field-label .modified-icon,
+.present .form-field-label .remove-icon {
     display: inline-block;
 }
 
@@ -1392,7 +1388,7 @@ a.hide-toggle {
 .inspector-hover .form-field-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
-.inspector-hover .form-label-button-wrap,
+.inspector-hover .form-field-label button,
 .inspector-hover .tag-reference-button,
 .inspector-hover .footer * {
     opacity: 0;
@@ -1813,7 +1809,7 @@ a.hide-toggle {
 }
 
 button.localized-add.disabled,
-.localized-multilingual .form-label button.disabled,
+.localized-multilingual .form-field-label button.disabled,
 .localized-multilingual .localized-lang.disabled,
 .localized-multilingual .localized-value.disabled {
     color: #777;
@@ -1960,19 +1956,10 @@ button.localized-add.disabled,
 .form-field-comment:not(.present) #preset-input-comment {
     border-color: rgb(230, 100, 100);
 }
-
-.form-field-comment:not(.present) .form-label {
+.form-field-comment:not(.present) .form-field-label {
     border-color: rgb(230, 100, 100);
     background: rgba(230, 100, 100, 0.2);
 }
-
-.form-field-comment:not(.present) .form-label {
-}
-
-.form-field-comment:not(.present) .form-label-button-wrap {
-    border-color: rgb(230, 100, 100);
-}
-
 .form-field-comment:not(.present) button {
     border-color: rgb(230, 100, 100);
 }

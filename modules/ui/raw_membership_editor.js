@@ -189,7 +189,7 @@ export function uiRawMembershipEditor(context) {
 
             var label = enter
                 .append('label')
-                .attr('class', 'form-label')
+                .attr('class', 'form-field-label')
                 .append('span')
                 .attr('class', 'label-text')
                 .append('a')

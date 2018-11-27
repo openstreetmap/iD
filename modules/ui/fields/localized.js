@@ -335,7 +335,7 @@ export function uiFieldLocalized(field, context) {
 
                 var label = wrap
                     .append('label')
-                    .attr('class', 'form-label');
+                    .attr('class', 'form-field-label');
 
                 label
                     .append('span')
@@ -343,8 +343,6 @@ export function uiFieldLocalized(field, context) {
                     .text(t('translate.localized_translation_label'));
 
                 label
-                    .append('div')
-                    .attr('class', 'form-label-button-wrap')
                     .append('button')
                     .attr('class', 'minor remove-icon-multilingual')
                     .on('click', function(d){
