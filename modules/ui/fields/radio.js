@@ -14,16 +14,16 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 
 export function uiFieldRadio(field, context) {
-    var dispatch = d3_dispatch('change'),
-        placeholder = d3_select(null),
-        wrap = d3_select(null),
-        labels = d3_select(null),
-        radios = d3_select(null),
-        radioData = _clone(field.options || field.keys),
-        typeField,
-        layerField,
-        oldType = {},
-        entity;
+    var dispatch = d3_dispatch('change');
+    var placeholder = d3_select(null);
+    var wrap = d3_select(null);
+    var labels = d3_select(null);
+    var radios = d3_select(null);
+    var radioData = _clone(field.options || field.keys);
+    var typeField;
+    var layerField;
+    var _oldType = {};
+    var _entity;
 
 
     function selectedKey() {
@@ -35,12 +35,12 @@ export function uiFieldRadio(field, context) {
     function radio(selection) {
         selection.classed('preset-radio', true);
 
-        wrap = selection.selectAll('.preset-input-wrap')
+        wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         var enter = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap toggle-list');
+            .attr('class', 'form-field-input-wrap toggle-list');
 
         enter
             .append('span')
@@ -79,10 +79,10 @@ export function uiFieldRadio(field, context) {
 
 
     function structureExtras(selection, tags) {
-        var selected = selectedKey(),
-            type = context.presets().field(selected),
-            layer = context.presets().field('layer'),
-            showLayer = (selected === 'bridge' || selected === 'tunnel');
+        var selected = selectedKey();
+        var type = context.presets().field(selected);
+        var layer = context.presets().field('layer');
+        var showLayer = (selected === 'bridge' || selected === 'tunnel');
 
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
@@ -107,7 +107,7 @@ export function uiFieldRadio(field, context) {
         // Type
         if (type) {
             if (!typeField || typeField.id !== selected) {
-                typeField = uiField(context, type, entity, { wrap: false })
+                typeField = uiField(context, type, _entity, { wrap: false })
                     .on('change', changeType);
             }
             typeField.tags(tags);
@@ -150,7 +150,7 @@ export function uiFieldRadio(field, context) {
         // Layer
         if (layer && showLayer) {
             if (!layerField) {
-                layerField = uiField(context, layer, entity, { wrap: false })
+                layerField = uiField(context, layer, _entity, { wrap: false })
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
@@ -199,7 +199,7 @@ export function uiFieldRadio(field, context) {
 
         var val = t[key];
         if (val !== 'no') {
-            oldType[key] = val;
+            _oldType[key] = val;
         }
 
         if (field.type === 'structureRadio') {
@@ -233,8 +233,8 @@ export function uiFieldRadio(field, context) {
 
 
     function changeRadio() {
-        var t = {},
-            activeKey;
+        var t = {};
+        var activeKey;
 
         if (field.key) {
             t[field.key] = undefined;
@@ -247,7 +247,7 @@ export function uiFieldRadio(field, context) {
             if (field.key) {
                 if (active) t[field.key] = d;
             } else {
-                var val = oldType[activeKey] || 'yes';
+                var val = _oldType[activeKey] || 'yes';
                 t[d] = active ? val : undefined;
             }
         });
@@ -284,14 +284,14 @@ export function uiFieldRadio(field, context) {
             placeholder.text(t('inspector.none'));
         } else {
             placeholder.text(selection.attr('value'));
-            oldType[selection.datum()] = tags[selection.datum()];
+            _oldType[selection.datum()] = tags[selection.datum()];
         }
 
         if (field.type === 'structureRadio') {
             // For waterways without a tunnel tag, set 'culvert' as
-            // the oldType to default to if the user picks 'tunnel'
-            if (!!tags.waterway && !oldType.tunnel) {
-                oldType.tunnel = 'culvert';
+            // the _oldType to default to if the user picks 'tunnel'
+            if (!!tags.waterway && !_oldType.tunnel) {
+                _oldType.tunnel = 'culvert';
             }
 
             wrap.call(structureExtras, tags);
@@ -304,10 +304,10 @@ export function uiFieldRadio(field, context) {
     };
 
 
-    radio.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
-        oldType = {};
+    radio.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
+        _oldType = {};
         return radio;
     };
 

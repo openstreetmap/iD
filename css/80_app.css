@@ -1294,7 +1294,7 @@ a.hide-toggle {
 .form-field > input,
 .form-field > textarea,
 .form-field .localized-input-wrap > input,
-.form-field .preset-input-wrap {
+.form-field .form-field-input-wrap {
     border: 1px solid #ccc;
     min-height: 30px;
     border-top: 0;
@@ -1336,7 +1336,7 @@ a.hide-toggle {
 /* Inspector (hover styles)
 ------------------------------------------------------- */
 .inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap .label,
+.inspector-hover .form-field-input-wrap .label,
 .inspector-hover .form-field-multicombo,
 .inspector-hover .structure-extras-wrap,
 .inspector-hover .comments-container .comment,
@@ -1494,7 +1494,7 @@ a.hide-toggle {
     margin-right: 10px;
 }
 
-.preset-input-wrap .label {
+.form-field-input-wrap .label {
     height: 30px;
     background: #F6F6F6;
     padding: 5px 10px;
@@ -1504,19 +1504,19 @@ a.hide-toggle {
 /* Field - Access, Cycleway, Structure
 ------------------------------------------------------- */
 .structure-extras-wrap li,
-.form-field-cycleway .preset-input-wrap li,
-.form-field-access .preset-input-wrap li {
+.form-field-cycleway .form-field-input-wrap li,
+.form-field-access .form-field-input-wrap li {
     border-bottom: 1px solid #ccc;
     display: flex;
 }
 .structure-extras-wrap li:last-child,
-.form-field-cycleway .preset-input-wrap li:last-child,
-.form-field-access .preset-input-wrap li:last-child {
+.form-field-cycleway .form-field-input-wrap li:last-child,
+.form-field-access .form-field-input-wrap li:last-child {
     border-bottom: 0;
 }
 .structure-extras-wrap li > *,
-.form-field-cycleway .preset-input-wrap li > *,
-.form-field-access .preset-input-wrap li > * {
+.form-field-cycleway .form-field-input-wrap li > *,
+.form-field-access .form-field-input-wrap li > * {
     flex: 1;
 }
 .structure-input-type-wrap input,
@@ -1547,7 +1547,7 @@ a.hide-toggle {
     border-right-width: 1px;
 }
 
-.preset-input-wrap li:last-child input {
+.form-field-input-wrap li:last-child input {
     border-bottom-right-radius: 4px;
 }
 

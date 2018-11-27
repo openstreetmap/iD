@@ -92,12 +92,12 @@ export function uiFieldCheck(field, context) {
         checkImpliedYes();
         selection.classed('checkselect', 'true');
 
-        label = selection.selectAll('.preset-input-wrap')
+        label = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         var enter = label.enter()
             .append('label')
-            .attr('class', 'preset-input-wrap');
+            .attr('class', 'form-field-input-wrap');
 
         enter
             .append('input')

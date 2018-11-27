@@ -14,15 +14,15 @@ import {
 
 
 export function uiFieldMaxspeed(field, context) {
-    var dispatch = d3_dispatch('change'),
-        entity,
-        isImperial,
-        unitInput = d3_select(null),
-        input = d3_select(null),
-        combobox;
+    var dispatch = d3_dispatch('change');
+    var _entity;
+    var isImperial;
+    var unitInput = d3_select(null);
+    var input = d3_select(null);
+    var combobox;
 
-    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
+    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+    var imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
 
     function maxspeed(selection) {
@@ -50,11 +50,11 @@ export function uiFieldMaxspeed(field, context) {
             .on('blur', change);
 
         var loc;
-        if (entity.type === 'node') {
-            loc = entity.loc;
+        if (_entity.type === 'node') {
+            loc = _entity.loc;
         }
         else {
-            var childNodes = context.graph().childNodes(context.entity(entity.id));
+            var childNodes = context.graph().childNodes(context.entity(_entity.id));
             loc = childNodes[~~(childNodes.length/2)].loc;
         }
 
@@ -103,8 +103,8 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function change() {
-        var tag = {},
-            value = utilGetSetValue(input);
+        var tag = {};
+        var value = utilGetSetValue(input);
 
         if (!value) {
             tag[field.key] = undefined;
@@ -138,8 +138,8 @@ export function uiFieldMaxspeed(field, context) {
     };
 
 
-    maxspeed.entity = function(_) {
-        entity = _;
+    maxspeed.entity = function(val) {
+        _entity = val;
     };
 
 

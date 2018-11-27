@@ -24,24 +24,26 @@ import {
 
 
 export function uiFieldAddress(field, context) {
-    var dispatch = d3_dispatch('init', 'change'),
-        nominatim = services.geocoder,
-        wrap = d3_select(null),
-        isInitialized = false,
-        entity;
+    var dispatch = d3_dispatch('init', 'change');
+    var nominatim = services.geocoder;
+    var wrap = d3_select(null);
+    var _isInitialized = false;
+    var _entity;
 
     function getNearStreets() {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
+        var extent = _entity.extent(context.graph());
+        var l = extent.center();
+        var box = geoExtent(l).padByMeters(200);
 
         var streets = context.intersects(box)
             .filter(isAddressable)
             .map(function(d) {
                 var loc = context.projection([
                     (extent[0][0] + extent[1][0]) / 2,
-                    (extent[0][1] + extent[1][1]) / 2]),
-                    choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
+                    (extent[0][1] + extent[1][1]) / 2
+                ]);
+                var choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
+
                 return {
                     title: d.tags.name,
                     value: d.tags.name,
@@ -61,9 +63,9 @@ export function uiFieldAddress(field, context) {
 
 
     function getNearCities() {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
+        var extent = _entity.extent(context.graph());
+        var l = extent.center();
+        var box = geoExtent(l).padByMeters(200);
 
         var cities = context.intersects(box)
             .filter(isAddressable)
@@ -99,14 +101,12 @@ export function uiFieldAddress(field, context) {
     }
 
     function getNearValues(key) {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
+        var extent = _entity.extent(context.graph());
+        var l = extent.center();
+        var box = geoExtent(l).padByMeters(200);
 
         var results = context.intersects(box)
-            .filter(function hasTag(d) {
-                return d.tags[key];
-            })
+            .filter(function hasTag(d) { return d.tags[key]; })
             .map(function(d) {
                 return {
                     title: d.tags[key],
@@ -159,8 +159,8 @@ export function uiFieldAddress(field, context) {
             .append('input')
             .property('type', 'text')
             .attr('placeholder', function (d) {
-                var localkey = d.id + '!' + countryCode.toLowerCase(),
-                    tkey = field.strings.placeholders[localkey] ? localkey : d.id;
+                var localkey = d.id + '!' + countryCode.toLowerCase();
+                var tkey = field.strings.placeholders[localkey] ? localkey : d.id;
                 return field.t('placeholders.' + tkey);
             })
             .attr('class', function (d) { return 'addr-' + d.id; })
@@ -200,23 +200,23 @@ export function uiFieldAddress(field, context) {
             .on('input', change(true));
 
         dispatch.call('init');
-        isInitialized = true;
+        _isInitialized = true;
     }
 
 
     function address(selection) {
-        isInitialized = false;
+        _isInitialized = false;
 
-        wrap = selection.selectAll('.preset-input-wrap')
+        wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
+            .attr('class', 'form-field-input-wrap')
             .merge(wrap);
 
-        if (nominatim && entity) {
-            var center = entity.extent(context.graph()).center();
+        if (nominatim && _entity) {
+            var center = _entity.extent(context.graph()).center();
             nominatim.countryCode(center, initCallback);
         }
     }
@@ -243,15 +243,15 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    address.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+    address.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
         return address;
     };
 
 
     address.tags = function(tags) {
-        if (isInitialized) {
+        if (_isInitialized) {
             updateTags(tags);
         } else {
             dispatch.on('init', function () {

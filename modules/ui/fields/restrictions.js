@@ -102,12 +102,12 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-        var wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
+            .attr('class', 'form-field-input-wrap')
             .merge(wrap);
 
         var container = wrap.selectAll('.restriction-container')

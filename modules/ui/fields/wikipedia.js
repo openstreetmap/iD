@@ -24,14 +24,14 @@ import {
 
 
 export function uiFieldWikipedia(field, context) {
-    var dispatch = d3_dispatch('change'),
-        wikipedia = services.wikipedia,
-        wikidata = services.wikidata,
-        link = d3_select(null),
-        lang = d3_select(null),
-        title = d3_select(null),
-        wikiURL = '',
-        entity;
+    var dispatch = d3_dispatch('change');
+    var wikipedia = services.wikipedia;
+    var wikidata = services.wikidata;
+    var link = d3_select(null);
+    var lang = d3_select(null);
+    var title = d3_select(null);
+    var _wikiURL = '';
+    var _entity;
 
 
     function wiki(selection) {
@@ -53,7 +53,7 @@ export function uiFieldWikipedia(field, context) {
             .container(context.container())
             .fetcher(function(value, cb) {
                 if (!value) {
-                    value = context.entity(entity.id).tags.name || '';
+                    value = context.entity(_entity.id).tags.name || '';
                 }
 
                 var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
@@ -114,7 +114,7 @@ export function uiFieldWikipedia(field, context) {
         link
             .on('click', function() {
                 d3_event.preventDefault();
-                if (wikiURL) window.open(wikiURL, '_blank');
+                if (_wikiURL) window.open(_wikiURL, '_blank');
             });
     }
 
@@ -144,10 +144,10 @@ export function uiFieldWikipedia(field, context) {
 
 
     function change(skipWikidata) {
-        var value = utilGetSetValue(title),
-            m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
-            l = m && _find(dataWikipedia, function(d) { return m[1] === d[2]; }),
-            syncTags = {};
+        var value = utilGetSetValue(title);
+        var m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/);
+        var l = m && _find(dataWikipedia, function(d) { return m[1] === d[2]; });
+        var syncTags = {};
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
@@ -180,8 +180,8 @@ export function uiFieldWikipedia(field, context) {
         if (skipWikidata || !value || !language()[2]) return;
 
         // attempt asynchronous update of wikidata tag..
-        var initGraph = context.graph(),
-            initEntityId = entity.id;
+        var initGraph = context.graph();
+        var initEntityID = _entity.id;
 
         wikidata.itemsByTitle(language()[2], value, function(title, data) {
             // If graph has changed, we can't apply this update.
@@ -191,13 +191,13 @@ export function uiFieldWikipedia(field, context) {
 
             var qids = Object.keys(data);
             var value = qids && _find(qids, function(id) { return id.match(/^Q\d+$/); });
-            var currTags = _clone(context.entity(initEntityId).tags);
+            var currTags = _clone(context.entity(initEntityID).tags);
 
             currTags.wikidata = value;
 
             // Coalesce the update of wikidata tag into the previous tag change
             context.overwrite(
-                actionChangeTags(initEntityId, currTags),
+                actionChangeTags(initEntityID, currTags),
                 context.history().undoAnnotation()
             );
 
@@ -208,10 +208,10 @@ export function uiFieldWikipedia(field, context) {
 
 
     wiki.tags = function(tags) {
-        var value = tags[field.key] || '',
-            m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
-            l = m && _find(dataWikipedia, function(d) { return m[1] === d[2]; }),
-            anchor = m && m[3];
+        var value = tags[field.key] || '';
+        var m = value.match(/([^:]+):([^#]+)(?:#(.+))?/);
+        var l = m && _find(dataWikipedia, function(d) { return m[1] === d[2]; });
+        var anchor = m && m[3];
 
         // value in correct format
         if (l) {
@@ -225,7 +225,7 @@ export function uiFieldWikipedia(field, context) {
                     anchor = anchor.replace(/ /g, '_');
                 }
             }
-            wikiURL = 'https://' + m[1] + '.wikipedia.org/wiki/' +
+            _wikiURL = 'https://' + m[1] + '.wikipedia.org/wiki/' +
                 m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : '');
 
         // unrecognized value format
@@ -233,17 +233,17 @@ export function uiFieldWikipedia(field, context) {
             utilGetSetValue(title, value);
             if (value && value !== '') {
                 utilGetSetValue(lang, '');
-                wikiURL = 'https://en.wikipedia.org/wiki/Special:Search?search=' + value;
+                _wikiURL = 'https://en.wikipedia.org/wiki/Special:Search?search=' + value;
             } else {
-                wikiURL = '';
+                _wikiURL = '';
             }
         }
     };
 
 
-    wiki.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+    wiki.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
         return wiki;
     };
 

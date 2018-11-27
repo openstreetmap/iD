@@ -1,5 +1,3 @@
-import _forEach from 'lodash-es/forEach';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
@@ -12,16 +10,16 @@ import {
 
 
 export function uiFieldAccess(field, context) {
-    var dispatch = d3_dispatch('change'),
-        items;
+    var dispatch = d3_dispatch('change');
+    var items = d3_select(null);
 
     function access(selection) {
-        var wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
+            .attr('class', 'form-field-input-wrap')
             .append('ul')
             .merge(wrap);
 
@@ -215,9 +213,12 @@ export function uiFieldAccess(field, context) {
         items.selectAll('#preset-input-access-access')
             .attr('placeholder', 'yes');
 
-        _forEach(placeholders[tags.highway], function(v, k) {
+        var which = tags.highway;
+        var keys = Object.keys(placeholders[which]);
+        keys.forEach(function(k) {
+            var v = placeholders[which][k];
             items.selectAll('#preset-input-access-' + k)
-                .attr('placeholder', function() { return (tags.access || v); });
+                .attr('placeholder', tags.access || v);
         });
     };
 
