@@ -10,8 +10,8 @@ import {
 
 
 export function uiFieldTextarea(field) {
-    var dispatch = d3_dispatch('change'),
-        input = d3_select(null);
+    var dispatch = d3_dispatch('change');
+    var input = d3_select(null);
 
 
     function textarea(selection) {
