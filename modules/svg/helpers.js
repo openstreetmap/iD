@@ -63,7 +63,9 @@ export function svgPassiveVertex(node, graph, activeID) {
 }
 
 
-export function svgOneWaySegments(projection, graph, dt) {
+export function svgMarkerSegments(projection, graph, dt,
+                                  shouldReverse,
+                                  bothDirections) {
     return function(entity) {
         var i = 0;
         var offset = dt;
@@ -72,11 +74,9 @@ export function svgOneWaySegments(projection, graph, dt) {
         var coordinates = graph.childNodes(entity).map(function(n) { return n.loc; });
         var a, b;
 
-        if (entity.tags.oneway === '-1') {
+        if (shouldReverse(entity)) {
             coordinates.reverse();
         }
-
-        var isReversible = (entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating');
 
         d3_geoStream({
             type: 'LineString',
@@ -116,7 +116,7 @@ export function svgOneWaySegments(projection, graph, dt) {
                         }
                         segments.push({ id: entity.id, index: i++, d: segment });
 
-                        if (isReversible) {
+                        if (bothDirections(entity)) {
                             segment = '';
                             for (j = coord.length - 1; j >= 0; j--) {
                                 segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];

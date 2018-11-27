@@ -205,7 +205,8 @@ text {
 }
 
 .onewaygroup path.oneway,
-.viewfieldgroup path.viewfield {
+.viewfieldgroup path.viewfield,
+.sidedgroup path.sided {
     stroke-width: 6px;
 }
 
