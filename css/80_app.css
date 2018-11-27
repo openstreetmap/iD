@@ -1092,6 +1092,9 @@ a.hide-toggle {
 }
 
 .preset-list-button .label {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
     background-color: #f6f6f6;
     text-align: left;
     position: absolute;
@@ -1100,10 +1103,6 @@ a.hide-toggle {
     right: 0;
     padding: 5px 10px;
     left: 60px;
-    line-height: 50px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
     border-radius: 0 3px 3px 0;
 }
@@ -1114,6 +1113,21 @@ a.hide-toggle {
     border-left: none;
     border-right: 1px solid rgba(0, 0, 0, .1);
     border-radius: 3px 0 0 3px;
+}
+
+.preset-list-button .label-inner {
+    width: 100%;
+}
+.preset-list-button .label-inner .namepart {
+    height: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 30px;
+}
+[dir='rtl'] .preset-list-button .label-inner .namepart {
+    padding-right: 0;
+    padding-left: 30px;
 }
 
 .preset-list-button:hover .label,
@@ -1146,7 +1160,7 @@ a.hide-toggle {
 
 .current .preset-list-button,
 .current .preset-list-button .label {
-    background-color: #E8EBFF;
+    background-color: #e8ebff;
 }
 
 .category .preset-list-button:after,
