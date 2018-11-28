@@ -135,7 +135,7 @@ export function uiRawTagEditor(context) {
         innerWrap
             .append('button')
             .attr('tabindex', -1)
-            .attr('class', 'remove minor')
+            .attr('class', 'form-field-button remove')
             .call(svgIcon('#iD-operation-delete'));
 
 

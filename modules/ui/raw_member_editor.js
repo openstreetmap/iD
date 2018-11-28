@@ -220,7 +220,7 @@ export function uiRawMemberEditor(context) {
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('title', t('icons.remove'))
-                .attr('class', 'remove button-input-action member-delete minor')
+                .attr('class', 'remove form-field-button member-delete')
                 .on('click', deleteMember)
                 .call(svgIcon('#iD-operation-delete'));
 

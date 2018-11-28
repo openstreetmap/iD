@@ -222,7 +222,7 @@ export function uiRawMembershipEditor(context) {
             enter
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'remove button-input-action member-delete minor')
+                .attr('class', 'remove form-field-button member-delete')
                 .on('click', deleteMembership)
                 .call(svgIcon('#iD-operation-delete'));
 
@@ -259,7 +259,7 @@ export function uiRawMembershipEditor(context) {
             enter
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'remove button-input-action member-delete minor')
+                .attr('class', 'remove form-field-button member-delete')
                 .on('click', deleteMembership)
                 .call(svgIcon('#iD-operation-delete'));
 

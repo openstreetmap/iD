@@ -27,7 +27,6 @@ export function uiFieldWikipedia(field, context) {
     var dispatch = d3_dispatch('change');
     var wikipedia = services.wikipedia;
     var wikidata = services.wikidata;
-    var link = d3_select(null);
     var lang = d3_select(null);
     var title = d3_select(null);
     var _wikiURL = '';
@@ -65,7 +64,25 @@ export function uiFieldWikipedia(field, context) {
             });
 
 
-        lang = selection.selectAll('input.wiki-lang')
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+
+        var langRow = wrap.selectAll('.wiki-lang-container')
+            .data([0]);
+
+        langRow = langRow.enter()
+            .append('div')
+            .attr('class', 'form-row-container wiki-lang-container')
+            .merge(langRow)
+
+
+        lang = langRow.selectAll('input.wiki-lang')
             .data([0]);
 
         lang = lang.enter()
@@ -84,7 +101,15 @@ export function uiFieldWikipedia(field, context) {
             .on('change', changeLang);
 
 
-        title = selection.selectAll('input.wiki-title')
+        var titleRow = wrap.selectAll('.wiki-title-container')
+            .data([0]);
+
+        titleRow = titleRow.enter()
+            .append('div')
+            .attr('class', 'form-row-container wiki-title-container')
+            .merge(titleRow)
+
+        title = titleRow.selectAll('input.wiki-title')
             .data([0]);
 
         title = title.enter()
@@ -101,12 +126,12 @@ export function uiFieldWikipedia(field, context) {
             .on('change', change);
 
 
-        link = selection.selectAll('.wiki-link')
+        var link = titleRow.selectAll('.wiki-link')
             .data([0]);
 
         link = link.enter()
             .append('button')
-            .attr('class', 'button-input-action wiki-link minor')
+            .attr('class', 'form-field-button wiki-link')
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
             .merge(link);

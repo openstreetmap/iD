@@ -67,13 +67,13 @@ export function uiFieldLocalized(field, context) {
         calcLocked();
         var preset = _entity && context.presets().match(_entity, context.graph());
 
-        var wrap = selection.selectAll('.localized-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         // enter/update
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'localized-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap)
             .call(_isLocked ? _brandTip : _brandTip.destroy);
 
@@ -157,7 +157,7 @@ export function uiFieldLocalized(field, context) {
 
         translateButton = translateButton.enter()
             .append('button')
-            .attr('class', 'localized-add button-input-action minor')
+            .attr('class', 'localized-add form-field-button')
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-plus'))
             .merge(translateButton);
@@ -344,7 +344,7 @@ export function uiFieldLocalized(field, context) {
 
                 label
                     .append('button')
-                    .attr('class', 'minor remove-icon-multilingual')
+                    .attr('class', 'remove-icon-multilingual')
                     .on('click', function(d){
                         if (_isLocked) return;
                         d3_event.preventDefault();

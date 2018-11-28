@@ -148,11 +148,11 @@ export function uiFieldAddress(field, context) {
             });
         }
 
-        wrap.selectAll('div.addr-row')
+        wrap.selectAll('div.form-row-container')
             .data(addressFormat.format)
             .enter()
             .append('div')
-            .attr('class', 'addr-row')
+            .attr('class', 'form-row-container')
             .selectAll('input')
             .data(row)
             .enter()
@@ -212,7 +212,7 @@ export function uiFieldAddress(field, context) {
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
         if (nominatim && _entity) {
