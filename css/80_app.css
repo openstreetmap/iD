@@ -1259,7 +1259,12 @@ img.tag-reference-wiki-image {
     flex: 1 1 100%;
     min-height: 30px;
     border-top: 0;
+    border-radius: 0 0 4px 4px;
 }
+.nowrap .form-field-input-wrap {
+    border-radius: 0;
+}
+
 
 .form-field-input-wrap > input,
 .form-field-input-wrap > label,
@@ -1304,12 +1309,6 @@ img.tag-reference-wiki-image {
 
 
 /* round corners of first/last child elements */
-.form-field-input-wrap > input:first-of-type {
-    border-bottom-left-radius: 4px;
-}
-[dir='rtl'] .form-field-input-wrap > input:first-of-type {
-    border-bottom-right-radius: 4px;
-}
 .form-field-input-wrap > button:last-of-type {
     border-bottom-right-radius: 4px;
 }
@@ -1320,28 +1319,46 @@ img.tag-reference-wiki-image {
 
 /* Field - Access, Cycleway, Structure
 ------------------------------------------------------- */
+.form-field-input-access,
+.form-field-input-cycleway {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row wrap;
+}
+.form-field-input-access > ul,
+.form-field-input-cycleway > ul {
+    flex: 1 1 auto;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    width: 100%;
+}
+
 .structure-extras-wrap li,
-.form-field-input-cycleway .form-field-input-wrap li,
-.form-field-input-access .form-field-input-wrap li {
+.form-field-input-cycleway li,
+.form-field-input-access li {
     border-bottom: 1px solid #ccc;
     display: flex;
+    flex-flow: row nowrap;
 }
 .structure-extras-wrap li:last-child,
-.form-field-input-cycleway .form-field-input-wrap li:last-child,
-.form-field-input-access .form-field-input-wrap li:last-child {
+.form-field-input-cycleway li:last-child,
+.form-field-input-access li:last-child {
     border-bottom: 0;
 }
 .structure-extras-wrap li > *,
-.form-field-input-cycleway .form-field-input-wrap li > *,
-.form-field-input-access .form-field-input-wrap li > * {
-    flex: 1;
+.form-field-input-cycleway li > *,
+.form-field-input-access li > * {
+    flex: 1 1 auto;
+    width: 100%;
+    border-radius: 0;
 }
 .structure-input-type-wrap input,
 .structure-input-layer-wrap input,
 .preset-input-cycleway-wrap input,
 .preset-input-access-wrap input {
-    border-radius: 0;
     border-width: 0;
+    border-radius: 0;
     border-left-width: 1px;
     width: 100%;
 }
@@ -1350,17 +1367,6 @@ img.tag-reference-wiki-image {
 [dir='rtl'] .preset-input-cycleway-wrap input,
 [dir='rtl'] .preset-input-access-wrap input {
     border-left-width: 0;
-    border-right-width: 1px;
-}
-.structure-extras-wrap button {
-    border-bottom: 0;
-}
-[dir='ltr'] .structure-extras-wrap button {
-    border-right: 0;
-    border-left-width: 1px;
-}
-[dir='rtl'] .structure-extras-wrap button {
-    border-left: 0;
     border-right-width: 1px;
 }
 
@@ -1377,54 +1383,79 @@ img.tag-reference-wiki-image {
     border-top: 0px;
     border-radius: 0 0 4px 4px;
 }
-.structure-extras-wrap ul {
+.structure-extras-wrap > ul {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.structure-extras-wrap li button {
+    border-bottom: 0;
+    border-right: 0;
+    border-left-width: 1px;
+}
+[dir='rtl'] .structure-extras-wrap li button {
+    border-left: 0;
+    border-right-width: 1px;
+}
+
 .structure-extras-wrap li:first-child span {
-    border-top-left-radius: 4px;
-}
-.structure-extras-wrap li:first-child input {
-    border-radius: 0;
-    border-top-right-radius: 4px;
-}
-.structure-extras-wrap li:last-child span {
-    border-bottom-left-radius: 4px;
-}
-.structure-extras-wrap li:last-child input {
-    border-radius: 0;
-    border-bottom-right-radius: 4px;
+    border-radius: 4px 0 0 0;
 }
 [dir='rtl'] .structure-extras-wrap li:first-child span {
-    border-top-left-radius: 0;
-    border-top-right-radius: 4px;
+    border-radius: 0 4px 0 0;
+}
+
+.structure-extras-wrap li:first-child input {
+    border-radius: 0 4px 0 0;
 }
 [dir='rtl'] .structure-extras-wrap li:first-child input {
-    border-top-right-radius: 0;
-    border-top-left-radius: 4px;
+    border-radius: 4px 0 0 0;
 }
-[dir='rtl'] .structure-extras-wrap li:last-child span {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 4px;
+
+.structure-extras-wrap li:last-child span,
+.form-field-input-cycleway li:last-child span,
+.form-field-input-access li:last-child span {
+    border-radius: 0 0 0 4px;
 }
-[dir='rtl'] .structure-extras-wrap li:last-child input {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 4px;
+[dir='rtl'] .structure-extras-wrap li:last-child span,
+[dir='rtl'] .form-field-input-cycleway li:last-child span,
+[dir='rtl'] .form-field-input-access li:last-child span {
+    border-radius: 0 0 4px 0;
+}
+
+.form-field-input-cycleway li:last-child input,
+.form-field-input-access li:last-child input {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .form-field-input-cycleway li:last-child input,
+[dir='rtl'] .form-field-input-access li:last-child input {
+    border-radius: 0 0 0 4px;
+}
+
+.structure-extras-wrap li:last-child input {
+    border-radius: 0 0 0 0;
+}
+
+.structure-extras-wrap li:only-child span {
+    border-radius: 4px 0 0 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:only-child span {
+    border-radius: 0 4px 4px 0;
+}
+.structure-extras-wrap li:only-child input {
+    border-radius: 0 4px 4px 0;
+}
+[dir='rtl'] .structure-extras-wrap li:only-child input {
+    border-radius: 4px 0 0 4px;
 }
 
 
-/* Field - Combo
+/* Field - Combo / Multicombo
 ------------------------------------------------------- */
-[dir='ltr'] .form-field-input-combo > input {
-    border-bottom-right-radius: 4px;
-}
-[dir='rtl'] .form-field-input-combo > input {
-    border-bottom-left-radius: 4px;
+.form-field-input-combo > input:only-of-type {
+    border-radius: 0 0 4px 4px;
 }
 
-
-/* Field - Multicombo
-------------------------------------------------------- */
 .form-field-input-multicombo ul.chiplist {
     padding: 5px 0 5px 10px;
     background: #fff;
@@ -1471,8 +1502,28 @@ img.tag-reference-wiki-image {
 }
 
 
-/* Field - Numeric
+/* Field - Text / Numeric
 ------------------------------------------------------- */
+.form-field-input-text > input:only-of-type,
+.form-field-input-tel > input:only-of-type,
+.form-field-input-email > input:only-of-type,
+.form-field-input-url > input:only-of-type {
+    border-radius: 0 0 4px 4px;
+}
+.form-field-input-number > input:only-of-type {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .form-field-input-number > input:only-of-type {
+    border-radius: 0 0 4px 0;
+}
+.form-field-input-number > button:last-of-type {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .form-field-input-number > button:last-of-type {
+    border-radius: 0 0 0 4px;
+}
+
+/* draw the up/down on the buttons */
 .form-field-input-number button.decrement::after,
 .form-field-input-number button.increment::after {
     content: "";
@@ -1502,7 +1553,6 @@ img.tag-reference-wiki-image {
     color: #7092ff;
     border: 1px solid #ccc;
     border-top: 0;
-    border-radius: 0 0 4px 4px;
     cursor: pointer;
 }
 .form-field-input-check:hover {
@@ -1536,8 +1586,6 @@ img.tag-reference-wiki-image {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
-    border: 0;
-    border-top: 0px;
 }
 .form-field-input-radio > label {
     width: 100%;
@@ -1549,35 +1597,23 @@ img.tag-reference-wiki-image {
     color: #7092ff;
     cursor: pointer;
 }
-
+.form-field-input-radio > label:last-child {
+    border-radius: 0 0 4px 4px;
+}
 .form-field-input-radio > label:hover {
     background-color: #ececec;
 }
+.form-field-input-radio > label.active {
+    background-color: #e8ebff;
+}
 .form-field-input-radio > label:not(:last-of-type) {
     border-bottom: 1px solid #ccc;
-}
-.form-field-input-radio > label:last-child {
-    border-radius: 0 0 3px 3px;
 }
 .form-field-input-radio label > span {
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-.form-field-input-radio > label.active {
-    background: #e8ebff;
-}
-
-.form-field-input-radio button.remove {
-    border-radius: 0 0 3px 3px;
-}
-.form-field-input-radio button.remove .icon {
-    position: absolute;
-    left: 5px;
-}
-.form-field-input-radio button.remove::before {
-    content: none;
 }
 
 /* Hide placeholder for radio buttons if another is active, or not in hover state */
@@ -1594,13 +1630,19 @@ img.tag-reference-wiki-image {
 
 /* Field - Maxspeed
 ------------------------------------------------------- */
-.form-field-input-maxspeed > .maxspeed-unit {
+.form-field-input-maxspeed > input:first-of-type {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .form-field-input-maxspeed > input:first-of-type {
+    border-radius: 0 0 4px 0;
+}
+.form-field-input-maxspeed > input:last-of-type {  /* unit field */
     flex: 0 1 80px;
     width: 80px;
     border-left: 0;
     border-radius: 0 0 4px 0;
 }
-[dir='rtl'] .form-field-input-maxspeed > .maxspeed-unit {
+[dir='rtl'] .form-field-input-maxspeed > input:last-of-type {
     border-right: 0;
     border-radius: 0 0 0 4px;
 }
@@ -1608,6 +1650,29 @@ img.tag-reference-wiki-image {
 
 /* Field - Localized Name
 ------------------------------------------------------- */
+.form-field-input-localized > input.localized-main {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .form-field-input-localized > input.localized-main {
+    border-radius: 0 0 4px 0;
+}
+.form-field-input-localized > button.localized-add {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .form-field-input-localized > button.localized-add {
+    border-radius: 0 0 0 4px;
+}
+
+.form-field-input-localized button.localized-add.disabled,
+.form-field-input-localized input.localized-main.disabled,
+.form-field-input-localized input.localized-lang.disabled,
+.form-field-input-localized input.localized-value.disabled {
+    color: #777;
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+/* nested subfields for name in different languages */
 .localized-multilingual {
     padding: 0 10px;
     flex-basis: 100%;
@@ -1617,6 +1682,7 @@ img.tag-reference-wiki-image {
     overflow: hidden;
 }
 
+/* draws a little line connecting the multilingual field up to the name field */
 .localized-multilingual .entry::before {
     content: "";
     display: block;
@@ -1639,13 +1705,6 @@ img.tag-reference-wiki-image {
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
     width: 100%;
-}
-
-.localized-multilingual .localized-lang.disabled,
-.localized-multilingual .localized-value.disabled {
-    color: #777;
-    background-color: #eee;
-    cursor: not-allowed;
 }
 
 
@@ -1716,22 +1775,22 @@ img.tag-reference-wiki-image {
     width: 100%;
 }
 
-.wiki-lang-container > .wiki-lang,
-.wiki-title-container > .wiki-title {
+.wiki-lang-container > input.wiki-lang,
+.wiki-title-container > input.wiki-title {
     flex: 1 1 auto;
     border-top: 0;
     border-radius: 0;
 }
-.wiki-title-container > .wiki-title {
+.wiki-title-container > input.wiki-title {
     border-radius: 0 0 0 4px;
 }
-[dir='rtl'] .wiki-title-container > .wiki-title {
+[dir='rtl'] .wiki-title-container > input.wiki-title {
     border-radius: 0 0 4px 0;
 }
-.wiki-title-container > .wiki-link {
+.wiki-title-container > button.wiki-link {
     border-radius: 0 0 4px 0;
 }
-[dir='rtl'] .wiki-title-container > .wiki-link {
+[dir='rtl'] .wiki-title-container > button.wiki-link {
     border-radius: 0 0 0 4px;
 }
 
@@ -1901,7 +1960,8 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
-/* remove bottom border radius when combobox is open */
+/* Remove the field's bottom border radius when combobox is open */
+/* For some reason this stops the combobox from overlapping the bottom of the field */
 .combobox + * textarea:focus,
 .combobox + * input:focus {
     border-bottom-left-radius: 0 !important;
@@ -2372,21 +2432,26 @@ input.key-trap {
     padding-left: 0;
     border-width: 0;
 }
-
 .inspector-hover .form-field-input-radio button.active {
     padding-left: 10px;
 }
 
-/* Add placeholder only on hover for radio buttons */
+/* Show placeholder on hover for radio buttons */
+.inspector-hover .form-field-input-radio {
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
 .inspector-hover .form-field-input-radio .placeholder {
     opacity: 1;
     color: #666;
     padding: 5px 10px;
     line-height: 20px;
     width: 100%;
-    border: 1px solid #ccc;
-    border-top: 0;
-    border-bottom: 0;
+    border: 0;
+}
+.inspector-hover .form-field-input-radio .structure-extras-wrap {
+    border: 0;
 }
 
 
