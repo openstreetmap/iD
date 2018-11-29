@@ -1259,7 +1259,6 @@ img.tag-reference-wiki-image {
     flex: 1 1 100%;
     min-height: 30px;
     border-top: 0;
-    border-radius: 0 0 4px 4px;
 }
 
 .form-field-input-wrap > input,
@@ -1305,13 +1304,13 @@ img.tag-reference-wiki-image {
 
 
 /* round corners of first/last child elements */
-[dir='ltr'] .form-field-input-wrap > input:first-of-type {
+.form-field-input-wrap > input:first-of-type {
     border-bottom-left-radius: 4px;
 }
 [dir='rtl'] .form-field-input-wrap > input:first-of-type {
     border-bottom-right-radius: 4px;
 }
-[dir='ltr'] .form-field-input-wrap > button:last-of-type {
+.form-field-input-wrap > button:last-of-type {
     border-bottom-right-radius: 4px;
 }
 [dir='rtl'] .form-field-input-wrap > button:last-of-type {
@@ -1369,9 +1368,14 @@ img.tag-reference-wiki-image {
     border-bottom-right-radius: 4px;
 }
 
+
 .structure-extras-wrap {
+    width: 100%;
     padding: 10px 10px;
     background: #fff;
+    border: 1px solid #ccc;
+    border-top: 0px;
+    border-radius: 0 0 4px 4px;
 }
 .structure-extras-wrap ul {
     border: 1px solid #ccc;
@@ -1381,12 +1385,14 @@ img.tag-reference-wiki-image {
     border-top-left-radius: 4px;
 }
 .structure-extras-wrap li:first-child input {
+    border-radius: 0;
     border-top-right-radius: 4px;
 }
 .structure-extras-wrap li:last-child span {
     border-bottom-left-radius: 4px;
 }
 .structure-extras-wrap li:last-child input {
+    border-radius: 0;
     border-bottom-right-radius: 4px;
 }
 [dir='rtl'] .structure-extras-wrap li:first-child span {
@@ -1496,6 +1502,7 @@ img.tag-reference-wiki-image {
     color: #7092ff;
     border: 1px solid #ccc;
     border-top: 0;
+    border-radius: 0 0 4px 4px;
     cursor: pointer;
 }
 .form-field-input-check:hover {
@@ -1546,7 +1553,7 @@ img.tag-reference-wiki-image {
 .form-field-input-radio > label:hover {
     background-color: #ececec;
 }
-.form-field-input-radio > label:not(:last-child) {
+.form-field-input-radio > label:not(:last-of-type) {
     border-bottom: 1px solid #ccc;
 }
 .form-field-input-radio > label:last-child {
@@ -1642,10 +1649,9 @@ img.tag-reference-wiki-image {
 }
 
 
-/* Field - Table-like (Address, Wikipedia)
+/* Field - Address
 ------------------------------------------------------- */
-.form-field-input-address,
-.form-field-input-wikipedia {
+.form-field-input-address {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
@@ -1653,58 +1659,80 @@ img.tag-reference-wiki-image {
     border-top: 0px;
 }
 
-.form-row-container {
+.addr-row {
     flex: 1 1 auto;
     display: flex;
     width: 100%;
     min-height: 30px;
 }
 
-.form-row-container > input {
+.addr-row > input {
     flex: 1 1 auto;
     border-radius: 0;
     border-right: 0;
     border-bottom: 0;
 }
-[dir='rtl'] .form-row-container input {
+[dir='rtl'] .addr-row input {
     border-right: 1px solid #ccc;
     border-left: 0;
 }
 
-.form-row-container:first-of-type input {
+.addr-row:first-of-type input {
     border-top: 0;
 }
-.form-row-container input:first-of-type {
+.addr-row input:first-of-type {
     border-left: 0;
 }
-[dir='rtl'] .form-row-container input:first-of-type {
+[dir='rtl'] .addr-row input:first-of-type {
     border-right: 0;
 }
-.form-row-container:last-of-type input:first-of-type {
+.addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 0 4px;
 }
-[dir='rtl'] .form-row-container:last-of-type input:first-of-type {
+[dir='rtl'] .addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 4px 0;
 }
-.form-row-container:last-of-type input:last-of-type {
+.addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 4px 0;
 }
-[dir='rtl'] .form-row-container:last-of-type input:last-of-type {
+[dir='rtl'] .addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 0 4px;
 }
 
-/* overrides for last row of wikipedia field */
-.wiki-title-container:last-of-type input.wiki-title {
+
+/* Field - Wikipedia
+------------------------------------------------------- */
+.form-field-input-wikipedia {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 1 auto;
+}
+
+.wiki-lang-container,
+.wiki-title-container {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.wiki-lang-container > .wiki-lang,
+.wiki-title-container > .wiki-title {
+    flex: 1 1 auto;
+    border-top: 0;
+    border-radius: 0;
+}
+.wiki-title-container > .wiki-title {
     border-radius: 0 0 0 4px;
 }
-[dir='rtl'] .wiki-title-container:last-of-type input.wiki-title {
+[dir='rtl'] .wiki-title-container > .wiki-title {
     border-radius: 0 0 4px 0;
 }
-.wiki-title-container:last-of-type button.wiki-link {
+.wiki-title-container > .wiki-link {
+    border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .wiki-title-container > .wiki-link {
     border-radius: 0 0 0 4px;
-}
-[dir='rtl'] .wiki-title-container:last-of-type button.wiki-link {
-    border-radius: 0 0 4px 0;
 }
 
 
@@ -1871,6 +1899,13 @@ div.combobox {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
+}
+
+/* remove bottom border radius when combobox is open */
+.combobox + * textarea:focus,
+.combobox + * input:focus {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 
@@ -2238,6 +2273,7 @@ input.key-trap {
 .inspector-hover .form-field-button,
 .inspector-hover .structure-extras-wrap,
 .inspector-hover .comments-container .comment,
+.inspector-hover button,
 .inspector-hover input,
 .inspector-hover textarea,
 .inspector-hover label {
@@ -2343,11 +2379,14 @@ input.key-trap {
 
 /* Add placeholder only on hover for radio buttons */
 .inspector-hover .form-field-input-radio .placeholder {
-    color: #a9a9a9;
-    padding: 5px 10px;
     opacity: 1;
+    color: #666;
+    padding: 5px 10px;
     line-height: 20px;
     width: 100%;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 

@@ -78,7 +78,7 @@ export function uiFieldWikipedia(field, context) {
 
         langRow = langRow.enter()
             .append('div')
-            .attr('class', 'form-row-container wiki-lang-container')
+            .attr('class', 'wiki-lang-container')
             .merge(langRow)
 
 
@@ -106,7 +106,7 @@ export function uiFieldWikipedia(field, context) {
 
         titleRow = titleRow.enter()
             .append('div')
-            .attr('class', 'form-row-container wiki-title-container')
+            .attr('class', 'wiki-title-container')
             .merge(titleRow)
 
         title = titleRow.selectAll('input.wiki-title')

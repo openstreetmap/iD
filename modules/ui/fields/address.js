@@ -148,11 +148,11 @@ export function uiFieldAddress(field, context) {
             });
         }
 
-        wrap.selectAll('div.form-row-container')
+        wrap.selectAll('.addr-row')
             .data(addressFormat.format)
             .enter()
             .append('div')
-            .attr('class', 'form-row-container')
+            .attr('class', 'addr-row')
             .selectAll('input')
             .data(row)
             .enter()
