@@ -4115,13 +4115,17 @@
                     "name": "Fence",
                     "terms": ""
                 },
+                "barrier/fence/railing": {
+                    "name": "Railing",
+                    "terms": "railing,handrail,guard rail"
+                },
                 "barrier/gate": {
                     "name": "Gate",
                     "terms": ""
                 },
                 "barrier/guard_rail": {
                     "name": "Guard Rail",
-                    "terms": "railing,guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier"
+                    "terms": "guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier"
                 },
                 "barrier/hedge": {
                     "name": "Hedge",

@@ -3096,6 +3096,11 @@ en:
         # barrier=fence
         name: Fence
         terms: '<translate with synonyms or related terms for ''Fence'', separated by commas>'
+      barrier/fence/railing:
+        # 'barrier=fence, fence_type=railing'
+        name: Railing
+        # 'terms: railing,handrail,guard rail'
+        terms: '<translate with synonyms or related terms for ''Railing'', separated by commas>'
       barrier/gate:
         # barrier=gate
         name: Gate
@@ -3103,7 +3108,7 @@ en:
       barrier/guard_rail:
         # barrier=guard_rail
         name: Guard Rail
-        # 'terms: railing,guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier'
+        # 'terms: guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier'
         terms: '<translate with synonyms or related terms for ''Guard Rail'', separated by commas>'
       barrier/hedge:
         # barrier=hedge
