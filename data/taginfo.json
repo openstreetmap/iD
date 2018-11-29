@@ -1591,6 +1591,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/fence-15.svg?sanitize=true"
     },
     {
+      "key": "fence_type",
+      "value": "railing",
+      "description": "Railing",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/barrier-15.svg?sanitize=true"
+    },
+    {
       "key": "barrier",
       "value": "gate",
       "description": "Gate",
