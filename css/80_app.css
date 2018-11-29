@@ -1797,11 +1797,19 @@ img.tag-reference-wiki-image {
 
 /* Field - Restriction Editor
 ------------------------------------------------------- */
+.form-field-input-restrictions {
+    display: block;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+
 .form-field-input-restrictions .restriction-controls-container {
     background-color: #fff;
-    border-top: 1px solid #ccc;
     width: 100%;
     padding: 5px;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
 }
 
 .restriction-controls-container .restriction-controls {
