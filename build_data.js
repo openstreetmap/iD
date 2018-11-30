@@ -339,7 +339,8 @@ function generateTaginfo(presets, fields) {
             tag.value = preset.tags[last];
         }
         if (preset.name) {
-            tag.description = [ preset.name ];
+            var legacy = (preset.searchable === false) ? ' (unsearchable)' : '';
+            tag.description = [ '🄿 ' + preset.name + legacy ];
         }
         if (preset.geometry) {
             setObjectType(tag, preset);
@@ -373,14 +374,14 @@ function generateTaginfo(presets, fields) {
                     if (value === 'undefined' || value === '*' || value === '') return;
                     var tag = { key: key, value: value };
                     if (field.label) {
-                        tag.description = [ field.label ];
+                        tag.description = [ '🄵 ' + field.label ];
                     }
                     coalesceTags(taginfo, tag);
                 });
             } else {
                 var tag = { key: key };
                 if (field.label) {
-                    tag.description = [ field.label ];
+                    tag.description = [ '🄵 ' + field.label ];
                 }
                 coalesceTags(taginfo, tag);
             }
