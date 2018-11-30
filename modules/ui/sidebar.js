@@ -62,6 +62,8 @@ export function uiSidebar(context) {
                 selection
                     .style('width', widthPct + '%')    // lock in current width
                     .style('max-width', '85%');        // but allow larger widths
+
+                resizer.classed('dragging', true);
             })
             .on('drag', function() {
                 var isRTL = (textDirection === 'rtl');
@@ -96,6 +98,9 @@ export function uiSidebar(context) {
                         context.ui().onResize([-d3_event.dx, 0]);
                     }
                 }
+            })
+            .on('end', function() {
+                resizer.classed('dragging', false);
             })
         );
 

@@ -66,6 +66,8 @@ export function uiFieldRestrictions(field, context) {
     var _intersection;
     var _fromWayID;
 
+    var _lastXPos;
+
 
     function restrictions(selection) {
         _parent = selection;
@@ -293,14 +295,7 @@ export function uiFieldRestrictions(field, context) {
 
             surface
                 .call(breathe);
-
-            d3_select(window)
-                .on('resize.restrictions', function() {
-                    utilSetDimensions(_container, null);
-                    redraw();
-                });
         }
-
 
         // This can happen if we've lowered the detail while a FROM way
         // is selected, and that way is no longer part of the intersection.
@@ -334,6 +329,11 @@ export function uiFieldRestrictions(field, context) {
                 .classed('selected', true)
                 .classed('related', true);
         }
+
+        document.addEventListener('resizeWindow', function () {
+            utilSetDimensions(_container, null);
+            redraw(1);
+        }, false);
 
         updateHints(null);
 
@@ -435,10 +435,20 @@ export function uiFieldRestrictions(field, context) {
             updateHints(datum);
         }
 
+        _lastXPos = _lastXPos || sdims[0];
 
-        function redraw() {
-            if (context.hasEntity(_vertexID)) {
-                _container.call(renderViewer);
+        function redraw(minChange) {
+            var xPos = -1;
+
+            if (minChange) {
+                xPos = utilGetDimensions(d3_select('#sidebar'))[0];
+            }
+
+            if (!minChange || (minChange && Math.abs(xPos - _lastXPos) >= minChange)) {
+                if (context.hasEntity(_vertexID)) {
+                    _lastXPos = xPos;
+                    _container.call(renderViewer);
+                }
             }
         }
 
