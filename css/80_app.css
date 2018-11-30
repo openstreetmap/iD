@@ -637,7 +637,7 @@ button.add-note svg.icon {
     margin: 0;
     padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
-    background-color: #fafafa;
+    background-color: #f6f6f6;
     width: 100%;
     z-index: 1;
     flex-wrap: wrap;
@@ -1076,7 +1076,7 @@ a.hide-toggle {
     top: 0;
     right: 0;
     width: 32px;
-    background: #fafafa;
+    background: #f6f6f6;
 }
 [dir='rtl'] .preset-list-item button.tag-reference-button {
     left: 0;
@@ -2251,8 +2251,9 @@ div.combobox {
 }
 
 .tag-reference-body {
+    flex: 1 1 auto;
+    width: 100%;
     overflow: hidden;
-    clear: both;
 }
 .tag-reference-body .tag-reference-description {
     margin: 10px 5px 0 5px;
@@ -2356,6 +2357,10 @@ input.key-trap {
 .inspector-hover label {
     background: #ececec;
 }
+.inspector-hover .preset-list-button,
+.inspector-hover .tag-row input {
+    background: #f6f6f6;
+}
 
 .inspector-hover a,
 .inspector-hover .form-field-input-multicombo .chips,
@@ -2376,6 +2381,7 @@ input.key-trap {
 
 /* hide and remove from layout */
 .inspector-hidden,
+.inspector-hover .preset-list-button-wrap .tag-reference-button,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],
 .inspector-hover .form-field-input-multicombo .combobox-input,
@@ -2400,7 +2406,7 @@ input.key-trap {
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .form-field-label button,
-.inspector-hover .tag-reference-button,
+.inspector-hover .tag-row button,
 .inspector-hover .footer * {
     opacity: 0;
 }
