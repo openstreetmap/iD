@@ -1626,6 +1626,13 @@
     },
     {
       "key": "kerb",
+      "value": "flush",
+      "description": "Flush Curb",
+      "object_types": ["node", "way"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
+    },
+    {
+      "key": "kerb",
       "value": "lowered",
       "description": "Lowered Curb",
       "object_types": ["node", "way"],
