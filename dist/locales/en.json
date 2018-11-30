@@ -4135,6 +4135,10 @@
                     "name": "Curb",
                     "terms": ""
                 },
+                "barrier/kerb/flush": {
+                    "name": "Flush Curb",
+                    "terms": "even curb,level curb,tactile curb"
+                },
                 "barrier/kerb/lowered": {
                     "name": "Lowered Curb",
                     "terms": "curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp"

@@ -3118,6 +3118,11 @@ en:
         # barrier=kerb
         name: Curb
         terms: '<translate with synonyms or related terms for ''Curb'', separated by commas>'
+      barrier/kerb/flush:
+        # 'barrier=kerb, kerb=flush'
+        name: Flush Curb
+        # 'terms: even curb,level curb,tactile curb'
+        terms: '<translate with synonyms or related terms for ''Flush Curb'', separated by commas>'
       barrier/kerb/lowered:
         # 'barrier=kerb, kerb=lowered'
         name: Lowered Curb
