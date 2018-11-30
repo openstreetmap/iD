@@ -90,14 +90,13 @@ export function uiFieldCheck(field, context) {
 
     var check = function(selection) {
         checkImpliedYes();
-        selection.classed('checkselect', 'true');
 
         label = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         var enter = label.enter()
             .append('label')
-            .attr('class', 'form-field-input-wrap');
+            .attr('class', 'form-field-input-wrap form-field-input-check');
 
         enter
             .append('input')

@@ -27,7 +27,7 @@ export function uiFieldRadio(field, context) {
 
 
     function selectedKey() {
-        var node = wrap.selectAll('.toggle-list label.active input');
+        var node = wrap.selectAll('.form-field-input-radio label.active input');
         return !node.empty() && node.datum();
     }
 
@@ -40,7 +40,7 @@ export function uiFieldRadio(field, context) {
 
         var enter = wrap.enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap toggle-list');
+            .attr('class', 'form-field-input-wrap form-field-input-radio');
 
         enter
             .append('span')

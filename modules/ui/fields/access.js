@@ -19,8 +19,7 @@ export function uiFieldAccess(field, context) {
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap')
-            .append('ul')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
         var list = wrap.selectAll('ul')
@@ -214,6 +213,8 @@ export function uiFieldAccess(field, context) {
             .attr('placeholder', 'yes');
 
         var which = tags.highway;
+        if (!placeholders[which]) return;
+
         var keys = Object.keys(placeholders[which]);
         keys.forEach(function(k) {
             var v = placeholders[which][k];

@@ -26,7 +26,7 @@ export function uiFieldCycleway(field, context) {
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
 

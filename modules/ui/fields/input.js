@@ -42,9 +42,17 @@ export function uiFieldText(field, context) {
         var preset = _entity && context.presets().match(_entity, context.graph());
         var isSuggestion = preset && preset.suggestion && field.id === 'brand';
 
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
         var fieldID = 'preset-input-' + field.safeid;
 
-        input = selection.selectAll('input')
+        input = wrap.selectAll('input')
             .data([0]);
 
         input = input.enter()
@@ -68,7 +76,7 @@ export function uiFieldText(field, context) {
             var center = _entity.extent(context.graph()).center();
             nominatim.countryCode(center, function (err, countryCode) {
                 if (err || !dataPhoneFormats[countryCode]) return;
-                selection.selectAll('#' + fieldID)
+                wrap.selectAll('#' + fieldID)
                     .attr('placeholder', dataPhoneFormats[countryCode]);
             });
 
@@ -77,31 +85,17 @@ export function uiFieldText(field, context) {
 
             input.attr('type', 'text');
 
-            var spinControl = selection.selectAll('.spin-control')
-                .data([0]);
+            var buttons = wrap.selectAll('.increment, .decrement')
+                .data(rtl ? [1, -1] : [-1, 1]);
 
-            var enter = spinControl.enter()
-                .append('div')
-                .attr('class', 'spin-control');
-
-            enter
+            buttons.enter()
                 .append('button')
-                .datum(rtl ? 1 : -1)
-                .attr('class', 'button-input-action minor')
-                .classed(rtl ? 'increment' : 'decrement', true)
-                .attr('tabindex', -1);
-
-            enter
-                .append('button')
-                .datum(rtl ? -1 : 1)
-                .attr('class', 'button-input-action minor')
-                .classed(rtl ? 'decrement' : 'increment', true)
-                .attr('tabindex', -1);
-
-            spinControl = spinControl
-                .merge(enter);
-
-            spinControl.selectAll('button')
+                .attr('tabindex', -1)
+                .attr('class', function(d) {
+                    var which = (d === 1 ? 'increment' : 'decrement');
+                    return 'form-field-button ' + which;
+                })
+                .merge(buttons)
                 .on('click', function(d) {
                     d3_event.preventDefault();
                     input.node().value = parsed(input.node().value) + d;
@@ -118,7 +112,7 @@ export function uiFieldText(field, context) {
                     .filter(function(k) { return k !== pKey && k !== 'name'; });
             }
 
-            selection.call(isSuggestion ? _brandTip : _brandTip.destroy);
+            wrap.call(isSuggestion ? _brandTip : _brandTip.destroy);
         }
     }
 
@@ -127,6 +121,7 @@ export function uiFieldText(field, context) {
     function parsed(val) {
         return parseFloat(val || 0, 10) || 0;
     }
+
 
     // clamp number to min/max
     function clamped(num) {

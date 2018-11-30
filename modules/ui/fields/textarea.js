@@ -15,7 +15,15 @@ export function uiFieldTextarea(field) {
 
 
     function textarea(selection) {
-        input = selection.selectAll('textarea')
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+        input = wrap.selectAll('textarea')
             .data([0]);
 
         input = input.enter()
