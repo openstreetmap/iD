@@ -49,7 +49,7 @@ export function svgDefs(context) {
                 .attr('orient', 'auto')
                 .append('path')
                 .attr('class', 'sided-marker-path sided-marker-' + name + '-path')
-                .attr('d', 'M 0,0 L 1,2 L 2,0 z')
+                .attr('d', 'M 0,0 L 1,1 L 2,0 z')
                 .attr('stroke', 'none')
                 .attr('fill', color);
         }
