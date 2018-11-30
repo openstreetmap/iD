@@ -2079,6 +2079,39 @@ div.combobox {
 }
 
 
+/* More Fields dropdown
+------------------------------------------------------- */
+.more-fields {
+    padding: 0 20px 20px 20px;
+    font-weight: bold;
+}
+.changeset-editor .more-fields {
+    padding: 15px 20px 0 20px;
+}
+
+.more-fields label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.more-fields input {
+    margin-left: 10px;
+    flex: 1 1 50%;
+}
+[dir='rtl'] .more-fields input {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.form-field-input-wrap .label {
+    height: 30px;
+    background: #f6f6f6;
+    padding: 5px 10px;
+}
+
+
 /* Raw Tag Editor
 ------------------------------------------------------- */
 .tag-list {
@@ -2089,9 +2122,14 @@ div.combobox {
     position: relative;
 }
 .tag-row .inner-wrap {
+    display: flex;
+    flex-flow: row nowrap;
     width: 100%;
     position: relative;
-    display: flex;
+}
+.tag-row .key-wrap,
+.tag-row .value-wrap {
+    flex: 1 1 auto;
 }
 
 .tag-row.readonly,
@@ -2116,11 +2154,6 @@ div.combobox {
     border-right: 1px solid #ccc;
 }
 
-.tag-row .key-wrap,
-.tag-row .input-wrap-position {
-    flex: 1;
-    height: 30px;
-}
 
 .tag-row input.key {
     font-weight: bold;
@@ -2147,6 +2180,7 @@ div.combobox {
     border-top: 1px solid #ccc;
 }
 .tag-row button {
+    flex: 0 0 32px;
     height: 31px;
     width: 32px;
     border: 1px solid #ccc;
@@ -2186,7 +2220,6 @@ div.combobox {
 
 .tag-row .tag-reference-button {
     border-radius: 0;
-    background: #fafafa;
 }
 [dir='rtl'] .tag-row .tag-reference-button {
     border-left-width: 1px;
@@ -2257,19 +2290,28 @@ div.combobox {
 .raw-membership-editor .member-list li:first-child {
     padding-top: 10px;
 }
-.raw-member-editor .member-row,
-.raw-membership-editor .member-row {
-    position: relative;
-}
 .raw-member-editor .member-row .member-entity-name,
 .raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
     padding-left: 10px;
 }
 
+.form-field-input-member > input.member-role {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .form-field-input-member > input.member-role {
+    border-radius: 0 0 4px 0;
+}
+
+.member-incomplete .form-field-input-member > input.member-role,
+[dir='rtl'] .member-incomplete .form-field-input-member > input.member-role {
+    border-radius: 0 0 4px 4px;
+}
+
 .member-incomplete .member-delete {
     display: none;
 }
+
 .member-row-new .member-entity-input {
     border-radius: 4px 4px 0 0;
     border: 1px solid #ccc;
@@ -2298,39 +2340,6 @@ input.key-trap {
     width: 0px;
     padding: 0px;
     border: 1px solid rgba(0,0,0,0);
-}
-
-
-/* More Fields dropdown
-------------------------------------------------------- */
-.more-fields {
-    padding: 0 20px 20px 20px;
-    font-weight: bold;
-}
-.changeset-editor .more-fields {
-    padding: 15px 20px 0 20px;
-}
-
-.more-fields label {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.more-fields input {
-    margin-left: 10px;
-    flex: 1 1 50%;
-}
-[dir='rtl'] .more-fields input {
-    margin-left: auto;
-    margin-right: 10px;
-}
-
-.form-field-input-wrap .label {
-    height: 30px;
-    background: #f6f6f6;
-    padding: 5px 10px;
 }
 
 
@@ -2398,7 +2407,7 @@ input.key-trap {
 
 /* Styles for raw tag inspector on hover */
 .inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .input-wrap-position {
+.inspector-hover .tag-row .value-wrap {
     height: 31px;
 }
 
@@ -2638,7 +2647,7 @@ input.key-trap {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
-.data-editor.raw-tag-editor .tag-row .input-wrap-position {
+.data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
 }
 

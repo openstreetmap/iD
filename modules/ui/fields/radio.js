@@ -40,7 +40,7 @@ export function uiFieldRadio(field, context) {
 
         var enter = wrap.enter()
             .append('div')
-            .attr('class', 'form-field-input-wrap form-field-input-radio')
+            .attr('class', 'form-field-input-wrap form-field-input-radio');
 
         enter
             .append('span')

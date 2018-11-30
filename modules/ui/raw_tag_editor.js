@@ -122,7 +122,7 @@ export function uiRawTagEditor(context) {
 
         innerWrap
             .append('div')
-            .attr('class', 'input-wrap-position')
+            .attr('class', 'value-wrap')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
