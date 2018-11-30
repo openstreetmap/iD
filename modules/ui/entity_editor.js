@@ -279,6 +279,12 @@ export function uiEntityEditor(context) {
         _base = context.graph();
         _coalesceChanges = false;
 
+        // reset the scroll to the top of the inspector
+        var body = d3_selectAll('.entity-editor-pane .inspector-body');
+        if (!body.empty()) {
+            body.node().scrollTop = 0;
+        }
+
         var presetMatch = context.presets().match(context.entity(_entityID), _base);
 
         return entityEditor
