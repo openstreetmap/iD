@@ -1547,7 +1547,8 @@ img.tag-reference-wiki-image {
 /* Field - Checkbox
 ------------------------------------------------------- */
 .form-field-input-check {
-    display: block;
+    display: flex;
+    align-items: end;
     background: #fff;
     padding: 5px 10px;
     color: #7092ff;
@@ -1555,6 +1556,25 @@ img.tag-reference-wiki-image {
     border-top: 0;
     cursor: pointer;
 }
+.form-field-input-check > input[type="checkbox"] {
+    flex: 0 1 auto;
+    min-height: 20px;
+    width: 20px;
+}
+.form-field-input-check > span {
+    flex: 1 1 auto;
+}
+.form-field-input-check > .reverser.button {
+    flex: 0 1 auto;
+    background-color: #eff2f7;
+    border: 1px solid #ccd5e3;
+    border-radius: 2px;
+    padding: 0px 8px;
+}
+.form-field-input-check > .reverser.button.hide {
+    display: none;
+}
+
 .form-field-input-check:hover {
     background: #f1f1f1;
 }
@@ -1563,20 +1583,6 @@ img.tag-reference-wiki-image {
 }
 .form-field-input-check label:not(.set) input[type="checkbox"] {
     opacity: .5;
-}
-.form-field-input-check .reverser.button {
-    display: block;
-    float: right;
-    background-color: #eff2f7;
-    border: 1px solid #ccd5e3;
-    border-radius: 2px;
-    padding: 0px 8px;
-}
-[dir='rtl'] .form-field-input-check .reverser.button {
-    float: left;
-}
-.form-field-input-check .reverser.button.hide {
-    display: none;
 }
 
 
@@ -1588,10 +1594,11 @@ img.tag-reference-wiki-image {
     flex-flow: row wrap;
 }
 .form-field-input-radio > label {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row nowrap;
     width: 100%;
-    position: relative;
     padding: 5px 10px;
-    display: block;
     height: 30px;
     background-color: #fff;
     color: #7092ff;
@@ -1609,8 +1616,12 @@ img.tag-reference-wiki-image {
 .form-field-input-radio > label:not(:last-of-type) {
     border-bottom: 1px solid #ccc;
 }
-.form-field-input-radio label > span {
-    display: block;
+.form-field-input-radio > label > input[type="radio"] {
+    flex: 0 1 auto;
+    width: 20px;
+}
+.form-field-input-radio > label > span {
+    flex: 1 1 auto;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -2390,13 +2401,7 @@ input.key-trap {
 .inspector-hover .form-field-input-radio label.remove .icon,
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation {
-    height: 0;
-    width: 0;
-    overflow: hidden;
-    opacity: 0 !important;
-    border-width: 0;
-    margin: 0;
-    padding: 0;
+    display: none;
 }
 
 /* hide but preserve in layout */
