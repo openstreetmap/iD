@@ -1437,6 +1437,9 @@
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
         },
+        "wikidata": {
+            "identifier": "Identifier"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {

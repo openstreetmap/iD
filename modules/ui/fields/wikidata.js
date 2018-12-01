@@ -12,6 +12,8 @@ import {
     utilRebind
 } from '../../util';
 
+import { t } from '../../util/locale';
+
 
 export function uiFieldWikidata(field) {
     var dispatch = d3_dispatch('change'),
@@ -23,14 +25,46 @@ export function uiFieldWikidata(field) {
 
     function wiki(selection) {
 
-        title = selection.selectAll('input.wiki-title')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
-        title = title.enter()
-            .append('input')
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+
+        var list = wrap.selectAll('ul')
+            .data([0]);
+
+        list = list.enter()
+            .append('ul')
+            .attr('class', 'labeled-inputs')
+            .merge(list);
+
+
+        var items = list.selectAll('li')
+            .data(field.keys);
+
+        // Enter
+        var enter = items.enter()
+            .append('li')
+            .attr('class', function(d) { return 'preset-access-' + d; });
+
+        enter
+            .append('span')
+            .attr('class', 'label preset-label-access')
+            .attr('for', function(d) { return 'preset-input-wikidata-' + d; })
+            .text(t('wikidata.identifier'));
+
+        var inputWrap = enter
+            .append('div')
+            .attr('class', 'preset-input-wikidata-wrap');
+
+        title = inputWrap.append('input')
             .attr('type', 'text')
-            .attr('class', 'wiki-title')
-            .attr('id', 'preset-input-' + field.safeid)
+            .attr('class', 'preset-input-wikidata')
+            .attr('id', function(d) { return 'preset-input-wikidata-' + d; })
             .call(utilNoAuto)
             .merge(title);
 
@@ -38,13 +72,9 @@ export function uiFieldWikidata(field) {
             .on('blur', blur)
             .on('change', change);
 
-
-        link = selection.selectAll('.wiki-link')
-            .data([0]);
-
-        link = link.enter()
+        link = enter
             .append('button')
-            .attr('class', 'button-input-action wiki-link minor')
+            .attr('class', 'form-field-button wiki-link')
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
             .merge(link);
