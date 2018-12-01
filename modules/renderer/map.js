@@ -51,6 +51,7 @@ import {
 } from '../util';
 
 import { utilBindOnce } from '../util/bind_once';
+import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
 
 
@@ -413,6 +414,7 @@ export function rendererMap(context) {
         // They might be triggered by the user scrolling the mouse wheel,
         // or 2-finger pinch/zoom gestures, the transform may need adjustment.
         if (source && source.type === 'wheel') {
+            var detected = utilDetect();
             var dX = source.deltaX;
             var dY = source.deltaY;
             var x2 = x;
@@ -429,9 +431,20 @@ export function rendererMap(context) {
             if (source.deltaMode === 1 /* LINE */) {
                 // Convert from lines to pixels, more if the user is scrolling fast.
                 // (I made up the exp function to roughly match Firefox to what Chrome does)
-                var lines = clamp(Math.abs(source.deltaY), 0, 12);
+                var lines = Math.abs(source.deltaY);
                 var sign = (source.deltaY > 0) ? 1 : -1;
-                dY = sign * Math.exp((lines - 1) * 0.5) * 4.000244140625;
+                dY = sign * clamp(
+                    Math.exp((lines - 1) * 0.75) * 4.000244140625,
+                    4.000244140625,    // min
+                    350.000244140625   // max
+                );
+
+                // On Firefox/Windows we just always get +/- the scroll line amount (default 3)
+                // There doesn't seem to be any scroll accelleration.
+                // This multiplier increases the speed a little bit - #5512
+                if (detected.os === 'win') {
+                    dY *= 5;
+                }
 
                 // recalculate x2,y2,k2
                 t0 = _transformed ? _transformLast : _transformStart;
@@ -478,15 +491,19 @@ export function rendererMap(context) {
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
-            // 2 finger map panning (all browsers) - #5492
+            // 2 finger map panning (Mac only, all browsers) - #5492, #5512
             // Panning via the `wheel` event will always have:
             // - `ctrlKey = false`
             // - `deltaX`,`deltaY` are round integer pixels
-            } else if (!source.ctrlKey && isInteger(dX) && isInteger(dY)) {
-                p1 = projection.translate();
-                x2 = p1[0] - dX;
-                y2 = p1[1] - dY;
-                k2 = projection.scale();
+            } else if (detected.os === 'mac' && !source.ctrlKey && isInteger(dX) && isInteger(dY)) {
+                // Firefox will set `mozInputSource = 1` if the event was generated
+                // by an actual mouse wheel.  If we detect this, don't pan..
+                if (source.mozInputSource === undefined || source.mozInputSource !== 1) {
+                    p1 = projection.translate();
+                    x2 = p1[0] - dX;
+                    y2 = p1[1] - dY;
+                    k2 = projection.scale();
+                }
             }
 
             // something changed - replace the event transform
