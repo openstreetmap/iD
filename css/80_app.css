@@ -1343,7 +1343,8 @@ img.tag-reference-wiki-image {
 .form-field ul.labeled-inputs li:last-child {
     border-bottom: 0;
 }
-.form-field ul.labeled-inputs li > * {
+.form-field ul.labeled-inputs li > span,
+.form-field ul.labeled-inputs li > div {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
