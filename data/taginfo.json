@@ -1621,8 +1621,7 @@
       "key": "barrier",
       "value": "kerb",
       "description": "🄿 Curb",
-      "object_types": ["node", "way"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/wheelchair-15.svg?sanitize=true"
+      "object_types": ["node", "way"]
     },
     {
       "key": "kerb",
