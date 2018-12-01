@@ -1,5 +1,3 @@
-import _forEach from 'lodash-es/forEach';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
@@ -12,17 +10,16 @@ import {
 
 
 export function uiFieldAccess(field, context) {
-    var dispatch = d3_dispatch('change'),
-        items;
+    var dispatch = d3_dispatch('change');
+    var items = d3_select(null);
 
     function access(selection) {
-        var wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'cf preset-input-wrap')
-            .append('ul')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
         var list = wrap.selectAll('ul')
@@ -30,6 +27,7 @@ export function uiFieldAccess(field, context) {
 
         list = list.enter()
             .append('ul')
+            .attr('class', 'labeled-inputs')
             .merge(list);
 
 
@@ -39,17 +37,17 @@ export function uiFieldAccess(field, context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'cf preset-access-' + d; });
+            .attr('class', function(d) { return 'preset-access-' + d; });
 
         enter
             .append('span')
-            .attr('class', 'col6 label preset-label-access')
+            .attr('class', 'label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
             .text(function(d) { return field.t('types.' + d); });
 
         enter
             .append('div')
-            .attr('class', 'col6 preset-input-access-wrap')
+            .attr('class', 'preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
             .attr('class', 'preset-input-access')
@@ -215,9 +213,14 @@ export function uiFieldAccess(field, context) {
         items.selectAll('#preset-input-access-access')
             .attr('placeholder', 'yes');
 
-        _forEach(placeholders[tags.highway], function(v, k) {
+        var which = tags.highway;
+        if (!placeholders[which]) return;
+
+        var keys = Object.keys(placeholders[which]);
+        keys.forEach(function(k) {
+            var v = placeholders[which][k];
             items.selectAll('#preset-input-access-' + k)
-                .attr('placeholder', function() { return (tags.access || v); });
+                .attr('placeholder', tags.access || v);
         });
     };
 

@@ -293,7 +293,7 @@ en:
   browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
   translate:
     translate: Translate
-    localized_translation_label: Multilingual name
+    localized_translation_label: Multilingual Name
     localized_translation_language: Choose language
     localized_translation_name: Name
   zoom_in_edit: Zoom in to edit
@@ -438,6 +438,8 @@ en:
     relation: Relation
     location: Location
     add_fields: "Add field:"
+    lock:
+      suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "All tags" section.'
   background:
     title: Background
     description: Background settings

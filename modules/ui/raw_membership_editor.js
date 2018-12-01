@@ -1,6 +1,5 @@
 import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
-import _forEach from 'lodash-es/forEach';
 import _groupBy from 'lodash-es/groupBy';
 
 import {
@@ -28,13 +27,17 @@ import { utilDisplayName, utilNoAuto, utilHighlightEntity } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
-    var taginfo = services.taginfo,
-        _entityID,
-        _showBlank;
+    var taginfo = services.taginfo;
+    var _entityID;
+    var _showBlank;
 
 
     function selectRelation(d) {
         d3_event.preventDefault();
+
+        // remove the hover-highlight styling
+        utilHighlightEntity(d.relation.id, false, context);
+
         context.enter(modeSelect(context, [d.relation.id]));
     }
 
@@ -86,16 +89,14 @@ export function uiRawMembershipEditor(context) {
         var graph = context.graph();
 
         context.intersects(context.extent()).forEach(function(entity) {
-            if (entity.type !== 'relation' || entity.id === _entityID)
-                return;
+            if (entity.type !== 'relation' || entity.id === _entityID) return;
 
-            var matched = context.presets().match(entity, graph),
-                presetName = (matched && matched.name()) || t('inspector.relation'),
-                entityName = utilDisplayName(entity) || '';
+            var matched = context.presets().match(entity, graph);
+            var presetName = (matched && matched.name()) || t('inspector.relation');
+            var entityName = utilDisplayName(entity) || '';
 
             var value = presetName + ' ' + entityName;
-            if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1)
-                return;
+            if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
             result.push({ relation: entity, value: value });
         });
@@ -116,7 +117,7 @@ export function uiRawMembershipEditor(context) {
             });
         });
 
-        _forEach(result, function(obj) {
+        result.forEach(function(obj) {
             obj.title = obj.value;
         });
 
@@ -126,9 +127,9 @@ export function uiRawMembershipEditor(context) {
 
 
     function rawMembershipEditor(selection) {
-        var entity = context.entity(_entityID),
-            parents = context.graph().parentRelations(entity),
-            memberships = [];
+        var entity = context.entity(_entityID);
+        var parents = context.graph().parentRelations(entity);
+        var memberships = [];
 
         parents.slice(0, 1000).forEach(function(relation) {
             relation.members.forEach(function(member, index) {
@@ -150,8 +151,8 @@ export function uiRawMembershipEditor(context) {
         );
 
 
-        function content(wrap) {
-            var list = wrap.selectAll('.member-list')
+        function content(selection) {
+            var list = selection.selectAll('.member-list')
                 .data([0]);
 
             list = list.enter()
@@ -183,14 +184,16 @@ export function uiRawMembershipEditor(context) {
                 });
             });
 
-            var label = enter
+            var labelEnter = enter
                 .append('label')
-                .attr('class', 'form-label')
+                .attr('class', 'form-field-label')
+                .append('span')
+                .attr('class', 'label-text')
                 .append('a')
                 .attr('href', '#')
                 .on('click', selectRelation);
 
-            label
+            labelEnter
                 .append('span')
                 .attr('class', 'member-entity-type')
                 .text(function(d) {
@@ -198,12 +201,16 @@ export function uiRawMembershipEditor(context) {
                     return (matched && matched.name()) || t('inspector.relation');
                 });
 
-            label
+            labelEnter
                 .append('span')
                 .attr('class', 'member-entity-name')
                 .text(function(d) { return utilDisplayName(d.relation); });
 
-            enter
+            var wrapEnter = enter
+                .append('div')
+                .attr('class', 'form-field-input-wrap form-field-input-member');
+
+            wrapEnter
                 .append('input')
                 .attr('class', 'member-role')
                 .property('type', 'text')
@@ -213,15 +220,15 @@ export function uiRawMembershipEditor(context) {
                 .property('value', function(d) { return d.member.role; })
                 .on('change', changeRole);
 
-            enter
+            wrapEnter
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'remove button-input-action member-delete minor')
+                .attr('class', 'remove form-field-button member-delete')
                 .on('click', deleteMembership)
                 .call(svgIcon('#iD-operation-delete'));
 
             if (taginfo) {
-                enter.each(bindTypeahead);
+                wrapEnter.each(bindTypeahead);
             }
 
 
@@ -253,7 +260,7 @@ export function uiRawMembershipEditor(context) {
             enter
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', 'remove button-input-action member-delete minor')
+                .attr('class', 'remove form-field-button member-delete')
                 .on('click', deleteMembership)
                 .call(svgIcon('#iD-operation-delete'));
 
@@ -269,7 +276,7 @@ export function uiRawMembershipEditor(context) {
                 );
 
 
-            var addrel = wrap.selectAll('.add-relation')
+            var addrel = selection.selectAll('.add-relation')
                 .data([0]);
 
             addrel = addrel.enter()
@@ -281,7 +288,7 @@ export function uiRawMembershipEditor(context) {
                 .call(svgIcon('#iD-icon-plus', 'light'))
                 .on('click', function() {
                     _showBlank = true;
-                    content(wrap);
+                    content(selection);
                     list.selectAll('.member-entity-input').node().focus();
                 });
 
@@ -293,12 +300,12 @@ export function uiRawMembershipEditor(context) {
 
 
             function bindTypeahead(d) {
-                var row = d3_select(this),
-                    role = row.selectAll('input.member-role');
+                var row = d3_select(this);
+                var role = row.selectAll('input.member-role');
 
                 function sort(value, data) {
-                    var sameletter = [],
-                        other = [];
+                    var sameletter = [];
+                    var other = [];
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].value.substring(0, value.length) === value) {
                             sameletter.push(data[i]);

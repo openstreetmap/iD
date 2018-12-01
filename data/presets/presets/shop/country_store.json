@@ -1,13 +1,10 @@
 {
-    "icon": "maki-car",
+    "icon": "maki-shop",
     "fields": [
         "name",
-        "brand",
         "operator",
         "address",
         "building_area",
-        "second_hand",
-        "service/vehicle",
         "opening_hours",
         "payment_multi"
     ],
@@ -15,11 +12,8 @@
         "point",
         "area"
     ],
-    "terms": [
-        "auto"
-    ],
     "tags": {
-        "shop": "car"
+        "shop": "country_store"
     },
-    "name": "Car Dealership"
+    "name": "Country Store"
 }

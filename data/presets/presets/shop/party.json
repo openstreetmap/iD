@@ -1,13 +1,10 @@
 {
-    "icon": "maki-car",
+    "icon": "maki-shop",
     "fields": [
         "name",
-        "brand",
         "operator",
         "address",
         "building_area",
-        "second_hand",
-        "service/vehicle",
         "opening_hours",
         "payment_multi"
     ],
@@ -16,10 +13,13 @@
         "area"
     ],
     "terms": [
-        "auto"
+        "balloons",
+        "costumes",
+        "decorations",
+        "invitations"
     ],
     "tags": {
-        "shop": "car"
+        "shop": "party"
     },
-    "name": "Car Dealership"
+    "name": "Party Supply Store"
 }

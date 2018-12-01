@@ -286,19 +286,26 @@ export function uiFieldCombo(field, context) {
 
 
     function combo(selection) {
+        container = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        var type = (isMulti || isSemi) ? 'multicombo': 'combo';
+        container = container.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + type)
+            .merge(container);
+
         if (isMulti || isSemi) {
-            container = selection.selectAll('ul').data([0]);
+            container = container.selectAll('.chiplist')
+                .data([0]);
 
             container = container.enter()
                 .append('ul')
-                .attr('class', 'form-field-multicombo')
+                .attr('class', 'chiplist')
                 .on('click', function() {
                     window.setTimeout(function() { input.node().focus(); }, 10);
                 })
                 .merge(container);
-
-        } else {
-            container = selection;
         }
 
         input = container.selectAll('input')

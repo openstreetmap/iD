@@ -95,7 +95,9 @@ export function uiEntityEditor(context) {
             .attr('class', 'preset-list-button preset-reset')
             .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'))
             .append('div')
-            .attr('class', 'label');
+            .attr('class', 'label')
+            .append('div')
+            .attr('class', 'label-inner');
 
         enter
             .append('div')
@@ -142,8 +144,20 @@ export function uiEntityEditor(context) {
                 .preset(_activePreset)
             );
 
-        body.select('.preset-list-item .label')
-            .text(_activePreset.name());
+
+        var label = body.select('.label-inner');
+        var nameparts = label.selectAll('.namepart')
+            .data(_activePreset.name().split(' - '), function(d) { return d; });
+
+        nameparts.exit()
+            .remove();
+
+        nameparts
+            .enter()
+            .append('div')
+            .attr('class', 'namepart')
+            .text(function(d) { return d; });
+
 
         body.select('.preset-editor')
             .call(presetEditor
@@ -264,6 +278,12 @@ export function uiEntityEditor(context) {
         _entityID = _;
         _base = context.graph();
         _coalesceChanges = false;
+
+        // reset the scroll to the top of the inspector
+        var body = d3_selectAll('.entity-editor-pane .inspector-body');
+        if (!body.empty()) {
+            body.node().scrollTop = 0;
+        }
 
         var presetMatch = context.presets().match(context.entity(_entityID), _base);
 

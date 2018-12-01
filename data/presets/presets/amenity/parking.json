@@ -21,8 +21,12 @@
         "amenity": "parking"
     },
     "terms": [
-        "car",
-        "parking lot"
+        "automobile parking",
+        "car lot",
+        "car parking",
+        "rv parking",
+        "truck parking",
+        "vehicle parking"
     ],
     "name": "Parking Lot"
 }

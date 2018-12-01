@@ -1,8 +1,17 @@
 /* base styles */
-.layer-osm path:not(.oneway-marker-path) {                /* IE/Edge needs :not(.oneway) */
+.layer-osm path {
     fill: none;
 }
-.layer-osm path.viewfield-marker-path {                   /* IE/Edge rule for <use> marker style */
+
+/* IE/Edge needs these overrides for markers to show up */
+.layer-osm path.oneway-marker-path          { fill: #000; }
+.layer-osm path.sided-marker-natural-path   { fill: rgb(140, 208, 95); }
+.layer-osm path.sided-marker-coastline-path { fill: #77dede; }
+.layer-osm path.sided-marker-barrier-path   { fill: #ddd; }
+.layer-osm path.sided-marker-man_made-path  { fill: #fff; }
+
+/* IE/Edge rule for <use> marker style */
+.layer-osm path.viewfield-marker-path {
     fill: #333;
     fill-opacity: 0.75;
     stroke: #fff;
@@ -205,7 +214,8 @@ text {
 }
 
 .onewaygroup path.oneway,
-.viewfieldgroup path.viewfield {
+.viewfieldgroup path.viewfield,
+.sidedgroup path.sided {
     stroke-width: 6px;
 }
 

@@ -14,15 +14,15 @@ import {
 
 
 export function uiFieldMaxspeed(field, context) {
-    var dispatch = d3_dispatch('change'),
-        entity,
-        isImperial,
-        unitInput = d3_select(null),
-        input = d3_select(null),
-        combobox;
+    var dispatch = d3_dispatch('change');
+    var unitInput = d3_select(null);
+    var input = d3_select(null);
+    var combobox;
+    var _entity;
+    var _isImperial;
 
-    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
+    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+    var imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
 
     function maxspeed(selection) {
@@ -33,7 +33,16 @@ export function uiFieldMaxspeed(field, context) {
             .container(context.container())
             .data(['km/h', 'mph'].map(comboValues));
 
-        input = selection.selectAll('#preset-input-' + field.safeid)
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+
+        input = wrap.selectAll('#preset-input-' + field.safeid)
             .data([0]);
 
         input = input.enter()
@@ -50,21 +59,20 @@ export function uiFieldMaxspeed(field, context) {
             .on('blur', change);
 
         var loc;
-        if (entity.type === 'node') {
-            loc = entity.loc;
-        }
-        else {
-            var childNodes = context.graph().childNodes(context.entity(entity.id));
+        if (_entity.type === 'node') {
+            loc = _entity.loc;
+        } else {
+            var childNodes = context.graph().childNodes(context.entity(_entity.id));
             loc = childNodes[~~(childNodes.length/2)].loc;
         }
 
-        isImperial = _some(dataImperial.features, function(f) {
+        _isImperial = _some(dataImperial.features, function(f) {
             return _some(f.geometry.coordinates, function(d) {
                 return geoPointInPolygon(loc, d);
             });
         });
 
-        unitInput = selection.selectAll('input.maxspeed-unit')
+        unitInput = wrap.selectAll('input.maxspeed-unit')
             .data([0]);
 
         unitInput = unitInput.enter()
@@ -80,8 +88,8 @@ export function uiFieldMaxspeed(field, context) {
 
 
         function changeUnits() {
-            isImperial = utilGetSetValue(unitInput) === 'mph';
-            utilGetSetValue(unitInput, isImperial ? 'mph' : 'km/h');
+            _isImperial = utilGetSetValue(unitInput) === 'mph';
+            utilGetSetValue(unitInput, _isImperial ? 'mph' : 'km/h');
             setSuggestions();
             change();
         }
@@ -89,8 +97,8 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function setSuggestions() {
-        combobox.data((isImperial ? imperialValues : metricValues).map(comboValues));
-        utilGetSetValue(unitInput, isImperial ? 'mph' : 'km/h');
+        combobox.data((_isImperial ? imperialValues : metricValues).map(comboValues));
+        utilGetSetValue(unitInput, _isImperial ? 'mph' : 'km/h');
     }
 
 
@@ -103,12 +111,12 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function change() {
-        var tag = {},
-            value = utilGetSetValue(input);
+        var tag = {};
+        var value = utilGetSetValue(input);
 
         if (!value) {
             tag[field.key] = undefined;
-        } else if (isNaN(value) || !isImperial) {
+        } else if (isNaN(value) || !_isImperial) {
             tag[field.key] = value;
         } else {
             tag[field.key] = value + ' mph';
@@ -123,9 +131,9 @@ export function uiFieldMaxspeed(field, context) {
 
         if (value && value.indexOf('mph') >= 0) {
             value = parseInt(value, 10);
-            isImperial = true;
+            _isImperial = true;
         } else if (value) {
-            isImperial = false;
+            _isImperial = false;
         }
 
         setSuggestions();
@@ -138,8 +146,8 @@ export function uiFieldMaxspeed(field, context) {
     };
 
 
-    maxspeed.entity = function(_) {
-        entity = _;
+    maxspeed.entity = function(val) {
+        _entity = val;
     };
 
 

@@ -373,7 +373,7 @@
         "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
         "translate": {
             "translate": "Translate",
-            "localized_translation_label": "Multilingual name",
+            "localized_translation_label": "Multilingual Name",
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
@@ -534,7 +534,10 @@
             "way": "Way",
             "relation": "Relation",
             "location": "Location",
-            "add_fields": "Add field:"
+            "add_fields": "Add field:",
+            "lock": {
+                "suggestion": "The \"{label}\" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the \"All tags\" section."
+            }
         },
         "background": {
             "title": "Background",
@@ -3607,6 +3610,10 @@
                     "name": "Monastery Grounds",
                     "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,monastery,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
                 },
+                "amenity/money_transfer": {
+                    "name": "Money Transfer Station",
+                    "terms": "money order,check,bill,currency,finance,wire transfer,cable,person to person,cash to cash,exchange"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcycle Parking",
                     "terms": ""
@@ -3629,11 +3636,19 @@
                 },
                 "amenity/parking": {
                     "name": "Parking Lot",
-                    "terms": "car,parking lot"
+                    "terms": "automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking"
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
+                },
+                "amenity/payment_centre": {
+                    "name": "Payment Center",
+                    "terms": "check,tax pay,bill pay,currency,finance,cash,money"
+                },
+                "amenity/payment_terminal": {
+                    "name": "Payment Terminal",
+                    "terms": "interactive kiosk,ekiosk,atm,bill pay,tax pay,phone pay,finance,cash,money transfer,card"
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy",
@@ -4103,9 +4118,17 @@
                     "name": "Fence",
                     "terms": ""
                 },
+                "barrier/fence/railing": {
+                    "name": "Railing",
+                    "terms": "railing,handrail,guard rail"
+                },
                 "barrier/gate": {
                     "name": "Gate",
                     "terms": ""
+                },
+                "barrier/guard_rail": {
+                    "name": "Guard Rail",
+                    "terms": "guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier"
                 },
                 "barrier/hedge": {
                     "name": "Hedge",
@@ -4114,6 +4137,10 @@
                 "barrier/kerb": {
                     "name": "Curb",
                     "terms": ""
+                },
+                "barrier/kerb/flush": {
+                    "name": "Flush Curb",
+                    "terms": "even curb,level curb,tactile curb"
                 },
                 "barrier/kerb/lowered": {
                     "name": "Lowered Curb",
@@ -5461,7 +5488,7 @@
                 },
                 "leisure/slipway": {
                     "name": "Slipway",
-                    "terms": "boat launch,boat ramp"
+                    "terms": "boat launch,boat ramp,boat landing"
                 },
                 "leisure/sports_centre": {
                     "name": "Sports Center / Complex",
@@ -6567,6 +6594,10 @@
                     "name": "Carpet Store",
                     "terms": "rug"
                 },
+                "shop/catalogue": {
+                    "name": "Catalog Shop",
+                    "terms": ""
+                },
                 "shop/charity": {
                     "name": "Charity Store",
                     "terms": "thrift,op shop,nonprofit"
@@ -6609,6 +6640,10 @@
                 },
                 "shop/cosmetics": {
                     "name": "Cosmetics Store",
+                    "terms": ""
+                },
+                "shop/country_store": {
+                    "name": "Country Store",
                     "terms": ""
                 },
                 "shop/craft": {
@@ -6694,6 +6729,10 @@
                 "shop/greengrocer": {
                     "name": "Greengrocer",
                     "terms": "fruit,vegetable"
+                },
+                "shop/hairdresser_supply": {
+                    "name": "Hairdresser Supply Store",
+                    "terms": "barber,shampoo,conditioner"
                 },
                 "shop/hairdresser": {
                     "name": "Hairdresser",
@@ -6814,6 +6853,10 @@
                 "shop/paint": {
                     "name": "Paint Store",
                     "terms": ""
+                },
+                "shop/party": {
+                    "name": "Party Supply Store",
+                    "terms": "balloons,costumes,decorations,invitations"
                 },
                 "shop/pastry": {
                     "name": "Pastry Shop",
@@ -7468,6 +7511,9 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -7475,10 +7521,6 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
-            },
-            "US-TIGER-Roads-2018": {
-                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
-                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -7580,33 +7622,11 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
-            "helsingborg-orto": {
+            "hike_n_bike": {
                 "attribution": {
-                    "text": "© Helsingborg municipality"
+                    "text": "© OpenStreetMap contributors"
                 },
-                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
-                "name": "Helsingborg Orthophoto"
-            },
-            "kalmar-orto-2014": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
-                "name": "Kalmar North Orthophoto 2014"
-            },
-            "kalmar-orto-2016": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
-                "name": "Kalmar South Orthophoto 2016"
-            },
-            "kalmar-orto-2018": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
-                "name": "Kalmar Urban Orthophoto 2018"
+                "name": "Hike & Bike"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -7628,20 +7648,6 @@
                 },
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
-            },
-            "lantmateriet-topowebb": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Topographic map of Sweden 1:50 000",
-                "name": "Lantmäteriet Topographic Map"
-            },
-            "linkoping-orto": {
-                "attribution": {
-                    "text": "© Linköping municipality"
-                },
-                "description": "Orthophotos from the municipality of Linköping 2010, open data",
-                "name": "Linköping Orthophoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -7706,13 +7712,6 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
-            },
-            "stockholm-orto": {
-                "attribution": {
-                    "text": "© Stockholm municipality, CC0"
-                },
-                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
-                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
@@ -7824,6 +7823,11 @@
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap India Mailinglist",
                 "description": "Talk-in is the official Mailinglist for Indian Community"
+            },
+            "OSM-India-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - Mailing List",
+                "description": "FSHM Puducherry mailing list to discuss mapping in Puducherry and other things.",
+                "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap."
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India Twitter",
@@ -8192,6 +8196,10 @@
                 "name": "OpenStreetMap mailing list for Trentino",
                 "description": "OpenStreetMap Italy regional talk list for Trentino"
             },
+            "kosovo-telegram": {
+                "name": "OpenStreetMap Kosovo on Telegram",
+                "description": "Semi-official all-Kosovo Telegram public group. We welcome all mappers from anywhere in any language."
+            },
             "no-forum": {
                 "name": "OpenStreetMap Norway Web Forum",
                 "description": "OpenStreetMap Norway web forum"
@@ -8324,6 +8332,10 @@
                 "name": "MaptimeME",
                 "description": "Mappers and OpenStreetMap users, around Portland, ME",
                 "extendedDescription": "Maptime is, rather literally, time for mapmaking.  Our mission is to open the doors of cartographic possibility to anyone interested by creating a time and space for collaborative learning, exploration, and map creation using mapping tools and technologies."
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA Twitter",
+                "description": "Follow us on Twitter at {url}"
             },
             "us-ma-mailinglist": {
                 "name": "Talk-us-massachusetts Mailing List",
@@ -8599,6 +8611,10 @@
                     }
                 }
             },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discord",
+                "description": "Get in touch with other mappers via Discord"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap on Facebook",
                 "description": "Like us on Facebook for news and updates about OpenStreetMap."
@@ -8607,6 +8623,10 @@
                 "name": "OpenStreetMap Help",
                 "description": "Ask a question and get answers on OSM's community-driven question and answer site.",
                 "extendedDescription": "{url} is for everyone who needs help with OpenStreetMap.  Whether you are a beginner mapper or have a technical question, we're here to help!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "Join #osm on irc.oftc.net (port 6667)"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",

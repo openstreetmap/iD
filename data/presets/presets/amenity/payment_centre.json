@@ -1,13 +1,10 @@
 {
-    "icon": "maki-car",
+    "icon": "maki-bank",
     "fields": [
-        "name",
+	    "name",
         "brand",
-        "operator",
         "address",
         "building_area",
-        "second_hand",
-        "service/vehicle",
         "opening_hours",
         "payment_multi"
     ],
@@ -16,10 +13,16 @@
         "area"
     ],
     "terms": [
-        "auto"
+        "check",
+        "tax pay",
+        "bill pay",
+        "currency",
+        "finance",
+        "cash",
+        "money"
     ],
     "tags": {
-        "shop": "car"
+        "amenity": "payment_centre"
     },
-    "name": "Car Dealership"
+    "name": "Payment Center"
 }

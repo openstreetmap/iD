@@ -241,7 +241,9 @@ export function d3combobox() {
         }
 
         function render() {
-            if (_suggestions.length >= _minItems && document.activeElement === input.node()) {
+            if (_suggestions.length >= _minItems &&
+                document.activeElement === input.node()) {
+                // input.attr('readonly') === null)
                 show();
             } else {
                 hide();

@@ -46,7 +46,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc'}
+                {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(
                 null, [{'title':'amenity', 'value':'amenity'}]
@@ -131,7 +131,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc'}
+                {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(
                 null, [{'title':'recycling:glass', 'value':'recycling:glass'}]
@@ -183,7 +183,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc'}
+                {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(
                 null, [{'value':'parking','title':'A place for parking cars'}]
@@ -321,7 +321,7 @@ describe('iD.serviceTaginfo', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc'}
+                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
             );
             expect(callback).to.have.been.calledWith(null, [
                 {'value': 'stop', 'title': 'stop'},

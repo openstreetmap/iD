@@ -103,7 +103,7 @@ export function uiRawTagEditor(context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', 'tag-row cf')
+            .attr('class', 'tag-row')
             .classed('readonly', isReadOnly);
 
         var innerWrap = enter.append('div')
@@ -122,7 +122,7 @@ export function uiRawTagEditor(context) {
 
         innerWrap
             .append('div')
-            .attr('class', 'input-wrap-position')
+            .attr('class', 'value-wrap')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
@@ -135,7 +135,7 @@ export function uiRawTagEditor(context) {
         innerWrap
             .append('button')
             .attr('tabindex', -1)
-            .attr('class', 'remove minor')
+            .attr('class', 'form-field-button remove')
             .call(svgIcon('#iD-operation-delete'));
 
 

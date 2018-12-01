@@ -262,7 +262,7 @@ export function uiPresetList(context) {
                     (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
                 d3_select(this)
                     .classed('expanded', !isExpanded);
-                d3_select(this).selectAll('div.label svg.icon use')
+                d3_select(this).selectAll('div.label-inner svg.icon use')
                     .attr('href', iconName);
                 item.choose();
             }
@@ -301,9 +301,13 @@ export function uiPresetList(context) {
 
             var label = button
                 .append('div')
-                .attr('class', 'label');
+                .attr('class', 'label')
+                .append('div')
+                .attr('class', 'label-inner');
 
             label
+                .append('div')
+                .attr('class', 'namepart')
                 .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
                 .html(function() { return preset.name() + '&hellip;'; });
@@ -352,16 +356,26 @@ export function uiPresetList(context) {
             var wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap col12');
 
-            wrap.append('button')
+            var button = wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .call(uiPresetIcon()
                     .geometry(context.geometry(_entityID))
                     .preset(preset))
                 .on('click', item.choose)
-                .on('keydown', itemKeydown)
+                .on('keydown', itemKeydown);
+
+            var label = button
                 .append('div')
                 .attr('class', 'label')
-                .text(preset.name());
+                .append('div')
+                .attr('class', 'label-inner');
+
+            label.selectAll('.namepart')
+                .data(preset.name().split(' - '))
+                .enter()
+                .append('div')
+                .attr('class', 'namepart')
+                .text(function(d) { return d; });
 
             wrap.call(item.reference.button);
             selection.call(item.reference.body);

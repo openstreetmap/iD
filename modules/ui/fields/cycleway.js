@@ -1,5 +1,3 @@
-import _keys from 'lodash-es/keys';
-
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
@@ -12,8 +10,8 @@ import {
 
 
 export function uiFieldCycleway(field, context) {
-    var dispatch = d3_dispatch('change'),
-        items = d3_select(null);
+    var dispatch = d3_dispatch('change');
+    var items = d3_select(null);
 
 
     function cycleway(selection) {
@@ -23,12 +21,12 @@ export function uiFieldCycleway(field, context) {
         }
 
 
-        var wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'cf preset-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
 
@@ -37,6 +35,7 @@ export function uiFieldCycleway(field, context) {
 
         div = div.enter()
             .append('ul')
+            .attr('class', 'labeled-inputs')
             .merge(div);
 
 
@@ -45,17 +44,17 @@ export function uiFieldCycleway(field, context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'cf preset-cycleway-' + stripcolon(d); });
+            .attr('class', function(d) { return 'preset-cycleway-' + stripcolon(d); });
 
         enter
             .append('span')
-            .attr('class', 'col6 label preset-label-cycleway')
+            .attr('class', 'label preset-label-cycleway')
             .attr('for', function(d) { return 'preset-input-cycleway-' + stripcolon(d); })
             .text(function(d) { return field.t('types.' + d); });
 
         enter
             .append('div')
-            .attr('class', 'col6 preset-input-cycleway-wrap')
+            .attr('class', 'preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
@@ -77,9 +76,9 @@ export function uiFieldCycleway(field, context) {
 
 
     function change() {
-        var left = utilGetSetValue(d3_select('.preset-input-cyclewayleft')),
-            right = utilGetSetValue(d3_select('.preset-input-cyclewayright')),
-            tag = {};
+        var left = utilGetSetValue(d3_select('.preset-input-cyclewayleft'));
+        var right = utilGetSetValue(d3_select('.preset-input-cyclewayright'));
+        var tag = {};
 
         if (left === 'none' || left === '') { left = undefined; }
         if (right === 'none' || right === '') { right = undefined; }
@@ -106,7 +105,7 @@ export function uiFieldCycleway(field, context) {
 
 
     cycleway.options = function() {
-        return _keys(field.strings.options).map(function(option) {
+        return Object.keys(field.strings.options).map(function(option) {
             return {
                 title: field.t('options.' + option + '.description'),
                 value: option
