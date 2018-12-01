@@ -35,6 +35,7 @@ export function uiFieldCycleway(field, context) {
 
         div = div.enter()
             .append('ul')
+            .attr('class', 'labeled-inputs')
             .merge(div);
 
 

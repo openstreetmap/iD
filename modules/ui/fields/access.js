@@ -27,6 +27,7 @@ export function uiFieldAccess(field, context) {
 
         list = list.enter()
             .append('ul')
+            .attr('class', 'labeled-inputs')
             .merge(list);
 
 

@@ -1316,7 +1316,7 @@ img.tag-reference-wiki-image {
 }
 
 
-/* Field - Access, Cycleway, Structure
+/* Field - Access, Cycleway
 ------------------------------------------------------- */
 .form-field-input-access,
 .form-field-input-cycleway {
@@ -1324,56 +1324,48 @@ img.tag-reference-wiki-image {
     display: flex;
     flex-flow: row wrap;
 }
-.form-field-input-access > ul,
-.form-field-input-cycleway > ul {
+
+/* Field - lists with labeled input items
+------------------------------------------------------- */
+.form-field ul.labeled-inputs {
     flex: 1 1 auto;
     border: 1px solid #ccc;
     border-top: 0;
     border-radius: 0 0 4px 4px;
+    overflow: hidden;
     width: 100%;
 }
-
-.structure-extras-wrap li,
-.form-field-input-cycleway li,
-.form-field-input-access li {
+.form-field ul.labeled-inputs li {
     border-bottom: 1px solid #ccc;
     display: flex;
     flex-flow: row nowrap;
 }
-.structure-extras-wrap li:last-child,
-.form-field-input-cycleway li:last-child,
-.form-field-input-access li:last-child {
+.form-field ul.labeled-inputs li:last-child {
     border-bottom: 0;
 }
-.structure-extras-wrap li > *,
-.form-field-input-cycleway li > *,
-.form-field-input-access li > * {
+.form-field ul.labeled-inputs li > * {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
 }
-.structure-input-type-wrap input,
-.structure-input-layer-wrap input,
-.preset-input-cycleway-wrap input,
-.preset-input-access-wrap input {
-    border-width: 0;
+.form-field ul.labeled-inputs li input {
     border-radius: 0;
-    border-left-width: 1px;
     width: 100%;
 }
-[dir='rtl'] .structure-input-type-wrap input,
-[dir='rtl'] .structure-input-layer-wrap input,
-[dir='rtl'] .preset-input-cycleway-wrap input,
-[dir='rtl'] .preset-input-access-wrap input {
+.form-field ul.labeled-inputs li input,
+.form-field ul.labeled-inputs li button {
+    border-width: 0;
+    border-left-width: 1px;
+}
+[dir='rtl'] .form-field ul.labeled-inputs li input,
+[dir='rtl'] .form-field ul.labeled-inputs li button {
     border-left-width: 0;
     border-right-width: 1px;
 }
 
-.form-field-input-wrap li:last-child input {
-    border-bottom-right-radius: 4px;
-}
 
-
+/* Field - Structure
+------------------------------------------------------- */
 .structure-extras-wrap {
     width: 100%;
     padding: 10px 10px;
@@ -1382,70 +1374,9 @@ img.tag-reference-wiki-image {
     border-top: 0px;
     border-radius: 0 0 4px 4px;
 }
-.structure-extras-wrap > ul {
+.structure-extras-wrap > ul.labeled-inputs {
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.structure-extras-wrap li button {
-    border-bottom: 0;
-    border-right: 0;
-    border-left-width: 1px;
-}
-[dir='rtl'] .structure-extras-wrap li button {
-    border-left: 0;
-    border-right-width: 1px;
-}
-
-.structure-extras-wrap li:first-child span {
-    border-radius: 4px 0 0 0;
-}
-[dir='rtl'] .structure-extras-wrap li:first-child span {
-    border-radius: 0 4px 0 0;
-}
-
-.structure-extras-wrap li:first-child input {
-    border-radius: 0 4px 0 0;
-}
-[dir='rtl'] .structure-extras-wrap li:first-child input {
-    border-radius: 4px 0 0 0;
-}
-
-.structure-extras-wrap li:last-child span,
-.form-field-input-cycleway li:last-child span,
-.form-field-input-access li:last-child span {
-    border-radius: 0 0 0 4px;
-}
-[dir='rtl'] .structure-extras-wrap li:last-child span,
-[dir='rtl'] .form-field-input-cycleway li:last-child span,
-[dir='rtl'] .form-field-input-access li:last-child span {
-    border-radius: 0 0 4px 0;
-}
-
-.form-field-input-cycleway li:last-child input,
-.form-field-input-access li:last-child input {
-    border-radius: 0 0 4px 0;
-}
-[dir='rtl'] .form-field-input-cycleway li:last-child input,
-[dir='rtl'] .form-field-input-access li:last-child input {
-    border-radius: 0 0 0 4px;
-}
-
-.structure-extras-wrap li:last-child input {
-    border-radius: 0 0 0 0;
-}
-
-.structure-extras-wrap li:only-child span {
-    border-radius: 4px 0 0 4px;
-}
-[dir='rtl'] .structure-extras-wrap li:only-child span {
-    border-radius: 0 4px 4px 0;
-}
-.structure-extras-wrap li:only-child input {
-    border-radius: 0 4px 4px 0;
-}
-[dir='rtl'] .structure-extras-wrap li:only-child input {
-    border-radius: 4px 0 0 4px;
 }
 
 
