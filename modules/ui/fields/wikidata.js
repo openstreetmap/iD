@@ -19,11 +19,10 @@ import { t } from '../../util/locale';
 
 export function uiFieldWikidata(field) {
     var wikidata = services.wikidata;
-    var dispatch = d3_dispatch('change'),
-        link = d3_select(null),
-        title = d3_select(null),
-        wikiURL = '',
-        entity;
+    var dispatch = d3_dispatch('change');
+    var link = d3_select(null);
+    var title = d3_select(null);
+    var _wikiURL = '';
 
 
     function wiki(selection) {
@@ -59,16 +58,18 @@ export function uiFieldWikidata(field) {
             .append('span')
             .attr('class', 'label')
             .attr('for', function(d) { return 'preset-input-wikidata-' + d; })
-            .text(function(d) { return t('wikidata.'+d); });
+            .text(function(d) { return t('wikidata.' + d); });
 
         var inputWrap = enter
             .append('div')
             .attr('class', 'input-wrap');
 
-        inputWrap.append('input')
+        inputWrap
+            .append('input')
             .attr('type', 'text')
             .attr('class', 'preset-input-wikidata')
             .attr('id', function(d) { return 'preset-input-wikidata-' + d; });
+
 
         title = wrap.select('.preset-wikidata-identifier input')
             .call(utilNoAuto)
@@ -83,7 +84,8 @@ export function uiFieldWikidata(field) {
         idItem.select('button')
             .remove();
 
-        link = idItem.append('button')
+        link = idItem
+            .append('button')
             .attr('class', 'form-field-button wiki-link')
             .attr('title', t('icons.open_wikidata'))
             .attr('tabindex', -1)
@@ -93,7 +95,7 @@ export function uiFieldWikidata(field) {
         link
             .on('click', function() {
                 d3_event.preventDefault();
-                if (wikiURL) window.open(wikiURL, '_blank');
+                if (_wikiURL) window.open(_wikiURL, '_blank');
             });
 
         var readOnlyItems = wrap.selectAll('li:not(.preset-wikidata-identifier)');
@@ -135,16 +137,17 @@ export function uiFieldWikidata(field) {
 
 
     wiki.tags = function(tags) {
-        var value = tags[field.key] || '',
-            matches = value.match(/^Q[0-9]*$/);
+        var value = tags[field.key] || '';
+        var matches = value.match(/^Q[0-9]*$/);
 
         utilGetSetValue(title, value);
 
         // value in correct format
         if (matches) {
-            wikiURL = 'https://wikidata.org/wiki/' + value;
+            _wikiURL = 'https://wikidata.org/wiki/' + value;
             wikidata.entityByQID(value, function(qid, entity) {
-                var label = '', description = '';
+                var label = '';
+                var description = '';
 
                 if (entity.labels && Object.keys(entity.labels).length > 0) {
                     label = entity.labels[Object.keys(entity.labels)[0]].value;
@@ -167,23 +170,17 @@ export function uiFieldWikidata(field) {
                     .select('input')
                     .attr('value', description);
             });
+
         // unrecognized value format
         } else {
             d3_select('.preset-wikidata-label').style('display', 'none');
             d3_select('.preset-wikidata-description').style('display', 'none');
             if (value && value !== '') {
-                wikiURL = 'https://wikidata.org/wiki/Special:Search?search=' + value;
+                _wikiURL = 'https://wikidata.org/wiki/Special:Search?search=' + value;
             } else {
-                wikiURL = '';
+                _wikiURL = '';
             }
         }
-    };
-
-
-    wiki.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
-        return wiki;
     };
 
 
