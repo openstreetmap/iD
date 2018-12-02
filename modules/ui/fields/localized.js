@@ -42,11 +42,26 @@ export function uiFieldLocalized(field, context) {
 
 
     function calcLocked() {
-        var preset = _entity && context.presets().match(_entity, context.graph());
+        if (!_entity) {    // the original entity
+            _isLocked = false;
+            return;
+        }
+
+        var latest = context.hasEntity(_entity.id);
+        if (!latest) {    // get current entity, possibly edited
+            _isLocked = false;
+            return;
+        }
+
+        var hasOriginalName = (latest.tags.name && latest.tags.name === _entity.tags.name);
+        var hasWikidata = latest.tags.wikidata;
+        var preset = context.presets().match(latest, context.graph());
         var isSuggestion = preset && preset.suggestion;
         var showsBrand = preset && preset.fields
             .filter(function(d) { return d.id === 'brand'; }).length;
-        _isLocked = field.id === 'name' && isSuggestion && !showsBrand;
+
+        _isLocked = !!(field.id === 'name' && hasOriginalName &&
+            (hasWikidata || (isSuggestion && !showsBrand)));
     }
 
 
@@ -65,7 +80,8 @@ export function uiFieldLocalized(field, context) {
     function localized(selection) {
         _selection = selection;
         calcLocked();
-        var preset = _entity && context.presets().match(_entity, context.graph());
+        var entity = context.hasEntity(_entity.id);  // get latest
+        var preset = entity && context.presets().match(entity, context.graph());
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -129,8 +145,9 @@ export function uiFieldLocalized(field, context) {
                             .fetcher(suggestNames(preset, allSuggestions))
                             .minItems(1)
                             .on('accept', function(d) {
-                                var tags = _entity.tags;
-                                var geometry = _entity.geometry(context.graph());
+                                var entity = context.hasEntity(_entity.id);  // get latest
+                                var tags = entity.tags;
+                                var geometry = entity.geometry(context.graph());
                                 var removed = preset.unsetTags(tags, geometry);
                                 for (var k in tags) {
                                     tags[k] = removed[k];  // set removed tags to `undefined`
@@ -168,8 +185,8 @@ export function uiFieldLocalized(field, context) {
             .on('click', addNew);
 
 
-        if (_entity && !_multilingual.length) {
-            calcMultilingual(_entity.tags);
+        if (entity && !_multilingual.length) {
+            calcMultilingual(entity.tags);
         }
 
         localizedInputs = selection.selectAll('.localized-multilingual')
