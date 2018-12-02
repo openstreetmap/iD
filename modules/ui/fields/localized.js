@@ -80,7 +80,7 @@ export function uiFieldLocalized(field, context) {
     function localized(selection) {
         _selection = selection;
         calcLocked();
-        var entity = context.hasEntity(_entity.id);  // get latest
+        var entity = _entity && context.hasEntity(_entity.id);  // get latest
         var preset = entity && context.presets().match(entity, context.graph());
 
         var wrap = selection.selectAll('.form-field-input-wrap')
@@ -145,7 +145,7 @@ export function uiFieldLocalized(field, context) {
                             .fetcher(suggestNames(preset, allSuggestions))
                             .minItems(1)
                             .on('accept', function(d) {
-                                var entity = context.hasEntity(_entity.id);  // get latest
+                                var entity = context.entity(_entity.id);  // get latest
                                 var tags = entity.tags;
                                 var geometry = entity.geometry(context.graph());
                                 var removed = preset.unsetTags(tags, geometry);
