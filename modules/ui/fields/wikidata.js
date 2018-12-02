@@ -116,7 +116,7 @@ export function uiFieldWikidata(field) {
                     .select('input')
                     .node()
                     .select();
-                document.execCommand("copy");
+                document.execCommand('copy');
             });
     }
 
@@ -147,12 +147,10 @@ export function uiFieldWikidata(field) {
                 var label = '', description = '';
 
                 if (entity.labels && Object.keys(entity.labels).length > 0) {
-                    var lang = Object.keys(entity.labels)[0];
-                    label = entity.labels[lang].value;
+                    label = entity.labels[Object.keys(entity.labels)[0]].value;
                 }
                 if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
-                    var lang = Object.keys(entity.descriptions)[0];
-                    description = entity.descriptions[lang].value;
+                    description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
                 }
 
                 d3_select('.preset-wikidata-label')
