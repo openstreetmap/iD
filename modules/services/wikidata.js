@@ -47,7 +47,7 @@ export default {
         }
         if (_wikidataCache[qid]) {
             callback('', _wikidataCache[qid]);
-            return
+            return;
         }
 
         var lang = currentLocale.replace(/-/g, '_');
