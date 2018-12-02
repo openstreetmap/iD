@@ -2025,6 +2025,9 @@ en:
       width:
         # width=*
         label: Width (Meters)
+      wikidata:
+        # wikidata=*
+        label: Wikidata
       wikipedia:
         # 'wikipedia=*, wikidata=*'
         label: Wikipedia

@@ -1303,6 +1303,7 @@ img.tag-reference-wiki-image {
     background-color: #f1f1f1;
 }
 .form-field-button .icon {
+    fill: #333;
     opacity: .5;
 }
 
@@ -1336,12 +1337,12 @@ img.tag-reference-wiki-image {
     width: 100%;
 }
 .form-field ul.labeled-inputs li {
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     display: flex;
     flex-flow: row nowrap;
 }
-.form-field ul.labeled-inputs li:last-child {
-    border-bottom: 0;
+.form-field ul.labeled-inputs li:first-child {
+    border-top: 0;
 }
 .form-field ul.labeled-inputs li > span,
 .form-field ul.labeled-inputs li > div {

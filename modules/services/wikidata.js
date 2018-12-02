@@ -2,6 +2,7 @@ import { json as d3_json } from 'd3-request';
 
 import { utilQsString } from '../util';
 
+import { currentLocale } from '../util/locale';
 
 var endpoint = 'https://www.wikidata.org/w/api.php?';
 
@@ -32,6 +33,32 @@ export default {
                 callback('', {});
             } else {
                 callback(title, data.entities || {});
+            }
+        });
+    },
+
+    entityByQID: function(qid, callback) {
+        if (!qid) {
+            callback('', {});
+            return;
+        }
+
+        var lang = currentLocale.replace(/-/g, '_');
+
+        d3_json(endpoint + utilQsString({
+            action: 'wbgetentities',
+            format: 'json',
+            ids: qid,
+            props: /*sitelinks|*/'labels|descriptions',
+            //sitefilter: lang + 'wiki',
+            languages: lang,
+            languagefallback: 1,
+            origin: '*'
+        }), function(err, data) {
+            if (err || !data || data.error) {
+                callback('', {});
+            } else {
+                callback(qid, data.entities[qid] || {});
             }
         });
     }

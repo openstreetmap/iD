@@ -71,6 +71,7 @@
                 "text",
                 "typeCombo",
                 "url",
+                "wikidata",
                 "wikipedia"
             ],
             "required": true
