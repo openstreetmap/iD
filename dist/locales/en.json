@@ -5,7 +5,9 @@
             "information": "info",
             "remove": "remove",
             "undo": "undo",
-            "zoom_to": "zoom to"
+            "zoom_to": "zoom to",
+            "copy": "copy",
+            "open_wikidata": "open on wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -1438,7 +1440,9 @@
             "coordinate_pair": "{latitude}, {longitude}"
         },
         "wikidata": {
-            "identifier": "Identifier"
+            "identifier": "Identifier",
+            "label": "Label",
+            "description": "Description"
         },
         "presets": {
             "categories": {
