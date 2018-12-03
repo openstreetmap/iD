@@ -7518,9 +7518,6 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -7528,6 +7525,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -7544,6 +7545,12 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -7629,11 +7636,33 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
-            "hike_n_bike": {
+            "helsingborg-orto": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors"
+                    "text": "© Helsingborg municipality"
                 },
-                "name": "Hike & Bike"
+                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+                "name": "Helsingborg Orthophoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+                "name": "Kalmar North Orthophoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+                "name": "Kalmar South Orthophoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -7655,6 +7684,20 @@
                 },
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topographic map of Sweden 1:50 000",
+                "name": "Lantmäteriet Topographic Map"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Orthophotos from the municipality of Linköping 2010, open data",
+                "name": "Linköping Orthophoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -7719,6 +7762,13 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
@@ -7827,23 +7877,47 @@
                     }
                 }
             },
+            "osm-india-forum": {
+                "name": "OpenStreetMap India forum",
+                "description": "OpenStreetMap India web forum"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap India GitHub",
+                "description": "Code with us: {url}"
+            },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap India Mailinglist",
                 "description": "Talk-in is the official Mailinglist for Indian Community"
             },
-            "OSM-India-Puducherry-Mailing-List": {
-                "name": "Free Software Hardware Movement - Mailing List",
-                "description": "FSHM Puducherry mailing list to discuss mapping in Puducherry and other things.",
-                "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap."
+            "osm-india-telegram": {
+                "name": "OpenStreetMap India Telegram",
+                "description": "Join our family: {url}"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India Twitter",
                 "description": "We are just a tweet away: {url}"
             },
+            "osm-india-website": {
+                "name": "OpenStreetMap India",
+                "description": "Mappers and OpenStreetMap users in India"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject India",
+                "description": "Everything you need to know about mapping in India: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap India Youtube",
+                "description": "Subscribe to our channel: {url}"
+            },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Free Software Hardware Movement - Facebook",
                 "description": "FSHM Facebook page to know about community events, activities",
                 "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap. Its FB page is the best way to keep in contact with its events."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - Mailing List",
+                "description": "FSHM Puducherry mailing list to discuss mapping in Puducherry and other things.",
+                "extendedDescription": "FSHM organizes events relating to free software/hardware, technology, activism and OpenStreetMap."
             },
             "OSM-India-Puducherry-Matrix": {
                 "name": "Free Software Hardware Movement - Matrix",
@@ -8009,11 +8083,6 @@
             "be-mailinglist": {
                 "name": "Talk-be Mailing List",
                 "description": "Talk-be is the official mailing list for the Belgian OSM community"
-            },
-            "be-maptime": {
-                "name": "Maptime Belgium",
-                "description": "Social events organized around mapping - beginners most welcome!",
-                "extendedDescription": "Maptime is an open learning environment for all levels and degrees of knowledge, offering intentional educational support for the beginner. Maptime is simultaneously flexible and structured, creating space for mapping tutorials, workshops, ongoing projects with a shared goal, and independent/collaborative work time."
             },
             "be-matrix": {
                 "name": "OpenStreetMap BE Matrix channel",
