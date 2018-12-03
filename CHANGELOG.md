@@ -11,7 +11,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 <!--
 # A.B.C
-##### MMM DD, YYYY
+##### YYYY-MMM-DD
 
 #### :newspaper: News
 #### :mega: Release Highlights
@@ -28,8 +28,9 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
 # 2.11.1
-##### Aug 29, 2018
+##### 2018-Aug-29
 
 #### :bug: Bugfixes
 * Fix handling of `.gpx` files passed in via url ([#5253])
@@ -38,7 +39,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 
 # 2.11.0
-##### Aug 26, 2018
+##### 2018-Aug-26
 
 #### :mega: Release Highlights
 * :1234: We've rolled out support for vector tiles in iD! This work was done as part of [Princi Vershwal's 2018 Google Summer of Code project](https://medium.com/@vershwal/vector-tile-support-for-openstreetmaps-id-editor-40b1cb77f63b). Thanks [@vershwal]!<br/>
@@ -142,7 +143,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 
 
 # 2.10.0
-##### Jul 26, 2018
+##### 2018-Jul-26
 
 #### :mega: Release Highlights
 * :memo: You can now create, comment on, and resolve OpenStreetMap notes from within iD! This work was done as part of [Thomas Hervey's 2018 Google Summer of Code project](https://www.openstreetmap.org/user/Thomas_Hervey/diary/44449). Thanks [@thomas-hervey]!<br/>
@@ -250,14 +251,14 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 
 
 # 2.9.2
-##### Jun 28, 2018
+##### 2018-Jun-28
 
 #### :sparkles: Usability
 * This release contains a few updates to the background imagery list
 
 
 # 2.9.1
-##### Jun 25, 2018
+##### 2018-Jun-25
 
 #### :sparkles: Usability
 * Improve the resolution of Bing Streetside ([#5102], thanks [@jharpster], [@LorenMueller])
@@ -312,7 +313,7 @@ _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and 
 
 
 # 2.9.0
-##### Jun 14, 2018
+##### 2018-Jun-14
 
 #### :mega: Release Highlights
 * :camera: We've added support for [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside)! This new layer provides 360-degree panoramic imagery across large regions of the United States, United Kingdom, France, and Spain. Thank you, Microsoft!<br/>
@@ -379,7 +380,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 
 
 # 2.8.2
-##### May 14, 2018
+##### 2018-May-14
 
 #### :tada: New Features
 * Allow performing Merge command when several nodes are selected ([#3774], [#4484], thanks [@ferdibiflator])
@@ -427,7 +428,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 
 
 # 2.8.1
-##### April 24, 2018
+##### 2018-Apr-24
 
 #### :sparkles: Usability
 * Linkify subreddit in community description ([#4997])
@@ -458,7 +459,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
 
 
 # 2.8.0
-##### April 16, 2018
+##### 2018-Apr-16
 
 #### :mega: Release Highlights
 * :speech_balloon: We've changed how things look on the post-upload screen.  Now after saving your edits,
@@ -610,7 +611,7 @@ _Reach out to nearby mappers and say hello!_
 
 
 # 2.7.1
-##### March 11, 2018
+##### 2018-Mar-11
 
 #### :tada: New Features
 * Add support for EPSG:4326 WMS layers ([#4858], thanks [@tyrasd])
@@ -655,7 +656,7 @@ _Reach out to nearby mappers and say hello!_
 
 
 # 2.7.0
-##### March 2, 2018
+##### 2018-Mar-02
 
 #### :mega: Release Highlights
 * :world_map: We've added support for more background imagery from WMS servers. Thanks Martin Raifer [@tyrasd] and Guillaume Rischard [@grischard] for your work on this!
@@ -762,7 +763,7 @@ _Reach out to nearby mappers and say hello!_
 
 
 # 2.6.1
-##### February 1, 2018
+##### 2018-Feb-01
 
 #### :tada: New Features
 * Add Esri World Imagery (Clarity) layer ([editor-layer-index#391], thanks [@jgravois])
@@ -850,7 +851,7 @@ _Reach out to nearby mappers and say hello!_
 
 
 # 2.6.0
-##### January 21, 2018
+##### 2018-Jan-21
 
 #### :mega: Release Highlights
 
@@ -1097,7 +1098,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 
 
 # 2.5.1
-##### November 16, 2017
+##### 2017-Nov-16
 
 #### :sparkles: Usability
 
@@ -1133,7 +1134,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 
 
 # 2.5.0
-##### November 10, 2017
+##### 2017-Nov-10
 
 #### :mega: Release Highlights
 
@@ -1299,9 +1300,8 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [@humanforklift]: https://github.com/humanforklift
 
 
-
 # 2.4.3
-##### October 9, 2017
+##### 2017-Oct-09
 
 #### :bug: Bugfixes
 
@@ -1328,7 +1328,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 
 
 # 2.4.2
-##### October 8, 2017
+##### 2017-Oct-08
 
 #### :tada: New Features
 
@@ -1485,7 +1485,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 
 
 # 2.4.1
-##### August 26, 2017
+##### 2017-Aug-26
 
 #### :bug: Bugfixes
 
@@ -1495,7 +1495,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 
 
 # 2.4.0
-##### August 25, 2017
+##### 2017-Aug-25
 
 #### :mega: Release Highlights
 
@@ -1629,7 +1629,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 
 # 2.3.2
-##### July 24, 2017
+##### 2017-Jul-24
 
 #### :tada: New Features
 
@@ -1685,7 +1685,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 
 # 2.3.1
-##### July 11, 2017
+##### 2017-Jul-11
 
 #### :sparkles: Usability
 
@@ -1701,7 +1701,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 
 # 2.3.0
-##### July 7, 2017
+##### 2017-Jul-07
 
 #### :tada: New Features
 
@@ -1773,7 +1773,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 
 # 2.2.2
-##### June 12, 2017
+##### 2017-Jun-12
 
 #### :tada: New Features
 
@@ -1833,7 +1833,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 
 # 2.2.1
-##### May 12, 2017
+##### 2017-May-12
 
 #### :bug: Bugfixes
 
@@ -1849,7 +1849,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 
 # 2.2.0
-##### May 9, 2017
+##### 2017-May-09
 
 #### :mega: Release Highlights
 
@@ -2093,7 +2093,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.1.3
-##### Feb 24, 2017
+##### 2017-Feb-24
 
 #### :bug: Bugfixes
 * Check all blacklist regexs in API imagery blacklist ([#3858], thanks [@tyrasd])
@@ -2121,7 +2121,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.1.2
-##### Feb 7, 2017
+##### 2017-Feb-07
 
 #### :bug: Bugfixes
 * Fix point dragging regression ([#3829])
@@ -2130,7 +2130,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.1.1
-##### Feb 6, 2017
+##### 2017-Feb-06
 
 #### :bug: Bugfixes
 * Fix issues with dragging sibling nodes of a selected way ([#3824])
@@ -2152,7 +2152,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.1.0
-##### Feb 4, 2017
+##### 2017-Feb-04
 
 #### :tada: New Features
 * Add KML and GeoJSON support to GPX layer ([#3811], thanks [@mertemin])
@@ -2304,7 +2304,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.0.2
-##### Dec 22, 2016
+##### 2016-Dec-22
 
 #### :tada: New Features
 * Pull LTR/RTL list from Transifex instead of hardcoding it ([#3489])
@@ -2363,7 +2363,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.0.1
-##### Nov 17, 2016
+##### 2016-Nov-17
 
 #### :bug: Bugfixes
 * When starting iD with an object selected, the map should focus on that object ([#3588], thanks [@tyrasd])
@@ -2379,7 +2379,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 2.0.0
-##### Nov 15, 2016
+##### 2016-Nov-15
 
 #### :boom: Breaking Changes
 * :warning: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
@@ -2476,7 +2476,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.9.7
-##### Jul 16, 2016
+##### 2016-Jul-16
 * Treat features on `addr:interpolation` lines as points, not vertices (#3241)
 * Add ref field to `amenity=post_box` preset (#3232, thanks @boothym)
 * Fix crash calling `_.all` when moving multiple features (#3155, thanks @tyrasd)
@@ -2495,14 +2495,14 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.9.6
-##### Jun 7, 2016
+##### 2016-Jun-07
 * Embed interactive Mapillary JS viewer instead of static image (#3128, thanks @kepta, @peterneubauer)
 * Add "grill" as search term for `amenity=bbq` preset (#3139, thanks @manfredbrandl)
 * When setting Wikipedia value, also set corresponding Wikidata tag (#2732, thanks @1ec5)
 
 
 # 1.9.5
-##### May 25, 2016
+##### 2016-May-25
 * Clean translated combo value when comparing to display value (#3129)
 * Change color of Save button as user edits increase (#2749, thanks @tanerochris)
 * Migrate to lodash v4 (#3107, thanks @kepta)
@@ -2524,7 +2524,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.9.4
-##### May 3, 2016
+##### 2016-May-03
 * Fix bug causing save button to remain disabled even when changeset comment is entered (#3096)
 * Support setting imagery offset via url hash parameter (#3093)
 * Don't allow user to straighten a line if start/end nodes are at the same location (#2792)
@@ -2542,7 +2542,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.9.3
-##### Apr 25, 2016
+##### 2016-Apr-25
 * Display "Choose language" placeholder value for Wikipedia language field (#3071)
 * Add prison preset (#3070, thanks @kepta)
 * Improve `studio=*` tagging (#3061, thanks @kepta)
@@ -2565,7 +2565,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.9.2
-##### Mar 18, 2016
+##### 2016-Mar-18
 * Avoid jumpiness when dragging node markers (#3003)
 * Rename "Dock" -> "Wet Dock / Dry Dock" (#3030)
 * Refresh lables when switching to a new GPX file (#3032)
@@ -2581,13 +2581,13 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.9.1
-##### Mar 3, 2016
+##### 2016-Mar-03
 * Add context.asset for building asset filenames, use for Mapillary Traffico files (#3011)
 * Fix crash in starting tutorial, bad selector for .layer-background opacity (#3010)
 
 
 # 1.9.0
-##### Mar 1, 2016
+##### 2016-Mar-01
 * Fix rendering of modified/moved multipolygons (#3008)
 * Preserve connectivity when pasting (#2584, thanks @jfirebaugh)
 * Fix rendering of bumpy surfaces in turn restriction editor (#3004)
@@ -2632,14 +2632,14 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.8.5
-##### Jan 18, 2016
+##### 2016-Jan-18
 * Fix address field to not lose focus while typing (#2903, #2320)
 * Bugfixes for Internet Explorer (classList #2909, parentElement #2910)
 * Presets for various man_made tags (#2893, thanks @manfredbrandl)
 
 
 # 1.8.4
-##### Jan 6, 2016
+##### 2016-Jan-06
 * Block UI, disable draws while fetching missing childnodes when user restores saved work
 * Add iD.Map#redrawEnable to enable/disable redraws
 * Don't select filtered hidden vertices with the lasso
@@ -2679,12 +2679,12 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.8.3
-##### Dec 11, 2015
+##### 2015-Dec-11
 * Replace nonstandard Array `find` with `_.find` for IE11 (#2871)
 
 
 # 1.8.2
-##### Dec 10, 2015
+##### 2015-Dec-10
 * Better save and restore map state when entering walkthrough
 * Add maxstay field for amenity=parking preset (#2851)
 * Add presets for popular vending machines (#2827, thanks @henningvs)
@@ -2695,7 +2695,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.8.1
-##### Dec 2, 2015
+##### 2015-Dec-02
 * Fix tag help lookup (#2844)
 * Support Internet Explorer 11 and Edge browsers (#2571)
 * New road styling for bumpy/unpaved roads (#2564, #2750, #2847)
@@ -2707,7 +2707,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.8.0
-##### Nov 7, 2015
+##### 2015-Nov-07
 * Don't update the urlhash during the walkthrough (#1795)
 * Add surface type to parking preset (#2816)
 * Make 100% background brightness the default (#2824)
@@ -2734,12 +2734,12 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add preset for Semi-Detached House (#2776)
 
 # 1.7.5
-##### Sep 28, 2015
+##### 2015-Sep-28
 * Relicense iD with ISC license
 
 
 # 1.7.4
-##### Sep 15, 2015
+##### 2015-Sep-15
 * Show docs for the selected value in raw tag editor (#2754) (Thanks @M1dgard)
 * Improve display of implied values in access UI field (#2763)
 * Better handling of preset search terms (#2756) (Thanks @M1dgard)
@@ -2776,7 +2776,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.7.3
-##### Jun 10, 2015
+##### 2015-Jun-10
 * Add fee field to toilet preset (#2639) (Thanks @alexandrz)
 * Several improvements for more reliable save and post-save data fetch (#2667)
 * Use locale passed in from container iframe instead of detected locale (#2672)
@@ -2796,13 +2796,13 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.7.2
-##### May 3, 2015
+##### 2015-May-03
 * Fix for 404 Error caused by duplicates in multi-fetch node request (#2626)
 * Fix oil well preset (#2621) (Thanks @1ec5)
 
 
 # 1.7.1
-##### Apr 30, 2015
+##### 2015-Apr-30
 * Add oil well preset (#2618) (Thanks @1ec5)
 * Add radio mast preset (#2613) (Thanks @1ec5)
 * Don't commit empty changesets (#1483)
@@ -2832,7 +2832,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.7.0
-##### Feb 12, 2015
+##### 2015-Feb-12
 * Fix typo in smoothness field - should be "impassable" (#2523)
 * Update to Mapillary API v2 calls (#2522) (Thanks @peterneubauer)
 * Add Rounded tooltips (#2521) (Thanks @samanpwbb)
@@ -2868,12 +2868,12 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.6.2
-##### Oct 24, 2014
+##### 2014-Oct-24
 * Fix "TypeError: r is undefined" (#2421)
 
 
 # 1.6.1
-##### Oct 23, 2014
+##### 2014-Oct-23
 * Remember raw tag editor expansion state across sessions (#2416)
 * Translate text in changes section on save panel (#2417)
 * Encode URL hash correctly (#2406)
@@ -2885,7 +2885,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.6.0
-##### Oct 6, 2014
+##### 2014-Oct-06
 * Add network field to Road Route relation preset (#2372)
 * Updated TIGER layer to use TIGER 2014
 * Added support for street-level imagery from Mapillary
@@ -2897,14 +2897,14 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.5.4
-##### Jul 29, 2014
+##### 2014-Jul-29
 * Do not fully fill certain landuse values, e.g. landuse=residential (#542)
 * Class midpoints to match parent way and adjust styles
 * Test visibility of gpx coords instead of just comparing extents
 
 
 # 1.5.3
-##### Jul 25, 2014
+##### 2014-Jul-25
 * When adding gpx, only rezoom map if gpx not in viewport (#2297)
 * Workaround for Chrome crash (#2295)
 * Add mtb fields (#2244)
@@ -2913,20 +2913,20 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.5.2
-##### Jul 15, 2014
+##### 2014-Jul-15
 * Fixed Chrome/Windows selection bug (#2151)
 * Don't automatically tag motorways, etc. as oneway=yes
 * Disable Move and Rotate operations if area < 80% contained in the viewport
 
 
 # 1.5.1
-##### Jul 10, 2014
+##### 2014-Jul-10
 * Fix mixed content errors on https osm.org (#2281)
 * Fix suggested access values for parking (#2280)
 
 
 # 1.5.0
-##### Jul 8, 2014
+##### 2014-Jul-08
 * Add support for localized address fields (#2246)
 * Rendering improvements for layers (#2250)
 * Add a map scale (#2266)
@@ -2935,7 +2935,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.4.0
-##### May 29, 2014
+##### 2014-May-29
 * Ensure combobox menus are closed on blur (#2207)
 * Limit imagery_used tag to 255 characters (#2181)
 * Simplify and fix midpoint drawing logic (#2136)
@@ -2947,7 +2947,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.10
-##### May 21, 2014
+##### 2014-May-21
 * `oneway=no` overrides implicit oneways on junction=roundabout, etc. (#2220)
 * Add presets for fords, parking_entrance, charging_station, compressed_air, churchyard, shop=wine
 * Improve access placeholders (#2221)
@@ -2964,7 +2964,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.9
-##### Apr 9, 2014
+##### 2014-Apr-09
 * Prevent closed areas from invalid disconnection (#2178)
 * Remove layer field from waterway=stream
 * Add preset for place=suburb and shop=seafood
@@ -2973,7 +2973,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.8
-##### Mar 28, 2014
+##### 2014-Mar-28
 * Disable circularize and orthogonalize operations when way is <80% contained in the viewport
 * Add place=neighbourhood preset
 * Add denomination=* field for cemetary, graveyard, funeral home
@@ -2999,7 +2999,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.7
-##### Feb 25, 2014
+##### 2014-Feb-25
 * Added building presets
 * Improve how tags are merged when merging to a multipolygon
 * Disable merge operation if at least one relation is incomplete
@@ -3010,7 +3010,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.6
-##### Feb 5, 2014
+##### 2014-Feb-05
 * More protection against relation loops (#2096)
 * Fix freeze when using Clinic preset (#2102)
 * Allow rotating closed multipolygon members (#1718)
@@ -3019,7 +3019,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.5
-##### Jan 8, 2014
+##### 2014-Jan-08
 * Smoother and faster panning, zooming, and tooltips
 * Fix bug relating to deleted nodes outside the viewport (#2085)
 * Ensure "New Relation..." is always available (#2066)
@@ -3039,7 +3039,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.4
-##### Nov 26, 2013
+##### 2013-Nov-26
 * Replace TIGER 2012 layer with next-generation TIGER 2013 layer (#2010)
 * Add tooltips to "untagged feature" warnings
 * Add pressets and category for golf features (#2013)
@@ -3050,7 +3050,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.3
-##### Nov 22, 2013
+##### 2013-Nov-22
 * Support for loading GPX-files via url parameter (#1965)
 * Update osm-auth (#1904)
 * Update 3rd party dependencies (Lo-Dash, D3, RBush)
@@ -3062,7 +3062,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.2
-##### Nov 14, 2013
+##### 2013-Nov-14
 * Update maki
 * Fix Disconnect of way with multiple intersections (#1955)
 * Fix unclosed area rendering (#1958)
@@ -3077,7 +3077,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.1
-##### Oct 26, 2013
+##### 2013-Oct-26
 * Fix misalignment -> Fix alignment (#1913)
 * Update maki (#1916)
 * Prioritize boundary tag to minimize area fills (#1920)
@@ -3085,7 +3085,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.3.0
-##### Oct 24, 2013
+##### 2013-Oct-24
 * Fix corner case that could cause getting stuck in drag mode (#1910)
 * Improved display of changed objects in save screen
 * Improved performance
@@ -3117,7 +3117,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.2.1
-##### Sep 30, 2013
+##### 2013-Sep-30
 * Split only the line of a node shared by a line and an area
 * Handle multipolygon corner case when splitting (#1799)
 * Don't automatically apply building tags to shop=car (#1813)
@@ -3133,7 +3133,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.2.0
-##### Sep 26, 2013
+##### 2013-Sep-26
 * Don't auto-save intro tutorial edits (#1745, #1795)
 * Added waypoint display to GPX layer
 * Added "Straighten" operation
@@ -3154,14 +3154,14 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.1.6
-##### Aug 24, 2013
+##### 2013-Aug-24
 * Fix walkthrough on Firefox (#1743)
 * Fix icon at end of walkthough (#1740)
 * Fix walkthrough (#1739)
 
 
 # 1.1.5
-##### Aug 23, 2013
+##### 2013-Aug-23
 * Add amenity=ranger_station preset (1723)
 * Add terms for tourism=artwork (#1726)
 * Reduce prominence of share links, add G+
@@ -3176,14 +3176,14 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.1.4
-##### Aug 17, 2013
+##### 2013-Aug-17
 * Fix adding multilingual name (#1694)
 * Fix social buttons (#1690)
 * Work around a Firefox bug that sometimes caused elements to be unselectable or stuck dragging (#1691, #1692)
 
 
 # 1.1.3
-##### Aug 15, 2013
+##### 2013-Aug-15
 * Fix behavior of enter key in name field (#1681)
 * Remove area=yes when choosing an area preset (#1684)
 * Save history more frequently (#1345)
@@ -3196,21 +3196,21 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 
 
 # 1.1.2
-##### Aug 12, 2013
+##### 2013-Aug-12
 * Fix cursor offset when clicking/dragging after resizing the window (#1678)
 * Include low-frequency tag values if they have a wiki entry
 * Fix tag value suggestions in preset comboboxes (#1679, #1680)
 
 
 # 1.1.1
-##### Aug 9, 2013
+##### 2013-Aug-09
 * Improve performance when drawing
 * Tail should appear only first time
 * Fix radial menu tooltip positioning on Firefox
 
 
 # 1.1.0
-##### Aug 9, 2013
+##### 2013-Aug-09
 * Fix radial menu tooltip positioning
 
 
@@ -3265,7 +3265,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * You can add a member to a relation via the "All relations" section of the sidebar
 
 # 1.0.1
-##### May 10, 2013
+##### 2013-May-10
 * Test, imagery, translation, and preset updates
 * Fix untranslatable strings
 * Prefer to keep existing ways when joining
