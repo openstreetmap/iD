@@ -43,7 +43,7 @@ _Try adding some branded businesses to the map - `brand`, `brand:wikidata`, and 
 * :paperclip: More Wikidata integration! iD now displays linked data if a feature has a `wikidata` tag, and will protect fields like `name` and `brand` from direct editing.<br/>
 _Make sure prominent features have a Wikidata tag, for added protection against accidental changes._
 * :high_brightness: More features for working with relations. Hovering over a relation or member in the sidebar will highlight it on the map. You can also download incomplete sections, and zoom to inspect relation children. Thanks, Quincy Morgan [@quincylvania]!<br/>
-_Check out the "All Relations" and "All Members" sections of the sidebar to try out the new relation ._
+_Check out the "All Relations" and "All Members" sections of the sidebar to try out the new relation editing tools._
 * :octocat: Hacktoberfest happened!  We merged 40 pull requests during the month of October.  Thank you to all of our new contributors!<br/>
 
 [@huonw]: https://github.com/huonw
