@@ -340,6 +340,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 [#5284]: https://github.com/openstreetmap/iD/issues/5284
 [#5270]: https://github.com/openstreetmap/iD/issues/5270
 [#5269]: https://github.com/openstreetmap/iD/issues/5269
+[#5268]: https://github.com/openstreetmap/iD/issues/5268
 [#5267]: https://github.com/openstreetmap/iD/issues/5267
 [#5262]: https://github.com/openstreetmap/iD/issues/5262
 [#5261]: https://github.com/openstreetmap/iD/issues/5261
