@@ -149,12 +149,6 @@
                 "annotation": "Heu eliminat un membre d'una relació"
             },
             "connect": {
-                "annotation": {
-                    "point": "Heu connectat una via a un punt.",
-                    "vertex": "Heu connectat una via a una altra.",
-                    "line": "Heu connectat una via a una línia.",
-                    "area": "Heu connectat una via a una àrea."
-                },
                 "relation": "Aquestes característiques no es poden connectar perquè tenen rols de relació amb conflicte.",
                 "restriction": "Aquestes característiques no es poden connectar perquè podria malmetre la relació «{relation}»-"
             },
@@ -356,7 +350,6 @@
         "browser_notice": "Aquest editor és compatible a Firefox, Chrome, Safari, Opera i Internet Explorer 11 i superior. Actualitzeu el vostre navegador o bé feu ús del Potlatch 2 per tal d'editar el mapa.",
         "translate": {
             "translate": "Traduïu",
-            "localized_translation_label": "Nom multilingüe",
             "localized_translation_language": "Trieu una llengua",
             "localized_translation_name": "Nom"
         },
@@ -1559,9 +1552,6 @@
                 "display": {
                     "label": "Pantalla"
                 },
-                "distance": {
-                    "label": "Distància total"
-                },
                 "dock": {
                     "label": "Tipus"
                 },
@@ -2037,15 +2027,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Dificultat",
-                    "options": {
-                        "advanced": "Avançat (Pista negra nivell I )",
-                        "easy": "Fàcil (pista verda)",
-                        "expert": "Expert (Pista negra nivell II)",
-                        "extreme": "Extrem (es necessita equipament d'escalada)",
-                        "freeride": "Pista no oficial (fora pistes)",
-                        "intermediate": "Intermedi (Pista blava)",
-                        "novice": "Debutants (instrucció)"
-                    },
                     "placeholder": "Fàcil, Intermedi, avançat..."
                 },
                 "piste/grooming": {
@@ -2846,18 +2827,11 @@
                 "amenity/nursing_home": {
                     "name": "Llar d'avis"
                 },
-                "amenity/parking": {
-                    "name": "Aparcament",
-                    "terms": "Aparcament, Pàrquing, Garatge, Parking, parking"
-                },
                 "amenity/parking_entrance": {
                     "name": "Entrada de Garatge/Sortida"
                 },
                 "amenity/parking_space": {
                     "name": "Espai d'aparcament"
-                },
-                "amenity/pavilion": {
-                    "name": "Pabelló"
                 },
                 "amenity/pharmacy": {
                     "name": "Farmàcia",
@@ -2926,9 +2900,6 @@
                 },
                 "amenity/ranger_station": {
                     "name": "Base d'Agents Rurals"
-                },
-                "amenity/recycling": {
-                    "name": "Contenidor de reciclatge"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centre de Reciclatge"
@@ -3036,9 +3007,6 @@
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Màquina expenedora de diaris"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Màquina de recollida/enviament de paqueteria"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Màquina de cobrament de tiquet d'aparcament"
@@ -3516,21 +3484,6 @@
                     "name": "Entrada/Sortida",
                     "terms": "Entrada/Sortida"
                 },
-                "footway/crossing": {
-                    "name": "Creuament de carrer"
-                },
-                "footway/crossing-raised": {
-                    "name": "Pas de carrer sobre-elevat"
-                },
-                "footway/crosswalk": {
-                    "name": "Pas de vianants"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Pas de vianants sobre-elevat"
-                },
-                "footway/sidewalk": {
-                    "name": "Vorera"
-                },
                 "ford": {
                     "name": "Ford"
                 },
@@ -3579,12 +3532,6 @@
                 },
                 "highway/corridor": {
                     "name": "Corredor interior"
-                },
-                "highway/crossing": {
-                    "name": "Creuament de carrer"
-                },
-                "highway/crosswalk": {
-                    "name": "Pas de vianants"
                 },
                 "highway/cycleway": {
                     "name": "Carril Bici",
@@ -3943,10 +3890,6 @@
                     "name": "Camp de futbol americà",
                     "terms": "Estadi de futbol americà,Camp de futbol americà"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Camp de beisbol",
-                    "terms": "Camp de beisbol,Pista de beisbol"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Pista de bàsquet",
                     "terms": "Pista de bàsquet, Pavelló de bàsquet"
@@ -4044,9 +3987,6 @@
                     "name": "Far",
                     "terms": "Far"
                 },
-                "man_made/observation": {
-                    "name": "Torre de vigilància"
-                },
                 "man_made/petroleum_well": {
                     "name": "Pou petrolífer"
                 },
@@ -4069,9 +4009,6 @@
                 },
                 "man_made/surveillance": {
                     "name": "Vigilància"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Càmera de vigilància"
                 },
                 "man_made/survey_point": {
                     "name": "Punt referencial",
@@ -4153,9 +4090,6 @@
                 "natural/tree": {
                     "name": "Arbre",
                     "terms": "Arbre"
-                },
-                "natural/tree_row": {
-                    "name": "Fila d'arbres"
                 },
                 "natural/volcano": {
                     "name": "Volcà"
@@ -4265,9 +4199,6 @@
                 "office/travel_agent": {
                     "name": "Agència de viatges"
                 },
-                "piste": {
-                    "name": "Pista d'esquí"
-                },
                 "place": {
                     "name": "Lloc"
                 },
@@ -4315,9 +4246,6 @@
                 },
                 "power/generator": {
                     "name": "Generador elèctric"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Reactor nuclear"
                 },
                 "power/line": {
                     "name": "Línia elèctrica"
@@ -5160,9 +5088,6 @@
             "SPW_PICC": {
                 "name": "imatgeria numèrica PICC de SPW (Valònia)"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "Carreteres TIGER 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "Al nivell de zoom 16+, les dades del mapa són del domini públic del US Census. A zooms més baixos, només canvis d'ençà de 2006, els canvis menors incorporats a OpenStreetMap",
                 "name": "Carreteres TIGER 2014"
@@ -5242,12 +5167,6 @@
                 },
                 "description": "Capa d'ortofoto proveïda per basemap.at. \"Successora\" de la imatgeria de geoimage.at.",
                 "name": "Ortofoto basemap.at "
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© col·laboradors d'OpenStreetMap"
-                },
-                "name": "Excursió i bicicleta"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -5406,6 +5325,12 @@
             "talk-gh": {
                 "name": "Llista de correu Talk-gh"
             },
+            "osm-mg-facebook": {
+                "name": "Grup de Facebook de OpenStreetMap a Madagascar"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh"
+            },
             "OSM-India-facebook": {
                 "description": "Millora OpenStreetMap a l'Índia"
             },
@@ -5420,13 +5345,29 @@
                 "name": "Twitter de Japó d'OpenStreetMap",
                 "description": "Etiqueta a Twitter: {url}"
             },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japó"
+            },
             "OSM-TW-facebook": {
                 "name": "Comunitat de Taiwan d'OpenStreetMap",
                 "description": "Grup de Facebook per mapadors i usuaris d'OpenStreetMap per discutir assumptes sobre Taiwan."
             },
+            "at-twitter": {
+                "name": "Twitter d'Àustria d'OpenStreetMap"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Àustria"
+            },
+            "be-twitter": {
+                "name": "Twitter de Bèlgica d'OpenStreetMap",
+                "description": "OSM Bèlgica a Twitter: @osm_be"
+            },
             "OSM-SoCal": {
                 "name": "OpenStreetMap Califòrnia del Sud",
                 "extendedDescription": "OpenStreetMap (OSM) Califòrnia del Sud és per a tothom interessat en el mapatge que s'uneixi a treballar amb OpenStreetMap. OpenStreetMap, la Viquipèdia dels mapes, és un mapa de codi obert gratuït del món sent creat per més de 1000000 de voluntaris al voltant del món. Tothom és benvingut. Si no coneixes OpenStreetMap, t'ensenyarem. Si tens una idea d'un projecte de mapatge o fins i tot una excursió de camp que el grup pot fer, genial!"
+            },
+            "PHXGeo-twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
             },
             "OSM-AR-telegram": {
                 "name": "Telegram d'OpenStreetMap Argentina",
@@ -5436,9 +5377,45 @@
                 "name": "Twitter d'Argentina d'OpenStreetMap",
                 "description": "Segueix-nos a Twitter a {url}"
             },
+            "OSM-br-twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
+            },
+            "OSM-CL-twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Perú"
+            },
+            "LATAM-Twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
+            },
+            "osm-latam": {
+                "events": {
+                    "sotm-latam-2018": {
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
+            },
+            "OSM-Discord": {
+                "name": "Discord d'OpenStreetMap"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap al Facebook"
+            },
+            "OSM-help": {
+                "name": "Ajuda d'OpenStreetMap"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap a Reddit",
                 "description": "/r/openstreetmap/ és un bon lloc per aprendre més sobre OpenStreetMap. Pregunta'ns qualsevol cosa!"
+            },
+            "OSMF": {
+                "name": "Fundació OpenStreetMap",
+                "events": {
+                    "sotm2018": {
+                        "where": "Milà, Itàlia"
+                    }
+                }
             }
         }
     }

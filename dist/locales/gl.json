@@ -1,43 +1,45 @@
 {
     "gl": {
         "icons": {
-            "information": "información",
+            "download": "descarregar",
+            "information": "informacións",
             "remove": "quitar",
-            "undo": "desfacer"
+            "undo": "desfacer",
+            "zoom_to": "achegar a"
         },
         "modes": {
             "add_area": {
                 "title": "Área",
-                "description": "Engadir parques, edificios, lagos ou outras áreas ao mapa.",
-                "tail": "Fai clic no mapa para comezar a debuxar unha área, como un parque, lago ou edificio."
+                "description": "Engadir parques, edificios, lagoas ou outras áreas ó mapa.",
+                "tail": "Fai clic no mapa para comezares a debuxar unha área, coma un parque, lagoa ou edificio."
             },
             "add_line": {
                 "title": "Liña",
                 "description": "Engadir estradas, rúas, camiños, canais ou outras liñas ao mapa.",
-                "tail": "Fai clic no mapa para comezar a debuxar unha estrada, camiño ou ruta."
+                "tail": "Fai clic no mapa para comezar a debuxar unha estrada, camiño ou rota."
             },
             "add_point": {
                 "title": "Punto",
                 "description": "Engadir restaurantes, monumentos, caixas do correo ou outros puntos ao mapa.",
-                "tail": "Fai clic no mapa para engadir un punto."
+                "tail": "Fai clic no mapa pra engadires un punto."
             },
             "add_note": {
                 "title": "Nota",
-                "description": "Atopaches un problema? Faillo saber a outros mapeadores.",
+                "description": "Atopaches un erro? Faillo saber a outros mapeadores.",
                 "tail": "Fai clic no mapa para engadir unha nota."
             },
             "browse": {
-                "title": "Buscar",
-                "description": "Desprazar e ampliar o mapa."
+                "title": "Procurar",
+                "description": "Desprazar e achega-lo mapa."
             },
             "draw_area": {
-                "tail": "Fai clic para engadir nós á túa área. Fai clic no primeiro nó para finalizar a área."
+                "tail": "Fai clic para engadir nós á túa área. Fai clic no primeiro nó para remata-la área."
             },
             "draw_line": {
                 "tail": "Fai clic para engadir máis nós á liña. Fai clic noutras liñas para conectalas, e fai dobre clic para rematar a liña."
             },
             "drag_node": {
-                "connected_to_hidden": "Isto non se pode editar xa que está conectado cun elemento oculto."
+                "connected_to_hidden": "Isto non se pode editar xa que está conectado cun elemento agochado."
             }
         },
         "operations": {
@@ -59,15 +61,15 @@
                 "key": "A",
                 "title": "Continuar",
                 "description": "Continuar esta liña.",
-                "not_eligible": "Ningunha liña pode continuar desde aquí.",
-                "multiple": "Desde aquí poden continuar varias liñas. Para escoller unha delas, preme a tecla de Maiúsculas e fai clic na liña para seleccionala.",
+                "not_eligible": "Ningunha liña pode continuar dende eiquí.",
+                "multiple": "Dende eiquí poden continuar varias liñas. Pra escoller unha delas, preme a tecra de Maiúsculas e fai clic na liña pra seleccionala.",
                 "annotation": {
                     "line": "Liña continuada.",
                     "area": "Área continuada."
                 }
             },
             "cancel_draw": {
-                "annotation": "Debuxo cancelado."
+                "annotation": "Debuxo desbotado."
             },
             "change_role": {
                 "annotation": "Cambiado o rol do membro dunha relación."
@@ -76,25 +78,25 @@
                 "annotation": "Etiquetas modificadas."
             },
             "circularize": {
-                "title": "Redondear",
+                "title": "Arredondar",
                 "description": {
-                    "line": "Redondear esta liña.",
-                    "area": "Redondear esta área."
+                    "line": "Arredondar esta liña.",
+                    "area": "Arredondar esta área."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Facer unha liña redondeada.",
-                    "area": "Facer unha área circular."
+                    "line": "Facer unha liña arredondada.",
+                    "area": "Arredondar unha área."
                 },
-                "not_closed": "Isto non se pode redondear porque non é un bucle.",
-                "too_large": "Isto non se pode redondear porque non está completamente visible.",
-                "connected_to_hidden": "Isto non se pode facer circular xa que está conectado cun elemento oculto."
+                "not_closed": "Isto non se pode arredondar porque non é un bucle.",
+                "too_large": "Isto non se pode arredondar porque non está completamente visíbel.",
+                "connected_to_hidden": "Isto non se pode arredondar xa que está conectado cun elemento agochado."
             },
             "orthogonalize": {
-                "title": "Escuadrar",
+                "title": "Encadrar",
                 "description": {
-                    "line": "Escuadrar as esquinas desta liña.",
-                    "area": "Escuadrar as esquinas desta área."
+                    "line": "Encadra-las esquinas desta liña.",
+                    "area": "Encadra-las esquinas desta área."
                 },
                 "key": "S",
                 "annotation": {
@@ -102,7 +104,7 @@
                     "area": "Escuadradas as esquinas dunha área."
                 },
                 "not_squarish": "Isto non se pode facer cadrado porque non ten forma cadrada.",
-                "too_large": "Isto non se pode facer cadrado porque non está completamente visible.",
+                "too_large": "Isto non se pode facer cadrado porque non está completamente visíbel.",
                 "connected_to_hidden": "Isto non se pode facer cadrado xa que está conectado cun elemento oculto."
             },
             "straighten": {
@@ -128,8 +130,8 @@
                     "multiple": "Borrados {n} elementos."
                 },
                 "too_large": {
-                    "single": "Este elemento non pode ser borrado porque non é totalmente visible.",
-                    "multiple": "Estes elementos non poden ser borrados porque non son totalmente visibles."
+                    "single": "Este elemento non pode ser borrado porque non é totalmente visíbel.",
+                    "multiple": "Estes elementos non poden ser borrados porque non son totalmente visíbeis."
                 },
                 "incomplete_relation": {
                     "single": "Este elemento non se pode borrar porque aínda non se acabou de descargar.",
@@ -151,12 +153,6 @@
                 "annotation": "Retirouse un membro a unha relación."
             },
             "connect": {
-                "annotation": {
-                    "point": "Conectouse unha vía a un punto.",
-                    "vertex": "Conectouse unha vía coa outra.",
-                    "line": "Conectouse unha vía a unha liña.",
-                    "area": "Conectouse unha vía a unha área."
-                },
                 "relation": "Estes elementos non se poden conectar porque teñen uns roles asociados que se contradín.",
                 "restriction": "Estes elementos non se poden conectar porque afectaría á relación \"{relation}\"."
             },
@@ -165,7 +161,7 @@
                 "description": "Desconectar estas liñas/áreas unha da outra.",
                 "key": "D",
                 "annotation": "Liñas/áreas desconectadas.",
-                "not_connected": "Aquí non hai liñas/áreas suficientes como para poder desconectar.",
+                "not_connected": "Eiquí non hai liñas/áreas suficientes como para poder desconectar.",
                 "connected_to_hidden": "Isto non se pode desconectar xa que está conectado cun elemento oculto.",
                 "relation": "Isto non pode ser desconectado porque liga os membros dunha relación."
             },
@@ -200,8 +196,8 @@
                     "multiple": "Estes elementos non poden ser movidos porque non foron completamente baixados."
                 },
                 "too_large": {
-                    "single": "Este elemento non pode ser movido porque actualmente non é completamente visible.",
-                    "multiple": "Estes elementos non poden ser movidos porque actualmente non son completamente visibles."
+                    "single": "Este elemento non pode ser movido porque agora mesmo non é completamente visíbel.",
+                    "multiple": "Estes elementos non poden ser movidos porque agora mesmo non son completamente visíbeis."
                 },
                 "connected_to_hidden": {
                     "single": "Este elemento non pode ser movido porque está ligado a un elemento agochado.",
@@ -242,8 +238,8 @@
                     "multiple": "Estes elementos non poden ser reflectidos porque non foron completamente baixados."
                 },
                 "too_large": {
-                    "single": "Este elemento non pode ser reflectidos porque actualmente non está completamente visible.",
-                    "multiple": "Estes elementos non poden ser reflectidos porque actualmente non están completamente visibles."
+                    "single": "Este elemento non pode ser reflectidos porque agora mesmo non está completamente visíbel.",
+                    "multiple": "Estes elementos non poden ser reflectidos porque agora mesmo non están completamente visíbeis."
                 },
                 "connected_to_hidden": {
                     "single": "Este elemento non pode ser reflectidos porque está ligado a un elemento agochado.",
@@ -267,8 +263,8 @@
                     "multiple": "Estes elementos non poden ser rotados porque non foron completamente baixados."
                 },
                 "too_large": {
-                    "single": "Este elemento non pode ser rotado porque actualmente non está completamente visible.",
-                    "multiple": "Estes elementos non poden ser rotados porque actualmente non está completamente visible."
+                    "single": "Este elemento non pode ser rotado porque agora mesmo non está completamente visíbel.",
+                    "multiple": "Estes elementos non poden ser rotados porque agora mesmo non está completamente visíbel."
                 },
                 "connected_to_hidden": {
                     "single": "Este elemento non pode ser rotado porque está ligado a un elemento agochado.",
@@ -295,7 +291,7 @@
                     "multiple": "Divididas {n} liñas/límites de área."
                 },
                 "not_eligible": "As liñas non se poden dividir no seu inicio ou fin.",
-                "multiple_ways": "Aquí hai demasiadas liñas para dividir.",
+                "multiple_ways": "Eiquí hai demasiadas liñas para dividir.",
                 "connected_to_hidden": "Isto non se pode partir xa que está conectado cun elemento oculto."
             },
             "restriction": {
@@ -306,17 +302,21 @@
             },
             "detach_node": {
                 "title": "Extraer",
-                "key": "E"
+                "key": "E",
+                "description": "Separar este nó das liñas ou áreas",
+                "annotation": "Separouse un nó das liñas/áreas pais.",
+                "restriction": "Este nó non se pode separar porque danaría unha relación \"{relation}\".",
+                "connected_to_hidden": "Este nó non se pode separar porque está ligado a unha funcionalidade agochada."
             }
         },
         "restriction": {
             "controls": {
                 "distance": "Distancia",
-                "distance_up_to": "Ata {distance}",
+                "distance_up_to": "Até {distance}",
                 "via": "A través de",
                 "via_node_only": "Só nó",
-                "via_up_to_one": "Ata 1 vía",
-                "via_up_to_two": "Ata 2 vías"
+                "via_up_to_one": "Até 1 vía",
+                "via_up_to_two": "Até 2 vías"
             },
             "help": {
                 "indirect": "(indirecta)",
@@ -347,26 +347,29 @@
         },
         "undo": {
             "tooltip": "Desfacer: {action}",
-            "nothing": "Nada para desfacer."
+            "nothing": "Ren para desfacer."
         },
         "redo": {
             "tooltip": "Refacer: {action}",
-            "nothing": "Nada para refacer"
+            "nothing": "Ren para refacer."
         },
         "tooltip_keyhint": "Atallo:",
-        "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera, e Internet Explorer 11 e superior. Prégase actualizar o seu navegador ou empregar Potlatch 2 para editar o mapa.",
+        "browser_notice": "Este editor suporta Firefox, Chrome, Safari, Opera, e Internet Explorer 11 e superior. Prégase actualiza-lo teu navigador ou empregar Potlatch 2 para edita-lo mapa.",
         "translate": {
             "translate": "Traducir",
             "localized_translation_label": "Nome multilingüe",
-            "localized_translation_language": "Escoller idioma",
+            "localized_translation_language": "Escoller lingua",
             "localized_translation_name": "Nome"
         },
-        "zoom_in_edit": "Fai zoom para editar",
-        "login": "Acceder",
-        "logout": "Saír",
+        "zoom_in_edit": "Achega o mapa para editar",
+        "login": "Inicia-la sesión",
+        "logout": "Pecha-la sesión",
         "loading_auth": "Conectando con OpenStreetMap...",
         "report_a_bug": "Informar do erro",
         "help_translate": "Axuda a traducir",
+        "sidebar": {
+            "tooltip": "Agochar ou amosar lapela lateral."
+        },
         "feature_info": {
             "hidden_warning": "{count} elementos agochados",
             "hidden_details": "Estes elementos agora están agochados: {details} "
@@ -374,23 +377,23 @@
         "status": {
             "error": "Non se puido conectar coa API.",
             "offline": "A API non está en liña. Por favor, intenta editar máis tarde.",
-            "readonly": "A API está en modo de só lectura. Necesitarás esperar para gardar os teus cambios.",
+            "readonly": "A API está en modo de só lectura. Precisarás agardar para garda-las túas mudanzas.",
             "rateLimit": "A API limita conexións anónimas. Podes evitar isto rexistrándote."
         },
         "commit": {
             "title": "Subir a OpenStreetMap",
-            "upload_explanation": "Os cambios que subas serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",
-            "upload_explanation_with_user": "Os cambios que subas como {user} serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",
+            "upload_explanation": "As mudanzas que subas serán visíbeis en tódolos mapas que empreguen os datos do OpenStreetMap.",
+            "upload_explanation_with_user": "As mudanzas que subas coma {user} serán visíbeis en tódolos mapas que empreguen os datos do OpenStreetMap.",
             "request_review": "Gustaríame que alguén revisase as miñas edicións.",
             "save": "Subir",
-            "cancel": "Cancelar",
-            "changes": "{count} Cambios",
+            "cancel": "Desbotar",
+            "changes": "{count} Mudanzas",
             "download_changes": "Descargar ficheiro osmChange",
             "warnings": "Avisos",
             "modified": "Modificado",
             "deleted": "Borrado",
             "created": "Creado",
-            "about_changeset_comments": "Acerca dos comentarios dos conxuntos de cambios",
+            "about_changeset_comments": "Acerca dos comentarios dos conxuntos de mudanzas",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Mencionaches Google neste comentario: lembra que a copia de Google Maps está estrictamente prohibida.",
             "google_warning_link": "https://www.openstreetmap.org/copyright"
@@ -412,9 +415,9 @@
                 "accuracy": "Precisión",
                 "unknown": "Descoñecido",
                 "show_tiles": "Amosar teselas",
-                "hide_tiles": "Ocultar teselas",
-                "show_vintage": "Mostrar antigüidade",
-                "hide_vintage": "Ocultar antigüidade"
+                "hide_tiles": "Agochar teselas",
+                "show_vintage": "Amosar antigüidade",
+                "hide_vintage": "Agochar antigüidade"
             },
             "history": {
                 "key": "H",
@@ -422,11 +425,16 @@
                 "selected": "{n} seleccionados",
                 "no_history": "Sen historial (elemento novo)",
                 "version": "Versión",
-                "last_edit": "Última edición",
+                "last_edit": "Derradeira edición",
                 "edited_by": "Editado por",
-                "changeset": "Conxunto de cambios",
+                "changeset": "Conxunto de mudanzas",
                 "unknown": "Descoñecido",
-                "link_text": "Historial en openstreetmap.org"
+                "link_text": "Historial en openstreetmap.org",
+                "note_no_history": "Sen historial (novo elemento)",
+                "note_comments": "Comentarios",
+                "note_created_date": "Data de creación",
+                "note_created_user": "Creado polo usuario",
+                "note_link_text": "Nota no openstreetmap.org"
             },
             "location": {
                 "key": "L",
@@ -456,23 +464,24 @@
             "vertex": "vértice",
             "line": "liña",
             "area": "área",
-            "relation": "relación"
+            "relation": "relación",
+            "note": "nota"
         },
         "geocoder": {
-            "search": "Buscar en todo o mundo...",
-            "no_results_visible": "Ningún resultado na área visible do mapa",
+            "search": "Procurar en todo o mundo...",
+            "no_results_visible": "Ningún resultado na área visíbel do mapa",
             "no_results_worldwide": "Non se atoparon resultados"
         },
         "geolocate": {
-            "title": "Mostrar a miña localización",
+            "title": "Amosa-la miña localización",
             "locating": "Localizando, por favor agarde..."
         },
         "inspector": {
-            "no_documentation_combination": "Non hai ningunha documentación dispoñible para esta combinación de etiquetas",
-            "no_documentation_key": "Non hai ningunha documentación dispoñible para esta clave",
+            "no_documentation_combination": "Non hai ningunha documentación dispoñíbel para esta combinación de etiquetas",
+            "no_documentation_key": "Non hai ningunha documentación dispoñíbel para esta clave",
             "documentation_redirect": "Esta documentación foi redirixida a unha páxina nova",
-            "show_more": "Mostrar máis",
-            "view_on_osm": "Ver en openstreetmap.org",
+            "show_more": "Amosar máis",
+            "view_on_osm": "Ollar no openstreetmap.org",
             "all_fields": "Tódolos campos",
             "all_tags": "Tódalas etiquetas",
             "all_members": "Tódolos membros",
@@ -481,19 +490,19 @@
             "role": "Rol",
             "choose": "Escolle o tipo de elemento",
             "results": "{n} resultados para {search}",
-            "reference": "Ver na wiki de OpenStreetMap",
-            "back_tooltip": "Trocar tipo de elemento",
+            "reference": "Ollar na wiki do OpenStreetMap",
+            "back_tooltip": "Mudar tipo de elemento",
             "remove": "Eliminar",
-            "search": "Buscar",
+            "search": "Procurar",
             "multiselect": "Elixir elementos",
             "unknown": "Descoñecido",
             "incomplete": "<non descargado>",
-            "feature_list": "Buscar elementos",
+            "feature_list": "Procurar elementos",
             "edit": "Editar elemento",
             "check": {
                 "yes": "Si",
                 "no": "Non",
-                "reverser": "Cambio de Sentido"
+                "reverser": "Cambio de sentido"
             },
             "radio": {
                 "structure": {
@@ -519,41 +528,46 @@
             "best_imagery": "Mellor fonte de imaxes coñecida deste sitio",
             "switch": "Voltar a este fondo",
             "custom": "Personalizado",
-            "overlays": "Superposicións",
+            "overlays": "Sobreposicións",
             "imagery_source_faq": "Información das imaxes/Informar dun problema",
             "reset": "reiniciar",
             "display_options": "Opcións de visualización",
-            "brightness": "Brillo",
+            "brightness": "Brilo",
             "contrast": "Contraste",
             "saturation": "Saturación",
             "sharpness": "Enfoque",
             "minimap": {
-                "description": "Mostrar minimapa",
-                "tooltip": "Mostrar un mapa reducido para facilitar a localización da área que se estea a mostrar. ",
+                "description": "Amosar minimapa",
+                "tooltip": "Amosar un mapa reducido para facilitares a localización da área que se estea a mostrar. ",
                 "key": "/"
             },
-            "fix_misalignment": "Axustar offset da imaxe",
-            "offset": "Arrastre en calquera parte da área gris de embaixo para axustar o desplazamento de imaxes ou ingrese os valores de desprazamento en metros."
+            "fix_misalignment": "Axustar desprazamento da imaxe",
+            "offset": "Arrastre en calquera parte da área gris de embaixo para axusta-lo desprazamento das imaxes ou insira os valores do desprazamento en metros."
         },
         "map_data": {
-            "title": "Datos de mapa",
-            "description": "Datos de mapa",
+            "title": "Datos do mapa",
+            "description": "Datos do mapa",
             "key": "F",
             "data_layers": "Capas de datos",
             "layers": {
                 "osm": {
-                    "tooltip": "Datos de mapa do OpenStreetMap",
+                    "tooltip": "Datos do mapa do OpenStreetMap",
                     "title": "Datos OpenStreetMap"
                 },
                 "notes": {
                     "tooltip": "Datos das notas de OpenStreetMap",
                     "title": "Notas de OpenStreetMap"
+                },
+                "custom": {
+                    "tooltip": "Arrastre e solta un ficheiro de datos na páxina, ou prema no botón pra configuralo",
+                    "title": "Datos do mapa persoalizados",
+                    "zoom": "Achégate cara os datos"
                 }
             },
-            "fill_area": "Encher as áreas",
+            "fill_area": "Enche-las áreas",
             "map_features": "Características do mapa",
-            "autohidden": "Xa que se mostrarían moitas na pantalla, hai características que se agocharon de xeito automático. Podes facer unha ampliación para editar calquera delas.",
-            "osmhidden": "Estas características agocháronse automaticamente porque a capa OpenStreetMap está oculta."
+            "autohidden": "Xa que se amosarían moitas na pantalla, hai características que se agocharon de xeito automático. Podes facer unha ampliación para editares calquera delas.",
+            "osmhidden": "Estas características agocháronse automaticamente porque a capa OpenStreetMap está agochada."
         },
         "feature": {
             "points": {
@@ -566,7 +580,7 @@
             },
             "service_roads": {
                 "description": "Vías de servizo",
-                "tooltip": "Vías de servizo, accesos de aparcamento, pistas, etc"
+                "tooltip": "Vías de servizo, accesos do aparcadoiro, pistas, etc"
             },
             "paths": {
                 "description": "Camiños",
@@ -577,7 +591,7 @@
                 "tooltip": "Edificios, cabanas, garaxes, etc."
             },
             "landuse": {
-                "description": "Usos do solo",
+                "description": "Usos da terra",
                 "tooltip": "Montes, áreas agrícolas, parques, áreas residenciais, comercios, etc."
             },
             "boundaries": {
@@ -598,7 +612,7 @@
             },
             "past_future": {
                 "description": "Estado da obra",
-                "tooltip": "Proposta, en construción, abandonada, en demolición, etc."
+                "tooltip": "Proposta, en construción, abandoada, en demolición, etc."
             },
             "others": {
                 "description": "Outros",
@@ -608,7 +622,7 @@
         "area_fill": {
             "wireframe": {
                 "description": "Sen recheo (molde)",
-                "tooltip": "Activando o modo sen recheo, faise máis sinxelo ver a imaxe de fondo. ",
+                "tooltip": "Estase a activa-lo modo sen recheo, faise máis sinxelo ve-la imaxe do fondo. ",
                 "key": "W"
             },
             "partial": {
@@ -620,22 +634,45 @@
                 "tooltip": "As áreas móstranse completamente recheas."
             }
         },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Editar un fondo persoalizado",
+                "header": "Axustes do fondo persoalizado",
+                "instructions": "Insire un modelo da URL do mosaico. Os 'tokens' son:\n   {zoom} ou {z}, {x}, {y} pra o esquema de teselas Z/X/Y\n   {-y} ou {ty} pra as coordenadas Y estilo TMS\n   {u} pra un esquema de catro teselas\n   {switch:a,b,c} pra a multiplexación do server DNS\n\nExemplo:\n{example}",
+                "template": {
+                    "placeholder": "Inserir unha ligazón URL pra o modelo"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Editar os datos dunha capa persoalizada",
+                "header": "Axustes de datos dos mapas persoalizados",
+                "file": {
+                    "instructions": "Elixe un ficheiro de datos local. As extensións suportadas son:\n.gpx, .kml, .geojson, .json",
+                    "label": "Procura de arquivos"
+                },
+                "or": "ou",
+                "url": {
+                    "instructions": "Insire unha URL de ficheiro de datos ou un modelo de URL de táboas de vectores. Os 'tokens' válidos son:\n {zoom} ou {z}, {x}, {y} para o esquema das teselas Z/X/Y tile scheme",
+                    "placeholder": "Insire unha ligazón URL"
+                }
+            }
+        },
         "restore": {
-            "heading": "Tes cambios sen gardar",
-            "description": "Queres recuperar os cambios non gardados da sesión de edición anterior?",
-            "restore": "Recuperar meus trocos",
-            "reset": "Desbotar meus trocos"
+            "heading": "Tes mudanzas sen gardar",
+            "description": "Queres recupera-las mudanzas non gardadas da sesión de edición anterior?",
+            "restore": "Recupera-las miñas mudanzas",
+            "reset": "Desbota-las miñas mudanzas"
         },
         "save": {
             "title": "Gardar",
-            "help": "Revisa os trocos e súbeos a OpenStreetMap, facéndoos visibles a outros/as usuarios/as.",
-            "no_changes": "Non hai cambios para gardar.",
+            "help": "Revisa-las mudanzas e súbeas ó OpenStreetMap, facéndoas visíbeis a outros/as usuarios/as.",
+            "no_changes": "Non hai mudanzas para gardar.",
             "error": "Houbo erros ao se intentar gardar. ",
             "status_code": "O servidor devolveu a referencia de estado {code}",
             "unknown_error_details": "Asegúrate de que estás conectado a Internet.",
-            "uploading": "Subindo trocos a OpenStreetMap...",
+            "uploading": "Subindo mudanzas ó OpenStreetMap...",
             "conflict_progress": "Comprobando conflitos: {num} de {total}",
-            "unsaved_changes": "Tes cambios sen gardar",
+            "unsaved_changes": "Tes mudanzas sen gardar",
             "conflict": {
                 "header": "Resolvendo os conflitos de edición",
                 "count": "Conflito {num} de {total}",
@@ -647,7 +684,7 @@
                 "delete": "Deixar eliminadas",
                 "download_changes": "Ou descargar o ficheiro osmChange.",
                 "done": "Resolvéronse todos os conflitos.",
-                "help": "Outro usuario cambiou algunhas das mesmas características que ti cambiaches.\nPreme en cada recurso de abaixo para ver máis detalles sobre o conflito, e escolle se queres manter\nos teus cambios ou os cambios do outro usuario.\n"
+                "help": "Outro usuario mudou algunhas das mesmas características que ti mudaches.\nPreme en cada recurso de embaixo para veres máis detalles sobre o conflito, e escolle se queres mantelas\nas túas mudanzas ou as mudanzas do outro usuario.\n"
             }
         },
         "merge_remote_changes": {
@@ -656,38 +693,38 @@
                 "location": "Este elemento foi movido por ambos ti e {user}.",
                 "nodelist": "Os nós cambiástelos tanto ti coma {user}.",
                 "memberlist": "Os elementos da relación modificáronnos {user} e máis vostede,",
-                "tags": "Cambiaches a etiqueta  <b>{tag}</b> a \"{local}\" e {user} cambiouna para \"{remote}\"."
+                "tags": "Mudaches a etiqueta  <b>{tag}</b> a \"{local}\" e {user} mudouna para \"{remote}\"."
             }
         },
         "success": {
             "just_edited": "Acabas de editar OpenStreetMap!",
             "thank_you": "Grazas por mellorar o mapa",
             "thank_you_location": "Grazas por mellorar o mapa por {where}",
-            "help_html": "Os teus cambios deberían aparecer na capa estándar de OpenStreetMap nuns minutos. Pódelle levar máis tempo actualizarse a outras capas e mapas de outros sitios.",
+            "help_html": "As túas mudanzas terían que aparecer na capa estándar do OpenStreetMap nuns intres. Pódelle levar máis tempo actualizarse a outras capas e mapas doutros sitios.",
             "help_link_text": "Detalles",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
-            "view_on_osm": "Ver cambios en OSM",
-            "changeset_id": "O teu conxunto de cambios é o {changeset_id}",
+            "view_on_osm": "Ollar mudanzas no OSM",
+            "changeset_id": "O teu conxunto de mudanzas é o {changeset_id}",
             "like_osm": "Gústache OpenStreetMap? Comunícate con outras persoas:",
             "more": "Máis",
             "events": "Eventos",
-            "languages": "Idiomas: {languages}",
-            "missing": "Falta algo nesta lista?",
+            "languages": "Linguas: {languages}",
+            "missing": "Falla algo nesta listaxe?",
             "tell_us": "Cóntanos!"
         },
         "confirm": {
-            "okay": "OK",
-            "cancel": "Cancelar"
+            "okay": "Feito",
+            "cancel": "Desbotar"
         },
         "splash": {
-            "welcome": "Benvido ao editor de OpenStreetMap iD",
-            "text": "iD é unha amigable pero potente ferramenta para contribuír ao mellor mapa libre do mundo. Esta é a versión {version}. Para obter máis información visita {website} e informa de erros en {github}.",
-            "walkthrough": "Comezar o titorial",
+            "welcome": "Benvido ó editor do OpenStreetMap iD",
+            "text": "iD é unha amigábel pero potente ferramenta para contribuír ó mellor mapa libre do mundo. Esta é a versión {version}. Para obter máis información visita {website} e informa de erros no {github}.",
+            "walkthrough": "Comeza-lo titorial",
             "start": "Editar agora"
         },
         "source_switch": {
             "live": "en liña",
-            "lose_changes": "Tes cambios sen gardar. Se cambias o servidor do mapa, descartaranse. Estás seguro de que queres cambiar o servidor?",
+            "lose_changes": "Tes mudanzas sen gardar. Se cambeas o servidor do mapa, desbotaranse. Estás na seguranza de que queres cambea-lo servidor?",
             "dev": "desenvolvemento"
         },
         "version": {
@@ -711,40 +748,40 @@
             "untagged_area_tooltip": "Escolle un tipo de elemento que describa o que é esta área.",
             "untagged_relation": "Relación sen etiquetar",
             "untagged_relation_tooltip": "Escolle un tipo de elemento que describa o que é esta relación.",
-            "many_deletions": "Estás borrando {n} elementos: {p} nós, {l} liñas, {a} áreas e {r} relacións. Estás seguro de querer facelo? Esta acción eliminaraos do mapa e ninguén os verá en openstreetmap.org.",
+            "many_deletions": "Estás borrando {n} elementos: {p} nós, {l} liñas, {a} áreas e {r} relacións. Estás na certeza de querer facelo? Esta acción eliminaraos do mapa e ninguén os verá no openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} suxire que a liña debería ser unha área, pero non é unha área.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
         "zoom": {
-            "in": "Ampliar",
-            "out": "Reducir"
+            "in": "Achegar",
+            "out": "Afastar"
         },
-        "cannot_zoom": "Non se pode reducir máis no modo actual.",
+        "cannot_zoom": "Non se pode afastar máis no modo actual.",
         "full_screen": "Pasar a pantalla completa",
         "streetside": {
-            "tooltip": "Fotos Streetside de Microsoft",
-            "title": "Superposición de fotos (Bing Streetside)",
+            "tooltip": "Imaxes Streetside de Microsoft",
+            "title": "Sobreposición de imaxes (Bing Streetside)",
             "report": "Informar dun problema de privacidade con esta imaxe",
-            "view_on_bing": "Ver en Bing Maps",
+            "view_on_bing": "Ollar no Bing Maps",
             "hires": "Alta resolución"
         },
         "mapillary_images": {
-            "tooltip": "Fotos ao nivel da rúa de Mapillary",
-            "title": "Superposición de fotos (Mapillary)"
+            "tooltip": "Imaxes ó nivel da rúa do Mapillary",
+            "title": "Sobreposición de imaxes (Mapillary)"
         },
         "mapillary_signs": {
-            "tooltip": "Sinais de tráfico de Mapillary (debes activar a superposición de fotos)",
-            "title": "Superposición de sinais de tráfico (Mapillary)"
+            "tooltip": "Sinais de tráfico do Mapillary (debes activa-la sobreposición de imaxes)",
+            "title": "Sobreposición das sinais de tráfico (Mapillary)"
         },
         "mapillary": {
-            "view_on_mapillary": "Ver esta imaxe en Mapillary"
+            "view_on_mapillary": "Ollar esta imaxe no Mapillary"
         },
         "openstreetcam_images": {
-            "tooltip": "Fotos ao nivel da rúa de OpenStreetCam",
-            "title": "Superposición de fotos (OpenStreetCam)"
+            "tooltip": "Imaxes ó nivel da rúa do OpenStreetCam",
+            "title": "Sobreposición de imaxes (OpenStreetCam)"
         },
         "openstreetcam": {
-            "view_on_openstreetcam": "Ver esta imaxe en OpenStreetCam"
+            "view_on_openstreetcam": "Ollar esta imaxe no OpenStreetCam"
         },
         "note": {
             "note": "Nota",
@@ -759,7 +796,7 @@
                 "closed": "pechada {when}"
             },
             "newComment": "Novo comentario",
-            "inputPlaceholder": "Introducir un comentario para compartir con outros usuarios.",
+            "inputPlaceholder": "Inserir un comentario para compartir con outros usuarios.",
             "close": "Pechar a nota",
             "open": "Volver a abrir a nota",
             "comment": "Comentar",
@@ -769,112 +806,208 @@
             "new": "Nova nota",
             "newDescription": "Describe o problema.",
             "save": "Gardar nota",
-            "login": "Debe acceder para poder facer cambios ou comentarios nesta nota.",
-            "upload_explanation": "Os seus comentarios serán públicos e visibles para calquera usuario de OpenStreetMap.",
-            "upload_explanation_with_user": "Os seus comentarios como  {user} serán públicos e visibles para todos os usuarios de OpenStreetMap."
+            "login": "Debes acceder para poderes facer mudanzas ou comentarios nesta nota.",
+            "upload_explanation": "Os seus comentarios serán públicos e visíbeis para calquera usuario do OpenStreetMap.",
+            "upload_explanation_with_user": "Os seus comentarios coma {user} serán públicos e visíbeis para tódolos usuarios do OpenStreetMap."
         },
         "help": {
             "title": "Axuda",
             "key": "H",
             "help": {
                 "title": "Axuda",
-                "welcome": "Benvido ao editor iD para [OpenStreetMap] (https://www.openstreetmap.org/). Con este editor podes actualizar OpenStreetMap directamente desde o teu navegador.",
+                "welcome": "Benvido ó editor iD para o [OpenStreetMap] (https://www.openstreetmap.org/). Con este editor podes actualiza-lo OpenStreetMap de xeito directo dende o teu navigador.",
                 "open_data_h": "Abrir datos",
+                "open_data": "As edicións que faga neste mapa serán visíbeis para todos os que empreguen o OpenStreetMap. As edicións poden basearse no coñecemento persoal, relevo no terreo ou imaxes recollidas de imaxes  aéreas ou da rúa. Copiar de fontes comerciais, coma o Google Maps, [está estrictamente prohibido](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Antes de que comeces",
-                "open_source_h": "Código aberto"
+                "before_start": "Tería que estar familiarizado co OpenStreetMap e este editor antes de comezar a editar. O iD ten un titorial para ensinarlle os conceptos básicos da edición do OpenStreetMap. Prema en \"Inicia-lo titorial\" nesta pantalla para face-lo titorial - Só lle tomará uns 15 minutos.",
+                "open_source_h": "Código aberto",
+                "open_source": "O editor do iD é un proxecto colaborativo de código aberto e agora está a emprega-la versión {version}. O código fonte está dispoñíbel [no GitHub](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Pode axudar ó iD [traducindo](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ou [reportando erros](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Resumo",
                 "navigation_h": "Navegación",
-                "navigation_zoom": "Podes facer ampliar ou afastarte dunha zona arrastrando co ratón ou trackpad, ou premendo nos botóns de {plus}/{minus} que aparecen no lateral do mapa. Ademais podes empregar as teclas  `+`, `-` .",
+                "navigation_drag": "Pode arrastra-lo mapa premendo e mantendo premido o {leftclick} botón esquerdo do rato e movendo o rato. Tamén se pode emprega-las teclas de frecha `↓`, `↑`, `←`, `→` do teclado.",
+                "navigation_zoom": "Pode achegar ou afastar xirando a roda do rato ou o panel táctil, ou premendo nos botóns {plus} / {minus} á beira do mapa. Tamén se pode emprega-las teclas `+`, `-` do teclado.",
                 "features_h": "Características do mapa",
-                "features": "Usámola palabra *elementos* para describir as cousas que aparecen no mapa, como estradas, construcións ou puntos de interese. Calquera cousa do mundo real poden cartografarse como un elemento en OpenStreetMap. Os elementos do mapa represéntanse usando *puntos*, *liñas* ou *áreas*.",
-                "nodes_ways": "En OpenStreetMap, aos puntos ás veces chámaselles *nós*, e as liñas e áreas *camiños*."
+                "features": "Empregamos a palabra *elementos* para describi-las cousas que aparecen no mapa, coma estradas, construcións ou puntos de interese. Calquera cousa do mundo real pode cartografarse coma un elemento no OpenStreetMap. Os elementos do mapa represéntanse empregando *puntos*, *liñas* ou *áreas*.",
+                "nodes_ways": "No OpenStreetMap, ós puntos ás veces chámaselles *nós*, e as liñas e áreas *vías* ou camiños."
             },
             "editing": {
                 "title": "Editar e gardar",
                 "select_h": "Seleccionar",
+                "select_left_click": "{leftclick} Faga clic co botón esquerdo nun elemento para seleccionalo. Isto resaltarao cun brilo pestanexante, e a barra lateral amosará os detalles sobre ese elemento, coma o seu nome oo enderezo.",
+                "select_right_click": "{rightclick} Faga clic co botón dereito nun elemento para amosa-lo menú da edición que amosa as ordes ou comandos dispoñíbeis, coma rotar, mover e eliminar.",
                 "multiselect_h": "Selección múltiple",
+                "multiselect_shift_click": "`{shift}`+{leftclick} clic esquerdo para seleccionar varios elementos xuntos. Isto fai que sexa máis doado mover ou eliminar varios elementos.",
+                "multiselect_lasso": "Outro xeito de seleccionar varios elementos é manter premida a tecla `{shift}`, despois manter premido o {leftclick} botón equerdo do rato e arrastra-lo rato para debuxar un lazo de selección. Seleccionaranse tódolos puntos dentro da área do lazo.",
                 "undo_redo_h": "Desfacer e refacer",
+                "undo_redo": "As edicións almacénanse de xeito local no navigador até que escolla gardalas no servidor do OpenStreetMap. Para desfacer edicións, prema no botón {undo} **Desfacer** e volva a facelas cun clic no botón {redo} **Refacer**.",
                 "save_h": "Gardar",
+                "save": "Prema en {save} **Gardar** para remata-las mudanzas e envialas ó OpenStreetMap. Ten que lembrar garda-lo traballo de xeito frecuente!",
+                "save_validation": "Na pantalla de gardar tense a oportunidade de revisa-lo feito. O iD tamén fará algunhas verificacións básicas dos datos fallantes e pode fornecer suxestións e advertenzas útis se algo non semella correcto.",
                 "upload_h": "Subir",
+                "upload": "Antes de subi-las mudanzas, debe inserir un [comentario do conxunto de mudanzas](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Deseguido, prema en **Subir** para envia-las súas mudanzas ó OpenStreetMap, onde se mesturarán no mapa e serán públicamente visíbeis para todos.",
                 "backups_h": "Copias de seguridade automáticas",
-                "keyboard_h": "Atallos de teclado"
+                "backups": "Se non consegue remata-las edicións dunha soa vez, por exemplo se a súa computadora falla ou pecha o navigador, as súas edicións aínda se manterán na memoria do navigador. Poderá voltar despois (empregando o mesmo navigador na mesma computadora) e o iD darálle a opción de restaura-lo seu traballo.",
+                "keyboard_h": "Atallos do teclado",
+                "keyboard": "Podes ollar unha listaxe de atallos do teclado premendo na tecla `?`."
             },
             "feature_editor": {
                 "title": "Editor preferido",
+                "intro": "O *editor de elemento* aparece xunto ó mapa, e permítelle ollar e editar toda a información do elemento escollido.",
+                "definitions": "A lapela de enriba amosa o tipo de elemento. A lapela central contén *campos* que amosan os atributos do elemento, coma o seu nome ou enderezo.",
                 "type_h": "Tipo preferido",
+                "type": "Pode facer clic no tipo de elemento para muda-lo elemento cara un tipo diferente. Todo o que existe no mundo real pódese engadir ó OpenStreetMap, polo que hai milleiros de tipos de elementos para elixir.",
+                "type_picker": "A escolla de tipos amosa os tipos de elementos máis comúns, coma parques, hospitais, restaurantes, estradas e construccións. Pode procurar calquera cousa escribindo o que está a procurar na caixa de procura. Tamén pode premer na icona {inspect} **Información** xunto ó tipo de elemento para obter máis información ó respecto.",
                 "fields_h": "Campos",
-                "tags_h": "Etiquetas"
+                "fields_all_fields": "A lapela \"Tódolos campos\" contén tódolos detalles do elemento que pode editar. No OpenStreetMap, tódolos campos son opcionais, e está ben deixar un campo en branco se non está na certeza del.",
+                "fields_example": "Cada tipo de elemento amosará diferentes campos. Por exemplo, unha estrada pode amosar campos para a súa superficie e límite da velocidade, pero un restaurante pode amosar campos para o tipo da comida que serve e o horario no que está aberto.",
+                "fields_add_field": "Tamén pode facer clic no menú despregábel \"Engadir campo\" para engadir máis campos, coma unha descrición, ligazón á Wikipedia, acceso para cadeiras de rodas e demais.",
+                "tags_h": "Etiquetas",
+                "tags_all_tags": "Embaixo da lapela dos campos, pode expandi-la lapela \"Tódalas etiquetas\" para editar calquera das *etiquetas* do OpenStreetMap para o elemento escollido. Cada etiqueta ten unha *clave* e *valor*, elementos de datos que definen tódolos elementos almacenados no OpenStreetMap.",
+                "tags_resources": "Edita-las etiquetas dun elemento precisa dun coñecemento intermedio acerca do OpenStreetMap. Tería que consultar recursos coma a [Wiki do OpenStreetMap] (https://wiki.openstreetmap.org/wiki/Main_Page) ou o [Taginfo] (https://taginfo.openstreetmap.org/) para obter máis información sobre as prácticas ou costumes aceptadas de etiquetado do OpenStreetMap."
             },
             "points": {
                 "title": "Puntos",
+                "intro": "Os *puntos* pódense empregar para representar elementos coma tendas, restaurantes e monumentos. Marcan unha localización específica e descreben o que hai alí.",
                 "add_point_h": "Engadindo puntos",
+                "add_point": "Para engadir un punto, prema no botón {point} **Punto** na barra das ferramentas sobre o mapa, ou prema a tecla do método abreviado `1`. Isto trocará o cursor do rato cara un símbolo dunha cruz.",
+                "add_point_finish": "Para poñer o novo punto no mapa, poña o cursor do rato onde ten que ir o punto, despois {leftclick} faga clic co botón esquerdo do rato ou prema `Espazo`.",
                 "move_point_h": "Movendo puntos",
-                "delete_point_h": "Eliminando puntos"
+                "move_point": "Para mover un punto, poña o cursor do rato sobre o punto e despois manteña premido o {leftclick} botón equerdo do rato mentres arrastra o punto cara a súa nova localización.",
+                "delete_point_h": "Eliminando puntos",
+                "delete_point": "Está ben elimina-los elementos que non se atopan no mundo real. Ó eliminar un elemento do OpenStreetMap, elimínase do mapa que todos empregan, polo que ten que estar na certeza de que o elemento en verdade non exista denantes de eliminalo.",
+                "delete_point_command": "Para eliminares un punto, {rightclick} faga clic co botón dereito no punto para escollelo e amosa-lo menú da edición, despois empregue a orde ou comando {delete} **Eliminar**."
             },
             "lines": {
                 "title": "Liñas",
+                "intro": "As *liñas* empréganse para representar características tales coma estradas, ferrocarrís e ríos. As liñas teñen que debuxarse no centro do elemento que representan.",
                 "add_line_h": "Engadindo liñas",
+                "add_line": "Para engadir unha liña, prema no botón {line} **Liña** na barra das ferramentas enriba do mapa, ou prema a tecla de método abreviado `2`. Isto trocará o cursor do rato cara un símbolo dunha cruz.",
+                "add_line_draw": "Deseguido, poña o cursor do rato onde debe comeza-la liña e {leftclick} faga clic co botón esquerdo do rato ou prema `Espazo` para comezar a poñer nós ó longo da liña. Prosegue poñendo máis nós faciendo clic ou premendo `Espazo`. Mentres debuxa, pode achegar ou arrastra-lo mapa para engadir máis detalles.",
+                "add_line_finish": "Para rematar unha liña, prema `{return}` ou faga clic de novo no derradeiro nó.",
                 "modify_line_h": "Modificando as liñas",
+                "modify_line_dragnode": "Decote verá liñas que non teñen a forma axeitada, por exemplo, unha estrada que non coincide cas imaxes do fondo. Para axusta-la forma dunha liña, primeiro faga clic co {leftclick} botón esquerdo para seleccionala. Tódolos nós da liña debuxaranse coma pequenos círculos. Deseguido, pode arrastra-los nós cara localizacións mellores.",
+                "modify_line_addnode": "Tamén pode crear novos nós ó longo dunha liña mediante {leftclick}**x2** facendo dobre clic na liña ou arrastrando os triángulos pequenos nos puntos medios entrambos nós.",
                 "connect_line_h": "Conectando as liñas",
+                "connect_line": "Te-las estradas conectadas de xeito correcto é importante para o mapa e esencial para fornecer indicacións de manexo.",
+                "connect_line_display": "As conexións entre estradas están debuxadas con círculos grises. Os puntos derradeiros dunha liña debúxanse con círculos brancos máis grandes se non se conectan a ren.",
+                "connect_line_drag": "Para conectar unha liña a otro elemento, arrastre un dos nós da liña ó outro elemento até que ámbolos dous se xunten. Consello: Pode manter premida a tecla `{alt}` para evitar que os nós se conecten a outros elementos.",
+                "connect_line_tag": "Se sabe que a conexión ten semáforos ou cruzamentos peonís, pode engadilos seleccionando o nó de conexión e empregando o editor de elementos para escolle-lo tipo de elemento axeitado.",
                 "disconnect_line_h": "Desconectando as liñas",
+                "disconnect_line_command": "Para desconectar unha estrada doutro elemento, {rightclick} faga clic co botón dereito no nó de conexión e escolla a orde ou comando {disconnect} **Desconectar** do menú da edición.",
                 "move_line_h": "Movendo as liñas",
-                "delete_line_h": "Eliminando as liñas"
+                "move_line_command": "Para mover unha liña enteira, faga clic {rightclick} botón dereito na liña e escolla a orde ou comando {move} **Mover** do menú da edición. Deseguido, mova o rato e faga clic co {leftclic} botón esquerdo para poñe-la liña nunha nova localización.",
+                "move_line_connected": "As liñas que están conectadas a outros elementos ficarán conectadas mentres mova a liña cara unha nova localización. O iD pode evitar que mova unha liña a través doutra liña conectada.",
+                "delete_line_h": "Eliminando as liñas",
+                "delete_line": "Se unha liña esta completamente incorrecta, por exemplo, unha rota que non existe no mundo real, está ben borrala. Teña coitadiño ó eliminar elementos: as imaxes do fondo que está a empregar poderían ficar desactualizadas, e unha estrada que semella estar mal podería sinxelamente estar recén construída.",
+                "delete_line_command": "Para eliminar unha liña, faga clic co {rightclick} botón dereito na liña para seleccionala e amosa-lo menú da edición, despois empregue a orde ou comando {delete} **Eliminar**."
             },
             "areas": {
                 "title": "Áreas",
+                "intro": "As **áreas** empréganse para amosa-los límites de elementos coma lagoas, edificios e áreas residenciais. As áreas teñen que debuxarse arredor da beira do elemento que representan, por exemplo, arredor da base dun edificio.",
                 "point_or_area_h": "Puntos ou áreas?",
+                "point_or_area": "Moitos elementos pódense representar coma puntos ou áreas. Ten que cartografa-los edificios e as contornas da propiedade coma áreas sempre que sexa posíbel. Poña puntos dentro da área do edificio para representar negocios, instalacións e outros elementos ubicados dentro do edificio.",
                 "add_area_h": "Engadindo áreas",
+                "add_area_command": "Para engadir unha área, prema no botón {area} **Área** na barra das ferramentas enriba do mapa, ou prema a tecla de método abreviado `3`. Isto trocará o cursor do rato cara un símbolo dunha cruz.",
+                "add_area_draw": "Deseguido, poña o cursor do rato nunha das esquinas do elemento e {leftclick} faga clic co botón esquerdo ou prema `Espazo` para comezar a colocar nós arredor do bordo exterior da área. Prosega poñendo máis nós faciendo clic ou premendo `Espazo`. Mentres debuxa, pode achegar ou arrastra-lo mapa para engadir máis detalles.",
+                "add_area_finish": "Para rematar unha área, prema `{return}` ou faga clic novamente no primeiro ou derradeiro nó.",
                 "square_area_h": "Esquinas cadradas",
+                "square_area_command": "Moitos elementos da área, coma edificios, teñen esquinas cadradas. Para encadra-las esquinas dunha área, faga clic {rightclick} co botón dereito na beira da área e escolla a orde ou comando {orthogonalize} **Encadrar** no menú da edición.",
                 "modify_area_h": "Modificando áreas",
-                "delete_area_h": "Eliminando áreas"
+                "modify_area_dragnode": "Decote verá áreas que non teñen a forma axeitada, por exemplo, un edificio que non coincide cas imaxes do fondo. Para axusta-la forma dunha área, primeiro, faga clic no {leftclick} botón esquerdo do rato para seleccionala. Tódolos nós da área debuxaranse coma pequenos círculos. Deseguido, pode arrastra-los nós cara localizacións mellores.",
+                "modify_area_addnode": "Tamén pode crear novos nós ó longo dunha área mediante {leftclick} **x2** faciendo dobre clic no bordo da área ou arrastrando os triángulos pequenos nos puntos medios entrambos nós.",
+                "delete_area_h": "Eliminando áreas",
+                "delete_area": "Se unha área é completamente incorrecta, por exemplo, un edificio que non existe no mundo real, está ben que se elimine. Teña coitadiño ó eliminar elementos: as imaxes do fondo que está a empregar poden ficar desactualizadas, e un edificio que semella incorrecto podería sinxelamente estar recén construído.",
+                "delete_area_command": "Para eliminar unha área, faga clic co {rightclick} botón dereito na área para seleccionala e amosa-lo menú da edición, despois empregue a orde ou comando {delete} **Eliminar**."
             },
             "relations": {
                 "title": "Relacións",
+                "intro": "Unha *relación* é un tipo especial de elemento no OpenStreetMap que agrupa outros elementos. Os elementos que pertencen a unha relación chámanse *membros*, e cada membro pode ter un *rol* na relación.",
                 "edit_relation_h": "Editando as relacións",
+                "edit_relation": "Na beira inferior do editor de elementos, pode expandi-la lapela \"Tódalas relacións\" para ollar se o elemento escollido é membro dalgunha relación. Deseguido, pode facer clic na relación para seleccionala e editala.",
+                "edit_relation_add": "Para engadir un elemento cara unha relación, escolla o elemento e despois prema no botón {plus} engadir na lapela \"Tódalas relacións\" do editor de funcións. Pode elixir dunha listaxe de relacións pretas, ou elixi-la opción \"Nova relación...\".",
+                "edit_relation_delete": "Tamén pode premer no botón {delete} **Eliminar** para elimina-lo elemento escollido da relación. Se elimina tódolos membros dunha relación, a relación eliminarase de xeito automático.",
                 "maintain_relation_h": "Mantendo as relacións",
+                "maintain_relation": "Na súa meirande parte, o iD manterá relacións de xeito automático mentres edita. Debe ter coidado ó substituí-los elementos que poderían ser membros das relacións. Por exemplo, se elimina un treito da estrada e debuxa un novo treito da estrada para substituíla, ten que engadi-lo novo treito ás mesmas relacións (rotas, restricións de xiro, etc.) que a orixinal.",
                 "relation_types_h": "Tipos de relacións",
                 "multipolygon_h": "Multipolígonos",
-                "turn_restriction_h": "Cambiar as restricións",
-                "route_h": "Rutas",
-                "boundary_h": "Fronteiras"
+                "multipolygon": "Unha relación *multipolígono* é un grupo duns ou máis elementos *externos* e un ou máis elementos internos. Os elementos externos definen as beiras exteriores do multipolígono, e os elementos internos definen subáreas ou buracos recortados dende o interior do multipolígono.",
+                "multipolygon_create": "Para xerar un multipolígono, por exemplo, un edificio cun buraco, debuxe o bordo externo coma unha área e o bordo interior coma unha liña ou un tipo diferente da área. Despois `{shift}`+{leftclick} faga clic co botón esquerdo para seleccionar ambos elementos, faga clic co {rightclick} botón dereito no menú para amosa-lo menú da edición e escolla a orde ou comando {merge} **Combinar**.",
+                "multipolygon_merge": "Combinar varias liñas ou áreas xerará unha nova relación multipolígono con tódalas áreas escollidas coma membros. O iD elixirá os roles internos e externos de xeito automático, en función dos elementos que se atopan dentro doutros elementos.",
+                "turn_restriction_h": "Muda-las restricións",
+                "turn_restriction": "Unha relación de *restrición de xiro* é un grupo de varios segmentos de camiño nun cruzamento. As restricións de xiro constan dun camiño *dende*, nó ou estradas *vía*, e un camiño *até*.",
+                "turn_restriction_field": "Para editar restricións de xiro, seleccione un nó de unión onde dous ou máis camiños se crucen. O editor de elementos amosará un campo especial \"Restricións de xiro\" que contén un modelo de cruzamento.",
+                "turn_restriction_editing": "No campo \"Restricións de xiro\", faga clic para escoller un camiño \"dende\", e vexa se os xiros están permitidos ou restrinxidos a calquera das estradas \"até\". Pode facer clic nas iconas de xiro para trocar entre permitido e restrinxido. O iD xerará relacións de xeito automático e estabelecerá os dende, vía e roles segundo as súas escollas.",
+                "route_h": "Rotas",
+                "route": "Unha relación *Rota* é un grupo dun ou máis elementos de liña que xuntas forman unha rede de rotas, coma unha rota de bus, unha rota de tren ou unha rota de estrada.",
+                "route_add": "Para engadir un elemento a unha relación de rota, seleccione o elemento e desprácese cara embaixo á lapela \"Tódalas relacións\" do editor de elementos, despois prema no botón {plus} engadir para engadir este elemento a unha relación preta existente ou a unha nova relación.",
+                "boundary_h": "Fronteiras",
+                "boundary": "Unha relación *límite* é un grupo dun ou máis elementos de liña que xuntas forman un límite administrativo.",
+                "boundary_add": "Para engadir un elemento a unha relación de límite, seleccione o elemento e desprácese cara embaixo á lapela \"Tódalas relacións\" do editor de elemento, despois prema no botón {plus} engadir para engadir este elemento a unha relación preta existente ou a unha nova relación."
+            },
+            "notes": {
+                "title": "Notas",
+                "intro": "As *Notas* empréganse para a dár unha sinal de aviso a outros usuarios de que un elemento ten ser corrixido ou precisa dunha atención. As notas sinalan unha localización específica no mapa. Para olla-las notas existentes ou engadir novas, prema na lapela {data} **Datos do mapa** para activa-la capa das notas do OpenStreetMap.",
+                "add_note_h": "Engadir notas",
+                "add_note": "Para engadir unha nova nota, prema no botón {note} **Nota** na barra das ferramentas enriba do mapa, ou prema na tecla de atallo `4`. Isto trocará o cursor do rato cara un símbolo dunha cruz. Para poñe-la nova nota no mapa, poña o cursor do rato onde debe ir a nota, despois faga clic co {leftclick} botón esquerdo do rato ou prema `Espazo`.",
+                "move_note": "Só pódense move-las notas novas. Para mover unha nota, poña o cursor do rato sobre a nova nota, despois prema e manteña premido o {leftclick} botón esquerdo do rato mentres arrastra a nota cara á súa nova localización.",
+                "update_note_h": "Peche, volve abrir e comenta",
+                "update_note": "Unha nota existente pódese actualizar pechándoa, voltando a abrila o engadíndolle un comentario. Pechar unha nota indica que o problema foi resolto. A reapertura dunha nota indica que o problema orixinal non está resolto.",
+                "save_note_h": "Gardar notas",
+                "save_note": "Debe garda-las edicións de notas de xeito individual premendo nos botóns que se atopan debaixo dos comentarios da nota. As edicións de nota **non** se inclúen nos conxuntos de mudanzas que se soben ó OpenStreetMap."
             },
             "imagery": {
-                "title": "Imaxe de fondo",
-                "sources_h": "Fontes de imaxes"
+                "title": "Imaxe do fondo",
+                "intro": "As imaxes do fondo que aparecen embaixo dos datos do mapa son un recurso importante para o cartografado. Estas imaxes poden ser imaxes aéreas recompiladas de satélites, avións e avións non tripulados ou drons, ou poden escanearse mapas históricos ou outros datos de orixe dispoñíbeis libremente.",
+                "sources_h": "Fontes de imaxes",
+                "choosing": "Para ollar que fontes de imaxes están dispoñíbeis para editar, prema no botón {layers} **Axustes do fondo** no costado do mapa.",
+                "sources": "De xeito predeterminado, escóllese a capa de satélite [Bing Maps](https://www.bing.com/maps/) coma imaxe do fondo. Dependendo de onde esté editando, outras fontes de imaxes estarán dispoñíbeis. Algunhas poden ser máis recentes ou ter unha resolución máis alta, polo que sempre é útil verificar que capa é a mellor para empregar coma referenza do cartografado.",
+                "offsets_h": "Axustar a desviación da imaxe",
+                "offset": "As imaxes ás veces están lixeiramente desprazadas con respecto ós datos precisos do mapa. Se olla unha grande cantidade de estradas ou edificios desprazados das imaxes do fondo, pode ser que as imaxes sexan incorrectas, polo que non as mova para que coincidan co fondo. No seu lugar, pode axusta-lo fondo para que coincida cos datos existentes ó expandi-la lapela \"Axustar desprazamento das imaxes\" na beira de embaixo da lapela dos Axustes do fondo.",
+                "offset_change": "Prema nos triángulos pequenos para axusta-lo desprazamento das imaxes en pequenos anacos, ou manteña premido o botón esquerdo do rato e arrastre dentro do cadrado gris para esborrexe-las imaxes cara a aliñación."
             },
             "streetlevel": {
-                "title": "Fotos a nivel de rúa",
-                "using_h": "Usando as fotos a nivel de rúa"
+                "title": "Imaxes ó nivel da rúa",
+                "intro": "As imaxes a nivel da rúa son útis para cartografar sinais de tráfico, negocios e outros detalles que non se poden ollar dende imaxes satelitais e aéreas. O editor do iD admite imaxes a nivel da rúa do [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) e [OpenStreetCam](https://www.openstreetcam.org).",
+                "using_h": "Estasen a emprega-las imaxes ó nivel da rúa",
+                "using": "Para empregar imaxes a nivel da rúa para cartografar, prema na lapela {data} **Datos do mapa** no costado do mapa para habilitar ou deshabilita-las capas de imaxes dispoñíbeis.",
+                "photos": "Cando está habilitada, a capa da imaxe amosa unha liña ó longo da serie de imaxes. Nos niveis do achegamento máis altos, indícase cun círculo en cada imaxe a ubicación, e nos niveis do achegamento aínda máis altos, indícase cun cone a dirección que á que ficou mirando a cámara cando se tomou a imaxe.",
+                "viewer": "Cando preme nunha das ubicacións das imaxes, aparece un visor de imaxes na esquina de embaixo do mapa. O visor de imaxes contén controis para ir cara avante e voltar na secuencia das imaxes. Tamén amosa o nome do usuario da persoa que fixo a imaxe, a data na que foi feita e unha ligazón para olla-la imaxe no sitio orixinal."
             },
             "gps": {
                 "title": "Pistas de GPS",
-                "using_h": "Usando as pistas de GPS"
+                "intro": "As pistas do GPS recompiladas son unha valiosa fonte de datos para o OpenStreetMap. Este editor admite ficheiros * .gpx *, * .geojson * e * .kml* na súa computadora local. Pode recompilar pistas do GPS cun teléfono móbil intelixente, reloxo deportivo ou outro aparello GPS.",
+                "survey": "Para obter información sobre de que xeito facer un relevamento con GPS, lea [Cartografado cun teléfono móbil intelixente, GPS ou papeis](http://learnosm.org/en/mobile-mapping/).",
+                "using_h": "Usando as pistas de GPS",
+                "using": "Para empregar unha pista do GPS para o cartografado, arrastre e solte o ficheiro dos datos no editor de mapas. Se recoñéceo, debuxarao no mapa coma unha liña violeta brilante. Prema na lapela {data} **Datos do mapa** na beira do mapa para habilitar, deshabilitar ou achega-los seus datos do GPS.",
+                "tracing": "A pista do GPS non se envía ó OpenStreetMap; a mellor maneira de empregala é debuxar no mapa empregándoa coma unha guía para os novos elementos que engada.",
+                "upload": "Tamén pode [carrega-los datos do GPS ó OpenStreetMap](https://www.openstreetmap.org/trace/create) para que os empreguem outros usuarios."
             },
             "field": {
                 "restrictions": {
                     "title": "Axuda das restricións de xiro",
                     "about": {
                         "title": "Acerca de",
-                        "about": "Este campo permíteche inspeccionar e modificar restricións de xiro. Mostra un modelo da intersección seleccionada, incluíndo outras estradas conectadas próximas.",
-                        "from_via_to": "Unha restrición de xiro sempre contén: unha **vía DESDE**, unha **vía CARA A** e un **nodo A TRAVÉS DE** ou unha ou varias **vías A TRAVÉS DE**.",
-                        "maxdist": "A barra de desprazamento \"{distField}\" controla ata onde se vai buscar por máis estradas conectadas.",
-                        "maxvia": "A barra de desprazamento \"{viaField}\" axusta cantas vías intermedias poden ser incluídas na busca. (Consello: canto máis simple, mellor)"
+                        "about": "Este campo permíteche inspeccionar e modificar restricións de xiro. Amosa un modelo do cruzamento escollido, incluíndo outras estradas conectadas próximas.",
+                        "from_via_to": "Unha restrición de xiro sempre contén: unha **vía DENDE**, unha **vía CARA A** e un **nó A TRAVÉS DE** ou unha ou varias **vías A TRAVÉS DE**.",
+                        "maxdist": "A barra de desprazamento \"{distField}\" controla até onde se vai procurar por máis estradas conectadas.",
+                        "maxvia": "A barra de desprazamento \"{viaField}\" axusta cantas vías intermedias poden ser incluídas na procura. (Consello: canto máis sinxelo, mellor)"
                     },
                     "inspecting": {
                         "title": "Inspeccionar",
-                        "about": "Sitúate sobre calquera segmento **DESDE** para ver se ten restricións de xiro. Cada destino **CARA A** posible debuxarase cunha sombra coloreada indicando se existe algunha restrición de xiro.",
+                        "about": "Sitúate sobre calquera segmento **DENDE** para ver se ten restricións de xiro. Cada destino **CARA A** posíbel debuxarase cunha sombra coreada indicando se existe algunha restrición de xiro.",
                         "from_shadow": "{fromShadow} **segmento DESDE**",
                         "allow_shadow": "{allowShadow} **CARA A permitido**",
                         "restrict_shadow": "{restrictShadow} **CARA A prohibido**",
                         "only_shadow": "{onlyShadow} **CARA A obrigatorio**",
                         "restricted": "\"Prohibido\" significa que hai unha restrición de xiro, por exemplo \"Prohibido xirar á esquerda\".",
-                        "only": "\"Obrigatorio\" significa que un vehículo que entre na intersección só poderá ir por esa ruta, por exemplo \"Obrigatorio seguir recto\"."
+                        "only": "\"Obrigatorio\" significa que un vehículo que entre no cruzamento só poderá ir por esa rota, por exemplo \"Obrigatorio seguir recto\"."
                     },
                     "modifying": {
                         "title": "Modificar",
-                        "about": "Para modificar restricións de xiro, primeiro fai clic en calquera segmento **DESDE** para seleccionalo. O segmento seleccionado parpadeará, e todos os destinos **CARA A** posibles mostraranse como símbolos de xiro.",
+                        "about": "Para modifica-las restricións de xiro, primeiro fai clic en calquera anaco **DENDE** para seleccionalo. O anaco seleccionado resaltarase, e tódolos destinos **CARA A** posíbeis amosaranse coma símbolos de xiro.",
                         "indicators": "Logo, fai clic nun símbolo de xiro para alternalo entre \"Permitido, \"Prohibido\" e \"Obrigatorio\".",
                         "allow_turn": "{allowTurn} **CARA A permitido**",
                         "restrict_turn": "{restrictTurn} **CARA A prohibido**",
@@ -883,9 +1016,9 @@
                     "tips": {
                         "title": "Consellos",
                         "simple": "**Intenta usar restricións simples en lugar de restricións máis complexas.**",
-                        "simple_example": "Por exemplo, se podes establecer o elemento intermedio simplemente cun nodo, evita facelo cunha vía.",
-                        "indirect": "**Algunhas restricións mostran o texto \"(indirecta)\" e aparecen cunha cor máis tenue.**",
-                        "indirect_example": "Estas restricións existen debido a outra restrición cercana. Por exemplo, unha restrición de \"Obrigatorio seguir recto\" creará indirectamente restricións de \"Prohibido xirar\" para tódalas demais rutas da intersección.",
+                        "simple_example": "Por exemplo, se podes estableceres o elemento intermedio sinxelamente cun nó, evita facelo cunha vía.",
+                        "indirect": "**Algunhas restricións amosan o texto \"(indirecta)\" e aparecen cunha cor máis feble.**",
+                        "indirect_example": "Estas restricións existen debido a outra restrición cercana. Por exemplo, unha restrición de \"Obrigatorio seguir recto\" creará indirectamente restricións de \"Prohibido xirar\" para tódalas demais rotas do cruzamento.",
                         "indirect_noedit": "Non podes modificar restricións indirectas. En lugar diso, modifica a restrición directa próxima."
                     }
                 }
@@ -893,7 +1026,7 @@
         },
         "intro": {
             "done": "feito",
-            "ok": "OK",
+            "ok": "Feito",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "city": "Three Rivers",
@@ -926,7 +1059,7 @@
                     "andrews-elementary-school": "Andrews Elementary School",
                     "andrews-street": "Andrews Street",
                     "armitage-street": "Armitage Street",
-                    "barrows-school": "Barrows School",
+                    "barrows-school": "Escola Barrows",
                     "battle-street": "Battle Street",
                     "bennett-street": "Bennett Street",
                     "bowman-park": "Bowman Park",
@@ -943,7 +1076,7 @@
                     "foster-street": "Foster Street",
                     "french-street": "French Street",
                     "garden-street": "Garden Street",
-                    "gem-pawnbroker": "Empeño de Xoias",
+                    "gem-pawnbroker": "Empeño de xoias",
                     "golden-finch-framing": "Golden Finch Framing",
                     "grant-avenue": "Grant Avenue",
                     "hoffman-pond": "Hoffman Pond",
@@ -1023,58 +1156,58 @@
                 "title": "Benvido/a",
                 "welcome": "Benvido/a! Esta explicación paso a paso vai ensinarlle as nocións básicas de edición en OpenStreetMap.",
                 "practice": "Tódolos datos nesta explicación paso a paso son para practicar, e as edicións que se fan non serán gardadas.",
-                "words": "Esta explicación paso a paso vai introducir algúns novos conceptos. Cando introducimos unha nova palabra, usaremos *cursiva*.",
-                "mouse": "Podes empregar calquera dispositivo de entrada para editar o mapa, mais este paso a paso asume que ten un rato con botóns esquerdo e dereito non necesario en mac. **Se queres conectar un rato, faino agora, a continuación, prema en OK.**",
+                "words": "Esta explicación paso a paso vai introducir algúns novos termos. Cando inserimos unha nova palabra, empregaremos *cursiva*.",
+                "mouse": "Podes empregar calquera dispositivo de entrada para editar o mapa, mais este paso a paso asume que ten un rato con botóns esquerdo e dereito non necesario en mac. **Se queres conectar un rato, faino agora, a continuación, prema en 'Feito'.**",
                 "leftclick": "Cando no titorial se lle pida facer clic ou facer dobre clic, refírese ao botón esquerdo. Nun trackpad debe facerse un clic sinxelo ou toque cun dedo. **Clic esquerdo {num} veces.**",
-                "rightclick": "Ás veces pedimos facer clic co botón dereito. Debe facerse ás veces como control esquerdo ou dous dedos nun trackpad. O teclado ata pode ter unha tecla \"menú\" que funciona como botón dereito do rato.  **Clic dereito {num} veces.**",
-                "chapters": "Es bo meu! Podes usar os botóns de abaixo para saltar capítulos en calquera momento ou para reiniciar un capítulo se queda preso. Imos comezar! **Prema '{next}'  para continuar. **"
+                "rightclick": "Ás veces pedimos facer clic co botón dereito. Debe facerse ás veces coma control esquerdo ou dous dedos nun trackpad. O teclado até pode ter unha tecla \"menú\" que funciona coma botón dereito do rato.  **Clic dereito {num} veces.**",
+                "chapters": "Es bo meu! Podes emprega-los botóns de embaixo para brincar capítulos en calquera momento ou para reiniciar un capítulo se queda preso. Imos comezar! **Prema '{next}'  para continuar. **"
             },
             "navigation": {
                 "title": "Navegación",
-                "drag": "A zona principal do mapa mostra os datos do OpenStreetMap enriba dun fondo. {br} Pode arrastrar o mapa premendo e sostendo o botón esquerdo do rato mentres move o rato arredor. Tamén pode usar as frechas do teclado. ** Arrastre o mapa! **",
+                "drag": "A zona principal do mapa amosa os datos do OpenStreetMap enriba dun fondo. {br} Pode arrastra-lo mapa premendo e sostendo o botón esquerdo do rato mentres move o rato arredor. Tamén pode emprega-las frechas do teclado. ** Arrastre o mapa! **",
                 "zoom": "Podes facer zoom fora da zona de desprazamento coa roda do rato ou o trackpad, ou premendo nos botóns  {plus} / {minus}. **Fai zoom no mapa!**",
-                "features": "Usámola palabra *elementos* para describir as cousas que aparecen no mapa. Calquera cousa do mundo real pode cartografarse como un elemento en OpenStreetMap.",
+                "features": "Empregamos a palabra *elementos* para describi-las cousas que aparecen no mapa. Calquera cousa do mundo real pode cartografarse coma un elemento no OpenStreetMap.",
                 "points_lines_areas": "Os elementos do mapa están representados empregando *puntos, liñas ou áreas.*",
-                "nodes_ways": "Ás veces, en OpenStreetMap os puntos son chamados *nodos*, e as liñas e áreas son chamadas *vías*.",
+                "nodes_ways": "Ás veces, no OpenStreetMap os puntos son chamados *nós*, e as liñas e áreas son chamadas *vías*.",
                 "click_townhall": "Tódolos elementos do mapa poden ser seleccionados facendo clic neles.  **Fai clic sobre o punto para seleccionalo.**",
-                "selected_townhall": "Meu! O punto está agora seleccionado. Os elementos seleccionados son deseñados cun brillo escintilante.",
-                "editor_townhall": "Cando os elementos son seleccionados, o *editor de elementos* é amosado ao lado do mapa.",
+                "selected_townhall": "Meu! O punto está agora seleccionado. Os elementos seleccionados son deseñados cun brilo escintilante.",
+                "editor_townhall": "Cando os elementos son seleccionados, o *editor de elementos* é amosado á beira do mapa.",
                 "preset_townhall": "A parte alta do editor de elementos amosa o tipo de elemento. Este punto é o {preset}.",
-                "fields_townhall": "A parte media do editor de elementos conten *campos* que mostran os atributos do elemento, tales como o nome e enderezo.",
-                "close_townhall": "** Pecha o editor de recursos premendo Esc ou o botón {button} situado no canto superior **.",
-                "search_street": "Podes buscar elementos na presente vista, ou de maneira mundial. **Busca \"{name}\".**",
-                "choose_street": "**Elixe {name} na lista para seleccionalo.**",
+                "fields_townhall": "A parte media do editor de elementos contén *campos* que amosan os atributos do elemento, tales coma o nome e enderezo.",
+                "close_townhall": "** Pecha o editor de recursos premendo Esc ou no botón {button} situado no canto superior **.",
+                "search_street": "Podes procurar elementos na presente vista, ou de maneira mundial. **Procura \"{name}\".**",
+                "choose_street": "**Elixe {name} na listaxe para seleccionalo.**",
                 "selected_street": "Meu! {name} está agora seleccionado.",
-                "editor_street": "Os campos mostrados nunha rúa son diferentes dos campos que se mostraron para o concello. {br}Para esta rúa seleccionada, o editor de elementos mostra campos como ''{field1}\" e \"{field2}\".  **Peche o editor de elementos pulsando Esc ou premendo o botón {button}.**",
+                "editor_street": "Os campos amosados nunha rúa son diferentes dos campos que se amosaron para o concello. {br}Para esta rúa seleccionada, o editor de elementos amosa campos coma ''{field1}\" e \"{field2}\".  **Peche o editor de elementos premendo Esc ou premendo o botón {button}.**",
                 "play": "Tenta mover o mapa e facer clic sobre outros elementos para ver que tipo de cousas podemos engadir a OpenStreetMap. **Cando esteas preparado para continuar co próximo capítulo fai clic en \"{next}\".**"
             },
             "points": {
                 "title": "Puntos",
                 "add_point": "Os *puntos* poden ser empregados para representar elementos tales como tendas, restaurantes e monumentos.{br}Marcan a localización específica e describen que son. **Pincha no botón {button} Punto para engadir un novo punto.**",
                 "place_point": "Para poñer o novo punto no mapa, sitúa o cursor do rato onde o debería estar o punto, e logo fai clic co botón esquerdo ou preme a barra espaciadora. **Move o punteiro do rato sobre este edificio, entón fai clic co botón esquerdo ou preme a barra de espazo**",
-                "search_cafe": "Hai moitos elementos diferentes que se poden representar como puntos. O punto que acabas de engadir é unha cafetería. **Busca '{preset}'.**",
-                "choose_cafe": "**Escolle {preset} da lista.**",
-                "feature_editor": "O punto está marcado agora como unha cafetería. Usando o editor de elementos, podemos engadir máis información sobre a cafetería.",
-                "add_name": "En OpenStreetMap tódolos campos son opcionais, e non está mal deixar un campo en branco se non estás seguro del.{br}Imos supoñer que tes coñecemento local sobre esta cafetería e coñeces o nome. **Engade o nome da cafetería.**",
-                "add_close": "O editor de elementos lembrará tódolos trocos automaticamente. **Cando remates de engadir o nome, pulsa Esc, Enter, ou fai clic no botón {button} para pechar o editor de elementos.**",
-                "reselect": "A miúdo os puntos xa existen, pero teñen erros ou están incompletos. Podemos editar puntos existentes. **Selecciona a cafetería que acabas de crear.**",
-                "update": "Imos cubrir algúns detalles sobre esta cafetería. Podes cambiar o seu nome, engadir o tipo de cociña, ou engadir un enderezo. **Cambiar a información do café.**",
+                "search_cafe": "Hai moitos elementos diferentes que se poden representar coma puntos. O punto que acabas de engadir é unha cafetaría. **Procura '{preset}'.**",
+                "choose_cafe": "**Escolle {preset} da listaxe.**",
+                "feature_editor": "O punto está marcado agora coma unha cafetaría. Empregando o editor de elementos, podemos engadir máis información sobre a cafetaría.",
+                "add_name": "No OpenStreetMap tódolos campos son opcionais, e non está mal deixar un campo en branco se non estás seguro del.{br}Imos supoñer que tes coñecemento local sobre esta cafetaría e coñeces o nome. **Engade o nome da cafetaría.**",
+                "add_close": "O editor de elementos lembrará tódalas mudanzas de xeito automático. **Cando remates de engadi-lo nome, preme Esc, Enter, ou fai clic no botón {button} para pecha-lo editor de elementos.**",
+                "reselect": "A miúdo os puntos xa existen, pero teñen erros ou están incompletos. Podemos editar puntos existentes. **Selecciona a cafetaría que acabaches de crear.**",
+                "update": "Imos cubrir algúns detalles sobre esta cafetaría. Podes muda-lo seu nome, engadir o tipo de cociña, ou engadir un enderezo. **Muda-la información do café.**",
                 "update_close": "**Cando remates de actualizar o café, pulsa escape, enter, ou fai clic no botón  {button}  para pechar o editor de elementos.**",
-                "rightclick": "Podes facer clic co botón dereito en calquera elemento para ver o *menú de edición*, o cal amosa unha listaxe de operacións de edición dispoñibles. **Fai clic co botón dereito para seleccionar o punto que creaches e amosar o menú de edición.**",
+                "rightclick": "Podes facer clic co botón dereito en calquera elemento para ve-lo *menú de edición*, o cal amosa unha listaxe de operacións de edición dispoñíbeis. **Fai clic co botón dereito para seleccionares o punto que creaches e amosa-lo menú de edición.**",
                 "delete": "Está ben borrar elementos que non existen no mundo real.{br}Borrando un elemento de OpenStreetMap quítalo do mapa que todos usan, polo tanto debes estar certo de que un elemento realmente non existe antes de borralo. **Preme no botón {button} para borrar o punto.**",
-                "undo": "Sempre podes desfacer calquera modificación mentres non gardes as túas edicións en OpenStreetMap. **Fai clic no botón {button} para anular a eliminación volver a ter o punto.**",
+                "undo": "Sempre podes desfacer calquera modificación mentres non gardes as túas edicións en OpenStreetMap. **Fai clic no botón {button} para anula-la eliminación e voltar a te-lo punto.**",
                 "play": "Agora que xa sabes como crear e editar puntos, tenta crear uns poucos puntos máis para practicar! **Canto esteas preparado para continuar co novo capítulo, fai clic en '{next}'.**"
             },
             "areas": {
                 "title": "Áreas",
                 "add_playground": "As *áreas* son usadas para amosar límites de elementos tales como lagoas, edificios e zonas residenciais.{br}Tamén poden ser empregadas para cartografar con maior detalle moitos dos elementos que normalmente cartografarías como puntos. **Fai clic no botón {button} Área para engadir unha nova área.**",
-                "start_playground": "Engadamos este parque infantil ao mapa debuxando unha área. As áreas debúxanse colocando *nodos* ao longo do bordo exterior do elemento. **Fai clic ou preme a barra de espazo para poñer un nodo inicial nunha das esquinas do parque infantil.**",
-                "continue_playground": "Continúa debuxando a área colocando máis nodos ao longo do bordo do parque infantil. Está ben conectar a área cos camiños peonís existentes.{br}Consello: podes manter presa a tecla '{alt}' para evitar que os nodos se conecten nos elementos próximos. **Continúa a debuxar a área do parque infantil.**",
-                "finish_playground": "Remata a área premendo enter, ou facendo clic outra vez no último ou no primeiro nodo. **Remata de debuxar a área para o parque infantil.**",
-                "search_playground": "**Busca '{preset}'.**",
-                "choose_playground": "**Elixe {preset} da lista.**",
-                "add_field": "Este parque infantil non ten un nome oficial, polo que non imos engadir nada no campo Nome.{br}En cambio engadiremos detalles adicionais sobre o parque infantil no campo Descrición. **Abre a listaxe Engadir Campo.**",
-                "choose_field": "**Elixe {field} da lista.**",
+                "start_playground": "Engadamos este parque infantil ó mapa debuxando unha área. As áreas debúxanse colocando *nós* ó longo do bordo exterior do elemento. **Fai clic ou preme a barra de espazo para poñer un nó inicial nunha das esquinas do parque infantil.**",
+                "continue_playground": "Prosegue debuxando a área colocando máis nós ó longo do bordo do parque infantil. Está ben conectar a área cos camiños peonís existentes.{br}Consello: podes manter premida a tecra '{alt}' para evitar que os nós se conecten nos elementos próximos. **Prosegue a debuxa-la área do parque infantil.**",
+                "finish_playground": "Remata a área premendo enter, ou facendo clic outra vez no derradeiro ou no primeiro nó. **Remata de debuxa-la área para o parque infantil.**",
+                "search_playground": "**Procura '{preset}'.**",
+                "choose_playground": "**Elixe {preset} da listaxe.**",
+                "add_field": "Este parque infantil non ten un nome oficial, polo que non imos engadir ren na cela do Nome.{br}En cambio engadiremos detalles adicionais sobre o parque infantil no campo Descrición. **Abre a listaxe Engadir Campo.**",
+                "choose_field": "**Elixe {field} da listaxe.**",
                 "retry_add_field": "Non elixiches o campo {field}. Volve tentalo.",
                 "describe_playground": "**Engade unha descrición; despois fai clic no botón {button} para pechar o editor de elementos.**",
                 "play": "Vas ben! Tenta debuxar unhas poucas áreas, e mira que outros tipos de elementos de áreas podes engadir en OpenStreetMap. **Cando esteas preparado para continuar co próximo capítulo, fai clic en \"{next}\".**"
@@ -1082,29 +1215,29 @@
             "lines": {
                 "title": "Liñas",
                 "add_line": "As *liñas* empréganse para representar elementos tales como estradas, vías ou ríos. **Fai clic no botón {button} Liña para engadir unha nova liña.**",
-                "start_line": "Aquí está unha estada incompleta. Debemos engadila!{br}En OpenStreetMap, as liñas deben ser debuxadas polo centro da estrada. Podes mover e facer zoom no mapa mentres debuxas, se é necesario. **Inicia a nova liña facendo clic no punto final superior desta estrada incompleta.**",
-                "intersect": "Fai clic ou preme a barra de espazo para engadir máis nodos á liña.{br}As estradas e moitos outros tipos de liñas forman parte dun rede máis grande. É importante que esas liñas estean correctamente ligadas para que as aplicacións de enrutamento poidan funcionar. **Fai clic sobre {name} para crear a intersección e ligar as dúas liñas.**",
+                "start_line": "Velaquí está unha estada incompleta. Precisamos engadila!{br}No OpenStreetMap, as liñas deben ser debuxadas polo centro da estrada. Podes mover e achega-lo mapa mentres debuxas, se é precisado. **Inicia a nova liña facendo clic no punto final superior desta estrada incompleta.**",
+                "intersect": "Fai clic ou preme na barra de espazo para engadir máis nós á liña.{br}As estradas e moitos outros tipos de liñas forman parte dunha rede máis grande. É importante que esas liñas estean correctamente ligadas para que as aplicacións de enrotamento poidan funcionar. **Fai clic sobre {name} para xera-lo cruzamento e liga-las dúas liñas.**",
                 "retry_intersect": "A estrada necesita ligar con {name}. Volve tentalo!",
-                "continue_line": "Continúa debuxando a liña para a nova estrada. Lembra que podes mover e facer zoom no mapa se o necesitas.{br}Cando remates de debuxar fai clic no último nodo outra vez. **Remata de debuxar a estrada.**",
-                "choose_category_road": "**Escolla {category} na lista.**",
+                "continue_line": "Prosegue debuxando a liña para a nova estrada. Lembra que podes mover e achega-lo mapa se o precisas.{br}Cando remates de debuxar preme no derradeiro nó outra vez. **Remata de debuxa-la estrada.**",
+                "choose_category_road": "**Escolla {category} na listaxe.**",
                 "choose_preset_residential": "Hai varios tipos diferentes de estradas, pero esta é unha rúa residencial. **Escolle o tipo {preset}.**",
                 "retry_preset_residential": "Non seleccionaches o tipo {preset}. **Fai clic aquí para volver a elixir.**",
                 "name_road": "**Dálle un nome á estrada, logo pulsa escape, enter, ou fai clic no botón {button} para pechar o editor de elementos.**",
-                "did_name_road": "Parece Bo! Agora aprenderemos como actualizar as formas dunha liña.",
-                "update_line": "Algunhas veces necesitaremos cambiar a forma dunha liña existente. Aquí hai unha estrada que non parece correcta.",
-                "add_node": "Podemos engadir algúns nodos a esta liña para mellorar a súa forma. Un xeito de engadir nodos é facendo dobre clic sobre a liña onde queiras engadir un nodo. **Fai dobre clic sobre a liña para crear un novo nodo.**",
-                "start_drag_endpoint": "Cando unha liña estea seleccionada podes mover calquera dos seus nodos facendo clic e mantendo o botón esquerdo do rato mentres arrastras. **Arrastra o punto final no lugar onde as estradas deberían intersectar.**",
+                "did_name_road": "Parece bo! Agora aprenderemos a de que xeito actualiza-las formas dunha liña.",
+                "update_line": "Algunhas veces precisaremos muda-la forma dunha liña existente. Velaquí hai unha estrada que non parece correcta.",
+                "add_node": "Podemos engadir algúns nós a esta liña para mellorares a súa forma. Un xeito de engadir nós é facendo dobre clic sobre a liña onde queiras engadir un nó. **Fai dobre clic sobre a liña para crear un novo nó.**",
+                "start_drag_endpoint": "Cando unha liña estea seleccionada podes mover calquera dos seus nós facendo clic e mantendo o botón esquerdo do rato mentres arrastras. **Arrastra o punto final no lugar onde as estradas terían que cruzarse.**",
                 "finish_drag_endpoint": "Este lugar parece bo. **Solta o botón esquerdo para rematar de arrastrar.**",
-                "start_drag_midpoint": "Móstranse pequenos triángulos nos *puntos intermedios* entre os nodos. Outra forma de crear novos nodos é arrastrando un punto intermedio cara unha nova localización. **Arrastra o triángulo do punto intermedio para crear un novo nodo ao longo da curva da estrada.**",
-                "continue_drag_midpoint": "Esta liña parece moito mellor! Continua axustando a liña facendo dobre clic ou arrastrando puntos intermedios ata que a curva coincida coa forma da estrada. **Cando esteas contento coa forma da liña, fai clic en OK.**",
-                "delete_lines": "Está ben borrar liñas de estradas non existentes no mundo real.{br}Aquí hai un exemplo onde a cidade planificou {street} pero non se chegou a construír. Nós podemos mellorar esta parte do mapa eliminando as liñas que sobren.",
-                "rightclick_intersection": "A última estrada real é {street1}, así que podemos *dividir* {street2}  nesta intersección e borrar todo o que haxa por enriba dela. **Fai clic co botón dereito no nodo da intersección.**",
+                "start_drag_midpoint": "Amósanse pequenos triángulos nos *puntos intermedios* entrambos nós. Outra forma de xerar novos nós é arrastrando un punto intermedio cara unha nova localización. **Arrastra o triángulo do punto intermedio para crear un novo nó ó longo da curva da estrada.**",
+                "continue_drag_midpoint": "Esta liña semella moito mellor! Continua axustando a liña facendo dobre clic ou arrastrando puntos intermedios até que a curva coincida ca forma da estrada. **Cando esteas satisfeito ca forma da liña, fai clic en 'Feito'.**",
+                "delete_lines": "Está ben borrar liñas de estradas non existentes no mundo real.{br}Velaquí hai un exemplo onde a cidade planificou {street} pero non se chegou a construír. Nós podemos mellorar esta parte do mapa eliminando as liñas que sobren.",
+                "rightclick_intersection": "A derradeira estrada real é {street1}, así que podemos *dividir* {street2}  neste cruzamento e borrar todo o que haxa por enriba dela. **Fai clic co botón dereito no nó do cruzamento.**",
                 "split_intersection": "**Fai clic no botón {button} para dividir {street}.**",
                 "retry_split": "Non pinchaches no botón dividir. Volve tentalo.",
                 "did_split_multi": "Ben feito! {street1} agora está dividida en dúas partes. A parte de enriba pode ser borrada. **Pincha na parte de enriba de {street2} para seleccionala.**",
                 "did_split_single": "**Pincha na parte alta de {street2} para seleccionala.**",
                 "multi_select": "{selected} está agora seleccionado. Seleccionemos tamén {other1}. Podes facer shift-clic para facer múltiples seleccións. **Fai clic en {other2} mentres mantés a tecla Maiúsculas.**",
-                "multi_rightclick": "Meu! Agora están seleccionadas as dúas liñas a eliminar. **Clic co botón dereito sobre unha das liñas para amosar o menú de edición.**",
+                "multi_rightclick": "Meu! Agora están seleccionadas as dúas liñas a eliminar. **Clic co botón dereito sobre unha das liñas para amosa-lo menú de edición.**",
                 "multi_delete": "**Fai clic no botón {button} para borrar as liñas de máis.**",
                 "retry_delete": "Non pinchaches no botón borrar. Volve tentalo.",
                 "play": "Grande! Empregue as habilidades que aprendeu neste capítulo para a práctica de edición dalgunhas liñas máis. **Cando estea listo para continuar co seguinte capítulo, prema en  '{next}'.**"
@@ -1112,37 +1245,37 @@
             "buildings": {
                 "title": "Edificios",
                 "add_building": "OpenStreetMap é a maior e máis ampla base de datos mundial de edificios.{br} Podes axudar a aumentar esta base de datos trazando edificios que non están aínda cartografados. **Preme no botón {button} Área para engadir nova área.**",
-                "start_building": "Imos engadir esta casa ao mapa, trazando o seu contorno. {br}Os edificios deberán ser trazados ao redor da súa pegada coa maior precisión posible. **Fai clic ou preme a barra de espazo para poñer un nó inicial nun dos cantos do edificio. **",
-                "continue_building": "Continúa editando máis nodos para trazar o perímetro do edificio. Lembra que podes facer zoom se queres engadir máis detalles.{br}Remata o edificio premendo enter ou facendo clic outra vez no primeiro ou último nodo. **Remata de trazar o edificio.**",
-                "retry_building": "Parece que tivo algúns problemas poñendo os nós nas esquinas do edificio. Probe de novo!",
-                "choose_category_building": "**Elixe {category} na lista.**",
+                "start_building": "Imos engadir esta casa ó mapa, trazando a súa contorna. {br}Os edificios deberán seren trazados ó redor da súa pegada ca maior precisión posíbel. **Fai clic ou preme a barra de espazo para poñer un nó inicial nun dos cantos do edificio. **",
+                "continue_building": "Prosegue editando máis nós para trazares o perímetro do edificio. Lembra que podes facer zoom se queres engadir máis detalles.{br}Remata o edificio premendo enter ou facendo clic outra vez no primeiro ou derradeiro nó. **Remata de traza-lo edificio.**",
+                "retry_building": "Semella que tivo algúns problemas poñendo os nós nas esquinas do edificio. Probe de novo!",
+                "choose_category_building": "**Elixe {category} na listaxe.**",
                 "choose_preset_house": "Hai moitos diferentes tipos de edificios, pero este está claro que é unha casa.{br}Se ti non estás seguro do tipo, está ben elixir simplemente o tipo xenérico Edificio. **Elixe o tipo {preset}.**",
                 "close": "**Pulsa escape ou fai clic no botón {button} para pechar o editor de elementos.**",
                 "rightclick_building": "**Fai clic co botón dereito para seleccionar o edificio que creaches e amosar o menú de edición.**",
-                "square_building": "A casa que engadiches verase mellor se ten as esquinas formanto perfectos ángulos rectos. **Pincha sobre o botón {button} para escuadrar a forma do edificio.**",
-                "retry_square": "Ti non premiches no botón Escuadrar. Volve tentalo.",
+                "square_building": "A casa que engadiches verase mellor se ten as esquinas formando perfectos ángulos rectos. **Prema sobre o botón {button} para encadra-la forma do edificio.**",
+                "retry_square": "Non premiches no botón Encadrar. Volve tentalo.",
                 "done_square": "Ves como os cantos do edificio se colocaron no seu sitio? Imos aprender outro truco útil.",
                 "add_tank": "Agora trazaremos este depósito circular.**Fai clic no botón {button} Área para engadir unha nova área.**",
-                "start_tank": "Non te preocupes, non tes que debuxar un círculo perfecto. Simplemente debuxa unha área dentro do depósito que toque o seu bordo. **Clic ou preme a barra de espazo para colocar un nodo inicial sobre o bordo do depósito.**",
-                "continue_tank": "Engade uns poucos nodos ao redor da forma. O círculo será creado por fóra dos nodos que debuxes.{br}Remata a área premendo enter, ou facendo clic outra vez no primeiro ou último nodo. **Remata de debuxar o recinto.**",
-                "search_tank": "**Busca '{preset}'.**",
-                "choose_tank": "**Elixe {preset} da lista.**",
-                "rightclick_tank": "**Fai clic co botón dereito para seleccionar o tanque de almacenamento que creaches e mostrar o menú de edición.**",
+                "start_tank": "Non te preocupes, non tes que debuxar un círculo perfecto. Sinxelamente debuxa unha área dentro do depósito que toque o seu bordo. **Clic ou preme a barra de espazo para colocares un nó inicial sobre o bordo do depósito.**",
+                "continue_tank": "Engade uns poucos nós ó redor da forma. O círculo será xerado por fóra dos nós que debuxes.{br}Remata a área premendo enter, ou facendo clic outra vez no primeiro ou derradeiro nó. **Remata de debuxa-lo recinto.**",
+                "search_tank": "**Procura '{preset}'.**",
+                "choose_tank": "**Elixe {preset} da listaxe.**",
+                "rightclick_tank": "**Fai clic co botón dereito para seleccionares o tanque de almacenamento que creaches e amosar o menú de edición.**",
                 "circle_tank": "**Prema no botón {button} para converter o tanque nun círculo.**",
                 "retry_circle": "Non premiches no botón Redondear. Volve tentalo.",
-                "play": "Bo traballo! Practica trazando algúns edificios máis, e proba outros comandos do menú de edición. **Cando esteas listo para seguir co seguinte capítulo, fai clic en \"{next}\".**"
+                "play": "Bo traballo! Practica trazando algúns edificios máis, e proba outras ordes ou comandos do menú de edición. **Cando esteas disposto para seguir co seguinte capítulo, fai clic en \"{next}\".**"
             },
             "startediting": {
                 "title": "Comezar a editar",
                 "help": "Agora estás listo para editar OpenStreetMap! {br} Pode reproducir este paseo en calquera momento ou ver máis documentación premendo no botón {button} Axuda ou premendo a tecla  '{key}'.",
-                "shortcuts": "Podes ver unha lista de comandos xunto cos seus atallos de teclado premendo a tecla  '{key}'.",
-                "save": "Non te esquezas de gardar regularmente os teus cambios!",
+                "shortcuts": "Podes ollar unha listaxe de ordes ou comandos xunto cos teus atallos do teclado premendo a tecla '{key}'.",
+                "save": "Non te esquezas de gardar de xeito regular as túas mudanzas!",
                 "start": "Comeza a cartografar!"
             }
         },
         "shortcuts": {
-            "title": "Atallos de teclado",
-            "tooltip": "Amosar os atallos de teclado na pantalla.",
+            "title": "Atallos do teclado",
+            "tooltip": "Amosa-los atallos do teclado na pantalla.",
             "toggle": {
                 "key": "?"
             },
@@ -1170,7 +1303,7 @@
             },
             "or": "-ou-",
             "browsing": {
-                "title": "Explorar",
+                "title": "Desprazarse",
                 "navigation": {
                     "title": "Navegación",
                     "pan": "Mover mapa",
@@ -1181,14 +1314,15 @@
                 "help": {
                     "title": "Axuda",
                     "help": "Amosar axuda/documentación",
-                    "keyboard": "Amosar atallos de teclado"
+                    "keyboard": "Amosar atallos do teclado"
                 },
                 "display_options": {
                     "title": "Opcións de visualización",
                     "background": "Amosar opcións do fondo",
-                    "background_switch": "Volver trocar ao último fondo",
+                    "background_switch": "Voltar a trocar ó derradeiro fondo",
                     "map_data": "Amosar opcións de datos do mapa",
                     "fullscreen": "Entrar no modo de pantalla completa",
+                    "sidebar": "Agochar ou amosar lapela lateral",
                     "wireframe": "Alternar a modo rede de arame",
                     "minimap": "Alternar minimapa"
                 },
@@ -1197,18 +1331,18 @@
                     "select_one": "Seleccionar un só elemento",
                     "select_multi": "Seleccionar múltiples elementos",
                     "lasso": "Debuxar un lazo de selección arredor dos elementos",
-                    "search": "Buscar elementos que coincidan cun texto de busca"
+                    "search": "Procurar elementos que coincidan cun texto de procura"
                 },
                 "with_selected": {
                     "title": "Con elementos seleccionados",
                     "edit_menu": "Alternar menú edición"
                 },
                 "vertex_selected": {
-                    "title": "Con nodo seleccionado",
-                    "previous": "Saltar ao nodo anterior",
-                    "next": "Saltar ao nodo seguinte",
-                    "first": "Saltar ao primeiro nodo",
-                    "last": "Saltar ao último nodo",
+                    "title": "Cun nó seleccionado",
+                    "previous": "Brincar ó nó anterior",
+                    "next": "Brincar ó nó seguinte",
+                    "first": "Brincar ó primeiro nó",
+                    "last": "Brincar ó derradeiro nó",
                     "change_parent": "Trocar a vía local"
                 }
             },
@@ -1226,26 +1360,27 @@
                 },
                 "operations": {
                     "title": "Operacións",
-                    "continue_line": "Continuar unha liña no nodo seleccionado",
+                    "continue_line": "Continuar unha liña no nó seleccionado",
                     "merge": "Combinar (unir) os elementos seleccionados",
-                    "disconnect": "Desligar elementos no nodo seleccionado",
-                    "split": "Dividir unha liña en dúas no nodo seleccionado",
+                    "disconnect": "Desligar elementos no nó seleccionado",
+                    "detach_node": "Separa-lo nó escollido das liñas/áreas pai",
+                    "split": "Dividir unha liña en dúas no nó seleccionado",
                     "reverse": "Inverter unha liña",
                     "move": "Mover elementos seleccionados",
                     "rotate": "Rotar elementos seleccionados",
-                    "orthogonalize": "Endereitar liña / Escuadrar esquinas",
+                    "orthogonalize": "Endereitar liña / Encadrar esquinas",
                     "circularize": "Arredondar unha liña pechada ou área",
                     "reflect_long": "Reflectir elementos centrados nun eixo longo",
                     "reflect_short": "Reflectir elementos centrados nun eixo curto",
                     "delete": "Borrar elementos seleccionados"
                 },
                 "commands": {
-                    "title": "Comandos",
+                    "title": "Ordes ou comandos",
                     "copy": "Copiar elementos seleccionados",
                     "paste": "Pegar elementos seleccionados",
-                    "undo": "Desfacer última acción",
-                    "redo": "Refacer última acción",
-                    "save": "Gardar os cambios"
+                    "undo": "Desfacer derradeira acción",
+                    "redo": "Refacer derradeira acción",
+                    "save": "Garda-las mudanzas"
                 }
             },
             "tools": {
@@ -1253,10 +1388,10 @@
                 "info": {
                     "title": "Información",
                     "all": "Alternar tódolos paneis de información",
-                    "background": "Alternar panel do fondo",
-                    "history": "Alternar panel do historial",
-                    "location": "Alternar panel de localización",
-                    "measurement": "Alternar panel de medición"
+                    "background": "Alternar lapela do fondo",
+                    "history": "Alternar lapela do historial",
+                    "location": "Alternar lapela da ubicación",
+                    "measurement": "Alternar lapela da medición"
                 }
             }
         },
@@ -1285,16 +1420,16 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Características de barreira"
+                    "name": "Características da barreira"
                 },
                 "category-building": {
                     "name": "Características de edificio"
                 },
                 "category-golf": {
-                    "name": "Características de campo de golf"
+                    "name": "Características do campo de golf"
                 },
                 "category-landuse": {
-                    "name": "Usos do solo"
+                    "name": "Usos da terra"
                 },
                 "category-natural-area": {
                     "name": "Características naturais"
@@ -1306,25 +1441,28 @@
                     "name": "Características naturais"
                 },
                 "category-path": {
-                    "name": "Características de camiño"
+                    "name": "Características do camiño"
                 },
                 "category-rail": {
-                    "name": "Características de ferrovía"
+                    "name": "Características da ferrovía"
                 },
                 "category-restriction": {
                     "name": "Tipos de restricións"
                 },
                 "category-road": {
-                    "name": "Características de estrada"
+                    "name": "Características da estrada"
                 },
                 "category-route": {
-                    "name": "Características de ruta"
+                    "name": "Características da rota"
+                },
+                "category-utility": {
+                    "name": "Características da utilidade"
                 },
                 "category-water-area": {
-                    "name": "Características de auga"
+                    "name": "Características da auga"
                 },
                 "category-water-line": {
-                    "name": "Características de auga"
+                    "name": "Características da auga"
                 }
             },
             "fields": {
@@ -1332,24 +1470,35 @@
                     "label": "Permítese o acceso",
                     "options": {
                         "designated": {
+                            "description": "Acceso permitido segundo as sinais ou leis locais específicas",
                             "title": "Designado"
                         },
                         "destination": {
+                            "description": "Acceso permitido só pra chegar a un destino",
                             "title": "Destino"
                         },
                         "dismount": {
+                            "description": "Acceso permitido pero o condutor debe baixarse do vehículo",
                             "title": "Baixar ou desmontar"
                         },
                         "no": {
+                            "description": "Acceso non permitido ó público en xeral",
                             "title": "Prohibido"
                         },
                         "permissive": {
+                            "description": "Acceso permitido até que o propietario revogue o permiso",
                             "title": "Permisivo"
                         },
+                        "permit": {
+                            "description": "Acceso permitido só cun permiso ou unha licenza válidos",
+                            "title": "Permiso"
+                        },
                         "private": {
+                            "description": "Acceso permitido só co permiso do propietario de forma individual",
                             "title": "Privado"
                         },
                         "yes": {
+                            "description": "Acceso permitido por lei; un dereito de paso",
                             "title": "Permitido"
                         }
                     },
@@ -1398,7 +1547,7 @@
                         "subdistrict!vn": "Ward/Commune/Townlet",
                         "suburb": "Barrio",
                         "suburb!jp": "Barrio",
-                        "unit": "Departamento"
+                        "unit": "Unidade"
                     }
                 },
                 "admin_level": {
@@ -1538,7 +1687,7 @@
                     "label": "Tipo"
                 },
                 "cables": {
-                    "label": "Cables",
+                    "label": "Cabos ou cables",
                     "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
@@ -1572,8 +1721,11 @@
                 "collection_times": {
                     "label": "Horario de recollida"
                 },
+                "colour": {
+                    "label": "Color"
+                },
                 "comment": {
-                    "label": "Comentario sobre o conxunto de cambios",
+                    "label": "Comentario acerca do conxunto de mudanzas",
                     "placeholder": "Descrición breve das túas achegas (obrigatorio)"
                 },
                 "communication_multi": {
@@ -1588,6 +1740,14 @@
                 },
                 "content": {
                     "label": "Contido"
+                },
+                "conveying": {
+                    "label": "Sentido do movemento",
+                    "options": {
+                        "backward": "Cara atrás",
+                        "forward": "Cara adiante",
+                        "reversible": "Reversíbel"
+                    }
                 },
                 "country": {
                     "label": "País"
@@ -1654,8 +1814,8 @@
                     },
                     "placeholder": "Ningún",
                     "types": {
-                        "cycleway:left": "Lado esquerdo",
-                        "cycleway:right": "Lado dereito"
+                        "cycleway:left": "Beira esquerda",
+                        "cycleway:right": "Beira dereita"
                     }
                 },
                 "dance/style": {
@@ -1727,7 +1887,7 @@
                     "label": "Presentación"
                 },
                 "distance": {
-                    "label": "Distancia total"
+                    "label": "Distancia"
                 },
                 "dock": {
                     "label": "Tipo"
@@ -1753,7 +1913,7 @@
                     "label": "Altitude"
                 },
                 "email": {
-                    "label": "Email",
+                    "label": "Enderezo de correo electrónico",
                     "placeholder": "exemplo@exemplo.gal"
                 },
                 "embankment": {
@@ -1786,8 +1946,8 @@
                     "label": "Posición",
                     "options": {
                         "green": "Verde",
-                        "lane": "Carrís",
-                        "parking_lot": "Aparcamento",
+                        "lane": "Faixa ou carril",
+                        "parking_lot": "Aparcadoiro",
                         "sidewalk": "Beirarrúa"
                     }
                 },
@@ -1814,10 +1974,10 @@
                     "label": "Frecuencia de operación"
                 },
                 "fuel": {
-                    "label": "Combustible"
+                    "label": "Combustíbel"
                 },
                 "fuel_multi": {
-                    "label": "Tipos de combustible"
+                    "label": "Tipos de combustíbeis"
                 },
                 "gauge": {
                     "label": "Ancho de vía"
@@ -1941,7 +2101,7 @@
                     "options": {
                         "no": "Non",
                         "terminal": "Terminal",
-                        "wired": "Por cable",
+                        "wired": "Por cabo ou cable",
                         "wlan": "Wi-Fi",
                         "yes": "Si"
                     }
@@ -1965,8 +2125,11 @@
                     "label": "Tipo"
                 },
                 "lanes": {
-                    "label": "Carrís",
+                    "label": "Faixas ou carrís",
                     "placeholder": "1, 2, 3..."
+                },
+                "language_multi": {
+                    "label": "Idiomas"
                 },
                 "layer": {
                     "label": "Capa",
@@ -2027,6 +2190,13 @@
                 "location": {
                     "label": "Localización"
                 },
+                "location_pool": {
+                    "label": "Localización",
+                    "options": {
+                        "indoor": "Interior",
+                        "outdoor": "Exterior"
+                    }
+                },
                 "man_made": {
                     "label": "Tipo"
                 },
@@ -2034,21 +2204,24 @@
                     "label": "Tipo"
                 },
                 "map_size": {
-                    "label": "Cuberta"
+                    "label": "Cobertura"
                 },
                 "map_type": {
                     "label": "Tipo"
+                },
+                "material": {
+                    "label": "Material"
                 },
                 "maxheight": {
                     "label": "Altura máxima",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
-                    "label": "Límite de velocidade",
+                    "label": "Límite da velocidade",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxspeed/advisory": {
-                    "label": "Límite de velocidade recomendado",
+                    "label": "Límite da velocidade recomendado",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2069,12 +2242,12 @@
                         "3": "3: Superficie escorregadiza, grandes obstáculos, curvas cerradas axustadas",
                         "4": "4: Superficie solta ou pedras, curvas cerradas perigosas",
                         "5": "5: Dificultade máxima, campos de pedras, desprendementos de terra",
-                        "6": "6: Non practicable excepto polos mellores ciclistas de montaña"
+                        "6": "6: Non practicábel agás polos mellores ciclistas de montaña"
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
                 "mtb/scale/imba": {
-                    "label": "Dificultade da ruta de sendeiro",
+                    "label": "Dificultade do roteiro de sendeiro",
                     "options": {
                         "0": "O máis doado (círculo branco)",
                         "1": "Doado (círculo verde)",
@@ -2085,14 +2258,14 @@
                     "placeholder": "Doado, Medio, Difícil..."
                 },
                 "mtb/scale/uphill": {
-                    "label": "Montain Bike Rutas de Subida",
+                    "label": "Dificultade do ciclismo de montaña costa arriba",
                     "options": {
                         "0": "0: Incl. media <10%, grava/terra batida, sen obstáculos",
                         "1": "1: Incl. media <15%, grava/terra batida, algúns pequenos obxectos",
-                        "2": "2: Incl. media <20%, superficie estable, rochas de tamaño medio/raíces",
-                        "3": "3: Incl. media <25%, superficie variable, rochas de tamaño medio/ramas",
+                        "2": "2: Incl. media <20%, superficie estábel, rochas de tamaño medio/raíces",
+                        "3": "3: Incl. media <25%, superficie variábel, rochas de tamaño medio/ramas",
                         "4": "4: Incl. media <30%, mal estado, grandes rochas/ramas",
-                        "5": "5: Moi escarpado, a bicicleta en xeral, debe ser empuxada ou transportada"
+                        "5": "5: Moi escarpado, a bicicleta en xeral, debe ser empurrada ou transportada"
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
@@ -2150,7 +2323,7 @@
                     "options": {
                         "alternating": "Alterno",
                         "no": "Non",
-                        "reversible": "Reversible",
+                        "reversible": "Reversíbel",
                         "undefined": "Suponse «Non»",
                         "yes": "Si"
                     }
@@ -2160,7 +2333,7 @@
                     "options": {
                         "alternating": "Alterno",
                         "no": "Non",
-                        "reversible": "Reversible",
+                        "reversible": "Reversíbel",
                         "undefined": "Suponse «Si»",
                         "yes": "Si"
                     }
@@ -2206,15 +2379,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Dificultade",
-                    "options": {
-                        "advanced": "Avanzado (diamante negro)",
-                        "easy": "Doado (círculo verde)",
-                        "expert": "Experto (dobre diamante negro)",
-                        "extreme": "Extremo (require equipamento de escalada)",
-                        "freeride": "Por libre (fóra da pista)",
-                        "intermediate": "Intermedio (cadrado azul)",
-                        "novice": "Principiante (aprendizaxe)"
-                    },
                     "placeholder": "Doado, Intermedio, Avanzado..."
                 },
                 "piste/grooming": {
@@ -2302,7 +2466,7 @@
                     "label": "Número de estrada"
                 },
                 "ref_route": {
-                    "label": "Número da ruta"
+                    "label": "Número da rota"
                 },
                 "ref_runway": {
                     "label": "Número de pista",
@@ -2350,6 +2514,12 @@
                 },
                 "sanitary_dump_station": {
                     "label": "Área de desaugue para caravanas"
+                },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Color"
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Color"
                 },
                 "seasonal": {
                     "label": "Estacional"
@@ -2415,7 +2585,7 @@
                         "excellent": "Rodas pequenas: patíns, skate",
                         "good": "Rodas estreitas: bicicleta de carreira",
                         "horrible": "Off-Road: vehículo todoterreo pesado",
-                        "impassable": "Intransitable: ningún vehículo con rodas",
+                        "impassable": "Intransitábel: ningún vehículo con rodas",
                         "intermediate": "Rodas normais: bicicleta de paseo, cadeiras de rodas, scooters",
                         "very_bad": "Maior altura: vehículo todoterreo lixeiro",
                         "very_horrible": "Off-road especializado: tractor, ATV"
@@ -2547,7 +2717,7 @@
                 },
                 "tower/construction": {
                     "label": "Construción",
-                    "placeholder": "Cable, Malla, Oculto, ..."
+                    "placeholder": "Cable, Cabo, Malla, Agochado, ..."
                 },
                 "tower/type": {
                     "label": "Tipo"
@@ -2583,11 +2753,11 @@
                 "trail_visibility": {
                     "label": "Visibilidade do sendeiro",
                     "options": {
-                        "bad": "Malo: sen marcas, camiño ás veces invisible/sen acceso",
+                        "bad": "Mal: sen marcas, camiño ás veces invisíbel/sen acceso",
                         "excellent": "Excelente: camiño sen ambigüidades ou marcadores en todas partes",
-                        "good": "Bo: marcadores visibles, ás veces, esixen busca",
-                        "horrible": "Horrible: moitas veces sen camiños, son necesarias algunhas habilidades de orientación",
-                        "intermediate": "Intermedio: poucas marcas, camiño xeralmente visible",
+                        "good": "Ben: marcadores visíbeis, ás veces, esixen procura",
+                        "horrible": "Horríbel: moitas veces sen camiños, son necesarias algunhas habilidades de orientación",
+                        "intermediate": "Intermedio: poucas marcas, camiño xeralmente visíbel",
                         "no": "Non: sen camiño, requírense excelentes habilidades de orientación"
                     },
                     "placeholder": "Excelente, bo, malo..."
@@ -2622,7 +2792,7 @@
                     "label": "Visibilidade",
                     "options": {
                         "area": "Sobre 20m (65pés)",
-                        "house": "Ata 5m (16pés)",
+                        "house": "Até 5m (16pés)",
                         "street": "5 a 20m (16 a 65pés)"
                     }
                 },
@@ -2829,6 +2999,9 @@
                     "name": "Lugar para ferramentas de reparación de bicicletas",
                     "terms": "bici, bicicleta, reparación, inchar"
                 },
+                "amenity/biergarten": {
+                    "name": "Bar-terraza alemá"
+                },
                 "amenity/boat_rental": {
                     "name": "Aluguer de botes",
                     "terms": "aluguer, bote, barca, lancha"
@@ -2841,8 +3014,8 @@
                     "name": "Estación de autobuses"
                 },
                 "amenity/cafe": {
-                    "name": "Cafetería",
-                    "terms": "cafetería, café, bar, tetería"
+                    "name": "Cafetaría",
+                    "terms": "cafetaría, café, bar, tetería, cafetería"
                 },
                 "amenity/car_rental": {
                     "name": "Aluguer de automóbiles",
@@ -2916,7 +3089,7 @@
                 },
                 "amenity/drinking_water": {
                     "name": "Fonte",
-                    "terms": "fonte, auga, potable, beber"
+                    "terms": "fonte, auga, potábel, bebíbel, beber, potable, bebible"
                 },
                 "amenity/driving_school": {
                     "name": "Autoescola",
@@ -2943,7 +3116,7 @@
                 },
                 "amenity/fuel": {
                     "name": "Gasolineira",
-                    "terms": "gasolineira, gasolina, gasoil, diésel, combustible, estación de servicio, área de servicio"
+                    "terms": "gasolineira, gasolina, gasoil, diésel, combustíbel, combustible, estación de servizo, área de servizo"
                 },
                 "amenity/grave_yard": {
                     "name": "Cemiterio",
@@ -2960,7 +3133,7 @@
                     "name": "Stand de Caza"
                 },
                 "amenity/ice_cream": {
-                    "name": "Xeadería",
+                    "name": "Xeadaría",
                     "terms": "xeadería, xeadaría, xeados"
                 },
                 "amenity/internet_cafe": {
@@ -2970,6 +3143,9 @@
                 "amenity/kindergarten": {
                     "name": "Zona de Preescolar/Xardín de Infancia",
                     "terms": "preescolar, xardín de infancia, guardería, infantil, párvulos"
+                },
+                "amenity/language_school": {
+                    "name": "Escola de idiomas"
                 },
                 "amenity/library": {
                     "name": "Biblioteca",
@@ -2984,8 +3160,8 @@
                     "terms": "mosteiro, área de mosteiro, igrexa, capela"
                 },
                 "amenity/motorcycle_parking": {
-                    "name": "Aparcamento de motos",
-                    "terms": "aparcamento, aparcadoiro, parking, motos, motocicletas, ciclomotores"
+                    "name": "Aparcadoiro de motos",
+                    "terms": "aparcadoiro, parking, motos, motocicletas, ciclomotores, aparcamento, estacionamento"
                 },
                 "amenity/music_school": {
                     "name": "Escola de música",
@@ -3000,16 +3176,13 @@
                 },
                 "amenity/parking": {
                     "name": "Aparcadoiro de automóbiles",
-                    "terms": "aparcadoiro, aparcamento, parking"
+                    "terms": "aparcadoiro, parking, aparcamento, estacionamento"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Entrada/Saída a garaxe de aparcamento"
+                    "name": "Entrada/Saída a garaxe de aparcadoiro"
                 },
                 "amenity/parking_space": {
-                    "name": "Praza de aparcamento"
-                },
-                "amenity/pavilion": {
-                    "name": "Pavillón"
+                    "name": "Praza de aparcadoiro"
                 },
                 "amenity/pharmacy": {
                     "name": "Farmacia",
@@ -3079,12 +3252,14 @@
                     "name": "Estación de garda de bosques"
                 },
                 "amenity/recycling": {
-                    "name": "Contenedor de reciclaxe",
-                    "terms": "reciclaxe, contedor, lixo, basura, orgánico, plásticos, vidro, punto limpo"
+                    "name": "Reciclaxe"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro de Reciclaxe",
                     "terms": "centro de reciclaxe, punto limpo"
+                },
+                "amenity/recycling_container": {
+                    "name": "Colector de reciclaxe"
                 },
                 "amenity/register_office": {
                     "name": "Oficina do rexistro"
@@ -3110,6 +3285,10 @@
                 "amenity/shower": {
                     "name": "Ducha",
                     "terms": "duchas, baño, auga"
+                },
+                "amenity/smoking_area": {
+                    "name": "Área de fumadoiro",
+                    "terms": "área de fumadoiro, fumadoiro, fumar, área de fume, fume"
                 },
                 "amenity/social_facility": {
                     "name": "Axuda Social"
@@ -3187,12 +3366,9 @@
                     "name": "Expendedora de xornais",
                     "terms": "expendedora, xornais, revistas, periódicos"
                 },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Máquina expendedora de recollida/entrega de paquetes"
-                },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parquímetro",
-                    "terms": "parquímetro, aparcamento, parking"
+                    "terms": "parquímetro, aparcadoiro, parking"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Expendedora de billetes de transporte público"
@@ -3217,7 +3393,7 @@
                     "name": "Estación de bombeo de augas residuais"
                 },
                 "amenity/water_point": {
-                    "name": "Auga potable para caravanas"
+                    "name": "Auga potábel para caravanas"
                 },
                 "amenity/watering_place": {
                     "name": "Bebedoiro de animais"
@@ -3250,7 +3426,7 @@
                 },
                 "attraction/carousel": {
                     "name": "Carrusel",
-                    "terms": "carrusel, carrousel, caballitos, cabaliños, tiovivo, atracción"
+                    "terms": "carrusel, carrousel, cabaliños, tiovivo, atracción"
                 },
                 "attraction/drop_tower": {
                     "name": "Torre de caída",
@@ -3303,7 +3479,7 @@
                     "terms": "muralla, muro"
                 },
                 "barrier/cycle_barrier": {
-                    "name": "Barreira Ciclista",
+                    "name": "Barreira ciclista",
                     "terms": "barreira, obstáculo, ciclista, bicicletas"
                 },
                 "barrier/ditch": {
@@ -3314,7 +3490,7 @@
                     "name": "Entrada"
                 },
                 "barrier/fence": {
-                    "name": "Valado",
+                    "name": "Valo",
                     "terms": "Valado, reixa, valo, cercado, alambrada, cerca"
                 },
                 "barrier/gate": {
@@ -3322,11 +3498,14 @@
                     "terms": "porta, entrada, cancela, cancelo, acceso"
                 },
                 "barrier/hedge": {
-                    "name": "Cobertura",
-                    "terms": "cobertura, seto, liña de arbustos"
+                    "name": "Sebe",
+                    "terms": "cobertura, sebe, liña de arbustos"
                 },
                 "barrier/kerb": {
-                    "name": "Bordillo"
+                    "name": "Bordo"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "Bordo rebaixado"
                 },
                 "barrier/kissing_gate": {
                     "name": "Porta Kissing"
@@ -3354,7 +3533,7 @@
                 },
                 "building": {
                     "name": "Edificio",
-                    "terms": "edificio, casa, inmoble, vivenda"
+                    "terms": "edificio, casa, inmóbel, vivenda, inmoble"
                 },
                 "building/apartments": {
                     "name": "Apartamentos",
@@ -3466,7 +3645,7 @@
                     "name": "Caravana estática"
                 },
                 "building/terrace": {
-                    "name": "Casas en fila",
+                    "name": "Ringleira de casas",
                     "terms": "casas en fila, fila de casas, ringleira de casas, casas adosadas, vivendas adosadas"
                 },
                 "building/train_station": {
@@ -3518,7 +3697,7 @@
                 },
                 "craft/carpet_layer": {
                     "name": "Alfombreiro",
-                    "terms": "alfombreiro, alfombra, moqueta, tapicería"
+                    "terms": "alfombreiro, alfombra, moqueta, tapizaría, tapicería"
                 },
                 "craft/caterer": {
                     "name": "Catering",
@@ -3526,7 +3705,7 @@
                 },
                 "craft/clockmaker": {
                     "name": "Reloxeiro",
-                    "terms": "reloxería, reloxeiro, reloxo, tempo"
+                    "terms": "reloxaría, reloxeiro, reloxo, tempo"
                 },
                 "craft/distillery": {
                     "name": "Destilaría",
@@ -3596,7 +3775,7 @@
                 },
                 "craft/plumber": {
                     "name": "Fontaneiro",
-                    "terms": "fontaneiro, fontanería"
+                    "terms": "fontaneiro, fontanaría"
                 },
                 "craft/pottery": {
                     "name": "Ceramista",
@@ -3613,7 +3792,7 @@
                 },
                 "craft/sailmaker": {
                     "name": "Fabricante de velas mariñas",
-                    "terms": "velas, velería"
+                    "terms": "velas, velería, velaría"
                 },
                 "craft/sawmill": {
                     "name": "Serradoiro",
@@ -3646,7 +3825,7 @@
                 },
                 "craft/upholsterer": {
                     "name": "Tapiceiro",
-                    "terms": "tapiceiro, tapizado, tapicería"
+                    "terms": "tapiceiro, tapizado, tapizaría, tapicería"
                 },
                 "craft/watchmaker": {
                     "name": "Reloxeiro"
@@ -3702,20 +3881,6 @@
                 "entrance": {
                     "name": "Entrada/Saída"
                 },
-                "footway/crossing": {
-                    "name": "Cruce de estrada"
-                },
-                "footway/crosswalk": {
-                    "name": "Paso de peóns",
-                    "terms": "paso de peóns, paso de cebra, cruamento peonil, cruzamento de peóns"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Paso de peóns elevado"
-                },
-                "footway/sidewalk": {
-                    "name": "Beirarrúa",
-                    "terms": "beirarrúa, acera"
-                },
                 "ford": {
                     "name": "Vao"
                 },
@@ -3769,17 +3934,6 @@
                     "name": "Corredor interior",
                     "terms": "corredor, pasillo"
                 },
-                "highway/crossing": {
-                    "name": "Cruzamento",
-                    "terms": "paso peonil, paso peatonal, paso de cebra"
-                },
-                "highway/crosswalk": {
-                    "name": "Paso de peóns",
-                    "terms": "paso de peóns, paso de cebra, cruamento peonil, cruzamento de peóns"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Paso de peóns elevado"
-                },
                 "highway/cycleway": {
                     "name": "Senda ciclista"
                 },
@@ -3789,6 +3943,9 @@
                 },
                 "highway/footway": {
                     "name": "Senda peonil"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Beirarrúa"
                 },
                 "highway/give_way": {
                     "name": "Ceda o paso"
@@ -3800,7 +3957,7 @@
                     "name": "Mini rotonda"
                 },
                 "highway/motorway": {
-                    "name": "Autovía",
+                    "name": "Autoestrada",
                     "terms": "autovía, autopista, autoestrada"
                 },
                 "highway/motorway_junction": {
@@ -3808,7 +3965,7 @@
                     "terms": "saída, entrada, autopista, autovía, autoestrada"
                 },
                 "highway/motorway_link": {
-                    "name": "Enlace de autovía",
+                    "name": "Ligazón da autoestrada",
                     "terms": "autovía, autopista, enlace, entrada, saída, acceso, autoestrada"
                 },
                 "highway/path": {
@@ -3826,7 +3983,7 @@
                     "terms": "estrada, primaria, primaria básica"
                 },
                 "highway/primary_link": {
-                    "name": "Enlace a estrada primaria"
+                    "name": "Ligazón da estrada primaria"
                 },
                 "highway/raceway": {
                     "name": "Pista de carreiras (Motorsport)"
@@ -3845,7 +4002,7 @@
                     "terms": "primaria complementaria"
                 },
                 "highway/secondary_link": {
-                    "name": "Ligazón a estrada secundaria"
+                    "name": "Ligazón da estrada secundaria"
                 },
                 "highway/service": {
                     "name": "Vía de servizo"
@@ -3863,7 +4020,7 @@
                     "name": "Acceso de emerxencia"
                 },
                 "highway/service/parking_aisle": {
-                    "name": "Pasillo de aparcamento"
+                    "name": "Corredor do aparcadoiro"
                 },
                 "highway/services": {
                     "name": "Área de servizo",
@@ -3886,7 +4043,7 @@
                     "terms": "secundaria, diputación"
                 },
                 "highway/tertiary_link": {
-                    "name": "Enlace a estrada terciaria"
+                    "name": "Ligazón da estrada terciaria"
                 },
                 "highway/track": {
                     "name": "Pista sen mantemento"
@@ -3898,11 +4055,11 @@
                     "name": "Semáforo"
                 },
                 "highway/trunk": {
-                    "name": "Estrada troncal",
+                    "name": "Estrada principal",
                     "terms": "nacional, vía rápida, vía de alta capacidade"
                 },
                 "highway/trunk_link": {
-                    "name": "Ligazón a estrada troncal"
+                    "name": "Ligazón da estrada principal"
                 },
                 "highway/turning_circle": {
                     "name": "Círculo de xiro"
@@ -3951,7 +4108,7 @@
                 },
                 "landuse": {
                     "name": "Uso da terra",
-                    "terms": "uso da terra, uso do solo"
+                    "terms": "uso da terra, uso do chan"
                 },
                 "landuse/allotments": {
                     "name": "Xardín comunitario",
@@ -3993,12 +4150,15 @@
                 "landuse/forest": {
                     "name": "Forestal"
                 },
+                "landuse/garages": {
+                    "name": "Uso da terra: Garaxes"
+                },
                 "landuse/grass": {
                     "name": "Céspede",
                     "terms": "céspede, herba"
                 },
                 "landuse/greenfield": {
-                    "name": "Solar urbanizable"
+                    "name": "Soar urbanizábel"
                 },
                 "landuse/harbour": {
                     "name": "Peirao",
@@ -4013,7 +4173,7 @@
                     "terms": "vertedoiro, lixo, escombrera, basurero"
                 },
                 "landuse/meadow": {
-                    "name": "Prado",
+                    "name": "Pradaría",
                     "terms": "prado, pasto, pradeira, herba"
                 },
                 "landuse/military": {
@@ -4062,7 +4222,7 @@
                 },
                 "landuse/quarry": {
                     "name": "Canteira",
-                    "terms": "canteira, pedra, minería, mina, pedra, rocha, minerais"
+                    "terms": "canteira, pedra, minaría, mina, pedra, rocha, minerais"
                 },
                 "landuse/railway": {
                     "name": "Corredor ferroviario"
@@ -4070,8 +4230,11 @@
                 "landuse/recreation_ground": {
                     "name": "Zona recreativa"
                 },
+                "landuse/religious": {
+                    "name": "Zona relixiosa"
+                },
                 "landuse/residential": {
-                    "name": "Área residencial"
+                    "name": "Zona residencial"
                 },
                 "landuse/retail": {
                     "name": "Zona comercial",
@@ -4156,7 +4319,7 @@
                     "name": "Campo de fútbol americano"
                 },
                 "leisure/pitch/baseball": {
-                    "name": "Diamante de béisbol"
+                    "name": "Campo de béisbol"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Cancha de baloncesto"
@@ -4243,7 +4406,7 @@
                 },
                 "man_made/adit": {
                     "name": "Entrada a mina",
-                    "terms": "entrada, mina, minería, cova, galería, túnel"
+                    "terms": "entrada, mina, minaría, cova, galería, túnel"
                 },
                 "man_made/antenna": {
                     "name": "Antena"
@@ -4288,10 +4451,6 @@
                 "man_made/monitoring_station": {
                     "name": "Estación meteorolóxica"
                 },
-                "man_made/observation": {
-                    "name": "Torre de observación",
-                    "terms": "torre, observación, atalaia, vixilancia"
-                },
                 "man_made/observatory": {
                     "name": "Observatorio"
                 },
@@ -4304,8 +4463,8 @@
                     "terms": "peirao, muelle, embarcadoiro, pantalán"
                 },
                 "man_made/pipeline": {
-                    "name": "Tubería",
-                    "terms": "tubería, tubo, canalización, oleoduto"
+                    "name": "Tubaxe",
+                    "terms": "tubería, tubo, tubaxe, canalización, oleoduto"
                 },
                 "man_made/pumping_station": {
                     "name": "Estación de bombeo",
@@ -4322,10 +4481,6 @@
                 "man_made/surveillance": {
                     "name": "Vixilancia",
                     "terms": "vixilancia, cámara, vídeo, recoñecemento facial, lector de matrículas, cctv, seguridade, webcam"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Cámara de vixilancia",
-                    "terms": "vixilancia, cámara, vídeo, gravación, cctv, seguridade, webcam"
                 },
                 "man_made/survey_point": {
                     "name": "Vértice xeodésico",
@@ -4441,8 +4596,7 @@
                     "name": "Árbore"
                 },
                 "natural/tree_row": {
-                    "name": "Fila de árbores",
-                    "terms": "fila, ringleira, árbores"
+                    "name": "Ringleira de árbores"
                 },
                 "natural/volcano": {
                     "name": "Volcán"
@@ -4451,7 +4605,7 @@
                     "name": "Auga"
                 },
                 "natural/water/lake": {
-                    "name": "Lago",
+                    "name": "Lagoa",
                     "terms": "lago, lagoa, charca, auga"
                 },
                 "natural/water/pond": {
@@ -4476,7 +4630,7 @@
                     "name": "Oficina"
                 },
                 "office/accountant": {
-                    "name": "Contable"
+                    "name": "Contábel"
                 },
                 "office/administrative": {
                     "name": "Administración local"
@@ -4577,9 +4731,6 @@
                 "office/water_utility": {
                     "name": "Oficina de servizos públicos de auga"
                 },
-                "piste": {
-                    "name": "Pista de esquí"
-                },
                 "place": {
                     "name": "Lugar"
                 },
@@ -4637,14 +4788,11 @@
                 "power": {
                     "name": "Rede eléctrica"
                 },
+                "power/cable/underground": {
+                    "name": "Liña eléctrica subterránea"
+                },
                 "power/generator": {
                     "name": "Xerador de enerxía"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Reactor nuclear"
-                },
-                "power/generator/source_wind": {
-                    "name": "Turbina eólica"
                 },
                 "power/line": {
                     "name": "Liña de alta tensión"
@@ -4767,11 +4915,17 @@
                 "railway/narrow_gauge": {
                     "name": "Tren de Vía Estreita"
                 },
+                "railway/platform": {
+                    "name": "Parada de trens / Plataforma"
+                },
                 "railway/rail": {
                     "name": "Vía de tren"
                 },
                 "railway/signal": {
                     "name": "Sinal Tren"
+                },
+                "railway/station": {
+                    "name": "Estación de trens"
                 },
                 "railway/subway": {
                     "name": "Metro"
@@ -4789,13 +4943,14 @@
                     "name": "Tranvía"
                 },
                 "relation": {
-                    "name": "Relación"
+                    "name": "Relación",
+                    "terms": "Relación, Ligazón, Vínculo, Asociación"
                 },
                 "roundabout": {
                     "name": "Rotonda"
                 },
                 "route/ferry": {
-                    "name": "Ruta de ferry"
+                    "name": "Liña de ferri"
                 },
                 "shop": {
                     "name": "Tenda"
@@ -4804,7 +4959,7 @@
                     "name": "Tenda de suministros agrícolas"
                 },
                 "shop/alcohol": {
-                    "name": "Licorería"
+                    "name": "Licoraría"
                 },
                 "shop/anime": {
                     "name": "Tenda de anime"
@@ -4825,7 +4980,7 @@
                     "name": "Tenda de maletas"
                 },
                 "shop/bakery": {
-                    "name": "Panadería"
+                    "name": "Panadaría"
                 },
                 "shop/bathroom_furnishing": {
                     "name": "Tenda de mobiliario de baño"
@@ -4849,16 +5004,18 @@
                     "name": "Tenda de bicicletas"
                 },
                 "shop/bookmaker": {
-                    "name": "Corredor de apostas"
+                    "name": "Corredor de apostas",
+                    "terms": "casa de apostas, casino, Codere, Luckia, apostas"
                 },
                 "shop/books": {
-                    "name": "Libraría"
+                    "name": "Libraría",
+                    "terms": "libraría, venda de libros"
                 },
                 "shop/boutique": {
                     "name": "Boutique"
                 },
                 "shop/butcher": {
-                    "name": "Carnicería"
+                    "name": "Carnizaría"
                 },
                 "shop/candles": {
                     "name": "Tenda de velas"
@@ -4882,10 +5039,10 @@
                     "name": "Tenda de queixos"
                 },
                 "shop/chemist": {
-                    "name": "Droguería"
+                    "name": "Drogaría"
                 },
                 "shop/chocolate": {
-                    "name": "Chocolatería"
+                    "name": "Chocolataría"
                 },
                 "shop/clothes": {
                     "name": "Tenda de roupa"
@@ -4903,7 +5060,7 @@
                     "name": "Tenda de barrio"
                 },
                 "shop/copyshop": {
-                    "name": "Copistería"
+                    "name": "Copistaría"
                 },
                 "shop/cosmetics": {
                     "name": "Tenda de cosméticos"
@@ -4928,7 +5085,7 @@
                     "terms": "bricolaxe, DIY"
                 },
                 "shop/dry_cleaning": {
-                    "name": "Lavandería en seco"
+                    "name": "Lavandaría en seco"
                 },
                 "shop/e-cigarette": {
                     "name": "Tenda de cigarros electrónicos"
@@ -4949,10 +5106,10 @@
                     "name": "Tenda de moda"
                 },
                 "shop/fishmonger": {
-                    "name": "Peixería"
+                    "name": "Peixaría"
                 },
                 "shop/florist": {
-                    "name": "Florería"
+                    "name": "Floraría"
                 },
                 "shop/frame": {
                     "name": "Tenda de enmarcado",
@@ -4966,10 +5123,10 @@
                     "name": "Tenda de calefacción"
                 },
                 "shop/furniture": {
-                    "name": "Tenda de mobles"
+                    "name": "Tenda de móbeis ou mobles"
                 },
                 "shop/garden_centre": {
-                    "name": "Centro de xardinería"
+                    "name": "Centro de xardinaría"
                 },
                 "shop/gas": {
                     "name": "Tenda de bombonas de gas"
@@ -4978,13 +5135,13 @@
                     "name": "Tenda de regalos"
                 },
                 "shop/greengrocer": {
-                    "name": "Froitería"
+                    "name": "Froitaría"
                 },
                 "shop/hairdresser": {
-                    "name": "Perruquería"
+                    "name": "Perrucaría"
                 },
                 "shop/hardware": {
-                    "name": "Ferretería"
+                    "name": "Ferretaría"
                 },
                 "shop/hearing_aids": {
                     "name": "Tenda de audífonos"
@@ -5002,7 +5159,7 @@
                     "name": "Tenda de decoración de interiores"
                 },
                 "shop/jewelry": {
-                    "name": "Xoiería"
+                    "name": "Xoiaría"
                 },
                 "shop/kiosk": {
                     "name": "Quiosco"
@@ -5011,7 +5168,7 @@
                     "name": "Tenda de cociñas"
                 },
                 "shop/laundry": {
-                    "name": "Lavandería"
+                    "name": "Lavandaría"
                 },
                 "shop/leather": {
                     "name": "Tenda de peles"
@@ -5021,7 +5178,7 @@
                     "terms": "cerralleiro, cerraxeiro, chaves, duplicado de chaves, copia de chaves"
                 },
                 "shop/lottery": {
-                    "name": "Tenda de lotería"
+                    "name": "Tenda de lotaría"
                 },
                 "shop/mall": {
                     "name": "Centro comercial"
@@ -5071,8 +5228,8 @@
                     "name": "Tenda de pintura"
                 },
                 "shop/pastry": {
-                    "name": "Confitería",
-                    "terms": "confitería, pastelería, pasteis, tartas"
+                    "name": "Confitaría",
+                    "terms": "confitaría, pastelaría, pasteis, tartas"
                 },
                 "shop/pawnbroker": {
                     "name": "Casa de empeños"
@@ -5102,20 +5259,20 @@
                     "terms": "mergullo, buceo"
                 },
                 "shop/seafood": {
-                    "name": "Peixería",
-                    "terms": "peixería, peixeiro, peixe, marisco"
+                    "name": "Peixaría",
+                    "terms": "peixaría, peixería, peixeiro, peixe, marisco"
                 },
                 "shop/second_hand": {
                     "name": "Tenda de segunda man"
                 },
                 "shop/shoes": {
-                    "name": "Zapatería"
+                    "name": "Zapataría"
                 },
                 "shop/sports": {
                     "name": "Tenda de deportes"
                 },
                 "shop/stationery": {
-                    "name": "Papelería"
+                    "name": "Papelaría"
                 },
                 "shop/storage_rental": {
                     "name": "Aluguer de almacéns"
@@ -5164,13 +5321,13 @@
                     "name": "Tenda de videoxogos"
                 },
                 "shop/watches": {
-                    "name": "Reloxería"
+                    "name": "Reloxaría"
                 },
                 "shop/water_sports": {
                     "name": "Deportes acuáticos/tenda de natación"
                 },
                 "shop/weapons": {
-                    "name": "Armería"
+                    "name": "Armaría"
                 },
                 "shop/wholesale": {
                     "name": "Almacén ao por maior"
@@ -5196,6 +5353,15 @@
                 "tourism/artwork": {
                     "name": "Obra artística"
                 },
+                "tourism/artwork/mural": {
+                    "name": "Mural"
+                },
+                "tourism/artwork/sculpture": {
+                    "name": "Escultura"
+                },
+                "tourism/artwork/statue": {
+                    "name": "Estatua"
+                },
                 "tourism/attraction": {
                     "name": "Atracción turística"
                 },
@@ -5205,8 +5371,12 @@
                 "tourism/caravan_site": {
                     "name": "Parque de caravanas"
                 },
+                "tourism/chalet": {
+                    "name": "Casas de vacacións ou chalets"
+                },
                 "tourism/gallery": {
-                    "name": "Galería de arte"
+                    "name": "Galería de arte",
+                    "terms": "arte, galería, galería de arte, museo, cadros, cuadros"
                 },
                 "tourism/guest_house": {
                     "name": "Hostal",
@@ -5263,7 +5433,8 @@
                     "name": "Chicán de Tráfico"
                 },
                 "traffic_calming/choker": {
-                    "name": "Estreitamento"
+                    "name": "Estreitamento",
+                    "terms": "estreitamento, camiño estreito"
                 },
                 "traffic_calming/cushion": {
                     "name": "Almofa de Velocidade"
@@ -5281,6 +5452,15 @@
                 "traffic_calming/rumble_strip": {
                     "name": "Bandas sonoras",
                     "terms": "bandas reductoras de velocidade, bandas sonoras"
+                },
+                "traffic_sign": {
+                    "name": "Sinal de tráfico"
+                },
+                "traffic_sign/maxspeed": {
+                    "name": "Sinal de límite da velocidade"
+                },
+                "traffic_sign/maxspeed_vertex": {
+                    "name": "Sinal de límite da velocidade"
                 },
                 "type/boundary": {
                     "name": "Límite"
@@ -5306,50 +5486,59 @@
                 "type/restriction/no_u_turn": {
                     "name": "Prohibido o cambio de sentido"
                 },
+                "type/restriction/only_left_turn": {
+                    "name": "Só cara a esquerda"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Só cara a dereita"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "Só cara adiante"
+                },
                 "type/route": {
-                    "name": "Ruta"
+                    "name": "Rota"
                 },
                 "type/route/bicycle": {
-                    "name": "Ruta ciclista"
+                    "name": "Roteiro ciclista"
                 },
                 "type/route/bus": {
-                    "name": "Ruta de autobús"
+                    "name": "Liña de bus"
                 },
                 "type/route/detour": {
-                    "name": "Ruta de desvío"
+                    "name": "Rota de desvío"
                 },
                 "type/route/ferry": {
-                    "name": "Ruta do ferry"
+                    "name": "Liña do ferri"
                 },
                 "type/route/foot": {
                     "name": "Rúa a pé"
                 },
                 "type/route/hiking": {
-                    "name": "Ruta de camiñata"
+                    "name": "Roteiro de sendeirismo"
                 },
                 "type/route/horse": {
-                    "name": "Ruta de equitación"
+                    "name": "Rota de equitación"
                 },
                 "type/route/pipeline": {
-                    "name": "Ruta de tubaría"
+                    "name": "Rota de tubaría"
                 },
                 "type/route/power": {
-                    "name": "Ruta de enerxía"
+                    "name": "Rota da rede de enerxía"
                 },
                 "type/route/road": {
-                    "name": "Ruta de estrada"
+                    "name": "Rota de estrada"
                 },
                 "type/route/subway": {
-                    "name": "Ruta de metro"
+                    "name": "Liña do metro"
                 },
                 "type/route/train": {
-                    "name": "Ruta de tren"
+                    "name": "Liña de tren"
                 },
                 "type/route/tram": {
-                    "name": "Ruta de tranvía"
+                    "name": "Liña de tranvía"
                 },
                 "type/route_master": {
-                    "name": "Ruta mestra"
+                    "name": "Rota mestra"
                 },
                 "type/site": {
                     "name": "Lugar"
@@ -5402,7 +5591,7 @@
                     "name": "Regato intermitente"
                 },
                 "waterway/water_point": {
-                    "name": "Auga potable para embarcacións"
+                    "name": "Auga potábel para embarcacións"
                 },
                 "waterway/waterfall": {
                     "name": "Fervenza"
@@ -5415,51 +5604,51 @@
         "imagery": {
             "Bing": {
                 "description": "Imaxe satélite e aérea.",
-                "name": "Imaxe aérea Bing."
+                "name": "Imaxe aérea do Bing"
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "name": "Imaxes DigitalGlobe Premium"
+                "name": "Imaxes do DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Límites das imaxes e datas de captura. As etiquetas aparecen a un nivel de zoom de 13 e superior.",
-                "name": "Antigüidade das imaxes DigitalGlobe Premium"
+                "description": "Límites das imaxes e datas de captura. As etiquetas xorden a un nivel de zoom de 13 e superior.",
+                "name": "Antigüidade das imaxes do DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "name": "Imaxes DigitalGlobe Standard"
+                "name": "Imaxes do DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Límites das imaxes e datas de captura. As etiquetas aparecen a un nivel de zoom de 13 e superior.",
-                "name": "Antigüidade das imaxes DigitalGlobe Standard"
+                "description": "Límites das imaxes e datas de captura. As etiquetas xorden a un nivel de zoom de 13 e superior.",
+                "name": "Antigüidade das imaxes do DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Imaxes mundiais Esri.",
-                "name": "Imaxes mundiais Esri"
+                "description": "Imaxes mundiais do Esri.",
+                "name": "Imaxes mundiais do Esri"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Arquivo de imaxes de Esri que pode que sexan máis claras e máis precisas que a súa capa por defecto.",
-                "name": "Imaxes mundiais Esri (Clarity) Beta"
+                "description": "Arquivo de imaxes do Esri que pode que sexan máis craras e máis precisas que a súa capa por defecto.",
+                "name": "Imaxes mundiais do Esri (Clarity) Beta"
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "description": "Capa OpenStreetMap por defecto.",
                 "name": "OpenStreetMap (Estándar)"
@@ -5473,59 +5662,74 @@
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Enderezos"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Xeometría"
             },
             "OSM_Inspector-Highways": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Estradas"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Área"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Lugares"
             },
             "OSM_Inspector-Routing": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Roteiros"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
-                    "text": "© Geofabrik GmbH, contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Geofabrik GmbH, contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Etiquetado"
             },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuíntes do OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Marcador de Pistas: Ciclismo"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuíntes do OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Marcador de Pistas: Excursionismo"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuíntes do OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Marcador de Pistas: MTB"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuíntes do OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Marcador de Pistas: Skate"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, contribuíntes do OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Marcadores de Pistas: Deportes de inverno"
             },
             "basemap.at": {
@@ -5538,14 +5742,13 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Capa ortofoto proporcionada por basemap.at  \"Sucesor\" de imaxes de geoimage.at.",
+                "description": "Capa ortofoto fornecida polo basemap.at  \"Sucesor\" de imaxes do geoimage.at.",
                 "name": "Ortofoto basemap.at"
             },
-            "hike_n_bike": {
+            "gsi.go.jp": {
                 "attribution": {
-                    "text": "© contribuidores do OpenStreetMap"
-                },
-                "name": "Camiño & Bici"
+                    "text": "Xapón GSI"
+                }
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -5556,38 +5759,38 @@
             },
             "openpt_map": {
                 "attribution": {
-                    "text": "© contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenPT Mapa (superposición)"
             },
             "osm-gps": {
                 "attribution": {
-                    "text": "© contribuidores do OpenStreetMap"
+                    "text": "© contribuíntes do OpenStreetMap"
                 },
                 "description": "Trazas públicas GPS subidas a OpenStreetMap.",
                 "name": "Trazas GPS de OpenStreetMap"
             },
             "osm-mapnik-black_and_white": {
                 "attribution": {
-                    "text": "© contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenStreetMap (Estándar Branco e Negro)"
             },
             "osm-mapnik-german_style": {
                 "attribution": {
-                    "text": "© contribuidores do OpenStreetMap, CC-BY-SA"
+                    "text": "© contribuíntes do OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenStreetMap (Estilo Alemá)"
             },
             "qa_no_address": {
                 "attribution": {
-                    "text": "Simon Poole, Datos ©contribuidores do OpenStreetMap"
+                    "text": "Simon Poole, Datos ©contribuíntes do OpenStreetMap"
                 },
                 "name": "QA Sen Enderezos"
             },
             "skobbler": {
                 "attribution": {
-                    "text": "© Teselas: skobbler Datos do mapa: contribuidores do OpenStreetMap"
+                    "text": "© Teselas: skobbler Datos do mapa: contribuíntes do OpenStreetMap"
                 },
                 "name": "skobbler"
             },
@@ -5599,28 +5802,80 @@
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Mapas © Thunderforest, Datos © contribuidores do OpenStreetMap"
+                    "text": "Mapas © Thunderforest, Datos © contribuíntes do OpenStreetMap"
                 },
                 "name": "OpenCycleMap de Thunderforest"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Mapas © Thunderforest, Datos © contribuidores do OpenStreetMap"
+                    "text": "Mapas © Thunderforest, Datos © contribuíntes do OpenStreetMap"
                 },
                 "name": "Landscape de Thunderforest"
             }
         },
         "community": {
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana no Facebook",
+                "description": "Grupo do Facebook pra a xente interesada de xeito activo no OpenStreetMap."
+            },
+            "osm-gh-twitter": {
+                "description": "Séguenos no Twitter: {url}"
+            },
             "osm-mg-facebook": {
                 "name": "Grupo de Facebook do OpenStreetMap na illa de Madagascar"
             },
+            "OSM-India-facebook": {
+                "events": {
+                    "sotmasia2018": {
+                        "name": "Estado do Mapa, Asia 2018"
+                    }
+                }
+            },
+            "OSM-india-twitter": {
+                "description": "Estamos só a un chío de distancia: {url}"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaisia no Facebook"
+            },
+            "fr-facebook": {
+                "name": "Páxina do Facebook do OpenStreetMap Francia",
+                "description": "Páxina do Facebook do OpenStreetMap Francia"
+            },
+            "hu-facebook": {
+                "name": "OpenStreetMap Hungría no Facebook",
+                "description": "Cartógrafos e Facebook do OpenStreetMap en Hungría"
+            },
+            "is-facebook": {
+                "name": "OpenStreetMap Islandia no Facebook"
+            },
+            "it-facebook": {
+                "name": "Facebook do OpenStreetMap Italia",
+                "description": "Unirse á comunidade do OpenStreetMap Italia no Facebook"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "Grupo de Facebook do OpenStreetMap Polonia"
+            },
             "OSM-ES-mailinglist": {
-                "name": "Lista de correo talk-es",
-                "description": "Unha lista de correo para debatir sobre o OpenStreetMap en España"
+                "name": "Listaxe de correo talk-es",
+                "description": "Unha listaxe de correo para debater sobre o OpenStreetMap en España"
             },
             "OSM-ES-telegram": {
                 "name": "@OSMes no Telegram",
-                "description": "Chat de Telegram do OpenStreetMap España"
+                "description": "Parola de Telegram do OpenStreetMap España"
+            },
+            "se-facebook": {
+                "name": "Facebook do OpenStreetMap Suecia",
+                "description": "OpenStreetMap Suecia no Facebook"
+            },
+            "OSM-SoCal": {
+                "extendedDescription": "O OpenStreetMap (OSM) Southern California é para todos aquilos interesados ​​en cartografar para traballar xuntos co OpenStreetMap. O OpenStreetMap, a Wikipedia de mapas, é un mapa de código aberto e de balde creado por máis de 1.000.000 de voluntarios en todo o mundo. Todos son benvidos. Se non coñece o OpenStreetMap, ensinarémoslle. Se ten unha idea para un proxecto de cartografado ou incluso unha andaina ou roteiro que o grupo poida facer, xenial!"
+            },
+            "Maptime-Australia-Slack": {
+                "description": "Rexistrarse en {signupUrl}"
+            },
+            "OSM-AR-facebook": {
+                "name": "Facebook do OpenStreetMap Arxentina",
+                "description": "Unirse á comunidade do OpenStreetMap Arxentina no Facebook"
             },
             "OSM-AR-twitter": {
                 "description": "Seguenos no Twitter na seguinte ligazón {url}"
@@ -5628,9 +5883,25 @@
             "OSM-br-twitter": {
                 "description": "Seguenos no Twitter na seguinte ligazón {url}"
             },
+            "OSM-CL-facebook": {
+                "name": "Facebook do OpenStreetMap Chile",
+                "description": "Unirse á comunidade do OpenStreetMap Chile no Facebook"
+            },
+            "OSM-CO-facebook": {
+                "name": "Facebook do OpenStreetMap Colombia",
+                "description": "Unirse á comunidade do OpenStreetMap Colombia no Facebook"
+            },
+            "OSM-PE-facebook": {
+                "name": "Facebook do OpenStreetMap Perú",
+                "description": "Unirse á comunidade do OpenStreetMap Perú no Facebook"
+            },
+            "LATAM-Facebook": {
+                "name": "Facebook do OpenStreetMap Latinoamérica",
+                "description": "OpenStreetMap Latinoamérica no Facebook"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap no Facebook",
-                "description": "Dános un Gústame no Facebook para ver novas e actualizacións sobre OpenStreetMap"
+                "description": "Dános un Góstame no Facebook para ver novas e actualizacións sobre o OpenStreetMap"
             },
             "OSM-help": {
                 "name": "Axuda de OpenStreetMap",
@@ -5650,7 +5921,7 @@
             },
             "OSMF": {
                 "name": "Fundación OpenStreetMap",
-                "description": "OSMF é unha organización sen ánimo de lucro establecida no Reino Unido que dá soporte ao proxecto OpenStreetMap"
+                "description": "OSMF é unha organización sen ánimo de lucro establecida no Reino Unido que dá soporte ó proxecto do OpenStreetMap"
             }
         }
     }

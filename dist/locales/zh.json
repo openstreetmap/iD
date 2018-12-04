@@ -90,14 +90,6 @@
             "delete_member": {
                 "annotation": "删除关系中的成员。"
             },
-            "connect": {
-                "annotation": {
-                    "point": "连接线到一个点上。",
-                    "vertex": "连接线到另一条线上。",
-                    "line": "连接线到一条线上。",
-                    "area": "连接线到一个面上。"
-                }
-            },
             "disconnect": {
                 "title": "断开",
                 "description": "断开这些线。",
@@ -160,7 +152,6 @@
         "tooltip_keyhint": "快捷方式",
         "translate": {
             "translate": "翻译",
-            "localized_translation_label": "多种语言名称",
             "localized_translation_language": "选择语言",
             "localized_translation_name": "名称"
         },
@@ -898,9 +889,6 @@
                 },
                 "leisure/pitch/american_football": {
                     "name": "美式足球场"
-                },
-                "leisure/pitch/baseball": {
-                    "name": "棒球场"
                 },
                 "leisure/pitch/basketball": {
                     "name": "篮球场"

@@ -21,6 +21,11 @@
                 "description": "Jatetxeak, monumentuak, postontziak edo beste puntu motak gehitu mapari.",
                 "tail": "Mapa klikatu puntu bat gehitzeko."
             },
+            "add_note": {
+                "title": "Oharra",
+                "description": "Arazo bat ikusi duzu? Jakinarazi beste kartografo batzuk.",
+                "tail": "Mapan klik egin ohar bat txertatzeko."
+            },
             "browse": {
                 "title": "Esploratu",
                 "description": "Mapan mugitu."
@@ -30,6 +35,9 @@
             },
             "draw_line": {
                 "tail": "Klikatu lerroari node gehiago ipintzeko. Klikatu beste lerroei konektatzeko, eta bitan klikatu lerroa bukatzeko."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Hau ezin da editatu ezkutuko ezaugarri lotuta dagoelako."
             }
         },
         "operations": {
@@ -37,7 +45,8 @@
                 "annotation": {
                     "point": "Puntua gehitu da.",
                     "vertex": "Nodoa gehitu zaio bideari.",
-                    "relation": "Harremana gehitu da."
+                    "relation": "Harremana gehitu da.",
+                    "note": "Ohar bat gehitu da."
                 }
             },
             "start": {
@@ -72,7 +81,2419 @@
                     "line": "Lerro hau biribila egin.",
                     "area": "Leku hau biribila egin."
                 },
-                "key": "O"
+                "key": "O",
+                "annotation": {
+                    "line": "Lerro zirkular bat egin da.",
+                    "area": "Area zirkular bat egin da."
+                },
+                "too_large": "Hau ezin da zirkularra egin gaur egun ez dagoelako nahikoa erabilgarri.",
+                "connected_to_hidden": "Hau ezin da zirkularra egin ezkutuko funtzio bati konektatuta dagoelako."
+            },
+            "orthogonalize": {
+                "title": "Laukia",
+                "key": "S",
+                "not_squarish": "Hau ezin da karratu egin karratua ez delako."
+            },
+            "straighten": {
+                "title": "Zuzendu",
+                "description": "Zuzendu lerro hau.",
+                "key": "S",
+                "annotation": "Lerro zuzendua.",
+                "too_bendy": "Hau ezin da zuzendu gehiegi okertu delako."
+            },
+            "delete": {
+                "title": "Ezabatu",
+                "description": {
+                    "single": "Ezaugarri hau iraunkorki ezabatu.",
+                    "multiple": "Ezaugarri hauek iraunkorki ezabatu."
+                },
+                "annotation": {
+                    "point": "Puntu bat ezabatu da.",
+                    "line": "Lerro bat ezabatu da.",
+                    "area": "Eremu bat ezabatu da.",
+                    "relation": "Lotura bat ezabatu da.",
+                    "multiple": "{n} ezaugarriak ezabatu dira."
+                },
+                "too_large": {
+                    "single": "Funtzio hau ezin da ezabatu  gaur egun ez dagoelako nahikoa erabilgarri.",
+                    "multiple": "Funtzio hauek ezin dira ezabatu gaur egun ez dagoelako nahikoa erabilgarri."
+                },
+                "incomplete_relation": {
+                    "single": "Funtzio hau ezin da ezabatu ez delako guztiz deskargatu. ",
+                    "multiple": "Funtzio hauek ezin dira ezabatu ez direlako guztiz deskargatu. "
+                },
+                "connected_to_hidden": {
+                    "single": "Funtzio hau ezin da ezabatu ezkutuko funtzio bati lotuta dagoelako. ",
+                    "multiple": "Funtzio hauek ezin dira ezabatu haietariko batzuk ezkutuko funtzio batzuei lotuta daudelako."
+                }
+            },
+            "add_member": {
+                "annotation": "Partaide bat gehitu da konexio batera."
+            },
+            "delete_member": {
+                "annotation": "Konexiotik partaide bat ezabatua izan da."
+            },
+            "disconnect": {
+                "title": "Deskonektatu",
+                "description": "Lerro/area hauek elkarrengandik deskonektatu. ",
+                "key": "D",
+                "annotation": "Lerro/areak deskonektatu.",
+                "not_connected": "Hemen ez dago lerro/area nahikorik deskonektatzeko. ",
+                "connected_to_hidden": "Hau ezin da deskonektatu ezkutuko funtzio bati lotuta dagoelako. ",
+                "relation": "Hau ezin da deskonektatu harreman bereko kideak lotzen dituelako. "
+            },
+            "merge": {
+                "title": "Bat egin",
+                "description": "Funtzio hauek bat egin.",
+                "key": "C",
+                "annotation": "{n} funtzioak bat eginak.",
+                "not_eligible": "Funtzio hauek ezin dira bat egin. ",
+                "not_adjacent": "Funtzio hauek ezin dira bat egin haien amaiera-puntuak ez daudelako konektatuta. ",
+                "restriction": "Funtzio hauek ezin dira bat egin \"{relation}\" harremana kaltetuko luketelako.",
+                "relation": "Funtzio hauek ezin dira bat egin haien arteko harreman-rol gatazkatsuak dituztelako. ",
+                "incomplete_relation": "Funtzio hauek ezin dira bat egin haietariko bat gutxienez ez delako guztiz deskargatu. "
+            },
+            "move": {
+                "title": "Mugitu",
+                "description": {
+                    "single": "Funtzio hau beste leku batera mugitu. ",
+                    "multiple": "Funtzio hauek beste leku batera mugitu. "
+                },
+                "key": "M",
+                "annotation": {
+                    "point": "Puntu bat mugitu da.",
+                    "line": "Lerro bat mugitu da.",
+                    "area": "Area bat mugitu da.",
+                    "multiple": "Funtzio ezberdinak mugitu dira."
+                }
+            },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                }
+            },
+            "rotate": {
+                "key": "R"
+            },
+            "reverse": {
+                "key": "V"
+            },
+            "split": {
+                "key": "X"
+            },
+            "detach_node": {
+                "key": "E"
+            }
+        },
+        "translate": {
+            "translate": "Itzuli",
+            "localized_translation_language": "Hizkuntza aukeratu",
+            "localized_translation_name": "Izena"
+        },
+        "login": "Sartu",
+        "logout": "Atera",
+        "commit": {
+            "save": "Igo",
+            "cancel": "Ezeztatu",
+            "changes": "{count} Aldaketak",
+            "modified": "Editatuta",
+            "deleted": "Ezabatua",
+            "created": "Sortua"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B"
+            },
+            "history": {
+                "key": "H"
+            },
+            "location": {
+                "key": "L"
+            },
+            "measurement": {
+                "key": "M"
+            }
+        },
+        "geometry": {
+            "note": "oharra"
+        },
+        "inspector": {
+            "role": "Rol-a",
+            "remove": "Ezabatu",
+            "incomplete": "<not downloaded>",
+            "check": {
+                "yes": "Bai",
+                "no": "Ez"
+            },
+            "add": "Gehitu"
+        },
+        "background": {
+            "key": "B",
+            "minimap": {
+                "key": "/"
+            }
+        },
+        "map_data": {
+            "key": "F"
+        },
+        "area_fill": {
+            "wireframe": {
+                "key": "W"
+            }
+        },
+        "confirm": {
+            "okay": "ADOS"
+        },
+        "help": {
+            "title": "Laguntza",
+            "key": "H",
+            "help": {
+                "title": "Laguntza"
+            },
+            "editing": {
+                "select_h": "Aukeratu",
+                "save_h": "Gorde"
+            },
+            "feature_editor": {
+                "fields_h": "Eremuak",
+                "tags_h": "Etiketak"
+            },
+            "lines": {
+                "title": "Eremuak"
+            },
+            "relations": {
+                "title": "Harremanak"
+            },
+            "notes": {
+                "title": "Oharrak",
+                "add_note_h": "Oharrak gehitu",
+                "save_note_h": "Oharrak gorde"
+            },
+            "field": {
+                "restrictions": {
+                    "modifying": {
+                        "title": "Aldatu"
+                    }
+                }
+            }
+        },
+        "intro": {
+            "done": "eginda",
+            "ok": "ADOS",
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "49093",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>"
+            },
+            "areas": {
+                "title": "Eremuak",
+                "choose_playground": "**Aukeratu {preset}-a zerrendatik.**"
+            },
+            "buildings": {
+                "title": "Eraikuntzak"
+            },
+            "startediting": {
+                "title": "Editatzen hasi",
+                "save": "Ez ahaztu aldizka zure aldaketak gordetzeaz!"
+            }
+        },
+        "shortcuts": {
+            "toggle": {
+                "key": "?"
+            },
+            "browsing": {
+                "help": {
+                    "title": "Laguntza"
+                }
+            },
+            "editing": {
+                "title": "Editatu",
+                "drawing": {
+                    "title": "Marraztu"
+                }
+            },
+            "tools": {
+                "title": "Tresnak",
+                "info": {
+                    "title": "Informazioa"
+                }
+            }
+        },
+        "units": {
+            "north": "N",
+            "south": "S",
+            "east": "E",
+            "west": "W"
+        },
+        "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "Oztopoen ezaugarriak"
+                },
+                "category-building": {
+                    "name": "Eraikuntzaren ezaugarriak"
+                },
+                "category-golf": {
+                    "name": "Golf-aren ezaugarriak"
+                },
+                "category-landuse": {
+                    "name": "Lurraren erabilera ezaugarriak"
+                },
+                "category-natural-area": {
+                    "name": "Ezaugarri naturalak"
+                },
+                "category-natural-line": {
+                    "name": "Ezaugarri naturalak"
+                },
+                "category-natural-point": {
+                    "name": "Ezaugarri naturalak"
+                },
+                "category-path": {
+                    "name": "Bidearen ezaugarriak"
+                },
+                "category-rail": {
+                    "name": "Errailen ezaugarriak"
+                },
+                "category-restriction": {
+                    "name": "Murrizte funtzioak"
+                },
+                "category-road": {
+                    "name": "Errepidearen ezaugarriak"
+                },
+                "category-route": {
+                    "name": "Ibilbidearen ezaugarriak"
+                },
+                "category-utility": {
+                    "name": "Ezaugarri baliagarriak"
+                },
+                "category-water-area": {
+                    "name": "Uraren ezaugarriak"
+                },
+                "category-water-line": {
+                    "name": "Uraren ezaugarriak"
+                }
+            },
+            "fields": {
+                "access": {
+                    "label": "Onartutako sarbidea",
+                    "options": {
+                        "designated": {
+                            "description": "Bertako tokiko lege espezifiko edo seinaleen arabera onartutako sarbidea",
+                            "title": "Aukeratua"
+                        },
+                        "destination": {
+                            "description": "Soilik helmugara heltzeko sarbidea ",
+                            "title": "Helmuga"
+                        },
+                        "dismount": {
+                            "description": "Baimendutako sarbidea baina zadilzkoak desmuntatu behar du",
+                            "title": "©Desmuntatu"
+                        },
+                        "no": {
+                            "description": "Publikoarentzako onartu gabeko sarbidea",
+                            "title": "Debekatuta"
+                        },
+                        "permissive": {
+                            "description": "Jabeak ezeztatu ezean baimendutako sarbidea",
+                            "title": "Permisibo"
+                        },
+                        "permit": {
+                            "description": "Baliozko baimen edo lizentziarekin bakarrik onartutako sarbidea",
+                            "title": "Baimendu"
+                        },
+                        "private": {
+                            "description": "Sarbide baimendua soilik jabeak banan-banan emandako baimenarekin",
+                            "title": "Pribatua"
+                        },
+                        "yes": {
+                            "description": "Legez onartutako sarbidea; bide eskubidea",
+                            "title": "Baimenduta"
+                        }
+                    },
+                    "placeholder": "Zehaztu gabe",
+                    "types": {
+                        "access": "Guztiak",
+                        "bicycle": "Bizikletak",
+                        "foot": "Oinezkoak",
+                        "horse": "Zaldiak",
+                        "motor_vehicle": "Motordun ibilgailuak"
+                    }
+                },
+                "access_simple": {
+                    "label": "Sarrera baimendua"
+                },
+                "address": {
+                    "label": "Helbidea",
+                    "placeholders": {
+                        "block_number": "Blokearen zenbakia",
+                        "block_number!jp": "Bloke Zenb.",
+                        "city": "Hiria",
+                        "city!jp": "Hiri/Herri/Herrixka/Tokioko auzo berezia",
+                        "city!vn": "Hiri/Herri",
+                        "conscriptionnumber": "123",
+                        "country": "Herrialde",
+                        "county": "Eskualde",
+                        "county!jp": "Barruti",
+                        "district": "Barruti",
+                        "district!vn": "Arrondizamendu/Herri/Barruti",
+                        "floor": "Solairu",
+                        "hamlet": "Herrixka",
+                        "housename": "Etxearen izena",
+                        "housenumber": "123",
+                        "housenumber!jp": "Eraikuntza Zenb./Bloke Zenb.",
+                        "neighbourhood": "Auzo",
+                        "place": "Leku",
+                        "postcode": "posta-kode",
+                        "province": "Probintzia",
+                        "province!jp": "Prefektura",
+                        "quarter": "Barruti",
+                        "state": "Estatu",
+                        "street": "Kale",
+                        "subdistrict": "Auzo",
+                        "subdistrict!vn": "Hautesbarruti/Erkidego/Herrixka",
+                        "suburb": "Auzo",
+                        "suburb!jp": "Hautesbarruti",
+                        "unit": "Apartamentu"
+                    }
+                },
+                "admin_level": {
+                    "label": "Administratibo-maila"
+                },
+                "aerialway": {
+                    "label": "Mota"
+                },
+                "aerialway/access": {
+                    "label": "Sarrera",
+                    "options": {
+                        "both": "Biak",
+                        "entry": "Sarrera",
+                        "exit": "Irteera"
+                    }
+                },
+                "aerialway/bubble": {
+                    "label": "Burbuila"
+                },
+                "aerialway/capacity": {
+                    "label": "Kapazitatea (orduko)",
+                    "placeholder": "500, 2500, 5000..."
+                },
+                "aerialway/duration": {
+                    "label": "Iraupena (minutuak)",
+                    "placeholder": "1, 2, 3..."
+                },
+                "aerialway/heating": {
+                    "label": "Beroa"
+                },
+                "aerialway/occupancy": {
+                    "label": "Betetze",
+                    "placeholder": "2, 4, 8..."
+                },
+                "aerialway/summer/access": {
+                    "label": "Sarbidea (uda)",
+                    "options": {
+                        "both": "Biak",
+                        "entry": "Sarrera",
+                        "exit": "Irteera"
+                    }
+                },
+                "aeroway": {
+                    "label": "Mota"
+                },
+                "agrarian": {
+                    "label": "Produktuak"
+                },
+                "amenity": {
+                    "label": "Mota"
+                },
+                "animal_boarding": {
+                    "label": "Animalientzako"
+                },
+                "animal_breeding": {
+                    "label": "Animalientzako"
+                },
+                "animal_shelter": {
+                    "label": "Animalientzako"
+                },
+                "area/highway": {
+                    "label": "Mota"
+                },
+                "artist": {
+                    "label": "Artista"
+                },
+                "artwork_type": {
+                    "label": "Mota"
+                },
+                "barrier": {
+                    "label": "Mota"
+                },
+                "bath/open_air": {
+                    "label": "Aire zabalean"
+                },
+                "bath/sand_bath": {
+                    "label": "Harea-bainua"
+                },
+                "bath/type": {
+                    "label": "Espezialitate",
+                    "options": {
+                        "foot_bath": "bidet",
+                        "hot_spring": "Iturri termala",
+                        "onsen": "Onsen japoniarra"
+                    }
+                },
+                "beauty": {
+                    "label": "Denda Mota"
+                },
+                "bench": {
+                    "label": "Banku"
+                },
+                "bicycle_parking": {
+                    "label": "Mota"
+                },
+                "bin": {
+                    "label": "Zakarrontzi"
+                },
+                "blood_components": {
+                    "label": "Odolaren osagaiak",
+                    "options": {
+                        "plasma": "odol-plasma",
+                        "platelets": "Plaketak",
+                        "stemcells": "zelula ama laginak",
+                        "whole": "Osagai guztidun odol"
+                    }
+                },
+                "board_type": {
+                    "label": "Mota"
+                },
+                "booth": {
+                    "label": "Postu"
+                },
+                "boules": {
+                    "label": "Mota"
+                },
+                "boundary": {
+                    "label": "Mota"
+                },
+                "brand": {
+                    "label": "Marka"
+                },
+                "brewery": {
+                    "label": "Presioko Garagardo"
+                },
+                "bridge": {
+                    "label": "Mota",
+                    "placeholder": "Akats"
+                },
+                "bridge/support": {
+                    "label": "Mota"
+                },
+                "building": {
+                    "label": "Eraikin"
+                },
+                "building_area": {
+                    "label": "Eraikin"
+                },
+                "bunker_type": {
+                    "label": "Mota"
+                },
+                "cables": {
+                    "label": "Kableak",
+                    "placeholder": "1, 2, 3..."
+                },
+                "camera/direction": {
+                    "label": "Norabidea ( Graduak erlojuaren orratzen norantzan)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Kameraren muntaia"
+                },
+                "camera/type": {
+                    "label": "Kamera Mota",
+                    "options": {
+                        "dome": "Domo",
+                        "fixed": "Konponduta",
+                        "panning": "Panoramika bat egin"
+                    }
+                },
+                "capacity": {
+                    "label": "Edukiera",
+                    "placeholder": "50, 100, 200..."
+                },
+                "cash_in": {
+                    "label": "Kobratu"
+                },
+                "castle_type": {
+                    "label": "Mota"
+                },
+                "clothes": {
+                    "label": "Arropa"
+                },
+                "club": {
+                    "label": "Mota"
+                },
+                "collection_times": {
+                    "label": "Biltzeko ordutegia"
+                },
+                "colour": {
+                    "label": "kolore"
+                },
+                "comment": {
+                    "placeholder": "Zure ekarpenei buruzko laburpena (beharrezkoa)"
+                },
+                "communication_multi": {
+                    "label": "Komunikabide Motak"
+                },
+                "construction": {
+                    "label": "Mota"
+                },
+                "contact/webcam": {
+                    "label": "Web kameraren URL-a",
+                    "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "Edukia"
+                },
+                "conveying": {
+                    "label": "Mugimendu norabidea",
+                    "options": {
+                        "backward": "Atzeratu",
+                        "forward": "Aurreratu",
+                        "reversible": "Itzulgarri"
+                    }
+                },
+                "country": {
+                    "label": "Herrialde"
+                },
+                "covered": {
+                    "label": "Estalita"
+                },
+                "craft": {
+                    "label": "Mota"
+                },
+                "crane/type": {
+                    "label": "Garabi Mota",
+                    "options": {
+                        "floor-mounted_crane": "Lurrerako Garabia",
+                        "portal_crane": "Lehorpe Garabia"
+                    }
+                },
+                "crop": {
+                    "label": "Laborantzak"
+                },
+                "crossing": {
+                    "label": "Mota"
+                },
+                "cuisine": {
+                    "label": "Sukaldeak"
+                },
+                "currency_multi": {
+                    "label": "Txanpon Motak"
+                },
+                "cutting": {
+                    "label": "Mota",
+                    "placeholder": "Lehenetsia "
+                },
+                "cycle_network": {
+                    "label": "Sarea"
+                },
+                "cycleway": {
+                    "label": "Bidegorria",
+                    "options": {
+                        "lane": {
+                            "description": "Margotutako marra batez autoen trafikotik bereizitako bidegorria",
+                            "title": "Bidegorri arrunta"
+                        },
+                        "none": {
+                            "description": "Bizikletentzako bidegorririk gabe",
+                            "title": "Inor"
+                        },
+                        "opposite": {
+                            "description": "Norabide bakarreko kale batean bi noranzkoetan ibiltzeko aukera duen bidegorria ",
+                            "title": "Kontrako norabidedun bidegorria"
+                        },
+                        "opposite_lane": {
+                            "description": "Trafikoaren kontrako norantzan doan bidegorria",
+                            "title": "Kontrako bidegorria"
+                        },
+                        "share_busway": {
+                            "description": "Autobus erraiarekin bat doan bidegorria",
+                            "title": "Autobusen bidearekin bat eginda doan bidegorria"
+                        },
+                        "shared_lane": {
+                            "description": "Errepidetik banandu gabeko bidegorria",
+                            "title": "Partekatutako bidegorria"
+                        },
+                        "track": {
+                            "description": "Errepidetik barrera fisiko batez banandutako bidegorria",
+                            "title": "Bidegorria"
+                        }
+                    },
+                    "placeholder": "Bat ere ez",
+                    "types": {
+                        "cycleway:left": "Ezkerreko aldea ",
+                        "cycleway:right": "Eskuineko aldea"
+                    }
+                },
+                "dance/style": {
+                    "label": "Dantza estiloak"
+                },
+                "date": {
+                    "label": "Data"
+                },
+                "delivery": {
+                    "label": "Entrega"
+                },
+                "denomination": {
+                    "label": "Izendapen"
+                },
+                "denotation": {
+                    "label": "Denotazio"
+                },
+                "description": {
+                    "label": "Deskripzio"
+                },
+                "design": {
+                    "label": "Diseinu"
+                },
+                "devices": {
+                    "label": "Tresnak",
+                    "placeholder": "1, 2, 3..."
+                },
+                "diaper": {
+                    "label": "Pixoihal Aldatzailea Erabilgarri"
+                },
+                "direction": {
+                    "label": "Norabidea ( Graduak erlojuaren orratzen norantzan)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Norabide",
+                    "options": {
+                        "E": "Ekialde",
+                        "ENE": "Ipar-ekialde",
+                        "ESE": "hego-ekialde",
+                        "N": "Ipar",
+                        "NE": "Ipar-ekialdea",
+                        "NW": "Ipar-mendebalde",
+                        "S": "Hegoalde",
+                        "SE": "Hego-ekialde",
+                        "SW": "Hego-mendebalde",
+                        "W": "Mendebalde"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Norabide",
+                    "options": {
+                        "anticlockwise": "Erlojuaren orratzen kontrako norantza",
+                        "clockwise": "Erlujaren orratzen norantzan"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Norabide",
+                    "options": {
+                        "backward": "Atzeranzko",
+                        "both": "Biak / Guztiak",
+                        "forward": "Aurreranzko"
+                    }
+                },
+                "dispensing": {
+                    "label": "Errezetak administratzen ditu"
+                },
+                "display": {
+                    "label": "Pantaila"
+                },
+                "distance": {
+                    "label": "Distantzia"
+                },
+                "dock": {
+                    "label": "Mota"
+                },
+                "drive_through": {
+                    "label": "Auto-zerbitzua"
+                },
+                "duration": {
+                    "label": "Iraupen",
+                    "placeholder": "00:00"
+                },
+                "electrified": {
+                    "label": "Elektrifikazio",
+                    "options": {
+                        "contact_line": "Ukipenezko Linea",
+                        "no": "Ez",
+                        "rail": "Errail elektrifikatua",
+                        "yes": "Bai (zehaztu gabe)"
+                    },
+                    "placeholder": "Ukipenezko linea, Errail elektrifikatua..."
+                },
+                "elevation": {
+                    "label": "Goragune"
+                },
+                "email": {
+                    "label": "Posta-elektroniko",
+                    "placeholder": "example@example.com"
+                },
+                "embankment": {
+                    "label": "Mota",
+                    "placeholder": "Lehenetsita"
+                },
+                "emergency": {
+                    "label": "Larrialdi"
+                },
+                "entrance": {
+                    "label": "Mota "
+                },
+                "except": {
+                    "label": "Salbuespenak"
+                },
+                "faces": {
+                    "label": "Aldeak"
+                },
+                "fax": {
+                    "label": "Fax",
+                    "placeholder": "+31 42 123 4567"
+                },
+                "fee": {
+                    "label": "Ordainketa"
+                },
+                "fence_type": {
+                    "label": "Mota"
+                },
+                "fire_hydrant/position": {
+                    "label": "Kokapen",
+                    "options": {
+                        "green": "Berdea",
+                        "lane": "Lerro",
+                        "parking_lot": "Aparkaleku",
+                        "sidewalk": "Espaloi"
+                    }
+                },
+                "fire_hydrant/type": {
+                    "label": "Mota",
+                    "options": {
+                        "pillar": "Zutabe/ Lur gaineko",
+                        "pond": "Urmael",
+                        "underground": "Lur azpian",
+                        "wall": "Horma"
+                    }
+                },
+                "fireplace": {
+                    "label": "Tximinia"
+                },
+                "fitness_station": {
+                    "label": "Ekipamendu mota"
+                },
+                "fixme": {
+                    "label": "Konpondu Nazazu"
+                },
+                "flag/type": {
+                    "label": "Bandera Mota"
+                },
+                "ford": {
+                    "label": "Mota",
+                    "placeholder": "Lehenetsita"
+                },
+                "frequency": {
+                    "label": "Eragiketa maiztasuna"
+                },
+                "fuel": {
+                    "label": "Erregai"
+                },
+                "fuel_multi": {
+                    "label": "Erregai Motak"
+                },
+                "gauge": {
+                    "label": "Kalibre"
+                },
+                "gender": {
+                    "label": "Genero",
+                    "options": {
+                        "female": "Emakume",
+                        "male": "Gizon",
+                        "unisex": "Unisex"
+                    },
+                    "placeholder": "Ezezagun"
+                },
+                "generator/method": {
+                    "label": "Metodo"
+                },
+                "generator/output/electricity": {
+                    "label": "Korronte irteera",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
+                "generator/source": {
+                    "label": "Sorburu"
+                },
+                "generator/type": {
+                    "label": "Mota"
+                },
+                "government": {
+                    "label": "Mota"
+                },
+                "grape_variety": {
+                    "label": "Mahats Motak"
+                },
+                "handicap": {
+                    "label": "Desabantaila",
+                    "placeholder": "1-18"
+                },
+                "handrail": {
+                    "label": "Baranda"
+                },
+                "hashtags": {
+                    "label": "Proposatutako Traolak",
+                    "placeholder": "#adibide"
+                },
+                "healthcare": {
+                    "label": "Mota"
+                },
+                "healthcare/speciality": {
+                    "label": "Berezitasunak"
+                },
+                "height": {
+                    "label": "Altuera (Metroak)"
+                },
+                "highway": {
+                    "label": "Mota"
+                },
+                "historic": {
+                    "label": "Mota"
+                },
+                "historic/civilization": {
+                    "label": "Zibilizazio historikoa"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Ikusgarria marea gora dagoenean"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Ikusgarria marea behera dagoenean"
+                },
+                "hoops": {
+                    "label": "Aroak",
+                    "placeholder": "1, 2, 4..."
+                },
+                "horse_dressage": {
+                    "options": {
+                        "equestrian": "Bai",
+                        "undefined": "Ez"
+                    }
+                },
+                "horse_riding": {
+                    "label": "Ekitazio",
+                    "options": {
+                        "horse_riding": "Bai",
+                        "undefined": "Ez"
+                    }
+                },
+                "horse_scale": {
+                    "label": "Ekitazioaren zailtasuna",
+                    "options": {
+                        "common": "Erraza: Arazorik edo zailtasunik gabea. (lehenetsita)",
+                        "critical": "Muga: Bakarrik zaldizko eta zaldi esperimentatuak ibiltzeko modukoa. Oztopo nagusiak. Zubiek arretaz aztertuak izan behar dute.",
+                        "dangerous": "Arriskutsua: Bakarrik oso zaldizko eta zaldi trebeek ibiltzeko modukoa eta soilik eguraldi ona egiten duenean. Desmuntatu.",
+                        "demanding": "Kontuz ibili: bide malkartsua, noizean behin pasabide zailak.",
+                        "difficult": "Zaila: bide estu eta arriskutsua. Bidea estutzen eta zailtzen duten oztopoak egon daitezke.",
+                        "impossible": "Zeharkaezina: Zaldiek igaro ezin duten bide edo zubia. Estuegia, euskarri nahikorik gabea, eskilarak bezalako oztopoekin. Hiltzeko arriskua."
+                    },
+                    "placeholder": "Zaila, Arriskutsua..."
+                },
+                "horse_stables": {
+                    "label": "Zalditegi",
+                    "options": {
+                        "stables": "Bai",
+                        "undefined": "Ez"
+                    }
+                },
+                "incline": {
+                    "label": "Aldapa"
+                },
+                "incline_steps": {
+                    "label": "Aldapa",
+                    "options": {
+                        "down": "Behera",
+                        "up": "Gora"
+                    }
+                },
+                "indoor": {
+                    "label": "Barneko"
+                },
+                "industrial": {
+                    "label": "Mota"
+                },
+                "information": {
+                    "label": "Mota"
+                },
+                "inscription": {
+                    "label": "Izen-ematea"
+                },
+                "intermittent": {
+                    "label": "Aldizka"
+                },
+                "internet_access": {
+                    "label": "Interneterako sarbide",
+                    "options": {
+                        "no": "Ez",
+                        "terminal": "Terminal",
+                        "wired": "Kableatua",
+                        "wlan": "Wifi",
+                        "yes": "Bai"
+                    }
+                },
+                "internet_access/fee": {
+                    "label": "Interneterako sarbidearen tarifa"
+                },
+                "kerb": {
+                    "label": "Frenatu"
+                },
+                "label": {
+                    "label": "Marka"
+                },
+                "lamp_type": {
+                    "label": "Mota"
+                },
+                "landuse": {
+                    "label": "Mota"
+                },
+                "lanes": {
+                    "label": "Gurdibideak",
+                    "placeholder": "1, 2, 3..."
+                },
+                "language_multi": {
+                    "label": "Hizkuntzak"
+                },
+                "layer": {
+                    "label": "Geruza",
+                    "placeholder": "0"
+                },
+                "leaf_cycle": {
+                    "label": "Hostoaren zikloa",
+                    "options": {
+                        "deciduous": "Hostoerorkor",
+                        "evergreen": "Hosto iraunkor",
+                        "mixed": "Misto",
+                        "semi_deciduous": "Erdi-hostoerorkor",
+                        "semi_evergreen": "Erdi-iraunkor"
+                    }
+                },
+                "leaf_cycle_singular": {
+                    "label": "Hostoaren zikloa",
+                    "options": {
+                        "deciduous": "Hostoerorkor",
+                        "evergreen": "Hosto iraunkor",
+                        "semi_deciduous": "Erdi-hostoerorkor",
+                        "semi_evergreen": "Erdi-iraunkor"
+                    }
+                },
+                "leaf_type": {
+                    "label": "Hosto Mota",
+                    "options": {
+                        "broadleaved": "Hosto zabalekoa",
+                        "leafless": "Hosto gabea",
+                        "mixed": "Nahastuta"
+                    }
+                },
+                "leaf_type_singular": {
+                    "label": "Hosto Mota"
+                },
+                "leisure": {
+                    "label": "Mota"
+                },
+                "length": {
+                    "label": "Luzeera (Metroak)"
+                },
+                "level": {
+                    "label": "Maila"
+                },
+                "levels": {
+                    "label": "Mailak",
+                    "placeholder": "2, 4, 6..."
+                },
+                "lit": {
+                    "label": "Argitu"
+                },
+                "location": {
+                    "label": "Kokalekua"
+                },
+                "location_pool": {
+                    "label": "Kokalekua",
+                    "options": {
+                        "indoor": "Barru",
+                        "outdoor": "Kanpo",
+                        "roof": "Teilatuan"
+                    }
+                },
+                "man_made": {
+                    "label": "Mota"
+                },
+                "manhole": {
+                    "label": "Mota"
+                },
+                "map_size": {
+                    "label": "Estaldura"
+                },
+                "map_type": {
+                    "label": "Mota"
+                },
+                "material": {
+                    "label": "Materiala"
+                },
+                "maxheight": {
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
+                "maxspeed": {
+                    "label": "Abiadura muga",
+                    "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "label": "Aholkatutako Abiadura Muga",
+                    "placeholder": "40, 50, 60..."
+                },
+                "memorial": {
+                    "label": "Mota"
+                },
+                "mtb/scale": {
+                    "placeholder": "0, 1, 2, 3..."
+                },
+                "mtb/scale/imba": {
+                    "options": {
+                        "0": "Errazena (zirkulu zuria)",
+                        "1": "Erraza (zirkulu berdea)",
+                        "2": "Erdi (karratu urdina)",
+                        "3": "Zaila (diamante beltza)",
+                        "4": "Oso zaila (Diamante beltz bikoitza)"
+                    },
+                    "placeholder": "Erraz, Erdi, Zail..."
+                },
+                "mtb/scale/uphill": {
+                    "label": "Zailtasun Handiko Mendi Ziklismoa",
+                    "placeholder": "0, 1, 2, 3..."
+                },
+                "name": {
+                    "label": "Izena",
+                    "placeholder": "Izen arrunta (egotekotan)"
+                },
+                "natural": {
+                    "label": "Naturala"
+                },
+                "network": {
+                    "label": "Sare"
+                },
+                "network_bicycle": {
+                    "label": "Sare Mota",
+                    "options": {
+                        "icn": "Internazionala",
+                        "lcn": "Lokala",
+                        "ncn": "Nazionala",
+                        "rcn": "Eskualdeko"
+                    },
+                    "placeholder": "Lokala, Eskualdekoa, Nazionala, Internazionala"
+                },
+                "network_foot": {
+                    "label": "Sare Mota",
+                    "options": {
+                        "iwn": "internazionala",
+                        "lwn": "Lokala",
+                        "nwn": "Nazionala",
+                        "rwn": "Eskualdekoa"
+                    },
+                    "placeholder": "Lokala, Eskualdekoa, Nazionala, Internazionala"
+                },
+                "network_horse": {
+                    "label": "Sare Mota",
+                    "options": {
+                        "ihn": "Internazionala",
+                        "lhn": "Lokala",
+                        "nhn": "Nazionala",
+                        "rhn": "Eskualdeko"
+                    },
+                    "placeholder": "Lokala, Eskualdekoa, Nazionala, Internazionala"
+                },
+                "network_road": {
+                    "label": "Sare"
+                },
+                "note": {
+                    "label": "Ohar"
+                },
+                "office": {
+                    "label": "Mota"
+                },
+                "oneway": {
+                    "label": "Norabide bakarra",
+                    "options": {
+                        "alternating": "Txandakatzen",
+                        "no": "Ez",
+                        "reversible": "Itzulgarri",
+                        "undefined": "Ezezkotzat hartua",
+                        "yes": "Bai"
+                    }
+                },
+                "oneway_yes": {
+                    "label": "Norabide bakarra",
+                    "options": {
+                        "alternating": "Txandakatzen",
+                        "no": "Ez",
+                        "reversible": "Itzulgarri",
+                        "undefined": "Baiezkotzat hartua",
+                        "yes": "Bai"
+                    }
+                },
+                "opening_hours": {
+                    "label": "Orduak"
+                },
+                "operator": {
+                    "label": "Operadore"
+                },
+                "outdoor_seating": {
+                    "label": "Kanpoko eserlekuak"
+                },
+                "par": {
+                    "label": "Maila",
+                    "placeholder": "3, 4, 5..."
+                },
+                "parking": {
+                    "label": "Mota",
+                    "options": {
+                        "carports": "Garaje",
+                        "sheds": "Estalgune",
+                        "underground": "Lur azpiko"
+                    }
+                },
+                "passenger_information_display": {
+                    "label": "Bidaiarientzako informazio pantaila"
+                },
+                "payment_multi": {
+                    "label": "Ordaintzeko Moduak"
+                },
+                "phases": {
+                    "label": "Faseak",
+                    "placeholder": "1, 2, 3..."
+                },
+                "phone": {
+                    "label": "Telefonoa",
+                    "placeholder": "+31 42 123 4567"
+                },
+                "piste/difficulty": {
+                    "label": "Zailtasun",
+                    "options": {
+                        "advanced": "Aurreratu",
+                        "easy": "Erraz",
+                        "expert": "Aditu",
+                        "intermediate": "Erdi-maila"
+                    },
+                    "placeholder": "Erraz, Erdi-maila, Aditu..."
+                },
+                "piste/difficulty_downhill": {
+                    "label": "Zailtasun",
+                    "placeholder": "Erraz, Erdi-mailako, Aditu..."
+                },
+                "piste/difficulty_nordic": {
+                    "label": "Zailtasun",
+                    "placeholder": "Erraz, Erdi-mailako, Aditu..."
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Zailtasun",
+                    "placeholder": "Erraz, Erdi-mailako, Aditu..."
+                },
+                "piste/grooming": {
+                    "options": {
+                        "classic": "Klasiko",
+                        "skating": "Patinaje"
+                    }
+                },
+                "piste/grooming_downhill": {
+                    "options": {
+                        "classic": "Klasiko"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "options": {
+                        "classic": "Klasiko"
+                    }
+                },
+                "piste/type": {
+                    "label": "Mota",
+                    "options": {
+                        "connection": "Konexio",
+                        "ice_skate": "Izotz gaineko patinajea",
+                        "snow_park": "Snow Park-a"
+                    }
+                },
+                "place": {
+                    "label": "Mota"
+                },
+                "plant": {
+                    "label": "Landare"
+                },
+                "plant/output/electricity": {
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "playground/baby": {
+                    "label": "Ume aulkia"
+                },
+                "playground/max_age": {
+                    "label": "Gehienezko Adina"
+                },
+                "playground/min_age": {
+                    "label": "Gutxienezko Adina"
+                },
+                "population": {
+                    "label": "Populazio"
+                },
+                "power": {
+                    "label": "Mota"
+                },
+                "power_supply": {
+                    "label": "Korronte irteera"
+                },
+                "produce": {
+                    "label": "Nekazaritza-produktuak"
+                },
+                "product": {
+                    "label": "Produktuak"
+                },
+                "railway": {
+                    "label": "Mota"
+                },
+                "railway/signal/direction": {
+                    "label": "Norabide",
+                    "options": {
+                        "backward": "Atzeranzko",
+                        "both": "Biak / Guztiak",
+                        "forward": "Aurrera"
+                    }
+                },
+                "recycling_accepts": {
+                    "label": "Onartzen du"
+                },
+                "recycling_type": {
+                    "label": "Mota",
+                    "options": {
+                        "centre": "Zentru",
+                        "container": "Edukiontzi"
+                    },
+                    "placeholder": "Edukiontzi, Zentru"
+                },
+                "ref": {
+                    "label": "Erreferentzia kode"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Ate Zenbakia"
+                },
+                "ref_golf_hole": {
+                    "placeholder": "1-18"
+                },
+                "ref_platform": {
+                    "label": "Plataforma Zenbakia"
+                },
+                "relation": {
+                    "label": "Mota"
+                },
+                "religion": {
+                    "label": "Erlijio"
+                },
+                "restriction": {
+                    "label": "Mota"
+                },
+                "rooms": {
+                    "label": "Gelak"
+                },
+                "route": {
+                    "label": "Mota"
+                },
+                "route_master": {
+                    "label": "Mota"
+                },
+                "seamark/beacon_isolated_danger/shape": {
+                    "label": "Forma"
+                },
+                "seamark/beacon_lateral/category": {
+                    "label": "Kategoria",
+                    "options": {
+                        "port": "Portu"
+                    }
+                },
+                "seamark/beacon_lateral/colour": {
+                    "options": {
+                        "green": "Berde",
+                        "grey": "Gris",
+                        "red": "Gorri"
+                    }
+                },
+                "seamark/beacon_lateral/shape": {
+                    "label": "Forma"
+                },
+                "seamark/beacon_lateral/system": {
+                    "label": "Sistema",
+                    "options": {
+                        "other": "Beste batzuk"
+                    }
+                },
+                "seamark/buoy_lateral/category": {
+                    "label": "Kategoria",
+                    "options": {
+                        "port": "Portu"
+                    }
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Kolore",
+                    "options": {
+                        "green": "Berde",
+                        "green;red;green": "Berde-Gorri-Berde",
+                        "green;white;green;white": "Berde-Zuri-Berde-Zuri",
+                        "red": "Gorri",
+                        "red;green;red": "Gorri-Berde-Gorri",
+                        "red;white;red;white": "Gorri-Zuri-Gorri-Zuri",
+                        "white": "Zuri",
+                        "yellow": "Hori"
+                    }
+                },
+                "seamark/buoy_lateral/shape": {
+                    "label": "Forma"
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "Sistema",
+                    "options": {
+                        "other": "Beste batzuk"
+                    }
+                },
+                "seamark/mooring/category": {
+                    "label": "Kategoria"
+                },
+                "seamark/wreck/category": {
+                    "label": "Kategoria"
+                },
+                "seats": {
+                    "label": "Eserlekuak",
+                    "placeholder": "2, 4, 6..."
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "Ez",
+                        "only": "Bakarrik",
+                        "yes": "Bai"
+                    },
+                    "placeholder": "Bai, Ez, Bakarrik"
+                },
+                "service": {
+                    "label": "Mota"
+                },
+                "service/bicycle": {
+                    "label": "Zerbitzuak"
+                },
+                "service/vehicle": {
+                    "label": "Zerbitzuak"
+                },
+                "service_rail": {
+                    "label": "Zerbitzu Mota"
+                },
+                "shelter_type": {
+                    "label": "Mota"
+                },
+                "shop": {
+                    "label": "Mota"
+                },
+                "siren/type": {
+                    "label": "Mota",
+                    "options": {
+                        "electronic": "Elektroniko",
+                        "other": "Beste batzuk",
+                        "pneumatic": "Neumatiko"
+                    }
+                },
+                "site": {
+                    "label": "Mota"
+                },
+                "site_type": {
+                    "label": "Leku Mota"
+                },
+                "smoking": {
+                    "label": "Erretze",
+                    "options": {
+                        "dedicated": "Erretzaileei zuzendua (adib. erretzaileen kluba)",
+                        "isolated": "Erretzeko zonaldeetan, fisikoki isolatuak",
+                        "no": "Ezin da inon erre ",
+                        "outside": "Kanpoaldean baimendua",
+                        "separated": "Erretzeko zonaldeetan, fisikoki isolatu gabekoak",
+                        "yes": "Leku guztietan baimendua"
+                    },
+                    "placeholder": "Ez, Bereizita, Bai..."
+                },
+                "smoothness": {
+                    "label": "Leuntasun"
+                },
+                "social_facility": {
+                    "label": "Mota"
+                },
+                "source": {
+                    "label": "Iturriak"
+                },
+                "sport": {
+                    "label": "Kirolak"
+                },
+                "sport_ice": {
+                    "label": "Kirolak"
+                },
+                "sport_racing_motor": {
+                    "label": "Kirolak"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Kirolak"
+                },
+                "stars": {
+                    "label": "Izarrak"
+                },
+                "start_date": {
+                    "label": "Hasiera Data"
+                },
+                "step_count": {
+                    "label": "Pausu kopurua"
+                },
+                "stop": {
+                    "label": "Geldialdi Mota",
+                    "options": {
+                        "all": "Norabide guztiak"
+                    }
+                },
+                "structure": {
+                    "label": "Egitura",
+                    "options": {
+                        "bridge": "Zubi",
+                        "tunnel": "Tunel"
+                    },
+                    "placeholder": "Ezezagun"
+                },
+                "structure_waterway": {
+                    "label": "Egitura",
+                    "options": {
+                        "tunnel": "Tunel"
+                    },
+                    "placeholder": "Ezezagun"
+                },
+                "studio": {
+                    "label": "Mota"
+                },
+                "substance": {
+                    "label": "Substantzia"
+                },
+                "substation": {
+                    "label": "Mota"
+                },
+                "supervised": {
+                    "label": "Gainbegiratu"
+                },
+                "support": {
+                    "label": "Laguntza"
+                },
+                "surveillance/type": {
+                    "options": {
+                        "camera": "Kamara",
+                        "guard": "Zaintzaile"
+                    }
+                },
+                "swimming_pool": {
+                    "label": "Mota"
+                },
+                "switch": {
+                    "label": "Mota",
+                    "options": {
+                        "mechanical": "Mekaniko"
+                    }
+                },
+                "takeaway": {
+                    "label": "Eramateko",
+                    "options": {
+                        "no": "Ez",
+                        "only": "Eramateko Bakarrik ",
+                        "yes": "Bai"
+                    },
+                    "placeholder": "Bai, Ez, Eramateko bakarrik"
+                },
+                "toll": {
+                    "label": "Bidesari"
+                },
+                "tomb": {
+                    "label": "Mota"
+                },
+                "tourism": {
+                    "label": "Mota"
+                },
+                "tourism_attraction": {
+                    "label": "Turismo"
+                },
+                "tower/construction": {
+                    "label": "Eraikuntza"
+                },
+                "tower/type": {
+                    "label": "Mota"
+                },
+                "trade": {
+                    "label": "Mota"
+                },
+                "traffic_calming": {
+                    "label": "Mota"
+                },
+                "traffic_sign": {
+                    "label": "Trafiko seinalea"
+                },
+                "traffic_sign/direction": {
+                    "label": "Norabide",
+                    "options": {
+                        "backward": "Atzera",
+                        "both": "Biak / Guztiak",
+                        "forward": "Aurrera"
+                    }
+                },
+                "traffic_signals": {
+                    "label": "Mota"
+                },
+                "traffic_signals/direction": {
+                    "label": "Norabide",
+                    "options": {
+                        "backward": "Atzera",
+                        "both": "Biak / Guztiak",
+                        "forward": "Aurrera"
+                    }
+                },
+                "trail_visibility": {
+                    "label": "Pistaren ikusgarritasuna",
+                    "placeholder": "Bikain, Ondo, Gaizki..."
+                },
+                "transformer": {
+                    "label": "Mota",
+                    "options": {
+                        "auxiliary": "Laguntzaile",
+                        "converter": "Bihurtzaile",
+                        "distribution": "Banaketa",
+                        "generator": "Sorgailu",
+                        "phase_angle_regulator": "Fase Angulu Erregulatzaile",
+                        "traction": "Trakzio",
+                        "yes": "Ezezagun"
+                    }
+                },
+                "trees": {
+                    "label": "Zuhaitzak"
+                },
+                "tunnel": {
+                    "label": "Mota",
+                    "placeholder": "Lehenetsia "
+                },
+                "usage_rail": {
+                    "label": "Erabilera Mota",
+                    "options": {
+                        "branch": "Adar",
+                        "industrial": "Industrial",
+                        "main": "Nagusi",
+                        "military": "Militar",
+                        "test": "Analisi",
+                        "tourism": "Turismo"
+                    }
+                },
+                "vending": {
+                    "label": "Elikagai Motak"
+                },
+                "visibility": {
+                    "label": "Ikuspen",
+                    "options": {
+                        "area": "20m baino gehiago (65ft)",
+                        "house": "5m-ra arte (16ft)",
+                        "street": "5-20m bitartean (16 to 65ft)"
+                    }
+                },
+                "volcano/status": {
+                    "label": "Sumendiaren egoera",
+                    "options": {
+                        "active": "Aktibo",
+                        "dormant": "Jarduera(rik) gabe(ko) ",
+                        "extinct": "Itzali"
+                    }
+                },
+                "volcano/type": {
+                    "label": "Sumendi Mota",
+                    "options": {
+                        "shield": "Babes"
+                    }
+                },
+                "voltage": {
+                    "label": "Tentsio"
+                },
+                "wall": {
+                    "label": "Mota"
+                },
+                "water": {
+                    "label": "Mota"
+                },
+                "waterway": {
+                    "label": "Mota"
+                },
+                "website": {
+                    "label": "Webgune",
+                    "placeholder": "http://example.com/"
+                },
+                "wetland": {
+                    "label": "Mota"
+                },
+                "wheelchair": {
+                    "label": "Gurpildun-aulkientzako Sarrera"
+                },
+                "wikipedia": {
+                    "label": "Wikipedia"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "options": {
+                        "open": "Ireki"
+                    }
+                }
+            },
+            "presets": {
+                "address": {
+                    "name": "Helbide"
+                },
+                "advertising/column": {
+                    "name": "Publizitaterako zutabea"
+                },
+                "aeroway/aerodrome": {
+                    "name": "Aireportu"
+                },
+                "aeroway/gate": {
+                    "name": "Aireportuko ate"
+                },
+                "aeroway/terminal": {
+                    "name": "Aireportuko Terminal"
+                },
+                "amenity": {
+                    "name": "Zerbitzu"
+                },
+                "amenity/arts_centre": {
+                    "name": "Arte Zentro"
+                },
+                "amenity/atm": {
+                    "name": "ATM"
+                },
+                "amenity/bank": {
+                    "name": "Banku"
+                },
+                "amenity/bar": {
+                    "name": "Taberna"
+                },
+                "amenity/bbq": {
+                    "name": "Barbakoa/Parrila"
+                },
+                "amenity/bench": {
+                    "name": "Banku"
+                },
+                "amenity/bicycle_parking": {
+                    "name": "Bizikletentzako Aparkalekua"
+                },
+                "amenity/bicycle_rental": {
+                    "name": "Bizikleten Alokairua "
+                },
+                "amenity/bicycle_repair_station": {
+                    "name": "Bizikleta konpontzeko tresneriaren postua"
+                },
+                "amenity/biergarten": {
+                    "name": "Biergarten"
+                },
+                "amenity/boat_rental": {
+                    "name": "Ontzi alokairu"
+                },
+                "amenity/bureau_de_change": {
+                    "name": "Moneta trukea"
+                },
+                "amenity/bus_station": {
+                    "name": "Autobus geltoki / Terminal"
+                },
+                "amenity/cafe": {
+                    "name": "Kafetegi"
+                },
+                "amenity/car_pooling": {
+                    "name": "Auto partekatzea"
+                },
+                "amenity/car_rental": {
+                    "name": "Auto Alokairua"
+                },
+                "amenity/car_sharing": {
+                    "name": "Autoen partekatzea"
+                },
+                "amenity/car_wash": {
+                    "name": "Auto garbiketa"
+                },
+                "amenity/casino": {
+                    "name": "Kasino"
+                },
+                "amenity/charging_station": {
+                    "name": "Kargatzeko geltokia"
+                },
+                "amenity/childcare": {
+                    "name": "Haurtzendegi/ Ume zaintza"
+                },
+                "amenity/cinema": {
+                    "name": "Zinema"
+                },
+                "amenity/clinic": {
+                    "name": "Erietxe"
+                },
+                "amenity/clinic/abortion": {
+                    "name": "Abortu klinika"
+                },
+                "amenity/clinic/fertility": {
+                    "name": "Ugalkortasun klinika"
+                },
+                "amenity/clock": {
+                    "name": "Ordulari"
+                },
+                "amenity/college": {
+                    "name": "Unibertsitate Eremu"
+                },
+                "amenity/community_centre": {
+                    "name": "Gizarte Etxe"
+                },
+                "amenity/compressed_air": {
+                    "name": "Aire konpromitua"
+                },
+                "amenity/courthouse": {
+                    "name": "Epaitegi"
+                },
+                "amenity/coworking_space": {
+                    "name": "Coworking espazioa"
+                },
+                "amenity/crematorium": {
+                    "name": "Errausketa-labe"
+                },
+                "amenity/dentist": {
+                    "name": "Dentista"
+                },
+                "amenity/doctors": {
+                    "name": "Mediku"
+                },
+                "amenity/drinking_water": {
+                    "name": "Ur edangarria"
+                },
+                "amenity/driving_school": {
+                    "name": "Auto-eskola"
+                },
+                "amenity/embassy": {
+                    "name": "Enbaxada"
+                },
+                "amenity/fast_food": {
+                    "name": "Janari azkarra"
+                },
+                "amenity/ferry_terminal": {
+                    "name": "Ferry geltoki / Terminala"
+                },
+                "amenity/fire_station": {
+                    "name": "Suhiltzaile-etxe"
+                },
+                "amenity/food_court": {
+                    "name": "Bazkaltzeko eremua"
+                },
+                "amenity/fountain": {
+                    "name": "Iturri"
+                },
+                "amenity/fuel": {
+                    "name": "Gasolindegi"
+                },
+                "amenity/grave_yard": {
+                    "name": "Hilerri"
+                },
+                "amenity/grit_bin": {
+                    "name": "Hare-ontzi"
+                },
+                "amenity/hospital": {
+                    "name": "Ospitalearen Eremua"
+                },
+                "amenity/hunting_stand": {
+                    "name": "Ehiza postua"
+                },
+                "amenity/ice_cream": {
+                    "name": "Izozki denda"
+                },
+                "amenity/internet_cafe": {
+                    "name": "Internet kafetegi"
+                },
+                "amenity/kindergarten": {
+                    "name": "Aurreskola/Haurtzandegi"
+                },
+                "amenity/language_school": {
+                    "name": "Hizkuntz eskola"
+                },
+                "amenity/library": {
+                    "name": "Liburutegi"
+                },
+                "amenity/marketplace": {
+                    "name": "Merkatu"
+                },
+                "amenity/monastery": {
+                    "name": "Monastegiaren eremu"
+                },
+                "amenity/motorcycle_parking": {
+                    "name": "Motorren aparkalekua"
+                },
+                "amenity/music_school": {
+                    "name": "Musika eskola"
+                },
+                "amenity/nightclub": {
+                    "name": "Klub"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Maila anitzeko aparkaleku"
+                },
+                "amenity/parking_entrance": {
+                    "name": "Aparkaleku garajearen Sarrera/Irteera"
+                },
+                "amenity/parking_space": {
+                    "name": "Aparkatzeko lekua"
+                },
+                "amenity/pharmacy": {
+                    "name": "Farmazia"
+                },
+                "amenity/place_of_worship": {
+                    "name": "Gurtza gune"
+                },
+                "amenity/place_of_worship/buddhist": {
+                    "name": "Tenplu budista"
+                },
+                "amenity/place_of_worship/christian": {
+                    "name": "Eliza"
+                },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Tenplu hindua"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "Sinagoga"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "Mezkita"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Xintoismo Santutegia"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Tenplu Sikhista "
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Tenplu Taoista"
+                },
+                "amenity/planetarium": {
+                    "name": "Planetario"
+                },
+                "amenity/police": {
+                    "name": "Polizia"
+                },
+                "amenity/post_box": {
+                    "name": "Postontzi"
+                },
+                "amenity/post_office": {
+                    "name": "Postetxe"
+                },
+                "amenity/prison": {
+                    "name": "Espetxe"
+                },
+                "amenity/pub": {
+                    "name": "Pub"
+                },
+                "amenity/public_bath": {
+                    "name": "Komun publikoak"
+                },
+                "amenity/public_bookcase": {
+                    "name": "Apalategi publikoa"
+                },
+                "amenity/ranger_station": {
+                    "name": "Basozain geltokia"
+                },
+                "amenity/recycling": {
+                    "name": "Birziklatze"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Birziklatze zentrua"
+                },
+                "amenity/recycling_container": {
+                    "name": "Birziklatze ontzi"
+                },
+                "amenity/register_office": {
+                    "name": "Erregistro bulegoa"
+                },
+                "amenity/restaurant": {
+                    "name": "Jatetxe"
+                },
+                "amenity/school": {
+                    "name": "Eskola eremu"
+                },
+                "amenity/scrapyard": {
+                    "name": "Txatarra metaketa"
+                },
+                "amenity/shelter": {
+                    "name": "Aterpetxe"
+                },
+                "amenity/shelter/gazebo": {
+                    "name": "Begiratoki"
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Zintzilikari"
+                },
+                "amenity/shelter/picnic_shelter": {
+                    "name": "Babestutako piknik-a"
+                },
+                "amenity/shelter/public_transport": {
+                    "name": "Babestutako korridorea"
+                },
+                "amenity/shower": {
+                    "name": "Dutxa"
+                },
+                "amenity/smoking_area": {
+                    "name": "Erretzeko gune"
+                },
+                "amenity/social_facility": {
+                    "name": "Gizarte-instalazio"
+                },
+                "amenity/social_facility/food_bank": {
+                    "name": "Elikagai-banku"
+                },
+                "amenity/social_facility/group_home": {
+                    "name": "Zahar-etxe"
+                },
+                "amenity/social_facility/homeless_shelter": {
+                    "name": "Etxegabeentzako aterpetxe"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Zahar-egoitza"
+                },
+                "amenity/studio": {
+                    "name": "Estudio"
+                },
+                "amenity/swimming_pool": {
+                    "name": "Igerileku"
+                },
+                "amenity/taxi": {
+                    "name": "Taxi postu"
+                },
+                "amenity/telephone": {
+                    "name": "Telefono"
+                },
+                "amenity/theatre": {
+                    "name": "Antzoki"
+                },
+                "amenity/theatre/type/amphi": {
+                    "name": "Anfiteatro"
+                },
+                "amenity/toilets": {
+                    "name": "Komun"
+                },
+                "amenity/townhall": {
+                    "name": "Udaletxe"
+                },
+                "amenity/university": {
+                    "name": "Unibertsitatearen eremua"
+                },
+                "amenity/vending_machine": {
+                    "name": "Makina saltzaile"
+                },
+                "amenity/vending_machine/cigarettes": {
+                    "name": "Zigarro makina saltzaile"
+                },
+                "amenity/vending_machine/coffee": {
+                    "name": "Kafe makina saltzaile"
+                },
+                "amenity/vending_machine/condoms": {
+                    "name": "Kondoi makina saltzaile"
+                },
+                "amenity/vending_machine/drinks": {
+                    "name": "Edarien makina saltzaile"
+                },
+                "amenity/vending_machine/electronics": {
+                    "name": "Sistema elektronikoen makina saltzaile"
+                },
+                "amenity/vending_machine/elongated_coin": {
+                    "name": "Txanpon-makina"
+                },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "Iraizkin poltsen makina saltzaile"
+                },
+                "amenity/vending_machine/feminine_hygiene": {
+                    "name": "Emakumezkoentzako higiene produktuen makina saltzaile"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Janari makina saltzailea"
+                },
+                "amenity/vending_machine/fuel": {
+                    "name": "Gas hornigailu"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Izozkien makina saltzaile"
+                },
+                "amenity/vending_machine/news_papers": {
+                    "name": "Egunkarien makina saltzaile"
+                },
+                "amenity/vending_machine/newspapers": {
+                    "name": "Egunkarien makina saltzaile"
+                },
+                "amenity/veterinary": {
+                    "name": "Albaitari"
+                },
+                "area": {
+                    "name": "Gune"
+                },
+                "attraction/animal": {
+                    "name": "Animali"
+                },
+                "attraction/carousel": {
+                    "name": "Zaldiko-maldiko"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Piraten itsasontzi"
+                },
+                "barrier/entrance": {
+                    "name": "Sarrera"
+                },
+                "barrier/gate": {
+                    "name": "Ate"
+                },
+                "barrier/wall": {
+                    "name": "Pareta"
+                },
+                "building/apartments": {
+                    "name": "Apartamentuak"
+                },
+                "building/dormitory": {
+                    "name": "Erresidentzia"
+                },
+                "building/entrance": {
+                    "name": "Sarrera/Irteera"
+                },
+                "building/garage": {
+                    "name": "Garaje"
+                },
+                "building/garages": {
+                    "name": "Garajeak"
+                },
+                "building/house": {
+                    "name": "Etxe"
+                },
+                "building/roof": {
+                    "name": "Teilatu"
+                },
+                "building/stable": {
+                    "name": "Ukuilu"
+                },
+                "building/train_station": {
+                    "name": "Tren geltoki"
+                },
+                "club": {
+                    "name": "Klub"
+                },
+                "craft/distillery": {
+                    "name": "Destilategi"
+                },
+                "craft/gardener": {
+                    "name": "Lorezain"
+                },
+                "craft/jeweler": {
+                    "name": "Bitxigile"
+                },
+                "craft/optician": {
+                    "name": "Optikari"
+                },
+                "craft/painter": {
+                    "name": "Margolari"
+                },
+                "craft/photographer": {
+                    "name": "Argazkilari"
+                },
+                "craft/photographic_laboratory": {
+                    "name": "Argazki laborategi"
+                },
+                "craft/plumber": {
+                    "name": "Iturgin"
+                },
+                "craft/rigger": {
+                    "name": "Aparejadore"
+                },
+                "leisure/pitch/table_tennis": {
+                    "name": "ping-pong mahai"
+                },
+                "leisure/pitch/tennis": {
+                    "name": "tenis-zelaia"
+                },
+                "leisure/pitch/volleyball": {
+                    "name": "boleibol-zelaia"
+                },
+                "leisure/playground": {
+                    "name": "Jolastoki"
+                },
+                "leisure/resort": {
+                    "name": "opor-leku"
+                },
+                "leisure/sauna": {
+                    "name": "Sauna"
+                },
+                "leisure/sports_centre": {
+                    "name": "Kiroldegia/ gunea"
+                },
+                "leisure/stadium": {
+                    "name": "Estadio"
+                },
+                "leisure/swimming_pool": {
+                    "name": "Igerileku"
+                },
+                "leisure/water_park": {
+                    "name": "Ur-parkea"
+                },
+                "line": {
+                    "name": "lerro"
+                },
+                "man_made": {
+                    "name": "Artifizial"
+                },
+                "man_made/adit": {
+                    "name": "Igarobide"
+                },
+                "man_made/antenna": {
+                    "name": "Antena"
+                },
+                "man_made/breakwater": {
+                    "name": "Olatu-orma"
+                },
+                "man_made/bridge": {
+                    "name": "Zubi"
+                },
+                "man_made/bunker_silo": {
+                    "name": "Bunker-siloa"
+                },
+                "man_made/chimney": {
+                    "name": "Tximinia"
+                }
+            }
+        },
+        "community": {
+            "bw-facebook": {
+                "description": "Bostwanako OpenStreetMap webgunea"
+            },
+            "bw-twitter": {
+                "description": "Bostwanako OpenStreetMap Twitter-a"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Jarraitu gaitzazu Twitterren: {url}"
+            },
+            "osm-gh-facebook": {
+                "name": "Ghana-ko OpenStreetMap Facebook-en",
+                "description": "OpenStreetMap-ean interesatutako jendearentzako Facebook taldea."
+            },
+            "osm-gh-twitter": {
+                "name": "Ghana-ko OpenStreetMap Twitter-en",
+                "description": "Jarraitu gaitzazu Twitterren: {url}"
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap-en Madagaskarreko Facebook Taldea"
+            },
+            "talk-mg": {
+                "description": "Madagaskarren OpenStreetMap-eko eragile, komunitate eta erabiltzailek elkarbanatzeko eta eztabaidatzeko gunea"
+            },
+            "OSM-India-facebook": {
+                "description": " OpenStreetMap-a hobetu Indian"
+            },
+            "OSM-india-twitter": {
+                "name": "Indiako OpenStreetMap Twitter-a"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Software Hardware Libre Mugimenduak - Facebook"
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Software Hardware Libre Mugimenduak - Matrix"
+            },
+            "OSM-IDN-facebook": {
+                "name": "Indonesiako OpenStreetMap",
+                "description": "OpenStreetMap hobetu Indonesian"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap-aren Japoniako Komunitatea"
+            },
+            "OSM-japan-twitter": {
+                "name": "Japoniako OpenStreetMap Twitter-a",
+                "description": "Traola Twitter-en: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "Japoniako OpenStreetMap",
+                "description": "Japoniako Kartografo eta OpenStreetMap erabiltzaileak"
+            },
+            "OSM-korea-telegram": {
+                "name": "Koreako OSM-ren Telegram Katea"
+            },
+            "OSM-MY-facebook": {
+                "name": "Malaysiako OpenStreetMap-a Facebook-en",
+                "description": "OpenStreetMap-i buruzko edozein gauzari buruz eztabaidatzeko! "
+            },
+            "OSM-MY-matrix": {
+                "description": "Kartografo guztiak ongi etorriak dira! Eman izena {signupUrl} -en"
+            },
+            "OSM-MNG-facebook": {
+                "name": "Mongoliako OpenStreetMap",
+                "description": "OpenStreetMap hobetu Mongolian"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "Nepaleko OpenStreetMap",
+                "description": "OpenStreetMap hobetu Nepalen"
+            },
+            "OSM-PH-slack": {
+                "description": "Edonor da ongi etorria! Izen eman {signupUrl} -en"
+            },
+            "OSM-RU-telegram": {
+                "description": "Errusiako OpenStreetMap-aren telegram txat-a"
+            },
+            "OSM-LKA-facebook": {
+                "name": "Sri Lankako OpenStreetMap",
+                "description": "OpenStreetMap hobetu Sri Lankan"
+            },
+            "al-telegram": {
+                "name": "Albaniako OSM-aren Telegram Katea",
+                "description": "Albaniako OpenStreetMap-aren Telegram Katea"
+            },
+            "at-twitter": {
+                "name": "Austriako OpenStreetMap Twitter-a",
+                "description": "Austriako OpenStreetMap Twitterren: {url}"
+            },
+            "osmgraz-meetup": {
+                "name": "OSM komunitatearen Graz-eko bilera",
+                "description": "OpenStreetMap komunitateren hileroko bilera Graz-en"
+            },
+            "osmgraz-twitter": {
+                "name": "Graz-eko OSM komunitatea Twitterren",
+                "description": "Graz-eko OpenStreetMap komunitatea twitterren"
+            },
+            "osm-at": {
+                "name": "Austriako OpenStreetMap",
+                "description": "Austriako OpenStreetMap-ari buruzko informazio plataforma"
+            },
+            "be-facebook": {
+                "name": "OpenStreetMap-aren BE Komunitatea"
+            },
+            "be-irc": {
+                "description": "Batu #osmbe  irc.oftc.net -en (6667 portua)"
+            },
+            "be-matrix": {
+                "description": "Kartografo guztiak ongi etorriak dira!"
+            },
+            "be-meetup": {
+                "name": "Belgikako OpenStreetMap bilkura "
+            },
+            "be-twitter": {
+                "name": "Belgikako OpenStreetMap Twitter-a",
+                "description": "Belgikako OSM Twitter-en: @osm_be"
+            },
+            "hr-facebook": {
+                "name": "Kroaziako OpenStreetMap Facebook taldea",
+                "description": "Kroaziako OpenStreetMap Facebook taldea"
+            },
+            "hr-irc": {
+                "name": "Kroaziako OpenStreetMap-a IRC-en",
+                "description": "Batu #osm-hr  irc.freenode.org -en (6667 portua)"
+            },
+            "czech-community": {
+                "name": "Txekiar OSM komunitatea",
+                "description": "Txekiako OSM kideen mapa ataria, webgunea eta kontaktuak"
+            },
+            "osmcz-facebook": {
+                "name": "CZ-ko OpenStreetMap Facebook-en",
+                "description": "Jarraitu txekiar komunitatea Facebook-en -  AsterokoOSM itzulia barne!"
+            },
+            "osmcz-twitter": {
+                "name": "Txekiar twitter-a @osmcz ",
+                "description": "Jarraitu txekiar komunitatea Twitter-en - AsterokoOSM itzulia barne!"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Txekiar posta zerrenda (talk-cz)"
+            },
+            "fr-irc": {
+                "description": "Batu #osm-fr  irc.oftc.net -en (6667 portua)"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin Telegram-en"
+            },
+            "de-berlin-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en: {url}"
+            },
+            "de-irc": {
+                "description": "Batu #osm-de  irc.oftc.net-en (6667 portua)"
+            },
+            "it-irc": {
+                "description": "Batu #osm-it irc.oftc.net-en (6667 portua)"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia Telegram-en"
+            },
+            "it-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en  {url}-(e)an"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes Telegram-en"
+            },
+            "se-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en: {url}"
+            },
+            "gb-irc": {
+                "description": "Batu #osm-gb  irc.oftc.net-en (port 6667)"
+            },
+            "OSM-CA-Slack": {
+                "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en."
+            },
+            "Code-for-San-Jose-Slack": {
+                "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en, gero batu #osm katea."
+            },
+            "OSM-US-Slack": {
+                "description": "Pertsona oro da ongi etorria! Izena eman {signupUrl}-en."
+            },
+            "PHXGeo-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
+            },
+            "Maptime-Australia-Slack": {
+                "description": "Izena eman {signupUrl}-ean"
+            },
+            "OSM-AR-facebook": {
+                "extendedDescription": "Lekuko komunitateko albisteak"
+            },
+            "OSM-AR-irc": {
+                "description": "Batu#osm-ar irc.oftc.net-en (6667 portua)"
+            },
+            "OSM-AR-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url} -ean"
+            },
+            "OSM-CO-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
+            },
+            "OSM-PE-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
+            },
+            "LATAM-Twitter": {
+                "description": "Jarrai gaitzazu Twitter-en hemen {url}"
+            },
+            "osm-latam": {
+                "events": {
+                    "sotm-latam-2018": {
+                        "where": "Buenos Aires, Argentina"
+                    }
+                }
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap-en Telegram-a"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap-en Twitter-a",
+                "description": "Jarrai gaitzazu Twitter-en hemen {url} "
+            },
+            "OSMF": {
+                "events": {
+                    "sotm2018": {
+                        "where": "Milan, Italia"
+                    }
+                }
             }
         }
     }

@@ -115,14 +115,6 @@
             "delete_member": {
                 "annotation": "Отстранет член од однос."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Поврзан пат со точка.",
-                    "vertex": "Поврзан еден пат со друг",
-                    "line": "Поврзан пат со линија.",
-                    "area": "Поврзан пат со подрачје."
-                }
-            },
             "disconnect": {
                 "title": "Оддели",
                 "description": "Одделете ги линииве/подрачјава.",
@@ -207,7 +199,6 @@
         "browser_notice": "Уредников е поддржан во Firefox, Chrome, Safari, Opera и Internet Explorer 11 или понова верзија. Надградете го прелистувачот или користете го Potlatch 2 за уредување на картата.",
         "translate": {
             "translate": "Преведи",
-            "localized_translation_label": "Повеќејазично име",
             "localized_translation_language": "Изберете јазик",
             "localized_translation_name": "Име"
         },
@@ -1168,15 +1159,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Тешкотија",
-                    "options": {
-                        "advanced": "Напредно (црна баклава)",
-                        "easy": "Лесно (зелен круг)",
-                        "expert": "Експертско (двојна црна баклава)",
-                        "extreme": "Екстремно (потребна искачувачка опрема)",
-                        "freeride": "Слободно (вон патека)",
-                        "intermediate": "Средно (син круг)",
-                        "novice": "Почетнички (за обука)"
-                    },
                     "placeholder": "Лесно, средно, напредно..."
                 },
                 "piste/grooming": {
@@ -1678,9 +1660,6 @@
                 "amenity/nightclub": {
                     "name": "Ноќен клуб"
                 },
-                "amenity/parking": {
-                    "name": "Паркиралиште"
-                },
                 "amenity/parking_entrance": {
                     "name": "Влез/излез на покриено паркиралиште"
                 },
@@ -1800,9 +1779,6 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "<преведете со истозначници или сродни поими на „Автомат за весници“, одделени со запирки>"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Автомат за оставање/подигање пратки"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Паркинг-автомат"
@@ -2167,15 +2143,6 @@
                 "entrance": {
                     "name": "Влез/излез"
                 },
-                "footway/crossing": {
-                    "name": "Уличен премин"
-                },
-                "footway/crosswalk": {
-                    "name": "Пешачки премин"
-                },
-                "footway/sidewalk": {
-                    "name": "Тротоар"
-                },
                 "ford": {
                     "name": "Брод"
                 },
@@ -2220,12 +2187,6 @@
                 },
                 "highway/corridor": {
                     "name": "Покриен премин"
-                },
-                "highway/crossing": {
-                    "name": "Уличен премин"
-                },
-                "highway/crosswalk": {
-                    "name": "Пешачки премин"
                 },
                 "highway/cycleway": {
                     "name": "Велосипедска патека"
@@ -2530,9 +2491,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Игралиште за американски фудбал"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Игралиште за бејзбол"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Кошаркарско игралиште"
                 },
@@ -2617,9 +2575,6 @@
                 "man_made/lighthouse": {
                     "name": "Светилник"
                 },
-                "man_made/observation": {
-                    "name": "Набљудувачница"
-                },
                 "man_made/petroleum_well": {
                     "name": "Нафтен извор"
                 },
@@ -2640,9 +2595,6 @@
                 },
                 "man_made/surveillance": {
                     "name": "Надзор"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Видеонадзор"
                 },
                 "man_made/survey_point": {
                     "name": "Надзорно место"
@@ -2722,9 +2674,6 @@
                 "natural/tree": {
                     "name": "Дрво"
                 },
-                "natural/tree_row": {
-                    "name": "Дрворед"
-                },
                 "natural/volcano": {
                     "name": "Вулкан"
                 },
@@ -2793,9 +2742,6 @@
                 },
                 "office/travel_agent": {
                     "name": "Туристичка агенција"
-                },
-                "piste": {
-                    "name": "Скијачка патека"
                 },
                 "place": {
                     "name": "Место"

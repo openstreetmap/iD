@@ -144,14 +144,6 @@
             "delete_member": {
                 "annotation": "Fjernet et medlem fra en relasjon"
             },
-            "connect": {
-                "annotation": {
-                    "point": "Koblet en linje til et punkt.",
-                    "vertex": "Koblet en linje til en annen.",
-                    "line": "Koblet en linje til en annen linje.",
-                    "area": "Koblet en linje til et område."
-                }
-            },
             "disconnect": {
                 "title": "Koble fra",
                 "description": "Koble disse linjene/areane fra hverandre",
@@ -321,7 +313,6 @@
         "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 11 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
         "translate": {
             "translate": "Oversett",
-            "localized_translation_label": "Flerspråklig navn",
             "localized_translation_language": "Velg språk",
             "localized_translation_name": "Navn"
         },
@@ -1637,11 +1628,7 @@
                     "placeholder": "+47 22 12 34 56"
                 },
                 "piste/difficulty": {
-                    "label": "Vanskelighet",
-                    "options": {
-                        "advanced": "Avansert (svart diamant)",
-                        "easy": "Enkel (grønn sirkel)"
-                    }
+                    "label": "Vanskelighet"
                 },
                 "piste/type": {
                     "label": "Type"
@@ -1853,9 +1840,6 @@
                 },
                 "amenity/nightclub": {
                     "name": "Nattklubb"
-                },
-                "amenity/parking": {
-                    "name": "Bilparkering"
                 },
                 "amenity/parking_entrance": {
                     "name": "Innkjøring/utkjøring parkeringsgarasje"
@@ -2202,15 +2186,6 @@
                 "entrance": {
                     "name": "Inngang/utgang"
                 },
-                "footway/crossing": {
-                    "name": "Fotgjengerovergang"
-                },
-                "footway/crosswalk": {
-                    "name": "Fotgjengerovergang"
-                },
-                "footway/sidewalk": {
-                    "name": "Fortau"
-                },
                 "ford": {
                     "name": "Vadested"
                 },
@@ -2237,12 +2212,6 @@
                 },
                 "highway/bridleway": {
                     "name": "Ridevei"
-                },
-                "highway/crossing": {
-                    "name": "Fotgjengerovergang"
-                },
-                "highway/crosswalk": {
-                    "name": "Fotgjengerovergang"
                 },
                 "highway/cycleway": {
                     "name": "Sykkelvei"
@@ -2427,9 +2396,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Amerikansk fotballbane"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Baseballbane"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Basketballbane"
                 },
@@ -2501,9 +2467,6 @@
                 },
                 "man_made/lighthouse": {
                     "name": "Fyrtårn"
-                },
-                "man_made/observation": {
-                    "name": "Observasjonstårn"
                 },
                 "man_made/petroleum_well": {
                     "name": "Oljebrønn"
@@ -2588,9 +2551,6 @@
                 },
                 "natural/tree": {
                     "name": "Tre"
-                },
-                "natural/tree_row": {
-                    "name": "Trerekke"
                 },
                 "natural/volcano": {
                     "name": "Vulkan"

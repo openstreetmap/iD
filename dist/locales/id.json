@@ -119,14 +119,6 @@
             "delete_member": {
                 "annotation": "Buang anggota dari sebuah relasi."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Menyambungkan sebuah jalan ke sebuah titik.",
-                    "vertex": "Menyambungkan sebuah jalan ke lainnya.",
-                    "line": "Menyambungkan sebuah jalan ke sebuah garis.",
-                    "area": "Menyambungkan sebuah jalan ke sebuah area."
-                }
-            },
             "disconnect": {
                 "title": "Memutuskan",
                 "description": "Putuskan garis/area masing-masing.",
@@ -208,7 +200,6 @@
         "tooltip_keyhint": "Pintasan:",
         "translate": {
             "translate": "Terjemahkan",
-            "localized_translation_label": "Nama multibahasa",
             "localized_translation_language": "Pilih Bahasa",
             "localized_translation_name": "Nama"
         },
@@ -882,10 +873,7 @@
                     "placeholder": "+31 42 123 4567"
                 },
                 "piste/difficulty": {
-                    "label": "Tingkat Kesulitan",
-                    "options": {
-                        "easy": "Mudah (lingkaran hijau)"
-                    }
+                    "label": "Tingkat Kesulitan"
                 },
                 "piste/grooming": {
                     "options": {
@@ -1196,9 +1184,6 @@
                 },
                 "amenity/nightclub": {
                     "name": "Kelab Malam"
-                },
-                "amenity/parking": {
-                    "name": "Parkir Mobil"
                 },
                 "amenity/parking_entrance": {
                     "name": "Pintu Masuk/Keluar Area Parkir"
@@ -1544,15 +1529,6 @@
                 "entrance": {
                     "name": "Pintu Masuk/Keluar"
                 },
-                "footway/crossing": {
-                    "name": "Penyeberangan Jalan"
-                },
-                "footway/crosswalk": {
-                    "name": "Penyeberangan Pejalan Kaki"
-                },
-                "footway/sidewalk": {
-                    "name": "Trotoar"
-                },
                 "ford": {
                     "name": "Ford"
                 },
@@ -1567,12 +1543,6 @@
                 },
                 "highway/corridor": {
                     "name": "Lorong dalam"
-                },
-                "highway/crossing": {
-                    "name": "Persimpangan jalan"
-                },
-                "highway/crosswalk": {
-                    "name": "Trotoar"
                 },
                 "highway/cycleway": {
                     "name": "Jalur Sepeda"
@@ -1852,10 +1822,6 @@
                     "name": "Lapangan Rugby",
                     "terms": "Lapangan Sepak Bola Amerika"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Lapangan Bisbol",
-                    "terms": "Baseball"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Lapangan Basket",
                     "terms": "Lapangan Basket"
@@ -1905,9 +1871,6 @@
                 },
                 "man_made/lighthouse": {
                     "name": "Mercusuar"
-                },
-                "man_made/observation": {
-                    "name": "Menara Pengamatan"
                 },
                 "man_made/petroleum_well": {
                     "name": "Sumur Minyak"
@@ -1983,9 +1946,6 @@
                 },
                 "natural/tree": {
                     "name": "Pohon"
-                },
-                "natural/tree_row": {
-                    "name": "Deretan pohon"
                 },
                 "natural/volcano": {
                     "name": "Gunung Api",

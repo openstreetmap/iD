@@ -115,7 +115,6 @@
         "tooltip_keyhint": "ޝޯރޓްކަޓް:",
         "translate": {
             "translate": "އެކި ބަސްބަހުން ބޭނުންކުރާ ނަންތައް",
-            "localized_translation_label": "އެހެން ބަހަކުން ކިޔާ ނަން",
             "localized_translation_language": "ބަސްް ޚިޔާރުކުރައްވާ",
             "localized_translation_name": "ނަން"
         },
@@ -363,9 +362,6 @@
                 "amenity/library": {
                     "name": "ލައިބްރަރީ"
                 },
-                "amenity/parking": {
-                    "name": "ކާރު ޕާރކުކުރާ ސަރަޙައްދު"
-                },
                 "amenity/place_of_worship": {
                     "name": "އަޅުކަންކުރާ ތަންތަން"
                 },
@@ -408,14 +404,8 @@
                 "building/residential": {
                     "name": "މީީހުން ދިރިއުޅޭ ޢިމާރާތްތައް"
                 },
-                "footway/crosswalk": {
-                    "name": "ކަަފިހި ހުރަސް"
-                },
                 "highway": {
                     "name": "ހައިވޭ"
-                },
-                "highway/crosswalk": {
-                    "name": "ކަަފިހި ހުރަސް"
                 },
                 "highway/path": {
                     "name": "ދުވާރު"

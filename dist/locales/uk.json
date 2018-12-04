@@ -1,9 +1,11 @@
 {
     "uk": {
         "icons": {
+            "download": "завантажити",
             "information": "інформація",
             "remove": "вилучити",
-            "undo": "відмінити"
+            "undo": "відмінити",
+            "zoom_to": "наблизитись до"
         },
         "modes": {
             "add_area": {
@@ -152,10 +154,20 @@
             },
             "connect": {
                 "annotation": {
-                    "point": "Лінію приєднано до точки.",
-                    "vertex": "Лінію приєднано до іншої лінії.",
-                    "line": "Лінія з’єднана з іншою лінією.",
-                    "area": "Лінія з’єднана з полігоном."
+                    "from_vertex": {
+                        "to_point": "Лінію приєднано до точки.",
+                        "to_vertex": "Лінію приєднано до іншої лінії.",
+                        "to_line": "Ліняя з’єднана з іншою лінією.",
+                        "to_area": "Лінія з’єднана з полігоном.",
+                        "to_adjacent_vertex": "Сусідні точки злито в одну.",
+                        "to_sibling_vertex": "Лінія приєднана сама до себе."
+                    },
+                    "from_point": {
+                        "to_point": "Точку приєднано до іншої точки.",
+                        "to_vertex": "Точку приєднано до точки на іншій лінії.",
+                        "to_line": "Точку приєднано до точки полігону.",
+                        "to_area": "Точку пересунуто на полігон."
+                    }
                 },
                 "relation": "Ці обʼєкти не можуть бути зʼєднані, бо вони мають ролі, значення яких конфліктують між собою.",
                 "restriction": "Ці об’єкти не можуть бути з’єднані, це може зруйнувати звʼязок \"{relation}\"."
@@ -361,7 +373,6 @@
         "browser_notice": "Цей редактор підтримується Firefox, Chrome, Safari, Opera та Internet Explorer 11 та вище. Будь ласка, оновіть ваш огладач або використовуйте Potlatch 2 для редагування мапи. ",
         "translate": {
             "translate": "Перекласти",
-            "localized_translation_label": "Назва іншою мовою",
             "localized_translation_language": "Обрати мову",
             "localized_translation_name": "Назва"
         },
@@ -371,6 +382,10 @@
         "loading_auth": "З’єднання з OpenStreetMap…",
         "report_a_bug": "Повідомити про помилку",
         "help_translate": "Допомогти перекласти",
+        "sidebar": {
+            "key": "`",
+            "tooltip": "Сховати/Показати бічну панель"
+        },
         "feature_info": {
             "hidden_warning": "приховано об’єктів - {count} ",
             "hidden_details": "Ці об’єкти є прихованими: {details}"
@@ -558,6 +573,11 @@
                 "notes": {
                     "tooltip": "Нотатки з OpenStreetMap",
                     "title": "Нотатки OpenStreetMap"
+                },
+                "custom": {
+                    "tooltip": "Перетягніть файл даних на сторінку або клацніть на кнопку для налаштувань",
+                    "title": "Власні дані мапи",
+                    "zoom": "Масштабувати до даних"
                 }
             },
             "fill_area": "Заливка полігонів",
@@ -637,6 +657,19 @@
                 "instructions": "Введіть шаблон URL для тайлів мапи. Використовуйте:\n   - {zoom} обо {z}, {x}, {y} для Z/X/Y схеми\n   - {-y} або {ty} для оберненної Y-координати в TMS-стилі\n   - {u} для схеми QuadTiles\n   - {switch:a,b,c} у разі використання DNS мультиплексування на сервері\n\nПриклад:\n{example}",
                 "template": {
                     "placeholder": "Введіть шаблон Url"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Налаштування шару власних даних",
+                "header": "Налаштування власних даних",
+                "file": {
+                    "instructions": "Оберіть локальний файл даних. Підтримуються\n.gpx, .kml, .geojson, .json",
+                    "label": "Перегляд файлів"
+                },
+                "or": "або",
+                "url": {
+                    "instructions": "Введіть шаблон URL для даних мапи чи URL для векторних тайлів. \nВикористовуйте:  {zoom} чи {z}, {x}, {y} для схеми Z/X/Y",
+                    "placeholder": "Введіть url"
                 }
             }
         },
@@ -1305,6 +1338,7 @@
                     "background_switch": "Перейти до останнього фонового зображення",
                     "map_data": "Налаштування даних мапи",
                     "fullscreen": "Перейти в повноекранний режим",
+                    "sidebar": "Сховати/Показати бічну панель",
                     "wireframe": "Каркасний режим",
                     "minimap": "Показати мінімапу"
                 },
@@ -1436,6 +1470,9 @@
                 },
                 "category-route": {
                     "name": "Маршрути"
+                },
+                "category-utility": {
+                    "name": "Трубопроводи/Лінії електропередач"
                 },
                 "category-water-area": {
                     "name": "Вода"
@@ -1662,6 +1699,9 @@
                     "label": "Тип",
                     "placeholder": "Типово"
                 },
+                "bridge/support": {
+                    "label": "Тип"
+                },
                 "building": {
                     "label": "Будинок"
                 },
@@ -1707,7 +1747,10 @@
                     "label": "Тип"
                 },
                 "collection_times": {
-                    "label": "Час виїмки пошти"
+                    "label": "Час виїмки/вивезення"
+                },
+                "colour": {
+                    "label": "Колір"
                 },
                 "comment": {
                     "label": "Коментар до пакету правок",
@@ -1725,6 +1768,14 @@
                 },
                 "content": {
                     "label": "Вміст"
+                },
+                "conveying": {
+                    "label": "Напрямок руху",
+                    "options": {
+                        "backward": "Проти напрямку лінії",
+                        "forward": "За напрямком лінії",
+                        "reversible": "Реверсивний рух"
+                    }
                 },
                 "country": {
                     "label": "Країна"
@@ -1817,6 +1868,9 @@
                 },
                 "description": {
                     "label": "Опис"
+                },
+                "design": {
+                    "label": "Конструкція"
                 },
                 "devices": {
                     "label": "Пристрої",
@@ -1945,11 +1999,17 @@
                         "wall": "Настінний"
                     }
                 },
+                "fireplace": {
+                    "label": "Вогнище"
+                },
                 "fitness_station": {
                     "label": "Вид спорядження"
                 },
                 "fixme": {
                     "label": "Потребує виправлення"
+                },
+                "flag/type": {
+                    "label": "Вид прапора"
                 },
                 "ford": {
                     "label": "Тип",
@@ -1957,6 +2017,9 @@
                 },
                 "frequency": {
                     "label": "Робоча частота"
+                },
+                "from": {
+                    "label": "Від"
                 },
                 "fuel": {
                     "label": "АЗС"
@@ -2023,6 +2086,15 @@
                 },
                 "historic/civilization": {
                     "label": "Антична культура"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Дата затоплення"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Видно під час приливу"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Видно під час відливу"
                 },
                 "hoops": {
                     "label": "Кільця",
@@ -2124,6 +2196,9 @@
                     "label": "Смуги",
                     "placeholder": "1, 2, 3…"
                 },
+                "language_multi": {
+                    "label": "Мови"
+                },
                 "layer": {
                     "label": "Шар",
                     "placeholder": "0"
@@ -2183,6 +2258,14 @@
                 "location": {
                     "label": "Місцезнаходження"
                 },
+                "location_pool": {
+                    "label": "Місце",
+                    "options": {
+                        "indoor": "В приміщенні",
+                        "outdoor": "На вулиці",
+                        "roof": "На даху"
+                    }
+                },
                 "man_made": {
                     "label": "Тип"
                 },
@@ -2194,6 +2277,9 @@
                 },
                 "map_type": {
                     "label": "Тип"
+                },
+                "material": {
+                    "label": "Матеріал"
                 },
                 "maxheight": {
                     "label": "Максимальна висота",
@@ -2369,15 +2455,52 @@
                 "piste/difficulty": {
                     "label": "Складність",
                     "options": {
+                        "advanced": "Складна",
+                        "easy": "Проста",
+                        "expert": "Надзвичайно складна",
+                        "extreme": "Екстремальна",
+                        "freeride": "Фрірайд",
+                        "intermediate": "Середня",
+                        "novice": "Для новачків"
+                    },
+                    "placeholder": "Легкий, Середній, Складний…"
+                },
+                "piste/difficulty_downhill": {
+                    "label": "Складність",
+                    "options": {
                         "advanced": "Складна (чорний ромб)",
                         "easy": "Проста (зелене коло)",
                         "expert": "Надзвичайно складна (подвійний чорний ромб)",
-                        "extreme": "Екстремальний (потрібне спорядження для скелелазів)",
+                        "extreme": "Екстремальна (потрібне спорядження для скелелазів)",
                         "freeride": "Фрірайд (без траси)",
                         "intermediate": "Середня (синій квадрат)",
                         "novice": "Для новачків (навчальний)"
                     },
-                    "placeholder": "Легкий, Середній, Складний…"
+                    "placeholder": "Проста, Середня, Складна…"
+                },
+                "piste/difficulty_nordic": {
+                    "label": "Складність",
+                    "options": {
+                        "advanced": "Складна - Вузька, крута або з крижаними секціями, різкими поворотами",
+                        "easy": "Проста - пологі пагорби, короткі круті ділянки",
+                        "expert": "Надзвичайно складна - Небезпечна місцевість навколо",
+                        "intermediate": "Середня - Круті ділянки",
+                        "novice": "Для новачків - Пласка, проходиться без зусиль"
+                    },
+                    "placeholder": "Проста, Середня, Складна…"
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Складність",
+                    "options": {
+                        "advanced": "Складна - S: 40-45° нахил",
+                        "easy": "Проста - WS: 30-35° нахил",
+                        "expert": "Надзвичайно складна - SS: 45–50° нахил",
+                        "extreme": "Екстремальна - EX: >55° нахил",
+                        "freeride": "Фрірайд - AS: 50–55° нахил",
+                        "intermediate": "Середня - ZS: 35-40° нахил",
+                        "novice": "Для новачків - L: <30° нахил"
+                    },
+                    "placeholder": "Проста, Середня, Складна…"
                 },
                 "piste/grooming": {
                     "label": "Підготовка траси",
@@ -2390,9 +2513,35 @@
                         "skating": "Ковзанковий хід"
                     }
                 },
+                "piste/grooming_downhill": {
+                    "label": "Підготовка траси",
+                    "options": {
+                        "backcountry": "Беккантрі - без підготовки",
+                        "classic": "Класична",
+                        "mogul": "Могул"
+                    }
+                },
+                "piste/grooming_hike": {
+                    "label": "Підготовка траси",
+                    "options": {
+                        "backcountry": "Беккантрі - Снігоступи",
+                        "classic": "Класична - Зимовий туризм"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "label": "Підготовка траси",
+                    "options": {
+                        "backcountry": "Беккантрі, без підготовки",
+                        "classic": "Класична",
+                        "classic+skating": "Класична та Ковзанковий хід",
+                        "scooter": "Скутер/Снігохід",
+                        "skating": "Ковзанковий хід"
+                    }
+                },
                 "piste/type": {
                     "label": "Тип",
                     "options": {
+                        "connection": "З'єднувач",
                         "downhill": "Гірськолижна",
                         "hike": "Пішки",
                         "ice_skate": "Ковзанка",
@@ -2458,6 +2607,14 @@
                 },
                 "recycling_accepts": {
                     "label": "Приймається"
+                },
+                "recycling_type": {
+                    "label": "Тип",
+                    "options": {
+                        "centre": "Центр",
+                        "container": "Контейнер"
+                    },
+                    "placeholder": "Контейнер, Приймальний пункт"
                 },
                 "ref": {
                     "label": "Номер"
@@ -2530,6 +2687,9 @@
                 },
                 "sanitary_dump_station": {
                     "label": "Злив каналізаційних відходів"
+                },
+                "scuba_diving": {
+                    "label": "Послуги"
                 },
                 "seasonal": {
                     "label": "Сезонний"
@@ -2702,6 +2862,9 @@
                 },
                 "surveillance/zone": {
                     "label": "Зона спостереження"
+                },
+                "swimming_pool": {
+                    "label": "Тип"
                 },
                 "switch": {
                     "label": "Тип",
@@ -3228,6 +3391,10 @@
                     "name": "Підготовча школа / Територія дитсадка",
                     "terms": "дитсадок, дошкільна підготовка, ясла"
                 },
+                "amenity/language_school": {
+                    "name": "Мовна школа",
+                    "terms": "мова,школа,іноземна"
+                },
                 "amenity/library": {
                     "name": "Бібліотека",
                     "terms": "Library, sksjntrf, бібліотека, книги, книжка, читач"
@@ -3259,10 +3426,6 @@
                 "amenity/nursing_home": {
                     "name": "Будинок престарілих"
                 },
-                "amenity/parking": {
-                    "name": "Автостоянка",
-                    "terms": "стоянка, паркування, парковка, fdnjcnjzyrf"
-                },
                 "amenity/parking_entrance": {
                     "name": "В’їзд/виїзд в паркінг",
                     "terms": "стоянка, паркінг"
@@ -3270,10 +3433,6 @@
                 "amenity/parking_space": {
                     "name": "Місце на стоянці",
                     "terms": "стоянка,місце,автомобіль"
-                },
-                "amenity/pavilion": {
-                    "name": "Павільйон",
-                    "terms": "павільйон,укриття,очікування"
                 },
                 "amenity/pharmacy": {
                     "name": "Аптека",
@@ -3351,10 +3510,6 @@
                     "name": "Контора лісництва",
                     "terms": "Ranger Station, rjynjhf kscybwndf, лісник, лісництво"
                 },
-                "amenity/recycling": {
-                    "name": "Контейнер для сміття ",
-                    "terms": "бляшанки,банки,пляшки,сміття,лахміття,лахи,вторинні ресурси,відходи"
-                },
                 "amenity/recycling_centre": {
                     "name": "Центру збору відходів для вторинної переробки",
                     "terms": "відходи,накопичення,сортування,воринна,сировина,пляшки,скло,бляшанки,ганчір'я,сміття,лом,поламані,речі"
@@ -3380,6 +3535,14 @@
                 "amenity/shelter": {
                     "name": "Притулок",
                     "terms": "накриття, навіс"
+                },
+                "amenity/shelter/gazebo": {
+                    "name": "Альтанка",
+                    "terms": "альтанка,укриття"
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Навіс",
+                    "terms": "укриття,навіс"
                 },
                 "amenity/shower": {
                     "name": "Душ",
@@ -3495,9 +3658,13 @@
                     "name": "Автомат продажу газет",
                     "terms": "газети,новини,журнали,преса"
                 },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
+                "amenity/vending_machine/parcel_pickup": {
                     "name": "Поштомат",
-                    "terms": "посилка,прийом,видача,пошта,доставка"
+                    "terms": "пошта,посилка,доставка,онлайн"
+                },
+                "amenity/vending_machine/parcel_pickup_dropoff": {
+                    "name": "Поштомат - видача/приймання відправлень",
+                    "terms": "пошта,відправлення,автомат,посилка,доставка"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Паркомат",
@@ -3653,10 +3820,6 @@
                 "barrier/hedge": {
                     "name": "Жива огорожа",
                     "terms": "Hedge, bdf jujhjf, живопліт, запліт, запуст"
-                },
-                "barrier/kerb": {
-                    "name": "Бордюр",
-                    "terms": "перешкода,бордюр"
                 },
                 "barrier/kissing_gate": {
                     "name": "Вузька хвіртка",
@@ -4079,8 +4242,7 @@
                     "terms": "вино, лоза, напої, алкоголь"
                 },
                 "embankment": {
-                    "name": "Насип",
-                    "terms": "Насип, вал"
+                    "name": "Насип"
                 },
                 "emergency/ambulance_station": {
                     "name": "Станція швидкої медичної допомоги",
@@ -4147,26 +4309,6 @@
                 "entrance": {
                     "name": "Вхід/вихід",
                     "terms": "вхід, вихід, блок, під’їзд, парадне, службовий"
-                },
-                "footway/crossing": {
-                    "name": "Перехід через дорогу",
-                    "terms": "Street Crossing,перехід,вулиця,дорога,перехід"
-                },
-                "footway/crossing-raised": {
-                    "name": "Припіднятий перехід через дорогу",
-                    "terms": "перешкода,швидкість,безпека,перехід,дорога,стіл,плаский,широкий"
-                },
-                "footway/crosswalk": {
-                    "name": "Пішохідний перехід",
-                    "terms": "Pedestrian Crosswalk,перехід,вулиця,дорога,перехід,зебра"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Припіднятий пішохідний перехід",
-                    "terms": "перешкода,швидкість,безпека,перехід,дорога,стіл,плаский,широкий,зебра"
-                },
-                "footway/sidewalk": {
-                    "name": "Тротуар вздовж дороги",
-                    "terms": "бокова доріжка, панель, тротуар, бровка"
                 },
                 "ford": {
                     "name": "Брід",
@@ -4294,22 +4436,6 @@
                     "name": "Коридор",
                     "terms": "Indoor Corridor,приміщення,коридор,прохід"
                 },
-                "highway/crossing": {
-                    "name": "Перехід через дорогу",
-                    "terms": "Street Crossing,перехід,вулиця,дорога,перехід"
-                },
-                "highway/crossing-raised": {
-                    "name": "Припіднятий перехід через дорогу",
-                    "terms": "перешкода,швидкість,безпека,перехід,дорога,стіл,плаский,широкий,горб"
-                },
-                "highway/crosswalk": {
-                    "name": "Пішохідний перехід",
-                    "terms": "Pedestrian Crosswalk,перехід,вулиця,дорога,перехід,зебра"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Припіднятий пішохідний перехід",
-                    "terms": "перешкода,швидкість,безпека,перехід,дорога,стіл,плаский,широкий,горб"
-                },
                 "highway/cycleway": {
                     "name": "Вело-доріжка",
                     "terms": "Cycle Path, dtkj-ljhsrf, веодоріжка"
@@ -4329,6 +4455,10 @@
                 "highway/living_street": {
                     "name": "Житлова зона",
                     "terms": "Living Street,bnkjdf pjyf,житлова зона"
+                },
+                "highway/milestone": {
+                    "name": "Кілометрова позначка",
+                    "terms": "позначка,табличка,кілометр,миля,верста,відстань,дорога,суходіл"
                 },
                 "highway/mini_roundabout": {
                     "name": "Малий круговий рух ",
@@ -4517,6 +4647,10 @@
                 "historic/wayside_shrine": {
                     "name": "Придорожня рака",
                     "terms": "Wayside Shrine, ghbljhjyz hfrf, гробниця, рака, придорожня рака"
+                },
+                "internet_access/wlan": {
+                    "name": "Точка доступу Wi-Fi",
+                    "terms": "wifi,wi-fi,інтернет,точка,доступ,тд,зв'язок"
                 },
                 "junction": {
                     "name": "Перехресття",
@@ -4709,6 +4843,10 @@
                     "name": "Ігрові автомати",
                     "terms": "один-на-один,ігра,автомат,відео,симулятор,пінбол"
                 },
+                "leisure/bandstand": {
+                    "name": "Естрада",
+                    "terms": "оркестр,виступ,майданчик,музика"
+                },
                 "leisure/beach_resort": {
                     "name": "Пляжний курорт",
                     "terms": "курорт,відпочинок,пляж,вода,дозвілля,розваги,готель,житло"
@@ -4853,9 +4991,9 @@
                     "name": "Поле для американського футболу",
                     "terms": "American Football Field, gjkt lkz fvthbrfycmrjuj aenjke, поле для американського футболу, американський футбол"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Бейсбольний майданчик",
-                    "terms": "Baseball Field, tqcjkmybq vfqlfyxbr, бейсбольний майданчик, бейсбол"
+                "leisure/pitch/badminton": {
+                    "name": "Майданчик для бадмінтону",
+                    "terms": "бадмінтон,спорт,майданчик"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Баскетбольний майданчик",
@@ -5024,10 +5162,6 @@
                     "name": "Станція спостереження",
                     "terms": "погода,землетрус,повітря,вода,сейсмологія,землетрус,gps,опади,повіні,рівень"
                 },
-                "man_made/observation": {
-                    "name": "Оглядова вежа",
-                    "terms": "Observation tower, jukzljdf dtf, пожежна вежа, вежа спостереження"
-                },
                 "man_made/observatory": {
                     "name": "Обсерваторія",
                     "terms": "астрономія,метеорологія,спостереження,зірки,погода"
@@ -5059,10 +5193,6 @@
                 "man_made/surveillance": {
                     "name": "Камера відео-спостереження",
                     "terms": "камера,спостереження,швидкість"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Камера відеоспостереження",
-                    "terms": "камера,спостереження,безпека,нагляд,швидкість,реєстрація,порушення,злочин,запис,відео"
                 },
                 "man_made/survey_point": {
                     "name": "Геодезичний пункт",
@@ -5195,10 +5325,6 @@
                 "natural/tree": {
                     "name": "Дерево",
                     "terms": "Tree, lthtdj, дерево"
-                },
-                "natural/tree_row": {
-                    "name": "Ряд дерев",
-                    "terms": "Tree row,дерева,ряд,рослини,природа"
                 },
                 "natural/volcano": {
                     "name": "Вулкан",
@@ -5388,10 +5514,6 @@
                     "name": "Водоканал",
                     "terms": "водопостачання,водовідведення,каналізація,послуги"
                 },
-                "piste": {
-                    "name": "Трек / Лижна траса",
-                    "terms": "доріжка, з’їзд, спуск"
-                },
                 "place": {
                     "name": "Місцевість"
                 },
@@ -5516,14 +5638,6 @@
                 "power/generator": {
                     "name": "Електростанція",
                     "terms": "Power Generator, tktrnhjcnfywsz, електростанція"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Ядерний реактор",
-                    "terms": "реактор,радіація,ядро,ділення,ядерний"
-                },
-                "power/generator/source_wind": {
-                    "name": "Вітро-електро установка",
-                    "terms": "генератор,вітер,вітряк,електрика,турбіна"
                 },
                 "power/line": {
                     "name": "Лінія електропередачі високої напруги",
@@ -6236,6 +6350,10 @@
                     "name": "Благодійний магазин",
                     "terms": "магазин, багодійний, низкі, ціни"
                 },
+                "shop/sewing": {
+                    "name": "Приладдя для шиття",
+                    "terms": "нитки,голки,пряжа,в'язальні спиці,швейні машини"
+                },
                 "shop/shoes": {
                     "name": "Взуття",
                     "terms": "Shoe Store,dpennz, взуття"
@@ -6641,6 +6759,10 @@
                     "name": "Заправка для човнів",
                     "terms": "petrol,gas,diesel,boat,пальне,бензин,дизпаливо,човен,лодка,газ"
                 },
+                "waterway/milestone": {
+                    "name": "Кілометрова позначка",
+                    "terms": "позначка,табличка,кілометр,миля,верста,відстань,вода,шлях"
+                },
                 "waterway/river": {
                     "name": "Ріка",
                     "terms": "River, hsrf, річка"
@@ -6802,9 +6924,6 @@
             "SPW_PICC": {
                 "name": "SPW (allonie) числові зображення PICC"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "На масштабах 16+, дані, що розповсюджуються US Census на умовах суспільного надбання. На менш докладних масштабах, тільки зміни з 2006 року з виключенням вже перенесених в OpenStreetMap даних.",
                 "name": "TIGER Roads 2014"
@@ -6812,6 +6931,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Жовтий = Дані, що розповсюджуються US Census на умовах суспільного надбання. Червоний = Дані, відсутні в OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Жовтий = Дані, що розповсюджуються US Census на умовах суспільного надбання. Червоний = Дані, відсутні в OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Дороги: Зелений контур = unclassified. Коричневий контур = track. Покриття: gravel = світло-коричневе заповнення, asphalt = чорне, paved = сіре, ground = біле, concrete = синє, grass = зелене. Seasonal = білі смуги",
@@ -6885,11 +7008,61 @@
                 "description": "Шат ортофото надається basemap.at. \"Наступник\" знімків від geoimage.at.",
                 "name": "basemap.at Ортофото"
             },
-            "hike_n_bike": {
+            "eufar-balaton": {
                 "attribution": {
-                    "text": "© Учасники OpenStreetMap"
+                    "text": "EUFAR Балатон ортофото 2010"
                 },
-                "name": "Туристині та велоспедні"
+                "description": "1940 р. гео-теговані фотографії Балатонського лімнологічного інституту.",
+                "name": "EUFAR Балатон ортофото"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 від finds.jp. Годиться для мапінгу, але трохи застарілі дані.",
+                "name": "Japan GSI KIBAN 2500"
+            },
+            "gsi.go.jp": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI ортофото. Зазвичай краще, ніж Bing, але трохи застарілі.",
+                "name": "Japan GSI ортофото"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI Стандартна мапа. Велике покриття.",
+                "name": "Japan GSI Стандартна мапа."
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg municipality"
+                },
+                "description": "Ортофоти муніципалітету Хельсінгборг, 2016 р., громадське надбання",
+                "name": "Хельсінгборг ортофото"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Ортофото північного узбережжя муніципалітету Кальмар, 2014 рік",
+                "name": "Ортофото північний Кальмар, 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Ортофото південного узбережжя муніципалітету Кальмар, 2016 рік",
+                "name": "Ортофото південний Кальмар, 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Ортофото міських районів муніципалітету Кальмар, 2018 рік",
+                "name": "Kalmar Urban Orthophoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -6911,6 +7084,20 @@
                 },
                 "description": "Мозаїка Шведських ортофото за період 1970-1980 рр. Можуть траплятись як старі так і нові зображення.",
                 "name": "Lantmäteriet Історичні ортофото 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Топомапа Швеції 1:50 000",
+                "name": "Lantmäteriet топомапа"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Ортофоти муніципалітету Лінчепінг, 2010 р., ввідкриті дані",
+                "name": "Лінчепінг ортофото"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -6975,6 +7162,13 @@
                     "text": "Тайли мапи від Stamen Design, CC BY 3.0. Дані OpenStreetMap, ODbL."
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Ортофоти муніципалітету Стокгольм, 2015 р., Ліцензія CC0",
+                "name": "Стокгольм ортофото"
             },
             "tf-cycle": {
                 "attribution": {
@@ -7252,11 +7446,6 @@
             "be-mailinglist": {
                 "name": "Talk-be Список розсилки",
                 "description": "Talk-be є офіційним списком розсилки для бельгійської спільноти OSM"
-            },
-            "be-maptime": {
-                "name": "Maptime Бельгія",
-                "description": "Соціальні заходи, пов'язані з мапінгом - в першу чергу запрошуємо початківців!",
-                "extendedDescription": "Maptime - це відкрите навчальне середовище для всіх, з різним ступенем  знань, пропонуе особисту ​​освітню підтримку для початківців. Maptime одночасно є гнучким та структурованим, створюючи простір для посібників з мапінгу, семінарів, поточних проектів із спільною метою та незалежним / спільним робочим часом."
             },
             "be-matrix": {
                 "name": "OpenStreetMap Бельгія Matrix чат",

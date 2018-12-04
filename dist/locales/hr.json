@@ -151,12 +151,6 @@
                 "annotation": "Uklonjen član relacije."
             },
             "connect": {
-                "annotation": {
-                    "point": "Put je spojen na točku.",
-                    "vertex": "Put povezan na drugi put.",
-                    "line": "Put je spojen na liniju.",
-                    "area": "Put je spojen na područje."
-                },
                 "relation": "Ovi elementi se ne mogu povezati jer imaju konfliktne uloge u relacijama.",
                 "restriction": "Ovi elementi se ne mogu povezati jer bi to oštetilo relaciju: \"{relation}\"."
             },
@@ -359,7 +353,6 @@
         "browser_notice": "Ovaj uređivač je podržan u Firefoxu, Chromeu, Safariju, Operi i Internet Exploreru 11 ili novijoj verziji. Molim nadogradi svoj internet preglednik ili koristi Potlatch 2 program za uređivanje karte.",
         "translate": {
             "translate": "Prevedi",
-            "localized_translation_label": "Višejezični naziv",
             "localized_translation_language": "Odaberi jezik",
             "localized_translation_name": "Ime"
         },
@@ -1844,15 +1837,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Težina",
-                    "options": {
-                        "advanced": "Napredno (crna staza)",
-                        "easy": "Lagano (zeleni krug)",
-                        "expert": "Ekspert (dupli crni dijamant)",
-                        "extreme": "Ekstremno (potrebna oprema za penjanje)",
-                        "freeride": "Slobodna vožnja (izvan staze)",
-                        "intermediate": "Srednje (crvena staza)",
-                        "novice": "Za početnike (baby staza)"
-                    },
                     "placeholder": "Lagano, srednje, napredno..."
                 },
                 "piste/grooming": {
@@ -2282,7 +2266,7 @@
                     "terms": "benzinska crpka,benzinska,benzinska stanica,benzinska pumpa"
                 },
                 "amenity/grave_yard": {
-                    "name": "Groblje",
+                    "name": "Groblje uz crkvu",
                     "terms": "groblje"
                 },
                 "amenity/grit_bin": {
@@ -2311,10 +2295,6 @@
                 },
                 "amenity/nightclub": {
                     "name": "Noćni klub"
-                },
-                "amenity/parking": {
-                    "name": "Parkiralište za automobile",
-                    "terms": "parkiralište,garaža,parkirno mjesto,podzemna garaža,parking"
                 },
                 "amenity/parking_entrance": {
                     "name": "Parking garaža Ulaz/Izlaz"
@@ -2425,7 +2405,7 @@
                     "terms": "gradska vijećnica,vijećnica,općinski dom"
                 },
                 "amenity/university": {
-                    "name": "Fakultetsko zemljište"
+                    "name": "Sveučilišno zemljište"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Automat za cigarete"
@@ -2441,9 +2421,6 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Automat za novine"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Automat za slanje/primanje paketa"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Automat za parkirališne karte"
@@ -2508,9 +2485,6 @@
                 },
                 "barrier/hedge": {
                     "name": "Živica"
-                },
-                "barrier/kerb": {
-                    "name": "Rubnjak"
                 },
                 "barrier/kissing_gate": {
                     "name": "Rotirajući prolaz za ljude"
@@ -2642,7 +2616,7 @@
                     "name": "Željeznički kolodvor"
                 },
                 "building/university": {
-                    "name": "Zgrada fakulteta"
+                    "name": "Zgrada sveučilišta"
                 },
                 "building/warehouse": {
                     "name": "Skladište"
@@ -2687,7 +2661,7 @@
                     "name": "Destilerija"
                 },
                 "craft/dressmaker": {
-                    "name": "Krojač"
+                    "name": "Krojač za žene"
                 },
                 "craft/electrician": {
                     "name": "Električar"
@@ -2766,7 +2740,7 @@
                     "name": "Zidar"
                 },
                 "craft/tailor": {
-                    "name": "Krojač"
+                    "name": "Krojač za muškarce"
                 },
                 "craft/tiler": {
                     "name": "Keramičar"
@@ -2803,16 +2777,6 @@
                 "entrance": {
                     "name": "Ulaz/izlaz"
                 },
-                "footway/crossing": {
-                    "name": "Pješački prijelaz",
-                    "terms": "zebra"
-                },
-                "footway/crosswalk": {
-                    "name": "Pješački prijelaz"
-                },
-                "footway/sidewalk": {
-                    "name": "Pločnik"
-                },
                 "ford": {
                     "name": "Prijelaz preko potoka"
                 },
@@ -2843,13 +2807,6 @@
                 },
                 "highway/corridor": {
                     "name": "Hodnik"
-                },
-                "highway/crossing": {
-                    "name": "Pješački prijelaz",
-                    "terms": "zebra"
-                },
-                "highway/crosswalk": {
-                    "name": "Pješački prijelaz"
                 },
                 "highway/cycleway": {
                     "name": "Biciklistička staza"
@@ -2889,7 +2846,7 @@
                     "name": "Ulica"
                 },
                 "highway/rest_area": {
-                    "name": "Odmorište"
+                    "name": "Odmorište bez benzinske stanice"
                 },
                 "highway/road": {
                     "name": "Nepoznata cesta"
@@ -3101,10 +3058,6 @@
                     "name": "Američki nogomet",
                     "terms": "igralište za američki nogomet"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Baseball igralište",
-                    "terms": "bejzbol igralište"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Košarkaški teren",
                     "terms": "košarkaško igralište"
@@ -3179,10 +3132,6 @@
                 "man_made/lighthouse": {
                     "name": "Svjetionik",
                     "terms": "svjetionik,svjetlosni signal,toranj za svjetlosnu navigaciju"
-                },
-                "man_made/observation": {
-                    "name": "Toranj za promatranje",
-                    "terms": "toranj za promatranje,čeka,vidikovački toranj,toranj vidikovac,promatrajući toranj"
                 },
                 "man_made/petroleum_well": {
                     "name": "Izvor nafte"
@@ -3263,7 +3212,7 @@
                     "terms": "ledenjak,glečer,vrh prekriven ledom,naslaga vječnoga leda"
                 },
                 "natural/grassland": {
-                    "name": "Travnjak",
+                    "name": "Prirodni travnjak",
                     "terms": "travnjak,prirodni travnjak,livada,pašnjak"
                 },
                 "natural/heath": {
@@ -3293,9 +3242,6 @@
                 "natural/tree": {
                     "name": "Drvo",
                     "terms": "stablo,drvo,deblo"
-                },
-                "natural/tree_row": {
-                    "name": "Drvored"
                 },
                 "natural/volcano": {
                     "name": "Vulkan"
@@ -3357,9 +3303,6 @@
                 },
                 "office/travel_agent": {
                     "name": "Putnička agencija"
-                },
-                "piste": {
-                    "name": "Skijaška staza"
                 },
                 "place": {
                     "name": "Mjesto"
@@ -3790,7 +3733,7 @@
                     "terms": "trgovina sportske opreme,dućan sportske opreme,sportski dućan,sportska trgovina,prodavaonica sportske opreme"
                 },
                 "shop/stationery": {
-                    "name": "Knjižara",
+                    "name": "Papirnica",
                     "terms": "papirnica,prodavaonica tiskanica,prodavaonica papira,trgovina papirom,knjižara"
                 },
                 "shop/supermarket": {
@@ -3855,7 +3798,7 @@
                     "name": "Trgovina za oružje"
                 },
                 "shop/wine": {
-                    "name": "Vinarija"
+                    "name": "Prodavaonica vina"
                 },
                 "tourism": {
                     "name": "Turizam",
@@ -3924,11 +3867,11 @@
                     "terms": "zoološki vrt,zoopark,park sa životinjama"
                 },
                 "traffic_calming/bump": {
-                    "name": "Uspornik",
+                    "name": "Kratki uspornik u širini ceste",
                     "terms": "ležeći policajac"
                 },
                 "traffic_calming/hump": {
-                    "name": "Uspornik",
+                    "name": "Duži uspornik u širini ceste",
                     "terms": "ležeći policajac"
                 },
                 "type/boundary": {
@@ -4151,9 +4094,6 @@
                 },
                 "name": "OSM Inspector: Označavanje"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER ceste 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "name": "TIGER ceste 2014"
             },
@@ -4187,12 +4127,6 @@
                 },
                 "description": "Ortofoto sloj omogućen od basemap.at. \"Nasljednik\" geoimage.at snimaka.",
                 "name": "basemap.at Ortofoto"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMap doprinositelji"
-                },
-                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

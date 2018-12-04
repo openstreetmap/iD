@@ -149,14 +149,6 @@
             "delete_member": {
                 "annotation": "Kümeden bir üye silindi. "
             },
-            "connect": {
-                "annotation": {
-                    "point": "Bir yol bir noktaya bağlandı.",
-                    "vertex": "Bir yol diğerine bağlandı.",
-                    "line": "Bir yol bir çizgiye bağlandı.",
-                    "area": "Bir yol bir alana bağlandı."
-                }
-            },
             "disconnect": {
                 "title": "Birbirinden ayır",
                 "description": "Bu çizgileri/alanları birbirinden ayır.",
@@ -325,7 +317,6 @@
         "browser_notice": "Bu editör Firefox, Chrome, Safari, Opera ve Internet Explorer 11+ tarafından destekleniyor. Lütfen tarayıcını güncelle ya da Potlatch 2 programı ile haritayı düzenle.",
         "translate": {
             "translate": "Çevir",
-            "localized_translation_label": "Yerel dilde adı",
             "localized_translation_language": "Dil seç",
             "localized_translation_name": "İsim"
         },
@@ -2032,15 +2023,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Zorluk",
-                    "options": {
-                        "advanced": "Çok Zor (siyah)",
-                        "easy": "Kolay (yeşil)",
-                        "expert": "Çok Zor (çift siyah)",
-                        "extreme": "Aşırı Zor (tırmanma gerekebilir)",
-                        "freeride": "Serbest (pist dışı)",
-                        "intermediate": "Orta (mavi)",
-                        "novice": "Başlangıç (eğitim amaçlı)"
-                    },
                     "placeholder": "Kolay, Orta, İleri Derece"
                 },
                 "piste/grooming": {
@@ -2856,10 +2838,6 @@
                 "amenity/nursing_home": {
                     "name": "Bakım Evi"
                 },
-                "amenity/parking": {
-                    "name": "Otopark",
-                    "terms": "Otopark, Araç Parkı"
-                },
                 "amenity/parking_entrance": {
                     "name": "Garaş Giriş/Çıkışı",
                     "terms": "Garaş Giriş/Çıkışı, Park Yeri Giriş/Çıkışı"
@@ -2867,10 +2845,6 @@
                 "amenity/parking_space": {
                     "name": "Park Yeri",
                     "terms": "Park Yeri"
-                },
-                "amenity/pavilion": {
-                    "name": "Köşk",
-                    "terms": "Köşk, Pavyon, Müzikhol"
                 },
                 "amenity/pharmacy": {
                     "name": "Eczane",
@@ -2947,10 +2921,6 @@
                 "amenity/ranger_station": {
                     "name": "Korucu İstasyonu",
                     "terms": "Korucu İstasyonu, Korucu Evi"
-                },
-                "amenity/recycling": {
-                    "name": "Geri Dönüşüm Kutusu",
-                    "terms": "Geri Dönüşüm Konteyneri"
                 },
                 "amenity/recycling_centre": {
                     "name": "Geri Dönüşüm Merkezi",
@@ -3067,10 +3037,6 @@
                 "amenity/vending_machine/newspapers": {
                     "name": "Gazete Satış Makinası",
                     "terms": "Gazete Satış Makinası, Gazete Otomatı"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Posta Alma-Bırakma Makinası",
-                    "terms": "Posta Alma-Bırakma Makinası"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Park Fişi Otomatı",
@@ -3212,9 +3178,6 @@
                 "barrier/hedge": {
                     "name": "Koruma Duvarı",
                     "terms": "Koruma Duvarı"
-                },
-                "barrier/kerb": {
-                    "name": "Bordür"
                 },
                 "barrier/kissing_gate": {
                     "name": "Sadece İnsanlar İçin Giriş Kapısı",
@@ -3621,8 +3584,7 @@
                     "terms": "Şarap Fabrikası"
                 },
                 "embankment": {
-                    "name": "Toprak Dolgu",
-                    "terms": "Toprak Dolgu, Toprak Set"
+                    "name": "Toprak Dolgu"
                 },
                 "emergency/ambulance_station": {
                     "name": "Ambulans İstasyonu",
@@ -3667,24 +3629,6 @@
                 "entrance": {
                     "name": "Giriş/Çıkış",
                     "terms": "Giriş/Çıkış"
-                },
-                "footway/crossing": {
-                    "name": "Geçit",
-                    "terms": "Geçit"
-                },
-                "footway/crossing-raised": {
-                    "name": "Üst Geçit"
-                },
-                "footway/crosswalk": {
-                    "name": "Yaya Geçidi",
-                    "terms": "Yaya Geçidi"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Yaya Üst Geçidi"
-                },
-                "footway/sidewalk": {
-                    "name": "Kaldırım",
-                    "terms": "Kaldırım"
                 },
                 "ford": {
                     "name": "Sığ Geçit, Akarsu Üzerinde Geçit Yeri",
@@ -3806,20 +3750,6 @@
                 "highway/corridor": {
                     "name": "Koridor",
                     "terms": "Koridor, Geçit"
-                },
-                "highway/crossing": {
-                    "name": "Geçit",
-                    "terms": "Yaya Geçidi, Geçit"
-                },
-                "highway/crossing-raised": {
-                    "name": "Üst Geçit"
-                },
-                "highway/crosswalk": {
-                    "name": "Yaya Geçidi",
-                    "terms": "Yaya Geçidi, Geçit"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Yaya Üst Geçidi"
                 },
                 "highway/cycleway": {
                     "name": "Bisiklet Yolu",
@@ -4280,10 +4210,6 @@
                     "name": "Amerikan Futbol Sahası",
                     "terms": "Amerikan Futbol Sahası"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Beyzbol Sahası",
-                    "terms": "Beyzbol Sahası"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Basketbol Sahası",
                     "terms": "Basketbol Sahası"
@@ -4429,10 +4355,6 @@
                     "name": "Direk",
                     "terms": "Baz İstasyonu"
                 },
-                "man_made/observation": {
-                    "name": "Gözetleme Kulesi",
-                    "terms": "Gözetleme Kulesi"
-                },
                 "man_made/petroleum_well": {
                     "name": "Petrol Kuyusu",
                     "terms": "Petrol Kuyusu"
@@ -4460,10 +4382,6 @@
                 "man_made/surveillance": {
                     "name": "Güvenlik Direği",
                     "terms": "Güvenlik Direği"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Güvenlik Kamerası",
-                    "terms": "Güvenlik Kamerası"
                 },
                 "man_made/survey_point": {
                     "name": "Ölçüm Kontrol Noktası",
@@ -4579,10 +4497,6 @@
                 "natural/tree": {
                     "name": "Ağaç",
                     "terms": "Ağaç"
-                },
-                "natural/tree_row": {
-                    "name": "Ağaç Dizisi",
-                    "terms": "Ağaç Dizisi, Ağaçlar"
                 },
                 "natural/volcano": {
                     "name": "Yanardağ",
@@ -4771,10 +4685,6 @@
                 "office/water_utility": {
                     "name": "Su Müdürlüğü",
                     "terms": "Su ve Kanalizasyon Müdürlüğü"
-                },
-                "piste": {
-                    "name": "Kayak Pisti",
-                    "terms": "Kayak Pisti"
                 },
                 "place": {
                     "name": "Yer"
@@ -5960,9 +5870,6 @@
                 },
                 "name": "OSM Müfettişi: Etiketleme"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "16'dan büyük ölçekte, US Census verileri. Daha küçük ölçeklerde, 2006'dan bu yana yapılmış güncellemeler - OpenStreetMap güncellemeleri hariç",
                 "name": "TIGER Roads 2014"
@@ -6013,12 +5920,6 @@
                 },
                 "description": "basemap.at - daha önce geoimage.at - tarafından sağlanan Orthofoto katmanı.",
                 "name": "basemap.at Orthofoto"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMap destekçileri"
-                },
-                "name": "Yürüyüş & Bisiklet"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

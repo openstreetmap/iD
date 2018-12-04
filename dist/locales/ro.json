@@ -132,14 +132,6 @@
             "delete_member": {
                 "annotation": "Am șters un membru dintr-o relație."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Am conectat o cale cu un punct.",
-                    "vertex": "Am conectat o cale cu alta.",
-                    "line": "Am conectat o cale la o linie.",
-                    "area": "Am conectat o cale la o suprafață."
-                }
-            },
             "disconnect": {
                 "title": "Deconectează",
                 "description": "Deconectează aceste linii/suprafețe de ele insele.",
@@ -223,7 +215,6 @@
         "tooltip_keyhint": "Scurtătură:",
         "translate": {
             "translate": "Traduce",
-            "localized_translation_label": "Nume multilingual",
             "localized_translation_language": "Alege limba",
             "localized_translation_name": "Nume"
         },
@@ -1067,9 +1058,6 @@
                 "display": {
                     "label": "Afișare"
                 },
-                "distance": {
-                    "label": "Distanţă totală"
-                },
                 "dock": {
                     "label": "Tip"
                 },
@@ -1783,17 +1771,11 @@
                 "amenity/nightclub": {
                     "name": "Club de Noapte"
                 },
-                "amenity/parking": {
-                    "name": " Parcare de Mașini"
-                },
                 "amenity/parking_entrance": {
                     "name": "Intrare/Ieșire Garaj"
                 },
                 "amenity/parking_space": {
                     "name": "Loc de Parcare"
-                },
-                "amenity/pavilion": {
-                    "name": "Pavilion"
                 },
                 "amenity/pharmacy": {
                     "name": "Farmacie"
@@ -2080,15 +2062,6 @@
                 "entrance": {
                     "name": "Intrare/Ieșire"
                 },
-                "footway/crossing": {
-                    "name": "Traversare"
-                },
-                "footway/crosswalk": {
-                    "name": "Traversare de Pietoni"
-                },
-                "footway/sidewalk": {
-                    "name": "Drum de Pietoni"
-                },
                 "ford": {
                     "name": "Vad"
                 },
@@ -2106,12 +2079,6 @@
                 },
                 "highway/corridor": {
                     "name": "Coridor Interior"
-                },
-                "highway/crossing": {
-                    "name": "Traversare de Stradă"
-                },
-                "highway/crosswalk": {
-                    "name": "Traversare pentru Pietoni"
                 },
                 "highway/cycleway": {
                     "name": "Pistă biciclete"
@@ -2368,9 +2335,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Teren de Fotbal American"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Teren de Baseball"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Teren de Basket"
                 },
@@ -2437,9 +2401,6 @@
                 "man_made/lighthouse": {
                     "name": "Far"
                 },
-                "man_made/observation": {
-                    "name": "Turn de Observație"
-                },
                 "man_made/pier": {
                     "name": "Chei"
                 },
@@ -2457,9 +2418,6 @@
                 },
                 "man_made/surveillance": {
                     "name": "Supraveghere"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Cameră de Supraveghere"
                 },
                 "man_made/tower": {
                     "name": "Turn"
@@ -2526,9 +2484,6 @@
                 },
                 "natural/tree": {
                     "name": "Copac"
-                },
-                "natural/tree_row": {
-                    "name": "Rând de Copaci"
                 },
                 "natural/volcano": {
                     "name": "Vulcan"
@@ -2605,9 +2560,6 @@
                 "office/travel_agent": {
                     "name": "Agenție de Călătorii"
                 },
-                "piste": {
-                    "name": "Pistă de Schi"
-                },
                 "place": {
                     "name": "Loc"
                 },
@@ -2652,12 +2604,6 @@
                 },
                 "power/generator": {
                     "name": "Generator de Energie"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Reactor Nuclear"
-                },
-                "power/generator/source_wind": {
-                    "name": "Turbină de Vânt"
                 },
                 "power/line": {
                     "name": "Linie de Alimentare"
@@ -3290,12 +3236,6 @@
                 },
                 "description": "Strat Orthofoto furnizat de basemap.at. \"Succesor\" al imaginilor geoimage.at.",
                 "name": "Orthofoto basemap.at "
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© Contribuitori OpenStreetMap"
-                },
-                "name": "Drumeție & Bicicletă"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

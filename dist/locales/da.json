@@ -145,12 +145,6 @@
                 "annotation": "Fjernede et medlem fra en relation."
             },
             "connect": {
-                "annotation": {
-                    "point": "Forbandt en vej til et punkt.",
-                    "vertex": "Forbandt en vej til en anden.",
-                    "line": "Forbandt en vej til en linje.",
-                    "area": "Forbandt en vej til et område."
-                },
                 "relation": "Disse kortobjekter kan ikke forbindes, da deres relationsroller er i konflikt. ",
                 "restriction": "Disse kortobjekter kan ikke forbindes, da det ville skade en \"{relation}\"-relation."
             },
@@ -354,7 +348,6 @@
         "browser_notice": "Dette redigeringsværktøj er understøttet af Firefox, Chrome, Safari, Opera og Internet Explorer 11 og højere. Opgrader din browser eller brug Potlatch 2 for at redigere.",
         "translate": {
             "translate": "Oversæt",
-            "localized_translation_label": "Flersproget navn",
             "localized_translation_language": "Vælg sprog",
             "localized_translation_name": "Navn"
         },
@@ -2160,15 +2153,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Sværhedsgrad",
-                    "options": {
-                        "advanced": "Avanceret (sort diamant)",
-                        "easy": "Nemt (grøn cirkel)",
-                        "expert": "Ekspert (dobbelt sort diamant)",
-                        "extreme": "Ekstremt (klatreudstyr påkrævet)",
-                        "freeride": "Freeride (off-piste)",
-                        "intermediate": "Mellemsvært (blå firkant)",
-                        "novice": "Nybegynder (vejledning)"
-                    },
                     "placeholder": "Let, mellemsvær, avanceret..."
                 },
                 "piste/grooming": {
@@ -2990,10 +2974,6 @@
                 "amenity/nursing_home": {
                     "name": "Plejehjem"
                 },
-                "amenity/parking": {
-                    "name": "Bilparkering",
-                    "terms": "Bilparkering, Parkering"
-                },
                 "amenity/parking_entrance": {
                     "name": "Parkeringsgarage Indgang/Udgang",
                     "terms": "Parkeringsgarage Indgang/Udgang, Parkeringskælder Indgang/Udgang"
@@ -3001,10 +2981,6 @@
                 "amenity/parking_space": {
                     "name": "Parkeringsbås",
                     "terms": "Parkeringsbås"
-                },
-                "amenity/pavilion": {
-                    "name": "Pavilion",
-                    "terms": "Pavilion"
                 },
                 "amenity/pharmacy": {
                     "name": "Apotek",
@@ -3081,10 +3057,6 @@
                 "amenity/ranger_station": {
                     "name": "Rangerstation",
                     "terms": "Rangerstation"
-                },
-                "amenity/recycling": {
-                    "name": "Genbrugscontainer",
-                    "terms": "genbrug, miljø, ressourcer"
                 },
                 "amenity/recycling_centre": {
                     "name": "Genbrugsplads",
@@ -3203,10 +3175,6 @@
                 "amenity/vending_machine/newspapers": {
                     "name": "Avis-salgsautomat",
                     "terms": "Avis-salgsautomat, automat, avis"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Pakkepostautomat",
-                    "terms": "Pakkepostautomat"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parkeringsbilletautomat",
@@ -3716,8 +3684,7 @@
                     "terms": "Vingård"
                 },
                 "embankment": {
-                    "name": "Forhøjning til tog, vej",
-                    "terms": "Forhøjning, Vold"
+                    "name": "Forhøjning til tog, vej"
                 },
                 "emergency/ambulance_station": {
                     "name": "Udrykningsstation",
@@ -3760,24 +3727,6 @@
                 "entrance": {
                     "name": "Indgang/Udgang",
                     "terms": "Indgang/Udgang"
-                },
-                "footway/crossing": {
-                    "name": "Gadekryds",
-                    "terms": "Gadekryds, Vejkryds"
-                },
-                "footway/crossing-raised": {
-                    "name": "Hævet fodgængerkryds"
-                },
-                "footway/crosswalk": {
-                    "name": "Fodgængerovergang",
-                    "terms": "Fodgængerovergang"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Hævet fodgængerovergang"
-                },
-                "footway/sidewalk": {
-                    "name": "Fortov",
-                    "terms": "Fortov"
                 },
                 "ford": {
                     "name": "Vadested",
@@ -3884,19 +3833,8 @@
                     "name": "Indendørskorridor",
                     "terms": "Indendørskorridor, Indendørspassage"
                 },
-                "highway/crossing": {
-                    "name": "Gadekryds",
-                    "terms": "Gadekryds, Vejkryds"
-                },
-                "highway/crossing-raised": {
-                    "name": "Hævet gadekryds"
-                },
-                "highway/crosswalk": {
-                    "name": "Fodgængerfelt",
-                    "terms": "Fodgængerfelt"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Hævet fodgængerovergang"
+                "highway/crossing/unmarked": {
+                    "name": "Fodgængerovergang"
                 },
                 "highway/cycleway": {
                     "name": "Cykelsti",
@@ -4060,7 +3998,7 @@
                     "terms": "Helleanlæg (trafikø)"
                 },
                 "highway/unclassified": {
-                    "name": "Mindre/Uspecificeret vej",
+                    "name": "Mindre offentlig vej udenfor byområde",
                     "terms": "Mindre/Uspecificeret vej"
                 },
                 "historic": {
@@ -4356,10 +4294,6 @@
                     "name": "Amerikansk fodboldbane",
                     "terms": "Amerikansk Fodboldbane"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Baseballbane",
-                    "terms": "Baseballbane"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Basketballbane",
                     "terms": "Basketballbane"
@@ -4480,6 +4414,10 @@
                     "name": "Bro",
                     "terms": "Bro"
                 },
+                "man_made/bunker_silo": {
+                    "name": "Plansilo",
+                    "terms": "Køresilo"
+                },
                 "man_made/chimney": {
                     "name": "Skorsten",
                     "terms": "Skorsten"
@@ -4519,10 +4457,6 @@
                     "name": "Mast",
                     "terms": "Mast"
                 },
-                "man_made/observation": {
-                    "name": "Observationstårn",
-                    "terms": "observationstårn, udkigstårn"
-                },
                 "man_made/observatory": {
                     "name": "Observatorie",
                     "terms": "astronomi, astrofysik, meteorologi"
@@ -4549,15 +4483,11 @@
                 },
                 "man_made/storage_tank": {
                     "name": "Lagertank",
-                    "terms": "Lagertank"
+                    "terms": "Tank, Gylletank"
                 },
                 "man_made/surveillance": {
                     "name": "Overvågning",
                     "terms": "Overvågning"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Overvågningskamera",
-                    "terms": "Overvågningskamera, videoovervågning"
                 },
                 "man_made/survey_point": {
                     "name": "Geografisk fixpunkt",
@@ -4685,10 +4615,6 @@
                     "name": "Træ",
                     "terms": "Træ"
                 },
-                "natural/tree_row": {
-                    "name": "Trærække",
-                    "terms": "Trærække"
-                },
                 "natural/volcano": {
                     "name": "Vulkan",
                     "terms": "Vulkan"
@@ -4805,10 +4731,6 @@
                 "office/travel_agent": {
                     "name": "Rejsebureau"
                 },
-                "piste": {
-                    "name": "Skiløjper/Skispor",
-                    "terms": "Skiløjper/Skispor"
-                },
                 "place": {
                     "name": "Lokalitet"
                 },
@@ -4884,14 +4806,6 @@
                 "power/generator": {
                     "name": "Kraftværk",
                     "terms": "Kraftværk"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Atomreaktor",
-                    "terms": "atom,nuklear,kernekraft"
-                },
-                "power/generator/source_wind": {
-                    "name": "Vindmølle",
-                    "terms": "mølle,vind,strøm"
                 },
                 "power/line": {
                     "name": "Elledning",
@@ -5892,9 +5806,6 @@
                 },
                 "name": "OSM Inspector: Tagging"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "Ved zoom-niveau 16+ offentligt tilgængelige public domain kort-data fra US Census. Ved lavere niveauer kun ændringer siden 2006, eksklusiv ændringer allerede indarbejdet i OpenStreetMap.",
                 "name": "TIGER Roads 2014"
@@ -5946,12 +5857,6 @@
                 },
                 "description": "Ortofoto-lag leveret af basemap.at. \"Efterfølger\" til geoimage.at.",
                 "name": "basemap.at Ortofoto"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMap bidragsydere"
-                },
-                "name": "Vandring & Cykling"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

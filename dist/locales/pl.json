@@ -1,9 +1,11 @@
 {
     "pl": {
         "icons": {
+            "download": "pobierz",
             "information": "informacja",
             "remove": "usuń",
-            "undo": "Cofnij"
+            "undo": "Cofnij",
+            "zoom_to": "powiększ do"
         },
         "modes": {
             "add_area": {
@@ -152,10 +154,20 @@
             },
             "connect": {
                 "annotation": {
-                    "point": "Połączono linię z punktem.",
-                    "vertex": "Połączono linie.",
-                    "line": "Połączono drogę z linią.",
-                    "area": "Połączono drogę z obszarem."
+                    "from_vertex": {
+                        "to_point": "Połączono drogę z punktem ",
+                        "to_vertex": "Połączono dwie drogi.",
+                        "to_line": "Połączono drogę z linią.",
+                        "to_area": "Połączono drogę z obszarem.",
+                        "to_adjacent_vertex": "Połączono przylegające punkty na drodze.",
+                        "to_sibling_vertex": "Połączono drogę z samą sobą."
+                    },
+                    "from_point": {
+                        "to_point": "Połączono dwa punkty.",
+                        "to_vertex": "Połączono punkt z punktem na drodze.",
+                        "to_line": "Przesunięto punkt na linię ",
+                        "to_area": "Przesunięto punkt na obszar."
+                    }
                 },
                 "relation": "Te obiekty nie mogą zostać połączone, ponieważ mają sprzeczne role w relacji.",
                 "restriction": "Te obiekty nie mogą zostać połączone, ponieważ uszkodziłoby to relację „{relation}”."
@@ -371,6 +383,10 @@
         "loading_auth": "Łączenie z OpenStreetMap...",
         "report_a_bug": "Zgłoś błąd",
         "help_translate": "Pomóż przetłumaczyć",
+        "sidebar": {
+            "key": "`",
+            "tooltip": "Przełącz panel boczny."
+        },
         "feature_info": {
             "hidden_warning": "{count} ukrytych obiektów",
             "hidden_details": "Te obiekty są akutalnie ukryte: {details}"
@@ -496,7 +512,7 @@
             "remove": "Usuń",
             "search": "Szukaj",
             "multiselect": "Wybrane obiekty",
-            "unknown": "brak",
+            "unknown": "Nieznane",
             "incomplete": "<nie pobrane>",
             "feature_list": "Wyszukiwanie rodzaju obiektu",
             "edit": "Edytor obiektu",
@@ -518,7 +534,10 @@
             "way": "Linia",
             "relation": "Relacja",
             "location": "Położenie",
-            "add_fields": "Dodaj pole:"
+            "add_fields": "Dodaj pole:",
+            "lock": {
+                "suggestion": "Pole \"{label}\" jest zablokowane, ponieważ jest to tag Wikidata. Możesz je usunąć lub edytować tagi w sekcji \"Wszystkie tagi\"."
+            }
         },
         "background": {
             "title": "Warstwa tła",
@@ -1323,6 +1342,7 @@
                     "background_switch": "Wróć do ostatniego podkładu",
                     "map_data": "Wyświetl opcje danych mapy",
                     "fullscreen": "Wejdź w tryb pełnoekranowy",
+                    "sidebar": "Przełącz panel boczny",
                     "wireframe": "Przełącz tryb szkieletowy",
                     "minimap": "Przełącz minimapę"
                 },
@@ -1455,6 +1475,9 @@
                 "category-route": {
                     "name": "Trasa"
                 },
+                "category-utility": {
+                    "name": "Funkcje użytkowe"
+                },
                 "category-water-area": {
                     "name": "Woda"
                 },
@@ -1471,12 +1494,12 @@
                             "title": "Wyznaczony"
                         },
                         "destination": {
-                            "description": "Dostęp dozwolony tylko, by dotrzeć do celu",
+                            "description": "Dostęp dozwolony tylko by dotrzeć do celu",
                             "title": "Docelowy"
                         },
                         "dismount": {
                             "description": "Dostęp dozwolony tylko, gdy jeździec zsiądzie z pojazdu/zwierzęcia",
-                            "title": "Zejdź z roweru i go poprowadź"
+                            "title": "Zejdź z pojazdu go poprowadź"
                         },
                         "no": {
                             "description": "Niedostępne dla ogólnego ruchu",
@@ -1525,8 +1548,8 @@
                         "county!jp": "Powiat",
                         "district": "Dystrykt",
                         "district!vn": "Okręg/Miejscowość/Dystrykt",
-                        "floor": "Piętro (adres)",
-                        "hamlet": "Przysiółek",
+                        "floor": "Nr piętra",
+                        "hamlet": "Przysiółek/kolonia",
                         "housename": "Nazwa domu",
                         "housenumber": "123",
                         "housenumber!jp": "Nr budynku/działki",
@@ -1539,7 +1562,7 @@
                         "quarter": "Dzielnica/kwartał/wyższy okręg",
                         "quarter!jp": "Ōaza/Machi",
                         "state": "Stan",
-                        "street": "Ulica (nie miejscowość)",
+                        "street": "Ulica",
                         "subdistrict": "Sub-dystrykt",
                         "subdistrict!vn": "Osiedle/Wspólnota/Miasteczko",
                         "suburb": "Dzielnica",
@@ -1680,6 +1703,9 @@
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
                 },
+                "bridge/support": {
+                    "label": "Rodzaj"
+                },
                 "building": {
                     "label": "Budynek"
                 },
@@ -1709,7 +1735,7 @@
                     }
                 },
                 "capacity": {
-                    "label": "Pojemność",
+                    "label": "Liczba miejsc",
                     "placeholder": "50, 100, 200..."
                 },
                 "cash_in": {
@@ -1727,6 +1753,9 @@
                 "collection_times": {
                     "label": "Godziny odbioru"
                 },
+                "colour": {
+                    "label": "Kolor"
+                },
                 "comment": {
                     "label": "Opis zmian",
                     "placeholder": "Krótki opis dla Twoich zmian (wymagany)"
@@ -1743,6 +1772,14 @@
                 },
                 "content": {
                     "label": "Zawartość"
+                },
+                "conveying": {
+                    "label": "Kierunek ruchu",
+                    "options": {
+                        "backward": "Wstecz",
+                        "forward": "W przód",
+                        "reversible": "Odwracalne"
+                    }
                 },
                 "country": {
                     "label": "Kraj"
@@ -1836,6 +1873,9 @@
                 "description": {
                     "label": "Opis obiektu"
                 },
+                "design": {
+                    "label": "Konstrukcja"
+                },
                 "devices": {
                     "label": "Liczba urządzeń",
                     "placeholder": "1, 2, 3..."
@@ -1890,7 +1930,7 @@
                     "label": "Typ wyświetlacza"
                 },
                 "distance": {
-                    "label": "Całkowita Odległość"
+                    "label": "Odległość"
                 },
                 "dock": {
                     "label": "Typ"
@@ -1963,11 +2003,17 @@
                         "wall": "Mur"
                     }
                 },
+                "fireplace": {
+                    "label": "Miejsce na ognisko"
+                },
                 "fitness_station": {
                     "label": "Rodzaj urządzeń"
                 },
                 "fixme": {
                     "label": "Popraw mnie (fixme)"
+                },
+                "flag/type": {
+                    "label": "Rodzaj flagi"
                 },
                 "ford": {
                     "label": "Rodzaj",
@@ -1975,6 +2021,9 @@
                 },
                 "frequency": {
                     "label": "Częstotliwość pracy"
+                },
+                "from": {
+                    "label": "Z"
                 },
                 "fuel": {
                     "label": "Paliwo"
@@ -2041,6 +2090,15 @@
                 },
                 "historic/civilization": {
                     "label": "Cywilizacja historyczna"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Data zatonięcia"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Widoczny przy wysokiej fali"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Widoczny w czasie odpływu"
                 },
                 "hoops": {
                     "label": "Kosz",
@@ -2142,6 +2200,9 @@
                     "label": "Pasy ruchu",
                     "placeholder": "1, 2, 3..."
                 },
+                "language_multi": {
+                    "label": "Języki"
+                },
                 "layer": {
                     "label": "Warstwa",
                     "placeholder": "0"
@@ -2201,6 +2262,14 @@
                 "location": {
                     "label": "Lokalizacja"
                 },
+                "location_pool": {
+                    "label": "Lokalizacja",
+                    "options": {
+                        "indoor": "Wewnątrz",
+                        "outdoor": "Na zewnątrz",
+                        "roof": "Na dachu"
+                    }
+                },
                 "man_made": {
                     "label": "Typ"
                 },
@@ -2212,6 +2281,9 @@
                 },
                 "map_type": {
                     "label": "Typ"
+                },
+                "material": {
+                    "label": "Tworzywo"
                 },
                 "maxheight": {
                     "label": "Maksymalna wysokość",
@@ -2274,7 +2346,7 @@
                     "placeholder": "0, 1, 2, 3..."
                 },
                 "name": {
-                    "label": "Nazwa [~s dla litery ś]",
+                    "label": "Nazwa",
                     "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)"
                 },
                 "natural": {
@@ -2387,13 +2459,50 @@
                 "piste/difficulty": {
                     "label": "Stopień trudności",
                     "options": {
+                        "advanced": "Trudny",
+                        "easy": "Łatwy",
+                        "expert": "Dla zawodowców",
+                        "extreme": "Ekstremalny",
+                        "freeride": "Swobodna jazda",
+                        "intermediate": "Średni",
+                        "novice": "Dla początkujących"
+                    },
+                    "placeholder": "Łatwa, Średnia, Zaawansowana..."
+                },
+                "piste/difficulty_downhill": {
+                    "label": "Trudność",
+                    "options": {
                         "advanced": "Zaawansowana (czarny romb)",
                         "easy": "Łatwa (zielony okrąg)",
                         "expert": "Ekspercka (podwójny czarny romb)",
                         "extreme": "Ekstremalna (konieczne wyposażenie wspinaczkowe)",
-                        "freeride": "Zjazd pozatrasowy",
-                        "intermediate": "Średni (niebieski kwadrat)",
-                        "novice": "Początkujący"
+                        "freeride": "Swobodna jazda (poza trasą)",
+                        "intermediate": "Średnia (niebieski kwadrat)",
+                        "novice": "Początkujący (ośla łączka)"
+                    },
+                    "placeholder": "Łatwa, Średnia, Zaawansowana..."
+                },
+                "piste/difficulty_nordic": {
+                    "label": "Trudność",
+                    "options": {
+                        "advanced": "Zaawansowana - wąska, strome lub oblodzone fragmenty, ostre zakręty",
+                        "easy": "Łatwa - delikatne pagórki, krótkie strome odcinki",
+                        "expert": "Ekspercka - niebezpieczny teren dookoła",
+                        "intermediate": "Średnia - strome fragmenty",
+                        "novice": "Początkujący - płaska, niewymagająca wysiłku"
+                    },
+                    "placeholder": "Łatwa, Średnia, Zaawansowana..."
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Trudność",
+                    "options": {
+                        "advanced": "Zaawansowana - S: 40-45° nachylenia",
+                        "easy": "Łatwa - WS: 30-35° nachylenia",
+                        "expert": "Ekspercka - SS: 45–50° nachylenia",
+                        "extreme": "Ekstremalna - EX: >55° nachylenia",
+                        "freeride": "Freeride - AS: 50–55° nachylenia",
+                        "intermediate": "Średnia - ZS: 35-40° nachylenia",
+                        "novice": "Początkujący - L: <30° nachylenia"
                     },
                     "placeholder": "Łatwa, Średnia, Zaawansowana..."
                 },
@@ -2401,16 +2510,42 @@
                     "label": "Ratrakowanie",
                     "options": {
                         "backcountry": "Obozowisko",
-                        "classic": "frez klasyczny",
+                        "classic": "Frez klasyczny",
                         "classic+skating": "Multifrez",
                         "mogul": "Muldy",
                         "scooter": "Dla skuterów śnieżnych",
                         "skating": "Łyżwiarstwo"
                     }
                 },
+                "piste/grooming_downhill": {
+                    "label": "Ratrakowanie",
+                    "options": {
+                        "backcountry": "Dzika - bez ratrakowania",
+                        "classic": "Klasycznie",
+                        "mogul": "Muldy"
+                    }
+                },
+                "piste/grooming_hike": {
+                    "label": "Ratrakowanie",
+                    "options": {
+                        "backcountry": "Dzika - rakiety śnieżne",
+                        "classic": "Klasyczna - zimowa wspinaczka"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "label": "Ratrakowanie",
+                    "options": {
+                        "backcountry": "Dzika, bez ratrakowania",
+                        "classic": "Klasyczna",
+                        "classic+skating": "Klasyczna i skating",
+                        "scooter": "Dla skuterów śnieżnych",
+                        "skating": "Skating"
+                    }
+                },
                 "piste/type": {
                     "label": "Typ",
                     "options": {
+                        "connection": "Połączenie",
                         "downhill": "Downhill",
                         "hike": "Turystyka piesza",
                         "ice_skate": "Łyżwiarstwo",
@@ -2476,6 +2611,14 @@
                 },
                 "recycling_accepts": {
                     "label": "Przyjmuje"
+                },
+                "recycling_type": {
+                    "label": "Rodzaj",
+                    "options": {
+                        "centre": "Centrum",
+                        "container": "Kontener"
+                    },
+                    "placeholder": "Kontener, Centrum"
                 },
                 "ref": {
                     "label": "Kod referencyjny"
@@ -2549,8 +2692,98 @@
                 "sanitary_dump_station": {
                     "label": "Miejsce opróżniania toalety"
                 },
+                "scuba_diving": {
+                    "label": "Usługi"
+                },
+                "seamark/beacon_isolated_danger/shape": {
+                    "label": "Kształt"
+                },
+                "seamark/beacon_lateral/category": {
+                    "label": "Kategoria",
+                    "options": {
+                        "danger_left": "Niebezpieczeństwo, lewy",
+                        "danger_right": "Niebezpieczeństwo, prawy",
+                        "port": "Port",
+                        "starboard": "Burta",
+                        "waterway_left": "Droga wodna, lewy",
+                        "waterway_right": "Droga wodna, prawy"
+                    }
+                },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Kolor",
+                    "options": {
+                        "green": "Zielony",
+                        "grey": "Szary",
+                        "red": "Czerwony"
+                    }
+                },
+                "seamark/beacon_lateral/shape": {
+                    "label": "Kształt"
+                },
+                "seamark/beacon_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Inny"
+                    }
+                },
+                "seamark/buoy_lateral/category": {
+                    "label": "Kategoria",
+                    "options": {
+                        "channel_left": "Kanał, lewa",
+                        "channel_right": "Kanał, prawa",
+                        "danger_left": "Niebezpieczeństwo, lewa",
+                        "danger_right": "Niebezpieczeństwo, prawa",
+                        "port": "Port",
+                        "preferred_channel_port": "Preferowany kanał portowy",
+                        "preferred_channel_starboard": "Preferowany kanał burtowy",
+                        "starboard": "Burta",
+                        "waterway_left": "Droga wodna, lewa",
+                        "waterway_right": "Droga wodna, prawa"
+                    }
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Kolor",
+                    "options": {
+                        "green": "Zielony",
+                        "green;red;green": "Zielony-Czerwony-Zielony",
+                        "green;white;green;white": "Zielony-Biały-Zielony-Biały",
+                        "red": "Czerwony",
+                        "red;green;red": "Czerwony-Zielony-Czerwony",
+                        "red;white;red;white": "Czerwony-Biały-Czerwony-Biały",
+                        "white": "Biały",
+                        "yellow": "Żółty"
+                    }
+                },
+                "seamark/buoy_lateral/shape": {
+                    "label": "Kształt"
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Inny"
+                    }
+                },
+                "seamark/mooring/category": {
+                    "label": "Kategoria"
+                },
+                "seamark/type": {
+                    "label": "Znak wodny"
+                },
+                "seamark/wreck/category": {
+                    "label": "Kategoria"
+                },
                 "seasonal": {
                     "label": "Sezonowy"
+                },
+                "seats": {
+                    "label": "Miejsca",
+                    "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
                     "label": "Sprzedaż używanych",
@@ -2721,6 +2954,9 @@
                 "surveillance/zone": {
                     "label": "Obszar Dozoru"
                 },
+                "swimming_pool": {
+                    "label": "Rodzaj"
+                },
                 "switch": {
                     "label": "Rodzaj",
                     "options": {
@@ -2741,6 +2977,9 @@
                         "yes": "Tak"
                     },
                     "placeholder": "Tak, Nie, Tylko na wynos..."
+                },
+                "to": {
+                    "label": "Do"
                 },
                 "toilets/disposal": {
                     "label": "Opróżnianie",
@@ -2786,6 +3025,17 @@
                 },
                 "traffic_calming": {
                     "label": "Rodzaj"
+                },
+                "traffic_sign": {
+                    "label": "Znak drogowy"
+                },
+                "traffic_sign/direction": {
+                    "label": "Kierunek",
+                    "options": {
+                        "backward": "Do tyłu",
+                        "both": "Oba / Wszystkie",
+                        "forward": "Do przodu"
+                    }
                 },
                 "traffic_signals": {
                     "label": "Rodzaj"
@@ -3149,8 +3399,8 @@
                     "terms": "zegarek"
                 },
                 "amenity/college": {
-                    "name": "Teren szkoły",
-                    "terms": "tereny szkolne"
+                    "name": "Teren szkoły policealnej",
+                    "terms": "teren szkoły policealnej"
                 },
                 "amenity/community_centre": {
                     "name": "Centrum społeczności",
@@ -3175,9 +3425,13 @@
                     "name": "Dentysta",
                     "terms": "stomatolog, gabinet stomatologiczny"
                 },
+                "amenity/dive_centre": {
+                    "name": "Centrum nurkowe",
+                    "terms": "centrum nurkowe,nurkowanie,nurkować"
+                },
                 "amenity/doctors": {
-                    "name": "Gabinet lub przychodnia lekarska",
-                    "terms": "lekarz, doktor, nzoz, przychodnia lekarska"
+                    "name": "Gabinet lekarski lub praktyka lekarzy rodzinnych",
+                    "terms": "lekarz, doktor,gabinet lekarski"
                 },
                 "amenity/dojo": {
                     "name": "Dojo/szkoła sztuk walki",
@@ -3196,8 +3450,32 @@
                     "terms": "ambasada, konsulat"
                 },
                 "amenity/fast_food": {
-                    "name": "Fast-food/bar",
+                    "name": "Bar/fast-food",
                     "terms": "kebab, hot dog, fast food, McDonald's, McDonald, bar"
+                },
+                "amenity/fast_food/burger": {
+                    "name": "Bar z burgerami",
+                    "terms": "bar z burgerami,burgery"
+                },
+                "amenity/fast_food/chicken": {
+                    "name": "Bar z kurczakiem z rożna",
+                    "terms": "kurczak z rożna"
+                },
+                "amenity/fast_food/fish_and_chips": {
+                    "name": "Bar z rybą i frytkami",
+                    "terms": "bar z rybą i frytkami"
+                },
+                "amenity/fast_food/kebab": {
+                    "name": "Bar z kebabem",
+                    "terms": "kebab,kebap"
+                },
+                "amenity/fast_food/pizza": {
+                    "name": "Bar z pizzą",
+                    "terms": "pizzeria"
+                },
+                "amenity/fast_food/sandwich": {
+                    "name": "Bar kanapkowy",
+                    "terms": "bar kanapkowy,kanapki"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Terminal promowy"
@@ -3246,6 +3524,10 @@
                     "name": "Teren przedszkola/żłobka",
                     "terms": "teren żłobka, teren przedszkola"
                 },
+                "amenity/language_school": {
+                    "name": "Szkoła językowa",
+                    "terms": "esl,szkoła języków,języki"
+                },
                 "amenity/library": {
                     "name": "Biblioteka",
                     "terms": "biblioteka,czytelnia"
@@ -3278,8 +3560,12 @@
                     "name": "Dom spokojnej starości"
                 },
                 "amenity/parking": {
-                    "name": "Parking samochodowy",
-                    "terms": "Parking dla samochodów"
+                    "name": "Miejsce parkingowe",
+                    "terms": "samochód,parking"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Parking wielopoziomowy",
+                    "terms": "parking wielopiętrowy,samochód,parking wewnętrzny,parking wielopoziomowy,budynek parkingu,pokład parkingowy,garaż parkingowy,rampa parkingowa,struktura parkingowa"
                 },
                 "amenity/parking_entrance": {
                     "name": "Wjazd/wyjazd z parkingu/garażu",
@@ -3289,9 +3575,13 @@
                     "name": "Miejsce/miejsca parkingowe (pojedyncze lub ich zwarty blok)",
                     "terms": "zatoczka"
                 },
-                "amenity/pavilion": {
-                    "name": "Altana",
-                    "terms": "altana,pawilon,daszek,zadaszenie"
+                "amenity/payment_centre": {
+                    "name": "Centrum płatnicze",
+                    "terms": "czeki,podatki,rachunki,waluta,finanse,gotówka,pieniądze"
+                },
+                "amenity/payment_terminal": {
+                    "name": "Terminal płatniczy",
+                    "terms": "infokiosk,ekiosk,bankomat,rachunki,podatki,płatności telefoniczne,finanse,gotówka,przelew,karta"
                 },
                 "amenity/pharmacy": {
                     "name": "Apteka",
@@ -3370,12 +3660,15 @@
                     "terms": "straż rezerwatu, straż parku narodowego"
                 },
                 "amenity/recycling": {
-                    "name": "Kontener do recyclingu",
-                    "terms": "utylizacja, recyklizacja, recycling"
+                    "name": "Przetwarzanie odpadów"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centrum przetwarzania odpadów (recycling)",
                     "terms": "centrum przetwarzania odpadów, centrum recyclingu"
+                },
+                "amenity/recycling_container": {
+                    "name": "Pojemnik na surowce wtórne",
+                    "terms": "kosz,pojemnik,kontener,śmieci,szkło,papier,metal,plastik,śmietnik,butelki,puszki"
                 },
                 "amenity/register_office": {
                     "name": "Urząd stanu cywilnego"
@@ -3384,12 +3677,84 @@
                     "name": "Restauracja",
                     "terms": "Bar,Kawiarnia,Stołówka,Jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria,karczma,zajazd"
                 },
+                "amenity/restaurant/american": {
+                    "name": "Restauracja amerykańska",
+                    "terms": "restauracja amerykańska,kuchnia amerykańska"
+                },
+                "amenity/restaurant/asian": {
+                    "name": "Restauracja azjatycka",
+                    "terms": "restauracja azjatycka,kuchnia azjatycka"
+                },
+                "amenity/restaurant/chinese": {
+                    "name": "Restauracja chińska",
+                    "terms": "restauracja chińska,kuchnia chińska"
+                },
+                "amenity/restaurant/french": {
+                    "name": "Restauracja francuska",
+                    "terms": "restauracja francuska,francuska"
+                },
+                "amenity/restaurant/german": {
+                    "name": "Restauracja niemiecka",
+                    "terms": "restauracja niemiecka,kuchnia niemiecka"
+                },
+                "amenity/restaurant/greek": {
+                    "name": "Restauracja grecka",
+                    "terms": "restauracja grecka,kuchnia grecka"
+                },
+                "amenity/restaurant/indian": {
+                    "name": "Restauracja hinduska",
+                    "terms": "restauracja hinduska,kuchnia indyjska"
+                },
+                "amenity/restaurant/italian": {
+                    "name": "Restauracja włoska",
+                    "terms": "restauracja włoska,kuchnia włoska"
+                },
+                "amenity/restaurant/japanese": {
+                    "name": "Restauracja japońska",
+                    "terms": "restauracja japońska,kuchnia japońska"
+                },
+                "amenity/restaurant/mexican": {
+                    "name": "Restauracja meksykańska",
+                    "terms": "restauracja meksykańska,kuchnia meksykańska"
+                },
+                "amenity/restaurant/noodle": {
+                    "name": "Restauracja z makaronem",
+                    "terms": "restauracja z makaronem,makaron"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "Pizzeria",
+                    "terms": "pizzera,pizza"
+                },
+                "amenity/restaurant/seafood": {
+                    "name": "Restauracja z owocami morza",
+                    "terms": "owoce morza"
+                },
+                "amenity/restaurant/steakhouse": {
+                    "name": "Restauracja serwująca głównie steki",
+                    "terms": "steki"
+                },
+                "amenity/restaurant/sushi": {
+                    "name": "Restauracja z sushi",
+                    "terms": "sushi"
+                },
+                "amenity/restaurant/thai": {
+                    "name": "Restauracja tajska",
+                    "terms": "restauracja tajska,kuchnia tajska"
+                },
+                "amenity/restaurant/turkish": {
+                    "name": "Restauracja turecka",
+                    "terms": "restauracja turecka,kuchnia turecka"
+                },
+                "amenity/restaurant/vietnamese": {
+                    "name": "Restauracja wietnamska",
+                    "terms": "restauracja wietnamska,kuchnia wietnamska"
+                },
                 "amenity/sanitary_dump_station": {
                     "name": "Miejsce opróżniania toalety (dla kamperów)",
                     "terms": "Miejsce opróżniania toalety (kemping)"
                 },
                 "amenity/school": {
-                    "name": "Teren szkoły",
+                    "name": "Szkoła podstawowa/średnia - teren (nie stosować dla budynku!)",
                     "terms": "tereny szkolne"
                 },
                 "amenity/scrapyard": {
@@ -3398,6 +3763,22 @@
                 "amenity/shelter": {
                     "name": "Schronienie",
                     "terms": "schronienie,"
+                },
+                "amenity/shelter/gazebo": {
+                    "name": "Altana",
+                    "terms": "altana"
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Zadaszenie",
+                    "terms": "zadaszenie"
+                },
+                "amenity/shelter/picnic_shelter": {
+                    "name": "Wiata piknikowa",
+                    "terms": "zadaszenie piknikowe,pawilon"
+                },
+                "amenity/shelter/public_transport": {
+                    "name": "Wiata tranzytowa",
+                    "terms": "wiata przystankowa,przystanek autobusowy,stacja metra,oczekiwanie"
                 },
                 "amenity/shower": {
                     "name": "Prysznic",
@@ -3446,17 +3827,25 @@
                     "name": "Teatr",
                     "terms": "teatr,sztuka,przedstawienie"
                 },
+                "amenity/theatre/type/amphi": {
+                    "name": "Amfiteatr",
+                    "terms": "amfiteatr,na świeżym powietrzu,na zewnątrz,grecki,amfi"
+                },
                 "amenity/toilets": {
                     "name": "Toalety publiczne",
                     "terms": "toaleta,wc"
                 },
                 "amenity/townhall": {
-                    "name": "Ratusz (siedziba władz)",
+                    "name": "Ratusz - siedziba władz",
                     "terms": "władze miasta,ratusz,urząd miasta,urząd gminy,starostwo"
                 },
                 "amenity/university": {
                     "name": "Teren uczelni wyższej",
                     "terms": "teren uniwersytetu,teren akademii,teren politechniki"
+                },
+                "amenity/vehicle_inspection": {
+                    "name": "Kontrola pojazdów",
+                    "terms": "kontrola pojazdów,kontrola samochodów"
                 },
                 "amenity/vending_machine": {
                     "name": "Automat sprzedający",
@@ -3499,7 +3888,7 @@
                     "terms": "automat do sprzedaży jedzenia,jedzenie,pożywienie"
                 },
                 "amenity/vending_machine/fuel": {
-                    "name": "Pompa gazowa",
+                    "name": "Automat paliwowy",
                     "terms": "dystrybutor,paliwo,gaz,benzyna,diesel,lng,cng,biodiesel"
                 },
                 "amenity/vending_machine/ice_cream": {
@@ -3513,9 +3902,13 @@
                     "name": "Automat z gazetami",
                     "terms": "Automat z gazetami"
                 },
+                "amenity/vending_machine/parcel_pickup": {
+                    "name": "Paczkomat",
+                    "terms": "amazon,paczki,przesyłki,paczkomat,odbiór"
+                },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Paczkomat z funkcją nadawania przesyłek",
-                    "terms": "paczkomat"
+                    "name": "Paczkomat z możliwością nadawania przesyłek",
+                    "terms": "paczki,przesyłki,paczkomat,odbiór,wysyłanie"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parkomat",
@@ -3617,6 +4010,10 @@
                     "name": "Kolejka górska",
                     "terms": "kolejka górska, rollercoaster"
                 },
+                "attraction/summer_toboggan": {
+                    "name": "Letnie saneczkarstwo",
+                    "terms": "letnie saneczkarstwo,zjazd alpejski,kolejka górska"
+                },
                 "attraction/train": {
                     "name": "Pociąg turystyczny",
                     "terms": "pociąg turystyczny"
@@ -3664,9 +4061,17 @@
                     "name": "Płot",
                     "terms": "ogrodzenie,płot"
                 },
+                "barrier/fence/railing": {
+                    "name": "Poręcz",
+                    "terms": "poręcz"
+                },
                 "barrier/gate": {
                     "name": "Brama",
                     "terms": "brama,bramka,przejście,furtka"
+                },
+                "barrier/guard_rail": {
+                    "name": "Barierka",
+                    "terms": "barierka,bariera ochronna,bariera drogowa,bariera energochłonna,bariera Armco"
                 },
                 "barrier/hedge": {
                     "name": "Żywopłot",
@@ -3674,7 +4079,11 @@
                 },
                 "barrier/kerb": {
                     "name": "Krawężnik",
-                    "terms": "krawężnik,krawędź"
+                    "terms": "krawężnik"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "Obniżony krawężnik",
+                    "terms": "obniżony krawężnik,wycięty krawężnik,rampa,opuszczony krawężnik,łagodny zjazd"
                 },
                 "barrier/kissing_gate": {
                     "name": "Kissing Gate",
@@ -3704,6 +4113,14 @@
                     "name": "Granica administracyjna",
                     "terms": "granica,administracyjna,granice,administracyjne"
                 },
+                "bridge/support": {
+                    "name": "Filar mostu",
+                    "terms": "podpora mostu"
+                },
+                "bridge/support/pier": {
+                    "name": "Pomost",
+                    "terms": "filar mostu"
+                },
                 "building": {
                     "name": "Budynek (ogólny)",
                     "terms": "budynek,budowla,dom"
@@ -3730,6 +4147,10 @@
                 "building/cabin": {
                     "name": "Domek letniskowy/kempingowy",
                     "terms": "chata, dom letniskowy"
+                },
+                "building/carport": {
+                    "name": "Wiata",
+                    "terms": "wiata,zadaszone miejsce parkingowe,garaż,samochód,podjazd"
                 },
                 "building/cathedral": {
                     "name": "Budynek katedralny",
@@ -3822,6 +4243,10 @@
                     "name": "Budynek meczetu",
                     "terms": "meczet"
                 },
+                "building/pavilion": {
+                    "name": "Budynek pawilonu",
+                    "terms": "pawilon,sporty"
+                },
                 "building/public": {
                     "name": "Budynek publiczny",
                     "terms": "budynek użyteczności publicznej"
@@ -3843,8 +4268,8 @@
                     "terms": "ruiny,wyburzony"
                 },
                 "building/school": {
-                    "name": "Budynek szkolny",
-                    "terms": "budynek szkoły, szkoła"
+                    "name": "Budynek wyglądający jak szkoła",
+                    "terms": "budynek szkolny"
                 },
                 "building/semidetached_house": {
                     "name": "Bliźniak",
@@ -3894,15 +4319,15 @@
                     "terms": "Magazyn"
                 },
                 "camp_site/camp_pitch": {
-                    "name": "Miejsce na Kempingu",
-                    "terms": "miejsce na namiot"
+                    "name": "Indywidualne miejsce na kempingu",
+                    "terms": "miejsce na namiot,miejsce na kampera"
                 },
                 "circular": {
-                    "name": "Rondo"
+                    "name": "Skrzyżowanie o ruchu okrężnym"
                 },
                 "club": {
                     "name": "Klub",
-                    "terms": "klub,imprezownia"
+                    "terms": "klub"
                 },
                 "craft": {
                     "name": "Rzemiosło",
@@ -4097,8 +4522,7 @@
                     "terms": "winiarnia,winnica,wino"
                 },
                 "embankment": {
-                    "name": "Nasyp",
-                    "terms": "nasyp, wał"
+                    "name": "Nasyp"
                 },
                 "emergency/ambulance_station": {
                     "name": "Stacja pogotowia ratunkowego (budynek)",
@@ -4165,26 +4589,6 @@
                 "entrance": {
                     "name": "Wejście/wyjście",
                     "terms": "Wejście, Wyjście"
-                },
-                "footway/crossing": {
-                    "name": "Przejście dla pieszych",
-                    "terms": "Przejście dla pieszych"
-                },
-                "footway/crossing-raised": {
-                    "name": "Podniesione przejście dla pieszych",
-                    "terms": "podniesione przejście dla pieszych, podwyższone przejście dla pieszych"
-                },
-                "footway/crosswalk": {
-                    "name": "Przejście dla pieszych z zebrą",
-                    "terms": "zebra"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Podniesione przejście dla pieszych",
-                    "terms": "podniesione przejście dla pieszych, podwyższone przejście dla pieszych"
-                },
-                "footway/sidewalk": {
-                    "name": "Chodnik przy jezdni",
-                    "terms": "chodnik, droga dla pieszych"
                 },
                 "ford": {
                     "name": "Bród",
@@ -4312,21 +4716,27 @@
                     "name": "Korytarz (w budynku)",
                     "terms": "korytarz, hall"
                 },
-                "highway/crossing": {
-                    "name": "Przejście dla pieszych",
-                    "terms": "Przejście drogowe"
+                "highway/crossing/marked": {
+                    "name": "Oznakowane przejście dla pieszych",
+                    "terms": "oznaczone przejście dla pieszych,zebra,przejście dla pieszych"
                 },
-                "highway/crossing-raised": {
-                    "name": "Przejście dla pieszych-podwyższone",
-                    "terms": "podwyższone przejście dla pieszych, wyniesione przejście dla pieszych"
+                "highway/crossing/marked-raised": {
+                    "name": "Oznakowane przejście dla pieszych (podwyższone)",
+                    "terms": "oznaczone przejście dla pieszych (wyniesione),zebra,przejście dla pieszych,płaska góra,próg zwalniający,prędkość,powoli"
                 },
-                "highway/crosswalk": {
-                    "name": "Przejście dla pieszych",
-                    "terms": "Przejście drogowe"
+                "highway/crossing/unmarked": {
+                    "name": "Nieoznakowane przejście",
+                    "terms": "nieoznaczone przejście dla pieszych"
                 },
-                "highway/crosswalk-raised": {
-                    "name": "Przejście dla pieszych-podwyższone i oznakowane",
-                    "terms": "podwyższone oznakowane przejście dla pieszych"
+                "highway/crossing/unmarked-raised": {
+                    "name": "Nieoznakowane przejście (podwyższone)",
+                    "terms": "nieoznaczone przejście dla pieszych (wyniesione),płaska góra,próg zwalniający,prędkość,powoli"
+                },
+                "highway/crossing/zebra": {
+                    "name": "Oznakowane przejście dla pieszych"
+                },
+                "highway/crossing/zebra-raised": {
+                    "name": "Oznakowane przejście dla pieszych (podwyższone)"
                 },
                 "highway/cycleway": {
                     "name": "Droga rowerowa",
@@ -4340,6 +4750,36 @@
                     "name": "Droga/ścieżka dla pieszych",
                     "terms": "pobocze,bulwar,ścieżka,deptak,szosa,spacer,chodnik"
                 },
+                "highway/footway/conveying": {
+                    "name": "Ruchomy chodnik",
+                    "terms": "ruchomy chodnik,automatyczny chodnik,przenośnik"
+                },
+                "highway/footway/marked": {
+                    "name": "Oznakowane przejście dla pieszych",
+                    "terms": "oznaczone przejście dla pieszych,zebra,przejście dla pieszych"
+                },
+                "highway/footway/marked-raised": {
+                    "name": "Oznakowane przejście dla pieszych (podwyższone)",
+                    "terms": "oznaczone przejście dla pieszych (wyniesione),zebra,przejście dla pieszych,płaska góra,próg zwalniający,prędkość,powoli"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Chodnik przy jezdni",
+                    "terms": "chodnik, droga dla pieszych"
+                },
+                "highway/footway/unmarked": {
+                    "name": "Nieoznakowane przejście",
+                    "terms": "nieoznaczone przejście dla pieszych"
+                },
+                "highway/footway/unmarked-raised": {
+                    "name": "Nieoznakowane przejście (podwyższone)",
+                    "terms": "nieoznaczone przejście dla pieszych (wyniesione),płaska góra,próg zwalniający,prędkość,powoli"
+                },
+                "highway/footway/zebra": {
+                    "name": "Oznakowane przejście dla pieszych"
+                },
+                "highway/footway/zebra-raised": {
+                    "name": "Oznakowane przejście dla pieszych (podwyższone)"
+                },
                 "highway/give_way": {
                     "name": "Ustąp pierwszeństwa przejazdu",
                     "terms": "ustąp pierwszeństwa przejazdu"
@@ -4347,6 +4787,10 @@
                 "highway/living_street": {
                     "name": "Droga w oznaczonej znakami D-40/D-41 strefie zamieszkania",
                     "terms": "strefa zamieszkania"
+                },
+                "highway/milestone": {
+                    "name": "Słupek pikietażowy",
+                    "terms": "słupek kilometrowy,pikietaż"
                 },
                 "highway/mini_roundabout": {
                     "name": "Mini-rondo",
@@ -4448,6 +4892,10 @@
                     "name": "Schody",
                     "terms": "schody"
                 },
+                "highway/steps/conveying": {
+                    "name": "Schody ruchome",
+                    "terms": "ruchome schody, stopnie, ruch ludzi, jazda"
+                },
                 "highway/stop": {
                     "name": "Znak stop",
                     "terms": "znak,stop,zatrzymania"
@@ -4536,6 +4984,14 @@
                     "name": "Przydrożna kapliczka",
                     "terms": "kapliczka,przydrożna"
                 },
+                "historic/wreck": {
+                    "name": "Wrak statku",
+                    "terms": "wrak statku,kadłub,maszt,morski,pozostałości,statek,łódź"
+                },
+                "internet_access/wlan": {
+                    "name": "Hotspot Wi-Fi",
+                    "terms": "wi-fi,wifi,wlan,hotspot"
+                },
                 "junction": {
                     "name": "Skrzyżowanie",
                     "terms": "krzyżówka"
@@ -4577,7 +5033,7 @@
                     "terms": "teren budowy,budowa,obszar budowy"
                 },
                 "landuse/farm": {
-                    "name": "Użytki rolne"
+                    "name": "Użytki rolne lub podwórze gospodarcze"
                 },
                 "landuse/farmland": {
                     "name": "Pola uprawne",
@@ -4660,8 +5116,8 @@
                     "terms": "Port wojenny"
                 },
                 "landuse/military/nuclear_explosion_site": {
-                    "name": "Nuklearny poligon doświadczalny",
-                    "terms": "Nuklearny poligon doświadczalny"
+                    "name": "Doświadczalny poligon jądrowy",
+                    "terms": "atom,wybuch,bomba,detonacja,miejsce,poligon,jądrowy,nuklearny"
                 },
                 "landuse/military/obstacle_course": {
                     "name": "Tor przeszkód",
@@ -4727,6 +5183,10 @@
                     "name": "Salon gier",
                     "terms": "salon gier,automaty wrzutowe,gry wideo,symulatory jazdy,pinball"
                 },
+                "leisure/bandstand": {
+                    "name": "Estrada",
+                    "terms": "estrada,scena,występy"
+                },
                 "leisure/beach_resort": {
                     "name": "Resort nadmorski",
                     "terms": "nadmorski ośrodek"
@@ -4762,6 +5222,10 @@
                 "leisure/firepit": {
                     "name": "Miejsce na ognisko",
                     "terms": "ognisko"
+                },
+                "leisure/fishing": {
+                    "name": "Łowisko",
+                    "terms": "miejsce łowienia ryb,łowisko"
                 },
                 "leisure/fitness_centre": {
                     "name": "Fitness",
@@ -4877,7 +5341,7 @@
                 },
                 "leisure/pitch/baseball": {
                     "name": "Boisko do baseballu",
-                    "terms": "baseball"
+                    "terms": "boisko do baseballa"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Boisko do koszykówki",
@@ -4918,6 +5382,10 @@
                 "leisure/pitch/soccer": {
                     "name": "Boisko do piłki nożnej",
                     "terms": "boisko piłkarskie, boisko do piłki nożnej"
+                },
+                "leisure/pitch/softball": {
+                    "name": "Boisko do softballu",
+                    "terms": "boisko do softballa,softball"
                 },
                 "leisure/pitch/table_tennis": {
                     "name": "Stół do tenisa stołowego",
@@ -5020,7 +5488,8 @@
                     "terms": "przecinka"
                 },
                 "man_made/embankment": {
-                    "name": "Nasyp"
+                    "name": "Nasyp",
+                    "terms": "nasyp,wał"
                 },
                 "man_made/flagpole": {
                     "name": "Maszt flagowy",
@@ -5042,13 +5511,25 @@
                     "name": "Maszt",
                     "terms": "Wieża radiowa, maszt"
                 },
+                "man_made/mast/communication": {
+                    "name": "Maszt komunikacyjny",
+                    "terms": "antena,wieża przekaźnikowa,maszt telefoniczny,maszt komórkowy,maszt komunikacyjny,wieża komunikacyjna,maszt telefonii komórkowej,maszt radiowy,wieża radiowa,wieża telewizyjna,maszt transmisyjny,wieża transmisyjna,wieża tv"
+                },
+                "man_made/mast/communication/mobile_phone": {
+                    "name": "Maszt telefonii komórkowej",
+                    "terms": "antena,maszt komórkowy,maszt telefonii komórkowej,wieża telefonii komórkowej,maszt komunikacyjny,wieża komunikacyjna,maszt transmisyjny,wieża transmisyjna"
+                },
+                "man_made/mast/communication/radio": {
+                    "name": "Maszt radiowy",
+                    "terms": "antena,wieża nadawcza,maszt komunikacyjny,wieża komunikacyjna,maszt radiowy,wieża radiowa,maszt transmisyjny,wieża transmisyjna"
+                },
+                "man_made/mast/communication/television": {
+                    "name": "Maszt telewizyjny",
+                    "terms": "antena,wieża nadawcza,maszt komunikacyjny,wieża komunikacyjna,maszt telewizyjny,wieża telewizyjna,maszt transmisyjny,wieża transmisyjna,maszt tv,wieża tv"
+                },
                 "man_made/monitoring_station": {
                     "name": "Stacja monitoringu",
                     "terms": "stacja monitoringu, pomiary"
-                },
-                "man_made/observation": {
-                    "name": "Wieża obserwacyjna",
-                    "terms": "wieża obserwacyjna"
                 },
                 "man_made/observatory": {
                     "name": "Obserwatorium",
@@ -5082,9 +5563,9 @@
                     "name": "Monitoring",
                     "terms": "ochrona monitoringowa"
                 },
-                "man_made/surveillance_camera": {
+                "man_made/surveillance/camera": {
                     "name": "Kamera monitoringu",
-                    "terms": "monitoring"
+                    "terms": "kamera,rozpoznawanie tablic samochodowych,cctv,ochroniarz,rozpoznawanie tablic rejestracyjnych,monitoring,rozpoznawanie numerów rejestracyjnych,ochrona,wideo,kamera internetowa"
                 },
                 "man_made/survey_point": {
                     "name": "Punkt geodezyjny",
@@ -5093,6 +5574,14 @@
                 "man_made/tower": {
                     "name": "Wieża",
                     "terms": "wieża"
+                },
+                "man_made/tower/communication": {
+                    "name": "Wieża komunikacyjna",
+                    "terms": "antena,wieża nadawcza,maszt telefoniczny,maszt komórkowy,maszt komunikacyjny,wieża komunikacyjna,maszt telefonii komórkowej,maszt radiowy,wieża radiowa,wieża telewizyjna,maszt transmisyjny,wieża transmisyjna,wieża tv"
+                },
+                "man_made/tower/observation": {
+                    "name": "Wieża obserwacyjna",
+                    "terms": "wieża obserwacyjna,wieża pożarowa"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Oczyszczalnia ścieków",
@@ -5220,7 +5709,7 @@
                 },
                 "natural/tree_row": {
                     "name": "Rząd drzew",
-                    "terms": "szpaler drzew"
+                    "terms": "rząd drzew"
                 },
                 "natural/volcano": {
                     "name": "Wulkan",
@@ -5383,6 +5872,10 @@
                     "name": "Biuro organizacji prawie pozarządowej",
                     "terms": "biuro organizacji quasi-ngo,ngo,organizacja pozarządowa,pozarządowa,organizacja,prawie niezależna"
                 },
+                "office/religion": {
+                    "name": "Biuro organizacji religijnej",
+                    "terms": "biuro organizacji religijnej, kancelaria parafialna"
+                },
                 "office/research": {
                     "name": "Biuro badawcze",
                     "terms": "instytut badawczy"
@@ -5410,9 +5903,37 @@
                     "name": "Biuro wodociągowe",
                     "terms": "biuro dostawcy wody,licznik wody,woda,media"
                 },
-                "piste": {
-                    "name": "Trasa narciarska",
-                    "terms": "Trasa narciarska"
+                "piste/downhill": {
+                    "name": "Narciarska trasa donwhillowa",
+                    "terms": "narciarska trasa downhillowa,narty,alpy,snowboard,downhill,trasa narciarska"
+                },
+                "piste/hike": {
+                    "name": "Rakiety śniegowe lub zimowy szlak wspinaczkowy",
+                    "terms": "rakiety śnieżne lub zimowy szlak wspinaczkowy,wspinaczka,zimowa wspinaczka,rakiety śniegowe,trasa narciarska,narty"
+                },
+                "piste/ice_skate": {
+                    "name": "Trasa łyżwiarska",
+                    "terms": "trasa łyżwiarska,lód,łyżwiarstwo,narty,trasa narciarska"
+                },
+                "piste/nordic": {
+                    "name": "Trasa narciarstwa klasycznego lub przełajowego",
+                    "terms": "szlak narciarstwa klasycznego lub przełajowego,narty,klasyczne,przełajowe,narciarstwo,trasa narciarska"
+                },
+                "piste/piste": {
+                    "name": "Szlaki sportów zimowych",
+                    "terms": "szlaki sportów zimowych,narty,klasyczne,przełajowe,downhill,alpejskie,snowbord,wycieczki narciarskie,sanki,saneczki,sanie,kulig,skijöring,husky,koń,zimowa wspinaczka,rakiety śniegowe,lód,łyżwiarstwo"
+                },
+                "piste/skitour": {
+                    "name": "Narciarski szlak turystyczny",
+                    "terms": "narciarski szlak turystyczny,narty,wycieczki narciarskie,przełajowe,trasa narciarska"
+                },
+                "piste/sled": {
+                    "name": "Trasa saneczkowa",
+                    "terms": "trasa saneczkowa,narty,sanki,saneczki,sanie,kulig,trasa narciarska"
+                },
+                "piste/sleigh": {
+                    "name": "Trasa do kuligów",
+                    "terms": "trasa do kuligów,narty,trasa narciarska,sanki,saneczki,sanie,skijöring,husky,koń"
                 },
                 "place": {
                     "name": "Miejsce"
@@ -5420,6 +5941,10 @@
                 "place/city": {
                     "name": "Miasto",
                     "terms": "miasto"
+                },
+                "place/city_block": {
+                    "name": "Kwartał",
+                    "terms": "kwartał,sektor,obręb"
                 },
                 "place/farm": {
                     "name": "Farma/gospodarstwo rolne"
@@ -5535,17 +6060,25 @@
                 "power": {
                     "name": "Energetyka"
                 },
+                "power/cable/underground": {
+                    "name": "Podziemny kabel zasilający",
+                    "terms": "podziemny kabel zasilający"
+                },
                 "power/generator": {
                     "name": "Źródło energii",
                     "terms": "generator,prądnica,wytwornica"
                 },
-                "power/generator/source_nuclear": {
-                    "name": "Reaktor jądrowy",
-                    "terms": "reaktor jądrowy"
+                "power/generator/method/photovoltaic": {
+                    "name": "Panel słoneczny",
+                    "terms": "panel słoneczny,moduł fotowoltaiczny,moduł PV,światło słoneczne"
                 },
-                "power/generator/source_wind": {
+                "power/generator/source/nuclear": {
+                    "name": "Reaktor jądrowy",
+                    "terms": "rozszczepienie,generator,jądrowy,reaktor,atomowa"
+                },
+                "power/generator/source/wind": {
                     "name": "Turbina wiatrowa",
-                    "terms": "turbina wiatrowa, wiatrak, generator"
+                    "terms": "turbina wiatrowa,generator,turbina,wiatrak,wiatr"
                 },
                 "power/line": {
                     "name": "Linia energetyczna wysokiego napiecia",
@@ -5781,7 +6314,7 @@
                     "name": "Przystanek kolejowy"
                 },
                 "railway/level_crossing": {
-                    "name": "przejazd kolejowy (jezdnia)",
+                    "name": "Przejazd kolejowy (jezdnia)",
                     "terms": "przejazd kolejowy"
                 },
                 "railway/light_rail": {
@@ -5851,6 +6384,33 @@
                 "route/ferry": {
                     "name": "Trasa morska",
                     "terms": "trasa promowa"
+                },
+                "seamark": {
+                    "name": "Znak wodny"
+                },
+                "seamark/beacon_isolated_danger": {
+                    "name": "Znacznik niebezpieczeństwa",
+                    "terms": "wskaźnik odosobnionego niebezpieczeństwa,odosobnione niebezpieczeństwo,iala"
+                },
+                "seamark/beacon_lateral": {
+                    "name": "Znacznik kanału",
+                    "terms": "wskaźnik boczny,cevni,znacznik kanału,iala"
+                },
+                "seamark/buoy_lateral": {
+                    "name": "Boja kanału",
+                    "terms": "boja boczna,cevni,iala,wskaźnik kanału"
+                },
+                "seamark/buoy_lateral/green": {
+                    "name": "Zielona boja",
+                    "terms": "boja boczna,cevni,znacznik kanalu,iala"
+                },
+                "seamark/buoy_lateral/red": {
+                    "name": "Czerwona boja",
+                    "terms": "boja boczna,cevni,znacznik kanalu,iala"
+                },
+                "seamark/mooring": {
+                    "name": "Cumowanie",
+                    "terms": "delfin,pal,słupek,boja"
                 },
                 "shop": {
                     "name": "Sklep",
@@ -5941,7 +6501,7 @@
                     "terms": "świece"
                 },
                 "shop/car": {
-                    "name": "Dealer samochodowy",
+                    "name": "Sprzedaż samochodów",
                     "terms": "sprzedawca samochodów, dealer samochodowy"
                 },
                 "shop/car_parts": {
@@ -6000,6 +6560,10 @@
                     "name": "Sklep z kosmetykami",
                     "terms": "kosmetyki,drogeria"
                 },
+                "shop/country_store": {
+                    "name": "Sklep wiejski",
+                    "terms": "sklep wiejski"
+                },
                 "shop/craft": {
                     "name": "Sklep z rzemiosłem artystycznym",
                     "terms": "rzemiosło artystyczne"
@@ -6013,7 +6577,7 @@
                     "terms": "nabiał"
                 },
                 "shop/deli": {
-                    "name": "Delikatesy",
+                    "name": "Ekskluzywne delikatesy",
                     "terms": "wyroby delikatesowe, żywność delikatesowa"
                 },
                 "shop/department_store": {
@@ -6093,6 +6657,10 @@
                 "shop/hairdresser": {
                     "name": "Fryzjer",
                     "terms": "fryzjer"
+                },
+                "shop/hairdresser_supply": {
+                    "name": "Sklep z artykułami fryzjerskimi",
+                    "terms": "fryzjer,szampon,odżywka"
                 },
                 "shop/hardware": {
                     "name": "Sklep z narzędziami",
@@ -6210,6 +6778,10 @@
                     "name": "Sklep z farbami",
                     "terms": "farby,malowanie"
                 },
+                "shop/party": {
+                    "name": "Sklep z artykułami imprezowymi",
+                    "terms": "balony,kostiumy,dekoracje,zaproszenia"
+                },
                 "shop/pastry": {
                     "name": "Sklep z wypiekami",
                     "terms": "sklep z wypiekami, piekarnia, ciastkarnia, ciasta"
@@ -6257,6 +6829,10 @@
                 "shop/second_hand": {
                     "name": "Sklep z rzeczami używanymi",
                     "terms": "second hand, komis"
+                },
+                "shop/sewing": {
+                    "name": "Sklep krawiecki",
+                    "terms": "pasmanteria,szycie"
                 },
                 "shop/shoes": {
                     "name": "Sklep obuwniczy",
@@ -6370,8 +6946,8 @@
                     "terms": "chata alpejska"
                 },
                 "tourism/apartment": {
-                    "name": "Apartamenty na wynajem",
-                    "terms": "aparatament na wynajem, apartamenty na wynajem, pokój na wynajem, pokoje na wynajem, apartament, apartamenty, pokój, pokoje, do wynajęcia"
+                    "name": "Mieszkanie na wynajem",
+                    "terms": "aparatament na wynajem, apartamenty na wynajem, mieszkanie na wynajem, mieszkania na wynajem, apartament, apartamenty, do wynajęcia"
                 },
                 "tourism/aquarium": {
                     "name": "Akwarium",
@@ -6380,6 +6956,18 @@
                 "tourism/artwork": {
                     "name": "Rzeźba",
                     "terms": "dzieło sztuki"
+                },
+                "tourism/artwork/mural": {
+                    "name": "Mural",
+                    "terms": "mural,fresk,malowanie ścian"
+                },
+                "tourism/artwork/sculpture": {
+                    "name": "Rzeźba",
+                    "terms": "rzeźba,posąg,statua,figura,kształt,sylwetka,carving"
+                },
+                "tourism/artwork/statue": {
+                    "name": "Statua",
+                    "terms": "statua,rzeźba,figura,kształt,sylwetka,carving"
                 },
                 "tourism/attraction": {
                     "name": "Atrakcja turystyczna",
@@ -6447,7 +7035,7 @@
                 },
                 "tourism/theme_park": {
                     "name": "Park rozrywki",
-                    "terms": "park tematyczny"
+                    "terms": "park rozrywki, disneyland"
                 },
                 "tourism/trail_riding_station": {
                     "name": "Konny ośrodek wypoczynkowy",
@@ -6504,6 +7092,30 @@
                 "traffic_calming/table": {
                     "name": "Próg zwalniający z długą płaską nawierzchnią",
                     "terms": "długi próg zwalniający"
+                },
+                "traffic_sign": {
+                    "name": "Znak drogowy",
+                    "terms": "znak drogowy,droga,ulica"
+                },
+                "traffic_sign/city_limit": {
+                    "name": "Znak granicy miasta",
+                    "terms": "znak granicy miasta,miasto,wieś,przysiółek,granica,krawędź,droga,ulica"
+                },
+                "traffic_sign/city_limit_vertex": {
+                    "name": "Znak granicy miasta",
+                    "terms": "znak granicy miasta,miasto,wieś,przysiółek,granica,krawędź,droga,ulica"
+                },
+                "traffic_sign/maxspeed": {
+                    "name": "Znak ograniczenia prędkości",
+                    "terms": "znak ograniczenia prędkości,maks. prędkość,maksymalna prędkość,droga,ulica"
+                },
+                "traffic_sign/maxspeed_vertex": {
+                    "name": "Znak ograniczenia prędkości",
+                    "terms": "znak ograniczenia prędkości,maks. prędkość,maksymalna prędkość,droga,ulica"
+                },
+                "traffic_sign_vertex": {
+                    "name": "Znak drogowy",
+                    "terms": "znak drogowy,droga,ulica"
                 },
                 "type/boundary": {
                     "name": "Granica",
@@ -6662,6 +7274,10 @@
                 "waterway/fuel": {
                     "name": "Stacja tankowania paliwa (dla łodzi)",
                     "terms": "wodna stacja paliw"
+                },
+                "waterway/milestone": {
+                    "name": "Słupek pikietażowy",
+                    "terms": "słupek kilometrowy,pikietaż"
                 },
                 "waterway/river": {
                     "name": "Rzeka",
@@ -6824,9 +7440,6 @@
             "SPW_PICC": {
                 "name": "Obrazowanie numeryczne SPW(allonie) PICC"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "Na poziomie powiększenia 16+ są dane public domain od US Census. Na niższych poziomach powiększenia są tylko zmiany od 2006, ale bez zmian już włączonych do OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -6834,6 +7447,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Żółty = Dane public domain od US Census. Czerwony = Brak danych w OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Żółty = Dane public domain od US Census. Czerwony = Brak danych w OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Drogi:  Zielone obramowanie = czwartorzędna. Brązowe obramowanie = polna/leśna. Nawierzchnia: żwir = jasno-brązowe wypełnienie, asfalt = czarny, twarda = szary, grunt = biały, beton = niebieski, trawa = zielony. Dostępna sezonowo = białe paski",
@@ -6850,6 +7467,12 @@
                     "text": "Zrealizowano za pomocą Brussels UrbIS®© - Dystrybucja i prawa autorskie CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Zrealizowano za pomocą Brussels UrbIS®© - Dystrybucja i prawa autorskie CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -6907,11 +7530,61 @@
                 "description": "Warstwa ortofotomapy dostarczana przez basemap.at. \"Następca\" obrazowania z serwisu geoimage.at.",
                 "name": "basemap.at Orthofoto"
             },
-            "hike_n_bike": {
+            "eufar-balaton": {
                 "attribution": {
-                    "text": "© autorzy OpenStreetMap"
+                    "text": "EUFAR Balaton ortofotó 2010"
                 },
-                "name": "Hike & Bike"
+                "description": "Geotagowane zdjęcia z 1940 od Balaton Limnological Institute.",
+                "name": "Ortofotomapy EUFAR Balaton"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 przez finds.jp. Dobra do odrysowywania, ale trochę starsza.",
+                "name": "Japońska GSI KIBAN 2500"
+            },
+            "gsi.go.jp": {
+                "attribution": {
+                    "text": "GSI Japonia"
+                },
+                "description": "Ortofotomapa z japońskiego GSI. Zazwyczaj lepsza niż bing, ale trochę starsza.",
+                "name": "Ortofotomapa z japońskiego GSI"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japonia"
+                },
+                "description": "Standardowa mapa japońskiego GSI. Duże pokrycie.",
+                "name": "Standardowa mapa japońskiego GSI"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Urząd miasta Helsingborg"
+                },
+                "description": "Ortofotografie z urzędu miejskiego Helsingborgu 2016, domena publiczna",
+                "name": "Ortofotografia Helsingborga"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Urząd miasta Kalmar"
+                },
+                "description": "Ortofotografie północnego wybrzeża z urzędu miasta Kalmar 2014",
+                "name": "Ortofoto Kalmar Północ 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Urząd miasta Kalmar"
+                },
+                "description": "Ortofotografie południowego wybrzeża z urzędu miasta Kalmar 2016",
+                "name": "Ortofoto Kalmar Południe 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Urząd miasta Kalmar"
+                },
+                "description": "Ortofotografie obszaru miejskiego z urzędu miasta Kalmar 2018",
+                "name": "Ortofoto Kalmar Miasto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -6933,6 +7606,20 @@
                 },
                 "description": "Mozaika szwedzkich ortofotomap z okresu 1970-1980. W budowie.",
                 "name": "Historyczne ortofotomapy Lantmäteriet 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mapa topograficzna Szwecji 1:50 000",
+                "name": "Mapa topograficzna Lantmäteriet"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Urząd miasta Linköping"
+                },
+                "description": "Ortofotografie z urzędu miejskiego Linköpingu 2010, dane otwarte",
+                "name": "Ortofotografia Linköpingu"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -6997,6 +7684,13 @@
                     "text": "Kafle mapy od Stamen Design, licencja CC BY 3.0. Dane z OpenStreetMap, licencja ODbL"
                 },
                 "name": "Stamen - Teren"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Urząd miasta Sztokholm, CC0"
+                },
+                "description": "Ortofotografie z urzędu miejskiego Sztokholmu 2015, licencja CC0",
+                "name": "Ortofotografia Sztokholmu"
             },
             "tf-cycle": {
                 "attribution": {
@@ -7283,11 +7977,6 @@
                 "name": "Lista dyskusyjna Talk-be",
                 "description": "Talk-be to oficjalna lista dyskusyjna belgijskiej społeczności OSM"
             },
-            "be-maptime": {
-                "name": "Maptime Belgia",
-                "description": "Imprezy towarzyszące mapowaniu - początkujący bardzo mile widziani!",
-                "extendedDescription": "Maptime jest otwartym środowiskiem nauki dla wszystkich stopni i poziomów wiedzy, oferującym celowe wsparcie edukacyjne dla początkujących. Maptime jest jednocześnie elastyczne i usystematyzowane, tworząc miejsce dla podręczników i warsztatów mapowania, bieżących projektów z określonym wspólnym celem, jak i niezależnej lub wspólnej pracy."
-            },
             "be-matrix": {
                 "name": "Kanał OpenStreetMap BE na Matrixie",
                 "description": "Wszyscy mapujący są mile widziani!",
@@ -7476,6 +8165,10 @@
                 "name": "Lista dyskusyjna OpenStreetMap dla Trydentu",
                 "description": "Regionalna lista dyskusyjna OpenStreetMap Włochy dla Trydentu"
             },
+            "kosovo-telegram": {
+                "name": "OpenStreetMap Kosowa na Telegramie",
+                "description": "Półoficjalna grupa publiczna na Telegramie dla Kosowa i okolic. Zapraszamy wszystkich mapujących z dowolnego kraju i z dowolnym językiem."
+            },
             "no-forum": {
                 "name": "Forum www OpenStreetMap Norwegia",
                 "description": "Forum www OpenStreetMap Norwegia"
@@ -7608,6 +8301,10 @@
                 "name": "MaptimeME",
                 "description": "Maperzy i użytkownicy OpenStreetMap z okolic Portland",
                 "extendedDescription": "Maptime, to dosłownie czas na tworzenie mapy. Naszą misją jest otworzyć drzwi do kartografii każdemu zainteresowanemu stworzeniem czasu i miejsca dla wspólnej nauki, odkrywania i tworzenia map przy użyciu odpowiednich narzędzi i technologii."
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA Twitter",
+                "description": "Obserwuj nas na Twitterze: {url}"
             },
             "us-ma-mailinglist": {
                 "name": "Lista dyskusyjna Talk-us-massachusetts",
@@ -7883,6 +8580,10 @@
                     }
                 }
             },
+            "OSM-Discord": {
+                "name": "Discord OpenStreetMap",
+                "description": "Pozostawaj w kontakcie z innymi maperami dzięki Discord"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap na Facebooku",
                 "description": "Polub nas na Facebooku, aby być na bieżąco z OpenStreetMap."
@@ -7891,6 +8592,10 @@
                 "name": "Pomoc OpenStreetMap",
                 "description": "Uzyskaj odpowiedzi na najczęściej zadawane pytania na dedykowanej stronie prowadzonej przez społeczność OSM.",
                 "extendedDescription": "{url} jest dla wszystkich, którzy potrzebują pomocy z OpenStreetMap. Nieważne, czy dopiero zaczynasz, czy masz tylko pytanie techniczne, jesteśmy tutaj, by Ci pomóc!"
+            },
+            "OSM-IRC": {
+                "name": "IRC OpenStreetMap",
+                "description": "Dołącz do #osm na serwerze irc.oftc.net (port 6667)"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap  na Reddit",

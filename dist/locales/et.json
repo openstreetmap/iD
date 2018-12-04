@@ -143,14 +143,6 @@
             "delete_member": {
                 "annotation": "Relatsiooni liige kustutatud."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Joon ühendatud punktiga.",
-                    "vertex": "Joon ühendatud teise joonega.",
-                    "line": "Joon ühendatud joonega.",
-                    "area": "Joon ühendatud alaga."
-                }
-            },
             "disconnect": {
                 "title": "Ühenda lahti",
                 "description": "Ühenda need jooned/alad üksteisest lahti.",
@@ -293,7 +285,6 @@
         "browser_notice": "Seda redaktorit toetavad järgmised brauserid: Firefox, Chrome, Safari, Opera ning Internet Explorer 11 ja uuemad. Palun uuenda oma brauser või kasuta redaktorit Potlatch 2, et kaarti muuta.",
         "translate": {
             "translate": "Tõlgi",
-            "localized_translation_label": "Mitmekeelne nimi",
             "localized_translation_language": "Vali keel",
             "localized_translation_name": "Nimi"
         },
@@ -1645,10 +1636,6 @@
                 "amenity/nursing_home": {
                     "name": "Hoolduskodu"
                 },
-                "amenity/parking": {
-                    "name": "Autoparkla",
-                    "terms": "Parkla, parkimisplats"
-                },
                 "amenity/parking_entrance": {
                     "name": "Parkimismaja sisse/väljapääs"
                 },
@@ -1705,10 +1692,6 @@
                 "amenity/ranger_station": {
                     "name": "Looduskeskus",
                     "terms": "külastuskeskus"
-                },
-                "amenity/recycling": {
-                    "name": "Jäätmekonteiner",
-                    "terms": "taaskasutus,konteiner,prügi,jäätmed,ohtlikud"
                 },
                 "amenity/recycling_centre": {
                     "name": "Ümbertöötluskeskus",
@@ -1846,10 +1829,6 @@
                 },
                 "barrier/hedge": {
                     "name": "Hekk"
-                },
-                "barrier/kerb": {
-                    "name": "Kiviääris",
-                    "terms": "ääris"
                 },
                 "barrier/kissing_gate": {
                     "name": "Karjavärav"
@@ -2177,8 +2156,7 @@
                     "name": "Veinitehas"
                 },
                 "embankment": {
-                    "name": "Teetamm",
-                    "terms": "muldkeha, tamm, vall"
+                    "name": "Teetamm"
                 },
                 "emergency/ambulance_station": {
                     "name": "Kiirabipunkt"
@@ -2196,22 +2174,6 @@
                 },
                 "entrance": {
                     "name": "Sisse- ja Väljapääs"
-                },
-                "footway/crossing": {
-                    "name": "Ülekäik"
-                },
-                "footway/crossing-raised": {
-                    "name": "Tõstetud ülekäik",
-                    "terms": "lame,künnis,aeglusti"
-                },
-                "footway/crosswalk": {
-                    "name": "Ülekäigurada"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Tõstetud ülekäigurada"
-                },
-                "footway/sidewalk": {
-                    "name": "Kõnnitee"
                 },
                 "ford": {
                     "name": "Koolmekoht",
@@ -2257,19 +2219,6 @@
                 "highway/corridor": {
                     "name": "Sisekoridor",
                     "terms": "koridor"
-                },
-                "highway/crossing": {
-                    "name": "Ülekäigurada"
-                },
-                "highway/crossing-raised": {
-                    "name": "Tõstetud ristmik"
-                },
-                "highway/crosswalk": {
-                    "name": "Ülekäigurada",
-                    "terms": "jalakäijate ülekäik,ülekäik"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Tõstetud ülekäigurada"
                 },
                 "highway/cycleway": {
                     "name": "Rattatee"
@@ -2634,9 +2583,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Ameerika jalgpalliväljak"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Pesapalliväljak"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Korvpalliväljak"
                 },
@@ -2749,9 +2695,6 @@
                     "name": "Mast",
                     "terms": "Mobiilimast, tv mast, telefonimast, raadiomast, televisioonimast, kommunikatsioonimast"
                 },
-                "man_made/observation": {
-                    "name": "Vaatlustorn"
-                },
                 "man_made/observatory": {
                     "name": "Observatoorium"
                 },
@@ -2770,9 +2713,6 @@
                 },
                 "man_made/storage_tank": {
                     "name": "Mahuti"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Valvekaamera"
                 },
                 "man_made/tower": {
                     "name": "Torn"
@@ -2870,10 +2810,6 @@
                 "natural/tree": {
                     "name": "Puu"
                 },
-                "natural/tree_row": {
-                    "name": "Puude rivi",
-                    "terms": "rivis,reas,järjest"
-                },
                 "natural/volcano": {
                     "name": "Vulkaan"
                 },
@@ -2913,9 +2849,6 @@
                 },
                 "office/travel_agent": {
                     "name": "Reisibüroo"
-                },
-                "piste": {
-                    "name": "Suusarada"
                 },
                 "place": {
                     "name": "Koht"

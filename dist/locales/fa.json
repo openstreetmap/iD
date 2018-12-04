@@ -52,7 +52,7 @@
             "continue": {
                 "key": "A",
                 "title": "ادامه",
-                "description": "ادامه این خط.",
+                "description": "این خط را ادامه دهید.",
                 "not_eligible": "اینجا خطی قابل ادامه‌دادن نیست.",
                 "multiple": "اینجا چندین خط قابل ادامه دادن است. برای انتخاب یک خط، کلید Shift را فشار دهید و روی آن کلیک کنید تا انتخاب شود.",
                 "annotation": {
@@ -143,14 +143,6 @@
             },
             "delete_member": {
                 "annotation": "یک عضو از رابطه حذف شد."
-            },
-            "connect": {
-                "annotation": {
-                    "point": "راه به نقطه ای متصل شد.",
-                    "vertex": "راه به یکی دیگر متصل شد.",
-                    "line": "راه به خطی متصل شد.",
-                    "area": "راه به محدوده‌ای متصل شد."
-                }
             },
             "disconnect": {
                 "title": "قطع اتصال",
@@ -311,7 +303,6 @@
         "browser_notice": "این ویراستار از مرورگرهای کروم، سافاری، اپرا و اینترنت اکسپلورر 11 و ویرایش های جدیدتر آن پشتیبانی می کند. لطفا مرورگر خود را بروزرسانی کنید  یا از Potlatch 2 برای ویرایش نقشه استفاده کنید",
         "translate": {
             "translate": "ترجمه",
-            "localized_translation_label": "نام چند زبانه",
             "localized_translation_language": "انتخاب زبان",
             "localized_translation_name": "نام"
         },
@@ -320,7 +311,7 @@
         "report_a_bug": "گزارش یک اشکال",
         "help_translate": "کمک به ترجمه",
         "feature_info": {
-            "hidden_warning": "{COUNT} عنصر پنهان",
+            "hidden_warning": "{count} عنصر پنهان",
             "hidden_details": "این عناصر در حال حاضر پنهان‌اند:\n{details}"
         },
         "status": {
@@ -331,18 +322,18 @@
         },
         "commit": {
             "title": "آپلود در اوپن استریت مپ",
-            "upload_explanation": "تغییراتی که بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
-            "upload_explanation_with_user": "تفییراتی که شما به عنوان {user} بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
+            "upload_explanation": "تغییراتی که بارگذاری می‌کنید در همهٔ نقشه‌هایی که از داده‌های OpenStreetMap استفاده می‌کنند پدیدار خواهد شد.",
+            "upload_explanation_with_user": "تفییراتی که شما با نام {user} بارگذاری می‌کنید در همهٔ نقشه‌هایی که از داده‌های OpenStreetMap استفاده می‌کنند پدیدار خواهد شد.",
             "request_review": "می‌خواهم کسی ویرایش‌هایم را بررسی کند.",
-            "save": "بارگزاری",
+            "save": "بارگذاری",
             "cancel": "لغو",
             "changes": "{count} تغییر",
             "warnings": "اخطارها",
-            "modified": "اصلاح شد",
-            "deleted": "حذف شد",
-            "created": "ساخته شد",
+            "modified": "اصلاح",
+            "deleted": "حذف",
+            "created": "ایجاد",
             "about_changeset_comments": "درباره توضیحات تغییرات",
-            "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+            "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Fa:Good_changeset_comments",
             "google_warning": "شما در توضیحات خود از گوگل نام بردید. لطفا توجه داشته باشید که کپی کردن از نقشه‌های گوگل، ممنوع است.",
             "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
@@ -403,7 +394,7 @@
         },
         "geocoder": {
             "search": "جستجو در سراسر جهان ...",
-            "no_results_visible": "هیچ نتیجه ای در ناحیه نقشه ی مشاهده شده نیسن",
+            "no_results_visible": "در محدودهٔ نمایان از نقشه هیچ نتیجه‌ای یافت نشد",
             "no_results_worldwide": "نتیجه ای یافت نشد"
         },
         "geolocate": {
@@ -411,8 +402,8 @@
             "locating": "در حال مکان‌یابی، لطفا صبر کنید..."
         },
         "inspector": {
-            "no_documentation_combination": "برای این ترکیب برچسب اسنادی موجود نیست",
-            "no_documentation_key": "برای این کلید اسنادی موجود نیست",
+            "no_documentation_combination": "برای این ترکیب از برچسب مستنداتی موجود نیست",
+            "no_documentation_key": "برای این کلید مستنداتی موجود نیست",
             "documentation_redirect": "این اسناد به صفحه جدیدی منتقل شده اند",
             "show_more": "نمایش بیشتر",
             "view_on_osm": "نمایش در openstreetmap.org",
@@ -422,7 +413,7 @@
             "all_relations": "تمام روابط",
             "new_relation": "رابطه جدید...",
             "role": "نقش",
-            "choose": "انتخاب نوع عنصر",
+            "choose": "انتخاب نوع عارضه",
             "results": "{n} نتیجه برای   {search}",
             "reference": "نمایش در ویکی  OpenStreetMap",
             "back_tooltip": "تغییر عنصر",
@@ -560,11 +551,12 @@
         },
         "save": {
             "title": "ذخیره",
-            "help": "بررسی تغییرات و ذخیره آن‌ها در OpenStreetMap, آنها را برای دیگران قابل نمایش می سازد.",
+            "help": "تغییرات خود را بازبینی و سپس آن‌ها را در OpenStreetMap ذخیره می‌کنید. در نتیجه برای دیگران قابل نمایش می‌شود.",
             "no_changes": "تغییراتی برای دخیره نیست.",
             "error": "هنگامی که  تلاش شد ذخیره شود مشکلاتی رخ داد",
             "status_code": "سرور کد {code} را بازگرداند.",
             "unknown_error_details": "لطفا اطمینان پیدا کنید که به اینترنت متصل هستید.",
+            "uploading": "در حال بارگذاری تغییرات در نقشه...",
             "unsaved_changes": "شما تغییرات ذخیره نشده دارید",
             "conflict": {
                 "header": "حل کردن ویرایش‌های متداخل",
@@ -590,9 +582,17 @@
         },
         "success": {
             "just_edited": "شما OpenStreetMap را ویرایش کردید!",
+            "thank_you": "از اینکه نقشه را بهتر می‌کنید، سپاسگزاریم.",
+            "thank_you_location": "از اینکه نقشهٔ {where} را بهتر می‌کنید، سپاسگزاریم.",
+            "help_html": "تغییرات شما معمولاً پس از دقایقی در وبسایت OpenStreetMap منعکس می‌شود. برای سایر برنامه‌ها احتمالاً باید زمان طولانی‌تری را تا دریافت به‌روزرسانی‌ها منتظر بمانید.",
             "help_link_text": "جزئیات",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F",
-            "languages": "زبان‌ها: {languages}"
+            "view_on_osm": "دیدن تغییرات روی وبسایت OSM",
+            "changeset_id": "شمارهٔ (#) بستهٔ تغییرات شما: {changeset_id}",
+            "like_osm": "از نقشهٔ شهری باز خوشتان آمده؟ به دیگران بپیوندید:",
+            "languages": "زبان‌ها: {languages}",
+            "missing": "در این فهرست چیزی از قلم افتاده؟",
+            "tell_us": "به ما بگویید!"
         },
         "confirm": {
             "okay": "ok",
@@ -600,9 +600,9 @@
         },
         "splash": {
             "welcome": "به ویرایشگر ID OpenStreetMap خوش آمدید",
-            "text": "iD یک ابزار دوستانه اما قدرتمند برای کمک کردن به بهترین نقشه رایگان جهان است. این نسخه ی  {version} است. برای اطلاعات بیشتر {website} را ببینید و باگ را در {github} گزارش دهید.",
+            "text": "iD یک ابزار کاربرپسند اما قدرتمند برای مشارکت در بهترین نقشهٔ رایگان جهان است. این نسخهٔ  {version} است. برای اطلاعات بیشتر {website} را ببینید و خرابی‌های سایت را در {github} گزارش دهید.",
             "walkthrough": "آغاز گردش",
-            "start": "حالا ویرایش کن"
+            "start": "اکنون ویرایش می‌کنم"
         },
         "source_switch": {
             "live": "زنده",
@@ -616,12 +616,13 @@
         },
         "validations": {
             "disconnected_highway": "قطع اتصال",
-            "untagged_point": "نقطه برچسب نخورده",
-            "untagged_point_tooltip": "یک نوع عنصر را برای توصیف موجودیت این نقطه انتخاب کنید.",
-            "untagged_line": "خط برچسب گذاری نشده",
-            "untagged_line_tooltip": "یک نوع عنصر را برای توصیف موجودیت این خط انتخاب کنید.",
-            "untagged_area": "فضای برچسب گذاری نشده",
-            "untagged_area_tooltip": "یک نوع عنصر را برای توصیف موجودیت این محدوده انتخاب کنید.",
+            "untagged_point": "نقطهٔ بی‌برچسب",
+            "untagged_point_tooltip": "یکی از انواع ویژگی‌ها را انتخاب کنید تا مشخص کند که این نقطه چه‌چیزی است.",
+            "untagged_line": "خط بی‌برچسب",
+            "untagged_line_tooltip": "یکی از انواع ویژگی‌ها را انتخاب کنید تا مشخص کند که این خط چه‌چیزی است.",
+            "untagged_area": "ناحیهٔ بی‌برچسب",
+            "untagged_area_tooltip": "یکی از انواع ویژگی‌ها را انتخاب کنید تا مشخص کند که این ناحیه چه‌چیزی است.",
+            "untagged_relation": "رابطهٔ بی‌برچسب",
             "tag_suggests_area": "برچسب  {tag} پیشنهاد میکند خط باید یک فضا باشد، اما این یک فضا نیست",
             "deprecated_tags": "برچسب های توصیه شده: {tags}"
         },
@@ -659,7 +660,8 @@
                 "select_h": "انتخاب",
                 "multiselect_h": "انتخاب چندتایی",
                 "save_h": "ذخیره کن",
-                "upload_h": "آپلود",
+                "upload_h": "بارگذاری",
+                "upload": "پیش از بارگذاری تغییرات باید [توضیحی بر بستهٔ تغییر](https://wiki.openstreetmap.org/wiki/Fa:Good_changeset_comments) خود بنویسید. سپس روی **بارگذاری** کلیک کنید تا تغییرات شما در OpenStreetMap ذخیره شود، به‌عبارتی تغییرات شما در نقشه ادغام می‌شود و به‌شکل عمومی در دسترس همگان قرار می‌گیرد.",
                 "backups_h": "بکآپ اتوماتیک",
                 "keyboard_h": "کلید میانبر"
             },
@@ -1733,15 +1735,6 @@
                 },
                 "piste/difficulty": {
                     "label": "سختی",
-                    "options": {
-                        "advanced": "پیشرفته (الماس سیاه)",
-                        "easy": "آسان (دایره سبز)",
-                        "expert": "کارشناس (دو الماس سیاه)",
-                        "extreme": "حداکثر (تجهیزات کوهنوردی مورد نیاز است)",
-                        "freeride": "رانندگی آزاد (خارج از پیست)",
-                        "intermediate": "متوسط (مربع آبی)",
-                        "novice": "تازه کار (آموزشی)"
-                    },
                     "placeholder": "آسان، متوسط، پیشرفته ..."
                 },
                 "piste/grooming": {
@@ -2502,9 +2495,6 @@
                 "amenity/nursing_home": {
                     "name": "خانه سالمندان"
                 },
-                "amenity/parking": {
-                    "name": "پارکینگ خودرو"
-                },
                 "amenity/parking_entrance": {
                     "name": "ورودی/خروجی پارکینگ"
                 },
@@ -2663,10 +2653,6 @@
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "دستگاه فروش خودکار روزنامه"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "سرویس دریافت مرسولات پستی، دستگاه دریافت مرسولات پستی",
-                    "terms": "سرویس دریافت امانات پستی، دستگاه دریافت کننده مرسولات پستی"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "دستگاه فروش خودکار کارت پارکینگ"
@@ -3087,15 +3073,6 @@
                 "entrance": {
                     "name": "ورود/خروج"
                 },
-                "footway/crossing": {
-                    "name": "تقاطع خیابانی"
-                },
-                "footway/crosswalk": {
-                    "name": "محل عبور عابر پیاده"
-                },
-                "footway/sidewalk": {
-                    "name": "پیاده رو"
-                },
                 "ford": {
                     "name": "معبر"
                 },
@@ -3173,12 +3150,6 @@
                 },
                 "highway/corridor": {
                     "name": "راهروی داخلی"
-                },
-                "highway/crossing": {
-                    "name": "تقاطع خیابانی"
-                },
-                "highway/crosswalk": {
-                    "name": "محل عبور عابر پیاده"
                 },
                 "highway/cycleway": {
                     "name": "مسیر دوچرخه سواری"
@@ -3529,9 +3500,6 @@
                 "leisure/pitch/american_football": {
                     "name": "میدان فوتبال آمریکایی"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "الماسی شکل بیسبال"
-                },
                 "leisure/pitch/basketball": {
                     "name": "محوطه بسکتبال"
                 },
@@ -3632,9 +3600,6 @@
                 "man_made/mast": {
                     "name": "دکل مخابراتی"
                 },
-                "man_made/observation": {
-                    "name": "برج رصد"
-                },
                 "man_made/observatory": {
                     "name": "رصد خانه"
                 },
@@ -3658,9 +3623,6 @@
                 },
                 "man_made/surveillance": {
                     "name": "تجهیزات نظارتی"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "دوربین نظارت"
                 },
                 "man_made/survey_point": {
                     "name": "نقطه مطالعاتی"
@@ -3746,9 +3708,6 @@
                 },
                 "natural/tree": {
                     "name": "درخت"
-                },
-                "natural/tree_row": {
-                    "name": "ردیف درخت"
                 },
                 "natural/volcano": {
                     "name": "آتشفشان"
@@ -3861,9 +3820,6 @@
                 "office/travel_agent": {
                     "name": "آژانس مسافرتی"
                 },
-                "piste": {
-                    "name": "پیست/ مسیر اسکی"
-                },
                 "place": {
                     "name": "محل"
                 },
@@ -3917,12 +3873,6 @@
                 },
                 "power/generator": {
                     "name": "مولد برق"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "راکتور هسته‌ای"
-                },
-                "power/generator/source_wind": {
-                    "name": "توربین بادی"
                 },
                 "power/line": {
                     "name": "خط نیرو"
@@ -4725,9 +4675,6 @@
                 },
                 "name": "بازبین OSM: تگ‌گذاری"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "جاده های TIGER 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "در زوم ۱۶‎+‎، اطلاعات مالکیت عمومی از سرشماری آمریکاست. در زوم‌های کمتر، فقط تغییراتی که از سال ۲۰۰۶ ایجاد شده منهای تغییراتی که قبلاً در OSM آمده",
                 "name": "جاده های TIGER 2014"
@@ -4783,12 +4730,6 @@
                 },
                 "description": "لایهٔ Orthofoto را basemap.at فراهم کرده است. «جایگزین» تصاویر geoimage.at.",
                 "name": "basemap.at Orthofoto"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© مشارکت‌کنندگان OpenStreetMap "
-                },
-                "name": "پیاده‌روی و دوچرخه‌سواری"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

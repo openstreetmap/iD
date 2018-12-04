@@ -136,14 +136,6 @@
             "delete_member": {
                 "annotation": "Suatu ahli telah dihapuskan dalam hubungan."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Suatu jalan telah disambungkan pada suatu titik.",
-                    "vertex": "Suatu jalan telah disambungkan pada suatu jalan yang lain.",
-                    "line": "Suatu jalan telah disambungkan pada suatu garis.",
-                    "area": "Telah disambung cara kepada kawasan."
-                }
-            },
             "disconnect": {
                 "title": "Pisahkan",
                 "description": "Putuskan garis-garis atau kawasan-kawasan ini antara satu sama lain.",
@@ -299,7 +291,6 @@
         "browser_notice": "Penyunting ini boleh digunakan dengan Firefox, Chrome, Safari, Opera, dan Internet Explorer 11 dan versi termaju. Sila tingkatkan pelayar anda, atau gunakan Potlatch 2 untuk menyunting peta.",
         "translate": {
             "translate": "Terjemah",
-            "localized_translation_label": "Nama berbilang bahasa",
             "localized_translation_language": "Pilih bahasa",
             "localized_translation_name": "Nama"
         },
@@ -1609,15 +1600,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Kesukaran",
-                    "options": {
-                        "advanced": "Lanjutan (berlian hitam)",
-                        "easy": "Senang (bulatan hijau)",
-                        "expert": "Pakar (berlian hitam berganda)",
-                        "extreme": "Lasak (peralatan mendaki diperlukan)",
-                        "freeride": "Freeride (luar ski)",
-                        "intermediate": "Pertengahan (segi empat sama biru)",
-                        "novice": "Orang baru (berarahan)"
-                    },
                     "placeholder": "Senang, Pertengahan, Lanjutan..."
                 },
                 "piste/grooming": {
@@ -2090,9 +2072,6 @@
                 "amenity/nightclub": {
                     "name": "Kelab Malam"
                 },
-                "amenity/parking": {
-                    "name": "Tempat Letak Kereta"
-                },
                 "amenity/parking_space": {
                     "name": "Ruang Letak Kenderaan"
                 },
@@ -2148,9 +2127,6 @@
                 },
                 "amenity/ranger_station": {
                     "name": "Stesen Renjer"
-                },
-                "amenity/recycling": {
-                    "name": "Bekas Kitar Semula"
                 },
                 "amenity/recycling_centre": {
                     "name": "Pusat Kitar Semula"
@@ -2451,9 +2427,6 @@
                 "office/water_utility": {
                     "name": "Pejabat Pembekal Air"
                 },
-                "piste": {
-                    "name": "Piste/Denai Ski"
-                },
                 "place": {
                     "name": "Tempat"
                 },
@@ -2501,12 +2474,6 @@
                 },
                 "power/generator": {
                     "name": "Penjana Tenaga Elektrik"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Reaktor Nuklear"
-                },
-                "power/generator/source_wind": {
-                    "name": "Turbin Angin"
                 },
                 "power/line": {
                     "name": "Talian Elektrik"
@@ -2799,9 +2766,6 @@
                 },
                 "name": "OSM Inspector: Penandaan"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "Pada tahap zum 16+, data peta domain awam dari Banci AS. Pada tahap zum yang lebih rendah, hanya perubahan sejak 2006 tanpa perubahan yang telah dimasukkan ke dalam OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -2837,12 +2801,6 @@
                 },
                 "description": "Lapisan Ortofoto disediakan oleh basemap.at. \"Pengganti\" imejan geoimage.at.",
                 "name": "Orthofoto basemap.at"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© Penyumbang-penyumbang OpenStreetMap"
-                },
-                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

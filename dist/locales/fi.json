@@ -150,14 +150,6 @@
             "delete_member": {
                 "annotation": "Jäsen poistettiin relaatiosta."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Viiva yhdistetty pisteeseen.",
-                    "vertex": "Kaksi viivaa yhdistetty.",
-                    "line": "Kaksi viivaa yhdistetty.",
-                    "area": "Viiva ja alue yhdistetty."
-                }
-            },
             "disconnect": {
                 "title": "Erota",
                 "description": "Erota nämä viivat/alueet toisistaan.",
@@ -349,7 +341,6 @@
         "browser_notice": "Tätä muokkausohjelmaa voi käyttää Firefox-, Chrome-, Safari- ja Opera-selaimilla sekä Internet Explorerin versiolla 11 tai uudemmalla. Päivitä selainohjelmisto tai käytä vanhempaa Potlatch 2 -muokkausohjelmaa.",
         "translate": {
             "translate": "Käännä",
-            "localized_translation_label": "Monikielinen nimi",
             "localized_translation_language": "Valitse kieli",
             "localized_translation_name": "Nimi"
         },
@@ -1130,7 +1121,7 @@
             },
             "startediting": {
                 "title": "Aloita kartanmuokkaus!",
-                "help": "Olet nyt valmis OpenStreetMapiin!{br}Voit käyfdä tämän aloitusoppaan läpi uudelleen tai tutustua käyttöohjeeseen milloin tahansa napsauttamalla {button} Ohje tai painamalla {key}-näppäintä.",
+                "help": "Olet nyt valmis OpenStreetMapiin!{br}Voit käydä tämän aloitusoppaan läpi uudelleen tai tutustua käyttöohjeeseen milloin tahansa napsauttamalla {button} Ohje tai painamalla {key}-näppäintä.",
                 "shortcuts": "Tutustu käytettävissä oleviin pikanäppäimiin painamalla {key}-näppäintä.",
                 "save": "Muista tallentaa muutokset säännöllisesti!",
                 "start": "Aloita kartanmuokkaus!"
@@ -1297,7 +1288,7 @@
                     "name": "Luonto"
                 },
                 "category-path": {
-                    "name": "Kevyenliikenteenväylät"
+                    "name": "Jalankulun ja pyöräilyn väylät"
                 },
                 "category-rail": {
                     "name": "Rautatiet"
@@ -1727,9 +1718,6 @@
                 },
                 "display": {
                     "label": "Näyttö"
-                },
-                "distance": {
-                    "label": "Kokonaisetäisyys"
                 },
                 "dock": {
                     "label": "Tyyppi"
@@ -2211,15 +2199,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Haastavuus",
-                    "options": {
-                        "advanced": "Vaikea (musta)",
-                        "easy": "Helppo (sininen)",
-                        "expert": "Äärimmäisen vaikea (kaksoismusta/oranssi)",
-                        "extreme": "Extreme (edellyttää kiipeilyvarusteet)",
-                        "freeride": "Merkitsemätön (off-rinne)",
-                        "intermediate": "Keskivaikea (punainen)",
-                        "novice": "Erittäin helppo (vihreä)"
-                    },
                     "placeholder": "Helppo, keskivaikea, vaikea..."
                 },
                 "piste/grooming": {
@@ -3038,10 +3017,6 @@
                 "amenity/nursing_home": {
                     "name": "Hoitokoti"
                 },
-                "amenity/parking": {
-                    "name": "Autopysäköinti",
-                    "terms": "auto, parkki, parkkihalli, pysäköintialue, pysäköinti, parkki, parkkipaikka, pysäköintialue, parkkialue"
-                },
                 "amenity/parking_entrance": {
                     "name": "Pysäköintihallin ajoramppi",
                     "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo, ulosajo, sisäänajo, ajo, ulos, sisään, ramppi"
@@ -3049,9 +3024,6 @@
                 "amenity/parking_space": {
                     "name": "Pysäköintitila",
                     "terms": "pysäköinti, pysäköintipaikka, pysäköintiruutu, parkkipaikka, parkkeeraus, autopysäköinti, autopaikka"
-                },
-                "amenity/pavilion": {
-                    "name": "Paviljonki"
                 },
                 "amenity/pharmacy": {
                     "name": "Apteekki",
@@ -3125,9 +3097,6 @@
                 "amenity/ranger_station": {
                     "name": "Metsävartiosto"
                 },
-                "amenity/recycling": {
-                    "name": "Kierrätysastia"
-                },
                 "amenity/recycling_centre": {
                     "name": "Kierrätyskeskus"
                 },
@@ -3142,8 +3111,8 @@
                     "name": "Asuntoautojen jäteveden tyhjennyspiste"
                 },
                 "amenity/school": {
-                    "name": "Koulualue",
-                    "terms": "koulu, koulutus, ala-aste, koulualue, alue, koulupiha, piha, välitunti, välituntialue"
+                    "name": "Koulualue (peruskoulu/lukio/ammattikoulu)",
+                    "terms": "koulu, koulutus, ala-aste, koulualue, alue, koulupiha, piha, välitunti, välituntialue, yläaste, yläkoulu, lukio, ammatti, ammattioppilaitos, ammattiopisto, oppilaitos, ammattikoulu, amis, yhtenäiskoulu, yhtenäislukio, yhteislukio"
                 },
                 "amenity/scrapyard": {
                     "name": "Autonromuttamo"
@@ -3234,10 +3203,6 @@
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Lehtiautomaatti"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Pakettiautomaatti",
-                    "terms": "posti, smartpost, paketti, automaatti, nouto, jättö, paketointi, sähköinen, elektroninen, piste"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Pysäköintimaksuautomaatti",
@@ -3373,10 +3338,6 @@
                 },
                 "barrier/hedge": {
                     "name": "Pensasaita"
-                },
-                "barrier/kerb": {
-                    "name": "Reunakivi",
-                    "terms": "kantti, rotvalli, reunus, reuna, katukivi, kivi"
                 },
                 "barrier/kissing_gate": {
                     "name": "Karjarajoitin"
@@ -3711,8 +3672,7 @@
                     "terms": "viini, viinipanimo, viinit, alkoholi, juoma, juominen, panimo, viininvalmistamo, viininpanimo, viinivalmistamo, viinitalo"
                 },
                 "embankment": {
-                    "name": "Penger",
-                    "terms": "maavalli, rantavalli, valli, pengerrys, pato"
+                    "name": "Penger"
                 },
                 "emergency/ambulance_station": {
                     "name": "Ambulanssiasema",
@@ -3757,22 +3717,6 @@
                 "entrance": {
                     "name": "Sisään- tai uloskäynti",
                     "terms": "ovi, portti, sisään, ulos, sisäänkäynti, uloskäynti"
-                },
-                "footway/crossing": {
-                    "name": "Suojatieväylä"
-                },
-                "footway/crossing-raised": {
-                    "name": "Korotettu ylityspaikka"
-                },
-                "footway/crosswalk": {
-                    "name": "Jalankulkijoiden suojatieväylä"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Korotettu jalankulkijoiden suojatie"
-                },
-                "footway/sidewalk": {
-                    "name": "Jalkakäytävä",
-                    "terms": "jalkakäytävä, jalankulku, kävellä, jalkaisin, kadunreuna, kadussa, katuun, katu"
                 },
                 "ford": {
                     "name": "Kahlauspaikka"
@@ -3874,18 +3818,6 @@
                 "highway/corridor": {
                     "name": "Sisäkäytävä",
                     "terms": "katettu, katos, käytävä, sisällä, sisätila, sisätiloissa"
-                },
-                "highway/crossing": {
-                    "name": "Suojatie"
-                },
-                "highway/crossing-raised": {
-                    "name": "Korotettu ylityspaikka"
-                },
-                "highway/crosswalk": {
-                    "name": "Jalankulkijoiden suojatie"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Korotettu jalankulkijoiden suojatie"
                 },
                 "highway/cycleway": {
                     "name": "Pyörätie"
@@ -4284,9 +4216,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Amerikkalainen jalkapallo -kenttä"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Pesäpallokenttä"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Koripallokenttä"
                 },
@@ -4419,10 +4348,6 @@
                 "man_made/monitoring_station": {
                     "name": "Havaintoasema"
                 },
-                "man_made/observation": {
-                    "name": "Näkötorni",
-                    "terms": "observatorio, näköalatasanne, näköala, maisema, maisematorni"
-                },
                 "man_made/petroleum_well": {
                     "name": "Öljylähde"
                 },
@@ -4444,9 +4369,6 @@
                 "man_made/surveillance": {
                     "name": "Valvontakamera",
                     "terms": "kamera, valvonta, poliisi, turva, turvallisuus, turvakamera, nauhoittava, tallentava, kameravalvonta"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Valvontakamera"
                 },
                 "man_made/survey_point": {
                     "name": "Mittauspiste"
@@ -4545,9 +4467,6 @@
                 },
                 "natural/tree": {
                     "name": "Puu"
-                },
-                "natural/tree_row": {
-                    "name": "Puurivi"
                 },
                 "natural/volcano": {
                     "name": "Tulivuori"
@@ -4711,10 +4630,6 @@
                     "name": "Vesilaitos",
                     "terms": "vesipalvelu, vesihuoltolaitos, vesihuolto, vedenjakelu, vesiosuuskunta, vesikunta, viemäröintilaitos, vesi, toimisto"
                 },
-                "piste": {
-                    "name": "Laskettelurinne/hiihtolatu",
-                    "terms": "laskettelu, alamäki, mäki, laskettelumäki, rinne, latu, hiihtolatu, urheilu, kuntoilu, liikunta, talvi, talviliikunta, talviurheilu, talvikuntoilu"
-                },
                 "place": {
                     "name": "Paikka"
                 },
@@ -4797,12 +4712,6 @@
                 },
                 "power/generator": {
                     "name": "Generaattori"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Ydinreaktori"
-                },
-                "power/generator/source_wind": {
-                    "name": "Tuulivoimala"
                 },
                 "power/line": {
                     "name": "Voimalinja"
@@ -4961,7 +4870,7 @@
                     "name": "Pysäytyspuskuri"
                 },
                 "railway/crossing": {
-                    "name": "Kevyenliikenteen tasoristeys",
+                    "name": "Jalankulun ja pyöräilyn tasoristeys",
                     "terms": "tasoristeys, ylityspaikka, rautatie, radanylitys, jalankulku, pyöräily, jalan, pyörällä, pyörä, polkupyörä, polkupyörien, polkupyörän, pyörien, pyörän, suojatie"
                 },
                 "railway/disused": {
@@ -5416,7 +5325,8 @@
                     "terms": "pölynimuri, siivoaminen, siivous, imuri, pölynimuri, imurointi"
                 },
                 "shop/variety_store": {
-                    "name": "Halpahalli"
+                    "name": "Halpahalli",
+                    "terms": "tokmanni, hintamyymälä, halpa, halpatalo, halpamyymälä, säästömyymälä, säästö, kauppa, myymälä, putiikki, liike"
                 },
                 "shop/video": {
                     "name": "Videovuokraamo"
@@ -5747,7 +5657,7 @@
                 "attribution": {
                     "text": "Käyttöehdot ja palaute"
                 },
-                "description": "Esrin arkistokuvat voivat olle selkeämpiä ja tarkempia kuin oletustaustakuva."
+                "description": "Esrin arkistokuvat voivat olla oletustaustakuvaa selkeämpiä ja tarkempia."
             },
             "MAPNIK": {
                 "attribution": {
@@ -5805,9 +5715,6 @@
                 },
                 "name": "OSM Tarkastajat: Tagit"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "Suurennostasolla 16 ja sitä lähempänä käytetään Yhdysvaltain väestönlaskentaviranomaisen kartta-aineistoa. Kauempana näytetään vain muutokset vuodelta 2006 pois lukien jo OpenStreetMapiin yhdistetyt muutokset.",
                 "name": "TIGER Roads 2014"
@@ -5862,12 +5769,6 @@
                 },
                 "name": "basemap.at Orthofoto"
             },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMapin tekijät"
-                },
-                "name": "Vaellus ja pyöräily"
-            },
             "kelkkareitit": {
                 "description": "Kelkkareitit.fi-moottorikelkkareitit Pohjoismaissa",
                 "name": "Pohjoismaiset moottorikelkkareitit"
@@ -5876,13 +5777,15 @@
                 "attribution": {
                     "text": "© Maanmittauslaitos, CC0"
                 },
-                "name": "Maanmittauslaitoksen historiallinen ortokuva vuodelta 1960"
+                "description": "Mosaiikkiortokuva Ruotsista vuosilta 1955–1965. Aineistossa saattaa olla myös uudempia ja vanhempia kuvia.",
+                "name": "Maanmittauslaitoksen historiallinen ortokuva 1960"
             },
             "lantmateriet-orto1975": {
                 "attribution": {
                     "text": "© Maanmittauslaitos, CC0"
                 },
-                "name": "Maanmittauslaitoksen historiallinen ortokuva vuodelta 1975"
+                "description": "Mosaiikkiortokuva Ruotsista vuosilta 1970–1980, keskeneräinen",
+                "name": "Maanmittauslaitoksen historiallinen ortokuva 1975"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -5920,6 +5823,7 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
+                "description": "Digitoitu talouskartta vuosilta 1950–1980",
                 "name": "Maanmittauslaitoksen talouskartta 1950–1980"
             },
             "qa_no_address": {
@@ -5950,23 +5854,46 @@
                 "name": "Thunderforest-maisema"
             },
             "trafikverket-baninfo": {
-                "description": "Ruotsin rautatieverkosto, sivuraiteet mukaanlukien."
+                "attribution": {
+                    "text": "© Liikennevirasto, CC0"
+                },
+                "description": "Ruotsin rataverkko sivuraiteineen",
+                "name": "Liikenneviraston rataverkko"
             },
             "trafikverket-baninfo-option": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
-                }
+                },
+                "description": "Ruotsin rataverkko mukautettavilla asetusvalinnoilla",
+                "name": "Liikenneviraston rataverkon asetukset"
             },
             "trafikverket-vagnat": {
                 "attribution": {
-                    "text": "© Trafikverket, CC0"
-                }
+                    "text": "© Liikennevirasto, CC0"
+                },
+                "description": "Ruotsin kansallinen tiestötietokanta",
+                "name": "Liikenneviraston tieverkko"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Liikennevirasto, CC0"
+                },
+                "description": "Ruotsin kansallinen tiestötietokanta laajennettuna: valtatienumerointi, hidasteet, pysähdysalueet, linja-autopysäkit, sillat, tunnelit ja liikenteenvalvontakamerat",
+                "name": "Liikenneviraston laajennettu tieverkko"
             },
             "trafikverket-vagnat-navn": {
                 "attribution": {
-                    "text": "© Trafikverket, CC0"
+                    "text": "© Liikennevirasto, CC0"
                 },
-                "description": "Ruotsinkieliset NVDB:n tiennimet"
+                "description": "Ruotsin kansallisen tiestötietokannan nimistö",
+                "name": "Liikenneviraston kadunnimikartta"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Liikennevirasto, CC0"
+                },
+                "description": "Ruotsin kansallinen tiestötietokanta mukautettavilla asetusvalinnoilla",
+                "name": "Liikenneviraston tieverkon asetukset"
             }
         },
         "community": {
@@ -5998,8 +5925,25 @@
             "it-twitter": {
                 "description": "Seuraa Twitter-tiliämme osoitteessa {url}"
             },
+            "osm-se": {
+                "description": "OSM-palvelut ja -neuvonta Ruotsin paikallisyhteisölle"
+            },
             "se-facebook": {
-                "description": "OpenStreetMap Ruotsi Facebookissa"
+                "name": "OpenStreetMap Ruotsi Facebookissa",
+                "description": "OpenStreetMap Ruotsin Facebook-sivu"
+            },
+            "se-forum": {
+                "name": "OpenStreetMap Ruotsin keskustelualue verkossa",
+                "description": "OpenStreetMap Ruotsin keskustelualue verkossa"
+            },
+            "se-irc": {
+                "name": "OpenStreetMap Ruotsin irc-kanava "
+            },
+            "se-mailinglist": {
+                "description": "OpenStreetMapin postituslista avointa keskustelua varten"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap Ruotsi Twitterissä"
             },
             "PHXGeo-twitter": {
                 "description": "Seuraa Twitter-tiliämme osoitteessa {url}"

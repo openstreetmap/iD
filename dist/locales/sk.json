@@ -136,14 +136,6 @@
             "delete_member": {
                 "annotation": "Odstránenie člena z relácie."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Pripojenie cesty k bodu.",
-                    "vertex": "Pripojenie cesty k inej ceste.",
-                    "line": "Pripojenie cesty k čiare.",
-                    "area": "Pripojenie cesty k ploche."
-                }
-            },
             "disconnect": {
                 "title": "Odpojiť",
                 "description": "Odpojiť od seba tieto čiary alebo plochy.",
@@ -299,7 +291,6 @@
         "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera a Internet Explorer 11 a vyžší. Aktualizujte prosím svoj prehliadač alebo použite Potlach 2.",
         "translate": {
             "translate": "Preložiť",
-            "localized_translation_label": "Cudzojazyčné meno",
             "localized_translation_language": "Zvoľte jazyk",
             "localized_translation_name": "Meno"
         },
@@ -1422,9 +1413,6 @@
                 "display": {
                     "label": "Ciferník"
                 },
-                "distance": {
-                    "label": "Celková vzdialenosť"
-                },
                 "dock": {
                     "label": "Typ"
                 },
@@ -1492,6 +1480,9 @@
                         "underground": "Podzemný",
                         "wall": "Nastenný"
                     }
+                },
+                "fireplace": {
+                    "label": "Ohnisko"
                 },
                 "fixme": {
                     "label": "Oprav ma!"
@@ -1701,7 +1692,7 @@
                     "label": "Poschodie"
                 },
                 "levels": {
-                    "label": "Poschodia",
+                    "label": "Podlažia",
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
@@ -1878,15 +1869,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Obtiažnosť",
-                    "options": {
-                        "advanced": "Pokročilá (čierny kosoštvorec)",
-                        "easy": "Ľahká (zelený kruh)",
-                        "expert": "Pre expertov (dvojitý čierny kosoštvorec)",
-                        "extreme": "Extrémna (potrebné horolezecké vybavenie)",
-                        "freeride": "Voľný zjazd (mimo zjazdovky)",
-                        "intermediate": "Stredná (modrý štvorec)",
-                        "novice": "Pre začiatočníkov (inštruktážny)"
-                    },
                     "placeholder": "Ľahká, stredná, pokročilá..."
                 },
                 "piste/grooming": {
@@ -2659,10 +2641,6 @@
                 "amenity/nursing_home": {
                     "name": "Ošetrovateľské centum"
                 },
-                "amenity/parking": {
-                    "name": "Parkovisko",
-                    "terms": "parkovisko,parkovanie,garaz,garáž"
-                },
                 "amenity/parking_entrance": {
                     "name": "Vhod/východ do garáže",
                     "terms": "vchod/vychod do garaze,vchod,vychod,garáž,garaz,parkovanie"
@@ -2670,10 +2648,6 @@
                 "amenity/parking_space": {
                     "name": "Parkovacie miesto",
                     "terms": "parkovisko,miesto na parkovanie"
-                },
-                "amenity/pavilion": {
-                    "name": "Pavilón",
-                    "terms": "pavilon"
                 },
                 "amenity/pharmacy": {
                     "name": "Lekáreň",
@@ -2820,6 +2794,9 @@
                     "name": "Divadlo",
                     "terms": "divadlo,predstavenie,muzikál,hra,scéna,muzikal,scena,činohra,cinohra,balet"
                 },
+                "amenity/theatre/type/amphi": {
+                    "name": "Amfiteáter"
+                },
                 "amenity/toilets": {
                     "name": "Toalety",
                     "terms": "záchod, záchody, toaleta, toalety, WC,zachod,zachody"
@@ -2862,10 +2839,6 @@
                 "amenity/vending_machine/newspapers": {
                     "name": "Automat na noviny",
                     "terms": "noviny,casopisy"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Automat na odosielanie/príjem balíkov",
-                    "terms": "automat na dodsielanie/prijem balikov,baliky,balíky"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Automat na parkovacie lístky",
@@ -3296,8 +3269,7 @@
                     "terms": "vyroba vin,vino,víno,vína,vina,vinaren,vináreň,vinica,vínna pivnica,vinna pivnica,pivnica"
                 },
                 "embankment": {
-                    "name": "Násyp",
-                    "terms": "nasyp,hrádza,hradza,val"
+                    "name": "Násyp"
                 },
                 "emergency/ambulance_station": {
                     "name": "Stanovište sanitiek",
@@ -3337,18 +3309,6 @@
                     "name": "Vchod/východ",
                     "terms": "vchod/vychod,vchod,vychod,východ,vstup,výstup,vchodové dvere,vchodove dvere"
                 },
-                "footway/crossing": {
-                    "name": "Prechod",
-                    "terms": "prechod pre chodcov"
-                },
-                "footway/crosswalk": {
-                    "name": "Prechod pre chodcov",
-                    "terms": "zebra,prechod"
-                },
-                "footway/sidewalk": {
-                    "name": "Chodník",
-                    "terms": "chodnik"
-                },
                 "ford": {
                     "name": "Brod",
                     "terms": "brod rieky,rieka,prechod cez rieku"
@@ -3387,14 +3347,6 @@
                 "highway/corridor": {
                     "name": "Chodba v budove",
                     "terms": "chodba,hala"
-                },
-                "highway/crossing": {
-                    "name": "Prechod",
-                    "terms": "prechod pre chodcov,zebra"
-                },
-                "highway/crosswalk": {
-                    "name": "Prechod pre chodcov",
-                    "terms": "prechod,zebra"
                 },
                 "highway/cycleway": {
                     "name": "Cyklocesta",
@@ -3727,10 +3679,6 @@
                     "name": "Ihrisko pre americký futbal",
                     "terms": "Ihrisko americkeho futbalu,americky futbal,americký futbal,rugby"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Basebalové ihrisko",
-                    "terms": "basebalove ihrisko,basebal,baseball"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Basketbalové ihrisko",
                     "terms": "basketbalove ihrisko,basketbal,basket,streetbal"
@@ -3828,10 +3776,6 @@
                     "name": "Maják",
                     "terms": "majak,výstraha,vystraha"
                 },
-                "man_made/observation": {
-                    "name": "Výhliadková veža",
-                    "terms": "vyhliadkova veza,veza,veža,výhliadka,vyhliadka"
-                },
                 "man_made/petroleum_well": {
                     "name": "Ropný vrt",
                     "terms": "ropny vrt,ropa"
@@ -3859,6 +3803,9 @@
                 "man_made/tower": {
                     "name": "Veža",
                     "terms": "veza,stĺp,stlp,stoziar,stožiar"
+                },
+                "man_made/tower/observation": {
+                    "name": "Vyhliadkova veža"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Čistička odpadových vôd",
@@ -3956,10 +3903,6 @@
                     "name": "Strom",
                     "terms": "listnatý strom,listnaty strom,ihličnatý strom,ihlicnaty strom"
                 },
-                "natural/tree_row": {
-                    "name": "Rad stromov",
-                    "terms": "aleja,alej,stromoradie"
-                },
                 "natural/volcano": {
                     "name": "Sopka",
                     "terms": "sopka,vulkán,vulkan"
@@ -4045,10 +3988,6 @@
                 "office/travel_agent": {
                     "name": "Cestovná agentúra"
                 },
-                "piste": {
-                    "name": "Lyžiarská dráha",
-                    "terms": "lyziarska draha,svah,lyziarsky svah,lyžiarská svah"
-                },
                 "place": {
                     "name": "Obec"
                 },
@@ -4097,14 +4036,6 @@
                 "power/generator": {
                     "name": "Elektráreň",
                     "terms": "elektraren,veterna elektraren,veterná elektráreň,atómka,atomka,vodná,vodna,tepelna,tepelna"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Jadrový reaktor",
-                    "terms": "jadrovy reaktor, nuklearny reaktor,nukleárny reaktor"
-                },
-                "power/generator/source_wind": {
-                    "name": "Veterná elektráreň",
-                    "terms": "veterna elektraren"
                 },
                 "power/line": {
                     "name": "Elektrické vedenie",
@@ -4159,6 +4090,9 @@
                 "railway/rail": {
                     "name": "Železničná trať",
                     "terms": "zeleznicna trat,trat,trať,železnica,zeleznica"
+                },
+                "railway/station": {
+                    "name": "Vlaková stanica"
                 },
                 "railway/subway": {
                     "name": "Metro",
@@ -4964,12 +4898,6 @@
                 },
                 "description": "Letecké snímky poskytnuté od basemap.at. Nástupca záberov geoimage.at.",
                 "name": "basemap.at Orthofoto"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMap prispievatielia"
-                },
-                "name": "Turistika & cyklo"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

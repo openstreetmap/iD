@@ -124,14 +124,6 @@
             "delete_member": {
                 "annotation": "సంబంధం నుండి ఒక అంశం తొలగించబడింది."
             },
-            "connect": {
-                "annotation": {
-                    "point": "పాయంట్ ఒక దారికి కలపబడింది",
-                    "vertex": "ఒక దారి మరొక దారితో కలపబడింది",
-                    "line": "గీత ఒక దారికి కలపబడింది",
-                    "area": "స్థలము ఒక దారికి కలపబడింది"
-                }
-            },
             "disconnect": {
                 "title": "విడదీయు",
                 "description": "ఈ గీతలను/ప్రదేశాలను ఒకదాని నుండి మరొకదానిని విడదీయండి.",
@@ -204,7 +196,6 @@
         "browser_notice": "ఈ సవరికకు Firefox, Chrome, Safari, Opera మరియు Internet Explorer 11 ఆపై మాత్రమే మద్దుతు ఇస్తాయి. పటాన్ని సవరించడానికి మీ బ్రౌజరును నవీకరించండి లేదా Potlatch 2 వాడండి.",
         "translate": {
             "translate": "అనువదించండి",
-            "localized_translation_label": "బహుభాషా పేరు",
             "localized_translation_language": "భాషను ఎంచుకోండి",
             "localized_translation_name": "పేరు"
         },

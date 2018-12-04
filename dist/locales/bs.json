@@ -110,14 +110,6 @@
             "delete_member": {
                 "annotation": "Uklonjen član iz relacije."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Povezana putanja na tačku.",
-                    "vertex": "Povezana putanja na drugo.",
-                    "line": "Povezana putanja na liniju.",
-                    "area": "Povezana putanja na područje."
-                }
-            },
             "disconnect": {
                 "title": "Prekinite vezu.",
                 "description": "Razdvojite ove linije/ područja jedne od drugih.",
@@ -182,7 +174,6 @@
         "tooltip_keyhint": "Prečica:",
         "translate": {
             "translate": "Prevesti",
-            "localized_translation_label": "Višejezični naziv",
             "localized_translation_language": "Izaberite jezik",
             "localized_translation_name": "Naziv"
         },
@@ -799,10 +790,6 @@
                     "name": "Tržnica",
                     "terms": "tržnica,pijaca"
                 },
-                "amenity/parking": {
-                    "name": "Parking za automobile",
-                    "terms": "parking,parking za automobile,parking za auta"
-                },
                 "amenity/pharmacy": {
                     "name": "Apoteka",
                     "terms": "apoteka,ljekarna"
@@ -1067,8 +1054,7 @@
                     "name": "Izrada prozora"
                 },
                 "embankment": {
-                    "name": "Nasip",
-                    "terms": "nasip"
+                    "name": "Nasip"
                 },
                 "emergency/ambulance_station": {
                     "name": "Stanica hitne pomoći",
@@ -1081,10 +1067,6 @@
                 "emergency/phone": {
                     "name": "Telefon za hitne slučajeve",
                     "terms": "telefon za hitne slučajeve,hitna telefonska linija"
-                },
-                "footway/sidewalk": {
-                    "name": "Trotoar",
-                    "terms": "trotoar"
                 },
                 "golf/bunker": {
                     "name": "Pješčana zamka",
@@ -1337,10 +1319,6 @@
                     "name": "Polje za američki fudbal",
                     "terms": "Polje za američki fudbal,igralište za američki fudbal"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Bejzbol teren",
-                    "terms": "bejzbol teren,igralište za bejzbol,bejzbol dijamant"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Košarkaški teren",
                     "terms": "košarkaški teren,igralište za košarku"
@@ -1403,10 +1381,6 @@
                 "man_made/lighthouse": {
                     "name": "Svjetionik",
                     "terms": "svjetionik,toranj za svjetlosnu navigaciju"
-                },
-                "man_made/observation": {
-                    "name": "Osmatračnica",
-                    "terms": "osmatračnica,toranj za osmatranje,platforma za osmatranje,toranj za turiste,protupožarni toranj"
                 },
                 "man_made/pier": {
                     "name": "Pristanište",

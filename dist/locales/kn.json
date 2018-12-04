@@ -139,14 +139,6 @@
             "delete_member": {
                 "annotation": "ಒಂದು ಅಂಶವನ್ನು ಸಂಬಂಧದಿಂದ ತೆಗೆಯಲಾಗಿದೆ. "
             },
-            "connect": {
-                "annotation": {
-                    "point": "ದಾರಿಯನ್ನು ಒಂದು ಚುಕ್ಕೆಗೆ ಸೇರಿಸಲಾಗಿದೆ.",
-                    "vertex": "ಒಂದು ದಾರಿಯನ್ನು ಇನೊಂದಕ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ.",
-                    "line": "ದಾರಿಯನ್ನು ಒಂದು ಗೆರೆಗೆ ಸೇರಿಸಲಾಗಿದೆ.",
-                    "area": "ದಾರಿಯನ್ನು ಒಂದು ಕ್ಷೇತ್ರಕ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ."
-                }
-            },
             "disconnect": {
                 "title": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸು",
                 "description": "ಈ ದಾರಿಗಳನ್ನು ಅಥವಾ ಕ್ಷೇತ್ರಗಳನ್ನು, ಒಂದರಿಂದ ಇನ್ನೊಂದನ್ನು ಬೇರ್ಪಡಿಸಿ. ",
@@ -302,7 +294,6 @@
         "browser_notice": "ಸಫಾರಿ, ಗೂಗಲ್, ಫಯರ್ಫಾಕ್ಸ್ ಮತ್ತು ಇಂಟರ್‌ನೆಟ್ ಎಕ್ಸ್‌ಪ್ಲೋರರ್ 11 ಈ ಎಡಿಟರನ್ನು ಬೆಂಬಲಿಸುತ್ತವೆ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಬ್ರೌಸೆರನ್ನು ಉನ್ನತೀಕರಿಸಿ ಅಥವಾ ಈ ನಕ್ಷೆ ಬಡಸಿಲರು ಪೊಟ್ಲಾಚ್ 2 ಅನ್ನು ಉಪಯೋಗಿಸಿ. ",
         "translate": {
             "translate": "ಭಾಷಾಂತರಿಸು",
-            "localized_translation_label": "ಬಹುಭಾಷಿಕ ಹೆಸರು.",
             "localized_translation_language": "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
             "localized_translation_name": "ಹೆಸರು"
         },
@@ -1277,12 +1268,6 @@
                 },
                 "piste/difficulty": {
                     "label": "ಕಷ್ಟ",
-                    "options": {
-                        "advanced": "ಮುಂದುವರೆದ (ಕಪ್ಪು ವಜ್ರ)",
-                        "easy": "ಸುಲಭ (ಹಸಿರು ವರ್ತುಲ)",
-                        "intermediate": "ಮಧ್ಯಂತರ (ನೀಲಿ ವರ್ತುಲ)",
-                        "novice": "ಅನನುಭವಿ (ಸೂಚನಾ)"
-                    },
                     "placeholder": "ಸುಲಭ, ಮಧ್ಯಂತರ, ಮುಂದುವರೆದ ....."
                 },
                 "piste/grooming": {
@@ -1484,9 +1469,6 @@
                 "amenity/library": {
                     "name": "ಗ್ರಂಥಾಲಯ"
                 },
-                "amenity/parking": {
-                    "name": "ಬಂಡಿ ನಿಲ್ದಾಣ"
-                },
                 "amenity/pharmacy": {
                     "name": "ಔಷಧಾಲಯ"
                 },
@@ -1674,9 +1656,6 @@
                 "leisure/swimming_pool": {
                     "name": "ಈಜುಕೊಳ"
                 },
-                "man_made/observation": {
-                    "name": "ವೀಕ್ಷಣಾ ಗೋಪುರ"
-                },
                 "man_made/petroleum_well": {
                     "name": "ತೈಲ ಬಾವಿ"
                 },
@@ -1694,9 +1673,6 @@
                 },
                 "natural/tree": {
                     "name": "ಮರ"
-                },
-                "natural/tree_row": {
-                    "name": "ಸಾಲು ಮರ"
                 },
                 "natural/volcano": {
                     "name": "ಜ್ವಾಲಾಮುಖಿ"

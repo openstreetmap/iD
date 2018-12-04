@@ -117,14 +117,6 @@
             "delete_member": {
                 "annotation": "একটি সম্পর্ক থেকে একজন সদস্যকে সরানো হয়েছে।"
             },
-            "connect": {
-                "annotation": {
-                    "point": "একটি গমনপথের সাথে একটি বিন্দু সংযোজন করা হয়েছে।",
-                    "vertex": "একটি গমনপথকে অারেকটি গমনপথের সাথে সংযোজন করা হয়েছে।",
-                    "line": "একটি রেখার সাথে একটি গমনপথ সংযোজন করা হয়েছে।",
-                    "area": "একটি এলাকার সাথে একটি গমনপথ সংযোজন করা হয়েছে।"
-                }
-            },
             "disconnect": {
                 "title": "বিচ্ছিন্ন করুন",
                 "description": "এই রেখা/এলাকাগুলিকে একে অপরের থেকে বিচ্ছিন্ন করুন।",
@@ -194,7 +186,6 @@
         "tooltip_keyhint": "শর্টকাট:",
         "translate": {
             "translate": "অনুবাদ করুন",
-            "localized_translation_label": "বহুভাষিক নাম",
             "localized_translation_language": "ভাষা বেছে নিন",
             "localized_translation_name": "নাম"
         },
@@ -815,9 +806,6 @@
                 "amenity/marketplace": {
                     "name": "বাজার"
                 },
-                "amenity/parking": {
-                    "name": "গাড়ি পার্কিং"
-                },
                 "amenity/pharmacy": {
                     "name": "দাওয়াইখানা"
                 },
@@ -1377,11 +1365,6 @@
             "OSM_Inspector-Tagging": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, ওপেনস্ট্রীটম্যাপের অবদানকারীগণ, সিসি-বাই-এসএ"
-                }
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© ওপেনস্ট্রীটম্যাপের অবদানকারীগণ"
                 }
             },
             "mapbox_locator_overlay": {

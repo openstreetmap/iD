@@ -133,14 +133,6 @@
             "delete_member": {
                 "annotation": "拎走咗關聯成員。"
             },
-            "connect": {
-                "annotation": {
-                    "point": "駁咗道去嗰處。",
-                    "vertex": "駁咗道去其他。",
-                    "line": "駁咗道去綫。",
-                    "area": "駁咗道去範圍。"
-                }
-            },
             "disconnect": {
                 "title": "掹開",
                 "description": "此綫或者範圍等，全部掹開。",
@@ -229,7 +221,6 @@
         "browser_notice": "只能在 Firefox、Chrome、Safari、Opera，以及Internet Explorer 至少版本十一。更新瀏覽器，又或者用 Potlatch 2 修改地圖。",
         "translate": {
             "translate": "繙",
-            "localized_translation_label": "話名",
             "localized_translation_language": "揀話",
             "localized_translation_name": "名"
         },
@@ -461,6 +452,7 @@
             "tell_us": "話過我知！"
         },
         "confirm": {
+            "okay": "知",
             "cancel": "唔做"
         },
         "splash": {
@@ -530,10 +522,38 @@
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "cn"
+                "countrycode": "cn",
+                "name": {
+                    "spring-street": "泉街"
+                }
+            },
+            "welcome": {
+                "title": "歡迎",
+                "welcome": "歡迎！此行教君改公家街圖之基本。",
+                "practice": "此行君只不過練習，改乜都唔會記低。",
+                "words": "此行會介紹新字新義。有新字時，會見字斜。",
+                "mouse": "君可用任意輸入裝置來改圖，之不過，此行當君有滑鼠，鼠上有左右掣。**君要駁滑鼠，當下就做，撳知掣。**",
+                "leftclick": "此處指導問君撳一下，連撳一下，就指用左掣。觸控皮嘅話，可以係撳一下，或者單指點一下。**左撳  {num} 次。**",
+                "rightclick": "有時會叫你右撳。如此等同控制鍵加一撳，或者觸控板上二指點一下。君之鍵盤或者有選單鍵，如同加撳。**右撳 {num} 次。**",
+                "chapters": "做得唔錯！君可以按下面嘅掣，隨時跳過幾課，或者遇難時，重新一課。開始喇！**撳 '{next}' 繼續。**"
             },
             "navigation": {
-                "title": "周圍望"
+                "title": "周圍望",
+                "drag": "此主圖，下有底圖，上有公家街圖資料。{br}君可拖張圖，撳定滑鼠左掣，滑鼠移來移去。用鍵盤箭嘴鍵一樣得。**拖張圖！**",
+                "zoom": "君可放大縮細。用滑鼠面個轆，或者觸控板卷動，或者撳圖上 {plus} ／ {minus} 掣。**放大縮細張圖！**",
+                "features": "*地貌*指圖上見到之物。現實世界何物，均可化成公家街圖中之地貌。",
+                "points_lines_areas": "圖中地貌，都以*處、綫或範圍*代表。",
+                "nodes_ways": "公家街圖中，處亦叫*節點*，綫及範圍亦叫*道*。",
+                "click_townhall": "圖上所有地貌，撳一下就㨂到。**撳一點就揀佢。**",
+                "selected_townhall": "做得好！處就揀咗喇。揀咗地貌佢會發光，時弱時強。",
+                "editor_townhall": "地貌㨂咗，*改地貌*亦會圖邊出現。",
+                "preset_townhall": "頂上有地貌分類。此處為 {preset}。",
+                "fields_townhall": "中間帶*欄*，地貌有何種性質，如名如地址。",
+                "close_townhall": "**要收返佢，鍵盤撳脫出掣，或者上面個 {button} 掣。**",
+                "search_street": "無論此面或全部，都可以搵地貌。**搵 '{name}' 。**",
+                "selected_street": "掂喎！ {name} 現下㨂咗喇。",
+                "editor_street": "街所有之欄，同大會堂有唔同。{br}依條街會有欄位 '{field1}' 同 '{field2}'。**收起編輯，鍵盤撳脫出掣，或上面 {button} 掣。**",
+                "play": "移下張圖，撳下其他地貌。睇下有乜可以加入公家街圖。**君攪掂時，去下一課，撳 '{next}' 。**"
             },
             "points": {
                 "title": "處"
@@ -543,6 +563,9 @@
             },
             "lines": {
                 "title": "綫"
+            },
+            "buildings": {
+                "title": "屋宇"
             },
             "startediting": {
                 "title": "開始改",
@@ -1327,15 +1350,6 @@
                 },
                 "piste/difficulty": {
                     "label": "難度",
-                    "options": {
-                        "advanced": "進階（黑鑽）",
-                        "easy": "易（綠圈）",
-                        "expert": "專家（雙黑鑽）",
-                        "extreme": "極難（要攀山架生）",
-                        "freeride": "自由滑行（場地外）",
-                        "intermediate": "中階（藍方）",
-                        "novice": "新手（教學）"
-                    },
                     "placeholder": "易、中階、 進階⋯⋯"
                 },
                 "piste/grooming": {
@@ -1808,10 +1822,6 @@
                     "name": "街市",
                     "terms": "Marketplace,市場,菜市場,街市"
                 },
-                "amenity/parking": {
-                    "name": "停車場",
-                    "terms": "Car Parking,停車場"
-                },
                 "amenity/pharmacy": {
                     "name": "藥房",
                     "terms": "Pharmacy,葯局,葯店,葯房,葯舖,藥局,藥店,藥房,藥舖"
@@ -1940,9 +1950,6 @@
                     "name": "樹籬",
                     "terms": "Hedge,樹籬"
                 },
-                "barrier/kerb": {
-                    "name": "路邊石"
-                },
                 "barrier/kissing_gate": {
                     "name": "單人轉門 ",
                     "terms": "Kissing Gate,單人轉門"
@@ -2015,8 +2022,7 @@
                     "terms": "Window Construction,造窗"
                 },
                 "embankment": {
-                    "name": "基堤",
-                    "terms": "Embankment,基堤,堤,堤壩,堤岸"
+                    "name": "基堤"
                 },
                 "emergency/ambulance_station": {
                     "name": "救護站",
@@ -2029,16 +2035,6 @@
                 "emergency/phone": {
                     "name": "求助電話",
                     "terms": "Emergency Phone,求助電話,緊急電話"
-                },
-                "footway/crosswalk": {
-                    "name": "行人過路"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "升起行人過路"
-                },
-                "footway/sidewalk": {
-                    "name": "行人路",
-                    "terms": "Sidewalk,行人路"
                 },
                 "golf/bunker": {
                     "name": "沙坑",
@@ -2070,12 +2066,6 @@
                 "highway/bridleway": {
                     "name": "馬徑",
                     "terms": "Bridle Path,馬徑,馬道"
-                },
-                "highway/crosswalk": {
-                    "name": "行人過路"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "升起行人過路"
                 },
                 "highway/cycleway": {
                     "name": "單車徑",
@@ -2343,10 +2333,6 @@
                     "name": "美式足球場",
                     "terms": "American Football Field,美式足球場"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "棒球場",
-                    "terms": "Baseball Field,棒球場"
-                },
                 "leisure/pitch/basketball": {
                     "name": "籃球場",
                     "terms": "Basketball Court,球場,籃球場"
@@ -2409,10 +2395,6 @@
                 "man_made/lighthouse": {
                     "name": "燈塔",
                     "terms": "Lighthouse,燈塔"
-                },
-                "man_made/observation": {
-                    "name": "瞭望臺",
-                    "terms": "Observation Tower,瞭望塔,瞭望臺"
                 },
                 "man_made/pier": {
                     "name": "埗頭",
@@ -2488,6 +2470,9 @@
                     "name": "峯",
                     "terms": "Peak,山峰,山頂,峯"
                 },
+                "natural/sand": {
+                    "name": "砂"
+                },
                 "natural/scree": {
                     "name": "碎石坡",
                     "terms": "Scree,碎石坡"
@@ -2503,10 +2488,6 @@
                 "natural/tree": {
                     "name": "樹",
                     "terms": "Tree,木,樹"
-                },
-                "natural/tree_row": {
-                    "name": "排樹",
-                    "terms": "Tree row,排樹,排樹"
                 },
                 "natural/volcano": {
                     "name": "火山",
@@ -2635,6 +2616,9 @@
                 "place/village": {
                     "name": "村",
                     "terms": "Village,村,村莊,村鎮"
+                },
+                "playground/sandpit": {
+                    "name": "砂池"
                 },
                 "point": {
                     "name": "點",

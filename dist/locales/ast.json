@@ -139,14 +139,6 @@
             "delete_member": {
                 "annotation": "Desaniciáu un miembru d'una rellación."
             },
-            "connect": {
-                "annotation": {
-                    "point": "Coneutada una vía con un puntu.",
-                    "vertex": "Coneutada una vía con otra.",
-                    "line": "Coneutada una vía con una llinia.",
-                    "area": "Coneutada una vía con un área."
-                }
-            },
             "disconnect": {
                 "title": "Desconeutar",
                 "description": "Desconectar estes llinies/árees una d'otra.",
@@ -302,7 +294,6 @@
         "browser_notice": "Esti editor tien encontu en Firefox, Chrome, Safari, Opera, ya Internet Explorer 11 y superior. Anueva'l restolador o usa Potlatch 2 pa editar el mapa.",
         "translate": {
             "translate": "Traducir",
-            "localized_translation_label": "Nome multillingüe",
             "localized_translation_language": "Escoyer idioma",
             "localized_translation_name": "Nome"
         },
@@ -1593,15 +1584,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Dificultá",
-                    "options": {
-                        "advanced": "Avanzáu (diamante prietu)",
-                        "easy": "Fácil (círculu verde)",
-                        "expert": "Espertu (doble diamante prietu)",
-                        "extreme": "Estremu (necesita equipu d'escalada)",
-                        "freeride": "Llibre (fuera de pista)",
-                        "intermediate": "Intermediu (cuadráu azul)",
-                        "novice": "Principiantes (enseñanza)"
-                    },
                     "placeholder": "Fácil, intermediu, avanzáu..."
                 },
                 "piste/grooming": {
@@ -2324,9 +2306,6 @@
                     "name": "Discoteca",
                     "terms": "Disco, discobar, baille"
                 },
-                "amenity/parking": {
-                    "name": "Aparcamientu"
-                },
                 "amenity/parking_entrance": {
                     "name": "Entrada/Salida de garaxe"
                 },
@@ -2501,9 +2480,6 @@
                 "amenity/vending_machine/newspapers": {
                     "name": "Máquina de venta de periódicos",
                     "terms": "máquina,automática,periódicos.prensa,revistes"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Máquina d'entrega/recoyía de paquetes"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Máquina de pagu d'aparcamientu",
@@ -2900,8 +2876,7 @@
                     "terms": "Viña"
                 },
                 "embankment": {
-                    "name": "Terremplén",
-                    "terms": "rellenu"
+                    "name": "Terremplén"
                 },
                 "emergency/ambulance_station": {
                     "name": "Parque d'ambulancies",
@@ -2940,22 +2915,6 @@
                 "entrance": {
                     "name": "Entrada/Salida",
                     "terms": "Accesu, puerta"
-                },
-                "footway/crossing": {
-                    "name": "Cruce de cai",
-                    "terms": "pasu"
-                },
-                "footway/crossing-raised": {
-                    "name": "Cruce de cai llevantáu"
-                },
-                "footway/crosswalk": {
-                    "name": "Pasu de peatones"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Pasu de peatones llevantáu"
-                },
-                "footway/sidewalk": {
-                    "name": "Cera"
                 },
                 "ford": {
                     "name": "Vau"
@@ -3043,18 +3002,6 @@
                 },
                 "highway/corridor": {
                     "name": "Pasiellu d'edificiu"
-                },
-                "highway/crossing": {
-                    "name": "Cruce de cai"
-                },
-                "highway/crossing-raised": {
-                    "name": "Cruce de cai llevantáu"
-                },
-                "highway/crosswalk": {
-                    "name": "Pasu de peatones"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Pasu de peatones llevantáu"
                 },
                 "highway/cycleway": {
                     "name": "Camín ciclista"
@@ -3406,9 +3353,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Campu de fútbol americanu"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Campu de béisbol"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Pista de baloncestu"
                 },
@@ -3523,10 +3467,6 @@
                 "man_made/monitoring_station": {
                     "name": "Estación de control"
                 },
-                "man_made/observation": {
-                    "name": "Torre de vixilancia",
-                    "terms": "Observatoriu,Torre d'observación"
-                },
                 "man_made/petroleum_well": {
                     "name": "Pozu petrolíferu"
                 },
@@ -3547,9 +3487,6 @@
                 },
                 "man_made/surveillance": {
                     "name": "Vixilancia"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Cámara de vixilancia"
                 },
                 "man_made/survey_point": {
                     "name": "Vértiz xeodésicu"
@@ -3640,9 +3577,6 @@
                 },
                 "natural/tree": {
                     "name": "Árbol"
-                },
-                "natural/tree_row": {
-                    "name": "Filera d'árboles"
                 },
                 "natural/volcano": {
                     "name": "Volcan"
@@ -3740,9 +3674,6 @@
                 "office/travel_agent": {
                     "name": "Axencia de viaxes"
                 },
-                "piste": {
-                    "name": "Pista/Circuitu d'esquí"
-                },
                 "place": {
                     "name": "Llugar"
                 },
@@ -3786,12 +3717,6 @@
                 "power/generator": {
                     "name": "Xenerador d'enerxía",
                     "terms": "Central eléctrica"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Reactor nuclear"
-                },
-                "power/generator/source_wind": {
-                    "name": "Turbina de vientu"
                 },
                 "power/line": {
                     "name": "Llinia eléctrica"
@@ -4648,9 +4573,6 @@
                 },
                 "name": "OSM Inspector: Etiquetáu"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "Estraes TIGER 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "A nivel d'ampliación 16+, datos del mapa de dominiu públicu dende US Census. A nivel d'ampliación menor, sólo los cambios dende 2006 menos los cambios yá incorporaos a OpenStreetMap",
                 "name": "Estraes TIGER 2014"
@@ -4686,12 +4608,6 @@
                 },
                 "description": "Capa d'ortofotos proporcionada por basemap.at «Socesor» de les imáxenes de geoimage.at.",
                 "name": "Ortofoto de basemap.at"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© collaboradores d'OpenStreetMap"
-                },
-                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -4876,9 +4792,6 @@
             },
             "be-mailinglist": {
                 "name": "Llista de corréu Talk-be"
-            },
-            "be-maptime": {
-                "name": "Maptime Bélxica"
             },
             "be-matrix": {
                 "name": "Canal Matrix d'OpenStreetMap BE"

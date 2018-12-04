@@ -145,12 +145,6 @@
                 "annotation": "Премахнат член на релация."
             },
             "connect": {
-                "annotation": {
-                    "point": "Свързан е път с точка.",
-                    "vertex": "Свързан е път с друг път.",
-                    "line": "Свързан е път с линия.",
-                    "area": "Свързан е път с площен обект."
-                },
                 "relation": "Тези обекти не могат да бъдат свързани, защото имат различни роли в релация.",
                 "restriction": "Тези обекти не могат да бъдат свързани, защото това ще повреди релацията \"{relation}\". "
             },
@@ -347,7 +341,6 @@
         "browser_notice": "Този редактор се поддържа във Firefox, Chrome, Safari, Opera и Internet Explorer 11 и следващи. Моля обновете своя браузър или използвайте  Potlatch 2, за да редактирате картата.",
         "translate": {
             "translate": "Превод",
-            "localized_translation_label": "Многоезично име",
             "localized_translation_language": "Изберете език",
             "localized_translation_name": "Име"
         },
@@ -1714,15 +1707,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Трудност",
-                    "options": {
-                        "advanced": "Трудна (черен диамант)",
-                        "easy": "Лесна (зелен кръг)",
-                        "expert": "Експерт (двоен черен диамант)",
-                        "extreme": "Екстремна (небходима катерачна екипировка)",
-                        "freeride": "Фрирайд (извън пистите)",
-                        "intermediate": "Средна (син квадрат)",
-                        "novice": "За начинаещи (учебни)"
-                    },
                     "placeholder": "Лесна, Средна, Трудна"
                 },
                 "piste/grooming": {
@@ -2295,9 +2279,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Игрище за американски футбол"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Игрище за бейзбол"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Баскетболно игрище"
                 },
@@ -2869,9 +2850,6 @@
                 },
                 "name": "OSM Inspector: Тагове"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Пътища 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "При ниво на увеличение 16+, публично достъпни картографски данни от US Census. При по-ниски нива увеличение само промените от 2006 година насам без тези вече включени в OpenStreetMap",
                 "name": "TIGER Пътища 2014"
@@ -2927,12 +2905,6 @@
                 },
                 "description": "Ортофото слой осигурен от basemap.at. \"Приемник\" на geoimage.at изображенията.",
                 "name": "basemap.at Ортофото"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMap contributors"
-                },
-                "name": "Туризъм & Колоездене"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

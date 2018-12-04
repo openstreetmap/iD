@@ -1,9 +1,13 @@
 {
     "eo": {
         "icons": {
+            "download": "elŝuti",
             "information": "informoj",
             "remove": "forigi",
-            "undo": "malfari"
+            "undo": "malfari",
+            "zoom_to": "fokusi",
+            "copy": "kopii",
+            "open_wikidata": "malfermi ĉe wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -152,10 +156,20 @@
             },
             "connect": {
                 "annotation": {
-                    "point": "Kunigis linion/areon al punkto.",
-                    "vertex": "Kunigis linion/areon al alia linio.",
-                    "line": "Kunigis linion/areon al linio.",
-                    "area": "Kunigis linion/areon al areo."
+                    "from_vertex": {
+                        "to_point": "Kunigis linion/areon al punkto.",
+                        "to_vertex": "Kunigis linion/areon al alia linio.",
+                        "to_line": "Kunigis linion/areon al linio.",
+                        "to_area": "Kunigis linion/areon al areo.",
+                        "to_adjacent_vertex": "Kunfandis apudajn punktojn al linio/areo.",
+                        "to_sibling_vertex": "Kunigis linion al si mem."
+                    },
+                    "from_point": {
+                        "to_point": "Kunfandis punkton al alia punkto.",
+                        "to_vertex": "Kunfandis punkton al punkto en linio/areo.",
+                        "to_line": "Movis punkton al linio.",
+                        "to_area": "Movis punkton al areo."
+                    }
                 },
                 "relation": "Ĉi tiuj elementoj ne povas esti konektitaj, ĉar ili havas konfliktajn rolojn de rilatoj.",
                 "restriction": "Ĉi tiuj elementoj ne povas esti konektitaj, ĉar tio ĉi detruus la rilaton “{relation}”."
@@ -371,6 +385,10 @@
         "loading_auth": "Konektado al OpenStreetMap…",
         "report_a_bug": "Raporti eraron",
         "help_translate": "Helpi traduki",
+        "sidebar": {
+            "key": "`",
+            "tooltip": "Baskuli flankbreton."
+        },
         "feature_info": {
             "hidden_warning": "{count} kaŝitaj objektoj",
             "hidden_details": "Ĉi tiuj objektoj estas nune kaŝitaj: {details}"
@@ -517,7 +535,10 @@
             "way": "Linio",
             "relation": "Rilato",
             "location": "Pozicio",
-            "add_fields": "Aldoni kampon:"
+            "add_fields": "Aldoni kampon:",
+            "lock": {
+                "suggestion": "La kampo “{label}” estas neredaktebla, ĉar estas etikedo de Vikidatumoj. Vi povas forigi ĝin aŭ redakti aliajn etikedojn en la sekcio “ĉiuj etikedoj”."
+            }
         },
         "background": {
             "title": "Fono",
@@ -1321,6 +1342,7 @@
                     "background_switch": "Baskuli reen al antaŭa fono",
                     "map_data": "Montri agordojn pri map-datumoj",
                     "fullscreen": "Enigi plenekranan reĝimon",
+                    "sidebar": "Baskuli flankbreton",
                     "wireframe": "Baskuli map-plenigon",
                     "minimap": "Baskuli mapeton"
                 },
@@ -1415,6 +1437,11 @@
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
         },
+        "wikidata": {
+            "identifier": "Identigilo",
+            "label": "Etikedo",
+            "description": "Priskribo"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1452,6 +1479,9 @@
                 },
                 "category-route": {
                     "name": "Kursoj"
+                },
+                "category-utility": {
+                    "name": "Tuboj kaj kabloj"
                 },
                 "category-water-area": {
                     "name": "Akvejoj"
@@ -1636,7 +1666,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Speco de vendejo"
+                    "label": "Servoj"
                 },
                 "bench": {
                     "label": "Benko"
@@ -1677,6 +1707,9 @@
                 "bridge": {
                     "label": "Speco",
                     "placeholder": "Norma"
+                },
+                "bridge/support": {
+                    "label": "Speco"
                 },
                 "building": {
                     "label": "Konstruaĵo"
@@ -1725,6 +1758,9 @@
                 "collection_times": {
                     "label": "Repreno je"
                 },
+                "colour": {
+                    "label": "Koloro"
+                },
                 "comment": {
                     "label": "Ŝanĝara komento",
                     "placeholder": "Konciza priskribo de viaj kontribuaĵoj (nepra)"
@@ -1741,6 +1777,14 @@
                 },
                 "content": {
                     "label": "Enhavo"
+                },
+                "conveying": {
+                    "label": "Direkto de movado",
+                    "options": {
+                        "backward": "Malantaŭen",
+                        "forward": "Antaŭen",
+                        "reversible": "Ŝanĝata"
+                    }
                 },
                 "country": {
                     "label": "Lando"
@@ -1834,6 +1878,9 @@
                 "description": {
                     "label": "Priskribo"
                 },
+                "design": {
+                    "label": "Formo de fosto"
+                },
                 "devices": {
                     "label": "Aparatoj",
                     "placeholder": "1, 2, 3…"
@@ -1888,7 +1935,7 @@
                     "label": "Vidigilo"
                 },
                 "distance": {
-                    "label": "Tuta distanco"
+                    "label": "Distanco"
                 },
                 "dock": {
                     "label": "Speco"
@@ -1961,11 +2008,17 @@
                         "wall": "Muro"
                     }
                 },
+                "fireplace": {
+                    "label": "Kameno"
+                },
                 "fitness_station": {
                     "label": "Speco de ekzerc-ilaro"
                 },
                 "fixme": {
                     "label": "Riparu min!"
+                },
+                "flag/type": {
+                    "label": "Speco de flago"
                 },
                 "ford": {
                     "label": "Speco",
@@ -1973,6 +2026,9 @@
                 },
                 "frequency": {
                     "label": "Frekvenco"
+                },
+                "from": {
+                    "label": "El"
                 },
                 "fuel": {
                     "label": "Brulaĵo"
@@ -2039,6 +2095,15 @@
                 },
                 "historic/civilization": {
                     "label": "Historia civilizo"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Dronigita je"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Videbla dum alfluo"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Videbla dum defluo"
                 },
                 "hoops": {
                     "label": "Korboj",
@@ -2140,6 +2205,9 @@
                     "label": "Vetur-koridoroj",
                     "placeholder": "1, 2, 3…"
                 },
+                "language_multi": {
+                    "label": "Lingvoj"
+                },
                 "layer": {
                     "label": "Tavolo",
                     "placeholder": "0"
@@ -2199,6 +2267,14 @@
                 "location": {
                     "label": "Loko"
                 },
+                "location_pool": {
+                    "label": "Loko",
+                    "options": {
+                        "indoor": "En konstruaĵo",
+                        "outdoor": "Ekstere",
+                        "roof": "Tegmento"
+                    }
+                },
                 "man_made": {
                     "label": "Speco"
                 },
@@ -2210,6 +2286,9 @@
                 },
                 "map_type": {
                     "label": "Tipo"
+                },
+                "material": {
+                    "label": "Materialo"
                 },
                 "maxheight": {
                     "label": "Maksimuma alto",
@@ -2385,15 +2464,52 @@
                 "piste/difficulty": {
                     "label": "Malfacileco",
                     "options": {
+                        "advanced": "Malfacila",
+                        "easy": "Facila",
+                        "expert": "Malfacilega",
+                        "extreme": "Ekstrema",
+                        "freeride": "Tre malfacilega",
+                        "intermediate": "Meza",
+                        "novice": "Facilega"
+                    },
+                    "placeholder": "Facila, meza, malfacila…"
+                },
+                "piste/difficulty_downhill": {
+                    "label": "Malfacileco",
+                    "options": {
                         "advanced": "Malfacila (nigra rombo)",
-                        "easy": "Facila (verda cirklo)",
+                        "easy": "Facila (verda rondo)",
                         "expert": "Malfacilega (duobla nigra rombo)",
                         "extreme": "Ekstrema (grimpada ilaro bezonata)",
-                        "freeride": "Tre malfacilega (eksterskivoje)",
+                        "freeride": "Tre malfacilega",
                         "intermediate": "Meza (blua kvadrato)",
                         "novice": "Facilega (por novuloj)"
                     },
-                    "placeholder": "Facila, meza, malfacila…"
+                    "placeholder": "Facila, meza, malfacila..."
+                },
+                "piste/difficulty_nordic": {
+                    "label": "Malfacileco",
+                    "options": {
+                        "advanced": "Malfacila - mallarĝaj, krutaj aŭ glaciaj fragmentoj; akraj turniĝoj",
+                        "easy": "Facila - malgrandaj montetoj, malmulte da krutaj fragmentoj",
+                        "expert": "Malfacilega - danĝera tereno ĉirkaŭe",
+                        "intermediate": "Meza - kruta fragmento",
+                        "novice": "Facilega - ebena, senpena"
+                    },
+                    "placeholder": "Facila, meza, malfacila..."
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Malfacileco",
+                    "options": {
+                        "advanced": "Malfacila - S: klineco 40-45°",
+                        "easy": "Facila - WS: klineco 30-35°",
+                        "expert": "Malfacilega - SS: klineco 45-50°",
+                        "extreme": "Ekstrema - EX: klineco >55°",
+                        "freeride": "Tre malfacilega - AS: klineco 50-55°",
+                        "intermediate": "Meza - ZS: klineco 35-40°",
+                        "novice": "Facilega - L: klineco <30°"
+                    },
+                    "placeholder": "Facila, meza, malfacila..."
                 },
                 "piste/grooming": {
                     "label": "Skivoja preparado",
@@ -2406,9 +2522,35 @@
                         "skating": "Neĝtabulada"
                     }
                 },
+                "piste/grooming_downhill": {
+                    "label": "Skivoja preparado",
+                    "options": {
+                        "backcountry": "Nenia",
+                        "classic": "Klasika",
+                        "mogul": "Ĝibetara"
+                    }
+                },
+                "piste/grooming_hike": {
+                    "label": "Skivoja preparado",
+                    "options": {
+                        "backcountry": "Skivojo preparita per skiistoj permane",
+                        "classic": "Klasika - vintra marŝado"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "label": "Skivoja preparado",
+                    "options": {
+                        "backcountry": "Skivojo preparita per skiistoj permane",
+                        "classic": "Klasika",
+                        "classic+skating": "Klasika kaj neĝtabulada",
+                        "scooter": "Motorsleda",
+                        "skating": "Neĝtabulada"
+                    }
+                },
                 "piste/type": {
                     "label": "Speco",
                     "options": {
+                        "connection": "Konekto",
                         "downhill": "Alpa, malsuprenira (downhill)",
                         "hike": "Skikurada",
                         "ice_skate": "Glitkurada",
@@ -2458,7 +2600,7 @@
                     "label": "Tipo"
                 },
                 "railway/position": {
-                    "label": "Pozicio de mejloŝtono",
+                    "label": "Kilometro de fosto",
                     "placeholder": "Distanco (kun precizo de unu dekono 123.4)"
                 },
                 "railway/signal/direction": {
@@ -2474,6 +2616,14 @@
                 },
                 "recycling_accepts": {
                     "label": "Akceptanta"
+                },
+                "recycling_type": {
+                    "label": "Speco",
+                    "options": {
+                        "centre": "centro de recikligo",
+                        "container": "ujo"
+                    },
+                    "placeholder": "ujo, centro"
                 },
                 "ref": {
                     "label": "Referenco"
@@ -2547,8 +2697,98 @@
                 "sanitary_dump_station": {
                     "label": "Forigado de fekaĵoj"
                 },
+                "scuba_diving": {
+                    "label": "Servoj"
+                },
+                "seamark/beacon_isolated_danger/shape": {
+                    "label": "Formo"
+                },
+                "seamark/beacon_lateral/category": {
+                    "label": "Kategorio",
+                    "options": {
+                        "danger_left": "Danĝero maldekstre",
+                        "danger_right": "Danĝero dekstre",
+                        "port": "Maldekstra ŝipflanko",
+                        "starboard": "Dekstra ŝipflanko",
+                        "waterway_left": "Akvovojo maldekstre",
+                        "waterway_right": "Akvovojo dekstre"
+                    }
+                },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Koloro",
+                    "options": {
+                        "green": "Verda",
+                        "grey": "Griza",
+                        "red": "Ruĝa"
+                    }
+                },
+                "seamark/beacon_lateral/shape": {
+                    "label": "Formo"
+                },
+                "seamark/beacon_lateral/system": {
+                    "label": "Sistemo",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Alia"
+                    }
+                },
+                "seamark/buoy_lateral/category": {
+                    "label": "Kategorio",
+                    "options": {
+                        "channel_left": "Kanalo maldekstre",
+                        "channel_right": "Kanalo dekstre",
+                        "danger_left": "Danĝero maldekstre",
+                        "danger_right": "Danĝero dekstre",
+                        "port": "Maldekstra ŝipflanko",
+                        "preferred_channel_port": "Disvojigo: preferata maldekstra ŝipflanko",
+                        "preferred_channel_starboard": "Disvojigo: preferata dekstra ŝipflanko",
+                        "starboard": "Dekstra ŝipflanko",
+                        "waterway_left": "Akvovojo maldekstre",
+                        "waterway_right": "Akvovojo dekstre"
+                    }
+                },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Koloro",
+                    "options": {
+                        "green": "Verda",
+                        "green;red;green": "Verda-Ruĝa-Verda",
+                        "green;white;green;white": "Verda-Blanka-Verda-Blanka",
+                        "red": "Ruĝa",
+                        "red;green;red": "Ruĝa-Verda-Ruĝa",
+                        "red;white;red;white": "Ruĝa-Blanka-Ruĝa-Blanka",
+                        "white": "Blanka",
+                        "yellow": "Flava"
+                    }
+                },
+                "seamark/buoy_lateral/shape": {
+                    "label": "Formo"
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "Sistemo",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Alia"
+                    }
+                },
+                "seamark/mooring/category": {
+                    "label": "Kategorio"
+                },
+                "seamark/type": {
+                    "label": "Marmarko"
+                },
+                "seamark/wreck/category": {
+                    "label": "Kategorio"
+                },
                 "seasonal": {
                     "label": "Sezona"
+                },
+                "seats": {
+                    "label": "Seĝoj",
+                    "placeholder": "2, 4, 6…"
                 },
                 "second_hand": {
                     "label": "Brokantado",
@@ -2719,6 +2959,9 @@
                 "surveillance/zone": {
                     "label": "Gardata areo"
                 },
+                "swimming_pool": {
+                    "label": "Speco"
+                },
                 "switch": {
                     "label": "Tipo",
                     "options": {
@@ -2739,6 +2982,9 @@
                         "yes": "Jes"
                     },
                     "placeholder": "Jes, ne, nur elportado"
+                },
+                "to": {
+                    "label": "Al"
                 },
                 "toilets/disposal": {
                     "label": "Malplenigado",
@@ -2784,6 +3030,17 @@
                 },
                 "traffic_calming": {
                     "label": "Speco"
+                },
+                "traffic_sign": {
+                    "label": "Trafiksigno"
+                },
+                "traffic_sign/direction": {
+                    "label": "Direkto",
+                    "options": {
+                        "backward": "Malantaŭen",
+                        "both": "Ambaŭ / ĉiuj",
+                        "forward": "Antaŭen"
+                    }
                 },
                 "traffic_signals": {
                     "label": "Speco"
@@ -2905,6 +3162,9 @@
                 },
                 "width": {
                     "label": "Larĝo (metroj)"
+                },
+                "wikidata": {
+                    "label": "Vikidatumoj"
                 },
                 "wikipedia": {
                     "label": "Vikipedio"
@@ -3173,6 +3433,10 @@
                     "name": "Dentistejo",
                     "terms": "dentisto,dentkuracisto,stomatologo,kabineto de dentisto"
                 },
+                "amenity/dive_centre": {
+                    "name": "Centro de subakva naĝado",
+                    "terms": "plonĝado,plonghado,plongxado,naĝado subakva,subakva naĝado,"
+                },
                 "amenity/doctors": {
                     "name": "Kabineto de kuracisto",
                     "terms": "kuracistejo,sanigejo,doktoro"
@@ -3196,6 +3460,30 @@
                 "amenity/fast_food": {
                     "name": "Rapidmanĝejo",
                     "terms": "rapimanghejo,rapidmangxejo,manĝetejo,sandviĉejo,makdonaldo,fritbudo,fastfood,kebabo,hotdogo,hamburgero,picejo"
+                },
+                "amenity/fast_food/burger": {
+                    "name": "Rapidmanĝejo (burgeroj)",
+                    "terms": "burgeroj,hamburgeroj"
+                },
+                "amenity/fast_food/chicken": {
+                    "name": "Rapidmanĝejo (kokaĵo)",
+                    "terms": "kokaĵo,rostigilo"
+                },
+                "amenity/fast_food/fish_and_chips": {
+                    "name": "Rapidmanĝejo (terpomfingroj kun fiŝaĵo)",
+                    "terms": "fiŝaĵo,fritoj,terpomfingroj,terpomfritoj,fritbudo"
+                },
+                "amenity/fast_food/kebab": {
+                    "name": "Rapidmanĝejo (kebabo)",
+                    "terms": "kebabo,kebap,doner,giros"
+                },
+                "amenity/fast_food/pizza": {
+                    "name": "Picejo (rapidmanĝejo)",
+                    "terms": "pico,pizza"
+                },
+                "amenity/fast_food/sandwich": {
+                    "name": "Rapidmanĝejo (sandviĉoj)",
+                    "terms": "sandviĉoj,sandvichoj,sandvicxoj"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Pram-stacio"
@@ -3244,6 +3532,10 @@
                     "name": "Tereno de infanĝardeno (ISCED 0)",
                     "terms": "infanoghardeno,infanogxardeno,antaŭlernejo,kindergarteno,infanĝardeno,infanghardeno,infangxardeno,infanvartejo,lernludejo"
                 },
+                "amenity/language_school": {
+                    "name": "Lingva lernejo",
+                    "terms": "lingvolernejo"
+                },
                 "amenity/library": {
                     "name": "Biblioteko",
                     "terms": "libropruntejo,librejo,librarejo"
@@ -3259,6 +3551,10 @@
                 "amenity/monastery": {
                     "name": "Monaĥeja tereno",
                     "terms": "monahhejo,monahxejo,abatejo,klostro,klaŭstro"
+                },
+                "amenity/money_transfer": {
+                    "name": "Centro de mon-transigo",
+                    "terms": "monsendo,montransigo"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcikla parkumejo",
@@ -3277,7 +3573,11 @@
                 },
                 "amenity/parking": {
                     "name": "Parkumejo",
-                    "terms": "parkejo,parkadejo,aŭtoparkejo"
+                    "terms": "parkumejo,parkejo,aŭtohaltejo,parkadejo"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Pluretaĝa parkumejo",
+                    "terms": "parkejo,parkumejo,aŭtejo,aŭtoparkejo"
                 },
                 "amenity/parking_entrance": {
                     "name": "Parkumeja/garaĝa enveturejo/elveturejo",
@@ -3287,9 +3587,13 @@
                     "name": "Parkumeja loko (detala)",
                     "terms": "parkumejo"
                 },
-                "amenity/pavilion": {
-                    "name": "Pavilono",
-                    "terms": "laŭbo,altano"
+                "amenity/payment_centre": {
+                    "name": "Centro de pago",
+                    "terms": "pagejo"
+                },
+                "amenity/payment_terminal": {
+                    "name": "Pag-aŭtomato",
+                    "terms": "pagaŭtomato,pagterminalo,monaŭtomato,bankaŭtomato"
                 },
                 "amenity/pharmacy": {
                     "name": "Apoteko",
@@ -3356,8 +3660,8 @@
                     "terms": "bierejo,trinkejo,drinkejo,alkoholejo,gastejo,pub"
                 },
                 "amenity/public_bath": {
-                    "name": "Publika banejo",
-                    "terms": "banejo,lavejo"
+                    "name": "Banejo (distro)",
+                    "terms": "banejo,lavejo,naĝejo,termofonto,varmofonto,baseno"
                 },
                 "amenity/public_bookcase": {
                     "name": "Publika libroŝranko",
@@ -3368,12 +3672,15 @@
                     "terms": "naturrezervejo,naturprotektejo,impostbudo,konservejo,arbaristejo,nacia parko,gardistejo"
                 },
                 "amenity/recycling": {
-                    "name": "Recikligujo",
-                    "terms": "recikligo,rubujo,rubujego"
+                    "name": "Recikligejo"
                 },
                 "amenity/recycling_centre": {
                     "name": "Ricikliga centro",
                     "terms": "recikligejo,recikligo,rubodeponejo,balaaĵejo"
+                },
+                "amenity/recycling_container": {
+                    "name": "Centro de recikligo",
+                    "terms": "rubujo,balaaĵujo,rubujego,recikligujo"
                 },
                 "amenity/register_office": {
                     "name": "Oficejo de civila stato"
@@ -3381,6 +3688,78 @@
                 "amenity/restaurant": {
                     "name": "Restoracio",
                     "terms": "kafejo,manĝejo,gastejo,picejo"
+                },
+                "amenity/restaurant/american": {
+                    "name": "Restoracio (Amerika kuirarto)",
+                    "terms": "amerika restoracio,usona restoracio"
+                },
+                "amenity/restaurant/asian": {
+                    "name": "Restoracio (Azia kuirarto)",
+                    "terms": "azia restoracio"
+                },
+                "amenity/restaurant/chinese": {
+                    "name": "Restoracio (Ĉina kuirarto)",
+                    "terms": "ĉina restoracio,china restoracio,cxina restoracio"
+                },
+                "amenity/restaurant/french": {
+                    "name": "Restoracio (Franca kuirarto)",
+                    "terms": "franca restoracio"
+                },
+                "amenity/restaurant/german": {
+                    "name": "Restoracio (Germana kuirarto)",
+                    "terms": "germana restoracio"
+                },
+                "amenity/restaurant/greek": {
+                    "name": "Restoracio (greka kuirarto)",
+                    "terms": "greka restoracio"
+                },
+                "amenity/restaurant/indian": {
+                    "name": "Restoracio (Barata kuirarto)",
+                    "terms": "barata restoracio,hinda restoracio"
+                },
+                "amenity/restaurant/italian": {
+                    "name": "Restoracio (Itala kuirarto)",
+                    "terms": "itala restoracio"
+                },
+                "amenity/restaurant/japanese": {
+                    "name": "Restoracio (Japana kuirarto)",
+                    "terms": "japana restoracio"
+                },
+                "amenity/restaurant/mexican": {
+                    "name": "Restoracio (Meksika kuirarto)",
+                    "terms": "meksika restoracio"
+                },
+                "amenity/restaurant/noodle": {
+                    "name": "Restoracio (aziaj nudeloj)",
+                    "terms": "nudeloj,riznudeloj,bihun,mihun,rameno,udono,bamio"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "Picejo (restoracio)",
+                    "terms": "pico,pizza"
+                },
+                "amenity/restaurant/seafood": {
+                    "name": "Restoracio (marfruktoj)",
+                    "terms": "marfruktoj,mariskoj,moluskoj,krustuloj,kalmaroj,salikokoj,franca restoracio"
+                },
+                "amenity/restaurant/steakhouse": {
+                    "name": "Restoracio (viandtranĉaĵoj)",
+                    "terms": "viando,stekoj,bovaĵo"
+                },
+                "amenity/restaurant/sushi": {
+                    "name": "Restoracio (suŝio)",
+                    "terms": "suŝio,susxio,sushio"
+                },
+                "amenity/restaurant/thai": {
+                    "name": "Restoracio (Taja kuirarto)",
+                    "terms": "taja restoracio,tajlanda restoracio"
+                },
+                "amenity/restaurant/turkish": {
+                    "name": "Restoracio (Turka kuirarto)",
+                    "terms": "turka kuirarto"
+                },
+                "amenity/restaurant/vietnamese": {
+                    "name": "Restoracio (Vjetnama kuirarto)",
+                    "terms": "vjetnama restoracio"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "Stacio de forigado de fekaĵoj (kampado)",
@@ -3397,9 +3776,25 @@
                     "name": "Ŝirmejo",
                     "terms": "shirmejo,sxirmejo,ŝedo,budo,ŝirmo"
                 },
+                "amenity/shelter/gazebo": {
+                    "name": "Ĝardena budo",
+                    "terms": "budo,shedo,sxedo"
+                },
+                "amenity/shelter/lean_to": {
+                    "name": "Duon-ferma ŝirmejo",
+                    "terms": "budo,ŝedo,shirmo,sxirmo"
+                },
+                "amenity/shelter/picnic_shelter": {
+                    "name": "Ŝirmejo senflankmura (piknika)",
+                    "terms": "shirmejo,sxirmejo,ŝedo,budo,ŝirmo"
+                },
+                "amenity/shelter/public_transport": {
+                    "name": "Ŝirmejo publik-transporta",
+                    "terms": "shirmejo,sxirmejo,ŝedo,budo,ŝirmo,haltejo"
+                },
                 "amenity/shower": {
                     "name": "Duŝejo",
-                    "terms": "duŝo,dushejo,dusxejo,banado"
+                    "terms": "duŝo,dushejo,dusxejo,banado,banejo"
                 },
                 "amenity/smoking_area": {
                     "name": "Fumejo",
@@ -3444,6 +3839,10 @@
                     "name": "Teatrejo",
                     "terms": "teatro"
                 },
+                "amenity/theatre/type/amphi": {
+                    "name": "Amfiteatro",
+                    "terms": "teatro,spektejo"
+                },
                 "amenity/toilets": {
                     "name": "Necesejo",
                     "terms": "tualeto,urinejo,wc,latrino,maltrinkejo,pisejo"
@@ -3455,6 +3854,10 @@
                 "amenity/university": {
                     "name": "Tereno de altgrada lernejo (ISCED 5-7)",
                     "terms": "universitato,altgrada lernejo,instruejo,politeĥniko,politekniko,altlernejo,studejo"
+                },
+                "amenity/vehicle_inspection": {
+                    "name": "Aŭtomobil-kontrolejo",
+                    "terms": "kontrolstacio,inspektejo"
                 },
                 "amenity/vending_machine": {
                     "name": "Vendilo",
@@ -3511,8 +3914,12 @@
                     "name": "Vendilo de gazetoj",
                     "terms": "gazeto,ĵurnalo,jhurnalo,jxurnalo,vendmaŝino"
                 },
+                "amenity/vending_machine/parcel_pickup": {
+                    "name": "Poŝt-aŭtomato (nur ricevo)",
+                    "terms": "poŝtmaŝino,poshtmashino,posxtmasxino,poŝtkesto,pakaĵo,ekspedaĵo"
+                },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Vendilo por ricevo/sendo de poŝtaĵoj",
+                    "name": "Poŝt-aŭtomato (sendo kaj ricevo)",
                     "terms": "poŝtmaŝino,poshtmashino,posxtmasxino,poŝtkesto,pakaĵo,ekspedaĵo"
                 },
                 "amenity/vending_machine/parking_tickets": {
@@ -3561,7 +3968,7 @@
                 },
                 "area": {
                     "name": "Areo",
-                    "terms": "areo,ejo,zono,kampejo"
+                    "terms": "areo"
                 },
                 "area/highway": {
                     "name": "Vojpavimo",
@@ -3615,6 +4022,10 @@
                     "name": "Onda fervojo",
                     "terms": "reltobogano"
                 },
+                "attraction/summer_toboggan": {
+                    "name": "Somera tobogano",
+                    "terms": "tobogano,deglitejo,skeletonado,sledado"
+                },
                 "attraction/train": {
                     "name": "Trajneto (allogaĵo)",
                     "terms": "turisma trajno,turisma vagonareto,vagonareto"
@@ -3662,17 +4073,33 @@
                     "name": "Palisaro",
                     "terms": "barilo"
                 },
+                "barrier/fence/railing": {
+                    "name": "Gard-relo",
+                    "terms": "gardrelo,palisaro,balustro,balustrado,barilo,bariero,apogrelo"
+                },
                 "barrier/gate": {
                     "name": "Pordego",
                     "terms": "pordo,enirejo"
                 },
+                "barrier/guard_rail": {
+                    "name": "Gard-relo (apudvoja)",
+                    "terms": "gardrelo,palisaro,balustro,balustrado,barilo,bariero,apogrelo"
+                },
                 "barrier/hedge": {
-                    "name": "Kreskaĵbarilo",
-                    "terms": "kreskajhbarilo,kreskajxbarilo,heĝo,hegho,hegxo,plektobarilo"
+                    "name": "Kreskaĵ-barilo",
+                    "terms": "kreskaĵbarilo,kreskajhbarilo,kreskajxbarilo,heĝo,hegho,hegxo,plektobarilo"
                 },
                 "barrier/kerb": {
                     "name": "Trotuar-randaĵo",
-                    "terms": "trotuarrandaĵo,randaĵo,randŝtono"
+                    "terms": "trotuarrandaĵo,trotuarlimo,irejlimo,irejrandaĵo,randŝtono,randaĵo"
+                },
+                "barrier/kerb/flush": {
+                    "name": "Trotuar-randaĵo kun blind-reliefo (≈0cm)",
+                    "terms": "trotuarrandaĵo,trotuarlimo,irejlimo,irejrandaĵo,randŝtono,randaĵo,blindreliefo,reliefo"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "Trotuar-randaĵo malalta (≈3cm)",
+                    "terms": "trotuarrando,trotuarlimo,irejlimo,irejrandaĵo,randŝtono,randaĵo"
                 },
                 "barrier/kissing_gate": {
                     "name": "Nurhoma pordego",
@@ -3702,6 +4129,14 @@
                     "name": "Administra limo",
                     "terms": "limo,landlimo,provinclimo,ŝtatlimo,urblimo"
                 },
+                "bridge/support": {
+                    "name": "Subtenilo de ponto",
+                    "terms": "subteno,pilono,apogilo,apogkolono,trabo"
+                },
+                "bridge/support/pier": {
+                    "name": "Vertikala(j) apogilo(j)",
+                    "terms": "subteno,pilono,apogilo,apogkolono,trabo"
+                },
                 "building": {
                     "name": "Konstruaĵo",
                     "terms": "konstruajho,konstruajxo,konstruo,domo"
@@ -3728,6 +4163,10 @@
                 "building/cabin": {
                     "name": "Kabano (parte-masonita)",
                     "terms": "dometo,ĥato,ĉaledo"
+                },
+                "building/carport": {
+                    "name": "Tegmenta parkumejo",
+                    "terms": "aŭtejo,garaĝo,garaĝaro,parkumejo,budo,ŝedo"
                 },
                 "building/cathedral": {
                     "name": "Katedralo",
@@ -3819,6 +4258,10 @@
                 "building/mosque": {
                     "name": "Moskea konstruaĵo",
                     "terms": "moskeo,islamo,minareto"
+                },
+                "building/pavilion": {
+                    "name": "Ĉesporteja konstruaĵo",
+                    "terms": "pavilono,vestejo,sportejo,halo"
                 },
                 "building/public": {
                     "name": "Publika konstruaĵo (ofica)",
@@ -4095,8 +4538,7 @@
                     "terms": "vinvendejo"
                 },
                 "embankment": {
-                    "name": "Surŝutaĵo",
-                    "terms": "surshutajh,sursxutajxo,eskarpo,taluso,terŝutaĵo,ŝutaĵo"
+                    "name": "Surŝutaĵo"
                 },
                 "emergency/ambulance_station": {
                     "name": "Ambulanca stacio",
@@ -4163,26 +4605,6 @@
                 "entrance": {
                     "name": "Enirejo/elirejo",
                     "terms": "eniro,eliro,pordego,pordo"
-                },
-                "footway/crossing": {
-                    "name": "Trapasejo",
-                    "terms": "pasejo,trairejo,irejo"
-                },
-                "footway/crossing-raised": {
-                    "name": "Stratĝiba pasejo (ne-zebrostria)",
-                    "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
-                },
-                "footway/crosswalk": {
-                    "name": "Pasejo zebrostria",
-                    "terms": "zebro,pasejo,trairejo,irejo"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Stratĝiba pasejo zebrostria",
-                    "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
-                },
-                "footway/sidewalk": {
-                    "name": "Trotuaro (apudvoja)",
-                    "terms": "irejo"
                 },
                 "ford": {
                     "name": "Travadejo",
@@ -4310,21 +4732,27 @@
                     "name": "Koridoro endoma",
                     "terms": "koridoro"
                 },
-                "highway/crossing": {
-                    "name": "Trapasejo",
-                    "terms": "pasejo,trairejo,irejo"
-                },
-                "highway/crossing-raised": {
-                    "name": "Stratĝiba pasejo (ne-zebrostria)",
-                    "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
-                },
-                "highway/crosswalk": {
-                    "name": "Pasejo zebrostria",
+                "highway/crossing/marked": {
+                    "name": "Stratpasejo zebrostria",
                     "terms": "zebro,pasejo,trairejo,irejo"
                 },
-                "highway/crosswalk-raised": {
-                    "name": "Stratĝiba pasejo zebrostria",
+                "highway/crossing/marked-raised": {
+                    "name": "Stratpasejo zebrostria (kun stratĝibo longa)",
                     "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
+                },
+                "highway/crossing/unmarked": {
+                    "name": "Stratpasejo nemarkita",
+                    "terms": "pasejo,trairejo,irejo"
+                },
+                "highway/crossing/unmarked-raised": {
+                    "name": "Stratpasejo nemarkita (kun stratĝibo longa)",
+                    "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
+                },
+                "highway/crossing/zebra": {
+                    "name": "Marked Crosswalk"
+                },
+                "highway/crossing/zebra-raised": {
+                    "name": "Stratpasejo zebrostria (kun stratĝibo longa)"
                 },
                 "highway/cycleway": {
                     "name": "Bicikl-vojo",
@@ -4338,6 +4766,36 @@
                     "name": "Trotuaro",
                     "terms": "irejo,piedirejo,pavimo"
                 },
+                "highway/footway/conveying": {
+                    "name": "Rultrotuaro",
+                    "terms": "movanta irejo,movanta trotuaro,trotuaro,horizontala eskalatoro,movtrotuaro"
+                },
+                "highway/footway/marked": {
+                    "name": "Stratpasejo zebrostria",
+                    "terms": "zebro,pasejo,trairejo,irejo"
+                },
+                "highway/footway/marked-raised": {
+                    "name": "Stratpasejo zebrostria (kun stratĝibo longa)",
+                    "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Trotuaro (ĉestrata)",
+                    "terms": "irejo"
+                },
+                "highway/footway/unmarked": {
+                    "name": "Stratpasejo nemarkita",
+                    "terms": "pasejo,trairejo,irejo"
+                },
+                "highway/footway/unmarked-raised": {
+                    "name": "Stratpasejo nemarkita (kun stratĝibo longa)",
+                    "terms": "pasejo,trairejo,irejo,stratĝibo,azendorso,malrapidigilo"
+                },
+                "highway/footway/zebra": {
+                    "name": "Stratpasejo zebrostria"
+                },
+                "highway/footway/zebra-raised": {
+                    "name": "Stratpasejo zebrostria (kun stratĝibo longa)"
+                },
                 "highway/give_way": {
                     "name": "Trafiksigno pri cedi traveturon",
                     "terms": "cedi traveturon,signo"
@@ -4345,6 +4803,10 @@
                 "highway/living_street": {
                     "name": "Ĉedoma strato",
                     "terms": "loka vojo,chedoma vojo,cxedoma vojo,strateto"
+                },
+                "highway/milestone": {
+                    "name": "Kilometra fosto (apud ŝoseo)",
+                    "terms": "ŝosea cipo"
                 },
                 "highway/mini_roundabout": {
                     "name": "Eta trafikcirklo",
@@ -4446,6 +4908,10 @@
                     "name": "Ŝtuparo",
                     "terms": "shtuparo,sxtuparo,ŝtupoj"
                 },
+                "highway/steps/conveying": {
+                    "name": "Rulŝtuparo",
+                    "terms": "rulshtuparo,rulsxtuparo,movŝtuparo,eskalatoro"
+                },
                 "highway/stop": {
                     "name": "Trafiksigno STOP",
                     "terms": "stop,signo"
@@ -4533,6 +4999,14 @@
                 "historic/wayside_shrine": {
                     "name": "Adorejo apudvoja",
                     "terms": "adorejo,krucifikso,kruco"
+                },
+                "historic/wreck": {
+                    "name": "Ruino de ŝipo",
+                    "terms": "ŝipo,shipo,sxipo,vrako"
+                },
+                "internet_access/wlan": {
+                    "name": "Sendrata interreto",
+                    "terms": "interreto,vifio,hotspot"
                 },
                 "junction": {
                     "name": "Vojkruciĝo",
@@ -4725,6 +5199,10 @@
                     "name": "Salono de ludoj",
                     "terms": "ludejo,amuzaparatoj,videoludoj,paĉinko,flipero,bilardo"
                 },
+                "leisure/bandstand": {
+                    "name": "Orkestrejeto",
+                    "terms": "estrado,tribuno"
+                },
                 "leisure/beach_resort": {
                     "name": "Sablobordo administrata (kun oportunaĵoj)",
                     "terms": "plaĝo,strando,ripozcentro,sunbanejo"
@@ -4760,6 +5238,10 @@
                 "leisure/firepit": {
                     "name": "Lignofajrejo",
                     "terms": "fajrejo"
+                },
+                "leisure/fishing": {
+                    "name": "Loko por fiŝhokado",
+                    "terms": "fiŝhokado,hokfiŝado,fiŝkaptado,fisxejo,fishejo"
                 },
                 "leisure/fitness_centre": {
                     "name": "Ripoz-gimnastika centro",
@@ -4875,7 +5357,7 @@
                 },
                 "leisure/pitch/baseball": {
                     "name": "Basbala ludkampo",
-                    "terms": "basbalo,bazpilkado"
+                    "terms": "basbalo,bazpilkado,bazbalo"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Korbopilkada ludkampo",
@@ -4916,6 +5398,10 @@
                 "leisure/pitch/soccer": {
                     "name": "Futbala ludkampo",
                     "terms": "futbalejo,piedpilkadejo"
+                },
+                "leisure/pitch/softball": {
+                    "name": "Sofbala ludkampo",
+                    "terms": "basbalo,bazpilkado"
                 },
                 "leisure/pitch/table_tennis": {
                     "name": "Tablotenisa tablo",
@@ -5018,7 +5504,8 @@
                     "terms": "malarbigita strio,kontraŭbrula strio"
                 },
                 "man_made/embankment": {
-                    "name": "Surŝutaĵo"
+                    "name": "Surŝutaĵo",
+                    "terms": "surshutajho,sursxutajxo,taluso,maltranĉeo,digo,remparo,altaĵo"
                 },
                 "man_made/flagpole": {
                     "name": "Flago",
@@ -5040,13 +5527,25 @@
                     "name": "Masto",
                     "terms": "signalmasto,anteno"
                 },
+                "man_made/mast/communication": {
+                    "name": "Masto telekomunikada",
+                    "terms": "signalmasto,anteno,komunikada masto"
+                },
+                "man_made/mast/communication/mobile_phone": {
+                    "name": "Masto poŝtelefona",
+                    "terms": "anteno,masto,gsm,poŝtelefona masto"
+                },
+                "man_made/mast/communication/radio": {
+                    "name": "Masto radia",
+                    "terms": "signalmasto,anteno,radio.dissendomasto"
+                },
+                "man_made/mast/communication/television": {
+                    "name": "Masto televida",
+                    "terms": "tv,televido,masto,anteno,dissendomasto"
+                },
                 "man_made/monitoring_station": {
                     "name": "Observada stacio",
                     "terms": "veterstacio,meteorologia stacio,meteostacio,monitorado,akvonivelmezurilo,medikvalit-mezuro,aerkvalit-mezuro"
-                },
-                "man_made/observation": {
-                    "name": "Vidturo",
-                    "terms": "observturo,turo"
                 },
                 "man_made/observatory": {
                     "name": "Observejo",
@@ -5061,7 +5560,7 @@
                     "terms": "moleo,piero,kajo"
                 },
                 "man_made/pipeline": {
-                    "name": "Tubokondukilo",
+                    "name": "Konduktubo",
                     "terms": "dukto,tubaro,tubolinio,tubkondukilo,naftodukto,gasoduto,akvodukto"
                 },
                 "man_made/pumping_station": {
@@ -5080,7 +5579,7 @@
                     "name": "Supergardo",
                     "terms": "monitorado,gardado,kamerao,fora kontrolado,gvatkamerao"
                 },
-                "man_made/surveillance_camera": {
+                "man_made/surveillance/camera": {
                     "name": "Supergarda kamerao",
                     "terms": "kamerao,gvatkamerao,gardado,monitorado"
                 },
@@ -5091,6 +5590,14 @@
                 "man_made/tower": {
                     "name": "Turo",
                     "terms": "turo"
+                },
+                "man_made/tower/communication": {
+                    "name": "Turo telekomunikada",
+                    "terms": "komunikada turo,anteno"
+                },
+                "man_made/tower/observation": {
+                    "name": "Turo observada",
+                    "terms": "observturo,vidturo"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Akvopurigejo",
@@ -5381,6 +5888,10 @@
                     "name": "Oficejo de duon-registara organizaĵo",
                     "terms": "organizaĵo"
                 },
+                "office/religion": {
+                    "name": "Kancelario religia",
+                    "terms": "religia oficejo"
+                },
                 "office/research": {
                     "name": "Oficejo de scienca esplorado",
                     "terms": "esploro,progreso,scienco"
@@ -5408,9 +5919,37 @@
                     "name": "Oficejo de akv-provizanta firmao",
                     "terms": "akvoprovizo,akvokondukto"
                 },
-                "piste": {
-                    "name": "Skivojo",
-                    "terms": "skitrako,skiado"
+                "piste/downhill": {
+                    "name": "Skivojo alpa (malsuprenira)",
+                    "terms": "skivojo,skitrako,alpa skiado"
+                },
+                "piste/hike": {
+                    "name": "Skivojo marŝada",
+                    "terms": "bastonmarŝado,skiŝuado,marŝado,vintra marŝado"
+                },
+                "piste/ice_skate": {
+                    "name": "Skivojo glitkurada",
+                    "terms": "glitkurado,sketado,glitado"
+                },
+                "piste/nordic": {
+                    "name": "Skivojo nordia (skikurada)",
+                    "terms": "nordia skiado,skikurado"
+                },
+                "piste/piste": {
+                    "name": "Vintrosporta kurso",
+                    "terms": "vintra sporto,skikurso,skivego,neĝtabulado"
+                },
+                "piste/skitour": {
+                    "name": "Skivojo ski-ekskursuma",
+                    "terms": "bastonmarŝado,skiŝuado,marŝado,vintra marŝado"
+                },
+                "piste/sled": {
+                    "name": "Skivojo glitveturila",
+                    "terms": "sledado,glitveturilado"
+                },
+                "piste/sleigh": {
+                    "name": "Skivojo glitveturila (tirata de hundoj)",
+                    "terms": "sledado,glitveturilado,hundosledado"
                 },
                 "place": {
                     "name": "Ejo"
@@ -5418,6 +5957,10 @@
                 "place/city": {
                     "name": "Urbego",
                     "terms": "urbo"
+                },
+                "place/city_block": {
+                    "name": "Dombloko",
+                    "terms": "urbobloko,bloko,stratkvadrato"
                 },
                 "place/farm": {
                     "name": "Farmejo (setlejo)"
@@ -5533,25 +6076,33 @@
                 "power": {
                     "name": "Elektr-energia objekto"
                 },
+                "power/cable/underground": {
+                    "name": "Elektra kondukilo subtera",
+                    "terms": "lineo,kablo,kondukilo"
+                },
                 "power/generator": {
                     "name": "Elektr-generilo",
                     "terms": "elektrogenerilo,generilo,generatoro"
                 },
-                "power/generator/source_nuclear": {
-                    "name": "Nuklea reakciujo",
-                    "terms": "nuklea reaktoro,reaktoro,reakciujo,atoma reaktoro,atompilo,elektrocentralo"
+                "power/generator/method/photovoltaic": {
+                    "name": "Sun-panelo",
+                    "terms": "sunpanelo,sunĉelo,fotovoltaiko,suna pilo,"
                 },
-                "power/generator/source_wind": {
-                    "name": "Ventoturbino",
-                    "terms": "ventturbino,elektrogenerilo,ventomuelejo,ventturbino,ventelektrigilo,ventmotoro,ventenergio"
+                "power/generator/source/nuclear": {
+                    "name": "Nuklea reakciujo",
+                    "terms": "reaktoro,atomkerna energio"
+                },
+                "power/generator/source/wind": {
+                    "name": "Vent-turbino",
+                    "terms": "ventoturbino,turbino,ventmaŝino"
                 },
                 "power/line": {
                     "name": "Elektra kondukilo (alttensia)",
-                    "terms": "lineo forkurenta,kablo"
+                    "terms": "lineo,kablo,kurento"
                 },
                 "power/minor_line": {
                     "name": "Elektra kondukilo (mez- kaj malalttensia)",
-                    "terms": "lineo forkurenta,kablo"
+                    "terms": "lineo,kablo,kurento"
                 },
                 "power/plant": {
                     "name": "Elektrocentrala tereno",
@@ -5787,8 +6338,8 @@
                     "terms": "malpeza fervojo,malpeza trajno,suburba fervojo,tramo"
                 },
                 "railway/milestone": {
-                    "name": "Mejloŝtono fervoja",
-                    "terms": "fervoja mejloŝtono"
+                    "name": "Kilometra fosto (apud fervojo)",
+                    "terms": "mejloŝtono,cipo"
                 },
                 "railway/miniature": {
                     "name": "Miniatura fervojo",
@@ -5849,6 +6400,33 @@
                 "route/ferry": {
                     "name": "Prama kurso",
                     "terms": "pramkurso,pramŝipo,,ŝiplinio"
+                },
+                "seamark": {
+                    "name": "Seamark"
+                },
+                "seamark/beacon_isolated_danger": {
+                    "name": "Bou fiksa: danĝero",
+                    "terms": "BCNISD, danĝero"
+                },
+                "seamark/beacon_lateral": {
+                    "name": "Buo fiksa: flanko (latera)",
+                    "terms": "BCNLAT,kanalo,flanka,latera"
+                },
+                "seamark/buoy_lateral": {
+                    "name": "Buo flosa: flanko (latera)",
+                    "terms": "BCNLAT,kanalo,flanka,latera"
+                },
+                "seamark/buoy_lateral/green": {
+                    "name": "Verda buo flosa",
+                    "terms": "buo"
+                },
+                "seamark/buoy_lateral/red": {
+                    "name": "Ruĝa buo flosa",
+                    "terms": "buo"
+                },
+                "seamark/mooring": {
+                    "name": "Ŝipaligejo",
+                    "terms": "dukdalbo,aligi ŝipon,buo,shipaligejo,sxipaligejo"
                 },
                 "shop": {
                     "name": "Vendejo",
@@ -5947,8 +6525,8 @@
                     "terms": "partoj aŭtomobilaj,pecoj aŭtomobilaj"
                 },
                 "shop/car_repair": {
-                    "name": "Aŭtoriparejo",
-                    "terms": "riparejo,aŭtoservejo,aŭtejo,autoriparejo,auxtoriparejo,meĥanisto,mekanisto,meĥanikisto,mekanikisto"
+                    "name": "Aŭtomobil-riparejo",
+                    "terms": "aŭtoriparejo,riparejo,aŭtoservejo,aŭtejo,autoriparejo,auxtoriparejo,meĥanisto,mekanisto,meĥanikisto,mekanikisto"
                 },
                 "shop/carpet": {
                     "name": "Tapiŝa vendejo",
@@ -5997,6 +6575,10 @@
                 "shop/cosmetics": {
                     "name": "Kosmetikaĵa (persona higieno) vendejo",
                     "terms": "kosmetikaĵoj,kosmetikajhoj,kosmetikajxoj,drogejo,beligaĵoj,kosmetikoj,drogerio"
+                },
+                "shop/country_store": {
+                    "name": "Ĝenerala vendejo",
+                    "terms": "ĝenerala vendejo"
                 },
                 "shop/craft": {
                     "name": "Materialoj-por-metio vendejo",
@@ -6091,6 +6673,10 @@
                 "shop/hairdresser": {
                     "name": "Frizejo",
                     "terms": "frizisto,haristo,hararisto,barbisto,hartondisto,tondisto"
+                },
+                "shop/hairdresser_supply": {
+                    "name": "Frizist-ilara vendejo",
+                    "terms": "hartondisto,tondisto"
                 },
                 "shop/hardware": {
                     "name": "Laborila vendejo",
@@ -6208,6 +6794,10 @@
                     "name": "Farba vendejo",
                     "terms": "farboj,kolorigiloj,lakoj,pentriloj"
                 },
+                "shop/party": {
+                    "name": "Vendejo de okazaĵaj provizoj",
+                    "terms": "okazaĵoj,eventoj,balonoj,kostumoj"
+                },
                 "shop/pastry": {
                     "name": "Kukejo",
                     "terms": "panejo,bakejo,sukeraĵejo"
@@ -6255,6 +6845,10 @@
                 "shop/second_hand": {
                     "name": "Brokantejo",
                     "terms": "lambardejo,eluzitaĵoj,uzitaĵoj,malnovaĵoj"
+                },
+                "shop/sewing": {
+                    "name": "Kudrilar-vendejo",
+                    "terms": "pasamento,kudriloj,ŝtofo,teksaĵo,pingloj"
                 },
                 "shop/shoes": {
                     "name": "Ŝua vendejo",
@@ -6378,6 +6972,18 @@
                 "tourism/artwork": {
                     "name": "Artverko",
                     "terms": "artaĵo,monumento,statuo,artoverko,pentraĵo,skulptaĵo,murpentraĵo,grafitio"
+                },
+                "tourism/artwork/mural": {
+                    "name": "Murpentraĵo",
+                    "terms": "murskribaĵo,grafitio"
+                },
+                "tourism/artwork/sculpture": {
+                    "name": "Skulptaĵo (abstrakta)",
+                    "terms": "statuo,monumento"
+                },
+                "tourism/artwork/statue": {
+                    "name": "Statuo (pri homo aŭ besto)",
+                    "terms": "monumento,statuo,figuro,ŝtonfiguro"
                 },
                 "tourism/attraction": {
                     "name": "Turisma vidindaĵo",
@@ -6503,6 +7109,30 @@
                     "name": "Stratĝiba kuseno (malrapidigilo)",
                     "terms": "stratĝibo,stratghibo,stratghibo,azendorso,malrapidigilo"
                 },
+                "traffic_sign": {
+                    "name": "Trafiksigno",
+                    "terms": "signo,trafiksignalo"
+                },
+                "traffic_sign/city_limit": {
+                    "name": "Trafiksigno pri urba/vilaĝa rapidlimo",
+                    "terms": "trafiksigno,rapidlimo,vilaĝo,limo,maksimuma rapido"
+                },
+                "traffic_sign/city_limit_vertex": {
+                    "name": "Trafiksigno pri urba/vilaĝa rapidlimo",
+                    "terms": "trafiksigno,rapidlimo,vilaĝo"
+                },
+                "traffic_sign/maxspeed": {
+                    "name": "Trafiksigno pri rapidlimo",
+                    "terms": "trafiksigno,rapidlimo,maksimuma rapido"
+                },
+                "traffic_sign/maxspeed_vertex": {
+                    "name": "Trafiksigno pri rapidlimo",
+                    "terms": "trafiksigno,rapidlimo,maksimuma rapido"
+                },
+                "traffic_sign_vertex": {
+                    "name": "Trafiksigno",
+                    "terms": "signo,trafiksignalo"
+                },
                 "type/boundary": {
                     "name": "Limo",
                     "terms": "rando,limito"
@@ -6587,7 +7217,7 @@
                     "terms": "malpeza fervojo,malpeza trajno,suburba fervojo,tramo"
                 },
                 "type/route/pipeline": {
-                    "name": "Tubokondukilo",
+                    "name": "Konduktubo",
                     "terms": "dukto,tubaro,tubolinio,tubkondukilo,naftodukto,gasoduto,akvodukto"
                 },
                 "type/route/piste": {
@@ -6596,7 +7226,7 @@
                 },
                 "type/route/power": {
                     "name": "Elektra kondukilo",
-                    "terms": "lineo forkurenta,kablo"
+                    "terms": "lineo,kablo,kurento"
                 },
                 "type/route/road": {
                     "name": "Trafikvojo",
@@ -6660,6 +7290,10 @@
                 "waterway/fuel": {
                     "name": "Benzinejo (por jaĥtoj)",
                     "terms": "akvobenzinejo,jaĥto benzinejo"
+                },
+                "waterway/milestone": {
+                    "name": "Kilometra fosto (apud akvovojo)",
+                    "terms": "mejloŝtono,cipo"
                 },
                 "waterway/river": {
                     "name": "Rivero",
@@ -6822,9 +7456,6 @@
             "SPW_PICC": {
                 "name": "Cifereca fotaro de PICC SPW(allonie)"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "Ĉe skal-nivelo 16+, publikaj map-datumoj de Usona popolnombrado. Ĉe malpli grandaj skal-niveloj, nur ŝanĝoj de post 2006 sen ŝanĝoj jam aldonitaj al OpenStreetMap.",
                 "name": "TIGER Roads 2014"
@@ -6832,6 +7463,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Flave = publikaj map-datumoj de Usona popolnombrado. Ruĝe = datumoj ne trovitaj en OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Flave = publikaj map-datumoj de Usona popolnombrado. Ruĝe = datumoj ne trovitaj en OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Vojo: verda rando = neklasifikita, bruna rando = kampa vojo. Pavimo: helbruna plenigo = sablego, nigra = asfalto, griza = pavimita, blanka = tera, blua = betono, verda = herbo. Blankaj strioj = sezona vojo.",
@@ -6848,6 +7483,12 @@
                     "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -6905,11 +7546,61 @@
                 "description": "Ortofota tavolo liverata de basemap.at, anstataŭanto de fotaro geoimage.at.",
                 "name": "basemap.at ortofoto"
             },
-            "hike_n_bike": {
+            "eufar-balaton": {
                 "attribution": {
-                    "text": "© OpenStreetMap kontribuintoj"
+                    "text": "EUFAR Balaton ortofotó 2010"
                 },
-                "name": "Hike & Bike"
+                "description": "Geografi-etikedita fotaro de 1940 de Balatona Instituto de Limnologio",
+                "name": "EUFAR Balaton aera fotaro"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 de finds.jp. Bona por mapigi, sed malpli aktuala.",
+                "name": "Japanujo GSI KIBAN 2500"
+            },
+            "gsi.go.jp": {
+                "attribution": {
+                    "text": "GSI Japanujo"
+                },
+                "description": "Aera fotaro de GSI Japanujo. Kutime pli akurata ol Bing, sed malpli nova.",
+                "name": "Aera fotaro GSI Japanujo"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japanujo"
+                },
+                "description": "Norma mapo de GSI Japanujo, larĝa map-atingo.",
+                "name": "Norma mapo GSI Japanujo"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© komunumo Helsingborg"
+                },
+                "description": "Aera fotaro de la komunumo Helsingborg, publika uzo, 2016",
+                "name": "Aera fotaro Helsingborg"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© komunumo Kalmar"
+                },
+                "description": "Aera fotaro pri la norda marbordo de la komunumo Kalmar, 2014",
+                "name": "Aera fotaro Kalmar (nordo) 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© komunumo Kalmar"
+                },
+                "description": "Aera fotaro pri la suda marbordo de la komunumo Kalmar, 2016",
+                "name": "Aera fotaro Kalmar (sudo) 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© komunumo Kalmar"
+                },
+                "description": "Aera fotaro pri urba areo de la komunumo Kalmar, 2018",
+                "name": "Aera fotaro Kalmar (urbo) 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -6931,6 +7622,20 @@
                 },
                 "description": "Kunmetaĵo de Sveda aera fotaro de jaroj 1970–1980. Estos plivastigita.",
                 "name": "Lantmäteriet historia aera fotaro 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topografia mapo de Svedujo 1:50 000",
+                "name": "Lantmäteriet topografia mapo"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© komunumo Linköping"
+                },
+                "description": "Aera fotaro de la komunumo Linköping, malfermaj datumoj, 2010",
+                "name": "Aera fotaro Linköping"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -6995,6 +7700,13 @@
                     "text": "Map-kaheloj de Stamen Design, laŭ CC BY 3.0. Datumoj de OpenStreetMap, laŭ ODbL"
                 },
                 "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© komunumo Stokholmo, CC0"
+                },
+                "description": "Aera fotaro de la komunumo Stokholmo, permesilo CC0, 2015",
+                "name": "Aera fotaro Stokholmo"
             },
             "tf-cycle": {
                 "attribution": {
@@ -7281,11 +7993,6 @@
                 "name": "Dissendolisto talk-be",
                 "description": "Talk-be estas oficiala dissendolisto por la OSM-komunumo en Belgujo"
             },
-            "be-maptime": {
-                "name": "Maptime Belgium",
-                "description": "Sociaj okazaĵoj organizitaj por mapigi – komencantoj estas akceptindaj!",
-                "extendedDescription": "Maptime estas malferma lernada medio por ĉiuj niveloj de scio, kiu estas precipe preparita por komencantoj. Maptime estas kaj fleksebla kaj strukturebla, liverante lokon por mapigaj gvidiloj, instruadoj, nunaj projektoj kun difinita komuna celo, per aŭ individua aŭ kolektiva laboro."
-            },
             "be-matrix": {
                 "name": "Matrix-kanalo OpenStreetMap BE",
                 "description": "Ĉiuj mapigistoj estas akceptindaj!",
@@ -7378,7 +8085,7 @@
             },
             "de-berlin-meetup": {
                 "name": "OpenStreetMap Berlin-Brandenburg ĉe Meetup",
-                "description": "Mapigistoj de uzantoj de OpenStreetMap proksime de Berlino"
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Berlino"
             },
             "de-berlin-telegram": {
                 "name": "@osmberlin ĉe Telegram",
@@ -7553,11 +8260,101 @@
                 "description": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667)",
                 "extendedDescription": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667), bonvolu esti pacienca kaj atendi kelkajn minutojn post demandi"
             },
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}."
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Vankuvero, Brita Kolumbio"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Kubo"
+            },
+            "OSM-NI-telegram": {
+                "name": "OSM Nicaragua ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Nikaragvo"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Plibonigi OpenStreetMap en la regiono apud Golfo de San-Francisko",
+                "extendedDescription": "Celo de tiu ĉi grupo estas kunigi OpenStreetMap-komunumon en la regiono apud Golfo de San-Francisko. Niaj eventoj estas malfermitaj al ĉiuj: ŝatantoj de malfermkoda programaro, biciklistoj, GIS-profesiuloj, geokaŝ-ludantoj kaj aliuloj. Ĉiu, kiu interesiĝas pri mapoj, mapigado kaj liberaj map-datumoj povas aligi la grupon kaj alveni niajn eventojn."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Interreta mapiga komunumo en State College, Pensilvanio"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Code for San Jose ĉe Slack",
+                "description": "Bonvenon ĉiuj! Registriĝu ĉe {signupUrl} kaj sekve aliĝu al la kanalo #osm."
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "Grupo de uzantoj de OpenStreetMap en Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth kaj ĉiuj urboj inter estas plenaj da kreemaj kaj teĥnologi-lertaj homoj. La celo de tiu ĉi grupo estas trovi novajn manierojn por uzi mirindajn kapablojn de OSM."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Renkontiĝo por map-ŝatantoj proksime de Filadelfio",
+                "extendedDescription": "GeoPhilly kunigas programistojn, geografiistoj, fanatikuloj de datumoj kaj malfermkoda programaro, lertuloj kaj map-ŝatantoj en la komuna amo al mapoj kaj historioj pri ili. Se vi uzas mapojn en laboro aŭ simple volas sciiĝi pli, tiu ĉi renkontiĝo estas por vi! Niaj renkontiĝoj estas malfermitaj, amikecaj, instruantaj kaj sociaj kaj temas pri klaĉado, teĥnika babilado kaj eĉ laboro. Alvenu por krei diversan kaj inspiran mapigan komunumon en Filadelfio kun ni!"
+            },
+            "MapMinnesota": {
+                "name": "Map Minnesota",
+                "description": "Mapigistoj kaj ŝatantoj de OpenStreetMap en Mineapolo kaj Saint Paul",
+                "extendedDescription": "Konektante ŝatantoj de OpenStreetMap en Minesoto kaj Ĝemelaj Urboj!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Plibonigi OpenStreetMap en la Distrikto Kolumbio",
+                "extendedDescription": "Ni estas grupo da helpemaj mapigistoj, kiuj celas plibonigi OpenStreetMap en la regiono de la Distrikto Kolombio. Ni ankaŭ volas instrui aliajn pri la OSM-ĉirkaŭsistemo, analizo de datumoj, kartografio kaj GIS. Ni renkontas ĉiumonate por koncentriĝi al kelka are de nia urbo."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Portlando (Majno)",
+                "extendedDescription": "«Maptime» estas tempo por mapigado. Nia celo estas ebligi al ĉiu lerni pri kartografio per liveri spacon por kunlabora lernado, esplorado kaj map-farado uzante mapigajn ilojn kaj teĥnologiojn."
+            },
+            "us-ma-mailinglist": {
+                "name": "Dissendolisto talk-us-massachusetts",
+                "description": "Dissendolisto por la OSM-komunumo en Masaĉuseco"
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Plibonigi OpenStreetMap proksime de Klevlando",
+                "extendedDescription": "Open Geo Cleveland celas esti rimedo por homoj por diskuti kaj kunhavigi scion pri uzi liberajn geografiajn datumojn (precipe OpenStreetMap) kaj liberan programaron por administri, redakti kaj vidigi geografiajn datumojn, kaj promoti ĝian uzon en nordorienta Ohio. Ni ankaŭ estas klubo de mapigistoj =)"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Bostono",
+                "extendedDescription": "OpenStreetMap estas libera kaj malferma kiel vikio mapo de la mondo kun centoj da miloj da kontribuantoj ĉiutage de homoj kiel vi. Redakti mapon estas simpla kaj amuza! Kunigu nin aŭ eksterdome aŭ maleksterdome en nia peno por krei la plej bonan mapon de areo de Bestono kaj la resto de mondo!"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Mount Vernon (Vaŝingtonio)",
+                "extendedDescription": "OpenStreetMap estas mapo de la mondo farata de homoj kiel vi. Ĝi estas mapo, kiun vi kreas kaj kiu estas donata senpage kiel Vikipedio. Rigardu osm.org por pli da informo. Ni renkontas por pridiskuti mapojn, fari mapojn kaj ĝui!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Grupo de uzantoj de OpenStreetMap en Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en la subŝtato Koloradio",
+                "extendedDescription": "OpenStreetMap (OSM) Colorado estas loka kunlaboro de homoj, kiuj interesiĝas pri kontribui al krei liberajn mapojn. Ni instigas ĉiujn niajn mapigistojn al organizi aŭ sugesti mapigajn eventojn en Koloradio. Tiuj eventoj povas esti simplaj renkontiĝoj, komencanta aŭ sperta instruado pri OSM, aŭ komuna mapigado."
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US ĉe Slack",
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}"
+            },
             "OSM-US": {
+                "name": "OpenStreetMap US",
+                "description": "Ni helpas disvastigi kaj plibonigi OpenStreetMap en Usono.",
+                "extendedDescription": "Nie subtenas OpenStreetMap per organizi ĉiujaran konferencon, liverante rimedojn por la komunumo, gajnante akompanantojn kaj diskonigante la ideon. Aliĝu al OpenStreetMap US tie ĉi: {signupUrl}",
                 "events": {
                     "sotmus2018": {
                         "name": "State of the Map US 2018",
-                        "description": "Kunigu al la OpenStreetMap-komunumo ĉe «State of the Map US» en Detrojto, Miĉigano. Aliĝu al aliaj mapigistoj, komerco, organizaĵoj registaraj kaj ne-profit-celaj – ĉiuj kunlaborantaj pri libera kaj redaktebla mapo de la mondo."
+                        "description": "Kunigu al la OpenStreetMap-komunumo ĉe «State of the Map US» en Detrojto, Miĉigano. Aliĝu al aliaj mapigistoj, komerco, organizaĵoj registaraj kaj ne-profit-celaj – ĉiuj kunlaborantaj pri libera kaj redaktebla mapo de la mondo.",
+                        "where": "Detrojto, Miĉigano"
                     }
                 }
             },
@@ -7584,6 +8381,10 @@
                     }
                 }
             },
+            "OSM-Discord": {
+                "name": "OpenStreetMap ĉe Discord",
+                "description": "Kontaktu kun aliaj mapigistoj per Discord"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap ĉe Facebook",
                 "description": "Ŝatu nin ĉe Facebook por akiri novaĵojn pri OpenStreetMap."
@@ -7592,6 +8393,10 @@
                 "name": "Helpo pri OpenStreetMap",
                 "description": "Demandu kaj akiru respondojn ĉe kreata de komunumo retejo.",
                 "extendedDescription": "{url} taŭgas por ĉiu, kiu bezonas helpon pri OpenStreetMap. Ne gravas ĉu vi estas komencanta mapisto aŭ havas teĥnikan demandon, ni estas tie ĉi por vin helpi!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap ĉe IRC",
+                "description": "Aliĝu al #osm ĉe irc.oftc.net (pordo 6667)"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap ĉe Reddit",

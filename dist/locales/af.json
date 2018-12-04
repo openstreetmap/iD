@@ -74,14 +74,6 @@
                     "relation": "'n Verhouding is verwyder."
                 }
             },
-            "connect": {
-                "annotation": {
-                    "point": "'n Weg is gekoppel aan 'n punt.",
-                    "vertex": "Een weg is aan 'n ander gekoppel.",
-                    "line": "'n Weg is aan 'n lyn gekoppel.",
-                    "area": "'n Weg is aan 'n area gekoppel."
-                }
-            },
             "disconnect": {
                 "title": "Ontkoppel.",
                 "description": "Ontkoppel hierdie lyne/areas van mekkaar.",
@@ -880,10 +872,6 @@
                 "leisure/pitch/american_football": {
                     "name": "Amerikaanse Voetbal Veld",
                     "terms": "Amerikaanse voetbalveld"
-                },
-                "leisure/pitch/baseball": {
-                    "name": "Bofpalveld",
-                    "terms": "bofbaldiamant"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Basketbalbaan",

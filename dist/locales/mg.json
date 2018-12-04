@@ -137,14 +137,6 @@
                     "multiple": "Tsy mety fafàna ireo singa ireo satria mifampitohy amina zavatra tsy miseho ny sasany aminy."
                 }
             },
-            "connect": {
-                "annotation": {
-                    "point": "Nampifandray an'ilay soritra tamin'ilay teboka.",
-                    "vertex": "Nampifandray an'ilay soritra tamin'ny anankiray hafa.",
-                    "line": "Nampifandray an'ilay soritra tamin'ilay tsipika.",
-                    "area": "Nampifandray an'ilay soritra tamin'ilay faritra."
-                }
-            },
             "disconnect": {
                 "title": "Hanatsoaka",
                 "description": "Hanasaraka an'ireto tsipika/faritra ireto.",
@@ -334,7 +326,6 @@
         "browser_notice": "Ao amin'ny navigateur Firefox, Chrome, Safari, Opera ary Internet Explorer 11 na amboniny ihany no mandeha ity fitaovana ity. Havaozy azafady ny navigateur ampiasainao na mampiasà Potlatch 2 hahafahanao manova ny sarintany.",
         "translate": {
             "translate": "Handika",
-            "localized_translation_label": "Ananarana amin'ny fiteny maromaro",
             "localized_translation_language": "Hisafidy fiteny",
             "localized_translation_name": "Anarana"
         },
@@ -774,6 +765,15 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "description": "Pejy OpenStreetMap Botswana"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Araho ao aminin'ny Twitter izahay: {url}"
+            },
+            "osm-gh-facebook": {
+                "description": "Vondrona Facebook hoan'izay liana amin'ny OpenStreetMap"
+            },
             "osm-mg-facebook": {
                 "name": "Vondrona Facebook OpenStreetMap Madagascar",
                 "description": "Vondrona Facebook malagasy ho an'izay liana amin'ny OpenStreetMap."
@@ -781,6 +781,19 @@
             "talk-mg": {
                 "name": "Mailaka fiseraserana Talk-mg",
                 "description": "Toerana ahafahan'ny mpandray anjara sy ny mpampiasa ny OpenStreetMap eto Madagasikara mifanakalo hevitra sy miresaka."
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap ao amin'ny Facebook"
+            },
+            "OSM-help": {
+                "name": "Fanampiana OpenStreetMap"
+            },
+            "OSMF": {
+                "events": {
+                    "sotm2018": {
+                        "where": "Milan, Italie"
+                    }
+                }
             }
         }
     }
