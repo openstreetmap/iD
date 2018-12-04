@@ -28,6 +28,350 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.12.0
+##### 2018-Dec-03
+
+#### :mega: Release Highlights
+* :v: Mac users can now use 2 finger trackpad gestures to pan and zoom the map.<br/>
+_Try swiping with 2 fingers to pan, or pinching out/in to zoom and unzoom. You'll be less likely to accidently drag nodes!_
+* :small_red_triangle_down: iD now draws triangular markers on the "down" side of ways where the direction matters.  Thanks, Huon Wilson [@huonw] for this feature!</br>
+_Ways with a direction include cliffs, coastlines, retaining walls, kerbs, guard rails, embankments._
+* :left_right_arrow: You can now resize the sidebar, or hide it completely. Shout out to Quincy Morgan [@quincylvania] for his work on this!</br>
+_Try dragging the sidebar to resize it, or click the hide button in the top toolbar. The top bar buttons can also shrink on narrower screens._
+* :hamburger: We've released a huge upgrade to the [brand name suggestions](https://github.com/osmlab/name-suggestion-index) in iD. Thank you to [everyone who volunteered](https://github.com/osmlab/name-suggestion-index/issues/2034) to match brand names to their proper OpenStreetMap tags.</br>
+_Try adding some branded businesses to the map - `brand`, `brand:wikidata`, and other tags will be set for you._
+* :paperclip: More Wikidata integration! iD now displays linked data if a feature has a `wikidata` tag, and will protect fields like `name` and `brand` from direct editing.<br/>
+_Make sure prominent features have a Wikidata tag, for added protection against accidental changes._
+* :high_brightness: More features for working with relations. Hovering over a relation or member in the sidebar will highlight it on the map. You can also download incomplete sections, and zoom to inspect relation children. Thanks, Quincy Morgan [@quincylvania]!<br/>
+_Check out the "All Relations" and "All Members" sections of the sidebar to try out the new relation ._
+* :octocat: Hacktoberfest happened!  We merged 40 pull requests during the month of October.  Thank you to all of our new contributors!<br/>
+
+[@huonw]: https://github.com/huonw
+[@quincylvania]: https://github.com/quincylvania
+
+#### :tada: New Features
+* Make `name`, `brand` fields readonly when there is a `wikidata` or `brand:wikidata` tag ([#5515])
+  (Users may still delete the name field or edit the tags manually)
+* Add a Wikidata field ([#4382], [#5500], thanks [@quincylvania])
+* Display triangular markers along ways with a "lower" direction (e.g. `natural=cliff`). ([#1475], [#5529], thanks [@huonw])
+* Upgrade the brand name presets from new [name-suggestion-index](https://github.com/osmlab/name-suggestion-index):
+  * Display name suggestion presets on 2 lines ([#5514])
+  * Offer up to 10 brand name suggestions in the name field, show preset type alongside brand name
+  * :warning: Code refactor - remove `dataSuggestions` and `utilSuggestNames` functions
+* Add `context.keybinding` for keybindings that don't change ([#5487])
+  * :warning: Code refactor - Move `lib/d3.keybinding.js` -> `util/keybinding.js`
+* The sidebar can be now be resized by dragging the divider ([#3447], [#5443], thanks [@quincylvania])
+  * There is also a new button in the top tool bar, and keyboard shortcut to toggle the sidebar
+* Add hover-highlighting to the selected features list ([#5404], thanks [@quincylvania])
+* Add hover-highlighting for relations in the raw membership list ([#2946], [#5402], [#5429], thanks [@quincylvania])
+* Add a button to zoom to a relation child ([#5405], thanks [@quincylvania])
+* Add a button to download an undownloaded relation child ([#2284], [#5396], thanks [@quincylvania])
+* Display type (node, way, or relation) in the name of undownloaded relation children ([#5399], thanks [@quincylvania])
+
+[#5529]: https://github.com/openstreetmap/iD/issues/5529
+[#5515]: https://github.com/openstreetmap/iD/issues/5515
+[#5514]: https://github.com/openstreetmap/iD/issues/5514
+[#5500]: https://github.com/openstreetmap/iD/issues/5500
+[#5487]: https://github.com/openstreetmap/iD/issues/5487
+[#5443]: https://github.com/openstreetmap/iD/issues/5443
+[#5429]: https://github.com/openstreetmap/iD/issues/5429
+[#5405]: https://github.com/openstreetmap/iD/issues/5405
+[#5404]: https://github.com/openstreetmap/iD/issues/5404
+[#5402]: https://github.com/openstreetmap/iD/issues/5402
+[#5399]: https://github.com/openstreetmap/iD/issues/5399
+[#5396]: https://github.com/openstreetmap/iD/issues/5396
+[#4382]: https://github.com/openstreetmap/iD/issues/4382
+[#3447]: https://github.com/openstreetmap/iD/issues/3447
+[#2946]: https://github.com/openstreetmap/iD/issues/2946
+[#2284]: https://github.com/openstreetmap/iD/issues/2284
+[#1475]: https://github.com/openstreetmap/iD/issues/1475
+[@huonw]: https://github.com/huonw
+[@quincylvania]: https://github.com/quincylvania
+
+#### :sparkles: Usability
+* Redraw restrictions editor when resizing sidebar ([#5474], [#5502], thanks [@jguthrie100])
+* Add support for 2-finger pan and zoom gestures on Mac computers ([#5492])
+* Improve rendering for more leisure objects (`track`, `golf_course`, `garden`) ([#5526], thanks [@hikemaniac])
+* Improve rendering for `attraction=water_slide` ([#5522], thanks [@hikemaniac])
+* Use green stroke to render `barrier=hedge` ([#5459], thanks [@quincylvania])
+* More responsive sidebar and toolbar ([#4356], [#5455])
+  * Adjusts save count padding slightly ([#5509],thanks [@quincylvania])
+  * Display icons only (no labels) on very narrow width toolbar
+  * Better management of button widths in the sidebar ([#5467], thanks [@quincylvania])
+* Adds more fill patterns to areas ([#5489], [#5499], thanks [@RudyTheDev])
+* Update Icons (Maki upgraded to v5, FontAwesome upgraded to v5.5)
+* Preserve extra space at bottom of inspector to allow for dropdown options ([#5280])
+* Better undo tooltips when connecting points ([#1252], [#5468], thanks [@quincylvania])
+* Display ways with `location=underwater` same as `location=underground` ([#5442], thanks [@quincylvania])
+* Improve rendering of `man_made=pipeline` ([#5392], thanks [@quincylvania])
+* Improve rendering of ferry routes ([#5414], [#5416], thanks [@quincylvania])
+* Improve keyboard navigation of the preset selection menu ([#5304], thanks [@quincylvania])
+* Make "search worldwide" button look like a button ([#5386], thanks [@jguthrie100])
+* Make OpenTopoMap imagery layer available ([#5277])
+
+[#5526]: https://github.com/openstreetmap/iD/issues/5526
+[#5522]: https://github.com/openstreetmap/iD/issues/5522
+[#5509]: https://github.com/openstreetmap/iD/issues/5509
+[#5502]: https://github.com/openstreetmap/iD/issues/5502
+[#5499]: https://github.com/openstreetmap/iD/issues/5499
+[#5492]: https://github.com/openstreetmap/iD/issues/5492
+[#5489]: https://github.com/openstreetmap/iD/issues/5489
+[#5474]: https://github.com/openstreetmap/iD/issues/5474
+[#5468]: https://github.com/openstreetmap/iD/issues/5468
+[#5467]: https://github.com/openstreetmap/iD/issues/5467
+[#5459]: https://github.com/openstreetmap/iD/issues/5459
+[#5455]: https://github.com/openstreetmap/iD/issues/5455
+[#5442]: https://github.com/openstreetmap/iD/issues/5442
+[#5416]: https://github.com/openstreetmap/iD/issues/5416
+[#5414]: https://github.com/openstreetmap/iD/issues/5414
+[#5392]: https://github.com/openstreetmap/iD/issues/5392
+[#5386]: https://github.com/openstreetmap/iD/issues/5386
+[#5304]: https://github.com/openstreetmap/iD/issues/5304
+[#5280]: https://github.com/openstreetmap/iD/issues/5280
+[#5277]: https://github.com/openstreetmap/iD/issues/5277
+[#4356]: https://github.com/openstreetmap/iD/issues/4356
+[#1252]: https://github.com/openstreetmap/iD/issues/1252
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@jguthrie100]: https://github.com/jguthrie100
+[@quincylvania]: https://github.com/quincylvania
+
+#### :bug: Bugfixes
+* Prevent Mapillary signs and markers from flickering as the user pans the map ([#4297])
+* Don't snap notes to OSM elements ([#5191])
+* Avoid requesting imagery and data from wrapped world past antimeridian ([#5485])
+* Adjust layer ordering to draw touch targets above data layers ([#5257], [#5479])
+* Fix background imagery with multiple outer rings ([#5264], [#5250], [#5272])
+* Use new Mapillary API calls for features and signs ([#5374], [#5395], thanks [@cbeddow])
+* Exclude non-searchable presets from the preset recently-used list ([#5450])
+* Don't give boost to autocompleted tag values because they have a wiki page ([#5460], [#5461], thanks [@matkoniecz])
+* Adding a new point on a way now adds a vertex, not a standalone point ([#5409], [#5413], thanks [@quincylvania])
+* Treat multicombo values other than 'no' and '' as if they are set ([#5291])
+* Fix bug preventing use of gpx files with an uppercase file extension ([#5266], thanks [@JamesKingdom])
+
+[#5485]: https://github.com/openstreetmap/iD/issues/5485
+[#5479]: https://github.com/openstreetmap/iD/issues/5479
+[#5461]: https://github.com/openstreetmap/iD/issues/5461
+[#5460]: https://github.com/openstreetmap/iD/issues/5460
+[#5450]: https://github.com/openstreetmap/iD/issues/5450
+[#5413]: https://github.com/openstreetmap/iD/issues/5413
+[#5409]: https://github.com/openstreetmap/iD/issues/5409
+[#5395]: https://github.com/openstreetmap/iD/issues/5395
+[#5374]: https://github.com/openstreetmap/iD/issues/5374
+[#5291]: https://github.com/openstreetmap/iD/issues/5291
+[#5272]: https://github.com/openstreetmap/iD/issues/5272
+[#5266]: https://github.com/openstreetmap/iD/issues/5266
+[#5264]: https://github.com/openstreetmap/iD/issues/5264
+[#5257]: https://github.com/openstreetmap/iD/issues/5257
+[#5250]: https://github.com/openstreetmap/iD/issues/5250
+[#5191]: https://github.com/openstreetmap/iD/issues/5191
+[#4297]: https://github.com/openstreetmap/iD/issues/4297
+[@cbeddow]: https://github.com/cbeddow
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@matkoniecz]: https://github.com/matkoniecz
+[@quincylvania]: https://github.com/quincylvania
+
+#### :earth_asia: Localization
+* Localize combo box tooltip descriptions ([#5523], [#5524], thanks [@jguthrie100])
+* Switch parking icons from "P" to car icon ([#5341])
+
+[#5524]: https://github.com/openstreetmap/iD/issues/5524
+[#5523]: https://github.com/openstreetmap/iD/issues/5523
+[#5341]: https://github.com/openstreetmap/iD/issues/5341
+[@jguthrie100]: https://github.com/jguthrie100
+
+#### :hourglass: Performance
+* Avoid reflow caused by restriction editor checking its dimensions
+* Memoize `preset.match` - this slightly speeds up some things, including label rendering
+* Don't lookup or autocomplete `postal_code` values from taginfo
+
+#### :mortar_board: Walkthrough / Help
+* Setup data layers and sidebar before starting the walkthrough ([#5136])
+* When switching chapters in Help, return to the top ([#5439], [#5441], thanks [@n42k])
+* Fix crash if user cancels drawing of Tulip Road in walkthrough ([#5295])
+
+[#5441]: https://github.com/openstreetmap/iD/issues/5441
+[#5439]: https://github.com/openstreetmap/iD/issues/5439
+[#5295]: https://github.com/openstreetmap/iD/issues/5295
+[#5136]: https://github.com/openstreetmap/iD/issues/5136
+[@n42k]: https://github.com/n42k
+
+#### :rocket: Presets
+* Add Flush Curb preset ([#5534], thanks [@quincylvania])
+* Add Railing preset for `barrier=fence; fence_type=railing` ([#5532], thanks [@RudyTheDev])
+* Add Guard Rail preset for `barrier=guard_rail` ([#5527], [#5528], thanks [@RudyTheDev])
+* Update the Slipway preset with Name and Fee fields, allow vertex geometry, (thanks [@quincylvania])
+* Add terms for the Parking Lot preset ([#5519], thanks [@quincylvania])
+* Add missing presets for items in name-suggestion-index v1 ([#5510], [#5518], thanks [@quincylvania])
+  * `amenity=money_transfer`
+  * `amenity=payment_centre`
+  * `amenity=payment_terminal`
+  * `shop=catalogue`
+  * `shop=country_store`
+  * `shop=hairdresser_supply`
+  * `shop=party`
+* Add Communication, Mobile Phone, Television, and Radio Mast, Communication Tower presets ([#5486], thanks [@quincylvania])
+* Add `office=religion` preset ([#5483], thanks [@Raubraupe])
+* Add presets for common cuisines for `amenity=fast_food` and `amenity=restaurant` (thanks [@quincylvania])
+* Add `leisure=fishing` preset ([#5469], [#5476], thanks [@xmile1])
+* Switch embankment preset from `embankment=yes` to `man_made=embankment` ([#5344])
+* Add `amenity=vehicle_inspection` preset ([#5453], thanks [@hikemaniac])
+* Add `amenity=dive_centre` preset ([#5451], thanks [@hikemaniac])
+* Add paved/unpaved surface style for `aeroway=taxiway` ([#5419], [#5422], thanks [@thefifthisa])
+* Add preset and rendering for `attraction=summer_toboggan` ([#5447], thanks [@hikemaniac])
+* Add `place=city_block` preset ([#5425], [#5432], thanks [@wvanderp])
+* Add fields for To and From and add fields to all route presets ([#5408], [#5410], thanks [@castriganoj])
+* Add `maxspeed` field to Speed Camera preset ([#5417], [#5421], thanks [@FrikanRw])
+* Add takeaway field to cafe preset ([#5403], [#5418], thanks [@thefifthisa])
+* Add "Garage" to the "Building Features" category ([#5375])
+* Switch the generator/output/electricity field from text to typeCombo ([#5384], thanks [@quincylvania])
+* Add Utility Infrastructure Category ([#5381], [#5382], thanks [@quincylvania])
+* Add Underground Power Cable Preset ([#5380], [#5382], thanks [@quincylvania])
+* Add Solar Panel Preset ([#5371], [#5372], thanks [@quincylvania])
+* Add `backrest` `material` `seats` `colour` fields to Bench preset ([#5367], [#5387], thanks [@simonbilskyrollins])
+* Adjust fields shown on piste presets, different types for "downhill" and "nordic" ([#5268], [#5368], [#5397], thanks [@yvecai])
+* Add generic "Recycling" preset and field `recycling_type=container/center` ([#5363])
+* Switch `crossing` presets to use `marked`/`unmarked`, retain `zebra` as unsearchable value
+* Add escalator and moving walkway presets ([#5350], [#5365] thanks [@mchlp])
+* Add Bridge Pier, Bridge Support presets ([#5337], [#5360], thanks [@nadyafebi])
+* Add Amphitheatre preset ([#5349], [#5359], thanks [@enighter])
+* Add Softball Field preset ([#5346], [#5357], thanks [@s-Hale])
+* Rename Baseball Diamond to Baseball Field ([#5345], [#5357], thanks [@s-Hale])
+* Add `design` field and improve search terms for `power=tower` preset ([#5334], [#5356], thanks [@hchho])
+* Add Picnic Shelter preset ([#5347], [#5355], thanks [@programistka])
+* Add Carport preset ([#5339], [#5353], thanks [@Stormheg])
+* Add Multilevel Car Parking preset ([#5338], [#5352], thanks [@programistka])
+* Add Transit Shelter preset ([#5348], [#5358], thanks [@enighter])
+* Add presets for Traffic Sign, Speed Limit Sign, and City Limit Sign ([#5331], [#5333], thanks [@quincylvania])
+* Add Lowered Curb preset ([#5327], [#5328], thanks [@quincylvania])
+* Change "Pavilion" preset from an `amenity=shelter` to a `building=pavilion` ([#5292], [#5325])
+* Add Operator, Country, Lit, Height, and Type fields to Flagpole preset ([#5315], [#5316], thanks [@quincylvania])
+* Add Sculpture, Statue, and Mural presets, Material field ([#5309], [#5310], thanks [@quincylvania])
+* Add Shipwreck preset for `historic=wreck`, also related fields ([#5302], [#5303], thanks [@quincylvania])
+* Add Location, Length, Type fields to the Swimming Pool preset ([#5300], [#5301], thanks [@quincylvania])
+* Add preset for Parcel Pickup Locker ([#5260])
+* Add Lean-To and Gazebo presets, Fireplace checkbox field ([#5292], [#5293], thanks [@quincylvania])
+* Add basic seamark presets and fields ([#5286], [#5297], thanks [@quincylvania])
+  * Presets: Channel Buoy, Green Buoy, Red Buoy, Channel Beacon, Danger Beacon, Mooring
+  * Fields: Category, Colour, Shape, and System, also universal Seamark field
+* Add preset for `leisure=bandstand` ([#5259], [#5262], thanks [@AndreasHae])
+* Add preset for `amenity=language_school` ([#5245], [#5261], thanks [@AndreasHae])
+* Add preset for `shop=sewing` ([#5244], [#5267], thanks [@SilentSpike])
+* Add presets for `highway=milestone` and `waterway=milestone` ([#5284])
+* Add the Lit field to the Swimming Pool preset ([#5287], [#5288], thanks [@quincylvania])
+* Add Advertising Column preset ([#5270], thanks [@tordans])
+* Add WiFi Hotspot preset ([#5239], [#5251], thanks [@simonbilskyrollins])
+* Add name, bridge type, layer and maxweight fields to Bridge preset ([#5269], thanks [@LaszloEr])
+
+[#5534]: https://github.com/openstreetmap/iD/issues/5534
+[#5532]: https://github.com/openstreetmap/iD/issues/5532
+[#5528]: https://github.com/openstreetmap/iD/issues/5528
+[#5527]: https://github.com/openstreetmap/iD/issues/5527
+[#5519]: https://github.com/openstreetmap/iD/issues/5519
+[#5518]: https://github.com/openstreetmap/iD/issues/5518
+[#5510]: https://github.com/openstreetmap/iD/issues/5510
+[#5486]: https://github.com/openstreetmap/iD/issues/5486
+[#5483]: https://github.com/openstreetmap/iD/issues/5483
+[#5476]: https://github.com/openstreetmap/iD/issues/5476
+[#5469]: https://github.com/openstreetmap/iD/issues/5469
+[#5453]: https://github.com/openstreetmap/iD/issues/5453
+[#5451]: https://github.com/openstreetmap/iD/issues/5451
+[#5447]: https://github.com/openstreetmap/iD/issues/5447
+[#5432]: https://github.com/openstreetmap/iD/issues/5432
+[#5425]: https://github.com/openstreetmap/iD/issues/5425
+[#5422]: https://github.com/openstreetmap/iD/issues/5422
+[#5421]: https://github.com/openstreetmap/iD/issues/5421
+[#5419]: https://github.com/openstreetmap/iD/issues/5419
+[#5418]: https://github.com/openstreetmap/iD/issues/5418
+[#5417]: https://github.com/openstreetmap/iD/issues/5417
+[#5410]: https://github.com/openstreetmap/iD/issues/5410
+[#5408]: https://github.com/openstreetmap/iD/issues/5408
+[#5403]: https://github.com/openstreetmap/iD/issues/5403
+[#5397]: https://github.com/openstreetmap/iD/issues/5397
+[#5387]: https://github.com/openstreetmap/iD/issues/5387
+[#5384]: https://github.com/openstreetmap/iD/issues/5384
+[#5382]: https://github.com/openstreetmap/iD/issues/5382
+[#5381]: https://github.com/openstreetmap/iD/issues/5381
+[#5380]: https://github.com/openstreetmap/iD/issues/5380
+[#5375]: https://github.com/openstreetmap/iD/issues/5375
+[#5372]: https://github.com/openstreetmap/iD/issues/5372
+[#5371]: https://github.com/openstreetmap/iD/issues/5371
+[#5368]: https://github.com/openstreetmap/iD/issues/5368
+[#5367]: https://github.com/openstreetmap/iD/issues/5367
+[#5365]: https://github.com/openstreetmap/iD/issues/5365
+[#5363]: https://github.com/openstreetmap/iD/issues/5363
+[#5360]: https://github.com/openstreetmap/iD/issues/5360
+[#5359]: https://github.com/openstreetmap/iD/issues/5359
+[#5358]: https://github.com/openstreetmap/iD/issues/5358
+[#5357]: https://github.com/openstreetmap/iD/issues/5357
+[#5356]: https://github.com/openstreetmap/iD/issues/5356
+[#5355]: https://github.com/openstreetmap/iD/issues/5355
+[#5353]: https://github.com/openstreetmap/iD/issues/5353
+[#5352]: https://github.com/openstreetmap/iD/issues/5352
+[#5350]: https://github.com/openstreetmap/iD/issues/5350
+[#5349]: https://github.com/openstreetmap/iD/issues/5349
+[#5348]: https://github.com/openstreetmap/iD/issues/5348
+[#5347]: https://github.com/openstreetmap/iD/issues/5347
+[#5346]: https://github.com/openstreetmap/iD/issues/5346
+[#5345]: https://github.com/openstreetmap/iD/issues/5345
+[#5344]: https://github.com/openstreetmap/iD/issues/5344
+[#5339]: https://github.com/openstreetmap/iD/issues/5339
+[#5338]: https://github.com/openstreetmap/iD/issues/5338
+[#5337]: https://github.com/openstreetmap/iD/issues/5337
+[#5334]: https://github.com/openstreetmap/iD/issues/5334
+[#5333]: https://github.com/openstreetmap/iD/issues/5333
+[#5331]: https://github.com/openstreetmap/iD/issues/5331
+[#5328]: https://github.com/openstreetmap/iD/issues/5328
+[#5327]: https://github.com/openstreetmap/iD/issues/5327
+[#5325]: https://github.com/openstreetmap/iD/issues/5325
+[#5316]: https://github.com/openstreetmap/iD/issues/5316
+[#5315]: https://github.com/openstreetmap/iD/issues/5315
+[#5310]: https://github.com/openstreetmap/iD/issues/5310
+[#5309]: https://github.com/openstreetmap/iD/issues/5309
+[#5303]: https://github.com/openstreetmap/iD/issues/5303
+[#5302]: https://github.com/openstreetmap/iD/issues/5302
+[#5301]: https://github.com/openstreetmap/iD/issues/5301
+[#5300]: https://github.com/openstreetmap/iD/issues/5300
+[#5297]: https://github.com/openstreetmap/iD/issues/5297
+[#5293]: https://github.com/openstreetmap/iD/issues/5293
+[#5292]: https://github.com/openstreetmap/iD/issues/5292
+[#5288]: https://github.com/openstreetmap/iD/issues/5288
+[#5287]: https://github.com/openstreetmap/iD/issues/5287
+[#5286]: https://github.com/openstreetmap/iD/issues/5286
+[#5284]: https://github.com/openstreetmap/iD/issues/5284
+[#5270]: https://github.com/openstreetmap/iD/issues/5270
+[#5269]: https://github.com/openstreetmap/iD/issues/5269
+[#5267]: https://github.com/openstreetmap/iD/issues/5267
+[#5262]: https://github.com/openstreetmap/iD/issues/5262
+[#5261]: https://github.com/openstreetmap/iD/issues/5261
+[#5260]: https://github.com/openstreetmap/iD/issues/5260
+[#5259]: https://github.com/openstreetmap/iD/issues/5259
+[#5251]: https://github.com/openstreetmap/iD/issues/5251
+[#5245]: https://github.com/openstreetmap/iD/issues/5245
+[#5244]: https://github.com/openstreetmap/iD/issues/5244
+[#5239]: https://github.com/openstreetmap/iD/issues/5239
+[@AndreasHae]: https://github.com/AndreasHae
+[@castriganoj]: https://github.com/castriganoj
+[@enighter]: https://github.com/enighter
+[@FrikanRw]: https://github.com/FrikanRw
+[@hchho]: https://github.com/hchho
+[@hikemaniac]: https://github.com/hikemaniac
+[@LaszloEr]: https://github.com/LaszloEr
+[@mchlp]: https://github.com/mchlp
+[@nadyafebi]: https://github.com/nadyafebi
+[@programistka]: https://github.com/programistka
+[@quincylvania]: https://github.com/quincylvania
+[@Raubraupe]: https://github.com/Raubraupe
+[@RudyTheDev]: https://github.com/RudyTheDev
+[@s-Hale]: https://github.com/s-Hale
+[@SilentSpike]: https://github.com/SilentSpike
+[@simonbilskyrollins]: https://github.com/simonbilskyrollins
+[@Stormheg]: https://github.com/Stormheg
+[@thefifthisa]: https://github.com/thefifthisa
+[@tordans]: https://github.com/tordans
+[@wvanderp]: https://github.com/wvanderp
+[@xmile1]: https://github.com/xmile1
+[@yvecai]: https://github.com/yvecai
+
 
 # 2.11.1
 ##### 2018-Aug-29
