@@ -69,7 +69,10 @@ export function tooltip() {
     };
 
 
-    tooltip.destroy = function(selection) {
+    tooltip.destroy = function(selection, selector) {
+        // by default, just destroy the current tooltip
+        selector = selector || '.tooltip-' + _id;
+
         selection
             .on('mouseenter.tooltip', null)
             .on('mouseleave.tooltip', null)
@@ -77,8 +80,13 @@ export function tooltip() {
                 return this.getAttribute('data-original-title') || this.getAttribute('title');
             })
             .attr('data-original-title', null)
-            .selectAll('.tooltip-' + _id)
+            .selectAll(selector)
             .remove();
+    };
+
+
+    tooltip.destroyAny = function(selection) {
+        selection.call(tooltip.destroy, '.tooltip');
     };
 
 

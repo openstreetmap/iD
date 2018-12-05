@@ -52,6 +52,8 @@ export function uiBackground(context) {
             var description = d.description();
             var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
+            item.call(tooltip().destroyAny);
+
             if (d === _previousBackground) {
                 item.call(tooltip()
                     .placement(placement)
@@ -66,8 +68,6 @@ export function uiBackground(context) {
                     .placement(placement)
                     .title(description || d.name())
                 );
-            } else {
-                item.call(tooltip().destroy);
             }
         });
     }
