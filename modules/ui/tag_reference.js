@@ -13,7 +13,8 @@ import { svgIcon } from '../svg';
 
 
 export function uiTagReference(tag) {
-    var taginfo = services.taginfo;
+    // var taginfo = services.taginfo;
+    var wikibase = services.osmWikibase;
     var tagReference = {};
 
     var _button = d3_select(null);
@@ -22,44 +23,45 @@ export function uiTagReference(tag) {
     var _showing;
 
 
-    function findLocal(data) {
-        var locale = utilDetect().locale.toLowerCase();
-        var localized;
+    // function findLocal(data) {
+    //     var locale = utilDetect().locale.toLowerCase();
+    //     var localized;
 
-        if (locale !== 'pt-br') {  // see #3776, prefer 'pt' over 'pt-br'
-            localized = _find(data, function(d) {
-                return d.lang.toLowerCase() === locale;
-            });
-            if (localized) return localized;
-        }
+    //     if (locale !== 'pt-br') {  // see #3776, prefer 'pt' over 'pt-br'
+    //         localized = _find(data, function(d) {
+    //             return d.lang.toLowerCase() === locale;
+    //         });
+    //         if (localized) return localized;
+    //     }
 
-        // try the non-regional version of a language, like
-        // 'en' if the language is 'en-US'
-        if (locale.indexOf('-') !== -1) {
-            var first = locale.split('-')[0];
-            localized = _find(data, function(d) {
-                return d.lang.toLowerCase() === first;
-            });
-            if (localized) return localized;
-        }
+    //     // try the non-regional version of a language, like
+    //     // 'en' if the language is 'en-US'
+    //     if (locale.indexOf('-') !== -1) {
+    //         var first = locale.split('-')[0];
+    //         localized = _find(data, function(d) {
+    //             return d.lang.toLowerCase() === first;
+    //         });
+    //         if (localized) return localized;
+    //     }
 
-        // finally fall back to english
-        return _find(data, function(d) {
-            return d.lang.toLowerCase() === 'en';
-        });
-    }
+    //     // finally fall back to english
+    //     return _find(data, function(d) {
+    //         return d.lang.toLowerCase() === 'en';
+    //     });
+    // }
 
 
     function load(param) {
-        if (!taginfo) return;
+        if (!wikibase) return;
 
         _button
             .classed('tag-reference-loading', true);
 
-        taginfo.docs(param, function show(err, data) {
+        wikibase.docs(param, function show(err, data) {
             var docs;
             if (!err && data) {
-                docs = findLocal(data);
+                // docs = findLocal(data);
+                debugger;
             }
 
             _body.html('');
