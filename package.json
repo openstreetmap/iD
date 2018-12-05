@@ -53,7 +53,7 @@
     "@fortawesome/free-brands-svg-icons": "~5.5.0",
     "@fortawesome/free-regular-svg-icons": "~5.5.0",
     "@fortawesome/free-solid-svg-icons": "~5.5.0",
-    "@mapbox/maki": "^5.0.0",
+    "@mapbox/maki": "^6.0.0",
     "chai": "^4.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
