@@ -98,7 +98,10 @@ export function uiIntro(context) {
         // Setup data layers (only OSM)
         var layers = context.layers();
         layers.all().forEach(function(item) {
-            item.layer.enabled(item.id === 'osm');
+            // if the layer has the function `enabled`
+            if (typeof item.layer.enabled == 'function') {
+                item.layer.enabled(item.id === 'osm');
+            }
         });
 
         // Mock geocoder
