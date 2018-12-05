@@ -7820,18 +7820,47 @@
                     }
                 }
             },
+            "osm-india-forum": {
+                "name": "OpenStreetMap Indien Forum",
+                "description": "OpenStreetMap Indien Web Forum"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap Indien GitHub",
+                "description": "Programmiere mit uns: {url}"
+            },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap Indien Mailingliste",
                 "description": "Talk-in ist die offizielle Mailingliste für die indische Community"
+            },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap Indien Telegram",
+                "description": "Schließen Sie sich unserer Gemeinschaft an: {url}"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap Indien Twitter",
                 "description": "Wir sind nur einen Tweet weit weg: {url}"
             },
+            "osm-india-website": {
+                "name": "OpenStreetMap Indien",
+                "description": "Mapper und OpenStreetMap Benutzer in Indien"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject Indien",
+                "description": "Alles was du über Mappen in Indien wissen musst: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap Indien Youtube",
+                "description": "Abonniere unseren Kanal: {url}"
+            },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Freie Software Hardware Bewegung - Facebook",
                 "description": "FSHM Facebook Seite für Veranstaltungen und Aktivitäten der Gemeinschaft",
                 "extendedDescription": "FSHM organisiert Veranstaltungen für freie Software/Hard, Technologie, Aktivismus für OpenStreetMap. Seine Facebook Seite ist der beste Weg um in Kontakt mit sweinen Veranstaltungen zu bleiben."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Freie Software Hardware Bewegung - Mailing Liste",
+                "description": "FSHM Puducherry Mailing Liste um Mappen in Puducherry und anderes zu diskutieren.",
+                "extendedDescription": "FSHM organisiert Treffen über Freie Software/Hardware, Technologie und Aktivismus für OpenStreetMap."
             },
             "OSM-India-Puducherry-Matrix": {
                 "name": "Freie Software Hardware Bewegung - Matrix",
