@@ -28,6 +28,19 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.12.1
+##### 2018-Dec-05
+
+#### :bug: Bugfixes
+* Fix bug preventing walkthrough from starting ([#5553], [#5555], thanks [@quincylvania])
+* Fix bug causing tooltips on background pane not to disappear ([#5551])
+
+[#5555]: https://github.com/openstreetmap/iD/issues/5555
+[#5553]: https://github.com/openstreetmap/iD/issues/5553
+[#5551]: https://github.com/openstreetmap/iD/issues/5551
+[@quincylvania]: https://github.com/quincylvania
+
+
 # 2.12.0
 ##### 2018-Dec-03
 
