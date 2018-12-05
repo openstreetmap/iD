@@ -99,7 +99,7 @@ export function uiIntro(context) {
         var layers = context.layers();
         layers.all().forEach(function(item) {
             // if the layer has the function `enabled`
-            if (typeof item.layer.enabled == 'function') {
+            if (typeof item.layer.enabled === 'function') {
                 item.layer.enabled(item.id === 'osm');
             }
         });
