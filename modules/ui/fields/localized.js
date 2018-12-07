@@ -24,7 +24,6 @@ import {
 
 
 export function uiFieldLocalized(field, context) {
-console.log('new uiFieldLocalized!');
     var dispatch = d3_dispatch('change', 'input');
     var wikipedia = services.wikipedia;
     var input = d3_select(null);
@@ -42,7 +41,7 @@ console.log('new uiFieldLocalized!');
 
     var brandcombo = d3_combobox()
         .container(context.container())
-        // .canAutocomplete(false)
+        .canAutocomplete(false)
         .minItems(1);
 
     var _selection = d3_select(null);
