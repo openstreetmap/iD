@@ -138,10 +138,10 @@ export function uiField(context, presetField, entity, options) {
         container = container
             .merge(enter);
 
-        container.selectAll('.form-field-label > .remove-icon')
+        container.select('.form-field-label > .remove-icon')  // propagate bound data
             .on('click', remove);
 
-        container.selectAll('.form-field-label > .modified-icon')
+        container.select('.form-field-label > .modified-icon')  // propagate bound data
             .on('click', revert);
 
         container
