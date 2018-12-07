@@ -172,6 +172,14 @@ describe('d3.combobox', function() {
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
+    it('does not autocomplete if canAutocomplete(false)', function() {
+        input.call(combobox.data(data).canAutocomplete(false));
+        focusTypeahead(input);
+        simulateKeypress('b');
+        expect(input.property('value')).to.equal('b');
+        expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
+    });
+
     it('selects the completed portion of the value', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);

@@ -24,10 +24,27 @@ import {
 
 
 export function uiFieldLocalized(field, context) {
+console.log('new uiFieldLocalized!');
     var dispatch = d3_dispatch('change', 'input');
     var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
+
+    var allSuggestions = context.presets().collection.filter(function(p) {
+        return p.suggestion === true;
+    });
+
+    // reuse these combos
+    var langcombo = d3_combobox()
+        .container(context.container())
+        .fetcher(fetchLanguages)
+        .minItems(0);
+
+    var brandcombo = d3_combobox()
+        .container(context.container())
+        // .canAutocomplete(false)
+        .minItems(1);
+
     var _selection = d3_select(null);
     var _multilingual = [];
     var _isLocked = false;
@@ -120,10 +137,6 @@ export function uiFieldLocalized(field, context) {
 
             } else {
                 // Not a suggestion preset - Add a suggestions dropdown if it makes sense to.
-                var allSuggestions = context.presets().collection.filter(function(p) {
-                    return p.suggestion === true;
-                });
-
                 // This code attempts to determine if the matched preset is the
                 // kind of preset that even can benefit from name suggestions..
                 // - true = shops, cafes, hotels, etc. (also generic and fallback presets)
@@ -140,10 +153,8 @@ export function uiFieldLocalized(field, context) {
                 // Show the suggestions.. If the user picks one, change the tags..
                 if (allSuggestions.length && goodSuggestions.length) {
                     input
-                        .call(d3_combobox()
-                            .container(context.container())
-                            .fetcher(suggestNames(preset, allSuggestions))
-                            .minItems(1)
+                        .call(brandcombo
+                            .fetcher(fetchBrandNames(preset, allSuggestions))
                             .on('accept', function(d) {
                                 var entity = context.entity(_entity.id);  // get latest
                                 var tags = entity.tags;
@@ -206,7 +217,7 @@ export function uiFieldLocalized(field, context) {
 
 
 
-        function suggestNames(preset, suggestions) {
+        function fetchBrandNames(preset, suggestions) {
             var pTag = preset.id.split('/', 2);
             var pKey = pTag[0];
             var pValue = pTag[1];
@@ -313,7 +324,7 @@ export function uiFieldLocalized(field, context) {
     }
 
 
-    function fetcher(value, cb) {
+    function fetchLanguages(value, cb) {
         var v = value.toLowerCase();
 
         cb(dataWikipedia.filter(function(d) {
@@ -345,10 +356,6 @@ export function uiFieldLocalized(field, context) {
             .attr('class', 'entry')
             .each(function() {
                 var wrap = d3_select(this);
-                var langcombo = d3_combobox()
-                    .container(context.container())
-                    .fetcher(fetcher)
-                    .minItems(0);
 
                 var label = wrap
                     .append('label')
