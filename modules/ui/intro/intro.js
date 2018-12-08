@@ -75,6 +75,11 @@ export function uiIntro(context) {
         var baseEntities = context.history().graph().base().entities;
         var countryCode = services.geocoder.countryCode;
 
+        // Show sidebar and disable the sidebar resizing button
+        // (this needs to be before `context.inIntro(true)`)
+        context.ui().sidebar.expand();
+        d3_selectAll('button.sidebar-toggle').classed('disabled', true);
+
         // Block saving
         context.inIntro(true);
 
@@ -109,8 +114,6 @@ export function uiIntro(context) {
             callback(null, t('intro.graph.countrycode'));
         };
 
-        // Disable the sidebar resizing button
-        d3_selectAll('button.sidebar-toggle').classed('disabled', true);
 
         d3_selectAll('#map .layer-background').style('opacity', 1);
 
