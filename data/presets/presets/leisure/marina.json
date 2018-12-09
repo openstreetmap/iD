@@ -9,7 +9,9 @@
         "sanitary_dump_station",
         "power_supply",
         "internet_access",
-        "internet_access/fee",
+        "internet_access/fee"
+    ],
+    "moreFields" : [
         "internet_access/ssid"
     ],
     "geometry": [

@@ -9,7 +9,9 @@
         "smoking",
         "rooms",
         "internet_access",
-        "internet_access/fee",
+        "internet_access/fee"
+    ],
+    "moreFields" : [
         "internet_access/ssid"
     ],
     "geometry": [

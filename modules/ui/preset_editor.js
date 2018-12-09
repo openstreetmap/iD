@@ -53,8 +53,16 @@ export function uiPresetEditor(context) {
                 );
             }
 
-            presets.universal().forEach(function(field) {
+            _preset.moreFields.forEach(function(field) {
                 if (_preset.fields.indexOf(field) === -1) {
+                    _fieldsArr.push(
+                        uiField(context, field, entity, { show: false })
+                    );
+                }
+            });
+
+            presets.universal().forEach(function(field) {
+                if (_preset.fields.indexOf(field) === -1 && _preset.moreFields.indexOf(field) === -1) {
                     _fieldsArr.push(
                         uiField(context, field, entity, { show: false })
                     );
