@@ -6026,6 +6026,15 @@ en:
         # shop=fashion
         name: Fashion Store
         terms: '<translate with synonyms or related terms for ''Fashion Store'', separated by commas>'
+      shop/fireplace:
+        # shop=fireplace
+        name: Fireplace Store
+        # 'terms: fireplace,stove,masonry heater'
+        terms: '<translate with synonyms or related terms for ''Fireplace Store'', separated by commas>'
+      shop/fishing:
+        # shop=fishing
+        name: Fishing Shop
+        terms: '<translate with synonyms or related terms for ''Fishing Shop'', separated by commas>'
       shop/fishmonger:
         # shop=fishmonger
         name: Fishmonger
@@ -6109,6 +6118,10 @@ en:
         name: Houseware Store
         # 'terms: home,household'
         terms: '<translate with synonyms or related terms for ''Houseware Store'', separated by commas>'
+      shop/hunting:
+        # shop=hunting
+        name: Hunting Shop
+        terms: '<translate with synonyms or related terms for ''Hunting Shop'', separated by commas>'
       shop/interior_decoration:
         # shop=interior_decoration
         name: Interior Decoration Store
@@ -6362,6 +6375,10 @@ en:
         # shop=watches
         name: Watches Shop
         terms: '<translate with synonyms or related terms for ''Watches Shop'', separated by commas>'
+      shop/water:
+        # shop=water
+        name: Drinking Water Shop
+        terms: '<translate with synonyms or related terms for ''Drinking Water Shop'', separated by commas>'
       shop/water_sports:
         # shop=water_sports
         name: Watersport/Swim Shop
