@@ -2,6 +2,7 @@
 const requireESM = require('esm')(module);
 const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
 const _forEach = requireESM('lodash-es/forEach').default;
+const _intersection = requireESM('lodash-es/intersection').default;
 const _isEmpty = requireESM('lodash-es/isEmpty').default;
 const _merge = requireESM('lodash-es/merge').default;
 const _toPairs = requireESM('lodash-es/toPairs').default;
@@ -214,6 +215,7 @@ function suggestionsToPresets(presets) {
             name: name,
             icon: preset.icon,
             fields: preset.fields,
+            moreFields: preset.moreFields,
             geometry: preset.geometry,
             tags: _merge({}, preset.tags, wikidataTag),
             addTags: suggestion.tags,
@@ -461,10 +463,23 @@ function validatePresetFields(presets, fields) {
         if (preset.fields) {
             preset.fields.forEach(function(field) {
                 if (fields[field] === undefined) {
-                    console.error('Unknown preset field: ' + field + ' in preset ' + preset.name);
+                    console.error('Unknown preset field "' + field + '" in "fields" array of preset ' + preset.name);
                     process.exit(1);
                 }
             });
+        }
+        if (preset.moreFields) {
+            preset.moreFields.forEach(function(field) {
+                if (fields[field] === undefined) {
+                    console.error('Unknown preset field "' + field + '" in "moreFields" array of preset ' + preset.name);
+                    process.exit(1);
+                }
+            });
+        }
+        var fieldsIntersection = _intersection(preset.fields, preset.moreFields);
+        if (fieldsIntersection.length > 0) {
+            console.error('Preset field "' + fieldsIntersection[0] + '" in both "fields" and "moreFields" arrays of preset ' + preset.name);
+            process.exit(1);
         }
     });
 }

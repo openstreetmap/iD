@@ -10,6 +10,7 @@ export function presetPreset(id, preset, fields) {
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
+    preset.moreFields = (preset.moreFields || []).map(getFields);
     preset.geometry = (preset.geometry || []);
 
 

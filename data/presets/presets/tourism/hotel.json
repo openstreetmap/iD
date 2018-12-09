@@ -7,10 +7,12 @@
         "address",
         "building_area",
         "smoking",
-        "stars",
         "rooms",
         "internet_access",
-        "internet_access/fee",
+        "internet_access/fee"
+    ],
+    "moreFields": [
+        "stars",
         "internet_access/ssid"
     ],
     "geometry": [
