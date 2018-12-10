@@ -205,6 +205,9 @@ en:
       barrier:
         # barrier=*
         label: Type
+      basin:
+        # basin=*
+        label: Type
       bath/open_air:
         # 'bath:open_air=*'
         label: Open Air
@@ -794,6 +797,9 @@ en:
         # inscription=*
         label: Inscription
       intermittent:
+        # intermittent=*
+        label: Intermittent
+      intermittent_yes:
         # intermittent=*
         label: Intermittent
       internet_access:

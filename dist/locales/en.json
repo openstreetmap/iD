@@ -1653,6 +1653,9 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "basin": {
+                    "label": "Type"
+                },
                 "bath/open_air": {
                     "label": "Open Air"
                 },
@@ -2171,6 +2174,9 @@
                 },
                 "inscription": {
                     "label": "Inscription"
+                },
+                "intermittent_yes": {
+                    "label": "Intermittent"
                 },
                 "intermittent": {
                     "label": "Intermittent"

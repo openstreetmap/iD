@@ -475,7 +475,7 @@
     "landuse/farm": {"icon": "maki-farm", "fields": ["name", "operator", "crop"], "geometry": ["point", "area"], "tags": {"landuse": "farm"}, "terms": [], "name": "Farmland", "searchable": false},
     "landuse/allotments": {"icon": "maki-garden-centre", "geometry": ["area"], "fields": ["name"], "tags": {"landuse": "allotments"}, "terms": ["allotment", "garden"], "name": "Community Garden"},
     "landuse/aquaculture": {"icon": "maki-aquarium", "fields": ["name", "operator", "produce"], "geometry": ["area"], "tags": {"landuse": "aquaculture"}, "terms": ["fish farm", "crustacean", "algae", "aquafarming", "shrimp farm", "oyster farm", "mariculture", "algaculture"], "name": "Aquaculture"},
-    "landuse/basin": {"icon": "maki-water", "fields": ["name"], "geometry": ["area"], "tags": {"landuse": "basin"}, "terms": [], "name": "Basin"},
+    "landuse/basin": {"icon": "maki-water", "fields": ["name", "basin", "intermittent_yes"], "geometry": ["area"], "tags": {"landuse": "basin"}, "terms": [], "name": "Basin"},
     "landuse/brownfield": {"geometry": ["area"], "fields": ["name"], "tags": {"landuse": "brownfield"}, "terms": [], "matchScore": 0.9, "name": "Brownfield"},
     "landuse/cemetery": {"icon": "maki-cemetery", "fields": ["name", "religion", "denomination"], "geometry": ["area"], "tags": {"landuse": "cemetery"}, "terms": [], "name": "Cemetery"},
     "landuse/churchyard": {"icon": "maki-religious-christian", "fields": ["name", "religion", "denomination"], "geometry": ["area"], "tags": {"landuse": "churchyard"}, "terms": [], "name": "Churchyard"},
