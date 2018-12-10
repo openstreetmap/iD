@@ -244,7 +244,7 @@ And may optionally have one of these properties:
 - `value`: The value that the key must have.
 - `valueNot`: The value that the key must not have.
 
-For example, this is how we show the Internet Access Field only if the feature has an `internet_access` tag not equal to `no`.
+For example, this is how we show the Internet Access Fee field only if the feature has an `internet_access` tag not equal to `no`.
 
 ```js
 "prerequisiteTag": {
