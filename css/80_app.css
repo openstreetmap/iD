@@ -483,6 +483,9 @@ button.save.disabled .count {
     border-right-width: 1px;
     padding: 0px 8px 0px 0px;
 }
+#bar.narrow button.save .count {
+    padding: 0px;
+}
 
 button.save .label {
     margin-right: 3px;
