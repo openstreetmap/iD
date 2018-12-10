@@ -24,7 +24,6 @@ import {
 export function d3combobox() {
     var dispatch = d3_dispatch('accept');
     var _container = d3_select(document.body);
-    var _wrapper = d3_select(null);
     var _suggestions = [];
     var _choice = '';
     var _canAutocomplete = true;
@@ -42,9 +41,7 @@ export function d3combobox() {
     };
 
     var combobox = function(input, attachTo) {
-        _wrapper = _container
-            .selectAll('div.combobox')
-            .filter(function(d) { return d === input.node(); });
+        var combo = _container.selectAll('.combobox');
 
         input
             .classed('combobox-input', true)
@@ -71,7 +68,8 @@ export function d3combobox() {
                         // prevent the form element from blurring. it blurs on mousedown
                         d3_event.stopPropagation();
                         d3_event.preventDefault();
-                        if (_wrapper.empty()) {
+                        var combo = _container.selectAll('.combobox');
+                        if (combo.empty()) {
                             input.node().focus();
                             fetch('', render);
                         } else {
@@ -89,36 +87,37 @@ export function d3combobox() {
         }
 
         function show() {
-            if (_wrapper.empty()) {
-                _wrapper = _container
-                    .insert('div', ':first-child')
-                    .datum(input.node())
-                    .attr('class', 'combobox')
-                    .style('position', 'absolute')
-                    .style('display', 'block')
-                    .style('left', '0px')
-                    .on('mousedown', function () {
-                        // prevent moving focus out of the text field
-                        d3_event.preventDefault();
-                    });
+            hide();   // remove any existing
 
-                d3_select('body')
-                    .on('scroll.combobox', render, true);
-            }
+            _container
+                .insert('div', ':first-child')
+                .datum(input.node())
+                .attr('class', 'combobox')
+                .style('position', 'absolute')
+                .style('display', 'block')
+                .style('left', '0px')
+                .on('mousedown', function () {
+                    // prevent moving focus out of the text field
+                    d3_event.preventDefault();
+                });
+
+            d3_select('body')
+                .on('scroll.combobox', render, true);
         }
 
         function hide() {
-            if (!_wrapper.empty()) {
-                _choice = '';
-                _wrapper.remove();
+            var combo = _container.selectAll('.combobox');
+            if (combo.empty()) return;
 
-                d3_select('body')
-                    .on('scroll.combobox', null);
-            }
+            _choice = '';
+            combo.remove();
+
+            d3_select('body')
+                .on('scroll.combobox', null);
         }
 
         function keydown() {
-            var shown = !_wrapper.empty();
+            var shown = !_container.selectAll('.combobox').empty();
             var tagName = input.node() ? input.node().tagName.toLowerCase() : '';
 
             switch (d3_event.keyCode) {
@@ -134,7 +133,7 @@ export function d3combobox() {
                     break;
 
                 case 9:   // ⇥ Tab
-                    _wrapper.selectAll('a.selected').each(function (d) {
+                    _container.selectAll('.combobox-option.selected').each(function (d) {
                         dispatch.call('accept', this, d);
                     });
                     hide();
@@ -169,7 +168,7 @@ export function d3combobox() {
                     break;
 
                 case 13:  // ↩ Return
-                    _wrapper.selectAll('a.selected').each(function (d) {
+                    _container.selectAll('.combobox-option.selected').each(function (d) {
                        dispatch.call('accept', this, d);
                     });
                     hide();
@@ -266,8 +265,8 @@ export function d3combobox() {
                 return;
             }
 
-            var options = _wrapper
-                .selectAll('a.combobox-option')
+            var combo = _container.selectAll('.combobox');
+            var options = combo.selectAll('.combobox-option')
                 .data(_suggestions, function(d) { return d.value; });
 
             options.exit()
@@ -288,19 +287,21 @@ export function d3combobox() {
             var node = attachTo ? attachTo.node() : input.node();
             var rect = node.getBoundingClientRect();
 
-            _wrapper
+            combo
                 .style('left', (rect.left + 5) + 'px')
                 .style('width', (rect.width - 10) + 'px')
                 .style('top', rect.height + rect.top + 'px');
         }
 
         function ensureVisible() {
-            var node = _wrapper.selectAll('a.selected').node();
+            var node = _container.selectAll('.combobox-option.selected').node();
             if (node) node.scrollIntoView();
         }
 
         function accept(d) {
-            if (_wrapper.empty()) return;
+            var combo = _container.selectAll('.combobox');
+            if (combo.empty()) return;
+
             input.property('value', d.value);
             utilTriggerEvent(input, 'change');
             dispatch.call('accept', this, d);
