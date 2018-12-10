@@ -1869,7 +1869,7 @@
       "value": "greenhouse",
       "description": "🄿 Greenhouse",
       "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-centre-15.svg?sanitize=true"
     },
     {
       "key": "building",
@@ -2175,7 +2175,7 @@
       "value": "confectionery",
       "description": "🄿 Candy Maker",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/confectionary-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/confectionery-15.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -2210,7 +2210,7 @@
       "value": "gardener",
       "description": "🄿 Gardener",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-centre-15.svg?sanitize=true"
     },
     {
       "key": "craft",
@@ -3160,7 +3160,7 @@
       "value": "allotments",
       "description": "🄿 Community Garden",
       "object_types": ["area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-centre-15.svg?sanitize=true"
     },
     {
       "key": "landuse",
@@ -3720,7 +3720,7 @@
       "value": "american_football",
       "description": "🄿 American Football Field",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/america-football-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/american-football-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -3783,14 +3783,14 @@
       "value": "rugby_league",
       "description": "🄿 Rugby League Field",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/america-football-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/american-football-15.svg?sanitize=true"
     },
     {
       "key": "sport",
       "value": "rugby_union",
       "description": "🄿 Rugby Union Field",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/america-football-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/american-football-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -5587,7 +5587,7 @@
       "value": "confectionery",
       "description": "🄿 Candy Store",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/confectionary-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/confectionery-15.svg?sanitize=true"
     },
     {
       "key": "shop",
@@ -5741,7 +5741,7 @@
       "value": "garden_centre",
       "description": "🄿 Garden Center",
       "object_types": ["node", "area"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-center-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/garden-centre-15.svg?sanitize=true"
     },
     {
       "key": "shop",
