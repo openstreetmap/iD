@@ -7,10 +7,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import {
-    utilRebind,
-    utilTriggerEvent
-} from '../../modules/util';
+import { utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -21,7 +18,7 @@ import {
 //       value:  'display text'
 //   }, ...]
 
-export function d3combobox() {
+export function uiCombobox() {
     var dispatch = d3_dispatch('accept');
     var _container = d3_select(document.body);
     var _suggestions = [];
@@ -350,7 +347,7 @@ export function d3combobox() {
 }
 
 
-d3combobox.off = function(input) {
+uiCombobox.off = function(input) {
     input
         .on('focus.typeahead', null)
         .on('blur.typeahead', null)

@@ -7,8 +7,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
-
 import { t } from '../util/locale';
 
 import {
@@ -22,7 +20,7 @@ import { modeSelect } from '../modes';
 import { osmEntity, osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg';
-import { uiDisclosure } from './disclosure';
+import { uiCombobox, uiDisclosure } from './index';
 import { utilDisplayName, utilNoAuto, utilHighlightEntity } from '../util';
 
 
@@ -268,7 +266,7 @@ export function uiRawMembershipEditor(context) {
                 .merge(enter);
 
             newrow.selectAll('.member-entity-input')
-                .call(d3_combobox()
+                .call(uiCombobox()
                     .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) { callback(relations(value)); })
@@ -316,7 +314,7 @@ export function uiRawMembershipEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(d3_combobox()
+                role.call(uiCombobox()
                     .container(context.container())
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
@@ -336,7 +334,7 @@ export function uiRawMembershipEditor(context) {
                 var row = d3_select(this);
 
                 row.selectAll('input.member-role')
-                    .call(d3_combobox.off);
+                    .call(uiCombobox.off);
             }
         }
     }

@@ -5,22 +5,12 @@ import _uniqBy from 'lodash-es/uniqBy';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { dataAddressFormats } from '../../../data';
-
-import {
-    geoExtent,
-    geoChooseEdge,
-    geoSphericalDistance
-} from '../../geo';
-
+import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { uiCombobox } from '../index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldAddress(field, context) {
@@ -183,7 +173,7 @@ export function uiFieldAddress(field, context) {
                     : getNearValues;
 
             wrap.selectAll('input.addr-' + tag)
-                .call(d3_combobox()
+                .call(uiCombobox()
                     .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) {

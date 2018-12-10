@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
 
 import { t } from '../util/locale';
+import { uiCombobox } from './index';
 import { utilGetSetValue, utilNoAuto } from '../util';
 
 
@@ -95,7 +95,7 @@ export function uiFormFields(context) {
                 }
                 return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
             })
-            .call(d3_combobox()
+            .call(uiCombobox()
                 .container(context.container())
                 .data(notShown)
                 .minItems(1)

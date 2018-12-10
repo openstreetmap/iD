@@ -8,19 +8,14 @@ import {
     event as d3_event
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
-
 import { t } from '../../util/locale';
 import { actionChangeTags } from '../../actions/index';
 import { dataWikipedia } from '../../../data/index';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
+import { uiCombobox } from '../index';
 import { utilDetect } from '../../util/detect';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
@@ -34,7 +29,7 @@ export function uiFieldWikipedia(field, context) {
 
 
     function wiki(selection) {
-        var langcombo = d3_combobox()
+        var langcombo = uiCombobox()
             .container(context.container())
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
@@ -48,7 +43,7 @@ export function uiFieldWikipedia(field, context) {
                 }));
             });
 
-        var titlecombo = d3_combobox()
+        var titlecombo = uiCombobox()
             .container(context.container())
             .fetcher(function(value, cb) {
                 if (!value) {

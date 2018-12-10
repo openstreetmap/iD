@@ -1,12 +1,10 @@
 import _uniqBy from 'lodash-es/uniqBy';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
-import { uiField } from './field';
-import { uiFormFields } from './form_fields';
+import { uiCombobox, uiField, uiFormFields } from './index';
 import { utilRebind, utilTriggerEvent } from '../util';
 
 
@@ -80,7 +78,7 @@ export function uiChangesetEditor(context) {
                     });
 
                     commentField
-                        .call(d3_combobox()
+                        .call(uiCombobox()
                             .container(context.container())
                             .caseSensitive(true)
                             .data(_uniqBy(comments, 'title'))

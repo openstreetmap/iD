@@ -1,4 +1,4 @@
-describe('d3.combobox', function() {
+describe('uiCombobox', function() {
     var body, container, content, input, combobox;
 
     var data = [
@@ -67,7 +67,7 @@ describe('d3.combobox', function() {
         container = body.append('div').attr('class', 'id-container');
         content = container.append('div');
         input = content.append('input');
-        combobox = iD.lib.d3combobox();
+        combobox = iD.uiCombobox();
     });
 
     afterEach(function() {

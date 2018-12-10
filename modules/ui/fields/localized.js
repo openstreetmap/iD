@@ -7,20 +7,15 @@ import {
     event as d3_event
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { t } from '../../util/locale';
 import { dataWikipedia } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
+import { uiCombobox } from '../index';
 import { utilDetect } from '../../util/detect';
-import {
-    utilEditDistance,
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldLocalized(field, context) {
@@ -34,12 +29,12 @@ export function uiFieldLocalized(field, context) {
     });
 
     // reuse these combos
-    var langcombo = d3_combobox()
+    var langcombo = uiCombobox()
         .container(context.container())
         .fetcher(fetchLanguages)
         .minItems(0);
 
-    var brandcombo = d3_combobox()
+    var brandcombo = uiCombobox()
         .container(context.container())
         .canAutocomplete(false)
         .minItems(1);

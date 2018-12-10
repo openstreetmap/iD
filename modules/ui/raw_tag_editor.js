@@ -9,18 +9,11 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
-
 import { t } from '../util/locale';
 import { services } from '../services';
 import { svgIcon } from '../svg';
-import { uiDisclosure } from './disclosure';
-import { uiTagReference } from './tag_reference';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../util';
+import { uiCombobox, uiDisclosure, uiTagReference } from './index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../util';
 
 
 export function uiRawTagEditor(context) {
@@ -216,7 +209,7 @@ export function uiRawTagEditor(context) {
 
             var geometry = context.geometry(_entityID);
 
-            key.call(d3_combobox()
+            key.call(uiCombobox()
                 .container(context.container())
                 .fetcher(function(value, callback) {
                     taginfo.keys({
@@ -228,7 +221,7 @@ export function uiRawTagEditor(context) {
                     });
                 }));
 
-            value.call(d3_combobox()
+            value.call(uiCombobox()
                 .container(context.container())
                 .fetcher(function(value, callback) {
                     taginfo.values({
@@ -261,10 +254,10 @@ export function uiRawTagEditor(context) {
             var row = d3_select(this);
 
             row.selectAll('input.key')
-                .call(d3_combobox.off);
+                .call(uiCombobox.off);
 
             row.selectAll('input.value')
-                .call(d3_combobox.off);
+                .call(uiCombobox.off);
         }
 
 

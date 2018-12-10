@@ -3,15 +3,13 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
-
 import { t } from '../util/locale';
 import { actionChangeMember, actionDeleteMember } from '../actions';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
 import { services } from '../services';
-import { uiDisclosure } from './disclosure';
+import { uiCombobox, uiDisclosure } from './index';
 import {
     utilDisplayName,
     utilDisplayType,
@@ -251,7 +249,7 @@ export function uiRawMemberEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(d3_combobox()
+                role.call(uiCombobox()
                     .container(context.container())
                     .fetcher(function(role, callback) {
                         var rtype = entity.tags.type;
@@ -271,7 +269,7 @@ export function uiRawMemberEditor(context) {
                 var row = d3_select(this);
 
                 row.selectAll('input.member-role')
-                    .call(d3_combobox.off);
+                    .call(uiCombobox.off);
             }
         }
     }

@@ -2,15 +2,11 @@ import _some from 'lodash-es/some';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { dataImperial } from '../../../data';
 import { geoPointInPolygon } from '../../geo';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { uiCombobox } from '../index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldMaxspeed(field, context) {
@@ -26,10 +22,10 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function maxspeed(selection) {
-        combobox = d3_combobox()
+        combobox = uiCombobox()
             .container(context.container());
 
-        var unitCombobox = d3_combobox()
+        var unitCombobox = uiCombobox()
             .container(context.container())
             .data(['km/h', 'mph'].map(comboValues));
 
