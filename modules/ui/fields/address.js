@@ -173,8 +173,7 @@ export function uiFieldAddress(field, context) {
                     : getNearValues;
 
             wrap.selectAll('input.addr-' + tag)
-                .call(uiCombobox()
-                    .container(context.container())
+                .call(uiCombobox(context)
                     .minItems(1)
                     .fetcher(function(value, callback) {
                         callback(nearValues('addr:' + tag));

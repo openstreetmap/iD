@@ -249,8 +249,7 @@ export function uiRawMemberEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(uiCombobox()
-                    .container(context.container())
+                role.call(uiCombobox(context)
                     .fetcher(function(role, callback) {
                         var rtype = entity.tags.type;
                         taginfo.roles({

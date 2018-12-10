@@ -209,8 +209,7 @@ export function uiRawTagEditor(context) {
 
             var geometry = context.geometry(_entityID);
 
-            key.call(uiCombobox()
-                .container(context.container())
+            key.call(uiCombobox(context)
                 .fetcher(function(value, callback) {
                     taginfo.keys({
                         debounce: true,
@@ -221,8 +220,7 @@ export function uiRawTagEditor(context) {
                     });
                 }));
 
-            value.call(uiCombobox()
-                .container(context.container())
+            value.call(uiCombobox(context)
                 .fetcher(function(value, callback) {
                     taginfo.values({
                         debounce: true,

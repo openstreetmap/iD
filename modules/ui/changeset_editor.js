@@ -78,8 +78,7 @@ export function uiChangesetEditor(context) {
                     });
 
                     commentField
-                        .call(uiCombobox()
-                            .container(context.container())
+                        .call(uiCombobox(context)
                             .caseSensitive(true)
                             .data(_uniqBy(comments, 'title'))
                         );

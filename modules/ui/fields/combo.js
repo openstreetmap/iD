@@ -38,8 +38,7 @@ export function uiFieldCombo(field, context) {
     var optarray = field.options;
     var snake_case = (field.snake_case || (field.snake_case === undefined));
     var caseSensitive = field.caseSensitive;
-    var combobox = uiCombobox()
-        .container(context.container())
+    var combobox = uiCombobox(context)
         .caseSensitive(caseSensitive)
         .minItems(isMulti || isSemi ? 1 : 2);
     var container = d3_select(null);

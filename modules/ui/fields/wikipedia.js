@@ -29,8 +29,7 @@ export function uiFieldWikipedia(field, context) {
 
 
     function wiki(selection) {
-        var langcombo = uiCombobox()
-            .container(context.container())
+        var langcombo = uiCombobox(context)
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
 
@@ -43,8 +42,7 @@ export function uiFieldWikipedia(field, context) {
                 }));
             });
 
-        var titlecombo = uiCombobox()
-            .container(context.container())
+        var titlecombo = uiCombobox(context)
             .fetcher(function(value, cb) {
                 if (!value) {
                     value = context.entity(_entity.id).tags.name || '';

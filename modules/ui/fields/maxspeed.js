@@ -22,11 +22,9 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function maxspeed(selection) {
-        combobox = uiCombobox()
-            .container(context.container());
+        combobox = uiCombobox(context);
 
-        var unitCombobox = uiCombobox()
-            .container(context.container())
+        var unitCombobox = uiCombobox(context)
             .data(['km/h', 'mph'].map(comboValues));
 
         var wrap = selection.selectAll('.form-field-input-wrap')

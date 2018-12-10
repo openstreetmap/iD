@@ -1,5 +1,5 @@
 describe('uiCombobox', function() {
-    var body, container, content, input, combobox;
+    var body, context, container, content, input, combobox;
 
     var data = [
         {title: 'foobar', value: 'foobar'},
@@ -65,9 +65,10 @@ describe('uiCombobox', function() {
     beforeEach(function() {
         body = d3.select('body');
         container = body.append('div').attr('class', 'id-container');
+        context = iD.coreContext().container(container);
         content = container.append('div');
         input = content.append('input');
-        combobox = iD.uiCombobox();
+        combobox = iD.uiCombobox(context);
     });
 
     afterEach(function() {
@@ -86,15 +87,8 @@ describe('uiCombobox', function() {
         expect(input.classed('combobox-input')).to.be.true;
     });
 
-    it('adds combobox under body by default', function() {
+    it('adds combobox under container', function() {
         input.call(combobox.data(data));
-        focusTypeahead(input);
-        expect(d3.select('body > div.combobox').nodes().length).to.equal(1);
-        expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(0);
-    });
-
-    it('adds combobox under container with container option', function() {
-        input.call(combobox.container(container).data(data));
         focusTypeahead(input);
         expect(d3.select('body > div.combobox').nodes().length).to.equal(0);
         expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);

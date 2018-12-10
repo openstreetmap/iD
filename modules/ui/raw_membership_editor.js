@@ -266,8 +266,7 @@ export function uiRawMembershipEditor(context) {
                 .merge(enter);
 
             newrow.selectAll('.member-entity-input')
-                .call(uiCombobox()
-                    .container(context.container())
+                .call(uiCombobox(context)
                     .minItems(1)
                     .fetcher(function(value, callback) { callback(relations(value)); })
                     .on('accept', onAccept)
@@ -314,8 +313,7 @@ export function uiRawMembershipEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(uiCombobox()
-                    .container(context.container())
+                role.call(uiCombobox(context)
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
                         taginfo.roles({

@@ -29,13 +29,11 @@ export function uiFieldLocalized(field, context) {
     });
 
     // reuse these combos
-    var langcombo = uiCombobox()
-        .container(context.container())
+    var langcombo = uiCombobox(context)
         .fetcher(fetchLanguages)
         .minItems(0);
 
-    var brandcombo = uiCombobox()
-        .container(context.container())
+    var brandcombo = uiCombobox(context)
         .canAutocomplete(false)
         .minItems(1);
 

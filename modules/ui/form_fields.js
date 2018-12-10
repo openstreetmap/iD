@@ -95,8 +95,7 @@ export function uiFormFields(context) {
                 }
                 return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
             })
-            .call(uiCombobox()
-                .container(context.container())
+            .call(uiCombobox(context)
                 .data(notShown)
                 .minItems(1)
                 .on('accept', function (d) {
