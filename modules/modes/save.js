@@ -513,6 +513,9 @@ export function modeSave(context) {
 
 
     mode.enter = function() {
+        // Show sidebar
+        context.ui().sidebar.expand();
+
         function done() {
             context.ui().sidebar.show(commit);
         }

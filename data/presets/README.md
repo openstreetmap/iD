@@ -17,9 +17,16 @@ A basic preset is of the form:
 {
     // The icon in iD which represents this feature.
     "icon": "maki-park",
-    // An array of field names. See the fields documentation for details of what's valid here.
+    // The names of fields that will appear by default in the editor sidebar.
+    // See the fields documentation for details of what's valid here.
     "fields": [
         "address"
+    ],
+    // The names of fields that the user can add manually. These will also
+    // appear if the corresponding tags are present.
+    "moreFields": [
+        "phone",
+        "website"
     ],
     // The geometry types for which this preset is valid.
     // options are point, area, line, and vertex.

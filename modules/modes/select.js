@@ -305,6 +305,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function esc() {
+            if (d3_select('.combobox').size()) return;
             context.enter(modeBrowse(context));
         }
 

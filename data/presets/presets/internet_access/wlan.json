@@ -16,5 +16,6 @@
     "tags": {
         "internet_access": "wlan"
     },
+    "matchScore": 0.25,
     "name": "Wi-Fi Hotspot"
 }
