@@ -1,7 +1,8 @@
 {
     "icon": "temaki-diamond",
     "fields": [
-        "surface"
+        "surface",
+        "direction_vertex"
     ],
     "geometry": [
         "vertex"
