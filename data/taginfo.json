@@ -649,7 +649,8 @@
       "key": "amenity",
       "value": "grit_bin",
       "description": "🄿 Grit Bin",
-      "object_types": ["node"]
+      "object_types": ["node"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/fas-box.svg?sanitize=true"
     },
     {
       "key": "amenity",
