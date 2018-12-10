@@ -46,7 +46,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :mega: Release Highlights
 * :v: Mac users can now use 2 finger trackpad gestures to pan and zoom the map.<br/>
-_Try swiping with 2 fingers to pan, or pinching out/in to zoom and unzoom. You'll be less likely to accidently drag nodes!_
+_Try swiping with 2 fingers to pan, or pinching out/in to zoom and unzoom. You'll be less likely to accidentally drag nodes!_
 * :small_red_triangle_down: iD now draws triangular markers on the "down" side of ways where the direction matters.  Thanks, Huon Wilson [@huonw] for this feature!</br>
 _Ways with a direction include cliffs, coastlines, retaining walls, kerbs, guard rails, embankments._
 * :left_right_arrow: You can now resize the sidebar, or hide it completely. Shout out to Quincy Morgan [@quincylvania] for his work on this!</br>
