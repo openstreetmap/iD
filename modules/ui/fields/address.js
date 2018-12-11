@@ -112,12 +112,18 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    function initCallback(err, countryCode) {
+    function countryCallback(err, countryCode) {
         if (err) return;
 
         var addressFormat = _find(dataAddressFormats, function (a) {
             return a && a.countryCodes && _includes(a.countryCodes, countryCode.toLowerCase());
         }) || dataAddressFormats[0];
+
+        var dropdowns = addressFormat.dropdowns || [
+            'city', 'county', 'country', 'district', 'hamlet',
+            'neighbourhood', 'place', 'postcode', 'province',
+            'quarter', 'state', 'street', 'subdistrict', 'suburb'
+        ];
 
         var widths = addressFormat.widths || {
             housenumber: 1/3, street: 2/3,
@@ -126,14 +132,14 @@ export function uiFieldAddress(field, context) {
 
         function row(r) {
             // Normalize widths.
-            var total = _reduce(r, function(sum, field) {
-                return sum + (widths[field] || 0.5);
+            var total = _reduce(r, function(sum, key) {
+                return sum + (widths[key] || 0.5);
             }, 0);
 
-            return r.map(function (field) {
+            return r.map(function(key) {
                 return {
-                    id: field,
-                    width: (widths[field] || 0.5) / total
+                    id: key,
+                    width: (widths[key] || 0.5) / total
                 };
             });
         }
@@ -155,31 +161,25 @@ export function uiFieldAddress(field, context) {
             })
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
+            .each(addDropdown)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
-        // Update
 
-        // setup dropdowns for common address tags
-        var dropdowns = addressFormat.dropdowns || [
-            'city', 'county', 'country', 'district', 'hamlet',
-            'neighbourhood', 'place', 'postcode', 'province',
-            'quarter', 'state', 'street', 'subdistrict', 'suburb'
-        ];
+        function addDropdown(d) {
+            if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
 
-        // If fields exist for any of these tags, create dropdowns to pick nearby values..
-        dropdowns.forEach(function(tag) {
-            var nearValues = (tag === 'street') ? getNearStreets
-                    : (tag === 'city') ? getNearCities
-                    : getNearValues;
+            var nearValues = (d.id === 'street') ? getNearStreets
+                : (d.id === 'city') ? getNearCities
+                : getNearValues;
 
-            wrap.selectAll('input.addr-' + tag)
-                .call(uiCombobox(context)
+            d3_select(this)
+                .call(uiCombobox(context, 'address-' + d.id)
                     .minItems(1)
                     .fetcher(function(value, callback) {
-                        callback(nearValues('addr:' + tag));
+                        callback(nearValues('addr:' + d.id));
                     })
                 );
-        });
+        }
 
         wrap.selectAll('input')
             .on('blur', change())
@@ -206,7 +206,7 @@ export function uiFieldAddress(field, context) {
 
         if (nominatim && _entity) {
             var center = _entity.extent(context.graph()).center();
-            nominatim.countryCode(center, initCallback);
+            nominatim.countryCode(center, countryCallback);
         }
     }
 

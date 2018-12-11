@@ -51,7 +51,7 @@ export function uiFieldAccess(field, context) {
             .call(utilNoAuto)
             .each(function(d) {
                 d3_select(this)
-                    .call(uiCombobox(context)
+                    .call(uiCombobox(context, 'access-' + d)
                         .data(access.options(d))
                     );
             });

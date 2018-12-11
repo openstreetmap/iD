@@ -57,7 +57,7 @@ export function uiFieldCycleway(field, context) {
             .call(utilNoAuto)
             .each(function(d) {
                 d3_select(this)
-                    .call(uiCombobox(context)
+                    .call(uiCombobox(context, 'cycleway-' + stripcolon(d))
                         .data(cycleway.options(d))
                     );
             });

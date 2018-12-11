@@ -29,11 +29,11 @@ export function uiFieldLocalized(field, context) {
     });
 
     // reuse these combos
-    var langcombo = uiCombobox(context)
+    var langCombo = uiCombobox(context, 'localized-lang')
         .fetcher(fetchLanguages)
         .minItems(0);
 
-    var brandcombo = uiCombobox(context)
+    var brandCombo = uiCombobox(context, 'localized-brand')
         .canAutocomplete(false)
         .minItems(1);
 
@@ -145,7 +145,7 @@ export function uiFieldLocalized(field, context) {
                 // Show the suggestions.. If the user picks one, change the tags..
                 if (allSuggestions.length && goodSuggestions.length) {
                     input
-                        .call(brandcombo
+                        .call(brandCombo
                             .fetcher(fetchBrandNames(preset, allSuggestions))
                             .on('accept', function(d) {
                                 var entity = context.entity(_entity.id);  // get latest
@@ -391,7 +391,7 @@ export function uiFieldLocalized(field, context) {
                     .attr('placeholder', t('translate.localized_translation_language'))
                     .on('blur', changeLang)
                     .on('change', changeLang)
-                    .call(langcombo);
+                    .call(langCombo);
 
                 wrap
                     .append('input')

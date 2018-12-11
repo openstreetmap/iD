@@ -11,6 +11,7 @@ import { utilRebind, utilTriggerEvent } from '../util';
 export function uiChangesetEditor(context) {
     var dispatch = d3_dispatch('change');
     var formFields = uiFormFields(context);
+    var commentCombo = uiCombobox(context, 'comment').caseSensitive(true);
     var _fieldsArr;
     var _tags;
     var _changesetID;
@@ -78,8 +79,7 @@ export function uiChangesetEditor(context) {
                     });
 
                     commentField
-                        .call(uiCombobox(context)
-                            .caseSensitive(true)
+                        .call(commentCombo
                             .data(_uniqBy(comments, 'title'))
                         );
                 });
