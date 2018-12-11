@@ -164,7 +164,12 @@ export function rendererBackground(context) {
             window.location.replace('#' + utilQsString(q, true));
         }
 
-        var imageryUsed = [b.imageryUsed()];
+        var imageryUsed = [];
+
+        var current = b.imageryUsed();
+        if (current) {
+            imageryUsed.push(current);
+        }
 
         _overlayLayers
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })

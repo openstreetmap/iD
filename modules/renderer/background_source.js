@@ -467,7 +467,7 @@ rendererBackgroundSource.None = function() {
 
 
     source.imageryUsed = function() {
-        return 'None';
+        return null;
     };
 
 

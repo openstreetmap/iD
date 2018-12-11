@@ -92,7 +92,9 @@ export function uiCommit(context) {
         }
 
         tags = _clone(_changeset.tags);
-        tags.imagery_used = context.history().imageryUsed().join(';').substr(0, 255);
+
+        var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
+        tags.imagery_used = imageryUsed || 'None';
         _changeset = _changeset.update({ tags: tags });
 
         var header = selection.selectAll('.header')
