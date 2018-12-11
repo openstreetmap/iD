@@ -66,6 +66,17 @@ export function svgAreas(projection, context) {
                 { leaf_type: 'leafless', pattern: 'forest_leafless' },
                 { pattern: 'forest' } // same as 'leaf_type:mixed'
             ]
+        },
+        traffic_calming: {
+            island: [
+                { surface: 'grass', pattern: 'grass' },
+            ],
+            chicane: [
+                { surface: 'grass', pattern: 'grass' },
+            ],
+            choker: [
+                { surface: 'grass', pattern: 'grass' },
+            ]
         }
     };
 
