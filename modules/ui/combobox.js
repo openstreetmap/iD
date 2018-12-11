@@ -18,6 +18,8 @@ import { utilRebind, utilTriggerEvent } from '../util';
 //       value:  'display text'
 //   }, ...]
 
+var _comboTimerID;
+
 export function uiCombobox(context) {
     var dispatch = d3_dispatch('accept');
     var container = context.container();
@@ -69,7 +71,10 @@ export function uiCombobox(context) {
                     var combo = container.selectAll('.combobox');
                     if (combo.empty()) {
                         input.node().focus();
-                        fetch('', render);
+                        fetch('', function() {
+                            show();
+                            render();
+                        });
                     } else {
                         hide();
                     }
@@ -78,12 +83,12 @@ export function uiCombobox(context) {
 
 
         function focus() {
-            fetch(value(), render);
+            fetch('', render);
         }
 
 
         function blur() {
-            window.setTimeout(hide, 150);
+            _comboTimerID = window.setTimeout(hide, 150);
         }
 
 
@@ -108,6 +113,11 @@ export function uiCombobox(context) {
 
 
         function hide() {
+            if (_comboTimerID) {
+                window.clearTimeout(_comboTimerID);
+                _comboTimerID = undefined;
+            }
+
             var combo = container.selectAll('.combobox');
             if (combo.empty()) return;
 
@@ -126,6 +136,7 @@ export function uiCombobox(context) {
             switch (d3_event.keyCode) {
                 case 8:   // ⌫ Backspace
                 case 46:  // ⌦ Delete
+                    d3_event.stopPropagation();
                     _choice = '';
                     render();
                     input.on('input.typeahead', function() {
@@ -136,6 +147,7 @@ export function uiCombobox(context) {
                     break;
 
                 case 9:   // ⇥ Tab
+                    d3_event.stopPropagation();
                     container.selectAll('.combobox-option.selected').each(function (d) {
                         dispatch.call('accept', this, d);
                     });
@@ -144,11 +156,15 @@ export function uiCombobox(context) {
 
                 case 13:  // ↩ Return
                     d3_event.preventDefault();
+                    d3_event.stopPropagation();
                     break;
 
                 case 38:  // ↑ Up arrow
                     if (tagName === 'textarea' && !shown) return;
                     d3_event.preventDefault();
+                    if (tagName === 'input' && !shown) {
+                        show();
+                    }
                     nav(-1);
                     break;
 
@@ -161,7 +177,6 @@ export function uiCombobox(context) {
                     nav(+1);
                     break;
             }
-            d3_event.stopPropagation();
         }
 
 
@@ -185,6 +200,11 @@ export function uiCombobox(context) {
             fetch(value(), function() {
                 if (input.property('selectionEnd') === input.property('value').length) {
                     doAutocomplete();
+                }
+
+                var combo = container.selectAll('.combobox');
+                if (combo.empty()) {
+                    show();
                 }
                 render();
             });
@@ -211,8 +231,24 @@ export function uiCombobox(context) {
 
 
         function ensureVisible() {
-            var node = container.selectAll('.combobox-option.selected').node();
-            if (node) node.scrollIntoView();
+            var combo = container.selectAll('.combobox');
+            if (combo.empty()) return;
+
+            var containerRect = container.node().getBoundingClientRect();
+            var comboRect = combo.node().getBoundingClientRect();
+
+            if (comboRect.bottom > containerRect.bottom) {
+                var node = attachTo ? attachTo.node() : input.node();
+                var rect = node.getBoundingClientRect();
+                node.scrollIntoView({ behavior: 'instant', block: 'center' });
+                render();
+            }
+
+            // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
+            var selected = combo.selectAll('.combobox-option.selected').node();
+            if (selected) {
+                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
 
@@ -272,15 +308,13 @@ export function uiCombobox(context) {
 
 
         function render() {
-            var shown = !container.selectAll('.combobox').empty();
-            if (_suggestions.length >= _minItems && document.activeElement === input.node()) {
-                if (!shown) {
-                    show();
-                }
-            } else {
+            if (_suggestions.length < _minItems || document.activeElement !== input.node()) {
                 hide();
                 return;
             }
+
+            var shown = !container.selectAll('.combobox').empty();
+            if (!shown) return;
 
             var combo = container.selectAll('.combobox');
             var options = combo.selectAll('.combobox-option')
