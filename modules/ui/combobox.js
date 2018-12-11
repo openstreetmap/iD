@@ -21,7 +21,7 @@ import { utilRebind, utilTriggerEvent } from '../util';
 var _comboTimerID;
 
 export function uiCombobox(context) {
-    var dispatch = d3_dispatch('accept');
+    var dispatch = d3_dispatch('accept', 'cancel');
     var container = context.container();
     var _suggestions = [];
     var _values = [];
@@ -183,6 +183,9 @@ export function uiCombobox(context) {
         function keyup() {
             switch (d3_event.keyCode) {
                 case 27:  // ⎋ Escape
+                    container.selectAll('.combobox-option.selected').each(function (d) {
+                       dispatch.call('cancel', this, d);
+                    });
                     hide();
                     break;
 

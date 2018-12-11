@@ -159,6 +159,13 @@ export function uiFieldLocalized(field, context) {
                                 utilGetSetValue(input, tags.name);
                                 dispatch.call('change', this, tags);
                             })
+                            .on('cancel', function() {
+                                // user hit escape, remove whatever is after the '-'
+                                var name = utilGetSetValue(input);
+                                name = name.split('-', 2)[0].trim();
+                                utilGetSetValue(input, name);
+                                dispatch.call('change', this, { name: name });
+                            })
                         );
                 }
             }
