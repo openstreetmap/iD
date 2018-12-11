@@ -37,6 +37,7 @@ describe('uiCombobox', function() {
             case '↑':
             case '↓':
             case '↩':
+            case '⎋':
                 break;
 
             case '⌫':
@@ -89,38 +90,18 @@ describe('uiCombobox', function() {
 
     it('adds combobox under container', function() {
         input.call(combobox.data(data));
-        focusTypeahead(input);
-        expect(d3.select('body > div.combobox').nodes().length).to.equal(0);
+        body.selectAll('.combobox-caret').dispatch('mousedown');
         expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);
     });
 
-    it('shows a menu of entries on focus', function() {
+    it('filters entries to those matching the value', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
-        expect(body.selectAll('.combobox-option').nodes().length).to.equal(5);
-        expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
-    });
-
-    it('filters entries to those matching the value', function() {
-        input.property('value', 'b').call(combobox.data(data));
-        focusTypeahead(input);
+        simulateKeypress('b');
         expect(body.selectAll('.combobox-option').size()).to.equal(3);
         expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal('foobar');
         expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal('bar');
         expect(body.selectAll('.combobox-option').nodes()[2].text).to.equal('Baz');
-    });
-
-    it('shows no menu on focus if it would contain only one item', function() {
-        input.property('value', 't').call(combobox.data(data));
-        focusTypeahead(input);
-        expect(body.selectAll('.combobox-option').size()).to.equal(0);
-    });
-
-    it('shows menu on focus if it would contain at least minItems items', function() {
-        combobox.minItems(1);
-        input.property('value', 't').call(combobox.data(data));
-        focusTypeahead(input);
-        expect(body.selectAll('.combobox-option').size()).to.equal(1);
     });
 
     it('shows all entries when clicking on the caret', function() {
@@ -132,7 +113,7 @@ describe('uiCombobox', function() {
 
     it('is initially shown with no selection', function() {
         input.call(combobox.data(data));
-        focusTypeahead(input);
+        body.selectAll('.combobox-caret').dispatch('mousedown');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
@@ -278,6 +259,17 @@ describe('uiCombobox', function() {
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('↩');
+    });
+
+    it('emits cancel event with selected datum on ⎋', function(done) {
+        combobox.on('cancel', function(d) {
+            expect(d).to.eql({title: 'bar', value: 'bar'});
+            done();
+        });
+        input.call(combobox.data(data));
+        focusTypeahead(input);
+        simulateKeypress('b');
+        simulateKeypress('⎋');
     });
 
     it('hides on ↩', function() {

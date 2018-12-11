@@ -83,7 +83,7 @@ export function uiCombobox(context) {
 
 
         function focus() {
-            fetch('', render);
+            fetch('');   // prefetch values (may warm taginfo cache)
         }
 
 
@@ -242,7 +242,6 @@ export function uiCombobox(context) {
 
             if (comboRect.bottom > containerRect.bottom) {
                 var node = attachTo ? attachTo.node() : input.node();
-                var rect = node.getBoundingClientRect();
                 node.scrollIntoView({ behavior: 'instant', block: 'center' });
                 render();
             }
@@ -271,7 +270,9 @@ export function uiCombobox(context) {
         function fetch(v, cb) {
             _fetcher.call(input, v, function(results) {
                 _suggestions = results;
-                cb();
+                if (cb) {
+                    cb();
+                }
             });
         }
 
