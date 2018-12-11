@@ -20,7 +20,7 @@ import { utilRebind, utilTriggerEvent } from '../util';
 
 var _comboTimerID;
 
-export function uiCombobox(context) {
+export function uiCombobox(context, klass) {
     var dispatch = d3_dispatch('accept', 'cancel');
     var container = context.container();
     var _suggestions = [];
@@ -40,6 +40,8 @@ export function uiCombobox(context) {
     };
 
     var combobox = function(input, attachTo) {
+        if (!input || input.empty()) return;
+
         input
             .classed('combobox-input', true)
             .on('focus.typeahead', focus)
@@ -98,7 +100,7 @@ export function uiCombobox(context) {
             container
                 .insert('div', ':first-child')
                 .datum(input.node())
-                .attr('class', 'combobox')
+                .attr('class', 'combobox' + (klass ? ' combobox-' + klass : ''))
                 .style('position', 'absolute')
                 .style('display', 'block')
                 .style('left', '0px')

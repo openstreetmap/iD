@@ -26,6 +26,9 @@ import { utilDisplayName, utilNoAuto, utilHighlightEntity } from '../util';
 
 export function uiRawMembershipEditor(context) {
     var taginfo = services.taginfo;
+    var nearbyCombo = uiCombobox(context, 'parent-relation')
+        .minItems(1)
+        .fetcher(fetchNearbyRelations);
     var _entityID;
     var _showBlank;
 
@@ -81,7 +84,7 @@ export function uiRawMembershipEditor(context) {
     }
 
 
-    function relations(q) {
+    function fetchNearbyRelations(q, callback) {
         var newRelation = { relation: null, value: t('inspector.new_relation') };
         var result = [];
         var graph = context.graph();
@@ -120,7 +123,7 @@ export function uiRawMembershipEditor(context) {
         });
 
         result.unshift(newRelation);
-        return result;
+        callback(result);
     }
 
 
@@ -266,9 +269,7 @@ export function uiRawMembershipEditor(context) {
                 .merge(enter);
 
             newrow.selectAll('.member-entity-input')
-                .call(uiCombobox(context)
-                    .minItems(1)
-                    .fetcher(function(value, callback) { callback(relations(value)); })
+                .call(nearbyCombo
                     .on('accept', onAccept)
                 );
 
@@ -313,7 +314,7 @@ export function uiRawMembershipEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(uiCombobox(context)
+                role.call(uiCombobox(context, 'member-role')
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
                         taginfo.roles({

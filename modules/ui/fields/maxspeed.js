@@ -13,19 +13,18 @@ export function uiFieldMaxspeed(field, context) {
     var dispatch = d3_dispatch('change');
     var unitInput = d3_select(null);
     var input = d3_select(null);
-    var combobox;
     var _entity;
     var _isImperial;
+
+    var speedCombo = uiCombobox(context, 'maxspeed');
+    var unitCombo = uiCombobox(context, 'maxspeed-unit')
+            .data(['km/h', 'mph'].map(comboValues));
 
     var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
     var imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
 
     function maxspeed(selection) {
-        combobox = uiCombobox(context);
-
-        var unitCombobox = uiCombobox(context)
-            .data(['km/h', 'mph'].map(comboValues));
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -45,7 +44,7 @@ export function uiFieldMaxspeed(field, context) {
             .attr('id', 'preset-input-' + field.safeid)
             .attr('placeholder', field.placeholder())
             .call(utilNoAuto)
-            .call(combobox)
+            .call(speedCombo)
             .merge(input);
 
         input
@@ -73,7 +72,7 @@ export function uiFieldMaxspeed(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('class', 'maxspeed-unit')
-            .call(unitCombobox)
+            .call(unitCombo)
             .merge(unitInput);
 
         unitInput
@@ -91,7 +90,7 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function setSuggestions() {
-        combobox.data((_isImperial ? imperialValues : metricValues).map(comboValues));
+        speedCombo.data((_isImperial ? imperialValues : metricValues).map(comboValues));
         utilGetSetValue(unitInput, _isImperial ? 'mph' : 'km/h');
     }
 

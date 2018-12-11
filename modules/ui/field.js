@@ -33,20 +33,26 @@ export function uiField(context, presetField, entity, options) {
     var _state = '';
     var _tags = {};
 
+    field.keys = field.keys || [field.key];
 
-    // field implementation
-    field.impl = uiFields[field.type](field, context)
-        .on('change', function(t, onInput) {
-            dispatch.call('change', field, t, onInput);
-        });
-
-    // if this field cares about the entity, pass it along
-    if (entity && field.impl.entity) {
-        field.entityID = entity.id;
-        field.impl.entity(entity);
+    // only create the fields that are actually being shown
+    if (_show && !field.impl) {
+        createField();
     }
 
-    field.keys = field.keys || [field.key];
+    // field implementation
+    function createField() {
+        field.impl = uiFields[field.type](field, context)
+            .on('change', function(t, onInput) {
+                dispatch.call('change', field, t, onInput);
+            });
+
+        // if this field cares about the entity, pass it along
+        if (entity && field.impl.entity) {
+            field.entityID = entity.id;
+            field.impl.entity(entity);
+        }
+    }
 
 
     function isModified() {
@@ -192,22 +198,25 @@ export function uiField(context, presetField, entity, options) {
     };
 
 
-    field.state = function(_) {
+    field.state = function(val) {
         if (!arguments.length) return _state;
-        _state = _;
+        _state = val;
         return field;
     };
 
 
-    field.tags = function(_) {
+    field.tags = function(val) {
         if (!arguments.length) return _tags;
-        _tags = _;
+        _tags = val;
         return field;
     };
 
 
     field.show = function() {
         _show = true;
+        if (!field.impl) {
+            createField();
+        }
         if (field.default && field.key && _tags[field.key] !== field.default) {
             var t = {};
             t[field.key] = field.default;
