@@ -154,6 +154,8 @@ export function uiField(context, presetField, entity, options) {
             .classed('modified', isModified())
             .classed('present', isPresent())
             .each(function(d) {
+                if (!d.impl) return;  // field is not yet shown
+
                 var reference, help;
 
                 // instantiate field help
