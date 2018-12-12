@@ -189,7 +189,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         function withIndex(arr) {
             var result = new Array(arr.length);
             for (var i = 0; i < arr.length; i++) {
-                result[i] = arr[i];
+                result[i] = _clone(arr[i]);
                 result[i].index = i;
             }
             return result;
