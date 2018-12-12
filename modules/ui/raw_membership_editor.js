@@ -44,13 +44,16 @@ export function uiRawMembershipEditor(context) {
 
 
     function changeRole(d) {
-        var role = d3_select(this).property('value');
         if (d === 0) return;   // called on newrow (shoudn't happen)
+        var oldRole = d.member.role;
+        var newRole = d3_select(this).property('value');
 
-        context.perform(
-            actionChangeMember(d.relation.id, _extend({}, d.member, { role: role }), d.index),
-            t('operations.change_role.annotation')
-        );
+        if (oldRole !== newRole) {
+            context.perform(
+                actionChangeMember(d.relation.id, _extend({}, d.member, { role: newRole }), d.index),
+                t('operations.change_role.annotation')
+            );
+        }
     }
 
 
@@ -225,27 +228,20 @@ export function uiRawMembershipEditor(context) {
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
                 .call(utilNoAuto)
-                .property('value', function(d) { return d.member.role; });
+                .property('value', function(d) { return d.member.role; })
+                .on('blur', changeRole)
+                .on('change', changeRole);
 
             wrapEnter
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove form-field-button member-delete')
-                .call(svgIcon('#iD-operation-delete'));
+                .call(svgIcon('#iD-operation-delete'))
+                .on('click', deleteMembership);
 
             if (taginfo) {
                 wrapEnter.each(bindTypeahead);
             }
-
-            // Update
-            items = items
-                .merge(itemsEnter);
-
-            items.selectAll('input.member-role')
-                .on('change', changeRole);
-
-            items.selectAll('button.member-delete')
-                .on('click', deleteMembership);
 
 
             var newMembership = list.selectAll('.member-row-new')
@@ -297,7 +293,10 @@ export function uiRawMembershipEditor(context) {
 
             newMembership.selectAll('.member-entity-input')
                 .call(nearbyCombo
-                    .on('accept', onAccept)
+                    .on('accept', function (d) {
+                        var role = list.selectAll('.member-row-new .member-role').property('value');
+                        addMembership(d, role);
+                    })
                     .on('cancel', function() { delete this.value; })
                 );
 
@@ -319,12 +318,6 @@ export function uiRawMembershipEditor(context) {
                     content(selection);
                     list.selectAll('.member-entity-input').node().focus();
                 });
-
-
-            function onAccept(d) {
-                var role = list.selectAll('.member-row-new .member-role').property('value');
-                addMembership(d, role);
-            }
 
 
             function bindTypeahead(d) {

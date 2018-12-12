@@ -59,12 +59,16 @@ export function uiRawMemberEditor(context) {
 
 
     function changeRole(d) {
-        var role = d3_select(this).property('value');
-        var member = { id: d.id, type: d.type, role: role };
-        context.perform(
-            actionChangeMember(d.relation.id, member, d.index),
-            t('operations.change_role.annotation')
-        );
+        var oldRole = d.role;
+        var newRole = d3_select(this).property('value');
+
+        if (oldRole !== newRole) {
+            var member = { id: d.id, type: d.type, role: newRole };
+            context.perform(
+                actionChangeMember(d.relation.id, member, d.index),
+                t('operations.change_role.annotation')
+            );
+        }
     }
 
 
@@ -217,6 +221,7 @@ export function uiRawMemberEditor(context) {
                 .attr('placeholder', t('inspector.role'))
                 .call(utilNoAuto)
                 .property('value', function(d) { return d.role; })
+                .on('blur', changeRole)
                 .on('change', changeRole);
 
             wrapEnter
@@ -224,8 +229,8 @@ export function uiRawMemberEditor(context) {
                 .attr('tabindex', -1)
                 .attr('title', t('icons.remove'))
                 .attr('class', 'remove form-field-button member-delete')
-                .on('click', deleteMember)
-                .call(svgIcon('#iD-operation-delete'));
+                .call(svgIcon('#iD-operation-delete'))
+                .on('click', deleteMember);
 
             if (taginfo) {
                 wrapEnter.each(bindTypeahead);
