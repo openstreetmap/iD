@@ -150,10 +150,7 @@ export function uiCombobox(context, klass) {
 
                 case 9:   // ⇥ Tab
                     d3_event.stopPropagation();
-                    container.selectAll('.combobox-option.selected').each(function (d) {
-                        dispatch.call('accept', this, d);
-                    });
-                    hide();
+                    container.selectAll('.combobox-option.selected').each(accept);
                     break;
 
                 case 13:  // ↩ Return
@@ -192,9 +189,7 @@ export function uiCombobox(context, klass) {
                     break;
 
                 case 13:  // ↩ Return
-                    container.selectAll('.combobox-option.selected').each(function (d) {
-                       dispatch.call('accept', this, d);
-                    });
+                    container.selectAll('.combobox-option.selected').each(accept);
                     hide();
                     break;
             }

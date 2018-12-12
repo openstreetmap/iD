@@ -235,6 +235,7 @@ export function uiRawMemberEditor(context) {
             function bindTypeahead(d) {
                 var row = d3_select(this);
                 var role = row.selectAll('input.member-role');
+                var origValue = role.property('value');
 
                 function sort(value, data) {
                     var sameletter = [];
@@ -260,7 +261,11 @@ export function uiRawMemberEditor(context) {
                         }, function(err, data) {
                             if (!err) callback(sort(role, data));
                         });
-                    }));
+                    })
+                    .on('cancel', function() {
+                        role.property('value', origValue);
+                    })
+                );
             }
 
 

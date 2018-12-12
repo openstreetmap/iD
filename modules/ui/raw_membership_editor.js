@@ -177,11 +177,12 @@ export function uiRawMembershipEditor(context) {
                 .each(unbind)
                 .remove();
 
-            var enter = items.enter()
+            // Enter
+            var itemsEnter = items.enter()
                 .append('li')
                 .attr('class', 'member-row member-row-normal form-field');
 
-            enter.each(function(d){
+            itemsEnter.each(function(d){
                 // highlight the relation in the map while hovering on the list item
                 d3_select(this).on('mouseover', function() {
                     utilHighlightEntity(d.relation.id, true, context);
@@ -191,7 +192,7 @@ export function uiRawMembershipEditor(context) {
                 });
             });
 
-            var labelEnter = enter
+            var labelEnter = itemsEnter
                 .append('label')
                 .attr('class', 'form-field-label')
                 .append('span')
@@ -213,7 +214,7 @@ export function uiRawMembershipEditor(context) {
                 .attr('class', 'member-entity-name')
                 .text(function(d) { return utilDisplayName(d.relation); });
 
-            var wrapEnter = enter
+            var wrapEnter = itemsEnter
                 .append('div')
                 .attr('class', 'form-field-input-wrap form-field-input-member');
 
@@ -224,19 +225,27 @@ export function uiRawMembershipEditor(context) {
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
                 .call(utilNoAuto)
-                .property('value', function(d) { return d.member.role; })
-                .on('change', changeRole);
+                .property('value', function(d) { return d.member.role; });
 
             wrapEnter
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove form-field-button member-delete')
-                .on('click', deleteMembership)
                 .call(svgIcon('#iD-operation-delete'));
 
             if (taginfo) {
                 wrapEnter.each(bindTypeahead);
             }
+
+            // Update
+            items = items
+                .merge(itemsEnter);
+
+            items.selectAll('input.member-role')
+                .on('change', changeRole);
+
+            items.selectAll('button.member-delete')
+                .on('click', deleteMembership);
 
 
             var newMembership = list.selectAll('.member-row-new')
@@ -289,6 +298,7 @@ export function uiRawMembershipEditor(context) {
             newMembership.selectAll('.member-entity-input')
                 .call(nearbyCombo
                     .on('accept', onAccept)
+                    .on('cancel', function() { delete this.value; })
                 );
 
 
@@ -320,6 +330,7 @@ export function uiRawMembershipEditor(context) {
             function bindTypeahead(d) {
                 var row = d3_select(this);
                 var role = row.selectAll('input.member-role');
+                var origValue = role.property('value');
 
                 function sort(value, data) {
                     var sameletter = [];
@@ -345,7 +356,11 @@ export function uiRawMembershipEditor(context) {
                         }, function(err, data) {
                             if (!err) callback(sort(role, data));
                         });
-                    }));
+                    })
+                    .on('cancel', function() {
+                        role.property('value', origValue);
+                    })
+                );
             }
 
 
@@ -362,6 +377,7 @@ export function uiRawMembershipEditor(context) {
     rawMembershipEditor.entityID = function(_) {
         if (!arguments.length) return _entityID;
         _entityID = _;
+        _showBlank = false;
         return rawMembershipEditor;
     };
 
