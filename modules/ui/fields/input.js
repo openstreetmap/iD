@@ -98,7 +98,12 @@ export function uiFieldText(field, context) {
                 .merge(buttons)
                 .on('click', function(d) {
                     d3_event.preventDefault();
-                    input.node().value = parsed(input.node().value) + d;
+                    var vals = input.node().value.split(';');
+                    vals = vals.map(function(v) {
+                        var num = parseFloat(v.trim(), 10);
+                        return isFinite(num) ? clamped(num + d) : v.trim();
+                    });
+                    input.node().value = vals.join(';');
                     change()();
                 });
 
@@ -114,12 +119,6 @@ export function uiFieldText(field, context) {
 
             wrap.call(isSuggestion ? _brandTip : _brandTip.destroy);
         }
-    }
-
-
-    // parse as a number
-    function parsed(val) {
-        return parseFloat(val || 0, 10) || 0;
     }
 
 
@@ -142,7 +141,12 @@ export function uiFieldText(field, context) {
 
             if (!onInput) {
                 if (field.type === 'number' && val !== undefined) {
-                    val = clamped(parsed(val)) + '';
+                    var vals = val.split(';');
+                    vals = vals.map(function(v) {
+                        var num = parseFloat(v.trim(), 10);
+                        return isFinite(num) ? clamped(num) : v.trim();
+                    });
+                    val = vals.join(';');
                 }
                 utilGetSetValue(input, val || '');
             }
