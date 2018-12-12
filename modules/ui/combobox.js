@@ -7,7 +7,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { utilRebind, utilTriggerEvent } from '../util';
+import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -25,7 +25,7 @@ export function uiCombobox(context, klass) {
     var container = context.container();
     var _suggestions = [];
     var _values = [];
-    var _choice = '';
+    var _choice = null;
     var _canAutocomplete = true;
     var _caseSensitive = false;
     var _minItems = 2;
@@ -85,6 +85,7 @@ export function uiCombobox(context, klass) {
 
 
         function focus() {
+            _choice = null;
             fetch('');   // prefetch values (may warm taginfo cache)
         }
 
@@ -120,11 +121,8 @@ export function uiCombobox(context, klass) {
                 _comboTimerID = undefined;
             }
 
-            var combo = container.selectAll('.combobox');
-            if (combo.empty()) return;
-
-            _choice = '';
-            combo.remove();
+            container.selectAll('.combobox')
+                .remove();
 
             d3_select('body')
                 .on('scroll.combobox', null);
@@ -139,7 +137,7 @@ export function uiCombobox(context, klass) {
                 case 8:   // ⌫ Backspace
                 case 46:  // ⌦ Delete
                     d3_event.stopPropagation();
-                    _choice = '';
+                    _choice = null;
                     render();
                     input.on('input.typeahead', function() {
                         var start = input.property('selectionStart');
@@ -150,7 +148,7 @@ export function uiCombobox(context, klass) {
 
                 case 9:   // ⇥ Tab
                     d3_event.stopPropagation();
-                    container.selectAll('.combobox-option.selected').each(accept);
+                    accept();
                     break;
 
                 case 13:  // ↩ Return
@@ -182,15 +180,11 @@ export function uiCombobox(context, klass) {
         function keyup() {
             switch (d3_event.keyCode) {
                 case 27:  // ⎋ Escape
-                    container.selectAll('.combobox-option.selected').each(function (d) {
-                       dispatch.call('cancel', this, d);
-                    });
-                    hide();
+                    cancel();
                     break;
 
                 case 13:  // ↩ Return
-                    container.selectAll('.combobox-option.selected').each(accept);
-                    hide();
+                    accept();
                     break;
             }
         }
@@ -199,7 +193,7 @@ export function uiCombobox(context, klass) {
         function change() {
             fetch(value(), function() {
                 if (input.property('selectionEnd') === input.property('value').length) {
-                    doAutocomplete();
+                    tryAutocomplete();
                 }
 
                 var combo = container.selectAll('.combobox');
@@ -216,15 +210,15 @@ export function uiCombobox(context, klass) {
 
             var index = -1;
             for (var i = 0; i < _suggestions.length; i++) {
-                if (_choice !== '' && _suggestions[i].value === _choice) {
+                if (_choice && _suggestions[i].value === _choice.value) {
                     index = i;
                     break;
                 }
             }
 
             index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
-            _choice = _suggestions[index].value;
-            input.property('value', _choice);
+            _choice = _suggestions[index];
+            input.property('value', _choice.value);
             render();
             ensureVisible();
         }
@@ -274,11 +268,11 @@ export function uiCombobox(context, klass) {
         }
 
 
-        function doAutocomplete() {
+        function tryAutocomplete() {
             if (!_canAutocomplete) return;
 
             var v = _caseSensitive ? value() : value().toLowerCase();
-            _choice = '';
+            _choice = null;
             if (!v) return;
 
             // Don't autocomplete if user is typing a number - #4935
@@ -301,9 +295,9 @@ export function uiCombobox(context, klass) {
             }
 
             if (best !== -1) {
-                _choice = _suggestions[best].value;
-                input.property('value', _choice);
-                input.node().setSelectionRange(v.length, _choice.length);
+                _choice = _suggestions[best];
+                input.property('value', _choice.value);
+                input.node().setSelectionRange(v.length, _choice.value.length);
             }
         }
 
@@ -331,7 +325,7 @@ export function uiCombobox(context, klass) {
                 .text(function(d) { return d.value; })
                 .merge(options)
                 .attr('title', function(d) { return d.title; })
-                .classed('selected', function(d) { return d.value === _choice; })
+                .classed('selected', function(d) { return d === _choice; })
                 .on('click', accept)
                 .order();
 
@@ -344,16 +338,26 @@ export function uiCombobox(context, klass) {
                 .style('top', rect.height + rect.top + 'px');
         }
 
-
+        // Dispatches an 'accept' event if an option has been chosen.
+        // Then hides the combobox.
         function accept(d) {
-            var combo = container.selectAll('.combobox');
-            if (combo.empty()) return;
-
-            input.property('value', d.value);
-            utilTriggerEvent(input, 'change');
-            dispatch.call('accept', this, d);
+            d = d || _choice;
+            if (d) {
+                utilGetSetValue(input, d.value);
+                utilTriggerEvent(input, 'change');
+                dispatch.call('accept', this, d);
+            }
             hide();
         }
+
+        // Dispatches an 'cancel' event
+        // Then hides the combobox.
+        function cancel(d) {
+            d = d || _choice;
+            dispatch.call('cancel', this, d);
+            hide();
+        }
+
     };
 
     combobox.canAutocomplete = function(val) {
