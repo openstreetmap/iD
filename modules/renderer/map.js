@@ -431,6 +431,7 @@ export function rendererMap(context) {
             if (source.deltaMode === 1 /* LINE */) {
                 // Convert from lines to pixels, more if the user is scrolling fast.
                 // (I made up the exp function to roughly match Firefox to what Chrome does)
+                // These numbers should be floats, because integers are treated as pan gesture below.
                 var lines = Math.abs(source.deltaY);
                 var sign = (source.deltaY > 0) ? 1 : -1;
                 dY = sign * clamp(
@@ -439,10 +440,10 @@ export function rendererMap(context) {
                     350.000244140625   // max
                 );
 
-                // On Firefox/Windows we just always get +/- the scroll line amount (default 3)
+                // On Firefox Windows and Linux we always get +/- the scroll line amount (default 3)
                 // There doesn't seem to be any scroll accelleration.
                 // This multiplier increases the speed a little bit - #5512
-                if (detected.os === 'win') {
+                if (detected.os !== 'mac') {
                     dY *= 5;
                 }
 
