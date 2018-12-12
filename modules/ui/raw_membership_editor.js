@@ -45,6 +45,8 @@ export function uiRawMembershipEditor(context) {
 
     function changeRole(d) {
         var role = d3_select(this).property('value');
+        if (d === 0) return;   // called on newrow (shoudn't happen)
+
         context.perform(
             actionChangeMember(d.relation.id, _extend({}, d.member, { role: role }), d.index),
             t('operations.change_role.annotation')
@@ -53,6 +55,7 @@ export function uiRawMembershipEditor(context) {
 
 
     function addMembership(d, role) {
+        this.blur();           // avoid keeping focus on the button
         _showBlank = false;
 
         var member = { id: _entityID, type: context.entity(_entityID).type, role: role };
@@ -77,6 +80,9 @@ export function uiRawMembershipEditor(context) {
 
 
     function deleteMembership(d) {
+        this.blur();           // avoid keeping focus on the button
+        if (d === 0) return;   // called on newrow (shoudn't happen)
+
         context.perform(
             actionDeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation')
@@ -233,42 +239,54 @@ export function uiRawMembershipEditor(context) {
             }
 
 
-            var newrow = list.selectAll('.member-row-new')
+            var newMembership = list.selectAll('.member-row-new')
                 .data(_showBlank ? [0] : []);
 
-            newrow.exit()
+            // Exit
+            newMembership.exit()
                 .remove();
 
-            enter = newrow.enter()
+            // Enter
+            var newMembershipEnter = newMembership.enter()
                 .append('li')
                 .attr('class', 'member-row member-row-new form-field');
 
-            enter
+            newMembershipEnter
+                .append('label')
+                .attr('class', 'form-field-label')
                 .append('input')
+                .attr('placeholder', t('inspector.choose_relation'))
                 .attr('type', 'text')
                 .attr('class', 'member-entity-input')
                 .call(utilNoAuto);
 
-            enter
+            var newWrapEnter = newMembershipEnter
+                .append('div')
+                .attr('class', 'form-field-input-wrap form-field-input-member');
+
+            newWrapEnter
                 .append('input')
                 .attr('class', 'member-role')
                 .property('type', 'text')
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
-                .call(utilNoAuto)
-                .on('change', changeRole);
+                .call(utilNoAuto);
 
-            enter
+            newWrapEnter
                 .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove form-field-button member-delete')
-                .on('click', deleteMembership)
+                .on('click', function() {
+                    list.selectAll('.member-row-new')
+                        .remove();
+                })
                 .call(svgIcon('#iD-operation-delete'));
 
-            newrow = newrow
-                .merge(enter);
+            // Update
+            newMembership = newMembership
+                .merge(newMembershipEnter);
 
-            newrow.selectAll('.member-entity-input')
+            newMembership.selectAll('.member-entity-input')
                 .call(nearbyCombo
                     .on('accept', onAccept)
                 );
@@ -277,12 +295,14 @@ export function uiRawMembershipEditor(context) {
             var addrel = selection.selectAll('.add-relation')
                 .data([0]);
 
-            addrel = addrel.enter()
+            // Enter
+            var addrelEnter = addrel.enter()
                 .append('button')
-                .attr('class', 'add-relation')
-                .merge(addrel);
+                .attr('class', 'add-relation');
 
+            // Update
             addrel
+                .merge(addrelEnter)
                 .call(svgIcon('#iD-icon-plus', 'light'))
                 .on('click', function() {
                     _showBlank = true;

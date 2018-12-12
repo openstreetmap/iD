@@ -2176,6 +2176,7 @@ div.combobox {
     background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
 }
+.raw-tag-editor .add-tag:focus,
 .raw-tag-editor .add-tag:hover {
     background: rgba(0,0,0,.8);
 }
@@ -2256,9 +2257,9 @@ div.combobox {
 }
 
 .member-row-new .member-entity-input {
+    flex: 1 1 100%;
     border-radius: 4px 4px 0 0;
-    border: 1px solid #ccc;
-    flex-basis: 100%;
+    border: 0;
 }
 
 .add-relation {
@@ -2268,6 +2269,7 @@ div.combobox {
     border-radius: 4px;
     margin-top: 10px;
 }
+.add-relation:focus,
 .add-relation:hover {
     background: rgba(0,0,0,.8);
 }
