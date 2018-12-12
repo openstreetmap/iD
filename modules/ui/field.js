@@ -40,7 +40,8 @@ export function uiField(context, presetField, entity, options) {
         createField();
     }
 
-    // field implementation
+    // Creates the field.. This is done lazily,
+    // once we know that the field will be shown.
     function createField() {
         field.impl = uiFields[field.type](field, context)
             .on('change', function(t, onInput) {
@@ -66,7 +67,7 @@ export function uiField(context, presetField, entity, options) {
 
     function isPresent() {
         return _some(field.keys, function(key) {
-            return _tags[key];
+            return _tags[key] !== undefined;
         });
     }
 
@@ -154,7 +155,9 @@ export function uiField(context, presetField, entity, options) {
             .classed('modified', isModified())
             .classed('present', isPresent())
             .each(function(d) {
-                if (!d.impl) return;  // field is not yet shown
+                if (!d.impl) {
+                    createField();
+                }
 
                 var reference, help;
 
@@ -228,12 +231,14 @@ export function uiField(context, presetField, entity, options) {
 
 
     field.isShown = function() {
-        return _show || _some(field.keys, function(key) { return !!_tags[key]; });
+        return _show || isPresent();
     };
 
 
     field.focus = function() {
-        field.impl.focus();
+        if (field.impl) {
+            field.impl.focus();
+        }
     };
 
 
