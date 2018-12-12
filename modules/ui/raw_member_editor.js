@@ -192,7 +192,7 @@ export function uiRawMemberEditor(context) {
                         labelText
                             .append('span')
                             .attr('class', 'member-entity-type')
-                            .text(t('inspector.'+d.type, { id: d.id }));
+                            .text(t('inspector.' + d.type, { id: d.id }));
 
                         labelText
                             .append('span')
@@ -257,11 +257,26 @@ export function uiRawMemberEditor(context) {
 
                 role.call(uiCombobox(context, 'member-role')
                     .fetcher(function(role, callback) {
+                        // The `geometry` param is used in the `taginfo.js` interface for
+                        // filtering results, as a key into the `tag_members_fractions`
+                        // object.  If we don't know the geometry because the member is
+                        // not yet downloaded, it's ok to guess based on type.
+                        var geometry;
+                        if (d.member) {
+                            geometry = context.geometry(d.member.id);
+                        } else if (d.type === 'relation') {
+                            geometry = 'relation';
+                        } else if (d.type === 'way') {
+                            geometry = 'line';
+                        } else {
+                            geometry = 'point';
+                        }
+
                         var rtype = entity.tags.type;
                         taginfo.roles({
                             debounce: true,
                             rtype: rtype || '',
-                            geometry: context.geometry(d.member.id),
+                            geometry: geometry,
                             query: role
                         }, function(err, data) {
                             if (!err) callback(sort(role, data));
