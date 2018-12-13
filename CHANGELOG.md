@@ -28,6 +28,86 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.12.2
+##### 2018-Dec-13
+
+#### :tada: New Features
+* Add `"moreFields"` property so a preset can control the fields shown in the "Add field" dropdown ([#4871], [#5582], thanks [@quincylvania])
+
+[#5582]: https://github.com/openstreetmap/iD/issues/5582
+[#4871]: https://github.com/openstreetmap/iD/issues/4871
+[@quincylvania]: https://github.com/quincylvania
+
+#### :sparkles: Usability
+* Improve mousewheel scrolling speed on Windows/Linux Firefox ([#5512])
+* Render grass surface on traffic calming areas ([#5584], thanks [@RudyTheDev])
+* Always show save count 0. Makes responsivness easier ([#5576])
+* Make sure sidebar is expanded before entering walkthrough or saving ([#5574])
+* Disable autocomplete on the brand suggestion combo ([#5558])
+* Don't automatically pop up the combobox when the field receives focus
+  (User can click carat, press down arrow, or start typing to make it appear)
+* Make sure combobox can always receive arrow and esc keyboard events
+
+[#5584]: https://github.com/openstreetmap/iD/issues/5584
+[#5576]: https://github.com/openstreetmap/iD/issues/5576
+[#5574]: https://github.com/openstreetmap/iD/issues/5574
+[#5558]: https://github.com/openstreetmap/iD/issues/5558
+[#5512]: https://github.com/openstreetmap/iD/issues/5512
+[@RudyTheDev]: https://github.com/RudyTheDev
+
+#### :bug: Bugfixes
+* Fix broken member role dropdown for members that are not downloaded ([#5592])
+* Fix relation member role value not persisting in some situations ([#4900], [#5449])
+* Fix rendering of raw membership editor new row ([#5589])
+* Avoid leaving relations modified when modifications to them are undone ([#5458])
+* Fix handling of semicolon delimited values in numeric field e.g. multiple `direction` ([#5438])
+* If imagery becomes invalid, remove it from imagery_used ([#4827])
+* Don't add "None" to `imagery_used` tag when other imagery was used ([#5565])
+* Make sure dropdowns don't remain visible ([#5575])
+* Make sure delete button can always delete all the brand suggestion tags ([#5573])
+* Fix rendering of combobox near bottom of sidebar when using up/down arrows
+  (Before, `scrollIntoView` would move the entire map container)
+
+[#5592]: https://github.com/openstreetmap/iD/issues/5592
+[#5589]: https://github.com/openstreetmap/iD/issues/5589
+[#5575]: https://github.com/openstreetmap/iD/issues/5575
+[#5573]: https://github.com/openstreetmap/iD/issues/5573
+[#5565]: https://github.com/openstreetmap/iD/issues/5565
+[#5458]: https://github.com/openstreetmap/iD/issues/5458
+[#5449]: https://github.com/openstreetmap/iD/issues/5449
+[#5438]: https://github.com/openstreetmap/iD/issues/5438
+[#4900]: https://github.com/openstreetmap/iD/issues/4900
+[#4827]: https://github.com/openstreetmap/iD/issues/4827
+
+#### :earth_asia: Localization
+* Use user's locale for fetching wikidata label/description ([#5563])
+
+[#5563]: https://github.com/openstreetmap/iD/issues/5563
+
+#### :hourglass: Performance
+* Don't create hidden/universal fields until they are actually needed
+* Don't render contents of collapsed sections (e.g. hidden raw tag editor)
+* Don't recreate as many comboboxes on every render ([#5568])
+  * :warning: Code refactor - Move lib/d3.combobox.js -> ui/combobox.js
+
+[#5568]: https://github.com/openstreetmap/iD/issues/5568
+
+#### :rocket: Presets
+* Make separate presets for "Apartment Building" and "Apartment Complex" ([#5594], thanks [@kreed])
+* Allow some kinds of traffic calmings to be mapped as areas ([#5562])
+* Add `basin=*` Type and `intermittent` fields to Basin preset ([#5497])
+* Add an icon for Grit Bin preset
+* Lowered the match score for the Wi-Fi Hotspot preset ([#5560], [#5561], [@quincylvania])
+
+[#5594]: https://github.com/openstreetmap/iD/issues/5594
+[#5562]: https://github.com/openstreetmap/iD/issues/5562
+[#5561]: https://github.com/openstreetmap/iD/issues/5561
+[#5560]: https://github.com/openstreetmap/iD/issues/5560
+[#5497]: https://github.com/openstreetmap/iD/issues/5497
+[@kreed]: https://github.com/kreed
+[@quincylvania]: https://github.com/quincylvania
+
+
 # 2.12.1
 ##### 2018-Dec-05
 
