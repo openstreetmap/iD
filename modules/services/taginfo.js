@@ -6,38 +6,40 @@ import _omit from 'lodash-es/omit';
 import { json as d3_json } from 'd3-request';
 
 import { utilQsString } from '../util';
+import { currentLocale } from '../util/locale';
 
 
-var apibase = 'https://taginfo.openstreetmap.org/api/4/',
-    inflight = {},
-    popularKeys = {},
-    taginfoCache = {},
-    tag_sorts = {
-        point: 'count_nodes',
-        vertex: 'count_nodes',
-        area: 'count_ways',
-        line: 'count_ways'
-    },
-    tag_sort_members = {
-        point: 'count_node_members',
-        vertex: 'count_node_members',
-        area: 'count_way_members',
-        line: 'count_way_members',
-        relation: 'count_relation_members'
-    },
-    tag_filters = {
-        point: 'nodes',
-        vertex: 'nodes',
-        area: 'ways',
-        line: 'ways'
-    },
-    tag_members_fractions = {
-        point: 'count_node_members_fraction',
-        vertex: 'count_node_members_fraction',
-        area: 'count_way_members_fraction',
-        line: 'count_way_members_fraction',
-        relation: 'count_relation_members_fraction'
-    };
+var apibase = 'https://taginfo.openstreetmap.org/api/4/';
+var _inflight = {};
+var _popularKeys = {};
+var _taginfoCache = {};
+
+var tag_sorts = {
+    point: 'count_nodes',
+    vertex: 'count_nodes',
+    area: 'count_ways',
+    line: 'count_ways'
+};
+var tag_sort_members = {
+    point: 'count_node_members',
+    vertex: 'count_node_members',
+    area: 'count_way_members',
+    line: 'count_way_members',
+    relation: 'count_relation_members'
+};
+var tag_filters = {
+    point: 'nodes',
+    vertex: 'nodes',
+    area: 'ways',
+    line: 'ways'
+};
+var tag_members_fractions = {
+    point: 'count_node_members_fraction',
+    vertex: 'count_node_members_fraction',
+    area: 'count_way_members_fraction',
+    line: 'count_way_members_fraction',
+    relation: 'count_relation_members_fraction'
+};
 
 
 function sets(params, n, o) {
@@ -90,7 +92,7 @@ function filterValues(allowUpperCase) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
         if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return parseFloat(d.fraction) > 0.0 || d.in_wiki;
+        return parseFloat(d.fraction) > 0.0;
     };
 }
 
@@ -139,24 +141,24 @@ function sortKeys(a, b) {
 var debouncedRequest = _debounce(request, 500, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
-    if (inflight[url]) return;
+    if (_inflight[url]) return;
 
     if (checkCache(url, params, exactMatch, callback)) return;
 
-    inflight[url] = d3_json(url, function (err, data) {
-        delete inflight[url];
+    _inflight[url] = d3_json(url, function (err, data) {
+        delete _inflight[url];
         loaded(err, data);
     });
 }
 
 
 function checkCache(url, params, exactMatch, callback) {
-    var rp = params.rp || 25,
-        testQuery = params.query || '',
-        testUrl = url;
+    var rp = params.rp || 25;
+    var testQuery = params.query || '';
+    var testUrl = url;
 
     do {
-        var hit = taginfoCache[testUrl];
+        var hit = _taginfoCache[testUrl];
 
         // exact match, or shorter match yielding fewer than max results (rp)
         if (hit && (url === testUrl || hit.length < rp)) {
@@ -180,34 +182,49 @@ function checkCache(url, params, exactMatch, callback) {
 export default {
 
     init: function() {
-        inflight = {};
-        taginfoCache = {};
-        popularKeys = {};
+        _inflight = {};
+        _taginfoCache = {};
+        _popularKeys = {
+            postal_code: true   // #5377
+        };
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
         // to yield meaningful autocomplete results.. see #3955
-        var params = { rp: 100, sortname: 'values_all', sortorder: 'desc', page: 1, debounce: false };
+        var params = {
+            rp: 100,
+            sortname: 'values_all',
+            sortorder: 'desc',
+            page: 1,
+            debounce: false,
+            lang: currentLocale
+        };
         this.keys(params, function(err, data) {
             if (err) return;
             data.forEach(function(d) {
                 if (d.value === 'opening_hours') return;  // exception
-                popularKeys[d.value] = true;
+                _popularKeys[d.value] = true;
             });
         });
     },
 
 
     reset: function() {
-        _forEach(inflight, function(req) { req.abort(); });
-        inflight = {};
+        _forEach(_inflight, function(req) { req.abort(); });
+        _inflight = {};
     },
 
 
     keys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({
+            rp: 10,
+            sortname: 'count_all',
+            sortorder: 'desc',
+            page: 1,
+            lang: currentLocale
+        }, params);
 
         var url = apibase + 'keys/all?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
@@ -216,7 +233,7 @@ export default {
             } else {
                 var f = filterKeys(params.filter);
                 var result = d.data.filter(f).sort(sortKeys).map(valKey);
-                taginfoCache[url] = result;
+                _taginfoCache[url] = result;
                 callback(null, result);
             }
         });
@@ -226,9 +243,15 @@ export default {
     multikeys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
-        var prefix = params.query;
+        params = _extend({
+            rp: 25,
+            sortname: 'count_all',
+            sortorder: 'desc',
+            page: 1,
+            lang: currentLocale
+        }, params);
 
+        var prefix = params.query;
         var url = apibase + 'keys/all?' + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {
             if (err) {
@@ -236,7 +259,7 @@ export default {
             } else {
                 var f = filterMultikeys(prefix);
                 var result = d.data.filter(f).map(valKey);
-                taginfoCache[url] = result;
+                _taginfoCache[url] = result;
                 callback(null, result);
             }
         });
@@ -246,14 +269,20 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && popularKeys[key]) {
+        if (key && _popularKeys[key]) {
             callback(null, []);
             return;
         }
 
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(setFilter(params)));
-        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({
+            rp: 25,
+            sortname: 'count_all',
+            sortorder: 'desc',
+            page: 1,
+            lang: currentLocale
+        }, params);
 
         var url = apibase + 'key/values?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
@@ -269,7 +298,7 @@ export default {
                 var f = filterValues(allowUpperCase);
 
                 var result = d.data.filter(f).map(valKeyDescription);
-                taginfoCache[url] = result;
+                _taginfoCache[url] = result;
                 callback(null, result);
             }
         });
@@ -280,7 +309,13 @@ export default {
         var doRequest = params.debounce ? debouncedRequest : request;
         var geometry = params.geometry;
         params = clean(setSortMembers(params));
-        params = _extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params);
+        params = _extend({
+            rp: 25,
+            sortname: 'count_all_members',
+            sortorder: 'desc',
+            page: 1,
+            lang: currentLocale
+        }, params);
 
         var url = apibase + 'relation/roles?' + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {
@@ -289,7 +324,7 @@ export default {
             } else {
                 var f = filterRoles(geometry);
                 var result = d.data.filter(f).map(roleKey);
-                taginfoCache[url] = result;
+                _taginfoCache[url] = result;
                 callback(null, result);
             }
         });
@@ -301,15 +336,18 @@ export default {
         params = clean(setSort(params));
 
         var path = 'key/wiki_pages?';
-        if (params.value) path = 'tag/wiki_pages?';
-        else if (params.rtype) path = 'relation/wiki_pages?';
+        if (params.value) {
+            path = 'tag/wiki_pages?';
+        } else if (params.rtype) {
+            path = 'relation/wiki_pages?';
+        }
 
         var url = apibase + path + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
-                taginfoCache[url] = d.data;
+                _taginfoCache[url] = d.data;
                 callback(null, d.data);
             }
         });

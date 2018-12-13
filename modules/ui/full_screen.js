@@ -1,18 +1,12 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { event as d3_event } from 'd3-selection';
 
 import { uiCmd } from './cmd';
 import { utilDetect } from '../util/detect';
 
 
 export function uiFullScreen(context) {
-    var element = context.container().node(),
-        keybinding = d3_keybinding('full-screen');
-        // button;
+    var element = context.container().node();
+    // var button = d3_select(null);
 
 
     function getFullScreenFn() {
@@ -67,8 +61,7 @@ export function uiFullScreen(context) {
 
 
     return function() { // selection) {
-        if (!isSupported())
-            return;
+        if (!isSupported()) return;
 
         // button = selection.append('button')
         //     .attr('title', t('full_screen'))
@@ -80,10 +73,7 @@ export function uiFullScreen(context) {
         //     .attr('class', 'icon full-screen');
 
         var detected = utilDetect();
-        var keys = detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11'];
-        keybinding.on(keys, fullScreen);
-
-        d3_select(document)
-            .call(keybinding);
+        var keys = (detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11']);
+        context.keybinding().on(keys, fullScreen);
     };
 }

@@ -1,0 +1,26 @@
+{
+    "icon": "iD-highway-footway",
+    "fields": [
+        "surface",
+        "lit",
+        "width",
+        "structure",
+        "access"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "footway",
+        "footway": "sidewalk"
+    },
+    "reference": {
+        "key": "footway",
+        "value": "sidewalk"
+    },
+    "terms": [
+        "pavement",
+        "sidepath"
+    ],
+    "name": "Sidewalk"
+}

@@ -1,5 +1,5 @@
 {
-    "icon": "maki-parking",
+    "icon": "maki-car",
     "fields": [
         "name",
         "operator",
@@ -20,6 +20,13 @@
     "tags": {
         "amenity": "parking"
     },
-    "terms": [],
-    "name": "Car Parking"
+    "terms": [
+        "automobile parking",
+        "car lot",
+        "car parking",
+        "rv parking",
+        "truck parking",
+        "vehicle parking"
+    ],
+    "name": "Parking Lot"
 }

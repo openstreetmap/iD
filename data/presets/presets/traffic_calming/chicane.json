@@ -1,11 +1,12 @@
 {
     "icon": "temaki-diamond",
     "fields": [
+        "surface",
         "direction_vertex"
     ],
     "geometry": [
         "vertex",
-        "line"
+        "area"
     ],
     "terms": [
         "driveway link",

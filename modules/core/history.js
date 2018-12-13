@@ -33,10 +33,10 @@ import {
 
 
 export function coreHistory(context) {
-    var imageryUsed = ['Bing'];
     var dispatch = d3_dispatch('change', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
     var duration = 150;
+    var _imageryUsed = [];
     var _checkpoints = {};
     var _stack;
     var _index;
@@ -63,7 +63,7 @@ export function coreHistory(context) {
         return {
             graph: graph,
             annotation: annotation,
-            imageryUsed: imageryUsed
+            imageryUsed: _imageryUsed
         };
     }
 
@@ -295,7 +295,7 @@ export function coreHistory(context) {
 
         imageryUsed: function(sources) {
             if (sources) {
-                imageryUsed = sources;
+                _imageryUsed = sources;
                 return history;
             } else {
                 var arr = _map(_stack.slice(1, _index + 1), 'imageryUsed');

@@ -1,0 +1,40 @@
+{
+    "icon": "maki-fast-food",
+    "fields": [
+        "name",
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "takeaway",
+        "delivery",
+        "drive_through",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "burger"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "burger"
+    },
+    "name": "Burger Fast Food"
+}

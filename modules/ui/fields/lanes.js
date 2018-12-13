@@ -6,26 +6,25 @@ import { utilGetDimensions } from '../../util/dimensions';
 
 
 export function uiFieldLanes(field, context) {
-    var dispatch = d3_dispatch('change'),
-        LANE_WIDTH = 40,
-        LANE_HEIGHT = 200,
-        wayID,
-        lanesData;
+    var dispatch = d3_dispatch('change');
+    var LANE_WIDTH = 40;
+    var LANE_HEIGHT = 200;
+    var _entityID;
 
     function lanes(selection) {
-        lanesData = context.entity(wayID).lanes();
+        var lanesData = context.entity(_entityID).lanes();
 
         if (!d3_select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }
 
-        var wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
         var surface =  wrap.selectAll('.surface')
@@ -123,9 +122,9 @@ export function uiFieldLanes(field, context) {
     }
 
 
-    lanes.entity = function(_) {
-        if (!wayID || wayID !== _.id) {
-            wayID = _.id;
+    lanes.entity = function(val) {
+        if (!_entityID || _entityID !== val.id) {
+            _entityID = val.id;
         }
     };
 

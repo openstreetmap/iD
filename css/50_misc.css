@@ -1,9 +1,11 @@
-/* power */
+/* power and pipeline */
 .preset-icon .icon.tag-man_made-pipeline,
 .preset-icon .icon.tag-power {
     color: #939393;
     fill: #939393;
 }
+
+/* power */
 
 path.stroke.tag-power {
     stroke: #939393;
@@ -13,6 +15,21 @@ path.casing.tag-power {
     stroke: none;
 }
 
+/* pipeline */
+
+path.stroke.tag-man_made-pipeline {
+    stroke: #CBD0D8;
+    stroke-linecap: butt;
+    stroke-width: 3;
+    stroke-dasharray: 80, 1.25;
+}
+path.casing.tag-man_made-pipeline {
+    stroke: #666;
+    stroke-width: 4.5;
+}
+.low-zoom path.stroke.tag-man_made-pipeline {
+    stroke-dasharray: 40, 1;
+}
 
 /* boundaries */
 path.stroke.tag-boundary {
@@ -55,8 +72,10 @@ path.stroke.tag-natural-tree_row {
 
 
 /* barriers */
-path.stroke.tag-barrier {
+path.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: #ddd;
+}
+path.stroke.tag-barrier {
     stroke-width: 3px;
     stroke-linecap: round;
     stroke-dasharray: 15, 5, 1, 5;
@@ -145,10 +164,14 @@ path.casing.tag-highway-bridleway.tag-bridge {
 
 
 /* tunnels */
-path.stroke.tag-tunnel {
+path.stroke.tag-tunnel,
+path.line.stroke.tag-location-underground,
+path.line.stroke.tag-location-underwater {
     stroke-opacity: 0.3;
 }
-path.casing.tag-tunnel {
+path.casing.tag-tunnel,
+path.line.casing.tag-location-underground,
+path.line.stroke.tag-location-underwater {
     stroke-opacity: 0.5;
     stroke-linecap: butt;
     stroke-dasharray: none;
@@ -218,6 +241,7 @@ path.fill.tag-building {
     stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
+.preset-icon-fill-area.tag-parking-multi-storey,
 .preset-icon-fill-area.tag-building {
     border-color: rgb(224, 110, 95);
     background-color: rgba(224, 110, 95, 0.3);
@@ -326,3 +350,41 @@ path.stroke.tag-crossing.tag-crossing-zebra {
     stroke-dasharray: 3, 2;
 }
 
+/* Attractions */
+path.shadow.tag-attraction-summer_toboggan,
+path.shadow.tag-attraction-water_slide {
+	stroke-width: 16;
+}
+path.casing.tag-attraction-summer_toboggan,
+path.casing.tag-attraction-water_slide {
+	stroke-width: 7;
+}
+path.stroke.tag-attraction-summer_toboggan,
+path.stroke.tag-attraction-water_slide {
+	stroke-width: 5;
+}
+.low-zoom path.shadow.tag-attraction-summer_toboggan,
+.low-zoom path.shadow.tag-attraction-water_slide {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-attraction-summer_toboggan,
+.low-zoom path.casing.tag-attraction-water_slide {
+    stroke-width: 5;
+}
+.low-zoom path.stroke.tag-attraction-summer_toboggan,
+.low-zoom path.stroke.tag-attraction-water_slide {
+	stroke-width: 3;
+}
+path.stroke.tag-attraction-summer_toboggan {
+    stroke: #9e9e9e;
+}
+path.casing.tag-attraction-summer_toboggan {
+    stroke: #666;
+}
+
+path.stroke.tag-attraction-water_slide {
+    stroke: #aae0cb;
+}
+path.casing.tag-attraction-water_slide {
+    stroke: #3d6c71;
+}

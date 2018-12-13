@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-antenna",
+    "icon": "maki-communications-tower",
     "fields": [
         "tower/type",
         "tower/construction",

@@ -34,6 +34,9 @@
             },
             "draw_line": {
                 "tail": "Klikoni për të shtuar më shumë nyje në vijë. Klikoni në viza të tjera për tu lidhur me 'to, dhe klikoni dy herë për të përfunduar vijën."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Kjo nuk mund të editohet sepse është e lidhur me një karakteristikë të fshehur."
             }
         },
         "operations": {
@@ -72,6 +75,7 @@
                 "annotation": "U ndruan etiketët."
             },
             "circularize": {
+                "title": "Jepi formë qarku",
                 "description": {
                     "line": "Bëj këtë vijë rrethore.",
                     "area": "Bëj këte sipërfaqe rrethore."
@@ -139,13 +143,15 @@
                     "multiple": "Këto karakteristika nuk mund të fshihen pasi janë të lidhura me karakteristika të fshehura."
                 }
             },
+            "add_member": {
+                "annotation": "U shtua një anëtar në një lidhje."
+            },
+            "delete_member": {
+                "annotation": "U fshi një anëtar nga lidhja."
+            },
             "connect": {
-                "annotation": {
-                    "point": "U lidh një linjë me një pik.",
-                    "vertex": "U lidh një linjë me një tjetër.",
-                    "line": "U lidh një linjë me një vijë.",
-                    "area": "U lidh një linjë me një sipërfaqe."
-                }
+                "relation": "Këto karakteristika nuk mund të lidhen bashkë sepse kanë konflikt me rolet që kanë në lidhje.",
+                "restriction": "Këto karakteristika nuk mund të lidhen sepse do të dëmtonte një \"{relation}\" lidhje."
             },
             "disconnect": {
                 "title": "Shqit",
@@ -153,7 +159,8 @@
                 "key": "D",
                 "annotation": "U shqitën vijë/sipërfaqe.",
                 "not_connected": "Këtu nuk ka aq vijë/sipërfaqe për tu shqitur.",
-                "connected_to_hidden": "Kjo nuk mund të shqitet sepse është lidhur me një tipar të fshehur."
+                "connected_to_hidden": "Kjo nuk mund të shqitet sepse është lidhur me një tipar të fshehur.",
+                "relation": "Kjo nuk mund të shkëputet sepse lidh bashkon e një lidhjeje."
             },
             "merge": {
                 "title": "Bashko",
@@ -161,16 +168,37 @@
                 "key": "C",
                 "annotation": "U bashkuan {n} karakteristika.",
                 "not_eligible": "Këto tipare nuk mund të bashkohen.",
-                "incomplete_relation": "Këto tipare nuk mund të bashkohen sepse të paktën një nuk është shkarkuar plotësisht."
+                "not_adjacent": "Këto karakteristika nuk mund të shkrihen bashkë sepse pikat e tyre fundore nuk janë të lidhura.",
+                "restriction": "Këto karakteristika nuk mund të lidhen sepse do të dëmtonte një \"{relation}\" lidhje.",
+                "relation": "Këto karakteristika nuk mund të lidhen bashkë sepse kanë konflikt me rolet që kanë në lidhje.",
+                "incomplete_relation": "Këto tipare nuk mund të bashkohen sepse të paktën një nuk është shkarkuar plotësisht.",
+                "conflicting_tags": "Këto karakteristika nuk mund të shkrihen sepse disa prej etiketave të tyre kanë vlera të ndryshme."
             },
             "move": {
                 "title": "Lëviz",
+                "description": {
+                    "single": "Lëvize këtë karakteristikë në një vend tjetër.",
+                    "multiple": "Lëvizi këto objekte në një vend tjetër."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "U lëviz një pik.",
                     "vertex": "U lëviz një njyë në një linjë.",
                     "line": "U lëviz një vijë.",
-                    "area": "U lëviz një sipërfaqe."
+                    "area": "U lëviz një sipërfaqe.",
+                    "multiple": "U zhvendosën disa karakteristika."
+                },
+                "incomplete_relation": {
+                    "single": "Ky tipar nuk mund të lëvizet sepse nuk është shkarkuar plotësisht.",
+                    "multiple": "Këto karakteristika nuk mund të fshihen sepse nuk janë shkarkuar plotësisht."
+                },
+                "too_large": {
+                    "single": "Kjo karakteristikë s'mund fshihet se pse s'është e mjaftueshme të dukshme.",
+                    "multiple": "Këto karakteristika nuk mund të fshihen sepse nuk janë mjatueshëm të dukshme."
+                },
+                "connected_to_hidden": {
+                    "single": "Kjo karakteristikë nuk mund të lëvizet pasi është e lidhur me një karakteristikë të fshehur.",
+                    "multiple": "Këto karakteristikë nuk mund të lëvizen pasi janë e lidhur me karakteristika të fshehura."
                 }
             },
             "reflect": {
@@ -180,7 +208,7 @@
                 }
             },
             "rotate": {
-                "title": "Rotullo",
+                "title": "Rrotullo",
                 "key": "R",
                 "annotation": {
                     "line": "U rotullua një vijë.",
@@ -244,7 +272,6 @@
         },
         "translate": {
             "translate": "Përkthe",
-            "localized_translation_label": "Emri shumëgjuhësh",
             "localized_translation_language": "Zgjidhni gdjuhën",
             "localized_translation_name": "Emër"
         },
@@ -412,6 +439,7 @@
             "title": "Të dhënat e hartës",
             "description": "Të dhënat e hartës",
             "key": "F",
+            "data_layers": "Shtresat e të Dhënave",
             "layers": {
                 "osm": {
                     "tooltip": "Të dhënat e hartës nga OpenStreetMap"
@@ -419,7 +447,8 @@
                 "notes": {
                     "title": "shënimet e OpenStreetMap"
                 }
-            }
+            },
+            "fill_area": "Mbush Sipërfaqet"
         },
         "feature": {
             "points": {
@@ -458,6 +487,10 @@
             }
         },
         "settings": {
+            "custom_background": {
+                "tooltip": "Redakto sfondin të personalizuar",
+                "header": "Parametrat e Sfondit të Personalizuar"
+            },
             "custom_data": {
                 "file": {
                     "label": "Shfletoni skedarët"
@@ -480,6 +513,7 @@
             "conflict_progress": "Duke kontrolluar për konflikte: {num} nga {total}",
             "unsaved_changes": "Ju keni ndryshime të paruajtura",
             "conflict": {
+                "header": "Zgjidh konfliktet midis editimeve",
                 "count": "Konflikt {num} nga {total}",
                 "previous": "< I mëparshëm",
                 "next": "I ardhshëm >",
@@ -491,7 +525,11 @@
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Kjo karakteristikë u fshi nga {user}."
+                "deleted": "Kjo karakteristikë u fshi nga {user}.",
+                "location": "Kjo karakteristikë është lëvizur nga të dy, ju dhe {user}.",
+                "nodelist": "Nyjet u ndryshuan nga të dy, ju dhe {user}.",
+                "memberlist": "Anëtarët e lidhjes u ndryshuan nga të dy, ju dhe {user}.",
+                "tags": "Ju ndryshuar etiketën <b>{tag}</b> në \"{local}\" dhe {user} e ndryshoi atë në \"{remote}\"."
             }
         },
         "success": {
@@ -502,6 +540,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Shikoni Ndryshimet në OSM",
             "changeset_id": "Ndryshimi juaj #:{changeset_id}",
+            "like_osm": "Ju pëlqen OpenStreetMap? Krijoni kontakte me të tjerët:",
             "more": "Më shumë",
             "events": "Eventet",
             "languages": "Gjuhët: {languages}",
@@ -509,12 +548,16 @@
             "tell_us": "Na thuaj!"
         },
         "confirm": {
-            "okay": "OK"
+            "okay": "OK",
+            "cancel": "Anullo"
         },
         "splash": {
             "welcome": "Mirësevini në iD OpenStreetMap editor",
             "text": "iD është një mjet familar por i fuqishëm për të kontribuar në hartën e hapur më të mirë në botë. Ky është vesioni {version}. Për më shumë informacion shihni {website} dhe raportoni problematikat në {github}.",
             "start": "Editoni tani"
+        },
+        "version": {
+            "whats_new": "Çfarë është e re në iD {version}"
         },
         "tag_reference": {
             "description": "Përshkrim",
@@ -522,23 +565,32 @@
             "used_with": "përdorur me {type}"
         },
         "validations": {
+            "disconnected_highway": "Hekurudhë e shkëputur",
             "disconnected_highway_tooltip": "Rrugët duhet të lidhen me rrugë të tjera ose me hyrjet e ndërtesave.",
             "untagged_point": "Pikë e paetiketuar",
             "untagged_point_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo pikë.",
             "untagged_line": "Vijë e paetiketuar",
             "untagged_line_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo vijë.",
             "untagged_area": "Sipërfaqe e paetiketuar",
-            "untagged_area_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo sipërfaqe."
+            "untagged_area_tooltip": "Përgjidhni një karakteristikë që përshkruan çfarë është kjo sipërfaqe.",
+            "untagged_relation": "Lidhje e paetiketuar",
+            "untagged_relation_tooltip": "Përzgjidhni një karakteristikë që përshkruan se çfarë është kjo lidhje.",
+            "many_deletions": "Ju po fshini {n} karakteristika: {p} nyje, {l} vija, {a} sipërfaqe, {r} lidhje. Jeni të sigurtë që doni ta baëni këtë? Kjo do fshihet nga harta që çdo përdorues shikon në openstreetmap.org.",
+            "tag_suggests_area": "Etiketa {tag} sugjeron se vija duhet të jetë sipërfaqe, por nuk është e tillë."
         },
         "zoom": {
             "in": "Zmadhoni",
             "out": "Zvogëloni"
         },
         "streetside": {
+            "view_on_bing": "Shikoje në hartat e Bing",
             "hires": "Rezolucion i lartë"
         },
         "mapillary": {
             "view_on_mapillary": "Shikoje këtë imazh në Mapilary"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Shikoje këtë imazh në OpenStreetCam"
         },
         "note": {
             "note": "Shënim",
@@ -575,7 +627,8 @@
                 "open_data_h": "Të dhëna të hapura",
                 "open_data": "Editimet që do bëni në këtë hartë do të jenë të dukshme tek çdokush që përdor OpenStreetMap. Editimet tuaja mund të bazohen në dijet vetjake, vëzhgimet tokësore apo imazheritë e mbledhura nga fotot aeriale apo tokësore. Të kopjuarit nga burime komerciale si Google Maps, [është rreptësisht e ndaluar](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Përpara se të filloni",
-                "open_source": "Editori iD është një projekt bashkëpunues me kodburim të hapur dhe ju po përdorni versionin {version} tani. Kodburimi është i disponueshëm [në Github](https://github.com/openstreetmap/iD)."
+                "open_source": "Editori iD është një projekt bashkëpunues me kodburim të hapur dhe ju po përdorni versionin {version} tani. Kodburimi është i disponueshëm [në Github](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Ju mund të ndihmoni iD duke [përkthyer](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ose [të raportoni problematika](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "navigation_h": "Navigim",
@@ -585,7 +638,10 @@
             "editing": {
                 "select_h": "Përzgjidhni",
                 "multiselect_h": "Përzgjedhje e shumëfishtë",
-                "multiselect_shift_click": "`{shift}`+{leftclick} klikim me të majtën për të përzgjedhur disa karakteristika së bashku. Kjo e bën më të lehtë për të lëvizur apo fshirë objekte të shumëfishtë."
+                "multiselect_shift_click": "`{shift}`+{leftclick} klikim me të majtën për të përzgjedhur disa karakteristika së bashku. Kjo e bën më të lehtë për të lëvizur apo fshirë objekte të shumëfishtë.",
+                "save_h": "Ruaj",
+                "upload_h": "Ngarkoni",
+                "keyboard_h": "Shkurtimet e tastierës"
             },
             "feature_editor": {
                 "fields_h": "Fushat",
@@ -830,11 +886,99 @@
                         "yes": "Po"
                     }
                 },
+                "layer": {
+                    "label": "Shtresë",
+                    "placeholder": "0"
+                },
+                "levels": {
+                    "placeholder": "2, 4, 6..."
+                },
+                "location": {
+                    "label": "Vendndodhja"
+                },
+                "maxheight": {
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
+                "maxspeed": {
+                    "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "placeholder": "40, 50, 60..."
+                },
+                "mtb/scale": {
+                    "placeholder": "0, 1, 2, 3..."
+                },
+                "mtb/scale/uphill": {
+                    "placeholder": "0, 1, 2, 3..."
+                },
+                "name": {
+                    "label": "Emri"
+                },
+                "network_bicycle": {
+                    "options": {
+                        "icn": "Ndërkombëtar",
+                        "lcn": "Lokal",
+                        "ncn": "Kombëtar",
+                        "rcn": "Rajonal"
+                    }
+                },
+                "network_foot": {
+                    "options": {
+                        "iwn": "Ndërkombëtar",
+                        "lwn": "Lokal",
+                        "nwn": "Kombëtar",
+                        "rwn": "Rajonal"
+                    }
+                },
+                "network_horse": {
+                    "options": {
+                        "ihn": "Ndërkombëtar",
+                        "lhn": "Lokal",
+                        "nhn": "Kombëtar",
+                        "rhn": "Rajonal"
+                    }
+                },
                 "piste/difficulty": {
                     "label": "Vështersia"
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "Jo",
+                        "yes": "Po"
+                    }
+                },
+                "service/vehicle": {
+                    "label": "Shërbimet"
+                },
+                "siren/purpose": {
+                    "label": "Qëllim"
+                },
+                "smoking": {
+                    "options": {
+                        "no": "Nuk lejohet duhani askund",
+                        "outside": "Lejuar përjashta",
+                        "separated": "Në zonat ku pihet duhan, të paizoluara fizikisht",
+                        "yes": "Lejuar kudo"
+                    },
+                    "placeholder": "Jo, Ndarë, Po..."
                 }
             },
             "presets": {
+                "highway": {
+                    "name": "Hekurudhë"
+                },
+                "highway/cycleway": {
+                    "name": "Rrugë biçikletash"
+                },
+                "highway/elevator": {
+                    "name": "Ashensor"
+                },
+                "highway/footway": {
+                    "name": "Rrugë këmbësorësh"
+                },
+                "highway/secondary": {
+                    "name": "Rrugë Dytësore"
+                },
                 "place/city": {
                     "name": "Qytet"
                 },
@@ -847,8 +991,101 @@
                 "railway/abandoned": {
                     "name": "Hekurudhë E Braktisur"
                 },
+                "shop": {
+                    "name": "Dyqan"
+                },
+                "shop/bakery": {
+                    "name": "Furrë buke"
+                },
+                "shop/clothes": {
+                    "name": "Dyqan Veshjesh"
+                },
+                "shop/dry_cleaning": {
+                    "name": "Pastrim Kimik"
+                },
                 "shop/jewelry": {
                     "name": "Argjendar"
+                },
+                "shop/kiosk": {
+                    "name": "Kioskë"
+                },
+                "shop/kitchen": {
+                    "name": "Dyqan për Aredim të Kuzhinës"
+                },
+                "shop/laundry": {
+                    "name": "Lavanderi"
+                },
+                "shop/optician": {
+                    "name": "Okulist"
+                },
+                "shop/supermarket": {
+                    "name": "Supermarket"
+                },
+                "tourism": {
+                    "name": "Turizëm"
+                },
+                "tourism/hotel": {
+                    "name": "Hotel"
+                },
+                "tourism/information": {
+                    "name": "Informacion"
+                },
+                "tourism/information/map": {
+                    "name": "Hartë"
+                },
+                "type/boundary/administrative": {
+                    "name": "Kufi Administrativ"
+                },
+                "waterway/canal": {
+                    "name": "Kanal"
+                },
+                "waterway/river": {
+                    "name": "Lumë"
+                },
+                "waterway/waterfall": {
+                    "name": "Ujëvarë"
+                }
+            }
+        },
+        "imagery": {
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                }
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                }
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                }
+            },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                }
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
                 }
             }
         },
@@ -909,6 +1146,30 @@
             },
             "osm-at": {
                 "name": "OpenStreetMap Austria"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia në Telegram"
+            },
+            "it-twitter": {
+                "description": "Na ndiqni në Twitter: {url}"
+            },
+            "OSM-CA-Slack": {
+                "description": "Të gjithë janë të mirëpritur! Regjistrohuni në {signupUrl}."
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Na ndiqni në Twitter: {url}"
+            },
+            "OSMF": {
+                "name": "Fondacioni OpenStreetMap",
+                "events": {
+                    "sotm2018": {
+                        "where": "Milano, Itali"
+                    }
+                }
             }
         }
     }

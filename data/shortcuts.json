@@ -67,6 +67,10 @@
               "text": "shortcuts.browsing.display_options.fullscreen"
             },
             {
+              "shortcuts": ["sidebar.key"],
+              "text": "shortcuts.browsing.display_options.sidebar"
+            },
+            {
               "shortcuts": ["area_fill.wireframe.key"],
               "text": "shortcuts.browsing.display_options.wireframe"
             },

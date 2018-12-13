@@ -1,8 +1,12 @@
 en:
   icons:
+    download: download
     information: info
     remove: remove
     undo: undo
+    zoom_to: zoom to
+    copy: copy
+    open_wikidata: open on wikidata.org
   modes:
     add_area:
       title: Area
@@ -116,10 +120,18 @@ en:
       annotation: Removed a member from a relation.
     connect:
       annotation:
-        point: Connected a way to a point.
-        vertex: Connected a way to another.
-        line: Connected a way to a line.
-        area: Connected a way to an area.
+        from_vertex:
+          to_point: Connected a way to a point.
+          to_vertex: Connected a way to another.
+          to_line: Connected a way to a line.
+          to_area: Connected a way to an area.
+          to_adjacent_vertex: Merged adjacent points in a way.
+          to_sibling_vertex: Connected a way to itself.
+        from_point:
+          to_point: Merged a point with another.
+          to_vertex: Merged a point with a point in a way.
+          to_line: Moved a point to a line.
+          to_area: Moved a point to an area.
       relation: These features can't be connected because they have conflicting relation roles.
       restriction: "These features can't be connected because it would damage a \"{relation}\" relation."
     disconnect:
@@ -283,7 +295,7 @@ en:
   browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
   translate:
     translate: Translate
-    localized_translation_label: Multilingual name
+    localized_translation_label: Multilingual Name
     localized_translation_language: Choose language
     localized_translation_name: Name
   zoom_in_edit: Zoom in to edit
@@ -292,6 +304,9 @@ en:
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: Report a bug
   help_translate: Help translate
+  sidebar:
+    key: '`'
+    tooltip: Toggle the sidebar.
   feature_info:
     hidden_warning: "{count} hidden features"
     hidden_details: "These features are currently hidden: {details}"
@@ -398,6 +413,7 @@ en:
     all_members: All members
     all_relations: All relations
     new_relation: New relation...
+    choose_relation: Choose a parent relation
     role: Role
     choose: Select feature type
     results: "{n} results for {search}"
@@ -426,6 +442,8 @@ en:
     relation: Relation
     location: Location
     add_fields: "Add field:"
+    lock:
+      suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "All tags" section.'
   background:
     title: Background
     description: Background settings
@@ -1147,6 +1165,7 @@ en:
         background_switch: "Switch back to last background"
         map_data: "Show map data options"
         fullscreen: "Enter full screen mode"
+        sidebar: "Toggle sidebar"
         wireframe: "Toggle wireframe mode"
         minimap: "Toggle minimap"
       selecting:
@@ -1228,3 +1247,7 @@ en:
     west: "W"
     coordinate: "{coordinate}{direction}"
     coordinate_pair: "{latitude}, {longitude}"
+  wikidata:
+    identifier: "Identifier"
+    label: "Label"
+    description: "Description"

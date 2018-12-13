@@ -19,7 +19,7 @@
       "category-water-line",
       "category-barrier",
       "category-natural-line",
-      "power/line",
+      "category-utility",
       "line"
     ],
     "point": [
@@ -36,8 +36,8 @@
       "point"
     ],
     "vertex": [
-      "highway/crosswalk",
-      "highway/crossing",
+      "highway/crossing/marked",
+      "highway/crossing/unmarked",
       "railway/level_crossing",
       "highway/traffic_signals",
       "highway/turning_circle",

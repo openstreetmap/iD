@@ -1,7 +1,6 @@
 import _values from 'lodash-es/values';
 
 export { wikipedia as dataWikipedia } from 'wmf-sitematrix';
-export { default as dataSuggestions } from 'name-suggestion-index/name-suggestions.json';
 
 export { dataAddressFormats } from './address-formats.json';
 export { dataDeprecated } from './deprecated.json';

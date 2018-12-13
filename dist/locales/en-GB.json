@@ -145,12 +145,6 @@
                 "annotation": "Removed a member from a relation."
             },
             "connect": {
-                "annotation": {
-                    "point": "Connected a way to a point.",
-                    "vertex": "Connected a way to another.",
-                    "line": "Connected a way to a line.",
-                    "area": "Connected a way to an area."
-                },
                 "relation": "These features can't be connected because they have conflicting relation roles.",
                 "restriction": "These features can't be connected because it would damage a \"{relation}\" relation."
             },
@@ -347,7 +341,6 @@
         "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
         "translate": {
             "translate": "Translate",
-            "localized_translation_label": "Multilingual name",
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
@@ -1772,9 +1765,6 @@
                 "display": {
                     "label": "Display"
                 },
-                "distance": {
-                    "label": "Total Distance"
-                },
                 "dock": {
                     "label": "Type"
                 },
@@ -2266,15 +2256,6 @@
                 },
                 "piste/difficulty": {
                     "label": "Difficulty",
-                    "options": {
-                        "advanced": "Advanced (black diamond)",
-                        "easy": "Easy (green circle)",
-                        "expert": "Expert (double black diamond)",
-                        "extreme": "Extreme (climbing equipment required)",
-                        "freeride": "Freeride (off-piste)",
-                        "intermediate": "Intermediate (blue square)",
-                        "novice": "Novice (instructional)"
-                    },
                     "placeholder": "Easy, Intermediate, Advanced..."
                 },
                 "piste/grooming": {
@@ -3061,17 +3042,11 @@
                 "amenity/nursing_home": {
                     "name": "Nursing Home"
                 },
-                "amenity/parking": {
-                    "name": "Car Parking"
-                },
                 "amenity/parking_entrance": {
                     "name": "Parking Garage Entrance/Exit"
                 },
                 "amenity/parking_space": {
                     "name": "Parking Space"
-                },
-                "amenity/pavilion": {
-                    "name": "Pavilion"
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy"
@@ -3130,9 +3105,6 @@
                 },
                 "amenity/ranger_station": {
                     "name": "Warden Station"
-                },
-                "amenity/recycling": {
-                    "name": "Recycling Container"
                 },
                 "amenity/recycling_centre": {
                     "name": "Recycling Centre"
@@ -3241,9 +3213,6 @@
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine"
-                },
-                "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Parcel Pickup/Dropoff Vending Machine"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parking Ticket Vending Machine"
@@ -3362,9 +3331,6 @@
                 "barrier/hedge": {
                     "name": "Hedge"
                 },
-                "barrier/kerb": {
-                    "name": "Kerb"
-                },
                 "barrier/kissing_gate": {
                     "name": "Kissing Gate"
                 },
@@ -3388,9 +3354,6 @@
                 },
                 "building": {
                     "name": "Building"
-                },
-                "building/apartments": {
-                    "name": "Apartments"
                 },
                 "building/barn": {
                     "name": "Barn"
@@ -3728,22 +3691,6 @@
                 "entrance": {
                     "name": "Entrance/Exit"
                 },
-                "footway/crossing": {
-                    "name": "Street Crossing"
-                },
-                "footway/crossing-raised": {
-                    "name": "Raised Street Crossing"
-                },
-                "footway/crosswalk": {
-                    "name": "Zebra Crossing"
-                },
-                "footway/crosswalk-raised": {
-                    "name": "Raised Zebra Crossing"
-                },
-                "footway/sidewalk": {
-                    "name": "Pavement",
-                    "terms": "sidewalk, pavement, footway, footpath"
-                },
                 "ford": {
                     "name": "Ford"
                 },
@@ -3839,18 +3786,6 @@
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor"
-                },
-                "highway/crossing": {
-                    "name": "Street Crossing"
-                },
-                "highway/crossing-raised": {
-                    "name": "Raised Street Crossing"
-                },
-                "highway/crosswalk": {
-                    "name": "Zebra Crossing"
-                },
-                "highway/crosswalk-raised": {
-                    "name": "Raised Zebra Crossing"
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path"
@@ -4257,9 +4192,6 @@
                 "leisure/pitch/american_football": {
                     "name": "American Football Field"
                 },
-                "leisure/pitch/baseball": {
-                    "name": "Baseball Diamond"
-                },
                 "leisure/pitch/basketball": {
                     "name": "Basketball Court"
                 },
@@ -4380,9 +4312,6 @@
                 "man_made/mast": {
                     "name": "Mast"
                 },
-                "man_made/observation": {
-                    "name": "Observation Tower"
-                },
                 "man_made/petroleum_well": {
                     "name": "Oil Well"
                 },
@@ -4403,9 +4332,6 @@
                 },
                 "man_made/surveillance": {
                     "name": "Surveillance"
-                },
-                "man_made/surveillance_camera": {
-                    "name": "Surveillance Camera"
                 },
                 "man_made/survey_point": {
                     "name": "Survey Point"
@@ -4505,9 +4431,6 @@
                 },
                 "natural/tree": {
                     "name": "Tree"
-                },
-                "natural/tree_row": {
-                    "name": "Tree row"
                 },
                 "natural/volcano": {
                     "name": "Volcano"
@@ -4653,9 +4576,6 @@
                 "office/water_utility": {
                     "name": "Water Utility Office"
                 },
-                "piste": {
-                    "name": "Piste/Ski Trail"
-                },
                 "place": {
                     "name": "Place"
                 },
@@ -4751,12 +4671,6 @@
                 },
                 "power/generator": {
                     "name": "Power Generator"
-                },
-                "power/generator/source_nuclear": {
-                    "name": "Nuclear Reactor"
-                },
-                "power/generator/source_wind": {
-                    "name": "Wind Turbine"
                 },
                 "power/line": {
                     "name": "Power Line"
@@ -5726,9 +5640,6 @@
                 },
                 "name": "OSM Inspector: Tagging"
             },
-            "US-TIGER-Roads-2012": {
-                "name": "TIGER Roads 2012"
-            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -5784,12 +5695,6 @@
                 },
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
-            },
-            "hike_n_bike": {
-                "attribution": {
-                    "text": "© OpenStreetMap contributors"
-                },
-                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {

@@ -56,3 +56,19 @@ export var osmPavedTags = {
         'grade1': true
     }
 };
+
+export var osmRightSideIsInsideTags = {
+    'natural': {
+        'cliff': true,
+        'coastline': 'coastline',
+    },
+    'barrier': {
+        'retaining_wall': true,
+        'kerb': true,
+        'guard_rail': true,
+        'city_wall': true,
+    },
+    'man_made': {
+        'embankment': true
+    }
+};

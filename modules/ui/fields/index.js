@@ -10,6 +10,7 @@ export * from './maxspeed';
 export * from './radio';
 export * from './restrictions';
 export * from './textarea';
+export * from './wikidata';
 export * from './wikipedia';
 
 import {
@@ -47,6 +48,7 @@ import { uiFieldLocalized } from './localized';
 import { uiFieldMaxspeed } from './maxspeed';
 import { uiFieldRestrictions } from './restrictions';
 import { uiFieldTextarea } from './textarea';
+import { uiFieldWikidata } from './wikidata';
 import { uiFieldWikipedia } from './wikipedia';
 
 export var uiFields = {
@@ -73,5 +75,6 @@ export var uiFields = {
     textarea: uiFieldTextarea,
     typeCombo: uiFieldTypeCombo,
     url: uiFieldUrl,
+    wikidata: uiFieldWikidata,
     wikipedia: uiFieldWikipedia
 };

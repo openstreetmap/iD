@@ -2,38 +2,40 @@ import _some from 'lodash-es/some';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { dataImperial } from '../../../data';
 import { geoPointInPolygon } from '../../geo';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { uiCombobox } from '../index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldMaxspeed(field, context) {
-    var dispatch = d3_dispatch('change'),
-        entity,
-        isImperial,
-        unitInput = d3_select(null),
-        input = d3_select(null),
-        combobox;
+    var dispatch = d3_dispatch('change');
+    var unitInput = d3_select(null);
+    var input = d3_select(null);
+    var _entity;
+    var _isImperial;
 
-    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
+    var speedCombo = uiCombobox(context, 'maxspeed');
+    var unitCombo = uiCombobox(context, 'maxspeed-unit')
+            .data(['km/h', 'mph'].map(comboValues));
+
+    var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+    var imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
 
     function maxspeed(selection) {
-        combobox = d3_combobox()
-            .container(context.container());
 
-        var unitCombobox = d3_combobox()
-            .container(context.container())
-            .data(['km/h', 'mph'].map(comboValues));
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
 
-        input = selection.selectAll('#preset-input-' + field.safeid)
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+
+        input = wrap.selectAll('#preset-input-' + field.safeid)
             .data([0]);
 
         input = input.enter()
@@ -42,30 +44,35 @@ export function uiFieldMaxspeed(field, context) {
             .attr('id', 'preset-input-' + field.safeid)
             .attr('placeholder', field.placeholder())
             .call(utilNoAuto)
-            .call(combobox)
+            .call(speedCombo)
             .merge(input);
 
         input
             .on('change', change)
             .on('blur', change);
 
-        var childNodes = context.graph().childNodes(context.entity(entity.id)),
+        var loc;
+        if (_entity.type === 'node') {
+            loc = _entity.loc;
+        } else {
+            var childNodes = context.graph().childNodes(context.entity(_entity.id));
             loc = childNodes[~~(childNodes.length/2)].loc;
+        }
 
-        isImperial = _some(dataImperial.features, function(f) {
+        _isImperial = _some(dataImperial.features, function(f) {
             return _some(f.geometry.coordinates, function(d) {
                 return geoPointInPolygon(loc, d);
             });
         });
 
-        unitInput = selection.selectAll('input.maxspeed-unit')
+        unitInput = wrap.selectAll('input.maxspeed-unit')
             .data([0]);
 
         unitInput = unitInput.enter()
             .append('input')
             .attr('type', 'text')
             .attr('class', 'maxspeed-unit')
-            .call(unitCombobox)
+            .call(unitCombo)
             .merge(unitInput);
 
         unitInput
@@ -74,8 +81,8 @@ export function uiFieldMaxspeed(field, context) {
 
 
         function changeUnits() {
-            isImperial = utilGetSetValue(unitInput) === 'mph';
-            utilGetSetValue(unitInput, isImperial ? 'mph' : 'km/h');
+            _isImperial = utilGetSetValue(unitInput) === 'mph';
+            utilGetSetValue(unitInput, _isImperial ? 'mph' : 'km/h');
             setSuggestions();
             change();
         }
@@ -83,8 +90,8 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function setSuggestions() {
-        combobox.data((isImperial ? imperialValues : metricValues).map(comboValues));
-        utilGetSetValue(unitInput, isImperial ? 'mph' : 'km/h');
+        speedCombo.data((_isImperial ? imperialValues : metricValues).map(comboValues));
+        utilGetSetValue(unitInput, _isImperial ? 'mph' : 'km/h');
     }
 
 
@@ -97,12 +104,12 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function change() {
-        var tag = {},
-            value = utilGetSetValue(input);
+        var tag = {};
+        var value = utilGetSetValue(input);
 
         if (!value) {
             tag[field.key] = undefined;
-        } else if (isNaN(value) || !isImperial) {
+        } else if (isNaN(value) || !_isImperial) {
             tag[field.key] = value;
         } else {
             tag[field.key] = value + ' mph';
@@ -117,9 +124,9 @@ export function uiFieldMaxspeed(field, context) {
 
         if (value && value.indexOf('mph') >= 0) {
             value = parseInt(value, 10);
-            isImperial = true;
+            _isImperial = true;
         } else if (value) {
-            isImperial = false;
+            _isImperial = false;
         }
 
         setSuggestions();
@@ -132,8 +139,8 @@ export function uiFieldMaxspeed(field, context) {
     };
 
 
-    maxspeed.entity = function(_) {
-        entity = _;
+    maxspeed.entity = function(val) {
+        _entity = val;
     };
 
 

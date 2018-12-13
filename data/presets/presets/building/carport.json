@@ -1,0 +1,21 @@
+{
+    "icon": "fas-warehouse",
+    "fields": [
+        "height",
+        "capacity"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "carport"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "covered parking space",
+        "garage",
+        "car",
+        "porch"
+    ],
+    "name": "Carport"
+}

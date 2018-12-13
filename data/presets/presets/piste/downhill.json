@@ -1,0 +1,26 @@
+{
+    "icon": "maki-skiing",
+    "fields": [
+        "name",
+        "piste/type",
+        "piste/difficulty_downhill",
+        "piste/grooming_downhill",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ski",
+        "alpine",
+        "snowboard",
+        "downhill",
+        "piste"
+    ],
+    "tags": {
+        "piste:type": "downhill"
+    },
+    "name": "Downhill Piste/Ski Run"
+}

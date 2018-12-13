@@ -42,7 +42,14 @@
             }
         },
         "fields": {
-            "description": "Form fields that are displayed for the preset",
+            "description": "Default form fields that are displayed for the preset",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "moreFields": {
+            "description": "Additional form fields that can be attached with the 'Add field' dropdown",
             "type": "array",
             "items": {
                 "type": "string"

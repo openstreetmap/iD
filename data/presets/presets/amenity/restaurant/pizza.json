@@ -1,0 +1,41 @@
+{
+    "icon": "maki-restaurant-pizza",
+    "fields": [
+        "name",
+        "cuisine",
+        "address",
+        "building_area",
+        "opening_hours",
+        "capacity",
+        "takeaway",
+        "delivery",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "lunch",
+        "table",
+        "deep dish",
+        "thin crust",
+        "slice"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "pizza"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "pizza"
+    },
+    "name": "Pizza Restaurant"
+}

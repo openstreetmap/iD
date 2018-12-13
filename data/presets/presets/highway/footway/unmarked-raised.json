@@ -1,0 +1,40 @@
+{
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "addTags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "unmarked",
+        "traffic_calming": "table"
+    },
+    "removeTags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "unmarked",
+        "traffic_calming": "table"
+    },
+    "tags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "traffic_calming": "table"
+    },
+    "reference": {
+        "key": "traffic_calming",
+        "value": "table"
+    },
+    "terms": [
+        "flat top",
+        "hump",
+        "speed",
+        "slow"
+    ],
+    "name": "Unmarked Crossing (Raised)"
+}

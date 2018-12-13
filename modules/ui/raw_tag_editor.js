@@ -9,18 +9,11 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
-
 import { t } from '../util/locale';
 import { services } from '../services';
 import { svgIcon } from '../svg';
-import { uiDisclosure } from './disclosure';
-import { uiTagReference } from './tag_reference';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../util';
+import { uiCombobox, uiDisclosure, uiTagReference } from './index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../util';
 
 
 export function uiRawTagEditor(context) {
@@ -103,10 +96,13 @@ export function uiRawTagEditor(context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', 'tag-row cf')
+            .attr('class', 'tag-row')
             .classed('readonly', isReadOnly);
 
-        enter
+        var innerWrap = enter.append('div')
+            .attr('class', 'inner-wrap');
+
+        innerWrap
             .append('div')
             .attr('class', 'key-wrap')
             .append('input')
@@ -117,9 +113,9 @@ export function uiRawTagEditor(context) {
             .on('blur', keyChange)
             .on('change', keyChange);
 
-        enter
+        innerWrap
             .append('div')
-            .attr('class', 'input-wrap-position')
+            .attr('class', 'value-wrap')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
@@ -129,10 +125,10 @@ export function uiRawTagEditor(context) {
             .on('change', valueChange)
             .on('keydown.push-more', pushMore);
 
-        enter
+        innerWrap
             .append('button')
             .attr('tabindex', -1)
-            .attr('class', 'remove minor')
+            .attr('class', 'form-field-button remove')
             .call(svgIcon('#iD-operation-delete'));
 
 
@@ -152,7 +148,7 @@ export function uiRawTagEditor(context) {
                 var key = row.select('input.key');      // propagate bound data to child
                 var value = row.select('input.value');  // propagate bound data to child
 
-                if (_entityID && taginfo) {
+                if (_entityID && taginfo && _state !== 'hover') {
                     bindTypeahead(key, value);
                 }
 
@@ -169,9 +165,10 @@ export function uiRawTagEditor(context) {
                     reference.showing(false);
                 }
 
-                row
-                    .call(reference.button)
-                    .call(reference.body);
+                row.select('.inner-wrap')
+                    .call(reference.button);
+
+                row.call(reference.body);
             });
 
         items.selectAll('input.key')
@@ -212,8 +209,7 @@ export function uiRawTagEditor(context) {
 
             var geometry = context.geometry(_entityID);
 
-            key.call(d3_combobox()
-                .container(context.container())
+            key.call(uiCombobox(context, 'tag-key')
                 .fetcher(function(value, callback) {
                     taginfo.keys({
                         debounce: true,
@@ -224,8 +220,7 @@ export function uiRawTagEditor(context) {
                     });
                 }));
 
-            value.call(d3_combobox()
-                .container(context.container())
+            value.call(uiCombobox(context, 'tag-value')
                 .fetcher(function(value, callback) {
                     taginfo.values({
                         debounce: true,
@@ -257,10 +252,10 @@ export function uiRawTagEditor(context) {
             var row = d3_select(this);
 
             row.selectAll('input.key')
-                .call(d3_combobox.off);
+                .call(uiCombobox.off);
 
             row.selectAll('input.value')
-                .call(d3_combobox.off);
+                .call(uiCombobox.off);
         }
 
 
@@ -340,16 +335,16 @@ export function uiRawTagEditor(context) {
     }
 
 
-    rawTagEditor.state = function(_) {
+    rawTagEditor.state = function(val) {
         if (!arguments.length) return _state;
-        _state = _;
+        _state = val;
         return rawTagEditor;
     };
 
 
-    rawTagEditor.preset = function(_) {
+    rawTagEditor.preset = function(val) {
         if (!arguments.length) return _preset;
-        _preset = _;
+        _preset = val;
         if (_preset.isFallback()) {
             _expanded = true;
             _updatePreference = false;
@@ -361,31 +356,31 @@ export function uiRawTagEditor(context) {
     };
 
 
-    rawTagEditor.tags = function(_) {
+    rawTagEditor.tags = function(val) {
         if (!arguments.length) return _tags;
-        _tags = _;
+        _tags = val;
         return rawTagEditor;
     };
 
 
-    rawTagEditor.entityID = function(_) {
+    rawTagEditor.entityID = function(val) {
         if (!arguments.length) return _entityID;
-        _entityID = _;
+        _entityID = val;
         return rawTagEditor;
     };
 
 
-    rawTagEditor.expanded = function(_) {
+    rawTagEditor.expanded = function(val) {
         if (!arguments.length) return _expanded;
-        _expanded = _;
+        _expanded = val;
         _updatePreference = false;
         return rawTagEditor;
     };
 
 
-    rawTagEditor.readOnlyTags = function(_) {
+    rawTagEditor.readOnlyTags = function(val) {
         if (!arguments.length) return _readOnlyTags;
-        _readOnlyTags = _;
+        _readOnlyTags = val;
         return rawTagEditor;
     };
 

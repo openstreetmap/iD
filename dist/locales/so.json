@@ -111,7 +111,6 @@
         "tooltip_keyhint": "Af-goys:",
         "translate": {
             "translate": "Turjum",
-            "localized_translation_label": "Magaca luqadaha badan",
             "localized_translation_language": "Dooro luuqada",
             "localized_translation_name": "Magaca"
         },
@@ -699,9 +698,6 @@
                 "amenity/library": {
                     "name": "Maktabad"
                 },
-                "amenity/parking": {
-                    "name": "Baakinka Baabuurta"
-                },
                 "amenity/place_of_worship": {
                     "name": "Goobta Cibaadada"
                 },
@@ -753,9 +749,6 @@
                 "building/stadium": {
                     "name": "Dhismo Garoon"
                 },
-                "footway/crosswalk": {
-                    "name": "Isgoyska Socotada"
-                },
                 "ford": {
                     "name": "Tog"
                 },
@@ -764,9 +757,6 @@
                 },
                 "highway/bus_stop": {
                     "name": "Boostaajo"
-                },
-                "highway/crosswalk": {
-                    "name": "Isgoyska Socotada"
                 },
                 "highway/path": {
                     "name": "Waddo"

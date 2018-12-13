@@ -1,0 +1,41 @@
+{
+    "icon": "fas-drumstick-bite",
+    "fields": [
+        "name",
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "takeaway",
+        "delivery",
+        "drive_through",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "chicken"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "chicken"
+    },
+    "name": "Chicken Fast Food"
+}

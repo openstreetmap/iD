@@ -3,8 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
@@ -578,7 +576,7 @@ export function uiMapData(context) {
 
         var pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane col4 hide');
+            .attr('class', 'fillL map-pane hide');
 
         var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -646,13 +644,9 @@ export function uiMapData(context) {
         update();
         setFill(_fillSelected);
 
-        var keybinding = d3_keybinding('features')
+        context.keybinding()
             .on(key, togglePane)
-            .on(t('area_fill.wireframe.key'), toggleWireframe)
-            .on([t('background.key'), t('help.key')], hidePane);
-
-        d3_select(document)
-            .call(keybinding);
+            .on(t('area_fill.wireframe.key'), toggleWireframe);
 
         uiMapData.hidePane = hidePane;
         uiMapData.togglePane = togglePane;

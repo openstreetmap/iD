@@ -5,48 +5,24 @@ import _find from 'lodash-es/find';
 import _forOwn from 'lodash-es/forOwn';
 import _isObject from 'lodash-es/isObject';
 import _isString from 'lodash-es/isString';
-import _map from 'lodash-es/map';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
 
-import {
-    t,
-    currentLocale,
-    addTranslation,
-    setLocale
-} from '../util/locale';
+import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
-
-import {
-    dataLocales,
-    dataEn
-} from '../../data';
-
-
+import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { presetIndex } from '../presets';
-
-import {
-    rendererBackground,
-    rendererFeatures,
-    rendererMap
-} from '../renderer';
-
+import { rendererBackground, rendererFeatures, rendererMap } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
+import { utilCallWhenIdle, utilKeybinding, utilRebind } from '../util';
 
-import {
-    utilCallWhenIdle,
-    utilExternalPresets,
-    utilExternalValidationRules,
-    utilRebind,
-    utilStringQs
-} from '../util';
 
 export var areaKeys = {};
 
@@ -57,7 +33,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.11.1';
+    context.version = '2.12.2';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -108,9 +84,17 @@ export function coreContext() {
     };
 
 
-    /* Straight accessors. Avoid using these if you can. */
-    var ui, connection, history;
+    /* User interface and keybinding */
+    var ui;
     context.ui = function() { return ui; };
+
+    var keybinding = utilKeybinding('context');
+    context.keybinding = function() { return keybinding; };
+    d3_select(document).call(keybinding);
+
+
+    /* Straight accessors. Avoid using these if you can. */
+    var connection, history;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
 
@@ -313,6 +297,12 @@ export function coreContext() {
         return features.hasHiddenConnections(entity, graph);
     };
 
+
+    /* Presets */
+    var presets;
+    context.presets = function() { return presets; };
+
+
     /* Map */
     var map;
     context.map = function() { return map; };
@@ -500,6 +490,7 @@ export function coreContext() {
     connection = services.osm;
     background = rendererBackground(context);
     features = rendererFeatures(context);
+    presets = presetIndex();
 
     map = rendererMap(context);
     context.mouse = map.mouse;
@@ -517,9 +508,11 @@ export function coreContext() {
         }
     });
 
-    areaKeys = presets.areaKeys();
     background.init();
     features.init();
+    presets.init();
+    areaKeys = presets.areaKeys();
+
 
     return utilRebind(context, dispatch, 'on');
 }

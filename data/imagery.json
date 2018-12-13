@@ -1052,7 +1052,7 @@
       "id": "alagoas_litoral",
       "name": "Alagoas Litoral 2006",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Ortofotos%202006&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Ortofotos%202006&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -1604,14 +1604,14 @@
           [-35.52384, -9.48089]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "arapiraca_al",
       "name": "Arapiraca AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Arapiraca&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Arapiraca&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -1626,8 +1626,8 @@
           [-36.60875, -9.83072]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "CRAIG-Auvergne-2013",
@@ -6159,7 +6159,7 @@
       "name": "Bing aerial imagery",
       "type": "bing",
       "template": "https://www.bing.com/maps",
-      "zoomExtent": [0, 22],
+      "zoomExtent": [1, 22],
       "default": true,
       "description": "Satellite and aerial imagery.",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"
@@ -6491,8 +6491,8 @@
           [-35.96968, -9.2928]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "British_Columbia_Mosaic",
@@ -7792,7 +7792,7 @@
       "id": "cajueiro_al",
       "name": "Cajueiro AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Cajueiro&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Cajueiro&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -7928,8 +7928,8 @@
           [-36.10753, -9.43884]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "osm-cambodia_laos_thailand_vietnam-bilingual",
@@ -7984,7 +7984,7 @@
       "id": "campo_alegre_al",
       "name": "Campo Alegre AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Campo%20Alegre&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Campo%20Alegre&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -8023,8 +8023,8 @@
           [-36.30643, -9.82332]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "canaan_drone_red_cross_201712",
@@ -9274,7 +9274,7 @@
       "id": "capela_al",
       "name": "Capela AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Capela&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Capela&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -9340,8 +9340,8 @@
           [-36.03321, -9.45741]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "COS2010_v1.0",
@@ -10599,6 +10599,156 @@
       "description": "OpenStreetMap use only. City of Cape Town Aerial ortho-photography of the municipal area. 8cm ground sample distance"
     },
     {
+      "id": "City_of_Melbourne_May_2018",
+      "name": "City of Melbourne",
+      "type": "tms",
+      "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/openstreetmapau.gdbhzo3g/{zoom}/{x}/{y}.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcGF1IiwiYSI6ImNqbWl3bXZ6aDA0MTkzd21xdnV1d2k0azEifQ.HYkMOqH_E2fYd1b0oXRe6w",
+      "endDate": "2018-05-01T00:00:00.000Z",
+      "startDate": "2018-05-01T00:00:00.000Z",
+      "zoomExtent": [10, 22],
+      "polygon": [
+        [
+          [144.9146, -37.79929],
+          [144.9139, -37.79888],
+          [144.91276, -37.79858],
+          [144.91138, -37.79876],
+          [144.90975, -37.79976],
+          [144.90604, -37.80641],
+          [144.90428, -37.81261],
+          [144.9042, -37.81421],
+          [144.90561, -37.82089],
+          [144.90426, -37.82245],
+          [144.89902, -37.82728],
+          [144.89686, -37.83007],
+          [144.89598, -37.83355],
+          [144.89602, -37.83873],
+          [144.89703, -37.84192],
+          [144.90113, -37.84692],
+          [144.9052, -37.85019],
+          [144.90684, -37.85056],
+          [144.90802, -37.8502],
+          [144.9084, -37.84948],
+          [144.90701, -37.84771],
+          [144.90763, -37.84693],
+          [144.90448, -37.84165],
+          [144.90529, -37.84139],
+          [144.90806, -37.8458],
+          [144.91181, -37.8502],
+          [144.91274, -37.85039],
+          [144.91548, -37.84892],
+          [144.91553, -37.84814],
+          [144.91396, -37.84594],
+          [144.91619, -37.84451],
+          [144.91396, -37.84131],
+          [144.91634, -37.83985],
+          [144.91651, -37.83841],
+          [144.91508, -37.83441],
+          [144.91829, -37.83307],
+          [144.91947, -37.83258],
+          [144.92102, -37.83087],
+          [144.92186, -37.83002],
+          [144.92297, -37.8295],
+          [144.92937, -37.82816],
+          [144.93529, -37.82702],
+          [144.94112, -37.82692],
+          [144.94181, -37.82679],
+          [144.94585, -37.8275],
+          [144.94707, -37.82794],
+          [144.94784, -37.82779],
+          [144.95786, -37.82953],
+          [144.95921, -37.82941],
+          [144.9613, -37.82902],
+          [144.96254, -37.82972],
+          [144.96477, -37.83184],
+          [144.96565, -37.83229],
+          [144.96621, -37.83231],
+          [144.97033, -37.83121],
+          [144.97052, -37.83228],
+          [144.97106, -37.83307],
+          [144.97346, -37.83507],
+          [144.97428, -37.83595],
+          [144.97943, -37.85002],
+          [144.97968, -37.85081],
+          [144.98061, -37.85117],
+          [144.98425, -37.85151],
+          [144.98483, -37.85139],
+          [144.98537, -37.85085],
+          [144.98923, -37.83109],
+          [144.98891, -37.83038],
+          [144.99226, -37.81041],
+          [144.99243, -37.80983],
+          [144.99187, -37.80895],
+          [144.97449, -37.80714],
+          [144.97683, -37.79327],
+          [144.97674, -37.7928],
+          [144.97642, -37.79232],
+          [144.97589, -37.79219],
+          [144.96977, -37.79146],
+          [144.97076, -37.78566],
+          [144.97041, -37.785],
+          [144.9699, -37.78477],
+          [144.96488, -37.7842],
+          [144.96511, -37.78252],
+          [144.96507, -37.78198],
+          [144.96421, -37.78142],
+          [144.96398, -37.78082],
+          [144.96389, -37.77964],
+          [144.96355, -37.7785],
+          [144.96267, -37.77779],
+          [144.96136, -37.77724],
+          [144.93919, -37.77456],
+          [144.93836, -37.77458],
+          [144.93801, -37.77485],
+          [144.93728, -37.77601],
+          [144.93658, -37.77692],
+          [144.93613, -37.77728],
+          [144.93598, -37.77791],
+          [144.93778, -37.78142],
+          [144.93827, -37.78421],
+          [144.93911, -37.78654],
+          [144.93885, -37.78672],
+          [144.93881, -37.7873],
+          [144.93773, -37.78801],
+          [144.93216, -37.7874],
+          [144.93123, -37.78783],
+          [144.93076, -37.78786],
+          [144.93003, -37.78735],
+          [144.92181, -37.78642],
+          [144.91488, -37.77938],
+          [144.91428, -37.77865],
+          [144.9137, -37.77853],
+          [144.91293, -37.77855],
+          [144.90819, -37.78135],
+          [144.90722, -37.78206],
+          [144.90572, -37.7845],
+          [144.90529, -37.78637],
+          [144.90428, -37.78657],
+          [144.90375, -37.78718],
+          [144.90319, -37.78827],
+          [144.90201, -37.78883],
+          [144.90143, -37.78964],
+          [144.90188, -37.79103],
+          [144.90257, -37.79198],
+          [144.90415, -37.79288],
+          [144.90645, -37.79383],
+          [144.90814, -37.79456],
+          [144.91046, -37.79519],
+          [144.9127, -37.79605],
+          [144.91429, -37.79695],
+          [144.91525, -37.79783],
+          [144.91539, -37.79815],
+          [144.91531, -37.79848],
+          [144.91518, -37.79872],
+          [144.9148, -37.79914],
+          [144.9146, -37.79929]
+        ]
+      ],
+      "terms_url": "https://data.melbourne.vic.gov.au/Property-Planning/2018-Aerial-Imagery-True-Ortho-/qa5h-sfgh",
+      "terms_text": "City of Melbourne",
+      "best": true,
+      "icon": "https://www.melbourne.vic.gov.au/_catalogs/masterpage/android-icon.png"
+    },
+    {
       "id": "Zuerich-aerial_2011",
       "name": "City of Zürich Orthophoto 2011",
       "type": "wms",
@@ -11697,7 +11847,7 @@
       "id": "delmiro_gouveia",
       "name": "Delmiro Gouveia AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Delmiro%20Gouveia&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Delmiro%20Gouveia&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -11708,8 +11858,8 @@
           [-37.94962, -9.42957]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "der-es",
@@ -17625,7 +17775,7 @@
       "name": "Estonia Ortho (Maaamet)",
       "type": "tms",
       "template": "https://tiles.maaamet.ee/tm/tms/1.0.0/foto@GMC/{zoom}/{x}/{-y}.png",
-      "zoomExtent": [14, 18],
+      "zoomExtent": [6, 18],
       "polygon": [
         [
           [22.35364, 58.85385],
@@ -18404,7 +18554,7 @@
       "id": "estrela_de_alagoas",
       "name": "Estrela de Alagoas",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Estrela%20de%20Alagoas&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Estrela%20de%20Alagoas&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -18415,8 +18565,43 @@
           [-36.71382, -9.43476]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
+    },
+    {
+      "id": "eufar-balaton",
+      "name": "EUFAR Balaton orthophotos",
+      "type": "tms",
+      "template": "http://e.tile.openstreetmap.hu/balaton/0/{zoom}/{x}/{y}.jpg",
+      "endDate": "2010-08-31T00:00:00.000Z",
+      "startDate": "2010-08-01T00:00:00.000Z",
+      "zoomExtent": [12, 19],
+      "polygon": [
+        [
+          [18.17918, 46.98502],
+          [18.17773, 47.01816],
+          [18.08176, 47.05643],
+          [18.10281, 47.06311],
+          [18.08152, 47.09344],
+          [18.06436, 47.09049],
+          [18.03537, 47.07983],
+          [18.03344, 47.08262],
+          [17.9582, 47.05567],
+          [17.99436, 47.00449],
+          [17.86441, 46.95517],
+          [17.80274, 47.0103],
+          [17.67184, 46.97207],
+          [17.23875, 46.77079],
+          [17.22244, 46.6796],
+          [17.47175, 46.70306],
+          [18.16735, 46.94133],
+          [18.17918, 46.98502]
+        ]
+      ],
+      "terms_url": "http://www.bli.okologia.mta.hu/",
+      "terms_text": "EUFAR Balaton ortofotó 2010",
+      "best": true,
+      "description": "1940 geo-tagged photography from Balaton Limnological Institute."
     },
     {
       "id": "Fiez-2013",
@@ -21415,7 +21600,7 @@
       "id": "Geolittoral-Orthophotos2000",
       "name": "Géolittoral - Orthophotos 2000",
       "type": "wms",
-      "template": "http://geolittoral.application.developpement-durable.gouv.fr/wms2/metropole?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortholittorale&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geolittoral.din.developpement-durable.gouv.fr/wxs?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortholittorale&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "endDate": "2000-01-01T00:00:00.000Z",
       "startDate": "2000-01-01T00:00:00.000Z",
@@ -21682,7 +21867,7 @@
       "id": "Geolittoral-Sentiers",
       "name": "Géolittoral - Sentiers",
       "type": "wms",
-      "template": "http://geolittoral.application.developpement-durable.gouv.fr/wms2/metropole?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=n_sentier_littoral_l&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geolittoral.din.developpement-durable.gouv.fr/wxs?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=n_sentier_littoral_l&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -22173,7 +22358,7 @@
       "id": "GeolittoralV2-Orthophotos",
       "name": "Géolittoral V2 - Orthophotos 2011-2014",
       "type": "wms",
-      "template": "http://geolittoral.application.developpement-durable.gouv.fr/wms2/metropole?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortholittorale_v2_rvb&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geolittoral.din.developpement-durable.gouv.fr/wxs?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortholittorale_v2_rvb&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "endDate": "2014-01-01T00:00:00.000Z",
       "startDate": "2011-01-01T00:00:00.000Z",
@@ -23023,7 +23208,7 @@
       "id": "girau_do_pnciano",
       "name": "Girau do Ponciano",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Girau%20do%20Ponciano&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Girau%20do%20Ponciano&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -23041,8 +23226,8 @@
           [-36.78013, -9.92939]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "Gliwice-buildings",
@@ -24423,18 +24608,30 @@
       ]
     },
     {
-      "id": "hu-hillshade",
-      "name": "Hillshade Hungary",
+      "id": "helsingborg-orto",
+      "name": "Helsingborg Orthophoto",
       "type": "tms",
-      "template": "https://{switch:a,b,c}.map.turistautak.hu/tiles/shading/{zoom}/{x}/{y}.png",
-      "zoomExtent": [0, 18],
-      "polygon": [[[15, 45], [24, 45], [24, 49], [15, 49], [15, 45]]],
-      "terms_text": "SRTM",
-      "overlay": true
+      "template": "http://mapproxy.openstreetmap.se/tiles/1.0.0/hborg2016_EPSG3857/{zoom}/{x}/{y}.jpeg",
+      "zoomExtent": [5, 20],
+      "polygon": [
+        [
+          [12.74345, 55.94997],
+          [12.93777, 55.90804],
+          [13.00369, 55.96842],
+          [12.79083, 56.25022],
+          [12.56698, 56.1356],
+          [12.74345, 55.94997]
+        ]
+      ],
+      "terms_url": "https://helsingborg.opendatasoft.com/",
+      "terms_text": "© Helsingborg municipality",
+      "best": true,
+      "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Helsingborg_vapen.svg/198px-Helsingborg_vapen.svg.png"
     },
     {
       "id": "hri-orto",
-      "name": "HRI Orthophoto",
+      "name": "Helsinki region orthophoto",
       "type": "wms",
       "template": "https://kartta.hsy.fi/geoserver/ows?SERVICE=WMS&FORMAT=image/jpeg&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=taustakartat_ja_aluejaot:Ortoilmakuva_2017&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
@@ -24457,11 +24654,21 @@
           [24.26948, 59.8593]
         ]
       ],
-      "terms_url": "https://www.hsy.fi/",
-      "terms_text": "© Helsingin kaupunkiympäristön toimiala",
+      "terms_url": "https://hri.fi/data/en_GB/dataset/paakaupunkiseudun-ortokuva-2017",
+      "terms_text": "© Espoon, Helsingin ja Vantaan kaupungit, Kirkkonummen ja Nurmijärven kunnat sekä HSL ja HSY",
       "best": true,
-      "description": "Ortophotos from Helsinki Region Infoshare",
-      "icon": "https://github.com/osmlab/editor-layer-index/blob/gh-pages/sources/europe/fi/hri_logo.png"
+      "description": "Ortophotos from the municipalities of Espoo, Helsinki, Vantaa, Kirkkonummi and Nurmijärvi + HSL and HSY",
+      "icon": "https://raw.githubusercontent.com/osmlab/editor-layer-index/gh-pages/sources/europe/fi/hri_logo.png"
+    },
+    {
+      "id": "hu-hillshade",
+      "name": "Hillshade Hungary",
+      "type": "tms",
+      "template": "https://{switch:a,b,c}.map.turistautak.hu/tiles/shading/{zoom}/{x}/{y}.png",
+      "zoomExtent": [0, 18],
+      "polygon": [[[15, 45], [24, 45], [24, 49], [15, 49], [15, 45]]],
+      "terms_text": "SRTM",
+      "overlay": true
     },
     {
       "id": "IBGE_DF_Addresses",
@@ -24486,7 +24693,7 @@
       "id": "IBGE_Setores_Rurais",
       "name": "IBGE Mapa de Setores Rurais",
       "type": "tms",
-      "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/tmpsantos.i00mo1kj/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJncjlmd0t3In0.DmZsIeOW-3x-C5eX-wAqTw",
+      "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/tmpsantos.i00mo1kj/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJjaml5MjVyb3MwMWV0M3hxYmUzdGdwbzE4In0.q548FjhsSJzvXsGlPsFxAQ",
       "zoomExtent": [0, 14],
       "polygon": [
         [
@@ -25576,7 +25783,7 @@
       "id": "IBGE_Setores_Urbanos",
       "name": "IBGE Mapa de Setores Urbanos",
       "type": "tms",
-      "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/tmpsantos.hgda0m6h/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJncjlmd0t3In0.DmZsIeOW-3x-C5eX-wAqTw",
+      "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/tmpsantos.hgda0m6h/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJjaml5MjVyb3MwMWV0M3hxYmUzdGdwbzE4In0.q548FjhsSJzvXsGlPsFxAQ",
       "zoomExtent": [0, 19],
       "polygon": [
         [
@@ -31866,6 +32073,65 @@
       "terms_text": "ITACyL"
     },
     {
+      "id": "finds.jp_KBN_2500",
+      "name": "Japan GSI KIBAN 2500",
+      "type": "tms",
+      "template": "http://www.finds.jp/ws/tmc/1.0.0/KBN2500FN-900913-L/{zoom}/{x}/{y}.png",
+      "zoomExtent": [15, 20],
+      "polygon": [
+        [
+          [140.88867, 45.67548],
+          [140.71289, 45.41388],
+          [141.04248, 43.80282],
+          [139.96582, 43.35714],
+          [138.99902, 42.01665],
+          [139.04297, 41.26129],
+          [137.5708, 38.58253],
+          [132.69287, 36.86204],
+          [130.84717, 34.93999],
+          [129.74854, 34.994],
+          [129.02344, 34.56086],
+          [128.36426, 33.21112],
+          [127.90283, 31.87756],
+          [128.4082, 29.89781],
+          [125.8374, 26.78485],
+          [123.33252, 25.0657],
+          [122.58545, 24.42715],
+          [123.53027, 23.44309],
+          [125.88135, 24.10665],
+          [129.96826, 26.31311],
+          [132.1875, 30.20211],
+          [134.42871, 32.43561],
+          [136.82373, 33.28462],
+          [137.85645, 34.21634],
+          [138.64746, 33.24788],
+          [138.58154, 32.00808],
+          [139.6582, 28.67131],
+          [141.65771, 29.66896],
+          [142.0752, 32.06396],
+          [141.21826, 33.37641],
+          [141.56982, 35.44277],
+          [141.43799, 36.52729],
+          [142.82227, 39.16414],
+          [143.04199, 40.89691],
+          [145.92041, 42.40723],
+          [146.18408, 43.03678],
+          [145.74463, 43.54855],
+          [145.32715, 43.67582],
+          [145.30518, 43.91372],
+          [145.61279, 44.2452],
+          [145.41504, 44.62175],
+          [144.38232, 44.52784],
+          [142.31689, 45.53714],
+          [141.3501, 45.70618],
+          [140.88867, 45.67548]
+        ]
+      ],
+      "terms_url": "http://www.finds.jp/siteinfo/c_tou.html.ja",
+      "terms_text": "GSI KIBAN 2500",
+      "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older."
+    },
+    {
       "id": "gsi.go.jp",
       "name": "Japan GSI ortho Imagery",
       "type": "tms",
@@ -33852,7 +34118,8 @@
         ]
       ],
       "terms_url": "http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html",
-      "terms_text": "GSI Japan"
+      "terms_text": "GSI Japan",
+      "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older."
     },
     {
       "id": "gsi.go.jp_std_map",
@@ -33887,7 +34154,198 @@
         ]
       ],
       "terms_url": "https://maps.gsi.go.jp/help/use.html",
-      "terms_text": "GSI Japan"
+      "terms_text": "GSI Japan",
+      "description": "Japan GSI Standard Map. Widely covered."
+    },
+    {
+      "id": "kalmar-orto-2014",
+      "name": "Kalmar North Orthophoto 2014",
+      "type": "wms",
+      "template": "https://kartportal.kalmar.se/arcgisserver/services/Ortofoto/Kalmar_2014/ImageServer/WMSServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:4326",
+      "endDate": "2014-01-01T00:00:00.000Z",
+      "startDate": "2014-01-01T00:00:00.000Z",
+      "zoomExtent": [9, 22],
+      "polygon": [
+        [
+          [16.28473, 56.70827],
+          [16.38856, 56.70798],
+          [16.40843, 56.7615],
+          [16.46269, 56.75672],
+          [16.47753, 56.76023],
+          [16.48815, 56.77023],
+          [16.48754, 56.79231],
+          [16.48254, 56.79547],
+          [16.47667, 56.8223],
+          [16.4687, 56.82614],
+          [16.48584, 56.86271],
+          [16.48809, 56.87369],
+          [16.45694, 56.87786],
+          [16.46288, 56.88769],
+          [16.42696, 56.88757],
+          [16.39809, 56.89604],
+          [16.36791, 56.8952],
+          [16.36717, 56.85985],
+          [16.36431, 56.84636],
+          [16.36001, 56.83657],
+          [16.34423, 56.82532],
+          [16.32675, 56.79284],
+          [16.26114, 56.74422],
+          [16.28473, 56.70827]
+        ]
+      ],
+      "terms_url": "http://data-kalmar.opendata.arcgis.com/",
+      "terms_text": "© Kalmar municipality",
+      "best": true,
+      "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kalmarvapen_1a.svg/206px-Kalmarvapen_1a.svg.png"
+    },
+    {
+      "id": "kalmar-orto-2016",
+      "name": "Kalmar South Orthophoto 2016",
+      "type": "wms",
+      "template": "https://kartportal.kalmar.se/arcgisserver/services/Ortofoto/Kalmar_2016/ImageServer/WMSServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:4326",
+      "endDate": "2016-01-01T00:00:00.000Z",
+      "startDate": "2016-01-01T00:00:00.000Z",
+      "zoomExtent": [9, 22],
+      "polygon": [
+        [
+          [16.156, 56.45834],
+          [16.11389, 56.46083],
+          [16.09246, 56.46633],
+          [16.0724, 56.4662],
+          [16.07126, 56.51153],
+          [16.08516, 56.56847],
+          [16.14417, 56.63933],
+          [16.21168, 56.68491],
+          [16.28412, 56.71655],
+          [16.25135, 56.74358],
+          [16.25045, 56.75062],
+          [16.29558, 56.7512],
+          [16.33516, 56.72511],
+          [16.38922, 56.71885],
+          [16.41137, 56.67602],
+          [16.4053, 56.66294],
+          [16.33101, 56.625],
+          [16.28048, 56.613],
+          [16.21561, 56.51967],
+          [16.156, 56.45834]
+        ]
+      ],
+      "terms_url": "http://data-kalmar.opendata.arcgis.com/",
+      "terms_text": "© Kalmar municipality",
+      "best": true,
+      "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kalmarvapen_1a.svg/206px-Kalmarvapen_1a.svg.png"
+    },
+    {
+      "id": "kalmar-orto-2018",
+      "name": "Kalmar Urban Orthophoto 2018",
+      "type": "wms",
+      "template": "https://kartportal.kalmar.se/arcgisserver/services/Ortofoto/Kalmar_2018/ImageServer/WMSServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:4326",
+      "endDate": "2018-01-01T00:00:00.000Z",
+      "startDate": "2018-01-01T00:00:00.000Z",
+      "zoomExtent": [9, 22],
+      "polygon": [
+        [
+          [16.3416, 56.81756],
+          [16.32773, 56.7973],
+          [16.36692, 56.78706],
+          [16.37105, 56.79153],
+          [16.36978, 56.80511],
+          [16.35645, 56.8133],
+          [16.3416, 56.81756]
+        ],
+        [
+          [16.39207, 56.79339],
+          [16.4608, 56.78944],
+          [16.48817, 56.79067],
+          [16.4833, 56.76986],
+          [16.46612, 56.76711],
+          [16.45409, 56.76774],
+          [16.43173, 56.77309],
+          [16.43178, 56.77663],
+          [16.40554, 56.77214],
+          [16.39325, 56.77349],
+          [16.39207, 56.79339]
+        ],
+        [
+          [16.29836, 56.79102],
+          [16.28796, 56.7883],
+          [16.27727, 56.78367],
+          [16.27623, 56.77952],
+          [16.2862, 56.7761],
+          [16.3108, 56.77696],
+          [16.3118, 56.78086],
+          [16.30364, 56.78883],
+          [16.29836, 56.79102]
+        ],
+        [
+          [16.20686, 56.63637],
+          [16.22098, 56.62389],
+          [16.2453, 56.62467],
+          [16.26751, 56.62951],
+          [16.28724, 56.63831],
+          [16.37871, 56.65462],
+          [16.38806, 56.6897],
+          [16.38664, 56.72867],
+          [16.31586, 56.72879],
+          [16.29956, 56.7219],
+          [16.29331, 56.70021],
+          [16.26799, 56.66889],
+          [16.23945, 56.66991],
+          [16.2266, 56.6624],
+          [16.21411, 56.64972],
+          [16.20686, 56.63637]
+        ],
+        [
+          [16.15172, 56.67843],
+          [16.15712, 56.69334],
+          [16.15268, 56.70297],
+          [16.13274, 56.71254],
+          [16.10987, 56.71964],
+          [16.08638, 56.7112],
+          [16.07969, 56.70056],
+          [16.08149, 56.69566],
+          [16.09534, 56.69599],
+          [16.12877, 56.67766],
+          [16.15172, 56.67843]
+        ],
+        [
+          [15.97369, 56.62759],
+          [16.00164, 56.63215],
+          [16.04126, 56.62999],
+          [16.05658, 56.62489],
+          [16.06201, 56.61794],
+          [16.09186, 56.60378],
+          [16.10527, 56.5926],
+          [16.09581, 56.58161],
+          [16.03481, 56.60405],
+          [16.0305, 56.61252],
+          [16.0088, 56.60223],
+          [15.98755, 56.59742],
+          [15.98449, 56.57141],
+          [15.94887, 56.57264],
+          [15.91878, 56.55184],
+          [15.90892, 56.55393],
+          [15.89921, 56.56867],
+          [15.9188, 56.57287],
+          [15.94612, 56.57491],
+          [15.96371, 56.59004],
+          [15.9496, 56.59724],
+          [15.94308, 56.60903],
+          [15.95726, 56.61598],
+          [15.97589, 56.62005],
+          [15.97369, 56.62759]
+        ]
+      ],
+      "terms_url": "http://data-kalmar.opendata.arcgis.com/",
+      "terms_text": "© Kalmar municipality",
+      "best": true,
+      "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kalmarvapen_1a.svg/206px-Kalmarvapen_1a.svg.png"
     },
     {
       "id": "Aargau-AGIS-2014",
@@ -38056,7 +38514,7 @@
       "terms_url": "https://www.lantmateriet.se",
       "terms_text": "© Lantmäteriet",
       "description": "Scan of \"Economic maps\" ca. 1950–1980",
-      "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/se/LantmterietHistoricOrthophoto1960.png"
+      "icon": "https://raw.githubusercontent.com/osmlab/editor-layer-index/gh-pages/sources/europe/se/lantmateriet_icon.png"
     },
     {
       "id": "lantmateriet-orto1960",
@@ -38091,7 +38549,7 @@
       "terms_url": "https://www.lantmateriet.se/",
       "terms_text": "© Lantmäteriet, CC0",
       "description": "Mosaic of Swedish orthophotos from the period 1955–1965. Older and younger pictures may occur.",
-      "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/se/LantmterietHistoricOrthophoto1960.png"
+      "icon": "https://raw.githubusercontent.com/osmlab/editor-layer-index/gh-pages/sources/europe/se/lantmateriet_icon.png"
     },
     {
       "id": "lantmateriet-orto1975",
@@ -38118,7 +38576,41 @@
       "terms_url": "https://www.lantmateriet.se/",
       "terms_text": "© Lantmäteriet, CC0",
       "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
-      "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/se/LantmterietHistoricOrthophoto1960.png"
+      "icon": "https://raw.githubusercontent.com/osmlab/editor-layer-index/gh-pages/sources/europe/se/lantmateriet_icon.png"
+    },
+    {
+      "id": "lantmateriet-topowebb",
+      "name": "Lantmäteriet Topographic Map",
+      "type": "tms",
+      "template": "https://api.lantmateriet.se/open/topowebb-ccby/v1/wmts/token/9b342b7d9f12d4ddb92277be9869d860/1.0.0/topowebb/default/3857/{zoom}/{y}/{x}.png",
+      "zoomExtent": [3, 15],
+      "polygon": [
+        [
+          [12.80182, 55.19612],
+          [14.22729, 55.27286],
+          [18.44604, 56.69244],
+          [19.74242, 57.98481],
+          [20.0061, 59.5371],
+          [19.08394, 60.19308],
+          [20.49499, 63.2497],
+          [24.25231, 65.57437],
+          [23.81835, 67.92514],
+          [23.23607, 68.34655],
+          [20.43456, 69.17038],
+          [18.08349, 68.5644],
+          [16.50145, 67.88382],
+          [14.43602, 66.14275],
+          [11.82128, 63.30775],
+          [12.20031, 60.31063],
+          [10.62377, 58.5482],
+          [12.64251, 56.03062],
+          [12.80182, 55.19612]
+        ]
+      ],
+      "terms_url": "https://www.lantmateriet.se/",
+      "terms_text": "© Lantmäteriet, CC0",
+      "description": "Topographic map of Sweden 1:50 000",
+      "icon": "https://raw.githubusercontent.com/osmlab/editor-layer-index/gh-pages/sources/europe/se/lantmateriet_icon.png"
     },
     {
       "id": "lu.geoportail.opendata.ortholatest",
@@ -38419,6 +38911,47 @@
       ],
       "terms_url": "http://carto.lausanne.ch/lausanne-gc/",
       "terms_text": "Ville de Lausanne - Orthophoto technique 2012"
+    },
+    {
+      "id": "linkoping-orto",
+      "name": "Linköping Orthophoto",
+      "type": "wms",
+      "template": "http://kartan.linkoping.se/wms?servicename=wms_ortofoto&FORMAT=image/jpeg&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Kommun_2010_25cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:3857",
+      "zoomExtent": [13, 20],
+      "polygon": [
+        [
+          [15.36884, 58.6305],
+          [15.41279, 58.65623],
+          [15.46635, 58.6339],
+          [15.54291, 58.64408],
+          [15.54119, 58.60672],
+          [15.58376, 58.6414],
+          [15.7592, 58.55267],
+          [15.76675, 58.52006],
+          [15.91438, 58.51755],
+          [16.08089, 58.37148],
+          [15.82718, 58.30588],
+          [15.84915, 58.21449],
+          [15.65861, 58.15513],
+          [15.56763, 58.19134],
+          [15.55939, 58.14661],
+          [15.50171, 58.07679],
+          [15.37777, 58.05881],
+          [15.28713, 58.1031],
+          [15.27203, 58.13483],
+          [15.35889, 58.16455],
+          [15.32387, 58.38012],
+          [15.24971, 58.40027],
+          [15.3582, 58.47288],
+          [15.36884, 58.6305]
+        ]
+      ],
+      "terms_url": "https://www.linkoping.se/open/",
+      "terms_text": "© Linköping municipality",
+      "best": true,
+      "description": "Orthophotos from the municipality of Linköping 2010, open data",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Linköping_vapen.svg/198px-Linköping_vapen.svg.png"
     },
     {
       "id": "LINZ_NZ_Aerial_Imagery",
@@ -40534,7 +41067,7 @@
       "id": "major_isidoro",
       "name": "Major Isidoro AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Major%20Isidoro&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Major%20Isidoro&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -40545,8 +41078,8 @@
           [-36.94048, -9.57588]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "Mapbox",
@@ -40565,7 +41098,7 @@
       "id": "Maps4BW-LGL_BW",
       "name": "Maps4BW (LGL-BW, www.lgl-bw.de)",
       "type": "wms",
-      "template": "http://www.webatlasde.de/arcgis/services/Maps4BW/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Halbtonvariante&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "https://owsproxy.lgl-bw.de/owsproxy/ows/WMS_Maps4BW?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=webatlasde&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -40865,7 +41398,7 @@
       "id": "mar_vermelho_al",
       "name": "Mar Vermelho AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Mar%20Vermelho&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Mar%20Vermelho&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -40916,14 +41449,15 @@
           [-36.34201, -9.49289]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "MassGIS-L3-Parcels",
       "name": "MassGIS L3 Parcels",
       "type": "tms",
-      "template": "http://tile.osm.osuosl.org/tiles/massgis_parcels/{zoom}/{x}/{y}.png",
+      "template": "https://ags-proxy.openstreetmap.us/tiles/{zoom}/{x}/{y}?url=http%3A%2F%2Fgisprpxy.itd.state.ma.us%2Farcgisserver%2Frest%2Fservices%2FAGOL%2FL3Parcels_feature_service%2FMapServer%2F&transparent=true&layers=show%3A0",
+      "zoomExtent": [15, 22],
       "polygon": [
         [
           [-72.13569, 42.03025],
@@ -41008,7 +41542,8 @@
           [-72.0635, 42.02735],
           [-72.13569, 42.03025]
         ]
-      ]
+      ],
+      "overlay": true
     },
     {
       "id": "geodata.md.gov-MD_SixInchImagery",
@@ -42035,7 +42570,7 @@
       "id": "minador_do_negrao",
       "name": "Minador do Negrão",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Minador%20do%20Negrao&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Minador%20do%20Negrao&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -42087,8 +42622,8 @@
           [-36.8196, -9.35174]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "mml-tausta",
@@ -43132,7 +43667,7 @@
       "id": "npd-offshore",
       "name": "NPD Offshore Installations overlay",
       "type": "wms",
-      "template": "http://npdwms.npd.no/NPD_FactMap.asp?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Surface_labels,Surface,Pipelines,Pipelines_labels,Fields_labels,Fields&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://gis.npd.no/ogc/factmaps/2_0?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=fclFixed,pplAll,fldByStatus&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "zoomExtent": [6, 20],
       "polygon": [
@@ -43682,7 +44217,7 @@
       "id": "olho_dagua_do_casado",
       "name": "Olho d'Agua do Casado AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Olho%20Dagua%20do%20Casado&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Olho%20Dagua%20do%20Casado&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -43696,8 +44231,8 @@
           [-37.7822, -9.54444]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "osmbe-nl",
@@ -44950,6 +45485,23 @@
           [18.13111, 47.02745],
           [18.13226, 47.0269],
           [18.13162, 47.02619]
+        ],
+        [
+          [17.79852, 46.81745],
+          [17.79178, 46.81585],
+          [17.79601, 46.80664],
+          [17.7948, 46.80598],
+          [17.79693, 46.80056],
+          [17.80109, 46.79993],
+          [17.80736, 46.80225],
+          [17.79852, 46.81745]
+        ],
+        [
+          [17.7788, 46.81461],
+          [17.78446, 46.80714],
+          [17.79083, 46.80925],
+          [17.7853, 46.81683],
+          [17.7788, 46.81461]
         ]
       ],
       "terms_text": "openstreetmap.hu"
@@ -47836,7 +48388,7 @@
       "id": "al_palestina",
       "name": "Palestina AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Palestina&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Palestina&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -47894,14 +48446,14 @@
           [-37.28907, -9.71916]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "palmeira_dos_indios",
       "name": "Palmeira dos Indios AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Palmeira%20dos%20Indios&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Palmeira%20dos%20Indios&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -47966,8 +48518,8 @@
           [-36.58664, -9.46124]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "Pangasinan_Bulacan_HiRes",
@@ -48001,7 +48553,7 @@
       "id": "pao_de_acucar",
       "name": "Pão de Açucar AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Pao%20de%20Acucar&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Pao%20de%20Acucar&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -48063,8 +48615,8 @@
           [-37.39003, -9.78589]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "PCN-Italy-2006",
@@ -48641,7 +49193,7 @@
       "id": "al_piranhas",
       "name": "Piranhas AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Piranhas&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Piranhas&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -48707,8 +49259,8 @@
           [-37.71918, -9.65236]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "PNOA-Spain-TMS",
@@ -49324,7 +49876,7 @@
       "id": "poco_das_trincheiras",
       "name": "Poço das Trincheiras AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Poco%20das%20Trincheiras&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Poco%20das%20Trincheiras&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -49397,8 +49949,8 @@
           [-37.23942, -9.35157]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "e-mapa.net-buildings",
@@ -51472,7 +52024,7 @@
       "id": "santana_do_ipanema",
       "name": "Santana do Ipanema AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Santana%20do%20Ipanema&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Santana%20do%20Ipanema&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -51517,14 +52069,14 @@
           [-37.20224, -9.41356]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "Sao_miguel_dos_campos",
       "name": "São Miguel dos Campos AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Sao_miguel_dos_campos&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Sao_miguel_dos_campos&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -51535,8 +52087,8 @@
           [-36.1415, -9.83171]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "GEOSN-DOP-2005",
@@ -58335,6 +58887,46 @@
       "icon": "https://stamen.com/wp-content/uploads/2016/07/stamen_compass_rose_small-01.png"
     },
     {
+      "id": "stockholm-orto",
+      "name": "Stockholm Orthophoto",
+      "type": "wms",
+      "template": "http://openmap.stockholm.se/bios/wms/app/baggis/web/WMS_STHLM_ORTOFOTO_2015?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=p_1002820&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:3857",
+      "zoomExtent": [5, 21],
+      "polygon": [
+        [
+          [17.8755, 59.2625],
+          [17.94411, 59.27307],
+          [18.09551, 59.22603],
+          [18.19582, 59.22786],
+          [18.20297, 59.24886],
+          [18.12538, 59.30779],
+          [18.1786, 59.32566],
+          [18.09876, 59.3721],
+          [18.04264, 59.37816],
+          [18.00796, 59.34334],
+          [17.93655, 59.37641],
+          [17.97483, 59.40246],
+          [17.90882, 59.4417],
+          [17.8854, 59.43792],
+          [17.88918, 59.41382],
+          [17.84077, 59.38568],
+          [17.81708, 59.40054],
+          [17.77725, 59.39984],
+          [17.75622, 59.3916],
+          [17.79899, 59.36204],
+          [17.94993, 59.31121],
+          [17.85622, 59.28412],
+          [17.8755, 59.2625]
+        ]
+      ],
+      "terms_url": "http://dataportalen.stockholm.se/dataportalen/",
+      "terms_text": "© Stockholm municipality, CC0",
+      "best": true,
+      "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Stockholm_vapen_bra.svg/196px-Stockholm_vapen_bra.svg.png"
+    },
+    {
       "id": "Surrey-Air_Survey",
       "name": "Surrey Air Survey",
       "type": "tms",
@@ -58895,7 +59487,7 @@
       "id": "teotonio_vilela",
       "name": "Teotonio Vilela AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Teotonio%20Vilela&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Teotonio%20Vilela&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -58935,8 +59527,8 @@
           [-36.31164, -9.95468]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "tnris.org",
@@ -59126,10 +59718,158 @@
       "overlay": true
     },
     {
+      "id": "US-TIGER-Roads-2018",
+      "name": "TIGER Roads 2018",
+      "type": "tms",
+      "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/styles/v1/openstreetmapus/cjo1wbulo3ub82ro1c9onlzmh/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcHVzIiwiYSI6ImNpcnF4Ym43dDBoOXZmYW04bWhlNWdrY2EifQ.4SFexuTUuKkZeerO3dgtmw",
+      "endDate": "2018-01-01T00:00:00.000Z",
+      "startDate": "2018-01-01T00:00:00.000Z",
+      "zoomExtent": [0, 22],
+      "polygon": [
+        [
+          [-124.76179, 48.41301],
+          [-124.60595, 45.90245],
+          [-124.99343, 40.05576],
+          [-122.53697, 36.85661],
+          [-119.97759, 33.00641],
+          [-117.67593, 32.46302],
+          [-114.86123, 32.47999],
+          [-111.00893, 31.33601],
+          [-108.19927, 31.326],
+          [-108.18711, 31.77551],
+          [-106.53072, 31.78209],
+          [-106.48421, 31.74645],
+          [-106.42932, 31.75206],
+          [-106.28689, 31.56133],
+          [-106.20525, 31.4467],
+          [-105.02053, 30.5361],
+          [-104.58819, 29.69979],
+          [-103.25189, 28.89087],
+          [-102.71736, 29.39206],
+          [-102.1514, 29.74757],
+          [-101.25529, 29.48105],
+          [-100.00624, 28.00822],
+          [-99.23511, 26.4476],
+          [-98.01091, 25.9928],
+          [-97.43502, 25.8266],
+          [-96.95553, 25.98216],
+          [-96.80617, 27.79782],
+          [-95.55633, 28.58761],
+          [-93.74053, 29.47421],
+          [-90.90285, 28.85645],
+          [-88.01567, 28.99443],
+          [-88.01625, 30.00389],
+          [-86.02775, 30.00475],
+          [-84.01879, 28.99618],
+          [-81.9972, 25.98268],
+          [-81.99666, 25.01349],
+          [-84.01656, 25.01258],
+          [-84.01601, 24.00527],
+          [-80.02, 24.0071],
+          [-79.89011, 26.85507],
+          [-80.02453, 32.01613],
+          [-75.41474, 35.05319],
+          [-74.02112, 39.57279],
+          [-72.00202, 40.99125],
+          [-69.87974, 40.99205],
+          [-69.84893, 43.26199],
+          [-66.94528, 44.71049],
+          [-67.75966, 47.099],
+          [-69.25051, 47.51223],
+          [-70.46149, 46.21766],
+          [-71.41227, 45.25488],
+          [-72.02225, 45.00598],
+          [-75.07988, 44.98029],
+          [-76.90231, 43.80246],
+          [-78.76239, 43.62496],
+          [-79.15798, 43.44626],
+          [-79.00601, 42.80053],
+          [-82.66248, 41.68895],
+          [-82.17616, 43.58854],
+          [-83.2814, 46.13885],
+          [-87.50645, 48.01427],
+          [-88.34922, 48.29633],
+          [-89.43531, 47.98378],
+          [-93.99811, 49.00671],
+          [-95.11054, 49.412],
+          [-96.01312, 49.00605],
+          [-123.32289, 49.00429],
+          [-123.22752, 48.18499],
+          [-124.76179, 48.41301]
+        ],
+        [
+          [-160.57876, 22.50629],
+          [-160.57822, 21.49846],
+          [-158.74706, 21.24398],
+          [-157.50832, 20.9958],
+          [-155.99619, 18.77902],
+          [-154.62178, 18.7587],
+          [-154.68902, 19.88057],
+          [-156.29276, 21.22259],
+          [-157.50474, 21.9985],
+          [-159.00937, 22.50702],
+          [-160.57876, 22.50629]
+        ],
+        [
+          [-167.1572, 68.722],
+          [-164.8554, 67.0255],
+          [-168.0022, 66.0018],
+          [-169.0087, 66.0015],
+          [-169.0075, 64.9988],
+          [-172.5143, 63.8767],
+          [-173.8197, 59.7401],
+          [-178.0001, 52.2446],
+          [-177.9993, 51.2554],
+          [-171.4689, 51.8215],
+          [-162.4025, 53.9567],
+          [-159.0076, 55.0025],
+          [-158.0191, 55.0028],
+          [-151.9963, 55.9992],
+          [-151.5003, 57.9988],
+          [-151.5013, 58.992],
+          [-138.516, 58.9953],
+          [-138.515, 57.9986],
+          [-133.9948, 54.0032],
+          [-130.0044, 54.0043],
+          [-130.0071, 57.0001],
+          [-131.9759, 56.9995],
+          [-135.123, 59.7566],
+          [-138.0072, 59.9918],
+          [-139.1716, 60.4127],
+          [-140.9874, 61.0119],
+          [-140.9684, 69.9535],
+          [-156.1769, 71.5633],
+          [-160.4136, 70.7398],
+          [-163.0218, 69.9707],
+          [-164.9717, 68.9947],
+          [-167.1572, 68.722]
+        ],
+        [
+          [-68.2, 17.8],
+          [-64.32, 17.38],
+          [-64.64, 18.36],
+          [-65.33, 18.57],
+          [-67.9, 18.67],
+          [-68.2, 17.8]
+        ],
+        [
+          [146.2, 15.4],
+          [145.7, 15.6],
+          [144.2, 13.2],
+          [144.8, 12.9],
+          [146.2, 15.4]
+        ],
+        [[179.99, 52.2], [172, 53.5], [172, 52.5], [179.99, 51], [179.99, 52.2]]
+      ],
+      "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+      "icon": "https://osmlab.github.io/editor-layer-index/sources/north-america/us/TIGER2017RoadsOverlay.png",
+      "overlay": true
+    },
+    {
       "id": "tirol.gv.at-contourlines",
       "name": "Tiris: contour lines",
       "type": "wms",
-      "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Hoehenschichtlinien 20m&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Hoehenschichtlinien_20m&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "zoomExtent": [15, 22],
       "polygon": [
@@ -59374,7 +60114,7 @@
       "id": "tirol.gv.at-DGM",
       "name": "Tiris: DGM (Terrain model)",
       "type": "wms",
-      "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Image Schummerung_Gelaendemodell&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Image_Schummerung_Gelaendemodell&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -59617,7 +60357,7 @@
       "id": "tirol.gv.at-DOM",
       "name": "Tiris: DOM (Surface model)",
       "type": "wms",
-      "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Image Schummerung_Oberflaechenmodell&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "https://gis.tirol.gv.at/arcgis/services/Service_Public/terrain/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Image_Schummerung_Oberflaechenmodell&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -61232,6 +61972,78 @@
       "terms_text": "ToulouseMetropole"
     },
     {
+      "id": "Toulouse-Orthophotoplan-2017",
+      "name": "Toulouse - Orthophotoplan 2017",
+      "type": "wms",
+      "template": "https://wms.plan.toulouse.fr/geocache/wms?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortho2017&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "projection": "EPSG:3857",
+      "endDate": "2017-01-01T00:00:00.000Z",
+      "startDate": "2017-01-01T00:00:00.000Z",
+      "zoomExtent": [0, 22],
+      "polygon": [
+        [
+          [1.11351, 43.68676],
+          [1.13518, 43.68708],
+          [1.13489, 43.69835],
+          [1.17829, 43.69903],
+          [1.17799, 43.71028],
+          [1.19966, 43.71061],
+          [1.19934, 43.72187],
+          [1.24274, 43.72253],
+          [1.24243, 43.73375],
+          [1.26415, 43.73409],
+          [1.26383, 43.74536],
+          [1.28553, 43.74565],
+          [1.28525, 43.75693],
+          [1.30692, 43.75723],
+          [1.30664, 43.76848],
+          [1.32834, 43.76879],
+          [1.32808, 43.78003],
+          [1.43673, 43.78158],
+          [1.43731, 43.7591],
+          [1.45901, 43.75937],
+          [1.45933, 43.74815],
+          [1.48103, 43.7484],
+          [1.48133, 43.73718],
+          [1.50303, 43.73741],
+          [1.50359, 43.71497],
+          [1.52531, 43.71518],
+          [1.52561, 43.70401],
+          [1.54727, 43.70426],
+          [1.54757, 43.69304],
+          [1.5692, 43.69329],
+          [1.56957, 43.68203],
+          [1.5912, 43.68227],
+          [1.59174, 43.6598],
+          [1.61342, 43.66003],
+          [1.61372, 43.64883],
+          [1.63538, 43.64908],
+          [1.63841, 43.51407],
+          [1.29216, 43.50947],
+          [1.29186, 43.5207],
+          [1.27021, 43.5204],
+          [1.26988, 43.53164],
+          [1.24823, 43.53133],
+          [1.2476, 43.55378],
+          [1.22596, 43.55349],
+          [1.22568, 43.56472],
+          [1.20398, 43.56442],
+          [1.20331, 43.5869],
+          [1.18162, 43.58656],
+          [1.18102, 43.60904],
+          [1.15928, 43.60869],
+          [1.15896, 43.61995],
+          [1.13726, 43.61962],
+          [1.13659, 43.64209],
+          [1.11491, 43.64176],
+          [1.11351, 43.68676]
+        ]
+      ],
+      "terms_url": "https://wiki.openstreetmap.org/wiki/Toulouse/ToulouseMetropoleData",
+      "terms_text": "ToulouseMetropole",
+      "best": true
+    },
+    {
       "id": "Tours-Orthophoto-2008_2010",
       "name": "Tours - Orthophotos 2008-2010",
       "type": "tms",
@@ -62336,7 +63148,7 @@
       "id": "uniao_dos_palmares",
       "name": "União dos Palmares AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Uniao%20dos%20Palmares&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Uniao%20dos%20Palmares&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -62380,8 +63192,8 @@
           [-35.97725, -9.20752]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "URBIS2009",
@@ -62849,6 +63661,84 @@
         ]
       ],
       "terms_text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB",
+      "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/be/URBIS2015aerialimagery.png"
+    },
+    {
+      "id": "UrbISOrtho2018",
+      "name": "UrbIS-Ortho 2018",
+      "type": "wms",
+      "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=Urbis:Ortho2018&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
+      "projection": "EPSG:3857",
+      "endDate": "2018-01-01T00:00:00.000Z",
+      "startDate": "2018-01-01T00:00:00.000Z",
+      "polygon": [
+        [
+          [4.37973, 50.76382],
+          [4.38917, 50.76377],
+          [4.43028, 50.77517],
+          [4.435, 50.775],
+          [4.46427, 50.78645],
+          [4.4817, 50.79134],
+          [4.48238, 50.79617],
+          [4.45921, 50.80626],
+          [4.45947, 50.81661],
+          [4.47972, 50.82036],
+          [4.46959, 50.83537],
+          [4.46899, 50.84573],
+          [4.46238, 50.85396],
+          [4.44968, 50.85591],
+          [4.44599, 50.85992],
+          [4.4253, 50.86615],
+          [4.43183, 50.87628],
+          [4.44007, 50.87845],
+          [4.43106, 50.89014],
+          [4.43595, 50.89502],
+          [4.4296, 50.90103],
+          [4.41655, 50.90757],
+          [4.41543, 50.91342],
+          [4.39578, 50.91407],
+          [4.38462, 50.91093],
+          [4.38119, 50.90319],
+          [4.3726, 50.90032],
+          [4.36213, 50.9033],
+          [4.34857, 50.90341],
+          [4.34025, 50.90411],
+          [4.32892, 50.90249],
+          [4.31647, 50.89605],
+          [4.30634, 50.89274],
+          [4.29004, 50.88982],
+          [4.29149, 50.88495],
+          [4.29553, 50.88262],
+          [4.29561, 50.88094],
+          [4.28274, 50.87227],
+          [4.27699, 50.86713],
+          [4.27802, 50.85911],
+          [4.28042, 50.85721],
+          [4.28094, 50.84215],
+          [4.27193, 50.84036],
+          [4.25467, 50.83695],
+          [4.25107, 50.83288],
+          [4.25227, 50.82697],
+          [4.24343, 50.82182],
+          [4.24403, 50.81548],
+          [4.25519, 50.8151],
+          [4.25802, 50.80935],
+          [4.27218, 50.81011],
+          [4.27579, 50.80696],
+          [4.2854, 50.80506],
+          [4.28901, 50.80691],
+          [4.29802, 50.80593],
+          [4.30282, 50.79709],
+          [4.31458, 50.79454],
+          [4.31621, 50.78624],
+          [4.32952, 50.77381],
+          [4.34205, 50.77164],
+          [4.34522, 50.77337],
+          [4.37853, 50.76811],
+          [4.37973, 50.76382]
+        ]
+      ],
+      "terms_text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB",
       "best": true,
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/be/URBIS2015aerialimagery.png"
     },
@@ -63217,10 +64107,10 @@
       "icon": "https://osmlab.github.io/editor-layer-index/sources/europe/be/URBIS2015aerialimagery.png"
     },
     {
-      "id": "USGS-Large_Scale",
-      "name": "USGS Large Scale Imagery",
+      "id": "USGS-Imagery",
+      "name": "USGS Imagery",
       "type": "tms",
-      "template": "http://{switch:a,b,c}.tile.openstreetmap.us/usgs_large_scale/{zoom}/{x}/{y}.jpg",
+      "template": "https://ags-proxy.openstreetmap.us/tiles/{zoom}/{x}/{y}?url=https%3A%2F%2Fbasemap.nationalmap.gov%2Farcgis%2Frest%2Fservices%2FUSGSImageryOnly%2FMapServer",
       "zoomExtent": [12, 20],
       "polygon": [
         [
@@ -64278,6 +65168,7 @@
           [-82.94071, 24.75359]
         ]
       ],
+      "description": "Public domain aerial imagery, mostly NAIP",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/north-america/us/USGSTopographicMaps.png"
     },
     {
@@ -64521,7 +65412,7 @@
       "id": "vicosa_al",
       "name": "Viçosa AL",
       "type": "wms",
-      "template": "http://geo.seplande.al.gov.br/teogc/terraogcwms.cgi?LAYERS=Vicosa&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+      "template": "http://geoserver.dados.al.gov.br:8080/geoserver/Alagoas/ows?LAYERS=Vicosa&SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.0&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
       "projection": "EPSG:3857",
       "polygon": [
         [
@@ -64574,8 +65465,8 @@
           [-36.198, -9.42067]
         ]
       ],
-      "terms_url": "http://www.seplande.al.gov.br",
-      "terms_text": "Secretaria de Estado do Planejamento e Desenvolvimento Econômico"
+      "terms_url": "http://www.seplag.al.gov.br",
+      "terms_text": "Secretaria de Estado do Planejamento, Gestão e Patrimônio"
     },
     {
       "id": "wien.gv.at-labels",
@@ -64860,9 +65751,9 @@
     },
     {
       "id": "VGIN-BuildingFootprints_WM",
-      "name": "Virginia Building Footprint Map Service",
+      "name": "Virginia Building Footprints",
       "type": "tms",
-      "template": "https://gismaps.vita.virginia.gov/arcgis/rest/services/VA_Base_layers/VA_Building_Footprints/MapServer/tile/{zoom}/{y}/{x}",
+      "template": "http://tileify-ags.herokuapp.com/tiles/{zoom}/{x}/{y}?url=https%3A%2F%2Fgismaps.vita.virginia.gov%2Farcgis%2Frest%2Fservices%2FVA_Base_layers%2FVA_Building_Footprints%2FMapServer&transparent=true&layers=show%3A20",
       "endDate": "2018-06-01T00:00:00.000Z",
       "startDate": "2015-05-01T00:00:00.000Z",
       "zoomExtent": [0, 20],
@@ -64954,9 +65845,9 @@
     },
     {
       "id": "VGIN-Imagery_WM",
-      "name": "Virginia Imagery Service - Most Recent, WGS Web Mercator (VBMP)",
+      "name": "Virginia Imagery Service - Most Recent",
       "type": "tms",
-      "template": "https://gismaps.vita.virginia.gov/arcgis/rest/services/MostRecentImagery/MostRecentImagery_WGS/MapServer/tile/{zoom}/{y}/{x}",
+      "template": "http://tileify-ags.herokuapp.com/tiles/{zoom}/{x}/{y}?url=https%3A%2F%2Fgismaps.vita.virginia.gov%2Farcgis%2Frest%2Fservices%2FMostRecentImagery%2FMostRecentImagery_WGS%2FMapServer&transparent=true&layers=show%3A0",
       "endDate": "2018-08-01T00:00:00.000Z",
       "startDate": "2013-04-01T00:00:00.000Z",
       "zoomExtent": [0, 20],
@@ -65047,9 +65938,9 @@
     },
     {
       "id": "VGIN-PropertyLines_WM",
-      "name": "Virginia Tax Parcels Map Service",
+      "name": "Virginia Property Lines",
       "type": "tms",
-      "template": "https://gismaps.vita.virginia.gov/arcgis/rest/services/VA_Base_layers/VA_Parcels/MapServer/tile/{zoom}/{y}/{x}",
+      "template": "http://tileify-ags.herokuapp.com/tiles/{zoom}/{x}/{y}?url=http%3A%2F%2Fgismaps.vita.virginia.gov%2Farcgis%2Frest%2Fservices%2FVA_Base_layers%2FVA_Parcels%2FMapServer&transparent=true",
       "endDate": "2018-06-01T00:00:00.000Z",
       "startDate": "2015-05-01T00:00:00.000Z",
       "zoomExtent": [0, 20],

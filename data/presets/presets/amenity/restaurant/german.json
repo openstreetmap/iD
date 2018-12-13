@@ -1,0 +1,43 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "cuisine",
+        "address",
+        "building_area",
+        "opening_hours",
+        "capacity",
+        "takeaway",
+        "delivery",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "german"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "german"
+    },
+    "name": "German Restaurant"
+}

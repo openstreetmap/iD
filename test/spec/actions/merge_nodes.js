@@ -60,14 +60,14 @@ describe('iD.actionMergeNodes', function () {
     it('merges two isolated nodes, merging tags, and averaging loc of both interesting nodes', function() {
         var graph = iD.coreGraph([
             iD.osmNode({ id: 'a', loc: [0, -2], tags: { highway: 'traffic_signals' } }),
-            iD.osmNode({ id: 'b', loc: [0,  2], tags: { crossing: 'zebra' } })
+            iD.osmNode({ id: 'b', loc: [0,  2], tags: { crossing: 'marked' } })
         ]);
         graph = iD.actionMergeNodes(['a', 'b'])(graph);
 
         expect(graph.hasEntity('a')).to.be.undefined;
 
         var survivor = graph.hasEntity('b');
-        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'zebra' }, 'merge all tags');
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
         expect(survivor.loc).to.eql([0, 0], 'average loc of both interesting nodes');
     });
 

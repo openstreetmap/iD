@@ -217,8 +217,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        var enabled = svgMapillaryImages.enabled,
-            service = getService();
+        var enabled = svgMapillaryImages.enabled;
+        var service = getService();
 
         layer = selection.selectAll('.layer-mapillary-images')
             .data(service ? [0] : []);

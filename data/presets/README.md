@@ -17,9 +17,16 @@ A basic preset is of the form:
 {
     // The icon in iD which represents this feature.
     "icon": "maki-park",
-    // An array of field names. See the fields documentation for details of what's valid here.
+    // The names of fields that will appear by default in the editor sidebar.
+    // See the fields documentation for details of what's valid here.
     "fields": [
         "address"
+    ],
+    // The names of fields that the user can add manually. These will also
+    // appear if the corresponding tags are present.
+    "moreFields": [
+        "phone",
+        "website"
     ],
     // The geometry types for which this preset is valid.
     // options are point, area, line, and vertex.
@@ -210,6 +217,21 @@ the user can not type their own value, they must choose one of the given values.
 If a combo field does not specify `options` or `strings`, the field will fetch
 common tag values from the Taginfo service to use as dropdown values.
 
+##### `snake_case`
+
+For combo fields, spaces are replaced with underscores in the tag value if `snake_case` is `true`. The default is `true`.
+
+##### `caseSensitive`
+
+For combo fields, case-sensitve field values are allowed if `caseSensitive` is `true`. The default is `false`.
+
+##### `min_value`
+
+For number fields, the lowest valid value. There is no default.
+
+##### `max_value`
+
+For number fields, the greatest valid value. There is no default.
 
 ## Icons
 

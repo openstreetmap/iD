@@ -5,8 +5,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
@@ -16,6 +14,7 @@ import { utilDetect } from '../util/detect';
 
 import {
     utilEntityOrMemberSelector,
+    utilKeybinding,
     utilRebind,
     utilWrap
 } from '../util';
@@ -23,7 +22,7 @@ import {
 
 export function uiConflicts(context) {
     var dispatch = d3_dispatch('cancel', 'save');
-    var keybinding = d3_keybinding('conflicts');
+    var keybinding = utilKeybinding('conflicts');
     var _origChanges;
     var _conflictList;
 
@@ -35,7 +34,7 @@ export function uiConflicts(context) {
 
     function keybindingOff() {
         d3_select(document)
-            .call(keybinding.off);
+            .call(keybinding.unbind);
     }
 
     function tryAgain() {

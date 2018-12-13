@@ -3,7 +3,9 @@
     "fields": [
         "name",
         "ref_route",
-        "network_road"
+        "network_road",
+        "to", 
+        "from"
     ],
     "geometry": [
         "relation"

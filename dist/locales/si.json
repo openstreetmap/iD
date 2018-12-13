@@ -112,14 +112,6 @@
             "delete_member": {
                 "annotation": "සාමාජිකයෙක් සම්බන්දතාවයෙන් ඉවත් කරන ලදී."
             },
-            "connect": {
-                "annotation": {
-                    "point": "මාර්ගය ලක්ෂයකට සම්බන්දකරන් ලදී.",
-                    "vertex": "මාර්ගය වෙනත් මාර්ගයකට සම්බන්දකරන් ලදී",
-                    "line": "මාර්ගය රෙකාවකට සම්බන්දකරන් ලදී",
-                    "area": "මාර්ගය ප්‍රදේශයකට සම්බන්දකරන් ලදී"
-                }
-            },
             "disconnect": {
                 "title": "විසන්ධි කරන්න",
                 "description": "මෙම රේකා/ප්‍රදේශයන් එකිනෙකින් වෙන් කරන්න",
@@ -193,7 +185,6 @@
         "tooltip_keyhint": "කෙටි මාර්ග",
         "translate": {
             "translate": "පරිවර්තනය",
-            "localized_translation_label": "බහු භාශා නාමය",
             "localized_translation_language": "භාෂාවක් තෝරාගන්න",
             "localized_translation_name": "නම"
         },

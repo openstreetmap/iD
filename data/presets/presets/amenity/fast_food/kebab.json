@@ -1,0 +1,44 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "takeaway",
+        "delivery",
+        "drive_through",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "kebab"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "kebab"
+    },
+    "name": "Kebab Fast Food"
+}

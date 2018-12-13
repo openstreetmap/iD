@@ -1,11 +1,16 @@
 /* photo viewer div */
 #photoviewer {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
+    left: 10px;
     width: 330px;
     height: 250px;
     padding: 5px;
     background-color: #fff;
+}
+[dir='rtl'] #photoviewer {
+    left: auto;
+    right: 10px;
 }
 
 @media screen and (min-width: 1600px) {
@@ -345,4 +350,3 @@ label.streetside-hires {
     background: rgba(0,0,0,0.85);
     color: #fff;
 }
-

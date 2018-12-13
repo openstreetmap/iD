@@ -2,18 +2,11 @@ import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
 import _map from 'lodash-es/map';
 
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { event as d3_event } from 'd3-selection';
 import { uiCmd } from '../ui';
 
 
 export function behaviorCopy(context) {
-    var keybinding = d3_keybinding('copy');
-
 
     function groupEntities(ids, graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
@@ -47,8 +40,15 @@ export function behaviorCopy(context) {
     }
 
 
+    function getSelectionText() {
+        return window.getSelection().toString();
+    }
+
+
     function doCopy() {
-        if (!getSelectionText()) d3_event.preventDefault();
+        if (!getSelectionText()) {
+            d3_event.preventDefault();
+        }
 
         var graph = context.graph();
         var selected = groupEntities(context.selectedIDs(), graph);
@@ -82,20 +82,15 @@ export function behaviorCopy(context) {
     }
 
 
-    function copy() {
-        keybinding.on(uiCmd('⌘C'), doCopy);
-        d3_select(document).call(keybinding);
-        return copy;
+    function behavior() {
+        context.keybinding().on(uiCmd('⌘C'), doCopy);
+        return behavior;
     }
 
-    function getSelectionText() {
-        return window.getSelection().toString();
-    }
-
-    copy.off = function() {
-        d3_select(document).call(keybinding.off);
+    behavior.off = function() {
+        context.keybinding().off(uiCmd('⌘C'));
     };
 
 
-    return copy;
+    return behavior;
 }

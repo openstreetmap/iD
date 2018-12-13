@@ -5,7 +5,8 @@ describe('iD.uiRawTagEditor', function() {
         taglist = iD.uiRawTagEditor(context)
             .entityID(entity.id)
             .preset({isFallback: function() { return false; }})
-            .tags(tags);
+            .tags(tags)
+            .expanded(true);
 
         element = d3.select('body')
             .append('div')

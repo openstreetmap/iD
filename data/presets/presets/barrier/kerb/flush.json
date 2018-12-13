@@ -1,0 +1,25 @@
+{
+    "icon": "maki-wheelchair",
+    "fields": [
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "barrier": "kerb",
+        "kerb": "flush"
+    },
+    "reference": {
+        "key": "kerb",
+        "value": "flush"
+    },
+    "terms": [
+        "even curb",
+        "level curb",
+        "tactile curb"
+    ],
+    "name": "Flush Curb"
+}

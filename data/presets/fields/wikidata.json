@@ -1,0 +1,7 @@
+{
+    "key": "wikidata",
+    "type": "wikidata",
+    "icon": "wikipedia",
+    "universal": true,
+    "label": "Wikidata"
+}

@@ -1,7 +1,11 @@
 {
     "icon": "temaki-diamond",
+    "fields": [
+        "surface"
+    ],
     "geometry": [
-        "vertex"
+        "vertex",
+        "area"
     ],
     "terms": [
         "circle",

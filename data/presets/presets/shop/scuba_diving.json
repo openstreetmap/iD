@@ -6,11 +6,16 @@
         "address",
         "building_area",
         "opening_hours",
-        "payment_multi"
+        "payment_multi",
+        "scuba_diving"
     ],
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "diving",
+        "scuba"
     ],
     "tags": {
         "shop": "scuba_diving"

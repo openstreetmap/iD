@@ -6,7 +6,7 @@ export function svgTagClasses() {
     var primaries = [
         'building', 'highway', 'railway', 'waterway', 'aeroway',
         'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-        'leisure', 'military', 'place', 'man_made'
+        'leisure', 'military', 'place', 'man_made', 'route', 'attraction'
     ];
     var statuses = [
         'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
@@ -15,7 +15,7 @@ export function svgTagClasses() {
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
-        'public_transport'
+        'public_transport', 'location', 'parking'
     ];
     var tagClassRe = /^tag-/;
     var _tags = function(entity) { return entity.tags; };
@@ -86,7 +86,7 @@ export function svgTagClasses() {
             }
 
             // For highways, look for surface tagging..
-            if (primary === 'highway') {
+            if (primary === 'highway' || primary === 'aeroway') {
                 var paved = (t.highway !== 'track');
                 for (k in t) {
                     v = t[k];

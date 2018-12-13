@@ -1,9 +1,14 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
+import {
+    select as d3_select,
+    event as d3_event
+} from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { services } from '../../services';
+import { tooltip } from '../../util/tooltip';
+
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -22,34 +27,56 @@ export {
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var nominatim = services.geocoder;
-    var input;
-    var entity;
+    var input = d3_select(null);
+    var _entity;
+    var _brandTip;
+
+    if (field.id === 'brand') {
+        _brandTip = tooltip()
+            .title(t('inspector.lock.suggestion', { label: field.label }))
+            .placement('bottom');
+    }
 
 
     function i(selection) {
-        var fieldId = 'preset-input-' + field.safeid;
+        var preset = _entity && context.presets().match(_entity, context.graph());
+        var isSuggestion = preset && preset.suggestion && field.id === 'brand';
 
-        input = selection.selectAll('input')
+        var wrap = selection.selectAll('.form-field-input-wrap')
+            .data([0]);
+
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
+            .merge(wrap);
+
+        var fieldID = 'preset-input-' + field.safeid;
+
+        input = wrap.selectAll('input')
             .data([0]);
 
         input = input.enter()
             .append('input')
             .attr('type', field.type)
-            .attr('id', fieldId)
+            .attr('id', fieldID)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
+            .classed(field.type, true)
             .call(utilNoAuto)
             .merge(input);
 
         input
+            .classed('disabled', !!isSuggestion)
+            .attr('readonly', isSuggestion || null)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
 
-        if (field.type === 'tel' && nominatim && entity) {
-            var center = entity.extent(context.graph()).center();
+
+        if (field.type === 'tel' && nominatim && _entity) {
+            var center = _entity.extent(context.graph()).center();
             nominatim.countryCode(center, function (err, countryCode) {
                 if (err || !dataPhoneFormats[countryCode]) return;
-                selection.selectAll('#' + fieldId)
+                wrap.selectAll('#' + fieldID)
                     .attr('placeholder', dataPhoneFormats[countryCode]);
             });
 
@@ -58,42 +85,42 @@ export function uiFieldText(field, context) {
 
             input.attr('type', 'text');
 
-            var spinControl = selection.selectAll('.spin-control')
-                .data([0]);
+            var buttons = wrap.selectAll('.increment, .decrement')
+                .data(rtl ? [1, -1] : [-1, 1]);
 
-            var enter = spinControl.enter()
-                .append('div')
-                .attr('class', 'spin-control');
-
-            enter
+            buttons.enter()
                 .append('button')
-                .datum(rtl ? 1 : -1)
-                .attr('class', rtl ? 'increment' : 'decrement')
-                .attr('tabindex', -1);
-
-            enter
-                .append('button')
-                .datum(rtl ? -1 : 1)
-                .attr('class', rtl ? 'decrement' : 'increment')
-                .attr('tabindex', -1);
-
-            spinControl = spinControl
-                .merge(enter);
-
-            spinControl.selectAll('button')
+                .attr('tabindex', -1)
+                .attr('class', function(d) {
+                    var which = (d === 1 ? 'increment' : 'decrement');
+                    return 'form-field-button ' + which;
+                })
+                .merge(buttons)
                 .on('click', function(d) {
                     d3_event.preventDefault();
-                    input.node().value = parsed(input.node().value) + d;
+                    var vals = input.node().value.split(';');
+                    vals = vals.map(function(v) {
+                        var num = parseFloat(v.trim(), 10);
+                        return isFinite(num) ? clamped(num + d) : v.trim();
+                    });
+                    input.node().value = vals.join(';');
                     change()();
                 });
+
+        } else if (preset && field.id === 'brand') {
+            var pTag = preset.id.split('/', 2);
+            var pKey = pTag[0];
+            if (isSuggestion) {
+                // A "suggestion" preset (brand name)
+                // Put suggestion keys in `field.keys` so delete button can remove them all.
+                field.keys = Object.keys(preset.removeTags)
+                    .filter(function(k) { return k !== pKey && k !== 'name'; });
+            }
+
+            wrap.call(isSuggestion ? _brandTip : _brandTip.destroy);
         }
     }
 
-
-    // parse as a number
-    function parsed(val) {
-        return parseFloat(val || 0, 10) || 0;
-    }
 
     // clamp number to min/max
     function clamped(num) {
@@ -114,7 +141,12 @@ export function uiFieldText(field, context) {
 
             if (!onInput) {
                 if (field.type === 'number' && val !== undefined) {
-                    val = clamped(parsed(val)) + '';
+                    var vals = val.split(';');
+                    vals = vals.map(function(v) {
+                        var num = parseFloat(v.trim(), 10);
+                        return isFinite(num) ? clamped(num) : v.trim();
+                    });
+                    val = vals.join(';');
                 }
                 utilGetSetValue(input, val || '');
             }
@@ -124,9 +156,9 @@ export function uiFieldText(field, context) {
     }
 
 
-    i.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+    i.entity = function(val) {
+        if (!arguments.length) return _entity;
+        _entity = val;
         return i;
     };
 
