@@ -5248,6 +5248,10 @@
                     "name": "Residential Area",
                     "terms": ""
                 },
+                "landuse/residential/apartments": {
+                    "name": "Apartment Complex",
+                    "terms": "flat,residence,tenement"
+                },
                 "landuse/retail": {
                     "name": "Retail Area",
                     "terms": ""

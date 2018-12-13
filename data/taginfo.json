@@ -3425,6 +3425,13 @@
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
     {
+      "key": "residential",
+      "value": "apartments",
+      "description": "🄿 Apartment Complex",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
+    },
+    {
       "key": "landuse",
       "value": "retail",
       "description": "🄿 Retail Area",
