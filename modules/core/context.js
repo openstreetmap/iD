@@ -21,7 +21,8 @@ import { rendererBackground, rendererFeatures, rendererMap } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
-import { utilCallWhenIdle, utilKeybinding, utilRebind } from '../util';
+import { utilCallWhenIdle, utilKeybinding, utilRebind, utilStringQs } from '../util';
+
 
 
 export var areaKeys = {};
@@ -441,16 +442,16 @@ export function coreContext() {
     }
 
     /* Presets */
-    var presets;
     presets = presetIndex();
-    if (utilExternalPresets()) {
+    if (utilStringQs(window.location.hash).presets) {
         presets.fromExternal();
     } else {
         presets.init();
     }
+ 
     context.presets = function() { return presets; };
     
-    if (utilExternalValidationRules()) {
+    if (utilStringQs(window.location.hash).validations) {
         var validationsUrl = utilStringQs(window.location.hash).validations;
         d3_json(validationsUrl, function (err, mapcss) {
             if (err) return;

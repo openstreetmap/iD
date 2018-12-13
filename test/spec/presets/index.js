@@ -110,6 +110,7 @@ describe('iD.presetIndex', function() {
                     geometry: ['point', 'area']
                 }
             }
+
         };
 
         it('whitelists keys for presets with area geometry', function() {
@@ -156,50 +157,48 @@ describe('iD.presetIndex', function() {
         });
     });
 
-    describe('#overwrite', function() {
-        it('overwrites iD presets with provided list of presets', function() {
-            var testPresets = {
-                presets: {
-                    'amenity/fuel/shell': {
-                        tags: { 'amenity': 'fuel' },
-                        geometry: ['point','area'],
-                        suggestion: true
-                    },
-                    'highway/foo': {
-                        tags: { 'highway': 'foo' },
-                        geometry: ['area']
-                    },
-                    'leisure/track': {
-                        tags: { 'leisure': 'track' },
-                        geometry: ['line', 'area']
-                    },
-                    'natural': {
-                        tags: { 'natural': '*' },
-                        geometry: ['point', 'vertex', 'area']
-                    },
-                    'natural/peak': {
-                        tags: { 'natural': 'peak' },
-                        geometry: ['point', 'vertex']
-                    },
-                    'natural/tree_row': {
-                        tags: { 'natural': 'tree_row' },
-                        geometry: ['line']
-                    },
-                    'natural/wood': {
-                        tags: { 'natural': 'wood' },
-                        geometry: ['point', 'area']
-                    }
-                }
-            };
-            var currentPresets = iD.Context().presets();
-            var overwrittenPresets = iD.Context().presets().overwrite(testPresets);
-            expect(currentPresets).to.not.eql(overwrittenPresets);
-        });
-    });
-
     describe('#build', function () {
         it('builds presets from provided', function() {
+            var surfShop = iD.Node({ tags: { amenity: 'shop', 'shop:type': 'surf' }}),
+                graph = iD.Graph([surfShop]),
+                presets = iD.Context().presets(),
+                morePresets = {
+                    presets: {
+                        'amenity/shop/surf': {
+                            tags: { amenity: 'shop', 'shop:type': 'surf' },
+                            geometry: ['point', 'area']
+                        }
+                    }
+                };
 
+            expect(presets.match(surfShop, graph)).to.eql(undefined); // no surfshop preset yet...
+            presets.build(morePresets, true);
+            expect(presets.match(surfShop, graph).addTags).to.eql({amenity: 'shop', 'shop:type': 'surf' });
+        });
+        it('configures presets\' initial visibility', function() {
+            var surfShop = iD.Node({ tags: { amenity: 'shop', 'shop:type': 'surf' }}),    
+                firstStreetJetty = iD.Node({ tags: { man_made: 'jetty' }}),
+                entities = [surfShop, firstStreetJetty],
+                graph = iD.Graph(entities),
+                presets = iD.Context().presets(),
+                morePresets = {
+                    presets: {
+                        'amenity/shop/surf': {
+                            tags: { amenity: 'shop', 'shop:type': 'surf' },
+                            geometry: ['point', 'area']
+                        },
+                        'man_made/jetty': {
+                            tags: { man_made: 'jetty' },
+                            geometry: [ 'point' ]
+                        }
+                    }
+                };
+
+            presets.build(morePresets, false);
+            entities.forEach(function(entity) {
+                var preset = presets.match(entity, graph);
+                expect(preset.visible()).to.be.false;
+            });
         });
     });
      

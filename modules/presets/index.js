@@ -3,18 +3,14 @@ import _forEach from 'lodash-es/forEach';
 import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
 
+import { json as d3_json } from 'd3-request';
+
 import { data } from '../../data/index';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilStringQs } from '../util';
-
-import { json as d3_json } from 'd3-request';
-import { 
-    select as d3_select,
-    selectAll as d3_selectAll 
-} from 'd3-selection';
+import { utilQsString } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -27,7 +23,7 @@ export function presetIndex() {
     // loading new data and returning defaults
 
     var all = presetCollection([]);
-    var _defaults = {};
+    var _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
     var _fields = {};
     var _universal = [];
     var _recent = presetCollection([]);
@@ -123,10 +119,11 @@ export function presetIndex() {
                 areaKeys[key][value] = true;
             }
         });
+
         return areaKeys;
     };
 
-    all.build = function (d, visible) {
+    all.build = function(d, visibility) {
         if (d.fields) {
             _forEach(d.fields, function(d, id) {
                 _fields[id] = presetField(id, d);
@@ -142,7 +139,7 @@ export function presetIndex() {
 
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                all.collection.push(presetPreset(id, d, _fields, visible));
+                all.collection.push(presetPreset(id, d, _fields, visibility));
             });
         }
 
@@ -154,16 +151,13 @@ export function presetIndex() {
 
         if (d.defaults) {
             var getItem = _bind(all.item, all);
-            _forEach(Object.keys(d.defaults), function (k) {
-                _defaults[k] = presetCollection(d.defaults[k].map(getItem));
-            });
-            // _defaults = {
-            //     area: presetCollection(d.defaults.area.map(getItem)),
-            //     line: presetCollection(d.defaults.line.map(getItem)),
-            //     point: presetCollection(d.defaults.point.map(getItem)),
-            //     vertex: presetCollection(d.defaults.vertex.map(getItem)),
-            //     relation: presetCollection(d.defaults.relation.map(getItem))
-            // };
+            _defaults = {
+                area: presetCollection(d.defaults.area.map(getItem)),
+                line: presetCollection(d.defaults.line.map(getItem)),
+                point: presetCollection(d.defaults.point.map(getItem)),
+                vertex: presetCollection(d.defaults.vertex.map(getItem)),
+                relation: presetCollection(d.defaults.relation.map(getItem))
+            };
         }
 
         for (var i = 0; i < all.collection.length; i++) {
@@ -177,22 +171,30 @@ export function presetIndex() {
                 }
             }
         }
-
-    };
-
-    all.fromExternal = function() {
-        var presetsUrl = utilStringQs(window.location.hash).presets;
-        d3_json(presetsUrl, function(err, presets) {
-            if (err) all.init();
-            all.build(presets, true);
-            all.build(data.presets, false);
-            all.areaKeys();
-        });
-        return all;
     };
 
     all.init = function() {
-		all.build(data.presets, true);
+        all.collection = [];
+        _recent.collection = [];
+        _fields = {};
+        _universal = [];
+        _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+
+        all.build(data.presets);
+
+        return all;
+    };
+
+    all.fromExternal = function() {
+        var external = utilQsString(window.location.hash).presets;
+        d3_json(external, function(err, presets) {
+            if (err) {
+                all.init();
+            } else {
+                all.build(data.presets, false); // make default presets hidden to begin
+                all.build(presets, true); // make the external visible
+            }
+        });
         return all;
     };
 
@@ -207,12 +209,7 @@ export function presetIndex() {
     all.defaults = function(geometry, n) {
         var rec = _recent.matchGeometry(geometry).collection.slice(0, 4);
         var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
-        var fin = _uniq(rec.concat(def).concat(all.item(geometry))).filter(function(d) { return d.visible(); });
-        return presetCollection(fin);
-    };
-
-    all.defaultTypes = function() {
-        return Object.keys(_defaults);
+        return presetCollection(_uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
     all.choose = function(preset) {
