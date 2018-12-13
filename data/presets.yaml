@@ -3179,8 +3179,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Building'', separated by commas>'
       building/apartments:
         # building=apartments
-        name: Apartments
-        terms: '<translate with synonyms or related terms for ''Apartments'', separated by commas>'
+        name: Apartment Building
+        terms: '<translate with synonyms or related terms for ''Apartment Building'', separated by commas>'
       building/barn:
         # building=barn
         name: Barn

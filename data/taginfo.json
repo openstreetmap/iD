@@ -1727,7 +1727,7 @@
     {
       "key": "building",
       "value": "apartments",
-      "description": "🄿 Apartments",
+      "description": "🄿 Apartment Building",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },

@@ -254,7 +254,7 @@
     "building/bunker": {"fields": ["name", "address", "levels", "height"], "geometry": ["area"], "tags": {"building": "bunker"}, "matchScore": 0.5, "name": "Bunker", "searchable": false},
     "building/entrance": {"icon": "maki-entrance-alt1", "geometry": ["vertex"], "tags": {"building": "entrance"}, "name": "Entrance/Exit", "searchable": false},
     "building/train_station": {"icon": "maki-building", "fields": ["name", "address", "levels", "height"], "geometry": ["point", "vertex", "area"], "tags": {"building": "train_station"}, "matchScore": 0.5, "name": "Train Station", "searchable": false},
-    "building/apartments": {"icon": "maki-building", "fields": ["name", "address", "levels", "height"], "geometry": ["area"], "tags": {"building": "apartments"}, "matchScore": 0.5, "name": "Apartments"},
+    "building/apartments": {"icon": "maki-building", "fields": ["name", "address", "levels", "height"], "geometry": ["area"], "tags": {"building": "apartments"}, "matchScore": 0.5, "name": "Apartment Building"},
     "building/barn": {"icon": "maki-farm", "fields": ["name", "address", "levels", "height"], "geometry": ["area"], "tags": {"building": "barn"}, "matchScore": 0.5, "name": "Barn"},
     "building/boathouse": {"icon": "maki-harbor", "fields": ["name", "levels", "height", "address"], "geometry": ["area"], "tags": {"building": "boathouse"}, "matchScore": 0.5, "terms": [], "name": "Boathouse"},
     "building/bungalow": {"icon": "maki-home", "fields": ["name", "address", "levels", "height"], "geometry": ["area"], "tags": {"building": "bungalow"}, "terms": ["home", "detached"], "matchScore": 0.5, "name": "Bungalow"},
