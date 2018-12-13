@@ -124,14 +124,7 @@ export function presetIndex() {
         return areaKeys;
     };
 
-    all.build = function () {
-        var d = data.presets;
-		all.collection = [];
-        _recent.collection = [];
-        _fields = {};
-        _universal = [];
-        _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-
+    all.build = function (d, visible) {
         if (d.fields) {
             _forEach(d.fields, function(d, id) {
                 _fields[id] = presetField(id, d);
@@ -143,7 +136,7 @@ export function presetIndex() {
 
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                all.collection.push(presetPreset(id, d, _fields));
+                all.collection.push(presetPreset(id, d, _fields, visible));
             });
         }
 
@@ -185,20 +178,15 @@ export function presetIndex() {
         var presetsUrl = utilStringQs(window.location.hash).presets;
         d3_json(presetsUrl, function(err, presets) {
             if (err) all.init();
-            all.overwrite(presets);
+            all.build(presets, true);
+            all.build(data.presets, false);
             all.areaKeys();
         });
         return all;
     };
 
-    all.overwrite = function (d) {
-        data.presets = d;
-        all.build();
-        return all;
-    };
-
     all.init = function() {
-		all.build();
+		all.build(data.presets, true);
         return all;
     };
 
@@ -213,7 +201,7 @@ export function presetIndex() {
     all.defaults = function(geometry, n) {
         var rec = _recent.matchGeometry(geometry).collection.slice(0, 4);
         var def = _uniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
-        var fin = _uniq(rec.concat(def).concat(all.item(geometry))).filter(function(d) { return d !== undefined; });
+        var fin = _uniq(rec.concat(def).concat(all.item(geometry))).filter(function(d) { return d.visible(); });
         return presetCollection(fin);
     };
 

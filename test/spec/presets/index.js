@@ -196,6 +196,12 @@ describe('iD.presetIndex', function() {
             expect(currentPresets).to.not.eql(overwrittenPresets);
         });
     });
+
+    describe('#build', function () {
+        it('builds presets from provided', function() {
+
+        });
+    });
      
     describe('expected matches', function() {
 
