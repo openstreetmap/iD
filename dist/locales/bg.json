@@ -2105,9 +2105,6 @@
                 "building": {
                     "name": "Сграда"
                 },
-                "building/apartments": {
-                    "name": "Жилищен блок"
-                },
                 "building/house": {
                     "name": "Къща"
                 },

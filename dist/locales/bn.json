@@ -872,9 +872,6 @@
                 "building": {
                     "name": "দালান"
                 },
-                "building/apartments": {
-                    "name": "এপার্টমেন্ট"
-                },
                 "building/commercial": {
                     "name": "বানিজ্যিক ভবন"
                 },

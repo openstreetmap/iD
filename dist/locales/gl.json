@@ -15,7 +15,7 @@
             },
             "add_line": {
                 "title": "Liña",
-                "description": "Engadir estradas, rúas, camiños, canais ou outras liñas ao mapa.",
+                "description": "Engadir estradas, rúas, camiños, canais ou outras liñas ó mapa.",
                 "tail": "Fai clic no mapa para comezar a debuxar unha estrada, camiño ou rota."
             },
             "add_point": {
@@ -384,7 +384,7 @@
             "title": "Subir a OpenStreetMap",
             "upload_explanation": "As mudanzas que subas serán visíbeis en tódolos mapas que empreguen os datos do OpenStreetMap.",
             "upload_explanation_with_user": "As mudanzas que subas coma {user} serán visíbeis en tódolos mapas que empreguen os datos do OpenStreetMap.",
-            "request_review": "Gustaríame que alguén revisase as miñas edicións.",
+            "request_review": "Gostaríame que alguén revisase as miñas edicións.",
             "save": "Subir",
             "cancel": "Desbotar",
             "changes": "{count} Mudanzas",
@@ -425,7 +425,7 @@
                 "selected": "{n} seleccionados",
                 "no_history": "Sen historial (elemento novo)",
                 "version": "Versión",
-                "last_edit": "Derradeira edición",
+                "last_edit": "Última edición",
                 "edited_by": "Editado por",
                 "changeset": "Conxunto de mudanzas",
                 "unknown": "Descoñecido",
@@ -525,13 +525,13 @@
             "key": "B",
             "backgrounds": "Fondos",
             "none": "Ningún",
-            "best_imagery": "Mellor fonte de imaxes coñecida deste sitio",
+            "best_imagery": "A mellor fonte de imaxes coñecida desta localización",
             "switch": "Voltar a este fondo",
             "custom": "Personalizado",
             "overlays": "Sobreposicións",
-            "imagery_source_faq": "Información das imaxes/Informar dun problema",
+            "imagery_source_faq": "Información das imaxes / Informar dun problema",
             "reset": "reiniciar",
-            "display_options": "Opcións de visualización",
+            "display_options": "Opcións da visualización",
             "brightness": "Brilo",
             "contrast": "Contraste",
             "saturation": "Saturación",
@@ -541,7 +541,7 @@
                 "tooltip": "Amosar un mapa reducido para facilitares a localización da área que se estea a mostrar. ",
                 "key": "/"
             },
-            "fix_misalignment": "Axustar desprazamento da imaxe",
+            "fix_misalignment": "Axustar desprazamento das imaxes",
             "offset": "Arrastre en calquera parte da área gris de embaixo para axusta-lo desprazamento das imaxes ou insira os valores do desprazamento en metros."
         },
         "map_data": {
@@ -622,7 +622,7 @@
         "area_fill": {
             "wireframe": {
                 "description": "Sen recheo (molde)",
-                "tooltip": "Estase a activa-lo modo sen recheo, faise máis sinxelo ve-la imaxe do fondo. ",
+                "tooltip": "Activando o modo en grella faise máis doado ve-las imaxes do fondo. ",
                 "key": "W"
             },
             "partial": {
@@ -759,15 +759,15 @@
         "cannot_zoom": "Non se pode afastar máis no modo actual.",
         "full_screen": "Pasar a pantalla completa",
         "streetside": {
-            "tooltip": "Imaxes Streetside de Microsoft",
-            "title": "Sobreposición de imaxes (Bing Streetside)",
+            "tooltip": "Imaxes Streetside do Microsoft",
+            "title": "Sobreposición das imaxes (Bing Streetside)",
             "report": "Informar dun problema de privacidade con esta imaxe",
             "view_on_bing": "Ollar no Bing Maps",
             "hires": "Alta resolución"
         },
         "mapillary_images": {
             "tooltip": "Imaxes ó nivel da rúa do Mapillary",
-            "title": "Sobreposición de imaxes (Mapillary)"
+            "title": "Sobreposición das imaxes (Mapillary)"
         },
         "mapillary_signs": {
             "tooltip": "Sinais de tráfico do Mapillary (debes activa-la sobreposición de imaxes)",
@@ -778,7 +778,7 @@
         },
         "openstreetcam_images": {
             "tooltip": "Imaxes ó nivel da rúa do OpenStreetCam",
-            "title": "Sobreposición de imaxes (OpenStreetCam)"
+            "title": "Sobreposición das imaxes (OpenStreetCam)"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Ollar esta imaxe no OpenStreetCam"
@@ -836,7 +836,7 @@
             "editing": {
                 "title": "Editar e gardar",
                 "select_h": "Seleccionar",
-                "select_left_click": "{leftclick} Faga clic co botón esquerdo nun elemento para seleccionalo. Isto resaltarao cun brilo pestanexante, e a barra lateral amosará os detalles sobre ese elemento, coma o seu nome oo enderezo.",
+                "select_left_click": "{leftclick} Faga clic co botón esquerdo nun elemento para seleccionalo. Isto resaltarao cun brilo pestanexante, e a lapela lateral amosará os detalles sobre ese elemento, coma o seu nome ou enderezo.",
                 "select_right_click": "{rightclick} Faga clic co botón dereito nun elemento para amosa-lo menú da edición que amosa as ordes ou comandos dispoñíbeis, coma rotar, mover e eliminar.",
                 "multiselect_h": "Selección múltiple",
                 "multiselect_shift_click": "`{shift}`+{leftclick} clic esquerdo para seleccionar varios elementos xuntos. Isto fai que sexa máis doado mover ou eliminar varios elementos.",
@@ -959,12 +959,12 @@
                 "save_note": "Debe garda-las edicións de notas de xeito individual premendo nos botóns que se atopan debaixo dos comentarios da nota. As edicións de nota **non** se inclúen nos conxuntos de mudanzas que se soben ó OpenStreetMap."
             },
             "imagery": {
-                "title": "Imaxe do fondo",
+                "title": "Imaxes do fondo",
                 "intro": "As imaxes do fondo que aparecen embaixo dos datos do mapa son un recurso importante para o cartografado. Estas imaxes poden ser imaxes aéreas recompiladas de satélites, avións e avións non tripulados ou drons, ou poden escanearse mapas históricos ou outros datos de orixe dispoñíbeis libremente.",
                 "sources_h": "Fontes de imaxes",
                 "choosing": "Para ollar que fontes de imaxes están dispoñíbeis para editar, prema no botón {layers} **Axustes do fondo** no costado do mapa.",
                 "sources": "De xeito predeterminado, escóllese a capa de satélite [Bing Maps](https://www.bing.com/maps/) coma imaxe do fondo. Dependendo de onde esté editando, outras fontes de imaxes estarán dispoñíbeis. Algunhas poden ser máis recentes ou ter unha resolución máis alta, polo que sempre é útil verificar que capa é a mellor para empregar coma referenza do cartografado.",
-                "offsets_h": "Axustar a desviación da imaxe",
+                "offsets_h": "Axusta-lo desprazamento das imaxes",
                 "offset": "As imaxes ás veces están lixeiramente desprazadas con respecto ós datos precisos do mapa. Se olla unha grande cantidade de estradas ou edificios desprazados das imaxes do fondo, pode ser que as imaxes sexan incorrectas, polo que non as mova para que coincidan co fondo. No seu lugar, pode axusta-lo fondo para que coincida cos datos existentes ó expandi-la lapela \"Axustar desprazamento das imaxes\" na beira de embaixo da lapela dos Axustes do fondo.",
                 "offset_change": "Prema nos triángulos pequenos para axusta-lo desprazamento das imaxes en pequenos anacos, ou manteña premido o botón esquerdo do rato e arrastre dentro do cadrado gris para esborrexe-las imaxes cara a aliñación."
             },
@@ -992,8 +992,8 @@
                         "title": "Acerca de",
                         "about": "Este campo permíteche inspeccionar e modificar restricións de xiro. Amosa un modelo do cruzamento escollido, incluíndo outras estradas conectadas próximas.",
                         "from_via_to": "Unha restrición de xiro sempre contén: unha **vía DENDE**, unha **vía CARA A** e un **nó A TRAVÉS DE** ou unha ou varias **vías A TRAVÉS DE**.",
-                        "maxdist": "A barra de desprazamento \"{distField}\" controla até onde se vai procurar por máis estradas conectadas.",
-                        "maxvia": "A barra de desprazamento \"{viaField}\" axusta cantas vías intermedias poden ser incluídas na procura. (Consello: canto máis sinxelo, mellor)"
+                        "maxdist": "Os controis do desprazamento \"{distField}\" controla até onde se vai procurar por máis estradas conectadas.",
+                        "maxvia": "Os controis do desprazamento \"{viaField}\" axusta cantas vías intermedias poden ser incluídas na procura. (Consello: canto máis sinxelo, mellor)"
                     },
                     "inspecting": {
                         "title": "Inspeccionar",
@@ -1317,10 +1317,10 @@
                     "keyboard": "Amosar atallos do teclado"
                 },
                 "display_options": {
-                    "title": "Opcións de visualización",
+                    "title": "Opcións da visualización",
                     "background": "Amosar opcións do fondo",
-                    "background_switch": "Voltar a trocar ó derradeiro fondo",
-                    "map_data": "Amosar opcións de datos do mapa",
+                    "background_switch": "Voltar a trocar ó último fondo",
+                    "map_data": "Amosa-las opcións de datos do mapa",
                     "fullscreen": "Entrar no modo de pantalla completa",
                     "sidebar": "Agochar ou amosar lapela lateral",
                     "wireframe": "Alternar a modo rede de arame",
@@ -1378,8 +1378,8 @@
                     "title": "Ordes ou comandos",
                     "copy": "Copiar elementos seleccionados",
                     "paste": "Pegar elementos seleccionados",
-                    "undo": "Desfacer derradeira acción",
-                    "redo": "Refacer derradeira acción",
+                    "undo": "Desfacer última acción",
+                    "redo": "Refacer última acción",
                     "save": "Garda-las mudanzas"
                 }
             },
@@ -1759,7 +1759,7 @@
                     "label": "Tipo"
                 },
                 "crane/type": {
-                    "label": "Tipo de grúa"
+                    "label": "Tipo de guindastre"
                 },
                 "crop": {
                     "label": "Cultivos"
@@ -2457,7 +2457,7 @@
                     "placeholder": "1-18"
                 },
                 "ref_highway_junction": {
-                    "label": "Número de cruce"
+                    "label": "Número de cruzamento"
                 },
                 "ref_platform": {
                     "label": "Número de plataforma"
@@ -2584,10 +2584,10 @@
                         "bad": "Rodas robustas: bicicleta de montaña, coche, carro",
                         "excellent": "Rodas pequenas: patíns, skate",
                         "good": "Rodas estreitas: bicicleta de carreira",
-                        "horrible": "Off-Road: vehículo todoterreo pesado",
+                        "horrible": "Todo terreo: vehículo todo terreo pesado",
                         "impassable": "Intransitábel: ningún vehículo con rodas",
                         "intermediate": "Rodas normais: bicicleta de paseo, cadeiras de rodas, scooters",
-                        "very_bad": "Maior altura: vehículo todoterreo lixeiro",
+                        "very_bad": "Maior altura: vehículo todo terreo lixeiro",
                         "very_horrible": "Off-road especializado: tractor, ATV"
                     },
                     "placeholder": "Patíns, rodas, off-Road ..."
@@ -2620,7 +2620,7 @@
                     "label": "Data de inicio"
                 },
                 "step_count": {
-                    "label": "Número de escaleiras"
+                    "label": "Número de chanzos"
                 },
                 "stop": {
                     "label": "Tipo de Stop",
@@ -2677,7 +2677,7 @@
                     }
                 },
                 "surveillance/zone": {
-                    "label": "Zona de Vixilancia"
+                    "label": "Zona de vixiancia"
                 },
                 "switch": {
                     "label": "Tipo"
@@ -2753,7 +2753,7 @@
                 "trail_visibility": {
                     "label": "Visibilidade do sendeiro",
                     "options": {
-                        "bad": "Mal: sen marcas, camiño ás veces invisíbel/sen acceso",
+                        "bad": "Mao: sen marcas, camiño ás veces invisíbel/sen acceso",
                         "excellent": "Excelente: camiño sen ambigüidades ou marcadores en todas partes",
                         "good": "Ben: marcadores visíbeis, ás veces, esixen procura",
                         "horrible": "Horríbel: moitas veces sen camiños, son necesarias algunhas habilidades de orientación",
@@ -3141,7 +3141,7 @@
                     "terms": "ciber, internet, ordenador"
                 },
                 "amenity/kindergarten": {
-                    "name": "Zona de Preescolar/Xardín de Infancia",
+                    "name": "Zona de gardería ou xardín de infancia",
                     "terms": "preescolar, xardín de infancia, guardería, infantil, párvulos"
                 },
                 "amenity/language_school": {
@@ -3272,7 +3272,7 @@
                     "name": "Eliminación de WC de caravanas"
                 },
                 "amenity/school": {
-                    "name": "Terreo escolar",
+                    "name": "Zona escolar",
                     "terms": "escola, colexio, instituto, educación, ensinanza, primaria, secundaria, ESO, bacharelato"
                 },
                 "amenity/scrapyard": {
@@ -3534,10 +3534,6 @@
                 "building": {
                     "name": "Edificio",
                     "terms": "edificio, casa, inmóbel, vivenda, inmoble"
-                },
-                "building/apartments": {
-                    "name": "Apartamentos",
-                    "terms": "apartamento, piso, vivenda, aloxamento"
                 },
                 "building/barn": {
                     "name": "Celeiro/Hórreo",
@@ -3934,6 +3930,20 @@
                     "name": "Corredor interior",
                     "terms": "corredor, pasillo"
                 },
+                "highway/crossing/marked": {
+                    "name": "Paso de peóns marcado",
+                    "terms": "cebra, paso de cebra, cruzamento marcado, paso de peóns, cruzamento de peóns"
+                },
+                "highway/crossing/marked-raised": {
+                    "name": "Paso de peóns marcado (Levantado)",
+                    "terms": "paso de cebra, cruzamento marcado, paso de peóns, lombo de burro, lombada, velocidade, calmador, redutor"
+                },
+                "highway/crossing/zebra": {
+                    "name": "Paso de peóns marcado"
+                },
+                "highway/crossing/zebra-raised": {
+                    "name": "Paso de peóns marcado (Levantado)"
+                },
                 "highway/cycleway": {
                     "name": "Senda ciclista"
                 },
@@ -3944,14 +3954,28 @@
                 "highway/footway": {
                     "name": "Senda peonil"
                 },
+                "highway/footway/marked": {
+                    "name": "Paso de peóns marcado",
+                    "terms": "cebra, paso de cebra, cruzamento marcado, paso de peóns, cruzamento de peóns"
+                },
+                "highway/footway/marked-raised": {
+                    "name": "Paso de peóns marcado (Levantado)",
+                    "terms": "paso de cebra, cruzamento marcado, paso de peóns, lombo de burro, lombada, velocidade, calmador, redutor"
+                },
                 "highway/footway/sidewalk": {
                     "name": "Beirarrúa"
+                },
+                "highway/footway/zebra": {
+                    "name": "Paso de peóns marcado"
+                },
+                "highway/footway/zebra-raised": {
+                    "name": "Paso de peóns marcado (Levantado)"
                 },
                 "highway/give_way": {
                     "name": "Ceda o paso"
                 },
                 "highway/living_street": {
-                    "name": "Rúa residencial"
+                    "name": "Rúa residencial ou semipeonil"
                 },
                 "highway/mini_roundabout": {
                     "name": "Mini rotonda"
@@ -3976,7 +4000,7 @@
                 },
                 "highway/pedestrian_line": {
                     "name": "Rúa peonil",
-                    "terms": "rúa peonil, rúa de peóns, calle peatonal"
+                    "terms": "peón, peon, peonil, rúa peonil, rúa de peóns, pasarela"
                 },
                 "highway/primary": {
                     "name": "Estrada primaria",
@@ -4030,7 +4054,7 @@
                     "name": "Rádar de velocidade"
                 },
                 "highway/steps": {
-                    "name": "Escaleiras"
+                    "name": "Escadas"
                 },
                 "highway/stop": {
                     "name": "Sinal de Stop"
@@ -4135,7 +4159,7 @@
                     "name": "Zona de oficinas"
                 },
                 "landuse/construction": {
-                    "name": "Zona en construción"
+                    "name": "Zona baixo construción"
                 },
                 "landuse/farm": {
                     "name": "Terra de cultivo"
@@ -4258,7 +4282,7 @@
                     "name": "Birlos"
                 },
                 "leisure/common": {
-                    "name": "Terreo comunal"
+                    "name": "Zona comunal"
                 },
                 "leisure/dance": {
                     "name": "Sala de baile"
@@ -4267,8 +4291,8 @@
                     "name": "Escola de danza"
                 },
                 "leisure/dog_park": {
-                    "name": "Parque canino",
-                    "terms": "parque, can, canino, perro"
+                    "name": "Parque para cans",
+                    "terms": "parque, can, cans, canino"
                 },
                 "leisure/firepit": {
                     "name": "Fogueira"
@@ -4526,8 +4550,8 @@
                     "name": "Natural"
                 },
                 "natural/bare_rock": {
-                    "name": "Área rochosa",
-                    "terms": "rochas, pedras, zona rochosa, área rochosa, rocha nua, rocha exposta"
+                    "name": "Rocha núa",
+                    "terms": "rochas, pedras, zona rochosa, área rochosa, rocha núa, rocha exposta"
                 },
                 "natural/bay": {
                     "name": "Baía",
@@ -4543,8 +4567,8 @@
                     "name": "Cantil"
                 },
                 "natural/coastline": {
-                    "name": "Liña de costa",
-                    "terms": "liña de costa, costa, litoral, ribeira"
+                    "name": "Beiramar",
+                    "terms": "liña de costa, costa, litoral, ribeira, beiramar"
                 },
                 "natural/fell": {
                     "name": "Zonas de montaña"
@@ -4564,14 +4588,14 @@
                     "name": "Barro"
                 },
                 "natural/peak": {
-                    "name": "Cume",
-                    "terms": "pico, cume, montaña, monte, cúspide"
+                    "name": "Cumio",
+                    "terms": "pico, cumio, cume, montaña, monte, cúspide"
                 },
                 "natural/reef": {
                     "name": "Arrecife"
                 },
                 "natural/ridge": {
-                    "name": "Cume"
+                    "name": "Crista"
                 },
                 "natural/saddle": {
                     "name": "Paso de montaña",
@@ -4891,7 +4915,7 @@
                     "name": "Parada de Buffer"
                 },
                 "railway/crossing": {
-                    "name": "Cruce Ferroviario (Camiño)"
+                    "name": "Cruzamento ferroviario (camiño)"
                 },
                 "railway/derail": {
                     "name": "Derailer Ferroviario"
@@ -4904,7 +4928,7 @@
                 },
                 "railway/level_crossing": {
                     "name": "Paso a nivel (estrada)",
-                    "terms": "paso a nivel, cruce ferroviario, paso ferroviario, cruce a nivel"
+                    "terms": "paso a nivel, cruzamento ferroviario, paso ferroviario, cruzamento a nivel"
                 },
                 "railway/milestone": {
                     "name": "Fito de Vía"
@@ -5511,7 +5535,7 @@
                     "name": "Liña do ferri"
                 },
                 "type/route/foot": {
-                    "name": "Rúa a pé"
+                    "name": "Roteiro a pé"
                 },
                 "type/route/hiking": {
                     "name": "Roteiro de sendeirismo"
@@ -5603,8 +5627,8 @@
         },
         "imagery": {
             "Bing": {
-                "description": "Imaxe satélite e aérea.",
-                "name": "Imaxe aérea do Bing"
+                "description": "Imaxes satelitais e aéreas.",
+                "name": "Imaxes aéreas do Bing"
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
@@ -5616,8 +5640,8 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Límites das imaxes e datas de captura. As etiquetas xorden a un nivel de zoom de 13 e superior.",
-                "name": "Antigüidade das imaxes do DigitalGlobe Premium"
+                "description": "Límites das imaxes e datas de captura. As etiquetas xorden nun nivel do achegamento de 13 e superior.",
+                "name": "Imaxes antigas do DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
@@ -5629,8 +5653,8 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Límites das imaxes e datas de captura. As etiquetas xorden a un nivel de zoom de 13 e superior.",
-                "name": "Antigüidade das imaxes do DigitalGlobe Standard"
+                "description": "Límites das imaxes e datas de captura. As etiquetas xorden  nun nivel do achegamento de 13 e superior.",
+                "name": "Imaxes antigas do DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -5657,7 +5681,7 @@
                 "attribution": {
                     "text": "Termos e comentarios"
                 },
-                "description": "Imaxes satélite e aéreas.",
+                "description": "Imaxes satelitais e aéreas.",
                 "name": "Mapbox Satélite"
             },
             "OSM_Inspector-Addresses": {
@@ -5899,13 +5923,16 @@
                 "name": "Facebook do OpenStreetMap Latinoamérica",
                 "description": "OpenStreetMap Latinoamérica no Facebook"
             },
+            "OSM-Discord": {
+                "description": "Póñase en contacto con outros cartógrafos a través do Discord"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap no Facebook",
                 "description": "Dános un Góstame no Facebook para ver novas e actualizacións sobre o OpenStreetMap"
             },
             "OSM-help": {
                 "name": "Axuda de OpenStreetMap",
-                "description": "Fai unha pregunta e obtén respostas no sitio de preguntas e respostas de OSM xestionado pola comunidade."
+                "description": "Fai unha pregunta e obtén respostas no sitio de cuestións e respostas xestionado pola comunidade do OSM."
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap no Reddit",
@@ -5913,15 +5940,15 @@
             },
             "OSM-Telegram": {
                 "name": "Telegram do OpenStreetMap",
-                "description": "Únete no Telegram ao supergrupo global do OpenStreetMap en {url}"
+                "description": "Únete no Telegram ó supergrupo global do OpenStreetMap en {url}"
             },
             "OSM-Twitter": {
                 "name": "Twitter do OpenStreetMap",
-                "description": "Síguenos no Twitter en {url}"
+                "description": "Séguenos no Twitter en {url}"
             },
             "OSMF": {
                 "name": "Fundación OpenStreetMap",
-                "description": "OSMF é unha organización sen ánimo de lucro establecida no Reino Unido que dá soporte ó proxecto do OpenStreetMap"
+                "description": "OSMF é unha organización sen ánimo de lucro estabelecida no Reino Unido que apoia ó proxecto do OpenStreetMap"
             }
         }
     }

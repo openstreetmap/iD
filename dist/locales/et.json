@@ -1858,9 +1858,6 @@
                     "name": "Hoone",
                     "terms": "ehitis"
                 },
-                "building/apartments": {
-                    "name": "Korterid"
-                },
                 "building/barn": {
                     "name": "Küün",
                     "terms": "Tall, laut"

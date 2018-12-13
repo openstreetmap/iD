@@ -64,7 +64,7 @@
                 "title": "Fortsetzen",
                 "description": "Diese Linie fortsetzen.",
                 "not_eligible": "Hier kann keine Linie fortgesetzt werden.",
-                "multiple": "Hier können mehrere Linien fortgesetzt werden. Um eine Linie auszuwählen, halte die Shift-Taste gedrückt und klicke die Linie an.",
+                "multiple": "Hier können mehrere Linien fortgesetzt werden. Um eine Linie zu wählen, halte die Shift-Taste gedrückt und klicke die Linie an.",
                 "annotation": {
                     "line": "Linie fortgesetzt.",
                     "area": "Fläche fortgesetzt."
@@ -506,6 +506,7 @@
             "all_members": "Alle Mitglieder",
             "all_relations": "Alle Relationen",
             "new_relation": "Neue Relation …",
+            "choose_relation": "Wähle eine Relation",
             "role": "Rolle",
             "choose": "Objekttyp auswählen",
             "results": "{n} Ergebnisse für {search}",
@@ -858,11 +859,11 @@
             "editing": {
                 "title": "Bearbeiten & Speichern",
                 "select_h": "Auswählen",
-                "select_left_click": "{leftclick} Klicke auf ein Objekt um es auszuwählen. Dadurch wird es mit einem pulsierenden Schimmer hervorgehoben und in der Seitenleiste werden Details des Objekts wie Name oder Adresse angezeigt.",
+                "select_left_click": "{leftclick} Klicke auf ein Objekt um es auszuwählen. Dadurch wird es mit einem pulsierenden Leuchten hervorgehoben und in der Seitenleiste werden Details des Objekts wie Name oder Adresse angezeigt.",
                 "select_right_click": "{rightclick} Rechtsklicke auf ein Objekt um das *Bearbeitungs-Menü* zu sehen, welches dir die verfügbaren Befehle wie Drehen, Bewegen oder Löschen zeigt.",
                 "multiselect_h": "Mehrfachauswahl",
                 "multiselect_shift_click": "`{shift}`+{leftclick} Klicken kann mehrere Objekte gemeinsam auswählen. Damit können diese leicht gemeinsam verschoben, gedreht oder gelöscht werden.",
-                "multiselect_lasso": "Eine andere Möglichkeit mehrere Objekte gemeinsam auszuwählen ist die `{shift}` Taste zu halten, dann die {leftclick} linke Maustaste festzuhalten und mit der Maus ein Auswahl-Lasso um die Objekte zu ziehen. Alle Punkte innerhalb des Auswahl-Lasso werden ausgewählt.",
+                "multiselect_lasso": "Eine andere Möglichkeit mehrere Objekte gemeinsam auszuwählen ist die `{shift}` Taste zu halten, dann die {leftclick} linke Maustaste festzuhalten und mit der Maus ein Auswahl-Lasso um die Objekte zu ziehen. Alle Punkte innerhalb des Lasso werden ausgewählt.",
                 "undo_redo_h": "Rückgängig & Wiederherstellen",
                 "undo_redo": "Deine Bearbeitungen werden lokal in deinem Web Browser gespeichert bis du diese auf dem OpenStreetMap Server speicherst. Du kannst Bearbeitungen durch Klicken des {undo} **Rückgängig** Knopf rückgängig machen und durch Klicken des {redo} **Wiederherstellen** Knopf wiederherstellen.",
                 "save_h": "Speichern",
@@ -880,12 +881,12 @@
                 "intro": "Der *Objekteditor* erscheint links neben der Karte und ermöglicht dir alle Informationen des ausgewählten Objekts zu sehen und zu bearbeiten.",
                 "definitions": "Im oberen Bereich wird der Objekttyp angezeigt. Der mittlere Bereich enthält die *Felder* mit den Merkmalen des Objektes wie Name oder Adresse.",
                 "type_h": "Objekttyp",
-                "type": "Du kannst auf den Objekttyp klicken um dem Objekt einem anderen Typ zu geben. Alles in der echten Welt kann als ein Objekt in OpenStreetMap abgebildet werden, daher kannst du aus tausenden Objekttypen wählen.",
+                "type": "Du kannst auf den Objekttyp klicken um dem Objekt einem anderen Typ zu geben. Alles in der echten Welt kann zu OpenStreetMap hinzugefügt werden, daher kannst du aus tausenden Objekttypen wählen.",
                 "type_picker": "Die Typauswahl zeigt die am häufigsten genutzten Objekttypen wie Park, Spital, Restaurant, Straße oder Gebäude. Du kannst durch Tippen in dem Suchfeld nach dem gewünschten Objekttyp suchen oder das {inspect} **Info** Symbol neben dem Objekttyp klicken um nähere Informationen zu bekommen.",
                 "fields_h": "Felder",
                 "fields_all_fields": "Der Bereich \"Alle Felder\" enthält alle Objektdetails die du bearbeiten kannst. In OpenStreetMap sind alle Felder optional und es ist okay ein Feld leer zu lassen, wenn du unsicher bist.",
                 "fields_example": "Für jeden Objekttyp werden unterschiedliche Felder angezeigt. So können für eine Straße Felder für Oberfläche und Geschwindigkeitsbeschränkung und für ein Restaurant Felder für die angebotene Küche und die Öffnungszeiten angezeigt werden.",
-                "fields_add_field": "Du kannst auch auf \"Feld hinzufügen\" klicken und weitere Felder aus der Dropdown-Liste hinzufügen, beispielsweise Beschreibung, Wikipedia Link, Rollstuhlzugänglichkeit und viele mehr.",
+                "fields_add_field": "Du kannst auch auf \"Feld hinzufügen\" klicken und Felder aus der Dropdown-Liste hinzufügen, beispielsweise Beschreibung, Wikipedia Link oder Rollstuhlzugänglichkeit.",
                 "tags_h": "Eigenschaften",
                 "tags_all_tags": "Unter den Feldern kannst du den Bereich \"Alle Eigenschaften\" aufklappen und alle OpenStreetMap *Eigenschaften* des ausgewählten Objekts bearbeiten. Jede Eigenschaft besteht aus einem *Schlüssel* und einem *Wert*, damit werden alle in OpenStreetMap gespeicherten Objekte beschrieben.",
                 "tags_resources": "Das Bearbeiten der Eigenschaften von Objekten erfordert detailliertes Wissen über OpenStreetMap. Um mehr über akzeptierte Eigenschaften zu erfahren solltest du dich im [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) oder bei [Taginfo](https://taginfo.openstreetmap.org/) informieren."
@@ -949,7 +950,7 @@
                 "intro": "Eine *Relation* ist ein spezieller Objekttyp in OpenStreetMap, der andere Objekte zusammenfasst. Die Objekte, die zu einer Relation gehören werden *Mitglieder* genannt und jedes Mitglied kann eine *Rolle* in der Relation haben.",
                 "edit_relation_h": "Relationen bearbeiten",
                 "edit_relation": "Unten im Objekteditor kannst du den Bereich \"Alle Relationen\" aufklappen und sehen, ob das ausgewählte Objekt Mitglied in einer oder mehrere Relationen ist. Du kannst auf eine Relation klicken, um sie auszuwählen und zu bearbeiten.",
-                "edit_relation_add": "Um ein Objekt zu einer Relation hinzuzufügen wählst du das Objekt aus, dann klickst du den {plus} Knopf im Bereich \"Alle Relationen\" im Objekteditor. Du kannst in der Liste eine Relation in der Nähe oder \"Neue Relation ...\" auswählen.",
+                "edit_relation_add": "Um ein Objekt zu einer Relation hinzuzufügen wählst du das Objekt aus, dann klickst du den {plus} Knopf im Bereich \"Alle Relationen\" im Objekteditor. Du kannst in der Liste eine Relation in der Nähe oder \"Neue Relation ...\" wählen.",
                 "edit_relation_delete": "Du kannst auch auf den {delete} **Löschen** Knopf klicken, um das ausgewählte Objekt aus der Relationen zu entfernen. Wenn du alle Mitglieder einer Relation entfernst, wird die Relation automatisch gelöscht.",
                 "maintain_relation_h": "Relationen erhalten",
                 "maintain_relation": "Normalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Du solltest aufpassen, wenn du Objekte austauschst, die Mitglieder von Relationen sein können. Wenn du beispielsweise einen Straßenabschnitt löschst und einen neuen Straßenabschnitt zeichnest, um ihn zu ersetzen, solltest du den neuen Straßenabschnitt denselben Relationen (Routen, Abbiegebeschränkungen usw.) zuweisen, in denen der gelöschte Straßenabschnitt war.",
@@ -1192,7 +1193,7 @@
                 "points_lines_areas": "Objekte werden auf der Karte als Punkte, Linien oder Flächen dargestellt.",
                 "nodes_ways": "In OpenStreetMap werden Punkte manchmal *Knoten* genannt, Linien und Flächen werden manchmal *Wege* genannt.",
                 "click_townhall": "Alle Objekte auf der Karte können durch Klicken ausgewählt werden. **Klicke auf den Punkt um ihn zu auszuwählen.**",
-                "selected_townhall": "Sehr gut! Der Punkt ist jetzt ausgewählt. Ausgewählte Objekte werden mit einem pulsierenden Schimmer angezeigt.",
+                "selected_townhall": "Sehr gut! Der Punkt ist jetzt ausgewählt. Ausgewählte Objekte werden mit einem pulsierenden Leuchten angezeigt.",
                 "editor_townhall": "Wenn ein Objekt ausgewählt ist wird der *Objekteditor* neben der Karte angezeigt.",
                 "preset_townhall": "Der obere Teil des Objekteditors zeigt den Typ des Objekts. Dieser Punkt ist ein {preset}.",
                 "fields_townhall": "Der mittlere Bereich des Objekteditors enthält *Felder* mit den Merkmalen des Objektes wie Name oder Adresse.",
@@ -1243,7 +1244,7 @@
                 "continue_line": "Setze das Zeichnen der Linie für die neue Straße fort. Du kannst die Karte zoomen und ziehen, wenn das notwendig ist.{br}Wenn du fertig bist klicke nochmals auf den letzten Knoten. **Beende das Zeichnen der Straße.**",
                 "choose_category_road": "**Wähle {category} aus der Liste.**",
                 "choose_preset_residential": "Es gibt viele verschiedene Typen von Straßen, diese ist eine Ortsstraße. **Wähle {preset}.**",
-                "retry_preset_residential": "Du hast nicht {preset} ausgewählt. **Klicke hier um erneut zu wählen.**",
+                "retry_preset_residential": "Du hast nicht {preset} gewählt. **Klicke hier um erneut zu wählen.**",
                 "name_road": "**Gib dieser Straße einen Namen, dann drücke Escape oder Enter oder klicke auf den {button} Knopf um den Objekteditor zu schließen.**",
                 "did_name_road": "Sieht gut aus! Jetzt wirst du lernen, wie du die Form einer Linie verbessern kannst.",
                 "update_line": "Manchmal musst du die Form einer bestehenden Linie ändern. Hier ist eine Straße, die nicht ganz richtig aussieht.",
@@ -1356,11 +1357,11 @@
                     "search": "Finde Objekte die zum Suchtext passen"
                 },
                 "with_selected": {
-                    "title": "Mit gewähltem Objekt",
+                    "title": "Mit ausgewähltem Objekt",
                     "edit_menu": "Bearbeitungs-Menü ein-/ausblenden"
                 },
                 "vertex_selected": {
-                    "title": "Mit gewähltem Knoten",
+                    "title": "Mit ausgewähltem Knoten",
                     "previous": "Vorheriger Knoten ",
                     "next": "Nächster Knoten",
                     "first": "Erster Knoten",
@@ -1440,8 +1441,8 @@
             "coordinate_pair": "{latitude}, {longitude}"
         },
         "wikidata": {
-            "identifier": "Bezeichnung",
-            "label": "bezeichnen",
+            "identifier": "Kennung",
+            "label": "Bezeichnung",
             "description": "Beschreibung"
         },
         "presets": {
@@ -1651,6 +1652,9 @@
                     "label": "Rückenlehne"
                 },
                 "barrier": {
+                    "label": "Typ"
+                },
+                "basin": {
                     "label": "Typ"
                 },
                 "bath/open_air": {
@@ -2174,6 +2178,9 @@
                 },
                 "intermittent": {
                     "label": "Periodisch"
+                },
+                "intermittent_yes": {
+                    "label": "Zeitweise ausgetrockneter Wasserlauf"
                 },
                 "internet_access": {
                     "label": "Internetzugang",
@@ -4145,7 +4152,7 @@
                 },
                 "building/apartments": {
                     "name": "Mehrfamilienhaus",
-                    "terms": "Wohnung"
+                    "terms": "Mehrfamilienhaus, Großes Wohnhaus"
                 },
                 "building/barn": {
                     "name": "Scheune",
@@ -5181,6 +5188,10 @@
                     "name": "Wohngebiet",
                     "terms": "Wohngebiet, Wohngegend, Wohnregion, Siedlungsfläche, Ortslage, Siedlungsraum"
                 },
+                "landuse/residential/apartments": {
+                    "name": "Wohnsiedlung",
+                    "terms": "Wohnsiedlung, Wohnkomplex"
+                },
                 "landuse/retail": {
                     "name": "Einzelhandel",
                     "terms": "Einzelhandelsgebiet, Einzelhandelsfläche, Geschäfte"
@@ -6095,8 +6106,8 @@
                     "terms": "Atomreaktor, Atomkraftwerk, Atomspaltungskraftwerk, Atomfusionskraftwerk"
                 },
                 "power/generator/source/wind": {
-                    "name": "Wind Turbine",
-                    "terms": "Wind Turbine"
+                    "name": "Windkraftanlage",
+                    "terms": "Windkraftanlage, Windturbine, Windgenerator, Windmühle, Windenergieanlage"
                 },
                 "power/line": {
                     "name": "Stromleitung-Hochspannung",

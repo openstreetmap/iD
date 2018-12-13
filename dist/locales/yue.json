@@ -1982,10 +1982,6 @@
                     "name": "屋宇",
                     "terms": "Building,屋宇,建築物"
                 },
-                "building/apartments": {
-                    "name": "公寓",
-                    "terms": "Apartments,公寓,分層屋宇"
-                },
                 "building/commercial": {
                     "name": "商業樓宇",
                     "terms": "Commercial Building,商業建築物,商業樓宇"

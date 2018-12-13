@@ -386,9 +386,6 @@
                 "building": {
                     "name": "އިމާރާތް"
                 },
-                "building/apartments": {
-                    "name": "އެޕާރޓްމަންޓްތައް"
-                },
                 "building/commercial": {
                     "name": "ވިިޔަފާރި ޢިމާރާތްތައް"
                 },

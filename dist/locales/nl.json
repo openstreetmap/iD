@@ -5,7 +5,9 @@
             "information": "info",
             "remove": "verwijder",
             "undo": "ongedaan maken",
-            "zoom_to": "Zoon naar"
+            "zoom_to": "Zoon naar",
+            "copy": "Kopiëer",
+            "open_wikidata": "open op wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -153,6 +155,22 @@
                 "annotation": "Een element is uit een relatie verwijderd."
             },
             "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Weg aan punt verbonden.",
+                        "to_vertex": "Weg aan andere weg verbonden.",
+                        "to_line": "Weg aan een lijn  verbonden.",
+                        "to_area": "Weg aan vlak verbonden.",
+                        "to_adjacent_vertex": "Aangrenzende punten in een weg samengevoegd.",
+                        "to_sibling_vertex": "Weg aan zichzelf verbonden."
+                    },
+                    "from_point": {
+                        "to_point": "Punt met een ander punt samengevoegd.",
+                        "to_vertex": "Punt met een punt in een weg samengevoegd.",
+                        "to_line": "Punt verplaatst naar een lijn.",
+                        "to_area": "Punt verplaatst naar een vlak."
+                    }
+                },
                 "relation": "Deze objecten kunnen niet verbonden worden omdat ze andere rollen in een relatie hebben.",
                 "restriction": "Deze objecten kunnen niet verbonden worden omdat dat een \"{relation}\"-relatie zou beschadigen."
             },
@@ -368,7 +386,8 @@
         "report_a_bug": "Meld een bug",
         "help_translate": "Help vertalen",
         "sidebar": {
-            "key": "`"
+            "key": "`",
+            "tooltip": "Open het zijpaneel."
         },
         "feature_info": {
             "hidden_warning": "{count} verborgen objecten",
@@ -517,7 +536,10 @@
             "way": "Weg",
             "relation": "Relatie",
             "location": "Locatie",
-            "add_fields": "Voeg eigenschap toe:"
+            "add_fields": "Voeg eigenschap toe:",
+            "lock": {
+                "suggestion": "Het \"{label}\" veld is vergrendeld omdat er een Wikidata tag bestaat. Je kunt het verwijderen of bewerken in de \"All tags\" sectie."
+            }
         },
         "background": {
             "title": "Achtergrond",
@@ -559,6 +581,8 @@
                     "title": "Kaartopmerkingen van OpenStreetMap"
                 },
                 "custom": {
+                    "tooltip": "Sleeps een databestand op de pagina of klik op de knop om te starten",
+                    "title": "Custom kaartdata",
                     "zoom": "Zoom in op data"
                 }
             },
@@ -633,13 +657,24 @@
             }
         },
         "settings": {
+            "custom_background": {
+                "tooltip": "Bewerk custom achtergrond",
+                "header": "Custom Achtergrondinstellingen",
+                "instructions": "Geef een tegel-URL-sjabloon op. Geldige placeholders zijn:\n   - {zoom}/{z}, {x}, {y} voor het Z/X/Y-schema\n   - {-y} of {ty} voor omgekeerde Y-coördinaten in TMS-stijl\n   - {u} voor het quadtile-schema\n   - {switch:a,b,c} voor DNS-server-multiplexing\n\nVoorbeeld:\n{example}",
+                "template": {
+                    "placeholder": "Voer een url-sjabloon in"
+                }
+            },
             "custom_data": {
+                "tooltip": "Bewerk custom datalaag",
+                "header": "Custom kaartdata instellingen",
                 "file": {
                     "instructions": "Kies een lokaal databestand. Ondersteunde bestanden zijn:\n .gpx, .kml, .geojson, .json",
                     "label": "Blader door bestanden"
                 },
                 "or": "Of",
                 "url": {
+                    "instructions": "Voer een databestand URL of vector tile URL sjabloon in. Geldige waarden zijn:\n{zoom} of {z}, {x}, {y} voor Z/X/Y tile schema",
                     "placeholder": "Voer een url in"
                 }
             }
@@ -779,6 +814,7 @@
             "status": {
                 "opened": "geopened {when}",
                 "reopened": "heropend {when}",
+                "commented": "Gereageerd {when}",
                 "closed": "gesloten {when}"
             },
             "newComment": "Nieuwe commentaar",
@@ -1308,6 +1344,7 @@
                     "background_switch": "Naar laatstgebruikte achtergrond wisselen",
                     "map_data": "Opties voor kaartgegevens tonen",
                     "fullscreen": "Volledig scherm gebruiken",
+                    "sidebar": "Zijpaneel aan/uit",
                     "wireframe": "Wireframemodus aan/uit",
                     "minimap": "Minikaartje aan/uit"
                 },
@@ -1402,6 +1439,11 @@
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
         },
+        "wikidata": {
+            "identifier": "Identificatie",
+            "label": "Label",
+            "description": "Omschrijving"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1439,6 +1481,9 @@
                 },
                 "category-route": {
                     "name": "Routeobjecten"
+                },
+                "category-utility": {
+                    "name": "Nutsvoorziening"
                 },
                 "category-water-area": {
                     "name": "Waterobjecten"
@@ -1733,7 +1778,10 @@
                     "label": "Inhoud"
                 },
                 "conveying": {
+                    "label": "Bewegingsrichting",
                     "options": {
+                        "backward": "Achteruit",
+                        "forward": "Vooruit",
                         "reversible": "Omkeerbaar"
                     }
                 },
@@ -1959,6 +2007,9 @@
                         "wall": "Muur"
                     }
                 },
+                "fireplace": {
+                    "label": "Vuurplaats"
+                },
                 "fitness_station": {
                     "label": "Toesteltype"
                 },
@@ -1974,6 +2025,9 @@
                 },
                 "frequency": {
                     "label": "Frequentie"
+                },
+                "from": {
+                    "label": "Van"
                 },
                 "fuel": {
                     "label": "Brandstof"
@@ -2216,6 +2270,7 @@
                     "label": "Locatie",
                     "options": {
                         "indoor": "Binnen",
+                        "outdoor": "Buiten",
                         "roof": "Dak"
                     }
                 },
@@ -2391,6 +2446,9 @@
                         "underground": "Ondergronds"
                     }
                 },
+                "passenger_information_display": {
+                    "label": " Passagiersinformatiepaneel"
+                },
                 "payment_multi": {
                     "label": "Betalingsmiddelen"
                 },
@@ -2408,12 +2466,24 @@
                         "advanced": "Geavanceerd",
                         "easy": "Makkelijk",
                         "expert": "Expert",
-                        "extreme": "Extreem"
+                        "extreme": "Extreem",
+                        "freeride": "Freeride",
+                        "intermediate": "Gemiddeld",
+                        "novice": "Beginner"
                     },
                     "placeholder": "Gemakkelijk, Gemiddeld, Moeilijk, …"
                 },
                 "piste/difficulty_downhill": {
-                    "label": "Moeilijkheidsgraad"
+                    "label": "Moeilijkheidsgraad",
+                    "options": {
+                        "advanced": "Gevorderd (zwarte diamand)",
+                        "easy": "Makkelijk (groene cirkel)",
+                        "expert": "Expert (dubbele zwarte diamand)",
+                        "extreme": "Extreem (klimuitrusting vereist)",
+                        "freeride": "Freeride (niet op piste)",
+                        "intermediate": "Normaal (blauw vierkant)",
+                        "novice": "Beginner (educatief)"
+                    }
                 },
                 "piste/difficulty_nordic": {
                     "label": "Moeilijkheidsgraad"
@@ -2646,6 +2716,10 @@
                 "seasonal": {
                     "label": "Seizoensgebonden"
                 },
+                "seats": {
+                    "label": "Stoelen",
+                    "placeholder": "2, 4, 6..."
+                },
                 "second_hand": {
                     "label": "Verkoopt tweedehands",
                     "options": {
@@ -2839,6 +2913,9 @@
                     },
                     "placeholder": "Ja, Nee, Alleen afhaal, …"
                 },
+                "to": {
+                    "label": "Naar"
+                },
                 "toilets/disposal": {
                     "label": "Afvoer",
                     "options": {
@@ -2884,9 +2961,15 @@
                 "traffic_calming": {
                     "label": "Type"
                 },
+                "traffic_sign": {
+                    "label": "Verkeersbord"
+                },
                 "traffic_sign/direction": {
+                    "label": "Richting",
                     "options": {
-                        "both": "Beide / Alles"
+                        "backward": "Achteruit",
+                        "both": "Beide / Alles",
+                        "forward": "Vooruit"
                     }
                 },
                 "traffic_signals": {
@@ -3009,6 +3092,9 @@
                 },
                 "width": {
                     "label": "Breedte (in meter)"
+                },
+                "wikidata": {
+                    "label": "Wikidata"
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
@@ -3184,7 +3270,8 @@
                     "terms": "fietsgereedschappen,fietsherstelplaats,fietspomp,pomp,kettinggereedschap,fietsbanden,onderhoud,doe-het-zelf-fietsenmaker"
                 },
                 "amenity/biergarten": {
-                    "name": "Biergarten"
+                    "name": "Biergarten",
+                    "terms": "Biergarten"
                 },
                 "amenity/boat_rental": {
                     "name": "Bootverhuur",
@@ -3275,6 +3362,9 @@
                 "amenity/dentist": {
                     "name": "Tandarts",
                     "terms": "tandheelkundige,mond,tanden"
+                },
+                "amenity/dive_centre": {
+                    "name": "Duikcentrum"
                 },
                 "amenity/doctors": {
                     "name": "Dokter",
@@ -3382,7 +3472,8 @@
                     "name": "Verpleeghuis"
                 },
                 "amenity/parking": {
-                    "name": "Parkeerplaats"
+                    "name": "Parkeerplaats",
+                    "terms": "Parkeerplaats, Parkeerterrein"
                 },
                 "amenity/parking_entrance": {
                     "name": "Ingang/Uitgang van parkeergelegenheid",
@@ -3652,6 +3743,9 @@
                     "name": "Krantenautomaat",
                     "terms": "automaat,dagbladautomaat,nieuwsautomaat"
                 },
+                "amenity/vending_machine/parcel_pickup_dropoff": {
+                    "name": "Pakketautomaat"
+                },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parkeerticketautomaat",
                     "terms": "ticketautomaat,automaat"
@@ -3837,10 +3931,6 @@
                 "building": {
                     "name": "Gebouw",
                     "terms": "pand,bouwwerk,bouwsel,constructie"
-                },
-                "building/apartments": {
-                    "name": "Appartementen",
-                    "terms": "flatgebouw,flats,appartementsgebouw,wolkenkrabber,woongebouw,residentie,apartementen"
                 },
                 "building/barn": {
                     "name": "Schuur",
@@ -4799,7 +4889,8 @@
                     "terms": "wijngaard"
                 },
                 "leisure": {
-                    "name": "Vrije tijd"
+                    "name": "Vrije tijd",
+                    "terms": "Recreatie"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Speelzaal (met kansspelmachines)",
@@ -4920,7 +5011,8 @@
                     "terms": "ijsbaan"
                 },
                 "leisure/marina": {
-                    "name": "Jachthaven"
+                    "name": "Jachthaven",
+                    "terms": "Marina, Jachthaven"
                 },
                 "leisure/miniature_golf": {
                     "name": "Minigolf",
@@ -4942,7 +5034,8 @@
                     "terms": "tafel,bank,zitbank"
                 },
                 "leisure/pitch": {
-                    "name": "Sportveld"
+                    "name": "Sportveld",
+                    "terms": "Sportveld"
                 },
                 "leisure/pitch/american_football": {
                     "name": "Americanfootball-veld",
@@ -4951,8 +5044,13 @@
                 "leisure/pitch/badminton": {
                     "name": "badmintonveld"
                 },
+                "leisure/pitch/baseball": {
+                    "name": "Honkbalveld",
+                    "terms": "Honkbalveld"
+                },
                 "leisure/pitch/basketball": {
-                    "name": "Basketbalveld"
+                    "name": "Basketbalveld",
+                    "terms": "Basketbalveld"
                 },
                 "leisure/pitch/beachvolleyball": {
                     "name": "Beachvolleybalveld",
@@ -4997,7 +5095,8 @@
                     "terms": "tennisbaan,tennisterrein"
                 },
                 "leisure/pitch/volleyball": {
-                    "name": "Volleybalveld"
+                    "name": "Volleybalveld",
+                    "terms": "Volleybalveld"
                 },
                 "leisure/playground": {
                     "name": "Speeltuin",
@@ -5221,7 +5320,8 @@
                     "terms": "ravijn,afgrond"
                 },
                 "natural/coastline": {
-                    "name": "Kustlijn"
+                    "name": "Kustlijn",
+                    "terms": "Kustlijn, Kust"
                 },
                 "natural/fell": {
                     "name": "Fjell",
@@ -5274,6 +5374,9 @@
                 },
                 "natural/tree": {
                     "name": "Boom"
+                },
+                "natural/tree_row": {
+                    "name": "Bomenrij"
                 },
                 "natural/volcano": {
                     "name": "Vulkaan",
@@ -6805,6 +6908,9 @@
             "SPW_ORTHO_LAST": {
                 "name": "Nieuwste luchtfoto's van SPW(allonie)"
             },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerieke beelden"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "Bij zoomniveau 16+, kaartgegevens in publiek domein van de VS Census. Bij lagere zoomniveaus, enkel wijzigingen sinds 2006 behalve wijzigingen die al in OpenStreetMap zitten",
                 "name": "TIGER Roads 2014"
@@ -6812,6 +6918,10 @@
             "US-TIGER-Roads-2017": {
                 "description": "Geel = Publiek domein kaartgegevens van de US Census. Rood = data niet gevonden in OpenStreetMap",
                 "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Geel = Publiek domein kaartgegevens van de US Census. Rood = data niet gevonden in OpenStreetMap",
+                "name": "TIGER Roads 2018"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Wegen: Groene omlijning = ongeclassificeerd. Bruine omlijning = veldweg. Oppervlak: grind = lichtbruin gevuld, asfalt = zwart, bestraat = grijs, grond = wit, beton = blauw, gras = groen. Seizoensgebonden = witte balken",
@@ -6828,6 +6938,12 @@
                     "text": "Gerealiseerd met middelen van Brussels UrbIS®© - Distributie & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Gerealiseerd met middelen van Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -6889,6 +7005,7 @@
                 "attribution": {
                     "text": "EUFAR Balaton orthofoto's 2010"
                 },
+                "description": "1940 gegeorefereede fotografie van Balaton Limnological Institute.",
                 "name": "EUFAR Balaton orthofoto's"
             },
             "finds.jp_KBN_2500": {
@@ -6901,13 +7018,44 @@
             "gsi.go.jp": {
                 "attribution": {
                     "text": "GSI Japan"
-                }
+                },
+                "description": "Japan GSI orthofoto. Gewoonlijk beter dan bing, maar iets ouder.",
+                "name": "Japan GSI orthofoto"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
                     "text": "GSI Japan"
                 },
+                "description": "Japan GSI Standaard Kaart. Grootschalige dekking.",
                 "name": "Japan GSI Standaard Kaart"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Gemeente Helsingborg"
+                },
+                "description": "Orthofoto's van de gemeente Helsingborg 2016, publiek domein",
+                "name": "Helsingborg Orthofoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Gemeente Kalmar"
+                },
+                "description": "Orthofoto's van de noordkust van de gemeente Kalmar 2014",
+                "name": "Kalmar-noord Orthofoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Gemeente Kalmar"
+                },
+                "description": "Orthofoto's van de zuidkust van de gemeente Kalmar 2016",
+                "name": "Kalmar-zuid Orthofoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Gemeente Kalmar"
+                },
+                "description": "Orthofoto's van de stedelijke gebieden van de gemeente Kalmar 2018",
+                "name": "Kalmar Stedelijke Orthofoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -6929,6 +7077,20 @@
                 },
                 "description": "Mosaic van Zweedse luchtfoto's van de periode 1970-1980. Wordt uitgebreid.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topografische kaart van Zweden 1:50 000",
+                "name": "Lantmäteriet Topografische Kaart"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Gemeente Linköping"
+                },
+                "description": "Orthofoto's van de gemeente Linköping 2010, open data",
+                "name": "Linköping Orthofoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -6966,7 +7128,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scan van \"Economische kaarten\" ca. 1950-1980"
+                "description": "Scan van \"Economische kaarten\" ca. 1950-1980",
+                "name": "Lantmäteriet Economische Kaart 1950–1980"
             },
             "qa_no_address": {
                 "attribution": {
@@ -6992,6 +7155,13 @@
                     "text": "Kaarttegels van Stamen Design, onder CC BY 3.0. Gegevens van OpenStreetMap, onder ODbL"
                 },
                 "name": "Stamen Terrein"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Gemeente Stockholm, CC0"
+                },
+                "description": "Orthofoto's van de gemeente Stockholm 2015, CC0 licentie",
+                "name": "Stockholm Orthofoto"
             },
             "tf-cycle": {
                 "attribution": {
@@ -7589,6 +7759,9 @@
                 "name": "Facebook",
                 "description": "Neem deel aan de OpenStreetMap Argentinië community op Facebook"
             },
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap Argentinië IRC"
+            },
             "OSM-AR-mailinglist": {
                 "name": "Talk-ar Mailinglijst"
             },
@@ -7604,7 +7777,8 @@
                 "description": "OpenStreetMap Bahia op Telegram"
             },
             "DF-telegram": {
-                "name": "OpenStreetMap Brasília Telegram-groep"
+                "name": "OpenStreetMap Brasília Telegram-groep",
+                "description": "OpenStreetMap Brazilië op Telegram"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Mailinglijst",
@@ -7665,12 +7839,19 @@
             "OSM-Facebook": {
                 "name": "OpenStreetMap op Facebook"
             },
+            "OSM-help": {
+                "name": "OpenStreetMap Help"
+            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap op Reddit",
                 "description": "Op /r/openstreetmap/ vind een levendige dialoog plaats over OpenStreetMap. Hier kun je alles vragen!"
             },
             "OSM-Telegram": {
                 "name": "OpenStreetMap Telegram"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Volg ons op Twitter at {url}"
             },
             "OSMF": {
                 "events": {

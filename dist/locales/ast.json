@@ -2604,9 +2604,6 @@
                 "building": {
                     "name": "Edificiu"
                 },
-                "building/apartments": {
-                    "name": "Pisos"
-                },
                 "building/barn": {
                     "name": "Graneru"
                 },

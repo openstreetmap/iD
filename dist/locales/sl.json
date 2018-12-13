@@ -2967,10 +2967,6 @@
                     "name": "Zgradba",
                     "terms": "hiša,objekt,stavba,zgradba"
                 },
-                "building/apartments": {
-                    "name": "Stanovanja",
-                    "terms": "stanovanjski blok"
-                },
                 "building/barn": {
                     "name": "Skedenj",
                     "terms": "pod,kašča"

@@ -2193,9 +2193,6 @@
                 "building": {
                     "name": "Bangunan"
                 },
-                "building/apartments": {
-                    "name": "Rumah-rumah Pangsa"
-                },
                 "building/cabin": {
                     "name": "Kabin"
                 },

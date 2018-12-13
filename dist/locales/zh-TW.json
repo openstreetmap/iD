@@ -506,6 +506,7 @@
             "all_members": "所有成員",
             "all_relations": "所有關係",
             "new_relation": "建立新關係...",
+            "choose_relation": "選擇父關係",
             "role": "角色",
             "choose": "選擇物件種類",
             "results": "{search} 的 {n} 個結果",
@@ -1653,6 +1654,9 @@
                 "barrier": {
                     "label": "種類"
                 },
+                "basin": {
+                    "label": "種類"
+                },
                 "bath/open_air": {
                     "label": "露天浴場"
                 },
@@ -2174,6 +2178,9 @@
                 },
                 "intermittent": {
                     "label": "週期性的"
+                },
+                "intermittent_yes": {
+                    "label": "週期性水流"
                 },
                 "internet_access": {
                     "label": "網際網絡存取",
@@ -4144,8 +4151,8 @@
                     "terms": "建物"
                 },
                 "building/apartments": {
-                    "name": "公寓",
-                    "terms": "分層公寓"
+                    "name": "大樓建築物",
+                    "terms": "大樓建築物,大樓"
                 },
                 "building/barn": {
                     "name": "穀倉",
@@ -5177,6 +5184,10 @@
                 "landuse/residential": {
                     "name": "住宅用地",
                     "terms": "住宅區"
+                },
+                "landuse/residential/apartments": {
+                    "name": "公寓大樓",
+                    "terms": "公寓大樓,公寓"
                 },
                 "landuse/retail": {
                     "name": "零售區",

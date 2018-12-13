@@ -1955,9 +1955,6 @@
                 "building": {
                     "name": "Bygning"
                 },
-                "building/apartments": {
-                    "name": "Leiligheter"
-                },
                 "building/barn": {
                     "name": "Låve"
                 },

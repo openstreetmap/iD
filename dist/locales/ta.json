@@ -1902,9 +1902,6 @@
                 "building": {
                     "name": "கட்டடம்"
                 },
-                "building/apartments": {
-                    "name": "அபார்ட்மண்டுகள்"
-                },
                 "building/church": {
                     "name": "தேவாலயக் கட்டிடம்"
                 },

@@ -3854,9 +3854,6 @@
                 "building": {
                     "name": "Bygging"
                 },
-                "building/apartments": {
-                    "name": "Íbúðir"
-                },
                 "building/barn": {
                     "name": "Hlaða"
                 },

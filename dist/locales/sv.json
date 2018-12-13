@@ -506,6 +506,7 @@
             "all_members": "Alla medlemmar",
             "all_relations": "Alla relationer",
             "new_relation": "Ny relation...",
+            "choose_relation": "Välj en föräldrarelation",
             "role": "Roll",
             "choose": "Välj typ av objekt",
             "results": "{n} sökresult för {search}",
@@ -1653,6 +1654,9 @@
                 "barrier": {
                     "label": "Typ"
                 },
+                "basin": {
+                    "label": "Typ"
+                },
                 "bath/open_air": {
                     "label": "Utomhus"
                 },
@@ -2173,6 +2177,9 @@
                     "label": "Inskription"
                 },
                 "intermittent": {
+                    "label": "Periodisk"
+                },
+                "intermittent_yes": {
                     "label": "Periodisk"
                 },
                 "internet_access": {
@@ -4118,10 +4125,6 @@
                 "building": {
                     "name": "Byggnad",
                     "terms": "Byggnad, hus, konstruktion, byggnadsverk, bygge, anläggning, fastighet, kåk"
-                },
-                "building/apartments": {
-                    "name": "Lägenheter",
-                    "terms": "Bostad, lägenheter, lägenhet, hyreshus, bostadshus"
                 },
                 "building/barn": {
                     "name": "Lada",

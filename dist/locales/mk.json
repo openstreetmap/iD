@@ -1867,9 +1867,6 @@
                 "building": {
                     "name": "Градба"
                 },
-                "building/apartments": {
-                    "name": "Станбена зграда"
-                },
                 "building/barn": {
                     "name": "Амбар"
                 },

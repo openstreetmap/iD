@@ -719,9 +719,6 @@
                 "building": {
                     "name": "建筑物"
                 },
-                "building/apartments": {
-                    "name": "酒店公寓"
-                },
                 "building/house": {
                     "name": "房屋"
                 },

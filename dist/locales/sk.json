@@ -2951,10 +2951,6 @@
                     "name": "Budova",
                     "terms": "dom,stavba,vežiak,činžiak,veziak,cinziak,panelák,panelak,drevenica,chyža,chyza,chajda,chatž,chatrc,búda,buda"
                 },
-                "building/apartments": {
-                    "name": "Bytovka",
-                    "terms": "Bytovka,obytna budova,panelak,panelák,vežiak,veziak,barak,barák,činžiak,cinziak,apartmany,apartmány"
-                },
                 "building/barn": {
                     "name": "Stodola",
                     "terms": "stodola,stajňa,stajna"

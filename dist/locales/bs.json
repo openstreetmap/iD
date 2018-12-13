@@ -947,10 +947,6 @@
                     "name": "Građevina",
                     "terms": "zgrada,građevina,kuća"
                 },
-                "building/apartments": {
-                    "name": "Apartmani",
-                    "terms": "stanovi,apartmani"
-                },
                 "building/commercial": {
                     "name": "Poslovna zgrada",
                     "terms": "poslovna zgrada,zgrada firme"

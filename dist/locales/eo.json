@@ -403,7 +403,7 @@
             "title": "Alŝuti al OpenStreetMap",
             "upload_explanation": "Ŝanĝoj alŝutotaj de vi estos videblaj sur ĉiuj mapoj, kiuj uzas datumojn de OpenStreetMap.",
             "upload_explanation_with_user": "Ŝanĝoj alŝutataj kiel {user} estos videblaj sur ĉiuj mapoj, kiuj uzas datumojn de OpenStreetMap.",
-            "request_review": "Mi volas por ke iu kontrolu miajn ŝanĝojn.",
+            "request_review": "Mi volas ke iu kontrolu miajn ŝanĝojn.",
             "save": "Alŝuti",
             "cancel": "Nuligi",
             "changes": "{count} ŝanĝoj",
@@ -680,7 +680,7 @@
         },
         "restore": {
             "heading": "Vi havas nekonservitajn ŝanĝojn",
-            "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de antaŭa redaktada seanco?",
+            "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de antaŭa redakta seanco?",
             "restore": "Restarigi miajn ŝanĝojn",
             "reset": "Ne konservi miajn ŝanĝojn"
         },
@@ -691,7 +691,7 @@
             "error": "Eraroj okazis dum provado de konservado",
             "status_code": "Servilo revenigis statan kodon {code}",
             "unknown_error_details": "Bonvolu certiĝi, ke vi estas konektita al la Interreto.",
-            "uploading": "Alŝutado de ŝanĝoj al OpenStreetMap…",
+            "uploading": "Alŝuto de ŝanĝoj al OpenStreetMap…",
             "conflict_progress": "Kontrolado pri konfliktoj: {num} el {total}",
             "unsaved_changes": "Vi havas nekonservitajn ŝanĝojn",
             "conflict": {
@@ -1651,6 +1651,9 @@
                 "barrier": {
                     "label": "Speco"
                 },
+                "basin": {
+                    "label": "Speco"
+                },
                 "bath/open_air": {
                     "label": "Eksterdome"
                 },
@@ -2171,6 +2174,9 @@
                     "label": "Skribaĵo"
                 },
                 "intermittent": {
+                    "label": "Perioda"
+                },
+                "intermittent_yes": {
                     "label": "Perioda"
                 },
                 "internet_access": {
@@ -4140,10 +4146,6 @@
                 "building": {
                     "name": "Konstruaĵo",
                     "terms": "konstruajho,konstruajxo,konstruo,domo"
-                },
-                "building/apartments": {
-                    "name": "Apartamentaro",
-                    "terms": "apartamento,loĝejaro,plurfamilia domo,multfamilia domo"
                 },
                 "building/barn": {
                     "name": "Garbejo",

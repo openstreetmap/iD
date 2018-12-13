@@ -2982,10 +2982,6 @@
                     "name": "Pastatas",
                     "terms": "pastatas,namas,statinys"
                 },
-                "building/apartments": {
-                    "name": "Apartamentai",
-                    "terms": "apartamentai"
-                },
                 "building/barn": {
                     "name": "Klėtis",
                     "terms": "Svirnas, Tvartas"
