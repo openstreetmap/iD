@@ -1,0 +1,33 @@
+{
+    "icon": "maki-building",
+    "fields": [
+        "name",
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "residential": "apartments"
+    },
+    "addTags": {
+        "landuse": "residential",
+        "residential": "apartments"
+    },
+    "removeTags": {
+        "landuse": "residential",
+        "residential": "apartments"
+    },
+    "reference": {
+        "key": "residential",
+        "value": "apartments"
+    },
+    "terms": [
+        "flat",
+        "residence",
+        "tenement"
+    ],
+    "name": "Apartment Complex"
+}

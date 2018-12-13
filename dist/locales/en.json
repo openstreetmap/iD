@@ -4213,7 +4213,7 @@
                     "terms": ""
                 },
                 "building/apartments": {
-                    "name": "Apartments",
+                    "name": "Apartment Building",
                     "terms": ""
                 },
                 "building/barn": {
@@ -5247,6 +5247,10 @@
                 "landuse/residential": {
                     "name": "Residential Area",
                     "terms": ""
+                },
+                "landuse/residential/apartments": {
+                    "name": "Apartment Complex",
+                    "terms": "flat,residence,tenement"
                 },
                 "landuse/retail": {
                     "name": "Retail Area",

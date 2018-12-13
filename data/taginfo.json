@@ -1727,7 +1727,7 @@
     {
       "key": "building",
       "value": "apartments",
-      "description": "🄿 Apartments",
+      "description": "🄿 Apartment Building",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
@@ -3422,6 +3422,13 @@
       "value": "residential",
       "description": "🄿 Residential Area",
       "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
+    },
+    {
+      "key": "residential",
+      "value": "apartments",
+      "description": "🄿 Apartment Complex",
+      "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
     {
