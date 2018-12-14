@@ -73,7 +73,6 @@ export function presetIndex() {
             if (address && (!match || match.isFallback())) {
                 match = address;
             }
-
             return match || all.item(geometry);
         });
     };
@@ -139,13 +138,23 @@ export function presetIndex() {
 
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                all.collection.push(presetPreset(id, d, _fields, visible));
+                var existing = all.collection.findIndex(function(p) { return p.id === id; });
+                if (existing !== -1) {
+                    all.collection[existing] = presetPreset(id, d, _fields, visible);
+                } else {
+                    all.collection.push(presetPreset(id, d, _fields, visible));
+                }
             });
         }
 
         if (d.categories) {
             _forEach(d.categories, function(d, id) {
-                all.collection.push(presetCategory(id, d, all));
+                var existing = all.collection.findIndex(function(p) { return p.id === id; });
+                if (existing !== -1) {
+                    all.collection[existing] = presetCategory(id, d, all);
+                } else {
+                    all.collection.push(presetCategory(id, d, all));
+                }
             });
         }
 
@@ -165,7 +174,7 @@ export function presetIndex() {
             var geometry = preset.geometry;
 
             for (var j = 0; j < geometry.length; j++) {
-                var g = _index[geometry[j]];
+                var g = _index[geometry[j]];    
                 for (var k in preset.tags) {
                     (g[k] = g[k] || []).push(preset);
                 }

@@ -503,8 +503,8 @@ export function coreContext() {
     features.init();
     if (utilStringQs(window.location.hash).presets) {
         var external = utilStringQs(window.location.hash).presets;
-        presets.fromExternal(external, function(externalPresets){
-            presets = externalPresets; // default + external presets...
+        presets.fromExternal(external, function(externalPresets) {
+            context.presets = function() { return externalPresets; }; // default + external presets...
             areaKeys = presets.areaKeys();
         });
     } else {
