@@ -506,6 +506,7 @@
             "all_members": "All members",
             "all_relations": "All relations",
             "new_relation": "New relation...",
+            "choose_relation": "Choose a parent relation",
             "role": "Role",
             "choose": "Select feature type",
             "results": "{n} results for {search}",
@@ -1653,6 +1654,9 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "basin": {
+                    "label": "Type"
+                },
                 "bath/open_air": {
                     "label": "Open Air"
                 },
@@ -2171,6 +2175,9 @@
                 },
                 "inscription": {
                     "label": "Inscription"
+                },
+                "intermittent_yes": {
+                    "label": "Intermittent"
                 },
                 "intermittent": {
                     "label": "Intermittent"
@@ -4206,7 +4213,7 @@
                     "terms": ""
                 },
                 "building/apartments": {
-                    "name": "Apartments",
+                    "name": "Apartment Building",
                     "terms": ""
                 },
                 "building/barn": {
@@ -5240,6 +5247,10 @@
                 "landuse/residential": {
                     "name": "Residential Area",
                     "terms": ""
+                },
+                "landuse/residential/apartments": {
+                    "name": "Apartment Complex",
+                    "terms": "flat,residence,tenement"
                 },
                 "landuse/retail": {
                     "name": "Retail Area",
@@ -7518,6 +7529,9 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -7545,12 +7559,6 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
-            },
-            "UrbISOrtho2018": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -7636,33 +7644,11 @@
                 "description": "Japan GSI Standard Map. Widely covered.",
                 "name": "Japan GSI Standard Map"
             },
-            "helsingborg-orto": {
+            "hike_n_bike": {
                 "attribution": {
-                    "text": "© Helsingborg municipality"
+                    "text": "© OpenStreetMap contributors"
                 },
-                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
-                "name": "Helsingborg Orthophoto"
-            },
-            "kalmar-orto-2014": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
-                "name": "Kalmar North Orthophoto 2014"
-            },
-            "kalmar-orto-2016": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
-                "name": "Kalmar South Orthophoto 2016"
-            },
-            "kalmar-orto-2018": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
-                "name": "Kalmar Urban Orthophoto 2018"
+                "name": "Hike & Bike"
             },
             "kelkkareitit": {
                 "attribution": {

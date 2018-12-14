@@ -3008,10 +3008,6 @@
                     "name": "مبنى",
                     "terms": "مبنى"
                 },
-                "building/apartments": {
-                    "name": "شقق",
-                    "terms": "شقق, شقة, بيت"
-                },
                 "building/barn": {
                     "name": "حظيرة",
                     "terms": "مخزن; اسطبل"

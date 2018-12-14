@@ -3967,10 +3967,6 @@
                     "name": "בניין",
                     "terms": "בניין"
                 },
-                "building/apartments": {
-                    "name": "דירה",
-                    "terms": "דירה"
-                },
                 "building/barn": {
                     "name": "אסם",
                     "terms": "אסם"

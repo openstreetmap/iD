@@ -1,9 +1,13 @@
 {
     "fi": {
         "icons": {
+            "download": "lataa",
             "information": "Tietoa",
             "remove": "Poista",
-            "undo": "Peru"
+            "undo": "Peru",
+            "zoom_to": "lähennä",
+            "copy": "kopioi",
+            "open_wikidata": "avaa wikidata.org-palvelussa"
         },
         "modes": {
             "add_area": {
@@ -341,6 +345,7 @@
         "browser_notice": "Tätä muokkausohjelmaa voi käyttää Firefox-, Chrome-, Safari- ja Opera-selaimilla sekä Internet Explorerin versiolla 11 tai uudemmalla. Päivitä selainohjelmisto tai käytä vanhempaa Potlatch 2 -muokkausohjelmaa.",
         "translate": {
             "translate": "Käännä",
+            "localized_translation_label": "Monikielinen nimi",
             "localized_translation_language": "Valitse kieli",
             "localized_translation_name": "Nimi"
         },
@@ -350,6 +355,9 @@
         "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
         "report_a_bug": "Ilmoita ongelmasta",
         "help_translate": "Auta kääntämisessä",
+        "sidebar": {
+            "tooltip": "Näytä/piilota kohdemuokkain"
+        },
         "feature_info": {
             "hidden_warning": "{count} piilotettua karttakohdetta",
             "hidden_details": "Nämä ominaisuudet ovat nykyisin piilotettu: {details}"
@@ -495,7 +503,10 @@
             "way": "Viiva",
             "relation": "Relaatio",
             "location": "Sijainti",
-            "add_fields": "Lisää kenttä:"
+            "add_fields": "Lisää kenttä:",
+            "lock": {
+                "suggestion": "{label}-kentän muokkaaminen on estetty, sillä se noudetaan Wikipediasta. Voit poistaa tai muokata ominaisuustietoja alempana Kaikki ominaisuustiedot -osiossa."
+            }
         },
         "background": {
             "title": "Tausta",
@@ -1176,6 +1187,7 @@
                     "background_switch": "Vaihda takaisin viimeisimpään taustaan",
                     "map_data": "Näytä kartta-aineistoasetukset",
                     "fullscreen": "Siirry koko näytön tilaan",
+                    "sidebar": "Näytä/piilota kohdemuokkain",
                     "wireframe": "Muuta alueen taustatäyttö -asetusta",
                     "minimap": "Ota pienoiskartta käyttöön/pois käytöstä"
                 },
@@ -1264,6 +1276,9 @@
             "east": "I",
             "west": "L"
         },
+        "wikidata": {
+            "description": "Kuvaus"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1301,6 +1316,9 @@
                 },
                 "category-route": {
                     "name": "Reitit"
+                },
+                "category-utility": {
+                    "name": "Infrastruktuuri..."
                 },
                 "category-water-area": {
                     "name": "Vesialueet"
@@ -3339,6 +3357,12 @@
                 "barrier/hedge": {
                     "name": "Pensasaita"
                 },
+                "barrier/kerb": {
+                    "name": "Reunakivi"
+                },
+                "barrier/kerb/lowered": {
+                    "name": "Madallettu reunakivi"
+                },
                 "barrier/kissing_gate": {
                     "name": "Karjarajoitin"
                 },
@@ -3364,9 +3388,6 @@
                 "building": {
                     "name": "Rakennus",
                     "terms": "talo"
-                },
-                "building/apartments": {
-                    "name": "Kerrostalo"
                 },
                 "building/barn": {
                     "name": "Lato"
@@ -3819,6 +3840,15 @@
                     "name": "Sisäkäytävä",
                     "terms": "katettu, katos, käytävä, sisällä, sisätila, sisätiloissa"
                 },
+                "highway/crossing/marked": {
+                    "name": "Merkitty suojatie"
+                },
+                "highway/crossing/marked-raised": {
+                    "name": "Korotettu suojatiealue"
+                },
+                "highway/crossing/unmarked": {
+                    "name": "Merkitsemätön suojatie"
+                },
                 "highway/cycleway": {
                     "name": "Pyörätie"
                 },
@@ -3828,6 +3858,9 @@
                 "highway/footway": {
                     "name": "Jalankulkutie",
                     "terms": "Polku"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Jalkakäytävä"
                 },
                 "highway/give_way": {
                     "name": "Väistämisvelvollisuus",
@@ -4468,6 +4501,9 @@
                 "natural/tree": {
                     "name": "Puu"
                 },
+                "natural/tree_row": {
+                    "name": "Puurivi"
+                },
                 "natural/volcano": {
                     "name": "Tulivuori"
                 },
@@ -4709,6 +4745,10 @@
                 },
                 "power": {
                     "name": "Sähkö"
+                },
+                "power/cable/underground": {
+                    "name": "Maanalainen virtakaapeli",
+                    "terms": "maan alla, pinnan, pinta, alla, alapuolinen, voima, virta, sähkö, johto, kaapeli"
                 },
                 "power/generator": {
                     "name": "Generaattori"

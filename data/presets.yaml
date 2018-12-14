@@ -205,6 +205,9 @@ en:
       barrier:
         # barrier=*
         label: Type
+      basin:
+        # basin=*
+        label: Type
       bath/open_air:
         # 'bath:open_air=*'
         label: Open Air
@@ -794,6 +797,9 @@ en:
         # inscription=*
         label: Inscription
       intermittent:
+        # intermittent=*
+        label: Intermittent
+      intermittent_yes:
         # intermittent=*
         label: Intermittent
       internet_access:
@@ -3173,8 +3179,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Building'', separated by commas>'
       building/apartments:
         # building=apartments
-        name: Apartments
-        terms: '<translate with synonyms or related terms for ''Apartments'', separated by commas>'
+        name: Apartment Building
+        terms: '<translate with synonyms or related terms for ''Apartment Building'', separated by commas>'
       building/barn:
         # building=barn
         name: Barn
@@ -4341,6 +4347,11 @@ en:
         # landuse=residential
         name: Residential Area
         terms: '<translate with synonyms or related terms for ''Residential Area'', separated by commas>'
+      landuse/residential/apartments:
+        # residential=apartments
+        name: Apartment Complex
+        # 'terms: flat,residence,tenement'
+        terms: '<translate with synonyms or related terms for ''Apartment Complex'', separated by commas>'
       landuse/retail:
         # landuse=retail
         name: Retail Area

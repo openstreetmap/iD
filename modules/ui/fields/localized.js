@@ -7,20 +7,15 @@ import {
     event as d3_event
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
 import { t } from '../../util/locale';
 import { dataWikipedia } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
+import { uiCombobox } from '../index';
 import { utilDetect } from '../../util/detect';
-import {
-    utilEditDistance,
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldLocalized(field, context) {
@@ -34,13 +29,11 @@ export function uiFieldLocalized(field, context) {
     });
 
     // reuse these combos
-    var langcombo = d3_combobox()
-        .container(context.container())
+    var langCombo = uiCombobox(context, 'localized-lang')
         .fetcher(fetchLanguages)
         .minItems(0);
 
-    var brandcombo = d3_combobox()
-        .container(context.container())
+    var brandCombo = uiCombobox(context, 'localized-brand')
         .canAutocomplete(false)
         .minItems(1);
 
@@ -152,7 +145,7 @@ export function uiFieldLocalized(field, context) {
                 // Show the suggestions.. If the user picks one, change the tags..
                 if (allSuggestions.length && goodSuggestions.length) {
                     input
-                        .call(brandcombo
+                        .call(brandCombo
                             .fetcher(fetchBrandNames(preset, allSuggestions))
                             .on('accept', function(d) {
                                 var entity = context.entity(_entity.id);  // get latest
@@ -165,6 +158,13 @@ export function uiFieldLocalized(field, context) {
                                 tags = d.suggestion.setTags(tags, geometry);
                                 utilGetSetValue(input, tags.name);
                                 dispatch.call('change', this, tags);
+                            })
+                            .on('cancel', function() {
+                                // user hit escape, remove whatever is after the '-'
+                                var name = utilGetSetValue(input);
+                                name = name.split('-', 2)[0].trim();
+                                utilGetSetValue(input, name);
+                                dispatch.call('change', this, { name: name });
                             })
                         );
                 }
@@ -391,7 +391,7 @@ export function uiFieldLocalized(field, context) {
                     .attr('placeholder', t('translate.localized_translation_language'))
                     .on('blur', changeLang)
                     .on('change', changeLang)
-                    .call(langcombo);
+                    .call(langCombo);
 
                 wrap
                     .append('input')

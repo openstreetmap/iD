@@ -2447,7 +2447,10 @@
                         "advanced": "Avanzato",
                         "easy": "Facile",
                         "expert": "Esperto",
-                        "extreme": "Estremo"
+                        "extreme": "Estremo",
+                        "freeride": "Discesa libera",
+                        "intermediate": "Intermedio",
+                        "novice": "Principiante"
                     },
                     "placeholder": "Facile, Intermedia, Avanzata..."
                 },
@@ -3210,6 +3213,9 @@
                     "name": "Stazione di riparazione biciclette",
                     "terms": "riparazione,bibiclette,meccanico,bici,cicli"
                 },
+                "amenity/biergarten": {
+                    "name": "Biergarten"
+                },
                 "amenity/boat_rental": {
                     "name": "Noleggio barche",
                     "terms": "noleggio barche,noleggio,barche,porto,negozio"
@@ -3492,6 +3498,9 @@
                 "amenity/ranger_station": {
                     "name": "Guardiaparco",
                     "terms": "Stazione guardia forestale"
+                },
+                "amenity/recycling": {
+                    "name": "Riciclaggio"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro di riciclaggio",
@@ -3784,6 +3793,9 @@
                     "name": "Siepe",
                     "terms": "Siepe"
                 },
+                "barrier/kerb": {
+                    "name": "Marciapiede"
+                },
                 "barrier/kissing_gate": {
                     "name": "Cancello che non fa passare il bestiame",
                     "terms": "Kissing Gate"
@@ -3815,10 +3827,6 @@
                 "building": {
                     "name": "Edificio",
                     "terms": "Edificio"
-                },
-                "building/apartments": {
-                    "name": "Appartamenti",
-                    "terms": "appartamenti,condominio,palazzo,palazzone,casermone,case popolari,abitazioni,case,edilizia popolare,peep,iacp"
                 },
                 "building/barn": {
                     "name": "Fienile",
@@ -4931,6 +4939,12 @@
                     "name": "Campo da Football Americano",
                     "terms": "Campo football americano"
                 },
+                "leisure/pitch/badminton": {
+                    "name": "Campo da badminton"
+                },
+                "leisure/pitch/baseball": {
+                    "name": "Campo da baseball"
+                },
                 "leisure/pitch/basketball": {
                     "name": "Campo da basket",
                     "terms": "Campo da pallacanestro"
@@ -5290,7 +5304,7 @@
                     "terms": "strada,senza,uscita,fine,punto,morto,strada senza uscita"
                 },
                 "office": {
-                    "name": "Uffici",
+                    "name": "Ufficio",
                     "terms": "Ufficio"
                 },
                 "office/accountant": {

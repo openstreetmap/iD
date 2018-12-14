@@ -2160,9 +2160,6 @@
                 "barrier/wall": {
                     "name": "Pareta"
                 },
-                "building/apartments": {
-                    "name": "Apartamentuak"
-                },
                 "building/dormitory": {
                     "name": "Erresidentzia"
                 },

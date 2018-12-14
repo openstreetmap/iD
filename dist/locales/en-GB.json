@@ -3355,9 +3355,6 @@
                 "building": {
                     "name": "Building"
                 },
-                "building/apartments": {
-                    "name": "Apartments"
-                },
                 "building/barn": {
                     "name": "Barn"
                 },

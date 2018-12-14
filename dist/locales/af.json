@@ -704,9 +704,6 @@
                 "building": {
                     "name": "Gebou"
                 },
-                "building/apartments": {
-                    "name": "Woonstelle"
-                },
                 "building/house": {
                     "name": "Huis"
                 },

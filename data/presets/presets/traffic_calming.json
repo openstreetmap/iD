@@ -2,11 +2,13 @@
     "icon": "temaki-diamond",
     "fields": [
         "traffic_calming",
+        "surface",
         "direction_vertex"
     ],
     "geometry": [
         "vertex",
-        "line"
+        "line",
+        "area"
     ],
     "tags": {
         "traffic_calming": "*"

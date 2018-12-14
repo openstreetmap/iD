@@ -3853,10 +3853,6 @@
                     "name": "Будинок",
                     "terms": "Building, elbyjr, будівля, споруда, нерухомість"
                 },
-                "building/apartments": {
-                    "name": "Багатоквартирний будинок",
-                    "terms": "Apartments, bnkj, картира, апартаменти"
-                },
                 "building/barn": {
                     "name": "Комора",
                     "terms": "амбар, запаси, комора"

@@ -2378,9 +2378,6 @@
                 "building": {
                     "name": "Зграда"
                 },
-                "building/apartments": {
-                    "name": "Апартмани"
-                },
                 "building/barn": {
                     "name": "Амбар"
                 },

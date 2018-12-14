@@ -33,23 +33,29 @@ export function uiField(context, presetField, entity, options) {
     var _state = '';
     var _tags = {};
 
+    field.keys = field.keys || [field.key];
 
-    // field implementation
-    field.impl = uiFields[field.type](field, context)
-        .on('change', function(t, onInput) {
-            dispatch.call('change', field, t, onInput);
-        });
-
-    if (entity) {
-        field.entityID = entity.id;
-
-        // if this field cares about the entity, pass it along
-        if (field.impl.entity) {
-            field.impl.entity(entity);
-        }
+    // only create the fields that are actually being shown
+    if (_show && !field.impl) {
+        createField();
     }
 
-    field.keys = field.keys || [field.key];
+    // Creates the field.. This is done lazily,
+    // once we know that the field will be shown.
+    function createField() {
+        field.impl = uiFields[field.type](field, context)
+            .on('change', function(t, onInput) {
+                dispatch.call('change', field, t, onInput);
+            });
+
+        if (entity) {
+            field.entityID = entity.id;
+            // if this field cares about the entity, pass it along
+            if (field.impl.entity) {
+                field.impl.entity(entity);
+            }
+        }
+    }
 
 
     function isModified() {
@@ -63,7 +69,7 @@ export function uiField(context, presetField, entity, options) {
 
     function isPresent() {
         return _some(field.keys, function(key) {
-            return _tags[key];
+            return _tags[key] !== undefined;
         });
     }
 
@@ -151,6 +157,10 @@ export function uiField(context, presetField, entity, options) {
             .classed('modified', isModified())
             .classed('present', isPresent())
             .each(function(d) {
+                if (!d.impl) {
+                    createField();
+                }
+
                 var reference, help;
 
                 // instantiate field help
@@ -195,16 +205,16 @@ export function uiField(context, presetField, entity, options) {
     };
 
 
-    field.state = function(_) {
+    field.state = function(val) {
         if (!arguments.length) return _state;
-        _state = _;
+        _state = val;
         return field;
     };
 
 
-    field.tags = function(_) {
+    field.tags = function(val) {
         if (!arguments.length) return _tags;
-        _tags = _;
+        _tags = val;
         return field;
     };
 
@@ -216,6 +226,9 @@ export function uiField(context, presetField, entity, options) {
 
     field.show = function() {
         _show = true;
+        if (!field.impl) {
+            createField();
+        }
         if (field.default && field.key && _tags[field.key] !== field.default) {
             var t = {};
             t[field.key] = field.default;
@@ -225,14 +238,14 @@ export function uiField(context, presetField, entity, options) {
 
     // A shown field has a visible UI, a non-shown field is in the 'Add field' dropdown
     field.isShown = function() {
-        return _show || field.hasValue();
+        return _show || isPresent();
     };
 
     // An allowed field can appear in the UI or in the 'Add field' dropdown.
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
 
-        if (field.hasValue()) {
+        if (isPresent()) {
             // always allow a field with a value to display
             return true;
         }
@@ -257,9 +270,10 @@ export function uiField(context, presetField, entity, options) {
         return true;
     };
 
-
     field.focus = function() {
-        field.impl.focus();
+        if (field.impl) {
+            field.impl.focus();
+        }
     };
 
 

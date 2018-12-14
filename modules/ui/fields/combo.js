@@ -14,16 +14,10 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
-
 import { t } from '../../util/locale';
 import { services } from '../../services';
-
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { uiCombobox } from '../index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 export {
     uiFieldCombo as uiFieldMultiCombo,
@@ -44,8 +38,7 @@ export function uiFieldCombo(field, context) {
     var optarray = field.options;
     var snake_case = (field.snake_case || (field.snake_case === undefined));
     var caseSensitive = field.caseSensitive;
-    var combobox = d3_combobox()
-        .container(context.container())
+    var combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(caseSensitive)
         .minItems(isMulti || isSemi ? 1 : 2);
     var container = d3_select(null);

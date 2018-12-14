@@ -3679,10 +3679,6 @@
                     "name": "Budova",
                     "terms": "budova"
                 },
-                "building/apartments": {
-                    "name": "Bytový dům",
-                    "terms": "bytovka,bytový dům,obytná budova,panelák,věžák,barák,činžák,činžovní dům"
-                },
                 "building/barn": {
                     "name": "Stodola",
                     "terms": "stodola,seník,sýpka"

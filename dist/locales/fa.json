@@ -2765,9 +2765,6 @@
                 "building": {
                     "name": "ساختمان"
                 },
-                "building/apartments": {
-                    "name": "آپارتمان"
-                },
                 "building/barn": {
                     "name": "انبار غله",
                     "terms": "انبار کاه"

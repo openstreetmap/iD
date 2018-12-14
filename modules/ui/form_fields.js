@@ -1,11 +1,13 @@
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
 
 import { t } from '../util/locale';
+import { uiCombobox } from './index';
 import { utilGetSetValue, utilNoAuto } from '../util';
 
 
 export function uiFormFields(context) {
+    var moreCombo = uiCombobox(context, 'more-fields').minItems(1);
+    var _state = '';
     var _fieldsArr;
 
 
@@ -69,7 +71,7 @@ export function uiFormFields(context) {
 
 
         var more = selection.selectAll('.more-fields')
-            .data((notShown.length > 0) ? [0] : []);
+            .data((_state === 'hover' || notShown.length === 0) ? [] : [0]);
 
         more.exit()
             .remove();
@@ -104,10 +106,8 @@ export function uiFormFields(context) {
                 }
                 return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
             })
-            .call(d3_combobox()
-                .container(context.container())
+            .call(moreCombo
                 .data(notShown)
-                .minItems(1)
                 .on('accept', function (d) {
                     var field = d.field;
                     field.show();
@@ -123,6 +123,12 @@ export function uiFormFields(context) {
     formFields.fieldsArr = function(val) {
         if (!arguments.length) return _fieldsArr;
         _fieldsArr = val;
+        return formFields;
+    };
+
+    formFields.state = function(val) {
+        if (!arguments.length) return _state;
+        _state = val;
         return formFields;
     };
 

@@ -1,3 +1,5 @@
+import _uniq from 'lodash-es/uniq';
+
 import { json as d3_json } from 'd3-request';
 
 import { utilQsString } from '../util';
@@ -24,9 +26,11 @@ export default {
         }
 
         lang = lang || 'en';
+
         d3_json(endpoint + utilQsString({
             action: 'wbgetentities',
             format: 'json',
+            formatversion: 2,
             sites: lang.replace(/-/g, '_') + 'wiki',
             titles: title,
             languages: 'en', // shrink response by filtering to one language
@@ -40,6 +44,7 @@ export default {
         });
     },
 
+
     entityByQID: function(qid, callback) {
         if (!qid) {
             callback('', {});
@@ -50,15 +55,20 @@ export default {
             return;
         }
 
-        var lang = currentLocale.replace(/-/g, '_');
+        var langs = _uniq([
+            currentLocale.toLowerCase(),
+            currentLocale.split('-', 2)[0].toLowerCase(),
+            'en'
+        ]);
 
         d3_json(endpoint + utilQsString({
             action: 'wbgetentities',
             format: 'json',
+            formatversion: 2,
             ids: qid,
             props: /*sitelinks|*/'labels|descriptions',
             //sitefilter: lang + 'wiki',
-            languages: lang,
+            languages: langs.join('|'),
             languagefallback: 1,
             origin: '*'
         }), function(err, data) {

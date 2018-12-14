@@ -3145,10 +3145,6 @@
                     "name": "Edifici",
                     "terms": "Edifici, Bloc de pisos, Nau industrial, Centre comercial, Oficines, Bloc, Casa, Barraca"
                 },
-                "building/apartments": {
-                    "name": "Apartaments",
-                    "terms": "Apartaments, Pisos, Bloc de pisos, Bloc"
-                },
                 "building/barn": {
                     "name": "Graner"
                 },

@@ -18,7 +18,6 @@ export * from './ui/panels/index';
 export * from './ui/settings/index';
 export * from './ui/index';
 export * from './util/index';
-export * from './lib/index';
 export * from './validations/index';
 
 /* export some legacy symbols: */
@@ -48,6 +47,4 @@ export { uiPresetEditor as uiPreset } from './ui/preset_editor';
 
 export var debug = false;
 
-import * as lib from './lib/index';
-
-export { lib, d3 };
+export { d3 };

@@ -4115,10 +4115,6 @@
                     "name": "Bâtiment",
                     "terms": "bâtiment, batiment, édifice, construction, bâtisse, building, immeuble, maison, tour, résidence, habitation, hlm"
                 },
-                "building/apartments": {
-                    "name": "Appartements",
-                    "terms": "appartements, immeuble résidentiel, habitations, logements, résidence, résidentiel, bâtiment résidentiel, complexe résidentiel, tour d'habitation, hlm, grand ensemble, studios, meublés, logis, chambres, apartments, building"
-                },
                 "building/barn": {
                     "name": "Grange",
                     "terms": "grange, hangar agricole, bâtiment agricole, stockage, grenier, abri, remise, étable, ferme, barn"
@@ -6426,6 +6422,10 @@
                     "name": "Magasin de tapis",
                     "terms": "Magasin de tapis"
                 },
+                "shop/catalogue": {
+                    "name": "Magasin à catalogue",
+                    "terms": "catalogue"
+                },
                 "shop/charity": {
                     "name": "Magasin d'organisme caritatif",
                     "terms": "Boutique caritative"
@@ -6469,6 +6469,10 @@
                 "shop/cosmetics": {
                     "name": "Magasin de cosmétiques",
                     "terms": "Vente de cosmétiques, Parfumerie"
+                },
+                "shop/country_store": {
+                    "name": "Magasin de campagne",
+                    "terms": "campagne,chasse,pêche,équitation,cheval,chevaux"
                 },
                 "shop/craft": {
                     "name": "Magasin d'arts et loisirs créatifs",
@@ -6563,6 +6567,10 @@
                 "shop/hairdresser": {
                     "name": "Salon de coiffure",
                     "terms": "Coiffeur"
+                },
+                "shop/hairdresser_supply": {
+                    "name": "Magasin de matériel de coiffure",
+                    "terms": "coiffeur,shampoings,barbier"
                 },
                 "shop/hardware": {
                     "name": "Quincaillerie",
@@ -6678,6 +6686,10 @@
                 "shop/paint": {
                     "name": "Magasin de peintures",
                     "terms": "Vente de peintures"
+                },
+                "shop/party": {
+                    "name": "Magasin de matériel de fête",
+                    "terms": "ballons,costumes,décorations,invitations,fête"
                 },
                 "shop/pastry": {
                     "name": "Pâtisserie",

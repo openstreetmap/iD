@@ -506,6 +506,7 @@
             "all_members": "Todos los miembros",
             "all_relations": "Todas las relaciones",
             "new_relation": "Nueva relación...",
+            "choose_relation": "Elija una relación de padre",
             "role": "Rol",
             "choose": "Selecciona tipo de elemento",
             "results": "{n} resultados para {search}",
@@ -538,7 +539,7 @@
             "location": "Ubicación",
             "add_fields": "Añadir campo:",
             "lock": {
-                "suggestion": "El campo \"{label}\" está bloqueado porque hay una etiqueta de Wikidata. Puede eliminarlo o editar las etiquetas en la sección \"Todas las etiquetas\"."
+                "suggestion": "El campo \"{label}\" está bloqueado porque hay una etiqueta de Wikidata. Puede eliminarla o editar las etiquetas en la sección \"Todas las etiquetas\"."
             }
         },
         "background": {
@@ -1653,6 +1654,9 @@
                 "barrier": {
                     "label": "Tipo"
                 },
+                "basin": {
+                    "label": "Tipo"
+                },
                 "bath/open_air": {
                     "label": "Aire libre"
                 },
@@ -2173,6 +2177,9 @@
                     "label": "Inscripción"
                 },
                 "intermittent": {
+                    "label": "Intermitente"
+                },
+                "intermittent_yes": {
                     "label": "Intermitente"
                 },
                 "internet_access": {
@@ -4142,10 +4149,6 @@
                 "building": {
                     "name": "Edificio",
                     "terms": "edificio, inmueble, casa, vivienda, bloque, finca, edificación, fábrica, chalet"
-                },
-                "building/apartments": {
-                    "name": "Apartamentos",
-                    "terms": "apartamento, piso, vivienda, alojamiento, buhardilla, estudio, edificio, departamento, condominio"
                 },
                 "building/barn": {
                     "name": "Granero",
@@ -6732,7 +6735,7 @@
                     "terms": "cuero, piel, gamuza, tienda de cuero, talabartería"
                 },
                 "shop/locksmith": {
-                    "name": "Cerrajero",
+                    "name": "Cerrajería",
                     "terms": "cerrajero, cerradura, cerrajería"
                 },
                 "shop/lottery": {

@@ -1653,6 +1653,9 @@
                 "barrier": {
                     "label": "Tipo"
                 },
+                "basin": {
+                    "label": "Tipo"
+                },
                 "bath/open_air": {
                     "label": "Céu Aberto"
                 },
@@ -2173,6 +2176,9 @@
                     "label": "Inscrição"
                 },
                 "intermittent": {
+                    "label": "Intermitente"
+                },
+                "intermittent_yes": {
                     "label": "Intermitente"
                 },
                 "internet_access": {
@@ -4137,10 +4143,6 @@
                 "building": {
                     "name": "Edifício",
                     "terms": "Edifício, Prédio, Edificação"
-                },
-                "building/apartments": {
-                    "name": "Edifício de apartamentos",
-                    "terms": "Apartamentos, prédio, residencial, edifício, quitenete, kitnet, condomínio"
                 },
                 "building/barn": {
                     "name": "Celeiro",

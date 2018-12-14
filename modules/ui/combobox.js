@@ -7,10 +7,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import {
-    utilRebind,
-    utilTriggerEvent
-} from '../../modules/util';
+import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -21,15 +18,16 @@ import {
 //       value:  'display text'
 //   }, ...]
 
-export function d3combobox() {
-    var dispatch = d3_dispatch('accept');
-    var _container = d3_select(document.body);
-    var _wrapper = d3_select(null);
+var _comboTimerID;
+
+export function uiCombobox(context, klass) {
+    var dispatch = d3_dispatch('accept', 'cancel');
+    var container = context.container();
     var _suggestions = [];
-    var _choice = '';
+    var _values = [];
+    var _choice = null;
     var _canAutocomplete = true;
     var _caseSensitive = false;
-    var _values = [];
     var _minItems = 2;
 
     var _fetcher = function(val, cb) {
@@ -42,9 +40,7 @@ export function d3combobox() {
     };
 
     var combobox = function(input, attachTo) {
-        _wrapper = _container
-            .selectAll('div.combobox')
-            .filter(function(d) { return d === input.node(); });
+        if (!input || input.empty()) return;
 
         input
             .classed('combobox-input', true)
@@ -53,78 +49,95 @@ export function d3combobox() {
             .on('keydown.typeahead', keydown)
             .on('keyup.typeahead', keyup)
             .on('input.typeahead', change)
-            .each(function() {
-                var parent = this.parentNode;
-                var sibling = this.nextSibling;
+            .each(addCaret);
 
-                var caret = d3_select(parent).selectAll('.combobox-caret')
-                    .filter(function(d) { return d === input.node(); })
-                    .data([input.node()]);
 
-                caret = caret.enter()
-                    .insert('div', function() { return sibling; })
-                    .attr('class', 'combobox-caret')
-                    .merge(caret);
+        function addCaret() {
+            var parent = this.parentNode;
+            var sibling = this.nextSibling;
 
-                caret
-                    .on('mousedown', function () {
-                        // prevent the form element from blurring. it blurs on mousedown
-                        d3_event.stopPropagation();
-                        d3_event.preventDefault();
-                        if (_wrapper.empty()) {
-                            input.node().focus();
-                            fetch('', render);
-                        } else {
-                            hide();
-                        }
-                    });
-            });
+            var caret = d3_select(parent).selectAll('.combobox-caret')
+                .filter(function(d) { return d === input.node(); })
+                .data([input.node()]);
+
+            caret = caret.enter()
+                .insert('div', function() { return sibling; })
+                .attr('class', 'combobox-caret')
+                .merge(caret);
+
+            caret
+                .on('mousedown', function () {
+                    // prevent the form element from blurring. it blurs on mousedown
+                    d3_event.stopPropagation();
+                    d3_event.preventDefault();
+                    var combo = container.selectAll('.combobox');
+                    if (combo.empty()) {
+                        input.node().focus();
+                        fetch('', function() {
+                            show();
+                            render();
+                        });
+                    } else {
+                        hide();
+                    }
+                });
+        }
+
 
         function focus() {
-            fetch(value(), render);
+            _choice = null;
+            fetch('');   // prefetch values (may warm taginfo cache)
         }
+
 
         function blur() {
-            window.setTimeout(hide, 150);
+            _comboTimerID = window.setTimeout(hide, 150);
         }
+
 
         function show() {
-            if (_wrapper.empty()) {
-                _wrapper = _container
-                    .insert('div', ':first-child')
-                    .datum(input.node())
-                    .attr('class', 'combobox')
-                    .style('position', 'absolute')
-                    .style('display', 'block')
-                    .style('left', '0px')
-                    .on('mousedown', function () {
-                        // prevent moving focus out of the text field
-                        d3_event.preventDefault();
-                    });
+            hide();   // remove any existing
 
-                d3_select('body')
-                    .on('scroll.combobox', render, true);
-            }
+            container
+                .insert('div', ':first-child')
+                .datum(input.node())
+                .attr('class', 'combobox' + (klass ? ' combobox-' + klass : ''))
+                .style('position', 'absolute')
+                .style('display', 'block')
+                .style('left', '0px')
+                .on('mousedown', function () {
+                    // prevent moving focus out of the input field
+                    d3_event.preventDefault();
+                });
+
+            d3_select('body')
+                .on('scroll.combobox', render, true);
         }
+
 
         function hide() {
-            if (!_wrapper.empty()) {
-                _choice = '';
-                _wrapper.remove();
-
-                d3_select('body')
-                    .on('scroll.combobox', null);
+            if (_comboTimerID) {
+                window.clearTimeout(_comboTimerID);
+                _comboTimerID = undefined;
             }
+
+            container.selectAll('.combobox')
+                .remove();
+
+            d3_select('body')
+                .on('scroll.combobox', null);
         }
 
+
         function keydown() {
-            var shown = !_wrapper.empty();
+            var shown = !container.selectAll('.combobox').empty();
             var tagName = input.node() ? input.node().tagName.toLowerCase() : '';
 
             switch (d3_event.keyCode) {
                 case 8:   // ⌫ Backspace
                 case 46:  // ⌦ Delete
-                    _choice = '';
+                    d3_event.stopPropagation();
+                    _choice = null;
                     render();
                     input.on('input.typeahead', function() {
                         var start = input.property('selectionStart');
@@ -134,19 +147,21 @@ export function d3combobox() {
                     break;
 
                 case 9:   // ⇥ Tab
-                    _wrapper.selectAll('a.selected').each(function (d) {
-                        dispatch.call('accept', this, d);
-                    });
-                    hide();
+                    d3_event.stopPropagation();
+                    accept();
                     break;
 
                 case 13:  // ↩ Return
                     d3_event.preventDefault();
+                    d3_event.stopPropagation();
                     break;
 
                 case 38:  // ↑ Up arrow
                     if (tagName === 'textarea' && !shown) return;
                     d3_event.preventDefault();
+                    if (tagName === 'input' && !shown) {
+                        show();
+                    }
                     nav(-1);
                     break;
 
@@ -159,50 +174,76 @@ export function d3combobox() {
                     nav(+1);
                     break;
             }
-            d3_event.stopPropagation();
         }
+
 
         function keyup() {
             switch (d3_event.keyCode) {
                 case 27:  // ⎋ Escape
-                    hide();
+                    cancel();
                     break;
 
                 case 13:  // ↩ Return
-                    _wrapper.selectAll('a.selected').each(function (d) {
-                       dispatch.call('accept', this, d);
-                    });
-                    hide();
+                    accept();
                     break;
             }
         }
 
+
         function change() {
             fetch(value(), function() {
                 if (input.property('selectionEnd') === input.property('value').length) {
-                    doAutocomplete();
+                    tryAutocomplete();
+                }
+
+                var combo = container.selectAll('.combobox');
+                if (combo.empty()) {
+                    show();
                 }
                 render();
             });
         }
+
 
         function nav(dir) {
             if (!_suggestions.length) return;
 
             var index = -1;
             for (var i = 0; i < _suggestions.length; i++) {
-                if (_choice !== '' && _suggestions[i].value === _choice) {
+                if (_choice && _suggestions[i].value === _choice.value) {
                     index = i;
                     break;
                 }
             }
 
             index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
-            _choice = _suggestions[index].value;
-            input.property('value', _choice);
+            _choice = _suggestions[index];
+            input.property('value', _choice.value);
             render();
             ensureVisible();
         }
+
+
+        function ensureVisible() {
+            var combo = container.selectAll('.combobox');
+            if (combo.empty()) return;
+
+            var containerRect = container.node().getBoundingClientRect();
+            var comboRect = combo.node().getBoundingClientRect();
+
+            if (comboRect.bottom > containerRect.bottom) {
+                var node = attachTo ? attachTo.node() : input.node();
+                node.scrollIntoView({ behavior: 'instant', block: 'center' });
+                render();
+            }
+
+            // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
+            var selected = combo.selectAll('.combobox-option.selected').node();
+            if (selected) {
+                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
 
         function value() {
             var value = input.property('value');
@@ -216,18 +257,22 @@ export function d3combobox() {
             return value;
         }
 
+
         function fetch(v, cb) {
             _fetcher.call(input, v, function(results) {
                 _suggestions = results;
-                cb();
+                if (cb) {
+                    cb();
+                }
             });
         }
 
-        function doAutocomplete() {
+
+        function tryAutocomplete() {
             if (!_canAutocomplete) return;
 
             var v = _caseSensitive ? value() : value().toLowerCase();
-            _choice = '';
+            _choice = null;
             if (!v) return;
 
             // Don't autocomplete if user is typing a number - #4935
@@ -250,24 +295,24 @@ export function d3combobox() {
             }
 
             if (best !== -1) {
-                _choice = _suggestions[best].value;
-                input.property('value', _choice);
-                input.node().setSelectionRange(v.length, _choice.length);
+                _choice = _suggestions[best];
+                input.property('value', _choice.value);
+                input.node().setSelectionRange(v.length, _choice.value.length);
             }
         }
 
+
         function render() {
-            if (_suggestions.length >= _minItems &&
-                document.activeElement === input.node()) {
-                // input.attr('readonly') === null)
-                show();
-            } else {
+            if (_suggestions.length < _minItems || document.activeElement !== input.node()) {
                 hide();
                 return;
             }
 
-            var options = _wrapper
-                .selectAll('a.combobox-option')
+            var shown = !container.selectAll('.combobox').empty();
+            if (!shown) return;
+
+            var combo = container.selectAll('.combobox');
+            var options = combo.selectAll('.combobox-option')
                 .data(_suggestions, function(d) { return d.value; });
 
             options.exit()
@@ -280,32 +325,39 @@ export function d3combobox() {
                 .text(function(d) { return d.value; })
                 .merge(options)
                 .attr('title', function(d) { return d.title; })
-                .classed('selected', function(d) { return d.value === _choice; })
+                .classed('selected', function(d) { return d === _choice; })
                 .on('click', accept)
                 .order();
-
 
             var node = attachTo ? attachTo.node() : input.node();
             var rect = node.getBoundingClientRect();
 
-            _wrapper
+            combo
                 .style('left', (rect.left + 5) + 'px')
                 .style('width', (rect.width - 10) + 'px')
                 .style('top', rect.height + rect.top + 'px');
         }
 
-        function ensureVisible() {
-            var node = _wrapper.selectAll('a.selected').node();
-            if (node) node.scrollIntoView();
-        }
-
+        // Dispatches an 'accept' event if an option has been chosen.
+        // Then hides the combobox.
         function accept(d) {
-            if (_wrapper.empty()) return;
-            input.property('value', d.value);
-            utilTriggerEvent(input, 'change');
-            dispatch.call('accept', this, d);
+            d = d || _choice;
+            if (d) {
+                utilGetSetValue(input, d.value);
+                utilTriggerEvent(input, 'change');
+                dispatch.call('accept', this, d);
+            }
             hide();
         }
+
+        // Dispatches an 'cancel' event
+        // Then hides the combobox.
+        function cancel(d) {
+            d = d || _choice;
+            dispatch.call('cancel', this, d);
+            hide();
+        }
+
     };
 
     combobox.canAutocomplete = function(val) {
@@ -317,12 +369,6 @@ export function d3combobox() {
     combobox.caseSensitive = function(val) {
         if (!arguments.length) return _caseSensitive;
         _caseSensitive = val;
-        return combobox;
-    };
-
-    combobox.container = function(val) {
-        if (!arguments.length) return _container;
-        _container = val;
         return combobox;
     };
 
@@ -349,7 +395,7 @@ export function d3combobox() {
 }
 
 
-d3combobox.off = function(input) {
+uiCombobox.off = function(input) {
     input
         .on('focus.typeahead', null)
         .on('blur.typeahead', null)

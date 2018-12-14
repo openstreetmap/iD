@@ -1,12 +1,8 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
 
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { uiCombobox } from '../index';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldCycleway(field, context) {
@@ -61,8 +57,7 @@ export function uiFieldCycleway(field, context) {
             .call(utilNoAuto)
             .each(function(d) {
                 d3_select(this)
-                    .call(d3_combobox()
-                        .container(context.container())
+                    .call(uiCombobox(context, 'cycleway-' + stripcolon(d))
                         .data(cycleway.options(d))
                     );
             });

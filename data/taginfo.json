@@ -1727,7 +1727,7 @@
     {
       "key": "building",
       "value": "apartments",
-      "description": "🄿 Apartments",
+      "description": "🄿 Apartment Building",
       "object_types": ["area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
@@ -3422,6 +3422,13 @@
       "value": "residential",
       "description": "🄿 Residential Area",
       "object_types": ["area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
+    },
+    {
+      "key": "residential",
+      "value": "apartments",
+      "description": "🄿 Apartment Complex",
+      "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/building-15.svg?sanitize=true"
     },
     {
@@ -6459,7 +6466,7 @@
     {
       "key": "traffic_calming",
       "description": "🄿 Traffic Calming, 🄵 Type",
-      "object_types": ["node", "way"],
+      "object_types": ["node", "way", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/diamond.svg?sanitize=true"
     },
     {
@@ -6473,14 +6480,14 @@
       "key": "traffic_calming",
       "value": "chicane",
       "description": "🄿 Traffic Chicane",
-      "object_types": ["node", "way"],
+      "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/diamond.svg?sanitize=true"
     },
     {
       "key": "traffic_calming",
       "value": "choker",
       "description": "🄿 Traffic Choker",
-      "object_types": ["node", "way"],
+      "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/diamond.svg?sanitize=true"
     },
     {
@@ -6508,7 +6515,7 @@
       "key": "traffic_calming",
       "value": "island",
       "description": "🄿 Traffic Island",
-      "object_types": ["node"],
+      "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/bhousel/temaki/master/icons/diamond.svg?sanitize=true"
     },
     {
@@ -7002,6 +7009,7 @@
     {"key": "artwork_type", "description": "🄵 Type"},
     {"key": "atm", "description": "🄵 ATM"},
     {"key": "backrest", "description": "🄵 Backrest"},
+    {"key": "basin", "description": "🄵 Type"},
     {"key": "bath:open_air", "description": "🄵 Open Air"},
     {"key": "bath:sand_bath", "description": "🄵 Sand Bath"},
     {"key": "bath:type", "value": "onsen", "description": "🄵 Specialty"},

@@ -153,6 +153,11 @@
                 "annotation": "从关系中删除了一个成员。"
             },
             "connect": {
+                "annotation": {
+                    "from_point": {
+                        "to_line": "将点添加到线上"
+                    }
+                },
                 "relation": "这些要素不能被连接，因为其有冲突的关系成员。",
                 "restriction": "这些要素不能被连接，因为这样会破坏 “{relation}” 关系。"
             },
@@ -357,6 +362,7 @@
         "browser_notice": "本编辑器需要在 Firefox、Chrome、Safari、Opera 以及 Internet Explorer 11 或更新版本的浏览器中工作。请升级您的浏览器，或使用 Potlatch 2 来编辑地图。",
         "translate": {
             "translate": "翻译",
+            "localized_translation_label": "多语言名称",
             "localized_translation_language": "选择语言",
             "localized_translation_name": "名称"
         },
@@ -517,7 +523,10 @@
             "way": "路径",
             "relation": "关系",
             "location": "位置",
-            "add_fields": "添加字段："
+            "add_fields": "添加字段：",
+            "lock": {
+                "suggestion": "{label}框已锁定，由于有Wikidata的标签。 你可以删除它或在“所有标签”框内编辑它。"
+            }
         },
         "background": {
             "title": "背景",
@@ -1356,6 +1365,7 @@
                             "title": "指定"
                         },
                         "destination": {
+                            "description": "仅限驻地车辆行驶",
                             "title": "目的地"
                         },
                         "dismount": {
@@ -3641,10 +3651,6 @@
                 "building": {
                     "name": "建筑物",
                     "terms": "建筑物，屋宇"
-                },
-                "building/apartments": {
-                    "name": "住宅楼",
-                    "terms": "公寓,住宅楼"
                 },
                 "building/barn": {
                     "name": "谷仓",

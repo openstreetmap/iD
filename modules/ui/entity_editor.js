@@ -33,10 +33,10 @@ export function uiEntityEditor(context) {
     var _activePreset;
     var _tagReference;
 
-    var presetEditor = uiPresetEditor(context)
-        .on('change', changeTags);
-    var rawTagEditor = uiRawTagEditor(context)
-        .on('change', changeTags);
+    var presetEditor = uiPresetEditor(context).on('change', changeTags);
+    var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
+    var rawMemberEditor = uiRawMemberEditor(context);
+    var rawMembershipEditor = uiRawMembershipEditor(context);
 
 
     function entityEditor(selection) {
@@ -178,7 +178,7 @@ export function uiEntityEditor(context) {
         if (entity.type === 'relation') {
             body.select('.raw-member-editor')
                 .style('display', 'block')
-                .call(uiRawMemberEditor(context)
+                .call(rawMemberEditor
                     .entityID(_entityID)
                 );
         } else {
@@ -187,7 +187,7 @@ export function uiEntityEditor(context) {
         }
 
         body.select('.raw-membership-editor')
-            .call(uiRawMembershipEditor(context)
+            .call(rawMembershipEditor
                 .entityID(_entityID)
             );
 

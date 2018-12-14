@@ -5,7 +5,9 @@
             "information": "info",
             "remove": "noņemt ",
             "undo": "atsaukt",
-            "zoom_to": "pietuvināt uz"
+            "zoom_to": "pietuvināt uz",
+            "copy": "kopēt",
+            "open_wikidata": "atvēŗt wikidata.org"
         },
         "modes": {
             "add_area": {
@@ -153,6 +155,12 @@
                 "annotation": "Noņēma locekli no relācijas."
             },
             "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Pievienoja līniju punktam.",
+                        "to_vertex": "Pievienoja līniju citai."
+                    }
+                },
                 "relation": "Šos objektus nevar savienot, jo tiem ir konfliktējošas relāciju lomas.",
                 "restriction": "Šos objektus nevar savienot, jo tas bojātu \"{relation}\" relāciju."
             },
@@ -206,12 +214,21 @@
                 "title": {
                     "long": "Atspoguļot garumā"
                 },
+                "description": {
+                    "long": {
+                        "multiple": "Atspoguļot šos objektus to garuma asī."
+                    }
+                },
                 "key": {
                     "long": "T",
                     "short": "Y"
                 },
+                "incomplete_relation": {
+                    "multiple": "Šos objektus nevar atspoguļot, jo tie nav pilnībā lejupielādēti."
+                },
                 "too_large": {
-                    "single": "Šo objektu nevar atspoguļot, jo tas nav pietiekami redzams."
+                    "single": "Šo objektu nevar atspoguļot, jo tas nav pietiekami redzams.",
+                    "multiple": "Šos objektus nevar atspoguļot, jo tie nav pietiekami redzami."
                 }
             },
             "rotate": {
@@ -233,6 +250,9 @@
                 "too_large": {
                     "single": "Šo objektu nevar pagriezt, jo tas nav pietiekami redzams.",
                     "multiple": "Šos objektus nevar pagriezt, jo tie nav pietiekami redzami."
+                },
+                "connected_to_hidden": {
+                    "multiple": "Šos objektus nevar pagriezt, jo daži no tiem ir pievienoti pie paslēptiem objektiem."
                 }
             },
             "reverse": {
@@ -633,6 +653,7 @@
             "untagged_line": "Neapzīmēta līnija",
             "untagged_line_tooltip": "Izvēlies tipu, kas vislabāk izskaidro šo līniju.",
             "untagged_area": "Neapzīmēts apgabals",
+            "many_deletions": "Jūs dzēšat {n} objektus: {p} mezglus, {l} līnijas, {a} apgabalus, {r} relācijas.. Vai tiešām vēlaties to darīt? Tie tiks izdzēsti no kartes, ko visi var aplūkt openstreetmap.org.",
             "tag_suggests_area": "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
             "deprecated_tags": "Novecojuši apzīmējumi: {tags}"
         },
@@ -705,7 +726,8 @@
             },
             "overview": {
                 "title": "Pārskats",
-                "navigation_h": "Navigācija"
+                "navigation_h": "Navigācija",
+                "features_h": "Kartes Objekti"
             },
             "editing": {
                 "title": "Rediģēšana un saglabāšana",
@@ -771,7 +793,8 @@
             },
             "gps": {
                 "title": "GPS Treki",
-                "using_h": "GPS Treku izmantošana"
+                "using_h": "GPS Treku izmantošana",
+                "tracing": "GPS Treks netiek nosūtīts uz OpenStreetMap - labākais veids, kā to izmantot ir zīmējot uz kartes, izmantojot to kā gidu priekš jauniem objektiem, ko tu pievieno."
             },
             "field": {
                 "restrictions": {
@@ -850,10 +873,16 @@
             "browsing": {
                 "navigation": {
                     "zoom": "Tuvināt / Tālināt"
+                },
+                "selecting": {
+                    "lasso": "Uzzīmēt izvēlnes laso ap objektiem",
+                    "search": "Atrast objektus, kas atbilst meklētajam tekstam"
                 }
             },
             "editing": {
                 "operations": {
+                    "merge": "Apvienot (apkopot) izvēlētos objektus",
+                    "disconnect": "Atvienot objektus izvēlētajā punktā",
                     "move": "Pārvietot izvēlētos objektus",
                     "rotate": "Pagriezt izvēlētos objektus",
                     "delete": "Dzēst izvēlētos objektus"
@@ -1040,7 +1069,8 @@
                     "label": "Specialitātes",
                     "options": {
                         "foot_bath": "Kāju vanna",
-                        "hot_spring": "Karstais Avots"
+                        "hot_spring": "Karstais Avots",
+                        "onsen": "Japāņu Onsens"
                     }
                 },
                 "beauty": {
@@ -1056,7 +1086,12 @@
                     "label": "Miskaste"
                 },
                 "blood_components": {
-                    "label": "Asins Daļas"
+                    "label": "Asins Daļas",
+                    "options": {
+                        "plasma": "plazma",
+                        "platelets": "trombocīti",
+                        "whole": "Pilnas asinis"
+                    }
                 },
                 "board_type": {
                     "label": "Tips"
@@ -1073,6 +1108,9 @@
                 "bridge": {
                     "label": "Tips",
                     "placeholder": "Noklusējuma"
+                },
+                "bridge/support": {
+                    "label": "Tips"
                 },
                 "building": {
                     "label": "Ēka"
@@ -1120,6 +1158,9 @@
                 },
                 "collection_times": {
                     "label": "Savākšanas laiki"
+                },
+                "colour": {
+                    "label": "Krāsa"
                 },
                 "comment": {
                     "label": "Izmaiņu komentārs",
@@ -1516,6 +1557,9 @@
                 "lanes": {
                     "label": "Joslas",
                     "placeholder": "1, 2, 3..."
+                },
+                "language_multi": {
+                    "label": "Valodas"
                 },
                 "layer": {
                     "label": "Līmenis",
@@ -2333,6 +2377,18 @@
                     "name": "Naktsklubs",
                     "terms": "klubs,deju klubs,dejošana,nakts klubs"
                 },
+                "amenity/parking": {
+                    "name": "Stāvvieta",
+                    "terms": "Auto, Mašīnas, stāvvieta, stāvēšana, apstāšanās, pieturvieta"
+                },
+                "amenity/parking/multi-storey": {
+                    "name": "Daudzlīmeņu Stāvvieta",
+                    "terms": "Garāža, daudzstāvu, stāvi, ēka, autostāvieta"
+                },
+                "amenity/parking_entrance": {
+                    "name": "Daudzlīmeņu Stāvvietas Ieeja/Izeja",
+                    "terms": "daudzstāvu stāvvieta, ieeja, izeja, iebrauktuve, izbrauktuve"
+                },
                 "amenity/pharmacy": {
                     "name": "Aptieka",
                     "terms": "medicīnas, recepšu"
@@ -2616,10 +2672,6 @@
                 },
                 "building": {
                     "name": "Ēka"
-                },
-                "building/apartments": {
-                    "name": "Dzīvokļi",
-                    "terms": "daudzstāvu māja"
                 },
                 "building/barn": {
                     "name": "Klēts"
@@ -3996,6 +4048,12 @@
                 },
                 "name": "UrbIS-Ortho 2017"
             },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realizēts, izmantojot  UrbIS®© - Izplatīšana & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
+            },
             "UrbisAdmFR": {
                 "attribution": {
                     "text": "Realizēts, izmantojot  UrbIS®© - Izplatīšana & Copyright CIRB"
@@ -4090,18 +4148,23 @@
             "kalmar-orto-2014": {
                 "attribution": {
                     "text": "© Kalmaras pašvaldība"
-                }
+                },
+                "description": "Kalmāras pašlavaldības ziemeļu krasta ortofoto 2014",
+                "name": "Kalmāras Ziemeļu Ortofoto 2014"
             },
             "kalmar-orto-2016": {
                 "attribution": {
                     "text": "© Kalmaras pašvaldība"
-                }
+                },
+                "description": "Kalmāras pašvaldības dienvidu krasta ortofoto 2016",
+                "name": "Kalmāras Dienvidu Ortofoto 2016"
             },
             "kalmar-orto-2018": {
                 "attribution": {
                     "text": "© Kalmaras pašvaldība"
                 },
-                "description": "Urbāno vietu ortofoto no Kalmaras pašvaldības 2018"
+                "description": "Urbāno vietu ortofoto no Kalmaras pašvaldības 2018",
+                "name": "Kalmāras Dienvidu Ortofoto 2018"
             },
             "kelkkareitit": {
                 "attribution": {
@@ -4826,21 +4889,42 @@
                 "description": "Seko mums Twitterī: {url}"
             },
             "OSM-BO-mailinglist": {
-                "name": "Talk-bo E-pasta saraksts"
+                "name": "Talk-bo E-pasta saraksts",
+                "extendedDescription": "Kartē Bolīvijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
+            },
+            "Bahia-telegram": {
+                "description": "Pievienojies OpenStreetMap Baijas kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br E-pasta saraksts"
             },
+            "OSM-br-telegram": {
+                "description": "Pievienojies OpenStreetMap Brazīlijas kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
+            },
             "OSM-br-twitter": {
                 "description": "Seko mums Twitterī: {url}"
             },
+            "RS-telegram": {
+                "description": "Pievienojies OpenStreetMap Rio Grande do Sul kopienai Telegram"
+            },
+            "OSM-CL-facebook": {
+                "description": "Pievienojies OpenStreetMap Čīles kopienai Feisbookā",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
+            },
             "OSM-CL-mailinglist": {
                 "name": "Talk-cl E-pasta saraksts"
+            },
+            "OSM-CL-telegram": {
+                "description": "Pievienojies OpenStreetMap Čīles kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
             },
             "OSM-CL-twitter": {
                 "description": "Seko mums Twitterī: {url}"
             },
             "OSM-CO-facebook": {
+                "description": "Pievienojies OpenStreetMap Kolumbijas kopienai Feisbookā",
                 "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap. Visi ir gaidīti!"
             },
             "OSM-CO-mailinglist": {

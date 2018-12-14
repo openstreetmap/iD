@@ -59,7 +59,6 @@ export function uiSave(context) {
 
             button
                 .classed('disabled', numChanges === 0)
-                .classed('has-count', numChanges > 0)
                 .style('background', background);
 
             button.select('span.count')

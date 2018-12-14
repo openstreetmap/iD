@@ -3,15 +3,13 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
-
 import { t } from '../util/locale';
 import { actionChangeMember, actionDeleteMember } from '../actions';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg';
 import { services } from '../services';
-import { uiDisclosure } from './disclosure';
+import { uiCombobox, uiDisclosure } from './index';
 import {
     utilDisplayName,
     utilDisplayType,
@@ -61,12 +59,16 @@ export function uiRawMemberEditor(context) {
 
 
     function changeRole(d) {
-        var role = d3_select(this).property('value');
-        var member = { id: d.id, type: d.type, role: role };
-        context.perform(
-            actionChangeMember(d.relation.id, member, d.index),
-            t('operations.change_role.annotation')
-        );
+        var oldRole = d.role;
+        var newRole = d3_select(this).property('value');
+
+        if (oldRole !== newRole) {
+            var member = { id: d.id, type: d.type, role: newRole };
+            context.perform(
+                actionChangeMember(d.relation.id, member, d.index),
+                t('operations.change_role.annotation')
+            );
+        }
     }
 
 
@@ -190,7 +192,7 @@ export function uiRawMemberEditor(context) {
                         labelText
                             .append('span')
                             .attr('class', 'member-entity-type')
-                            .text(t('inspector.'+d.type, { id: d.id }));
+                            .text(t('inspector.' + d.type, { id: d.id }));
 
                         labelText
                             .append('span')
@@ -219,6 +221,7 @@ export function uiRawMemberEditor(context) {
                 .attr('placeholder', t('inspector.role'))
                 .call(utilNoAuto)
                 .property('value', function(d) { return d.role; })
+                .on('blur', changeRole)
                 .on('change', changeRole);
 
             wrapEnter
@@ -226,8 +229,8 @@ export function uiRawMemberEditor(context) {
                 .attr('tabindex', -1)
                 .attr('title', t('icons.remove'))
                 .attr('class', 'remove form-field-button member-delete')
-                .on('click', deleteMember)
-                .call(svgIcon('#iD-operation-delete'));
+                .call(svgIcon('#iD-operation-delete'))
+                .on('click', deleteMember);
 
             if (taginfo) {
                 wrapEnter.each(bindTypeahead);
@@ -237,6 +240,7 @@ export function uiRawMemberEditor(context) {
             function bindTypeahead(d) {
                 var row = d3_select(this);
                 var role = row.selectAll('input.member-role');
+                var origValue = role.property('value');
 
                 function sort(value, data) {
                     var sameletter = [];
@@ -251,19 +255,37 @@ export function uiRawMemberEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(d3_combobox()
-                    .container(context.container())
+                role.call(uiCombobox(context, 'member-role')
                     .fetcher(function(role, callback) {
+                        // The `geometry` param is used in the `taginfo.js` interface for
+                        // filtering results, as a key into the `tag_members_fractions`
+                        // object.  If we don't know the geometry because the member is
+                        // not yet downloaded, it's ok to guess based on type.
+                        var geometry;
+                        if (d.member) {
+                            geometry = context.geometry(d.member.id);
+                        } else if (d.type === 'relation') {
+                            geometry = 'relation';
+                        } else if (d.type === 'way') {
+                            geometry = 'line';
+                        } else {
+                            geometry = 'point';
+                        }
+
                         var rtype = entity.tags.type;
                         taginfo.roles({
                             debounce: true,
                             rtype: rtype || '',
-                            geometry: context.geometry(d.member.id),
+                            geometry: geometry,
                             query: role
                         }, function(err, data) {
                             if (!err) callback(sort(role, data));
                         });
-                    }));
+                    })
+                    .on('cancel', function() {
+                        role.property('value', origValue);
+                    })
+                );
             }
 
 
@@ -271,7 +293,7 @@ export function uiRawMemberEditor(context) {
                 var row = d3_select(this);
 
                 row.selectAll('input.member-role')
-                    .call(d3_combobox.off);
+                    .call(uiCombobox.off);
             }
         }
     }

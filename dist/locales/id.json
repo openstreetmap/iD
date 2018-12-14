@@ -1326,9 +1326,6 @@
                 "building": {
                     "name": "Bangunan"
                 },
-                "building/apartments": {
-                    "name": "Apartemen"
-                },
                 "building/barn": {
                     "name": "Lumbung"
                 },

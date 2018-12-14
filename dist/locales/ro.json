@@ -1903,9 +1903,6 @@
                 "building": {
                     "name": "Clădire"
                 },
-                "building/apartments": {
-                    "name": "Apartamente"
-                },
                 "building/barn": {
                     "name": "Grajd"
                 },

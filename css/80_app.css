@@ -462,7 +462,6 @@ button[disabled].action:hover {
 }
 
 button.save .count {
-    visibility: hidden;
     display: inline-block;
     border: 0px solid #ccc;
     border-left-width: 1px;
@@ -475,24 +474,24 @@ button.save .count {
     border-right-width: 1px;
     padding: 0px 8px 0px 0px;
 }
-button.save.has-count .count {
-    visibility: visible;
+button.save.disabled .count {
+    border: 0px solid rgba(0,0,0,0.25);
+    border-left-width: 1px;
+}
+[dir='rtl'] button.save.disabled .count {
+    border-left-width: 0px;
+    border-right-width: 1px;
+    padding: 0px 8px 0px 0px;
+}
+#bar.narrow button.save .count {
+    padding: 0px;
 }
 
-/* if no count, shift label over where the count would be, preserving width */
 button.save .label {
-    margin-right: -12px;
-    margin-left: 15px;
-}
-[dir='rtl'] button.save .label {
-    margin-left: -12px;
-    margin-right: 15px;
-}
-button.save.has-count .label {
     margin-right: 3px;
     margin-left: 0;
 }
-[dir='rtl'] button.save.has-count .label {
+[dir='rtl'] button.save .label {
     margin-left: 3px;
     margin-right: 0;
 }
@@ -2177,6 +2176,7 @@ div.combobox {
     background: rgba(0,0,0,.5);
     border-radius: 0 0 4px 4px;
 }
+.raw-tag-editor .add-tag:focus,
 .raw-tag-editor .add-tag:hover {
     background: rgba(0,0,0,.8);
 }
@@ -2257,9 +2257,9 @@ div.combobox {
 }
 
 .member-row-new .member-entity-input {
+    flex: 1 1 100%;
     border-radius: 4px 4px 0 0;
-    border: 1px solid #ccc;
-    flex-basis: 100%;
+    border: 0;
 }
 
 .add-relation {
@@ -2269,6 +2269,7 @@ div.combobox {
     border-radius: 4px;
     margin-top: 10px;
 }
+.add-relation:focus,
 .add-relation:hover {
     background: rgba(0,0,0,.8);
 }

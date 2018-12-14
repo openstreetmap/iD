@@ -3387,10 +3387,6 @@
                     "name": "Épület",
                     "terms": "építmény, ház, lakás,"
                 },
-                "building/apartments": {
-                    "name": "Társasház",
-                    "terms": "Lakások, tömbház, bérház"
-                },
                 "building/barn": {
                     "name": "Pajta",
                     "terms": "csűr, melléképület, mezőgazdasági épület"

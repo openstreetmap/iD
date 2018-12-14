@@ -359,6 +359,7 @@
         "browser_notice": "이 편집기는 파이어폭스, 크롬, 사파리, 오페라와 인터넷 익스플로러 11을 지원합니다. 지도를 편집하려면 사용하고 있는 브라우저를 업그레이드하거나 Potlatch 2를 사용하세요.",
         "translate": {
             "translate": "번역",
+            "localized_translation_label": "다국어 이름",
             "localized_translation_language": "언어 선택",
             "localized_translation_name": "이름"
         },
@@ -3685,10 +3686,6 @@
                 "building": {
                     "name": "건물",
                     "terms": "빌딩"
-                },
-                "building/apartments": {
-                    "name": "아파트",
-                    "terms": "아파트, 아파트먼트"
                 },
                 "building/barn": {
                     "name": "외양간",

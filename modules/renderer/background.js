@@ -19,6 +19,7 @@ export function rendererBackground(context) {
     var dispatch = d3_dispatch('change');
     var detected = utilDetect();
     var baseLayer = rendererTileLayer(context).projection(context.projection);
+    var _isValid = true;
     var _overlayLayers = [];
     var _backgroundSources = [];
     var _brightness = 1;
@@ -37,6 +38,17 @@ export function rendererBackground(context) {
                 basemap.fetchTilemap(center);
             }
         }
+
+        // Is the imagery valid here? - #4827
+        var sources = background.sources(context.map().extent());
+        var wasValid = _isValid;
+        _isValid = !!sources
+            .filter(function(d) { return d === baseLayer.source(); }).length;
+
+        if (wasValid !== _isValid) {      // change in valid status
+            background.updateImagery();
+        }
+
 
         var baseFilter = '';
         if (detected.cssfilters) {
@@ -123,9 +135,9 @@ export function rendererBackground(context) {
 
 
     background.updateImagery = function() {
-        if (context.inIntro()) return;
+        var b = baseLayer.source();
+        if (context.inIntro() || !b) return;
 
-        var b = background.baseLayerSource();
         var o = _overlayLayers
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
             .map(function (d) { return d.source().id; })
@@ -164,7 +176,12 @@ export function rendererBackground(context) {
             window.location.replace('#' + utilQsString(q, true));
         }
 
-        var imageryUsed = [b.imageryUsed()];
+        var imageryUsed = [];
+
+        var current = b.imageryUsed();
+        if (current && _isValid) {
+            imageryUsed.push(current);
+        }
 
         _overlayLayers
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })

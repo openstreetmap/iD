@@ -3211,10 +3211,6 @@
                     "name": "Bina",
                     "terms": "Yapı"
                 },
-                "building/apartments": {
-                    "name": "Apartman",
-                    "terms": "Apartman"
-                },
                 "building/barn": {
                     "name": "Samanlık",
                     "terms": "Samanlık"

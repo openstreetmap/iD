@@ -3344,10 +3344,6 @@
                     "name": "Bygning",
                     "terms": "Bygning"
                 },
-                "building/apartments": {
-                    "name": "Lejligheder",
-                    "terms": "Lejligheder, Ejerlejligheder"
-                },
                 "building/barn": {
                     "name": "Lade",
                     "terms": "Lade, Stald"
@@ -5187,8 +5183,8 @@
                     "terms": "Juvelér, Smykkeforretning,smykke,guldsmed"
                 },
                 "shop/kitchen": {
-                    "name": "Køkkenudstyrsbutik",
-                    "terms": "Køkkenudstyrsbutik"
+                    "name": "Køkkenforhandler",
+                    "terms": "Køkkenbutik"
                 },
                 "shop/laundry": {
                     "name": "Vaskeri",

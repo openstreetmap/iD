@@ -8,19 +8,14 @@ import {
     event as d3_event
 } from 'd3-selection';
 
-import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
-
 import { t } from '../../util/locale';
 import { actionChangeTags } from '../../actions/index';
 import { dataWikipedia } from '../../../data/index';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
+import { uiCombobox } from '../index';
 import { utilDetect } from '../../util/detect';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
@@ -32,38 +27,35 @@ export function uiFieldWikipedia(field, context) {
     var _wikiURL = '';
     var _entity;
 
+    var langCombo = uiCombobox(context, 'wikipedia-lang')
+        .fetcher(function(value, cb) {
+            var v = value.toLowerCase();
 
-    function wiki(selection) {
-        var langcombo = d3_combobox()
-            .container(context.container())
-            .fetcher(function(value, cb) {
-                var v = value.toLowerCase();
+            cb(dataWikipedia.filter(function(d) {
+                return d[0].toLowerCase().indexOf(v) >= 0 ||
+                    d[1].toLowerCase().indexOf(v) >= 0 ||
+                    d[2].toLowerCase().indexOf(v) >= 0;
+            }).map(function(d) {
+                return { value: d[1] };
+            }));
+        });
 
-                cb(dataWikipedia.filter(function(d) {
-                    return d[0].toLowerCase().indexOf(v) >= 0 ||
-                        d[1].toLowerCase().indexOf(v) >= 0 ||
-                        d[2].toLowerCase().indexOf(v) >= 0;
-                }).map(function(d) {
-                    return { value: d[1] };
+    var titleCombo = uiCombobox(context, 'wikipedia-title')
+        .fetcher(function(value, cb) {
+            if (!value && _entity) {
+                value = context.entity(_entity.id).tags.name || '';
+            }
+
+            var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
+            searchfn(language()[2], value, function(query, data) {
+                cb(data.map(function(d) {
+                    return { value: d };
                 }));
             });
-
-        var titlecombo = d3_combobox()
-            .container(context.container())
-            .fetcher(function(value, cb) {
-                if (!value) {
-                    value = context.entity(_entity.id).tags.name || '';
-                }
-
-                var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
-                searchfn(language()[2], value, function(query, data) {
-                    cb(data.map(function(d) {
-                        return { value: d };
-                    }));
-                });
-            });
+        });
 
 
+    function wiki(selection) {
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
@@ -91,12 +83,12 @@ export function uiFieldWikipedia(field, context) {
             .attr('class', 'wiki-lang')
             .attr('placeholder', t('translate.localized_translation_language'))
             .call(utilNoAuto)
+            .call(langCombo)
             .merge(lang);
 
         utilGetSetValue(lang, language()[1]);
 
         lang
-            .call(langcombo)
             .on('blur', changeLang)
             .on('change', changeLang);
 
@@ -118,10 +110,10 @@ export function uiFieldWikipedia(field, context) {
             .attr('class', 'wiki-title')
             .attr('id', 'preset-input-' + field.safeid)
             .call(utilNoAuto)
+            .call(titleCombo)
             .merge(title);
 
         title
-            .call(titlecombo)
             .on('blur', blur)
             .on('change', change);
 

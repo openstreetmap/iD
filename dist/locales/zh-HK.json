@@ -3636,10 +3636,6 @@
                     "name": "建築物",
                     "terms": "Building,屋宇,建築物"
                 },
-                "building/apartments": {
-                    "name": "公寓",
-                    "terms": "Apartments,公寓,分層屋宇"
-                },
                 "building/barn": {
                     "name": "穀倉",
                     "terms": "穀倉,糧倉"

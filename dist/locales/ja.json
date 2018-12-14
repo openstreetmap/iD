@@ -506,6 +506,7 @@
             "all_members": "すべてのメンバー",
             "all_relations": "すべてのリレーション",
             "new_relation": "新しいリレーション...",
+            "choose_relation": "親のリレーションを選択",
             "role": "役割",
             "choose": "地物の種類を選択",
             "results": "検索結果{n}件: {search}",
@@ -1653,6 +1654,9 @@
                 "barrier": {
                     "label": "種類"
                 },
+                "basin": {
+                    "label": "種類"
+                },
                 "bath/open_air": {
                     "label": "露天風呂"
                 },
@@ -2173,6 +2177,9 @@
                     "label": "碑文の文面"
                 },
                 "intermittent": {
+                    "label": "間欠性"
+                },
+                "intermittent_yes": {
                     "label": "間欠性"
                 },
                 "internet_access": {
@@ -3839,7 +3846,7 @@
                 },
                 "amenity/theatre": {
                     "name": "劇場",
-                    "terms": "劇場, ホール, 映画館, 娯楽, カルチャー"
+                    "terms": "劇場, ホール, 映画館, 娯楽, カルチャー, シアター"
                 },
                 "amenity/theatre/type/amphi": {
                     "name": " 野外劇場",
@@ -4142,10 +4149,6 @@
                 "building": {
                     "name": "建物全般",
                     "terms": "建物, ビル"
-                },
-                "building/apartments": {
-                    "name": "集合住宅",
-                    "terms": "アパート, マンション, 集合住宅, 住宅, 住居"
                 },
                 "building/barn": {
                     "name": "納屋",

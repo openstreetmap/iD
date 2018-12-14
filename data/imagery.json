@@ -6159,7 +6159,7 @@
       "name": "Bing aerial imagery",
       "type": "bing",
       "template": "https://www.bing.com/maps",
-      "zoomExtent": [0, 22],
+      "zoomExtent": [1, 22],
       "default": true,
       "description": "Satellite and aerial imagery.",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"

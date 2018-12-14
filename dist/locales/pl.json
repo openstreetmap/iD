@@ -4125,10 +4125,6 @@
                     "name": "Budynek (ogólny)",
                     "terms": "budynek,budowla,dom"
                 },
-                "building/apartments": {
-                    "name": "Budynek mieszkalny wielorodzinny",
-                    "terms": "blok,kamienica"
-                },
                 "building/barn": {
                     "name": "Stodoła",
                     "terms": "stodoła"
