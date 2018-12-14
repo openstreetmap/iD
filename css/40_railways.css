@@ -1,4 +1,6 @@
 /* railways */
+
+/* defaults */
 .preset-icon .icon.tag-railway.other-line {
     color: #fff;
     fill: #777;
@@ -8,49 +10,36 @@
     fill: #eee;
 }
 
-/* railway areas */
-path.stroke.area.tag-railway,
-.low-zoom path.stroke.area.tag-railway {
-    stroke: white;
-    stroke-width: 1;
-    stroke-dasharray: none;
-}
-
-path.casing.area.tag-railway,
-.low-zoom path.casing.area.tag-railway {
-    stroke: none;
-}
-
+/* lines */
 /* narrow widths */
-path.shadow.tag-railway {
+path.line.shadow.tag-railway {
     stroke-width: 16;
 }
-path.casing.tag-railway {
+path.line.casing.tag-railway {
     stroke-width: 7;
 }
-path.stroke.tag-railway {
+path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-linecap: butt;
     stroke-dasharray: 12,12;
 }
-
-.low-zoom path.shadow.tag-railway {
+.low-zoom path.line.shadow.tag-railway {
     stroke-width: 12;
 }
-.low-zoom path.casing.tag-railway {
+.low-zoom path.line.casing.tag-railway {
     stroke-width: 5;
 }
-.low-zoom path.stroke.tag-railway {
+.low-zoom path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-dasharray: 6,6;
 }
 
 
 /* styles */
-path.casing.tag-railway {
+path.line.casing.tag-railway {
     stroke: #555;
 }
-path.stroke.tag-railway {
+path.line.stroke.tag-railway {
     stroke: #eee;
 }
 
@@ -60,12 +49,12 @@ path.stroke.tag-railway {
     color: #999;
     fill: #eee;
 }
-path.casing.tag-railway-disused,
-path.casing.tag-railway-abandoned {
+path.line.casing.tag-railway-disused,
+path.line.casing.tag-railway-abandoned {
     stroke: #999;
 }
-path.stroke.tag-railway-disused,
-path.stroke.tag-railway-abandoned {
+path.line.stroke.tag-railway-disused,
+path.line.stroke.tag-railway-abandoned {
     stroke: #eee;
 }
 
@@ -74,9 +63,9 @@ path.stroke.tag-railway-abandoned {
     color: #222;
     fill: #bbb;
 }
-path.casing.tag-railway-subway {
+path.line.casing.tag-railway-subway {
     stroke: #222;
 }
-path.stroke.tag-railway-subway {
+path.line.stroke.tag-railway-subway {
     stroke: #bbb;
 }
