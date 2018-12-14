@@ -219,11 +219,6 @@ export function uiField(context, presetField, entity, options) {
     };
 
 
-    field.hasValue = function() {
-        return _some(field.keys, function(key) { return !!_tags[key]; });
-    };
-
-
     field.show = function() {
         _show = true;
         if (!field.impl) {
