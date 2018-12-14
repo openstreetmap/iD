@@ -123,7 +123,7 @@ export function presetIndex() {
         return areaKeys;
     };
 
-    all.build = function(d, visibility) {
+    all.build = function(d, visible) {
         if (d.fields) {
             _forEach(d.fields, function(d, id) {
                 _fields[id] = presetField(id, d);
@@ -139,7 +139,7 @@ export function presetIndex() {
 
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                all.collection.push(presetPreset(id, d, _fields, visibility));
+                all.collection.push(presetPreset(id, d, _fields, visible));
             });
         }
 
@@ -171,6 +171,7 @@ export function presetIndex() {
                 }
             }
         }
+        return all;
     };
 
     all.init = function() {
@@ -180,22 +181,40 @@ export function presetIndex() {
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
-        all.build(data.presets);
+        return all.build(data.presets);
+    };
+
+    
+    all.reset = function() {
+        all.collection = [];
+        _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
+        _fields = {};
+        _universal = [];
+        _recent = presetCollection([]);
+
+        // Index of presets by (geometry, tag key).
+        _index = {
+            point: {},
+            vertex: {},
+            line: {},
+            area: {},
+            relation: {}
+        };
 
         return all;
     };
 
-    all.fromExternal = function() {
-        var external = utilQsString(window.location.hash).presets;
-        d3_json(external, function(err, presets) {
+    all.fromExternal = function(external, done) {
+        all.reset();
+        d3_json(external, function(err, externalPresets) {
             if (err) {
                 all.init();
             } else {
                 all.build(data.presets, false); // make default presets hidden to begin
-                all.build(presets, true); // make the external visible
+                all.build(externalPresets, true); // make the external visible
             }
+            done(all);
         });
-        return all;
     };
 
     all.field = function(id) {

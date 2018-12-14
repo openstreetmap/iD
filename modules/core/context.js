@@ -441,28 +441,6 @@ export function coreContext() {
         locale = locale.split('-')[0];
     }
 
-    /* Presets */
-    presets = presetIndex();
-    if (utilStringQs(window.location.hash).presets) {
-        presets.fromExternal();
-    } else {
-        presets.init();
-    }
- 
-    context.presets = function() { return presets; };
-    
-    if (utilStringQs(window.location.hash).validations) {
-        var validationsUrl = utilStringQs(window.location.hash).validations;
-        d3_json(validationsUrl, function (err, mapcss) {
-            if (err) return;
-            services.maprules.init(context.presets().areaKeys());
-            _each(mapcss, function(mapcssSelector) {
-                return services.maprules.addRule(mapcssSelector); 
-            });
-            context.validationRules = true;
-        });
-    }
-
     history = coreHistory(context);
     context.graph = history.graph;
     context.changes = history.changes;
@@ -492,6 +470,18 @@ export function coreContext() {
     background = rendererBackground(context);
     features = rendererFeatures(context);
     presets = presetIndex();
+    
+    if (utilStringQs(window.location.hash).validations) {
+        var validationsUrl = utilStringQs(window.location.hash).validations;
+        d3_json(validationsUrl, function (err, mapcss) {
+            if (err) return;
+            services.maprules.init(context.presets().areaKeys());
+            _each(mapcss, function(mapcssSelector) {
+                return services.maprules.addRule(mapcssSelector); 
+            });
+            context.validationRules = true;
+        });
+    }
 
     map = rendererMap(context);
     context.mouse = map.mouse;
@@ -511,9 +501,16 @@ export function coreContext() {
 
     background.init();
     features.init();
-    presets.init();
-    areaKeys = presets.areaKeys();
-
+    if (utilStringQs(window.location.hash).presets) {
+        var external = utilStringQs(window.location.hash).presets;
+        presets.fromExternal(external, function(externalPresets){
+            presets = externalPresets; // default + external presets...
+            areaKeys = presets.areaKeys();
+        });
+    } else {
+        presets.init();
+        areaKeys = presets.areaKeys();
+    }
 
     return utilRebind(context, dispatch, 'on');
 }
