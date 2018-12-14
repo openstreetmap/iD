@@ -175,13 +175,13 @@ export function presetIndex() {
     };
 
     all.init = function() {
-        all.collection = [];
+        all.collection = [];    
         _recent.collection = [];
         _fields = {};
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
-        return all.build(data.presets);
+        return all.build(data.presets, true);
     };
 
     
