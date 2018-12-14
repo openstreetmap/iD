@@ -88,40 +88,36 @@ export function svgAreas(projection, context) {
         }
 
         for (var tag in patterns) {
-            if (patterns.hasOwnProperty(tag)) {
-                var entityValue = entity.tags[tag];
-                if (entityValue) {
+            var entityValue = entity.tags[tag];
+            if (!entityValue) continue;
 
-                    var values = patterns[tag];
-                    for (var value in values) {
-                        if (entityValue === value) {
+            var values = patterns[tag];
+            for (var value in values) {
+                if (entityValue !== value) continue;
 
-                            var rules = values[value];
-                            if (typeof rules === 'string') { // short syntax - pattern name
-                                this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
-                                return;
-                            } else { // long syntax - rule array
-                                for (var ruleKey in rules) {
-                                    var rule = rules[ruleKey];
+                var rules = values[value];
+                if (typeof rules === 'string') { // short syntax - pattern name
+                    this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
+                    return;
+                } else { // long syntax - rule array
+                    for (var ruleKey in rules) {
+                        var rule = rules[ruleKey];
 
-                                    var pass = true;
-                                    for (var criterion in rule) {
-                                        if (criterion !== 'pattern') { // reserved for pattern name
-                                            // The only rule is a required tag-value pair
-                                            var v = entity.tags[criterion];
-                                            if (!v || v !== rule[criterion]) {
-                                                pass = false;
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    if (pass) {
-                                        this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
-                                        return;
-                                    }
+                        var pass = true;
+                        for (var criterion in rule) {
+                            if (criterion !== 'pattern') { // reserved for pattern name
+                                // The only rule is a required tag-value pair
+                                var v = entity.tags[criterion];
+                                if (!v || v !== rule[criterion]) {
+                                    pass = false;
+                                    break;
                                 }
                             }
+                        }
+
+                        if (pass) {
+                            this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
+                            return;
                         }
                     }
                 }
@@ -186,9 +182,9 @@ export function svgAreas(projection, context) {
 
 
     function drawAreas(selection, graph, entities, filter) {
-        var path = svgPath(projection, graph, true),
-            areas = {},
-            multipolygon;
+        var path = svgPath(projection, graph, true);
+        var areas = {};
+        var multipolygon;
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
