@@ -80,7 +80,9 @@ path.stroke.tag-natural-water,
 path.stroke.tag-landuse-aquaculture,
 path.stroke.tag-landuse-basin,
 path.stroke.tag-landuse-harbour,
-path.stroke.tag-landuse-reservoir {
+path.stroke.tag-landuse-reservoir,
+path.stroke.tag-man_made-groyne,
+path.stroke.tag-man_made-breakwater {
     stroke: rgb(119, 211, 222);
 }
 path.fill.tag-amenity-swimming_pool,
