@@ -11,6 +11,8 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
+        // tag - pattern name
+        // -or-
         // tag - value - pattern name
         // -or-
         // tag - value - rules (optional tag-values, pattern name)
@@ -93,33 +95,38 @@ export function svgAreas(projection, context) {
             var entityValue = entity.tags[tag];
             if (!entityValue) continue;
 
-            var values = patterns[tag];
-            for (var value in values) {
-                if (entityValue !== value) continue;
+            if (typeof patterns[tag] === 'string') { // extra short syntax (just tag) - pattern name
+                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[tag] + '")';
+                return;
+            } else {
+                var values = patterns[tag];
+                for (var value in values) {
+                    if (entityValue !== value) continue;
 
-                var rules = values[value];
-                if (typeof rules === 'string') { // short syntax - pattern name
-                    this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
-                    return;
-                } else { // long syntax - rule array
-                    for (var ruleKey in rules) {
-                        var rule = rules[ruleKey];
+                    var rules = values[value];
+                    if (typeof rules === 'string') { // short syntax - pattern name
+                        this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
+                        return;
+                    } else { // long syntax - rule array
+                        for (var ruleKey in rules) {
+                            var rule = rules[ruleKey];
 
-                        var pass = true;
-                        for (var criterion in rule) {
-                            if (criterion !== 'pattern') { // reserved for pattern name
-                                // The only rule is a required tag-value pair
-                                var v = entity.tags[criterion];
-                                if (!v || v !== rule[criterion]) {
-                                    pass = false;
-                                    break;
+                            var pass = true;
+                            for (var criterion in rule) {
+                                if (criterion !== 'pattern') { // reserved for pattern name
+                                    // The only rule is a required tag-value pair
+                                    var v = entity.tags[criterion];
+                                    if (!v || v !== rule[criterion]) {
+                                        pass = false;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (pass) {
-                            this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
-                            return;
+                            if (pass) {
+                                this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
+                                return;
+                            }
                         }
                     }
                 }
