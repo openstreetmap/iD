@@ -96,16 +96,20 @@ path.line.stroke.tag-natural-tree_row {
 }
 
 
-/* barriers */
+/* barriers and similar */
 path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: #ddd;
 }
-path.line.stroke.tag-barrier {
+path.line.stroke.tag-barrier,
+path.stroke.tag-man_made-groyne,
+path.stroke.tag-man_made-breakwater {
     stroke-width: 3px;
     stroke-linecap: round;
     stroke-dasharray: 15, 5, 1, 5;
 }
-.low-zoom path.line.stroke.tag-barrier {
+.low-zoom path.line.stroke.tag-barrier,
+.low-zoom path.stroke.tag-man_made-groyne,
+.low-zoom path.stroke.tag-man_made-breakwater {
     stroke-width: 2px;
     stroke-linecap: butt;
     stroke-dasharray: 8, 2, 2, 2;

@@ -125,6 +125,7 @@ export function svgDefs(context) {
                 ['quarry', 'quarry'],
                 ['scrub', 'bushes'],
                 ['vineyard', 'vineyard'],
+                ['water_standing', 'lines'],
                 ['waves', 'waves'],
                 ['wetland', 'wetland'],
                 ['wetland_marsh', 'wetland_marsh'],
