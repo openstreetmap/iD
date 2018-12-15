@@ -41,6 +41,7 @@ export function svgAreas(projection, context) {
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
+            reservoir: 'water',
             quarry: 'quarry',
             vineyard: 'vineyard'
         },
@@ -51,6 +52,7 @@ export function svgAreas(projection, context) {
             scrub: 'scrub',
             water: [
                 { water: 'pond', pattern: 'pond' },
+                { water: 'reservoir', pattern: 'water' },
                 { pattern: 'waves' }
             ],
             wetland: [
