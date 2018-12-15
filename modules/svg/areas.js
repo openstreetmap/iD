@@ -18,7 +18,8 @@ export function svgAreas(projection, context) {
         // tag - value - rules (optional tag-values, pattern name)
         // (matches earlier rules first, so fallback should be last entry)
         amenity: {
-            grave_yard: 'cemetery'
+            grave_yard: 'cemetery',
+            fountain: 'water_standing'
         },
         landuse: {
             cemetery: [
@@ -43,7 +44,7 @@ export function svgAreas(projection, context) {
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
-            reservoir: 'water',
+            reservoir: 'water_standing',
             quarry: 'quarry',
             vineyard: 'vineyard'
         },
@@ -54,7 +55,7 @@ export function svgAreas(projection, context) {
             scrub: 'scrub',
             water: [
                 { water: 'pond', pattern: 'pond' },
-                { water: 'reservoir', pattern: 'water' },
+                { water: 'reservoir', pattern: 'water_standing' },
                 { pattern: 'waves' }
             ],
             wetland: [

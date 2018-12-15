@@ -95,6 +95,9 @@ path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }
+path.fill.tag-amenity-fountain {
+    fill: rgba(119, 211, 222, 0.3);
+}
 .preset-icon-fill-area.tag-amenity-swimming_pool,
 .preset-icon-fill-area.tag-leisure-swimming_pool,
 .preset-icon-fill-area.tag-landuse-aquaculture,
@@ -106,7 +109,7 @@ path.fill.tag-natural-water {
     background-color: rgba(119, 211, 222, 0.3);
 }
 .pattern-color-waves,
-.pattern-color-water,
+.pattern-color-water_standing,
 .pattern-color-pond {
     fill: rgba(119, 211, 222, 0.3);
 }
