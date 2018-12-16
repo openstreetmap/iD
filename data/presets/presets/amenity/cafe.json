@@ -6,14 +6,15 @@
         "address",
         "building_area",
         "opening_hours",
-        "internet_access",
-        "internet_access/fee",
         "smoking",
         "outdoor_seating",
         "takeaway"
     ],
-    "moreFields" : [
-        "internet_access/ssid"
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "diet_multi"
     ],
     "geometry": [
         "point",

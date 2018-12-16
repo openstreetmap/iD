@@ -463,6 +463,9 @@ en:
       diaper:
         # diaper=*
         label: Diaper Changing Available
+      diet_multi:
+        # 'diet:=*'
+        label: Diet Types
       direction:
         # direction=*
         label: Direction (Degrees Clockwise)

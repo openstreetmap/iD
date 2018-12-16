@@ -7152,6 +7152,7 @@
     {"key": "design", "description": "🄵 Design"},
     {"key": "devices", "description": "🄵 Devices"},
     {"key": "diaper", "description": "🄵 Diaper Changing Available"},
+    {"key": "diet:", "description": "🄵 Diet Types"},
     {"key": "direction", "value": "N", "description": "🄵 Direction"},
     {"key": "direction", "value": "E", "description": "🄵 Direction"},
     {"key": "direction", "value": "S", "description": "🄵 Direction"},

@@ -1894,6 +1894,9 @@
                 "diaper": {
                     "label": "Diaper Changing Available"
                 },
+                "diet_multi": {
+                    "label": "Diet Types"
+                },
                 "direction_cardinal": {
                     "label": "Direction",
                     "options": {
