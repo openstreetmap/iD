@@ -11,15 +11,16 @@
     ],
     "tags": {
         "leisure": "pitch",
-        "sport": "american_football"
+        "sport": "australian_football"
     },
     "reference": {
         "key": "sport",
-        "value": "american_football"
+        "value": "australian_football"
     },
     "terms": [
-        "football",
-        "gridiron"
+        "Aussie",
+        "AFL",
+        "football"
     ],
-    "name": "American Football Field"
+    "name": "Australian Football Field"
 }

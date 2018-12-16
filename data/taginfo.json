@@ -3731,6 +3731,13 @@
     },
     {
       "key": "sport",
+      "value": "australian_football",
+      "description": "🄿 Australian Football Field",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/american-football-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
       "value": "badminton",
       "description": "🄿 Badminton Court",
       "object_types": ["node", "area"],

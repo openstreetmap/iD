@@ -4562,7 +4562,13 @@ en:
       leisure/pitch/american_football:
         # 'leisure=pitch, sport=american_football'
         name: American Football Field
+        # 'terms: football,gridiron'
         terms: '<translate with synonyms or related terms for ''American Football Field'', separated by commas>'
+      leisure/pitch/australian_football:
+        # 'leisure=pitch, sport=australian_football'
+        name: Australian Football Field
+        # 'terms: Aussie,AFL,football'
+        terms: '<translate with synonyms or related terms for ''Australian Football Field'', separated by commas>'
       leisure/pitch/badminton:
         # 'leisure=pitch, sport=badminton'
         name: Badminton Court

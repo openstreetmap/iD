@@ -5425,7 +5425,11 @@
                 },
                 "leisure/pitch/american_football": {
                     "name": "American Football Field",
-                    "terms": ""
+                    "terms": "football,gridiron"
+                },
+                "leisure/pitch/australian_football": {
+                    "name": "Australian Football Field",
+                    "terms": "Aussie,AFL,football"
                 },
                 "leisure/pitch/badminton": {
                     "name": "Badminton Court",
