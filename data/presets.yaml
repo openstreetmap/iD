@@ -4598,6 +4598,10 @@ en:
         name: Riding Arena
         # 'terms: dressage,equestrian,horse,horseback,riding'
         terms: '<translate with synonyms or related terms for ''Riding Arena'', separated by commas>'
+      leisure/pitch/netball:
+        # 'leisure=pitch, sport=netball'
+        name: Netball Court
+        terms: '<translate with synonyms or related terms for ''Netball Court'', separated by commas>'
       leisure/pitch/rugby_league:
         # 'leisure=pitch, sport=rugby_league'
         name: Rugby League Field

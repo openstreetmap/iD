@@ -5459,6 +5459,10 @@
                     "name": "Riding Arena",
                     "terms": "dressage,equestrian,horse,horseback,riding"
                 },
+                "leisure/pitch/netball": {
+                    "name": "Netball Court",
+                    "terms": ""
+                },
                 "leisure/pitch/rugby_league": {
                     "name": "Rugby League Field",
                     "terms": ""

@@ -3787,6 +3787,13 @@
     },
     {
       "key": "sport",
+      "value": "netball",
+      "description": "🄿 Netball Court",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/volleyball-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
       "value": "rugby_league",
       "description": "🄿 Rugby League Field",
       "object_types": ["node", "area"],
