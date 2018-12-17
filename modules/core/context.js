@@ -472,8 +472,8 @@ export function coreContext() {
     presets = presetIndex();
     
     if (utilStringQs(window.location.hash).validations) {
-        var validationsUrl = utilStringQs(window.location.hash).validations;
-        d3_json(validationsUrl, function (err, mapcss) {
+        var validations = utilStringQs(window.location.hash).validations;
+        d3_json(validations, function (err, mapcss) {
             if (err) return;
             services.maprules.init(context.presets().areaKeys());
             _each(mapcss, function(mapcssSelector) {

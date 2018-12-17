@@ -1,8 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
-import { 
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import {
     modeAddArea,
@@ -15,8 +13,6 @@ import {
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
-
-import _includes from 'lodash-es/includes';
 
 export function uiModes(context) {
     var modes = [
