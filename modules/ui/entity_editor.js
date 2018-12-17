@@ -252,7 +252,6 @@ export function uiEntityEditor(context) {
                 context.overwrite(actionChangeTags(_entityID, tags), annotation);
             } else {
                 context.perform(actionChangeTags(_entityID, tags), annotation);
-                // context.presets().choose(context.presets().match(context.graph))
                 _coalesceChanges = !!onInput;
             }
         }
