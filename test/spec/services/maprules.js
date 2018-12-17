@@ -357,17 +357,6 @@ describe('maprules', function() {
                     error: '\'suburban road\' structure tag cannot be \'bridge\' or \'tunnel\''
                 }
             ];
-            entities = [
-                iD.Entity({ type: 'node', tags: { amenity: 'marketplace' }}),
-                iD.Way({ tags: { building: 'house', amenity: 'clinic' }, nodes: [ 'a', 'b', 'c', 'a' ]}),
-                iD.Entity({ type: 'node', tags: { man_made: 'tower', 'tower:type': 'communication', height: 5 }}),
-                iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 6 }}),
-                iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 9 }}),
-                iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 5 }}),
-                iD.Entity({ type: 'node', tags: { man_made: 'tower', height: 10 }}),
-                iD.Way({ tags: { amenity: 'clinic', emergency: 'definitely' }, nodes: [ 'd', 'e', 'f', 'd' ]}),
-                iD.Way({ tags: { highway: 'residential', structure: 'bridge' }}),
-            ];
 
             iD.serviceMapRules.clearRules();
             selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });

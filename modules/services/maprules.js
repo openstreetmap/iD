@@ -210,7 +210,7 @@ export default {
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
                     var type = Object.keys(selector).indexOf('error') > -1 ? 'error' : 'warning';
                     warnings.push({
-                        id: 'mapcss_' + type,
+                        severity: type,
                         message: selector[type],
                         entity: entity
                     });
