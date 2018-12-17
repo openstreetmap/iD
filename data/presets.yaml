@@ -317,6 +317,9 @@ en:
       castle_type:
         # castle_type=*
         label: Type
+      check_date:
+        # check_date=*
+        label: Last Checked Date
       clothes:
         # clothes=*
         label: Clothes
@@ -1114,6 +1117,9 @@ en:
           undefined: Assumed to be Yes
           # oneway=yes
           'yes': 'Yes'
+      opening_date:
+        # opening_date=*
+        label: Expected Opening Date
       opening_hours:
         # opening_hours=*
         label: Hours
@@ -3826,6 +3832,11 @@ en:
       highway/bus_stop:
         # highway=bus_stop
         name: Bus Stop / Platform
+      highway/construction:
+        # 'highway=construction, access=no'
+        name: Road Closed
+        # 'terms: closed,closure,construction'
+        terms: '<translate with synonyms or related terms for ''Road Closed'', separated by commas>'
       highway/corridor:
         # highway=corridor
         name: Indoor Corridor

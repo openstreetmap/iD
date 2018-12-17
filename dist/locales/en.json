@@ -1755,6 +1755,9 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "check_date": {
+                    "label": "Last Checked Date"
+                },
                 "clothes": {
                     "label": "Clothes"
                 },
@@ -2430,6 +2433,9 @@
                         "reversible": "Reversible",
                         "alternating": "Alternating"
                     }
+                },
+                "opening_date": {
+                    "label": "Expected Opening Date"
                 },
                 "opening_hours": {
                     "label": "Hours"
@@ -4794,6 +4800,10 @@
                 "highway/bus_guideway": {
                     "name": "Bus Guideway",
                     "terms": ""
+                },
+                "highway/construction": {
+                    "name": "Road Closed",
+                    "terms": "closed,closure,construction"
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor",

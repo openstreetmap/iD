@@ -41,7 +41,6 @@ path.line.casing.tag-power {
 }
 
 /* pipeline */
-
 path.line.stroke.tag-man_made-pipeline {
     stroke: #cbd0d8;
     stroke-linecap: butt;
@@ -84,7 +83,6 @@ path.line.casing.tag-natural-tree_row {
 path.line.stroke.tag-natural-tree_row {
     stroke-width: 5;
 }
-
 .low-zoom path.line.shadow.tag-natural-tree_row {
     stroke-width: 12;
 }
@@ -123,7 +121,6 @@ path.line.casing.tag-bridge {
     stroke-linecap: butt;
     stroke-dasharray: none;
 }
-
 path.line.shadow.tag-bridge {
     stroke-width: 24;
 }
@@ -250,7 +247,7 @@ path.line.casing.tag-bridge.tag-unpaved {
 }
 
 
-/* Status (e.g. construction, proposed, abandoned) */
+/* Status (e.g. proposed, abandoned) */
 path.area.stroke.tag-status,
 path.line.stroke.tag-status,
 path.area.casing.tag-status,
@@ -263,6 +260,37 @@ path.line.casing.tag-status {
 .low-zoom path.area.casing.tag-status,
 .low-zoom path.line.casing.tag-status {
     stroke-dasharray: 5, 2;
+}
+
+/* Road Closed Status */
+.preset-icon .icon.iD-highway-construction {
+    color: #fc6c14;
+    fill: #fff;
+}
+path.line.shadow.tag-status.tag-status-construction {
+    stroke-width: 20;
+}
+path.line.casing.tag-status.tag-status-construction {
+    stroke: #fff;
+    stroke-width: 10;
+    stroke-linecap: butt;
+    stroke-dasharray: none
+}
+path.line.stroke.tag-status.tag-status-construction {
+    stroke: #fc6c14;
+    stroke-width: 8;
+    stroke-linecap: butt;
+    stroke-dasharray: 10, 10;
+}
+.low-zoom path.line.shadow.tag-status.tag-status-construction {
+    stroke-width: 16;
+}
+.low-zoom path.line.casing.tag-status.tag-status-construction {
+    stroke-width: 7;
+}
+.low-zoom path.line.stroke.tag-status.tag-status-construction {
+    stroke-width: 5;
+    stroke-dasharray: 8, 8;
 }
 
 
