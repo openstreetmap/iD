@@ -300,7 +300,7 @@ describe('maprules', function() {
         });
     });
     describe('rule', function() {
-        var selectors, entities;
+        var selectors;
         before(function() {
             selectors = [
                 {   

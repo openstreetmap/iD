@@ -187,7 +187,6 @@ export default {
     },
     // adds from mapcss-parse selector check...
     addRule: function(selector) {
-        var _areaKeys = this._areaKeys;
         var rule = {
             // checks relevant to mapcss-selector
             checks: this.filterRuleChecks(selector),

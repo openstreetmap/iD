@@ -9,7 +9,6 @@ import _isEmpty from 'lodash-es/isEmpty';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
 import _omit from 'lodash-es/omit';
-import _reduce from 'lodash-es/reduce';
 import _reject from 'lodash-es/reject';
 import _values from 'lodash-es/values';
 import _without from 'lodash-es/without';

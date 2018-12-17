@@ -10,7 +10,6 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilQsString } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -138,7 +137,7 @@ export function presetIndex() {
 
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                var existing = all.collection.findIndex(function(p) { return p.id === id; });
+                var existing = all.index(id);
                 if (existing !== -1) {
                     all.collection[existing] = presetPreset(id, d, _fields, visible);
                 } else {
@@ -149,7 +148,7 @@ export function presetIndex() {
 
         if (d.categories) {
             _forEach(d.categories, function(d, id) {
-                var existing = all.collection.findIndex(function(p) { return p.id === id; });
+                var existing = all.index(id);
                 if (existing !== -1) {
                     all.collection[existing] = presetCategory(id, d, all);
                 } else {
