@@ -218,8 +218,6 @@ export function uiEntityEditor(context) {
             // A "weak" preset doesn't set any tags. (e.g. "Address")
             // Don't replace a weak preset with a fallback preset (e.g. "Point")
             if (!(weakPreset && match.isFallback())) {
-                match.visible(true);
-                context.presets().choose(match);
                 entityEditor.preset(match);
             }
             entityEditor.modified(_base !== graph);
