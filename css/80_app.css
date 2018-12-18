@@ -4088,6 +4088,7 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .settings-modal textarea {
     height: 70px;
+    width: 100%;
 }
 
 .settings-custom-background .instructions-template {
