@@ -317,6 +317,9 @@ en:
       castle_type:
         # castle_type=*
         label: Type
+      check_date:
+        # check_date=*
+        label: Last Checked Date
       clothes:
         # clothes=*
         label: Clothes
@@ -463,6 +466,9 @@ en:
       diaper:
         # diaper=*
         label: Diaper Changing Available
+      diet_multi:
+        # 'diet:=*'
+        label: Diet Types
       direction:
         # direction=*
         label: Direction (Degrees Clockwise)
@@ -1111,6 +1117,9 @@ en:
           undefined: Assumed to be Yes
           # oneway=yes
           'yes': 'Yes'
+      opening_date:
+        # opening_date=*
+        label: Expected Opening Date
       opening_hours:
         # opening_hours=*
         label: Hours
@@ -3823,6 +3832,11 @@ en:
       highway/bus_stop:
         # highway=bus_stop
         name: Bus Stop / Platform
+      highway/construction:
+        # 'highway=construction, access=no'
+        name: Road Closed
+        # 'terms: closed,closure,construction'
+        terms: '<translate with synonyms or related terms for ''Road Closed'', separated by commas>'
       highway/corridor:
         # highway=corridor
         name: Indoor Corridor
@@ -4559,7 +4573,13 @@ en:
       leisure/pitch/american_football:
         # 'leisure=pitch, sport=american_football'
         name: American Football Field
+        # 'terms: football,gridiron'
         terms: '<translate with synonyms or related terms for ''American Football Field'', separated by commas>'
+      leisure/pitch/australian_football:
+        # 'leisure=pitch, sport=australian_football'
+        name: Australian Football Field
+        # 'terms: Aussie,AFL,football'
+        terms: '<translate with synonyms or related terms for ''Australian Football Field'', separated by commas>'
       leisure/pitch/badminton:
         # 'leisure=pitch, sport=badminton'
         name: Badminton Court
@@ -4595,6 +4615,10 @@ en:
         name: Riding Arena
         # 'terms: dressage,equestrian,horse,horseback,riding'
         terms: '<translate with synonyms or related terms for ''Riding Arena'', separated by commas>'
+      leisure/pitch/netball:
+        # 'leisure=pitch, sport=netball'
+        name: Netball Court
+        terms: '<translate with synonyms or related terms for ''Netball Court'', separated by commas>'
       leisure/pitch/rugby_league:
         # 'leisure=pitch, sport=rugby_league'
         name: Rugby League Field

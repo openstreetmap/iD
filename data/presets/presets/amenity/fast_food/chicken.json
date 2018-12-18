@@ -13,6 +13,12 @@
         "smoking",
         "outdoor_seating"
     ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "diet_multi"
+    ],
     "geometry": [
         "point",
         "area"

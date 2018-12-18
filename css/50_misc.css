@@ -1,3 +1,29 @@
+
+/* ferry routes  */
+.preset-icon .icon.tag-route-ferry {
+    color: #58a9ed;
+    fill: #fff;
+}
+path.line.shadow.tag-route-ferry {
+    stroke-width: 16;
+}
+path.line.stroke.tag-route-ferry {
+    stroke-width: 3;
+    stroke-linecap: butt;
+    stroke-dasharray: 12,8;
+}
+.low-zoom path.line.shadow.tag-route-ferry {
+    stroke-width: 12;
+}
+.low-zoom path.line.stroke.tag-route-ferry {
+    stroke-width: 2;
+    stroke-dasharray: 6,4;
+}
+path.line.stroke.tag-route-ferry {
+    stroke: #58a9ed;
+}
+
+
 /* power and pipeline */
 .preset-icon .icon.tag-man_made-pipeline,
 .preset-icon .icon.tag-power {
@@ -6,81 +32,82 @@
 }
 
 /* power */
-
-path.stroke.tag-power {
+path.line.stroke.tag-power {
     stroke: #939393;
     stroke-width: 2;
 }
-path.casing.tag-power {
+path.line.casing.tag-power {
     stroke: none;
 }
 
 /* pipeline */
-
-path.stroke.tag-man_made-pipeline {
-    stroke: #CBD0D8;
+path.line.stroke.tag-man_made-pipeline {
+    stroke: #cbd0d8;
     stroke-linecap: butt;
     stroke-width: 3;
     stroke-dasharray: 80, 1.25;
 }
-path.casing.tag-man_made-pipeline {
+path.line.casing.tag-man_made-pipeline {
     stroke: #666;
     stroke-width: 4.5;
 }
-.low-zoom path.stroke.tag-man_made-pipeline {
+.low-zoom path.line.stroke.tag-man_made-pipeline {
     stroke-dasharray: 40, 1;
 }
 
 /* boundaries */
-path.stroke.tag-boundary {
+path.line.stroke.tag-boundary {
     stroke: #fff;
     stroke-width: 2;
     stroke-linecap: butt;
     stroke-dasharray: 20, 5, 5, 5;
 }
-path.casing.tag-boundary {
-    stroke: #82B5FE;
+path.line.casing.tag-boundary {
+    stroke: #82b5fe;
     stroke-width: 6;
 }
 
-path.casing.tag-boundary-protected_area,
-path.casing.tag-boundary-national_park {
+path.line.casing.tag-boundary-protected_area,
+path.line.casing.tag-boundary-national_park {
     stroke: #b0e298;
 }
 
 
 /* Tree Rows */
-path.shadow.tag-natural-tree_row {
+path.line.shadow.tag-natural-tree_row {
     stroke-width: 16;
 }
-path.casing.tag-natural-tree_row {
+path.line.casing.tag-natural-tree_row {
     stroke-width: 7;
 }
-path.stroke.tag-natural-tree_row {
+path.line.stroke.tag-natural-tree_row {
     stroke-width: 5;
 }
-
-.low-zoom path.shadow.tag-natural-tree_row {
+.low-zoom path.line.shadow.tag-natural-tree_row {
     stroke-width: 12;
 }
-.low-zoom path.casing.tag-natural-tree_row {
+.low-zoom path.line.casing.tag-natural-tree_row {
     stroke-width: 5;
 }
-.low-zoom path.stroke.tag-natural-tree_row {
+.low-zoom path.line.stroke.tag-natural-tree_row {
     stroke-width: 3;
 }
 
 
-/* barriers */
-path.stroke.tag-barrier:not(.tag-barrier-hedge) {
+/* barriers and similar */
+path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: #ddd;
 }
-path.stroke.tag-barrier {
+path.line.stroke.tag-barrier,
+path.stroke.tag-man_made-groyne,
+path.stroke.tag-man_made-breakwater {
     stroke-width: 3px;
     stroke-linecap: round;
     stroke-dasharray: 15, 5, 1, 5;
 }
-.low-zoom path.stroke.tag-barrier {
+.low-zoom path.line.stroke.tag-barrier,
+.low-zoom path.stroke.tag-man_made-groyne,
+.low-zoom path.stroke.tag-man_made-breakwater {
     stroke-width: 2px;
     stroke-linecap: butt;
     stroke-dasharray: 8, 2, 2, 2;
@@ -88,88 +115,87 @@ path.stroke.tag-barrier {
 
 
 /* bridges */
-path.casing.tag-bridge {
+path.line.casing.tag-bridge {
     stroke-opacity: 0.6;
     stroke: #000 !important;
     stroke-linecap: butt;
     stroke-dasharray: none;
 }
-
-path.shadow.tag-bridge {
+path.line.shadow.tag-bridge {
     stroke-width: 24;
 }
-path.casing.tag-bridge {
+path.line.casing.tag-bridge {
     stroke-width: 16;
 }
-.low-zoom path.shadow.tag-bridge {
+.low-zoom path.line.shadow.tag-bridge {
     stroke-width: 16;
 }
-.low-zoom path.casing.tag-bridge {
+.low-zoom path.line.casing.tag-bridge {
     stroke-width: 10;
 }
 
-path.shadow.line.tag-railway.tag-bridge,
-path.shadow.tag-highway-living_street.tag-bridge,
-path.shadow.tag-highway-path.tag-bridge,
-path.shadow.tag-highway-corridor.tag-bridge,
-path.shadow.line.tag-highway-pedestrian.tag-bridge,
-path.shadow.tag-highway-service.tag-bridge,
-path.shadow.tag-highway-track.tag-bridge,
-path.shadow.tag-highway-steps.tag-bridge,
-path.shadow.tag-highway-footway.tag-bridge,
-path.shadow.tag-highway-cycleway.tag-bridge,
-path.shadow.tag-highway-bridleway.tag-bridge {
+path.line.shadow.tag-railway.tag-bridge,
+path.line.shadow.tag-highway-living_street.tag-bridge,
+path.line.shadow.tag-highway-path.tag-bridge,
+path.line.shadow.tag-highway-corridor.tag-bridge,
+path.line.shadow.tag-highway-pedestrian.tag-bridge,
+path.line.shadow.tag-highway-service.tag-bridge,
+path.line.shadow.tag-highway-track.tag-bridge,
+path.line.shadow.tag-highway-steps.tag-bridge,
+path.line.shadow.tag-highway-footway.tag-bridge,
+path.line.shadow.tag-highway-cycleway.tag-bridge,
+path.line.shadow.tag-highway-bridleway.tag-bridge {
     stroke-width: 18;
 }
-path.casing.line.tag-railway.tag-bridge,
-path.casing.tag-highway-living_street.tag-bridge,
-path.casing.tag-highway-path.tag-bridge,
-path.casing.tag-highway-corridor.tag-bridge,
-path.casing.line.tag-highway-pedestrian.tag-bridge,
-path.casing.tag-highway-service.tag-bridge,
-path.casing.tag-highway-track.tag-bridge,
-path.casing.tag-highway-steps.tag-bridge,
-path.casing.tag-highway-footway.tag-bridge,
-path.casing.tag-highway-cycleway.tag-bridge,
-path.casing.tag-highway-bridleway.tag-bridge {
+path.line.casing.tag-railway.tag-bridge,
+path.line.casing.tag-highway-living_street.tag-bridge,
+path.line.casing.tag-highway-path.tag-bridge,
+path.line.casing.tag-highway-corridor.tag-bridge,
+path.line.casing.tag-highway-pedestrian.tag-bridge,
+path.line.casing.tag-highway-service.tag-bridge,
+path.line.casing.tag-highway-track.tag-bridge,
+path.line.casing.tag-highway-steps.tag-bridge,
+path.line.casing.tag-highway-footway.tag-bridge,
+path.line.casing.tag-highway-cycleway.tag-bridge,
+path.line.casing.tag-highway-bridleway.tag-bridge {
     stroke-width: 10;
 }
 
-.low-zoom path.shadow.line.tag-railway.tag-bridge,
-.low-zoom path.shadow.tag-highway-living_street.tag-bridge,
-.low-zoom path.shadow.tag-highway-path.tag-bridge,
-.low-zoom path.shadow.tag-highway-corridor.tag-bridge,
-.low-zoom path.shadow.line.tag-highway-pedestrian.tag-bridge,
-.low-zoom path.shadow.tag-highway-service.tag-bridge,
-.low-zoom path.shadow.tag-highway-track.tag-bridge,
-.low-zoom path.shadow.tag-highway-steps.tag-bridge,
-.low-zoom path.shadow.tag-highway-footway.tag-bridge,
-.low-zoom path.shadow.tag-highway-cycleway.tag-bridge,
-.low-zoom path.shadow.tag-highway-bridleway.tag-bridge {
+.low-zoom path.line.shadow.tag-railway.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-living_street.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-path.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-corridor.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-service.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-track.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-steps.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-footway.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-cycleway.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-bridleway.tag-bridge {
     stroke-width: 14;
 }
-.low-zoom path.casing.line.tag-railway.tag-bridge,
-.low-zoom path.casing.tag-highway-living_street.tag-bridge,
-.low-zoom path.casing.tag-highway-path.tag-bridge,
-.low-zoom path.casing.tag-highway-corridor.tag-bridge,
-.low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
-.low-zoom path.casing.tag-highway-service.tag-bridge,
-.low-zoom path.casing.tag-highway-track.tag-bridge,
-.low-zoom path.casing.tag-highway-steps.tag-bridge,
-.low-zoom path.casing.tag-highway-footway.tag-bridge,
-.low-zoom path.casing.tag-highway-cycleway.tag-bridge,
-.low-zoom path.casing.tag-highway-bridleway.tag-bridge {
+.low-zoom path.line.casing.tag-railway.tag-bridge,
+.low-zoom path.line.casing.tag-highway-living_street.tag-bridge,
+.low-zoom path.line.casing.tag-highway-path.tag-bridge,
+.low-zoom path.line.casing.tag-highway-corridor.tag-bridge,
+.low-zoom path.line.casing.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.line.casing.tag-highway-service.tag-bridge,
+.low-zoom path.line.casing.tag-highway-track.tag-bridge,
+.low-zoom path.line.casing.tag-highway-steps.tag-bridge,
+.low-zoom path.line.casing.tag-highway-footway.tag-bridge,
+.low-zoom path.line.casing.tag-highway-cycleway.tag-bridge,
+.low-zoom path.line.casing.tag-highway-bridleway.tag-bridge {
     stroke-width: 6;
 }
 
 
 /* tunnels */
-path.stroke.tag-tunnel,
+path.line.stroke.tag-tunnel,
 path.line.stroke.tag-location-underground,
 path.line.stroke.tag-location-underwater {
     stroke-opacity: 0.3;
 }
-path.casing.tag-tunnel,
+path.line.casing.tag-tunnel,
 path.line.casing.tag-location-underground,
 path.line.stroke.tag-location-underwater {
     stroke-opacity: 0.5;
@@ -179,12 +205,12 @@ path.line.stroke.tag-location-underwater {
 
 
 /* embankments / cuttings */
-path.shadow.tag-embankment,
-path.shadow.tag-cutting {
+path.line.shadow.tag-embankment,
+path.line.shadow.tag-cutting {
     stroke-width: 28;
 }
-path.casing.tag-embankment,
-path.casing.tag-cutting {
+path.line.casing.tag-embankment,
+path.line.casing.tag-cutting {
     stroke-opacity: 0.5;
     stroke: #000;
     stroke-width: 22;
@@ -192,44 +218,79 @@ path.casing.tag-cutting {
     stroke-linecap: butt;
 }
 
-.low-zoom path.shadow.tag-embankment,
-.low-zoom path.shadow.tag-cutting {
+.low-zoom path.line.shadow.tag-embankment,
+.low-zoom path.line.shadow.tag-cutting {
     stroke-width: 14;
 }
-.low-zoom path.casing.tag-embankment,
-.low-zoom path.casing.tag-cutting {
+.low-zoom path.line.casing.tag-embankment,
+.low-zoom path.line.casing.tag-cutting {
     stroke-width: 10;
 }
 
 
 /* Surface - unpaved */
-path.casing.tag-unpaved {
+path.line.casing.tag-unpaved {
     stroke: #ccc;
     stroke-linecap: butt;
     stroke-dasharray: 4, 3;
 }
-.low-zoom path.casing.tag-unpaved {
+.low-zoom path.line.casing.tag-unpaved {
     stroke-dasharray: 3, 2;
 }
-path.casing.tag-bridge.tag-unpaved {
+path.line.casing.tag-bridge.tag-unpaved {
     stroke: #000;
     stroke-dasharray: 4, 3;
 }
-.low-zoom path.casing.tag-bridge.tag-unpaved {
+.low-zoom path.line.casing.tag-bridge.tag-unpaved {
     stroke: #000;
     stroke-dasharray: 3, 2;
 }
 
 
-/* Status (e.g. construction, proposed, abandoned) */
-path.stroke.tag-status,
-path.casing.tag-status {
+/* Status (e.g. proposed, abandoned) */
+path.area.stroke.tag-status,
+path.line.stroke.tag-status,
+path.area.casing.tag-status,
+path.line.casing.tag-status {
     stroke-linecap: butt;
     stroke-dasharray: 7, 3;
 }
-.low-zoom path.stroke.tag-status,
-.low-zoom path.casing.tag-status {
+.low-zoom path.area.stroke.tag-status,
+.low-zoom path.line.stroke.tag-status,
+.low-zoom path.area.casing.tag-status,
+.low-zoom path.line.casing.tag-status {
     stroke-dasharray: 5, 2;
+}
+
+/* Road Closed Status */
+.preset-icon .icon.iD-highway-construction {
+    color: #fc6c14;
+    fill: #fff;
+}
+path.line.shadow.tag-status.tag-status-construction {
+    stroke-width: 20;
+}
+path.line.casing.tag-status.tag-status-construction {
+    stroke: #fff;
+    stroke-width: 10;
+    stroke-linecap: butt;
+    stroke-dasharray: none
+}
+path.line.stroke.tag-status.tag-status-construction {
+    stroke: #fc6c14;
+    stroke-width: 8;
+    stroke-linecap: butt;
+    stroke-dasharray: 10, 10;
+}
+.low-zoom path.line.shadow.tag-status.tag-status-construction {
+    stroke-width: 16;
+}
+.low-zoom path.line.casing.tag-status.tag-status-construction {
+    stroke-width: 7;
+}
+.low-zoom path.line.stroke.tag-status.tag-status-construction {
+    stroke-width: 5;
+    stroke-dasharray: 8, 8;
 }
 
 
@@ -267,53 +328,53 @@ path.fill.tag-building {
     background-color: #dca;
 }
 
-path.shadow.tag-public_transport-platform,
-path.shadow.tag-railway-platform,
-path.shadow.tag-man_made-pier,
-path.shadow.tag-footway.tag-footway-crossing,
-path.shadow.tag-crossing {
+path.line.shadow.tag-public_transport-platform,
+path.line.shadow.tag-railway-platform,
+path.line.shadow.tag-man_made-pier,
+path.line.shadow.tag-footway.tag-footway-crossing,
+path.line.shadow.tag-crossing {
     stroke-width: 16;
 }
-path.casing.tag-public_transport-platform,
-path.casing.tag-railway-platform,
-path.casing.tag-man_made-pier,
-path.casing.tag-footway.tag-footway-crossing,
-path.casing.tag-crossing {
+path.line.casing.tag-public_transport-platform,
+path.line.casing.tag-railway-platform,
+path.line.casing.tag-man_made-pier,
+path.line.casing.tag-footway.tag-footway-crossing,
+path.line.casing.tag-crossing {
     stroke: #dca;
     stroke-width: 5;
     stroke-linecap: round;
     stroke-dasharray: none;
 }
-path.stroke.tag-public_transport-platform,
-path.stroke.tag-railway-platform,
-path.stroke.tag-man_made-pier,
-path.stroke.tag-footway.tag-footway-crossing,
-path.stroke.tag-crossing {
+path.line.stroke.tag-public_transport-platform,
+path.line.stroke.tag-railway-platform,
+path.line.stroke.tag-man_made-pier,
+path.line.stroke.tag-footway.tag-footway-crossing,
+path.line.stroke.tag-crossing {
     stroke: #988;
     stroke-width: 3;
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
 }
 
-.low-zoom path.shadow.tag-public_transport-platform,
-.low-zoom path.shadow.tag-railway-platform,
-.low-zoom path.shadow.tag-man_made-pier,
-.low-zoom path.shadow.tag-footway.tag-footway-crossing,
-.low-zoom path.shadow.tag-crossing {
+.low-zoom path.line.shadow.tag-public_transport-platform,
+.low-zoom path.line.shadow.tag-railway-platform,
+.low-zoom path.line.shadow.tag-man_made-pier,
+.low-zoom path.line.shadow.tag-footway.tag-footway-crossing,
+.low-zoom path.line.shadow.tag-crossing {
     stroke-width: 12;
 }
-.low-zoom path.casing.tag-public_transport-platform,
-.low-zoom path.casing.tag-railway-platform,
-.low-zoom path.casing.tag-man_made-pier,
-.low-zoom path.casing.tag-footway.tag-footway-crossing,
-.low-zoom path.casing.tag-crossing {
+.low-zoom path.line.casing.tag-public_transport-platform,
+.low-zoom path.line.casing.tag-railway-platform,
+.low-zoom path.line.casing.tag-man_made-pier,
+.low-zoom path.line.casing.tag-footway.tag-footway-crossing,
+.low-zoom path.line.casing.tag-crossing {
     stroke-width: 3;
 }
-.low-zoom path.stroke.tag-public_transport-platform,
-.low-zoom path.stroke.tag-railway-platform,
-.low-zoom path.stroke.tag-man_made-pier,
-.low-zoom path.stroke.tag-footway.tag-footway-crossing,
-.low-zoom path.stroke.tag-crossing {
+.low-zoom path.line.stroke.tag-public_transport-platform,
+.low-zoom path.line.stroke.tag-railway-platform,
+.low-zoom path.line.stroke.tag-man_made-pier,
+.low-zoom path.line.stroke.tag-footway.tag-footway-crossing,
+.low-zoom path.line.stroke.tag-crossing {
     stroke-width: 1;
     stroke-linecap: butt;
     stroke-dasharray: 3, 3;
@@ -336,55 +397,55 @@ g.midpoint.tag-crossing .fill {
     color: #444;
     fill: #dca;
 }
-path.casing.tag-crossing.tag-crossing-marked,
-path.casing.tag-crossing.tag-crossing-zebra {
+path.line.casing.tag-crossing.tag-crossing-marked,
+path.line.casing.tag-crossing.tag-crossing-zebra {
     stroke: #dca;
 }
-path.stroke.tag-crossing.tag-crossing-marked,
-path.stroke.tag-crossing.tag-crossing-zebra {
+path.line.stroke.tag-crossing.tag-crossing-marked,
+path.line.stroke.tag-crossing.tag-crossing-zebra {
     stroke: #444;
     stroke-dasharray: 6, 4;
 }
-.low-zoom path.stroke.tag-crossing.tag-crossing-marked,
-.low-zoom path.stroke.tag-crossing.tag-crossing-zebra {
+.low-zoom path.line.stroke.tag-crossing.tag-crossing-marked,
+.low-zoom path.line.stroke.tag-crossing.tag-crossing-zebra {
     stroke-dasharray: 3, 2;
 }
 
 /* Attractions */
-path.shadow.tag-attraction-summer_toboggan,
-path.shadow.tag-attraction-water_slide {
+path.line.shadow.tag-attraction-summer_toboggan,
+path.line.shadow.tag-attraction-water_slide {
 	stroke-width: 16;
 }
-path.casing.tag-attraction-summer_toboggan,
-path.casing.tag-attraction-water_slide {
+path.line.casing.tag-attraction-summer_toboggan,
+path.line.casing.tag-attraction-water_slide {
 	stroke-width: 7;
 }
-path.stroke.tag-attraction-summer_toboggan,
-path.stroke.tag-attraction-water_slide {
+path.line.stroke.tag-attraction-summer_toboggan,
+path.line.stroke.tag-attraction-water_slide {
 	stroke-width: 5;
 }
-.low-zoom path.shadow.tag-attraction-summer_toboggan,
-.low-zoom path.shadow.tag-attraction-water_slide {
+.low-zoom path.line.shadow.tag-attraction-summer_toboggan,
+.low-zoom path.line.shadow.tag-attraction-water_slide {
     stroke-width: 12;
 }
-.low-zoom path.casing.tag-attraction-summer_toboggan,
-.low-zoom path.casing.tag-attraction-water_slide {
+.low-zoom path.line.casing.tag-attraction-summer_toboggan,
+.low-zoom path.line.casing.tag-attraction-water_slide {
     stroke-width: 5;
 }
-.low-zoom path.stroke.tag-attraction-summer_toboggan,
-.low-zoom path.stroke.tag-attraction-water_slide {
+.low-zoom path.line.stroke.tag-attraction-summer_toboggan,
+.low-zoom path.line.stroke.tag-attraction-water_slide {
 	stroke-width: 3;
 }
-path.stroke.tag-attraction-summer_toboggan {
+path.line.stroke.tag-attraction-summer_toboggan {
     stroke: #9e9e9e;
 }
-path.casing.tag-attraction-summer_toboggan {
+path.line.casing.tag-attraction-summer_toboggan {
     stroke: #666;
 }
 
-path.stroke.tag-attraction-water_slide {
+path.line.stroke.tag-attraction-water_slide {
     stroke: #aae0cb;
 }
-path.casing.tag-attraction-water_slide {
+path.line.casing.tag-attraction-water_slide {
     stroke: #3d6c71;
 }

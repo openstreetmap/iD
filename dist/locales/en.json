@@ -1755,6 +1755,9 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "check_date": {
+                    "label": "Last Checked Date"
+                },
                 "clothes": {
                     "label": "Clothes"
                 },
@@ -1893,6 +1896,9 @@
                 },
                 "diaper": {
                     "label": "Diaper Changing Available"
+                },
+                "diet_multi": {
+                    "label": "Diet Types"
                 },
                 "direction_cardinal": {
                     "label": "Direction",
@@ -2427,6 +2433,9 @@
                         "reversible": "Reversible",
                         "alternating": "Alternating"
                     }
+                },
+                "opening_date": {
+                    "label": "Expected Opening Date"
                 },
                 "opening_hours": {
                     "label": "Hours"
@@ -4792,6 +4801,10 @@
                     "name": "Bus Guideway",
                     "terms": ""
                 },
+                "highway/construction": {
+                    "name": "Road Closed",
+                    "terms": "closed,closure,construction"
+                },
                 "highway/corridor": {
                     "name": "Indoor Corridor",
                     "terms": "gallery,hall,hallway,indoor,passage,passageway"
@@ -5422,7 +5435,11 @@
                 },
                 "leisure/pitch/american_football": {
                     "name": "American Football Field",
-                    "terms": ""
+                    "terms": "football,gridiron"
+                },
+                "leisure/pitch/australian_football": {
+                    "name": "Australian Football Field",
+                    "terms": "Aussie,AFL,football"
                 },
                 "leisure/pitch/badminton": {
                     "name": "Badminton Court",
@@ -5455,6 +5472,10 @@
                 "leisure/pitch/equestrian": {
                     "name": "Riding Arena",
                     "terms": "dressage,equestrian,horse,horseback,riding"
+                },
+                "leisure/pitch/netball": {
+                    "name": "Netball Court",
+                    "terms": ""
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Rugby League Field",
@@ -7540,10 +7561,6 @@
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
-            "US-TIGER-Roads-2018": {
-                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
-                "name": "TIGER Roads 2018"
-            },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
                 "name": "U.S. Forest Roads Overlay"
@@ -7671,20 +7688,6 @@
                 "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
                 "name": "Lantmäteriet Historic Orthophoto 1975"
             },
-            "lantmateriet-topowebb": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Topographic map of Sweden 1:50 000",
-                "name": "Lantmäteriet Topographic Map"
-            },
-            "linkoping-orto": {
-                "attribution": {
-                    "text": "© Linköping municipality"
-                },
-                "description": "Orthophotos from the municipality of Linköping 2010, open data",
-                "name": "Linköping Orthophoto"
-            },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Terms & Feedback"
@@ -7748,13 +7751,6 @@
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
-            },
-            "stockholm-orto": {
-                "attribution": {
-                    "text": "© Stockholm municipality, CC0"
-                },
-                "description": "Orthophotos from the municipality of Stockholm 2015, CC0 license",
-                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {

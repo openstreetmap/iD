@@ -80,7 +80,9 @@ path.stroke.tag-natural-water,
 path.stroke.tag-landuse-aquaculture,
 path.stroke.tag-landuse-basin,
 path.stroke.tag-landuse-harbour,
-path.stroke.tag-landuse-reservoir {
+path.stroke.tag-landuse-reservoir,
+path.stroke.tag-man_made-groyne,
+path.stroke.tag-man_made-breakwater {
     stroke: rgb(119, 211, 222);
 }
 path.fill.tag-amenity-swimming_pool,
@@ -91,6 +93,9 @@ path.fill.tag-landuse-harbour,
 path.fill.tag-landuse-reservoir,
 path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
+    fill: rgba(119, 211, 222, 0.3);
+}
+path.fill.tag-amenity-fountain {
     fill: rgba(119, 211, 222, 0.3);
 }
 .preset-icon-fill-area.tag-amenity-swimming_pool,
@@ -104,6 +109,7 @@ path.fill.tag-natural-water {
     background-color: rgba(119, 211, 222, 0.3);
 }
 .pattern-color-waves,
+.pattern-color-water_standing,
 .pattern-color-pond {
     fill: rgba(119, 211, 222, 0.3);
 }

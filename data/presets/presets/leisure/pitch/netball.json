@@ -1,5 +1,5 @@
 {
-    "icon": "maki-american-football",
+    "icon": "maki-volleyball",
     "fields": [
         "name",
         "surface",
@@ -11,15 +11,12 @@
     ],
     "tags": {
         "leisure": "pitch",
-        "sport": "american_football"
+        "sport": "netball"
     },
     "reference": {
         "key": "sport",
-        "value": "american_football"
+        "value": "netball"
     },
-    "terms": [
-        "football",
-        "gridiron"
-    ],
-    "name": "American Football Field"
+    "terms": [],
+    "name": "Netball Court"
 }

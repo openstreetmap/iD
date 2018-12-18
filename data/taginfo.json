@@ -2708,6 +2708,13 @@
       "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-bus-guideway.svg?sanitize=true"
     },
     {
+      "key": "access",
+      "value": "no",
+      "description": "🄿 Road Closed, 🄵 Allowed Access",
+      "object_types": ["way"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/highway-construction.svg?sanitize=true"
+    },
+    {
       "key": "highway",
       "value": "corridor",
       "description": "🄿 Indoor Corridor",
@@ -3731,6 +3738,13 @@
     },
     {
       "key": "sport",
+      "value": "australian_football",
+      "description": "🄿 Australian Football Field",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/american-football-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
       "value": "badminton",
       "description": "🄿 Badminton Court",
       "object_types": ["node", "area"],
@@ -3784,6 +3798,13 @@
       "description": "🄿 Riding Arena, 🄵 Dressage Riding",
       "object_types": ["node", "area"],
       "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/horse-riding-15.svg?sanitize=true"
+    },
+    {
+      "key": "sport",
+      "value": "netball",
+      "description": "🄿 Netball Court",
+      "object_types": ["node", "area"],
+      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/volleyball-15.svg?sanitize=true"
     },
     {
       "key": "sport",
@@ -6862,7 +6883,6 @@
     },
     {"key": "access", "description": "🄵 Allowed Access"},
     {"key": "access", "value": "yes", "description": "🄵 Allowed Access"},
-    {"key": "access", "value": "no", "description": "🄵 Allowed Access"},
     {
       "key": "access",
       "value": "permissive",
@@ -7051,6 +7071,7 @@
     {"key": "capacity", "description": "🄵 Capacity"},
     {"key": "cash_in", "description": "🄵 Cash In"},
     {"key": "castle_type", "description": "🄵 Type"},
+    {"key": "check_date", "description": "🄵 Last Checked Date"},
     {"key": "clothes", "description": "🄵 Clothes"},
     {"key": "collection_times", "description": "🄵 Collection Times"},
     {"key": "colour", "description": "🄵 Color"},
@@ -7152,6 +7173,7 @@
     {"key": "design", "description": "🄵 Design"},
     {"key": "devices", "description": "🄵 Devices"},
     {"key": "diaper", "description": "🄵 Diaper Changing Available"},
+    {"key": "diet:", "description": "🄵 Diet Types"},
     {"key": "direction", "value": "N", "description": "🄵 Direction"},
     {"key": "direction", "value": "E", "description": "🄵 Direction"},
     {"key": "direction", "value": "S", "description": "🄵 Direction"},
@@ -7491,6 +7513,7 @@
     {"key": "oneway", "value": "no", "description": "🄵 One Way"},
     {"key": "oneway", "value": "reversible", "description": "🄵 One Way"},
     {"key": "oneway", "value": "alternating", "description": "🄵 One Way"},
+    {"key": "opening_date", "description": "🄵 Expected Opening Date"},
     {"key": "opening_hours", "description": "🄵 Hours"},
     {"key": "operator", "description": "🄵 Operator"},
     {"key": "outdoor_seating", "description": "🄵 Outdoor Seating"},

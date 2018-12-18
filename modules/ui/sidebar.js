@@ -180,7 +180,9 @@ export function uiSidebar(context) {
 
 
         sidebar.select = function(id, newFeature) {
-            if (!_current && id) {
+            sidebar.hide();
+
+            if (id) {
                 // uncollapse the sidebar
                 if (selection.classed('collapsed')) {
                     var entity = context.entity(id);
@@ -205,11 +207,7 @@ export function uiSidebar(context) {
                         .call(inspector);
                 }
 
-            } else if (!_current) {
-                featureListWrap
-                    .classed('inspector-hidden', false);
-                inspectorWrap
-                    .classed('inspector-hidden', true);
+            } else {
                 inspector
                     .state('hide');
             }

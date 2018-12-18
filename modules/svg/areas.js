@@ -11,12 +11,15 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
+        // tag - pattern name
+        // -or-
         // tag - value - pattern name
         // -or-
         // tag - value - rules (optional tag-values, pattern name)
         // (matches earlier rules first, so fallback should be last entry)
         amenity: {
-            grave_yard: 'cemetery'
+            grave_yard: 'cemetery',
+            fountain: 'water_standing'
         },
         landuse: {
             cemetery: [
@@ -41,6 +44,7 @@ export function svgAreas(projection, context) {
             meadow: 'meadow',
             military: 'construction',
             orchard: 'orchard',
+            reservoir: 'water_standing',
             quarry: 'quarry',
             vineyard: 'vineyard'
         },
@@ -51,6 +55,7 @@ export function svgAreas(projection, context) {
             scrub: 'scrub',
             water: [
                 { water: 'pond', pattern: 'pond' },
+                { water: 'reservoir', pattern: 'water_standing' },
                 { pattern: 'waves' }
             ],
             wetland: [
@@ -88,39 +93,40 @@ export function svgAreas(projection, context) {
         }
 
         for (var tag in patterns) {
-            if (patterns.hasOwnProperty(tag)) {
-                var entityValue = entity.tags[tag];
-                if (entityValue) {
+            var entityValue = entity.tags[tag];
+            if (!entityValue) continue;
 
-                    var values = patterns[tag];
-                    for (var value in values) {
-                        if (entityValue === value) {
+            if (typeof patterns[tag] === 'string') { // extra short syntax (just tag) - pattern name
+                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[tag] + '")';
+                return;
+            } else {
+                var values = patterns[tag];
+                for (var value in values) {
+                    if (entityValue !== value) continue;
 
-                            var rules = values[value];
-                            if (typeof rules === 'string') { // short syntax - pattern name
-                                this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
-                                return;
-                            } else { // long syntax - rule array
-                                for (var ruleKey in rules) {
-                                    var rule = rules[ruleKey];
+                    var rules = values[value];
+                    if (typeof rules === 'string') { // short syntax - pattern name
+                        this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
+                        return;
+                    } else { // long syntax - rule array
+                        for (var ruleKey in rules) {
+                            var rule = rules[ruleKey];
 
-                                    var pass = true;
-                                    for (var criterion in rule) {
-                                        if (criterion !== 'pattern') { // reserved for pattern name
-                                            // The only rule is a required tag-value pair
-                                            var v = entity.tags[criterion];
-                                            if (!v || v !== rule[criterion]) {
-                                                pass = false;
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    if (pass) {
-                                        this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
-                                        return;
+                            var pass = true;
+                            for (var criterion in rule) {
+                                if (criterion !== 'pattern') { // reserved for pattern name
+                                    // The only rule is a required tag-value pair
+                                    var v = entity.tags[criterion];
+                                    if (!v || v !== rule[criterion]) {
+                                        pass = false;
+                                        break;
                                     }
                                 }
+                            }
+
+                            if (pass) {
+                                this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
+                                return;
                             }
                         }
                     }
@@ -186,9 +192,9 @@ export function svgAreas(projection, context) {
 
 
     function drawAreas(selection, graph, entities, filter) {
-        var path = svgPath(projection, graph, true),
-            areas = {},
-            multipolygon;
+        var path = svgPath(projection, graph, true);
+        var areas = {};
+        var multipolygon;
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
