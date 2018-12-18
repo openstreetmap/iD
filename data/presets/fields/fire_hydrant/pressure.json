@@ -1,6 +1,6 @@
 {
     "key": "fire_hydrant:pressure",
     "type": "combo",
-    "label": "Pressure in bar or suction",
-    "options": [ "#", "yes", "suction" ]
+    "label": "Pressure (bar)",
+    "snake_case": false
 }

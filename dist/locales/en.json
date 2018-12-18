@@ -1798,6 +1798,10 @@
                 "country": {
                     "label": "Country"
                 },
+                "couplings": {
+                    "label": "Couplings",
+                    "placeholder": "1, 2, 3..."
+                },
                 "covered": {
                     "label": "Covered"
                 },
@@ -2003,27 +2007,18 @@
                     "label": "Type"
                 },
                 "fire_hydrant/diameter": {
-                    "label": "Nominal diameter (in mm, inches or letters)."
-                },
-                "fire_hydrant/position": {
-                    "label": "Position",
-                    "options": {
-                        "lane": "on the side of a road lane",
-                        "parking_lot": "in a parking_lot",
-                        "sidewalk": "on a sidewalk",
-                        "green": "in a grassy area"
-                    }
+                    "label": "Diameter (mm, in, or letters)"
                 },
                 "fire_hydrant/pressure": {
-                    "label": "Pressure in bar or suction"
+                    "label": "Pressure (bar)"
                 },
                 "fire_hydrant/type": {
-                    "label": "The shape of the hydrant.",
+                    "label": "Shape",
                     "options": {
-                        "pillar": "A pillar type hydrant.",
-                        "underground": "A fire hydrant simple outlet located underground.",
-                        "wall": "A wall-mounted fire hydrant.",
-                        "pipe": "A simple capped pipe, without the usual hydrant shape."
+                        "pillar": "Pillar/Aboveground",
+                        "underground": "Underground",
+                        "wall": "Wall",
+                        "pipe": "Capped Pipe"
                     }
                 },
                 "fireplace": {
@@ -2984,7 +2979,7 @@
                     "label": "Surveillance Zone"
                 },
                 "survey/date": {
-                    "label": "Date of last site survey (YYYY-MM-DD)"
+                    "label": "Last Survey Date"
                 },
                 "swimming_pool": {
                     "label": "Type"
@@ -3169,10 +3164,10 @@
                     "label": "Water Point"
                 },
                 "water_source": {
-                    "label": "Water source"
+                    "label": "Water Source"
                 },
                 "water_volume": {
-                    "label": "Volume of the water reserve. Tanks and pools only (default in m^3)."
+                    "label": "Water Reserve Volume (m³)"
                 },
                 "water": {
                     "label": "Type"
@@ -4666,7 +4661,7 @@
                 },
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
-                    "terms": "fire plug,fire water well"
+                    "terms": "fire plug,fire water well,hydrant"
                 },
                 "emergency/first_aid_kit": {
                     "name": "First Aid Kit",

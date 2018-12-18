@@ -364,6 +364,11 @@ en:
       country:
         # country=*
         label: Country
+      couplings:
+        # couplings=*
+        label: Couplings
+        # couplings field placeholder
+        placeholder: '1, 2, 3...'
       covered:
         # covered=*
         label: Covered
@@ -600,34 +605,22 @@ en:
         label: Type
       fire_hydrant/diameter:
         # 'fire_hydrant:diameter=*'
-        label: 'Nominal diameter (in mm, inches or letters).'
-      fire_hydrant/position:
-        # 'fire_hydrant:position=*'
-        label: Position
-        options:
-          # 'fire_hydrant:position=green'
-          green: in a grassy area
-          # 'fire_hydrant:position=lane'
-          lane: on the side of a road lane
-          # 'fire_hydrant:position=parking_lot'
-          parking_lot: in a parking_lot
-          # 'fire_hydrant:position=sidewalk'
-          sidewalk: on a sidewalk
+        label: 'Diameter (mm, in, or letters)'
       fire_hydrant/pressure:
         # 'fire_hydrant:pressure=*'
-        label: Pressure in bar or suction
+        label: Pressure (bar)
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
-        label: The shape of the hydrant.
+        label: Shape
         options:
           # 'fire_hydrant:type=pillar'
-          pillar: A pillar type hydrant.
+          pillar: Pillar/Aboveground
           # 'fire_hydrant:type=pipe'
-          pipe: 'A simple capped pipe, without the usual hydrant shape.'
+          pipe: Capped Pipe
           # 'fire_hydrant:type=underground'
-          underground: A fire hydrant simple outlet located underground.
+          underground: Underground
           # 'fire_hydrant:type=wall'
-          wall: A wall-mounted fire hydrant.
+          wall: Wall
       fireplace:
         # fireplace=*
         label: Fireplace
@@ -1799,7 +1792,7 @@ en:
         label: Surveillance Zone
       survey/date:
         # 'survey:date=*'
-        label: Date of last site survey (YYYY-MM-DD)
+        label: Last Survey Date
       swimming_pool:
         # swimming_pool=*
         label: Type
@@ -2031,10 +2024,10 @@ en:
         label: Water Point
       water_source:
         # water_source=*
-        label: Water source
+        label: Water Source
       water_volume:
         # water_volume=*
-        label: Volume of the water reserve. Tanks and pools only (default in m^3).
+        label: Water Reserve Volume (m³)
       waterway:
         # waterway=*
         label: Type
@@ -3658,7 +3651,7 @@ en:
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
-        # 'terms: fire plug,fire water well'
+        # 'terms: fire plug,fire water well,hydrant'
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
       emergency/first_aid_kit:
         # emergency=first_aid_kit

@@ -1,5 +1,6 @@
 {
     "key": "water_volume",
     "type": "number",
-    "label": "Volume of the water reserve. Tanks and pools only (default in m^3)."
+    "label": "Water Reserve Volume (m³)",
+    "snake_case": false
 }

@@ -7096,6 +7096,7 @@
       "description": "🄵 Movement Direction"
     },
     {"key": "country", "description": "🄵 Country"},
+    {"key": "couplings", "description": "🄵 Couplings"},
     {"key": "covered", "description": "🄵 Covered"},
     {
       "key": "crane:type",
@@ -7229,52 +7230,17 @@
     {"key": "fence_type", "description": "🄵 Type"},
     {
       "key": "fire_hydrant:diameter",
-      "description": "🄵 Nominal diameter (in mm, inches or letters)."
+      "description": "🄵 Diameter (mm, in, or letters)"
     },
-    {
-      "key": "fire_hydrant:position",
-      "value": "lane",
-      "description": "🄵 Position"
-    },
-    {
-      "key": "fire_hydrant:position",
-      "value": "parking_lot",
-      "description": "🄵 Position"
-    },
-    {
-      "key": "fire_hydrant:position",
-      "value": "sidewalk",
-      "description": "🄵 Position"
-    },
-    {
-      "key": "fire_hydrant:position",
-      "value": "green",
-      "description": "🄵 Position"
-    },
-    {
-      "key": "fire_hydrant:pressure",
-      "description": "🄵 Pressure in bar or suction"
-    },
-    {
-      "key": "fire_hydrant:type",
-      "value": "pillar",
-      "description": "🄵 The shape of the hydrant."
-    },
+    {"key": "fire_hydrant:pressure", "description": "🄵 Pressure (bar)"},
+    {"key": "fire_hydrant:type", "value": "pillar", "description": "🄵 Shape"},
     {
       "key": "fire_hydrant:type",
       "value": "underground",
-      "description": "🄵 The shape of the hydrant."
+      "description": "🄵 Shape"
     },
-    {
-      "key": "fire_hydrant:type",
-      "value": "wall",
-      "description": "🄵 The shape of the hydrant."
-    },
-    {
-      "key": "fire_hydrant:type",
-      "value": "pipe",
-      "description": "🄵 The shape of the hydrant."
-    },
+    {"key": "fire_hydrant:type", "value": "wall", "description": "🄵 Shape"},
+    {"key": "fire_hydrant:type", "value": "pipe", "description": "🄵 Shape"},
     {"key": "fireplace", "description": "🄵 Fireplace"},
     {"key": "fitness_station", "description": "🄵 Equipment Type"},
     {"key": "fixme", "description": "🄵 Fix Me"},
@@ -7943,10 +7909,7 @@
       "description": "🄵 Surveillance Type"
     },
     {"key": "surveillance:zone", "description": "🄵 Surveillance Zone"},
-    {
-      "key": "survey:date",
-      "description": "🄵 Date of last site survey (YYYY-MM-DD)"
-    },
+    {"key": "survey:date", "description": "🄵 Last Survey Date"},
     {"key": "swimming_pool", "description": "🄵 Type"},
     {"key": "switch", "value": "mechanical", "description": "🄵 Type"},
     {"key": "switch", "value": "circuit_breaker", "description": "🄵 Type"},
@@ -8104,11 +8067,8 @@
     {"key": "voltage:tertiary", "description": "🄵 Tertiary Voltage"},
     {"key": "wall", "description": "🄵 Type"},
     {"key": "water_point", "description": "🄵 Water Point"},
-    {"key": "water_source", "description": "🄵 Water source"},
-    {
-      "key": "water_volume",
-      "description": "🄵 Volume of the water reserve. Tanks and pools only (default in m^3)."
-    },
+    {"key": "water_source", "description": "🄵 Water Source"},
+    {"key": "water_volume", "description": "🄵 Water Reserve Volume (m³)"},
     {"key": "water", "description": "🄵 Type"},
     {"key": "website", "description": "🄵 Website"},
     {"key": "wetland", "description": "🄵 Type"},

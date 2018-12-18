@@ -1,5 +1,6 @@
 {
     "key": "fire_hydrant:diameter",
-    "type": "text",
-    "label": "Nominal diameter (in mm, inches or letters)."
+    "type": "combo",
+    "label": "Diameter (mm, in, or letters)",
+    "snake_case": false
 }
