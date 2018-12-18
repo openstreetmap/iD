@@ -623,7 +623,7 @@ en:
     on_wiki: "{tag} on wiki.osm.org"
     used_with: "used with {type}"
   validations:
-    disconnected_highway: Disconnected highway
+    disconnected_highway: "{entityLabel} is disconnected from other highways."
     disconnected_highway_tooltip: "Roads should be connected to other roads or building entrances."
     old_multipolygon: Multipolygon tags on outer way
     old_multipolygon_tooltip: "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way."
