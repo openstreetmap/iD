@@ -25,6 +25,11 @@ export function uiGeolocate(context) {
 
 
     function success(position) {
+        var location = { loc: [position.coords.longitude, position.coords.latitude] },
+            layer = context.layers().layer('geolocate');
+
+        layer.enabled(location);
+
         var map = context.map(),
             extent = geoExtent([position.coords.longitude, position.coords.latitude])
                 .padByMeters(position.coords.accuracy);
