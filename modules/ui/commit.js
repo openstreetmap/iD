@@ -108,13 +108,17 @@ export function uiCommit(context) {
 
         headerTitle
             .append('div')
-            .attr('class', 'header-block')
+            .attr('class', 'header-block header-block-outer')
+        
+        headerTitle
+            .append('div')
+            .attr('class', 'header-block header-block')
             .append('h3')
             .text(t('commit.title'))
         
         headerTitle
             .append('div')
-            .attr('class', 'header-block')
+            .attr('class', 'header-block header-block-outer header-block-close')
             .append('button') 
             .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
