@@ -11,8 +11,8 @@ export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
 
-        var changes = context.history().changes();
-        var validations = context.history().validate(changes);
+        // maybe call these issues now?
+        var validations = context.issueManager().validate();
 
         validations = _reduce(validations, function(validations, val) {
             var severity = val.severity;
