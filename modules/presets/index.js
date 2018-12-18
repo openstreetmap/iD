@@ -173,7 +173,7 @@ export function presetIndex() {
             var geometry = preset.geometry;
 
             for (var j = 0; j < geometry.length; j++) {
-                var g = _index[geometry[j]];    
+                var g = _index[geometry[j]];
                 for (var k in preset.tags) {
                     (g[k] = g[k] || []).push(preset);
                 }
@@ -183,7 +183,7 @@ export function presetIndex() {
     };
 
     all.init = function() {
-        all.collection = [];    
+        all.collection = [];
         _recent.collection = [];
         _fields = {};
         _universal = [];
@@ -192,7 +192,7 @@ export function presetIndex() {
         return all.build(data.presets, true);
     };
 
-    
+
     all.reset = function() {
         all.collection = [];
         _defaults = { area: all, line: all, point: all, vertex: all, relation: all };

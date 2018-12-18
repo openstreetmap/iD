@@ -470,14 +470,14 @@ export function coreContext() {
     background = rendererBackground(context);
     features = rendererFeatures(context);
     presets = presetIndex();
-    
-    if (utilStringQs(window.location.hash).validations) {
+
+    if (services.maprules && utilStringQs(window.location.hash).validations) {
         var validations = utilStringQs(window.location.hash).validations;
         d3_json(validations, function (err, mapcss) {
             if (err) return;
             services.maprules.init(context.presets().areaKeys());
             _each(mapcss, function(mapcssSelector) {
-                return services.maprules.addRule(mapcssSelector); 
+                return services.maprules.addRule(mapcssSelector);
             });
             context.validationRules = true;
         });

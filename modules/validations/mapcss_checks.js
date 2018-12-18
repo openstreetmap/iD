@@ -1,8 +1,10 @@
-import { serviceMapRules } from '../services';
+import { services } from '../services';
 
 export function validationMapCSSChecks() {
     var validation = function(changes, graph) {
-        var rules = serviceMapRules.validationRules();
+        if (!services.maprules) return [];
+
+        var rules = services.maprules.validationRules();
         var warnings = [];
         var createdModified = ['created', 'modified'];
 

@@ -1,9 +1,15 @@
 describe('maprules', function() {
-    var _ruleChecks, validationRules; 
+    var _ruleChecks, validationRules;
+
     before(function() {
+        iD.services.maprules = iD.serviceMapRules;
         var areaKeys = iD.Context().presets().areaKeys();
         iD.serviceMapRules.init(areaKeys);
         _ruleChecks = iD.serviceMapRules.ruleChecks();
+    });
+
+    after(function() {
+        delete iD.services.maprules;
     });
 
     describe('#filterRuleChecks', function() {
@@ -30,9 +36,9 @@ describe('maprules', function() {
             [
                 {
                     t: {
-                        equals: { 
-                            man_made: 'tower', 
-                            'tower:type': 'communication' 
+                        equals: {
+                            man_made: 'tower',
+                            'tower:type': 'communication'
                         }
                     },
                     r: {
@@ -42,9 +48,9 @@ describe('maprules', function() {
                 },
                 {
                     t: {
-                        equals: { 
-                            building: 'yes', 
-                            amenity: 'school' 
+                        equals: {
+                            building: 'yes',
+                            amenity: 'school'
                         },
                         positiveRegex: {
                             opening_hours: [
@@ -96,7 +102,7 @@ describe('maprules', function() {
                 positiveRegex: { amenity: ['^school$', '^healthcare$'] },
                 error: 'amenity cannot be healthcare or school!'
             };
-            
+
             var areaDerivedArea = {
                 geometry: 'closedway',
                 equals: { area: 'yes' },
@@ -141,7 +147,7 @@ describe('maprules', function() {
 
     describe('#addRule', function() {
         it ('builds a rule from provided selector and adds it to _validationRules', function () {
-            var selector = {   
+            var selector = {
                 geometry:'node',
                 equals: {amenity:'marketplace'},
                 absence:'name',
@@ -303,7 +309,7 @@ describe('maprules', function() {
         var selectors;
         before(function() {
             selectors = [
-                {   
+                {
                     geometry:'node',
                     equals: {amenity:'marketplace'},
                     absence:'name',
@@ -361,12 +367,12 @@ describe('maprules', function() {
             iD.serviceMapRules.clearRules();
             selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
             validationRules = iD.serviceMapRules.validationRules();
-        }); 
+        });
         describe('#matches', function() {
             var selectors, entities;
             before(function() {
                 selectors = [
-                    {   
+                    {
                         geometry:'node',
                         equals: {amenity:'marketplace'},
                         absence:'name',
@@ -435,7 +441,7 @@ describe('maprules', function() {
                 iD.serviceMapRules.clearRules();
                 selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
                 validationRules = iD.serviceMapRules.validationRules();
-            }); 
+            });
             it('is true when each rule check is \'true\'', function() {
                 validationRules.forEach(function(rule, i) {
                     expect(rule.matches(entities[i])).to.be.true;
@@ -461,7 +467,7 @@ describe('maprules', function() {
 
             before(function() {
                 selectors = [
-                    {   
+                    {
                         geometry:'node',
                         equals: {amenity:'marketplace'},
                         absence:'name',
@@ -545,12 +551,12 @@ describe('maprules', function() {
                     var warnings = [];
                     var entity = entities[i];
                     var selector = selectors[i];
-                    
+
                     rule.findWarnings(entity, _graph, warnings);
-                   
+
                     var warning = warnings[0];
                     var type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
-                    
+
                     expect(warnings.length).to.eql(1);
                     expect(warning.entity).to.eql(entity);
                     expect(warning.message).to.eql(selector[type]);

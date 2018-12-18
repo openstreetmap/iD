@@ -16,7 +16,7 @@ var buildRuleChecks = function() {
             };
         },
         absence: function(absence) {
-            return function(tags) { 
+            return function(tags) {
                 return Object.keys(tags).indexOf(absence) === -1;
             };
         },
@@ -44,7 +44,7 @@ var buildRuleChecks = function() {
         lessThan: function(lessThan) {
             var key = Object.keys(lessThan)[0];
             var value = lessThan[key];
-            
+
             return function(tags) {
                 return tags[key] < value;
             };
@@ -52,9 +52,9 @@ var buildRuleChecks = function() {
         lessThanEqual: function(lessThanEqual) {
             var key = Object.keys(lessThanEqual)[0];
             var value = lessThanEqual[key];
-            
+
             return function(tags) {
-                return tags[key] <= value; 
+                return tags[key] <= value;
             };
         },
         positiveRegex: function(positiveRegex) {
@@ -70,7 +70,7 @@ var buildRuleChecks = function() {
             var tagKey = Object.keys(negativeRegex)[0];
             var expression = negativeRegex[tagKey].join('|');
             var regex = new RegExp(expression);
-            
+
             return function(tags) {
                 return !regex.test(tags[tagKey]);
             };
@@ -128,23 +128,23 @@ export default {
             if (isRegex || isEqual) {
                 Object.keys(selector[key]).forEach(function(selectorKey) {
                     values = isEqual ? [selector[key][selectorKey]] : getRegexValues(selector[key][selectorKey]);
-                    
+
                     if (expectedTags.hasOwnProperty(selectorKey)) {
                         values = values.concat(expectedTags[selectorKey]);
                     }
-                    
+
                     expectedTags[selectorKey] = values;
                 });
-                
+
             } else if (/(greater|less)Than(Equal)?|presence/g.test(key)) {
                 var tagKey = /presence/.test(key) ? selector[key] : Object.keys(selector[key])[0];
-                
+
                 values = [selector[key][tagKey]];
 
                 if (expectedTags.hasOwnProperty(tagKey)) {
                     values = values.concat(expectedTags[tagKey]);
                 }
-            
+
                 expectedTags[tagKey] = values;
             }
 
@@ -173,7 +173,7 @@ export default {
                 return 'line';
             }
         }
-        
+
         for (var key in tagMap) {
             if (key in _areaKeys && !isAreaKeyBlackList(key)) {
                 return 'area';
@@ -192,15 +192,15 @@ export default {
             checks: this.filterRuleChecks(selector),
             // true if all conditions for a tag error are true..
             matches: function(entity) {
-                return _every(this.checks, function(check) { 
-                    return check(entity.tags); 
+                return _every(this.checks, function(check) {
+                    return check(entity.tags);
                 });
             },
             // borrowed from Way#isArea()
-            inferredGeometry: this.inferGeometry(this.buildTagMap(selector), this._areaKeys), 
+            inferredGeometry: this.inferGeometry(this.buildTagMap(selector), this._areaKeys),
             geometryMatches: function(entity, graph) {
-                if (entity.type === 'node' || entity.type === 'relation') { 
-                    return selector.geometry === entity.type; 
+                if (entity.type === 'node' || entity.type === 'relation') {
+                    return selector.geometry === entity.type;
                 } else if (entity.type === 'way') {
                     return this.inferredGeometry === entity.geometry(graph);
                 }
