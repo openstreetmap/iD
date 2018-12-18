@@ -7,7 +7,9 @@ import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
-import { modeBrowse } from '../modes';
+import { modeBrowse,
+        modeSelect
+} from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
@@ -18,10 +20,171 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiIssues(context) {
     var key = t('issues.key');
+    var featureApplicability = ['edited', 'all'];
+    var _issuesOptionsContainer = d3_select(null);
+    var _featureApplicabilityList = d3_select(null);
+    var _issuesList = d3_select(null);
     var _shown = false;
+    var _selectedFeatureApplicability = context.storage('issue-features') || 'edited';
+
+    function renderIssuesOptions(selection) {
+        var container = selection.selectAll('.issues-options-container')
+            .data([0]);
+
+        _issuesOptionsContainer = container.enter()
+            .append('div')
+            .attr('class', 'issues-options-container')
+            .merge(container);
+
+        _featureApplicabilityList = container.selectAll('.feature-applicability-list')
+            .data([0]);
+
+        _featureApplicabilityList = container.enter()
+            .append('ul')
+            .attr('class', 'layer-list feature-applicability-list')
+            .merge(_featureApplicabilityList);
+    }
+
+    function renderIssuesList(selection) {
+        _issuesList = selection.selectAll('.issues-list')
+            .data([0]);
+
+        _issuesList = _issuesList.enter()
+            .append('ul')
+            .attr('class', 'layer-list issues-list')
+            .merge(_issuesList);
+    }
+
+    function drawListItems(selection, data, type, name, change, active) {
+        var items = selection.selectAll('li')
+            .data(data);
+
+        // Exit
+        items.exit()
+            .remove();
+
+        // Enter
+        var enter = items.enter()
+            .append('li')
+            .attr('class', 'layer')
+            .call(tooltip()
+                .html(true)
+                .title(function(d) {
+                    var tip = t('issues.' + name + '.' + d + '.tooltip');
+                    return uiTooltipHtml(tip);
+                })
+                .placement('bottom')
+            );
+
+        var label = enter
+            .append('label');
+
+        label
+            .append('input')
+            .attr('type', type)
+            .attr('name', name)
+            .on('change', change);
+
+        label
+            .append('span')
+            .text(function(d) { return t('issues.' + name + '.' + d + '.description'); });
+
+        // Update
+        items = items
+            .merge(enter);
+
+        items
+            .classed('active', active)
+            .selectAll('input')
+            .property('checked', active)
+            .property('indeterminate', function(d) {
+                return (name === 'feature' && autoHiddenFeature(d));
+            });
+    }
+
+    function drawIssuesList(selection) {
+
+        var name = 'issues_list';
+
+        var changes = context.history().changes();
+        var validations = context.history().validate(changes);
+
+        /*validations = _reduce(validations, function(validations, val) {
+            var severity = val.severity;
+            if (validations.hasOwnProperty(severity)) {
+                validations[severity].push(val);
+            } else {
+                validations[severity] = [val];
+            }
+            return validations;
+        }, {});*/
+
+        var items = selection.selectAll('li')
+            .data(validations);
+
+        // Exit
+        items.exit()
+            .remove();
+
+        // Enter
+        var enter = items.enter()
+            .append('li')
+            .attr('class', 'layer')
+            .call(tooltip()
+                .html(true)
+                .title(function(d) {
+                    var tip = d.tooltip;
+                    return uiTooltipHtml(tip);
+                })
+                .placement('bottom')
+            )
+            .on('click', function(d) {
+                context.enter(modeSelect(context, [d.entity.id]));
+            });
+
+        var label = enter
+            .append('label');
+
+        /*label
+            .append('input')
+            .attr('type', type)
+            .attr('name', name)
+            .on('change', change);
+*/
+        label
+            .append('span')
+            .text(function(d) { return d.message; });
+
+        // Update
+        items = items
+            .merge(enter);
+
+    /*    items
+            .classed('active', active)
+            .selectAll('input')
+            .property('checked', active)
+            .property('indeterminate', function(d) {
+                return (name === 'feature' && autoHiddenFeature(d));
+            });*/
+    }
+
+    function showsFeatureApplicability(d) {
+        return _selectedFeatureApplicability === d;
+    }
+
+
+    function _setFeatureApplicability(d) {
+        _selectedFeatureApplicability = d;
+        context.storage('issue-features', d);
+        update();
+    }
 
     function update() {
+        _featureApplicabilityList
+            .call(drawListItems, featureApplicability, 'radio', 'feature_applicability', _setFeatureApplicability, showsFeatureApplicability);
 
+        _issuesList
+            .call(drawIssuesList);
     }
 
     function issues(selection) {
@@ -45,7 +208,7 @@ export function uiIssues(context) {
                     uiHelp.hidePane();
                     uiMapData.hidePane();
                     update();
-                    
+
                     pane
                         .style('display', 'block')
                         .style('right', '-300px')
@@ -95,6 +258,28 @@ export function uiIssues(context) {
             .append('button')
             .on('click', function() { uiIssues.hidePane(); })
             .call(svgIcon('#iD-icon-close'));
+
+        var content = pane
+            .append('div')
+            .attr('class', 'pane-content');
+
+        // issues
+        content
+            .append('div')
+            .attr('class', 'issues-issues')
+            .call(uiDisclosure(context, 'issues_issues', true)
+                .title(t('issues.title'))
+                .content(renderIssuesList)
+            );
+
+        // options
+        content
+            .append('div')
+            .attr('class', 'issues-options')
+            .call(uiDisclosure(context, 'issues_options', true)
+                .title(t('issues.options.title'))
+                .content(renderIssuesOptions)
+            );
 
         update();
 

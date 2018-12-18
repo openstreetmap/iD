@@ -1051,7 +1051,20 @@
         "issues": {
             "title": "Issues",
             "description": "Issues",
-            "key": "I"
+            "key": "I",
+            "options": {
+                "title": "Options"
+            },
+            "feature_applicability": {
+                "edited": {
+                    "description": "Edited features only",
+                    "tooltip": "Only issues for features you change will be flagged"
+                },
+                "all": {
+                    "description": "All features",
+                    "tooltip": "Issues for all loaded features will be flagged"
+                }
+            }
         },
         "intro": {
             "done": "done",
