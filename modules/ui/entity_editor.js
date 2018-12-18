@@ -38,7 +38,6 @@ export function uiEntityEditor(context) {
     var rawMemberEditor = uiRawMemberEditor(context);
     var rawMembershipEditor = uiRawMembershipEditor(context);
 
-
     function entityEditor(selection) {
         var entity = context.entity(_entityID);
         var tags = _clone(entity.tags);

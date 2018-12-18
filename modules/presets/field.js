@@ -21,7 +21,7 @@ export function presetField(id, field) {
 
 
     field.label = function() {
-        return field.t('label', {'default': id});
+        return field.overrideLabel || field.t('label', {'default': id});
     };
 
 

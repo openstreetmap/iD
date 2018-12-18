@@ -4167,6 +4167,10 @@ svg.mouseclick use.right {
     background: #ffb;
 }
 
+.mode-save .error-section {
+    background: #ffa5a5;
+}
+
 .mode-save .warning-section .changeset-list button {
     border-left: 1px solid #ccc;
 }

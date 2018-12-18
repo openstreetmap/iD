@@ -151,9 +151,14 @@ export function uiPresetList(context) {
 
 
     function drawList(list, presets) {
-        var collection = presets.collection.map(function(preset) {
-            return preset.members ? CategoryItem(preset) : PresetItem(preset);
-        });
+        var collection = presets.collection.reduce(function(collection, preset) {
+            if (preset.members) {
+                collection.push(CategoryItem(preset));
+            } else if (preset.visible()) {
+                collection.push(PresetItem(preset));
+            }
+            return collection;
+        }, []);
 
         var items = list.selectAll('.preset-list-item')
             .data(collection, function(d) { return d.preset.id; });
