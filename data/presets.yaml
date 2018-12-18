@@ -364,6 +364,11 @@ en:
       country:
         # country=*
         label: Country
+      couplings:
+        # couplings=*
+        label: Couplings
+        # couplings field placeholder
+        placeholder: '1, 2, 3...'
       covered:
         # covered=*
         label: Covered
@@ -598,26 +603,20 @@ en:
       fence_type:
         # fence_type=*
         label: Type
-      fire_hydrant/position:
-        # 'fire_hydrant:position=*'
-        label: Position
-        options:
-          # 'fire_hydrant:position=green'
-          green: Green
-          # 'fire_hydrant:position=lane'
-          lane: Lane
-          # 'fire_hydrant:position=parking_lot'
-          parking_lot: Parking Lot
-          # 'fire_hydrant:position=sidewalk'
-          sidewalk: Sidewalk
+      fire_hydrant/diameter:
+        # 'fire_hydrant:diameter=*'
+        label: 'Diameter (mm, in, or letters)'
+      fire_hydrant/pressure:
+        # 'fire_hydrant:pressure=*'
+        label: Pressure (bar)
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
-        label: Type
+        label: Shape
         options:
           # 'fire_hydrant:type=pillar'
           pillar: Pillar/Aboveground
-          # 'fire_hydrant:type=pond'
-          pond: Pond
+          # 'fire_hydrant:type=pipe'
+          pipe: Capped Pipe
           # 'fire_hydrant:type=underground'
           underground: Underground
           # 'fire_hydrant:type=wall'
@@ -1791,6 +1790,9 @@ en:
       surveillance/zone:
         # 'surveillance:zone=*'
         label: Surveillance Zone
+      survey/date:
+        # 'survey:date=*'
+        label: Last Survey Date
       swimming_pool:
         # swimming_pool=*
         label: Type
@@ -2020,6 +2022,12 @@ en:
       water_point:
         # water_point=*
         label: Water Point
+      water_source:
+        # water_source=*
+        label: Water Source
+      water_volume:
+        # water_volume=*
+        label: Water Reserve Volume (m³)
       waterway:
         # waterway=*
         label: Type
@@ -3643,7 +3651,7 @@ en:
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
-        # 'terms: fire plug'
+        # 'terms: fire plug,fire water well,hydrant'
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
       emergency/first_aid_kit:
         # emergency=first_aid_kit

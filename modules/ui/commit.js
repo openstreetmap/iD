@@ -14,6 +14,8 @@ import { uiCommitWarnings } from './commit_warnings';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util';
+import { modeBrowse } from '../modes';
+import { svgIcon } from '../svg';
 
 
 var _changeset;
@@ -100,11 +102,27 @@ export function uiCommit(context) {
         var header = selection.selectAll('.header')
             .data([0]);
 
-        header.enter()
+        var headerTitle = header.enter()
             .append('div')
-            .attr('class', 'header fillL')
+            .attr('class', 'header fillL header-container');
+
+        headerTitle
+            .append('div')
+            .attr('class', 'header-block header-block-outer');
+        
+        headerTitle
+            .append('div')
+            .attr('class', 'header-block')
             .append('h3')
             .text(t('commit.title'));
+        
+        headerTitle
+            .append('div')
+            .attr('class', 'header-block header-block-outer header-block-close')
+            .append('button') 
+            .attr('class', 'close')
+            .on('click', function() { context.enter(modeBrowse(context)); })
+            .call(svgIcon('#iD-icon-close'));
 
         var body = selection.selectAll('.body')
             .data([0]);

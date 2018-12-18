@@ -648,6 +648,19 @@ button.add-note svg.icon {
     justify-content: center;
 }
 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-block-outer {
+    width: 20%;
+}
+
+.header-block-close {
+    display: flex;
+    justify-content: flex-end;
+}
 
 /* Hide/Toggle collapsable sections (aka Disclosure)
 ------------------------------------------------------- */
@@ -4075,6 +4088,7 @@ svg.mouseclick use.right {
 ------------------------------------------------------- */
 .settings-modal textarea {
     height: 70px;
+    width: 100%;
 }
 
 .settings-custom-background .instructions-template {

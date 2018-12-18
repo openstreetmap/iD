@@ -1,0 +1,6 @@
+{
+    "key": "water_source",
+    "default": "main",
+    "type": "combo",
+    "label": "Water Source"
+}
