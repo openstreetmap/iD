@@ -104,17 +104,17 @@ export function uiCommit(context) {
 
         var headerTitle = header.enter()
             .append('div')
-            .attr('class', 'header fillL header-container')
+            .attr('class', 'header fillL header-container');
 
         headerTitle
             .append('div')
-            .attr('class', 'header-block header-block-outer')
+            .attr('class', 'header-block header-block-outer');
         
         headerTitle
             .append('div')
             .attr('class', 'header-block')
             .append('h3')
-            .text(t('commit.title'))
+            .text(t('commit.title'));
         
         headerTitle
             .append('div')
