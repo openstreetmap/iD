@@ -7228,6 +7228,10 @@
     {"key": "fee", "description": "🄵 Fee"},
     {"key": "fence_type", "description": "🄵 Type"},
     {
+      "key": "fire_hydrant:diameter",
+      "description": "🄵 Nominal diameter (in mm, inches or letters)."
+    },
+    {
       "key": "fire_hydrant:position",
       "value": "lane",
       "description": "🄵 Position"
@@ -7247,14 +7251,30 @@
       "value": "green",
       "description": "🄵 Position"
     },
-    {"key": "fire_hydrant:type", "value": "pillar", "description": "🄵 Type"},
+    {
+      "key": "fire_hydrant:pressure",
+      "description": "🄵 Pressure in bar or suction"
+    },
+    {
+      "key": "fire_hydrant:type",
+      "value": "pillar",
+      "description": "🄵 The shape of the hydrant."
+    },
     {
       "key": "fire_hydrant:type",
       "value": "underground",
-      "description": "🄵 Type"
+      "description": "🄵 The shape of the hydrant."
     },
-    {"key": "fire_hydrant:type", "value": "wall", "description": "🄵 Type"},
-    {"key": "fire_hydrant:type", "value": "pond", "description": "🄵 Type"},
+    {
+      "key": "fire_hydrant:type",
+      "value": "wall",
+      "description": "🄵 The shape of the hydrant."
+    },
+    {
+      "key": "fire_hydrant:type",
+      "value": "pipe",
+      "description": "🄵 The shape of the hydrant."
+    },
     {"key": "fireplace", "description": "🄵 Fireplace"},
     {"key": "fitness_station", "description": "🄵 Equipment Type"},
     {"key": "fixme", "description": "🄵 Fix Me"},
@@ -7923,6 +7943,10 @@
       "description": "🄵 Surveillance Type"
     },
     {"key": "surveillance:zone", "description": "🄵 Surveillance Zone"},
+    {
+      "key": "survey:date",
+      "description": "🄵 Date of last site survey (YYYY-MM-DD)"
+    },
     {"key": "swimming_pool", "description": "🄵 Type"},
     {"key": "switch", "value": "mechanical", "description": "🄵 Type"},
     {"key": "switch", "value": "circuit_breaker", "description": "🄵 Type"},
@@ -8080,6 +8104,11 @@
     {"key": "voltage:tertiary", "description": "🄵 Tertiary Voltage"},
     {"key": "wall", "description": "🄵 Type"},
     {"key": "water_point", "description": "🄵 Water Point"},
+    {"key": "water_source", "description": "🄵 Water source"},
+    {
+      "key": "water_volume",
+      "description": "🄵 Volume of the water reserve. Tanks and pools only (default in m^3)."
+    },
     {"key": "water", "description": "🄵 Type"},
     {"key": "website", "description": "🄵 Website"},
     {"key": "wetland", "description": "🄵 Type"},

@@ -2002,22 +2002,28 @@
                 "fence_type": {
                     "label": "Type"
                 },
+                "fire_hydrant/diameter": {
+                    "label": "Nominal diameter (in mm, inches or letters)."
+                },
                 "fire_hydrant/position": {
                     "label": "Position",
                     "options": {
-                        "lane": "Lane",
-                        "parking_lot": "Parking Lot",
-                        "sidewalk": "Sidewalk",
-                        "green": "Green"
+                        "lane": "on the side of a road lane",
+                        "parking_lot": "in a parking_lot",
+                        "sidewalk": "on a sidewalk",
+                        "green": "in a grassy area"
                     }
                 },
+                "fire_hydrant/pressure": {
+                    "label": "Pressure in bar or suction"
+                },
                 "fire_hydrant/type": {
-                    "label": "Type",
+                    "label": "The shape of the hydrant.",
                     "options": {
-                        "pillar": "Pillar/Aboveground",
-                        "underground": "Underground",
-                        "wall": "Wall",
-                        "pond": "Pond"
+                        "pillar": "A pillar type hydrant.",
+                        "underground": "A fire hydrant simple outlet located underground.",
+                        "wall": "A wall-mounted fire hydrant.",
+                        "pipe": "A simple capped pipe, without the usual hydrant shape."
                     }
                 },
                 "fireplace": {
@@ -2977,6 +2983,9 @@
                 "surveillance/zone": {
                     "label": "Surveillance Zone"
                 },
+                "survey/date": {
+                    "label": "Date of last site survey (YYYY-MM-DD)"
+                },
                 "swimming_pool": {
                     "label": "Type"
                 },
@@ -3158,6 +3167,12 @@
                 },
                 "water_point": {
                     "label": "Water Point"
+                },
+                "water_source": {
+                    "label": "Water source"
+                },
+                "water_volume": {
+                    "label": "Volume of the water reserve. Tanks and pools only (default in m^3)."
                 },
                 "water": {
                     "label": "Type"
@@ -4651,7 +4666,7 @@
                 },
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
-                    "terms": "fire plug"
+                    "terms": "fire plug,fire water well"
                 },
                 "emergency/first_aid_kit": {
                     "name": "First Aid Kit",

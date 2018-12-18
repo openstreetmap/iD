@@ -1,0 +1,7 @@
+{
+    "key": "water_source",
+    "default": "main",
+    "type": "combo",
+    "label": "Water source",
+    "options": [ "main", "groundwater", "stream", "river", "canal", "drain", "ditch", "pond", "lake", "water_tank", "swimming_pool" ]
+}
