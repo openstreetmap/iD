@@ -13,6 +13,7 @@ import { select as d3_select } from 'd3-selection';
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
+import { IssueManager } from '../validations/issueManager';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -95,10 +96,10 @@ export function coreContext() {
 
 
     /* Straight accessors. Avoid using these if you can. */
-    var connection, history;
+    var connection, history, issueManager;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
-
+    context.issueManager = function() { return issueManager; };
 
     /* Connection */
     context.preauth = function(options) {
@@ -445,6 +446,8 @@ export function coreContext() {
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
+
+    issueManager = IssueManager(context);
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
