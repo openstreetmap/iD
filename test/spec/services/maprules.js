@@ -554,7 +554,7 @@ describe('maprules', function() {
                     expect(warnings.length).to.eql(1);
                     expect(warning.entity).to.eql(entity);
                     expect(warning.message).to.eql(selector[type]);
-                    expect('mapcss_' + type).to.eql(warning.id);
+                    expect(type).to.eql(warning.severity);
                 });
             });
         });

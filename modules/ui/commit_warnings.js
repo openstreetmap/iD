@@ -15,11 +15,11 @@ export function uiCommitWarnings(context) {
         var validations = context.history().validate(changes);
 
         validations = _reduce(validations, function(validations, val) {
-            var type = val.id === 'mapcss_error' ? 'error' : 'warning';
-            if (validations.hasOwnProperty(type)) {
-                validations[type].push(val);
+            var severity = val.severity;
+            if (validations.hasOwnProperty(severity)) {
+                validations[severity].push(val);
             } else {
-                validations[type] = [val];
+                validations[severity] = [val];
             }
             return validations;
         }, {});
