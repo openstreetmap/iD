@@ -408,6 +408,7 @@
             "cancel": "Cancel",
             "changes": "{count} Changes",
             "download_changes": "Download osmChange file",
+            "errors": "Errors",
             "warnings": "Warnings",
             "modified": "Modified",
             "deleted": "Deleted",

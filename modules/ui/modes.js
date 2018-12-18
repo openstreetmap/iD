@@ -14,7 +14,6 @@ import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 
-
 export function uiModes(context) {
     var modes = [
         modeAddPoint(context),
@@ -22,7 +21,6 @@ export function uiModes(context) {
         modeAddArea(context),
         modeAddNote(context)
     ];
-
 
     function editable() {
         var mode = context.mode();
@@ -38,7 +36,6 @@ export function uiModes(context) {
         var mode = context.mode();
         return context.map().notesEditable() && mode && mode.id !== 'save';
     }
-
 
     return function(selection) {
         context

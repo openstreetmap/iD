@@ -467,7 +467,7 @@ export function uiMapData(context) {
 
 
     function renderDataLayers(selection) {
-        var container = selection.selectAll('data-layer-container')
+        var container = selection.selectAll('.data-layer-container')
             .data([0]);
 
         _dataLayerContainer = container.enter()
@@ -478,7 +478,7 @@ export function uiMapData(context) {
 
 
     function renderFillList(selection) {
-        var container = selection.selectAll('layer-fill-list')
+        var container = selection.selectAll('.layer-fill-list')
             .data([0]);
 
         _fillList = container.enter()
@@ -489,7 +489,7 @@ export function uiMapData(context) {
 
 
     function renderFeatureList(selection) {
-        var container = selection.selectAll('layer-feature-list')
+        var container = selection.selectAll('.layer-feature-list')
             .data([0]);
 
         _featureList = container.enter()

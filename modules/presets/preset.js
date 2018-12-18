@@ -5,7 +5,7 @@ import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 
-export function presetPreset(id, preset, fields) {
+export function presetPreset(id, preset, fields, visible) {
     preset = _clone(preset);
 
     preset.id = id;
@@ -13,6 +13,7 @@ export function presetPreset(id, preset, fields) {
     preset.moreFields = (preset.moreFields || []).map(getFields);
     preset.geometry = (preset.geometry || []);
 
+    visible = visible || false;
 
     function getFields(f) {
         return fields[f];
@@ -69,6 +70,12 @@ export function presetPreset(id, preset, fields) {
     preset.isFallback = function() {
         var tagCount = Object.keys(preset.tags).length;
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
+    };
+
+    preset.visible = function(_) {
+        if (!arguments.length) return visible;
+        visible = _;
+        return visible;
     };
 
 

@@ -1,5 +1,6 @@
 import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
+import _findIndex from 'lodash-es/findIndex';
 import _some from 'lodash-es/some';
 import _uniq from 'lodash-es/uniq';
 import _values from 'lodash-es/values';
@@ -23,6 +24,11 @@ export function presetCollection(collection) {
             });
         },
 
+        index: function(id) {
+            return _findIndex(this.collection, function(d) {
+                return d.id === id;
+            });
+        },
 
         matchGeometry: function(geometry) {
             return presetCollection(this.collection.filter(function(d) {

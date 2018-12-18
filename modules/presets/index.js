@@ -3,6 +3,8 @@ import _forEach from 'lodash-es/forEach';
 import _reject from 'lodash-es/reject';
 import _uniq from 'lodash-es/uniq';
 
+import { json as d3_json } from 'd3-request';
+
 import { data } from '../../data/index';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
@@ -70,7 +72,6 @@ export function presetIndex() {
             if (address && (!match || match.isFallback())) {
                 match = address;
             }
-
             return match || all.item(geometry);
         });
     };
@@ -120,16 +121,7 @@ export function presetIndex() {
         return areaKeys;
     };
 
-
-    all.init = function() {
-        var d = data.presets;
-
-        all.collection = [];
-        _recent.collection = [];
-        _fields = {};
-        _universal = [];
-        _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-
+    all.build = function(d, visible) {
         if (d.fields) {
             _forEach(d.fields, function(d, id) {
                 _fields[id] = presetField(id, d);
@@ -145,13 +137,23 @@ export function presetIndex() {
 
         if (d.presets) {
             _forEach(d.presets, function(d, id) {
-                all.collection.push(presetPreset(id, d, _fields));
+                var existing = all.index(id);
+                if (existing !== -1) {
+                    all.collection[existing] = presetPreset(id, d, _fields, visible);
+                } else {
+                    all.collection.push(presetPreset(id, d, _fields, visible));
+                }
             });
         }
 
         if (d.categories) {
             _forEach(d.categories, function(d, id) {
-                all.collection.push(presetCategory(id, d, all));
+                var existing = all.index(id);
+                if (existing !== -1) {
+                    all.collection[existing] = presetCategory(id, d, all);
+                } else {
+                    all.collection.push(presetCategory(id, d, all));
+                }
             });
         }
 
@@ -177,8 +179,50 @@ export function presetIndex() {
                 }
             }
         }
+        return all;
+    };
+
+    all.init = function() {
+        all.collection = [];
+        _recent.collection = [];
+        _fields = {};
+        _universal = [];
+        _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+
+        return all.build(data.presets, true);
+    };
+
+
+    all.reset = function() {
+        all.collection = [];
+        _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
+        _fields = {};
+        _universal = [];
+        _recent = presetCollection([]);
+
+        // Index of presets by (geometry, tag key).
+        _index = {
+            point: {},
+            vertex: {},
+            line: {},
+            area: {},
+            relation: {}
+        };
 
         return all;
+    };
+
+    all.fromExternal = function(external, done) {
+        all.reset();
+        d3_json(external, function(err, externalPresets) {
+            if (err) {
+                all.init();
+            } else {
+                all.build(data.presets, false); // make default presets hidden to begin
+                all.build(externalPresets, true); // make the external visible
+            }
+            done(all);
+        });
     };
 
     all.field = function(id) {

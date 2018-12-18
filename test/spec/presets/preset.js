@@ -149,4 +149,13 @@ describe('iD.presetPreset', function() {
             expect(preset.unsetTags({a: 'b'}, 'area')).to.eql({a: 'b'});
         });
     });
+
+    describe('#visible', function() {
+        it('sets/gets visibility of preset', function() {
+            var preset = iD.presetPreset('test', {}, false);
+            expect(preset.visible()).to.be.false;
+            preset.visible(true);
+            expect(preset.visible()).to.be.true;
+        });
+    });
 });

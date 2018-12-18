@@ -281,9 +281,9 @@ export function coreHistory(context) {
 
 
         validate: function(changes) {
-            return _flatten(
-                _map(Validations, function(fn) { return fn()(changes, _stack[_index].graph); })
-            );
+            return _flatten(_map(Validations, function(fn) {
+                return fn()(changes, _stack[_index].graph);
+            }));
         },
 
 
