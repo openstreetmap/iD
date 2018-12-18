@@ -17,6 +17,7 @@ import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
+import { uiIssues } from './issues';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiSettingsCustomBackground } from './settings/custom_background';
@@ -310,8 +311,9 @@ export function uiBackground(context) {
                 _shown = show;
 
                 if (show) {
-                    uiMapData.hidePane();
                     uiHelp.hidePane();
+                    uiIssues.hidePane();
+                    uiMapData.hidePane();
                     update();
 
                     pane

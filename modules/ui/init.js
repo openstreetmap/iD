@@ -21,6 +21,7 @@ import { uiGeolocate } from './geolocate';
 import { uiHelp } from './help';
 import { uiInfo } from './info';
 import { uiIntro } from './intro';
+import { uiIssues } from './issues';
 import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
@@ -164,6 +165,11 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'map-control map-data-control')
             .call(uiMapData(context));
+
+        controls
+            .append('div')
+            .attr('class', 'map-control map-issues-control')
+            .call(uiIssues(context));
 
         controls
             .append('div')

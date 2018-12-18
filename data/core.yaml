@@ -881,6 +881,10 @@ en:
           indirect: "**Some restrictions display the text \"(indirect)\" and are drawn lighter.**"
           indirect_example: "These restrictions exist because of another nearby restriction. For example, an \"Only Straight On\" restriction will indirectly create \"No Turn\" restrictions for all other paths through the intersection."
           indirect_noedit: "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
+  issues:
+    title: Issues
+    description: Issues
+    key: I
   intro:
     done: done
     ok: OK

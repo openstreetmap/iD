@@ -11,6 +11,7 @@ import { modeBrowse } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
+import { uiIssues } from './issues';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -550,6 +551,7 @@ export function uiMapData(context) {
                 if (show) {
                     uiBackground.hidePane();
                     uiHelp.hidePane();
+                    uiIssues.hidePane();
                     update();
 
                     pane

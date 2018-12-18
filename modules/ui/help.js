@@ -9,6 +9,7 @@ import { uiCmd } from './cmd';
 import { uiBackground } from './background';
 import { uiIntro } from './intro';
 import { uiMapData } from './map_data';
+import { uiIssues } from './issues';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -294,6 +295,7 @@ export function uiHelp(context) {
 
                 if (show) {
                     uiBackground.hidePane();
+                    uiIssues.hidePane();
                     uiMapData.hidePane();
 
                     pane.style('display', 'block')
