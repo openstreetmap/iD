@@ -112,7 +112,7 @@ export function uiCommit(context) {
         
         headerTitle
             .append('div')
-            .attr('class', 'header-block header-block')
+            .attr('class', 'header-block')
             .append('h3')
             .text(t('commit.title'))
         
