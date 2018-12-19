@@ -189,30 +189,35 @@ describe('iD.osmEntity', function () {
         });
     });
 
-    describe('#isUsed', function () {
+    describe('#hasNonGeometryTags', function () {
         it('returns false for an entity without tags', function () {
-            var node = iD.Node(),
-                graph = iD.Graph([node]);
-            expect(node.isUsed(graph)).to.equal(false);
+            var node = iD.Node();
+            expect(node.hasNonGeometryTags()).to.equal(false);
         });
 
         it('returns true for an entity with tags', function () {
-            var node = iD.Node({tags: {foo: 'bar'}}),
-                graph = iD.Graph([node]);
-            expect(node.isUsed(graph)).to.equal(true);
+            var node = iD.Node({tags: {foo: 'bar'}});
+            expect(node.hasNonGeometryTags()).to.equal(true);
         });
 
         it('returns false for an entity with only an area=yes tag', function () {
-            var node = iD.Node({tags: {area: 'yes'}}),
-                graph = iD.Graph([node]);
-            expect(node.isUsed(graph)).to.equal(false);
+            var node = iD.Node({tags: {area: 'yes'}});
+            expect(node.hasNonGeometryTags()).to.equal(false);
         });
+    });
 
+    describe('#hasParentRelations', function () {
         it('returns true for an entity that is a relation member', function () {
             var node = iD.Node(),
                 relation = iD.Relation({members: [{id: node.id}]}),
                 graph = iD.Graph([node, relation]);
-            expect(node.isUsed(graph)).to.equal(true);
+            expect(node.hasParentRelations(graph)).to.equal(true);
+        });
+
+        it('returns false for an entity that is not a relation member', function () {
+            var node = iD.Node(),
+                graph = iD.Graph([node]);
+            expect(node.hasParentRelations(graph)).to.equal(false);
         });
     });
 

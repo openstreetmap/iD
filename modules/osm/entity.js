@@ -143,11 +143,13 @@ osmEntity.prototype = {
     },
 
 
-    isUsed: function(resolver) {
-        return _without(Object.keys(this.tags), 'area').length > 0 ||
-            resolver.parentRelations(this).length > 0;
+    hasNonGeometryTags: function() {
+        return _without(Object.keys(this.tags), 'area').length > 0;
     },
 
+    hasParentRelations: function(resolver) {
+        return resolver.parentRelations(this).length > 0;
+    },
 
     hasInterestingTags: function() {
         return _keys(this.tags).some(osmIsInterestingTag);

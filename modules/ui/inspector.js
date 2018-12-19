@@ -14,7 +14,7 @@ export function uiInspector(context) {
     var _newFeature = false;
 
 
-    function inspector(selection) {
+    function inspector(selection, newFeature) {
         presetList
             .entityID(_entityID)
             .autofocus(_newFeature)
@@ -44,19 +44,18 @@ export function uiInspector(context) {
         var presetPane = wrap.selectAll('.preset-list-pane');
         var editorPane = wrap.selectAll('.entity-editor-pane');
 
-        var graph = context.graph();
         var entity = context.entity(_entityID);
 
-        var showEditor = _state === 'hover' ||
-            entity.isUsed(graph) ||
-            entity.isHighwayIntersection(graph);
+        var isTaglessVertex = entity.geometry(context.graph()) === 'vertex' && !entity.hasNonGeometryTags();
+        // start with the preset list if the feature is new or is a vertex with no tags
+        var showPresetList = newFeature || isTaglessVertex;
 
-        if (showEditor) {
-            wrap.style('right', '0%');
-            editorPane.call(entityEditor);
-        } else {
+        if (showPresetList) {
             wrap.style('right', '-100%');
             presetPane.call(presetList);
+        } else {
+            wrap.style('right', '0%');
+            editorPane.call(entityEditor);
         }
 
         var footer = selection.selectAll('.footer')
