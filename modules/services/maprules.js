@@ -206,14 +206,17 @@ export default {
                 }
             },
             // when geometries match and tag matches are present, return a warning...
-            findWarnings: function (entity, graph, warnings) {
+            findIssues: function (entity, graph, issues) {
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
-                    var type = Object.keys(selector).indexOf('error') > -1 ? 'error' : 'warning';
-                    warnings.push({
-                        severity: type,
-                        message: selector[type],
-                        entity: entity
-                    });
+                    var severity = Object.keys(selector).indexOf('error') > -1
+                            ? ValidationIssueSeverity.error
+                            : ValidationIssueSeverity.warning;
+                    issues.push(new validationIssue({
+                        type: ValidationIssueType.map_rule_issue,
+                        severity: severity,
+                        message: selector[severity],
+                        entities: [entity],
+                    }));
                 }
             }
         };

@@ -1,3 +1,5 @@
+import _map from 'lodash-es/map';
+
 import { t } from '../util/locale';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
@@ -23,10 +25,10 @@ export function uiCommitWarnings(context) {
             return issues;
         }, {});
 
-        _forEach(issues, function(instances, type) {
+        _forEach(issues, function(instances, severity) {
             instances = _uniqBy(instances, function(val) { return val.id + '_' + val.message.replace(/\s+/g,''); });
-            var section = type + '-section';
-            var instanceItem = type + '-item';
+            var section = severity + '-section';
+            var instanceItem = severity + '-item';
 
             var container = selection.selectAll('.' + section)
                 .data(instances.length ? [0] : []);
@@ -40,7 +42,7 @@ export function uiCommitWarnings(context) {
 
             containerEnter
                 .append('h3')
-                .text(type === 'warning' ? t('commit.warnings') : t('commit.errors'));
+                .text(severity === 'warning' ? t('commit.warnings') : t('commit.errors'));
 
             containerEnter
                 .append('ul')
@@ -76,31 +78,35 @@ export function uiCommitWarnings(context) {
             items = itemsEnter
                 .merge(items);
 
+
             items
                 .on('mouseover', mouseover)
                 .on('mouseout', mouseout)
                 .on('click', warningClick);
 
-
             function mouseover(d) {
-                if (d.entity) {
+                if (d.entities) {
                     context.surface().selectAll(
-                        utilEntityOrMemberSelector([d.entity.id], context.graph())
+                        utilEntityOrMemberSelector(
+                            _map(d.entities, function(e) { return e.id; }),
+                            context.graph()
+                        )
                     ).classed('hover', true);
                 }
             }
-
 
             function mouseout() {
                 context.surface().selectAll('.hover')
                     .classed('hover', false);
             }
 
-
             function warningClick(d) {
-                if (d.entity) {
-                    context.map().zoomTo(d.entity);
-                    context.enter(modeSelect(context, [d.entity.id]));
+                if (d.entities && d.entities.length > 0) {
+                    context.map().zoomTo(d.entities[0]);
+                    context.enter(modeSelect(
+                        context,
+                        _map(d.entities, function(e) { return e.id; }),
+                    ));
                 }
             }
         });

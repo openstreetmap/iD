@@ -2,27 +2,33 @@ import _isEmpty from 'lodash-es/isEmpty';
 
 import { t } from '../util/locale';
 import { utilTagText } from '../util/index';
+import {
+    ValidationIssueType,
+    ValidationIssueSeverity,
+    validationIssue,
+} from './validation_issue';
 
 
 export function validationDeprecatedTag() {
 
     var validation = function(changes) {
-        var warnings = [];
+        var issues = [];
         for (var i = 0; i < changes.created.length; i++) {
             var change = changes.created[i],
                 deprecatedTags = change.deprecatedTags();
 
             if (!_isEmpty(deprecatedTags)) {
                 var tags = utilTagText({ tags: deprecatedTags });
-                warnings.push({
-                    id: 'deprecated_tags',
+                issues.push(new validationIssue({
+                    type: ValidationIssueType.deprecated_tags,
+                    severity: ValidationIssueSeverity.warning,
                     message: t('validations.deprecated_tags', { tags: tags }),
-                    entity: change
-                });
+                    entities: [change],
+                }));
             }
         }
 
-        return warnings;
+        return issues;
     };
 
 

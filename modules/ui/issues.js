@@ -1,3 +1,4 @@
+import _map from 'lodash-es/map';
 import {
     event as d3_event,
     select as d3_select
@@ -102,10 +103,10 @@ export function uiIssues(context) {
     function drawIssuesList(selection) {
 
         var name = 'issues_list';
-
+        
         var issues = context.issueManager().getIssues();
 
-        /*validations = _reduce(validations, function(validations, val) {
+        /*validations = _reduce(issues, function(validations, val) {
             var severity = val.severity;
             if (validations.hasOwnProperty(severity)) {
                 validations[severity].push(val);
@@ -129,13 +130,18 @@ export function uiIssues(context) {
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
-                    var tip = d.tooltip;
+                    var tip = d.tooltip ? d.tooltip : '';
                     return uiTooltipHtml(tip);
                 })
                 .placement('bottom')
             )
             .on('click', function(d) {
-                context.enter(modeSelect(context, [d.entity.id]));
+                if (d.entities) {
+                    context.enter(modeSelect(
+                        context,
+                        _map(d.entities, function(e) { return e.id; })
+                    ));
+                }
             });
 
         var label = enter
