@@ -2851,7 +2851,7 @@ div.full-screen > button:hover {
     background: #FFD5D4;
 }
 .issues-list li.severity-error:hover {
-    background: #FFC8C6;
+    background: #ffc9c7;
 }
 .issues-list li.severity-error .icon {
     color: #DD1400
