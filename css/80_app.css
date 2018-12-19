@@ -2836,14 +2836,22 @@ div.full-screen > button:hover {
     height: auto;
     color: inherit;
 }
+
 .issues-list li.severity-warning {
     background: #ffb;
+}
+.issues-list li.severity-warning:hover {
+    background: #FFFF99;
 }
 .issues-list li.severity-warning .icon {
     color: #FFB300
 }
+
 .issues-list li.severity-error {
     background: #FFD5D4;
+}
+.issues-list li.severity-error:hover {
+    background: #FFC8C6;
 }
 .issues-list li.severity-error .icon {
     color: #DD1400
