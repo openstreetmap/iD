@@ -144,6 +144,9 @@ export function uiIssues(context) {
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
+                .append('div')
+                .attr('title', t('issues.severity.'+d.severity))
+                .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
 

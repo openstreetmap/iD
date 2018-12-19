@@ -49,7 +49,7 @@ export function uiEntityIssues(context) {
                 .placement('bottom')
             )
             .on('click', function(d) {
-                
+
             });
 
         var label = enter
@@ -58,6 +58,9 @@ export function uiEntityIssues(context) {
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
+                .append('div')
+                .attr('title', t('issues.severity.'+d.severity))
+                .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
 

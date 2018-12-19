@@ -895,6 +895,9 @@ en:
       all:
         description: All features
         tooltip: Issues for all loaded features will be flagged
+    severity:
+      error: error
+      warning: warning
   intro:
     done: done
     ok: OK
