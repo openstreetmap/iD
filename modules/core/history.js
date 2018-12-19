@@ -40,6 +40,7 @@ export function coreHistory(context) {
     var _stack;
     var _index;
     var _tree;
+    var validations = _filter(Validations, _isFunction);
 
 
     // internal _act, accepts list of actions and eased time
@@ -282,7 +283,7 @@ export function coreHistory(context) {
 
         validate: function(changes) {
             return _flatten(_map(
-                _filter(Validations, _isFunction),
+                validations,
                 function(fn) {
                     return fn(context)(changes, _stack[_index].graph);
                 }
