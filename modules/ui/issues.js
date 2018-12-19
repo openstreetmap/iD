@@ -17,15 +17,12 @@ import { uiMapData } from './map_data';
 import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
-
 export function uiIssues(context) {
     var key = t('issues.key');
-    var featureApplicability = ['edited', 'all'];
     var _issuesOptionsContainer = d3_select(null);
     var _featureApplicabilityList = d3_select(null);
     var _issuesList = d3_select(null);
     var _shown = false;
-    var _selectedFeatureApplicability = context.storage('issue-features') || 'edited';
 
     function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
@@ -169,19 +166,24 @@ export function uiIssues(context) {
     }
 
     function showsFeatureApplicability(d) {
-        return _selectedFeatureApplicability === d;
+        return context.issueManager().getFeatureApplicability() === d;
     }
 
-
-    function _setFeatureApplicability(d) {
-        _selectedFeatureApplicability = d;
-        context.storage('issue-features', d);
+    function setFeatureApplicability(d) {
+        context.issueManager().setFeatureApplicability(d);
         update();
     }
 
     function update() {
         _featureApplicabilityList
-            .call(drawListItems, featureApplicability, 'radio', 'feature_applicability', _setFeatureApplicability, showsFeatureApplicability);
+            .call(
+                drawListItems,
+                context.issueManager().featureApplicabilityOptions,
+                'radio',
+                'feature_applicability',
+                setFeatureApplicability,
+                showsFeatureApplicability
+            );
 
         _issuesList
             .call(drawIssuesList);

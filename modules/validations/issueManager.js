@@ -6,6 +6,19 @@ export function IssueManager(context) {
         self = {},
         issues = [];
 
+    self.featureApplicabilityOptions = ['edited', 'all'];
+
+    var featureApplicability = context.storage('issue-features') || 'edited';
+
+    self.getFeatureApplicability = function() {
+        return featureApplicability;
+    };
+
+    self.setFeatureApplicability = function(applicability) {
+        featureApplicability = applicability;
+        context.storage('issue-features', applicability);
+    };
+
     self.getIssues = function() {
         self.validate();
         return issues;
