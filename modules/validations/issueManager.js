@@ -1,4 +1,7 @@
 import * as d3 from 'd3';
+
+import _filter from 'lodash-es/filter';
+
 import { utilRebind } from '../util/rebind';
 
 export function IssueManager(context) {
@@ -22,6 +25,18 @@ export function IssueManager(context) {
     self.getIssues = function() {
         self.validate();
         return issues;
+    };
+
+    self.getIssuesForEntityWithID = function(entityID) {
+        var issues = self.getIssues();
+        return _filter(issues, function(issue) {
+            for (var i = 0; i < issue.entities.length; i++) {
+                if (issue.entities[i].id === entityID) {
+                    return true;
+                }
+            }
+            return false;
+        });
     };
 
     self.validate = function() {

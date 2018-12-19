@@ -107,7 +107,7 @@ export function uiIssues(context) {
         }, {});*/
 
         var items = selection.selectAll('li')
-            .data(issues);
+            .data(issues, function(d) { return d.id(); });
 
         // Exit
         items.exit()
@@ -117,7 +117,7 @@ export function uiIssues(context) {
         var enter = items.enter()
             .append('li')
             .attr('class', function (d) {
-                return 'layer severity-' + d.severity;
+                return 'layer issue severity-' + d.severity;
             })
             .call(tooltip()
                 .html(true)

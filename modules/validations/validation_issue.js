@@ -1,5 +1,5 @@
 import _isObject from 'lodash-es/isObject';
-
+import { osmEntity } from '../osm';
 
 var ValidationIssueType = Object.freeze({
     deprecated_tags: 'deprecated_tags',
@@ -22,6 +22,11 @@ export { ValidationIssueType, ValidationIssueSeverity };
 
 
 export function validationIssue(attrs) {
+
+    this.id = function () {
+        return this.type + osmEntity.key(this.entities[0]);
+    };
+
     if (!_isObject(attrs)) throw new Error('Input attrs is not an object');
     if (!attrs.type || !ValidationIssueType.hasOwnProperty(attrs.type)) {
         throw new Error('Invalid attrs.type: ' + attrs.type);

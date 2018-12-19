@@ -20,6 +20,7 @@ import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
+import { uiEntityIssues } from './entity_issues';
 import { utilCleanTags, utilRebind } from '../util';
 
 
@@ -33,6 +34,7 @@ export function uiEntityEditor(context) {
     var _activePreset;
     var _tagReference;
 
+    var entityIssues = uiEntityIssues(context);
     var presetEditor = uiPresetEditor(context).on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
@@ -100,6 +102,10 @@ export function uiEntityEditor(context) {
 
         enter
             .append('div')
+            .attr('class', 'inspector-border entity-issues');
+
+        enter
+            .append('div')
             .attr('class', 'inspector-border preset-editor');
 
         enter
@@ -157,6 +163,10 @@ export function uiEntityEditor(context) {
             .attr('class', 'namepart')
             .text(function(d) { return d; });
 
+        body.select('.entity-issues')
+            .call(entityIssues
+                .entityID(_entityID)
+            );
 
         body.select('.preset-editor')
             .call(presetEditor
@@ -182,6 +192,14 @@ export function uiEntityEditor(context) {
                 );
         } else {
             body.select('.raw-member-editor')
+                .style('display', 'none');
+        }
+
+        if (context.issueManager().getIssuesForEntityWithID(_entityID).length > 0) {
+            body.select('.entity-issues')
+                .style('display', 'block');
+        } else {
+            body.select('.entity-issues')
                 .style('display', 'none');
         }
 
