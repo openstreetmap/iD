@@ -126,7 +126,9 @@ export function uiIssues(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', 'layer')
+            .attr('class', function (d) {
+                return 'layer severity-' + d.severity;
+            })
             .call(tooltip()
                 .html(true)
                 .title(function(d) {

@@ -2824,6 +2824,21 @@ div.full-screen > button:hover {
     padding-bottom: 10px;
 }
 
+/* Issues List */
+
+.issues-list label > span {
+    white-space: normal;
+}
+.issues-list li {
+    height: auto;
+    color: inherit;
+}
+.issues-list li.severity-warning {
+    background: #ffb;
+}
+.issues-list li.severity-error {
+    background: #FFD5D4;
+}
 
 /* Background - Display Options Sliders
 ------------------------------------------------------- */
