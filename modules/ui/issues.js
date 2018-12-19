@@ -12,13 +12,17 @@ import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
+import { uiSettingsCustomRule } from './settings/custom_rule';
 import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiIssues(context) {
     var key = t('issues.key');
     var _featureApplicabilityList = d3_select(null);
     var _issuesList = d3_select(null);
+    var settingsCustomRule = uiSettingsCustomRule(context)
+        .on('change', customChanged);
     var _shown = false;
+    var _customRulesContainer = d3_select(null);
 
     function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
@@ -182,6 +186,10 @@ export function uiIssues(context) {
 
         _issuesList
             .call(drawIssuesList);
+
+        _customRulesContainer
+            .call(drawCustomRulesItems);
+
     }
 
     function issues(selection) {
@@ -276,6 +284,15 @@ export function uiIssues(context) {
             .call(uiDisclosure(context, 'issues_options', true)
                 .title(t('issues.options.title'))
                 .content(renderIssuesOptions)
+
+            );
+
+        content
+            .append('div')
+            .attr('class', 'issues-custom-rules')
+            .call(uiDisclosure(context, 'custom_rules', true)
+                .title(t('issues.rules.custom.header'))
+                .content(renderCustomRules)
             );
 
         update();
@@ -287,6 +304,101 @@ export function uiIssues(context) {
         uiIssues.togglePane = togglePane;
         uiIssues.setVisible = setVisible;
     }
+
+    function renderCustomRules(selection) {
+        var container = selection.selectAll('div.custom-rules-container')
+            .data([0]);
+        _customRulesContainer = container.enter()
+            .append('div')
+            .attr('class', 'custom-rules-container')
+            .merge(container);
+    }
+
+    function drawCustomRulesItems(selection) {
+        var ul = selection
+            .selectAll('.layer-list-data')
+            .data(_issuesList ? [0] : []);
+
+        ul.exit()
+            .remove();
+
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-data');
+
+        var liEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-data');
+
+        liEnter
+            .append('button')
+            .call(tooltip()
+                .title(t('settings.custom_rule.tooltip'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editCustom)
+            .call(svgIcon('#iD-icon-more'));
+
+
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('issues.rules.custom.tooltip'))
+                .placement('top')
+            );
+
+
+        labelEnter.append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                if(d3_select(this).property('checked')){
+                    context.issueManager().removeSourceIgnore(d3_select('.custom-rule-name').text());
+                } else {
+                    context.issueManager().ignoreSource(d3_select('.custom-rule-name').text());
+                }
+            });
+
+        labelEnter
+            .append('span')
+            .attr('class', 'custom-rule-name')
+            .text(t('issues.rules.custom.title'));
+
+        ul = ul
+            .merge(ulEnter);
+
+        var hasData = context.issueManager().getSourceIssues(d3_select('.custom-rule-name').text()).length > 0;
+        var showsData = true;
+
+        ul.selectAll('.list-item-rule')
+            .classed('active', showsData)
+            .selectAll('label')
+            .classed('deemphasize', !hasData)
+            .selectAll('input')
+            .property('disabled', !hasData)
+            .property('checked', showsData)
+
+    }
+
+    function editCustom() {
+        d3_event.preventDefault();
+        context.container()
+            .call(settingsCustomRule);
+    }
+
+    function customChanged(c) {
+        if(c){
+            if(c.name){
+                d3_select('.custom-rule-name').text(c.name);
+            }
+            if (c.url) {
+                context.issueManager().setCustomUrl(c.url);
+                //console.log(c.url);
+            } else if (c.fileList) {
+                //console.log(c.fileList);
+            }
+        }
+    }
+
 
     return issues;
 }

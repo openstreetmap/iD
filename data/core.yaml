@@ -552,6 +552,18 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
+    custom_rule:
+      tooltip: Edit custom validation rule
+      header: Custom Validation Rule Settings
+      name: 
+        instructions: Enter name for custom validation rule
+        label: Name
+      file:
+        instructions: "Choose a local validation rule file. Supported types are: \n  .validator.mapcss, .json"
+        label: "Browse files"
+      url:
+        instructions: "Enter a validation rule URL"
+        placeholder: Enter a url
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
@@ -895,6 +907,11 @@ en:
       all:
         description: All features
         tooltip: Issues for all loaded features will be flagged
+    rules:
+      custom:
+        header: Custom Validation Rules
+        tooltip: "Drag and drop a data file onto the page, or click the button to setup"
+        title: Custom Validation Rule
   intro:
     done: done
     ok: OK

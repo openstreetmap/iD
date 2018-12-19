@@ -2788,6 +2788,7 @@ div.full-screen > button:hover {
     text-overflow: ellipsis;
 }
 
+.map-issues-control .layer-list button,
 .map-data-control .layer-list button,
 .background-control .layer-list button {
     float: right;

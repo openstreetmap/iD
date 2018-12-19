@@ -7,7 +7,9 @@ import { utilRebind } from '../util/rebind';
 export function IssueManager(context) {
     var dispatch = d3.dispatch('reload'),
         self = {},
-        issues = [];
+        issues = [],
+        ignore = [],
+        customUrl = "";
 
     self.featureApplicabilityOptions = ['edited', 'all'];
 
@@ -39,9 +41,38 @@ export function IssueManager(context) {
         });
     };
 
+    self.setCustomUrl = function(url) {
+        customUrl = url;
+    };
+
+    self.getSourceIssues = function(src) {
+        self.validate();
+        return _filter(issues, function(error){
+            return error.source == src;
+        });
+    };
+
+    self.removeSourceIgnore = function(src) {
+        var index = ignore.indexOf(src);
+        if(index !== -1){
+            ignore.splice(index,1);
+        }
+    };
+
+    self.ignoreSource = function(src) {
+        ignore.push(src);
+    };
+
+    self.getIgnore = function() {
+        return ignore;
+    };
+
     self.validate = function() {
         var changes = context.history().changes();
         issues = context.history().validate(changes);
+        issues = _filter(issues, function(error){
+            return !ignore.includes(error.source);
+        });
         dispatch.call('reload', self, issues);
     };
 
