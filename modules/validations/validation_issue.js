@@ -9,6 +9,7 @@ var ValidationIssueType = Object.freeze({
     old_multipolygon: 'old_multipolygon',
     tag_suggests_area: 'tag_suggests_area',
     map_rule_issue: 'map_rule_issue',
+    crossing_ways: 'crossing_ways'
 });
 
 
@@ -41,6 +42,6 @@ export function validationIssue(attrs) {
     this.message = attrs.message;
     this.tooltip = attrs.tooltip;
     this.entities = attrs.entities;  // expect an array of entities
-    this.coordinates = attrs.coordinates;  // expect an array of [lon, lat]
+    this.coordinates = attrs.coordinates;  // expect a [lon, lat] array
     this.fixes = attrs.fixes;  // expect an array of functions for possible fixes
 }
