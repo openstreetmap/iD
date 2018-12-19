@@ -63,9 +63,8 @@ export function svgGeolocate(projection, context, dispatch) {
     }
 
     function update() {
-        var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] },
-            pixelAccuracy = accuracy(_position.coords.accuracy, geolocation.loc);
-
+        var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] };
+        
         var groups = layer.selectAll('.geolocations').selectAll('.geolocation')
             .data([geolocation]);
 
@@ -97,7 +96,7 @@ export function svgGeolocate(projection, context, dispatch) {
         groups.merge(pointsEnter)
             .attr('transform', transform);
 
-        d3_select('#geolocate-radius').attr('r', pixelAccuracy)
+        d3_select('#geolocate-radius').attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
     }
 
     function drawLocation(selection) {
