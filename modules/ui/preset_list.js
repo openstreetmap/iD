@@ -8,7 +8,6 @@ import {
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
-import { modeBrowse } from '../modes/index';
 import { svgIcon } from '../svg/index';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
@@ -43,21 +42,11 @@ export function uiPresetList(context) {
             .append('h3')
             .text(t('inspector.choose'));
 
-        if (context.entity(_entityID).isUsed(context.graph())) {
-            messagewrap
-                .append('button')
-                .attr('class', 'preset-choose')
-                .on('click', function() { dispatch.call('choose', this, _currentPreset); })
-                .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
-        } else {
-            messagewrap
-                .append('button')
-                .attr('class', 'close')
-                .on('click', function() {
-                    context.enter(modeBrowse(context));
-                })
-                .call(svgIcon('#iD-icon-close'));
-        }
+        messagewrap
+            .append('button')
+            .attr('class', 'preset-choose')
+            .on('click', function() { dispatch.call('choose', this, _currentPreset); })
+            .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
 
         function initialKeydown() {
             // hack to let delete shortcut work when search is autofocused
