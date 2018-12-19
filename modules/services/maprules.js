@@ -3,6 +3,12 @@ import _intersection from 'lodash-es/intersection';
 import _reduce from 'lodash-es/reduce';
 import _every from 'lodash-es/every';
 
+import {
+    ValidationIssueType,
+    ValidationIssueSeverity,
+    validationIssue
+} from '../validations/validation_issue';
+
 var buildRuleChecks = function() {
     return {
         equals: function (equals) {

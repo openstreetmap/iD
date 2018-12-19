@@ -1,5 +1,8 @@
 {
     "key": "denomination",
     "type": "combo",
-    "label": "Denomination"
+    "label": "Denomination",
+    "prerequisiteTag": {
+        "key": "religion"
+    }
 }

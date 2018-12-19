@@ -9,6 +9,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgData } from './data';
 import { svgDebug } from './debug';
+import { svgGeolocate } from './geolocate';
 import { svgStreetside } from './streetside';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
@@ -32,6 +33,7 @@ export function svgLayers(projection, context) {
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
         { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
+        { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
         { id: 'touch', layer: svgTouch(projection, context, dispatch) }
     ];
 

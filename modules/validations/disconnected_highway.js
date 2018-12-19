@@ -1,5 +1,8 @@
 import { t } from '../util/locale';
-import { utilDisplayName } from '../util';
+import {
+    utilDisplayName,
+    utilDisplayType
+} from '../util';
 import {
     ValidationIssueType,
     ValidationIssueSeverity,
@@ -40,13 +43,13 @@ export function validationDisconnectedHighway(context) {
                     if (preset && preset.name()) {
                         entityLabel = preset.name();
                     } else {
-                        entityLabel = utilDisplayType(entity.id)
+                        entityLabel = utilDisplayType(entity.id);
                     }
                 }
 
                 issues.push(new validationIssue({
                     type: ValidationIssueType.disconnected_highway,
-                    severity: ValidationIssueSeverity.error,
+                    severity: ValidationIssueSeverity.warning,
                     message: t('validations.disconnected_highway', {entityLabel: entityLabel}),
                     tooltip: t('validations.disconnected_highway_tooltip'),
                     entities: [entity],

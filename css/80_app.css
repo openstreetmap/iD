@@ -2825,19 +2825,58 @@ div.full-screen > button:hover {
 }
 
 /* Issues List */
-
+.issues-list label {
+    padding: 5px;
+}
 .issues-list label > span {
+    display: inline;
     white-space: normal;
 }
 .issues-list li {
     height: auto;
     color: inherit;
 }
-.issues-list li.severity-warning {
+
+.issue.severity-warning {
     background: #ffb;
 }
-.issues-list li.severity-error {
+.issue.severity-warning:hover {
+    background: #FFFF99;
+}
+.issue.severity-warning .icon {
+    color: #FFB300
+}
+
+.issue.severity-error {
     background: #FFD5D4;
+}
+.issue.severity-error:hover {
+    background: #ffc9c7;
+}
+.issue.severity-error .icon {
+    color: #DD1400
+}
+
+/* Entity Issues List */
+
+.entity-issues {
+    padding: 0 20px 20px 20px;
+    margin-bottom: 20px;
+}
+.entity-issues .issue {
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px;
+}
+.entity-issues .issue.severity-warning {
+    border-color: #FFDF5C;
+}
+.entity-issues .issue.severity-error {
+    border-color: #F5817D;
+}
+.entity-issues .issue:not(:last-of-type) {
+    margin-bottom: 20px;
 }
 
 /* Background - Display Options Sliders

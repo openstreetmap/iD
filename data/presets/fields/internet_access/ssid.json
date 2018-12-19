@@ -1,5 +1,9 @@
 {
     "key": "internet_access:ssid",
     "type": "text",
-    "label": "SSID (Network Name)"
+    "label": "SSID (Network Name)",
+    "prerequisiteTag": {
+        "key": "internet_access",
+        "valueNot": "no"
+    }
 }

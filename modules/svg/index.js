@@ -3,6 +3,7 @@ export { svgData } from './data.js';
 export { svgDebug } from './debug.js';
 export { svgDefs } from './defs.js';
 export { svgIcon } from './icon.js';
+export { svgGeolocate } from './geolocate';
 export { svgLabels } from './labels.js';
 export { svgLayers } from './layers.js';
 export { svgLines } from './lines.js';

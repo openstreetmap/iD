@@ -7,20 +7,15 @@ import {
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { geoExtent } from '../geo';
-import { modeBrowse,
-        modeSelect
-} from '../modes';
+import { modeSelect } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
-import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiIssues(context) {
     var key = t('issues.key');
-    var _issuesOptionsContainer = d3_select(null);
     var _featureApplicabilityList = d3_select(null);
     var _issuesList = d3_select(null);
     var _shown = false;
@@ -29,7 +24,7 @@ export function uiIssues(context) {
         var container = selection.selectAll('.issues-options-container')
             .data([0]);
 
-        _issuesOptionsContainer = container.enter()
+        container = container.enter()
             .append('div')
             .attr('class', 'issues-options-container')
             .merge(container);
@@ -37,7 +32,7 @@ export function uiIssues(context) {
         _featureApplicabilityList = container.selectAll('.feature-applicability-list')
             .data([0]);
 
-        _featureApplicabilityList = container.enter()
+        _featureApplicabilityList = _featureApplicabilityList.enter()
             .append('ul')
             .attr('class', 'layer-list feature-applicability-list')
             .merge(_featureApplicabilityList);
@@ -94,16 +89,11 @@ export function uiIssues(context) {
         items
             .classed('active', active)
             .selectAll('input')
-            .property('checked', active)
-            .property('indeterminate', function(d) {
-                return (name === 'feature' && autoHiddenFeature(d));
-            });
+            .property('checked', active);
     }
 
     function drawIssuesList(selection) {
 
-        var name = 'issues_list';
-        
         var issues = context.issueManager().getIssues();
 
         /*validations = _reduce(issues, function(validations, val) {
@@ -117,7 +107,7 @@ export function uiIssues(context) {
         }, {});*/
 
         var items = selection.selectAll('li')
-            .data(issues);
+            .data(issues, function(d) { return d.id(); });
 
         // Exit
         items.exit()
@@ -127,7 +117,7 @@ export function uiIssues(context) {
         var enter = items.enter()
             .append('li')
             .attr('class', function (d) {
-                return 'layer severity-' + d.severity;
+                return 'layer issue severity-' + d.severity;
             })
             .call(tooltip()
                 .html(true)
@@ -149,6 +139,12 @@ export function uiIssues(context) {
         var label = enter
             .append('label');
 
+        label.each(function(d) {
+            var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
+            d3_select(this)
+                .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
+        });
+
         /*label
             .append('input')
             .attr('type', type)
@@ -162,14 +158,6 @@ export function uiIssues(context) {
         // Update
         items = items
             .merge(enter);
-
-    /*    items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active)
-            .property('indeterminate', function(d) {
-                return (name === 'feature' && autoHiddenFeature(d));
-            });*/
     }
 
     function showsFeatureApplicability(d) {

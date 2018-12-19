@@ -1,0 +1,14 @@
+{
+    "icon": "iD-relation",
+    "fields": [
+        "name",
+        "enforcement"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "enforcement"
+    },
+    "name": "Enforcement"
+}
