@@ -204,7 +204,7 @@ export function uiSidebar(context) {
                         .newFeature(newFeature);
 
                     inspectorWrap
-                        .call(inspector);
+                        .call(inspector, newFeature);
                 }
 
             } else {
