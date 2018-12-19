@@ -583,6 +583,10 @@
                     "tooltip": "Note data from OpenStreetMap",
                     "title": "OpenStreetMap notes"
                 },
+                "keepRight": {
+                    "tooltip": "Quality Assurance data from keepright.at",
+                    "title": "KeepRight Issues"
+                },
                 "custom": {
                     "tooltip": "Drag and drop a data file onto the page, or click the button to setup",
                     "title": "Custom Map Data",
@@ -591,10 +595,6 @@
             },
             "fill_area": "Fill Areas",
             "map_features": "Map Features",
-            "QA": {
-                "title": "Quality Assurance",
-                "keepRight": "KeepRight"
-            },
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
         },
@@ -1130,7 +1130,27 @@
                     },
                     "_360": {
                         "description": "language unknown",
-                        "tooltip": "It would be nice if this {var1} had an additional tag name:XX={var2} where XX shows the language of its name {var2}",
+                        "tooltip": "It would be nice if this {var1} had an additional tag name:XX={var2} where XX shows the language of its name {var2}"
+                    },
+                    "_390": {
+                        "description": "missing tracktype",
+                        "tooltip": "This track doesn't have a tracktype"
+                    }
+                }
+            }
+        },
+        "gpx": {
+            "local_layer": "Add a GPX",
+            "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
+            "zoom": "Zoom to layer",
+            "browse": "Browse for a file"
+        },
+        "mvt": {
+            "local_layer": "Add a MVT",
+            "drag_drop": "Drag and drop a .mvt or .pbf file on the page, or click the button to the right to browse",
+            "zoom": "Zoom to layer",
+            "browse": "Browse for a file"
+        },
         "QA": {
             "keepRight": {
                 "tooltip": "automatically detected errors from keepright.at",
@@ -8386,37 +8406,6 @@
                 "name": "basemap.at Orthofoto"
             },
             "eufar-balaton": {
-<<<<<<< HEAD
-                "attribution": {
-                    "text": "EUFAR Balaton ortofotó 2010"
-                },
-                "description": "1940 geo-tagged photography from Balaton Limnological Institute.",
-                "name": "EUFAR Balaton orthophotos"
-            },
-            "finds.jp_KBN_2500": {
-                "attribution": {
-                    "text": "GSI KIBAN 2500"
-                },
-                "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
-                "name": "Japan GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
-                "name": "Japan GSI ortho Imagery"
-            },
-            "gsi.go.jp_std_map": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI Standard Map. Widely covered.",
-                "name": "Japan GSI Standard Map"
-            },
-            "hike_n_bike": {
-=======
->>>>>>> added: notes and todos for keepRight
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
                 },

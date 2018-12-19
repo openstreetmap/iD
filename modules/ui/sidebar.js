@@ -125,14 +125,14 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (what instanceof krError) {
+            } else if (datum instanceof krError) {
                 _was_krError = true;
                 var kr_errors = d3_selectAll('.kr_error');
                 kr_errors
-                    .classed('hover', function(d) { return d === what; });
+                    .classed('hover', function(d) { return d === datum; });
 
                 sidebar
-                    .show(keepRightEditor.error(what));
+                    .show(keepRightEditor.error(datum));
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);

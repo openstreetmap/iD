@@ -1,6 +1,5 @@
 import { t } from '../util/locale';
 import { parseErrorDescriptions, errorTypes } from '../util';
-import { select as d3_selectAll } from 'd3-selection';
 
 import { clickLink } from '../util/keepRight';
 

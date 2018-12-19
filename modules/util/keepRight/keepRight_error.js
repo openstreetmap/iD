@@ -6,50 +6,6 @@ import { krError } from '../../osm';
 import { errorTypes } from './errorSchema.json';
 import { parseError } from './parse_error';
 
-// TODO: for reference; remove
-var keepRightSchema = {
-        'schema': '',
-        'id': 0,
-        'error_type': 0,
-        'error_name': 0,
-        'object_type': [
-            'node',
-            'way',
-            'relation'
-        ],
-        'object_id': 0,
-        'state': [
-            'new',
-            'reopened',
-            'ignore_temporarily',
-            'ignore'
-        ],
-        'first_occurrence': new Date(),
-        'last_checked': new Date(),
-        'object_timestamp': new Date(),
-        'user_name': '',
-        'lat': 0,
-        'lon': 0,
-        'comment': '',
-        'comment_timestamp': new Date(),
-        'msgid': '',
-        'txt1': '',
-        'txt2': '',
-        'txt3': '',
-        'txt4': '',
-        'txt5': ''
-    };
-// TODO: for reference; remove
-var keepRightSchemaFromWeb = {
-    'error_type': '192',
-    'object_type': 'way',
-    'object_id': '339948768',
-    'comment': null,
-    'error_id': '92854860',
-    'schema': '58',
-    'description': 'This waterway intersects the highway #450282565',
-    'title': 'intersections without junctions, highway-waterway'
-};
 
 export function parseErrorDescriptions(entity) {
     var parsedDetails = {};
