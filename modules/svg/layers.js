@@ -33,8 +33,8 @@ export function svgLayers(projection, context) {
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
         { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
-        { id: 'touch', layer: svgTouch(projection, context, dispatch) },
-        { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) }
+        { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
+        { id: 'touch', layer: svgTouch(projection, context, dispatch) }
     ];
 
 

@@ -5,7 +5,6 @@ import { geoMetersToLat } from '../geo';
 import _throttle from 'lodash-es/throttle';
 
 export function svgGeolocate(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var layer = d3_select(null);
     var _position;
 
@@ -22,12 +21,10 @@ export function svgGeolocate(projection, context, dispatch) {
 
 
     function hideLayer() {
-        throttledRedraw.cancel();
         layer
             .transition()
             .duration(250)
-            .style('opacity', 0)
-            .on('end', function () { });
+            .style('opacity', 0);
     }
 
     function layerOn() {
@@ -53,7 +50,8 @@ export function svgGeolocate(projection, context, dispatch) {
             projectedTangent = projection(tangentLoc),
             projectedLoc = projection([loc[0], loc[1]]);
 
-       return Math.round(projectedLoc[1] - projectedTangent[1]).toString(); // more south point will have higher pixel value...
+        // southern most point will have higher pixel value...
+       return Math.round(projectedLoc[1] - projectedTangent[1]).toString();
     }
 
     function update() {
@@ -131,7 +129,6 @@ export function svgGeolocate(projection, context, dispatch) {
         } else {
             hideLayer();
         }
-        // dispatch.call('change');
         return this;
     };
 

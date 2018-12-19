@@ -35,8 +35,8 @@ describe('iD.svgLayers', function () {
         expect(d3.select(nodes[5]).classed('mapillary-signs')).to.be.true;
         expect(d3.select(nodes[6]).classed('openstreetcam-images')).to.be.true;
         expect(d3.select(nodes[7]).classed('debug')).to.be.true;
-        expect(d3.select(nodes[8]).classed('touch')).to.be.true;
-        expect(d3.select(nodes[9]).classed('geolocate')).to.be.true;
+        expect(d3.select(nodes[8]).classed('geolocate')).to.be.true;
+        expect(d3.select(nodes[9]).classed('touch')).to.be.true;
     });
 
 });
