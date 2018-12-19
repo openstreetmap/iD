@@ -46,7 +46,7 @@ export function validationDisconnectedHighway(context) {
 
                 issues.push(new validationIssue({
                     type: ValidationIssueType.disconnected_highway,
-                    severity: ValidationIssueSeverity.error,
+                    severity: ValidationIssueSeverity.warning,
                     message: t('validations.disconnected_highway', {entityLabel: entityLabel}),
                     tooltip: t('validations.disconnected_highway_tooltip'),
                     entities: [entity],
