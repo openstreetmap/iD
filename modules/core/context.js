@@ -443,11 +443,19 @@ export function coreContext() {
     }
 
     history = coreHistory(context);
+
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
 
     issueManager = IssueManager(context);
+
+    var debouncedValidate = _debounce(issueManager.validate, 1000);
+    history.on('change', function(difference) {
+        if (difference) {
+            debouncedValidate();
+        }
+    });
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
