@@ -23,7 +23,6 @@ export function IssueManager(context) {
     };
 
     self.getIssues = function() {
-        self.validate();
         return issues;
     };
 
