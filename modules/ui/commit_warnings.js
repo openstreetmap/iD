@@ -105,7 +105,7 @@ export function uiCommitWarnings(context) {
                     context.map().zoomTo(d.entities[0]);
                     context.enter(modeSelect(
                         context,
-                        _map(d.entities, function(e) { return e.id; }),
+                        _map(d.entities, function(e) { return e.id; })
                     ));
                 }
             }
