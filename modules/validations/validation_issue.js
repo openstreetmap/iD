@@ -27,7 +27,7 @@ export function validationIssue(attrs) {
         throw new Error('Invalid attrs.type: ' + attrs.type);
     }
     if (!attrs.severity || !ValidationIssueSeverity.hasOwnProperty(attrs.severity)) {
-        throw new Error('Invalid attrs.severity: ' + attr.severity);
+        throw new Error('Invalid attrs.severity: ' + attrs.severity);
     }
     if (!attrs.message) throw new Error('attrs.message is empty');
 

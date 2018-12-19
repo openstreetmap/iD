@@ -7,20 +7,15 @@ import {
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { geoExtent } from '../geo';
-import { modeBrowse,
-        modeSelect
-} from '../modes';
+import { modeSelect } from '../modes';
 import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
-import { uiSettingsCustomData } from './settings/custom_data';
 import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiIssues(context) {
     var key = t('issues.key');
-    var _issuesOptionsContainer = d3_select(null);
     var _featureApplicabilityList = d3_select(null);
     var _issuesList = d3_select(null);
     var _shown = false;
@@ -29,7 +24,7 @@ export function uiIssues(context) {
         var container = selection.selectAll('.issues-options-container')
             .data([0]);
 
-        _issuesOptionsContainer = container.enter()
+        container = container.enter()
             .append('div')
             .attr('class', 'issues-options-container')
             .merge(container);
@@ -37,7 +32,7 @@ export function uiIssues(context) {
         _featureApplicabilityList = container.selectAll('.feature-applicability-list')
             .data([0]);
 
-        _featureApplicabilityList = container.enter()
+        _featureApplicabilityList = _featureApplicabilityList.enter()
             .append('ul')
             .attr('class', 'layer-list feature-applicability-list')
             .merge(_featureApplicabilityList);
@@ -98,8 +93,6 @@ export function uiIssues(context) {
     }
 
     function drawIssuesList(selection) {
-
-        var name = 'issues_list';
 
         var issues = context.issueManager().getIssues();
 

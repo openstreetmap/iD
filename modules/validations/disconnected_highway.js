@@ -1,5 +1,8 @@
 import { t } from '../util/locale';
-import { utilDisplayName } from '../util';
+import {
+    utilDisplayName,
+    utilDisplayType
+} from '../util';
 import {
     ValidationIssueType,
     ValidationIssueSeverity,
@@ -40,7 +43,7 @@ export function validationDisconnectedHighway(context) {
                     if (preset && preset.name()) {
                         entityLabel = preset.name();
                     } else {
-                        entityLabel = utilDisplayType(entity.id)
+                        entityLabel = utilDisplayType(entity.id);
                     }
                 }
 
