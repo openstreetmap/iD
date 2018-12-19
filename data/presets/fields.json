@@ -99,6 +99,7 @@
     "email": {"key": "email", "type": "email", "placeholder": "example@example.com", "universal": true, "label": "Email"},
     "embankment": {"key": "embankment", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "emergency": {"key": "emergency", "type": "check", "label": "Emergency"},
+    "enforcement": {"key": "enforcement", "type": "combo", "label": "Type"},
     "entrance": {"key": "entrance", "type": "typeCombo", "label": "Type"},
     "except": {"key": "except", "type": "combo", "label": "Exceptions"},
     "faces": {"key": "faces", "type": "number", "minValue": 0, "label": "Faces"},

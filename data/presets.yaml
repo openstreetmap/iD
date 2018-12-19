@@ -583,6 +583,9 @@ en:
       emergency:
         # emergency=*
         label: Emergency
+      enforcement:
+        # enforcement=*
+        label: Type
       entrance:
         # entrance=*
         label: Type
@@ -6647,6 +6650,10 @@ en:
         # 'type=boundary, boundary=administrative'
         name: Administrative Boundary
         terms: '<translate with synonyms or related terms for ''Administrative Boundary'', separated by commas>'
+      type/enforcement:
+        # type=enforcement
+        name: Enforcement
+        terms: '<translate with synonyms or related terms for ''Enforcement'', separated by commas>'
       type/multipolygon:
         # type=multipolygon
         name: Multipolygon

@@ -1988,6 +1988,9 @@
                 "emergency": {
                     "label": "Emergency"
                 },
+                "enforcement": {
+                    "label": "Type"
+                },
                 "entrance": {
                     "label": "Type"
                 },
@@ -7250,6 +7253,10 @@
                 },
                 "type/boundary/administrative": {
                     "name": "Administrative Boundary",
+                    "terms": ""
+                },
+                "type/enforcement": {
+                    "name": "Enforcement",
                     "terms": ""
                 },
                 "type/restriction": {

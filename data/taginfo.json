@@ -5146,7 +5146,7 @@
       "value": "stop_area",
       "description": "🄿 Transit Stop Area",
       "object_types": ["relation"],
-      "icon_url": "https://raw.githubusercontent.com/mapbox/maki/master/icons/bus-15.svg?sanitize=true"
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/relation.svg?sanitize=true"
     },
     {
       "key": "public_transport",
@@ -6582,6 +6582,13 @@
     },
     {
       "key": "type",
+      "value": "enforcement",
+      "description": "🄿 Enforcement",
+      "object_types": ["relation"],
+      "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/relation.svg?sanitize=true"
+    },
+    {
+      "key": "type",
       "value": "restriction",
       "description": "🄿 Restriction",
       "object_types": ["relation"],
@@ -7223,6 +7230,7 @@
     {"key": "email", "description": "🄵 Email"},
     {"key": "embankment", "description": "🄵 Type"},
     {"key": "emergency", "description": "🄵 Emergency"},
+    {"key": "enforcement", "description": "🄵 Type"},
     {"key": "except", "description": "🄵 Exceptions"},
     {"key": "faces", "description": "🄵 Faces"},
     {"key": "fax", "description": "🄵 Fax"},
