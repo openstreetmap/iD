@@ -1,4 +1,13 @@
-import { svgPointTransform } from "./helpers";
+import { select as d3_select } from 'd3-selection';
+
+import { svgPointTransform } from './helpers';
+import { geoMetersToLat } from '../geo';
+import {
+    geoIdentity as d3_geoIdentity,
+    geoPath as d3_geoPath,
+    geoStream as d3_geoStream
+} from 'd3-geo';
+import _throttle from 'lodash-es/throttle';
 
 export function svgGeolocate(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
@@ -14,8 +23,7 @@ export function svgGeolocate(projection, context, dispatch) {
     }
 
     function showLayer() {
-        layer.attr('display', 'block'); 
-        layerOn();
+        layer.style('display', 'block');
     }
 
 
@@ -25,7 +33,7 @@ export function svgGeolocate(projection, context, dispatch) {
             .transition()
             .duration(250)
             .style('opacity', 0)
-            .on('end', function() {});
+            .on('end', function () { });
     }
 
     function layerOn() {
@@ -33,80 +41,106 @@ export function svgGeolocate(projection, context, dispatch) {
             .style('opacity', 0)
             .transition()
             .duration(250)
-            .style('opacity', 1)
-            .on('end', function () { dispatch.call('change'); });
+            .style('opacity', 1);
 
     }
 
     function layerOff() {
-        // layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
     function transform(d) {
         return svgPointTransform(projection)(d);
     }
-    
-    function update() {
-        var points = layer.selectAll('.geolocations').selectAll('.geolocation')
-            .data([_position]);
-    
 
-        points.enter()
+    function accuracy(accuracy, loc) { // converts accuracy to pixels...
+        var degreesRadius = geoMetersToLat(accuracy),
+            tangentLoc = [loc[0], loc[1] + degreesRadius],
+            projectedTangent = projection(tangentLoc),
+            projectedLoc = projection([loc[0], loc[1]]);
+
+       return Math.round(projectedLoc[1] - projectedTangent[1]).toString(); // more south point will have higher pixel value...
+    }
+
+    function update() {
+        var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] },
+            pixelAccuracy = accuracy(_position.coords.accuracy, geolocation.loc);
+
+        var groups = layer.selectAll('.geolocations').selectAll('.geolocation')
+            .data([geolocation]);
+
+        groups.exit()
+            .remove();
+
+        var pointsEnter = groups.enter()
             .append('g')
-            .attr('class', 'point')
+            .attr('class', 'geolocation');
+
+        pointsEnter
+            .append('circle')
+            .attr('id', 'geolocate-radius')
+            .attr('dx', '0')
+            .attr('dy', '0')
+            .attr('fill', 'rgb(15,128,225)')
+            .attr('fill-opacity', '0.3')
+            .attr('r', '0');
+
+        pointsEnter
+            .append('circle')
+            .attr('dx', '0')
+            .attr('dy', '0')
+            .attr('fill', 'rgb(15,128,225)')
+            .attr('stroke', 'white')
+            .attr('stroke-width', '1.5')
+            .attr('r', '6');
+
+        groups.merge(pointsEnter)
             .attr('transform', transform);
 
+        d3_select('#geolocate-radius').attr('r', pixelAccuracy)
     }
 
     function drawLocation(selection) {
         var enabled = svgGeolocate.enabled;
 
         layer = selection.selectAll('.layer-geolocate')
-            .data([]);
+            .data([0]);
 
         layer.exit()
             .remove();
 
         var layerEnter = layer.enter()
             .append('g')
-            .attr('class', 'layer-geolocation')
+            .attr('class', 'layer-geolocate')
             .style('display', enabled ? 'block' : 'none');
 
         layerEnter
             .append('g')
             .attr('class', 'geolocations');
 
-        layerEnter
-            .append('g')
-            .attr('class', 'radius');
-        
         layer = layerEnter
             .merge(layer);
 
         if (enabled) {
-            layerOn();
             update();
         } else {
             layerOff();
         }
     }
 
-    drawLocation.enabled = function(_) {
+    drawLocation.enabled = function (position, enabled) {
         if (!arguments.length) return svgGeolocate.enabled;
-        _position = _;
-        svgGeolocate.enabled = true;
+        _position = position;
+        svgGeolocate.enabled = enabled;
         if (svgGeolocate.enabled) {
             showLayer();
-            update();
+            layerOn();
         } else {
             hideLayer();
         }
-        dispatch.call('change');
+        // dispatch.call('change');
         return this;
     };
-
-
 
     init();
     return drawLocation;
