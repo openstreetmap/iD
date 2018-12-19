@@ -1,5 +1,10 @@
 import { t } from '../util/locale';
 import { utilDisplayName } from '../util';
+import {
+    ValidationIssueType,
+    ValidationIssueSeverity,
+    validationIssue,
+} from './validation_issue';
 
 
 export function validationDisconnectedHighway(context) {
@@ -24,7 +29,7 @@ export function validationDisconnectedHighway(context) {
 
 
     var validation = function(changes, graph) {
-        var warnings = [];
+        var issues = [];
         for (var i = 0; i < changes.created.length; i++) {
             var entity = changes.created[i];
 
@@ -38,16 +43,18 @@ export function validationDisconnectedHighway(context) {
                         entityLabel = utilDisplayType(entity.id)
                     }
                 }
-                warnings.push({
-                    id: 'disconnected_highway',
-                    message: t('validations.disconnected_highway', {entityLabel: entityLabel}),
+
+                issues.push(new validationIssue({
+                    type: ValidationIssueType.disconnected_highway,
+                    severity: ValidationIssueSeverity.error,
+                    message: t('validations.disconnected_highway'),
                     tooltip: t('validations.disconnected_highway_tooltip'),
-                    entity: entity
-                });
+                    entities: [entity],
+                }));
             }
         }
 
-        return warnings;
+        return issues;
     };
 
 

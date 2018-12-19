@@ -1,5 +1,10 @@
 import _isEmpty from 'lodash-es/isEmpty';
 import { t } from '../util/locale';
+import {
+    ValidationIssueType,
+    ValidationIssueSeverity,
+    validationIssue,
+} from './validation_issue';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/
@@ -25,22 +30,23 @@ export function validationTagSuggestsArea() {
 
 
     var validation = function(changes, graph) {
-        var warnings = [];
+        var issues = [];
         for (var i = 0; i < changes.created.length; i++) {
             var change = changes.created[i],
                 geometry = change.geometry(graph),
                 suggestion = (geometry === 'line' ? tagSuggestsArea(change.tags) : undefined);
 
             if (suggestion) {
-                warnings.push({
-                    id: 'tag_suggests_area',
+                issues.push(new validationIssue({
+                    type: ValidationIssueType.tag_suggests_area,
+                    severity: ValidationIssueSeverity.warning,
                     message: t('validations.tag_suggests_area', { tag: suggestion }),
-                    entity: change
-                });
+                    entities: [change],
+                }));
             }
         }
 
-        return warnings;
+        return issues;
     };
 
 

@@ -5,7 +5,7 @@ export function validationMapCSSChecks() {
         if (!services.maprules) return [];
 
         var rules = services.maprules.validationRules();
-        var warnings = [];
+        var issues = [];
         var createdModified = ['created', 'modified'];
 
         for (var i = 0; i < rules.length; i++) {
@@ -14,12 +14,12 @@ export function validationMapCSSChecks() {
                 var type = createdModified[j];
                 var entities = changes[type];
                 for (var k = 0; k < entities.length; k++) {
-                    rule.findWarnings(entities[k], graph, warnings);
+                    rule.findIssues(entities[k], graph, issues);
                 }
             }
         }
 
-        return warnings;
+        return issues;
     };
     return validation;
 }

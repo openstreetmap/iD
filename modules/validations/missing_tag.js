@@ -1,6 +1,10 @@
 import _without from 'lodash-es/without';
 import { t } from '../util/locale';
-
+import {
+    ValidationIssueType,
+    ValidationIssueSeverity,
+    validationIssue,
+} from './validation_issue';
 
 export function validationMissingTag() {
 
@@ -12,23 +16,24 @@ export function validationMissingTag() {
 
     var validation = function(changes, graph) {
         var types = ['point', 'line', 'area', 'relation'],
-            warnings = [];
+            issues = [];
 
         for (var i = 0; i < changes.created.length; i++) {
             var change = changes.created[i],
                 geometry = change.geometry(graph);
 
             if (types.indexOf(geometry) !== -1 && !hasTags(change, graph)) {
-                warnings.push({
-                    id: 'missing_tag',
+                issues.push(new validationIssue({
+                    type: ValidationIssueType.missing_tag,
+                    severity: ValidationIssueSeverity.error,
                     message: t('validations.untagged_' + geometry),
                     tooltip: t('validations.untagged_' + geometry + '_tooltip'),
-                    entity: change
-                });
+                    entities: [change],
+                }));
             }
         }
 
-        return warnings;
+        return issues;
     };
 
 

@@ -1,3 +1,4 @@
+import _map from 'lodash-es/map';
 import {
     event as d3_event,
     select as d3_select
@@ -104,9 +105,9 @@ export function uiIssues(context) {
         var name = 'issues_list';
 
         var changes = context.history().changes();
-        var validations = context.history().validate(changes);
+        var issues = context.history().validate(changes);
 
-        /*validations = _reduce(validations, function(validations, val) {
+        /*validations = _reduce(issues, function(validations, val) {
             var severity = val.severity;
             if (validations.hasOwnProperty(severity)) {
                 validations[severity].push(val);
@@ -117,7 +118,7 @@ export function uiIssues(context) {
         }, {});*/
 
         var items = selection.selectAll('li')
-            .data(validations);
+            .data(issues);
 
         // Exit
         items.exit()
@@ -130,13 +131,18 @@ export function uiIssues(context) {
             .call(tooltip()
                 .html(true)
                 .title(function(d) {
-                    var tip = d.tooltip;
+                    var tip = d.tooltip ? d.tooltip : '';
                     return uiTooltipHtml(tip);
                 })
                 .placement('bottom')
             )
             .on('click', function(d) {
-                context.enter(modeSelect(context, [d.entity.id]));
+                if (d.entities) {
+                    context.enter(modeSelect(
+                        context,
+                        _map(d.entities, function(e) { return e.id; })
+                    ));
+                }
             });
 
         var label = enter
