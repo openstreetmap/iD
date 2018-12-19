@@ -26,7 +26,7 @@ describe('iD.svgLayers', function () {
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).to.eql(9);
+        expect(nodes.length).to.eql(10);
         expect(d3.select(nodes[0]).classed('osm')).to.be.true;
         expect(d3.select(nodes[1]).classed('notes')).to.be.true;
         expect(d3.select(nodes[2]).classed('data')).to.be.true;
@@ -36,6 +36,7 @@ describe('iD.svgLayers', function () {
         expect(d3.select(nodes[6]).classed('openstreetcam-images')).to.be.true;
         expect(d3.select(nodes[7]).classed('debug')).to.be.true;
         expect(d3.select(nodes[8]).classed('touch')).to.be.true;
+        expect(d3.select(nodes[9]).classed('geolocate')).to.be.true;
     });
 
 });
