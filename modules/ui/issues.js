@@ -94,16 +94,13 @@ export function uiIssues(context) {
         items
             .classed('active', active)
             .selectAll('input')
-            .property('checked', active)
-            .property('indeterminate', function(d) {
-                return (name === 'feature' && autoHiddenFeature(d));
-            });
+            .property('checked', active);
     }
 
     function drawIssuesList(selection) {
 
         var name = 'issues_list';
-        
+
         var issues = context.issueManager().getIssues();
 
         /*validations = _reduce(issues, function(validations, val) {
@@ -168,14 +165,6 @@ export function uiIssues(context) {
         // Update
         items = items
             .merge(enter);
-
-    /*    items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active)
-            .property('indeterminate', function(d) {
-                return (name === 'feature' && autoHiddenFeature(d));
-            });*/
     }
 
     function showsFeatureApplicability(d) {
