@@ -16,9 +16,18 @@ export function uiFormFields(context) {
     }
 
 
+    formFields.tagsChanged = function() {};
+
     function render(selection, klass) {
-        var shown = _fieldsArr.filter(function(field) { return field.isShown(); });
-        var notShown = _fieldsArr.filter(function(field) { return !field.isShown(); });
+
+        formFields.tagsChanged = function() {
+            render(selection, klass);
+        };
+
+        var allowedFields = _fieldsArr.filter(function(field) { return field.isAllowed(); });
+
+        var shown = allowedFields.filter(function(field) { return field.isShown(); });
+        var notShown = allowedFields.filter(function(field) { return !field.isShown(); });
 
         var container = selection.selectAll('.form-fields-container')
             .data([0]);

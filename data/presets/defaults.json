@@ -54,6 +54,7 @@
       "type/boundary",
       "type/waterway",
       "type/multipolygon",
+      "type/enforcement",
       "type/site",
       "relation"
     ]

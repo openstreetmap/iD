@@ -233,6 +233,26 @@ For number fields, the lowest valid value. There is no default.
 
 For number fields, the greatest valid value. There is no default.
 
+##### `prerequisiteTag`
+
+An object defining the tags the feature needs before this field will be displayed. It must have this property:
+
+- `key`: The key for the required tag.
+
+And may optionally have one of these properties:
+
+- `value`: The value that the key must have.
+- `valueNot`: The value that the key must not have.
+
+For example, this is how we show the Internet Access Fee field only if the feature has an `internet_access` tag not equal to `no`.
+
+```js
+"prerequisiteTag": {
+    "key": "internet_access",
+    "valueNot": "no"
+}
+```
+
 ## Icons
 
 You can use any of the following open source map icon sets as preset icons.
