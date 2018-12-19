@@ -48,10 +48,12 @@ export function uiField(context, presetField, entity, options) {
                 dispatch.call('change', field, t, onInput);
             });
 
-        // if this field cares about the entity, pass it along
-        if (entity && field.impl.entity) {
+        if (entity) {
             field.entityID = entity.id;
-            field.impl.entity(entity);
+            // if this field cares about the entity, pass it along
+            if (field.impl.entity) {
+                field.impl.entity(entity);
+            }
         }
     }
 
@@ -229,11 +231,39 @@ export function uiField(context, presetField, entity, options) {
         }
     };
 
-
+    // A shown field has a visible UI, a non-shown field is in the 'Add field' dropdown
     field.isShown = function() {
         return _show || isPresent();
     };
 
+    // An allowed field can appear in the UI or in the 'Add field' dropdown.
+    // A non-allowed field is hidden from the user altogether
+    field.isAllowed = function() {
+
+        if (isPresent()) {
+            // always allow a field with a value to display
+            return true;
+        }
+
+        var prerequisiteTag = field.prerequisiteTag;
+        if (prerequisiteTag && field.entityID) {
+            if (prerequisiteTag.key) {
+                var value = context.graph().entity(field.entityID).tags[prerequisiteTag.key];
+                if (value) {
+                    if (prerequisiteTag.valueNot) {
+                        return prerequisiteTag.valueNot !== value;
+                    }
+                    if (prerequisiteTag.value) {
+                        return prerequisiteTag.value === value;
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
 
     field.focus = function() {
         if (field.impl) {

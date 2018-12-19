@@ -120,6 +120,7 @@ export function uiPresetEditor(context) {
     presetEditor.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
+        formFields.tagsChanged();
         // Don't reset _fieldsArr here.
         return presetEditor;
     };
