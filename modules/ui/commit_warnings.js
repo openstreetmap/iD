@@ -11,20 +11,19 @@ export function uiCommitWarnings(context) {
 
     function commitWarnings(selection) {
 
-        // maybe call these issues now?
-        var validations = context.issueManager().validate();
+        var issues = context.issueManager().getIssues();
 
-        validations = _reduce(validations, function(validations, val) {
+        issues = _reduce(issues, function(issues, val) {
             var severity = val.severity;
-            if (validations.hasOwnProperty(severity)) {
-                validations[severity].push(val);
+            if (issues.hasOwnProperty(severity)) {
+                issues[severity].push(val);
             } else {
-                validations[severity] = [val];
+                issues[severity] = [val];
             }
-            return validations;
+            return issues;
         }, {});
 
-        _forEach(validations, function(instances, type) {
+        _forEach(issues, function(instances, type) {
             instances = _uniqBy(instances, function(val) { return val.id + '_' + val.message.replace(/\s+/g,''); });
             var section = type + '-section';
             var instanceItem = type + '-item';

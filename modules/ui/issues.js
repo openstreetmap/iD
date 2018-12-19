@@ -103,8 +103,7 @@ export function uiIssues(context) {
 
         var name = 'issues_list';
 
-        var changes = context.history().changes();
-        var validations = context.history().validate(changes);
+        var issues = context.issueManager().getIssues();
 
         /*validations = _reduce(validations, function(validations, val) {
             var severity = val.severity;
@@ -117,7 +116,7 @@ export function uiIssues(context) {
         }, {});*/
 
         var items = selection.selectAll('li')
-            .data(validations);
+            .data(issues);
 
         // Exit
         items.exit()

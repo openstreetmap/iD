@@ -28,7 +28,6 @@ export function IssueManager(context) {
         var changes = context.history().changes();
         issues = context.history().validate(changes);
         dispatch.call('reload', self, issues);
-        return issues;
     };
 
     return utilRebind(self, dispatch, 'on');
