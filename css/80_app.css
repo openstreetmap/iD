@@ -2827,6 +2827,7 @@ div.full-screen > button:hover {
 /* Issues List */
 
 .issues-list label > span {
+    display: inline;
     white-space: normal;
 }
 .issues-list li {

@@ -149,6 +149,12 @@ export function uiIssues(context) {
         var label = enter
             .append('label');
 
+        label
+            .call(
+                svgIcon(function(d) {
+                    var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
+                    return '#iD-icon-'+iconSuffix;
+                }, 'pre-text'));
         /*label
             .append('input')
             .attr('type', type)
