@@ -2,16 +2,10 @@ import { select as d3_select } from 'd3-selection';
 
 import { svgPointTransform } from './helpers';
 import { geoMetersToLat } from '../geo';
-import {
-    geoIdentity as d3_geoIdentity,
-    geoPath as d3_geoPath,
-    geoStream as d3_geoStream
-} from 'd3-geo';
 import _throttle from 'lodash-es/throttle';
 
 export function svgGeolocate(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
     var layer = d3_select(null);
     var _position;
 
@@ -64,7 +58,7 @@ export function svgGeolocate(projection, context, dispatch) {
 
     function update() {
         var geolocation = { loc: [_position.coords.longitude, _position.coords.latitude] };
-        
+
         var groups = layer.selectAll('.geolocations').selectAll('.geolocation')
             .data([geolocation]);
 
