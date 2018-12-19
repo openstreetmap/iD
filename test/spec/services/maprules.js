@@ -462,7 +462,7 @@ describe('maprules', function() {
                 expect(rule.matches(entity)).to.be.false;
             });
         });
-        describe('#findWarnings', function() {
+        describe('#findIssues', function() {
             var selectors, entities, _graph;
 
             before(function() {
@@ -554,13 +554,13 @@ describe('maprules', function() {
 
                     rule.findIssues(entity, _graph, issues);
 
-                    var warning = issues[0];
+                    var issue = issues[0];
                     var type = Object.keys(selector).indexOf('error') ? 'error' : 'warning';
 
                     expect(issues.length).to.eql(1);
-                    expect(warning.entity).to.eql(entity);
-                    expect(warning.message).to.eql(selector[type]);
-                    expect(type).to.eql(warning.severity);
+                    expect(issue.entities).to.eql([entity]);
+                    expect(issue.message).to.eql(selector[type]);
+                    expect(type).to.eql(issue.severity);
                 });
             });
         });
