@@ -96,8 +96,8 @@ export function validationHighwayCrossingOtherWays() {
                 issues.push(new validationIssue({
                     type: ValidationIssueType.crossing_ways,
                     severity: ValidationIssueSeverity.error,
-                    message: t('validations.crossing_ways'),
-                    tooltip: t('validations.crossing_ways_tooltip'),
+                    message: t('issues.crossing_ways.message'),
+                    tooltip: t('issues.crossing_ways.tooltip'),
                     entities: crosses[j].ways,
                     coordinates: crosses[j].cross_point,
                 }));

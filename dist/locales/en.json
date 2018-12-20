@@ -759,25 +759,6 @@
             "on_wiki": "{tag} on wiki.osm.org",
             "used_with": "used with {type}"
         },
-        "validations": {
-            "disconnected_highway": "{entityLabel} is disconnected from other highways.",
-            "disconnected_highway_tooltip": "Roads should be connected to other roads or building entrances.",
-            "old_multipolygon": "Multipolygon tags on outer way",
-            "old_multipolygon_tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way.",
-            "untagged_point": "Untagged point",
-            "untagged_point_tooltip": "Select a feature type that describes what this point is.",
-            "untagged_line": "Untagged line",
-            "untagged_line_tooltip": "Select a feature type that describes what this line is.",
-            "untagged_area": "Untagged area",
-            "untagged_area_tooltip": "Select a feature type that describes what this area is.",
-            "untagged_relation": "Untagged relation",
-            "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
-            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
-            "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
-            "deprecated_tags": "Deprecated tags: {tags}",
-            "crossing_ways": "Crossing ways without connection",
-            "crossing_ways_tooltip": "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."
-        },
         "zoom": {
             "in": "Zoom in",
             "out": "Zoom out"
@@ -1070,6 +1051,43 @@
             "severity": {
                 "error": "error",
                 "warning": "warning"
+            },
+            "disconnected_highway": {
+                "message": "{entityLabel} is disconnected from other highways.",
+                "tooltip": "Roads should be connected to other roads or building entrances."
+            },
+            "old_multipolygon": {
+                "message": "Multipolygon tags on outer way",
+                "tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way."
+            },
+            "untagged_point": {
+                "message": "Untagged point",
+                "tooltip": "Select a feature type that describes what this point is."
+            },
+            "untagged_line": {
+                "message": "Untagged line",
+                "tooltip": "Select a feature type that describes what this line is."
+            },
+            "untagged_area": {
+                "message": "Untagged area",
+                "tooltip": "Select a feature type that describes what this area is."
+            },
+            "untagged_relation": {
+                "message": "Untagged relation",
+                "tooltip": "Select a feature type that describes what this relation is."
+            },
+            "many_deletions": {
+                "message": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
+            },
+            "tag_suggests_area": {
+                "message": "The tag {tag} suggests line should be area, but it is not an area"
+            },
+            "deprecated_tags": {
+                "message": "Deprecated tags: {tags}"
+            },
+            "crossing_ways": {
+                "message": "Crossing ways without connection",
+                "tooltip": "Roads are crossing other roads, buildings, railroads, or waterways without connection nodes or a bridge tag."
             }
         },
         "intro": {

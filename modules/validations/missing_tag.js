@@ -26,8 +26,8 @@ export function validationMissingTag() {
                 issues.push(new validationIssue({
                     type: ValidationIssueType.missing_tag,
                     severity: ValidationIssueSeverity.error,
-                    message: t('validations.untagged_' + geometry),
-                    tooltip: t('validations.untagged_' + geometry + '_tooltip'),
+                    message: t('issues.untagged_' + geometry + '.message'),
+                    tooltip: t('issues.untagged_' + geometry + '.tooltip'),
                     entities: [change],
                 }));
             }

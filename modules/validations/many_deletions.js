@@ -23,7 +23,7 @@ export function validationManyDeletions() {
                 type: ValidationIssueType.many_deletions,
                 severity: ValidationIssueSeverity.warning,
                 message: t(
-                    'validations.many_deletions',
+                    'issues.many_deletions.message',
                     { n: changes.deleted.length, p: nodes, l: ways, a:areas, r: relations }
                 ),
             }));

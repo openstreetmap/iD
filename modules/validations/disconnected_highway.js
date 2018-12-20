@@ -50,8 +50,8 @@ export function validationDisconnectedHighway(context) {
                 issues.push(new validationIssue({
                     type: ValidationIssueType.disconnected_highway,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('validations.disconnected_highway', {entityLabel: entityLabel}),
-                    tooltip: t('validations.disconnected_highway_tooltip'),
+                    message: t('issues.disconnected_highway.message', {entityLabel: entityLabel}),
+                    tooltip: t('issues.disconnected_highway.tooltip'),
                     entities: [entity],
                 }));
             }

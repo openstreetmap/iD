@@ -40,7 +40,7 @@ export function validationTagSuggestsArea() {
                 issues.push(new validationIssue({
                     type: ValidationIssueType.tag_suggests_area,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('validations.tag_suggests_area', { tag: suggestion }),
+                    message: t('issues.tag_suggests_area.message', { tag: suggestion }),
                     entities: [change],
                 }));
             }
