@@ -476,6 +476,7 @@ export function coreContext() {
 
     if (services.maprules && utilStringQs(window.location.hash).validations) {
         var validationUrl = utilStringQs(window.location.hash).validations;
+        context.issueManager().setCustomName("Custom Validation Rule");
         context.issueManager().setCustomUrl(validationUrl);
         d3_json(validationUrl, function (err, mapcss) {
             if (err) return;

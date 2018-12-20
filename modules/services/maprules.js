@@ -224,7 +224,7 @@ export default {
                         severity: severity,
                         message: selector[severity],
                         entities: [entity],
-                        source: this.source
+                        source: source
                     }));
                 }
             }

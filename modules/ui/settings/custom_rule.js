@@ -14,6 +14,7 @@ export function uiSettingsCustomRule(context) {
     function render(selection) {
         var validationLayer = context.layers().layer('validation');
         var _origSettings = {
+            name: context.storage('settings-custom-rule-name'),
             fileList: (validationLayer && validationLayer.fileList()) || null,
             url: context.storage('settings-custom-rule-url')
         };
@@ -105,6 +106,7 @@ export function uiSettingsCustomRule(context) {
         // restore the original url
         function clickCancel() {
             textSection.select('.field-url').property('value', _origSettings.url);
+            context.storage('settings-custom-rule-name', _origSettings.name);
             context.storage('settings-custom-rule-url', _origSettings.url);
             this.blur();
             modal.close();
@@ -119,6 +121,7 @@ export function uiSettingsCustomRule(context) {
             if (_currSettings.url) { _currSettings.fileList = null; }
             if (_currSettings.fileList) { _currSettings.url = ''; }
 
+            context.storage('settings-custom-rule-name', _currSettings.name);
             context.storage('settings-custom-rule-url', _currSettings.url);
             this.blur();
             modal.close();
