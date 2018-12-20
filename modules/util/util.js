@@ -121,6 +121,22 @@ export function utilDisplayType(id) {
 }
 
 
+export function utilDisplayLabel(entity, context) {
+    var displayName = utilDisplayName(entity);
+    if (displayName) {
+        // use the display name if there is one
+        return displayName;
+    }
+    var preset = context.presets().match(entity, context.graph());
+    if (preset && preset.name()) {
+        // use the preset name if there is a match
+        return preset.name();
+    }
+    // fallback to the display type (node/way/relation)
+    return utilDisplayType(entity.id);
+}
+
+
 export function utilStringQs(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');

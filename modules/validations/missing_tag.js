@@ -1,12 +1,15 @@
 import _without from 'lodash-es/without';
 import { t } from '../util/locale';
 import {
+    utilDisplayLabel
+} from '../util';
+import {
     ValidationIssueType,
     ValidationIssueSeverity,
     validationIssue,
 } from './validation_issue';
 
-export function validationMissingTag() {
+export function validationMissingTag(context) {
 
     // Slightly stricter check than Entity#isUsed (#3091)
     function hasTags(entity, graph) {
@@ -23,11 +26,12 @@ export function validationMissingTag() {
                 geometry = change.geometry(graph);
 
             if (types.indexOf(geometry) !== -1 && !hasTags(change, graph)) {
+                var entityLabel = utilDisplayLabel(change, context);
                 issues.push(new validationIssue({
                     type: ValidationIssueType.missing_tag,
                     severity: ValidationIssueSeverity.error,
-                    message: t('issues.untagged_' + geometry + '.message'),
-                    tooltip: t('issues.untagged_' + geometry + '.tooltip'),
+                    message: t('issues.untagged_feature.message', {feature: entityLabel}),
+                    tooltip: t('issues.untagged_feature.tooltip'),
                     entities: [change],
                 }));
             }

@@ -2874,7 +2874,7 @@ div.full-screen > button:hover {
     border-color: #FFDF5C;
 }
 .entity-issues .issue.severity-error {
-    border-color: #F5817D;
+    border-color: #f59c90;
 }
 .entity-issues .issue:not(:last-of-type) {
     margin-bottom: 20px;

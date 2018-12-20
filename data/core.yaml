@@ -883,23 +883,14 @@ en:
       error: error
       warning: warning
     disconnected_highway:
-      message: "{entityLabel} is disconnected from other highways."
+      message: "{highway} is disconnected from other highways"
       tooltip: "Roads should be connected to other roads or building entrances."
     old_multipolygon:
       message: Multipolygon tags on outer way
       tooltip: "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way."
-    untagged_point:
-      message: Untagged point
-      tooltip: "Select a feature type that describes what this point is."
-    untagged_line:
-      message: Untagged line
-      tooltip: "Select a feature type that describes what this line is."
-    untagged_area:
-      message: Untagged area
-      tooltip: "Select a feature type that describes what this area is."
-    untagged_relation:
-      message: Untagged relation
-      tooltip: "Select a feature type that describes what this relation is."
+    untagged_feature:
+      message: "{feature} has no tags"
+      tooltip: "Select a feature type that describes what this is."
     many_deletions:
       message: "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
     tag_suggests_area:
