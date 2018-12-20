@@ -341,7 +341,7 @@ export function uiCombobox(context, klass) {
         // Dispatches an 'accept' event if an option has been chosen.
         // Then hides the combobox.
         function accept(d) {
-            d = d || _choice;
+            d = d || _choice || value();
             if (d) {
                 utilGetSetValue(input, d.value);
                 utilTriggerEvent(input, 'change');
