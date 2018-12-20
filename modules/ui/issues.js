@@ -354,9 +354,9 @@ export function uiIssues(context) {
 
         labelEnter.append('input')
             .attr('type', 'checkbox')
-            .property("checked", context.validationRules)
+            .property('checked', context.validationRules)
             .on('change', function() {
-                if(d3_select(this).property('checked')){
+                if (d3_select(this).property('checked')){
                     context.issueManager().removeSourceIgnore(d3_select('.custom-rule-name').text());
                 } else {
                     context.issueManager().ignoreSource(d3_select('.custom-rule-name').text());
@@ -381,7 +381,7 @@ export function uiIssues(context) {
             .classed('deemphasize', !hasData)
             .selectAll('input')
             .property('disabled', !hasData)
-            .property('checked', showsData)
+            .property('checked', showsData);
 
     }
 
@@ -392,8 +392,8 @@ export function uiIssues(context) {
     }
 
     function customChanged(c) {
-        if(c){
-            if(c.name){
+        if (c){
+            if (c.name){
                 context.issueManager().setCustomName(c.name);
                 d3_select('.custom-rule-name').text(c.name);
             }

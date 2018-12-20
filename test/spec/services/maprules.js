@@ -154,7 +154,7 @@ describe('maprules', function() {
                 warning:'\'Marketplace\' preset must be coupled with name'
             };
             expect(iD.serviceMapRules.validationRules()).to.be.empty;
-            iD.serviceMapRules.addRule(selector);
+            iD.serviceMapRules.addRule(selector, 'Custom Validation Rule');
             expect(iD.serviceMapRules.validationRules().length).to.eql(1);
         });
     });
@@ -174,7 +174,7 @@ describe('maprules', function() {
                 absence: 'name',
                 error: '\'Marketplace\' preset must be coupled with name'
             };
-            iD.serviceMapRules.addRule(selector);
+            iD.serviceMapRules.addRule(selector,'Custom Validation Rule');
             var rules = iD.serviceMapRules.validationRules();
             expect(rules).instanceof(Array);
             expect(rules.length).to.eql(1);
@@ -365,7 +365,7 @@ describe('maprules', function() {
             ];
 
             iD.serviceMapRules.clearRules();
-            selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
+            selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector, 'Custom Validation Rule'); });
             validationRules = iD.serviceMapRules.validationRules();
         });
         describe('#matches', function() {
@@ -439,7 +439,7 @@ describe('maprules', function() {
                 ];
 
                 iD.serviceMapRules.clearRules();
-                selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
+                selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector, 'Custom Validation Rule'); });
                 validationRules = iD.serviceMapRules.validationRules();
             });
             it('is true when each rule check is \'true\'', function() {
@@ -456,7 +456,7 @@ describe('maprules', function() {
                 };
                 var entity = iD.Way({ tags: { highway: 'residential', structure: 'tunnel' }});
                 iD.serviceMapRules.clearRules();
-                iD.serviceMapRules.addRule(selector);
+                iD.serviceMapRules.addRule(selector, 'Custom Validation Rule');
                 var rule = iD.serviceMapRules.validationRules()[0];
 
                 expect(rule.matches(entity)).to.be.false;
@@ -543,7 +543,7 @@ describe('maprules', function() {
                 ];
                 _graph = iD.Graph(entities.concat(wayNodes));
                 iD.serviceMapRules.clearRules();
-                selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector); });
+                selectors.forEach(function(selector) { iD.serviceMapRules.addRule(selector, 'Custom Validation Rule'); });
                 validationRules = iD.serviceMapRules.validationRules();
             });
             it('finds issues', function() {

@@ -10,7 +10,7 @@ export function IssueManager(context) {
         issues = [],
         ignore = [],
         customName,
-        customUrl = "";
+        customUrl = '';
 
     self.featureApplicabilityOptions = ['edited', 'all'];
 
@@ -44,15 +44,15 @@ export function IssueManager(context) {
 
     self.setCustomName = function(name) {
         customName =  name;
-    }
+    };
 
-    self.getCustomName = function(name){
+    self.getCustomName = function(){
         return customName;
-    }
+    };
 
     self.getCustomUrl = function() {
         return customUrl;
-    }
+    };
 
     self.setCustomUrl = function(url) {
         customUrl = url;
@@ -61,13 +61,13 @@ export function IssueManager(context) {
     self.getSourceIssues = function(src) {
         self.validate();
         return _filter(issues, function(error){
-            return error.source == src;
+            return error.source === src;
         });
     };
 
     self.removeSourceIgnore = function(src) {
         var index = ignore.indexOf(src);
-        if(index !== -1){
+        if (index !== -1){
             ignore.splice(index,1);
         }
     };

@@ -477,17 +477,17 @@ export function coreContext() {
     if (services.maprules){
         var customRuleName = context.storage('settings-custom-rule-name');
         var customRuleUrl = context.storage('settings-custom-rule-url');
-        if(customRuleName){
+        if (customRuleName){
             context.validationRules = true;
         }
 
-        if(utilStringQs(window.location.hash).validations) {
+        if (utilStringQs(window.location.hash).validations) {
             customRuleUrl = utilStringQs(window.location.hash).validations;
-            customRuleName = "Custom Validation Rule";
+            customRuleName = 'Custom Validation Rule';
             context.validationRules = true;
         }
 
-        if(context.validationRules){
+        if (context.validationRules){
             context.issueManager().setCustomName(customRuleName);
             context.issueManager().setCustomUrl(customRuleUrl);
 
