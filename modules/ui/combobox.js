@@ -49,8 +49,8 @@ export function uiCombobox(context, klass) {
             .on('keydown.typeahead', keydown)
             .on('keyup.typeahead', keyup)
             .on('input.typeahead', change)
+            .on('mousedown', mousedown)
             .each(addCaret);
-
 
         function addCaret() {
             var parent = this.parentNode;
@@ -65,22 +65,6 @@ export function uiCombobox(context, klass) {
                 .attr('class', 'combobox-caret')
                 .merge(caret);
 
-            caret
-                .on('mousedown', function () {
-                    // prevent the form element from blurring. it blurs on mousedown
-                    d3_event.stopPropagation();
-                    d3_event.preventDefault();
-                    var combo = container.selectAll('.combobox');
-                    if (combo.empty()) {
-                        input.node().focus();
-                        fetch('', function() {
-                            show();
-                            render();
-                        });
-                    } else {
-                        hide();
-                    }
-                });
         }
 
 
@@ -204,6 +188,22 @@ export function uiCombobox(context, klass) {
             });
         }
 
+
+        function mousedown() {
+            // prevent the form element from blurring. it blurs on mousedown
+            d3_event.stopPropagation();
+            d3_event.preventDefault();
+            var combo = container.selectAll('.combobox');
+            if (combo.empty()) {
+                input.node().focus();
+                fetch('', function() {
+                    show();
+                    render();
+                });
+            } else {
+                hide();
+            }
+        }
 
         function nav(dir) {
             if (!_suggestions.length) return;
