@@ -115,10 +115,9 @@ export default {
                         // - move markers slightly so it doesn't obscure the geometry,
                         // - then move markers away from other coincident markers
                         var coincident = false;
-                        var epsilon = 0.00001;
                         do {
                             // first time, move marker up. after that, move marker right.
-                            var delta = coincident ? [epsilon, 0] : [0, epsilon];
+                            var delta = coincident ? [0.00001, 0] : [0, 0.000005];
                             loc = geoVecAdd(loc, delta);
                             var bbox = geoExtent(loc).bbox();
                             coincident = _krCache.rtree.search(bbox).length;
