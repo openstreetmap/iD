@@ -46,9 +46,10 @@ export function uiInspector(context) {
 
         var entity = context.entity(_entityID);
 
-        var isTaglessVertex = entity.geometry(context.graph()) === 'vertex' && !entity.hasNonGeometryTags();
-        // start with the preset list if the feature is new or is a vertex with no tags
-        var showPresetList = newFeature || isTaglessVertex;
+        var isTaglessOrIntersectionVertex = entity.geometry(context.graph()) === 'vertex' &&
+            (!entity.hasNonGeometryTags() && !entity.isHighwayIntersection(context.graph()));
+        // start with the preset list if the feature is new or is an uninteresting vertex
+        var showPresetList = newFeature || isTaglessOrIntersectionVertex;
 
         if (showPresetList) {
             wrap.style('right', '-100%');
