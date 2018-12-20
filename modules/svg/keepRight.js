@@ -31,7 +31,7 @@ export function svgKeepRight(projection, context, dispatch) {
     function getService() {
         if (services.keepRight && !_keepRight) {
             _keepRight = services.keepRight;
-            _keepRight.event.on('loadedKeepRight', throttledRedraw);
+            _keepRight.event.on('loaded', throttledRedraw);
         } else if (!services.keepRight && _keepRight) {
             _keepRight = null;
         }
@@ -110,7 +110,7 @@ export function svgKeepRight(projection, context, dispatch) {
     function update() {
         var service = getService();
         var selectedID = context.selectedNoteID(); // TODO: update with selectedErrorID
-        var data = (service ? service.keepRight(projection) : []);
+        var data = (service ? service.getErrors(projection) : []);
         var visibleData =  data; // getVisible(data); // TODO: only show sub-layers that are toggled on
         var transform = svgPointTransform(projection);
         var kr_errors = layer.selectAll('.kr_error')
@@ -177,19 +177,11 @@ export function svgKeepRight(projection, context, dispatch) {
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
-        function exampleCallback(value1, value2, value3) { // TODO: rename, possibly remove function
-        }
-
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                var options = {
-                    st: '', // NOTE: passing in 'ignore' or 'ignore_t' seems to have no effect
-                    ch: [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413]
-                };
-
-                service.loadKeepRightErrors(context, projection, options, exampleCallback);
+                service.loadErrors(context, projection);
             } else {
                 editOff();
             }

@@ -6,6 +6,7 @@ import _isEmpty from 'lodash-es/isEmpty';
 import rbush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
 import { geoExtent } from '../geo';
@@ -15,281 +16,222 @@ import { krError } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
 var tiler = utilTiler();
-var dispatch = d3_dispatch(
-	'authLoading',
-	'authDone',
-	'change',
-	'loading',
-	'loaded',
-	'loadedKeepRight'
-);
+var dispatch = d3_dispatch('loaded');
 
-var _keepRightCache = {
-	loaded: {},
-	inflight: {},
-	inflightPost: {},
-	keepRight: {},
-	rtree: rbush()
-};
-var _off;
-var _keepRightZoom = 14;
-
-var apiBase = 'https://www.keepright.at/';
+var _krCache;
+var _krZoom = 14;
+var apibase = 'https://www.keepright.at/';
+var defaultRuleset = [0,30,40,50,70,90,100,110,120,130,150,160,170,180,191,192,193,194,195,196,197,198,201,202,203,204,205,206,207,208,210,220,231,232,270,281,282,283,284,285,291,292,293,294,295,296,297,298,311,312,313,320,350,370,380,401,402,411,412,413];
 
 function abortRequest(i) {
-	if (i) {
-		i.abort();
-	}
+    if (i) {
+        i.abort();
+    }
 }
 
 function abortUnwantedRequests(cache, tiles) {
-	_forEach(cache.inflight, function(v, k) {
-		var wanted = _find(tiles, function(tile) {
-			return k === tile.id;
-		});
-		if (!wanted) {
-			abortRequest(v);
-			delete cache.inflight[k];
-		}
-	});
+    _forEach(cache.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) {
+            return k === tile.id;
+        });
+        if (!wanted) {
+            abortRequest(v);
+            delete cache.inflight[k];
+        }
+    });
 }
 
-function encodeErrorRtree(error) {
-	return {
-		minX: error.loc[0],
-		minY: error.loc[1],
-		maxX: error.loc[0],
-		maxY: error.loc[1],
-		data: error
-	};
+
+function encodeErrorRtree(d) {
+    return { minX: d.loc[0], minY: d.loc[1], maxX: d.loc[0], maxY: d.loc[1], data: d };
 }
+
 
 // replace or remove error from rtree
 function updateRtree(item, replace) {
-	_keepRightCache.rtree.remove(item, function isEql(a, b) {
-		return a.data.id === b.data.id;
-	});
+    _krCache.rtree.remove(item, function isEql(a, b) {
+        return a.data.id === b.data.id;
+    });
 
-	if (replace) {
-		_keepRightCache.rtree.insert(item);
-	}
+    if (replace) {
+        _krCache.rtree.insert(item);
+    }
 }
 
+
 export default {
-	init: function() {
-		if (!_keepRightCache) {
-			this.reset();
-		}
+    init: function() {
+        if (!_krCache) {
+            this.reset();
+        }
 
-		this.event = utilRebind(this, dispatch, 'on');
-	},
+        this.event = utilRebind(this, dispatch, 'on');
+    },
 
-	reset: function() {
-		_forEach(_keepRightCache.inflight, abortRequest);
+    reset: function() {
+        if (_krCache) {
+            _forEach(_krCache.inflight, abortRequest);
+        }
+        _krCache = { loaded: {}, inflight: {}, keepRight: {}, rtree: rbush() };
+    },
 
-		_keepRightCache = {
-			loaded: {},
-			inflight: {},
-			keepRight: {},
-			rtree: rbush()
-		};
-	},
 
-	loadKeepRightErrors: function(context, projection, options, callback) {
-		options = _extend({ format: 'geojson' }, options); // set format to geojson
-		if (_off) return;
-
-		var cache = _keepRightCache;
-
+    // KeepRight API:  http://osm.mueschelsoft.de/keepright/interfacing.php
+    loadErrors: function(context, projection) {
+        var options = {
+            format: 'geojson'
+        };
+        var rules = defaultRuleset.join();
         var that = this;
 
-        // NOTE: the KeepRight API doesn't seem to load
-		var path =
-			apiBase +
-			'export.php?' +
-			'format=' +
-            options.format +
-            '&st=' +
-            options.st +
-			'&ch=' +
-			options.ch.join() +
-			'&';
+        // determine the needed tiles to cover the view
+        var tiles = tiler
+            .zoomExtent([_krZoom, _krZoom])
+            .getTiles(projection);
 
-		// determine the needed tiles to cover the view
-		var tiles = tiler
-			.zoomExtent([_keepRightZoom, _keepRightZoom])
-			.getTiles(projection);
+        // abort inflight requests that are no longer needed
+        abortUnwantedRequests(_krCache, tiles);
 
-		// abort inflight requests that are no longer needed
-		var hadRequests = !_isEmpty(cache.inflight);
-		abortUnwantedRequests(cache, tiles);
-		if (hadRequests && _isEmpty(cache.inflight)) {
-			dispatch.call('loaded'); // stop the spinner
-		}
+        // issue new requests..
+        tiles.forEach(function(tile) {
+            if (_krCache.loaded[tile.id] || _krCache.inflight[tile.id]) return;
 
-		// issue new requests..
-		tiles.forEach(function(tile) {
-			if (cache.loaded[tile.id] || cache.inflight[tile.id]) return;
-			if (_isEmpty(cache.inflight)) {
-				dispatch.call('loading'); // start the spinner
-			}
+            var rect = tile.extent.rectangle();
+            var params = _extend({}, options, { left: rect[0], bottom: rect[3], right: rect[2], top: rect[1] });
+            var url = apibase + 'export.php?' + utilQsString(params) + '&ch=' + rules;
 
-			var rect = tile.extent.rectangle();
-			var nextPath =
-				path +
-				utilQsString({
-					left: rect[0],
-					bottom: [3],
-					right: rect[2],
-					top: rect[1]
-				});
+            _krCache.inflight[tile.id] = d3_json(url,
+                function(err, data) {
+                    delete _krCache.inflight[tile.id];
 
-			var options = {}; // TODO: implement
+                    if (err) return;
+                    _krCache.loaded[tile.id] = true;
 
-			cache.inflight[tile.id] = that.loadFromAPI(
-				nextPath,
-				function(err, data) {
-					if (err || !data.features || !data.features.length) return;
+                    if (!data.features || !data.features.length) return;
 
-					cache.loaded[tile.id] = true;
-					delete cache.inflight[tile.id];
+                    var features = data.features
+                        .map(function(feature) {
+                            var loc = feature.geometry.coordinates;
+                            var props = feature.properties;
 
-					if (callback) {
-						callback(err, _extend({ data: data }, tile));
-					}
-					if (_isEmpty(cache.inflight)) {
-						dispatch.call('loaded'); // stop the spinner
-					}
-				},
-				options
-			);
-		});
-	},
+                            // TODO: finish implementing overlapping error offset
+                            // // if errors are coincident, move them apart slightly
+                            // var coincident = false;
+                            // var epsilon = 0.00001;
+                            // do {
+                            //     if (coincident) {
+                            //         loc = geoVecAdd(loc, [epsilon, epsilon]);
+                            //     }
+                            //     var bbox = geoExtent(loc).bbox();
+                            //     coincident = cache.rtree.search(bbox).length;
+                            // } while (coincident);
 
-	loadFromAPI: function(path, callback, options) {
-		var cache = _keepRightCache;
+                            var d = new krError({
+                                loc: loc,
+                                id: props.error_id,
+                                comment: props.comment || null,
+                                description: props.description || '',
+                                error_id: props.error_id,
+                                error_type: props.error_type,
+                                object_id: props.object_id,
+                                object_type: props.object_type,
+                                schema: props.schema,
+                                title: props.title
+                            });
 
-		return d3_request(path)
-			.mimeType('application/json') // TODO: only have this as a response if the input format is json
-			.header('Content-type', 'application/x-www-form-urlencoded')
-			.response(function(xhr) {
-				return JSON.parse(xhr.responseText);
-			})
-			.get(function(err, data) {
-				var features = data.features
-					.map(function(feature) {
-						var loc = feature.geometry.coordinates;
-						var props = feature.properties;
+                            _krCache.keepRight[d.id] = d;
+                            return encodeErrorRtree(d);
+                        })
+                        .filter(Boolean);
 
-						// TODO: finish implementing overlapping error offset
-						// // if errors are coincident, move them apart slightly
-						// var coincident = false;
-						// var epsilon = 0.00001;
-						// do {
-						//     if (coincident) {
-						//         loc = geoVecAdd(loc, [epsilon, epsilon]);
-						//     }
-						//     var bbox = geoExtent(loc).bbox();
-						//     coincident = cache.rtree.search(bbox).length;
-						// } while (coincident);
+                    _krCache.rtree.load(features);
+                    dispatch.call('loaded');
+                }
+            );
+        });
+    },
 
-						var d = new krError({
-							loc: loc,
-							id: props.error_id,
-							comment: props.comment || null,
-							description: props.description || '',
-							error_id: props.error_id,
-							error_type: props.error_type,
-							object_id: props.object_id,
-							object_type: props.object_type,
-							schema: props.schema,
-							title: props.title
-						});
+    // loadTile: function(url, callback) {
+    //     var cache = _krCache;
 
-						cache.keepRight[d.id] = d;
+    //     return d3_request(url)
+    //         .mimeType('application/json')
+    //         .header('Content-type', 'application/x-www-form-urlencoded')
+    //         .response(function(xhr) {
+    //             return JSON.parse(xhr.responseText);
+    //         })
+    //         .get(function(err, data) {
+    //             callback(err, data);
+    //         });
+    // },
 
-						return {
-							minX: loc[0],
-							minY: loc[1],
-							maxX: loc[0],
-							maxY: loc[1],
-							data: d
-						};
-					})
-					.filter(Boolean);
 
-				cache.rtree.load(features);
-				dispatch.call('loadedKeepRight');
-
-				callback(err, data);
-			});
-	},
-
-	postKeepRightUpdate: function(update, callback) {
-		if (!services.osm.authenticated()) {
-			return callback({ message: 'Not Authenticated', status: -3 }, update);
-		}
-        if (_keepRightCache.inflightPost[update.id]) {
-			return callback(
+    postKeepRightUpdate: function(update, callback) {
+        if (!services.osm.authenticated()) {
+            return callback({ message: 'Not Authenticated', status: -3 }, update);
+        }
+        if (_krCache.inflightPost[update.id]) {
+            return callback(
                 { message: 'Error update already inflight', status: -2 }, update);
-		}
+        }
 
-		var path = apiBase + 'comment.php?';
+        var path = apibase + 'comment.php?';
         if (update.state) {
             path += '&st=' + update.state;
-		}
-		if (update.newComment) {
+        }
+        if (update.newComment) {
             path += '&' + utilQsString({ co: update.newComment });
-		}
+        }
 
         path += '&schema=' + update.schema + '&id=' + update.error_id;
 
-        _keepRightCache.inflightPost[update.id] = d3_request(path)
-			.mimeType('application/json')
-			.response(function(xhr) {
-				return JSON.parse(xhr.responseText);
-			})
-			.post(function(err, data) {
-                delete _keepRightCache.inflightPost[update.id];
+        _krCache.inflightPost[update.id] = d3_request(path)
+            .mimeType('application/json')
+            .response(function(xhr) {
+                return JSON.parse(xhr.responseText);
+            })
+            .post(function(err, data) {
+                delete _krCache.inflightPost[update.id];
                 if (err) { return callback(err); }
 
                 console.log('data ', data);
-			});
+            });
 
-		// NOTE: This throws a CORS error, but it seems successful?
-	},
+        // NOTE: This throws a CORS error, but it seems successful?
+    },
 
-	// get all cached errors covering the viewport
-	keepRight: function(projection) {
-		var viewport = projection.clipExtent();
-		var min = [viewport[0][0], viewport[1][1]];
-		var max = [viewport[1][0], viewport[0][1]];
-		var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
 
-		return _keepRightCache.rtree.search(bbox).map(function(d) {
-			return d.data;
-		});
-	},
+    // get all cached errors covering the viewport
+    getErrors: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
 
-	// get a single error from the cache
-	getError: function(id) {
-		return _keepRightCache.keepRight[id];
-	},
+        return _krCache.rtree.search(bbox).map(function(d) {
+            return d.data;
+        });
+    },
 
-	// replace a single error in the cache
-	replaceError: function(error) {
-		if (!(error instanceof krError) || !error.id) return;
+    // get a single error from the cache
+    getError: function(id) {
+        return _krCache.keepRight[id];
+    },
 
-		_keepRightCache.keepRight[error.id] = error;
-		updateRtree(encodeErrorRtree(error), true); // true = replace
-		return error;
-	},
+    // replace a single error in the cache
+    replaceError: function(error) {
+        if (!(error instanceof krError) || !error.id) return;
 
-	// remove a single error from the cache
-	removeError: function(error) {
-		if (!(error instanceof krError) || !error.id) return;
+        _krCache.keepRight[error.id] = error;
+        updateRtree(encodeErrorRtree(error), true); // true = replace
+        return error;
+    },
 
-		delete _keepRightCache.keepRight[error.id];
-		updateRtree(encodeErrorRtree(error), false); // false = remove
-	}
+    // remove a single error from the cache
+    removeError: function(error) {
+        if (!(error instanceof krError) || !error.id) return;
+
+        delete _krCache.keepRight[error.id];
+        updateRtree(encodeErrorRtree(error), false); // false = remove
+    }
 };

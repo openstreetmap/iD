@@ -1,12 +1,8 @@
 import { t } from '../util/locale';
-import { svgIcon } from '../svg';
-import { services } from '../services';
-import { utilDetect } from '../util/detect';
 
 
 export function uiKeepRightComment() {
     var _error;
-
 
     function keepRightComment(selection) {
         if (!_error.comment) return;
