@@ -53,7 +53,8 @@ export function uiEntityIssues(context) {
             });
 
         var label = enter
-            .append('label');
+            .append('button')
+            .classed('label', true);
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
@@ -66,6 +67,7 @@ export function uiEntityIssues(context) {
 
         label
             .append('span')
+            .append('strong')
             .text(function(d) { return d.message; });
 
         // Update
