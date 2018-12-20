@@ -83,7 +83,6 @@ export function uiRawMemberEditor(context) {
         }
 
         utilHighlightEntity(d.id, false, context);
-
     }
 
 
