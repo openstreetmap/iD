@@ -474,18 +474,31 @@ export function coreContext() {
     features = rendererFeatures(context);
     presets = presetIndex();
 
-    if (services.maprules && utilStringQs(window.location.hash).validations) {
-        var validationUrl = utilStringQs(window.location.hash).validations;
-        context.issueManager().setCustomName("Custom Validation Rule");
-        context.issueManager().setCustomUrl(validationUrl);
-        d3_json(validationUrl, function (err, mapcss) {
-            if (err) return;
-            services.maprules.init(context.presets().areaKeys());
-            _each(mapcss, function(mapcssSelector) {
-                return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
-            });
+    if (services.maprules){
+        var customRuleName = context.storage('settings-custom-rule-name');
+        var customRuleUrl = context.storage('settings-custom-rule-url');
+        if(customRuleName){
             context.validationRules = true;
-        });
+        }
+
+        if(utilStringQs(window.location.hash).validations) {
+            customRuleUrl = utilStringQs(window.location.hash).validations;
+            customRuleName = "Custom Validation Rule";
+            context.validationRules = true;
+        }
+
+        if(context.validationRules){
+            context.issueManager().setCustomName(customRuleName);
+            context.issueManager().setCustomUrl(customRuleUrl);
+
+            d3_json(customRuleUrl, function (err, mapcss) {
+                if (err) return;
+                services.maprules.init(context.presets().areaKeys());
+                _each(mapcss, function(mapcssSelector) {
+                    return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
+                });
+            });
+        }
     }
 
     map = rendererMap(context);

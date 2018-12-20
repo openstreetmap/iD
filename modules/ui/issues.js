@@ -354,6 +354,7 @@ export function uiIssues(context) {
 
         labelEnter.append('input')
             .attr('type', 'checkbox')
+            .property("checked", context.validationRules)
             .on('change', function() {
                 if(d3_select(this).property('checked')){
                     context.issueManager().removeSourceIgnore(d3_select('.custom-rule-name').text());
@@ -362,10 +363,11 @@ export function uiIssues(context) {
                 }
             });
 
+        var customRuleName = context.storage('settings-custom-rule-name') ? context.storage('settings-custom-rule-name') : t('issues.rules.custom.title');
         labelEnter
             .append('span')
             .attr('class', 'custom-rule-name')
-            .text(t('issues.rules.custom.title'));
+            .text(customRuleName);
 
         ul = ul
             .merge(ulEnter);

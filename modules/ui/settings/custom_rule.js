@@ -12,10 +12,9 @@ export function uiSettingsCustomRule(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
-        var validationLayer = context.layers().layer('validation');
         var _origSettings = {
             name: context.storage('settings-custom-rule-name'),
-            fileList: (validationLayer && validationLayer.fileList()) || null,
+            fileList: null,
             url: context.storage('settings-custom-rule-url')
         };
         var _currSettings = _cloneDeep(_origSettings);
