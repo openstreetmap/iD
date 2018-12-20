@@ -475,12 +475,13 @@ export function coreContext() {
     presets = presetIndex();
 
     if (services.maprules && utilStringQs(window.location.hash).validations) {
-        var validations = utilStringQs(window.location.hash).validations;
-        d3_json(validations, function (err, mapcss) {
+        var validationUrl = utilStringQs(window.location.hash).validations;
+        context.issueManager().setCustomUrl(validationUrl);
+        d3_json(validationUrl, function (err, mapcss) {
             if (err) return;
             services.maprules.init(context.presets().areaKeys());
             _each(mapcss, function(mapcssSelector) {
-                return services.maprules.addRule(mapcssSelector);
+                return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
             });
             context.validationRules = true;
         });

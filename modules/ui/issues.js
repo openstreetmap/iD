@@ -1,9 +1,13 @@
 import _map from 'lodash-es/map';
+import _each from 'lodash-es/each';
+
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
+import { json as d3_json } from 'd3-request';
+import { services } from '../services';
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
@@ -388,11 +392,19 @@ export function uiIssues(context) {
     function customChanged(c) {
         if(c){
             if(c.name){
+                context.issueManager().setCustomName(c.name);
                 d3_select('.custom-rule-name').text(c.name);
             }
             if (c.url) {
                 context.issueManager().setCustomUrl(c.url);
-                //console.log(c.url);
+                d3_json(c.url, function (err, mapcss) {
+                    if (err) return;
+                    services.maprules.init(context.presets().areaKeys());
+                    _each(mapcss, function(mapcssSelector) {
+                        return services.maprules.addRule(mapcssSelector, context.issueManager().getCustomName());
+                    });
+                    context.validationRules = true;
+                });
             } else if (c.fileList) {
                 //console.log(c.fileList);
             }

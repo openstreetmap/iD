@@ -192,7 +192,8 @@ export default {
         return 'line';
     },
     // adds from mapcss-parse selector check...
-    addRule: function(selector) {
+    addRule: function(selector, source) {
+        console.log(source);
         var rule = {
             // checks relevant to mapcss-selector
             checks: this.filterRuleChecks(selector),
@@ -213,6 +214,7 @@ export default {
             },
             // when geometries match and tag matches are present, return a warning...
             findIssues: function (entity, graph, issues) {
+                console.log(this.source);
                 if (this.geometryMatches(entity, graph) && this.matches(entity)) {
                     var severity = Object.keys(selector).indexOf('error') > -1
                             ? ValidationIssueSeverity.error
@@ -222,6 +224,7 @@ export default {
                         severity: severity,
                         message: selector[severity],
                         entities: [entity],
+                        source: this.source
                     }));
                 }
             }

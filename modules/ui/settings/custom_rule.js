@@ -15,7 +15,7 @@ export function uiSettingsCustomRule(context) {
         var validationLayer = context.layers().layer('validation');
         var _origSettings = {
             fileList: (validationLayer && validationLayer.fileList()) || null,
-            url: context.storage('settings-custom-data-url')
+            url: context.storage('settings-custom-rule-url')
         };
         var _currSettings = _cloneDeep(_origSettings);
 
@@ -105,7 +105,7 @@ export function uiSettingsCustomRule(context) {
         // restore the original url
         function clickCancel() {
             textSection.select('.field-url').property('value', _origSettings.url);
-            context.storage('settings-custom-data-url', _origSettings.url);
+            context.storage('settings-custom-rule-url', _origSettings.url);
             this.blur();
             modal.close();
         }
@@ -119,7 +119,7 @@ export function uiSettingsCustomRule(context) {
             if (_currSettings.url) { _currSettings.fileList = null; }
             if (_currSettings.fileList) { _currSettings.url = ''; }
 
-            context.storage('settings-custom-data-url', _currSettings.url);
+            context.storage('settings-custom-rule-url', _currSettings.url);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

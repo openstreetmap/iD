@@ -9,6 +9,7 @@ export function IssueManager(context) {
         self = {},
         issues = [],
         ignore = [],
+        customName,
         customUrl = "";
 
     self.featureApplicabilityOptions = ['edited', 'all'];
@@ -40,6 +41,18 @@ export function IssueManager(context) {
             return false;
         });
     };
+
+    self.setCustomName = function(name) {
+        customName =  name;
+    }
+
+    self.getCustomName = function(name){
+        return customName;
+    }
+
+    self.getCustomUrl = function() {
+        return customUrl;
+    }
 
     self.setCustomUrl = function(url) {
         customUrl = url;
