@@ -81,6 +81,9 @@ export function uiRawMemberEditor(context) {
         if (!context.hasEntity(d.relation.id)) {
             context.enter(modeBrowse(context));
         }
+
+        utilHighlightEntity(d.id, false, context);
+
     }
 
 
