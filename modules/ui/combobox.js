@@ -49,7 +49,7 @@ export function uiCombobox(context, klass) {
             .on('keydown.typeahead', keydown)
             .on('keyup.typeahead', keyup)
             .on('input.typeahead', change)
-            .on('mouseover', mouseover)
+            .on('mousedown', mousedown)
             .each(addCaret);
 
         function addCaret() {
@@ -189,7 +189,7 @@ export function uiCombobox(context, klass) {
         }
 
 
-        function mouseover() {
+        function mousedown() {
             // prevent the form element from blurring. it blurs on mousedown
             d3_event.stopPropagation();
             d3_event.preventDefault();
