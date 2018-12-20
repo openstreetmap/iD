@@ -27,6 +27,8 @@ export function uiIssues(context) {
         .on('change', customChanged);
     var _shown = false;
     var _customRulesContainer = d3_select(null);
+    var customRuleName = context.storage('settings-custom-rule-name') ? context.storage('settings-custom-rule-name') : t('issues.rules.custom.title');
+
 
     context.issueManager().on('reload', update);
 
@@ -368,7 +370,6 @@ export function uiIssues(context) {
                 }
             });
 
-        var customRuleName = context.storage('settings-custom-rule-name') ? context.storage('settings-custom-rule-name') : t('issues.rules.custom.title');
         labelEnter
             .append('span')
             .attr('class', 'custom-rule-name')
@@ -377,16 +378,14 @@ export function uiIssues(context) {
         ul = ul
             .merge(ulEnter);
 
-        var hasData = context.issueManager().getSourceIssues(d3_select('.custom-rule-name').text()).length > 0;
-        var showsData = true;
 
         ul.selectAll('.list-item-rule')
-            .classed('active', showsData)
+            .classed('active', context.validationRules)
             .selectAll('label')
-            .classed('deemphasize', !hasData)
+            .classed('deemphasize', !context.validationRules)
             .selectAll('input')
-            .property('disabled', !hasData)
-            .property('checked', showsData);
+            .property('disabled', !context.validationRules)
+            .property('checked', context.validationRules);
 
     }
 
