@@ -1,11 +1,11 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import _filter from 'lodash-es/filter';
 
 import { utilRebind } from '../util/rebind';
 
 export function IssueManager(context) {
-    var dispatch = d3.dispatch('reload'),
+    var dispatch = d3_dispatch('reload'),
         self = {},
         issues = [];
 
