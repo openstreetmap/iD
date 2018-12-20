@@ -2876,8 +2876,11 @@ div.full-screen > button:hover {
 .entity-issues .issue.severity-error {
     border-color: #f59c90;
 }
+.entity-issues .issue:first-of-type {
+    margin-top: 5px;
+}
 .entity-issues .issue:not(:last-of-type) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Background - Display Options Sliders
