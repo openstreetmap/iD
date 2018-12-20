@@ -1,7 +1,6 @@
 import _extend from 'lodash-es/extend';
 import _find from 'lodash-es/find';
 import _forEach from 'lodash-es/forEach';
-import _isEmpty from 'lodash-es/isEmpty';
 
 import rbush from 'rbush';
 
@@ -9,7 +8,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { request as d3_request } from 'd3-request';
 
-import { geoExtent } from '../geo';
+import { geoExtent, geoVecAdd } from '../geo';
 import { services } from './index';
 import { krError } from '../osm';
 
@@ -109,68 +108,51 @@ export default {
 
                     if (!data.features || !data.features.length) return;
 
-                    var features = data.features
-                        .map(function(feature) {
-                            var loc = feature.geometry.coordinates;
-                            var props = feature.properties;
+                    data.features.forEach(function(feature) {
+                        var loc = feature.geometry.coordinates;
+                        var props = feature.properties;
 
-                            // TODO: finish implementing overlapping error offset
-                            // // if errors are coincident, move them apart slightly
-                            // var coincident = false;
-                            // var epsilon = 0.00001;
-                            // do {
-                            //     if (coincident) {
-                            //         loc = geoVecAdd(loc, [epsilon, epsilon]);
-                            //     }
-                            //     var bbox = geoExtent(loc).bbox();
-                            //     coincident = cache.rtree.search(bbox).length;
-                            // } while (coincident);
+                        // - move markers slightly so it doesn't obscure the geometry,
+                        // - then move markers away from other coincident markers
+                        var coincident = false;
+                        var epsilon = 0.00001;
+                        do {
+                            // first time, move marker up. after that, move marker right.
+                            var delta = coincident ? [epsilon, 0] : [0, epsilon];
+                            loc = geoVecAdd(loc, delta);
+                            var bbox = geoExtent(loc).bbox();
+                            coincident = _krCache.rtree.search(bbox).length;
+                        } while (coincident);
 
-                            var d = new krError({
-                                loc: loc,
-                                id: props.error_id,
-                                comment: props.comment || null,
-                                description: props.description || '',
-                                error_id: props.error_id,
-                                error_type: props.error_type,
-                                object_id: props.object_id,
-                                object_type: props.object_type,
-                                schema: props.schema,
-                                title: props.title
-                            });
+                        var d = new krError({
+                            loc: loc,
+                            id: props.error_id,
+                            comment: props.comment || null,
+                            description: props.description || '',
+                            error_id: props.error_id,
+                            error_type: props.error_type,
+                            object_id: props.object_id,
+                            object_type: props.object_type,
+                            schema: props.schema,
+                            title: props.title
+                        });
 
-                            _krCache.keepRight[d.id] = d;
-                            return encodeErrorRtree(d);
-                        })
-                        .filter(Boolean);
+                        _krCache.keepRight[d.id] = d;
+                        _krCache.rtree.insert(encodeErrorRtree(d));
+                    });
 
-                    _krCache.rtree.load(features);
                     dispatch.call('loaded');
                 }
             );
         });
     },
 
-    // loadTile: function(url, callback) {
-    //     var cache = _krCache;
-
-    //     return d3_request(url)
-    //         .mimeType('application/json')
-    //         .header('Content-type', 'application/x-www-form-urlencoded')
-    //         .response(function(xhr) {
-    //             return JSON.parse(xhr.responseText);
-    //         })
-    //         .get(function(err, data) {
-    //             callback(err, data);
-    //         });
-    // },
-
 
     postKeepRightUpdate: function(update, callback) {
         if (!services.osm.authenticated()) {
             return callback({ message: 'Not Authenticated', status: -3 }, update);
         }
-        if (_krCache.inflightPost[update.id]) {
+        if (_krCache.inflight[update.id]) {
             return callback(
                 { message: 'Error update already inflight', status: -2 }, update);
         }
@@ -185,13 +167,13 @@ export default {
 
         path += '&schema=' + update.schema + '&id=' + update.error_id;
 
-        _krCache.inflightPost[update.id] = d3_request(path)
+        _krCache.inflight[update.id] = d3_request(path)
             .mimeType('application/json')
             .response(function(xhr) {
                 return JSON.parse(xhr.responseText);
             })
             .post(function(err, data) {
-                delete _krCache.inflightPost[update.id];
+                delete _krCache.inflight[update.id];
                 if (err) { return callback(err); }
 
                 console.log('data ', data);
