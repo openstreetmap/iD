@@ -41,7 +41,8 @@ export function uiSettingsCustomRule(context) {
         textSection
             .append('input')
             .attr('type', 'text')
-            .attr('class', 'field-name');
+            .attr('class', 'field-name')
+            .property('value', _currSettings.name);
 
         textSection
             .append('pre')
