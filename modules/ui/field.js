@@ -246,20 +246,18 @@ export function uiField(context, presetField, entity, options) {
         }
 
         var prerequisiteTag = field.prerequisiteTag;
-        if (prerequisiteTag && field.entityID) {
-            if (prerequisiteTag.key) {
-                var value = context.graph().entity(field.entityID).tags[prerequisiteTag.key];
-                if (value) {
-                    if (prerequisiteTag.valueNot) {
-                        return prerequisiteTag.valueNot !== value;
-                    }
-                    if (prerequisiteTag.value) {
-                        return prerequisiteTag.value === value;
-                    }
-                    return true;
-                } else {
-                    return false;
+        if (prerequisiteTag && prerequisiteTag.key && field.entityID && context.hasEntity(field.entityID)) {
+            var value = context.entity(field.entityID).tags[prerequisiteTag.key];
+            if (value) {
+                if (prerequisiteTag.valueNot) {
+                    return prerequisiteTag.valueNot !== value;
                 }
+                if (prerequisiteTag.value) {
+                    return prerequisiteTag.value === value;
+                }
+                return true;
+            } else {
+                return false;
             }
         }
         return true;

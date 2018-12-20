@@ -1906,6 +1906,7 @@ div.combobox {
     margin-left: -30px;
     vertical-align: top;
     cursor: pointer;
+    pointer-events: none;
 }
 [dir='rtl'] .combobox-caret {
   margin-left: 0;
@@ -2838,20 +2839,26 @@ div.full-screen > button:hover {
     color: inherit;
 }
 
-.issue.severity-warning {
+.issue.severity-warning,
+.issue.severity-warning button {
     background: #ffb;
 }
-.issue.severity-warning:hover {
+.issue.severity-warning:hover,
+.issue.severity-warning button:hover,
+.issue.severity-warning button:focus {
     background: #FFFF99;
 }
 .issue.severity-warning .icon {
     color: #FFB300
 }
 
-.issue.severity-error {
+.issue.severity-error,
+.issue.severity-error button {
     background: #FFD5D4;
 }
-.issue.severity-error:hover {
+.issue.severity-error:hover,
+.issue.severity-error button:hover,
+.issue.severity-error button:focus {
     background: #ffc9c7;
 }
 .issue.severity-error .icon {
@@ -2868,16 +2875,25 @@ div.full-screen > button:hover {
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
+}
+.entity-issues .issue .label {
     padding: 5px;
+    display: flex;
+    height: auto;
+    width: 100%;
+    text-align: inherit;
 }
 .entity-issues .issue.severity-warning {
     border-color: #FFDF5C;
 }
 .entity-issues .issue.severity-error {
-    border-color: #F5817D;
+    border-color: #f5b0ab;
+}
+.entity-issues .issue:first-of-type {
+    margin-top: 5px;
 }
 .entity-issues .issue:not(:last-of-type) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Background - Display Options Sliders

@@ -122,6 +122,11 @@ export function coreHistory(context) {
         },
 
 
+        tree: function() {
+            return _tree;
+        },
+
+
         base: function() {
             return _stack[0].graph;
         },
@@ -285,7 +290,7 @@ export function coreHistory(context) {
             return _flatten(_map(
                 validations,
                 function(fn) {
-                    return fn(context)(changes, _stack[_index].graph);
+                    return fn(context)(changes, _stack[_index].graph, _tree);
                 }
             ));
         },

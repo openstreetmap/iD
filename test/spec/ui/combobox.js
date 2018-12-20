@@ -90,7 +90,7 @@ describe('uiCombobox', function() {
 
     it('adds combobox under container', function() {
         input.call(combobox.data(data));
-        body.selectAll('.combobox-caret').dispatch('mousedown');
+        body.selectAll('.combobox-input').dispatch('mousedown');
         expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);
     });
 
@@ -106,14 +106,14 @@ describe('uiCombobox', function() {
 
     it('shows all entries when clicking on the caret', function() {
         input.property('value', 'foobar').call(combobox.data(data));
-        body.selectAll('.combobox-caret').dispatch('mousedown');
+        body.selectAll('.combobox-input').dispatch('mousedown');
         expect(body.selectAll('.combobox-option').size()).to.equal(5);
         expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
     });
 
     it('is initially shown with no selection', function() {
         input.call(combobox.data(data));
-        body.selectAll('.combobox-caret').dispatch('mousedown');
+        body.selectAll('.combobox-input').dispatch('mousedown');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 

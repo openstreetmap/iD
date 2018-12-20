@@ -17,8 +17,8 @@ export function validationOldMultipolygon() {
                 issues.push(new validationIssue({
                     type: ValidationIssueType.old_multipolygon,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('validations.old_multipolygon'),
-                    tooltip: t('validations.old_multipolygon_tooltip'),
+                    message: t('issues.old_multipolygon.message'),
+                    tooltip: t('issues.old_multipolygon.tooltip'),
                     entities: [parent],
                 }));
             }

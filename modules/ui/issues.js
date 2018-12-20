@@ -28,6 +28,8 @@ export function uiIssues(context) {
     var _shown = false;
     var _customRulesContainer = d3_select(null);
 
+    context.issueManager().on('reload', update);
+
     function renderIssuesOptions(selection) {
         var container = selection.selectAll('.issues-options-container')
             .data([0]);
@@ -150,6 +152,9 @@ export function uiIssues(context) {
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
+                .append('div')
+                .attr('title', t('issues.severity.'+d.severity))
+                .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
 

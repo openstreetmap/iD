@@ -49,20 +49,25 @@ export function uiEntityIssues(context) {
                 .placement('bottom')
             )
             .on('click', function(d) {
-                
+
             });
 
         var label = enter
-            .append('label');
+            .append('button')
+            .classed('label', true);
 
         label.each(function(d) {
             var iconSuffix = d.severity === 'warning' ? 'alert' : 'error';
             d3_select(this)
+                .append('div')
+                .attr('title', t('issues.severity.'+d.severity))
+                .style('display', 'inline')
                 .call(svgIcon('#iD-icon-' + iconSuffix, 'pre-text'));
         });
 
         label
             .append('span')
+            .append('strong')
             .text(function(d) { return d.message; });
 
         // Update

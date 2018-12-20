@@ -22,7 +22,7 @@ export function validationDeprecatedTag() {
                 issues.push(new validationIssue({
                     type: ValidationIssueType.deprecated_tags,
                     severity: ValidationIssueSeverity.warning,
-                    message: t('validations.deprecated_tags', { tags: tags }),
+                    message: t('issues.deprecated_tags.message', { tags: tags }),
                     entities: [change],
                 }));
             }
